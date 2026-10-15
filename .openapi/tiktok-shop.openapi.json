@@ -1627,6 +1627,7 @@
             "in": "query",
             "required": false,
             "description": "A comma-separated list of numeric product IDs. Maximum: 50 IDs per request.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -5003,6 +5004,7 @@
             "in": "query",
             "required": true,
             "description": "The product IDs whose sample rules to retrieve. Specify 1 to 200 product IDs per request.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -8004,6 +8006,7 @@
             "in": "query",
             "required": false,
             "description": "Creator data groups to include in the response. If omitted, all five groups are selected. Individual field availability remains subject to the documented market, permission, and availability conditions for each field. To request multiple groups, provide the values as a comma-separated query string, for example, BASIC_CREATOR_INFORMATION,CONTENT_PERFORMANCE.\nAvailable values:\n- BASIC_CREATOR_INFORMATION: Basic creator profile information.\n- CONTENT_PERFORMANCE: Content performance metrics, Promotion Performance Score (PPS), fulfillment score, and promoted product count.\n- FOLLOWER_INFORMATION: Follower location, age, and gender distributions.\n- COLLABORATION: Collaborated brands and commission information.\n- SALES_AND_GMV: Units sold; GMV and GPM metrics and distributions; product price range; and average GMV per buyer.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -9425,6 +9428,7 @@
             "in": "query",
             "required": false,
             "description": "List of category IDs used to filter returned SKU performance records.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -9456,6 +9460,7 @@
             "in": "query",
             "required": false,
             "description": "Filter SKUs by product IDs. If product_ids are provided, the API will only return SKUs for the given product IDs, otherwise it will return all SKUs for the shop",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -10900,6 +10905,7 @@
             "in": "query",
             "required": false,
             "description": "Level 1 category IDs used to filter the returned shop product performance list.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -12635,6 +12641,7 @@
             "in": "query",
             "required": true,
             "description": "The IDs of the shop videos whose performance details are requested.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -15630,6 +15637,7 @@
             "in": "query",
             "required": true,
             "description": "The list of numeric identifiers of the inbound orders to fetch information for.  \n**Note:** Provide the numeric sequence only; do not include the \"IBR\" prefix (e.g., use `123456` instead of `IBR123456`). There is a **limit of 10 orders** to be fetched in each request.\n\nOnly orders that are found and accessible to the current seller are returned. Missing or inaccessible order IDs are omitted from the response; the request fails if none of the requested orders can be returned.\n\nYou can get the value in `data.inbound_order_id` in [Inbound FBT order status change](6708f866a88d1103246fed6a) webhook or in `data.inventory_records.order.id` in the response of [Search FBT Inventory Record](670d584ba83c5f030f3071e4).",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -17211,6 +17219,7 @@
             "in": "query",
             "required": true,
             "description": "The transaction types to return.\nPossible values:\n- WITHDRAW: The seller withdraws the settlement amount to a bank card.\n- SETTLE: The platform settles the amount to the seller.\n- TRANSFER: A platform subsidy or deduction due to platform policies.\n- REVERSE: A withdrawal failure caused by incorrect bank card information.\n- PAYMENT: A payment transaction.\n- REFUND: A refund transaction.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -18595,6 +18604,7 @@
             "in": "query",
             "required": true,
             "description": "A comma-separated list of TikTok Shop order IDs to check for package split eligibility.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -23288,6 +23298,7 @@
             "in": "query",
             "required": true,
             "description": "A list of TikTok Shop order ID values.\nMax count: 50",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -31472,6 +31483,7 @@
             "in": "query",
             "required": true,
             "description": "The list of product IDs that you want to diagnose.\n\n**Note**:\n- Max number of IDs: 200\n- The product must be live (status: `ACTIVATE`)",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -31589,6 +31601,7 @@
             "in": "query",
             "required": true,
             "description": "The product IDs for which you want to obtain SEO suggestions.\n- Max IDs: 20\n- The product must be live (`ACTIVATE` status)",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -31673,6 +31686,7 @@
             "in": "query",
             "required": true,
             "description": "The product IDs for which you want to optimize the information.\n- Max IDs: 20\n- The product must be live (status: `ACTIVATE`)",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -31841,6 +31855,7 @@
             "in": "query",
             "required": false,
             "description": "The BCP-47 locale codes for displaying the size charts.\nDefault: The default locale of your shop.\nPossible values:\n- de-DE\n- en-GB\n- en-IE\n- en-US\n- es-ES\n- es-MX\n- fr-FR\n- id-ID\n- it-IT\n- ja-JP\n- ms-MY\n- pt-BR\n- th-TH\n- vi-VN\n- zh-CN",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -33172,6 +33187,7 @@
             "in": "query",
             "required": false,
             "description": "The image translation task IDs for retrieving translation results.\nMax count: 20",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -40198,6 +40214,7 @@
             "in": "query",
             "required": true,
             "description": "The identifier of a specific return.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -40304,6 +40321,7 @@
             "in": "query",
             "required": false,
             "description": "The seller decisions to evaluate for the specified aftersales request. Possible Values:\n- `APPROVE_REQUEST_CANCEL`\n- `APPROVE_REFUND`\n- `APPROVE_RETURN`\n- `APPROVE_RECEIVED_PACKAGE`\n- `APPROVE_REPLACEMENT`\n- `ISSUE_REPLACEMENT_REFUND`\n- `DIRECT_REFUND`\n- `REJECT_REQUEST_CANCEL`\n- `REJECT_REFUND`\n- `REJECT_RETURN`\n- `REJECT_RECEIVED_PACKAGE`\n- `REJECT_REPLACEMENT`\n-`ISSUE_EXCHANGE_REFUND`\n**Note:** When omitted, the API evaluates all supported seller decisions for the request and returns one result per decision.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -40764,6 +40782,7 @@
             "in": "query",
             "required": false,
             "description": "**Optional.** Specifies which request types to query. If omitted, the API returns all request types currently available for the specified initiator. Possible values:\n-`CANCEL`\n-`REFUND`\n-`RETURN_AND_REFUND`",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
@@ -42162,6 +42181,7 @@
             "in": "query",
             "required": false,
             "description": "The seller decisions to evaluate for the specified aftersales request. Possible values:\n- `APPROVE_REQUEST_CANCEL`\n- `APPROVE_REFUND`\n- `APPROVE_RETURN`\n- `APPROVE_RECEIVED_PACKAGE`\n- `APPROVE_REPLACEMENT`\n- `ISSUE_REPLACEMENT_REFUND`\n- `DIRECT_REFUND`\n- `REJECT_REQUEST_CANCEL`\n- `REJECT_REFUND`\n- `REJECT_RETURN`\n- `REJECT_RECEIVED_PACKAGE`\n- `REJECT_REPLACEMENT`\n- `ISSUE_EXCHANGE_REFUND`\n- `OFFER_PARTIAL_REFUND`\n- `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`\n**Note:** When omitted, the API evaluates all supported seller decisions for the request and returns one result per decision.",
+            "explode": false,
             "schema": {
               "type": "array",
               "items": {
