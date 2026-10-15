@@ -90,7 +90,6 @@ paths:
               - Ascending order
               - Descending order
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -169,6 +168,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 20
         - name: page_token
           in: query
           required: false
@@ -314,6 +315,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 0
+            maximum: 100
       requestBody:
         required: true
         content:
@@ -536,8 +539,9 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -670,7 +674,6 @@ paths:
             type: integer
             format: int64
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -952,6 +955,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
       requestBody:
         required: true
         content:
@@ -1239,6 +1244,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -1582,7 +1589,6 @@ paths:
       tags:
         - Affiliate creator
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -1618,7 +1624,6 @@ paths:
       tags:
         - Affiliate creator
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -1776,6 +1781,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -2004,7 +2011,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -2394,6 +2400,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
         - name: page_token
           in: query
           required: false
@@ -2481,7 +2489,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -2677,6 +2684,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
         - name: page_token
           in: query
           required: false
@@ -2755,7 +2764,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -2918,7 +2926,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3038,7 +3045,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3121,8 +3127,9 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 20
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3311,7 +3318,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3514,8 +3520,9 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3721,7 +3728,6 @@ paths:
               - Retrieve conversations the seller starred.
               - Retrieve conversations the seller archived.
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -3967,6 +3973,12 @@ paths:
             - DESC：means to sort data in descending order
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
+            x-enum-descriptions:
+              - means to sort data in ascending order
+              - means to sort data in descending order
         - name: sort_field
           in: query
           required: false
@@ -3977,7 +3989,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -4255,7 +4266,6 @@ paths:
             type: integer
             format: int64
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -4836,7 +4846,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -5233,7 +5242,6 @@ paths:
             type: integer
             format: int64
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -5375,7 +5383,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -5443,6 +5450,18 @@ paths:
             type: array
             items:
               type: string
+              enum:
+                - BASIC_CREATOR_INFORMATION
+                - CONTENT_PERFORMANCE
+                - FOLLOWER_INFORMATION
+                - COLLABORATION
+                - SALES_AND_GMV
+              x-enum-descriptions:
+                - Basic creator profile information.
+                - Content performance metrics, Promotion Performance Score (PPS), fulfillment score, and promoted product count.
+                - Follower location, age, and gender distributions.
+                - Collaborated brands and commission information.
+                - Units sold; GMV and GPM metrics and distributions; product price range; and average GMV per buyer.
       responses:
         "200":
           description: Success
@@ -6222,6 +6241,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -6233,6 +6255,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
       responses:
         "200":
           description: Success
@@ -6339,6 +6364,7 @@ paths:
           schema:
             type: integer
             format: int64
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -6491,6 +6517,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -6590,6 +6619,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -6602,6 +6634,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
       responses:
         "200":
           description: Success
@@ -6704,6 +6739,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: sort_field
           in: query
           required: false
@@ -6713,6 +6750,10 @@ paths:
             Default value: gmv
           schema:
             type: string
+            enum:
+              - gmv
+              - units_sold
+              - daily_avg_buyers
         - name: sort_order
           in: query
           required: false
@@ -6724,6 +6765,9 @@ paths:
             * DESC: descending
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
         - name: currency
           in: query
           required: false
@@ -6735,6 +6779,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
         - name: page_token
           in: query
           required: false
@@ -6815,6 +6862,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
       responses:
         "200":
           description: Success
@@ -7018,6 +7068,14 @@ paths:
             - 30D — 30 days
           schema:
             type: string
+            enum:
+              - 1D
+              - 7D
+              - 30D
+            x-enum-descriptions:
+              - 1 day
+              - 7 days
+              - 30 days
         - name: author_type
           in: query
           required: true
@@ -7029,6 +7087,16 @@ paths:
             - AFFILIATE — include affiliate creators
           schema:
             type: string
+            enum:
+              - ALL
+              - OFFICIAL
+              - CHANNEL
+              - AFFILIATE
+            x-enum-descriptions:
+              - include all creator types
+              - include official creators
+              - include channel creators
+              - include affiliate creators
         - name: currency
           in: query
           required: false
@@ -7039,6 +7107,12 @@ paths:
             If omitted, defaults to LOCAL.
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
+            x-enum-descriptions:
+              - US dollars
+              - the local currency where the shop is registered
       responses:
         "200":
           description: Success
@@ -7095,6 +7169,14 @@ paths:
             This field determines the maximum range that can be queried using the date field.
           schema:
             type: string
+            enum:
+              - 1D
+              - 7D
+              - 30D
+            x-enum-descriptions:
+              - query data for 1 day
+              - query data for 7 days
+              - query data for 30 days
         - name: currency
           in: query
           required: false
@@ -7160,6 +7242,14 @@ paths:
             - 30D — 30 days
           schema:
             type: string
+            enum:
+              - 1D
+              - 7D
+              - 30D
+            x-enum-descriptions:
+              - 1 day
+              - 7 days
+              - 30 days
         - name: currency
           in: query
           required: false
@@ -7228,6 +7318,14 @@ paths:
             - 30D: 30 days
           schema:
             type: string
+            enum:
+              - 1D
+              - 7D
+              - 30D
+            x-enum-descriptions:
+              - 1 day
+              - 7 days
+              - 30 days
         - name: currency
           in: query
           required: false
@@ -7296,6 +7394,9 @@ paths:
             * DESC: descending
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
         - name: sort_field
           in: query
           required: false
@@ -7315,6 +7416,15 @@ paths:
             Default value: gmv
           schema:
             type: string
+            enum:
+              - gmv
+              - items_sold
+              - customers
+              - created_sku_orders
+              - sku_orders
+              - main_orders
+              - product_impressions
+              - product_clicks
         - name: currency
           in: query
           required: false
@@ -7402,6 +7512,7 @@ paths:
           schema:
             type: integer
             format: int64
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -7422,6 +7533,10 @@ paths:
             - orders
           schema:
             type: string
+            enum:
+              - gmv
+              - items_sold
+              - orders
         - name: sort_order
           in: query
           required: false
@@ -7433,6 +7548,9 @@ paths:
             * DESC: descending
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
         - name: currency
           in: query
           required: false
@@ -7444,6 +7562,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
         - name: category_filter
           in: query
           required: false
@@ -7467,6 +7588,14 @@ paths:
             - ALL: all product statuses; this is the default
           schema:
             type: string
+            enum:
+              - LIVE
+              - INACTIVE
+              - ALL
+            x-enum-descriptions:
+              - live products
+              - inactive products
+              - all product statuses; this is the default
       responses:
         "200":
           description: Success
@@ -7713,6 +7842,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: sort_field
           in: query
           required: false
@@ -7730,6 +7861,24 @@ paths:
             - post_time: sort by the time the video was posted.
           schema:
             type: string
+            enum:
+              - gmv
+              - gpm
+              - avg_customers
+              - sku_orders
+              - items_sold
+              - views
+              - click_through_rate
+              - post_time
+            x-enum-descriptions:
+              - sort by overall Gross Merchandise Value (GMV).
+              - sort by average GMV generated from 1,000 views.
+              - sort by daily average customers.
+              - sort by paid SKU orders.
+              - sort by units sold.
+              - sort by video views.
+              - sort by the ratio of product clicks to video views.
+              - sort by the time the video was posted.
         - name: sort_order
           in: query
           required: false
@@ -7741,6 +7890,9 @@ paths:
             * DESC: descending
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
         - name: currency
           in: query
           required: false
@@ -7753,6 +7905,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
         - name: page_token
           in: query
           required: false
@@ -7774,6 +7929,11 @@ paths:
             - AFFILIATE_ACCOUNTS: affiliate accounts
           schema:
             type: string
+            enum:
+              - ALL
+              - OFFICIAL_ACCOUNTS
+              - MARKETING_ACCOUNTS
+              - AFFILIATE_ACCOUNTS
       responses:
         "200":
           description: Success
@@ -8015,6 +8175,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
       responses:
         "200":
           description: Success
@@ -8265,6 +8427,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -8277,6 +8442,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
       responses:
         "200":
           description: Success
@@ -8468,6 +8636,12 @@ paths:
             Default value: ALL
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
+            x-enum-descriptions:
+              - Aggregate data for the full requested time range.
+              - Daily data.
         - name: currency
           in: query
           required: false
@@ -8480,6 +8654,12 @@ paths:
             Default value: LOCAL
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
+            x-enum-descriptions:
+              - US dollars.
+              - Local currency where the shop is located.
         - name: account_type
           in: query
           required: false
@@ -8492,6 +8672,14 @@ paths:
             Default value: ALL
           schema:
             type: string
+            enum:
+              - ALL
+              - LINKED_ACCOUNTS
+              - AFFILIATE_ACCOUNTS
+            x-enum-descriptions:
+              - All account types.
+              - Linked accounts.
+              - Affiliate accounts.
       responses:
         "200":
           description: Success
@@ -8580,6 +8768,14 @@ paths:
             - AFFILIATE_ACCOUNTS: Affiliate accounts.
           schema:
             type: string
+            enum:
+              - OFFICIAL_ACCOUNTS
+              - MARKETING_ACCOUNTS
+              - AFFILIATE_ACCOUNTS
+            x-enum-descriptions:
+              - Official accounts.
+              - Marketing accounts.
+              - Affiliate accounts.
         - name: page_size
           in: query
           required: false
@@ -8590,6 +8786,7 @@ paths:
           schema:
             type: integer
             format: int64
+            maximum: 100
         - name: sort_field
           in: query
           required: false
@@ -8605,6 +8802,13 @@ paths:
             - attributed_customers
           schema:
             type: string
+            enum:
+              - live_attributed_gmv
+              - products_added
+              - products_sold
+              - live_attributed_sku_orders
+              - live_attributed_items_sold
+              - attributed_customers
         - name: sort_order
           in: query
           required: false
@@ -8616,6 +8820,12 @@ paths:
             Default value: DESC
           schema:
             type: string
+            enum:
+              - ASC
+              - DESC
+            x-enum-descriptions:
+              - Ascending order.
+              - Descending order.
         - name: currency
           in: query
           required: false
@@ -8627,6 +8837,12 @@ paths:
             Default value: LOCAL
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
+            x-enum-descriptions:
+              - US dollars.
+              - Local currency where the shop is located.
         - name: page_token
           in: query
           required: false
@@ -8795,6 +9011,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -8807,6 +9026,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
       responses:
         "200":
           description: Success
@@ -8916,6 +9138,9 @@ paths:
             * 1D: daily
           schema:
             type: string
+            enum:
+              - ALL
+              - 1D
         - name: currency
           in: query
           required: false
@@ -8929,6 +9154,9 @@ paths:
             * LOCAL: local currency where the shop is located
           schema:
             type: string
+            enum:
+              - USD
+              - LOCAL
         - name: account_type
           in: query
           required: false
@@ -8942,6 +9170,16 @@ paths:
             Default value: ALL
           schema:
             type: string
+            enum:
+              - ALL
+              - OFFICIAL_ACCOUNTS
+              - MARKETING_ACCOUNTS
+              - AFFILIATE_ACCOUNTS
+            x-enum-descriptions:
+              - All account types.
+              - Official accounts.
+              - Marketing accounts.
+              - Affiliate accounts.
       responses:
         "200":
           description: Success
@@ -10020,6 +10258,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -10309,6 +10549,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -10316,7 +10558,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -10463,6 +10704,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -10470,7 +10713,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -10702,7 +10944,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -11483,6 +11724,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -11490,7 +11733,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -11617,7 +11859,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -11837,6 +12078,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -12255,6 +12498,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
       responses:
         "200":
           description: Success
@@ -12480,6 +12725,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: sort_field
           in: query
           required: true
@@ -12687,6 +12934,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -12836,6 +13085,10 @@ paths:
           description: "Filters account transactions by business transaction type. Allowed values: RECHARGE, WITHDRAW, REVERSE. If omitted, all supported transaction types are returned."
           schema:
             type: string
+            enum:
+              - RECHARGE
+              - WITHDRAW
+              - REVERSE
         - name: page_size
           in: query
           required: true
@@ -12904,6 +13157,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
       responses:
         "200":
           description: Success
@@ -13168,7 +13423,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -13483,6 +13737,7 @@ paths:
       tags:
         - Fulfillment
       parameters:
+        - $ref: "#/components/parameters/ShopCipher"
         - name: page_size
           in: query
           required: true
@@ -13490,6 +13745,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
         - name: sort_field
           in: query
           required: false
@@ -13530,14 +13787,7 @@ paths:
           description: An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the `next_page_token` from a previous response. It is not needed for the first page.
           schema:
             type: string
-        - name: shop_cipher
-          in: query
-          required: false
-          description: Use this property to pass shop information in requesting the API. Failure in passing the correct value when requesting the API for cross-border shops will return incorrect response. Get by API [Get Authorization Shop](https://partner.tiktokshop.com/docv2/page/6507ead7b99d5302be949ba9?external_id=6507ead7b99d5302be949ba9)
-          schema:
-            type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -13579,6 +13829,7 @@ paths:
                         - "1729382476852921560"
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
       x-tts-scopes:
         - Fulfillment Basic
@@ -13912,7 +14163,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -14224,7 +14474,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -14338,7 +14587,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -14774,7 +15022,6 @@ paths:
       tags:
         - Fulfillment
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -14902,7 +15149,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -15349,7 +15595,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -15560,6 +15805,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: sort_order
           in: query
           required: false
@@ -15599,7 +15846,6 @@ paths:
               - create_time
               - update_time
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -16411,7 +16657,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -16557,6 +16802,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -19128,7 +19375,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -21264,6 +21510,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -21271,7 +21519,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -21389,7 +21636,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -21676,6 +21922,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -21725,7 +21973,6 @@ paths:
                 - vi-VN
                 - zh-CN
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -21881,7 +22128,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22036,7 +22282,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22209,6 +22454,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -22216,7 +22463,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22293,6 +22539,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -22300,7 +22548,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22378,6 +22625,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -22385,7 +22634,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22694,7 +22942,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -22821,7 +23068,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -23698,7 +23944,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -24360,8 +24605,9 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 50
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -24443,6 +24689,8 @@ paths:
           schema:
             type: integer
             format: int64
+            minimum: 1
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -24450,7 +24698,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -24568,6 +24815,7 @@ paths:
           schema:
             type: integer
             format: int64
+            maximum: 100
         - name: page_token
           in: query
           required: false
@@ -24699,6 +24947,7 @@ paths:
           schema:
             type: integer
             format: int64
+            maximum: 100
       responses:
         "200":
           description: Success
@@ -24928,7 +25177,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -25617,7 +25865,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -26278,7 +26525,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -26378,7 +26624,6 @@ paths:
             type: integer
             format: int64
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -26567,7 +26812,6 @@ paths:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -27226,7 +27470,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -27617,7 +27860,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -27779,7 +28021,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -28009,7 +28250,6 @@ paths:
           schema:
             type: string
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -28442,7 +28682,6 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
@@ -30283,6 +30522,10 @@ components:
              * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
         product_level:
           type: string
+          enum:
+            - PRODUCT
+            - VARIATION
+            - SHOP
           description: |-
             Activity product dimension, values are: 
               
@@ -30752,6 +30995,22 @@ components:
       properties:
         decision:
           type: string
+          enum:
+            - APPROVE_REFUND
+            - APPROVE_RETURN
+            - APPROVE_RECEIVED_PACKAGE
+            - APPROVE_REPLACEMENT
+            - ISSUE_REPLACEMENT_REFUND
+            - OFFER_PARTIAL_REFUND
+            - DIRECT_REFUND
+          x-enum-descriptions:
+            - seller approve a refund-only request
+            - seller approve the initial return-and-refund request
+            - seller approve return-and-refund request after the buyer has already shipped or handed over the item.
+            - seller approve replacement request
+            - seller decline the replacement request and directly refund the buyer instead.
+            - seller offers a partial refund amount to the buyer without requiring the item(s) to be returned.
+            - seller issues a returnless refund, meaning the buyer receives a full refund and keeps the item
           description: |-
             Seller's decision for the return request, available values:
             - `APPROVE_REFUND`: seller approve a refund-only request
@@ -31106,6 +31365,18 @@ components:
           description: Carton weight.
         weight_unit:
           type: string
+          enum:
+            - KILOGRAM
+            - GRAM
+            - MILLIGRAM
+            - POUNDS
+            - OUNCE
+          x-enum-descriptions:
+            - kg
+            - g
+            - mg
+            - lbs
+            - oz
           description: |-
             The unit used for the carton's `weight` value.
 
@@ -31126,6 +31397,20 @@ components:
           description: Carton length.
         length_unit:
           type: string
+          enum:
+            - METER
+            - CENTIMETER
+            - MILLIMETER
+            - FOOT
+            - MICRON
+            - INCH
+          x-enum-descriptions:
+            - m
+            - cm
+            - mm
+            - ft
+            - μm
+            - in
           description: |-
             The unit used for the carton's `length`, `width`, and `height` values.
 
@@ -31470,6 +31755,11 @@ components:
           description: The identifier of a specific order cancellation.
         cancel_status:
           type: string
+          enum:
+            - CANCELLATION_REQUEST_PENDING
+            - CANCELLATION_REQUEST_SUCCESS
+            - CANCELLATION_REQUEST_CANCEL
+            - CANCELLATION_REQUEST_COMPLETE
           description: |-
             The status of an order cancellation request. 
             Available values:
@@ -31540,6 +31830,12 @@ components:
       properties:
         carton_type:
           type: string
+          enum:
+            - SINGLE_SKU
+            - MULTI_SKU
+          x-enum-descriptions:
+            - "`items` must contain exactly one item."
+            - "`items` must contain two or more items."
           description: |-
             Indicates whether the carton is configured as single-SKU or multi-SKU.
 
@@ -32894,6 +33190,12 @@ components:
           description: Placement option id. A placement option represents the shipment splits and destinations.
         inbound_method:
           type: string
+          enum:
+            - D2FC
+            - ONE_HUB
+          x-enum-descriptions:
+            - Direct to fulfillment center, may be split into multiple shipments
+            - Single destination, includes fee
           description: |-
             **Possible values:**
             * `D2FC` (Direct to fulfillment center, may be split into multiple shipments)
@@ -33356,12 +33658,22 @@ components:
       properties:
         module_type:
           type: string
+          enum:
+            - CREATOR
+            - BASE
+          x-enum-descriptions:
+            - Creator list data.
+            - Core performance data.
           description: |-
             Type of Compass data to export. Allowed values:
             - CREATOR: Creator list data.
             - BASE: Core performance data.
         window_type:
           type: string
+          enum:
+            - PAST_24H
+            - PAST_7_DAYS
+            - PAST_30_DAYS
           description: "Time window included in the export, ending on end_day. Allowed values: PAST_24H, PAST_7_DAYS, PAST_30_DAYS."
         end_day:
           type: integer
@@ -33395,6 +33707,11 @@ components:
               - hu：UTC+1
         plan_type:
           type: string
+          enum:
+            - ALL
+            - TARGET
+            - OPEN
+            - PARTNER
           description: "Plan type. Allowed values: ALL, TARGET, OPEN, PARTNER."
     CreateCompassOfflineExportTaskResponse:
       type: object
@@ -34330,6 +34647,8 @@ components:
             - The `id/name` and `value_id/value_name` pairs must be unique in each SKU. For example, you cannot repeat `"name": "Color"`, `"value_name": "Red"` in different SKUs.
         seller_sku:
           type: string
+          minLength: 1
+          maxLength: 50
           description: |-
             An internal code/name for managing SKUs, not visible to buyers.  
             - Valid length: 1-50 characters
@@ -34802,7 +35121,7 @@ components:
             type: string
           description: The TikTok Shop order IDs to combine into one package. Required when `ship_type` is `3`; provide at least two order IDs.
         dimension:
-          $ref: "#/components/schemas/PackageDimension"
+          $ref: "#/components/schemas/CreatePackagesRequestDimension"
           description: Package dimensions. For `ship_type` `1` and `2`, each dimension must be between 0.01 and 999999 and have no more than two decimal places.
         shipping_service_id:
           type: string
@@ -34810,10 +35129,67 @@ components:
             Specify the shipping service used. 
             If not specified, use the default service obtained from [Get Eligible Shipping Service](https://partner.tiktokshop.com/docv2/page/650aa6b2bace3e02b75dda4e).
         weight:
-          $ref: "#/components/schemas/PackageWeight"
+          $ref: "#/components/schemas/CreatePackagesRequestWeight"
           description: Package weight. For `ship_type` `1` and `2`, the value must be between 0.01 and 999999 and have no more than two decimal places.
       required:
         - ship_type
+    CreatePackagesRequestDimension:
+      type: object
+      properties:
+        length:
+          type: string
+          description: |-
+            Package length.
+
+            The length, width, and height must be passed together.
+        width:
+          type: string
+          description: |-
+            Package width.
+
+            The length, width, and height must be passed together.
+        height:
+          type: string
+          description: |-
+            Package height.
+
+            The length, width, and height must be passed together.
+        unit:
+          type: string
+          enum:
+            - CM
+            - INCH
+          description: |-
+            The unit of measurement for the package dimensions. For packages in the US, use `INCH`.
+
+            Available values:
+            - `CM`
+            - `INCH`
+      required:
+        - length
+        - width
+        - height
+        - unit
+    CreatePackagesRequestWeight:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The numerical value of the package weight.
+        unit:
+          type: string
+          enum:
+            - GRAM
+            - POUND
+          description: |-
+            The unit of measurement for the package weight.
+
+            Available values:
+            - `GRAM`
+            - `POUND`
+      required:
+        - value
+        - unit
     CreatePackagesResponse:
       type: object
       properties:
@@ -35753,6 +36129,11 @@ components:
       properties:
         user_type:
           type: string
+          enum:
+            - ALL_USER
+            - SHOP_NEW_CUSTOMER
+            - SHOP_EXISTING_CUSTOMER
+            - SHOP_REPEAT_CUSTOMER
           description: |-
             Possible enumerations are:
             `ALL_USER`
@@ -35968,6 +36349,24 @@ components:
           description: The identifier of a specific return request.
         return_status:
           type: string
+          enum:
+            - RETURN_OR_REFUND_REQUEST_PENDING
+            - REFUND_OR_RETURN_REQUEST_REJECT
+            - AWAITING_BUYER_SHIP
+            - BUYER_SHIPPED_ITEM
+            - REJECT_RECEIVE_PACKAGE
+            - RETURN_OR_REFUND_REQUEST_SUCCESS
+            - RETURN_OR_REFUND_REQUEST_CANCEL
+            - RETURN_OR_REFUND_REQUEST_COMPLETE
+          x-enum-descriptions:
+            - Request is pending, needs to be approved by seller or platform
+            - Seller rejected the request
+            - Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform
+            - Buyer has shipped items to seller.
+            - Seller reject return package
+            - The refund/return request is successful, buyer will be refunded.
+            - The request has been cancelled by buyer or system
+            - The request is successful, and the amount has been refunded.
           description: |-
             Return status, available values:
             - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform
@@ -37035,6 +37434,9 @@ components:
           description: Package height.
         unit:
           type: string
+          enum:
+            - CM
+            - INCH
           description: |-
             The unit of measurement for the package dimensions.
 
@@ -37370,6 +37772,8 @@ components:
             The inventory for each local shop is automatically calculated when a product is first published. After publishing, this global quantity cannot be manually changed. You can only modify the inventory quantity in each local shop.
         seller_sku:
           type: string
+          minLength: 1
+          maxLength: 50
           description: |-
             An internal code/name for managing SKUs, not visible to buyers.  
             - Valid length: 1-50 characters
@@ -38154,6 +38558,8 @@ components:
         quantity:
           type: integer
           format: int64
+          minimum: 1
+          maximum: 999999
           description: |-
             The SKU quantity available in the warehouse.
             Valid range: [1, 999,999]. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
@@ -38308,7 +38714,7 @@ components:
             - Applicable only for the EU market. 
             - The identifier code must be unique for each SKU, with no repetition allowed.
         pre_sale:
-          $ref: "#/components/schemas/PreSale"
+          $ref: "#/components/schemas/EditProductRequestSkuPreSale"
           description: |-
             SKU presale information, used to tag a product as a presale product based on its presale type.
             Applicable only if `allowed_special_product_types` from [Get Category Rules](6509c0febace3e02b74594a9) is not empty.
@@ -38358,6 +38764,42 @@ components:
             - Provide the weight measured after packing the SKU.
             - Use the same measurement system for `sku_weight` and `sku_dimensions`; for example, use `KILOGRAM` with `CENTIMETER`.
             - Weight and dimensions can affect shipping costs, so ensure both are accurate. Shipping fees may use the higher of the actual weight and the volumetric weight calculated from the dimensions.
+    EditProductRequestSkuPreSale:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - PRE_ORDER
+            - MADE_TO_ORDER
+            - CUSTOM
+            - NONE
+          x-enum-descriptions:
+            - The product is not yet available or released. Fulfillment can be extended by specifying a release date.
+            - The product is produced only after the order is received. Fulfillment can be extended by specifying a duration.
+            - The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.
+            - To convert the product to a regular (non-presale) product.
+          description: |-
+            The type of pre-sale.
+            Possible values based on the region:
+            **US**
+            - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**.
+            - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**.
+            - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.
+
+            **UK, EU, SEA, JP, and LATAM**
+            - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**. 
+
+            **ALL**
+            - `NONE`: To convert the product to a regular (non-presale) product.
+        fulfillment_type:
+          $ref: "#/components/schemas/FulfillmentType"
+          description: |-
+            Information about the type of pre-sale order fulfillment and the corresponding timeframe.
+            - `handling_duration_days` is for fulfillment with an extended duration.
+            - `release_date` is for starting fulfillment on a fixed date.
+
+            **Note**: Provide either the `handling_duration_days` or the `release_date`, depending on the value of `pre_sale.type` and your shop's region.
     EditProductRequestSubscribeInfoEdit:
       type: object
       properties:
@@ -39405,6 +39847,14 @@ components:
           description: Activity update time as a UNIX timestamp in milliseconds.
         product_level:
           type: string
+          enum:
+            - PRODUCT
+            - VARIATION
+            - SHOP
+          x-enum-descriptions:
+            - Product level promotion activity.
+            - SKU level promotion activity.
+            - Shop level promotion activity.
           description: |-
             Activity product dimension, values are: 
             - PRODUCT: Product level promotion activity.
@@ -41479,6 +41929,9 @@ components:
       properties:
         module_type:
           type: string
+          enum:
+            - CREATOR
+            - BASE
           description: "Allowed values: CREATOR, BASE."
         id:
           type: string
@@ -43097,7 +43550,7 @@ components:
             type: string
           description: Line item ID list
         weight:
-          $ref: "#/components/schemas/Weight"
+          $ref: "#/components/schemas/GetEligibleShippingServicesResponseDataWeight"
           description: The weight of the scheduled package.
         shipping_services:
           type: array
@@ -43105,8 +43558,26 @@ components:
             $ref: "#/components/schemas/GetEligibleShippingServicesResponseDataShippingService"
           description: The shipping services available for the order.
         dimension:
-          $ref: "#/components/schemas/Dimension"
+          $ref: "#/components/schemas/GetEligibleShippingServicesResponseDataDimension"
           description: The dimension of the scheduled package.
+    GetEligibleShippingServicesResponseDataDimension:
+      type: object
+      properties:
+        length:
+          type: string
+          description: The length of the package.
+        width:
+          type: string
+          description: The width of the package.
+        height:
+          type: string
+          description: The height of the package.
+        unit:
+          type: string
+          description: |-
+            The unit of measurement for the package dimensions.
+            - CM
+            - INCH
     GetEligibleShippingServicesResponseDataShippingService:
       type: object
       properties:
@@ -43148,6 +43619,18 @@ components:
         signature_fee:
           type: string
           description: Signature service fee
+    GetEligibleShippingServicesResponseDataWeight:
+      type: object
+      properties:
+        value:
+          type: string
+          description: The weight of the scheduled package.
+        unit:
+          type: string
+          description: |-
+            The unit of measurement is used to measure the weight.
+            - GRAM
+            - POUND
     GetEngagementFeaturePermissionsResponse:
       type: object
       properties:
@@ -43394,6 +43877,9 @@ components:
           description: Carton number.
         carton_type:
           type: string
+          enum:
+            - SINGLE_SKU
+            - MULTI_SKU
           description: |-
             Whether this carton is single-SKU or multi-SKU.
 
@@ -43416,6 +43902,18 @@ components:
           description: Carton weight.
         weight_unit:
           type: string
+          enum:
+            - KILOGRAM
+            - GRAM
+            - MILLIGRAM
+            - POUNDS
+            - OUNCE
+          x-enum-descriptions:
+            - kg
+            - g
+            - mg
+            - lbs
+            - oz
           description: |-
             The unit used for the carton's `weight` value.
 
@@ -43436,6 +43934,20 @@ components:
           description: Carton length.
         length_unit:
           type: string
+          enum:
+            - METER
+            - CENTIMETER
+            - MILLIMETER
+            - FOOT
+            - MICRON
+            - INCH
+          x-enum-descriptions:
+            - m
+            - cm
+            - mm
+            - ft
+            - μm
+            - in
           description: |-
             The unit used for the carton's `length`, `width`, and `height` values.
 
@@ -43516,6 +44028,17 @@ components:
           description: The time when the inbound order is processed by the merchant or warehouses, represented as a Unix timestamp in seconds.
         new_status:
           type: string
+          enum:
+            - WORKING
+            - READY_TO_SHIP
+            - TO_BE_RECEIVED
+            - ARRIVED_HUB
+            - INTERNAL_TRANSFER
+            - RECEIVING
+            - PARTIALLY_RECEIVED
+            - RECEIVED
+            - CANCELLED
+            - DELIVERED
           description: |-
             The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.
 
@@ -43532,6 +44055,17 @@ components:
             * `DELIVERED`
         previous_status:
           type: string
+          enum:
+            - WORKING
+            - READY_TO_SHIP
+            - TO_BE_RECEIVED
+            - ARRIVED_HUB
+            - INTERNAL_TRANSFER
+            - RECEIVING
+            - PARTIALLY_RECEIVED
+            - RECEIVED
+            - CANCELLED
+            - DELIVERED
           description: |-
             The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.
 
@@ -43750,22 +44284,6 @@ components:
           description: The tracking number of this consign order. If the order has not yet been handed over to the logistics carrier, this field may be a null value.
         status:
           type: string
-          enum:
-            - SHIPPED
-            - HANDOVER
-            - CLOSED
-            - LOST
-            - DAMAGE
-            - COMPLETED
-            - ABNORMAL
-          x-enum-descriptions:
-            - Order has been shipped out from the warehouse
-            - Order has been received by the logistics carrier and is in transit
-            - Order has been closed
-            - Order is lost
-            - Order is damaged
-            - Order has been completed
-            - There is an issue related to this order and cannot be fulfilled.
           description: |-
             The status of this consign order 
               
@@ -44872,10 +45390,10 @@ components:
           type: string
           description: The product description in HTML format.
         package_dimensions:
-          $ref: "#/components/schemas/Dimension"
+          $ref: "#/components/schemas/GetEligibleShippingServicesResponseDataDimension"
           description: The dimensions of the product package.
         package_weight:
-          $ref: "#/components/schemas/Weight"
+          $ref: "#/components/schemas/GetEligibleShippingServicesResponseDataWeight"
           description: The weight of the product package.
         certifications:
           type: array
@@ -45496,6 +46014,12 @@ components:
           description: Inbound plan identifier
         inbound_method:
           type: string
+          enum:
+            - D2FC
+            - ONE_HUB
+          x-enum-descriptions:
+            - Direct to fulfillment center, may be split into multiple shipments
+            - Single destination; can include an estimated placement fee
           description: |-
             **Possible values:**
             * `D2FC` (Direct to fulfillment center, may be split into multiple shipments)
@@ -45532,6 +46056,10 @@ components:
           description: Placement options for the current placement task. If `placement_task_status` is `Executing`, repeat this request with the same `plan_id`, `inbound_method`, and estimated arrival window to retrieve the latest status. When the status is `Succeed`, select an option from `info` and pass its `placement_option_id` to the Confirm Inbound Method API. Do not confirm an option when the status is `Failed`. After `expiration_timestamp`, call this API again with the same selection inputs to obtain a new placement option or task.
         placement_task_status:
           type: string
+          enum:
+            - Executing
+            - Succeed
+            - Failed
           description: |-
             **Possible values:**
             * `Executing`
@@ -45552,7 +46080,7 @@ components:
           type: string
           description: Placement option id. A placement option represents the shipment splits and destinations.
         placement_fee_estimate:
-          $ref: "#/components/schemas/CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListPrice"
+          $ref: "#/components/schemas/GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate"
           description: Estimated placement fee for a `ONE_HUB` placement option.
     GetInboundMethodDetailResponseDataInfoAllocationShipment:
       type: object
@@ -45580,6 +46108,9 @@ components:
       properties:
         carton_type:
           type: string
+          enum:
+            - SINGLE_SKU
+            - MULTI_SKU
           description: |-
             Indicates if this is a single SKU carton or multi SKU carton.
             **Possible values:**
@@ -45624,6 +46155,29 @@ components:
         shipping_method:
           type: string
           description: "Shipping method for this shipment option. Possible values: SMALL_PARCEL, a parcel shipment method; FREIGHT, a freight shipment method."
+    GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Placement fee amount.
+        currency:
+          type: string
+          enum:
+            - USD
+            - CNY
+            - EUR
+            - GBP
+            - SAR
+          description: |-
+            The currency of the placement fee amount.
+
+            **Possible values:**
+            * `USD`
+            * `CNY`
+            * `EUR`
+            * `GBP`
+            * `SAR`
     GetInboxCategoryCountsResponse:
       type: object
       properties:
@@ -46624,8 +47178,10 @@ components:
             type: string
             enum:
               - REGULAR_ALL
+              - REGULAR_REPEAT
             x-enum-descriptions:
               - Regular coupons that target all buyers.
+              - Regular coupons that target only repeat buyers.
           description: |-
             The types of coupon that can be included in the message. 
             Possible values:
@@ -47656,6 +48212,22 @@ components:
             **Note**: Available only in the Indonesia market.
         order_type:
           type: string
+          enum:
+            - NORMAL
+            - ZERO_LOTTERY
+            - AUCTION
+            - PRE_ORDER
+            - MADE_TO_ORDER
+            - BACK_ORDER
+            - VIRTUAL_ORDER
+          x-enum-descriptions:
+            - An item that is in stock and available for immediate purchase and fulfillment.
+            - An order placed during a lottery event in TikTok LIVE.
+            - An order placed during auction, where the price of the product is not fixed.
+            - An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.
+            - An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.
+            - An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.
+            - An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.
           description: |-
             The order type.
             Possible values based on region:
@@ -47831,6 +48403,18 @@ components:
             - `SYSTEM`
         sku_type:
           type: string
+          enum:
+            - NORMAL
+            - ZERO_LOTTERY
+            - SHOP_PARTNER
+            - PRE_ORDER
+            - MADE_TO_ORDER
+          x-enum-descriptions:
+            - An item that is in stock and available for immediate purchase and fulfillment.
+            - "` An item purchased during a lottery event in TikTok LIVE."
+            - An item purchased from a TikTok Shop partner store.
+            - An item that is not yet available or released. Fulfillment starts on a specific date in the future.
+            - An item that is produced only after the order is received. Fulfillment starts after the product is produced.
           description: |-
             [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]
             The order line type:
@@ -47866,7 +48450,7 @@ components:
         item_tax:
           type: array
           items:
-            $ref: "#/components/schemas/ItemTax"
+            $ref: "#/components/schemas/GetOrderDetailResponseDataOrderLineItemItemTax"
           description: Item tax detail.
         package_status:
           type: string
@@ -47977,6 +48561,21 @@ components:
             This describes the product listing type of the SKU. 
             Possible values:
             - `TEMPORARY_LISTING`
+    GetOrderDetailResponseDataOrderLineItemItemTax:
+      type: object
+      properties:
+        tax_type:
+          type: string
+          description: |-
+            Tax type.
+            - `SALES_TAX` (US market sales tax)
+            Currently only sales tax is available.
+        tax_amount:
+          type: string
+          description: Tax amount.
+        tax_rate:
+          type: string
+          description: Tax rate.
     GetOrderDetailResponseDataOrderRecipientAddress:
       type: object
       properties:
@@ -48050,6 +48649,26 @@ components:
       properties:
         order_status:
           type: string
+          enum:
+            - UNPAID
+            - ON_HOLD
+            - AWAITING_SHIPMENT
+            - PARTIALLY_SHIPPING
+            - AWAITING_COLLECTION
+            - IN_TRANSIT
+            - DELIVERED
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - The order has been placed, but payment has not been completed.
+            - The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.
+            - The order is ready to be shipped, but no items have been shipped yet.
+            - Some items in the order have been shipped, but not all.
+            - Shipping has been arranged, but the package is waiting to be collected by the carrier.
+            - The package has been collected by the carrier and delivery is in progress.
+            - The package has been delivered to the buyer.
+            - The order has been completed, and no further returns or refunds are allowed.
+            - The order has been cancelled.
           description: |-
             Specific order status.
             Available values:
@@ -48162,6 +48781,10 @@ components:
           description: The note from the buyer.
         cancellation_initiator:
           type: string
+          enum:
+            - SELLER
+            - BUYER
+            - SYSTEM
           description: |-
             Cancellation request initiator. 
             Available values: 
@@ -48191,6 +48814,26 @@ components:
           description: "`recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses."
         status:
           type: string
+          enum:
+            - UNPAID
+            - ON_HOLD
+            - AWAITING_SHIPMENT
+            - PARTIALLY_SHIPPING
+            - AWAITING_COLLECTION
+            - IN_TRANSIT
+            - DELIVERED
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - The order has been placed, but payment has not been completed.
+            - The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.
+            - The order is ready to be shipped, but no items have been shipped yet.
+            - Some items in the order have been shipped, but not all.
+            - Shipping has been arranged, but the package is waiting to be collected by the carrier.
+            - The package has been collected by the carrier and delivery is in progress.
+            - The package has been delivered to the buyer.
+            - The order has been completed, and no further returns or refunds are allowed.
+            - The order has been cancelled.
           description: |-
             Specific order status.
             Available values:
@@ -48205,6 +48848,14 @@ components:
             - `CANCELLED`: The order has been cancelled.
         fulfillment_type:
           type: string
+          enum:
+            - FULFILLMENT_BY_SELLER
+            - FULFILLMENT_BY_TIKTOK
+            - FULFILLMENT_BY_DILAYANI_TOKOPEDIA
+          x-enum-descriptions:
+            - a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.
+            - a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.
+            - a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
           description: |-
             Fulfillment type. Only orders with fulfillment type can be shipped by sellers.
             Available values:
@@ -48213,6 +48864,12 @@ components:
             - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
         delivery_type:
           type: string
+          enum:
+            - HOME_DELIVERY
+            - COLLECTION_POINT
+          x-enum-descriptions:
+            - not a PUDO location
+            - a PUDO location
           description: |-
             Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders.
             Available values:
@@ -48273,6 +48930,14 @@ components:
           description: Buyer request cancellation time. Unix timestamp.
         shipping_type:
           type: string
+          enum:
+            - TIKTOK
+            - SELLER
+            - TIKTOK_DIGITAL
+          x-enum-descriptions:
+            - Shipping service provided by TikTok. The seller should obtain shipping label from TikTok.
+            - Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller.
+            - Tiktok delivers virtual goods directly to buyers. There is no action needed.
           description: |-
             Delivery method.
             Available values:
@@ -48411,6 +49076,22 @@ components:
             **Note**: Available only in the Indonesia market.
         order_type:
           type: string
+          enum:
+            - NORMAL
+            - ZERO_LOTTERY
+            - AUCTION
+            - PRE_ORDER
+            - MADE_TO_ORDER
+            - BACK_ORDER
+            - VIRTUAL_ORDER
+          x-enum-descriptions:
+            - An item that is in stock and available for immediate purchase and fulfillment.
+            - An order placed during a lottery event in TikTok LIVE.
+            - An order placed during auction, where the price of the product is not fixed.
+            - An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.
+            - An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.
+            - An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.
+            - An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.
           description: |-
             The order type.
             Possible values based on region:
@@ -48539,6 +49220,22 @@ components:
           description: For a virtual bundle SKU, returns an array of related product SKUs that compose the virtual bundle.
         display_status:
           type: string
+          enum:
+            - UNPAID
+            - AWAITING_SHIPMENT
+            - AWAITING_COLLECTION
+            - IN_TRANSIT
+            - DELIVERED
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - The order has been placed, but payment has not yet completed.
+            - The order is ready for shipment, but no items have been shipped yet.
+            - Shipping has been arranged, but the package is waiting to be collected by the carrier.
+            - The package has been collected by the carrier and delivery is in progress.
+            - The package has been delivered to the buyer.
+            - The order has been completed, and no further returns or refunds are allowed.
+            - The order has been cancelled.
           description: |-
             Available values:
             - `UNPAID`: The order has been placed, but payment has not yet completed.
@@ -48579,6 +49276,18 @@ components:
           description: Seller discount amount. Please refer to the currency of `payment_info`.
         sku_type:
           type: string
+          enum:
+            - NORMAL
+            - ZERO_LOTTERY
+            - SHOP_PARTNER
+            - PRE_ORDER
+            - MADE_TO_ORDER
+          x-enum-descriptions:
+            - An item that is in stock and available for immediate purchase and fulfillment.
+            - An item purchased during a lottery event in TikTok LIVE.
+            - An item purchased from a TikTok Shop partner store.
+            - An item that is not yet available or released. Fulfillment starts on a specific date in the future.
+            - An item that is produced only after the order is received. Fulfillment starts after the product is produced.
           description: |-
             [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]
 
@@ -48605,6 +49314,18 @@ components:
           description: The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
         package_status:
           type: string
+          enum:
+            - TO_FULFILL
+            - PROCESSING
+            - FULFILLING
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - Package awaiting seller to arrange shipment.
+            - Shipping has been arranged by the seller. Awaiting carrier collection.
+            - Package has been collected by carrier and is in transit.
+            - Package has been delivered.
+            - Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
           description: |-
             The package status of the item.
             Available values:
@@ -48621,6 +49342,11 @@ components:
           description: The shipping provider name.
         cancel_user:
           type: string
+          enum:
+            - BUYER
+            - SELLER
+            - OPERATOR
+            - SYSTEM
           description: |-
             Cancellation request initiator.
             Available values:
@@ -49350,10 +50076,10 @@ components:
           $ref: "#/components/schemas/RecipientAddress"
           description: The sender's address and contact information. Sensitive fields may be masked.
         weight:
-          $ref: "#/components/schemas/GetPackageDetailResponseDataWeight"
+          $ref: "#/components/schemas/Weight"
           description: The weight of the scheduled package.
         dimension:
-          $ref: "#/components/schemas/GetPackageDetailResponseDataDimension"
+          $ref: "#/components/schemas/Dimension"
           description: The dimensions of the scheduled package.
         update_time:
           type: integer
@@ -49372,27 +50098,6 @@ components:
         warehouse_id:
           type: string
           description: Seller Warehouse id for this package
-    GetPackageDetailResponseDataDimension:
-      type: object
-      properties:
-        length:
-          type: string
-          description: The length of the scheduled package.
-        width:
-          type: string
-          description: The width of the scheduled package.
-        height:
-          type: string
-          description: The height of the scheduled package.
-        unit:
-          type: string
-          enum:
-            - CM
-            - INCH
-          description: |-
-            The unit of measurement for the package dimensions. Possible values:
-            - `CM`
-            - `INCH`
     GetPackageDetailResponseDataInsurance:
       type: object
       properties:
@@ -49407,6 +50112,16 @@ components:
           description: Whether the package is eligible for an insurance claim, based on eligible refund reasons.
         claim_status:
           type: string
+          enum:
+            - NOT_STARTED
+            - CLAIM_PENDING
+            - APPROVED
+            - DECLINED
+          x-enum-descriptions:
+            - Claim has not been initiated for this package.
+            - Claim is currently under review.
+            - Claim has been approved.
+            - Claim has been declined.
           description: |-
             The insurance claim status.
             Available values:
@@ -49430,21 +50145,6 @@ components:
           type: integer
           format: int64
           description: "[Deprecated]SKU quantity."
-    GetPackageDetailResponseDataWeight:
-      type: object
-      properties:
-        value:
-          type: string
-          description: The value of the weight of the scheduled package.
-        unit:
-          type: string
-          enum:
-            - GRAM
-            - POUND
-          description: |-
-            The unit of measurement used to measure the weight. Possible values:
-            - `GRAM`
-            - `POUND`
     GetPackageHandoverTimeSlotsResponse:
       type: object
       properties:
@@ -55526,11 +56226,39 @@ components:
           type: string
           description: The id of the video pre-check task.
         violation_check_result:
-          $ref: "#/components/schemas/ViolationCheckResult"
+          $ref: "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult"
           description: violation check details
         good_quality_check_result:
-          $ref: "#/components/schemas/GoodQualityCheckResult"
+          $ref: "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult"
           description: Good-quality check details. This field is omitted when the good-quality check is disabled.
+    GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: |-
+            SUCCESS: The precheck task passed all good quality checks
+            FAIL: The precheck task failed good quality checks. Check the 'issues' field for details.
+            PROCESSING: The good qualtify check is still in progress
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+          description: A list of quality issues and improvement suggestions when the good quality check fails.
+    GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult:
+      type: object
+      properties:
+        status:
+          type: string
+          description: |-
+            SUCCESS: The precheck task passed violation checks
+            FAIL: The precheck task has failed due to violations. Check the 'issues' field for details.
+            PROCESSING: The precheck violation task is still in progress
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
+          description: A list of policy violation details returned when violation check fails
     GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue:
       type: object
       properties:
@@ -58348,20 +59076,6 @@ components:
       required:
         - id
         - quantity
-    GoodQualityCheckResult:
-      type: object
-      properties:
-        status:
-          type: string
-          description: |-
-            SUCCESS: The precheck task passed all good quality checks
-            FAIL: The precheck task failed good quality checks. Check the 'issues' field for details.
-            PROCESSING: The good qualtify check is still in progress
-        issues:
-          type: array
-          items:
-            $ref: "#/components/schemas/Issue"
-          description: A list of quality issues and improvement suggestions when the good quality check fails.
     GoodsItem:
       type: object
       properties:
@@ -58676,6 +59390,13 @@ components:
           description: FBT inbound order ID.
         order_status:
           type: string
+          enum:
+            - TO_BE_RECEIVED
+            - ARRIVE_HUB
+            - RECEIVING
+            - PARTIALLY_RECEIVED
+            - RECEIVED
+            - CANCELLED
           description: |-
             Inbound order status. Possible enumerations: 
             - TO_BE_RECEIVED 
@@ -58741,6 +59462,12 @@ components:
         data:
           $ref: "#/components/schemas/InventoryChangedByShopWebhookData"
           description: The inventory change event data.
+      required:
+        - type
+        - tts_notification_id
+        - shop_id
+        - timestamp
+        - data
     InventoryChangedByShopWebhookData:
       type: object
       properties:
@@ -58770,6 +59497,14 @@ components:
           items:
             $ref: "#/components/schemas/InventoryChangedByShopWebhookDataChangeDetail"
           description: The individual inventory changes associated with the event.
+      required:
+        - event_id
+        - occurred_at
+        - shop_id
+        - product_id
+        - sku_id
+        - quantity_snapshot_after_change
+        - change_detail
     InventoryChangedByShopWebhookDataChangeDetail:
       type: object
       properties:
@@ -58806,6 +59541,16 @@ components:
           type: integer
           format: int64
           description: The change in `creator_locked_quantity`.
+      required:
+        - idempotency_key
+        - trigger_source
+        - occurred_at
+        - total_quantity_delta
+        - available_quantity_delta
+        - committed_quantity_delta
+        - in_shop_quantity_delta
+        - campaign_locked_quantity_delta
+        - creator_locked_quantity_delta
     InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange:
       type: object
       properties:
@@ -58833,6 +59578,13 @@ components:
           type: integer
           format: int64
           description: Inventory reserved for creator collaborations.
+      required:
+        - total_quantity
+        - total_available_quantity
+        - total_committed_quantity
+        - in_shop_quantity
+        - campaign_locked_quantity
+        - creator_locked_quantity
     InventorySearchRequest:
       type: object
       properties:
@@ -59172,10 +59924,16 @@ components:
       properties:
         tax_type:
           type: string
+          enum:
+            - SALES_TAX
+          x-enum-descriptions:
+            - US market sales tax
           description: |-
             Tax type.
+            Available values:
             - `SALES_TAX` (US market sales tax)
-            Currently only sales tax is available.
+
+            **Note**: Currently only sales tax is available.
         tax_amount:
           type: string
           description: Tax amount.
@@ -60468,7 +61226,9 @@ components:
              * ROLE_OPERATOR 
              * ROLE_SYSTEM
         package_list:
-          $ref: "#/components/schemas/PackageUpdateWebhookDataPackageList"
+          type: array
+          items:
+            $ref: "#/components/schemas/PackageUpdateWebhookDataPackageList"
           description: Package list updated by the event trigger
         update_time:
           type: integer
@@ -60515,6 +61275,8 @@ components:
         page_size:
           type: integer
           format: int64
+          minimum: 1
+          maximum: 100
           description: "Number of records to return per page. Minimum: 1. Maximum: 100."
         page_token:
           type: string
@@ -60666,9 +61428,11 @@ components:
         category_version:
           type: string
           enum:
-            - US
+            - v2
+            - v1
           x-enum-descriptions:
-            - "`v2`, represents the 7-level category tree."
+            - "US: represents the 7-level category tree."
+            - "Other regions: represents the 3-level category tree."
           description: |-
             The category tree version used by `category_id`.
             Possible values based on region:
@@ -60703,6 +61467,8 @@ components:
             The inventory for each local shop is automatically calculated when a product is first published. After publishing, this global quantity cannot be manually changed. You can only modify the inventory quantity in each local shop.
         seller_sku:
           type: string
+          minLength: 1
+          maxLength: 50
           description: |-
             An internal code/name for managing SKUs, not visible to buyers.  
             - Valid length: 1-50 characters
@@ -61615,7 +62381,7 @@ components:
         inventory:
           type: array
           items:
-            $ref: "#/components/schemas/GetProductResponseDataSkuCombinedSkuInventory"
+            $ref: "#/components/schemas/PartialEditProductRequestReplicatedProductSkuInventory"
           description: SKU inventory information per warehouse. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
         price:
           $ref: "#/components/schemas/PartialEditProductRequestReplicatedProductSkuPrice"
@@ -61632,6 +62398,20 @@ components:
             - Other regions: Text without spaces
       required:
         - price
+    PartialEditProductRequestReplicatedProductSkuInventory:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          format: int64
+          minimum: 1
+          maximum: 999999
+          description: |-
+            The SKU quantity available in the warehouse.
+            Valid range: [1, 999,999]. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
+        warehouse_id:
+          type: string
+          description: The warehouse ID. Retrieve this value from the [Get Warehouse List API](650aa418defece02be6e66b6) or Get Inventory Rules API. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
     PartialEditProductRequestReplicatedProductSkuPrice:
       type: object
       properties:
@@ -62650,6 +63430,14 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - CARTON_PALLET_LABEL
+              - PACKING_PICKING_LIST
+              - FBT_BARCODE
+            x-enum-descriptions:
+              - Identification labels for cartons or pallets. Apply carton labels to at least two adjacent sides of each carton.
+              - Warehouse document for identifying and packing items.
+              - Fulfilled by TikTok barcode labels.
           description: |-
             Specifies the types of documents to generate. Multiple values can be included in one combined output.
 
@@ -62662,6 +63450,12 @@ components:
             **Note:** If this list is empty or omitted, `CARTON_PALLET_LABEL` is generated by default.
         carton_label_format:
           type: string
+          enum:
+            - DEFAULT_1UP
+            - A4_4UP
+          x-enum-descriptions:
+            - Standard format (1 label per page).
+            - A4 paper format (4 labels per page).
           description: |-
             Specifies the layout and dimensions for the carton labels. If this parameter is omitted or an invalid value is provided, the system will use the default single-label format.
 
@@ -64069,6 +64863,18 @@ components:
              * `SELLER`
         rma_status:
           type: string
+          enum:
+            - INIT
+            - AWAITING_BUYER_SHIPPED
+            - RETURN_IN_TRANSIT
+            - PENDING_PACKAGE_REVIEW
+            - PACKAGE_REVIEW_COMPLETED
+          x-enum-descriptions:
+            - The RMA has been created
+            - Awaiting buyer's action to ship the return package with carrier
+            - Buyer has shipped the return and is in transit to the sellers destination warehouse
+            - The return package has been delivered and is pending seller package review. The seller has 2-4 business days SLA to respond with a refund review/decision. Please refer to the latest seller academy document.
+            - The package review lifecycle is complete, and the RMA refund has either been approved or rejected.
           description: |-
             Current RMA status. Possible enumerations: 
               
@@ -64423,9 +65229,11 @@ components:
         category_version:
           type: string
           enum:
-            - US
+            - v2
+            - v1
           x-enum-descriptions:
-            - "`v2`, represents the 7-level category tree."
+            - "US: represents the 7-level category tree."
+            - "Other regions: represents the 3-level category tree."
           description: |-
             The category tree version to use for this product.
             Possible values based on region:
@@ -64823,6 +65631,18 @@ components:
       properties:
         decision:
           type: string
+          enum:
+            - REJECT_REFUND
+            - REJECT_RETURN
+            - REJECT_RECEIVED_PACKAGE
+            - REJECT_REPLACEMENT
+            - OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG
+          x-enum-descriptions:
+            - seller reject a refund-only request
+            - seller reject the initial return-and-refund request
+            - seller reject return-and-refund request after the buyer has already shipped or handed over the item.
+            - seller reject replacement request
+            - seller offer partial refund regarding to the package item quality check
           description: |-
             Seller's decision for the request, available values:
             - `REJECT_REFUND`: seller reject a refund-only request
@@ -65186,7 +66006,7 @@ components:
         inventory:
           type: array
           items:
-            $ref: "#/components/schemas/ReplicateProductRequestReplicateTargetSkuInventory"
+            $ref: "#/components/schemas/PartialEditProductRequestReplicatedProductSkuInventory"
           description: |-
             SKU inventory information per warehouse.
             This field is only required if the inventory allocation mode for the warehouse is MANUAL. Otherwise, it is optional.
@@ -65206,20 +66026,6 @@ components:
             Format: 
             - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
             - Other regions: Text without spaces
-    ReplicateProductRequestReplicateTargetSkuInventory:
-      type: object
-      properties:
-        quantity:
-          type: integer
-          format: int64
-          minimum: 1
-          maximum: 999999
-          description: |-
-            The SKU quantity available in the warehouse.
-            Valid range: [1, 999,999]
-        warehouse_id:
-          type: string
-          description: The warehouse ID. Retrieve this value from the [Get Warehouse List API](650aa418defece02be6e66b6) or Get Inventory Rules API.
     ReplicateProductRequestReplicateTargetSkuPrice:
       type: object
       properties:
@@ -66933,7 +67739,7 @@ components:
         seller_next_action_response:
           type: array
           items:
-            $ref: "#/components/schemas/SellerNextActionResponse"
+            $ref: "#/components/schemas/SearchCancellationsResponseDataCancellationSellerNextActionResponse"
           description: Seller's next action and deadline.
         refund_amount:
           $ref: "#/components/schemas/RefundAmount"
@@ -67016,6 +67822,16 @@ components:
         refund_amount:
           $ref: "#/components/schemas/RefundAmount"
           description: Refund amount information.
+    SearchCancellationsResponseDataCancellationSellerNextActionResponse:
+      type: object
+      properties:
+        action:
+          type: string
+          description: "**Optional.** For buyer-initiated cancellation requests that still require seller handling, the action value is `SELLER_RESPOND_BUYER_CANCEL`."
+        deadline:
+          type: integer
+          format: int64
+          description: Unix timestamp in seconds indicating the deadline for the seller to perform the next action.
     SearchCombinablePackagesResponse:
       type: object
       properties:
@@ -69896,6 +70712,12 @@ components:
             Refer to notes in `update_time_ge` for more usage information.
         category_version:
           type: string
+          enum:
+            - v2
+            - v1
+          x-enum-descriptions:
+            - "US: represents the 7-level category tree."
+            - "Other regions: represents the 3-level category tree."
           description: |-
             Filter products by the category tree version.
             Possible values based on region:
@@ -71043,6 +71865,11 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - REFUND
+              - RETURN_AND_REFUND
+              - REPLACEMENT
+              - EXCHANGE
           description: |-
             List of return types.
             Available values:
@@ -71054,6 +71881,44 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - RETURN_OR_REFUND_REQUEST_PENDING
+              - REFUND_OR_RETURN_REQUEST_REJECT
+              - AWAITING_BUYER_SHIP
+              - BUYER_SHIPPED_ITEM
+              - REJECT_RECEIVE_PACKAGE
+              - RETURN_OR_REFUND_REQUEST_SUCCESS
+              - RETURN_OR_REFUND_REQUEST_CANCEL
+              - RETURN_OR_REFUND_REQUEST_COMPLETE
+              - REPLACEMENT_REQUEST_PENDING
+              - REPLACEMENT_REQUEST_REJECT
+              - REPLACEMENT_REQUEST_REFUND_SUCCESS
+              - REPLACEMENT_REQUEST_CANCEL
+              - REPLACEMENT_REQUEST_COMPLETE
+              - AWAITING_BUYER_RESPONSE
+              - EXCHANGE_REQUEST_PENDING
+              - EXCHANGE_REQUEST_REFUND_SUCCESS
+              - EXCHANGE_REQUEST_CANCEL
+              - EXCHANGE_REQUEST_COMPLETE
+            x-enum-descriptions:
+              - Buyer has initiated a return or refund request. The request is pending review by seller or system.
+              - The return or refund request was rejected.
+              - The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.
+              - Buyer has shipped the approved items to seller.
+              - Seller inspected the returned items and rejected the return request.
+              - The return/refund request was successful. The buyer will be refunded.
+              - The request has been cancelled by the buyer or system.
+              - The return/refund was processed successfully. The buyer has been refunded.
+              - Buyer has initiated a replacement request. The request is pending review by seller.
+              - Seller reject the buyer replacement request.
+              - Buyer's replacement request was resolved by refund due to insufficient inventory.
+              - Buyer canceled the replacement request.
+              - Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.
+              - Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.
+              - Buyer has initiated an exchange request. The request is pending review by seller.
+              - Buyer's exchange request was resolved by refund due to insufficient inventory.
+              - Buyer canceled the exchange request.
+              - Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
           description: |-
             List of return status.
             Available values:
@@ -71079,6 +71944,8 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - PARTIAL_REFUND
           description: |-
             List of seller proposed return types.
             Available values:
@@ -71097,6 +71964,16 @@ components:
           type: array
           items:
             type: string
+            enum:
+              - IN_PROGRESS
+              - SUPPORT_BUYER
+              - SUPPORT_SELLER
+              - CLOSED
+            x-enum-descriptions:
+              - The TikTok Shop platform operator is processing arbitration. Platform may request additional information from the seller.
+              - The platform operator supports buyer.
+              - The platform operator supports seller.
+              - Arbitration is closed.
           description: |-
             List of arbitration statuses. 
             Available values:
@@ -71168,6 +72045,16 @@ components:
           description: The identifier of a specific return.
         return_type:
           type: string
+          enum:
+            - REFUND
+            - RETURN_AND_REFUND
+            - REPLACEMENT
+            - EXCHANGE
+          x-enum-descriptions:
+            - Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.
+            - Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.
+            - The buyer requires the seller to replace the item(s).
+            - The buyer requires the seller to exchange the item(s).
           description: |-
             Return type.
             Available values:
@@ -71177,6 +72064,44 @@ components:
             - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
         return_status:
           type: string
+          enum:
+            - RETURN_OR_REFUND_REQUEST_PENDING
+            - REFUND_OR_RETURN_REQUEST_REJECT
+            - AWAITING_BUYER_SHIP
+            - BUYER_SHIPPED_ITEM
+            - REJECT_RECEIVE_PACKAGE
+            - RETURN_OR_REFUND_REQUEST_SUCCESS
+            - RETURN_OR_REFUND_REQUEST_CANCEL
+            - RETURN_OR_REFUND_REQUEST_COMPLETE
+            - REPLACEMENT_REQUEST_PENDING
+            - REPLACEMENT_REQUEST_REJECT
+            - REPLACEMENT_REQUEST_REFUND_SUCCESS
+            - REPLACEMENT_REQUEST_CANCEL
+            - REPLACEMENT_REQUEST_COMPLETE
+            - AWAITING_BUYER_RESPONSE
+            - EXCHANGE_REQUEST_PENDING
+            - EXCHANGE_REQUEST_REFUND_SUCCESS
+            - EXCHANGE_REQUEST_CANCEL
+            - EXCHANGE_REQUEST_COMPLETE
+          x-enum-descriptions:
+            - Buyer has initiated a return or refund request. The request is pending review by seller or platform.
+            - The return or refund request was rejected.
+            - The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.
+            - Buyer has shipped the approved items to seller.
+            - Seller inspected the returned items and rejected the return package.
+            - The return/refund request was approved. The buyer will be refunded.
+            - The request has been cancelled by the buyer or system.
+            - The return/refund was processed successfully. The buyer has been refunded.
+            - Buyer has initiated a replacement request. The request is pending review by seller.
+            - Seller reject the buyer replacement request.
+            - Buyer's replacement request was resolved by refund due to insufficient inventory.
+            - Buyer canceled the replacement request.
+            - Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.
+            - Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.
+            - Buyer has initiated an exchange request. The request is pending review by seller.
+            - Buyer's exchange request was resolved by refund due to insufficient inventory.
+            - Buyer canceled the exchange request.
+            - Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
           description: |-
             Return status.
             Available values:
@@ -71200,6 +72125,16 @@ components:
             - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
         arbitration_status:
           type: string
+          enum:
+            - IN_PROGRESS
+            - SUPPORT_BUYER
+            - SUPPORT_SELLER
+            - CLOSED
+          x-enum-descriptions:
+            - The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.
+            - The platform operator supports the buyer.
+            - The platform operator supports the seller.
+            - Arbitration is closed.
           description: |-
             Arbitration status.
             Available values:
@@ -71209,6 +72144,16 @@ components:
             - `CLOSED`: Arbitration is closed.
         role:
           type: string
+          enum:
+            - BUYER
+            - SELLER
+            - OPERATOR
+            - SYSTEM
+          x-enum-descriptions:
+            - ""
+            - ""
+            - TikTok Shop platform operator.
+            - TikTok Shop system.
           description: |-
             Return initiation role.
             Available values:
@@ -71227,6 +72172,12 @@ components:
             You can change language using the locale request parameter.
         shipment_type:
           type: string
+          enum:
+            - PLATFORM
+            - BUYER_ARRANGE
+          x-enum-descriptions:
+            - The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.
+            - The buyer arranges the return shipment.
           description: |-
             The shipment method selected by the buyer for sending the item(s) back to the seller.
             Available values:
@@ -71289,6 +72240,14 @@ components:
           description: Total refund amount to buyer.
         return_shipping_document_type:
           type: string
+          enum:
+            - SHIPPING_LABEL
+            - QR_CODE
+            - QR_CODE_NBNL
+          x-enum-descriptions:
+            - ""
+            - QR Code with Box
+            - QR Code with No Box No Label
           description: |-
             The type of return shipping document selected by the buyer. 
             Available values:
@@ -72485,6 +73444,12 @@ components:
       properties:
         creator_accept_status:
           type: string
+          enum:
+            - ACCEPT
+            - ALL
+          x-enum-descriptions:
+            - The creators have added the products to their showcases.
+            - Do not filter by whether the creators have added the products to their showcases.
           description: |-
             Filter target collaborations by the acceptance status of invited creators.
             Allowed values:
@@ -72673,8 +73638,11 @@ components:
           type: integer
           format: int64
           description: The time when the notification is pushed, represented as a Unix timestamp (seconds).
+        tts_notification_id:
+          type: string
+          description: The ID of the notification.
         data:
-          type: object
+          $ref: "#/components/schemas/FailReason"
           description: The object contains business parameters related to the specific notification type
     SellerFundedProductPromotion:
       type: object
@@ -72687,6 +73655,9 @@ components:
           description: Discount amount of this activity
         discount_type:
           type: string
+          enum:
+            - COUPON
+            - ACTIVITY
           description: |-
             Discount type of this activity. Enumerations:
             - COUPON
@@ -72717,6 +73688,11 @@ components:
       properties:
         action:
           type: string
+          enum:
+            - SELLER_RESPOND_REFUND
+            - SELLER_RESPOND_RETURN
+            - SELLER_RESPOND_RECEIVE_PACKAGE
+            - SELLER_RESPOND_REPLACEMENT
           description: |-
             Seller's next action.
             Available values:
@@ -73098,6 +74074,9 @@ components:
           description: "Shipping method. Possible values: SMALL_PARCEL (small parcel shipping); FREIGHT (freight shipping)."
         freight_type:
           type: string
+          enum:
+            - FTL
+            - LTL
           description: |-
             Freight load type. Required when `shipping_method` is `FREIGHT` for EU and UK shops. It is optional for US shops and is not required when `shipping_method` is `SMALL_PARCEL`.
 
@@ -73355,9 +74334,45 @@ components:
           type: string
           description: ID of precheck task generated by TikTok Shop.
         violation_check_result:
-          $ref: "#/components/schemas/ViolationCheckResult"
+          $ref: "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult"
         good_quality_check_result:
-          $ref: "#/components/schemas/GoodQualityCheckResult"
+          $ref: "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult"
+    ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - SUCCESS
+            - FAIL
+            - PROCESSING
+          description: |-
+            Possible enumerations:  
+             `SUCCESS` 
+             `FAIL` 
+             `PROCESSING`
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/Issue"
+    ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - SUCCESS
+            - FAIL
+            - PROCESSING
+          description: |-
+            Possible enumerations:  
+             `SUCCESS` 
+             `FAIL` 
+             `PROCESSING`
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
     SiocAttribute:
       type: object
       properties:
@@ -73468,6 +74483,16 @@ components:
           description: The identifier of a specific return.
         return_type:
           type: string
+          enum:
+            - REFUND
+            - RETURN_AND_REFUND
+            - REPLACEMENT
+            - EXCHANGE
+          x-enum-descriptions:
+            - Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.
+            - Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.
+            - The buyer requires the seller to replace the item(s).
+            - The buyer requires the seller to exchange the item(s).
           description: |-
             Return type.
             Available values:
@@ -73477,6 +74502,44 @@ components:
             - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
         return_status:
           type: string
+          enum:
+            - RETURN_OR_REFUND_REQUEST_PENDING
+            - REFUND_OR_RETURN_REQUEST_REJECT
+            - AWAITING_BUYER_SHIP
+            - BUYER_SHIPPED_ITEM
+            - REJECT_RECEIVE_PACKAGE
+            - RETURN_OR_REFUND_REQUEST_SUCCESS
+            - RETURN_OR_REFUND_REQUEST_CANCEL
+            - RETURN_OR_REFUND_REQUEST_COMPLETE
+            - REPLACEMENT_REQUEST_PENDING
+            - REPLACEMENT_REQUEST_REJECT
+            - REPLACEMENT_REQUEST_REFUND_SUCCESS
+            - REPLACEMENT_REQUEST_CANCEL
+            - REPLACEMENT_REQUEST_COMPLETE
+            - AWAITING_BUYER_RESPONSE
+            - EXCHANGE_REQUEST_PENDING
+            - EXCHANGE_REQUEST_REFUND_SUCCESS
+            - EXCHANGE_REQUEST_CANCEL
+            - EXCHANGE_REQUEST_COMPLETE
+          x-enum-descriptions:
+            - Buyer has initiated a return or refund request. The request is pending review by seller or platform.
+            - The return or refund request was rejected.
+            - The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.
+            - Buyer has shipped the approved items to seller.
+            - Seller inspected the returned items and rejected the return package.
+            - The return/refund request was approved. The buyer will be refunded.
+            - The request has been cancelled by the buyer or system.
+            - The return/refund was processed successfully. The buyer has been refunded.
+            - Buyer has initiated a replacement request. The request is pending review by seller.
+            - Seller reject the buyer replacement request.
+            - Buyer's replacement request was resolved by refund due to insufficient inventory.
+            - Buyer canceled the replacement request.
+            - Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.
+            - Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.
+            - Buyer has initiated an exchange request. The request is pending review by seller.
+            - Buyer's exchange request was resolved by refund due to insufficient inventory.
+            - Buyer canceled the exchange request.
+            - Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
           description: |-
             Return status.
             Available values:
@@ -73500,6 +74563,16 @@ components:
             - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
         arbitration_status:
           type: string
+          enum:
+            - IN_PROGRESS
+            - SUPPORT_BUYER
+            - SUPPORT_SELLER
+            - CLOSED
+          x-enum-descriptions:
+            - The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.
+            - The platform operator supports the buyer.
+            - The platform operator supports the seller.
+            - Arbitration is closed.
           description: |-
             Arbitration status.
             Available values:
@@ -73509,6 +74582,16 @@ components:
             - `CLOSED`: Arbitration is closed.
         role:
           type: string
+          enum:
+            - BUYER
+            - SELLER
+            - OPERATOR
+            - SYSTEM
+          x-enum-descriptions:
+            - ""
+            - ""
+            - TikTok Shop platform operator.
+            - TikTok Shop system.
           description: |-
             Return initiation role.
             Available values:
@@ -73532,6 +74615,12 @@ components:
           description: Seller's next action and deadline.
         shipment_type:
           type: string
+          enum:
+            - PLATFORM
+            - BUYER_ARRANGE
+          x-enum-descriptions:
+            - The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.
+            - The buyer arranges the return shipment.
           description: |-
             The shipment method selected by the buyer for sending the item(s) back to the seller.
             Available values:
@@ -73585,6 +74674,14 @@ components:
           description: Indicates whether the buyer may keep the item(s). This field is returned as `true` for replacement requests and is omitted for other return types.
         return_shipping_document_type:
           type: string
+          enum:
+            - SHIPPING_LABEL
+            - QR_CODE
+            - QR_CODE_NBNL
+          x-enum-descriptions:
+            - ""
+            - QR Code with Box
+            - QR Code with No Box No Label
           description: |-
             The type of return shipping document selected by the buyer.
             Available values:
@@ -73710,6 +74807,22 @@ components:
           description: SKU ID.
         display_status:
           type: string
+          enum:
+            - UNPAID
+            - AWAITING_SHIPMENT
+            - AWAITING_COLLECTION
+            - IN_TRANSIT
+            - DELIVERED
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - The order has been placed, but payment has not yet completed.
+            - The order is ready for shipment, but no items have been shipped yet.
+            - Shipping has been arranged, but the package is waiting to be collected by the carrier.
+            - The package has been collected by the carrier and delivery is in progress.
+            - The package has been delivered to the buyer.
+            - The order has been completed, and no further returns or refunds are allowed.
+            - The order has been cancelled.
           description: |-
             Available values:
             - `UNPAID`: The order has been placed, but payment has not yet completed.
@@ -73755,6 +74868,18 @@ components:
           description: The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
         package_status:
           type: string
+          enum:
+            - TO_FULFILL
+            - PROCESSING
+            - FULFILLING
+            - COMPLETED
+            - CANCELLED
+          x-enum-descriptions:
+            - Package awaiting seller to arrange shipment.
+            - Shipping has been arranged by the seller. Awaiting carrier collection.
+            - Package has been collected by carrier and is in transit.
+            - Package has been delivered.
+            - Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
           description: |-
             The package status of the item.
             Available values:
@@ -73771,6 +74896,11 @@ components:
           description: The shipping provider name.
         cancel_user:
           type: string
+          enum:
+            - BUYER
+            - SELLER
+            - OPERATOR
+            - SYSTEM
           description: |-
             Cancellation request initiator.
             Available values:
@@ -74550,6 +75680,9 @@ components:
           description: Unboxed sku code associated with the actual unboxed item.
         unbox_sku_type:
           type: string
+          enum:
+            - NORMAL
+            - GIFT
           description: |-
             Indicates if the unboxed sku is a gift item
             Enumerations: NORMAL or GIFT
@@ -74612,9 +75745,19 @@ components:
           type: integer
           format: int64
           description: The time when the notification is pushed, represented as a Unix timestamp (seconds).
+        tts_notification_id:
+          type: string
+          description: The ID of the notification.
         data:
-          type: object
+          $ref: "#/components/schemas/UpcomingAuthorizationExpirationWebhookData"
           description: The object contains business parameters related to the specific notification type.
+    UpcomingAuthorizationExpirationWebhookData:
+      type: object
+      properties:
+        message:
+          type: string
+        expiration_time:
+          type: string
     UpdateAgentSettingsRequest:
       type: object
       properties:
@@ -75637,6 +76780,11 @@ components:
       properties:
         user_type:
           type: string
+          enum:
+            - ALL_USER
+            - SHOP_NEW_CUSTOMER
+            - SHOP_EXISTING_CUSTOMER
+            - SHOP_REPEAT_CUSTOMER
           description: |-
             Possible enumerations are:
             `ALL_USER`
@@ -76773,6 +77921,9 @@ components:
           description: ID of precheck task generated by TikTok Shop.
         result:
           type: string
+          enum:
+            - PASS
+            - FAIL
           description: |-
             Possible enumerations:  
              `PASS` 
@@ -76791,20 +77942,6 @@ components:
         suggestion:
           type: string
           description: Suggestions on how to fix the risk.
-    ViolationCheckResult:
-      type: object
-      properties:
-        status:
-          type: string
-          description: |-
-            SUCCESS: The precheck task passed violation checks
-            FAIL: The precheck task has failed due to violations. Check the 'issues' field for details.
-            PROCESSING: The precheck violation task is still in progress
-        issues:
-          type: array
-          items:
-            $ref: "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
-          description: A list of policy violation details returned when violation check fails
     WebhookEvent:
       oneOf:
         - $ref: "#/components/schemas/ActivityChangeWebhook"
@@ -76859,6 +77996,9 @@ components:
           description: The numerical value of the package weight.
         unit:
           type: string
+          enum:
+            - GRAM
+            - POUND
           description: |-
             The unit of measurement for the package weight.
 

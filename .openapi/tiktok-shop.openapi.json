@@ -140,7 +140,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -249,7 +248,9 @@
             "description": "The number of results to be returned per page. Valid range: [1-20].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 20
             }
           },
           {
@@ -464,7 +465,9 @@
             "description": "The number of results to be returned per page. Valid range: [0-100].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 0,
+              "maximum": 100
             }
           }
         ],
@@ -774,12 +777,13 @@
             "description": "The number of results to be returned per page. Default: 20\nValid Range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -957,7 +961,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -1358,7 +1361,9 @@
             "description": "The number of results to return per page.\nValid range: 1 to 100.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           }
         ],
@@ -1749,7 +1754,9 @@
             "description": "Pagination count determines how many products you'll get after sending the request. 20 is a recommended number.\nValid Range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -2321,7 +2328,6 @@
           "Affiliate creator"
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -2376,7 +2382,6 @@
           "Affiliate creator"
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -2642,7 +2647,9 @@
             "description": "The number of campaigns to return per page. Valid range: 1-100.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -2962,7 +2969,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -3551,7 +3557,9 @@
             "description": "The number of results to be returned per page. Valid range: 1-50.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           },
           {
@@ -3674,7 +3682,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -3968,7 +3975,9 @@
             "description": "The number of results to be returned per page. Valid range: 1-50.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           },
           {
@@ -4085,7 +4094,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -4305,7 +4313,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -4469,7 +4476,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -4571,12 +4577,13 @@
             "description": "The number of results to be returned per page. Valid range: [1-20].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 20
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -4856,7 +4863,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -5153,12 +5159,13 @@
             "description": "The number of results to be returned per page. Default: 20\nValid Range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -5435,7 +5442,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -5811,7 +5817,15 @@
             "required": false,
             "description": "Default value of \"sort_order\" is DESC.\nEnum:\n- ASC：means to sort data in ascending order\n- DESC：means to sort data in descending order",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "x-enum-descriptions": [
+                "means to sort data in ascending order",
+                "means to sort data in descending order"
+              ]
             }
           },
           {
@@ -5825,7 +5839,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -6244,7 +6257,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -7092,7 +7104,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -7695,7 +7706,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -7900,7 +7910,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -7998,7 +8007,21 @@
             "schema": {
               "type": "array",
               "items": {
-                "type": "string"
+                "type": "string",
+                "enum": [
+                  "BASIC_CREATOR_INFORMATION",
+                  "CONTENT_PERFORMANCE",
+                  "FOLLOWER_INFORMATION",
+                  "COLLABORATION",
+                  "SALES_AND_GMV"
+                ],
+                "x-enum-descriptions": [
+                  "Basic creator profile information.",
+                  "Content performance metrics, Promotion Performance Score (PPS), fulfillment score, and promoted product count.",
+                  "Follower location, age, and gender distributions.",
+                  "Collaborated brands and commission information.",
+                  "Units sold; GMV and GPM metrics and distributions; product price range; and average GMV per buyer."
+                ]
               }
             }
           }
@@ -9164,7 +9187,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -9173,7 +9200,11 @@
             "required": false,
             "description": "Currency.\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           }
         ],
@@ -9340,7 +9371,8 @@
             "description": "Number of records per page. If omitted, defaults to 10. Maximum: 100.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "maximum": 100
             }
           },
           {
@@ -9535,7 +9567,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -9665,7 +9701,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -9674,7 +9714,11 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           }
         ],
@@ -9822,7 +9866,9 @@
             "description": "Number of products per page.\nMin value: 1\nMax value: 100\nDefault value: 10",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -9831,7 +9877,12 @@
             "required": false,
             "description": "Sort on.\nAvailable values: gmv, units_sold, daily_avg_buyers\nDefault value: gmv",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "gmv",
+                "units_sold",
+                "daily_avg_buyers"
+              ]
             }
           },
           {
@@ -9840,7 +9891,11 @@
             "required": false,
             "description": "Sort direction.\nAvailable values: ASC, DESC\nDefault value: DESC\n* ASC: ascending\n* DESC: descending",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
             }
           },
           {
@@ -9849,7 +9904,11 @@
             "required": false,
             "description": "Currency.\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           },
           {
@@ -9954,7 +10013,11 @@
             "required": false,
             "description": "Currency.\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           }
         ],
@@ -10227,7 +10290,17 @@
             "required": true,
             "description": "The length of the query period ending on `date`. Supported values are:\n- 1D — 1 day\n- 7D — 7 days\n- 30D — 30 days",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1D",
+                "7D",
+                "30D"
+              ],
+              "x-enum-descriptions": [
+                "1 day",
+                "7 days",
+                "30 days"
+              ]
             }
           },
           {
@@ -10236,7 +10309,19 @@
             "required": true,
             "description": "The creator type to include. Supported values are:\n- ALL — include all creator types\n- OFFICIAL — include official creators\n- CHANNEL — include channel creators\n- AFFILIATE — include affiliate creators",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "OFFICIAL",
+                "CHANNEL",
+                "AFFILIATE"
+              ],
+              "x-enum-descriptions": [
+                "include all creator types",
+                "include official creators",
+                "include channel creators",
+                "include affiliate creators"
+              ]
             }
           },
           {
@@ -10245,7 +10330,15 @@
             "required": false,
             "description": "Currency for monetary values. Supported values are:\n- USD — US dollars\n- LOCAL — the local currency where the shop is registered\nIf omitted, defaults to LOCAL.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ],
+              "x-enum-descriptions": [
+                "US dollars",
+                "the local currency where the shop is registered"
+              ]
             }
           }
         ],
@@ -10315,7 +10408,17 @@
             "required": false,
             "description": "Specifies the query time range. Supported values are:\n\n- 1D: query data for 1 day\n\n- 7D: query data for 7 days\n\n- 30D: query data for 30 days\n\nThis field determines the maximum range that can be queried using the date field.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1D",
+                "7D",
+                "30D"
+              ],
+              "x-enum-descriptions": [
+                "query data for 1 day",
+                "query data for 7 days",
+                "query data for 30 days"
+              ]
             }
           },
           {
@@ -10405,7 +10508,17 @@
             "required": true,
             "description": "The length of the query period ending on date. Supported values are:\n- 1D — 1 day\n- 7D — 7 days\n- 30D — 30 days",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1D",
+                "7D",
+                "30D"
+              ],
+              "x-enum-descriptions": [
+                "1 day",
+                "7 days",
+                "30 days"
+              ]
             }
           },
           {
@@ -10495,7 +10608,17 @@
             "required": true,
             "description": "The length of the query period ending on `date`. Supported values are:\n\n- 1D: 1 day\n\n- 7D: 7 days\n\n- 30D: 30 days",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "1D",
+                "7D",
+                "30D"
+              ],
+              "x-enum-descriptions": [
+                "1 day",
+                "7 days",
+                "30 days"
+              ]
             }
           },
           {
@@ -10583,7 +10706,11 @@
             "required": false,
             "description": "Sort direction.\n\nAvailable values: ASC, DESC\n\nDefault value: DESC\n\n* ASC: ascending\n\n* DESC: descending",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
             }
           },
           {
@@ -10592,7 +10719,17 @@
             "required": false,
             "description": "Field to sort on.\n\nAvailable values:\n- gmv\n- items_sold\n- customers\n- created_sku_orders\n- sku_orders\n- main_orders\n- product_impressions\n- product_clicks\n\nDefault value: gmv",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "gmv",
+                "items_sold",
+                "customers",
+                "created_sku_orders",
+                "sku_orders",
+                "main_orders",
+                "product_impressions",
+                "product_clicks"
+              ]
             }
           },
           {
@@ -10705,7 +10842,8 @@
             "description": "Number of products per page.\nMax value: 100\nDefault value: 10",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "maximum": 100
             }
           },
           {
@@ -10723,7 +10861,12 @@
             "required": false,
             "description": "Field to sort on.\nDefault: gmv\nAvailable values:\n- gmv\n- items_sold\n- orders",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "gmv",
+                "items_sold",
+                "orders"
+              ]
             }
           },
           {
@@ -10732,7 +10875,11 @@
             "required": false,
             "description": "Sort direction.\nAvailable values: ASC, DESC\nDefault value: DESC\n* ASC: ascending\n* DESC: descending",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
             }
           },
           {
@@ -10741,7 +10888,11 @@
             "required": false,
             "description": "Currency.\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           },
           {
@@ -10762,7 +10913,17 @@
             "required": false,
             "description": "Product status filter.\n\nAvailable values:\n\n- LIVE: live products\n\n- INACTIVE: inactive products\n\n- ALL: all product statuses; this is the default",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "LIVE",
+                "INACTIVE",
+                "ALL"
+              ],
+              "x-enum-descriptions": [
+                "live products",
+                "inactive products",
+                "all product statuses; this is the default"
+              ]
             }
           }
         ],
@@ -11051,7 +11212,9 @@
             "description": "Number of videos per page.\nMinimum value: 1\nMaximum value: 100\nDefault value: 10",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -11060,7 +11223,27 @@
             "required": false,
             "description": "Field used to sort the shop video performance list.\nDefault value: gmv\nAvailable values:\n- gmv: sort by overall Gross Merchandise Value (GMV).\n- gpm: sort by average GMV generated from 1,000 views.\n- avg_customers: sort by daily average customers.\n- sku_orders: sort by paid SKU orders.\n- items_sold: sort by units sold.\n- views: sort by video views.\n- click_through_rate: sort by the ratio of product clicks to video views.\n- post_time: sort by the time the video was posted.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "gmv",
+                "gpm",
+                "avg_customers",
+                "sku_orders",
+                "items_sold",
+                "views",
+                "click_through_rate",
+                "post_time"
+              ],
+              "x-enum-descriptions": [
+                "sort by overall Gross Merchandise Value (GMV).",
+                "sort by average GMV generated from 1,000 views.",
+                "sort by daily average customers.",
+                "sort by paid SKU orders.",
+                "sort by units sold.",
+                "sort by video views.",
+                "sort by the ratio of product clicks to video views.",
+                "sort by the time the video was posted."
+              ]
             }
           },
           {
@@ -11069,7 +11252,11 @@
             "required": false,
             "description": "Sort direction.\nAvailable values: ASC, DESC\nDefault value: DESC\n* ASC: ascending\n* DESC: descending",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
             }
           },
           {
@@ -11078,7 +11265,11 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           },
           {
@@ -11096,7 +11287,13 @@
             "required": false,
             "description": "Types of the accounts under which videos were created.\nAvailable values: ALL, OFFICIAL_ACCOUNTS, MARKETING_ACCOUNTS, AFFILIATE_ACCOUNTS\nDefault value: ALL\n- ALL: all account types\n- OFFICIAL_ACCOUNTS: official accounts\n- MARKETING_ACCOUNTS: marketing accounts\n- AFFILIATE_ACCOUNTS: affiliate accounts",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "OFFICIAL_ACCOUNTS",
+                "MARKETING_ACCOUNTS",
+                "AFFILIATE_ACCOUNTS"
+              ]
             }
           }
         ],
@@ -11428,7 +11625,9 @@
             "description": "The number of results to return per page. Minimum value is 1. Default value is 10. Maximum value is 50.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           }
         ],
@@ -11763,7 +11962,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -11772,7 +11975,11 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           }
         ],
@@ -12026,7 +12233,15 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values:\n- ALL: Aggregate data for the full requested time range.\n- 1D: Daily data.\nDefault value: ALL",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ],
+              "x-enum-descriptions": [
+                "Aggregate data for the full requested time range.",
+                "Daily data."
+              ]
             }
           },
           {
@@ -12035,7 +12250,15 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nAvailable values:\n- USD: US dollars.\n- LOCAL: Local currency where the shop is located.\nDefault value: LOCAL",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ],
+              "x-enum-descriptions": [
+                "US dollars.",
+                "Local currency where the shop is located."
+              ]
             }
           },
           {
@@ -12044,7 +12267,17 @@
             "required": false,
             "description": "Types of the accounts under which videos were created.\nAvailable values:\n- ALL: All account types.\n- LINKED_ACCOUNTS: Linked accounts.\n- AFFILIATE_ACCOUNTS: Affiliate accounts.\nDefault value: ALL",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "LINKED_ACCOUNTS",
+                "AFFILIATE_ACCOUNTS"
+              ],
+              "x-enum-descriptions": [
+                "All account types.",
+                "Linked accounts.",
+                "Affiliate accounts."
+              ]
             }
           }
         ],
@@ -12159,7 +12392,17 @@
             "required": true,
             "description": "Types of the accounts under which videos were created.\nAvailable values:\n- OFFICIAL_ACCOUNTS: Official accounts.\n- MARKETING_ACCOUNTS: Marketing accounts.\n- AFFILIATE_ACCOUNTS: Affiliate accounts.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "OFFICIAL_ACCOUNTS",
+                "MARKETING_ACCOUNTS",
+                "AFFILIATE_ACCOUNTS"
+              ],
+              "x-enum-descriptions": [
+                "Official accounts.",
+                "Marketing accounts.",
+                "Affiliate accounts."
+              ]
             }
           },
           {
@@ -12169,7 +12412,8 @@
             "description": "Number of products per page.\nMax value: 100\nDefault value: 10",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "maximum": 100
             }
           },
           {
@@ -12178,7 +12422,15 @@
             "required": false,
             "description": "Field to sort on.\nDefault: live_attributed_gmv\nAvailable values:\n- live_attributed_gmv\n- products_added\n- products_sold\n- live_attributed_sku_orders\n- live_attributed_items_sold\n- attributed_customers",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "live_attributed_gmv",
+                "products_added",
+                "products_sold",
+                "live_attributed_sku_orders",
+                "live_attributed_items_sold",
+                "attributed_customers"
+              ]
             }
           },
           {
@@ -12187,7 +12439,15 @@
             "required": false,
             "description": "Sort direction.\nAvailable values:\n- ASC: Ascending order.\n- DESC: Descending order.\nDefault value: DESC",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ASC",
+                "DESC"
+              ],
+              "x-enum-descriptions": [
+                "Ascending order.",
+                "Descending order."
+              ]
             }
           },
           {
@@ -12196,7 +12456,15 @@
             "required": false,
             "description": "Currency.\nAvailable values:\n- USD: US dollars.\n- LOCAL: Local currency where the shop is located.\nDefault value: LOCAL",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ],
+              "x-enum-descriptions": [
+                "US dollars.",
+                "Local currency where the shop is located."
+              ]
             }
           },
           {
@@ -12399,7 +12667,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -12408,7 +12680,11 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           }
         ],
@@ -12557,7 +12833,11 @@
             "required": false,
             "description": "Granularity of the data.\nAvailable values: ALL, 1D\nDefault value: ALL\n* ALL: aggregate\n* 1D: daily",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "1D"
+              ]
             }
           },
           {
@@ -12566,7 +12846,11 @@
             "required": false,
             "description": "Currently, only local currency is supported in the response.\n\nCurrency.\nAvailable values: USD, LOCAL\nDefault value: LOCAL\n* USD: US dollars\n* LOCAL: local currency where the shop is located",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "USD",
+                "LOCAL"
+              ]
             }
           },
           {
@@ -12575,7 +12859,19 @@
             "required": false,
             "description": "Types of the accounts under which videos were created.\nAvailable values:\n- ALL: All account types.\n- OFFICIAL_ACCOUNTS: Official accounts.\n- MARKETING_ACCOUNTS: Marketing accounts.\n- AFFILIATE_ACCOUNTS: Affiliate accounts.\nDefault value: ALL",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "ALL",
+                "OFFICIAL_ACCOUNTS",
+                "MARKETING_ACCOUNTS",
+                "AFFILIATE_ACCOUNTS"
+              ],
+              "x-enum-descriptions": [
+                "All account types.",
+                "Official accounts.",
+                "Marketing accounts.",
+                "Affiliate accounts."
+              ]
             }
           }
         ],
@@ -14077,7 +14373,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -14516,7 +14814,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -14530,7 +14830,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -14745,7 +15044,9 @@
             "description": "The number of results to return per page.\nValid range: [1-100].\nPagination is limited to the first 20,000 results.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -14759,7 +15060,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -15108,7 +15408,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -16287,7 +16586,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -16301,7 +16602,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -16478,7 +16778,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -16784,7 +17083,9 @@
             "description": "The number of results to be returned per page. \nDefault: 20\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -17286,7 +17587,9 @@
             "description": "The number of results to be returned per page. \nDefault: 20\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           }
         ],
@@ -17539,7 +17842,9 @@
             "description": "The number of results to be returned per page. \nDefault: 20\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -17777,7 +18082,9 @@
             "description": "The number of results to be returned per page. \nDefault: 20\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -17977,7 +18284,12 @@
             "required": false,
             "description": "Filters account transactions by business transaction type. Allowed values: RECHARGE, WITHDRAW, REVERSE. If omitted, all supported transaction types are returned.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "RECHARGE",
+                "WITHDRAW",
+                "REVERSE"
+              ]
             }
           },
           {
@@ -18078,7 +18390,9 @@
             "description": "The number of results to be returned per page. Valid range: [1-50].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           }
         ],
@@ -18482,7 +18796,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -18971,13 +19284,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
             "name": "page_size",
             "in": "query",
             "required": true,
             "description": "The number of results to be returned per page. Valid range: [1-50].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           },
           {
@@ -19019,19 +19337,9 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "shop_cipher",
-            "in": "query",
-            "required": false,
-            "description": "Use this property to pass shop information in requesting the API. Failure in passing the correct value when requesting the API for cross-border shops will return incorrect response. Get by API [Get Authorization Shop](https://partner.tiktokshop.com/docv2/page/6507ead7b99d5302be949ba9?external_id=6507ead7b99d5302be949ba9)",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -19095,6 +19403,7 @@
             }
           }
         },
+        "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
         "x-tts-scopes": [
           "Fulfillment Basic"
@@ -19597,7 +19906,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -20111,7 +20419,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -20297,7 +20604,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -20995,7 +21301,6 @@
           "Fulfillment"
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -21196,7 +21501,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -21938,7 +22242,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -22242,7 +22545,9 @@
             "description": "The number of results to be returned per page. Default: 20. Valid range: [1-100].",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -22286,7 +22591,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -23311,7 +23615,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -23512,7 +23815,9 @@
             "description": "The number of results to be returned per page.\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -27341,7 +27646,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -30881,7 +31185,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -30895,7 +31201,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -31076,7 +31381,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -31518,7 +31822,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -31561,7 +31867,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -31799,7 +32104,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -32032,7 +32336,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -32273,7 +32576,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -32287,7 +32592,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -32399,7 +32703,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -32413,7 +32719,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -32526,7 +32831,9 @@
             "description": "The number of results to be returned per page. \nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -32540,7 +32847,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -33015,7 +33321,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -33224,7 +33529,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -34749,7 +35053,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -35939,12 +36242,13 @@
             "description": "The number of results to be returned per page. \nValid range: [1-50]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 50
             }
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -36052,7 +36356,9 @@
             "description": "The number of results to be returned per page.\nValid range: [1-100]",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "minimum": 1,
+              "maximum": 100
             }
           },
           {
@@ -36066,7 +36372,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -36224,7 +36529,8 @@
             "description": "Number of results per page. Max: 100. Default: 20.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "maximum": 100
             }
           },
           {
@@ -36409,7 +36715,8 @@
             "description": "Number of results per page. Max: 100. Default: 20.",
             "schema": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "maximum": 100
             }
           }
         ],
@@ -36710,7 +37017,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -37784,7 +38090,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -38858,7 +39163,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -39030,7 +39334,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -39276,7 +39579,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -40267,7 +40569,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -40835,7 +41136,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -41056,7 +41356,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -41370,7 +41669,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -41988,7 +42286,6 @@
           }
         ],
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
@@ -44409,6 +44706,11 @@
           },
           "product_level": {
             "type": "string",
+            "enum": [
+              "PRODUCT",
+              "VARIATION",
+              "SHOP"
+            ],
             "description": "Activity product dimension, values are: \n  \n * `PRODUCT` \n * `VARIATION` \n * `SHOP`"
           },
           "status": {
@@ -44955,6 +45257,24 @@
         "properties": {
           "decision": {
             "type": "string",
+            "enum": [
+              "APPROVE_REFUND",
+              "APPROVE_RETURN",
+              "APPROVE_RECEIVED_PACKAGE",
+              "APPROVE_REPLACEMENT",
+              "ISSUE_REPLACEMENT_REFUND",
+              "OFFER_PARTIAL_REFUND",
+              "DIRECT_REFUND"
+            ],
+            "x-enum-descriptions": [
+              "seller approve a refund-only request",
+              "seller approve the initial return-and-refund request",
+              "seller approve return-and-refund request after the buyer has already shipped or handed over the item.",
+              "seller approve replacement request",
+              "seller decline the replacement request and directly refund the buyer instead.",
+              "seller offers a partial refund amount to the buyer without requiring the item(s) to be returned.",
+              "seller issues a returnless refund, meaning the buyer receives a full refund and keeps the item"
+            ],
             "description": "Seller's decision for the return request, available values:\n- `APPROVE_REFUND`: seller approve a refund-only request\n- `APPROVE_RETURN`: seller approve the initial return-and-refund request\n- `APPROVE_RECEIVED_PACKAGE`: seller approve return-and-refund request after the buyer has already shipped or handed over the item.\n- `APPROVE_REPLACEMENT`: seller approve replacement request\n- `ISSUE_REPLACEMENT_REFUND`: seller decline the replacement request and directly refund the buyer instead.\n- `OFFER_PARTIAL_REFUND`: seller offers a partial refund amount to the buyer without requiring the item(s) to be returned.\n- `DIRECT_REFUND`: seller issues a returnless refund, meaning the buyer receives a full refund and keeps the item"
           },
           "buyer_keep_item": {
@@ -45350,6 +45670,20 @@
           },
           "weight_unit": {
             "type": "string",
+            "enum": [
+              "KILOGRAM",
+              "GRAM",
+              "MILLIGRAM",
+              "POUNDS",
+              "OUNCE"
+            ],
+            "x-enum-descriptions": [
+              "kg",
+              "g",
+              "mg",
+              "lbs",
+              "oz"
+            ],
             "description": "The unit used for the carton's `weight` value.\n\n**Possible values:**\n* `KILOGRAM` (kg)\n* `GRAM` (g)\n* `MILLIGRAM` (mg)\n* `POUNDS` (lbs)\n* `OUNCE` (oz)"
           },
           "width": {
@@ -45366,6 +45700,22 @@
           },
           "length_unit": {
             "type": "string",
+            "enum": [
+              "METER",
+              "CENTIMETER",
+              "MILLIMETER",
+              "FOOT",
+              "MICRON",
+              "INCH"
+            ],
+            "x-enum-descriptions": [
+              "m",
+              "cm",
+              "mm",
+              "ft",
+              "μm",
+              "in"
+            ],
             "description": "The unit used for the carton's `length`, `width`, and `height` values.\n\n**Possible values:**\n* `METER` (m)\n* `CENTIMETER` (cm)\n* `MILLIMETER` (mm)\n* `FOOT` (ft)\n* `MICRON` (μm)\n* `INCH` (in)"
           }
         },
@@ -45762,6 +46112,12 @@
           },
           "cancel_status": {
             "type": "string",
+            "enum": [
+              "CANCELLATION_REQUEST_PENDING",
+              "CANCELLATION_REQUEST_SUCCESS",
+              "CANCELLATION_REQUEST_CANCEL",
+              "CANCELLATION_REQUEST_COMPLETE"
+            ],
             "description": "The status of an order cancellation request. \nAvailable values:\n- `CANCELLATION_REQUEST_PENDING`\n- `CANCELLATION_REQUEST_SUCCESS`\n- `CANCELLATION_REQUEST_CANCEL`\n- `CANCELLATION_REQUEST_COMPLETE`"
           }
         }
@@ -45834,6 +46190,14 @@
         "properties": {
           "carton_type": {
             "type": "string",
+            "enum": [
+              "SINGLE_SKU",
+              "MULTI_SKU"
+            ],
+            "x-enum-descriptions": [
+              "`items` must contain exactly one item.",
+              "`items` must contain two or more items."
+            ],
             "description": "Indicates whether the carton is configured as single-SKU or multi-SKU.\n\n**Possible values:**\n* `SINGLE_SKU`: `items` must contain exactly one item.\n* `MULTI_SKU`: `items` must contain two or more items."
           },
           "items": {
@@ -47225,6 +47589,14 @@
           },
           "inbound_method": {
             "type": "string",
+            "enum": [
+              "D2FC",
+              "ONE_HUB"
+            ],
+            "x-enum-descriptions": [
+              "Direct to fulfillment center, may be split into multiple shipments",
+              "Single destination, includes fee"
+            ],
             "description": "**Possible values:**\n* `D2FC` (Direct to fulfillment center, may be split into multiple shipments)\n* `ONE_HUB` (Single destination, includes fee)"
           },
           "estimate_arrival_time": {
@@ -47819,10 +48191,23 @@
         "properties": {
           "module_type": {
             "type": "string",
+            "enum": [
+              "CREATOR",
+              "BASE"
+            ],
+            "x-enum-descriptions": [
+              "Creator list data.",
+              "Core performance data."
+            ],
             "description": "Type of Compass data to export. Allowed values:\n- CREATOR: Creator list data.\n- BASE: Core performance data."
           },
           "window_type": {
             "type": "string",
+            "enum": [
+              "PAST_24H",
+              "PAST_7_DAYS",
+              "PAST_30_DAYS"
+            ],
             "description": "Time window included in the export, ending on end_day. Allowed values: PAST_24H, PAST_7_DAYS, PAST_30_DAYS."
           },
           "end_day": {
@@ -47832,6 +48217,12 @@
           },
           "plan_type": {
             "type": "string",
+            "enum": [
+              "ALL",
+              "TARGET",
+              "OPEN",
+              "PARTNER"
+            ],
             "description": "Plan type. Allowed values: ALL, TARGET, OPEN, PARTNER."
           }
         }
@@ -48859,6 +49250,8 @@
           },
           "seller_sku": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
             "description": "An internal code/name for managing SKUs, not visible to buyers.  \n- Valid length: 1-50 characters\n- Format: Text without spaces"
           },
           "price": {
@@ -49352,7 +49745,7 @@
             "description": "The TikTok Shop order IDs to combine into one package. Required when `ship_type` is `3`; provide at least two order IDs."
           },
           "dimension": {
-            "$ref": "#/components/schemas/PackageDimension",
+            "$ref": "#/components/schemas/CreatePackagesRequestDimension",
             "description": "Package dimensions. For `ship_type` `1` and `2`, each dimension must be between 0.01 and 999999 and have no more than two decimal places."
           },
           "shipping_service_id": {
@@ -49360,12 +49753,64 @@
             "description": "Specify the shipping service used. \nIf not specified, use the default service obtained from [Get Eligible Shipping Service](https://partner.tiktokshop.com/docv2/page/650aa6b2bace3e02b75dda4e)."
           },
           "weight": {
-            "$ref": "#/components/schemas/PackageWeight",
+            "$ref": "#/components/schemas/CreatePackagesRequestWeight",
             "description": "Package weight. For `ship_type` `1` and `2`, the value must be between 0.01 and 999999 and have no more than two decimal places."
           }
         },
         "required": [
           "ship_type"
+        ]
+      },
+      "CreatePackagesRequestDimension": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "string",
+            "description": "Package length.\n\nThe length, width, and height must be passed together."
+          },
+          "width": {
+            "type": "string",
+            "description": "Package width.\n\nThe length, width, and height must be passed together."
+          },
+          "height": {
+            "type": "string",
+            "description": "Package height.\n\nThe length, width, and height must be passed together."
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "CM",
+              "INCH"
+            ],
+            "description": "The unit of measurement for the package dimensions. For packages in the US, use `INCH`.\n\nAvailable values:\n- `CM`\n- `INCH`"
+          }
+        },
+        "required": [
+          "length",
+          "width",
+          "height",
+          "unit"
+        ]
+      },
+      "CreatePackagesRequestWeight": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The numerical value of the package weight."
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "GRAM",
+              "POUND"
+            ],
+            "description": "The unit of measurement for the package weight.\n\nAvailable values:\n- `GRAM`\n- `POUND`"
+          }
+        },
+        "required": [
+          "value",
+          "unit"
         ]
       },
       "CreatePackagesResponse": {
@@ -50159,6 +50604,12 @@
         "properties": {
           "user_type": {
             "type": "string",
+            "enum": [
+              "ALL_USER",
+              "SHOP_NEW_CUSTOMER",
+              "SHOP_EXISTING_CUSTOMER",
+              "SHOP_REPEAT_CUSTOMER"
+            ],
             "description": "Possible enumerations are:\n`ALL_USER`\n`SHOP_NEW_CUSTOMER`\n`SHOP_EXISTING_CUSTOMER`\n`SHOP_REPEAT_CUSTOMER`"
           }
         }
@@ -50398,6 +50849,26 @@
           },
           "return_status": {
             "type": "string",
+            "enum": [
+              "RETURN_OR_REFUND_REQUEST_PENDING",
+              "REFUND_OR_RETURN_REQUEST_REJECT",
+              "AWAITING_BUYER_SHIP",
+              "BUYER_SHIPPED_ITEM",
+              "REJECT_RECEIVE_PACKAGE",
+              "RETURN_OR_REFUND_REQUEST_SUCCESS",
+              "RETURN_OR_REFUND_REQUEST_CANCEL",
+              "RETURN_OR_REFUND_REQUEST_COMPLETE"
+            ],
+            "x-enum-descriptions": [
+              "Request is pending, needs to be approved by seller or platform",
+              "Seller rejected the request",
+              "Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform",
+              "Buyer has shipped items to seller.",
+              "Seller reject return package",
+              "The refund/return request is successful, buyer will be refunded.",
+              "The request has been cancelled by buyer or system",
+              "The request is successful, and the amount has been refunded."
+            ],
             "description": "Return status, available values:\n- RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform\n- REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request\n- AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform\n- BUYER_SHIPPED_ITEM: Buyer has shipped items to seller.\n- REJECT_RECEIVE_PACKAGE: Seller reject return package\n- RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded.\n- RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system\n- RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded."
           }
         }
@@ -51613,6 +52084,10 @@
           },
           "unit": {
             "type": "string",
+            "enum": [
+              "CM",
+              "INCH"
+            ],
             "description": "The unit of measurement for the package dimensions.\n\nAvailable values:\n- `CM`\n- `INCH`"
           }
         }
@@ -51926,6 +52401,8 @@
           },
           "seller_sku": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
             "description": "An internal code/name for managing SKUs, not visible to buyers.  \n- Valid length: 1-50 characters\n- Format: Text without spaces"
           },
           "price": {
@@ -52552,6 +53029,8 @@
           "quantity": {
             "type": "integer",
             "format": "int64",
+            "minimum": 1,
+            "maximum": 999999,
             "description": "The SKU quantity available in the warehouse.\nValid range: [1, 999,999]. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional."
           }
         }
@@ -52661,7 +53140,7 @@
             "description": "If the SKU belongs to a virtual bundle (containing multiple individual SKUs), you can add up to 10 additional identifier codes here for the SKUs included in the bundle.\n\n**Format**:\nGTIN: 14 digits \nEAN: 8, 13, or 14 digits \nUPC: 12 digits \nISBN: 13 digits, or 9 digits ending in capital `X`\n\n**Note**: \n- Applicable only for the EU market. \n- The identifier code must be unique for each SKU, with no repetition allowed."
           },
           "pre_sale": {
-            "$ref": "#/components/schemas/PreSale",
+            "$ref": "#/components/schemas/EditProductRequestSkuPreSale",
             "description": "SKU presale information, used to tag a product as a presale product based on its presale type.\nApplicable only if `allowed_special_product_types` from [Get Category Rules](6509c0febace3e02b74594a9) is not empty.\n\n**General usage rules**:\n- Omit this object to retain the current presale settings.\n\n**Rules for the US market**:\n- Regular / Preorder product: Once the product goes live, you cannot change the product type.\n- Made-to-order product: You can change it to a regular product at any time."
           },
           "list_price": {
@@ -52689,6 +53168,31 @@
           "sku_weight": {
             "$ref": "#/components/schemas/PackageWeight",
             "description": "The packaged weight of the SKU.\n\n**Note**:\n- Provide the weight measured after packing the SKU.\n- Use the same measurement system for `sku_weight` and `sku_dimensions`; for example, use `KILOGRAM` with `CENTIMETER`.\n- Weight and dimensions can affect shipping costs, so ensure both are accurate. Shipping fees may use the higher of the actual weight and the volumetric weight calculated from the dimensions."
+          }
+        }
+      },
+      "EditProductRequestSkuPreSale": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PRE_ORDER",
+              "MADE_TO_ORDER",
+              "CUSTOM",
+              "NONE"
+            ],
+            "x-enum-descriptions": [
+              "The product is not yet available or released. Fulfillment can be extended by specifying a release date.",
+              "The product is produced only after the order is received. Fulfillment can be extended by specifying a duration.",
+              "The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.",
+              "To convert the product to a regular (non-presale) product."
+            ],
+            "description": "The type of pre-sale.\nPossible values based on the region:\n**US**\n- `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**.\n- `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**.\n- `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.\n\n**UK, EU, SEA, JP, and LATAM**\n- `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**. \n\n**ALL**\n- `NONE`: To convert the product to a regular (non-presale) product."
+          },
+          "fulfillment_type": {
+            "$ref": "#/components/schemas/FulfillmentType",
+            "description": "Information about the type of pre-sale order fulfillment and the corresponding timeframe.\n- `handling_duration_days` is for fulfillment with an extended duration.\n- `release_date` is for starting fulfillment on a fixed date.\n\n**Note**: Provide either the `handling_duration_days` or the `release_date`, depending on the value of `pre_sale.type` and your shop's region."
           }
         }
       },
@@ -53977,6 +54481,16 @@
           },
           "product_level": {
             "type": "string",
+            "enum": [
+              "PRODUCT",
+              "VARIATION",
+              "SHOP"
+            ],
+            "x-enum-descriptions": [
+              "Product level promotion activity.",
+              "SKU level promotion activity.",
+              "Shop level promotion activity."
+            ],
             "description": "Activity product dimension, values are: \n- PRODUCT: Product level promotion activity.\n- VARIATION: SKU level promotion activity.\n- SHOP: Shop level promotion activity."
           },
           "activity_commands": {
@@ -56497,6 +57011,10 @@
         "properties": {
           "module_type": {
             "type": "string",
+            "enum": [
+              "CREATOR",
+              "BASE"
+            ],
             "description": "Allowed values: CREATOR, BASE."
           },
           "id": {
@@ -58040,7 +58558,7 @@
             "description": "Line item ID list"
           },
           "weight": {
-            "$ref": "#/components/schemas/Weight",
+            "$ref": "#/components/schemas/GetEligibleShippingServicesResponseDataWeight",
             "description": "The weight of the scheduled package."
           },
           "shipping_services": {
@@ -58051,8 +58569,29 @@
             "description": "The shipping services available for the order."
           },
           "dimension": {
-            "$ref": "#/components/schemas/Dimension",
+            "$ref": "#/components/schemas/GetEligibleShippingServicesResponseDataDimension",
             "description": "The dimension of the scheduled package."
+          }
+        }
+      },
+      "GetEligibleShippingServicesResponseDataDimension": {
+        "type": "object",
+        "properties": {
+          "length": {
+            "type": "string",
+            "description": "The length of the package."
+          },
+          "width": {
+            "type": "string",
+            "description": "The width of the package."
+          },
+          "height": {
+            "type": "string",
+            "description": "The height of the package."
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit of measurement for the package dimensions.\n- CM\n- INCH"
           }
         }
       },
@@ -58108,6 +58647,19 @@
           "signature_fee": {
             "type": "string",
             "description": "Signature service fee"
+          }
+        }
+      },
+      "GetEligibleShippingServicesResponseDataWeight": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "The weight of the scheduled package."
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit of measurement is used to measure the weight.\n- GRAM\n- POUND"
           }
         }
       },
@@ -58418,6 +58970,10 @@
           },
           "carton_type": {
             "type": "string",
+            "enum": [
+              "SINGLE_SKU",
+              "MULTI_SKU"
+            ],
             "description": "Whether this carton is single-SKU or multi-SKU.\n\n**Possible values:**\n* `SINGLE_SKU`\n* `MULTI_SKU`"
           },
           "box_measurements": {
@@ -58442,6 +58998,20 @@
           },
           "weight_unit": {
             "type": "string",
+            "enum": [
+              "KILOGRAM",
+              "GRAM",
+              "MILLIGRAM",
+              "POUNDS",
+              "OUNCE"
+            ],
+            "x-enum-descriptions": [
+              "kg",
+              "g",
+              "mg",
+              "lbs",
+              "oz"
+            ],
             "description": "The unit used for the carton's `weight` value.\n\n**Possible values:**\n* `KILOGRAM` (kg)\n* `GRAM` (g)\n* `MILLIGRAM` (mg)\n* `POUNDS` (lbs)\n* `OUNCE` (oz)"
           },
           "width": {
@@ -58458,6 +59028,22 @@
           },
           "length_unit": {
             "type": "string",
+            "enum": [
+              "METER",
+              "CENTIMETER",
+              "MILLIMETER",
+              "FOOT",
+              "MICRON",
+              "INCH"
+            ],
+            "x-enum-descriptions": [
+              "m",
+              "cm",
+              "mm",
+              "ft",
+              "μm",
+              "in"
+            ],
             "description": "The unit used for the carton's `length`, `width`, and `height` values.\n\n**Possible values:**\n* `METER` (m)\n* `CENTIMETER` (cm)\n* `MILLIMETER` (mm)\n* `FOOT` (ft)\n* `MICRON` (μm)\n* `INCH` (in)"
           }
         }
@@ -58541,10 +59127,34 @@
           },
           "new_status": {
             "type": "string",
+            "enum": [
+              "WORKING",
+              "READY_TO_SHIP",
+              "TO_BE_RECEIVED",
+              "ARRIVED_HUB",
+              "INTERNAL_TRANSFER",
+              "RECEIVING",
+              "PARTIALLY_RECEIVED",
+              "RECEIVED",
+              "CANCELLED",
+              "DELIVERED"
+            ],
             "description": "The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.\n\n**Possible values:**\n* `WORKING`\n* `READY_TO_SHIP`\n* `TO_BE_RECEIVED`\n* `ARRIVED_HUB`\n* `INTERNAL_TRANSFER`\n* `RECEIVING`\n* `PARTIALLY_RECEIVED`\n* `RECEIVED`\n* `CANCELLED`\n* `DELIVERED`"
           },
           "previous_status": {
             "type": "string",
+            "enum": [
+              "WORKING",
+              "READY_TO_SHIP",
+              "TO_BE_RECEIVED",
+              "ARRIVED_HUB",
+              "INTERNAL_TRANSFER",
+              "RECEIVING",
+              "PARTIALLY_RECEIVED",
+              "RECEIVED",
+              "CANCELLED",
+              "DELIVERED"
+            ],
             "description": "The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.\n\n**Possible values:**\n* `WORKING`\n* `READY_TO_SHIP`\n* `TO_BE_RECEIVED`\n* `ARRIVED_HUB`\n* `INTERNAL_TRANSFER`\n* `RECEIVING`\n* `PARTIALLY_RECEIVED`\n* `RECEIVED`\n* `CANCELLED`\n* `DELIVERED`"
           },
           "operator": {
@@ -58795,24 +59405,6 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "SHIPPED",
-              "HANDOVER",
-              "CLOSED",
-              "LOST",
-              "DAMAGE",
-              "COMPLETED",
-              "ABNORMAL"
-            ],
-            "x-enum-descriptions": [
-              "Order has been shipped out from the warehouse",
-              "Order has been received by the logistics carrier and is in transit",
-              "Order has been closed",
-              "Order is lost",
-              "Order is damaged",
-              "Order has been completed",
-              "There is an issue related to this order and cannot be fulfilled."
-            ],
             "description": "The status of this consign order \n  \n Possible Status Enumerations \n 1. **SHIPPED** - Order has been shipped out from the warehouse \n 2. **HANDOVER** - Order has been received by the logistics carrier and is in transit \n 3. **CLOSED** - Order has been closed \n 4. **LOST** - Order is lost \n 5. **DAMAGE** - Order is damaged \n 6. **COMPLETED** - Order has been completed \n 7. **ABNORMAL** - There is an issue related to this order and cannot be fulfilled."
           },
           "goods": {
@@ -59895,11 +60487,11 @@
             "description": "The product description in HTML format."
           },
           "package_dimensions": {
-            "$ref": "#/components/schemas/Dimension",
+            "$ref": "#/components/schemas/GetEligibleShippingServicesResponseDataDimension",
             "description": "The dimensions of the product package."
           },
           "package_weight": {
-            "$ref": "#/components/schemas/Weight",
+            "$ref": "#/components/schemas/GetEligibleShippingServicesResponseDataWeight",
             "description": "The weight of the product package."
           },
           "certifications": {
@@ -60555,6 +61147,14 @@
           },
           "inbound_method": {
             "type": "string",
+            "enum": [
+              "D2FC",
+              "ONE_HUB"
+            ],
+            "x-enum-descriptions": [
+              "Direct to fulfillment center, may be split into multiple shipments",
+              "Single destination; can include an estimated placement fee"
+            ],
             "description": "**Possible values:**\n* `D2FC` (Direct to fulfillment center, may be split into multiple shipments)\n* `ONE_HUB` (Single destination; can include an estimated placement fee)"
           },
           "estimate_arrival_time": {
@@ -60601,6 +61201,11 @@
           },
           "placement_task_status": {
             "type": "string",
+            "enum": [
+              "Executing",
+              "Succeed",
+              "Failed"
+            ],
             "description": "**Possible values:**\n* `Executing`\n* `Succeed`\n* `Failed`"
           },
           "expiration_timestamp": {
@@ -60624,7 +61229,7 @@
             "description": "Placement option id. A placement option represents the shipment splits and destinations."
           },
           "placement_fee_estimate": {
-            "$ref": "#/components/schemas/CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListPrice",
+            "$ref": "#/components/schemas/GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate",
             "description": "Estimated placement fee for a `ONE_HUB` placement option."
           }
         }
@@ -60664,6 +61269,10 @@
         "properties": {
           "carton_type": {
             "type": "string",
+            "enum": [
+              "SINGLE_SKU",
+              "MULTI_SKU"
+            ],
             "description": "Indicates if this is a single SKU carton or multi SKU carton.\n**Possible values:**\n* `SINGLE_SKU`\n* `MULTI_SKU`"
           },
           "items": {
@@ -60719,6 +61328,26 @@
           "shipping_method": {
             "type": "string",
             "description": "Shipping method for this shipment option. Possible values: SMALL_PARCEL, a parcel shipment method; FREIGHT, a freight shipment method."
+          }
+        }
+      },
+      "GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "Placement fee amount."
+          },
+          "currency": {
+            "type": "string",
+            "enum": [
+              "USD",
+              "CNY",
+              "EUR",
+              "GBP",
+              "SAR"
+            ],
+            "description": "The currency of the placement fee amount.\n\n**Possible values:**\n* `USD`\n* `CNY`\n* `EUR`\n* `GBP`\n* `SAR`"
           }
         }
       },
@@ -62022,10 +62651,12 @@
             "items": {
               "type": "string",
               "enum": [
-                "REGULAR_ALL"
+                "REGULAR_ALL",
+                "REGULAR_REPEAT"
               ],
               "x-enum-descriptions": [
-                "Regular coupons that target all buyers."
+                "Regular coupons that target all buyers.",
+                "Regular coupons that target only repeat buyers."
               ]
             },
             "description": "The types of coupon that can be included in the message. \nPossible values:\n- REGULAR_ALL: Regular coupons that target all buyers. \nRequired coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).\n- REGULAR_REPEAT: Regular coupons that target only repeat buyers. \nRequired coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=REPEAT_CUSTOMERS` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd)."
@@ -63223,6 +63854,24 @@
           },
           "order_type": {
             "type": "string",
+            "enum": [
+              "NORMAL",
+              "ZERO_LOTTERY",
+              "AUCTION",
+              "PRE_ORDER",
+              "MADE_TO_ORDER",
+              "BACK_ORDER",
+              "VIRTUAL_ORDER"
+            ],
+            "x-enum-descriptions": [
+              "An item that is in stock and available for immediate purchase and fulfillment.",
+              "An order placed during a lottery event in TikTok LIVE.",
+              "An order placed during auction, where the price of the product is not fixed.",
+              "An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.",
+              "An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.",
+              "An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.",
+              "An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation."
+            ],
             "description": "The order type.\nPossible values based on region:\n**All regions**\n- `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.\n- `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE.\n- `AUCTION`: An order placed during auction, where the price of the product is not fixed.\n**US**\n- `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.\n- `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.\n- `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.\n- `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.\nReturns an empty value for standard orders or other types that don't fall into the above categories."
           },
           "release_date": {
@@ -63378,6 +64027,20 @@
           },
           "sku_type": {
             "type": "string",
+            "enum": [
+              "NORMAL",
+              "ZERO_LOTTERY",
+              "SHOP_PARTNER",
+              "PRE_ORDER",
+              "MADE_TO_ORDER"
+            ],
+            "x-enum-descriptions": [
+              "An item that is in stock and available for immediate purchase and fulfillment.",
+              "` An item purchased during a lottery event in TikTok LIVE.",
+              "An item purchased from a TikTok Shop partner store.",
+              "An item that is not yet available or released. Fulfillment starts on a specific date in the future.",
+              "An item that is produced only after the order is received. Fulfillment starts after the product is produced."
+            ],
             "description": "[**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]\nThe order line type:\nPossible values based on region:\n**All regions**\n- `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.\n- `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE.\n- `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.\n**US**\n- `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future.\n- `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced."
           },
           "seller_sku": {
@@ -63408,7 +64071,7 @@
           "item_tax": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ItemTax"
+              "$ref": "#/components/schemas/GetOrderDetailResponseDataOrderLineItemItemTax"
             },
             "description": "Item tax detail."
           },
@@ -63519,6 +64182,23 @@
           }
         }
       },
+      "GetOrderDetailResponseDataOrderLineItemItemTax": {
+        "type": "object",
+        "properties": {
+          "tax_type": {
+            "type": "string",
+            "description": "Tax type.\n- `SALES_TAX` (US market sales tax)\nCurrently only sales tax is available."
+          },
+          "tax_amount": {
+            "type": "string",
+            "description": "Tax amount."
+          },
+          "tax_rate": {
+            "type": "string",
+            "description": "Tax rate."
+          }
+        }
+      },
       "GetOrderDetailResponseDataOrderRecipientAddress": {
         "type": "object",
         "properties": {
@@ -63609,6 +64289,28 @@
         "properties": {
           "order_status": {
             "type": "string",
+            "enum": [
+              "UNPAID",
+              "ON_HOLD",
+              "AWAITING_SHIPMENT",
+              "PARTIALLY_SHIPPING",
+              "AWAITING_COLLECTION",
+              "IN_TRANSIT",
+              "DELIVERED",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "The order has been placed, but payment has not been completed.",
+              "The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.",
+              "The order is ready to be shipped, but no items have been shipped yet.",
+              "Some items in the order have been shipped, but not all.",
+              "Shipping has been arranged, but the package is waiting to be collected by the carrier.",
+              "The package has been collected by the carrier and delivery is in progress.",
+              "The package has been delivered to the buyer.",
+              "The order has been completed, and no further returns or refunds are allowed.",
+              "The order has been cancelled."
+            ],
             "description": "Specific order status.\nAvailable values:\n- `UNPAID`: The order has been placed, but payment has not been completed.\n- `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.\n- `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet.\n- `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all.\n- `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.\n- `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.\n- `DELIVERED`: The package has been delivered to the buyer.\n- `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.\n- `CANCELLED`: The order has been cancelled."
           },
           "create_time_ge": {
@@ -63708,6 +64410,11 @@
           },
           "cancellation_initiator": {
             "type": "string",
+            "enum": [
+              "SELLER",
+              "BUYER",
+              "SYSTEM"
+            ],
             "description": "Cancellation request initiator. \nAvailable values: \n- `SELLER`\n- `BUYER`\n- `SYSTEM`"
           },
           "shipping_provider_id": {
@@ -63740,14 +64447,54 @@
           },
           "status": {
             "type": "string",
+            "enum": [
+              "UNPAID",
+              "ON_HOLD",
+              "AWAITING_SHIPMENT",
+              "PARTIALLY_SHIPPING",
+              "AWAITING_COLLECTION",
+              "IN_TRANSIT",
+              "DELIVERED",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "The order has been placed, but payment has not been completed.",
+              "The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.",
+              "The order is ready to be shipped, but no items have been shipped yet.",
+              "Some items in the order have been shipped, but not all.",
+              "Shipping has been arranged, but the package is waiting to be collected by the carrier.",
+              "The package has been collected by the carrier and delivery is in progress.",
+              "The package has been delivered to the buyer.",
+              "The order has been completed, and no further returns or refunds are allowed.",
+              "The order has been cancelled."
+            ],
             "description": "Specific order status.\nAvailable values:\n- `UNPAID`: The order has been placed, but payment has not been completed.\n- `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.\n- `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet.\n- `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all.\n- `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.\n- `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.\n- `DELIVERED`: The package has been delivered to the buyer.\n- `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.\n- `CANCELLED`: The order has been cancelled."
           },
           "fulfillment_type": {
             "type": "string",
+            "enum": [
+              "FULFILLMENT_BY_SELLER",
+              "FULFILLMENT_BY_TIKTOK",
+              "FULFILLMENT_BY_DILAYANI_TOKOPEDIA"
+            ],
+            "x-enum-descriptions": [
+              "a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.",
+              "a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.",
+              "a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service."
+            ],
             "description": "Fulfillment type. Only orders with fulfillment type can be shipped by sellers.\nAvailable values:\n- `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.\n- `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.\n- `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service."
           },
           "delivery_type": {
             "type": "string",
+            "enum": [
+              "HOME_DELIVERY",
+              "COLLECTION_POINT"
+            ],
+            "x-enum-descriptions": [
+              "not a PUDO location",
+              "a PUDO location"
+            ],
             "description": "Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders.\nAvailable values:\n- `HOME_DELIVERY`: not a PUDO location\n- `COLLECTION_POINT`: a PUDO location"
           },
           "paid_time": {
@@ -63811,6 +64558,16 @@
           },
           "shipping_type": {
             "type": "string",
+            "enum": [
+              "TIKTOK",
+              "SELLER",
+              "TIKTOK_DIGITAL"
+            ],
+            "x-enum-descriptions": [
+              "Shipping service provided by TikTok. The seller should obtain shipping label from TikTok.",
+              "Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller.",
+              "Tiktok delivers virtual goods directly to buyers. There is no action needed."
+            ],
             "description": "Delivery method.\nAvailable values:\n- `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok.\n- `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller.\n- `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed."
           },
           "user_id": {
@@ -63944,6 +64701,24 @@
           },
           "order_type": {
             "type": "string",
+            "enum": [
+              "NORMAL",
+              "ZERO_LOTTERY",
+              "AUCTION",
+              "PRE_ORDER",
+              "MADE_TO_ORDER",
+              "BACK_ORDER",
+              "VIRTUAL_ORDER"
+            ],
+            "x-enum-descriptions": [
+              "An item that is in stock and available for immediate purchase and fulfillment.",
+              "An order placed during a lottery event in TikTok LIVE.",
+              "An order placed during auction, where the price of the product is not fixed.",
+              "An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.",
+              "An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.",
+              "An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.",
+              "An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation."
+            ],
             "description": "The order type.\nPossible values based on region:\n\n**All regions**\n- `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.\n- `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE.\n- `AUCTION`: An order placed during auction, where the price of the product is not fixed.\n**US**\n- `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.\n- `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.\n- `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.\n- `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.\n\nReturns an empty value for standard orders or other types that don't fall into the above categories."
           },
           "release_date": {
@@ -64047,6 +64822,24 @@
           },
           "display_status": {
             "type": "string",
+            "enum": [
+              "UNPAID",
+              "AWAITING_SHIPMENT",
+              "AWAITING_COLLECTION",
+              "IN_TRANSIT",
+              "DELIVERED",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "The order has been placed, but payment has not yet completed.",
+              "The order is ready for shipment, but no items have been shipped yet.",
+              "Shipping has been arranged, but the package is waiting to be collected by the carrier.",
+              "The package has been collected by the carrier and delivery is in progress.",
+              "The package has been delivered to the buyer.",
+              "The order has been completed, and no further returns or refunds are allowed.",
+              "The order has been cancelled."
+            ],
             "description": "Available values:\n- `UNPAID`: The order has been placed, but payment has not yet completed.\n- `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.\n- `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.\n- `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.\n- `DELIVERED`: The package has been delivered to the buyer.\n- `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.\n- `CANCELLED`: The order has been cancelled."
           },
           "product_name": {
@@ -64087,6 +64880,20 @@
           },
           "sku_type": {
             "type": "string",
+            "enum": [
+              "NORMAL",
+              "ZERO_LOTTERY",
+              "SHOP_PARTNER",
+              "PRE_ORDER",
+              "MADE_TO_ORDER"
+            ],
+            "x-enum-descriptions": [
+              "An item that is in stock and available for immediate purchase and fulfillment.",
+              "An item purchased during a lottery event in TikTok LIVE.",
+              "An item purchased from a TikTok Shop partner store.",
+              "An item that is not yet available or released. Fulfillment starts on a specific date in the future.",
+              "An item that is produced only after the order is received. Fulfillment starts after the product is produced."
+            ],
             "description": "[**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]\n\nThe order line type.\nPossible values based on region:\n\n**All regions**\n- `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.\n- `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE.\n- `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.\n\n**US**\n- `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future.\n- `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced."
           },
           "cancel_reason": {
@@ -64104,6 +64911,20 @@
           },
           "package_status": {
             "type": "string",
+            "enum": [
+              "TO_FULFILL",
+              "PROCESSING",
+              "FULFILLING",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "Package awaiting seller to arrange shipment.",
+              "Shipping has been arranged by the seller. Awaiting carrier collection.",
+              "Package has been collected by carrier and is in transit.",
+              "Package has been delivered.",
+              "Package has been canceled. Normally, the package is canceled due to the package being lost or damaged."
+            ],
             "description": "The package status of the item.\nAvailable values:\n- `TO_FULFILL`: Package awaiting seller to arrange shipment.\n- `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.\n- `FULFILLING`: Package has been collected by carrier and is in transit.\n- `COMPLETED`: Package has been delivered.\n- `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged."
           },
           "currency": {
@@ -64116,6 +64937,12 @@
           },
           "cancel_user": {
             "type": "string",
+            "enum": [
+              "BUYER",
+              "SELLER",
+              "OPERATOR",
+              "SYSTEM"
+            ],
             "description": "Cancellation request initiator.\nAvailable values:\n- `BUYER`\n- `SELLER`\n- `OPERATOR`\n- `SYSTEM`"
           },
           "shipping_provider_id": {
@@ -64961,11 +65788,11 @@
             "description": "The sender's address and contact information. Sensitive fields may be masked."
           },
           "weight": {
-            "$ref": "#/components/schemas/GetPackageDetailResponseDataWeight",
+            "$ref": "#/components/schemas/Weight",
             "description": "The weight of the scheduled package."
           },
           "dimension": {
-            "$ref": "#/components/schemas/GetPackageDetailResponseDataDimension",
+            "$ref": "#/components/schemas/Dimension",
             "description": "The dimensions of the scheduled package."
           },
           "update_time": {
@@ -64990,31 +65817,6 @@
           }
         }
       },
-      "GetPackageDetailResponseDataDimension": {
-        "type": "object",
-        "properties": {
-          "length": {
-            "type": "string",
-            "description": "The length of the scheduled package."
-          },
-          "width": {
-            "type": "string",
-            "description": "The width of the scheduled package."
-          },
-          "height": {
-            "type": "string",
-            "description": "The height of the scheduled package."
-          },
-          "unit": {
-            "type": "string",
-            "enum": [
-              "CM",
-              "INCH"
-            ],
-            "description": "The unit of measurement for the package dimensions. Possible values:\n- `CM`\n- `INCH`"
-          }
-        }
-      },
       "GetPackageDetailResponseDataInsurance": {
         "type": "object",
         "properties": {
@@ -65032,6 +65834,18 @@
           },
           "claim_status": {
             "type": "string",
+            "enum": [
+              "NOT_STARTED",
+              "CLAIM_PENDING",
+              "APPROVED",
+              "DECLINED"
+            ],
+            "x-enum-descriptions": [
+              "Claim has not been initiated for this package.",
+              "Claim is currently under review.",
+              "Claim has been approved.",
+              "Claim has been declined."
+            ],
             "description": "The insurance claim status.\nAvailable values:\n- `NOT_STARTED`: Claim has not been initiated for this package.\n- `CLAIM_PENDING`: Claim is currently under review.\n- `APPROVED`: Claim has been approved.\n- `DECLINED`: Claim has been declined."
           }
         }
@@ -65055,23 +65869,6 @@
             "type": "integer",
             "format": "int64",
             "description": "[Deprecated]SKU quantity."
-          }
-        }
-      },
-      "GetPackageDetailResponseDataWeight": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "description": "The value of the weight of the scheduled package."
-          },
-          "unit": {
-            "type": "string",
-            "enum": [
-              "GRAM",
-              "POUND"
-            ],
-            "description": "The unit of measurement used to measure the weight. Possible values:\n- `GRAM`\n- `POUND`"
           }
         }
       },
@@ -72673,12 +73470,44 @@
             "description": "The id of the video pre-check task."
           },
           "violation_check_result": {
-            "$ref": "#/components/schemas/ViolationCheckResult",
+            "$ref": "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult",
             "description": "violation check details"
           },
           "good_quality_check_result": {
-            "$ref": "#/components/schemas/GoodQualityCheckResult",
+            "$ref": "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult",
             "description": "Good-quality check details. This field is omitted when the good-quality check is disabled."
+          }
+        }
+      },
+      "GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "SUCCESS: The precheck task passed all good quality checks\nFAIL: The precheck task failed good quality checks. Check the 'issues' field for details.\nPROCESSING: The good qualtify check is still in progress"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "description": "A list of quality issues and improvement suggestions when the good quality check fails."
+          }
+        }
+      },
+      "GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "SUCCESS: The precheck task passed violation checks\nFAIL: The precheck task has failed due to violations. Check the 'issues' field for details.\nPROCESSING: The precheck violation task is still in progress"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
+            },
+            "description": "A list of policy violation details returned when violation check fails"
           }
         }
       },
@@ -76052,22 +76881,6 @@
           "quantity"
         ]
       },
-      "GoodQualityCheckResult": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "SUCCESS: The precheck task passed all good quality checks\nFAIL: The precheck task failed good quality checks. Check the 'issues' field for details.\nPROCESSING: The good qualtify check is still in progress"
-          },
-          "issues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Issue"
-            },
-            "description": "A list of quality issues and improvement suggestions when the good quality check fails."
-          }
-        }
-      },
       "GoodsItem": {
         "type": "object",
         "properties": {
@@ -76414,6 +77227,14 @@
           },
           "order_status": {
             "type": "string",
+            "enum": [
+              "TO_BE_RECEIVED",
+              "ARRIVE_HUB",
+              "RECEIVING",
+              "PARTIALLY_RECEIVED",
+              "RECEIVED",
+              "CANCELLED"
+            ],
             "description": "Inbound order status. Possible enumerations: \n- TO_BE_RECEIVED \n- ARRIVE_HUB, \n- RECEIVING, \n- PARTIALLY_RECEIVED, \n- RECEIVED, \n- CANCELLED"
           },
           "update_time": {
@@ -76477,7 +77298,14 @@
             "$ref": "#/components/schemas/InventoryChangedByShopWebhookData",
             "description": "The inventory change event data."
           }
-        }
+        },
+        "required": [
+          "type",
+          "tts_notification_id",
+          "shop_id",
+          "timestamp",
+          "data"
+        ]
       },
       "InventoryChangedByShopWebhookData": {
         "type": "object",
@@ -76516,7 +77344,16 @@
             },
             "description": "The individual inventory changes associated with the event."
           }
-        }
+        },
+        "required": [
+          "event_id",
+          "occurred_at",
+          "shop_id",
+          "product_id",
+          "sku_id",
+          "quantity_snapshot_after_change",
+          "change_detail"
+        ]
       },
       "InventoryChangedByShopWebhookDataChangeDetail": {
         "type": "object",
@@ -76563,7 +77400,18 @@
             "format": "int64",
             "description": "The change in `creator_locked_quantity`."
           }
-        }
+        },
+        "required": [
+          "idempotency_key",
+          "trigger_source",
+          "occurred_at",
+          "total_quantity_delta",
+          "available_quantity_delta",
+          "committed_quantity_delta",
+          "in_shop_quantity_delta",
+          "campaign_locked_quantity_delta",
+          "creator_locked_quantity_delta"
+        ]
       },
       "InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange": {
         "type": "object",
@@ -76598,7 +77446,15 @@
             "format": "int64",
             "description": "Inventory reserved for creator collaborations."
           }
-        }
+        },
+        "required": [
+          "total_quantity",
+          "total_available_quantity",
+          "total_committed_quantity",
+          "in_shop_quantity",
+          "campaign_locked_quantity",
+          "creator_locked_quantity"
+        ]
       },
       "InventorySearchRequest": {
         "type": "object",
@@ -77007,7 +77863,13 @@
         "properties": {
           "tax_type": {
             "type": "string",
-            "description": "Tax type.\n- `SALES_TAX` (US market sales tax)\nCurrently only sales tax is available."
+            "enum": [
+              "SALES_TAX"
+            ],
+            "x-enum-descriptions": [
+              "US market sales tax"
+            ],
+            "description": "Tax type.\nAvailable values:\n- `SALES_TAX` (US market sales tax)\n\n**Note**: Currently only sales tax is available."
           },
           "tax_amount": {
             "type": "string",
@@ -78464,7 +79326,10 @@
             "description": "Operator of the event trigger, with possible values: \n  \n * ROLE_USER \n * ROLE_SELLER \n * ROLE_OPERATOR \n * ROLE_SYSTEM"
           },
           "package_list": {
-            "$ref": "#/components/schemas/PackageUpdateWebhookDataPackageList",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PackageUpdateWebhookDataPackageList"
+            },
             "description": "Package list updated by the event trigger"
           },
           "update_time": {
@@ -78513,6 +79378,8 @@
           "page_size": {
             "type": "integer",
             "format": "int64",
+            "minimum": 1,
+            "maximum": 100,
             "description": "Number of records to return per page. Minimum: 1. Maximum: 100."
           },
           "page_token": {
@@ -78608,10 +79475,12 @@
           "category_version": {
             "type": "string",
             "enum": [
-              "US"
+              "v2",
+              "v1"
             ],
             "x-enum-descriptions": [
-              "`v2`, represents the 7-level category tree."
+              "US: represents the 7-level category tree.",
+              "Other regions: represents the 3-level category tree."
             ],
             "description": "The category tree version used by `category_id`.\nPossible values based on region:\n- US: `v2`, represents the 7-level category tree.\n  **Important**: If the seller account contains an active US shop, you must pass `v2` when using this API.\n- Other regions: `v1`, represents the 3-level category tree.\nDefault: `v1`"
           },
@@ -78636,6 +79505,8 @@
           },
           "seller_sku": {
             "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
             "description": "An internal code/name for managing SKUs, not visible to buyers.  \n- Valid length: 1-50 characters\n- Format: Text without spaces"
           },
           "price": {
@@ -79399,7 +80270,7 @@
           "inventory": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetProductResponseDataSkuCombinedSkuInventory"
+              "$ref": "#/components/schemas/PartialEditProductRequestReplicatedProductSkuInventory"
             },
             "description": "SKU inventory information per warehouse. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional."
           },
@@ -79415,6 +80286,22 @@
         "required": [
           "price"
         ]
+      },
+      "PartialEditProductRequestReplicatedProductSkuInventory": {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "maximum": 999999,
+            "description": "The SKU quantity available in the warehouse.\nValid range: [1, 999,999]. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional."
+          },
+          "warehouse_id": {
+            "type": "string",
+            "description": "The warehouse ID. Retrieve this value from the [Get Warehouse List API](650aa418defece02be6e66b6) or Get Inventory Rules API. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional."
+          }
+        }
       },
       "PartialEditProductRequestReplicatedProductSkuPrice": {
         "type": "object",
@@ -80432,12 +81319,30 @@
           "print_items": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "CARTON_PALLET_LABEL",
+                "PACKING_PICKING_LIST",
+                "FBT_BARCODE"
+              ],
+              "x-enum-descriptions": [
+                "Identification labels for cartons or pallets. Apply carton labels to at least two adjacent sides of each carton.",
+                "Warehouse document for identifying and packing items.",
+                "Fulfilled by TikTok barcode labels."
+              ]
             },
             "description": "Specifies the types of documents to generate. Multiple values can be included in one combined output.\n\n**Allowed Values:**\n\n* `CARTON_PALLET_LABEL`: Identification labels for cartons or pallets. Apply carton labels to at least two adjacent sides of each carton.\n* `PACKING_PICKING_LIST`: Warehouse document for identifying and packing items.\n* `FBT_BARCODE`: Fulfilled by TikTok barcode labels.\n\n**Note:** If this list is empty or omitted, `CARTON_PALLET_LABEL` is generated by default."
           },
           "carton_label_format": {
             "type": "string",
+            "enum": [
+              "DEFAULT_1UP",
+              "A4_4UP"
+            ],
+            "x-enum-descriptions": [
+              "Standard format (1 label per page).",
+              "A4 paper format (4 labels per page)."
+            ],
             "description": "Specifies the layout and dimensions for the carton labels. If this parameter is omitted or an invalid value is provided, the system will use the default single-label format.\n\n**Allowed Values:**\n\n* `DEFAULT_1UP`: Standard format (1 label per page).\n* `A4_4UP`: A4 paper format (4 labels per page).\n\n**Note:** If no value is provided, `DEFAULT_1UP` will be used as the default format."
           },
           "barcode_format": {
@@ -81954,6 +82859,20 @@
           },
           "rma_status": {
             "type": "string",
+            "enum": [
+              "INIT",
+              "AWAITING_BUYER_SHIPPED",
+              "RETURN_IN_TRANSIT",
+              "PENDING_PACKAGE_REVIEW",
+              "PACKAGE_REVIEW_COMPLETED"
+            ],
+            "x-enum-descriptions": [
+              "The RMA has been created",
+              "Awaiting buyer's action to ship the return package with carrier",
+              "Buyer has shipped the return and is in transit to the sellers destination warehouse",
+              "The return package has been delivered and is pending seller package review. The seller has 2-4 business days SLA to respond with a refund review/decision. Please refer to the latest seller academy document.",
+              "The package review lifecycle is complete, and the RMA refund has either been approved or rejected."
+            ],
             "description": "Current RMA status. Possible enumerations: \n  \n * `INIT` = The RMA has been created \n * `AWAITING_BUYER_SHIPPED` = Awaiting buyer's action to ship the return package with carrier \n * `RETURN_IN_TRANSIT` = Buyer has shipped the return and is in transit to the sellers destination warehouse \n * `PENDING_PACKAGE_REVIEW` = The return package has been delivered and is pending seller package review. The seller has **2-4 business days** **SLA** to respond with a refund review/decision. Please refer to the latest seller academy document. \n * `PACKAGE_REVIEW_COMPLETED` = The package review lifecycle is complete, and the RMA refund has either been approved or rejected."
           },
           "rma_request_create_time": {
@@ -82300,10 +83219,12 @@
           "category_version": {
             "type": "string",
             "enum": [
-              "US"
+              "v2",
+              "v1"
             ],
             "x-enum-descriptions": [
-              "`v2`, represents the 7-level category tree."
+              "US: represents the 7-level category tree.",
+              "Other regions: represents the 3-level category tree."
             ],
             "description": "The category tree version to use for this product.\nPossible values based on region:\n- US: `v2`, represents the 7-level category tree.\n  **Important**: If the seller account contains an active US shop, you must pass `v2` when using this API.\n- Other regions: `v1`, represents the 3-level category tree.\nDefault: `v1`"
           }
@@ -82825,6 +83746,20 @@
         "properties": {
           "decision": {
             "type": "string",
+            "enum": [
+              "REJECT_REFUND",
+              "REJECT_RETURN",
+              "REJECT_RECEIVED_PACKAGE",
+              "REJECT_REPLACEMENT",
+              "OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG"
+            ],
+            "x-enum-descriptions": [
+              "seller reject a refund-only request",
+              "seller reject the initial return-and-refund request",
+              "seller reject return-and-refund request after the buyer has already shipped or handed over the item.",
+              "seller reject replacement request",
+              "seller offer partial refund regarding to the package item quality check"
+            ],
             "description": "Seller's decision for the request, available values:\n- `REJECT_REFUND`: seller reject a refund-only request\n- `REJECT_RETURN`: seller reject the initial return-and-refund request\n- `REJECT_RECEIVED_PACKAGE`: seller reject return-and-refund request after the buyer has already shipped or handed over the item.\n- `REJECT_REPLACEMENT`: seller reject replacement request\n- `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`: seller offer partial refund regarding to the package item quality check"
           },
           "reject_reason": {
@@ -83258,7 +84193,7 @@
           "inventory": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ReplicateProductRequestReplicateTargetSkuInventory"
+              "$ref": "#/components/schemas/PartialEditProductRequestReplicatedProductSkuInventory"
             },
             "description": "SKU inventory information per warehouse.\nThis field is only required if the inventory allocation mode for the warehouse is MANUAL. Otherwise, it is optional."
           },
@@ -83273,22 +84208,6 @@
           "seller_sku": {
             "type": "string",
             "description": "An internal code/name for managing SKUs, not visible to buyers.  \nValid length: \n- DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters\n- Other regions: 1-50 characters\nFormat: \n- DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only\n- Other regions: Text without spaces"
-          }
-        }
-      },
-      "ReplicateProductRequestReplicateTargetSkuInventory": {
-        "type": "object",
-        "properties": {
-          "quantity": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "maximum": 999999,
-            "description": "The SKU quantity available in the warehouse.\nValid range: [1, 999,999]"
-          },
-          "warehouse_id": {
-            "type": "string",
-            "description": "The warehouse ID. Retrieve this value from the [Get Warehouse List API](650aa418defece02be6e66b6) or Get Inventory Rules API."
           }
         }
       },
@@ -85285,7 +86204,7 @@
           "seller_next_action_response": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/SellerNextActionResponse"
+              "$ref": "#/components/schemas/SearchCancellationsResponseDataCancellationSellerNextActionResponse"
             },
             "description": "Seller's next action and deadline."
           },
@@ -85396,6 +86315,20 @@
           "refund_amount": {
             "$ref": "#/components/schemas/RefundAmount",
             "description": "Refund amount information."
+          }
+        }
+      },
+      "SearchCancellationsResponseDataCancellationSellerNextActionResponse": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "description": "**Optional.** For buyer-initiated cancellation requests that still require seller handling, the action value is `SELLER_RESPOND_BUYER_CANCEL`."
+          },
+          "deadline": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unix timestamp in seconds indicating the deadline for the seller to perform the next action."
           }
         }
       },
@@ -88599,6 +89532,14 @@
           },
           "category_version": {
             "type": "string",
+            "enum": [
+              "v2",
+              "v1"
+            ],
+            "x-enum-descriptions": [
+              "US: represents the 7-level category tree.",
+              "Other regions: represents the 3-level category tree."
+            ],
             "description": "Filter products by the category tree version.\nPossible values based on region:\n- US: `v2`, represents the 7-level category tree.\n- Other regions: `v1`, represents the 3-level category tree.\nDefault: Return all products from both `v1` and `v2` category trees."
           },
           "listing_quality_tiers": {
@@ -89693,21 +90634,70 @@
           "return_types": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "REFUND",
+                "RETURN_AND_REFUND",
+                "REPLACEMENT",
+                "EXCHANGE"
+              ]
             },
             "description": "List of return types.\nAvailable values:\n- `REFUND`\n- `RETURN_AND_REFUND`\n- `REPLACEMENT`\n- `EXCHANGE`"
           },
           "return_status": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "RETURN_OR_REFUND_REQUEST_PENDING",
+                "REFUND_OR_RETURN_REQUEST_REJECT",
+                "AWAITING_BUYER_SHIP",
+                "BUYER_SHIPPED_ITEM",
+                "REJECT_RECEIVE_PACKAGE",
+                "RETURN_OR_REFUND_REQUEST_SUCCESS",
+                "RETURN_OR_REFUND_REQUEST_CANCEL",
+                "RETURN_OR_REFUND_REQUEST_COMPLETE",
+                "REPLACEMENT_REQUEST_PENDING",
+                "REPLACEMENT_REQUEST_REJECT",
+                "REPLACEMENT_REQUEST_REFUND_SUCCESS",
+                "REPLACEMENT_REQUEST_CANCEL",
+                "REPLACEMENT_REQUEST_COMPLETE",
+                "AWAITING_BUYER_RESPONSE",
+                "EXCHANGE_REQUEST_PENDING",
+                "EXCHANGE_REQUEST_REFUND_SUCCESS",
+                "EXCHANGE_REQUEST_CANCEL",
+                "EXCHANGE_REQUEST_COMPLETE"
+              ],
+              "x-enum-descriptions": [
+                "Buyer has initiated a return or refund request. The request is pending review by seller or system.",
+                "The return or refund request was rejected.",
+                "The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.",
+                "Buyer has shipped the approved items to seller.",
+                "Seller inspected the returned items and rejected the return request.",
+                "The return/refund request was successful. The buyer will be refunded.",
+                "The request has been cancelled by the buyer or system.",
+                "The return/refund was processed successfully. The buyer has been refunded.",
+                "Buyer has initiated a replacement request. The request is pending review by seller.",
+                "Seller reject the buyer replacement request.",
+                "Buyer's replacement request was resolved by refund due to insufficient inventory.",
+                "Buyer canceled the replacement request.",
+                "Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.",
+                "Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.",
+                "Buyer has initiated an exchange request. The request is pending review by seller.",
+                "Buyer's exchange request was resolved by refund due to insufficient inventory.",
+                "Buyer canceled the exchange request.",
+                "Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
+              ]
             },
             "description": "List of return status.\nAvailable values:\n- `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending review by seller or system. \n- `REFUND_OR_RETURN_REQUEST_REJECT`: The return or refund request was rejected. \n- `AWAITING_BUYER_SHIP`: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.\n- `BUYER_SHIPPED_ITEM`: Buyer has shipped the approved items to seller.\n- `REJECT_RECEIVE_PACKAGE`: Seller inspected the returned items and rejected the return request. \n- `RETURN_OR_REFUND_REQUEST_SUCCESS`: The return/refund request was successful. The buyer will be refunded.\n- `RETURN_OR_REFUND_REQUEST_CANCEL`: The request has been cancelled by the buyer or system.\n- `RETURN_OR_REFUND_REQUEST_COMPLETE`: The return/refund was processed successfully. The buyer has been refunded.\n- `REPLACEMENT_REQUEST_PENDING`: Buyer has initiated a replacement request. The request is pending review by seller.\n- `REPLACEMENT_REQUEST_REJECT`: Seller reject the buyer replacement request.\n- `REPLACEMENT_REQUEST_REFUND_SUCCESS`: Buyer's replacement request was resolved by refund due to insufficient inventory.\n- `REPLACEMENT_REQUEST_CANCEL`: Buyer canceled the replacement request.\n- `REPLACEMENT_REQUEST_COMPLETE`: Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.\n- `AWAITING_BUYER_RESPONSE`: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.\n- `EXCHANGE_REQUEST_PENDING`: Buyer has initiated an exchange request. The request is pending review by seller.\n- `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory.\n- `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.\n- `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
           },
           "seller_proposed_return_type": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "PARTIAL_REFUND"
+              ]
             },
             "description": "List of seller proposed return types.\nAvailable values:\n- `PARTIAL_REFUND`"
           },
@@ -89719,7 +90709,19 @@
           "arbitration_status": {
             "type": "array",
             "items": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "IN_PROGRESS",
+                "SUPPORT_BUYER",
+                "SUPPORT_SELLER",
+                "CLOSED"
+              ],
+              "x-enum-descriptions": [
+                "The TikTok Shop platform operator is processing arbitration. Platform may request additional information from the seller.",
+                "The platform operator supports buyer.",
+                "The platform operator supports seller.",
+                "Arbitration is closed."
+              ]
             },
             "description": "List of arbitration statuses. \nAvailable values:\n- `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration. Platform may request additional information from the seller.  \n- `SUPPORT_BUYER`: The platform operator supports buyer.\n- `SUPPORT_SELLER`: The platform operator supports seller.\n- `CLOSED`: Arbitration is closed."
           },
@@ -89799,18 +90801,94 @@
           },
           "return_type": {
             "type": "string",
+            "enum": [
+              "REFUND",
+              "RETURN_AND_REFUND",
+              "REPLACEMENT",
+              "EXCHANGE"
+            ],
+            "x-enum-descriptions": [
+              "Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.",
+              "Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.",
+              "The buyer requires the seller to replace the item(s).",
+              "The buyer requires the seller to exchange the item(s)."
+            ],
             "description": "Return type.\nAvailable values:\n- `REFUND`: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.\n- `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer. \n- `REPLACEMENT`: The buyer requires the seller to replace the item(s).\n- `EXCHANGE`: The buyer requires the seller to exchange the item(s)."
           },
           "return_status": {
             "type": "string",
+            "enum": [
+              "RETURN_OR_REFUND_REQUEST_PENDING",
+              "REFUND_OR_RETURN_REQUEST_REJECT",
+              "AWAITING_BUYER_SHIP",
+              "BUYER_SHIPPED_ITEM",
+              "REJECT_RECEIVE_PACKAGE",
+              "RETURN_OR_REFUND_REQUEST_SUCCESS",
+              "RETURN_OR_REFUND_REQUEST_CANCEL",
+              "RETURN_OR_REFUND_REQUEST_COMPLETE",
+              "REPLACEMENT_REQUEST_PENDING",
+              "REPLACEMENT_REQUEST_REJECT",
+              "REPLACEMENT_REQUEST_REFUND_SUCCESS",
+              "REPLACEMENT_REQUEST_CANCEL",
+              "REPLACEMENT_REQUEST_COMPLETE",
+              "AWAITING_BUYER_RESPONSE",
+              "EXCHANGE_REQUEST_PENDING",
+              "EXCHANGE_REQUEST_REFUND_SUCCESS",
+              "EXCHANGE_REQUEST_CANCEL",
+              "EXCHANGE_REQUEST_COMPLETE"
+            ],
+            "x-enum-descriptions": [
+              "Buyer has initiated a return or refund request. The request is pending review by seller or platform.",
+              "The return or refund request was rejected.",
+              "The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.",
+              "Buyer has shipped the approved items to seller.",
+              "Seller inspected the returned items and rejected the return package.",
+              "The return/refund request was approved. The buyer will be refunded.",
+              "The request has been cancelled by the buyer or system.",
+              "The return/refund was processed successfully. The buyer has been refunded.",
+              "Buyer has initiated a replacement request. The request is pending review by seller.",
+              "Seller reject the buyer replacement request.",
+              "Buyer's replacement request was resolved by refund due to insufficient inventory.",
+              "Buyer canceled the replacement request.",
+              "Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.",
+              "Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.",
+              "Buyer has initiated an exchange request. The request is pending review by seller.",
+              "Buyer's exchange request was resolved by refund due to insufficient inventory.",
+              "Buyer canceled the exchange request.",
+              "Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
+            ],
             "description": "Return status.\nAvailable values:\n- `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending review by seller or platform. \n- `REFUND_OR_RETURN_REQUEST_REJECT`: The return or refund request was rejected. \n- `AWAITING_BUYER_SHIP`: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.\n- `BUYER_SHIPPED_ITEM`: Buyer has shipped the approved items to seller.\n- `REJECT_RECEIVE_PACKAGE`: Seller inspected the returned items and rejected the return package. \n- `RETURN_OR_REFUND_REQUEST_SUCCESS`: The return/refund request was approved. The buyer will be refunded.\n- `RETURN_OR_REFUND_REQUEST_CANCEL`: The request has been cancelled by the buyer or system. \n- `RETURN_OR_REFUND_REQUEST_COMPLETE`: The return/refund was processed successfully. The buyer has been refunded.\n- `REPLACEMENT_REQUEST_PENDING`: Buyer has initiated a replacement request. The request is pending review by seller.\n- `REPLACEMENT_REQUEST_REJECT`: Seller reject the buyer replacement request.\n- `REPLACEMENT_REQUEST_REFUND_SUCCESS`: Buyer's replacement request was resolved by refund due to insufficient inventory.\n- `REPLACEMENT_REQUEST_CANCEL`: Buyer canceled the replacement request.\n- `REPLACEMENT_REQUEST_COMPLETE`: Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.\n- `AWAITING_BUYER_RESPONSE`: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.\n- `EXCHANGE_REQUEST_PENDING`: Buyer has initiated an exchange request. The request is pending review by seller.\n- `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory.\n- `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.\n- `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
           },
           "arbitration_status": {
             "type": "string",
+            "enum": [
+              "IN_PROGRESS",
+              "SUPPORT_BUYER",
+              "SUPPORT_SELLER",
+              "CLOSED"
+            ],
+            "x-enum-descriptions": [
+              "The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.",
+              "The platform operator supports the buyer.",
+              "The platform operator supports the seller.",
+              "Arbitration is closed."
+            ],
             "description": "Arbitration status.\nAvailable values:\n- `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.\n- `SUPPORT_BUYER`: The platform operator supports the buyer.\n- `SUPPORT_SELLER`: The platform operator supports the seller.\n- `CLOSED`: Arbitration is closed."
           },
           "role": {
             "type": "string",
+            "enum": [
+              "BUYER",
+              "SELLER",
+              "OPERATOR",
+              "SYSTEM"
+            ],
+            "x-enum-descriptions": [
+              "",
+              "",
+              "TikTok Shop platform operator.",
+              "TikTok Shop system."
+            ],
             "description": "Return initiation role.\nAvailable values:\n- `BUYER`\n- `SELLER`\n- `OPERATOR` : TikTok Shop platform operator.\n- `SYSTEM`:  TikTok Shop system.\nPlease see \"API overview\" to learn more about roles."
           },
           "return_reason": {
@@ -89823,6 +90901,14 @@
           },
           "shipment_type": {
             "type": "string",
+            "enum": [
+              "PLATFORM",
+              "BUYER_ARRANGE"
+            ],
+            "x-enum-descriptions": [
+              "The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.",
+              "The buyer arranges the return shipment."
+            ],
             "description": "The shipment method selected by the buyer for sending the item(s) back to the seller.\nAvailable values:\n- `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.\n- `BUYER_ARRANGE`: The buyer arranges the return shipment."
           },
           "handover_method": {
@@ -89897,6 +90983,16 @@
           },
           "return_shipping_document_type": {
             "type": "string",
+            "enum": [
+              "SHIPPING_LABEL",
+              "QR_CODE",
+              "QR_CODE_NBNL"
+            ],
+            "x-enum-descriptions": [
+              "",
+              "QR Code with Box",
+              "QR Code with No Box No Label"
+            ],
             "description": "The type of return shipping document selected by the buyer. \nAvailable values:\n- `SHIPPING_LABEL`\n- `QR_CODE` - QR Code with Box\n- `QR_CODE_NBNL` - QR Code with No Box No Label"
           },
           "return_method": {
@@ -91307,6 +92403,14 @@
         "properties": {
           "creator_accept_status": {
             "type": "string",
+            "enum": [
+              "ACCEPT",
+              "ALL"
+            ],
+            "x-enum-descriptions": [
+              "The creators have added the products to their showcases.",
+              "Do not filter by whether the creators have added the products to their showcases."
+            ],
             "description": "Filter target collaborations by the acceptance status of invited creators.\nAllowed values:\n- ACCEPT: The creators have added the products to their showcases.\n- ALL: Do not filter by whether the creators have added the products to their showcases.\nDefault: ALL."
           },
           "free_sample_setting": {
@@ -91525,8 +92629,12 @@
             "format": "int64",
             "description": "The time when the notification is pushed, represented as a Unix timestamp (seconds)."
           },
+          "tts_notification_id": {
+            "type": "string",
+            "description": "The ID of the notification."
+          },
           "data": {
-            "type": "object",
+            "$ref": "#/components/schemas/FailReason",
             "description": "The object contains business parameters related to the specific notification type"
           }
         }
@@ -91544,6 +92652,10 @@
           },
           "discount_type": {
             "type": "string",
+            "enum": [
+              "COUPON",
+              "ACTIVITY"
+            ],
             "description": "Discount type of this activity. Enumerations:\n- COUPON\n- ACTIVITY"
           }
         }
@@ -91583,6 +92695,12 @@
         "properties": {
           "action": {
             "type": "string",
+            "enum": [
+              "SELLER_RESPOND_REFUND",
+              "SELLER_RESPOND_RETURN",
+              "SELLER_RESPOND_RECEIVE_PACKAGE",
+              "SELLER_RESPOND_REPLACEMENT"
+            ],
             "description": "Seller's next action.\nAvailable values:\n- `SELLER_RESPOND_REFUND`\n- `SELLER_RESPOND_RETURN`\n- `SELLER_RESPOND_RECEIVE_PACKAGE`\n- `SELLER_RESPOND_REPLACEMENT`"
           },
           "deadline": {
@@ -91965,6 +93083,10 @@
           },
           "freight_type": {
             "type": "string",
+            "enum": [
+              "FTL",
+              "LTL"
+            ],
             "description": "Freight load type. Required when `shipping_method` is `FREIGHT` for EU and UK shops. It is optional for US shops and is not required when `shipping_method` is `SMALL_PARCEL`.\n\n**Possible values:**\n* `FTL`\n* `LTL`"
           }
         },
@@ -92261,10 +93383,50 @@
             "description": "ID of precheck task generated by TikTok Shop."
           },
           "violation_check_result": {
-            "$ref": "#/components/schemas/ViolationCheckResult"
+            "$ref": "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult"
           },
           "good_quality_check_result": {
-            "$ref": "#/components/schemas/GoodQualityCheckResult"
+            "$ref": "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult"
+          }
+        }
+      },
+      "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "FAIL",
+              "PROCESSING"
+            ],
+            "description": "Possible enumerations:  \n `SUCCESS` \n `FAIL` \n `PROCESSING`"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            }
+          }
+        }
+      },
+      "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "FAIL",
+              "PROCESSING"
+            ],
+            "description": "Possible enumerations:  \n `SUCCESS` \n `FAIL` \n `PROCESSING`"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
+            }
           }
         }
       },
@@ -92395,18 +93557,94 @@
           },
           "return_type": {
             "type": "string",
+            "enum": [
+              "REFUND",
+              "RETURN_AND_REFUND",
+              "REPLACEMENT",
+              "EXCHANGE"
+            ],
+            "x-enum-descriptions": [
+              "Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.",
+              "Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.",
+              "The buyer requires the seller to replace the item(s).",
+              "The buyer requires the seller to exchange the item(s)."
+            ],
             "description": "Return type.\nAvailable values:\n- `REFUND`: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.\n- `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.\n- `REPLACEMENT`: The buyer requires the seller to replace the item(s).\n- `EXCHANGE`: The buyer requires the seller to exchange the item(s)."
           },
           "return_status": {
             "type": "string",
+            "enum": [
+              "RETURN_OR_REFUND_REQUEST_PENDING",
+              "REFUND_OR_RETURN_REQUEST_REJECT",
+              "AWAITING_BUYER_SHIP",
+              "BUYER_SHIPPED_ITEM",
+              "REJECT_RECEIVE_PACKAGE",
+              "RETURN_OR_REFUND_REQUEST_SUCCESS",
+              "RETURN_OR_REFUND_REQUEST_CANCEL",
+              "RETURN_OR_REFUND_REQUEST_COMPLETE",
+              "REPLACEMENT_REQUEST_PENDING",
+              "REPLACEMENT_REQUEST_REJECT",
+              "REPLACEMENT_REQUEST_REFUND_SUCCESS",
+              "REPLACEMENT_REQUEST_CANCEL",
+              "REPLACEMENT_REQUEST_COMPLETE",
+              "AWAITING_BUYER_RESPONSE",
+              "EXCHANGE_REQUEST_PENDING",
+              "EXCHANGE_REQUEST_REFUND_SUCCESS",
+              "EXCHANGE_REQUEST_CANCEL",
+              "EXCHANGE_REQUEST_COMPLETE"
+            ],
+            "x-enum-descriptions": [
+              "Buyer has initiated a return or refund request. The request is pending review by seller or platform.",
+              "The return or refund request was rejected.",
+              "The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.",
+              "Buyer has shipped the approved items to seller.",
+              "Seller inspected the returned items and rejected the return package.",
+              "The return/refund request was approved. The buyer will be refunded.",
+              "The request has been cancelled by the buyer or system.",
+              "The return/refund was processed successfully. The buyer has been refunded.",
+              "Buyer has initiated a replacement request. The request is pending review by seller.",
+              "Seller reject the buyer replacement request.",
+              "Buyer's replacement request was resolved by refund due to insufficient inventory.",
+              "Buyer canceled the replacement request.",
+              "Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.",
+              "Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.",
+              "Buyer has initiated an exchange request. The request is pending review by seller.",
+              "Buyer's exchange request was resolved by refund due to insufficient inventory.",
+              "Buyer canceled the exchange request.",
+              "Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
+            ],
             "description": "Return status.\nAvailable values:\n- `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending review by seller or platform.\n- `REFUND_OR_RETURN_REQUEST_REJECT`: The return or refund request was rejected.\n- `AWAITING_BUYER_SHIP`: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request.\n- `BUYER_SHIPPED_ITEM`: Buyer has shipped the approved items to seller.\n- `REJECT_RECEIVE_PACKAGE`: Seller inspected the returned items and rejected the return package.\n- `RETURN_OR_REFUND_REQUEST_SUCCESS`: The return/refund request was approved. The buyer will be refunded.\n- `RETURN_OR_REFUND_REQUEST_CANCEL`: The request has been cancelled by the buyer or system.\n- `RETURN_OR_REFUND_REQUEST_COMPLETE`: The return/refund was processed successfully. The buyer has been refunded.\n- `REPLACEMENT_REQUEST_PENDING`: Buyer has initiated a replacement request. The request is pending review by seller.\n- `REPLACEMENT_REQUEST_REJECT`: Seller reject the buyer replacement request.\n- `REPLACEMENT_REQUEST_REFUND_SUCCESS`: Buyer's replacement request was resolved by refund due to insufficient inventory.\n- `REPLACEMENT_REQUEST_CANCEL`: Buyer canceled the replacement request.\n- `REPLACEMENT_REQUEST_COMPLETE`: Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill.\n- `AWAITING_BUYER_RESPONSE`: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`.\n- `EXCHANGE_REQUEST_PENDING`: Buyer has initiated an exchange request. The request is pending review by seller.\n- `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory.\n- `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.\n- `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill."
           },
           "arbitration_status": {
             "type": "string",
+            "enum": [
+              "IN_PROGRESS",
+              "SUPPORT_BUYER",
+              "SUPPORT_SELLER",
+              "CLOSED"
+            ],
+            "x-enum-descriptions": [
+              "The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.",
+              "The platform operator supports the buyer.",
+              "The platform operator supports the seller.",
+              "Arbitration is closed."
+            ],
             "description": "Arbitration status.\nAvailable values:\n- `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.\n- `SUPPORT_BUYER`: The platform operator supports the buyer.\n- `SUPPORT_SELLER`: The platform operator supports the seller.\n- `CLOSED`: Arbitration is closed."
           },
           "role": {
             "type": "string",
+            "enum": [
+              "BUYER",
+              "SELLER",
+              "OPERATOR",
+              "SYSTEM"
+            ],
+            "x-enum-descriptions": [
+              "",
+              "",
+              "TikTok Shop platform operator.",
+              "TikTok Shop system."
+            ],
             "description": "Return initiation role.\nAvailable values:\n- `BUYER`\n- `SELLER`\n- `OPERATOR` : TikTok Shop platform operator.\n- `SYSTEM`: TikTok Shop system.\nPlease see \"API overview\" to learn more about roles."
           },
           "return_reason": {
@@ -92426,6 +93664,14 @@
           },
           "shipment_type": {
             "type": "string",
+            "enum": [
+              "PLATFORM",
+              "BUYER_ARRANGE"
+            ],
+            "x-enum-descriptions": [
+              "The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.",
+              "The buyer arranges the return shipment."
+            ],
             "description": "The shipment method selected by the buyer for sending the item(s) back to the seller.\nAvailable values:\n- `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.\n- `BUYER_ARRANGE`: The buyer arranges the return shipment."
           },
           "handover_method": {
@@ -92487,6 +93733,16 @@
           },
           "return_shipping_document_type": {
             "type": "string",
+            "enum": [
+              "SHIPPING_LABEL",
+              "QR_CODE",
+              "QR_CODE_NBNL"
+            ],
+            "x-enum-descriptions": [
+              "",
+              "QR Code with Box",
+              "QR Code with No Box No Label"
+            ],
             "description": "The type of return shipping document selected by the buyer.\nAvailable values:\n- `SHIPPING_LABEL`\n- `QR_CODE` - QR Code with Box\n- `QR_CODE_NBNL` - QR Code with No Box No Label"
           },
           "return_method": {
@@ -92628,6 +93884,24 @@
           },
           "display_status": {
             "type": "string",
+            "enum": [
+              "UNPAID",
+              "AWAITING_SHIPMENT",
+              "AWAITING_COLLECTION",
+              "IN_TRANSIT",
+              "DELIVERED",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "The order has been placed, but payment has not yet completed.",
+              "The order is ready for shipment, but no items have been shipped yet.",
+              "Shipping has been arranged, but the package is waiting to be collected by the carrier.",
+              "The package has been collected by the carrier and delivery is in progress.",
+              "The package has been delivered to the buyer.",
+              "The order has been completed, and no further returns or refunds are allowed.",
+              "The order has been cancelled."
+            ],
             "description": "Available values:\n- `UNPAID`: The order has been placed, but payment has not yet completed.\n- `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.\n- `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.\n- `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.\n- `DELIVERED`: The package has been delivered to the buyer.\n- `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.\n- `CANCELLED`: The order has been cancelled."
           },
           "product_name": {
@@ -92677,6 +93951,20 @@
           },
           "package_status": {
             "type": "string",
+            "enum": [
+              "TO_FULFILL",
+              "PROCESSING",
+              "FULFILLING",
+              "COMPLETED",
+              "CANCELLED"
+            ],
+            "x-enum-descriptions": [
+              "Package awaiting seller to arrange shipment.",
+              "Shipping has been arranged by the seller. Awaiting carrier collection.",
+              "Package has been collected by carrier and is in transit.",
+              "Package has been delivered.",
+              "Package has been canceled. Normally, the package is canceled due to the package being lost or damaged."
+            ],
             "description": "The package status of the item.\nAvailable values:\n- `TO_FULFILL`: Package awaiting seller to arrange shipment.\n- `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.\n- `FULFILLING`: Package has been collected by carrier and is in transit.\n- `COMPLETED`: Package has been delivered.\n- `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged."
           },
           "currency": {
@@ -92689,6 +93977,12 @@
           },
           "cancel_user": {
             "type": "string",
+            "enum": [
+              "BUYER",
+              "SELLER",
+              "OPERATOR",
+              "SYSTEM"
+            ],
             "description": "Cancellation request initiator.\nAvailable values:\n- `BUYER`\n- `SELLER`\n- `OPERATOR`\n- `SYSTEM`"
           },
           "shipping_provider_id": {
@@ -93706,6 +95000,10 @@
           },
           "unbox_sku_type": {
             "type": "string",
+            "enum": [
+              "NORMAL",
+              "GIFT"
+            ],
             "description": "Indicates if the unboxed sku is a gift item\nEnumerations: NORMAL or GIFT"
           }
         }
@@ -93791,9 +95089,24 @@
             "format": "int64",
             "description": "The time when the notification is pushed, represented as a Unix timestamp (seconds)."
           },
+          "tts_notification_id": {
+            "type": "string",
+            "description": "The ID of the notification."
+          },
           "data": {
-            "type": "object",
+            "$ref": "#/components/schemas/UpcomingAuthorizationExpirationWebhookData",
             "description": "The object contains business parameters related to the specific notification type."
+          }
+        }
+      },
+      "UpcomingAuthorizationExpirationWebhookData": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "expiration_time": {
+            "type": "string"
           }
         }
       },
@@ -94986,6 +96299,12 @@
         "properties": {
           "user_type": {
             "type": "string",
+            "enum": [
+              "ALL_USER",
+              "SHOP_NEW_CUSTOMER",
+              "SHOP_EXISTING_CUSTOMER",
+              "SHOP_REPEAT_CUSTOMER"
+            ],
             "description": "Possible enumerations are:\n`ALL_USER`\n`SHOP_NEW_CUSTOMER`\n`SHOP_EXISTING_CUSTOMER`\n`SHOP_REPEAT_CUSTOMER`"
           }
         }
@@ -96361,6 +97680,10 @@
           },
           "result": {
             "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL"
+            ],
             "description": "Possible enumerations:  \n `PASS` \n `FAIL`"
           },
           "issues": {
@@ -96382,22 +97705,6 @@
           "suggestion": {
             "type": "string",
             "description": "Suggestions on how to fix the risk."
-          }
-        }
-      },
-      "ViolationCheckResult": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "description": "SUCCESS: The precheck task passed violation checks\nFAIL: The precheck task has failed due to violations. Check the 'issues' field for details.\nPROCESSING: The precheck violation task is still in progress"
-          },
-          "issues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue"
-            },
-            "description": "A list of policy violation details returned when violation check fails"
           }
         }
       },
@@ -96546,6 +97853,10 @@
           },
           "unit": {
             "type": "string",
+            "enum": [
+              "GRAM",
+              "POUND"
+            ],
             "description": "The unit of measurement for the package weight.\n\nAvailable values:\n- `GRAM`\n- `POUND`"
           }
         }
