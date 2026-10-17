@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.10.15",
+    "version": "2026.10.16",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
