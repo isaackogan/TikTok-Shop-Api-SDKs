@@ -1,5 +1,6 @@
 package com.isaackogan.tiktok.shop;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -8,35 +9,31 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 
-/** ReadmeSnippets.java is compiled by test-compile; this keeps it identical to the README. */
+/** readme/SnippetN.java are compiled by test-compile; this keeps them identical to the README blocks. */
 class ReadmeTest {
     private static String read(String path) throws IOException {
         return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
     }
 
     @Test
-    void everyReadmeJavaLineIsInTheCompiledSnippetsFile() throws IOException {
-        Set<String> compiled = new HashSet<>();
-        for (String l : read("src/test/java/com/isaackogan/tiktok/shop/ReadmeSnippets.java").split("\n")) {
-            compiled.add(l);
-        }
+    void eachReadmeJavaBlockIsItsOwnCompiledSnippetFile() throws IOException {
         Matcher m = Pattern.compile("```java\n(.*?)```", Pattern.DOTALL).matcher(read("README.md"));
-        int blocks = 0;
+        int n = 0;
         while (m.find()) {
-            blocks++;
-            for (String line : m.group(1).split("\n")) {
-                if (!line.trim().isEmpty()) {
-                    assertTrue(compiled.contains(line), "README line missing from ReadmeSnippets.java: " + line);
-                }
-            }
+            n++;
+            String path = "src/test/java/com/isaackogan/tiktok/shop/readme/Snippet" + n + ".java";
+            String wrapper = "package com.isaackogan.tiktok.shop.readme;\n\n";
+            String file = read(path);
+            assertTrue(file.startsWith(wrapper), path + " must start with the package line only");
+            assertEquals(m.group(1), file.substring(wrapper.length()), "README java block " + n + " differs from " + path);
+            assertTrue(m.group(1).contains("import "), "README java block " + n + " carries its own imports");
         }
-        assertTrue(blocks >= 4, "expected the README's java blocks");
+        assertEquals(4, n, "expected the README's java blocks");
+        assertFalse(Files.exists(Paths.get("src/test/java/com/isaackogan/tiktok/shop/readme/Snippet" + (n + 1) + ".java")), "stale snippet file");
     }
 
     @Test
