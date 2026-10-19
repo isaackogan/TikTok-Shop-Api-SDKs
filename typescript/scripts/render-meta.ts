@@ -20,26 +20,46 @@ interface Meta {
   idFields?: string[];
 }
 
-/** Map each group to the generated `*Api` class holding its first operation's method. */
-export function findGroupClasses(apisDir: string, operations: Operation[]): Record<string, { className: string }> {
-  const sources = readdirSync(apisDir)
-    .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
-    .map((f) => readFileSync(join(apisDir, f), 'utf8'));
+export interface ApiSource {
+  /** File name inside apis/, e.g. `OrdersApi.ts`. */
+  file: string;
+  src: string;
+}
+
+/**
+ * Map each group to the generated `*Api` class holding its first operation's method.
+ * Throws when the method is in no file, in more than one file, or its class is not
+ * re-exported through apis/index.ts and the generated index.ts.
+ */
+export function findGroupClasses(
+  apis: ApiSource[],
+  operations: Operation[],
+  apisIndex: string,
+  rootIndex: string,
+): Record<string, { className: string }> {
+  if (!/export \* from '\.\/apis\/index(\.ts)?'/.test(rootIndex)) {
+    throw new Error("generated index.ts does not re-export './apis/index'");
+  }
   const groups: Record<string, { className: string }> = {};
   for (const op of operations) {
     if (op.group in groups) continue;
     const method = new RegExp(`^\\s+async ${op.operationId}\\(`, 'm');
-    for (const src of sources) {
-      const m = method.exec(src);
-      if (!m) continue;
-      const classes = [...src.slice(0, m.index).matchAll(/export class (\w+)/g)];
-      const cls = classes.at(-1)?.[1];
-      if (cls) groups[op.group] = { className: cls };
-      break;
-    }
-    if (!(op.group in groups)) {
+    const hits = apis.filter((a) => method.test(a.src));
+    if (hits.length === 0) {
       throw new Error(`no generated API class for group "${op.group}" (operation ${op.operationId})`);
     }
+    if (hits.length > 1) {
+      throw new Error(`operation ${op.operationId} is defined in several API files: ${hits.map((h) => h.file).join(', ')}`);
+    }
+    const [{ file, src }] = hits;
+    const m = method.exec(src)!;
+    const cls = [...src.slice(0, m.index).matchAll(/export class (\w+)/g)].at(-1)?.[1];
+    if (!cls) throw new Error(`no class precedes ${op.operationId} in ${file}`);
+    const mod = file.replace(/\.ts$/, '');
+    if (!new RegExp(`export \\* from '\\./${mod}(\\.ts)?'`).test(apisIndex)) {
+      throw new Error(`class ${cls} (${file}) is not exported from apis/index.ts`);
+    }
+    groups[op.group] = { className: cls };
   }
   return groups;
 }
@@ -47,7 +67,17 @@ export function findGroupClasses(apisDir: string, operations: Operation[]): Reco
 /** Write `<generatedDir>/meta.ts` from `meta.json`. */
 export function renderMeta(metaPath: string, generatedDir: string): void {
   const meta = JSON.parse(readFileSync(metaPath, 'utf8')) as Meta;
-  const groups = findGroupClasses(join(generatedDir, 'apis'), meta.operations);
+  if (!meta.idFields) throw new Error('meta.json has no idFields (was it prepared with --lang typescript?)');
+  const apisDir = join(generatedDir, 'apis');
+  const apis = readdirSync(apisDir)
+    .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
+    .map((file) => ({ file, src: readFileSync(join(apisDir, file), 'utf8') }));
+  const groups = findGroupClasses(
+    apis,
+    meta.operations,
+    readFileSync(join(apisDir, 'index.ts'), 'utf8'),
+    readFileSync(join(generatedDir, 'index.ts'), 'utf8'),
+  );
   const eventTypes: Record<number, string> = {};
   for (const w of meta.webhooks) if (w.eventType) eventTypes[w.type] = w.eventType;
   const json = (v: unknown) => JSON.stringify(v, null, 2);
@@ -76,7 +106,7 @@ export const WEBHOOKS: readonly WebhookMeta[] = ${json(meta.webhooks)};
 
 export const EVENT_TYPES: Record<number, string> = ${json(eventTypes)};
 
-export const ID_FIELDS: readonly string[] = ${json(meta.idFields ?? [])};
+export const ID_FIELDS: readonly string[] = ${json(meta.idFields)};
 `;
   writeFileSync(join(generatedDir, 'meta.ts'), out);
 }
