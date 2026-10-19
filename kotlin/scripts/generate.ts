@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fixGetBody } from './fix-get-body.ts';
+import { renderEvents } from './render-events.ts';
 import { renderMeta } from './render-meta.ts';
 
 const pkg = resolve(import.meta.dirname, '..');
@@ -37,3 +38,4 @@ const apiClient = resolve(dest, 'infrastructure/ApiClient.kt');
 writeFileSync(apiClient, fixGetBody(readFileSync(apiClient, 'utf8')));
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
+renderEvents(resolve(pkg, 'build/meta.json'), dest);
