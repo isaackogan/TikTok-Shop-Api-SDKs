@@ -50,7 +50,36 @@ describe('prepareSpec', () => {
     expect(params[0].schema.type).toBe('integer');
     expect(params[1].schema).toEqual({ type: 'string' });
     expect(spec.paths['/chat/202309/conversations'].get.requestBody.content['application/json'].schema.properties.count.type).toBe('integer');
-    expect(meta.idFields).toEqual(['big', 'product_id', 'shop_id', 'sku_ids']);
+    expect(meta.idFields).toEqual(['big', 'file_id', 'product_id', 'shop_id', 'sku_id', 'sku_ids', 'user_id']);
+  });
+
+  it('typescript: records the request-body locations of converted IDs per operation', () => {
+    const { meta } = prepareSpec(fixture(), 'typescript', groups);
+    // getConversationList: its JSON body has no ID (file_id is only in the multipart body), so it is omitted.
+    // OrderLine.note_id is ID-named but a string, so it is not a location. Note.replies recurses without IDs.
+    expect(meta.idBodyPaths).toEqual({ getOrderList: ['big', 'buyer.user_id', 'lines[].sku_id', 'product_id', 'sku_ids[]'] });
+  });
+
+  it('typescript: records root-array and nested-array locations', () => {
+    const spec = {
+      paths: {
+        '/a': { post: { operationId: 'a', tags: ['T'], requestBody: { content: { 'application/json': { schema: {
+          type: 'array', items: { type: 'object', properties: { shop_id: { type: 'integer' }, video_ids: { type: 'array', items: { type: 'array', items: { type: 'integer' } } } } },
+        } } } } } },
+      },
+    };
+    expect(prepareSpec(spec, 'typescript', {}).meta.idBodyPaths).toEqual({ a: ['[].shop_id', '[].video_ids[][]'] });
+  });
+
+  it('typescript: throws when a converted ID sits where a body path cannot reach', () => {
+    const body = (schema: object, schemas: object = {}) => ({
+      paths: { '/a': { post: { operationId: 'a', tags: ['T'], requestBody: { content: { 'application/json': { schema } } } } } },
+      components: { schemas },
+    });
+    const viaMap = body({ type: 'object', additionalProperties: { type: 'object', properties: { shop_id: { type: 'integer' } } } });
+    expect(() => prepareSpec(viaMap, 'typescript', {})).toThrow(/a: .*additionalProperties/);
+    const node = { type: 'object', properties: { sku_id: { type: 'integer' }, children: { type: 'array', items: { $ref: '#/components/schemas/Node' } } } };
+    expect(() => prepareSpec(body({ $ref: '#/components/schemas/Node' }, { Node: node }), 'typescript', {})).toThrow(/a: .*children\[\]/);
   });
 
   it('typescript: leaves example values untouched', () => {
@@ -63,6 +92,7 @@ describe('prepareSpec', () => {
     const { spec, meta } = prepareSpec(fixture(), 'go', groups);
     expect(spec.components.schemas.OrderRequest.properties.product_id.type).toBe('integer');
     expect(meta).not.toHaveProperty('idFields');
+    expect(meta).not.toHaveProperty('idBodyPaths');
   });
 });
 

@@ -38,7 +38,10 @@
         "x-tts-requires-shop-cipher": true,
         "parameters": [{ "$ref": "#/components/parameters/ShopCipher" }],
         "requestBody": {
-          "content": { "application/json": { "schema": { "type": "object", "properties": { "count": { "type": "integer", "format": "int32" } } } } }
+          "content": {
+            "application/json": { "schema": { "type": "object", "properties": { "count": { "type": "integer", "format": "int32" } } } },
+            "multipart/form-data": { "schema": { "type": "object", "properties": { "file_id": { "type": "integer", "format": "int64" } } } }
+          }
         },
         "responses": { "200": { "description": "ok" } }
       }
@@ -73,8 +76,20 @@
           "sku_ids": { "type": "array", "items": { "type": "integer", "format": "int64" } },
           "count": { "type": "integer", "format": "int32" },
           "serial": { "type": "integer", "format": "int64" },
-          "big": { "type": ["integer", "null"], "format": "int64", "description": "Large" }
+          "big": { "type": ["integer", "null"], "format": "int64", "description": "Large" },
+          "lines": { "type": "array", "items": { "$ref": "#/components/schemas/OrderLine" } },
+          "buyer": { "anyOf": [{ "$ref": "#/components/schemas/Buyer" }, { "type": "null" }] },
+          "notes": { "type": "array", "items": { "$ref": "#/components/schemas/Note" } }
         }
+      },
+      "OrderLine": {
+        "type": "object",
+        "properties": { "sku_id": { "type": "integer", "format": "int64" }, "note_id": { "type": "string" } }
+      },
+      "Buyer": { "type": "object", "properties": { "user_id": { "type": "integer", "format": "int64" }, "age": { "type": "integer" } } },
+      "Note": {
+        "type": "object",
+        "properties": { "text": { "type": "string" }, "replies": { "type": "array", "items": { "$ref": "#/components/schemas/Note" } } }
       },
       "OrderStatusChangeWebhook": { "type": "object", "properties": { "shop_id": { "type": "string" } } },
       "PackageUpdateWebhook": { "type": "object", "properties": { "shop_id": { "type": "string" } } }

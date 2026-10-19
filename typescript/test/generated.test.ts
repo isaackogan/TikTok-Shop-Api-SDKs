@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import * as generated from '../src/generated/index.ts';
-import { EVENT_TYPES, GROUPS, ID_FIELDS, OPERATIONS, WEBHOOKS } from '../src/generated/meta.ts';
+import { EVENT_TYPES, GROUPS, ID_BODY_PATHS, ID_FIELDS, OPERATIONS, WEBHOOKS } from '../src/generated/meta.ts';
 import { findGroupClasses } from '../scripts/render-meta.ts';
 
 const groups = Object.values(
@@ -32,6 +32,10 @@ describe('generated client', () => {
     for (const f of ['product_id', 'shop_id', 'sku_id', 'material_id', 'tts_pid']) {
       expect(ID_FIELDS).toContain(f);
     }
+  });
+  it('carries the request-body ID paths from meta.json', () => {
+    expect(meta.idBodyPaths).toBeTypeOf('object');
+    expect(ID_BODY_PATHS).toEqual(meta.idBodyPaths);
   });
 });
 

@@ -18,10 +18,13 @@ export interface Meta {
   operations: OperationMeta[];
   webhooks: WebhookMeta[];
   idFields?: string[];
+  /** Per operationId, the JSON request-body locations of converted IDs, e.g. `products[].product_id`. */
+  idBodyPaths?: Record<string, string[]>;
 }
 
 const METHODS = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'];
 const SHOP_CIPHER_REF = '#/components/parameters/ShopCipher';
+const SCHEMA_REF = '#/components/schemas/';
 const ID_DIGITS = 16;
 // Values under these keys are data, never schema: do not rewrite them.
 const DATA_KEYS = new Set(['example', 'examples', 'default', 'enum', 'const']);
@@ -82,9 +85,13 @@ function longExampleNames(spec: Json): Set<string> {
 
 const isIntegerType = (t: unknown): boolean => t === 'integer' || (Array.isArray(t) && t.includes('integer'));
 
-/** Rewrites integer ID schemas to strings in place (on an already-cloned spec). */
-function stringifyIds(spec: Json, isIdName: (n: string) => boolean): string[] {
+/**
+ * Rewrites integer ID schemas to strings in place (on an already-cloned spec).
+ * Returns the converted field names and the converted schema objects themselves.
+ */
+function stringifyIds(spec: Json, isIdName: (n: string) => boolean): { names: string[]; nodes: Set<Json> } {
   const converted = new Set<string>();
+  const nodes = new Set<Json>();
   const convert = (schema: Json, name: string): void => {
     const out: Json = { type: Array.isArray(schema.type) ? schema.type.map((t: string) => (t === 'integer' ? 'string' : t)) : 'string' };
     if (schema.description !== undefined) out.description = schema.description;
@@ -92,6 +99,7 @@ function stringifyIds(spec: Json, isIdName: (n: string) => boolean): string[] {
     for (const k of Object.keys(schema)) delete schema[k];
     Object.assign(schema, out);
     converted.add(name);
+    nodes.add(schema);
   };
   const walk = (node: Json, name?: string): void => {
     if (Array.isArray(node)) return void node.forEach((x) => walk(x, name));
@@ -106,7 +114,61 @@ function stringifyIds(spec: Json, isIdName: (n: string) => boolean): string[] {
     }
   };
   walk(spec);
-  return [...converted].sort();
+  return { names: [...converted].sort(), nodes };
+}
+
+/**
+ * For each operation's `application/json` request body, the paths of the fields in `converted`:
+ * dot-separated property names, with `[]` after a name whose array items are walked (`[]` alone
+ * for a root array). Operations without such fields are omitted. Throws when a converted field is
+ * reachable only where a path cannot point (a recursive schema, `additionalProperties`, ...).
+ */
+function idBodyPaths(spec: Json, converted: Set<Json>): Record<string, string[]> {
+  const schemas: Json = spec.components?.schemas ?? {};
+  const target = (ref: unknown): Json =>
+    typeof ref === 'string' && ref.startsWith(SCHEMA_REF) ? schemas[ref.slice(SCHEMA_REF.length)] : undefined;
+  const reaches = (node: Json, seen = new Set<Json>()): boolean => {
+    if (Array.isArray(node)) return node.some((x) => reaches(x, seen));
+    if (!isObj(node) || isRaw(node) || seen.has(node)) return false;
+    seen.add(node);
+    if (converted.has(node) || reaches(target(node.$ref), seen)) return true;
+    return Object.entries(node).some(([k, v]) =>
+      k === 'properties' ? isObj(v) && reaches(Object.values(v), seen) : !DATA_KEYS.has(k) && reaches(v, seen),
+    );
+  };
+  const out: Record<string, string[]> = {};
+  for (const item of Object.values<Json>(spec.paths ?? {})) {
+    for (const method of METHODS) {
+      const op = item[method];
+      const root = isObj(op) ? op.requestBody?.content?.['application/json']?.schema : undefined;
+      if (!isObj(root)) continue;
+      const found = new Set<string>();
+      const walk = (node: Json, path: string, stack: readonly Json[]): void => {
+        if (!isObj(node) || isRaw(node)) return;
+        if (converted.has(node)) return void found.add(path);
+        for (const [k, v] of Object.entries(node)) {
+          if (DATA_KEYS.has(k)) continue;
+          const at = (where: string) => `${op.operationId}: an integer ID under ${where} has no body path`;
+          if (k === '$ref') {
+            const t = target(v);
+            if (!stack.includes(t)) walk(t, path, [...stack, t]);
+            else if (reaches(t)) throw new Error(at(`the recursive ${v} at "${path}"`));
+          } else if (k === 'properties' && isObj(v)) {
+            for (const [p, s] of Object.entries(v)) walk(s, path === '' ? p : `${path}.${p}`, stack);
+          } else if (k === 'items' && isObj(v)) {
+            walk(v, `${path}[]`, stack);
+          } else if ((k === 'allOf' || k === 'anyOf' || k === 'oneOf') && Array.isArray(v)) {
+            v.forEach((x) => walk(x, path, stack));
+          } else if (reaches(v)) {
+            throw new Error(at(`"${path}" ${k}`));
+          }
+        }
+      };
+      walk(root, '', []);
+      if (found.size) out[op.operationId] = [...found].sort();
+    }
+  }
+  return out;
 }
 
 function removeShopCipher(spec: Json): void {
@@ -157,7 +219,9 @@ export function prepareSpec(spec: object, lang: Lang, groups: Record<string, str
   removeShopCipher(out);
   if (lang === 'typescript') {
     const long = longExampleNames(out);
-    meta.idFields = stringifyIds(out, (n) => n === 'id' || n.endsWith('_id') || n.endsWith('_ids') || long.has(n));
+    const ids = stringifyIds(out, (n) => n === 'id' || n.endsWith('_id') || n.endsWith('_ids') || long.has(n));
+    meta.idFields = ids.names;
+    meta.idBodyPaths = idBodyPaths(out, ids.nodes);
   }
   return { spec: out, meta };
 }

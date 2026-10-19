@@ -2864,3 +2864,10 @@ export const ID_FIELDS: readonly string[] = [
   "tts_pid",
   "video_ids"
 ];
+
+/** Per operationId, the JSON request-body locations of integer IDs, e.g. `products[].product_id`. */
+export const ID_BODY_PATHS: Readonly<Record<string, readonly string[]>> = {
+  "submitSizeChartAppeal": [
+    "product_id"
+  ]
+};

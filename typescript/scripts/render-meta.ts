@@ -18,6 +18,7 @@ interface Meta {
   operations: Operation[];
   webhooks: Webhook[];
   idFields?: string[];
+  idBodyPaths?: Record<string, string[]>;
 }
 
 export interface ApiSource {
@@ -67,7 +68,9 @@ export function findGroupClasses(
 /** Write `<generatedDir>/meta.ts` from `meta.json`. */
 export function renderMeta(metaPath: string, generatedDir: string): void {
   const meta = JSON.parse(readFileSync(metaPath, 'utf8')) as Meta;
-  if (!meta.idFields) throw new Error('meta.json has no idFields (was it prepared with --lang typescript?)');
+  if (!meta.idFields || !meta.idBodyPaths) {
+    throw new Error('meta.json has no idFields/idBodyPaths (was it prepared with --lang typescript?)');
+  }
   const apisDir = join(generatedDir, 'apis');
   const apis = readdirSync(apisDir)
     .filter((f) => f.endsWith('.ts') && f !== 'index.ts')
@@ -107,6 +110,9 @@ export const WEBHOOKS: readonly WebhookMeta[] = ${json(meta.webhooks)};
 export const EVENT_TYPES: Record<number, string> = ${json(eventTypes)};
 
 export const ID_FIELDS: readonly string[] = ${json(meta.idFields)};
+
+/** Per operationId, the JSON request-body locations of integer IDs, e.g. \`products[].product_id\`. */
+export const ID_BODY_PATHS: Readonly<Record<string, readonly string[]>> = ${json(meta.idBodyPaths)};
 `;
   writeFileSync(join(generatedDir, 'meta.ts'), out);
 }
