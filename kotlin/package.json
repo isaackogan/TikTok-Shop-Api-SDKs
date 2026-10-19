@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/kotlin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "./gradlew --no-daemon -q compileKotlin",
+    "test": "./gradlew --no-daemon -q test"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

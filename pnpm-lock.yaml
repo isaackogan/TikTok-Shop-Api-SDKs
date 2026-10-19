@@ -27,6 +27,12 @@ importers:
         specifier: 4.20.6
         version: 4.20.6
 
+  kotlin:
+    devDependencies:
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
+
   python: {}
 
   scripts:
