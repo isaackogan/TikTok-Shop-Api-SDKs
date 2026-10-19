@@ -1640,6 +1640,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOpenCollaborationProductListByProductIdsRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -1793,7 +1803,7 @@
                           "amount": "56.00",
                           "currency": "USD"
                         },
-                        "added_status": "ADDABLE\n",
+                        "added_status": "ADDABLE",
                         "brand_name": "Apple",
                         "images": [
                           {
@@ -3490,6 +3500,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PublishAffiliatePartnerCampaignRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -3691,12 +3711,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/GenerateCampaignProductPromotionLinksInBatchRequest"
-              },
-              "example": {
-                "product_ids": [
-                  7362840009596340000,
-                  7362840009596340000
-                ]
               }
             }
           }
@@ -3708,22 +3722,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GenerateCampaignProductPromotionLinksInBatchResponse"
-                },
-                "example": {
-                  "code": 0,
-                  "data": {
-                    "product_promotion_links": [
-                      {
-                        "product_id": "7362840009596339971",
-                        "link": "https://affiliate.tiktok.com/api/v1/share/AIxvOHlaJoKO"
-                      }
-                    ],
-                    "failed_product_ids": [
-                      7362840009596340000
-                    ]
-                  },
-                  "message": "Success",
-                  "request_id": "202203070749000101890810281E8C70B7"
                 }
               }
             }
@@ -4704,6 +4702,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateAffiliateProductPromotionLinkRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -4811,6 +4819,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveOpenCollaborationRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -4955,6 +4973,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemoveTargetCollaborationRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -5655,11 +5683,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/MarkConversationsAsReadRequest"
-              },
-              "example": {
-                "conversation_ids": [
-                  576486316948490000
-                ]
               }
             }
           }
@@ -6927,6 +6950,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateTargetCollaborationLinkRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -11544,56 +11577,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetSPSMetricDiagnosisResponse"
-                },
-                "example": {
-                  "code": 0,
-                  "data": {
-                    "benchmarks": {
-                      "excellent_threshold": "0.98",
-                      "poor_threshold": "0.80"
-                    },
-                    "calculation_rule": {
-                      "denominator_label": "Delivered orders",
-                      "denominator_value": "1000",
-                      "numerator_label": "On-time delivered orders",
-                      "numerator_value": "947"
-                    },
-                    "dimension": "Product satisfaction",
-                    "distribution_details": [
-                      {
-                        "count": 820,
-                        "name": "Dispatch 24-48 Hours",
-                        "percent": "82.0"
-                      }
-                    ],
-                    "evaluate_duration_days": 30,
-                    "end_evaluation_time": 1761264000,
-                    "start_evaluation_time": 1758672000,
-                    "metric_code": "OTDR",
-                    "score": "4.3",
-                    "status": "GOOD",
-                    "status_text": "Excellent",
-                    "trend": {
-                      "data_points": [
-                        {
-                          "record_date": "20260601",
-                          "value": "0.947"
-                        }
-                      ]
-                    },
-                    "value": "0.947",
-                    "value_unit": "PERCENT",
-                    "analyses": [
-                      {
-                        "summaries": [
-                          "Stable performance. Top 3 issues to address."
-                        ],
-                        "details": "Your 30-day on-time delivery rate is only higher than **% of peers, which is hurting your SPS."
-                      }
-                    ]
-                  },
-                  "message": "Success",
-                  "request_id": "202203070749000101890810281E8C70B7"
                 }
               }
             }
@@ -13106,18 +13089,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateEngagementTaskRequest"
-              },
-              "example": {
-                "template_id": "50002_20011",
-                "task_name": "Task1 for mega sale",
-                "end_time": 1744344885,
-                "channel": "TIKTOK_IM",
-                "product_ids": [
-                  8646958016719848000
-                ],
-                "coupon_ids": [
-                  8646958016719848000
-                ]
               }
             }
           }
@@ -13337,11 +13308,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/GetEngagementTaskPerformancesRequest"
-              },
-              "example": {
-                "task_ids": [
-                  8646958016719848000
-                ]
               }
             }
           }
@@ -13413,21 +13379,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateCustomEngagementTaskRequest"
-              },
-              "example": {
-                "task_name": "Task1 for mega sale\n",
-                "end_time": 1744344885,
-                "channel": "TIKTOK_IM",
-                "product_ids": [
-                  8646958016719848000
-                ],
-                "coupon_ids": [
-                  8646958016219849000
-                ],
-                "custom_message": {
-                  "title": "Meet your next favorite thing!",
-                  "body": "Check out our newest drop to find your perfect fit."
-                }
               }
             }
           }
@@ -14095,6 +14046,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkBuyerMessagesAsReadRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -14530,6 +14491,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndSessionRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -16752,7 +16723,7 @@
                             "volume": "1",
                             "volume_unit": "MILLILITER"
                           },
-                          "dg_class": "CLASS_2\n",
+                          "dg_class": "CLASS_2",
                           "dg_uncode": "UN1266",
                           "msds_file_url": "https://example.com/fbt/msds-report.pdf"
                         },
@@ -22961,6 +22932,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchOrdersByExternalOrderReferenceRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -23265,7 +23246,7 @@
                           {
                             "activity_id": "7136104329798256386",
                             "discount_amount": "2.25",
-                            "discount_type": "COUPON\n"
+                            "discount_type": "COUPON"
                           }
                         ]
                       }
@@ -23427,7 +23408,7 @@
                         "delivery_option_id": "7091146663229654785",
                         "delivery_sla_time": 1678389618,
                         "payment_method_name": "CCDC",
-                        "payment_card_type": "Debit\n",
+                        "payment_card_type": "Debit",
                         "channel_entity_national_registry_id": "26.545.167/0001-21",
                         "payment_method_code": "pm_pi_ccdc_visa_c_d",
                         "payment_auth_code": "AUTH123457",
@@ -24510,77 +24491,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetCategoryAttributesResponse"
-                },
-                "example": {
-                  "code": 0,
-                  "data": {
-                    "attributes": [
-                      {
-                        "id": "100392",
-                        "name": "Occasion",
-                        "type": "PRODUCT_PROPERTY",
-                        "is_requried": false,
-                        "values": [
-                          {
-                            "id": "1001533",
-                            "name": "Birthday",
-                            "icon_url": "https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/37a9d5d39c27480d9870f73a2ad7cc95~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=11254&from=3455097676&height=956&idc=no1a&ps=933b5bde&shcp=9b759fb9&shp=cdf09b4c&t=555f072d&width=1000"
-                          }
-                        ],
-                        "value_data_format": "POSITIVE_INT_OR_DECIMAL",
-                        "is_customizable": true,
-                        "requirement_conditions": [
-                          {
-                            "condition_type": "VALUE_ID_MATCH",
-                            "attribute_id": "101610",
-                            "attribute_value_id": "1024358"
-                          }
-                        ],
-                        "is_multiple_selection": true,
-                        "metric_standards": [
-                          {
-                            "id": "7678592839487784712",
-                            "name": "prefix+num+units+suffix",
-                            "metric_value_modules": [
-                              {
-                                "id": "7678592839487735560",
-                                "name": "prefix+num",
-                                "input_type": "CUSTOMIZED",
-                                "data_types": "POSITIVE_INTEGER",
-                                "default_values": [
-                                  {
-                                    "id": "7678592839487735560",
-                                    "name": "2026"
-                                  }
-                                ],
-                                "units": [
-                                  {
-                                    "id": "7678592839484720903",
-                                    "name": "piece"
-                                  }
-                                ],
-                                "value_limit": {
-                                  "num_limit": {
-                                    "min_value": 1000,
-                                    "max_value": 1
-                                  },
-                                  "length_limit": {
-                                    "min_length": 10,
-                                    "max_length": 1
-                                  }
-                                },
-                                "prefix": "daily",
-                                "suffix": "and",
-                                "shading_word": "number2"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "message": "Success",
-                  "request_id": "202203070749000101890810281E8C70B7"
                 }
               }
             }
@@ -27842,7 +27752,7 @@
                     "seller_sku": "Color-Red-XM001",
                     "price": {
                       "amount": "1.21",
-                      "currency": "USD\n",
+                      "currency": "USD",
                       "sale_price": "1.21",
                       "starting_bid_price": "2.22"
                     },
@@ -31788,6 +31698,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryUpgradeTaskRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -36991,6 +36911,16 @@
         "tags": [
           "Products"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGPAUpgradeTaskRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -37965,6 +37895,181 @@
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/submit-strikethrough-price-202609"
       }
     },
+    "/product/202610/size_charts": {
+      "post": {
+        "operationId": "createSizeChartV2",
+        "summary": "Create Size Chart V2",
+        "description": "Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID. The request must identify one authorized shop using shop_cipher.",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSizeChartV2Request"
+              },
+              "example": {
+                "category_id": "601739",
+                "size_chart_data": {
+                  "description": "Use body measurements.",
+                  "is_one_size": false,
+                  "measurement_type": "BODY_MEASUREMENTS",
+                  "size_types": [
+                    "size_chart_size_type_regular"
+                  ],
+                  "table": {
+                    "headers": [
+                      {
+                        "id": "size_chart_size_system_size",
+                        "name": "Size"
+                      },
+                      {
+                        "id": "size_chart_option_bust",
+                        "name": "Bust"
+                      }
+                    ],
+                    "rows": [
+                      {
+                        "cells": [
+                          {
+                            "value": "M"
+                          },
+                          {
+                            "value": "90"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "unit_system": "METRIC"
+                },
+                "size_chart_mode": "REUSABLE_TEMPLATE",
+                "template_name": "Women's Tops Size Chart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSizeChartV2Response"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "size_chart_id": "7612345678901234567"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/create-size-chart-v2-202610"
+      }
+    },
+    "/product/202610/size_charts/edit": {
+      "post": {
+        "operationId": "editSizeChartV2",
+        "summary": "Edit Size Chart V2",
+        "description": "Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name. The request must identify one authorized shop using shop_cipher.",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditSizeChartV2Request"
+              },
+              "example": {
+                "size_chart_data": {
+                  "description": "Use body measurements.",
+                  "is_one_size": false,
+                  "measurement_type": "BODY_MEASUREMENTS",
+                  "size_types": [
+                    "size_chart_size_type_regular"
+                  ],
+                  "table": {
+                    "headers": [
+                      {
+                        "id": "size_chart_size_system_size",
+                        "name": "Size"
+                      },
+                      {
+                        "id": "size_chart_option_bust",
+                        "name": "Bust"
+                      }
+                    ],
+                    "rows": [
+                      {
+                        "cells": [
+                          {
+                            "value": "M"
+                          },
+                          {
+                            "value": "90"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "unit_system": "METRIC"
+                },
+                "size_chart_id": "7612345678901234567",
+                "template_name": "Women's Tops"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditSizeChartV2Response"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "size_chart_id": "12345"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/edit-size-chart-v2-202610"
+      }
+    },
     "/promotion/202309/activities": {
       "post": {
         "operationId": "createPromotionActivity",
@@ -38857,6 +38962,16 @@
             "$ref": "#/components/parameters/ShopCipher"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateActivityRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -39502,7 +39617,7 @@
                           "relative_time": 4
                         },
                         "promo_code": "TTS12345",
-                        "target_buyer_segment": "NEW\n",
+                        "target_buyer_segment": "NEW",
                         "usage_limits": {
                           "single_buyer_claim_limit": 30,
                           "total_claim_limit": 1000,
@@ -39608,7 +39723,7 @@
                         "SHOPPING_CENTER"
                       ],
                       "promo_code": "TTS12345",
-                      "target_buyer_segment": "NEW\n",
+                      "target_buyer_segment": "NEW",
                       "usage_limits": {
                         "single_buyer_claim_limit": 30,
                         "total_claim_limit": 1000,
@@ -39774,6 +39889,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveCancellationRequest"
+              },
+              "example": {}
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -40905,36 +41030,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/GetAftersaleEligibilityResponse"
-                },
-                "example": {
-                  "code": 0,
-                  "data": {
-                    "sku_eligibility": [
-                      {
-                        "sku_id": "1729385144994206632",
-                        "line_item_eligibility": [
-                          {
-                            "request_type": "REFUND",
-                            "order_line_items_ids": [
-                              "576469648086306000"
-                            ],
-                            "eligible": true,
-                            "ineligible_code": 25001001,
-                            "ineligible_reason": "invalid order status",
-                            "available_reason_names": "available reason names",
-                            "order_line_list": [
-                              {
-                                "order_line_item_id": "576469648086306986",
-                                "sub_order_line_item_id": "576469648086306987"
-                              }
-                            ]
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  "message": "Success",
-                  "request_id": "202203070749000101890810281E8C70B7"
                 }
               }
             }
@@ -42812,6 +42907,7 @@
   "webhooks": {
     "activity_change": {
       "post": {
+        "operationId": "activityChangeWebhook",
         "summary": "(63) Activity change",
         "description": "The Activity change webhook is designed to notify partners about modifications related to  activities and the products associated with them. This allows applications to stay synchronized with changes in activity details or product inclusion/exclusion lists.",
         "requestBody": {
@@ -42873,6 +42969,7 @@
     },
     "activity_status_change": {
       "post": {
+        "operationId": "activityStatusChangeWebhook",
         "summary": "(39) Activity status change",
         "description": "When a promotion activity of the specified type starts, expires, or is deactivated, you'll receive this webhook.\nThis webhook will only be triggered when all the following conditions are met:\n\n* Your App has been authorized the` Promotion Information` scope.\n* The activities are of the following types:\n   * `FIXED_PRICE`\n   * `DIRECT_DISCOUNT`\n   * `SHIPPING_DISCOUNT`\n   * `BUY_MORE_SAVE_MORE`\n   * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)\n* One of the following status changes happens:\n   * The activity starts: the status changes from `NOT_START` to `ONGOING`.\n   * The activity expires: the status changes from `ONGOING` to `EXPIRED`.\n   * The activity is deactivated: the status changes to `DEACTIVATED`.",
         "requestBody": {
@@ -42914,6 +43011,7 @@
     },
     "aftersales_request_status_update": {
       "post": {
+        "operationId": "aftersalesRequestStatusUpdateWebhook",
         "summary": "(64) Aftersales Request Status Update",
         "description": "The **Aftersales Request Status Update** webhook is triggered in two scenarios:\n\n1. Buyer submits a return request in their TikTok user app.\n2. A seller makes a decision on whether to approve or reject the request.\n\n\n> **Note:** This is considered the **first-review** stage of the return journey. If the Afterales request is approved, it will enter the **second-review** stage, which is waiting for the seller to make a decision to approve or reject the returned items.",
         "requestBody": {
@@ -42955,6 +43053,7 @@
     },
     "appeal_completed": {
       "post": {
+        "operationId": "appealCompletedWebhook",
         "summary": "(66) Appeal Completed",
         "description": "This webhook is triggered when a size chart verification appeal is approved or rejected.",
         "requestBody": {
@@ -42983,6 +43082,7 @@
     },
     "cancellation_status_change": {
       "post": {
+        "operationId": "cancellationStatusChangeWebhook",
         "summary": "(11) Cancellation status change",
         "description": "The **cancellation status change** webhook is triggered when the `cancel_status` of an order changes:\n\n* An order cancellation is initiated: `CANCELLATION_REQUEST_PENDING`\n* An order cancellation is accepted by the `SELLER` or `SYSTEM`: `CANCELLATION_REQUEST_SUCCESS`\n* An order cancellation is closed by the `BUYER` or `SYSTEM`: `CANCELLATION_REQUEST_CANCELLED`\n* An order cancellation is successful and a refund is issued: `CANCELLATION_REQUEST_COMPLETE`",
         "requestBody": {
@@ -43019,11 +43119,13 @@
           }
         },
         "x-tts-webhook-type": 11,
+        "x-tts-event-type": "CANCELLATION_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/11-cancellation-status-change"
       }
     },
     "combined_listing_change": {
       "post": {
+        "operationId": "combinedListingChangeWebhook",
         "summary": "(42) Combined listing change",
         "description": "This webhook is triggered when a combined listing is created, updated (the list of products in the combined listing changes), or deleted.\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43077,6 +43179,7 @@
     },
     "creator_deauthorization": {
       "post": {
+        "operationId": "creatorDeauthorizationWebhook",
         "summary": "(20) Creator deauthorization",
         "description": "When a creator completely removes the App's access to his/her data.",
         "requestBody": {
@@ -43085,15 +43188,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreatorDeauthorizationWebhook"
-              },
-              "example": {
-                "type": 20,
-                "creator_open_id": "VIyStQAAAADCBQ40s4TzOSSOEIW-bM5O9cod3vK8OytW8m-bnBYlXw",
-                "tts_notification_id": "7327112393057371910",
-                "timestamp": 1644412885,
-                "data": {
-                  "cancel_time": 1644412885
-                }
               }
             }
           }
@@ -43114,6 +43208,7 @@
     },
     "fbt_inventory_update": {
       "post": {
+        "operationId": "fbtInventoryUpdateWebhook",
         "summary": "(24) FBT inventory update",
         "description": "This webhook is triggered when the FBT inventory updates.\n> Prerequisite: The **Fulfilled by TikTok(FBT) Info** API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43163,6 +43258,7 @@
     },
     "fbt_merchant_onboarding": {
       "post": {
+        "operationId": "fbtMerchantOnboardingWebhook",
         "summary": "(22) FBT merchant onboarding",
         "description": "This webhook is triggered when the TikTok Shop seller onboards FBT platform to enable FBT service.\n> Prerequisite: The **Fulfilled by TikTok(FBT) Info** API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43205,6 +43301,7 @@
     },
     "get_fbt_mcf_order_status": {
       "post": {
+        "operationId": "getFBTMCFOrderStatusWebhook",
         "summary": "(58) Get FBT MCF Order Status",
         "description": "This webhook is triggered when the FBT multi-channel-fulfillment order status has changed/updated.\n> Prerequisite: The **Fulfilled by TikTok(FBT) Info** API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43213,29 +43310,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/GetFBTMCFOrderStatusWebhook"
-              },
-              "example": {
-                "type": 58,
-                "creator_open_id": "VIyStQAAAADCBQ40s4TzOSSOEIW-bM5O9cod3vK8OytW8m-bnBYlXw",
-                "tts_notification_id": "7327112393057371910",
-                "timestamp": 1644412885,
-                "data": {
-                  "mcf_order": {
-                    "external_order_id": "shopify202208291503530001100220033",
-                    "mcf_order_id": "7136104329798256386",
-                    "consign_orders": {
-                      "id": "OBF12345678",
-                      "tracking_number": "TN87654321",
-                      "carrier": "USPS",
-                      "status": "processing",
-                      "goods": {
-                        "id": "1231231",
-                        "quantity": 1
-                      }
-                    },
-                    "create_time": 1661756811
-                  }
-                }
               }
             }
           }
@@ -43256,6 +43330,7 @@
     },
     "global_listing_method_change": {
       "post": {
+        "operationId": "globalListingMethodChangeWebhook",
         "summary": "(52) Global listing method change",
         "description": "This webhook is triggered when the global listing method for a shop changes.\n**Applicable only for global sellers.**\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](https://partner.tiktokshop.com/docv2/page/access-scope).",
         "requestBody": {
@@ -43297,6 +43372,7 @@
     },
     "global_replication_status_change": {
       "post": {
+        "operationId": "globalReplicationStatusChangeWebhook",
         "summary": "(51) Global replication status change",
         "description": "This webhook is triggered when a product replication operation in another market is completed, regardless of success or failure. If the replication fails, the failure reason(s) will be included in the response.\n**Applicable only for global sellers.**\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](https://partner.tiktokshop.com/docv2/page/access-scope).",
         "requestBody": {
@@ -43305,23 +43381,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/GlobalReplicationStatusChangeWebhook"
-              },
-              "example": {
-                "type": 51,
-                "shop_id": "7494049642642441621",
-                "tts_notification_id": "7327112393057371910",
-                "timestamp": 1644412885,
-                "data": {
-                  "source_product_id": "764c6e87eedcea90399a0dafcd572b71",
-                  "replicated_product": {
-                    "product_id": "576486316948490000",
-                    "region": "GB",
-                    "result": "SUCCESS",
-                    "fail_reasons": {
-                      "message": ""
-                    }
-                  }
-                }
               }
             }
           }
@@ -43342,6 +43401,7 @@
     },
     "goods_match": {
       "post": {
+        "operationId": "goodsMatchWebhook",
         "summary": "(23) Goods match",
         "description": "This webhook is triggered when the seller matches / unmatches the TikTok Shop product to the FBT Goods.\n> Prerequisite: The **Fulfilled by TikTok(FBT) Info** API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43384,6 +43444,7 @@
     },
     "image_translation_completed": {
       "post": {
+        "operationId": "imageTranslationCompletedWebhook",
         "summary": "(46) Image translation completed",
         "description": "This webhook is triggered when an image translation is completed or failed.\n\n\nApplicable only for sellers that sell across EU.\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43434,6 +43495,7 @@
     },
     "inbound_fbt_order_status_change": {
       "post": {
+        "operationId": "inboundFBTOrderStatusChangeWebhook",
         "summary": "(21) Inbound FBT order status change",
         "description": "This webhook is triggered when the status of an FBT inbound order changes.\n> Prerequisite: The **Fulfilled by TikTok(FBT) Info** API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -43473,6 +43535,7 @@
     },
     "inventory_changed_by_shop": {
       "post": {
+        "operationId": "inventoryChangedByShopWebhook",
         "summary": "(71) Inventory Changed By Shop",
         "description": "This webhook is triggered when a SKU's inventory quantity changes in a shop. Each notification identifies the affected shop, product, and SKU, and includes an inventory snapshot after the change together with the individual change details.\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](https://partner.tiktokshop.com/docv2/page/access-scope).\nThe following events trigger this webhook when they cause an inventory quantity change:\n| Trigger source | Description |\n| --- | --- |\n| `order_created` | An order is successfully placed, and inventory is committed to the order. |\n| `order_canceled` | A buyer or seller cancels an order, and the committed inventory is released back to available stock. |\n| `order_shipped` | An order is shipped, and the committed inventory is deducted. |\n| `manual_adjustment` | A seller manually adjusts inventory in Seller Center. |\n| `api_sync` | A developer updates inventory through an inventory-related OpenAPI. |\n| `campaign_lock` | A seller joins a platform marketing campaign, and inventory is locked for the campaign. |\n| `campaign_unlock` | A marketing campaign ends or a seller withdraws, and the locked inventory is released. |\n| `creator_lock` | A seller allocates exclusive inventory to a creator collaboration. |\n| `creator_unlock` | A creator collaboration ends, and the locked inventory is released. |\n| `system_auto_replenish` | The system automatically replenishes inventory, such as after an order fails due to an exception. |",
         "requestBody": {
@@ -43535,6 +43598,7 @@
     },
     "inventory_status_change": {
       "post": {
+        "operationId": "inventoryStatusChangeWebhook",
         "summary": "(27) Inventory status change",
         "description": "This webhook will be triggered in either of the following situations:\n\n* The `current_inventory_status` has dropped to LOW_STOCK / OUT_OF_STOCK.\n* TikTok Shop predicts the `available_quantity` will drop to `0` in X days.\n\n> Note: The value of X can be system-configured or manually set by the seller.",
         "requestBody": {
@@ -43586,6 +43650,7 @@
     },
     "invoice_status_change": {
       "post": {
+        "operationId": "invoiceStatusChangeWebhook",
         "summary": "(36) Invoice status change",
         "description": "This webhook is triggered when the status of an invoice upload changes after using the [POST Upload Invoice](upload-invoice) endpoint.\n**Note**: The [POST Upload Invoice](upload-invoice) API is currently only applicable to the Brazil market.",
         "requestBody": {
@@ -43624,11 +43689,13 @@
           }
         },
         "x-tts-webhook-type": 36,
+        "x-tts-event-type": "INVOICE_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/36-invoice-status-change"
       }
     },
     "new_conversation": {
       "post": {
+        "operationId": "newConversationWebhook",
         "summary": "(13) New conversation",
         "description": "This **new conversation** webhook is triggered when a customer service agent joins or leaves a conversation.\nWe recommend refreshing the conversation list when receiving this event.",
         "requestBody": {
@@ -43662,11 +43729,13 @@
           }
         },
         "x-tts-webhook-type": 13,
+        "x-tts-event-type": "NEW_CONVERSATION",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/13-new-conversation"
       }
     },
     "new_message": {
       "post": {
+        "operationId": "newMessageWebhook",
         "summary": "(14) New message",
         "description": "The **new message** webhook is triggered when a new message is sent in a customer service conversation.",
         "requestBody": {
@@ -43709,11 +43778,13 @@
           }
         },
         "x-tts-webhook-type": 14,
+        "x-tts-event-type": "NEW_MESSAGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/14-new-message"
       }
     },
     "new_message_listener": {
       "post": {
+        "operationId": "newMessageListenerWebhook",
         "summary": "(33) New message listener",
         "description": "When a creator sends a message to the seller.",
         "requestBody": {
@@ -43754,11 +43825,13 @@
           }
         },
         "x-tts-webhook-type": 33,
+        "x-tts-event-type": "NEW_MESSAGE_LISTENER",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/33-new-message-listener"
       }
     },
     "opportunity_matching_status_change": {
       "post": {
+        "operationId": "opportunityMatchingStatusChangeWebhook",
         "summary": "(25) Opportunity matching status change",
         "description": "This webhook is triggered when the status of opportunity matching for a candidate product changes.\n**Prerequisite**: The \"Product Opportunities\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).\n<span style=\"background-color: rgb(255, 245, 235)\">📌 This webhook is currently available only to a limited set of developers.</span>",
         "requestBody": {
@@ -43803,6 +43876,7 @@
     },
     "order_status_change": {
       "post": {
+        "operationId": "orderStatusChangeWebhook",
         "summary": "(1) Order status change",
         "description": "The **order status change** webhook is triggered when the `order_status` of an order changes.",
         "requestBody": {
@@ -43838,11 +43912,13 @@
           }
         },
         "x-tts-webhook-type": 1,
+        "x-tts-event-type": "ORDER_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/1-order-status-change"
       }
     },
     "package_update": {
       "post": {
+        "operationId": "packageUpdateWebhook",
         "summary": "(4) Package update",
         "description": "The **package update** webhook is triggered when package updates such as combine, split, cancel the combine package operation, etc. occur.",
         "requestBody": {
@@ -43886,11 +43962,13 @@
           }
         },
         "x-tts-webhook-type": 4,
+        "x-tts-event-type": "PACKAGE_UPDATE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/4-package-update"
       }
     },
     "product_audit_status_change": {
       "post": {
+        "operationId": "productAuditStatusChangeWebhook",
         "summary": "(37) Product audit status change",
         "description": "When the product audit status changes, you'll receive this webhook.\nWith this webhook, you can easily get the audit status information of a product instead of calling [Get Product](get-product) API.\nTo receive this webhook, you must ensure the `Product Basic` API scope is enabled in Partner Center.",
         "requestBody": {
@@ -43932,11 +44010,13 @@
           }
         },
         "x-tts-webhook-type": 37,
+        "x-tts-event-type": "PRODUCT_AUDIT_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/37-product-audit-status-change"
       }
     },
     "product_category_change": {
       "post": {
+        "operationId": "productCategoryChangeWebhook",
         "summary": "(18) Product category change",
         "description": "When the category of a product is changed, all apps authorized by the shop (using `shop_id`) receive this webhook. When you receive the webhook, you can get more detailed product information by using the [Get Product](get-product) API.\nThis webhook is triggered regardless of how a product category is changed. Categories can be changed by the seller, developer, or TikTok Shop.",
         "requestBody": {
@@ -43972,11 +44052,13 @@
           }
         },
         "x-tts-webhook-type": 18,
+        "x-tts-event-type": "PRODUCT_CATEGORY_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/18-product-category-change"
       }
     },
     "product_creation": {
       "post": {
+        "operationId": "productCreationWebhook",
         "summary": "(16) Product creation",
         "description": "Triggers a webhook message when a product is created",
         "requestBody": {
@@ -44013,11 +44095,13 @@
           }
         },
         "x-tts-webhook-type": 16,
+        "x-tts-event-type": "PRODUCT_CREATION",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/16-product-creation"
       }
     },
     "product_information_change": {
       "post": {
+        "operationId": "productInformationChangeWebhook",
         "summary": "(15) Product information change",
         "description": "This webhook is triggered when changes to a **live** product's properties take effect online.\n**Prerequisite**: The product is **live** and the \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -44061,11 +44145,13 @@
           }
         },
         "x-tts-webhook-type": 15,
+        "x-tts-event-type": "PRODUCT_INFORMATION_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/15-product-information-change"
       }
     },
     "product_package_recommended": {
       "post": {
+        "operationId": "productPackageRecommendedWebhook",
         "summary": "(62) Product Package Recommended",
         "description": "This webhook is triggered when a product package recommendation is generated.\n**Note:** Applicable only for Brazil (**BR**) and Mexico (**MX**) markets.\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, please refer to [Access Scope](https://partner.tiktokshop.com/docv2/page/access-scope).",
         "requestBody": {
@@ -44129,6 +44215,7 @@
     },
     "product_status_change": {
       "post": {
+        "operationId": "productStatusChangeWebhook",
         "summary": "(5) Product status change",
         "description": "The **product status change** webhook triggers when a product audit status changes or is completed:\n\n* Product passes the first audit: `PRODUCT_FIRST_PASS_REVIEW`\n* Product status changes by platform: `PRODUCT_STATUS_CHANGED`\n* Product audit fails: `PRODUCT_AUDIT_FAILURE`",
         "requestBody": {
@@ -44164,11 +44251,13 @@
           }
         },
         "x-tts-webhook-type": 5,
+        "x-tts-event-type": "PRODUCT_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/5-product-status-change"
       }
     },
     "recipient_address_update": {
       "post": {
+        "operationId": "recipientAddressUpdateWebhook",
         "summary": "(3) Recipient address update",
         "description": "The **recipient address update** webhook triggers when an order recipient's address is updated.",
         "requestBody": {
@@ -44201,11 +44290,13 @@
           }
         },
         "x-tts-webhook-type": 3,
+        "x-tts-event-type": "RECIPIENT_ADDRESS_UPDATE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/3-recipient-address-update"
       }
     },
     "refund_success": {
       "post": {
+        "operationId": "refundSuccessWebhook",
         "summary": "(67) Refund Success",
         "description": "Once a refund of an RMA is successfully completed.",
         "requestBody": {
@@ -44270,6 +44361,7 @@
     },
     "return_status_change": {
       "post": {
+        "operationId": "returnStatusChangeWebhook",
         "summary": "(12) Return status change",
         "description": "The **return status change** webhook is triggered when the `return_status` of an order changes:\n\n* The `BUYER` initiates a return or refund request and is pending `SELLER` review: `RETURN_OR_REFUND_REQUEST_PENDING`\n* The `SELLER` declines the `BUYER`'s return or refund request: `REFUND_OR_RETURN_REQUEST_REJECT`\n* The return request is approved and the `SELLER` is waiting for the `BUYER` to return the approved items: `AWAITING_BUYER_SHIP`. If the `BUYER` doesn't ship the items to the `SELLER` before the deadline, the request will be closed automatically.\n* To return the items to the `SELLER`, the `BUYER` drops off the package successfully or the `BUYER` ships the package and uploads the tracking number: `BUYER_SHIPPED_ITEM`\n* The `SELLER` declines the refund request for the return: `REJECT_RECEIVE_PACKAGE`\n* The `SELLER` accepts the refund request or issues a refund for the return: `RETURN_OR_REFUND_REQUEST_SUCCESS`\n* The `BUYER` or `SYSTEM` closes the return or refund request: `RETURN_OR_REFUND__REQUEST_CANCELLED`\n* The return or refund is successful: `RETURN_OR_REFUND_REQUEST_COMPLETE`\n\nAdditionally, a `BUYER` may request an identical replacement item instead of a refund:\n\n* The `BUYER` initiates a replacement request and is pending `SELLER` review: `REPLACEMENT_REQUEST_PENDING`\n* The `SELLER` declines the `BUYER`'s replacement request: `REPLACEMENT_REQUEST_REJECT`\n* The `SELLER` decides to issue a refund to the `BUYER` without replacement: `REPLACEMENT_REQUEST_REFUND_SUCCESS`\n* The `BUYER` cancels the replacement request: `REPLACEMENT_REQUEST_CANCEL`\n* The `SELLER` approves the replacement request: `REPLACEMENT_REQUEST_COMPLETE`",
         "requestBody": {
@@ -44308,11 +44400,13 @@
           }
         },
         "x-tts-webhook-type": 12,
+        "x-tts-event-type": "RETURN_STATUS_CHANGE",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/12-return-status-change"
       }
     },
     "rma_status_update": {
       "post": {
+        "operationId": "rmaStatusUpdateWebhook",
         "summary": "(65) RMA Status Update",
         "description": "The **RMA Status Update** webhook is triggered in the following scenarios:\n\n1. RMA is created\n2. The RMA package is delivered and is pending the seller to review items to make a refund **decision.**\n3. The RMA items review and refund decision is completed.\n\n\n> **Note:** The RMA is automatically created once the Aftersales Request has been approved. The RMA decision is considered the second-review stage of the Aftersales journey.",
         "requestBody": {
@@ -44355,6 +44449,7 @@
     },
     "sample_application_status_change": {
       "post": {
+        "operationId": "sampleApplicationStatusChangeWebhook",
         "summary": "(56) Sample Application Status Change",
         "description": "This webhook will trigger when the creator's sample application status changes.",
         "requestBody": {
@@ -44363,23 +44458,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SampleApplicationStatusChangeWebhook"
-              },
-              "example": {
-                "type": 56,
-                "shop_id": "7494049642642441621",
-                "tts_notification_id": "7327112393057371910",
-                "timestamp": 1644412885,
-                "data": {
-                  "application_id": "123456",
-                  "new_status": "PENDING",
-                  "creator": {
-                    "creator_open_id": "uACafQAAAABmUU2qon4R0vUYvUVS3QC6CICP2m5A2-wd77j8R9G0yg"
-                  },
-                  "product": {
-                    "id": "1729859829942358814",
-                    "sku_id": "1729859567502267166"
-                  }
-                }
               }
             }
           }
@@ -44400,6 +44478,7 @@
     },
     "seller_deauthorization": {
       "post": {
+        "operationId": "sellerDeauthorizationWebhook",
         "summary": "(6) Seller deauthorization",
         "description": "The **seller deauthorization** webhook is triggered after a seller is deauthorized. This is important to prevent developers from assuming there is an issue with the platform authorization function.",
         "requestBody": {
@@ -44432,11 +44511,13 @@
           }
         },
         "x-tts-webhook-type": 6,
+        "x-tts-event-type": "SELLER_DEAUTHORIZATION",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/6-seller-deauthorization"
       }
     },
     "shoppable_content_posting": {
       "post": {
+        "operationId": "shoppableContentPostingWebhook",
         "summary": "(17) Shoppable content posting",
         "description": "The shoppable content posting webhook is triggered when the creator adds, updates, or removes a product link in a video or livestream.\n> This webhook will only be triggered after the creator has authorized the `Read Creator Affiliate Collaborations` scope.",
         "requestBody": {
@@ -44479,6 +44560,7 @@
     },
     "shoppable_video_precheck_tasks_result": {
       "post": {
+        "operationId": "shoppableVideoPrecheckTasksResultWebhook",
         "summary": "(59) Shoppable Video Precheck Tasks Result",
         "description": "The Video Precheck Result webhook is triggered when the Precheck Video Content API is called, and provides the results of the video’s quality assessment and violation checks.",
         "requestBody": {
@@ -44534,6 +44616,7 @@
     },
     "size_chart_change": {
       "post": {
+        "operationId": "sizeChartChangeWebhook",
         "summary": "(19) Size chart change",
         "description": "This webhook is triggered when a product size chart is created, edited, or deleted.\n**Prerequisite**: The \"Product Basic\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -44574,6 +44657,7 @@
     },
     "sku_status_change": {
       "post": {
+        "operationId": "skuStatusChangeWebhook",
         "summary": "(50) SKU status change",
         "description": "This webhook is triggered when the SKU status of an existing product changes.\nTypical scenarios include:\n\n* A new SKU is added under an existing product.\n* An existing SKU is deleted from an existing product.\n* An existing SKU is activated.\n* An existing SKU is deactivated.\n\n**Prerequisite:** The merchant has subscribed to the corresponding webhook topic and the related product change event is successfully consumed by the webhook delivery pipeline.",
         "requestBody": {
@@ -44582,27 +44666,6 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SKUStatusChangeWebhook"
-              },
-              "example": {
-                "type": "TBD",
-                "tts_notification_id": "7327112393057371910",
-                "shop_id": "7494049642642441621",
-                "timestamp": 1644412885,
-                "data": {
-                  "product_id": "123456789",
-                  "skus": [
-                    {
-                      "sku_id": "987654321",
-                      "status": "DEACTIVATED",
-                      "deactivation_source": "SELLER"
-                    },
-                    {
-                      "sku_id": "987654322",
-                      "status": "CREATED"
-                    }
-                  ],
-                  "update_time": 1627587600
-                }
               }
             }
           }
@@ -44623,6 +44686,7 @@
     },
     "strikethrough_price_expired": {
       "post": {
+        "operationId": "strikethroughPriceExpiredWebhook",
         "summary": "(38) Strikethrough price expired",
         "description": "This webhook will be triggered when the strikethrough pricing verification information expires, 90 days after submission.\nPrerequisite: The \"Strikethrough Price\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -44661,6 +44725,7 @@
     },
     "tokopedia_mirror_status_change": {
       "post": {
+        "operationId": "tokopediaMirrorStatusChangeWebhook",
         "summary": "(35) Tokopedia mirror status change",
         "description": "This webhook is triggered when the TikTok Shop to Tokopedia mirroring process is completed or rolled back. Applicable only for the **Indonesia** market.\n\n**Prerequisite**: The shop is [active](get-active-shops), and the \"**Shop Authorized Information**\" API scope is enabled in Partner Center. For more information, refer to [Access Scope](access-scope).",
         "requestBody": {
@@ -44700,6 +44765,7 @@
     },
     "upcoming_authorization_expiration": {
       "post": {
+        "operationId": "upcomingAuthorizationExpirationWebhook",
         "summary": "(7) Upcoming authorization expiration",
         "description": "The **upcoming authorization expiration** webhook is triggered 30 days before authorization automatically expires. This webhook continues to notify the seller once a day at 0:00 until re-authorization is completed.",
         "requestBody": {
@@ -44733,11 +44799,13 @@
           }
         },
         "x-tts-webhook-type": 7,
+        "x-tts-event-type": "UPCOMING_AUTHORIZATION_EXPIRATION",
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/7-upcoming-authorization-expiration"
       }
     },
     "video_precheck_result": {
       "post": {
+        "operationId": "videoPrecheckResultWebhook",
         "summary": "(55) Video Precheck Result",
         "description": "The Video Precheck Result webhook is triggered when the Precheck Video Content API is called, and the results are surfaced to know if the video has any violations, or if it has passed inspection.",
         "requestBody": {
@@ -45631,6 +45699,10 @@
           "indicator_type",
           "status"
         ]
+      },
+      "ApproveCancellationRequest": {
+        "type": "object",
+        "properties": {}
       },
       "ApproveCancellationResponse": {
         "type": "object",
@@ -46665,6 +46737,19 @@
           }
         }
       },
+      "Cell": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "maxLength": 32,
+            "description": "Cell value. Maximum length: 32 characters."
+          }
+        },
+        "required": [
+          "value"
+        ]
+      },
       "Certification": {
         "type": "object",
         "properties": {
@@ -47472,7 +47557,7 @@
           "diagnoses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnos"
+              "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnosis"
             },
             "description": "(**Deprecated**: This field is deprecated and will be removed in a future API version. Use [Diagnose and Optimize Product](677c9523f7765c0308b3d68d) API instead to get product diagnosis related information.)\nProduct optimization diagnosis information.",
             "deprecated": true
@@ -47486,7 +47571,7 @@
           }
         }
       },
-      "CheckProductListingResponseDataDiagnos": {
+      "CheckProductListingResponseDataDiagnosis": {
         "type": "object",
         "properties": {
           "field": {
@@ -47515,12 +47600,12 @@
             "description": "The diagnosis results."
           },
           "suggestions": {
-            "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnosSuggestion",
+            "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnosisSuggestion",
             "description": "Improvement suggestions."
           }
         }
       },
-      "CheckProductListingResponseDataDiagnosSuggestion": {
+      "CheckProductListingResponseDataDiagnosisSuggestion": {
         "type": "object",
         "properties": {
           "seo_words": {
@@ -47540,13 +47625,13 @@
           "images": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnosSuggestionImage"
+              "$ref": "#/components/schemas/CheckProductListingResponseDataDiagnosisSuggestionImage"
             },
             "description": "The optimized main image. Only the first image in the main image set will be optimized."
           }
         }
       },
-      "CheckProductListingResponseDataDiagnosSuggestionImage": {
+      "CheckProductListingResponseDataDiagnosisSuggestionImage": {
         "type": "object",
         "properties": {
           "uri": {
@@ -48652,6 +48737,10 @@
           }
         }
       },
+      "CreateCategoryUpgradeTaskRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "CreateCategoryUpgradeTaskResponse": {
         "type": "object",
         "properties": {
@@ -49565,6 +49654,10 @@
             "description": "Errors associated with requested orders. An entry can indicate that the requested order could not be resolved, or that a package associated with the order could not be included in the bundle. Multiple errors may be returned, including when the top-level `code` is `0`."
           }
         }
+      },
+      "CreateGPAUpgradeTaskRequest": {
+        "type": "object",
+        "properties": {}
       },
       "CreateGPAUpgradeTaskResponse": {
         "type": "object",
@@ -51496,6 +51589,157 @@
           }
         }
       },
+      "CreateSizeChartV2Request": {
+        "type": "object",
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "description": "The leaf category for which to create the size chart. The category must support size charts."
+          },
+          "size_chart_data": {
+            "$ref": "#/components/schemas/CreateSizeChartV2RequestSizeChartData",
+            "description": "Structured size chart content."
+          },
+          "size_chart_mode": {
+            "type": "string",
+            "description": "Possible values:\nREUSABLE_TEMPLATE: A size chart template that can be reused across multiple products.\nPRODUCT_SCOPED: A size chart created for and used by a single product."
+          },
+          "template_name": {
+            "type": "string",
+            "description": "Template name. Required when size_chart_mode is REUSABLE_TEMPLATE.\nWhen size_chart_mode is PRODUCT_SCOPED, any value provided for this field is discarded and is not stored."
+          }
+        },
+        "required": [
+          "category_id",
+          "size_chart_data",
+          "size_chart_mode"
+        ]
+      },
+      "CreateSizeChartV2RequestSizeChartData": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Additional size chart description."
+          },
+          "is_one_size": {
+            "type": "boolean",
+            "description": "Whether this is a one-size chart."
+          },
+          "measurement_type": {
+            "type": "string",
+            "enum": [
+              "GENERIC_MEASUREMENTS",
+              "BODY_MEASUREMENTS",
+              "PRODUCT_MEASUREMENTS"
+            ],
+            "x-enum-descriptions": [
+              "generic measurements",
+              "shopper body measurements",
+              "finished-product measurements."
+            ],
+            "description": "Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements."
+          },
+          "size_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category."
+          },
+          "table": {
+            "$ref": "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTable",
+            "description": "Table containing headers and rows."
+          },
+          "unit_system": {
+            "type": "string",
+            "enum": [
+              "METRIC",
+              "IMPERIAL"
+            ],
+            "x-enum-descriptions": [
+              "metric units",
+              "imperial units."
+            ],
+            "description": "Possible values: METRIC: metric units; IMPERIAL: imperial units."
+          }
+        },
+        "required": [
+          "measurement_type",
+          "table",
+          "unit_system"
+        ]
+      },
+      "CreateSizeChartV2RequestSizeChartDataTable": {
+        "type": "object",
+        "properties": {
+          "headers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTableHeader"
+            },
+            "description": "Ordered header definitions. Provide 1 to 20 headers."
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Row"
+            },
+            "description": "Rows of the size chart. Provide 1 to 45 rows."
+          }
+        },
+        "required": [
+          "headers",
+          "rows"
+        ]
+      },
+      "CreateSizeChartV2RequestSizeChartDataTableHeader": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Standard size-system or measurement ID.\nFor standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type.\nFor size-system columns, use the following predefined IDs:\n- Size: size_chart_size_system_size\n- US: size_chart_size_system_us\n- UK: size_chart_size_system_uk\n- EU: size_chart_size_system_eu\n- JP: size_chart_size_system_jp\n- MX: size_chart_size_system_mx\nOmit this field for custom columns."
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 32,
+            "description": "Header display name. Maximum length: 32 characters."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "CreateSizeChartV2Response": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/CreateSizeChartV2ResponseData"
+          }
+        }
+      },
+      "CreateSizeChartV2ResponseData": {
+        "type": "object",
+        "properties": {
+          "size_chart_id": {
+            "type": "string",
+            "description": "The ID of the created size chart. For REUSABLE_TEMPLATE mode, use this value as size_chart.template.id in subsequent product APIs. For PRODUCT_SCOPED mode, this ID identifies a size chart specific to a single product and cannot be reused as a template ID."
+          }
+        }
+      },
       "CreateTargetCollaborationRequest": {
         "type": "object",
         "properties": {
@@ -51930,6 +52174,10 @@
           }
         }
       },
+      "DeactivateActivityRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "DeactivateActivityResponse": {
         "type": "object",
         "properties": {
@@ -52239,40 +52487,6 @@
           }
         }
       },
-      "Diagnos": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string",
-            "enum": [
-              "TITLE",
-              "DESCRIPTION",
-              "IMAGE",
-              "ATTRIBUTE",
-              "SIZE_CHART"
-            ],
-            "x-enum-descriptions": [
-              "Product title",
-              "Product description",
-              "Product image displayed in the image gallery",
-              "Product attribute",
-              "Product size chart"
-            ],
-            "description": "The product field being diagnosed.\nPossible values:\n- TITLE: Product title\n- DESCRIPTION: Product description\n- IMAGE: Product image displayed in the image gallery\n- ATTRIBUTE: Product attribute\n- SIZE_CHART: Product size chart"
-          },
-          "diagnosis_results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiagnosisResult"
-            },
-            "description": "The results of diagnosing the specified field."
-          },
-          "suggestion": {
-            "$ref": "#/components/schemas/Suggestion",
-            "description": "Optimization suggestions that are auto-generated by the system to improve the effectiveness of the specified field.\n\n**Note**: This will not be returned if the value for `optimization_fields` is blank or `NONE`."
-          }
-        }
-      },
       "DiagnoseAndOptimizeProductRequest": {
         "type": "object",
         "properties": {
@@ -52442,13 +52656,13 @@
           "diagnoses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Diagnos"
+              "$ref": "#/components/schemas/Diagnosis"
             },
             "description": "Product diagnosis and optimization information."
           }
         }
       },
-      "DiagnoseAndOptimizeProductResponseDataDiagnosSuggestionImage": {
+      "DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage": {
         "type": "object",
         "properties": {
           "height": {
@@ -52476,6 +52690,40 @@
           "optimized_url": {
             "type": "string",
             "description": "The URL of the image after optimization."
+          }
+        }
+      },
+      "Diagnosis": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "enum": [
+              "TITLE",
+              "DESCRIPTION",
+              "IMAGE",
+              "ATTRIBUTE",
+              "SIZE_CHART"
+            ],
+            "x-enum-descriptions": [
+              "Product title",
+              "Product description",
+              "Product image displayed in the image gallery",
+              "Product attribute",
+              "Product size chart"
+            ],
+            "description": "The product field being diagnosed.\nPossible values:\n- TITLE: Product title\n- DESCRIPTION: Product description\n- IMAGE: Product image displayed in the image gallery\n- ATTRIBUTE: Product attribute\n- SIZE_CHART: Product size chart"
+          },
+          "diagnosis_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiagnosisResult"
+            },
+            "description": "The results of diagnosing the specified field."
+          },
+          "suggestion": {
+            "$ref": "#/components/schemas/Suggestion",
+            "description": "Optimization suggestions that are auto-generated by the system to improve the effectiveness of the specified field.\n\n**Note**: This will not be returned if the value for `optimization_fields` is blank or `NONE`."
           }
         }
       },
@@ -53791,6 +54039,61 @@
           }
         }
       },
+      "EditSizeChartV2Request": {
+        "type": "object",
+        "properties": {
+          "size_chart_data": {
+            "$ref": "#/components/schemas/CreateSizeChartV2RequestSizeChartData",
+            "description": "Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata."
+          },
+          "size_chart_id": {
+            "type": "string",
+            "description": "The ID of the seller-owned reusable size chart template to update."
+          },
+          "template_name": {
+            "type": "string",
+            "description": "The new name of the size chart template. If omitted, the current name remains unchanged."
+          }
+        },
+        "required": [
+          "size_chart_data",
+          "size_chart_id"
+        ]
+      },
+      "EditSizeChartV2Response": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/EditSizeChartV2ResponseData"
+          }
+        }
+      },
+      "EditSizeChartV2ResponseData": {
+        "type": "object",
+        "properties": {
+          "size_chart_id": {
+            "type": "string",
+            "description": "The ID of the updated size chart. This is the same ID provided in `size_chart_id`."
+          }
+        }
+      },
+      "EndSessionRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "EndSessionResponse": {
         "type": "object",
         "properties": {
@@ -54347,6 +54650,10 @@
           }
         }
       },
+      "GenerateAffiliateProductPromotionLinkRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "GenerateAffiliateProductPromotionLinkResponse": {
         "type": "object",
         "properties": {
@@ -54660,6 +54967,10 @@
             "description": "A product promotion one-link that opens the corresponding TikTok Shop product detail page. Agencies can share this link with collaborated creators, and creators can copy/paste it into a web browser (or share it to users).\nIf a user places an order via this link, the resulting e-commerce order will carry these parameter values for tracking.\nIf the user does not have TikTok installed on their phone, they will be redirected to the app store to install TikTok."
           }
         }
+      },
+      "GenerateTargetCollaborationLinkRequest": {
+        "type": "object",
+        "properties": {}
       },
       "GenerateTargetCollaborationLinkResponse": {
         "type": "object",
@@ -55325,10 +55636,15 @@
           },
           "published_date": {
             "type": "string",
+            "format": "date",
             "description": "When content_type == VIDEO, this is the date when the video was published; when content_type == LIVE_ROOM, this is the date when the live started. The value is in YYYY_MM_DD format."
           },
           "content_end_date": {
-            "type": "string",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
             "description": "When content_type == VIDEO, this field is None; when content_type == LIVE_ROOM, this is the date when the live ended. The value is in YYYY_MM_DD format."
           }
         }
@@ -60324,13 +60640,13 @@
           "warehouses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehous"
+              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehouse"
             },
             "description": "A list of Fulfilled by TikTok warehouses information."
           }
         }
       },
-      "GetFBTWarehouseListResponseDataWarehous": {
+      "GetFBTWarehouseListResponseDataWarehouse": {
         "type": "object",
         "properties": {
           "fbt_warehouse_id": {
@@ -60367,20 +60683,20 @@
           "addresses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehousAddress"
+              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehouseAddress"
             },
             "description": "A list of addresses used to receive inbound shipments at the Fulfilled by TikTok warehouse."
           },
           "logistics_services": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehousLogisticsService"
+              "$ref": "#/components/schemas/GetFBTWarehouseListResponseDataWarehouseLogisticsService"
             },
             "description": "A list of logistics service information related to the current warehouse."
           }
         }
       },
-      "GetFBTWarehouseListResponseDataWarehousAddress": {
+      "GetFBTWarehouseListResponseDataWarehouseAddress": {
         "type": "object",
         "properties": {
           "postal_code": {
@@ -60417,7 +60733,7 @@
           }
         }
       },
-      "GetFBTWarehouseListResponseDataWarehousLogisticsService": {
+      "GetFBTWarehouseListResponseDataWarehouseLogisticsService": {
         "type": "object",
         "properties": {
           "id": {
@@ -61248,13 +61564,13 @@
           "associated_warehouses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehous"
+              "$ref": "#/components/schemas/GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse"
             },
             "description": "A list of associated warehouses whose inventory is shared with or dynamically allocated from this warehouse. Each item identifies a warehouse and its region.\n**Note**: Applicable only when `allocation_mode` is `SHARED` or `DYNAMIC`."
           }
         }
       },
-      "GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehous": {
+      "GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse": {
         "type": "object",
         "properties": {
           "warehouse_id": {
@@ -62000,13 +62316,13 @@
           "global_warehouses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetGlobalSellerWarehousesResponseDataGlobalWarehous"
+              "$ref": "#/components/schemas/GetGlobalSellerWarehousesResponseDataGlobalWarehouse"
             },
             "description": "A list of global warehouses associated with the seller."
           }
         }
       },
-      "GetGlobalSellerWarehousesResponseDataGlobalWarehous": {
+      "GetGlobalSellerWarehousesResponseDataGlobalWarehouse": {
         "type": "object",
         "properties": {
           "id": {
@@ -64146,6 +64462,10 @@
             "description": "The product image url."
           }
         }
+      },
+      "GetOpenCollaborationProductListByProductIdsRequest": {
+        "type": "object",
+        "properties": {}
       },
       "GetOpenCollaborationProductListByProductIdsResponse": {
         "type": "object",
@@ -67664,7 +67984,7 @@
           "diagnoses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Diagnos"
+              "$ref": "#/components/schemas/Diagnosis"
             },
             "description": "Product diagnosis and optimization information."
           }
@@ -70240,13 +70560,13 @@
           "analyses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetSPSMetricDiagnosisResponseDataAnalys"
+              "$ref": "#/components/schemas/GetSPSMetricDiagnosisResponseDataAnalysis"
             },
             "description": "Diagnostic insights for the selected metric."
           }
         }
       },
-      "GetSPSMetricDiagnosisResponseDataAnalys": {
+      "GetSPSMetricDiagnosisResponseDataAnalysis": {
         "type": "object",
         "properties": {
           "summaries": {
@@ -75557,6 +75877,7 @@
         "properties": {
           "end_date": {
             "type": "string",
+            "format": "date",
             "description": "End date of the interval, exclusive."
           },
           "sales": {
@@ -75565,6 +75886,7 @@
           },
           "start_date": {
             "type": "string",
+            "format": "date",
             "description": "Start date of the interval, inclusive."
           },
           "traffic": {
@@ -78783,13 +79105,13 @@
           "warehouses": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehous"
+              "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehouse"
             },
             "description": "Warehouses returned for the seller. This field is omitted when the result contains no warehouse."
           }
         }
       },
-      "GetWarehouseListResponseDataWarehous": {
+      "GetWarehouseListResponseDataWarehouse": {
         "type": "object",
         "properties": {
           "id": {
@@ -78849,12 +79171,12 @@
             "description": "The default warehouse.  If a product is listed with no designated warehouse, the default warehouse will be used."
           },
           "address": {
-            "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehousAddress",
+            "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehouseAddress",
             "description": "Warehouse address."
           }
         }
       },
-      "GetWarehouseListResponseDataWarehousAddress": {
+      "GetWarehouseListResponseDataWarehouseAddress": {
         "type": "object",
         "properties": {
           "region": {
@@ -78930,12 +79252,12 @@
             "description": "This represents supplement information, like flat, apartment, or suit (optional).\nNote: Available only in the Brazilian market."
           },
           "geolocation": {
-            "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehousAddressGeolocation",
+            "$ref": "#/components/schemas/GetWarehouseListResponseDataWarehouseAddressGeolocation",
             "description": "The geographical location of the address."
           }
         }
       },
-      "GetWarehouseListResponseDataWarehousAddressGeolocation": {
+      "GetWarehouseListResponseDataWarehouseAddressGeolocation": {
         "type": "object",
         "properties": {
           "latitude": {
@@ -80059,6 +80381,7 @@
           },
           "occurred_at": {
             "type": "string",
+            "format": "date-time",
             "description": "The UTC time of the individual change."
           },
           "total_quantity_delta": {
@@ -81287,6 +81610,10 @@
             "description": "list of product data"
           }
         }
+      },
+      "MarkBuyerMessagesAsReadRequest": {
+        "type": "object",
+        "properties": {}
       },
       "MarkBuyerMessagesAsReadResponse": {
         "type": "object",
@@ -84980,6 +85307,10 @@
           "enable"
         ]
       },
+      "PublishAffiliatePartnerCampaignRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "PublishAffiliatePartnerCampaignResponse": {
         "type": "object",
         "properties": {
@@ -86991,6 +87322,10 @@
         "type": "object",
         "properties": {}
       },
+      "RemoveOpenCollaborationRequest": {
+        "type": "object",
+        "properties": {}
+      },
       "RemoveOpenCollaborationResponse": {
         "type": "object",
         "properties": {
@@ -87165,6 +87500,10 @@
             "description": "Every request generates a unique request_id for logging purposes."
           }
         }
+      },
+      "RemoveTargetCollaborationRequest": {
+        "type": "object",
+        "properties": {}
       },
       "RemoveTargetCollaborationResponse": {
         "type": "object",
@@ -88099,6 +88438,21 @@
             "description": "Lists errors for partially failed requests. For example, if a request reviews multiple orders or items and only some fail, individual error details are returned here.\n\n**IMPORTANT**: Partial failures still return a top-level success code (0), so clients must also check this field to detect partial errors. For complete failures (e.g. validation errors), the top-level response code and message will indicate a failure, but this field will remain empty."
           }
         }
+      },
+      "Row": {
+        "type": "object",
+        "properties": {
+          "cells": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cell"
+            },
+            "description": "Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header."
+          }
+        },
+        "required": [
+          "cells"
+        ]
       },
       "SKUStatusChangeWebhook": {
         "type": "object",
@@ -92479,6 +92833,10 @@
             "description": "The product's original price"
           }
         }
+      },
+      "SearchOrdersByExternalOrderReferenceRequest": {
+        "type": "object",
+        "properties": {}
       },
       "SearchOrdersByExternalOrderReferenceResponse": {
         "type": "object",
@@ -98624,7 +98982,7 @@
           "images": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DiagnoseAndOptimizeProductResponseDataDiagnosSuggestionImage"
+              "$ref": "#/components/schemas/DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage"
             },
             "description": "The optimized main image. Only the first image in the main image set will be optimized."
           }
@@ -98655,7 +99013,7 @@
           "rows": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TableRow"
+              "$ref": "#/components/schemas/Row"
             },
             "description": "Rows of the size chart. Provide 1 to 45 rows."
           }
@@ -98663,34 +99021,6 @@
         "required": [
           "headers",
           "rows"
-        ]
-      },
-      "TableRow": {
-        "type": "object",
-        "properties": {
-          "cells": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TableRowCell"
-            },
-            "description": "Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header."
-          }
-        },
-        "required": [
-          "cells"
-        ]
-      },
-      "TableRowCell": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "maxLength": 32,
-            "description": "Cell value. Maximum length: 32 characters."
-          }
-        },
-        "required": [
-          "value"
         ]
       },
       "TargetCollaborationConflict": {
@@ -100964,6 +101294,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB."
           }
@@ -101129,6 +101460,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB. Zero-byte files are rejected."
           }
@@ -101182,6 +101514,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB."
           }
@@ -101235,6 +101568,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The local file to be uploaded.\n\n**Note**:\n- Supported formats: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG\n- Zero-byte files are rejected.\n- Max PDF size: 20 MB\n- Max video size: 100 MB\n- Video aspect ratio: 9:16 to 16:9\n\n**Recommendations for product videos**:\n- Aspect ratio: 1:1\n- Resolution: HD 720p or higher\n- Duration: 20 - 60 seconds"
           },
@@ -101307,6 +101641,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The local image file to be uploaded.\n\n**Note**:\n- Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP\n- Zero-byte files are rejected.\n- Max size: 10MB\n- Dimensions: [100x100 px, 20000x20000 px]\n- For `use_case=MAIN_IMAGE`, the dimensions must be between 300x300 px and 4000x4000 px.\n- For `use_case=SIZE_CHART_IMAGE`, the dimension must be at least 1024 px on the shorter side."
           },
@@ -101396,6 +101731,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "PDF file data to be uploaded to TikTok Shop. \nPrerequisites：\n- Only `PDF` file format is supported.\n- Original file size must not exceed 10MB."
           },
@@ -101448,6 +101784,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The image file to upload as binary data in this multipart/form-data field.\n\nRequirements:\n- Format: `JPG`, `JPEG`, or `PNG`.\n- Resolution: between 100 x 100 and 20,000 x 20,000 pixels.\n- File size: no more than 5 MB."
           }
@@ -101501,11 +101838,13 @@
         "properties": {
           "return_shipping_label": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "Return shipping label."
           },
           "return_qr_code": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "Return QR code."
           },
@@ -101553,6 +101892,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The local image file to upload.\n\nRequirements:\n- Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP\n- Zero-byte files are rejected.\n- Maximum file size: 10 MiB (10,485,760 bytes).\n- Aspect ratio: 9:16 to 16:9"
           }
@@ -101605,6 +101945,7 @@
         "properties": {
           "data": {
             "type": "string",
+            "format": "binary",
             "contentMediaType": "application/octet-stream",
             "description": "The local file to be uploaded.\nNote：\n- For files larger than 10 MB, use the [Large File Uploads](https://partner.tiktokshop.com/docv2/page/wfi3nz36).\n- Supported formats: MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG\n- Max video size: 10 MB\n- Video aspect ratio: 9:16 to 16:9\nRecommendations for product videos:\n- Resolution: 720p or higher\n- Duration: > 30 seconds"
           }
@@ -101950,56 +102291,7 @@
           {
             "$ref": "#/components/schemas/VideoPrecheckResultWebhook"
           }
-        ],
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "1": "#/components/schemas/OrderStatusChangeWebhook",
-            "3": "#/components/schemas/RecipientAddressUpdateWebhook",
-            "4": "#/components/schemas/PackageUpdateWebhook",
-            "5": "#/components/schemas/ProductStatusChangeWebhook",
-            "6": "#/components/schemas/SellerDeauthorizationWebhook",
-            "7": "#/components/schemas/UpcomingAuthorizationExpirationWebhook",
-            "11": "#/components/schemas/CancellationStatusChangeWebhook",
-            "12": "#/components/schemas/ReturnStatusChangeWebhook",
-            "13": "#/components/schemas/NewConversationWebhook",
-            "14": "#/components/schemas/NewMessageWebhook",
-            "15": "#/components/schemas/ProductInformationChangeWebhook",
-            "16": "#/components/schemas/ProductCreationWebhook",
-            "17": "#/components/schemas/ShoppableContentPostingWebhook",
-            "18": "#/components/schemas/ProductCategoryChangeWebhook",
-            "19": "#/components/schemas/SizeChartChangeWebhook",
-            "20": "#/components/schemas/CreatorDeauthorizationWebhook",
-            "21": "#/components/schemas/InboundFBTOrderStatusChangeWebhook",
-            "22": "#/components/schemas/FBTMerchantOnboardingWebhook",
-            "23": "#/components/schemas/GoodsMatchWebhook",
-            "24": "#/components/schemas/FBTInventoryUpdateWebhook",
-            "25": "#/components/schemas/OpportunityMatchingStatusChangeWebhook",
-            "27": "#/components/schemas/InventoryStatusChangeWebhook",
-            "33": "#/components/schemas/NewMessageListenerWebhook",
-            "35": "#/components/schemas/TokopediaMirrorStatusChangeWebhook",
-            "36": "#/components/schemas/InvoiceStatusChangeWebhook",
-            "37": "#/components/schemas/ProductAuditStatusChangeWebhook",
-            "38": "#/components/schemas/StrikethroughPriceExpiredWebhook",
-            "39": "#/components/schemas/ActivityStatusChangeWebhook",
-            "42": "#/components/schemas/CombinedListingChangeWebhook",
-            "46": "#/components/schemas/ImageTranslationCompletedWebhook",
-            "50": "#/components/schemas/SKUStatusChangeWebhook",
-            "51": "#/components/schemas/GlobalReplicationStatusChangeWebhook",
-            "52": "#/components/schemas/GlobalListingMethodChangeWebhook",
-            "55": "#/components/schemas/VideoPrecheckResultWebhook",
-            "56": "#/components/schemas/SampleApplicationStatusChangeWebhook",
-            "58": "#/components/schemas/GetFBTMCFOrderStatusWebhook",
-            "59": "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhook",
-            "62": "#/components/schemas/ProductPackageRecommendedWebhook",
-            "63": "#/components/schemas/ActivityChangeWebhook",
-            "64": "#/components/schemas/AftersalesRequestStatusUpdateWebhook",
-            "65": "#/components/schemas/RMAStatusUpdateWebhook",
-            "66": "#/components/schemas/AppealCompletedWebhook",
-            "67": "#/components/schemas/RefundSuccessWebhook",
-            "71": "#/components/schemas/InventoryChangedByShopWebhook"
-          }
-        }
+        ]
       },
       "Weight": {
         "type": "object",

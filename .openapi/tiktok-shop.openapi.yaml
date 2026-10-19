@@ -1148,6 +1148,12 @@ paths:
             type: array
             items:
               type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetOpenCollaborationProductListByProductIdsRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -1273,8 +1279,7 @@ paths:
                       price:
                         amount: "56.00"
                         currency: USD
-                      added_status: |
-                        ADDABLE
+                      added_status: ADDABLE
                       brand_name: Apple
                       images:
                         - url: https://p19-pu-sign-useast8.tiktokcdn-us.com/tos-useast5-avt-0068-tx/982dd6b4e46a6a24203b00611a474cca~c5_1080x1080.webp
@@ -2357,6 +2362,12 @@ paths:
           description: The partner identifier used in API requests. Retrieve this value by using the [Get Authorized Category Assets API](https://partner.tiktokshop.com/docv2/page/666012dd609d4402cc3be995).
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PublishAffiliatePartnerCampaignRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -2498,10 +2509,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GenerateCampaignProductPromotionLinksInBatchRequest"
-            example:
-              product_ids:
-                - 7362840009596340000
-                - 7362840009596340000
       responses:
         "200":
           description: Success
@@ -2509,16 +2516,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GenerateCampaignProductPromotionLinksInBatchResponse"
-              example:
-                code: 0
-                data:
-                  product_promotion_links:
-                    - product_id: "7362840009596339971"
-                      link: https://affiliate.tiktok.com/api/v1/share/AIxvOHlaJoKO
-                  failed_product_ids:
-                    - 7362840009596340000
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
       x-tts-scenario: 6
       x-tts-scopes:
         - Read Affiliate Partner Campaigns
@@ -3217,6 +3214,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateAffiliateProductPromotionLinkRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -3286,6 +3289,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveOpenCollaborationRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -3380,6 +3389,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveTargetCollaborationRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -3869,9 +3884,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/MarkConversationsAsReadRequest"
-            example:
-              conversation_ids:
-                - 576486316948490000
       responses:
         "200":
           description: Success
@@ -4722,6 +4734,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GenerateTargetCollaborationLinkRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -8126,41 +8144,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetSPSMetricDiagnosisResponse"
-              example:
-                code: 0
-                data:
-                  benchmarks:
-                    excellent_threshold: "0.98"
-                    poor_threshold: "0.80"
-                  calculation_rule:
-                    denominator_label: Delivered orders
-                    denominator_value: "1000"
-                    numerator_label: On-time delivered orders
-                    numerator_value: "947"
-                  dimension: Product satisfaction
-                  distribution_details:
-                    - count: 820
-                      name: Dispatch 24-48 Hours
-                      percent: "82.0"
-                  evaluate_duration_days: 30
-                  end_evaluation_time: 1761264000
-                  start_evaluation_time: 1758672000
-                  metric_code: OTDR
-                  score: "4.3"
-                  status: GOOD
-                  status_text: Excellent
-                  trend:
-                    data_points:
-                      - record_date: "20260601"
-                        value: "0.947"
-                  value: "0.947"
-                  value_unit: PERCENT
-                  analyses:
-                    - summaries:
-                        - Stable performance. Top 3 issues to address.
-                      details: Your 30-day on-time delivery rate is only higher than **% of peers, which is hurting your SPS.
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
       x-tts-scopes:
@@ -9364,15 +9347,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateEngagementTaskRequest"
-            example:
-              template_id: 50002_20011
-              task_name: Task1 for mega sale
-              end_time: 1744344885
-              channel: TIKTOK_IM
-              product_ids:
-                - 8646958016719848000
-              coupon_ids:
-                - 8646958016719848000
       responses:
         "200":
           description: Success
@@ -9513,9 +9487,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GetEngagementTaskPerformancesRequest"
-            example:
-              task_ids:
-                - 8646958016719848000
       responses:
         "200":
           description: Success
@@ -9567,18 +9538,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CreateCustomEngagementTaskRequest"
-            example:
-              task_name: |
-                Task1 for mega sale
-              end_time: 1744344885
-              channel: TIKTOK_IM
-              product_ids:
-                - 8646958016719848000
-              coupon_ids:
-                - 8646958016219849000
-              custom_message:
-                title: Meet your next favorite thing!
-                body: Check out our newest drop to find your perfect fit.
       responses:
         "200":
           description: Success
@@ -10084,6 +10043,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MarkBuyerMessagesAsReadRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -10372,6 +10337,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EndSessionRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -11853,8 +11824,7 @@ paths:
                         aerosol_extra_info:
                           volume: "1"
                           volume_unit: MILLILITER
-                        dg_class: |
-                          CLASS_2
+                        dg_class: CLASS_2
                         dg_uncode: UN1266
                         msds_file_url: https://example.com/fbt/msds-report.pdf
                       sioc_approval_status: SIOC_APPROVAL_STATUS_APPROVE
@@ -16164,6 +16134,12 @@ paths:
           description: Order ID in your OMS.
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchOrdersByExternalOrderReferenceRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -16392,8 +16368,7 @@ paths:
                       seller_funded_shipping_promotions:
                         - activity_id: "7136104329798256386"
                           discount_amount: "2.25"
-                          discount_type: |
-                            COUPON
+                          discount_type: COUPON
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
@@ -16518,8 +16493,7 @@ paths:
                       delivery_option_id: "7091146663229654785"
                       delivery_sla_time: 1678389618
                       payment_method_name: CCDC
-                      payment_card_type: |
-                        Debit
+                      payment_card_type: Debit
                       channel_entity_national_registry_id: 26.545.167/0001-21
                       payment_method_code: pm_pi_ccdc_visa_c_d
                       payment_auth_code: AUTH123457
@@ -17353,51 +17327,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetCategoryAttributesResponse"
-              example:
-                code: 0
-                data:
-                  attributes:
-                    - id: "100392"
-                      name: Occasion
-                      type: PRODUCT_PROPERTY
-                      is_requried: false
-                      values:
-                        - id: "1001533"
-                          name: Birthday
-                          icon_url: https://p16-oec-sg.ibyteimg.com/tos-alisg-i-aphluv4xwc-sg/37a9d5d39c27480d9870f73a2ad7cc95~tplv-aphluv4xwc-origin-jpeg.jpeg?dr=11254&from=3455097676&height=956&idc=no1a&ps=933b5bde&shcp=9b759fb9&shp=cdf09b4c&t=555f072d&width=1000
-                      value_data_format: POSITIVE_INT_OR_DECIMAL
-                      is_customizable: true
-                      requirement_conditions:
-                        - condition_type: VALUE_ID_MATCH
-                          attribute_id: "101610"
-                          attribute_value_id: "1024358"
-                      is_multiple_selection: true
-                      metric_standards:
-                        - id: "7678592839487784712"
-                          name: prefix+num+units+suffix
-                          metric_value_modules:
-                            - id: "7678592839487735560"
-                              name: prefix+num
-                              input_type: CUSTOMIZED
-                              data_types: POSITIVE_INTEGER
-                              default_values:
-                                - id: "7678592839487735560"
-                                  name: "2026"
-                              units:
-                                - id: "7678592839484720903"
-                                  name: piece
-                              value_limit:
-                                num_limit:
-                                  min_value: 1000
-                                  max_value: 1
-                                length_limit:
-                                  min_length: 10
-                                  max_length: 1
-                              prefix: daily
-                              suffix: and
-                              shading_word: number2
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
       x-tts-scopes:
@@ -19515,8 +19444,7 @@ paths:
                   seller_sku: Color-Red-XM001
                   price:
                     amount: "1.21"
-                    currency: |
-                      USD
+                    currency: USD
                     sale_price: "1.21"
                     starting_bid_price: "2.22"
                   external_sku_id: "1729592969712207012"
@@ -21905,6 +21833,12 @@ paths:
         - Products
       parameters:
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCategoryUpgradeTaskRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -25156,6 +25090,12 @@ paths:
       description: This interface is only available for EU L2L sellers. The interface is used to upgrade products on EU interconnection. After the upgrade, products can be managed using the new interface, but not using interfaces related to Global Product.
       tags:
         - Products
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateGPAUpgradeTaskRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -25799,6 +25739,113 @@ paths:
       x-tts-scopes: []
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/submit-strikethrough-price-202609
+  /product/202610/size_charts:
+    post:
+      operationId: createSizeChartV2
+      summary: Create Size Chart V2
+      description: Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID. The request must identify one authorized shop using shop_cipher.
+      tags:
+        - Products
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSizeChartV2Request"
+            example:
+              category_id: "601739"
+              size_chart_data:
+                description: Use body measurements.
+                is_one_size: false
+                measurement_type: BODY_MEASUREMENTS
+                size_types:
+                  - size_chart_size_type_regular
+                table:
+                  headers:
+                    - id: size_chart_size_system_size
+                      name: Size
+                    - id: size_chart_option_bust
+                      name: Bust
+                  rows:
+                    - cells:
+                        - value: M
+                        - value: "90"
+                unit_system: METRIC
+              size_chart_mode: REUSABLE_TEMPLATE
+              template_name: Women's Tops Size Chart
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateSizeChartV2Response"
+              example:
+                code: 0
+                data:
+                  size_chart_id: "7612345678901234567"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/create-size-chart-v2-202610
+  /product/202610/size_charts/edit:
+    post:
+      operationId: editSizeChartV2
+      summary: Edit Size Chart V2
+      description: Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name. The request must identify one authorized shop using shop_cipher.
+      tags:
+        - Products
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EditSizeChartV2Request"
+            example:
+              size_chart_data:
+                description: Use body measurements.
+                is_one_size: false
+                measurement_type: BODY_MEASUREMENTS
+                size_types:
+                  - size_chart_size_type_regular
+                table:
+                  headers:
+                    - id: size_chart_size_system_size
+                      name: Size
+                    - id: size_chart_option_bust
+                      name: Bust
+                  rows:
+                    - cells:
+                        - value: M
+                        - value: "90"
+                unit_system: METRIC
+              size_chart_id: "7612345678901234567"
+              template_name: Women's Tops
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EditSizeChartV2Response"
+              example:
+                code: 0
+                data:
+                  size_chart_id: "12345"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/edit-size-chart-v2-202610
   /promotion/202309/activities:
     post:
       operationId: createPromotionActivity
@@ -26355,6 +26402,12 @@ paths:
           schema:
             type: string
         - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeactivateActivityRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -26751,8 +26804,7 @@ paths:
                         end_time: 1709754340
                         relative_time: 4
                       promo_code: TTS12345
-                      target_buyer_segment: |
-                        NEW
+                      target_buyer_segment: NEW
                       usage_limits:
                         single_buyer_claim_limit: 30
                         total_claim_limit: 1000
@@ -26834,8 +26886,7 @@ paths:
                     display_channels:
                       - SHOPPING_CENTER
                     promo_code: TTS12345
-                    target_buyer_segment: |
-                      NEW
+                    target_buyer_segment: NEW
                     usage_limits:
                       single_buyer_claim_limit: 30
                       total_claim_limit: 1000
@@ -26949,6 +27000,12 @@ paths:
           schema:
             type: string
             maxLength: 255
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApproveCancellationRequest"
+            example: {}
       responses:
         "200":
           description: Success
@@ -27716,24 +27773,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetAftersaleEligibilityResponse"
-              example:
-                code: 0
-                data:
-                  sku_eligibility:
-                    - sku_id: "1729385144994206632"
-                      line_item_eligibility:
-                        - request_type: REFUND
-                          order_line_items_ids:
-                            - "576469648086306000"
-                          eligible: true
-                          ineligible_code: 25001001
-                          ineligible_reason: invalid order status
-                          available_reason_names: available reason names
-                          order_line_list:
-                            - order_line_item_id: "576469648086306986"
-                              sub_order_line_item_id: "576469648086306987"
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
       x-tts-scopes:
@@ -29021,6 +29060,7 @@ paths:
 webhooks:
   activity_change:
     post:
+      operationId: activityChangeWebhook
       summary: (63) Activity change
       description: The Activity change webhook is designed to notify partners about modifications related to  activities and the products associated with them. This allows applications to stay synchronized with changes in activity details or product inclusion/exclusion lists.
       requestBody:
@@ -29062,6 +29102,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/x6legjl9
   activity_status_change:
     post:
+      operationId: activityStatusChangeWebhook
       summary: (39) Activity status change
       description: |-
         When a promotion activity of the specified type starts, expires, or is deactivated, you'll receive this webhook.
@@ -29104,6 +29145,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/39-activity-status-change
   aftersales_request_status_update:
     post:
+      operationId: aftersalesRequestStatusUpdateWebhook
       summary: (64) Aftersales Request Status Update
       description: |-
         The **Aftersales Request Status Update** webhook is triggered in two scenarios:
@@ -29139,6 +29181,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/h4cxaxub
   appeal_completed:
     post:
+      operationId: appealCompletedWebhook
       summary: (66) Appeal Completed
       description: This webhook is triggered when a size chart verification appeal is approved or rejected.
       requestBody:
@@ -29156,6 +29199,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/ohw7toic
   cancellation_status_change:
     post:
+      operationId: cancellationStatusChangeWebhook
       summary: (11) Cancellation status change
       description: |-
         The **cancellation status change** webhook is triggered when the `cancel_status` of an order changes:
@@ -29187,9 +29231,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 11
+      x-tts-event-type: CANCELLATION_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/11-cancellation-status-change
   combined_listing_change:
     post:
+      operationId: combinedListingChangeWebhook
       summary: (42) Combined listing change
       description: |-
         This webhook is triggered when a combined listing is created, updated (the list of products in the combined listing changes), or deleted.
@@ -29225,6 +29271,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/42-combined-listing-change
   creator_deauthorization:
     post:
+      operationId: creatorDeauthorizationWebhook
       summary: (20) Creator deauthorization
       description: When a creator completely removes the App's access to his/her data.
       requestBody:
@@ -29233,13 +29280,6 @@ webhooks:
           application/json:
             schema:
               $ref: "#/components/schemas/CreatorDeauthorizationWebhook"
-            example:
-              type: 20
-              creator_open_id: VIyStQAAAADCBQ40s4TzOSSOEIW-bM5O9cod3vK8OytW8m-bnBYlXw
-              tts_notification_id: "7327112393057371910"
-              timestamp: 1644412885
-              data:
-                cancel_time: 1644412885
       security:
         - webhookSignature: []
       responses:
@@ -29249,6 +29289,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/20-creator-deauthorization
   fbt_inventory_update:
     post:
+      operationId: fbtInventoryUpdateWebhook
       summary: (24) FBT inventory update
       description: |-
         This webhook is triggered when the FBT inventory updates.
@@ -29283,6 +29324,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/24-fbt-inventory-update
   fbt_merchant_onboarding:
     post:
+      operationId: fbtMerchantOnboardingWebhook
       summary: (22) FBT merchant onboarding
       description: |-
         This webhook is triggered when the TikTok Shop seller onboards FBT platform to enable FBT service.
@@ -29311,6 +29353,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/22-fbt-merchant-onboarding
   get_fbt_mcf_order_status:
     post:
+      operationId: getFBTMCFOrderStatusWebhook
       summary: (58) Get FBT MCF Order Status
       description: |-
         This webhook is triggered when the FBT multi-channel-fulfillment order status has changed/updated.
@@ -29321,24 +29364,6 @@ webhooks:
           application/json:
             schema:
               $ref: "#/components/schemas/GetFBTMCFOrderStatusWebhook"
-            example:
-              type: 58
-              creator_open_id: VIyStQAAAADCBQ40s4TzOSSOEIW-bM5O9cod3vK8OytW8m-bnBYlXw
-              tts_notification_id: "7327112393057371910"
-              timestamp: 1644412885
-              data:
-                mcf_order:
-                  external_order_id: shopify202208291503530001100220033
-                  mcf_order_id: "7136104329798256386"
-                  consign_orders:
-                    id: OBF12345678
-                    tracking_number: TN87654321
-                    carrier: USPS
-                    status: processing
-                    goods:
-                      id: "1231231"
-                      quantity: 1
-                  create_time: 1661756811
       security:
         - webhookSignature: []
       responses:
@@ -29348,6 +29373,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/gqh1f39k
   global_listing_method_change:
     post:
+      operationId: globalListingMethodChangeWebhook
       summary: (52) Global listing method change
       description: |-
         This webhook is triggered when the global listing method for a shop changes.
@@ -29378,6 +29404,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/g2wnrb57
   global_replication_status_change:
     post:
+      operationId: globalReplicationStatusChangeWebhook
       summary: (51) Global replication status change
       description: |-
         This webhook is triggered when a product replication operation in another market is completed, regardless of success or failure. If the replication fails, the failure reason(s) will be included in the response.
@@ -29389,19 +29416,6 @@ webhooks:
           application/json:
             schema:
               $ref: "#/components/schemas/GlobalReplicationStatusChangeWebhook"
-            example:
-              type: 51
-              shop_id: "7494049642642441621"
-              tts_notification_id: "7327112393057371910"
-              timestamp: 1644412885
-              data:
-                source_product_id: 764c6e87eedcea90399a0dafcd572b71
-                replicated_product:
-                  product_id: "576486316948490000"
-                  region: GB
-                  result: SUCCESS
-                  fail_reasons:
-                    message: ""
       security:
         - webhookSignature: []
       responses:
@@ -29411,6 +29425,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/7nzxgima
   goods_match:
     post:
+      operationId: goodsMatchWebhook
       summary: (23) Goods match
       description: |-
         This webhook is triggered when the seller matches / unmatches the TikTok Shop product to the FBT Goods.
@@ -29442,6 +29457,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/23-goods-match
   image_translation_completed:
     post:
+      operationId: imageTranslationCompletedWebhook
       summary: (46) Image translation completed
       description: |-
         This webhook is triggered when an image translation is completed or failed.
@@ -29481,6 +29497,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/46-image-translation-completed
   inbound_fbt_order_status_change:
     post:
+      operationId: inboundFBTOrderStatusChangeWebhook
       summary: (21) Inbound FBT order status change
       description: |-
         This webhook is triggered when the status of an FBT inbound order changes.
@@ -29509,6 +29526,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/21-inbound-fbt-order-status-change
   inventory_changed_by_shop:
     post:
+      operationId: inventoryChangedByShopWebhook
       summary: (71) Inventory Changed By Shop
       description: |-
         This webhook is triggered when a SKU's inventory quantity changes in a shop. Each notification identifies the affected shop, product, and SKU, and includes an inventory snapshot after the change together with the individual change details.
@@ -29569,6 +29587,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/qk9yta93
   inventory_status_change:
     post:
+      operationId: inventoryStatusChangeWebhook
       summary: (27) Inventory status change
       description: |-
         This webhook will be triggered in either of the following situations:
@@ -29611,6 +29630,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/27-inventory-status-change
   invoice_status_change:
     post:
+      operationId: invoiceStatusChangeWebhook
       summary: (36) Invoice status change
       description: |-
         This webhook is triggered when the status of an invoice upload changes after using the [POST Upload Invoice](upload-invoice) endpoint.
@@ -29639,9 +29659,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 36
+      x-tts-event-type: INVOICE_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/36-invoice-status-change
   new_conversation:
     post:
+      operationId: newConversationWebhook
       summary: (13) New conversation
       description: |-
         This **new conversation** webhook is triggered when a customer service agent joins or leaves a conversation.
@@ -29666,9 +29688,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 13
+      x-tts-event-type: NEW_CONVERSATION
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/13-new-conversation
   new_message:
     post:
+      operationId: newMessageWebhook
       summary: (14) New message
       description: The **new message** webhook is triggered when a new message is sent in a customer service conversation.
       requestBody:
@@ -29699,9 +29723,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 14
+      x-tts-event-type: NEW_MESSAGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/14-new-message
   new_message_listener:
     post:
+      operationId: newMessageListenerWebhook
       summary: (33) New message listener
       description: When a creator sends a message to the seller.
       requestBody:
@@ -29730,9 +29756,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 33
+      x-tts-event-type: NEW_MESSAGE_LISTENER
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/33-new-message-listener
   opportunity_matching_status_change:
     post:
+      operationId: opportunityMatchingStatusChangeWebhook
       summary: (25) Opportunity matching status change
       description: |-
         This webhook is triggered when the status of opportunity matching for a candidate product changes.
@@ -29766,6 +29794,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/25-opportunity-matching-status-change
   order_status_change:
     post:
+      operationId: orderStatusChangeWebhook
       summary: (1) Order status change
       description: The **order status change** webhook is triggered when the `order_status` of an order changes.
       requestBody:
@@ -29790,9 +29819,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 1
+      x-tts-event-type: ORDER_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/1-order-status-change
   package_update:
     post:
+      operationId: packageUpdateWebhook
       summary: (4) Package update
       description: The **package update** webhook is triggered when package updates such as combine, split, cancel the combine package operation, etc. occur.
       requestBody:
@@ -29821,9 +29852,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 4
+      x-tts-event-type: PACKAGE_UPDATE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/4-package-update
   product_audit_status_change:
     post:
+      operationId: productAuditStatusChangeWebhook
       summary: (37) Product audit status change
       description: |-
         When the product audit status changes, you'll receive this webhook.
@@ -29855,9 +29888,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 37
+      x-tts-event-type: PRODUCT_AUDIT_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/37-product-audit-status-change
   product_category_change:
     post:
+      operationId: productCategoryChangeWebhook
       summary: (18) Product category change
       description: |-
         When the category of a product is changed, all apps authorized by the shop (using `shop_id`) receive this webhook. When you receive the webhook, you can get more detailed product information by using the [Get Product](get-product) API.
@@ -29884,9 +29919,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 18
+      x-tts-event-type: PRODUCT_CATEGORY_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/18-product-category-change
   product_creation:
     post:
+      operationId: productCreationWebhook
       summary: (16) Product creation
       description: Triggers a webhook message when a product is created
       requestBody:
@@ -29911,9 +29948,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 16
+      x-tts-event-type: PRODUCT_CREATION
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/16-product-creation
   product_information_change:
     post:
+      operationId: productInformationChangeWebhook
       summary: (15) Product information change
       description: |-
         This webhook is triggered when changes to a **live** product's properties take effect online.
@@ -29947,9 +29986,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 15
+      x-tts-event-type: PRODUCT_INFORMATION_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/15-product-information-change
   product_package_recommended:
     post:
+      operationId: productPackageRecommendedWebhook
       summary: (62) Product Package Recommended
       description: |-
         This webhook is triggered when a product package recommendation is generated.
@@ -29996,6 +30037,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/ve4gakno
   product_status_change:
     post:
+      operationId: productStatusChangeWebhook
       summary: (5) Product status change
       description: |-
         The **product status change** webhook triggers when a product audit status changes or is completed:
@@ -30025,9 +30067,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 5
+      x-tts-event-type: PRODUCT_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/5-product-status-change
   recipient_address_update:
     post:
+      operationId: recipientAddressUpdateWebhook
       summary: (3) Recipient address update
       description: The **recipient address update** webhook triggers when an order recipient's address is updated.
       requestBody:
@@ -30049,9 +30093,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 3
+      x-tts-event-type: RECIPIENT_ADDRESS_UPDATE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/3-recipient-address-update
   refund_success:
     post:
+      operationId: refundSuccessWebhook
       summary: (67) Refund Success
       description: Once a refund of an RMA is successfully completed.
       requestBody:
@@ -30096,6 +30142,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/8y10pibm
   return_status_change:
     post:
+      operationId: returnStatusChangeWebhook
       summary: (12) Return status change
       description: |-
         The **return status change** webhook is triggered when the `return_status` of an order changes:
@@ -30141,9 +30188,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 12
+      x-tts-event-type: RETURN_STATUS_CHANGE
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/12-return-status-change
   rma_status_update:
     post:
+      operationId: rmaStatusUpdateWebhook
       summary: (65) RMA Status Update
       description: |-
         The **RMA Status Update** webhook is triggered in the following scenarios:
@@ -30181,6 +30230,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/2f0jrrxc
   sample_application_status_change:
     post:
+      operationId: sampleApplicationStatusChangeWebhook
       summary: (56) Sample Application Status Change
       description: This webhook will trigger when the creator's sample application status changes.
       requestBody:
@@ -30189,19 +30239,6 @@ webhooks:
           application/json:
             schema:
               $ref: "#/components/schemas/SampleApplicationStatusChangeWebhook"
-            example:
-              type: 56
-              shop_id: "7494049642642441621"
-              tts_notification_id: "7327112393057371910"
-              timestamp: 1644412885
-              data:
-                application_id: "123456"
-                new_status: PENDING
-                creator:
-                  creator_open_id: uACafQAAAABmUU2qon4R0vUYvUVS3QC6CICP2m5A2-wd77j8R9G0yg
-                product:
-                  id: "1729859829942358814"
-                  sku_id: "1729859567502267166"
       security:
         - webhookSignature: []
       responses:
@@ -30211,6 +30248,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/urzvzank
   seller_deauthorization:
     post:
+      operationId: sellerDeauthorizationWebhook
       summary: (6) Seller deauthorization
       description: The **seller deauthorization** webhook is triggered after a seller is deauthorized. This is important to prevent developers from assuming there is an issue with the platform authorization function.
       requestBody:
@@ -30232,9 +30270,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 6
+      x-tts-event-type: SELLER_DEAUTHORIZATION
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/6-seller-deauthorization
   shoppable_content_posting:
     post:
+      operationId: shoppableContentPostingWebhook
       summary: (17) Shoppable content posting
       description: |-
         The shoppable content posting webhook is triggered when the creator adds, updates, or removes a product link in a video or livestream.
@@ -30265,6 +30305,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/17-shoppable-content-posting
   shoppable_video_precheck_tasks_result:
     post:
+      operationId: shoppableVideoPrecheckTasksResultWebhook
       summary: (59) Shoppable Video Precheck Tasks Result
       description: The Video Precheck Result webhook is triggered when the Precheck Video Content API is called, and provides the results of the video’s quality assessment and violation checks.
       requestBody:
@@ -30299,6 +30340,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/arpnre1g
   size_chart_change:
     post:
+      operationId: sizeChartChangeWebhook
       summary: (19) Size chart change
       description: |-
         This webhook is triggered when a product size chart is created, edited, or deleted.
@@ -30328,6 +30370,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/19-size-chart-change
   sku_status_change:
     post:
+      operationId: skuStatusChangeWebhook
       summary: (50) SKU status change
       description: |-
         This webhook is triggered when the SKU status of an existing product changes.
@@ -30345,20 +30388,6 @@ webhooks:
           application/json:
             schema:
               $ref: "#/components/schemas/SKUStatusChangeWebhook"
-            example:
-              type: TBD
-              tts_notification_id: "7327112393057371910"
-              shop_id: "7494049642642441621"
-              timestamp: 1644412885
-              data:
-                product_id: "123456789"
-                skus:
-                  - sku_id: "987654321"
-                    status: DEACTIVATED
-                    deactivation_source: SELLER
-                  - sku_id: "987654322"
-                    status: CREATED
-                update_time: 1627587600
       security:
         - webhookSignature: []
       responses:
@@ -30368,6 +30397,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/u94ho74u
   strikethrough_price_expired:
     post:
+      operationId: strikethroughPriceExpiredWebhook
       summary: (38) Strikethrough price expired
       description: |-
         This webhook will be triggered when the strikethrough pricing verification information expires, 90 days after submission.
@@ -30395,6 +30425,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/38-strikethrough-price-expired
   tokopedia_mirror_status_change:
     post:
+      operationId: tokopediaMirrorStatusChangeWebhook
       summary: (35) Tokopedia mirror status change
       description: |-
         This webhook is triggered when the TikTok Shop to Tokopedia mirroring process is completed or rolled back. Applicable only for the **Indonesia** market.
@@ -30424,6 +30455,7 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/35-tokopedia-mirror-status-change
   upcoming_authorization_expiration:
     post:
+      operationId: upcomingAuthorizationExpirationWebhook
       summary: (7) Upcoming authorization expiration
       description: The **upcoming authorization expiration** webhook is triggered 30 days before authorization automatically expires. This webhook continues to notify the seller once a day at 0:00 until re-authorization is completed.
       requestBody:
@@ -30446,9 +30478,11 @@ webhooks:
         "200":
           description: Return HTTP 200 to acknowledge receipt.
       x-tts-webhook-type: 7
+      x-tts-event-type: UPCOMING_AUTHORIZATION_EXPIRATION
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/7-upcoming-authorization-expiration
   video_precheck_result:
     post:
+      operationId: videoPrecheckResultWebhook
       summary: (55) Video Precheck Result
       description: The Video Precheck Result webhook is triggered when the Precheck Video Content API is called, and the results are surfaced to know if the video has any violations, or if it has passed inspection.
       requestBody:
@@ -31173,6 +31207,9 @@ components:
       required:
         - indicator_type
         - status
+    ApproveCancellationRequest:
+      type: object
+      properties: {}
     ApproveCancellationResponse:
       type: object
       properties:
@@ -32046,6 +32083,15 @@ components:
         parent_id:
           type: string
           description: The category id of its parent category
+    Cell:
+      type: object
+      properties:
+        value:
+          type: string
+          maxLength: 32
+          description: "Cell value. Maximum length: 32 characters."
+      required:
+        - value
     Certification:
       type: object
       properties:
@@ -32958,7 +33004,7 @@ components:
         diagnoses:
           type: array
           items:
-            $ref: "#/components/schemas/CheckProductListingResponseDataDiagnos"
+            $ref: "#/components/schemas/CheckProductListingResponseDataDiagnosis"
           description: |-
             (**Deprecated**: This field is deprecated and will be removed in a future API version. Use [Diagnose and Optimize Product](677c9523f7765c0308b3d68d) API instead to get product diagnosis related information.)
             Product optimization diagnosis information.
@@ -32968,7 +33014,7 @@ components:
           items:
             $ref: "#/components/schemas/CheckProductListingResponseDataPreCheckResult"
           description: Contains any completed product information verification findings available for the supplied `gne_async_check_session_id`. The response does not expose a separate pending or completed status. If this field is missing or empty, you cannot determine from the response whether the asynchronous checks have completed or passed.
-    CheckProductListingResponseDataDiagnos:
+    CheckProductListingResponseDataDiagnosis:
       type: object
       properties:
         field:
@@ -32999,9 +33045,9 @@ components:
             $ref: "#/components/schemas/DiagnosisResult"
           description: The diagnosis results.
         suggestions:
-          $ref: "#/components/schemas/CheckProductListingResponseDataDiagnosSuggestion"
+          $ref: "#/components/schemas/CheckProductListingResponseDataDiagnosisSuggestion"
           description: Improvement suggestions.
-    CheckProductListingResponseDataDiagnosSuggestion:
+    CheckProductListingResponseDataDiagnosisSuggestion:
       type: object
       properties:
         seo_words:
@@ -33017,9 +33063,9 @@ components:
         images:
           type: array
           items:
-            $ref: "#/components/schemas/CheckProductListingResponseDataDiagnosSuggestionImage"
+            $ref: "#/components/schemas/CheckProductListingResponseDataDiagnosisSuggestionImage"
           description: The optimized main image. Only the first image in the main image set will be optimized.
-    CheckProductListingResponseDataDiagnosSuggestionImage:
+    CheckProductListingResponseDataDiagnosisSuggestionImage:
       type: object
       properties:
         uri:
@@ -33880,6 +33926,9 @@ components:
         campaign_id:
           type: string
           description: The campaign identifier.
+    CreateCategoryUpgradeTaskRequest:
+      type: object
+      properties: {}
     CreateCategoryUpgradeTaskResponse:
       type: object
       properties:
@@ -34631,6 +34680,9 @@ components:
           items:
             $ref: "#/components/schemas/CreateFirstMileBundleResponseDataError"
           description: Errors associated with requested orders. An entry can indicate that the requested order could not be resolved, or that a package associated with the order could not be included in the bundle. Multiple errors may be returned, including when the top-level `code` is `0`.
+    CreateGPAUpgradeTaskRequest:
+      type: object
+      properties: {}
     CreateGPAUpgradeTaskResponse:
       type: object
       properties:
@@ -36726,6 +36778,130 @@ components:
         size_chart_id:
           type: string
           description: The ID of the created size chart. For REUSABLE_TEMPLATE mode, use this value as size_chart.template.id in subsequent product APIs. For PRODUCT_SCOPED mode, this ID identifies a size chart specific to a single product and cannot be reused as a template ID.
+    CreateSizeChartV2Request:
+      type: object
+      properties:
+        category_id:
+          type: string
+          description: The leaf category for which to create the size chart. The category must support size charts.
+        size_chart_data:
+          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartData"
+          description: Structured size chart content.
+        size_chart_mode:
+          type: string
+          description: |-
+            Possible values:
+            REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products.
+            PRODUCT_SCOPED: A size chart created for and used by a single product.
+        template_name:
+          type: string
+          description: |-
+            Template name. Required when size_chart_mode is REUSABLE_TEMPLATE.
+            When size_chart_mode is PRODUCT_SCOPED, any value provided for this field is discarded and is not stored.
+      required:
+        - category_id
+        - size_chart_data
+        - size_chart_mode
+    CreateSizeChartV2RequestSizeChartData:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Additional size chart description.
+        is_one_size:
+          type: boolean
+          description: Whether this is a one-size chart.
+        measurement_type:
+          type: string
+          enum:
+            - GENERIC_MEASUREMENTS
+            - BODY_MEASUREMENTS
+            - PRODUCT_MEASUREMENTS
+          x-enum-descriptions:
+            - generic measurements
+            - shopper body measurements
+            - finished-product measurements.
+          description: "Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements."
+        size_types:
+          type: array
+          items:
+            type: string
+          description: "Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category."
+        table:
+          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTable"
+          description: Table containing headers and rows.
+        unit_system:
+          type: string
+          enum:
+            - METRIC
+            - IMPERIAL
+          x-enum-descriptions:
+            - metric units
+            - imperial units.
+          description: "Possible values: METRIC: metric units; IMPERIAL: imperial units."
+      required:
+        - measurement_type
+        - table
+        - unit_system
+    CreateSizeChartV2RequestSizeChartDataTable:
+      type: object
+      properties:
+        headers:
+          type: array
+          items:
+            $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTableHeader"
+          description: Ordered header definitions. Provide 1 to 20 headers.
+        rows:
+          type: array
+          items:
+            $ref: "#/components/schemas/Row"
+          description: Rows of the size chart. Provide 1 to 45 rows.
+      required:
+        - headers
+        - rows
+    CreateSizeChartV2RequestSizeChartDataTableHeader:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |-
+            Standard size-system or measurement ID.
+            For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type.
+            For size-system columns, use the following predefined IDs:
+            - Size: size_chart_size_system_size
+            - US: size_chart_size_system_us
+            - UK: size_chart_size_system_uk
+            - EU: size_chart_size_system_eu
+            - JP: size_chart_size_system_jp
+            - MX: size_chart_size_system_mx
+            Omit this field for custom columns.
+        name:
+          type: string
+          maxLength: 32
+          description: "Header display name. Maximum length: 32 characters."
+      required:
+        - name
+    CreateSizeChartV2Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/CreateSizeChartV2ResponseData"
+    CreateSizeChartV2ResponseData:
+      type: object
+      properties:
+        size_chart_id:
+          type: string
+          description: The ID of the created size chart. For REUSABLE_TEMPLATE mode, use this value as size_chart.template.id in subsequent product APIs. For PRODUCT_SCOPED mode, this ID identifies a size chart specific to a single product and cannot be reused as a template ID.
     CreateTargetCollaborationRequest:
       type: object
       properties:
@@ -37089,6 +37265,9 @@ components:
           type: integer
           format: int64
           description: The time of the data points
+    DeactivateActivityRequest:
+      type: object
+      properties: {}
     DeactivateActivityResponse:
       type: object
       properties:
@@ -37349,42 +37528,6 @@ components:
         product_id:
           type: string
           description: The product identifier.
-    Diagnos:
-      type: object
-      properties:
-        field:
-          type: string
-          enum:
-            - TITLE
-            - DESCRIPTION
-            - IMAGE
-            - ATTRIBUTE
-            - SIZE_CHART
-          x-enum-descriptions:
-            - Product title
-            - Product description
-            - Product image displayed in the image gallery
-            - Product attribute
-            - Product size chart
-          description: |-
-            The product field being diagnosed.
-            Possible values:
-            - TITLE: Product title
-            - DESCRIPTION: Product description
-            - IMAGE: Product image displayed in the image gallery
-            - ATTRIBUTE: Product attribute
-            - SIZE_CHART: Product size chart
-        diagnosis_results:
-          type: array
-          items:
-            $ref: "#/components/schemas/DiagnosisResult"
-          description: The results of diagnosing the specified field.
-        suggestion:
-          $ref: "#/components/schemas/Suggestion"
-          description: |-
-            Optimization suggestions that are auto-generated by the system to improve the effectiveness of the specified field.
-
-            **Note**: This will not be returned if the value for `optimization_fields` is blank or `NONE`.
     DiagnoseAndOptimizeProductRequest:
       type: object
       properties:
@@ -37566,9 +37709,9 @@ components:
         diagnoses:
           type: array
           items:
-            $ref: "#/components/schemas/Diagnos"
+            $ref: "#/components/schemas/Diagnosis"
           description: Product diagnosis and optimization information.
-    DiagnoseAndOptimizeProductResponseDataDiagnosSuggestionImage:
+    DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage:
       type: object
       properties:
         height:
@@ -37591,6 +37734,42 @@ components:
         optimized_url:
           type: string
           description: The URL of the image after optimization.
+    Diagnosis:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+            - TITLE
+            - DESCRIPTION
+            - IMAGE
+            - ATTRIBUTE
+            - SIZE_CHART
+          x-enum-descriptions:
+            - Product title
+            - Product description
+            - Product image displayed in the image gallery
+            - Product attribute
+            - Product size chart
+          description: |-
+            The product field being diagnosed.
+            Possible values:
+            - TITLE: Product title
+            - DESCRIPTION: Product description
+            - IMAGE: Product image displayed in the image gallery
+            - ATTRIBUTE: Product attribute
+            - SIZE_CHART: Product size chart
+        diagnosis_results:
+          type: array
+          items:
+            $ref: "#/components/schemas/DiagnosisResult"
+          description: The results of diagnosing the specified field.
+        suggestion:
+          $ref: "#/components/schemas/Suggestion"
+          description: |-
+            Optimization suggestions that are auto-generated by the system to improve the effectiveness of the specified field.
+
+            **Note**: This will not be returned if the value for `optimization_fields` is blank or `NONE`.
     DiagnosisResult:
       type: object
       properties:
@@ -39127,6 +39306,45 @@ components:
         size_chart_id:
           type: string
           description: The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
+    EditSizeChartV2Request:
+      type: object
+      properties:
+        size_chart_data:
+          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartData"
+          description: Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
+        size_chart_id:
+          type: string
+          description: The ID of the seller-owned reusable size chart template to update.
+        template_name:
+          type: string
+          description: The new name of the size chart template. If omitted, the current name remains unchanged.
+      required:
+        - size_chart_data
+        - size_chart_id
+    EditSizeChartV2Response:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/EditSizeChartV2ResponseData"
+    EditSizeChartV2ResponseData:
+      type: object
+      properties:
+        size_chart_id:
+          type: string
+          description: The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
+    EndSessionRequest:
+      type: object
+      properties: {}
     EndSessionResponse:
       type: object
       properties:
@@ -39570,6 +39788,9 @@ components:
         product_promotion_link:
           type: string
           description: A URL for product promotion content. This URL is provided to agencies for sharing with colloborating creators. Creators share this link with followers via the TikTok App. Note that creators control whether or not to add products to their showcase in the pop-up window.
+    GenerateAffiliateProductPromotionLinkRequest:
+      type: object
+      properties: {}
     GenerateAffiliateProductPromotionLinkResponse:
       type: object
       properties:
@@ -39821,6 +40042,9 @@ components:
             A product promotion one-link that opens the corresponding TikTok Shop product detail page. Agencies can share this link with collaborated creators, and creators can copy/paste it into a web browser (or share it to users).
             If a user places an order via this link, the resulting e-commerce order will carry these parameter values for tracking.
             If the user does not have TikTok installed on their phone, they will be redirected to the app store to install TikTok.
+    GenerateTargetCollaborationLinkRequest:
+      type: object
+      properties: {}
     GenerateTargetCollaborationLinkResponse:
       type: object
       properties:
@@ -40433,9 +40657,13 @@ components:
           description: The friendly URL for the video on the TikTok website.
         published_date:
           type: string
+          format: date
           description: When content_type == VIDEO, this is the date when the video was published; when content_type == LIVE_ROOM, this is the date when the live started. The value is in YYYY_MM_DD format.
         content_end_date:
-          type: string
+          type:
+            - string
+            - "null"
+          format: date
           description: When content_type == VIDEO, this field is None; when content_type == LIVE_ROOM, this is the date when the live ended. The value is in YYYY_MM_DD format.
     GetAffiliateCampaignCreatorProductSampleStatusResponse:
       type: object
@@ -44873,9 +45101,9 @@ components:
         warehouses:
           type: array
           items:
-            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehous"
+            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehouse"
           description: A list of Fulfilled by TikTok warehouses information.
-    GetFBTWarehouseListResponseDataWarehous:
+    GetFBTWarehouseListResponseDataWarehouse:
       type: object
       properties:
         fbt_warehouse_id:
@@ -44911,14 +45139,14 @@ components:
         addresses:
           type: array
           items:
-            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehousAddress"
+            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehouseAddress"
           description: A list of addresses used to receive inbound shipments at the Fulfilled by TikTok warehouse.
         logistics_services:
           type: array
           items:
-            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehousLogisticsService"
+            $ref: "#/components/schemas/GetFBTWarehouseListResponseDataWarehouseLogisticsService"
           description: A list of logistics service information related to the current warehouse.
-    GetFBTWarehouseListResponseDataWarehousAddress:
+    GetFBTWarehouseListResponseDataWarehouseAddress:
       type: object
       properties:
         postal_code:
@@ -44945,7 +45173,7 @@ components:
         address_line_3:
           type: string
           description: The detail address line 3, additional address information(optional).
-    GetFBTWarehouseListResponseDataWarehousLogisticsService:
+    GetFBTWarehouseListResponseDataWarehouseLogisticsService:
       type: object
       properties:
         id:
@@ -45886,11 +46114,11 @@ components:
         associated_warehouses:
           type: array
           items:
-            $ref: "#/components/schemas/GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehous"
+            $ref: "#/components/schemas/GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse"
           description: |-
             A list of associated warehouses whose inventory is shared with or dynamically allocated from this warehouse. Each item identifies a warehouse and its region.
             **Note**: Applicable only when `allocation_mode` is `SHARED` or `DYNAMIC`.
-    GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehous:
+    GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse:
       type: object
       properties:
         warehouse_id:
@@ -46567,9 +46795,9 @@ components:
         global_warehouses:
           type: array
           items:
-            $ref: "#/components/schemas/GetGlobalSellerWarehousesResponseDataGlobalWarehous"
+            $ref: "#/components/schemas/GetGlobalSellerWarehousesResponseDataGlobalWarehouse"
           description: A list of global warehouses associated with the seller.
-    GetGlobalSellerWarehousesResponseDataGlobalWarehous:
+    GetGlobalSellerWarehousesResponseDataGlobalWarehouse:
       type: object
       properties:
         id:
@@ -48256,6 +48484,9 @@ components:
         image_url:
           type: string
           description: The product image url.
+    GetOpenCollaborationProductListByProductIdsRequest:
+      type: object
+      properties: {}
     GetOpenCollaborationProductListByProductIdsResponse:
       type: object
       properties:
@@ -51443,7 +51674,7 @@ components:
         diagnoses:
           type: array
           items:
-            $ref: "#/components/schemas/Diagnos"
+            $ref: "#/components/schemas/Diagnosis"
           description: Product diagnosis and optimization information.
     GetProductPackageRecommendationsRequest:
       type: object
@@ -53720,9 +53951,9 @@ components:
         analyses:
           type: array
           items:
-            $ref: "#/components/schemas/GetSPSMetricDiagnosisResponseDataAnalys"
+            $ref: "#/components/schemas/GetSPSMetricDiagnosisResponseDataAnalysis"
           description: Diagnostic insights for the selected metric.
-    GetSPSMetricDiagnosisResponseDataAnalys:
+    GetSPSMetricDiagnosisResponseDataAnalysis:
       type: object
       properties:
         summaries:
@@ -57733,12 +57964,14 @@ components:
       properties:
         end_date:
           type: string
+          format: date
           description: End date of the interval, exclusive.
         sales:
           $ref: "#/components/schemas/GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale"
           description: Sales performance data.
         start_date:
           type: string
+          format: date
           description: Start date of the interval, inclusive.
         traffic:
           $ref: "#/components/schemas/GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic"
@@ -60425,9 +60658,9 @@ components:
         warehouses:
           type: array
           items:
-            $ref: "#/components/schemas/GetWarehouseListResponseDataWarehous"
+            $ref: "#/components/schemas/GetWarehouseListResponseDataWarehouse"
           description: Warehouses returned for the seller. This field is omitted when the result contains no warehouse.
-    GetWarehouseListResponseDataWarehous:
+    GetWarehouseListResponseDataWarehouse:
       type: object
       properties:
         id:
@@ -60489,9 +60722,9 @@ components:
           type: boolean
           description: The default warehouse.  If a product is listed with no designated warehouse, the default warehouse will be used.
         address:
-          $ref: "#/components/schemas/GetWarehouseListResponseDataWarehousAddress"
+          $ref: "#/components/schemas/GetWarehouseListResponseDataWarehouseAddress"
           description: Warehouse address.
-    GetWarehouseListResponseDataWarehousAddress:
+    GetWarehouseListResponseDataWarehouseAddress:
       type: object
       properties:
         region:
@@ -60565,9 +60798,9 @@ components:
             This represents supplement information, like flat, apartment, or suit (optional).
             Note: Available only in the Brazilian market.
         geolocation:
-          $ref: "#/components/schemas/GetWarehouseListResponseDataWarehousAddressGeolocation"
+          $ref: "#/components/schemas/GetWarehouseListResponseDataWarehouseAddressGeolocation"
           description: The geographical location of the address.
-    GetWarehouseListResponseDataWarehousAddressGeolocation:
+    GetWarehouseListResponseDataWarehouseAddressGeolocation:
       type: object
       properties:
         latitude:
@@ -61503,6 +61736,7 @@ components:
           description: The cause of the change. See the trigger sources in Section 1.
         occurred_at:
           type: string
+          format: date-time
           description: The UTC time of the individual change.
         total_quantity_delta:
           type: integer
@@ -62519,6 +62753,9 @@ components:
           items:
             $ref: "#/components/schemas/Product"
           description: list of product data
+    MarkBuyerMessagesAsReadRequest:
+      type: object
+      properties: {}
     MarkBuyerMessagesAsReadResponse:
       type: object
       properties:
@@ -66239,6 +66476,9 @@ components:
       required:
         - product_tag
         - enable
+    PublishAffiliatePartnerCampaignRequest:
+      type: object
+      properties: {}
     PublishAffiliatePartnerCampaignResponse:
       type: object
       properties:
@@ -68050,6 +68290,9 @@ components:
     RemoveCreatorFromOpenCollaborationProductResponseData:
       type: object
       properties: {}
+    RemoveOpenCollaborationRequest:
+      type: object
+      properties: {}
     RemoveOpenCollaborationResponse:
       type: object
       properties:
@@ -68189,6 +68432,9 @@ components:
         request_id:
           type: string
           description: Every request generates a unique request_id for logging purposes.
+    RemoveTargetCollaborationRequest:
+      type: object
+      properties: {}
     RemoveTargetCollaborationResponse:
       type: object
       properties:
@@ -68983,6 +69229,16 @@ components:
             Lists errors for partially failed requests. For example, if a request reviews multiple orders or items and only some fail, individual error details are returned here.
 
             **IMPORTANT**: Partial failures still return a top-level success code (0), so clients must also check this field to detect partial errors. For complete failures (e.g. validation errors), the top-level response code and message will indicate a failure, but this field will remain empty.
+    Row:
+      type: object
+      properties:
+        cells:
+          type: array
+          items:
+            $ref: "#/components/schemas/Cell"
+          description: Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header.
+      required:
+        - cells
     SKUStatusChangeWebhook:
       type: object
       properties:
@@ -72795,6 +73051,9 @@ components:
         original_price:
           $ref: "#/components/schemas/OriginalPrice"
           description: The product's original price
+    SearchOrdersByExternalOrderReferenceRequest:
+      type: object
+      properties: {}
     SearchOrdersByExternalOrderReferenceResponse:
       type: object
       properties:
@@ -78345,7 +78604,7 @@ components:
         images:
           type: array
           items:
-            $ref: "#/components/schemas/DiagnoseAndOptimizeProductResponseDataDiagnosSuggestionImage"
+            $ref: "#/components/schemas/DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage"
           description: The optimized main image. Only the first image in the main image set will be optimized.
     SupplementarySkuImage:
       type: object
@@ -78368,30 +78627,11 @@ components:
         rows:
           type: array
           items:
-            $ref: "#/components/schemas/TableRow"
+            $ref: "#/components/schemas/Row"
           description: Rows of the size chart. Provide 1 to 45 rows.
       required:
         - headers
         - rows
-    TableRow:
-      type: object
-      properties:
-        cells:
-          type: array
-          items:
-            $ref: "#/components/schemas/TableRowCell"
-          description: Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header.
-      required:
-        - cells
-    TableRowCell:
-      type: object
-      properties:
-        value:
-          type: string
-          maxLength: 32
-          description: "Cell value. Maximum length: 32 characters."
-      required:
-        - value
     TargetCollaborationConflict:
       type: object
       properties:
@@ -80258,6 +80498,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB.
       required:
@@ -80380,6 +80621,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB. Zero-byte files are rejected.
       required:
@@ -80418,6 +80660,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: The format of the image must be jpg, gif, webp, or png. The size of the image must not exceed 10MB.
       required:
@@ -80456,6 +80699,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             The local file to be uploaded.
@@ -80533,6 +80777,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             The local image file to be uploaded.
@@ -80632,6 +80877,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             PDF file data to be uploaded to TikTok Shop. 
@@ -80673,6 +80919,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             The image file to upload as binary data in this multipart/form-data field.
@@ -80721,10 +80968,12 @@ components:
       properties:
         return_shipping_label:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: Return shipping label.
         return_qr_code:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: Return QR code.
         tracking_number:
@@ -80759,6 +81008,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             The local image file to upload.
@@ -80802,6 +81052,7 @@ components:
       properties:
         data:
           type: string
+          format: binary
           contentMediaType: application/octet-stream
           description: |-
             The local file to be uploaded.
@@ -81014,53 +81265,6 @@ components:
         - $ref: "#/components/schemas/TokopediaMirrorStatusChangeWebhook"
         - $ref: "#/components/schemas/UpcomingAuthorizationExpirationWebhook"
         - $ref: "#/components/schemas/VideoPrecheckResultWebhook"
-      discriminator:
-        propertyName: type
-        mapping:
-          "1": "#/components/schemas/OrderStatusChangeWebhook"
-          "3": "#/components/schemas/RecipientAddressUpdateWebhook"
-          "4": "#/components/schemas/PackageUpdateWebhook"
-          "5": "#/components/schemas/ProductStatusChangeWebhook"
-          "6": "#/components/schemas/SellerDeauthorizationWebhook"
-          "7": "#/components/schemas/UpcomingAuthorizationExpirationWebhook"
-          "11": "#/components/schemas/CancellationStatusChangeWebhook"
-          "12": "#/components/schemas/ReturnStatusChangeWebhook"
-          "13": "#/components/schemas/NewConversationWebhook"
-          "14": "#/components/schemas/NewMessageWebhook"
-          "15": "#/components/schemas/ProductInformationChangeWebhook"
-          "16": "#/components/schemas/ProductCreationWebhook"
-          "17": "#/components/schemas/ShoppableContentPostingWebhook"
-          "18": "#/components/schemas/ProductCategoryChangeWebhook"
-          "19": "#/components/schemas/SizeChartChangeWebhook"
-          "20": "#/components/schemas/CreatorDeauthorizationWebhook"
-          "21": "#/components/schemas/InboundFBTOrderStatusChangeWebhook"
-          "22": "#/components/schemas/FBTMerchantOnboardingWebhook"
-          "23": "#/components/schemas/GoodsMatchWebhook"
-          "24": "#/components/schemas/FBTInventoryUpdateWebhook"
-          "25": "#/components/schemas/OpportunityMatchingStatusChangeWebhook"
-          "27": "#/components/schemas/InventoryStatusChangeWebhook"
-          "33": "#/components/schemas/NewMessageListenerWebhook"
-          "35": "#/components/schemas/TokopediaMirrorStatusChangeWebhook"
-          "36": "#/components/schemas/InvoiceStatusChangeWebhook"
-          "37": "#/components/schemas/ProductAuditStatusChangeWebhook"
-          "38": "#/components/schemas/StrikethroughPriceExpiredWebhook"
-          "39": "#/components/schemas/ActivityStatusChangeWebhook"
-          "42": "#/components/schemas/CombinedListingChangeWebhook"
-          "46": "#/components/schemas/ImageTranslationCompletedWebhook"
-          "50": "#/components/schemas/SKUStatusChangeWebhook"
-          "51": "#/components/schemas/GlobalReplicationStatusChangeWebhook"
-          "52": "#/components/schemas/GlobalListingMethodChangeWebhook"
-          "55": "#/components/schemas/VideoPrecheckResultWebhook"
-          "56": "#/components/schemas/SampleApplicationStatusChangeWebhook"
-          "58": "#/components/schemas/GetFBTMCFOrderStatusWebhook"
-          "59": "#/components/schemas/ShoppableVideoPrecheckTasksResultWebhook"
-          "62": "#/components/schemas/ProductPackageRecommendedWebhook"
-          "63": "#/components/schemas/ActivityChangeWebhook"
-          "64": "#/components/schemas/AftersalesRequestStatusUpdateWebhook"
-          "65": "#/components/schemas/RMAStatusUpdateWebhook"
-          "66": "#/components/schemas/AppealCompletedWebhook"
-          "67": "#/components/schemas/RefundSuccessWebhook"
-          "71": "#/components/schemas/InventoryChangedByShopWebhook"
     Weight:
       type: object
       properties:
