@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { fixGetBody } from './fix-get-body.ts';
 import { renderMeta } from './render-meta.ts';
 
 const pkg = resolve(import.meta.dirname, '..');
@@ -31,18 +32,7 @@ rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
 cpSync(resolve(out, pkgPath), dest, { recursive: true });
 
-// Fix-up (R18): the generated ApiClient builds a GET without its body (`RequestMethod.GET -> Request.Builder().url(url)`), and
-// OkHttp cannot send one anyway. Carry the serialized body as a tag; the hand-written SigningInterceptor sends it.
-export const GET_LINE = 'RequestMethod.GET -> Request.Builder().url(url)';
-export const GET_FIXUP =
-  'RequestMethod.GET -> Request.Builder().url(url).apply { if (requestConfig.body != null) tag(RequestBody::class.java, requestBody(requestConfig.body, contentType)) } // fix-up: scripts/generate.ts (GET with a body)';
-export function fixGetBody(src: string): string {
-  const parts = src.split(GET_LINE);
-  if (parts.length !== 2) {
-    throw new Error(`generate: expected exactly one "${GET_LINE}" in ApiClient.kt, found ${parts.length - 1}`);
-  }
-  return parts.join(GET_FIXUP);
-}
+// Fix-up (R18): see fix-get-body.ts.
 const apiClient = resolve(dest, 'infrastructure/ApiClient.kt');
 writeFileSync(apiClient, fixGetBody(readFileSync(apiClient, 'utf8')));
 

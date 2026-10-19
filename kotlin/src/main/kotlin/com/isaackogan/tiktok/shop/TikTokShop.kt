@@ -20,9 +20,12 @@ import com.isaackogan.tiktok.shop.generated.apis.ReturnAndRefundApi
 import com.isaackogan.tiktok.shop.generated.apis.SellerApi
 import com.isaackogan.tiktok.shop.generated.apis.SupplyChainApi
 import com.isaackogan.tiktok.shop.generated.apis.ToolsApi
+import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Proxy
 import java.net.ProxySelector
+import java.net.SocketAddress
+import java.net.URI
 import java.net.http.HttpClient
 import java.time.Duration
 import java.util.Locale
@@ -61,7 +64,12 @@ data class TikTokShopOptions(
      * used), DNS, redirects (never followed) and interceptors that run after the signing one.
      */
     val httpClient: OkHttpClient? = null,
-)
+) {
+    /** Never prints the app secret or the access token. */
+    override fun toString(): String =
+        "TikTokShopOptions(appKey=$appKey, appSecret=***, accessToken=${if (accessToken.isNullOrEmpty()) "null" else "***"}, " +
+            "shopCipher=${if (shopCipher.isNullOrEmpty()) "null" else "***"}, baseUrl=$baseUrl, timeout=$timeout, httpClient=${httpClient != null})"
+}
 
 /**
  * A client for the TikTok Shop API: one property per API group, each the concrete generated API class, e.g.
@@ -81,7 +89,7 @@ class TikTokShop private constructor(private val shared: Shared, private val cre
     internal val jdkClient: HttpClient get() = shared.jdk
 
     private val api = shared.http.newBuilder() // newBuilder shares the base client's pool and dispatcher; only the interceptor differs
-        .addInterceptor(SigningInterceptor(creds, shared.jdk)).build()
+        .addInterceptor(SigningInterceptor(creds) { shared.jdk }).build()
 
     val affiliateCreator: AffiliateCreatorApi = AffiliateCreatorApi(shared.baseUrl, api)
     val affiliatePartner: AffiliatePartnerApi = AffiliatePartnerApi(shared.baseUrl, api)
@@ -128,20 +136,32 @@ class TikTokShop private constructor(private val shared: Shared, private val cre
 
     /** What a client and the clients [withShop] derives from it share. */
     internal class Shared(val http: OkHttpClient, val baseUrl: String) {
-        // For the GET requests that carry a body, which OkHttp cannot send. HTTP/1.1 only: no h2c upgrade headers.
-        val jdk: HttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
-            .connectTimeout(Duration.ofMillis(maxOf(http.connectTimeoutMillis, 1).toLong()))
-            .apply {
-                val proxy = http.proxy
-                val address = proxy?.address()
-                if (proxy != null && proxy.type() == Proxy.Type.HTTP && address is InetSocketAddress) {
-                    proxy(ProxySelector.of(address))
-                } else if (proxy == null) {
-                    proxy(http.proxySelector)
-                } // an explicit DIRECT proxy: none; SOCKS cannot be expressed: none
-            }.build()
+        // For the GET requests that carry a body, which OkHttp cannot send. Built on first use, so a client that never makes one
+        // never starts the JDK client's selector thread. HTTP/1.1 only: no h2c upgrade headers.
+        val jdk: HttpClient by lazy {
+            HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
+                .apply {
+                    // OkHttp: 0 means no timeout. The JDK client has no connect timeout unless one is set.
+                    if (http.connectTimeoutMillis > 0) connectTimeout(Duration.ofMillis(http.connectTimeoutMillis.toLong()))
+                    val proxy = http.proxy
+                    val address = proxy?.address()
+                    if (proxy == null) {
+                        proxy(http.proxySelector)
+                    } else if (proxy.type() == Proxy.Type.HTTP && address is InetSocketAddress) {
+                        proxy(ProxySelector.of(address))
+                    } else {
+                        proxy(NO_PROXY) // an explicit DIRECT: none; SOCKS cannot be expressed: none, never the JVM default
+                    }
+                }.build()
+        }
 
         companion object {
+            private val NO_PROXY = object : ProxySelector() {
+                override fun select(uri: URI?): List<Proxy> = listOf(Proxy.NO_PROXY)
+
+                override fun connectFailed(uri: URI?, sa: SocketAddress?, ioe: IOException?) {}
+            }
+
             fun of(options: TikTokShopOptions): Shared {
                 val http = (options.httpClient?.newBuilder() ?: OkHttpClient.Builder()).apply {
                     val t = options.timeout ?: (if (options.httpClient == null) DEFAULT_TIMEOUT else null)

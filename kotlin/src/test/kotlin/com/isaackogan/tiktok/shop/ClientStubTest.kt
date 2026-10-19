@@ -319,4 +319,38 @@ class ClientStubTest {
             assertEquals("""{"only_need_conversation_id":true}""", String(r.body, Charsets.UTF_8))
         }
     }
+
+    @Test
+    fun zeroOkHttpTimeoutsMeanNoLimitOnTheGetWithBodyPath() {
+        RawServer().use { raw ->
+            val noLimits = OkHttpClient.Builder().connectTimeout(Duration.ZERO).readTimeout(Duration.ZERO).callTimeout(Duration.ZERO).build()
+            val c = TikTokShop(options(raw.baseUrl()).copy(httpClient = noLimits))
+            c.affiliateSeller.getConversationList(10L, getConversationListRequest = onlyIds)
+            assertEquals("GET", raw.take().method)
+        }
+    }
+
+    @Test
+    fun zeroReadAndCallTimeoutsWithADefaultConnectTimeoutStillComplete() {
+        RawServer().use { raw ->
+            val c = OkHttpClient.Builder().readTimeout(Duration.ZERO).callTimeout(Duration.ZERO).build()
+            TikTokShop(options(raw.baseUrl()).copy(httpClient = c)).affiliateSeller.getConversationList(10L, getConversationListRequest = onlyIds)
+            assertEquals("GET", raw.take().method)
+        }
+    }
+
+    @Test
+    fun anExplicitDirectOrSocksProxyMeansNoProxyForTheJdkClient() {
+        for (p in listOf(Proxy.NO_PROXY, Proxy(Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", 9)))) {
+            val c = TikTokShop(TikTokShopOptions(appKey = "k", appSecret = "s", httpClient = OkHttpClient.Builder().proxy(p).build()))
+            assertEquals(Proxy.Type.DIRECT, c.jdkClient.proxy().get().select(URI.create("http://example.com"))[0].type())
+        }
+    }
+
+    @Test
+    fun optionsToStringNeverPrintsTheSecretOrTheToken() {
+        val text = TikTokShopOptions(appKey = "appkey1", appSecret = "super-secret-value", accessToken = "tok-value-xyz", shopCipher = "cipher-xyz").toString()
+        assertFalse(text.contains("super-secret-value") || text.contains("tok-value-xyz") || text.contains("cipher-xyz"), text)
+        assertContains(text, "appkey1")
+    }
 }

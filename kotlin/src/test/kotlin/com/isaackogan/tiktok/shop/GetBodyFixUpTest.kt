@@ -6,16 +6,16 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-/** The generator's own ApiClient drops a GET's body; scripts/generate.ts patches that one line, and only that one. */
+/** The generator's own ApiClient drops a GET's body; scripts/generate.ts patches that one line (its tsx tests cover the patcher). */
 class GetBodyFixUpTest {
     private val stockLine = "RequestMethod.GET -> Request.Builder().url(url)"
     private val rel = "src/main/kotlin/com/isaackogan/tiktok/shop/generated/infrastructure/ApiClient.kt"
 
     @Test
-    fun theStockGeneratorOutputBuildsAGetWithoutItsBody() {
-        val stock = File("build/out/$rel").readText()
-        assertEquals(1, stock.split(stockLine).size - 1, "the stock GET line appears exactly once")
-        assertFalse(stock.contains("tag(RequestBody::class.java"), "the stock client never looks at the body")
+    fun theCommittedClientHasNoBodyDroppingGetLine() {
+        val fixed = File(rel).readText()
+        assertFalse(fixed.lines().any { it.trim() == stockLine }, "the stock GET line is gone")
+        assertEquals(1, fixed.lines().count { it.contains("RequestMethod.GET ->") })
     }
 
     @Test

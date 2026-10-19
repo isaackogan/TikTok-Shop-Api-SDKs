@@ -33,26 +33,31 @@ class WiringTest {
 
     @Test
     fun everyOperationIsAMethodOnItsGroupsConcreteApiClass() {
-        val ops = read("build/meta.json").getAsJsonArray("operations")
-        assertEquals(320, ops.size())
+        // Meta is generated from the spec and committed, so this needs no build output.
+        assertTrue(Meta.OPERATIONS.isNotEmpty())
         val byGroup = TikTokShop::class.memberProperties.associateBy { it.name }
         val methodsOf = HashMap<String, Set<String>>()
-        for (el in ops) {
-            val op = el.asJsonObject
-            val group = op["group"].asString
-            val prop = byGroup[group] ?: error("no property for group $group")
+        for (op in Meta.OPERATIONS) {
+            val prop = byGroup[op.group] ?: error("no property for group ${op.group}")
             val api = prop.returnType.classifier as kotlin.reflect.KClass<*>
-            assertTrue(api.java.name.startsWith("com.isaackogan.tiktok.shop.generated.apis.") && api.java.name.endsWith("Api"), "$group returns the concrete generated API, got ${api.java.name}")
-            val methods = methodsOf.getOrPut(group) { api.memberFunctions.map { it.name }.toSet() }
-            assertTrue(op["operationId"].asString in methods, "${op["operationId"].asString} is a method of ${api.simpleName}")
+            assertTrue(api.java.name.startsWith("com.isaackogan.tiktok.shop.generated.apis.") && api.java.name.endsWith("Api"), "${op.group} returns the concrete generated API, got ${api.java.name}")
+            assertEquals(op.apiClass, api.simpleName, "${op.group} is the class Meta names")
+            val methods = methodsOf.getOrPut(op.group) { api.memberFunctions.map { it.name }.toSet() }
+            assertTrue(op.operationId in methods, "${op.operationId} is a method of ${api.simpleName}")
         }
+        assertEquals(groups.sorted(), Meta.OPERATIONS.map { it.group }.distinct().sorted())
+        assertEquals(groups.sorted(), Meta.GROUPS.map { it.name }.sorted())
     }
 
     @Test
-    fun metaMatchesTheSpec() {
-        val ops = read("build/meta.json").getAsJsonArray("operations")
-        assertEquals(ops.size(), Meta.OPERATIONS.size)
-        assertEquals(233, Meta.OPERATIONS.count { it.requiresShopCipher })
-        assertEquals(16, Meta.EVENT_TYPES.size)
+    fun metaIsInternallyConsistent() {
+        assertTrue(Meta.OPERATIONS.any { it.requiresShopCipher } && Meta.OPERATIONS.any { !it.requiresShopCipher })
+        assertEquals(Meta.OPERATIONS.size, Meta.OPERATIONS.map { it.operationId }.toSet().size, "operation ids are unique")
+        assertTrue(Meta.EVENT_TYPES.isNotEmpty())
+        assertEquals(Meta.WEBHOOKS.mapNotNull { w -> w.eventType?.let { w.type to it } }.toMap(), Meta.EVENT_TYPES)
+        // the matcher agrees with Meta for every operation that has no path parameter
+        for (op in Meta.OPERATIONS.filter { !it.path.contains('{') }) {
+            assertEquals(op.requiresShopCipher, requiresShopCipher(op.method, op.path), op.operationId)
+        }
     }
 }

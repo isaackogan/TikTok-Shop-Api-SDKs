@@ -39,7 +39,7 @@ internal class Credentials(val appKey: String, val appSecret: String, accessToke
  * A GET that has a body carries it as a [RequestBody] tag (see the fix-up in `scripts/generate.ts`), because OkHttp cannot
  * send one; such a request goes through the JDK's `java.net.http.HttpClient` instead.
  */
-internal class SigningInterceptor(private val creds: Credentials, private val jdk: HttpClient) : Interceptor {
+internal class SigningInterceptor(private val creds: Credentials, private val jdk: () -> HttpClient) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val req = chain.request()
         val getBody: RequestBody? = if (req.method == "GET") req.tag(RequestBody::class.java) else null
@@ -102,8 +102,13 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
 
     private fun sendWithJdk(chain: Interceptor.Chain, out: Request, body: ByteArray, contentType: String?): HttpResponse<ByteArray> {
         val nanos = chain.call().timeout().timeoutNanos()
-        val timeout = if (nanos > 0) Duration.ofNanos(nanos) else Duration.ofMillis(maxOf(chain.readTimeoutMillis(), 1).toLong())
-        val b = HttpRequest.newBuilder(URI.create(out.url.toString())).timeout(timeout)
+        // OkHttp: 0 means no limit, here as there.
+        val timeout: Duration? = when {
+            nanos > 0 -> Duration.ofNanos(nanos)
+            chain.readTimeoutMillis() > 0 -> Duration.ofMillis(chain.readTimeoutMillis().toLong())
+            else -> null
+        }
+        val b = HttpRequest.newBuilder(URI.create(out.url.toString())).apply { if (timeout != null) timeout(timeout) }
             .method("GET", HttpRequest.BodyPublishers.ofByteArray(body))
         for (name in out.headers.names()) {
             if (name.lowercase() !in JDK_RESTRICTED && !name.equals("Content-Type", ignoreCase = true)) {
@@ -112,9 +117,9 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
         }
         if (contentType != null) b.header("Content-Type", contentType)
         // HttpRequest.timeout only covers the wait for the headers; bound the whole exchange, body included.
-        val f: CompletableFuture<HttpResponse<ByteArray>> = jdk.sendAsync(b.build(), HttpResponse.BodyHandlers.ofByteArray())
+        val f: CompletableFuture<HttpResponse<ByteArray>> = jdk().sendAsync(b.build(), HttpResponse.BodyHandlers.ofByteArray())
         try {
-            return f.get(timeout.toMillis(), TimeUnit.MILLISECONDS)
+            return if (timeout == null) f.get() else f.get(timeout.toMillis(), TimeUnit.MILLISECONDS)
         } catch (e: TimeoutException) {
             f.cancel(true)
             throw HttpTimeoutException("timeout")
