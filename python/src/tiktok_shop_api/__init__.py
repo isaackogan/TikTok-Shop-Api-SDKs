@@ -4,7 +4,7 @@ from .auth import DEFAULT_AUTH_BASE_URL, AsyncTikTokShopAuth, TikTokShopAuth, To
 from .client import DEFAULT_BASE_URL, AsyncTikTokShop, TikTokShop
 from .errors import TikTokShopError
 from .signing import Signer, operation_for, requires_shop_cipher
-from .webhooks import EVENT_TYPES, UnknownWebhookEvent, WebhookSignatureError, Webhooks
+from .webhooks import EVENT_TYPES, UnknownWebhookEvent, WebhookEvent, WebhookSignatureError, Webhooks
 
 __all__ = [
     "DEFAULT_AUTH_BASE_URL",
@@ -18,6 +18,7 @@ __all__ = [
     "TikTokShopError",
     "TokenSet",
     "UnknownWebhookEvent",
+    "WebhookEvent",
     "WebhookSignatureError",
     "Webhooks",
     "operation_for",

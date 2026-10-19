@@ -79,3 +79,9 @@ def test_malformed_body_raises_value_error():
         Webhooks.parse("not json")
     with pytest.raises(ValueError):
         Webhooks.parse("[1]")
+
+
+@pytest.mark.parametrize("body", ['{"shop_id":"1"}', '{"type":"1"}', '{"type":true}', '{"type":1.5}', '{"type":null}'])
+def test_missing_or_non_integer_type_raises_value_error(body):
+    with pytest.raises(ValueError, match="type"):
+        Webhooks.parse(body)

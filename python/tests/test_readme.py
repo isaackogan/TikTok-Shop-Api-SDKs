@@ -9,7 +9,7 @@ def test_readme_examples_module_contains_every_statement_of_the_readme_python_bl
     assert len(blocks) == 5
     for block in blocks:
         for line in (l.strip() for l in block.splitlines()):
-            if line and not line.startswith(("import ", "from ", ")")):
+            if line and line != ")":
                 assert line in module, line
 
 

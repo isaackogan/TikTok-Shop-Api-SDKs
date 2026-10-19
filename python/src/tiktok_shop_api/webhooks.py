@@ -7,13 +7,17 @@ import hmac
 import importlib
 import json
 from dataclasses import dataclass
-from typing import Any
+from typing import TYPE_CHECKING, Any, TypeAlias
 
 from .generated._meta import EVENT_TYPES as _EVENT_TYPES
 from .generated._meta import WEBHOOKS
 
 #: Webhook type ID -> event name, e.g. ``1`` -> ``"ORDER_STATUS_CHANGE"``.
 EVENT_TYPES: dict[int, str] = dict(_EVENT_TYPES)
+
+if TYPE_CHECKING:
+    from .generated._webhook_event import GeneratedWebhookEvent
+
 
 _SCHEMAS: dict[int, str] = {w["type"]: w["schema"] for w in WEBHOOKS}
 
@@ -31,6 +35,10 @@ class UnknownWebhookEvent:
 
     type: int
     raw: dict[str, Any]
+
+
+#: A parsed webhook: one generated model per known type, or :class:`UnknownWebhookEvent`.
+WebhookEvent: TypeAlias = "GeneratedWebhookEvent | UnknownWebhookEvent"
 
 
 def _model(schema: str) -> Any:
@@ -59,25 +67,27 @@ class Webhooks:
         return hmac.compare_digest(mac.hexdigest().encode("ascii"), signature.encode("utf-8"))
 
     @staticmethod
-    def parse(raw_body: bytes | str) -> Any:
+    def parse(raw_body: bytes | str) -> WebhookEvent:
         """Parse a body to its generated model; an unknown ``type`` gives an :class:`UnknownWebhookEvent`.
 
-        Raises ``ValueError`` when the body is not JSON, not an object, or lacks the fields its type requires.
+        Raises ``ValueError`` when the body is not JSON, not an object, has no integer ``type``, or lacks the fields its type requires.
         """
         body = json.loads(_to_bytes(raw_body))
         if not isinstance(body, dict):
             raise ValueError("Webhook body is not a JSON object")
         t = body.get("type")
-        schema = _SCHEMAS.get(t) if isinstance(t, int) and not isinstance(t, bool) else None
+        if not isinstance(t, int) or isinstance(t, bool):
+            raise ValueError("Webhook body has no integer 'type'")
+        schema = _SCHEMAS.get(t)
         if schema is None:
-            return UnknownWebhookEvent(type=t, raw=body)  # type: ignore[arg-type]
+            return UnknownWebhookEvent(type=t, raw=body)
         try:
             return _model(schema).from_dict(body)
         except (KeyError, TypeError, AttributeError) as e:
             raise ValueError(f"Webhook type {t} does not match {schema}: {e!r}") from e
 
     @staticmethod
-    def verify_and_parse(*, app_key: str, app_secret: str, raw_body: bytes | str, signature: str) -> Any:
+    def verify_and_parse(*, app_key: str, app_secret: str, raw_body: bytes | str, signature: str) -> WebhookEvent:
         """Verify, then parse. Raises :class:`WebhookSignatureError` on a mismatch."""
         if not Webhooks.verify(app_key=app_key, app_secret=app_secret, raw_body=raw_body, signature=signature):
             raise WebhookSignatureError()

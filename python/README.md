@@ -25,6 +25,8 @@ import os
 
 from tiktok_shop_api import TikTokShopAuth
 
+code_from_redirect = "the ?code= value from your redirect URL"
+
 auth = TikTokShopAuth(
     os.environ["TTS_APP_KEY"],
     os.environ["TTS_APP_SECRET"],
@@ -47,15 +49,19 @@ renewed = auth.refresh(tokens.refresh_token)
 ## Make your first call
 
 ```python
+import os
+
 from tiktok_shop_api import TikTokShop
 
-with TikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"], access_token=tokens.access_token) as client:
+access_token = os.environ["TTS_ACCESS_TOKEN"]
+
+with TikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"], access_token=access_token) as client:
     # Find the shop cipher
     shops = client.authorization.get_authorized_shops()
     assert shops is not None
     shop_cipher = shops.to_dict()["data"]["shops"][0]["cipher"]
 
-    seller = client.with_shop(access_token=tokens.access_token, shop_cipher=shop_cipher)
+    seller = client.with_shop(access_token=access_token, shop_cipher=shop_cipher)
     orders = seller.orders.get_order_list(page_size=20)
 ```
 
@@ -63,12 +69,15 @@ The async client mirrors it, with `await` on every call:
 
 ```python
 import asyncio
+import os
 
 from tiktok_shop_api import AsyncTikTokShop
 
+access_token = os.environ["TTS_ACCESS_TOKEN"]
+
 
 async def main() -> None:
-    async with AsyncTikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"], access_token=tokens.access_token) as client:
+    async with AsyncTikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"], access_token=access_token) as client:
         shops = await client.authorization.get_authorized_shops()
         assert shops is not None
         seller = client.with_shop(shop_cipher=shops.to_dict()["data"]["shops"][0]["cipher"])
@@ -85,6 +94,14 @@ One attribute per API area hangs off the client (`orders`, `products`, `fulfillm
 `with_shop` returns a client for another shop. It shares the HTTP transport and your app credentials, so you can keep one per shop. Arguments you leave out keep the original's values, and the original is never changed:
 
 ```python
+import os
+
+from tiktok_shop_api import TikTokShop
+
+client = TikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"])
+token_a, cipher_a = os.environ["TOKEN_A"], os.environ["CIPHER_A"]
+token_b, cipher_b = os.environ["TOKEN_B"], os.environ["CIPHER_B"]
+
 shop_a = client.with_shop(access_token=token_a, shop_cipher=cipher_a)
 shop_b = client.with_shop(access_token=token_b, shop_cipher=cipher_b)
 ```
@@ -94,6 +111,8 @@ shop_b = client.with_shop(access_token=token_b, shop_cipher=cipher_b)
 Verify the signature against the **raw** request body, then parse it into a typed event. This example uses Flask; any framework that gives you the unmodified bytes works:
 
 ```python
+import os
+
 from flask import Flask, request
 
 from tiktok_shop_api import UnknownWebhookEvent, WebhookSignatureError, Webhooks

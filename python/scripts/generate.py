@@ -137,6 +137,7 @@ def main() -> None:
         g["ops"].append((name, OperationSource(mod)))
 
     write_meta(meta)
+    write_webhook_event(meta)
     write_groups(groups)
 
 
@@ -148,6 +149,18 @@ def write_meta(meta: dict) -> None:
         + f"OPERATIONS: list[dict[str, Any]] = {pyliteral(meta['operations'])}\n\n"
         + f"WEBHOOKS: list[dict[str, Any]] = {pyliteral(meta['webhooks'])}\n\n"
         + f"EVENT_TYPES: dict[int, str] = {pyliteral(event_types)}\n",
+        encoding="utf-8",
+    )
+
+
+def write_webhook_event(meta: dict) -> None:
+    names = sorted(w["schema"] for w in meta["webhooks"])
+    (DEST / "_webhook_event.py").write_text(
+        HEADER
+        + "\nfrom __future__ import annotations\n\nfrom typing import TypeAlias\n\n"
+        + "from .models import (\n" + "".join(f"    {n},\n" for n in names) + ")\n\n"
+        + "#: Every generated webhook model, one per webhook type.\n"
+        + "GeneratedWebhookEvent: TypeAlias = (\n    " + "\n    | ".join(names) + "\n)\n",
         encoding="utf-8",
     )
 
