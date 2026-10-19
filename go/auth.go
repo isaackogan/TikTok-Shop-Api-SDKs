@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -153,6 +154,7 @@ func (a *Auth) token(ctx context.Context, endpoint string, extra [][2]string) (*
 	}
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, a.opts.BaseURL+"/api/v2/token/"+endpoint+"?"+strings.Join(parts, "&"), nil)
 	if err != nil {
+		err = withoutURL(err)
 		return nil, &Error{Message: "invalid token request: " + err.Error(), Cause: err}
 	}
 	res, err := a.client.Do(req)
@@ -162,9 +164,21 @@ func (a *Auth) token(ctx context.Context, endpoint string, extra [][2]string) (*
 		res.Body.Close()
 	}
 	if err != nil {
-		return nil, &Error{Message: "token request failed: " + err.Error(), Cause: err}
+		// net/http's *url.Error carries the full URL, whose query holds the app secret and the code or
+		// refresh token, so neither the message nor the cause may include it.
+		err = withoutURL(err)
+		return nil, &Error{Message: "token request to /api/v2/token/" + endpoint + " failed: " + err.Error(), Cause: err}
 	}
 	return toTokenSet(res.StatusCode, body)
+}
+
+// withoutURL returns the error inside a *url.Error, which has no URL.
+func withoutURL(err error) error {
+	var ue *url.Error
+	if errors.As(err, &ue) && ue.Err != nil {
+		return ue.Err
+	}
+	return err
 }
 
 func toTokenSet(status int, body []byte) (*TokenSet, error) {
@@ -204,9 +218,9 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		RefreshToken         *string         `json:"refresh_token"`
 		RefreshTokenExpireIn *int64          `json:"refresh_token_expire_in"`
 		OpenID               json.RawMessage `json:"open_id"`
-		SellerName           *string         `json:"seller_name"`
-		SellerBaseRegion     *string         `json:"seller_base_region"`
-		UserType             *int            `json:"user_type"`
+		SellerName           string          `json:"seller_name"`
+		SellerBaseRegion     string          `json:"seller_base_region"`
+		UserType             int             `json:"user_type"`
 		GrantedScopes        []string        `json:"granted_scopes"`
 	}
 	if raw := bytes.TrimSpace(env["data"]); len(raw) == 0 || raw[0] != '{' {
@@ -216,19 +230,22 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		return fail("token response data is malformed: "+err.Error(), err)
 	}
 	// open_id is an ID: keep its digits whether TikTok sends a string or a number.
+	// It is optional: absent or null gives "".
 	var openID string
-	if err := json.Unmarshal(d.OpenID, &openID); err != nil {
-		var n json.Number
-		dec := json.NewDecoder(bytes.NewReader(d.OpenID))
-		dec.UseNumber()
-		if dec.Decode(&n) != nil || n == "" {
-			return fail("token response is missing open_id", nil)
+	if raw := bytes.TrimSpace(d.OpenID); len(raw) > 0 && string(raw) != "null" {
+		if err := json.Unmarshal(raw, &openID); err != nil {
+			var n json.Number
+			dec := json.NewDecoder(bytes.NewReader(raw))
+			dec.UseNumber()
+			if dec.Decode(&n) != nil || n == "" {
+				return fail("token response has a malformed open_id", nil)
+			}
+			openID = n.String()
 		}
-		openID = n.String()
 	}
-	if d.AccessToken == nil || d.AccessTokenExpireIn == nil || d.RefreshToken == nil || d.RefreshTokenExpireIn == nil ||
-		d.SellerName == nil || d.SellerBaseRegion == nil || d.UserType == nil {
-		return fail("token response is missing fields", nil)
+	// Creator and partner tokens may lack the seller fields, so only the token fields are required.
+	if d.AccessToken == nil || d.AccessTokenExpireIn == nil || d.RefreshToken == nil || d.RefreshTokenExpireIn == nil {
+		return fail("token response is missing token fields", nil)
 	}
 	return &TokenSet{
 		AccessToken:          *d.AccessToken,
@@ -236,9 +253,9 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		RefreshToken:         *d.RefreshToken,
 		RefreshTokenExpireIn: *d.RefreshTokenExpireIn,
 		OpenID:               openID,
-		SellerName:           *d.SellerName,
-		SellerBaseRegion:     *d.SellerBaseRegion,
-		UserType:             *d.UserType,
+		SellerName:           d.SellerName,
+		SellerBaseRegion:     d.SellerBaseRegion,
+		UserType:             d.UserType,
 		GrantedScopes:        d.GrantedScopes,
 	}, nil
 }

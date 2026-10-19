@@ -128,7 +128,7 @@ func (w webhooks) VerifyAndParse(o WebhookVerifyOptions) (WebhookEvent, error) {
 	return w.Parse(o.RawBody)
 }
 
-// fit shapes a decoded body for the strict generated models: a JSON number where the model has a string
+// fit shapes a decoded body for the generated models: a JSON number where the model has a string
 // (TikTok sometimes sends IDs as numbers) becomes that number's exact text. Keys a model does not know
 // pass through to its AdditionalProperties.
 func fit(v any, t reflect.Type) any {

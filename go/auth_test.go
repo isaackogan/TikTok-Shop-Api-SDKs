@@ -4,11 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -81,16 +84,23 @@ func TestAuthorizationURLRejectsBadInput(t *testing.T) {
 	}
 }
 
-func authStub(t *testing.T, status int, body string) (*httptest.Server, *[]*http.Request) {
+func authStub(t *testing.T, status int, body string) (*httptest.Server, func() []*http.Request) {
 	t.Helper()
+	var mu sync.Mutex
 	var got []*http.Request
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		mu.Lock()
 		got = append(got, r)
+		mu.Unlock()
 		w.WriteHeader(status)
 		_, _ = w.Write([]byte(body))
 	}))
 	t.Cleanup(srv.Close)
-	return srv, &got
+	return srv, func() []*http.Request {
+		mu.Lock()
+		defer mu.Unlock()
+		return append([]*http.Request(nil), got...)
+	}
 }
 
 func TestTokenRequestsMatchVectorsAndResponsesMap(t *testing.T) {
@@ -108,7 +118,7 @@ func TestTokenRequestsMatchVectorsAndResponsesMap(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
-		r := (*got)[0]
+		r := got()[0]
 		if r.Method != "GET" {
 			t.Errorf("%s: method %s", req.Kind, r.Method)
 		}
@@ -179,7 +189,7 @@ func TestTokenResponseFailuresAreErrors(t *testing.T) {
 		"code 0 without data":    {200, `{"code":0,"request_id":"r1"}`, -1},
 		"code 0 data not object": {200, `{"code":0,"request_id":"r1","data":[]}`, -1},
 		"code 0 data null":       {200, `{"code":0,"request_id":"r1","data":null}`, -1},
-		"code 0 missing fields":  {200, `{"code":0,"request_id":"r1","data":{"access_token":"a","open_id":"1"}}`, -1},
+		"code 0 missing fields":  {200, `{"code":0,"request_id":"r1","data":{"access_token":"a","open_id":"1","seller_name":"n"}}`, -1},
 		"not json":               {200, `<html>`, -1},
 		"json not an object":     {200, `[1]`, -1},
 		"500 with envelope":      {500, `{"code":1234,"message":"boom","request_id":"r9"}`, 1234},
@@ -224,5 +234,77 @@ func TestTokenNetworkErrorsAreErrors(t *testing.T) {
 	_, err = NewAuth(AuthOptions{AppKey: "k", AppSecret: "s", BaseURL: hang.URL}).Refresh(ctx, "r")
 	if !errors.As(err, &e) || !errors.Is(err, context.Canceled) {
 		t.Errorf("canceled: %v", err)
+	}
+}
+
+func TestMinimalTokenResponseSucceeds(t *testing.T) {
+	body := `{"code":0,"request_id":"r","data":{"access_token":"a","access_token_expire_in":1,"refresh_token":"r","refresh_token_expire_in":2}}`
+	srv, _ := authStub(t, 200, body)
+	ts, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: "s", BaseURL: srv.URL}).ExchangeCode(context.Background(), "c")
+	if err != nil || ts.AccessToken != "a" || ts.RefreshTokenExpireIn != 2 || ts.OpenID != "" || ts.SellerName != "" || ts.UserType != 0 || len(ts.GrantedScopes) != 0 {
+		t.Fatalf("%+v %v", ts, err)
+	}
+}
+
+func TestTokenErrorsNeverContainCredentials(t *testing.T) {
+	const secret, code, refresh = "SECRET-VALUE-9", "AUTHCODE-VALUE-7", "REFRESHTOKEN-VALUE-5"
+	l, _ := net.Listen("tcp", "127.0.0.1:0")
+	closed := "http://" + l.Addr().String()
+	l.Close()
+	hang := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { <-r.Context().Done() }))
+	defer hang.Close()
+	bad, _ := authStub(t, 500, `{"code":1,"message":"boom","request_id":"r"}`)
+	html, _ := authStub(t, 200, `<html>`)
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	cases := map[string]func() error{
+		"closed port": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: closed}).ExchangeCode(context.Background(), code)
+			return err
+		},
+		"timeout": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: hang.URL, Timeout: 100 * time.Millisecond}).Refresh(context.Background(), refresh)
+			return err
+		},
+		"canceled": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: hang.URL}).ExchangeCode(ctx, code)
+			return err
+		},
+		"500": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: bad.URL}).Refresh(context.Background(), refresh)
+			return err
+		},
+		"not json": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: html.URL}).ExchangeCode(context.Background(), code)
+			return err
+		},
+		"bad base url": func() error {
+			_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: secret, BaseURL: "http://bad host"}).ExchangeCode(context.Background(), code)
+			return err
+		},
+	}
+	for name, run := range cases {
+		err := run()
+		if err == nil {
+			t.Errorf("%s: no error", name)
+			continue
+		}
+		var e *Error
+		if !errors.As(err, &e) {
+			t.Errorf("%s: %T", name, err)
+			continue
+		}
+		texts := []string{e.Error(), fmt.Sprintf("%+v", e), fmt.Sprintf("%v", err), fmt.Sprintf("%#v", e.Cause)}
+		for c := error(e); c != nil; c = errors.Unwrap(c) {
+			texts = append(texts, c.Error())
+		}
+		for _, text := range texts {
+			for _, v := range []string{secret, code, refresh} {
+				if strings.Contains(text, v) {
+					t.Errorf("%s: %q leaks %q", name, text, v)
+				}
+			}
+		}
 	}
 }
