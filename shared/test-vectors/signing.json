@@ -1,0 +1,148 @@
+{
+  "cases": [
+    {
+      "name": "docs-worked-example",
+      "secret": "abc000def111",
+      "method": "GET",
+      "path": "/authorization/202309/shops",
+      "query": [
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "timestamp",
+          "1234567890"
+        ]
+      ],
+      "contentType": null,
+      "body": null,
+      "stringToSign": "abc000def111/authorization/202309/shopsapp_key123456timestamp1234567890abc000def111",
+      "sign": "c8767e4fd7a1b48a0ce3fd23197f058159ce11b53f1ae1ad6d1ec931a1da5540"
+    },
+    {
+      "name": "json-body",
+      "secret": "abc000def111",
+      "method": "POST",
+      "path": "/product/202309/products",
+      "query": [
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "timestamp",
+          "1234567890"
+        ],
+        [
+          "shop_cipher",
+          "GCP_XF90igAAAABh00qsWgtvOiGFNqyubMt3"
+        ]
+      ],
+      "contentType": "application/json",
+      "body": "{\"title\":\"Café\",\"price\":\"9.99\"}",
+      "stringToSign": "abc000def111/product/202309/productsapp_key123456shop_cipherGCP_XF90igAAAABh00qsWgtvOiGFNqyubMt3timestamp1234567890{\"title\":\"Café\",\"price\":\"9.99\"}abc000def111",
+      "sign": "3f6ebac240b9681f7ad14dacf791c548060bcaba2dc925cc1946121517720ba1"
+    },
+    {
+      "name": "excluded-params",
+      "secret": "abc000def111",
+      "method": "GET",
+      "path": "/order/202309/orders",
+      "query": [
+        [
+          "timestamp",
+          "1234567890"
+        ],
+        [
+          "sign",
+          "ffff"
+        ],
+        [
+          "access_token",
+          "TTP_x"
+        ],
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "page_size",
+          "20"
+        ]
+      ],
+      "contentType": null,
+      "body": null,
+      "stringToSign": "abc000def111/order/202309/ordersapp_key123456page_size20timestamp1234567890abc000def111",
+      "sign": "36528d5e25a5c5ba57362f811a2300811bce5b98fe7d1929727c0a0085f49023"
+    },
+    {
+      "name": "multipart-body-excluded",
+      "secret": "abc000def111",
+      "method": "POST",
+      "path": "/product/202309/images/upload",
+      "query": [
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "timestamp",
+          "1234567890"
+        ]
+      ],
+      "contentType": "multipart/form-data; boundary=xyz",
+      "body": "--xyz\r\nContent-Disposition: form-data; name=\"data\"; filename=\"a.png\"\r\n\r\nPNGDATA\r\n--xyz--\r\n",
+      "stringToSign": "abc000def111/product/202309/images/uploadapp_key123456timestamp1234567890abc000def111",
+      "sign": "a49ad73b963a82cbfa934fbff79d1a79887cb2c2200cd96b63f9d21f7e23391e"
+    },
+    {
+      "name": "decoded-page-token-and-array",
+      "secret": "abc000def111",
+      "method": "GET",
+      "path": "/product/202502/products/search",
+      "query": [
+        [
+          "page_token",
+          "b2Zmc2V0PTEw+/x=="
+        ],
+        [
+          "ids",
+          "1,2,3"
+        ],
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "timestamp",
+          "1234567890"
+        ]
+      ],
+      "contentType": null,
+      "body": null,
+      "stringToSign": "abc000def111/product/202502/products/searchapp_key123456ids1,2,3page_tokenb2Zmc2V0PTEw+/x==timestamp1234567890abc000def111",
+      "sign": "7f8e7eac57af95b9f223d653fe41fe5976123b32e996fed7193d86e7884d6fe6"
+    },
+    {
+      "name": "empty-json-body",
+      "secret": "abc000def111",
+      "method": "POST",
+      "path": "/seller/202309/shops",
+      "query": [
+        [
+          "app_key",
+          "123456"
+        ],
+        [
+          "timestamp",
+          "1234567890"
+        ]
+      ],
+      "contentType": "application/json",
+      "body": "",
+      "stringToSign": "abc000def111/seller/202309/shopsapp_key123456timestamp1234567890abc000def111",
+      "sign": "927aa712f050b6dd2fe7825701348b66bcef65fb4b793e1a2aa8bc57e6201b22"
+    }
+  ]
+}
