@@ -218,6 +218,11 @@ public final class TikTokShop {
         return withShop(ShopCredentials.builder().accessToken(accessToken).shopCipher(shopCipher).build());
     }
 
+    /** The JDK client used for GET requests with a body. */
+    HttpClient jdkClient() {
+        return shared.jdk;
+    }
+
     /** What a client and the clients {@code withShop} derives from it share. */
     private static final class Shared {
         final OkHttpClient http;
@@ -228,9 +233,15 @@ public final class TikTokShop {
             this.http = http;
             this.baseUrl = baseUrl;
             // For the GET requests that carry a body, which OkHttp cannot send. HTTP/1.1 only: no h2c upgrade headers.
-            this.jdk = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).proxy(http.proxySelector() == null
-                    ? ProxySelector.getDefault() : http.proxySelector()).connectTimeout(Duration.ofMillis(
-                    Math.max(http.connectTimeoutMillis(), 1))).build();
+            HttpClient.Builder j = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
+                    .connectTimeout(Duration.ofMillis(Math.max(http.connectTimeoutMillis(), 1)));
+            java.net.Proxy proxy = http.proxy();
+            if (proxy != null && proxy.type() == java.net.Proxy.Type.HTTP && proxy.address() instanceof java.net.InetSocketAddress) {
+                j.proxy(ProxySelector.of((java.net.InetSocketAddress) proxy.address()));
+            } else if (proxy == null) {
+                j.proxy(http.proxySelector() == null ? ProxySelector.getDefault() : http.proxySelector());
+            } // an explicit DIRECT proxy: none; SOCKS cannot be expressed: none
+            this.jdk = j.build();
         }
     }
 
@@ -284,8 +295,16 @@ public final class TikTokShop {
         }
 
         /**
-         * Carries the signed requests. Its connection pool, proxy and TLS settings are used as they are. Without it, a default
-         * OkHttp client is used, which honours the JVM's proxy settings.
+         * Carries the signed requests. Its connection pool, proxy, TLS settings, interceptors and timeouts are used as they are.
+         * Without it, a default OkHttp client is used, which honours the JVM's proxy settings.
+         *
+         * <p>Three operations ({@code getConversationList}, {@code mapTokopediaToTikTokShopProductIDs} and
+         * {@code getShippingTemplateAvailability}) are GETs with a body, which OkHttp cannot send, so they go through the JDK's
+         * {@code java.net.http.HttpClient} instead. For those, only these settings of your client apply: an HTTP proxy
+         * ({@code proxy()}, or else {@code proxySelector()}), the connect timeout and the call timeout (or else the read
+         * timeout), which bound the whole exchange. Not applied: SOCKS proxies, authenticators, custom
+         * {@code sslSocketFactory}, {@code hostnameVerifier} and certificate pinner (the JVM's default trust store is used),
+         * DNS, redirects (never followed) and interceptors that run after the signing one.
          */
         public Builder httpClient(OkHttpClient httpClient) {
             this.httpClient = httpClient;

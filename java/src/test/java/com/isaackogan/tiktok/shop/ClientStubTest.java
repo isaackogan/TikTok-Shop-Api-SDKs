@@ -286,4 +286,52 @@ class ClientStubTest {
         assertEquals("t", orders.getData().getNextPageToken());
         assertEquals("1", orders.getData().getOrders().get(0).getId());
     }
+
+    @Test
+    void unknownFieldsInNestedModelsWithRequiredPropertiesStillDecode() throws Exception {
+        // PackageDimension requires height, length, unit, width; PackageWeight requires unit, value.
+        reply("{\"code\":0,\"message\":\"ok\",\"request_id\":\"r\",\"data\":{\"surprise\":1,"
+                + "\"package_dimensions\":{\"height\":3,\"length\":4,\"width\":5,\"unit\":\"CENTIMETER\",\"new_field\":{\"a\":1}},"
+                + "\"package_weight\":{\"value\":\"1.5\",\"unit\":\"KILOGRAM\",\"another\":[1,2]}}}");
+        com.isaackogan.tiktok.shop.generated.model.PredictProductPackageDimensionsAndWeightResponse resp = builder().build().products()
+                .predictProductPackageDimensionsAndWeight(
+                        new com.isaackogan.tiktok.shop.generated.model.PredictProductPackageDimensionsAndWeightRequest());
+        com.isaackogan.tiktok.shop.generated.model.PredictProductPackageDimensionsAndWeightResponseDataPackageDimension d =
+                resp.getData().getPackageDimensions();
+        assertEquals(3L, d.getHeight());
+        assertEquals(4L, d.getLength());
+        assertEquals(5L, d.getWidth());
+        assertEquals("CENTIMETER", d.getUnit().getValue());
+        assertEquals("1.5", resp.getData().getPackageWeight().getValue());
+        assertEquals("KILOGRAM", resp.getData().getPackageWeight().getUnit().getValue());
+    }
+
+    @Test
+    void getWithBodyTimeoutBoundsASlowDrippedBody() throws Exception {
+        try (RawServer raw = new RawServer().drip()) {
+            long start = System.nanoTime();
+            TikTokShopException e = assertThrows(TikTokShopException.class, () -> TikTokShop.builder().appKey("key1").appSecret(SECRET)
+                    .baseUrl(raw.baseUrl()).timeout(Duration.ofMillis(700)).build().affiliateSeller()
+                    .getConversationList(10L, null, null, null, new GetConversationListRequest().onlyNeedConversationId(true)));
+            assertInstanceOf(IOException.class, e.getCause());
+            assertTrue(Duration.ofNanos(System.nanoTime() - start).toSeconds() < 10);
+        }
+    }
+
+    @Test
+    void getWithBodyHonoursAnExplicitHttpProxy() throws Exception {
+        try (RawServer proxy = new RawServer()) {
+            int port = Integer.parseInt(proxy.baseUrl().substring(proxy.baseUrl().lastIndexOf(':') + 1));
+            OkHttpClient viaProxy = new OkHttpClient.Builder()
+                    .proxy(new java.net.Proxy(java.net.Proxy.Type.HTTP, new java.net.InetSocketAddress("127.0.0.1", port))).build();
+            TikTokShop client = TikTokShop.builder().appKey("key1").appSecret(SECRET).baseUrl("http://target.invalid")
+                    .httpClient(viaProxy).build();
+            assertEquals(java.net.Proxy.Type.HTTP,
+                    client.jdkClient().proxy().get().select(java.net.URI.create("http://target.invalid")).get(0).type());
+            client.affiliateSeller().getConversationList(10L, null, null, null, new GetConversationListRequest().onlyNeedConversationId(true));
+            RawServer.Received r = proxy.take();
+            assertTrue(r.target.startsWith("http://target.invalid/"), r.target);
+            assertEquals("{\"only_need_conversation_id\":true}", new String(r.body, StandardCharsets.UTF_8));
+        }
+    }
 }

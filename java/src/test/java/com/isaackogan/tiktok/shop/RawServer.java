@@ -37,6 +37,7 @@ final class RawServer implements Closeable {
     private volatile int status = 200;
     private volatile String reply = StubSupport.OK;
     private volatile boolean hang;
+    private volatile boolean drip;
 
     RawServer() throws IOException {
         socket = new ServerSocket(0);
@@ -53,6 +54,12 @@ final class RawServer implements Closeable {
         this.status = status;
         this.reply = body;
         this.hang = false;
+        return this;
+    }
+
+    /** Sends the headers, then trickles the body one byte at a time, far slower than any test timeout. */
+    RawServer drip() {
+        this.drip = true;
         return this;
     }
 
@@ -100,6 +107,17 @@ final class RawServer implements Closeable {
             received.add(r);
             if (hang) {
                 Thread.sleep(60_000);
+                return;
+            }
+            if (drip) {
+                OutputStream o = sock.getOutputStream();
+                o.write("HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nContent-Length: 100\r\n\r\n".getBytes(StandardCharsets.UTF_8));
+                o.flush();
+                for (int i = 0; i < 100; i++) {
+                    o.write(' ');
+                    o.flush();
+                    Thread.sleep(500);
+                }
                 return;
             }
             byte[] body = reply.getBytes(StandardCharsets.UTF_8);

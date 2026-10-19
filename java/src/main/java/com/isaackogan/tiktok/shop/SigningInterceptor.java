@@ -171,9 +171,17 @@ final class SigningInterceptor implements Interceptor {
         if (contentType != null) {
             b.header("Content-Type", contentType);
         }
+        // HttpRequest.timeout only covers the wait for the headers; bound the whole exchange, body included.
+        java.util.concurrent.CompletableFuture<HttpResponse<byte[]>> f = jdk.sendAsync(b.build(), HttpResponse.BodyHandlers.ofByteArray());
         try {
-            return jdk.send(b.build(), HttpResponse.BodyHandlers.ofByteArray());
+            return f.get(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+        } catch (java.util.concurrent.TimeoutException e) {
+            f.cancel(true);
+            throw new java.net.http.HttpTimeoutException("timeout");
+        } catch (java.util.concurrent.ExecutionException e) {
+            throw e.getCause() instanceof IOException ? (IOException) e.getCause() : new IOException(e.getCause());
         } catch (InterruptedException e) {
+            f.cancel(true);
             Thread.currentThread().interrupt();
             throw new java.io.InterruptedIOException("interrupted");
         }
