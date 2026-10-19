@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -43,6 +42,7 @@ type EditGlobalProductRequestSku struct {
 	ExternalGlobalSkuId *string `json:"external_global_sku_id,omitempty"`
 	// The SKU's **local display price** shown on the product page before any discounts.   **Note**:  -  Required for JP and US shops using China warehouses, optional for others. - This is the definitive final price shown on the product page, all other prices will be ignored.
 	SalePrices []EditGlobalProductRequestSkuSalePrice `json:"sale_prices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditGlobalProductRequestSku EditGlobalProductRequestSku
@@ -450,6 +450,11 @@ func (o EditGlobalProductRequestSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SalePrices) {
 		toSerialize["sale_prices"] = o.SalePrices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -477,15 +482,30 @@ func (o *EditGlobalProductRequestSku) UnmarshalJSON(data []byte) (err error) {
 
 	varEditGlobalProductRequestSku := _EditGlobalProductRequestSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditGlobalProductRequestSku)
+	err = json.Unmarshal(data, &varEditGlobalProductRequestSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditGlobalProductRequestSku(varEditGlobalProductRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "global_quantity")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "external_global_sku_id")
+		delete(additionalProperties, "sale_prices")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

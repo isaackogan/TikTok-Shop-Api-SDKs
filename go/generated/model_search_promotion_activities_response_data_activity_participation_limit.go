@@ -21,7 +21,10 @@ var _ MappedNullable = &SearchPromotionActivitiesResponseDataActivityParticipati
 type SearchPromotionActivitiesResponseDataActivityParticipationLimit struct {
 	// Determines whether the promotion activity limits the number of times each buyer can receive its benefit. e.g.: - `BUYER_NO_LIMIT`: No limit for buyer​s. Buyers can benefit from this promotion across multiple orders. - `BUYER_LIMIT_ONLY_ONE`: Buyers can benefit from this promotion activity for no more than one order. ​Default: `BUYER_NO_LIMIT`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPromotionActivitiesResponseDataActivityParticipationLimit SearchPromotionActivitiesResponseDataActivityParticipationLimit
 
 // NewSearchPromotionActivitiesResponseDataActivityParticipationLimit instantiates a new SearchPromotionActivitiesResponseDataActivityParticipationLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SearchPromotionActivitiesResponseDataActivityParticipationLimit) ToMap()
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPromotionActivitiesResponseDataActivityParticipationLimit) UnmarshalJSON(data []byte) (err error) {
+	varSearchPromotionActivitiesResponseDataActivityParticipationLimit := _SearchPromotionActivitiesResponseDataActivityParticipationLimit{}
+
+	err = json.Unmarshal(data, &varSearchPromotionActivitiesResponseDataActivityParticipationLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPromotionActivitiesResponseDataActivityParticipationLimit(varSearchPromotionActivitiesResponseDataActivityParticipationLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPromotionActivitiesResponseDataActivityParticipationLimit struct {

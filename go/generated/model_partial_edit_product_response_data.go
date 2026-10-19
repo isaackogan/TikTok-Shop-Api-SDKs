@@ -25,7 +25,10 @@ type PartialEditProductResponseData struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
 	Skus []PartialEditProductResponseDataSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductResponseData PartialEditProductResponseData
 
 // NewPartialEditProductResponseData instantiates a new PartialEditProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PartialEditProductResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductResponseData := _PartialEditProductResponseData{}
+
+	err = json.Unmarshal(data, &varPartialEditProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductResponseData(varPartialEditProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "audit")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductResponseData struct {

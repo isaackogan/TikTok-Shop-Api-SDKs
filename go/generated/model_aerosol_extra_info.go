@@ -23,7 +23,10 @@ type AerosolExtraInfo struct {
 	Volume *string `json:"volume,omitempty"`
 	// aeroslo volume unit
 	VolumeUnit *string `json:"volume_unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AerosolExtraInfo AerosolExtraInfo
 
 // NewAerosolExtraInfo instantiates a new AerosolExtraInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AerosolExtraInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VolumeUnit) {
 		toSerialize["volume_unit"] = o.VolumeUnit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AerosolExtraInfo) UnmarshalJSON(data []byte) (err error) {
+	varAerosolExtraInfo := _AerosolExtraInfo{}
+
+	err = json.Unmarshal(data, &varAerosolExtraInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AerosolExtraInfo(varAerosolExtraInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "volume")
+		delete(additionalProperties, "volume_unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAerosolExtraInfo struct {

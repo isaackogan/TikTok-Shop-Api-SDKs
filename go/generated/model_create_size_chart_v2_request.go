@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateSizeChartV2Request struct {
 	SizeChartMode string `json:"size_chart_mode"`
 	// Template name. Required when size_chart_mode is REUSABLE_TEMPLATE. When size_chart_mode is PRODUCT_SCOPED, any value provided for this field is discarded and is not stored.
 	TemplateName *string `json:"template_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSizeChartV2Request CreateSizeChartV2Request
@@ -173,6 +173,11 @@ func (o CreateSizeChartV2Request) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemplateName) {
 		toSerialize["template_name"] = o.TemplateName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *CreateSizeChartV2Request) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateSizeChartV2Request := _CreateSizeChartV2Request{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSizeChartV2Request)
+	err = json.Unmarshal(data, &varCreateSizeChartV2Request)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSizeChartV2Request(varCreateSizeChartV2Request)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "size_chart_data")
+		delete(additionalProperties, "size_chart_mode")
+		delete(additionalProperties, "template_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

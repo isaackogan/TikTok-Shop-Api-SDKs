@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateConversationStatusRequest{}
 type UpdateConversationStatusRequest struct {
 	// update conversation status. e.g. -STARRED star this conversation -UNSTARRED un star this conversation -ARCHIVED archived this invitation
 	Action string `json:"action"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateConversationStatusRequest UpdateConversationStatusRequest
@@ -80,6 +80,11 @@ func (o UpdateConversationStatusRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateConversationStatusRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["action"] = o.Action
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateConversationStatusRequest) UnmarshalJSON(data []byte) (err error)
 
 	varUpdateConversationStatusRequest := _UpdateConversationStatusRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateConversationStatusRequest)
+	err = json.Unmarshal(data, &varUpdateConversationStatusRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateConversationStatusRequest(varUpdateConversationStatusRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type SendEngagementMessageResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// The details of the error.
 	Detail *SendEngagementMessageResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendEngagementMessageResponseDataError SendEngagementMessageResponseDataError
 
 // NewSendEngagementMessageResponseDataError instantiates a new SendEngagementMessageResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SendEngagementMessageResponseDataError) ToMap() (map[string]interface{},
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendEngagementMessageResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varSendEngagementMessageResponseDataError := _SendEngagementMessageResponseDataError{}
+
+	err = json.Unmarshal(data, &varSendEngagementMessageResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendEngagementMessageResponseDataError(varSendEngagementMessageResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendEngagementMessageResponseDataError struct {

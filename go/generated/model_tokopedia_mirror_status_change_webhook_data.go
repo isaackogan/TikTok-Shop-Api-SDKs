@@ -25,7 +25,10 @@ type TokopediaMirrorStatusChangeWebhookData struct {
 	UpdateTime *int64 `json:"update_time,omitempty"`
 	// The shop mirroring status:   - MIRRORED   - ROLLED_BACK   - CANCELED
 	MirrorStatus *string `json:"mirror_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TokopediaMirrorStatusChangeWebhookData TokopediaMirrorStatusChangeWebhookData
 
 // NewTokopediaMirrorStatusChangeWebhookData instantiates a new TokopediaMirrorStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o TokopediaMirrorStatusChangeWebhookData) ToMap() (map[string]interface{},
 	if !IsNil(o.MirrorStatus) {
 		toSerialize["mirror_status"] = o.MirrorStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TokopediaMirrorStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varTokopediaMirrorStatusChangeWebhookData := _TokopediaMirrorStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varTokopediaMirrorStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TokopediaMirrorStatusChangeWebhookData(varTokopediaMirrorStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_shop_id")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "mirror_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTokopediaMirrorStatusChangeWebhookData struct {

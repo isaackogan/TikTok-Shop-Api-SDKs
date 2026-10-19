@@ -23,7 +23,10 @@ type AddExternalOrderReferencesResponseDataErrorDetail struct {
 	OrderId *string `json:"order_id,omitempty"`
 	// The order information in your OMS.
 	ExternalOrder *AddExternalOrderReferencesResponseDataErrorDetailExternalOrder `json:"external_order,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddExternalOrderReferencesResponseDataErrorDetail AddExternalOrderReferencesResponseDataErrorDetail
 
 // NewAddExternalOrderReferencesResponseDataErrorDetail instantiates a new AddExternalOrderReferencesResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AddExternalOrderReferencesResponseDataErrorDetail) ToMap() (map[string]i
 	if !IsNil(o.ExternalOrder) {
 		toSerialize["external_order"] = o.ExternalOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddExternalOrderReferencesResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varAddExternalOrderReferencesResponseDataErrorDetail := _AddExternalOrderReferencesResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddExternalOrderReferencesResponseDataErrorDetail(varAddExternalOrderReferencesResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "external_order")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddExternalOrderReferencesResponseDataErrorDetail struct {

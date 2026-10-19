@@ -25,7 +25,10 @@ type GetMessageTemplatesResponseDataMessageTemplateCouponCardRule struct {
 	MaxCount *int64 `json:"max_count,omitempty"`
 	// The types of coupon that can be included in the message.  Possible values: - REGULAR_ALL: Regular coupons that target all buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd). - REGULAR_REPEAT: Regular coupons that target only repeat buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=REPEAT_CUSTOMERS` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).
 	CouponType []string `json:"coupon_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMessageTemplatesResponseDataMessageTemplateCouponCardRule GetMessageTemplatesResponseDataMessageTemplateCouponCardRule
 
 // NewGetMessageTemplatesResponseDataMessageTemplateCouponCardRule instantiates a new GetMessageTemplatesResponseDataMessageTemplateCouponCardRule object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetMessageTemplatesResponseDataMessageTemplateCouponCardRule) ToMap() (m
 	if !IsNil(o.CouponType) {
 		toSerialize["coupon_type"] = o.CouponType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMessageTemplatesResponseDataMessageTemplateCouponCardRule) UnmarshalJSON(data []byte) (err error) {
+	varGetMessageTemplatesResponseDataMessageTemplateCouponCardRule := _GetMessageTemplatesResponseDataMessageTemplateCouponCardRule{}
+
+	err = json.Unmarshal(data, &varGetMessageTemplatesResponseDataMessageTemplateCouponCardRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMessageTemplatesResponseDataMessageTemplateCouponCardRule(varGetMessageTemplatesResponseDataMessageTemplateCouponCardRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_count")
+		delete(additionalProperties, "max_count")
+		delete(additionalProperties, "coupon_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMessageTemplatesResponseDataMessageTemplateCouponCardRule struct {

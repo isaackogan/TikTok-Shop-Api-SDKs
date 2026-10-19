@@ -33,7 +33,10 @@ type GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// User review rating from 1 to 5.
 	UserReviewRating *int64 `json:"user_review_rating,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem
 
 // NewGetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem instantiates a new GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem) ToMap() (map[
 	if !IsNil(o.UserReviewRating) {
 		toSerialize["user_review_rating"] = o.UserReviewRating
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem := _GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem(varGetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deliver_time")
+		delete(additionalProperties, "order_create_time")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "user_review_rating")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem struct {

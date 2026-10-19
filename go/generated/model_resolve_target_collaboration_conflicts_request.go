@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ResolveTargetCollaborationConflictsRequest{}
 type ResolveTargetCollaborationConflictsRequest struct {
 	// A list of creators and their existing target collaborations involved in conflicts that caused target collaboration failure. Each item identifies a creator and the existing target collaboration from which that creator will be removed.
 	ConflictItems []ResolveTargetCollaborationConflictsRequestConflictItem `json:"conflict_items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResolveTargetCollaborationConflictsRequest ResolveTargetCollaborationConflictsRequest
@@ -80,6 +80,11 @@ func (o ResolveTargetCollaborationConflictsRequest) MarshalJSON() ([]byte, error
 func (o ResolveTargetCollaborationConflictsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["conflict_items"] = o.ConflictItems
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ResolveTargetCollaborationConflictsRequest) UnmarshalJSON(data []byte) 
 
 	varResolveTargetCollaborationConflictsRequest := _ResolveTargetCollaborationConflictsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResolveTargetCollaborationConflictsRequest)
+	err = json.Unmarshal(data, &varResolveTargetCollaborationConflictsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResolveTargetCollaborationConflictsRequest(varResolveTargetCollaborationConflictsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conflict_items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

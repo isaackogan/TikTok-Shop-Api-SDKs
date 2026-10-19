@@ -27,7 +27,10 @@ type GetSPSMetricTopItemsResponseDataOtdrLogisticsItem struct {
 	OnTimeDeliverOrderCount *int64 `json:"on_time_deliver_order_count,omitempty"`
 	// On-time delivery rate as a ratio from 0 to 1.
 	OnTimeDeliverRate *string `json:"on_time_deliver_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricTopItemsResponseDataOtdrLogisticsItem GetSPSMetricTopItemsResponseDataOtdrLogisticsItem
 
 // NewGetSPSMetricTopItemsResponseDataOtdrLogisticsItem instantiates a new GetSPSMetricTopItemsResponseDataOtdrLogisticsItem object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetSPSMetricTopItemsResponseDataOtdrLogisticsItem) ToMap() (map[string]i
 	if !IsNil(o.OnTimeDeliverRate) {
 		toSerialize["on_time_deliver_rate"] = o.OnTimeDeliverRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricTopItemsResponseDataOtdrLogisticsItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricTopItemsResponseDataOtdrLogisticsItem := _GetSPSMetricTopItemsResponseDataOtdrLogisticsItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricTopItemsResponseDataOtdrLogisticsItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricTopItemsResponseDataOtdrLogisticsItem(varGetSPSMetricTopItemsResponseDataOtdrLogisticsItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delivered_order_count")
+		delete(additionalProperties, "logistics_provider")
+		delete(additionalProperties, "on_time_deliver_order_count")
+		delete(additionalProperties, "on_time_deliver_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricTopItemsResponseDataOtdrLogisticsItem struct {

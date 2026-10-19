@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ReplicateProductRequestReplicateTargetCertificationFile struct {
 	Id string `json:"id"`
 	// The name of the certification file, including the file extension.
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplicateProductRequestReplicateTargetCertificationFile ReplicateProductRequestReplicateTargetCertificationFile
@@ -145,6 +145,11 @@ func (o ReplicateProductRequestReplicateTargetCertificationFile) ToMap() (map[st
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *ReplicateProductRequestReplicateTargetCertificationFile) UnmarshalJSON(
 
 	varReplicateProductRequestReplicateTargetCertificationFile := _ReplicateProductRequestReplicateTargetCertificationFile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReplicateProductRequestReplicateTargetCertificationFile)
+	err = json.Unmarshal(data, &varReplicateProductRequestReplicateTargetCertificationFile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReplicateProductRequestReplicateTargetCertificationFile(varReplicateProductRequestReplicateTargetCertificationFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -31,7 +31,10 @@ type RMAStatusUpdateWebhookData struct {
 	RmaRequestCreateTime *int64 `json:"rma_request_create_time,omitempty"`
 	// Last update time of the RMA in Unix seconds.
 	RmaRequestUpdateTime *int64 `json:"rma_request_update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RMAStatusUpdateWebhookData RMAStatusUpdateWebhookData
 
 // NewRMAStatusUpdateWebhookData instantiates a new RMAStatusUpdateWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o RMAStatusUpdateWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RmaRequestUpdateTime) {
 		toSerialize["rma_request_update_time"] = o.RmaRequestUpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RMAStatusUpdateWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varRMAStatusUpdateWebhookData := _RMAStatusUpdateWebhookData{}
+
+	err = json.Unmarshal(data, &varRMAStatusUpdateWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RMAStatusUpdateWebhookData(varRMAStatusUpdateWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rma_id")
+		delete(additionalProperties, "aftersales_request_id")
+		delete(additionalProperties, "return_role")
+		delete(additionalProperties, "rma_status")
+		delete(additionalProperties, "rma_request_create_time")
+		delete(additionalProperties, "rma_request_update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRMAStatusUpdateWebhookData struct {

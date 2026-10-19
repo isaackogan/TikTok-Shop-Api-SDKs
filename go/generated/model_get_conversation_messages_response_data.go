@@ -25,7 +25,10 @@ type GetConversationMessagesResponseData struct {
 	UnsupportedMsgTips *string `json:"unsupported_msg_tips,omitempty"`
 	// Messages in conversation.
 	Messages []GetConversationMessagesResponseDataMessage `json:"messages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationMessagesResponseData GetConversationMessagesResponseData
 
 // NewGetConversationMessagesResponseData instantiates a new GetConversationMessagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetConversationMessagesResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Messages) {
 		toSerialize["messages"] = o.Messages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationMessagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationMessagesResponseData := _GetConversationMessagesResponseData{}
+
+	err = json.Unmarshal(data, &varGetConversationMessagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationMessagesResponseData(varGetConversationMessagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "unsupported_msg_tips")
+		delete(additionalProperties, "messages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationMessagesResponseData struct {

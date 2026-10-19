@@ -44,7 +44,10 @@ type GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupple
 	RefundedCustomerShippingFeeAmount *string `json:"refunded_customer_shipping_fee_amount,omitempty"`
 	// Reimbursement from the Shipping Fee Guarantee Program for failed deliveries or returns
 	ShippingFeeGuaranteeReimbursement *string `json:"shipping_fee_guarantee_reimbursement,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent
 
 // NewGetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent instantiates a new GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent object
 // This constructor will assign default values to properties that have it defined,
@@ -496,7 +499,44 @@ func (o GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSup
 	if !IsNil(o.ShippingFeeGuaranteeReimbursement) {
 		toSerialize["shipping_fee_guarantee_reimbursement"] = o.ShippingFeeGuaranteeReimbursement
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent := _GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent(varGetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fbt_fulfillment_fee_reimbursement_amount")
+		delete(additionalProperties, "platform_shipping_fee_discount_amount")
+		delete(additionalProperties, "promo_shipping_incentive_amount")
+		delete(additionalProperties, "shipping_fee_subsidy_amount")
+		delete(additionalProperties, "seller_shipping_fee_discount_amount")
+		delete(additionalProperties, "fbt_shipping_cost_amount")
+		delete(additionalProperties, "customer_shipping_fee_offset_amount")
+		delete(additionalProperties, "fbm_shipping_cost_amount")
+		delete(additionalProperties, "fbt_fulfillment_fee_amount")
+		delete(additionalProperties, "return_refund_subsidy_amount")
+		delete(additionalProperties, "refunded_customer_shipping_fee_amount")
+		delete(additionalProperties, "shipping_fee_guarantee_reimbursement")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdownSupplementaryComponent struct {

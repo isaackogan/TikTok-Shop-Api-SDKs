@@ -25,7 +25,10 @@ type GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail struct
 	QuotaPeriodSum *int64 `json:"quota_period_sum,omitempty"`
 	// Bonus quota num in the current quota tiering, if the seller meet the exposure posts percentile threshold, will gain quota bonus
 	QuotaBonusSum *int64 `json:"quota_bonus_sum,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail
 
 // NewGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail instantiates a new GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail) To
 	if !IsNil(o.QuotaBonusSum) {
 		toSerialize["quota_bonus_sum"] = o.QuotaBonusSum
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail := _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail(varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_levels")
+		delete(additionalProperties, "quota_period_sum")
+		delete(additionalProperties, "quota_bonus_sum")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail struct {

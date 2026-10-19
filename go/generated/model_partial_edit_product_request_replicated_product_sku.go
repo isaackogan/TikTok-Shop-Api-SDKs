@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type PartialEditProductRequestReplicatedProductSku struct {
 	Price PartialEditProductRequestReplicatedProductSkuPrice `json:"price"`
 	// An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces
 	SellerSku *string `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestReplicatedProductSku PartialEditProductRequestReplicatedProductSku
@@ -228,6 +228,11 @@ func (o PartialEditProductRequestReplicatedProductSku) ToMap() (map[string]inter
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *PartialEditProductRequestReplicatedProductSku) UnmarshalJSON(data []byt
 
 	varPartialEditProductRequestReplicatedProductSku := _PartialEditProductRequestReplicatedProductSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestReplicatedProductSku)
+	err = json.Unmarshal(data, &varPartialEditProductRequestReplicatedProductSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestReplicatedProductSku(varPartialEditProductRequestReplicatedProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type GlobalReplicationStatusChangeWebhook struct {
 	// The time when this webhook is triggered. Unix timestamp.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *GlobalReplicationStatusChangeWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GlobalReplicationStatusChangeWebhook GlobalReplicationStatusChangeWebhook
@@ -227,6 +227,11 @@ func (o GlobalReplicationStatusChangeWebhook) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *GlobalReplicationStatusChangeWebhook) UnmarshalJSON(data []byte) (err e
 
 	varGlobalReplicationStatusChangeWebhook := _GlobalReplicationStatusChangeWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGlobalReplicationStatusChangeWebhook)
+	err = json.Unmarshal(data, &varGlobalReplicationStatusChangeWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GlobalReplicationStatusChangeWebhook(varGlobalReplicationStatusChangeWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

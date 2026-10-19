@@ -21,7 +21,10 @@ var _ MappedNullable = &CalculateRefundResponseData{}
 type CalculateRefundResponseData struct {
 	// Refund amount to buyer.
 	OrderRefundAmount *CalculateRefundResponseDataOrderRefundAmount `json:"order_refund_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CalculateRefundResponseData CalculateRefundResponseData
 
 // NewCalculateRefundResponseData instantiates a new CalculateRefundResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CalculateRefundResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderRefundAmount) {
 		toSerialize["order_refund_amount"] = o.OrderRefundAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CalculateRefundResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCalculateRefundResponseData := _CalculateRefundResponseData{}
+
+	err = json.Unmarshal(data, &varCalculateRefundResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CalculateRefundResponseData(varCalculateRefundResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_refund_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCalculateRefundResponseData struct {

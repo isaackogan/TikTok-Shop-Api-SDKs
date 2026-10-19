@@ -13,7 +13,6 @@ package generated
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type SubmitStrikethroughPriceRequestSkuExternalTransactionPrice struct {
 	Image *Image `json:"image,omitempty"`
 	// The RFC 3339 time when the highest transaction price was recorded. The time must include a timezone and be within the 90 days before the request.
 	TransactionTime time.Time `json:"transaction_time"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitStrikethroughPriceRequestSkuExternalTransactionPrice SubmitStrikethroughPriceRequestSkuExternalTransactionPrice
@@ -174,6 +174,11 @@ func (o SubmitStrikethroughPriceRequestSkuExternalTransactionPrice) ToMap() (map
 		toSerialize["image"] = o.Image
 	}
 	toSerialize["transaction_time"] = o.TransactionTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -203,15 +208,23 @@ func (o *SubmitStrikethroughPriceRequestSkuExternalTransactionPrice) UnmarshalJS
 
 	varSubmitStrikethroughPriceRequestSkuExternalTransactionPrice := _SubmitStrikethroughPriceRequestSkuExternalTransactionPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitStrikethroughPriceRequestSkuExternalTransactionPrice)
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceRequestSkuExternalTransactionPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitStrikethroughPriceRequestSkuExternalTransactionPrice(varSubmitStrikethroughPriceRequestSkuExternalTransactionPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "transaction_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

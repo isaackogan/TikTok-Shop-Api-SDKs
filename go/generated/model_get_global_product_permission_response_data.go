@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalProductPermissionResponseData{}
 type GetGlobalProductPermissionResponseData struct {
 	// The seller's global product permissions. Possible values: - MANAGE_GLOBAL_PRODUCT: Indicates the seller is permitted to manage global products listed in TikTok Shops across multiple countries. An empty array means the seller does not have the MANAGE_GLOBAL_PRODUCT permission.
 	Permissions []string `json:"permissions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductPermissionResponseData GetGlobalProductPermissionResponseData
 
 // NewGetGlobalProductPermissionResponseData instantiates a new GetGlobalProductPermissionResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalProductPermissionResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.Permissions) {
 		toSerialize["permissions"] = o.Permissions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductPermissionResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductPermissionResponseData := _GetGlobalProductPermissionResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductPermissionResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductPermissionResponseData(varGetGlobalProductPermissionResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "permissions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductPermissionResponseData struct {

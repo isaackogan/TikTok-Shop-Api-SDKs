@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateOpenCollaborationRequest struct {
 	ProductId string `json:"product_id"`
 	// The commission rate for the open collaboration, expressed in hundredths of a percent. For example, `3587` represents `35.87%`. The value must be from `100` to `8000`, inclusive.
 	CommissionRate int64 `json:"commission_rate"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateOpenCollaborationRequest CreateOpenCollaborationRequest
@@ -108,6 +108,11 @@ func (o CreateOpenCollaborationRequest) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["commission_rate"] = o.CommissionRate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateOpenCollaborationRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varCreateOpenCollaborationRequest := _CreateOpenCollaborationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateOpenCollaborationRequest)
+	err = json.Unmarshal(data, &varCreateOpenCollaborationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateOpenCollaborationRequest(varCreateOpenCollaborationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

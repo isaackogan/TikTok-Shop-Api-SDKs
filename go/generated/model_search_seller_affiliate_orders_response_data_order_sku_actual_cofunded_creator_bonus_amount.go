@@ -23,7 +23,10 @@ type SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAm
 	Amount *string `json:"amount,omitempty"`
 	// The commission currency.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount
 
 // NewSearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount instantiates a new SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonu
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount) UnmarshalJSON(data []byte) (err error) {
+	varSearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount := _SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount{}
+
+	err = json.Unmarshal(data, &varSearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount(varSearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount struct {

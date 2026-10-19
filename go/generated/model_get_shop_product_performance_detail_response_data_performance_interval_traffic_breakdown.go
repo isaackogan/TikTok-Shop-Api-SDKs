@@ -23,7 +23,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakd
 	Traffic *GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic `json:"traffic,omitempty"`
 	// Traffic breakdown content type. Possible values: - VIDEO: Video content. - LIVE: Live stream content. - PRODUCT_CARD: Product card.
 	ContentType *string `json:"content_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBre
 	if !IsNil(o.ContentType) {
 		toSerialize["content_type"] = o.ContentType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "traffic")
+		delete(additionalProperties, "content_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown struct {

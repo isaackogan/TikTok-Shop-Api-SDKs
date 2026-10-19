@@ -26,7 +26,10 @@ type GetVideoPerformancesResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetVideoPerformancesResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetVideoPerformancesResponse GetVideoPerformancesResponse
 
 // NewGetVideoPerformancesResponse instantiates a new GetVideoPerformancesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetVideoPerformancesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetVideoPerformancesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetVideoPerformancesResponse := _GetVideoPerformancesResponse{}
+
+	err = json.Unmarshal(data, &varGetVideoPerformancesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetVideoPerformancesResponse(varGetVideoPerformancesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetVideoPerformancesResponse struct {

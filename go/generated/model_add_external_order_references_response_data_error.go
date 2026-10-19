@@ -25,7 +25,10 @@ type AddExternalOrderReferencesResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// The TikTok Shop order and external OMS reference associated with this per-order error.
 	Detail *AddExternalOrderReferencesResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddExternalOrderReferencesResponseDataError AddExternalOrderReferencesResponseDataError
 
 // NewAddExternalOrderReferencesResponseDataError instantiates a new AddExternalOrderReferencesResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o AddExternalOrderReferencesResponseDataError) ToMap() (map[string]interfa
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddExternalOrderReferencesResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varAddExternalOrderReferencesResponseDataError := _AddExternalOrderReferencesResponseDataError{}
+
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddExternalOrderReferencesResponseDataError(varAddExternalOrderReferencesResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddExternalOrderReferencesResponseDataError struct {

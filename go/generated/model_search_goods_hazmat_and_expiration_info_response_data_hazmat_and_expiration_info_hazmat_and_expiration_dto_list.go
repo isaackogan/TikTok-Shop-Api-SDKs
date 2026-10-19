@@ -29,7 +29,10 @@ type SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmat
 	IsExpirationManagement *bool `json:"is_expiration_management,omitempty"`
 	// Expiration-management thresholds for the product associated with the SKU when `is_expiration_management` is `true`.
 	ExpBaseInfo *SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo `json:"exp_base_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList
 
 // NewSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList instantiates a new SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHaz
 	if !IsNil(o.ExpBaseInfo) {
 		toSerialize["exp_base_info"] = o.ExpBaseInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList := _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList{}
+
+	err = json.Unmarshal(data, &varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList(varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_sku_id")
+		delete(additionalProperties, "is_hazmat")
+		delete(additionalProperties, "is_lot_code")
+		delete(additionalProperties, "is_expiration_management")
+		delete(additionalProperties, "exp_base_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList struct {

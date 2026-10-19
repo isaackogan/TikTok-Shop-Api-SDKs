@@ -25,7 +25,10 @@ type GetProductResponseDataSkuGlobalListingPolicyReplicateSource struct {
 	ShopId *string `json:"shop_id,omitempty"`
 	// The SKU ID of the source product.
 	SkuId *string `json:"sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuGlobalListingPolicyReplicateSource GetProductResponseDataSkuGlobalListingPolicyReplicateSource
 
 // NewGetProductResponseDataSkuGlobalListingPolicyReplicateSource instantiates a new GetProductResponseDataSkuGlobalListingPolicyReplicateSource object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataSkuGlobalListingPolicyReplicateSource) ToMap() (ma
 	if !IsNil(o.SkuId) {
 		toSerialize["sku_id"] = o.SkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuGlobalListingPolicyReplicateSource) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuGlobalListingPolicyReplicateSource := _GetProductResponseDataSkuGlobalListingPolicyReplicateSource{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuGlobalListingPolicyReplicateSource)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuGlobalListingPolicyReplicateSource(varGetProductResponseDataSkuGlobalListingPolicyReplicateSource)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuGlobalListingPolicyReplicateSource struct {

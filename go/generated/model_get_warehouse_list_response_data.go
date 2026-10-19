@@ -21,7 +21,10 @@ var _ MappedNullable = &GetWarehouseListResponseData{}
 type GetWarehouseListResponseData struct {
 	// Warehouses returned for the seller. This field is omitted when the result contains no warehouse.
 	Warehouses []GetWarehouseListResponseDataWarehouse `json:"warehouses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseListResponseData GetWarehouseListResponseData
 
 // NewGetWarehouseListResponseData instantiates a new GetWarehouseListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetWarehouseListResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Warehouses) {
 		toSerialize["warehouses"] = o.Warehouses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseListResponseData := _GetWarehouseListResponseData{}
+
+	err = json.Unmarshal(data, &varGetWarehouseListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseListResponseData(varGetWarehouseListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseListResponseData struct {

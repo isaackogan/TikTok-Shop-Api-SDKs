@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type BatteryExtraInfo struct {
 	Un383TestFileUrl *string `json:"un_38_3_test_file_url,omitempty"`
 	// per package battery count
 	BatteryCountPerPackage *string `json:"battery_count_per_package,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatteryExtraInfo BatteryExtraInfo
@@ -322,6 +322,11 @@ func (o BatteryExtraInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BatteryCountPerPackage) {
 		toSerialize["battery_count_per_package"] = o.BatteryCountPerPackage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -355,15 +360,28 @@ func (o *BatteryExtraInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varBatteryExtraInfo := _BatteryExtraInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatteryExtraInfo)
+	err = json.Unmarshal(data, &varBatteryExtraInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatteryExtraInfo(varBatteryExtraInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "battery_type")
+		delete(additionalProperties, "battery_packaging_type")
+		delete(additionalProperties, "total_battery_weight")
+		delete(additionalProperties, "total_battery_weight_unit")
+		delete(additionalProperties, "total_battery_capacity")
+		delete(additionalProperties, "total_battery_capacity_unit")
+		delete(additionalProperties, "is_need_un_38_3_test")
+		delete(additionalProperties, "un_38_3_test_file_url")
+		delete(additionalProperties, "battery_count_per_package")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

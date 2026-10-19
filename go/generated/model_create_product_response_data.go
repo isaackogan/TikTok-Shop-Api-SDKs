@@ -25,7 +25,10 @@ type CreateProductResponseData struct {
 	Skus []CreateProductResponseDataSku `json:"skus,omitempty"`
 	// Warning information that the API caller needs to pay special attention to.
 	Warnings []Warning `json:"warnings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateProductResponseData CreateProductResponseData
 
 // NewCreateProductResponseData instantiates a new CreateProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Warnings) {
 		toSerialize["warnings"] = o.Warnings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateProductResponseData := _CreateProductResponseData{}
+
+	err = json.Unmarshal(data, &varCreateProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateProductResponseData(varCreateProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "warnings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateProductResponseData struct {

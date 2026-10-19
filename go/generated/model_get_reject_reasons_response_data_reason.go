@@ -23,7 +23,10 @@ type GetRejectReasonsResponseDataReason struct {
 	Name *string `json:"name,omitempty"`
 	// The corresponding text to the reason name, localized based on the locale input parameter.
 	Text *string `json:"text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRejectReasonsResponseDataReason GetRejectReasonsResponseDataReason
 
 // NewGetRejectReasonsResponseDataReason instantiates a new GetRejectReasonsResponseDataReason object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetRejectReasonsResponseDataReason) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRejectReasonsResponseDataReason) UnmarshalJSON(data []byte) (err error) {
+	varGetRejectReasonsResponseDataReason := _GetRejectReasonsResponseDataReason{}
+
+	err = json.Unmarshal(data, &varGetRejectReasonsResponseDataReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRejectReasonsResponseDataReason(varGetRejectReasonsResponseDataReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRejectReasonsResponseDataReason struct {

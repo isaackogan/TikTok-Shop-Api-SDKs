@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SubmitCustomsClearanceInformationRequestOrderList struct {
 	OrderId string `json:"order_id"`
 	// List of customs clearance entries for order lines. Within the same order, explicit order_line_id values must be unique.
 	ItemList []SubmitCustomsClearanceInformationRequestOrderListItemList `json:"item_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitCustomsClearanceInformationRequestOrderList SubmitCustomsClearanceInformationRequestOrderList
@@ -117,6 +117,11 @@ func (o SubmitCustomsClearanceInformationRequestOrderList) ToMap() (map[string]i
 	if !IsNil(o.ItemList) {
 		toSerialize["item_list"] = o.ItemList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *SubmitCustomsClearanceInformationRequestOrderList) UnmarshalJSON(data [
 
 	varSubmitCustomsClearanceInformationRequestOrderList := _SubmitCustomsClearanceInformationRequestOrderList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitCustomsClearanceInformationRequestOrderList)
+	err = json.Unmarshal(data, &varSubmitCustomsClearanceInformationRequestOrderList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitCustomsClearanceInformationRequestOrderList(varSubmitCustomsClearanceInformationRequestOrderList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "item_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

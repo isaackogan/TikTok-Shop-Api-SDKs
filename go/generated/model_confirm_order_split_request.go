@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ConfirmOrderSplitRequest struct {
 	SplittableGroups []ConfirmOrderSplitRequestSplittableGroup `json:"splittable_groups"`
 	// This new parameter is completely backward compatible with the previous splittable groups field and in addition this supports bundle order splitting, use the sub items accordingly
 	SplittableGroupsV2 []ConfirmOrderSplitRequestSplittableGroupsV2 `json:"splittable_groups_v2,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmOrderSplitRequest ConfirmOrderSplitRequest
@@ -117,6 +117,11 @@ func (o ConfirmOrderSplitRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SplittableGroupsV2) {
 		toSerialize["splittable_groups_v2"] = o.SplittableGroupsV2
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ConfirmOrderSplitRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varConfirmOrderSplitRequest := _ConfirmOrderSplitRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmOrderSplitRequest)
+	err = json.Unmarshal(data, &varConfirmOrderSplitRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmOrderSplitRequest(varConfirmOrderSplitRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "splittable_groups")
+		delete(additionalProperties, "splittable_groups_v2")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

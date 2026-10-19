@@ -26,7 +26,10 @@ type MapTokopediaToTikTokShopProductIDsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *MapTokopediaToTikTokShopProductIDsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MapTokopediaToTikTokShopProductIDsResponse MapTokopediaToTikTokShopProductIDsResponse
 
 // NewMapTokopediaToTikTokShopProductIDsResponse instantiates a new MapTokopediaToTikTokShopProductIDsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o MapTokopediaToTikTokShopProductIDsResponse) ToMap() (map[string]interfac
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MapTokopediaToTikTokShopProductIDsResponse) UnmarshalJSON(data []byte) (err error) {
+	varMapTokopediaToTikTokShopProductIDsResponse := _MapTokopediaToTikTokShopProductIDsResponse{}
+
+	err = json.Unmarshal(data, &varMapTokopediaToTikTokShopProductIDsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MapTokopediaToTikTokShopProductIDsResponse(varMapTokopediaToTikTokShopProductIDsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMapTokopediaToTikTokShopProductIDsResponse struct {

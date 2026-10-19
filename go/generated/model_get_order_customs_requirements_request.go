@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetOrderCustomsRequirementsRequest{}
 type GetOrderCustomsRequirementsRequest struct {
 	// TikTok Shop order IDs to query. When providing a request body, include 1 to 50 order IDs.
 	OrderIds []string `json:"order_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetOrderCustomsRequirementsRequest GetOrderCustomsRequirementsRequest
@@ -80,6 +80,11 @@ func (o GetOrderCustomsRequirementsRequest) MarshalJSON() ([]byte, error) {
 func (o GetOrderCustomsRequirementsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["order_ids"] = o.OrderIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *GetOrderCustomsRequirementsRequest) UnmarshalJSON(data []byte) (err err
 
 	varGetOrderCustomsRequirementsRequest := _GetOrderCustomsRequirementsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetOrderCustomsRequirementsRequest)
+	err = json.Unmarshal(data, &varGetOrderCustomsRequirementsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetOrderCustomsRequirementsRequest(varGetOrderCustomsRequirementsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

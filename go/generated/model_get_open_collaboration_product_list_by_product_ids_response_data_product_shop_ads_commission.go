@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpenCollaborationProductListByProductIdsResponseDataP
 type GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission struct {
 	// The Shop Ads commission rate for this product, multiplied by 10,000. The range is 100 to 8,000. For example, 3,000 represents 30.00% and 3,555 represents 35.55%.
 	Rate *int64 `json:"rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission
 
 // NewGetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission instantiates a new GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCom
 	if !IsNil(o.Rate) {
 		toSerialize["rate"] = o.Rate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission := _GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission(varGetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type EditProductRequestReplicatedProductSkuPrice struct {
 	Currency string `json:"currency"`
 	// The SKU's local display price shown on the product page before any discounts.  Refer to [Product Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed price ranges in each market.
 	SalePrice string `json:"sale_price"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditProductRequestReplicatedProductSkuPrice EditProductRequestReplicatedProductSkuPrice
@@ -108,6 +108,11 @@ func (o EditProductRequestReplicatedProductSkuPrice) ToMap() (map[string]interfa
 	toSerialize := map[string]interface{}{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["sale_price"] = o.SalePrice
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *EditProductRequestReplicatedProductSkuPrice) UnmarshalJSON(data []byte)
 
 	varEditProductRequestReplicatedProductSkuPrice := _EditProductRequestReplicatedProductSkuPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditProductRequestReplicatedProductSkuPrice)
+	err = json.Unmarshal(data, &varEditProductRequestReplicatedProductSkuPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditProductRequestReplicatedProductSkuPrice(varEditProductRequestReplicatedProductSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

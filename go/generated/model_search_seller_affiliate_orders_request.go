@@ -25,7 +25,10 @@ type SearchSellerAffiliateOrdersRequest struct {
 	CreateTimeGe *int64 `json:"create_time_ge,omitempty"`
 	// Filter orders by the associated affiliate partner campaign ID.
 	ProgramId *string `json:"program_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSellerAffiliateOrdersRequest SearchSellerAffiliateOrdersRequest
 
 // NewSearchSellerAffiliateOrdersRequest instantiates a new SearchSellerAffiliateOrdersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchSellerAffiliateOrdersRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.ProgramId) {
 		toSerialize["program_id"] = o.ProgramId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSellerAffiliateOrdersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchSellerAffiliateOrdersRequest := _SearchSellerAffiliateOrdersRequest{}
+
+	err = json.Unmarshal(data, &varSearchSellerAffiliateOrdersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSellerAffiliateOrdersRequest(varSearchSellerAffiliateOrdersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "program_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSellerAffiliateOrdersRequest struct {

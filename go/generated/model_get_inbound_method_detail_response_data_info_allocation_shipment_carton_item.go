@@ -27,7 +27,10 @@ type GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem struct {
 	LotCode *string `json:"lot_code,omitempty"`
 	// The expiration date for this item, Unix timestamp in seconds.
 	ExpirationTimestamp *string `json:"expiration_timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem
 
 // NewGetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem instantiates a new GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem) ToMa
 	if !IsNil(o.ExpirationTimestamp) {
 		toSerialize["expiration_timestamp"] = o.ExpirationTimestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem := _GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem(varGetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "lot_code")
+		delete(additionalProperties, "expiration_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem struct {

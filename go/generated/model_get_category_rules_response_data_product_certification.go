@@ -33,7 +33,10 @@ type GetCategoryRulesResponseDataProductCertification struct {
 	RequirementConditions []RequirementCondition `json:"requirement_conditions,omitempty"`
 	// Certification expiration date related rules.
 	ExpirationDate *GetCategoryRulesResponseDataProductCertificationExpirationDate `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataProductCertification GetCategoryRulesResponseDataProductCertification
 
 // NewGetCategoryRulesResponseDataProductCertification instantiates a new GetCategoryRulesResponseDataProductCertification object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetCategoryRulesResponseDataProductCertification) ToMap() (map[string]in
 	if !IsNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataProductCertification) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataProductCertification := _GetCategoryRulesResponseDataProductCertification{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataProductCertification)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataProductCertification(varGetCategoryRulesResponseDataProductCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "document_details")
+		delete(additionalProperties, "sample_image_url")
+		delete(additionalProperties, "requirement_conditions")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataProductCertification struct {

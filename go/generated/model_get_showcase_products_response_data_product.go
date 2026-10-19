@@ -45,7 +45,10 @@ type GetShowcaseProductsResponseDataProduct struct {
 	Commission *GetShowcaseProductsResponseDataProductCommission `json:"commission,omitempty"`
 	// An object containing collaboration data for the product.
 	Collaboration *GetShowcaseProductsResponseDataProductCollaboration `json:"collaboration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProduct GetShowcaseProductsResponseDataProduct
 
 // NewGetShowcaseProductsResponseDataProduct instantiates a new GetShowcaseProductsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o GetShowcaseProductsResponseDataProduct) ToMap() (map[string]interface{},
 	if !IsNil(o.Collaboration) {
 		toSerialize["collaboration"] = o.Collaboration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProduct := _GetShowcaseProductsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProduct(varGetShowcaseProductsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "shop")
+		delete(additionalProperties, "addition")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "detail_link")
+		delete(additionalProperties, "third_party_link")
+		delete(additionalProperties, "sale_regions")
+		delete(additionalProperties, "commission")
+		delete(additionalProperties, "collaboration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProduct struct {

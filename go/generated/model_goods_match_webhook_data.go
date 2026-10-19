@@ -31,7 +31,10 @@ type GoodsMatchWebhookData struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// The time when the action occurred. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GoodsMatchWebhookData GoodsMatchWebhookData
 
 // NewGoodsMatchWebhookData instantiates a new GoodsMatchWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GoodsMatchWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GoodsMatchWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varGoodsMatchWebhookData := _GoodsMatchWebhookData{}
+
+	err = json.Unmarshal(data, &varGoodsMatchWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GoodsMatchWebhookData(varGoodsMatchWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "match_type")
+		delete(additionalProperties, "product_type")
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGoodsMatchWebhookData struct {

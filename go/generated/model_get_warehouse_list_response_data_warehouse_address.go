@@ -57,7 +57,10 @@ type GetWarehouseListResponseDataWarehouseAddress struct {
 	AddressLine4 *string `json:"address_line4,omitempty"`
 	// The geographical location of the address.
 	Geolocation *GetWarehouseListResponseDataWarehouseAddressGeolocation `json:"geolocation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseListResponseDataWarehouseAddress GetWarehouseListResponseDataWarehouseAddress
 
 // NewGetWarehouseListResponseDataWarehouseAddress instantiates a new GetWarehouseListResponseDataWarehouseAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -751,7 +754,51 @@ func (o GetWarehouseListResponseDataWarehouseAddress) ToMap() (map[string]interf
 	if !IsNil(o.Geolocation) {
 		toSerialize["geolocation"] = o.Geolocation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseListResponseDataWarehouseAddress) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseListResponseDataWarehouseAddress := _GetWarehouseListResponseDataWarehouseAddress{}
+
+	err = json.Unmarshal(data, &varGetWarehouseListResponseDataWarehouseAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseListResponseDataWarehouseAddress(varGetWarehouseListResponseDataWarehouseAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "distict")
+		delete(additionalProperties, "town")
+		delete(additionalProperties, "contact_person")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "first_name_local_script")
+		delete(additionalProperties, "last_name_local_script")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "full_address")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address_line1")
+		delete(additionalProperties, "address_line2")
+		delete(additionalProperties, "address_line3")
+		delete(additionalProperties, "address_line4")
+		delete(additionalProperties, "geolocation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseListResponseDataWarehouseAddress struct {

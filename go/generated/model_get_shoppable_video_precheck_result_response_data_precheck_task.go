@@ -25,7 +25,10 @@ type GetShoppableVideoPrecheckResultResponseDataPrecheckTask struct {
 	ViolationCheckResult *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult `json:"violation_check_result,omitempty"`
 	// Good-quality check details. This field is omitted when the good-quality check is disabled.
 	GoodQualityCheckResult *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult `json:"good_quality_check_result,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseDataPrecheckTask GetShoppableVideoPrecheckResultResponseDataPrecheckTask
 
 // NewGetShoppableVideoPrecheckResultResponseDataPrecheckTask instantiates a new GetShoppableVideoPrecheckResultResponseDataPrecheckTask object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShoppableVideoPrecheckResultResponseDataPrecheckTask) ToMap() (map[st
 	if !IsNil(o.GoodQualityCheckResult) {
 		toSerialize["good_quality_check_result"] = o.GoodQualityCheckResult
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseDataPrecheckTask) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseDataPrecheckTask := _GetShoppableVideoPrecheckResultResponseDataPrecheckTask{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseDataPrecheckTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseDataPrecheckTask(varGetShoppableVideoPrecheckResultResponseDataPrecheckTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "violation_check_result")
+		delete(additionalProperties, "good_quality_check_result")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseDataPrecheckTask struct {

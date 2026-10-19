@@ -25,7 +25,10 @@ type SearchCreatorsInCreatorMarketplaceResponseData struct {
 	SearchKey *string `json:"search_key,omitempty"`
 	// Creator records with basic profile, content performance, follower, GMV, and sales-range information. Included fields depend on the requested `data_groups`.
 	Creators []SearchCreatorsInCreatorMarketplaceResponseDataCreator `json:"creators,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceResponseData SearchCreatorsInCreatorMarketplaceResponseData
 
 // NewSearchCreatorsInCreatorMarketplaceResponseData instantiates a new SearchCreatorsInCreatorMarketplaceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCreatorsInCreatorMarketplaceResponseData) ToMap() (map[string]inte
 	if !IsNil(o.Creators) {
 		toSerialize["creators"] = o.Creators
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceResponseData := _SearchCreatorsInCreatorMarketplaceResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceResponseData(varSearchCreatorsInCreatorMarketplaceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "search_key")
+		delete(additionalProperties, "creators")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceResponseData struct {

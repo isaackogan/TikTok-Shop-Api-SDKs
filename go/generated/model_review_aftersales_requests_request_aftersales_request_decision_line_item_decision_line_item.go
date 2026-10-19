@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLin
 	ReturnLineItemId string `json:"return_line_item_id"`
 	// Unique identifier for this item in the return. In the case of virtual bundle, this corresponds to the id of the current child item being returned.
 	SubReturnLineItemId *string `json:"sub_return_line_item_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem
@@ -117,6 +117,11 @@ func (o ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
 	if !IsNil(o.SubReturnLineItemId) {
 		toSerialize["sub_return_line_item_id"] = o.SubReturnLineItemId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisio
 
 	varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem := _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem)
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem(varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "sub_return_line_item_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

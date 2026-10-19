@@ -21,7 +21,10 @@ var _ MappedNullable = &GetActiveShopsResponseData{}
 type GetActiveShopsResponseData struct {
 	// The list of active shops that belong to the seller. Note: Local sellers only have 1 shop.
 	Shops []GetActiveShopsResponseDataShop `json:"shops,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActiveShopsResponseData GetActiveShopsResponseData
 
 // NewGetActiveShopsResponseData instantiates a new GetActiveShopsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetActiveShopsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Shops) {
 		toSerialize["shops"] = o.Shops
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActiveShopsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetActiveShopsResponseData := _GetActiveShopsResponseData{}
+
+	err = json.Unmarshal(data, &varGetActiveShopsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActiveShopsResponseData(varGetActiveShopsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shops")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActiveShopsResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type SearchTargetCollaborationsRequest struct {
 	CreatorUserOpenId *string `json:"creator_user_open_id,omitempty"`
 	// Filtering by target collaborations' status. You can query based on: - ONGOING: If you use ONGOING to search, the remaining validity period of the returned target collaborations will be greater than 7 days. - EXPIRING: If you use EXPIRING to search, the remaining validity period of the returned target collaborations will be less than 7 days. - VALID: If you use VALID to search, all returned target collaborations will be valid. - CANCELING: If you use CANCELING to search, all returned target collaborations will be in the process of canceling. - COMPLETED: If you use COMPLETED to search, all returned target collaborations will be in the state of completed, including expired and canceled.
 	CollaborationStatus string `json:"collaboration_status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchTargetCollaborationsRequest SearchTargetCollaborationsRequest
@@ -228,6 +228,11 @@ func (o SearchTargetCollaborationsRequest) ToMap() (map[string]interface{}, erro
 		toSerialize["creator_user_open_id"] = o.CreatorUserOpenId
 	}
 	toSerialize["collaboration_status"] = o.CollaborationStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *SearchTargetCollaborationsRequest) UnmarshalJSON(data []byte) (err erro
 
 	varSearchTargetCollaborationsRequest := _SearchTargetCollaborationsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchTargetCollaborationsRequest)
+	err = json.Unmarshal(data, &varSearchTargetCollaborationsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchTargetCollaborationsRequest(varSearchTargetCollaborationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_accept_status")
+		delete(additionalProperties, "free_sample_setting")
+		delete(additionalProperties, "search_param")
+		delete(additionalProperties, "creator_user_open_id")
+		delete(additionalProperties, "collaboration_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

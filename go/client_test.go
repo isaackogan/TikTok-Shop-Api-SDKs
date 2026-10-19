@@ -3,6 +3,7 @@ package tiktokshop
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"io"
 	"mime"
@@ -531,5 +532,30 @@ func TestWithShopEmptyValueClears(t *testing.T) {
 	}
 	if cipher, n, token := withShopSends(t, s, a); cipher != "cipher1" || n != 1 || token != "tok" {
 		t.Errorf("original changed: cipher %q token %q", cipher, token)
+	}
+}
+
+func TestResponseWithUnknownFieldsStillDecodes(t *testing.T) {
+	s := newStub(t)
+	s.body = `{"code":0,"message":"Success","request_id":"r0","new_top":1,"data":{"new_data":{"a":1},"shops":[{"id":"7","name":"n","new_in_shop":true,"cipher":"c"}]}}`
+	resp, _, err := s.client().Authorization.GetAuthorizedShops(context.Background()).Execute()
+	if err != nil {
+		t.Fatal(err)
+	}
+	data := resp.GetData()
+	shops := data.GetShops()
+	if len(shops) != 1 || shops[0].GetId() != "7" || shops[0].GetName() != "n" {
+		t.Fatalf("known fields lost: %+v", data)
+	}
+	if data.AdditionalProperties["new_data"] == nil || shops[0].AdditionalProperties["new_in_shop"] == nil {
+		t.Errorf("unknown fields not kept: %+v", data)
+	}
+}
+
+func TestModelWithRequiredPropertiesAcceptsUnknownFields(t *testing.T) {
+	// A model with required properties used to be decoded with DisallowUnknownFields.
+	var o generated.ActivateProductsRequest
+	if err := json.Unmarshal([]byte(`{"product_ids":["1"],"brand_new":true}`), &o); err != nil {
+		t.Fatal(err)
 	}
 }

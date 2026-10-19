@@ -33,7 +33,10 @@ type CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult struct 
 	IsCreatorLevelQuotaAvailable *bool `json:"is_creator_level_quota_available,omitempty"`
 	// Whether the shop is paired with the creator.
 	IsPaired *bool `json:"is_paired,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult
 
 // NewCheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult instantiates a new CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult) ToM
 	if !IsNil(o.IsPaired) {
 		toSerialize["is_paired"] = o.IsPaired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult := _CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult{}
+
+	err = json.Unmarshal(data, &varCheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult(varCheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_level")
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "is_blocked")
+		delete(additionalProperties, "is_connected")
+		delete(additionalProperties, "is_creator_follower_count_threshold_met")
+		delete(additionalProperties, "is_creator_level_quota_available")
+		delete(additionalProperties, "is_paired")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult struct {

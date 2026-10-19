@@ -41,7 +41,10 @@ type GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampai
 	ProductThumbnail *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail `json:"product_thumbnail,omitempty"`
 	// Key performance indicators for the product.
 	IndicatorData *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData `json:"indicator_data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail
 
 // NewGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail instantiates a new GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCam
 	if !IsNil(o.IndicatorData) {
 		toSerialize["indicator_data"] = o.IndicatorData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail := _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail(varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_status")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "product_stock_count")
+		delete(additionalProperties, "total_commission_percent")
+		delete(additionalProperties, "creator_commission_percent")
+		delete(additionalProperties, "partner_commission_percent")
+		delete(additionalProperties, "plan_commission_percent")
+		delete(additionalProperties, "product_price")
+		delete(additionalProperties, "product_thumbnail")
+		delete(additionalProperties, "indicator_data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail struct {

@@ -25,7 +25,10 @@ type Suggestion struct {
 	SmartTexts []SmartText `json:"smart_texts,omitempty"`
 	// The optimized main image. Only the first image in the main image set will be optimized.
 	Images []DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Suggestion Suggestion
 
 // NewSuggestion instantiates a new Suggestion object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Suggestion) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Suggestion) UnmarshalJSON(data []byte) (err error) {
+	varSuggestion := _Suggestion{}
+
+	err = json.Unmarshal(data, &varSuggestion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Suggestion(varSuggestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seo_words")
+		delete(additionalProperties, "smart_texts")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSuggestion struct {

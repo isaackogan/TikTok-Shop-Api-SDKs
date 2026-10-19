@@ -23,7 +23,10 @@ type GenerateCampaignProductPromotionLinksInBatchResponseData struct {
 	ProductPromotionLinks []GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink `json:"product_promotion_links,omitempty"`
 	// The list of products for which the promotion links failed to be generated.
 	FailedProductIds []string `json:"failed_product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateCampaignProductPromotionLinksInBatchResponseData GenerateCampaignProductPromotionLinksInBatchResponseData
 
 // NewGenerateCampaignProductPromotionLinksInBatchResponseData instantiates a new GenerateCampaignProductPromotionLinksInBatchResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GenerateCampaignProductPromotionLinksInBatchResponseData) ToMap() (map[s
 	if !IsNil(o.FailedProductIds) {
 		toSerialize["failed_product_ids"] = o.FailedProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateCampaignProductPromotionLinksInBatchResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGenerateCampaignProductPromotionLinksInBatchResponseData := _GenerateCampaignProductPromotionLinksInBatchResponseData{}
+
+	err = json.Unmarshal(data, &varGenerateCampaignProductPromotionLinksInBatchResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateCampaignProductPromotionLinksInBatchResponseData(varGenerateCampaignProductPromotionLinksInBatchResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_promotion_links")
+		delete(additionalProperties, "failed_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateCampaignProductPromotionLinksInBatchResponseData struct {

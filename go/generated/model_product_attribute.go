@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ProductAttribute struct {
 	Id string `json:"id"`
 	// A list of selectable values for the product attribute.  **Note**: Provide either a built-in ID or a custom name; if both are provided, the ID takes priority.
 	Values []Value `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductAttribute ProductAttribute
@@ -108,6 +108,11 @@ func (o ProductAttribute) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ProductAttribute) UnmarshalJSON(data []byte) (err error) {
 
 	varProductAttribute := _ProductAttribute{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductAttribute)
+	err = json.Unmarshal(data, &varProductAttribute)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductAttribute(varProductAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

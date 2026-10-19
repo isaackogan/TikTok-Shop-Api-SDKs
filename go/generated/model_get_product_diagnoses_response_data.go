@@ -21,7 +21,10 @@ var _ MappedNullable = &GetProductDiagnosesResponseData{}
 type GetProductDiagnosesResponseData struct {
 	// The list of requested products and the corresponding diagnosis results.
 	Products []GetProductDiagnosesResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductDiagnosesResponseData GetProductDiagnosesResponseData
 
 // NewGetProductDiagnosesResponseData instantiates a new GetProductDiagnosesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetProductDiagnosesResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductDiagnosesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetProductDiagnosesResponseData := _GetProductDiagnosesResponseData{}
+
+	err = json.Unmarshal(data, &varGetProductDiagnosesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductDiagnosesResponseData(varGetProductDiagnosesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductDiagnosesResponseData struct {

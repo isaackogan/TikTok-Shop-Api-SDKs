@@ -25,7 +25,10 @@ type GlobalListingMethodChangeWebhookData struct {
 	LocalProductId []string `json:"local_product_id,omitempty"`
 	// The listing method applicable to the local product.   Possible values:      * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.   * LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
 	ListingMethod *string `json:"listing_method,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalListingMethodChangeWebhookData GlobalListingMethodChangeWebhookData
 
 // NewGlobalListingMethodChangeWebhookData instantiates a new GlobalListingMethodChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GlobalListingMethodChangeWebhookData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.ListingMethod) {
 		toSerialize["listing_method"] = o.ListingMethod
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalListingMethodChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varGlobalListingMethodChangeWebhookData := _GlobalListingMethodChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varGlobalListingMethodChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalListingMethodChangeWebhookData(varGlobalListingMethodChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_product_id")
+		delete(additionalProperties, "local_product_id")
+		delete(additionalProperties, "listing_method")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalListingMethodChangeWebhookData struct {

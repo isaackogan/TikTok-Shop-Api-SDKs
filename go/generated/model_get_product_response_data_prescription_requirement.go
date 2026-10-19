@@ -21,7 +21,10 @@ var _ MappedNullable = &GetProductResponseDataPrescriptionRequirement{}
 type GetProductResponseDataPrescriptionRequirement struct {
 	// A flag to indicate whether a prescription is required to purchase this pharmacy product.
 	NeedsPrescription *bool `json:"needs_prescription,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPrescriptionRequirement GetProductResponseDataPrescriptionRequirement
 
 // NewGetProductResponseDataPrescriptionRequirement instantiates a new GetProductResponseDataPrescriptionRequirement object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetProductResponseDataPrescriptionRequirement) ToMap() (map[string]inter
 	if !IsNil(o.NeedsPrescription) {
 		toSerialize["needs_prescription"] = o.NeedsPrescription
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPrescriptionRequirement) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPrescriptionRequirement := _GetProductResponseDataPrescriptionRequirement{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPrescriptionRequirement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPrescriptionRequirement(varGetProductResponseDataPrescriptionRequirement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "needs_prescription")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPrescriptionRequirement struct {

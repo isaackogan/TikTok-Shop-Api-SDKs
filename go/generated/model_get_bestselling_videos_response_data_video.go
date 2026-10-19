@@ -41,7 +41,10 @@ type GetBestsellingVideosResponseDataVideo struct {
 	PublishTime *int64 `json:"publish_time,omitempty"`
 	// Duration of the video, in seconds.
 	Duration *int64 `json:"duration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingVideosResponseDataVideo GetBestsellingVideosResponseDataVideo
 
 // NewGetBestsellingVideosResponseDataVideo instantiates a new GetBestsellingVideosResponseDataVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o GetBestsellingVideosResponseDataVideo) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Duration) {
 		toSerialize["duration"] = o.Duration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingVideosResponseDataVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingVideosResponseDataVideo := _GetBestsellingVideosResponseDataVideo{}
+
+	err = json.Unmarshal(data, &varGetBestsellingVideosResponseDataVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingVideosResponseDataVideo(varGetBestsellingVideosResponseDataVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rank")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "nick_name")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "views")
+		delete(additionalProperties, "likes")
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "shares")
+		delete(additionalProperties, "product_infos")
+		delete(additionalProperties, "publish_time")
+		delete(additionalProperties, "duration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingVideosResponseDataVideo struct {

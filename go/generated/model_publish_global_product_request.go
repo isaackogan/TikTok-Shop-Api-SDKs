@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &PublishGlobalProductRequest{}
 type PublishGlobalProductRequest struct {
 	// Target markets for publishing global products.
 	PublishTarget []PublishGlobalProductRequestPublishTarget `json:"publish_target"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PublishGlobalProductRequest PublishGlobalProductRequest
@@ -80,6 +80,11 @@ func (o PublishGlobalProductRequest) MarshalJSON() ([]byte, error) {
 func (o PublishGlobalProductRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["publish_target"] = o.PublishTarget
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PublishGlobalProductRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPublishGlobalProductRequest := _PublishGlobalProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPublishGlobalProductRequest)
+	err = json.Unmarshal(data, &varPublishGlobalProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PublishGlobalProductRequest(varPublishGlobalProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "publish_target")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

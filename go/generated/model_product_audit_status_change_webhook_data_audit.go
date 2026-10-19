@@ -23,7 +23,10 @@ type ProductAuditStatusChangeWebhookDataAudit struct {
 	Status *string `json:"status,omitempty"`
 	// The reason why the audit status of the product is `PRE_APPROVED`.   Possible values:      * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.   * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center.
 	PreApprovedReasons []string `json:"pre_approved_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductAuditStatusChangeWebhookDataAudit ProductAuditStatusChangeWebhookDataAudit
 
 // NewProductAuditStatusChangeWebhookDataAudit instantiates a new ProductAuditStatusChangeWebhookDataAudit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ProductAuditStatusChangeWebhookDataAudit) ToMap() (map[string]interface{
 	if !IsNil(o.PreApprovedReasons) {
 		toSerialize["pre_approved_reasons"] = o.PreApprovedReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductAuditStatusChangeWebhookDataAudit) UnmarshalJSON(data []byte) (err error) {
+	varProductAuditStatusChangeWebhookDataAudit := _ProductAuditStatusChangeWebhookDataAudit{}
+
+	err = json.Unmarshal(data, &varProductAuditStatusChangeWebhookDataAudit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductAuditStatusChangeWebhookDataAudit(varProductAuditStatusChangeWebhookDataAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "pre_approved_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductAuditStatusChangeWebhookDataAudit struct {

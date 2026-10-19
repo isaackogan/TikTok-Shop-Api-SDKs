@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateFirstMileBundleResponseDataErrorDetail{}
 type CreateFirstMileBundleResponseDataErrorDetail struct {
 	// TikTok Shop order ID
 	OrderId *string `json:"order_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFirstMileBundleResponseDataErrorDetail CreateFirstMileBundleResponseDataErrorDetail
 
 // NewCreateFirstMileBundleResponseDataErrorDetail instantiates a new CreateFirstMileBundleResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateFirstMileBundleResponseDataErrorDetail) ToMap() (map[string]interf
 	if !IsNil(o.OrderId) {
 		toSerialize["order_id"] = o.OrderId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFirstMileBundleResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varCreateFirstMileBundleResponseDataErrorDetail := _CreateFirstMileBundleResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varCreateFirstMileBundleResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFirstMileBundleResponseDataErrorDetail(varCreateFirstMileBundleResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFirstMileBundleResponseDataErrorDetail struct {

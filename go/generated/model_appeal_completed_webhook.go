@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type AppealCompletedWebhook struct {
 	TtsNotificationId string `json:"tts_notification_id"`
 	Timestamp int64 `json:"timestamp"`
 	Data AppealCompletedWebhookData `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppealCompletedWebhook AppealCompletedWebhook
@@ -188,6 +188,11 @@ func (o AppealCompletedWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize["tts_notification_id"] = o.TtsNotificationId
 	toSerialize["timestamp"] = o.Timestamp
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -219,15 +224,24 @@ func (o *AppealCompletedWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varAppealCompletedWebhook := _AppealCompletedWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppealCompletedWebhook)
+	err = json.Unmarshal(data, &varAppealCompletedWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppealCompletedWebhook(varAppealCompletedWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

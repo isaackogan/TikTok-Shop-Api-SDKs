@@ -27,7 +27,10 @@ type GetProductResponseDataCategoryChain struct {
 	LocalName *string `json:"local_name,omitempty"`
 	// The parent category ID.  For the root category, the parent ID is `0`.
 	ParentId *string `json:"parent_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataCategoryChain GetProductResponseDataCategoryChain
 
 // NewGetProductResponseDataCategoryChain instantiates a new GetProductResponseDataCategoryChain object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataCategoryChain) ToMap() (map[string]interface{}, er
 	if !IsNil(o.ParentId) {
 		toSerialize["parent_id"] = o.ParentId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataCategoryChain) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataCategoryChain := _GetProductResponseDataCategoryChain{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataCategoryChain)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataCategoryChain(varGetProductResponseDataCategoryChain)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "local_name")
+		delete(additionalProperties, "parent_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataCategoryChain struct {

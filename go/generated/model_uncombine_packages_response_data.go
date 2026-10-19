@@ -21,7 +21,10 @@ var _ MappedNullable = &UncombinePackagesResponseData{}
 type UncombinePackagesResponseData struct {
 	// The packages created after the specified orders are removed from the original combined package.
 	Packages []Package `json:"packages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UncombinePackagesResponseData UncombinePackagesResponseData
 
 // NewUncombinePackagesResponseData instantiates a new UncombinePackagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UncombinePackagesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Packages) {
 		toSerialize["packages"] = o.Packages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UncombinePackagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUncombinePackagesResponseData := _UncombinePackagesResponseData{}
+
+	err = json.Unmarshal(data, &varUncombinePackagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UncombinePackagesResponseData(varUncombinePackagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUncombinePackagesResponseData struct {

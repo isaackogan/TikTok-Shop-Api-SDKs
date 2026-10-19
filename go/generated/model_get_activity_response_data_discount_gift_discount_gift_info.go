@@ -27,7 +27,10 @@ type GetActivityResponseDataDiscountGiftDiscountGiftInfo struct {
 	ThresholdValue *string `json:"threshold_value,omitempty"`
 	// Gift configurations related to Gift With Purchase (GWP) promotions.
 	GiftDetails []GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail `json:"gift_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountGiftDiscountGiftInfo GetActivityResponseDataDiscountGiftDiscountGiftInfo
 
 // NewGetActivityResponseDataDiscountGiftDiscountGiftInfo instantiates a new GetActivityResponseDataDiscountGiftDiscountGiftInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetActivityResponseDataDiscountGiftDiscountGiftInfo) ToMap() (map[string
 	if !IsNil(o.GiftDetails) {
 		toSerialize["gift_details"] = o.GiftDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountGiftDiscountGiftInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountGiftDiscountGiftInfo := _GetActivityResponseDataDiscountGiftDiscountGiftInfo{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountGiftDiscountGiftInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountGiftDiscountGiftInfo(varGetActivityResponseDataDiscountGiftDiscountGiftInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier")
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "gift_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountGiftDiscountGiftInfo struct {

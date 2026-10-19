@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateSizeChartV2RequestSizeChartDataTableHeader struct {
 	Name string `json:"name"`
 	// Standard size-system or measurement ID. For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type. For size-system columns, use the following predefined IDs: - Size: size_chart_size_system_size - US: size_chart_size_system_us - UK: size_chart_size_system_uk - EU: size_chart_size_system_eu - JP: size_chart_size_system_jp - MX: size_chart_size_system_mx Omit this field for custom columns.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSizeChartV2RequestSizeChartDataTableHeader CreateSizeChartV2RequestSizeChartDataTableHeader
@@ -117,6 +117,11 @@ func (o CreateSizeChartV2RequestSizeChartDataTableHeader) ToMap() (map[string]in
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CreateSizeChartV2RequestSizeChartDataTableHeader) UnmarshalJSON(data []
 
 	varCreateSizeChartV2RequestSizeChartDataTableHeader := _CreateSizeChartV2RequestSizeChartDataTableHeader{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSizeChartV2RequestSizeChartDataTableHeader)
+	err = json.Unmarshal(data, &varCreateSizeChartV2RequestSizeChartDataTableHeader)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSizeChartV2RequestSizeChartDataTableHeader(varCreateSizeChartV2RequestSizeChartDataTableHeader)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

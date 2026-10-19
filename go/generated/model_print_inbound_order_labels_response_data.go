@@ -23,7 +23,10 @@ type PrintInboundOrderLabelsResponseData struct {
 	DownloadUrl *string `json:"download_url,omitempty"`
 	// * `PROCESSING`: Task is currently being processed. Continue to periodically poll. * `SUCCESS`:  Task is finished. `download_url` should be included in response
 	TaskStatus *string `json:"task_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PrintInboundOrderLabelsResponseData PrintInboundOrderLabelsResponseData
 
 // NewPrintInboundOrderLabelsResponseData instantiates a new PrintInboundOrderLabelsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PrintInboundOrderLabelsResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.TaskStatus) {
 		toSerialize["task_status"] = o.TaskStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PrintInboundOrderLabelsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varPrintInboundOrderLabelsResponseData := _PrintInboundOrderLabelsResponseData{}
+
+	err = json.Unmarshal(data, &varPrintInboundOrderLabelsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PrintInboundOrderLabelsResponseData(varPrintInboundOrderLabelsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "download_url")
+		delete(additionalProperties, "task_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePrintInboundOrderLabelsResponseData struct {

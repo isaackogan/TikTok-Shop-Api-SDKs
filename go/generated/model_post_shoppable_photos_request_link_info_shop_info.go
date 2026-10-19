@@ -25,7 +25,10 @@ type PostShoppablePhotosRequestLinkInfoShopInfo struct {
 	GroupType *string `json:"group_type,omitempty"`
 	// Category ID/Collection ID. Use [Get Shop Category And Collection] to retrieve a valid category_id or collection_id, then set it in this field
 	GroupId *string `json:"group_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PostShoppablePhotosRequestLinkInfoShopInfo PostShoppablePhotosRequestLinkInfoShopInfo
 
 // NewPostShoppablePhotosRequestLinkInfoShopInfo instantiates a new PostShoppablePhotosRequestLinkInfoShopInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PostShoppablePhotosRequestLinkInfoShopInfo) ToMap() (map[string]interfac
 	if !IsNil(o.GroupId) {
 		toSerialize["group_id"] = o.GroupId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PostShoppablePhotosRequestLinkInfoShopInfo) UnmarshalJSON(data []byte) (err error) {
+	varPostShoppablePhotosRequestLinkInfoShopInfo := _PostShoppablePhotosRequestLinkInfoShopInfo{}
+
+	err = json.Unmarshal(data, &varPostShoppablePhotosRequestLinkInfoShopInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PostShoppablePhotosRequestLinkInfoShopInfo(varPostShoppablePhotosRequestLinkInfoShopInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "group_type")
+		delete(additionalProperties, "group_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePostShoppablePhotosRequestLinkInfoShopInfo struct {

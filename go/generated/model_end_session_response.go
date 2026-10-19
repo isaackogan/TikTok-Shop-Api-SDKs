@@ -26,7 +26,10 @@ type EndSessionResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EndSessionResponse EndSessionResponse
 
 // NewEndSessionResponse instantiates a new EndSessionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o EndSessionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EndSessionResponse) UnmarshalJSON(data []byte) (err error) {
+	varEndSessionResponse := _EndSessionResponse{}
+
+	err = json.Unmarshal(data, &varEndSessionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EndSessionResponse(varEndSessionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEndSessionResponse struct {

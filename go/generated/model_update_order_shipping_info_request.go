@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type UpdateOrderShippingInfoRequest struct {
 	TrackingNumber string `json:"tracking_number"`
 	// Identifies the carrier that will deliver the package. Please call [Get Shipping Providers API](https://partner.tiktokshop.com/docv2/page/650aa48d4a0bb702c06d85cd?external_id=650aa48d4a0bb702c06d85cd#Back%20To%20Top) to retrieve the available shipping provider(s).
 	ShippingProviderId string `json:"shipping_provider_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateOrderShippingInfoRequest UpdateOrderShippingInfoRequest
@@ -108,6 +108,11 @@ func (o UpdateOrderShippingInfoRequest) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["tracking_number"] = o.TrackingNumber
 	toSerialize["shipping_provider_id"] = o.ShippingProviderId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *UpdateOrderShippingInfoRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varUpdateOrderShippingInfoRequest := _UpdateOrderShippingInfoRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateOrderShippingInfoRequest)
+	err = json.Unmarshal(data, &varUpdateOrderShippingInfoRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateOrderShippingInfoRequest(varUpdateOrderShippingInfoRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "shipping_provider_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

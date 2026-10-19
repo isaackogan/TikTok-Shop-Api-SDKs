@@ -25,7 +25,10 @@ type GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion struc
 	DiscountAmount *string `json:"discount_amount,omitempty"`
 	// Discount type of this activity. Enumerations: - COUPON - ACTIVITY
 	DiscountType *string `json:"discount_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion
 
 // NewGetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion instantiates a new GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion) T
 	if !IsNil(o.DiscountType) {
 		toSerialize["discount_type"] = o.DiscountType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion := _GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion{}
+
+	err = json.Unmarshal(data, &varGetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion(varGetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "discount_amount")
+		delete(additionalProperties, "discount_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion struct {

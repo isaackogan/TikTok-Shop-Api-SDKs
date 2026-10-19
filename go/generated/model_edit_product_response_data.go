@@ -27,7 +27,10 @@ type EditProductResponseData struct {
 	Warnings []Warning `json:"warnings,omitempty"`
 	// Product audit information. **Note**: Applicable only to products listed on TikTok Shop. Not applicable for products listed only on Tokopedia.
 	Audit *EditProductResponseDataAudit `json:"audit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditProductResponseData EditProductResponseData
 
 // NewEditProductResponseData instantiates a new EditProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o EditProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Audit) {
 		toSerialize["audit"] = o.Audit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varEditProductResponseData := _EditProductResponseData{}
+
+	err = json.Unmarshal(data, &varEditProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditProductResponseData(varEditProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "warnings")
+		delete(additionalProperties, "audit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditProductResponseData struct {

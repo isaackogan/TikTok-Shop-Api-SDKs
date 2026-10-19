@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataEpr{}
 type GetCategoryRulesResponseDataEpr struct {
 	// A flag to indicate whether EPR is required.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataEpr GetCategoryRulesResponseDataEpr
 
 // NewGetCategoryRulesResponseDataEpr instantiates a new GetCategoryRulesResponseDataEpr object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataEpr) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataEpr) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataEpr := _GetCategoryRulesResponseDataEpr{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataEpr)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataEpr(varGetCategoryRulesResponseDataEpr)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataEpr struct {

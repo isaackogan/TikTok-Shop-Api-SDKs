@@ -26,7 +26,10 @@ type QueryGoodsInventoryForMCFResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *QueryGoodsInventoryForMCFResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryGoodsInventoryForMCFResponse QueryGoodsInventoryForMCFResponse
 
 // NewQueryGoodsInventoryForMCFResponse instantiates a new QueryGoodsInventoryForMCFResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o QueryGoodsInventoryForMCFResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryGoodsInventoryForMCFResponse) UnmarshalJSON(data []byte) (err error) {
+	varQueryGoodsInventoryForMCFResponse := _QueryGoodsInventoryForMCFResponse{}
+
+	err = json.Unmarshal(data, &varQueryGoodsInventoryForMCFResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryGoodsInventoryForMCFResponse(varQueryGoodsInventoryForMCFResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryGoodsInventoryForMCFResponse struct {

@@ -23,7 +23,10 @@ type GetMessageTemplatesResponseDataMessageTemplateProductCardRule struct {
 	MinCount *int64 `json:"min_count,omitempty"`
 	// The maximum number of product cards that can be included.
 	MaxCount *int64 `json:"max_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMessageTemplatesResponseDataMessageTemplateProductCardRule GetMessageTemplatesResponseDataMessageTemplateProductCardRule
 
 // NewGetMessageTemplatesResponseDataMessageTemplateProductCardRule instantiates a new GetMessageTemplatesResponseDataMessageTemplateProductCardRule object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMessageTemplatesResponseDataMessageTemplateProductCardRule) ToMap() (
 	if !IsNil(o.MaxCount) {
 		toSerialize["max_count"] = o.MaxCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMessageTemplatesResponseDataMessageTemplateProductCardRule) UnmarshalJSON(data []byte) (err error) {
+	varGetMessageTemplatesResponseDataMessageTemplateProductCardRule := _GetMessageTemplatesResponseDataMessageTemplateProductCardRule{}
+
+	err = json.Unmarshal(data, &varGetMessageTemplatesResponseDataMessageTemplateProductCardRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMessageTemplatesResponseDataMessageTemplateProductCardRule(varGetMessageTemplatesResponseDataMessageTemplateProductCardRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_count")
+		delete(additionalProperties, "max_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMessageTemplatesResponseDataMessageTemplateProductCardRule struct {

@@ -25,7 +25,10 @@ type UploadMessageImageResponseData struct {
 	Width *int64 `json:"width,omitempty"`
 	// Image height in pixels.
 	Height *int64 `json:"height,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadMessageImageResponseData UploadMessageImageResponseData
 
 // NewUploadMessageImageResponseData instantiates a new UploadMessageImageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UploadMessageImageResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Height) {
 		toSerialize["height"] = o.Height
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadMessageImageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadMessageImageResponseData := _UploadMessageImageResponseData{}
+
+	err = json.Unmarshal(data, &varUploadMessageImageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadMessageImageResponseData(varUploadMessageImageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadMessageImageResponseData struct {

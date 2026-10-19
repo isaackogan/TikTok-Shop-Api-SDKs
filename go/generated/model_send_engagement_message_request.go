@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SendEngagementMessageRequest struct {
 	BuyerEmails []string `json:"buyer_emails"`
 	// The ID of the associated customer engagement task. Use the value returned when you call the [Create Engagement Task API](67777e436b61b002f60f01da). **Note**: Ensure the task is still active. You cannot send messages to tasks that have ended.
 	TaskId *string `json:"task_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendEngagementMessageRequest SendEngagementMessageRequest
@@ -117,6 +117,11 @@ func (o SendEngagementMessageRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaskId) {
 		toSerialize["task_id"] = o.TaskId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *SendEngagementMessageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSendEngagementMessageRequest := _SendEngagementMessageRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendEngagementMessageRequest)
+	err = json.Unmarshal(data, &varSendEngagementMessageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendEngagementMessageRequest(varSendEngagementMessageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "buyer_emails")
+		delete(additionalProperties, "task_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

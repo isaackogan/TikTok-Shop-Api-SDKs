@@ -23,7 +23,10 @@ type ClaimDuration struct {
 	StartTime *int64 `json:"start_time,omitempty"`
 	// The UNIX timestamp, in seconds, after which a shopper can no longer claim the coupon.
 	EndTime *int64 `json:"end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClaimDuration ClaimDuration
 
 // NewClaimDuration instantiates a new ClaimDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ClaimDuration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndTime) {
 		toSerialize["end_time"] = o.EndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClaimDuration) UnmarshalJSON(data []byte) (err error) {
+	varClaimDuration := _ClaimDuration{}
+
+	err = json.Unmarshal(data, &varClaimDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClaimDuration(varClaimDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClaimDuration struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type EditGlobalProductRequestSkuSalePrice struct {
 	Region string `json:"region"`
 	// The price amount. Refer to [Product Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed price ranges in each market.
 	Amount string `json:"amount"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditGlobalProductRequestSkuSalePrice EditGlobalProductRequestSkuSalePrice
@@ -108,6 +108,11 @@ func (o EditGlobalProductRequestSkuSalePrice) ToMap() (map[string]interface{}, e
 	toSerialize := map[string]interface{}{}
 	toSerialize["region"] = o.Region
 	toSerialize["amount"] = o.Amount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *EditGlobalProductRequestSkuSalePrice) UnmarshalJSON(data []byte) (err e
 
 	varEditGlobalProductRequestSkuSalePrice := _EditGlobalProductRequestSkuSalePrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditGlobalProductRequestSkuSalePrice)
+	err = json.Unmarshal(data, &varEditGlobalProductRequestSkuSalePrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditGlobalProductRequestSkuSalePrice(varEditGlobalProductRequestSkuSalePrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAffiliateCampaignCreatorProductSampleStatusResponseDa
 type GetAffiliateCampaignCreatorProductSampleStatusResponseData struct {
 	// The creator's sample status
 	SampleStatus *GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus `json:"sample_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliateCampaignCreatorProductSampleStatusResponseData GetAffiliateCampaignCreatorProductSampleStatusResponseData
 
 // NewGetAffiliateCampaignCreatorProductSampleStatusResponseData instantiates a new GetAffiliateCampaignCreatorProductSampleStatusResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAffiliateCampaignCreatorProductSampleStatusResponseData) ToMap() (map
 	if !IsNil(o.SampleStatus) {
 		toSerialize["sample_status"] = o.SampleStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliateCampaignCreatorProductSampleStatusResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliateCampaignCreatorProductSampleStatusResponseData := _GetAffiliateCampaignCreatorProductSampleStatusResponseData{}
+
+	err = json.Unmarshal(data, &varGetAffiliateCampaignCreatorProductSampleStatusResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliateCampaignCreatorProductSampleStatusResponseData(varGetAffiliateCampaignCreatorProductSampleStatusResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sample_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliateCampaignCreatorProductSampleStatusResponseData struct {

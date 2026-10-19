@@ -23,7 +23,10 @@ type GetShopVideoPerformanceListResponseDataVideoProduct struct {
 	Id *string `json:"id,omitempty"`
 	// The product name.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceListResponseDataVideoProduct GetShopVideoPerformanceListResponseDataVideoProduct
 
 // NewGetShopVideoPerformanceListResponseDataVideoProduct instantiates a new GetShopVideoPerformanceListResponseDataVideoProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopVideoPerformanceListResponseDataVideoProduct) ToMap() (map[string
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceListResponseDataVideoProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceListResponseDataVideoProduct := _GetShopVideoPerformanceListResponseDataVideoProduct{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceListResponseDataVideoProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceListResponseDataVideoProduct(varGetShopVideoPerformanceListResponseDataVideoProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceListResponseDataVideoProduct struct {

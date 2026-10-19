@@ -25,7 +25,10 @@ type GetInboundMethodDetailResponseData struct {
 	PlacementTaskStatus *string `json:"placement_task_status,omitempty"`
 	// Unix timestamp in seconds when the placement result expires. For `ONE_HUB`, the expiration is set to 24 hours after this API processes the request. For other methods, it is 24 hours after the placement task's trigger time. After expiration, call this API again to generate a new placement task.
 	ExpirationTimestamp *string `json:"expiration_timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseData GetInboundMethodDetailResponseData
 
 // NewGetInboundMethodDetailResponseData instantiates a new GetInboundMethodDetailResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetInboundMethodDetailResponseData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.ExpirationTimestamp) {
 		toSerialize["expiration_timestamp"] = o.ExpirationTimestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseData := _GetInboundMethodDetailResponseData{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseData(varGetInboundMethodDetailResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "info")
+		delete(additionalProperties, "placement_task_status")
+		delete(additionalProperties, "expiration_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseData struct {

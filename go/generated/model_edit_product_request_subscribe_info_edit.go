@@ -23,7 +23,10 @@ type EditProductRequestSubscribeInfoEdit struct {
 	SubscribeStatus *string `json:"subscribe_status,omitempty"`
 	// All of the Save and Subscribe discount details.
 	DiscountDetails []DiscountDetail `json:"discount_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditProductRequestSubscribeInfoEdit EditProductRequestSubscribeInfoEdit
 
 // NewEditProductRequestSubscribeInfoEdit instantiates a new EditProductRequestSubscribeInfoEdit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o EditProductRequestSubscribeInfoEdit) ToMap() (map[string]interface{}, er
 	if !IsNil(o.DiscountDetails) {
 		toSerialize["discount_details"] = o.DiscountDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditProductRequestSubscribeInfoEdit) UnmarshalJSON(data []byte) (err error) {
+	varEditProductRequestSubscribeInfoEdit := _EditProductRequestSubscribeInfoEdit{}
+
+	err = json.Unmarshal(data, &varEditProductRequestSubscribeInfoEdit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditProductRequestSubscribeInfoEdit(varEditProductRequestSubscribeInfoEdit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "subscribe_status")
+		delete(additionalProperties, "discount_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditProductRequestSubscribeInfoEdit struct {

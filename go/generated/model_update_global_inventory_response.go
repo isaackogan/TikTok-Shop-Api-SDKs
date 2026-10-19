@@ -26,7 +26,10 @@ type UpdateGlobalInventoryResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateGlobalInventoryResponse UpdateGlobalInventoryResponse
 
 // NewUpdateGlobalInventoryResponse instantiates a new UpdateGlobalInventoryResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UpdateGlobalInventoryResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateGlobalInventoryResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdateGlobalInventoryResponse := _UpdateGlobalInventoryResponse{}
+
+	err = json.Unmarshal(data, &varUpdateGlobalInventoryResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateGlobalInventoryResponse(varUpdateGlobalInventoryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateGlobalInventoryResponse struct {

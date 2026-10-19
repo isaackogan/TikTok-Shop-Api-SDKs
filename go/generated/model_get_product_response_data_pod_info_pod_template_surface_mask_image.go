@@ -29,7 +29,10 @@ type GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage struct {
 	Urls []string `json:"urls,omitempty"`
 	// The width of the mask image, in pixels.
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage
 
 // NewGetProductResponseDataPodInfoPodTemplateSurfaceMaskImage instantiates a new GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage) ToMap() (map[s
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurfaceMaskImage := _GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurfaceMaskImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage(varGetProductResponseDataPodInfoPodTemplateSurfaceMaskImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "thumb_urls")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurfaceMaskImage struct {

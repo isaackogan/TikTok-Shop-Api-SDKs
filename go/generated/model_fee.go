@@ -25,7 +25,10 @@ type Fee struct {
 	Amount *string `json:"amount,omitempty"`
 	// An optional attribute that provides additional context for the fee. The accepted values may vary by fee type and market.  Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE
 	AdditionalAttribute *string `json:"additional_attribute,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Fee Fee
 
 // NewFee instantiates a new Fee object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Fee) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdditionalAttribute) {
 		toSerialize["additional_attribute"] = o.AdditionalAttribute
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Fee) UnmarshalJSON(data []byte) (err error) {
+	varFee := _Fee{}
+
+	err = json.Unmarshal(data, &varFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Fee(varFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "additional_attribute")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFee struct {

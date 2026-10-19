@@ -25,7 +25,10 @@ type UpdateFBTGoodsInfoResponseDataUpdateResultInfo struct {
 	IsSuccess *bool `json:"is_success,omitempty"`
 	// Reason the goods update failed.
 	FailReason *string `json:"fail_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateFBTGoodsInfoResponseDataUpdateResultInfo UpdateFBTGoodsInfoResponseDataUpdateResultInfo
 
 // NewUpdateFBTGoodsInfoResponseDataUpdateResultInfo instantiates a new UpdateFBTGoodsInfoResponseDataUpdateResultInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UpdateFBTGoodsInfoResponseDataUpdateResultInfo) ToMap() (map[string]inte
 	if !IsNil(o.FailReason) {
 		toSerialize["fail_reason"] = o.FailReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateFBTGoodsInfoResponseDataUpdateResultInfo) UnmarshalJSON(data []byte) (err error) {
+	varUpdateFBTGoodsInfoResponseDataUpdateResultInfo := _UpdateFBTGoodsInfoResponseDataUpdateResultInfo{}
+
+	err = json.Unmarshal(data, &varUpdateFBTGoodsInfoResponseDataUpdateResultInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateFBTGoodsInfoResponseDataUpdateResultInfo(varUpdateFBTGoodsInfoResponseDataUpdateResultInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_goods_id")
+		delete(additionalProperties, "is_success")
+		delete(additionalProperties, "fail_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateFBTGoodsInfoResponseDataUpdateResultInfo struct {

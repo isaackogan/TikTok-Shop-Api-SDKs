@@ -23,7 +23,10 @@ type GetCategoryRulesResponseDataSizeChartMeasurementAndOption struct {
 	MeasurementType *string `json:"measurement_type,omitempty"`
 	// Online measurement options for this group.
 	Options []GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption `json:"options,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataSizeChartMeasurementAndOption GetCategoryRulesResponseDataSizeChartMeasurementAndOption
 
 // NewGetCategoryRulesResponseDataSizeChartMeasurementAndOption instantiates a new GetCategoryRulesResponseDataSizeChartMeasurementAndOption object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCategoryRulesResponseDataSizeChartMeasurementAndOption) ToMap() (map[
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataSizeChartMeasurementAndOption) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataSizeChartMeasurementAndOption := _GetCategoryRulesResponseDataSizeChartMeasurementAndOption{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataSizeChartMeasurementAndOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataSizeChartMeasurementAndOption(varGetCategoryRulesResponseDataSizeChartMeasurementAndOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "measurement_type")
+		delete(additionalProperties, "options")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataSizeChartMeasurementAndOption struct {

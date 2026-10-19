@@ -21,7 +21,10 @@ var _ MappedNullable = &SmartText{}
 type SmartText struct {
 	// The suggested intelligent text.
 	Text *string `json:"text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SmartText SmartText
 
 // NewSmartText instantiates a new SmartText object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SmartText) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SmartText) UnmarshalJSON(data []byte) (err error) {
+	varSmartText := _SmartText{}
+
+	err = json.Unmarshal(data, &varSmartText)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SmartText(varSmartText)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSmartText struct {

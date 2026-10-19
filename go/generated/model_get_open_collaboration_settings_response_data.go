@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpenCollaborationSettingsResponseData{}
 type GetOpenCollaborationSettingsResponseData struct {
 	// Open collaboration settings for the shop.
 	OpenCollaborationSettings *GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting `json:"open_collaboration_settings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSettingsResponseData GetOpenCollaborationSettingsResponseData
 
 // NewGetOpenCollaborationSettingsResponseData instantiates a new GetOpenCollaborationSettingsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpenCollaborationSettingsResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.OpenCollaborationSettings) {
 		toSerialize["open_collaboration_settings"] = o.OpenCollaborationSettings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSettingsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSettingsResponseData := _GetOpenCollaborationSettingsResponseData{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSettingsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSettingsResponseData(varGetOpenCollaborationSettingsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "open_collaboration_settings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSettingsResponseData struct {

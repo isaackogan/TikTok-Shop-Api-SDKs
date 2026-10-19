@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution s
 	ContentType *string `json:"content_type,omitempty"`
 	// The proportion of the creator's GMV attributed to this content type, expressed as a decimal from `0` to `1` (for example, `0.3035` = 30.35%).
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistributio
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution := _GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution(varGetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorContentGmvDistribution struct {

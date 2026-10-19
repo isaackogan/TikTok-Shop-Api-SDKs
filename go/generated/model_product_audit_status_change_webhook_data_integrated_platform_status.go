@@ -23,7 +23,10 @@ type ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus struct {
 	Platform *string `json:"platform,omitempty"`
 	// The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit or the audit was cancelled.   * APPROVED: The product passed the audit and has been listed on the platform.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus
 
 // NewProductAuditStatusChangeWebhookDataIntegratedPlatformStatus instantiates a new ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus) ToMap() (ma
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus) UnmarshalJSON(data []byte) (err error) {
+	varProductAuditStatusChangeWebhookDataIntegratedPlatformStatus := _ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus{}
+
+	err = json.Unmarshal(data, &varProductAuditStatusChangeWebhookDataIntegratedPlatformStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus(varProductAuditStatusChangeWebhookDataIntegratedPlatformStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "platform")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductAuditStatusChangeWebhookDataIntegratedPlatformStatus struct {

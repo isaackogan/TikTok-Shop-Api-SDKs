@@ -26,7 +26,10 @@ type GetOpenCollaborationSettingsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetOpenCollaborationSettingsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSettingsResponse GetOpenCollaborationSettingsResponse
 
 // NewGetOpenCollaborationSettingsResponse instantiates a new GetOpenCollaborationSettingsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetOpenCollaborationSettingsResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSettingsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSettingsResponse := _GetOpenCollaborationSettingsResponse{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSettingsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSettingsResponse(varGetOpenCollaborationSettingsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSettingsResponse struct {

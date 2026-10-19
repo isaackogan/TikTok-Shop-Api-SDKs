@@ -23,7 +23,10 @@ type SearchProductsResponseDataProductAudit struct {
 	Status *string `json:"status,omitempty"`
 	// The reason why the product is pre-approved. Applicable only if `audit.status=PRE_APPROVED`, otherwise returns an empty array. Possible values: - KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing. - RESTRICTED_CATEGORY_PENDING: The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center. Applicable only for the US market.
 	PreApprovedReasons []string `json:"pre_approved_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductAudit SearchProductsResponseDataProductAudit
 
 // NewSearchProductsResponseDataProductAudit instantiates a new SearchProductsResponseDataProductAudit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchProductsResponseDataProductAudit) ToMap() (map[string]interface{},
 	if !IsNil(o.PreApprovedReasons) {
 		toSerialize["pre_approved_reasons"] = o.PreApprovedReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductAudit) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductAudit := _SearchProductsResponseDataProductAudit{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductAudit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductAudit(varSearchProductsResponseDataProductAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "pre_approved_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductAudit struct {

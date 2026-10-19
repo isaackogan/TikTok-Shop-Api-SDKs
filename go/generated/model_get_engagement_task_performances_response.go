@@ -26,7 +26,10 @@ type GetEngagementTaskPerformancesResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetEngagementTaskPerformancesResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEngagementTaskPerformancesResponse GetEngagementTaskPerformancesResponse
 
 // NewGetEngagementTaskPerformancesResponse instantiates a new GetEngagementTaskPerformancesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetEngagementTaskPerformancesResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEngagementTaskPerformancesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetEngagementTaskPerformancesResponse := _GetEngagementTaskPerformancesResponse{}
+
+	err = json.Unmarshal(data, &varGetEngagementTaskPerformancesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEngagementTaskPerformancesResponse(varGetEngagementTaskPerformancesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEngagementTaskPerformancesResponse struct {

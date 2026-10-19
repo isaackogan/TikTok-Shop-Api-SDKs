@@ -27,7 +27,10 @@ type DeactivateActivityResponseData struct {
 	Status *string `json:"status,omitempty"`
 	// The time when the deactivation response was created, as a Unix timestamp in seconds.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeactivateActivityResponseData DeactivateActivityResponseData
 
 // NewDeactivateActivityResponseData instantiates a new DeactivateActivityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o DeactivateActivityResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeactivateActivityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varDeactivateActivityResponseData := _DeactivateActivityResponseData{}
+
+	err = json.Unmarshal(data, &varDeactivateActivityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeactivateActivityResponseData(varDeactivateActivityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeactivateActivityResponseData struct {

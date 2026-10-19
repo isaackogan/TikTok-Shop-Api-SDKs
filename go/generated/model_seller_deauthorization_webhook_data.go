@@ -20,7 +20,10 @@ var _ MappedNullable = &SellerDeauthorizationWebhookData{}
 // SellerDeauthorizationWebhookData struct for SellerDeauthorizationWebhookData
 type SellerDeauthorizationWebhookData struct {
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerDeauthorizationWebhookData SellerDeauthorizationWebhookData
 
 // NewSellerDeauthorizationWebhookData instantiates a new SellerDeauthorizationWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -84,7 +87,33 @@ func (o SellerDeauthorizationWebhookData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerDeauthorizationWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varSellerDeauthorizationWebhookData := _SellerDeauthorizationWebhookData{}
+
+	err = json.Unmarshal(data, &varSellerDeauthorizationWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerDeauthorizationWebhookData(varSellerDeauthorizationWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerDeauthorizationWebhookData struct {

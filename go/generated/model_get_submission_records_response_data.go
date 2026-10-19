@@ -21,7 +21,10 @@ var _ MappedNullable = &GetSubmissionRecordsResponseData{}
 type GetSubmissionRecordsResponseData struct {
 	// The submission records and pagination information returned for this request.
 	Data *GetSubmissionRecordsResponseDataData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSubmissionRecordsResponseData GetSubmissionRecordsResponseData
 
 // NewGetSubmissionRecordsResponseData instantiates a new GetSubmissionRecordsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetSubmissionRecordsResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSubmissionRecordsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSubmissionRecordsResponseData := _GetSubmissionRecordsResponseData{}
+
+	err = json.Unmarshal(data, &varGetSubmissionRecordsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSubmissionRecordsResponseData(varGetSubmissionRecordsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSubmissionRecordsResponseData struct {

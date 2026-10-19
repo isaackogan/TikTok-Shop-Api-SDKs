@@ -26,7 +26,10 @@ type GetWarehouseListResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetWarehouseListResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseListResponse GetWarehouseListResponse
 
 // NewGetWarehouseListResponse instantiates a new GetWarehouseListResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetWarehouseListResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseListResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseListResponse := _GetWarehouseListResponse{}
+
+	err = json.Unmarshal(data, &varGetWarehouseListResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseListResponse(varGetWarehouseListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseListResponse struct {

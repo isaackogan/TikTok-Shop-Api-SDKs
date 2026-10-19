@@ -33,7 +33,10 @@ type GetShopProductsResponseDataProduct struct {
 	Images []GetReturnRecordsResponseDataRecordImage `json:"images,omitempty"`
 	// The number of products that have been sold.
 	SalesCount *int64 `json:"sales_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductsResponseDataProduct GetShopProductsResponseDataProduct
 
 // NewGetShopProductsResponseDataProduct instantiates a new GetShopProductsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetShopProductsResponseDataProduct) ToMap() (map[string]interface{}, err
 	if !IsNil(o.SalesCount) {
 		toSerialize["sales_count"] = o.SalesCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductsResponseDataProduct := _GetShopProductsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetShopProductsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductsResponseDataProduct(varGetShopProductsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "added_status")
+		delete(additionalProperties, "brand_name")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "sales_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductsResponseDataProduct struct {

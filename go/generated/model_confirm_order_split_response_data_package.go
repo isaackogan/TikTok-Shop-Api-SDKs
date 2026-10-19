@@ -23,7 +23,10 @@ type ConfirmOrderSplitResponseDataPackage struct {
 	SplittableGroupId *string `json:"splittable_group_id,omitempty"`
 	// Package ID after success split. Use this new package ID to call [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1?external_id=650aa4f1defece02be6e7cb1) to ship the package.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmOrderSplitResponseDataPackage ConfirmOrderSplitResponseDataPackage
 
 // NewConfirmOrderSplitResponseDataPackage instantiates a new ConfirmOrderSplitResponseDataPackage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ConfirmOrderSplitResponseDataPackage) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmOrderSplitResponseDataPackage) UnmarshalJSON(data []byte) (err error) {
+	varConfirmOrderSplitResponseDataPackage := _ConfirmOrderSplitResponseDataPackage{}
+
+	err = json.Unmarshal(data, &varConfirmOrderSplitResponseDataPackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmOrderSplitResponseDataPackage(varConfirmOrderSplitResponseDataPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "splittable_group_id")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmOrderSplitResponseDataPackage struct {

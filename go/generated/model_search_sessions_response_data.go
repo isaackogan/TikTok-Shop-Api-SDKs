@@ -23,7 +23,10 @@ type SearchSessionsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Customer service sessions that match the request filters.
 	Sessions []SearchSessionsResponseDataSession `json:"sessions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSessionsResponseData SearchSessionsResponseData
 
 // NewSearchSessionsResponseData instantiates a new SearchSessionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchSessionsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sessions) {
 		toSerialize["sessions"] = o.Sessions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSessionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchSessionsResponseData := _SearchSessionsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchSessionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSessionsResponseData(varSearchSessionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "sessions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSessionsResponseData struct {

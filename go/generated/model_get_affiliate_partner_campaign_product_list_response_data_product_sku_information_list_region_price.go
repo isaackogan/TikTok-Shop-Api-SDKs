@@ -29,7 +29,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList
 	SalePrice *string `json:"sale_price,omitempty"`
 	// localized dutiable price
 	LocalizedDutiablePrice *string `json:"localized_dutiable_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationL
 	if !IsNil(o.LocalizedDutiablePrice) {
 		toSerialize["localized_dutiable_price"] = o.LocalizedDutiablePrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice := _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice(varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "localized_dutiable_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice struct {

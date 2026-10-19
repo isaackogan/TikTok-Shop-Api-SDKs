@@ -53,7 +53,10 @@ type SearchGoodsInfoResponseDataGood struct {
 	IsSioc *bool `json:"is_sioc,omitempty"`
 	// sioc info
 	SiocAttribute *SiocAttribute `json:"sioc_attribute,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGood SearchGoodsInfoResponseDataGood
 
 // NewSearchGoodsInfoResponseDataGood instantiates a new SearchGoodsInfoResponseDataGood object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o SearchGoodsInfoResponseDataGood) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.SiocAttribute) {
 		toSerialize["sioc_attribute"] = o.SiocAttribute
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGood) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGood := _SearchGoodsInfoResponseDataGood{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGood)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGood(varSearchGoodsInfoResponseDataGood)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "barcodes")
+		delete(additionalProperties, "reference_code")
+		delete(additionalProperties, "image_url")
+		delete(additionalProperties, "merchant_declaration_info")
+		delete(additionalProperties, "warehouse_confirmation_info")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "lot_expiration_info")
+		delete(additionalProperties, "is_hazmat")
+		delete(additionalProperties, "hazmat_info")
+		delete(additionalProperties, "sioc_approval_status")
+		delete(additionalProperties, "hazmat_approval_status")
+		delete(additionalProperties, "bulky_item_attribute")
+		delete(additionalProperties, "goods_safety_attributes")
+		delete(additionalProperties, "is_sioc")
+		delete(additionalProperties, "sioc_attribute")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGood struct {

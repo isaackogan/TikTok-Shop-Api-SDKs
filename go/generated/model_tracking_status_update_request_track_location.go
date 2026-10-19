@@ -27,7 +27,10 @@ type TrackingStatusUpdateRequestTrackLocation struct {
 	City *string `json:"city,omitempty"`
 	// zip code/post code.
 	ZipCode *string `json:"zip_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrackingStatusUpdateRequestTrackLocation TrackingStatusUpdateRequestTrackLocation
 
 // NewTrackingStatusUpdateRequestTrackLocation instantiates a new TrackingStatusUpdateRequestTrackLocation object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o TrackingStatusUpdateRequestTrackLocation) ToMap() (map[string]interface{
 	if !IsNil(o.ZipCode) {
 		toSerialize["zip_code"] = o.ZipCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrackingStatusUpdateRequestTrackLocation) UnmarshalJSON(data []byte) (err error) {
+	varTrackingStatusUpdateRequestTrackLocation := _TrackingStatusUpdateRequestTrackLocation{}
+
+	err = json.Unmarshal(data, &varTrackingStatusUpdateRequestTrackLocation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrackingStatusUpdateRequestTrackLocation(varTrackingStatusUpdateRequestTrackLocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "zip_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrackingStatusUpdateRequestTrackLocation struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type CreatorDeauthorizationWebhook struct {
 	// The UNIX timestamp when this webhook was triggered.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *CreatorDeauthorizationWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatorDeauthorizationWebhook CreatorDeauthorizationWebhook
@@ -227,6 +227,11 @@ func (o CreatorDeauthorizationWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *CreatorDeauthorizationWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varCreatorDeauthorizationWebhook := _CreatorDeauthorizationWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatorDeauthorizationWebhook)
+	err = json.Unmarshal(data, &varCreatorDeauthorizationWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatorDeauthorizationWebhook(varCreatorDeauthorizationWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateAffiliatePartnerCampaignRequestContactInfo struct {
 	Viber *string `json:"viber,omitempty"`
 	// The partner's phone number registered in LINE, in E.164 international format. Required if the target market is TH; otherwise, not applicable.
 	Line *string `json:"line,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAffiliatePartnerCampaignRequestContactInfo CreateAffiliatePartnerCampaignRequestContactInfo
@@ -265,6 +265,11 @@ func (o CreateAffiliatePartnerCampaignRequestContactInfo) ToMap() (map[string]in
 	if !IsNil(o.Line) {
 		toSerialize["line"] = o.Line
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -292,15 +297,25 @@ func (o *CreateAffiliatePartnerCampaignRequestContactInfo) UnmarshalJSON(data []
 
 	varCreateAffiliatePartnerCampaignRequestContactInfo := _CreateAffiliatePartnerCampaignRequestContactInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAffiliatePartnerCampaignRequestContactInfo)
+	err = json.Unmarshal(data, &varCreateAffiliatePartnerCampaignRequestContactInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAffiliatePartnerCampaignRequestContactInfo(varCreateAffiliatePartnerCampaignRequestContactInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "whatsapp")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone")
+		delete(additionalProperties, "zalo")
+		delete(additionalProperties, "viber")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

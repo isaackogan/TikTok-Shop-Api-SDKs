@@ -23,7 +23,10 @@ type AddExternalOrderReferencesResponseDataErrorDetailExternalOrder struct {
 	Id *string `json:"id,omitempty"`
 	// The alias of your OMS.
 	Platform *string `json:"platform,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddExternalOrderReferencesResponseDataErrorDetailExternalOrder AddExternalOrderReferencesResponseDataErrorDetailExternalOrder
 
 // NewAddExternalOrderReferencesResponseDataErrorDetailExternalOrder instantiates a new AddExternalOrderReferencesResponseDataErrorDetailExternalOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AddExternalOrderReferencesResponseDataErrorDetailExternalOrder) ToMap() 
 	if !IsNil(o.Platform) {
 		toSerialize["platform"] = o.Platform
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddExternalOrderReferencesResponseDataErrorDetailExternalOrder) UnmarshalJSON(data []byte) (err error) {
+	varAddExternalOrderReferencesResponseDataErrorDetailExternalOrder := _AddExternalOrderReferencesResponseDataErrorDetailExternalOrder{}
+
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesResponseDataErrorDetailExternalOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddExternalOrderReferencesResponseDataErrorDetailExternalOrder(varAddExternalOrderReferencesResponseDataErrorDetailExternalOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "platform")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddExternalOrderReferencesResponseDataErrorDetailExternalOrder struct {

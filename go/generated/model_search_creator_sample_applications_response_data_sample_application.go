@@ -31,7 +31,10 @@ type SearchCreatorSampleApplicationsResponseDataSampleApplication struct {
 	Status *string `json:"status,omitempty"`
 	// Fulfillment info for this sample application.
 	CreatorFulfillment *SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment `json:"creator_fulfillment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorSampleApplicationsResponseDataSampleApplication SearchCreatorSampleApplicationsResponseDataSampleApplication
 
 // NewSearchCreatorSampleApplicationsResponseDataSampleApplication instantiates a new SearchCreatorSampleApplicationsResponseDataSampleApplication object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchCreatorSampleApplicationsResponseDataSampleApplication) ToMap() (m
 	if !IsNil(o.CreatorFulfillment) {
 		toSerialize["creator_fulfillment"] = o.CreatorFulfillment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorSampleApplicationsResponseDataSampleApplication) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorSampleApplicationsResponseDataSampleApplication := _SearchCreatorSampleApplicationsResponseDataSampleApplication{}
+
+	err = json.Unmarshal(data, &varSearchCreatorSampleApplicationsResponseDataSampleApplication)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorSampleApplicationsResponseDataSampleApplication(varSearchCreatorSampleApplicationsResponseDataSampleApplication)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sample_product")
+		delete(additionalProperties, "main_order_id")
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "creator_fulfillment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorSampleApplicationsResponseDataSampleApplication struct {

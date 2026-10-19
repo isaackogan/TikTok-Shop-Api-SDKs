@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopSKPPSummaryResponseData{}
 type GetShopSKPPSummaryResponseData struct {
 	// The shop-level SKPP summary of qualified and eligible product counts, earned ad credit, and incremental visibility in the last 30 days.
 	ShopSummary *GetShopSKPPSummaryResponseDataShopSummary `json:"shop_summary,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopSKPPSummaryResponseData GetShopSKPPSummaryResponseData
 
 // NewGetShopSKPPSummaryResponseData instantiates a new GetShopSKPPSummaryResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopSKPPSummaryResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.ShopSummary) {
 		toSerialize["shop_summary"] = o.ShopSummary
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopSKPPSummaryResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopSKPPSummaryResponseData := _GetShopSKPPSummaryResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopSKPPSummaryResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopSKPPSummaryResponseData(varGetShopSKPPSummaryResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_summary")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopSKPPSummaryResponseData struct {

@@ -25,7 +25,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown
 	ItemsSold *int64 `json:"items_sold,omitempty"`
 	// Daily average count of customers.
 	AvgCustomers *int64 `json:"avg_customers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakd
 	if !IsNil(o.AvgCustomers) {
 		toSerialize["avg_customers"] = o.AvgCustomers
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "avg_customers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale struct {

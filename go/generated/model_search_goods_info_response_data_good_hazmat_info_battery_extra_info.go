@@ -37,7 +37,10 @@ type SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo struct {
 	Un383TestFileUrl *string `json:"un_38_3_test_file_url,omitempty"`
 	// Unit for `total_battery_capacity`, such as `WATT_HOURS`.
 	TotalBatteryCapacityUnit *string `json:"total_battery_capacity_unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo
 
 // NewSearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo instantiates a new SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo) ToMap() (map[
 	if !IsNil(o.TotalBatteryCapacityUnit) {
 		toSerialize["total_battery_capacity_unit"] = o.TotalBatteryCapacityUnit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo := _SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo(varSearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "battery_type")
+		delete(additionalProperties, "battery_packaging_type")
+		delete(additionalProperties, "total_battery_weight")
+		delete(additionalProperties, "total_battery_weight_unit")
+		delete(additionalProperties, "total_battery_capacity")
+		delete(additionalProperties, "battery_count_per_package")
+		delete(additionalProperties, "is_need_un_38_3_test")
+		delete(additionalProperties, "un_38_3_test_file_url")
+		delete(additionalProperties, "total_battery_capacity_unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo struct {

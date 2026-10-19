@@ -27,7 +27,10 @@ type SearchFBTInventoryRecordRequest struct {
 	CreateTimeGe *int64 `json:"create_time_ge,omitempty"`
 	// Filter inventory record creation time to show only those that are created on or before the specified date and time. Unix timestamp in seconds. `create_time_le` is the current time by default.
 	CreateTimeLe *int64 `json:"create_time_le,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRecordRequest SearchFBTInventoryRecordRequest
 
 // NewSearchFBTInventoryRecordRequest instantiates a new SearchFBTInventoryRecordRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchFBTInventoryRecordRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.CreateTimeLe) {
 		toSerialize["create_time_le"] = o.CreateTimeLe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRecordRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRecordRequest := _SearchFBTInventoryRecordRequest{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRecordRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRecordRequest(varSearchFBTInventoryRecordRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_ids")
+		delete(additionalProperties, "fbt_warehouse_ids")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_le")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRecordRequest struct {

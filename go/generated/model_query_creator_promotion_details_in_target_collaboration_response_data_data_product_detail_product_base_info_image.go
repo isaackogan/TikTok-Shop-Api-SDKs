@@ -21,7 +21,10 @@ var _ MappedNullable = &QueryCreatorPromotionDetailsInTargetCollaborationRespons
 type QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage struct {
 	// Product Image URL
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage
 
 // NewQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage instantiates a new QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProduct
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage) UnmarshalJSON(data []byte) (err error) {
+	varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage := _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage{}
+
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage(varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoImage struct {

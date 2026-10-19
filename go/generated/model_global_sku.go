@@ -27,7 +27,10 @@ type GlobalSku struct {
 	SalesAttributes []SalesAttribute `json:"sales_attributes,omitempty"`
 	// An external identifier used in an external ecommerce platform. This is used to associate the global SKU between TikTok Shop and the external ecommerce platform.  Max length: 999 characters
 	ExternalGlobalSkuId *string `json:"external_global_sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalSku GlobalSku
 
 // NewGlobalSku instantiates a new GlobalSku object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GlobalSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalGlobalSkuId) {
 		toSerialize["external_global_sku_id"] = o.ExternalGlobalSkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalSku) UnmarshalJSON(data []byte) (err error) {
+	varGlobalSku := _GlobalSku{}
+
+	err = json.Unmarshal(data, &varGlobalSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalSku(varGlobalSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "external_global_sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalSku struct {

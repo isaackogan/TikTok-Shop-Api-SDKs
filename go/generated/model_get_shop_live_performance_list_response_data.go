@@ -29,7 +29,10 @@ type GetShopLIVEPerformanceListResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Time when the data was last updated in shop registered timezone.
 	UpdatedAt *string `json:"updated_at,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseData GetShopLIVEPerformanceListResponseData
 
 // NewGetShopLIVEPerformanceListResponseData instantiates a new GetShopLIVEPerformanceListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopLIVEPerformanceListResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updated_at"] = o.UpdatedAt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseData := _GetShopLIVEPerformanceListResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseData(varGetShopLIVEPerformanceListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "latest_available_date")
+		delete(additionalProperties, "live_stream_sessions")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "updated_at")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseData struct {

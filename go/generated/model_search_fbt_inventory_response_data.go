@@ -25,7 +25,10 @@ type SearchFBTInventoryResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// A list of inventory records. Each item represents one goods item at one Fulfilled by TikTok warehouse and can include the associated SKU inventory breakdown.
 	Inventory []SearchFBTInventoryResponseDataInventory `json:"inventory,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryResponseData SearchFBTInventoryResponseData
 
 // NewSearchFBTInventoryResponseData instantiates a new SearchFBTInventoryResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchFBTInventoryResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Inventory) {
 		toSerialize["inventory"] = o.Inventory
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryResponseData := _SearchFBTInventoryResponseData{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryResponseData(varSearchFBTInventoryResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "inventory")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryResponseData struct {

@@ -29,7 +29,10 @@ type GetProductResponseDataSkuPrice struct {
 	TaxExclusivePrice *string `json:"tax_exclusive_price,omitempty"`
 	// The unit price of the SKU.  You can display the unit price to facilitate easier price comparisons across different products and packaging sizes. Applicable only for the EU market.  **Note**:  - This value is available only if you have defined the elements used to calculate this price when creating the product. - Unit price = Selling price/(SKU unit count/base unit count)
 	UnitPrice *string `json:"unit_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuPrice GetProductResponseDataSkuPrice
 
 // NewGetProductResponseDataSkuPrice instantiates a new GetProductResponseDataSkuPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataSkuPrice) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UnitPrice) {
 		toSerialize["unit_price"] = o.UnitPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuPrice := _GetProductResponseDataSkuPrice{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuPrice(varGetProductResponseDataSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "starting_bid_price")
+		delete(additionalProperties, "tax_exclusive_price")
+		delete(additionalProperties, "unit_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuPrice struct {

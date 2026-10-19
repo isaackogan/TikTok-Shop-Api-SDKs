@@ -23,7 +23,10 @@ type GetPaymentsResponseDataPaymentAmount struct {
 	Value *string `json:"value,omitempty"`
 	// The exchange currency code in ISO 4217 format.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPaymentsResponseDataPaymentAmount GetPaymentsResponseDataPaymentAmount
 
 // NewGetPaymentsResponseDataPaymentAmount instantiates a new GetPaymentsResponseDataPaymentAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetPaymentsResponseDataPaymentAmount) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPaymentsResponseDataPaymentAmount) UnmarshalJSON(data []byte) (err error) {
+	varGetPaymentsResponseDataPaymentAmount := _GetPaymentsResponseDataPaymentAmount{}
+
+	err = json.Unmarshal(data, &varGetPaymentsResponseDataPaymentAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPaymentsResponseDataPaymentAmount(varGetPaymentsResponseDataPaymentAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPaymentsResponseDataPaymentAmount struct {

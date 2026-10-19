@@ -29,7 +29,10 @@ type CreateGlobalProductRequestSkuSalesAttribute struct {
 	ValueName *string `json:"value_name,omitempty"`
 	// An image to display for the SKU.  You can attach images to only 1 type of sales attribute, and you must attach an image for each value of the chosen attribute. For example, if a product has 2 colors and 3 sizes, you can choose to attach images for either the Color sales attribute or the Size sales attribute. If you choose to attach images for Color, you must attach 2 images, one for each color.
 	SkuImg *SkuImg `json:"sku_img,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateGlobalProductRequestSkuSalesAttribute CreateGlobalProductRequestSkuSalesAttribute
 
 // NewCreateGlobalProductRequestSkuSalesAttribute instantiates a new CreateGlobalProductRequestSkuSalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CreateGlobalProductRequestSkuSalesAttribute) ToMap() (map[string]interfa
 	if !IsNil(o.SkuImg) {
 		toSerialize["sku_img"] = o.SkuImg
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateGlobalProductRequestSkuSalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varCreateGlobalProductRequestSkuSalesAttribute := _CreateGlobalProductRequestSkuSalesAttribute{}
+
+	err = json.Unmarshal(data, &varCreateGlobalProductRequestSkuSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateGlobalProductRequestSkuSalesAttribute(varCreateGlobalProductRequestSkuSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		delete(additionalProperties, "sku_img")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateGlobalProductRequestSkuSalesAttribute struct {

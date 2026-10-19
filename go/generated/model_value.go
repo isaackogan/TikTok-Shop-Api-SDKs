@@ -23,7 +23,10 @@ type Value struct {
 	Id *string `json:"id,omitempty"`
 	// A self-defined custom product attribute value if the built-in values do not satisfy your needs. The system will auto-generate an ID after listing.  **Note**:  - No duplicates allowed under the same attribute. - Max length: 2000 characters
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Value Value
 
 // NewValue instantiates a new Value object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Value) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Value) UnmarshalJSON(data []byte) (err error) {
+	varValue := _Value{}
+
+	err = json.Unmarshal(data, &varValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Value(varValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableValue struct {

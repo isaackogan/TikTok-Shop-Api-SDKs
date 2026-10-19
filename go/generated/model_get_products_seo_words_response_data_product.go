@@ -23,7 +23,10 @@ type GetProductsSEOWordsResponseDataProduct struct {
 	Id *string `json:"id,omitempty"`
 	// The list of SEO keyword suggestions for the product title.
 	SeoWords []SeoWord `json:"seo_words,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductsSEOWordsResponseDataProduct GetProductsSEOWordsResponseDataProduct
 
 // NewGetProductsSEOWordsResponseDataProduct instantiates a new GetProductsSEOWordsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductsSEOWordsResponseDataProduct) ToMap() (map[string]interface{},
 	if !IsNil(o.SeoWords) {
 		toSerialize["seo_words"] = o.SeoWords
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductsSEOWordsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetProductsSEOWordsResponseDataProduct := _GetProductsSEOWordsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetProductsSEOWordsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductsSEOWordsResponseDataProduct(varGetProductsSEOWordsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seo_words")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductsSEOWordsResponseDataProduct struct {

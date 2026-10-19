@@ -33,7 +33,10 @@ type GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea struct {
 	IsRequired *bool `json:"is_required,omitempty"`
 	// Configuration for a text-type customization area. This field is returned when `area_type` is `TEXT`.
 	TextArea *TextArea `json:"text_area,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea
 
 // NewGetProductResponseDataPodInfoPodTemplateSurfaceCustomArea instantiates a new GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea) ToMap() (map[
 	if !IsNil(o.TextArea) {
 		toSerialize["text_area"] = o.TextArea
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurfaceCustomArea := _GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurfaceCustomArea)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea(varGetProductResponseDataPodInfoPodTemplateSurfaceCustomArea)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "area_name")
+		delete(additionalProperties, "area_placement")
+		delete(additionalProperties, "area_type")
+		delete(additionalProperties, "external_area_id")
+		delete(additionalProperties, "image_area")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "text_area")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurfaceCustomArea struct {

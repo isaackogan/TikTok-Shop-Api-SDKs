@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateFBTMCFOrderRequestConsignee struct {
 	Email string `json:"email"`
 	// The consignee address must be a valid address; if the address verification fails, no order will be created.
 	Address CreateFBTMCFOrderRequestConsigneeAddress `json:"address"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFBTMCFOrderRequestConsignee CreateFBTMCFOrderRequestConsignee
@@ -164,6 +164,11 @@ func (o CreateFBTMCFOrderRequestConsignee) ToMap() (map[string]interface{}, erro
 	toSerialize["phone_number"] = o.PhoneNumber
 	toSerialize["email"] = o.Email
 	toSerialize["address"] = o.Address
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *CreateFBTMCFOrderRequestConsignee) UnmarshalJSON(data []byte) (err erro
 
 	varCreateFBTMCFOrderRequestConsignee := _CreateFBTMCFOrderRequestConsignee{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFBTMCFOrderRequestConsignee)
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderRequestConsignee)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFBTMCFOrderRequestConsignee(varCreateFBTMCFOrderRequestConsignee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "address")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

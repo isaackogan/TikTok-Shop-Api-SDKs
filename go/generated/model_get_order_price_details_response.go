@@ -26,7 +26,10 @@ type GetOrderPriceDetailsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetOrderPriceDetailsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderPriceDetailsResponse GetOrderPriceDetailsResponse
 
 // NewGetOrderPriceDetailsResponse instantiates a new GetOrderPriceDetailsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetOrderPriceDetailsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderPriceDetailsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderPriceDetailsResponse := _GetOrderPriceDetailsResponse{}
+
+	err = json.Unmarshal(data, &varGetOrderPriceDetailsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderPriceDetailsResponse(varGetOrderPriceDetailsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderPriceDetailsResponse struct {

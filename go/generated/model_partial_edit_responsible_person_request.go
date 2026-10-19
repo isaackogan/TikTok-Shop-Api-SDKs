@@ -29,7 +29,10 @@ type PartialEditResponsiblePersonRequest struct {
 	Address *Address `json:"address,omitempty"`
 	// The BCP-47 locale code representing the language of the responsible person information to update. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT Default: The locale of the seller's registered business address.  **Note**: Only the language version selected by this locale is updated; other language versions remain unchanged. Ensure the locale matches the language used in the supplied field values.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditResponsiblePersonRequest PartialEditResponsiblePersonRequest
 
 // NewPartialEditResponsiblePersonRequest instantiates a new PartialEditResponsiblePersonRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o PartialEditResponsiblePersonRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditResponsiblePersonRequest) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditResponsiblePersonRequest := _PartialEditResponsiblePersonRequest{}
+
+	err = json.Unmarshal(data, &varPartialEditResponsiblePersonRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditResponsiblePersonRequest(varPartialEditResponsiblePersonRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditResponsiblePersonRequest struct {

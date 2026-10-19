@@ -26,7 +26,10 @@ type CreateProductResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateProductResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateProductResponse CreateProductResponse
 
 // NewCreateProductResponse instantiates a new CreateProductResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateProductResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateProductResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateProductResponse := _CreateProductResponse{}
+
+	err = json.Unmarshal(data, &varCreateProductResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateProductResponse(varCreateProductResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateProductResponse struct {

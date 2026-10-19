@@ -33,7 +33,10 @@ type SearchGoodsInfoResponseDataGoodHazmatInfo struct {
 	DgUncode *string `json:"dg_uncode,omitempty"`
 	// Material safety data sheet of the hazmat goods to support review the goods' safety compliance in FBT
 	MsdsFileUrl *string `json:"msds_file_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodHazmatInfo SearchGoodsInfoResponseDataGoodHazmatInfo
 
 // NewSearchGoodsInfoResponseDataGoodHazmatInfo instantiates a new SearchGoodsInfoResponseDataGoodHazmatInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o SearchGoodsInfoResponseDataGoodHazmatInfo) ToMap() (map[string]interface
 	if !IsNil(o.MsdsFileUrl) {
 		toSerialize["msds_file_url"] = o.MsdsFileUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodHazmatInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodHazmatInfo := _SearchGoodsInfoResponseDataGoodHazmatInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodHazmatInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodHazmatInfo(varSearchGoodsInfoResponseDataGoodHazmatInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hazmat_type")
+		delete(additionalProperties, "battery_extra_info")
+		delete(additionalProperties, "flammable_liquids_extra_info")
+		delete(additionalProperties, "aerosol_extra_info")
+		delete(additionalProperties, "dg_class")
+		delete(additionalProperties, "dg_uncode")
+		delete(additionalProperties, "msds_file_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodHazmatInfo struct {

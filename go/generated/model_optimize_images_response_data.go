@@ -21,7 +21,10 @@ var _ MappedNullable = &OptimizeImagesResponseData{}
 type OptimizeImagesResponseData struct {
 	// The list of images to be optimized.
 	Images []OptimizeImagesResponseDataImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OptimizeImagesResponseData OptimizeImagesResponseData
 
 // NewOptimizeImagesResponseData instantiates a new OptimizeImagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o OptimizeImagesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OptimizeImagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varOptimizeImagesResponseData := _OptimizeImagesResponseData{}
+
+	err = json.Unmarshal(data, &varOptimizeImagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OptimizeImagesResponseData(varOptimizeImagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOptimizeImagesResponseData struct {

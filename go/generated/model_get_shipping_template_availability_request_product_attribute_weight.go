@@ -23,7 +23,10 @@ type GetShippingTemplateAvailabilityRequestProductAttributeWeight struct {
 	Weight *string `json:"weight,omitempty"`
 	// 1:gram 2:pound 3:ounce 4:kilogram
 	Unit *int64 `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityRequestProductAttributeWeight GetShippingTemplateAvailabilityRequestProductAttributeWeight
 
 // NewGetShippingTemplateAvailabilityRequestProductAttributeWeight instantiates a new GetShippingTemplateAvailabilityRequestProductAttributeWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShippingTemplateAvailabilityRequestProductAttributeWeight) ToMap() (m
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityRequestProductAttributeWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityRequestProductAttributeWeight := _GetShippingTemplateAvailabilityRequestProductAttributeWeight{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityRequestProductAttributeWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityRequestProductAttributeWeight(varGetShippingTemplateAvailabilityRequestProductAttributeWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityRequestProductAttributeWeight struct {

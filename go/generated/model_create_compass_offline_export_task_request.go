@@ -27,7 +27,10 @@ type CreateCompassOfflineExportTaskRequest struct {
 	EndDay *int64 `json:"end_day,omitempty"`
 	// Plan type. Allowed values: ALL, TARGET, OPEN, PARTNER.
 	PlanType *string `json:"plan_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCompassOfflineExportTaskRequest CreateCompassOfflineExportTaskRequest
 
 // NewCreateCompassOfflineExportTaskRequest instantiates a new CreateCompassOfflineExportTaskRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CreateCompassOfflineExportTaskRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.PlanType) {
 		toSerialize["plan_type"] = o.PlanType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCompassOfflineExportTaskRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateCompassOfflineExportTaskRequest := _CreateCompassOfflineExportTaskRequest{}
+
+	err = json.Unmarshal(data, &varCreateCompassOfflineExportTaskRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCompassOfflineExportTaskRequest(varCreateCompassOfflineExportTaskRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "module_type")
+		delete(additionalProperties, "window_type")
+		delete(additionalProperties, "end_day")
+		delete(additionalProperties, "plan_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCompassOfflineExportTaskRequest struct {

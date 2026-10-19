@@ -23,7 +23,10 @@ type NewConversationWebhookData struct {
 	ConversationId *string `json:"conversation_id,omitempty"`
 	// Conversation creation time, represented as a Unix timestamp (in seconds).
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NewConversationWebhookData NewConversationWebhookData
 
 // NewNewConversationWebhookData instantiates a new NewConversationWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o NewConversationWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NewConversationWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varNewConversationWebhookData := _NewConversationWebhookData{}
+
+	err = json.Unmarshal(data, &varNewConversationWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NewConversationWebhookData(varNewConversationWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNewConversationWebhookData struct {

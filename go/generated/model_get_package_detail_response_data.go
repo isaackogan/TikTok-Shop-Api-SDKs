@@ -73,7 +73,10 @@ type GetPackageDetailResponseData struct {
 	BizExtensionTags []string `json:"biz_extension_tags,omitempty"`
 	// Seller Warehouse id for this package
 	WarehouseId *string `json:"warehouse_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageDetailResponseData GetPackageDetailResponseData
 
 // NewGetPackageDetailResponseData instantiates a new GetPackageDetailResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -1047,7 +1050,59 @@ func (o GetPackageDetailResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WarehouseId) {
 		toSerialize["warehouse_id"] = o.WarehouseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageDetailResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageDetailResponseData := _GetPackageDetailResponseData{}
+
+	err = json.Unmarshal(data, &varGetPackageDetailResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageDetailResponseData(varGetPackageDetailResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "package_status")
+		delete(additionalProperties, "package_sub_status")
+		delete(additionalProperties, "ship_exception_reason")
+		delete(additionalProperties, "split_and_combine_tag")
+		delete(additionalProperties, "has_multi_skus")
+		delete(additionalProperties, "note_tag")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "shipping_type")
+		delete(additionalProperties, "delivery_option_name")
+		delete(additionalProperties, "delivery_option_id")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "last_mile_tracking_number")
+		delete(additionalProperties, "pickup_slot")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "recipient_address")
+		delete(additionalProperties, "sender_address")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "insurance")
+		delete(additionalProperties, "biz_extension_tags")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageDetailResponseData struct {

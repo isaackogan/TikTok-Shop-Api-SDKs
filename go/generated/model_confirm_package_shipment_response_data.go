@@ -23,7 +23,10 @@ type ConfirmPackageShipmentResponseData struct {
 	SuccessPackages []string `json:"success_packages,omitempty"`
 	// List of packages that were not confirmed, with failure information for each package. This field is omitted when every package is confirmed.
 	Errors []ConfirmPackageShipmentResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmPackageShipmentResponseData ConfirmPackageShipmentResponseData
 
 // NewConfirmPackageShipmentResponseData instantiates a new ConfirmPackageShipmentResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ConfirmPackageShipmentResponseData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmPackageShipmentResponseData) UnmarshalJSON(data []byte) (err error) {
+	varConfirmPackageShipmentResponseData := _ConfirmPackageShipmentResponseData{}
+
+	err = json.Unmarshal(data, &varConfirmPackageShipmentResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmPackageShipmentResponseData(varConfirmPackageShipmentResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success_packages")
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmPackageShipmentResponseData struct {

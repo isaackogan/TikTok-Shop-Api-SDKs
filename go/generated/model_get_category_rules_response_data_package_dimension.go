@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataPackageDimension{}
 type GetCategoryRulesResponseDataPackageDimension struct {
 	// A flag to indicate whether package dimensions are required.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataPackageDimension GetCategoryRulesResponseDataPackageDimension
 
 // NewGetCategoryRulesResponseDataPackageDimension instantiates a new GetCategoryRulesResponseDataPackageDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataPackageDimension) ToMap() (map[string]interf
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataPackageDimension) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataPackageDimension := _GetCategoryRulesResponseDataPackageDimension{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataPackageDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataPackageDimension(varGetCategoryRulesResponseDataPackageDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataPackageDimension struct {

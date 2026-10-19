@@ -21,7 +21,10 @@ var _ MappedNullable = &DiagnoseAndOptimizeProductRequestMainImage{}
 type DiagnoseAndOptimizeProductRequestMainImage struct {
 	// The URI of the image. Retrieve the URI from the [Upload Product Image API](https://partner.tiktokshop.com/docv2/page/6509df95defece02be598a22) or the [Optimize Images API](https://partner.tiktokshop.com/docv2/page/665692b35d39dc02deb49a97).
 	Uri *string `json:"uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductRequestMainImage DiagnoseAndOptimizeProductRequestMainImage
 
 // NewDiagnoseAndOptimizeProductRequestMainImage instantiates a new DiagnoseAndOptimizeProductRequestMainImage object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DiagnoseAndOptimizeProductRequestMainImage) ToMap() (map[string]interfac
 	if !IsNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductRequestMainImage) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductRequestMainImage := _DiagnoseAndOptimizeProductRequestMainImage{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductRequestMainImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductRequestMainImage(varDiagnoseAndOptimizeProductRequestMainImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductRequestMainImage struct {

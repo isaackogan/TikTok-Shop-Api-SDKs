@@ -31,7 +31,10 @@ type GetProductSKPPDetailResponseDataTaskDetail struct {
 	Passed *bool `json:"passed,omitempty"`
 	// Suggested actions to complete this task; returned only when passed = false. A task may have multiple suggestions.
 	ActionSuggestions []GetProductSKPPDetailResponseDataTaskDetailActionSuggestion `json:"action_suggestions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductSKPPDetailResponseDataTaskDetail GetProductSKPPDetailResponseDataTaskDetail
 
 // NewGetProductSKPPDetailResponseDataTaskDetail instantiates a new GetProductSKPPDetailResponseDataTaskDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetProductSKPPDetailResponseDataTaskDetail) ToMap() (map[string]interfac
 	if !IsNil(o.ActionSuggestions) {
 		toSerialize["action_suggestions"] = o.ActionSuggestions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductSKPPDetailResponseDataTaskDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetProductSKPPDetailResponseDataTaskDetail := _GetProductSKPPDetailResponseDataTaskDetail{}
+
+	err = json.Unmarshal(data, &varGetProductSKPPDetailResponseDataTaskDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductSKPPDetailResponseDataTaskDetail(varGetProductSKPPDetailResponseDataTaskDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "current_value")
+		delete(additionalProperties, "target_value")
+		delete(additionalProperties, "passed")
+		delete(additionalProperties, "action_suggestions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductSKPPDetailResponseDataTaskDetail struct {

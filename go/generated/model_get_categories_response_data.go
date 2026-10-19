@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoriesResponseData{}
 type GetCategoriesResponseData struct {
 	// The list of categories that meet the query conditions.
 	Categories []GetCategoriesResponseDataCategory `json:"categories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoriesResponseData GetCategoriesResponseData
 
 // NewGetCategoriesResponseData instantiates a new GetCategoriesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoriesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Categories) {
 		toSerialize["categories"] = o.Categories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoriesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoriesResponseData := _GetCategoriesResponseData{}
+
+	err = json.Unmarshal(data, &varGetCategoriesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoriesResponseData(varGetCategoriesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "categories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoriesResponseData struct {

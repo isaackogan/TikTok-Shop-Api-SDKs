@@ -26,7 +26,10 @@ type SearchSizeChartsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchSizeChartsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponse SearchSizeChartsResponse
 
 // NewSearchSizeChartsResponse instantiates a new SearchSizeChartsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchSizeChartsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponse := _SearchSizeChartsResponse{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponse(varSearchSizeChartsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponse struct {

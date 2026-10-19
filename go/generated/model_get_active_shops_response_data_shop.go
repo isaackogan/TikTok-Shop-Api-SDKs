@@ -23,7 +23,10 @@ type GetActiveShopsResponseDataShop struct {
 	Id *string `json:"id,omitempty"`
 	// The region of the shop.
 	Region *string `json:"region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActiveShopsResponseDataShop GetActiveShopsResponseDataShop
 
 // NewGetActiveShopsResponseDataShop instantiates a new GetActiveShopsResponseDataShop object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetActiveShopsResponseDataShop) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActiveShopsResponseDataShop) UnmarshalJSON(data []byte) (err error) {
+	varGetActiveShopsResponseDataShop := _GetActiveShopsResponseDataShop{}
+
+	err = json.Unmarshal(data, &varGetActiveShopsResponseDataShop)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActiveShopsResponseDataShop(varGetActiveShopsResponseDataShop)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActiveShopsResponseDataShop struct {

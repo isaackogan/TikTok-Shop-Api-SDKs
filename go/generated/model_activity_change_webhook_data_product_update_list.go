@@ -25,7 +25,10 @@ type ActivityChangeWebhookDataProductUpdateList struct {
 	ExcludeProductIds []string `json:"exclude_product_ids,omitempty"`
 	// TikTokShop product ID list.
 	BenefitProductIds []string `json:"benefit_product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivityChangeWebhookDataProductUpdateList ActivityChangeWebhookDataProductUpdateList
 
 // NewActivityChangeWebhookDataProductUpdateList instantiates a new ActivityChangeWebhookDataProductUpdateList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ActivityChangeWebhookDataProductUpdateList) ToMap() (map[string]interfac
 	if !IsNil(o.BenefitProductIds) {
 		toSerialize["benefit_product_ids"] = o.BenefitProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivityChangeWebhookDataProductUpdateList) UnmarshalJSON(data []byte) (err error) {
+	varActivityChangeWebhookDataProductUpdateList := _ActivityChangeWebhookDataProductUpdateList{}
+
+	err = json.Unmarshal(data, &varActivityChangeWebhookDataProductUpdateList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivityChangeWebhookDataProductUpdateList(varActivityChangeWebhookDataProductUpdateList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "exclude_product_ids")
+		delete(additionalProperties, "benefit_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivityChangeWebhookDataProductUpdateList struct {

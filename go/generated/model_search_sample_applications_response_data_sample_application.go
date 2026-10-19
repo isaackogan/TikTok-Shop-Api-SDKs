@@ -47,7 +47,10 @@ type SearchSampleApplicationsResponseDataSampleApplication struct {
 	Creator *SearchSampleApplicationsResponseDataSampleApplicationCreator `json:"creator,omitempty"`
 	// product information
 	Product *SearchSampleApplicationsResponseDataSampleApplicationProduct `json:"product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationsResponseDataSampleApplication SearchSampleApplicationsResponseDataSampleApplication
 
 // NewSearchSampleApplicationsResponseDataSampleApplication instantiates a new SearchSampleApplicationsResponseDataSampleApplication object
 // This constructor will assign default values to properties that have it defined,
@@ -566,7 +569,46 @@ func (o SearchSampleApplicationsResponseDataSampleApplication) ToMap() (map[stri
 	if !IsNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationsResponseDataSampleApplication) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationsResponseDataSampleApplication := _SearchSampleApplicationsResponseDataSampleApplication{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationsResponseDataSampleApplication)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationsResponseDataSampleApplication(varSearchSampleApplicationsResponseDataSampleApplication)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "approve_expiration_time")
+		delete(additionalProperties, "shipment_expiration_time")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "fulfillment_status")
+		delete(additionalProperties, "is_approvable")
+		delete(additionalProperties, "disapprovable_reasons")
+		delete(additionalProperties, "partner_name")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationsResponseDataSampleApplication struct {

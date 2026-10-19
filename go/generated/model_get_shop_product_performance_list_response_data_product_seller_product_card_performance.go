@@ -55,7 +55,10 @@ type GetShopProductPerformanceListResponseDataProductSellerProductCardPerformanc
 	UniqueAtcRate *string `json:"unique_atc_rate,omitempty"`
 	// Unique click to order rate.
 	UniqueClickOrderRate *string `json:"unique_click_order_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance
 
 // NewGetShopProductPerformanceListResponseDataProductSellerProductCardPerformance instantiates a new GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -714,7 +717,50 @@ func (o GetShopProductPerformanceListResponseDataProductSellerProductCardPerform
 	if !IsNil(o.UniqueClickOrderRate) {
 		toSerialize["unique_click_order_rate"] = o.UniqueClickOrderRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceListResponseDataProductSellerProductCardPerformance := _GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceListResponseDataProductSellerProductCardPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceListResponseDataProductSellerProductCardPerformance(varGetShopProductPerformanceListResponseDataProductSellerProductCardPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attributed_gmv")
+		delete(additionalProperties, "attributed_orders")
+		delete(additionalProperties, "attributed_sku_orders")
+		delete(additionalProperties, "attributed_sold_items")
+		delete(additionalProperties, "estimated_customers")
+		delete(additionalProperties, "aov")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "add_cart_count")
+		delete(additionalProperties, "add_cart_rate")
+		delete(additionalProperties, "click_order_rate")
+		delete(additionalProperties, "unique_product_impressions")
+		delete(additionalProperties, "unique_clicks")
+		delete(additionalProperties, "unique_ctr")
+		delete(additionalProperties, "add_cart_users")
+		delete(additionalProperties, "unique_atc_rate")
+		delete(additionalProperties, "unique_click_order_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceListResponseDataProductSellerProductCardPerformance struct {

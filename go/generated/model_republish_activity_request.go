@@ -23,7 +23,10 @@ type RepublishActivityRequest struct {
 	EndTime *int64 `json:"end_time,omitempty"`
 	// Activity start time as a Unix timestamp in seconds. The value must be later than the current time.
 	BeginTime *int64 `json:"begin_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepublishActivityRequest RepublishActivityRequest
 
 // NewRepublishActivityRequest instantiates a new RepublishActivityRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RepublishActivityRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BeginTime) {
 		toSerialize["begin_time"] = o.BeginTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepublishActivityRequest) UnmarshalJSON(data []byte) (err error) {
+	varRepublishActivityRequest := _RepublishActivityRequest{}
+
+	err = json.Unmarshal(data, &varRepublishActivityRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepublishActivityRequest(varRepublishActivityRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "begin_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepublishActivityRequest struct {

@@ -25,7 +25,10 @@ type GetGlobalProductResponseDataMainImage struct {
 	Width *int64 `json:"width,omitempty"`
 	// The URI of the image.
 	Uri *string `json:"uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataMainImage GetGlobalProductResponseDataMainImage
 
 // NewGetGlobalProductResponseDataMainImage instantiates a new GetGlobalProductResponseDataMainImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalProductResponseDataMainImage) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataMainImage) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataMainImage := _GetGlobalProductResponseDataMainImage{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataMainImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataMainImage(varGetGlobalProductResponseDataMainImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataMainImage struct {

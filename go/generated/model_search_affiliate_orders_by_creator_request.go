@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SearchAffiliateOrdersByCreatorRequest struct {
 	TimeLt int64 `json:"time_lt"`
 	// Specifies the type of timestamp to filter the orders by. The query time range (time_ge and time_lt) will be applied to the selected time type. Possible values: - PAY_TIME: Filter based on the order payment time. - DELIVERY_TIME: Filter based on the order delivery/shipment time. - SETTLE_TIME: Filter based on the order settlement time. - CREATE_TIME (default): Filter based on the order creation time.
 	TimeType *string `json:"time_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchAffiliateOrdersByCreatorRequest SearchAffiliateOrdersByCreatorRequest
@@ -145,6 +145,11 @@ func (o SearchAffiliateOrdersByCreatorRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.TimeType) {
 		toSerialize["time_type"] = o.TimeType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *SearchAffiliateOrdersByCreatorRequest) UnmarshalJSON(data []byte) (err 
 
 	varSearchAffiliateOrdersByCreatorRequest := _SearchAffiliateOrdersByCreatorRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchAffiliateOrdersByCreatorRequest)
+	err = json.Unmarshal(data, &varSearchAffiliateOrdersByCreatorRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchAffiliateOrdersByCreatorRequest(varSearchAffiliateOrdersByCreatorRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "time_ge")
+		delete(additionalProperties, "time_lt")
+		delete(additionalProperties, "time_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &SkuImg{}
 type SkuImg struct {
 	// The URI of the image. Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with `use_case=ATTRIBUTE_IMAGE`.
 	Uri string `json:"uri"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SkuImg SkuImg
@@ -80,6 +80,11 @@ func (o SkuImg) MarshalJSON() ([]byte, error) {
 func (o SkuImg) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uri"] = o.Uri
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *SkuImg) UnmarshalJSON(data []byte) (err error) {
 
 	varSkuImg := _SkuImg{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSkuImg)
+	err = json.Unmarshal(data, &varSkuImg)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SkuImg(varSkuImg)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

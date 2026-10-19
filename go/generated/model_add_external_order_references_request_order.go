@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AddExternalOrderReferencesRequestOrder struct {
 	Id string `json:"id"`
 	// Order information in your external order management system (OMS).
 	ExternalOrder AddExternalOrderReferencesRequestOrderExternalOrder `json:"external_order"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddExternalOrderReferencesRequestOrder AddExternalOrderReferencesRequestOrder
@@ -108,6 +108,11 @@ func (o AddExternalOrderReferencesRequestOrder) ToMap() (map[string]interface{},
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["external_order"] = o.ExternalOrder
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *AddExternalOrderReferencesRequestOrder) UnmarshalJSON(data []byte) (err
 
 	varAddExternalOrderReferencesRequestOrder := _AddExternalOrderReferencesRequestOrder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddExternalOrderReferencesRequestOrder)
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesRequestOrder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddExternalOrderReferencesRequestOrder(varAddExternalOrderReferencesRequestOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "external_order")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

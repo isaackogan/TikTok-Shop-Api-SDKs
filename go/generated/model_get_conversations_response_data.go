@@ -23,7 +23,10 @@ type GetConversationsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Conversation info.
 	Conversations []GetConversationsResponseDataConversation `json:"conversations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationsResponseData GetConversationsResponseData
 
 // NewGetConversationsResponseData instantiates a new GetConversationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetConversationsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Conversations) {
 		toSerialize["conversations"] = o.Conversations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationsResponseData := _GetConversationsResponseData{}
+
+	err = json.Unmarshal(data, &varGetConversationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationsResponseData(varGetConversationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "conversations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationsResponseData struct {

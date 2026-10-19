@@ -21,7 +21,10 @@ var _ MappedNullable = &GetExternalOrderReferencesResponseData{}
 type GetExternalOrderReferencesResponseData struct {
 	// A list of orders that have been synced between your OMS and TikTok Shop.  Note: If you've synced order information between multiple OMSs to the same TikTok Shop order, you'll retrieve all external order information.
 	ExternalOrders []ExternalOrder `json:"external_orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetExternalOrderReferencesResponseData GetExternalOrderReferencesResponseData
 
 // NewGetExternalOrderReferencesResponseData instantiates a new GetExternalOrderReferencesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetExternalOrderReferencesResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.ExternalOrders) {
 		toSerialize["external_orders"] = o.ExternalOrders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetExternalOrderReferencesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetExternalOrderReferencesResponseData := _GetExternalOrderReferencesResponseData{}
+
+	err = json.Unmarshal(data, &varGetExternalOrderReferencesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetExternalOrderReferencesResponseData(varGetExternalOrderReferencesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetExternalOrderReferencesResponseData struct {

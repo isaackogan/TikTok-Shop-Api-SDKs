@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SubmitStrikethroughPriceResponseDataError struct {
 	Detail SubmitStrikethroughPriceResponseDataErrorDetail `json:"detail"`
 	// A human-readable description of the failure and the action needed to correct it.
 	Message string `json:"message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitStrikethroughPriceResponseDataError SubmitStrikethroughPriceResponseDataError
@@ -136,6 +136,11 @@ func (o SubmitStrikethroughPriceResponseDataError) ToMap() (map[string]interface
 	toSerialize["code"] = o.Code
 	toSerialize["detail"] = o.Detail
 	toSerialize["message"] = o.Message
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *SubmitStrikethroughPriceResponseDataError) UnmarshalJSON(data []byte) (
 
 	varSubmitStrikethroughPriceResponseDataError := _SubmitStrikethroughPriceResponseDataError{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitStrikethroughPriceResponseDataError)
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceResponseDataError)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitStrikethroughPriceResponseDataError(varSubmitStrikethroughPriceResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

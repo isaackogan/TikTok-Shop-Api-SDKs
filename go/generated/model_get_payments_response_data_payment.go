@@ -37,7 +37,10 @@ type GetPaymentsResponseDataPayment struct {
 	PaidTime *int64 `json:"paid_time,omitempty"`
 	// The seller's bank account number masked, revealing only the last 4 digits for privacy.
 	BankAccount *string `json:"bank_account,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPaymentsResponseDataPayment GetPaymentsResponseDataPayment
 
 // NewGetPaymentsResponseDataPayment instantiates a new GetPaymentsResponseDataPayment object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetPaymentsResponseDataPayment) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.BankAccount) {
 		toSerialize["bank_account"] = o.BankAccount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPaymentsResponseDataPayment) UnmarshalJSON(data []byte) (err error) {
+	varGetPaymentsResponseDataPayment := _GetPaymentsResponseDataPayment{}
+
+	err = json.Unmarshal(data, &varGetPaymentsResponseDataPayment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPaymentsResponseDataPayment(varGetPaymentsResponseDataPayment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "settlement_amount")
+		delete(additionalProperties, "payment_amount_before_exchange")
+		delete(additionalProperties, "exchange_rate")
+		delete(additionalProperties, "paid_time")
+		delete(additionalProperties, "bank_account")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPaymentsResponseDataPayment struct {

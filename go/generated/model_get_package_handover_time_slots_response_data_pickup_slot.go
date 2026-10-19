@@ -25,7 +25,10 @@ type GetPackageHandoverTimeSlotsResponseDataPickupSlot struct {
 	EndTime *int64 `json:"end_time,omitempty"`
 	// Whether an appointment be made for this time slot.
 	Avaliable *bool `json:"avaliable,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageHandoverTimeSlotsResponseDataPickupSlot GetPackageHandoverTimeSlotsResponseDataPickupSlot
 
 // NewGetPackageHandoverTimeSlotsResponseDataPickupSlot instantiates a new GetPackageHandoverTimeSlotsResponseDataPickupSlot object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetPackageHandoverTimeSlotsResponseDataPickupSlot) ToMap() (map[string]i
 	if !IsNil(o.Avaliable) {
 		toSerialize["avaliable"] = o.Avaliable
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageHandoverTimeSlotsResponseDataPickupSlot) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageHandoverTimeSlotsResponseDataPickupSlot := _GetPackageHandoverTimeSlotsResponseDataPickupSlot{}
+
+	err = json.Unmarshal(data, &varGetPackageHandoverTimeSlotsResponseDataPickupSlot)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageHandoverTimeSlotsResponseDataPickupSlot(varGetPackageHandoverTimeSlotsResponseDataPickupSlot)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "avaliable")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageHandoverTimeSlotsResponseDataPickupSlot struct {

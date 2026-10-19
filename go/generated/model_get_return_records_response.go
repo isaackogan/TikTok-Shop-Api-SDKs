@@ -26,7 +26,10 @@ type GetReturnRecordsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetReturnRecordsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReturnRecordsResponse GetReturnRecordsResponse
 
 // NewGetReturnRecordsResponse instantiates a new GetReturnRecordsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetReturnRecordsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReturnRecordsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetReturnRecordsResponse := _GetReturnRecordsResponse{}
+
+	err = json.Unmarshal(data, &varGetReturnRecordsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReturnRecordsResponse(varGetReturnRecordsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReturnRecordsResponse struct {

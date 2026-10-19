@@ -26,7 +26,10 @@ type SendIMMessageResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SendIMMessageResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendIMMessageResponse SendIMMessageResponse
 
 // NewSendIMMessageResponse instantiates a new SendIMMessageResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SendIMMessageResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendIMMessageResponse) UnmarshalJSON(data []byte) (err error) {
+	varSendIMMessageResponse := _SendIMMessageResponse{}
+
+	err = json.Unmarshal(data, &varSendIMMessageResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendIMMessageResponse(varSendIMMessageResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendIMMessageResponse struct {

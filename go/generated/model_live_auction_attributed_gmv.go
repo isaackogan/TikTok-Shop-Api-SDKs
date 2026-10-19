@@ -23,7 +23,10 @@ type LiveAuctionAttributedGmv struct {
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LiveAuctionAttributedGmv LiveAuctionAttributedGmv
 
 // NewLiveAuctionAttributedGmv instantiates a new LiveAuctionAttributedGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o LiveAuctionAttributedGmv) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LiveAuctionAttributedGmv) UnmarshalJSON(data []byte) (err error) {
+	varLiveAuctionAttributedGmv := _LiveAuctionAttributedGmv{}
+
+	err = json.Unmarshal(data, &varLiveAuctionAttributedGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LiveAuctionAttributedGmv(varLiveAuctionAttributedGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLiveAuctionAttributedGmv struct {

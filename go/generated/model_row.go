@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Row{}
 type Row struct {
 	// Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header.
 	Cells []Cell `json:"cells"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Row Row
@@ -80,6 +80,11 @@ func (o Row) MarshalJSON() ([]byte, error) {
 func (o Row) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["cells"] = o.Cells
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *Row) UnmarshalJSON(data []byte) (err error) {
 
 	varRow := _Row{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRow)
+	err = json.Unmarshal(data, &varRow)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Row(varRow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cells")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -111,7 +111,10 @@ type GetOrderDetailResponseDataOrderLineItem struct {
 	RoomId *string `json:"room_id,omitempty"`
 	// This describes the product listing type of the SKU.  Possible values: - `TEMPORARY_LISTING`
 	ProductListingType *string `json:"product_listing_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrderLineItem GetOrderDetailResponseDataOrderLineItem
 
 // NewGetOrderDetailResponseDataOrderLineItem instantiates a new GetOrderDetailResponseDataOrderLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -1721,7 +1724,77 @@ func (o GetOrderDetailResponseDataOrderLineItem) ToMap() (map[string]interface{}
 	if !IsNil(o.ProductListingType) {
 		toSerialize["product_listing_type"] = o.ProductListingType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrderLineItem) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrderLineItem := _GetOrderDetailResponseDataOrderLineItem{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrderLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrderLineItem(varGetOrderDetailResponseDataOrderLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "combined_listing_skus")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "sku_image")
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "pfand_fee")
+		delete(additionalProperties, "platform_discount")
+		delete(additionalProperties, "display_status")
+		delete(additionalProperties, "cancel_user")
+		delete(additionalProperties, "sku_type")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "seller_discount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "rts_time")
+		delete(additionalProperties, "item_tax")
+		delete(additionalProperties, "package_status")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "is_gift")
+		delete(additionalProperties, "cancel_reason")
+		delete(additionalProperties, "small_order_fee")
+		delete(additionalProperties, "retail_delivery_fee")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "buyer_service_fee")
+		delete(additionalProperties, "handling_duration_days")
+		delete(additionalProperties, "is_dangerous_good")
+		delete(additionalProperties, "needs_prescription")
+		delete(additionalProperties, "gift_retail_price")
+		delete(additionalProperties, "is_unboxing_item")
+		delete(additionalProperties, "unboxing_sku_code")
+		delete(additionalProperties, "unboxing_case_list")
+		delete(additionalProperties, "sub_item_info")
+		delete(additionalProperties, "distance_shipping_fee")
+		delete(additionalProperties, "distance_fee")
+		delete(additionalProperties, "shipping_vat_amount")
+		delete(additionalProperties, "shipping_vat_rate")
+		delete(additionalProperties, "is_pod_customized")
+		delete(additionalProperties, "pod_info_id")
+		delete(additionalProperties, "room_id")
+		delete(additionalProperties, "product_listing_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrderLineItem struct {

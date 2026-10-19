@@ -39,7 +39,10 @@ type SearchCreatorsInCreatorMarketplaceRequest struct {
 	AdvancedFilters *SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter `json:"advanced_filters,omitempty"`
 	// Creator's Data Group, get all group by default, which include:  - BASIC_CREATOR_INFORMATION - CONTENT_PERFORMANCE - FOLLOWER_INFORMATION - COLLABORATION - SALES_AND_GMV
 	DataGroups []string `json:"data_groups,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequest SearchCreatorsInCreatorMarketplaceRequest
 
 // NewSearchCreatorsInCreatorMarketplaceRequest instantiates a new SearchCreatorsInCreatorMarketplaceRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o SearchCreatorsInCreatorMarketplaceRequest) ToMap() (map[string]interface
 	if !IsNil(o.DataGroups) {
 		toSerialize["data_groups"] = o.DataGroups
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequest := _SearchCreatorsInCreatorMarketplaceRequest{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequest(varSearchCreatorsInCreatorMarketplaceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "search_key")
+		delete(additionalProperties, "keyword")
+		delete(additionalProperties, "follower_demographics")
+		delete(additionalProperties, "gmv_ranges")
+		delete(additionalProperties, "units_sold_ranges")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "content_performance")
+		delete(additionalProperties, "affiliate_data")
+		delete(additionalProperties, "advanced_filters")
+		delete(additionalProperties, "data_groups")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequest struct {

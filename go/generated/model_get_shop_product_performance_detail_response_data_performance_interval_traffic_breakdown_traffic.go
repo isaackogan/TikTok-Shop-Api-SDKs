@@ -29,7 +29,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakd
 	Ctr *string `json:"ctr,omitempty"`
 	// Average percentage of unique page views that result in sales.
 	AvgConversionRate *string `json:"avg_conversion_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBre
 	if !IsNil(o.AvgConversionRate) {
 		toSerialize["avg_conversion_rate"] = o.AvgConversionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "impressions")
+		delete(additionalProperties, "page_views")
+		delete(additionalProperties, "avg_unique_page_views")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "avg_conversion_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic struct {

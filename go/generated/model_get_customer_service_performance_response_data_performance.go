@@ -33,7 +33,10 @@ type GetCustomerServicePerformanceResponseDataPerformance struct {
 	CsGuidedGmv *string `json:"cs_guided_gmv,omitempty"`
 	// The ISO 4217 three-letter currency code used for `cs_guided_gmv`. See [Currency Codes](https://www.iso.org/iso-4217-currency-codes.html).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCustomerServicePerformanceResponseDataPerformance GetCustomerServicePerformanceResponseDataPerformance
 
 // NewGetCustomerServicePerformanceResponseDataPerformance instantiates a new GetCustomerServicePerformanceResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetCustomerServicePerformanceResponseDataPerformance) ToMap() (map[strin
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCustomerServicePerformanceResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetCustomerServicePerformanceResponseDataPerformance := _GetCustomerServicePerformanceResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetCustomerServicePerformanceResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCustomerServicePerformanceResponseDataPerformance(varGetCustomerServicePerformanceResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "support_session_count")
+		delete(additionalProperties, "response_percentage")
+		delete(additionalProperties, "satisfaction_percentage")
+		delete(additionalProperties, "response_time_mins")
+		delete(additionalProperties, "conversion_rate")
+		delete(additionalProperties, "cs_guided_gmv")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCustomerServicePerformanceResponseDataPerformance struct {

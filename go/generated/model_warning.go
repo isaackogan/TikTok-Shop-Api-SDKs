@@ -21,7 +21,10 @@ var _ MappedNullable = &Warning{}
 type Warning struct {
 	// Warning information that needs attention. Review and address it when applicable. Its presence alone does not mean `check_result` is `FAILED`.
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Warning Warning
 
 // NewWarning instantiates a new Warning object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Warning) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Warning) UnmarshalJSON(data []byte) (err error) {
+	varWarning := _Warning{}
+
+	err = json.Unmarshal(data, &varWarning)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Warning(varWarning)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableWarning struct {

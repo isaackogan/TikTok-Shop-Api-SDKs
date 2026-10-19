@@ -31,7 +31,10 @@ type PartialEditManufacturerRequest struct {
 	Address *string `json:"address,omitempty"`
 	// The BCP-47 locale code representing the language of the manufacturer information to update. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT Default: The locale of the seller's registered business address.  **Note**: Only the language version selected by this locale is updated; other language versions remain unchanged. Ensure the locale matches the language used in the supplied field values.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditManufacturerRequest PartialEditManufacturerRequest
 
 // NewPartialEditManufacturerRequest instantiates a new PartialEditManufacturerRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o PartialEditManufacturerRequest) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditManufacturerRequest) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditManufacturerRequest := _PartialEditManufacturerRequest{}
+
+	err = json.Unmarshal(data, &varPartialEditManufacturerRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditManufacturerRequest(varPartialEditManufacturerRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "registered_trade_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditManufacturerRequest struct {

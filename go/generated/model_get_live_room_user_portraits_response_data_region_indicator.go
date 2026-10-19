@@ -23,7 +23,10 @@ type GetLiveRoomUserPortraitsResponseDataRegionIndicator struct {
 	Value *string `json:"value,omitempty"`
 	// The country of indicators
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomUserPortraitsResponseDataRegionIndicator GetLiveRoomUserPortraitsResponseDataRegionIndicator
 
 // NewGetLiveRoomUserPortraitsResponseDataRegionIndicator instantiates a new GetLiveRoomUserPortraitsResponseDataRegionIndicator object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetLiveRoomUserPortraitsResponseDataRegionIndicator) ToMap() (map[string
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomUserPortraitsResponseDataRegionIndicator) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomUserPortraitsResponseDataRegionIndicator := _GetLiveRoomUserPortraitsResponseDataRegionIndicator{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomUserPortraitsResponseDataRegionIndicator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomUserPortraitsResponseDataRegionIndicator(varGetLiveRoomUserPortraitsResponseDataRegionIndicator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomUserPortraitsResponseDataRegionIndicator struct {

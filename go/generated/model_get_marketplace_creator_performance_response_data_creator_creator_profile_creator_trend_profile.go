@@ -31,7 +31,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTre
 	Follower *int64 `json:"follower,omitempty"`
 	// Trend engagement rate e.g. 558 means creator's engagement rate is 5.58%
 	EngagementRate *int64 `json:"engagement_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreator
 	if !IsNil(o.EngagementRate) {
 		toSerialize["engagement_rate"] = o.EngagementRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile := _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile(varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_timestamp")
+		delete(additionalProperties, "end_timestamp")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "units_sold")
+		delete(additionalProperties, "follower")
+		delete(additionalProperties, "engagement_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile struct {

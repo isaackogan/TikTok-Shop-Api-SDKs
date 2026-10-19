@@ -37,7 +37,10 @@ type GetBestsellingLIVESessionsResponseDataLive struct {
 	OpenId *string `json:"open_id,omitempty"`
 	// The creator’s display nickname, visible externally.
 	CreatorNickName *string `json:"creator_nick_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingLIVESessionsResponseDataLive GetBestsellingLIVESessionsResponseDataLive
 
 // NewGetBestsellingLIVESessionsResponseDataLive instantiates a new GetBestsellingLIVESessionsResponseDataLive object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetBestsellingLIVESessionsResponseDataLive) ToMap() (map[string]interfac
 	if !IsNil(o.CreatorNickName) {
 		toSerialize["creator_nick_name"] = o.CreatorNickName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingLIVESessionsResponseDataLive) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingLIVESessionsResponseDataLive := _GetBestsellingLIVESessionsResponseDataLive{}
+
+	err = json.Unmarshal(data, &varGetBestsellingLIVESessionsResponseDataLive)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingLIVESessionsResponseDataLive(varGetBestsellingLIVESessionsResponseDataLive)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rank")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "creator_name")
+		delete(additionalProperties, "open_id")
+		delete(additionalProperties, "creator_nick_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingLIVESessionsResponseDataLive struct {

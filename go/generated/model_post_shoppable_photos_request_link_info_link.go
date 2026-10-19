@@ -23,7 +23,10 @@ type PostShoppablePhotosRequestLinkInfoLink struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// Photo Anchor Title:The title to be shown on the product anchor. Anchor title should be shorter than 30 characters
 	LinkTitle *string `json:"link_title,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PostShoppablePhotosRequestLinkInfoLink PostShoppablePhotosRequestLinkInfoLink
 
 // NewPostShoppablePhotosRequestLinkInfoLink instantiates a new PostShoppablePhotosRequestLinkInfoLink object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PostShoppablePhotosRequestLinkInfoLink) ToMap() (map[string]interface{},
 	if !IsNil(o.LinkTitle) {
 		toSerialize["link_title"] = o.LinkTitle
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PostShoppablePhotosRequestLinkInfoLink) UnmarshalJSON(data []byte) (err error) {
+	varPostShoppablePhotosRequestLinkInfoLink := _PostShoppablePhotosRequestLinkInfoLink{}
+
+	err = json.Unmarshal(data, &varPostShoppablePhotosRequestLinkInfoLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PostShoppablePhotosRequestLinkInfoLink(varPostShoppablePhotosRequestLinkInfoLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "link_title")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePostShoppablePhotosRequestLinkInfoLink struct {

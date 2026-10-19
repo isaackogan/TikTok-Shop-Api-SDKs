@@ -25,7 +25,10 @@ type SearchTAPAffiliateOrdersRequest struct {
 	CreateTimeLt *int64 `json:"create_time_lt,omitempty"`
 	// Filter orders by a TAP campaign using its identifier.
 	CampaignId *string `json:"campaign_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchTAPAffiliateOrdersRequest SearchTAPAffiliateOrdersRequest
 
 // NewSearchTAPAffiliateOrdersRequest instantiates a new SearchTAPAffiliateOrdersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchTAPAffiliateOrdersRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.CampaignId) {
 		toSerialize["campaign_id"] = o.CampaignId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchTAPAffiliateOrdersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchTAPAffiliateOrdersRequest := _SearchTAPAffiliateOrdersRequest{}
+
+	err = json.Unmarshal(data, &varSearchTAPAffiliateOrdersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchTAPAffiliateOrdersRequest(varSearchTAPAffiliateOrdersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "campaign_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchTAPAffiliateOrdersRequest struct {

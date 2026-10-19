@@ -33,7 +33,10 @@ type GetOrderCustomsRequirementsResponseDataOrderClearanceList struct {
 	ShipmentType *int64 `json:"shipment_type,omitempty"`
 	// Order-line details for the order.
 	ItemList []GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList `json:"item_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderCustomsRequirementsResponseDataOrderClearanceList GetOrderCustomsRequirementsResponseDataOrderClearanceList
 
 // NewGetOrderCustomsRequirementsResponseDataOrderClearanceList instantiates a new GetOrderCustomsRequirementsResponseDataOrderClearanceList object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetOrderCustomsRequirementsResponseDataOrderClearanceList) ToMap() (map[
 	if !IsNil(o.ItemList) {
 		toSerialize["item_list"] = o.ItemList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderCustomsRequirementsResponseDataOrderClearanceList) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderCustomsRequirementsResponseDataOrderClearanceList := _GetOrderCustomsRequirementsResponseDataOrderClearanceList{}
+
+	err = json.Unmarshal(data, &varGetOrderCustomsRequirementsResponseDataOrderClearanceList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderCustomsRequirementsResponseDataOrderClearanceList(varGetOrderCustomsRequirementsResponseDataOrderClearanceList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "need_fill_clearance")
+		delete(additionalProperties, "already_filled_clearance")
+		delete(additionalProperties, "target_country")
+		delete(additionalProperties, "biz_type")
+		delete(additionalProperties, "shipment_type")
+		delete(additionalProperties, "item_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderCustomsRequirementsResponseDataOrderClearanceList struct {

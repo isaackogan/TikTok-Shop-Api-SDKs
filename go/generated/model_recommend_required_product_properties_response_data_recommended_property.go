@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type RecommendRequiredProductPropertiesResponseDataRecommendedProperty struct {
 	Type string `json:"type"`
 	// Ordered values recommended for the property. The array is empty when the property requires a custom value or no value is recommended.
 	Values []RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendRequiredProductPropertiesResponseDataRecommendedProperty RecommendRequiredProductPropertiesResponseDataRecommendedProperty
@@ -248,6 +248,11 @@ func (o RecommendRequiredProductPropertiesResponseDataRecommendedProperty) ToMap
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -281,15 +286,26 @@ func (o *RecommendRequiredProductPropertiesResponseDataRecommendedProperty) Unma
 
 	varRecommendRequiredProductPropertiesResponseDataRecommendedProperty := _RecommendRequiredProductPropertiesResponseDataRecommendedProperty{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendRequiredProductPropertiesResponseDataRecommendedProperty)
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesResponseDataRecommendedProperty)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendRequiredProductPropertiesResponseDataRecommendedProperty(varRecommendRequiredProductPropertiesResponseDataRecommendedProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_customizable")
+		delete(additionalProperties, "is_multiple_selection")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -29,7 +29,10 @@ type PartialEditProductRequestPodInfoPodTemplate struct {
 	Surfaces []PartialEditProductRequestPodInfoPodTemplateSurface `json:"surfaces,omitempty"`
 	// The name of the customization template, used by the seller for internal management.
 	TemplateName *string `json:"template_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestPodInfoPodTemplate PartialEditProductRequestPodInfoPodTemplate
 
 // NewPartialEditProductRequestPodInfoPodTemplate instantiates a new PartialEditProductRequestPodInfoPodTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o PartialEditProductRequestPodInfoPodTemplate) ToMap() (map[string]interfa
 	if !IsNil(o.TemplateName) {
 		toSerialize["template_name"] = o.TemplateName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestPodInfoPodTemplate) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestPodInfoPodTemplate := _PartialEditProductRequestPodInfoPodTemplate{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestPodInfoPodTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestPodInfoPodTemplate(varPartialEditProductRequestPodInfoPodTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pod_template_id")
+		delete(additionalProperties, "remark")
+		delete(additionalProperties, "sku_ids")
+		delete(additionalProperties, "surfaces")
+		delete(additionalProperties, "template_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestPodInfoPodTemplate struct {

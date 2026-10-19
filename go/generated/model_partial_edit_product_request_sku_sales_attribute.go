@@ -31,7 +31,10 @@ type PartialEditProductRequestSkuSalesAttribute struct {
 	ValueId *string `json:"value_id,omitempty"`
 	// A self-defined custom sales attribute value if the existing values do not satisfy your needs. The system will auto-generate an ID after editing.  **Note**: - No duplicates allowed under the same attribute. - Max length: 50 characters.
 	ValueName *string `json:"value_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestSkuSalesAttribute PartialEditProductRequestSkuSalesAttribute
 
 // NewPartialEditProductRequestSkuSalesAttribute instantiates a new PartialEditProductRequestSkuSalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o PartialEditProductRequestSkuSalesAttribute) ToMap() (map[string]interfac
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestSkuSalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestSkuSalesAttribute := _PartialEditProductRequestSkuSalesAttribute{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestSkuSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestSkuSalesAttribute(varPartialEditProductRequestSkuSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sku_img")
+		delete(additionalProperties, "supplementary_sku_images")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestSkuSalesAttribute struct {

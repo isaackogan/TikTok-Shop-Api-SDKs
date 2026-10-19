@@ -26,7 +26,10 @@ type GetCreatorPerformanceForCampaignProductResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetCreatorPerformanceForCampaignProductResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorPerformanceForCampaignProductResponse GetCreatorPerformanceForCampaignProductResponse
 
 // NewGetCreatorPerformanceForCampaignProductResponse instantiates a new GetCreatorPerformanceForCampaignProductResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetCreatorPerformanceForCampaignProductResponse) ToMap() (map[string]int
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorPerformanceForCampaignProductResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorPerformanceForCampaignProductResponse := _GetCreatorPerformanceForCampaignProductResponse{}
+
+	err = json.Unmarshal(data, &varGetCreatorPerformanceForCampaignProductResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorPerformanceForCampaignProductResponse(varGetCreatorPerformanceForCampaignProductResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorPerformanceForCampaignProductResponse struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &EditProductResponseDataAudit{}
 type EditProductResponseDataAudit struct {
 	// The product audit status. Possible values: - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state. - AUDITING: The product is currently being audited. - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the new information is immediately published on the platform.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditProductResponseDataAudit EditProductResponseDataAudit
 
 // NewEditProductResponseDataAudit instantiates a new EditProductResponseDataAudit object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o EditProductResponseDataAudit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditProductResponseDataAudit) UnmarshalJSON(data []byte) (err error) {
+	varEditProductResponseDataAudit := _EditProductResponseDataAudit{}
+
+	err = json.Unmarshal(data, &varEditProductResponseDataAudit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditProductResponseDataAudit(varEditProductResponseDataAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditProductResponseDataAudit struct {

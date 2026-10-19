@@ -33,7 +33,10 @@ type GetConversationsResponseDataConversationLatestMessage struct {
 	Sender *GetConversationsResponseDataConversationLatestMessageSender `json:"sender,omitempty"`
 	// Message index. This field can be used to sort messages. \"index\" means the order of the message in the conversation. This value is unique for every message in a conversation. This value is time-related, meaning a newer message will get a larger \"index\". But it is not strictly increasing.
 	Index *string `json:"index,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationsResponseDataConversationLatestMessage GetConversationsResponseDataConversationLatestMessage
 
 // NewGetConversationsResponseDataConversationLatestMessage instantiates a new GetConversationsResponseDataConversationLatestMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetConversationsResponseDataConversationLatestMessage) ToMap() (map[stri
 	if !IsNil(o.Index) {
 		toSerialize["index"] = o.Index
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationsResponseDataConversationLatestMessage) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationsResponseDataConversationLatestMessage := _GetConversationsResponseDataConversationLatestMessage{}
+
+	err = json.Unmarshal(data, &varGetConversationsResponseDataConversationLatestMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationsResponseDataConversationLatestMessage(varGetConversationsResponseDataConversationLatestMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "is_visible")
+		delete(additionalProperties, "sender")
+		delete(additionalProperties, "index")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationsResponseDataConversationLatestMessage struct {

@@ -31,7 +31,10 @@ type GetPackageDetailResponseDataOrderSku struct {
 	// [Deprecated]SKU quantity.
 	// Deprecated
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageDetailResponseDataOrderSku GetPackageDetailResponseDataOrderSku
 
 // NewGetPackageDetailResponseDataOrderSku instantiates a new GetPackageDetailResponseDataOrderSku object
 // This constructor will assign default values to properties that have it defined,
@@ -212,7 +215,36 @@ func (o GetPackageDetailResponseDataOrderSku) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageDetailResponseDataOrderSku) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageDetailResponseDataOrderSku := _GetPackageDetailResponseDataOrderSku{}
+
+	err = json.Unmarshal(data, &varGetPackageDetailResponseDataOrderSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageDetailResponseDataOrderSku(varGetPackageDetailResponseDataOrderSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "image_url")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageDetailResponseDataOrderSku struct {

@@ -29,7 +29,10 @@ type RecommendCategoryRequestOriginPlatformCategory struct {
 	IsLeaf *bool `json:"is_leaf,omitempty"`
 	// Whether the category is a root category.
 	IsRoot *bool `json:"is_root,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryRequestOriginPlatformCategory RecommendCategoryRequestOriginPlatformCategory
 
 // NewRecommendCategoryRequestOriginPlatformCategory instantiates a new RecommendCategoryRequestOriginPlatformCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o RecommendCategoryRequestOriginPlatformCategory) ToMap() (map[string]inte
 	if !IsNil(o.IsRoot) {
 		toSerialize["is_root"] = o.IsRoot
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryRequestOriginPlatformCategory) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryRequestOriginPlatformCategory := _RecommendCategoryRequestOriginPlatformCategory{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryRequestOriginPlatformCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryRequestOriginPlatformCategory(varRecommendCategoryRequestOriginPlatformCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "full_name")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "is_root")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryRequestOriginPlatformCategory struct {

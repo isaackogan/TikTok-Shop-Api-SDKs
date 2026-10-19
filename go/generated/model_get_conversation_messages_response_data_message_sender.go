@@ -27,7 +27,10 @@ type GetConversationMessagesResponseDataMessageSender struct {
 	Nickname *string `json:"nickname,omitempty"`
 	// Sender's avatar URL.
 	Avatar *string `json:"avatar,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationMessagesResponseDataMessageSender GetConversationMessagesResponseDataMessageSender
 
 // NewGetConversationMessagesResponseDataMessageSender instantiates a new GetConversationMessagesResponseDataMessageSender object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetConversationMessagesResponseDataMessageSender) ToMap() (map[string]in
 	if !IsNil(o.Avatar) {
 		toSerialize["avatar"] = o.Avatar
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationMessagesResponseDataMessageSender) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationMessagesResponseDataMessageSender := _GetConversationMessagesResponseDataMessageSender{}
+
+	err = json.Unmarshal(data, &varGetConversationMessagesResponseDataMessageSender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationMessagesResponseDataMessageSender(varGetConversationMessagesResponseDataMessageSender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "im_user_id")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "avatar")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationMessagesResponseDataMessageSender struct {

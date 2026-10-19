@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalSellerWarehousesResponseData{}
 type GetGlobalSellerWarehousesResponseData struct {
 	// A list of global warehouses associated with the seller.
 	GlobalWarehouses []GetGlobalSellerWarehousesResponseDataGlobalWarehouse `json:"global_warehouses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalSellerWarehousesResponseData GetGlobalSellerWarehousesResponseData
 
 // NewGetGlobalSellerWarehousesResponseData instantiates a new GetGlobalSellerWarehousesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalSellerWarehousesResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.GlobalWarehouses) {
 		toSerialize["global_warehouses"] = o.GlobalWarehouses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalSellerWarehousesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalSellerWarehousesResponseData := _GetGlobalSellerWarehousesResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalSellerWarehousesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalSellerWarehousesResponseData(varGetGlobalSellerWarehousesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_warehouses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalSellerWarehousesResponseData struct {

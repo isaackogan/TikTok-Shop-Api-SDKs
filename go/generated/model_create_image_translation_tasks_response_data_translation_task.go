@@ -25,7 +25,10 @@ type CreateImageTranslationTasksResponseDataTranslationTask struct {
 	TargetLanguage *string `json:"target_language,omitempty"`
 	// The ID to identify the image translation task. Pass this ID to the [Get Image Translation Tasks API](684f8b2d535a9d048f234564) to retrieve the task status and the translated image URIs.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateImageTranslationTasksResponseDataTranslationTask CreateImageTranslationTasksResponseDataTranslationTask
 
 // NewCreateImageTranslationTasksResponseDataTranslationTask instantiates a new CreateImageTranslationTasksResponseDataTranslationTask object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateImageTranslationTasksResponseDataTranslationTask) ToMap() (map[str
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateImageTranslationTasksResponseDataTranslationTask) UnmarshalJSON(data []byte) (err error) {
+	varCreateImageTranslationTasksResponseDataTranslationTask := _CreateImageTranslationTasksResponseDataTranslationTask{}
+
+	err = json.Unmarshal(data, &varCreateImageTranslationTasksResponseDataTranslationTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateImageTranslationTasksResponseDataTranslationTask(varCreateImageTranslationTasksResponseDataTranslationTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "image_uri")
+		delete(additionalProperties, "target_language")
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateImageTranslationTasksResponseDataTranslationTask struct {

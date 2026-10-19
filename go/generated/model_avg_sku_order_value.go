@@ -23,7 +23,10 @@ type AvgSkuOrderValue struct {
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AvgSkuOrderValue AvgSkuOrderValue
 
 // NewAvgSkuOrderValue instantiates a new AvgSkuOrderValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AvgSkuOrderValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AvgSkuOrderValue) UnmarshalJSON(data []byte) (err error) {
+	varAvgSkuOrderValue := _AvgSkuOrderValue{}
+
+	err = json.Unmarshal(data, &varAvgSkuOrderValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AvgSkuOrderValue(varAvgSkuOrderValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAvgSkuOrderValue struct {

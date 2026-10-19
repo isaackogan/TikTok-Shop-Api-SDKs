@@ -25,7 +25,10 @@ type GetProductResponseDataProductAttribute struct {
 	Name *string `json:"name,omitempty"`
 	// A list of selectable values for the product attribute.
 	Values []GetProductResponseDataProductAttributeValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataProductAttribute GetProductResponseDataProductAttribute
 
 // NewGetProductResponseDataProductAttribute instantiates a new GetProductResponseDataProductAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataProductAttribute) ToMap() (map[string]interface{},
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataProductAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataProductAttribute := _GetProductResponseDataProductAttribute{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataProductAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataProductAttribute(varGetProductResponseDataProductAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataProductAttribute struct {

@@ -27,7 +27,10 @@ type RemovePromotionActivityProductsRequest struct {
 	BenefitProductIds []string `json:"benefit_product_ids,omitempty"`
 	// IDs of excluded-product relations to remove from a SHOP-scoped `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`, or `SHIPPING_DISCOUNT` activity. Maximum: 100 IDs.
 	ExcludeProductIds []string `json:"exclude_product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemovePromotionActivityProductsRequest RemovePromotionActivityProductsRequest
 
 // NewRemovePromotionActivityProductsRequest instantiates a new RemovePromotionActivityProductsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o RemovePromotionActivityProductsRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.ExcludeProductIds) {
 		toSerialize["exclude_product_ids"] = o.ExcludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemovePromotionActivityProductsRequest) UnmarshalJSON(data []byte) (err error) {
+	varRemovePromotionActivityProductsRequest := _RemovePromotionActivityProductsRequest{}
+
+	err = json.Unmarshal(data, &varRemovePromotionActivityProductsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemovePromotionActivityProductsRequest(varRemovePromotionActivityProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "sku_ids")
+		delete(additionalProperties, "benefit_product_ids")
+		delete(additionalProperties, "exclude_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemovePromotionActivityProductsRequest struct {

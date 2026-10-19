@@ -29,7 +29,10 @@ type GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic 
 	Shares *int64 `json:"shares,omitempty"`
 	// The number of video views.
 	Views *int64 `json:"views,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic
 
 // NewGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic instantiates a new GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraff
 	if !IsNil(o.Views) {
 		toSerialize["views"] = o.Views
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic := _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic(varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "likes")
+		delete(additionalProperties, "new_followers")
+		delete(additionalProperties, "shares")
+		delete(additionalProperties, "views")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic struct {

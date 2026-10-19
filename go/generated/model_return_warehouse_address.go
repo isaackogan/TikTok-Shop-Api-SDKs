@@ -21,7 +21,10 @@ var _ MappedNullable = &ReturnWarehouseAddress{}
 type ReturnWarehouseAddress struct {
 	// The full return warehouse address.
 	FullAddress *string `json:"full_address,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReturnWarehouseAddress ReturnWarehouseAddress
 
 // NewReturnWarehouseAddress instantiates a new ReturnWarehouseAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ReturnWarehouseAddress) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FullAddress) {
 		toSerialize["full_address"] = o.FullAddress
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReturnWarehouseAddress) UnmarshalJSON(data []byte) (err error) {
+	varReturnWarehouseAddress := _ReturnWarehouseAddress{}
+
+	err = json.Unmarshal(data, &varReturnWarehouseAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReturnWarehouseAddress(varReturnWarehouseAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "full_address")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReturnWarehouseAddress struct {

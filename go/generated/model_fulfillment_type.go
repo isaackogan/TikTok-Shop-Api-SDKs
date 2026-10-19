@@ -23,7 +23,10 @@ type FulfillmentType struct {
 	HandlingDurationDays *int64 `json:"handling_duration_days,omitempty"`
 	// The date on which the product gets converted into a regular product and becomes available for general purchase. On this date, order handling will also start, changing the status of the order to [`AWAITING_SHIPMENT`](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011).   Applicable only for `PRE_ORDER` in the US. **Note**: - Valid range: The date must fall within 3 - 60 days from the current date. - This date is a unix timestamp (seconds) based on the seller-selected timezone in Seller Center. - This date cannot be modified once the product goes live.
 	ReleaseDate *int64 `json:"release_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FulfillmentType FulfillmentType
 
 // NewFulfillmentType instantiates a new FulfillmentType object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o FulfillmentType) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReleaseDate) {
 		toSerialize["release_date"] = o.ReleaseDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FulfillmentType) UnmarshalJSON(data []byte) (err error) {
+	varFulfillmentType := _FulfillmentType{}
+
+	err = json.Unmarshal(data, &varFulfillmentType)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FulfillmentType(varFulfillmentType)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "handling_duration_days")
+		delete(additionalProperties, "release_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFulfillmentType struct {

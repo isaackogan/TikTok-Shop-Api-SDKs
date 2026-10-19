@@ -35,7 +35,10 @@ type QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct struct
 	CommissionEffectiveStatus *string `json:"commission_effective_status,omitempty"`
 	// The status of the product in the current target cooperation. Field values: - NORMAL: The status of the product in the current target collaboration is normal. - DELETING: The status of the product in the current target collaboration is deleting.Product in the DELETING state will end their delayed effectiveness state and move to the DELETED state at 00:00 the next day. - DELETED: The status of the product in the current target collaboration is deleted.
 	CollaborationStatus *string `json:"collaboration_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct
 
 // NewQueryTargetCollaborationDetailResponseDataTargetCollaborationProduct instantiates a new QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct) To
 	if !IsNil(o.CollaborationStatus) {
 		toSerialize["collaboration_status"] = o.CollaborationStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponseDataTargetCollaborationProduct := _QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponseDataTargetCollaborationProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct(varQueryTargetCollaborationDetailResponseDataTargetCollaborationProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "commission")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "commission_effective_status")
+		delete(additionalProperties, "collaboration_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponseDataTargetCollaborationProduct struct {

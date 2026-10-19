@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateTargetCollaborationResponseDataTargetCollaboration
 type CreateTargetCollaborationResponseDataTargetCollaboration struct {
 	// The target collaboration identifier.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateTargetCollaborationResponseDataTargetCollaboration CreateTargetCollaborationResponseDataTargetCollaboration
 
 // NewCreateTargetCollaborationResponseDataTargetCollaboration instantiates a new CreateTargetCollaborationResponseDataTargetCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateTargetCollaborationResponseDataTargetCollaboration) ToMap() (map[s
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateTargetCollaborationResponseDataTargetCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varCreateTargetCollaborationResponseDataTargetCollaboration := _CreateTargetCollaborationResponseDataTargetCollaboration{}
+
+	err = json.Unmarshal(data, &varCreateTargetCollaborationResponseDataTargetCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateTargetCollaborationResponseDataTargetCollaboration(varCreateTargetCollaborationResponseDataTargetCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateTargetCollaborationResponseDataTargetCollaboration struct {

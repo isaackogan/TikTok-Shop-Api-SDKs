@@ -27,7 +27,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale struct {
 	ItemsSold *int64 `json:"items_sold,omitempty"`
 	// Sales breakdowns.
 	Breakdowns []GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown `json:"breakdowns,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalSale instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale) ToMa
 	if !IsNil(o.Breakdowns) {
 		toSerialize["breakdowns"] = o.Breakdowns
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSale := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "breakdowns")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalSale struct {

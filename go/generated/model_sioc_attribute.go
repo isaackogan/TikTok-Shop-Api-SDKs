@@ -21,7 +21,10 @@ var _ MappedNullable = &SiocAttribute{}
 type SiocAttribute struct {
 	// Sioc files
 	SiocFiles []SiocFile `json:"sioc_files,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SiocAttribute SiocAttribute
 
 // NewSiocAttribute instantiates a new SiocAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SiocAttribute) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SiocFiles) {
 		toSerialize["sioc_files"] = o.SiocFiles
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SiocAttribute) UnmarshalJSON(data []byte) (err error) {
+	varSiocAttribute := _SiocAttribute{}
+
+	err = json.Unmarshal(data, &varSiocAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SiocAttribute(varSiocAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sioc_files")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSiocAttribute struct {

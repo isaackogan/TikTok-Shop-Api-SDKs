@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateCustomBrandsRequest{}
 type CreateCustomBrandsRequest struct {
 	// The brand name.  **Note**: - Length: [2, 30] - No language restrictions, but do not use Chinese. - Do not use a name that already exists. - Do not include special fonts or emoticons. - Do not include 5 or more consecutive numbers. - The name will not be translated into multiple languages.
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateCustomBrandsRequest CreateCustomBrandsRequest
@@ -80,6 +80,11 @@ func (o CreateCustomBrandsRequest) MarshalJSON() ([]byte, error) {
 func (o CreateCustomBrandsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateCustomBrandsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateCustomBrandsRequest := _CreateCustomBrandsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateCustomBrandsRequest)
+	err = json.Unmarshal(data, &varCreateCustomBrandsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateCustomBrandsRequest(varCreateCustomBrandsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

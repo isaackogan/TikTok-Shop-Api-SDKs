@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ListAvailableInboundMethodsRequest{}
 type ListAvailableInboundMethodsRequest struct {
 	// Inbound plan identifier
 	PlanId string `json:"plan_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListAvailableInboundMethodsRequest ListAvailableInboundMethodsRequest
@@ -80,6 +80,11 @@ func (o ListAvailableInboundMethodsRequest) MarshalJSON() ([]byte, error) {
 func (o ListAvailableInboundMethodsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["plan_id"] = o.PlanId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ListAvailableInboundMethodsRequest) UnmarshalJSON(data []byte) (err err
 
 	varListAvailableInboundMethodsRequest := _ListAvailableInboundMethodsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListAvailableInboundMethodsRequest)
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListAvailableInboundMethodsRequest(varListAvailableInboundMethodsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "plan_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

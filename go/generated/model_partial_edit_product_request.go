@@ -75,7 +75,10 @@ type PartialEditProductRequest struct {
 	Video *Video `json:"video,omitempty"`
 	// Whether the product is a blind box of lucky bag. For example: PopMart
 	IsBlindBox *bool `json:"is_blind_box,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequest PartialEditProductRequest
 
 // NewPartialEditProductRequest instantiates a new PartialEditProductRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -1084,7 +1087,60 @@ func (o PartialEditProductRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsBlindBox) {
 		toSerialize["is_blind_box"] = o.IsBlindBox
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequest) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequest := _PartialEditProductRequest{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequest(varPartialEditProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auto_translate_enabled")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "inventory_mode")
+		delete(additionalProperties, "is_cod_allowed")
+		delete(additionalProperties, "key_product_features")
+		delete(additionalProperties, "listing_platforms")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "pod_info")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "replicated_products")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "save_mode")
+		delete(additionalProperties, "scheduled_sale")
+		delete(additionalProperties, "search_terms")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "subscribe_info_edit")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "is_blind_box")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequest struct {

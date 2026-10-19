@@ -25,7 +25,10 @@ type RequirementCondition struct {
 	AttributeId *string `json:"attribute_id,omitempty"`
 	// The ID of the product attribute value that must match the seller's input for the condition to be true.
 	AttributeValueId *string `json:"attribute_value_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RequirementCondition RequirementCondition
 
 // NewRequirementCondition instantiates a new RequirementCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o RequirementCondition) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AttributeValueId) {
 		toSerialize["attribute_value_id"] = o.AttributeValueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RequirementCondition) UnmarshalJSON(data []byte) (err error) {
+	varRequirementCondition := _RequirementCondition{}
+
+	err = json.Unmarshal(data, &varRequirementCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RequirementCondition(varRequirementCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition_type")
+		delete(additionalProperties, "attribute_id")
+		delete(additionalProperties, "attribute_value_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRequirementCondition struct {

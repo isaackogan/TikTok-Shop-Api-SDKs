@@ -33,7 +33,10 @@ type GetFBTWarehouseListResponseDataWarehouse struct {
 	Addresses []GetFBTWarehouseListResponseDataWarehouseAddress `json:"addresses,omitempty"`
 	// A list of logistics service information related to the current warehouse.
 	LogisticsServices []GetFBTWarehouseListResponseDataWarehouseLogisticsService `json:"logistics_services,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTWarehouseListResponseDataWarehouse GetFBTWarehouseListResponseDataWarehouse
 
 // NewGetFBTWarehouseListResponseDataWarehouse instantiates a new GetFBTWarehouseListResponseDataWarehouse object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetFBTWarehouseListResponseDataWarehouse) ToMap() (map[string]interface{
 	if !IsNil(o.LogisticsServices) {
 		toSerialize["logistics_services"] = o.LogisticsServices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTWarehouseListResponseDataWarehouse) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTWarehouseListResponseDataWarehouse := _GetFBTWarehouseListResponseDataWarehouse{}
+
+	err = json.Unmarshal(data, &varGetFBTWarehouseListResponseDataWarehouse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTWarehouseListResponseDataWarehouse(varGetFBTWarehouseListResponseDataWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fbt_warehouse_id")
+		delete(additionalProperties, "warehouse_ids")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "subscribed")
+		delete(additionalProperties, "addresses")
+		delete(additionalProperties, "logistics_services")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTWarehouseListResponseDataWarehouse struct {

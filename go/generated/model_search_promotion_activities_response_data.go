@@ -25,7 +25,10 @@ type SearchPromotionActivitiesResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Activities list information.
 	Activities []SearchPromotionActivitiesResponseDataActivity `json:"activities,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPromotionActivitiesResponseData SearchPromotionActivitiesResponseData
 
 // NewSearchPromotionActivitiesResponseData instantiates a new SearchPromotionActivitiesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchPromotionActivitiesResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Activities) {
 		toSerialize["activities"] = o.Activities
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPromotionActivitiesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchPromotionActivitiesResponseData := _SearchPromotionActivitiesResponseData{}
+
+	err = json.Unmarshal(data, &varSearchPromotionActivitiesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPromotionActivitiesResponseData(varSearchPromotionActivitiesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "activities")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPromotionActivitiesResponseData struct {

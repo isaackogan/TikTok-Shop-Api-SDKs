@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision st
 	AlternativeSolutionDetails *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail `json:"alternative_solution_details,omitempty"`
 	// To justify the action/decision (generally required for rejection).
 	Reason *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason `json:"reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
@@ -182,6 +182,11 @@ func (o ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
 	if !IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisio
 
 	varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision := _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision)
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision(varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "line_items")
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "alternative_solution_details")
+		delete(additionalProperties, "reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

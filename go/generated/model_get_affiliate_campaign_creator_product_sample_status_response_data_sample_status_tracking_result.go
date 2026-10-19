@@ -25,7 +25,10 @@ type GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrack
 	TrackingEventDescription *string `json:"tracking_event_description,omitempty"`
 	// More information about the tracking event
 	TrackingEventDescriptionExtended *string `json:"tracking_event_description_extended,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult
 
 // NewGetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult instantiates a new GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTr
 	if !IsNil(o.TrackingEventDescriptionExtended) {
 		toSerialize["tracking_event_description_extended"] = o.TrackingEventDescriptionExtended
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult := _GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult{}
+
+	err = json.Unmarshal(data, &varGetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult(varGetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tracking_event_update_date")
+		delete(additionalProperties, "tracking_event_description")
+		delete(additionalProperties, "tracking_event_description_extended")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult struct {

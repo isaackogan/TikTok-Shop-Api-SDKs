@@ -27,7 +27,10 @@ type DistrictInfo struct {
 	AddressLevel *string `json:"address_level,omitempty"`
 	// ISO code of the administrative district level
 	IsoCode *string `json:"iso_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DistrictInfo DistrictInfo
 
 // NewDistrictInfo instantiates a new DistrictInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o DistrictInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsoCode) {
 		toSerialize["iso_code"] = o.IsoCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DistrictInfo) UnmarshalJSON(data []byte) (err error) {
+	varDistrictInfo := _DistrictInfo{}
+
+	err = json.Unmarshal(data, &varDistrictInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DistrictInfo(varDistrictInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "address_level_name")
+		delete(additionalProperties, "address_name")
+		delete(additionalProperties, "address_level")
+		delete(additionalProperties, "iso_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDistrictInfo struct {

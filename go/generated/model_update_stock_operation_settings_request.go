@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type UpdateStockOperationSettingsRequest struct {
 	SkuIds []string `json:"sku_ids,omitempty"`
 	// The canceled-order auto-restock configuration to apply to the specified SKUs.
 	StockOperationSetting *UpdateStockOperationSettingsRequestStockOperationSetting `json:"stock_operation_setting,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateStockOperationSettingsRequest UpdateStockOperationSettingsRequest
@@ -154,6 +154,11 @@ func (o UpdateStockOperationSettingsRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.StockOperationSetting) {
 		toSerialize["stock_operation_setting"] = o.StockOperationSetting
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *UpdateStockOperationSettingsRequest) UnmarshalJSON(data []byte) (err er
 
 	varUpdateStockOperationSettingsRequest := _UpdateStockOperationSettingsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateStockOperationSettingsRequest)
+	err = json.Unmarshal(data, &varUpdateStockOperationSettingsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateStockOperationSettingsRequest(varUpdateStockOperationSettingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seller_id")
+		delete(additionalProperties, "sku_ids")
+		delete(additionalProperties, "stock_operation_setting")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

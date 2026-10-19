@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &BatchShipPackagesRequest{}
 type BatchShipPackagesRequest struct {
 	// Input list of packages you would like to batch ship.
 	Packages []BatchShipPackagesRequestPackage `json:"packages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchShipPackagesRequest BatchShipPackagesRequest
@@ -80,6 +80,11 @@ func (o BatchShipPackagesRequest) MarshalJSON() ([]byte, error) {
 func (o BatchShipPackagesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["packages"] = o.Packages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *BatchShipPackagesRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varBatchShipPackagesRequest := _BatchShipPackagesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatchShipPackagesRequest)
+	err = json.Unmarshal(data, &varBatchShipPackagesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatchShipPackagesRequest(varBatchShipPackagesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

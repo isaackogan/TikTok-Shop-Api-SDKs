@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type RejectCancellationRequestImage struct {
 	Height *int64 `json:"height,omitempty"`
 	// Image width. Unit: px
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RejectCancellationRequestImage RejectCancellationRequestImage
@@ -191,6 +191,11 @@ func (o RejectCancellationRequestImage) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *RejectCancellationRequestImage) UnmarshalJSON(data []byte) (err error) 
 
 	varRejectCancellationRequestImage := _RejectCancellationRequestImage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRejectCancellationRequestImage)
+	err = json.Unmarshal(data, &varRejectCancellationRequestImage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RejectCancellationRequestImage(varRejectCancellationRequestImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "image_id")
+		delete(additionalProperties, "mime_type")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

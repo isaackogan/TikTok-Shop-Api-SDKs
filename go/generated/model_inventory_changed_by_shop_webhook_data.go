@@ -13,7 +13,6 @@ package generated
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type InventoryChangedByShopWebhookData struct {
 	QuantitySnapshotAfterChange InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange `json:"quantity_snapshot_after_change"`
 	// The individual inventory changes associated with the event.
 	ChangeDetail []InventoryChangedByShopWebhookDataChangeDetail `json:"change_detail"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InventoryChangedByShopWebhookData InventoryChangedByShopWebhookData
@@ -249,6 +249,11 @@ func (o InventoryChangedByShopWebhookData) ToMap() (map[string]interface{}, erro
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["quantity_snapshot_after_change"] = o.QuantitySnapshotAfterChange
 	toSerialize["change_detail"] = o.ChangeDetail
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -282,15 +287,26 @@ func (o *InventoryChangedByShopWebhookData) UnmarshalJSON(data []byte) (err erro
 
 	varInventoryChangedByShopWebhookData := _InventoryChangedByShopWebhookData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInventoryChangedByShopWebhookData)
+	err = json.Unmarshal(data, &varInventoryChangedByShopWebhookData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InventoryChangedByShopWebhookData(varInventoryChangedByShopWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_id")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "quantity_snapshot_after_change")
+		delete(additionalProperties, "change_detail")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

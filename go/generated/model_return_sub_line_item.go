@@ -39,7 +39,10 @@ type ReturnSubLineItem struct {
 	SellerSku *string `json:"seller_sku,omitempty"`
 	// Refund amount details.
 	RefundAmount *RefundAmount `json:"refund_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReturnSubLineItem ReturnSubLineItem
 
 // NewReturnSubLineItem instantiates a new ReturnSubLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o ReturnSubLineItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RefundAmount) {
 		toSerialize["refund_amount"] = o.RefundAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReturnSubLineItem) UnmarshalJSON(data []byte) (err error) {
+	varReturnSubLineItem := _ReturnSubLineItem{}
+
+	err = json.Unmarshal(data, &varReturnSubLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReturnSubLineItem(varReturnSubLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_sub_line_item_id")
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "sub_order_line_item_id")
+		delete(additionalProperties, "order_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "refund_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReturnSubLineItem struct {

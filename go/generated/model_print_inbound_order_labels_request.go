@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PrintInboundOrderLabelsRequest struct {
 	CartonLabelFormat *string `json:"carton_label_format,omitempty"`
 	// Specifies the layout and dimensions for the generated label PDF. If this parameter is omitted or an invalid value is provided, the system will use the default thermal label format.  **Allowed Values:**  **Standard / Default** * `DEFAULT_40MM_60MM`: Standard 40mm x 60mm thermal label format  **A4 Paper Layouts** * `A4_21UP_60_0MM_40_0MM`: 21-up labels (60.0mm x 40.0mm) on A4 * `A4_21UP_63_5MM_38_1MM`: 21-up labels (63.5mm x 38.1mm) on A4 * `A4_24UP_63_5MM_33_9MM`: 24-up labels (63.5mm x 33.9mm) on A4 * `A4_24UP_64_6MM_33_8MM`: 24-up labels (64.6mm x 33.8mm) on A4 * `A4_24UP_66_0MM_33_9MM`: 24-up labels (66.0mm x 33.9mm) on A4 * `A4_24UP_66_0MM_35_0MM`: 24-up labels (66.0mm x 35.0mm) on A4 * `A4_24UP_70_0MM_36_0MM`: 24-up labels (70.0mm x 36.0mm) on A4 * `A4_24UP_70_0MM_37_0MM`: 24-up labels (70.0mm x 37.0mm) on A4 * `A4_27UP_63_5MM_29_6MM`: 27-up labels (63.5mm x 29.6mm) on A4 * `A4_40UP_52_5MM_29_7MM`: 40-up labels (52.5mm x 29.7mm) on A4 * `A4_44UP_48_5MM_25_4MM`: 44-up labels (48.5mm x 25.4mm) on A4  **US Letter Layouts** * `US_LETTER_30UP_1IN_2_625IN`: 30-up labels (1\" x 2-5/8\") on US Letter  **Note:** If no value is provided, `DEFAULT_40MM_60MM` will be used as the default format.
 	BarcodeFormat *string `json:"barcode_format,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PrintInboundOrderLabelsRequest PrintInboundOrderLabelsRequest
@@ -191,6 +191,11 @@ func (o PrintInboundOrderLabelsRequest) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.BarcodeFormat) {
 		toSerialize["barcode_format"] = o.BarcodeFormat
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *PrintInboundOrderLabelsRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varPrintInboundOrderLabelsRequest := _PrintInboundOrderLabelsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPrintInboundOrderLabelsRequest)
+	err = json.Unmarshal(data, &varPrintInboundOrderLabelsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PrintInboundOrderLabelsRequest(varPrintInboundOrderLabelsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "print_items")
+		delete(additionalProperties, "carton_label_format")
+		delete(additionalProperties, "barcode_format")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

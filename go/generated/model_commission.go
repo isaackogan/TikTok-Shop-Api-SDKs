@@ -25,7 +25,10 @@ type Commission struct {
 	Currency *string `json:"currency,omitempty"`
 	// The commission amount calculated from the product's promotional price and commission rate. When both minimum and maximum promotional prices are available, the value is formatted as `<minimum commission> - <maximum commission>`; otherwise, it contains the available commission amount. If neither price is available, the value is `0`. The currency is specified by `commission.currency`.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Commission Commission
 
 // NewCommission instantiates a new Commission object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Commission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Commission) UnmarshalJSON(data []byte) (err error) {
+	varCommission := _Commission{}
+
+	err = json.Unmarshal(data, &varCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Commission(varCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCommission struct {

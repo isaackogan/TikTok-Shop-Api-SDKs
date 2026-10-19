@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreatePromotionActivityRequestDiscountBmsmDiscountDetail struct {
 	Type string `json:"type"`
 	// The discount value. - When `type==PERCENTAGE_OFF`, enter a positive integer percentage. - When `type==AMOUNT_OFF`, enter a positive amount in local currency, with at most two decimal places.
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatePromotionActivityRequestDiscountBmsmDiscountDetail CreatePromotionActivityRequestDiscountBmsmDiscountDetail
@@ -192,6 +192,11 @@ func (o CreatePromotionActivityRequestDiscountBmsmDiscountDetail) ToMap() (map[s
 	toSerialize["threshold_value"] = o.ThresholdValue
 	toSerialize["type"] = o.Type
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *CreatePromotionActivityRequestDiscountBmsmDiscountDetail) UnmarshalJSON
 
 	varCreatePromotionActivityRequestDiscountBmsmDiscountDetail := _CreatePromotionActivityRequestDiscountBmsmDiscountDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatePromotionActivityRequestDiscountBmsmDiscountDetail)
+	err = json.Unmarshal(data, &varCreatePromotionActivityRequestDiscountBmsmDiscountDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatePromotionActivityRequestDiscountBmsmDiscountDetail(varCreatePromotionActivityRequestDiscountBmsmDiscountDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier")
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

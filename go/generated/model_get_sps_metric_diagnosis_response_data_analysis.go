@@ -23,7 +23,10 @@ type GetSPSMetricDiagnosisResponseDataAnalysis struct {
 	Summaries []string `json:"summaries,omitempty"`
 	// Detailed explanations for the selected metric diagnosis.
 	Details []string `json:"details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricDiagnosisResponseDataAnalysis GetSPSMetricDiagnosisResponseDataAnalysis
 
 // NewGetSPSMetricDiagnosisResponseDataAnalysis instantiates a new GetSPSMetricDiagnosisResponseDataAnalysis object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetSPSMetricDiagnosisResponseDataAnalysis) ToMap() (map[string]interface
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricDiagnosisResponseDataAnalysis) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricDiagnosisResponseDataAnalysis := _GetSPSMetricDiagnosisResponseDataAnalysis{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricDiagnosisResponseDataAnalysis)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricDiagnosisResponseDataAnalysis(varGetSPSMetricDiagnosisResponseDataAnalysis)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "summaries")
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricDiagnosisResponseDataAnalysis struct {

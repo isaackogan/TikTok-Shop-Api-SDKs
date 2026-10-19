@@ -33,7 +33,10 @@ type GetSPSMetricProblemDetailsResponseDataImDsatChatItem struct {
 	RatingReasons []string `json:"rating_reasons,omitempty"`
 	// Service agent name.
 	ServiceAgent *string `json:"service_agent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricProblemDetailsResponseDataImDsatChatItem GetSPSMetricProblemDetailsResponseDataImDsatChatItem
 
 // NewGetSPSMetricProblemDetailsResponseDataImDsatChatItem instantiates a new GetSPSMetricProblemDetailsResponseDataImDsatChatItem object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetSPSMetricProblemDetailsResponseDataImDsatChatItem) ToMap() (map[strin
 	if !IsNil(o.ServiceAgent) {
 		toSerialize["service_agent"] = o.ServiceAgent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricProblemDetailsResponseDataImDsatChatItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricProblemDetailsResponseDataImDsatChatItem := _GetSPSMetricProblemDetailsResponseDataImDsatChatItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricProblemDetailsResponseDataImDsatChatItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricProblemDetailsResponseDataImDsatChatItem(varGetSPSMetricProblemDetailsResponseDataImDsatChatItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "chat_duration_hours")
+		delete(additionalProperties, "chat_record_id")
+		delete(additionalProperties, "customer_name")
+		delete(additionalProperties, "customer_rating")
+		delete(additionalProperties, "first_reply_time")
+		delete(additionalProperties, "rating_reasons")
+		delete(additionalProperties, "service_agent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricProblemDetailsResponseDataImDsatChatItem struct {

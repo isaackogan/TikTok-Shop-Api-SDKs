@@ -25,7 +25,10 @@ type InboundFBTOrderStatusChangeWebhookData struct {
 	OrderStatus *string `json:"order_status,omitempty"`
 	// The time when the change occurred. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InboundFBTOrderStatusChangeWebhookData InboundFBTOrderStatusChangeWebhookData
 
 // NewInboundFBTOrderStatusChangeWebhookData instantiates a new InboundFBTOrderStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o InboundFBTOrderStatusChangeWebhookData) ToMap() (map[string]interface{},
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InboundFBTOrderStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varInboundFBTOrderStatusChangeWebhookData := _InboundFBTOrderStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varInboundFBTOrderStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InboundFBTOrderStatusChangeWebhookData(varInboundFBTOrderStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_order_id")
+		delete(additionalProperties, "order_status")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInboundFBTOrderStatusChangeWebhookData struct {

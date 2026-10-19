@@ -25,7 +25,10 @@ type GetProductSKPPDetailResponseDataRewardClaimCondition struct {
 	CurrentValue *string `json:"current_value,omitempty"`
 	// Threshold value; same formatting as current_value.
 	TargetValue *string `json:"target_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductSKPPDetailResponseDataRewardClaimCondition GetProductSKPPDetailResponseDataRewardClaimCondition
 
 // NewGetProductSKPPDetailResponseDataRewardClaimCondition instantiates a new GetProductSKPPDetailResponseDataRewardClaimCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductSKPPDetailResponseDataRewardClaimCondition) ToMap() (map[strin
 	if !IsNil(o.TargetValue) {
 		toSerialize["target_value"] = o.TargetValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductSKPPDetailResponseDataRewardClaimCondition) UnmarshalJSON(data []byte) (err error) {
+	varGetProductSKPPDetailResponseDataRewardClaimCondition := _GetProductSKPPDetailResponseDataRewardClaimCondition{}
+
+	err = json.Unmarshal(data, &varGetProductSKPPDetailResponseDataRewardClaimCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductSKPPDetailResponseDataRewardClaimCondition(varGetProductSKPPDetailResponseDataRewardClaimCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "condition_type")
+		delete(additionalProperties, "current_value")
+		delete(additionalProperties, "target_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductSKPPDetailResponseDataRewardClaimCondition struct {

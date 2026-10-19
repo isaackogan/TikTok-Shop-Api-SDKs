@@ -23,7 +23,10 @@ type GetAvailableReviewDecisionsResponseDataError struct {
 	Code *string `json:"code,omitempty"`
 	// Error Description
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAvailableReviewDecisionsResponseDataError GetAvailableReviewDecisionsResponseDataError
 
 // NewGetAvailableReviewDecisionsResponseDataError instantiates a new GetAvailableReviewDecisionsResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAvailableReviewDecisionsResponseDataError) ToMap() (map[string]interf
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAvailableReviewDecisionsResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varGetAvailableReviewDecisionsResponseDataError := _GetAvailableReviewDecisionsResponseDataError{}
+
+	err = json.Unmarshal(data, &varGetAvailableReviewDecisionsResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAvailableReviewDecisionsResponseDataError(varGetAvailableReviewDecisionsResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAvailableReviewDecisionsResponseDataError struct {

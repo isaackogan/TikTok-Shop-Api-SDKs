@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryAttributesResponseData{}
 type GetCategoryAttributesResponseData struct {
 	// The list of standard built-in product and sales attributes that are bound to the specified category, based on your shop's location.
 	Attributes []GetCategoryAttributesResponseDataAttribute `json:"attributes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseData GetCategoryAttributesResponseData
 
 // NewGetCategoryAttributesResponseData instantiates a new GetCategoryAttributesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryAttributesResponseData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseData := _GetCategoryAttributesResponseData{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseData(varGetCategoryAttributesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attributes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseData struct {

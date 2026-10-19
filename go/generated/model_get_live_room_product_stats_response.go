@@ -26,7 +26,10 @@ type GetLiveRoomProductStatsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetLiveRoomProductStatsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomProductStatsResponse GetLiveRoomProductStatsResponse
 
 // NewGetLiveRoomProductStatsResponse instantiates a new GetLiveRoomProductStatsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetLiveRoomProductStatsResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomProductStatsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomProductStatsResponse := _GetLiveRoomProductStatsResponse{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomProductStatsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomProductStatsResponse(varGetLiveRoomProductStatsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomProductStatsResponse struct {

@@ -23,7 +23,10 @@ type OptimizeImagesRequestImage struct {
 	Uri *string `json:"uri,omitempty"`
 	// The optimization type. Possible values: - WHITE_BACKGROUND: Change the background to white.
 	OptimizationMode []string `json:"optimization_mode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OptimizeImagesRequestImage OptimizeImagesRequestImage
 
 // NewOptimizeImagesRequestImage instantiates a new OptimizeImagesRequestImage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o OptimizeImagesRequestImage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OptimizationMode) {
 		toSerialize["optimization_mode"] = o.OptimizationMode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OptimizeImagesRequestImage) UnmarshalJSON(data []byte) (err error) {
+	varOptimizeImagesRequestImage := _OptimizeImagesRequestImage{}
+
+	err = json.Unmarshal(data, &varOptimizeImagesRequestImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OptimizeImagesRequestImage(varOptimizeImagesRequestImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "optimization_mode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOptimizeImagesRequestImage struct {

@@ -25,7 +25,10 @@ type SearchResponsiblePersonsRequest struct {
 	Keyword *string `json:"keyword,omitempty"`
 	// The BCP-47 locale codes for displaying the responsible person information. Default: The locale of the seller's registered business address. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT
 	Locales []string `json:"locales,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchResponsiblePersonsRequest SearchResponsiblePersonsRequest
 
 // NewSearchResponsiblePersonsRequest instantiates a new SearchResponsiblePersonsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchResponsiblePersonsRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Locales) {
 		toSerialize["locales"] = o.Locales
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchResponsiblePersonsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchResponsiblePersonsRequest := _SearchResponsiblePersonsRequest{}
+
+	err = json.Unmarshal(data, &varSearchResponsiblePersonsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchResponsiblePersonsRequest(varSearchResponsiblePersonsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "keyword")
+		delete(additionalProperties, "locales")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchResponsiblePersonsRequest struct {

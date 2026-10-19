@@ -21,7 +21,10 @@ var _ MappedNullable = &GetMessageTemplatesResponseData{}
 type GetMessageTemplatesResponseData struct {
 	// Customer engagement message templates predefined by TikTok Shop.
 	MessageTemplates []GetMessageTemplatesResponseDataMessageTemplate `json:"message_templates,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMessageTemplatesResponseData GetMessageTemplatesResponseData
 
 // NewGetMessageTemplatesResponseData instantiates a new GetMessageTemplatesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetMessageTemplatesResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.MessageTemplates) {
 		toSerialize["message_templates"] = o.MessageTemplates
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMessageTemplatesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetMessageTemplatesResponseData := _GetMessageTemplatesResponseData{}
+
+	err = json.Unmarshal(data, &varGetMessageTemplatesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMessageTemplatesResponseData(varGetMessageTemplatesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_templates")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMessageTemplatesResponseData struct {

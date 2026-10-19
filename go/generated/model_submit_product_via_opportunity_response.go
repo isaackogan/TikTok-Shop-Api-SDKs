@@ -26,7 +26,10 @@ type SubmitProductViaOpportunityResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SubmitProductViaOpportunityResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitProductViaOpportunityResponse SubmitProductViaOpportunityResponse
 
 // NewSubmitProductViaOpportunityResponse instantiates a new SubmitProductViaOpportunityResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SubmitProductViaOpportunityResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitProductViaOpportunityResponse) UnmarshalJSON(data []byte) (err error) {
+	varSubmitProductViaOpportunityResponse := _SubmitProductViaOpportunityResponse{}
+
+	err = json.Unmarshal(data, &varSubmitProductViaOpportunityResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitProductViaOpportunityResponse(varSubmitProductViaOpportunityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitProductViaOpportunityResponse struct {

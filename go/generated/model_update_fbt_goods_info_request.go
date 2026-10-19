@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateFBTGoodsInfoRequest{}
 type UpdateFBTGoodsInfoRequest struct {
 	// Goods information to update.  Update behavior is field-specific; this object is neither a uniform partial patch nor a full replacement.  Shared fields: - `tts_goods_id`: Identifies the goods record to update; it is not mutable. - `goods_name`, `goods_image_url`, `return_handling_method`, and `dimension_and_weight_base_info`: Replace their stored values. - `reference_code`: If omitted or empty, it is reset to the system-generated fallback. - `barcode_infos`: Replaces the existing barcode set. The FBT system barcode is preserved or added, and existing non-system barcodes omitted from the request are deleted. Removal of a barcode with an inbound record is rejected. - `is_hazmat`: `false` clears existing hazmat information. `true` requires valid `hazmat_info`.  Optional extended fields: - `is_sioc` and `sioc_attribute`: `is_sioc` controls Ships in Own Container (SIOC) management. If `is_sioc` is omitted, no SIOC state or attribute update is requested, and `sioc_attribute` alone is ignored. - `goods_safety_attributes`: Omitted fragile, liquid, or sharp subfields retain their stored values. A changed value for a locked subfield causes the request to fail; resubmitting the same locked value is a no-op. Supplied editable values are updated.  Do not send explicit `null`; the public schemas for these fields are non-nullable.
 	UpdateGoodsDto *UpdateFBTGoodsInfoRequestUpdateGoodsDto `json:"update_goods_dto,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateFBTGoodsInfoRequest UpdateFBTGoodsInfoRequest
 
 // NewUpdateFBTGoodsInfoRequest instantiates a new UpdateFBTGoodsInfoRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateFBTGoodsInfoRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateGoodsDto) {
 		toSerialize["update_goods_dto"] = o.UpdateGoodsDto
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateFBTGoodsInfoRequest) UnmarshalJSON(data []byte) (err error) {
+	varUpdateFBTGoodsInfoRequest := _UpdateFBTGoodsInfoRequest{}
+
+	err = json.Unmarshal(data, &varUpdateFBTGoodsInfoRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateFBTGoodsInfoRequest(varUpdateFBTGoodsInfoRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "update_goods_dto")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateFBTGoodsInfoRequest struct {

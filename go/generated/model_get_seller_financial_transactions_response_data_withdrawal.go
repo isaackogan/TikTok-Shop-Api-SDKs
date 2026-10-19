@@ -31,7 +31,10 @@ type GetSellerFinancialTransactionsResponseDataWithdrawal struct {
 	Status *string `json:"status,omitempty"`
 	// The transaction creation time, expressed as a Unix timestamp in seconds.
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSellerFinancialTransactionsResponseDataWithdrawal GetSellerFinancialTransactionsResponseDataWithdrawal
 
 // NewGetSellerFinancialTransactionsResponseDataWithdrawal instantiates a new GetSellerFinancialTransactionsResponseDataWithdrawal object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetSellerFinancialTransactionsResponseDataWithdrawal) ToMap() (map[strin
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSellerFinancialTransactionsResponseDataWithdrawal) UnmarshalJSON(data []byte) (err error) {
+	varGetSellerFinancialTransactionsResponseDataWithdrawal := _GetSellerFinancialTransactionsResponseDataWithdrawal{}
+
+	err = json.Unmarshal(data, &varGetSellerFinancialTransactionsResponseDataWithdrawal)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSellerFinancialTransactionsResponseDataWithdrawal(varGetSellerFinancialTransactionsResponseDataWithdrawal)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSellerFinancialTransactionsResponseDataWithdrawal struct {

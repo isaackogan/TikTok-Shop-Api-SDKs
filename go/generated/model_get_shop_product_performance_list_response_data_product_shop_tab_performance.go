@@ -35,7 +35,10 @@ type GetShopProductPerformanceListResponseDataProductShopTabPerformance struct {
 	ShopTabGmv *GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv `json:"shop_tab_gmv,omitempty"`
 	// Items sold via shop tab.
 	ShopTabSoldItems *int64 `json:"shop_tab_sold_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceListResponseDataProductShopTabPerformance GetShopProductPerformanceListResponseDataProductShopTabPerformance
 
 // NewGetShopProductPerformanceListResponseDataProductShopTabPerformance instantiates a new GetShopProductPerformanceListResponseDataProductShopTabPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopProductPerformanceListResponseDataProductShopTabPerformance) ToMa
 	if !IsNil(o.ShopTabSoldItems) {
 		toSerialize["shop_tab_sold_items"] = o.ShopTabSoldItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceListResponseDataProductShopTabPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceListResponseDataProductShopTabPerformance := _GetShopProductPerformanceListResponseDataProductShopTabPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceListResponseDataProductShopTabPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceListResponseDataProductShopTabPerformance(varGetShopProductPerformanceListResponseDataProductShopTabPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_tab_product_impressions")
+		delete(additionalProperties, "shop_tab_product_clicks")
+		delete(additionalProperties, "unique_shop_tab_product_clicks")
+		delete(additionalProperties, "estimated_shop_tab_customers")
+		delete(additionalProperties, "shop_tab_ctr")
+		delete(additionalProperties, "shop_tab_ctor_sku")
+		delete(additionalProperties, "shop_tab_gmv")
+		delete(additionalProperties, "shop_tab_sold_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceListResponseDataProductShopTabPerformance struct {

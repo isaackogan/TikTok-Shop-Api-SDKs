@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type Address struct {
 	Province *string `json:"province,omitempty"`
 	// The two letter ISO 3166 country code representing the country of the address. It must be an EU country.
 	Country string `json:"country"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Address Address
@@ -300,6 +300,11 @@ func (o Address) ToMap() (map[string]interface{}, error) {
 		toSerialize["province"] = o.Province
 	}
 	toSerialize["country"] = o.Country
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -329,15 +334,26 @@ func (o *Address) UnmarshalJSON(data []byte) (err error) {
 
 	varAddress := _Address{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddress)
+	err = json.Unmarshal(data, &varAddress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Address(varAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "street_address_line1")
+		delete(additionalProperties, "street_address_line2")
+		delete(additionalProperties, "district")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "province")
+		delete(additionalProperties, "country")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

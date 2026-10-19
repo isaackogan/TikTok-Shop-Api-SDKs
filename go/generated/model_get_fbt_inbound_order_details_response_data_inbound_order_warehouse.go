@@ -27,7 +27,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse struct {
 	Name *string `json:"name,omitempty"`
 	// Type of warehouse associated with the inbound order.  Possible values: * `HUB` * `FC` (Fulfillment Center)
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse) ToMap() (map
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse := _GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse(varGetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fbt_warehouse_id")
+		delete(additionalProperties, "business_warehouse_ids")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse struct {

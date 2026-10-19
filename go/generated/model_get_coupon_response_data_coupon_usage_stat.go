@@ -23,7 +23,10 @@ type GetCouponResponseDataCouponUsageStat struct {
 	ClaimedCount *int64 `json:"claimed_count,omitempty"`
 	// The number of times that a coupon has been redeemed (i.e. applied to an order).
 	RedeemedCount *int64 `json:"redeemed_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseDataCouponUsageStat GetCouponResponseDataCouponUsageStat
 
 // NewGetCouponResponseDataCouponUsageStat instantiates a new GetCouponResponseDataCouponUsageStat object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCouponResponseDataCouponUsageStat) ToMap() (map[string]interface{}, e
 	if !IsNil(o.RedeemedCount) {
 		toSerialize["redeemed_count"] = o.RedeemedCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseDataCouponUsageStat) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseDataCouponUsageStat := _GetCouponResponseDataCouponUsageStat{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseDataCouponUsageStat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseDataCouponUsageStat(varGetCouponResponseDataCouponUsageStat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "claimed_count")
+		delete(additionalProperties, "redeemed_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseDataCouponUsageStat struct {

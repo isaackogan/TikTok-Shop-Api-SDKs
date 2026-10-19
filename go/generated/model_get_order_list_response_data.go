@@ -25,7 +25,10 @@ type GetOrderListResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Order information.
 	Orders []GetOrderListResponseDataOrder `json:"orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderListResponseData GetOrderListResponseData
 
 // NewGetOrderListResponseData instantiates a new GetOrderListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderListResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Orders) {
 		toSerialize["orders"] = o.Orders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderListResponseData := _GetOrderListResponseData{}
+
+	err = json.Unmarshal(data, &varGetOrderListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderListResponseData(varGetOrderListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderListResponseData struct {

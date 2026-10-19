@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type CreateFBTMCFOrderRequestConsigneeAddress struct {
 	AddressLine2 *string `json:"address_line_2,omitempty"`
 	// The 5-digit US ZIP code for the consignee address.
 	PostalCode *string `json:"postal_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFBTMCFOrderRequestConsigneeAddress CreateFBTMCFOrderRequestConsigneeAddress
@@ -275,6 +275,11 @@ func (o CreateFBTMCFOrderRequestConsigneeAddress) ToMap() (map[string]interface{
 	if !IsNil(o.PostalCode) {
 		toSerialize["postal_code"] = o.PostalCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -305,15 +310,26 @@ func (o *CreateFBTMCFOrderRequestConsigneeAddress) UnmarshalJSON(data []byte) (e
 
 	varCreateFBTMCFOrderRequestConsigneeAddress := _CreateFBTMCFOrderRequestConsigneeAddress{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFBTMCFOrderRequestConsigneeAddress)
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderRequestConsigneeAddress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFBTMCFOrderRequestConsigneeAddress(varCreateFBTMCFOrderRequestConsigneeAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "state_or_region")
+		delete(additionalProperties, "district_or_county")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "address_line_1")
+		delete(additionalProperties, "address_line_2")
+		delete(additionalProperties, "postal_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

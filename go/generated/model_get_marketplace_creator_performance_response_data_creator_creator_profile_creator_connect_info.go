@@ -25,7 +25,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorCon
 	IsConnect *bool `json:"is_connect,omitempty"`
 	// Creator is blocked or not
 	IsBlocked *bool `json:"is_blocked,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreator
 	if !IsNil(o.IsBlocked) {
 		toSerialize["is_blocked"] = o.IsBlocked
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo := _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo(varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_paired")
+		delete(additionalProperties, "is_connect")
+		delete(additionalProperties, "is_blocked")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo struct {

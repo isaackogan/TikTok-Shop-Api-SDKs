@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type CreateTargetCollaborationRequest struct {
 	FreeSampleRule FreeSampleRule `json:"free_sample_rule"`
 	// preferred creator content type, \"LIVE\" or \"VIDEO\"
 	PreferredContentType *string `json:"preferred_content_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateTargetCollaborationRequest CreateTargetCollaborationRequest
@@ -294,6 +294,11 @@ func (o CreateTargetCollaborationRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.PreferredContentType) {
 		toSerialize["preferred_content_type"] = o.PreferredContentType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -326,15 +331,27 @@ func (o *CreateTargetCollaborationRequest) UnmarshalJSON(data []byte) (err error
 
 	varCreateTargetCollaborationRequest := _CreateTargetCollaborationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateTargetCollaborationRequest)
+	err = json.Unmarshal(data, &varCreateTargetCollaborationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateTargetCollaborationRequest(varCreateTargetCollaborationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "creator_user_open_ids")
+		delete(additionalProperties, "seller_contact_info")
+		delete(additionalProperties, "free_sample_rule")
+		delete(additionalProperties, "preferred_content_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

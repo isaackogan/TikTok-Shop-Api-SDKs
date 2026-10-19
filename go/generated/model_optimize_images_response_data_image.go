@@ -33,7 +33,10 @@ type OptimizeImagesResponseDataImage struct {
 	OptimizedUrl *string `json:"optimized_url,omitempty"`
 	// The optimization status. Possible values: - SUCCESS: The image has been successfully optimized. - IGNORE: The image already has a white background, so no optimization was applied. - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status.
 	OptimizeStatus *string `json:"optimize_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OptimizeImagesResponseDataImage OptimizeImagesResponseDataImage
 
 // NewOptimizeImagesResponseDataImage instantiates a new OptimizeImagesResponseDataImage object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o OptimizeImagesResponseDataImage) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.OptimizeStatus) {
 		toSerialize["optimize_status"] = o.OptimizeStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OptimizeImagesResponseDataImage) UnmarshalJSON(data []byte) (err error) {
+	varOptimizeImagesResponseDataImage := _OptimizeImagesResponseDataImage{}
+
+	err = json.Unmarshal(data, &varOptimizeImagesResponseDataImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OptimizeImagesResponseDataImage(varOptimizeImagesResponseDataImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "original_uri")
+		delete(additionalProperties, "original_url")
+		delete(additionalProperties, "optimized_uri")
+		delete(additionalProperties, "optimized_url")
+		delete(additionalProperties, "optimize_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOptimizeImagesResponseDataImage struct {

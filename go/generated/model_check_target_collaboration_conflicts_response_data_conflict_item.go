@@ -25,7 +25,10 @@ type CheckTargetCollaborationConflictsResponseDataConflictItem struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The confict target collaboration id
 	ExistingCollaborationId *string `json:"existing_collaboration_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckTargetCollaborationConflictsResponseDataConflictItem CheckTargetCollaborationConflictsResponseDataConflictItem
 
 // NewCheckTargetCollaborationConflictsResponseDataConflictItem instantiates a new CheckTargetCollaborationConflictsResponseDataConflictItem object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CheckTargetCollaborationConflictsResponseDataConflictItem) ToMap() (map[
 	if !IsNil(o.ExistingCollaborationId) {
 		toSerialize["existing_collaboration_id"] = o.ExistingCollaborationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckTargetCollaborationConflictsResponseDataConflictItem) UnmarshalJSON(data []byte) (err error) {
+	varCheckTargetCollaborationConflictsResponseDataConflictItem := _CheckTargetCollaborationConflictsResponseDataConflictItem{}
+
+	err = json.Unmarshal(data, &varCheckTargetCollaborationConflictsResponseDataConflictItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckTargetCollaborationConflictsResponseDataConflictItem(varCheckTargetCollaborationConflictsResponseDataConflictItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "existing_collaboration_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckTargetCollaborationConflictsResponseDataConflictItem struct {

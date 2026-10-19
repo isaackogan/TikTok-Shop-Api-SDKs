@@ -23,7 +23,10 @@ type GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood struct {
 	Id *string `json:"id,omitempty"`
 	// The goods quantity in this consign order
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood
 
 // NewGetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood instantiates a new GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood) ToMap() (map[st
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood := _GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood{}
+
+	err = json.Unmarshal(data, &varGetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood(varGetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood struct {

@@ -39,7 +39,10 @@ type EditAffiliatePartnerCampaignRequest struct {
 	TargetShopCodes []string `json:"target_shop_codes,omitempty"`
 	// A list of eligible seller types to allow to register for the campaign. Use this field to broadly target types of sellers instead of specific sellers in the `target_shop_codes` field. This is an enumerated type with possible values: - LOCAL - CROSS_BORDER
 	TargetSellerTypes []string `json:"target_seller_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditAffiliatePartnerCampaignRequest EditAffiliatePartnerCampaignRequest
 
 // NewEditAffiliatePartnerCampaignRequest instantiates a new EditAffiliatePartnerCampaignRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o EditAffiliatePartnerCampaignRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.TargetSellerTypes) {
 		toSerialize["target_seller_types"] = o.TargetSellerTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditAffiliatePartnerCampaignRequest) UnmarshalJSON(data []byte) (err error) {
+	varEditAffiliatePartnerCampaignRequest := _EditAffiliatePartnerCampaignRequest{}
+
+	err = json.Unmarshal(data, &varEditAffiliatePartnerCampaignRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditAffiliatePartnerCampaignRequest(varEditAffiliatePartnerCampaignRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "campaign_start_time")
+		delete(additionalProperties, "campaign_end_time")
+		delete(additionalProperties, "registration_start_time")
+		delete(additionalProperties, "registration_end_time")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "contact_info")
+		delete(additionalProperties, "target_shop_codes")
+		delete(additionalProperties, "target_seller_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditAffiliatePartnerCampaignRequest struct {

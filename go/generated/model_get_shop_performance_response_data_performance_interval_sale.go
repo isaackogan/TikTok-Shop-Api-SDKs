@@ -83,7 +83,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalSale struct {
 	VideoGmv *GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv `json:"video_gmv,omitempty"`
 	// Indirect GMV from videos.
 	VideoIndirectGmv *VideoIndirectGmv `json:"video_indirect_gmv,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalSale GetShopPerformanceResponseDataPerformanceIntervalSale
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalSale instantiates a new GetShopPerformanceResponseDataPerformanceIntervalSale object
 // This constructor will assign default values to properties that have it defined,
@@ -1232,7 +1235,64 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalSale) ToMap() (map[stri
 	if !IsNil(o.VideoIndirectGmv) {
 		toSerialize["video_indirect_gmv"] = o.VideoIndirectGmv
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalSale := _GetShopPerformanceResponseDataPerformanceIntervalSale{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalSale(varGetShopPerformanceResponseDataPerformanceIntervalSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_order_value")
+		delete(additionalProperties, "avg_sku_order_value")
+		delete(additionalProperties, "cancellations_and_returns")
+		delete(additionalProperties, "creator_live_attributed_gmv")
+		delete(additionalProperties, "creator_live_gmv")
+		delete(additionalProperties, "creator_live_indirect_gmv")
+		delete(additionalProperties, "creator_video_attributed_gmv")
+		delete(additionalProperties, "creator_video_gmv")
+		delete(additionalProperties, "creator_video_indirect_gmv")
+		delete(additionalProperties, "customers_count")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "gmv_with_tax")
+		delete(additionalProperties, "gmv_with_tiktok_co_funding")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "live_attributed_gmv")
+		delete(additionalProperties, "live_gmv")
+		delete(additionalProperties, "live_indirect_gmv")
+		delete(additionalProperties, "orders_count")
+		delete(additionalProperties, "product_card_attributed_gmv")
+		delete(additionalProperties, "refunds")
+		delete(additionalProperties, "seller_live_attributed_gmv")
+		delete(additionalProperties, "seller_live_gmv")
+		delete(additionalProperties, "seller_live_indirect_gmv")
+		delete(additionalProperties, "seller_video_attributed_gmv")
+		delete(additionalProperties, "seller_video_gmv")
+		delete(additionalProperties, "seller_video_indirect_gmv")
+		delete(additionalProperties, "shipping_fees")
+		delete(additionalProperties, "sku_orders_count")
+		delete(additionalProperties, "tax")
+		delete(additionalProperties, "video_attributed_gmv")
+		delete(additionalProperties, "video_gmv")
+		delete(additionalProperties, "video_indirect_gmv")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalSale struct {

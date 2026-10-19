@@ -23,7 +23,10 @@ type DiagnoseAndOptimizeProductRequestProductAttribute struct {
 	Id *string `json:"id,omitempty"`
 	// A list of selectable values for the product attribute. **Note**: Provide either a built-in ID or a custom name; if both are provided, the ID takes priority.
 	Values []DiagnoseAndOptimizeProductRequestProductAttributeValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductRequestProductAttribute DiagnoseAndOptimizeProductRequestProductAttribute
 
 // NewDiagnoseAndOptimizeProductRequestProductAttribute instantiates a new DiagnoseAndOptimizeProductRequestProductAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DiagnoseAndOptimizeProductRequestProductAttribute) ToMap() (map[string]i
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductRequestProductAttribute) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductRequestProductAttribute := _DiagnoseAndOptimizeProductRequestProductAttribute{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductRequestProductAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductRequestProductAttribute(varDiagnoseAndOptimizeProductRequestProductAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductRequestProductAttribute struct {

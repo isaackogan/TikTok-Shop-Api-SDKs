@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CombinedSku struct {
 	SkuId string `json:"sku_id"`
 	// The quantity of the source SKU included in the virtual bundle.
 	SkuCount int64 `json:"sku_count"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CombinedSku CombinedSku
@@ -136,6 +136,11 @@ func (o CombinedSku) ToMap() (map[string]interface{}, error) {
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["sku_count"] = o.SkuCount
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *CombinedSku) UnmarshalJSON(data []byte) (err error) {
 
 	varCombinedSku := _CombinedSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCombinedSku)
+	err = json.Unmarshal(data, &varCombinedSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CombinedSku(varCombinedSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_count")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

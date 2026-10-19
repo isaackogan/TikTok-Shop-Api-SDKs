@@ -21,7 +21,10 @@ var _ MappedNullable = &SendEngagementMessageResponseDataErrorDetail{}
 type SendEngagementMessageResponseDataErrorDetail struct {
 	// The anonymized buyer email address associated with the error.
 	BuyerEmail *string `json:"buyer_email,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendEngagementMessageResponseDataErrorDetail SendEngagementMessageResponseDataErrorDetail
 
 // NewSendEngagementMessageResponseDataErrorDetail instantiates a new SendEngagementMessageResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SendEngagementMessageResponseDataErrorDetail) ToMap() (map[string]interf
 	if !IsNil(o.BuyerEmail) {
 		toSerialize["buyer_email"] = o.BuyerEmail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendEngagementMessageResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varSendEngagementMessageResponseDataErrorDetail := _SendEngagementMessageResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varSendEngagementMessageResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendEngagementMessageResponseDataErrorDetail(varSendEngagementMessageResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "buyer_email")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendEngagementMessageResponseDataErrorDetail struct {

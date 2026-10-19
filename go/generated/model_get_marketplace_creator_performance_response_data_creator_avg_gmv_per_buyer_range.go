@@ -27,7 +27,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange stru
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The formatted range of average GMV per buyer associated with the creator.
 	FormattedRange *string `json:"formatted_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange) 
 	if !IsNil(o.FormattedRange) {
 		toSerialize["formatted_range"] = o.FormattedRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange := _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange(varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "formatted_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange struct {

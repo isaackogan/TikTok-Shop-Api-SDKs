@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type UpdateGoodsSKURelationsRequest struct {
 	OperateGoodsSkuRelationList []UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList `json:"operate_goods_sku_relation_list"`
 	// Operation type for the goods-SKU relation. Possible values: BIND (bind the listed SKUs to the goods); UN_BIND (unbind the listed SKUs from the goods).
 	OperationType string `json:"operation_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGoodsSKURelationsRequest UpdateGoodsSKURelationsRequest
@@ -108,6 +108,11 @@ func (o UpdateGoodsSKURelationsRequest) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["operate_goods_sku_relation_list"] = o.OperateGoodsSkuRelationList
 	toSerialize["operation_type"] = o.OperationType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *UpdateGoodsSKURelationsRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varUpdateGoodsSKURelationsRequest := _UpdateGoodsSKURelationsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGoodsSKURelationsRequest)
+	err = json.Unmarshal(data, &varUpdateGoodsSKURelationsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGoodsSKURelationsRequest(varUpdateGoodsSKURelationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operate_goods_sku_relation_list")
+		delete(additionalProperties, "operation_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

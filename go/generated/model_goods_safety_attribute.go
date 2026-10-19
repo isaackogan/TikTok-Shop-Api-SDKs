@@ -25,7 +25,10 @@ type GoodsSafetyAttribute struct {
 	IsLiquid *bool `json:"is_liquid,omitempty"`
 	// where sharp
 	IsSharp *bool `json:"is_sharp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GoodsSafetyAttribute GoodsSafetyAttribute
 
 // NewGoodsSafetyAttribute instantiates a new GoodsSafetyAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GoodsSafetyAttribute) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsSharp) {
 		toSerialize["is_sharp"] = o.IsSharp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GoodsSafetyAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGoodsSafetyAttribute := _GoodsSafetyAttribute{}
+
+	err = json.Unmarshal(data, &varGoodsSafetyAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GoodsSafetyAttribute(varGoodsSafetyAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_fragile")
+		delete(additionalProperties, "is_liquid")
+		delete(additionalProperties, "is_sharp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGoodsSafetyAttribute struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopLIVEProductsPerformanceListResponseDataProductTra
 type GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm struct {
 	// The Watch GPM is the average GMV generated from 1,000 views of the LIVE.
 	WatchGpm *string `json:"watch_gpm,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm instantiates a new GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm) ToMap()
 	if !IsNil(o.WatchGpm) {
 		toSerialize["watch_gpm"] = o.WatchGpm
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm := _GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm(varGetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "watch_gpm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm struct {

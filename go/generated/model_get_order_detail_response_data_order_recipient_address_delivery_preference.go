@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOrderDetailResponseDataOrderRecipientAddressDeliveryP
 type GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference struct {
 	// Drop-off location selected by the buyer.
 	DropOffLocation *string `json:"drop_off_location,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference
 
 // NewGetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference instantiates a new GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference) ToMap
 	if !IsNil(o.DropOffLocation) {
 		toSerialize["drop_off_location"] = o.DropOffLocation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference := _GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference(varGetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "drop_off_location")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference struct {

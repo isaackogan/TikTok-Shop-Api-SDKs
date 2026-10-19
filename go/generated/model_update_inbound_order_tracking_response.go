@@ -26,7 +26,10 @@ type UpdateInboundOrderTrackingResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateInboundOrderTrackingResponse UpdateInboundOrderTrackingResponse
 
 // NewUpdateInboundOrderTrackingResponse instantiates a new UpdateInboundOrderTrackingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UpdateInboundOrderTrackingResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateInboundOrderTrackingResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdateInboundOrderTrackingResponse := _UpdateInboundOrderTrackingResponse{}
+
+	err = json.Unmarshal(data, &varUpdateInboundOrderTrackingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateInboundOrderTrackingResponse(varUpdateInboundOrderTrackingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateInboundOrderTrackingResponse struct {

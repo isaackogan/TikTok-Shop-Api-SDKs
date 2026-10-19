@@ -23,7 +23,10 @@ type GetProductResponseDataPackageWeight struct {
 	Unit *string `json:"unit,omitempty"`
 	// The package weight.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPackageWeight GetProductResponseDataPackageWeight
 
 // NewGetProductResponseDataPackageWeight instantiates a new GetProductResponseDataPackageWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductResponseDataPackageWeight) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPackageWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPackageWeight := _GetProductResponseDataPackageWeight{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPackageWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPackageWeight(varGetProductResponseDataPackageWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPackageWeight struct {

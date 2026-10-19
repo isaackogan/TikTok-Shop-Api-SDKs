@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAffiliateCampaignCreatorProductContentStatisticsRespo
 type GetAffiliateCampaignCreatorProductContentStatisticsResponseData struct {
 	// A list of objects that represent content statistics for the associated creator.
 	CreatorContentStatistics []GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic `json:"creator_content_statistics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliateCampaignCreatorProductContentStatisticsResponseData GetAffiliateCampaignCreatorProductContentStatisticsResponseData
 
 // NewGetAffiliateCampaignCreatorProductContentStatisticsResponseData instantiates a new GetAffiliateCampaignCreatorProductContentStatisticsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAffiliateCampaignCreatorProductContentStatisticsResponseData) ToMap()
 	if !IsNil(o.CreatorContentStatistics) {
 		toSerialize["creator_content_statistics"] = o.CreatorContentStatistics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliateCampaignCreatorProductContentStatisticsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliateCampaignCreatorProductContentStatisticsResponseData := _GetAffiliateCampaignCreatorProductContentStatisticsResponseData{}
+
+	err = json.Unmarshal(data, &varGetAffiliateCampaignCreatorProductContentStatisticsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliateCampaignCreatorProductContentStatisticsResponseData(varGetAffiliateCampaignCreatorProductContentStatisticsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_content_statistics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliateCampaignCreatorProductContentStatisticsResponseData struct {

@@ -25,7 +25,10 @@ type SearchReturnMerchandiseAuthorizationsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Used to fetch the next page/set of results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnMerchandiseAuthorizationsResponseData SearchReturnMerchandiseAuthorizationsResponseData
 
 // NewSearchReturnMerchandiseAuthorizationsResponseData instantiates a new SearchReturnMerchandiseAuthorizationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchReturnMerchandiseAuthorizationsResponseData) ToMap() (map[string]i
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnMerchandiseAuthorizationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnMerchandiseAuthorizationsResponseData := _SearchReturnMerchandiseAuthorizationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchReturnMerchandiseAuthorizationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnMerchandiseAuthorizationsResponseData(varSearchReturnMerchandiseAuthorizationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_merchandise_authorizations")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnMerchandiseAuthorizationsResponseData struct {

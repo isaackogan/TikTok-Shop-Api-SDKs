@@ -33,7 +33,10 @@ type GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem struct {
 	ReturnRefundReason *string `json:"return_refund_reason,omitempty"`
 	// SKU ID.
 	SkuId *string `json:"sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem
 
 // NewGetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem instantiates a new GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem) ToMap() (map
 	if !IsNil(o.SkuId) {
 		toSerialize["sku_id"] = o.SkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem := _GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem(varGetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deliver_time")
+		delete(additionalProperties, "order_create_time")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "return_refund_reason")
+		delete(additionalProperties, "sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricProblemDetailsResponseDataNbfrProblemOrderItem struct {

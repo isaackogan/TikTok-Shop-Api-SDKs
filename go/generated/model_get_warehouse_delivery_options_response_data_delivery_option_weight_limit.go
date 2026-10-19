@@ -25,7 +25,10 @@ type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit struct {
 	MinWeight *int64 `json:"min_weight,omitempty"`
 	// The unit of measurement for the weight. Possible values: - GRAM - POUND - OUNCE - KILOGRAM
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit
 
 // NewGetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit instantiates a new GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit) ToMap(
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit := _GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit{}
+
+	err = json.Unmarshal(data, &varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit(varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max_weight")
+		delete(additionalProperties, "min_weight")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit struct {

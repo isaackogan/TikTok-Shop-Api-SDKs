@@ -26,7 +26,10 @@ type GetLiveRoomGMVAndOrderTrendsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetLiveRoomGMVAndOrderTrendsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomGMVAndOrderTrendsResponse GetLiveRoomGMVAndOrderTrendsResponse
 
 // NewGetLiveRoomGMVAndOrderTrendsResponse instantiates a new GetLiveRoomGMVAndOrderTrendsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetLiveRoomGMVAndOrderTrendsResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomGMVAndOrderTrendsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomGMVAndOrderTrendsResponse := _GetLiveRoomGMVAndOrderTrendsResponse{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomGMVAndOrderTrendsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomGMVAndOrderTrendsResponse(varGetLiveRoomGMVAndOrderTrendsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomGMVAndOrderTrendsResponse struct {

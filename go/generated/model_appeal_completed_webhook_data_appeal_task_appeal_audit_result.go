@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type AppealCompletedWebhookDataAppealTaskAppealAuditResult struct {
 	IndicatorType string `json:"indicator_type"`
 	Status string `json:"status"`
 	RejectReason *string `json:"reject_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppealCompletedWebhookDataAppealTaskAppealAuditResult AppealCompletedWebhookDataAppealTaskAppealAuditResult
@@ -142,6 +142,11 @@ func (o AppealCompletedWebhookDataAppealTaskAppealAuditResult) ToMap() (map[stri
 	if !IsNil(o.RejectReason) {
 		toSerialize["reject_reason"] = o.RejectReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -170,15 +175,22 @@ func (o *AppealCompletedWebhookDataAppealTaskAppealAuditResult) UnmarshalJSON(da
 
 	varAppealCompletedWebhookDataAppealTaskAppealAuditResult := _AppealCompletedWebhookDataAppealTaskAppealAuditResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppealCompletedWebhookDataAppealTaskAppealAuditResult)
+	err = json.Unmarshal(data, &varAppealCompletedWebhookDataAppealTaskAppealAuditResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppealCompletedWebhookDataAppealTaskAppealAuditResult(varAppealCompletedWebhookDataAppealTaskAppealAuditResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "indicator_type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "reject_reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

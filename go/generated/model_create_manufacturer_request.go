@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateManufacturerRequest struct {
 	Address string `json:"address"`
 	// The BCP-47 locale code representing the language used for specifying the manufacturer information. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT Default: The locale of the seller's registered business address.  **Note**: The information provided will be automatically translated into all EU languages supported by TikTok Shop. Ensure the locale matches the language used in field values to avoid inaccurate translations.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateManufacturerRequest CreateManufacturerRequest
@@ -238,6 +238,11 @@ func (o CreateManufacturerRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,25 @@ func (o *CreateManufacturerRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateManufacturerRequest := _CreateManufacturerRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateManufacturerRequest)
+	err = json.Unmarshal(data, &varCreateManufacturerRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateManufacturerRequest(varCreateManufacturerRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "registered_trade_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -26,7 +26,10 @@ type CreateSizeChartV2Response struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateSizeChartV2ResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateSizeChartV2Response CreateSizeChartV2Response
 
 // NewCreateSizeChartV2Response instantiates a new CreateSizeChartV2Response object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateSizeChartV2Response) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateSizeChartV2Response) UnmarshalJSON(data []byte) (err error) {
+	varCreateSizeChartV2Response := _CreateSizeChartV2Response{}
+
+	err = json.Unmarshal(data, &varCreateSizeChartV2Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateSizeChartV2Response(varCreateSizeChartV2Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateSizeChartV2Response struct {

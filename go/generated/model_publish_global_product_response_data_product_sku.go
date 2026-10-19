@@ -27,7 +27,10 @@ type PublishGlobalProductResponseDataProductSku struct {
 	SellerSku *string `json:"seller_sku,omitempty"`
 	// A list of attributes  (e.g. size, color, length) that define each variant of a product.
 	SaleAttributes []PublishGlobalProductResponseDataProductSkuSaleAttribute `json:"sale_attributes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PublishGlobalProductResponseDataProductSku PublishGlobalProductResponseDataProductSku
 
 // NewPublishGlobalProductResponseDataProductSku instantiates a new PublishGlobalProductResponseDataProductSku object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o PublishGlobalProductResponseDataProductSku) ToMap() (map[string]interfac
 	if !IsNil(o.SaleAttributes) {
 		toSerialize["sale_attributes"] = o.SaleAttributes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PublishGlobalProductResponseDataProductSku) UnmarshalJSON(data []byte) (err error) {
+	varPublishGlobalProductResponseDataProductSku := _PublishGlobalProductResponseDataProductSku{}
+
+	err = json.Unmarshal(data, &varPublishGlobalProductResponseDataProductSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PublishGlobalProductResponseDataProductSku(varPublishGlobalProductResponseDataProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "related_global_sku_id")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sale_attributes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePublishGlobalProductResponseDataProductSku struct {

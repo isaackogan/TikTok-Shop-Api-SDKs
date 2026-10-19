@@ -23,7 +23,10 @@ type Package struct {
 	Id *string `json:"id,omitempty"`
 	// List of order IDs corresponding to a new combined package ID.
 	OrderIds []string `json:"order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Package Package
 
 // NewPackage instantiates a new Package object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Package) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderIds) {
 		toSerialize["order_ids"] = o.OrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Package) UnmarshalJSON(data []byte) (err error) {
+	varPackage := _Package{}
+
+	err = json.Unmarshal(data, &varPackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Package(varPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackage struct {

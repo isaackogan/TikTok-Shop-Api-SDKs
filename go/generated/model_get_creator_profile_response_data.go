@@ -35,7 +35,10 @@ type GetCreatorProfileResponseData struct {
 	UserType *string `json:"user_type,omitempty"`
 	// Creator Open ID. [More details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
 	CreatorUserOpenId *string `json:"creator_user_open_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorProfileResponseData GetCreatorProfileResponseData
 
 // NewGetCreatorProfileResponseData instantiates a new GetCreatorProfileResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetCreatorProfileResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreatorUserOpenId) {
 		toSerialize["creator_user_open_id"] = o.CreatorUserOpenId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorProfileResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorProfileResponseData := _GetCreatorProfileResponseData{}
+
+	err = json.Unmarshal(data, &varGetCreatorProfileResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorProfileResponseData(varGetCreatorProfileResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "selection_region")
+		delete(additionalProperties, "register_region")
+		delete(additionalProperties, "seller_type")
+		delete(additionalProperties, "permissions")
+		delete(additionalProperties, "user_type")
+		delete(additionalProperties, "creator_user_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorProfileResponseData struct {

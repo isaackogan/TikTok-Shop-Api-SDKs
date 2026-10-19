@@ -23,7 +23,10 @@ type GetTradeInAccountTransactionsResponseDataFlowAmount struct {
 	Amount *string `json:"amount,omitempty"`
 	// The currency code in ISO 4217 format.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTradeInAccountTransactionsResponseDataFlowAmount GetTradeInAccountTransactionsResponseDataFlowAmount
 
 // NewGetTradeInAccountTransactionsResponseDataFlowAmount instantiates a new GetTradeInAccountTransactionsResponseDataFlowAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetTradeInAccountTransactionsResponseDataFlowAmount) ToMap() (map[string
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTradeInAccountTransactionsResponseDataFlowAmount) UnmarshalJSON(data []byte) (err error) {
+	varGetTradeInAccountTransactionsResponseDataFlowAmount := _GetTradeInAccountTransactionsResponseDataFlowAmount{}
+
+	err = json.Unmarshal(data, &varGetTradeInAccountTransactionsResponseDataFlowAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTradeInAccountTransactionsResponseDataFlowAmount(varGetTradeInAccountTransactionsResponseDataFlowAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTradeInAccountTransactionsResponseDataFlowAmount struct {

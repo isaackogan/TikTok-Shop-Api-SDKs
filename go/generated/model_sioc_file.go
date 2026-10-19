@@ -23,7 +23,10 @@ type SiocFile struct {
 	SiocCertificationUrl *string `json:"sioc_certification_url,omitempty"`
 	// sioc attachment type: - PHOTO  - DOCUMENT  - DROP_TEST_VIDEO
 	SiocFileType *string `json:"sioc_file_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SiocFile SiocFile
 
 // NewSiocFile instantiates a new SiocFile object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SiocFile) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SiocFileType) {
 		toSerialize["sioc_file_type"] = o.SiocFileType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SiocFile) UnmarshalJSON(data []byte) (err error) {
+	varSiocFile := _SiocFile{}
+
+	err = json.Unmarshal(data, &varSiocFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SiocFile(varSiocFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sioc_certification_url")
+		delete(additionalProperties, "sioc_file_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSiocFile struct {

@@ -29,7 +29,10 @@ type GetBestsellingProductsResponseDataProductProductImage struct {
 	Uri *string `json:"uri,omitempty"`
 	// The URLs to view the images.
 	Urls []string `json:"urls,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingProductsResponseDataProductProductImage GetBestsellingProductsResponseDataProductProductImage
 
 // NewGetBestsellingProductsResponseDataProductProductImage instantiates a new GetBestsellingProductsResponseDataProductProductImage object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetBestsellingProductsResponseDataProductProductImage) ToMap() (map[stri
 	if !IsNil(o.Urls) {
 		toSerialize["urls"] = o.Urls
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingProductsResponseDataProductProductImage) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingProductsResponseDataProductProductImage := _GetBestsellingProductsResponseDataProductProductImage{}
+
+	err = json.Unmarshal(data, &varGetBestsellingProductsResponseDataProductProductImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingProductsResponseDataProductProductImage(varGetBestsellingProductsResponseDataProductProductImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "thumb_urls")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "urls")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingProductsResponseDataProductProductImage struct {

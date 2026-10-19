@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SearchSessionsRequest struct {
 	BeginTimeLt int64 `json:"begin_time_lt"`
 	// Filter sessions by the buyer's nickname.
 	BuyerNickname *string `json:"buyer_nickname,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchSessionsRequest SearchSessionsRequest
@@ -145,6 +145,11 @@ func (o SearchSessionsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BuyerNickname) {
 		toSerialize["buyer_nickname"] = o.BuyerNickname
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *SearchSessionsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSearchSessionsRequest := _SearchSessionsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchSessionsRequest)
+	err = json.Unmarshal(data, &varSearchSessionsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchSessionsRequest(varSearchSessionsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "begin_time_ge")
+		delete(additionalProperties, "begin_time_lt")
+		delete(additionalProperties, "buyer_nickname")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

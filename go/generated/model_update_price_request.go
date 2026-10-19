@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdatePriceRequest{}
 type UpdatePriceRequest struct {
 	// A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
 	Skus []UpdatePriceRequestSku `json:"skus"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePriceRequest UpdatePriceRequest
@@ -80,6 +80,11 @@ func (o UpdatePriceRequest) MarshalJSON() ([]byte, error) {
 func (o UpdatePriceRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["skus"] = o.Skus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdatePriceRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdatePriceRequest := _UpdatePriceRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePriceRequest)
+	err = json.Unmarshal(data, &varUpdatePriceRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePriceRequest(varUpdatePriceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

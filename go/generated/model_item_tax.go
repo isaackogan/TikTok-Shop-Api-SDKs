@@ -25,7 +25,10 @@ type ItemTax struct {
 	TaxAmount *string `json:"tax_amount,omitempty"`
 	// Tax rate.
 	TaxRate *string `json:"tax_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ItemTax ItemTax
 
 // NewItemTax instantiates a new ItemTax object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ItemTax) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxRate) {
 		toSerialize["tax_rate"] = o.TaxRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ItemTax) UnmarshalJSON(data []byte) (err error) {
+	varItemTax := _ItemTax{}
+
+	err = json.Unmarshal(data, &varItemTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ItemTax(varItemTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tax_type")
+		delete(additionalProperties, "tax_amount")
+		delete(additionalProperties, "tax_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableItemTax struct {

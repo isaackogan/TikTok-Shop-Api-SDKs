@@ -31,7 +31,10 @@ type GetProductResponseDataSkuCombinedSkuSalesAttribute struct {
 	ValueId *string `json:"value_id,omitempty"`
 	// The sales attribute value name.
 	ValueName *string `json:"value_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuCombinedSkuSalesAttribute GetProductResponseDataSkuCombinedSkuSalesAttribute
 
 // NewGetProductResponseDataSkuCombinedSkuSalesAttribute instantiates a new GetProductResponseDataSkuCombinedSkuSalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetProductResponseDataSkuCombinedSkuSalesAttribute) ToMap() (map[string]
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuCombinedSkuSalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuCombinedSkuSalesAttribute := _GetProductResponseDataSkuCombinedSkuSalesAttribute{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuCombinedSkuSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuCombinedSkuSalesAttribute(varGetProductResponseDataSkuCombinedSkuSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sku_img")
+		delete(additionalProperties, "supplementary_sku_images")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuCombinedSkuSalesAttribute struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type TrackingStatusUpdateRequestTrack struct {
 	Location *TrackingStatusUpdateRequestTrackLocation `json:"location,omitempty"`
 	// The waybill number used when placing an order. If there is no tracking code, fill in the invoice id instead. And it may change in split shipment, it may change in different track in this scene.
 	TrackingNo string `json:"tracking_no"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrackingStatusUpdateRequestTrack TrackingStatusUpdateRequestTrack
@@ -275,6 +275,11 @@ func (o TrackingStatusUpdateRequestTrack) ToMap() (map[string]interface{}, error
 		toSerialize["location"] = o.Location
 	}
 	toSerialize["tracking_no"] = o.TrackingNo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -305,15 +310,26 @@ func (o *TrackingStatusUpdateRequestTrack) UnmarshalJSON(data []byte) (err error
 
 	varTrackingStatusUpdateRequestTrack := _TrackingStatusUpdateRequestTrack{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrackingStatusUpdateRequestTrack)
+	err = json.Unmarshal(data, &varTrackingStatusUpdateRequestTrack)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrackingStatusUpdateRequestTrack(varTrackingStatusUpdateRequestTrack)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action_code")
+		delete(additionalProperties, "occur_time")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "failed_reason")
+		delete(additionalProperties, "proof_url")
+		delete(additionalProperties, "location")
+		delete(additionalProperties, "tracking_no")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

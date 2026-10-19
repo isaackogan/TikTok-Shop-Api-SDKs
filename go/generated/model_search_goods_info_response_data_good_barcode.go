@@ -23,7 +23,10 @@ type SearchGoodsInfoResponseDataGoodBarcode struct {
 	Code *string `json:"code,omitempty"`
 	// The barcode type. Possible values: - UPC - EAN - GTIN - ASIN_OR_FNSKU - MERCHANT_SKU_ID - FBT_SPECIFIC_BARCODE
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodBarcode SearchGoodsInfoResponseDataGoodBarcode
 
 // NewSearchGoodsInfoResponseDataGoodBarcode instantiates a new SearchGoodsInfoResponseDataGoodBarcode object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchGoodsInfoResponseDataGoodBarcode) ToMap() (map[string]interface{},
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodBarcode) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodBarcode := _SearchGoodsInfoResponseDataGoodBarcode{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodBarcode)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodBarcode(varSearchGoodsInfoResponseDataGoodBarcode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodBarcode struct {

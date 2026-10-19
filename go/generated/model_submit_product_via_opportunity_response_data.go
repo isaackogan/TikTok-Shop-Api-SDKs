@@ -21,7 +21,10 @@ var _ MappedNullable = &SubmitProductViaOpportunityResponseData{}
 type SubmitProductViaOpportunityResponseData struct {
 	// The submission record that links the product to the opportunity.
 	Submission *SubmitProductViaOpportunityResponseDataSubmission `json:"submission,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitProductViaOpportunityResponseData SubmitProductViaOpportunityResponseData
 
 // NewSubmitProductViaOpportunityResponseData instantiates a new SubmitProductViaOpportunityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SubmitProductViaOpportunityResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.Submission) {
 		toSerialize["submission"] = o.Submission
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitProductViaOpportunityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSubmitProductViaOpportunityResponseData := _SubmitProductViaOpportunityResponseData{}
+
+	err = json.Unmarshal(data, &varSubmitProductViaOpportunityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitProductViaOpportunityResponseData(varSubmitProductViaOpportunityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "submission")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitProductViaOpportunityResponseData struct {

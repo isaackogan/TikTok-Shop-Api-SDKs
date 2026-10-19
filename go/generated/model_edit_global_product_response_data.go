@@ -23,7 +23,10 @@ type EditGlobalProductResponseData struct {
 	GlobalSkus []GlobalSku `json:"global_skus,omitempty"`
 	// Results of syncing the changes in the edited product to markets where it is published.
 	PublishResults []PublishResult `json:"publish_results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditGlobalProductResponseData EditGlobalProductResponseData
 
 // NewEditGlobalProductResponseData instantiates a new EditGlobalProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o EditGlobalProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PublishResults) {
 		toSerialize["publish_results"] = o.PublishResults
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditGlobalProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varEditGlobalProductResponseData := _EditGlobalProductResponseData{}
+
+	err = json.Unmarshal(data, &varEditGlobalProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditGlobalProductResponseData(varEditGlobalProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_skus")
+		delete(additionalProperties, "publish_results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditGlobalProductResponseData struct {

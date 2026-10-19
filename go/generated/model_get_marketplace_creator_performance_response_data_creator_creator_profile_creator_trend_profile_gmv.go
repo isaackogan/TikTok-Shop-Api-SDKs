@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTre
 	Amount *string `json:"amount,omitempty"`
 	// GMV symbol
 	Symbol *string `json:"symbol,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreator
 	if !IsNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv := _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv(varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "symbol")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfileGmv struct {

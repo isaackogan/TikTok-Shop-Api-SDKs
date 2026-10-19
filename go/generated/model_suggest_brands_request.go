@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type SuggestBrandsRequest struct {
 	Description *string `json:"description,omitempty"`
 	// Product images. Optional. The recommendation service currently uses the first image.
 	Images []DiagnoseAndOptimizeProductRequestSizeChartImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SuggestBrandsRequest SuggestBrandsRequest
@@ -191,6 +191,11 @@ func (o SuggestBrandsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *SuggestBrandsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSuggestBrandsRequest := _SuggestBrandsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSuggestBrandsRequest)
+	err = json.Unmarshal(data, &varSuggestBrandsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SuggestBrandsRequest(varSuggestBrandsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_title")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown
 	ContentType *string `json:"content_type,omitempty"`
 	// Sales of the corresponding content type.
 	Sales *GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale `json:"sales,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakd
 	if !IsNil(o.Sales) {
 		toSerialize["sales"] = o.Sales
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "sales")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown struct {

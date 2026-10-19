@@ -23,7 +23,10 @@ type GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampai
 	Uri *string `json:"uri,omitempty"`
 	// A list of URLs for the product thumbnail image.
 	UrlList []string `json:"url_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail
 
 // NewGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail instantiates a new GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCam
 	if !IsNil(o.UrlList) {
 		toSerialize["url_list"] = o.UrlList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail := _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail(varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductThumbnail struct {

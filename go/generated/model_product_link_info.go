@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ProductLinkInfo struct {
 	ProductId string `json:"product_id"`
 	// The title to be shown on the product anchor. Anchor title should be shorter than 30 characters. Titles may be rejected for punctuation, emoji, or offensive language.
 	Title string `json:"title"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductLinkInfo ProductLinkInfo
@@ -108,6 +108,11 @@ func (o ProductLinkInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["title"] = o.Title
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ProductLinkInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varProductLinkInfo := _ProductLinkInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductLinkInfo)
+	err = json.Unmarshal(data, &varProductLinkInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductLinkInfo(varProductLinkInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "title")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

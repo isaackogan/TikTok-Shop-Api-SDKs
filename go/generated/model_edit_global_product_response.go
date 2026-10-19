@@ -26,7 +26,10 @@ type EditGlobalProductResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *EditGlobalProductResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditGlobalProductResponse EditGlobalProductResponse
 
 // NewEditGlobalProductResponse instantiates a new EditGlobalProductResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o EditGlobalProductResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditGlobalProductResponse) UnmarshalJSON(data []byte) (err error) {
+	varEditGlobalProductResponse := _EditGlobalProductResponse{}
+
+	err = json.Unmarshal(data, &varEditGlobalProductResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditGlobalProductResponse(varEditGlobalProductResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditGlobalProductResponse struct {

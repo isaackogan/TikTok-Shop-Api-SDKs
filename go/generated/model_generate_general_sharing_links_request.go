@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GenerateGeneralSharingLinksRequest struct {
 	CampaignId *string `json:"campaign_id,omitempty"`
 	// Optional. For Tokopedia agencies, set this field to `TOKO`. The response returns the Tokopedia product URL in `sharing_link` and omits `deep_link` and `one_link`. If this field is omitted or set to another value, the response returns the TikTok Shop product URL in `sharing_link`. For `PRODUCT` requests, `deep_link` and `one_link` are also returned.
 	LinkType *string `json:"link_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GenerateGeneralSharingLinksRequest GenerateGeneralSharingLinksRequest
@@ -154,6 +154,11 @@ func (o GenerateGeneralSharingLinksRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.LinkType) {
 		toSerialize["link_type"] = o.LinkType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *GenerateGeneralSharingLinksRequest) UnmarshalJSON(data []byte) (err err
 
 	varGenerateGeneralSharingLinksRequest := _GenerateGeneralSharingLinksRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenerateGeneralSharingLinksRequest)
+	err = json.Unmarshal(data, &varGenerateGeneralSharingLinksRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GenerateGeneralSharingLinksRequest(varGenerateGeneralSharingLinksRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "material")
+		delete(additionalProperties, "campaign_id")
+		delete(additionalProperties, "link_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

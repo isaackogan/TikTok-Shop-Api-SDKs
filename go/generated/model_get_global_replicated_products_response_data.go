@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalReplicatedProductsResponseData{}
 type GetGlobalReplicatedProductsResponseData struct {
 	// The product replicas associated with the requested product in other markets. The requested source product is excluded. Returns an empty array when no other associated replica is found.
 	ReplicatedProducts []GetGlobalReplicatedProductsResponseDataReplicatedProduct `json:"replicated_products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalReplicatedProductsResponseData GetGlobalReplicatedProductsResponseData
 
 // NewGetGlobalReplicatedProductsResponseData instantiates a new GetGlobalReplicatedProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalReplicatedProductsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.ReplicatedProducts) {
 		toSerialize["replicated_products"] = o.ReplicatedProducts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalReplicatedProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalReplicatedProductsResponseData := _GetGlobalReplicatedProductsResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalReplicatedProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalReplicatedProductsResponseData(varGetGlobalReplicatedProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "replicated_products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalReplicatedProductsResponseData struct {

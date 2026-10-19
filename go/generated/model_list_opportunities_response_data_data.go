@@ -25,7 +25,10 @@ type ListOpportunitiesResponseDataData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total number of matching opportunities (approximate).
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListOpportunitiesResponseDataData ListOpportunitiesResponseDataData
 
 // NewListOpportunitiesResponseDataData instantiates a new ListOpportunitiesResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ListOpportunitiesResponseDataData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListOpportunitiesResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varListOpportunitiesResponseDataData := _ListOpportunitiesResponseDataData{}
+
+	err = json.Unmarshal(data, &varListOpportunitiesResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListOpportunitiesResponseDataData(varListOpportunitiesResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "opportunities")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListOpportunitiesResponseDataData struct {

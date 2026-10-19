@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateManufacturerResponseData{}
 type CreateManufacturerResponseData struct {
 	// A unique ID that identifies the manufacturer in TikTok Shop.
 	ManufacturerId *string `json:"manufacturer_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateManufacturerResponseData CreateManufacturerResponseData
 
 // NewCreateManufacturerResponseData instantiates a new CreateManufacturerResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateManufacturerResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.ManufacturerId) {
 		toSerialize["manufacturer_id"] = o.ManufacturerId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateManufacturerResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateManufacturerResponseData := _CreateManufacturerResponseData{}
+
+	err = json.Unmarshal(data, &varCreateManufacturerResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateManufacturerResponseData(varCreateManufacturerResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "manufacturer_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateManufacturerResponseData struct {

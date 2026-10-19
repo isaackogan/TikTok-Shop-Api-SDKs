@@ -21,7 +21,10 @@ var _ MappedNullable = &RecommendRequiredProductPropertiesResponseData{}
 type RecommendRequiredProductPropertiesResponseData struct {
 	// Ordered required properties predicted for the product. The array is empty when no property recommendation is available.
 	RecommendedProperties []RecommendRequiredProductPropertiesResponseDataRecommendedProperty `json:"recommended_properties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendRequiredProductPropertiesResponseData RecommendRequiredProductPropertiesResponseData
 
 // NewRecommendRequiredProductPropertiesResponseData instantiates a new RecommendRequiredProductPropertiesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o RecommendRequiredProductPropertiesResponseData) ToMap() (map[string]inte
 	if !IsNil(o.RecommendedProperties) {
 		toSerialize["recommended_properties"] = o.RecommendedProperties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendRequiredProductPropertiesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRecommendRequiredProductPropertiesResponseData := _RecommendRequiredProductPropertiesResponseData{}
+
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendRequiredProductPropertiesResponseData(varRecommendRequiredProductPropertiesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "recommended_properties")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendRequiredProductPropertiesResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SkuWeight struct {
 	Value string `json:"value"`
 	// The unit for the SKU weight. Possible values based on region: - US: KILOGRAM, POUND - BR, JP, MX: KILOGRAM, GRAM - Other countries: KILOGRAM  Note: Use the same measurement system (metric or imperial) for `sku_weight` and `sku_dimensions`. For example, use `KILOGRAM` with `CENTIMETER`.
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SkuWeight SkuWeight
@@ -108,6 +108,11 @@ func (o SkuWeight) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SkuWeight) UnmarshalJSON(data []byte) (err error) {
 
 	varSkuWeight := _SkuWeight{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSkuWeight)
+	err = json.Unmarshal(data, &varSkuWeight)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SkuWeight(varSkuWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

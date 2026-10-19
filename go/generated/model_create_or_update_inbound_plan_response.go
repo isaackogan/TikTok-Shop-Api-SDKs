@@ -26,7 +26,10 @@ type CreateOrUpdateInboundPlanResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateOrUpdateInboundPlanResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateOrUpdateInboundPlanResponse CreateOrUpdateInboundPlanResponse
 
 // NewCreateOrUpdateInboundPlanResponse instantiates a new CreateOrUpdateInboundPlanResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateOrUpdateInboundPlanResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateOrUpdateInboundPlanResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateOrUpdateInboundPlanResponse := _CreateOrUpdateInboundPlanResponse{}
+
+	err = json.Unmarshal(data, &varCreateOrUpdateInboundPlanResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOrUpdateInboundPlanResponse(varCreateOrUpdateInboundPlanResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateOrUpdateInboundPlanResponse struct {

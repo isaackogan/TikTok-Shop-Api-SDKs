@@ -23,7 +23,10 @@ type FBTInventoryUpdateWebhookDataFbtWarehouseInventory struct {
 	FbtWarehouseId *string `json:"fbt_warehouse_id,omitempty"`
 	// The number of units physically in the warehouse, excluding those in transit or damaged.
 	OnHandDetail *FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail `json:"on_hand_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FBTInventoryUpdateWebhookDataFbtWarehouseInventory FBTInventoryUpdateWebhookDataFbtWarehouseInventory
 
 // NewFBTInventoryUpdateWebhookDataFbtWarehouseInventory instantiates a new FBTInventoryUpdateWebhookDataFbtWarehouseInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o FBTInventoryUpdateWebhookDataFbtWarehouseInventory) ToMap() (map[string]
 	if !IsNil(o.OnHandDetail) {
 		toSerialize["on_hand_detail"] = o.OnHandDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FBTInventoryUpdateWebhookDataFbtWarehouseInventory) UnmarshalJSON(data []byte) (err error) {
+	varFBTInventoryUpdateWebhookDataFbtWarehouseInventory := _FBTInventoryUpdateWebhookDataFbtWarehouseInventory{}
+
+	err = json.Unmarshal(data, &varFBTInventoryUpdateWebhookDataFbtWarehouseInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FBTInventoryUpdateWebhookDataFbtWarehouseInventory(varFBTInventoryUpdateWebhookDataFbtWarehouseInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fbt_warehouse_id")
+		delete(additionalProperties, "on_hand_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFBTInventoryUpdateWebhookDataFbtWarehouseInventory struct {

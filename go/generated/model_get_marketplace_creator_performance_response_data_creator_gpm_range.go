@@ -27,7 +27,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange struct {
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The formatted range of GPM values associated with the creator.
 	FormattedRange *string `json:"formatted_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange) ToMap() (ma
 	if !IsNil(o.FormattedRange) {
 		toSerialize["formatted_range"] = o.FormattedRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange := _GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange(varGetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "formatted_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorGpmRange struct {

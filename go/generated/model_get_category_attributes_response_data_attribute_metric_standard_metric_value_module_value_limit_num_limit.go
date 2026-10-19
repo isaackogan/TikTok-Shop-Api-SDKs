@@ -23,7 +23,10 @@ type GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleVa
 	MinValue *int64 `json:"min_value,omitempty"`
 	// Metric value num limit max value.
 	MaxValue *int64 `json:"max_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit
 
 // NewGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit instantiates a new GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModul
 	if !IsNil(o.MaxValue) {
 		toSerialize["max_value"] = o.MaxValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit := _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit(varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_value")
+		delete(additionalProperties, "max_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit struct {

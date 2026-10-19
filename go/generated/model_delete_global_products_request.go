@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &DeleteGlobalProductsRequest{}
 type DeleteGlobalProductsRequest struct {
 	// The global product IDs to delete. Max number of IDs: 20
 	GlobalProductIds []string `json:"global_product_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteGlobalProductsRequest DeleteGlobalProductsRequest
@@ -80,6 +80,11 @@ func (o DeleteGlobalProductsRequest) MarshalJSON() ([]byte, error) {
 func (o DeleteGlobalProductsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["global_product_ids"] = o.GlobalProductIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *DeleteGlobalProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDeleteGlobalProductsRequest := _DeleteGlobalProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteGlobalProductsRequest)
+	err = json.Unmarshal(data, &varDeleteGlobalProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteGlobalProductsRequest(varDeleteGlobalProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

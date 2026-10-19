@@ -37,7 +37,10 @@ type SearchSampleApplicationsResponseDataSampleApplicationCreator struct {
 	FulfillmentPercentage *string `json:"fulfillment_percentage,omitempty"`
 	// The median number of creators' shoppable video views over the past 30 days. If the creator has not authorized the sharing of this information, the field returns an empty string.
 	EcVideoView *int64 `json:"ec_video_view,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationsResponseDataSampleApplicationCreator SearchSampleApplicationsResponseDataSampleApplicationCreator
 
 // NewSearchSampleApplicationsResponseDataSampleApplicationCreator instantiates a new SearchSampleApplicationsResponseDataSampleApplicationCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchSampleApplicationsResponseDataSampleApplicationCreator) ToMap() (m
 	if !IsNil(o.EcVideoView) {
 		toSerialize["ec_video_view"] = o.EcVideoView
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationsResponseDataSampleApplicationCreator) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationsResponseDataSampleApplicationCreator := _SearchSampleApplicationsResponseDataSampleApplicationCreator{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationsResponseDataSampleApplicationCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationsResponseDataSampleApplicationCreator(varSearchSampleApplicationsResponseDataSampleApplicationCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "follower_count")
+		delete(additionalProperties, "avatar_url")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "content_count")
+		delete(additionalProperties, "fulfillment_percentage")
+		delete(additionalProperties, "ec_video_view")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationsResponseDataSampleApplicationCreator struct {

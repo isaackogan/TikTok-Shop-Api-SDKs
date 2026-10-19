@@ -26,7 +26,10 @@ type RepublishActivityResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *RepublishActivityResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepublishActivityResponse RepublishActivityResponse
 
 // NewRepublishActivityResponse instantiates a new RepublishActivityResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o RepublishActivityResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepublishActivityResponse) UnmarshalJSON(data []byte) (err error) {
+	varRepublishActivityResponse := _RepublishActivityResponse{}
+
+	err = json.Unmarshal(data, &varRepublishActivityResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepublishActivityResponse(varRepublishActivityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepublishActivityResponse struct {

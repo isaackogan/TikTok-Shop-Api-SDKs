@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &QueryGoodsInventoryForMCFRequest{}
 type QueryGoodsInventoryForMCFRequest struct {
 	// Goods to query. The array must contain 1 to 50 entries.
 	Goods []QueryGoodsInventoryForMCFRequestGood `json:"goods"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QueryGoodsInventoryForMCFRequest QueryGoodsInventoryForMCFRequest
@@ -80,6 +80,11 @@ func (o QueryGoodsInventoryForMCFRequest) MarshalJSON() ([]byte, error) {
 func (o QueryGoodsInventoryForMCFRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["goods"] = o.Goods
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *QueryGoodsInventoryForMCFRequest) UnmarshalJSON(data []byte) (err error
 
 	varQueryGoodsInventoryForMCFRequest := _QueryGoodsInventoryForMCFRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQueryGoodsInventoryForMCFRequest)
+	err = json.Unmarshal(data, &varQueryGoodsInventoryForMCFRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QueryGoodsInventoryForMCFRequest(varQueryGoodsInventoryForMCFRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

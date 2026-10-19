@@ -27,7 +27,10 @@ type RedemptionDuration struct {
 	EndTime *int64 `json:"end_time,omitempty"`
 	// The number of days after coupon claim time for which a coupon is valid to be redeemed, `type = 'RELATIVE'`.
 	RelativeTime *int64 `json:"relative_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RedemptionDuration RedemptionDuration
 
 // NewRedemptionDuration instantiates a new RedemptionDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o RedemptionDuration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RelativeTime) {
 		toSerialize["relative_time"] = o.RelativeTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RedemptionDuration) UnmarshalJSON(data []byte) (err error) {
+	varRedemptionDuration := _RedemptionDuration{}
+
+	err = json.Unmarshal(data, &varRedemptionDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RedemptionDuration(varRedemptionDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "relative_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRedemptionDuration struct {

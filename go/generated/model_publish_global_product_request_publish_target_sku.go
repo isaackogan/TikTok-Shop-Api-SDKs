@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PublishGlobalProductRequestPublishTargetSku struct {
 	Inventory *PublishGlobalProductRequestPublishTargetSkuInventory `json:"inventory,omitempty"`
 	// The fees required for this product based on TikTok Shop policies. Fees are required only for certain product categories, retrieve the requirements from the [Get Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
 	Fees []Fee `json:"fees,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PublishGlobalProductRequestPublishTargetSku PublishGlobalProductRequestPublishTargetSku
@@ -191,6 +191,11 @@ func (o PublishGlobalProductRequestPublishTargetSku) ToMap() (map[string]interfa
 	if !IsNil(o.Fees) {
 		toSerialize["fees"] = o.Fees
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *PublishGlobalProductRequestPublishTargetSku) UnmarshalJSON(data []byte)
 
 	varPublishGlobalProductRequestPublishTargetSku := _PublishGlobalProductRequestPublishTargetSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPublishGlobalProductRequestPublishTargetSku)
+	err = json.Unmarshal(data, &varPublishGlobalProductRequestPublishTargetSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PublishGlobalProductRequestPublishTargetSku(varPublishGlobalProductRequestPublishTargetSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "related_global_sku_id")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "fees")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

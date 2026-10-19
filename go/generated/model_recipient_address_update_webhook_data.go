@@ -23,7 +23,10 @@ type RecipientAddressUpdateWebhookData struct {
 	OrderId *string `json:"order_id,omitempty"`
 	// The time when recipient address is updated, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecipientAddressUpdateWebhookData RecipientAddressUpdateWebhookData
 
 // NewRecipientAddressUpdateWebhookData instantiates a new RecipientAddressUpdateWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RecipientAddressUpdateWebhookData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecipientAddressUpdateWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varRecipientAddressUpdateWebhookData := _RecipientAddressUpdateWebhookData{}
+
+	err = json.Unmarshal(data, &varRecipientAddressUpdateWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecipientAddressUpdateWebhookData(varRecipientAddressUpdateWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecipientAddressUpdateWebhookData struct {

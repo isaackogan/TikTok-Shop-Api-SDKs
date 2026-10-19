@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Table struct {
 	Headers []Header `json:"headers"`
 	// Rows of the size chart. Provide 1 to 45 rows.
 	Rows []Row `json:"rows"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Table Table
@@ -108,6 +108,11 @@ func (o Table) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["headers"] = o.Headers
 	toSerialize["rows"] = o.Rows
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *Table) UnmarshalJSON(data []byte) (err error) {
 
 	varTable := _Table{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTable)
+	err = json.Unmarshal(data, &varTable)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Table(varTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "rows")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

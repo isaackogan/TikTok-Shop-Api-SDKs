@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateImageTranslationTasksRequestImage struct {
 	ImageUri string `json:"image_uri"`
 	// The target languages to translate the image into. You can specify multiple target languages for each image. Possible values: - `cs-CZ` - `da-DK` - `de-AT` - `de-BE` - `de-DE` - `el-GR` - `en-GB` - `en-IE` - `es-ES` - `fi-FI` - `fr-FR` - `fr-BE` - `hu-HU` - `it-IT` - `nl-NL` - `nl-BE` - `pl-PL` - `pt-PT` - `sv-SE` Recommendation: Specify up to 20 languages to avoid exceeding the task limit per call.
 	TargetLanguages []string `json:"target_languages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateImageTranslationTasksRequestImage CreateImageTranslationTasksRequestImage
@@ -108,6 +108,11 @@ func (o CreateImageTranslationTasksRequestImage) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["image_uri"] = o.ImageUri
 	toSerialize["target_languages"] = o.TargetLanguages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateImageTranslationTasksRequestImage) UnmarshalJSON(data []byte) (er
 
 	varCreateImageTranslationTasksRequestImage := _CreateImageTranslationTasksRequestImage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateImageTranslationTasksRequestImage)
+	err = json.Unmarshal(data, &varCreateImageTranslationTasksRequestImage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateImageTranslationTasksRequestImage(varCreateImageTranslationTasksRequestImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "image_uri")
+		delete(additionalProperties, "target_languages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

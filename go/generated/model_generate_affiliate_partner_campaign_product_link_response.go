@@ -26,7 +26,10 @@ type GenerateAffiliatePartnerCampaignProductLinkResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GenerateAffiliatePartnerCampaignProductLinkResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateAffiliatePartnerCampaignProductLinkResponse GenerateAffiliatePartnerCampaignProductLinkResponse
 
 // NewGenerateAffiliatePartnerCampaignProductLinkResponse instantiates a new GenerateAffiliatePartnerCampaignProductLinkResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GenerateAffiliatePartnerCampaignProductLinkResponse) ToMap() (map[string
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateAffiliatePartnerCampaignProductLinkResponse) UnmarshalJSON(data []byte) (err error) {
+	varGenerateAffiliatePartnerCampaignProductLinkResponse := _GenerateAffiliatePartnerCampaignProductLinkResponse{}
+
+	err = json.Unmarshal(data, &varGenerateAffiliatePartnerCampaignProductLinkResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateAffiliatePartnerCampaignProductLinkResponse(varGenerateAffiliatePartnerCampaignProductLinkResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateAffiliatePartnerCampaignProductLinkResponse struct {

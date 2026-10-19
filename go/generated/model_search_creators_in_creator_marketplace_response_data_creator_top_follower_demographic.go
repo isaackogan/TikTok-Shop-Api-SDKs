@@ -23,7 +23,10 @@ type SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic
 	AgeRanges []string `json:"age_ranges,omitempty"`
 	// Major gender of the followers
 	MajorGender *SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender `json:"major_gender,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic
 
 // NewSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic instantiates a new SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemograp
 	if !IsNil(o.MajorGender) {
 		toSerialize["major_gender"] = o.MajorGender
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic := _SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic(varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "age_ranges")
+		delete(additionalProperties, "major_gender")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic struct {

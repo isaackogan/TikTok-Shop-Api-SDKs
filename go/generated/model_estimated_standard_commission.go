@@ -23,7 +23,10 @@ type EstimatedStandardCommission struct {
 	Amount *string `json:"amount,omitempty"`
 	// Type of currency use
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EstimatedStandardCommission EstimatedStandardCommission
 
 // NewEstimatedStandardCommission instantiates a new EstimatedStandardCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o EstimatedStandardCommission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EstimatedStandardCommission) UnmarshalJSON(data []byte) (err error) {
+	varEstimatedStandardCommission := _EstimatedStandardCommission{}
+
+	err = json.Unmarshal(data, &varEstimatedStandardCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EstimatedStandardCommission(varEstimatedStandardCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEstimatedStandardCommission struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateFBTMCFOrderRequest struct {
 	Goods []CreateFBTMCFOrderRequestGood `json:"goods"`
 	// The consignee contact info
 	Consignee CreateFBTMCFOrderRequestConsignee `json:"consignee"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFBTMCFOrderRequest CreateFBTMCFOrderRequest
@@ -136,6 +136,11 @@ func (o CreateFBTMCFOrderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["external_order_id"] = o.ExternalOrderId
 	toSerialize["goods"] = o.Goods
 	toSerialize["consignee"] = o.Consignee
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *CreateFBTMCFOrderRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateFBTMCFOrderRequest := _CreateFBTMCFOrderRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFBTMCFOrderRequest)
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFBTMCFOrderRequest(varCreateFBTMCFOrderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_order_id")
+		delete(additionalProperties, "goods")
+		delete(additionalProperties, "consignee")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

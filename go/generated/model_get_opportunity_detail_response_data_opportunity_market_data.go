@@ -33,7 +33,10 @@ type GetOpportunityDetailResponseDataOpportunityMarketData struct {
 	CompetitorProductCount *string `json:"competitor_product_count,omitempty"`
 	// Number of competing sellers with the products currently listed.
 	CompetitorSellerCount *string `json:"competitor_seller_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpportunityDetailResponseDataOpportunityMarketData GetOpportunityDetailResponseDataOpportunityMarketData
 
 // NewGetOpportunityDetailResponseDataOpportunityMarketData instantiates a new GetOpportunityDetailResponseDataOpportunityMarketData object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetOpportunityDetailResponseDataOpportunityMarketData) ToMap() (map[stri
 	if !IsNil(o.CompetitorSellerCount) {
 		toSerialize["competitor_seller_count"] = o.CompetitorSellerCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpportunityDetailResponseDataOpportunityMarketData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpportunityDetailResponseDataOpportunityMarketData := _GetOpportunityDetailResponseDataOpportunityMarketData{}
+
+	err = json.Unmarshal(data, &varGetOpportunityDetailResponseDataOpportunityMarketData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpportunityDetailResponseDataOpportunityMarketData(varGetOpportunityDetailResponseDataOpportunityMarketData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "est_market_sales_volume")
+		delete(additionalProperties, "est_market_gmv")
+		delete(additionalProperties, "market_buzz")
+		delete(additionalProperties, "search_volume")
+		delete(additionalProperties, "search_keyword")
+		delete(additionalProperties, "competitor_product_count")
+		delete(additionalProperties, "competitor_seller_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpportunityDetailResponseDataOpportunityMarketData struct {

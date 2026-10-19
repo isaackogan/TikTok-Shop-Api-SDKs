@@ -25,7 +25,10 @@ type Option struct {
 	Name *string `json:"name,omitempty"`
 	// Children option detail list, used if the option has sub option choices
 	OptionChildren []OptionChildren `json:"option_children,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Option Option
 
 // NewOption instantiates a new Option object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o Option) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OptionChildren) {
 		toSerialize["option_children"] = o.OptionChildren
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Option) UnmarshalJSON(data []byte) (err error) {
+	varOption := _Option{}
+
+	err = json.Unmarshal(data, &varOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Option(varOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "option_children")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOption struct {

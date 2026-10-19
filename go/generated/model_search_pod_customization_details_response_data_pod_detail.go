@@ -23,7 +23,10 @@ type SearchPODCustomizationDetailsResponseDataPodDetail struct {
 	OrderLineId *string `json:"order_line_id,omitempty"`
 	// The unique identifier of the order line item.
 	PodDetail *string `json:"pod_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPODCustomizationDetailsResponseDataPodDetail SearchPODCustomizationDetailsResponseDataPodDetail
 
 // NewSearchPODCustomizationDetailsResponseDataPodDetail instantiates a new SearchPODCustomizationDetailsResponseDataPodDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchPODCustomizationDetailsResponseDataPodDetail) ToMap() (map[string]
 	if !IsNil(o.PodDetail) {
 		toSerialize["pod_detail"] = o.PodDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPODCustomizationDetailsResponseDataPodDetail) UnmarshalJSON(data []byte) (err error) {
+	varSearchPODCustomizationDetailsResponseDataPodDetail := _SearchPODCustomizationDetailsResponseDataPodDetail{}
+
+	err = json.Unmarshal(data, &varSearchPODCustomizationDetailsResponseDataPodDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPODCustomizationDetailsResponseDataPodDetail(varSearchPODCustomizationDetailsResponseDataPodDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "pod_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPODCustomizationDetailsResponseDataPodDetail struct {

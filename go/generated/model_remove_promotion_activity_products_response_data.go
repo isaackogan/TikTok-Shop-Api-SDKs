@@ -25,7 +25,10 @@ type RemovePromotionActivityProductsResponseData struct {
 	Status *string `json:"status,omitempty"`
 	// The time when the response was generated, as a Unix timestamp in seconds (UTC).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemovePromotionActivityProductsResponseData RemovePromotionActivityProductsResponseData
 
 // NewRemovePromotionActivityProductsResponseData instantiates a new RemovePromotionActivityProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o RemovePromotionActivityProductsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemovePromotionActivityProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRemovePromotionActivityProductsResponseData := _RemovePromotionActivityProductsResponseData{}
+
+	err = json.Unmarshal(data, &varRemovePromotionActivityProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemovePromotionActivityProductsResponseData(varRemovePromotionActivityProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemovePromotionActivityProductsResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ApproveReturnRequest struct {
 	BuyerKeepItem *bool `json:"buyer_keep_item,omitempty"`
 	// **Required** when `decision` is set to `OFFER_PARTIAL_REFUND`. When `partial_refund` is provided, both `amount` and `currency` are required. Omit this field for all other decisions.
 	PartialRefund *PartialRefund `json:"partial_refund,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ApproveReturnRequest ApproveReturnRequest
@@ -154,6 +154,11 @@ func (o ApproveReturnRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PartialRefund) {
 		toSerialize["partial_refund"] = o.PartialRefund
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *ApproveReturnRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varApproveReturnRequest := _ApproveReturnRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varApproveReturnRequest)
+	err = json.Unmarshal(data, &varApproveReturnRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ApproveReturnRequest(varApproveReturnRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decision")
+		delete(additionalProperties, "buyer_keep_item")
+		delete(additionalProperties, "partial_refund")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

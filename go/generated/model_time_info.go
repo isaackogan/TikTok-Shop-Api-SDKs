@@ -23,7 +23,10 @@ type TimeInfo struct {
 	CreateTime *CreateTime `json:"create_time,omitempty"`
 	// Filter based on last update time.
 	UpdateTime *UpdateTime `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TimeInfo TimeInfo
 
 // NewTimeInfo instantiates a new TimeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o TimeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TimeInfo) UnmarshalJSON(data []byte) (err error) {
+	varTimeInfo := _TimeInfo{}
+
+	err = json.Unmarshal(data, &varTimeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TimeInfo(varTimeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTimeInfo struct {

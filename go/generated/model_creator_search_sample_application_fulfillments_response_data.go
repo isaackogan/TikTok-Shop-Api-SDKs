@@ -21,7 +21,10 @@ var _ MappedNullable = &CreatorSearchSampleApplicationFulfillmentsResponseData{}
 type CreatorSearchSampleApplicationFulfillmentsResponseData struct {
 	// Creator fulfillment contents.
 	Fulfillments []CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment `json:"fulfillments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatorSearchSampleApplicationFulfillmentsResponseData CreatorSearchSampleApplicationFulfillmentsResponseData
 
 // NewCreatorSearchSampleApplicationFulfillmentsResponseData instantiates a new CreatorSearchSampleApplicationFulfillmentsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreatorSearchSampleApplicationFulfillmentsResponseData) ToMap() (map[str
 	if !IsNil(o.Fulfillments) {
 		toSerialize["fulfillments"] = o.Fulfillments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatorSearchSampleApplicationFulfillmentsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreatorSearchSampleApplicationFulfillmentsResponseData := _CreatorSearchSampleApplicationFulfillmentsResponseData{}
+
+	err = json.Unmarshal(data, &varCreatorSearchSampleApplicationFulfillmentsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatorSearchSampleApplicationFulfillmentsResponseData(varCreatorSearchSampleApplicationFulfillmentsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fulfillments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatorSearchSampleApplicationFulfillmentsResponseData struct {

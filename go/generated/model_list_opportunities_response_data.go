@@ -21,7 +21,10 @@ var _ MappedNullable = &ListOpportunitiesResponseData{}
 type ListOpportunitiesResponseData struct {
 	// Paginated opportunity results.
 	Data *ListOpportunitiesResponseDataData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListOpportunitiesResponseData ListOpportunitiesResponseData
 
 // NewListOpportunitiesResponseData instantiates a new ListOpportunitiesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ListOpportunitiesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListOpportunitiesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varListOpportunitiesResponseData := _ListOpportunitiesResponseData{}
+
+	err = json.Unmarshal(data, &varListOpportunitiesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListOpportunitiesResponseData(varListOpportunitiesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListOpportunitiesResponseData struct {

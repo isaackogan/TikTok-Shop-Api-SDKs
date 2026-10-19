@@ -26,7 +26,10 @@ type MarkConversationsAsReadResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *MarkConversationsAsReadResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarkConversationsAsReadResponse MarkConversationsAsReadResponse
 
 // NewMarkConversationsAsReadResponse instantiates a new MarkConversationsAsReadResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o MarkConversationsAsReadResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarkConversationsAsReadResponse) UnmarshalJSON(data []byte) (err error) {
+	varMarkConversationsAsReadResponse := _MarkConversationsAsReadResponse{}
+
+	err = json.Unmarshal(data, &varMarkConversationsAsReadResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarkConversationsAsReadResponse(varMarkConversationsAsReadResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarkConversationsAsReadResponse struct {

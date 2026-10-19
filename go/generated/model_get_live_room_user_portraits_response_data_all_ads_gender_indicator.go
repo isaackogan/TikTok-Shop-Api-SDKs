@@ -23,7 +23,10 @@ type GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator struct {
 	Type *string `json:"type,omitempty"`
 	// The count for the corresponding gender indicator.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator
 
 // NewGetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator instantiates a new GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator) ToMap() (map[
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator := _GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator(varGetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicator struct {

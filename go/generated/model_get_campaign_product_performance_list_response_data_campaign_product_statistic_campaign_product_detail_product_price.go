@@ -25,7 +25,10 @@ type GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampai
 	MaxPrice *string `json:"max_price,omitempty"`
 	// The currency code for the maximum and minimum offered price for the product.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice
 
 // NewGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice instantiates a new GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCam
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice := _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice(varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_price")
+		delete(additionalProperties, "max_price")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice struct {

@@ -25,7 +25,10 @@ type BatchShipPackagesResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// Error detail.
 	Detail *BatchShipPackagesResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchShipPackagesResponseDataError BatchShipPackagesResponseDataError
 
 // NewBatchShipPackagesResponseDataError instantiates a new BatchShipPackagesResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o BatchShipPackagesResponseDataError) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchShipPackagesResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varBatchShipPackagesResponseDataError := _BatchShipPackagesResponseDataError{}
+
+	err = json.Unmarshal(data, &varBatchShipPackagesResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchShipPackagesResponseDataError(varBatchShipPackagesResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchShipPackagesResponseDataError struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &ActivateProductsResponseData{}
 type ActivateProductsResponseData struct {
 	// The errors for individual products that could not be activated. Check this list even when the top-level `code` is `0`.
 	Errors []ActivateProductsResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivateProductsResponseData ActivateProductsResponseData
 
 // NewActivateProductsResponseData instantiates a new ActivateProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ActivateProductsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivateProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varActivateProductsResponseData := _ActivateProductsResponseData{}
+
+	err = json.Unmarshal(data, &varActivateProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivateProductsResponseData(varActivateProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivateProductsResponseData struct {

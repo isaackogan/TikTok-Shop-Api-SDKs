@@ -43,7 +43,10 @@ type GetProductResponseDataSkuCombinedSku struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// The title of the source product included in the virtual bundle.
 	Title *string `json:"title,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuCombinedSku GetProductResponseDataSkuCombinedSku
 
 // NewGetProductResponseDataSkuCombinedSku instantiates a new GetProductResponseDataSkuCombinedSku object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o GetProductResponseDataSkuCombinedSku) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Title) {
 		toSerialize["title"] = o.Title
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuCombinedSku) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuCombinedSku := _GetProductResponseDataSkuCombinedSku{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuCombinedSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuCombinedSku(varGetProductResponseDataSkuCombinedSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "brand")
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "combined_listing_not_live_reasons")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_main_image")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sku_count")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "title")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuCombinedSku struct {

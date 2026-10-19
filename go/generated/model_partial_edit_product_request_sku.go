@@ -51,7 +51,10 @@ type PartialEditProductRequestSku struct {
 	SkuUnitCount *string `json:"sku_unit_count,omitempty"`
 	// The packaged weight of the SKU.  Note: - Product package weight is mandatory by default, except for products under Virtual Products categories. This requirement applies to `package_weight`, not `sku_weight`. - Provide the weight measured after packing the SKU. - This value impacts the shipping cost, so ensure that the SKU weight is accurate. Any discrepancies in measurements may lead to additional shipping fees. - The package weight takes precedence over package dimensions in fee calculation if the fee based on weight is higher.
 	SkuWeight *PartialEditProductRequestSkuSkuWeight `json:"sku_weight,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestSku PartialEditProductRequestSku
 
 // NewPartialEditProductRequestSku instantiates a new PartialEditProductRequestSku object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o PartialEditProductRequestSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuWeight) {
 		toSerialize["sku_weight"] = o.SkuWeight
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestSku) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestSku := _PartialEditProductRequestSku{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestSku(varPartialEditProductRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_list_prices")
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "external_urls")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "fees")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "pre_sale")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sku_dimensions")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "sku_weight")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestSku struct {

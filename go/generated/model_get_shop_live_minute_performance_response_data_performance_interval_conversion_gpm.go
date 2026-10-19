@@ -23,7 +23,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm st
 	WatchGpm *string `json:"watch_gpm,omitempty"`
 	// The average GMV generated from 1,000 impressions of the LIVE.
 	ShowGpm *string `json:"show_gpm,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm
 	if !IsNil(o.ShowGpm) {
 		toSerialize["show_gpm"] = o.ShowGpm
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm := _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm(varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "watch_gpm")
+		delete(additionalProperties, "show_gpm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversionGpm struct {

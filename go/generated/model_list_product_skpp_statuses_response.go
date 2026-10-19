@@ -26,7 +26,10 @@ type ListProductSKPPStatusesResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *ListProductSKPPStatusesResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListProductSKPPStatusesResponse ListProductSKPPStatusesResponse
 
 // NewListProductSKPPStatusesResponse instantiates a new ListProductSKPPStatusesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o ListProductSKPPStatusesResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListProductSKPPStatusesResponse) UnmarshalJSON(data []byte) (err error) {
+	varListProductSKPPStatusesResponse := _ListProductSKPPStatusesResponse{}
+
+	err = json.Unmarshal(data, &varListProductSKPPStatusesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListProductSKPPStatusesResponse(varListProductSKPPStatusesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListProductSKPPStatusesResponse struct {

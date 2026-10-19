@@ -29,7 +29,10 @@ type GetDecisionEligibilityResponseDataDecision struct {
 	IneligibleReason *string `json:"ineligible_reason,omitempty"`
 	// The reject reasons available for an eligible reject decision. Each reason includes a name and localized display text.
 	AvailableRejectReasons []AvailableRejectReason `json:"available_reject_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetDecisionEligibilityResponseDataDecision GetDecisionEligibilityResponseDataDecision
 
 // NewGetDecisionEligibilityResponseDataDecision instantiates a new GetDecisionEligibilityResponseDataDecision object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetDecisionEligibilityResponseDataDecision) ToMap() (map[string]interfac
 	if !IsNil(o.AvailableRejectReasons) {
 		toSerialize["available_reject_reasons"] = o.AvailableRejectReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetDecisionEligibilityResponseDataDecision) UnmarshalJSON(data []byte) (err error) {
+	varGetDecisionEligibilityResponseDataDecision := _GetDecisionEligibilityResponseDataDecision{}
+
+	err = json.Unmarshal(data, &varGetDecisionEligibilityResponseDataDecision)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetDecisionEligibilityResponseDataDecision(varGetDecisionEligibilityResponseDataDecision)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decision")
+		delete(additionalProperties, "eligible")
+		delete(additionalProperties, "ineligible_code")
+		delete(additionalProperties, "ineligible_reason")
+		delete(additionalProperties, "available_reject_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetDecisionEligibilityResponseDataDecision struct {

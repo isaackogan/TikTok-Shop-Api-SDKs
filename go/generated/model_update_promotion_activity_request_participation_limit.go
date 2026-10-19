@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdatePromotionActivityRequestParticipationLimit{}
 type UpdatePromotionActivityRequestParticipationLimit struct {
 	// Determines whether the promotion limits how many orders each buyer can receive the benefit from. - `BUYER_NO_LIMIT`: Buyers can receive the benefit across multiple orders. - `BUYER_LIMIT_ONLY_ONE`: Each buyer can receive the benefit for no more than one order.
 	Type string `json:"type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePromotionActivityRequestParticipationLimit UpdatePromotionActivityRequestParticipationLimit
@@ -80,6 +80,11 @@ func (o UpdatePromotionActivityRequestParticipationLimit) MarshalJSON() ([]byte,
 func (o UpdatePromotionActivityRequestParticipationLimit) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdatePromotionActivityRequestParticipationLimit) UnmarshalJSON(data []
 
 	varUpdatePromotionActivityRequestParticipationLimit := _UpdatePromotionActivityRequestParticipationLimit{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePromotionActivityRequestParticipationLimit)
+	err = json.Unmarshal(data, &varUpdatePromotionActivityRequestParticipationLimit)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePromotionActivityRequestParticipationLimit(varUpdatePromotionActivityRequestParticipationLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -35,7 +35,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerforman
 	ShareRate *string `json:"share_rate,omitempty"`
 	// Number of times the LIVE video posted during the selected period were shared.
 	Shares *int64 `json:"shares,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerfor
 	if !IsNil(o.Shares) {
 		toSerialize["shares"] = o.Shares
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "comment_rate")
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "follow_rate")
+		delete(additionalProperties, "like_rate")
+		delete(additionalProperties, "likes")
+		delete(additionalProperties, "new_followers")
+		delete(additionalProperties, "share_rate")
+		delete(additionalProperties, "shares")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance struct {

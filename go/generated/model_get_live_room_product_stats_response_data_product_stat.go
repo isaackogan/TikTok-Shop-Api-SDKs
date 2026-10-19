@@ -53,7 +53,10 @@ type GetLiveRoomProductStatsResponseDataProductStat struct {
 	PaidUserCount *int64 `json:"paid_user_count,omitempty"`
 	// Product paid SKU orders/Product clicks
 	ClickOrderRate *string `json:"click_order_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomProductStatsResponseDataProductStat GetLiveRoomProductStatsResponseDataProductStat
 
 // NewGetLiveRoomProductStatsResponseDataProductStat instantiates a new GetLiveRoomProductStatsResponseDataProductStat object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetLiveRoomProductStatsResponseDataProductStat) ToMap() (map[string]inte
 	if !IsNil(o.ClickOrderRate) {
 		toSerialize["click_order_rate"] = o.ClickOrderRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomProductStatsResponseDataProductStat) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomProductStatsResponseDataProductStat := _GetLiveRoomProductStatsResponseDataProductStat{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomProductStatsResponseDataProductStat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomProductStatsResponseDataProductStat(varGetLiveRoomProductStatsResponseDataProductStat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "is_live")
+		delete(additionalProperties, "click_through_rate")
+		delete(additionalProperties, "sellable_region")
+		delete(additionalProperties, "created_order_count")
+		delete(additionalProperties, "exposure_count")
+		delete(additionalProperties, "total_click_count")
+		delete(additionalProperties, "local_gmv")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "local_unit_price")
+		delete(additionalProperties, "paid_order_count")
+		delete(additionalProperties, "inventory_left_count")
+		delete(additionalProperties, "inventory_consumption_count")
+		delete(additionalProperties, "created_order_user_count")
+		delete(additionalProperties, "paid_user_count")
+		delete(additionalProperties, "click_order_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomProductStatsResponseDataProductStat struct {

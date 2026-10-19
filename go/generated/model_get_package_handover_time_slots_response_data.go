@@ -29,7 +29,10 @@ type GetPackageHandoverTimeSlotsResponseData struct {
 	DropOffPointUrl *string `json:"drop_off_point_url,omitempty"`
 	// Door-to-door collection time slots. Check `avaliable` to determine whether each time slot can be scheduled.
 	PickupSlots []GetPackageHandoverTimeSlotsResponseDataPickupSlot `json:"pickup_slots,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageHandoverTimeSlotsResponseData GetPackageHandoverTimeSlotsResponseData
 
 // NewGetPackageHandoverTimeSlotsResponseData instantiates a new GetPackageHandoverTimeSlotsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetPackageHandoverTimeSlotsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.PickupSlots) {
 		toSerialize["pickup_slots"] = o.PickupSlots
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageHandoverTimeSlotsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageHandoverTimeSlotsResponseData := _GetPackageHandoverTimeSlotsResponseData{}
+
+	err = json.Unmarshal(data, &varGetPackageHandoverTimeSlotsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageHandoverTimeSlotsResponseData(varGetPackageHandoverTimeSlotsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_pickup")
+		delete(additionalProperties, "can_drop_off")
+		delete(additionalProperties, "can_van_collection")
+		delete(additionalProperties, "drop_off_point_url")
+		delete(additionalProperties, "pickup_slots")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageHandoverTimeSlotsResponseData struct {

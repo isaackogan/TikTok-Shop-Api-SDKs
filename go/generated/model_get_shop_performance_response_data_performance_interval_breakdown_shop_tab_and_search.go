@@ -25,7 +25,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch 
 	SearchAttributed *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed `json:"search_attributed,omitempty"`
 	// GMV attributed to shop tab.
 	ShopTabAttributed *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchShopTabAttributed `json:"shop_tab_attributed,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSear
 	if !IsNil(o.ShopTabAttributed) {
 		toSerialize["shop_tab_attributed"] = o.ShopTabAttributed
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch := _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch(varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "others")
+		delete(additionalProperties, "search_attributed")
+		delete(additionalProperties, "shop_tab_attributed")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch struct {

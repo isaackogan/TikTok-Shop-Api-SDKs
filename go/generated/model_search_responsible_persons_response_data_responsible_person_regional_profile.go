@@ -29,7 +29,10 @@ type SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile struct
 	PhoneNumber *SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfilePhoneNumber `json:"phone_number,omitempty"`
 	// The residential address of the responsible person.
 	Address *SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile
 
 // NewSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile instantiates a new SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile) To
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile) UnmarshalJSON(data []byte) (err error) {
+	varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile := _SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile{}
+
+	err = json.Unmarshal(data, &varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile(varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile struct {

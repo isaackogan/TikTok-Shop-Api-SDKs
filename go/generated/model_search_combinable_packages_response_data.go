@@ -25,7 +25,10 @@ type SearchCombinablePackagesResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The number of combinable packages counted by this result.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCombinablePackagesResponseData SearchCombinablePackagesResponseData
 
 // NewSearchCombinablePackagesResponseData instantiates a new SearchCombinablePackagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCombinablePackagesResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCombinablePackagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCombinablePackagesResponseData := _SearchCombinablePackagesResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCombinablePackagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCombinablePackagesResponseData(varSearchCombinablePackagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "combinable_packages")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCombinablePackagesResponseData struct {

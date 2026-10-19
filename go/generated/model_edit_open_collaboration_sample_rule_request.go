@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type EditOpenCollaborationSampleRuleRequest struct {
 	ProductId string `json:"product_id"`
 	// The sample rule settings to apply to the specified product. Use `activate_status` to create, update, or deactivate the rule.
 	SampleRule *EditOpenCollaborationSampleRuleRequestSampleRule `json:"sample_rule,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditOpenCollaborationSampleRuleRequest EditOpenCollaborationSampleRuleRequest
@@ -117,6 +117,11 @@ func (o EditOpenCollaborationSampleRuleRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.SampleRule) {
 		toSerialize["sample_rule"] = o.SampleRule
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *EditOpenCollaborationSampleRuleRequest) UnmarshalJSON(data []byte) (err
 
 	varEditOpenCollaborationSampleRuleRequest := _EditOpenCollaborationSampleRuleRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditOpenCollaborationSampleRuleRequest)
+	err = json.Unmarshal(data, &varEditOpenCollaborationSampleRuleRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditOpenCollaborationSampleRuleRequest(varEditOpenCollaborationSampleRuleRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sample_rule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAgentSettingsResponseData{}
 type GetAgentSettingsResponseData struct {
 	// Whether the current agent can accept chat. If true, the agent will receive auto-assigned chats. The agent can manually select chats to respond.  If false, the agent will receive manually assigned chats only.
 	CanAcceptChat *bool `json:"can_accept_chat,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAgentSettingsResponseData GetAgentSettingsResponseData
 
 // NewGetAgentSettingsResponseData instantiates a new GetAgentSettingsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAgentSettingsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CanAcceptChat) {
 		toSerialize["can_accept_chat"] = o.CanAcceptChat
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAgentSettingsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAgentSettingsResponseData := _GetAgentSettingsResponseData{}
+
+	err = json.Unmarshal(data, &varGetAgentSettingsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAgentSettingsResponseData(varGetAgentSettingsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_accept_chat")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAgentSettingsResponseData struct {

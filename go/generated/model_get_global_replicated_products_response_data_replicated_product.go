@@ -27,7 +27,10 @@ type GetGlobalReplicatedProductsResponseDataReplicatedProduct struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The status of the replicated product. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED
 	ProductStatus *string `json:"product_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalReplicatedProductsResponseDataReplicatedProduct GetGlobalReplicatedProductsResponseDataReplicatedProduct
 
 // NewGetGlobalReplicatedProductsResponseDataReplicatedProduct instantiates a new GetGlobalReplicatedProductsResponseDataReplicatedProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalReplicatedProductsResponseDataReplicatedProduct) ToMap() (map[s
 	if !IsNil(o.ProductStatus) {
 		toSerialize["product_status"] = o.ProductStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalReplicatedProductsResponseDataReplicatedProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalReplicatedProductsResponseDataReplicatedProduct := _GetGlobalReplicatedProductsResponseDataReplicatedProduct{}
+
+	err = json.Unmarshal(data, &varGetGlobalReplicatedProductsResponseDataReplicatedProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalReplicatedProductsResponseDataReplicatedProduct(varGetGlobalReplicatedProductsResponseDataReplicatedProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalReplicatedProductsResponseDataReplicatedProduct struct {

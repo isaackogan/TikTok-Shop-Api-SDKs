@@ -43,7 +43,10 @@ type SearchProductsForComplianceAuditingResponseDataProduct struct {
 	BrandName *string `json:"brand_name,omitempty"`
 	// The category hierarchy of the product.
 	Categories []SearchProductsForComplianceAuditingResponseDataProductCategory `json:"categories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsForComplianceAuditingResponseDataProduct SearchProductsForComplianceAuditingResponseDataProduct
 
 // NewSearchProductsForComplianceAuditingResponseDataProduct instantiates a new SearchProductsForComplianceAuditingResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o SearchProductsForComplianceAuditingResponseDataProduct) ToMap() (map[str
 	if !IsNil(o.Categories) {
 		toSerialize["categories"] = o.Categories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsForComplianceAuditingResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsForComplianceAuditingResponseDataProduct := _SearchProductsForComplianceAuditingResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varSearchProductsForComplianceAuditingResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsForComplianceAuditingResponseDataProduct(varSearchProductsForComplianceAuditingResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "variants")
+		delete(additionalProperties, "listing_url")
+		delete(additionalProperties, "seller_name")
+		delete(additionalProperties, "seller_id")
+		delete(additionalProperties, "main_image_urls")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "brand_name")
+		delete(additionalProperties, "categories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsForComplianceAuditingResponseDataProduct struct {

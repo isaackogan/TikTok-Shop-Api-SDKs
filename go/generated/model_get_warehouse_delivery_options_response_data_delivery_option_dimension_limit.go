@@ -27,7 +27,10 @@ type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit struct 
 	MaxWidth *int64 `json:"max_width,omitempty"`
 	// The unit of measurement for the dimensions, with possible values: - CM - INCH
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit
 
 // NewGetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit instantiates a new GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit) ToM
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit := _GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit{}
+
+	err = json.Unmarshal(data, &varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit(varGetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "max_height")
+		delete(additionalProperties, "max_length")
+		delete(additionalProperties, "max_width")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit struct {

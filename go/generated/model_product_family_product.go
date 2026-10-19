@@ -21,7 +21,10 @@ var _ MappedNullable = &ProductFamilyProduct{}
 type ProductFamilyProduct struct {
 	// The product ID.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductFamilyProduct ProductFamilyProduct
 
 // NewProductFamilyProduct instantiates a new ProductFamilyProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ProductFamilyProduct) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductFamilyProduct) UnmarshalJSON(data []byte) (err error) {
+	varProductFamilyProduct := _ProductFamilyProduct{}
+
+	err = json.Unmarshal(data, &varProductFamilyProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductFamilyProduct(varProductFamilyProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductFamilyProduct struct {

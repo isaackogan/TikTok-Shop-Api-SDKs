@@ -27,7 +27,10 @@ type CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSal
 	ValueId *string `json:"value_id,omitempty"`
 	// The SKU property value name.
 	ValueName *string `json:"value_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty
 
 // NewCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty instantiates a new CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty := _CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty{}
+
+	err = json.Unmarshal(data, &varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty(varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty struct {

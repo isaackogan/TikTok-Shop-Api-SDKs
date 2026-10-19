@@ -23,7 +23,10 @@ type GetGlobalListingRulesResponseData struct {
 	ListingMethods []string `json:"listing_methods,omitempty"`
 	// A list of inventory allocation rules for all warehouses linked to the shop.
 	InventoryRules []GetGlobalListingRulesResponseDataInventoryRule `json:"inventory_rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalListingRulesResponseData GetGlobalListingRulesResponseData
 
 // NewGetGlobalListingRulesResponseData instantiates a new GetGlobalListingRulesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalListingRulesResponseData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.InventoryRules) {
 		toSerialize["inventory_rules"] = o.InventoryRules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalListingRulesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalListingRulesResponseData := _GetGlobalListingRulesResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalListingRulesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalListingRulesResponseData(varGetGlobalListingRulesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "listing_methods")
+		delete(additionalProperties, "inventory_rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalListingRulesResponseData struct {

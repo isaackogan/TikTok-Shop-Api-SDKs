@@ -23,7 +23,10 @@ type CountryDistribution struct {
 	CountryCode *string `json:"country_code,omitempty"`
 	// Proportion for the corresponding country within this viewer profile, expressed as a decimal fraction.
 	Percentage *string `json:"percentage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CountryDistribution CountryDistribution
 
 // NewCountryDistribution instantiates a new CountryDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CountryDistribution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CountryDistribution) UnmarshalJSON(data []byte) (err error) {
+	varCountryDistribution := _CountryDistribution{}
+
+	err = json.Unmarshal(data, &varCountryDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CountryDistribution(varCountryDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "percentage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCountryDistribution struct {

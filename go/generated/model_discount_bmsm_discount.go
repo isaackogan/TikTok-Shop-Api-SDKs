@@ -21,7 +21,10 @@ var _ MappedNullable = &DiscountBmsmDiscount{}
 type DiscountBmsmDiscount struct {
 	// Configurations for Buy More Save More tiers. Provide one or two tiers. `threshold_type` and `type` must be the same across all tiers.
 	Details []CreatePromotionActivityRequestDiscountBmsmDiscountDetail `json:"details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiscountBmsmDiscount DiscountBmsmDiscount
 
 // NewDiscountBmsmDiscount instantiates a new DiscountBmsmDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DiscountBmsmDiscount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiscountBmsmDiscount) UnmarshalJSON(data []byte) (err error) {
+	varDiscountBmsmDiscount := _DiscountBmsmDiscount{}
+
+	err = json.Unmarshal(data, &varDiscountBmsmDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiscountBmsmDiscount(varDiscountBmsmDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiscountBmsmDiscount struct {

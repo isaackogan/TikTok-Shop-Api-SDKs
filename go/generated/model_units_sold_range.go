@@ -25,7 +25,10 @@ type UnitsSoldRange struct {
 	MaximumAmount *int64 `json:"maximum_amount,omitempty"`
 	// The formatted range of minimum number of units sold to maximum number of units sold over the lifetime of the creator account.
 	FormattedRange *string `json:"formatted_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnitsSoldRange UnitsSoldRange
 
 // NewUnitsSoldRange instantiates a new UnitsSoldRange object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UnitsSoldRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FormattedRange) {
 		toSerialize["formatted_range"] = o.FormattedRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnitsSoldRange) UnmarshalJSON(data []byte) (err error) {
+	varUnitsSoldRange := _UnitsSoldRange{}
+
+	err = json.Unmarshal(data, &varUnitsSoldRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnitsSoldRange(varUnitsSoldRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "formatted_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnitsSoldRange struct {

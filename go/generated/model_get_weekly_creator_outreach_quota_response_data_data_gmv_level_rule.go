@@ -29,7 +29,10 @@ type GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule struct {
 	RightGmv *GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv `json:"right_gmv,omitempty"`
 	// Creator-level quota detail rules
 	QuotaDetails []GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleQuotaDetail `json:"quota_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule
 
 // NewGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule instantiates a new GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule) ToMap() (map[
 	if !IsNil(o.QuotaDetails) {
 		toSerialize["quota_details"] = o.QuotaDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule := _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule(varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reached_max_follower_cnt")
+		delete(additionalProperties, "gmv_tier")
+		delete(additionalProperties, "left_gmv")
+		delete(additionalProperties, "right_gmv")
+		delete(additionalProperties, "quota_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule struct {

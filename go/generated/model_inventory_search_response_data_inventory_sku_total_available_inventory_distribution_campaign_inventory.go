@@ -23,7 +23,10 @@ type InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionC
 	Quantity *int64 `json:"quantity,omitempty"`
 	// The name of the associated campaign.
 	CampaignName *string `json:"campaign_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory
 
 // NewInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory instantiates a new InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributi
 	if !IsNil(o.CampaignName) {
 		toSerialize["campaign_name"] = o.CampaignName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory := _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory(varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "campaign_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory struct {

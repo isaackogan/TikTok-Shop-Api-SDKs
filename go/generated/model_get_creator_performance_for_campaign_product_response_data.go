@@ -25,7 +25,10 @@ type GetCreatorPerformanceForCampaignProductResponseData struct {
 	PromotionCreators []GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator `json:"promotion_creators,omitempty"`
 	// Opaque token for retrieving the next page. When this value is non-empty, pass it as the `page_token` query parameter in the next request and reuse the same `campaign_id`, `product_id`, and `page_size`. An empty token means there are no more results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorPerformanceForCampaignProductResponseData GetCreatorPerformanceForCampaignProductResponseData
 
 // NewGetCreatorPerformanceForCampaignProductResponseData instantiates a new GetCreatorPerformanceForCampaignProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCreatorPerformanceForCampaignProductResponseData) ToMap() (map[string
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorPerformanceForCampaignProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorPerformanceForCampaignProductResponseData := _GetCreatorPerformanceForCampaignProductResponseData{}
+
+	err = json.Unmarshal(data, &varGetCreatorPerformanceForCampaignProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorPerformanceForCampaignProductResponseData(varGetCreatorPerformanceForCampaignProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_creator_count")
+		delete(additionalProperties, "promotion_creators")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorPerformanceForCampaignProductResponseData struct {

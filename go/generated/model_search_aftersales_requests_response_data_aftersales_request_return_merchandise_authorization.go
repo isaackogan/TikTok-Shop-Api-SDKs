@@ -29,7 +29,10 @@ type SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAutho
 	Status *string `json:"status,omitempty"`
 	// List of items associated with this return merchandise authorization (RMA).
 	LineItems []LineItem `json:"line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization
 
 // NewSearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization instantiates a new SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAu
 	if !IsNil(o.LineItems) {
 		toSerialize["line_items"] = o.LineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization := _SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization(varSearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "aftersales_request_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization struct {

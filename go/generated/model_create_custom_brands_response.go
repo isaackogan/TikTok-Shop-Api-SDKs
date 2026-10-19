@@ -26,7 +26,10 @@ type CreateCustomBrandsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateCustomBrandsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCustomBrandsResponse CreateCustomBrandsResponse
 
 // NewCreateCustomBrandsResponse instantiates a new CreateCustomBrandsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateCustomBrandsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCustomBrandsResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateCustomBrandsResponse := _CreateCustomBrandsResponse{}
+
+	err = json.Unmarshal(data, &varCreateCustomBrandsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCustomBrandsResponse(varCreateCustomBrandsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCustomBrandsResponse struct {

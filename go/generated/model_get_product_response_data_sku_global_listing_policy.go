@@ -25,7 +25,10 @@ type GetProductResponseDataSkuGlobalListingPolicy struct {
 	PriceSync *bool `json:"price_sync,omitempty"`
 	// The source global listing product to synchronize from.
 	ReplicateSource *GetProductResponseDataSkuGlobalListingPolicyReplicateSource `json:"replicate_source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuGlobalListingPolicy GetProductResponseDataSkuGlobalListingPolicy
 
 // NewGetProductResponseDataSkuGlobalListingPolicy instantiates a new GetProductResponseDataSkuGlobalListingPolicy object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataSkuGlobalListingPolicy) ToMap() (map[string]interf
 	if !IsNil(o.ReplicateSource) {
 		toSerialize["replicate_source"] = o.ReplicateSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuGlobalListingPolicy) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuGlobalListingPolicy := _GetProductResponseDataSkuGlobalListingPolicy{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuGlobalListingPolicy)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuGlobalListingPolicy(varGetProductResponseDataSkuGlobalListingPolicy)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory_type")
+		delete(additionalProperties, "price_sync")
+		delete(additionalProperties, "replicate_source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuGlobalListingPolicy struct {

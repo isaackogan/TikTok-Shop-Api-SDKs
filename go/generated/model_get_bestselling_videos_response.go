@@ -26,7 +26,10 @@ type GetBestsellingVideosResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetBestsellingVideosResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingVideosResponse GetBestsellingVideosResponse
 
 // NewGetBestsellingVideosResponse instantiates a new GetBestsellingVideosResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetBestsellingVideosResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingVideosResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingVideosResponse := _GetBestsellingVideosResponse{}
+
+	err = json.Unmarshal(data, &varGetBestsellingVideosResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingVideosResponse(varGetBestsellingVideosResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingVideosResponse struct {

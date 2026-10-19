@@ -26,7 +26,10 @@ type GetActivityResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetActivityResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponse GetActivityResponse
 
 // NewGetActivityResponse instantiates a new GetActivityResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetActivityResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponse := _GetActivityResponse{}
+
+	err = json.Unmarshal(data, &varGetActivityResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponse(varGetActivityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponse struct {

@@ -33,7 +33,10 @@ type GetGlobalCategoryRulesResponseDataProductCertification struct {
 	OptionalRegions []string `json:"optional_regions,omitempty"`
 	// A list of conditions that determine if the certification is required in a market based on the seller's inputs for a product attribute. If any of the conditions is met, the certification is required; otherwise, it is optional.  For example, there's a condition that states that the \"Safety Data Sheet (SDS) for flammable materials\" certification is required if the seller selects the value \"Yes\" for the attribute \"Flammable Liquid?\". For more scenario-based guidance on using this parameter, refer to the [Solution Guide](https://partner.tiktokshop.com/openlearn/guide/usecase?parent_id=7256668359046153985).  Applicable only if `optional_regions` is not empty.
 	RequirementConditions []GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition `json:"requirement_conditions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoryRulesResponseDataProductCertification GetGlobalCategoryRulesResponseDataProductCertification
 
 // NewGetGlobalCategoryRulesResponseDataProductCertification instantiates a new GetGlobalCategoryRulesResponseDataProductCertification object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetGlobalCategoryRulesResponseDataProductCertification) ToMap() (map[str
 	if !IsNil(o.RequirementConditions) {
 		toSerialize["requirement_conditions"] = o.RequirementConditions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoryRulesResponseDataProductCertification) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoryRulesResponseDataProductCertification := _GetGlobalCategoryRulesResponseDataProductCertification{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoryRulesResponseDataProductCertification)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoryRulesResponseDataProductCertification(varGetGlobalCategoryRulesResponseDataProductCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "sample_image_url")
+		delete(additionalProperties, "required_regions")
+		delete(additionalProperties, "optional_regions")
+		delete(additionalProperties, "requirement_conditions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoryRulesResponseDataProductCertification struct {

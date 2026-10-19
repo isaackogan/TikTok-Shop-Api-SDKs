@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PartialEditProductRequestReplicatedProduct struct {
 	Region string `json:"region"`
 	// The SKUs to be synced to the specified market. Specify this **only if** you are adding SKUs or changing the sales attribute id/name. **Note**: - You must pass in all existing SKUs. Any existing SKU IDs not listed here will result in the deletion of those SKUs. For example, if this product contains 5 SKUs and you only provide 2 SKU IDs, the remaining 3 will be deleted. - To create new SKUs, leave the SKU ID blank and provide the seller_sku.
 	Skus []PartialEditProductRequestReplicatedProductSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestReplicatedProduct PartialEditProductRequestReplicatedProduct
@@ -154,6 +154,11 @@ func (o PartialEditProductRequestReplicatedProduct) ToMap() (map[string]interfac
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *PartialEditProductRequestReplicatedProduct) UnmarshalJSON(data []byte) 
 
 	varPartialEditProductRequestReplicatedProduct := _PartialEditProductRequestReplicatedProduct{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestReplicatedProduct)
+	err = json.Unmarshal(data, &varPartialEditProductRequestReplicatedProduct)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestReplicatedProduct(varPartialEditProductRequestReplicatedProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory_mode")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

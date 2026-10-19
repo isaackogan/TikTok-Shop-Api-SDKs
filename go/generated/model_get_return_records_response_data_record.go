@@ -35,7 +35,10 @@ type GetReturnRecordsResponseDataRecord struct {
 	Videos []GetReturnRecordsResponseDataRecordVideo `json:"videos,omitempty"`
 	// The Unix timestamp, in seconds, when this record entry was created.
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReturnRecordsResponseDataRecord GetReturnRecordsResponseDataRecord
 
 // NewGetReturnRecordsResponseDataRecord instantiates a new GetReturnRecordsResponseDataRecord object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetReturnRecordsResponseDataRecord) ToMap() (map[string]interface{}, err
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReturnRecordsResponseDataRecord) UnmarshalJSON(data []byte) (err error) {
+	varGetReturnRecordsResponseDataRecord := _GetReturnRecordsResponseDataRecord{}
+
+	err = json.Unmarshal(data, &varGetReturnRecordsResponseDataRecord)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReturnRecordsResponseDataRecord(varGetReturnRecordsResponseDataRecord)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "reason_text")
+		delete(additionalProperties, "note")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "videos")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReturnRecordsResponseDataRecord struct {

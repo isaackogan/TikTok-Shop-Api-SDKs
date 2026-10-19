@@ -37,7 +37,10 @@ type SearchPackageResponseDataPackage struct {
 	ShippingProviderId *string `json:"shipping_provider_id,omitempty"`
 	// The order line item ID contained in the package.
 	OrderLineItemIds []string `json:"order_line_item_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPackageResponseDataPackage SearchPackageResponseDataPackage
 
 // NewSearchPackageResponseDataPackage instantiates a new SearchPackageResponseDataPackage object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchPackageResponseDataPackage) ToMap() (map[string]interface{}, error
 	if !IsNil(o.OrderLineItemIds) {
 		toSerialize["order_line_item_ids"] = o.OrderLineItemIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPackageResponseDataPackage) UnmarshalJSON(data []byte) (err error) {
+	varSearchPackageResponseDataPackage := _SearchPackageResponseDataPackage{}
+
+	err = json.Unmarshal(data, &varSearchPackageResponseDataPackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPackageResponseDataPackage(varSearchPackageResponseDataPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "order_line_item_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPackageResponseDataPackage struct {

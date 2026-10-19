@@ -37,7 +37,10 @@ type SearchProductsResponseDataProductSku struct {
 	StatusInfo *SearchProductsResponseDataProductSkuStatusInfo `json:"status_info,omitempty"`
 	// The fees required for this product based on TikTok Shop policies. Fees are required only for certain product categories, retrieve the requirements from the [Get Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
 	Fees []Fee `json:"fees,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductSku SearchProductsResponseDataProductSku
 
 // NewSearchProductsResponseDataProductSku instantiates a new SearchProductsResponseDataProductSku object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchProductsResponseDataProductSku) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Fees) {
 		toSerialize["fees"] = o.Fees
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductSku) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductSku := _SearchProductsResponseDataProductSku{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductSku(varSearchProductsResponseDataProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "external_list_prices")
+		delete(additionalProperties, "pre_sale")
+		delete(additionalProperties, "status_info")
+		delete(additionalProperties, "fees")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductSku struct {

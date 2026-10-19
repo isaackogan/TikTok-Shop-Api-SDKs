@@ -27,7 +27,10 @@ type GetGlobalCategoryRulesResponseData struct {
 	ResponsiblePerson *GetGlobalCategoryRulesResponseDataResponsiblePerson `json:"responsible_person,omitempty"`
 	// Manufacturer rules. If this is empty, it means a manufacturer is not required for this category.  Applicable only for EU markets.
 	Manufacturer *GetGlobalCategoryRulesResponseDataManufacturer `json:"manufacturer,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoryRulesResponseData GetGlobalCategoryRulesResponseData
 
 // NewGetGlobalCategoryRulesResponseData instantiates a new GetGlobalCategoryRulesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalCategoryRulesResponseData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Manufacturer) {
 		toSerialize["manufacturer"] = o.Manufacturer
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoryRulesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoryRulesResponseData := _GetGlobalCategoryRulesResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoryRulesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoryRulesResponseData(varGetGlobalCategoryRulesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_certifications")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "responsible_person")
+		delete(additionalProperties, "manufacturer")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoryRulesResponseData struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetMarketplaceCreatorPerformanceResponseData{}
 type GetMarketplaceCreatorPerformanceResponseData struct {
 	// Data associated with the creator's TikTok profile.
 	Creator *GetMarketplaceCreatorPerformanceResponseDataCreator `json:"creator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseData GetMarketplaceCreatorPerformanceResponseData
 
 // NewGetMarketplaceCreatorPerformanceResponseData instantiates a new GetMarketplaceCreatorPerformanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetMarketplaceCreatorPerformanceResponseData) ToMap() (map[string]interf
 	if !IsNil(o.Creator) {
 		toSerialize["creator"] = o.Creator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseData := _GetMarketplaceCreatorPerformanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseData(varGetMarketplaceCreatorPerformanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseData struct {

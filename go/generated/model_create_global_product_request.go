@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -58,6 +57,7 @@ type CreateGlobalProductRequest struct {
 	SourceLocale *string `json:"source_locale,omitempty"`
 	// An external identifier used in an external ecommerce platform. This is used to associate the global product between TikTok Shop and the external ecommerce platform.  Max length: 999 characters
 	ExternalGlobalProductId *string `json:"external_global_product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGlobalProductRequest CreateGlobalProductRequest
@@ -668,6 +668,11 @@ func (o CreateGlobalProductRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalGlobalProductId) {
 		toSerialize["external_global_product_id"] = o.ExternalGlobalProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -700,15 +705,37 @@ func (o *CreateGlobalProductRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateGlobalProductRequest := _CreateGlobalProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGlobalProductRequest)
+	err = json.Unmarshal(data, &varCreateGlobalProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGlobalProductRequest(varCreateGlobalProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "source_locale")
+		delete(additionalProperties, "external_global_product_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

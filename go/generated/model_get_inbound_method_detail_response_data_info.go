@@ -25,7 +25,10 @@ type GetInboundMethodDetailResponseDataInfo struct {
 	PlacementOptionId *string `json:"placement_option_id,omitempty"`
 	// Estimated placement fee for a `ONE_HUB` placement option.
 	PlacementFeeEstimate *GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate `json:"placement_fee_estimate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfo GetInboundMethodDetailResponseDataInfo
 
 // NewGetInboundMethodDetailResponseDataInfo instantiates a new GetInboundMethodDetailResponseDataInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetInboundMethodDetailResponseDataInfo) ToMap() (map[string]interface{},
 	if !IsNil(o.PlacementFeeEstimate) {
 		toSerialize["placement_fee_estimate"] = o.PlacementFeeEstimate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfo := _GetInboundMethodDetailResponseDataInfo{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfo(varGetInboundMethodDetailResponseDataInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "allocation_shipments")
+		delete(additionalProperties, "placement_option_id")
+		delete(additionalProperties, "placement_fee_estimate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfo struct {

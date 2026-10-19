@@ -26,7 +26,10 @@ type QueryTargetCollaborationDetailResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *QueryTargetCollaborationDetailResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponse QueryTargetCollaborationDetailResponse
 
 // NewQueryTargetCollaborationDetailResponse instantiates a new QueryTargetCollaborationDetailResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o QueryTargetCollaborationDetailResponse) ToMap() (map[string]interface{},
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponse) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponse := _QueryTargetCollaborationDetailResponse{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponse(varQueryTargetCollaborationDetailResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponse struct {

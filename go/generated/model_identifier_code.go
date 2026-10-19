@@ -23,7 +23,10 @@ type IdentifierCode struct {
 	Code *string `json:"code,omitempty"`
 	// The type of identifier code. Possible values: - GTIN - EAN - UPC - ISBN - JAN
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _IdentifierCode IdentifierCode
 
 // NewIdentifierCode instantiates a new IdentifierCode object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o IdentifierCode) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *IdentifierCode) UnmarshalJSON(data []byte) (err error) {
+	varIdentifierCode := _IdentifierCode{}
+
+	err = json.Unmarshal(data, &varIdentifierCode)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IdentifierCode(varIdentifierCode)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableIdentifierCode struct {

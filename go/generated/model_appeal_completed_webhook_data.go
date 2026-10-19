@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &AppealCompletedWebhookData{}
 type AppealCompletedWebhookData struct {
 	AppealTask AppealCompletedWebhookDataAppealTask `json:"appeal_task"`
 	ProductId int64 `json:"product_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppealCompletedWebhookData AppealCompletedWebhookData
@@ -106,6 +106,11 @@ func (o AppealCompletedWebhookData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["appeal_task"] = o.AppealTask
 	toSerialize["product_id"] = o.ProductId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -134,15 +139,21 @@ func (o *AppealCompletedWebhookData) UnmarshalJSON(data []byte) (err error) {
 
 	varAppealCompletedWebhookData := _AppealCompletedWebhookData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppealCompletedWebhookData)
+	err = json.Unmarshal(data, &varAppealCompletedWebhookData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppealCompletedWebhookData(varAppealCompletedWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "appeal_task")
+		delete(additionalProperties, "product_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

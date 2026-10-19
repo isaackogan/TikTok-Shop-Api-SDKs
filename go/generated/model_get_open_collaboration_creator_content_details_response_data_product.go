@@ -23,7 +23,10 @@ type GetOpenCollaborationCreatorContentDetailsResponseDataProduct struct {
 	Id *string `json:"id,omitempty"`
 	// The product image url.
 	ImageUrl *string `json:"image_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationCreatorContentDetailsResponseDataProduct GetOpenCollaborationCreatorContentDetailsResponseDataProduct
 
 // NewGetOpenCollaborationCreatorContentDetailsResponseDataProduct instantiates a new GetOpenCollaborationCreatorContentDetailsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetOpenCollaborationCreatorContentDetailsResponseDataProduct) ToMap() (m
 	if !IsNil(o.ImageUrl) {
 		toSerialize["image_url"] = o.ImageUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationCreatorContentDetailsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationCreatorContentDetailsResponseDataProduct := _GetOpenCollaborationCreatorContentDetailsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationCreatorContentDetailsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationCreatorContentDetailsResponseDataProduct(varGetOpenCollaborationCreatorContentDetailsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "image_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationCreatorContentDetailsResponseDataProduct struct {

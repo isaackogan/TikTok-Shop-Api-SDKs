@@ -31,7 +31,10 @@ type SearchReturnMerchandiseAuthorizationsRequestFilter struct {
 	MainOrderIds []string `json:"main_order_ids,omitempty"`
 	// Time-based filtering criteria.
 	Time *TimeInfo `json:"time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnMerchandiseAuthorizationsRequestFilter SearchReturnMerchandiseAuthorizationsRequestFilter
 
 // NewSearchReturnMerchandiseAuthorizationsRequestFilter instantiates a new SearchReturnMerchandiseAuthorizationsRequestFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchReturnMerchandiseAuthorizationsRequestFilter) ToMap() (map[string]
 	if !IsNil(o.Time) {
 		toSerialize["time"] = o.Time
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnMerchandiseAuthorizationsRequestFilter) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnMerchandiseAuthorizationsRequestFilter := _SearchReturnMerchandiseAuthorizationsRequestFilter{}
+
+	err = json.Unmarshal(data, &varSearchReturnMerchandiseAuthorizationsRequestFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnMerchandiseAuthorizationsRequestFilter(varSearchReturnMerchandiseAuthorizationsRequestFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rma_ids")
+		delete(additionalProperties, "package_ids")
+		delete(additionalProperties, "statuses")
+		delete(additionalProperties, "aftersales_request_ids")
+		delete(additionalProperties, "main_order_ids")
+		delete(additionalProperties, "time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnMerchandiseAuthorizationsRequestFilter struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type RejectCancellationRequest struct {
 	Comment *string `json:"comment,omitempty"`
 	// List of images provided by the seller to support seller's decision to reject the order cancellation request.
 	Images []RejectCancellationRequestImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RejectCancellationRequest RejectCancellationRequest
@@ -154,6 +154,11 @@ func (o RejectCancellationRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *RejectCancellationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRejectCancellationRequest := _RejectCancellationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRejectCancellationRequest)
+	err = json.Unmarshal(data, &varRejectCancellationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RejectCancellationRequest(varRejectCancellationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reject_reason")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

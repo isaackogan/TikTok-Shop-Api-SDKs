@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type UpdateInboundOrderTrackingRequest struct {
 	OrderId string `json:"order_id"`
 	// Carton-level parcel tracking information for the inbound order, including carton number, logistics provider name, and tracking number.
 	ParcelTrackingInfo []UpdateInboundOrderTrackingRequestParcelTrackingInfo `json:"parcel_tracking_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateInboundOrderTrackingRequest UpdateInboundOrderTrackingRequest
@@ -117,6 +117,11 @@ func (o UpdateInboundOrderTrackingRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.ParcelTrackingInfo) {
 		toSerialize["parcel_tracking_info"] = o.ParcelTrackingInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *UpdateInboundOrderTrackingRequest) UnmarshalJSON(data []byte) (err erro
 
 	varUpdateInboundOrderTrackingRequest := _UpdateInboundOrderTrackingRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateInboundOrderTrackingRequest)
+	err = json.Unmarshal(data, &varUpdateInboundOrderTrackingRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateInboundOrderTrackingRequest(varUpdateInboundOrderTrackingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "parcel_tracking_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

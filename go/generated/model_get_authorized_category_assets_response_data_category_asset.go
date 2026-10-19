@@ -25,7 +25,10 @@ type GetAuthorizedCategoryAssetsResponseDataCategoryAsset struct {
 	TargetMarket *string `json:"target_market,omitempty"`
 	// The business category information.
 	Category *GetAuthorizedCategoryAssetsResponseDataCategoryAssetCategory `json:"category,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAuthorizedCategoryAssetsResponseDataCategoryAsset GetAuthorizedCategoryAssetsResponseDataCategoryAsset
 
 // NewGetAuthorizedCategoryAssetsResponseDataCategoryAsset instantiates a new GetAuthorizedCategoryAssetsResponseDataCategoryAsset object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAuthorizedCategoryAssetsResponseDataCategoryAsset) ToMap() (map[strin
 	if !IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAuthorizedCategoryAssetsResponseDataCategoryAsset) UnmarshalJSON(data []byte) (err error) {
+	varGetAuthorizedCategoryAssetsResponseDataCategoryAsset := _GetAuthorizedCategoryAssetsResponseDataCategoryAsset{}
+
+	err = json.Unmarshal(data, &varGetAuthorizedCategoryAssetsResponseDataCategoryAsset)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAuthorizedCategoryAssetsResponseDataCategoryAsset(varGetAuthorizedCategoryAssetsResponseDataCategoryAsset)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cipher")
+		delete(additionalProperties, "target_market")
+		delete(additionalProperties, "category")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAuthorizedCategoryAssetsResponseDataCategoryAsset struct {

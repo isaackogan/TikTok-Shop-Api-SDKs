@@ -31,7 +31,10 @@ type CombinedListingChangeWebhookData struct {
 	AddedProductIds []string `json:"added_product_ids,omitempty"`
 	// The list of products that were removed from the combined listing.
 	RemovedProductIds []string `json:"removed_product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CombinedListingChangeWebhookData CombinedListingChangeWebhookData
 
 // NewCombinedListingChangeWebhookData instantiates a new CombinedListingChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o CombinedListingChangeWebhookData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.RemovedProductIds) {
 		toSerialize["removed_product_ids"] = o.RemovedProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CombinedListingChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varCombinedListingChangeWebhookData := _CombinedListingChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varCombinedListingChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CombinedListingChangeWebhookData(varCombinedListingChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "combined_listing_id")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "change_type")
+		delete(additionalProperties, "added_product_ids")
+		delete(additionalProperties, "removed_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCombinedListingChangeWebhookData struct {

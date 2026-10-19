@@ -23,7 +23,10 @@ type GetBestsellingVideosResponseDataVideoProductInfo struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// Product name in the product anchor. Deactivated and sold-out products are excluded.
 	ProductName *string `json:"product_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingVideosResponseDataVideoProductInfo GetBestsellingVideosResponseDataVideoProductInfo
 
 // NewGetBestsellingVideosResponseDataVideoProductInfo instantiates a new GetBestsellingVideosResponseDataVideoProductInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetBestsellingVideosResponseDataVideoProductInfo) ToMap() (map[string]in
 	if !IsNil(o.ProductName) {
 		toSerialize["product_name"] = o.ProductName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingVideosResponseDataVideoProductInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingVideosResponseDataVideoProductInfo := _GetBestsellingVideosResponseDataVideoProductInfo{}
+
+	err = json.Unmarshal(data, &varGetBestsellingVideosResponseDataVideoProductInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingVideosResponseDataVideoProductInfo(varGetBestsellingVideosResponseDataVideoProductInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingVideosResponseDataVideoProductInfo struct {

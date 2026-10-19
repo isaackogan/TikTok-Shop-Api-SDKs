@@ -27,7 +27,10 @@ type PackageUpdateWebhookData struct {
 	PackageList []PackageUpdateWebhookDataPackageList `json:"package_list,omitempty"`
 	// The time when the package was updated, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageUpdateWebhookData PackageUpdateWebhookData
 
 // NewPackageUpdateWebhookData instantiates a new PackageUpdateWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o PackageUpdateWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageUpdateWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varPackageUpdateWebhookData := _PackageUpdateWebhookData{}
+
+	err = json.Unmarshal(data, &varPackageUpdateWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageUpdateWebhookData(varPackageUpdateWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sc_type")
+		delete(additionalProperties, "role_type")
+		delete(additionalProperties, "package_list")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageUpdateWebhookData struct {

@@ -27,7 +27,10 @@ type SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscou
 	ShippingFeePlatformDiscount *string `json:"shipping_fee_platform_discount,omitempty"`
 	// The refund amount of shipping fee seller discount.
 	ShippingFeeSellerDiscount *string `json:"shipping_fee_seller_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount
 
 // NewSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount instantiates a new SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDis
 	if !IsNil(o.ShippingFeeSellerDiscount) {
 		toSerialize["shipping_fee_seller_discount"] = o.ShippingFeeSellerDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount := _SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount(varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_platform_discount")
+		delete(additionalProperties, "product_seller_discount")
+		delete(additionalProperties, "shipping_fee_platform_discount")
+		delete(additionalProperties, "shipping_fee_seller_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount struct {

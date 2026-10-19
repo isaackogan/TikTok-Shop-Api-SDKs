@@ -25,7 +25,10 @@ type GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountR
 	MaxAmount *string `json:"max_amount,omitempty"`
 	// The currency of the partial refund amount range, matching the currency of the current return request.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange
 
 // NewGetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange instantiates a new GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmou
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange) UnmarshalJSON(data []byte) (err error) {
+	varGetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange := _GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange{}
+
+	err = json.Unmarshal(data, &varGetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange(varGetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_amount")
+		delete(additionalProperties, "max_amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange struct {

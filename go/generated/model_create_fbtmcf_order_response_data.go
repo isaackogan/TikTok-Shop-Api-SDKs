@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateFBTMCFOrderResponseData{}
 type CreateFBTMCFOrderResponseData struct {
 	// Information about the successfully created MCF order. On a successful response, this object contains `mcf_order_id`, `external_order_id`, and `create_time`.
 	McfOrder *CreateFBTMCFOrderResponseDataMcfOrder `json:"mcf_order,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFBTMCFOrderResponseData CreateFBTMCFOrderResponseData
 
 // NewCreateFBTMCFOrderResponseData instantiates a new CreateFBTMCFOrderResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateFBTMCFOrderResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.McfOrder) {
 		toSerialize["mcf_order"] = o.McfOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFBTMCFOrderResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateFBTMCFOrderResponseData := _CreateFBTMCFOrderResponseData{}
+
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFBTMCFOrderResponseData(varCreateFBTMCFOrderResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mcf_order")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFBTMCFOrderResponseData struct {

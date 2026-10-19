@@ -27,7 +27,10 @@ type FBTInventoryUpdateWebhookData struct {
 	FbtWarehouseInventory []FBTInventoryUpdateWebhookDataFbtWarehouseInventory `json:"fbt_warehouse_inventory,omitempty"`
 	// The time when the action occurred. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FBTInventoryUpdateWebhookData FBTInventoryUpdateWebhookData
 
 // NewFBTInventoryUpdateWebhookData instantiates a new FBTInventoryUpdateWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o FBTInventoryUpdateWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FBTInventoryUpdateWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varFBTInventoryUpdateWebhookData := _FBTInventoryUpdateWebhookData{}
+
+	err = json.Unmarshal(data, &varFBTInventoryUpdateWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FBTInventoryUpdateWebhookData(varFBTInventoryUpdateWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "fbt_warehouse_inventory")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFBTInventoryUpdateWebhookData struct {

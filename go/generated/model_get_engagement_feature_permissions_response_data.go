@@ -21,7 +21,10 @@ var _ MappedNullable = &GetEngagementFeaturePermissionsResponseData{}
 type GetEngagementFeaturePermissionsResponseData struct {
 	// The list of customer engagement features that has access control.
 	Features []GetEngagementFeaturePermissionsResponseDataFeature `json:"features,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEngagementFeaturePermissionsResponseData GetEngagementFeaturePermissionsResponseData
 
 // NewGetEngagementFeaturePermissionsResponseData instantiates a new GetEngagementFeaturePermissionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetEngagementFeaturePermissionsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.Features) {
 		toSerialize["features"] = o.Features
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEngagementFeaturePermissionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetEngagementFeaturePermissionsResponseData := _GetEngagementFeaturePermissionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetEngagementFeaturePermissionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEngagementFeaturePermissionsResponseData(varGetEngagementFeaturePermissionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "features")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEngagementFeaturePermissionsResponseData struct {

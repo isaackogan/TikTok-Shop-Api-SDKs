@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SubmitStrikethroughPriceRequestSkuExternalRetailPrice struct {
 	Amount string `json:"amount"`
 	// The ISO 4217 currency code. The supported value is `USD`.
 	Currency string `json:"currency"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitStrikethroughPriceRequestSkuExternalRetailPrice SubmitStrikethroughPriceRequestSkuExternalRetailPrice
@@ -108,6 +108,11 @@ func (o SubmitStrikethroughPriceRequestSkuExternalRetailPrice) ToMap() (map[stri
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["currency"] = o.Currency
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SubmitStrikethroughPriceRequestSkuExternalRetailPrice) UnmarshalJSON(da
 
 	varSubmitStrikethroughPriceRequestSkuExternalRetailPrice := _SubmitStrikethroughPriceRequestSkuExternalRetailPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitStrikethroughPriceRequestSkuExternalRetailPrice)
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceRequestSkuExternalRetailPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitStrikethroughPriceRequestSkuExternalRetailPrice(varSubmitStrikethroughPriceRequestSkuExternalRetailPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

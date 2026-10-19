@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &MoveShowcaseProductsToTheTopRequest{}
 type MoveShowcaseProductsToTheTopRequest struct {
 	// The IDs of products that are already in the creator's showcase and should be moved to the top. If you provide multiple product IDs, the products are displayed at the top in the same order as the IDs in this array.
 	ProductIds []string `json:"product_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MoveShowcaseProductsToTheTopRequest MoveShowcaseProductsToTheTopRequest
@@ -80,6 +80,11 @@ func (o MoveShowcaseProductsToTheTopRequest) MarshalJSON() ([]byte, error) {
 func (o MoveShowcaseProductsToTheTopRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_ids"] = o.ProductIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *MoveShowcaseProductsToTheTopRequest) UnmarshalJSON(data []byte) (err er
 
 	varMoveShowcaseProductsToTheTopRequest := _MoveShowcaseProductsToTheTopRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMoveShowcaseProductsToTheTopRequest)
+	err = json.Unmarshal(data, &varMoveShowcaseProductsToTheTopRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MoveShowcaseProductsToTheTopRequest(varMoveShowcaseProductsToTheTopRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

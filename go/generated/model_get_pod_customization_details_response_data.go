@@ -23,7 +23,10 @@ type GetPODCustomizationDetailsResponseData struct {
 	PodDetails []GetPODCustomizationDetailsResponseDataPodDetail `json:"pod_details,omitempty"`
 	// response status
 	StatusCode *int64 `json:"status_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPODCustomizationDetailsResponseData GetPODCustomizationDetailsResponseData
 
 // NewGetPODCustomizationDetailsResponseData instantiates a new GetPODCustomizationDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetPODCustomizationDetailsResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.StatusCode) {
 		toSerialize["status_code"] = o.StatusCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPODCustomizationDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetPODCustomizationDetailsResponseData := _GetPODCustomizationDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varGetPODCustomizationDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPODCustomizationDetailsResponseData(varGetPODCustomizationDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pod_details")
+		delete(additionalProperties, "status_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPODCustomizationDetailsResponseData struct {

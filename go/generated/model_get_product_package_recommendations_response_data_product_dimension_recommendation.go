@@ -27,7 +27,10 @@ type GetProductPackageRecommendationsResponseDataProductDimensionRecommendation 
 	Height *GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight `json:"height,omitempty"`
 	// Recommended values for width (structure same as length).
 	Width *GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseDataProductDimensionRecommendation GetProductPackageRecommendationsResponseDataProductDimensionRecommendation
 
 // NewGetProductPackageRecommendationsResponseDataProductDimensionRecommendation instantiates a new GetProductPackageRecommendationsResponseDataProductDimensionRecommendation object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductPackageRecommendationsResponseDataProductDimensionRecommendati
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseDataProductDimensionRecommendation) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseDataProductDimensionRecommendation := _GetProductPackageRecommendationsResponseDataProductDimensionRecommendation{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseDataProductDimensionRecommendation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseDataProductDimensionRecommendation(varGetProductPackageRecommendationsResponseDataProductDimensionRecommendation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseDataProductDimensionRecommendation struct {

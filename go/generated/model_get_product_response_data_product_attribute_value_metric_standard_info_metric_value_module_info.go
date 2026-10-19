@@ -31,7 +31,10 @@ type GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueMod
 	Suffix *string `json:"suffix,omitempty"`
 	// Metric value prefix.
 	Prefix *string `json:"prefix,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo
 
 // NewGetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo instantiates a new GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValue
 	if !IsNil(o.Prefix) {
 		toSerialize["prefix"] = o.Prefix
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo := _GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo(varGetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit_id")
+		delete(additionalProperties, "unit_name")
+		delete(additionalProperties, "suffix")
+		delete(additionalProperties, "prefix")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo struct {

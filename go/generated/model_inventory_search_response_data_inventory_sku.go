@@ -31,7 +31,10 @@ type InventorySearchResponseDataInventorySku struct {
 	WarehouseInventory []InventorySearchResponseDataInventorySkuWarehouseInventory `json:"warehouse_inventory,omitempty"`
 	// The distribution of the total available inventory for the SKU across different channels.
 	TotalAvailableInventoryDistribution *InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution `json:"total_available_inventory_distribution,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventorySku InventorySearchResponseDataInventorySku
 
 // NewInventorySearchResponseDataInventorySku instantiates a new InventorySearchResponseDataInventorySku object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o InventorySearchResponseDataInventorySku) ToMap() (map[string]interface{}
 	if !IsNil(o.TotalAvailableInventoryDistribution) {
 		toSerialize["total_available_inventory_distribution"] = o.TotalAvailableInventoryDistribution
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventorySku) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventorySku := _InventorySearchResponseDataInventorySku{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventorySku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventorySku(varInventorySearchResponseDataInventorySku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "total_available_quantity")
+		delete(additionalProperties, "total_committed_quantity")
+		delete(additionalProperties, "warehouse_inventory")
+		delete(additionalProperties, "total_available_inventory_distribution")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventorySku struct {

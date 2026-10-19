@@ -23,7 +23,10 @@ type GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown struct {
 	Fee *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee `json:"fee,omitempty"`
 	// An object containing the tax amounts that contribute to `fee_tax_amount`.
 	Tax *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax `json:"tax,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown
 
 // NewGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown instantiates a new GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown) ToMap()
 	if !IsNil(o.Tax) {
 		toSerialize["tax"] = o.Tax
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown := _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown(varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fee")
+		delete(additionalProperties, "tax")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown struct {

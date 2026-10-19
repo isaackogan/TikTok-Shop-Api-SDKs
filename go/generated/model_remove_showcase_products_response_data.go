@@ -25,7 +25,10 @@ type RemoveShowcaseProductsResponseData struct {
 	Message *string `json:"message,omitempty"`
 	// Every request generates a unique request_id for logging purposes.
 	RequestId *string `json:"request_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemoveShowcaseProductsResponseData RemoveShowcaseProductsResponseData
 
 // NewRemoveShowcaseProductsResponseData instantiates a new RemoveShowcaseProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o RemoveShowcaseProductsResponseData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.RequestId) {
 		toSerialize["request_id"] = o.RequestId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemoveShowcaseProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRemoveShowcaseProductsResponseData := _RemoveShowcaseProductsResponseData{}
+
+	err = json.Unmarshal(data, &varRemoveShowcaseProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemoveShowcaseProductsResponseData(varRemoveShowcaseProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemoveShowcaseProductsResponseData struct {

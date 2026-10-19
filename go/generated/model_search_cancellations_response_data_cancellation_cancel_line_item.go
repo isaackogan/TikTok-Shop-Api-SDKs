@@ -37,7 +37,10 @@ type SearchCancellationsResponseDataCancellationCancelLineItem struct {
 	RefundAmount *RefundAmount `json:"refund_amount,omitempty"`
 	// Cancellation sub line items. Sub items represent skus that belong to a \"virtual bundle\" that has been defined by a seller. The sub_items will include all relevant information about each item that is a part of the virtual bundle.
 	CancelSubLineItems []SearchCancellationsResponseDataCancellationCancelLineItemCancelSubLineItem `json:"cancel_sub_line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCancellationsResponseDataCancellationCancelLineItem SearchCancellationsResponseDataCancellationCancelLineItem
 
 // NewSearchCancellationsResponseDataCancellationCancelLineItem instantiates a new SearchCancellationsResponseDataCancellationCancelLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchCancellationsResponseDataCancellationCancelLineItem) ToMap() (map[
 	if !IsNil(o.CancelSubLineItems) {
 		toSerialize["cancel_sub_line_items"] = o.CancelSubLineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCancellationsResponseDataCancellationCancelLineItem) UnmarshalJSON(data []byte) (err error) {
+	varSearchCancellationsResponseDataCancellationCancelLineItem := _SearchCancellationsResponseDataCancellationCancelLineItem{}
+
+	err = json.Unmarshal(data, &varSearchCancellationsResponseDataCancellationCancelLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCancellationsResponseDataCancellationCancelLineItem(varSearchCancellationsResponseDataCancellationCancelLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cancel_line_item_id")
+		delete(additionalProperties, "order_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "refund_amount")
+		delete(additionalProperties, "cancel_sub_line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCancellationsResponseDataCancellationCancelLineItem struct {

@@ -23,7 +23,10 @@ type GetGlobalProductResponseDataSkuInventory struct {
 	GlobalWarehouseId *string `json:"global_warehouse_id,omitempty"`
 	// The SKU quantity available in the warehouse.
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataSkuInventory GetGlobalProductResponseDataSkuInventory
 
 // NewGetGlobalProductResponseDataSkuInventory instantiates a new GetGlobalProductResponseDataSkuInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalProductResponseDataSkuInventory) ToMap() (map[string]interface{
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataSkuInventory) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataSkuInventory := _GetGlobalProductResponseDataSkuInventory{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataSkuInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataSkuInventory(varGetGlobalProductResponseDataSkuInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_warehouse_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataSkuInventory struct {

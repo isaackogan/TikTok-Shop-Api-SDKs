@@ -137,7 +137,10 @@ type GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee struct {
 	AutoPostShoppableVideoCommissionFee *string `json:"auto_post_shoppable_video_commission_fee,omitempty"`
 	// Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
 	SellerFundedUserSpointServiceFee *string `json:"seller_funded_user_spoint_service_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee
 
 // NewGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee instantiates a new GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee object
 // This constructor will assign default values to properties that have it defined,
@@ -2231,7 +2234,91 @@ func (o GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee) ToMa
 	if !IsNil(o.SellerFundedUserSpointServiceFee) {
 		toSerialize["seller_funded_user_spoint_service_fee"] = o.SellerFundedUserSpointServiceFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee := _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee(varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "platform_commission_amount")
+		delete(additionalProperties, "referral_fee_amount")
+		delete(additionalProperties, "refund_administration_fee_amount")
+		delete(additionalProperties, "transaction_fee_amount")
+		delete(additionalProperties, "credit_card_handling_fee_amount")
+		delete(additionalProperties, "affiliate_commission_amount")
+		delete(additionalProperties, "affiliate_commission_amount_before_pit")
+		delete(additionalProperties, "affiliate_partner_commission_amount")
+		delete(additionalProperties, "affiliate_ads_commission_amount")
+		delete(additionalProperties, "sfp_service_fee_amount")
+		delete(additionalProperties, "live_specials_fee_amount")
+		delete(additionalProperties, "bonus_cashback_service_fee_amount")
+		delete(additionalProperties, "mall_service_fee_amount")
+		delete(additionalProperties, "voucher_xtra_service_fee_amount")
+		delete(additionalProperties, "flash_sales_service_fee_amount")
+		delete(additionalProperties, "cofunded_promotion_service_fee_amount")
+		delete(additionalProperties, "pre_order_service_fee_amount")
+		delete(additionalProperties, "tsp_commission_amount")
+		delete(additionalProperties, "dt_handling_fee_amount")
+		delete(additionalProperties, "epr_pob_service_fee_amount")
+		delete(additionalProperties, "fee_per_item_sold_amount")
+		delete(additionalProperties, "seller_paylater_handling_fee_amount")
+		delete(additionalProperties, "cofunded_creator_bonus_amount")
+		delete(additionalProperties, "dynamic_commission_amount")
+		delete(additionalProperties, "external_affiliate_marketing_fee_amount")
+		delete(additionalProperties, "vn_fix_infrastructure_fee")
+		delete(additionalProperties, "affiliate_commission_deposit")
+		delete(additionalProperties, "affiliate_commission_release")
+		delete(additionalProperties, "tap_shop_ads_commission")
+		delete(additionalProperties, "shipping_fee_guarantee_service_fee")
+		delete(additionalProperties, "installation_service_fee")
+		delete(additionalProperties, "campaign_resource_fee")
+		delete(additionalProperties, "platform_special_service_fee_amount")
+		delete(additionalProperties, "smart_promotion_fee_amount")
+		delete(additionalProperties, "gmv_max_ad_fee_amount")
+		delete(additionalProperties, "platform_semi_managed_commission_fee")
+		delete(additionalProperties, "platform_semi_managed_commission_fee_tax")
+		delete(additionalProperties, "campaign_period_fee_cfp_amount")
+		delete(additionalProperties, "campaign_period_fee_sp_amount")
+		delete(additionalProperties, "campaign_period_fee_sp_tax_amount")
+		delete(additionalProperties, "campaign_period_fee_cfp_tax_amount")
+		delete(additionalProperties, "seller_growth_fee_amount")
+		delete(additionalProperties, "category_led_campaign_fee_amount")
+		delete(additionalProperties, "category_led_campaign_fee_tax_amount")
+		delete(additionalProperties, "brand_amplification_program_commission")
+		delete(additionalProperties, "brand_amplification_program_fee_tax")
+		delete(additionalProperties, "brand_campaign_fee")
+		delete(additionalProperties, "brand_campaign_fee_tax")
+		delete(additionalProperties, "failed_delivery_shipping_fee")
+		delete(additionalProperties, "buyer_fault_return_shipping_fee")
+		delete(additionalProperties, "insurance_fee")
+		delete(additionalProperties, "gmv_max_coupon_fee")
+		delete(additionalProperties, "cps_shop_ads_commission_tax_amount")
+		delete(additionalProperties, "shipping_insurance_fee_tax_amount")
+		delete(additionalProperties, "new_customer_growth_package_fee")
+		delete(additionalProperties, "target_product_gmv_growth_package_fee")
+		delete(additionalProperties, "store_gmv_growth_package_fee")
+		delete(additionalProperties, "auto_post_shoppable_video_commission_fee")
+		delete(additionalProperties, "seller_funded_user_spoint_service_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownFee struct {

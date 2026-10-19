@@ -29,7 +29,10 @@ type GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage struct {
 	Urls []string `json:"urls,omitempty"`
 	// The width of the background image, in pixels.
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage
 
 // NewGetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage instantiates a new GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage) ToMap() 
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage := _GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage(varGetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "thumb_urls")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurfaceBackgroundImage struct {

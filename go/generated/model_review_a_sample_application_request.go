@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReviewASampleApplicationRequest struct {
 	ReviewResult string `json:"review_result"`
 	// The reason why a seller rejected a creator's sample application. The possible enumerated values are: - NOT_MATCH: The creator does not meet the seller's collaboration requirements. - OFFLINE: The product has been taken offline. - OUT_OF_STOCK: The product is temporarily out of stock. - OTHER: Any other reason not covered by the above categories. Required if the review_result is set to REJECT This field allows the seller to specify the reason for rejecting a sample application, providing clarity to the creator regarding the rejection.
 	RejectReason *string `json:"reject_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewASampleApplicationRequest ReviewASampleApplicationRequest
@@ -117,6 +117,11 @@ func (o ReviewASampleApplicationRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.RejectReason) {
 		toSerialize["reject_reason"] = o.RejectReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ReviewASampleApplicationRequest) UnmarshalJSON(data []byte) (err error)
 
 	varReviewASampleApplicationRequest := _ReviewASampleApplicationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewASampleApplicationRequest)
+	err = json.Unmarshal(data, &varReviewASampleApplicationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewASampleApplicationRequest(varReviewASampleApplicationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "review_result")
+		delete(additionalProperties, "reject_reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

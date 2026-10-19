@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type AddExternalOrderReferencesRequestOrderExternalOrder struct {
 	Platform string `json:"platform"`
 	// Max count: 100.
 	LineItems []AddExternalOrderReferencesRequestOrderExternalOrderLineItem `json:"line_items"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddExternalOrderReferencesRequestOrderExternalOrder AddExternalOrderReferencesRequestOrderExternalOrder
@@ -136,6 +136,11 @@ func (o AddExternalOrderReferencesRequestOrderExternalOrder) ToMap() (map[string
 	toSerialize["id"] = o.Id
 	toSerialize["platform"] = o.Platform
 	toSerialize["line_items"] = o.LineItems
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *AddExternalOrderReferencesRequestOrderExternalOrder) UnmarshalJSON(data
 
 	varAddExternalOrderReferencesRequestOrderExternalOrder := _AddExternalOrderReferencesRequestOrderExternalOrder{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddExternalOrderReferencesRequestOrderExternalOrder)
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesRequestOrderExternalOrder)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddExternalOrderReferencesRequestOrderExternalOrder(varAddExternalOrderReferencesRequestOrderExternalOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "platform")
+		delete(additionalProperties, "line_items")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

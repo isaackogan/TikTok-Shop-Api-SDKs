@@ -27,7 +27,10 @@ type GetShippingTemplateAvailabilityRequestProductAttributeDimension struct {
 	Height *string `json:"height,omitempty"`
 	// 1: centimeter 2:inch 3:foot 4:millimeter 5:meter
 	Unit *int64 `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityRequestProductAttributeDimension GetShippingTemplateAvailabilityRequestProductAttributeDimension
 
 // NewGetShippingTemplateAvailabilityRequestProductAttributeDimension instantiates a new GetShippingTemplateAvailabilityRequestProductAttributeDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShippingTemplateAvailabilityRequestProductAttributeDimension) ToMap()
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityRequestProductAttributeDimension) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityRequestProductAttributeDimension := _GetShippingTemplateAvailabilityRequestProductAttributeDimension{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityRequestProductAttributeDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityRequestProductAttributeDimension(varGetShippingTemplateAvailabilityRequestProductAttributeDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityRequestProductAttributeDimension struct {

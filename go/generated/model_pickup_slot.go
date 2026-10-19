@@ -23,7 +23,10 @@ type PickupSlot struct {
 	StartTime *int64 `json:"start_time,omitempty"`
 	// The end of the package pickup time slot, as a Unix timestamp in seconds.
 	EndTime *int64 `json:"end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PickupSlot PickupSlot
 
 // NewPickupSlot instantiates a new PickupSlot object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PickupSlot) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EndTime) {
 		toSerialize["end_time"] = o.EndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PickupSlot) UnmarshalJSON(data []byte) (err error) {
+	varPickupSlot := _PickupSlot{}
+
+	err = json.Unmarshal(data, &varPickupSlot)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PickupSlot(varPickupSlot)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePickupSlot struct {

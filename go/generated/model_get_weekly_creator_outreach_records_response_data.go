@@ -21,7 +21,10 @@ var _ MappedNullable = &GetWeeklyCreatorOutreachRecordsResponseData{}
 type GetWeeklyCreatorOutreachRecordsResponseData struct {
 	// Creator outreach records and the total number of matching records.
 	Data *GetWeeklyCreatorOutreachRecordsResponseDataData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachRecordsResponseData GetWeeklyCreatorOutreachRecordsResponseData
 
 // NewGetWeeklyCreatorOutreachRecordsResponseData instantiates a new GetWeeklyCreatorOutreachRecordsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetWeeklyCreatorOutreachRecordsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachRecordsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachRecordsResponseData := _GetWeeklyCreatorOutreachRecordsResponseData{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachRecordsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachRecordsResponseData(varGetWeeklyCreatorOutreachRecordsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachRecordsResponseData struct {

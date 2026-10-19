@@ -21,7 +21,10 @@ var _ MappedNullable = &QueryGoodsInventoryForMCFResponseData{}
 type QueryGoodsInventoryForMCFResponseData struct {
 	// Inventory entries for the requested goods. For MCF, only goods associated with the seller for the shop region and having an inventory-group result are returned. A requested goods ID without an inventory-group result is omitted; the API does not add an entry with `available_qty` set to `0`. The list is empty when none of the requested goods has an inventory-group result. Each entry represents one goods-and-inventory-group result, so the same `goods_id` may appear in multiple entries when it has multiple inventory groups. Request goods IDs are not deduplicated; repeating a `goods_id` may repeat the same inventory-group entries. Include each `goods_id` only once, and do not align response entries with request entries by list position.
 	GoodsInventoryList []QueryGoodsInventoryForMCFResponseDataGoodsInventoryList `json:"goods_inventory_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryGoodsInventoryForMCFResponseData QueryGoodsInventoryForMCFResponseData
 
 // NewQueryGoodsInventoryForMCFResponseData instantiates a new QueryGoodsInventoryForMCFResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o QueryGoodsInventoryForMCFResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.GoodsInventoryList) {
 		toSerialize["goods_inventory_list"] = o.GoodsInventoryList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryGoodsInventoryForMCFResponseData) UnmarshalJSON(data []byte) (err error) {
+	varQueryGoodsInventoryForMCFResponseData := _QueryGoodsInventoryForMCFResponseData{}
+
+	err = json.Unmarshal(data, &varQueryGoodsInventoryForMCFResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryGoodsInventoryForMCFResponseData(varQueryGoodsInventoryForMCFResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_inventory_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryGoodsInventoryForMCFResponseData struct {

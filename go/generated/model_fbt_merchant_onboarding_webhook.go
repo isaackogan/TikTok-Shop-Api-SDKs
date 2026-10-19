@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type FBTMerchantOnboardingWebhook struct {
 	// The UNIX timestamp when the FBT onboarding status is updated.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *FBTMerchantOnboardingWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FBTMerchantOnboardingWebhook FBTMerchantOnboardingWebhook
@@ -227,6 +227,11 @@ func (o FBTMerchantOnboardingWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *FBTMerchantOnboardingWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varFBTMerchantOnboardingWebhook := _FBTMerchantOnboardingWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFBTMerchantOnboardingWebhook)
+	err = json.Unmarshal(data, &varFBTMerchantOnboardingWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FBTMerchantOnboardingWebhook(varFBTMerchantOnboardingWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "seller_open_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ConfirmPackageShipmentRequestPackageSku struct {
 	Id string `json:"id"`
 	// Quantity of this SKU in the package. Must be greater than `0`.
 	Quantity int64 `json:"quantity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmPackageShipmentRequestPackageSku ConfirmPackageShipmentRequestPackageSku
@@ -108,6 +108,11 @@ func (o ConfirmPackageShipmentRequestPackageSku) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["quantity"] = o.Quantity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ConfirmPackageShipmentRequestPackageSku) UnmarshalJSON(data []byte) (er
 
 	varConfirmPackageShipmentRequestPackageSku := _ConfirmPackageShipmentRequestPackageSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmPackageShipmentRequestPackageSku)
+	err = json.Unmarshal(data, &varConfirmPackageShipmentRequestPackageSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmPackageShipmentRequestPackageSku(varConfirmPackageShipmentRequestPackageSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

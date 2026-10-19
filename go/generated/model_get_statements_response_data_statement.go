@@ -43,7 +43,10 @@ type GetStatementsResponseDataStatement struct {
 	ShippingCostAmount *string `json:"shipping_cost_amount,omitempty"`
 	// The Unix payment timestamp
 	PaymentTime *int64 `json:"payment_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetStatementsResponseDataStatement GetStatementsResponseDataStatement
 
 // NewGetStatementsResponseDataStatement instantiates a new GetStatementsResponseDataStatement object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o GetStatementsResponseDataStatement) ToMap() (map[string]interface{}, err
 	if !IsNil(o.PaymentTime) {
 		toSerialize["payment_time"] = o.PaymentTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetStatementsResponseDataStatement) UnmarshalJSON(data []byte) (err error) {
+	varGetStatementsResponseDataStatement := _GetStatementsResponseDataStatement{}
+
+	err = json.Unmarshal(data, &varGetStatementsResponseDataStatement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetStatementsResponseDataStatement(varGetStatementsResponseDataStatement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "statement_time")
+		delete(additionalProperties, "settlement_amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "revenue_amount")
+		delete(additionalProperties, "fee_amount")
+		delete(additionalProperties, "adjustment_amount")
+		delete(additionalProperties, "payment_status")
+		delete(additionalProperties, "payment_id")
+		delete(additionalProperties, "net_sales_amount")
+		delete(additionalProperties, "shipping_cost_amount")
+		delete(additionalProperties, "payment_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetStatementsResponseDataStatement struct {

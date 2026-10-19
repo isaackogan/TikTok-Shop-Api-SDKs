@@ -23,7 +23,10 @@ type GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeig
 	MinValue *string `json:"min_value,omitempty"`
 	// Recommended range maximum; unit: g
 	MaxValue *string `json:"max_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight
 
 // NewGetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight instantiates a new GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductPackageRecommendationsResponseDataProductWeightRecommendationW
 	if !IsNil(o.MaxValue) {
 		toSerialize["max_value"] = o.MaxValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight := _GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight(varGetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_value")
+		delete(additionalProperties, "max_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight struct {

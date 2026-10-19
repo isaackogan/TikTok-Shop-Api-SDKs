@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PublishGlobalProductRequestPublishTarget struct {
 	ManufacturerIds []string `json:"manufacturer_ids,omitempty"`
 	// The SKUs to be published in the specified market. - Max SKUs for EU, JP, UK, US: 300 - Max SKUs for other regions: 100
 	Skus []PublishGlobalProductRequestPublishTargetSku `json:"skus"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PublishGlobalProductRequestPublishTarget PublishGlobalProductRequestPublishTarget
@@ -182,6 +182,11 @@ func (o PublishGlobalProductRequestPublishTarget) ToMap() (map[string]interface{
 		toSerialize["manufacturer_ids"] = o.ManufacturerIds
 	}
 	toSerialize["skus"] = o.Skus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *PublishGlobalProductRequestPublishTarget) UnmarshalJSON(data []byte) (e
 
 	varPublishGlobalProductRequestPublishTarget := _PublishGlobalProductRequestPublishTarget{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPublishGlobalProductRequestPublishTarget)
+	err = json.Unmarshal(data, &varPublishGlobalProductRequestPublishTarget)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PublishGlobalProductRequestPublishTarget(varPublishGlobalProductRequestPublishTarget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

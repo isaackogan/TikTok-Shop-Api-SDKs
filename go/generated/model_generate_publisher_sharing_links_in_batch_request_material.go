@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GeneratePublisherSharingLinksInBatchRequestMaterial struct {
 	Type string `json:"type"`
 	// When `type` is set to `CAMPAIGN`, this field is required. This schema is associated with the Campaign page.
 	PromotionCampaignSchema *string `json:"promotion_campaign_schema,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GeneratePublisherSharingLinksInBatchRequestMaterial GeneratePublisherSharingLinksInBatchRequestMaterial
@@ -145,6 +145,11 @@ func (o GeneratePublisherSharingLinksInBatchRequestMaterial) ToMap() (map[string
 	if !IsNil(o.PromotionCampaignSchema) {
 		toSerialize["promotion_campaign_schema"] = o.PromotionCampaignSchema
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *GeneratePublisherSharingLinksInBatchRequestMaterial) UnmarshalJSON(data
 
 	varGeneratePublisherSharingLinksInBatchRequestMaterial := _GeneratePublisherSharingLinksInBatchRequestMaterial{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGeneratePublisherSharingLinksInBatchRequestMaterial)
+	err = json.Unmarshal(data, &varGeneratePublisherSharingLinksInBatchRequestMaterial)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GeneratePublisherSharingLinksInBatchRequestMaterial(varGeneratePublisherSharingLinksInBatchRequestMaterial)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ids")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "promotion_campaign_schema")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

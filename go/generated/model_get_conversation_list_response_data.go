@@ -25,7 +25,10 @@ type GetConversationListResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The conversation list.
 	Conversations []GetConversationListResponseDataConversation `json:"conversations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationListResponseData GetConversationListResponseData
 
 // NewGetConversationListResponseData instantiates a new GetConversationListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetConversationListResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Conversations) {
 		toSerialize["conversations"] = o.Conversations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationListResponseData := _GetConversationListResponseData{}
+
+	err = json.Unmarshal(data, &varGetConversationListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationListResponseData(varGetConversationListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_more")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "conversations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationListResponseData struct {

@@ -26,7 +26,10 @@ type CreateEngagementTaskResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateEngagementTaskResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateEngagementTaskResponse CreateEngagementTaskResponse
 
 // NewCreateEngagementTaskResponse instantiates a new CreateEngagementTaskResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateEngagementTaskResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateEngagementTaskResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateEngagementTaskResponse := _CreateEngagementTaskResponse{}
+
+	err = json.Unmarshal(data, &varCreateEngagementTaskResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateEngagementTaskResponse(varCreateEngagementTaskResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateEngagementTaskResponse struct {

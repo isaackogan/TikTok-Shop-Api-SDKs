@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLiveRoomGMVAndOrderTrendsResponseData{}
 type GetLiveRoomGMVAndOrderTrendsResponseData struct {
 	// GMV and created-order trend series for the live room. Each item identifies one metric through `stats_type`.
 	GmvTrendPerformances []GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformance `json:"gmv_trend_performances,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomGMVAndOrderTrendsResponseData GetLiveRoomGMVAndOrderTrendsResponseData
 
 // NewGetLiveRoomGMVAndOrderTrendsResponseData instantiates a new GetLiveRoomGMVAndOrderTrendsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetLiveRoomGMVAndOrderTrendsResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.GmvTrendPerformances) {
 		toSerialize["gmv_trend_performances"] = o.GmvTrendPerformances
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomGMVAndOrderTrendsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomGMVAndOrderTrendsResponseData := _GetLiveRoomGMVAndOrderTrendsResponseData{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomGMVAndOrderTrendsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomGMVAndOrderTrendsResponseData(varGetLiveRoomGMVAndOrderTrendsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gmv_trend_performances")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomGMVAndOrderTrendsResponseData struct {

@@ -23,7 +23,10 @@ type GetAftersaleEligibilityResponseDataSkuEligibility struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// Eligibility results for order line items in this SKU, grouped by aftersale request type. A request type can include separate entries for eligible and ineligible order line items. Eligible entries can include available_reason_names, while ineligible entries include ineligible_code and ineligible_reason.
 	LineItemEligibility []GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility `json:"line_item_eligibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAftersaleEligibilityResponseDataSkuEligibility GetAftersaleEligibilityResponseDataSkuEligibility
 
 // NewGetAftersaleEligibilityResponseDataSkuEligibility instantiates a new GetAftersaleEligibilityResponseDataSkuEligibility object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAftersaleEligibilityResponseDataSkuEligibility) ToMap() (map[string]i
 	if !IsNil(o.LineItemEligibility) {
 		toSerialize["line_item_eligibility"] = o.LineItemEligibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAftersaleEligibilityResponseDataSkuEligibility) UnmarshalJSON(data []byte) (err error) {
+	varGetAftersaleEligibilityResponseDataSkuEligibility := _GetAftersaleEligibilityResponseDataSkuEligibility{}
+
+	err = json.Unmarshal(data, &varGetAftersaleEligibilityResponseDataSkuEligibility)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAftersaleEligibilityResponseDataSkuEligibility(varGetAftersaleEligibilityResponseDataSkuEligibility)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "line_item_eligibility")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAftersaleEligibilityResponseDataSkuEligibility struct {

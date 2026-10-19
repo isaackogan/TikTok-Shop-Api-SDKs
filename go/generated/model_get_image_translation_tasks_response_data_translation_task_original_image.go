@@ -23,7 +23,10 @@ type GetImageTranslationTasksResponseDataTranslationTaskOriginalImage struct {
 	Uri *string `json:"uri,omitempty"`
 	// The URL of the original image.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetImageTranslationTasksResponseDataTranslationTaskOriginalImage GetImageTranslationTasksResponseDataTranslationTaskOriginalImage
 
 // NewGetImageTranslationTasksResponseDataTranslationTaskOriginalImage instantiates a new GetImageTranslationTasksResponseDataTranslationTaskOriginalImage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetImageTranslationTasksResponseDataTranslationTaskOriginalImage) ToMap(
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetImageTranslationTasksResponseDataTranslationTaskOriginalImage) UnmarshalJSON(data []byte) (err error) {
+	varGetImageTranslationTasksResponseDataTranslationTaskOriginalImage := _GetImageTranslationTasksResponseDataTranslationTaskOriginalImage{}
+
+	err = json.Unmarshal(data, &varGetImageTranslationTasksResponseDataTranslationTaskOriginalImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetImageTranslationTasksResponseDataTranslationTaskOriginalImage(varGetImageTranslationTasksResponseDataTranslationTaskOriginalImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetImageTranslationTasksResponseDataTranslationTaskOriginalImage struct {

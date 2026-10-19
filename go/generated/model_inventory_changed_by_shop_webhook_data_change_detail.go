@@ -13,7 +13,6 @@ package generated
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type InventoryChangedByShopWebhookDataChangeDetail struct {
 	CampaignLockedQuantityDelta int64 `json:"campaign_locked_quantity_delta"`
 	// The change in `creator_locked_quantity`.
 	CreatorLockedQuantityDelta int64 `json:"creator_locked_quantity_delta"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InventoryChangedByShopWebhookDataChangeDetail InventoryChangedByShopWebhookDataChangeDetail
@@ -305,6 +305,11 @@ func (o InventoryChangedByShopWebhookDataChangeDetail) ToMap() (map[string]inter
 	toSerialize["in_shop_quantity_delta"] = o.InShopQuantityDelta
 	toSerialize["campaign_locked_quantity_delta"] = o.CampaignLockedQuantityDelta
 	toSerialize["creator_locked_quantity_delta"] = o.CreatorLockedQuantityDelta
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -340,15 +345,28 @@ func (o *InventoryChangedByShopWebhookDataChangeDetail) UnmarshalJSON(data []byt
 
 	varInventoryChangedByShopWebhookDataChangeDetail := _InventoryChangedByShopWebhookDataChangeDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInventoryChangedByShopWebhookDataChangeDetail)
+	err = json.Unmarshal(data, &varInventoryChangedByShopWebhookDataChangeDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InventoryChangedByShopWebhookDataChangeDetail(varInventoryChangedByShopWebhookDataChangeDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "idempotency_key")
+		delete(additionalProperties, "trigger_source")
+		delete(additionalProperties, "occurred_at")
+		delete(additionalProperties, "total_quantity_delta")
+		delete(additionalProperties, "available_quantity_delta")
+		delete(additionalProperties, "committed_quantity_delta")
+		delete(additionalProperties, "in_shop_quantity_delta")
+		delete(additionalProperties, "campaign_locked_quantity_delta")
+		delete(additionalProperties, "creator_locked_quantity_delta")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

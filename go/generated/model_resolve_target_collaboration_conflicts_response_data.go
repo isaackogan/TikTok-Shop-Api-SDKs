@@ -23,7 +23,10 @@ type ResolveTargetCollaborationConflictsResponseData struct {
 	SuccessItems []ResolveTargetCollaborationConflictsResponseDataSuccessItem `json:"success_items,omitempty"`
 	// failed update items
 	FailedItems []ResolveTargetCollaborationConflictsResponseDataFailedItem `json:"failed_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ResolveTargetCollaborationConflictsResponseData ResolveTargetCollaborationConflictsResponseData
 
 // NewResolveTargetCollaborationConflictsResponseData instantiates a new ResolveTargetCollaborationConflictsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ResolveTargetCollaborationConflictsResponseData) ToMap() (map[string]int
 	if !IsNil(o.FailedItems) {
 		toSerialize["failed_items"] = o.FailedItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ResolveTargetCollaborationConflictsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varResolveTargetCollaborationConflictsResponseData := _ResolveTargetCollaborationConflictsResponseData{}
+
+	err = json.Unmarshal(data, &varResolveTargetCollaborationConflictsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ResolveTargetCollaborationConflictsResponseData(varResolveTargetCollaborationConflictsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "success_items")
+		delete(additionalProperties, "failed_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableResolveTargetCollaborationConflictsResponseData struct {

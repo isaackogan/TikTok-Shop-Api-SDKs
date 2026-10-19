@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GenerateAffiliatePartnerCampaignProductLinkRequest{}
 type GenerateAffiliatePartnerCampaignProductLinkRequest struct {
 	// The commission rate paid to a creator, in hundredths of a percent (0.01%). The value must be at least 100 (1%) and no greater than the total commission rate set by the seller.
 	CreatorCommissionRate int64 `json:"creator_commission_rate"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GenerateAffiliatePartnerCampaignProductLinkRequest GenerateAffiliatePartnerCampaignProductLinkRequest
@@ -80,6 +80,11 @@ func (o GenerateAffiliatePartnerCampaignProductLinkRequest) MarshalJSON() ([]byt
 func (o GenerateAffiliatePartnerCampaignProductLinkRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["creator_commission_rate"] = o.CreatorCommissionRate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *GenerateAffiliatePartnerCampaignProductLinkRequest) UnmarshalJSON(data 
 
 	varGenerateAffiliatePartnerCampaignProductLinkRequest := _GenerateAffiliatePartnerCampaignProductLinkRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenerateAffiliatePartnerCampaignProductLinkRequest)
+	err = json.Unmarshal(data, &varGenerateAffiliatePartnerCampaignProductLinkRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GenerateAffiliatePartnerCampaignProductLinkRequest(varGenerateAffiliatePartnerCampaignProductLinkRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

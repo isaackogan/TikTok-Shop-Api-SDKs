@@ -31,7 +31,10 @@ type SearchOpenCollaborationsResponseDataOpenCollaborationProduct struct {
 	Inventory *int64 `json:"inventory,omitempty"`
 	// The product's original price
 	OriginalPrice *OriginalPrice `json:"original_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationsResponseDataOpenCollaborationProduct SearchOpenCollaborationsResponseDataOpenCollaborationProduct
 
 // NewSearchOpenCollaborationsResponseDataOpenCollaborationProduct instantiates a new SearchOpenCollaborationsResponseDataOpenCollaborationProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchOpenCollaborationsResponseDataOpenCollaborationProduct) ToMap() (m
 	if !IsNil(o.OriginalPrice) {
 		toSerialize["original_price"] = o.OriginalPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationsResponseDataOpenCollaborationProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationsResponseDataOpenCollaborationProduct := _SearchOpenCollaborationsResponseDataOpenCollaborationProduct{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationsResponseDataOpenCollaborationProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationsResponseDataOpenCollaborationProduct(varSearchOpenCollaborationsResponseDataOpenCollaborationProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "original_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationsResponseDataOpenCollaborationProduct struct {

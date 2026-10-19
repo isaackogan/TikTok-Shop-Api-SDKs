@@ -25,7 +25,10 @@ type GetShopLIVEMinutePerformanceResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total number of minute-level intervals across all pages.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseData GetShopLIVEMinutePerformanceResponseData
 
 // NewGetShopLIVEMinutePerformanceResponseData instantiates a new GetShopLIVEMinutePerformanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopLIVEMinutePerformanceResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseData := _GetShopLIVEMinutePerformanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseData(varGetShopLIVEMinutePerformanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "performance")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseData struct {

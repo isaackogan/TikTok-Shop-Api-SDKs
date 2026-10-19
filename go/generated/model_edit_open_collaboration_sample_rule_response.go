@@ -26,7 +26,10 @@ type EditOpenCollaborationSampleRuleResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditOpenCollaborationSampleRuleResponse EditOpenCollaborationSampleRuleResponse
 
 // NewEditOpenCollaborationSampleRuleResponse instantiates a new EditOpenCollaborationSampleRuleResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o EditOpenCollaborationSampleRuleResponse) ToMap() (map[string]interface{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditOpenCollaborationSampleRuleResponse) UnmarshalJSON(data []byte) (err error) {
+	varEditOpenCollaborationSampleRuleResponse := _EditOpenCollaborationSampleRuleResponse{}
+
+	err = json.Unmarshal(data, &varEditOpenCollaborationSampleRuleResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditOpenCollaborationSampleRuleResponse(varEditOpenCollaborationSampleRuleResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditOpenCollaborationSampleRuleResponse struct {

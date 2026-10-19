@@ -23,7 +23,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLive
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceL
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceLiveAuctionIndirectGmv struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &CombinedListingChangeWebhookDataProduct{}
 type CombinedListingChangeWebhookDataProduct struct {
 	// The product id.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CombinedListingChangeWebhookDataProduct CombinedListingChangeWebhookDataProduct
 
 // NewCombinedListingChangeWebhookDataProduct instantiates a new CombinedListingChangeWebhookDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CombinedListingChangeWebhookDataProduct) ToMap() (map[string]interface{}
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CombinedListingChangeWebhookDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varCombinedListingChangeWebhookDataProduct := _CombinedListingChangeWebhookDataProduct{}
+
+	err = json.Unmarshal(data, &varCombinedListingChangeWebhookDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CombinedListingChangeWebhookDataProduct(varCombinedListingChangeWebhookDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCombinedListingChangeWebhookDataProduct struct {

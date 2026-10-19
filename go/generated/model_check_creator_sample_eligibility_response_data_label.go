@@ -29,7 +29,10 @@ type CheckCreatorSampleEligibilityResponseDataLabel struct {
 	ReachLimit *bool `json:"reach_limit,omitempty"`
 	// The sample product information.
 	SampleProduct *CheckCreatorSampleEligibilityResponseDataLabelSampleProduct `json:"sample_product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorSampleEligibilityResponseDataLabel CheckCreatorSampleEligibilityResponseDataLabel
 
 // NewCheckCreatorSampleEligibilityResponseDataLabel instantiates a new CheckCreatorSampleEligibilityResponseDataLabel object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CheckCreatorSampleEligibilityResponseDataLabel) ToMap() (map[string]inte
 	if !IsNil(o.SampleProduct) {
 		toSerialize["sample_product"] = o.SampleProduct
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorSampleEligibilityResponseDataLabel) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorSampleEligibilityResponseDataLabel := _CheckCreatorSampleEligibilityResponseDataLabel{}
+
+	err = json.Unmarshal(data, &varCheckCreatorSampleEligibilityResponseDataLabel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorSampleEligibilityResponseDataLabel(varCheckCreatorSampleEligibilityResponseDataLabel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_apply")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "reach_limit")
+		delete(additionalProperties, "sample_product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorSampleEligibilityResponseDataLabel struct {

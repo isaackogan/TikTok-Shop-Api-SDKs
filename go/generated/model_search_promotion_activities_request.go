@@ -29,7 +29,10 @@ type SearchPromotionActivitiesRequest struct {
 	PageToken *string `json:"page_token,omitempty"`
 	// The type of promotion activity to return. If `activity_type` is omitted, activities of all supported types are returned. Possible values: - `FIXED_PRICE`: Product discount activity with a fixed price. - `DIRECT_DISCOUNT`: Product discount activity with a percentage off. - `FLASHSALE`: Flash sale activity. - `SHIPPING_DISCOUNT`: Shipping fee discount activity. - `BUY_MORE_SAVE_MORE`: Buy More Save More activity. - `GIFT_WITH_PURCHASE`: Gift With Purchase activity. - `BUY_X_GET_Y`: Buy X Get Y activity.
 	ActivityType *string `json:"activity_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPromotionActivitiesRequest SearchPromotionActivitiesRequest
 
 // NewSearchPromotionActivitiesRequest instantiates a new SearchPromotionActivitiesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchPromotionActivitiesRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.ActivityType) {
 		toSerialize["activity_type"] = o.ActivityType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPromotionActivitiesRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchPromotionActivitiesRequest := _SearchPromotionActivitiesRequest{}
+
+	err = json.Unmarshal(data, &varSearchPromotionActivitiesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPromotionActivitiesRequest(varSearchPromotionActivitiesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "activity_title")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "page_token")
+		delete(additionalProperties, "activity_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPromotionActivitiesRequest struct {

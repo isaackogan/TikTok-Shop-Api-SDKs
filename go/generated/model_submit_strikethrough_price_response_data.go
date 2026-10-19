@@ -21,7 +21,10 @@ var _ MappedNullable = &SubmitStrikethroughPriceResponseData{}
 type SubmitStrikethroughPriceResponseData struct {
 	// Item-level failures for SKUs that could not be submitted. The array is empty when every requested SKU is accepted for verification.
 	Errors []SubmitStrikethroughPriceResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitStrikethroughPriceResponseData SubmitStrikethroughPriceResponseData
 
 // NewSubmitStrikethroughPriceResponseData instantiates a new SubmitStrikethroughPriceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SubmitStrikethroughPriceResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitStrikethroughPriceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSubmitStrikethroughPriceResponseData := _SubmitStrikethroughPriceResponseData{}
+
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitStrikethroughPriceResponseData(varSubmitStrikethroughPriceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitStrikethroughPriceResponseData struct {

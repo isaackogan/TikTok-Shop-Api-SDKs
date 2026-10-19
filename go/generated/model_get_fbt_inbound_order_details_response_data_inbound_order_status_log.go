@@ -27,7 +27,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog struct {
 	PreviousStatus *string `json:"previous_status,omitempty"`
 	// The unique identifier or name of the user or system entity that performed the status change.
 	Operator *string `json:"operator,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog) ToMap() (map
 	if !IsNil(o.Operator) {
 		toSerialize["operator"] = o.Operator
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog := _GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog(varGetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operate_time")
+		delete(additionalProperties, "new_status")
+		delete(additionalProperties, "previous_status")
+		delete(additionalProperties, "operator")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog struct {

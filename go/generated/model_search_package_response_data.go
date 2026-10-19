@@ -25,7 +25,10 @@ type SearchPackageResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The response list of packages.
 	Packages []SearchPackageResponseDataPackage `json:"packages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPackageResponseData SearchPackageResponseData
 
 // NewSearchPackageResponseData instantiates a new SearchPackageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchPackageResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Packages) {
 		toSerialize["packages"] = o.Packages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPackageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchPackageResponseData := _SearchPackageResponseData{}
+
+	err = json.Unmarshal(data, &varSearchPackageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPackageResponseData(varSearchPackageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPackageResponseData struct {

@@ -51,7 +51,10 @@ type GetShopVideoPerformanceOverviewResponseDataPerformanceInterval struct {
 	VideoProductViewers *int64 `json:"video_product_viewers,omitempty"`
 	// The number of video views. Returned only for offline data.
 	VideoViews *int64 `json:"video_views,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceOverviewResponseDataPerformanceInterval GetShopVideoPerformanceOverviewResponseDataPerformanceInterval
 
 // NewGetShopVideoPerformanceOverviewResponseDataPerformanceInterval instantiates a new GetShopVideoPerformanceOverviewResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o GetShopVideoPerformanceOverviewResponseDataPerformanceInterval) ToMap() 
 	if !IsNil(o.VideoViews) {
 		toSerialize["video_views"] = o.VideoViews
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceOverviewResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceOverviewResponseDataPerformanceInterval := _GetShopVideoPerformanceOverviewResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceOverviewResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceOverviewResponseDataPerformanceInterval(varGetShopVideoPerformanceOverviewResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_daily_customers")
+		delete(additionalProperties, "ctor_sku_order")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "shoppable_video_attributed_gmv")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "today")
+		delete(additionalProperties, "video_attributed_gmv")
+		delete(additionalProperties, "video_attributed_sku_orders")
+		delete(additionalProperties, "video_gmv")
+		delete(additionalProperties, "video_indirect_gmv")
+		delete(additionalProperties, "video_product_viewers")
+		delete(additionalProperties, "video_views")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceOverviewResponseDataPerformanceInterval struct {

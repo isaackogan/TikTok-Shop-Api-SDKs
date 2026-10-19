@@ -35,7 +35,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction stru
 	LikeRate *string `json:"like_rate,omitempty"`
 	// Total number of times the LIVE was shared divided by the total number of views.
 	ShareRate *string `json:"share_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction) 
 	if !IsNil(o.ShareRate) {
 		toSerialize["share_rate"] = o.ShareRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction := _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction(varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "new_followers")
+		delete(additionalProperties, "shares")
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "likes")
+		delete(additionalProperties, "comment_rate")
+		delete(additionalProperties, "follow_rate")
+		delete(additionalProperties, "like_rate")
+		delete(additionalProperties, "share_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction struct {

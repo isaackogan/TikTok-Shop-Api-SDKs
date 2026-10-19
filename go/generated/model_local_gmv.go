@@ -23,7 +23,10 @@ type LocalGmv struct {
 	Amount *string `json:"amount,omitempty"`
 	// The ISO 4217 currency code for `amount`.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LocalGmv LocalGmv
 
 // NewLocalGmv instantiates a new LocalGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o LocalGmv) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LocalGmv) UnmarshalJSON(data []byte) (err error) {
+	varLocalGmv := _LocalGmv{}
+
+	err = json.Unmarshal(data, &varLocalGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LocalGmv(varLocalGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLocalGmv struct {

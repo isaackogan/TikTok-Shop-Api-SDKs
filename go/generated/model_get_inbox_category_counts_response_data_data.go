@@ -21,7 +21,10 @@ var _ MappedNullable = &GetInboxCategoryCountsResponseDataData{}
 type GetInboxCategoryCountsResponseDataData struct {
 	// Conversation counts for each inbox category.
 	GroupCounts []GetInboxCategoryCountsResponseDataDataGroupCount `json:"group_counts,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboxCategoryCountsResponseDataData GetInboxCategoryCountsResponseDataData
 
 // NewGetInboxCategoryCountsResponseDataData instantiates a new GetInboxCategoryCountsResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetInboxCategoryCountsResponseDataData) ToMap() (map[string]interface{},
 	if !IsNil(o.GroupCounts) {
 		toSerialize["group_counts"] = o.GroupCounts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboxCategoryCountsResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varGetInboxCategoryCountsResponseDataData := _GetInboxCategoryCountsResponseDataData{}
+
+	err = json.Unmarshal(data, &varGetInboxCategoryCountsResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboxCategoryCountsResponseDataData(varGetInboxCategoryCountsResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "group_counts")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboxCategoryCountsResponseDataData struct {

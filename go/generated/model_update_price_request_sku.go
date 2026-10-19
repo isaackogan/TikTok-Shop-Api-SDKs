@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type UpdatePriceRequestSku struct {
 	ListPrice *ListPrice `json:"list_price,omitempty"`
 	// The SKU list price (e.g. MSRP, RRP) or original price information on external ecommerce platforms. Applicable only for selected sellers in the US market.  **Note**: This value may appear as the strikethrough price on the product page. However, whether the strikethrough price is shown and the amount shown are subject to the audit team's review and decision based on various pricing information.
 	ExternalListPrices []ExternalListPrice `json:"external_list_prices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePriceRequestSku UpdatePriceRequestSku
@@ -182,6 +182,11 @@ func (o UpdatePriceRequestSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalListPrices) {
 		toSerialize["external_list_prices"] = o.ExternalListPrices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *UpdatePriceRequestSku) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdatePriceRequestSku := _UpdatePriceRequestSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePriceRequestSku)
+	err = json.Unmarshal(data, &varUpdatePriceRequestSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePriceRequestSku(varUpdatePriceRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "external_list_prices")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

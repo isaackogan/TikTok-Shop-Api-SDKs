@@ -23,7 +23,10 @@ type GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult
 	Risk *string `json:"risk,omitempty"`
 	// Detailed guidance to resolve the detected violation.
 	Suggestions *string `json:"suggestions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue
 
 // NewGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue instantiates a new GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckRes
 	if !IsNil(o.Suggestions) {
 		toSerialize["suggestions"] = o.Suggestions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue := _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue(varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "risk")
+		delete(additionalProperties, "suggestions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue struct {

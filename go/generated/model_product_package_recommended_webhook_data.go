@@ -27,7 +27,10 @@ type ProductPackageRecommendedWebhookData struct {
 	WeightRecommendation *ProductPackageRecommendedWebhookDataWeightRecommendation `json:"weight_recommendation,omitempty"`
 	// Dimension correction recommendation.
 	DimensionRecommendation *ProductPackageRecommendedWebhookDataDimensionRecommendation `json:"dimension_recommendation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductPackageRecommendedWebhookData ProductPackageRecommendedWebhookData
 
 // NewProductPackageRecommendedWebhookData instantiates a new ProductPackageRecommendedWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ProductPackageRecommendedWebhookData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.DimensionRecommendation) {
 		toSerialize["dimension_recommendation"] = o.DimensionRecommendation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductPackageRecommendedWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varProductPackageRecommendedWebhookData := _ProductPackageRecommendedWebhookData{}
+
+	err = json.Unmarshal(data, &varProductPackageRecommendedWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductPackageRecommendedWebhookData(varProductPackageRecommendedWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "abnormality_types")
+		delete(additionalProperties, "weight_recommendation")
+		delete(additionalProperties, "dimension_recommendation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductPackageRecommendedWebhookData struct {

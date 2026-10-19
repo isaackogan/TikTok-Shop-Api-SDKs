@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type QueryCreatorPromotionDetailsInTargetCollaborationRequest struct {
 	InvitationId *string `json:"invitation_id,omitempty"`
 	// Product Fitler
 	ProductFilter *QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter `json:"product_filter,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QueryCreatorPromotionDetailsInTargetCollaborationRequest QueryCreatorPromotionDetailsInTargetCollaborationRequest
@@ -256,6 +256,11 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationRequest) ToMap() (map[s
 	if !IsNil(o.ProductFilter) {
 		toSerialize["product_filter"] = o.ProductFilter
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -284,15 +289,25 @@ func (o *QueryCreatorPromotionDetailsInTargetCollaborationRequest) UnmarshalJSON
 
 	varQueryCreatorPromotionDetailsInTargetCollaborationRequest := _QueryCreatorPromotionDetailsInTargetCollaborationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQueryCreatorPromotionDetailsInTargetCollaborationRequest)
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QueryCreatorPromotionDetailsInTargetCollaborationRequest(varQueryCreatorPromotionDetailsInTargetCollaborationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_user_open_id")
+		delete(additionalProperties, "invitation_group_id")
+		delete(additionalProperties, "query")
+		delete(additionalProperties, "query_type")
+		delete(additionalProperties, "invitation_id")
+		delete(additionalProperties, "product_filter")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

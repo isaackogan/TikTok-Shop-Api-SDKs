@@ -29,7 +29,10 @@ type GetBrandsResponseDataBrand struct {
 	IsT1Brand *bool `json:"is_t1_brand,omitempty"`
 	// The availability of an **authorized brand** in the requested category. Possible values: - AVAILABLE - UNAVAILABLE  **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized.
 	BrandStatus *string `json:"brand_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBrandsResponseDataBrand GetBrandsResponseDataBrand
 
 // NewGetBrandsResponseDataBrand instantiates a new GetBrandsResponseDataBrand object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetBrandsResponseDataBrand) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BrandStatus) {
 		toSerialize["brand_status"] = o.BrandStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBrandsResponseDataBrand) UnmarshalJSON(data []byte) (err error) {
+	varGetBrandsResponseDataBrand := _GetBrandsResponseDataBrand{}
+
+	err = json.Unmarshal(data, &varGetBrandsResponseDataBrand)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBrandsResponseDataBrand(varGetBrandsResponseDataBrand)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "authorized_status")
+		delete(additionalProperties, "is_t1_brand")
+		delete(additionalProperties, "brand_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBrandsResponseDataBrand struct {

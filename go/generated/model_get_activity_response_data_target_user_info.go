@@ -21,7 +21,10 @@ var _ MappedNullable = &GetActivityResponseDataTargetUserInfo{}
 type GetActivityResponseDataTargetUserInfo struct {
 	// The targeted user type. Possible values: - `ALL_USER` - `SHOP_NEW_CUSTOMER` - `SHOP_EXISTING_CUSTOMER` - `SHOP_REPEAT_CUSTOMER` - `SHOP_ABANDONED_CHECKOUTS_CUSTOMER`
 	UserType *string `json:"user_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataTargetUserInfo GetActivityResponseDataTargetUserInfo
 
 // NewGetActivityResponseDataTargetUserInfo instantiates a new GetActivityResponseDataTargetUserInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetActivityResponseDataTargetUserInfo) ToMap() (map[string]interface{}, 
 	if !IsNil(o.UserType) {
 		toSerialize["user_type"] = o.UserType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataTargetUserInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataTargetUserInfo := _GetActivityResponseDataTargetUserInfo{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataTargetUserInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataTargetUserInfo(varGetActivityResponseDataTargetUserInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataTargetUserInfo struct {

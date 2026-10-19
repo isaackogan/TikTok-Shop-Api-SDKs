@@ -29,7 +29,10 @@ type InventoryStatusChangeWebhookDataInventoryDistribution struct {
 	CampaignReservedQuantity *int64 `json:"campaign_reserved_quantity,omitempty"`
 	// The total number of SKUs reserved by existing customer orders in the warehouses.
 	CommittedQuantity *int64 `json:"committed_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventoryStatusChangeWebhookDataInventoryDistribution InventoryStatusChangeWebhookDataInventoryDistribution
 
 // NewInventoryStatusChangeWebhookDataInventoryDistribution instantiates a new InventoryStatusChangeWebhookDataInventoryDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o InventoryStatusChangeWebhookDataInventoryDistribution) ToMap() (map[stri
 	if !IsNil(o.CommittedQuantity) {
 		toSerialize["committed_quantity"] = o.CommittedQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventoryStatusChangeWebhookDataInventoryDistribution) UnmarshalJSON(data []byte) (err error) {
+	varInventoryStatusChangeWebhookDataInventoryDistribution := _InventoryStatusChangeWebhookDataInventoryDistribution{}
+
+	err = json.Unmarshal(data, &varInventoryStatusChangeWebhookDataInventoryDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventoryStatusChangeWebhookDataInventoryDistribution(varInventoryStatusChangeWebhookDataInventoryDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_quantity")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "creator_reserved_quantity")
+		delete(additionalProperties, "campaign_reserved_quantity")
+		delete(additionalProperties, "committed_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventoryStatusChangeWebhookDataInventoryDistribution struct {

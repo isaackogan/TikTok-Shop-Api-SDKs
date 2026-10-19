@@ -23,7 +23,10 @@ type GlobalReplicationStatusChangeWebhookData struct {
 	SourceProductId *string `json:"source_product_id,omitempty"`
 	// The product that was replicated from the source product.
 	ReplicatedProduct *GlobalReplicationStatusChangeWebhookDataReplicatedProduct `json:"replicated_product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalReplicationStatusChangeWebhookData GlobalReplicationStatusChangeWebhookData
 
 // NewGlobalReplicationStatusChangeWebhookData instantiates a new GlobalReplicationStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GlobalReplicationStatusChangeWebhookData) ToMap() (map[string]interface{
 	if !IsNil(o.ReplicatedProduct) {
 		toSerialize["replicated_product"] = o.ReplicatedProduct
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalReplicationStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varGlobalReplicationStatusChangeWebhookData := _GlobalReplicationStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varGlobalReplicationStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalReplicationStatusChangeWebhookData(varGlobalReplicationStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source_product_id")
+		delete(additionalProperties, "replicated_product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalReplicationStatusChangeWebhookData struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &Shop{}
 type Shop struct {
 	// The name of the shop to which the product belongs.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Shop Shop
 
 // NewShop instantiates a new Shop object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Shop) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Shop) UnmarshalJSON(data []byte) (err error) {
+	varShop := _Shop{}
+
+	err = json.Unmarshal(data, &varShop)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Shop(varShop)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShop struct {

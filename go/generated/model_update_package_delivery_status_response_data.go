@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdatePackageDeliveryStatusResponseData{}
 type UpdatePackageDeliveryStatusResponseData struct {
 	// Package-level failures from the batch request. Each entry identifies the affected package and contains the returned failure code and message fields. Check this list even when the top-level response code is `0`.
 	Errors []BatchShipPackagesResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePackageDeliveryStatusResponseData UpdatePackageDeliveryStatusResponseData
 
 // NewUpdatePackageDeliveryStatusResponseData instantiates a new UpdatePackageDeliveryStatusResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdatePackageDeliveryStatusResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePackageDeliveryStatusResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePackageDeliveryStatusResponseData := _UpdatePackageDeliveryStatusResponseData{}
+
+	err = json.Unmarshal(data, &varUpdatePackageDeliveryStatusResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePackageDeliveryStatusResponseData(varUpdatePackageDeliveryStatusResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePackageDeliveryStatusResponseData struct {

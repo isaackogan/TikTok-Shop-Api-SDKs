@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateSizeChartResponseDataData{}
 type CreateSizeChartResponseDataData struct {
 	// The ID of the created size chart. For REUSABLE_TEMPLATE mode, use this value as size_chart.template.id in subsequent product APIs. For PRODUCT_SCOPED mode, this ID identifies a size chart specific to a single product and cannot be reused as a template ID.
 	SizeChartId *string `json:"size_chart_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateSizeChartResponseDataData CreateSizeChartResponseDataData
 
 // NewCreateSizeChartResponseDataData instantiates a new CreateSizeChartResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateSizeChartResponseDataData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.SizeChartId) {
 		toSerialize["size_chart_id"] = o.SizeChartId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateSizeChartResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varCreateSizeChartResponseDataData := _CreateSizeChartResponseDataData{}
+
+	err = json.Unmarshal(data, &varCreateSizeChartResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateSizeChartResponseDataData(varCreateSizeChartResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size_chart_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateSizeChartResponseDataData struct {

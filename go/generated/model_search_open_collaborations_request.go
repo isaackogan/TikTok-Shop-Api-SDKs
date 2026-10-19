@@ -25,7 +25,10 @@ type SearchOpenCollaborationsRequest struct {
 	Keyword *string `json:"keyword,omitempty"`
 	// Filter products by a first-level category ID. The value of `top_level_category_id` must be greater than 0.
 	TopLevelCategoryId *string `json:"top_level_category_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationsRequest SearchOpenCollaborationsRequest
 
 // NewSearchOpenCollaborationsRequest instantiates a new SearchOpenCollaborationsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchOpenCollaborationsRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.TopLevelCategoryId) {
 		toSerialize["top_level_category_id"] = o.TopLevelCategoryId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationsRequest := _SearchOpenCollaborationsRequest{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationsRequest(varSearchOpenCollaborationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keyword_type")
+		delete(additionalProperties, "keyword")
+		delete(additionalProperties, "top_level_category_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationsRequest struct {

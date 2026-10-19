@@ -23,7 +23,10 @@ type HandlingDuration struct {
 	Days *string `json:"days,omitempty"`
 	// Indicates if the duration is calculated in calendar days or business days. Possible values: - `CALENDAR_DAY`: Represents consecutive days, including weekends and holidays. - `BUSINESS_DAY`: Represents business days, excluding weekends and public holidays. Default: `BUSINESS_DAY`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _HandlingDuration HandlingDuration
 
 // NewHandlingDuration instantiates a new HandlingDuration object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o HandlingDuration) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *HandlingDuration) UnmarshalJSON(data []byte) (err error) {
+	varHandlingDuration := _HandlingDuration{}
+
+	err = json.Unmarshal(data, &varHandlingDuration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = HandlingDuration(varHandlingDuration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "days")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableHandlingDuration struct {

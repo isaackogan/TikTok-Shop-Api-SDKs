@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOrderSplitAttributesResponseData{}
 type GetOrderSplitAttributesResponseData struct {
 	// Split-eligibility results for the evaluated TikTok Shop orders. Each result identifies an order and indicates whether it can be split; it may also include a reason when splitting is not allowed and mandatory package-splitting limits when applicable.
 	SplitAttributes []GetOrderSplitAttributesResponseDataSplitAttribute `json:"split_attributes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderSplitAttributesResponseData GetOrderSplitAttributesResponseData
 
 // NewGetOrderSplitAttributesResponseData instantiates a new GetOrderSplitAttributesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOrderSplitAttributesResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.SplitAttributes) {
 		toSerialize["split_attributes"] = o.SplitAttributes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderSplitAttributesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderSplitAttributesResponseData := _GetOrderSplitAttributesResponseData{}
+
+	err = json.Unmarshal(data, &varGetOrderSplitAttributesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderSplitAttributesResponseData(varGetOrderSplitAttributesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "split_attributes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderSplitAttributesResponseData struct {

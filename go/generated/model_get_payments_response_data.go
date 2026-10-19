@@ -23,7 +23,10 @@ type GetPaymentsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The list of payments that meet the query conditions.
 	Payments []GetPaymentsResponseDataPayment `json:"payments,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPaymentsResponseData GetPaymentsResponseData
 
 // NewGetPaymentsResponseData instantiates a new GetPaymentsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetPaymentsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Payments) {
 		toSerialize["payments"] = o.Payments
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPaymentsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetPaymentsResponseData := _GetPaymentsResponseData{}
+
+	err = json.Unmarshal(data, &varGetPaymentsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPaymentsResponseData(varGetPaymentsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "payments")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPaymentsResponseData struct {

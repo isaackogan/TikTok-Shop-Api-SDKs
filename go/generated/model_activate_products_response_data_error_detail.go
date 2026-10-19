@@ -23,7 +23,10 @@ type ActivateProductsResponseDataErrorDetail struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// A list of further nested errors or issues related to the main error.
 	ExtraErrors []ActivateProductsResponseDataErrorDetailExtraError `json:"extra_errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivateProductsResponseDataErrorDetail ActivateProductsResponseDataErrorDetail
 
 // NewActivateProductsResponseDataErrorDetail instantiates a new ActivateProductsResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ActivateProductsResponseDataErrorDetail) ToMap() (map[string]interface{}
 	if !IsNil(o.ExtraErrors) {
 		toSerialize["extra_errors"] = o.ExtraErrors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivateProductsResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varActivateProductsResponseDataErrorDetail := _ActivateProductsResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varActivateProductsResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivateProductsResponseDataErrorDetail(varActivateProductsResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "extra_errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivateProductsResponseDataErrorDetail struct {

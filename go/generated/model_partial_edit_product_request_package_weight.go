@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type PartialEditProductRequestPackageWeight struct {
 	Value string `json:"value"`
 	// The unit for the package weight. Possible values based on region: - US: `KILOGRAM`, `POUND` - BR, JP, MX: `KILOGRAM`, `GRAM` - Other countries: `KILOGRAM`  **Note**: You must use the same system of measurement (metric system or imperial system) for `package_weight` and `package_dimensions`. In other words, if you are using `KILOGRAM` for the weight, you must use `CENTIMETER` for the dimensions.
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestPackageWeight PartialEditProductRequestPackageWeight
@@ -108,6 +108,11 @@ func (o PartialEditProductRequestPackageWeight) ToMap() (map[string]interface{},
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PartialEditProductRequestPackageWeight) UnmarshalJSON(data []byte) (err
 
 	varPartialEditProductRequestPackageWeight := _PartialEditProductRequestPackageWeight{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestPackageWeight)
+	err = json.Unmarshal(data, &varPartialEditProductRequestPackageWeight)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestPackageWeight(varPartialEditProductRequestPackageWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

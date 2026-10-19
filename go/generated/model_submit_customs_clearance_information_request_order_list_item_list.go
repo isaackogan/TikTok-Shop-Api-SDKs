@@ -25,7 +25,10 @@ type SubmitCustomsClearanceInformationRequestOrderListItemList struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// List of SKU-level customs clearance details for the order line.
 	ItemDetail []SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail `json:"item_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitCustomsClearanceInformationRequestOrderListItemList SubmitCustomsClearanceInformationRequestOrderListItemList
 
 // NewSubmitCustomsClearanceInformationRequestOrderListItemList instantiates a new SubmitCustomsClearanceInformationRequestOrderListItemList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SubmitCustomsClearanceInformationRequestOrderListItemList) ToMap() (map[
 	if !IsNil(o.ItemDetail) {
 		toSerialize["item_detail"] = o.ItemDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitCustomsClearanceInformationRequestOrderListItemList) UnmarshalJSON(data []byte) (err error) {
+	varSubmitCustomsClearanceInformationRequestOrderListItemList := _SubmitCustomsClearanceInformationRequestOrderListItemList{}
+
+	err = json.Unmarshal(data, &varSubmitCustomsClearanceInformationRequestOrderListItemList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitCustomsClearanceInformationRequestOrderListItemList(varSubmitCustomsClearanceInformationRequestOrderListItemList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "item_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitCustomsClearanceInformationRequestOrderListItemList struct {

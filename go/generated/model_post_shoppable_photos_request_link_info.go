@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PostShoppablePhotosRequestLinkInfo struct {
 	ShopInfo *PostShoppablePhotosRequestLinkInfoShopInfo `json:"shop_info,omitempty"`
 	// Photo Anchor List
 	Links []PostShoppablePhotosRequestLinkInfoLink `json:"links,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostShoppablePhotosRequestLinkInfo PostShoppablePhotosRequestLinkInfo
@@ -154,6 +154,11 @@ func (o PostShoppablePhotosRequestLinkInfo) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Links) {
 		toSerialize["links"] = o.Links
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *PostShoppablePhotosRequestLinkInfo) UnmarshalJSON(data []byte) (err err
 
 	varPostShoppablePhotosRequestLinkInfo := _PostShoppablePhotosRequestLinkInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostShoppablePhotosRequestLinkInfo)
+	err = json.Unmarshal(data, &varPostShoppablePhotosRequestLinkInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostShoppablePhotosRequestLinkInfo(varPostShoppablePhotosRequestLinkInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "post_type")
+		delete(additionalProperties, "shop_info")
+		delete(additionalProperties, "links")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

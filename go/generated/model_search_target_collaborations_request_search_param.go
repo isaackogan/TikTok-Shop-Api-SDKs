@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SearchTargetCollaborationsRequestSearchParam struct {
 	KeywordType string `json:"keyword_type"`
 	// The value to search for, interpreted according to keyword_type.
 	Keyword string `json:"keyword"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchTargetCollaborationsRequestSearchParam SearchTargetCollaborationsRequestSearchParam
@@ -108,6 +108,11 @@ func (o SearchTargetCollaborationsRequestSearchParam) ToMap() (map[string]interf
 	toSerialize := map[string]interface{}{}
 	toSerialize["keyword_type"] = o.KeywordType
 	toSerialize["keyword"] = o.Keyword
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SearchTargetCollaborationsRequestSearchParam) UnmarshalJSON(data []byte
 
 	varSearchTargetCollaborationsRequestSearchParam := _SearchTargetCollaborationsRequestSearchParam{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchTargetCollaborationsRequestSearchParam)
+	err = json.Unmarshal(data, &varSearchTargetCollaborationsRequestSearchParam)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchTargetCollaborationsRequestSearchParam(varSearchTargetCollaborationsRequestSearchParam)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "keyword_type")
+		delete(additionalProperties, "keyword")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

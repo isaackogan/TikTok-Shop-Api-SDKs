@@ -29,7 +29,10 @@ type AreaPlacement struct {
 	XCoordinate *string `json:"x_coordinate,omitempty"`
 	// The Y-coordinate of the customizable area's starting point on the surface. Supports two decimal places.
 	YCoordinate *string `json:"y_coordinate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AreaPlacement AreaPlacement
 
 // NewAreaPlacement instantiates a new AreaPlacement object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o AreaPlacement) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.YCoordinate) {
 		toSerialize["y_coordinate"] = o.YCoordinate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AreaPlacement) UnmarshalJSON(data []byte) (err error) {
+	varAreaPlacement := _AreaPlacement{}
+
+	err = json.Unmarshal(data, &varAreaPlacement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AreaPlacement(varAreaPlacement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "rotate_degree")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "x_coordinate")
+		delete(additionalProperties, "y_coordinate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAreaPlacement struct {

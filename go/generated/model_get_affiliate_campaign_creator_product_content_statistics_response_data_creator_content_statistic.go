@@ -41,7 +41,10 @@ type GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorConte
 	PublishedDate *string `json:"published_date,omitempty"`
 	// When content_type == VIDEO, this field is None; when content_type == LIVE_ROOM, this is the date when the live ended. The value is in YYYY_MM_DD format.
 	ContentEndDate NullableString `json:"content_end_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic
 
 // NewGetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic instantiates a new GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic object
 // This constructor will assign default values to properties that have it defined,
@@ -465,7 +468,43 @@ func (o GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorCo
 	if o.ContentEndDate.IsSet() {
 		toSerialize["content_end_date"] = o.ContentEndDate.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic := _GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic{}
+
+	err = json.Unmarshal(data, &varGetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic(varGetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "cover_img_url")
+		delete(additionalProperties, "source_url")
+		delete(additionalProperties, "view_count")
+		delete(additionalProperties, "like_count")
+		delete(additionalProperties, "comment_num")
+		delete(additionalProperties, "paid_order_num")
+		delete(additionalProperties, "paid_amount")
+		delete(additionalProperties, "linked_tiktok_video")
+		delete(additionalProperties, "published_date")
+		delete(additionalProperties, "content_end_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatistic struct {

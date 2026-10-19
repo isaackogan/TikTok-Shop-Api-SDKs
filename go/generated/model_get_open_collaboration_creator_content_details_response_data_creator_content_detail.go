@@ -29,7 +29,10 @@ type GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail s
 	PromotionStatus *string `json:"promotion_status,omitempty"`
 	// End time of creator promotion.
 	PromotionEndTime *int64 `json:"promotion_end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail
 
 // NewGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail instantiates a new GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetai
 	if !IsNil(o.PromotionEndTime) {
 		toSerialize["promotion_end_time"] = o.PromotionEndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail := _GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail(varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_profile")
+		delete(additionalProperties, "video_count")
+		delete(additionalProperties, "live_count")
+		delete(additionalProperties, "promotion_status")
+		delete(additionalProperties, "promotion_end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail struct {

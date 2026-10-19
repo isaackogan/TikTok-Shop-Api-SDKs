@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail struct 
 	Qty int64 `json:"qty"`
 	// Percentage assigned to this SKU within the order line. Each value must be non-negative, and the price_percent values in item_detail must total 100. For example, 10 means 10%.
 	PricePercent int64 `json:"price_percent"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail
@@ -136,6 +136,11 @@ func (o SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail) ToM
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["qty"] = o.Qty
 	toSerialize["price_percent"] = o.PricePercent
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail) Un
 
 	varSubmitCustomsClearanceInformationRequestOrderListItemListItemDetail := _SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitCustomsClearanceInformationRequestOrderListItemListItemDetail)
+	err = json.Unmarshal(data, &varSubmitCustomsClearanceInformationRequestOrderListItemListItemDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail(varSubmitCustomsClearanceInformationRequestOrderListItemListItemDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "qty")
+		delete(additionalProperties, "price_percent")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

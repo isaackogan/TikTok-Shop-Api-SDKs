@@ -31,7 +31,10 @@ type SearchManufacturersResponseDataManufacturerRegionalProfile struct {
 	PhoneNumber *PhoneNumber `json:"phone_number,omitempty"`
 	// The postal address of the manufacturer. Max length: 500 characters
 	Address *string `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchManufacturersResponseDataManufacturerRegionalProfile SearchManufacturersResponseDataManufacturerRegionalProfile
 
 // NewSearchManufacturersResponseDataManufacturerRegionalProfile instantiates a new SearchManufacturersResponseDataManufacturerRegionalProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchManufacturersResponseDataManufacturerRegionalProfile) ToMap() (map
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchManufacturersResponseDataManufacturerRegionalProfile) UnmarshalJSON(data []byte) (err error) {
+	varSearchManufacturersResponseDataManufacturerRegionalProfile := _SearchManufacturersResponseDataManufacturerRegionalProfile{}
+
+	err = json.Unmarshal(data, &varSearchManufacturersResponseDataManufacturerRegionalProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchManufacturersResponseDataManufacturerRegionalProfile(varSearchManufacturersResponseDataManufacturerRegionalProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "registered_trade_name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchManufacturersResponseDataManufacturerRegionalProfile struct {

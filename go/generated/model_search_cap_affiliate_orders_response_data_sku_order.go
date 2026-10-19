@@ -123,7 +123,10 @@ type SearchCAPAffiliateOrdersResponseDataSkuOrder struct {
 	LastUpdateTime *int64 `json:"last_update_time,omitempty"`
 	// Carousel content may involve a commission rate discount. Returns true when the SKU order is attributed to carousel content.
 	IsCarousel *bool `json:"is_carousel,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCAPAffiliateOrdersResponseDataSkuOrder SearchCAPAffiliateOrdersResponseDataSkuOrder
 
 // NewSearchCAPAffiliateOrdersResponseDataSkuOrder instantiates a new SearchCAPAffiliateOrdersResponseDataSkuOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -1972,7 +1975,84 @@ func (o SearchCAPAffiliateOrdersResponseDataSkuOrder) ToMap() (map[string]interf
 	if !IsNil(o.IsCarousel) {
 		toSerialize["is_carousel"] = o.IsCarousel
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCAPAffiliateOrdersResponseDataSkuOrder) UnmarshalJSON(data []byte) (err error) {
+	varSearchCAPAffiliateOrdersResponseDataSkuOrder := _SearchCAPAffiliateOrdersResponseDataSkuOrder{}
+
+	err = json.Unmarshal(data, &varSearchCAPAffiliateOrdersResponseDataSkuOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCAPAffiliateOrdersResponseDataSkuOrder(varSearchCAPAffiliateOrdersResponseDataSkuOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "delivery_time")
+		delete(additionalProperties, "settle_status")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "open_collaboration_id")
+		delete(additionalProperties, "target_collaboration_id")
+		delete(additionalProperties, "creator_username")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "shop_name")
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "content_id")
+		delete(additionalProperties, "attribution_type")
+		delete(additionalProperties, "commission_model")
+		delete(additionalProperties, "commission_tier_setting")
+		delete(additionalProperties, "standard_commission_rate")
+		delete(additionalProperties, "commission_bonus_rate")
+		delete(additionalProperties, "shop_ads_commission_rate")
+		delete(additionalProperties, "tap_bonus_commission_rate")
+		delete(additionalProperties, "revenue_sharing_portion_rate")
+		delete(additionalProperties, "estimated_commission_base")
+		delete(additionalProperties, "estimated_standard_commission")
+		delete(additionalProperties, "estimated_bonus_commission")
+		delete(additionalProperties, "estimated_shop_ads_commission")
+		delete(additionalProperties, "estimated_tap_bonus_commission")
+		delete(additionalProperties, "estimated_creator_tax_isr")
+		delete(additionalProperties, "estimated_creator_tax_iva")
+		delete(additionalProperties, "estimated_creator_tax_pit")
+		delete(additionalProperties, "estimated_creator_total_earnings_after_tax")
+		delete(additionalProperties, "estimated_total_agency_earnings")
+		delete(additionalProperties, "estimated_agency_isr")
+		delete(additionalProperties, "estimated_agency_iva")
+		delete(additionalProperties, "actual_commission_base")
+		delete(additionalProperties, "actual_standard_commission")
+		delete(additionalProperties, "actual_bonus_commission")
+		delete(additionalProperties, "actual_shop_ads_commission")
+		delete(additionalProperties, "actual_tap_bonus_commission")
+		delete(additionalProperties, "actual_creator_tax_isr")
+		delete(additionalProperties, "actual_creator_tax_iva")
+		delete(additionalProperties, "actual_creator_tax_pit")
+		delete(additionalProperties, "actual_creator_total_earnings_after_tax")
+		delete(additionalProperties, "actual_total_agency_commission")
+		delete(additionalProperties, "actual_agency_isr")
+		delete(additionalProperties, "actual_agency_iva")
+		delete(additionalProperties, "fully_return")
+		delete(additionalProperties, "settlement_time")
+		delete(additionalProperties, "last_update_time")
+		delete(additionalProperties, "is_carousel")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCAPAffiliateOrdersResponseDataSkuOrder struct {

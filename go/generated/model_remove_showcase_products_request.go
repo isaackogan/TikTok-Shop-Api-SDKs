@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RemoveShowcaseProductsRequest{}
 type RemoveShowcaseProductsRequest struct {
 	// The product IDs to remove from the creator's showcase. Specify at least one product ID. The maximum number of products to delete at once is 200.
 	ProductIds []string `json:"product_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RemoveShowcaseProductsRequest RemoveShowcaseProductsRequest
@@ -80,6 +80,11 @@ func (o RemoveShowcaseProductsRequest) MarshalJSON() ([]byte, error) {
 func (o RemoveShowcaseProductsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_ids"] = o.ProductIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RemoveShowcaseProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRemoveShowcaseProductsRequest := _RemoveShowcaseProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemoveShowcaseProductsRequest)
+	err = json.Unmarshal(data, &varRemoveShowcaseProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RemoveShowcaseProductsRequest(varRemoveShowcaseProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

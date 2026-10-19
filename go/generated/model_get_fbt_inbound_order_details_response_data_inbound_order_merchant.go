@@ -23,7 +23,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant struct {
 	Id *string `json:"id,omitempty"`
 	// Name of the Fulfilled by TikTok merchant.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderMerchant instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant) ToMap() (map[
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderMerchant := _GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderMerchant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderMerchant(varGetFBTInboundOrderDetailsResponseDataInboundOrderMerchant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderMerchant struct {

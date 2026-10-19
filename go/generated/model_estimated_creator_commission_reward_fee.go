@@ -23,7 +23,10 @@ type EstimatedCreatorCommissionRewardFee struct {
 	Amount *string `json:"amount,omitempty"`
 	// The currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EstimatedCreatorCommissionRewardFee EstimatedCreatorCommissionRewardFee
 
 // NewEstimatedCreatorCommissionRewardFee instantiates a new EstimatedCreatorCommissionRewardFee object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o EstimatedCreatorCommissionRewardFee) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EstimatedCreatorCommissionRewardFee) UnmarshalJSON(data []byte) (err error) {
+	varEstimatedCreatorCommissionRewardFee := _EstimatedCreatorCommissionRewardFee{}
+
+	err = json.Unmarshal(data, &varEstimatedCreatorCommissionRewardFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EstimatedCreatorCommissionRewardFee(varEstimatedCreatorCommissionRewardFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEstimatedCreatorCommissionRewardFee struct {

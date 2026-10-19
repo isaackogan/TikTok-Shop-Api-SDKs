@@ -23,7 +23,10 @@ type GetProductPackageRecommendationsResponseDataProductWeightRecommendation str
 	Unit *string `json:"unit,omitempty"`
 	// Recommended values for weight.
 	Weight *GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight `json:"weight,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseDataProductWeightRecommendation GetProductPackageRecommendationsResponseDataProductWeightRecommendation
 
 // NewGetProductPackageRecommendationsResponseDataProductWeightRecommendation instantiates a new GetProductPackageRecommendationsResponseDataProductWeightRecommendation object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductPackageRecommendationsResponseDataProductWeightRecommendation)
 	if !IsNil(o.Weight) {
 		toSerialize["weight"] = o.Weight
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseDataProductWeightRecommendation) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseDataProductWeightRecommendation := _GetProductPackageRecommendationsResponseDataProductWeightRecommendation{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseDataProductWeightRecommendation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseDataProductWeightRecommendation(varGetProductPackageRecommendationsResponseDataProductWeightRecommendation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "weight")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseDataProductWeightRecommendation struct {

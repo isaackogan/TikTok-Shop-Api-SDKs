@@ -27,7 +27,10 @@ type GetProductResponseDataSubscribeInfo struct {
 	SubscribeStatus *string `json:"subscribe_status,omitempty"`
 	// A flag outlining whether the seller and given product support Subscribe and Save promotions.
 	SupportSubscribe *bool `json:"support_subscribe,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSubscribeInfo GetProductResponseDataSubscribeInfo
 
 // NewGetProductResponseDataSubscribeInfo instantiates a new GetProductResponseDataSubscribeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataSubscribeInfo) ToMap() (map[string]interface{}, er
 	if !IsNil(o.SupportSubscribe) {
 		toSerialize["support_subscribe"] = o.SupportSubscribe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSubscribeInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSubscribeInfo := _GetProductResponseDataSubscribeInfo{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSubscribeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSubscribeInfo(varGetProductResponseDataSubscribeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "subscribe_discount_details")
+		delete(additionalProperties, "subscribe_promotion_config")
+		delete(additionalProperties, "subscribe_status")
+		delete(additionalProperties, "support_subscribe")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSubscribeInfo struct {

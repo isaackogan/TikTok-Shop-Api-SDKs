@@ -69,7 +69,10 @@ type SubItemInfo struct {
 	IsDangerousGood *bool `json:"is_dangerous_good,omitempty"`
 	// Seller warehouse ID.
 	WarehouseId *string `json:"warehouse_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubItemInfo SubItemInfo
 
 // NewSubItemInfo instantiates a new SubItemInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -973,7 +976,57 @@ func (o SubItemInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WarehouseId) {
 		toSerialize["warehouse_id"] = o.WarehouseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubItemInfo) UnmarshalJSON(data []byte) (err error) {
+	varSubItemInfo := _SubItemInfo{}
+
+	err = json.Unmarshal(data, &varSubItemInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubItemInfo(varSubItemInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "display_status")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sku_image")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "platform_discount")
+		delete(additionalProperties, "seller_discount")
+		delete(additionalProperties, "cancel_reason")
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "rts_time")
+		delete(additionalProperties, "package_status")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "cancel_user")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "item_tax")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "retail_delivery_fee")
+		delete(additionalProperties, "is_dangerous_good")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubItemInfo struct {

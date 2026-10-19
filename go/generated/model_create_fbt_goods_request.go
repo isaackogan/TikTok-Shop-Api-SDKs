@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateFBTGoodsRequest{}
 type CreateFBTGoodsRequest struct {
 	// List of goods records to create.
 	CreateGoodsDtoList []CreateFBTGoodsRequestCreateGoodsDtoList `json:"create_goods_dto_list"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFBTGoodsRequest CreateFBTGoodsRequest
@@ -80,6 +80,11 @@ func (o CreateFBTGoodsRequest) MarshalJSON() ([]byte, error) {
 func (o CreateFBTGoodsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["create_goods_dto_list"] = o.CreateGoodsDtoList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateFBTGoodsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateFBTGoodsRequest := _CreateFBTGoodsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFBTGoodsRequest)
+	err = json.Unmarshal(data, &varCreateFBTGoodsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFBTGoodsRequest(varCreateFBTGoodsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_goods_dto_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

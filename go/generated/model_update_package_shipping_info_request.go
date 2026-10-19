@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdatePackageShippingInfoRequest{}
 type UpdatePackageShippingInfoRequest struct {
 	// \"Only supports uploading multiple tracking numbers for split-shipment in 3PL single item scenarios (non-virtual bundle) (This function is only support for whitelist sellers； If you are not on the allowlist, it is recommended to contact AM to apply) For other scenarios, only one tracking number can be uploaded at a time.\"
 	ShippingInfoList []ShippingInfoList `json:"shipping_info_list"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePackageShippingInfoRequest UpdatePackageShippingInfoRequest
@@ -80,6 +80,11 @@ func (o UpdatePackageShippingInfoRequest) MarshalJSON() ([]byte, error) {
 func (o UpdatePackageShippingInfoRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["shipping_info_list"] = o.ShippingInfoList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdatePackageShippingInfoRequest) UnmarshalJSON(data []byte) (err error
 
 	varUpdatePackageShippingInfoRequest := _UpdatePackageShippingInfoRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePackageShippingInfoRequest)
+	err = json.Unmarshal(data, &varUpdatePackageShippingInfoRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePackageShippingInfoRequest(varUpdatePackageShippingInfoRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_info_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

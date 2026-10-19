@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PackageDimension struct {
 	Height string `json:"height"`
 	// The unit for the package dimensions. Possible values based on region: - US: CENTIMETER, INCH - Other  regions: CENTIMETER    **Note**: You must use the same system of measurement (metric system or imperial system) for `package_weight` and `package_dimensions`. In other words, if you are using KILOGRAM for the weight, you must use CENTIMETER for the dimensions.
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PackageDimension PackageDimension
@@ -164,6 +164,11 @@ func (o PackageDimension) ToMap() (map[string]interface{}, error) {
 	toSerialize["width"] = o.Width
 	toSerialize["height"] = o.Height
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *PackageDimension) UnmarshalJSON(data []byte) (err error) {
 
 	varPackageDimension := _PackageDimension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPackageDimension)
+	err = json.Unmarshal(data, &varPackageDimension)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PackageDimension(varPackageDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

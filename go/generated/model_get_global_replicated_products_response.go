@@ -26,7 +26,10 @@ type GetGlobalReplicatedProductsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetGlobalReplicatedProductsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalReplicatedProductsResponse GetGlobalReplicatedProductsResponse
 
 // NewGetGlobalReplicatedProductsResponse instantiates a new GetGlobalReplicatedProductsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetGlobalReplicatedProductsResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalReplicatedProductsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalReplicatedProductsResponse := _GetGlobalReplicatedProductsResponse{}
+
+	err = json.Unmarshal(data, &varGetGlobalReplicatedProductsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalReplicatedProductsResponse(varGetGlobalReplicatedProductsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalReplicatedProductsResponse struct {

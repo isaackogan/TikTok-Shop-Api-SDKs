@@ -27,7 +27,10 @@ type SearchFBTInventoryResponseDataInventoryGood struct {
 	Name *string `json:"name,omitempty"`
 	// A list of inventory information for Stock Keeping Units (SKUs) matched with current Fulfilled by TikTok goods.
 	Skus []SearchFBTInventoryResponseDataInventoryGoodSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryResponseDataInventoryGood SearchFBTInventoryResponseDataInventoryGood
 
 // NewSearchFBTInventoryResponseDataInventoryGood instantiates a new SearchFBTInventoryResponseDataInventoryGood object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchFBTInventoryResponseDataInventoryGood) ToMap() (map[string]interfa
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryResponseDataInventoryGood) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryResponseDataInventoryGood := _SearchFBTInventoryResponseDataInventoryGood{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryResponseDataInventoryGood)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryResponseDataInventoryGood(varSearchFBTInventoryResponseDataInventoryGood)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reference_code")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryResponseDataInventoryGood struct {

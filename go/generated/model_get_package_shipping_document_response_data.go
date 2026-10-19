@@ -23,7 +23,10 @@ type GetPackageShippingDocumentResponseData struct {
 	DocUrl *string `json:"doc_url,omitempty"`
 	// The package tracking number from the shipping carrier.
 	TrackingNumber *string `json:"tracking_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageShippingDocumentResponseData GetPackageShippingDocumentResponseData
 
 // NewGetPackageShippingDocumentResponseData instantiates a new GetPackageShippingDocumentResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetPackageShippingDocumentResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.TrackingNumber) {
 		toSerialize["tracking_number"] = o.TrackingNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageShippingDocumentResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageShippingDocumentResponseData := _GetPackageShippingDocumentResponseData{}
+
+	err = json.Unmarshal(data, &varGetPackageShippingDocumentResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageShippingDocumentResponseData(varGetPackageShippingDocumentResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "doc_url")
+		delete(additionalProperties, "tracking_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageShippingDocumentResponseData struct {

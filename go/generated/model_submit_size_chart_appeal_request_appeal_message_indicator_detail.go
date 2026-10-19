@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &SubmitSizeChartAppealRequestAppealMessageIndicatorDetail
 type SubmitSizeChartAppealRequestAppealMessageIndicatorDetail struct {
 	// The target indicator_type to appeal of this field. Possible values: - REQUIRED_DIMENSION：Does the size chart include all required dimensions? - CONTAINS_ALL_SALE_PROPERTY：Does the size chart cover all sales attributes?\"\" - VALUE_RANGE_OUT_OF_RANGE：Are the value ranges in the size chart valid?
 	IndicatorType string `json:"indicator_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitSizeChartAppealRequestAppealMessageIndicatorDetail SubmitSizeChartAppealRequestAppealMessageIndicatorDetail
@@ -80,6 +80,11 @@ func (o SubmitSizeChartAppealRequestAppealMessageIndicatorDetail) MarshalJSON() 
 func (o SubmitSizeChartAppealRequestAppealMessageIndicatorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["indicator_type"] = o.IndicatorType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *SubmitSizeChartAppealRequestAppealMessageIndicatorDetail) UnmarshalJSON
 
 	varSubmitSizeChartAppealRequestAppealMessageIndicatorDetail := _SubmitSizeChartAppealRequestAppealMessageIndicatorDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitSizeChartAppealRequestAppealMessageIndicatorDetail)
+	err = json.Unmarshal(data, &varSubmitSizeChartAppealRequestAppealMessageIndicatorDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitSizeChartAppealRequestAppealMessageIndicatorDetail(varSubmitSizeChartAppealRequestAppealMessageIndicatorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "indicator_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

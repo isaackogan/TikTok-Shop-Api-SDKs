@@ -54,7 +54,10 @@ type PartialEditGlobalProductRequest struct {
 	CategoryVersion *string `json:"category_version,omitempty"`
 	// An external identifier used in an external ecommerce platform. This is used to associate the global product between TikTok Shop and the external ecommerce platform.  Max length: 999 characters
 	ExternalGlobalProductId *string `json:"external_global_product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditGlobalProductRequest PartialEditGlobalProductRequest
 
 // NewPartialEditGlobalProductRequest instantiates a new PartialEditGlobalProductRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -681,7 +684,49 @@ func (o PartialEditGlobalProductRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.ExternalGlobalProductId) {
 		toSerialize["external_global_product_id"] = o.ExternalGlobalProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditGlobalProductRequest) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditGlobalProductRequest := _PartialEditGlobalProductRequest{}
+
+	err = json.Unmarshal(data, &varPartialEditGlobalProductRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditGlobalProductRequest(varPartialEditGlobalProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "external_global_product_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditGlobalProductRequest struct {

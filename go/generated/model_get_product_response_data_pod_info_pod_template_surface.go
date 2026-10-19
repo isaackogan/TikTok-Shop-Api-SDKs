@@ -29,7 +29,10 @@ type GetProductResponseDataPodInfoPodTemplateSurface struct {
 	MaskImage *GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage `json:"mask_image,omitempty"`
 	// The name of the customizable surface, for example, `Front Side` or `Back Side`.
 	SurfaceName *string `json:"surface_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurface GetProductResponseDataPodInfoPodTemplateSurface
 
 // NewGetProductResponseDataPodInfoPodTemplateSurface instantiates a new GetProductResponseDataPodInfoPodTemplateSurface object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataPodInfoPodTemplateSurface) ToMap() (map[string]int
 	if !IsNil(o.SurfaceName) {
 		toSerialize["surface_name"] = o.SurfaceName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurface) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurface := _GetProductResponseDataPodInfoPodTemplateSurface{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurface)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurface(varGetProductResponseDataPodInfoPodTemplateSurface)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "background_image")
+		delete(additionalProperties, "custom_areas")
+		delete(additionalProperties, "external_surface_id")
+		delete(additionalProperties, "mask_image")
+		delete(additionalProperties, "surface_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurface struct {

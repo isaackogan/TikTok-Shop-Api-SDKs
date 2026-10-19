@@ -21,7 +21,10 @@ var _ MappedNullable = &GetProductResponseDataPodInfo{}
 type GetProductResponseDataPodInfo struct {
 	// A list of POD customization templates. Each template represents one customization plan and can be associated with one or more SKUs.
 	PodTemplates []GetProductResponseDataPodInfoPodTemplate `json:"pod_templates,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfo GetProductResponseDataPodInfo
 
 // NewGetProductResponseDataPodInfo instantiates a new GetProductResponseDataPodInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetProductResponseDataPodInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PodTemplates) {
 		toSerialize["pod_templates"] = o.PodTemplates
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfo := _GetProductResponseDataPodInfo{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfo(varGetProductResponseDataPodInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pod_templates")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfo struct {

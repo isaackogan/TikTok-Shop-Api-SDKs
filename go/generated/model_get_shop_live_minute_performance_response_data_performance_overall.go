@@ -35,7 +35,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceOverall struct {
 	UniqueViewers *int64 `json:"unique_viewers,omitempty"`
 	// The total number of times the LIVE was displayed to viewers.
 	Impressions *int64 `json:"impressions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceOverall GetShopLIVEMinutePerformanceResponseDataPerformanceOverall
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceOverall instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceOverall object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceOverall) ToMap() (map
 	if !IsNil(o.Impressions) {
 		toSerialize["impressions"] = o.Impressions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceOverall) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceOverall := _GetShopLIVEMinutePerformanceResponseDataPerformanceOverall{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceOverall)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceOverall(varGetShopLIVEMinutePerformanceResponseDataPerformanceOverall)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "live_title")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "unique_viewers")
+		delete(additionalProperties, "impressions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceOverall struct {

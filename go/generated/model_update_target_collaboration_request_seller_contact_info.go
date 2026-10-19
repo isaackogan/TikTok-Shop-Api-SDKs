@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type UpdateTargetCollaborationRequestSellerContactInfo struct {
 	Telegram *string `json:"telegram,omitempty"`
 	// The phone number used by the seller to register for the Line app
 	Line *string `json:"line,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateTargetCollaborationRequestSellerContactInfo UpdateTargetCollaborationRequestSellerContactInfo
@@ -228,6 +228,11 @@ func (o UpdateTargetCollaborationRequestSellerContactInfo) ToMap() (map[string]i
 	if !IsNil(o.Line) {
 		toSerialize["line"] = o.Line
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *UpdateTargetCollaborationRequestSellerContactInfo) UnmarshalJSON(data [
 
 	varUpdateTargetCollaborationRequestSellerContactInfo := _UpdateTargetCollaborationRequestSellerContactInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateTargetCollaborationRequestSellerContactInfo)
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationRequestSellerContactInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateTargetCollaborationRequestSellerContactInfo(varUpdateTargetCollaborationRequestSellerContactInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "whatsapp")
+		delete(additionalProperties, "telegram")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

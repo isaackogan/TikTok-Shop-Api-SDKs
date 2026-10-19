@@ -21,7 +21,10 @@ var _ MappedNullable = &SendIMMessageResponseData{}
 type SendIMMessageResponseData struct {
 	// The message ID. The `message_id` field is not always returned upon successful message submission.
 	MessageId *string `json:"message_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendIMMessageResponseData SendIMMessageResponseData
 
 // NewSendIMMessageResponseData instantiates a new SendIMMessageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SendIMMessageResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MessageId) {
 		toSerialize["message_id"] = o.MessageId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendIMMessageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSendIMMessageResponseData := _SendIMMessageResponseData{}
+
+	err = json.Unmarshal(data, &varSendIMMessageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendIMMessageResponseData(varSendIMMessageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendIMMessageResponseData struct {

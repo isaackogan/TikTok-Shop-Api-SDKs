@@ -23,7 +23,10 @@ type GetProductResponseDataSkuSkuWeight struct {
 	Unit *string `json:"unit,omitempty"`
 	// The package weight, which must be a positive number. The number format varies based on the unit:  - GRAM: integer - KILOGRAM: up to 3 decimal places - POUND: up to 2 decimal places
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuSkuWeight GetProductResponseDataSkuSkuWeight
 
 // NewGetProductResponseDataSkuSkuWeight instantiates a new GetProductResponseDataSkuSkuWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductResponseDataSkuSkuWeight) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuSkuWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuSkuWeight := _GetProductResponseDataSkuSkuWeight{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuSkuWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuSkuWeight(varGetProductResponseDataSkuSkuWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuSkuWeight struct {

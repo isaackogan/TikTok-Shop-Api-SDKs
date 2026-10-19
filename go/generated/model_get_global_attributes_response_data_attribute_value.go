@@ -23,7 +23,10 @@ type GetGlobalAttributesResponseDataAttributeValue struct {
 	Id *string `json:"id,omitempty"`
 	// The name of the built-in attribute value.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalAttributesResponseDataAttributeValue GetGlobalAttributesResponseDataAttributeValue
 
 // NewGetGlobalAttributesResponseDataAttributeValue instantiates a new GetGlobalAttributesResponseDataAttributeValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalAttributesResponseDataAttributeValue) ToMap() (map[string]inter
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalAttributesResponseDataAttributeValue) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalAttributesResponseDataAttributeValue := _GetGlobalAttributesResponseDataAttributeValue{}
+
+	err = json.Unmarshal(data, &varGetGlobalAttributesResponseDataAttributeValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalAttributesResponseDataAttributeValue(varGetGlobalAttributesResponseDataAttributeValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalAttributesResponseDataAttributeValue struct {

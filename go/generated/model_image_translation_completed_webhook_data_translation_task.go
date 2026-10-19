@@ -31,7 +31,10 @@ type ImageTranslationCompletedWebhookDataTranslationTask struct {
 	OriginalImage *ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage `json:"original_image,omitempty"`
 	// The translated image.
 	TranslatedImage *ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage `json:"translated_image,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ImageTranslationCompletedWebhookDataTranslationTask ImageTranslationCompletedWebhookDataTranslationTask
 
 // NewImageTranslationCompletedWebhookDataTranslationTask instantiates a new ImageTranslationCompletedWebhookDataTranslationTask object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o ImageTranslationCompletedWebhookDataTranslationTask) ToMap() (map[string
 	if !IsNil(o.TranslatedImage) {
 		toSerialize["translated_image"] = o.TranslatedImage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ImageTranslationCompletedWebhookDataTranslationTask) UnmarshalJSON(data []byte) (err error) {
+	varImageTranslationCompletedWebhookDataTranslationTask := _ImageTranslationCompletedWebhookDataTranslationTask{}
+
+	err = json.Unmarshal(data, &varImageTranslationCompletedWebhookDataTranslationTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ImageTranslationCompletedWebhookDataTranslationTask(varImageTranslationCompletedWebhookDataTranslationTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "fail_reason")
+		delete(additionalProperties, "target_language")
+		delete(additionalProperties, "original_image")
+		delete(additionalProperties, "translated_image")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableImageTranslationCompletedWebhookDataTranslationTask struct {

@@ -29,7 +29,10 @@ type SearchPackageRequest struct {
 	UpdateTimeLt *int64 `json:"update_time_lt,omitempty"`
 	// Possible values: - `TO_FULFILL` - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel. - `FULFILLING`: Package has been collected by carrier and in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
 	PackageStatus *string `json:"package_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPackageRequest SearchPackageRequest
 
 // NewSearchPackageRequest instantiates a new SearchPackageRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchPackageRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PackageStatus) {
 		toSerialize["package_status"] = o.PackageStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPackageRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchPackageRequest := _SearchPackageRequest{}
+
+	err = json.Unmarshal(data, &varSearchPackageRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPackageRequest(varSearchPackageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_lt")
+		delete(additionalProperties, "package_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPackageRequest struct {

@@ -49,7 +49,10 @@ type GetSPSMetricDiagnosisResponseData struct {
 	ValueUnit *string `json:"value_unit,omitempty"`
 	// Diagnostic insights for the selected metric.
 	Analyses []GetSPSMetricDiagnosisResponseDataAnalysis `json:"analyses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricDiagnosisResponseData GetSPSMetricDiagnosisResponseData
 
 // NewGetSPSMetricDiagnosisResponseData instantiates a new GetSPSMetricDiagnosisResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -603,7 +606,47 @@ func (o GetSPSMetricDiagnosisResponseData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Analyses) {
 		toSerialize["analyses"] = o.Analyses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricDiagnosisResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricDiagnosisResponseData := _GetSPSMetricDiagnosisResponseData{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricDiagnosisResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricDiagnosisResponseData(varGetSPSMetricDiagnosisResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "benchmarks")
+		delete(additionalProperties, "calculation_rule")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "distribution_details")
+		delete(additionalProperties, "evaluate_duration_days")
+		delete(additionalProperties, "end_evaluation_time")
+		delete(additionalProperties, "start_evaluation_time")
+		delete(additionalProperties, "metric_code")
+		delete(additionalProperties, "score")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_text")
+		delete(additionalProperties, "trend")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "value_unit")
+		delete(additionalProperties, "analyses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricDiagnosisResponseData struct {

@@ -33,7 +33,10 @@ type RevenueBreakdown struct {
 	RefundCodServiceFeeAmount *string `json:"refund_cod_service_fee_amount,omitempty"`
 	// The distance fee for items paid by the customer. With your current settings for Horizon+ Program, this fee is included in product price for orders with shipping out of Java island.
 	DistantItemFeeAmount *string `json:"distant_item_fee_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RevenueBreakdown RevenueBreakdown
 
 // NewRevenueBreakdown instantiates a new RevenueBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o RevenueBreakdown) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DistantItemFeeAmount) {
 		toSerialize["distant_item_fee_amount"] = o.DistantItemFeeAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RevenueBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varRevenueBreakdown := _RevenueBreakdown{}
+
+	err = json.Unmarshal(data, &varRevenueBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RevenueBreakdown(varRevenueBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "subtotal_before_discount_amount")
+		delete(additionalProperties, "seller_discount_amount")
+		delete(additionalProperties, "refund_subtotal_before_discount_amount")
+		delete(additionalProperties, "seller_discount_refund_amount")
+		delete(additionalProperties, "cod_service_fee_amount")
+		delete(additionalProperties, "refund_cod_service_fee_amount")
+		delete(additionalProperties, "distant_item_fee_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRevenueBreakdown struct {

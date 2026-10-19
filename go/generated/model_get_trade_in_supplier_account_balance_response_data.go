@@ -21,7 +21,10 @@ var _ MappedNullable = &GetTradeInSupplierAccountBalanceResponseData{}
 type GetTradeInSupplierAccountBalanceResponseData struct {
 	// The available balance of the supplier's TradeIn account.
 	AvailableBalance *GetTradeInSupplierAccountBalanceResponseDataAvailableBalance `json:"available_balance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTradeInSupplierAccountBalanceResponseData GetTradeInSupplierAccountBalanceResponseData
 
 // NewGetTradeInSupplierAccountBalanceResponseData instantiates a new GetTradeInSupplierAccountBalanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetTradeInSupplierAccountBalanceResponseData) ToMap() (map[string]interf
 	if !IsNil(o.AvailableBalance) {
 		toSerialize["available_balance"] = o.AvailableBalance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTradeInSupplierAccountBalanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetTradeInSupplierAccountBalanceResponseData := _GetTradeInSupplierAccountBalanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetTradeInSupplierAccountBalanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTradeInSupplierAccountBalanceResponseData(varGetTradeInSupplierAccountBalanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "available_balance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTradeInSupplierAccountBalanceResponseData struct {

@@ -25,7 +25,10 @@ type ProductCreationWebhookData struct {
 	ProductTypes []string `json:"product_types,omitempty"`
 	// The time when the product was created, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductCreationWebhookData ProductCreationWebhookData
 
 // NewProductCreationWebhookData instantiates a new ProductCreationWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ProductCreationWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductCreationWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varProductCreationWebhookData := _ProductCreationWebhookData{}
+
+	err = json.Unmarshal(data, &varProductCreationWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductCreationWebhookData(varProductCreationWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_types")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductCreationWebhookData struct {

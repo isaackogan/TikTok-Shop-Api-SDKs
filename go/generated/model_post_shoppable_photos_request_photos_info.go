@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &PostShoppablePhotosRequestPhotosInfo{}
 type PostShoppablePhotosRequestPhotosInfo struct {
 	// Photo file uris, not a file upload. Use [Upload Shoppable Photo File] to upload the image and obtain the photo_file_uri, then pass that URI in this field
 	PhotoFileUris string `json:"photo_file_uris"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostShoppablePhotosRequestPhotosInfo PostShoppablePhotosRequestPhotosInfo
@@ -80,6 +80,11 @@ func (o PostShoppablePhotosRequestPhotosInfo) MarshalJSON() ([]byte, error) {
 func (o PostShoppablePhotosRequestPhotosInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["photo_file_uris"] = o.PhotoFileUris
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PostShoppablePhotosRequestPhotosInfo) UnmarshalJSON(data []byte) (err e
 
 	varPostShoppablePhotosRequestPhotosInfo := _PostShoppablePhotosRequestPhotosInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostShoppablePhotosRequestPhotosInfo)
+	err = json.Unmarshal(data, &varPostShoppablePhotosRequestPhotosInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostShoppablePhotosRequestPhotosInfo(varPostShoppablePhotosRequestPhotosInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "photo_file_uris")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

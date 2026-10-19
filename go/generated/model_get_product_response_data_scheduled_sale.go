@@ -23,7 +23,10 @@ type GetProductResponseDataScheduledSale struct {
 	IsEnabledScheduledSale *bool `json:"is_enabled_scheduled_sale,omitempty"`
 	// The stored scheduled listing time, expressed as a Unix timestamp in milliseconds.
 	ScheduleSaleTime *int64 `json:"schedule_sale_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataScheduledSale GetProductResponseDataScheduledSale
 
 // NewGetProductResponseDataScheduledSale instantiates a new GetProductResponseDataScheduledSale object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductResponseDataScheduledSale) ToMap() (map[string]interface{}, er
 	if !IsNil(o.ScheduleSaleTime) {
 		toSerialize["schedule_sale_time"] = o.ScheduleSaleTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataScheduledSale) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataScheduledSale := _GetProductResponseDataScheduledSale{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataScheduledSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataScheduledSale(varGetProductResponseDataScheduledSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_enabled_scheduled_sale")
+		delete(additionalProperties, "schedule_sale_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataScheduledSale struct {

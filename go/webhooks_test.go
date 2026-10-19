@@ -134,12 +134,13 @@ func TestParseRejectsMissingOrNonIntegerType(t *testing.T) {
 }
 
 func TestParseToleratesFieldsTheModelDoesNotKnow(t *testing.T) {
-	ev, err := Webhooks.Parse([]byte(`{"type":1,"brand_new_field":{"a":1},"data":{"order_id":"1","extra":2}}`))
+	ev, err := Webhooks.Parse([]byte(`{"type":1,"shop_id":"9","brand_new_field":{"a":1},"data":{"order_id":"1","extra":2}}`))
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ev.(*generated.OrderStatusChangeWebhook).Data.GetOrderId() != "1" {
-		t.Error("lost known field")
+	e := ev.(*generated.OrderStatusChangeWebhook)
+	if e.Data.GetOrderId() != "1" || e.GetShopId() != "9" || e.AdditionalProperties["brand_new_field"] == nil || e.Data.AdditionalProperties["extra"] == nil {
+		t.Errorf("%+v", e)
 	}
 }
 

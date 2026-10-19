@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PartialEditProductRequestSkuPrice struct {
 	Currency string `json:"currency"`
 	// **Global sellers** The SKU's **local display price** shown on the product page before any discounts.  Refer to [Product Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed price ranges in each market.  **Note**:  - Applicable for all global sellers. - Required for JP and US shops using China warehouses. Optional for others. - This is the definitive final price shown on the product page, all other prices will be ignored.
 	SalePrice *string `json:"sale_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestSkuPrice PartialEditProductRequestSkuPrice
@@ -154,6 +154,11 @@ func (o PartialEditProductRequestSkuPrice) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.SalePrice) {
 		toSerialize["sale_price"] = o.SalePrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *PartialEditProductRequestSkuPrice) UnmarshalJSON(data []byte) (err erro
 
 	varPartialEditProductRequestSkuPrice := _PartialEditProductRequestSkuPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestSkuPrice)
+	err = json.Unmarshal(data, &varPartialEditProductRequestSkuPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestSkuPrice(varPartialEditProductRequestSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

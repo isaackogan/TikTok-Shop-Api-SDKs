@@ -23,7 +23,10 @@ type GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLin
 	ProductId *string `json:"product_id,omitempty"`
 	// This is the product promotion link that agencies can share with collaborated creators. Creators can copy/paste this link into the web browser. Creators will be re-directed to the add-product-link page in the Tikotk app. Creators can decide whether to add products to their showcases in the pop-up window.
 	Link *string `json:"link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink
 
 // NewGenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink instantiates a new GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotion
 	if !IsNil(o.Link) {
 		toSerialize["link"] = o.Link
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink) UnmarshalJSON(data []byte) (err error) {
+	varGenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink := _GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink{}
+
+	err = json.Unmarshal(data, &varGenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink(varGenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLink struct {

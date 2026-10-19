@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type Sku struct {
 	SkuId string `json:"sku_id"`
 	// Quantity of this SKU to include in the refund calculation.
 	Quantity int64 `json:"quantity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Sku Sku
@@ -108,6 +108,11 @@ func (o Sku) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["quantity"] = o.Quantity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *Sku) UnmarshalJSON(data []byte) (err error) {
 
 	varSku := _Sku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSku)
+	err = json.Unmarshal(data, &varSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Sku(varSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

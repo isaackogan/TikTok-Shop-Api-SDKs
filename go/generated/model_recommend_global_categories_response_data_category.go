@@ -27,7 +27,10 @@ type RecommendGlobalCategoriesResponseDataCategory struct {
 	Level *int64 `json:"level,omitempty"`
 	// A flag to indicate if the category is a leaf category.  **Note**: You can only create or edit products that belong to a leaf category.
 	IsLeaf *bool `json:"is_leaf,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendGlobalCategoriesResponseDataCategory RecommendGlobalCategoriesResponseDataCategory
 
 // NewRecommendGlobalCategoriesResponseDataCategory instantiates a new RecommendGlobalCategoriesResponseDataCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o RecommendGlobalCategoriesResponseDataCategory) ToMap() (map[string]inter
 	if !IsNil(o.IsLeaf) {
 		toSerialize["is_leaf"] = o.IsLeaf
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendGlobalCategoriesResponseDataCategory) UnmarshalJSON(data []byte) (err error) {
+	varRecommendGlobalCategoriesResponseDataCategory := _RecommendGlobalCategoriesResponseDataCategory{}
+
+	err = json.Unmarshal(data, &varRecommendGlobalCategoriesResponseDataCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendGlobalCategoriesResponseDataCategory(varRecommendGlobalCategoriesResponseDataCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "is_leaf")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendGlobalCategoriesResponseDataCategory struct {

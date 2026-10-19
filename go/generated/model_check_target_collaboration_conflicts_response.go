@@ -26,7 +26,10 @@ type CheckTargetCollaborationConflictsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CheckTargetCollaborationConflictsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckTargetCollaborationConflictsResponse CheckTargetCollaborationConflictsResponse
 
 // NewCheckTargetCollaborationConflictsResponse instantiates a new CheckTargetCollaborationConflictsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CheckTargetCollaborationConflictsResponse) ToMap() (map[string]interface
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckTargetCollaborationConflictsResponse) UnmarshalJSON(data []byte) (err error) {
+	varCheckTargetCollaborationConflictsResponse := _CheckTargetCollaborationConflictsResponse{}
+
+	err = json.Unmarshal(data, &varCheckTargetCollaborationConflictsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckTargetCollaborationConflictsResponse(varCheckTargetCollaborationConflictsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckTargetCollaborationConflictsResponse struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateImageTranslationTasksRequest{}
 type CreateImageTranslationTasksRequest struct {
 	// The list of images to translate. Use the [Upload Product Image API](https://partner.tiktokshop.com/docv2/page/6509df95defece02be598a22) to upload the images first and obtain the corresponding image URIs.  **Note**: A request can contain at most 20 image URI and target language combinations in total. The recommendations to specify up to 5 images and up to 20 target languages are not independent limits that can be used together; the total number of combinations must remain 20 or fewer. For example, you can submit 10 images with 2 target languages each, but you can't submit 10 images with 5 target languages each.
 	Images []CreateImageTranslationTasksRequestImage `json:"images"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateImageTranslationTasksRequest CreateImageTranslationTasksRequest
@@ -80,6 +80,11 @@ func (o CreateImageTranslationTasksRequest) MarshalJSON() ([]byte, error) {
 func (o CreateImageTranslationTasksRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["images"] = o.Images
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateImageTranslationTasksRequest) UnmarshalJSON(data []byte) (err err
 
 	varCreateImageTranslationTasksRequest := _CreateImageTranslationTasksRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateImageTranslationTasksRequest)
+	err = json.Unmarshal(data, &varCreateImageTranslationTasksRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateImageTranslationTasksRequest(varCreateImageTranslationTasksRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlt
 	PartialRefundAmount *string `json:"partial_refund_amount,omitempty"`
 	// Currency of the refund amount (ISO 4217). Must match the currency of the forward order.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail
 
 // NewReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail instantiates a new ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail) UnmarshalJSON(data []byte) (err error) {
+	varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail := _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail{}
+
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail(varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "partial_refund_amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail struct {

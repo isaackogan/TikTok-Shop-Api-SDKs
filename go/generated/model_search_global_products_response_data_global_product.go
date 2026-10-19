@@ -31,7 +31,10 @@ type SearchGlobalProductsResponseDataGlobalProduct struct {
 	CreateTime *int64 `json:"create_time,omitempty"`
 	// The time when the product is last updated. Unix timestamp in seconds.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGlobalProductsResponseDataGlobalProduct SearchGlobalProductsResponseDataGlobalProduct
 
 // NewSearchGlobalProductsResponseDataGlobalProduct instantiates a new SearchGlobalProductsResponseDataGlobalProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchGlobalProductsResponseDataGlobalProduct) ToMap() (map[string]inter
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGlobalProductsResponseDataGlobalProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchGlobalProductsResponseDataGlobalProduct := _SearchGlobalProductsResponseDataGlobalProduct{}
+
+	err = json.Unmarshal(data, &varSearchGlobalProductsResponseDataGlobalProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGlobalProductsResponseDataGlobalProduct(varSearchGlobalProductsResponseDataGlobalProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGlobalProductsResponseDataGlobalProduct struct {

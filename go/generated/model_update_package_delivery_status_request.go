@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdatePackageDeliveryStatusRequest{}
 type UpdatePackageDeliveryStatusRequest struct {
 	// The packages to update. Provide at least one package.
 	Packages []UpdatePackageDeliveryStatusRequestPackage `json:"packages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePackageDeliveryStatusRequest UpdatePackageDeliveryStatusRequest
@@ -80,6 +80,11 @@ func (o UpdatePackageDeliveryStatusRequest) MarshalJSON() ([]byte, error) {
 func (o UpdatePackageDeliveryStatusRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["packages"] = o.Packages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdatePackageDeliveryStatusRequest) UnmarshalJSON(data []byte) (err err
 
 	varUpdatePackageDeliveryStatusRequest := _UpdatePackageDeliveryStatusRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePackageDeliveryStatusRequest)
+	err = json.Unmarshal(data, &varUpdatePackageDeliveryStatusRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePackageDeliveryStatusRequest(varUpdatePackageDeliveryStatusRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

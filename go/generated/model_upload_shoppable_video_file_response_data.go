@@ -21,7 +21,10 @@ var _ MappedNullable = &UploadShoppableVideoFileResponseData{}
 type UploadShoppableVideoFileResponseData struct {
 	// Video file information.
 	VideoFile *UploadShoppableVideoFileResponseDataVideoFile `json:"video_file,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadShoppableVideoFileResponseData UploadShoppableVideoFileResponseData
 
 // NewUploadShoppableVideoFileResponseData instantiates a new UploadShoppableVideoFileResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UploadShoppableVideoFileResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.VideoFile) {
 		toSerialize["video_file"] = o.VideoFile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadShoppableVideoFileResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadShoppableVideoFileResponseData := _UploadShoppableVideoFileResponseData{}
+
+	err = json.Unmarshal(data, &varUploadShoppableVideoFileResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadShoppableVideoFileResponseData(varUploadShoppableVideoFileResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "video_file")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadShoppableVideoFileResponseData struct {

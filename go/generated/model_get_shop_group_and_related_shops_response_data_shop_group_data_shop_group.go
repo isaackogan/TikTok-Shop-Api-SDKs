@@ -23,7 +23,10 @@ type GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup struct {
 	Source *string `json:"source,omitempty"`
 	// The unique name representing the product interoperability group
 	ShopGroupName *string `json:"shop_group_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup
 
 // NewGetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup instantiates a new GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup) ToMap() (
 	if !IsNil(o.ShopGroupName) {
 		toSerialize["shop_group_name"] = o.ShopGroupName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup) UnmarshalJSON(data []byte) (err error) {
+	varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup := _GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup{}
+
+	err = json.Unmarshal(data, &varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup(varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "shop_group_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroup struct {

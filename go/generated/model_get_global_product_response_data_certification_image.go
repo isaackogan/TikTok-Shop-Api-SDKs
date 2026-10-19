@@ -25,7 +25,10 @@ type GetGlobalProductResponseDataCertificationImage struct {
 	Width *int64 `json:"width,omitempty"`
 	// The URI of the image.
 	Uri *string `json:"uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataCertificationImage GetGlobalProductResponseDataCertificationImage
 
 // NewGetGlobalProductResponseDataCertificationImage instantiates a new GetGlobalProductResponseDataCertificationImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalProductResponseDataCertificationImage) ToMap() (map[string]inte
 	if !IsNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataCertificationImage) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataCertificationImage := _GetGlobalProductResponseDataCertificationImage{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataCertificationImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataCertificationImage(varGetGlobalProductResponseDataCertificationImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataCertificationImage struct {

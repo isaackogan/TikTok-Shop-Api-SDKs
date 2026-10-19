@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type DeactivateProductsRequest struct {
 	ProductIds []string `json:"product_ids"`
 	// The listing platforms where the product will be deactivated.  Possible values: - TOKOPEDIA - TIKTOK_SHOP Default: TIKTOK_SHOP  Applicable only for sellers that migrated from Tokopedia.
 	ListingPlatforms []string `json:"listing_platforms,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeactivateProductsRequest DeactivateProductsRequest
@@ -117,6 +117,11 @@ func (o DeactivateProductsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ListingPlatforms) {
 		toSerialize["listing_platforms"] = o.ListingPlatforms
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *DeactivateProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDeactivateProductsRequest := _DeactivateProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeactivateProductsRequest)
+	err = json.Unmarshal(data, &varDeactivateProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeactivateProductsRequest(varDeactivateProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "listing_platforms")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

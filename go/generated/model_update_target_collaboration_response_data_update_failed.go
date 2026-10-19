@@ -39,7 +39,10 @@ type UpdateTargetCollaborationResponseDataUpdateFailed struct {
 	InvalidProductIdList []string `json:"invalid_product_id_list,omitempty"`
 	// The list of open id that caused the update to fail.
 	InvalidOpenIdList []string `json:"invalid_open_id_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTargetCollaborationResponseDataUpdateFailed UpdateTargetCollaborationResponseDataUpdateFailed
 
 // NewUpdateTargetCollaborationResponseDataUpdateFailed instantiates a new UpdateTargetCollaborationResponseDataUpdateFailed object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o UpdateTargetCollaborationResponseDataUpdateFailed) ToMap() (map[string]i
 	if !IsNil(o.InvalidOpenIdList) {
 		toSerialize["invalid_open_id_list"] = o.InvalidOpenIdList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTargetCollaborationResponseDataUpdateFailed) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTargetCollaborationResponseDataUpdateFailed := _UpdateTargetCollaborationResponseDataUpdateFailed{}
+
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationResponseDataUpdateFailed)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTargetCollaborationResponseDataUpdateFailed(varUpdateTargetCollaborationResponseDataUpdateFailed)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "remove_creator_open_ids")
+		delete(additionalProperties, "remove_product_ids")
+		delete(additionalProperties, "add_creator_open_ids")
+		delete(additionalProperties, "add_products")
+		delete(additionalProperties, "change_commissions")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "seller_contact_info")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "invalid_product_id_list")
+		delete(additionalProperties, "invalid_open_id_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTargetCollaborationResponseDataUpdateFailed struct {

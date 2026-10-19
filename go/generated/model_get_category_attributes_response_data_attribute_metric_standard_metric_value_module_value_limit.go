@@ -23,7 +23,10 @@ type GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleVa
 	NumLimit *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit `json:"num_limit,omitempty"`
 	// Metric value length limit.
 	LengthLimit *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitLengthLimit `json:"length_limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit
 
 // NewGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit instantiates a new GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModul
 	if !IsNil(o.LengthLimit) {
 		toSerialize["length_limit"] = o.LengthLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit := _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit(varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "num_limit")
+		delete(additionalProperties, "length_limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimit struct {

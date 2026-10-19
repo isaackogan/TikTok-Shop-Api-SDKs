@@ -31,7 +31,10 @@ type CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList st
 	IsAvailable *bool `json:"is_available,omitempty"`
 	// The reason code associated with SKU sample availability. Interpret a specific unavailability reason only when `is_available` is `false`. `UNKNOWN` can also be returned when `is_available` is `true` because no unavailability reason applies. Possible values: - IS_PREORDER: The product is a preorder product and does not support free samples. - IS_GIFT: The product is a gift and does not support free samples. - OUT_OF_STOCK: The product is out of stock. - EXCEED_CB_PRICE_THRESHOLD: The SKU price exceeds the applicable cross-border price threshold. - ALREADY_APPLYED: The creator has already applied for this SKU. - UNKNOWN: No mapped unavailability reason is available.
 	UnavailableReason *string `json:"unavailable_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList
 
 // NewCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList instantiates a new CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList
 	if !IsNil(o.UnavailableReason) {
 		toSerialize["unavailable_reason"] = o.UnavailableReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList := _CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList{}
+
+	err = json.Unmarshal(data, &varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList(varCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sale_property_value_ids")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "sale_properties")
+		delete(additionalProperties, "is_available")
+		delete(additionalProperties, "unavailable_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList struct {

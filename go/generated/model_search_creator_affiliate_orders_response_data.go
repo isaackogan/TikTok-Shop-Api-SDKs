@@ -25,7 +25,10 @@ type SearchCreatorAffiliateOrdersResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The total number of SKU orders that match the search criteria. `page_size` limits SKU-order rows before they are grouped into `orders`; because one order can contain multiple SKUs, the number of returned order objects can be less than `page_size`. Use `next_page_token` to continue pagination.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorAffiliateOrdersResponseData SearchCreatorAffiliateOrdersResponseData
 
 // NewSearchCreatorAffiliateOrdersResponseData instantiates a new SearchCreatorAffiliateOrdersResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCreatorAffiliateOrdersResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorAffiliateOrdersResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorAffiliateOrdersResponseData := _SearchCreatorAffiliateOrdersResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCreatorAffiliateOrdersResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorAffiliateOrdersResponseData(varSearchCreatorAffiliateOrdersResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorAffiliateOrdersResponseData struct {

@@ -26,7 +26,10 @@ type GetShopWebhooksResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetShopWebhooksResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopWebhooksResponse GetShopWebhooksResponse
 
 // NewGetShopWebhooksResponse instantiates a new GetShopWebhooksResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetShopWebhooksResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopWebhooksResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetShopWebhooksResponse := _GetShopWebhooksResponse{}
+
+	err = json.Unmarshal(data, &varGetShopWebhooksResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopWebhooksResponse(varGetShopWebhooksResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopWebhooksResponse struct {

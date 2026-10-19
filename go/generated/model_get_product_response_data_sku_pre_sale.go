@@ -23,7 +23,10 @@ type GetProductResponseDataSkuPreSale struct {
 	FulfillmentType *FulfillmentType `json:"fulfillment_type,omitempty"`
 	// The type of pre-sale. Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.  **UK, EU, SEA, JP, and LATAM** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**.
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuPreSale GetProductResponseDataSkuPreSale
 
 // NewGetProductResponseDataSkuPreSale instantiates a new GetProductResponseDataSkuPreSale object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductResponseDataSkuPreSale) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuPreSale) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuPreSale := _GetProductResponseDataSkuPreSale{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuPreSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuPreSale(varGetProductResponseDataSkuPreSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fulfillment_type")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuPreSale struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &MarkConversationsAsReadRequest{}
 type MarkConversationsAsReadRequest struct {
 	// The array of conversations to read. After the API is called, all the messages in the specified conversations will be read, and the read timestamp is set to the time when the API is called. The length of the array must not exceed `20`.
 	ConversationIds []string `json:"conversation_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MarkConversationsAsReadRequest MarkConversationsAsReadRequest
@@ -80,6 +80,11 @@ func (o MarkConversationsAsReadRequest) MarshalJSON() ([]byte, error) {
 func (o MarkConversationsAsReadRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["conversation_ids"] = o.ConversationIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *MarkConversationsAsReadRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varMarkConversationsAsReadRequest := _MarkConversationsAsReadRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMarkConversationsAsReadRequest)
+	err = json.Unmarshal(data, &varMarkConversationsAsReadRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MarkConversationsAsReadRequest(varMarkConversationsAsReadRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

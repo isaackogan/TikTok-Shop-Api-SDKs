@@ -21,7 +21,10 @@ var _ MappedNullable = &FBTMerchantOnboardingWebhookDataOnboardedRegion{}
 type FBTMerchantOnboardingWebhookDataOnboardedRegion struct {
 	// Onboarded FBT region code.
 	RegionCode *string `json:"region_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FBTMerchantOnboardingWebhookDataOnboardedRegion FBTMerchantOnboardingWebhookDataOnboardedRegion
 
 // NewFBTMerchantOnboardingWebhookDataOnboardedRegion instantiates a new FBTMerchantOnboardingWebhookDataOnboardedRegion object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o FBTMerchantOnboardingWebhookDataOnboardedRegion) ToMap() (map[string]int
 	if !IsNil(o.RegionCode) {
 		toSerialize["region_code"] = o.RegionCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FBTMerchantOnboardingWebhookDataOnboardedRegion) UnmarshalJSON(data []byte) (err error) {
+	varFBTMerchantOnboardingWebhookDataOnboardedRegion := _FBTMerchantOnboardingWebhookDataOnboardedRegion{}
+
+	err = json.Unmarshal(data, &varFBTMerchantOnboardingWebhookDataOnboardedRegion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FBTMerchantOnboardingWebhookDataOnboardedRegion(varFBTMerchantOnboardingWebhookDataOnboardedRegion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFBTMerchantOnboardingWebhookDataOnboardedRegion struct {

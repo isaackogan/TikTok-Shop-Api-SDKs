@@ -25,7 +25,10 @@ type GetOrderTrackingResponseDataTracking struct {
 	UpdateTimeMillis *int64 `json:"update_time_millis,omitempty"`
 	// Code that identifies the tracking event type. Use `description` for the human-readable event message.
 	ActionCode *int64 `json:"action_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderTrackingResponseDataTracking GetOrderTrackingResponseDataTracking
 
 // NewGetOrderTrackingResponseDataTracking instantiates a new GetOrderTrackingResponseDataTracking object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderTrackingResponseDataTracking) ToMap() (map[string]interface{}, e
 	if !IsNil(o.ActionCode) {
 		toSerialize["action_code"] = o.ActionCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderTrackingResponseDataTracking) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderTrackingResponseDataTracking := _GetOrderTrackingResponseDataTracking{}
+
+	err = json.Unmarshal(data, &varGetOrderTrackingResponseDataTracking)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderTrackingResponseDataTracking(varGetOrderTrackingResponseDataTracking)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "update_time_millis")
+		delete(additionalProperties, "action_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderTrackingResponseDataTracking struct {

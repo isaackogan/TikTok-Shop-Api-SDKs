@@ -21,7 +21,10 @@ var _ MappedNullable = &GetActivityResponseDataDiscountBmsmDiscount{}
 type GetActivityResponseDataDiscountBmsmDiscount struct {
 	// Configurations for BMSM promotions. A maximum of two `tier`s are permitted. `details.threshold_type` and `details.type` must be the same across all `tier`s.
 	Details []GetActivityResponseDataDiscountBmsmDiscountDetail `json:"details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountBmsmDiscount GetActivityResponseDataDiscountBmsmDiscount
 
 // NewGetActivityResponseDataDiscountBmsmDiscount instantiates a new GetActivityResponseDataDiscountBmsmDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetActivityResponseDataDiscountBmsmDiscount) ToMap() (map[string]interfa
 	if !IsNil(o.Details) {
 		toSerialize["details"] = o.Details
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountBmsmDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountBmsmDiscount := _GetActivityResponseDataDiscountBmsmDiscount{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountBmsmDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountBmsmDiscount(varGetActivityResponseDataDiscountBmsmDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountBmsmDiscount struct {

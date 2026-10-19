@@ -25,7 +25,10 @@ type GetProductResponseDataAudit struct {
 	Status *string `json:"status,omitempty"`
 	// The reasons why the product has not been submitted for TikTok Shop audit. Applicable only when `audit.status=NONE` and the product cannot be submitted for audit because the shop has not met one or more listing prerequisites; otherwise, an empty array is returned.  Possible values: - PAYMENT_ACCOUNT_NOT_LINKED: No payment account is linked to the shop. - SHOP_INACTIVE: The shop is inactive. - W8_NOT_CONFIGURED: The required W-8 tax information has not been provided for the shop. Applicable only to US shops.
 	NotSubmittedReasons []string `json:"not_submitted_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataAudit GetProductResponseDataAudit
 
 // NewGetProductResponseDataAudit instantiates a new GetProductResponseDataAudit object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataAudit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NotSubmittedReasons) {
 		toSerialize["not_submitted_reasons"] = o.NotSubmittedReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataAudit) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataAudit := _GetProductResponseDataAudit{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataAudit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataAudit(varGetProductResponseDataAudit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pre_approved_reasons")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "not_submitted_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataAudit struct {

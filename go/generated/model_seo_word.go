@@ -21,7 +21,10 @@ var _ MappedNullable = &SeoWord{}
 type SeoWord struct {
 	// The suggested SEO keyword text.
 	Text *string `json:"text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SeoWord SeoWord
 
 // NewSeoWord instantiates a new SeoWord object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SeoWord) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SeoWord) UnmarshalJSON(data []byte) (err error) {
+	varSeoWord := _SeoWord{}
+
+	err = json.Unmarshal(data, &varSeoWord)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SeoWord(varSeoWord)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSeoWord struct {

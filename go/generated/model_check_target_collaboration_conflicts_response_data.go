@@ -23,7 +23,10 @@ type CheckTargetCollaborationConflictsResponseData struct {
 	HasConflict *bool `json:"has_conflict,omitempty"`
 	// A list of creator-product combinations whose conflicts caused the target collaboration to fail. Each item identifies the creator, product, and existing target collaboration involved.
 	ConflictItems []CheckTargetCollaborationConflictsResponseDataConflictItem `json:"conflict_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckTargetCollaborationConflictsResponseData CheckTargetCollaborationConflictsResponseData
 
 // NewCheckTargetCollaborationConflictsResponseData instantiates a new CheckTargetCollaborationConflictsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CheckTargetCollaborationConflictsResponseData) ToMap() (map[string]inter
 	if !IsNil(o.ConflictItems) {
 		toSerialize["conflict_items"] = o.ConflictItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckTargetCollaborationConflictsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckTargetCollaborationConflictsResponseData := _CheckTargetCollaborationConflictsResponseData{}
+
+	err = json.Unmarshal(data, &varCheckTargetCollaborationConflictsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckTargetCollaborationConflictsResponseData(varCheckTargetCollaborationConflictsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_conflict")
+		delete(additionalProperties, "conflict_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckTargetCollaborationConflictsResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &PredictProductPackageDimensionsAndWeightRequest{}
 type PredictProductPackageDimensionsAndWeightRequest struct {
 	// The ID of the leaf category selected for the product.
 	CategoryId string `json:"category_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PredictProductPackageDimensionsAndWeightRequest PredictProductPackageDimensionsAndWeightRequest
@@ -80,6 +80,11 @@ func (o PredictProductPackageDimensionsAndWeightRequest) MarshalJSON() ([]byte, 
 func (o PredictProductPackageDimensionsAndWeightRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["category_id"] = o.CategoryId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *PredictProductPackageDimensionsAndWeightRequest) UnmarshalJSON(data []b
 
 	varPredictProductPackageDimensionsAndWeightRequest := _PredictProductPackageDimensionsAndWeightRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPredictProductPackageDimensionsAndWeightRequest)
+	err = json.Unmarshal(data, &varPredictProductPackageDimensionsAndWeightRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PredictProductPackageDimensionsAndWeightRequest(varPredictProductPackageDimensionsAndWeightRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

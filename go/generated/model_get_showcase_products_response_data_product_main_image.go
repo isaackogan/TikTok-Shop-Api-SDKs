@@ -25,7 +25,10 @@ type GetShowcaseProductsResponseDataProductMainImage struct {
 	Heigth *int64 `json:"heigth,omitempty"`
 	// The product's TikTok Shop image URL.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductMainImage GetShowcaseProductsResponseDataProductMainImage
 
 // NewGetShowcaseProductsResponseDataProductMainImage instantiates a new GetShowcaseProductsResponseDataProductMainImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShowcaseProductsResponseDataProductMainImage) ToMap() (map[string]int
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductMainImage) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductMainImage := _GetShowcaseProductsResponseDataProductMainImage{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductMainImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductMainImage(varGetShowcaseProductsResponseDataProductMainImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "heigth")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductMainImage struct {

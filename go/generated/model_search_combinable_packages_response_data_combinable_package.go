@@ -23,7 +23,10 @@ type SearchCombinablePackagesResponseDataCombinablePackage struct {
 	Id *string `json:"id,omitempty"`
 	// List of order IDs for this package.
 	OrderIds []string `json:"order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCombinablePackagesResponseDataCombinablePackage SearchCombinablePackagesResponseDataCombinablePackage
 
 // NewSearchCombinablePackagesResponseDataCombinablePackage instantiates a new SearchCombinablePackagesResponseDataCombinablePackage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCombinablePackagesResponseDataCombinablePackage) ToMap() (map[stri
 	if !IsNil(o.OrderIds) {
 		toSerialize["order_ids"] = o.OrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCombinablePackagesResponseDataCombinablePackage) UnmarshalJSON(data []byte) (err error) {
+	varSearchCombinablePackagesResponseDataCombinablePackage := _SearchCombinablePackagesResponseDataCombinablePackage{}
+
+	err = json.Unmarshal(data, &varSearchCombinablePackagesResponseDataCombinablePackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCombinablePackagesResponseDataCombinablePackage(varSearchCombinablePackagesResponseDataCombinablePackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCombinablePackagesResponseDataCombinablePackage struct {

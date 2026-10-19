@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type UpdatePromotionActivityProductsRequest struct {
 	BenefitProductIds []string `json:"benefit_product_ids,omitempty"`
 	// For a SHOP-level Buy More Save More (BMSM) or Buy X Get Y (BXGY) activity, these are the IDs of products to add to or update in the exclusion list. Omitting this field or passing an empty array leaves existing excluded products unchanged; it does not remove them. Maximum: 100 IDs per request.
 	ExcludeProductIds []string `json:"exclude_product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePromotionActivityProductsRequest UpdatePromotionActivityProductsRequest
@@ -191,6 +191,11 @@ func (o UpdatePromotionActivityProductsRequest) ToMap() (map[string]interface{},
 	if !IsNil(o.ExcludeProductIds) {
 		toSerialize["exclude_product_ids"] = o.ExcludeProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *UpdatePromotionActivityProductsRequest) UnmarshalJSON(data []byte) (err
 
 	varUpdatePromotionActivityProductsRequest := _UpdatePromotionActivityProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePromotionActivityProductsRequest)
+	err = json.Unmarshal(data, &varUpdatePromotionActivityProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePromotionActivityProductsRequest(varUpdatePromotionActivityProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "benefit_product_ids")
+		delete(additionalProperties, "exclude_product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

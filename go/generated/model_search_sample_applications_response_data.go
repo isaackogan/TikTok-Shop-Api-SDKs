@@ -25,7 +25,10 @@ type SearchSampleApplicationsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The sample applications from creators
 	SampleApplications []SearchSampleApplicationsResponseDataSampleApplication `json:"sample_applications,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationsResponseData SearchSampleApplicationsResponseData
 
 // NewSearchSampleApplicationsResponseData instantiates a new SearchSampleApplicationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchSampleApplicationsResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.SampleApplications) {
 		toSerialize["sample_applications"] = o.SampleApplications
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationsResponseData := _SearchSampleApplicationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationsResponseData(varSearchSampleApplicationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "sample_applications")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationsResponseData struct {

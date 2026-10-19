@@ -31,7 +31,10 @@ type SearchSizeChartsResponseDataSizeChart struct {
 	SizeChartDatas []SearchSizeChartsResponseDataSizeChartSizeChartData `json:"size_chart_datas,omitempty"`
 	// Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
 	SizeChartMode *string `json:"size_chart_mode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponseDataSizeChart SearchSizeChartsResponseDataSizeChart
 
 // NewSearchSizeChartsResponseDataSizeChart instantiates a new SearchSizeChartsResponseDataSizeChart object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchSizeChartsResponseDataSizeChart) ToMap() (map[string]interface{}, 
 	if !IsNil(o.SizeChartMode) {
 		toSerialize["size_chart_mode"] = o.SizeChartMode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponseDataSizeChart) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponseDataSizeChart := _SearchSizeChartsResponseDataSizeChart{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponseDataSizeChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponseDataSizeChart(varSearchSizeChartsResponseDataSizeChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template_id")
+		delete(additionalProperties, "template_name")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "related_category_ids")
+		delete(additionalProperties, "size_chart_datas")
+		delete(additionalProperties, "size_chart_mode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponseDataSizeChart struct {

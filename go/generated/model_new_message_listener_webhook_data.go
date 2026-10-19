@@ -32,7 +32,10 @@ type NewMessageListenerWebhookData struct {
 	// Message creation time, represented as a Unix timestamp (seconds).
 	CreateTime *string `json:"create_time,omitempty"`
 	Sender *NewMessageListenerWebhookDataSender `json:"sender,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NewMessageListenerWebhookData NewMessageListenerWebhookData
 
 // NewNewMessageListenerWebhookData instantiates a new NewMessageListenerWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -306,7 +309,39 @@ func (o NewMessageListenerWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sender) {
 		toSerialize["sender"] = o.Sender
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NewMessageListenerWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varNewMessageListenerWebhookData := _NewMessageListenerWebhookData{}
+
+	err = json.Unmarshal(data, &varNewMessageListenerWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NewMessageListenerWebhookData(varNewMessageListenerWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "index")
+		delete(additionalProperties, "message_id")
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "msg_type")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "sender")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNewMessageListenerWebhookData struct {

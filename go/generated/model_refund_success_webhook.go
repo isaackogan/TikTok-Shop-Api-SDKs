@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type RefundSuccessWebhook struct {
 	// The ID of the webhook type.
 	Type int32 `json:"type"`
 	Data *RefundSuccessWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RefundSuccessWebhook RefundSuccessWebhook
@@ -227,6 +227,11 @@ func (o RefundSuccessWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *RefundSuccessWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varRefundSuccessWebhook := _RefundSuccessWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRefundSuccessWebhook)
+	err = json.Unmarshal(data, &varRefundSuccessWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RefundSuccessWebhook(varRefundSuccessWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

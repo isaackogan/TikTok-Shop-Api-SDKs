@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalProductResponseDataVideo{}
 type GetGlobalProductResponseDataVideo struct {
 	// The video ID.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataVideo GetGlobalProductResponseDataVideo
 
 // NewGetGlobalProductResponseDataVideo instantiates a new GetGlobalProductResponseDataVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalProductResponseDataVideo) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataVideo := _GetGlobalProductResponseDataVideo{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataVideo(varGetGlobalProductResponseDataVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataVideo struct {

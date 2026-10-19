@@ -29,7 +29,10 @@ type ActivityChangeWebhookData struct {
 	ProductUpdateList *ActivityChangeWebhookDataProductUpdateList `json:"product_update_list,omitempty"`
 	// Products removed from the activity.
 	ProductRemoveList *ActivityChangeWebhookDataProductRemoveList `json:"product_remove_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivityChangeWebhookData ActivityChangeWebhookData
 
 // NewActivityChangeWebhookData instantiates a new ActivityChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o ActivityChangeWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductRemoveList) {
 		toSerialize["product_remove_list"] = o.ProductRemoveList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivityChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varActivityChangeWebhookData := _ActivityChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varActivityChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivityChangeWebhookData(varActivityChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "change_type")
+		delete(additionalProperties, "product_update_list")
+		delete(additionalProperties, "product_remove_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivityChangeWebhookData struct {

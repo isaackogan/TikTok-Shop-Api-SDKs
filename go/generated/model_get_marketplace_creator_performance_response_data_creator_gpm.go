@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorGpm struct {
 	Currency *string `json:"currency,omitempty"`
 	// The GPM amount.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorGpm GetMarketplaceCreatorPerformanceResponseDataCreatorGpm
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorGpm instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorGpm object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorGpm) ToMap() (map[str
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorGpm) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorGpm := _GetMarketplaceCreatorPerformanceResponseDataCreatorGpm{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorGpm)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorGpm(varGetMarketplaceCreatorPerformanceResponseDataCreatorGpm)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorGpm struct {

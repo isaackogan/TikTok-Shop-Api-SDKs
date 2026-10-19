@@ -23,7 +23,10 @@ type SearchProductsResponseDataProductIntegratedPlatformStatus struct {
 	Platform *string `json:"platform,omitempty"`
 	// The product status in the integrated platform. Possible values: - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductIntegratedPlatformStatus SearchProductsResponseDataProductIntegratedPlatformStatus
 
 // NewSearchProductsResponseDataProductIntegratedPlatformStatus instantiates a new SearchProductsResponseDataProductIntegratedPlatformStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchProductsResponseDataProductIntegratedPlatformStatus) ToMap() (map[
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductIntegratedPlatformStatus) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductIntegratedPlatformStatus := _SearchProductsResponseDataProductIntegratedPlatformStatus{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductIntegratedPlatformStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductIntegratedPlatformStatus(varSearchProductsResponseDataProductIntegratedPlatformStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "platform")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductIntegratedPlatformStatus struct {

@@ -26,7 +26,10 @@ type SearchCreatorTargetCollaborationsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchCreatorTargetCollaborationsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorTargetCollaborationsResponse SearchCreatorTargetCollaborationsResponse
 
 // NewSearchCreatorTargetCollaborationsResponse instantiates a new SearchCreatorTargetCollaborationsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchCreatorTargetCollaborationsResponse) ToMap() (map[string]interface
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorTargetCollaborationsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorTargetCollaborationsResponse := _SearchCreatorTargetCollaborationsResponse{}
+
+	err = json.Unmarshal(data, &varSearchCreatorTargetCollaborationsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorTargetCollaborationsResponse(varSearchCreatorTargetCollaborationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorTargetCollaborationsResponse struct {

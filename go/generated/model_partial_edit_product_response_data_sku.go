@@ -29,7 +29,10 @@ type PartialEditProductResponseDataSku struct {
 	SalesAttributes []SalesAttribute `json:"sales_attributes,omitempty"`
 	// An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces
 	SellerSku *string `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductResponseDataSku PartialEditProductResponseDataSku
 
 // NewPartialEditProductResponseDataSku instantiates a new PartialEditProductResponseDataSku object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o PartialEditProductResponseDataSku) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductResponseDataSku) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductResponseDataSku := _PartialEditProductResponseDataSku{}
+
+	err = json.Unmarshal(data, &varPartialEditProductResponseDataSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductResponseDataSku(varPartialEditProductResponseDataSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "fees")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductResponseDataSku struct {

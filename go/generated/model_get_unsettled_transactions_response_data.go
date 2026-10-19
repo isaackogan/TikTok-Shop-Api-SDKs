@@ -33,7 +33,10 @@ type GetUnsettledTransactionsResponseData struct {
 	SumEstFeeAmount *string `json:"sum_est_fee_amount,omitempty"`
 	// The list of transaction records in the statement. Each transaction corresponds to an order, an adjustment, or a reserve-related transaction.
 	Transactions []GetUnsettledTransactionsResponseDataTransaction `json:"transactions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseData GetUnsettledTransactionsResponseData
 
 // NewGetUnsettledTransactionsResponseData instantiates a new GetUnsettledTransactionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetUnsettledTransactionsResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Transactions) {
 		toSerialize["transactions"] = o.Transactions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseData := _GetUnsettledTransactionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseData(varGetUnsettledTransactionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "sum_est_settlement_amount")
+		delete(additionalProperties, "sum_est_revenue_amount")
+		delete(additionalProperties, "sum_est_adjustment_amount")
+		delete(additionalProperties, "sum_est_fee_amount")
+		delete(additionalProperties, "transactions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseData struct {

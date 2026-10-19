@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreateResponsiblePersonRequest struct {
 	Address Address `json:"address"`
 	// The BCP-47 locale code representing the language used for specifying the responsible person information. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT Default: The locale of the seller's registered business address.  **Note**: The information provided will be automatically translated into all EU languages supported by TikTok Shop. Ensure the locale matches the language used in field values to avoid inaccurate translations.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateResponsiblePersonRequest CreateResponsiblePersonRequest
@@ -201,6 +201,11 @@ func (o CreateResponsiblePersonRequest) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -231,15 +236,24 @@ func (o *CreateResponsiblePersonRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varCreateResponsiblePersonRequest := _CreateResponsiblePersonRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateResponsiblePersonRequest)
+	err = json.Unmarshal(data, &varCreateResponsiblePersonRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateResponsiblePersonRequest(varCreateResponsiblePersonRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

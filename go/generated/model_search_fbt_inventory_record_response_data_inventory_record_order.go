@@ -23,7 +23,10 @@ type SearchFBTInventoryRecordResponseDataInventoryRecordOrder struct {
 	Id *string `json:"id,omitempty"`
 	// The type of order. Possible values: - INBOUND_ORDER - RETURN_TO_SUPPLIER_ORDER - DISPOSAL - INVENTORY_STATUS_ADJUSTMENT_ORDER - CONSIGN_ORDER - INVENTORY_COUNT_ORDER - FAILED_DELIVERY - CUSTOMER_RETURN - INVENTORY_QUANTITY_ADJUSTMENT_ORDER - INVENTORY_TRANSFER_ORDER
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRecordResponseDataInventoryRecordOrder SearchFBTInventoryRecordResponseDataInventoryRecordOrder
 
 // NewSearchFBTInventoryRecordResponseDataInventoryRecordOrder instantiates a new SearchFBTInventoryRecordResponseDataInventoryRecordOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchFBTInventoryRecordResponseDataInventoryRecordOrder) ToMap() (map[s
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRecordResponseDataInventoryRecordOrder) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRecordResponseDataInventoryRecordOrder := _SearchFBTInventoryRecordResponseDataInventoryRecordOrder{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRecordResponseDataInventoryRecordOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRecordResponseDataInventoryRecordOrder(varSearchFBTInventoryRecordResponseDataInventoryRecordOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRecordResponseDataInventoryRecordOrder struct {

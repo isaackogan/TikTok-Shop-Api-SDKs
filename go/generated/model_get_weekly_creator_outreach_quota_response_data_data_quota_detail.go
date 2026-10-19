@@ -29,7 +29,10 @@ type GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail struct {
 	QuotaBonusSum *int64 `json:"quota_bonus_sum,omitempty"`
 	// Bonus quota use in the current quota tiering, bonus will be consume first.
 	QuotaBonusUse *int64 `json:"quota_bonus_use,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail
 
 // NewGetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail instantiates a new GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail) ToMap() (map[s
 	if !IsNil(o.QuotaBonusUse) {
 		toSerialize["quota_bonus_use"] = o.QuotaBonusUse
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail := _GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail(varGetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_levels")
+		delete(additionalProperties, "quota_period_sum")
+		delete(additionalProperties, "quota_period_use")
+		delete(additionalProperties, "quota_bonus_sum")
+		delete(additionalProperties, "quota_bonus_use")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail struct {

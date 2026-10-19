@@ -23,7 +23,10 @@ type ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseL
 	WarehouseName *string `json:"warehouse_name,omitempty"`
 	// Warehouse identifier for this available inbound method option.
 	WarehouseId *string `json:"warehouse_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList
 
 // NewListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList instantiates a new ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehou
 	if !IsNil(o.WarehouseId) {
 		toSerialize["warehouse_id"] = o.WarehouseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList) UnmarshalJSON(data []byte) (err error) {
+	varListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList := _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList{}
+
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList(varListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse_name")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList struct {

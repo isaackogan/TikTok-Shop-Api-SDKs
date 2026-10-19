@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CancelOrderRequest struct {
 	CancelReason string `json:"cancel_reason"`
 	// List of order lines or sub-order lines to cancel. In the US and UK markets, when an item is out of stock, partial cancellation at the individual item level is supported. **Note:** This field is completely backward compatible with the previous `order_line_item_ids` field. Do not provide non-empty values in both `order_line_list` and `order_line_item_ids` in the same request.
 	OrderLineList []OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CancelOrderRequest CancelOrderRequest
@@ -219,6 +219,11 @@ func (o CancelOrderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *CancelOrderRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCancelOrderRequest := _CancelOrderRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCancelOrderRequest)
+	err = json.Unmarshal(data, &varCancelOrderRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CancelOrderRequest(varCancelOrderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "cancel_reason")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

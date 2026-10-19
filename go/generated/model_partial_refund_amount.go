@@ -23,7 +23,10 @@ type PartialRefundAmount struct {
 	PartialRefundTotal *string `json:"partial_refund_total,omitempty"`
 	// Currency of the partial refund amount. When `decision` is `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`, this field is required and must match the return order's currency.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialRefundAmount PartialRefundAmount
 
 // NewPartialRefundAmount instantiates a new PartialRefundAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PartialRefundAmount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialRefundAmount) UnmarshalJSON(data []byte) (err error) {
+	varPartialRefundAmount := _PartialRefundAmount{}
+
+	err = json.Unmarshal(data, &varPartialRefundAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialRefundAmount(varPartialRefundAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "partial_refund_total")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialRefundAmount struct {

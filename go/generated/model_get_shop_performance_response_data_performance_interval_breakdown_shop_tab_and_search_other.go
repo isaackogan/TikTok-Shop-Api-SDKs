@@ -23,7 +23,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchO
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSear
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther := _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther(varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOther struct {

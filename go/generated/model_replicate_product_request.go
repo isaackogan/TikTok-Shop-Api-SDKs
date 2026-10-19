@@ -23,7 +23,10 @@ type ReplicateProductRequest struct {
 	InventoryMode *string `json:"inventory_mode,omitempty"`
 	// Target markets for replicating the local product.
 	ReplicateTarget []ReplicateProductRequestReplicateTarget `json:"replicate_target,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductRequest ReplicateProductRequest
 
 // NewReplicateProductRequest instantiates a new ReplicateProductRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ReplicateProductRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReplicateTarget) {
 		toSerialize["replicate_target"] = o.ReplicateTarget
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductRequest) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductRequest := _ReplicateProductRequest{}
+
+	err = json.Unmarshal(data, &varReplicateProductRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductRequest(varReplicateProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory_mode")
+		delete(additionalProperties, "replicate_target")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductRequest struct {

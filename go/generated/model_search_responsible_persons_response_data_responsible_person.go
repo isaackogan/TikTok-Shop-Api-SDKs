@@ -23,7 +23,10 @@ type SearchResponsiblePersonsResponseDataResponsiblePerson struct {
 	Id *string `json:"id,omitempty"`
 	// A list of contact details for the responsible person, presented in different languages for each supported EU country.
 	RegionalProfiles []SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile `json:"regional_profiles,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchResponsiblePersonsResponseDataResponsiblePerson SearchResponsiblePersonsResponseDataResponsiblePerson
 
 // NewSearchResponsiblePersonsResponseDataResponsiblePerson instantiates a new SearchResponsiblePersonsResponseDataResponsiblePerson object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchResponsiblePersonsResponseDataResponsiblePerson) ToMap() (map[stri
 	if !IsNil(o.RegionalProfiles) {
 		toSerialize["regional_profiles"] = o.RegionalProfiles
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchResponsiblePersonsResponseDataResponsiblePerson) UnmarshalJSON(data []byte) (err error) {
+	varSearchResponsiblePersonsResponseDataResponsiblePerson := _SearchResponsiblePersonsResponseDataResponsiblePerson{}
+
+	err = json.Unmarshal(data, &varSearchResponsiblePersonsResponseDataResponsiblePerson)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchResponsiblePersonsResponseDataResponsiblePerson(varSearchResponsiblePersonsResponseDataResponsiblePerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "regional_profiles")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchResponsiblePersonsResponseDataResponsiblePerson struct {

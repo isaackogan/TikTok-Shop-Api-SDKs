@@ -23,7 +23,10 @@ type UpdateInventoryResponseDataErrorDetail struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// A list of secondary errors or issues related to the main error.
 	ExtraErrors []UpdateInventoryResponseDataErrorDetailExtraError `json:"extra_errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateInventoryResponseDataErrorDetail UpdateInventoryResponseDataErrorDetail
 
 // NewUpdateInventoryResponseDataErrorDetail instantiates a new UpdateInventoryResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateInventoryResponseDataErrorDetail) ToMap() (map[string]interface{},
 	if !IsNil(o.ExtraErrors) {
 		toSerialize["extra_errors"] = o.ExtraErrors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateInventoryResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varUpdateInventoryResponseDataErrorDetail := _UpdateInventoryResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varUpdateInventoryResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateInventoryResponseDataErrorDetail(varUpdateInventoryResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "extra_errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateInventoryResponseDataErrorDetail struct {

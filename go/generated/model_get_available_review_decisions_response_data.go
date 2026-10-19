@@ -25,7 +25,10 @@ type GetAvailableReviewDecisionsResponseData struct {
 	RequestLogId *string `json:"request_log_id,omitempty"`
 	// Lists errors for partially failed requests. For example, if a request reviews multiple orders or items and only some fail, individual error details are returned here. **IMPORTANT**: Partial failures still return a top-level success code (0), so clients must also check this field to detect partial errors. For complete failures (e.g. validation errors), the top-level response code and message will indicate a failure, but this field will remain empty.
 	Errors []GetAvailableReviewDecisionsResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAvailableReviewDecisionsResponseData GetAvailableReviewDecisionsResponseData
 
 // NewGetAvailableReviewDecisionsResponseData instantiates a new GetAvailableReviewDecisionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAvailableReviewDecisionsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAvailableReviewDecisionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAvailableReviewDecisionsResponseData := _GetAvailableReviewDecisionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetAvailableReviewDecisionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAvailableReviewDecisionsResponseData(varGetAvailableReviewDecisionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "line_items")
+		delete(additionalProperties, "request_log_id")
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAvailableReviewDecisionsResponseData struct {

@@ -23,7 +23,10 @@ type UpdateStockOperationSettingsResponseDataStockOperation struct {
 	FailedSkuIds []string `json:"failed_sku_ids,omitempty"`
 	// List of SkuIDs that successfully updated inventory rules
 	SuccessSkuIds []string `json:"success_sku_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateStockOperationSettingsResponseDataStockOperation UpdateStockOperationSettingsResponseDataStockOperation
 
 // NewUpdateStockOperationSettingsResponseDataStockOperation instantiates a new UpdateStockOperationSettingsResponseDataStockOperation object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateStockOperationSettingsResponseDataStockOperation) ToMap() (map[str
 	if !IsNil(o.SuccessSkuIds) {
 		toSerialize["success_sku_ids"] = o.SuccessSkuIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateStockOperationSettingsResponseDataStockOperation) UnmarshalJSON(data []byte) (err error) {
+	varUpdateStockOperationSettingsResponseDataStockOperation := _UpdateStockOperationSettingsResponseDataStockOperation{}
+
+	err = json.Unmarshal(data, &varUpdateStockOperationSettingsResponseDataStockOperation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateStockOperationSettingsResponseDataStockOperation(varUpdateStockOperationSettingsResponseDataStockOperation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "failed_sku_ids")
+		delete(additionalProperties, "success_sku_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateStockOperationSettingsResponseDataStockOperation struct {

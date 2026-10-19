@@ -25,7 +25,10 @@ type GetSellerFinancialTransactionsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The list of transaction records matching the request filters.
 	Withdrawals []GetSellerFinancialTransactionsResponseDataWithdrawal `json:"withdrawals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSellerFinancialTransactionsResponseData GetSellerFinancialTransactionsResponseData
 
 // NewGetSellerFinancialTransactionsResponseData instantiates a new GetSellerFinancialTransactionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetSellerFinancialTransactionsResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.Withdrawals) {
 		toSerialize["withdrawals"] = o.Withdrawals
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSellerFinancialTransactionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSellerFinancialTransactionsResponseData := _GetSellerFinancialTransactionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetSellerFinancialTransactionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSellerFinancialTransactionsResponseData(varGetSellerFinancialTransactionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "withdrawals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSellerFinancialTransactionsResponseData struct {

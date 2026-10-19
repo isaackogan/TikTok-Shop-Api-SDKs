@@ -21,7 +21,10 @@ var _ MappedNullable = &AddShowcaseProductsResponseData{}
 type AddShowcaseProductsResponseData struct {
 	// A list of product showcase addition errors.
 	Errors []Error `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AddShowcaseProductsResponseData AddShowcaseProductsResponseData
 
 // NewAddShowcaseProductsResponseData instantiates a new AddShowcaseProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o AddShowcaseProductsResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AddShowcaseProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varAddShowcaseProductsResponseData := _AddShowcaseProductsResponseData{}
+
+	err = json.Unmarshal(data, &varAddShowcaseProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AddShowcaseProductsResponseData(varAddShowcaseProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAddShowcaseProductsResponseData struct {

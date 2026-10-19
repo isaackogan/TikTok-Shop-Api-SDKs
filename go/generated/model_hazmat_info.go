@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type HazmatInfo struct {
 	MsdsFileUrl string `json:"msds_file_url"`
 	// Aerosol info
 	AerosolExtraInfo *AerosolExtraInfo `json:"aerosol_extra_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HazmatInfo HazmatInfo
@@ -275,6 +275,11 @@ func (o HazmatInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AerosolExtraInfo) {
 		toSerialize["aerosol_extra_info"] = o.AerosolExtraInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -305,15 +310,26 @@ func (o *HazmatInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varHazmatInfo := _HazmatInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varHazmatInfo)
+	err = json.Unmarshal(data, &varHazmatInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = HazmatInfo(varHazmatInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hazmat_type")
+		delete(additionalProperties, "battery_extra_info")
+		delete(additionalProperties, "flammable_liquids_extra_info")
+		delete(additionalProperties, "dg_class")
+		delete(additionalProperties, "dg_uncode")
+		delete(additionalProperties, "msds_file_url")
+		delete(additionalProperties, "aerosol_extra_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -26,7 +26,10 @@ type InventorySearchResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *InventorySearchResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponse InventorySearchResponse
 
 // NewInventorySearchResponse instantiates a new InventorySearchResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o InventorySearchResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponse) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponse := _InventorySearchResponse{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponse(varInventorySearchResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponse struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &CancelFBTMCFOrderRequestConsignOrder{}
 type CancelFBTMCFOrderRequestConsignOrder struct {
 	// The consign order ID as a numeric string without the `OBF` prefix.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CancelFBTMCFOrderRequestConsignOrder CancelFBTMCFOrderRequestConsignOrder
 
 // NewCancelFBTMCFOrderRequestConsignOrder instantiates a new CancelFBTMCFOrderRequestConsignOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CancelFBTMCFOrderRequestConsignOrder) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CancelFBTMCFOrderRequestConsignOrder) UnmarshalJSON(data []byte) (err error) {
+	varCancelFBTMCFOrderRequestConsignOrder := _CancelFBTMCFOrderRequestConsignOrder{}
+
+	err = json.Unmarshal(data, &varCancelFBTMCFOrderRequestConsignOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CancelFBTMCFOrderRequestConsignOrder(varCancelFBTMCFOrderRequestConsignOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCancelFBTMCFOrderRequestConsignOrder struct {

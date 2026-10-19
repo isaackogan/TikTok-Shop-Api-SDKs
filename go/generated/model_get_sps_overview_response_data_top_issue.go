@@ -23,7 +23,10 @@ type GetSPSOverviewResponseDataTopIssue struct {
 	Issues []GetSPSOverviewResponseDataTopIssueIssue `json:"issues,omitempty"`
 	// Localized summary of the top issues.
 	Summary *string `json:"summary,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSOverviewResponseDataTopIssue GetSPSOverviewResponseDataTopIssue
 
 // NewGetSPSOverviewResponseDataTopIssue instantiates a new GetSPSOverviewResponseDataTopIssue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetSPSOverviewResponseDataTopIssue) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Summary) {
 		toSerialize["summary"] = o.Summary
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSOverviewResponseDataTopIssue) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSOverviewResponseDataTopIssue := _GetSPSOverviewResponseDataTopIssue{}
+
+	err = json.Unmarshal(data, &varGetSPSOverviewResponseDataTopIssue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSOverviewResponseDataTopIssue(varGetSPSOverviewResponseDataTopIssue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "issues")
+		delete(additionalProperties, "summary")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSOverviewResponseDataTopIssue struct {

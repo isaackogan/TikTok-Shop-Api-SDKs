@@ -23,7 +23,10 @@ type GetProductResponseDataSkuStatusInfo struct {
 	DeactivationSource *string `json:"deactivation_source,omitempty"`
 	// The SKU status in TikTok Shop. Possible values:  - NORMAL - DEACTIVATED
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuStatusInfo GetProductResponseDataSkuStatusInfo
 
 // NewGetProductResponseDataSkuStatusInfo instantiates a new GetProductResponseDataSkuStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductResponseDataSkuStatusInfo) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuStatusInfo := _GetProductResponseDataSkuStatusInfo{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuStatusInfo(varGetProductResponseDataSkuStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deactivation_source")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuStatusInfo struct {

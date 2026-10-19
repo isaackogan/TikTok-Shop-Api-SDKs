@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ReplicateProductRequestReplicateTargetCertification struct {
 	Id string `json:"id"`
 	// A list of certification related images.
 	Images []Image `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReplicateProductRequestReplicateTargetCertification ReplicateProductRequestReplicateTargetCertification
@@ -191,6 +191,11 @@ func (o ReplicateProductRequestReplicateTargetCertification) ToMap() (map[string
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *ReplicateProductRequestReplicateTargetCertification) UnmarshalJSON(data
 
 	varReplicateProductRequestReplicateTargetCertification := _ReplicateProductRequestReplicateTargetCertification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReplicateProductRequestReplicateTargetCertification)
+	err = json.Unmarshal(data, &varReplicateProductRequestReplicateTargetCertification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReplicateProductRequestReplicateTargetCertification(varReplicateProductRequestReplicateTargetCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "files")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

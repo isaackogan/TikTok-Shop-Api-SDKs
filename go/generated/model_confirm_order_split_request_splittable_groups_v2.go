@@ -23,7 +23,10 @@ type ConfirmOrderSplitRequestSplittableGroupsV2 struct {
 	Id *string `json:"id,omitempty"`
 	// This new parameter is completely backward compatible with the previous oder_line_items_ids field and in addition this supports bundle order splitting, use the sub items accordingly
 	OrderLineList []ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmOrderSplitRequestSplittableGroupsV2 ConfirmOrderSplitRequestSplittableGroupsV2
 
 // NewConfirmOrderSplitRequestSplittableGroupsV2 instantiates a new ConfirmOrderSplitRequestSplittableGroupsV2 object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ConfirmOrderSplitRequestSplittableGroupsV2) ToMap() (map[string]interfac
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmOrderSplitRequestSplittableGroupsV2) UnmarshalJSON(data []byte) (err error) {
+	varConfirmOrderSplitRequestSplittableGroupsV2 := _ConfirmOrderSplitRequestSplittableGroupsV2{}
+
+	err = json.Unmarshal(data, &varConfirmOrderSplitRequestSplittableGroupsV2)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmOrderSplitRequestSplittableGroupsV2(varConfirmOrderSplitRequestSplittableGroupsV2)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmOrderSplitRequestSplittableGroupsV2 struct {

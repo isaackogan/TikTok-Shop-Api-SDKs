@@ -25,7 +25,10 @@ type GetCampaignProductPerformanceListResponseData struct {
 	CampaignProductStatistics []GetCampaignProductPerformanceListResponseDataCampaignProductStatistic `json:"campaign_product_statistics,omitempty"`
 	// The token to use as `page_token` in the next request. Keep the same `campaign_id` and `page_size` on subsequent requests. An empty string indicates that there are no more results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseData GetCampaignProductPerformanceListResponseData
 
 // NewGetCampaignProductPerformanceListResponseData instantiates a new GetCampaignProductPerformanceListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCampaignProductPerformanceListResponseData) ToMap() (map[string]inter
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseData := _GetCampaignProductPerformanceListResponseData{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseData(varGetCampaignProductPerformanceListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "campaign_product_statistics")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseData struct {

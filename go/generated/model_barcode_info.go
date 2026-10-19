@@ -23,7 +23,10 @@ type BarcodeInfo struct {
 	BarcodeType *string `json:"barcode_type,omitempty"`
 	// Barcode value. UPC must contain 8 or 12 digits; EAN must contain 8 or 13 digits; and GTIN must contain 8, 12, 13, or 14 digits. UPC, EAN, and GTIN values must have a valid checksum. ASIN_OR_FNSKU must contain 10 uppercase letters or digits and start with B or X. MERCHANT_SKU_ID must contain 1 to 32 printable ASCII characters with no whitespace.
 	BarcodeValue *string `json:"barcode_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BarcodeInfo BarcodeInfo
 
 // NewBarcodeInfo instantiates a new BarcodeInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o BarcodeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BarcodeValue) {
 		toSerialize["barcode_value"] = o.BarcodeValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BarcodeInfo) UnmarshalJSON(data []byte) (err error) {
+	varBarcodeInfo := _BarcodeInfo{}
+
+	err = json.Unmarshal(data, &varBarcodeInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BarcodeInfo(varBarcodeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "barcode_type")
+		delete(additionalProperties, "barcode_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBarcodeInfo struct {

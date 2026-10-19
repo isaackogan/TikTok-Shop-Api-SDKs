@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv struct {
 	Currency *string `json:"currency,omitempty"`
 	// Total livestream GMV associated with the creator.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv) ToMap() (map
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv := _GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv(varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGmv struct {

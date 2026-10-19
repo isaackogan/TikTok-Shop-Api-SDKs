@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type RecommendRequiredProductPropertiesRequest struct {
 	SalesProperties []RecommendRequiredProductPropertiesRequestSalesProperty `json:"sales_properties,omitempty"`
 	// Optional property IDs that limit prediction to specific properties. When omitted, no property ID filter is applied.
 	TargetPropertyIds []string `json:"target_property_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendRequiredProductPropertiesRequest RecommendRequiredProductPropertiesRequest
@@ -256,6 +256,11 @@ func (o RecommendRequiredProductPropertiesRequest) ToMap() (map[string]interface
 	if !IsNil(o.TargetPropertyIds) {
 		toSerialize["target_property_ids"] = o.TargetPropertyIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -284,15 +289,25 @@ func (o *RecommendRequiredProductPropertiesRequest) UnmarshalJSON(data []byte) (
 
 	varRecommendRequiredProductPropertiesRequest := _RecommendRequiredProductPropertiesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendRequiredProductPropertiesRequest)
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendRequiredProductPropertiesRequest(varRecommendRequiredProductPropertiesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "product_title")
+		delete(additionalProperties, "sales_properties")
+		delete(additionalProperties, "target_property_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

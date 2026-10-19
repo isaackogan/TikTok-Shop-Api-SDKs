@@ -45,7 +45,10 @@ type GetAffiliatePartnerCampaignDetailResponseData struct {
 	TargetShops []GetAffiliatePartnerCampaignDetailResponseDataTargetShop `json:"target_shops,omitempty"`
 	// A list of seller types eligible to register for the campaign. Use this field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values: - LOCAL - CROSS_BORDER
 	TargetSellerTypes []string `json:"target_seller_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignDetailResponseData GetAffiliatePartnerCampaignDetailResponseData
 
 // NewGetAffiliatePartnerCampaignDetailResponseData instantiates a new GetAffiliatePartnerCampaignDetailResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o GetAffiliatePartnerCampaignDetailResponseData) ToMap() (map[string]inter
 	if !IsNil(o.TargetSellerTypes) {
 		toSerialize["target_seller_types"] = o.TargetSellerTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignDetailResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignDetailResponseData := _GetAffiliatePartnerCampaignDetailResponseData{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignDetailResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignDetailResponseData(varGetAffiliatePartnerCampaignDetailResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "registration_start_time")
+		delete(additionalProperties, "registration_end_time")
+		delete(additionalProperties, "campaign_start_time")
+		delete(additionalProperties, "campaign_end_time")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "contact_info")
+		delete(additionalProperties, "target_shops")
+		delete(additionalProperties, "target_seller_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignDetailResponseData struct {

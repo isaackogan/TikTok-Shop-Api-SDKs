@@ -27,7 +27,10 @@ type GetOpportunityDetailResponseDataOpportunityListingCriteria struct {
 	ProductStatus *string `json:"product_status,omitempty"`
 	// A comma-separated list of keywords that must be included in the product's title, attributes, description, or other applicable content.
 	Keywords *string `json:"keywords,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpportunityDetailResponseDataOpportunityListingCriteria GetOpportunityDetailResponseDataOpportunityListingCriteria
 
 // NewGetOpportunityDetailResponseDataOpportunityListingCriteria instantiates a new GetOpportunityDetailResponseDataOpportunityListingCriteria object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetOpportunityDetailResponseDataOpportunityListingCriteria) ToMap() (map
 	if !IsNil(o.Keywords) {
 		toSerialize["keywords"] = o.Keywords
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpportunityDetailResponseDataOpportunityListingCriteria) UnmarshalJSON(data []byte) (err error) {
+	varGetOpportunityDetailResponseDataOpportunityListingCriteria := _GetOpportunityDetailResponseDataOpportunityListingCriteria{}
+
+	err = json.Unmarshal(data, &varGetOpportunityDetailResponseDataOpportunityListingCriteria)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpportunityDetailResponseDataOpportunityListingCriteria(varGetOpportunityDetailResponseDataOpportunityListingCriteria)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_brand")
+		delete(additionalProperties, "product_category")
+		delete(additionalProperties, "product_status")
+		delete(additionalProperties, "keywords")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpportunityDetailResponseDataOpportunityListingCriteria struct {

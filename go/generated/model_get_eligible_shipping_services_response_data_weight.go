@@ -23,7 +23,10 @@ type GetEligibleShippingServicesResponseDataWeight struct {
 	Value *string `json:"value,omitempty"`
 	// The unit of measurement is used to measure the weight. - GRAM - POUND
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEligibleShippingServicesResponseDataWeight GetEligibleShippingServicesResponseDataWeight
 
 // NewGetEligibleShippingServicesResponseDataWeight instantiates a new GetEligibleShippingServicesResponseDataWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetEligibleShippingServicesResponseDataWeight) ToMap() (map[string]inter
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEligibleShippingServicesResponseDataWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetEligibleShippingServicesResponseDataWeight := _GetEligibleShippingServicesResponseDataWeight{}
+
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesResponseDataWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEligibleShippingServicesResponseDataWeight(varGetEligibleShippingServicesResponseDataWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEligibleShippingServicesResponseDataWeight struct {

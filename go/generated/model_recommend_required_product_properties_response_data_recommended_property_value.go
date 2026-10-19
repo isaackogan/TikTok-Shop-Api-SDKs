@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue stru
 	Id string `json:"id"`
 	// Display name of the recommended property value for the shop's region.
 	Name string `json:"name"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue
@@ -108,6 +108,11 @@ func (o RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue) 
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue)
 
 	varRecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue := _RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue)
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue(varRecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

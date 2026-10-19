@@ -21,7 +21,10 @@ var _ MappedNullable = &GetConversationListRequest{}
 type GetConversationListRequest struct {
 	// - If `true`, only `conversation_id` in `data.conversation` is returned.  - If `false`, all fields in `data.conversation` are returned. `true` by default.
 	OnlyNeedConversationId *bool `json:"only_need_conversation_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationListRequest GetConversationListRequest
 
 // NewGetConversationListRequest instantiates a new GetConversationListRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetConversationListRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OnlyNeedConversationId) {
 		toSerialize["only_need_conversation_id"] = o.OnlyNeedConversationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationListRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationListRequest := _GetConversationListRequest{}
+
+	err = json.Unmarshal(data, &varGetConversationListRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationListRequest(varGetConversationListRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "only_need_conversation_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationListRequest struct {

@@ -25,7 +25,10 @@ type SampleProduct struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// Sku property name list for this sku id.
 	SkuSalePropertyValueNames []string `json:"sku_sale_property_value_names,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SampleProduct SampleProduct
 
 // NewSampleProduct instantiates a new SampleProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SampleProduct) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuSalePropertyValueNames) {
 		toSerialize["sku_sale_property_value_names"] = o.SkuSalePropertyValueNames
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SampleProduct) UnmarshalJSON(data []byte) (err error) {
+	varSampleProduct := _SampleProduct{}
+
+	err = json.Unmarshal(data, &varSampleProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SampleProduct(varSampleProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_sale_property_value_names")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSampleProduct struct {

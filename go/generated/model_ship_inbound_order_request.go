@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ShipInboundOrderRequest struct {
 	Cartons []Carton `json:"cartons,omitempty"`
 	// Shipment option containing freight type and shipping method.
 	ShipmentOption ShipInboundOrderRequestShipmentOption `json:"shipment_option"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShipInboundOrderRequest ShipInboundOrderRequest
@@ -145,6 +145,11 @@ func (o ShipInboundOrderRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["cartons"] = o.Cartons
 	}
 	toSerialize["shipment_option"] = o.ShipmentOption
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *ShipInboundOrderRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varShipInboundOrderRequest := _ShipInboundOrderRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShipInboundOrderRequest)
+	err = json.Unmarshal(data, &varShipInboundOrderRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShipInboundOrderRequest(varShipInboundOrderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_order_id")
+		delete(additionalProperties, "cartons")
+		delete(additionalProperties, "shipment_option")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

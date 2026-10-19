@@ -26,7 +26,10 @@ type PredictProductPackageDimensionsAndWeightResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *PredictProductPackageDimensionsAndWeightResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PredictProductPackageDimensionsAndWeightResponse PredictProductPackageDimensionsAndWeightResponse
 
 // NewPredictProductPackageDimensionsAndWeightResponse instantiates a new PredictProductPackageDimensionsAndWeightResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o PredictProductPackageDimensionsAndWeightResponse) ToMap() (map[string]in
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PredictProductPackageDimensionsAndWeightResponse) UnmarshalJSON(data []byte) (err error) {
+	varPredictProductPackageDimensionsAndWeightResponse := _PredictProductPackageDimensionsAndWeightResponse{}
+
+	err = json.Unmarshal(data, &varPredictProductPackageDimensionsAndWeightResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PredictProductPackageDimensionsAndWeightResponse(varPredictProductPackageDimensionsAndWeightResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePredictProductPackageDimensionsAndWeightResponse struct {

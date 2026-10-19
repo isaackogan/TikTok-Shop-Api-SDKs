@@ -27,7 +27,10 @@ type ProductAuditStatusChangeWebhookData struct {
 	IntegratedPlatformStatuses *ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus `json:"integrated_platform_statuses,omitempty"`
 	// The time when the status changed, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductAuditStatusChangeWebhookData ProductAuditStatusChangeWebhookData
 
 // NewProductAuditStatusChangeWebhookData instantiates a new ProductAuditStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ProductAuditStatusChangeWebhookData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductAuditStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varProductAuditStatusChangeWebhookData := _ProductAuditStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varProductAuditStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductAuditStatusChangeWebhookData(varProductAuditStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "audit")
+		delete(additionalProperties, "integrated_platform_statuses")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductAuditStatusChangeWebhookData struct {

@@ -80,7 +80,7 @@ func (webhooks) Verify(o WebhookVerifyOptions) bool {
 // Parse decodes a body into the generated model for its integer `type`. An unknown type returns an
 // [UnknownWebhookEvent]. A body that is not a JSON object, has no integer `type`, or does not fit its
 // model is an error. 64-bit IDs keep every digit even when TikTok sends them as JSON numbers; fields a
-// model does not know are ignored.
+// model does not know are kept in its AdditionalProperties.
 func (webhooks) Parse(rawBody []byte) (WebhookEvent, error) {
 	dec := json.NewDecoder(bytes.NewReader(rawBody))
 	dec.UseNumber()
@@ -129,8 +129,8 @@ func (w webhooks) VerifyAndParse(o WebhookVerifyOptions) (WebhookEvent, error) {
 }
 
 // fit shapes a decoded body for the strict generated models: a JSON number where the model has a string
-// (TikTok sometimes sends IDs as numbers) becomes that number's exact text, and keys the model does not
-// know are dropped, because the generated unmarshallers reject them.
+// (TikTok sometimes sends IDs as numbers) becomes that number's exact text. Keys a model does not know
+// pass through to its AdditionalProperties.
 func fit(v any, t reflect.Type) any {
 	for t.Kind() == reflect.Pointer {
 		t = t.Elem()
@@ -165,6 +165,8 @@ func fit(v any, t reflect.Type) any {
 			for k, e := range x {
 				if ft, ok := fields[k]; ok {
 					out[k] = fit(e, ft)
+				} else {
+					out[k] = e // unknown to the model: its AdditionalProperties keeps it
 				}
 			}
 			return out

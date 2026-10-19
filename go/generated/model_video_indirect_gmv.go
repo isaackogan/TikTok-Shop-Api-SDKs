@@ -23,7 +23,10 @@ type VideoIndirectGmv struct {
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VideoIndirectGmv VideoIndirectGmv
 
 // NewVideoIndirectGmv instantiates a new VideoIndirectGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o VideoIndirectGmv) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VideoIndirectGmv) UnmarshalJSON(data []byte) (err error) {
+	varVideoIndirectGmv := _VideoIndirectGmv{}
+
+	err = json.Unmarshal(data, &varVideoIndirectGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VideoIndirectGmv(varVideoIndirectGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVideoIndirectGmv struct {

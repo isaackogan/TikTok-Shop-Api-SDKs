@@ -31,7 +31,10 @@ type GetSPSMetricTopItemsResponseData struct {
 	OtdrLogisticsItems []GetSPSMetricTopItemsResponseDataOtdrLogisticsItem `json:"otdr_logistics_items,omitempty"`
 	// Number of items in the metric-specific list returned by this response.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricTopItemsResponseData GetSPSMetricTopItemsResponseData
 
 // NewGetSPSMetricTopItemsResponseData instantiates a new GetSPSMetricTopItemsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetSPSMetricTopItemsResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricTopItemsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricTopItemsResponseData := _GetSPSMetricTopItemsResponseData{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricTopItemsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricTopItemsResponseData(varGetSPSMetricTopItemsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aht_aftersales_type_items")
+		delete(additionalProperties, "metric_code")
+		delete(additionalProperties, "nbfr_top_product_items")
+		delete(additionalProperties, "nrr_top_product_items")
+		delete(additionalProperties, "otdr_logistics_items")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricTopItemsResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ProductTagOperation struct {
 	ProductTag string `json:"product_tag"`
 	// Whether to enable the specified product tag. Set to `true` to enable the `AUCTION` tag or `false` to disable it.
 	Enable bool `json:"enable"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ProductTagOperation ProductTagOperation
@@ -108,6 +108,11 @@ func (o ProductTagOperation) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_tag"] = o.ProductTag
 	toSerialize["enable"] = o.Enable
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ProductTagOperation) UnmarshalJSON(data []byte) (err error) {
 
 	varProductTagOperation := _ProductTagOperation{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varProductTagOperation)
+	err = json.Unmarshal(data, &varProductTagOperation)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ProductTagOperation(varProductTagOperation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_tag")
+		delete(additionalProperties, "enable")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

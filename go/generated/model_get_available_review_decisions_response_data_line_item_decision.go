@@ -31,7 +31,10 @@ type GetAvailableReviewDecisionsResponseDataLineItemDecision struct {
 	AvailableRejectReasons []AvailableRejectReason `json:"available_reject_reasons,omitempty"`
 	// The allowed partial refund amount band. Returned for the `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG` decision when it is eligible; omitted for all other decisions.
 	PartialRefundAmountRange *GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange `json:"partial_refund_amount_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAvailableReviewDecisionsResponseDataLineItemDecision GetAvailableReviewDecisionsResponseDataLineItemDecision
 
 // NewGetAvailableReviewDecisionsResponseDataLineItemDecision instantiates a new GetAvailableReviewDecisionsResponseDataLineItemDecision object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetAvailableReviewDecisionsResponseDataLineItemDecision) ToMap() (map[st
 	if !IsNil(o.PartialRefundAmountRange) {
 		toSerialize["partial_refund_amount_range"] = o.PartialRefundAmountRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAvailableReviewDecisionsResponseDataLineItemDecision) UnmarshalJSON(data []byte) (err error) {
+	varGetAvailableReviewDecisionsResponseDataLineItemDecision := _GetAvailableReviewDecisionsResponseDataLineItemDecision{}
+
+	err = json.Unmarshal(data, &varGetAvailableReviewDecisionsResponseDataLineItemDecision)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAvailableReviewDecisionsResponseDataLineItemDecision(varGetAvailableReviewDecisionsResponseDataLineItemDecision)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decision")
+		delete(additionalProperties, "eligible")
+		delete(additionalProperties, "ineligible_code")
+		delete(additionalProperties, "ineligible_reason")
+		delete(additionalProperties, "available_reject_reasons")
+		delete(additionalProperties, "partial_refund_amount_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAvailableReviewDecisionsResponseDataLineItemDecision struct {

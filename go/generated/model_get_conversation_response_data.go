@@ -21,7 +21,10 @@ var _ MappedNullable = &GetConversationResponseData{}
 type GetConversationResponseData struct {
 	// Conversation info.
 	Conversation *GetConversationResponseDataConversation `json:"conversation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationResponseData GetConversationResponseData
 
 // NewGetConversationResponseData instantiates a new GetConversationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetConversationResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Conversation) {
 		toSerialize["conversation"] = o.Conversation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationResponseData := _GetConversationResponseData{}
+
+	err = json.Unmarshal(data, &varGetConversationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationResponseData(varGetConversationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationResponseData struct {

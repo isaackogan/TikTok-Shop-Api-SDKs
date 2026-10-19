@@ -23,7 +23,10 @@ type GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv struct {
 	Amount *string `json:"amount,omitempty"`
 	// GMV currency
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv
 
 // NewGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv instantiates a new GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv) ToMap
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv := _GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv(varGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleRightGmv struct {

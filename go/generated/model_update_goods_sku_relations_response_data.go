@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateGoodsSKURelationsResponseData{}
 type UpdateGoodsSKURelationsResponseData struct {
 	// Results of the requested bindings or unbindings between TikTok Shop SKUs and FBT goods.
 	OperateGoodsSkuRelationInfo *UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfo `json:"operate_goods_sku_relation_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateGoodsSKURelationsResponseData UpdateGoodsSKURelationsResponseData
 
 // NewUpdateGoodsSKURelationsResponseData instantiates a new UpdateGoodsSKURelationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateGoodsSKURelationsResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.OperateGoodsSkuRelationInfo) {
 		toSerialize["operate_goods_sku_relation_info"] = o.OperateGoodsSkuRelationInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateGoodsSKURelationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdateGoodsSKURelationsResponseData := _UpdateGoodsSKURelationsResponseData{}
+
+	err = json.Unmarshal(data, &varUpdateGoodsSKURelationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateGoodsSKURelationsResponseData(varUpdateGoodsSKURelationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "operate_goods_sku_relation_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateGoodsSKURelationsResponseData struct {

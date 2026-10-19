@@ -27,7 +27,10 @@ type GetConversationsResponseDataConversationLatestMessageSender struct {
 	Role *string `json:"role,omitempty"`
 	// Sender's nickname. - For shops, the nickname is the shop's name.  - For customer service, the nickname is the customer service's name.  - For buyers, the nickname is the buyer's nickname on TikTok.  You can set the nicknames for shops and customer service agents on Seller Center.
 	Nickname *string `json:"nickname,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationsResponseDataConversationLatestMessageSender GetConversationsResponseDataConversationLatestMessageSender
 
 // NewGetConversationsResponseDataConversationLatestMessageSender instantiates a new GetConversationsResponseDataConversationLatestMessageSender object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetConversationsResponseDataConversationLatestMessageSender) ToMap() (ma
 	if !IsNil(o.Nickname) {
 		toSerialize["nickname"] = o.Nickname
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationsResponseDataConversationLatestMessageSender) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationsResponseDataConversationLatestMessageSender := _GetConversationsResponseDataConversationLatestMessageSender{}
+
+	err = json.Unmarshal(data, &varGetConversationsResponseDataConversationLatestMessageSender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationsResponseDataConversationLatestMessageSender(varGetConversationsResponseDataConversationLatestMessageSender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "im_user_id")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "nickname")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationsResponseDataConversationLatestMessageSender struct {

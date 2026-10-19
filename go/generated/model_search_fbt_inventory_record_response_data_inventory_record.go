@@ -35,7 +35,10 @@ type SearchFBTInventoryRecordResponseDataInventoryRecord struct {
 	FinalOnHandQuantity *int64 `json:"final_on_hand_quantity,omitempty"`
 	// The change in the number of units is calculated as the `final_on_hand_quantity` - `initial_on_hand_quantity`.
 	ChangedQuantity *int64 `json:"changed_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRecordResponseDataInventoryRecord SearchFBTInventoryRecordResponseDataInventoryRecord
 
 // NewSearchFBTInventoryRecordResponseDataInventoryRecord instantiates a new SearchFBTInventoryRecordResponseDataInventoryRecord object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o SearchFBTInventoryRecordResponseDataInventoryRecord) ToMap() (map[string
 	if !IsNil(o.ChangedQuantity) {
 		toSerialize["changed_quantity"] = o.ChangedQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRecordResponseDataInventoryRecord) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRecordResponseDataInventoryRecord := _SearchFBTInventoryRecordResponseDataInventoryRecord{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRecordResponseDataInventoryRecord)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRecordResponseDataInventoryRecord(varSearchFBTInventoryRecordResponseDataInventoryRecord)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods")
+		delete(additionalProperties, "fbt_warehouse_id")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "inventory_goods_type")
+		delete(additionalProperties, "initial_on_hand_quantity")
+		delete(additionalProperties, "final_on_hand_quantity")
+		delete(additionalProperties, "changed_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRecordResponseDataInventoryRecord struct {

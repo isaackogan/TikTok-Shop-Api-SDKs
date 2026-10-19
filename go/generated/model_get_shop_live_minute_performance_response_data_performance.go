@@ -23,7 +23,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformance struct {
 	Overall *GetShopLIVEMinutePerformanceResponseDataPerformanceOverall `json:"overall,omitempty"`
 	// Minute-level interval data for the LIVE session, including traffic, interactions, conversion, and sales fields. Each page contains up to 100 intervals.
 	Intervals []GetShopLIVEMinutePerformanceResponseDataPerformanceInterval `json:"intervals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformance GetShopLIVEMinutePerformanceResponseDataPerformance
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformance instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformance) ToMap() (map[string
 	if !IsNil(o.Intervals) {
 		toSerialize["intervals"] = o.Intervals
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformance := _GetShopLIVEMinutePerformanceResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformance(varGetShopLIVEMinutePerformanceResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "overall")
+		delete(additionalProperties, "intervals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformance struct {

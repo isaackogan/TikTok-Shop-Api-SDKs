@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataProductCertificationExpirati
 type GetCategoryRulesResponseDataProductCertificationExpirationDate struct {
 	// A flag to indicate whether an expiration date is required for this certification.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataProductCertificationExpirationDate GetCategoryRulesResponseDataProductCertificationExpirationDate
 
 // NewGetCategoryRulesResponseDataProductCertificationExpirationDate instantiates a new GetCategoryRulesResponseDataProductCertificationExpirationDate object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataProductCertificationExpirationDate) ToMap() 
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataProductCertificationExpirationDate) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataProductCertificationExpirationDate := _GetCategoryRulesResponseDataProductCertificationExpirationDate{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataProductCertificationExpirationDate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataProductCertificationExpirationDate(varGetCategoryRulesResponseDataProductCertificationExpirationDate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataProductCertificationExpirationDate struct {

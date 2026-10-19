@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateAffiliatePartnerCampaignResponseData{}
 type CreateAffiliatePartnerCampaignResponseData struct {
 	// The campaign identifier.
 	CampaignId *string `json:"campaign_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateAffiliatePartnerCampaignResponseData CreateAffiliatePartnerCampaignResponseData
 
 // NewCreateAffiliatePartnerCampaignResponseData instantiates a new CreateAffiliatePartnerCampaignResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateAffiliatePartnerCampaignResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.CampaignId) {
 		toSerialize["campaign_id"] = o.CampaignId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateAffiliatePartnerCampaignResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateAffiliatePartnerCampaignResponseData := _CreateAffiliatePartnerCampaignResponseData{}
+
+	err = json.Unmarshal(data, &varCreateAffiliatePartnerCampaignResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateAffiliatePartnerCampaignResponseData(varCreateAffiliatePartnerCampaignResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "campaign_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateAffiliatePartnerCampaignResponseData struct {

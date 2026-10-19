@@ -31,7 +31,10 @@ type GetImageTranslationTasksResponseDataTranslationTask struct {
 	FailReason *string `json:"fail_reason,omitempty"`
 	// The translated image.
 	TranslatedImage *GetImageTranslationTasksResponseDataTranslationTaskTranslatedImage `json:"translated_image,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetImageTranslationTasksResponseDataTranslationTask GetImageTranslationTasksResponseDataTranslationTask
 
 // NewGetImageTranslationTasksResponseDataTranslationTask instantiates a new GetImageTranslationTasksResponseDataTranslationTask object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetImageTranslationTasksResponseDataTranslationTask) ToMap() (map[string
 	if !IsNil(o.TranslatedImage) {
 		toSerialize["translated_image"] = o.TranslatedImage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetImageTranslationTasksResponseDataTranslationTask) UnmarshalJSON(data []byte) (err error) {
+	varGetImageTranslationTasksResponseDataTranslationTask := _GetImageTranslationTasksResponseDataTranslationTask{}
+
+	err = json.Unmarshal(data, &varGetImageTranslationTasksResponseDataTranslationTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetImageTranslationTasksResponseDataTranslationTask(varGetImageTranslationTasksResponseDataTranslationTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "original_image")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "target_language")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "fail_reason")
+		delete(additionalProperties, "translated_image")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetImageTranslationTasksResponseDataTranslationTask struct {

@@ -23,7 +23,10 @@ type GetTokopediaAndTikTokShopProductIDMappingsResponseData struct {
 	Error *GetTokopediaAndTikTokShopProductIDMappingsResponseDataError `json:"error,omitempty"`
 	// list of product data
 	Product []Product `json:"product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTokopediaAndTikTokShopProductIDMappingsResponseData GetTokopediaAndTikTokShopProductIDMappingsResponseData
 
 // NewGetTokopediaAndTikTokShopProductIDMappingsResponseData instantiates a new GetTokopediaAndTikTokShopProductIDMappingsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetTokopediaAndTikTokShopProductIDMappingsResponseData) ToMap() (map[str
 	if !IsNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTokopediaAndTikTokShopProductIDMappingsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetTokopediaAndTikTokShopProductIDMappingsResponseData := _GetTokopediaAndTikTokShopProductIDMappingsResponseData{}
+
+	err = json.Unmarshal(data, &varGetTokopediaAndTikTokShopProductIDMappingsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTokopediaAndTikTokShopProductIDMappingsResponseData(varGetTokopediaAndTikTokShopProductIDMappingsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTokopediaAndTikTokShopProductIDMappingsResponseData struct {

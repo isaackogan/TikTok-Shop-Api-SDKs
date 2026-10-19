@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &DeleteWebhookForAnEventRequest{}
 type DeleteWebhookForAnEventRequest struct {
 	// The topic of the webhook event. Possible values: - `ORDER_STATUS_CHANGE`: Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a). - `RECIPIENT_ADDRESS_UPDATE`: Triggers when the recipient's address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9). - `PACKAGE_UPDATE`: Triggers when a package is updated (e.g., combined, split, or address changed). See [Package update](650955cabace3e02b73cc886). - `PRODUCT_STATUS_CHANGE`: Triggers when product audit results are updated. See [Product status change](650956aff1fd3102b90b6261). - `SELLER_DEAUTHORIZATION`: Triggers when a seller is deauthorized to inform developers and avoid misunderstandings about platform authorization issues. See [Seller deauthorization](65095746defece02be4d749d). - `UPCOMING_AUTHORIZATION_EXPIRATION`: Triggers 30 days before authorization expiration, with daily notifications at 0:00 until re-authorization is completed. See [Upcoming authorization expiration](6509579c0fcef602bf11312c). - `CANCELLATION_STATUS_CHANGE`: Triggers when an order's cancellation status changes. See [Cancellation status change](65030150746462028285f657). - `RETURN_STATUS_CHANGE`: Triggers when an order's return status changes. See [Return status change](65030162bb2a4d028d50cc51). - `NEW_CONVERSATION`: Triggers when a customer service agent joins or leaves a conversation. See [New conversation](6614330bfe9fdc02e002abfd). - `NEW_MESSAGE`: Triggers when a new message is sent in a customer service conversation. See [New Message](66143486ef8a1202dc323258). - `PRODUCT_INFORMATION_CHANGE`: Triggers when changes to a product's title, description, main images, or attributes go live. See [Product information change](65d6f41411a60f02dc1cf8bf). - `PRODUCT_CREATION`: Triggers when a new product is created. See [Product creation](663c98b566828e02e4515580). - `PRODUCT_CATEGORY_CHANGE`: Triggers when the category of a product is changed. See [Product category change](668764a371f16d02eef1f393). - `NEW_MESSAGE_LISTENER`: Triggers when a creator sends a message to the seller. See [New message listener](6790b76eb59cf9030997b783). - `INVOICE_STATUS_CHANGE`: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d). - `PRODUCT_AUDIT_STATUS_CHANGE`: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062). - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
 	EventType string `json:"event_type"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteWebhookForAnEventRequest DeleteWebhookForAnEventRequest
@@ -80,6 +80,11 @@ func (o DeleteWebhookForAnEventRequest) MarshalJSON() ([]byte, error) {
 func (o DeleteWebhookForAnEventRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["event_type"] = o.EventType
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *DeleteWebhookForAnEventRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varDeleteWebhookForAnEventRequest := _DeleteWebhookForAnEventRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteWebhookForAnEventRequest)
+	err = json.Unmarshal(data, &varDeleteWebhookForAnEventRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteWebhookForAnEventRequest(varDeleteWebhookForAnEventRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

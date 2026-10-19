@@ -25,7 +25,10 @@ type GetProductResponseDataDeliveryOption struct {
 	IsAvailable *bool `json:"is_available,omitempty"`
 	// The delivery option name.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataDeliveryOption GetProductResponseDataDeliveryOption
 
 // NewGetProductResponseDataDeliveryOption instantiates a new GetProductResponseDataDeliveryOption object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataDeliveryOption) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataDeliveryOption) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataDeliveryOption := _GetProductResponseDataDeliveryOption{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataDeliveryOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataDeliveryOption(varGetProductResponseDataDeliveryOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_available")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataDeliveryOption struct {

@@ -26,7 +26,10 @@ type GetBrandsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetBrandsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBrandsResponse GetBrandsResponse
 
 // NewGetBrandsResponse instantiates a new GetBrandsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetBrandsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBrandsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetBrandsResponse := _GetBrandsResponse{}
+
+	err = json.Unmarshal(data, &varGetBrandsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBrandsResponse(varGetBrandsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBrandsResponse struct {

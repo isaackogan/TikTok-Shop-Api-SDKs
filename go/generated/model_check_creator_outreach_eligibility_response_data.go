@@ -25,7 +25,10 @@ type CheckCreatorOutreachEligibilityResponseData struct {
 	IneligibleCreatorLevels []int64 `json:"ineligible_creator_levels,omitempty"`
 	// Whether quota can be consumed for the full requested creator batch.
 	IsBatchQuotaConsumable *bool `json:"is_batch_quota_consumable,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorOutreachEligibilityResponseData CheckCreatorOutreachEligibilityResponseData
 
 // NewCheckCreatorOutreachEligibilityResponseData instantiates a new CheckCreatorOutreachEligibilityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CheckCreatorOutreachEligibilityResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.IsBatchQuotaConsumable) {
 		toSerialize["is_batch_quota_consumable"] = o.IsBatchQuotaConsumable
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorOutreachEligibilityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorOutreachEligibilityResponseData := _CheckCreatorOutreachEligibilityResponseData{}
+
+	err = json.Unmarshal(data, &varCheckCreatorOutreachEligibilityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorOutreachEligibilityResponseData(varCheckCreatorOutreachEligibilityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_eligibility_results")
+		delete(additionalProperties, "ineligible_creator_levels")
+		delete(additionalProperties, "is_batch_quota_consumable")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorOutreachEligibilityResponseData struct {

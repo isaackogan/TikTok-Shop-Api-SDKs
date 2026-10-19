@@ -27,7 +27,10 @@ type SearchReturnsResponseDataReturnOrderShippingFeeAmount struct {
 	PlatformPaidReturnShippingFee *string `json:"platform_paid_return_shipping_fee,omitempty"`
 	// The amount of return shipping fee buyer paid.
 	BuyerPaidReturnShippingFee *string `json:"buyer_paid_return_shipping_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnsResponseDataReturnOrderShippingFeeAmount SearchReturnsResponseDataReturnOrderShippingFeeAmount
 
 // NewSearchReturnsResponseDataReturnOrderShippingFeeAmount instantiates a new SearchReturnsResponseDataReturnOrderShippingFeeAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchReturnsResponseDataReturnOrderShippingFeeAmount) ToMap() (map[stri
 	if !IsNil(o.BuyerPaidReturnShippingFee) {
 		toSerialize["buyer_paid_return_shipping_fee"] = o.BuyerPaidReturnShippingFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnsResponseDataReturnOrderShippingFeeAmount) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnsResponseDataReturnOrderShippingFeeAmount := _SearchReturnsResponseDataReturnOrderShippingFeeAmount{}
+
+	err = json.Unmarshal(data, &varSearchReturnsResponseDataReturnOrderShippingFeeAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnsResponseDataReturnOrderShippingFeeAmount(varSearchReturnsResponseDataReturnOrderShippingFeeAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "seller_paid_return_shipping_fee")
+		delete(additionalProperties, "platform_paid_return_shipping_fee")
+		delete(additionalProperties, "buyer_paid_return_shipping_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnsResponseDataReturnOrderShippingFeeAmount struct {

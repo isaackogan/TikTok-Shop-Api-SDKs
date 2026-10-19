@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpenCollaborationProductListByProductIdsResponseData{
 type GetOpenCollaborationProductListByProductIdsResponseData struct {
 	// Products found for the requested product IDs. The response may contain fewer products than requested.
 	Products []GetOpenCollaborationProductListByProductIdsResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationProductListByProductIdsResponseData GetOpenCollaborationProductListByProductIdsResponseData
 
 // NewGetOpenCollaborationProductListByProductIdsResponseData instantiates a new GetOpenCollaborationProductListByProductIdsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpenCollaborationProductListByProductIdsResponseData) ToMap() (map[st
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationProductListByProductIdsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationProductListByProductIdsResponseData := _GetOpenCollaborationProductListByProductIdsResponseData{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationProductListByProductIdsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationProductListByProductIdsResponseData(varGetOpenCollaborationProductListByProductIdsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationProductListByProductIdsResponseData struct {

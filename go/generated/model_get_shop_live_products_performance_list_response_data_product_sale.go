@@ -35,7 +35,10 @@ type GetShopLIVEProductsPerformanceListResponseDataProductSale struct {
 	MainOrders *int64 `json:"main_orders,omitempty"`
 	// Main order paid / Main order created of this product
 	PaymentRate *string `json:"payment_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProductSale GetShopLIVEProductsPerformanceListResponseDataProductSale
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProductSale instantiates a new GetShopLIVEProductsPerformanceListResponseDataProductSale object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProductSale) ToMap() (map[
 	if !IsNil(o.PaymentRate) {
 		toSerialize["payment_rate"] = o.PaymentRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProductSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProductSale := _GetShopLIVEProductsPerformanceListResponseDataProductSale{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProductSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProductSale(varGetShopLIVEProductsPerformanceListResponseDataProductSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "direct_gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "created_sku_orders")
+		delete(additionalProperties, "avg_price")
+		delete(additionalProperties, "sku_orders")
+		delete(additionalProperties, "main_orders")
+		delete(additionalProperties, "payment_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProductSale struct {

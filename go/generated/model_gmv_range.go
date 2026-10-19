@@ -27,7 +27,10 @@ type GmvRange struct {
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The formatted range of GMV values associated with this creator.
 	FormattedRange *string `json:"formatted_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GmvRange GmvRange
 
 // NewGmvRange instantiates a new GmvRange object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GmvRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FormattedRange) {
 		toSerialize["formatted_range"] = o.FormattedRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GmvRange) UnmarshalJSON(data []byte) (err error) {
+	varGmvRange := _GmvRange{}
+
+	err = json.Unmarshal(data, &varGmvRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GmvRange(varGmvRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "formatted_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGmvRange struct {

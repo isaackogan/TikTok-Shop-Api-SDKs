@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Cell{}
 type Cell struct {
 	// Cell value. Maximum length: 32 characters.
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Cell Cell
@@ -80,6 +80,11 @@ func (o Cell) MarshalJSON() ([]byte, error) {
 func (o Cell) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *Cell) UnmarshalJSON(data []byte) (err error) {
 
 	varCell := _Cell{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCell)
+	err = json.Unmarshal(data, &varCell)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Cell(varCell)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

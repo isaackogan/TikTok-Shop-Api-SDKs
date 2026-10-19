@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -37,6 +36,7 @@ type CalculateRefundRequest struct {
 	Skus []Sku `json:"skus,omitempty"`
 	// Order lines to include in the refund calculation. Use this field when you need to identify individual sub-items in a bundle product. **Note:** This field is completely backward compatible with the previous `order_line_item_ids` field. Do not provide non-empty values in both `order_line_list` and `order_line_item_ids` in the same request.
 	OrderLineList []OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CalculateRefundRequest CalculateRefundRequest
@@ -321,6 +321,11 @@ func (o CalculateRefundRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -350,15 +355,27 @@ func (o *CalculateRefundRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCalculateRefundRequest := _CalculateRefundRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCalculateRefundRequest)
+	err = json.Unmarshal(data, &varCalculateRefundRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CalculateRefundRequest(varCalculateRefundRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "request_type")
+		delete(additionalProperties, "shipment_type")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "reason_name")
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

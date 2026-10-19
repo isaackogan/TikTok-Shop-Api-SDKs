@@ -23,7 +23,10 @@ type GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax 
 	Amount *string `json:"amount,omitempty"`
 	// GMV with tax currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax
 
 // NewGetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax instantiates a new GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclT
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax := _GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax(varGetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetActivityResponseDataBenefitProduct{}
 type GetActivityResponseDataBenefitProduct struct {
 	// TikTokShop product ID
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataBenefitProduct GetActivityResponseDataBenefitProduct
 
 // NewGetActivityResponseDataBenefitProduct instantiates a new GetActivityResponseDataBenefitProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetActivityResponseDataBenefitProduct) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataBenefitProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataBenefitProduct := _GetActivityResponseDataBenefitProduct{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataBenefitProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataBenefitProduct(varGetActivityResponseDataBenefitProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataBenefitProduct struct {

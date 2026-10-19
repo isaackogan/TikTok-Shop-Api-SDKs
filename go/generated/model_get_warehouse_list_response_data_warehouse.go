@@ -35,7 +35,10 @@ type GetWarehouseListResponseDataWarehouse struct {
 	IsDefault *bool `json:"is_default,omitempty"`
 	// Warehouse address.
 	Address *GetWarehouseListResponseDataWarehouseAddress `json:"address,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseListResponseDataWarehouse GetWarehouseListResponseDataWarehouse
 
 // NewGetWarehouseListResponseDataWarehouse instantiates a new GetWarehouseListResponseDataWarehouse object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetWarehouseListResponseDataWarehouse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseListResponseDataWarehouse) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseListResponseDataWarehouse := _GetWarehouseListResponseDataWarehouse{}
+
+	err = json.Unmarshal(data, &varGetWarehouseListResponseDataWarehouse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseListResponseDataWarehouse(varGetWarehouseListResponseDataWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "entity_id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "effect_status")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "sub_type")
+		delete(additionalProperties, "is_default")
+		delete(additionalProperties, "address")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseListResponseDataWarehouse struct {

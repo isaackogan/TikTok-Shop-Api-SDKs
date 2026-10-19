@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTInboundOrderDetailsResponseData{}
 type GetFBTInboundOrderDetailsResponseData struct {
 	// A list of inbound order detail information.
 	InboundOrders []GetFBTInboundOrderDetailsResponseDataInboundOrder `json:"inbound_orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseData GetFBTInboundOrderDetailsResponseData
 
 // NewGetFBTInboundOrderDetailsResponseData instantiates a new GetFBTInboundOrderDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTInboundOrderDetailsResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.InboundOrders) {
 		toSerialize["inbound_orders"] = o.InboundOrders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseData := _GetFBTInboundOrderDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseData(varGetFBTInboundOrderDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseData struct {

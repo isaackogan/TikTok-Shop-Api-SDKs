@@ -29,7 +29,10 @@ type AftersalesRequestStatusUpdateWebhookData struct {
 	AftersalesRequestCreateTime *int64 `json:"aftersales_request_create_time,omitempty"`
 	// Last update time of the aftersales request in Unix seconds.
 	AftersalesRequestUpdateTime *int64 `json:"aftersales_request_update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AftersalesRequestStatusUpdateWebhookData AftersalesRequestStatusUpdateWebhookData
 
 // NewAftersalesRequestStatusUpdateWebhookData instantiates a new AftersalesRequestStatusUpdateWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o AftersalesRequestStatusUpdateWebhookData) ToMap() (map[string]interface{
 	if !IsNil(o.AftersalesRequestUpdateTime) {
 		toSerialize["aftersales_request_update_time"] = o.AftersalesRequestUpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AftersalesRequestStatusUpdateWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varAftersalesRequestStatusUpdateWebhookData := _AftersalesRequestStatusUpdateWebhookData{}
+
+	err = json.Unmarshal(data, &varAftersalesRequestStatusUpdateWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AftersalesRequestStatusUpdateWebhookData(varAftersalesRequestStatusUpdateWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_request_id")
+		delete(additionalProperties, "return_role")
+		delete(additionalProperties, "aftersales_request_status")
+		delete(additionalProperties, "aftersales_request_create_time")
+		delete(additionalProperties, "aftersales_request_update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAftersalesRequestStatusUpdateWebhookData struct {

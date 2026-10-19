@@ -27,7 +27,10 @@ type GetCouponResponseDataCouponDiscount struct {
 	Percentage *string `json:"percentage,omitempty"`
 	// Optional monetary upper limit of the total discount amount when `type == \"PERCENT_OFF\"`.
 	MaxDiscount *MaxDiscount `json:"max_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseDataCouponDiscount GetCouponResponseDataCouponDiscount
 
 // NewGetCouponResponseDataCouponDiscount instantiates a new GetCouponResponseDataCouponDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetCouponResponseDataCouponDiscount) ToMap() (map[string]interface{}, er
 	if !IsNil(o.MaxDiscount) {
 		toSerialize["max_discount"] = o.MaxDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseDataCouponDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseDataCouponDiscount := _GetCouponResponseDataCouponDiscount{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseDataCouponDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseDataCouponDiscount(varGetCouponResponseDataCouponDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "reduction_amount")
+		delete(additionalProperties, "percentage")
+		delete(additionalProperties, "max_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseDataCouponDiscount struct {

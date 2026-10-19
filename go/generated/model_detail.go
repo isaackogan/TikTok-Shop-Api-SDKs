@@ -21,7 +21,10 @@ var _ MappedNullable = &Detail{}
 type Detail struct {
 	// The product identifier.
 	ProductId *string `json:"product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Detail Detail
 
 // NewDetail instantiates a new Detail object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Detail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductId) {
 		toSerialize["product_id"] = o.ProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Detail) UnmarshalJSON(data []byte) (err error) {
+	varDetail := _Detail{}
+
+	err = json.Unmarshal(data, &varDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Detail(varDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDetail struct {

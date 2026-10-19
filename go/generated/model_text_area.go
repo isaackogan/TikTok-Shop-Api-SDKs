@@ -29,7 +29,10 @@ type TextArea struct {
 	Fonts []string `json:"fonts,omitempty"`
 	// The maximum number of characters allowed for consumer text input.
 	MaxTextLength *int64 `json:"max_text_length,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TextArea TextArea
 
 // NewTextArea instantiates a new TextArea object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o TextArea) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxTextLength) {
 		toSerialize["max_text_length"] = o.MaxTextLength
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TextArea) UnmarshalJSON(data []byte) (err error) {
+	varTextArea := _TextArea{}
+
+	err = json.Unmarshal(data, &varTextArea)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TextArea(varTextArea)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "align_type")
+		delete(additionalProperties, "colors")
+		delete(additionalProperties, "default_text")
+		delete(additionalProperties, "fonts")
+		delete(additionalProperties, "max_text_length")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTextArea struct {

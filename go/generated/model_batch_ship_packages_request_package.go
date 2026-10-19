@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type BatchShipPackagesRequestPackage struct {
 	PickupSlot *PickupSlot `json:"pickup_slot,omitempty"`
 	// Only needed for seller shipping packages. Check the `delivery_option `field in [Get Package Detail](https://partner.tiktokshop.com/docv2/page/650aa39fbace3e02b75d8617?external_id=650aa39fbace3e02b75d8617) to see how to differentiate between TikTok shipping and seller shipping. Use the `shipping_provider_id` retrieved from the [Get Shipping Providers](https://partner.tiktokshop.com/docv2/page/650aa48d4a0bb702c06d85cd?external_id=650aa48d4a0bb702c06d85cd#Back%20To%20Top) API and upload the corresponding tracking number.
 	SelfShipment *SelfShipment `json:"self_shipment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BatchShipPackagesRequestPackage BatchShipPackagesRequestPackage
@@ -191,6 +191,11 @@ func (o BatchShipPackagesRequestPackage) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.SelfShipment) {
 		toSerialize["self_shipment"] = o.SelfShipment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *BatchShipPackagesRequestPackage) UnmarshalJSON(data []byte) (err error)
 
 	varBatchShipPackagesRequestPackage := _BatchShipPackagesRequestPackage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBatchShipPackagesRequestPackage)
+	err = json.Unmarshal(data, &varBatchShipPackagesRequestPackage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BatchShipPackagesRequestPackage(varBatchShipPackagesRequestPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "pickup_slot")
+		delete(additionalProperties, "self_shipment")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type GetShoppableVideoStatusResponseDataVideo struct {
 	PostStatus *string `json:"post_status,omitempty"`
 	// Returned if the video has been successfully posted, i.e. `posting_status = SUCCESS`. Represented in seconds.
 	PostTime *int64 `json:"post_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoStatusResponseDataVideo GetShoppableVideoStatusResponseDataVideo
 
 // NewGetShoppableVideoStatusResponseDataVideo instantiates a new GetShoppableVideoStatusResponseDataVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShoppableVideoStatusResponseDataVideo) ToMap() (map[string]interface{
 	if !IsNil(o.PostTime) {
 		toSerialize["post_time"] = o.PostTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoStatusResponseDataVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoStatusResponseDataVideo := _GetShoppableVideoStatusResponseDataVideo{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoStatusResponseDataVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoStatusResponseDataVideo(varGetShoppableVideoStatusResponseDataVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "post_status")
+		delete(additionalProperties, "post_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoStatusResponseDataVideo struct {

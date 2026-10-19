@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type PostShoppableVideoRequestVideoInfo struct {
 	CoverTimestampMs *int64 `json:"cover_timestamp_ms,omitempty"`
 	// The music ID for the video's background music. Obtain it from Search Music (`GET /affiliate_creator/202602/music/search`). If not provided, no music will be associated with the video.
 	MusicId *string `json:"music_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostShoppableVideoRequestVideoInfo PostShoppableVideoRequestVideoInfo
@@ -219,6 +219,11 @@ func (o PostShoppableVideoRequestVideoInfo) ToMap() (map[string]interface{}, err
 	if !IsNil(o.MusicId) {
 		toSerialize["music_id"] = o.MusicId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *PostShoppableVideoRequestVideoInfo) UnmarshalJSON(data []byte) (err err
 
 	varPostShoppableVideoRequestVideoInfo := _PostShoppableVideoRequestVideoInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostShoppableVideoRequestVideoInfo)
+	err = json.Unmarshal(data, &varPostShoppableVideoRequestVideoInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostShoppableVideoRequestVideoInfo(varPostShoppableVideoRequestVideoInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "cover_uri")
+		delete(additionalProperties, "cover_timestamp_ms")
+		delete(additionalProperties, "music_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

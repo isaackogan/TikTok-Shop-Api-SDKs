@@ -29,7 +29,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator struct {
 	OpenId *string `json:"open_id,omitempty"`
 	// The creator's username.
 	UserName *string `json:"user_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator) ToMap() 
 	if !IsNil(o.UserName) {
 		toSerialize["user_name"] = o.UserName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "author_type")
+		delete(additionalProperties, "creator_country")
+		delete(additionalProperties, "nick_name")
+		delete(additionalProperties, "open_id")
+		delete(additionalProperties, "user_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator struct {

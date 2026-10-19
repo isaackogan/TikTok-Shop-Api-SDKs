@@ -21,7 +21,10 @@ var _ MappedNullable = &ReplicateProductResponseData{}
 type ReplicateProductResponseData struct {
 	// The pre-submission validation errors for target markets. When this list is non-empty, asynchronous replication is not submitted. Use each item's `detail.region` to identify the affected target market.
 	Errors []ReplicateProductResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductResponseData ReplicateProductResponseData
 
 // NewReplicateProductResponseData instantiates a new ReplicateProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ReplicateProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductResponseData := _ReplicateProductResponseData{}
+
+	err = json.Unmarshal(data, &varReplicateProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductResponseData(varReplicateProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductResponseData struct {

@@ -49,7 +49,10 @@ type SearchProductsRequest struct {
 	Locale *string `json:"locale,omitempty"`
 	// Whether to include LIVE_QUICK products in the query results. true — Returns LIVE_QUICK products and normal product. false —only return normal product.  Default: false
 	IncludeLiveQuickProducts *bool `json:"include_live_quick_products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsRequest SearchProductsRequest
 
 // NewSearchProductsRequest instantiates a new SearchProductsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -603,7 +606,47 @@ func (o SearchProductsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IncludeLiveQuickProducts) {
 		toSerialize["include_live_quick_products"] = o.IncludeLiveQuickProducts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsRequest := _SearchProductsRequest{}
+
+	err = json.Unmarshal(data, &varSearchProductsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsRequest(varSearchProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "seller_skus")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_le")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_le")
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "listing_quality_tiers")
+		delete(additionalProperties, "listing_platforms")
+		delete(additionalProperties, "audit_status")
+		delete(additionalProperties, "sku_ids")
+		delete(additionalProperties, "sns_filter")
+		delete(additionalProperties, "return_draft_version")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "include_live_quick_products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsRequest struct {

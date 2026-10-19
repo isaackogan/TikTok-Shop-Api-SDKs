@@ -59,7 +59,10 @@ type GetProductResponseDataSku struct {
 	StatusInfo *GetProductResponseDataSkuStatusInfo `json:"status_info,omitempty"`
 	// The customer purchase limits for this SKU. `maximum_order_quantity` is the maximum quantity the customer can purchase in one order, and `cumulative_order_quantity` is the maximum quantity the customer can purchase across all orders while the limit is active.
 	PurchaseOrderQuantityLimit *PurchaseOrderQuantityLimit `json:"purchase_order_quantity_limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSku GetProductResponseDataSku
 
 // NewGetProductResponseDataSku instantiates a new GetProductResponseDataSku object
 // This constructor will assign default values to properties that have it defined,
@@ -788,7 +791,52 @@ func (o GetProductResponseDataSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PurchaseOrderQuantityLimit) {
 		toSerialize["purchase_order_quantity_limit"] = o.PurchaseOrderQuantityLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSku) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSku := _GetProductResponseDataSku{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSku(varGetProductResponseDataSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "combined_skus")
+		delete(additionalProperties, "external_list_prices")
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "external_urls")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "fees")
+		delete(additionalProperties, "global_listing_policy")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "pre_sale")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sku_dimensions")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "sku_weight")
+		delete(additionalProperties, "status_info")
+		delete(additionalProperties, "purchase_order_quantity_limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSku struct {

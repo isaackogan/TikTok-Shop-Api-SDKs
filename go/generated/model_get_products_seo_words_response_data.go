@@ -21,7 +21,10 @@ var _ MappedNullable = &GetProductsSEOWordsResponseData{}
 type GetProductsSEOWordsResponseData struct {
 	// The requested products for which SEO keyword suggestions were returned. Products without returned suggestions are omitted. When no suggestions are returned, `products` may be omitted or returned as an empty list.
 	Products []GetProductsSEOWordsResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductsSEOWordsResponseData GetProductsSEOWordsResponseData
 
 // NewGetProductsSEOWordsResponseData instantiates a new GetProductsSEOWordsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetProductsSEOWordsResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductsSEOWordsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetProductsSEOWordsResponseData := _GetProductsSEOWordsResponseData{}
+
+	err = json.Unmarshal(data, &varGetProductsSEOWordsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductsSEOWordsResponseData(varGetProductsSEOWordsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductsSEOWordsResponseData struct {

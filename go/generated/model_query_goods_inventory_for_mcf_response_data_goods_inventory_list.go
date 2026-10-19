@@ -23,7 +23,10 @@ type QueryGoodsInventoryForMCFResponseDataGoodsInventoryList struct {
 	GoodsId *string `json:"goods_id,omitempty"`
 	// Available inventory of goods
 	AvailableQty *int64 `json:"available_qty,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryGoodsInventoryForMCFResponseDataGoodsInventoryList QueryGoodsInventoryForMCFResponseDataGoodsInventoryList
 
 // NewQueryGoodsInventoryForMCFResponseDataGoodsInventoryList instantiates a new QueryGoodsInventoryForMCFResponseDataGoodsInventoryList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o QueryGoodsInventoryForMCFResponseDataGoodsInventoryList) ToMap() (map[st
 	if !IsNil(o.AvailableQty) {
 		toSerialize["available_qty"] = o.AvailableQty
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryGoodsInventoryForMCFResponseDataGoodsInventoryList) UnmarshalJSON(data []byte) (err error) {
+	varQueryGoodsInventoryForMCFResponseDataGoodsInventoryList := _QueryGoodsInventoryForMCFResponseDataGoodsInventoryList{}
+
+	err = json.Unmarshal(data, &varQueryGoodsInventoryForMCFResponseDataGoodsInventoryList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryGoodsInventoryForMCFResponseDataGoodsInventoryList(varQueryGoodsInventoryForMCFResponseDataGoodsInventoryList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "available_qty")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryGoodsInventoryForMCFResponseDataGoodsInventoryList struct {

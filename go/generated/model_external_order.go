@@ -25,7 +25,10 @@ type ExternalOrder struct {
 	Platform *string `json:"platform,omitempty"`
 	// Line item references between the external order and TikTok Shop.
 	LineItems []GetExternalOrderReferencesResponseDataExternalOrderLineItem `json:"line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExternalOrder ExternalOrder
 
 // NewExternalOrder instantiates a new ExternalOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ExternalOrder) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LineItems) {
 		toSerialize["line_items"] = o.LineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExternalOrder) UnmarshalJSON(data []byte) (err error) {
+	varExternalOrder := _ExternalOrder{}
+
+	err = json.Unmarshal(data, &varExternalOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExternalOrder(varExternalOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "platform")
+		delete(additionalProperties, "line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExternalOrder struct {

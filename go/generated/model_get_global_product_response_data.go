@@ -64,7 +64,10 @@ type GetGlobalProductResponseData struct {
 	SourceLocale *string `json:"source_locale,omitempty"`
 	// An external identifier used in an external ecommerce platform. This is used to associate the product between TikTok Shop and the external ecommerce platform.
 	ExternalGlobalProductId *string `json:"external_global_product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseData GetGlobalProductResponseData
 
 // NewGetGlobalProductResponseData instantiates a new GetGlobalProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -866,7 +869,54 @@ func (o GetGlobalProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalGlobalProductId) {
 		toSerialize["external_global_product_id"] = o.ExternalGlobalProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseData := _GetGlobalProductResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseData(varGetGlobalProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "global_seller_id")
+		delete(additionalProperties, "brand")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "source_locale")
+		delete(additionalProperties, "external_global_product_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseData struct {

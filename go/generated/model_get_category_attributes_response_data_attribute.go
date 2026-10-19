@@ -39,7 +39,10 @@ type GetCategoryAttributesResponseDataAttribute struct {
 	IsMultipleSelection *bool `json:"is_multiple_selection,omitempty"`
 	// Defines the measurement template information used to describe the measurement standards and metric values configured for the product.
 	MetricStandards []GetCategoryAttributesResponseDataAttributeMetricStandard `json:"metric_standards,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttribute GetCategoryAttributesResponseDataAttribute
 
 // NewGetCategoryAttributesResponseDataAttribute instantiates a new GetCategoryAttributesResponseDataAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetCategoryAttributesResponseDataAttribute) ToMap() (map[string]interfac
 	if !IsNil(o.MetricStandards) {
 		toSerialize["metric_standards"] = o.MetricStandards
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttribute := _GetCategoryAttributesResponseDataAttribute{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttribute(varGetCategoryAttributesResponseDataAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "is_requried")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "value_data_format")
+		delete(additionalProperties, "is_customizable")
+		delete(additionalProperties, "requirement_conditions")
+		delete(additionalProperties, "is_multiple_selection")
+		delete(additionalProperties, "metric_standards")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttribute struct {

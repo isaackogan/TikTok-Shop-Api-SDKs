@@ -23,7 +23,10 @@ type GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMercha
 	Amount *string `json:"amount,omitempty"`
 	// Gross merchandise value currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue
 
 // NewGetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue instantiates a new GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMer
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue := _GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue(varGetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue struct {

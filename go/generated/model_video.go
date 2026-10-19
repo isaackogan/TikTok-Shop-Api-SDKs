@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &Video{}
 type Video struct {
 	// The ID of the product video. Use the [Upload Product File API](https://partner.tiktokshop.com/docv2/page/6509dffdc16ffe02b8dc10c5) to upload the video first and obtain the corresponding file ID.
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Video Video
@@ -80,6 +80,11 @@ func (o Video) MarshalJSON() ([]byte, error) {
 func (o Video) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *Video) UnmarshalJSON(data []byte) (err error) {
 
 	varVideo := _Video{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVideo)
+	err = json.Unmarshal(data, &varVideo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Video(varVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

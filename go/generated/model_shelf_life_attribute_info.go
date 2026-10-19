@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ShelfLifeAttributeInfo struct {
 	SalesCutoffDays int64 `json:"sales_cutoff_days"`
 	// How expired inventory is handled. Possible values: - `STORE_UNITS`: Move the units to defective inventory. - `RETURN_TO_SELLER`: Return the units to the seller. - `DISPOSE`: Dispose of the units.
 	HandlingMethodExpiredGoods *string `json:"handling_method_expired_goods,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShelfLifeAttributeInfo ShelfLifeAttributeInfo
@@ -210,6 +210,11 @@ func (o ShelfLifeAttributeInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HandlingMethodExpiredGoods) {
 		toSerialize["handling_method_expired_goods"] = o.HandlingMethodExpiredGoods
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *ShelfLifeAttributeInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varShelfLifeAttributeInfo := _ShelfLifeAttributeInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShelfLifeAttributeInfo)
+	err = json.Unmarshal(data, &varShelfLifeAttributeInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShelfLifeAttributeInfo(varShelfLifeAttributeInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shelf_life")
+		delete(additionalProperties, "inbound_cutoff_days")
+		delete(additionalProperties, "expiration_alert_days")
+		delete(additionalProperties, "sales_cutoff_days")
+		delete(additionalProperties, "handling_method_expired_goods")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

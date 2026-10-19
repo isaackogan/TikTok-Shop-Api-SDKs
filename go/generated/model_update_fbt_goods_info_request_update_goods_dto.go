@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -53,6 +52,7 @@ type UpdateFBTGoodsInfoRequestUpdateGoodsDto struct {
 	BulkyItemAttribute *UpdateFBTGoodsInfoRequestUpdateGoodsDtoBulkyItemAttribute `json:"bulky_item_attribute,omitempty"`
 	// safety attribute info
 	GoodsSafetyAttributes *GoodsSafetyAttribute `json:"goods_safety_attributes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateFBTGoodsInfoRequestUpdateGoodsDto UpdateFBTGoodsInfoRequestUpdateGoodsDto
@@ -572,6 +572,11 @@ func (o UpdateFBTGoodsInfoRequestUpdateGoodsDto) ToMap() (map[string]interface{}
 	if !IsNil(o.GoodsSafetyAttributes) {
 		toSerialize["goods_safety_attributes"] = o.GoodsSafetyAttributes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -606,15 +611,35 @@ func (o *UpdateFBTGoodsInfoRequestUpdateGoodsDto) UnmarshalJSON(data []byte) (er
 
 	varUpdateFBTGoodsInfoRequestUpdateGoodsDto := _UpdateFBTGoodsInfoRequestUpdateGoodsDto{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateFBTGoodsInfoRequestUpdateGoodsDto)
+	err = json.Unmarshal(data, &varUpdateFBTGoodsInfoRequestUpdateGoodsDto)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateFBTGoodsInfoRequestUpdateGoodsDto(varUpdateFBTGoodsInfoRequestUpdateGoodsDto)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_goods_id")
+		delete(additionalProperties, "goods_name")
+		delete(additionalProperties, "goods_image_url")
+		delete(additionalProperties, "reference_code")
+		delete(additionalProperties, "barcode_infos")
+		delete(additionalProperties, "return_handling_method")
+		delete(additionalProperties, "dimension_and_weight_base_info")
+		delete(additionalProperties, "is_hazmat")
+		delete(additionalProperties, "hazmat_info")
+		delete(additionalProperties, "is_lot_code")
+		delete(additionalProperties, "is_expiration_management")
+		delete(additionalProperties, "shelf_life_attribute_info")
+		delete(additionalProperties, "is_sioc")
+		delete(additionalProperties, "sioc_attribute")
+		delete(additionalProperties, "bulky_item_attribute")
+		delete(additionalProperties, "goods_safety_attributes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

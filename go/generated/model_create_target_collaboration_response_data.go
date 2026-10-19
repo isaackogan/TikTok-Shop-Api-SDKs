@@ -29,7 +29,10 @@ type CreateTargetCollaborationResponseData struct {
 	InvalidProductIdList []string `json:"invalid_product_id_list,omitempty"`
 	// The create time of the target collaboration.
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateTargetCollaborationResponseData CreateTargetCollaborationResponseData
 
 // NewCreateTargetCollaborationResponseData instantiates a new CreateTargetCollaborationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CreateTargetCollaborationResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateTargetCollaborationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateTargetCollaborationResponseData := _CreateTargetCollaborationResponseData{}
+
+	err = json.Unmarshal(data, &varCreateTargetCollaborationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateTargetCollaborationResponseData(varCreateTargetCollaborationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "target_collaboration")
+		delete(additionalProperties, "target_collaboration_conflicts")
+		delete(additionalProperties, "invalid_open_id_list")
+		delete(additionalProperties, "invalid_product_id_list")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateTargetCollaborationResponseData struct {

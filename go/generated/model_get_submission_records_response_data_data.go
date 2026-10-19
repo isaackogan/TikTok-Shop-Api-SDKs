@@ -25,7 +25,10 @@ type GetSubmissionRecordsResponseDataData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total number of matching submissions (approximate).
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSubmissionRecordsResponseDataData GetSubmissionRecordsResponseDataData
 
 // NewGetSubmissionRecordsResponseDataData instantiates a new GetSubmissionRecordsResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetSubmissionRecordsResponseDataData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSubmissionRecordsResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varGetSubmissionRecordsResponseDataData := _GetSubmissionRecordsResponseDataData{}
+
+	err = json.Unmarshal(data, &varGetSubmissionRecordsResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSubmissionRecordsResponseDataData(varGetSubmissionRecordsResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "submissions")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSubmissionRecordsResponseDataData struct {

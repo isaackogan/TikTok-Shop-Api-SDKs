@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type UpcomingAuthorizationExpirationWebhook struct {
 	TtsNotificationId *string `json:"tts_notification_id,omitempty"`
 	// The object contains business parameters related to the specific notification type.
 	Data *UpcomingAuthorizationExpirationWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpcomingAuthorizationExpirationWebhook UpcomingAuthorizationExpirationWebhook
@@ -228,6 +228,11 @@ func (o UpcomingAuthorizationExpirationWebhook) ToMap() (map[string]interface{},
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *UpcomingAuthorizationExpirationWebhook) UnmarshalJSON(data []byte) (err
 
 	varUpcomingAuthorizationExpirationWebhook := _UpcomingAuthorizationExpirationWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpcomingAuthorizationExpirationWebhook)
+	err = json.Unmarshal(data, &varUpcomingAuthorizationExpirationWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpcomingAuthorizationExpirationWebhook(varUpcomingAuthorizationExpirationWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

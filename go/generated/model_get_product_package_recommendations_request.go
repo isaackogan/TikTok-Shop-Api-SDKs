@@ -21,7 +21,10 @@ var _ MappedNullable = &GetProductPackageRecommendationsRequest{}
 type GetProductPackageRecommendationsRequest struct {
 	// A JSON array of product IDs for which to retrieve package recommendations.
 	ProductIds []string `json:"product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsRequest GetProductPackageRecommendationsRequest
 
 // NewGetProductPackageRecommendationsRequest instantiates a new GetProductPackageRecommendationsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetProductPackageRecommendationsRequest) ToMap() (map[string]interface{}
 	if !IsNil(o.ProductIds) {
 		toSerialize["product_ids"] = o.ProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsRequest := _GetProductPackageRecommendationsRequest{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsRequest(varGetProductPackageRecommendationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsRequest struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalAttributesResponseData{}
 type GetGlobalAttributesResponseData struct {
 	// The list of standard built-in product and sales attributes that are bound to the specified category.
 	Attributes []GetGlobalAttributesResponseDataAttribute `json:"attributes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalAttributesResponseData GetGlobalAttributesResponseData
 
 // NewGetGlobalAttributesResponseData instantiates a new GetGlobalAttributesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalAttributesResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Attributes) {
 		toSerialize["attributes"] = o.Attributes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalAttributesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalAttributesResponseData := _GetGlobalAttributesResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalAttributesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalAttributesResponseData(varGetGlobalAttributesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attributes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalAttributesResponseData struct {

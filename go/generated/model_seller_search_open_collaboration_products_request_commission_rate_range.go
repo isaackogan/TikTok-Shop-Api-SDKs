@@ -23,7 +23,10 @@ type SellerSearchOpenCollaborationProductsRequestCommissionRateRange struct {
 	RateGe *int64 `json:"rate_ge,omitempty"`
 	// The commission rate must be less than this value in order to be included in the search results. The commission rate is expressed in hundredths of a percent. For example, `3587` is a commission rate of `35.87%`. This value must a minimum of `100`.
 	RateLt *int64 `json:"rate_lt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerSearchOpenCollaborationProductsRequestCommissionRateRange SellerSearchOpenCollaborationProductsRequestCommissionRateRange
 
 // NewSellerSearchOpenCollaborationProductsRequestCommissionRateRange instantiates a new SellerSearchOpenCollaborationProductsRequestCommissionRateRange object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SellerSearchOpenCollaborationProductsRequestCommissionRateRange) ToMap()
 	if !IsNil(o.RateLt) {
 		toSerialize["rate_lt"] = o.RateLt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerSearchOpenCollaborationProductsRequestCommissionRateRange) UnmarshalJSON(data []byte) (err error) {
+	varSellerSearchOpenCollaborationProductsRequestCommissionRateRange := _SellerSearchOpenCollaborationProductsRequestCommissionRateRange{}
+
+	err = json.Unmarshal(data, &varSellerSearchOpenCollaborationProductsRequestCommissionRateRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerSearchOpenCollaborationProductsRequestCommissionRateRange(varSellerSearchOpenCollaborationProductsRequestCommissionRateRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate_ge")
+		delete(additionalProperties, "rate_lt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerSearchOpenCollaborationProductsRequestCommissionRateRange struct {

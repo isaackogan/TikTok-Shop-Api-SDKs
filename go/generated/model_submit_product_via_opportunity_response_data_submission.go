@@ -31,7 +31,10 @@ type SubmitProductViaOpportunityResponseDataSubmission struct {
 	SubmitTime *int64 `json:"submit_time,omitempty"`
 	// the reason when the status is REJECTED
 	RejectionReason *string `json:"rejection_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitProductViaOpportunityResponseDataSubmission SubmitProductViaOpportunityResponseDataSubmission
 
 // NewSubmitProductViaOpportunityResponseDataSubmission instantiates a new SubmitProductViaOpportunityResponseDataSubmission object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SubmitProductViaOpportunityResponseDataSubmission) ToMap() (map[string]i
 	if !IsNil(o.RejectionReason) {
 		toSerialize["rejection_reason"] = o.RejectionReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitProductViaOpportunityResponseDataSubmission) UnmarshalJSON(data []byte) (err error) {
+	varSubmitProductViaOpportunityResponseDataSubmission := _SubmitProductViaOpportunityResponseDataSubmission{}
+
+	err = json.Unmarshal(data, &varSubmitProductViaOpportunityResponseDataSubmission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitProductViaOpportunityResponseDataSubmission(varSubmitProductViaOpportunityResponseDataSubmission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "opportunity_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "submit_time")
+		delete(additionalProperties, "rejection_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitProductViaOpportunityResponseDataSubmission struct {

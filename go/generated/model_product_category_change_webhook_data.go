@@ -27,7 +27,10 @@ type ProductCategoryChangeWebhookData struct {
 	CurrentCategoryId *string `json:"current_category_id,omitempty"`
 	// The time when this category update happens, represented by Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductCategoryChangeWebhookData ProductCategoryChangeWebhookData
 
 // NewProductCategoryChangeWebhookData instantiates a new ProductCategoryChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ProductCategoryChangeWebhookData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductCategoryChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varProductCategoryChangeWebhookData := _ProductCategoryChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varProductCategoryChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductCategoryChangeWebhookData(varProductCategoryChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "previous_category_id")
+		delete(additionalProperties, "current_category_id")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductCategoryChangeWebhookData struct {

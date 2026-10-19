@@ -23,7 +23,10 @@ type AgeDistribution struct {
 	Age *string `json:"age,omitempty"`
 	// Proportion for the corresponding age group within this viewer profile, expressed as a decimal fraction.
 	Percentage *string `json:"percentage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AgeDistribution AgeDistribution
 
 // NewAgeDistribution instantiates a new AgeDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AgeDistribution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AgeDistribution) UnmarshalJSON(data []byte) (err error) {
+	varAgeDistribution := _AgeDistribution{}
+
+	err = json.Unmarshal(data, &varAgeDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AgeDistribution(varAgeDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "age")
+		delete(additionalProperties, "percentage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAgeDistribution struct {

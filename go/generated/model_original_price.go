@@ -25,7 +25,10 @@ type OriginalPrice struct {
 	MinimumAmount *string `json:"minimum_amount,omitempty"`
 	// The maximum original price of all skus of this product.
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OriginalPrice OriginalPrice
 
 // NewOriginalPrice instantiates a new OriginalPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o OriginalPrice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaximumAmount) {
 		toSerialize["maximum_amount"] = o.MaximumAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OriginalPrice) UnmarshalJSON(data []byte) (err error) {
+	varOriginalPrice := _OriginalPrice{}
+
+	err = json.Unmarshal(data, &varOriginalPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OriginalPrice(varOriginalPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOriginalPrice struct {

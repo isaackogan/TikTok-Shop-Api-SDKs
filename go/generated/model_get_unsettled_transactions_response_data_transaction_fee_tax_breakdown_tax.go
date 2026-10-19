@@ -51,7 +51,10 @@ type GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax struct {
 	TargetProductGmvGrowthPackageTax *string `json:"target_product_gmv_growth_package_tax,omitempty"`
 	// The sales tax applied to the auto-post shoppable video commission fee.
 	AutoPostShoppableVideoSalesTax *string `json:"auto_post_shoppable_video_sales_tax,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax
 
 // NewGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax instantiates a new GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax) ToMap
 	if !IsNil(o.AutoPostShoppableVideoSalesTax) {
 		toSerialize["auto_post_shoppable_video_sales_tax"] = o.AutoPostShoppableVideoSalesTax
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax := _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax(varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sales_tax_amount")
+		delete(additionalProperties, "sales_tax_payment_amount")
+		delete(additionalProperties, "sales_tax_refund_amount")
+		delete(additionalProperties, "vat_amount")
+		delete(additionalProperties, "import_vat_amount")
+		delete(additionalProperties, "customs_duty_amount")
+		delete(additionalProperties, "customs_clearance_amount")
+		delete(additionalProperties, "sst_amount")
+		delete(additionalProperties, "gst_amount")
+		delete(additionalProperties, "sales_tax_referral_fee_amount")
+		delete(additionalProperties, "smart_promotion_fee_tax_amount")
+		delete(additionalProperties, "cedular_tax")
+		delete(additionalProperties, "new_customer_growth_package_fee_tax")
+		delete(additionalProperties, "store_gmv_growth_package_fee_sales_tax")
+		delete(additionalProperties, "target_product_gmv_growth_package_tax")
+		delete(additionalProperties, "auto_post_shoppable_video_sales_tax")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax struct {

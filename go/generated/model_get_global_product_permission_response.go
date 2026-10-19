@@ -26,7 +26,10 @@ type GetGlobalProductPermissionResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetGlobalProductPermissionResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductPermissionResponse GetGlobalProductPermissionResponse
 
 // NewGetGlobalProductPermissionResponse instantiates a new GetGlobalProductPermissionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetGlobalProductPermissionResponse) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductPermissionResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductPermissionResponse := _GetGlobalProductPermissionResponse{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductPermissionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductPermissionResponse(varGetGlobalProductPermissionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductPermissionResponse struct {

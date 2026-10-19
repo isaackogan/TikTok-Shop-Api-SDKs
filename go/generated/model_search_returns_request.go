@@ -43,7 +43,10 @@ type SearchReturnsRequest struct {
 	Locale *string `json:"locale,omitempty"`
 	// Filter returns to those created before the specified time. Provide a Unix timestamp in seconds.
 	CreateTimeLt *int64 `json:"create_time_lt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnsRequest SearchReturnsRequest
 
 // NewSearchReturnsRequest instantiates a new SearchReturnsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o SearchReturnsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateTimeLt) {
 		toSerialize["create_time_lt"] = o.CreateTimeLt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnsRequest := _SearchReturnsRequest{}
+
+	err = json.Unmarshal(data, &varSearchReturnsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnsRequest(varSearchReturnsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_ids")
+		delete(additionalProperties, "order_ids")
+		delete(additionalProperties, "buyer_user_ids")
+		delete(additionalProperties, "return_types")
+		delete(additionalProperties, "return_status")
+		delete(additionalProperties, "seller_proposed_return_type")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "arbitration_status")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_lt")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "create_time_lt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnsRequest struct {

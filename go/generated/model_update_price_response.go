@@ -26,7 +26,10 @@ type UpdatePriceResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePriceResponse UpdatePriceResponse
 
 // NewUpdatePriceResponse instantiates a new UpdatePriceResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UpdatePriceResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePriceResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePriceResponse := _UpdatePriceResponse{}
+
+	err = json.Unmarshal(data, &varUpdatePriceResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePriceResponse(varUpdatePriceResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePriceResponse struct {

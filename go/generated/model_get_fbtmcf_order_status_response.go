@@ -26,7 +26,10 @@ type GetFBTMCFOrderStatusResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetFBTMCFOrderStatusResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMCFOrderStatusResponse GetFBTMCFOrderStatusResponse
 
 // NewGetFBTMCFOrderStatusResponse instantiates a new GetFBTMCFOrderStatusResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetFBTMCFOrderStatusResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMCFOrderStatusResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMCFOrderStatusResponse := _GetFBTMCFOrderStatusResponse{}
+
+	err = json.Unmarshal(data, &varGetFBTMCFOrderStatusResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMCFOrderStatusResponse(varGetFBTMCFOrderStatusResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMCFOrderStatusResponse struct {

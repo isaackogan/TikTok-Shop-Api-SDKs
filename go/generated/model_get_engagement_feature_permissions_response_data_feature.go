@@ -23,7 +23,10 @@ type GetEngagementFeaturePermissionsResponseDataFeature struct {
 	Name *string `json:"name,omitempty"`
 	// A flag to indicate whether the shop has permission to use this feature. Possible values: - `true`: Authorized to use this feature. - `false`: Not authorized to use this feature.
 	IsAuthorized *bool `json:"is_authorized,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEngagementFeaturePermissionsResponseDataFeature GetEngagementFeaturePermissionsResponseDataFeature
 
 // NewGetEngagementFeaturePermissionsResponseDataFeature instantiates a new GetEngagementFeaturePermissionsResponseDataFeature object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetEngagementFeaturePermissionsResponseDataFeature) ToMap() (map[string]
 	if !IsNil(o.IsAuthorized) {
 		toSerialize["is_authorized"] = o.IsAuthorized
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEngagementFeaturePermissionsResponseDataFeature) UnmarshalJSON(data []byte) (err error) {
+	varGetEngagementFeaturePermissionsResponseDataFeature := _GetEngagementFeaturePermissionsResponseDataFeature{}
+
+	err = json.Unmarshal(data, &varGetEngagementFeaturePermissionsResponseDataFeature)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEngagementFeaturePermissionsResponseDataFeature(varGetEngagementFeaturePermissionsResponseDataFeature)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "is_authorized")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEngagementFeaturePermissionsResponseDataFeature struct {

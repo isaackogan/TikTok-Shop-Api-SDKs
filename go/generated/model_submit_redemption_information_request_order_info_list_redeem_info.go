@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SubmitRedemptionInformationRequestOrderInfoListRedeemInfo struct {
 	RedeemData *string `json:"redeem_data,omitempty"`
 	// Additional redemption instruction in JSON format. Use instruction_url to specify a third-party website where the buyer completes redemption. This URL is included as a clickable link in the fulfillment email. Example: {\"instruction_url\": \"https://example.com/redeem\"}
 	RedeemInstructionInfo *string `json:"redeem_instruction_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitRedemptionInformationRequestOrderInfoListRedeemInfo SubmitRedemptionInformationRequestOrderInfoListRedeemInfo
@@ -154,6 +154,11 @@ func (o SubmitRedemptionInformationRequestOrderInfoListRedeemInfo) ToMap() (map[
 	if !IsNil(o.RedeemInstructionInfo) {
 		toSerialize["redeem_instruction_info"] = o.RedeemInstructionInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *SubmitRedemptionInformationRequestOrderInfoListRedeemInfo) UnmarshalJSO
 
 	varSubmitRedemptionInformationRequestOrderInfoListRedeemInfo := _SubmitRedemptionInformationRequestOrderInfoListRedeemInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitRedemptionInformationRequestOrderInfoListRedeemInfo)
+	err = json.Unmarshal(data, &varSubmitRedemptionInformationRequestOrderInfoListRedeemInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitRedemptionInformationRequestOrderInfoListRedeemInfo(varSubmitRedemptionInformationRequestOrderInfoListRedeemInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "redeem_type")
+		delete(additionalProperties, "redeem_data")
+		delete(additionalProperties, "redeem_instruction_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

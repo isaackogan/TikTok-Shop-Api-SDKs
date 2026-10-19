@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AddExternalOrderReferencesRequestOrderExternalOrderLineItem struct {
 	Id string `json:"id"`
 	// Line item ID in TikTok Shop.
 	OriginId string `json:"origin_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddExternalOrderReferencesRequestOrderExternalOrderLineItem AddExternalOrderReferencesRequestOrderExternalOrderLineItem
@@ -108,6 +108,11 @@ func (o AddExternalOrderReferencesRequestOrderExternalOrderLineItem) ToMap() (ma
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["origin_id"] = o.OriginId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *AddExternalOrderReferencesRequestOrderExternalOrderLineItem) UnmarshalJ
 
 	varAddExternalOrderReferencesRequestOrderExternalOrderLineItem := _AddExternalOrderReferencesRequestOrderExternalOrderLineItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddExternalOrderReferencesRequestOrderExternalOrderLineItem)
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesRequestOrderExternalOrderLineItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddExternalOrderReferencesRequestOrderExternalOrderLineItem(varAddExternalOrderReferencesRequestOrderExternalOrderLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "origin_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -27,7 +27,10 @@ type GetTradeInAccountTransactionsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The total number of account transactions that match the query conditions.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTradeInAccountTransactionsResponseData GetTradeInAccountTransactionsResponseData
 
 // NewGetTradeInAccountTransactionsResponseData instantiates a new GetTradeInAccountTransactionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetTradeInAccountTransactionsResponseData) ToMap() (map[string]interface
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTradeInAccountTransactionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetTradeInAccountTransactionsResponseData := _GetTradeInAccountTransactionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetTradeInAccountTransactionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTradeInAccountTransactionsResponseData(varGetTradeInAccountTransactionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "flows")
+		delete(additionalProperties, "has_more")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTradeInAccountTransactionsResponseData struct {

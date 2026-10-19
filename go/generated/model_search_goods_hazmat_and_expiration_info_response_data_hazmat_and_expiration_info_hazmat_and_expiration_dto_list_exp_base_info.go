@@ -25,7 +25,10 @@ type SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmat
 	ExpirationAlertDays *int64 `json:"expiration_alert_days,omitempty"`
 	// The period before a product's expiration date when the inventory will no longer be available for sale. For example, if the product expiration date is December 1, 2024, and the sales cutoff days are 20 days, then the inventory will stop being available for sale after November 11, 2024 (20 days before expiration).
 	SalesCutoffDays *int64 `json:"sales_cutoff_days,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo
 
 // NewSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo instantiates a new SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHaz
 	if !IsNil(o.SalesCutoffDays) {
 		toSerialize["sales_cutoff_days"] = o.SalesCutoffDays
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo := _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo(varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_cutoff_days")
+		delete(additionalProperties, "expiration_alert_days")
+		delete(additionalProperties, "sales_cutoff_days")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo struct {

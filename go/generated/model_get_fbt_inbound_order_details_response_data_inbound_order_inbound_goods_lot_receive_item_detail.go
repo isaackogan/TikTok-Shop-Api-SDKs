@@ -33,7 +33,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItem
 	DefectiveReceivedCount *int64 `json:"defective_received_count,omitempty"`
 	// The sum of both `normal_received_count` and `defective_received_count`.
 	TotalReceivedCount *int64 `json:"total_received_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveI
 	if !IsNil(o.TotalReceivedCount) {
 		toSerialize["total_received_count"] = o.TotalReceivedCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail := _GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail(varGetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "lot_code")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "planned_count")
+		delete(additionalProperties, "normal_received_count")
+		delete(additionalProperties, "defective_received_count")
+		delete(additionalProperties, "total_received_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail struct {

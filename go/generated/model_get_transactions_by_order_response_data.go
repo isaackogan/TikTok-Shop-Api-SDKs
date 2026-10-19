@@ -37,7 +37,10 @@ type GetTransactionsByOrderResponseData struct {
 	SkuTransactions []GetTransactionsByOrderResponseDataSkuTransaction `json:"sku_transactions,omitempty"`
 	// The number of transaction records
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseData GetTransactionsByOrderResponseData
 
 // NewGetTransactionsByOrderResponseData instantiates a new GetTransactionsByOrderResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetTransactionsByOrderResponseData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseData := _GetTransactionsByOrderResponseData{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseData(varGetTransactionsByOrderResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_create_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "revenue_amount")
+		delete(additionalProperties, "fee_and_tax_amount")
+		delete(additionalProperties, "shipping_cost_amount")
+		delete(additionalProperties, "settlement_amount")
+		delete(additionalProperties, "sku_transactions")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseData struct {

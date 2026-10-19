@@ -26,7 +26,10 @@ type PostShoppablePhotosResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *PostShoppablePhotosResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PostShoppablePhotosResponse PostShoppablePhotosResponse
 
 // NewPostShoppablePhotosResponse instantiates a new PostShoppablePhotosResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o PostShoppablePhotosResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PostShoppablePhotosResponse) UnmarshalJSON(data []byte) (err error) {
+	varPostShoppablePhotosResponse := _PostShoppablePhotosResponse{}
+
+	err = json.Unmarshal(data, &varPostShoppablePhotosResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PostShoppablePhotosResponse(varPostShoppablePhotosResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePostShoppablePhotosResponse struct {

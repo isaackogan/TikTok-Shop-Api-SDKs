@@ -27,7 +27,10 @@ type ListProductSKPPStatusesResponseDataProductReward struct {
 	Value *string `json:"value,omitempty"`
 	// Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed). Ad credit must be claimed manually.
 	AdCreditClaimStatus *string `json:"ad_credit_claim_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListProductSKPPStatusesResponseDataProductReward ListProductSKPPStatusesResponseDataProductReward
 
 // NewListProductSKPPStatusesResponseDataProductReward instantiates a new ListProductSKPPStatusesResponseDataProductReward object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ListProductSKPPStatusesResponseDataProductReward) ToMap() (map[string]in
 	if !IsNil(o.AdCreditClaimStatus) {
 		toSerialize["ad_credit_claim_status"] = o.AdCreditClaimStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListProductSKPPStatusesResponseDataProductReward) UnmarshalJSON(data []byte) (err error) {
+	varListProductSKPPStatusesResponseDataProductReward := _ListProductSKPPStatusesResponseDataProductReward{}
+
+	err = json.Unmarshal(data, &varListProductSKPPStatusesResponseDataProductReward)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListProductSKPPStatusesResponseDataProductReward(varListProductSKPPStatusesResponseDataProductReward)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reward_type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "ad_credit_claim_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListProductSKPPStatusesResponseDataProductReward struct {

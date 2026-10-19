@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type Certification struct {
 	Files []File `json:"files,omitempty"`
 	// The expiration date of this certification expressed in unix timestamp (seconds) UTC+0.  This field may be required for certain certifications. Use the [Get Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9) to find out the requirements.
 	ExpirationDate *int64 `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Certification Certification
@@ -191,6 +191,11 @@ func (o Certification) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *Certification) UnmarshalJSON(data []byte) (err error) {
 
 	varCertification := _Certification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCertification)
+	err = json.Unmarshal(data, &varCertification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Certification(varCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "files")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

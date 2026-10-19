@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetOrCreateCreatorConversationRequest struct {
 	CreatorOpenId string `json:"creator_open_id"`
 	// - If `true`, only `conversation_id` in `data.conversation` is returned.  - If `false`, all fields in `data.conversation` are returned. `true` by default.
 	OnlyNeedConversationId *bool `json:"only_need_conversation_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetOrCreateCreatorConversationRequest GetOrCreateCreatorConversationRequest
@@ -117,6 +117,11 @@ func (o GetOrCreateCreatorConversationRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.OnlyNeedConversationId) {
 		toSerialize["only_need_conversation_id"] = o.OnlyNeedConversationId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *GetOrCreateCreatorConversationRequest) UnmarshalJSON(data []byte) (err 
 
 	varGetOrCreateCreatorConversationRequest := _GetOrCreateCreatorConversationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetOrCreateCreatorConversationRequest)
+	err = json.Unmarshal(data, &varGetOrCreateCreatorConversationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetOrCreateCreatorConversationRequest(varGetOrCreateCreatorConversationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "only_need_conversation_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

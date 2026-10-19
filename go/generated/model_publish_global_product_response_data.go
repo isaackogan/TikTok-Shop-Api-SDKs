@@ -23,7 +23,10 @@ type PublishGlobalProductResponseData struct {
 	Products []PublishGlobalProductResponseDataProduct `json:"products,omitempty"`
 	// Results of publishing the global product.
 	PublishResult []PublishResult `json:"publish_result,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PublishGlobalProductResponseData PublishGlobalProductResponseData
 
 // NewPublishGlobalProductResponseData instantiates a new PublishGlobalProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PublishGlobalProductResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.PublishResult) {
 		toSerialize["publish_result"] = o.PublishResult
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PublishGlobalProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varPublishGlobalProductResponseData := _PublishGlobalProductResponseData{}
+
+	err = json.Unmarshal(data, &varPublishGlobalProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PublishGlobalProductResponseData(varPublishGlobalProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "publish_result")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePublishGlobalProductResponseData struct {

@@ -23,7 +23,10 @@ type NewMessageWebhookDataSender struct {
 	ImUserId *string `json:"im_user_id,omitempty"`
 	// Sender's role, with possible values:   * BUYER   * SHOP   * CUSTOMER_SERVICE   * SYSTEM   * ROBOT
 	Role *string `json:"role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NewMessageWebhookDataSender NewMessageWebhookDataSender
 
 // NewNewMessageWebhookDataSender instantiates a new NewMessageWebhookDataSender object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o NewMessageWebhookDataSender) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Role) {
 		toSerialize["role"] = o.Role
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NewMessageWebhookDataSender) UnmarshalJSON(data []byte) (err error) {
+	varNewMessageWebhookDataSender := _NewMessageWebhookDataSender{}
+
+	err = json.Unmarshal(data, &varNewMessageWebhookDataSender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NewMessageWebhookDataSender(varNewMessageWebhookDataSender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "im_user_id")
+		delete(additionalProperties, "role")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNewMessageWebhookDataSender struct {

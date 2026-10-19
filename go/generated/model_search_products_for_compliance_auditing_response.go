@@ -26,7 +26,10 @@ type SearchProductsForComplianceAuditingResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchProductsForComplianceAuditingResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsForComplianceAuditingResponse SearchProductsForComplianceAuditingResponse
 
 // NewSearchProductsForComplianceAuditingResponse instantiates a new SearchProductsForComplianceAuditingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchProductsForComplianceAuditingResponse) ToMap() (map[string]interfa
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsForComplianceAuditingResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsForComplianceAuditingResponse := _SearchProductsForComplianceAuditingResponse{}
+
+	err = json.Unmarshal(data, &varSearchProductsForComplianceAuditingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsForComplianceAuditingResponse(varSearchProductsForComplianceAuditingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsForComplianceAuditingResponse struct {

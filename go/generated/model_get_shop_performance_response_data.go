@@ -23,7 +23,10 @@ type GetShopPerformanceResponseData struct {
 	LatestAvailableDate *string `json:"latest_available_date,omitempty"`
 	// Overall performance data for the shop.
 	Performance *GetShopPerformanceResponseDataPerformance `json:"performance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseData GetShopPerformanceResponseData
 
 // NewGetShopPerformanceResponseData instantiates a new GetShopPerformanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopPerformanceResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Performance) {
 		toSerialize["performance"] = o.Performance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseData := _GetShopPerformanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseData(varGetShopPerformanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "latest_available_date")
+		delete(additionalProperties, "performance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseData struct {

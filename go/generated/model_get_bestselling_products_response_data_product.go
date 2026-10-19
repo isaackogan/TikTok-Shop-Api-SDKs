@@ -35,7 +35,10 @@ type GetBestsellingProductsResponseDataProduct struct {
 	ShopName *string `json:"shop_name,omitempty"`
 	// The ID of the TikTok Shop associated with the product.
 	ShopId *string `json:"shop_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingProductsResponseDataProduct GetBestsellingProductsResponseDataProduct
 
 // NewGetBestsellingProductsResponseDataProduct instantiates a new GetBestsellingProductsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetBestsellingProductsResponseDataProduct) ToMap() (map[string]interface
 	if !IsNil(o.ShopId) {
 		toSerialize["shop_id"] = o.ShopId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingProductsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingProductsResponseDataProduct := _GetBestsellingProductsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetBestsellingProductsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingProductsResponseDataProduct(varGetBestsellingProductsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rank")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "rating")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "shop_name")
+		delete(additionalProperties, "shop_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingProductsResponseDataProduct struct {

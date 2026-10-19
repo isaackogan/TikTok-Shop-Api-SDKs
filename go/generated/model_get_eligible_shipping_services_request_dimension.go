@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type GetEligibleShippingServicesRequestDimension struct {
 	Height string `json:"height"`
 	// The unit of measurement for the package dimensions. - CM - INCH
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetEligibleShippingServicesRequestDimension GetEligibleShippingServicesRequestDimension
@@ -164,6 +164,11 @@ func (o GetEligibleShippingServicesRequestDimension) ToMap() (map[string]interfa
 	toSerialize["width"] = o.Width
 	toSerialize["height"] = o.Height
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *GetEligibleShippingServicesRequestDimension) UnmarshalJSON(data []byte)
 
 	varGetEligibleShippingServicesRequestDimension := _GetEligibleShippingServicesRequestDimension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetEligibleShippingServicesRequestDimension)
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesRequestDimension)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetEligibleShippingServicesRequestDimension(varGetEligibleShippingServicesRequestDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -29,7 +29,10 @@ type SearchSampleApplicationsResponseDataSampleApplicationProduct struct {
 	SkuImageUrl *string `json:"sku_image_url,omitempty"`
 	// The SKU property value names, joined by commas.
 	SkuName *string `json:"sku_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationsResponseDataSampleApplicationProduct SearchSampleApplicationsResponseDataSampleApplicationProduct
 
 // NewSearchSampleApplicationsResponseDataSampleApplicationProduct instantiates a new SearchSampleApplicationsResponseDataSampleApplicationProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchSampleApplicationsResponseDataSampleApplicationProduct) ToMap() (m
 	if !IsNil(o.SkuName) {
 		toSerialize["sku_name"] = o.SkuName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationsResponseDataSampleApplicationProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationsResponseDataSampleApplicationProduct := _SearchSampleApplicationsResponseDataSampleApplicationProduct{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationsResponseDataSampleApplicationProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationsResponseDataSampleApplicationProduct(varSearchSampleApplicationsResponseDataSampleApplicationProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_image_url")
+		delete(additionalProperties, "sku_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationsResponseDataSampleApplicationProduct struct {

@@ -23,7 +23,10 @@ type UploadFileInitResponseData struct {
 	UploadUrl *string `json:"upload_url,omitempty"`
 	// The upload token used when uploading the file to the returned upload URL.
 	UploadToken *string `json:"upload_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadFileInitResponseData UploadFileInitResponseData
 
 // NewUploadFileInitResponseData instantiates a new UploadFileInitResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UploadFileInitResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UploadToken) {
 		toSerialize["upload_token"] = o.UploadToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadFileInitResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadFileInitResponseData := _UploadFileInitResponseData{}
+
+	err = json.Unmarshal(data, &varUploadFileInitResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadFileInitResponseData(varUploadFileInitResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "upload_url")
+		delete(additionalProperties, "upload_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadFileInitResponseData struct {

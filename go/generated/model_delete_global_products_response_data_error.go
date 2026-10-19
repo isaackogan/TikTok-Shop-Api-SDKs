@@ -25,7 +25,10 @@ type DeleteGlobalProductsResponseDataError struct {
 	Code *int64 `json:"code,omitempty"`
 	// The details of the error.
 	Detail *DeleteGlobalProductsResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeleteGlobalProductsResponseDataError DeleteGlobalProductsResponseDataError
 
 // NewDeleteGlobalProductsResponseDataError instantiates a new DeleteGlobalProductsResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o DeleteGlobalProductsResponseDataError) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeleteGlobalProductsResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varDeleteGlobalProductsResponseDataError := _DeleteGlobalProductsResponseDataError{}
+
+	err = json.Unmarshal(data, &varDeleteGlobalProductsResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteGlobalProductsResponseDataError(varDeleteGlobalProductsResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeleteGlobalProductsResponseDataError struct {

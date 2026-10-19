@@ -21,7 +21,10 @@ var _ MappedNullable = &SendMessageResponseData{}
 type SendMessageResponseData struct {
 	// Message ID
 	MessageId *string `json:"message_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SendMessageResponseData SendMessageResponseData
 
 // NewSendMessageResponseData instantiates a new SendMessageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SendMessageResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MessageId) {
 		toSerialize["message_id"] = o.MessageId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SendMessageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSendMessageResponseData := _SendMessageResponseData{}
+
+	err = json.Unmarshal(data, &varSendMessageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SendMessageResponseData(varSendMessageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSendMessageResponseData struct {

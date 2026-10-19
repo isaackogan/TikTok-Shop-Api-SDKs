@@ -25,7 +25,10 @@ type GetProductResponseDataSkuFee struct {
 	Amount *string `json:"amount,omitempty"`
 	// The type of fee. Possible values: PFAND
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuFee GetProductResponseDataSkuFee
 
 // NewGetProductResponseDataSkuFee instantiates a new GetProductResponseDataSkuFee object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataSkuFee) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuFee) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuFee := _GetProductResponseDataSkuFee{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuFee(varGetProductResponseDataSkuFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "additional_attribute")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuFee struct {

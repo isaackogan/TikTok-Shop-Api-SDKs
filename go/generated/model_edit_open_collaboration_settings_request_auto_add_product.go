@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type EditOpenCollaborationSettingsRequestAutoAddProduct struct {
 	Enable bool `json:"enable"`
 	// The commission rate in hundredths of a percent. For example, `3587` is a commission rate of `35.87%`. This value must a minimum of `100` and a maximum of `8000`. Not that setting the `enable` property to `false` overrides this property.
 	CommissionRate int64 `json:"commission_rate"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditOpenCollaborationSettingsRequestAutoAddProduct EditOpenCollaborationSettingsRequestAutoAddProduct
@@ -108,6 +108,11 @@ func (o EditOpenCollaborationSettingsRequestAutoAddProduct) ToMap() (map[string]
 	toSerialize := map[string]interface{}{}
 	toSerialize["enable"] = o.Enable
 	toSerialize["commission_rate"] = o.CommissionRate
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *EditOpenCollaborationSettingsRequestAutoAddProduct) UnmarshalJSON(data 
 
 	varEditOpenCollaborationSettingsRequestAutoAddProduct := _EditOpenCollaborationSettingsRequestAutoAddProduct{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditOpenCollaborationSettingsRequestAutoAddProduct)
+	err = json.Unmarshal(data, &varEditOpenCollaborationSettingsRequestAutoAddProduct)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditOpenCollaborationSettingsRequestAutoAddProduct(varEditOpenCollaborationSettingsRequestAutoAddProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enable")
+		delete(additionalProperties, "commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

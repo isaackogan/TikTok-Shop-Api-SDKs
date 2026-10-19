@@ -27,7 +27,10 @@ type Discount struct {
 	GiftDiscount *GiftDiscount `json:"gift_discount,omitempty"`
 	// Configurations related to Buy X Get Y (BXGY) promotions. Only needs to be configured for BXGY promotions.
 	BxgyDiscount *BxgyDiscount `json:"bxgy_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Discount Discount
 
 // NewDiscount instantiates a new Discount object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o Discount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BxgyDiscount) {
 		toSerialize["bxgy_discount"] = o.BxgyDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Discount) UnmarshalJSON(data []byte) (err error) {
+	varDiscount := _Discount{}
+
+	err = json.Unmarshal(data, &varDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Discount(varDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_discount")
+		delete(additionalProperties, "bmsm_discount")
+		delete(additionalProperties, "gift_discount")
+		delete(additionalProperties, "bxgy_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiscount struct {

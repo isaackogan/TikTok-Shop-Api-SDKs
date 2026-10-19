@@ -41,7 +41,10 @@ type SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile struct 
 	IsRisingStar *bool `json:"is_rising_star,omitempty"`
 	// Creator level
 	CreatorLevel *int64 `json:"creator_level,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile
 
 // NewSearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile instantiates a new SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile) ToM
 	if !IsNil(o.CreatorLevel) {
 		toSerialize["creator_level"] = o.CreatorLevel
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile := _SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile(varSearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_official_recommend")
+		delete(additionalProperties, "creator_bind_mcn_name")
+		delete(additionalProperties, "is_fast_growing")
+		delete(additionalProperties, "has_collaborated")
+		delete(additionalProperties, "user_type_tag")
+		delete(additionalProperties, "has_invited_90d")
+		delete(additionalProperties, "is_creator_blocked")
+		delete(additionalProperties, "pps_score")
+		delete(additionalProperties, "is_eligible_flat_fee")
+		delete(additionalProperties, "is_rising_star")
+		delete(additionalProperties, "creator_level")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile struct {

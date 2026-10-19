@@ -23,7 +23,10 @@ type CreateReturnResponseData struct {
 	ReturnId *string `json:"return_id,omitempty"`
 	// Return status, available values: - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform - REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request - AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform - BUYER_SHIPPED_ITEM: Buyer has shipped items to seller. - REJECT_RECEIVE_PACKAGE: Seller reject return package - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded. - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded.
 	ReturnStatus *string `json:"return_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateReturnResponseData CreateReturnResponseData
 
 // NewCreateReturnResponseData instantiates a new CreateReturnResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CreateReturnResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReturnStatus) {
 		toSerialize["return_status"] = o.ReturnStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateReturnResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateReturnResponseData := _CreateReturnResponseData{}
+
+	err = json.Unmarshal(data, &varCreateReturnResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateReturnResponseData(varCreateReturnResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_id")
+		delete(additionalProperties, "return_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateReturnResponseData struct {

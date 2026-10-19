@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type ConfirmInboundMethodRequest struct {
 	InboundMethod string `json:"inbound_method"`
 	// Estimated arrival time. Value should be retrieved from the `available_time_window_list` from `ListAvailableInboundMethod` API response
 	EstimateArrivalTime EstimateArrivalTime `json:"estimate_arrival_time"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmInboundMethodRequest ConfirmInboundMethodRequest
@@ -164,6 +164,11 @@ func (o ConfirmInboundMethodRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["placement_option_id"] = o.PlacementOptionId
 	toSerialize["inbound_method"] = o.InboundMethod
 	toSerialize["estimate_arrival_time"] = o.EstimateArrivalTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *ConfirmInboundMethodRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varConfirmInboundMethodRequest := _ConfirmInboundMethodRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmInboundMethodRequest)
+	err = json.Unmarshal(data, &varConfirmInboundMethodRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmInboundMethodRequest(varConfirmInboundMethodRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "plan_id")
+		delete(additionalProperties, "placement_option_id")
+		delete(additionalProperties, "inbound_method")
+		delete(additionalProperties, "estimate_arrival_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

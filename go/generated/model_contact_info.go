@@ -31,7 +31,10 @@ type ContactInfo struct {
 	Viber *string `json:"viber,omitempty"`
 	// The partner's phone number registered in LINE, in E.164 international format. Applicable if the target market is TH.
 	Line *string `json:"line,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ContactInfo ContactInfo
 
 // NewContactInfo instantiates a new ContactInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o ContactInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Line) {
 		toSerialize["line"] = o.Line
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ContactInfo) UnmarshalJSON(data []byte) (err error) {
+	varContactInfo := _ContactInfo{}
+
+	err = json.Unmarshal(data, &varContactInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ContactInfo(varContactInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "whatsapp")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone")
+		delete(additionalProperties, "zalo")
+		delete(additionalProperties, "viber")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableContactInfo struct {

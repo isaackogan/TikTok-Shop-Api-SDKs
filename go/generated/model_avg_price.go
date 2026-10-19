@@ -23,7 +23,10 @@ type AvgPrice struct {
 	Amount *string `json:"amount,omitempty"`
 	// GMV currency code (ISO 4217 standard). If LOCAL currency is requested, the value will be the local currency code of where the shop is registered (e.g. GBP).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AvgPrice AvgPrice
 
 // NewAvgPrice instantiates a new AvgPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AvgPrice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AvgPrice) UnmarshalJSON(data []byte) (err error) {
+	varAvgPrice := _AvgPrice{}
+
+	err = json.Unmarshal(data, &varAvgPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AvgPrice(varAvgPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAvgPrice struct {

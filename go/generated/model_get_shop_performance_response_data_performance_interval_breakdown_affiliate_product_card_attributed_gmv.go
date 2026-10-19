@@ -23,7 +23,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductC
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProdu
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv := _GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv(varGetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmv struct {

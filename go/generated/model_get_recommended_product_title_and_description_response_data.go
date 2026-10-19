@@ -21,7 +21,10 @@ var _ MappedNullable = &GetRecommendedProductTitleAndDescriptionResponseData{}
 type GetRecommendedProductTitleAndDescriptionResponseData struct {
 	// Returned products and their title and description suggestions. A requested product might not appear in the response. For a returned product, an empty `items` list for `TITLE` or `DESCRIPTION` means that no optimized text is available for that field.
 	Products []GetRecommendedProductTitleAndDescriptionResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRecommendedProductTitleAndDescriptionResponseData GetRecommendedProductTitleAndDescriptionResponseData
 
 // NewGetRecommendedProductTitleAndDescriptionResponseData instantiates a new GetRecommendedProductTitleAndDescriptionResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetRecommendedProductTitleAndDescriptionResponseData) ToMap() (map[strin
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRecommendedProductTitleAndDescriptionResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetRecommendedProductTitleAndDescriptionResponseData := _GetRecommendedProductTitleAndDescriptionResponseData{}
+
+	err = json.Unmarshal(data, &varGetRecommendedProductTitleAndDescriptionResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRecommendedProductTitleAndDescriptionResponseData(varGetRecommendedProductTitleAndDescriptionResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRecommendedProductTitleAndDescriptionResponseData struct {

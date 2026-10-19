@@ -25,7 +25,10 @@ type GetGlobalProductResponseDataProductAttribute struct {
 	Name *string `json:"name,omitempty"`
 	// A list of selectable values for the product attribute.
 	Values []GetGlobalAttributesResponseDataAttributeValue `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataProductAttribute GetGlobalProductResponseDataProductAttribute
 
 // NewGetGlobalProductResponseDataProductAttribute instantiates a new GetGlobalProductResponseDataProductAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalProductResponseDataProductAttribute) ToMap() (map[string]interf
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataProductAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataProductAttribute := _GetGlobalProductResponseDataProductAttribute{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataProductAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataProductAttribute(varGetGlobalProductResponseDataProductAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataProductAttribute struct {

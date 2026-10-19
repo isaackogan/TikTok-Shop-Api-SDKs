@@ -29,7 +29,10 @@ type QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDet
 	LiveCount *int64 `json:"live_count,omitempty"`
 	// Whether the target collaboration commission for this creator-product pair is currently effective. `false` means an active campaign collaboration takes precedence.
 	IsCommissionEffective *bool `json:"is_commission_effective,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail
 
 // NewQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail instantiates a new QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProduct
 	if !IsNil(o.IsCommissionEffective) {
 		toSerialize["is_commission_effective"] = o.IsCommissionEffective
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail) UnmarshalJSON(data []byte) (err error) {
+	varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail := _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail{}
+
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail(varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_base_info")
+		delete(additionalProperties, "product_add_status")
+		delete(additionalProperties, "video_count")
+		delete(additionalProperties, "live_count")
+		delete(additionalProperties, "is_commission_effective")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail struct {

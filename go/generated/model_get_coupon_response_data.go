@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCouponResponseData{}
 type GetCouponResponseData struct {
 	// The coupon detail object, including identity, display settings, status, claim and redemption durations, discount, threshold, product scope, usage limits, usage stats, and live tasks.
 	Coupon *GetCouponResponseDataCoupon `json:"coupon,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseData GetCouponResponseData
 
 // NewGetCouponResponseData instantiates a new GetCouponResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCouponResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coupon) {
 		toSerialize["coupon"] = o.Coupon
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseData := _GetCouponResponseData{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseData(varGetCouponResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "coupon")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseData struct {

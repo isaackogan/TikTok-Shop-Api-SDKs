@@ -25,7 +25,10 @@ type SearchTargetCollaborationsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The basic information of target collaboration which creators can view in Targeted Invitation on TikTok EC Center.
 	TargetCollaborations []SearchTargetCollaborationsResponseDataTargetCollaboration `json:"target_collaborations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchTargetCollaborationsResponseData SearchTargetCollaborationsResponseData
 
 // NewSearchTargetCollaborationsResponseData instantiates a new SearchTargetCollaborationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchTargetCollaborationsResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.TargetCollaborations) {
 		toSerialize["target_collaborations"] = o.TargetCollaborations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchTargetCollaborationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchTargetCollaborationsResponseData := _SearchTargetCollaborationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchTargetCollaborationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchTargetCollaborationsResponseData(varSearchTargetCollaborationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "target_collaborations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchTargetCollaborationsResponseData struct {

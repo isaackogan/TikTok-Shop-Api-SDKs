@@ -23,7 +23,10 @@ type InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionC
 	Quantity *int64 `json:"quantity,omitempty"`
 	// The name of the associated TikTok creator.
 	CreatorName *string `json:"creator_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory
 
 // NewInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory instantiates a new InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributi
 	if !IsNil(o.CreatorName) {
 		toSerialize["creator_name"] = o.CreatorName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory := _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory(varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "creator_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory struct {

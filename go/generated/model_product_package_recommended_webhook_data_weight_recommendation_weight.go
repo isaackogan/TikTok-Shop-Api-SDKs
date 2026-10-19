@@ -23,7 +23,10 @@ type ProductPackageRecommendedWebhookDataWeightRecommendationWeight struct {
 	MinValue *string `json:"min_value,omitempty"`
 	// Recommended range maximum; unit: g
 	MaxValue *string `json:"max_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductPackageRecommendedWebhookDataWeightRecommendationWeight ProductPackageRecommendedWebhookDataWeightRecommendationWeight
 
 // NewProductPackageRecommendedWebhookDataWeightRecommendationWeight instantiates a new ProductPackageRecommendedWebhookDataWeightRecommendationWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ProductPackageRecommendedWebhookDataWeightRecommendationWeight) ToMap() 
 	if !IsNil(o.MaxValue) {
 		toSerialize["max_value"] = o.MaxValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductPackageRecommendedWebhookDataWeightRecommendationWeight) UnmarshalJSON(data []byte) (err error) {
+	varProductPackageRecommendedWebhookDataWeightRecommendationWeight := _ProductPackageRecommendedWebhookDataWeightRecommendationWeight{}
+
+	err = json.Unmarshal(data, &varProductPackageRecommendedWebhookDataWeightRecommendationWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductPackageRecommendedWebhookDataWeightRecommendationWeight(varProductPackageRecommendedWebhookDataWeightRecommendationWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_value")
+		delete(additionalProperties, "max_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductPackageRecommendedWebhookDataWeightRecommendationWeight struct {

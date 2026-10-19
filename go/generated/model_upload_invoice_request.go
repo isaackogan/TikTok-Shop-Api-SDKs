@@ -21,7 +21,10 @@ var _ MappedNullable = &UploadInvoiceRequest{}
 type UploadInvoiceRequest struct {
 	// The list of invoices to upload. When `invoices` is provided, include 1 to 500 items.
 	Invoices []UploadInvoiceRequestInvoice `json:"invoices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadInvoiceRequest UploadInvoiceRequest
 
 // NewUploadInvoiceRequest instantiates a new UploadInvoiceRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UploadInvoiceRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Invoices) {
 		toSerialize["invoices"] = o.Invoices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadInvoiceRequest) UnmarshalJSON(data []byte) (err error) {
+	varUploadInvoiceRequest := _UploadInvoiceRequest{}
+
+	err = json.Unmarshal(data, &varUploadInvoiceRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadInvoiceRequest(varUploadInvoiceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "invoices")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadInvoiceRequest struct {

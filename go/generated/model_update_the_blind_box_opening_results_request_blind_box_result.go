@@ -27,7 +27,10 @@ type UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult struct {
 	BlindResultSkuId *string `json:"blind_result_sku_id,omitempty"`
 	// Unix timestamp in milliseconds indicating when the blind box was opened.
 	BlindOpenTime *int64 `json:"blind_open_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult
 
 // NewUpdateTheBlindBoxOpeningResultsRequestBlindBoxResult instantiates a new UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult) ToMap() (map[strin
 	if !IsNil(o.BlindOpenTime) {
 		toSerialize["blind_open_time"] = o.BlindOpenTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTheBlindBoxOpeningResultsRequestBlindBoxResult := _UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult{}
+
+	err = json.Unmarshal(data, &varUpdateTheBlindBoxOpeningResultsRequestBlindBoxResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTheBlindBoxOpeningResultsRequestBlindBoxResult(varUpdateTheBlindBoxOpeningResultsRequestBlindBoxResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "blind_result_product_id")
+		delete(additionalProperties, "blind_result_sku_id")
+		delete(additionalProperties, "blind_open_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTheBlindBoxOpeningResultsRequestBlindBoxResult struct {

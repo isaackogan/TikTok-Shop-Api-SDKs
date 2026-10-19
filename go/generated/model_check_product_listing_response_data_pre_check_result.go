@@ -23,7 +23,10 @@ type CheckProductListingResponseDataPreCheckResult struct {
 	PreCheckItem *string `json:"pre_check_item,omitempty"`
 	// Information Verification Details.
 	PreCheckDetails []CheckProductListingResponseDataPreCheckResultPreCheckDetail `json:"pre_check_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponseDataPreCheckResult CheckProductListingResponseDataPreCheckResult
 
 // NewCheckProductListingResponseDataPreCheckResult instantiates a new CheckProductListingResponseDataPreCheckResult object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CheckProductListingResponseDataPreCheckResult) ToMap() (map[string]inter
 	if !IsNil(o.PreCheckDetails) {
 		toSerialize["pre_check_details"] = o.PreCheckDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponseDataPreCheckResult) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponseDataPreCheckResult := _CheckProductListingResponseDataPreCheckResult{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponseDataPreCheckResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponseDataPreCheckResult(varCheckProductListingResponseDataPreCheckResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pre_check_item")
+		delete(additionalProperties, "pre_check_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponseDataPreCheckResult struct {

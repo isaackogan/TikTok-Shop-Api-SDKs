@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CombinePackageRequestCombinablePackage struct {
 	Id string `json:"id"`
 	// The order IDs to include when combining the package identified by `id`.
 	OrderIds []string `json:"order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CombinePackageRequestCombinablePackage CombinePackageRequestCombinablePackage
@@ -117,6 +117,11 @@ func (o CombinePackageRequestCombinablePackage) ToMap() (map[string]interface{},
 	if !IsNil(o.OrderIds) {
 		toSerialize["order_ids"] = o.OrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CombinePackageRequestCombinablePackage) UnmarshalJSON(data []byte) (err
 
 	varCombinePackageRequestCombinablePackage := _CombinePackageRequestCombinablePackage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCombinePackageRequestCombinablePackage)
+	err = json.Unmarshal(data, &varCombinePackageRequestCombinablePackage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CombinePackageRequestCombinablePackage(varCombinePackageRequestCombinablePackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

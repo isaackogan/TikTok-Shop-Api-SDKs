@@ -73,7 +73,10 @@ type SearchAffiliateOrdersByCreatorResponseDataOrderSku struct {
 	EstimatedCommission *EstimatedCommission `json:"estimated_commission,omitempty"`
 	// An object representing the actual bonus commission, calculated by multiplying the actual commission base by the commission bonus rate.
 	ActualBonusCommission *ActualBonusCommission `json:"actual_bonus_commission,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAffiliateOrdersByCreatorResponseDataOrderSku SearchAffiliateOrdersByCreatorResponseDataOrderSku
 
 // NewSearchAffiliateOrdersByCreatorResponseDataOrderSku instantiates a new SearchAffiliateOrdersByCreatorResponseDataOrderSku object
 // This constructor will assign default values to properties that have it defined,
@@ -1047,7 +1050,59 @@ func (o SearchAffiliateOrdersByCreatorResponseDataOrderSku) ToMap() (map[string]
 	if !IsNil(o.ActualBonusCommission) {
 		toSerialize["actual_bonus_commission"] = o.ActualBonusCommission
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAffiliateOrdersByCreatorResponseDataOrderSku) UnmarshalJSON(data []byte) (err error) {
+	varSearchAffiliateOrdersByCreatorResponseDataOrderSku := _SearchAffiliateOrdersByCreatorResponseDataOrderSku{}
+
+	err = json.Unmarshal(data, &varSearchAffiliateOrdersByCreatorResponseDataOrderSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAffiliateOrdersByCreatorResponseDataOrderSku(varSearchAffiliateOrdersByCreatorResponseDataOrderSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "estimated_commission_base")
+		delete(additionalProperties, "actual_commission")
+		delete(additionalProperties, "shop_ads_commission_rate")
+		delete(additionalProperties, "commission_bonus_rate")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "shop_name")
+		delete(additionalProperties, "returned_quantity")
+		delete(additionalProperties, "refunded_quantity")
+		delete(additionalProperties, "campaign_id")
+		delete(additionalProperties, "actual_commission_base")
+		delete(additionalProperties, "actual_shop_ads_commission")
+		delete(additionalProperties, "estimated_shop_ads_commission")
+		delete(additionalProperties, "estimated_bonus_commission")
+		delete(additionalProperties, "delivery_time")
+		delete(additionalProperties, "creator_commission_reward_rate")
+		delete(additionalProperties, "estimated_creator_commission_reward_fee")
+		delete(additionalProperties, "actual_creator_commission_reward_fee")
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "content_id")
+		delete(additionalProperties, "trace")
+		delete(additionalProperties, "estimated_commission")
+		delete(additionalProperties, "actual_bonus_commission")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAffiliateOrdersByCreatorResponseDataOrderSku struct {

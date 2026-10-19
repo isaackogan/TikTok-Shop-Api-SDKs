@@ -21,7 +21,10 @@ var _ MappedNullable = &TrackingStatusUpdateResponseData{}
 type TrackingStatusUpdateResponseData struct {
 	// The trajectory node array, where the field in each element of the array indicates which trajectory it is. The `code` and `message` fields describe whether the trajectory has been received; if not, they represent the corresponding error code and error description.
 	TrackResults []TrackingStatusUpdateResponseDataTrackResult `json:"track_results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrackingStatusUpdateResponseData TrackingStatusUpdateResponseData
 
 // NewTrackingStatusUpdateResponseData instantiates a new TrackingStatusUpdateResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o TrackingStatusUpdateResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.TrackResults) {
 		toSerialize["track_results"] = o.TrackResults
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrackingStatusUpdateResponseData) UnmarshalJSON(data []byte) (err error) {
+	varTrackingStatusUpdateResponseData := _TrackingStatusUpdateResponseData{}
+
+	err = json.Unmarshal(data, &varTrackingStatusUpdateResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrackingStatusUpdateResponseData(varTrackingStatusUpdateResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "track_results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrackingStatusUpdateResponseData struct {

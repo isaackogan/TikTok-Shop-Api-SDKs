@@ -23,7 +23,10 @@ type GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem struct {
 	GoodsId *string `json:"goods_id,omitempty"`
 	// Quantity of this goods.
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem
 
 // NewGetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem instantiates a new GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem) ToMap
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem := _GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem(varGetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfoAllocationShipmentGoodsItem struct {

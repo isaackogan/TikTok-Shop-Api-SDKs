@@ -23,7 +23,10 @@ type RecommendGlobalCategoriesResponseData struct {
 	LeafCategoryId *string `json:"leaf_category_id,omitempty"`
 	// The category hierarchy for the recommended leaf category, ordered from the top-level category to the leaf category.
 	Categories []RecommendGlobalCategoriesResponseDataCategory `json:"categories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendGlobalCategoriesResponseData RecommendGlobalCategoriesResponseData
 
 // NewRecommendGlobalCategoriesResponseData instantiates a new RecommendGlobalCategoriesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RecommendGlobalCategoriesResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Categories) {
 		toSerialize["categories"] = o.Categories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendGlobalCategoriesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRecommendGlobalCategoriesResponseData := _RecommendGlobalCategoriesResponseData{}
+
+	err = json.Unmarshal(data, &varRecommendGlobalCategoriesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendGlobalCategoriesResponseData(varRecommendGlobalCategoriesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "leaf_category_id")
+		delete(additionalProperties, "categories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendGlobalCategoriesResponseData struct {

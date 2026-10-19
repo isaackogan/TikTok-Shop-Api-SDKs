@@ -31,7 +31,10 @@ type GetShopLIVEProductsPerformanceListResponseDataProductTraffic struct {
 	Gpm *GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm `json:"gpm,omitempty"`
 	// The total number of times the product was clicked from this LIVE, including from the product list and product card
 	ProdutClicks *int64 `json:"produt_clicks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProductTraffic GetShopLIVEProductsPerformanceListResponseDataProductTraffic
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProductTraffic instantiates a new GetShopLIVEProductsPerformanceListResponseDataProductTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProductTraffic) ToMap() (m
 	if !IsNil(o.ProdutClicks) {
 		toSerialize["produt_clicks"] = o.ProdutClicks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProductTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProductTraffic := _GetShopLIVEProductsPerformanceListResponseDataProductTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProductTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProductTraffic(varGetShopLIVEProductsPerformanceListResponseDataProductTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "add_to_cart_count")
+		delete(additionalProperties, "click_to_order_rate")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "produt_clicks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProductTraffic struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &SubmitStrikethroughPriceResponseDataErrorDetail{}
 type SubmitStrikethroughPriceResponseDataErrorDetail struct {
 	// The TikTok Shop SKU ID for which submission failed.
 	SkuId string `json:"sku_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitStrikethroughPriceResponseDataErrorDetail SubmitStrikethroughPriceResponseDataErrorDetail
@@ -80,6 +80,11 @@ func (o SubmitStrikethroughPriceResponseDataErrorDetail) MarshalJSON() ([]byte, 
 func (o SubmitStrikethroughPriceResponseDataErrorDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["sku_id"] = o.SkuId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *SubmitStrikethroughPriceResponseDataErrorDetail) UnmarshalJSON(data []b
 
 	varSubmitStrikethroughPriceResponseDataErrorDetail := _SubmitStrikethroughPriceResponseDataErrorDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitStrikethroughPriceResponseDataErrorDetail)
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceResponseDataErrorDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitStrikethroughPriceResponseDataErrorDetail(varSubmitStrikethroughPriceResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &RepublishActivityResponseData{}
 type RepublishActivityResponseData struct {
 	// On success, the ID of the republished activity. This is the same activity_id supplied in the request path; republishing does not create a new activity. Use this ID for subsequent activity, product, or SKU edits.
 	ActivityId *string `json:"activity_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RepublishActivityResponseData RepublishActivityResponseData
 
 // NewRepublishActivityResponseData instantiates a new RepublishActivityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o RepublishActivityResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ActivityId) {
 		toSerialize["activity_id"] = o.ActivityId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RepublishActivityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRepublishActivityResponseData := _RepublishActivityResponseData{}
+
+	err = json.Unmarshal(data, &varRepublishActivityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RepublishActivityResponseData(varRepublishActivityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRepublishActivityResponseData struct {

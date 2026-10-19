@@ -23,7 +23,10 @@ type SearchManufacturersResponseDataManufacturer struct {
 	Id *string `json:"id,omitempty"`
 	// A list of contact details for the manufacturer, presented in different languages for each supported EU country.
 	RegionalProfiles []SearchManufacturersResponseDataManufacturerRegionalProfile `json:"regional_profiles,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchManufacturersResponseDataManufacturer SearchManufacturersResponseDataManufacturer
 
 // NewSearchManufacturersResponseDataManufacturer instantiates a new SearchManufacturersResponseDataManufacturer object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchManufacturersResponseDataManufacturer) ToMap() (map[string]interfa
 	if !IsNil(o.RegionalProfiles) {
 		toSerialize["regional_profiles"] = o.RegionalProfiles
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchManufacturersResponseDataManufacturer) UnmarshalJSON(data []byte) (err error) {
+	varSearchManufacturersResponseDataManufacturer := _SearchManufacturersResponseDataManufacturer{}
+
+	err = json.Unmarshal(data, &varSearchManufacturersResponseDataManufacturer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchManufacturersResponseDataManufacturer(varSearchManufacturersResponseDataManufacturer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "regional_profiles")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchManufacturersResponseDataManufacturer struct {

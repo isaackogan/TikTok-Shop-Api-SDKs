@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopVideosPerformanceDetailsResponseDataVideoPerforma
 type GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale struct {
 	// Overall sales performance data.
 	Overall *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall `json:"overall,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale
 
 // NewGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale instantiates a new GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale)
 	if !IsNil(o.Overall) {
 		toSerialize["overall"] = o.Overall
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale := _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale{}
+
+	err = json.Unmarshal(data, &varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale(varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "overall")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale struct {

@@ -33,7 +33,10 @@ type ReplicateProductRequestReplicateTarget struct {
 	ResponsiblePersonIds []string `json:"responsible_person_ids,omitempty"`
 	// The SKUs to be published in the specified market. - Max SKUs for EU, JP, UK, US: 300 - Max SKUs for other regions: 100 Note: SKUs of all source country must be included.
 	Skus []ReplicateProductRequestReplicateTargetSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductRequestReplicateTarget ReplicateProductRequestReplicateTarget
 
 // NewReplicateProductRequestReplicateTarget instantiates a new ReplicateProductRequestReplicateTarget object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o ReplicateProductRequestReplicateTarget) ToMap() (map[string]interface{},
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductRequestReplicateTarget) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductRequestReplicateTarget := _ReplicateProductRequestReplicateTarget{}
+
+	err = json.Unmarshal(data, &varReplicateProductRequestReplicateTarget)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductRequestReplicateTarget(varReplicateProductRequestReplicateTarget)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "inventory_mode")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductRequestReplicateTarget struct {

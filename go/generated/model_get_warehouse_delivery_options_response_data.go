@@ -21,7 +21,10 @@ var _ MappedNullable = &GetWarehouseDeliveryOptionsResponseData{}
 type GetWarehouseDeliveryOptionsResponseData struct {
 	// Delivery options available for the seller's warehouse or assignable to a product, depending on `scope`. Each option identifies its supported platforms. Options returned for `WAREHOUSE` may also include applicable weight and dimension limits.
 	DeliveryOptions []GetWarehouseDeliveryOptionsResponseDataDeliveryOption `json:"delivery_options,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseDeliveryOptionsResponseData GetWarehouseDeliveryOptionsResponseData
 
 // NewGetWarehouseDeliveryOptionsResponseData instantiates a new GetWarehouseDeliveryOptionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetWarehouseDeliveryOptionsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.DeliveryOptions) {
 		toSerialize["delivery_options"] = o.DeliveryOptions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseDeliveryOptionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseDeliveryOptionsResponseData := _GetWarehouseDeliveryOptionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetWarehouseDeliveryOptionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseDeliveryOptionsResponseData(varGetWarehouseDeliveryOptionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delivery_options")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseDeliveryOptionsResponseData struct {

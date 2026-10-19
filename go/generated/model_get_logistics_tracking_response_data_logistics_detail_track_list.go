@@ -29,7 +29,10 @@ type GetLogisticsTrackingResponseDataLogisticsDetailTrackList struct {
 	ActionCode *int64 `json:"action_code,omitempty"`
 	// Machine-readable status name corresponding to `action_code`. For action code and name mapping details, see https://partner.tiktokshop.com/docv2/page/37tihrdq.
 	ActionCodeName *string `json:"action_code_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLogisticsTrackingResponseDataLogisticsDetailTrackList GetLogisticsTrackingResponseDataLogisticsDetailTrackList
 
 // NewGetLogisticsTrackingResponseDataLogisticsDetailTrackList instantiates a new GetLogisticsTrackingResponseDataLogisticsDetailTrackList object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetLogisticsTrackingResponseDataLogisticsDetailTrackList) ToMap() (map[s
 	if !IsNil(o.ActionCodeName) {
 		toSerialize["action_code_name"] = o.ActionCodeName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLogisticsTrackingResponseDataLogisticsDetailTrackList) UnmarshalJSON(data []byte) (err error) {
+	varGetLogisticsTrackingResponseDataLogisticsDetailTrackList := _GetLogisticsTrackingResponseDataLogisticsDetailTrackList{}
+
+	err = json.Unmarshal(data, &varGetLogisticsTrackingResponseDataLogisticsDetailTrackList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLogisticsTrackingResponseDataLogisticsDetailTrackList(varGetLogisticsTrackingResponseDataLogisticsDetailTrackList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "tracking_no")
+		delete(additionalProperties, "update_time_millis")
+		delete(additionalProperties, "action_code")
+		delete(additionalProperties, "action_code_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLogisticsTrackingResponseDataLogisticsDetailTrackList struct {

@@ -31,7 +31,10 @@ type DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage struct {
 	Height *int64 `json:"height,omitempty"`
 	// The image width after optimization.
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage
 
 // NewDiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage instantiates a new DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage) ToMap() 
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage := _DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage(varDiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "optimized_uri")
+		delete(additionalProperties, "optimized_url")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductResponseDataDiagnosisSuggestionImage struct {

@@ -25,7 +25,10 @@ type CreateProductRequestProductAttributeValue struct {
 	Name *string `json:"name,omitempty"`
 	// Defines the measurement template information used to describe the measurement standards and metric values configured for the product.
 	MetricStandardInfo *MetricStandardInfo `json:"metric_standard_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateProductRequestProductAttributeValue CreateProductRequestProductAttributeValue
 
 // NewCreateProductRequestProductAttributeValue instantiates a new CreateProductRequestProductAttributeValue object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateProductRequestProductAttributeValue) ToMap() (map[string]interface
 	if !IsNil(o.MetricStandardInfo) {
 		toSerialize["metric_standard_info"] = o.MetricStandardInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateProductRequestProductAttributeValue) UnmarshalJSON(data []byte) (err error) {
+	varCreateProductRequestProductAttributeValue := _CreateProductRequestProductAttributeValue{}
+
+	err = json.Unmarshal(data, &varCreateProductRequestProductAttributeValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateProductRequestProductAttributeValue(varCreateProductRequestProductAttributeValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "metric_standard_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateProductRequestProductAttributeValue struct {

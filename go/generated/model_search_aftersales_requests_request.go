@@ -27,7 +27,10 @@ type SearchAftersalesRequestsRequest struct {
 	Sort *Sort `json:"sort,omitempty"`
 	// Pagination configuration.
 	Pagination *Pagination `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsRequest SearchAftersalesRequestsRequest
 
 // NewSearchAftersalesRequestsRequest instantiates a new SearchAftersalesRequestsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchAftersalesRequestsRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsRequest := _SearchAftersalesRequestsRequest{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsRequest(varSearchAftersalesRequestsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "whitelisted_data_fields")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "sort")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsRequest struct {

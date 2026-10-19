@@ -26,7 +26,10 @@ type CancelOrderResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CancelOrderResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CancelOrderResponse CancelOrderResponse
 
 // NewCancelOrderResponse instantiates a new CancelOrderResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CancelOrderResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CancelOrderResponse) UnmarshalJSON(data []byte) (err error) {
+	varCancelOrderResponse := _CancelOrderResponse{}
+
+	err = json.Unmarshal(data, &varCancelOrderResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CancelOrderResponse(varCancelOrderResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCancelOrderResponse struct {

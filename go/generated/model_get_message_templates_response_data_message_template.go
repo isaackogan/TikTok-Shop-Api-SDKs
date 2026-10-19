@@ -29,7 +29,10 @@ type GetMessageTemplatesResponseDataMessageTemplate struct {
 	ProductCardRules *GetMessageTemplatesResponseDataMessageTemplateProductCardRule `json:"product_card_rules,omitempty"`
 	// Rules on the number and type of interactive coupon cards that can be included in a message.
 	CouponCardRules *GetMessageTemplatesResponseDataMessageTemplateCouponCardRule `json:"coupon_card_rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMessageTemplatesResponseDataMessageTemplate GetMessageTemplatesResponseDataMessageTemplate
 
 // NewGetMessageTemplatesResponseDataMessageTemplate instantiates a new GetMessageTemplatesResponseDataMessageTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetMessageTemplatesResponseDataMessageTemplate) ToMap() (map[string]inte
 	if !IsNil(o.CouponCardRules) {
 		toSerialize["coupon_card_rules"] = o.CouponCardRules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMessageTemplatesResponseDataMessageTemplate) UnmarshalJSON(data []byte) (err error) {
+	varGetMessageTemplatesResponseDataMessageTemplate := _GetMessageTemplatesResponseDataMessageTemplate{}
+
+	err = json.Unmarshal(data, &varGetMessageTemplatesResponseDataMessageTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMessageTemplatesResponseDataMessageTemplate(varGetMessageTemplatesResponseDataMessageTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "message_title")
+		delete(additionalProperties, "message_body")
+		delete(additionalProperties, "product_card_rules")
+		delete(additionalProperties, "coupon_card_rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMessageTemplatesResponseDataMessageTemplate struct {

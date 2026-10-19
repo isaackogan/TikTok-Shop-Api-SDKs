@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type CreateFirstMileBundleV2Request struct {
 	TrackingNumber *string `json:"tracking_number,omitempty"`
 	// Last 4 digits of the sender's phone number. Required when `handover_method == DROP_OFF`.
 	PhoneTailNumber *string `json:"phone_tail_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFirstMileBundleV2Request CreateFirstMileBundleV2Request
@@ -219,6 +219,11 @@ func (o CreateFirstMileBundleV2Request) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.PhoneTailNumber) {
 		toSerialize["phone_tail_number"] = o.PhoneTailNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *CreateFirstMileBundleV2Request) UnmarshalJSON(data []byte) (err error) 
 
 	varCreateFirstMileBundleV2Request := _CreateFirstMileBundleV2Request{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFirstMileBundleV2Request)
+	err = json.Unmarshal(data, &varCreateFirstMileBundleV2Request)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFirstMileBundleV2Request(varCreateFirstMileBundleV2Request)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_ids")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "phone_tail_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

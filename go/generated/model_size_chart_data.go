@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type SizeChartData struct {
 	MeasurementType string `json:"measurement_type"`
 	// Possible values: METRIC: metric units; IMPERIAL: imperial units.
 	UnitSystem string `json:"unit_system"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SizeChartData SizeChartData
@@ -247,6 +247,11 @@ func (o SizeChartData) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["measurement_type"] = o.MeasurementType
 	toSerialize["unit_system"] = o.UnitSystem
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -276,15 +281,25 @@ func (o *SizeChartData) UnmarshalJSON(data []byte) (err error) {
 
 	varSizeChartData := _SizeChartData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSizeChartData)
+	err = json.Unmarshal(data, &varSizeChartData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SizeChartData(varSizeChartData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "table")
+		delete(additionalProperties, "size_types")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "is_one_size")
+		delete(additionalProperties, "measurement_type")
+		delete(additionalProperties, "unit_system")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

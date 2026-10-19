@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTMerchantOnboardedRegionsResponseData{}
 type GetFBTMerchantOnboardedRegionsResponseData struct {
 	// A list of countries or regions where the merchant is onboarded and can conduct business in the Fulfilled by TikTok system. If seller is not onboarded, `data` will be empty.
 	OnboardedRegions []GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion `json:"onboarded_regions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMerchantOnboardedRegionsResponseData GetFBTMerchantOnboardedRegionsResponseData
 
 // NewGetFBTMerchantOnboardedRegionsResponseData instantiates a new GetFBTMerchantOnboardedRegionsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTMerchantOnboardedRegionsResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.OnboardedRegions) {
 		toSerialize["onboarded_regions"] = o.OnboardedRegions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMerchantOnboardedRegionsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMerchantOnboardedRegionsResponseData := _GetFBTMerchantOnboardedRegionsResponseData{}
+
+	err = json.Unmarshal(data, &varGetFBTMerchantOnboardedRegionsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMerchantOnboardedRegionsResponseData(varGetFBTMerchantOnboardedRegionsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "onboarded_regions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMerchantOnboardedRegionsResponseData struct {

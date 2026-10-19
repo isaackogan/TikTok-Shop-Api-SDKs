@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type SellerDeauthorizationWebhook struct {
 	TtsNotificationId *string `json:"tts_notification_id,omitempty"`
 	// The object contains business parameters related to the specific notification type
 	Data *SellerDeauthorizationWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SellerDeauthorizationWebhook SellerDeauthorizationWebhook
@@ -228,6 +228,11 @@ func (o SellerDeauthorizationWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *SellerDeauthorizationWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varSellerDeauthorizationWebhook := _SellerDeauthorizationWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSellerDeauthorizationWebhook)
+	err = json.Unmarshal(data, &varSellerDeauthorizationWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SellerDeauthorizationWebhook(varSellerDeauthorizationWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

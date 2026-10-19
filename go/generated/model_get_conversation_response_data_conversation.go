@@ -33,7 +33,10 @@ type GetConversationResponseDataConversation struct {
 	CurSessionId *string `json:"cur_session_id,omitempty"`
 	// Information about the current open session. This field is returned when `need_session_info` is `true` and current open session information is available.
 	CurSession *CurSession `json:"cur_session,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationResponseDataConversation GetConversationResponseDataConversation
 
 // NewGetConversationResponseDataConversation instantiates a new GetConversationResponseDataConversation object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetConversationResponseDataConversation) ToMap() (map[string]interface{}
 	if !IsNil(o.CurSession) {
 		toSerialize["cur_session"] = o.CurSession
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationResponseDataConversation) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationResponseDataConversation := _GetConversationResponseDataConversation{}
+
+	err = json.Unmarshal(data, &varGetConversationResponseDataConversation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationResponseDataConversation(varGetConversationResponseDataConversation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "participant_count")
+		delete(additionalProperties, "participants")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "unread_count")
+		delete(additionalProperties, "cur_session_id")
+		delete(additionalProperties, "cur_session")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationResponseDataConversation struct {

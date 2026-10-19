@@ -21,7 +21,10 @@ var _ MappedNullable = &GetInboundMethodDetailResponseDataInfoAllocationShipment
 type GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption struct {
 	// Shipping method for this shipment option. Possible values: SMALL_PARCEL, a parcel shipment method; FREIGHT, a freight shipment method.
 	ShippingMethod *string `json:"shipping_method,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption
 
 // NewGetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption instantiates a new GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption) 
 	if !IsNil(o.ShippingMethod) {
 		toSerialize["shipping_method"] = o.ShippingMethod
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption := _GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption(varGetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_method")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption struct {

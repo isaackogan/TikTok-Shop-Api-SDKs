@@ -93,7 +93,10 @@ type GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee struct {
 	SellerFundedUserSpointServiceFee *string `json:"seller_funded_user_spoint_service_fee,omitempty"`
 	// The service fee charged for participation in flash sales.
 	FlashSalesServiceFeeAmount *string `json:"flash_sales_service_fee_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee
 
 // NewGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee instantiates a new GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee object
 // This constructor will assign default values to properties that have it defined,
@@ -1417,7 +1420,69 @@ func (o GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee) ToMap
 	if !IsNil(o.FlashSalesServiceFeeAmount) {
 		toSerialize["flash_sales_service_fee_amount"] = o.FlashSalesServiceFeeAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee := _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee(varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "platform_commission_amount")
+		delete(additionalProperties, "referral_fee_amount")
+		delete(additionalProperties, "refund_administration_fee_amount")
+		delete(additionalProperties, "transaction_fee_amount")
+		delete(additionalProperties, "credit_card_handling_fee_amount")
+		delete(additionalProperties, "affiliate_commission_amount")
+		delete(additionalProperties, "affiliate_commission_before_pit_amount")
+		delete(additionalProperties, "pit_withheld_from_ads_commission_amount")
+		delete(additionalProperties, "affiliate_partner_commission_amount")
+		delete(additionalProperties, "affiliate_ads_commission_amount")
+		delete(additionalProperties, "sfp_service_fee_amount")
+		delete(additionalProperties, "live_specials_fee_amount")
+		delete(additionalProperties, "bonus_cashback_service_fee_amount")
+		delete(additionalProperties, "mall_service_fee_amount")
+		delete(additionalProperties, "retail_delivery_fee_amount")
+		delete(additionalProperties, "retail_delivery_fee_payment_amount")
+		delete(additionalProperties, "retail_delivery_fee_refund_amount")
+		delete(additionalProperties, "platform_special_service_fee_amount")
+		delete(additionalProperties, "smart_promotion_fee_amount")
+		delete(additionalProperties, "vn_fix_infrastructure_fee")
+		delete(additionalProperties, "dynamic_commission_amount")
+		delete(additionalProperties, "campaign_period_fee_cfp_amount")
+		delete(additionalProperties, "campaign_period_fee_sp_amount")
+		delete(additionalProperties, "campaign_period_fee_sp_tax_amount")
+		delete(additionalProperties, "campaign_period_fee_cfp_tax_amount")
+		delete(additionalProperties, "seller_growth_fee_amount")
+		delete(additionalProperties, "failed_delivery_shipping_fee")
+		delete(additionalProperties, "buyer_fault_return_shipping_fee")
+		delete(additionalProperties, "insurance_fee")
+		delete(additionalProperties, "cps_shop_ads_commission_tax_amount")
+		delete(additionalProperties, "shipping_insurance_fee_tax_amount")
+		delete(additionalProperties, "new_customer_growth_package_fee")
+		delete(additionalProperties, "target_product_gmv_growth_package_fee")
+		delete(additionalProperties, "store_gmv_growth_package_fee")
+		delete(additionalProperties, "auto_post_shoppable_video_commission_fee")
+		delete(additionalProperties, "seller_funded_user_spoint_service_fee")
+		delete(additionalProperties, "flash_sales_service_fee_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee struct {

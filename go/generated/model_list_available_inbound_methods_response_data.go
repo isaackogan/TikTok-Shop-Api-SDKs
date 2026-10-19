@@ -21,7 +21,10 @@ var _ MappedNullable = &ListAvailableInboundMethodsResponseData{}
 type ListAvailableInboundMethodsResponseData struct {
 	// List of available inbound methods for the specified plan, including arrival time windows, placement fee estimates, and warehouses.
 	AvailableInboundMethodList []ListAvailableInboundMethodsResponseDataAvailableInboundMethodList `json:"available_inbound_method_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAvailableInboundMethodsResponseData ListAvailableInboundMethodsResponseData
 
 // NewListAvailableInboundMethodsResponseData instantiates a new ListAvailableInboundMethodsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ListAvailableInboundMethodsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.AvailableInboundMethodList) {
 		toSerialize["available_inbound_method_list"] = o.AvailableInboundMethodList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAvailableInboundMethodsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varListAvailableInboundMethodsResponseData := _ListAvailableInboundMethodsResponseData{}
+
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAvailableInboundMethodsResponseData(varListAvailableInboundMethodsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "available_inbound_method_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAvailableInboundMethodsResponseData struct {

@@ -23,7 +23,10 @@ type AvailableRejectReason struct {
 	Name *string `json:"name,omitempty"`
 	// The display text for the rejection reason.
 	Text *string `json:"text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _AvailableRejectReason AvailableRejectReason
 
 // NewAvailableRejectReason instantiates a new AvailableRejectReason object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o AvailableRejectReason) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Text) {
 		toSerialize["text"] = o.Text
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *AvailableRejectReason) UnmarshalJSON(data []byte) (err error) {
+	varAvailableRejectReason := _AvailableRejectReason{}
+
+	err = json.Unmarshal(data, &varAvailableRejectReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AvailableRejectReason(varAvailableRejectReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAvailableRejectReason struct {

@@ -43,7 +43,10 @@ type GetEligibleShippingServicesResponseDataShippingService struct {
 	ShippingAppServiceFee *string `json:"shipping_app_service_fee,omitempty"`
 	// Signature service fee
 	SignatureFee *string `json:"signature_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEligibleShippingServicesResponseDataShippingService GetEligibleShippingServicesResponseDataShippingService
 
 // NewGetEligibleShippingServicesResponseDataShippingService instantiates a new GetEligibleShippingServicesResponseDataShippingService object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o GetEligibleShippingServicesResponseDataShippingService) ToMap() (map[str
 	if !IsNil(o.SignatureFee) {
 		toSerialize["signature_fee"] = o.SignatureFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEligibleShippingServicesResponseDataShippingService) UnmarshalJSON(data []byte) (err error) {
+	varGetEligibleShippingServicesResponseDataShippingService := _GetEligibleShippingServicesResponseDataShippingService{}
+
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesResponseDataShippingService)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEligibleShippingServicesResponseDataShippingService(varGetEligibleShippingServicesResponseDataShippingService)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "earliest_delivery_days")
+		delete(additionalProperties, "latest_delivery_days")
+		delete(additionalProperties, "is_default")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "shipping_fee")
+		delete(additionalProperties, "shipping_app_service_fee")
+		delete(additionalProperties, "signature_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEligibleShippingServicesResponseDataShippingService struct {

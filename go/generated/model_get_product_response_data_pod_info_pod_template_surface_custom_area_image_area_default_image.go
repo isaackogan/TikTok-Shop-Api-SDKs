@@ -29,7 +29,10 @@ type GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultIm
 	Urls []string `json:"urls,omitempty"`
 	// The width of the default image, in pixels.
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage
 
 // NewGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage instantiates a new GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaul
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage := _GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage(varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "thumb_urls")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage struct {

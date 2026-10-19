@@ -29,7 +29,10 @@ type GetActivityResponseDataDiscountBmsmDiscountDetail struct {
 	Type *string `json:"type,omitempty"`
 	// Value of the discount. - When `type`==`PERCENTAGE_OFF`, the buyer will receive X% off the price of eligible products. If the value represents a percentage, it should be an integer. - `type`==`AMOUNT_OFF`, the buyer will receive X units of local currency off the price of eligible products. If the value represents a monetary amount, it should be limited to two decimal places.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountBmsmDiscountDetail GetActivityResponseDataDiscountBmsmDiscountDetail
 
 // NewGetActivityResponseDataDiscountBmsmDiscountDetail instantiates a new GetActivityResponseDataDiscountBmsmDiscountDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetActivityResponseDataDiscountBmsmDiscountDetail) ToMap() (map[string]i
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountBmsmDiscountDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountBmsmDiscountDetail := _GetActivityResponseDataDiscountBmsmDiscountDetail{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountBmsmDiscountDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountBmsmDiscountDetail(varGetActivityResponseDataDiscountBmsmDiscountDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier")
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountBmsmDiscountDetail struct {

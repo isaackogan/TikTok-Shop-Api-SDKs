@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type UpdatePackageDeliveryStatusRequestPackage struct {
 	FileUrl *string `json:"file_url,omitempty"`
 	// The verification code required for order pickup.
 	VerificationCode *string `json:"verification_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePackageDeliveryStatusRequestPackage UpdatePackageDeliveryStatusRequestPackage
@@ -256,6 +256,11 @@ func (o UpdatePackageDeliveryStatusRequestPackage) ToMap() (map[string]interface
 	if !IsNil(o.VerificationCode) {
 		toSerialize["verification_code"] = o.VerificationCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -284,15 +289,25 @@ func (o *UpdatePackageDeliveryStatusRequestPackage) UnmarshalJSON(data []byte) (
 
 	varUpdatePackageDeliveryStatusRequestPackage := _UpdatePackageDeliveryStatusRequestPackage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePackageDeliveryStatusRequestPackage)
+	err = json.Unmarshal(data, &varUpdatePackageDeliveryStatusRequestPackage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePackageDeliveryStatusRequestPackage(varUpdatePackageDeliveryStatusRequestPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "delivery_type")
+		delete(additionalProperties, "fail_delivery_reason")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "file_url")
+		delete(additionalProperties, "verification_code")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

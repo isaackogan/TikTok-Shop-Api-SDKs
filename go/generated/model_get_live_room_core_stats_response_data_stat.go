@@ -53,7 +53,10 @@ type GetLiveRoomCoreStatsResponseDataStat struct {
 	AccumulatedSharingCount *int64 `json:"accumulated_sharing_count,omitempty"`
 	// The peak number of concurrent viewers of the livestream
 	PeakConcurrentUserCount *int64 `json:"peak_concurrent_user_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomCoreStatsResponseDataStat GetLiveRoomCoreStatsResponseDataStat
 
 // NewGetLiveRoomCoreStatsResponseDataStat instantiates a new GetLiveRoomCoreStatsResponseDataStat object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetLiveRoomCoreStatsResponseDataStat) ToMap() (map[string]interface{}, e
 	if !IsNil(o.PeakConcurrentUserCount) {
 		toSerialize["peak_concurrent_user_count"] = o.PeakConcurrentUserCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomCoreStatsResponseDataStat) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomCoreStatsResponseDataStat := _GetLiveRoomCoreStatsResponseDataStat{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomCoreStatsResponseDataStat)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomCoreStatsResponseDataStat(varGetLiveRoomCoreStatsResponseDataStat)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "local_gmv")
+		delete(additionalProperties, "created_order_count")
+		delete(additionalProperties, "current_visitor_count")
+		delete(additionalProperties, "paid_order_count")
+		delete(additionalProperties, "local_unit_price")
+		delete(additionalProperties, "product_reach_count")
+		delete(additionalProperties, "watch_pv")
+		delete(additionalProperties, "click_through_rate")
+		delete(additionalProperties, "accumulated_new_follower_count")
+		delete(additionalProperties, "buyer_count")
+		delete(additionalProperties, "accumulated_comment_count")
+		delete(additionalProperties, "product_view_count")
+		delete(additionalProperties, "click_order_rate")
+		delete(additionalProperties, "avg_watching_duration")
+		delete(additionalProperties, "accumulated_sharing_count")
+		delete(additionalProperties, "peak_concurrent_user_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomCoreStatsResponseDataStat struct {

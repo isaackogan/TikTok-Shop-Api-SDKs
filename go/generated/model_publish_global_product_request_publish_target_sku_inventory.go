@@ -23,7 +23,10 @@ type PublishGlobalProductRequestPublishTargetSkuInventory struct {
 	WarehouseId *string `json:"warehouse_id,omitempty"`
 	// The SKU quantity available in the warehouse. Valid range: [1, 99,999]  **Note**: If the local SKU inventory quantity exceeds the global SKU quantity, the global SKU quantity will be updated to be the sum of all local inventories.
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PublishGlobalProductRequestPublishTargetSkuInventory PublishGlobalProductRequestPublishTargetSkuInventory
 
 // NewPublishGlobalProductRequestPublishTargetSkuInventory instantiates a new PublishGlobalProductRequestPublishTargetSkuInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PublishGlobalProductRequestPublishTargetSkuInventory) ToMap() (map[strin
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PublishGlobalProductRequestPublishTargetSkuInventory) UnmarshalJSON(data []byte) (err error) {
+	varPublishGlobalProductRequestPublishTargetSkuInventory := _PublishGlobalProductRequestPublishTargetSkuInventory{}
+
+	err = json.Unmarshal(data, &varPublishGlobalProductRequestPublishTargetSkuInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PublishGlobalProductRequestPublishTargetSkuInventory(varPublishGlobalProductRequestPublishTargetSkuInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePublishGlobalProductRequestPublishTargetSkuInventory struct {

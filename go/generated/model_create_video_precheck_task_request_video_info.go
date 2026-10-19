@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateVideoPrecheckTaskRequestVideoInfo{}
 type CreateVideoPrecheckTaskRequestVideoInfo struct {
 	// Video file_id from [Upload Shoppable Video File](https://api/affiliate_creator/202505/videos/video_files)
 	FileId string `json:"file_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateVideoPrecheckTaskRequestVideoInfo CreateVideoPrecheckTaskRequestVideoInfo
@@ -80,6 +80,11 @@ func (o CreateVideoPrecheckTaskRequestVideoInfo) MarshalJSON() ([]byte, error) {
 func (o CreateVideoPrecheckTaskRequestVideoInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["file_id"] = o.FileId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateVideoPrecheckTaskRequestVideoInfo) UnmarshalJSON(data []byte) (er
 
 	varCreateVideoPrecheckTaskRequestVideoInfo := _CreateVideoPrecheckTaskRequestVideoInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateVideoPrecheckTaskRequestVideoInfo)
+	err = json.Unmarshal(data, &varCreateVideoPrecheckTaskRequestVideoInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateVideoPrecheckTaskRequestVideoInfo(varCreateVideoPrecheckTaskRequestVideoInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

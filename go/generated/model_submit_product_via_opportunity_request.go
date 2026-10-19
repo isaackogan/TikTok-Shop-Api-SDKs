@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &SubmitProductViaOpportunityRequest{}
 type SubmitProductViaOpportunityRequest struct {
 	// The TikTok Shop product ID to submit. Must be in ACTIVATE status.
 	ProductId string `json:"product_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitProductViaOpportunityRequest SubmitProductViaOpportunityRequest
@@ -80,6 +80,11 @@ func (o SubmitProductViaOpportunityRequest) MarshalJSON() ([]byte, error) {
 func (o SubmitProductViaOpportunityRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_id"] = o.ProductId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *SubmitProductViaOpportunityRequest) UnmarshalJSON(data []byte) (err err
 
 	varSubmitProductViaOpportunityRequest := _SubmitProductViaOpportunityRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitProductViaOpportunityRequest)
+	err = json.Unmarshal(data, &varSubmitProductViaOpportunityRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitProductViaOpportunityRequest(varSubmitProductViaOpportunityRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

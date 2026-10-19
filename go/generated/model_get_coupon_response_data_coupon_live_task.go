@@ -23,7 +23,10 @@ type GetCouponResponseDataCouponLiveTask struct {
 	Type *string `json:"type,omitempty"`
 	// Number of seconds for which the shopper must watch the LIVE in order to claim the coupon.
 	MinWatchTime *string `json:"min_watch_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseDataCouponLiveTask GetCouponResponseDataCouponLiveTask
 
 // NewGetCouponResponseDataCouponLiveTask instantiates a new GetCouponResponseDataCouponLiveTask object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCouponResponseDataCouponLiveTask) ToMap() (map[string]interface{}, er
 	if !IsNil(o.MinWatchTime) {
 		toSerialize["min_watch_time"] = o.MinWatchTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseDataCouponLiveTask) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseDataCouponLiveTask := _GetCouponResponseDataCouponLiveTask{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseDataCouponLiveTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseDataCouponLiveTask(varGetCouponResponseDataCouponLiveTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "min_watch_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseDataCouponLiveTask struct {

@@ -25,7 +25,10 @@ type ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionRea
 	Text *string `json:"text,omitempty"`
 	// Supporting evidence (such as images).
 	Media *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia `json:"media,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason
 
 // NewReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason instantiates a new ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
 	if !IsNil(o.Media) {
 		toSerialize["media"] = o.Media
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason) UnmarshalJSON(data []byte) (err error) {
+	varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason := _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason{}
+
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason(varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reason_id")
+		delete(additionalProperties, "text")
+		delete(additionalProperties, "media")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason struct {

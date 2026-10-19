@@ -21,7 +21,10 @@ var _ MappedNullable = &ReviewAftersalesRequestsRequest{}
 type ReviewAftersalesRequestsRequest struct {
 	// Decisions to apply to aftersales requests.
 	AftersalesRequestDecisions []ReviewAftersalesRequestsRequestAftersalesRequestDecision `json:"aftersales_request_decisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReviewAftersalesRequestsRequest ReviewAftersalesRequestsRequest
 
 // NewReviewAftersalesRequestsRequest instantiates a new ReviewAftersalesRequestsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ReviewAftersalesRequestsRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.AftersalesRequestDecisions) {
 		toSerialize["aftersales_request_decisions"] = o.AftersalesRequestDecisions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReviewAftersalesRequestsRequest) UnmarshalJSON(data []byte) (err error) {
+	varReviewAftersalesRequestsRequest := _ReviewAftersalesRequestsRequest{}
+
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewAftersalesRequestsRequest(varReviewAftersalesRequestsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_request_decisions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReviewAftersalesRequestsRequest struct {

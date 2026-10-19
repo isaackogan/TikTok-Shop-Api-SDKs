@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateGlobalProductRequestSkuPrice struct {
 	Amount string `json:"amount"`
 	// The currency. Possible values: - `USD`: Applicable for global sellers - `EUR`: Applicable for intra-EU sellers
 	Currency string `json:"currency"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGlobalProductRequestSkuPrice CreateGlobalProductRequestSkuPrice
@@ -108,6 +108,11 @@ func (o CreateGlobalProductRequestSkuPrice) ToMap() (map[string]interface{}, err
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["currency"] = o.Currency
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateGlobalProductRequestSkuPrice) UnmarshalJSON(data []byte) (err err
 
 	varCreateGlobalProductRequestSkuPrice := _CreateGlobalProductRequestSkuPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGlobalProductRequestSkuPrice)
+	err = json.Unmarshal(data, &varCreateGlobalProductRequestSkuPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGlobalProductRequestSkuPrice(varCreateGlobalProductRequestSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

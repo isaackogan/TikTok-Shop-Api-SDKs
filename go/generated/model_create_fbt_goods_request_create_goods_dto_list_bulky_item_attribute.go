@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribut
 type CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute struct {
 	// whether the goods is bulky accessories
 	IsBulkyItemAccessories *bool `json:"is_bulky_item_accessories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute
 
 // NewCreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute instantiates a new CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute) ToMap() (map[
 	if !IsNil(o.IsBulkyItemAccessories) {
 		toSerialize["is_bulky_item_accessories"] = o.IsBulkyItemAccessories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute) UnmarshalJSON(data []byte) (err error) {
+	varCreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute := _CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute{}
+
+	err = json.Unmarshal(data, &varCreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute(varCreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_bulky_item_accessories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute struct {

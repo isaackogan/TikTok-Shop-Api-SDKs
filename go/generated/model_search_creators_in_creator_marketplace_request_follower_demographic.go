@@ -25,7 +25,10 @@ type SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic struct {
 	CountRange *SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange `json:"count_range,omitempty"`
 	// Filters creators by follower gender. Possible values: - MALE - FEMALE
 	GenderDistribution *SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution `json:"gender_distribution,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic
 
 // NewSearchCreatorsInCreatorMarketplaceRequestFollowerDemographic instantiates a new SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic) ToMap() (m
 	if !IsNil(o.GenderDistribution) {
 		toSerialize["gender_distribution"] = o.GenderDistribution
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographic := _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestFollowerDemographic(varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "age_ranges")
+		delete(additionalProperties, "count_range")
+		delete(additionalProperties, "gender_distribution")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestFollowerDemographic struct {

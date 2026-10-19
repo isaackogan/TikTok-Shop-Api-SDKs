@@ -25,7 +25,10 @@ type SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippi
 	BuyerPaidReturnShippingFeeAmount *string `json:"buyer_paid_return_shipping_fee_amount,omitempty"`
 	// The amount of return shipping fee platform paid.
 	PlatformPaidReturnShippingFeeAmount *string `json:"platform_paid_return_shipping_fee_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee
 
 // NewSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee instantiates a new SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShi
 	if !IsNil(o.PlatformPaidReturnShippingFeeAmount) {
 		toSerialize["platform_paid_return_shipping_fee_amount"] = o.PlatformPaidReturnShippingFeeAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee := _SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee(varSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seller_paid_return_shipping_fee_amount")
+		delete(additionalProperties, "buyer_paid_return_shipping_fee_amount")
+		delete(additionalProperties, "platform_paid_return_shipping_fee_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee struct {

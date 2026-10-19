@@ -23,7 +23,10 @@ type CheckTikTokShippingAndCollectionByTikTokCoverageResponseData struct {
 	IsTiktokShipping *bool `json:"is_tiktok_shipping,omitempty"`
 	// Indicates whether the tracking number is covered by Collection by TikTok (CBT).
 	IsTiktokCollection *bool `json:"is_tiktok_collection,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckTikTokShippingAndCollectionByTikTokCoverageResponseData CheckTikTokShippingAndCollectionByTikTokCoverageResponseData
 
 // NewCheckTikTokShippingAndCollectionByTikTokCoverageResponseData instantiates a new CheckTikTokShippingAndCollectionByTikTokCoverageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CheckTikTokShippingAndCollectionByTikTokCoverageResponseData) ToMap() (m
 	if !IsNil(o.IsTiktokCollection) {
 		toSerialize["is_tiktok_collection"] = o.IsTiktokCollection
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckTikTokShippingAndCollectionByTikTokCoverageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckTikTokShippingAndCollectionByTikTokCoverageResponseData := _CheckTikTokShippingAndCollectionByTikTokCoverageResponseData{}
+
+	err = json.Unmarshal(data, &varCheckTikTokShippingAndCollectionByTikTokCoverageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckTikTokShippingAndCollectionByTikTokCoverageResponseData(varCheckTikTokShippingAndCollectionByTikTokCoverageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_tiktok_shipping")
+		delete(additionalProperties, "is_tiktok_collection")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckTikTokShippingAndCollectionByTikTokCoverageResponseData struct {

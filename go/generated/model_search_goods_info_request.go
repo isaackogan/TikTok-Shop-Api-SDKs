@@ -27,7 +27,10 @@ type SearchGoodsInfoRequest struct {
 	ReferenceCodes []string `json:"reference_codes,omitempty"`
 	// TikTok Shop SKU IDs used to filter the results. Each ID must be a positive decimal string. Maximum: 100 IDs per request.
 	SkuIds []string `json:"sku_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoRequest SearchGoodsInfoRequest
 
 // NewSearchGoodsInfoRequest instantiates a new SearchGoodsInfoRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchGoodsInfoRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuIds) {
 		toSerialize["sku_ids"] = o.SkuIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoRequest := _SearchGoodsInfoRequest{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoRequest(varSearchGoodsInfoRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_ids")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "reference_codes")
+		delete(additionalProperties, "sku_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoRequest struct {

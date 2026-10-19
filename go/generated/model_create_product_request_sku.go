@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -53,6 +52,7 @@ type CreateProductRequestSku struct {
 	SkuDimensions *SkuDimension `json:"sku_dimensions,omitempty"`
 	// The packaged weight of the SKU.  Note: - Provide the weight measured after packing the SKU. - Use the same measurement system for `sku_weight` and `sku_dimensions`; for example, use `KILOGRAM` with `CENTIMETER`. - SKU weight and SKU dimensions can affect shipping costs, so ensure both are accurate. If the fee based on SKU weight is higher than the fee based on SKU dimensions, the weight-based fee takes precedence.
 	SkuWeight *SkuWeight `json:"sku_weight,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateProductRequestSku CreateProductRequestSku
@@ -626,6 +626,11 @@ func (o CreateProductRequestSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuWeight) {
 		toSerialize["sku_weight"] = o.SkuWeight
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -654,15 +659,35 @@ func (o *CreateProductRequestSku) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateProductRequestSku := _CreateProductRequestSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateProductRequestSku)
+	err = json.Unmarshal(data, &varCreateProductRequestSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateProductRequestSku(varCreateProductRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "combined_skus")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "external_urls")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "pre_sale")
+		delete(additionalProperties, "list_price")
+		delete(additionalProperties, "external_list_prices")
+		delete(additionalProperties, "fees")
+		delete(additionalProperties, "sku_dimensions")
+		delete(additionalProperties, "sku_weight")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

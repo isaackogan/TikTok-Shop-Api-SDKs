@@ -33,7 +33,10 @@ type GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem struct {
 	ReviewCount *int64 `json:"review_count,omitempty"`
 	// Total aftersales handle duration in hours.
 	TotalHandleDurationHours *string `json:"total_handle_duration_hours,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem
 
 // NewGetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem instantiates a new GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem) ToMap() (map[
 	if !IsNil(o.TotalHandleDurationHours) {
 		toSerialize["total_handle_duration_hours"] = o.TotalHandleDurationHours
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem := _GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem(varGetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_type_name")
+		delete(additionalProperties, "approve_duration_hours")
+		delete(additionalProperties, "inspect_duration_hours")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "return_order_id")
+		delete(additionalProperties, "review_count")
+		delete(additionalProperties, "total_handle_duration_hours")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem struct {

@@ -59,7 +59,10 @@ type GetTransactionsByStatementResponseDataTransaction struct {
 	ReserveStatus *string `json:"reserve_status,omitempty"`
 	// The estimated date when the reserve funds will be released and paid out to the seller. Unix timestamp.  Returns an empty value if the reserve funds have already been released.
 	EstimatedReleaseTime *string `json:"estimated_release_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByStatementResponseDataTransaction GetTransactionsByStatementResponseDataTransaction
 
 // NewGetTransactionsByStatementResponseDataTransaction instantiates a new GetTransactionsByStatementResponseDataTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -788,7 +791,52 @@ func (o GetTransactionsByStatementResponseDataTransaction) ToMap() (map[string]i
 	if !IsNil(o.EstimatedReleaseTime) {
 		toSerialize["estimated_release_time"] = o.EstimatedReleaseTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByStatementResponseDataTransaction) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByStatementResponseDataTransaction := _GetTransactionsByStatementResponseDataTransaction{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByStatementResponseDataTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByStatementResponseDataTransaction(varGetTransactionsByStatementResponseDataTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_create_time")
+		delete(additionalProperties, "adjustment_id")
+		delete(additionalProperties, "adjustment_order_id")
+		delete(additionalProperties, "adjustment_amount")
+		delete(additionalProperties, "settlement_amount")
+		delete(additionalProperties, "revenue_amount")
+		delete(additionalProperties, "revenue_breakdown")
+		delete(additionalProperties, "shipping_cost_amount")
+		delete(additionalProperties, "shipping_cost_breakdown")
+		delete(additionalProperties, "fee_tax_amount")
+		delete(additionalProperties, "fee_tax_breakdown")
+		delete(additionalProperties, "supplementary_component")
+		delete(additionalProperties, "reserve_id")
+		delete(additionalProperties, "reserve_amount")
+		delete(additionalProperties, "associated_order_id")
+		delete(additionalProperties, "reserve_status")
+		delete(additionalProperties, "estimated_release_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByStatementResponseDataTransaction struct {

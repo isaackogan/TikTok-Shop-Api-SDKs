@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateFBTGoodsInfoResponseData{}
 type UpdateFBTGoodsInfoResponseData struct {
 	// Goods update result information.
 	UpdateResultInfo *UpdateFBTGoodsInfoResponseDataUpdateResultInfo `json:"update_result_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateFBTGoodsInfoResponseData UpdateFBTGoodsInfoResponseData
 
 // NewUpdateFBTGoodsInfoResponseData instantiates a new UpdateFBTGoodsInfoResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateFBTGoodsInfoResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UpdateResultInfo) {
 		toSerialize["update_result_info"] = o.UpdateResultInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateFBTGoodsInfoResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdateFBTGoodsInfoResponseData := _UpdateFBTGoodsInfoResponseData{}
+
+	err = json.Unmarshal(data, &varUpdateFBTGoodsInfoResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateFBTGoodsInfoResponseData(varUpdateFBTGoodsInfoResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "update_result_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateFBTGoodsInfoResponseData struct {

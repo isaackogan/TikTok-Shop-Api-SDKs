@@ -25,7 +25,10 @@ type CreateFirstMileBundleResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// Error detail
 	Detail *CreateFirstMileBundleResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFirstMileBundleResponseDataError CreateFirstMileBundleResponseDataError
 
 // NewCreateFirstMileBundleResponseDataError instantiates a new CreateFirstMileBundleResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateFirstMileBundleResponseDataError) ToMap() (map[string]interface{},
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFirstMileBundleResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varCreateFirstMileBundleResponseDataError := _CreateFirstMileBundleResponseDataError{}
+
+	err = json.Unmarshal(data, &varCreateFirstMileBundleResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFirstMileBundleResponseDataError(varCreateFirstMileBundleResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFirstMileBundleResponseDataError struct {

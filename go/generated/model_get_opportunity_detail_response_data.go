@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpportunityDetailResponseData{}
 type GetOpportunityDetailResponseData struct {
 	// Detailed opportunity information, including basic details, market and content data, listing criteria, and the recommended action.
 	Opportunity *GetOpportunityDetailResponseDataOpportunity `json:"opportunity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpportunityDetailResponseData GetOpportunityDetailResponseData
 
 // NewGetOpportunityDetailResponseData instantiates a new GetOpportunityDetailResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpportunityDetailResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Opportunity) {
 		toSerialize["opportunity"] = o.Opportunity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpportunityDetailResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpportunityDetailResponseData := _GetOpportunityDetailResponseData{}
+
+	err = json.Unmarshal(data, &varGetOpportunityDetailResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpportunityDetailResponseData(varGetOpportunityDetailResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "opportunity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpportunityDetailResponseData struct {

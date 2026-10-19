@@ -21,7 +21,10 @@ var _ MappedNullable = &NewMessageListenerWebhookDataSender{}
 type NewMessageListenerWebhookDataSender struct {
 	// ID in IM system for the sender.
 	SenderImUserId *string `json:"sender_im_user_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NewMessageListenerWebhookDataSender NewMessageListenerWebhookDataSender
 
 // NewNewMessageListenerWebhookDataSender instantiates a new NewMessageListenerWebhookDataSender object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o NewMessageListenerWebhookDataSender) ToMap() (map[string]interface{}, er
 	if !IsNil(o.SenderImUserId) {
 		toSerialize["sender_im_user_id"] = o.SenderImUserId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NewMessageListenerWebhookDataSender) UnmarshalJSON(data []byte) (err error) {
+	varNewMessageListenerWebhookDataSender := _NewMessageListenerWebhookDataSender{}
+
+	err = json.Unmarshal(data, &varNewMessageListenerWebhookDataSender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NewMessageListenerWebhookDataSender(varNewMessageListenerWebhookDataSender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sender_im_user_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNewMessageListenerWebhookDataSender struct {

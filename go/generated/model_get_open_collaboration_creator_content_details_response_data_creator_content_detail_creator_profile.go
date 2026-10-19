@@ -29,7 +29,10 @@ type GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCr
 	Avatar *Avatar `json:"avatar,omitempty"`
 	// Creator Open ID. [More details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
 	CreatorOpenId *string `json:"creator_open_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile
 
 // NewGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile instantiates a new GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetai
 	if !IsNil(o.CreatorOpenId) {
 		toSerialize["creator_open_id"] = o.CreatorOpenId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile := _GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile(varGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "follower_count")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfile struct {

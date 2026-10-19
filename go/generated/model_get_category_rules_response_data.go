@@ -39,7 +39,10 @@ type GetCategoryRulesResponseData struct {
 	Fees []GetCategoryRulesResponseDataFee `json:"fees,omitempty"`
 	// Seller SKU related rules. Applicable only for cross-border POP shops in EU markets.
 	SellerSku *GetCategoryRulesResponseDataSellerSku `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseData GetCategoryRulesResponseData
 
 // NewGetCategoryRulesResponseData instantiates a new GetCategoryRulesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetCategoryRulesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseData := _GetCategoryRulesResponseData{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseData(varGetCategoryRulesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_certifications")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "cod")
+		delete(additionalProperties, "package_dimension")
+		delete(additionalProperties, "epr")
+		delete(additionalProperties, "responsible_person")
+		delete(additionalProperties, "manufacturer")
+		delete(additionalProperties, "allowed_special_product_types")
+		delete(additionalProperties, "fees")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseData struct {

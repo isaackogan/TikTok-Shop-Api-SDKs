@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTWarehouseListResponseData{}
 type GetFBTWarehouseListResponseData struct {
 	// A list of Fulfilled by TikTok warehouses information.
 	Warehouses []GetFBTWarehouseListResponseDataWarehouse `json:"warehouses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTWarehouseListResponseData GetFBTWarehouseListResponseData
 
 // NewGetFBTWarehouseListResponseData instantiates a new GetFBTWarehouseListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTWarehouseListResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Warehouses) {
 		toSerialize["warehouses"] = o.Warehouses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTWarehouseListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTWarehouseListResponseData := _GetFBTWarehouseListResponseData{}
+
+	err = json.Unmarshal(data, &varGetFBTWarehouseListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTWarehouseListResponseData(varGetFBTWarehouseListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTWarehouseListResponseData struct {

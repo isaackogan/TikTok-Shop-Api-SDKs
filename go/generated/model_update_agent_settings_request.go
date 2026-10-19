@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateAgentSettingsRequest{}
 type UpdateAgentSettingsRequest struct {
 	// Whether the shop owner's customer service account can accept auto-assigned chats.  - `true`: The agent receives auto-assigned chats and can also manually select chats to respond to. - `false`: The agent receives only manually assigned chats.  For a shop with only one customer service agent, set this field to `true`; `false` is rejected. When using the IM API, `true` is recommended.
 	CanAcceptChat bool `json:"can_accept_chat"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateAgentSettingsRequest UpdateAgentSettingsRequest
@@ -80,6 +80,11 @@ func (o UpdateAgentSettingsRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateAgentSettingsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["can_accept_chat"] = o.CanAcceptChat
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateAgentSettingsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateAgentSettingsRequest := _UpdateAgentSettingsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateAgentSettingsRequest)
+	err = json.Unmarshal(data, &varUpdateAgentSettingsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateAgentSettingsRequest(varUpdateAgentSettingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "can_accept_chat")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

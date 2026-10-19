@@ -25,7 +25,10 @@ type SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo struct {
 	FlammableLiquidsVolume *string `json:"flammable_liquids_volume,omitempty"`
 	// Unit for `flammable_liquids_volume`, such as `MILLILITER`.
 	VolumeUnit *string `json:"volume_unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo
 
 // NewSearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo instantiates a new SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo) ToMa
 	if !IsNil(o.VolumeUnit) {
 		toSerialize["volume_unit"] = o.VolumeUnit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo := _SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo(varSearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "flammable_liquids_type")
+		delete(additionalProperties, "flammable_liquids_volume")
+		delete(additionalProperties, "volume_unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo struct {

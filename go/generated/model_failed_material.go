@@ -23,7 +23,10 @@ type FailedMaterial struct {
 	MaterialId *string `json:"material_id,omitempty"`
 	// Fail reason.
 	FailReason *string `json:"fail_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FailedMaterial FailedMaterial
 
 // NewFailedMaterial instantiates a new FailedMaterial object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o FailedMaterial) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailReason) {
 		toSerialize["fail_reason"] = o.FailReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FailedMaterial) UnmarshalJSON(data []byte) (err error) {
+	varFailedMaterial := _FailedMaterial{}
+
+	err = json.Unmarshal(data, &varFailedMaterial)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FailedMaterial(varFailedMaterial)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "material_id")
+		delete(additionalProperties, "fail_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFailedMaterial struct {

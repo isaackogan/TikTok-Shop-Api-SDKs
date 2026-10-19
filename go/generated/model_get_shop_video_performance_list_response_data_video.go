@@ -77,7 +77,10 @@ type GetShopVideoPerformanceListResponseDataVideo struct {
 	VideoPostTime *string `json:"video_post_time,omitempty"`
 	// Number of video views during the selected time range.
 	Views *int64 `json:"views,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceListResponseDataVideo GetShopVideoPerformanceListResponseDataVideo
 
 // NewGetShopVideoPerformanceListResponseDataVideo instantiates a new GetShopVideoPerformanceListResponseDataVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -1121,7 +1124,61 @@ func (o GetShopVideoPerformanceListResponseDataVideo) ToMap() (map[string]interf
 	if !IsNil(o.Views) {
 		toSerialize["views"] = o.Views
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceListResponseDataVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceListResponseDataVideo := _GetShopVideoPerformanceListResponseDataVideo{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceListResponseDataVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceListResponseDataVideo(varGetShopVideoPerformanceListResponseDataVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "advertisable")
+		delete(additionalProperties, "attributed_gmv")
+		delete(additionalProperties, "avg_customers")
+		delete(additionalProperties, "click_through_rate")
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "ctor")
+		delete(additionalProperties, "duration")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "hash_tags")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "indirect_gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "likes")
+		delete(additionalProperties, "new_followers")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "review_type")
+		delete(additionalProperties, "shares")
+		delete(additionalProperties, "sku_orders")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "v_to_l_clicks")
+		delete(additionalProperties, "v_to_l_rate")
+		delete(additionalProperties, "video_finish_rate")
+		delete(additionalProperties, "video_post_time")
+		delete(additionalProperties, "views")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceListResponseDataVideo struct {

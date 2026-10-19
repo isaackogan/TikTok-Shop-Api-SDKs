@@ -27,7 +27,10 @@ type SearchProductsResponseDataProductSkuInventory struct {
 	Quantity *int64 `json:"quantity,omitempty"`
 	// The ID of the warehouse where the SKU is stored.  Retrieve details of the warehouse from the [Get Warehouse List API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
 	WarehouseId *string `json:"warehouse_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductSkuInventory SearchProductsResponseDataProductSkuInventory
 
 // NewSearchProductsResponseDataProductSkuInventory instantiates a new SearchProductsResponseDataProductSkuInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchProductsResponseDataProductSkuInventory) ToMap() (map[string]inter
 	if !IsNil(o.WarehouseId) {
 		toSerialize["warehouse_id"] = o.WarehouseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductSkuInventory) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductSkuInventory := _SearchProductsResponseDataProductSkuInventory{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductSkuInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductSkuInventory(varSearchProductsResponseDataProductSkuInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "backorder_quantity")
+		delete(additionalProperties, "handling_time")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductSkuInventory struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type DiagnoseAndOptimizeProductRequest struct {
 	SizeChart *DiagnoseAndOptimizeProductRequestSizeChart `json:"size_chart,omitempty"`
 	// The fields for which you want to generate specific optimization suggestions. Possible values:  - TITLE: Product title - DESCRIPTION: Product description (suggestions for this may take more than 10 seconds to generate) - IMAGE: Product image displayed in the image gallery  - ALL: Suggestions are generated for all the above fields - NONE: No suggestions will be provided. Default: NONE
 	OptimizationFields []string `json:"optimization_fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DiagnoseAndOptimizeProductRequest DiagnoseAndOptimizeProductRequest
@@ -376,6 +376,11 @@ func (o DiagnoseAndOptimizeProductRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.OptimizationFields) {
 		toSerialize["optimization_fields"] = o.OptimizationFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -403,15 +408,28 @@ func (o *DiagnoseAndOptimizeProductRequest) UnmarshalJSON(data []byte) (err erro
 
 	varDiagnoseAndOptimizeProductRequest := _DiagnoseAndOptimizeProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDiagnoseAndOptimizeProductRequest)
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DiagnoseAndOptimizeProductRequest(varDiagnoseAndOptimizeProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "optimization_fields")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

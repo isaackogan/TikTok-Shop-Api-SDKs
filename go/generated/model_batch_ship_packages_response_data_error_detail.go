@@ -21,7 +21,10 @@ var _ MappedNullable = &BatchShipPackagesResponseDataErrorDetail{}
 type BatchShipPackagesResponseDataErrorDetail struct {
 	// Package ID.
 	PackageId *string `json:"package_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _BatchShipPackagesResponseDataErrorDetail BatchShipPackagesResponseDataErrorDetail
 
 // NewBatchShipPackagesResponseDataErrorDetail instantiates a new BatchShipPackagesResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o BatchShipPackagesResponseDataErrorDetail) ToMap() (map[string]interface{
 	if !IsNil(o.PackageId) {
 		toSerialize["package_id"] = o.PackageId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *BatchShipPackagesResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varBatchShipPackagesResponseDataErrorDetail := _BatchShipPackagesResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varBatchShipPackagesResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = BatchShipPackagesResponseDataErrorDetail(varBatchShipPackagesResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBatchShipPackagesResponseDataErrorDetail struct {

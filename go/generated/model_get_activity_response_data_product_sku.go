@@ -31,7 +31,10 @@ type GetActivityResponseDataProductSku struct {
 	ActivityPrice *ActivityPrice `json:"activity_price,omitempty"`
 	// The quantity of SKU that have already taken effect in the activity.
 	UsedQuantity *int64 `json:"used_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataProductSku GetActivityResponseDataProductSku
 
 // NewGetActivityResponseDataProductSku instantiates a new GetActivityResponseDataProductSku object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetActivityResponseDataProductSku) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.UsedQuantity) {
 		toSerialize["used_quantity"] = o.UsedQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataProductSku) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataProductSku := _GetActivityResponseDataProductSku{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataProductSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataProductSku(varGetActivityResponseDataProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "quantity_limit")
+		delete(additionalProperties, "quantity_per_user")
+		delete(additionalProperties, "activity_price")
+		delete(additionalProperties, "used_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataProductSku struct {

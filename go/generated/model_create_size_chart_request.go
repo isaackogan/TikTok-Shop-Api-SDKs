@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateSizeChartRequest struct {
 	TemplateName *string `json:"template_name,omitempty"`
 	// Structured size chart content.
 	SizeChartData SizeChartData `json:"size_chart_data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSizeChartRequest CreateSizeChartRequest
@@ -173,6 +173,11 @@ func (o CreateSizeChartRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["template_name"] = o.TemplateName
 	}
 	toSerialize["size_chart_data"] = o.SizeChartData
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -202,15 +207,23 @@ func (o *CreateSizeChartRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateSizeChartRequest := _CreateSizeChartRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSizeChartRequest)
+	err = json.Unmarshal(data, &varCreateSizeChartRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSizeChartRequest(varCreateSizeChartRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "size_chart_mode")
+		delete(additionalProperties, "template_name")
+		delete(additionalProperties, "size_chart_data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -31,7 +31,10 @@ type SearchOpenCollaborationsResponseDataOpenCollaboration struct {
 	ContentCreatorCount *int64 `json:"content_creator_count,omitempty"`
 	// The open collaboration bound product information.
 	Product *SearchOpenCollaborationsResponseDataOpenCollaborationProduct `json:"product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationsResponseDataOpenCollaboration SearchOpenCollaborationsResponseDataOpenCollaboration
 
 // NewSearchOpenCollaborationsResponseDataOpenCollaboration instantiates a new SearchOpenCollaborationsResponseDataOpenCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchOpenCollaborationsResponseDataOpenCollaboration) ToMap() (map[stri
 	if !IsNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationsResponseDataOpenCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationsResponseDataOpenCollaboration := _SearchOpenCollaborationsResponseDataOpenCollaboration{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationsResponseDataOpenCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationsResponseDataOpenCollaboration(varSearchOpenCollaborationsResponseDataOpenCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "current_commission")
+		delete(additionalProperties, "showcase_creator_count")
+		delete(additionalProperties, "content_creator_count")
+		delete(additionalProperties, "product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationsResponseDataOpenCollaboration struct {

@@ -27,7 +27,10 @@ type SellerSearchOpenCollaborationProductsRequest struct {
 	Category *Category `json:"category,omitempty"`
 	// Filters products by the commission rate range specified by `rate_ge` and `rate_lt`.
 	CommissionRateRange *SellerSearchOpenCollaborationProductsRequestCommissionRateRange `json:"commission_rate_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerSearchOpenCollaborationProductsRequest SellerSearchOpenCollaborationProductsRequest
 
 // NewSellerSearchOpenCollaborationProductsRequest instantiates a new SellerSearchOpenCollaborationProductsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SellerSearchOpenCollaborationProductsRequest) ToMap() (map[string]interf
 	if !IsNil(o.CommissionRateRange) {
 		toSerialize["commission_rate_range"] = o.CommissionRateRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerSearchOpenCollaborationProductsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSellerSearchOpenCollaborationProductsRequest := _SellerSearchOpenCollaborationProductsRequest{}
+
+	err = json.Unmarshal(data, &varSellerSearchOpenCollaborationProductsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerSearchOpenCollaborationProductsRequest(varSellerSearchOpenCollaborationProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "title_keywords")
+		delete(additionalProperties, "sales_price_range")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "commission_rate_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerSearchOpenCollaborationProductsRequest struct {

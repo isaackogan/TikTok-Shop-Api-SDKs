@@ -29,7 +29,10 @@ type CreateProductResponseDataSku struct {
 	ExternalSkuId *string `json:"external_sku_id,omitempty"`
 	// The fees required for this product based on TikTok Shop policies. Fees are required only for certain product categories, retrieve the requirements from the [Get Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
 	Fees []Fee `json:"fees,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateProductResponseDataSku CreateProductResponseDataSku
 
 // NewCreateProductResponseDataSku instantiates a new CreateProductResponseDataSku object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CreateProductResponseDataSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Fees) {
 		toSerialize["fees"] = o.Fees
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateProductResponseDataSku) UnmarshalJSON(data []byte) (err error) {
+	varCreateProductResponseDataSku := _CreateProductResponseDataSku{}
+
+	err = json.Unmarshal(data, &varCreateProductResponseDataSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateProductResponseDataSku(varCreateProductResponseDataSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "external_sku_id")
+		delete(additionalProperties, "fees")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateProductResponseDataSku struct {

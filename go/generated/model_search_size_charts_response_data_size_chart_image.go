@@ -25,7 +25,10 @@ type SearchSizeChartsResponseDataSizeChartImage struct {
 	Url *string `json:"url,omitempty"`
 	// The language of the size chart image.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponseDataSizeChartImage SearchSizeChartsResponseDataSizeChartImage
 
 // NewSearchSizeChartsResponseDataSizeChartImage instantiates a new SearchSizeChartsResponseDataSizeChartImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchSizeChartsResponseDataSizeChartImage) ToMap() (map[string]interfac
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponseDataSizeChartImage) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponseDataSizeChartImage := _SearchSizeChartsResponseDataSizeChartImage{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponseDataSizeChartImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponseDataSizeChartImage(varSearchSizeChartsResponseDataSizeChartImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponseDataSizeChartImage struct {

@@ -23,7 +23,10 @@ type ProductPackageRecommendedWebhookDataDimensionRecommendationLength struct {
 	MinValue *string `json:"min_value,omitempty"`
 	// Recommended range maximum.unit: cm
 	MaxValue *string `json:"max_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductPackageRecommendedWebhookDataDimensionRecommendationLength ProductPackageRecommendedWebhookDataDimensionRecommendationLength
 
 // NewProductPackageRecommendedWebhookDataDimensionRecommendationLength instantiates a new ProductPackageRecommendedWebhookDataDimensionRecommendationLength object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ProductPackageRecommendedWebhookDataDimensionRecommendationLength) ToMap
 	if !IsNil(o.MaxValue) {
 		toSerialize["max_value"] = o.MaxValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductPackageRecommendedWebhookDataDimensionRecommendationLength) UnmarshalJSON(data []byte) (err error) {
+	varProductPackageRecommendedWebhookDataDimensionRecommendationLength := _ProductPackageRecommendedWebhookDataDimensionRecommendationLength{}
+
+	err = json.Unmarshal(data, &varProductPackageRecommendedWebhookDataDimensionRecommendationLength)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductPackageRecommendedWebhookDataDimensionRecommendationLength(varProductPackageRecommendedWebhookDataDimensionRecommendationLength)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_value")
+		delete(additionalProperties, "max_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductPackageRecommendedWebhookDataDimensionRecommendationLength struct {

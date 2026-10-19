@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateResponsiblePersonResponseData{}
 type CreateResponsiblePersonResponseData struct {
 	// A unique ID that identifies the responsible person in TikTok Shop.
 	ResponsiblePersonId *string `json:"responsible_person_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateResponsiblePersonResponseData CreateResponsiblePersonResponseData
 
 // NewCreateResponsiblePersonResponseData instantiates a new CreateResponsiblePersonResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateResponsiblePersonResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.ResponsiblePersonId) {
 		toSerialize["responsible_person_id"] = o.ResponsiblePersonId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateResponsiblePersonResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateResponsiblePersonResponseData := _CreateResponsiblePersonResponseData{}
+
+	err = json.Unmarshal(data, &varCreateResponsiblePersonResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateResponsiblePersonResponseData(varCreateResponsiblePersonResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "responsible_person_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateResponsiblePersonResponseData struct {

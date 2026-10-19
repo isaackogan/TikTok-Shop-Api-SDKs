@@ -23,7 +23,10 @@ type Sort struct {
 	SortField *string `json:"sort_field,omitempty"`
 	// Sort direction. Possible values: - `ASC` - `DESC`
 	SortOrder *string `json:"sort_order,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Sort Sort
 
 // NewSort instantiates a new Sort object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Sort) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SortOrder) {
 		toSerialize["sort_order"] = o.SortOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Sort) UnmarshalJSON(data []byte) (err error) {
+	varSort := _Sort{}
+
+	err = json.Unmarshal(data, &varSort)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Sort(varSort)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sort_field")
+		delete(additionalProperties, "sort_order")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSort struct {

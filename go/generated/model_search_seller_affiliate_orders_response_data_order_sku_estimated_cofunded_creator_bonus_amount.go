@@ -23,7 +23,10 @@ type SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonu
 	Amount *string `json:"amount,omitempty"`
 	// The commission currency.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount
 
 // NewSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount instantiates a new SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorB
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount) UnmarshalJSON(data []byte) (err error) {
+	varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount := _SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount{}
+
+	err = json.Unmarshal(data, &varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount(varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount struct {

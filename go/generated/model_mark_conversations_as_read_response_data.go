@@ -21,7 +21,10 @@ var _ MappedNullable = &MarkConversationsAsReadResponseData{}
 type MarkConversationsAsReadResponseData struct {
 	// The conversation IDs that could not be marked as read. Retry the request using only these IDs.
 	FailedConversationIds []string `json:"failed_conversation_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarkConversationsAsReadResponseData MarkConversationsAsReadResponseData
 
 // NewMarkConversationsAsReadResponseData instantiates a new MarkConversationsAsReadResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o MarkConversationsAsReadResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.FailedConversationIds) {
 		toSerialize["failed_conversation_ids"] = o.FailedConversationIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarkConversationsAsReadResponseData) UnmarshalJSON(data []byte) (err error) {
+	varMarkConversationsAsReadResponseData := _MarkConversationsAsReadResponseData{}
+
+	err = json.Unmarshal(data, &varMarkConversationsAsReadResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarkConversationsAsReadResponseData(varMarkConversationsAsReadResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "failed_conversation_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarkConversationsAsReadResponseData struct {

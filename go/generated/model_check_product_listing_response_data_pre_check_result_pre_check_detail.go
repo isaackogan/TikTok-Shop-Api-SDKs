@@ -25,7 +25,10 @@ type CheckProductListingResponseDataPreCheckResultPreCheckDetail struct {
 	LongReason *string `json:"long_reason,omitempty"`
 	// Problem Module: From which module does the problem originate, e.g., PRE_CHECK_FIELD_TITLE, PRE_CHECK_FIELD_IMAGES
 	RelatedFields []string `json:"related_fields,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponseDataPreCheckResultPreCheckDetail CheckProductListingResponseDataPreCheckResultPreCheckDetail
 
 // NewCheckProductListingResponseDataPreCheckResultPreCheckDetail instantiates a new CheckProductListingResponseDataPreCheckResultPreCheckDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CheckProductListingResponseDataPreCheckResultPreCheckDetail) ToMap() (ma
 	if !IsNil(o.RelatedFields) {
 		toSerialize["related_fields"] = o.RelatedFields
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponseDataPreCheckResultPreCheckDetail) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponseDataPreCheckResultPreCheckDetail := _CheckProductListingResponseDataPreCheckResultPreCheckDetail{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponseDataPreCheckResultPreCheckDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponseDataPreCheckResultPreCheckDetail(varCheckProductListingResponseDataPreCheckResultPreCheckDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "short_reason")
+		delete(additionalProperties, "long_reason")
+		delete(additionalProperties, "related_fields")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponseDataPreCheckResultPreCheckDetail struct {

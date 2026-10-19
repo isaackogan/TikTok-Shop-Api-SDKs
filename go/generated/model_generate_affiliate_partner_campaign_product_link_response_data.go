@@ -21,7 +21,10 @@ var _ MappedNullable = &GenerateAffiliatePartnerCampaignProductLinkResponseData{
 type GenerateAffiliatePartnerCampaignProductLinkResponseData struct {
 	// A URL for product promotion content. This URL is provided to agencies for sharing with colloborating creators. Creators share this link with followers via the TikTok App. Note that creators control whether or not to add products to their showcase in the pop-up window.
 	ProductPromotionLink *string `json:"product_promotion_link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateAffiliatePartnerCampaignProductLinkResponseData GenerateAffiliatePartnerCampaignProductLinkResponseData
 
 // NewGenerateAffiliatePartnerCampaignProductLinkResponseData instantiates a new GenerateAffiliatePartnerCampaignProductLinkResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GenerateAffiliatePartnerCampaignProductLinkResponseData) ToMap() (map[st
 	if !IsNil(o.ProductPromotionLink) {
 		toSerialize["product_promotion_link"] = o.ProductPromotionLink
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateAffiliatePartnerCampaignProductLinkResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGenerateAffiliatePartnerCampaignProductLinkResponseData := _GenerateAffiliatePartnerCampaignProductLinkResponseData{}
+
+	err = json.Unmarshal(data, &varGenerateAffiliatePartnerCampaignProductLinkResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateAffiliatePartnerCampaignProductLinkResponseData(varGenerateAffiliatePartnerCampaignProductLinkResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_promotion_link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateAffiliatePartnerCampaignProductLinkResponseData struct {

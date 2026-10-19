@@ -27,7 +27,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown 
 	Gmv *Gmv `json:"gmv,omitempty"`
 	// Indirect GMV for this content type and channel.
 	IndirectGmv *IndirectGmv `json:"indirect_gmv,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdo
 	if !IsNil(o.IndirectGmv) {
 		toSerialize["indirect_gmv"] = o.IndirectGmv
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown := _GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown(varGetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "channel")
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "indirect_gmv")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown struct {

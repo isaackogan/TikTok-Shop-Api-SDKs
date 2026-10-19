@@ -25,7 +25,10 @@ type GetAvailableReviewDecisionsResponseDataLineItem struct {
 	SubReturnLineItemId *string `json:"sub_return_line_item_id,omitempty"`
 	// The list of candidate review decisions for this line item.
 	Decisions []GetAvailableReviewDecisionsResponseDataLineItemDecision `json:"decisions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAvailableReviewDecisionsResponseDataLineItem GetAvailableReviewDecisionsResponseDataLineItem
 
 // NewGetAvailableReviewDecisionsResponseDataLineItem instantiates a new GetAvailableReviewDecisionsResponseDataLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAvailableReviewDecisionsResponseDataLineItem) ToMap() (map[string]int
 	if !IsNil(o.Decisions) {
 		toSerialize["decisions"] = o.Decisions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAvailableReviewDecisionsResponseDataLineItem) UnmarshalJSON(data []byte) (err error) {
+	varGetAvailableReviewDecisionsResponseDataLineItem := _GetAvailableReviewDecisionsResponseDataLineItem{}
+
+	err = json.Unmarshal(data, &varGetAvailableReviewDecisionsResponseDataLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAvailableReviewDecisionsResponseDataLineItem(varGetAvailableReviewDecisionsResponseDataLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "sub_return_line_item_id")
+		delete(additionalProperties, "decisions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAvailableReviewDecisionsResponseDataLineItem struct {

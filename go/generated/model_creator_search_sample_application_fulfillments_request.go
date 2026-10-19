@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreatorSearchSampleApplicationFulfillmentsRequest{}
 type CreatorSearchSampleApplicationFulfillmentsRequest struct {
 	// A list of fulfillment statuses. The response is filtered to include sample fulfillments with the `status` field set to one of the specified values. The possible values are: - PENDING: The creator has not yet fulfilled the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator is exempt from the fulfillment obligation.
 	FulfillmentStatuses []string `json:"fulfillment_statuses"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatorSearchSampleApplicationFulfillmentsRequest CreatorSearchSampleApplicationFulfillmentsRequest
@@ -80,6 +80,11 @@ func (o CreatorSearchSampleApplicationFulfillmentsRequest) MarshalJSON() ([]byte
 func (o CreatorSearchSampleApplicationFulfillmentsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["fulfillment_statuses"] = o.FulfillmentStatuses
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreatorSearchSampleApplicationFulfillmentsRequest) UnmarshalJSON(data [
 
 	varCreatorSearchSampleApplicationFulfillmentsRequest := _CreatorSearchSampleApplicationFulfillmentsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatorSearchSampleApplicationFulfillmentsRequest)
+	err = json.Unmarshal(data, &varCreatorSearchSampleApplicationFulfillmentsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatorSearchSampleApplicationFulfillmentsRequest(varCreatorSearchSampleApplicationFulfillmentsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fulfillment_statuses")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

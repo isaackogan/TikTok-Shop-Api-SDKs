@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PartialEditProductRequestCertification struct {
 	Id string `json:"id"`
 	// A list of certification related images.
 	Images []Image `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestCertification PartialEditProductRequestCertification
@@ -191,6 +191,11 @@ func (o PartialEditProductRequestCertification) ToMap() (map[string]interface{},
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *PartialEditProductRequestCertification) UnmarshalJSON(data []byte) (err
 
 	varPartialEditProductRequestCertification := _PartialEditProductRequestCertification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestCertification)
+	err = json.Unmarshal(data, &varPartialEditProductRequestCertification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestCertification(varPartialEditProductRequestCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "expiration_date")
+		delete(additionalProperties, "files")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

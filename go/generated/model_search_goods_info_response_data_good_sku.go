@@ -31,7 +31,10 @@ type SearchGoodsInfoResponseDataGoodSku struct {
 	Regions []string `json:"regions,omitempty"`
 	// Indicates that the SKU is matched to the current Fulfilled by TikTok goods. Entries in `skus` are matched relations, so this value is always `true`.
 	Matched *bool `json:"matched,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodSku SearchGoodsInfoResponseDataGoodSku
 
 // NewSearchGoodsInfoResponseDataGoodSku instantiates a new SearchGoodsInfoResponseDataGoodSku object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchGoodsInfoResponseDataGoodSku) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Matched) {
 		toSerialize["matched"] = o.Matched
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodSku) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodSku := _SearchGoodsInfoResponseDataGoodSku{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodSku(varSearchGoodsInfoResponseDataGoodSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "image_url")
+		delete(additionalProperties, "product")
+		delete(additionalProperties, "regions")
+		delete(additionalProperties, "matched")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodSku struct {

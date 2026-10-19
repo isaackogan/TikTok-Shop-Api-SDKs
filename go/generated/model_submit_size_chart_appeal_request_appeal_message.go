@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type SubmitSizeChartAppealRequestAppealMessage struct {
 	SizeChartId *string `json:"size_chart_id,omitempty"`
 	// uri of size_chart_image
 	SizeChartImageUri *string `json:"size_chart_image_uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitSizeChartAppealRequestAppealMessage SubmitSizeChartAppealRequestAppealMessage
@@ -182,6 +182,11 @@ func (o SubmitSizeChartAppealRequestAppealMessage) ToMap() (map[string]interface
 	if !IsNil(o.SizeChartImageUri) {
 		toSerialize["size_chart_image_uri"] = o.SizeChartImageUri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *SubmitSizeChartAppealRequestAppealMessage) UnmarshalJSON(data []byte) (
 
 	varSubmitSizeChartAppealRequestAppealMessage := _SubmitSizeChartAppealRequestAppealMessage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitSizeChartAppealRequestAppealMessage)
+	err = json.Unmarshal(data, &varSubmitSizeChartAppealRequestAppealMessage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitSizeChartAppealRequestAppealMessage(varSubmitSizeChartAppealRequestAppealMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "field_name")
+		delete(additionalProperties, "indicator_details")
+		delete(additionalProperties, "size_chart_id")
+		delete(additionalProperties, "size_chart_image_uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

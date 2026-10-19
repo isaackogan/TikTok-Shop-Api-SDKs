@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCreatorMarketplaceAdvancedSearchFiltersRequestOption{
 type GetCreatorMarketplaceAdvancedSearchFiltersRequestOption struct {
 	// Filter option type to retrieve. Possible values: - `OPTION_VERTICAL_PRO`: Category Pro, a label for creators who regularly post about one product category and generated most of their sales in that category during the past 60 days. - `OPTION_LANGUAGE`: Creator language. - `OPTION_CREATOR_LEVEL`: Creator level based on GMV. The definition varies by country and is maintained by the TikTok Shop Creator team. - `OPTION_SORTER`: Available creator-search sorting options, returned in `sorters`. - `OPTION_BRAND`: Creator brand information. This value is not supported in DE, FR, IT, ES, IE, or JP.
 	OptionType *string `json:"option_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorMarketplaceAdvancedSearchFiltersRequestOption GetCreatorMarketplaceAdvancedSearchFiltersRequestOption
 
 // NewGetCreatorMarketplaceAdvancedSearchFiltersRequestOption instantiates a new GetCreatorMarketplaceAdvancedSearchFiltersRequestOption object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCreatorMarketplaceAdvancedSearchFiltersRequestOption) ToMap() (map[st
 	if !IsNil(o.OptionType) {
 		toSerialize["option_type"] = o.OptionType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorMarketplaceAdvancedSearchFiltersRequestOption) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorMarketplaceAdvancedSearchFiltersRequestOption := _GetCreatorMarketplaceAdvancedSearchFiltersRequestOption{}
+
+	err = json.Unmarshal(data, &varGetCreatorMarketplaceAdvancedSearchFiltersRequestOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorMarketplaceAdvancedSearchFiltersRequestOption(varGetCreatorMarketplaceAdvancedSearchFiltersRequestOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "option_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorMarketplaceAdvancedSearchFiltersRequestOption struct {

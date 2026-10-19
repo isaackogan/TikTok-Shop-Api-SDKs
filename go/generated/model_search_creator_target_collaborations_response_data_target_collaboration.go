@@ -27,7 +27,10 @@ type SearchCreatorTargetCollaborationsResponseDataTargetCollaboration struct {
 	Status *string `json:"status,omitempty"`
 	// A list of products associated with the target collaboration.
 	Products []SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorTargetCollaborationsResponseDataTargetCollaboration SearchCreatorTargetCollaborationsResponseDataTargetCollaboration
 
 // NewSearchCreatorTargetCollaborationsResponseDataTargetCollaboration instantiates a new SearchCreatorTargetCollaborationsResponseDataTargetCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchCreatorTargetCollaborationsResponseDataTargetCollaboration) ToMap(
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorTargetCollaborationsResponseDataTargetCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorTargetCollaborationsResponseDataTargetCollaboration := _SearchCreatorTargetCollaborationsResponseDataTargetCollaboration{}
+
+	err = json.Unmarshal(data, &varSearchCreatorTargetCollaborationsResponseDataTargetCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorTargetCollaborationsResponseDataTargetCollaboration(varSearchCreatorTargetCollaborationsResponseDataTargetCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorTargetCollaborationsResponseDataTargetCollaboration struct {

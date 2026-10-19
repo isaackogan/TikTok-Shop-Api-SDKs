@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLatestUnreadMessagesResponseData{}
 type GetLatestUnreadMessagesResponseData struct {
 	// The list of unread messages from the last minute.
 	NewestMessageList []GetLatestUnreadMessagesResponseDataNewestMessageList `json:"newest_message_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLatestUnreadMessagesResponseData GetLatestUnreadMessagesResponseData
 
 // NewGetLatestUnreadMessagesResponseData instantiates a new GetLatestUnreadMessagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetLatestUnreadMessagesResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.NewestMessageList) {
 		toSerialize["newest_message_list"] = o.NewestMessageList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLatestUnreadMessagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetLatestUnreadMessagesResponseData := _GetLatestUnreadMessagesResponseData{}
+
+	err = json.Unmarshal(data, &varGetLatestUnreadMessagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLatestUnreadMessagesResponseData(varGetLatestUnreadMessagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "newest_message_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLatestUnreadMessagesResponseData struct {

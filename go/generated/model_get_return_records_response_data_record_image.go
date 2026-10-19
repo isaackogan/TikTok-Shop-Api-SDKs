@@ -25,7 +25,10 @@ type GetReturnRecordsResponseDataRecordImage struct {
 	Width *int64 `json:"width,omitempty"`
 	// The height of image. Unit: px
 	Height *int64 `json:"height,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReturnRecordsResponseDataRecordImage GetReturnRecordsResponseDataRecordImage
 
 // NewGetReturnRecordsResponseDataRecordImage instantiates a new GetReturnRecordsResponseDataRecordImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetReturnRecordsResponseDataRecordImage) ToMap() (map[string]interface{}
 	if !IsNil(o.Height) {
 		toSerialize["height"] = o.Height
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReturnRecordsResponseDataRecordImage) UnmarshalJSON(data []byte) (err error) {
+	varGetReturnRecordsResponseDataRecordImage := _GetReturnRecordsResponseDataRecordImage{}
+
+	err = json.Unmarshal(data, &varGetReturnRecordsResponseDataRecordImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReturnRecordsResponseDataRecordImage(varGetReturnRecordsResponseDataRecordImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReturnRecordsResponseDataRecordImage struct {

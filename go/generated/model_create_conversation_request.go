@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CreateConversationRequest{}
 type CreateConversationRequest struct {
 	// Buyer's user ID The value is the same as `data.orders.user_id` in the response data of [Get Order Detail](650aa8ccc16ffe02b8f167a0).
 	BuyerUserId string `json:"buyer_user_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateConversationRequest CreateConversationRequest
@@ -80,6 +80,11 @@ func (o CreateConversationRequest) MarshalJSON() ([]byte, error) {
 func (o CreateConversationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["buyer_user_id"] = o.BuyerUserId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CreateConversationRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateConversationRequest := _CreateConversationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateConversationRequest)
+	err = json.Unmarshal(data, &varCreateConversationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateConversationRequest(varCreateConversationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "buyer_user_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

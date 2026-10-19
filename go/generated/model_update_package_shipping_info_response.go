@@ -26,7 +26,10 @@ type UpdatePackageShippingInfoResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePackageShippingInfoResponse UpdatePackageShippingInfoResponse
 
 // NewUpdatePackageShippingInfoResponse instantiates a new UpdatePackageShippingInfoResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UpdatePackageShippingInfoResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePackageShippingInfoResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePackageShippingInfoResponse := _UpdatePackageShippingInfoResponse{}
+
+	err = json.Unmarshal(data, &varUpdatePackageShippingInfoResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePackageShippingInfoResponse(varUpdatePackageShippingInfoResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePackageShippingInfoResponse struct {

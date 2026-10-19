@@ -26,7 +26,10 @@ type GetCouponResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetCouponResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponse GetCouponResponse
 
 // NewGetCouponResponse instantiates a new GetCouponResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetCouponResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponse := _GetCouponResponse{}
+
+	err = json.Unmarshal(data, &varGetCouponResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponse(varGetCouponResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponse struct {

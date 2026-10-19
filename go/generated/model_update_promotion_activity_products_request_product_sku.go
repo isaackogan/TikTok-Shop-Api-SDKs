@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type UpdatePromotionActivityProductsRequestProductSku struct {
 	QuantityLimit int64 `json:"quantity_limit"`
 	// Limit of SKU purchase per buyer. The range is `[1, 99]`, or you can use `-1` for unlimited. If you are updating the value of an existing SKU, the value cannot be decreased.
 	QuantityPerUser int64 `json:"quantity_per_user"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePromotionActivityProductsRequestProductSku UpdatePromotionActivityProductsRequestProductSku
@@ -210,6 +210,11 @@ func (o UpdatePromotionActivityProductsRequestProductSku) ToMap() (map[string]in
 	}
 	toSerialize["quantity_limit"] = o.QuantityLimit
 	toSerialize["quantity_per_user"] = o.QuantityPerUser
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -239,15 +244,24 @@ func (o *UpdatePromotionActivityProductsRequestProductSku) UnmarshalJSON(data []
 
 	varUpdatePromotionActivityProductsRequestProductSku := _UpdatePromotionActivityProductsRequestProductSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePromotionActivityProductsRequestProductSku)
+	err = json.Unmarshal(data, &varUpdatePromotionActivityProductsRequestProductSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePromotionActivityProductsRequestProductSku(varUpdatePromotionActivityProductsRequestProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "activity_price_amount")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "quantity_limit")
+		delete(additionalProperties, "quantity_per_user")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

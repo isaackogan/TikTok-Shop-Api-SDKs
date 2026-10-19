@@ -21,7 +21,10 @@ var _ MappedNullable = &RemoveOpenCollaborationResponseData{}
 type RemoveOpenCollaborationResponseData struct {
 	// The Unix timestamp, in seconds, when the open collaboration termination takes effect. This is usually 00:00 on the next day in the shop's time zone.
 	TerminatedEffectiveTime *int64 `json:"terminated_effective_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RemoveOpenCollaborationResponseData RemoveOpenCollaborationResponseData
 
 // NewRemoveOpenCollaborationResponseData instantiates a new RemoveOpenCollaborationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o RemoveOpenCollaborationResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.TerminatedEffectiveTime) {
 		toSerialize["terminated_effective_time"] = o.TerminatedEffectiveTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RemoveOpenCollaborationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRemoveOpenCollaborationResponseData := _RemoveOpenCollaborationResponseData{}
+
+	err = json.Unmarshal(data, &varRemoveOpenCollaborationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RemoveOpenCollaborationResponseData(varRemoveOpenCollaborationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "terminated_effective_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRemoveOpenCollaborationResponseData struct {

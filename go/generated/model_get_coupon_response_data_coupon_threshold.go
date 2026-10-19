@@ -23,7 +23,10 @@ type GetCouponResponseDataCouponThreshold struct {
 	Type *string `json:"type,omitempty"`
 	// When `threshold.type == 'MIN_SPEND'`, a customer must purchase products from the range defined by `product_scope` with a monetary amount greater than or equal to this value, or the customer cannot use the coupon.
 	MinSpend *MinSpend `json:"min_spend,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseDataCouponThreshold GetCouponResponseDataCouponThreshold
 
 // NewGetCouponResponseDataCouponThreshold instantiates a new GetCouponResponseDataCouponThreshold object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCouponResponseDataCouponThreshold) ToMap() (map[string]interface{}, e
 	if !IsNil(o.MinSpend) {
 		toSerialize["min_spend"] = o.MinSpend
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseDataCouponThreshold) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseDataCouponThreshold := _GetCouponResponseDataCouponThreshold{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseDataCouponThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseDataCouponThreshold(varGetCouponResponseDataCouponThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "min_spend")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseDataCouponThreshold struct {

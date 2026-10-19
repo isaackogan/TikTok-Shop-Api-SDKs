@@ -23,7 +23,10 @@ type GenerateGeneralSharingLinksResponseData struct {
 	SharingLinks []GenerateGeneralSharingLinksResponseDataSharingLink `json:"sharing_links,omitempty"`
 	// The list of materials which failed to generate sharing links for.
 	FailedMaterials []FailedMaterial `json:"failed_materials,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateGeneralSharingLinksResponseData GenerateGeneralSharingLinksResponseData
 
 // NewGenerateGeneralSharingLinksResponseData instantiates a new GenerateGeneralSharingLinksResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GenerateGeneralSharingLinksResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.FailedMaterials) {
 		toSerialize["failed_materials"] = o.FailedMaterials
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateGeneralSharingLinksResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGenerateGeneralSharingLinksResponseData := _GenerateGeneralSharingLinksResponseData{}
+
+	err = json.Unmarshal(data, &varGenerateGeneralSharingLinksResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateGeneralSharingLinksResponseData(varGenerateGeneralSharingLinksResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sharing_links")
+		delete(additionalProperties, "failed_materials")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateGeneralSharingLinksResponseData struct {

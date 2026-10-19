@@ -21,7 +21,10 @@ var _ MappedNullable = &PostShoppableVideoResponseData{}
 type PostShoppableVideoResponseData struct {
 	// Submitted shoppable video information.
 	Video *PostShoppableVideoResponseDataVideo `json:"video,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PostShoppableVideoResponseData PostShoppableVideoResponseData
 
 // NewPostShoppableVideoResponseData instantiates a new PostShoppableVideoResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PostShoppableVideoResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Video) {
 		toSerialize["video"] = o.Video
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PostShoppableVideoResponseData) UnmarshalJSON(data []byte) (err error) {
+	varPostShoppableVideoResponseData := _PostShoppableVideoResponseData{}
+
+	err = json.Unmarshal(data, &varPostShoppableVideoResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PostShoppableVideoResponseData(varPostShoppableVideoResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "video")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePostShoppableVideoResponseData struct {

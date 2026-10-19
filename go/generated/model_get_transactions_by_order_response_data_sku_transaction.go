@@ -43,7 +43,10 @@ type GetTransactionsByOrderResponseDataSkuTransaction struct {
 	FeeTaxAmount *string `json:"fee_tax_amount,omitempty"`
 	// An object containing the fee and tax amounts that directly contribute to `fee_tax_amount`.
 	FeeTaxBreakdown *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown `json:"fee_tax_breakdown,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseDataSkuTransaction GetTransactionsByOrderResponseDataSkuTransaction
 
 // NewGetTransactionsByOrderResponseDataSkuTransaction instantiates a new GetTransactionsByOrderResponseDataSkuTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o GetTransactionsByOrderResponseDataSkuTransaction) ToMap() (map[string]in
 	if !IsNil(o.FeeTaxBreakdown) {
 		toSerialize["fee_tax_breakdown"] = o.FeeTaxBreakdown
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseDataSkuTransaction) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseDataSkuTransaction := _GetTransactionsByOrderResponseDataSkuTransaction{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseDataSkuTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseDataSkuTransaction(varGetTransactionsByOrderResponseDataSkuTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "statement_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "settlement_amount")
+		delete(additionalProperties, "revenue_amount")
+		delete(additionalProperties, "revenue_breakdown")
+		delete(additionalProperties, "shipping_cost_amount")
+		delete(additionalProperties, "shipping_cost_breakdown")
+		delete(additionalProperties, "fee_tax_amount")
+		delete(additionalProperties, "fee_tax_breakdown")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseDataSkuTransaction struct {

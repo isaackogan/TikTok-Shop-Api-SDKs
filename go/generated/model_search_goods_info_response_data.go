@@ -25,7 +25,10 @@ type SearchGoodsInfoResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// A list of detailed information for Fulfilled by TikTok goods.
 	Goods []SearchGoodsInfoResponseDataGood `json:"goods,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseData SearchGoodsInfoResponseData
 
 // NewSearchGoodsInfoResponseData instantiates a new SearchGoodsInfoResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchGoodsInfoResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Goods) {
 		toSerialize["goods"] = o.Goods
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseData := _SearchGoodsInfoResponseData{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseData(varSearchGoodsInfoResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "goods")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseData struct {

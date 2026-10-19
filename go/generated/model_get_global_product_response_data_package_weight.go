@@ -23,7 +23,10 @@ type GetGlobalProductResponseDataPackageWeight struct {
 	Value *string `json:"value,omitempty"`
 	// The unit for the package weight.
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataPackageWeight GetGlobalProductResponseDataPackageWeight
 
 // NewGetGlobalProductResponseDataPackageWeight instantiates a new GetGlobalProductResponseDataPackageWeight object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalProductResponseDataPackageWeight) ToMap() (map[string]interface
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataPackageWeight) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataPackageWeight := _GetGlobalProductResponseDataPackageWeight{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataPackageWeight)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataPackageWeight(varGetGlobalProductResponseDataPackageWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataPackageWeight struct {

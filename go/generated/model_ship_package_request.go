@@ -25,7 +25,10 @@ type ShipPackageRequest struct {
 	PickupSlot *PickupSlot `json:"pickup_slot,omitempty"`
 	// Only needed for merchant self-shipping packages. Check the `delivery_option` field of [Get Package Detail](https://partner.tiktokshop.com/docv2/page/650aa39fbace3e02b75d8617?external_id=650aa39fbace3e02b75d8617#Back%20To%20Top) to see how to differentiate platform-logistics and self-shipping. Use the `shipping_provider_id` retrieved from [Get Shipping Providers](https://partner.tiktokshop.com/docv2/page/650aa48d4a0bb702c06d85cd?external_id=650aa48d4a0bb702c06d85cd) and upload the corresponding `tracking_number`.
 	SelfShipment *SelfShipment `json:"self_shipment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShipPackageRequest ShipPackageRequest
 
 // NewShipPackageRequest instantiates a new ShipPackageRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ShipPackageRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SelfShipment) {
 		toSerialize["self_shipment"] = o.SelfShipment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShipPackageRequest) UnmarshalJSON(data []byte) (err error) {
+	varShipPackageRequest := _ShipPackageRequest{}
+
+	err = json.Unmarshal(data, &varShipPackageRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShipPackageRequest(varShipPackageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "pickup_slot")
+		delete(additionalProperties, "self_shipment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShipPackageRequest struct {

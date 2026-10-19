@@ -29,7 +29,10 @@ type GetSPSOverviewResponseDataDimension struct {
 	StatusText *string `json:"status_text,omitempty"`
 	// Dimension weight as a percent from 0 to 100.
 	Weight *string `json:"weight,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSOverviewResponseDataDimension GetSPSOverviewResponseDataDimension
 
 // NewGetSPSOverviewResponseDataDimension instantiates a new GetSPSOverviewResponseDataDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetSPSOverviewResponseDataDimension) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Weight) {
 		toSerialize["weight"] = o.Weight
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSOverviewResponseDataDimension) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSOverviewResponseDataDimension := _GetSPSOverviewResponseDataDimension{}
+
+	err = json.Unmarshal(data, &varGetSPSOverviewResponseDataDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSOverviewResponseDataDimension(varGetSPSOverviewResponseDataDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "score")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_text")
+		delete(additionalProperties, "weight")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSOverviewResponseDataDimension struct {

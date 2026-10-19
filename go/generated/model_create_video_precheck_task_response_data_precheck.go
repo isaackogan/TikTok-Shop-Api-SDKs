@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateVideoPrecheckTaskResponseDataPrecheck{}
 type CreateVideoPrecheckTaskResponseDataPrecheck struct {
 	// The ID of the created video pre-check task. Pass this value as the `task_id` path parameter to `GET /affiliate_creator/202511/videos/precheck_tasks/{task_id}` to retrieve the result.
 	TaskId *string `json:"task_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateVideoPrecheckTaskResponseDataPrecheck CreateVideoPrecheckTaskResponseDataPrecheck
 
 // NewCreateVideoPrecheckTaskResponseDataPrecheck instantiates a new CreateVideoPrecheckTaskResponseDataPrecheck object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateVideoPrecheckTaskResponseDataPrecheck) ToMap() (map[string]interfa
 	if !IsNil(o.TaskId) {
 		toSerialize["task_id"] = o.TaskId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateVideoPrecheckTaskResponseDataPrecheck) UnmarshalJSON(data []byte) (err error) {
+	varCreateVideoPrecheckTaskResponseDataPrecheck := _CreateVideoPrecheckTaskResponseDataPrecheck{}
+
+	err = json.Unmarshal(data, &varCreateVideoPrecheckTaskResponseDataPrecheck)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateVideoPrecheckTaskResponseDataPrecheck(varCreateVideoPrecheckTaskResponseDataPrecheck)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateVideoPrecheckTaskResponseDataPrecheck struct {

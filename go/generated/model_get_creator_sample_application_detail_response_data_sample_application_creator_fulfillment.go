@@ -27,7 +27,10 @@ type GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfil
 	TotalSuspendDuration *int64 `json:"total_suspend_duration,omitempty"`
 	// Fulfillment status, It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation. - REPEATED: The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment
 
 // NewGetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment instantiates a new GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFul
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment := _GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment{}
+
+	err = json.Unmarshal(data, &varGetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment(varGetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "total_suspend_duration")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment struct {

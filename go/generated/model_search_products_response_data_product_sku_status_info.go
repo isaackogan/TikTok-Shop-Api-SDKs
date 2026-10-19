@@ -23,7 +23,10 @@ type SearchProductsResponseDataProductSkuStatusInfo struct {
 	Status *string `json:"status,omitempty"`
 	// The deactivation source of the SKU with `DEACTIVATED` status. Possible values: - SELLER: Indicates that the seller deactivated the SKU - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons - COMBO_RELATION: Indicates that the platform de-activated the combined-SKU due to the deactivation of sub-SKU.
 	DeactivationSource *string `json:"deactivation_source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductSkuStatusInfo SearchProductsResponseDataProductSkuStatusInfo
 
 // NewSearchProductsResponseDataProductSkuStatusInfo instantiates a new SearchProductsResponseDataProductSkuStatusInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchProductsResponseDataProductSkuStatusInfo) ToMap() (map[string]inte
 	if !IsNil(o.DeactivationSource) {
 		toSerialize["deactivation_source"] = o.DeactivationSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductSkuStatusInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductSkuStatusInfo := _SearchProductsResponseDataProductSkuStatusInfo{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductSkuStatusInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductSkuStatusInfo(varSearchProductsResponseDataProductSkuStatusInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "deactivation_source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductSkuStatusInfo struct {

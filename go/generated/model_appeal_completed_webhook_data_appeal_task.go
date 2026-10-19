@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ type AppealCompletedWebhookDataAppealTask struct {
 	SizeChartId *int64 `json:"size_chart_id,omitempty"`
 	SizeChartImageUri *string `json:"size_chart_image_uri,omitempty"`
 	AppealAuditResult []AppealCompletedWebhookDataAppealTaskAppealAuditResult `json:"appeal_audit_result"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AppealCompletedWebhookDataAppealTask AppealCompletedWebhookDataAppealTask
@@ -151,6 +151,11 @@ func (o AppealCompletedWebhookDataAppealTask) ToMap() (map[string]interface{}, e
 		toSerialize["size_chart_image_uri"] = o.SizeChartImageUri
 	}
 	toSerialize["appeal_audit_result"] = o.AppealAuditResult
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -178,15 +183,22 @@ func (o *AppealCompletedWebhookDataAppealTask) UnmarshalJSON(data []byte) (err e
 
 	varAppealCompletedWebhookDataAppealTask := _AppealCompletedWebhookDataAppealTask{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAppealCompletedWebhookDataAppealTask)
+	err = json.Unmarshal(data, &varAppealCompletedWebhookDataAppealTask)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AppealCompletedWebhookDataAppealTask(varAppealCompletedWebhookDataAppealTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size_chart_id")
+		delete(additionalProperties, "size_chart_image_uri")
+		delete(additionalProperties, "appeal_audit_result")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

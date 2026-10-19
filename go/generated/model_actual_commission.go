@@ -23,7 +23,10 @@ type ActualCommission struct {
 	Amount *string `json:"amount,omitempty"`
 	// The currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActualCommission ActualCommission
 
 // NewActualCommission instantiates a new ActualCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ActualCommission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActualCommission) UnmarshalJSON(data []byte) (err error) {
+	varActualCommission := _ActualCommission{}
+
+	err = json.Unmarshal(data, &varActualCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActualCommission(varActualCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActualCommission struct {

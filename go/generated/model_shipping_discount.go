@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type ShippingDiscount struct {
 	InventoryType *string `json:"inventory_type,omitempty"`
 	// The (buyer's) geographical areas to which the promotion activity applies.
 	AreaScope AreaScope `json:"area_scope"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShippingDiscount ShippingDiscount
@@ -284,6 +284,11 @@ func (o ShippingDiscount) ToMap() (map[string]interface{}, error) {
 		toSerialize["inventory_type"] = o.InventoryType
 	}
 	toSerialize["area_scope"] = o.AreaScope
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -313,15 +318,26 @@ func (o *ShippingDiscount) UnmarshalJSON(data []byte) (err error) {
 
 	varShippingDiscount := _ShippingDiscount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShippingDiscount)
+	err = json.Unmarshal(data, &varShippingDiscount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShippingDiscount(varShippingDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "shipping_method")
+		delete(additionalProperties, "inventory_type")
+		delete(additionalProperties, "area_scope")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type GetExternalOrderReferencesResponseDataExternalOrderLineItem struct {
 	Id *string `json:"id,omitempty"`
 	// Line item ID in TikTok Shop.
 	OriginId *string `json:"origin_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetExternalOrderReferencesResponseDataExternalOrderLineItem GetExternalOrderReferencesResponseDataExternalOrderLineItem
 
 // NewGetExternalOrderReferencesResponseDataExternalOrderLineItem instantiates a new GetExternalOrderReferencesResponseDataExternalOrderLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetExternalOrderReferencesResponseDataExternalOrderLineItem) ToMap() (ma
 	if !IsNil(o.OriginId) {
 		toSerialize["origin_id"] = o.OriginId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetExternalOrderReferencesResponseDataExternalOrderLineItem) UnmarshalJSON(data []byte) (err error) {
+	varGetExternalOrderReferencesResponseDataExternalOrderLineItem := _GetExternalOrderReferencesResponseDataExternalOrderLineItem{}
+
+	err = json.Unmarshal(data, &varGetExternalOrderReferencesResponseDataExternalOrderLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetExternalOrderReferencesResponseDataExternalOrderLineItem(varGetExternalOrderReferencesResponseDataExternalOrderLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "origin_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetExternalOrderReferencesResponseDataExternalOrderLineItem struct {

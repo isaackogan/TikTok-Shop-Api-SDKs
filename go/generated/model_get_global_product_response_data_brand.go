@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalProductResponseDataBrand{}
 type GetGlobalProductResponseDataBrand struct {
 	// The ID of the brand of this product.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataBrand GetGlobalProductResponseDataBrand
 
 // NewGetGlobalProductResponseDataBrand instantiates a new GetGlobalProductResponseDataBrand object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalProductResponseDataBrand) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataBrand) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataBrand := _GetGlobalProductResponseDataBrand{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataBrand)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataBrand(varGetGlobalProductResponseDataBrand)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataBrand struct {

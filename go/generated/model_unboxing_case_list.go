@@ -23,7 +23,10 @@ type UnboxingCaseList struct {
 	UnboxSku *string `json:"unbox_sku,omitempty"`
 	// Indicates if the unboxed sku is a gift item Enumerations: NORMAL or GIFT
 	UnboxSkuType *string `json:"unbox_sku_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UnboxingCaseList UnboxingCaseList
 
 // NewUnboxingCaseList instantiates a new UnboxingCaseList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UnboxingCaseList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UnboxSkuType) {
 		toSerialize["unbox_sku_type"] = o.UnboxSkuType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UnboxingCaseList) UnmarshalJSON(data []byte) (err error) {
+	varUnboxingCaseList := _UnboxingCaseList{}
+
+	err = json.Unmarshal(data, &varUnboxingCaseList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UnboxingCaseList(varUnboxingCaseList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unbox_sku")
+		delete(additionalProperties, "unbox_sku_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUnboxingCaseList struct {

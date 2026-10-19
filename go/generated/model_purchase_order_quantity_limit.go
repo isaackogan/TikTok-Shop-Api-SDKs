@@ -23,7 +23,10 @@ type PurchaseOrderQuantityLimit struct {
 	MaximumOrderQuantity *int64 `json:"maximum_order_quantity,omitempty"`
 	// · The total quantity a customer can buy of a product's variations (SKUs) across all orders, while the limit is active. Clearing the limit will reset their past purchases, allowing them to buy again up to the new limit, or without restriction if no limit is set. • For example, if you set a total limit of 2 for a product with 5 variations (SKUs), the customer can buy up to 2 of each SKU, for a total of 10 items across multiple purchases. After that, they can't buy more unless you clear the limits.The total limit must be more than or equal to the maximum limit.
 	CumulativeOrderQuantity *int64 `json:"cumulative_order_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PurchaseOrderQuantityLimit PurchaseOrderQuantityLimit
 
 // NewPurchaseOrderQuantityLimit instantiates a new PurchaseOrderQuantityLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PurchaseOrderQuantityLimit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CumulativeOrderQuantity) {
 		toSerialize["cumulative_order_quantity"] = o.CumulativeOrderQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PurchaseOrderQuantityLimit) UnmarshalJSON(data []byte) (err error) {
+	varPurchaseOrderQuantityLimit := _PurchaseOrderQuantityLimit{}
+
+	err = json.Unmarshal(data, &varPurchaseOrderQuantityLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PurchaseOrderQuantityLimit(varPurchaseOrderQuantityLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "maximum_order_quantity")
+		delete(additionalProperties, "cumulative_order_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePurchaseOrderQuantityLimit struct {

@@ -25,7 +25,10 @@ type GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion struct
 	DiscountAmount *string `json:"discount_amount,omitempty"`
 	// Discount type of this activity. Enumerations: - COUPON - ACTIVITY
 	DiscountType *string `json:"discount_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion
 
 // NewGetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion instantiates a new GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion) To
 	if !IsNil(o.DiscountType) {
 		toSerialize["discount_type"] = o.DiscountType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion := _GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion{}
+
+	err = json.Unmarshal(data, &varGetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion(varGetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "discount_amount")
+		delete(additionalProperties, "discount_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion struct {

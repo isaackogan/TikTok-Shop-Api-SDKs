@@ -26,7 +26,10 @@ type GetLogisticsTrackingResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetLogisticsTrackingResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLogisticsTrackingResponse GetLogisticsTrackingResponse
 
 // NewGetLogisticsTrackingResponse instantiates a new GetLogisticsTrackingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetLogisticsTrackingResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLogisticsTrackingResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetLogisticsTrackingResponse := _GetLogisticsTrackingResponse{}
+
+	err = json.Unmarshal(data, &varGetLogisticsTrackingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLogisticsTrackingResponse(varGetLogisticsTrackingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLogisticsTrackingResponse struct {

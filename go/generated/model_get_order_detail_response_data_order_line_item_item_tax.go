@@ -25,7 +25,10 @@ type GetOrderDetailResponseDataOrderLineItemItemTax struct {
 	TaxAmount *string `json:"tax_amount,omitempty"`
 	// Tax rate.
 	TaxRate *string `json:"tax_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrderLineItemItemTax GetOrderDetailResponseDataOrderLineItemItemTax
 
 // NewGetOrderDetailResponseDataOrderLineItemItemTax instantiates a new GetOrderDetailResponseDataOrderLineItemItemTax object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderDetailResponseDataOrderLineItemItemTax) ToMap() (map[string]inte
 	if !IsNil(o.TaxRate) {
 		toSerialize["tax_rate"] = o.TaxRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrderLineItemItemTax) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrderLineItemItemTax := _GetOrderDetailResponseDataOrderLineItemItemTax{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrderLineItemItemTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrderLineItemItemTax(varGetOrderDetailResponseDataOrderLineItemItemTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tax_type")
+		delete(additionalProperties, "tax_amount")
+		delete(additionalProperties, "tax_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrderLineItemItemTax struct {

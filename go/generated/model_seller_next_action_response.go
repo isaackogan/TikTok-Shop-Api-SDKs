@@ -23,7 +23,10 @@ type SellerNextActionResponse struct {
 	Action *string `json:"action,omitempty"`
 	// The deadline for the seller to perform the specified action, as a Unix timestamp in seconds.
 	Deadline *int64 `json:"deadline,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerNextActionResponse SellerNextActionResponse
 
 // NewSellerNextActionResponse instantiates a new SellerNextActionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SellerNextActionResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Deadline) {
 		toSerialize["deadline"] = o.Deadline
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerNextActionResponse) UnmarshalJSON(data []byte) (err error) {
+	varSellerNextActionResponse := _SellerNextActionResponse{}
+
+	err = json.Unmarshal(data, &varSellerNextActionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerNextActionResponse(varSellerNextActionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "deadline")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerNextActionResponse struct {

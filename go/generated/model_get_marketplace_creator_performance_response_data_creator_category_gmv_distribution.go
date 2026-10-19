@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution 
 	CategoryId *string `json:"category_id,omitempty"`
 	// The proportion of the creator's GMV attributed to this category, expressed as a decimal from `0` to `1` (for example, `0.3035` = 30.35%).
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistributi
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution := _GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution(varGetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorCategoryGmvDistribution struct {

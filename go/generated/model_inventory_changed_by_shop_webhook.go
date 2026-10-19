@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type InventoryChangedByShopWebhook struct {
 	Timestamp int64 `json:"timestamp"`
 	// The inventory change event data.
 	Data InventoryChangedByShopWebhookData `json:"data"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InventoryChangedByShopWebhook InventoryChangedByShopWebhook
@@ -192,6 +192,11 @@ func (o InventoryChangedByShopWebhook) ToMap() (map[string]interface{}, error) {
 	toSerialize["shop_id"] = o.ShopId
 	toSerialize["timestamp"] = o.Timestamp
 	toSerialize["data"] = o.Data
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *InventoryChangedByShopWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varInventoryChangedByShopWebhook := _InventoryChangedByShopWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInventoryChangedByShopWebhook)
+	err = json.Unmarshal(data, &varInventoryChangedByShopWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InventoryChangedByShopWebhook(varInventoryChangedByShopWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

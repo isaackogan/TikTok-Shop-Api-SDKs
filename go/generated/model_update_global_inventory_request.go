@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &UpdateGlobalInventoryRequest{}
 type UpdateGlobalInventoryRequest struct {
 	// A non-empty list of global SKUs whose inventory quantities you want to set.
 	GlobalSkus []UpdateGlobalInventoryRequestGlobalSku `json:"global_skus"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGlobalInventoryRequest UpdateGlobalInventoryRequest
@@ -80,6 +80,11 @@ func (o UpdateGlobalInventoryRequest) MarshalJSON() ([]byte, error) {
 func (o UpdateGlobalInventoryRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["global_skus"] = o.GlobalSkus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *UpdateGlobalInventoryRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUpdateGlobalInventoryRequest := _UpdateGlobalInventoryRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGlobalInventoryRequest)
+	err = json.Unmarshal(data, &varUpdateGlobalInventoryRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGlobalInventoryRequest(varUpdateGlobalInventoryRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

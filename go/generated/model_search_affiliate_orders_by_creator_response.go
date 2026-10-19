@@ -26,7 +26,10 @@ type SearchAffiliateOrdersByCreatorResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchAffiliateOrdersByCreatorResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAffiliateOrdersByCreatorResponse SearchAffiliateOrdersByCreatorResponse
 
 // NewSearchAffiliateOrdersByCreatorResponse instantiates a new SearchAffiliateOrdersByCreatorResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchAffiliateOrdersByCreatorResponse) ToMap() (map[string]interface{},
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAffiliateOrdersByCreatorResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchAffiliateOrdersByCreatorResponse := _SearchAffiliateOrdersByCreatorResponse{}
+
+	err = json.Unmarshal(data, &varSearchAffiliateOrdersByCreatorResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAffiliateOrdersByCreatorResponse(varSearchAffiliateOrdersByCreatorResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAffiliateOrdersByCreatorResponse struct {

@@ -26,7 +26,10 @@ type ReplicateProductResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *ReplicateProductResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductResponse ReplicateProductResponse
 
 // NewReplicateProductResponse instantiates a new ReplicateProductResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o ReplicateProductResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductResponse) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductResponse := _ReplicateProductResponse{}
+
+	err = json.Unmarshal(data, &varReplicateProductResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductResponse(varReplicateProductResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductResponse struct {

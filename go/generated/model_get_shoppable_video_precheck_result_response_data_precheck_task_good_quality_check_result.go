@@ -23,7 +23,10 @@ type GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResu
 	Status *string `json:"status,omitempty"`
 	// A list of quality issues and improvement suggestions when the good quality check fails.
 	Issues []GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue `json:"issues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult
 
 // NewGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult instantiates a new GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckR
 	if !IsNil(o.Issues) {
 		toSerialize["issues"] = o.Issues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult := _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult(varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "issues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResult struct {

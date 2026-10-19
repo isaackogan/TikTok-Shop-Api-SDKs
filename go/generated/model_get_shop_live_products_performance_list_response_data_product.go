@@ -27,7 +27,10 @@ type GetShopLIVEProductsPerformanceListResponseDataProduct struct {
 	Sales *GetShopLIVEProductsPerformanceListResponseDataProductSale `json:"sales,omitempty"`
 	// Traffic performance for the product in the LIVE session, including add-to-cart, click-to-order, CTR, GPM, product impressions, and product clicks.
 	Traffic *GetShopLIVEProductsPerformanceListResponseDataProductTraffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProduct GetShopLIVEProductsPerformanceListResponseDataProduct
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProduct instantiates a new GetShopLIVEProductsPerformanceListResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProduct) ToMap() (map[stri
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProduct := _GetShopLIVEProductsPerformanceListResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProduct(varGetShopLIVEProductsPerformanceListResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProduct struct {

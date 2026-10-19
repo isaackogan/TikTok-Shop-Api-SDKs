@@ -23,7 +23,10 @@ type PreSale struct {
 	Type *string `json:"type,omitempty"`
 	// Information about the type of pre-sale order fulfillment and the corresponding timeframe. - `handling_duration_days` is for fulfillment with an extended duration. - `release_date` is for starting fulfillment on a fixed date.  **Note**: Provide either the `handling_duration_days` or the `release_date`, depending on the value of `pre_sale.type` and your shop's region.
 	FulfillmentType *FulfillmentType `json:"fulfillment_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PreSale PreSale
 
 // NewPreSale instantiates a new PreSale object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PreSale) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FulfillmentType) {
 		toSerialize["fulfillment_type"] = o.FulfillmentType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PreSale) UnmarshalJSON(data []byte) (err error) {
+	varPreSale := _PreSale{}
+
+	err = json.Unmarshal(data, &varPreSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PreSale(varPreSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "fulfillment_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePreSale struct {

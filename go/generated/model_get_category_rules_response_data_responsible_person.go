@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataResponsiblePerson{}
 type GetCategoryRulesResponseDataResponsiblePerson struct {
 	// A flag to indicate whether the responsible person information is required.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataResponsiblePerson GetCategoryRulesResponseDataResponsiblePerson
 
 // NewGetCategoryRulesResponseDataResponsiblePerson instantiates a new GetCategoryRulesResponseDataResponsiblePerson object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataResponsiblePerson) ToMap() (map[string]inter
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataResponsiblePerson) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataResponsiblePerson := _GetCategoryRulesResponseDataResponsiblePerson{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataResponsiblePerson)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataResponsiblePerson(varGetCategoryRulesResponseDataResponsiblePerson)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataResponsiblePerson struct {

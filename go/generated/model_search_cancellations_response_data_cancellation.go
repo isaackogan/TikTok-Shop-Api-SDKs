@@ -45,7 +45,10 @@ type SearchCancellationsResponseDataCancellation struct {
 	CancelId *string `json:"cancel_id,omitempty"`
 	// Should seller replenish the stock when order cancelled successfully.
 	ShouldReplenishStock *bool `json:"should_replenish_stock,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCancellationsResponseDataCancellation SearchCancellationsResponseDataCancellation
 
 // NewSearchCancellationsResponseDataCancellation instantiates a new SearchCancellationsResponseDataCancellation object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o SearchCancellationsResponseDataCancellation) ToMap() (map[string]interfa
 	if !IsNil(o.ShouldReplenishStock) {
 		toSerialize["should_replenish_stock"] = o.ShouldReplenishStock
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCancellationsResponseDataCancellation) UnmarshalJSON(data []byte) (err error) {
+	varSearchCancellationsResponseDataCancellation := _SearchCancellationsResponseDataCancellation{}
+
+	err = json.Unmarshal(data, &varSearchCancellationsResponseDataCancellation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCancellationsResponseDataCancellation(varSearchCancellationsResponseDataCancellation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "cancel_type")
+		delete(additionalProperties, "cancel_status")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "cancel_reason")
+		delete(additionalProperties, "cancel_reason_text")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "seller_next_action_response")
+		delete(additionalProperties, "refund_amount")
+		delete(additionalProperties, "cancel_line_items")
+		delete(additionalProperties, "cancel_id")
+		delete(additionalProperties, "should_replenish_stock")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCancellationsResponseDataCancellation struct {

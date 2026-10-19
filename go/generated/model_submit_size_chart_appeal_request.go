@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SubmitSizeChartAppealRequest struct {
 	ProductId int64 `json:"product_id"`
 	// Details of the products submitted for appeal
 	AppealMessage SubmitSizeChartAppealRequestAppealMessage `json:"appeal_message"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitSizeChartAppealRequest SubmitSizeChartAppealRequest
@@ -108,6 +108,11 @@ func (o SubmitSizeChartAppealRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["appeal_message"] = o.AppealMessage
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SubmitSizeChartAppealRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSubmitSizeChartAppealRequest := _SubmitSizeChartAppealRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitSizeChartAppealRequest)
+	err = json.Unmarshal(data, &varSubmitSizeChartAppealRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitSizeChartAppealRequest(varSubmitSizeChartAppealRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "appeal_message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

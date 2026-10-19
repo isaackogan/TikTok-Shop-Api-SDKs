@@ -27,7 +27,10 @@ type GetProductResponseDataSubscribeInfoSubscribePromotionConfig struct {
 	MaxDiscount *int64 `json:"max_discount,omitempty"`
 	// The minimum discount a seller can set for the associated discount level.
 	MinDiscount *int64 `json:"min_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSubscribeInfoSubscribePromotionConfig GetProductResponseDataSubscribeInfoSubscribePromotionConfig
 
 // NewGetProductResponseDataSubscribeInfoSubscribePromotionConfig instantiates a new GetProductResponseDataSubscribeInfoSubscribePromotionConfig object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataSubscribeInfoSubscribePromotionConfig) ToMap() (ma
 	if !IsNil(o.MinDiscount) {
 		toSerialize["min_discount"] = o.MinDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSubscribeInfoSubscribePromotionConfig) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSubscribeInfoSubscribePromotionConfig := _GetProductResponseDataSubscribeInfoSubscribePromotionConfig{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSubscribeInfoSubscribePromotionConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSubscribeInfoSubscribePromotionConfig(varGetProductResponseDataSubscribeInfoSubscribePromotionConfig)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "discount_level")
+		delete(additionalProperties, "discount_options")
+		delete(additionalProperties, "max_discount")
+		delete(additionalProperties, "min_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSubscribeInfoSubscribePromotionConfig struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &ShipInboundOrderResponseData{}
 type ShipInboundOrderResponseData struct {
 	// Identifier of the shipped inbound order.
 	InboundOrderId *string `json:"inbound_order_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShipInboundOrderResponseData ShipInboundOrderResponseData
 
 // NewShipInboundOrderResponseData instantiates a new ShipInboundOrderResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ShipInboundOrderResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InboundOrderId) {
 		toSerialize["inbound_order_id"] = o.InboundOrderId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShipInboundOrderResponseData) UnmarshalJSON(data []byte) (err error) {
+	varShipInboundOrderResponseData := _ShipInboundOrderResponseData{}
+
+	err = json.Unmarshal(data, &varShipInboundOrderResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShipInboundOrderResponseData(varShipInboundOrderResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_order_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShipInboundOrderResponseData struct {

@@ -25,7 +25,10 @@ type ProductImage struct {
 	Width *int64 `json:"width,omitempty"`
 	// Ignore this field. It is not yet supported.
 	Height *int64 `json:"height,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductImage ProductImage
 
 // NewProductImage instantiates a new ProductImage object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ProductImage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Height) {
 		toSerialize["height"] = o.Height
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductImage) UnmarshalJSON(data []byte) (err error) {
+	varProductImage := _ProductImage{}
+
+	err = json.Unmarshal(data, &varProductImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductImage(varProductImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductImage struct {

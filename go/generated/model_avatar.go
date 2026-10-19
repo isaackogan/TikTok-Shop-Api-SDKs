@@ -21,7 +21,10 @@ var _ MappedNullable = &Avatar{}
 type Avatar struct {
 	// The URL for the creator's TikTok profile avatar.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Avatar Avatar
 
 // NewAvatar instantiates a new Avatar object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o Avatar) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Avatar) UnmarshalJSON(data []byte) (err error) {
+	varAvatar := _Avatar{}
+
+	err = json.Unmarshal(data, &varAvatar)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Avatar(varAvatar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableAvatar struct {

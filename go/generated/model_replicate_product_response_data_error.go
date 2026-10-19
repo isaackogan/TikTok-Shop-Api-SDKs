@@ -25,7 +25,10 @@ type ReplicateProductResponseDataError struct {
 	Detail *ReplicateProductResponseDataErrorDetail `json:"detail,omitempty"`
 	// The error message.
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductResponseDataError ReplicateProductResponseDataError
 
 // NewReplicateProductResponseDataError instantiates a new ReplicateProductResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ReplicateProductResponseDataError) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductResponseDataError := _ReplicateProductResponseDataError{}
+
+	err = json.Unmarshal(data, &varReplicateProductResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductResponseDataError(varReplicateProductResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "detail")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductResponseDataError struct {

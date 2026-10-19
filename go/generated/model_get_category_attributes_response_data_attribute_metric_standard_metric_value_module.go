@@ -39,7 +39,10 @@ type GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule s
 	Suffix *string `json:"suffix,omitempty"`
 	// Metric value shading word.
 	ShadingWord *string `json:"shading_word,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule
 
 // NewGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule instantiates a new GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModul
 	if !IsNil(o.ShadingWord) {
 		toSerialize["shading_word"] = o.ShadingWord
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule := _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule(varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "input_type")
+		delete(additionalProperties, "data_types")
+		delete(additionalProperties, "default_values")
+		delete(additionalProperties, "units")
+		delete(additionalProperties, "value_limit")
+		delete(additionalProperties, "prefix")
+		delete(additionalProperties, "suffix")
+		delete(additionalProperties, "shading_word")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule struct {

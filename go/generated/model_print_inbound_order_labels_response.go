@@ -26,7 +26,10 @@ type PrintInboundOrderLabelsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *PrintInboundOrderLabelsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PrintInboundOrderLabelsResponse PrintInboundOrderLabelsResponse
 
 // NewPrintInboundOrderLabelsResponse instantiates a new PrintInboundOrderLabelsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o PrintInboundOrderLabelsResponse) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PrintInboundOrderLabelsResponse) UnmarshalJSON(data []byte) (err error) {
+	varPrintInboundOrderLabelsResponse := _PrintInboundOrderLabelsResponse{}
+
+	err = json.Unmarshal(data, &varPrintInboundOrderLabelsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PrintInboundOrderLabelsResponse(varPrintInboundOrderLabelsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePrintInboundOrderLabelsResponse struct {

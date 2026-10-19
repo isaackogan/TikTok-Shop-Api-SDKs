@@ -25,7 +25,10 @@ type PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea struc
 	MinHeight *int64 `json:"min_height,omitempty"`
 	// The minimum required width, in pixels, for an image uploaded by the consumer.
 	MinWidth *int64 `json:"min_width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea
 
 // NewPartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea instantiates a new PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea) T
 	if !IsNil(o.MinWidth) {
 		toSerialize["min_width"] = o.MinWidth
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea := _PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea(varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "default_image")
+		delete(additionalProperties, "min_height")
+		delete(additionalProperties, "min_width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageArea struct {

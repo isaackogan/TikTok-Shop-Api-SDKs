@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataSellerSku{}
 type GetCategoryRulesResponseDataSellerSku struct {
 	// A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 50 characters long and can contain only letters, digits, hyphens (-) and underscores (_).
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataSellerSku GetCategoryRulesResponseDataSellerSku
 
 // NewGetCategoryRulesResponseDataSellerSku instantiates a new GetCategoryRulesResponseDataSellerSku object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataSellerSku) ToMap() (map[string]interface{}, 
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataSellerSku) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataSellerSku := _GetCategoryRulesResponseDataSellerSku{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataSellerSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataSellerSku(varGetCategoryRulesResponseDataSellerSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataSellerSku struct {

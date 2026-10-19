@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type AddShowcaseProductsRequest struct {
 	ProductIds []string `json:"product_ids,omitempty"`
 	// A product URL to use when `add_type` is set to `PRODUCT_LINK`. The product associated with the URL is added to the showcase.
 	ProductLink *string `json:"product_link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddShowcaseProductsRequest AddShowcaseProductsRequest
@@ -154,6 +154,11 @@ func (o AddShowcaseProductsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductLink) {
 		toSerialize["product_link"] = o.ProductLink
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *AddShowcaseProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varAddShowcaseProductsRequest := _AddShowcaseProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddShowcaseProductsRequest)
+	err = json.Unmarshal(data, &varAddShowcaseProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddShowcaseProductsRequest(varAddShowcaseProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "add_type")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "product_link")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

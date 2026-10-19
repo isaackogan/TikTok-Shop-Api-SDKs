@@ -23,7 +23,10 @@ type DiagnoseAndOptimizeProductRequestSizeChart struct {
 	Template *DiagnoseAndOptimizeProductRequestSizeChartTemplate `json:"template,omitempty"`
 	// An image of the size chart.
 	Image *DiagnoseAndOptimizeProductRequestSizeChartImage `json:"image,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductRequestSizeChart DiagnoseAndOptimizeProductRequestSizeChart
 
 // NewDiagnoseAndOptimizeProductRequestSizeChart instantiates a new DiagnoseAndOptimizeProductRequestSizeChart object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DiagnoseAndOptimizeProductRequestSizeChart) ToMap() (map[string]interfac
 	if !IsNil(o.Image) {
 		toSerialize["image"] = o.Image
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductRequestSizeChart) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductRequestSizeChart := _DiagnoseAndOptimizeProductRequestSizeChart{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductRequestSizeChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductRequestSizeChart(varDiagnoseAndOptimizeProductRequestSizeChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template")
+		delete(additionalProperties, "image")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductRequestSizeChart struct {

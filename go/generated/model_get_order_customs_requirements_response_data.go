@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOrderCustomsRequirementsResponseData{}
 type GetOrderCustomsRequirementsResponseData struct {
 	// clearance info of this order
 	OrderClearanceList []GetOrderCustomsRequirementsResponseDataOrderClearanceList `json:"order_clearance_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderCustomsRequirementsResponseData GetOrderCustomsRequirementsResponseData
 
 // NewGetOrderCustomsRequirementsResponseData instantiates a new GetOrderCustomsRequirementsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOrderCustomsRequirementsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.OrderClearanceList) {
 		toSerialize["order_clearance_list"] = o.OrderClearanceList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderCustomsRequirementsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderCustomsRequirementsResponseData := _GetOrderCustomsRequirementsResponseData{}
+
+	err = json.Unmarshal(data, &varGetOrderCustomsRequirementsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderCustomsRequirementsResponseData(varGetOrderCustomsRequirementsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_clearance_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderCustomsRequirementsResponseData struct {

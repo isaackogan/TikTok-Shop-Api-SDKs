@@ -21,7 +21,10 @@ var _ MappedNullable = &DeleteProductsResponseData{}
 type DeleteProductsResponseData struct {
 	// The errors for individual products that could not be deleted. Check this list even when the top-level `code` is `0`.
 	Errors []Error `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DeleteProductsResponseData DeleteProductsResponseData
 
 // NewDeleteProductsResponseData instantiates a new DeleteProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DeleteProductsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DeleteProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varDeleteProductsResponseData := _DeleteProductsResponseData{}
+
+	err = json.Unmarshal(data, &varDeleteProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteProductsResponseData(varDeleteProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDeleteProductsResponseData struct {

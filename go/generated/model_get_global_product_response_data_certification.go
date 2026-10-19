@@ -27,7 +27,10 @@ type GetGlobalProductResponseDataCertification struct {
 	Files []GetGlobalProductResponseDataCertificationFile `json:"files,omitempty"`
 	// A list of certification related images.
 	Images []GetGlobalProductResponseDataCertificationImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataCertification GetGlobalProductResponseDataCertification
 
 // NewGetGlobalProductResponseDataCertification instantiates a new GetGlobalProductResponseDataCertification object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalProductResponseDataCertification) ToMap() (map[string]interface
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataCertification) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataCertification := _GetGlobalProductResponseDataCertification{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataCertification)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataCertification(varGetGlobalProductResponseDataCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "files")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataCertification struct {

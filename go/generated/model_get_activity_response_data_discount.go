@@ -27,7 +27,10 @@ type GetActivityResponseDataDiscount struct {
 	GiftDiscount *GetActivityResponseDataDiscountGiftDiscount `json:"gift_discount,omitempty"`
 	// Configurations related to Buy X Get Y (BXGY) promotions. Only needs to be configured for BXGY promotions.
 	BxgyDiscount *GetActivityResponseDataDiscountBxgyDiscount `json:"bxgy_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscount GetActivityResponseDataDiscount
 
 // NewGetActivityResponseDataDiscount instantiates a new GetActivityResponseDataDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetActivityResponseDataDiscount) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.BxgyDiscount) {
 		toSerialize["bxgy_discount"] = o.BxgyDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscount := _GetActivityResponseDataDiscount{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscount(varGetActivityResponseDataDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_discount")
+		delete(additionalProperties, "bmsm_discount")
+		delete(additionalProperties, "gift_discount")
+		delete(additionalProperties, "bxgy_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscount struct {

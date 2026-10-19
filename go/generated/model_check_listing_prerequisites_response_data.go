@@ -21,7 +21,10 @@ var _ MappedNullable = &CheckListingPrerequisitesResponseData{}
 type CheckListingPrerequisitesResponseData struct {
 	// A list of results from checking whether a shop satisfies TikTok Shop requirements.
 	CheckResults []CheckListingPrerequisitesResponseDataCheckResult `json:"check_results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckListingPrerequisitesResponseData CheckListingPrerequisitesResponseData
 
 // NewCheckListingPrerequisitesResponseData instantiates a new CheckListingPrerequisitesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CheckListingPrerequisitesResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.CheckResults) {
 		toSerialize["check_results"] = o.CheckResults
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckListingPrerequisitesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckListingPrerequisitesResponseData := _CheckListingPrerequisitesResponseData{}
+
+	err = json.Unmarshal(data, &varCheckListingPrerequisitesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckListingPrerequisitesResponseData(varCheckListingPrerequisitesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "check_results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckListingPrerequisitesResponseData struct {

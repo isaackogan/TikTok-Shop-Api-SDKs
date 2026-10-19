@@ -23,7 +23,10 @@ type SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable struct
 	Headers []SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableHeader `json:"headers,omitempty"`
 	// Rows of the size chart.
 	Rows []SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRow `json:"rows,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable
 
 // NewSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable instantiates a new SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable) To
 	if !IsNil(o.Rows) {
 		toSerialize["rows"] = o.Rows
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable := _SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable(varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "rows")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable struct {

@@ -35,7 +35,10 @@ type GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder struct {
 	Issue *string `json:"issue,omitempty"`
 	// The shipping carrier detailed informatioin of this consign order. If the order has not yet been handed over to the logistics carrier, this field may be a null value.
 	ShippingProvider NullableShippingProvider `json:"shipping_provider,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder
 
 // NewGetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder instantiates a new GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -374,7 +377,40 @@ func (o GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder) ToMap() (map[strin
 	if o.ShippingProvider.IsSet() {
 		toSerialize["shipping_provider"] = o.ShippingProvider.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder := _GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder{}
+
+	err = json.Unmarshal(data, &varGetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder(varGetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "goods")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "carrier")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "is_platform_closed")
+		delete(additionalProperties, "issue")
+		delete(additionalProperties, "shipping_provider")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder struct {

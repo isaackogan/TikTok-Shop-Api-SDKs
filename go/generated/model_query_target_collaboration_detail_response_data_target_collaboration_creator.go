@@ -37,7 +37,10 @@ type QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator struct
 	ProductEffectiveStatus *string `json:"product_effective_status,omitempty"`
 	// Creator Open ID. [More details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
 	CreatorOpenId *string `json:"creator_open_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator
 
 // NewQueryTargetCollaborationDetailResponseDataTargetCollaborationCreator instantiates a new QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator) To
 	if !IsNil(o.CreatorOpenId) {
 		toSerialize["creator_open_id"] = o.CreatorOpenId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponseDataTargetCollaborationCreator := _QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponseDataTargetCollaborationCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator(varQueryTargetCollaborationDetailResponseDataTargetCollaborationCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "selection_region")
+		delete(additionalProperties, "showcase_product_count")
+		delete(additionalProperties, "content_product_count")
+		delete(additionalProperties, "collaboration_status")
+		delete(additionalProperties, "product_effective_status")
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponseDataTargetCollaborationCreator struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type UpdateTargetCollaborationRequestProduct struct {
 	CommissionRate int64 `json:"commission_rate"`
 	// The commission rate applies only to orders generated from ads. If a creator’s video is used as an ad without this rate being set, the resulting orders will instead earn either: - The Shop Ads commission you configured in open collaboration, or - The standard commission defined in this invitation. The commission rate is specified in increments of 1/10,000. For example, 1000 stands for 0.1 or 10%.
 	TargetAdCommissionRate *int64 `json:"target_ad_commission_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateTargetCollaborationRequestProduct UpdateTargetCollaborationRequestProduct
@@ -145,6 +145,11 @@ func (o UpdateTargetCollaborationRequestProduct) ToMap() (map[string]interface{}
 	if !IsNil(o.TargetAdCommissionRate) {
 		toSerialize["target_ad_commission_rate"] = o.TargetAdCommissionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *UpdateTargetCollaborationRequestProduct) UnmarshalJSON(data []byte) (er
 
 	varUpdateTargetCollaborationRequestProduct := _UpdateTargetCollaborationRequestProduct{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateTargetCollaborationRequestProduct)
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationRequestProduct)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateTargetCollaborationRequestProduct(varUpdateTargetCollaborationRequestProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "target_ad_commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

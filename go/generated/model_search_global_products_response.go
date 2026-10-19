@@ -26,7 +26,10 @@ type SearchGlobalProductsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchGlobalProductsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGlobalProductsResponse SearchGlobalProductsResponse
 
 // NewSearchGlobalProductsResponse instantiates a new SearchGlobalProductsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchGlobalProductsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGlobalProductsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchGlobalProductsResponse := _SearchGlobalProductsResponse{}
+
+	err = json.Unmarshal(data, &varSearchGlobalProductsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGlobalProductsResponse(varSearchGlobalProductsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGlobalProductsResponse struct {

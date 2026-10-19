@@ -23,7 +23,10 @@ type SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribut
 	Gender *string `json:"gender,omitempty"`
 	// Greater than or equal to a certain percentage, scaled up by 10,000 times.  For example, 6000 stands for 0.6 or 60%
 	PercentageGe *int64 `json:"percentage_ge,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution
 
 // NewSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution instantiates a new SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistri
 	if !IsNil(o.PercentageGe) {
 		toSerialize["percentage_ge"] = o.PercentageGe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution := _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution(varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gender")
+		delete(additionalProperties, "percentage_ge")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicGenderDistribution struct {

@@ -27,7 +27,10 @@ type GetProductPackageRecommendationsResponseDataProduct struct {
 	WeightRecommendation *GetProductPackageRecommendationsResponseDataProductWeightRecommendation `json:"weight_recommendation,omitempty"`
 	// Dimension correction recommendation (Returned only when the dimensions of product has been recommended).
 	DimensionRecommendation *GetProductPackageRecommendationsResponseDataProductDimensionRecommendation `json:"dimension_recommendation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseDataProduct GetProductPackageRecommendationsResponseDataProduct
 
 // NewGetProductPackageRecommendationsResponseDataProduct instantiates a new GetProductPackageRecommendationsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductPackageRecommendationsResponseDataProduct) ToMap() (map[string
 	if !IsNil(o.DimensionRecommendation) {
 		toSerialize["dimension_recommendation"] = o.DimensionRecommendation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseDataProduct := _GetProductPackageRecommendationsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseDataProduct(varGetProductPackageRecommendationsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "abnormality_types")
+		delete(additionalProperties, "weight_recommendation")
+		delete(additionalProperties, "dimension_recommendation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseDataProduct struct {

@@ -25,7 +25,10 @@ type SearchOpenCollaborationsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Open collaborations matching the search criteria on the current page.
 	OpenCollaborations []SearchOpenCollaborationsResponseDataOpenCollaboration `json:"open_collaborations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationsResponseData SearchOpenCollaborationsResponseData
 
 // NewSearchOpenCollaborationsResponseData instantiates a new SearchOpenCollaborationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchOpenCollaborationsResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.OpenCollaborations) {
 		toSerialize["open_collaborations"] = o.OpenCollaborations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationsResponseData := _SearchOpenCollaborationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationsResponseData(varSearchOpenCollaborationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "open_collaborations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationsResponseData struct {

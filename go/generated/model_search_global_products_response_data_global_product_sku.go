@@ -23,7 +23,10 @@ type SearchGlobalProductsResponseDataGlobalProductSku struct {
 	Id *string `json:"id,omitempty"`
 	// An internal code/name for managing SKUs, not visible to buyers.
 	SellerSku *string `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGlobalProductsResponseDataGlobalProductSku SearchGlobalProductsResponseDataGlobalProductSku
 
 // NewSearchGlobalProductsResponseDataGlobalProductSku instantiates a new SearchGlobalProductsResponseDataGlobalProductSku object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchGlobalProductsResponseDataGlobalProductSku) ToMap() (map[string]in
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGlobalProductsResponseDataGlobalProductSku) UnmarshalJSON(data []byte) (err error) {
+	varSearchGlobalProductsResponseDataGlobalProductSku := _SearchGlobalProductsResponseDataGlobalProductSku{}
+
+	err = json.Unmarshal(data, &varSearchGlobalProductsResponseDataGlobalProductSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGlobalProductsResponseDataGlobalProductSku(varSearchGlobalProductsResponseDataGlobalProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGlobalProductsResponseDataGlobalProductSku struct {

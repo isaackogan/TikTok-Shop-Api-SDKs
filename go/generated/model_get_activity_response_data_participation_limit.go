@@ -21,7 +21,10 @@ var _ MappedNullable = &GetActivityResponseDataParticipationLimit{}
 type GetActivityResponseDataParticipationLimit struct {
 	// Determines whether the promotion activity limits the number of times each buyer can receive its benefit. e.g.: - `BUYER_NO_LIMIT`: No limit for buyer​s. Buyers can benefit from this promotion across multiple orders. - `BUYER_LIMIT_ONLY_ONE`: Buyers can benefit from this promotion activity for no more than one order. ​Default: `BUYER_NO_LIMIT`
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataParticipationLimit GetActivityResponseDataParticipationLimit
 
 // NewGetActivityResponseDataParticipationLimit instantiates a new GetActivityResponseDataParticipationLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetActivityResponseDataParticipationLimit) ToMap() (map[string]interface
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataParticipationLimit) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataParticipationLimit := _GetActivityResponseDataParticipationLimit{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataParticipationLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataParticipationLimit(varGetActivityResponseDataParticipationLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataParticipationLimit struct {

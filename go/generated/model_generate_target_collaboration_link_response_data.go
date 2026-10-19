@@ -21,7 +21,10 @@ var _ MappedNullable = &GenerateTargetCollaborationLinkResponseData{}
 type GenerateTargetCollaborationLinkResponseData struct {
 	// The link of the target invitation, the creator can jump to the page of adding products after clicking.
 	Link *string `json:"link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateTargetCollaborationLinkResponseData GenerateTargetCollaborationLinkResponseData
 
 // NewGenerateTargetCollaborationLinkResponseData instantiates a new GenerateTargetCollaborationLinkResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GenerateTargetCollaborationLinkResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.Link) {
 		toSerialize["link"] = o.Link
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateTargetCollaborationLinkResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGenerateTargetCollaborationLinkResponseData := _GenerateTargetCollaborationLinkResponseData{}
+
+	err = json.Unmarshal(data, &varGenerateTargetCollaborationLinkResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateTargetCollaborationLinkResponseData(varGenerateTargetCollaborationLinkResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateTargetCollaborationLinkResponseData struct {

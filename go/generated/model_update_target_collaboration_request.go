@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type UpdateTargetCollaborationRequest struct {
 	SellerContactInfo UpdateTargetCollaborationRequestSellerContactInfo `json:"seller_contact_info"`
 	// The free sample rules set by the seller in the target collaboration.
 	FreeSampleRule FreeSampleRule `json:"free_sample_rule"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateTargetCollaborationRequest UpdateTargetCollaborationRequest
@@ -220,6 +220,11 @@ func (o UpdateTargetCollaborationRequest) ToMap() (map[string]interface{}, error
 	toSerialize["creator_user_open_ids"] = o.CreatorUserOpenIds
 	toSerialize["seller_contact_info"] = o.SellerContactInfo
 	toSerialize["free_sample_rule"] = o.FreeSampleRule
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *UpdateTargetCollaborationRequest) UnmarshalJSON(data []byte) (err error
 
 	varUpdateTargetCollaborationRequest := _UpdateTargetCollaborationRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateTargetCollaborationRequest)
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateTargetCollaborationRequest(varUpdateTargetCollaborationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "creator_user_open_ids")
+		delete(additionalProperties, "seller_contact_info")
+		delete(additionalProperties, "free_sample_rule")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

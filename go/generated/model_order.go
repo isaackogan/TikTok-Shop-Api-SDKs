@@ -24,7 +24,10 @@ type Order struct {
 	// [Deprecated]SKU information.
 	// Deprecated
 	Skus []GetPackageDetailResponseDataOrderSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Order Order
 
 // NewOrder instantiates a new Order object
 // This constructor will assign default values to properties that have it defined,
@@ -126,7 +129,34 @@ func (o Order) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Order) UnmarshalJSON(data []byte) (err error) {
+	varOrder := _Order{}
+
+	err = json.Unmarshal(data, &varOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Order(varOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrder struct {

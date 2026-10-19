@@ -21,7 +21,10 @@ var _ MappedNullable = &PartialEditProductRequestPodInfoPodTemplateSurfaceBackgr
 type PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage struct {
 	// The URI of the background image. Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with `use_case=CUSTOMIZATION_IMAGE`.
 	Uri *string `json:"uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage
 
 // NewPartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage instantiates a new PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage) ToMap
 	if !IsNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage := _PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage(varPartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestPodInfoPodTemplateSurfaceBackgroundImage struct {

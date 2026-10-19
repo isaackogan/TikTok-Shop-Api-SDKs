@@ -21,7 +21,10 @@ var _ MappedNullable = &PartialEditProductRequestPodInfoPodTemplateSurfaceMaskIm
 type PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage struct {
 	// The URI of the mask image. Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with `use_case=CUSTOMIZATION_IMAGE`.
 	Uri *string `json:"uri,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage
 
 // NewPartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage instantiates a new PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage) ToMap() (ma
 	if !IsNil(o.Uri) {
 		toSerialize["uri"] = o.Uri
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage := _PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage(varPartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestPodInfoPodTemplateSurfaceMaskImage struct {

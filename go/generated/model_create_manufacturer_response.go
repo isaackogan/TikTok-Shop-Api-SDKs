@@ -26,7 +26,10 @@ type CreateManufacturerResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateManufacturerResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateManufacturerResponse CreateManufacturerResponse
 
 // NewCreateManufacturerResponse instantiates a new CreateManufacturerResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateManufacturerResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateManufacturerResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateManufacturerResponse := _CreateManufacturerResponse{}
+
+	err = json.Unmarshal(data, &varCreateManufacturerResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateManufacturerResponse(varCreateManufacturerResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateManufacturerResponse struct {

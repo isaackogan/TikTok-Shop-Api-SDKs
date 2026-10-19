@@ -27,7 +27,10 @@ type GetShopSKPPSummaryResponseDataShopSummary struct {
 	EarnedAdCredit *string `json:"earned_ad_credit,omitempty"`
 	// Incremental visibility gained from SKPP rewards in the last 30 days.
 	IncreasedVisibilityL30d *string `json:"increased_visibility_l30d,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopSKPPSummaryResponseDataShopSummary GetShopSKPPSummaryResponseDataShopSummary
 
 // NewGetShopSKPPSummaryResponseDataShopSummary instantiates a new GetShopSKPPSummaryResponseDataShopSummary object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopSKPPSummaryResponseDataShopSummary) ToMap() (map[string]interface
 	if !IsNil(o.IncreasedVisibilityL30d) {
 		toSerialize["increased_visibility_l30d"] = o.IncreasedVisibilityL30d
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopSKPPSummaryResponseDataShopSummary) UnmarshalJSON(data []byte) (err error) {
+	varGetShopSKPPSummaryResponseDataShopSummary := _GetShopSKPPSummaryResponseDataShopSummary{}
+
+	err = json.Unmarshal(data, &varGetShopSKPPSummaryResponseDataShopSummary)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopSKPPSummaryResponseDataShopSummary(varGetShopSKPPSummaryResponseDataShopSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "qualified_products_count")
+		delete(additionalProperties, "eligible_products_count")
+		delete(additionalProperties, "earned_ad_credit")
+		delete(additionalProperties, "increased_visibility_l30d")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopSKPPSummaryResponseDataShopSummary struct {

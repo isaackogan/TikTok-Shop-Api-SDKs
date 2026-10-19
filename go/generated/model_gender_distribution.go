@@ -23,7 +23,10 @@ type GenderDistribution struct {
 	Gender *string `json:"gender,omitempty"`
 	// Proportion for the corresponding gender within this viewer profile, expressed as a decimal fraction.
 	Percentage *string `json:"percentage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenderDistribution GenderDistribution
 
 // NewGenderDistribution instantiates a new GenderDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GenderDistribution) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenderDistribution) UnmarshalJSON(data []byte) (err error) {
+	varGenderDistribution := _GenderDistribution{}
+
+	err = json.Unmarshal(data, &varGenderDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenderDistribution(varGenderDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gender")
+		delete(additionalProperties, "percentage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenderDistribution struct {

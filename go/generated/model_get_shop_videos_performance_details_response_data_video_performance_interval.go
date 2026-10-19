@@ -27,7 +27,10 @@ type GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval struct 
 	StartDate *string `json:"start_date,omitempty"`
 	// Traffic performance of the video.
 	Traffic *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval
 
 // NewGetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval instantiates a new GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval) ToM
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval := _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval(varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval struct {

@@ -33,7 +33,10 @@ type ReturnStatusChangeWebhookData struct {
 	CreateTime *int64 `json:"create_time,omitempty"`
 	// The time when return order status update, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReturnStatusChangeWebhookData ReturnStatusChangeWebhookData
 
 // NewReturnStatusChangeWebhookData instantiates a new ReturnStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o ReturnStatusChangeWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReturnStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varReturnStatusChangeWebhookData := _ReturnStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varReturnStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReturnStatusChangeWebhookData(varReturnStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "return_role")
+		delete(additionalProperties, "return_type")
+		delete(additionalProperties, "return_status")
+		delete(additionalProperties, "return_id")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReturnStatusChangeWebhookData struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetSPSMetricsResponseData{}
 type GetSPSMetricsResponseData struct {
 	// Fixed complete SPS metric set for the authorized shop.
 	Metrics []GetSPSMetricsResponseDataMetric `json:"metrics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricsResponseData GetSPSMetricsResponseData
 
 // NewGetSPSMetricsResponseData instantiates a new GetSPSMetricsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetSPSMetricsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metrics) {
 		toSerialize["metrics"] = o.Metrics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricsResponseData := _GetSPSMetricsResponseData{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricsResponseData(varGetSPSMetricsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricsResponseData struct {

@@ -31,7 +31,10 @@ type TrackingStatusUpdateResponseDataTrackResult struct {
 	Message *string `json:"message,omitempty"`
 	// The waybill number used when placing an order. If there is no tracking code, fill in the invoice id instead. And it may change in split shipment, it may change in different track in this scene.
 	TrackingNo *string `json:"tracking_no,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TrackingStatusUpdateResponseDataTrackResult TrackingStatusUpdateResponseDataTrackResult
 
 // NewTrackingStatusUpdateResponseDataTrackResult instantiates a new TrackingStatusUpdateResponseDataTrackResult object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o TrackingStatusUpdateResponseDataTrackResult) ToMap() (map[string]interfa
 	if !IsNil(o.TrackingNo) {
 		toSerialize["tracking_no"] = o.TrackingNo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TrackingStatusUpdateResponseDataTrackResult) UnmarshalJSON(data []byte) (err error) {
+	varTrackingStatusUpdateResponseDataTrackResult := _TrackingStatusUpdateResponseDataTrackResult{}
+
+	err = json.Unmarshal(data, &varTrackingStatusUpdateResponseDataTrackResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TrackingStatusUpdateResponseDataTrackResult(varTrackingStatusUpdateResponseDataTrackResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action_code")
+		delete(additionalProperties, "occur_time")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "tracking_no")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTrackingStatusUpdateResponseDataTrackResult struct {

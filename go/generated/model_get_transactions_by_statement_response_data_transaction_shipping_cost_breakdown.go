@@ -75,7 +75,10 @@ type GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown stru
 	NonStandardWeightFee *string `json:"non_standard_weight_fee,omitempty"`
 	// Fee charged when a parcel exceeds the standard size range. The rate is set by TikTok Shop and charged when the parcel is delivered.
 	NonStandardDimensionFee *string `json:"non_standard_dimension_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown
 
 // NewGetTransactionsByStatementResponseDataTransactionShippingCostBreakdown instantiates a new GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -1084,7 +1087,60 @@ func (o GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown) 
 	if !IsNil(o.NonStandardDimensionFee) {
 		toSerialize["non_standard_dimension_fee"] = o.NonStandardDimensionFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByStatementResponseDataTransactionShippingCostBreakdown := _GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByStatementResponseDataTransactionShippingCostBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown(varGetTransactionsByStatementResponseDataTransactionShippingCostBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "actual_shipping_fee_amount")
+		delete(additionalProperties, "international_leg_logistics_amount")
+		delete(additionalProperties, "shipping_fee_discount_amount")
+		delete(additionalProperties, "customer_paid_shipping_fee_amount")
+		delete(additionalProperties, "return_shipping_fee_amount")
+		delete(additionalProperties, "replacement_shipping_fee_amount")
+		delete(additionalProperties, "exchange_shipping_fee_amount")
+		delete(additionalProperties, "signature_confirmation_fee_amount")
+		delete(additionalProperties, "shipping_insurance_fee_amount")
+		delete(additionalProperties, "fbt_fulfillment_fee_reimbursement_amount")
+		delete(additionalProperties, "return_shipping_label_fee_amount")
+		delete(additionalProperties, "seller_self_shipping_service_fee_amount")
+		delete(additionalProperties, "return_shipping_fee_paid_buyer_amount")
+		delete(additionalProperties, "failed_delivery_subsidy_amount")
+		delete(additionalProperties, "shipping_fee_guarantee_reimbursement")
+		delete(additionalProperties, "fbt_free_shipping_fee_amount")
+		delete(additionalProperties, "free_return_subsidy_amount")
+		delete(additionalProperties, "distant_shipping_fee_amount")
+		delete(additionalProperties, "shipping_app_service_fee_amount")
+		delete(additionalProperties, "logistics_service_fee")
+		delete(additionalProperties, "fbt_overall_merchant_subsidy")
+		delete(additionalProperties, "fbt_key_merchant_subsidy")
+		delete(additionalProperties, "tiktok_shop_shipping_incentive_amount")
+		delete(additionalProperties, "supplementary_component")
+		delete(additionalProperties, "hazmat_noncompliance_fee")
+		delete(additionalProperties, "hazmat_handling_fee")
+		delete(additionalProperties, "non_standard_weight_fee")
+		delete(additionalProperties, "non_standard_dimension_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByStatementResponseDataTransactionShippingCostBreakdown struct {

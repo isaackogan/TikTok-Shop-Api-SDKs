@@ -25,7 +25,10 @@ type GetCategoryAttributesResponseDataAttributeMetricStandard struct {
 	Name *string `json:"name,omitempty"`
 	// Metric value modules.
 	MetricValueModules []GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModule `json:"metric_value_modules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeMetricStandard GetCategoryAttributesResponseDataAttributeMetricStandard
 
 // NewGetCategoryAttributesResponseDataAttributeMetricStandard instantiates a new GetCategoryAttributesResponseDataAttributeMetricStandard object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCategoryAttributesResponseDataAttributeMetricStandard) ToMap() (map[s
 	if !IsNil(o.MetricValueModules) {
 		toSerialize["metric_value_modules"] = o.MetricValueModules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeMetricStandard) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeMetricStandard := _GetCategoryAttributesResponseDataAttributeMetricStandard{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeMetricStandard)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeMetricStandard(varGetCategoryAttributesResponseDataAttributeMetricStandard)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "metric_value_modules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeMetricStandard struct {

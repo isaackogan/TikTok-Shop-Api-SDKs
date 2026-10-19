@@ -33,7 +33,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall st
 	ProductImpressions *int64 `json:"product_impressions,omitempty"`
 	// The number of product clicks from the video
 	ProductClicks *int64 `json:"product_clicks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall
 	if !IsNil(o.ProductClicks) {
 		toSerialize["product_clicks"] = o.ProductClicks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall := _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall(varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "product_clicks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall struct {

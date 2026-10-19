@@ -23,7 +23,10 @@ type CreateTime struct {
 	MinUnixTimeInclusive *int64 `json:"min_unix_time_inclusive,omitempty"`
 	// Exclusive upper bound (Unix seconds).
 	MaxUnixTimeExclusive *int64 `json:"max_unix_time_exclusive,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateTime CreateTime
 
 // NewCreateTime instantiates a new CreateTime object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CreateTime) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaxUnixTimeExclusive) {
 		toSerialize["max_unix_time_exclusive"] = o.MaxUnixTimeExclusive
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateTime) UnmarshalJSON(data []byte) (err error) {
+	varCreateTime := _CreateTime{}
+
+	err = json.Unmarshal(data, &varCreateTime)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateTime(varCreateTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_unix_time_inclusive")
+		delete(additionalProperties, "max_unix_time_exclusive")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateTime struct {

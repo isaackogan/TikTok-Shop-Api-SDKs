@@ -37,7 +37,10 @@ type GetConversationMessagesResponseDataMessage struct {
 	Data *string `json:"data,omitempty"`
 	// Human-readable message content. Request it with `need_plaintext=true`. The field is available only for visible messages and message types for which plaintext can be generated.  Example for a `PRODUCT_CARD` message: Product card shared: - Product ID: 1732529206731441911;  - Product name: Áo Khoác Cardigan Logo Thêu Phong Cách Hàn Quốc By Zonef, Áo Khoác Thu Đông Chất Vải Cotton Tổ Ong Nam Nữ Unisex;  - Product price: ;  - Strike-through price:  - Sold: 40013.   View full details at: https://seller-vn.tiktok.com/product/manage?search_content=1732529206731441911
 	Plaintext *string `json:"plaintext,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationMessagesResponseDataMessage GetConversationMessagesResponseDataMessage
 
 // NewGetConversationMessagesResponseDataMessage instantiates a new GetConversationMessagesResponseDataMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetConversationMessagesResponseDataMessage) ToMap() (map[string]interfac
 	if !IsNil(o.Plaintext) {
 		toSerialize["plaintext"] = o.Plaintext
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationMessagesResponseDataMessage) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationMessagesResponseDataMessage := _GetConversationMessagesResponseDataMessage{}
+
+	err = json.Unmarshal(data, &varGetConversationMessagesResponseDataMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationMessagesResponseDataMessage(varGetConversationMessagesResponseDataMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "is_visible")
+		delete(additionalProperties, "sender")
+		delete(additionalProperties, "index")
+		delete(additionalProperties, "data")
+		delete(additionalProperties, "plaintext")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationMessagesResponseDataMessage struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type RecipientAddressUpdateWebhook struct {
 	// The Unix timestamp when the webhook was triggered.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *RecipientAddressUpdateWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecipientAddressUpdateWebhook RecipientAddressUpdateWebhook
@@ -190,6 +190,11 @@ func (o RecipientAddressUpdateWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -217,15 +222,23 @@ func (o *RecipientAddressUpdateWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varRecipientAddressUpdateWebhook := _RecipientAddressUpdateWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecipientAddressUpdateWebhook)
+	err = json.Unmarshal(data, &varRecipientAddressUpdateWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecipientAddressUpdateWebhook(varRecipientAddressUpdateWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

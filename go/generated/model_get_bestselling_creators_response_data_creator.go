@@ -33,7 +33,10 @@ type GetBestsellingCreatorsResponseDataCreator struct {
 	FollowersCount *int64 `json:"followers_count,omitempty"`
 	// Number of likes
 	LikesCount *int64 `json:"likes_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingCreatorsResponseDataCreator GetBestsellingCreatorsResponseDataCreator
 
 // NewGetBestsellingCreatorsResponseDataCreator instantiates a new GetBestsellingCreatorsResponseDataCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetBestsellingCreatorsResponseDataCreator) ToMap() (map[string]interface
 	if !IsNil(o.LikesCount) {
 		toSerialize["likes_count"] = o.LikesCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingCreatorsResponseDataCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingCreatorsResponseDataCreator := _GetBestsellingCreatorsResponseDataCreator{}
+
+	err = json.Unmarshal(data, &varGetBestsellingCreatorsResponseDataCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingCreatorsResponseDataCreator(varGetBestsellingCreatorsResponseDataCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rank")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "open_id")
+		delete(additionalProperties, "user_name")
+		delete(additionalProperties, "nick_name")
+		delete(additionalProperties, "followers_count")
+		delete(additionalProperties, "likes_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingCreatorsResponseDataCreator struct {

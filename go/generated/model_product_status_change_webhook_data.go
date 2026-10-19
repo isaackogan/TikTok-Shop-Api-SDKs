@@ -27,7 +27,10 @@ type ProductStatusChangeWebhookData struct {
 	SuspendedReason *string `json:"suspended_reason,omitempty"`
 	// The time when the status changed, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ProductStatusChangeWebhookData ProductStatusChangeWebhookData
 
 // NewProductStatusChangeWebhookData instantiates a new ProductStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ProductStatusChangeWebhookData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ProductStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varProductStatusChangeWebhookData := _ProductStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varProductStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductStatusChangeWebhookData(varProductStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "suspended_reason")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProductStatusChangeWebhookData struct {

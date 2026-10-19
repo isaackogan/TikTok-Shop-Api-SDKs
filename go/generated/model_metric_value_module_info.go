@@ -25,7 +25,10 @@ type MetricValueModuleInfo struct {
 	Value *string `json:"value,omitempty"`
 	// Metric value module unit id.
 	UnitId *string `json:"unit_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricValueModuleInfo MetricValueModuleInfo
 
 // NewMetricValueModuleInfo instantiates a new MetricValueModuleInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o MetricValueModuleInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UnitId) {
 		toSerialize["unit_id"] = o.UnitId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricValueModuleInfo) UnmarshalJSON(data []byte) (err error) {
+	varMetricValueModuleInfo := _MetricValueModuleInfo{}
+
+	err = json.Unmarshal(data, &varMetricValueModuleInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricValueModuleInfo(varMetricValueModuleInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricValueModuleInfo struct {

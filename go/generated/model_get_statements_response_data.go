@@ -23,7 +23,10 @@ type GetStatementsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The list of statements that meet the query conditions.
 	Statements []GetStatementsResponseDataStatement `json:"statements,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetStatementsResponseData GetStatementsResponseData
 
 // NewGetStatementsResponseData instantiates a new GetStatementsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetStatementsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Statements) {
 		toSerialize["statements"] = o.Statements
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetStatementsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetStatementsResponseData := _GetStatementsResponseData{}
+
+	err = json.Unmarshal(data, &varGetStatementsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetStatementsResponseData(varGetStatementsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "statements")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetStatementsResponseData struct {

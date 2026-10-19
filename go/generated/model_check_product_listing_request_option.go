@@ -23,7 +23,10 @@ type CheckProductListingRequestOption struct {
 	NeedTriggerGneAsyncCheck *bool `json:"need_trigger_gne_async_check,omitempty"`
 	// A caller-provided session ID for asynchronous product information verification. This asynchronous workflow is available only to enabled sellers in the US. Provide a nonempty session ID when you trigger asynchronous verification, then reuse the same session ID on later calls to this API with the same product information to retrieve any completed findings in `pre_check_results`. This API does not generate or return a new session ID for you.
 	GneAsyncCheckSessionId *string `json:"gne_async_check_session_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingRequestOption CheckProductListingRequestOption
 
 // NewCheckProductListingRequestOption instantiates a new CheckProductListingRequestOption object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CheckProductListingRequestOption) ToMap() (map[string]interface{}, error
 	if !IsNil(o.GneAsyncCheckSessionId) {
 		toSerialize["gne_async_check_session_id"] = o.GneAsyncCheckSessionId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingRequestOption) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingRequestOption := _CheckProductListingRequestOption{}
+
+	err = json.Unmarshal(data, &varCheckProductListingRequestOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingRequestOption(varCheckProductListingRequestOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "need_trigger_gne_async_check")
+		delete(additionalProperties, "gne_async_check_session_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingRequestOption struct {

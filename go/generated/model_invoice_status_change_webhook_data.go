@@ -27,7 +27,10 @@ type InvoiceStatusChangeWebhookData struct {
 	InvoiceStatus *string `json:"invoice_status,omitempty"`
 	// The reason why `invoice_status = INVALID`. Possible values:      * `UNKNOWN`: Internal system error. Please try again later.   * `FAILED`: The NFe file or access key is invalid. Please check the XML file for correctness.   * `NOT_FOUND`: The NFe was not found. This may be due to data delay. Please try again later.   * `NOT_AUTHORIZED`: The NFe is not legally authorized. It may not have been issued or has been canceled.   * `ACCESS_KEY_DUPLICATE`: The access key already exists. You cannot upload an invoice with duplicate access key.   * `CNPJ_NOT_MATCH`：Ensure the NF-e has the same 8-digit prefix as the CNPJ you provided during onboarding.   * `UF_Inconsistent_Required`: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse.   * `UF_Inconsistent_Dismisse_Retirada_missing`: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.   * `UF_Inconsistent_Dismissed_Retirada_Inconsistent`: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.
 	InvalidReason *string `json:"invalid_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InvoiceStatusChangeWebhookData InvoiceStatusChangeWebhookData
 
 // NewInvoiceStatusChangeWebhookData instantiates a new InvoiceStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o InvoiceStatusChangeWebhookData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.InvalidReason) {
 		toSerialize["invalid_reason"] = o.InvalidReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InvoiceStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varInvoiceStatusChangeWebhookData := _InvoiceStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varInvoiceStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvoiceStatusChangeWebhookData(varInvoiceStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "order_ids")
+		delete(additionalProperties, "invoice_status")
+		delete(additionalProperties, "invalid_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInvoiceStatusChangeWebhookData struct {

@@ -25,7 +25,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceRating struct {
 	Count *int64 `json:"count,omitempty"`
 	// Share of all product reviews in the corresponding rating bucket. The value is the bucket's review count divided by the total product review count and is returned as a decimal from 0 to 1, rounded to four decimal places. For example, `0.23` means 23%.
 	Percentage *string `json:"percentage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceRating GetShopProductPerformanceDetailResponseDataPerformanceRating
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceRating instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceRating object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceRating) ToMap() (m
 	if !IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceRating) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceRating := _GetShopProductPerformanceDetailResponseDataPerformanceRating{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceRating)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceRating(varGetShopProductPerformanceDetailResponseDataPerformanceRating)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stars")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "percentage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceRating struct {

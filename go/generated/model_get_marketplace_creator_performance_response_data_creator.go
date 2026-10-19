@@ -117,7 +117,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreator struct {
 	PostRate *string `json:"post_rate,omitempty"`
 	// Advanced creator profile information. An empty object means this information is not available for the caller's account or region.
 	CreatorProfile *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile `json:"creator_profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreator GetMarketplaceCreatorPerformanceResponseDataCreator
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreator instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -1861,7 +1864,81 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreator) ToMap() (map[string
 	if !IsNil(o.CreatorProfile) {
 		toSerialize["creator_profile"] = o.CreatorProfile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreator := _GetMarketplaceCreatorPerformanceResponseDataCreator{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreator(varGetMarketplaceCreatorPerformanceResponseDataCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "selection_region")
+		delete(additionalProperties, "bio_description")
+		delete(additionalProperties, "follower_count")
+		delete(additionalProperties, "profile_tt_uri")
+		delete(additionalProperties, "category_ids")
+		delete(additionalProperties, "top_collaborated_brand_ids")
+		delete(additionalProperties, "brand_collaboration_count")
+		delete(additionalProperties, "units_sold")
+		delete(additionalProperties, "units_sold_range")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "video_gmv")
+		delete(additionalProperties, "live_gmv")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "ec_live_engagement_rate")
+		delete(additionalProperties, "category_gmv_distribution")
+		delete(additionalProperties, "content_gmv_distribution")
+		delete(additionalProperties, "product_original_price_range")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "live_gpm")
+		delete(additionalProperties, "video_gpm")
+		delete(additionalProperties, "gpm_range")
+		delete(additionalProperties, "video_gpm_range")
+		delete(additionalProperties, "live_gpm_range")
+		delete(additionalProperties, "promoted_product_num")
+		delete(additionalProperties, "ec_live_count")
+		delete(additionalProperties, "ec_video_count")
+		delete(additionalProperties, "avg_ec_video_play_count")
+		delete(additionalProperties, "avg_commission_rate")
+		delete(additionalProperties, "avg_commission_rate_range")
+		delete(additionalProperties, "avg_gmv_per_buyer")
+		delete(additionalProperties, "avg_gmv_per_buyer_range")
+		delete(additionalProperties, "avg_ec_live_view_count")
+		delete(additionalProperties, "avg_ec_live_like_count")
+		delete(additionalProperties, "avg_ec_live_comment_count")
+		delete(additionalProperties, "avg_ec_live_share_count")
+		delete(additionalProperties, "avg_ec_video_like_count")
+		delete(additionalProperties, "avg_ec_video_comment_count")
+		delete(additionalProperties, "avg_ec_video_share_count")
+		delete(additionalProperties, "follower_location")
+		delete(additionalProperties, "follower_age")
+		delete(additionalProperties, "follower_gender")
+		delete(additionalProperties, "pps")
+		delete(additionalProperties, "rating")
+		delete(additionalProperties, "ec_video_engagement_rate")
+		delete(additionalProperties, "post_rate")
+		delete(additionalProperties, "creator_profile")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreator struct {

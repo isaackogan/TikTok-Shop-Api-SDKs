@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type EstimateArrivalTime struct {
 	StartTimestamp string `json:"start_timestamp"`
 	// End of the estimated arrival time window as a Unix timestamp in seconds. For example, `1774767600` corresponds to Sunday, 2026-03-29 at 00:00 PDT (`2026-03-29T07:00:00Z`). Use the exact `end_timestamp` returned in `available_time_window_list` by the `ListAvailableInboundMethod` API.
 	EndTimestamp string `json:"end_timestamp"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EstimateArrivalTime EstimateArrivalTime
@@ -108,6 +108,11 @@ func (o EstimateArrivalTime) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["start_timestamp"] = o.StartTimestamp
 	toSerialize["end_timestamp"] = o.EndTimestamp
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *EstimateArrivalTime) UnmarshalJSON(data []byte) (err error) {
 
 	varEstimateArrivalTime := _EstimateArrivalTime{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEstimateArrivalTime)
+	err = json.Unmarshal(data, &varEstimateArrivalTime)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EstimateArrivalTime(varEstimateArrivalTime)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_timestamp")
+		delete(additionalProperties, "end_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

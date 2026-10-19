@@ -27,7 +27,10 @@ type GetShippingTemplateAvailabilityResponseDataTemplateTemplate struct {
 	IsDefault *bool `json:"is_default,omitempty"`
 	// 1 for shipping by platform template 2 for shipping by seller template
 	TemplateParty *int64 `json:"template_party,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityResponseDataTemplateTemplate GetShippingTemplateAvailabilityResponseDataTemplateTemplate
 
 // NewGetShippingTemplateAvailabilityResponseDataTemplateTemplate instantiates a new GetShippingTemplateAvailabilityResponseDataTemplateTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShippingTemplateAvailabilityResponseDataTemplateTemplate) ToMap() (ma
 	if !IsNil(o.TemplateParty) {
 		toSerialize["template_party"] = o.TemplateParty
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityResponseDataTemplateTemplate) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityResponseDataTemplateTemplate := _GetShippingTemplateAvailabilityResponseDataTemplateTemplate{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityResponseDataTemplateTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityResponseDataTemplateTemplate(varGetShippingTemplateAvailabilityResponseDataTemplateTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template_name")
+		delete(additionalProperties, "template_id")
+		delete(additionalProperties, "is_default")
+		delete(additionalProperties, "template_party")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityResponseDataTemplateTemplate struct {

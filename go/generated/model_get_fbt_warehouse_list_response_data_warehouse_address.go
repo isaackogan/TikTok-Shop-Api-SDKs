@@ -35,7 +35,10 @@ type GetFBTWarehouseListResponseDataWarehouseAddress struct {
 	AddressLine2 *string `json:"address_line_2,omitempty"`
 	// The detail address line 3, additional address information(optional).
 	AddressLine3 *string `json:"address_line_3,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTWarehouseListResponseDataWarehouseAddress GetFBTWarehouseListResponseDataWarehouseAddress
 
 // NewGetFBTWarehouseListResponseDataWarehouseAddress instantiates a new GetFBTWarehouseListResponseDataWarehouseAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetFBTWarehouseListResponseDataWarehouseAddress) ToMap() (map[string]int
 	if !IsNil(o.AddressLine3) {
 		toSerialize["address_line_3"] = o.AddressLine3
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTWarehouseListResponseDataWarehouseAddress) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTWarehouseListResponseDataWarehouseAddress := _GetFBTWarehouseListResponseDataWarehouseAddress{}
+
+	err = json.Unmarshal(data, &varGetFBTWarehouseListResponseDataWarehouseAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTWarehouseListResponseDataWarehouseAddress(varGetFBTWarehouseListResponseDataWarehouseAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "district")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "address_line_1")
+		delete(additionalProperties, "address_line_2")
+		delete(additionalProperties, "address_line_3")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTWarehouseListResponseDataWarehouseAddress struct {

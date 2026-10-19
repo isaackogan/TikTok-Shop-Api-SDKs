@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type UploadInvoiceRequestInvoice struct {
 	FileType string `json:"file_type"`
 	// Base64 encoding of the invoice file to upload. Max file size: 1MB
 	File string `json:"file"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UploadInvoiceRequestInvoice UploadInvoiceRequestInvoice
@@ -164,6 +164,11 @@ func (o UploadInvoiceRequestInvoice) ToMap() (map[string]interface{}, error) {
 	toSerialize["order_ids"] = o.OrderIds
 	toSerialize["file_type"] = o.FileType
 	toSerialize["file"] = o.File
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *UploadInvoiceRequestInvoice) UnmarshalJSON(data []byte) (err error) {
 
 	varUploadInvoiceRequestInvoice := _UploadInvoiceRequestInvoice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUploadInvoiceRequestInvoice)
+	err = json.Unmarshal(data, &varUploadInvoiceRequestInvoice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UploadInvoiceRequestInvoice(varUploadInvoiceRequestInvoice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "order_ids")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "file")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -29,7 +29,10 @@ type GetReturnRecordsResponseDataRecordVideo struct {
 	Height *int64 `json:"height,omitempty"`
 	// Video duration.  Unit: milliseconds
 	DurationMillis *int64 `json:"duration_millis,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReturnRecordsResponseDataRecordVideo GetReturnRecordsResponseDataRecordVideo
 
 // NewGetReturnRecordsResponseDataRecordVideo instantiates a new GetReturnRecordsResponseDataRecordVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetReturnRecordsResponseDataRecordVideo) ToMap() (map[string]interface{}
 	if !IsNil(o.DurationMillis) {
 		toSerialize["duration_millis"] = o.DurationMillis
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReturnRecordsResponseDataRecordVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetReturnRecordsResponseDataRecordVideo := _GetReturnRecordsResponseDataRecordVideo{}
+
+	err = json.Unmarshal(data, &varGetReturnRecordsResponseDataRecordVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReturnRecordsResponseDataRecordVideo(varGetReturnRecordsResponseDataRecordVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "cover")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "duration_millis")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReturnRecordsResponseDataRecordVideo struct {

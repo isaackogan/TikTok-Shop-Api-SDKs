@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RecoverProductsRequest{}
 type RecoverProductsRequest struct {
 	// The product IDs to recover. Max number of IDs: 20.
 	ProductIds []string `json:"product_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecoverProductsRequest RecoverProductsRequest
@@ -80,6 +80,11 @@ func (o RecoverProductsRequest) MarshalJSON() ([]byte, error) {
 func (o RecoverProductsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_ids"] = o.ProductIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RecoverProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRecoverProductsRequest := _RecoverProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecoverProductsRequest)
+	err = json.Unmarshal(data, &varRecoverProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecoverProductsRequest(varRecoverProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

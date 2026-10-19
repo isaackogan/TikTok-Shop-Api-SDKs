@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type Item struct {
 	LotCode *string `json:"lot_code,omitempty"`
 	// The expiration date for this item, as a Unix timestamp in seconds. Required when expiration management is enabled for the goods. It must be no earlier than the current time plus the goods-specific `inbound_cutoff_days`. Obtain this value from `data.goods[].lot_expiration_info.inbound_cutoff_days` in Search Goods Info (`POST /fbt/202607/goods/search`).
 	ExpirationTimestamp *string `json:"expiration_timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Item Item
@@ -182,6 +182,11 @@ func (o Item) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExpirationTimestamp) {
 		toSerialize["expiration_timestamp"] = o.ExpirationTimestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *Item) UnmarshalJSON(data []byte) (err error) {
 
 	varItem := _Item{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varItem)
+	err = json.Unmarshal(data, &varItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Item(varItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "lot_code")
+		delete(additionalProperties, "expiration_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

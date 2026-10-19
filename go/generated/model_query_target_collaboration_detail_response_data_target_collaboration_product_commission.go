@@ -31,7 +31,10 @@ type QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommiss
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The commission rate applies only to orders generated from ads. If a creator’s video is used as an ad without this rate being set, the resulting orders will instead earn either: - The Shop Ads commission you configured in open collaboration, or - The standard commission defined in this invitation. The commission rate is specified in increments of 1/10,000. For example, 1000 stands for 0.1 or 10%.
 	ShopAdsCommissionRate *int64 `json:"shop_ads_commission_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission
 
 // NewQueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission instantiates a new QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o QueryTargetCollaborationDetailResponseDataTargetCollaborationProductComm
 	if !IsNil(o.ShopAdsCommissionRate) {
 		toSerialize["shop_ads_commission_rate"] = o.ShopAdsCommissionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission := _QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission(varQueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "effective_time")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "shop_ads_commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission struct {

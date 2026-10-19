@@ -37,7 +37,10 @@ type SearchReturnsResponseDataReturnOrderReturnLineItem struct {
 	RefundAmount *RefundAmount `json:"refund_amount,omitempty"`
 	// Return sub-order line items. These items represent SKUs that belong to a \"virtual bundle\" defined by a seller. This field includes all relevant information about each item in the virtual bundle.
 	ReturnSubLineItems []ReturnSubLineItem `json:"return_sub_line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnsResponseDataReturnOrderReturnLineItem SearchReturnsResponseDataReturnOrderReturnLineItem
 
 // NewSearchReturnsResponseDataReturnOrderReturnLineItem instantiates a new SearchReturnsResponseDataReturnOrderReturnLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o SearchReturnsResponseDataReturnOrderReturnLineItem) ToMap() (map[string]
 	if !IsNil(o.ReturnSubLineItems) {
 		toSerialize["return_sub_line_items"] = o.ReturnSubLineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnsResponseDataReturnOrderReturnLineItem) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnsResponseDataReturnOrderReturnLineItem := _SearchReturnsResponseDataReturnOrderReturnLineItem{}
+
+	err = json.Unmarshal(data, &varSearchReturnsResponseDataReturnOrderReturnLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnsResponseDataReturnOrderReturnLineItem(varSearchReturnsResponseDataReturnOrderReturnLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "order_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "refund_amount")
+		delete(additionalProperties, "return_sub_line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnsResponseDataReturnOrderReturnLineItem struct {

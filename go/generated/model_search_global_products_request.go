@@ -31,7 +31,10 @@ type SearchGlobalProductsRequest struct {
 	UpdateTimeGe *int64 `json:"update_time_ge,omitempty"`
 	// Filter global products to show only those that are updated on or before the specified date and time. Unix timestamp in seconds. Refer to notes in `update_time_ge` for more usage information.
 	UpdateTimeLe *int64 `json:"update_time_le,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGlobalProductsRequest SearchGlobalProductsRequest
 
 // NewSearchGlobalProductsRequest instantiates a new SearchGlobalProductsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchGlobalProductsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTimeLe) {
 		toSerialize["update_time_le"] = o.UpdateTimeLe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGlobalProductsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchGlobalProductsRequest := _SearchGlobalProductsRequest{}
+
+	err = json.Unmarshal(data, &varSearchGlobalProductsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGlobalProductsRequest(varSearchGlobalProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "seller_skus")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_le")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_le")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGlobalProductsRequest struct {

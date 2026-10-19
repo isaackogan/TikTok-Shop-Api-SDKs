@@ -21,7 +21,10 @@ var _ MappedNullable = &OptimizeImagesRequest{}
 type OptimizeImagesRequest struct {
 	// The list of images to be optimized.  Use the [Upload Product Image API](https://partner.tiktokshop.com/docv2/page/6509df95defece02be598a22) to upload the images first and obtain the corresponding image URIs. Max count: 200
 	Images []OptimizeImagesRequestImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OptimizeImagesRequest OptimizeImagesRequest
 
 // NewOptimizeImagesRequest instantiates a new OptimizeImagesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o OptimizeImagesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OptimizeImagesRequest) UnmarshalJSON(data []byte) (err error) {
+	varOptimizeImagesRequest := _OptimizeImagesRequest{}
+
+	err = json.Unmarshal(data, &varOptimizeImagesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OptimizeImagesRequest(varOptimizeImagesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOptimizeImagesRequest struct {

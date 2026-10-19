@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &AddExternalOrderReferencesRequest{}
 type AddExternalOrderReferencesRequest struct {
 	// Orders for which to add or update external OMS references. Min count: 1. Max count: 100.
 	Orders []AddExternalOrderReferencesRequestOrder `json:"orders"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AddExternalOrderReferencesRequest AddExternalOrderReferencesRequest
@@ -80,6 +80,11 @@ func (o AddExternalOrderReferencesRequest) MarshalJSON() ([]byte, error) {
 func (o AddExternalOrderReferencesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["orders"] = o.Orders
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *AddExternalOrderReferencesRequest) UnmarshalJSON(data []byte) (err erro
 
 	varAddExternalOrderReferencesRequest := _AddExternalOrderReferencesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAddExternalOrderReferencesRequest)
+	err = json.Unmarshal(data, &varAddExternalOrderReferencesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AddExternalOrderReferencesRequest(varAddExternalOrderReferencesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orders")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

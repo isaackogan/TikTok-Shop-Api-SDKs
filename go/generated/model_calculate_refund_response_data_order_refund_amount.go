@@ -31,7 +31,10 @@ type CalculateRefundResponseDataOrderRefundAmount struct {
 	RefundTax *string `json:"refund_tax,omitempty"`
 	// Retail delivery fee takes effect once platform GMV exceeds 500,000 USD, according to US Colorado states' compliance rules.
 	RetailDeliveryFee *string `json:"retail_delivery_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CalculateRefundResponseDataOrderRefundAmount CalculateRefundResponseDataOrderRefundAmount
 
 // NewCalculateRefundResponseDataOrderRefundAmount instantiates a new CalculateRefundResponseDataOrderRefundAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o CalculateRefundResponseDataOrderRefundAmount) ToMap() (map[string]interf
 	if !IsNil(o.RetailDeliveryFee) {
 		toSerialize["retail_delivery_fee"] = o.RetailDeliveryFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CalculateRefundResponseDataOrderRefundAmount) UnmarshalJSON(data []byte) (err error) {
+	varCalculateRefundResponseDataOrderRefundAmount := _CalculateRefundResponseDataOrderRefundAmount{}
+
+	err = json.Unmarshal(data, &varCalculateRefundResponseDataOrderRefundAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CalculateRefundResponseDataOrderRefundAmount(varCalculateRefundResponseDataOrderRefundAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "refund_total")
+		delete(additionalProperties, "refund_subtotal")
+		delete(additionalProperties, "refund_shipping_fee")
+		delete(additionalProperties, "refund_tax")
+		delete(additionalProperties, "retail_delivery_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCalculateRefundResponseDataOrderRefundAmount struct {

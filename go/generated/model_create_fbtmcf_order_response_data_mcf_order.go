@@ -25,7 +25,10 @@ type CreateFBTMCFOrderResponseDataMcfOrder struct {
 	McfOrderId *string `json:"mcf_order_id,omitempty"`
 	// The Unix timestamp, in seconds, when the MCF order was created.
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFBTMCFOrderResponseDataMcfOrder CreateFBTMCFOrderResponseDataMcfOrder
 
 // NewCreateFBTMCFOrderResponseDataMcfOrder instantiates a new CreateFBTMCFOrderResponseDataMcfOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateFBTMCFOrderResponseDataMcfOrder) ToMap() (map[string]interface{}, 
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFBTMCFOrderResponseDataMcfOrder) UnmarshalJSON(data []byte) (err error) {
+	varCreateFBTMCFOrderResponseDataMcfOrder := _CreateFBTMCFOrderResponseDataMcfOrder{}
+
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderResponseDataMcfOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFBTMCFOrderResponseDataMcfOrder(varCreateFBTMCFOrderResponseDataMcfOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_order_id")
+		delete(additionalProperties, "mcf_order_id")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFBTMCFOrderResponseDataMcfOrder struct {

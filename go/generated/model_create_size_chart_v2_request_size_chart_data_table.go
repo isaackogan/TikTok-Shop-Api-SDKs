@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateSizeChartV2RequestSizeChartDataTable struct {
 	Headers []CreateSizeChartV2RequestSizeChartDataTableHeader `json:"headers"`
 	// Rows of the size chart. Provide 1 to 45 rows.
 	Rows []Row `json:"rows"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSizeChartV2RequestSizeChartDataTable CreateSizeChartV2RequestSizeChartDataTable
@@ -108,6 +108,11 @@ func (o CreateSizeChartV2RequestSizeChartDataTable) ToMap() (map[string]interfac
 	toSerialize := map[string]interface{}{}
 	toSerialize["headers"] = o.Headers
 	toSerialize["rows"] = o.Rows
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateSizeChartV2RequestSizeChartDataTable) UnmarshalJSON(data []byte) 
 
 	varCreateSizeChartV2RequestSizeChartDataTable := _CreateSizeChartV2RequestSizeChartDataTable{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSizeChartV2RequestSizeChartDataTable)
+	err = json.Unmarshal(data, &varCreateSizeChartV2RequestSizeChartDataTable)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSizeChartV2RequestSizeChartDataTable(varCreateSizeChartV2RequestSizeChartDataTable)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "rows")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

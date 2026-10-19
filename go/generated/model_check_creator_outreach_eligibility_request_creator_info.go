@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CheckCreatorOutreachEligibilityRequestCreatorInfo{}
 type CheckCreatorOutreachEligibilityRequestCreatorInfo struct {
 	// Creator Open ID.
 	CreatorOpenId string `json:"creator_open_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CheckCreatorOutreachEligibilityRequestCreatorInfo CheckCreatorOutreachEligibilityRequestCreatorInfo
@@ -80,6 +80,11 @@ func (o CheckCreatorOutreachEligibilityRequestCreatorInfo) MarshalJSON() ([]byte
 func (o CheckCreatorOutreachEligibilityRequestCreatorInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["creator_open_id"] = o.CreatorOpenId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CheckCreatorOutreachEligibilityRequestCreatorInfo) UnmarshalJSON(data [
 
 	varCheckCreatorOutreachEligibilityRequestCreatorInfo := _CheckCreatorOutreachEligibilityRequestCreatorInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCheckCreatorOutreachEligibilityRequestCreatorInfo)
+	err = json.Unmarshal(data, &varCheckCreatorOutreachEligibilityRequestCreatorInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CheckCreatorOutreachEligibilityRequestCreatorInfo(varCheckCreatorOutreachEligibilityRequestCreatorInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

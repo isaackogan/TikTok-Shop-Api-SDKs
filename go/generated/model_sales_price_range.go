@@ -23,7 +23,10 @@ type SalesPriceRange struct {
 	AmountGe *string `json:"amount_ge,omitempty"`
 	// The product price must be greater than this value in order to be included in the search results. The value must be greater than `0`. No upper bound is set if this property is not included.
 	AmountLt *string `json:"amount_lt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesPriceRange SalesPriceRange
 
 // NewSalesPriceRange instantiates a new SalesPriceRange object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SalesPriceRange) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AmountLt) {
 		toSerialize["amount_lt"] = o.AmountLt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesPriceRange) UnmarshalJSON(data []byte) (err error) {
+	varSalesPriceRange := _SalesPriceRange{}
+
+	err = json.Unmarshal(data, &varSalesPriceRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesPriceRange(varSalesPriceRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount_ge")
+		delete(additionalProperties, "amount_lt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesPriceRange struct {

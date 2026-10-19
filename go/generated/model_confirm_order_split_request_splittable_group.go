@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ConfirmOrderSplitRequestSplittableGroup struct {
 	Id string `json:"id"`
 	// The order line item IDs that need to be split into this group.
 	OrderLineItemIds []string `json:"order_line_item_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmOrderSplitRequestSplittableGroup ConfirmOrderSplitRequestSplittableGroup
@@ -108,6 +108,11 @@ func (o ConfirmOrderSplitRequestSplittableGroup) ToMap() (map[string]interface{}
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["order_line_item_ids"] = o.OrderLineItemIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ConfirmOrderSplitRequestSplittableGroup) UnmarshalJSON(data []byte) (er
 
 	varConfirmOrderSplitRequestSplittableGroup := _ConfirmOrderSplitRequestSplittableGroup{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmOrderSplitRequestSplittableGroup)
+	err = json.Unmarshal(data, &varConfirmOrderSplitRequestSplittableGroup)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmOrderSplitRequestSplittableGroup(varConfirmOrderSplitRequestSplittableGroup)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "order_line_item_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

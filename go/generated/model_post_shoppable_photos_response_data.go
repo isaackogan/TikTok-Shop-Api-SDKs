@@ -23,7 +23,10 @@ type PostShoppablePhotosResponseData struct {
 	Photo *PostShoppablePhotosResponseDataPhoto `json:"photo,omitempty"`
 	// Content posting quota for the creator. Returned on successful publish; included in the error message on failure; omitted if no quota restriction applies.
 	Quota *string `json:"quota,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PostShoppablePhotosResponseData PostShoppablePhotosResponseData
 
 // NewPostShoppablePhotosResponseData instantiates a new PostShoppablePhotosResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PostShoppablePhotosResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Quota) {
 		toSerialize["quota"] = o.Quota
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PostShoppablePhotosResponseData) UnmarshalJSON(data []byte) (err error) {
+	varPostShoppablePhotosResponseData := _PostShoppablePhotosResponseData{}
+
+	err = json.Unmarshal(data, &varPostShoppablePhotosResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PostShoppablePhotosResponseData(varPostShoppablePhotosResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "photo")
+		delete(additionalProperties, "quota")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePostShoppablePhotosResponseData struct {

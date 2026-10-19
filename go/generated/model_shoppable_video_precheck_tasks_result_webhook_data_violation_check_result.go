@@ -22,7 +22,10 @@ type ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult struct {
 	// Possible enumerations:    `SUCCESS`   `FAIL`   `PROCESSING`
 	Status *string `json:"status,omitempty"`
 	Issues []ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue `json:"issues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult
 
 // NewShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult instantiates a new ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult) ToMap(
 	if !IsNil(o.Issues) {
 		toSerialize["issues"] = o.Issues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult) UnmarshalJSON(data []byte) (err error) {
+	varShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult := _ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult{}
+
+	err = json.Unmarshal(data, &varShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult(varShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "issues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult struct {

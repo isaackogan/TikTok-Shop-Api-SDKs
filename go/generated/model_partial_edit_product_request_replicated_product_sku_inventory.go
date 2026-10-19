@@ -23,7 +23,10 @@ type PartialEditProductRequestReplicatedProductSkuInventory struct {
 	Quantity *int64 `json:"quantity,omitempty"`
 	// The warehouse ID. Retrieve this value from the [Get Warehouse List API](650aa418defece02be6e66b6) or Get Inventory Rules API. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
 	WarehouseId *string `json:"warehouse_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestReplicatedProductSkuInventory PartialEditProductRequestReplicatedProductSkuInventory
 
 // NewPartialEditProductRequestReplicatedProductSkuInventory instantiates a new PartialEditProductRequestReplicatedProductSkuInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PartialEditProductRequestReplicatedProductSkuInventory) ToMap() (map[str
 	if !IsNil(o.WarehouseId) {
 		toSerialize["warehouse_id"] = o.WarehouseId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestReplicatedProductSkuInventory) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestReplicatedProductSkuInventory := _PartialEditProductRequestReplicatedProductSkuInventory{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestReplicatedProductSkuInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestReplicatedProductSkuInventory(varPartialEditProductRequestReplicatedProductSkuInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestReplicatedProductSkuInventory struct {

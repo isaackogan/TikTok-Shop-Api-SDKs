@@ -26,7 +26,10 @@ type UploadMessageImageResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *UploadMessageImageResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadMessageImageResponse UploadMessageImageResponse
 
 // NewUploadMessageImageResponse instantiates a new UploadMessageImageResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UploadMessageImageResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadMessageImageResponse) UnmarshalJSON(data []byte) (err error) {
+	varUploadMessageImageResponse := _UploadMessageImageResponse{}
+
+	err = json.Unmarshal(data, &varUploadMessageImageResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadMessageImageResponse(varUploadMessageImageResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadMessageImageResponse struct {

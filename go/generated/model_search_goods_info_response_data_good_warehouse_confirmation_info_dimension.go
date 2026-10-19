@@ -27,7 +27,10 @@ type SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension struct {
 	Height *string `json:"height,omitempty"`
 	// Dimension unit.  Possible values: - MILLIMETER  - CENTIMETER - METER  - FOOT  - INCH - MICRO
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension
 
 // NewSearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension instantiates a new SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension) ToMap
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension := _SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension(varSearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension struct {

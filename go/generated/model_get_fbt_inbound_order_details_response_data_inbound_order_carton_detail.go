@@ -27,7 +27,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail struct {
 	BoxMeasurements *GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement `json:"box_measurements,omitempty"`
 	// List of items in this carton.
 	Items []GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem `json:"items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail) ToMap() (
 	if !IsNil(o.Items) {
 		toSerialize["items"] = o.Items
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail := _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail(varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "carton_no")
+		delete(additionalProperties, "carton_type")
+		delete(additionalProperties, "box_measurements")
+		delete(additionalProperties, "items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail struct {

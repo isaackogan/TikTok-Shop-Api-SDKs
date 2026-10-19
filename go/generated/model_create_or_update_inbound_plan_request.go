@@ -27,7 +27,10 @@ type CreateOrUpdateInboundPlanRequest struct {
 	GoodsItems []CreateOrUpdateInboundPlanRequestGoodsItem `json:"goods_items,omitempty"`
 	// Carton List.
 	Cartons []Carton `json:"cartons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateOrUpdateInboundPlanRequest CreateOrUpdateInboundPlanRequest
 
 // NewCreateOrUpdateInboundPlanRequest instantiates a new CreateOrUpdateInboundPlanRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CreateOrUpdateInboundPlanRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Cartons) {
 		toSerialize["cartons"] = o.Cartons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateOrUpdateInboundPlanRequest) UnmarshalJSON(data []byte) (err error) {
+	varCreateOrUpdateInboundPlanRequest := _CreateOrUpdateInboundPlanRequest{}
+
+	err = json.Unmarshal(data, &varCreateOrUpdateInboundPlanRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOrUpdateInboundPlanRequest(varCreateOrUpdateInboundPlanRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "plan_id")
+		delete(additionalProperties, "idempotent_key")
+		delete(additionalProperties, "goods_items")
+		delete(additionalProperties, "cartons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateOrUpdateInboundPlanRequest struct {

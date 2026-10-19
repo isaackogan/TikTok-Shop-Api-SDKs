@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreatePackagesRequestWeight struct {
 	Value string `json:"value"`
 	// The unit of measurement for the package weight.  Available values: - `GRAM` - `POUND`
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatePackagesRequestWeight CreatePackagesRequestWeight
@@ -108,6 +108,11 @@ func (o CreatePackagesRequestWeight) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreatePackagesRequestWeight) UnmarshalJSON(data []byte) (err error) {
 
 	varCreatePackagesRequestWeight := _CreatePackagesRequestWeight{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatePackagesRequestWeight)
+	err = json.Unmarshal(data, &varCreatePackagesRequestWeight)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatePackagesRequestWeight(varCreatePackagesRequestWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

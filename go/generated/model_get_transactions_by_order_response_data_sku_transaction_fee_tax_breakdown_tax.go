@@ -57,7 +57,10 @@ type GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax struct {
 	AutoPostShoppableVideoSalesTax *string `json:"auto_post_shoppable_video_sales_tax,omitempty"`
 	// Article 22 Income Tax withheld by the platform under PMK 37/2025
 	Article22IncomeTaxWithheld *string `json:"article_22_income_tax_withheld,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax
 
 // NewGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax instantiates a new GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax object
 // This constructor will assign default values to properties that have it defined,
@@ -751,7 +754,51 @@ func (o GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax) ToMa
 	if !IsNil(o.Article22IncomeTaxWithheld) {
 		toSerialize["article_22_income_tax_withheld"] = o.Article22IncomeTaxWithheld
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax := _GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax(varGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "vat_amount")
+		delete(additionalProperties, "import_vat_amount")
+		delete(additionalProperties, "customs_duty_amount")
+		delete(additionalProperties, "customs_clearance_amount")
+		delete(additionalProperties, "sst_amount")
+		delete(additionalProperties, "gst_amount")
+		delete(additionalProperties, "iva_amount")
+		delete(additionalProperties, "isr_amount")
+		delete(additionalProperties, "anti_dumping_duty_amount")
+		delete(additionalProperties, "local_vat_amount")
+		delete(additionalProperties, "pit_amount")
+		delete(additionalProperties, "sales_tax_referral_fee_amount")
+		delete(additionalProperties, "smart_promotion_fee_tax_amount")
+		delete(additionalProperties, "cedular_tax")
+		delete(additionalProperties, "new_customer_growth_package_fee_tax")
+		delete(additionalProperties, "store_gmv_growth_package_fee_sales_tax")
+		delete(additionalProperties, "target_product_gmv_growth_package_tax")
+		delete(additionalProperties, "auto_post_shoppable_video_sales_tax")
+		delete(additionalProperties, "article_22_income_tax_withheld")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax struct {

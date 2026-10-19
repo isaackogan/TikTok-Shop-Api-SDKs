@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type UpdatePromotionActivityProductsRequestProduct struct {
 	QuantityPerUser int64 `json:"quantity_per_user"`
 	// The SKUs to add to the list or to edit. The number of the SKUs across all products must not exceed 300 in an API call. For a product-discount or flash-deal activity with `product_level==VARIATION`, every product must contain at least one SKU. For those activity types with `product_level==PRODUCT`, specify `[]`.
 	Skus []UpdatePromotionActivityProductsRequestProductSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdatePromotionActivityProductsRequestProduct UpdatePromotionActivityProductsRequestProduct
@@ -247,6 +247,11 @@ func (o UpdatePromotionActivityProductsRequestProduct) ToMap() (map[string]inter
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -276,15 +281,25 @@ func (o *UpdatePromotionActivityProductsRequestProduct) UnmarshalJSON(data []byt
 
 	varUpdatePromotionActivityProductsRequestProduct := _UpdatePromotionActivityProductsRequestProduct{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdatePromotionActivityProductsRequestProduct)
+	err = json.Unmarshal(data, &varUpdatePromotionActivityProductsRequestProduct)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdatePromotionActivityProductsRequestProduct(varUpdatePromotionActivityProductsRequestProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "activity_price_amount")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "quantity_limit")
+		delete(additionalProperties, "quantity_per_user")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

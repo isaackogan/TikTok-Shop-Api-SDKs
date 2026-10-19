@@ -29,7 +29,10 @@ type GetShopPerformanceResponseDataPerformanceInterval struct {
 	StartDate *string `json:"start_date,omitempty"`
 	// Traffic data for the interval.
 	Traffic *GetShopPerformanceResponseDataPerformanceIntervalTraffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceInterval GetShopPerformanceResponseDataPerformanceInterval
 
 // NewGetShopPerformanceResponseDataPerformanceInterval instantiates a new GetShopPerformanceResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopPerformanceResponseDataPerformanceInterval) ToMap() (map[string]i
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceInterval := _GetShopPerformanceResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceInterval(varGetShopPerformanceResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "breakdowns")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceInterval struct {

@@ -25,7 +25,10 @@ type GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason struct {
 	CategoryId *string `json:"category_id,omitempty"`
 	// For category verification, return the maximum quantity of goods allowed for this category in a single package; for total product quantity verification within the package, return the total quantity limit of goods in a single package.
 	MaxCount *string `json:"max_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason
 
 // NewGetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason instantiates a new GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason) ToMap(
 	if !IsNil(o.MaxCount) {
 		toSerialize["max_count"] = o.MaxCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason := _GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason{}
+
+	err = json.Unmarshal(data, &varGetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason(varGetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "max_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason struct {

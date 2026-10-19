@@ -27,7 +27,10 @@ type GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping struct {
 	GlobalValueId *string `json:"global_value_id,omitempty"`
 	// The local sales attribute value ID.
 	LocalValueId *string `json:"local_value_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping
 
 // NewGetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping instantiates a new GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping) ToMa
 	if !IsNil(o.LocalValueId) {
 		toSerialize["local_value_id"] = o.LocalValueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping := _GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping(varGetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_attribute_id")
+		delete(additionalProperties, "local_attribute_id")
+		delete(additionalProperties, "global_value_id")
+		delete(additionalProperties, "local_value_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping struct {

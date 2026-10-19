@@ -49,7 +49,10 @@ type QueryTargetCollaborationDetailResponseDataTargetCollaboration struct {
 	Creators []QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator `json:"creators,omitempty"`
 	// The type of target collaboration. Field values: - STANDARD: The target collaboration is created by sellers manually selecting products and creators. - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program, requiring only product submission.
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponseDataTargetCollaboration QueryTargetCollaborationDetailResponseDataTargetCollaboration
 
 // NewQueryTargetCollaborationDetailResponseDataTargetCollaboration instantiates a new QueryTargetCollaborationDetailResponseDataTargetCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -603,7 +606,47 @@ func (o QueryTargetCollaborationDetailResponseDataTargetCollaboration) ToMap() (
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponseDataTargetCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponseDataTargetCollaboration := _QueryTargetCollaborationDetailResponseDataTargetCollaboration{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponseDataTargetCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponseDataTargetCollaboration(varQueryTargetCollaborationDetailResponseDataTargetCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "seller_contact_info")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "creator_invited_count")
+		delete(additionalProperties, "showcase_creator_count")
+		delete(additionalProperties, "content_creator_count")
+		delete(additionalProperties, "product_count")
+		delete(additionalProperties, "free_sample_rule")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "creators")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponseDataTargetCollaboration struct {

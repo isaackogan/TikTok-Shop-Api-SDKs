@@ -25,7 +25,10 @@ type GetSPSOverviewResponseDataBenefit struct {
 	IsUnlocked *bool `json:"is_unlocked,omitempty"`
 	// Score required to unlock the benefit, from 0 to 5.
 	UnlockScore *string `json:"unlock_score,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSOverviewResponseDataBenefit GetSPSOverviewResponseDataBenefit
 
 // NewGetSPSOverviewResponseDataBenefit instantiates a new GetSPSOverviewResponseDataBenefit object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetSPSOverviewResponseDataBenefit) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.UnlockScore) {
 		toSerialize["unlock_score"] = o.UnlockScore
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSOverviewResponseDataBenefit) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSOverviewResponseDataBenefit := _GetSPSOverviewResponseDataBenefit{}
+
+	err = json.Unmarshal(data, &varGetSPSOverviewResponseDataBenefit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSOverviewResponseDataBenefit(varGetSPSOverviewResponseDataBenefit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "benefit_name")
+		delete(additionalProperties, "is_unlocked")
+		delete(additionalProperties, "unlock_score")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSOverviewResponseDataBenefit struct {

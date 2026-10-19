@@ -23,7 +23,10 @@ type Tax struct {
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Tax Tax
 
 // NewTax instantiates a new Tax object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Tax) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Tax) UnmarshalJSON(data []byte) (err error) {
+	varTax := _Tax{}
+
+	err = json.Unmarshal(data, &varTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Tax(varTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTax struct {

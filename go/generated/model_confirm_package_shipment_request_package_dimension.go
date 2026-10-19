@@ -27,7 +27,10 @@ type ConfirmPackageShipmentRequestPackageDimension struct {
 	Height *int64 `json:"height,omitempty"`
 	// Package dimension unit Possible values: - METER - CENTIMETER - MILLIMETER - MICRON - FOOT - INCH
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmPackageShipmentRequestPackageDimension ConfirmPackageShipmentRequestPackageDimension
 
 // NewConfirmPackageShipmentRequestPackageDimension instantiates a new ConfirmPackageShipmentRequestPackageDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ConfirmPackageShipmentRequestPackageDimension) ToMap() (map[string]inter
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmPackageShipmentRequestPackageDimension) UnmarshalJSON(data []byte) (err error) {
+	varConfirmPackageShipmentRequestPackageDimension := _ConfirmPackageShipmentRequestPackageDimension{}
+
+	err = json.Unmarshal(data, &varConfirmPackageShipmentRequestPackageDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmPackageShipmentRequestPackageDimension(varConfirmPackageShipmentRequestPackageDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmPackageShipmentRequestPackageDimension struct {

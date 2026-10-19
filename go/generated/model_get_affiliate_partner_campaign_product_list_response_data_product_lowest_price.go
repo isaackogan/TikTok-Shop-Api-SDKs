@@ -23,7 +23,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice struct
 	Currency *string `json:"currency,omitempty"`
 	// The lowest price amount.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice) To
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice := _GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice(varGetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice struct {

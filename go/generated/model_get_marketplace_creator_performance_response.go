@@ -26,7 +26,10 @@ type GetMarketplaceCreatorPerformanceResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetMarketplaceCreatorPerformanceResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponse GetMarketplaceCreatorPerformanceResponse
 
 // NewGetMarketplaceCreatorPerformanceResponse instantiates a new GetMarketplaceCreatorPerformanceResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetMarketplaceCreatorPerformanceResponse) ToMap() (map[string]interface{
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponse := _GetMarketplaceCreatorPerformanceResponse{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponse(varGetMarketplaceCreatorPerformanceResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponse struct {

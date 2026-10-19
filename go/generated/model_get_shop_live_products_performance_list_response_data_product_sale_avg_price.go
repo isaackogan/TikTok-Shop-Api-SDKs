@@ -23,7 +23,10 @@ type GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice struct {
 	Currency *string `json:"currency,omitempty"`
 	// Average price amount in the corresponding currency.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice instantiates a new GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice) ToMap
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice := _GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice(varGetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice struct {

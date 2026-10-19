@@ -33,7 +33,10 @@ type GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility struct
 	AvailableReasonNames []string `json:"available_reason_names,omitempty"`
 	// Specifies the order line items. **Note:** This field is completely backward compatible with the previous `order_line_items_ids` field.
 	OrderLineList []OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility
 
 // NewGetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility instantiates a new GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility) To
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility) UnmarshalJSON(data []byte) (err error) {
+	varGetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility := _GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility{}
+
+	err = json.Unmarshal(data, &varGetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility(varGetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "request_type")
+		delete(additionalProperties, "order_line_items_ids")
+		delete(additionalProperties, "eligible")
+		delete(additionalProperties, "ineligible_code")
+		delete(additionalProperties, "ineligible_reason")
+		delete(additionalProperties, "available_reason_names")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateResponsiblePersonRequestPhoneNumber struct {
 	CountryCode string `json:"country_code"`
 	// The local number. Length: 7 - 11 digits
 	LocalNumber string `json:"local_number"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateResponsiblePersonRequestPhoneNumber CreateResponsiblePersonRequestPhoneNumber
@@ -108,6 +108,11 @@ func (o CreateResponsiblePersonRequestPhoneNumber) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["country_code"] = o.CountryCode
 	toSerialize["local_number"] = o.LocalNumber
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateResponsiblePersonRequestPhoneNumber) UnmarshalJSON(data []byte) (
 
 	varCreateResponsiblePersonRequestPhoneNumber := _CreateResponsiblePersonRequestPhoneNumber{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateResponsiblePersonRequestPhoneNumber)
+	err = json.Unmarshal(data, &varCreateResponsiblePersonRequestPhoneNumber)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateResponsiblePersonRequestPhoneNumber(varCreateResponsiblePersonRequestPhoneNumber)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "local_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

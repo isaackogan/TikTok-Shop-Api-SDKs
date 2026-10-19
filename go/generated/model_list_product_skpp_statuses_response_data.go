@@ -25,7 +25,10 @@ type ListProductSKPPStatusesResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Date of the offline data snapshot that total_score and rewards are derived from, returned as a Unix timestamp in seconds, pinned to the last second of that date in UTC (23:59:59Z). The value is date-level only — the time component is always 23:59:59 UTC — because the SKPP scoring runs in an offline pipeline with no intraday granularity. Latency is typically T+1 (the evening of day N publishes the day N−1 snapshot) and at most T+2.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListProductSKPPStatusesResponseData ListProductSKPPStatusesResponseData
 
 // NewListProductSKPPStatusesResponseData instantiates a new ListProductSKPPStatusesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ListProductSKPPStatusesResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListProductSKPPStatusesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varListProductSKPPStatusesResponseData := _ListProductSKPPStatusesResponseData{}
+
+	err = json.Unmarshal(data, &varListProductSKPPStatusesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListProductSKPPStatusesResponseData(varListProductSKPPStatusesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListProductSKPPStatusesResponseData struct {

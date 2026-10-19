@@ -31,7 +31,10 @@ type GetShopVideoPerformanceListResponseDataVideoCreator struct {
 	OpenId *string `json:"open_id,omitempty"`
 	// Creator username (handle).
 	UserName *string `json:"user_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceListResponseDataVideoCreator GetShopVideoPerformanceListResponseDataVideoCreator
 
 // NewGetShopVideoPerformanceListResponseDataVideoCreator instantiates a new GetShopVideoPerformanceListResponseDataVideoCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetShopVideoPerformanceListResponseDataVideoCreator) ToMap() (map[string
 	if !IsNil(o.UserName) {
 		toSerialize["user_name"] = o.UserName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceListResponseDataVideoCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceListResponseDataVideoCreator := _GetShopVideoPerformanceListResponseDataVideoCreator{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceListResponseDataVideoCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceListResponseDataVideoCreator(varGetShopVideoPerformanceListResponseDataVideoCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "author_type")
+		delete(additionalProperties, "creator_country")
+		delete(additionalProperties, "creator_id")
+		delete(additionalProperties, "nick_name")
+		delete(additionalProperties, "open_id")
+		delete(additionalProperties, "user_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceListResponseDataVideoCreator struct {

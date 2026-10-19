@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type CreatePromotionActivityRequest struct {
 	TargetUserInfo *CreatePromotionActivityRequestTargetUserInfo `json:"target_user_info,omitempty"`
 	// For `SHIPPING_DISCOUNT` activities, determines whether auction products are supported. Possible values: - `ALL`: Support both regular and auction products. - `EXCLUDE_AUCTION`: Exclude auction products. Default: `ALL`.
 	AuctionSupportType *string `json:"auction_support_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatePromotionActivityRequest CreatePromotionActivityRequest
@@ -377,6 +377,11 @@ func (o CreatePromotionActivityRequest) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.AuctionSupportType) {
 		toSerialize["auction_support_type"] = o.AuctionSupportType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -408,15 +413,29 @@ func (o *CreatePromotionActivityRequest) UnmarshalJSON(data []byte) (err error) 
 
 	varCreatePromotionActivityRequest := _CreatePromotionActivityRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatePromotionActivityRequest)
+	err = json.Unmarshal(data, &varCreatePromotionActivityRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatePromotionActivityRequest(varCreatePromotionActivityRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "activity_type")
+		delete(additionalProperties, "product_level")
+		delete(additionalProperties, "duration_type")
+		delete(additionalProperties, "begin_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "participation_limit")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "target_user_info")
+		delete(additionalProperties, "auction_support_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -33,7 +33,10 @@ type ListProductSKPPStatusesResponseDataProduct struct {
 	TargetScore *int64 `json:"target_score,omitempty"`
 	// Rewards data.
 	Rewards []ListProductSKPPStatusesResponseDataProductReward `json:"rewards,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListProductSKPPStatusesResponseDataProduct ListProductSKPPStatusesResponseDataProduct
 
 // NewListProductSKPPStatusesResponseDataProduct instantiates a new ListProductSKPPStatusesResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o ListProductSKPPStatusesResponseDataProduct) ToMap() (map[string]interfac
 	if !IsNil(o.Rewards) {
 		toSerialize["rewards"] = o.Rewards
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListProductSKPPStatusesResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varListProductSKPPStatusesResponseDataProduct := _ListProductSKPPStatusesResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varListProductSKPPStatusesResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListProductSKPPStatusesResponseDataProduct(varListProductSKPPStatusesResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "skpp_status")
+		delete(additionalProperties, "affiliate_program_status")
+		delete(additionalProperties, "total_score")
+		delete(additionalProperties, "target_score")
+		delete(additionalProperties, "rewards")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListProductSKPPStatusesResponseDataProduct struct {

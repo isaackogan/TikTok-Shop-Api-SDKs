@@ -33,7 +33,10 @@ type RefundAmount struct {
 	RetailDeliveryFee *string `json:"retail_delivery_fee,omitempty"`
 	// Buyer service fee.
 	BuyerServiceFee *string `json:"buyer_service_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RefundAmount RefundAmount
 
 // NewRefundAmount instantiates a new RefundAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o RefundAmount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BuyerServiceFee) {
 		toSerialize["buyer_service_fee"] = o.BuyerServiceFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RefundAmount) UnmarshalJSON(data []byte) (err error) {
+	varRefundAmount := _RefundAmount{}
+
+	err = json.Unmarshal(data, &varRefundAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RefundAmount(varRefundAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "refund_total")
+		delete(additionalProperties, "refund_subtotal")
+		delete(additionalProperties, "refund_shipping_fee")
+		delete(additionalProperties, "refund_tax")
+		delete(additionalProperties, "retail_delivery_fee")
+		delete(additionalProperties, "buyer_service_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRefundAmount struct {

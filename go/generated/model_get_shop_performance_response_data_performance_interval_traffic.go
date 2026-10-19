@@ -33,7 +33,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalTraffic struct {
 	UniqueClicks *int64 `json:"unique_clicks,omitempty"`
 	// Total number of unique product impressions during the selected period.
 	UniqueProductImpressions *int64 `json:"unique_product_impressions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalTraffic GetShopPerformanceResponseDataPerformanceIntervalTraffic
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalTraffic instantiates a new GetShopPerformanceResponseDataPerformanceIntervalTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalTraffic) ToMap() (map[s
 	if !IsNil(o.UniqueProductImpressions) {
 		toSerialize["unique_product_impressions"] = o.UniqueProductImpressions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalTraffic := _GetShopPerformanceResponseDataPerformanceIntervalTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalTraffic(varGetShopPerformanceResponseDataPerformanceIntervalTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_conversation_rate")
+		delete(additionalProperties, "avg_page_views")
+		delete(additionalProperties, "avg_visitors")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "unique_clicks")
+		delete(additionalProperties, "unique_product_impressions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalTraffic struct {

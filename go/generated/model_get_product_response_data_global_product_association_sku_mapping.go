@@ -25,7 +25,10 @@ type GetProductResponseDataGlobalProductAssociationSkuMapping struct {
 	LocalSkuId *string `json:"local_sku_id,omitempty"`
 	// The list of sales attribute mappings between the global and local SKUs.
 	SalesAttributeMappings []GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping `json:"sales_attribute_mappings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataGlobalProductAssociationSkuMapping GetProductResponseDataGlobalProductAssociationSkuMapping
 
 // NewGetProductResponseDataGlobalProductAssociationSkuMapping instantiates a new GetProductResponseDataGlobalProductAssociationSkuMapping object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataGlobalProductAssociationSkuMapping) ToMap() (map[s
 	if !IsNil(o.SalesAttributeMappings) {
 		toSerialize["sales_attribute_mappings"] = o.SalesAttributeMappings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataGlobalProductAssociationSkuMapping) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataGlobalProductAssociationSkuMapping := _GetProductResponseDataGlobalProductAssociationSkuMapping{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataGlobalProductAssociationSkuMapping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataGlobalProductAssociationSkuMapping(varGetProductResponseDataGlobalProductAssociationSkuMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_sku_id")
+		delete(additionalProperties, "local_sku_id")
+		delete(additionalProperties, "sales_attribute_mappings")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataGlobalProductAssociationSkuMapping struct {

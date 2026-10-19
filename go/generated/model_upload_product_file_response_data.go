@@ -27,7 +27,10 @@ type UploadProductFileResponseData struct {
 	Name *string `json:"name,omitempty"`
 	// The format of the file. Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG
 	Format *string `json:"format,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadProductFileResponseData UploadProductFileResponseData
 
 // NewUploadProductFileResponseData instantiates a new UploadProductFileResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o UploadProductFileResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadProductFileResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadProductFileResponseData := _UploadProductFileResponseData{}
+
+	err = json.Unmarshal(data, &varUploadProductFileResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadProductFileResponseData(varUploadProductFileResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "format")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadProductFileResponseData struct {

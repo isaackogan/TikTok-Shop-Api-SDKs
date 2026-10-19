@@ -23,7 +23,10 @@ type GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason
 	ServiceId *string `json:"service_id,omitempty"`
 	// Reasons this shipping service is unavailable for the template.
 	FilterReason []GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReasonFilterReason `json:"filter_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason
 
 // NewGetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason instantiates a new GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableRea
 	if !IsNil(o.FilterReason) {
 		toSerialize["filter_reason"] = o.FilterReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason := _GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason(varGetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "service_id")
+		delete(additionalProperties, "filter_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason struct {

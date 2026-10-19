@@ -23,7 +23,10 @@ type DataPoint struct {
 	Value *string `json:"value,omitempty"`
 	// The time of the data points
 	Timestamp *int64 `json:"timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DataPoint DataPoint
 
 // NewDataPoint instantiates a new DataPoint object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DataPoint) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Timestamp) {
 		toSerialize["timestamp"] = o.Timestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DataPoint) UnmarshalJSON(data []byte) (err error) {
+	varDataPoint := _DataPoint{}
+
+	err = json.Unmarshal(data, &varDataPoint)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DataPoint(varDataPoint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDataPoint struct {

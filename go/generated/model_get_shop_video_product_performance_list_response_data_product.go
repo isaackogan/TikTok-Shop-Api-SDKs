@@ -39,7 +39,10 @@ type GetShopVideoProductPerformanceListResponseDataProduct struct {
 	ProductImpressions *int64 `json:"product_impressions,omitempty"`
 	// Number of units sold for the current product.
 	UnitsSold *int64 `json:"units_sold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoProductPerformanceListResponseDataProduct GetShopVideoProductPerformanceListResponseDataProduct
 
 // NewGetShopVideoProductPerformanceListResponseDataProduct instantiates a new GetShopVideoProductPerformanceListResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetShopVideoProductPerformanceListResponseDataProduct) ToMap() (map[stri
 	if !IsNil(o.UnitsSold) {
 		toSerialize["units_sold"] = o.UnitsSold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoProductPerformanceListResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoProductPerformanceListResponseDataProduct := _GetShopVideoProductPerformanceListResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetShopVideoProductPerformanceListResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoProductPerformanceListResponseDataProduct(varGetShopVideoProductPerformanceListResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "daily_avg_buyers")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "units_sold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoProductPerformanceListResponseDataProduct struct {

@@ -26,7 +26,10 @@ type GetCampaignProductPerformanceListResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetCampaignProductPerformanceListResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponse GetCampaignProductPerformanceListResponse
 
 // NewGetCampaignProductPerformanceListResponse instantiates a new GetCampaignProductPerformanceListResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetCampaignProductPerformanceListResponse) ToMap() (map[string]interface
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponse := _GetCampaignProductPerformanceListResponse{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponse(varGetCampaignProductPerformanceListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponse struct {

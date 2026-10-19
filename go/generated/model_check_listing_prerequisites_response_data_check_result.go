@@ -25,7 +25,10 @@ type CheckListingPrerequisitesResponseDataCheckResult struct {
 	IsFailed *bool `json:"is_failed,omitempty"`
 	// The specific reasons for failing a certain `check_item`.
 	FailReasons []string `json:"fail_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckListingPrerequisitesResponseDataCheckResult CheckListingPrerequisitesResponseDataCheckResult
 
 // NewCheckListingPrerequisitesResponseDataCheckResult instantiates a new CheckListingPrerequisitesResponseDataCheckResult object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CheckListingPrerequisitesResponseDataCheckResult) ToMap() (map[string]in
 	if !IsNil(o.FailReasons) {
 		toSerialize["fail_reasons"] = o.FailReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckListingPrerequisitesResponseDataCheckResult) UnmarshalJSON(data []byte) (err error) {
+	varCheckListingPrerequisitesResponseDataCheckResult := _CheckListingPrerequisitesResponseDataCheckResult{}
+
+	err = json.Unmarshal(data, &varCheckListingPrerequisitesResponseDataCheckResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckListingPrerequisitesResponseDataCheckResult(varCheckListingPrerequisitesResponseDataCheckResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "check_item")
+		delete(additionalProperties, "is_failed")
+		delete(additionalProperties, "fail_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckListingPrerequisitesResponseDataCheckResult struct {

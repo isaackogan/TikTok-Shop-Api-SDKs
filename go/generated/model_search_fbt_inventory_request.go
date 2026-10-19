@@ -25,7 +25,10 @@ type SearchFBTInventoryRequest struct {
 	FbtWarehouseIds []string `json:"fbt_warehouse_ids,omitempty"`
 	// TikTok Shop SKU identifiers used to select goods matched to those SKUs. Maximum: 100 SKU IDs per request. Do not provide `sku_ids` and `goods_ids` in the same request; both fields may be omitted. For each matched goods record, the returned `goods.skus` list contains the SKU inventory supplied for that goods record and is not restricted to the requested SKU IDs.
 	SkuIds []string `json:"sku_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRequest SearchFBTInventoryRequest
 
 // NewSearchFBTInventoryRequest instantiates a new SearchFBTInventoryRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchFBTInventoryRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuIds) {
 		toSerialize["sku_ids"] = o.SkuIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRequest := _SearchFBTInventoryRequest{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRequest(varSearchFBTInventoryRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_ids")
+		delete(additionalProperties, "fbt_warehouse_ids")
+		delete(additionalProperties, "sku_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRequest struct {

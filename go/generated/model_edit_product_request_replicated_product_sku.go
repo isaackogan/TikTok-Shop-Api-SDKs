@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type EditProductRequestReplicatedProductSku struct {
 	Price EditProductRequestReplicatedProductSkuPrice `json:"price"`
 	// SKU inventory information per warehouse. This field is mandatory for other regions. But when syncing products from the US to MX, the MX product inventory field is optional.
 	Inventory []EditProductRequestReplicatedProductSkuInventory `json:"inventory,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditProductRequestReplicatedProductSku EditProductRequestReplicatedProductSku
@@ -191,6 +191,11 @@ func (o EditProductRequestReplicatedProductSku) ToMap() (map[string]interface{},
 	if !IsNil(o.Inventory) {
 		toSerialize["inventory"] = o.Inventory
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *EditProductRequestReplicatedProductSku) UnmarshalJSON(data []byte) (err
 
 	varEditProductRequestReplicatedProductSku := _EditProductRequestReplicatedProductSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditProductRequestReplicatedProductSku)
+	err = json.Unmarshal(data, &varEditProductRequestReplicatedProductSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditProductRequestReplicatedProductSku(varEditProductRequestReplicatedProductSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "inventory")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

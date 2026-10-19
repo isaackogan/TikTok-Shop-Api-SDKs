@@ -26,7 +26,10 @@ type GetCustomerServicePerformanceResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetCustomerServicePerformanceResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCustomerServicePerformanceResponse GetCustomerServicePerformanceResponse
 
 // NewGetCustomerServicePerformanceResponse instantiates a new GetCustomerServicePerformanceResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetCustomerServicePerformanceResponse) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCustomerServicePerformanceResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCustomerServicePerformanceResponse := _GetCustomerServicePerformanceResponse{}
+
+	err = json.Unmarshal(data, &varGetCustomerServicePerformanceResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCustomerServicePerformanceResponse(varGetCustomerServicePerformanceResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCustomerServicePerformanceResponse struct {

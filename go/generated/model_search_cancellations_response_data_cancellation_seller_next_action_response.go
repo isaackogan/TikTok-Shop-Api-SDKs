@@ -23,7 +23,10 @@ type SearchCancellationsResponseDataCancellationSellerNextActionResponse struct 
 	Action *string `json:"action,omitempty"`
 	// Unix timestamp in seconds indicating the deadline for the seller to perform the next action.
 	Deadline *int64 `json:"deadline,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCancellationsResponseDataCancellationSellerNextActionResponse SearchCancellationsResponseDataCancellationSellerNextActionResponse
 
 // NewSearchCancellationsResponseDataCancellationSellerNextActionResponse instantiates a new SearchCancellationsResponseDataCancellationSellerNextActionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCancellationsResponseDataCancellationSellerNextActionResponse) ToM
 	if !IsNil(o.Deadline) {
 		toSerialize["deadline"] = o.Deadline
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCancellationsResponseDataCancellationSellerNextActionResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchCancellationsResponseDataCancellationSellerNextActionResponse := _SearchCancellationsResponseDataCancellationSellerNextActionResponse{}
+
+	err = json.Unmarshal(data, &varSearchCancellationsResponseDataCancellationSellerNextActionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCancellationsResponseDataCancellationSellerNextActionResponse(varSearchCancellationsResponseDataCancellationSellerNextActionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "action")
+		delete(additionalProperties, "deadline")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCancellationsResponseDataCancellationSellerNextActionResponse struct {

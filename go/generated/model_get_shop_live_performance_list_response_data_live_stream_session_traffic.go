@@ -63,7 +63,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic struct {
 	Views *int64 `json:"views,omitempty"`
 	// LIVE-attributed GMV generated per 1,000 watch units.
 	WatchGpm *GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm `json:"watch_gpm,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -862,7 +865,54 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic) ToMap() 
 	if !IsNil(o.WatchGpm) {
 		toSerialize["watch_gpm"] = o.WatchGpm
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "acu")
+		delete(additionalProperties, "avg_viewing_duration")
+		delete(additionalProperties, "avg_viewing_duration_per_viewer")
+		delete(additionalProperties, "ctor")
+		delete(additionalProperties, "ctor_sku_order")
+		delete(additionalProperties, "ctr")
+		delete(additionalProperties, "gmv_per_hour")
+		delete(additionalProperties, "impressions")
+		delete(additionalProperties, "impressions_per_hour")
+		delete(additionalProperties, "live_ctr")
+		delete(additionalProperties, "order_rate_sku_orders")
+		delete(additionalProperties, "over_1m_live_viewing_rate")
+		delete(additionalProperties, "over_1m_views")
+		delete(additionalProperties, "pcu")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "products_added")
+		delete(additionalProperties, "show_gpm")
+		delete(additionalProperties, "tap_through_rate")
+		delete(additionalProperties, "viewers")
+		delete(additionalProperties, "views")
+		delete(additionalProperties, "watch_gpm")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic struct {

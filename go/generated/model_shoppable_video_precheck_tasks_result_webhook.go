@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ShoppableVideoPrecheckTasksResultWebhook struct {
 	// The UNIX timestamp when this webhook was triggered.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *ShoppableVideoPrecheckTasksResultWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShoppableVideoPrecheckTasksResultWebhook ShoppableVideoPrecheckTasksResultWebhook
@@ -227,6 +227,11 @@ func (o ShoppableVideoPrecheckTasksResultWebhook) ToMap() (map[string]interface{
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *ShoppableVideoPrecheckTasksResultWebhook) UnmarshalJSON(data []byte) (e
 
 	varShoppableVideoPrecheckTasksResultWebhook := _ShoppableVideoPrecheckTasksResultWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShoppableVideoPrecheckTasksResultWebhook)
+	err = json.Unmarshal(data, &varShoppableVideoPrecheckTasksResultWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShoppableVideoPrecheckTasksResultWebhook(varShoppableVideoPrecheckTasksResultWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

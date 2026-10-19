@@ -31,7 +31,10 @@ type GetActivityResponseDataDiscountBxgyDiscount struct {
 	BenefitMaxApplicableQuantity *string `json:"benefit_max_applicable_quantity,omitempty"`
 	// Optional. The maximum number of times the BXGY benefit can be applied within a single order. This value must be a positive integer.
 	BenefitMaxApplicableTimes *string `json:"benefit_max_applicable_times,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountBxgyDiscount GetActivityResponseDataDiscountBxgyDiscount
 
 // NewGetActivityResponseDataDiscountBxgyDiscount instantiates a new GetActivityResponseDataDiscountBxgyDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetActivityResponseDataDiscountBxgyDiscount) ToMap() (map[string]interfa
 	if !IsNil(o.BenefitMaxApplicableTimes) {
 		toSerialize["benefit_max_applicable_times"] = o.BenefitMaxApplicableTimes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountBxgyDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountBxgyDiscount := _GetActivityResponseDataDiscountBxgyDiscount{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountBxgyDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountBxgyDiscount(varGetActivityResponseDataDiscountBxgyDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "discount_type")
+		delete(additionalProperties, "discount_value")
+		delete(additionalProperties, "benefit_max_applicable_quantity")
+		delete(additionalProperties, "benefit_max_applicable_times")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountBxgyDiscount struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataCod{}
 type GetCategoryRulesResponseDataCod struct {
 	// A flag to indicate whether COD is supported.  **Note**: If COD is not supported, but you set `is_cod_allowed=true` when creating or editing a product, the listing will fail.
 	IsSupported *bool `json:"is_supported,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataCod GetCategoryRulesResponseDataCod
 
 // NewGetCategoryRulesResponseDataCod instantiates a new GetCategoryRulesResponseDataCod object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataCod) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.IsSupported) {
 		toSerialize["is_supported"] = o.IsSupported
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataCod) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataCod := _GetCategoryRulesResponseDataCod{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataCod)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataCod(varGetCategoryRulesResponseDataCod)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_supported")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataCod struct {

@@ -23,7 +23,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice struc
 	Currency *string `json:"currency,omitempty"`
 	// The highest price amount.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice) T
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice := _GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice(varGetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice struct {

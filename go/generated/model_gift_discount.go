@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GiftDiscount struct {
 	GiftReceivingType string `json:"gift_receiving_type"`
 	// Gift With Purchase tier configurations. Provide at least one tier. A maximum of two tiers is permitted in SEA and the UK, while only one tier is permitted in the US. `threshold_type` must be the same across all tiers.
 	GiftInfos []GiftInfo `json:"gift_infos"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GiftDiscount GiftDiscount
@@ -108,6 +108,11 @@ func (o GiftDiscount) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["gift_receiving_type"] = o.GiftReceivingType
 	toSerialize["gift_infos"] = o.GiftInfos
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *GiftDiscount) UnmarshalJSON(data []byte) (err error) {
 
 	varGiftDiscount := _GiftDiscount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGiftDiscount)
+	err = json.Unmarshal(data, &varGiftDiscount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GiftDiscount(varGiftDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gift_receiving_type")
+		delete(additionalProperties, "gift_infos")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

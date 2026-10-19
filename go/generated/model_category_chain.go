@@ -27,7 +27,10 @@ type CategoryChain struct {
 	IsLeaf *bool `json:"is_leaf,omitempty"`
 	// The category id of its parent category
 	ParentId *string `json:"parent_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CategoryChain CategoryChain
 
 // NewCategoryChain instantiates a new CategoryChain object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CategoryChain) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ParentId) {
 		toSerialize["parent_id"] = o.ParentId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CategoryChain) UnmarshalJSON(data []byte) (err error) {
+	varCategoryChain := _CategoryChain{}
+
+	err = json.Unmarshal(data, &varCategoryChain)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CategoryChain(varCategoryChain)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "local_name")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "parent_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCategoryChain struct {

@@ -23,7 +23,10 @@ type GetLiveRoomUserPortraitsResponseDataAllFanIndicator struct {
 	Type *string `json:"type,omitempty"`
 	// The count for the corresponding follower-status indicator.
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomUserPortraitsResponseDataAllFanIndicator GetLiveRoomUserPortraitsResponseDataAllFanIndicator
 
 // NewGetLiveRoomUserPortraitsResponseDataAllFanIndicator instantiates a new GetLiveRoomUserPortraitsResponseDataAllFanIndicator object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetLiveRoomUserPortraitsResponseDataAllFanIndicator) ToMap() (map[string
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomUserPortraitsResponseDataAllFanIndicator) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomUserPortraitsResponseDataAllFanIndicator := _GetLiveRoomUserPortraitsResponseDataAllFanIndicator{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomUserPortraitsResponseDataAllFanIndicator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomUserPortraitsResponseDataAllFanIndicator(varGetLiveRoomUserPortraitsResponseDataAllFanIndicator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomUserPortraitsResponseDataAllFanIndicator struct {

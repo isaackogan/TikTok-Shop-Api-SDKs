@@ -26,7 +26,10 @@ type SearchOrdersByExternalOrderReferenceResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchOrdersByExternalOrderReferenceResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOrdersByExternalOrderReferenceResponse SearchOrdersByExternalOrderReferenceResponse
 
 // NewSearchOrdersByExternalOrderReferenceResponse instantiates a new SearchOrdersByExternalOrderReferenceResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchOrdersByExternalOrderReferenceResponse) ToMap() (map[string]interf
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOrdersByExternalOrderReferenceResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchOrdersByExternalOrderReferenceResponse := _SearchOrdersByExternalOrderReferenceResponse{}
+
+	err = json.Unmarshal(data, &varSearchOrdersByExternalOrderReferenceResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOrdersByExternalOrderReferenceResponse(varSearchOrdersByExternalOrderReferenceResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOrdersByExternalOrderReferenceResponse struct {

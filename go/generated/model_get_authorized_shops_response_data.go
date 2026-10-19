@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAuthorizedShopsResponseData{}
 type GetAuthorizedShopsResponseData struct {
 	// The list of shops that a seller has authorized for the app.
 	Shops []GetAuthorizedShopsResponseDataShop `json:"shops,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAuthorizedShopsResponseData GetAuthorizedShopsResponseData
 
 // NewGetAuthorizedShopsResponseData instantiates a new GetAuthorizedShopsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAuthorizedShopsResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Shops) {
 		toSerialize["shops"] = o.Shops
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAuthorizedShopsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAuthorizedShopsResponseData := _GetAuthorizedShopsResponseData{}
+
+	err = json.Unmarshal(data, &varGetAuthorizedShopsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAuthorizedShopsResponseData(varGetAuthorizedShopsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shops")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAuthorizedShopsResponseData struct {

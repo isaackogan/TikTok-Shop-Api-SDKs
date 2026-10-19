@@ -81,7 +81,10 @@ type SearchSellerAffiliateOrdersResponseDataOrderSku struct {
 	FullyReturn *string `json:"fully_return,omitempty"`
 	// Indicates whether the SKU order is attributed to carousel content. Carousel content may involve a commission rate discount. Returns `true` for a carousel-attributed SKU order and `false` otherwise.
 	IsCarousel *bool `json:"is_carousel,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSellerAffiliateOrdersResponseDataOrderSku SearchSellerAffiliateOrdersResponseDataOrderSku
 
 // NewSearchSellerAffiliateOrdersResponseDataOrderSku instantiates a new SearchSellerAffiliateOrdersResponseDataOrderSku object
 // This constructor will assign default values to properties that have it defined,
@@ -1166,7 +1169,62 @@ func (o SearchSellerAffiliateOrdersResponseDataOrderSku) ToMap() (map[string]int
 	if !IsNil(o.IsCarousel) {
 		toSerialize["is_carousel"] = o.IsCarousel
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSellerAffiliateOrdersResponseDataOrderSku) UnmarshalJSON(data []byte) (err error) {
+	varSearchSellerAffiliateOrdersResponseDataOrderSku := _SearchSellerAffiliateOrdersResponseDataOrderSku{}
+
+	err = json.Unmarshal(data, &varSearchSellerAffiliateOrdersResponseDataOrderSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSellerAffiliateOrdersResponseDataOrderSku(varSearchSellerAffiliateOrdersResponseDataOrderSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "settlement_status")
+		delete(additionalProperties, "open_collaboration_id")
+		delete(additionalProperties, "target_collaboration_id")
+		delete(additionalProperties, "campaign_id")
+		delete(additionalProperties, "creator_username")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "content_type")
+		delete(additionalProperties, "content_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "commission_model")
+		delete(additionalProperties, "commission_tier_setting")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "partner_commission_rate")
+		delete(additionalProperties, "shop_ads_commission_rate")
+		delete(additionalProperties, "estimated_commission_base")
+		delete(additionalProperties, "estimated_paid_shop_ads_commission")
+		delete(additionalProperties, "estimated_paid_commission")
+		delete(additionalProperties, "estimated_paid_partner_commission")
+		delete(additionalProperties, "actual_commission_base")
+		delete(additionalProperties, "actual_paid_commission")
+		delete(additionalProperties, "actual_paid_partner_commission")
+		delete(additionalProperties, "actual_paid_shop_ads_commission")
+		delete(additionalProperties, "estimated_cofunded_creator_bonus_amount")
+		delete(additionalProperties, "actual_cofunded_creator_bonus_amount")
+		delete(additionalProperties, "refunded_quantity")
+		delete(additionalProperties, "returned_quantity")
+		delete(additionalProperties, "fully_return")
+		delete(additionalProperties, "is_carousel")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSellerAffiliateOrdersResponseDataOrderSku struct {

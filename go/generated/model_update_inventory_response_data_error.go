@@ -25,7 +25,10 @@ type UpdateInventoryResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// The details of the main error.
 	Detail *UpdateInventoryResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateInventoryResponseDataError UpdateInventoryResponseDataError
 
 // NewUpdateInventoryResponseDataError instantiates a new UpdateInventoryResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UpdateInventoryResponseDataError) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateInventoryResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varUpdateInventoryResponseDataError := _UpdateInventoryResponseDataError{}
+
+	err = json.Unmarshal(data, &varUpdateInventoryResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateInventoryResponseDataError(varUpdateInventoryResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateInventoryResponseDataError struct {

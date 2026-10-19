@@ -25,7 +25,10 @@ type GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea struct {
 	MinHeight *int64 `json:"min_height,omitempty"`
 	// The minimum required width, in pixels, for an image uploaded by the consumer.
 	MinWidth *int64 `json:"min_width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea
 
 // NewGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea instantiates a new GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea) ToMa
 	if !IsNil(o.MinWidth) {
 		toSerialize["min_width"] = o.MinWidth
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea := _GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea(varGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "default_image")
+		delete(additionalProperties, "min_height")
+		delete(additionalProperties, "min_width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PartialEditProductRequestPackageDimension struct {
 	Unit string `json:"unit"`
 	// The package width. A positive whole number. **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded to the nearest whole number.
 	Width string `json:"width"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestPackageDimension PartialEditProductRequestPackageDimension
@@ -164,6 +164,11 @@ func (o PartialEditProductRequestPackageDimension) ToMap() (map[string]interface
 	toSerialize["length"] = o.Length
 	toSerialize["unit"] = o.Unit
 	toSerialize["width"] = o.Width
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *PartialEditProductRequestPackageDimension) UnmarshalJSON(data []byte) (
 
 	varPartialEditProductRequestPackageDimension := _PartialEditProductRequestPackageDimension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestPackageDimension)
+	err = json.Unmarshal(data, &varPartialEditProductRequestPackageDimension)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestPackageDimension(varPartialEditProductRequestPackageDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type SearchResponsiblePersonsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// An opaque token used to retrieve the next page of a paginated result set. Provide this value in the `page_token` parameter of your request if the current response does not return all the results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchResponsiblePersonsResponseData SearchResponsiblePersonsResponseData
 
 // NewSearchResponsiblePersonsResponseData instantiates a new SearchResponsiblePersonsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchResponsiblePersonsResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchResponsiblePersonsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchResponsiblePersonsResponseData := _SearchResponsiblePersonsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchResponsiblePersonsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchResponsiblePersonsResponseData(varSearchResponsiblePersonsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "responsible_persons")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchResponsiblePersonsResponseData struct {

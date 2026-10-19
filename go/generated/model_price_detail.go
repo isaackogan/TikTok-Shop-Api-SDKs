@@ -29,7 +29,10 @@ type PriceDetail struct {
 	RefundShippingFee *string `json:"refund_shipping_fee,omitempty"`
 	// Ignore this field. It is not yet supported.
 	RefundTax *string `json:"refund_tax,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PriceDetail PriceDetail
 
 // NewPriceDetail instantiates a new PriceDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o PriceDetail) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RefundTax) {
 		toSerialize["refund_tax"] = o.RefundTax
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PriceDetail) UnmarshalJSON(data []byte) (err error) {
+	varPriceDetail := _PriceDetail{}
+
+	err = json.Unmarshal(data, &varPriceDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PriceDetail(varPriceDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "refund_total")
+		delete(additionalProperties, "refund_subtotal")
+		delete(additionalProperties, "refund_shipping_fee")
+		delete(additionalProperties, "refund_tax")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePriceDetail struct {

@@ -27,7 +27,10 @@ type GetGlobalProductResponseDataCertificationFile struct {
 	Name *string `json:"name,omitempty"`
 	// The format of the certification file.
 	Format *string `json:"format,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalProductResponseDataCertificationFile GetGlobalProductResponseDataCertificationFile
 
 // NewGetGlobalProductResponseDataCertificationFile instantiates a new GetGlobalProductResponseDataCertificationFile object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalProductResponseDataCertificationFile) ToMap() (map[string]inter
 	if !IsNil(o.Format) {
 		toSerialize["format"] = o.Format
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalProductResponseDataCertificationFile) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalProductResponseDataCertificationFile := _GetGlobalProductResponseDataCertificationFile{}
+
+	err = json.Unmarshal(data, &varGetGlobalProductResponseDataCertificationFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalProductResponseDataCertificationFile(varGetGlobalProductResponseDataCertificationFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "urls")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "format")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalProductResponseDataCertificationFile struct {

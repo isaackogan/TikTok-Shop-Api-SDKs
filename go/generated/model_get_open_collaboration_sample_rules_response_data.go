@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpenCollaborationSampleRulesResponseData{}
 type GetOpenCollaborationSampleRulesResponseData struct {
 	// The sample rules for the requested products. Products whose sample rules have never been created or have been deleted are omitted.
 	SampleRules []GetOpenCollaborationSampleRulesResponseDataSampleRule `json:"sample_rules,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSampleRulesResponseData GetOpenCollaborationSampleRulesResponseData
 
 // NewGetOpenCollaborationSampleRulesResponseData instantiates a new GetOpenCollaborationSampleRulesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpenCollaborationSampleRulesResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.SampleRules) {
 		toSerialize["sample_rules"] = o.SampleRules
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSampleRulesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSampleRulesResponseData := _GetOpenCollaborationSampleRulesResponseData{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSampleRulesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSampleRulesResponseData(varGetOpenCollaborationSampleRulesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sample_rules")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSampleRulesResponseData struct {

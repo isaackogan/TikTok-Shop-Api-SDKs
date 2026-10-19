@@ -23,7 +23,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour st
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour struct {

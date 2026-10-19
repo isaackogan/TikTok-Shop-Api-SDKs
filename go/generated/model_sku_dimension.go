@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type SkuDimension struct {
 	Height string `json:"height"`
 	// The unit for the SKU dimensions. Possible values based on region: - US: CENTIMETER, INCH - Other regions: CENTIMETER  Note: Use the same measurement system (metric or imperial) for `sku_weight` and `sku_dimensions`. For example, use `KILOGRAM` with `CENTIMETER`.
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SkuDimension SkuDimension
@@ -164,6 +164,11 @@ func (o SkuDimension) ToMap() (map[string]interface{}, error) {
 	toSerialize["width"] = o.Width
 	toSerialize["height"] = o.Height
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *SkuDimension) UnmarshalJSON(data []byte) (err error) {
 
 	varSkuDimension := _SkuDimension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSkuDimension)
+	err = json.Unmarshal(data, &varSkuDimension)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SkuDimension(varSkuDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

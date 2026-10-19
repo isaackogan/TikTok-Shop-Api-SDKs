@@ -26,7 +26,10 @@ type GetPackageHandoverTimeSlotsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetPackageHandoverTimeSlotsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageHandoverTimeSlotsResponse GetPackageHandoverTimeSlotsResponse
 
 // NewGetPackageHandoverTimeSlotsResponse instantiates a new GetPackageHandoverTimeSlotsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetPackageHandoverTimeSlotsResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageHandoverTimeSlotsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageHandoverTimeSlotsResponse := _GetPackageHandoverTimeSlotsResponse{}
+
+	err = json.Unmarshal(data, &varGetPackageHandoverTimeSlotsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageHandoverTimeSlotsResponse(varGetPackageHandoverTimeSlotsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageHandoverTimeSlotsResponse struct {

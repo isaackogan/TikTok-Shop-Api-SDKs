@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTMerchantMCFStatusResponseDataMcfStatus{}
 type GetFBTMerchantMCFStatusResponseDataMcfStatus struct {
 	// Flag indicating whether the seller has participated in Multi Channel Fulfillment. 0 means inactive and 1 means active.
 	IsMcf *int64 `json:"is_mcf,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMerchantMCFStatusResponseDataMcfStatus GetFBTMerchantMCFStatusResponseDataMcfStatus
 
 // NewGetFBTMerchantMCFStatusResponseDataMcfStatus instantiates a new GetFBTMerchantMCFStatusResponseDataMcfStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTMerchantMCFStatusResponseDataMcfStatus) ToMap() (map[string]interf
 	if !IsNil(o.IsMcf) {
 		toSerialize["is_mcf"] = o.IsMcf
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMerchantMCFStatusResponseDataMcfStatus) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMerchantMCFStatusResponseDataMcfStatus := _GetFBTMerchantMCFStatusResponseDataMcfStatus{}
+
+	err = json.Unmarshal(data, &varGetFBTMerchantMCFStatusResponseDataMcfStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMerchantMCFStatusResponseDataMcfStatus(varGetFBTMerchantMCFStatusResponseDataMcfStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_mcf")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMerchantMCFStatusResponseDataMcfStatus struct {

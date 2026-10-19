@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateCompassOfflineExportTaskResponseData{}
 type CreateCompassOfflineExportTaskResponseData struct {
 	// The task for creating downloadable files
 	Task *CreateCompassOfflineExportTaskResponseDataTask `json:"task,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCompassOfflineExportTaskResponseData CreateCompassOfflineExportTaskResponseData
 
 // NewCreateCompassOfflineExportTaskResponseData instantiates a new CreateCompassOfflineExportTaskResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateCompassOfflineExportTaskResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.Task) {
 		toSerialize["task"] = o.Task
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCompassOfflineExportTaskResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateCompassOfflineExportTaskResponseData := _CreateCompassOfflineExportTaskResponseData{}
+
+	err = json.Unmarshal(data, &varCreateCompassOfflineExportTaskResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCompassOfflineExportTaskResponseData(varCreateCompassOfflineExportTaskResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCompassOfflineExportTaskResponseData struct {

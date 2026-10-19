@@ -25,7 +25,10 @@ type SearchFBTInventoryRecordResponseDataInventoryRecordGood struct {
 	ReferenceCode *string `json:"reference_code,omitempty"`
 	// The goods name.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRecordResponseDataInventoryRecordGood SearchFBTInventoryRecordResponseDataInventoryRecordGood
 
 // NewSearchFBTInventoryRecordResponseDataInventoryRecordGood instantiates a new SearchFBTInventoryRecordResponseDataInventoryRecordGood object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchFBTInventoryRecordResponseDataInventoryRecordGood) ToMap() (map[st
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRecordResponseDataInventoryRecordGood) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRecordResponseDataInventoryRecordGood := _SearchFBTInventoryRecordResponseDataInventoryRecordGood{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRecordResponseDataInventoryRecordGood)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRecordResponseDataInventoryRecordGood(varSearchFBTInventoryRecordResponseDataInventoryRecordGood)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reference_code")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRecordResponseDataInventoryRecordGood struct {

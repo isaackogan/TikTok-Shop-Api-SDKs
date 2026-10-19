@@ -29,7 +29,10 @@ type SearchReturnsResponseDataReturnOrderDiscountAmount struct {
 	ShippingFeeSellerDiscount *string `json:"shipping_fee_seller_discount,omitempty"`
 	// The refund amount of platform discount.
 	ProductPlatformDiscount *string `json:"product_platform_discount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnsResponseDataReturnOrderDiscountAmount SearchReturnsResponseDataReturnOrderDiscountAmount
 
 // NewSearchReturnsResponseDataReturnOrderDiscountAmount instantiates a new SearchReturnsResponseDataReturnOrderDiscountAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchReturnsResponseDataReturnOrderDiscountAmount) ToMap() (map[string]
 	if !IsNil(o.ProductPlatformDiscount) {
 		toSerialize["product_platform_discount"] = o.ProductPlatformDiscount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnsResponseDataReturnOrderDiscountAmount) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnsResponseDataReturnOrderDiscountAmount := _SearchReturnsResponseDataReturnOrderDiscountAmount{}
+
+	err = json.Unmarshal(data, &varSearchReturnsResponseDataReturnOrderDiscountAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnsResponseDataReturnOrderDiscountAmount(varSearchReturnsResponseDataReturnOrderDiscountAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "product_seller_discount")
+		delete(additionalProperties, "shipping_fee_platform_discount")
+		delete(additionalProperties, "shipping_fee_seller_discount")
+		delete(additionalProperties, "product_platform_discount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnsResponseDataReturnOrderDiscountAmount struct {

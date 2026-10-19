@@ -29,7 +29,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceInterval struct {
 	Traffic *GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic `json:"traffic,omitempty"`
 	// cancel and refunds data
 	CancelAndRefunds *GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund `json:"cancel_and_refunds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceInterval GetShopProductPerformanceDetailResponseDataPerformanceInterval
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceInterval instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceInterval) ToMap() 
 	if !IsNil(o.CancelAndRefunds) {
 		toSerialize["cancel_and_refunds"] = o.CancelAndRefunds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceInterval := _GetShopProductPerformanceDetailResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceInterval(varGetShopProductPerformanceDetailResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "traffic")
+		delete(additionalProperties, "cancel_and_refunds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceInterval struct {

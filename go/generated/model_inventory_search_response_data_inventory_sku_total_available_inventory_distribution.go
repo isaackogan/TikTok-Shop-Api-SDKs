@@ -25,7 +25,10 @@ type InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution 
 	CreatorInventory []InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory `json:"creator_inventory,omitempty"`
 	// The remaining inventory available for the shop after deducting those allocated for campaigns and creators.
 	InShopInventory *InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionInShopInventory `json:"in_shop_inventory,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution
 
 // NewInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution instantiates a new InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributi
 	if !IsNil(o.InShopInventory) {
 		toSerialize["in_shop_inventory"] = o.InShopInventory
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution := _InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution(varInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "campaign_inventory")
+		delete(additionalProperties, "creator_inventory")
+		delete(additionalProperties, "in_shop_inventory")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution struct {

@@ -23,7 +23,10 @@ type SearchCreatorsInCreatorMarketplaceRequestCategory struct {
 	ParentCategoryId *string `json:"parent_category_id,omitempty"`
 	// If you are using the category ID for a child category, you must pass the parent category as well. A child category is only 1 level deeper than the parent category. We do not support going deeper down the category tree (some countries have 4 levels, others have 7)
 	ChildCategoryIdList []string `json:"child_category_id_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestCategory SearchCreatorsInCreatorMarketplaceRequestCategory
 
 // NewSearchCreatorsInCreatorMarketplaceRequestCategory instantiates a new SearchCreatorsInCreatorMarketplaceRequestCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorsInCreatorMarketplaceRequestCategory) ToMap() (map[string]i
 	if !IsNil(o.ChildCategoryIdList) {
 		toSerialize["child_category_id_list"] = o.ChildCategoryIdList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestCategory) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestCategory := _SearchCreatorsInCreatorMarketplaceRequestCategory{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestCategory(varSearchCreatorsInCreatorMarketplaceRequestCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "parent_category_id")
+		delete(additionalProperties, "child_category_id_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestCategory struct {

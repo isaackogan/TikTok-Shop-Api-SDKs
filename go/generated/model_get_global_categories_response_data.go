@@ -21,7 +21,10 @@ var _ MappedNullable = &GetGlobalCategoriesResponseData{}
 type GetGlobalCategoriesResponseData struct {
 	// The list of categories that meet the query conditions.
 	Categories []GetGlobalCategoriesResponseDataCategory `json:"categories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoriesResponseData GetGlobalCategoriesResponseData
 
 // NewGetGlobalCategoriesResponseData instantiates a new GetGlobalCategoriesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetGlobalCategoriesResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Categories) {
 		toSerialize["categories"] = o.Categories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoriesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoriesResponseData := _GetGlobalCategoriesResponseData{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoriesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoriesResponseData(varGetGlobalCategoriesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "categories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoriesResponseData struct {

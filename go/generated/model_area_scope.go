@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type AreaScope struct {
 	Type string `json:"type"`
 	// The list of areas for which the promotion activity applies. The valid values that may be included in this list are dependent on the region of the shop. The list of valid values for each shop region are available here: [link](https://partner.tiktokshop.com/docv2/page/67e3b059e7dc4f04a4ff9e09)
 	SpecificAreas []string `json:"specific_areas,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AreaScope AreaScope
@@ -117,6 +117,11 @@ func (o AreaScope) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SpecificAreas) {
 		toSerialize["specific_areas"] = o.SpecificAreas
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *AreaScope) UnmarshalJSON(data []byte) (err error) {
 
 	varAreaScope := _AreaScope{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAreaScope)
+	err = json.Unmarshal(data, &varAreaScope)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AreaScope(varAreaScope)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "specific_areas")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -25,7 +25,10 @@ type GetGlobalCategoryRulesResponseDataManufacturer struct {
 	OptionalRegions []string `json:"optional_regions,omitempty"`
 	// The markets where the manufacturer is required. Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GR: Greece - HU: Hungary - IE: Ireland - IT: Italy - NL: Netherlands - PL: Poland - PT: Portugal
 	RequiredRegions []string `json:"required_regions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoryRulesResponseDataManufacturer GetGlobalCategoryRulesResponseDataManufacturer
 
 // NewGetGlobalCategoryRulesResponseDataManufacturer instantiates a new GetGlobalCategoryRulesResponseDataManufacturer object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalCategoryRulesResponseDataManufacturer) ToMap() (map[string]inte
 	if !IsNil(o.RequiredRegions) {
 		toSerialize["required_regions"] = o.RequiredRegions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoryRulesResponseDataManufacturer) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoryRulesResponseDataManufacturer := _GetGlobalCategoryRulesResponseDataManufacturer{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoryRulesResponseDataManufacturer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoryRulesResponseDataManufacturer(varGetGlobalCategoryRulesResponseDataManufacturer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "optional_regions")
+		delete(additionalProperties, "required_regions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoryRulesResponseDataManufacturer struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &UpcomingAuthorizationExpirationWebhookData{}
 type UpcomingAuthorizationExpirationWebhookData struct {
 	Message *string `json:"message,omitempty"`
 	ExpirationTime *string `json:"expiration_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpcomingAuthorizationExpirationWebhookData UpcomingAuthorizationExpirationWebhookData
 
 // NewUpcomingAuthorizationExpirationWebhookData instantiates a new UpcomingAuthorizationExpirationWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -120,7 +123,34 @@ func (o UpcomingAuthorizationExpirationWebhookData) ToMap() (map[string]interfac
 	if !IsNil(o.ExpirationTime) {
 		toSerialize["expiration_time"] = o.ExpirationTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpcomingAuthorizationExpirationWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varUpcomingAuthorizationExpirationWebhookData := _UpcomingAuthorizationExpirationWebhookData{}
+
+	err = json.Unmarshal(data, &varUpcomingAuthorizationExpirationWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpcomingAuthorizationExpirationWebhookData(varUpcomingAuthorizationExpirationWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "expiration_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpcomingAuthorizationExpirationWebhookData struct {

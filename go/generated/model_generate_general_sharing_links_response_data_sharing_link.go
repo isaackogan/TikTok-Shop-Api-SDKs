@@ -27,7 +27,10 @@ type GenerateGeneralSharingLinksResponseDataSharingLink struct {
 	DeepLink *string `json:"deep_link,omitempty"`
 	// A product promotion one-link that opens the corresponding TikTok Shop product detail page. It is returned for `PRODUCT` requests that use the TikTok Shop link type and is omitted when `link_type` is `TOKO`. Agencies can share this link with collaborated creators, and creators can copy and paste it into a web browser or share it with users.  To enable attribution, replace the `o_event_id` placeholder in the returned `one_link` URL with a developer-generated unique ID for each click. Do not URL-encode or URL-decode the returned link. If a user places an order through this link, the resulting e-commerce order carries the event ID for tracking. If the user does not have TikTok installed, the link redirects the user to the app store to install TikTok.
 	OneLink *string `json:"one_link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateGeneralSharingLinksResponseDataSharingLink GenerateGeneralSharingLinksResponseDataSharingLink
 
 // NewGenerateGeneralSharingLinksResponseDataSharingLink instantiates a new GenerateGeneralSharingLinksResponseDataSharingLink object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GenerateGeneralSharingLinksResponseDataSharingLink) ToMap() (map[string]
 	if !IsNil(o.OneLink) {
 		toSerialize["one_link"] = o.OneLink
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateGeneralSharingLinksResponseDataSharingLink) UnmarshalJSON(data []byte) (err error) {
+	varGenerateGeneralSharingLinksResponseDataSharingLink := _GenerateGeneralSharingLinksResponseDataSharingLink{}
+
+	err = json.Unmarshal(data, &varGenerateGeneralSharingLinksResponseDataSharingLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateGeneralSharingLinksResponseDataSharingLink(varGenerateGeneralSharingLinksResponseDataSharingLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "material_id")
+		delete(additionalProperties, "sharing_link")
+		delete(additionalProperties, "deep_link")
+		delete(additionalProperties, "one_link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateGeneralSharingLinksResponseDataSharingLink struct {

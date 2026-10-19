@@ -21,7 +21,10 @@ var _ MappedNullable = &GetVideoPerformancesResponseData{}
 type GetVideoPerformancesResponseData struct {
 	// Contains a list of video objects. The inner list of objects will be organized in ascending order based on the video_id field.
 	Videos []GetVideoPerformancesResponseDataVideo `json:"videos,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetVideoPerformancesResponseData GetVideoPerformancesResponseData
 
 // NewGetVideoPerformancesResponseData instantiates a new GetVideoPerformancesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetVideoPerformancesResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Videos) {
 		toSerialize["videos"] = o.Videos
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetVideoPerformancesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetVideoPerformancesResponseData := _GetVideoPerformancesResponseData{}
+
+	err = json.Unmarshal(data, &varGetVideoPerformancesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetVideoPerformancesResponseData(varGetVideoPerformancesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "videos")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetVideoPerformancesResponseData struct {

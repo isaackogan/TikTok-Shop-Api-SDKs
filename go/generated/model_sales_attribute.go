@@ -23,7 +23,10 @@ type SalesAttribute struct {
 	Id *string `json:"id,omitempty"`
 	// The sales attribute value ID.  If you included the custom sales attribute value name in the request, this is a newly generated ID.
 	ValueId *string `json:"value_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesAttribute SalesAttribute
 
 // NewSalesAttribute instantiates a new SalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SalesAttribute) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ValueId) {
 		toSerialize["value_id"] = o.ValueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varSalesAttribute := _SalesAttribute{}
+
+	err = json.Unmarshal(data, &varSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesAttribute(varSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "value_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesAttribute struct {

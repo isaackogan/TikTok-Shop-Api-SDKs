@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTMCFOrderStatusWebhookData{}
 type GetFBTMCFOrderStatusWebhookData struct {
 	// MCF order information
 	McfOrder *GetFBTMCFOrderStatusWebhookDataMcfOrder `json:"mcf_order,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMCFOrderStatusWebhookData GetFBTMCFOrderStatusWebhookData
 
 // NewGetFBTMCFOrderStatusWebhookData instantiates a new GetFBTMCFOrderStatusWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTMCFOrderStatusWebhookData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.McfOrder) {
 		toSerialize["mcf_order"] = o.McfOrder
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMCFOrderStatusWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMCFOrderStatusWebhookData := _GetFBTMCFOrderStatusWebhookData{}
+
+	err = json.Unmarshal(data, &varGetFBTMCFOrderStatusWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMCFOrderStatusWebhookData(varGetFBTMCFOrderStatusWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mcf_order")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMCFOrderStatusWebhookData struct {

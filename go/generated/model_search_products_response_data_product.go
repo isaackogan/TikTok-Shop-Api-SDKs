@@ -55,7 +55,10 @@ type SearchProductsResponseDataProduct struct {
 	ProductTags []string `json:"product_tags,omitempty"`
 	// The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
 	SellingFormat *string `json:"selling_format,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProduct SearchProductsResponseDataProduct
 
 // NewSearchProductsResponseDataProduct instantiates a new SearchProductsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -714,7 +717,50 @@ func (o SearchProductsResponseDataProduct) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.SellingFormat) {
 		toSerialize["selling_format"] = o.SellingFormat
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProduct := _SearchProductsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProduct(varSearchProductsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "sales_regions")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "product_sync_fail_reasons")
+		delete(additionalProperties, "is_not_for_sale")
+		delete(additionalProperties, "recommended_categories")
+		delete(additionalProperties, "listing_quality_tier")
+		delete(additionalProperties, "integrated_platform_statuses")
+		delete(additionalProperties, "audit")
+		delete(additionalProperties, "product_families")
+		delete(additionalProperties, "has_draft")
+		delete(additionalProperties, "scheduled_sale")
+		delete(additionalProperties, "product_tags")
+		delete(additionalProperties, "selling_format")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProduct struct {

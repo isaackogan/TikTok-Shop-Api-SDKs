@@ -23,7 +23,10 @@ type QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDet
 	MinPrice *MinPrice `json:"min_price,omitempty"`
 	// Product promotion max price
 	MaxPrice *MaxPrice `json:"max_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice
 
 // NewQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice instantiates a new QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProduct
 	if !IsNil(o.MaxPrice) {
 		toSerialize["max_price"] = o.MaxPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice) UnmarshalJSON(data []byte) (err error) {
+	varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice := _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice{}
+
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice(varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_price")
+		delete(additionalProperties, "max_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPromotionPrice struct {

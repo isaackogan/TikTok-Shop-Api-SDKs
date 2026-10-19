@@ -21,7 +21,10 @@ var _ MappedNullable = &GetReturnRecordsResponseData{}
 type GetReturnRecordsResponseData struct {
 	// A list of return records.
 	Records []GetReturnRecordsResponseDataRecord `json:"records,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetReturnRecordsResponseData GetReturnRecordsResponseData
 
 // NewGetReturnRecordsResponseData instantiates a new GetReturnRecordsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetReturnRecordsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Records) {
 		toSerialize["records"] = o.Records
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetReturnRecordsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetReturnRecordsResponseData := _GetReturnRecordsResponseData{}
+
+	err = json.Unmarshal(data, &varGetReturnRecordsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetReturnRecordsResponseData(varGetReturnRecordsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "records")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetReturnRecordsResponseData struct {

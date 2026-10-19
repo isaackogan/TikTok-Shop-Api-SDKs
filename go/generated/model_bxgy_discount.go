@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type BxgyDiscount struct {
 	BenefitMaxApplicableQuantity string `json:"benefit_max_applicable_quantity"`
 	// Optional. The maximum number of times the Buy X Get Y benefit can be applied in one order. Enter a positive integer no greater than `50`.
 	BenefitMaxApplicableTimes *string `json:"benefit_max_applicable_times,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BxgyDiscount BxgyDiscount
@@ -229,6 +229,11 @@ func (o BxgyDiscount) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BenefitMaxApplicableTimes) {
 		toSerialize["benefit_max_applicable_times"] = o.BenefitMaxApplicableTimes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -260,15 +265,25 @@ func (o *BxgyDiscount) UnmarshalJSON(data []byte) (err error) {
 
 	varBxgyDiscount := _BxgyDiscount{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBxgyDiscount)
+	err = json.Unmarshal(data, &varBxgyDiscount)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BxgyDiscount(varBxgyDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "discount_type")
+		delete(additionalProperties, "discount_value")
+		delete(additionalProperties, "benefit_max_applicable_quantity")
+		delete(additionalProperties, "benefit_max_applicable_times")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

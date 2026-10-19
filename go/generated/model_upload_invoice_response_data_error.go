@@ -25,7 +25,10 @@ type UploadInvoiceResponseDataError struct {
 	Message *string `json:"message,omitempty"`
 	// The details of the error.
 	Detail *UploadInvoiceResponseDataErrorDetail `json:"detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadInvoiceResponseDataError UploadInvoiceResponseDataError
 
 // NewUploadInvoiceResponseDataError instantiates a new UploadInvoiceResponseDataError object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UploadInvoiceResponseDataError) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadInvoiceResponseDataError) UnmarshalJSON(data []byte) (err error) {
+	varUploadInvoiceResponseDataError := _UploadInvoiceResponseDataError{}
+
+	err = json.Unmarshal(data, &varUploadInvoiceResponseDataError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadInvoiceResponseDataError(varUploadInvoiceResponseDataError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadInvoiceResponseDataError struct {

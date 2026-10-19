@@ -45,7 +45,10 @@ type GetOpenCollaborationProductListByProductIdsResponseDataProduct struct {
 	SalesPrice *SalesPrice `json:"sales_price,omitempty"`
 	// The ads commission rate applies only to orders generated from ads. If a creator’s video is used as an ad without this rate being set, the resulting orders will instead earn either: - The Shop Ads commission you configured in open collaboration, or - The standard commission defined in this invitation.
 	ShopAdsCommission *GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission `json:"shop_ads_commission,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationProductListByProductIdsResponseDataProduct GetOpenCollaborationProductListByProductIdsResponseDataProduct
 
 // NewGetOpenCollaborationProductListByProductIdsResponseDataProduct instantiates a new GetOpenCollaborationProductListByProductIdsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o GetOpenCollaborationProductListByProductIdsResponseDataProduct) ToMap() 
 	if !IsNil(o.ShopAdsCommission) {
 		toSerialize["shop_ads_commission"] = o.ShopAdsCommission
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationProductListByProductIdsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationProductListByProductIdsResponseDataProduct := _GetOpenCollaborationProductListByProductIdsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationProductListByProductIdsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationProductListByProductIdsResponseDataProduct(varGetOpenCollaborationProductListByProductIdsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "has_inventory")
+		delete(additionalProperties, "units_sold")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "sale_region")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "detail_link")
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "category_chains")
+		delete(additionalProperties, "commission")
+		delete(additionalProperties, "sales_price")
+		delete(additionalProperties, "shop_ads_commission")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationProductListByProductIdsResponseDataProduct struct {

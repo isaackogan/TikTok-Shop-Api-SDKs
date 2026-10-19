@@ -53,7 +53,10 @@ type GetOrderListResponseDataOrderRecipientAddress struct {
 	RegionCode *string `json:"region_code,omitempty"`
 	// Post town of the address Note: Available only in UK market
 	PostTown *string `json:"post_town,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderListResponseDataOrderRecipientAddress GetOrderListResponseDataOrderRecipientAddress
 
 // NewGetOrderListResponseDataOrderRecipientAddress instantiates a new GetOrderListResponseDataOrderRecipientAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetOrderListResponseDataOrderRecipientAddress) ToMap() (map[string]inter
 	if !IsNil(o.PostTown) {
 		toSerialize["post_town"] = o.PostTown
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderListResponseDataOrderRecipientAddress) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderListResponseDataOrderRecipientAddress := _GetOrderListResponseDataOrderRecipientAddress{}
+
+	err = json.Unmarshal(data, &varGetOrderListResponseDataOrderRecipientAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderListResponseDataOrderRecipientAddress(varGetOrderListResponseDataOrderRecipientAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "full_address")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "first_name_local_script")
+		delete(additionalProperties, "last_name_local_script")
+		delete(additionalProperties, "address_detail")
+		delete(additionalProperties, "address_line1")
+		delete(additionalProperties, "address_line2")
+		delete(additionalProperties, "address_line3")
+		delete(additionalProperties, "address_line4")
+		delete(additionalProperties, "district_info")
+		delete(additionalProperties, "delivery_preferences")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "post_town")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderListResponseDataOrderRecipientAddress struct {

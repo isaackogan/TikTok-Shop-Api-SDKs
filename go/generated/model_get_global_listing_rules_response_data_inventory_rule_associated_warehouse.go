@@ -23,7 +23,10 @@ type GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse struct {
 	WarehouseId *string `json:"warehouse_id,omitempty"`
 	// The country where the warehouse is located.
 	Region *string `json:"region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse
 
 // NewGetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse instantiates a new GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse) ToMap
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse := _GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse{}
+
+	err = json.Unmarshal(data, &varGetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse(varGetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse_id")
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse struct {

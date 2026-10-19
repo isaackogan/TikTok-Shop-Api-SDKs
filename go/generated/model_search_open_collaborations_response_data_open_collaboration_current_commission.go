@@ -25,7 +25,10 @@ type SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission stru
 	StartTime *int64 `json:"start_time,omitempty"`
 	// The Unix timestamp, in seconds, when the commission rate stops being effective.
 	EndTime *int64 `json:"end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission
 
 // NewSearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission instantiates a new SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission) 
 	if !IsNil(o.EndTime) {
 		toSerialize["end_time"] = o.EndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission := _SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission(varSearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission struct {

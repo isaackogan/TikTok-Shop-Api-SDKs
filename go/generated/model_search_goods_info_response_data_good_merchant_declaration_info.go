@@ -23,7 +23,10 @@ type SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo struct {
 	Weight *SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight `json:"weight,omitempty"`
 	// The goods dimension.
 	Dimension *SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension `json:"dimension,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo
 
 // NewSearchGoodsInfoResponseDataGoodMerchantDeclarationInfo instantiates a new SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo) ToMap() (map[str
 	if !IsNil(o.Dimension) {
 		toSerialize["dimension"] = o.Dimension
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodMerchantDeclarationInfo := _SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodMerchantDeclarationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodMerchantDeclarationInfo(varSearchGoodsInfoResponseDataGoodMerchantDeclarationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "dimension")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodMerchantDeclarationInfo struct {

@@ -23,7 +23,10 @@ type GetCreatorConversationMessagesResponseDataMessage struct {
 	ConversationIndex *string `json:"conversation_index,omitempty"`
 	// Message's content
 	MessageBody *GetCreatorConversationMessagesResponseDataMessageMessageBody `json:"message_body,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorConversationMessagesResponseDataMessage GetCreatorConversationMessagesResponseDataMessage
 
 // NewGetCreatorConversationMessagesResponseDataMessage instantiates a new GetCreatorConversationMessagesResponseDataMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCreatorConversationMessagesResponseDataMessage) ToMap() (map[string]i
 	if !IsNil(o.MessageBody) {
 		toSerialize["message_body"] = o.MessageBody
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorConversationMessagesResponseDataMessage) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorConversationMessagesResponseDataMessage := _GetCreatorConversationMessagesResponseDataMessage{}
+
+	err = json.Unmarshal(data, &varGetCreatorConversationMessagesResponseDataMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorConversationMessagesResponseDataMessage(varGetCreatorConversationMessagesResponseDataMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_index")
+		delete(additionalProperties, "message_body")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorConversationMessagesResponseDataMessage struct {

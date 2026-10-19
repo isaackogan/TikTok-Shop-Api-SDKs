@@ -41,7 +41,10 @@ type PartialEditGlobalProductRequestSku struct {
 	ExternalGlobalSkuId *string `json:"external_global_sku_id,omitempty"`
 	// The SKU's **local display price** shown on the product page before any discounts.   **Note**:  -  Required for JP and US shops using China warehouses, optional for others. - This is the definitive final price shown on the product page, all other prices will be ignored.
 	SalePrices []PartialEditGlobalProductRequestSkuSalePrice `json:"sale_prices,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditGlobalProductRequestSku PartialEditGlobalProductRequestSku
 
 // NewPartialEditGlobalProductRequestSku instantiates a new PartialEditGlobalProductRequestSku object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o PartialEditGlobalProductRequestSku) ToMap() (map[string]interface{}, err
 	if !IsNil(o.SalePrices) {
 		toSerialize["sale_prices"] = o.SalePrices
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditGlobalProductRequestSku) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditGlobalProductRequestSku := _PartialEditGlobalProductRequestSku{}
+
+	err = json.Unmarshal(data, &varPartialEditGlobalProductRequestSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditGlobalProductRequestSku(varPartialEditGlobalProductRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "global_quantity")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "external_global_sku_id")
+		delete(additionalProperties, "sale_prices")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditGlobalProductRequestSku struct {

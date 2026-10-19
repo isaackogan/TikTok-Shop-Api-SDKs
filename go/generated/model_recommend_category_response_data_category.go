@@ -29,7 +29,10 @@ type RecommendCategoryResponseDataCategory struct {
 	Name *string `json:"name,omitempty"`
 	// The shop's permission status for this category. Possible values: - AVAILABLE: You have the permission to create products in this category. - INVITE_ONLY: This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, `INVITE_ONLY` is also known as \"restricted\". - NON_MAIN_CATEGORY: This category is not in the shop's main category. - PROHIBITED: This category is prohibited on TikTok Shop. If your product falls under this category, do not attempt to list it, as it will be rejected during audit. Applicable only for BR and MX markets.
 	PermissionStatuses []string `json:"permission_statuses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryResponseDataCategory RecommendCategoryResponseDataCategory
 
 // NewRecommendCategoryResponseDataCategory instantiates a new RecommendCategoryResponseDataCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o RecommendCategoryResponseDataCategory) ToMap() (map[string]interface{}, 
 	if !IsNil(o.PermissionStatuses) {
 		toSerialize["permission_statuses"] = o.PermissionStatuses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryResponseDataCategory) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryResponseDataCategory := _RecommendCategoryResponseDataCategory{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryResponseDataCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryResponseDataCategory(varRecommendCategoryResponseDataCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "permission_statuses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryResponseDataCategory struct {

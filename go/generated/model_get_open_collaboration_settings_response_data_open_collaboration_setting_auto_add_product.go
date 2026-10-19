@@ -23,7 +23,10 @@ type GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProd
 	Enable *bool `json:"enable,omitempty"`
 	// The default commission rate of open collaboration created for the auto-added products.  The unit is 0.01%. For example, to set the default commission rate to 10%, set the value to `1000`. If so, if the price of a product is $50 USD, the creator would receive $5 USD for every piece of product sold.  The range is `[100, 8000]`. When enable=false, this field will not be returned.
 	CommissionRate *int64 `json:"commission_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct
 
 // NewGetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct instantiates a new GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddP
 	if !IsNil(o.CommissionRate) {
 		toSerialize["commission_rate"] = o.CommissionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct := _GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct(varGetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enable")
+		delete(additionalProperties, "commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct struct {

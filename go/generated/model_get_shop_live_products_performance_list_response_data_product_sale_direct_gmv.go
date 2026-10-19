@@ -23,7 +23,10 @@ type GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv struct {
 	Currency *string `json:"currency,omitempty"`
 	// Direct GMV amount in the corresponding currency.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv
 
 // NewGetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv instantiates a new GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv) ToMa
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv := _GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv(varGetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv struct {

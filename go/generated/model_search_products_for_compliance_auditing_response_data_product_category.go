@@ -29,7 +29,10 @@ type SearchProductsForComplianceAuditingResponseDataProductCategory struct {
 	ParentId *string `json:"parent_id,omitempty"`
 	// A flag to indicate if the category is a leaf category.   Note: You can only create or edit products that belong to a leaf category.
 	IsLeaf *bool `json:"is_leaf,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsForComplianceAuditingResponseDataProductCategory SearchProductsForComplianceAuditingResponseDataProductCategory
 
 // NewSearchProductsForComplianceAuditingResponseDataProductCategory instantiates a new SearchProductsForComplianceAuditingResponseDataProductCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchProductsForComplianceAuditingResponseDataProductCategory) ToMap() 
 	if !IsNil(o.IsLeaf) {
 		toSerialize["is_leaf"] = o.IsLeaf
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsForComplianceAuditingResponseDataProductCategory) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsForComplianceAuditingResponseDataProductCategory := _SearchProductsForComplianceAuditingResponseDataProductCategory{}
+
+	err = json.Unmarshal(data, &varSearchProductsForComplianceAuditingResponseDataProductCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsForComplianceAuditingResponseDataProductCategory(varSearchProductsForComplianceAuditingResponseDataProductCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "level")
+		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "is_leaf")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsForComplianceAuditingResponseDataProductCategory struct {

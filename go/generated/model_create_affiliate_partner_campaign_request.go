@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type CreateAffiliatePartnerCampaignRequest struct {
 	TargetShopCodes []string `json:"target_shop_codes,omitempty"`
 	// A list of eligible seller types that may register for the campaign. Use this field to target seller types instead of specific sellers in `target_shop_codes`. Specify exactly one of `target_seller_types` and `target_shop_codes`. Possible values: - `LOCAL` - `CROSS_BORDER`
 	TargetSellerTypes []string `json:"target_seller_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateAffiliatePartnerCampaignRequest CreateAffiliatePartnerCampaignRequest
@@ -350,6 +350,11 @@ func (o CreateAffiliatePartnerCampaignRequest) ToMap() (map[string]interface{}, 
 	if !IsNil(o.TargetSellerTypes) {
 		toSerialize["target_seller_types"] = o.TargetSellerTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -384,15 +389,29 @@ func (o *CreateAffiliatePartnerCampaignRequest) UnmarshalJSON(data []byte) (err 
 
 	varCreateAffiliatePartnerCampaignRequest := _CreateAffiliatePartnerCampaignRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateAffiliatePartnerCampaignRequest)
+	err = json.Unmarshal(data, &varCreateAffiliatePartnerCampaignRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateAffiliatePartnerCampaignRequest(varCreateAffiliatePartnerCampaignRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "campaign_start_time")
+		delete(additionalProperties, "campaign_end_time")
+		delete(additionalProperties, "registration_start_time")
+		delete(additionalProperties, "registration_end_time")
+		delete(additionalProperties, "commission_rate")
+		delete(additionalProperties, "contact_info")
+		delete(additionalProperties, "target_shop_codes")
+		delete(additionalProperties, "target_seller_types")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResu
 	Code *string `json:"code,omitempty"`
 	// Recommended improvements based on the quality finding.
 	Suggestions *string `json:"suggestions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue
 
 // NewGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue instantiates a new GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckR
 	if !IsNil(o.Suggestions) {
 		toSerialize["suggestions"] = o.Suggestions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue := _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue(varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "suggestions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseDataPrecheckTaskGoodQualityCheckResultIssue struct {

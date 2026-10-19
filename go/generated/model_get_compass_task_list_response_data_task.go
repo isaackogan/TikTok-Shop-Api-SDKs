@@ -27,7 +27,10 @@ type GetCompassTaskListResponseDataTask struct {
 	FileName *string `json:"file_name,omitempty"`
 	// The status of the task. - RUNNING - SUCCEEDED - FAILED
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCompassTaskListResponseDataTask GetCompassTaskListResponseDataTask
 
 // NewGetCompassTaskListResponseDataTask instantiates a new GetCompassTaskListResponseDataTask object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetCompassTaskListResponseDataTask) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCompassTaskListResponseDataTask) UnmarshalJSON(data []byte) (err error) {
+	varGetCompassTaskListResponseDataTask := _GetCompassTaskListResponseDataTask{}
+
+	err = json.Unmarshal(data, &varGetCompassTaskListResponseDataTask)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCompassTaskListResponseDataTask(varGetCompassTaskListResponseDataTask)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "module_type")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "file_name")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCompassTaskListResponseDataTask struct {

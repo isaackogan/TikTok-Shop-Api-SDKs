@@ -23,7 +23,10 @@ type GetShowcaseProductsResponseDataProductCommission struct {
 	Rate *int64 `json:"rate,omitempty"`
 	// The reward commission rate in hundredths of a percent. For example, `3587` is a commission rate of `35.87%`.
 	RewardRate *int64 `json:"reward_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductCommission GetShowcaseProductsResponseDataProductCommission
 
 // NewGetShowcaseProductsResponseDataProductCommission instantiates a new GetShowcaseProductsResponseDataProductCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShowcaseProductsResponseDataProductCommission) ToMap() (map[string]in
 	if !IsNil(o.RewardRate) {
 		toSerialize["reward_rate"] = o.RewardRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductCommission) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductCommission := _GetShowcaseProductsResponseDataProductCommission{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductCommission(varGetShowcaseProductsResponseDataProductCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "rate")
+		delete(additionalProperties, "reward_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductCommission struct {

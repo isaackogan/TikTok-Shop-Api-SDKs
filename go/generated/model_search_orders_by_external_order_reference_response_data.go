@@ -21,7 +21,10 @@ var _ MappedNullable = &SearchOrdersByExternalOrderReferenceResponseData{}
 type SearchOrdersByExternalOrderReferenceResponseData struct {
 	// A list of TikTok Shop orders that match the specified external order ID and OMS platform. This field may be omitted when no orders match.
 	Orders []SearchOrdersByExternalOrderReferenceResponseDataOrder `json:"orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOrdersByExternalOrderReferenceResponseData SearchOrdersByExternalOrderReferenceResponseData
 
 // NewSearchOrdersByExternalOrderReferenceResponseData instantiates a new SearchOrdersByExternalOrderReferenceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SearchOrdersByExternalOrderReferenceResponseData) ToMap() (map[string]in
 	if !IsNil(o.Orders) {
 		toSerialize["orders"] = o.Orders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOrdersByExternalOrderReferenceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchOrdersByExternalOrderReferenceResponseData := _SearchOrdersByExternalOrderReferenceResponseData{}
+
+	err = json.Unmarshal(data, &varSearchOrdersByExternalOrderReferenceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOrdersByExternalOrderReferenceResponseData(varSearchOrdersByExternalOrderReferenceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOrdersByExternalOrderReferenceResponseData struct {

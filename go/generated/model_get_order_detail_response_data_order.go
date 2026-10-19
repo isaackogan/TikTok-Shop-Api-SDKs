@@ -169,7 +169,10 @@ type GetOrderDetailResponseDataOrder struct {
 	FastRtsSlaTime *int64 `json:"fast_rts_sla_time,omitempty"`
 	// Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp
 	FastCollectionSlaTime *int64 `json:"fast_collection_sla_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrder GetOrderDetailResponseDataOrder
 
 // NewGetOrderDetailResponseDataOrder instantiates a new GetOrderDetailResponseDataOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -2823,7 +2826,107 @@ func (o GetOrderDetailResponseDataOrder) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.FastCollectionSlaTime) {
 		toSerialize["fast_collection_sla_time"] = o.FastCollectionSlaTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrder) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrder := _GetOrderDetailResponseDataOrder{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrder(varGetOrderDetailResponseDataOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "cancellation_initiator")
+		delete(additionalProperties, "shipping_provider")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "rts_time")
+		delete(additionalProperties, "payment")
+		delete(additionalProperties, "recipient_address")
+		delete(additionalProperties, "buyer_message")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "cancel_reason")
+		delete(additionalProperties, "rts_sla_time")
+		delete(additionalProperties, "paid_time")
+		delete(additionalProperties, "fulfillment_type")
+		delete(additionalProperties, "seller_note")
+		delete(additionalProperties, "tts_sla_time")
+		delete(additionalProperties, "cancel_order_sla_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "packages")
+		delete(additionalProperties, "delivery_type")
+		delete(additionalProperties, "is_sample_order")
+		delete(additionalProperties, "warehouse_id")
+		delete(additionalProperties, "split_or_combine_tag")
+		delete(additionalProperties, "has_updated_recipient_address")
+		delete(additionalProperties, "cpf")
+		delete(additionalProperties, "delivery_option_id")
+		delete(additionalProperties, "delivery_sla_time")
+		delete(additionalProperties, "payment_method_name")
+		delete(additionalProperties, "payment_card_type")
+		delete(additionalProperties, "channel_entity_national_registry_id")
+		delete(additionalProperties, "payment_method_code")
+		delete(additionalProperties, "payment_auth_code")
+		delete(additionalProperties, "shipping_due_time")
+		delete(additionalProperties, "line_items")
+		delete(additionalProperties, "shipping_type")
+		delete(additionalProperties, "buyer_email")
+		delete(additionalProperties, "delivery_time")
+		delete(additionalProperties, "need_upload_invoice")
+		delete(additionalProperties, "is_cod")
+		delete(additionalProperties, "request_cancel_time")
+		delete(additionalProperties, "delivery_option_required_delivery_time")
+		delete(additionalProperties, "delivery_option_name")
+		delete(additionalProperties, "is_buyer_request_cancel")
+		delete(additionalProperties, "delivery_due_time")
+		delete(additionalProperties, "collection_time")
+		delete(additionalProperties, "is_on_hold_order")
+		delete(additionalProperties, "cancel_time")
+		delete(additionalProperties, "is_replacement_order")
+		delete(additionalProperties, "replaced_order_id")
+		delete(additionalProperties, "collection_due_time")
+		delete(additionalProperties, "pick_up_cut_off_time")
+		delete(additionalProperties, "fast_dispatch_sla_time")
+		delete(additionalProperties, "commerce_platform")
+		delete(additionalProperties, "order_type")
+		delete(additionalProperties, "release_date")
+		delete(additionalProperties, "handling_duration")
+		delete(additionalProperties, "auto_combine_group_id")
+		delete(additionalProperties, "cpf_name")
+		delete(additionalProperties, "is_exchange_order")
+		delete(additionalProperties, "exchange_source_order_id")
+		delete(additionalProperties, "is_subscription_order")
+		delete(additionalProperties, "is_refundable_sample")
+		delete(additionalProperties, "authentication_required")
+		delete(additionalProperties, "consultation_id")
+		delete(additionalProperties, "fast_delivery_program")
+		delete(additionalProperties, "buyer_nickname")
+		delete(additionalProperties, "buyer_avatar")
+		delete(additionalProperties, "order_rights")
+		delete(additionalProperties, "fulfillment_priority_level")
+		delete(additionalProperties, "recommended_shipping_time")
+		delete(additionalProperties, "instore_pickup_sla_time")
+		delete(additionalProperties, "fast_rts_sla_time")
+		delete(additionalProperties, "fast_collection_sla_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrder struct {

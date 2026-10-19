@@ -29,7 +29,10 @@ type GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator 
 	UserName *string `json:"user_name,omitempty"`
 	// Creator Open ID. More details:https://partner.tiktokshop.com/docv2/page/3obfokj6
 	CreatorOpenId *string `json:"creator_open_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator
 
 // NewGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator instantiates a new GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreat
 	if !IsNil(o.CreatorOpenId) {
 		toSerialize["creator_open_id"] = o.CreatorOpenId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator := _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator{}
+
+	err = json.Unmarshal(data, &varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator(varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "nick_name")
+		delete(additionalProperties, "avatar_url")
+		delete(additionalProperties, "follower_num")
+		delete(additionalProperties, "user_name")
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator struct {

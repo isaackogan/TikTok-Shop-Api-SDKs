@@ -25,7 +25,10 @@ type GetSPSMetricDiagnosisResponseDataDistributionDetail struct {
 	Name *string `json:"name,omitempty"`
 	// Percentage of items in the distribution bucket, from 0 to 100.
 	Percent *string `json:"percent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricDiagnosisResponseDataDistributionDetail GetSPSMetricDiagnosisResponseDataDistributionDetail
 
 // NewGetSPSMetricDiagnosisResponseDataDistributionDetail instantiates a new GetSPSMetricDiagnosisResponseDataDistributionDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetSPSMetricDiagnosisResponseDataDistributionDetail) ToMap() (map[string
 	if !IsNil(o.Percent) {
 		toSerialize["percent"] = o.Percent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricDiagnosisResponseDataDistributionDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricDiagnosisResponseDataDistributionDetail := _GetSPSMetricDiagnosisResponseDataDistributionDetail{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricDiagnosisResponseDataDistributionDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricDiagnosisResponseDataDistributionDetail(varGetSPSMetricDiagnosisResponseDataDistributionDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "percent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricDiagnosisResponseDataDistributionDetail struct {

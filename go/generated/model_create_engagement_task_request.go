@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateEngagementTaskRequest struct {
 	ProductIds []string `json:"product_ids,omitempty"`
 	// The coupon ID. Retrieve this value and other coupon-related information from the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).  **Note**: The coupon properties must comply with the rules defined in `coupon_card_rules.coupon_type` of the [Get Message Templates API](67777e44223fde02fdfdc157).
 	CouponIds []string `json:"coupon_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateEngagementTaskRequest CreateEngagementTaskRequest
@@ -238,6 +238,11 @@ func (o CreateEngagementTaskRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CouponIds) {
 		toSerialize["coupon_ids"] = o.CouponIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -268,15 +273,25 @@ func (o *CreateEngagementTaskRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateEngagementTaskRequest := _CreateEngagementTaskRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateEngagementTaskRequest)
+	err = json.Unmarshal(data, &varCreateEngagementTaskRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateEngagementTaskRequest(varCreateEngagementTaskRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template_id")
+		delete(additionalProperties, "task_name")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "channel")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "coupon_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

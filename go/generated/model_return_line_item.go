@@ -37,7 +37,10 @@ type ReturnLineItem struct {
 	RefundAmount *RefundAmount `json:"refund_amount,omitempty"`
 	// Return sub order lines items. Sub items represent skus that belong to a \"virtual bundle\" that has been defined by a seller. The sub_items will include all relevant information about each item that is a part of the virtual bundle.
 	ReturnSubLineItems []ReturnSubLineItem `json:"return_sub_line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReturnLineItem ReturnLineItem
 
 // NewReturnLineItem instantiates a new ReturnLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o ReturnLineItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReturnSubLineItems) {
 		toSerialize["return_sub_line_items"] = o.ReturnSubLineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReturnLineItem) UnmarshalJSON(data []byte) (err error) {
+	varReturnLineItem := _ReturnLineItem{}
+
+	err = json.Unmarshal(data, &varReturnLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReturnLineItem(varReturnLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "order_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "refund_amount")
+		delete(additionalProperties, "return_sub_line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReturnLineItem struct {

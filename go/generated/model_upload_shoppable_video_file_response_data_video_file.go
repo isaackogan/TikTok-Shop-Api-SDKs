@@ -23,7 +23,10 @@ type UploadShoppableVideoFileResponseDataVideoFile struct {
 	Id *string `json:"id,omitempty"`
 	// Upload file md5 checksum
 	Md5 *string `json:"md5,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadShoppableVideoFileResponseDataVideoFile UploadShoppableVideoFileResponseDataVideoFile
 
 // NewUploadShoppableVideoFileResponseDataVideoFile instantiates a new UploadShoppableVideoFileResponseDataVideoFile object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UploadShoppableVideoFileResponseDataVideoFile) ToMap() (map[string]inter
 	if !IsNil(o.Md5) {
 		toSerialize["md5"] = o.Md5
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadShoppableVideoFileResponseDataVideoFile) UnmarshalJSON(data []byte) (err error) {
+	varUploadShoppableVideoFileResponseDataVideoFile := _UploadShoppableVideoFileResponseDataVideoFile{}
+
+	err = json.Unmarshal(data, &varUploadShoppableVideoFileResponseDataVideoFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadShoppableVideoFileResponseDataVideoFile(varUploadShoppableVideoFileResponseDataVideoFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "md5")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadShoppableVideoFileResponseDataVideoFile struct {

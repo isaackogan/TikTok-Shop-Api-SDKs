@@ -25,7 +25,10 @@ type SearchSizeChartsRequest struct {
 	Keyword *string `json:"keyword,omitempty"`
 	// Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
 	SizeChartMode *string `json:"size_chart_mode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsRequest SearchSizeChartsRequest
 
 // NewSearchSizeChartsRequest instantiates a new SearchSizeChartsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchSizeChartsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SizeChartMode) {
 		toSerialize["size_chart_mode"] = o.SizeChartMode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsRequest := _SearchSizeChartsRequest{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsRequest(varSearchSizeChartsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ids")
+		delete(additionalProperties, "keyword")
+		delete(additionalProperties, "size_chart_mode")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsRequest struct {

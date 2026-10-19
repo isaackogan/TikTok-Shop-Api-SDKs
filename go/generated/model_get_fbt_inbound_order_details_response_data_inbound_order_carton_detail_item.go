@@ -23,7 +23,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem struct {
 	GoodsId *string `json:"goods_id,omitempty"`
 	// The number of units of the goods in this carton.
 	Quantity *int64 `json:"quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem) ToMap
 	if !IsNil(o.Quantity) {
 		toSerialize["quantity"] = o.Quantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem := _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem(varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem struct {

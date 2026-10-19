@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCompassTaskListResponseData{}
 type GetCompassTaskListResponseData struct {
 	// The list of the task
 	Tasks []GetCompassTaskListResponseDataTask `json:"tasks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCompassTaskListResponseData GetCompassTaskListResponseData
 
 // NewGetCompassTaskListResponseData instantiates a new GetCompassTaskListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCompassTaskListResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Tasks) {
 		toSerialize["tasks"] = o.Tasks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCompassTaskListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCompassTaskListResponseData := _GetCompassTaskListResponseData{}
+
+	err = json.Unmarshal(data, &varGetCompassTaskListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCompassTaskListResponseData(varGetCompassTaskListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tasks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCompassTaskListResponseData struct {

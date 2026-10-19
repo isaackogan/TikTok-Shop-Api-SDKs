@@ -25,7 +25,10 @@ type DiagnosisResult struct {
 	HowToSolve *string `json:"how_to_solve,omitempty"`
 	// The listing quality tier you can reach by implementing the recommendation. Possible values: - FAIR - GOOD  **Note**:  - To reach a higher tier, you must implement all recommendations from the destination tier and all preceding tiers. For example, a product will reach the \"GOOD\" tier once all \"FAIR\" and \"GOOD\" recommendations are addressed or implemented. - Available only for the US market.
 	QualityTier *string `json:"quality_tier,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnosisResult DiagnosisResult
 
 // NewDiagnosisResult instantiates a new DiagnosisResult object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o DiagnosisResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.QualityTier) {
 		toSerialize["quality_tier"] = o.QualityTier
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnosisResult) UnmarshalJSON(data []byte) (err error) {
+	varDiagnosisResult := _DiagnosisResult{}
+
+	err = json.Unmarshal(data, &varDiagnosisResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnosisResult(varDiagnosisResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "how_to_solve")
+		delete(additionalProperties, "quality_tier")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnosisResult struct {

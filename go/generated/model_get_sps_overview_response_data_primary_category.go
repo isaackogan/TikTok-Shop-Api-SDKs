@@ -23,7 +23,10 @@ type GetSPSOverviewResponseDataPrimaryCategory struct {
 	CategoryId *string `json:"category_id,omitempty"`
 	// The primary category name.
 	CategoryName *string `json:"category_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSOverviewResponseDataPrimaryCategory GetSPSOverviewResponseDataPrimaryCategory
 
 // NewGetSPSOverviewResponseDataPrimaryCategory instantiates a new GetSPSOverviewResponseDataPrimaryCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetSPSOverviewResponseDataPrimaryCategory) ToMap() (map[string]interface
 	if !IsNil(o.CategoryName) {
 		toSerialize["category_name"] = o.CategoryName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSOverviewResponseDataPrimaryCategory) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSOverviewResponseDataPrimaryCategory := _GetSPSOverviewResponseDataPrimaryCategory{}
+
+	err = json.Unmarshal(data, &varGetSPSOverviewResponseDataPrimaryCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSOverviewResponseDataPrimaryCategory(varGetSPSOverviewResponseDataPrimaryCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "category_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSOverviewResponseDataPrimaryCategory struct {

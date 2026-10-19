@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type GiftInfo struct {
 	ThresholdValue string `json:"threshold_value"`
 	// The gift SKUs for this tier. Across all tiers, provide at least one gift SKU in total, and do not repeat the same sku_id anywhere in the activity. For a MINIMAL_ITEM_QUANTITY tier, this list must not be empty.
 	GiftDetails []GiftDetail `json:"gift_details"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GiftInfo GiftInfo
@@ -164,6 +164,11 @@ func (o GiftInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize["threshold_type"] = o.ThresholdType
 	toSerialize["threshold_value"] = o.ThresholdValue
 	toSerialize["gift_details"] = o.GiftDetails
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *GiftInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varGiftInfo := _GiftInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGiftInfo)
+	err = json.Unmarshal(data, &varGiftInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GiftInfo(varGiftInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tier")
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "gift_details")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

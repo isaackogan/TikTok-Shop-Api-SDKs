@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &RecommendRequiredProductPropertiesRequestSalesPropertyVa
 type RecommendRequiredProductPropertiesRequestSalesPropertyValue struct {
 	// ID of the sales property value.
 	Id string `json:"id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendRequiredProductPropertiesRequestSalesPropertyValue RecommendRequiredProductPropertiesRequestSalesPropertyValue
@@ -80,6 +80,11 @@ func (o RecommendRequiredProductPropertiesRequestSalesPropertyValue) MarshalJSON
 func (o RecommendRequiredProductPropertiesRequestSalesPropertyValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *RecommendRequiredProductPropertiesRequestSalesPropertyValue) UnmarshalJ
 
 	varRecommendRequiredProductPropertiesRequestSalesPropertyValue := _RecommendRequiredProductPropertiesRequestSalesPropertyValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendRequiredProductPropertiesRequestSalesPropertyValue)
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesRequestSalesPropertyValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendRequiredProductPropertiesRequestSalesPropertyValue(varRecommendRequiredProductPropertiesRequestSalesPropertyValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

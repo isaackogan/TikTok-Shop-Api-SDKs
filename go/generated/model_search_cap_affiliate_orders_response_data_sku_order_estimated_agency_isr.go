@@ -23,7 +23,10 @@ type SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr struct {
 	Amount *string `json:"amount,omitempty"`
 	// Type of currency use
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr
 
 // NewSearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr instantiates a new SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr) ToMap() 
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr) UnmarshalJSON(data []byte) (err error) {
+	varSearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr := _SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr{}
+
+	err = json.Unmarshal(data, &varSearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr(varSearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr struct {

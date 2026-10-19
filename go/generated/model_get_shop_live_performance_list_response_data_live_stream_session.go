@@ -35,7 +35,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSession struct {
 	Title *string `json:"title,omitempty"`
 	// Traffic efficiency metrics for the LIVE session.
 	Traffic *GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSession GetShopLIVEPerformanceListResponseDataLiveStreamSession
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSession instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSession object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSession) ToMap() (map[st
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSession) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSession := _GetShopLIVEPerformanceListResponseDataLiveStreamSession{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSession)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSession(varGetShopLIVEPerformanceListResponseDataLiveStreamSession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "interaction_performance")
+		delete(additionalProperties, "sales_performance")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSession struct {

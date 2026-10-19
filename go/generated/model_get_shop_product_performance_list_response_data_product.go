@@ -37,7 +37,10 @@ type GetShopProductPerformanceListResponseDataProduct struct {
 	AffiliateVideoPerformance *GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance `json:"affiliate_video_performance,omitempty"`
 	// Performance metrics from shop tab.
 	ShopTabPerformance *GetShopProductPerformanceListResponseDataProductShopTabPerformance `json:"shop_tab_performance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceListResponseDataProduct GetShopProductPerformanceListResponseDataProduct
 
 // NewGetShopProductPerformanceListResponseDataProduct instantiates a new GetShopProductPerformanceListResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetShopProductPerformanceListResponseDataProduct) ToMap() (map[string]in
 	if !IsNil(o.ShopTabPerformance) {
 		toSerialize["shop_tab_performance"] = o.ShopTabPerformance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceListResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceListResponseDataProduct := _GetShopProductPerformanceListResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceListResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceListResponseDataProduct(varGetShopProductPerformanceListResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "total_performance")
+		delete(additionalProperties, "seller_live_performance")
+		delete(additionalProperties, "seller_video_performance")
+		delete(additionalProperties, "seller_product_card_performance")
+		delete(additionalProperties, "affiliate_total_performance")
+		delete(additionalProperties, "affiliate_live_performance")
+		delete(additionalProperties, "affiliate_video_performance")
+		delete(additionalProperties, "shop_tab_performance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceListResponseDataProduct struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &DownloadCompassTaskFileResponseData{}
 type DownloadCompassTaskFileResponseData struct {
 	// The downloadable file
 	File *DownloadCompassTaskFileResponseDataFile `json:"file,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DownloadCompassTaskFileResponseData DownloadCompassTaskFileResponseData
 
 // NewDownloadCompassTaskFileResponseData instantiates a new DownloadCompassTaskFileResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DownloadCompassTaskFileResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.File) {
 		toSerialize["file"] = o.File
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DownloadCompassTaskFileResponseData) UnmarshalJSON(data []byte) (err error) {
+	varDownloadCompassTaskFileResponseData := _DownloadCompassTaskFileResponseData{}
+
+	err = json.Unmarshal(data, &varDownloadCompassTaskFileResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DownloadCompassTaskFileResponseData(varDownloadCompassTaskFileResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDownloadCompassTaskFileResponseData struct {

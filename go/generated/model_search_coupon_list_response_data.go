@@ -25,7 +25,10 @@ type SearchCouponListResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The list of coupons matching the search criteria.
 	Coupons []SearchCouponListResponseDataCoupon `json:"coupons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCouponListResponseData SearchCouponListResponseData
 
 // NewSearchCouponListResponseData instantiates a new SearchCouponListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCouponListResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Coupons) {
 		toSerialize["coupons"] = o.Coupons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCouponListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCouponListResponseData := _SearchCouponListResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCouponListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCouponListResponseData(varSearchCouponListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "coupons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCouponListResponseData struct {

@@ -43,7 +43,10 @@ type SearchOpenCollaborationProductsResponseDataProduct struct {
 	Commission *Commission `json:"commission,omitempty"`
 	// Metadata and data associated with the sale price of the product
 	SalesPrice *SalesPrice `json:"sales_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationProductsResponseDataProduct SearchOpenCollaborationProductsResponseDataProduct
 
 // NewSearchOpenCollaborationProductsResponseDataProduct instantiates a new SearchOpenCollaborationProductsResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -492,7 +495,44 @@ func (o SearchOpenCollaborationProductsResponseDataProduct) ToMap() (map[string]
 	if !IsNil(o.SalesPrice) {
 		toSerialize["sales_price"] = o.SalesPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationProductsResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationProductsResponseDataProduct := _SearchOpenCollaborationProductsResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationProductsResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationProductsResponseDataProduct(varSearchOpenCollaborationProductsResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "has_inventory")
+		delete(additionalProperties, "units_sold")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "sale_region")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "detail_link")
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "category_chains")
+		delete(additionalProperties, "commission")
+		delete(additionalProperties, "sales_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationProductsResponseDataProduct struct {

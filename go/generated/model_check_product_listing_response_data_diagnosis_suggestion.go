@@ -25,7 +25,10 @@ type CheckProductListingResponseDataDiagnosisSuggestion struct {
 	SmartTexts []SmartText `json:"smart_texts,omitempty"`
 	// The optimized main image. Only the first image in the main image set will be optimized.
 	Images []CheckProductListingResponseDataDiagnosisSuggestionImage `json:"images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponseDataDiagnosisSuggestion CheckProductListingResponseDataDiagnosisSuggestion
 
 // NewCheckProductListingResponseDataDiagnosisSuggestion instantiates a new CheckProductListingResponseDataDiagnosisSuggestion object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CheckProductListingResponseDataDiagnosisSuggestion) ToMap() (map[string]
 	if !IsNil(o.Images) {
 		toSerialize["images"] = o.Images
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponseDataDiagnosisSuggestion) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponseDataDiagnosisSuggestion := _CheckProductListingResponseDataDiagnosisSuggestion{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponseDataDiagnosisSuggestion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponseDataDiagnosisSuggestion(varCheckProductListingResponseDataDiagnosisSuggestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seo_words")
+		delete(additionalProperties, "smart_texts")
+		delete(additionalProperties, "images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponseDataDiagnosisSuggestion struct {

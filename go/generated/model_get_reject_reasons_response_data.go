@@ -21,7 +21,10 @@ var _ MappedNullable = &GetRejectReasonsResponseData{}
 type GetRejectReasonsResponseData struct {
 	// The list of rejection reasons the seller has provided.
 	Reasons []GetRejectReasonsResponseDataReason `json:"reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRejectReasonsResponseData GetRejectReasonsResponseData
 
 // NewGetRejectReasonsResponseData instantiates a new GetRejectReasonsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetRejectReasonsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Reasons) {
 		toSerialize["reasons"] = o.Reasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRejectReasonsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetRejectReasonsResponseData := _GetRejectReasonsResponseData{}
+
+	err = json.Unmarshal(data, &varGetRejectReasonsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRejectReasonsResponseData(varGetRejectReasonsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRejectReasonsResponseData struct {

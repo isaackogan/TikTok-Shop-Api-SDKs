@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopProductPerformanceDetailResponseDataPerformanceIn
 type GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic struct {
 	// Traffic breakdowns.
 	Breakdowns []GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown `json:"breakdowns,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic) T
 	if !IsNil(o.Breakdowns) {
 		toSerialize["breakdowns"] = o.Breakdowns
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "breakdowns")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic struct {

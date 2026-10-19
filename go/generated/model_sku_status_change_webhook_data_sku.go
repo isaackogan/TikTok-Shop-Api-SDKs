@@ -25,7 +25,10 @@ type SKUStatusChangeWebhookDataSku struct {
 	Status *string `json:"status,omitempty"`
 	// The source of deactivation. This field is returned only when `status` is `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`.
 	DeactivationSource *string `json:"deactivation_source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SKUStatusChangeWebhookDataSku SKUStatusChangeWebhookDataSku
 
 // NewSKUStatusChangeWebhookDataSku instantiates a new SKUStatusChangeWebhookDataSku object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SKUStatusChangeWebhookDataSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DeactivationSource) {
 		toSerialize["deactivation_source"] = o.DeactivationSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SKUStatusChangeWebhookDataSku) UnmarshalJSON(data []byte) (err error) {
+	varSKUStatusChangeWebhookDataSku := _SKUStatusChangeWebhookDataSku{}
+
+	err = json.Unmarshal(data, &varSKUStatusChangeWebhookDataSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SKUStatusChangeWebhookDataSku(varSKUStatusChangeWebhookDataSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "deactivation_source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSKUStatusChangeWebhookDataSku struct {

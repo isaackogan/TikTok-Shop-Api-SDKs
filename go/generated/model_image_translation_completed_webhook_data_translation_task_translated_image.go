@@ -23,7 +23,10 @@ type ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage struct {
 	Uri *string `json:"uri,omitempty"`
 	// The URL of the translated image.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage
 
 // NewImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage instantiates a new ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage) ToMa
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage) UnmarshalJSON(data []byte) (err error) {
+	varImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage := _ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage{}
+
+	err = json.Unmarshal(data, &varImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage(varImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage struct {

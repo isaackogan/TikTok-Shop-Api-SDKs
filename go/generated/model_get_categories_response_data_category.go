@@ -29,7 +29,10 @@ type GetCategoriesResponseDataCategory struct {
 	IsLeaf *bool `json:"is_leaf,omitempty"`
 	// The shop's permission statuses for this category. Possible values: - `AVAILABLE`: None of the category-permission restrictions listed below applies to this category. To create or edit a product in the category, `is_leaf` must be `true`. - `INVITE_ONLY`: This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, `INVITE_ONLY` is also known as \"restricted\". - `NON_MAIN_CATEGORY`: This category is out of scope for this shop, and you do not have permission to use it. Contact your account manager for assistance. - `PROHIBITED`: This category is prohibited on TikTok Shop. Do not attempt to list products in this category as they will be rejected during audit. Applicable only for BR, MX, EU and SEA markets.
 	PermissionStatuses []string `json:"permission_statuses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoriesResponseDataCategory GetCategoriesResponseDataCategory
 
 // NewGetCategoriesResponseDataCategory instantiates a new GetCategoriesResponseDataCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetCategoriesResponseDataCategory) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.PermissionStatuses) {
 		toSerialize["permission_statuses"] = o.PermissionStatuses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoriesResponseDataCategory) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoriesResponseDataCategory := _GetCategoriesResponseDataCategory{}
+
+	err = json.Unmarshal(data, &varGetCategoriesResponseDataCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoriesResponseDataCategory(varGetCategoriesResponseDataCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "local_name")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "permission_statuses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoriesResponseDataCategory struct {

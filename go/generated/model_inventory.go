@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type Inventory struct {
 	BackorderQuantity *int64 `json:"backorder_quantity,omitempty"`
 	// The estimated number of working days needed for a backorder to be shipped. For non-virtual product categories, provide `handling_time` and `backorder_quantity` together. All warehouses for the same SKU must use the same `handling_time`.
 	HandlingTime *int64 `json:"handling_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Inventory Inventory
@@ -191,6 +191,11 @@ func (o Inventory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.HandlingTime) {
 		toSerialize["handling_time"] = o.HandlingTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *Inventory) UnmarshalJSON(data []byte) (err error) {
 
 	varInventory := _Inventory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInventory)
+	err = json.Unmarshal(data, &varInventory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Inventory(varInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse_id")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "backorder_quantity")
+		delete(additionalProperties, "handling_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

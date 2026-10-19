@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateCustomEngagementTaskRequest struct {
 	CouponIds []string `json:"coupon_ids,omitempty"`
 	// The custom message to send to customers.
 	CustomMessage *CreateCustomEngagementTaskRequestCustomMessage `json:"custom_message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateCustomEngagementTaskRequest CreateCustomEngagementTaskRequest
@@ -247,6 +247,11 @@ func (o CreateCustomEngagementTaskRequest) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.CustomMessage) {
 		toSerialize["custom_message"] = o.CustomMessage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -276,15 +281,25 @@ func (o *CreateCustomEngagementTaskRequest) UnmarshalJSON(data []byte) (err erro
 
 	varCreateCustomEngagementTaskRequest := _CreateCustomEngagementTaskRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateCustomEngagementTaskRequest)
+	err = json.Unmarshal(data, &varCreateCustomEngagementTaskRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateCustomEngagementTaskRequest(varCreateCustomEngagementTaskRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task_name")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "channel")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "coupon_ids")
+		delete(additionalProperties, "custom_message")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

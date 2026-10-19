@@ -27,7 +27,10 @@ type GetOpportunityDetailResponseDataOpportunityContentData struct {
 	TrendingHashtag *string `json:"trending_hashtag,omitempty"`
 	// Links to the top 10 shoppable short videos related to the product, sorted by view count.
 	TopShoppableVideoLinks []string `json:"top_shoppable_video_links,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpportunityDetailResponseDataOpportunityContentData GetOpportunityDetailResponseDataOpportunityContentData
 
 // NewGetOpportunityDetailResponseDataOpportunityContentData instantiates a new GetOpportunityDetailResponseDataOpportunityContentData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetOpportunityDetailResponseDataOpportunityContentData) ToMap() (map[str
 	if !IsNil(o.TopShoppableVideoLinks) {
 		toSerialize["top_shoppable_video_links"] = o.TopShoppableVideoLinks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpportunityDetailResponseDataOpportunityContentData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpportunityDetailResponseDataOpportunityContentData := _GetOpportunityDetailResponseDataOpportunityContentData{}
+
+	err = json.Unmarshal(data, &varGetOpportunityDetailResponseDataOpportunityContentData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpportunityDetailResponseDataOpportunityContentData(varGetOpportunityDetailResponseDataOpportunityContentData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "video_view_pv")
+		delete(additionalProperties, "shoppable_video_search_pv")
+		delete(additionalProperties, "trending_hashtag")
+		delete(additionalProperties, "top_shoppable_video_links")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpportunityDetailResponseDataOpportunityContentData struct {

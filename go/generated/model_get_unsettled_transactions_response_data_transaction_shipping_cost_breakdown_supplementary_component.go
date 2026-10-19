@@ -35,7 +35,10 @@ type GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplem
 	FbtFulfillmentFeeAmount *string `json:"fbt_fulfillment_fee_amount,omitempty"`
 	// The shipping fee discount provided by sellers.
 	SellerShippingFeeDiscountAmount *string `json:"seller_shipping_fee_discount_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent
 
 // NewGetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent instantiates a new GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupp
 	if !IsNil(o.SellerShippingFeeDiscountAmount) {
 		toSerialize["seller_shipping_fee_discount_amount"] = o.SellerShippingFeeDiscountAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent := _GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent(varGetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customer_shipping_fee_offset_amount")
+		delete(additionalProperties, "shipping_fee_subsidy_amount")
+		delete(additionalProperties, "platform_shipping_fee_discount_amount")
+		delete(additionalProperties, "fbm_shipping_cost_amount")
+		delete(additionalProperties, "fbt_shipping_cost_amount")
+		delete(additionalProperties, "promo_shipping_incentive_amount")
+		delete(additionalProperties, "fbt_fulfillment_fee_amount")
+		delete(additionalProperties, "seller_shipping_fee_discount_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent struct {

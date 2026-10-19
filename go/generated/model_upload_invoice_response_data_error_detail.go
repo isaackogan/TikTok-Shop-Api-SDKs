@@ -23,7 +23,10 @@ type UploadInvoiceResponseDataErrorDetail struct {
 	PackageId *string `json:"package_id,omitempty"`
 	// The order IDs where errors occurred.
 	OrderIds []string `json:"order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadInvoiceResponseDataErrorDetail UploadInvoiceResponseDataErrorDetail
 
 // NewUploadInvoiceResponseDataErrorDetail instantiates a new UploadInvoiceResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UploadInvoiceResponseDataErrorDetail) ToMap() (map[string]interface{}, e
 	if !IsNil(o.OrderIds) {
 		toSerialize["order_ids"] = o.OrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadInvoiceResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varUploadInvoiceResponseDataErrorDetail := _UploadInvoiceResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varUploadInvoiceResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadInvoiceResponseDataErrorDetail(varUploadInvoiceResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadInvoiceResponseDataErrorDetail struct {

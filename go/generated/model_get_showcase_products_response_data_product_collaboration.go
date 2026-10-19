@@ -25,7 +25,10 @@ type GetShowcaseProductsResponseDataProductCollaboration struct {
 	Type *string `json:"type,omitempty"`
 	// The partner information.
 	Partner *GetShowcaseProductsResponseDataProductCollaborationPartner `json:"partner,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductCollaboration GetShowcaseProductsResponseDataProductCollaboration
 
 // NewGetShowcaseProductsResponseDataProductCollaboration instantiates a new GetShowcaseProductsResponseDataProductCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShowcaseProductsResponseDataProductCollaboration) ToMap() (map[string
 	if !IsNil(o.Partner) {
 		toSerialize["partner"] = o.Partner
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductCollaboration := _GetShowcaseProductsResponseDataProductCollaboration{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductCollaboration(varGetShowcaseProductsResponseDataProductCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "partner")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductCollaboration struct {

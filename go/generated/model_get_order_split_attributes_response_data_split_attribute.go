@@ -29,7 +29,10 @@ type GetOrderSplitAttributesResponseDataSplitAttribute struct {
 	MustSplit *bool `json:"must_split,omitempty"`
 	// The reason why the order must be split. Only return this field when must_split = true.
 	MustSplitReasons []GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason `json:"must_split_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderSplitAttributesResponseDataSplitAttribute GetOrderSplitAttributesResponseDataSplitAttribute
 
 // NewGetOrderSplitAttributesResponseDataSplitAttribute instantiates a new GetOrderSplitAttributesResponseDataSplitAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetOrderSplitAttributesResponseDataSplitAttribute) ToMap() (map[string]i
 	if !IsNil(o.MustSplitReasons) {
 		toSerialize["must_split_reasons"] = o.MustSplitReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderSplitAttributesResponseDataSplitAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderSplitAttributesResponseDataSplitAttribute := _GetOrderSplitAttributesResponseDataSplitAttribute{}
+
+	err = json.Unmarshal(data, &varGetOrderSplitAttributesResponseDataSplitAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderSplitAttributesResponseDataSplitAttribute(varGetOrderSplitAttributesResponseDataSplitAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "can_split")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "must_split")
+		delete(additionalProperties, "must_split_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderSplitAttributesResponseDataSplitAttribute struct {

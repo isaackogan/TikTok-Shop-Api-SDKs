@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SendIMMessageRequest struct {
 	MsgType string `json:"msg_type"`
 	// Message content as a JSON-serialized string. The decoded JSON object depends on `msg_type`:  - `TEXT`: `{\"content\": \"simple text\"}`. `content` is required, must not be empty, and supports up to 2,000 Unicode characters. - `PRODUCT_CARD`: `{\"product_id\": \"12345\"}`. `product_id` is required. - `TARGET_COLLABORATION_CARD`: `{\"target_collaboration_id\": \"1234\"}`. `target_collaboration_id` is required and is the invitation group ID. - `FREE_SAMPLE_CARD`: `{\"apply_id\": \"1234\"}`. `apply_id` is required. - `IMAGE`: `{\"url\": \"https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/2ca53c34ad8443e6b39f4e0153d3aed4~tplv-o3syd03w52-origin-image.image?from=1320446476\", \"width\": 1280, \"height\": 720}`. `url`, `width`, and `height` are required; `width` and `height` must be integers. You can obtain `url` by calling [Upload Messages Image](https://partner.tiktokshop.com/docv2/page/upload-message-image-v2-202608). - `CRM_TEXT_WITH_PRODUCTS_CARD`: `{\"product_ids\": \"12345,123456\", \"title\": \"abc\", \"content\": \"abc\"}`. `product_ids` is required and contains one to five comma-separated positive product IDs. `content` is required, must not be empty, and supports up to 500 Unicode characters. `title` supports up to 50 Unicode characters. - `CRM_TEXT_WITH_IMAGE_CARD`: `{\"image_url\": \"https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/2ca53c34ad8443e6b39f4e0153d3aed4~tplv-o3syd03w52-origin-image.image?from=1320446476\", \"title\": \"abc\", \"content\": \"abc\"}`. `image_url` and `content` are required. `content` must not be empty and supports up to 500 Unicode characters. `title` supports up to 50 Unicode characters.
 	Content string `json:"content"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendIMMessageRequest SendIMMessageRequest
@@ -108,6 +108,11 @@ func (o SendIMMessageRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["msg_type"] = o.MsgType
 	toSerialize["content"] = o.Content
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SendIMMessageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSendIMMessageRequest := _SendIMMessageRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendIMMessageRequest)
+	err = json.Unmarshal(data, &varSendIMMessageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendIMMessageRequest(varSendIMMessageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "msg_type")
+		delete(additionalProperties, "content")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

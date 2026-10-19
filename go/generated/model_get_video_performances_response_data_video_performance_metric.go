@@ -29,7 +29,10 @@ type GetVideoPerformancesResponseDataVideoPerformanceMetric struct {
 	ItemSoldCount *int64 `json:"item_sold_count,omitempty"`
 	// Gross merchandise value (GMV) for this video.
 	Gmv *Gmv `json:"gmv,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetVideoPerformancesResponseDataVideoPerformanceMetric GetVideoPerformancesResponseDataVideoPerformanceMetric
 
 // NewGetVideoPerformancesResponseDataVideoPerformanceMetric instantiates a new GetVideoPerformancesResponseDataVideoPerformanceMetric object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetVideoPerformancesResponseDataVideoPerformanceMetric) ToMap() (map[str
 	if !IsNil(o.Gmv) {
 		toSerialize["gmv"] = o.Gmv
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetVideoPerformancesResponseDataVideoPerformanceMetric) UnmarshalJSON(data []byte) (err error) {
+	varGetVideoPerformancesResponseDataVideoPerformanceMetric := _GetVideoPerformancesResponseDataVideoPerformanceMetric{}
+
+	err = json.Unmarshal(data, &varGetVideoPerformancesResponseDataVideoPerformanceMetric)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetVideoPerformancesResponseDataVideoPerformanceMetric(varGetVideoPerformancesResponseDataVideoPerformanceMetric)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "anchor_display_rate")
+		delete(additionalProperties, "click_through_rate")
+		delete(additionalProperties, "order_count")
+		delete(additionalProperties, "item_sold_count")
+		delete(additionalProperties, "gmv")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetVideoPerformancesResponseDataVideoPerformanceMetric struct {

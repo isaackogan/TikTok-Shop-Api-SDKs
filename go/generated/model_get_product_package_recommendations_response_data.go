@@ -25,7 +25,10 @@ type GetProductPackageRecommendationsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The product package recommendations that meet the query conditions. Each item identifies a product and provides detected anomaly types with any available weight or dimension correction range.
 	Products []GetProductPackageRecommendationsResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseData GetProductPackageRecommendationsResponseData
 
 // NewGetProductPackageRecommendationsResponseData instantiates a new GetProductPackageRecommendationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductPackageRecommendationsResponseData) ToMap() (map[string]interf
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseData := _GetProductPackageRecommendationsResponseData{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseData(varGetProductPackageRecommendationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseData struct {

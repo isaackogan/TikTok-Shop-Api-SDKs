@@ -26,7 +26,10 @@ type CreateTargetCollaborationResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateTargetCollaborationResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateTargetCollaborationResponse CreateTargetCollaborationResponse
 
 // NewCreateTargetCollaborationResponse instantiates a new CreateTargetCollaborationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateTargetCollaborationResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateTargetCollaborationResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateTargetCollaborationResponse := _CreateTargetCollaborationResponse{}
+
+	err = json.Unmarshal(data, &varCreateTargetCollaborationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateTargetCollaborationResponse(varCreateTargetCollaborationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateTargetCollaborationResponse struct {

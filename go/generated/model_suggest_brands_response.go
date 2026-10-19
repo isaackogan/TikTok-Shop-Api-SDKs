@@ -26,7 +26,10 @@ type SuggestBrandsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SuggestBrandsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SuggestBrandsResponse SuggestBrandsResponse
 
 // NewSuggestBrandsResponse instantiates a new SuggestBrandsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SuggestBrandsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SuggestBrandsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSuggestBrandsResponse := _SuggestBrandsResponse{}
+
+	err = json.Unmarshal(data, &varSuggestBrandsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SuggestBrandsResponse(varSuggestBrandsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSuggestBrandsResponse struct {

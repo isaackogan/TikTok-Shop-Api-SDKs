@@ -23,7 +23,10 @@ type ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableT
 	StartTimestamp *string `json:"start_timestamp,omitempty"`
 	// Epoch seconds representing Sunday at midnight like 2026-03-29T07:00:00Z, in US we are using US west time zone  **This value should be passed in the subsequent GetInboundMethodDetail API**
 	EndTimestamp *string `json:"end_timestamp,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList
 
 // NewListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList instantiates a new ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailab
 	if !IsNil(o.EndTimestamp) {
 		toSerialize["end_timestamp"] = o.EndTimestamp
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList) UnmarshalJSON(data []byte) (err error) {
+	varListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList := _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList{}
+
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList(varListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_timestamp")
+		delete(additionalProperties, "end_timestamp")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList struct {

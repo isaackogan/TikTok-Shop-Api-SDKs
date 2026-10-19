@@ -21,7 +21,10 @@ var _ MappedNullable = &SellerGetSampleRequestDeeplinkResponseData{}
 type SellerGetSampleRequestDeeplinkResponseData struct {
 	// Use this deeplink to invoke TikTok:
 	Deeplink *string `json:"deeplink,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerGetSampleRequestDeeplinkResponseData SellerGetSampleRequestDeeplinkResponseData
 
 // NewSellerGetSampleRequestDeeplinkResponseData instantiates a new SellerGetSampleRequestDeeplinkResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SellerGetSampleRequestDeeplinkResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.Deeplink) {
 		toSerialize["deeplink"] = o.Deeplink
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerGetSampleRequestDeeplinkResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSellerGetSampleRequestDeeplinkResponseData := _SellerGetSampleRequestDeeplinkResponseData{}
+
+	err = json.Unmarshal(data, &varSellerGetSampleRequestDeeplinkResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerGetSampleRequestDeeplinkResponseData(varSellerGetSampleRequestDeeplinkResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "deeplink")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerGetSampleRequestDeeplinkResponseData struct {

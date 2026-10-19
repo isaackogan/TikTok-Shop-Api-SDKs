@@ -27,7 +27,10 @@ type GetOpenCollaborationCreatorContentDetailsResponseData struct {
 	CreatorContentDetails []GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail `json:"creator_content_details,omitempty"`
 	// Product details.
 	Product *GetOpenCollaborationCreatorContentDetailsResponseDataProduct `json:"product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationCreatorContentDetailsResponseData GetOpenCollaborationCreatorContentDetailsResponseData
 
 // NewGetOpenCollaborationCreatorContentDetailsResponseData instantiates a new GetOpenCollaborationCreatorContentDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetOpenCollaborationCreatorContentDetailsResponseData) ToMap() (map[stri
 	if !IsNil(o.Product) {
 		toSerialize["product"] = o.Product
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationCreatorContentDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationCreatorContentDetailsResponseData := _GetOpenCollaborationCreatorContentDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationCreatorContentDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationCreatorContentDetailsResponseData(varGetOpenCollaborationCreatorContentDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "creator_content_details")
+		delete(additionalProperties, "product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationCreatorContentDetailsResponseData struct {

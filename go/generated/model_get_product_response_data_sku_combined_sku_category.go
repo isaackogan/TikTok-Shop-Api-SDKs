@@ -27,7 +27,10 @@ type GetProductResponseDataSkuCombinedSkuCategory struct {
 	LocalName *string `json:"local_name,omitempty"`
 	// The parent category ID of the source product included in the virtual bundle.
 	ParentId *string `json:"parent_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuCombinedSkuCategory GetProductResponseDataSkuCombinedSkuCategory
 
 // NewGetProductResponseDataSkuCombinedSkuCategory instantiates a new GetProductResponseDataSkuCombinedSkuCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataSkuCombinedSkuCategory) ToMap() (map[string]interf
 	if !IsNil(o.ParentId) {
 		toSerialize["parent_id"] = o.ParentId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuCombinedSkuCategory) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuCombinedSkuCategory := _GetProductResponseDataSkuCombinedSkuCategory{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuCombinedSkuCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuCombinedSkuCategory(varGetProductResponseDataSkuCombinedSkuCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "local_name")
+		delete(additionalProperties, "parent_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuCombinedSkuCategory struct {

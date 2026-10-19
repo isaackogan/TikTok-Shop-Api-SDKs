@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type RecommendGlobalCategoriesRequest struct {
 	Images []DiagnoseAndOptimizeProductRequestSizeChartImage `json:"images,omitempty"`
 	// The category tree version to use for this product. Possible values based on region: - US: `v2`, represents the 7-level category tree.   **Important**: If the seller account contains an active US shop, you must pass `v2` when using this API. - Other regions: `v1`, represents the 3-level category tree. Default: `v1`
 	CategoryVersion *string `json:"category_version,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendGlobalCategoriesRequest RecommendGlobalCategoriesRequest
@@ -191,6 +191,11 @@ func (o RecommendGlobalCategoriesRequest) ToMap() (map[string]interface{}, error
 	if !IsNil(o.CategoryVersion) {
 		toSerialize["category_version"] = o.CategoryVersion
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *RecommendGlobalCategoriesRequest) UnmarshalJSON(data []byte) (err error
 
 	varRecommendGlobalCategoriesRequest := _RecommendGlobalCategoriesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendGlobalCategoriesRequest)
+	err = json.Unmarshal(data, &varRecommendGlobalCategoriesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendGlobalCategoriesRequest(varRecommendGlobalCategoriesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_title")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "category_version")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

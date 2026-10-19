@@ -23,7 +23,10 @@ type QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule
 	HasFreeSample *bool `json:"has_free_sample,omitempty"`
 	// If true, creators invited to the target collaboration are exempt from seller review and will automatically be approved for a free sample. Note that if has_free_sample=false, this field will not take effect.
 	IsSampleApprovalExempt *bool `json:"is_sample_approval_exempt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule
 
 // NewQueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule instantiates a new QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleR
 	if !IsNil(o.IsSampleApprovalExempt) {
 		toSerialize["is_sample_approval_exempt"] = o.IsSampleApprovalExempt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule) UnmarshalJSON(data []byte) (err error) {
+	varQueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule := _QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule{}
+
+	err = json.Unmarshal(data, &varQueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule(varQueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_free_sample")
+		delete(additionalProperties, "is_sample_approval_exempt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule struct {

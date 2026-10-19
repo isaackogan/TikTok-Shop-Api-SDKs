@@ -27,7 +27,10 @@ type GetPackageDetailResponseDataInsurance struct {
 	IsClaimEligible *bool `json:"is_claim_eligible,omitempty"`
 	// The insurance claim status. Available values: - `NOT_STARTED`: Claim has not been initiated for this package. - `CLAIM_PENDING`: Claim is currently under review. - `APPROVED`: Claim has been approved. - `DECLINED`: Claim has been declined.
 	ClaimStatus *string `json:"claim_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageDetailResponseDataInsurance GetPackageDetailResponseDataInsurance
 
 // NewGetPackageDetailResponseDataInsurance instantiates a new GetPackageDetailResponseDataInsurance object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetPackageDetailResponseDataInsurance) ToMap() (map[string]interface{}, 
 	if !IsNil(o.ClaimStatus) {
 		toSerialize["claim_status"] = o.ClaimStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageDetailResponseDataInsurance) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageDetailResponseDataInsurance := _GetPackageDetailResponseDataInsurance{}
+
+	err = json.Unmarshal(data, &varGetPackageDetailResponseDataInsurance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageDetailResponseDataInsurance(varGetPackageDetailResponseDataInsurance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_purchased")
+		delete(additionalProperties, "coverage_amount")
+		delete(additionalProperties, "is_claim_eligible")
+		delete(additionalProperties, "claim_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageDetailResponseDataInsurance struct {

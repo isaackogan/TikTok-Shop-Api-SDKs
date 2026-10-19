@@ -21,7 +21,10 @@ var _ MappedNullable = &SampleApplicationStatusChangeWebhookDataCreator{}
 type SampleApplicationStatusChangeWebhookDataCreator struct {
 	// Creator Open ID. [More details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
 	CreatorOpenId *string `json:"creator_open_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SampleApplicationStatusChangeWebhookDataCreator SampleApplicationStatusChangeWebhookDataCreator
 
 // NewSampleApplicationStatusChangeWebhookDataCreator instantiates a new SampleApplicationStatusChangeWebhookDataCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SampleApplicationStatusChangeWebhookDataCreator) ToMap() (map[string]int
 	if !IsNil(o.CreatorOpenId) {
 		toSerialize["creator_open_id"] = o.CreatorOpenId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SampleApplicationStatusChangeWebhookDataCreator) UnmarshalJSON(data []byte) (err error) {
+	varSampleApplicationStatusChangeWebhookDataCreator := _SampleApplicationStatusChangeWebhookDataCreator{}
+
+	err = json.Unmarshal(data, &varSampleApplicationStatusChangeWebhookDataCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SampleApplicationStatusChangeWebhookDataCreator(varSampleApplicationStatusChangeWebhookDataCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSampleApplicationStatusChangeWebhookDataCreator struct {

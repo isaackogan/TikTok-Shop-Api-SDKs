@@ -21,7 +21,10 @@ var _ MappedNullable = &CheckCreatorSampleEligibilityResponseData{}
 type CheckCreatorSampleEligibilityResponseData struct {
 	// Creator applicable sample label information.
 	Label *CheckCreatorSampleEligibilityResponseDataLabel `json:"label,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorSampleEligibilityResponseData CheckCreatorSampleEligibilityResponseData
 
 // NewCheckCreatorSampleEligibilityResponseData instantiates a new CheckCreatorSampleEligibilityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CheckCreatorSampleEligibilityResponseData) ToMap() (map[string]interface
 	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorSampleEligibilityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorSampleEligibilityResponseData := _CheckCreatorSampleEligibilityResponseData{}
+
+	err = json.Unmarshal(data, &varCheckCreatorSampleEligibilityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorSampleEligibilityResponseData(varCheckCreatorSampleEligibilityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "label")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorSampleEligibilityResponseData struct {

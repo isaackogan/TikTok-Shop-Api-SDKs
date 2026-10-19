@@ -25,7 +25,10 @@ type GetAffiliatePartnerCampaignListResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The total number of campaigns in the list.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignListResponseData GetAffiliatePartnerCampaignListResponseData
 
 // NewGetAffiliatePartnerCampaignListResponseData instantiates a new GetAffiliatePartnerCampaignListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetAffiliatePartnerCampaignListResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignListResponseData := _GetAffiliatePartnerCampaignListResponseData{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignListResponseData(varGetAffiliatePartnerCampaignListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "campaigns")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignListResponseData struct {

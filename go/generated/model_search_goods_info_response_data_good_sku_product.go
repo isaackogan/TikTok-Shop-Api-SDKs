@@ -25,7 +25,10 @@ type SearchGoodsInfoResponseDataGoodSkuProduct struct {
 	Name *string `json:"name,omitempty"`
 	// The Tiktok Shop product image url.
 	ImageUrl *string `json:"image_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodSkuProduct SearchGoodsInfoResponseDataGoodSkuProduct
 
 // NewSearchGoodsInfoResponseDataGoodSkuProduct instantiates a new SearchGoodsInfoResponseDataGoodSkuProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchGoodsInfoResponseDataGoodSkuProduct) ToMap() (map[string]interface
 	if !IsNil(o.ImageUrl) {
 		toSerialize["image_url"] = o.ImageUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodSkuProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodSkuProduct := _SearchGoodsInfoResponseDataGoodSkuProduct{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodSkuProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodSkuProduct(varSearchGoodsInfoResponseDataGoodSkuProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "image_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodSkuProduct struct {

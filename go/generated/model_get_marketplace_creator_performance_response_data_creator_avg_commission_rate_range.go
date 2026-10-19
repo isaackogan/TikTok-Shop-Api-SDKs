@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange s
 	MinimumAmount *int64 `json:"minimum_amount,omitempty"`
 	// The largest average commission rate in hundredths of a percent.
 	MaximumAmount *int64 `json:"maximum_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRang
 	if !IsNil(o.MaximumAmount) {
 		toSerialize["maximum_amount"] = o.MaximumAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange := _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange(varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorAvgCommissionRateRange struct {

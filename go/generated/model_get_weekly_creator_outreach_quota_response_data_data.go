@@ -47,7 +47,10 @@ type GetWeeklyCreatorOutreachQuotaResponseDataData struct {
 	QuotaDetails []GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail `json:"quota_details,omitempty"`
 	// Threshold for exposure posts percentile  for shops to obtain additional reward of creator-level quota, 0.8 means the 80th percentile.
 	BonusExposurePostPercentileThreshold *string `json:"bonus_exposure_post_percentile_threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachQuotaResponseDataData GetWeeklyCreatorOutreachQuotaResponseDataData
 
 // NewGetWeeklyCreatorOutreachQuotaResponseDataData instantiates a new GetWeeklyCreatorOutreachQuotaResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -566,7 +569,46 @@ func (o GetWeeklyCreatorOutreachQuotaResponseDataData) ToMap() (map[string]inter
 	if !IsNil(o.BonusExposurePostPercentileThreshold) {
 		toSerialize["bonus_exposure_post_percentile_threshold"] = o.BonusExposurePostPercentileThreshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachQuotaResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachQuotaResponseDataData := _GetWeeklyCreatorOutreachQuotaResponseDataData{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachQuotaResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachQuotaResponseDataData(varGetWeeklyCreatorOutreachQuotaResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "quota_type")
+		delete(additionalProperties, "gmv_tier")
+		delete(additionalProperties, "quota_sum")
+		delete(additionalProperties, "quota_use")
+		delete(additionalProperties, "unlimited")
+		delete(additionalProperties, "reached_max_follower_cnt")
+		delete(additionalProperties, "new_connect_count")
+		delete(additionalProperties, "pair_connect_count")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "gmv_level_rule")
+		delete(additionalProperties, "quota_details")
+		delete(additionalProperties, "bonus_exposure_post_percentile_threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachQuotaResponseDataData struct {

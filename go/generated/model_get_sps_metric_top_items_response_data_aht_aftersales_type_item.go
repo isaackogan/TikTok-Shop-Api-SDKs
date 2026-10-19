@@ -33,7 +33,10 @@ type GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem struct {
 	TopTypeOrderCount *int64 `json:"top_type_order_count,omitempty"`
 	// Product image URL.
 	ImageUrl *string `json:"image_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem
 
 // NewGetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem instantiates a new GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem) ToMap() (map[stri
 	if !IsNil(o.ImageUrl) {
 		toSerialize["image_url"] = o.ImageUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem := _GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem(varGetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "handle_duration_hours")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "return_order_count")
+		delete(additionalProperties, "top_aftersales_type_name")
+		delete(additionalProperties, "top_type_order_count")
+		delete(additionalProperties, "image_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem struct {

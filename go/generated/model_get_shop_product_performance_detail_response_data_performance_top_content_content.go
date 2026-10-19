@@ -25,7 +25,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent str
 	ItemsSold *int64 `json:"items_sold,omitempty"`
 	// Gross merchandise value.
 	Gmv *Gmv `json:"gmv,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceTopContentContent instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent)
 	if !IsNil(o.Gmv) {
 		toSerialize["gmv"] = o.Gmv
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceTopContentContent := _GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceTopContentContent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent(varGetShopProductPerformanceDetailResponseDataPerformanceTopContentContent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_id")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "gmv")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceTopContentContent struct {

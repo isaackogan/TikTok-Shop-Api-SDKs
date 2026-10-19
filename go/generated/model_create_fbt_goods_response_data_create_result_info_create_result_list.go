@@ -27,7 +27,10 @@ type CreateFBTGoodsResponseDataCreateResultInfoCreateResultList struct {
 	TtsGoodsId *string `json:"tts_goods_id,omitempty"`
 	// Reason the goods record was not created. Returned when is_success is false.
 	FailReason *string `json:"fail_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFBTGoodsResponseDataCreateResultInfoCreateResultList CreateFBTGoodsResponseDataCreateResultInfoCreateResultList
 
 // NewCreateFBTGoodsResponseDataCreateResultInfoCreateResultList instantiates a new CreateFBTGoodsResponseDataCreateResultInfoCreateResultList object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CreateFBTGoodsResponseDataCreateResultInfoCreateResultList) ToMap() (map
 	if !IsNil(o.FailReason) {
 		toSerialize["fail_reason"] = o.FailReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFBTGoodsResponseDataCreateResultInfoCreateResultList) UnmarshalJSON(data []byte) (err error) {
+	varCreateFBTGoodsResponseDataCreateResultInfoCreateResultList := _CreateFBTGoodsResponseDataCreateResultInfoCreateResultList{}
+
+	err = json.Unmarshal(data, &varCreateFBTGoodsResponseDataCreateResultInfoCreateResultList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFBTGoodsResponseDataCreateResultInfoCreateResultList(varCreateFBTGoodsResponseDataCreateResultInfoCreateResultList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_sku_id")
+		delete(additionalProperties, "is_success")
+		delete(additionalProperties, "tts_goods_id")
+		delete(additionalProperties, "fail_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFBTGoodsResponseDataCreateResultInfoCreateResultList struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCreatorMarketplaceAdvancedSearchFiltersResponseData{}
 type GetCreatorMarketplaceAdvancedSearchFiltersResponseData struct {
 	// The available Creator Marketplace search-filter values and sorting options.
 	Data *GetCreatorMarketplaceAdvancedSearchFiltersResponseDataData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorMarketplaceAdvancedSearchFiltersResponseData GetCreatorMarketplaceAdvancedSearchFiltersResponseData
 
 // NewGetCreatorMarketplaceAdvancedSearchFiltersResponseData instantiates a new GetCreatorMarketplaceAdvancedSearchFiltersResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCreatorMarketplaceAdvancedSearchFiltersResponseData) ToMap() (map[str
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorMarketplaceAdvancedSearchFiltersResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorMarketplaceAdvancedSearchFiltersResponseData := _GetCreatorMarketplaceAdvancedSearchFiltersResponseData{}
+
+	err = json.Unmarshal(data, &varGetCreatorMarketplaceAdvancedSearchFiltersResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorMarketplaceAdvancedSearchFiltersResponseData(varGetCreatorMarketplaceAdvancedSearchFiltersResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorMarketplaceAdvancedSearchFiltersResponseData struct {

@@ -29,7 +29,10 @@ type GetEligibleShippingServicesResponseData struct {
 	ShippingServices []GetEligibleShippingServicesResponseDataShippingService `json:"shipping_services,omitempty"`
 	// The dimension of the scheduled package.
 	Dimension *GetEligibleShippingServicesResponseDataDimension `json:"dimension,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEligibleShippingServicesResponseData GetEligibleShippingServicesResponseData
 
 // NewGetEligibleShippingServicesResponseData instantiates a new GetEligibleShippingServicesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetEligibleShippingServicesResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.Dimension) {
 		toSerialize["dimension"] = o.Dimension
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEligibleShippingServicesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetEligibleShippingServicesResponseData := _GetEligibleShippingServicesResponseData{}
+
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEligibleShippingServicesResponseData(varGetEligibleShippingServicesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "shipping_services")
+		delete(additionalProperties, "dimension")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEligibleShippingServicesResponseData struct {

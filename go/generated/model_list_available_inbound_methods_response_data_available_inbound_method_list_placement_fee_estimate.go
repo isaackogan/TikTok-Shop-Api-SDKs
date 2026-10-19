@@ -23,7 +23,10 @@ type ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementF
 	Amount *string `json:"amount,omitempty"`
 	// - USD - CNY - EUR
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate
 
 // NewListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate instantiates a new ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlaceme
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate) UnmarshalJSON(data []byte) (err error) {
+	varListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate := _ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate{}
+
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate(varListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate struct {

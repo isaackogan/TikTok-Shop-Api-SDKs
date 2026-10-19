@@ -31,7 +31,10 @@ type GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption struct {
 	MetricValueRange []string `json:"metric_value_range,omitempty"`
 	// Allowed imperial range in [minimum, maximum] order.
 	ImperialValueRange []string `json:"imperial_value_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption
 
 // NewGetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption instantiates a new GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption) ToMap()
 	if !IsNil(o.ImperialValueRange) {
 		toSerialize["imperial_value_range"] = o.ImperialValueRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption := _GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption(varGetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "metric_value_range")
+		delete(additionalProperties, "imperial_value_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption struct {

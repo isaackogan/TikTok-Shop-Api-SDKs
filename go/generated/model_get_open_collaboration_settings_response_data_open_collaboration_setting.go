@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOpenCollaborationSettingsResponseDataOpenCollaboratio
 type GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting struct {
 	// Settings for automatically adding products to open collaboration.
 	AutoAddProduct *GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct `json:"auto_add_product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting
 
 // NewGetOpenCollaborationSettingsResponseDataOpenCollaborationSetting instantiates a new GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting) ToMap(
 	if !IsNil(o.AutoAddProduct) {
 		toSerialize["auto_add_product"] = o.AutoAddProduct
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSettingsResponseDataOpenCollaborationSetting := _GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSettingsResponseDataOpenCollaborationSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting(varGetOpenCollaborationSettingsResponseDataOpenCollaborationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auto_add_product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSettingsResponseDataOpenCollaborationSetting struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShoppableVideoPrecheckResultResponseData{}
 type GetShoppableVideoPrecheckResultResponseData struct {
 	// Video pre-check task
 	PrecheckTask *GetShoppableVideoPrecheckResultResponseDataPrecheckTask `json:"precheck_task,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseData GetShoppableVideoPrecheckResultResponseData
 
 // NewGetShoppableVideoPrecheckResultResponseData instantiates a new GetShoppableVideoPrecheckResultResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShoppableVideoPrecheckResultResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.PrecheckTask) {
 		toSerialize["precheck_task"] = o.PrecheckTask
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseData := _GetShoppableVideoPrecheckResultResponseData{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseData(varGetShoppableVideoPrecheckResultResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "precheck_task")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseData struct {

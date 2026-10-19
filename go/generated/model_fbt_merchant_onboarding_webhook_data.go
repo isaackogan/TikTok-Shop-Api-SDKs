@@ -23,7 +23,10 @@ type FBTMerchantOnboardingWebhookData struct {
 	OnboardedRegions []FBTMerchantOnboardingWebhookDataOnboardedRegion `json:"onboarded_regions,omitempty"`
 	// The latest update time. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FBTMerchantOnboardingWebhookData FBTMerchantOnboardingWebhookData
 
 // NewFBTMerchantOnboardingWebhookData instantiates a new FBTMerchantOnboardingWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o FBTMerchantOnboardingWebhookData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FBTMerchantOnboardingWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varFBTMerchantOnboardingWebhookData := _FBTMerchantOnboardingWebhookData{}
+
+	err = json.Unmarshal(data, &varFBTMerchantOnboardingWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FBTMerchantOnboardingWebhookData(varFBTMerchantOnboardingWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "onboarded_regions")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFBTMerchantOnboardingWebhookData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &CombinePackageRequest{}
 type CombinePackageRequest struct {
 	// The packages to combine. Provide at least one package. Each item identifies a package and can specify the order IDs to include.
 	CombinablePackages []CombinePackageRequestCombinablePackage `json:"combinable_packages"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CombinePackageRequest CombinePackageRequest
@@ -80,6 +80,11 @@ func (o CombinePackageRequest) MarshalJSON() ([]byte, error) {
 func (o CombinePackageRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["combinable_packages"] = o.CombinablePackages
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *CombinePackageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCombinePackageRequest := _CombinePackageRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCombinePackageRequest)
+	err = json.Unmarshal(data, &varCombinePackageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CombinePackageRequest(varCombinePackageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "combinable_packages")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type PartialEditProductRequestSubscribeInfoEdit struct {
 	SubscribeStatus *string `json:"subscribe_status,omitempty"`
 	// All of the Save and Subscribe discount details.
 	DiscountDetails []DiscountDetail `json:"discount_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestSubscribeInfoEdit PartialEditProductRequestSubscribeInfoEdit
 
 // NewPartialEditProductRequestSubscribeInfoEdit instantiates a new PartialEditProductRequestSubscribeInfoEdit object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PartialEditProductRequestSubscribeInfoEdit) ToMap() (map[string]interfac
 	if !IsNil(o.DiscountDetails) {
 		toSerialize["discount_details"] = o.DiscountDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestSubscribeInfoEdit) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestSubscribeInfoEdit := _PartialEditProductRequestSubscribeInfoEdit{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestSubscribeInfoEdit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestSubscribeInfoEdit(varPartialEditProductRequestSubscribeInfoEdit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "subscribe_status")
+		delete(additionalProperties, "discount_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestSubscribeInfoEdit struct {

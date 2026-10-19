@@ -25,7 +25,10 @@ type SearchProductsResponseData struct {
 	Products []SearchProductsResponseDataProduct `json:"products,omitempty"`
 	// An opaque token used to retrieve the next page of a paginated result set. Provide this value in the `page_token` parameter of your request if the current response does not return all the results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseData SearchProductsResponseData
 
 // NewSearchProductsResponseData instantiates a new SearchProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchProductsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseData := _SearchProductsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseData(varSearchProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseData struct {

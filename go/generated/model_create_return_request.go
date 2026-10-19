@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -41,6 +40,7 @@ type CreateReturnRequest struct {
 	HandoverMethod *string `json:"handover_method,omitempty"`
 	// Specifies the line items to include in the return request and supports bundle order splitting. Every entry must include `order_line_item_id`. For a bundle sub-item, also include `sub_order_line_item_id`; omit `sub_order_line_item_id` for a normal order line. Do not mix normal order lines and bundle sub-items in the same request. **Note:** This field is completely backward compatible with the legacy `order_line_item_ids` field.
 	OrderLineList []OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateReturnRequest CreateReturnRequest
@@ -395,6 +395,11 @@ func (o CreateReturnRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -424,15 +429,29 @@ func (o *CreateReturnRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateReturnRequest := _CreateReturnRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateReturnRequest)
+	err = json.Unmarshal(data, &varCreateReturnRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateReturnRequest(varCreateReturnRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "return_reason")
+		delete(additionalProperties, "return_type")
+		delete(additionalProperties, "refund_total")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "shipment_type")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

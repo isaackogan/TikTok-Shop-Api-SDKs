@@ -25,7 +25,10 @@ type UsageLimit struct {
 	TotalClaimLimit *int64 `json:"total_claim_limit,omitempty"`
 	// The number of times that a claimed coupon can be redeemed across all buyers. (Only available in ID, MY, PH, TH, SG, VN regions.)
 	RedemptionLimit *int64 `json:"redemption_limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UsageLimit UsageLimit
 
 // NewUsageLimit instantiates a new UsageLimit object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UsageLimit) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RedemptionLimit) {
 		toSerialize["redemption_limit"] = o.RedemptionLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UsageLimit) UnmarshalJSON(data []byte) (err error) {
+	varUsageLimit := _UsageLimit{}
+
+	err = json.Unmarshal(data, &varUsageLimit)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UsageLimit(varUsageLimit)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "single_buyer_claim_limit")
+		delete(additionalProperties, "total_claim_limit")
+		delete(additionalProperties, "redemption_limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUsageLimit struct {

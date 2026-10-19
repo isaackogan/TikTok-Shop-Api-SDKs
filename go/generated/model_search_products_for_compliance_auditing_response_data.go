@@ -25,7 +25,10 @@ type SearchProductsForComplianceAuditingResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Product information
 	Products []SearchProductsForComplianceAuditingResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsForComplianceAuditingResponseData SearchProductsForComplianceAuditingResponseData
 
 // NewSearchProductsForComplianceAuditingResponseData instantiates a new SearchProductsForComplianceAuditingResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchProductsForComplianceAuditingResponseData) ToMap() (map[string]int
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsForComplianceAuditingResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsForComplianceAuditingResponseData := _SearchProductsForComplianceAuditingResponseData{}
+
+	err = json.Unmarshal(data, &varSearchProductsForComplianceAuditingResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsForComplianceAuditingResponseData(varSearchProductsForComplianceAuditingResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsForComplianceAuditingResponseData struct {

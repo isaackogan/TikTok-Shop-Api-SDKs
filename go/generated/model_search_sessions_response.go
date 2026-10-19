@@ -26,7 +26,10 @@ type SearchSessionsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchSessionsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSessionsResponse SearchSessionsResponse
 
 // NewSearchSessionsResponse instantiates a new SearchSessionsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchSessionsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSessionsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchSessionsResponse := _SearchSessionsResponse{}
+
+	err = json.Unmarshal(data, &varSearchSessionsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSessionsResponse(varSearchSessionsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSessionsResponse struct {

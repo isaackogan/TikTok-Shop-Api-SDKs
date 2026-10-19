@@ -27,7 +27,10 @@ type Manufacturer struct {
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The email address of the manufacturer.
 	Email *string `json:"email,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Manufacturer Manufacturer
 
 // NewManufacturer instantiates a new Manufacturer object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o Manufacturer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Manufacturer) UnmarshalJSON(data []byte) (err error) {
+	varManufacturer := _Manufacturer{}
+
+	err = json.Unmarshal(data, &varManufacturer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Manufacturer(varManufacturer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "email")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableManufacturer struct {

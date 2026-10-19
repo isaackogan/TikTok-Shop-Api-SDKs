@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SearchPODCustomizationDetailsRequest struct {
 	MainOrderId string `json:"main_order_id"`
 	// The order lines for which to retrieve POD customization details.
 	QueryOrderLines []QueryOrderLine `json:"query_order_lines"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchPODCustomizationDetailsRequest SearchPODCustomizationDetailsRequest
@@ -108,6 +108,11 @@ func (o SearchPODCustomizationDetailsRequest) ToMap() (map[string]interface{}, e
 	toSerialize := map[string]interface{}{}
 	toSerialize["main_order_id"] = o.MainOrderId
 	toSerialize["query_order_lines"] = o.QueryOrderLines
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SearchPODCustomizationDetailsRequest) UnmarshalJSON(data []byte) (err e
 
 	varSearchPODCustomizationDetailsRequest := _SearchPODCustomizationDetailsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchPODCustomizationDetailsRequest)
+	err = json.Unmarshal(data, &varSearchPODCustomizationDetailsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchPODCustomizationDetailsRequest(varSearchPODCustomizationDetailsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "main_order_id")
+		delete(additionalProperties, "query_order_lines")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

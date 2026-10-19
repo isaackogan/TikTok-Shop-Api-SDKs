@@ -27,7 +27,10 @@ type CombinedListingSku struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The original `seller_sku` (which is defined by sellers) related to the virtual bundle SKU.
 	SellerSku *string `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CombinedListingSku CombinedListingSku
 
 // NewCombinedListingSku instantiates a new CombinedListingSku object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CombinedListingSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CombinedListingSku) UnmarshalJSON(data []byte) (err error) {
+	varCombinedListingSku := _CombinedListingSku{}
+
+	err = json.Unmarshal(data, &varCombinedListingSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CombinedListingSku(varCombinedListingSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_count")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCombinedListingSku struct {

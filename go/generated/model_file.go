@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type File struct {
 	Name string `json:"name"`
 	// The format of the certification file. Only PDF is supported.
 	Format string `json:"format"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _File File
@@ -136,6 +136,11 @@ func (o File) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["format"] = o.Format
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *File) UnmarshalJSON(data []byte) (err error) {
 
 	varFile := _File{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFile)
+	err = json.Unmarshal(data, &varFile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = File(varFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "format")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

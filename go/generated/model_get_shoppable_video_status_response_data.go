@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShoppableVideoStatusResponseData{}
 type GetShoppableVideoStatusResponseData struct {
 	// returned video info
 	Video *GetShoppableVideoStatusResponseDataVideo `json:"video,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoStatusResponseData GetShoppableVideoStatusResponseData
 
 // NewGetShoppableVideoStatusResponseData instantiates a new GetShoppableVideoStatusResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShoppableVideoStatusResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Video) {
 		toSerialize["video"] = o.Video
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoStatusResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoStatusResponseData := _GetShoppableVideoStatusResponseData{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoStatusResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoStatusResponseData(varGetShoppableVideoStatusResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "video")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoStatusResponseData struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndE
 type SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo struct {
 	// Per-SKU hazmat, lot-control, and expiration-management results. Correlate each entry with the requested SKU using `tts_sku_id`.
 	HazmatAndExpirationDtoList []SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList `json:"hazmat_and_expiration_dto_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo
 
 // NewSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo instantiates a new SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo) T
 	if !IsNil(o.HazmatAndExpirationDtoList) {
 		toSerialize["hazmat_and_expiration_dto_list"] = o.HazmatAndExpirationDtoList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo := _SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo(varSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hazmat_and_expiration_dto_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo struct {

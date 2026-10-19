@@ -23,7 +23,10 @@ type CreateCustomEngagementTaskRequestCustomMessage struct {
 	Title *string `json:"title,omitempty"`
 	// The message body. - Valid format: plain text, unicode emoji (UTF-8) - Valid length: 1–500 Unicode code points.
 	Body *string `json:"body,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCustomEngagementTaskRequestCustomMessage CreateCustomEngagementTaskRequestCustomMessage
 
 // NewCreateCustomEngagementTaskRequestCustomMessage instantiates a new CreateCustomEngagementTaskRequestCustomMessage object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CreateCustomEngagementTaskRequestCustomMessage) ToMap() (map[string]inte
 	if !IsNil(o.Body) {
 		toSerialize["body"] = o.Body
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCustomEngagementTaskRequestCustomMessage) UnmarshalJSON(data []byte) (err error) {
+	varCreateCustomEngagementTaskRequestCustomMessage := _CreateCustomEngagementTaskRequestCustomMessage{}
+
+	err = json.Unmarshal(data, &varCreateCustomEngagementTaskRequestCustomMessage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCustomEngagementTaskRequestCustomMessage(varCreateCustomEngagementTaskRequestCustomMessage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "body")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCustomEngagementTaskRequestCustomMessage struct {

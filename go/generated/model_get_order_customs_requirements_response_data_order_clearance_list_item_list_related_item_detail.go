@@ -27,7 +27,10 @@ type GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedIte
 	Qty *int64 `json:"qty,omitempty"`
 	// unit: %, price_percent=10 means 10%
 	PricePercent *int64 `json:"price_percent,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail
 
 // NewGetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail instantiates a new GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelated
 	if !IsNil(o.PricePercent) {
 		toSerialize["price_percent"] = o.PricePercent
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail := _GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail{}
+
+	err = json.Unmarshal(data, &varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail(varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "qty")
+		delete(additionalProperties, "price_percent")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail struct {

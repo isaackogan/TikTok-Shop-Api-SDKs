@@ -21,7 +21,10 @@ var _ MappedNullable = &CreatorDeauthorizationWebhookData{}
 type CreatorDeauthorizationWebhookData struct {
 	// The UNIX timestamp when this event happened.
 	CancelTime *string `json:"cancel_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatorDeauthorizationWebhookData CreatorDeauthorizationWebhookData
 
 // NewCreatorDeauthorizationWebhookData instantiates a new CreatorDeauthorizationWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreatorDeauthorizationWebhookData) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.CancelTime) {
 		toSerialize["cancel_time"] = o.CancelTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatorDeauthorizationWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varCreatorDeauthorizationWebhookData := _CreatorDeauthorizationWebhookData{}
+
+	err = json.Unmarshal(data, &varCreatorDeauthorizationWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatorDeauthorizationWebhookData(varCreatorDeauthorizationWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cancel_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatorDeauthorizationWebhookData struct {

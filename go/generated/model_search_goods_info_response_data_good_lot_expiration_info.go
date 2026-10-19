@@ -33,7 +33,10 @@ type SearchGoodsInfoResponseDataGoodLotExpirationInfo struct {
 	SalesCutoffDays *int64 `json:"sales_cutoff_days,omitempty"`
 	// The handling method for expired inventory. Possible values: - `STORE_UNITS`: Move the units to defective inventory. - `RETURN_TO_SELLER`: Return the units to the seller. - `DISPOSE`: Dispose of the units.
 	HandlingMethod *string `json:"handling_method,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodLotExpirationInfo SearchGoodsInfoResponseDataGoodLotExpirationInfo
 
 // NewSearchGoodsInfoResponseDataGoodLotExpirationInfo instantiates a new SearchGoodsInfoResponseDataGoodLotExpirationInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o SearchGoodsInfoResponseDataGoodLotExpirationInfo) ToMap() (map[string]in
 	if !IsNil(o.HandlingMethod) {
 		toSerialize["handling_method"] = o.HandlingMethod
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodLotExpirationInfo) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodLotExpirationInfo := _SearchGoodsInfoResponseDataGoodLotExpirationInfo{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodLotExpirationInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodLotExpirationInfo(varSearchGoodsInfoResponseDataGoodLotExpirationInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_lot_control")
+		delete(additionalProperties, "is_expiration_management")
+		delete(additionalProperties, "shelf_life_days")
+		delete(additionalProperties, "inbound_cutoff_days")
+		delete(additionalProperties, "expiration_alert_days")
+		delete(additionalProperties, "sales_cutoff_days")
+		delete(additionalProperties, "handling_method")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodLotExpirationInfo struct {

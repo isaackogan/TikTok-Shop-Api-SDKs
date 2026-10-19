@@ -27,7 +27,10 @@ type SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter struct {
 	OptionList []SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList `json:"option_list,omitempty"`
 	// Sorter algorithm id. Please use \"Get Seller Search  Creator Marketplace Advanced Filters\"(https://partner.tiktokshop.com/docv2/page/get-seller-search-creator-marketplace-advanced-filters) get available sorter algorithm for you first. Default is 1(default sorter)
 	SorterAlgorithmId *string `json:"sorter_algorithm_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter
 
 // NewSearchCreatorsInCreatorMarketplaceRequestAdvancedFilter instantiates a new SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter) ToMap() (map[st
 	if !IsNil(o.SorterAlgorithmId) {
 		toSerialize["sorter_algorithm_id"] = o.SorterAlgorithmId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestAdvancedFilter := _SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestAdvancedFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter(varSearchCreatorsInCreatorMarketplaceRequestAdvancedFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "content_preference_type")
+		delete(additionalProperties, "eligible_flat_fee")
+		delete(additionalProperties, "option_list")
+		delete(additionalProperties, "sorter_algorithm_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestAdvancedFilter struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GetInboundMethodDetailRequest struct {
 	InboundMethod string `json:"inbound_method"`
 	// Estimated arrival window for the selected `inbound_method`. Use the `start_timestamp` and `end_timestamp` from the same entry in the `available_time_window_list` returned by the List Available Inbound Methods API for this plan.
 	EstimateArrivalTime EstimateArrivalTime `json:"estimate_arrival_time"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetInboundMethodDetailRequest GetInboundMethodDetailRequest
@@ -136,6 +136,11 @@ func (o GetInboundMethodDetailRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["plan_id"] = o.PlanId
 	toSerialize["inbound_method"] = o.InboundMethod
 	toSerialize["estimate_arrival_time"] = o.EstimateArrivalTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *GetInboundMethodDetailRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varGetInboundMethodDetailRequest := _GetInboundMethodDetailRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetInboundMethodDetailRequest)
+	err = json.Unmarshal(data, &varGetInboundMethodDetailRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetInboundMethodDetailRequest(varGetInboundMethodDetailRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "plan_id")
+		delete(additionalProperties, "inbound_method")
+		delete(additionalProperties, "estimate_arrival_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type GetVideoPerformancesResponseDataVideoPerformance struct {
 	TimeRange *GetVideoPerformancesResponseDataVideoPerformanceTimeRange `json:"time_range,omitempty"`
 	// Performance metrics for this video.
 	Metrics *GetVideoPerformancesResponseDataVideoPerformanceMetric `json:"metrics,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetVideoPerformancesResponseDataVideoPerformance GetVideoPerformancesResponseDataVideoPerformance
 
 // NewGetVideoPerformancesResponseDataVideoPerformance instantiates a new GetVideoPerformancesResponseDataVideoPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetVideoPerformancesResponseDataVideoPerformance) ToMap() (map[string]in
 	if !IsNil(o.Metrics) {
 		toSerialize["metrics"] = o.Metrics
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetVideoPerformancesResponseDataVideoPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetVideoPerformancesResponseDataVideoPerformance := _GetVideoPerformancesResponseDataVideoPerformance{}
+
+	err = json.Unmarshal(data, &varGetVideoPerformancesResponseDataVideoPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetVideoPerformancesResponseDataVideoPerformance(varGetVideoPerformancesResponseDataVideoPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "time_range")
+		delete(additionalProperties, "metrics")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetVideoPerformancesResponseDataVideoPerformance struct {

@@ -26,7 +26,10 @@ type GetTransactionsByOrderResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetTransactionsByOrderResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByOrderResponse GetTransactionsByOrderResponse
 
 // NewGetTransactionsByOrderResponse instantiates a new GetTransactionsByOrderResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetTransactionsByOrderResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByOrderResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByOrderResponse := _GetTransactionsByOrderResponse{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByOrderResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByOrderResponse(varGetTransactionsByOrderResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByOrderResponse struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLiveRoomTrafficPerformanceResponseData{}
 type GetLiveRoomTrafficPerformanceResponseData struct {
 	// Traffic performance grouped by primary traffic source, including any available sub-source breakdowns.
 	TrafficPerformances []GetLiveRoomTrafficPerformanceResponseDataTrafficPerformance `json:"traffic_performances,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomTrafficPerformanceResponseData GetLiveRoomTrafficPerformanceResponseData
 
 // NewGetLiveRoomTrafficPerformanceResponseData instantiates a new GetLiveRoomTrafficPerformanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetLiveRoomTrafficPerformanceResponseData) ToMap() (map[string]interface
 	if !IsNil(o.TrafficPerformances) {
 		toSerialize["traffic_performances"] = o.TrafficPerformances
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomTrafficPerformanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomTrafficPerformanceResponseData := _GetLiveRoomTrafficPerformanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomTrafficPerformanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomTrafficPerformanceResponseData(varGetLiveRoomTrafficPerformanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "traffic_performances")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomTrafficPerformanceResponseData struct {

@@ -174,7 +174,7 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		if err == nil {
 			err = fmt.Errorf("body is not a JSON object")
 		}
-		return nil, &Error{Message: fmt.Sprintf("unparseable token response (HTTP %d)", status), HTTPStatus: status, Cause: err}
+		return nil, &Error{Code: -1, Message: fmt.Sprintf("unparseable token response (HTTP %d)", status), HTTPStatus: status, Cause: err}
 	}
 	var requestID, message string
 	_ = json.Unmarshal(env["request_id"], &requestID)

@@ -21,7 +21,10 @@ var _ MappedNullable = &ConfirmInboundMethodResponseData{}
 type ConfirmInboundMethodResponseData struct {
 	// List of child inbound order IDs generated for the confirmed FBT inbound plan.
 	InboundOrderIds []string `json:"inbound_order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmInboundMethodResponseData ConfirmInboundMethodResponseData
 
 // NewConfirmInboundMethodResponseData instantiates a new ConfirmInboundMethodResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ConfirmInboundMethodResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.InboundOrderIds) {
 		toSerialize["inbound_order_ids"] = o.InboundOrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmInboundMethodResponseData) UnmarshalJSON(data []byte) (err error) {
+	varConfirmInboundMethodResponseData := _ConfirmInboundMethodResponseData{}
+
+	err = json.Unmarshal(data, &varConfirmInboundMethodResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmInboundMethodResponseData(varConfirmInboundMethodResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmInboundMethodResponseData struct {

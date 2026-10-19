@@ -27,7 +27,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile struct {
 	AgeDistribution []AgeDistribution `json:"age_distribution,omitempty"`
 	// Viewer country distribution.
 	CountryDistribution []CountryDistribution `json:"country_distribution,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile) ToMa
 	if !IsNil(o.CountryDistribution) {
 		toSerialize["country_distribution"] = o.CountryDistribution
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile := _GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile(varGetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "gender_distribution")
+		delete(additionalProperties, "age_distribution")
+		delete(additionalProperties, "country_distribution")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile struct {

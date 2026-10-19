@@ -27,7 +27,10 @@ type GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefu
 	Refunded *int64 `json:"refunded,omitempty"`
 	// Replacements refers to units that were returned and replaced.
 	Replacements *int64 `json:"replacements,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund
 
 // NewGetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund instantiates a new GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndR
 	if !IsNil(o.Replacements) {
 		toSerialize["replacements"] = o.Replacements
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund := _GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund(varGetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "returned")
+		delete(additionalProperties, "canceled")
+		delete(additionalProperties, "refunded")
+		delete(additionalProperties, "replacements")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange struct {
 	CampaignLockedQuantity int64 `json:"campaign_locked_quantity"`
 	// Inventory reserved for creator collaborations.
 	CreatorLockedQuantity int64 `json:"creator_locked_quantity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange
@@ -220,6 +220,11 @@ func (o InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange) ToMap() (m
 	toSerialize["in_shop_quantity"] = o.InShopQuantity
 	toSerialize["campaign_locked_quantity"] = o.CampaignLockedQuantity
 	toSerialize["creator_locked_quantity"] = o.CreatorLockedQuantity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange) Unmarshal
 
 	varInventoryChangedByShopWebhookDataQuantitySnapshotAfterChange := _InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInventoryChangedByShopWebhookDataQuantitySnapshotAfterChange)
+	err = json.Unmarshal(data, &varInventoryChangedByShopWebhookDataQuantitySnapshotAfterChange)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange(varInventoryChangedByShopWebhookDataQuantitySnapshotAfterChange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_quantity")
+		delete(additionalProperties, "total_available_quantity")
+		delete(additionalProperties, "total_committed_quantity")
+		delete(additionalProperties, "in_shop_quantity")
+		delete(additionalProperties, "campaign_locked_quantity")
+		delete(additionalProperties, "creator_locked_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type PredictProductPackageDimensionsAndWeightResponseDataPackageWeight struct {
 	Unit string `json:"unit"`
 	// Predicted positive package weight.
 	Value string `json:"value"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PredictProductPackageDimensionsAndWeightResponseDataPackageWeight PredictProductPackageDimensionsAndWeightResponseDataPackageWeight
@@ -108,6 +108,11 @@ func (o PredictProductPackageDimensionsAndWeightResponseDataPackageWeight) ToMap
 	toSerialize := map[string]interface{}{}
 	toSerialize["unit"] = o.Unit
 	toSerialize["value"] = o.Value
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PredictProductPackageDimensionsAndWeightResponseDataPackageWeight) Unma
 
 	varPredictProductPackageDimensionsAndWeightResponseDataPackageWeight := _PredictProductPackageDimensionsAndWeightResponseDataPackageWeight{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPredictProductPackageDimensionsAndWeightResponseDataPackageWeight)
+	err = json.Unmarshal(data, &varPredictProductPackageDimensionsAndWeightResponseDataPackageWeight)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PredictProductPackageDimensionsAndWeightResponseDataPackageWeight(varPredictProductPackageDimensionsAndWeightResponseDataPackageWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

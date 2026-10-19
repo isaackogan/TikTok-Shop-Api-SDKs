@@ -27,7 +27,10 @@ type OrderStatusChangeWebhookData struct {
 	IsOnHoldOrder *bool `json:"is_on_hold_order,omitempty"`
 	// The order status update time, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrderStatusChangeWebhookData OrderStatusChangeWebhookData
 
 // NewOrderStatusChangeWebhookData instantiates a new OrderStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o OrderStatusChangeWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrderStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varOrderStatusChangeWebhookData := _OrderStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varOrderStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderStatusChangeWebhookData(varOrderStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_status")
+		delete(additionalProperties, "is_on_hold_order")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrderStatusChangeWebhookData struct {

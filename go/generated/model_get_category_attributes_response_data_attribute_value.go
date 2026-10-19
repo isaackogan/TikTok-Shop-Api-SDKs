@@ -25,7 +25,10 @@ type GetCategoryAttributesResponseDataAttributeValue struct {
 	Name *string `json:"name,omitempty"`
 	// The icon url value of the built-in attribute value.
 	IconUrl *string `json:"icon_url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeValue GetCategoryAttributesResponseDataAttributeValue
 
 // NewGetCategoryAttributesResponseDataAttributeValue instantiates a new GetCategoryAttributesResponseDataAttributeValue object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCategoryAttributesResponseDataAttributeValue) ToMap() (map[string]int
 	if !IsNil(o.IconUrl) {
 		toSerialize["icon_url"] = o.IconUrl
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeValue) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeValue := _GetCategoryAttributesResponseDataAttributeValue{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeValue(varGetCategoryAttributesResponseDataAttributeValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "icon_url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeValue struct {

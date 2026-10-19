@@ -23,7 +23,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList
 	Name *string `json:"name,omitempty"`
 	// the name of the value
 	ValueName *string `json:"value_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationL
 	if !IsNil(o.ValueName) {
 		toSerialize["value_name"] = o.ValueName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty := _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty(varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty struct {

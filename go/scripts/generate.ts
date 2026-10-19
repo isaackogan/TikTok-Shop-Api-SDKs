@@ -17,7 +17,7 @@ run('pnpm', [
   '-i', 'go/build/openapi.json',
   '-o', 'go/build/_out',
   '--global-property', 'apiDocs=false,modelDocs=false,apiTests=false,modelTests=false',
-  '--additional-properties=packageName=generated,enumClassPrefix=true,withGoMod=false',
+  '--additional-properties=packageName=generated,enumClassPrefix=true,withGoMod=false,disallowAdditionalPropertiesIfNotPresent=false',
   // The spec has a schema called Time, which collides with time.Time's usual import name.
   '--model-name-mappings=Time=TimeInfo',
 ]);

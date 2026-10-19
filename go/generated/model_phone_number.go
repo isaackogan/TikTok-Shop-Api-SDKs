@@ -25,7 +25,10 @@ type PhoneNumber struct {
 	CountryCode *string `json:"country_code,omitempty"`
 	// The local number. Length: 7 - 20 digits Required if `availability=AVAILABLE`.
 	LocalNumber *string `json:"local_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PhoneNumber PhoneNumber
 
 // NewPhoneNumber instantiates a new PhoneNumber object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PhoneNumber) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocalNumber) {
 		toSerialize["local_number"] = o.LocalNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PhoneNumber) UnmarshalJSON(data []byte) (err error) {
+	varPhoneNumber := _PhoneNumber{}
+
+	err = json.Unmarshal(data, &varPhoneNumber)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PhoneNumber(varPhoneNumber)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "availability")
+		delete(additionalProperties, "country_code")
+		delete(additionalProperties, "local_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePhoneNumber struct {

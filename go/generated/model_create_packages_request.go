@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -35,6 +34,7 @@ type CreatePackagesRequest struct {
 	ShippingServiceId *string `json:"shipping_service_id,omitempty"`
 	// Package weight. For `ship_type` `1` and `2`, the value must be between 0.01 and 999999 and have no more than two decimal places.
 	Weight *CreatePackagesRequestWeight `json:"weight,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatePackagesRequest CreatePackagesRequest
@@ -302,6 +302,11 @@ func (o CreatePackagesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Weight) {
 		toSerialize["weight"] = o.Weight
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -329,15 +334,26 @@ func (o *CreatePackagesRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreatePackagesRequest := _CreatePackagesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatePackagesRequest)
+	err = json.Unmarshal(data, &varCreatePackagesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatePackagesRequest(varCreatePackagesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ship_type")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_line_item")
+		delete(additionalProperties, "order_list_ids")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "shipping_service_id")
+		delete(additionalProperties, "weight")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -23,7 +23,10 @@ type ListingQuality struct {
 	CurrentTier *string `json:"current_tier,omitempty"`
 	// The remaining number of recommendations (see `diagnosis_results`) that must be implemented for the product to advance to the highest tier.  **Note**: - To advance to the highest tier, you must implement all recommendations listed in `diagnosis_results`.  - Available only for the US market.
 	RemainingRecommendations *int64 `json:"remaining_recommendations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListingQuality ListingQuality
 
 // NewListingQuality instantiates a new ListingQuality object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ListingQuality) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RemainingRecommendations) {
 		toSerialize["remaining_recommendations"] = o.RemainingRecommendations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListingQuality) UnmarshalJSON(data []byte) (err error) {
+	varListingQuality := _ListingQuality{}
+
+	err = json.Unmarshal(data, &varListingQuality)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListingQuality(varListingQuality)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "current_tier")
+		delete(additionalProperties, "remaining_recommendations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListingQuality struct {

@@ -23,7 +23,10 @@ type GetProductSKPPDetailResponseDataTaskDetailActionSuggestion struct {
 	ScoreIncrease *int64 `json:"score_increase,omitempty"`
 	// Link to the Seller Center page that completes the action.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductSKPPDetailResponseDataTaskDetailActionSuggestion GetProductSKPPDetailResponseDataTaskDetailActionSuggestion
 
 // NewGetProductSKPPDetailResponseDataTaskDetailActionSuggestion instantiates a new GetProductSKPPDetailResponseDataTaskDetailActionSuggestion object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductSKPPDetailResponseDataTaskDetailActionSuggestion) ToMap() (map
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductSKPPDetailResponseDataTaskDetailActionSuggestion) UnmarshalJSON(data []byte) (err error) {
+	varGetProductSKPPDetailResponseDataTaskDetailActionSuggestion := _GetProductSKPPDetailResponseDataTaskDetailActionSuggestion{}
+
+	err = json.Unmarshal(data, &varGetProductSKPPDetailResponseDataTaskDetailActionSuggestion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductSKPPDetailResponseDataTaskDetailActionSuggestion(varGetProductSKPPDetailResponseDataTaskDetailActionSuggestion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "score_increase")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductSKPPDetailResponseDataTaskDetailActionSuggestion struct {

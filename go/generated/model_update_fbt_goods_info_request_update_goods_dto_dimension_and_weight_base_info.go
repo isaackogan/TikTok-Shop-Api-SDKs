@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo struct {
 	WeightUnit string `json:"weight_unit"`
 	// Dimension unit.  Possible values: - MILLIMETER  - CENTIMETER - METER  - FOOT  - INCH
 	DimensionUnit string `json:"dimension_unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo
@@ -220,6 +220,11 @@ func (o UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo) ToMap
 	toSerialize["height_value"] = o.HeightValue
 	toSerialize["weight_unit"] = o.WeightUnit
 	toSerialize["dimension_unit"] = o.DimensionUnit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo) Unma
 
 	varUpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo := _UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo)
+	err = json.Unmarshal(data, &varUpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo(varUpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weight_value")
+		delete(additionalProperties, "length_value")
+		delete(additionalProperties, "width_value")
+		delete(additionalProperties, "height_value")
+		delete(additionalProperties, "weight_unit")
+		delete(additionalProperties, "dimension_unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

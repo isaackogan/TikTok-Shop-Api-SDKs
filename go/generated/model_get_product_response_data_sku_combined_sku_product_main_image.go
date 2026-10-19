@@ -29,7 +29,10 @@ type GetProductResponseDataSkuCombinedSkuProductMainImage struct {
 	Uri *string `json:"uri,omitempty"`
 	// The URLs to view the images.
 	Urls []string `json:"urls,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuCombinedSkuProductMainImage GetProductResponseDataSkuCombinedSkuProductMainImage
 
 // NewGetProductResponseDataSkuCombinedSkuProductMainImage instantiates a new GetProductResponseDataSkuCombinedSkuProductMainImage object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetProductResponseDataSkuCombinedSkuProductMainImage) ToMap() (map[strin
 	if !IsNil(o.Urls) {
 		toSerialize["urls"] = o.Urls
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuCombinedSkuProductMainImage) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuCombinedSkuProductMainImage := _GetProductResponseDataSkuCombinedSkuProductMainImage{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuCombinedSkuProductMainImage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuCombinedSkuProductMainImage(varGetProductResponseDataSkuCombinedSkuProductMainImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "thumb_urls")
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "urls")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuCombinedSkuProductMainImage struct {

@@ -25,7 +25,10 @@ type CancelFBTMCFOrderResponseDataMcfOrder struct {
 	McfOrderId *string `json:"mcf_order_id,omitempty"`
 	// All consign orders in the MCF order and their current statuses after the cancellation request. Match the requested consign order IDs to the returned items; a status of `CLOSED` means that the consign order has been canceled.
 	ConsignOrders []CancelFBTMCFOrderResponseDataMcfOrderConsignOrder `json:"consign_orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CancelFBTMCFOrderResponseDataMcfOrder CancelFBTMCFOrderResponseDataMcfOrder
 
 // NewCancelFBTMCFOrderResponseDataMcfOrder instantiates a new CancelFBTMCFOrderResponseDataMcfOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CancelFBTMCFOrderResponseDataMcfOrder) ToMap() (map[string]interface{}, 
 	if !IsNil(o.ConsignOrders) {
 		toSerialize["consign_orders"] = o.ConsignOrders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CancelFBTMCFOrderResponseDataMcfOrder) UnmarshalJSON(data []byte) (err error) {
+	varCancelFBTMCFOrderResponseDataMcfOrder := _CancelFBTMCFOrderResponseDataMcfOrder{}
+
+	err = json.Unmarshal(data, &varCancelFBTMCFOrderResponseDataMcfOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CancelFBTMCFOrderResponseDataMcfOrder(varCancelFBTMCFOrderResponseDataMcfOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_order_id")
+		delete(additionalProperties, "mcf_order_id")
+		delete(additionalProperties, "consign_orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCancelFBTMCFOrderResponseDataMcfOrder struct {

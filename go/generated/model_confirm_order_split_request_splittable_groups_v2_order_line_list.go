@@ -23,7 +23,10 @@ type ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList struct {
 	OrderLineId *string `json:"order_line_id,omitempty"`
 	// The sub-order-line ID inside a bundle product. - Required for bundle products. - Not required for non-bundle products.
 	SubItemId *string `json:"sub_item_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList
 
 // NewConfirmOrderSplitRequestSplittableGroupsV2OrderLineList instantiates a new ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList) ToMap() (map[st
 	if !IsNil(o.SubItemId) {
 		toSerialize["sub_item_id"] = o.SubItemId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList) UnmarshalJSON(data []byte) (err error) {
+	varConfirmOrderSplitRequestSplittableGroupsV2OrderLineList := _ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList{}
+
+	err = json.Unmarshal(data, &varConfirmOrderSplitRequestSplittableGroupsV2OrderLineList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList(varConfirmOrderSplitRequestSplittableGroupsV2OrderLineList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "sub_item_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmOrderSplitRequestSplittableGroupsV2OrderLineList struct {

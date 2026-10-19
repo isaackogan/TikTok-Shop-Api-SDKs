@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type PartialEditProductRequestReplicatedProductSkuPrice struct {
 	Currency string `json:"currency"`
 	// The SKU's local display price shown on the product page before any discounts.  Refer to Product Pricing for the allowed price ranges in each market.
 	SalePrice string `json:"sale_price"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestReplicatedProductSkuPrice PartialEditProductRequestReplicatedProductSkuPrice
@@ -108,6 +108,11 @@ func (o PartialEditProductRequestReplicatedProductSkuPrice) ToMap() (map[string]
 	toSerialize := map[string]interface{}{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["sale_price"] = o.SalePrice
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PartialEditProductRequestReplicatedProductSkuPrice) UnmarshalJSON(data 
 
 	varPartialEditProductRequestReplicatedProductSkuPrice := _PartialEditProductRequestReplicatedProductSkuPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestReplicatedProductSkuPrice)
+	err = json.Unmarshal(data, &varPartialEditProductRequestReplicatedProductSkuPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestReplicatedProductSkuPrice(varPartialEditProductRequestReplicatedProductSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

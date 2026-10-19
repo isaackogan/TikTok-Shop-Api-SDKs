@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer struct {
 	Currency *string `json:"currency,omitempty"`
 	// The average GMV per buyer amount.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer) ToMap
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer := _GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer(varGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyer struct {

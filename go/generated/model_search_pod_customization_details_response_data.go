@@ -23,7 +23,10 @@ type SearchPODCustomizationDetailsResponseData struct {
 	PodDetails []SearchPODCustomizationDetailsResponseDataPodDetail `json:"pod_details,omitempty"`
 	// The status code for the POD customization details query.
 	StatusCode *int64 `json:"status_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchPODCustomizationDetailsResponseData SearchPODCustomizationDetailsResponseData
 
 // NewSearchPODCustomizationDetailsResponseData instantiates a new SearchPODCustomizationDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchPODCustomizationDetailsResponseData) ToMap() (map[string]interface
 	if !IsNil(o.StatusCode) {
 		toSerialize["status_code"] = o.StatusCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchPODCustomizationDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchPODCustomizationDetailsResponseData := _SearchPODCustomizationDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchPODCustomizationDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchPODCustomizationDetailsResponseData(varSearchPODCustomizationDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "pod_details")
+		delete(additionalProperties, "status_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchPODCustomizationDetailsResponseData struct {

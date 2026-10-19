@@ -31,7 +31,10 @@ type SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriza
 	LineItems []LineItem `json:"line_items,omitempty"`
 	// SKU-level sub return requests associated with this RMA. This field is returned only when `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching data is available.
 	SkuReturnRequests []SkuReturnRequest `json:"sku_return_requests,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization
 
 // NewSearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization instantiates a new SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthor
 	if !IsNil(o.SkuReturnRequests) {
 		toSerialize["sku_return_requests"] = o.SkuReturnRequests
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization := _SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization{}
+
+	err = json.Unmarshal(data, &varSearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization(varSearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "aftersales_request_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "line_items")
+		delete(additionalProperties, "sku_return_requests")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization struct {

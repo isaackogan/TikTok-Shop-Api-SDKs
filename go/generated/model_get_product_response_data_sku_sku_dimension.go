@@ -27,7 +27,10 @@ type GetProductResponseDataSkuSkuDimension struct {
 	Unit *string `json:"unit,omitempty"`
 	// The package width. A positive whole number. Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the nearest whole number.
 	Width *string `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuSkuDimension GetProductResponseDataSkuSkuDimension
 
 // NewGetProductResponseDataSkuSkuDimension instantiates a new GetProductResponseDataSkuSkuDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataSkuSkuDimension) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuSkuDimension) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuSkuDimension := _GetProductResponseDataSkuSkuDimension{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuSkuDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuSkuDimension(varGetProductResponseDataSkuSkuDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "unit")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuSkuDimension struct {

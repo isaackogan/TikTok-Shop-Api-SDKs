@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLiveRoomInteractiveTrendsResponseData{}
 type GetLiveRoomInteractiveTrendsResponseData struct {
 	// The trend data of living room
 	InteractiveTrendPerformances []GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance `json:"interactive_trend_performances,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomInteractiveTrendsResponseData GetLiveRoomInteractiveTrendsResponseData
 
 // NewGetLiveRoomInteractiveTrendsResponseData instantiates a new GetLiveRoomInteractiveTrendsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetLiveRoomInteractiveTrendsResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.InteractiveTrendPerformances) {
 		toSerialize["interactive_trend_performances"] = o.InteractiveTrendPerformances
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomInteractiveTrendsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomInteractiveTrendsResponseData := _GetLiveRoomInteractiveTrendsResponseData{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomInteractiveTrendsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomInteractiveTrendsResponseData(varGetLiveRoomInteractiveTrendsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "interactive_trend_performances")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomInteractiveTrendsResponseData struct {

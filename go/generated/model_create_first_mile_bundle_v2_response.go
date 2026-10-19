@@ -26,7 +26,10 @@ type CreateFirstMileBundleV2Response struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateFirstMileBundleV2ResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFirstMileBundleV2Response CreateFirstMileBundleV2Response
 
 // NewCreateFirstMileBundleV2Response instantiates a new CreateFirstMileBundleV2Response object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateFirstMileBundleV2Response) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFirstMileBundleV2Response) UnmarshalJSON(data []byte) (err error) {
+	varCreateFirstMileBundleV2Response := _CreateFirstMileBundleV2Response{}
+
+	err = json.Unmarshal(data, &varCreateFirstMileBundleV2Response)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFirstMileBundleV2Response(varCreateFirstMileBundleV2Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFirstMileBundleV2Response struct {

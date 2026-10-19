@@ -27,7 +27,10 @@ type SearchReturnMerchandiseAuthorizationsRequest struct {
 	Sort *Sort `json:"sort,omitempty"`
 	// Pagination configuration.
 	Pagination *Pagination `json:"pagination,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnMerchandiseAuthorizationsRequest SearchReturnMerchandiseAuthorizationsRequest
 
 // NewSearchReturnMerchandiseAuthorizationsRequest instantiates a new SearchReturnMerchandiseAuthorizationsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchReturnMerchandiseAuthorizationsRequest) ToMap() (map[string]interf
 	if !IsNil(o.Pagination) {
 		toSerialize["pagination"] = o.Pagination
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnMerchandiseAuthorizationsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnMerchandiseAuthorizationsRequest := _SearchReturnMerchandiseAuthorizationsRequest{}
+
+	err = json.Unmarshal(data, &varSearchReturnMerchandiseAuthorizationsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnMerchandiseAuthorizationsRequest(varSearchReturnMerchandiseAuthorizationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "whitelisted_data_fields")
+		delete(additionalProperties, "filters")
+		delete(additionalProperties, "sort")
+		delete(additionalProperties, "pagination")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnMerchandiseAuthorizationsRequest struct {

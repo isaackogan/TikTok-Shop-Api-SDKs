@@ -23,7 +23,10 @@ type SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic
 	Gender *string `json:"gender,omitempty"`
 	// Percentage of top follower gender, scaled up by 10,000 times.  For example, 6524 stands for 0.6524 or 65.24%. You can then infer that the opposite gender would be 0.3476 or 34.76%.
 	Percentage *int64 `json:"percentage,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender
 
 // NewSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender instantiates a new SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemograp
 	if !IsNil(o.Percentage) {
 		toSerialize["percentage"] = o.Percentage
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender := _SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender(varSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gender")
+		delete(additionalProperties, "percentage")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender struct {

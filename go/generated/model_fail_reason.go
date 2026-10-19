@@ -21,7 +21,10 @@ var _ MappedNullable = &FailReason{}
 type FailReason struct {
 	// The error message.
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _FailReason FailReason
 
 // NewFailReason instantiates a new FailReason object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o FailReason) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *FailReason) UnmarshalJSON(data []byte) (err error) {
+	varFailReason := _FailReason{}
+
+	err = json.Unmarshal(data, &varFailReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FailReason(varFailReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableFailReason struct {

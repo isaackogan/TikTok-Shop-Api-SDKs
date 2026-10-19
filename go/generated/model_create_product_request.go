@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -95,6 +94,7 @@ type CreateProductRequest struct {
 	IsLiveQuick *bool `json:"is_live_quick,omitempty"`
 	// Whether the product is a blind box of lucky bag. For example: PopMart
 	IsBlindBox *bool `json:"is_blind_box,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateProductRequest CreateProductRequest
@@ -1376,6 +1376,11 @@ func (o CreateProductRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsBlindBox) {
 		toSerialize["is_blind_box"] = o.IsBlindBox
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1407,15 +1412,56 @@ func (o *CreateProductRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateProductRequest := _CreateProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateProductRequest)
+	err = json.Unmarshal(data, &varCreateProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateProductRequest(varCreateProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "save_mode")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "is_cod_allowed")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "delivery_option_ids")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "primary_combined_product_id")
+		delete(additionalProperties, "is_not_for_sale")
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "listing_platforms")
+		delete(additionalProperties, "shipping_insurance_requirement")
+		delete(additionalProperties, "minimum_order_quantity")
+		delete(additionalProperties, "is_pre_owned")
+		delete(additionalProperties, "idempotency_key")
+		delete(additionalProperties, "shipping_template_id")
+		delete(additionalProperties, "scheduled_sale")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "auto_translate_enabled")
+		delete(additionalProperties, "search_terms")
+		delete(additionalProperties, "key_product_features")
+		delete(additionalProperties, "product_tag_operations")
+		delete(additionalProperties, "purchase_order_quantity_limit")
+		delete(additionalProperties, "selling_format")
+		delete(additionalProperties, "is_live_quick")
+		delete(additionalProperties, "is_blind_box")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

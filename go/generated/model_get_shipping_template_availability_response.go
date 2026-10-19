@@ -26,7 +26,10 @@ type GetShippingTemplateAvailabilityResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetShippingTemplateAvailabilityResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityResponse GetShippingTemplateAvailabilityResponse
 
 // NewGetShippingTemplateAvailabilityResponse instantiates a new GetShippingTemplateAvailabilityResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetShippingTemplateAvailabilityResponse) ToMap() (map[string]interface{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityResponse := _GetShippingTemplateAvailabilityResponse{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityResponse(varGetShippingTemplateAvailabilityResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityResponse struct {

@@ -23,7 +23,10 @@ type TargetCollaborationConflict struct {
 	CreatorUserOpenId *string `json:"creator_user_open_id,omitempty"`
 	// The product identifier.
 	ProductId *string `json:"product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _TargetCollaborationConflict TargetCollaborationConflict
 
 // NewTargetCollaborationConflict instantiates a new TargetCollaborationConflict object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o TargetCollaborationConflict) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ProductId) {
 		toSerialize["product_id"] = o.ProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *TargetCollaborationConflict) UnmarshalJSON(data []byte) (err error) {
+	varTargetCollaborationConflict := _TargetCollaborationConflict{}
+
+	err = json.Unmarshal(data, &varTargetCollaborationConflict)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TargetCollaborationConflict(varTargetCollaborationConflict)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_user_open_id")
+		delete(additionalProperties, "product_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableTargetCollaborationConflict struct {

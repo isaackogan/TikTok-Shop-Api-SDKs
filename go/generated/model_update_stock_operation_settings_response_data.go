@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateStockOperationSettingsResponseData{}
 type UpdateStockOperationSettingsResponseData struct {
 	// The update result of stock operation
 	StockOperation *UpdateStockOperationSettingsResponseDataStockOperation `json:"stock_operation,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateStockOperationSettingsResponseData UpdateStockOperationSettingsResponseData
 
 // NewUpdateStockOperationSettingsResponseData instantiates a new UpdateStockOperationSettingsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateStockOperationSettingsResponseData) ToMap() (map[string]interface{
 	if !IsNil(o.StockOperation) {
 		toSerialize["stock_operation"] = o.StockOperation
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateStockOperationSettingsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdateStockOperationSettingsResponseData := _UpdateStockOperationSettingsResponseData{}
+
+	err = json.Unmarshal(data, &varUpdateStockOperationSettingsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateStockOperationSettingsResponseData(varUpdateStockOperationSettingsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stock_operation")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateStockOperationSettingsResponseData struct {

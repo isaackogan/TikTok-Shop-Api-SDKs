@@ -29,7 +29,10 @@ type RefundSuccessWebhookDataLineItem struct {
 	SkuReturnRequestId *string `json:"sku_return_request_id,omitempty"`
 	// Optional child line-item identifier, only applicable for Virtual Bundle returns.
 	SubReturnLineItemId *string `json:"sub_return_line_item_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RefundSuccessWebhookDataLineItem RefundSuccessWebhookDataLineItem
 
 // NewRefundSuccessWebhookDataLineItem instantiates a new RefundSuccessWebhookDataLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o RefundSuccessWebhookDataLineItem) ToMap() (map[string]interface{}, error
 	if !IsNil(o.SubReturnLineItemId) {
 		toSerialize["sub_return_line_item_id"] = o.SubReturnLineItemId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RefundSuccessWebhookDataLineItem) UnmarshalJSON(data []byte) (err error) {
+	varRefundSuccessWebhookDataLineItem := _RefundSuccessWebhookDataLineItem{}
+
+	err = json.Unmarshal(data, &varRefundSuccessWebhookDataLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RefundSuccessWebhookDataLineItem(varRefundSuccessWebhookDataLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "main_order_id")
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_return_request_id")
+		delete(additionalProperties, "sub_return_line_item_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRefundSuccessWebhookDataLineItem struct {

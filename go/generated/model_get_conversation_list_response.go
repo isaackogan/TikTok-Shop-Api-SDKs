@@ -26,7 +26,10 @@ type GetConversationListResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetConversationListResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationListResponse GetConversationListResponse
 
 // NewGetConversationListResponse instantiates a new GetConversationListResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetConversationListResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationListResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationListResponse := _GetConversationListResponse{}
+
+	err = json.Unmarshal(data, &varGetConversationListResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationListResponse(varGetConversationListResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationListResponse struct {

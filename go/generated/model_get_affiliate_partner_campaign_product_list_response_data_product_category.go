@@ -23,7 +23,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductCategory struct {
 	Id *string `json:"id,omitempty"`
 	// The category name.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductCategory GetAffiliatePartnerCampaignProductListResponseDataProductCategory
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductCategory instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductCategory) ToMap
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductCategory) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductCategory := _GetAffiliatePartnerCampaignProductListResponseDataProductCategory{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductCategory(varGetAffiliatePartnerCampaignProductListResponseDataProductCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductCategory struct {

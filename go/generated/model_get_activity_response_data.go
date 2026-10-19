@@ -53,7 +53,10 @@ type GetActivityResponseData struct {
 	BenefitProducts []GetActivityResponseDataBenefitProduct `json:"benefit_products,omitempty"`
 	// Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-support data is unavailable. Possible values: - `ALL`: The activity supports both normal products and auction products. - `EXCLUDE_AUCTION`: The activity does not support auction products.
 	AuctionSupportType *string `json:"auction_support_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseData GetActivityResponseData
 
 // NewGetActivityResponseData instantiates a new GetActivityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetActivityResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AuctionSupportType) {
 		toSerialize["auction_support_type"] = o.AuctionSupportType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseData := _GetActivityResponseData{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseData(varGetActivityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "activity_type")
+		delete(additionalProperties, "duration_type")
+		delete(additionalProperties, "begin_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "participation_limit")
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "product_level")
+		delete(additionalProperties, "activity_commands")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "target_user_info")
+		delete(additionalProperties, "benefit_products")
+		delete(additionalProperties, "auction_support_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseData struct {

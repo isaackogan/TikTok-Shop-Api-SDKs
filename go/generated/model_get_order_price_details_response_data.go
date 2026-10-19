@@ -71,7 +71,10 @@ type GetOrderPriceDetailsResponseData struct {
 	DistanceFee *string `json:"distance_fee,omitempty"`
 	// Price details for each line item in the order.
 	LineItems []GetOrderPriceDetailsResponseDataLineItem `json:"line_items,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderPriceDetailsResponseData GetOrderPriceDetailsResponseData
 
 // NewGetOrderPriceDetailsResponseData instantiates a new GetOrderPriceDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -1010,7 +1013,58 @@ func (o GetOrderPriceDetailsResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.LineItems) {
 		toSerialize["line_items"] = o.LineItems
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderPriceDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderPriceDetailsResponseData := _GetOrderPriceDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varGetOrderPriceDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderPriceDetailsResponseData(varGetOrderPriceDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "payment")
+		delete(additionalProperties, "sku_list_price")
+		delete(additionalProperties, "sku_sale_price")
+		delete(additionalProperties, "subtotal")
+		delete(additionalProperties, "subtotal_deduction_seller")
+		delete(additionalProperties, "subtotal_deduction_platform")
+		delete(additionalProperties, "subtotal_tax_amount")
+		delete(additionalProperties, "voucher_deduction_platform")
+		delete(additionalProperties, "voucher_deduction_seller")
+		delete(additionalProperties, "shipping_list_price")
+		delete(additionalProperties, "shipping_sale_price")
+		delete(additionalProperties, "shipping_fee_deduction_seller")
+		delete(additionalProperties, "shipping_fee_deduction_platform")
+		delete(additionalProperties, "shipping_fee_deduction_platform_voucher")
+		delete(additionalProperties, "tax_amount")
+		delete(additionalProperties, "tax_rate")
+		delete(additionalProperties, "net_price_amount")
+		delete(additionalProperties, "cod_fee")
+		delete(additionalProperties, "cod_fee_net_amount")
+		delete(additionalProperties, "sku_gift_original_price")
+		delete(additionalProperties, "sku_gift_net_price")
+		delete(additionalProperties, "distance_shipping_fee")
+		delete(additionalProperties, "distance_fee")
+		delete(additionalProperties, "line_items")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderPriceDetailsResponseData struct {

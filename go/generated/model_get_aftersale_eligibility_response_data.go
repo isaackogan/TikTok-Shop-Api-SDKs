@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAftersaleEligibilityResponseData{}
 type GetAftersaleEligibilityResponseData struct {
 	// The eligible aftersale options for a given SKU.
 	SkuEligibility []GetAftersaleEligibilityResponseDataSkuEligibility `json:"sku_eligibility,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAftersaleEligibilityResponseData GetAftersaleEligibilityResponseData
 
 // NewGetAftersaleEligibilityResponseData instantiates a new GetAftersaleEligibilityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAftersaleEligibilityResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.SkuEligibility) {
 		toSerialize["sku_eligibility"] = o.SkuEligibility
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAftersaleEligibilityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetAftersaleEligibilityResponseData := _GetAftersaleEligibilityResponseData{}
+
+	err = json.Unmarshal(data, &varGetAftersaleEligibilityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAftersaleEligibilityResponseData(varGetAftersaleEligibilityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_eligibility")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAftersaleEligibilityResponseData struct {

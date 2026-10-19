@@ -35,7 +35,10 @@ type GetOpenCollaborationSampleRulesResponseDataSampleRule struct {
 	EndTime *int64 `json:"end_time,omitempty"`
 	// The threshold criteria that a creator must meet to be eligible to apply for the sample.
 	Thresholds *Threshold `json:"thresholds,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOpenCollaborationSampleRulesResponseDataSampleRule GetOpenCollaborationSampleRulesResponseDataSampleRule
 
 // NewGetOpenCollaborationSampleRulesResponseDataSampleRule instantiates a new GetOpenCollaborationSampleRulesResponseDataSampleRule object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetOpenCollaborationSampleRulesResponseDataSampleRule) ToMap() (map[stri
 	if !IsNil(o.Thresholds) {
 		toSerialize["thresholds"] = o.Thresholds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOpenCollaborationSampleRulesResponseDataSampleRule) UnmarshalJSON(data []byte) (err error) {
+	varGetOpenCollaborationSampleRulesResponseDataSampleRule := _GetOpenCollaborationSampleRulesResponseDataSampleRule{}
+
+	err = json.Unmarshal(data, &varGetOpenCollaborationSampleRulesResponseDataSampleRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOpenCollaborationSampleRulesResponseDataSampleRule(varGetOpenCollaborationSampleRulesResponseDataSampleRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sample_quota")
+		delete(additionalProperties, "is_sample_time_unlimited")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "thresholds")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOpenCollaborationSampleRulesResponseDataSampleRule struct {

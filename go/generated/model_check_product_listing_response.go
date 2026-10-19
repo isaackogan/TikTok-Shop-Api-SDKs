@@ -26,7 +26,10 @@ type CheckProductListingResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CheckProductListingResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponse CheckProductListingResponse
 
 // NewCheckProductListingResponse instantiates a new CheckProductListingResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CheckProductListingResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponse) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponse := _CheckProductListingResponse{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponse(varCheckProductListingResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponse struct {

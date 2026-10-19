@@ -23,7 +23,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvW
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceG
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformanceGmvWithTiktokCoupon struct {

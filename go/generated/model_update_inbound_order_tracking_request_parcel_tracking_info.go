@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type UpdateInboundOrderTrackingRequestParcelTrackingInfo struct {
 	TrackingNumber string `json:"tracking_number"`
 	// The carton number of an existing carton in this inbound order. After leading and trailing whitespace is removed, this value is matched to the carton whose tracking information is created or replaced.
 	CartonNumber string `json:"carton_number"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateInboundOrderTrackingRequestParcelTrackingInfo UpdateInboundOrderTrackingRequestParcelTrackingInfo
@@ -136,6 +136,11 @@ func (o UpdateInboundOrderTrackingRequestParcelTrackingInfo) ToMap() (map[string
 	toSerialize["provider_name"] = o.ProviderName
 	toSerialize["tracking_number"] = o.TrackingNumber
 	toSerialize["carton_number"] = o.CartonNumber
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *UpdateInboundOrderTrackingRequestParcelTrackingInfo) UnmarshalJSON(data
 
 	varUpdateInboundOrderTrackingRequestParcelTrackingInfo := _UpdateInboundOrderTrackingRequestParcelTrackingInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateInboundOrderTrackingRequestParcelTrackingInfo)
+	err = json.Unmarshal(data, &varUpdateInboundOrderTrackingRequestParcelTrackingInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateInboundOrderTrackingRequestParcelTrackingInfo(varUpdateInboundOrderTrackingRequestParcelTrackingInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "provider_name")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "carton_number")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

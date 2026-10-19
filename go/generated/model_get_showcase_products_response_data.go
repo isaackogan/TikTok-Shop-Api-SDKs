@@ -25,7 +25,10 @@ type GetShowcaseProductsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total count of products in the response.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseData GetShowcaseProductsResponseData
 
 // NewGetShowcaseProductsResponseData instantiates a new GetShowcaseProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShowcaseProductsResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseData := _GetShowcaseProductsResponseData{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseData(varGetShowcaseProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseData struct {

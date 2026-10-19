@@ -26,7 +26,10 @@ type UpdatePromotionActivityProductsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *UpdatePromotionActivityProductsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePromotionActivityProductsResponse UpdatePromotionActivityProductsResponse
 
 // NewUpdatePromotionActivityProductsResponse instantiates a new UpdatePromotionActivityProductsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UpdatePromotionActivityProductsResponse) ToMap() (map[string]interface{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePromotionActivityProductsResponse) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePromotionActivityProductsResponse := _UpdatePromotionActivityProductsResponse{}
+
+	err = json.Unmarshal(data, &varUpdatePromotionActivityProductsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePromotionActivityProductsResponse(varUpdatePromotionActivityProductsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePromotionActivityProductsResponse struct {

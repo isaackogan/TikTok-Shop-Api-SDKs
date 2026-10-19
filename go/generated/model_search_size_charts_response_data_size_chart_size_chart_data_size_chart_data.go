@@ -31,7 +31,10 @@ type SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData struct {
 	UnitSystem *string `json:"unit_system,omitempty"`
 	// Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
 	SizeTypes []string `json:"size_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData
 
 // NewSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData instantiates a new SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData) ToMap()
 	if !IsNil(o.SizeTypes) {
 		toSerialize["size_types"] = o.SizeTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData := _SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData(varSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "table")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "is_one_size")
+		delete(additionalProperties, "measurement_type")
+		delete(additionalProperties, "unit_system")
+		delete(additionalProperties, "size_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData struct {

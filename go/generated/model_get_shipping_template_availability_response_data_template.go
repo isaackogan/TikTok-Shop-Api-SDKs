@@ -25,7 +25,10 @@ type GetShippingTemplateAvailabilityResponseDataTemplate struct {
 	Template *GetShippingTemplateAvailabilityResponseDataTemplateTemplate `json:"template,omitempty"`
 	// Reasons the shipping template is unavailable, grouped by shipping service. This field is omitted when the template is available.
 	ServiceUnreachableReason []GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason `json:"service_unreachable_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingTemplateAvailabilityResponseDataTemplate GetShippingTemplateAvailabilityResponseDataTemplate
 
 // NewGetShippingTemplateAvailabilityResponseDataTemplate instantiates a new GetShippingTemplateAvailabilityResponseDataTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShippingTemplateAvailabilityResponseDataTemplate) ToMap() (map[string
 	if !IsNil(o.ServiceUnreachableReason) {
 		toSerialize["service_unreachable_reason"] = o.ServiceUnreachableReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingTemplateAvailabilityResponseDataTemplate) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingTemplateAvailabilityResponseDataTemplate := _GetShippingTemplateAvailabilityResponseDataTemplate{}
+
+	err = json.Unmarshal(data, &varGetShippingTemplateAvailabilityResponseDataTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingTemplateAvailabilityResponseDataTemplate(varGetShippingTemplateAvailabilityResponseDataTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template_is_available")
+		delete(additionalProperties, "template")
+		delete(additionalProperties, "service_unreachable_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingTemplateAvailabilityResponseDataTemplate struct {

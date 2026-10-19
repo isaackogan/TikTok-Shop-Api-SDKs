@@ -23,7 +23,10 @@ type GetWeeklyCreatorOutreachRecordsResponseDataData struct {
 	Total *int64 `json:"total,omitempty"`
 	// Return the list of newly connected creator records for the shop
 	ConnectList []GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList `json:"connect_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachRecordsResponseDataData GetWeeklyCreatorOutreachRecordsResponseDataData
 
 // NewGetWeeklyCreatorOutreachRecordsResponseDataData instantiates a new GetWeeklyCreatorOutreachRecordsResponseDataData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetWeeklyCreatorOutreachRecordsResponseDataData) ToMap() (map[string]int
 	if !IsNil(o.ConnectList) {
 		toSerialize["connect_list"] = o.ConnectList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachRecordsResponseDataData) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachRecordsResponseDataData := _GetWeeklyCreatorOutreachRecordsResponseDataData{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachRecordsResponseDataData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachRecordsResponseDataData(varGetWeeklyCreatorOutreachRecordsResponseDataData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "connect_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachRecordsResponseDataData struct {

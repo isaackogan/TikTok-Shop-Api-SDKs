@@ -69,7 +69,10 @@ type Payment struct {
 	DistanceShippingFee *string `json:"distance_shipping_fee,omitempty"`
 	// Total distance fee for Horizon+ Program. Only applicable for ID market
 	DistanceFee *string `json:"distance_fee,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Payment Payment
 
 // NewPayment instantiates a new Payment object
 // This constructor will assign default values to properties that have it defined,
@@ -973,7 +976,57 @@ func (o Payment) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DistanceFee) {
 		toSerialize["distance_fee"] = o.DistanceFee
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Payment) UnmarshalJSON(data []byte) (err error) {
+	varPayment := _Payment{}
+
+	err = json.Unmarshal(data, &varPayment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Payment(varPayment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sub_total")
+		delete(additionalProperties, "shipping_fee")
+		delete(additionalProperties, "seller_discount")
+		delete(additionalProperties, "platform_discount")
+		delete(additionalProperties, "payment_platform_discount")
+		delete(additionalProperties, "payment_discount_service_fee")
+		delete(additionalProperties, "total_amount")
+		delete(additionalProperties, "original_total_product_price")
+		delete(additionalProperties, "original_shipping_fee")
+		delete(additionalProperties, "shipping_fee_seller_discount")
+		delete(additionalProperties, "shipping_fee_platform_discount")
+		delete(additionalProperties, "shipping_fee_cofunded_discount")
+		delete(additionalProperties, "tax")
+		delete(additionalProperties, "small_order_fee")
+		delete(additionalProperties, "shipping_fee_tax")
+		delete(additionalProperties, "product_tax")
+		delete(additionalProperties, "retail_delivery_fee")
+		delete(additionalProperties, "buyer_service_fee")
+		delete(additionalProperties, "handling_fee")
+		delete(additionalProperties, "shipping_insurance_fee")
+		delete(additionalProperties, "item_insurance_fee")
+		delete(additionalProperties, "item_insurance_tax")
+		delete(additionalProperties, "distance_shipping_fee")
+		delete(additionalProperties, "distance_fee")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePayment struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &SearchGoodsHazmatAndExpirationInfoResponseData{}
 type SearchGoodsHazmatAndExpirationInfoResponseData struct {
 	// Container for per-SKU hazmat, lot-control, and expiration-management results.
 	HazmatAndExpirationInfo *SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo `json:"hazmat_and_expiration_info,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsHazmatAndExpirationInfoResponseData SearchGoodsHazmatAndExpirationInfoResponseData
 
 // NewSearchGoodsHazmatAndExpirationInfoResponseData instantiates a new SearchGoodsHazmatAndExpirationInfoResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SearchGoodsHazmatAndExpirationInfoResponseData) ToMap() (map[string]inte
 	if !IsNil(o.HazmatAndExpirationInfo) {
 		toSerialize["hazmat_and_expiration_info"] = o.HazmatAndExpirationInfo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsHazmatAndExpirationInfoResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsHazmatAndExpirationInfoResponseData := _SearchGoodsHazmatAndExpirationInfoResponseData{}
+
+	err = json.Unmarshal(data, &varSearchGoodsHazmatAndExpirationInfoResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsHazmatAndExpirationInfoResponseData(varSearchGoodsHazmatAndExpirationInfoResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "hazmat_and_expiration_info")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsHazmatAndExpirationInfoResponseData struct {

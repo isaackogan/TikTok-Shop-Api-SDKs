@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetWeeklyCreatorOutreachRecordsRequest struct {
 	PageIndex int64 `json:"page_index"`
 	// Page size, need > 1 and < =50
 	PageSize int64 `json:"page_size"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetWeeklyCreatorOutreachRecordsRequest GetWeeklyCreatorOutreachRecordsRequest
@@ -108,6 +108,11 @@ func (o GetWeeklyCreatorOutreachRecordsRequest) ToMap() (map[string]interface{},
 	toSerialize := map[string]interface{}{}
 	toSerialize["page_index"] = o.PageIndex
 	toSerialize["page_size"] = o.PageSize
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *GetWeeklyCreatorOutreachRecordsRequest) UnmarshalJSON(data []byte) (err
 
 	varGetWeeklyCreatorOutreachRecordsRequest := _GetWeeklyCreatorOutreachRecordsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetWeeklyCreatorOutreachRecordsRequest)
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachRecordsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetWeeklyCreatorOutreachRecordsRequest(varGetWeeklyCreatorOutreachRecordsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "page_index")
+		delete(additionalProperties, "page_size")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

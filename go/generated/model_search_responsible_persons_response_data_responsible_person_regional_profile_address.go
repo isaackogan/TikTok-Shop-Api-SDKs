@@ -37,7 +37,10 @@ type SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress
 	Province *string `json:"province,omitempty"`
 	// The two letter ISO 3166 country code representing the country of the address. It must be an EU country.
 	Country *string `json:"country,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress
 
 // NewSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress instantiates a new SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -323,7 +326,39 @@ func (o SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddr
 	if !IsNil(o.Country) {
 		toSerialize["country"] = o.Country
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress) UnmarshalJSON(data []byte) (err error) {
+	varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress := _SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress{}
+
+	err = json.Unmarshal(data, &varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress(varSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "street_address_line1")
+		delete(additionalProperties, "street_address_line2")
+		delete(additionalProperties, "district")
+		delete(additionalProperties, "city")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "province")
+		delete(additionalProperties, "country")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress struct {

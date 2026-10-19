@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RecommendRequiredProductPropertiesRequestSalesProperty struct {
 	Id string `json:"id"`
 	// Existing values selected for the sales property.
 	Values []RecommendRequiredProductPropertiesRequestSalesPropertyValue `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendRequiredProductPropertiesRequestSalesProperty RecommendRequiredProductPropertiesRequestSalesProperty
@@ -108,6 +108,11 @@ func (o RecommendRequiredProductPropertiesRequestSalesProperty) ToMap() (map[str
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *RecommendRequiredProductPropertiesRequestSalesProperty) UnmarshalJSON(d
 
 	varRecommendRequiredProductPropertiesRequestSalesProperty := _RecommendRequiredProductPropertiesRequestSalesProperty{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendRequiredProductPropertiesRequestSalesProperty)
+	err = json.Unmarshal(data, &varRecommendRequiredProductPropertiesRequestSalesProperty)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendRequiredProductPropertiesRequestSalesProperty(varRecommendRequiredProductPropertiesRequestSalesProperty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -27,7 +27,10 @@ type UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineL
 	BlindOpenTime *int64 `json:"blind_open_time,omitempty"`
 	// Unboxing product type. Possible values: - `NORMAL`: A normal unboxed product. - `GIFT`: A gift unboxed product.
 	ProductType *string `json:"product_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList
 
 // NewUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList instantiates a new UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLi
 	if !IsNil(o.ProductType) {
 		toSerialize["product_type"] = o.ProductType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList := _UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList{}
+
+	err = json.Unmarshal(data, &varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList(varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "blind_result_product_id")
+		delete(additionalProperties, "blind_result_sku_id")
+		delete(additionalProperties, "blind_open_time")
+		delete(additionalProperties, "product_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList struct {

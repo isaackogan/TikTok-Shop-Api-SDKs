@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopGroupAndRelatedShopsResponseData{}
 type GetShopGroupAndRelatedShopsResponseData struct {
 	// Information of product interoperability groups
 	ShopGroupData *GetShopGroupAndRelatedShopsResponseDataShopGroupData `json:"shop_group_data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopGroupAndRelatedShopsResponseData GetShopGroupAndRelatedShopsResponseData
 
 // NewGetShopGroupAndRelatedShopsResponseData instantiates a new GetShopGroupAndRelatedShopsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopGroupAndRelatedShopsResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.ShopGroupData) {
 		toSerialize["shop_group_data"] = o.ShopGroupData
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopGroupAndRelatedShopsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopGroupAndRelatedShopsResponseData := _GetShopGroupAndRelatedShopsResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopGroupAndRelatedShopsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopGroupAndRelatedShopsResponseData(varGetShopGroupAndRelatedShopsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_group_data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopGroupAndRelatedShopsResponseData struct {

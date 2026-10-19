@@ -27,7 +27,10 @@ type ListAvailableInboundMethodsResponseDataAvailableInboundMethodList struct {
 	WarehouseList []ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList `json:"warehouse_list,omitempty"`
 	// Estimated placement fee for this inbound method. As of April 2026, only ONE_HUB methods can include an amount.
 	PlacementFeeEstimate *ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate `json:"placement_fee_estimate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListAvailableInboundMethodsResponseDataAvailableInboundMethodList ListAvailableInboundMethodsResponseDataAvailableInboundMethodList
 
 // NewListAvailableInboundMethodsResponseDataAvailableInboundMethodList instantiates a new ListAvailableInboundMethodsResponseDataAvailableInboundMethodList object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ListAvailableInboundMethodsResponseDataAvailableInboundMethodList) ToMap
 	if !IsNil(o.PlacementFeeEstimate) {
 		toSerialize["placement_fee_estimate"] = o.PlacementFeeEstimate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListAvailableInboundMethodsResponseDataAvailableInboundMethodList) UnmarshalJSON(data []byte) (err error) {
+	varListAvailableInboundMethodsResponseDataAvailableInboundMethodList := _ListAvailableInboundMethodsResponseDataAvailableInboundMethodList{}
+
+	err = json.Unmarshal(data, &varListAvailableInboundMethodsResponseDataAvailableInboundMethodList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListAvailableInboundMethodsResponseDataAvailableInboundMethodList(varListAvailableInboundMethodsResponseDataAvailableInboundMethodList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inbound_method")
+		delete(additionalProperties, "available_time_window_list")
+		delete(additionalProperties, "warehouse_list")
+		delete(additionalProperties, "placement_fee_estimate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListAvailableInboundMethodsResponseDataAvailableInboundMethodList struct {

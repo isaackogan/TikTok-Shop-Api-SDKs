@@ -31,7 +31,10 @@ type GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList struct {
 	IsTemporaryListing *bool `json:"is_temporary_listing,omitempty"`
 	// Submitted customs clearance item details for this order line, aggregated by SKU.
 	RelatedItemDetail []GetOrderCustomsRequirementsResponseDataOrderClearanceListItemListRelatedItemDetail `json:"related_item_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList
 
 // NewGetOrderCustomsRequirementsResponseDataOrderClearanceListItemList instantiates a new GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList) ToMap
 	if !IsNil(o.RelatedItemDetail) {
 		toSerialize["related_item_detail"] = o.RelatedItemDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemList := _GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList{}
+
+	err = json.Unmarshal(data, &varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderCustomsRequirementsResponseDataOrderClearanceListItemList(varGetOrderCustomsRequirementsResponseDataOrderClearanceListItemList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "is_virtual_unboxing")
+		delete(additionalProperties, "is_temporary_listing")
+		delete(additionalProperties, "related_item_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderCustomsRequirementsResponseDataOrderClearanceListItemList struct {

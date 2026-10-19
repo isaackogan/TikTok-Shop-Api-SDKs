@@ -27,7 +27,10 @@ type GetShowcaseProductsResponseDataProductStatus struct {
 	IsHidden *bool `json:"is_hidden,omitempty"`
 	// The product's add status for the request origin. For `SHOWCASE`, `ADDED` indicates that the product is in the showcase, while `REJECTED` indicates that the product is rejected for use in the current context. For `LIVE`, `ADDED` means the product is already in the Live room's product list (live bag), `NOT_ADDED` means the product can be added, and `REJECTED` means the product cannot be added.
 	AddedStatus *string `json:"added_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductStatus GetShowcaseProductsResponseDataProductStatus
 
 // NewGetShowcaseProductsResponseDataProductStatus instantiates a new GetShowcaseProductsResponseDataProductStatus object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShowcaseProductsResponseDataProductStatus) ToMap() (map[string]interf
 	if !IsNil(o.AddedStatus) {
 		toSerialize["added_status"] = o.AddedStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductStatus) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductStatus := _GetShowcaseProductsResponseDataProductStatus{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductStatus)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductStatus(varGetShowcaseProductsResponseDataProductStatus)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory_status")
+		delete(additionalProperties, "review_status")
+		delete(additionalProperties, "is_hidden")
+		delete(additionalProperties, "added_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductStatus struct {

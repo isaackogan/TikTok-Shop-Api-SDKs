@@ -23,7 +23,10 @@ type InventorySearchRequest struct {
 	ProductIds []string `json:"product_ids,omitempty"`
 	// A list of SKU IDs used to search for inventory information. Max IDs: 600  **Note**: If both `sku_ids` and `product_ids` are passed, `sku_ids` will take precedence.
 	SkuIds []string `json:"sku_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchRequest InventorySearchRequest
 
 // NewInventorySearchRequest instantiates a new InventorySearchRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o InventorySearchRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuIds) {
 		toSerialize["sku_ids"] = o.SkuIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchRequest) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchRequest := _InventorySearchRequest{}
+
+	err = json.Unmarshal(data, &varInventorySearchRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchRequest(varInventorySearchRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "sku_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchRequest struct {

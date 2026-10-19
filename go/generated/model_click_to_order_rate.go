@@ -23,7 +23,10 @@ type ClickToOrderRate struct {
 	SkuOrderCtor *string `json:"sku_order_ctor,omitempty"`
 	// Percentage of times viewers who clicked LIVE product links also placed a main order.
 	MainOrderCtor *string `json:"main_order_ctor,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ClickToOrderRate ClickToOrderRate
 
 // NewClickToOrderRate instantiates a new ClickToOrderRate object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ClickToOrderRate) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MainOrderCtor) {
 		toSerialize["main_order_ctor"] = o.MainOrderCtor
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ClickToOrderRate) UnmarshalJSON(data []byte) (err error) {
+	varClickToOrderRate := _ClickToOrderRate{}
+
+	err = json.Unmarshal(data, &varClickToOrderRate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ClickToOrderRate(varClickToOrderRate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_order_ctor")
+		delete(additionalProperties, "main_order_ctor")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableClickToOrderRate struct {

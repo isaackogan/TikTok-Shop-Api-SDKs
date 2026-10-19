@@ -35,7 +35,10 @@ type CreatePackagesResponseDataShippingServiceInfo struct {
 	ShippingProviderId *string `json:"shipping_provider_id,omitempty"`
 	// Shipping provider name.US only.
 	ShippingProviderName *string `json:"shipping_provider_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatePackagesResponseDataShippingServiceInfo CreatePackagesResponseDataShippingServiceInfo
 
 // NewCreatePackagesResponseDataShippingServiceInfo instantiates a new CreatePackagesResponseDataShippingServiceInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o CreatePackagesResponseDataShippingServiceInfo) ToMap() (map[string]inter
 	if !IsNil(o.ShippingProviderName) {
 		toSerialize["shipping_provider_name"] = o.ShippingProviderName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatePackagesResponseDataShippingServiceInfo) UnmarshalJSON(data []byte) (err error) {
+	varCreatePackagesResponseDataShippingServiceInfo := _CreatePackagesResponseDataShippingServiceInfo{}
+
+	err = json.Unmarshal(data, &varCreatePackagesResponseDataShippingServiceInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatePackagesResponseDataShippingServiceInfo(varCreatePackagesResponseDataShippingServiceInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "earliest_delivery_days")
+		delete(additionalProperties, "latest_delivery_days")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "shipping_provider_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatePackagesResponseDataShippingServiceInfo struct {

@@ -25,7 +25,10 @@ type GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// The quantity limit of the gift sku which is involved in the activity. The range is [1, 99999].  If you are updating the value of an existing sku, the value cannot be decreased.
 	TotalClaimLimit *string `json:"total_claim_limit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail
 
 // NewGetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail instantiates a new GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail) ToMap() (
 	if !IsNil(o.TotalClaimLimit) {
 		toSerialize["total_claim_limit"] = o.TotalClaimLimit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail := _GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail(varGetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "total_claim_limit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail struct {

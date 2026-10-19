@@ -23,7 +23,10 @@ type UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The desired commission rate for the target collaboration. The desired commission rate is expressed in hundredths of a percent. For example, 3587 is a commission rate of 35.87%. This value must be a minimum of 1000.
 	CommissionRate *int64 `json:"commission_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission
 
 // NewUpdateTargetCollaborationResponseDataUpdateFailedChangeCommission instantiates a new UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission) ToMap
 	if !IsNil(o.CommissionRate) {
 		toSerialize["commission_rate"] = o.CommissionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTargetCollaborationResponseDataUpdateFailedChangeCommission := _UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission{}
+
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationResponseDataUpdateFailedChangeCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTargetCollaborationResponseDataUpdateFailedChangeCommission(varUpdateTargetCollaborationResponseDataUpdateFailedChangeCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTargetCollaborationResponseDataUpdateFailedChangeCommission struct {

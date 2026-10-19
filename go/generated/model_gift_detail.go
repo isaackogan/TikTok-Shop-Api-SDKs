@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GiftDetail struct {
 	SkuId string `json:"sku_id"`
 	// The total claim limit for the gift SKU in this activity. Enter an integer from `1` to `99999`.
 	TotalClaimLimit string `json:"total_claim_limit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GiftDetail GiftDetail
@@ -136,6 +136,11 @@ func (o GiftDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["total_claim_limit"] = o.TotalClaimLimit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *GiftDetail) UnmarshalJSON(data []byte) (err error) {
 
 	varGiftDetail := _GiftDetail{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGiftDetail)
+	err = json.Unmarshal(data, &varGiftDetail)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GiftDetail(varGiftDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "total_claim_limit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

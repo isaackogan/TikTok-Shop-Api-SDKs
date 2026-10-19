@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ShipInboundOrderRequestShipmentOption struct {
 	ShippingMethod string `json:"shipping_method"`
 	// Freight load type. Required when `shipping_method` is `FREIGHT` for EU and UK shops. It is optional for US shops and is not required when `shipping_method` is `SMALL_PARCEL`.  **Possible values:** * `FTL` * `LTL`
 	FreightType *string `json:"freight_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ShipInboundOrderRequestShipmentOption ShipInboundOrderRequestShipmentOption
@@ -117,6 +117,11 @@ func (o ShipInboundOrderRequestShipmentOption) ToMap() (map[string]interface{}, 
 	if !IsNil(o.FreightType) {
 		toSerialize["freight_type"] = o.FreightType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ShipInboundOrderRequestShipmentOption) UnmarshalJSON(data []byte) (err 
 
 	varShipInboundOrderRequestShipmentOption := _ShipInboundOrderRequestShipmentOption{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varShipInboundOrderRequestShipmentOption)
+	err = json.Unmarshal(data, &varShipInboundOrderRequestShipmentOption)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ShipInboundOrderRequestShipmentOption(varShipInboundOrderRequestShipmentOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_method")
+		delete(additionalProperties, "freight_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

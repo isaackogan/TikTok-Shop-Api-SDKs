@@ -25,7 +25,10 @@ type PartialEditGlobalProductResponseDataPublishResult struct {
 	Status *string `json:"status,omitempty"`
 	// The list of errors that occurred.
 	FailReasons []FailReason `json:"fail_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditGlobalProductResponseDataPublishResult PartialEditGlobalProductResponseDataPublishResult
 
 // NewPartialEditGlobalProductResponseDataPublishResult instantiates a new PartialEditGlobalProductResponseDataPublishResult object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PartialEditGlobalProductResponseDataPublishResult) ToMap() (map[string]i
 	if !IsNil(o.FailReasons) {
 		toSerialize["fail_reasons"] = o.FailReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditGlobalProductResponseDataPublishResult) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditGlobalProductResponseDataPublishResult := _PartialEditGlobalProductResponseDataPublishResult{}
+
+	err = json.Unmarshal(data, &varPartialEditGlobalProductResponseDataPublishResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditGlobalProductResponseDataPublishResult(varPartialEditGlobalProductResponseDataPublishResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "fail_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditGlobalProductResponseDataPublishResult struct {

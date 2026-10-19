@@ -21,7 +21,10 @@ var _ MappedNullable = &CheckShippingTemplateExistenceResponseData{}
 type CheckShippingTemplateExistenceResponseData struct {
 	// if template exists, return true
 	TemplateExist *bool `json:"template_exist,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckShippingTemplateExistenceResponseData CheckShippingTemplateExistenceResponseData
 
 // NewCheckShippingTemplateExistenceResponseData instantiates a new CheckShippingTemplateExistenceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CheckShippingTemplateExistenceResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.TemplateExist) {
 		toSerialize["template_exist"] = o.TemplateExist
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckShippingTemplateExistenceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckShippingTemplateExistenceResponseData := _CheckShippingTemplateExistenceResponseData{}
+
+	err = json.Unmarshal(data, &varCheckShippingTemplateExistenceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckShippingTemplateExistenceResponseData(varCheckShippingTemplateExistenceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "template_exist")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckShippingTemplateExistenceResponseData struct {

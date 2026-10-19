@@ -27,7 +27,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdown struct {
 	SellerProductCardGmv *GetShopPerformanceResponseDataPerformanceIntervalBreakdownSellerProductCardGmv `json:"seller_product_card_gmv,omitempty"`
 	// Attribution breakdown by shop tab and search.
 	ShopTabAndSearch *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch `json:"shop_tab_and_search,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdown GetShopPerformanceResponseDataPerformanceIntervalBreakdown
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdown instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdown) ToMap() (map
 	if !IsNil(o.ShopTabAndSearch) {
 		toSerialize["shop_tab_and_search"] = o.ShopTabAndSearch
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdown := _GetShopPerformanceResponseDataPerformanceIntervalBreakdown{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdown(varGetShopPerformanceResponseDataPerformanceIntervalBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "affiliate_product_card_attributed_gmv")
+		delete(additionalProperties, "content_breakdown")
+		delete(additionalProperties, "seller_product_card_gmv")
+		delete(additionalProperties, "shop_tab_and_search")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdown struct {

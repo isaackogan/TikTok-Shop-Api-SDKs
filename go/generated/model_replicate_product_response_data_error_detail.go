@@ -21,7 +21,10 @@ var _ MappedNullable = &ReplicateProductResponseDataErrorDetail{}
 type ReplicateProductResponseDataErrorDetail struct {
 	// The target region where the error occurred.
 	Region *string `json:"region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductResponseDataErrorDetail ReplicateProductResponseDataErrorDetail
 
 // NewReplicateProductResponseDataErrorDetail instantiates a new ReplicateProductResponseDataErrorDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ReplicateProductResponseDataErrorDetail) ToMap() (map[string]interface{}
 	if !IsNil(o.Region) {
 		toSerialize["region"] = o.Region
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductResponseDataErrorDetail) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductResponseDataErrorDetail := _ReplicateProductResponseDataErrorDetail{}
+
+	err = json.Unmarshal(data, &varReplicateProductResponseDataErrorDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductResponseDataErrorDetail(varReplicateProductResponseDataErrorDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductResponseDataErrorDetail struct {

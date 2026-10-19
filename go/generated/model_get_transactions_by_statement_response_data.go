@@ -41,7 +41,10 @@ type GetTransactionsByStatementResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The list of transaction records in the statement. Each transaction corresponds to an order, an adjustment, or a reserve-related transaction.
 	Transactions []GetTransactionsByStatementResponseDataTransaction `json:"transactions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByStatementResponseData GetTransactionsByStatementResponseData
 
 // NewGetTransactionsByStatementResponseData instantiates a new GetTransactionsByStatementResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o GetTransactionsByStatementResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.Transactions) {
 		toSerialize["transactions"] = o.Transactions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByStatementResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByStatementResponseData := _GetTransactionsByStatementResponseData{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByStatementResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByStatementResponseData(varGetTransactionsByStatementResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "payable_amount")
+		delete(additionalProperties, "total_reserve_amount")
+		delete(additionalProperties, "total_settlement_amount")
+		delete(additionalProperties, "total_settlement_breakdown")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "transactions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByStatementResponseData struct {

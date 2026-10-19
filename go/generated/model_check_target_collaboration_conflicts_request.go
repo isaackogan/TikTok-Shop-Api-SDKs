@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CheckTargetCollaborationConflictsRequest struct {
 	CreatorOpenIdList []string `json:"creator_open_id_list"`
 	// product id list
 	ProductIdList []string `json:"product_id_list"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CheckTargetCollaborationConflictsRequest CheckTargetCollaborationConflictsRequest
@@ -108,6 +108,11 @@ func (o CheckTargetCollaborationConflictsRequest) ToMap() (map[string]interface{
 	toSerialize := map[string]interface{}{}
 	toSerialize["creator_open_id_list"] = o.CreatorOpenIdList
 	toSerialize["product_id_list"] = o.ProductIdList
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CheckTargetCollaborationConflictsRequest) UnmarshalJSON(data []byte) (e
 
 	varCheckTargetCollaborationConflictsRequest := _CheckTargetCollaborationConflictsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCheckTargetCollaborationConflictsRequest)
+	err = json.Unmarshal(data, &varCheckTargetCollaborationConflictsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CheckTargetCollaborationConflictsRequest(varCheckTargetCollaborationConflictsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_open_id_list")
+		delete(additionalProperties, "product_id_list")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

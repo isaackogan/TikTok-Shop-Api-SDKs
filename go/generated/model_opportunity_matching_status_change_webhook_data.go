@@ -29,7 +29,10 @@ type OpportunityMatchingStatusChangeWebhookData struct {
 	OpportunityMatchingEndTime *int64 `json:"opportunity_matching_end_time,omitempty"`
 	// The time when the opportunity matching status is last updated. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OpportunityMatchingStatusChangeWebhookData OpportunityMatchingStatusChangeWebhookData
 
 // NewOpportunityMatchingStatusChangeWebhookData instantiates a new OpportunityMatchingStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o OpportunityMatchingStatusChangeWebhookData) ToMap() (map[string]interfac
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OpportunityMatchingStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varOpportunityMatchingStatusChangeWebhookData := _OpportunityMatchingStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varOpportunityMatchingStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OpportunityMatchingStatusChangeWebhookData(varOpportunityMatchingStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "opportunity_matching_status")
+		delete(additionalProperties, "opportunity_ids")
+		delete(additionalProperties, "opportunity_matching_end_time")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOpportunityMatchingStatusChangeWebhookData struct {

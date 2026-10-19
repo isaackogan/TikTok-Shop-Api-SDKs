@@ -39,7 +39,10 @@ type SearchSessionsResponseDataSession struct {
 	FirstResponseLate *bool `json:"first_response_late,omitempty"`
 	// Time elapsed in seconds between when the buyer sends the first message and when the seller sends the first response.
 	FirstResponseTime *int64 `json:"first_response_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSessionsResponseDataSession SearchSessionsResponseDataSession
 
 // NewSearchSessionsResponseDataSession instantiates a new SearchSessionsResponseDataSession object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o SearchSessionsResponseDataSession) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.FirstResponseTime) {
 		toSerialize["first_response_time"] = o.FirstResponseTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSessionsResponseDataSession) UnmarshalJSON(data []byte) (err error) {
+	varSearchSessionsResponseDataSession := _SearchSessionsResponseDataSession{}
+
+	err = json.Unmarshal(data, &varSearchSessionsResponseDataSession)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSessionsResponseDataSession(varSearchSessionsResponseDataSession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "begin_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "buyer_nickname")
+		delete(additionalProperties, "chat_tags")
+		delete(additionalProperties, "satisfaction_score")
+		delete(additionalProperties, "dissatisfaction_reason")
+		delete(additionalProperties, "first_response_late")
+		delete(additionalProperties, "first_response_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSessionsResponseDataSession struct {

@@ -29,7 +29,10 @@ type Threshold struct {
 	CategoryIds []string `json:"category_ids,omitempty"`
 	// The creators whose predicted rate of posting a shoppable video or LIVE after receiving a sample. - ALL. All creators regardless of the rate. - LOW. The creators whose rate is above or equal to low. - MEDIUM. The creators whose rate is above or equal to medium. - HIGH. The creators whose rate is high.
 	PredictedFulfillmentRank *string `json:"predicted_fulfillment_rank,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Threshold Threshold
 
 // NewThreshold instantiates a new Threshold object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o Threshold) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PredictedFulfillmentRank) {
 		toSerialize["predicted_fulfillment_rank"] = o.PredictedFulfillmentRank
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Threshold) UnmarshalJSON(data []byte) (err error) {
+	varThreshold := _Threshold{}
+
+	err = json.Unmarshal(data, &varThreshold)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Threshold(varThreshold)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "minimum_follower_count")
+		delete(additionalProperties, "minimum_gmv")
+		delete(additionalProperties, "avg_ec_video_views")
+		delete(additionalProperties, "category_ids")
+		delete(additionalProperties, "predicted_fulfillment_rank")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableThreshold struct {

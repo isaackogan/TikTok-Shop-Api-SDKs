@@ -24,7 +24,10 @@ type GetCreatorConversationMessagesResponseData struct {
 	// When `has_more` is `true`, pass this cursor as `page_token` in the next request. It is empty when `has_more` is `false`.
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	Messages []GetCreatorConversationMessagesResponseDataMessage `json:"messages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorConversationMessagesResponseData GetCreatorConversationMessagesResponseData
 
 // NewGetCreatorConversationMessagesResponseData instantiates a new GetCreatorConversationMessagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -158,7 +161,35 @@ func (o GetCreatorConversationMessagesResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.Messages) {
 		toSerialize["messages"] = o.Messages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorConversationMessagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorConversationMessagesResponseData := _GetCreatorConversationMessagesResponseData{}
+
+	err = json.Unmarshal(data, &varGetCreatorConversationMessagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorConversationMessagesResponseData(varGetCreatorConversationMessagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_more")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "messages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorConversationMessagesResponseData struct {

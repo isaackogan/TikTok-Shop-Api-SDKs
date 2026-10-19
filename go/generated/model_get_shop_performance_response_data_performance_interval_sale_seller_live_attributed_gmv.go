@@ -23,7 +23,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGm
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv instantiates a new GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttribute
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv := _GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv(varGetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalSaleSellerLiveAttributedGmv struct {

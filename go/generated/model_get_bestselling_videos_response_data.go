@@ -21,7 +21,10 @@ var _ MappedNullable = &GetBestsellingVideosResponseData{}
 type GetBestsellingVideosResponseData struct {
 	// List of bestselling video records for the target date range.
 	Videos []GetBestsellingVideosResponseDataVideo `json:"videos,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetBestsellingVideosResponseData GetBestsellingVideosResponseData
 
 // NewGetBestsellingVideosResponseData instantiates a new GetBestsellingVideosResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetBestsellingVideosResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Videos) {
 		toSerialize["videos"] = o.Videos
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetBestsellingVideosResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetBestsellingVideosResponseData := _GetBestsellingVideosResponseData{}
+
+	err = json.Unmarshal(data, &varGetBestsellingVideosResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetBestsellingVideosResponseData(varGetBestsellingVideosResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "videos")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetBestsellingVideosResponseData struct {

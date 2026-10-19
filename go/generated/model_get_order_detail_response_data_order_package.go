@@ -21,7 +21,10 @@ var _ MappedNullable = &GetOrderDetailResponseDataOrderPackage{}
 type GetOrderDetailResponseDataOrderPackage struct {
 	// Package ID
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrderPackage GetOrderDetailResponseDataOrderPackage
 
 // NewGetOrderDetailResponseDataOrderPackage instantiates a new GetOrderDetailResponseDataOrderPackage object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetOrderDetailResponseDataOrderPackage) ToMap() (map[string]interface{},
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrderPackage) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrderPackage := _GetOrderDetailResponseDataOrderPackage{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrderPackage)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrderPackage(varGetOrderDetailResponseDataOrderPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrderPackage struct {

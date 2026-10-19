@@ -26,7 +26,10 @@ type GenerateCampaignProductPromotionLinksInBatchResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GenerateCampaignProductPromotionLinksInBatchResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateCampaignProductPromotionLinksInBatchResponse GenerateCampaignProductPromotionLinksInBatchResponse
 
 // NewGenerateCampaignProductPromotionLinksInBatchResponse instantiates a new GenerateCampaignProductPromotionLinksInBatchResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GenerateCampaignProductPromotionLinksInBatchResponse) ToMap() (map[strin
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateCampaignProductPromotionLinksInBatchResponse) UnmarshalJSON(data []byte) (err error) {
+	varGenerateCampaignProductPromotionLinksInBatchResponse := _GenerateCampaignProductPromotionLinksInBatchResponse{}
+
+	err = json.Unmarshal(data, &varGenerateCampaignProductPromotionLinksInBatchResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateCampaignProductPromotionLinksInBatchResponse(varGenerateCampaignProductPromotionLinksInBatchResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateCampaignProductPromotionLinksInBatchResponse struct {

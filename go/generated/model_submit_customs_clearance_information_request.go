@@ -21,7 +21,10 @@ var _ MappedNullable = &SubmitCustomsClearanceInformationRequest{}
 type SubmitCustomsClearanceInformationRequest struct {
 	// List of orders for which to submit customs clearance information. Maximum: 100 orders per request.
 	OrderList []SubmitCustomsClearanceInformationRequestOrderList `json:"order_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitCustomsClearanceInformationRequest SubmitCustomsClearanceInformationRequest
 
 // NewSubmitCustomsClearanceInformationRequest instantiates a new SubmitCustomsClearanceInformationRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SubmitCustomsClearanceInformationRequest) ToMap() (map[string]interface{
 	if !IsNil(o.OrderList) {
 		toSerialize["order_list"] = o.OrderList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitCustomsClearanceInformationRequest) UnmarshalJSON(data []byte) (err error) {
+	varSubmitCustomsClearanceInformationRequest := _SubmitCustomsClearanceInformationRequest{}
+
+	err = json.Unmarshal(data, &varSubmitCustomsClearanceInformationRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitCustomsClearanceInformationRequest(varSubmitCustomsClearanceInformationRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitCustomsClearanceInformationRequest struct {

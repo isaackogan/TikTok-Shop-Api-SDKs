@@ -34,7 +34,10 @@ type GetTradeInAccountTransactionsResponseDataFlow struct {
 	TransactionId *string `json:"transaction_id,omitempty"`
 	// The TradeIn business transaction type. - RECHARGE: Funds credited through a recharge. - WITHDRAW: Funds debited through a payout. - REVERSE: Funds returned after a payout reversal.
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTradeInAccountTransactionsResponseDataFlow GetTradeInAccountTransactionsResponseDataFlow
 
 // NewGetTradeInAccountTransactionsResponseDataFlow instantiates a new GetTradeInAccountTransactionsResponseDataFlow object
 // This constructor will assign default values to properties that have it defined,
@@ -308,7 +311,39 @@ func (o GetTradeInAccountTransactionsResponseDataFlow) ToMap() (map[string]inter
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTradeInAccountTransactionsResponseDataFlow) UnmarshalJSON(data []byte) (err error) {
+	varGetTradeInAccountTransactionsResponseDataFlow := _GetTradeInAccountTransactionsResponseDataFlow{}
+
+	err = json.Unmarshal(data, &varGetTradeInAccountTransactionsResponseDataFlow)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTradeInAccountTransactionsResponseDataFlow(varGetTradeInAccountTransactionsResponseDataFlow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "direction")
+		delete(additionalProperties, "origin_transaction_id")
+		delete(additionalProperties, "reference_id")
+		delete(additionalProperties, "transaction_id")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTradeInAccountTransactionsResponseDataFlow struct {

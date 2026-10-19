@@ -25,7 +25,10 @@ type SearchManufacturersRequest struct {
 	Keyword *string `json:"keyword,omitempty"`
 	// The BCP-47 locale codes for displaying the manufacturer information. Default: The locale of the seller's registered business address. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT
 	Locales []string `json:"locales,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchManufacturersRequest SearchManufacturersRequest
 
 // NewSearchManufacturersRequest instantiates a new SearchManufacturersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchManufacturersRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Locales) {
 		toSerialize["locales"] = o.Locales
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchManufacturersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchManufacturersRequest := _SearchManufacturersRequest{}
+
+	err = json.Unmarshal(data, &varSearchManufacturersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchManufacturersRequest(varSearchManufacturersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "keyword")
+		delete(additionalProperties, "locales")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchManufacturersRequest struct {

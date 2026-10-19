@@ -29,7 +29,10 @@ type UpdatePromotionActivityProductsResponseData struct {
 	Status *string `json:"status,omitempty"`
 	// The number of items in this request. When `product_level==PRODUCT`, this is the number of products. When `product_level==VARIATION`, this is the total number of SKUs across all products. When `product_level==SHOP`, this value is `0`. IDs in `benefit_product_ids` and `exclude_product_ids` are not included.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePromotionActivityProductsResponseData UpdatePromotionActivityProductsResponseData
 
 // NewUpdatePromotionActivityProductsResponseData instantiates a new UpdatePromotionActivityProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o UpdatePromotionActivityProductsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePromotionActivityProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePromotionActivityProductsResponseData := _UpdatePromotionActivityProductsResponseData{}
+
+	err = json.Unmarshal(data, &varUpdatePromotionActivityProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePromotionActivityProductsResponseData(varUpdatePromotionActivityProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePromotionActivityProductsResponseData struct {

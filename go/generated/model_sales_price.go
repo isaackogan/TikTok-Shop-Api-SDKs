@@ -25,7 +25,10 @@ type SalesPrice struct {
 	MinimumAmount *string `json:"minimum_amount,omitempty"`
 	// The maximum promotion price of all skus of this product.
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SalesPrice SalesPrice
 
 // NewSalesPrice instantiates a new SalesPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SalesPrice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MaximumAmount) {
 		toSerialize["maximum_amount"] = o.MaximumAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SalesPrice) UnmarshalJSON(data []byte) (err error) {
+	varSalesPrice := _SalesPrice{}
+
+	err = json.Unmarshal(data, &varSalesPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SalesPrice(varSalesPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSalesPrice struct {

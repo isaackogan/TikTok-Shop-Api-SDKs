@@ -41,7 +41,10 @@ type GetSubmissionRecordsResponseDataDataSubmission struct {
 	ProductOrders *int64 `json:"product_orders,omitempty"`
 	// The product page view count for the last 30 days.
 	ProductPv *int64 `json:"product_pv,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSubmissionRecordsResponseDataDataSubmission GetSubmissionRecordsResponseDataDataSubmission
 
 // NewGetSubmissionRecordsResponseDataDataSubmission instantiates a new GetSubmissionRecordsResponseDataDataSubmission object
 // This constructor will assign default values to properties that have it defined,
@@ -465,7 +468,43 @@ func (o GetSubmissionRecordsResponseDataDataSubmission) ToMap() (map[string]inte
 	if !IsNil(o.ProductPv) {
 		toSerialize["product_pv"] = o.ProductPv
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSubmissionRecordsResponseDataDataSubmission) UnmarshalJSON(data []byte) (err error) {
+	varGetSubmissionRecordsResponseDataDataSubmission := _GetSubmissionRecordsResponseDataDataSubmission{}
+
+	err = json.Unmarshal(data, &varGetSubmissionRecordsResponseDataDataSubmission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSubmissionRecordsResponseDataDataSubmission(varGetSubmissionRecordsResponseDataDataSubmission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "opportunity_id")
+		delete(additionalProperties, "opportunity_title")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "submit_time")
+		delete(additionalProperties, "review_time")
+		delete(additionalProperties, "rejection_reason")
+		delete(additionalProperties, "product_orders")
+		delete(additionalProperties, "product_pv")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSubmissionRecordsResponseDataDataSubmission struct {

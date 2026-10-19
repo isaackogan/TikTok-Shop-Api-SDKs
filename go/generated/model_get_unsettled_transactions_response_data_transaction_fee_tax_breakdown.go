@@ -23,7 +23,10 @@ type GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown struct {
 	Fee *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee `json:"fee,omitempty"`
 	// The tax amounts that contribute to `est_fee_tax_amount`.
 	Tax *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax `json:"tax,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown
 
 // NewGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown instantiates a new GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown) ToMap() 
 	if !IsNil(o.Tax) {
 		toSerialize["tax"] = o.Tax
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown := _GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown(varGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fee")
+		delete(additionalProperties, "tax")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown struct {

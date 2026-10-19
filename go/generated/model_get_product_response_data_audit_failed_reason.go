@@ -27,7 +27,10 @@ type GetProductResponseDataAuditFailedReason struct {
 	Reasons []string `json:"reasons,omitempty"`
 	// A detailed explanation of the reason for failure.
 	Suggestions []string `json:"suggestions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataAuditFailedReason GetProductResponseDataAuditFailedReason
 
 // NewGetProductResponseDataAuditFailedReason instantiates a new GetProductResponseDataAuditFailedReason object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataAuditFailedReason) ToMap() (map[string]interface{}
 	if !IsNil(o.Suggestions) {
 		toSerialize["suggestions"] = o.Suggestions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataAuditFailedReason) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataAuditFailedReason := _GetProductResponseDataAuditFailedReason{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataAuditFailedReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataAuditFailedReason(varGetProductResponseDataAuditFailedReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "listing_platform")
+		delete(additionalProperties, "position")
+		delete(additionalProperties, "reasons")
+		delete(additionalProperties, "suggestions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataAuditFailedReason struct {

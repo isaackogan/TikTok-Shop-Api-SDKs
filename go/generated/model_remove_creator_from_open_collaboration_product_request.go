@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RemoveCreatorFromOpenCollaborationProductRequest struct {
 	CreatorUserOpenId string `json:"creator_user_open_id"`
 	// The product identifier.
 	ProductId string `json:"product_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RemoveCreatorFromOpenCollaborationProductRequest RemoveCreatorFromOpenCollaborationProductRequest
@@ -108,6 +108,11 @@ func (o RemoveCreatorFromOpenCollaborationProductRequest) ToMap() (map[string]in
 	toSerialize := map[string]interface{}{}
 	toSerialize["creator_user_open_id"] = o.CreatorUserOpenId
 	toSerialize["product_id"] = o.ProductId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *RemoveCreatorFromOpenCollaborationProductRequest) UnmarshalJSON(data []
 
 	varRemoveCreatorFromOpenCollaborationProductRequest := _RemoveCreatorFromOpenCollaborationProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemoveCreatorFromOpenCollaborationProductRequest)
+	err = json.Unmarshal(data, &varRemoveCreatorFromOpenCollaborationProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RemoveCreatorFromOpenCollaborationProductRequest(varRemoveCreatorFromOpenCollaborationProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "creator_user_open_id")
+		delete(additionalProperties, "product_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

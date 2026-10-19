@@ -59,7 +59,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile struct {
 	CreatorConnectInfo *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorConnectInfo `json:"creator_connect_info,omitempty"`
 	// Creator trend infomation
 	CreatorTrendProfile []GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfileCreatorTrendProfile `json:"creator_trend_profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -788,7 +791,52 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile) ToMap
 	if !IsNil(o.CreatorTrendProfile) {
 		toSerialize["creator_trend_profile"] = o.CreatorTrendProfile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile := _GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile(varGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_official_recommend")
+		delete(additionalProperties, "contact_info_available")
+		delete(additionalProperties, "creator_bind_mcn_name")
+		delete(additionalProperties, "live_engagement_rate_30d")
+		delete(additionalProperties, "video_play_cnt_30d_med")
+		delete(additionalProperties, "live_view_cnt_30d_med")
+		delete(additionalProperties, "live_like_cnt_30d")
+		delete(additionalProperties, "live_comment_cnt_30d_med")
+		delete(additionalProperties, "live_share_cnt_30d_med")
+		delete(additionalProperties, "video_publish_cnt_30d_med")
+		delete(additionalProperties, "has_invited_90d")
+		delete(additionalProperties, "is_creator_blocked")
+		delete(additionalProperties, "creator_level")
+		delete(additionalProperties, "creator_fulfillment_reviews")
+		delete(additionalProperties, "is_eligible_flat_fee")
+		delete(additionalProperties, "is_rising_star")
+		delete(additionalProperties, "creator_fulfillment_score_90d")
+		delete(additionalProperties, "sample_score")
+		delete(additionalProperties, "creator_connect_info")
+		delete(additionalProperties, "creator_trend_profile")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile struct {

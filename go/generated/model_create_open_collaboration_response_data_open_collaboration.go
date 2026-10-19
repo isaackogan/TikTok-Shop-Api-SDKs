@@ -25,7 +25,10 @@ type CreateOpenCollaborationResponseDataOpenCollaboration struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The time from which the open collaboration commission is effective, expressed as a Unix timestamp in seconds.
 	EffectiveTime *int64 `json:"effective_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateOpenCollaborationResponseDataOpenCollaboration CreateOpenCollaborationResponseDataOpenCollaboration
 
 // NewCreateOpenCollaborationResponseDataOpenCollaboration instantiates a new CreateOpenCollaborationResponseDataOpenCollaboration object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateOpenCollaborationResponseDataOpenCollaboration) ToMap() (map[strin
 	if !IsNil(o.EffectiveTime) {
 		toSerialize["effective_time"] = o.EffectiveTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateOpenCollaborationResponseDataOpenCollaboration) UnmarshalJSON(data []byte) (err error) {
+	varCreateOpenCollaborationResponseDataOpenCollaboration := _CreateOpenCollaborationResponseDataOpenCollaboration{}
+
+	err = json.Unmarshal(data, &varCreateOpenCollaborationResponseDataOpenCollaboration)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOpenCollaborationResponseDataOpenCollaboration(varCreateOpenCollaborationResponseDataOpenCollaboration)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "effective_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateOpenCollaborationResponseDataOpenCollaboration struct {

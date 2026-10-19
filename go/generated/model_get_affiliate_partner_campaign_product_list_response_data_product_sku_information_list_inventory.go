@@ -21,7 +21,10 @@ var _ MappedNullable = &GetAffiliatePartnerCampaignProductListResponseDataProduc
 type GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory struct {
 	// The total SKU quantity available in the warehouse.
 	AvailableQuantity *string `json:"available_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationL
 	if !IsNil(o.AvailableQuantity) {
 		toSerialize["available_quantity"] = o.AvailableQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory := _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory(varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "available_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory struct {

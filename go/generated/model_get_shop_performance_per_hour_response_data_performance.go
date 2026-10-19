@@ -25,7 +25,10 @@ type GetShopPerformancePerHourResponseDataPerformance struct {
 	LatestAvailableTimestamp *int64 `json:"latest_available_timestamp,omitempty"`
 	// Aggregated shop performance metrics for the requested date.
 	Overall *GetShopPerformancePerHourResponseDataPerformanceOverall `json:"overall,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformancePerHourResponseDataPerformance GetShopPerformancePerHourResponseDataPerformance
 
 // NewGetShopPerformancePerHourResponseDataPerformance instantiates a new GetShopPerformancePerHourResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopPerformancePerHourResponseDataPerformance) ToMap() (map[string]in
 	if !IsNil(o.Overall) {
 		toSerialize["overall"] = o.Overall
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformancePerHourResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformancePerHourResponseDataPerformance := _GetShopPerformancePerHourResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopPerformancePerHourResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformancePerHourResponseDataPerformance(varGetShopPerformancePerHourResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "intervals")
+		delete(additionalProperties, "latest_available_timestamp")
+		delete(additionalProperties, "overall")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformancePerHourResponseDataPerformance struct {

@@ -29,7 +29,10 @@ type SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillm
 	Status *string `json:"status,omitempty"`
 	// Represents the marketing status of a product associated with a fulfillment order. It indicates whether the product is available for marketing and fulfillment. The possible values are: - UNKNOWN: The marketing status of the product is unknown. - LIVE: The product is available and can be used for fulfillment. - OUT_OF_STOCK: The product is out of stock and cannot be fulfilled. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to market the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available. This field helps sellers and creators understand the current status of products associated with fulfillment orders, ensuring that all parties are aware of the availability and marketing status of the products involved in sample applications and collaborations.
 	BoundProductStatus *string `json:"bound_product_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment
 
 // NewSearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment instantiates a new SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfi
 	if !IsNil(o.BoundProductStatus) {
 		toSerialize["bound_product_status"] = o.BoundProductStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment := _SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment{}
+
+	err = json.Unmarshal(data, &varSearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment(varSearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "total_suspend_duration")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "bound_product_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment struct {

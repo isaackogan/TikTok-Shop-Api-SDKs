@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCustomerServicePerformanceResponseData{}
 type GetCustomerServicePerformanceResponseData struct {
 	// The customer service performance metrics for the shop based on chat support sessions within the selected evaluation period.
 	Performance *GetCustomerServicePerformanceResponseDataPerformance `json:"performance,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCustomerServicePerformanceResponseData GetCustomerServicePerformanceResponseData
 
 // NewGetCustomerServicePerformanceResponseData instantiates a new GetCustomerServicePerformanceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCustomerServicePerformanceResponseData) ToMap() (map[string]interface
 	if !IsNil(o.Performance) {
 		toSerialize["performance"] = o.Performance
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCustomerServicePerformanceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCustomerServicePerformanceResponseData := _GetCustomerServicePerformanceResponseData{}
+
+	err = json.Unmarshal(data, &varGetCustomerServicePerformanceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCustomerServicePerformanceResponseData(varGetCustomerServicePerformanceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "performance")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCustomerServicePerformanceResponseData struct {

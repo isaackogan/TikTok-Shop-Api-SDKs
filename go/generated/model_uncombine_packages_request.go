@@ -21,7 +21,10 @@ var _ MappedNullable = &UncombinePackagesRequest{}
 type UncombinePackagesRequest struct {
 	// TikTok Shop order ID. Indicate the orders that need to be removed from the package. Please make sure the orders belong to the package.
 	OrderIds []string `json:"order_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UncombinePackagesRequest UncombinePackagesRequest
 
 // NewUncombinePackagesRequest instantiates a new UncombinePackagesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UncombinePackagesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderIds) {
 		toSerialize["order_ids"] = o.OrderIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UncombinePackagesRequest) UnmarshalJSON(data []byte) (err error) {
+	varUncombinePackagesRequest := _UncombinePackagesRequest{}
+
+	err = json.Unmarshal(data, &varUncombinePackagesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UncombinePackagesRequest(varUncombinePackagesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUncombinePackagesRequest struct {

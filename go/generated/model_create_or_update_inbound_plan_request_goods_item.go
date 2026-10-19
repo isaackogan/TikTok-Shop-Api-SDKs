@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateOrUpdateInboundPlanRequestGoodsItem struct {
 	GoodsId string `json:"goods_id"`
 	// Quantity of this goods item in the inbound plan. Must be greater than 0.
 	Quantity int64 `json:"quantity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateOrUpdateInboundPlanRequestGoodsItem CreateOrUpdateInboundPlanRequestGoodsItem
@@ -108,6 +108,11 @@ func (o CreateOrUpdateInboundPlanRequestGoodsItem) ToMap() (map[string]interface
 	toSerialize := map[string]interface{}{}
 	toSerialize["goods_id"] = o.GoodsId
 	toSerialize["quantity"] = o.Quantity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateOrUpdateInboundPlanRequestGoodsItem) UnmarshalJSON(data []byte) (
 
 	varCreateOrUpdateInboundPlanRequestGoodsItem := _CreateOrUpdateInboundPlanRequestGoodsItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateOrUpdateInboundPlanRequestGoodsItem)
+	err = json.Unmarshal(data, &varCreateOrUpdateInboundPlanRequestGoodsItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateOrUpdateInboundPlanRequestGoodsItem(varCreateOrUpdateInboundPlanRequestGoodsItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "goods_id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

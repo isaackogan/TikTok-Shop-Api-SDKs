@@ -21,7 +21,10 @@ var _ MappedNullable = &DiagnoseAndOptimizeProductRequestSizeChartTemplate{}
 type DiagnoseAndOptimizeProductRequestSizeChartTemplate struct {
 	// The size chart template ID.
 	Id *string `json:"id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductRequestSizeChartTemplate DiagnoseAndOptimizeProductRequestSizeChartTemplate
 
 // NewDiagnoseAndOptimizeProductRequestSizeChartTemplate instantiates a new DiagnoseAndOptimizeProductRequestSizeChartTemplate object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DiagnoseAndOptimizeProductRequestSizeChartTemplate) ToMap() (map[string]
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductRequestSizeChartTemplate) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductRequestSizeChartTemplate := _DiagnoseAndOptimizeProductRequestSizeChartTemplate{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductRequestSizeChartTemplate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductRequestSizeChartTemplate(varDiagnoseAndOptimizeProductRequestSizeChartTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductRequestSizeChartTemplate struct {

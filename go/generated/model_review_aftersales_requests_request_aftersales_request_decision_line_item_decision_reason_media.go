@@ -23,7 +23,10 @@ type ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionRea
 	Uri *string `json:"uri,omitempty"`
 	// MIME type of the media (such as image/jpeg).
 	MimeType *string `json:"mime_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia
 
 // NewReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia instantiates a new ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecision
 	if !IsNil(o.MimeType) {
 		toSerialize["mime_type"] = o.MimeType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia) UnmarshalJSON(data []byte) (err error) {
+	varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia := _ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia{}
+
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia(varReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "mime_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia struct {

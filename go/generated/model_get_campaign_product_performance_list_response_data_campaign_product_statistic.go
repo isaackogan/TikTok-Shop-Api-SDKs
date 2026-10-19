@@ -31,7 +31,10 @@ type GetCampaignProductPerformanceListResponseDataCampaignProductStatistic struc
 	SampleRequestedCreatorNum *int64 `json:"sample_requested_creator_num,omitempty"`
 	// An object representing the details for the product associated with the campaign.
 	CampaignProductDetail *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetail `json:"campaign_product_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseDataCampaignProductStatistic GetCampaignProductPerformanceListResponseDataCampaignProductStatistic
 
 // NewGetCampaignProductPerformanceListResponseDataCampaignProductStatistic instantiates a new GetCampaignProductPerformanceListResponseDataCampaignProductStatistic object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetCampaignProductPerformanceListResponseDataCampaignProductStatistic) T
 	if !IsNil(o.CampaignProductDetail) {
 		toSerialize["campaign_product_detail"] = o.CampaignProductDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseDataCampaignProductStatistic) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseDataCampaignProductStatistic := _GetCampaignProductPerformanceListResponseDataCampaignProductStatistic{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseDataCampaignProductStatistic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseDataCampaignProductStatistic(varGetCampaignProductPerformanceListResponseDataCampaignProductStatistic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "data_update_time")
+		delete(additionalProperties, "creator_sales_num")
+		delete(additionalProperties, "collaborated_creators_num")
+		delete(additionalProperties, "promoted_creator_num")
+		delete(additionalProperties, "sample_requested_creator_num")
+		delete(additionalProperties, "campaign_product_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseDataCampaignProductStatistic struct {

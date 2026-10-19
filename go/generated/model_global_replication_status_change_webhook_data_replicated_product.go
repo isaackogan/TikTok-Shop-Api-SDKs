@@ -27,7 +27,10 @@ type GlobalReplicationStatusChangeWebhookDataReplicatedProduct struct {
 	Result *string `json:"result,omitempty"`
 	// The list of reasons for why the replication failed.
 	FailReasons []GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason `json:"fail_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GlobalReplicationStatusChangeWebhookDataReplicatedProduct GlobalReplicationStatusChangeWebhookDataReplicatedProduct
 
 // NewGlobalReplicationStatusChangeWebhookDataReplicatedProduct instantiates a new GlobalReplicationStatusChangeWebhookDataReplicatedProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GlobalReplicationStatusChangeWebhookDataReplicatedProduct) ToMap() (map[
 	if !IsNil(o.FailReasons) {
 		toSerialize["fail_reasons"] = o.FailReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GlobalReplicationStatusChangeWebhookDataReplicatedProduct) UnmarshalJSON(data []byte) (err error) {
+	varGlobalReplicationStatusChangeWebhookDataReplicatedProduct := _GlobalReplicationStatusChangeWebhookDataReplicatedProduct{}
+
+	err = json.Unmarshal(data, &varGlobalReplicationStatusChangeWebhookDataReplicatedProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GlobalReplicationStatusChangeWebhookDataReplicatedProduct(varGlobalReplicationStatusChangeWebhookDataReplicatedProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "result")
+		delete(additionalProperties, "fail_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGlobalReplicationStatusChangeWebhookDataReplicatedProduct struct {

@@ -53,7 +53,10 @@ type GetOrderDetailResponseDataOrderRecipientAddress struct {
 	DeliveryPreferences *GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference `json:"delivery_preferences,omitempty"`
 	// Full buyer detail address.
 	AddressDetail *string `json:"address_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderDetailResponseDataOrderRecipientAddress GetOrderDetailResponseDataOrderRecipientAddress
 
 // NewGetOrderDetailResponseDataOrderRecipientAddress instantiates a new GetOrderDetailResponseDataOrderRecipientAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -677,7 +680,49 @@ func (o GetOrderDetailResponseDataOrderRecipientAddress) ToMap() (map[string]int
 	if !IsNil(o.AddressDetail) {
 		toSerialize["address_detail"] = o.AddressDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderDetailResponseDataOrderRecipientAddress) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderDetailResponseDataOrderRecipientAddress := _GetOrderDetailResponseDataOrderRecipientAddress{}
+
+	err = json.Unmarshal(data, &varGetOrderDetailResponseDataOrderRecipientAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderDetailResponseDataOrderRecipientAddress(varGetOrderDetailResponseDataOrderRecipientAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "full_address")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "first_name")
+		delete(additionalProperties, "last_name")
+		delete(additionalProperties, "first_name_local_script")
+		delete(additionalProperties, "last_name_local_script")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "post_town")
+		delete(additionalProperties, "address_line1")
+		delete(additionalProperties, "address_line2")
+		delete(additionalProperties, "address_line3")
+		delete(additionalProperties, "address_line4")
+		delete(additionalProperties, "district_info")
+		delete(additionalProperties, "delivery_preferences")
+		delete(additionalProperties, "address_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderDetailResponseDataOrderRecipientAddress struct {

@@ -51,7 +51,10 @@ type GetShopPerformancePerHourResponseDataPerformanceOverall struct {
 	VideoAttributedGmv *VideoAttributedGmv `json:"video_attributed_gmv,omitempty"`
 	// Number of unique users who visited your product detail pages before the most recent update time.
 	Visitors *int64 `json:"visitors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformancePerHourResponseDataPerformanceOverall GetShopPerformancePerHourResponseDataPerformanceOverall
 
 // NewGetShopPerformancePerHourResponseDataPerformanceOverall instantiates a new GetShopPerformancePerHourResponseDataPerformanceOverall object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o GetShopPerformancePerHourResponseDataPerformanceOverall) ToMap() (map[st
 	if !IsNil(o.Visitors) {
 		toSerialize["visitors"] = o.Visitors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformancePerHourResponseDataPerformanceOverall) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformancePerHourResponseDataPerformanceOverall := _GetShopPerformancePerHourResponseDataPerformanceOverall{}
+
+	err = json.Unmarshal(data, &varGetShopPerformancePerHourResponseDataPerformanceOverall)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformancePerHourResponseDataPerformanceOverall(varGetShopPerformancePerHourResponseDataPerformanceOverall)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_order_value")
+		delete(additionalProperties, "avg_sku_order_value")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "customers_count")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "live_attributed_gmv")
+		delete(additionalProperties, "orders_count")
+		delete(additionalProperties, "product_card_attributed_gmv")
+		delete(additionalProperties, "product_clicks")
+		delete(additionalProperties, "product_impressions")
+		delete(additionalProperties, "sku_orders_count")
+		delete(additionalProperties, "unique_clicks")
+		delete(additionalProperties, "unique_product_impressions")
+		delete(additionalProperties, "video_attributed_gmv")
+		delete(additionalProperties, "visitors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformancePerHourResponseDataPerformanceOverall struct {

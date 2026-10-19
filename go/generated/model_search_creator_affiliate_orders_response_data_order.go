@@ -29,7 +29,10 @@ type SearchCreatorAffiliateOrdersResponseDataOrder struct {
 	Status *string `json:"status,omitempty"`
 	// A list of SKUs associated with the order.
 	Skus []SearchCreatorAffiliateOrdersResponseDataOrderSku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorAffiliateOrdersResponseDataOrder SearchCreatorAffiliateOrdersResponseDataOrder
 
 // NewSearchCreatorAffiliateOrdersResponseDataOrder instantiates a new SearchCreatorAffiliateOrdersResponseDataOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchCreatorAffiliateOrdersResponseDataOrder) ToMap() (map[string]inter
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorAffiliateOrdersResponseDataOrder) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorAffiliateOrdersResponseDataOrder := _SearchCreatorAffiliateOrdersResponseDataOrder{}
+
+	err = json.Unmarshal(data, &varSearchCreatorAffiliateOrdersResponseDataOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorAffiliateOrdersResponseDataOrder(varSearchCreatorAffiliateOrdersResponseDataOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "delivery_time")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorAffiliateOrdersResponseDataOrder struct {

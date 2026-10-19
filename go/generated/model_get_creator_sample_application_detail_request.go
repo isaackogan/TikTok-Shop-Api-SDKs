@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type GetCreatorSampleApplicationDetailRequest struct {
 	ApplicationType string `json:"application_type"`
 	// The real main order identifier, required when application  is \"SAMPLE_COUPON\"  or \"SAMPLE_CAMPAIGN\" or \"REFUNDABLE_SAMPLE\".
 	MainOrderId *string `json:"main_order_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetCreatorSampleApplicationDetailRequest GetCreatorSampleApplicationDetailRequest
@@ -182,6 +182,11 @@ func (o GetCreatorSampleApplicationDetailRequest) ToMap() (map[string]interface{
 	if !IsNil(o.MainOrderId) {
 		toSerialize["main_order_id"] = o.MainOrderId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *GetCreatorSampleApplicationDetailRequest) UnmarshalJSON(data []byte) (e
 
 	varGetCreatorSampleApplicationDetailRequest := _GetCreatorSampleApplicationDetailRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetCreatorSampleApplicationDetailRequest)
+	err = json.Unmarshal(data, &varGetCreatorSampleApplicationDetailRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetCreatorSampleApplicationDetailRequest(varGetCreatorSampleApplicationDetailRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "application_type")
+		delete(additionalProperties, "main_order_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

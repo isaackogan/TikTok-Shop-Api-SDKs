@@ -23,7 +23,10 @@ type ShippingFee struct {
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShippingFee ShippingFee
 
 // NewShippingFee instantiates a new ShippingFee object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ShippingFee) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShippingFee) UnmarshalJSON(data []byte) (err error) {
+	varShippingFee := _ShippingFee{}
+
+	err = json.Unmarshal(data, &varShippingFee)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShippingFee(varShippingFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShippingFee struct {

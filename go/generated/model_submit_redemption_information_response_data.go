@@ -21,7 +21,10 @@ var _ MappedNullable = &SubmitRedemptionInformationResponseData{}
 type SubmitRedemptionInformationResponseData struct {
 	// Callback result.For partial failure usage, if some of order line id in the request fail, it will be recorded with a none zero status_code.
 	OrderStatuses []SubmitRedemptionInformationResponseDataOrderStatus `json:"order_statuses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SubmitRedemptionInformationResponseData SubmitRedemptionInformationResponseData
 
 // NewSubmitRedemptionInformationResponseData instantiates a new SubmitRedemptionInformationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SubmitRedemptionInformationResponseData) ToMap() (map[string]interface{}
 	if !IsNil(o.OrderStatuses) {
 		toSerialize["order_statuses"] = o.OrderStatuses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SubmitRedemptionInformationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSubmitRedemptionInformationResponseData := _SubmitRedemptionInformationResponseData{}
+
+	err = json.Unmarshal(data, &varSubmitRedemptionInformationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SubmitRedemptionInformationResponseData(varSubmitRedemptionInformationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_statuses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSubmitRedemptionInformationResponseData struct {

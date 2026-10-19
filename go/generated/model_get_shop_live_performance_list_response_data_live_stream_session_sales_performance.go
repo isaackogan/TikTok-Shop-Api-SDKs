@@ -57,7 +57,10 @@ type GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance str
 	PaymentRate *string `json:"payment_rate,omitempty"`
 	// Number of distinct products sold from the LIVE session.
 	ProductsSold *int64 `json:"products_sold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance
 
 // NewGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance instantiates a new GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -751,7 +754,51 @@ func (o GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance)
 	if !IsNil(o.ProductsSold) {
 		toSerialize["products_sold"] = o.ProductsSold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance := _GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance(varGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aov")
+		delete(additionalProperties, "attributed_customers")
+		delete(additionalProperties, "avg_live_auction_price")
+		delete(additionalProperties, "avg_price")
+		delete(additionalProperties, "created_sku_orders")
+		delete(additionalProperties, "gmv_with_tiktok_coupons")
+		delete(additionalProperties, "live_attributed_gmv")
+		delete(additionalProperties, "live_attributed_items_sold")
+		delete(additionalProperties, "live_attributed_orders")
+		delete(additionalProperties, "live_attributed_sku_orders")
+		delete(additionalProperties, "live_auction_attributed_gmv")
+		delete(additionalProperties, "live_auction_attributed_items_sold")
+		delete(additionalProperties, "live_auction_attributed_sku_orders")
+		delete(additionalProperties, "live_auction_gmv")
+		delete(additionalProperties, "live_auction_indirect_gmv")
+		delete(additionalProperties, "live_gmv")
+		delete(additionalProperties, "live_indirect_gmv")
+		delete(additionalProperties, "payment_rate")
+		delete(additionalProperties, "products_sold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance struct {

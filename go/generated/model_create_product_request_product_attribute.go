@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateProductRequestProductAttribute struct {
 	Id string `json:"id"`
 	// A list of selectable values for the product attribute.  **Note**: Provide either a built-in ID or a custom name; if both are provided, the ID takes priority.
 	Values []CreateProductRequestProductAttributeValue `json:"values"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateProductRequestProductAttribute CreateProductRequestProductAttribute
@@ -108,6 +108,11 @@ func (o CreateProductRequestProductAttribute) ToMap() (map[string]interface{}, e
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["values"] = o.Values
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateProductRequestProductAttribute) UnmarshalJSON(data []byte) (err e
 
 	varCreateProductRequestProductAttribute := _CreateProductRequestProductAttribute{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateProductRequestProductAttribute)
+	err = json.Unmarshal(data, &varCreateProductRequestProductAttribute)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateProductRequestProductAttribute(varCreateProductRequestProductAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

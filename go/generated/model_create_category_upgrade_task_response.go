@@ -26,7 +26,10 @@ type CreateCategoryUpgradeTaskResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateCategoryUpgradeTaskResponse CreateCategoryUpgradeTaskResponse
 
 // NewCreateCategoryUpgradeTaskResponse instantiates a new CreateCategoryUpgradeTaskResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateCategoryUpgradeTaskResponse) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateCategoryUpgradeTaskResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateCategoryUpgradeTaskResponse := _CreateCategoryUpgradeTaskResponse{}
+
+	err = json.Unmarshal(data, &varCreateCategoryUpgradeTaskResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateCategoryUpgradeTaskResponse(varCreateCategoryUpgradeTaskResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateCategoryUpgradeTaskResponse struct {

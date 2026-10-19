@@ -25,7 +25,10 @@ type UpdatePromotionActivityResponseData struct {
 	Title *string `json:"title,omitempty"`
 	// Last update time as a Unix timestamp in seconds.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdatePromotionActivityResponseData UpdatePromotionActivityResponseData
 
 // NewUpdatePromotionActivityResponseData instantiates a new UpdatePromotionActivityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o UpdatePromotionActivityResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdatePromotionActivityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdatePromotionActivityResponseData := _UpdatePromotionActivityResponseData{}
+
+	err = json.Unmarshal(data, &varUpdatePromotionActivityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdatePromotionActivityResponseData(varUpdatePromotionActivityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdatePromotionActivityResponseData struct {

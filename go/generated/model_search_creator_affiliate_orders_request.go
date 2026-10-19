@@ -23,7 +23,10 @@ type SearchCreatorAffiliateOrdersRequest struct {
 	CreateTimeGe *int64 `json:"create_time_ge,omitempty"`
 	// Filter orders to show only those created before the specified time, expressed as a Unix timestamp in seconds. Refer to the notes in `create_time_ge` for more usage information.
 	CreateTimeLt *int64 `json:"create_time_lt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorAffiliateOrdersRequest SearchCreatorAffiliateOrdersRequest
 
 // NewSearchCreatorAffiliateOrdersRequest instantiates a new SearchCreatorAffiliateOrdersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorAffiliateOrdersRequest) ToMap() (map[string]interface{}, er
 	if !IsNil(o.CreateTimeLt) {
 		toSerialize["create_time_lt"] = o.CreateTimeLt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorAffiliateOrdersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorAffiliateOrdersRequest := _SearchCreatorAffiliateOrdersRequest{}
+
+	err = json.Unmarshal(data, &varSearchCreatorAffiliateOrdersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorAffiliateOrdersRequest(varSearchCreatorAffiliateOrdersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorAffiliateOrdersRequest struct {

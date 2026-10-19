@@ -31,7 +31,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceInterval struct {
 	Interactions *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction `json:"interactions,omitempty"`
 	// Conversion data for the LIVE interval, including order rates, created SKU orders, GPM, and average price.
 	Conversion *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion `json:"conversion,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceInterval GetShopLIVEMinutePerformanceResponseDataPerformanceInterval
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceInterval instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceInterval) ToMap() (ma
 	if !IsNil(o.Conversion) {
 		toSerialize["conversion"] = o.Conversion
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceInterval := _GetShopLIVEMinutePerformanceResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceInterval(varGetShopLIVEMinutePerformanceResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "traffic")
+		delete(additionalProperties, "interactions")
+		delete(additionalProperties, "conversion")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceInterval struct {

@@ -27,7 +27,10 @@ type GetSPSMetricDiagnosisResponseDataCalculationRule struct {
 	NumeratorLabel *string `json:"numerator_label,omitempty"`
 	// Numerator value.
 	NumeratorValue *string `json:"numerator_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricDiagnosisResponseDataCalculationRule GetSPSMetricDiagnosisResponseDataCalculationRule
 
 // NewGetSPSMetricDiagnosisResponseDataCalculationRule instantiates a new GetSPSMetricDiagnosisResponseDataCalculationRule object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetSPSMetricDiagnosisResponseDataCalculationRule) ToMap() (map[string]in
 	if !IsNil(o.NumeratorValue) {
 		toSerialize["numerator_value"] = o.NumeratorValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricDiagnosisResponseDataCalculationRule) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricDiagnosisResponseDataCalculationRule := _GetSPSMetricDiagnosisResponseDataCalculationRule{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricDiagnosisResponseDataCalculationRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricDiagnosisResponseDataCalculationRule(varGetSPSMetricDiagnosisResponseDataCalculationRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "denominator_label")
+		delete(additionalProperties, "denominator_value")
+		delete(additionalProperties, "numerator_label")
+		delete(additionalProperties, "numerator_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricDiagnosisResponseDataCalculationRule struct {

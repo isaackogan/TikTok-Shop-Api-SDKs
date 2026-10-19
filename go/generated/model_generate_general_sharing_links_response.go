@@ -26,7 +26,10 @@ type GenerateGeneralSharingLinksResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GenerateGeneralSharingLinksResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateGeneralSharingLinksResponse GenerateGeneralSharingLinksResponse
 
 // NewGenerateGeneralSharingLinksResponse instantiates a new GenerateGeneralSharingLinksResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GenerateGeneralSharingLinksResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateGeneralSharingLinksResponse) UnmarshalJSON(data []byte) (err error) {
+	varGenerateGeneralSharingLinksResponse := _GenerateGeneralSharingLinksResponse{}
+
+	err = json.Unmarshal(data, &varGenerateGeneralSharingLinksResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateGeneralSharingLinksResponse(varGenerateGeneralSharingLinksResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateGeneralSharingLinksResponse struct {

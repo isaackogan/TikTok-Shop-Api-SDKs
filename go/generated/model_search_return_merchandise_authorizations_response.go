@@ -26,7 +26,10 @@ type SearchReturnMerchandiseAuthorizationsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchReturnMerchandiseAuthorizationsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnMerchandiseAuthorizationsResponse SearchReturnMerchandiseAuthorizationsResponse
 
 // NewSearchReturnMerchandiseAuthorizationsResponse instantiates a new SearchReturnMerchandiseAuthorizationsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchReturnMerchandiseAuthorizationsResponse) ToMap() (map[string]inter
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnMerchandiseAuthorizationsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnMerchandiseAuthorizationsResponse := _SearchReturnMerchandiseAuthorizationsResponse{}
+
+	err = json.Unmarshal(data, &varSearchReturnMerchandiseAuthorizationsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnMerchandiseAuthorizationsResponse(varSearchReturnMerchandiseAuthorizationsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnMerchandiseAuthorizationsResponse struct {

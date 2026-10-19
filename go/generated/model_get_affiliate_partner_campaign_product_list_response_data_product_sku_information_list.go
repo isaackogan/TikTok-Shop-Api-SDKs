@@ -31,7 +31,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList
 	RegionPrices []GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice `json:"region_prices,omitempty"`
 	// The properties of the sku
 	Properties []GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListProperty `json:"properties,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationL
 	if !IsNil(o.Properties) {
 		toSerialize["properties"] = o.Properties
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList := _GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList(varGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "base_price")
+		delete(additionalProperties, "region_prices")
+		delete(additionalProperties, "properties")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList struct {

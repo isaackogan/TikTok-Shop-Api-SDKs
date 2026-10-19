@@ -35,7 +35,10 @@ type NewMessageWebhookData struct {
 	IsVisible *bool `json:"is_visible,omitempty"`
 	// The message sender.   For system and robot roles, the shop is the sender.
 	Sender *NewMessageWebhookDataSender `json:"sender,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _NewMessageWebhookData NewMessageWebhookData
 
 // NewNewMessageWebhookData instantiates a new NewMessageWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o NewMessageWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Sender) {
 		toSerialize["sender"] = o.Sender
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *NewMessageWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varNewMessageWebhookData := _NewMessageWebhookData{}
+
+	err = json.Unmarshal(data, &varNewMessageWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = NewMessageWebhookData(varNewMessageWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "message_id")
+		delete(additionalProperties, "index")
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "is_visible")
+		delete(additionalProperties, "sender")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableNewMessageWebhookData struct {

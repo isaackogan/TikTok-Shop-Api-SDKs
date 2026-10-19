@@ -26,7 +26,10 @@ type GetAuthorizedCategoryAssetsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetAuthorizedCategoryAssetsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAuthorizedCategoryAssetsResponse GetAuthorizedCategoryAssetsResponse
 
 // NewGetAuthorizedCategoryAssetsResponse instantiates a new GetAuthorizedCategoryAssetsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetAuthorizedCategoryAssetsResponse) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAuthorizedCategoryAssetsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetAuthorizedCategoryAssetsResponse := _GetAuthorizedCategoryAssetsResponse{}
+
+	err = json.Unmarshal(data, &varGetAuthorizedCategoryAssetsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAuthorizedCategoryAssetsResponse(varGetAuthorizedCategoryAssetsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAuthorizedCategoryAssetsResponse struct {

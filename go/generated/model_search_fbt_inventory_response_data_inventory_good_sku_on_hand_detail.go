@@ -25,7 +25,10 @@ type SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail struct {
 	AvailableQuantity *int64 `json:"available_quantity,omitempty"`
 	// The number of units reserved for customer orders or return to supplier shipment.
 	ReservedQuantity *int64 `json:"reserved_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail
 
 // NewSearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail instantiates a new SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail) ToMap() (map
 	if !IsNil(o.ReservedQuantity) {
 		toSerialize["reserved_quantity"] = o.ReservedQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail := _SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail(varSearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_quantity")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "reserved_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail struct {

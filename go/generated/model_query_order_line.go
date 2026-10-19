@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type QueryOrderLine struct {
 	SkuId string `json:"sku_id"`
 	// The unique identifier of the pod data.
 	PodOrderDataId string `json:"pod_order_data_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _QueryOrderLine QueryOrderLine
@@ -164,6 +164,11 @@ func (o QueryOrderLine) ToMap() (map[string]interface{}, error) {
 	toSerialize["product_id"] = o.ProductId
 	toSerialize["sku_id"] = o.SkuId
 	toSerialize["pod_order_data_id"] = o.PodOrderDataId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *QueryOrderLine) UnmarshalJSON(data []byte) (err error) {
 
 	varQueryOrderLine := _QueryOrderLine{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varQueryOrderLine)
+	err = json.Unmarshal(data, &varQueryOrderLine)
 
 	if err != nil {
 		return err
 	}
 
 	*o = QueryOrderLine(varQueryOrderLine)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "pod_order_data_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

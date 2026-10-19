@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCreatorMarketplaceAdvancedSearchFiltersRequest{}
 type GetCreatorMarketplaceAdvancedSearchFiltersRequest struct {
 	// The filter option types to retrieve. If this field is omitted or empty, both `option_list` and `sorters` are returned as empty arrays.
 	Options []GetCreatorMarketplaceAdvancedSearchFiltersRequestOption `json:"options,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorMarketplaceAdvancedSearchFiltersRequest GetCreatorMarketplaceAdvancedSearchFiltersRequest
 
 // NewGetCreatorMarketplaceAdvancedSearchFiltersRequest instantiates a new GetCreatorMarketplaceAdvancedSearchFiltersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCreatorMarketplaceAdvancedSearchFiltersRequest) ToMap() (map[string]i
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorMarketplaceAdvancedSearchFiltersRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorMarketplaceAdvancedSearchFiltersRequest := _GetCreatorMarketplaceAdvancedSearchFiltersRequest{}
+
+	err = json.Unmarshal(data, &varGetCreatorMarketplaceAdvancedSearchFiltersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorMarketplaceAdvancedSearchFiltersRequest(varGetCreatorMarketplaceAdvancedSearchFiltersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "options")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorMarketplaceAdvancedSearchFiltersRequest struct {

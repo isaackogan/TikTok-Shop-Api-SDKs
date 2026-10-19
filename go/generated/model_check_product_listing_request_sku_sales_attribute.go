@@ -31,7 +31,10 @@ type CheckProductListingRequestSkuSalesAttribute struct {
 	SkuImg *SkuImg `json:"sku_img,omitempty"`
 	// A list of supplementary images for each value (e.g. red) of the primary sales attribute (e.g. color) to provide multiple views or details of the product for that attribute value. These appear in the product options gallery on TikTok Shop.  **Note**: - Max number of image URIs: 8. - Arrange your image URIs in the sequence that they should appear on TikTok Shop. - Applicable only for the US market.
 	SupplementarySkuImages []SupplementarySkuImage `json:"supplementary_sku_images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingRequestSkuSalesAttribute CheckProductListingRequestSkuSalesAttribute
 
 // NewCheckProductListingRequestSkuSalesAttribute instantiates a new CheckProductListingRequestSkuSalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o CheckProductListingRequestSkuSalesAttribute) ToMap() (map[string]interfa
 	if !IsNil(o.SupplementarySkuImages) {
 		toSerialize["supplementary_sku_images"] = o.SupplementarySkuImages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingRequestSkuSalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingRequestSkuSalesAttribute := _CheckProductListingRequestSkuSalesAttribute{}
+
+	err = json.Unmarshal(data, &varCheckProductListingRequestSkuSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingRequestSkuSalesAttribute(varCheckProductListingRequestSkuSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		delete(additionalProperties, "sku_img")
+		delete(additionalProperties, "supplementary_sku_images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingRequestSkuSalesAttribute struct {

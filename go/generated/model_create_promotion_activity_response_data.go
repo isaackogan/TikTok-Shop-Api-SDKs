@@ -27,7 +27,10 @@ type CreatePromotionActivityResponseData struct {
 	UpdateTime *int64 `json:"update_time,omitempty"`
 	// Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatePromotionActivityResponseData CreatePromotionActivityResponseData
 
 // NewCreatePromotionActivityResponseData instantiates a new CreatePromotionActivityResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o CreatePromotionActivityResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatePromotionActivityResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreatePromotionActivityResponseData := _CreatePromotionActivityResponseData{}
+
+	err = json.Unmarshal(data, &varCreatePromotionActivityResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatePromotionActivityResponseData(varCreatePromotionActivityResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatePromotionActivityResponseData struct {

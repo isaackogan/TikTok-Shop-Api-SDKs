@@ -113,7 +113,10 @@ type GetProductResponseData struct {
 	SellingFormat *string `json:"selling_format,omitempty"`
 	// Whether the product is a blind box of lucky bag. For example: PopMart
 	IsBlindBox *bool `json:"is_blind_box,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseData GetProductResponseData
 
 // NewGetProductResponseData instantiates a new GetProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -1787,7 +1790,79 @@ func (o GetProductResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsBlindBox) {
 		toSerialize["is_blind_box"] = o.IsBlindBox
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseData := _GetProductResponseData{}
+
+	err = json.Unmarshal(data, &varGetProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseData(varGetProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "audit")
+		delete(additionalProperties, "audit_failed_reasons")
+		delete(additionalProperties, "brand")
+		delete(additionalProperties, "category_chains")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "delivery_options")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "global_product_association")
+		delete(additionalProperties, "has_draft")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "integrated_platform_statuses")
+		delete(additionalProperties, "is_cod_allowed")
+		delete(additionalProperties, "is_not_for_sale")
+		delete(additionalProperties, "is_pre_owned")
+		delete(additionalProperties, "is_replicated")
+		delete(additionalProperties, "key_product_features")
+		delete(additionalProperties, "listing_quality_tier")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "minimum_order_quantity")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "pod_info")
+		delete(additionalProperties, "prescription_requirement")
+		delete(additionalProperties, "primary_combined_product_id")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "product_families")
+		delete(additionalProperties, "product_status")
+		delete(additionalProperties, "product_tags")
+		delete(additionalProperties, "product_types")
+		delete(additionalProperties, "recommended_categories")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "scheduled_sale")
+		delete(additionalProperties, "search_terms")
+		delete(additionalProperties, "shipping_insurance_requirement")
+		delete(additionalProperties, "shipping_template_id")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "subscribe_info")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "selling_format")
+		delete(additionalProperties, "is_blind_box")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseData struct {

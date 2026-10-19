@@ -26,7 +26,10 @@ type ReviewAftersalesRequestsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *ReviewAftersalesRequestsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReviewAftersalesRequestsResponse ReviewAftersalesRequestsResponse
 
 // NewReviewAftersalesRequestsResponse instantiates a new ReviewAftersalesRequestsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o ReviewAftersalesRequestsResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReviewAftersalesRequestsResponse) UnmarshalJSON(data []byte) (err error) {
+	varReviewAftersalesRequestsResponse := _ReviewAftersalesRequestsResponse{}
+
+	err = json.Unmarshal(data, &varReviewAftersalesRequestsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReviewAftersalesRequestsResponse(varReviewAftersalesRequestsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReviewAftersalesRequestsResponse struct {

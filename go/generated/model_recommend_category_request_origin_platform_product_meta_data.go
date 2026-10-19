@@ -21,7 +21,10 @@ var _ MappedNullable = &RecommendCategoryRequestOriginPlatformProductMetaData{}
 type RecommendCategoryRequestOriginPlatformProductMetaData struct {
 	// A list of product metadata attributes and their values.
 	AttributeValueList []RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList `json:"attribute_value_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryRequestOriginPlatformProductMetaData RecommendCategoryRequestOriginPlatformProductMetaData
 
 // NewRecommendCategoryRequestOriginPlatformProductMetaData instantiates a new RecommendCategoryRequestOriginPlatformProductMetaData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o RecommendCategoryRequestOriginPlatformProductMetaData) ToMap() (map[stri
 	if !IsNil(o.AttributeValueList) {
 		toSerialize["attribute_value_list"] = o.AttributeValueList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryRequestOriginPlatformProductMetaData) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryRequestOriginPlatformProductMetaData := _RecommendCategoryRequestOriginPlatformProductMetaData{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryRequestOriginPlatformProductMetaData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryRequestOriginPlatformProductMetaData(varRecommendCategoryRequestOriginPlatformProductMetaData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "attribute_value_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryRequestOriginPlatformProductMetaData struct {

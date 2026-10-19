@@ -23,7 +23,10 @@ type CancelOrderResponseData struct {
 	CancelId *string `json:"cancel_id,omitempty"`
 	// The status of an order cancellation request.  Available values: - `CANCELLATION_REQUEST_PENDING` - `CANCELLATION_REQUEST_SUCCESS` - `CANCELLATION_REQUEST_CANCEL` - `CANCELLATION_REQUEST_COMPLETE`
 	CancelStatus *string `json:"cancel_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CancelOrderResponseData CancelOrderResponseData
 
 // NewCancelOrderResponseData instantiates a new CancelOrderResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CancelOrderResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CancelStatus) {
 		toSerialize["cancel_status"] = o.CancelStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CancelOrderResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCancelOrderResponseData := _CancelOrderResponseData{}
+
+	err = json.Unmarshal(data, &varCancelOrderResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CancelOrderResponseData(varCancelOrderResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cancel_id")
+		delete(additionalProperties, "cancel_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCancelOrderResponseData struct {

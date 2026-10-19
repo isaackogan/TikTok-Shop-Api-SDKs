@@ -29,7 +29,10 @@ type GetGlobalCategoriesResponseDataCategory struct {
 	IsLeaf *bool `json:"is_leaf,omitempty"`
 	// The shop's permission status for this category. Possible values: - AVAILABLE: You have the permission to create products in this category. - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.  Contact your account manager for assistance.
 	PermissionStatuses []string `json:"permission_statuses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoriesResponseDataCategory GetGlobalCategoriesResponseDataCategory
 
 // NewGetGlobalCategoriesResponseDataCategory instantiates a new GetGlobalCategoriesResponseDataCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetGlobalCategoriesResponseDataCategory) ToMap() (map[string]interface{}
 	if !IsNil(o.PermissionStatuses) {
 		toSerialize["permission_statuses"] = o.PermissionStatuses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoriesResponseDataCategory) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoriesResponseDataCategory := _GetGlobalCategoriesResponseDataCategory{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoriesResponseDataCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoriesResponseDataCategory(varGetGlobalCategoriesResponseDataCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "local_name")
+		delete(additionalProperties, "is_leaf")
+		delete(additionalProperties, "permission_statuses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoriesResponseDataCategory struct {

@@ -26,7 +26,10 @@ type CreateFBTGoodsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *CreateFBTGoodsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFBTGoodsResponse CreateFBTGoodsResponse
 
 // NewCreateFBTGoodsResponse instantiates a new CreateFBTGoodsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o CreateFBTGoodsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFBTGoodsResponse) UnmarshalJSON(data []byte) (err error) {
+	varCreateFBTGoodsResponse := _CreateFBTGoodsResponse{}
+
+	err = json.Unmarshal(data, &varCreateFBTGoodsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFBTGoodsResponse(varCreateFBTGoodsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFBTGoodsResponse struct {

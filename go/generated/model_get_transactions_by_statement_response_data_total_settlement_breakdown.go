@@ -27,7 +27,10 @@ type GetTransactionsByStatementResponseDataTotalSettlementBreakdown struct {
 	TotalFeeTaxAmount *string `json:"total_fee_tax_amount,omitempty"`
 	// The total adjustment amount based on TikTok Shop policy.  Refer to `transactions.type` for the list of adjustment-related policies.
 	TotalAdjustmentAmount *string `json:"total_adjustment_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByStatementResponseDataTotalSettlementBreakdown GetTransactionsByStatementResponseDataTotalSettlementBreakdown
 
 // NewGetTransactionsByStatementResponseDataTotalSettlementBreakdown instantiates a new GetTransactionsByStatementResponseDataTotalSettlementBreakdown object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetTransactionsByStatementResponseDataTotalSettlementBreakdown) ToMap() 
 	if !IsNil(o.TotalAdjustmentAmount) {
 		toSerialize["total_adjustment_amount"] = o.TotalAdjustmentAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByStatementResponseDataTotalSettlementBreakdown) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByStatementResponseDataTotalSettlementBreakdown := _GetTransactionsByStatementResponseDataTotalSettlementBreakdown{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByStatementResponseDataTotalSettlementBreakdown)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByStatementResponseDataTotalSettlementBreakdown(varGetTransactionsByStatementResponseDataTotalSettlementBreakdown)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_revenue_amount")
+		delete(additionalProperties, "total_shipping_cost_amount")
+		delete(additionalProperties, "total_fee_tax_amount")
+		delete(additionalProperties, "total_adjustment_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByStatementResponseDataTotalSettlementBreakdown struct {

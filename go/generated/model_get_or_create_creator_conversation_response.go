@@ -26,7 +26,10 @@ type GetOrCreateCreatorConversationResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetOrCreateCreatorConversationResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrCreateCreatorConversationResponse GetOrCreateCreatorConversationResponse
 
 // NewGetOrCreateCreatorConversationResponse instantiates a new GetOrCreateCreatorConversationResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetOrCreateCreatorConversationResponse) ToMap() (map[string]interface{},
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrCreateCreatorConversationResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetOrCreateCreatorConversationResponse := _GetOrCreateCreatorConversationResponse{}
+
+	err = json.Unmarshal(data, &varGetOrCreateCreatorConversationResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrCreateCreatorConversationResponse(varGetOrCreateCreatorConversationResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrCreateCreatorConversationResponse struct {

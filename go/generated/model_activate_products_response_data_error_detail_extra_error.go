@@ -23,7 +23,10 @@ type ActivateProductsResponseDataErrorDetailExtraError struct {
 	Code *int64 `json:"code,omitempty"`
 	// The secondary error message.
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivateProductsResponseDataErrorDetailExtraError ActivateProductsResponseDataErrorDetailExtraError
 
 // NewActivateProductsResponseDataErrorDetailExtraError instantiates a new ActivateProductsResponseDataErrorDetailExtraError object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ActivateProductsResponseDataErrorDetailExtraError) ToMap() (map[string]i
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivateProductsResponseDataErrorDetailExtraError) UnmarshalJSON(data []byte) (err error) {
+	varActivateProductsResponseDataErrorDetailExtraError := _ActivateProductsResponseDataErrorDetailExtraError{}
+
+	err = json.Unmarshal(data, &varActivateProductsResponseDataErrorDetailExtraError)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivateProductsResponseDataErrorDetailExtraError(varActivateProductsResponseDataErrorDetailExtraError)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivateProductsResponseDataErrorDetailExtraError struct {

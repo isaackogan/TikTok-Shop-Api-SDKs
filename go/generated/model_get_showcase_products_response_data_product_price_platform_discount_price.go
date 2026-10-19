@@ -25,7 +25,10 @@ type GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice struct {
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The ISO 4217 currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice
 
 // NewGetShowcaseProductsResponseDataProductPricePlatformDiscountPrice instantiates a new GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice) ToMap(
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductPricePlatformDiscountPrice := _GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductPricePlatformDiscountPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice(varGetShowcaseProductsResponseDataProductPricePlatformDiscountPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductPricePlatformDiscountPrice struct {

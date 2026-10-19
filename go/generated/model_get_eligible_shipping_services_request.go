@@ -27,7 +27,10 @@ type GetEligibleShippingServicesRequest struct {
 	Dimension *GetEligibleShippingServicesRequestDimension `json:"dimension,omitempty"`
 	// This new parameter is completely backward compatible with the previous oder_line_items_ids field and in addition this supports bundle order splitting, use the sub items accordingly
 	OrderLineList []ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList `json:"order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEligibleShippingServicesRequest GetEligibleShippingServicesRequest
 
 // NewGetEligibleShippingServicesRequest instantiates a new GetEligibleShippingServicesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetEligibleShippingServicesRequest) ToMap() (map[string]interface{}, err
 	if !IsNil(o.OrderLineList) {
 		toSerialize["order_line_list"] = o.OrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEligibleShippingServicesRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetEligibleShippingServicesRequest := _GetEligibleShippingServicesRequest{}
+
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEligibleShippingServicesRequest(varGetEligibleShippingServicesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEligibleShippingServicesRequest struct {

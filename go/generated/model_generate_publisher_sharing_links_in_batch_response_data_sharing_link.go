@@ -27,7 +27,10 @@ type GeneratePublisherSharingLinksInBatchResponseDataSharingLink struct {
 	DeepLink *string `json:"deep_link,omitempty"`
 	// A product promotion one-link that opens the corresponding TikTok Shop product detail page. Agencies can share this link with collaborated creators, and creators can copy/paste it into a web browser (or share it to users). If a user places an order via this link, the resulting e-commerce order will carry these parameter values for tracking. If the user does not have TikTok installed on their phone, they will be redirected to the app store to install TikTok.
 	OneLink *string `json:"one_link,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GeneratePublisherSharingLinksInBatchResponseDataSharingLink GeneratePublisherSharingLinksInBatchResponseDataSharingLink
 
 // NewGeneratePublisherSharingLinksInBatchResponseDataSharingLink instantiates a new GeneratePublisherSharingLinksInBatchResponseDataSharingLink object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GeneratePublisherSharingLinksInBatchResponseDataSharingLink) ToMap() (ma
 	if !IsNil(o.OneLink) {
 		toSerialize["one_link"] = o.OneLink
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GeneratePublisherSharingLinksInBatchResponseDataSharingLink) UnmarshalJSON(data []byte) (err error) {
+	varGeneratePublisherSharingLinksInBatchResponseDataSharingLink := _GeneratePublisherSharingLinksInBatchResponseDataSharingLink{}
+
+	err = json.Unmarshal(data, &varGeneratePublisherSharingLinksInBatchResponseDataSharingLink)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GeneratePublisherSharingLinksInBatchResponseDataSharingLink(varGeneratePublisherSharingLinksInBatchResponseDataSharingLink)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "material_id")
+		delete(additionalProperties, "sharing_link")
+		delete(additionalProperties, "deep_link")
+		delete(additionalProperties, "one_link")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGeneratePublisherSharingLinksInBatchResponseDataSharingLink struct {

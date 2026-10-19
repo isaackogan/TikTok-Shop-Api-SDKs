@@ -49,7 +49,10 @@ type SearchCouponListResponseDataCoupon struct {
 	ProductScope *string `json:"product_scope,omitempty"`
 	// The system where the coupon is created: - `SELLER_CENTER`: Created via the Promotions section of TikTok Seller Center. - `SELLER_APP`: Created via the TikTok Seller Mobile App. - `TTS_CRM`: Created via the TikTok Shop CRM.
 	CreationSource *string `json:"creation_source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCouponListResponseDataCoupon SearchCouponListResponseDataCoupon
 
 // NewSearchCouponListResponseDataCoupon instantiates a new SearchCouponListResponseDataCoupon object
 // This constructor will assign default values to properties that have it defined,
@@ -603,7 +606,47 @@ func (o SearchCouponListResponseDataCoupon) ToMap() (map[string]interface{}, err
 	if !IsNil(o.CreationSource) {
 		toSerialize["creation_source"] = o.CreationSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCouponListResponseDataCoupon) UnmarshalJSON(data []byte) (err error) {
+	varSearchCouponListResponseDataCoupon := _SearchCouponListResponseDataCoupon{}
+
+	err = json.Unmarshal(data, &varSearchCouponListResponseDataCoupon)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCouponListResponseDataCoupon(varSearchCouponListResponseDataCoupon)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "display_type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "claim_duration")
+		delete(additionalProperties, "redemption_duration")
+		delete(additionalProperties, "promo_code")
+		delete(additionalProperties, "target_buyer_segment")
+		delete(additionalProperties, "usage_limits")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "product_scope")
+		delete(additionalProperties, "creation_source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCouponListResponseDataCoupon struct {

@@ -29,7 +29,10 @@ type GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton struct {
 	CartonNums []string `json:"carton_nums,omitempty"`
 	// Carton measurement.
 	BoxMeasurements *GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement `json:"box_measurements,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton
 
 // NewGetInboundMethodDetailResponseDataInfoAllocationShipmentCarton instantiates a new GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton) ToMap() 
 	if !IsNil(o.BoxMeasurements) {
 		toSerialize["box_measurements"] = o.BoxMeasurements
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfoAllocationShipmentCarton := _GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfoAllocationShipmentCarton)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton(varGetInboundMethodDetailResponseDataInfoAllocationShipmentCarton)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "carton_type")
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "carton_nums")
+		delete(additionalProperties, "box_measurements")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfoAllocationShipmentCarton struct {

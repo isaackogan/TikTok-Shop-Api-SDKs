@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type EditSizeChartV2Request struct {
 	SizeChartId string `json:"size_chart_id"`
 	// The new name of the size chart template. If omitted, the current name remains unchanged.
 	TemplateName *string `json:"template_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditSizeChartV2Request EditSizeChartV2Request
@@ -145,6 +145,11 @@ func (o EditSizeChartV2Request) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TemplateName) {
 		toSerialize["template_name"] = o.TemplateName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *EditSizeChartV2Request) UnmarshalJSON(data []byte) (err error) {
 
 	varEditSizeChartV2Request := _EditSizeChartV2Request{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditSizeChartV2Request)
+	err = json.Unmarshal(data, &varEditSizeChartV2Request)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditSizeChartV2Request(varEditSizeChartV2Request)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size_chart_data")
+		delete(additionalProperties, "size_chart_id")
+		delete(additionalProperties, "template_name")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

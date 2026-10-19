@@ -21,7 +21,10 @@ var _ MappedNullable = &DownloadCompassTaskFileResponseDataFile{}
 type DownloadCompassTaskFileResponseDataFile struct {
 	// The Base64-encoded contents of the export result file.
 	Base64 *string `json:"base64,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DownloadCompassTaskFileResponseDataFile DownloadCompassTaskFileResponseDataFile
 
 // NewDownloadCompassTaskFileResponseDataFile instantiates a new DownloadCompassTaskFileResponseDataFile object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o DownloadCompassTaskFileResponseDataFile) ToMap() (map[string]interface{}
 	if !IsNil(o.Base64) {
 		toSerialize["base64"] = o.Base64
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DownloadCompassTaskFileResponseDataFile) UnmarshalJSON(data []byte) (err error) {
+	varDownloadCompassTaskFileResponseDataFile := _DownloadCompassTaskFileResponseDataFile{}
+
+	err = json.Unmarshal(data, &varDownloadCompassTaskFileResponseDataFile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DownloadCompassTaskFileResponseDataFile(varDownloadCompassTaskFileResponseDataFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "base64")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDownloadCompassTaskFileResponseDataFile struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type TrackingStatusUpdateRequest struct {
 	Tracks []TrackingStatusUpdateRequestTrack `json:"tracks"`
 	// The logistics provider ID, which is the one filled in when placing an order or uploading a tracking number, must be consistent with it.
 	ProviderId string `json:"provider_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TrackingStatusUpdateRequest TrackingStatusUpdateRequest
@@ -201,6 +201,11 @@ func (o TrackingStatusUpdateRequest) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["tracks"] = o.Tracks
 	toSerialize["provider_id"] = o.ProviderId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -231,15 +236,24 @@ func (o *TrackingStatusUpdateRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varTrackingStatusUpdateRequest := _TrackingStatusUpdateRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTrackingStatusUpdateRequest)
+	err = json.Unmarshal(data, &varTrackingStatusUpdateRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TrackingStatusUpdateRequest(varTrackingStatusUpdateRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "country")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "external_tracking_url")
+		delete(additionalProperties, "tracks")
+		delete(additionalProperties, "provider_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

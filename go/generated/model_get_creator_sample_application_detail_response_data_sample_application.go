@@ -35,7 +35,10 @@ type GetCreatorSampleApplicationDetailResponseDataSampleApplication struct {
 	Status *string `json:"status,omitempty"`
 	// Fulfillment info for this sample application.
 	CreatorFulfillment *GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment `json:"creator_fulfillment,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorSampleApplicationDetailResponseDataSampleApplication GetCreatorSampleApplicationDetailResponseDataSampleApplication
 
 // NewGetCreatorSampleApplicationDetailResponseDataSampleApplication instantiates a new GetCreatorSampleApplicationDetailResponseDataSampleApplication object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetCreatorSampleApplicationDetailResponseDataSampleApplication) ToMap() 
 	if !IsNil(o.CreatorFulfillment) {
 		toSerialize["creator_fulfillment"] = o.CreatorFulfillment
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorSampleApplicationDetailResponseDataSampleApplication) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorSampleApplicationDetailResponseDataSampleApplication := _GetCreatorSampleApplicationDetailResponseDataSampleApplication{}
+
+	err = json.Unmarshal(data, &varGetCreatorSampleApplicationDetailResponseDataSampleApplication)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorSampleApplicationDetailResponseDataSampleApplication(varGetCreatorSampleApplicationDetailResponseDataSampleApplication)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "sample_product")
+		delete(additionalProperties, "main_order_id")
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "creator_fulfillment")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorSampleApplicationDetailResponseDataSampleApplication struct {

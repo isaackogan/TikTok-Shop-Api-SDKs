@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type GlobalListingMethodChangeWebhook struct {
 	// The open_id of the seller. For more information, refer to [Authorization overview](https://partner.tiktokshop.com/docv2/page/authorization-overview-202407).
 	SellerOpenId *string `json:"seller_open_id,omitempty"`
 	Data *GlobalListingMethodChangeWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GlobalListingMethodChangeWebhook GlobalListingMethodChangeWebhook
@@ -227,6 +227,11 @@ func (o GlobalListingMethodChangeWebhook) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *GlobalListingMethodChangeWebhook) UnmarshalJSON(data []byte) (err error
 
 	varGlobalListingMethodChangeWebhook := _GlobalListingMethodChangeWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGlobalListingMethodChangeWebhook)
+	err = json.Unmarshal(data, &varGlobalListingMethodChangeWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GlobalListingMethodChangeWebhook(varGlobalListingMethodChangeWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "seller_open_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

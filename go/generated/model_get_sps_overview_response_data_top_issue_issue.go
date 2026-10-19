@@ -35,7 +35,10 @@ type GetSPSOverviewResponseDataTopIssueIssue struct {
 	Percentile *string `json:"percentile,omitempty"`
 	// Issue rank, where 1 is the top issue.
 	Rank *int64 `json:"rank,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSOverviewResponseDataTopIssueIssue GetSPSOverviewResponseDataTopIssueIssue
 
 // NewGetSPSOverviewResponseDataTopIssueIssue instantiates a new GetSPSOverviewResponseDataTopIssueIssue object
 // This constructor will assign default values to properties that have it defined,
@@ -344,7 +347,40 @@ func (o GetSPSOverviewResponseDataTopIssueIssue) ToMap() (map[string]interface{}
 	if !IsNil(o.Rank) {
 		toSerialize["rank"] = o.Rank
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSOverviewResponseDataTopIssueIssue) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSOverviewResponseDataTopIssueIssue := _GetSPSOverviewResponseDataTopIssueIssue{}
+
+	err = json.Unmarshal(data, &varGetSPSOverviewResponseDataTopIssueIssue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSOverviewResponseDataTopIssueIssue(varGetSPSOverviewResponseDataTopIssueIssue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "evaluate_duration_days")
+		delete(additionalProperties, "end_evaluation_time")
+		delete(additionalProperties, "start_evaluation_time")
+		delete(additionalProperties, "metric_code")
+		delete(additionalProperties, "metric_name")
+		delete(additionalProperties, "percentile")
+		delete(additionalProperties, "rank")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSOverviewResponseDataTopIssueIssue struct {

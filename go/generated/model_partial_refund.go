@@ -23,7 +23,10 @@ type PartialRefund struct {
 	Currency *string `json:"currency,omitempty"`
 	// The partial refund amount seller would like to offer to the buyer
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialRefund PartialRefund
 
 // NewPartialRefund instantiates a new PartialRefund object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PartialRefund) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialRefund) UnmarshalJSON(data []byte) (err error) {
+	varPartialRefund := _PartialRefund{}
+
+	err = json.Unmarshal(data, &varPartialRefund)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialRefund(varPartialRefund)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialRefund struct {

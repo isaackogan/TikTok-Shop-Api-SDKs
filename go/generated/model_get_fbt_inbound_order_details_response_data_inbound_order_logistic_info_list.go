@@ -25,7 +25,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList struct {
 	WaybillNumber *string `json:"waybill_number,omitempty"`
 	// Carton number tied to the logistics information.
 	RelatedNumber *string `json:"related_number,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList) ToMap
 	if !IsNil(o.RelatedNumber) {
 		toSerialize["related_number"] = o.RelatedNumber
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList := _GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList(varGetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "provider_name")
+		delete(additionalProperties, "waybill_number")
+		delete(additionalProperties, "related_number")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList struct {

@@ -21,7 +21,10 @@ var _ MappedNullable = &CheckCreatorSampleEligibilityResponseDataLabelSampleProd
 type CheckCreatorSampleEligibilityResponseDataLabelSampleProduct struct {
 	// The sample product SKU information.
 	SampleSkuList []CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList `json:"sample_sku_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckCreatorSampleEligibilityResponseDataLabelSampleProduct CheckCreatorSampleEligibilityResponseDataLabelSampleProduct
 
 // NewCheckCreatorSampleEligibilityResponseDataLabelSampleProduct instantiates a new CheckCreatorSampleEligibilityResponseDataLabelSampleProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CheckCreatorSampleEligibilityResponseDataLabelSampleProduct) ToMap() (ma
 	if !IsNil(o.SampleSkuList) {
 		toSerialize["sample_sku_list"] = o.SampleSkuList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckCreatorSampleEligibilityResponseDataLabelSampleProduct) UnmarshalJSON(data []byte) (err error) {
+	varCheckCreatorSampleEligibilityResponseDataLabelSampleProduct := _CheckCreatorSampleEligibilityResponseDataLabelSampleProduct{}
+
+	err = json.Unmarshal(data, &varCheckCreatorSampleEligibilityResponseDataLabelSampleProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckCreatorSampleEligibilityResponseDataLabelSampleProduct(varCheckCreatorSampleEligibilityResponseDataLabelSampleProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sample_sku_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckCreatorSampleEligibilityResponseDataLabelSampleProduct struct {

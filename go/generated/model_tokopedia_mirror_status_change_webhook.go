@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type TokopediaMirrorStatusChangeWebhook struct {
 	// The time when this webhook is triggered. Unix timestamp.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *TokopediaMirrorStatusChangeWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TokopediaMirrorStatusChangeWebhook TokopediaMirrorStatusChangeWebhook
@@ -227,6 +227,11 @@ func (o TokopediaMirrorStatusChangeWebhook) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *TokopediaMirrorStatusChangeWebhook) UnmarshalJSON(data []byte) (err err
 
 	varTokopediaMirrorStatusChangeWebhook := _TokopediaMirrorStatusChangeWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTokopediaMirrorStatusChangeWebhook)
+	err = json.Unmarshal(data, &varTokopediaMirrorStatusChangeWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TokopediaMirrorStatusChangeWebhook(varTokopediaMirrorStatusChangeWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "seller_open_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

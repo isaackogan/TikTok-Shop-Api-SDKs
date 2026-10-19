@@ -31,7 +31,10 @@ type SearchCreatorsInCreatorMarketplaceRequestContentPerformance struct {
 	AvgLiveAvgViewersGe *string `json:"avg_live_avg_viewers_ge,omitempty"`
 	// Filters creators whose average shoppable LIVE viewers are greater than or equal to the specified value. Enter a whole number from 0 to 100,000. You can only pass one of avg_live_avg_viewers_ge and avg_shoppable_live_avg_viewers_ge. Using both filters causes the API call to fail.
 	AvgShoppableLiveAvgViewersGe *string `json:"avg_shoppable_live_avg_viewers_ge,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestContentPerformance SearchCreatorsInCreatorMarketplaceRequestContentPerformance
 
 // NewSearchCreatorsInCreatorMarketplaceRequestContentPerformance instantiates a new SearchCreatorsInCreatorMarketplaceRequestContentPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchCreatorsInCreatorMarketplaceRequestContentPerformance) ToMap() (ma
 	if !IsNil(o.AvgShoppableLiveAvgViewersGe) {
 		toSerialize["avg_shoppable_live_avg_viewers_ge"] = o.AvgShoppableLiveAvgViewersGe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestContentPerformance) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestContentPerformance := _SearchCreatorsInCreatorMarketplaceRequestContentPerformance{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestContentPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestContentPerformance(varSearchCreatorsInCreatorMarketplaceRequestContentPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_video_views")
+		delete(additionalProperties, "avg_shoppable_video_views")
+		delete(additionalProperties, "avg_engagement_rate")
+		delete(additionalProperties, "avg_shopable_engagement_rate")
+		delete(additionalProperties, "avg_live_avg_viewers_ge")
+		delete(additionalProperties, "avg_shoppable_live_avg_viewers_ge")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestContentPerformance struct {

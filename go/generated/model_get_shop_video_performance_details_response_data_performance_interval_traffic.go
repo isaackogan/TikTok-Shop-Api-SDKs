@@ -29,7 +29,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic struct
 	Comments *int64 `json:"comments,omitempty"`
 	// The cumulative number of times users liked the video
 	Likes *int64 `json:"likes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic) To
 	if !IsNil(o.Likes) {
 		toSerialize["likes"] = o.Likes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic := _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic(varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "views")
+		delete(additionalProperties, "new_followers")
+		delete(additionalProperties, "shares")
+		delete(additionalProperties, "comments")
+		delete(additionalProperties, "likes")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic struct {

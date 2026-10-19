@@ -21,7 +21,10 @@ var _ MappedNullable = &ConfirmOrderSplitResponseData{}
 type ConfirmOrderSplitResponseData struct {
 	// Packages created by the split. Each returned package includes the request group identifier in `splittable_group_id` and its new package ID in `id`.
 	Packages []ConfirmOrderSplitResponseDataPackage `json:"packages,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ConfirmOrderSplitResponseData ConfirmOrderSplitResponseData
 
 // NewConfirmOrderSplitResponseData instantiates a new ConfirmOrderSplitResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o ConfirmOrderSplitResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Packages) {
 		toSerialize["packages"] = o.Packages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ConfirmOrderSplitResponseData) UnmarshalJSON(data []byte) (err error) {
+	varConfirmOrderSplitResponseData := _ConfirmOrderSplitResponseData{}
+
+	err = json.Unmarshal(data, &varConfirmOrderSplitResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfirmOrderSplitResponseData(varConfirmOrderSplitResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableConfirmOrderSplitResponseData struct {

@@ -29,7 +29,10 @@ type UploadProductImageResponseData struct {
 	Width *int64 `json:"width,omitempty"`
 	// The usage scenario specified during upload. Possible values: - MAIN_IMAGE - ATTRIBUTE_IMAGE - DESCRIPTION_IMAGE - CERTIFICATION_IMAGE - SIZE_CHART_IMAGE - CUSTOMIZATION_IMAGE
 	UseCase *string `json:"use_case,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadProductImageResponseData UploadProductImageResponseData
 
 // NewUploadProductImageResponseData instantiates a new UploadProductImageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o UploadProductImageResponseData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.UseCase) {
 		toSerialize["use_case"] = o.UseCase
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadProductImageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadProductImageResponseData := _UploadProductImageResponseData{}
+
+	err = json.Unmarshal(data, &varUploadProductImageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadProductImageResponseData(varUploadProductImageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "use_case")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadProductImageResponseData struct {

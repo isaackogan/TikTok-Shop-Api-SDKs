@@ -23,7 +23,10 @@ type RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList str
 	Name *string `json:"name,omitempty"`
 	// The values associated with the metadata attribute.
 	Values []string `json:"values,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList
 
 // NewRecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList instantiates a new RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList)
 	if !IsNil(o.Values) {
 		toSerialize["values"] = o.Values
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList := _RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList(varRecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "values")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueList struct {

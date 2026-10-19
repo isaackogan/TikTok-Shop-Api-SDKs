@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type EditProductRequestReplicatedProduct struct {
 	Skus []EditProductRequestReplicatedProductSku `json:"skus,omitempty"`
 	// Defines the inventory mode for the duplicated target product. This parameter supports two modes: SHARED and EXCLUSIVE.   - SHARED: In this mode, the inventory of all interconnected (shared) products must be strictly consistent; otherwise, an error will be returned. - EXCLUSIVE: In this mode, the inventory for each product can be set independently without affecting others.   Applicability: This feature is applicable ONLY for the EU market.   Default Value: If left empty, the system defaults to the EXCLUSIVE mode.
 	InventoryMode *string `json:"inventory_mode,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditProductRequestReplicatedProduct EditProductRequestReplicatedProduct
@@ -154,6 +154,11 @@ func (o EditProductRequestReplicatedProduct) ToMap() (map[string]interface{}, er
 	if !IsNil(o.InventoryMode) {
 		toSerialize["inventory_mode"] = o.InventoryMode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *EditProductRequestReplicatedProduct) UnmarshalJSON(data []byte) (err er
 
 	varEditProductRequestReplicatedProduct := _EditProductRequestReplicatedProduct{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditProductRequestReplicatedProduct)
+	err = json.Unmarshal(data, &varEditProductRequestReplicatedProduct)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditProductRequestReplicatedProduct(varEditProductRequestReplicatedProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "inventory_mode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

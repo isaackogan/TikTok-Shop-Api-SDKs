@@ -25,7 +25,10 @@ type CreateFirstMileBundleV2ResponseData struct {
 	Url *string `json:"url,omitempty"`
 	// Errors associated with requested orders. An entry can indicate that the requested order could not be resolved, or that a package associated with the order could not be included in the bundle. Multiple errors may be returned, including when the top-level `code` is `0`.
 	Errors []CreateFirstMileBundleResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateFirstMileBundleV2ResponseData CreateFirstMileBundleV2ResponseData
 
 // NewCreateFirstMileBundleV2ResponseData instantiates a new CreateFirstMileBundleV2ResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o CreateFirstMileBundleV2ResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateFirstMileBundleV2ResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateFirstMileBundleV2ResponseData := _CreateFirstMileBundleV2ResponseData{}
+
+	err = json.Unmarshal(data, &varCreateFirstMileBundleV2ResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateFirstMileBundleV2ResponseData(varCreateFirstMileBundleV2ResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "first_mile_bundle_id")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateFirstMileBundleV2ResponseData struct {

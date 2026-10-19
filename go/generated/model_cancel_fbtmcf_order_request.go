@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CancelFBTMCFOrderRequest struct {
 	McfOrderId string `json:"mcf_order_id"`
 	// The consign orders to cancel. Omit this field to cancel all consign orders in the specified MCF order.
 	ConsignOrders []CancelFBTMCFOrderRequestConsignOrder `json:"consign_orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CancelFBTMCFOrderRequest CancelFBTMCFOrderRequest
@@ -117,6 +117,11 @@ func (o CancelFBTMCFOrderRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ConsignOrders) {
 		toSerialize["consign_orders"] = o.ConsignOrders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *CancelFBTMCFOrderRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCancelFBTMCFOrderRequest := _CancelFBTMCFOrderRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCancelFBTMCFOrderRequest)
+	err = json.Unmarshal(data, &varCancelFBTMCFOrderRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CancelFBTMCFOrderRequest(varCancelFBTMCFOrderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mcf_order_id")
+		delete(additionalProperties, "consign_orders")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

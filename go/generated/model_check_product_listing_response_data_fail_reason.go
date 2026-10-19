@@ -23,7 +23,10 @@ type CheckProductListingResponseDataFailReason struct {
 	Code *int64 `json:"code,omitempty"`
 	// A detailed reason for the failure.
 	Message *string `json:"message,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponseDataFailReason CheckProductListingResponseDataFailReason
 
 // NewCheckProductListingResponseDataFailReason instantiates a new CheckProductListingResponseDataFailReason object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CheckProductListingResponseDataFailReason) ToMap() (map[string]interface
 	if !IsNil(o.Message) {
 		toSerialize["message"] = o.Message
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponseDataFailReason) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponseDataFailReason := _CheckProductListingResponseDataFailReason{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponseDataFailReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponseDataFailReason(varCheckProductListingResponseDataFailReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponseDataFailReason struct {

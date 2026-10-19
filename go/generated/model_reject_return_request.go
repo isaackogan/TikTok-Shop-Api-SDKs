@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type RejectReturnRequest struct {
 	Images []RejectCancellationRequestImage `json:"images,omitempty"`
 	// Partial refund amount and currency. Required when `decision` is `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`.
 	PartialRefundAmount *PartialRefundAmount `json:"partial_refund_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RejectReturnRequest RejectReturnRequest
@@ -219,6 +219,11 @@ func (o RejectReturnRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PartialRefundAmount) {
 		toSerialize["partial_refund_amount"] = o.PartialRefundAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,24 @@ func (o *RejectReturnRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRejectReturnRequest := _RejectReturnRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRejectReturnRequest)
+	err = json.Unmarshal(data, &varRejectReturnRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RejectReturnRequest(varRejectReturnRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "decision")
+		delete(additionalProperties, "reject_reason")
+		delete(additionalProperties, "comment")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "partial_refund_amount")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

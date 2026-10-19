@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SendMessageRequest struct {
 	Content string `json:"content"`
 	// Message sending role. - 'CUSTOMER_SERVICE' : Messages replied by real customer service - 'SYSTEM': Replies automatically triggered by the system, such as welcome messages and timeout replies - 'ROBOT': Messages replied by intelligent robot
 	SenderRole *string `json:"sender_role,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendMessageRequest SendMessageRequest
@@ -145,6 +145,11 @@ func (o SendMessageRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SenderRole) {
 		toSerialize["sender_role"] = o.SenderRole
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *SendMessageRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varSendMessageRequest := _SendMessageRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendMessageRequest)
+	err = json.Unmarshal(data, &varSendMessageRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendMessageRequest(varSendMessageRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "sender_role")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

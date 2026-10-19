@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,7 @@ type ActivityStatusChangeWebhook struct {
 	// The time when this webhook was triggered, represented by Unix timestamp.
 	Timestamp *int64 `json:"timestamp,omitempty"`
 	Data *ActivityStatusChangeWebhookData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ActivityStatusChangeWebhook ActivityStatusChangeWebhook
@@ -227,6 +227,11 @@ func (o ActivityStatusChangeWebhook) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -254,15 +259,24 @@ func (o *ActivityStatusChangeWebhook) UnmarshalJSON(data []byte) (err error) {
 
 	varActivityStatusChangeWebhook := _ActivityStatusChangeWebhook{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varActivityStatusChangeWebhook)
+	err = json.Unmarshal(data, &varActivityStatusChangeWebhook)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ActivityStatusChangeWebhook(varActivityStatusChangeWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "tts_notification_id")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "timestamp")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

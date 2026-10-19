@@ -23,7 +23,10 @@ type Benchmark struct {
 	ExcellentThreshold *string `json:"excellent_threshold,omitempty"`
 	// Poor tier threshold.
 	PoorThreshold *string `json:"poor_threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Benchmark Benchmark
 
 // NewBenchmark instantiates a new Benchmark object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Benchmark) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PoorThreshold) {
 		toSerialize["poor_threshold"] = o.PoorThreshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Benchmark) UnmarshalJSON(data []byte) (err error) {
+	varBenchmark := _Benchmark{}
+
+	err = json.Unmarshal(data, &varBenchmark)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Benchmark(varBenchmark)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "excellent_threshold")
+		delete(additionalProperties, "poor_threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableBenchmark struct {

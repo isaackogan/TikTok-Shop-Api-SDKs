@@ -29,7 +29,10 @@ type GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList struct {
 	HasSentInvitation *bool `json:"has_sent_invitation,omitempty"`
 	// Is shop creator paired
 	IsPaired *bool `json:"is_paired,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList
 
 // NewGetWeeklyCreatorOutreachRecordsResponseDataDataConnectList instantiates a new GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList) ToMap() (map
 	if !IsNil(o.IsPaired) {
 		toSerialize["is_paired"] = o.IsPaired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList) UnmarshalJSON(data []byte) (err error) {
+	varGetWeeklyCreatorOutreachRecordsResponseDataDataConnectList := _GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList{}
+
+	err = json.Unmarshal(data, &varGetWeeklyCreatorOutreachRecordsResponseDataDataConnectList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList(varGetWeeklyCreatorOutreachRecordsResponseDataDataConnectList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "has_sent_im_message")
+		delete(additionalProperties, "has_sent_invitation")
+		delete(additionalProperties, "is_paired")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWeeklyCreatorOutreachRecordsResponseDataDataConnectList struct {

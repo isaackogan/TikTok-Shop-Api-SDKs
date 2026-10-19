@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCreatorSampleApplicationDetailResponseData{}
 type GetCreatorSampleApplicationDetailResponseData struct {
 	// The sample application information.
 	SampleApplication *GetCreatorSampleApplicationDetailResponseDataSampleApplication `json:"sample_application,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorSampleApplicationDetailResponseData GetCreatorSampleApplicationDetailResponseData
 
 // NewGetCreatorSampleApplicationDetailResponseData instantiates a new GetCreatorSampleApplicationDetailResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCreatorSampleApplicationDetailResponseData) ToMap() (map[string]inter
 	if !IsNil(o.SampleApplication) {
 		toSerialize["sample_application"] = o.SampleApplication
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorSampleApplicationDetailResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorSampleApplicationDetailResponseData := _GetCreatorSampleApplicationDetailResponseData{}
+
+	err = json.Unmarshal(data, &varGetCreatorSampleApplicationDetailResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorSampleApplicationDetailResponseData(varGetCreatorSampleApplicationDetailResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sample_application")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorSampleApplicationDetailResponseData struct {

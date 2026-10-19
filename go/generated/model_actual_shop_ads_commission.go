@@ -23,7 +23,10 @@ type ActualShopAdsCommission struct {
 	Amount *string `json:"amount,omitempty"`
 	// The currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActualShopAdsCommission ActualShopAdsCommission
 
 // NewActualShopAdsCommission instantiates a new ActualShopAdsCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o ActualShopAdsCommission) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActualShopAdsCommission) UnmarshalJSON(data []byte) (err error) {
+	varActualShopAdsCommission := _ActualShopAdsCommission{}
+
+	err = json.Unmarshal(data, &varActualShopAdsCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActualShopAdsCommission(varActualShopAdsCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActualShopAdsCommission struct {

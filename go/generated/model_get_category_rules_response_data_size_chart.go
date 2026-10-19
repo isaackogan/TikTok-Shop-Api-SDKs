@@ -27,7 +27,10 @@ type GetCategoryRulesResponseDataSizeChart struct {
 	MeasurementAndOptions []GetCategoryRulesResponseDataSizeChartMeasurementAndOption `json:"measurement_and_options,omitempty"`
 	// Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category.
 	SizeTypes []string `json:"size_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataSizeChart GetCategoryRulesResponseDataSizeChart
 
 // NewGetCategoryRulesResponseDataSizeChart instantiates a new GetCategoryRulesResponseDataSizeChart object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetCategoryRulesResponseDataSizeChart) ToMap() (map[string]interface{}, 
 	if !IsNil(o.SizeTypes) {
 		toSerialize["size_types"] = o.SizeTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataSizeChart) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataSizeChart := _GetCategoryRulesResponseDataSizeChart{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataSizeChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataSizeChart(varGetCategoryRulesResponseDataSizeChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_supported")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "measurement_and_options")
+		delete(additionalProperties, "size_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataSizeChart struct {

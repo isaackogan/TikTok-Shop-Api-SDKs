@@ -27,7 +27,10 @@ type SizeChartChangeWebhookData struct {
 	EventType *string `json:"event_type,omitempty"`
 	// The time when the change occurred. Unix timestamp.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SizeChartChangeWebhookData SizeChartChangeWebhookData
 
 // NewSizeChartChangeWebhookData instantiates a new SizeChartChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SizeChartChangeWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SizeChartChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varSizeChartChangeWebhookData := _SizeChartChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varSizeChartChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SizeChartChangeWebhookData(varSizeChartChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size_chart_template_id")
+		delete(additionalProperties, "size_chart_template_name")
+		delete(additionalProperties, "event_type")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSizeChartChangeWebhookData struct {

@@ -25,7 +25,10 @@ type SearchGlobalProductsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// The list of global products that meet the query conditions.
 	GlobalProducts []SearchGlobalProductsResponseDataGlobalProduct `json:"global_products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGlobalProductsResponseData SearchGlobalProductsResponseData
 
 // NewSearchGlobalProductsResponseData instantiates a new SearchGlobalProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchGlobalProductsResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.GlobalProducts) {
 		toSerialize["global_products"] = o.GlobalProducts
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGlobalProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchGlobalProductsResponseData := _SearchGlobalProductsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchGlobalProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGlobalProductsResponseData(varSearchGlobalProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "global_products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGlobalProductsResponseData struct {

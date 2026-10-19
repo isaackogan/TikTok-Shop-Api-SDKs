@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type PartialEditProductRequestSkuInventory struct {
 	Quantity int64 `json:"quantity"`
 	// The ID of the warehouse where the SKU is stored.  Retrieve the list of warehouses available for your shop from the [Get Warehouse List API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
 	WarehouseId string `json:"warehouse_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestSkuInventory PartialEditProductRequestSkuInventory
@@ -182,6 +182,11 @@ func (o PartialEditProductRequestSkuInventory) ToMap() (map[string]interface{}, 
 	}
 	toSerialize["quantity"] = o.Quantity
 	toSerialize["warehouse_id"] = o.WarehouseId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -210,15 +215,23 @@ func (o *PartialEditProductRequestSkuInventory) UnmarshalJSON(data []byte) (err 
 
 	varPartialEditProductRequestSkuInventory := _PartialEditProductRequestSkuInventory{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestSkuInventory)
+	err = json.Unmarshal(data, &varPartialEditProductRequestSkuInventory)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestSkuInventory(varPartialEditProductRequestSkuInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "backorder_quantity")
+		delete(additionalProperties, "handling_time")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "warehouse_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

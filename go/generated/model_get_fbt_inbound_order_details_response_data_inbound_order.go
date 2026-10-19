@@ -45,7 +45,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrder struct {
 	CartonDetails []GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail `json:"carton_details,omitempty"`
 	// A detailed breakdown of planned versus actual receiving information, segmented by item, lot number, and expiration date.
 	InboundGoodsLotReceiveItemDetails []GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail `json:"inbound_goods_lot_receive_item_details,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrder GetFBTInboundOrderDetailsResponseDataInboundOrder
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrder instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrder) ToMap() (map[string]i
 	if !IsNil(o.InboundGoodsLotReceiveItemDetails) {
 		toSerialize["inbound_goods_lot_receive_item_details"] = o.InboundGoodsLotReceiveItemDetails
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrder) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrder := _GetFBTInboundOrderDetailsResponseDataInboundOrder{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrder(varGetFBTInboundOrderDetailsResponseDataInboundOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_id_string")
+		delete(additionalProperties, "order_plan_id")
+		delete(additionalProperties, "merchant")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "ship_time")
+		delete(additionalProperties, "expected_arrival_time")
+		delete(additionalProperties, "actual_arrival_time")
+		delete(additionalProperties, "warehouse")
+		delete(additionalProperties, "status_logs")
+		delete(additionalProperties, "logistic_info_list")
+		delete(additionalProperties, "carton_details")
+		delete(additionalProperties, "inbound_goods_lot_receive_item_details")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrder struct {

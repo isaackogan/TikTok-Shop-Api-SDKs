@@ -21,7 +21,10 @@ var _ MappedNullable = &SuggestBrandsResponseData{}
 type SuggestBrandsResponseData struct {
 	// Recommended brands in recommendation order. Empty when no recommendations are available.
 	Brands []SuggestBrandsResponseDataBrand `json:"brands,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SuggestBrandsResponseData SuggestBrandsResponseData
 
 // NewSuggestBrandsResponseData instantiates a new SuggestBrandsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o SuggestBrandsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Brands) {
 		toSerialize["brands"] = o.Brands
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SuggestBrandsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSuggestBrandsResponseData := _SuggestBrandsResponseData{}
+
+	err = json.Unmarshal(data, &varSuggestBrandsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SuggestBrandsResponseData(varSuggestBrandsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "brands")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSuggestBrandsResponseData struct {

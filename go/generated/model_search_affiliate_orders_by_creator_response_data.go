@@ -25,7 +25,10 @@ type SearchAffiliateOrdersByCreatorResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total count of orders in the response.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAffiliateOrdersByCreatorResponseData SearchAffiliateOrdersByCreatorResponseData
 
 // NewSearchAffiliateOrdersByCreatorResponseData instantiates a new SearchAffiliateOrdersByCreatorResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchAffiliateOrdersByCreatorResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAffiliateOrdersByCreatorResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchAffiliateOrdersByCreatorResponseData := _SearchAffiliateOrdersByCreatorResponseData{}
+
+	err = json.Unmarshal(data, &varSearchAffiliateOrdersByCreatorResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAffiliateOrdersByCreatorResponseData(varSearchAffiliateOrdersByCreatorResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "orders")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAffiliateOrdersByCreatorResponseData struct {

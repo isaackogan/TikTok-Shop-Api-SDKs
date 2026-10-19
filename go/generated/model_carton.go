@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type Carton struct {
 	CartonNums []string `json:"carton_nums,omitempty"`
 	// Carton measurement.
 	BoxMeasurements BoxMeasurement `json:"box_measurements"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Carton Carton
@@ -201,6 +201,11 @@ func (o Carton) ToMap() (map[string]interface{}, error) {
 		toSerialize["carton_nums"] = o.CartonNums
 	}
 	toSerialize["box_measurements"] = o.BoxMeasurements
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -231,15 +236,24 @@ func (o *Carton) UnmarshalJSON(data []byte) (err error) {
 
 	varCarton := _Carton{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCarton)
+	err = json.Unmarshal(data, &varCarton)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Carton(varCarton)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "carton_type")
+		delete(additionalProperties, "items")
+		delete(additionalProperties, "quantity")
+		delete(additionalProperties, "carton_nums")
+		delete(additionalProperties, "box_measurements")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

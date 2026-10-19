@@ -26,7 +26,10 @@ type GetGlobalCategoriesResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetGlobalCategoriesResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoriesResponse GetGlobalCategoriesResponse
 
 // NewGetGlobalCategoriesResponse instantiates a new GetGlobalCategoriesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetGlobalCategoriesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoriesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoriesResponse := _GetGlobalCategoriesResponse{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoriesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoriesResponse(varGetGlobalCategoriesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoriesResponse struct {

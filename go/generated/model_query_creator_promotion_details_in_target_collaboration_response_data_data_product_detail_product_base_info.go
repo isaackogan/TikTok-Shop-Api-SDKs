@@ -45,7 +45,10 @@ type QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDet
 	AdsCommissionEffectiveTime *int64 `json:"ads_commission_effective_time,omitempty"`
 	// Product status   1: Active 2; Sold out 3: product deactivated by seller;  4: product deactivated by platform 5: product reject 6: product deleted
 	ProductStatus *string `json:"product_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo
 
 // NewQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo instantiates a new QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProduct
 	if !IsNil(o.ProductStatus) {
 		toSerialize["product_status"] = o.ProductStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo) UnmarshalJSON(data []byte) (err error) {
+	varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo := _QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo{}
+
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo(varQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "image")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "promotion_price")
+		delete(additionalProperties, "target_commission")
+		delete(additionalProperties, "open_commission")
+		delete(additionalProperties, "target_ads_commission")
+		delete(additionalProperties, "old_target_commission")
+		delete(additionalProperties, "old_target_ads_commission")
+		delete(additionalProperties, "commission_effective_time")
+		delete(additionalProperties, "ads_commission_effective_time")
+		delete(additionalProperties, "product_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfo struct {

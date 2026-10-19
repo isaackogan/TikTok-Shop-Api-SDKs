@@ -31,7 +31,10 @@ type SearchAftersalesRequestsRequestFilter struct {
 	BuyerIds []string `json:"buyer_ids,omitempty"`
 	// Time-based filtering criteria.
 	Time *TimeInfo `json:"time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsRequestFilter SearchAftersalesRequestsRequestFilter
 
 // NewSearchAftersalesRequestsRequestFilter instantiates a new SearchAftersalesRequestsRequestFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchAftersalesRequestsRequestFilter) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Time) {
 		toSerialize["time"] = o.Time
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsRequestFilter) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsRequestFilter := _SearchAftersalesRequestsRequestFilter{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsRequestFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsRequestFilter(varSearchAftersalesRequestsRequestFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_request_ids")
+		delete(additionalProperties, "aftersales_request_statuses")
+		delete(additionalProperties, "return_types")
+		delete(additionalProperties, "main_order_ids")
+		delete(additionalProperties, "buyer_ids")
+		delete(additionalProperties, "time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsRequestFilter struct {

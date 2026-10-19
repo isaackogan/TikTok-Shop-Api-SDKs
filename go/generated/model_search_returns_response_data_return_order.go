@@ -83,7 +83,10 @@ type SearchReturnsResponseDataReturnOrder struct {
 	ReturnWarehouseAddress *ReturnWarehouseAddress `json:"return_warehouse_address,omitempty"`
 	// If the return hit the quick refund strategy, the seller cannot reject the received package
 	IsQuickRefund *bool `json:"is_quick_refund,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchReturnsResponseDataReturnOrder SearchReturnsResponseDataReturnOrder
 
 // NewSearchReturnsResponseDataReturnOrder instantiates a new SearchReturnsResponseDataReturnOrder object
 // This constructor will assign default values to properties that have it defined,
@@ -1232,7 +1235,64 @@ func (o SearchReturnsResponseDataReturnOrder) ToMap() (map[string]interface{}, e
 	if !IsNil(o.IsQuickRefund) {
 		toSerialize["is_quick_refund"] = o.IsQuickRefund
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchReturnsResponseDataReturnOrder) UnmarshalJSON(data []byte) (err error) {
+	varSearchReturnsResponseDataReturnOrder := _SearchReturnsResponseDataReturnOrder{}
+
+	err = json.Unmarshal(data, &varSearchReturnsResponseDataReturnOrder)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchReturnsResponseDataReturnOrder(varSearchReturnsResponseDataReturnOrder)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "return_id")
+		delete(additionalProperties, "return_type")
+		delete(additionalProperties, "return_status")
+		delete(additionalProperties, "arbitration_status")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "return_reason")
+		delete(additionalProperties, "return_reason_text")
+		delete(additionalProperties, "shipment_type")
+		delete(additionalProperties, "handover_method")
+		delete(additionalProperties, "return_tracking_number")
+		delete(additionalProperties, "return_provider_name")
+		delete(additionalProperties, "return_provider_id")
+		delete(additionalProperties, "pre_return_id")
+		delete(additionalProperties, "next_return_id")
+		delete(additionalProperties, "can_buyer_keep_item")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "seller_next_action_response")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "return_line_items")
+		delete(additionalProperties, "discount_amount")
+		delete(additionalProperties, "shipping_fee_amount")
+		delete(additionalProperties, "refund_amount")
+		delete(additionalProperties, "return_shipping_document_type")
+		delete(additionalProperties, "return_method")
+		delete(additionalProperties, "is_combined_return")
+		delete(additionalProperties, "combined_return_id")
+		delete(additionalProperties, "seller_proposed_return_type")
+		delete(additionalProperties, "partial_refund")
+		delete(additionalProperties, "buyer_rejected_partial_refund")
+		delete(additionalProperties, "return_warehouse_address")
+		delete(additionalProperties, "is_quick_refund")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchReturnsResponseDataReturnOrder struct {

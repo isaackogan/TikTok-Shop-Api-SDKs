@@ -31,7 +31,10 @@ type CreateProductRequestSkuSalesAttribute struct {
 	Name *string `json:"name,omitempty"`
 	// A list of supplementary images for each value (e.g. red) of the primary sales attribute (e.g. color) to provide multiple views or details of the product for that attribute value. These appear in the product options gallery on TikTok Shop.  **Note**: - Max number of image URIs: 8. - Arrange your image URIs in the sequence that they should appear on TikTok Shop. - Applicable only for the US market.
 	SupplementarySkuImages []SupplementarySkuImage `json:"supplementary_sku_images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateProductRequestSkuSalesAttribute CreateProductRequestSkuSalesAttribute
 
 // NewCreateProductRequestSkuSalesAttribute instantiates a new CreateProductRequestSkuSalesAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o CreateProductRequestSkuSalesAttribute) ToMap() (map[string]interface{}, 
 	if !IsNil(o.SupplementarySkuImages) {
 		toSerialize["supplementary_sku_images"] = o.SupplementarySkuImages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateProductRequestSkuSalesAttribute) UnmarshalJSON(data []byte) (err error) {
+	varCreateProductRequestSkuSalesAttribute := _CreateProductRequestSkuSalesAttribute{}
+
+	err = json.Unmarshal(data, &varCreateProductRequestSkuSalesAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateProductRequestSkuSalesAttribute(varCreateProductRequestSkuSalesAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "value_id")
+		delete(additionalProperties, "value_name")
+		delete(additionalProperties, "sku_img")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "supplementary_sku_images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateProductRequestSkuSalesAttribute struct {

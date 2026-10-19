@@ -23,7 +23,10 @@ type GetGlobalCategoryRulesResponseDataSizeChart struct {
 	IsSupported *bool `json:"is_supported,omitempty"`
 	// A flag to indicate whether a size chart is required.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoryRulesResponseDataSizeChart GetGlobalCategoryRulesResponseDataSizeChart
 
 // NewGetGlobalCategoryRulesResponseDataSizeChart instantiates a new GetGlobalCategoryRulesResponseDataSizeChart object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetGlobalCategoryRulesResponseDataSizeChart) ToMap() (map[string]interfa
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoryRulesResponseDataSizeChart) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoryRulesResponseDataSizeChart := _GetGlobalCategoryRulesResponseDataSizeChart{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoryRulesResponseDataSizeChart)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoryRulesResponseDataSizeChart(varGetGlobalCategoryRulesResponseDataSizeChart)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_supported")
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoryRulesResponseDataSizeChart struct {

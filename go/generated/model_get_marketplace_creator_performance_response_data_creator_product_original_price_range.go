@@ -25,7 +25,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRang
 	MinimumAmount *string `json:"minimum_amount,omitempty"`
 	// The higest original promoted product price.
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceR
 	if !IsNil(o.MaximumAmount) {
 		toSerialize["maximum_amount"] = o.MaximumAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange := _GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange(varGetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorProductOriginalPriceRange struct {

@@ -25,7 +25,10 @@ type GetShopProductsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// An opaque token used to retrieve the next page. Pass it as `page_token` in the next request. It is empty when there are no more products to retrieve.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductsResponseData GetShopProductsResponseData
 
 // NewGetShopProductsResponseData instantiates a new GetShopProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopProductsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductsResponseData := _GetShopProductsResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductsResponseData(varGetShopProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductsResponseData struct {

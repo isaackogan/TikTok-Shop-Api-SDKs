@@ -25,7 +25,10 @@ type GetGlobalListingRulesResponseDataInventoryRule struct {
 	AllocationMode *string `json:"allocation_mode,omitempty"`
 	// A list of associated warehouses whose inventory is shared with or dynamically allocated from this warehouse. Each item identifies a warehouse and its region. **Note**: Applicable only when `allocation_mode` is `SHARED` or `DYNAMIC`.
 	AssociatedWarehouses []GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse `json:"associated_warehouses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalListingRulesResponseDataInventoryRule GetGlobalListingRulesResponseDataInventoryRule
 
 // NewGetGlobalListingRulesResponseDataInventoryRule instantiates a new GetGlobalListingRulesResponseDataInventoryRule object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalListingRulesResponseDataInventoryRule) ToMap() (map[string]inte
 	if !IsNil(o.AssociatedWarehouses) {
 		toSerialize["associated_warehouses"] = o.AssociatedWarehouses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalListingRulesResponseDataInventoryRule) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalListingRulesResponseDataInventoryRule := _GetGlobalListingRulesResponseDataInventoryRule{}
+
+	err = json.Unmarshal(data, &varGetGlobalListingRulesResponseDataInventoryRule)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalListingRulesResponseDataInventoryRule(varGetGlobalListingRulesResponseDataInventoryRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "local_warehouse_id")
+		delete(additionalProperties, "allocation_mode")
+		delete(additionalProperties, "associated_warehouses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalListingRulesResponseDataInventoryRule struct {

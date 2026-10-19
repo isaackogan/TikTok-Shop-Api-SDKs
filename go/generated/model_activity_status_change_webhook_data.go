@@ -29,7 +29,10 @@ type ActivityStatusChangeWebhookData struct {
 	ProductLevel *string `json:"product_level,omitempty"`
 	// The current status of the promotion activity. Possible values are:      * `ONGOING`   * `EXPIRED`   * `DEACTIVATED`
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ActivityStatusChangeWebhookData ActivityStatusChangeWebhookData
 
 // NewActivityStatusChangeWebhookData instantiates a new ActivityStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o ActivityStatusChangeWebhookData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ActivityStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varActivityStatusChangeWebhookData := _ActivityStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varActivityStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ActivityStatusChangeWebhookData(varActivityStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "activity_id")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "activity_type")
+		delete(additionalProperties, "product_level")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableActivityStatusChangeWebhookData struct {

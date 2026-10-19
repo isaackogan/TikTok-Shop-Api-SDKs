@@ -29,7 +29,10 @@ type SearchCreatorsInCreatorMarketplaceRequestAffiliateData struct {
 	IsFastGrowing *bool `json:"is_fast_growing,omitempty"`
 	// True/False Select this filter to see creators you haven't invited in the last 90 days
 	NotInvitedL90Days *bool `json:"not_invited_l90_days,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestAffiliateData SearchCreatorsInCreatorMarketplaceRequestAffiliateData
 
 // NewSearchCreatorsInCreatorMarketplaceRequestAffiliateData instantiates a new SearchCreatorsInCreatorMarketplaceRequestAffiliateData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchCreatorsInCreatorMarketplaceRequestAffiliateData) ToMap() (map[str
 	if !IsNil(o.NotInvitedL90Days) {
 		toSerialize["not_invited_l90_days"] = o.NotInvitedL90Days
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestAffiliateData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestAffiliateData := _SearchCreatorsInCreatorMarketplaceRequestAffiliateData{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestAffiliateData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestAffiliateData(varSearchCreatorsInCreatorMarketplaceRequestAffiliateData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_commission_rate")
+		delete(additionalProperties, "post_rate")
+		delete(additionalProperties, "creator_agency_staus")
+		delete(additionalProperties, "is_fast_growing")
+		delete(additionalProperties, "not_invited_l90_days")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestAffiliateData struct {

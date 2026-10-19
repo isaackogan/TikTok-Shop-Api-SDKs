@@ -26,7 +26,10 @@ type RecommendCategoryResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *RecommendCategoryResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryResponse RecommendCategoryResponse
 
 // NewRecommendCategoryResponse instantiates a new RecommendCategoryResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o RecommendCategoryResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryResponse) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryResponse := _RecommendCategoryResponse{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryResponse(varRecommendCategoryResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryResponse struct {

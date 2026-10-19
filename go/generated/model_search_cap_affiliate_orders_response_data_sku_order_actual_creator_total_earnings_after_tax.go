@@ -23,7 +23,10 @@ type SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfter
 	Amount *string `json:"amount,omitempty"`
 	// The currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax
 
 // NewSearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax instantiates a new SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAf
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax) UnmarshalJSON(data []byte) (err error) {
+	varSearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax := _SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax{}
+
+	err = json.Unmarshal(data, &varSearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax(varSearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax struct {

@@ -59,7 +59,10 @@ type GetCouponResponseDataCoupon struct {
 	CreationSource *string `json:"creation_source,omitempty"`
 	// The tasks which the shopper must fulfill before claiming the coupon distributed in TikTok live. Only exists for LIVE coupons in the US and the UK.
 	LiveTasks []GetCouponResponseDataCouponLiveTask `json:"live_tasks,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCouponResponseDataCoupon GetCouponResponseDataCoupon
 
 // NewGetCouponResponseDataCoupon instantiates a new GetCouponResponseDataCoupon object
 // This constructor will assign default values to properties that have it defined,
@@ -788,7 +791,52 @@ func (o GetCouponResponseDataCoupon) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LiveTasks) {
 		toSerialize["live_tasks"] = o.LiveTasks
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCouponResponseDataCoupon) UnmarshalJSON(data []byte) (err error) {
+	varGetCouponResponseDataCoupon := _GetCouponResponseDataCoupon{}
+
+	err = json.Unmarshal(data, &varGetCouponResponseDataCoupon)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCouponResponseDataCoupon(varGetCouponResponseDataCoupon)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "display_type")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		delete(additionalProperties, "claim_duration")
+		delete(additionalProperties, "redemption_duration")
+		delete(additionalProperties, "display_channels")
+		delete(additionalProperties, "promo_code")
+		delete(additionalProperties, "target_buyer_segment")
+		delete(additionalProperties, "usage_limits")
+		delete(additionalProperties, "usage_stats")
+		delete(additionalProperties, "discount")
+		delete(additionalProperties, "threshold")
+		delete(additionalProperties, "product_scope")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "seller_tnc")
+		delete(additionalProperties, "creation_source")
+		delete(additionalProperties, "live_tasks")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCouponResponseDataCoupon struct {

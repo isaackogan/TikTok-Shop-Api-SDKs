@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &DeleteProductsRequest{}
 type DeleteProductsRequest struct {
 	// The product IDs to delete. Max number of IDs: 20.
 	ProductIds []string `json:"product_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteProductsRequest DeleteProductsRequest
@@ -80,6 +80,11 @@ func (o DeleteProductsRequest) MarshalJSON() ([]byte, error) {
 func (o DeleteProductsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["product_ids"] = o.ProductIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *DeleteProductsRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varDeleteProductsRequest := _DeleteProductsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteProductsRequest)
+	err = json.Unmarshal(data, &varDeleteProductsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteProductsRequest(varDeleteProductsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

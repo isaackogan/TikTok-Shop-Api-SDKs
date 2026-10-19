@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type EditOpenCollaborationSampleRuleRequestSampleRule struct {
 	Thresholds *Threshold `json:"thresholds,omitempty"`
 	// To activate the sample rule, use `ACTIVATE`; to deactivate the sample rule, use `DEACTIVATE`. When using `ACTIVATE`, you must specify the details of the rule; when using `DEACTIVATE`, you just need to specify `product_id`.
 	ActivateStatus string `json:"activate_status"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EditOpenCollaborationSampleRuleRequestSampleRule EditOpenCollaborationSampleRuleRequestSampleRule
@@ -265,6 +265,11 @@ func (o EditOpenCollaborationSampleRuleRequestSampleRule) ToMap() (map[string]in
 		toSerialize["thresholds"] = o.Thresholds
 	}
 	toSerialize["activate_status"] = o.ActivateStatus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -292,15 +297,25 @@ func (o *EditOpenCollaborationSampleRuleRequestSampleRule) UnmarshalJSON(data []
 
 	varEditOpenCollaborationSampleRuleRequestSampleRule := _EditOpenCollaborationSampleRuleRequestSampleRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEditOpenCollaborationSampleRuleRequestSampleRule)
+	err = json.Unmarshal(data, &varEditOpenCollaborationSampleRuleRequestSampleRule)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EditOpenCollaborationSampleRuleRequestSampleRule(varEditOpenCollaborationSampleRuleRequestSampleRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sample_quota")
+		delete(additionalProperties, "is_sample_time_unlimited")
+		delete(additionalProperties, "start_time")
+		delete(additionalProperties, "end_time")
+		delete(additionalProperties, "thresholds")
+		delete(additionalProperties, "activate_status")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

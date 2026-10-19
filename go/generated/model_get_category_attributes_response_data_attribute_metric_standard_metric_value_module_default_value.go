@@ -23,7 +23,10 @@ type GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDe
 	Id *string `json:"id,omitempty"`
 	// Metric value modules default value name.
 	Name *string `json:"name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue
 
 // NewGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue instantiates a new GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModul
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue := _GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue(varGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleDefaultValue struct {

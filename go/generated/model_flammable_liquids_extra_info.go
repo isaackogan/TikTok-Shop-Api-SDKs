@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type FlammableLiquidsExtraInfo struct {
 	FlammableLiquidsVolume string `json:"flammable_liquids_volume"`
 	// Unit for flammable_liquids_volume, such as MILLILITERS.
 	VolumeUnit *string `json:"volume_unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FlammableLiquidsExtraInfo FlammableLiquidsExtraInfo
@@ -145,6 +145,11 @@ func (o FlammableLiquidsExtraInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.VolumeUnit) {
 		toSerialize["volume_unit"] = o.VolumeUnit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *FlammableLiquidsExtraInfo) UnmarshalJSON(data []byte) (err error) {
 
 	varFlammableLiquidsExtraInfo := _FlammableLiquidsExtraInfo{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFlammableLiquidsExtraInfo)
+	err = json.Unmarshal(data, &varFlammableLiquidsExtraInfo)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FlammableLiquidsExtraInfo(varFlammableLiquidsExtraInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "flammable_liquids_type")
+		delete(additionalProperties, "flammable_liquids_volume")
+		delete(additionalProperties, "volume_unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

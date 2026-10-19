@@ -29,7 +29,10 @@ type LineItem struct {
 	MainOrderId *string `json:"main_order_id,omitempty"`
 	// Identifier of the associated SKU-level, sub return request.
 	SkuReturnRequestId *string `json:"sku_return_request_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _LineItem LineItem
 
 // NewLineItem instantiates a new LineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o LineItem) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SkuReturnRequestId) {
 		toSerialize["sku_return_request_id"] = o.SkuReturnRequestId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *LineItem) UnmarshalJSON(data []byte) (err error) {
+	varLineItem := _LineItem{}
+
+	err = json.Unmarshal(data, &varLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = LineItem(varLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "return_line_item_id")
+		delete(additionalProperties, "sub_return_line_item_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "main_order_id")
+		delete(additionalProperties, "sku_return_request_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableLineItem struct {

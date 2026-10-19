@@ -25,7 +25,10 @@ type SearchAftersalesRequestsResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Used to fetch the next page/set of results.
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsResponseData SearchAftersalesRequestsResponseData
 
 // NewSearchAftersalesRequestsResponseData instantiates a new SearchAftersalesRequestsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchAftersalesRequestsResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.NextPageToken) {
 		toSerialize["next_page_token"] = o.NextPageToken
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsResponseData := _SearchAftersalesRequestsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsResponseData(varSearchAftersalesRequestsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_requests")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsResponseData struct {

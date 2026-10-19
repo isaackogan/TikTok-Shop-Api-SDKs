@@ -21,7 +21,10 @@ var _ MappedNullable = &CreatePromotionActivityRequestTargetUserInfo{}
 type CreatePromotionActivityRequestTargetUserInfo struct {
 	// Possible enumerations are: `ALL_USER` `SHOP_NEW_CUSTOMER` `SHOP_EXISTING_CUSTOMER` `SHOP_REPEAT_CUSTOMER`
 	UserType *string `json:"user_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatePromotionActivityRequestTargetUserInfo CreatePromotionActivityRequestTargetUserInfo
 
 // NewCreatePromotionActivityRequestTargetUserInfo instantiates a new CreatePromotionActivityRequestTargetUserInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreatePromotionActivityRequestTargetUserInfo) ToMap() (map[string]interf
 	if !IsNil(o.UserType) {
 		toSerialize["user_type"] = o.UserType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatePromotionActivityRequestTargetUserInfo) UnmarshalJSON(data []byte) (err error) {
+	varCreatePromotionActivityRequestTargetUserInfo := _CreatePromotionActivityRequestTargetUserInfo{}
+
+	err = json.Unmarshal(data, &varCreatePromotionActivityRequestTargetUserInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatePromotionActivityRequestTargetUserInfo(varCreatePromotionActivityRequestTargetUserInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "user_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatePromotionActivityRequestTargetUserInfo struct {

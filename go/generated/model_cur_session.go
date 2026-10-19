@@ -23,7 +23,10 @@ type CurSession struct {
 	Id *string `json:"id,omitempty"`
 	// Current phase of the session. Possible enumerations: - `AUTO_REPLY` — The session is being handled by automatic replies or chatbot responses. - `QUEUED` — The session is waiting to be assigned to an agent. - `ASSIGNED` — The session has been assigned to an agent.
 	Phase *string `json:"phase,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CurSession CurSession
 
 // NewCurSession instantiates a new CurSession object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CurSession) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Phase) {
 		toSerialize["phase"] = o.Phase
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CurSession) UnmarshalJSON(data []byte) (err error) {
+	varCurSession := _CurSession{}
+
+	err = json.Unmarshal(data, &varCurSession)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CurSession(varCurSession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "phase")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCurSession struct {

@@ -29,7 +29,10 @@ type SearchCAPAffiliateOrdersRequest struct {
 	CreateTimeGe *int64 `json:"create_time_ge,omitempty"`
 	// Filter orders created before this time. Unix timestamp in seconds. `create_time_ge` and `create_time_lt` must be provided together.
 	CreateTimeLt *int64 `json:"create_time_lt,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCAPAffiliateOrdersRequest SearchCAPAffiliateOrdersRequest
 
 // NewSearchCAPAffiliateOrdersRequest instantiates a new SearchCAPAffiliateOrdersRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SearchCAPAffiliateOrdersRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.CreateTimeLt) {
 		toSerialize["create_time_lt"] = o.CreateTimeLt
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCAPAffiliateOrdersRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchCAPAffiliateOrdersRequest := _SearchCAPAffiliateOrdersRequest{}
+
+	err = json.Unmarshal(data, &varSearchCAPAffiliateOrdersRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCAPAffiliateOrdersRequest(varSearchCAPAffiliateOrdersRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "settle_status")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCAPAffiliateOrdersRequest struct {

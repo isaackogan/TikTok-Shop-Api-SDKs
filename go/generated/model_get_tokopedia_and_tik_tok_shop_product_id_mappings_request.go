@@ -21,7 +21,10 @@ var _ MappedNullable = &GetTokopediaAndTikTokShopProductIDMappingsRequest{}
 type GetTokopediaAndTikTokShopProductIDMappingsRequest struct {
 	// List of Tokopedia product IDs to map to TikTok Shop product IDs.
 	TokoPids []int64 `json:"toko_pids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTokopediaAndTikTokShopProductIDMappingsRequest GetTokopediaAndTikTokShopProductIDMappingsRequest
 
 // NewGetTokopediaAndTikTokShopProductIDMappingsRequest instantiates a new GetTokopediaAndTikTokShopProductIDMappingsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetTokopediaAndTikTokShopProductIDMappingsRequest) ToMap() (map[string]i
 	if !IsNil(o.TokoPids) {
 		toSerialize["toko_pids"] = o.TokoPids
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTokopediaAndTikTokShopProductIDMappingsRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetTokopediaAndTikTokShopProductIDMappingsRequest := _GetTokopediaAndTikTokShopProductIDMappingsRequest{}
+
+	err = json.Unmarshal(data, &varGetTokopediaAndTikTokShopProductIDMappingsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTokopediaAndTikTokShopProductIDMappingsRequest(varGetTokopediaAndTikTokShopProductIDMappingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "toko_pids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTokopediaAndTikTokShopProductIDMappingsRequest struct {

@@ -23,7 +23,10 @@ type StrikethroughPriceExpiredWebhookData struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The TikTok Shop SKU ID.
 	SkuId *string `json:"sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _StrikethroughPriceExpiredWebhookData StrikethroughPriceExpiredWebhookData
 
 // NewStrikethroughPriceExpiredWebhookData instantiates a new StrikethroughPriceExpiredWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o StrikethroughPriceExpiredWebhookData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.SkuId) {
 		toSerialize["sku_id"] = o.SkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *StrikethroughPriceExpiredWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varStrikethroughPriceExpiredWebhookData := _StrikethroughPriceExpiredWebhookData{}
+
+	err = json.Unmarshal(data, &varStrikethroughPriceExpiredWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = StrikethroughPriceExpiredWebhookData(varStrikethroughPriceExpiredWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableStrikethroughPriceExpiredWebhookData struct {

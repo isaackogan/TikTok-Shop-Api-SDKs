@@ -23,7 +23,10 @@ type SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange stru
 	CountGe *int64 `json:"count_ge,omitempty"`
 	// The maximum value of follower count.  - Generally, a value greater than or equal to 0 needs to be passed. If a value less than 0 is passed, it means that the field will not be filtered.
 	CountLe *int64 `json:"count_le,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange
 
 // NewSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange instantiates a new SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange) 
 	if !IsNil(o.CountLe) {
 		toSerialize["count_le"] = o.CountLe
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange := _SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange(varSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "count_ge")
+		delete(additionalProperties, "count_le")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange struct {

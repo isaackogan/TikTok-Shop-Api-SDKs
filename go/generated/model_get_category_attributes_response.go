@@ -26,7 +26,10 @@ type GetCategoryAttributesResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetCategoryAttributesResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryAttributesResponse GetCategoryAttributesResponse
 
 // NewGetCategoryAttributesResponse instantiates a new GetCategoryAttributesResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetCategoryAttributesResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryAttributesResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryAttributesResponse := _GetCategoryAttributesResponse{}
+
+	err = json.Unmarshal(data, &varGetCategoryAttributesResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryAttributesResponse(varGetCategoryAttributesResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryAttributesResponse struct {

@@ -25,7 +25,10 @@ type SearchCreatorTargetCollaborationsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// A list of target collaboration objects.
 	TargetCollaborations []SearchCreatorTargetCollaborationsResponseDataTargetCollaboration `json:"target_collaborations,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorTargetCollaborationsResponseData SearchCreatorTargetCollaborationsResponseData
 
 // NewSearchCreatorTargetCollaborationsResponseData instantiates a new SearchCreatorTargetCollaborationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCreatorTargetCollaborationsResponseData) ToMap() (map[string]inter
 	if !IsNil(o.TargetCollaborations) {
 		toSerialize["target_collaborations"] = o.TargetCollaborations
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorTargetCollaborationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorTargetCollaborationsResponseData := _SearchCreatorTargetCollaborationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCreatorTargetCollaborationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorTargetCollaborationsResponseData(varSearchCreatorTargetCollaborationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "target_collaborations")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorTargetCollaborationsResponseData struct {

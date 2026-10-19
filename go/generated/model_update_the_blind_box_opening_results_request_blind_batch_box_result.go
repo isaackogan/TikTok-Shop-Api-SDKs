@@ -23,7 +23,10 @@ type UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult struct {
 	OrderLineId *string `json:"order_line_id,omitempty"`
 	// Unboxing results for line items under orders. on batch box version
 	BlindBoxOrderLineList []UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList `json:"blind_box_order_line_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult
 
 // NewUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult instantiates a new UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult) ToMap() (map[
 	if !IsNil(o.BlindBoxOrderLineList) {
 		toSerialize["blind_box_order_line_list"] = o.BlindBoxOrderLineList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult := _UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult{}
+
+	err = json.Unmarshal(data, &varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult(varUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "blind_box_order_line_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResult struct {

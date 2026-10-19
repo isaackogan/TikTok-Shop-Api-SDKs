@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type CreateGlobalProductRequestCertification struct {
 	Images []Image `json:"images,omitempty"`
 	// A list of certification related files.
 	Files []File `json:"files,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGlobalProductRequestCertification CreateGlobalProductRequestCertification
@@ -154,6 +154,11 @@ func (o CreateGlobalProductRequestCertification) ToMap() (map[string]interface{}
 	if !IsNil(o.Files) {
 		toSerialize["files"] = o.Files
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *CreateGlobalProductRequestCertification) UnmarshalJSON(data []byte) (er
 
 	varCreateGlobalProductRequestCertification := _CreateGlobalProductRequestCertification{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGlobalProductRequestCertification)
+	err = json.Unmarshal(data, &varCreateGlobalProductRequestCertification)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGlobalProductRequestCertification(varCreateGlobalProductRequestCertification)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "files")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

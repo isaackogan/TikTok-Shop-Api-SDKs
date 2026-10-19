@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -47,6 +46,7 @@ type RecommendCategoryRequest struct {
 	ProductTitle string `json:"product_title"`
 	// false — NORMAL products true — LIVE_QUICK products. Only seller with the required permissions can creat LIVE_QUICK products. Default: false
 	IsLiveQuick *bool `json:"is_live_quick,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RecommendCategoryRequest RecommendCategoryRequest
@@ -524,6 +524,11 @@ func (o RecommendCategoryRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsLiveQuick) {
 		toSerialize["is_live_quick"] = o.IsLiveQuick
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -551,15 +556,32 @@ func (o *RecommendCategoryRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varRecommendCategoryRequest := _RecommendCategoryRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRecommendCategoryRequest)
+	err = json.Unmarshal(data, &varRecommendCategoryRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RecommendCategoryRequest(varRecommendCategoryRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "category_version")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "images")
+		delete(additionalProperties, "include_prohibited_categories")
+		delete(additionalProperties, "listing_platform")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "origin_platform_product_type")
+		delete(additionalProperties, "origin_platform_vendor")
+		delete(additionalProperties, "origin_platform_tags")
+		delete(additionalProperties, "origin_platform_category")
+		delete(additionalProperties, "origin_platform_product_meta_data")
+		delete(additionalProperties, "product_title")
+		delete(additionalProperties, "is_live_quick")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

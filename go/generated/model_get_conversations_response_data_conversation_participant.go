@@ -31,7 +31,10 @@ type GetConversationsResponseDataConversationParticipant struct {
 	Nickname *string `json:"nickname,omitempty"`
 	// Which platform is the buyer from.  This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia. Possible enumerations: - TIKTOK_SHOP - TOKOPEDIA You cannot send platform-specific content to the buyer from a different platform. For example, when you send a product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
 	BuyerPlatform *string `json:"buyer_platform,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetConversationsResponseDataConversationParticipant GetConversationsResponseDataConversationParticipant
 
 // NewGetConversationsResponseDataConversationParticipant instantiates a new GetConversationsResponseDataConversationParticipant object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetConversationsResponseDataConversationParticipant) ToMap() (map[string
 	if !IsNil(o.BuyerPlatform) {
 		toSerialize["buyer_platform"] = o.BuyerPlatform
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetConversationsResponseDataConversationParticipant) UnmarshalJSON(data []byte) (err error) {
+	varGetConversationsResponseDataConversationParticipant := _GetConversationsResponseDataConversationParticipant{}
+
+	err = json.Unmarshal(data, &varGetConversationsResponseDataConversationParticipant)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetConversationsResponseDataConversationParticipant(varGetConversationsResponseDataConversationParticipant)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "im_user_id")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "user_id")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "buyer_platform")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetConversationsResponseDataConversationParticipant struct {

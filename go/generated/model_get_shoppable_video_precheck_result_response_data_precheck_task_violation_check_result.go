@@ -23,7 +23,10 @@ type GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult
 	Status *string `json:"status,omitempty"`
 	// A list of policy violation details returned when violation check fails
 	Issues []GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResultIssue `json:"issues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult
 
 // NewGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult instantiates a new GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckRes
 	if !IsNil(o.Issues) {
 		toSerialize["issues"] = o.Issues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult) UnmarshalJSON(data []byte) (err error) {
+	varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult := _GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult{}
+
+	err = json.Unmarshal(data, &varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult(varGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "issues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShoppableVideoPrecheckResultResponseDataPrecheckTaskViolationCheckResult struct {

@@ -27,7 +27,10 @@ type UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResult
 	IsSuccess *bool `json:"is_success,omitempty"`
 	// Reason the goods-SKU relation operation failed.
 	FailReason *string `json:"fail_reason,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList
 
 // NewUpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList instantiates a new UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateRes
 	if !IsNil(o.FailReason) {
 		toSerialize["fail_reason"] = o.FailReason
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList) UnmarshalJSON(data []byte) (err error) {
+	varUpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList := _UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList{}
+
+	err = json.Unmarshal(data, &varUpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList(varUpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_goods_id")
+		delete(additionalProperties, "tts_sku_id")
+		delete(additionalProperties, "is_success")
+		delete(additionalProperties, "fail_reason")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList struct {

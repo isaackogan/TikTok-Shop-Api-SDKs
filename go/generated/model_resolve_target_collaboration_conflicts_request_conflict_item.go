@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ResolveTargetCollaborationConflictsRequestConflictItem struct {
 	ExistingCollaborationId string `json:"existing_collaboration_id"`
 	// Creator Open ID. [More details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
 	CreatorOpenId string `json:"creator_open_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ResolveTargetCollaborationConflictsRequestConflictItem ResolveTargetCollaborationConflictsRequestConflictItem
@@ -108,6 +108,11 @@ func (o ResolveTargetCollaborationConflictsRequestConflictItem) ToMap() (map[str
 	toSerialize := map[string]interface{}{}
 	toSerialize["existing_collaboration_id"] = o.ExistingCollaborationId
 	toSerialize["creator_open_id"] = o.CreatorOpenId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ResolveTargetCollaborationConflictsRequestConflictItem) UnmarshalJSON(d
 
 	varResolveTargetCollaborationConflictsRequestConflictItem := _ResolveTargetCollaborationConflictsRequestConflictItem{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varResolveTargetCollaborationConflictsRequestConflictItem)
+	err = json.Unmarshal(data, &varResolveTargetCollaborationConflictsRequestConflictItem)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ResolveTargetCollaborationConflictsRequestConflictItem(varResolveTargetCollaborationConflictsRequestConflictItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "existing_collaboration_id")
+		delete(additionalProperties, "creator_open_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

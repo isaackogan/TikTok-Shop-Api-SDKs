@@ -25,7 +25,10 @@ type InventoryStatusChangeWebhookDataTriggerReason struct {
 	LeadDays *int64 `json:"lead_days,omitempty"`
 	// When `alert_type == REALTIME`, the value is the low stock threshold met.   When `alert_type == PREDICTION`, the parameter is not returned.
 	LowStockThreshold *int64 `json:"low_stock_threshold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventoryStatusChangeWebhookDataTriggerReason InventoryStatusChangeWebhookDataTriggerReason
 
 // NewInventoryStatusChangeWebhookDataTriggerReason instantiates a new InventoryStatusChangeWebhookDataTriggerReason object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o InventoryStatusChangeWebhookDataTriggerReason) ToMap() (map[string]inter
 	if !IsNil(o.LowStockThreshold) {
 		toSerialize["low_stock_threshold"] = o.LowStockThreshold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventoryStatusChangeWebhookDataTriggerReason) UnmarshalJSON(data []byte) (err error) {
+	varInventoryStatusChangeWebhookDataTriggerReason := _InventoryStatusChangeWebhookDataTriggerReason{}
+
+	err = json.Unmarshal(data, &varInventoryStatusChangeWebhookDataTriggerReason)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventoryStatusChangeWebhookDataTriggerReason(varInventoryStatusChangeWebhookDataTriggerReason)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "alert_type")
+		delete(additionalProperties, "lead_days")
+		delete(additionalProperties, "low_stock_threshold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventoryStatusChangeWebhookDataTriggerReason struct {

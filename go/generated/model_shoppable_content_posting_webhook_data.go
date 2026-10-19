@@ -22,7 +22,10 @@ type ShoppableContentPostingWebhookData struct {
 	// ID of the product promoted in the creator's video.
 	ProductId *string `json:"product_id,omitempty"`
 	Event *ShoppableContentPostingWebhookDataEvent `json:"event,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShoppableContentPostingWebhookData ShoppableContentPostingWebhookData
 
 // NewShoppableContentPostingWebhookData instantiates a new ShoppableContentPostingWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -121,7 +124,34 @@ func (o ShoppableContentPostingWebhookData) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Event) {
 		toSerialize["event"] = o.Event
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShoppableContentPostingWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varShoppableContentPostingWebhookData := _ShoppableContentPostingWebhookData{}
+
+	err = json.Unmarshal(data, &varShoppableContentPostingWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShoppableContentPostingWebhookData(varShoppableContentPostingWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "event")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShoppableContentPostingWebhookData struct {

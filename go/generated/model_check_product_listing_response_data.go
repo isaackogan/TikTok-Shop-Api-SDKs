@@ -33,7 +33,10 @@ type CheckProductListingResponseData struct {
 	Diagnoses []CheckProductListingResponseDataDiagnosis `json:"diagnoses,omitempty"`
 	// Contains any completed product information verification findings available for the supplied `gne_async_check_session_id`. The response does not expose a separate pending or completed status. If this field is missing or empty, you cannot determine from the response whether the asynchronous checks have completed or passed.
 	PreCheckResults []CheckProductListingResponseDataPreCheckResult `json:"pre_check_results,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CheckProductListingResponseData CheckProductListingResponseData
 
 // NewCheckProductListingResponseData instantiates a new CheckProductListingResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -278,7 +281,38 @@ func (o CheckProductListingResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.PreCheckResults) {
 		toSerialize["pre_check_results"] = o.PreCheckResults
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CheckProductListingResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCheckProductListingResponseData := _CheckProductListingResponseData{}
+
+	err = json.Unmarshal(data, &varCheckProductListingResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CheckProductListingResponseData(varCheckProductListingResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "check_result")
+		delete(additionalProperties, "fail_reasons")
+		delete(additionalProperties, "warnings")
+		delete(additionalProperties, "listing_quality")
+		delete(additionalProperties, "diagnoses")
+		delete(additionalProperties, "pre_check_results")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCheckProductListingResponseData struct {

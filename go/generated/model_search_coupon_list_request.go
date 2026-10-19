@@ -25,7 +25,10 @@ type SearchCouponListRequest struct {
 	TitleKeyword *string `json:"title_keyword,omitempty"`
 	// The display type of coupons. Values: - `REGULAR`: Regular coupons which are displayed to TikTok users across all display locations available in TTS, including PLPs, PDPs, TikTok Videos, LIVE Rooms, Creator Showcases, and may be shared via TTS Customer Support instant messages. Includes coupons which target select customer segments. - `LIVE`: Coupons which are only displayed to TikTok users in LIVE Rooms. - `CREATOR_EXCLUSIVE`: Coupons that can be claimed through the display channels of the specified creator, such as their LIVE Rooms, and their Creator Showcase. - `CHAT`: Exclusive coupons that may be sent to customers via TTS customer support chat messages, but are not displayed in other display locations. - `PROMO_CODE`: Promo codes do not have dedicated display locations on TikTok, but may be shared with customers in LIVEs, in TikTok videos, or other social media platforms. They can be claimed by customers entering a claim code at checkout or by customers that use a custom promo code landing page URL.
 	DisplayType []string `json:"display_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCouponListRequest SearchCouponListRequest
 
 // NewSearchCouponListRequest instantiates a new SearchCouponListRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchCouponListRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.DisplayType) {
 		toSerialize["display_type"] = o.DisplayType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCouponListRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchCouponListRequest := _SearchCouponListRequest{}
+
+	err = json.Unmarshal(data, &varSearchCouponListRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCouponListRequest(varSearchCouponListRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "title_keyword")
+		delete(additionalProperties, "display_type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCouponListRequest struct {

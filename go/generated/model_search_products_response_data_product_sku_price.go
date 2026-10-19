@@ -27,7 +27,10 @@ type SearchProductsResponseDataProductSkuPrice struct {
 	SalePrice *string `json:"sale_price,omitempty"`
 	// starting bid price for auction product
 	StartingBidPrice *string `json:"starting_bid_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductSkuPrice SearchProductsResponseDataProductSkuPrice
 
 // NewSearchProductsResponseDataProductSkuPrice instantiates a new SearchProductsResponseDataProductSkuPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchProductsResponseDataProductSkuPrice) ToMap() (map[string]interface
 	if !IsNil(o.StartingBidPrice) {
 		toSerialize["starting_bid_price"] = o.StartingBidPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductSkuPrice) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductSkuPrice := _SearchProductsResponseDataProductSkuPrice{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductSkuPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductSkuPrice(varSearchProductsResponseDataProductSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "tax_exclusive_price")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "starting_bid_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductSkuPrice struct {

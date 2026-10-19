@@ -21,7 +21,10 @@ var _ MappedNullable = &EditOpenCollaborationSettingsRequest{}
 type EditOpenCollaborationSettingsRequest struct {
 	// An object with properties to automatically add products to affiliate open collaboration plans.
 	AutoAddProduct *EditOpenCollaborationSettingsRequestAutoAddProduct `json:"auto_add_product,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _EditOpenCollaborationSettingsRequest EditOpenCollaborationSettingsRequest
 
 // NewEditOpenCollaborationSettingsRequest instantiates a new EditOpenCollaborationSettingsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o EditOpenCollaborationSettingsRequest) ToMap() (map[string]interface{}, e
 	if !IsNil(o.AutoAddProduct) {
 		toSerialize["auto_add_product"] = o.AutoAddProduct
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *EditOpenCollaborationSettingsRequest) UnmarshalJSON(data []byte) (err error) {
+	varEditOpenCollaborationSettingsRequest := _EditOpenCollaborationSettingsRequest{}
+
+	err = json.Unmarshal(data, &varEditOpenCollaborationSettingsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EditOpenCollaborationSettingsRequest(varEditOpenCollaborationSettingsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "auto_add_product")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableEditOpenCollaborationSettingsRequest struct {

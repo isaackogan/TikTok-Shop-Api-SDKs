@@ -27,7 +27,10 @@ type MarkPackageAsShippedResponseData struct {
 	PackageId *string `json:"package_id,omitempty"`
 	// Warning message.
 	Warning *Warning `json:"warning,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarkPackageAsShippedResponseData MarkPackageAsShippedResponseData
 
 // NewMarkPackageAsShippedResponseData instantiates a new MarkPackageAsShippedResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o MarkPackageAsShippedResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Warning) {
 		toSerialize["warning"] = o.Warning
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarkPackageAsShippedResponseData) UnmarshalJSON(data []byte) (err error) {
+	varMarkPackageAsShippedResponseData := _MarkPackageAsShippedResponseData{}
+
+	err = json.Unmarshal(data, &varMarkPackageAsShippedResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarkPackageAsShippedResponseData(varMarkPackageAsShippedResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "order_line_item_ids")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "warning")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarkPackageAsShippedResponseData struct {

@@ -23,7 +23,10 @@ type CreateGlobalProductResponseData struct {
 	GlobalProductId *string `json:"global_product_id,omitempty"`
 	// A list of global Stock Keeping Units (SKUs) used to identify distinct variants of the product.
 	GlobalSkus []GlobalSku `json:"global_skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateGlobalProductResponseData CreateGlobalProductResponseData
 
 // NewCreateGlobalProductResponseData instantiates a new CreateGlobalProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CreateGlobalProductResponseData) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.GlobalSkus) {
 		toSerialize["global_skus"] = o.GlobalSkus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateGlobalProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateGlobalProductResponseData := _CreateGlobalProductResponseData{}
+
+	err = json.Unmarshal(data, &varCreateGlobalProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateGlobalProductResponseData(varCreateGlobalProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_product_id")
+		delete(additionalProperties, "global_skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateGlobalProductResponseData struct {

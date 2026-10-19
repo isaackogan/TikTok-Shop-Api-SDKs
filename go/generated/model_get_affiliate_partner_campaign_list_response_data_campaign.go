@@ -33,7 +33,10 @@ type GetAffiliatePartnerCampaignListResponseDataCampaign struct {
 	CampaignStartTime *int64 `json:"campaign_start_time,omitempty"`
 	// The scheduled end time in Unix epoch time format for the campaign. Note that the end time must be less than 360 days from the start date. This field is no longer editable when the campaign status is set to `CLOSED`.
 	CampaignEndTime *int64 `json:"campaign_end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignListResponseDataCampaign GetAffiliatePartnerCampaignListResponseDataCampaign
 
 // NewGetAffiliatePartnerCampaignListResponseDataCampaign instantiates a new GetAffiliatePartnerCampaignListResponseDataCampaign object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetAffiliatePartnerCampaignListResponseDataCampaign) ToMap() (map[string
 	if !IsNil(o.CampaignEndTime) {
 		toSerialize["campaign_end_time"] = o.CampaignEndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignListResponseDataCampaign) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignListResponseDataCampaign := _GetAffiliatePartnerCampaignListResponseDataCampaign{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignListResponseDataCampaign)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignListResponseDataCampaign(varGetAffiliatePartnerCampaignListResponseDataCampaign)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "registration_start_time")
+		delete(additionalProperties, "registration_end_time")
+		delete(additionalProperties, "campaign_start_time")
+		delete(additionalProperties, "campaign_end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignListResponseDataCampaign struct {

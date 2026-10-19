@@ -25,7 +25,10 @@ type GetShowcaseProductsResponseDataProductPrice struct {
 	SellerDiscountPrice *GetShowcaseProductsResponseDataProductPriceSellerDiscountPrice `json:"seller_discount_price,omitempty"`
 	// An object including data about the product platform discount price.
 	PlatformDiscountPrice *GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice `json:"platform_discount_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductPrice GetShowcaseProductsResponseDataProductPrice
 
 // NewGetShowcaseProductsResponseDataProductPrice instantiates a new GetShowcaseProductsResponseDataProductPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShowcaseProductsResponseDataProductPrice) ToMap() (map[string]interfa
 	if !IsNil(o.PlatformDiscountPrice) {
 		toSerialize["platform_discount_price"] = o.PlatformDiscountPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductPrice := _GetShowcaseProductsResponseDataProductPrice{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductPrice(varGetShowcaseProductsResponseDataProductPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "original_price")
+		delete(additionalProperties, "seller_discount_price")
+		delete(additionalProperties, "platform_discount_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductPrice struct {

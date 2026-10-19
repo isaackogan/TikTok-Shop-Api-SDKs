@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type GetEligibleShippingServicesRequestWeight struct {
 	Value string `json:"value"`
 	// The unit of measurement is used to measure the weight. - GRAM - POUND
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetEligibleShippingServicesRequestWeight GetEligibleShippingServicesRequestWeight
@@ -108,6 +108,11 @@ func (o GetEligibleShippingServicesRequestWeight) ToMap() (map[string]interface{
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *GetEligibleShippingServicesRequestWeight) UnmarshalJSON(data []byte) (e
 
 	varGetEligibleShippingServicesRequestWeight := _GetEligibleShippingServicesRequestWeight{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetEligibleShippingServicesRequestWeight)
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesRequestWeight)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetEligibleShippingServicesRequestWeight(varGetEligibleShippingServicesRequestWeight)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

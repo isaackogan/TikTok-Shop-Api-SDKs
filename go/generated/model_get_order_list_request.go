@@ -37,7 +37,10 @@ type GetOrderListRequest struct {
 	IsBuyerRequestCancel *bool `json:"is_buyer_request_cancel,omitempty"`
 	// Filter orders by pickup/sales warehouse IDs. Applicable only if the multi-warehouse feature is enabled. Max count: 100
 	WarehouseIds []string `json:"warehouse_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderListRequest GetOrderListRequest
 
 // NewGetOrderListRequest instantiates a new GetOrderListRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetOrderListRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.WarehouseIds) {
 		toSerialize["warehouse_ids"] = o.WarehouseIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderListRequest) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderListRequest := _GetOrderListRequest{}
+
+	err = json.Unmarshal(data, &varGetOrderListRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderListRequest(varGetOrderListRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_status")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_lt")
+		delete(additionalProperties, "shipping_type")
+		delete(additionalProperties, "buyer_user_id")
+		delete(additionalProperties, "is_buyer_request_cancel")
+		delete(additionalProperties, "warehouse_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderListRequest struct {

@@ -23,7 +23,10 @@ type GetProductPackageRecommendationsResponseDataProductDimensionRecommendationW
 	MinValue *string `json:"min_value,omitempty"`
 	// Recommended range maximum; unit: cm
 	MaxValue *string `json:"max_value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth
 
 // NewGetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth instantiates a new GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetProductPackageRecommendationsResponseDataProductDimensionRecommendati
 	if !IsNil(o.MaxValue) {
 		toSerialize["max_value"] = o.MaxValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth) UnmarshalJSON(data []byte) (err error) {
+	varGetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth := _GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth{}
+
+	err = json.Unmarshal(data, &varGetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth(varGetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "min_value")
+		delete(additionalProperties, "max_value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type ListOpportunitiesRequest struct {
 	CreateTimeLt *int64 `json:"create_time_lt,omitempty"`
 	// A list of tag codes used to filter the results. You can provide at most 20 values. Use lowercase tag codes. The `core_product` and `top_product` tag codes are supported only when `opportunity_type` is `PRODUCT`; their availability also depends on the seller and market configuration.
 	TagCodes []string `json:"tag_codes,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListOpportunitiesRequest ListOpportunitiesRequest
@@ -228,6 +228,11 @@ func (o ListOpportunitiesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TagCodes) {
 		toSerialize["tag_codes"] = o.TagCodes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *ListOpportunitiesRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varListOpportunitiesRequest := _ListOpportunitiesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListOpportunitiesRequest)
+	err = json.Unmarshal(data, &varListOpportunitiesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListOpportunitiesRequest(varListOpportunitiesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "opportunity_type")
+		delete(additionalProperties, "category_ids")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "tag_codes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

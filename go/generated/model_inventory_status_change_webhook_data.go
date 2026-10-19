@@ -29,7 +29,10 @@ type InventoryStatusChangeWebhookData struct {
 	InventoryDistribution *InventoryStatusChangeWebhookDataInventoryDistribution `json:"inventory_distribution,omitempty"`
 	// The time when the status changed, represented as a Unix timestamp (seconds).
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventoryStatusChangeWebhookData InventoryStatusChangeWebhookData
 
 // NewInventoryStatusChangeWebhookData instantiates a new InventoryStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -268,7 +271,38 @@ func (o InventoryStatusChangeWebhookData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventoryStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varInventoryStatusChangeWebhookData := _InventoryStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varInventoryStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventoryStatusChangeWebhookData(varInventoryStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "trigger_reason")
+		delete(additionalProperties, "current_inventory_status")
+		delete(additionalProperties, "inventory_distribution")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventoryStatusChangeWebhookData struct {

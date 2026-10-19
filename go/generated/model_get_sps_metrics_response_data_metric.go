@@ -45,7 +45,10 @@ type GetSPSMetricsResponseDataMetric struct {
 	ValueUnit *string `json:"value_unit,omitempty"`
 	// Indicates that this metric is a key contributor to SPS.
 	TopReasonText *string `json:"top_reason_text,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricsResponseDataMetric GetSPSMetricsResponseDataMetric
 
 // NewGetSPSMetricsResponseDataMetric instantiates a new GetSPSMetricsResponseDataMetric object
 // This constructor will assign default values to properties that have it defined,
@@ -529,7 +532,45 @@ func (o GetSPSMetricsResponseDataMetric) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.TopReasonText) {
 		toSerialize["top_reason_text"] = o.TopReasonText
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricsResponseDataMetric) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricsResponseDataMetric := _GetSPSMetricsResponseDataMetric{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricsResponseDataMetric)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricsResponseDataMetric(varGetSPSMetricsResponseDataMetric)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "benchmarks")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "evaluate_duration_days")
+		delete(additionalProperties, "end_evaluation_time")
+		delete(additionalProperties, "start_evaluation_time")
+		delete(additionalProperties, "metric_code")
+		delete(additionalProperties, "metric_name")
+		delete(additionalProperties, "score")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "status_text")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "value_unit")
+		delete(additionalProperties, "top_reason_text")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricsResponseDataMetric struct {

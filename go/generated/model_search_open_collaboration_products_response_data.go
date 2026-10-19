@@ -25,7 +25,10 @@ type SearchOpenCollaborationProductsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// Total count of products meeting the search criteria expressed in the request body.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchOpenCollaborationProductsResponseData SearchOpenCollaborationProductsResponseData
 
 // NewSearchOpenCollaborationProductsResponseData instantiates a new SearchOpenCollaborationProductsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchOpenCollaborationProductsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchOpenCollaborationProductsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchOpenCollaborationProductsResponseData := _SearchOpenCollaborationProductsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchOpenCollaborationProductsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchOpenCollaborationProductsResponseData(varSearchOpenCollaborationProductsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchOpenCollaborationProductsResponseData struct {

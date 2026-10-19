@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -83,6 +82,7 @@ type CheckProductListingRequest struct {
 	SellingFormat *string `json:"selling_format,omitempty"`
 	// false — NORMAL products true — LIVE_QUICK products. Only seller with the required permissions can creat LIVE_QUICK products. Default: false
 	IsLiveQuick *bool `json:"is_live_quick,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CheckProductListingRequest CheckProductListingRequest
@@ -1154,6 +1154,11 @@ func (o CheckProductListingRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsLiveQuick) {
 		toSerialize["is_live_quick"] = o.IsLiveQuick
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -1185,15 +1190,50 @@ func (o *CheckProductListingRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCheckProductListingRequest := _CheckProductListingRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCheckProductListingRequest)
+	err = json.Unmarshal(data, &varCheckProductListingRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CheckProductListingRequest(varCheckProductListingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "category_id")
+		delete(additionalProperties, "brand_id")
+		delete(additionalProperties, "main_images")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "is_cod_allowed")
+		delete(additionalProperties, "certifications")
+		delete(additionalProperties, "package_weight")
+		delete(additionalProperties, "product_attributes")
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "package_dimensions")
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "delivery_option_ids")
+		delete(additionalProperties, "video")
+		delete(additionalProperties, "primary_combined_product_id")
+		delete(additionalProperties, "manufacturer_ids")
+		delete(additionalProperties, "responsible_person_ids")
+		delete(additionalProperties, "listing_platforms")
+		delete(additionalProperties, "shipping_insurance_requirement")
+		delete(additionalProperties, "is_pre_owned")
+		delete(additionalProperties, "minimum_order_quantity")
+		delete(additionalProperties, "shipping_template_id")
+		delete(additionalProperties, "option")
+		delete(additionalProperties, "scheduled_sale")
+		delete(additionalProperties, "search_terms")
+		delete(additionalProperties, "key_product_features")
+		delete(additionalProperties, "product_tag_operations")
+		delete(additionalProperties, "locale")
+		delete(additionalProperties, "selling_format")
+		delete(additionalProperties, "is_live_quick")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

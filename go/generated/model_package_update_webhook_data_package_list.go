@@ -23,7 +23,10 @@ type PackageUpdateWebhookDataPackageList struct {
 	PackageId *string `json:"package_id,omitempty"`
 	// List of order IDs in a given package
 	OrderIdList []string `json:"order_id_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PackageUpdateWebhookDataPackageList PackageUpdateWebhookDataPackageList
 
 // NewPackageUpdateWebhookDataPackageList instantiates a new PackageUpdateWebhookDataPackageList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o PackageUpdateWebhookDataPackageList) ToMap() (map[string]interface{}, er
 	if !IsNil(o.OrderIdList) {
 		toSerialize["order_id_list"] = o.OrderIdList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PackageUpdateWebhookDataPackageList) UnmarshalJSON(data []byte) (err error) {
+	varPackageUpdateWebhookDataPackageList := _PackageUpdateWebhookDataPackageList{}
+
+	err = json.Unmarshal(data, &varPackageUpdateWebhookDataPackageList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PackageUpdateWebhookDataPackageList(varPackageUpdateWebhookDataPackageList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "order_id_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePackageUpdateWebhookDataPackageList struct {

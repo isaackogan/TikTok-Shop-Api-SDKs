@@ -23,7 +23,10 @@ type CreatePackagesRequestOrderLineItem struct {
 	OrderLineId *string `json:"order_line_id,omitempty"`
 	// Only for virtual bundle items,list of sub item ids. If ship_type=2,This is a required field;If ship_type=1&3,we will not use this field
 	SubItemId *string `json:"sub_item_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatePackagesRequestOrderLineItem CreatePackagesRequestOrderLineItem
 
 // NewCreatePackagesRequestOrderLineItem instantiates a new CreatePackagesRequestOrderLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CreatePackagesRequestOrderLineItem) ToMap() (map[string]interface{}, err
 	if !IsNil(o.SubItemId) {
 		toSerialize["sub_item_id"] = o.SubItemId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatePackagesRequestOrderLineItem) UnmarshalJSON(data []byte) (err error) {
+	varCreatePackagesRequestOrderLineItem := _CreatePackagesRequestOrderLineItem{}
+
+	err = json.Unmarshal(data, &varCreatePackagesRequestOrderLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatePackagesRequestOrderLineItem(varCreatePackagesRequestOrderLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "sub_item_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatePackagesRequestOrderLineItem struct {

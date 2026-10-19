@@ -33,7 +33,10 @@ type PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea struct {
 	IsRequired *bool `json:"is_required,omitempty"`
 	// Configuration for a text-type customization area. This field should be provided when `area_type` is `TEXT`.
 	TextArea *TextArea `json:"text_area,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea
 
 // NewPartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea instantiates a new PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea) ToMap() (m
 	if !IsNil(o.TextArea) {
 		toSerialize["text_area"] = o.TextArea
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea) UnmarshalJSON(data []byte) (err error) {
+	varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea := _PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea{}
+
+	err = json.Unmarshal(data, &varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea(varPartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "area_name")
+		delete(additionalProperties, "area_placement")
+		delete(additionalProperties, "area_type")
+		delete(additionalProperties, "external_area_id")
+		delete(additionalProperties, "image_area")
+		delete(additionalProperties, "is_required")
+		delete(additionalProperties, "text_area")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePartialEditProductRequestPodInfoPodTemplateSurfaceCustomArea struct {

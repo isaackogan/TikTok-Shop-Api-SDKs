@@ -21,7 +21,10 @@ var _ MappedNullable = &QueryCreatorPromotionDetailsInTargetCollaborationRequest
 type QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter struct {
 	// Product added type list, support status:  -ALL: all status -ADDED: creator added product NOT_ADDED: creator not added product
 	AddedTypes []string `json:"added_types,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter
 
 // NewQueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter instantiates a new QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter) T
 	if !IsNil(o.AddedTypes) {
 		toSerialize["added_types"] = o.AddedTypes
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter) UnmarshalJSON(data []byte) (err error) {
+	varQueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter := _QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter{}
+
+	err = json.Unmarshal(data, &varQueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter)
+
+	if err != nil {
+		return err
+	}
+
+	*o = QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter(varQueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "added_types")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableQueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter struct {

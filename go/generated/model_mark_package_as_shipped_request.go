@@ -23,7 +23,10 @@ type MarkPackageAsShippedRequest struct {
 	OrderLineList []ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList `json:"order_line_list,omitempty"`
 	// \"Only supports uploading multiple tracking numbers for split-shipment in 3PL single item scenarios (non-virtual bundle) (This function is only support for whitelist sellers； If you are not on the allowlist, it is recommended to contact AM to apply) For other scenarios, only one tracking number can be uploaded at a time.\"
 	ShippingInfoList []ShippingInfoList `json:"shipping_info_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MarkPackageAsShippedRequest MarkPackageAsShippedRequest
 
 // NewMarkPackageAsShippedRequest instantiates a new MarkPackageAsShippedRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o MarkPackageAsShippedRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ShippingInfoList) {
 		toSerialize["shipping_info_list"] = o.ShippingInfoList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MarkPackageAsShippedRequest) UnmarshalJSON(data []byte) (err error) {
+	varMarkPackageAsShippedRequest := _MarkPackageAsShippedRequest{}
+
+	err = json.Unmarshal(data, &varMarkPackageAsShippedRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MarkPackageAsShippedRequest(varMarkPackageAsShippedRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_list")
+		delete(additionalProperties, "shipping_info_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMarkPackageAsShippedRequest struct {

@@ -23,7 +23,10 @@ type DiagnoseAndOptimizeProductResponseData struct {
 	ListingQuality *ListingQuality `json:"listing_quality,omitempty"`
 	// Product diagnosis and optimization information.
 	Diagnoses []Diagnosis `json:"diagnoses,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _DiagnoseAndOptimizeProductResponseData DiagnoseAndOptimizeProductResponseData
 
 // NewDiagnoseAndOptimizeProductResponseData instantiates a new DiagnoseAndOptimizeProductResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o DiagnoseAndOptimizeProductResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.Diagnoses) {
 		toSerialize["diagnoses"] = o.Diagnoses
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *DiagnoseAndOptimizeProductResponseData) UnmarshalJSON(data []byte) (err error) {
+	varDiagnoseAndOptimizeProductResponseData := _DiagnoseAndOptimizeProductResponseData{}
+
+	err = json.Unmarshal(data, &varDiagnoseAndOptimizeProductResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DiagnoseAndOptimizeProductResponseData(varDiagnoseAndOptimizeProductResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "listing_quality")
+		delete(additionalProperties, "diagnoses")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDiagnoseAndOptimizeProductResponseData struct {

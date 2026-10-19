@@ -55,7 +55,10 @@ type GetAffiliatePartnerCampaignProductListResponseDataProduct struct {
 	SkuInformationList []GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList `json:"sku_information_list,omitempty"`
 	// Return product description
 	ProductDescription *string `json:"product_description,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAffiliatePartnerCampaignProductListResponseDataProduct GetAffiliatePartnerCampaignProductListResponseDataProduct
 
 // NewGetAffiliatePartnerCampaignProductListResponseDataProduct instantiates a new GetAffiliatePartnerCampaignProductListResponseDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -714,7 +717,50 @@ func (o GetAffiliatePartnerCampaignProductListResponseDataProduct) ToMap() (map[
 	if !IsNil(o.ProductDescription) {
 		toSerialize["product_description"] = o.ProductDescription
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAffiliatePartnerCampaignProductListResponseDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varGetAffiliatePartnerCampaignProductListResponseDataProduct := _GetAffiliatePartnerCampaignProductListResponseDataProduct{}
+
+	err = json.Unmarshal(data, &varGetAffiliatePartnerCampaignProductListResponseDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAffiliatePartnerCampaignProductListResponseDataProduct(varGetAffiliatePartnerCampaignProductListResponseDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "review_status")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "lowest_price")
+		delete(additionalProperties, "highest_price")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "shop_name")
+		delete(additionalProperties, "total_commission_rate")
+		delete(additionalProperties, "creator_commission_rate")
+		delete(additionalProperties, "partner_commission_rate")
+		delete(additionalProperties, "open_collaboration_commission_rate")
+		delete(additionalProperties, "is_available")
+		delete(additionalProperties, "product_sales")
+		delete(additionalProperties, "category")
+		delete(additionalProperties, "sample_quota")
+		delete(additionalProperties, "sku_information_list")
+		delete(additionalProperties, "product_description")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAffiliatePartnerCampaignProductListResponseDataProduct struct {

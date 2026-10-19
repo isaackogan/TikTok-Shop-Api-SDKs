@@ -27,7 +27,10 @@ type GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile st
 	GenderDistribution []GenderDistribution `json:"gender_distribution,omitempty"`
 	// Viewer profile type. Possible values: NEW_FOLLOWER, VIEWERS.
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile
 
 // NewGetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile instantiates a new GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile := _GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile{}
+
+	err = json.Unmarshal(data, &varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile(varGetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "age_distribution")
+		delete(additionalProperties, "country_distribution")
+		delete(additionalProperties, "gender_distribution")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile struct {

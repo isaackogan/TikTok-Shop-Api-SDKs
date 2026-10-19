@@ -27,7 +27,10 @@ type GetShopSKUPerformanceListResponseData struct {
 	TotalCount *int64 `json:"total_count,omitempty"`
 	// Latest date in local timezone where data is ready (ISO 8601 format).
 	LatestAvailableDate *string `json:"latest_available_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopSKUPerformanceListResponseData GetShopSKUPerformanceListResponseData
 
 // NewGetShopSKUPerformanceListResponseData instantiates a new GetShopSKUPerformanceListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopSKUPerformanceListResponseData) ToMap() (map[string]interface{}, 
 	if !IsNil(o.LatestAvailableDate) {
 		toSerialize["latest_available_date"] = o.LatestAvailableDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopSKUPerformanceListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopSKUPerformanceListResponseData := _GetShopSKUPerformanceListResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopSKUPerformanceListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopSKUPerformanceListResponseData(varGetShopSKUPerformanceListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		delete(additionalProperties, "latest_available_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopSKUPerformanceListResponseData struct {

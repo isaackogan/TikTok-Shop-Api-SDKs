@@ -27,7 +27,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange struct {
 	MaximumAmount *string `json:"maximum_amount,omitempty"`
 	// The formatted range of livestream GPM values associted with the creator.
 	FormattedRange *string `json:"formatted_range,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange) ToMap()
 	if !IsNil(o.FormattedRange) {
 		toSerialize["formatted_range"] = o.FormattedRange
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange := _GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange(varGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "minimum_amount")
+		delete(additionalProperties, "maximum_amount")
+		delete(additionalProperties, "formatted_range")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorLiveGpmRange struct {

@@ -31,7 +31,10 @@ type SearchProductsForComplianceAuditingRequest struct {
 	BrandIds []string `json:"brand_ids,omitempty"`
 	// The name of the shop which product belongs to.
 	SellerName *string `json:"seller_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsForComplianceAuditingRequest SearchProductsForComplianceAuditingRequest
 
 // NewSearchProductsForComplianceAuditingRequest instantiates a new SearchProductsForComplianceAuditingRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o SearchProductsForComplianceAuditingRequest) ToMap() (map[string]interfac
 	if !IsNil(o.SellerName) {
 		toSerialize["seller_name"] = o.SellerName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsForComplianceAuditingRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsForComplianceAuditingRequest := _SearchProductsForComplianceAuditingRequest{}
+
+	err = json.Unmarshal(data, &varSearchProductsForComplianceAuditingRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsForComplianceAuditingRequest(varSearchProductsForComplianceAuditingRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_title")
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "seller_id")
+		delete(additionalProperties, "category_ids")
+		delete(additionalProperties, "brand_ids")
+		delete(additionalProperties, "seller_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsForComplianceAuditingRequest struct {

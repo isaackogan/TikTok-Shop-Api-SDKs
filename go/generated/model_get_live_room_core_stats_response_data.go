@@ -21,7 +21,10 @@ var _ MappedNullable = &GetLiveRoomCoreStatsResponseData{}
 type GetLiveRoomCoreStatsResponseData struct {
 	// The stats of the live room
 	Stats *GetLiveRoomCoreStatsResponseDataStat `json:"stats,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomCoreStatsResponseData GetLiveRoomCoreStatsResponseData
 
 // NewGetLiveRoomCoreStatsResponseData instantiates a new GetLiveRoomCoreStatsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetLiveRoomCoreStatsResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Stats) {
 		toSerialize["stats"] = o.Stats
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomCoreStatsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomCoreStatsResponseData := _GetLiveRoomCoreStatsResponseData{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomCoreStatsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomCoreStatsResponseData(varGetLiveRoomCoreStatsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stats")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomCoreStatsResponseData struct {

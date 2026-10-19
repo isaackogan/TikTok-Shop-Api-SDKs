@@ -33,7 +33,10 @@ type RefundSuccessWebhookData struct {
 	RefundTotal *string `json:"refund_total,omitempty"`
 	// Associated RMA identifier.
 	RmaId *string `json:"rma_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RefundSuccessWebhookData RefundSuccessWebhookData
 
 // NewRefundSuccessWebhookData instantiates a new RefundSuccessWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o RefundSuccessWebhookData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.RmaId) {
 		toSerialize["rma_id"] = o.RmaId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RefundSuccessWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varRefundSuccessWebhookData := _RefundSuccessWebhookData{}
+
+	err = json.Unmarshal(data, &varRefundSuccessWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RefundSuccessWebhookData(varRefundSuccessWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aftersales_request_id")
+		delete(additionalProperties, "line_items")
+		delete(additionalProperties, "refund_currency")
+		delete(additionalProperties, "refund_status")
+		delete(additionalProperties, "refund_timestamp")
+		delete(additionalProperties, "refund_total")
+		delete(additionalProperties, "rma_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRefundSuccessWebhookData struct {

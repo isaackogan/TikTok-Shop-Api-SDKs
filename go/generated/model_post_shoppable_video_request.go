@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type PostShoppableVideoRequest struct {
 	VideoInfo PostShoppableVideoRequestVideoInfo `json:"video_info"`
 	// Product link information
 	ProductLinkInfo ProductLinkInfo `json:"product_link_info"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostShoppableVideoRequest PostShoppableVideoRequest
@@ -108,6 +108,11 @@ func (o PostShoppableVideoRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["video_info"] = o.VideoInfo
 	toSerialize["product_link_info"] = o.ProductLinkInfo
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *PostShoppableVideoRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPostShoppableVideoRequest := _PostShoppableVideoRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostShoppableVideoRequest)
+	err = json.Unmarshal(data, &varPostShoppableVideoRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostShoppableVideoRequest(varPostShoppableVideoRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "video_info")
+		delete(additionalProperties, "product_link_info")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

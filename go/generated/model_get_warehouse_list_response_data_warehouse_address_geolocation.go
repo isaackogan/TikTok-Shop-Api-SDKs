@@ -23,7 +23,10 @@ type GetWarehouseListResponseDataWarehouseAddressGeolocation struct {
 	Latitude *string `json:"latitude,omitempty"`
 	// The longitude of the address.
 	Longitude *string `json:"longitude,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseListResponseDataWarehouseAddressGeolocation GetWarehouseListResponseDataWarehouseAddressGeolocation
 
 // NewGetWarehouseListResponseDataWarehouseAddressGeolocation instantiates a new GetWarehouseListResponseDataWarehouseAddressGeolocation object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetWarehouseListResponseDataWarehouseAddressGeolocation) ToMap() (map[st
 	if !IsNil(o.Longitude) {
 		toSerialize["longitude"] = o.Longitude
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseListResponseDataWarehouseAddressGeolocation) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseListResponseDataWarehouseAddressGeolocation := _GetWarehouseListResponseDataWarehouseAddressGeolocation{}
+
+	err = json.Unmarshal(data, &varGetWarehouseListResponseDataWarehouseAddressGeolocation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseListResponseDataWarehouseAddressGeolocation(varGetWarehouseListResponseDataWarehouseAddressGeolocation)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "latitude")
+		delete(additionalProperties, "longitude")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseListResponseDataWarehouseAddressGeolocation struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type GeneratePublisherSharingLinksInBatchRequest struct {
 	CampaignId *string `json:"campaign_id,omitempty"`
 	// Controls the `sharing_link` returned when `material.type` is `PRODUCT`. - Set to `TOKO` for a Tokopedia product URL. This option is for Tokopedia agencies. - Omit this field for a TikTok Shop product URL.
 	LinkType *string `json:"link_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GeneratePublisherSharingLinksInBatchRequest GeneratePublisherSharingLinksInBatchRequest
@@ -154,6 +154,11 @@ func (o GeneratePublisherSharingLinksInBatchRequest) ToMap() (map[string]interfa
 	if !IsNil(o.LinkType) {
 		toSerialize["link_type"] = o.LinkType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *GeneratePublisherSharingLinksInBatchRequest) UnmarshalJSON(data []byte)
 
 	varGeneratePublisherSharingLinksInBatchRequest := _GeneratePublisherSharingLinksInBatchRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGeneratePublisherSharingLinksInBatchRequest)
+	err = json.Unmarshal(data, &varGeneratePublisherSharingLinksInBatchRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GeneratePublisherSharingLinksInBatchRequest(varGeneratePublisherSharingLinksInBatchRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "material")
+		delete(additionalProperties, "campaign_id")
+		delete(additionalProperties, "link_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

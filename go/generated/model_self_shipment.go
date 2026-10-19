@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SelfShipment struct {
 	TrackingNumber string `json:"tracking_number"`
 	// For packages with the `SEND_BY_SELLER` delivery option type (seller shipping), you must provide the shipping provider information. Please use the [Get Shipping Providers](https://partner.tiktokshop.com/docv2/page/650aa48d4a0bb702c06d85cd?external_id=650aa48d4a0bb702c06d85cd#Back%20To%20Top) API to obtain the `shipping_provider_id`.
 	ShippingProviderId string `json:"shipping_provider_id"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SelfShipment SelfShipment
@@ -108,6 +108,11 @@ func (o SelfShipment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tracking_number"] = o.TrackingNumber
 	toSerialize["shipping_provider_id"] = o.ShippingProviderId
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SelfShipment) UnmarshalJSON(data []byte) (err error) {
 
 	varSelfShipment := _SelfShipment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSelfShipment)
+	err = json.Unmarshal(data, &varSelfShipment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SelfShipment(varSelfShipment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "shipping_provider_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

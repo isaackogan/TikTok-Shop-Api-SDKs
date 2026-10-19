@@ -27,7 +27,10 @@ type GetShopWebhooksResponseDataWebhook struct {
 	CreateTime *int64 `json:"create_time,omitempty"`
 	// The time when the webhook was last updated, represented as a Unix timestamp in milliseconds.
 	UpdateTime *int64 `json:"update_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopWebhooksResponseDataWebhook GetShopWebhooksResponseDataWebhook
 
 // NewGetShopWebhooksResponseDataWebhook instantiates a new GetShopWebhooksResponseDataWebhook object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopWebhooksResponseDataWebhook) ToMap() (map[string]interface{}, err
 	if !IsNil(o.UpdateTime) {
 		toSerialize["update_time"] = o.UpdateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopWebhooksResponseDataWebhook) UnmarshalJSON(data []byte) (err error) {
+	varGetShopWebhooksResponseDataWebhook := _GetShopWebhooksResponseDataWebhook{}
+
+	err = json.Unmarshal(data, &varGetShopWebhooksResponseDataWebhook)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopWebhooksResponseDataWebhook(varGetShopWebhooksResponseDataWebhook)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "event_type")
+		delete(additionalProperties, "address")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "update_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopWebhooksResponseDataWebhook struct {

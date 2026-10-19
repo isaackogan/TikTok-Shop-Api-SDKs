@@ -69,7 +69,10 @@ type ListOpportunitiesResponseDataDataOpportunity struct {
 	ExternalProductId *string `json:"external_product_id,omitempty"`
 	// The reference platform code, returned only when `external_product_id` is present. Possible values: - `1`: SHOPEE - `2`: AMAZON - `3`: LOOKFANTASTIC - `4`: WALMART - `5`: TTS - `6`: ASOS - `7`: UNIVERSAL_PRODUCT - `8`: DTCNEXUS - `9`: TEMU - `10`: SHOPIFY - `11`: NEXUS_SHOPIFY - `12`: SHEIN - `13`: PIXEL - `14`: SHOPIFY_NON_1P - `15`: MIRAVIA - `16`: RAKUTEN - `17`: EBAY - `18`: ONBUY - `19`: MERCADO_LIBRE - `20`: ALLEGRO - `21`: BOL - `22`: DTC
 	ReferenceSource *string `json:"reference_source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListOpportunitiesResponseDataDataOpportunity ListOpportunitiesResponseDataDataOpportunity
 
 // NewListOpportunitiesResponseDataDataOpportunity instantiates a new ListOpportunitiesResponseDataDataOpportunity object
 // This constructor will assign default values to properties that have it defined,
@@ -973,7 +976,57 @@ func (o ListOpportunitiesResponseDataDataOpportunity) ToMap() (map[string]interf
 	if !IsNil(o.ReferenceSource) {
 		toSerialize["reference_source"] = o.ReferenceSource
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListOpportunitiesResponseDataDataOpportunity) UnmarshalJSON(data []byte) (err error) {
+	varListOpportunitiesResponseDataDataOpportunity := _ListOpportunitiesResponseDataDataOpportunity{}
+
+	err = json.Unmarshal(data, &varListOpportunitiesResponseDataDataOpportunity)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListOpportunitiesResponseDataDataOpportunity(varListOpportunitiesResponseDataDataOpportunity)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "reference_images")
+		delete(additionalProperties, "category_id_level_1")
+		delete(additionalProperties, "category_id_level_2")
+		delete(additionalProperties, "category_id_level_3")
+		delete(additionalProperties, "category_name_level_1")
+		delete(additionalProperties, "category_name_level_2")
+		delete(additionalProperties, "category_name_level_3")
+		delete(additionalProperties, "is_collected")
+		delete(additionalProperties, "query_words")
+		delete(additionalProperties, "opportunity_type")
+		delete(additionalProperties, "brand_name")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "expire_time")
+		delete(additionalProperties, "est_market_sales_volume")
+		delete(additionalProperties, "est_market_gmv")
+		delete(additionalProperties, "search_volume")
+		delete(additionalProperties, "competitor_product_count")
+		delete(additionalProperties, "video_view_pv")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "tag_codes")
+		delete(additionalProperties, "reward_info")
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "reference_source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListOpportunitiesResponseDataDataOpportunity struct {

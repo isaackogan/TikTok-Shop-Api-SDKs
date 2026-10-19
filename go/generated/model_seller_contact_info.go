@@ -29,7 +29,10 @@ type SellerContactInfo struct {
 	Telegram *string `json:"telegram,omitempty"`
 	// The phone number used by the seller to register for the Line app.
 	Line *string `json:"line,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SellerContactInfo SellerContactInfo
 
 // NewSellerContactInfo instantiates a new SellerContactInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o SellerContactInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Line) {
 		toSerialize["line"] = o.Line
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SellerContactInfo) UnmarshalJSON(data []byte) (err error) {
+	varSellerContactInfo := _SellerContactInfo{}
+
+	err = json.Unmarshal(data, &varSellerContactInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SellerContactInfo(varSellerContactInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "whatsapp")
+		delete(additionalProperties, "telegram")
+		delete(additionalProperties, "line")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSellerContactInfo struct {

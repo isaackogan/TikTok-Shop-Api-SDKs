@@ -33,7 +33,10 @@ type GetWarehouseDeliveryOptionsResponseDataDeliveryOption struct {
 	WeightLimit *GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit `json:"weight_limit,omitempty"`
 	// The platform on which the delivery option is available Possible values: - TIKTOK_SHOP - TOKOPEDIA
 	Platform []string `json:"platform,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetWarehouseDeliveryOptionsResponseDataDeliveryOption GetWarehouseDeliveryOptionsResponseDataDeliveryOption
 
 // NewGetWarehouseDeliveryOptionsResponseDataDeliveryOption instantiates a new GetWarehouseDeliveryOptionsResponseDataDeliveryOption object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetWarehouseDeliveryOptionsResponseDataDeliveryOption) ToMap() (map[stri
 	if !IsNil(o.Platform) {
 		toSerialize["platform"] = o.Platform
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetWarehouseDeliveryOptionsResponseDataDeliveryOption) UnmarshalJSON(data []byte) (err error) {
+	varGetWarehouseDeliveryOptionsResponseDataDeliveryOption := _GetWarehouseDeliveryOptionsResponseDataDeliveryOption{}
+
+	err = json.Unmarshal(data, &varGetWarehouseDeliveryOptionsResponseDataDeliveryOption)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetWarehouseDeliveryOptionsResponseDataDeliveryOption(varGetWarehouseDeliveryOptionsResponseDataDeliveryOption)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "dimension_limit")
+		delete(additionalProperties, "weight_limit")
+		delete(additionalProperties, "platform")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetWarehouseDeliveryOptionsResponseDataDeliveryOption struct {

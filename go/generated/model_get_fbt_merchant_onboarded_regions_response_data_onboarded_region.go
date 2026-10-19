@@ -21,7 +21,10 @@ var _ MappedNullable = &GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegio
 type GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion struct {
 	// The country or region codes follow the two-character ISO 3166-1 alpha-2 format.
 	RegionCode *string `json:"region_code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion
 
 // NewGetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion instantiates a new GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion) ToMap() (map[
 	if !IsNil(o.RegionCode) {
 		toSerialize["region_code"] = o.RegionCode
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion := _GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion{}
+
+	err = json.Unmarshal(data, &varGetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion(varGetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region_code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTMerchantOnboardedRegionsResponseDataOnboardedRegion struct {

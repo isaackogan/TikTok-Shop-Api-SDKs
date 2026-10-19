@@ -37,7 +37,10 @@ type CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment struct {
 	Status *string `json:"status,omitempty"`
 	// The promotion status of the product associated with the fulfillment. Possible values: - UNKNOWN: The product's promotion status is unknown. - LIVE: The product is available for promotion. - OUT_OF_STOCK: The product is out of stock. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to promote the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
 	BoundProductStatus *string `json:"bound_product_status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment
 
 // NewCreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment instantiates a new CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment) ToMap
 	if !IsNil(o.BoundProductStatus) {
 		toSerialize["bound_product_status"] = o.BoundProductStatus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment) UnmarshalJSON(data []byte) (err error) {
+	varCreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment := _CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment{}
+
+	err = json.Unmarshal(data, &varCreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment(varCreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "application_id")
+		delete(additionalProperties, "sample_application_type")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "expiration_time")
+		delete(additionalProperties, "total_suspend_duration")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "bound_product_status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment struct {

@@ -29,7 +29,10 @@ type CancellationStatusChangeWebhookData struct {
 	CancelId *string `json:"cancel_id,omitempty"`
 	// The time when the buyer initiated the cancellation request, represented as a Unix timestamp (seconds).
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CancellationStatusChangeWebhookData CancellationStatusChangeWebhookData
 
 // NewCancellationStatusChangeWebhookData instantiates a new CancellationStatusChangeWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CancellationStatusChangeWebhookData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CancellationStatusChangeWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varCancellationStatusChangeWebhookData := _CancellationStatusChangeWebhookData{}
+
+	err = json.Unmarshal(data, &varCancellationStatusChangeWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CancellationStatusChangeWebhookData(varCancellationStatusChangeWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "cancellations_role")
+		delete(additionalProperties, "cancel_status")
+		delete(additionalProperties, "cancel_id")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCancellationStatusChangeWebhookData struct {

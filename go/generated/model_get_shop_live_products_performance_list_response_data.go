@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopLIVEProductsPerformanceListResponseData{}
 type GetShopLIVEProductsPerformanceListResponseData struct {
 	// List of products and their sales and traffic performance for the LIVE session.
 	Products []GetShopLIVEProductsPerformanceListResponseDataProduct `json:"products,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEProductsPerformanceListResponseData GetShopLIVEProductsPerformanceListResponseData
 
 // NewGetShopLIVEProductsPerformanceListResponseData instantiates a new GetShopLIVEProductsPerformanceListResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopLIVEProductsPerformanceListResponseData) ToMap() (map[string]inte
 	if !IsNil(o.Products) {
 		toSerialize["products"] = o.Products
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEProductsPerformanceListResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEProductsPerformanceListResponseData := _GetShopLIVEProductsPerformanceListResponseData{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEProductsPerformanceListResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEProductsPerformanceListResponseData(varGetShopLIVEProductsPerformanceListResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "products")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEProductsPerformanceListResponseData struct {

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -53,6 +52,7 @@ type ConfirmPackageShipmentRequestPackage struct {
 	ProviderWarehouseName *string `json:"provider_warehouse_name,omitempty"`
 	// TikTok warehouse type  Possible values: - STANDARD: Standard warehouse that has not been specifically certified by TikTok  - TIKTOK_CERTIFIED_WAREHOUSE_FULFILLMENT: TikTok certified warehouse usually offering better service levels. Certified warehouses are required to meet fulfillment timeline standards set by TikTok
 	TcwWarehouseType *string `json:"tcw_warehouse_type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ConfirmPackageShipmentRequestPackage ConfirmPackageShipmentRequestPackage
@@ -545,6 +545,11 @@ func (o ConfirmPackageShipmentRequestPackage) ToMap() (map[string]interface{}, e
 	if !IsNil(o.TcwWarehouseType) {
 		toSerialize["tcw_warehouse_type"] = o.TcwWarehouseType
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -582,15 +587,35 @@ func (o *ConfirmPackageShipmentRequestPackage) UnmarshalJSON(data []byte) (err e
 
 	varConfirmPackageShipmentRequestPackage := _ConfirmPackageShipmentRequestPackage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varConfirmPackageShipmentRequestPackage)
+	err = json.Unmarshal(data, &varConfirmPackageShipmentRequestPackage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ConfirmPackageShipmentRequestPackage(varConfirmPackageShipmentRequestPackage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "wms_order_id")
+		delete(additionalProperties, "provider_warehouse_code")
+		delete(additionalProperties, "shipping_origin_city")
+		delete(additionalProperties, "time_zone")
+		delete(additionalProperties, "ship_time_millis")
+		delete(additionalProperties, "create_time_millis")
+		delete(additionalProperties, "handover_time_millis")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "shipping_provider_name")
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "skus")
+		delete(additionalProperties, "provider_warehouse_name")
+		delete(additionalProperties, "tcw_warehouse_type")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

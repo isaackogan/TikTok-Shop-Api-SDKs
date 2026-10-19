@@ -25,7 +25,10 @@ type GetLogisticsTrackingResponseDataLogisticsDetail struct {
 	CarrierName *string `json:"carrier_name,omitempty"`
 	// A list of logistics tracking events for this parcel.
 	TrackList []GetLogisticsTrackingResponseDataLogisticsDetailTrackList `json:"track_list,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLogisticsTrackingResponseDataLogisticsDetail GetLogisticsTrackingResponseDataLogisticsDetail
 
 // NewGetLogisticsTrackingResponseDataLogisticsDetail instantiates a new GetLogisticsTrackingResponseDataLogisticsDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetLogisticsTrackingResponseDataLogisticsDetail) ToMap() (map[string]int
 	if !IsNil(o.TrackList) {
 		toSerialize["track_list"] = o.TrackList
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLogisticsTrackingResponseDataLogisticsDetail) UnmarshalJSON(data []byte) (err error) {
+	varGetLogisticsTrackingResponseDataLogisticsDetail := _GetLogisticsTrackingResponseDataLogisticsDetail{}
+
+	err = json.Unmarshal(data, &varGetLogisticsTrackingResponseDataLogisticsDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLogisticsTrackingResponseDataLogisticsDetail(varGetLogisticsTrackingResponseDataLogisticsDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "newest_tracking_no")
+		delete(additionalProperties, "carrier_name")
+		delete(additionalProperties, "track_list")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLogisticsTrackingResponseDataLogisticsDetail struct {

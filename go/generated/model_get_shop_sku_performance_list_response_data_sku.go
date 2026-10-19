@@ -29,7 +29,10 @@ type GetShopSKUPerformanceListResponseDataSku struct {
 	SkuOrders *int64 `json:"sku_orders,omitempty"`
 	// Number of units sold for a SKU
 	UnitsSold *int64 `json:"units_sold,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopSKUPerformanceListResponseDataSku GetShopSKUPerformanceListResponseDataSku
 
 // NewGetShopSKUPerformanceListResponseDataSku instantiates a new GetShopSKUPerformanceListResponseDataSku object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopSKUPerformanceListResponseDataSku) ToMap() (map[string]interface{
 	if !IsNil(o.UnitsSold) {
 		toSerialize["units_sold"] = o.UnitsSold
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopSKUPerformanceListResponseDataSku) UnmarshalJSON(data []byte) (err error) {
+	varGetShopSKUPerformanceListResponseDataSku := _GetShopSKUPerformanceListResponseDataSku{}
+
+	err = json.Unmarshal(data, &varGetShopSKUPerformanceListResponseDataSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopSKUPerformanceListResponseDataSku(varGetShopSKUPerformanceListResponseDataSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "sku_orders")
+		delete(additionalProperties, "units_sold")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopSKUPerformanceListResponseDataSku struct {

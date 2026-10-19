@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreateProductRequestSkuPrice struct {
 	SalePrice *string `json:"sale_price,omitempty"`
 	// starting bit price for auction product
 	StartingBidPrice *string `json:"starting_bid_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateProductRequestSkuPrice CreateProductRequestSkuPrice
@@ -191,6 +191,11 @@ func (o CreateProductRequestSkuPrice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.StartingBidPrice) {
 		toSerialize["starting_bid_price"] = o.StartingBidPrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -218,15 +223,23 @@ func (o *CreateProductRequestSkuPrice) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateProductRequestSkuPrice := _CreateProductRequestSkuPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateProductRequestSkuPrice)
+	err = json.Unmarshal(data, &varCreateProductRequestSkuPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateProductRequestSkuPrice(varCreateProductRequestSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "starting_bid_price")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type CreateSizeChartV2RequestSizeChartData struct {
 	Table CreateSizeChartV2RequestSizeChartDataTable `json:"table"`
 	// Possible values: METRIC: metric units; IMPERIAL: imperial units.
 	UnitSystem string `json:"unit_system"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSizeChartV2RequestSizeChartData CreateSizeChartV2RequestSizeChartData
@@ -247,6 +247,11 @@ func (o CreateSizeChartV2RequestSizeChartData) ToMap() (map[string]interface{}, 
 	}
 	toSerialize["table"] = o.Table
 	toSerialize["unit_system"] = o.UnitSystem
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -276,15 +281,25 @@ func (o *CreateSizeChartV2RequestSizeChartData) UnmarshalJSON(data []byte) (err 
 
 	varCreateSizeChartV2RequestSizeChartData := _CreateSizeChartV2RequestSizeChartData{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSizeChartV2RequestSizeChartData)
+	err = json.Unmarshal(data, &varCreateSizeChartV2RequestSizeChartData)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSizeChartV2RequestSizeChartData(varCreateSizeChartV2RequestSizeChartData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "is_one_size")
+		delete(additionalProperties, "measurement_type")
+		delete(additionalProperties, "size_types")
+		delete(additionalProperties, "table")
+		delete(additionalProperties, "unit_system")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

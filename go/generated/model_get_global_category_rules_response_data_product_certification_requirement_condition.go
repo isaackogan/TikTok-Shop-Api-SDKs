@@ -27,7 +27,10 @@ type GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition 
 	AttributeId *string `json:"attribute_id,omitempty"`
 	// The ID of the product attribute value that must match the seller's input for the condition to be true.
 	AttributeValueId *string `json:"attribute_value_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition
 
 // NewGetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition instantiates a new GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditi
 	if !IsNil(o.AttributeValueId) {
 		toSerialize["attribute_value_id"] = o.AttributeValueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition := _GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition{}
+
+	err = json.Unmarshal(data, &varGetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition(varGetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "condition_type")
+		delete(additionalProperties, "attribute_id")
+		delete(additionalProperties, "attribute_value_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition struct {

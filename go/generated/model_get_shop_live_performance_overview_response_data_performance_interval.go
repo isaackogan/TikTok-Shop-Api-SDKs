@@ -51,7 +51,10 @@ type GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval struct {
 	StartDate *string `json:"start_date,omitempty"`
 	// Number of LIVE views.
 	Views *int64 `json:"views,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval
 
 // NewGetShopLIVEPerformanceOverviewResponseDataPerformanceInterval instantiates a new GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval) ToMap() (
 	if !IsNil(o.Views) {
 		toSerialize["views"] = o.Views
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEPerformanceOverviewResponseDataPerformanceInterval := _GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEPerformanceOverviewResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval(varGetShopLIVEPerformanceOverviewResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_live_auction_price")
+		delete(additionalProperties, "avg_viewing_duration")
+		delete(additionalProperties, "ctor_sku_order")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "live_attributed_gmv")
+		delete(additionalProperties, "live_attributed_items_sold")
+		delete(additionalProperties, "live_attributed_sku_orders")
+		delete(additionalProperties, "live_auction_attributed_gmv")
+		delete(additionalProperties, "live_auction_attributed_items_sold")
+		delete(additionalProperties, "live_auction_attributed_sku_orders")
+		delete(additionalProperties, "live_ctr")
+		delete(additionalProperties, "live_gmv")
+		delete(additionalProperties, "live_indirect_gmv")
+		delete(additionalProperties, "show_gpm")
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "views")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEPerformanceOverviewResponseDataPerformanceInterval struct {

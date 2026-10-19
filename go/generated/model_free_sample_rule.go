@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type FreeSampleRule struct {
 	HasFreeSample bool `json:"has_free_sample"`
 	// If set to `true`, creators invited to the target collaboration are exempt from seller review and are automatically approved for a free  product sample. Note that the `has_free_sample` property overrides the free sample behavior.
 	IsSampleApprovalExempt bool `json:"is_sample_approval_exempt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FreeSampleRule FreeSampleRule
@@ -108,6 +108,11 @@ func (o FreeSampleRule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["has_free_sample"] = o.HasFreeSample
 	toSerialize["is_sample_approval_exempt"] = o.IsSampleApprovalExempt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *FreeSampleRule) UnmarshalJSON(data []byte) (err error) {
 
 	varFreeSampleRule := _FreeSampleRule{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFreeSampleRule)
+	err = json.Unmarshal(data, &varFreeSampleRule)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FreeSampleRule(varFreeSampleRule)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "has_free_sample")
+		delete(additionalProperties, "is_sample_approval_exempt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

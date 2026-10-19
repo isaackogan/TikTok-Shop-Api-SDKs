@@ -27,7 +27,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformanceInterval struct {
 	Sales *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale `json:"sales,omitempty"`
 	// Traffic performance of the video.
 	Traffic *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic `json:"traffic,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformanceInterval GetShopVideoPerformanceDetailsResponseDataPerformanceInterval
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformanceInterval instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformanceInterval object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformanceInterval) ToMap() (
 	if !IsNil(o.Traffic) {
 		toSerialize["traffic"] = o.Traffic
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformanceInterval) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformanceInterval := _GetShopVideoPerformanceDetailsResponseDataPerformanceInterval{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformanceInterval)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformanceInterval(varGetShopVideoPerformanceDetailsResponseDataPerformanceInterval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "start_date")
+		delete(additionalProperties, "end_date")
+		delete(additionalProperties, "sales")
+		delete(additionalProperties, "traffic")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformanceInterval struct {

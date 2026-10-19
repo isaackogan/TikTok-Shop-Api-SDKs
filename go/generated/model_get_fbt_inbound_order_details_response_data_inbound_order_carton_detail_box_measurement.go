@@ -31,7 +31,10 @@ type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement
 	Length *string `json:"length,omitempty"`
 	// The unit used for the carton's `length`, `width`, and `height` values.  **Possible values:** * `METER` (m) * `CENTIMETER` (cm) * `MILLIMETER` (mm) * `FOOT` (ft) * `MICRON` (μm) * `INCH` (in)
 	LengthUnit *string `json:"length_unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement
 
 // NewGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement instantiates a new GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurem
 	if !IsNil(o.LengthUnit) {
 		toSerialize["length_unit"] = o.LengthUnit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement) UnmarshalJSON(data []byte) (err error) {
+	varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement := _GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement{}
+
+	err = json.Unmarshal(data, &varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement(varGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "weight_unit")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "length_unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement struct {

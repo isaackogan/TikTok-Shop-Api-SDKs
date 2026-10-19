@@ -47,7 +47,10 @@ type GetTransactionsByStatementResponseDataTransactionSupplementaryComponent str
 	SalesTaxPaymentAmount *string `json:"sales_tax_payment_amount,omitempty"`
 	// The sales tax amount returned to the customer in the event of a refund.
 	SalesTaxRefundAmount *string `json:"sales_tax_refund_amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetTransactionsByStatementResponseDataTransactionSupplementaryComponent GetTransactionsByStatementResponseDataTransactionSupplementaryComponent
 
 // NewGetTransactionsByStatementResponseDataTransactionSupplementaryComponent instantiates a new GetTransactionsByStatementResponseDataTransactionSupplementaryComponent object
 // This constructor will assign default values to properties that have it defined,
@@ -566,7 +569,46 @@ func (o GetTransactionsByStatementResponseDataTransactionSupplementaryComponent)
 	if !IsNil(o.SalesTaxRefundAmount) {
 		toSerialize["sales_tax_refund_amount"] = o.SalesTaxRefundAmount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetTransactionsByStatementResponseDataTransactionSupplementaryComponent) UnmarshalJSON(data []byte) (err error) {
+	varGetTransactionsByStatementResponseDataTransactionSupplementaryComponent := _GetTransactionsByStatementResponseDataTransactionSupplementaryComponent{}
+
+	err = json.Unmarshal(data, &varGetTransactionsByStatementResponseDataTransactionSupplementaryComponent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetTransactionsByStatementResponseDataTransactionSupplementaryComponent(varGetTransactionsByStatementResponseDataTransactionSupplementaryComponent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customer_payment_amount")
+		delete(additionalProperties, "customer_refund_amount")
+		delete(additionalProperties, "platform_discount_amount")
+		delete(additionalProperties, "platform_discount_refund_amount")
+		delete(additionalProperties, "seller_cofunded_discount_amount")
+		delete(additionalProperties, "seller_cofunded_discount_refund_amount")
+		delete(additionalProperties, "platform_cofunded_discount_amount")
+		delete(additionalProperties, "platform_cofunded_discount_refund_amount")
+		delete(additionalProperties, "retail_delivery_fee_amount")
+		delete(additionalProperties, "retail_delivery_fee_payment_amount")
+		delete(additionalProperties, "retail_delivery_fee_refund_amount")
+		delete(additionalProperties, "sales_tax_amount")
+		delete(additionalProperties, "sales_tax_payment_amount")
+		delete(additionalProperties, "sales_tax_refund_amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetTransactionsByStatementResponseDataTransactionSupplementaryComponent struct {

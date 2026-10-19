@@ -26,7 +26,10 @@ type GetInboundMethodDetailResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetInboundMethodDetailResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponse GetInboundMethodDetailResponse
 
 // NewGetInboundMethodDetailResponse instantiates a new GetInboundMethodDetailResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetInboundMethodDetailResponse) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponse := _GetInboundMethodDetailResponse{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponse(varGetInboundMethodDetailResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponse struct {

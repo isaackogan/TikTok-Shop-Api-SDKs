@@ -29,7 +29,10 @@ type CreatePackagesResponseData struct {
 	Weight *Weight `json:"weight,omitempty"`
 	// The time when the product was created. Unix timestamp.
 	CreateTime *int64 `json:"create_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreatePackagesResponseData CreatePackagesResponseData
 
 // NewCreatePackagesResponseData instantiates a new CreatePackagesResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o CreatePackagesResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CreateTime) {
 		toSerialize["create_time"] = o.CreateTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreatePackagesResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreatePackagesResponseData := _CreatePackagesResponseData{}
+
+	err = json.Unmarshal(data, &varCreatePackagesResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreatePackagesResponseData(varCreatePackagesResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "dimension")
+		delete(additionalProperties, "shipping_service_info")
+		delete(additionalProperties, "package_id")
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "create_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreatePackagesResponseData struct {

@@ -25,7 +25,10 @@ type ShippingInfoList struct {
 	ShippingProviderId *string `json:"shipping_provider_id,omitempty"`
 	// \"Only available for a part of white list merchants.This applies to scenarios where a large single item needs to be shipped in multiple packages.Merchants not on the whitelist who upload this field will have it automatically ignored by the platform. For example, where Package 1 is marked with \"\"headboard\"\" and Package 2 is marked with \"\"bed frame\"\". This field will be displayed to buyers, so please fill it in carefully.\"
 	Note *string `json:"note,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ShippingInfoList ShippingInfoList
 
 // NewShippingInfoList instantiates a new ShippingInfoList object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o ShippingInfoList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Note) {
 		toSerialize["note"] = o.Note
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ShippingInfoList) UnmarshalJSON(data []byte) (err error) {
+	varShippingInfoList := _ShippingInfoList{}
+
+	err = json.Unmarshal(data, &varShippingInfoList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ShippingInfoList(varShippingInfoList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tracking_number")
+		delete(additionalProperties, "shipping_provider_id")
+		delete(additionalProperties, "note")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableShippingInfoList struct {

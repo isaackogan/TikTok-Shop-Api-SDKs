@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &MainImage{}
 type MainImage struct {
 	// The URI of the image.  Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with `use_case=MAIN_IMAGE`. You can use the returned URI directly, or process it through the [Optimize Images API](665692b35d39dc02deb49a97) first and use the resulting URI.
 	Uri string `json:"uri"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _MainImage MainImage
@@ -80,6 +80,11 @@ func (o MainImage) MarshalJSON() ([]byte, error) {
 func (o MainImage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["uri"] = o.Uri
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *MainImage) UnmarshalJSON(data []byte) (err error) {
 
 	varMainImage := _MainImage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varMainImage)
+	err = json.Unmarshal(data, &varMainImage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = MainImage(varMainImage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "uri")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

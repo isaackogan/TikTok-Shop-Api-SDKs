@@ -29,7 +29,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale struct {
 	SkuOrders *int64 `json:"sku_orders,omitempty"`
 	// Total number of paid main orders placed. Main orders refer to the single purchase transaction a customer makes.
 	MainOrders *int64 `json:"main_orders,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale) ToMap()
 	if !IsNil(o.MainOrders) {
 		toSerialize["main_orders"] = o.MainOrders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale := _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale(varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "items_sold")
+		delete(additionalProperties, "customers")
+		delete(additionalProperties, "sku_orders")
+		delete(additionalProperties, "main_orders")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale struct {

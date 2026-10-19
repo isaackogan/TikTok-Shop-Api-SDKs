@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShopVideoPerformanceOverviewResponseDataPerformance{}
 type GetShopVideoPerformanceOverviewResponseDataPerformance struct {
 	// Interval data for the requested time range. The time range of each interval is determined by the granularity.
 	Intervals []GetShopVideoPerformanceOverviewResponseDataPerformanceInterval `json:"intervals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceOverviewResponseDataPerformance GetShopVideoPerformanceOverviewResponseDataPerformance
 
 // NewGetShopVideoPerformanceOverviewResponseDataPerformance instantiates a new GetShopVideoPerformanceOverviewResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShopVideoPerformanceOverviewResponseDataPerformance) ToMap() (map[str
 	if !IsNil(o.Intervals) {
 		toSerialize["intervals"] = o.Intervals
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceOverviewResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceOverviewResponseDataPerformance := _GetShopVideoPerformanceOverviewResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceOverviewResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceOverviewResponseDataPerformance(varGetShopVideoPerformanceOverviewResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "intervals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceOverviewResponseDataPerformance struct {

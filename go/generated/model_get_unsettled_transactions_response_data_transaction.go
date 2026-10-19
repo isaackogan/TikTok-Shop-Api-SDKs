@@ -57,7 +57,10 @@ type GetUnsettledTransactionsResponseDataTransaction struct {
 	EstFeeTaxAmount *string `json:"est_fee_tax_amount,omitempty"`
 	// The fee and tax amounts that directly contribute to `est_fee_tax_amount`.
 	FeeTaxBreakdown *GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown `json:"fee_tax_breakdown,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetUnsettledTransactionsResponseDataTransaction GetUnsettledTransactionsResponseDataTransaction
 
 // NewGetUnsettledTransactionsResponseDataTransaction instantiates a new GetUnsettledTransactionsResponseDataTransaction object
 // This constructor will assign default values to properties that have it defined,
@@ -751,7 +754,51 @@ func (o GetUnsettledTransactionsResponseDataTransaction) ToMap() (map[string]int
 	if !IsNil(o.FeeTaxBreakdown) {
 		toSerialize["fee_tax_breakdown"] = o.FeeTaxBreakdown
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetUnsettledTransactionsResponseDataTransaction) UnmarshalJSON(data []byte) (err error) {
+	varGetUnsettledTransactionsResponseDataTransaction := _GetUnsettledTransactionsResponseDataTransaction{}
+
+	err = json.Unmarshal(data, &varGetUnsettledTransactionsResponseDataTransaction)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetUnsettledTransactionsResponseDataTransaction(varGetUnsettledTransactionsResponseDataTransaction)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "estimated_settlement")
+		delete(additionalProperties, "unsettled_reason")
+		delete(additionalProperties, "order_create_time")
+		delete(additionalProperties, "order_delivery_time")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "adjustment_id")
+		delete(additionalProperties, "adjustment_order_id")
+		delete(additionalProperties, "est_adjustment_amount")
+		delete(additionalProperties, "est_settlement_amount")
+		delete(additionalProperties, "est_revenue_amount")
+		delete(additionalProperties, "revenue_breakdown")
+		delete(additionalProperties, "est_shipping_cost_amount")
+		delete(additionalProperties, "shipping_cost_breakdown")
+		delete(additionalProperties, "est_fee_tax_amount")
+		delete(additionalProperties, "fee_tax_breakdown")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetUnsettledTransactionsResponseDataTransaction struct {

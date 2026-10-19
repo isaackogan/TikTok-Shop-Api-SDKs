@@ -51,7 +51,10 @@ type SearchCreatorsInCreatorMarketplaceResponseDataCreator struct {
 	CreatorOpenId *string `json:"creator_open_id,omitempty"`
 	// Advanced creator profile information. An empty object means that this profile information is not currently supported for your account or region.
 	CreatorProfile *SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile `json:"creator_profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorsInCreatorMarketplaceResponseDataCreator SearchCreatorsInCreatorMarketplaceResponseDataCreator
 
 // NewSearchCreatorsInCreatorMarketplaceResponseDataCreator instantiates a new SearchCreatorsInCreatorMarketplaceResponseDataCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -640,7 +643,48 @@ func (o SearchCreatorsInCreatorMarketplaceResponseDataCreator) ToMap() (map[stri
 	if !IsNil(o.CreatorProfile) {
 		toSerialize["creator_profile"] = o.CreatorProfile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorsInCreatorMarketplaceResponseDataCreator) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorsInCreatorMarketplaceResponseDataCreator := _SearchCreatorsInCreatorMarketplaceResponseDataCreator{}
+
+	err = json.Unmarshal(data, &varSearchCreatorsInCreatorMarketplaceResponseDataCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorsInCreatorMarketplaceResponseDataCreator(varSearchCreatorsInCreatorMarketplaceResponseDataCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "nickname")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "selection_region")
+		delete(additionalProperties, "category_ids")
+		delete(additionalProperties, "avg_ec_live_uv")
+		delete(additionalProperties, "avg_ec_video_view_count")
+		delete(additionalProperties, "follower_count")
+		delete(additionalProperties, "gmv")
+		delete(additionalProperties, "live_gmv")
+		delete(additionalProperties, "video_gmv")
+		delete(additionalProperties, "gmv_range")
+		delete(additionalProperties, "units_sold_range")
+		delete(additionalProperties, "top_follower_demographics")
+		delete(additionalProperties, "creator_open_id")
+		delete(additionalProperties, "creator_profile")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorsInCreatorMarketplaceResponseDataCreator struct {

@@ -27,7 +27,10 @@ type ReplicateProductRequestReplicateTargetSku struct {
 	SourceSkuId *string `json:"source_sku_id,omitempty"`
 	// An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces
 	SellerSku *string `json:"seller_sku,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ReplicateProductRequestReplicateTargetSku ReplicateProductRequestReplicateTargetSku
 
 // NewReplicateProductRequestReplicateTargetSku instantiates a new ReplicateProductRequestReplicateTargetSku object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ReplicateProductRequestReplicateTargetSku) ToMap() (map[string]interface
 	if !IsNil(o.SellerSku) {
 		toSerialize["seller_sku"] = o.SellerSku
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ReplicateProductRequestReplicateTargetSku) UnmarshalJSON(data []byte) (err error) {
+	varReplicateProductRequestReplicateTargetSku := _ReplicateProductRequestReplicateTargetSku{}
+
+	err = json.Unmarshal(data, &varReplicateProductRequestReplicateTargetSku)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReplicateProductRequestReplicateTargetSku(varReplicateProductRequestReplicateTargetSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "source_sku_id")
+		delete(additionalProperties, "seller_sku")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableReplicateProductRequestReplicateTargetSku struct {

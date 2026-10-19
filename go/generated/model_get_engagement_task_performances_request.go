@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &GetEngagementTaskPerformancesRequest{}
 type GetEngagementTaskPerformancesRequest struct {
 	// The customer engagement task IDs for which to retrieve performance data. Provide 1 to 50 IDs; each ID must be a base-10 string that fits in a signed 64-bit integer.
 	TaskIds []string `json:"task_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetEngagementTaskPerformancesRequest GetEngagementTaskPerformancesRequest
@@ -80,6 +80,11 @@ func (o GetEngagementTaskPerformancesRequest) MarshalJSON() ([]byte, error) {
 func (o GetEngagementTaskPerformancesRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["task_ids"] = o.TaskIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *GetEngagementTaskPerformancesRequest) UnmarshalJSON(data []byte) (err e
 
 	varGetEngagementTaskPerformancesRequest := _GetEngagementTaskPerformancesRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetEngagementTaskPerformancesRequest)
+	err = json.Unmarshal(data, &varGetEngagementTaskPerformancesRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetEngagementTaskPerformancesRequest(varGetEngagementTaskPerformancesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

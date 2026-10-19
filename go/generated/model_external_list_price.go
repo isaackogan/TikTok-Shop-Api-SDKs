@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ExternalListPrice struct {
 	Amount string `json:"amount"`
 	// The currency. Possible values: USD
 	Currency string `json:"currency"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ExternalListPrice ExternalListPrice
@@ -136,6 +136,11 @@ func (o ExternalListPrice) ToMap() (map[string]interface{}, error) {
 	toSerialize["source"] = o.Source
 	toSerialize["amount"] = o.Amount
 	toSerialize["currency"] = o.Currency
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *ExternalListPrice) UnmarshalJSON(data []byte) (err error) {
 
 	varExternalListPrice := _ExternalListPrice{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varExternalListPrice)
+	err = json.Unmarshal(data, &varExternalListPrice)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ExternalListPrice(varExternalListPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

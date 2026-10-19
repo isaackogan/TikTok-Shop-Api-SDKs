@@ -23,7 +23,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformance struct {
 	Intervals []GetShopVideoPerformanceDetailsResponseDataPerformanceInterval `json:"intervals,omitempty"`
 	// Viewer profile of the video
 	ViewerProfile []GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile `json:"viewer_profile,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformance GetShopVideoPerformanceDetailsResponseDataPerformance
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformance instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformance) ToMap() (map[stri
 	if !IsNil(o.ViewerProfile) {
 		toSerialize["viewer_profile"] = o.ViewerProfile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformance := _GetShopVideoPerformanceDetailsResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformance(varGetShopVideoPerformanceDetailsResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "intervals")
+		delete(additionalProperties, "viewer_profile")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformance struct {

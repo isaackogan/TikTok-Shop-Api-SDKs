@@ -27,7 +27,10 @@ type Dimension struct {
 	Height *string `json:"height,omitempty"`
 	// The unit of measurement for the package dimensions.  Available values: - `CM` - `INCH`
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Dimension Dimension
 
 // NewDimension instantiates a new Dimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o Dimension) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Dimension) UnmarshalJSON(data []byte) (err error) {
+	varDimension := _Dimension{}
+
+	err = json.Unmarshal(data, &varDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Dimension(varDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableDimension struct {

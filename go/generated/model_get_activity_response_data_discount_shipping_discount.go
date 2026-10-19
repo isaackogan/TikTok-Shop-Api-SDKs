@@ -33,7 +33,10 @@ type GetActivityResponseDataDiscountShippingDiscount struct {
 	InventoryType *string `json:"inventory_type,omitempty"`
 	// The (buyer's) geographical areas to which the promotion activity applies.
 	AreaScope *GetActivityResponseDataDiscountShippingDiscountAreaScope `json:"area_scope,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountShippingDiscount GetActivityResponseDataDiscountShippingDiscount
 
 // NewGetActivityResponseDataDiscountShippingDiscount instantiates a new GetActivityResponseDataDiscountShippingDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetActivityResponseDataDiscountShippingDiscount) ToMap() (map[string]int
 	if !IsNil(o.AreaScope) {
 		toSerialize["area_scope"] = o.AreaScope
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountShippingDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountShippingDiscount := _GetActivityResponseDataDiscountShippingDiscount{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountShippingDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountShippingDiscount(varGetActivityResponseDataDiscountShippingDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "threshold_type")
+		delete(additionalProperties, "threshold_value")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "shipping_method")
+		delete(additionalProperties, "inventory_type")
+		delete(additionalProperties, "area_scope")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountShippingDiscount struct {

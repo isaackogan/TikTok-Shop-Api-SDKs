@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateOpenCollaborationResponseData{}
 type CreateOpenCollaborationResponseData struct {
 	// The open collaboration.
 	OpenCollaboration *CreateOpenCollaborationResponseDataOpenCollaboration `json:"open_collaboration,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateOpenCollaborationResponseData CreateOpenCollaborationResponseData
 
 // NewCreateOpenCollaborationResponseData instantiates a new CreateOpenCollaborationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateOpenCollaborationResponseData) ToMap() (map[string]interface{}, er
 	if !IsNil(o.OpenCollaboration) {
 		toSerialize["open_collaboration"] = o.OpenCollaboration
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateOpenCollaborationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateOpenCollaborationResponseData := _CreateOpenCollaborationResponseData{}
+
+	err = json.Unmarshal(data, &varCreateOpenCollaborationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateOpenCollaborationResponseData(varCreateOpenCollaborationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "open_collaboration")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateOpenCollaborationResponseData struct {

@@ -23,7 +23,10 @@ type OrderLineList struct {
 	OrderLineItemId *string `json:"order_line_item_id,omitempty"`
 	// The sub-order-line ID inside a bundle product - Required for bundle products - Not required for non-bundle products
 	SubOrderLineItemId *string `json:"sub_order_line_item_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _OrderLineList OrderLineList
 
 // NewOrderLineList instantiates a new OrderLineList object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o OrderLineList) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.SubOrderLineItemId) {
 		toSerialize["sub_order_line_item_id"] = o.SubOrderLineItemId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *OrderLineList) UnmarshalJSON(data []byte) (err error) {
+	varOrderLineList := _OrderLineList{}
+
+	err = json.Unmarshal(data, &varOrderLineList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrderLineList(varOrderLineList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_item_id")
+		delete(additionalProperties, "sub_order_line_item_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableOrderLineList struct {

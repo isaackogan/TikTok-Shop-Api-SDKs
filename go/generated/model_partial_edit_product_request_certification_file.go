@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type PartialEditProductRequestCertificationFile struct {
 	Name string `json:"name"`
 	// The format of the certification file. Only PDF is supported.
 	Format string `json:"format"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PartialEditProductRequestCertificationFile PartialEditProductRequestCertificationFile
@@ -136,6 +136,11 @@ func (o PartialEditProductRequestCertificationFile) ToMap() (map[string]interfac
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["format"] = o.Format
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +170,22 @@ func (o *PartialEditProductRequestCertificationFile) UnmarshalJSON(data []byte) 
 
 	varPartialEditProductRequestCertificationFile := _PartialEditProductRequestCertificationFile{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPartialEditProductRequestCertificationFile)
+	err = json.Unmarshal(data, &varPartialEditProductRequestCertificationFile)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PartialEditProductRequestCertificationFile(varPartialEditProductRequestCertificationFile)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "format")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

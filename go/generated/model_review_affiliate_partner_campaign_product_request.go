@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReviewAffiliatePartnerCampaignProductRequest struct {
 	ReviewResult string `json:"review_result"`
 	// Rejection reasons for the product when `review_result` is `REJECT` or `REJECT_FOREVER`. Possible values for each item: - COMMISSION_TOO_LOW - PRODUCT_HARD_TO_PROMOTE - PRODUCT_TOO_EXPENSIVE - NO_SUITABLE_CREATOR
 	RejectReasons []string `json:"reject_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviewAffiliatePartnerCampaignProductRequest ReviewAffiliatePartnerCampaignProductRequest
@@ -117,6 +117,11 @@ func (o ReviewAffiliatePartnerCampaignProductRequest) ToMap() (map[string]interf
 	if !IsNil(o.RejectReasons) {
 		toSerialize["reject_reasons"] = o.RejectReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -144,15 +149,21 @@ func (o *ReviewAffiliatePartnerCampaignProductRequest) UnmarshalJSON(data []byte
 
 	varReviewAffiliatePartnerCampaignProductRequest := _ReviewAffiliatePartnerCampaignProductRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviewAffiliatePartnerCampaignProductRequest)
+	err = json.Unmarshal(data, &varReviewAffiliatePartnerCampaignProductRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviewAffiliatePartnerCampaignProductRequest(varReviewAffiliatePartnerCampaignProductRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "review_result")
+		delete(additionalProperties, "reject_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

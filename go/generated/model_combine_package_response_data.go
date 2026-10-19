@@ -23,7 +23,10 @@ type CombinePackageResponseData struct {
 	Packages []Package `json:"packages,omitempty"`
 	// The errors returned for packages that could not be combined.
 	Errors []BatchShipPackagesResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CombinePackageResponseData CombinePackageResponseData
 
 // NewCombinePackageResponseData instantiates a new CombinePackageResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o CombinePackageResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CombinePackageResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCombinePackageResponseData := _CombinePackageResponseData{}
+
+	err = json.Unmarshal(data, &varCombinePackageResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CombinePackageResponseData(varCombinePackageResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "packages")
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCombinePackageResponseData struct {

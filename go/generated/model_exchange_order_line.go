@@ -33,7 +33,10 @@ type ExchangeOrderLine struct {
 	ProductImage *ProductImage `json:"product_image,omitempty"`
 	// Ignore this field. It is not yet supported.
 	PriceDetail *PriceDetail `json:"price_detail,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ExchangeOrderLine ExchangeOrderLine
 
 // NewExchangeOrderLine instantiates a new ExchangeOrderLine object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o ExchangeOrderLine) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PriceDetail) {
 		toSerialize["price_detail"] = o.PriceDetail
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ExchangeOrderLine) UnmarshalJSON(data []byte) (err error) {
+	varExchangeOrderLine := _ExchangeOrderLine{}
+
+	err = json.Unmarshal(data, &varExchangeOrderLine)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ExchangeOrderLine(varExchangeOrderLine)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "sku_name")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "seller_sku_name")
+		delete(additionalProperties, "product_image")
+		delete(additionalProperties, "price_detail")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableExchangeOrderLine struct {

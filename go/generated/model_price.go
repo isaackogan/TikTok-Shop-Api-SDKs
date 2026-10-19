@@ -23,7 +23,10 @@ type Price struct {
 	Amount *string `json:"amount,omitempty"`
 	// The price currency code.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Price Price
 
 // NewPrice instantiates a new Price object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Price) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Price) UnmarshalJSON(data []byte) (err error) {
+	varPrice := _Price{}
+
+	err = json.Unmarshal(data, &varPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Price(varPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePrice struct {

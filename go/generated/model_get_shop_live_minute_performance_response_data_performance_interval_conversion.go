@@ -29,7 +29,10 @@ type GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion struc
 	CreatedSkuOrders *int64 `json:"created_sku_orders,omitempty"`
 	// Number of SKU orders from the LIVE divided by the impressions of the LIVE
 	SkuOrderRate *string `json:"sku_order_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion
 
 // NewGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion instantiates a new GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion) T
 	if !IsNil(o.SkuOrderRate) {
 		toSerialize["sku_order_rate"] = o.SkuOrderRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion) UnmarshalJSON(data []byte) (err error) {
+	varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion := _GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion{}
+
+	err = json.Unmarshal(data, &varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion(varGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "avg_price")
+		delete(additionalProperties, "click_to_order_rate")
+		delete(additionalProperties, "gpm")
+		delete(additionalProperties, "created_sku_orders")
+		delete(additionalProperties, "sku_order_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopLIVEMinutePerformanceResponseDataPerformanceIntervalConversion struct {

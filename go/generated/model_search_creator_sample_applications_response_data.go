@@ -23,7 +23,10 @@ type SearchCreatorSampleApplicationsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The sample application information.
 	SampleApplications []SearchCreatorSampleApplicationsResponseDataSampleApplication `json:"sample_applications,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorSampleApplicationsResponseData SearchCreatorSampleApplicationsResponseData
 
 // NewSearchCreatorSampleApplicationsResponseData instantiates a new SearchCreatorSampleApplicationsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchCreatorSampleApplicationsResponseData) ToMap() (map[string]interfa
 	if !IsNil(o.SampleApplications) {
 		toSerialize["sample_applications"] = o.SampleApplications
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorSampleApplicationsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorSampleApplicationsResponseData := _SearchCreatorSampleApplicationsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchCreatorSampleApplicationsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorSampleApplicationsResponseData(varSearchCreatorSampleApplicationsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "sample_applications")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorSampleApplicationsResponseData struct {

@@ -23,7 +23,10 @@ type GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate struct {
 	Amount *string `json:"amount,omitempty"`
 	// The currency of the placement fee amount.  **Possible values:** * `USD` * `CNY` * `EUR` * `GBP` * `SAR`
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate
 
 // NewGetInboundMethodDetailResponseDataInfoPlacementFeeEstimate instantiates a new GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate) ToMap() (map
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate) UnmarshalJSON(data []byte) (err error) {
+	varGetInboundMethodDetailResponseDataInfoPlacementFeeEstimate := _GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate{}
+
+	err = json.Unmarshal(data, &varGetInboundMethodDetailResponseDataInfoPlacementFeeEstimate)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate(varGetInboundMethodDetailResponseDataInfoPlacementFeeEstimate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetInboundMethodDetailResponseDataInfoPlacementFeeEstimate struct {

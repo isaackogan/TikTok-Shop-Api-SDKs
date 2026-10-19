@@ -23,7 +23,10 @@ type SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace struct {
 	Id *string `json:"id,omitempty"`
 	// For the orders coming from the sharing links for specific publishers, the value is `SPECIFIC`; for the orders coming from the general sharing links, the value is `GENERAL`.
 	Type *string `json:"type,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace
 
 // NewSearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace instantiates a new SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace) ToMap() (map[st
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace) UnmarshalJSON(data []byte) (err error) {
+	varSearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace := _SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace{}
+
+	err = json.Unmarshal(data, &varSearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace(varSearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace struct {

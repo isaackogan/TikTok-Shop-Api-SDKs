@@ -23,7 +23,10 @@ type InventorySearchResponseDataInventory struct {
 	ProductId *string `json:"product_id,omitempty"`
 	// The list of requested SKUs.
 	Skus []InventorySearchResponseDataInventorySku `json:"skus,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventory InventorySearchResponseDataInventory
 
 // NewInventorySearchResponseDataInventory instantiates a new InventorySearchResponseDataInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o InventorySearchResponseDataInventory) ToMap() (map[string]interface{}, e
 	if !IsNil(o.Skus) {
 		toSerialize["skus"] = o.Skus
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventory) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventory := _InventorySearchResponseDataInventory{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventory(varInventorySearchResponseDataInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventory struct {

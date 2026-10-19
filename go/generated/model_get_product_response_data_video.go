@@ -33,7 +33,10 @@ type GetProductResponseDataVideo struct {
 	Url *string `json:"url,omitempty"`
 	// The video width. Unit: px
 	Width *int64 `json:"width,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataVideo GetProductResponseDataVideo
 
 // NewGetProductResponseDataVideo instantiates a new GetProductResponseDataVideo object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetProductResponseDataVideo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Width) {
 		toSerialize["width"] = o.Width
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataVideo) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataVideo := _GetProductResponseDataVideo{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataVideo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataVideo(varGetProductResponseDataVideo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cover_url")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "size")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "width")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataVideo struct {

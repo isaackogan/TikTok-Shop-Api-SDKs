@@ -21,7 +21,10 @@ var _ MappedNullable = &UploadShoppablePhotoFileResponseData{}
 type UploadShoppablePhotoFileResponseData struct {
 	// Photo Info
 	PhotoFile *UploadShoppablePhotoFileResponseDataPhotoFile `json:"photo_file,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadShoppablePhotoFileResponseData UploadShoppablePhotoFileResponseData
 
 // NewUploadShoppablePhotoFileResponseData instantiates a new UploadShoppablePhotoFileResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UploadShoppablePhotoFileResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.PhotoFile) {
 		toSerialize["photo_file"] = o.PhotoFile
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadShoppablePhotoFileResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadShoppablePhotoFileResponseData := _UploadShoppablePhotoFileResponseData{}
+
+	err = json.Unmarshal(data, &varUploadShoppablePhotoFileResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadShoppablePhotoFileResponseData(varUploadShoppablePhotoFileResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "photo_file")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadShoppablePhotoFileResponseData struct {

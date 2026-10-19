@@ -39,7 +39,10 @@ type SearchCancellationsRequest struct {
 	UpdateTimeLt *int64 `json:"update_time_lt,omitempty"`
 	// The BCP-47 locale codes for displaying the order, delimited by commas. Default: en-US Refer to [Locale codes](678e3a47bae28f030a8c7523) for the list of supported locale codes.
 	Locale *string `json:"locale,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCancellationsRequest SearchCancellationsRequest
 
 // NewSearchCancellationsRequest instantiates a new SearchCancellationsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o SearchCancellationsRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCancellationsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchCancellationsRequest := _SearchCancellationsRequest{}
+
+	err = json.Unmarshal(data, &varSearchCancellationsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCancellationsRequest(varSearchCancellationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "cancel_ids")
+		delete(additionalProperties, "order_ids")
+		delete(additionalProperties, "buyer_user_ids")
+		delete(additionalProperties, "cancel_types")
+		delete(additionalProperties, "cancel_status")
+		delete(additionalProperties, "create_time_ge")
+		delete(additionalProperties, "create_time_lt")
+		delete(additionalProperties, "update_time_ge")
+		delete(additionalProperties, "update_time_lt")
+		delete(additionalProperties, "locale")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCancellationsRequest struct {

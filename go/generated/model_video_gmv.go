@@ -23,7 +23,10 @@ type VideoGmv struct {
 	Currency *string `json:"currency,omitempty"`
 	// The total video GMV associated with the creator.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VideoGmv VideoGmv
 
 // NewVideoGmv instantiates a new VideoGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o VideoGmv) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VideoGmv) UnmarshalJSON(data []byte) (err error) {
+	varVideoGmv := _VideoGmv{}
+
+	err = json.Unmarshal(data, &varVideoGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VideoGmv(varVideoGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVideoGmv struct {

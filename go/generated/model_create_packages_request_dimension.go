@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -29,6 +28,7 @@ type CreatePackagesRequestDimension struct {
 	Height string `json:"height"`
 	// The unit of measurement for the package dimensions. For packages in the US, use `INCH`.  Available values: - `CM` - `INCH`
 	Unit string `json:"unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreatePackagesRequestDimension CreatePackagesRequestDimension
@@ -164,6 +164,11 @@ func (o CreatePackagesRequestDimension) ToMap() (map[string]interface{}, error) 
 	toSerialize["width"] = o.Width
 	toSerialize["height"] = o.Height
 	toSerialize["unit"] = o.Unit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -194,15 +199,23 @@ func (o *CreatePackagesRequestDimension) UnmarshalJSON(data []byte) (err error) 
 
 	varCreatePackagesRequestDimension := _CreatePackagesRequestDimension{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreatePackagesRequestDimension)
+	err = json.Unmarshal(data, &varCreatePackagesRequestDimension)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreatePackagesRequestDimension(varCreatePackagesRequestDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

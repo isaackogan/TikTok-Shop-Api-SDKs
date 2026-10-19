@@ -27,7 +27,10 @@ type GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop struct {
 	ShopName *string `json:"shop_name,omitempty"`
 	// Region where the shop operates
 	ShopRegion *string `json:"shop_region,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop
 
 // NewGetShopGroupAndRelatedShopsResponseDataShopGroupDataShop instantiates a new GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop) ToMap() (map[s
 	if !IsNil(o.ShopRegion) {
 		toSerialize["shop_region"] = o.ShopRegion
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop) UnmarshalJSON(data []byte) (err error) {
+	varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShop := _GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop{}
+
+	err = json.Unmarshal(data, &varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShop)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopGroupAndRelatedShopsResponseDataShopGroupDataShop(varGetShopGroupAndRelatedShopsResponseDataShopGroupDataShop)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "seller_id")
+		delete(additionalProperties, "shop_name")
+		delete(additionalProperties, "shop_region")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopGroupAndRelatedShopsResponseDataShopGroupDataShop struct {

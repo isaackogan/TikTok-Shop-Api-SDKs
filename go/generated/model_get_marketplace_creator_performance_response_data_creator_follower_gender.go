@@ -23,7 +23,10 @@ type GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender struct {
 	Key *string `json:"key,omitempty"`
 	// The proportion of followers of this gender, expressed as a decimal (e.g., 0.5000 = 50.00%).
 	Value *string `json:"value,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender
 
 // NewGetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender instantiates a new GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender) ToMap
 	if !IsNil(o.Value) {
 		toSerialize["value"] = o.Value
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender) UnmarshalJSON(data []byte) (err error) {
+	varGetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender := _GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender{}
+
+	err = json.Unmarshal(data, &varGetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender(varGetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "value")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetMarketplaceCreatorPerformanceResponseDataCreatorFollowerGender struct {

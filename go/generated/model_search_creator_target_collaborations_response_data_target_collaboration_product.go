@@ -27,7 +27,10 @@ type SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct str
 	MainImageUrl *string `json:"main_image_url,omitempty"`
 	// The commission rate and estimated commission amount for the product in this target collaboration.
 	Commission *SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProductCommission `json:"commission,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct
 
 // NewSearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct instantiates a new SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct)
 	if !IsNil(o.Commission) {
 		toSerialize["commission"] = o.Commission
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct) UnmarshalJSON(data []byte) (err error) {
+	varSearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct := _SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct{}
+
+	err = json.Unmarshal(data, &varSearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct(varSearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "main_image_url")
+		delete(additionalProperties, "commission")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchCreatorTargetCollaborationsResponseDataTargetCollaborationProduct struct {

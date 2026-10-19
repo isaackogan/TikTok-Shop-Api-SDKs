@@ -23,7 +23,10 @@ type MetricStandardInfo struct {
 	Id *string `json:"id,omitempty"`
 	// The list of metric value entries under the measurement template. Each object represents the value submitted by the seller for a specific metric in the template.
 	MetricValueModuleInfos []MetricValueModuleInfo `json:"metric_value_module_infos,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MetricStandardInfo MetricStandardInfo
 
 // NewMetricStandardInfo instantiates a new MetricStandardInfo object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o MetricStandardInfo) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.MetricValueModuleInfos) {
 		toSerialize["metric_value_module_infos"] = o.MetricValueModuleInfos
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MetricStandardInfo) UnmarshalJSON(data []byte) (err error) {
+	varMetricStandardInfo := _MetricStandardInfo{}
+
+	err = json.Unmarshal(data, &varMetricStandardInfo)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MetricStandardInfo(varMetricStandardInfo)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "metric_value_module_infos")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMetricStandardInfo struct {

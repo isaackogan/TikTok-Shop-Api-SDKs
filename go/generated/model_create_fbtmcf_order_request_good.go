@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CreateFBTMCFOrderRequestGood struct {
 	Id string `json:"id"`
 	// The quantity of this item. Must be greater than 0.
 	Quantity int64 `json:"quantity"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateFBTMCFOrderRequestGood CreateFBTMCFOrderRequestGood
@@ -108,6 +108,11 @@ func (o CreateFBTMCFOrderRequestGood) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["quantity"] = o.Quantity
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CreateFBTMCFOrderRequestGood) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateFBTMCFOrderRequestGood := _CreateFBTMCFOrderRequestGood{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateFBTMCFOrderRequestGood)
+	err = json.Unmarshal(data, &varCreateFBTMCFOrderRequestGood)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateFBTMCFOrderRequestGood(varCreateFBTMCFOrderRequestGood)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "quantity")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

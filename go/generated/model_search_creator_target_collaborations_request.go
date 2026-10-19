@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SearchCreatorTargetCollaborationsRequest struct {
 	KeywordType *string `json:"keyword_type,omitempty"`
 	// The target collaboration ID or name to search for, as specified by `keyword_type`. For `TARGET_COLLABORATIONS_ID`, provide a base-10 integer. For `TARGET_COLLABORATIONS_NAME`, provide a value shorter than 500 bytes.
 	Keyword *string `json:"keyword,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SearchCreatorTargetCollaborationsRequest SearchCreatorTargetCollaborationsRequest
@@ -154,6 +154,11 @@ func (o SearchCreatorTargetCollaborationsRequest) ToMap() (map[string]interface{
 	if !IsNil(o.Keyword) {
 		toSerialize["keyword"] = o.Keyword
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -181,15 +186,22 @@ func (o *SearchCreatorTargetCollaborationsRequest) UnmarshalJSON(data []byte) (e
 
 	varSearchCreatorTargetCollaborationsRequest := _SearchCreatorTargetCollaborationsRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSearchCreatorTargetCollaborationsRequest)
+	err = json.Unmarshal(data, &varSearchCreatorTargetCollaborationsRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SearchCreatorTargetCollaborationsRequest(varSearchCreatorTargetCollaborationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shop_id")
+		delete(additionalProperties, "keyword_type")
+		delete(additionalProperties, "keyword")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

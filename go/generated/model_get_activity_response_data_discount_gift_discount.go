@@ -23,7 +23,10 @@ type GetActivityResponseDataDiscountGiftDiscount struct {
 	GiftReceivingType *string `json:"gift_receiving_type,omitempty"`
 	// Configurations regarding Gift With Purchase (GWP) promotions.  A maximum of two `tier`s are permitted in SEA and UK. Only one `tier` is permitted in US.  And `threshold_type` must be the same across all `tier`s.
 	GiftInfos []GetActivityResponseDataDiscountGiftDiscountGiftInfo `json:"gift_infos,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetActivityResponseDataDiscountGiftDiscount GetActivityResponseDataDiscountGiftDiscount
 
 // NewGetActivityResponseDataDiscountGiftDiscount instantiates a new GetActivityResponseDataDiscountGiftDiscount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetActivityResponseDataDiscountGiftDiscount) ToMap() (map[string]interfa
 	if !IsNil(o.GiftInfos) {
 		toSerialize["gift_infos"] = o.GiftInfos
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetActivityResponseDataDiscountGiftDiscount) UnmarshalJSON(data []byte) (err error) {
+	varGetActivityResponseDataDiscountGiftDiscount := _GetActivityResponseDataDiscountGiftDiscount{}
+
+	err = json.Unmarshal(data, &varGetActivityResponseDataDiscountGiftDiscount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetActivityResponseDataDiscountGiftDiscount(varGetActivityResponseDataDiscountGiftDiscount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "gift_receiving_type")
+		delete(additionalProperties, "gift_infos")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetActivityResponseDataDiscountGiftDiscount struct {

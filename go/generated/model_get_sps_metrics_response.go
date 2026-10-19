@@ -26,7 +26,10 @@ type GetSPSMetricsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetSPSMetricsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricsResponse GetSPSMetricsResponse
 
 // NewGetSPSMetricsResponse instantiates a new GetSPSMetricsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetSPSMetricsResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricsResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricsResponse := _GetSPSMetricsResponse{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricsResponse(varGetSPSMetricsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricsResponse struct {

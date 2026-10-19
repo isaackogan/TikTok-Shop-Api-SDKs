@@ -25,7 +25,10 @@ type GetGlobalSellerWarehousesResponseDataGlobalWarehouse struct {
 	Name *string `json:"name,omitempty"`
 	// Possible values: - SELLER: Warehouse owned by the seller.  - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop.
 	Ownership *string `json:"ownership,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalSellerWarehousesResponseDataGlobalWarehouse GetGlobalSellerWarehousesResponseDataGlobalWarehouse
 
 // NewGetGlobalSellerWarehousesResponseDataGlobalWarehouse instantiates a new GetGlobalSellerWarehousesResponseDataGlobalWarehouse object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetGlobalSellerWarehousesResponseDataGlobalWarehouse) ToMap() (map[strin
 	if !IsNil(o.Ownership) {
 		toSerialize["ownership"] = o.Ownership
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalSellerWarehousesResponseDataGlobalWarehouse) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalSellerWarehousesResponseDataGlobalWarehouse := _GetGlobalSellerWarehousesResponseDataGlobalWarehouse{}
+
+	err = json.Unmarshal(data, &varGetGlobalSellerWarehousesResponseDataGlobalWarehouse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalSellerWarehousesResponseDataGlobalWarehouse(varGetGlobalSellerWarehousesResponseDataGlobalWarehouse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "ownership")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalSellerWarehousesResponseDataGlobalWarehouse struct {

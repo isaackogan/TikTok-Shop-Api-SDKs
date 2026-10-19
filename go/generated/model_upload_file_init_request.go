@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type UploadFileInitRequest struct {
 	TotalChunkCount int64 `json:"total_chunk_count"`
 	// After the video is uploaded, use this interface to bind the video resource to the specific material
 	TargetPath string `json:"target_path"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UploadFileInitRequest UploadFileInitRequest
@@ -192,6 +192,11 @@ func (o UploadFileInitRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["file_size"] = o.FileSize
 	toSerialize["total_chunk_count"] = o.TotalChunkCount
 	toSerialize["target_path"] = o.TargetPath
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -223,15 +228,24 @@ func (o *UploadFileInitRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varUploadFileInitRequest := _UploadFileInitRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUploadFileInitRequest)
+	err = json.Unmarshal(data, &varUploadFileInitRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UploadFileInitRequest(varUploadFileInitRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "file_name")
+		delete(additionalProperties, "file_type")
+		delete(additionalProperties, "file_size")
+		delete(additionalProperties, "total_chunk_count")
+		delete(additionalProperties, "target_path")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

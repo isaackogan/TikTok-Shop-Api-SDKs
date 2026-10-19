@@ -33,7 +33,10 @@ type SearchSampleApplicationsRequest struct {
 	OrderId *string `json:"order_id,omitempty"`
 	// The status of sample applications. The possible enumerated values are: - PENDING: The sample application is waiting for the seller's review. - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample. - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package. - CONTENT_PENDING: The creator has received the sample package and is expected to create content. - REJECT_CANCELLED: The sample application has been rejected by the seller. - OVERDUE_CANCELLED: The sample application has expired due to being overdue. - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe. - DEL_OPEN_COLLAB: Open collaboration has been deleted. - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe. - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it. - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator's control, making it impossible to create content. - OPS_CANCELLED: The application was manually cancelled by operations staff. - OPS_FAILED: The application was marked as failed by operations staff. - OPS_COMPLETED: The application was manually marked as completed by operations staff. - COMPLETED: The application is complete, and the creator has posted the content. This field allows for tracking the status of a sample application throughout its lifecycle, providing visibility into each stage of the process for sellers and creators.
 	Status *string `json:"status,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationsRequest SearchSampleApplicationsRequest
 
 // NewSearchSampleApplicationsRequest instantiates a new SearchSampleApplicationsRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o SearchSampleApplicationsRequest) ToMap() (map[string]interface{}, error)
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationsRequest) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationsRequest := _SearchSampleApplicationsRequest{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationsRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationsRequest(varSearchSampleApplicationsRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "creator_user_oepn_id")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "target_collabration_id")
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "status")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationsRequest struct {

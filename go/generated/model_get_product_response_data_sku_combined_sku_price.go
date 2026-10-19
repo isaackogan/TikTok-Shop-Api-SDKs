@@ -25,7 +25,10 @@ type GetProductResponseDataSkuCombinedSkuPrice struct {
 	SalePrice *string `json:"sale_price,omitempty"`
 	// Global sellers The source SKU's local pre-tax price. This excludes any applicable charges such as cross-border shipping costs, taxes, and other fees, and therefore does not appear on the product page.  Note: Tax-exclusive pricing does not apply to JP and US shops using China warehouses, therefore this value is the same as sale_price.
 	TaxExclusivePrice *string `json:"tax_exclusive_price,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataSkuCombinedSkuPrice GetProductResponseDataSkuCombinedSkuPrice
 
 // NewGetProductResponseDataSkuCombinedSkuPrice instantiates a new GetProductResponseDataSkuCombinedSkuPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetProductResponseDataSkuCombinedSkuPrice) ToMap() (map[string]interface
 	if !IsNil(o.TaxExclusivePrice) {
 		toSerialize["tax_exclusive_price"] = o.TaxExclusivePrice
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataSkuCombinedSkuPrice) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataSkuCombinedSkuPrice := _GetProductResponseDataSkuCombinedSkuPrice{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataSkuCombinedSkuPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataSkuCombinedSkuPrice(varGetProductResponseDataSkuCombinedSkuPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "sale_price")
+		delete(additionalProperties, "tax_exclusive_price")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataSkuCombinedSkuPrice struct {

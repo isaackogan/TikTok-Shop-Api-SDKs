@@ -23,7 +23,10 @@ type GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchS
 	Amount *string `json:"amount,omitempty"`
 	// Currency code (ISO 4217 standard).
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed
 
 // NewGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed instantiates a new GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSear
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed) UnmarshalJSON(data []byte) (err error) {
+	varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed := _GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed{}
+
+	err = json.Unmarshal(data, &varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed(varGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchSearchAttributed struct {

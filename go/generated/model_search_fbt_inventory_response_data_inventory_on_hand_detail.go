@@ -27,7 +27,10 @@ type SearchFBTInventoryResponseDataInventoryOnHandDetail struct {
 	ReservedQuantity *int64 `json:"reserved_quantity,omitempty"`
 	// The number of defective units in the warehouse.
 	UnfulfillableQuantity *int64 `json:"unfulfillable_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryResponseDataInventoryOnHandDetail SearchFBTInventoryResponseDataInventoryOnHandDetail
 
 // NewSearchFBTInventoryResponseDataInventoryOnHandDetail instantiates a new SearchFBTInventoryResponseDataInventoryOnHandDetail object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o SearchFBTInventoryResponseDataInventoryOnHandDetail) ToMap() (map[string
 	if !IsNil(o.UnfulfillableQuantity) {
 		toSerialize["unfulfillable_quantity"] = o.UnfulfillableQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryResponseDataInventoryOnHandDetail) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryResponseDataInventoryOnHandDetail := _SearchFBTInventoryResponseDataInventoryOnHandDetail{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryResponseDataInventoryOnHandDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryResponseDataInventoryOnHandDetail(varSearchFBTInventoryResponseDataInventoryOnHandDetail)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "total_quantity")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "reserved_quantity")
+		delete(additionalProperties, "unfulfillable_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryResponseDataInventoryOnHandDetail struct {

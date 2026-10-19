@@ -25,7 +25,10 @@ type InventorySearchResponseDataInventorySkuWarehouseInventory struct {
 	AvailableQuantity *int64 `json:"available_quantity,omitempty"`
 	// The total number of units reserved by existing customer orders in this warehouse (and therefore not available for ordering).
 	CommittedQuantity *int64 `json:"committed_quantity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _InventorySearchResponseDataInventorySkuWarehouseInventory InventorySearchResponseDataInventorySkuWarehouseInventory
 
 // NewInventorySearchResponseDataInventorySkuWarehouseInventory instantiates a new InventorySearchResponseDataInventorySkuWarehouseInventory object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o InventorySearchResponseDataInventorySkuWarehouseInventory) ToMap() (map[
 	if !IsNil(o.CommittedQuantity) {
 		toSerialize["committed_quantity"] = o.CommittedQuantity
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *InventorySearchResponseDataInventorySkuWarehouseInventory) UnmarshalJSON(data []byte) (err error) {
+	varInventorySearchResponseDataInventorySkuWarehouseInventory := _InventorySearchResponseDataInventorySkuWarehouseInventory{}
+
+	err = json.Unmarshal(data, &varInventorySearchResponseDataInventorySkuWarehouseInventory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InventorySearchResponseDataInventorySkuWarehouseInventory(varInventorySearchResponseDataInventorySkuWarehouseInventory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "warehouse_id")
+		delete(additionalProperties, "available_quantity")
+		delete(additionalProperties, "committed_quantity")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableInventorySearchResponseDataInventorySkuWarehouseInventory struct {

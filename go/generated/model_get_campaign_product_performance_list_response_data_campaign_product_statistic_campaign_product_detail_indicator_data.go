@@ -39,7 +39,10 @@ type GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampai
 	PromotedCreatorNum *string `json:"promoted_creator_num,omitempty"`
 	// The total number of creators that applied for a sample.
 	SampleRequestedCreatorNum *string `json:"sample_requested_creator_num,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData
 
 // NewGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData instantiates a new GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCam
 	if !IsNil(o.SampleRequestedCreatorNum) {
 		toSerialize["sample_requested_creator_num"] = o.SampleRequestedCreatorNum
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData) UnmarshalJSON(data []byte) (err error) {
+	varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData := _GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData{}
+
+	err = json.Unmarshal(data, &varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData(varGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "paid_order_num")
+		delete(additionalProperties, "actual_order_num")
+		delete(additionalProperties, "estimated_amount")
+		delete(additionalProperties, "actual_amount")
+		delete(additionalProperties, "estimated_partner_commission")
+		delete(additionalProperties, "actual_partner_commission")
+		delete(additionalProperties, "creator_sales_num")
+		delete(additionalProperties, "collaborated_creators_num")
+		delete(additionalProperties, "promoted_creator_num")
+		delete(additionalProperties, "sample_requested_creator_num")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData struct {

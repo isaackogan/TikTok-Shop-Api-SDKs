@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateInventoryResponseData{}
 type UpdateInventoryResponseData struct {
 	// Inventory update errors for individual SKU and warehouse combinations. A successful top-level response can still include this list when individual updates fail, so inspect it before treating all updates as successful.
 	Errors []UpdateInventoryResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateInventoryResponseData UpdateInventoryResponseData
 
 // NewUpdateInventoryResponseData instantiates a new UpdateInventoryResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateInventoryResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateInventoryResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUpdateInventoryResponseData := _UpdateInventoryResponseData{}
+
+	err = json.Unmarshal(data, &varUpdateInventoryResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateInventoryResponseData(varUpdateInventoryResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateInventoryResponseData struct {

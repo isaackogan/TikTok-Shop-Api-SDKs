@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShippingProvidersResponseData{}
 type GetShippingProvidersResponseData struct {
 	// The shipping providers available for the specified delivery option.
 	ShippingProviders []ShippingProvider `json:"shipping_providers,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShippingProvidersResponseData GetShippingProvidersResponseData
 
 // NewGetShippingProvidersResponseData instantiates a new GetShippingProvidersResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShippingProvidersResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.ShippingProviders) {
 		toSerialize["shipping_providers"] = o.ShippingProviders
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShippingProvidersResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetShippingProvidersResponseData := _GetShippingProvidersResponseData{}
+
+	err = json.Unmarshal(data, &varGetShippingProvidersResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShippingProvidersResponseData(varGetShippingProvidersResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "shipping_providers")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShippingProvidersResponseData struct {

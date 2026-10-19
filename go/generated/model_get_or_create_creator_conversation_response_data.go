@@ -31,7 +31,10 @@ type GetOrCreateCreatorConversationResponseData struct {
 	UnreadCount *int64 `json:"unread_count,omitempty"`
 	// Creators' IM User ID.
 	CreatorImId *string `json:"creator_im_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrCreateCreatorConversationResponseData GetOrCreateCreatorConversationResponseData
 
 // NewGetOrCreateCreatorConversationResponseData instantiates a new GetOrCreateCreatorConversationResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetOrCreateCreatorConversationResponseData) ToMap() (map[string]interfac
 	if !IsNil(o.CreatorImId) {
 		toSerialize["creator_im_id"] = o.CreatorImId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrCreateCreatorConversationResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetOrCreateCreatorConversationResponseData := _GetOrCreateCreatorConversationResponseData{}
+
+	err = json.Unmarshal(data, &varGetOrCreateCreatorConversationResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrCreateCreatorConversationResponseData(varGetOrCreateCreatorConversationResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "is_new")
+		delete(additionalProperties, "username")
+		delete(additionalProperties, "avatar")
+		delete(additionalProperties, "unread_count")
+		delete(additionalProperties, "creator_im_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrCreateCreatorConversationResponseData struct {

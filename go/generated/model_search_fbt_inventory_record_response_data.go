@@ -25,7 +25,10 @@ type SearchFBTInventoryRecordResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The total number of the search results.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchFBTInventoryRecordResponseData SearchFBTInventoryRecordResponseData
 
 // NewSearchFBTInventoryRecordResponseData instantiates a new SearchFBTInventoryRecordResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchFBTInventoryRecordResponseData) ToMap() (map[string]interface{}, e
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchFBTInventoryRecordResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchFBTInventoryRecordResponseData := _SearchFBTInventoryRecordResponseData{}
+
+	err = json.Unmarshal(data, &varSearchFBTInventoryRecordResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchFBTInventoryRecordResponseData(varSearchFBTInventoryRecordResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "inventory_records")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchFBTInventoryRecordResponseData struct {

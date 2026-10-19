@@ -26,7 +26,10 @@ type UploadFileInitResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *UploadFileInitResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadFileInitResponse UploadFileInitResponse
 
 // NewUploadFileInitResponse instantiates a new UploadFileInitResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o UploadFileInitResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadFileInitResponse) UnmarshalJSON(data []byte) (err error) {
+	varUploadFileInitResponse := _UploadFileInitResponse{}
+
+	err = json.Unmarshal(data, &varUploadFileInitResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadFileInitResponse(varUploadFileInitResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadFileInitResponse struct {

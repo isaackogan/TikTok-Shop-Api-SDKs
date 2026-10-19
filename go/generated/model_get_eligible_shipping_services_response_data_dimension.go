@@ -27,7 +27,10 @@ type GetEligibleShippingServicesResponseDataDimension struct {
 	Height *string `json:"height,omitempty"`
 	// The unit of measurement for the package dimensions. - CM - INCH
 	Unit *string `json:"unit,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEligibleShippingServicesResponseDataDimension GetEligibleShippingServicesResponseDataDimension
 
 // NewGetEligibleShippingServicesResponseDataDimension instantiates a new GetEligibleShippingServicesResponseDataDimension object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetEligibleShippingServicesResponseDataDimension) ToMap() (map[string]in
 	if !IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEligibleShippingServicesResponseDataDimension) UnmarshalJSON(data []byte) (err error) {
+	varGetEligibleShippingServicesResponseDataDimension := _GetEligibleShippingServicesResponseDataDimension{}
+
+	err = json.Unmarshal(data, &varGetEligibleShippingServicesResponseDataDimension)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEligibleShippingServicesResponseDataDimension(varGetEligibleShippingServicesResponseDataDimension)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "unit")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEligibleShippingServicesResponseDataDimension struct {

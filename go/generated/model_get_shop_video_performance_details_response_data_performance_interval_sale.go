@@ -23,7 +23,10 @@ type GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale struct {
 	Overall *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall `json:"overall,omitempty"`
 	// Breakdown data for product-level sales performance in each interval.
 	Breakdowns []GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleBreakdown `json:"breakdowns,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale
 
 // NewGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale instantiates a new GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale) ToMap
 	if !IsNil(o.Breakdowns) {
 		toSerialize["breakdowns"] = o.Breakdowns
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale) UnmarshalJSON(data []byte) (err error) {
+	varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale := _GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale{}
+
+	err = json.Unmarshal(data, &varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale(varGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "overall")
+		delete(additionalProperties, "breakdowns")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSale struct {

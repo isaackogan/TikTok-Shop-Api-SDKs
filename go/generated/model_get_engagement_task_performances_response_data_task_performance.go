@@ -33,7 +33,10 @@ type GetEngagementTaskPerformancesResponseDataTaskPerformance struct {
 	GmvAmount *string `json:"gmv_amount,omitempty"`
 	// The number of coupons claimed.
 	ClaimedCouponsCount *int64 `json:"claimed_coupons_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetEngagementTaskPerformancesResponseDataTaskPerformance GetEngagementTaskPerformancesResponseDataTaskPerformance
 
 // NewGetEngagementTaskPerformancesResponseDataTaskPerformance instantiates a new GetEngagementTaskPerformancesResponseDataTaskPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -307,7 +310,39 @@ func (o GetEngagementTaskPerformancesResponseDataTaskPerformance) ToMap() (map[s
 	if !IsNil(o.ClaimedCouponsCount) {
 		toSerialize["claimed_coupons_count"] = o.ClaimedCouponsCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetEngagementTaskPerformancesResponseDataTaskPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetEngagementTaskPerformancesResponseDataTaskPerformance := _GetEngagementTaskPerformancesResponseDataTaskPerformance{}
+
+	err = json.Unmarshal(data, &varGetEngagementTaskPerformancesResponseDataTaskPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetEngagementTaskPerformancesResponseDataTaskPerformance(varGetEngagementTaskPerformancesResponseDataTaskPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "sent_recipient_count")
+		delete(additionalProperties, "read_recipient_count")
+		delete(additionalProperties, "order_count")
+		delete(additionalProperties, "gmv_amount")
+		delete(additionalProperties, "claimed_coupons_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetEngagementTaskPerformancesResponseDataTaskPerformance struct {

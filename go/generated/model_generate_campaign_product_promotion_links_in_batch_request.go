@@ -21,7 +21,10 @@ var _ MappedNullable = &GenerateCampaignProductPromotionLinksInBatchRequest{}
 type GenerateCampaignProductPromotionLinksInBatchRequest struct {
 	// The list of product IDs. The max length is 50.
 	ProductIds []string `json:"product_ids,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GenerateCampaignProductPromotionLinksInBatchRequest GenerateCampaignProductPromotionLinksInBatchRequest
 
 // NewGenerateCampaignProductPromotionLinksInBatchRequest instantiates a new GenerateCampaignProductPromotionLinksInBatchRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GenerateCampaignProductPromotionLinksInBatchRequest) ToMap() (map[string
 	if !IsNil(o.ProductIds) {
 		toSerialize["product_ids"] = o.ProductIds
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GenerateCampaignProductPromotionLinksInBatchRequest) UnmarshalJSON(data []byte) (err error) {
+	varGenerateCampaignProductPromotionLinksInBatchRequest := _GenerateCampaignProductPromotionLinksInBatchRequest{}
+
+	err = json.Unmarshal(data, &varGenerateCampaignProductPromotionLinksInBatchRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GenerateCampaignProductPromotionLinksInBatchRequest(varGenerateCampaignProductPromotionLinksInBatchRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGenerateCampaignProductPromotionLinksInBatchRequest struct {

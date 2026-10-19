@@ -39,7 +39,10 @@ type GetGlobalAttributesResponseDataAttribute struct {
 	OptionalRegions []string `json:"optional_regions,omitempty"`
 	// The markets where the attribute is required without conditions. When `is_requried=true`, this list contains all of the seller's markets. When `is_requried=false`, it contains only the markets where the attribute is unconditionally required. This field is omitted when there are no unconditionally required markets.  Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
 	RequiredRegions []string `json:"required_regions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetGlobalAttributesResponseDataAttribute GetGlobalAttributesResponseDataAttribute
 
 // NewGetGlobalAttributesResponseDataAttribute instantiates a new GetGlobalAttributesResponseDataAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetGlobalAttributesResponseDataAttribute) ToMap() (map[string]interface{
 	if !IsNil(o.RequiredRegions) {
 		toSerialize["required_regions"] = o.RequiredRegions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetGlobalAttributesResponseDataAttribute) UnmarshalJSON(data []byte) (err error) {
+	varGetGlobalAttributesResponseDataAttribute := _GetGlobalAttributesResponseDataAttribute{}
+
+	err = json.Unmarshal(data, &varGetGlobalAttributesResponseDataAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetGlobalAttributesResponseDataAttribute(varGetGlobalAttributesResponseDataAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "is_requried")
+		delete(additionalProperties, "values")
+		delete(additionalProperties, "is_multiple_selection")
+		delete(additionalProperties, "is_customizable")
+		delete(additionalProperties, "requirement_conditions")
+		delete(additionalProperties, "optional_regions")
+		delete(additionalProperties, "required_regions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetGlobalAttributesResponseDataAttribute struct {

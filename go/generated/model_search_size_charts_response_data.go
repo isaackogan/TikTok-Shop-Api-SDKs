@@ -25,7 +25,10 @@ type SearchSizeChartsResponseData struct {
 	NextPageToken *string `json:"next_page_token,omitempty"`
 	// The number of size charts that meet the query conditions.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSizeChartsResponseData SearchSizeChartsResponseData
 
 // NewSearchSizeChartsResponseData instantiates a new SearchSizeChartsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchSizeChartsResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSizeChartsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varSearchSizeChartsResponseData := _SearchSizeChartsResponseData{}
+
+	err = json.Unmarshal(data, &varSearchSizeChartsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSizeChartsResponseData(varSearchSizeChartsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "size_chart")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSizeChartsResponseData struct {

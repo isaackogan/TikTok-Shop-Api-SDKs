@@ -26,7 +26,10 @@ type SearchAftersalesRequestsResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *SearchAftersalesRequestsResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchAftersalesRequestsResponse SearchAftersalesRequestsResponse
 
 // NewSearchAftersalesRequestsResponse instantiates a new SearchAftersalesRequestsResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o SearchAftersalesRequestsResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchAftersalesRequestsResponse) UnmarshalJSON(data []byte) (err error) {
+	varSearchAftersalesRequestsResponse := _SearchAftersalesRequestsResponse{}
+
+	err = json.Unmarshal(data, &varSearchAftersalesRequestsResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchAftersalesRequestsResponse(varSearchAftersalesRequestsResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchAftersalesRequestsResponse struct {

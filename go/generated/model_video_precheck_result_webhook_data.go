@@ -25,7 +25,10 @@ type VideoPrecheckResultWebhookData struct {
 	Result *string `json:"result,omitempty"`
 	// Only if the `result` is `FAIL`
 	Issues []VideoPrecheckResultWebhookDataIssue `json:"issues,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _VideoPrecheckResultWebhookData VideoPrecheckResultWebhookData
 
 // NewVideoPrecheckResultWebhookData instantiates a new VideoPrecheckResultWebhookData object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o VideoPrecheckResultWebhookData) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Issues) {
 		toSerialize["issues"] = o.Issues
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *VideoPrecheckResultWebhookData) UnmarshalJSON(data []byte) (err error) {
+	varVideoPrecheckResultWebhookData := _VideoPrecheckResultWebhookData{}
+
+	err = json.Unmarshal(data, &varVideoPrecheckResultWebhookData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = VideoPrecheckResultWebhookData(varVideoPrecheckResultWebhookData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "precheck_task_id")
+		delete(additionalProperties, "result")
+		delete(additionalProperties, "issues")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableVideoPrecheckResultWebhookData struct {

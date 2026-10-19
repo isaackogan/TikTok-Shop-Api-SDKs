@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SubmitStrikethroughPriceRequest struct {
 	ExternalProductId string `json:"external_product_id"`
 	// A list of SKUs whose external pricing information is submitted for verification. All SKU IDs must belong to the product identified by `product_id`.
 	Skus []SubmitStrikethroughPriceRequestSku `json:"skus"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitStrikethroughPriceRequest SubmitStrikethroughPriceRequest
@@ -108,6 +108,11 @@ func (o SubmitStrikethroughPriceRequest) ToMap() (map[string]interface{}, error)
 	toSerialize := map[string]interface{}{}
 	toSerialize["external_product_id"] = o.ExternalProductId
 	toSerialize["skus"] = o.Skus
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *SubmitStrikethroughPriceRequest) UnmarshalJSON(data []byte) (err error)
 
 	varSubmitStrikethroughPriceRequest := _SubmitStrikethroughPriceRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitStrikethroughPriceRequest)
+	err = json.Unmarshal(data, &varSubmitStrikethroughPriceRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitStrikethroughPriceRequest(varSubmitStrikethroughPriceRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "external_product_id")
+		delete(additionalProperties, "skus")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

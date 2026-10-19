@@ -23,7 +23,10 @@ type SearchGoodsInfoResponseDataGoodBulkyItemAttribute struct {
 	IsBulkyItem *bool `json:"is_bulky_item,omitempty"`
 	// whether the goods is bulky accessories
 	IsBulkyItemAccessories *bool `json:"is_bulky_item_accessories,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchGoodsInfoResponseDataGoodBulkyItemAttribute SearchGoodsInfoResponseDataGoodBulkyItemAttribute
 
 // NewSearchGoodsInfoResponseDataGoodBulkyItemAttribute instantiates a new SearchGoodsInfoResponseDataGoodBulkyItemAttribute object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchGoodsInfoResponseDataGoodBulkyItemAttribute) ToMap() (map[string]i
 	if !IsNil(o.IsBulkyItemAccessories) {
 		toSerialize["is_bulky_item_accessories"] = o.IsBulkyItemAccessories
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchGoodsInfoResponseDataGoodBulkyItemAttribute) UnmarshalJSON(data []byte) (err error) {
+	varSearchGoodsInfoResponseDataGoodBulkyItemAttribute := _SearchGoodsInfoResponseDataGoodBulkyItemAttribute{}
+
+	err = json.Unmarshal(data, &varSearchGoodsInfoResponseDataGoodBulkyItemAttribute)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchGoodsInfoResponseDataGoodBulkyItemAttribute(varSearchGoodsInfoResponseDataGoodBulkyItemAttribute)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_bulky_item")
+		delete(additionalProperties, "is_bulky_item_accessories")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchGoodsInfoResponseDataGoodBulkyItemAttribute struct {

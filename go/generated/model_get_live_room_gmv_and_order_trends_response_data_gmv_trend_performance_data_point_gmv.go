@@ -23,7 +23,10 @@ type GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv str
 	Currency *string `json:"currency,omitempty"`
 	// The amount of GMV
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv
 
 // NewGetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv instantiates a new GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv)
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv) UnmarshalJSON(data []byte) (err error) {
+	varGetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv := _GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv{}
+
+	err = json.Unmarshal(data, &varGetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv(varGetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPointGmv struct {

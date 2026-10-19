@@ -23,7 +23,10 @@ type SampleApplicationStatusChangeWebhookDataProduct struct {
 	Id *string `json:"id,omitempty"`
 	// The unique id of product sku which the creator applied for as a sample.
 	SkuId *string `json:"sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SampleApplicationStatusChangeWebhookDataProduct SampleApplicationStatusChangeWebhookDataProduct
 
 // NewSampleApplicationStatusChangeWebhookDataProduct instantiates a new SampleApplicationStatusChangeWebhookDataProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SampleApplicationStatusChangeWebhookDataProduct) ToMap() (map[string]int
 	if !IsNil(o.SkuId) {
 		toSerialize["sku_id"] = o.SkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SampleApplicationStatusChangeWebhookDataProduct) UnmarshalJSON(data []byte) (err error) {
+	varSampleApplicationStatusChangeWebhookDataProduct := _SampleApplicationStatusChangeWebhookDataProduct{}
+
+	err = json.Unmarshal(data, &varSampleApplicationStatusChangeWebhookDataProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SampleApplicationStatusChangeWebhookDataProduct(varSampleApplicationStatusChangeWebhookDataProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSampleApplicationStatusChangeWebhookDataProduct struct {

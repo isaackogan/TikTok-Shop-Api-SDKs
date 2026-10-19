@@ -75,7 +75,10 @@ type GetOrderPriceDetailsResponseDataLineItem struct {
 	SellerFundedProductPromotions []GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion `json:"seller_funded_product_promotions,omitempty"`
 	// Seller-funded shipping promotions associated with the line item.
 	SellerFundedShippingPromotions []GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion `json:"seller_funded_shipping_promotions,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetOrderPriceDetailsResponseDataLineItem GetOrderPriceDetailsResponseDataLineItem
 
 // NewGetOrderPriceDetailsResponseDataLineItem instantiates a new GetOrderPriceDetailsResponseDataLineItem object
 // This constructor will assign default values to properties that have it defined,
@@ -1084,7 +1087,60 @@ func (o GetOrderPriceDetailsResponseDataLineItem) ToMap() (map[string]interface{
 	if !IsNil(o.SellerFundedShippingPromotions) {
 		toSerialize["seller_funded_shipping_promotions"] = o.SellerFundedShippingPromotions
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetOrderPriceDetailsResponseDataLineItem) UnmarshalJSON(data []byte) (err error) {
+	varGetOrderPriceDetailsResponseDataLineItem := _GetOrderPriceDetailsResponseDataLineItem{}
+
+	err = json.Unmarshal(data, &varGetOrderPriceDetailsResponseDataLineItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderPriceDetailsResponseDataLineItem(varGetOrderPriceDetailsResponseDataLineItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "payment")
+		delete(additionalProperties, "sku_list_price")
+		delete(additionalProperties, "sku_sale_price")
+		delete(additionalProperties, "subtotal")
+		delete(additionalProperties, "subtotal_deduction_seller")
+		delete(additionalProperties, "subtotal_deduction_platform")
+		delete(additionalProperties, "subtotal_tax_amount")
+		delete(additionalProperties, "voucher_deduction_platform")
+		delete(additionalProperties, "voucher_deduction_seller")
+		delete(additionalProperties, "shipping_list_price")
+		delete(additionalProperties, "shipping_sale_price")
+		delete(additionalProperties, "shipping_fee_deduction_seller")
+		delete(additionalProperties, "shipping_fee_deduction_platform")
+		delete(additionalProperties, "shipping_fee_deduction_platform_voucher")
+		delete(additionalProperties, "tax_amount")
+		delete(additionalProperties, "tax_rate")
+		delete(additionalProperties, "net_price_amount")
+		delete(additionalProperties, "cod_fee")
+		delete(additionalProperties, "cod_fee_amount")
+		delete(additionalProperties, "sku_gift_original_price")
+		delete(additionalProperties, "sku_gift_net_price")
+		delete(additionalProperties, "distance_shipping_fee")
+		delete(additionalProperties, "distance_fee")
+		delete(additionalProperties, "seller_funded_product_promotions")
+		delete(additionalProperties, "seller_funded_shipping_promotions")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetOrderPriceDetailsResponseDataLineItem struct {

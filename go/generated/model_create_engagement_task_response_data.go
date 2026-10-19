@@ -21,7 +21,10 @@ var _ MappedNullable = &CreateEngagementTaskResponseData{}
 type CreateEngagementTaskResponseData struct {
 	// The unique identifier for the customer engagement task. Pass this value in the [Send Engagement Message API](67777e448e882e030d29676e) to associate the task with the message sending operation.
 	TaskId *string `json:"task_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _CreateEngagementTaskResponseData CreateEngagementTaskResponseData
 
 // NewCreateEngagementTaskResponseData instantiates a new CreateEngagementTaskResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o CreateEngagementTaskResponseData) ToMap() (map[string]interface{}, error
 	if !IsNil(o.TaskId) {
 		toSerialize["task_id"] = o.TaskId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *CreateEngagementTaskResponseData) UnmarshalJSON(data []byte) (err error) {
+	varCreateEngagementTaskResponseData := _CreateEngagementTaskResponseData{}
+
+	err = json.Unmarshal(data, &varCreateEngagementTaskResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateEngagementTaskResponseData(varCreateEngagementTaskResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "task_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableCreateEngagementTaskResponseData struct {

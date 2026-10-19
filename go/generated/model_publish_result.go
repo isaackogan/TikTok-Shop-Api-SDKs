@@ -25,7 +25,10 @@ type PublishResult struct {
 	Status *string `json:"status,omitempty"`
 	// The list of errors that occurred.
 	FailReasons []FailReason `json:"fail_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _PublishResult PublishResult
 
 // NewPublishResult instantiates a new PublishResult object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o PublishResult) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FailReasons) {
 		toSerialize["fail_reasons"] = o.FailReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *PublishResult) UnmarshalJSON(data []byte) (err error) {
+	varPublishResult := _PublishResult{}
+
+	err = json.Unmarshal(data, &varPublishResult)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PublishResult(varPublishResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "fail_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullablePublishResult struct {

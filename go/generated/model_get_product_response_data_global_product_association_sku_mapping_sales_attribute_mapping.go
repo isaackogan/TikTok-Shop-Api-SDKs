@@ -27,7 +27,10 @@ type GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMappi
 	GlobalValueId *string `json:"global_value_id,omitempty"`
 	// The local sales attribute value ID.
 	LocalValueId *string `json:"local_value_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping
 
 // NewGetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping instantiates a new GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMa
 	if !IsNil(o.LocalValueId) {
 		toSerialize["local_value_id"] = o.LocalValueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping) UnmarshalJSON(data []byte) (err error) {
+	varGetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping := _GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping{}
+
+	err = json.Unmarshal(data, &varGetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping(varGetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_attribute_id")
+		delete(additionalProperties, "local_attribute_id")
+		delete(additionalProperties, "global_value_id")
+		delete(additionalProperties, "local_value_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetProductResponseDataGlobalProductAssociationSkuMappingSalesAttributeMapping struct {

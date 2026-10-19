@@ -23,7 +23,10 @@ type SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommissi
 	Amount *string `json:"amount,omitempty"`
 	// The commission currency.
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission
 
 // NewSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission instantiates a new SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommi
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission) UnmarshalJSON(data []byte) (err error) {
+	varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission := _SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission{}
+
+	err = json.Unmarshal(data, &varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission(varSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission struct {

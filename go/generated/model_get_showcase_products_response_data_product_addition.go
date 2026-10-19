@@ -21,7 +21,10 @@ var _ MappedNullable = &GetShowcaseProductsResponseDataProductAddition{}
 type GetShowcaseProductsResponseDataProductAddition struct {
 	// A list of product images.
 	CustomizedMainImages []GetShowcaseProductsResponseDataProductAdditionCustomizedMainImage `json:"customized_main_images,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShowcaseProductsResponseDataProductAddition GetShowcaseProductsResponseDataProductAddition
 
 // NewGetShowcaseProductsResponseDataProductAddition instantiates a new GetShowcaseProductsResponseDataProductAddition object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetShowcaseProductsResponseDataProductAddition) ToMap() (map[string]inte
 	if !IsNil(o.CustomizedMainImages) {
 		toSerialize["customized_main_images"] = o.CustomizedMainImages
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShowcaseProductsResponseDataProductAddition) UnmarshalJSON(data []byte) (err error) {
+	varGetShowcaseProductsResponseDataProductAddition := _GetShowcaseProductsResponseDataProductAddition{}
+
+	err = json.Unmarshal(data, &varGetShowcaseProductsResponseDataProductAddition)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShowcaseProductsResponseDataProductAddition(varGetShowcaseProductsResponseDataProductAddition)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customized_main_images")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShowcaseProductsResponseDataProductAddition struct {

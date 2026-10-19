@@ -37,7 +37,10 @@ type GetSPSMetricProblemDetailsResponseData struct {
 	SfcrProblemOrderItems []GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem `json:"sfcr_problem_order_items,omitempty"`
 	// Total number of available records.
 	TotalCount *int64 `json:"total_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricProblemDetailsResponseData GetSPSMetricProblemDetailsResponseData
 
 // NewGetSPSMetricProblemDetailsResponseData instantiates a new GetSPSMetricProblemDetailsResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetSPSMetricProblemDetailsResponseData) ToMap() (map[string]interface{},
 	if !IsNil(o.TotalCount) {
 		toSerialize["total_count"] = o.TotalCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricProblemDetailsResponseData) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricProblemDetailsResponseData := _GetSPSMetricProblemDetailsResponseData{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricProblemDetailsResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricProblemDetailsResponseData(varGetSPSMetricProblemDetailsResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "aht_problem_order_items")
+		delete(additionalProperties, "im_dsat_chat_items")
+		delete(additionalProperties, "metric_code")
+		delete(additionalProperties, "nbfr_problem_order_items")
+		delete(additionalProperties, "next_page_token")
+		delete(additionalProperties, "nrr_problem_order_items")
+		delete(additionalProperties, "otdr_problem_order_items")
+		delete(additionalProperties, "sfcr_problem_order_items")
+		delete(additionalProperties, "total_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricProblemDetailsResponseData struct {

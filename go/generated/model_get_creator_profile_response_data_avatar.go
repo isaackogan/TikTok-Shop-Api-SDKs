@@ -25,7 +25,10 @@ type GetCreatorProfileResponseDataAvatar struct {
 	Height *int64 `json:"height,omitempty"`
 	// The URL for the TikTok creator's avatar image file.
 	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorProfileResponseDataAvatar GetCreatorProfileResponseDataAvatar
 
 // NewGetCreatorProfileResponseDataAvatar instantiates a new GetCreatorProfileResponseDataAvatar object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetCreatorProfileResponseDataAvatar) ToMap() (map[string]interface{}, er
 	if !IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorProfileResponseDataAvatar) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorProfileResponseDataAvatar := _GetCreatorProfileResponseDataAvatar{}
+
+	err = json.Unmarshal(data, &varGetCreatorProfileResponseDataAvatar)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorProfileResponseDataAvatar(varGetCreatorProfileResponseDataAvatar)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "url")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorProfileResponseDataAvatar struct {

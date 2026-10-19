@@ -23,7 +23,10 @@ type SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva struct {
 	Amount *string `json:"amount,omitempty"`
 	// Type of currency use
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva
 
 // NewSearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva instantiates a new SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva) ToMap()
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva) UnmarshalJSON(data []byte) (err error) {
+	varSearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva := _SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva{}
+
+	err = json.Unmarshal(data, &varSearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva(varSearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchTAPAffiliateOrdersResponseDataSkuOrderEstimatedPartnerIva struct {

@@ -23,7 +23,10 @@ type MinPrice struct {
 	Amount *string `json:"amount,omitempty"`
 	// Price currency
 	Currency *string `json:"currency,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _MinPrice MinPrice
 
 // NewMinPrice instantiates a new MinPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o MinPrice) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *MinPrice) UnmarshalJSON(data []byte) (err error) {
+	varMinPrice := _MinPrice{}
+
+	err = json.Unmarshal(data, &varMinPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MinPrice(varMinPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableMinPrice struct {

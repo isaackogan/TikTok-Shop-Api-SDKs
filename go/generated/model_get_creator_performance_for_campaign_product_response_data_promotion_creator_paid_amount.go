@@ -23,7 +23,10 @@ type GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmou
 	Currency *string `json:"currency,omitempty"`
 	// The total amount paid for this product.
 	Amount *string `json:"amount,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount
 
 // NewGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount instantiates a new GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidA
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount := _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount{}
+
+	err = json.Unmarshal(data, &varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount(varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "amount")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount struct {

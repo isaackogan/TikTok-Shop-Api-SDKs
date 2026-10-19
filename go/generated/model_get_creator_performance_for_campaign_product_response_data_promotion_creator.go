@@ -37,7 +37,10 @@ type GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator struct 
 	Creator *GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator `json:"creator,omitempty"`
 	// The affiliate product identifier.
 	AffiliateProductId *string `json:"affiliate_product_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator
 
 // NewGetCreatorPerformanceForCampaignProductResponseDataPromotionCreator instantiates a new GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator object
 // This constructor will assign default values to properties that have it defined,
@@ -381,7 +384,41 @@ func (o GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator) ToM
 	if !IsNil(o.AffiliateProductId) {
 		toSerialize["affiliate_product_id"] = o.AffiliateProductId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator) UnmarshalJSON(data []byte) (err error) {
+	varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreator := _GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator{}
+
+	err = json.Unmarshal(data, &varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreator)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator(varGetCreatorPerformanceForCampaignProductResponseDataPromotionCreator)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "paid_amount")
+		delete(additionalProperties, "room_count")
+		delete(additionalProperties, "video_count")
+		delete(additionalProperties, "free_sample_status")
+		delete(additionalProperties, "commission")
+		delete(additionalProperties, "effective_end_time")
+		delete(additionalProperties, "effective_start_time")
+		delete(additionalProperties, "creator")
+		delete(additionalProperties, "affiliate_product_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCreatorPerformanceForCampaignProductResponseDataPromotionCreator struct {

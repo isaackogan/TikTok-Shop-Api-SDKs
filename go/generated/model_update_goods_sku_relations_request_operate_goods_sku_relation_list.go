@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList struct {
 	TtsGoodsId string `json:"tts_goods_id"`
 	// Identifiers of the TikTok Shop SKUs to bind to or unbind from the specified FBT goods.
 	TtsSkuIds []string `json:"tts_sku_ids"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList
@@ -108,6 +108,11 @@ func (o UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList) ToMap() (map[
 	toSerialize := map[string]interface{}{}
 	toSerialize["tts_goods_id"] = o.TtsGoodsId
 	toSerialize["tts_sku_ids"] = o.TtsSkuIds
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList) UnmarshalJSO
 
 	varUpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList := _UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList)
+	err = json.Unmarshal(data, &varUpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList(varUpdateGoodsSKURelationsRequestOperateGoodsSkuRelationList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tts_goods_id")
+		delete(additionalProperties, "tts_sku_ids")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

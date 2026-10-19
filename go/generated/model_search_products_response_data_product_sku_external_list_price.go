@@ -25,7 +25,10 @@ type SearchProductsResponseDataProductSkuExternalListPrice struct {
 	Currency *string `json:"currency,omitempty"`
 	// The external ecommerce platform from which the price is sourced. Possible values: - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
 	Source *string `json:"source,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchProductsResponseDataProductSkuExternalListPrice SearchProductsResponseDataProductSkuExternalListPrice
 
 // NewSearchProductsResponseDataProductSkuExternalListPrice instantiates a new SearchProductsResponseDataProductSkuExternalListPrice object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o SearchProductsResponseDataProductSkuExternalListPrice) ToMap() (map[stri
 	if !IsNil(o.Source) {
 		toSerialize["source"] = o.Source
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchProductsResponseDataProductSkuExternalListPrice) UnmarshalJSON(data []byte) (err error) {
+	varSearchProductsResponseDataProductSkuExternalListPrice := _SearchProductsResponseDataProductSkuExternalListPrice{}
+
+	err = json.Unmarshal(data, &varSearchProductsResponseDataProductSkuExternalListPrice)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchProductsResponseDataProductSkuExternalListPrice(varSearchProductsResponseDataProductSkuExternalListPrice)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "source")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchProductsResponseDataProductSkuExternalListPrice struct {

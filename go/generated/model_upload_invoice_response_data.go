@@ -21,7 +21,10 @@ var _ MappedNullable = &UploadInvoiceResponseData{}
 type UploadInvoiceResponseData struct {
 	// Invoice-level upload errors. This list may be returned even when the top-level `code` is `0`; each entry identifies the affected package and order IDs.
 	Errors []UploadInvoiceResponseDataError `json:"errors,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UploadInvoiceResponseData UploadInvoiceResponseData
 
 // NewUploadInvoiceResponseData instantiates a new UploadInvoiceResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UploadInvoiceResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Errors) {
 		toSerialize["errors"] = o.Errors
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UploadInvoiceResponseData) UnmarshalJSON(data []byte) (err error) {
+	varUploadInvoiceResponseData := _UploadInvoiceResponseData{}
+
+	err = json.Unmarshal(data, &varUploadInvoiceResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UploadInvoiceResponseData(varUploadInvoiceResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "errors")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUploadInvoiceResponseData struct {

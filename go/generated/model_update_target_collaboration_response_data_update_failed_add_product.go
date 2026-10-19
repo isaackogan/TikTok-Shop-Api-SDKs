@@ -23,7 +23,10 @@ type UpdateTargetCollaborationResponseDataUpdateFailedAddProduct struct {
 	Id *string `json:"id,omitempty"`
 	// The desired commission rate for the target collaboration. The desired commission rate is expressed in hundredths of a percent. For example, 3587 is a commission rate of 35.87%. This value must be a minimum of 1000.
 	CommissionRate *int64 `json:"commission_rate,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateTargetCollaborationResponseDataUpdateFailedAddProduct UpdateTargetCollaborationResponseDataUpdateFailedAddProduct
 
 // NewUpdateTargetCollaborationResponseDataUpdateFailedAddProduct instantiates a new UpdateTargetCollaborationResponseDataUpdateFailedAddProduct object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o UpdateTargetCollaborationResponseDataUpdateFailedAddProduct) ToMap() (ma
 	if !IsNil(o.CommissionRate) {
 		toSerialize["commission_rate"] = o.CommissionRate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateTargetCollaborationResponseDataUpdateFailedAddProduct) UnmarshalJSON(data []byte) (err error) {
+	varUpdateTargetCollaborationResponseDataUpdateFailedAddProduct := _UpdateTargetCollaborationResponseDataUpdateFailedAddProduct{}
+
+	err = json.Unmarshal(data, &varUpdateTargetCollaborationResponseDataUpdateFailedAddProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateTargetCollaborationResponseDataUpdateFailedAddProduct(varUpdateTargetCollaborationResponseDataUpdateFailedAddProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "commission_rate")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateTargetCollaborationResponseDataUpdateFailedAddProduct struct {

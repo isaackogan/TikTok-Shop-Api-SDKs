@@ -31,7 +31,10 @@ type GetAuthorizedShopsResponseDataShop struct {
 	Cipher *string `json:"cipher,omitempty"`
 	// The TikTok Shop code, which is also displayed on Seller Center.
 	Code *string `json:"code,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetAuthorizedShopsResponseDataShop GetAuthorizedShopsResponseDataShop
 
 // NewGetAuthorizedShopsResponseDataShop instantiates a new GetAuthorizedShopsResponseDataShop object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetAuthorizedShopsResponseDataShop) ToMap() (map[string]interface{}, err
 	if !IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetAuthorizedShopsResponseDataShop) UnmarshalJSON(data []byte) (err error) {
+	varGetAuthorizedShopsResponseDataShop := _GetAuthorizedShopsResponseDataShop{}
+
+	err = json.Unmarshal(data, &varGetAuthorizedShopsResponseDataShop)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetAuthorizedShopsResponseDataShop(varGetAuthorizedShopsResponseDataShop)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "region")
+		delete(additionalProperties, "seller_type")
+		delete(additionalProperties, "cipher")
+		delete(additionalProperties, "code")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetAuthorizedShopsResponseDataShop struct {

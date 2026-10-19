@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ScheduledSale struct {
 	IsEnabledScheduledSale bool `json:"is_enabled_scheduled_sale"`
 	// Scheduled listing time, expressed as a Unix timestamp in milliseconds; must be later than the current time and within 90 days, and is required when is_enabled_scheduled_sale is true.
 	ScheduleSaleTime int64 `json:"schedule_sale_time"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ScheduledSale ScheduledSale
@@ -108,6 +108,11 @@ func (o ScheduledSale) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["is_enabled_scheduled_sale"] = o.IsEnabledScheduledSale
 	toSerialize["schedule_sale_time"] = o.ScheduleSaleTime
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *ScheduledSale) UnmarshalJSON(data []byte) (err error) {
 
 	varScheduledSale := _ScheduledSale{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varScheduledSale)
+	err = json.Unmarshal(data, &varScheduledSale)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ScheduledSale(varScheduledSale)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_enabled_scheduled_sale")
+		delete(additionalProperties, "schedule_sale_time")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

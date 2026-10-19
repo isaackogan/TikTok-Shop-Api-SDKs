@@ -23,7 +23,10 @@ type RecommendedCategory struct {
 	Id *string `json:"id,omitempty"`
 	// The recommended category name in the requested locale.
 	LocalName *string `json:"local_name,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendedCategory RecommendedCategory
 
 // NewRecommendedCategory instantiates a new RecommendedCategory object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RecommendedCategory) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocalName) {
 		toSerialize["local_name"] = o.LocalName
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendedCategory) UnmarshalJSON(data []byte) (err error) {
+	varRecommendedCategory := _RecommendedCategory{}
+
+	err = json.Unmarshal(data, &varRecommendedCategory)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendedCategory(varRecommendedCategory)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "local_name")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendedCategory struct {

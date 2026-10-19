@@ -27,7 +27,10 @@ type GetShopProductPerformanceDetailResponseDataPerformance struct {
 	TopContents []GetShopProductPerformanceDetailResponseDataPerformanceTopContent `json:"top_contents,omitempty"`
 	// Product-related creators for the period from `start_date_ge` (inclusive) to `end_date_lt` (exclusive). Sorted by GMV; returns only the top 100.
 	TopCreators []GetShopProductPerformanceDetailResponseDataPerformanceTopCreator `json:"top_creators,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopProductPerformanceDetailResponseDataPerformance GetShopProductPerformanceDetailResponseDataPerformance
 
 // NewGetShopProductPerformanceDetailResponseDataPerformance instantiates a new GetShopProductPerformanceDetailResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o GetShopProductPerformanceDetailResponseDataPerformance) ToMap() (map[str
 	if !IsNil(o.TopCreators) {
 		toSerialize["top_creators"] = o.TopCreators
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopProductPerformanceDetailResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopProductPerformanceDetailResponseDataPerformance := _GetShopProductPerformanceDetailResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopProductPerformanceDetailResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopProductPerformanceDetailResponseDataPerformance(varGetShopProductPerformanceDetailResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "intervals")
+		delete(additionalProperties, "ratings")
+		delete(additionalProperties, "top_contents")
+		delete(additionalProperties, "top_creators")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopProductPerformanceDetailResponseDataPerformance struct {

@@ -23,7 +23,10 @@ type Product struct {
 	TokoPid *int64 `json:"toko_pid,omitempty"`
 	// product id in tts format
 	TtsPid *int64 `json:"tts_pid,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _Product Product
 
 // NewProduct instantiates a new Product object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o Product) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TtsPid) {
 		toSerialize["tts_pid"] = o.TtsPid
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *Product) UnmarshalJSON(data []byte) (err error) {
+	varProduct := _Product{}
+
+	err = json.Unmarshal(data, &varProduct)
+
+	if err != nil {
+		return err
+	}
+
+	*o = Product(varProduct)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "toko_pid")
+		delete(additionalProperties, "tts_pid")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableProduct struct {

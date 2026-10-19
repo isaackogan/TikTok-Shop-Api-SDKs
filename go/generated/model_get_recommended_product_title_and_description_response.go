@@ -26,7 +26,10 @@ type GetRecommendedProductTitleAndDescriptionResponse struct {
 	// Request log ID.
 	RequestId *string `json:"request_id,omitempty"`
 	Data *GetRecommendedProductTitleAndDescriptionResponseData `json:"data,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetRecommendedProductTitleAndDescriptionResponse GetRecommendedProductTitleAndDescriptionResponse
 
 // NewGetRecommendedProductTitleAndDescriptionResponse instantiates a new GetRecommendedProductTitleAndDescriptionResponse object
 // This constructor will assign default values to properties that have it defined,
@@ -195,7 +198,36 @@ func (o GetRecommendedProductTitleAndDescriptionResponse) ToMap() (map[string]in
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetRecommendedProductTitleAndDescriptionResponse) UnmarshalJSON(data []byte) (err error) {
+	varGetRecommendedProductTitleAndDescriptionResponse := _GetRecommendedProductTitleAndDescriptionResponse{}
+
+	err = json.Unmarshal(data, &varGetRecommendedProductTitleAndDescriptionResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetRecommendedProductTitleAndDescriptionResponse(varGetRecommendedProductTitleAndDescriptionResponse)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "code")
+		delete(additionalProperties, "message")
+		delete(additionalProperties, "request_id")
+		delete(additionalProperties, "data")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetRecommendedProductTitleAndDescriptionResponse struct {

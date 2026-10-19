@@ -21,7 +21,10 @@ var _ MappedNullable = &GetCategoryRulesResponseDataManufacturer{}
 type GetCategoryRulesResponseDataManufacturer struct {
 	// A flag to indicate whether the manufacturer information is required.
 	IsRequired *bool `json:"is_required,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetCategoryRulesResponseDataManufacturer GetCategoryRulesResponseDataManufacturer
 
 // NewGetCategoryRulesResponseDataManufacturer instantiates a new GetCategoryRulesResponseDataManufacturer object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o GetCategoryRulesResponseDataManufacturer) ToMap() (map[string]interface{
 	if !IsNil(o.IsRequired) {
 		toSerialize["is_required"] = o.IsRequired
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetCategoryRulesResponseDataManufacturer) UnmarshalJSON(data []byte) (err error) {
+	varGetCategoryRulesResponseDataManufacturer := _GetCategoryRulesResponseDataManufacturer{}
+
+	err = json.Unmarshal(data, &varGetCategoryRulesResponseDataManufacturer)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetCategoryRulesResponseDataManufacturer(varGetCategoryRulesResponseDataManufacturer)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "is_required")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetCategoryRulesResponseDataManufacturer struct {

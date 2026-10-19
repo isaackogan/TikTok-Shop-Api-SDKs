@@ -25,7 +25,10 @@ type GetShopSKUPerformanceDetailResponseDataPerformance struct {
 	SkuId *string `json:"sku_id,omitempty"`
 	// Interval data for the requested time range. The time range of each interval is determined by the granularity.
 	Intervals []GetShopSKUPerformanceDetailResponseDataPerformanceInterval `json:"intervals,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetShopSKUPerformanceDetailResponseDataPerformance GetShopSKUPerformanceDetailResponseDataPerformance
 
 // NewGetShopSKUPerformanceDetailResponseDataPerformance instantiates a new GetShopSKUPerformanceDetailResponseDataPerformance object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +162,35 @@ func (o GetShopSKUPerformanceDetailResponseDataPerformance) ToMap() (map[string]
 	if !IsNil(o.Intervals) {
 		toSerialize["intervals"] = o.Intervals
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetShopSKUPerformanceDetailResponseDataPerformance) UnmarshalJSON(data []byte) (err error) {
+	varGetShopSKUPerformanceDetailResponseDataPerformance := _GetShopSKUPerformanceDetailResponseDataPerformance{}
+
+	err = json.Unmarshal(data, &varGetShopSKUPerformanceDetailResponseDataPerformance)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetShopSKUPerformanceDetailResponseDataPerformance(varGetShopSKUPerformanceDetailResponseDataPerformance)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "sku_id")
+		delete(additionalProperties, "intervals")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetShopSKUPerformanceDetailResponseDataPerformance struct {

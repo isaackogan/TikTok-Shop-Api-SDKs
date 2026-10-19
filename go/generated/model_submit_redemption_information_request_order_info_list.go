@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type SubmitRedemptionInformationRequestOrderInfoList struct {
 	RedeemInfo SubmitRedemptionInformationRequestOrderInfoListRedeemInfo `json:"redeem_info"`
 	// Optional, a unique id related to the order line in the caller system
 	SourceUniqueId *string `json:"source_unique_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SubmitRedemptionInformationRequestOrderInfoList SubmitRedemptionInformationRequestOrderInfoList
@@ -145,6 +145,11 @@ func (o SubmitRedemptionInformationRequestOrderInfoList) ToMap() (map[string]int
 	if !IsNil(o.SourceUniqueId) {
 		toSerialize["source_unique_id"] = o.SourceUniqueId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -173,15 +178,22 @@ func (o *SubmitRedemptionInformationRequestOrderInfoList) UnmarshalJSON(data []b
 
 	varSubmitRedemptionInformationRequestOrderInfoList := _SubmitRedemptionInformationRequestOrderInfoList{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSubmitRedemptionInformationRequestOrderInfoList)
+	err = json.Unmarshal(data, &varSubmitRedemptionInformationRequestOrderInfoList)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SubmitRedemptionInformationRequestOrderInfoList(varSubmitRedemptionInformationRequestOrderInfoList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_line_id")
+		delete(additionalProperties, "redeem_info")
+		delete(additionalProperties, "source_unique_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

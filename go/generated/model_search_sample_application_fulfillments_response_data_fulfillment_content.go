@@ -41,7 +41,10 @@ type SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent struct {
 	CreateTime *int64 `json:"create_time,omitempty"`
 	// Only when `format==LIVE`. It refers to the time when the product link is removed from the live room. If the product link remains active and is not removed, then it is the end of the live stream.
 	LiveEndTime *int64 `json:"live_end_time,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent
 
 // NewSearchSampleApplicationFulfillmentsResponseDataFulfillmentContent instantiates a new SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent object
 // This constructor will assign default values to properties that have it defined,
@@ -455,7 +458,43 @@ func (o SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent) ToMap
 	if !IsNil(o.LiveEndTime) {
 		toSerialize["live_end_time"] = o.LiveEndTime
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent) UnmarshalJSON(data []byte) (err error) {
+	varSearchSampleApplicationFulfillmentsResponseDataFulfillmentContent := _SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent{}
+
+	err = json.Unmarshal(data, &varSearchSampleApplicationFulfillmentsResponseDataFulfillmentContent)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent(varSearchSampleApplicationFulfillmentsResponseDataFulfillmentContent)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "view_count")
+		delete(additionalProperties, "like_count")
+		delete(additionalProperties, "comment_count")
+		delete(additionalProperties, "paid_order_count")
+		delete(additionalProperties, "page_link")
+		delete(additionalProperties, "description")
+		delete(additionalProperties, "create_time")
+		delete(additionalProperties, "live_end_time")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSearchSampleApplicationFulfillmentsResponseDataFulfillmentContent struct {

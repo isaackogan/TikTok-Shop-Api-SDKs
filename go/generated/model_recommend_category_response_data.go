@@ -23,7 +23,10 @@ type RecommendCategoryResponseData struct {
 	Categories []RecommendCategoryResponseDataCategory `json:"categories,omitempty"`
 	// The recommended category ID. This is always a leaf category.
 	LeafCategoryId *string `json:"leaf_category_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _RecommendCategoryResponseData RecommendCategoryResponseData
 
 // NewRecommendCategoryResponseData instantiates a new RecommendCategoryResponseData object
 // This constructor will assign default values to properties that have it defined,
@@ -122,7 +125,34 @@ func (o RecommendCategoryResponseData) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LeafCategoryId) {
 		toSerialize["leaf_category_id"] = o.LeafCategoryId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *RecommendCategoryResponseData) UnmarshalJSON(data []byte) (err error) {
+	varRecommendCategoryResponseData := _RecommendCategoryResponseData{}
+
+	err = json.Unmarshal(data, &varRecommendCategoryResponseData)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RecommendCategoryResponseData(varRecommendCategoryResponseData)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "categories")
+		delete(additionalProperties, "leaf_category_id")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableRecommendCategoryResponseData struct {

@@ -31,7 +31,10 @@ type GetSPSMetricTopItemsResponseDataNrrTopProductItem struct {
 	ProductName *string `json:"product_name,omitempty"`
 	// Top negative review reasons.
 	TopReviewReasons []string `json:"top_review_reasons,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetSPSMetricTopItemsResponseDataNrrTopProductItem GetSPSMetricTopItemsResponseDataNrrTopProductItem
 
 // NewGetSPSMetricTopItemsResponseDataNrrTopProductItem instantiates a new GetSPSMetricTopItemsResponseDataNrrTopProductItem object
 // This constructor will assign default values to properties that have it defined,
@@ -270,7 +273,38 @@ func (o GetSPSMetricTopItemsResponseDataNrrTopProductItem) ToMap() (map[string]i
 	if !IsNil(o.TopReviewReasons) {
 		toSerialize["top_review_reasons"] = o.TopReviewReasons
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetSPSMetricTopItemsResponseDataNrrTopProductItem) UnmarshalJSON(data []byte) (err error) {
+	varGetSPSMetricTopItemsResponseDataNrrTopProductItem := _GetSPSMetricTopItemsResponseDataNrrTopProductItem{}
+
+	err = json.Unmarshal(data, &varGetSPSMetricTopItemsResponseDataNrrTopProductItem)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetSPSMetricTopItemsResponseDataNrrTopProductItem(varGetSPSMetricTopItemsResponseDataNrrTopProductItem)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "delivered_order_count")
+		delete(additionalProperties, "image_url")
+		delete(additionalProperties, "negative_order_count")
+		delete(additionalProperties, "product_id")
+		delete(additionalProperties, "product_name")
+		delete(additionalProperties, "top_review_reasons")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetSPSMetricTopItemsResponseDataNrrTopProductItem struct {

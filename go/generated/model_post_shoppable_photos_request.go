@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -31,6 +30,7 @@ type PostShoppablePhotosRequest struct {
 	LinkInfo *PostShoppablePhotosRequestLinkInfo `json:"link_info,omitempty"`
 	// Field to indicate whether the content was AI generated. Marking this field as true will display a tag indicating this post as an AI generated post.
 	IsAiGenerated *bool `json:"is_ai_generated,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PostShoppablePhotosRequest PostShoppablePhotosRequest
@@ -228,6 +228,11 @@ func (o PostShoppablePhotosRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.IsAiGenerated) {
 		toSerialize["is_ai_generated"] = o.IsAiGenerated
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -255,15 +260,24 @@ func (o *PostShoppablePhotosRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varPostShoppablePhotosRequest := _PostShoppablePhotosRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPostShoppablePhotosRequest)
+	err = json.Unmarshal(data, &varPostShoppablePhotosRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PostShoppablePhotosRequest(varPostShoppablePhotosRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "photos_info")
+		delete(additionalProperties, "music_id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "link_info")
+		delete(additionalProperties, "is_ai_generated")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

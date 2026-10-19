@@ -27,7 +27,10 @@ type ListProductSKPPStatusesRequest struct {
 	PageSize *int64 `json:"page_size,omitempty"`
 	// Page number, starting from 1. Default: 1.
 	PageNo *int64 `json:"page_no,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ListProductSKPPStatusesRequest ListProductSKPPStatusesRequest
 
 // NewListProductSKPPStatusesRequest instantiates a new ListProductSKPPStatusesRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -196,7 +199,36 @@ func (o ListProductSKPPStatusesRequest) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.PageNo) {
 		toSerialize["page_no"] = o.PageNo
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ListProductSKPPStatusesRequest) UnmarshalJSON(data []byte) (err error) {
+	varListProductSKPPStatusesRequest := _ListProductSKPPStatusesRequest{}
+
+	err = json.Unmarshal(data, &varListProductSKPPStatusesRequest)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ListProductSKPPStatusesRequest(varListProductSKPPStatusesRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "product_ids")
+		delete(additionalProperties, "skpp_status")
+		delete(additionalProperties, "page_size")
+		delete(additionalProperties, "page_no")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableListProductSKPPStatusesRequest struct {

@@ -39,7 +39,10 @@ type GetPackageDetailResponseDataSenderAddress struct {
 	AddressLine3 *string `json:"address_line3,omitempty"`
 	// The fourth line of the sender's street address. Usually only for the Brazilian market.
 	AddressLine4 *string `json:"address_line4,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetPackageDetailResponseDataSenderAddress GetPackageDetailResponseDataSenderAddress
 
 // NewGetPackageDetailResponseDataSenderAddress instantiates a new GetPackageDetailResponseDataSenderAddress object
 // This constructor will assign default values to properties that have it defined,
@@ -418,7 +421,42 @@ func (o GetPackageDetailResponseDataSenderAddress) ToMap() (map[string]interface
 	if !IsNil(o.AddressLine4) {
 		toSerialize["address_line4"] = o.AddressLine4
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetPackageDetailResponseDataSenderAddress) UnmarshalJSON(data []byte) (err error) {
+	varGetPackageDetailResponseDataSenderAddress := _GetPackageDetailResponseDataSenderAddress{}
+
+	err = json.Unmarshal(data, &varGetPackageDetailResponseDataSenderAddress)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetPackageDetailResponseDataSenderAddress(varGetPackageDetailResponseDataSenderAddress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "full_address")
+		delete(additionalProperties, "phone_number")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "postal_code")
+		delete(additionalProperties, "address_detail")
+		delete(additionalProperties, "region_code")
+		delete(additionalProperties, "address_line1")
+		delete(additionalProperties, "address_line2")
+		delete(additionalProperties, "address_line3")
+		delete(additionalProperties, "address_line4")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetPackageDetailResponseDataSenderAddress struct {

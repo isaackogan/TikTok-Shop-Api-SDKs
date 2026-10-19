@@ -29,7 +29,10 @@ type GetLatestUnreadMessagesResponseDataNewestMessageList struct {
 	SenderId *string `json:"sender_id,omitempty"`
 	// The number of unread messages of the sender in the conversation.
 	UnreadMessageCount *int64 `json:"unread_message_count,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _GetLatestUnreadMessagesResponseDataNewestMessageList GetLatestUnreadMessagesResponseDataNewestMessageList
 
 // NewGetLatestUnreadMessagesResponseDataNewestMessageList instantiates a new GetLatestUnreadMessagesResponseDataNewestMessageList object
 // This constructor will assign default values to properties that have it defined,
@@ -233,7 +236,37 @@ func (o GetLatestUnreadMessagesResponseDataNewestMessageList) ToMap() (map[strin
 	if !IsNil(o.UnreadMessageCount) {
 		toSerialize["unread_message_count"] = o.UnreadMessageCount
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *GetLatestUnreadMessagesResponseDataNewestMessageList) UnmarshalJSON(data []byte) (err error) {
+	varGetLatestUnreadMessagesResponseDataNewestMessageList := _GetLatestUnreadMessagesResponseDataNewestMessageList{}
+
+	err = json.Unmarshal(data, &varGetLatestUnreadMessagesResponseDataNewestMessageList)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetLatestUnreadMessagesResponseDataNewestMessageList(varGetLatestUnreadMessagesResponseDataNewestMessageList)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "conversation_id")
+		delete(additionalProperties, "content")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "sender_id")
+		delete(additionalProperties, "unread_message_count")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableGetLatestUnreadMessagesResponseDataNewestMessageList struct {

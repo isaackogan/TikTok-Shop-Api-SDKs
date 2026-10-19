@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -39,6 +38,7 @@ type CreateGlobalProductRequestSku struct {
 	ExtraIdentifierCodes []string `json:"extra_identifier_codes,omitempty"`
 	// An external identifier used in an external ecommerce platform. This is used to associate the global SKU between TikTok Shop and the external ecommerce platform.  Max length: 999 characters
 	ExternalGlobalSkuId *string `json:"external_global_sku_id,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateGlobalProductRequestSku CreateGlobalProductRequestSku
@@ -376,6 +376,11 @@ func (o CreateGlobalProductRequestSku) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ExternalGlobalSkuId) {
 		toSerialize["external_global_sku_id"] = o.ExternalGlobalSkuId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -403,15 +408,28 @@ func (o *CreateGlobalProductRequestSku) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateGlobalProductRequestSku := _CreateGlobalProductRequestSku{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateGlobalProductRequestSku)
+	err = json.Unmarshal(data, &varCreateGlobalProductRequestSku)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateGlobalProductRequestSku(varCreateGlobalProductRequestSku)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "global_quantity")
+		delete(additionalProperties, "sales_attributes")
+		delete(additionalProperties, "seller_sku")
+		delete(additionalProperties, "price")
+		delete(additionalProperties, "identifier_code")
+		delete(additionalProperties, "inventory")
+		delete(additionalProperties, "sku_unit_count")
+		delete(additionalProperties, "extra_identifier_codes")
+		delete(additionalProperties, "external_global_sku_id")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

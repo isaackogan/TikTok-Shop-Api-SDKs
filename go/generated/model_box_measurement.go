@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type BoxMeasurement struct {
 	Length string `json:"length"`
 	// The unit used for the carton's `length`, `width`, and `height` values.  **Possible values:** * `METER` (m) * `CENTIMETER` (cm) * `MILLIMETER` (mm) * `FOOT` (ft) * `MICRON` (μm) * `INCH` (in)
 	LengthUnit string `json:"length_unit"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BoxMeasurement BoxMeasurement
@@ -220,6 +220,11 @@ func (o BoxMeasurement) ToMap() (map[string]interface{}, error) {
 	toSerialize["height"] = o.Height
 	toSerialize["length"] = o.Length
 	toSerialize["length_unit"] = o.LengthUnit
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -252,15 +257,25 @@ func (o *BoxMeasurement) UnmarshalJSON(data []byte) (err error) {
 
 	varBoxMeasurement := _BoxMeasurement{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBoxMeasurement)
+	err = json.Unmarshal(data, &varBoxMeasurement)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BoxMeasurement(varBoxMeasurement)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "weight")
+		delete(additionalProperties, "weight_unit")
+		delete(additionalProperties, "width")
+		delete(additionalProperties, "height")
+		delete(additionalProperties, "length")
+		delete(additionalProperties, "length_unit")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -21,7 +21,10 @@ var _ MappedNullable = &UpdateStockOperationSettingsRequestStockOperationSetting
 type UpdateStockOperationSettingsRequestStockOperationSetting struct {
 	// Controls automatic inventory replenishment after a seller-fulfilled (FBM) order is canceled. When at least one SKU is supplied, omitting `stock_operation_setting` or `enable_auto_restock` uses `false`. - `true`: Enable automatic replenishment for the specified SKUs. - `false`: Disable automatic replenishment for the specified SKUs.
 	EnableAutoRestock *bool `json:"enable_auto_restock,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _UpdateStockOperationSettingsRequestStockOperationSetting UpdateStockOperationSettingsRequestStockOperationSetting
 
 // NewUpdateStockOperationSettingsRequestStockOperationSetting instantiates a new UpdateStockOperationSettingsRequestStockOperationSetting object
 // This constructor will assign default values to properties that have it defined,
@@ -85,7 +88,33 @@ func (o UpdateStockOperationSettingsRequestStockOperationSetting) ToMap() (map[s
 	if !IsNil(o.EnableAutoRestock) {
 		toSerialize["enable_auto_restock"] = o.EnableAutoRestock
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *UpdateStockOperationSettingsRequestStockOperationSetting) UnmarshalJSON(data []byte) (err error) {
+	varUpdateStockOperationSettingsRequestStockOperationSetting := _UpdateStockOperationSettingsRequestStockOperationSetting{}
+
+	err = json.Unmarshal(data, &varUpdateStockOperationSettingsRequestStockOperationSetting)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateStockOperationSettingsRequestStockOperationSetting(varUpdateStockOperationSettingsRequestStockOperationSetting)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "enable_auto_restock")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableUpdateStockOperationSettingsRequestStockOperationSetting struct {

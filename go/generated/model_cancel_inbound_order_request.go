@@ -12,7 +12,6 @@ package generated
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type CancelInboundOrderRequest struct {
 	OrderId string `json:"order_id"`
 	// Reason for cancelling the inbound order. The value must not be empty or contain only whitespace.
 	CancelReason string `json:"cancel_reason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CancelInboundOrderRequest CancelInboundOrderRequest
@@ -108,6 +108,11 @@ func (o CancelInboundOrderRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["order_id"] = o.OrderId
 	toSerialize["cancel_reason"] = o.CancelReason
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -136,15 +141,21 @@ func (o *CancelInboundOrderRequest) UnmarshalJSON(data []byte) (err error) {
 
 	varCancelInboundOrderRequest := _CancelInboundOrderRequest{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCancelInboundOrderRequest)
+	err = json.Unmarshal(data, &varCancelInboundOrderRequest)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CancelInboundOrderRequest(varCancelInboundOrderRequest)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "order_id")
+		delete(additionalProperties, "cancel_reason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
