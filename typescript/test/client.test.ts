@@ -177,6 +177,69 @@ describe('stub transport', () => {
   });
 });
 
+describe('GET bodies and 64-bit IDs', () => {
+  it('getConversationList sends its body with a GET, and signs it', async () => {
+    await make().affiliateSeller.getConversationList({ pageSize: 10, getConversationListRequest: { onlyNeedConversationId: true } });
+    const s = seen[0];
+    expect(s.method).toBe('GET');
+    expect(s.path).toBe('/affiliate_seller/202412/conversations');
+    expect(s.body).toBe('{"only_need_conversation_id":true}');
+    expect(s.headers['content-type']).toBe('application/json');
+    expect(s.headers['x-tts-access-token']).toBe('tok');
+    expect(q(s, 'shop_cipher')).toBe('cipher1');
+    checkSigned(s);
+  });
+
+  it('returns 19-digit IDs in a response exactly', async () => {
+    reply = { status: 200, body: '{"code":0,"message":"Success","request_id":"r0","data":{"id":1729507467923261408,"title":"t"}}' };
+    const product = await make().products.getProduct({ productId: '1729507467923261408' });
+    expect(product.data?.id).toBe('1729507467923261408');
+
+    reply = {
+      status: 200,
+      body: '{"code":0,"message":"Success","request_id":"r0","data":{"skus":[{"id":7494049642642441621,"product_id":1729507467923261408,"sku_orders":3}],"total_count":1}}',
+    };
+    const perf = await make().analytics.getShopSKUPerformanceList({ startDateGe: new Date('2026-01-01'), endDateLt: new Date('2026-01-02') });
+    expect(perf.data?.skus?.[0]).toEqual({ id: '7494049642642441621', productId: '1729507467923261408', skuOrders: 3 });
+    expect(perf.data?.totalCount).toBe(1);
+  });
+
+  it('sends an integer ID body location as a bare JSON number, signed over those bytes', async () => {
+    await make().products.submitSizeChartAppeal({
+      submitSizeChartAppealRequest: {
+        productId: '7494049642642441621',
+        appealMessage: {
+          fieldName: 'APPEAL_MESSAGE_FIELD_SIZE_CHART',
+          indicatorDetails: [{ indicatorType: 'REQUIRED_DIMENSION' }],
+          sizeChartId: '1729507467923261408',
+        },
+      },
+    });
+    const s = seen[0];
+    // product_id is an integer in the spec; size_chart_id here is a string and stays one.
+    expect(s.body).toBe(
+      '{"product_id":7494049642642441621,"appeal_message":{"field_name":"APPEAL_MESSAGE_FIELD_SIZE_CHART",' +
+        '"indicator_details":[{"indicator_type":"REQUIRED_DIMENSION"}],"size_chart_id":"1729507467923261408"}}',
+    );
+    checkSigned(s);
+  });
+
+  it('leaves string IDs in other bodies unchanged (ruling R6)', async () => {
+    await make().fulfillment.combinePackage({
+      combinePackageRequest: { combinablePackages: [{ id: '1729507467923261408', orderIds: ['576461413038785752'] }] },
+    });
+    expect(seen[0].body).toBe('{"combinable_packages":[{"id":"1729507467923261408","order_ids":["576461413038785752"]}]}');
+    checkSigned(seen[0]);
+
+    await make().products.submitProductViaOpportunity({
+      opportunityId: 'o1',
+      submitProductViaOpportunityRequest: { productId: '7494049642642441621' },
+    });
+    expect(seen[1].body).toBe('{"product_id":"7494049642642441621"}');
+    checkSigned(seen[1]);
+  });
+});
+
 describe('wiring', () => {
   it('every operation is reachable as client.<group>.<operationId>', () => {
     const c = make() as unknown as Record<string, Record<string, unknown>>;

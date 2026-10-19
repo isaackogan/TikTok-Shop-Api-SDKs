@@ -1,6 +1,9 @@
 import * as g from './generated/index.ts';
 import { TikTokShopError } from './errors.ts';
-import { requiresShopCipher, sign } from './signing.ts';
+import { ID_BODY_PATHS } from './generated/meta.ts';
+import { rewriteIdNumbers } from './json.ts';
+import { operationFor, requiresShopCipher, sign } from './signing.ts';
+import { createFetchApi } from './transport.ts';
 
 export const DEFAULT_BASE_URL = 'https://open-api.tiktokglobalshop.com';
 
@@ -12,9 +15,14 @@ export interface TikTokShopOptions {
   baseUrl?: string;
   /** Per-request timeout in milliseconds. */
   timeoutMs?: number;
-  /** HTTP client override (defaults to the global `fetch`). */
+  /**
+   * HTTP client override (defaults to the global `fetch`). A GET with a body, which `fetch`
+   * refuses, is sent with `node:http`/`node:https` instead.
+   */
   fetch?: typeof fetch;
 }
+
+const JSON_MIME = /^application\/(?:[^;/\s]+\+)?json\s*(?:;|$)/i;
 
 /** Parse a raw query string into decoded pairs. A literal `+` stays a `+`. */
 function parseQuery(raw: string): [string, string][] {
@@ -57,7 +65,7 @@ export class TikTokShop {
       middleware: [{ pre: (ctx) => this.requestHook(ctx), post: (ctx) => this.responseHook(ctx),
         onError: (ctx) => this.errorHook(ctx),
       }],
-      fetchApi: this.buildFetch(),
+      fetchApi: createFetchApi({ fetch: options.fetch, timeoutMs: options.timeoutMs }),
     });
     this.affiliateCreator = new g.AffiliateCreatorApi(cfg);
     this.affiliatePartner = new g.AffiliatePartnerApi(cfg);
@@ -85,13 +93,6 @@ export class TikTokShop {
     return new TikTokShop({ ...this.options, ...shop });
   }
 
-  private buildFetch(): typeof fetch {
-    const base = this.options.fetch ?? ((...a: Parameters<typeof fetch>) => fetch(...a));
-    const ms = this.options.timeoutMs;
-    if (!ms) return base;
-    return (input, init) => base(input, { ...init, signal: init?.signal ?? AbortSignal.timeout(ms) });
-  }
-
   private async requestHook(ctx: g.RequestContext): Promise<g.FetchParams> {
     const o = this.options;
     const url = new URL(ctx.url);
@@ -107,7 +108,13 @@ export class TikTokShop {
     const headers = new Headers(ctx.init.headers as HeadersInit | undefined);
     const contentType = headers.get('content-type');
     let body = ctx.init.body;
-    // 3. TODO(Task 7): location-precise rewrite of integer ID fields in the JSON body goes here.
+    // 3. the operation's integer ID locations in a JSON body go out as bare JSON numbers (§6.6);
+    //    every other body is sent byte-for-byte as is
+    if (typeof body === 'string' && JSON_MIME.test(contentType ?? '')) {
+      const op = operationFor(method, url.pathname);
+      const paths = op && ID_BODY_PATHS[op.operationId];
+      if (paths && paths.length > 0) body = rewriteIdNumbers(body, paths);
+    }
     // 4. access token
     if (o.accessToken) headers.set('x-tts-access-token', o.accessToken);
     // 5. sign over the final path, decoded query and body

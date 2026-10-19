@@ -1,5 +1,5 @@
 import { createHmac } from 'node:crypto';
-import { OPERATIONS } from './generated/meta.ts';
+import { OPERATIONS, type OperationMeta } from './generated/meta.ts';
 
 export interface SignRequest {
   path: string;
@@ -33,7 +33,9 @@ export function sign(req: SignRequest): string {
 }
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const matchers: { method: string; re: RegExp; needs: boolean }[] = OPERATIONS.map((op) => ({
+const matchers: { op: OperationMeta; literals: number; method: string; re: RegExp; needs: boolean }[] = OPERATIONS.map((op) => ({
+  op,
+  literals: op.path.split('/').filter((seg) => !/^\{[^}]+\}$/.test(seg)).length,
   method: op.method.toUpperCase(),
   re: new RegExp(
     '^' +
@@ -50,4 +52,12 @@ const matchers: { method: string; re: RegExp; needs: boolean }[] = OPERATIONS.ma
 export function requiresShopCipher(method: string, path: string): boolean {
   const m = method.toUpperCase();
   return matchers.some((x) => x.method === m && x.re.test(path) && x.needs);
+}
+
+/** The operation for `method` and `path`, preferring the template with the most literal segments. */
+export function operationFor(method: string, path: string): OperationMeta | undefined {
+  const m = method.toUpperCase();
+  let best: (typeof matchers)[number] | undefined;
+  for (const x of matchers) if (x.method === m && x.re.test(path) && (!best || x.literals > best.literals)) best = x;
+  return best?.op;
 }
