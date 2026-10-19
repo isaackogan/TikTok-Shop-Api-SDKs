@@ -1,0 +1,8 @@
+typescript/src/generated/** linguist-generated=true
+python/src/tiktok_shop_api/generated/** linguist-generated=true
+go/generated/** linguist-generated=true
+java/src/main/java/com/isaackogan/tiktok/shop/generated/** linguist-generated=true
+kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/generated/** linguist-generated=true
+php/src/Generated/** linguist-generated=true
+rust/src/generated/** linguist-generated=true
+csharp/src/TikTokShop.Api/Generated/** linguist-generated=true

@@ -1,0 +1,13 @@
+{
+  "name": "tiktok-shop-api-sdks",
+  "private": true,
+  "packageManager": "pnpm@11.5.2",
+  "scripts": {
+    "generate": "turbo run generate",
+    "build": "turbo run build",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}

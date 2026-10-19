@@ -1,0 +1,21 @@
+{
+  "Affiliate creator": "affiliateCreator",
+  "Affiliate partner": "affiliatePartner",
+  "Affiliate seller": "affiliateSeller",
+  "Analytics": "analytics",
+  "Authorization": "authorization",
+  "Customer engagement": "customerEngagement",
+  "Customer service": "customerService",
+  "Event": "event",
+  "Finance": "finance",
+  "Fulfilled by TikTok (FBT)": "fulfilledByTikTok",
+  "Fulfillment": "fulfillment",
+  "Logistics": "logistics",
+  "Orders": "orders",
+  "Products": "products",
+  "Promotion": "promotion",
+  "Return and refund": "returnAndRefund",
+  "Seller": "seller",
+  "Supply chain": "supplyChain",
+  "Tools": "tools"
+}
