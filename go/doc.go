@@ -6,6 +6,19 @@
 // field per API group of [TikTokShop]. This package adds request signing, the shop cipher, the access
 // token header and error handling around them.
 //
+// # OAuth
+//
+// [NewAuth] builds authorization URLs ([Auth.AuthorizationURL]) and trades codes and refresh tokens for a
+// [TokenSet] ([Auth.ExchangeCode], [Auth.Refresh]).
+//
+// # Webhooks
+//
+// [Webhooks].VerifyAndParse checks a delivery's signature and returns a [WebhookEvent]: a pointer to the
+// generated model for its type (type-switch on it) or an [UnknownWebhookEvent]. [ErrWebhookSignature] means
+// the signature does not match.
+//
+// Signing follows TikTok's documentation and has not been verified against the live API.
+//
 // # Errors
 //
 // Every failure is a [*Error], whatever its class, and is returned by the generated call's Execute

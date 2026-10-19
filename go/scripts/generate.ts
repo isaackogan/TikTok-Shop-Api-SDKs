@@ -29,5 +29,9 @@ rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
 for (const f of readdirSync(out).filter((n) => n.endsWith('.go'))) cpSync(resolve(out, f), resolve(dest, f));
 
+// The generated WebhookEvent oneOf union is never used (webhooks.go dispatches on `type` itself) and its
+// unmarshaller has unreachable code that fails `go vet`, so it is not shipped.
+rmSync(resolve(dest, 'model_webhook_event.go'), { force: true });
+
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
-run('gofmt', ['-w', 'generated/meta.go'], pkg);
+run('gofmt', ['-w', 'generated/meta.go', 'generated/webhook_models.go'], pkg);
