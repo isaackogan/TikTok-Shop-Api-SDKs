@@ -36,7 +36,8 @@ def camel_to_pascal(s: str) -> str:
 
 
 def camel_to_snake(s: str) -> str:
-    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", s).lower()
+    # "TikTok" is one word (ruling R9): fulfilledByTikTok -> fulfilled_by_tiktok
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", s.replace("TikTok", "Tiktok")).lower()
 
 
 def pyliteral(value: object) -> str:

@@ -8,7 +8,7 @@ from tiktok_shop_api.generated._meta import OPERATIONS
 def snake(name: str) -> str:
     import re
 
-    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name).lower()
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", name.replace("TikTok", "Tiktok")).lower()
 
 
 def test_every_operation_is_reachable_sync_and_async():
@@ -33,3 +33,17 @@ def test_groups_match_shared_api_groups():
     c = TikTokShop(app_key="k", app_secret="s")
     for camel in groups.values():
         assert hasattr(c, snake(camel)), camel
+
+
+def test_python_group_names():
+    expected = [
+        "affiliate_creator", "affiliate_partner", "affiliate_seller", "analytics", "authorization",
+        "customer_engagement", "customer_service", "event", "finance", "fulfilled_by_tiktok", "fulfillment",
+        "logistics", "orders", "products", "promotion", "return_and_refund", "seller", "supply_chain", "tools",
+    ]
+    from tiktok_shop_api.generated._groups import ASYNC_GROUPS, SYNC_GROUPS
+
+    assert sorted(SYNC_GROUPS) == sorted(expected) == sorted(ASYNC_GROUPS)
+    c = TikTokShop(app_key="k", app_secret="s")
+    for name in expected:
+        assert hasattr(c, name), name

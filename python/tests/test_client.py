@@ -348,3 +348,16 @@ def test_async_with_shop(stub):
     assert stub.seen[0].headers["x-tts-access-token"] == "tok2"
     assert stub.seen[1].headers["x-tts-access-token"] == "tok"
     assert q(stub.seen[1], "shop_cipher") == "cipher1"
+
+
+def test_default_client_honours_proxy_environment(monkeypatch):
+    monkeypatch.setenv("HTTPS_PROXY", "http://127.0.0.1:9")
+    c = TikTokShop(app_key="k", app_secret="s")
+    mounts = c._client.get_httpx_client()._mounts
+    assert any(p.pattern == "https://" for p in mounts), "trust_env proxy mount missing"
+    child = c.with_shop(shop_cipher="x")
+    assert any(p.pattern == "https://" for p in child._client.get_httpx_client()._mounts)
+    assert child._client.get_httpx_client() is not c._client.get_httpx_client()
+    monkeypatch.delenv("HTTPS_PROXY")
+    plain = TikTokShop(app_key="k", app_secret="s")
+    assert not any(p.pattern == "https://" for p in plain._client.get_httpx_client()._mounts)

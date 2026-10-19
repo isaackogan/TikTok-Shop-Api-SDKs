@@ -161,7 +161,7 @@ class TikTokShop:
     customer_service: Any
     event: Any
     finance: Any
-    fulfilled_by_tik_tok: Any
+    fulfilled_by_tiktok: Any
     fulfillment: Any
     logistics: Any
     orders: Any
@@ -186,16 +186,18 @@ class TikTokShop:
         self._creds = _Credentials(app_key, app_secret, access_token, shop_cipher)
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout
-        self._transport: httpx.BaseTransport = transport if transport is not None else httpx.HTTPTransport()
+        self._transport: httpx.BaseTransport | None = transport
         self._init_groups(self._transport)
 
-    def _init_groups(self, transport: httpx.BaseTransport) -> None:
+    def _init_groups(self, transport: httpx.BaseTransport | None) -> None:
         self._client = Client(
             base_url=self._base_url,
             timeout=_timeout(self._timeout),
             httpx_args={
                 "auth": _SigningAuth(self._creds),
-                "transport": transport,
+                # No transport of our own unless the caller gave one: httpx then builds its default,
+                # which honours HTTP(S)_PROXY, ALL_PROXY, NO_PROXY and SSL_CERT_FILE.
+                **({"transport": transport} if transport is not None else {}),
                 "event_hooks": {"response": [_sync_hook]},
             },
         )
@@ -204,6 +206,9 @@ class TikTokShop:
 
     def with_shop(self, *, access_token: str | None = _KEEP, shop_cipher: str | None = _KEEP) -> TikTokShop:
         """A client for another shop or token that shares this client's HTTP transport.
+
+        A transport you passed in is shared; otherwise the new client builds its own default httpx client with
+        the same base URL and timeout.
 
         Arguments left out keep this client's values. This client is not changed. Closing the returned
         client does not close the shared transport; close the original for that.
@@ -217,7 +222,7 @@ class TikTokShop:
         child._base_url = self._base_url
         child._timeout = self._timeout
         child._transport = self._transport
-        child._init_groups(_SharedTransport(self._transport))
+        child._init_groups(None if self._transport is None else _SharedTransport(self._transport))
         return child
 
     def close(self) -> None:
@@ -242,7 +247,7 @@ class AsyncTikTokShop:
     customer_service: Any
     event: Any
     finance: Any
-    fulfilled_by_tik_tok: Any
+    fulfilled_by_tiktok: Any
     fulfillment: Any
     logistics: Any
     orders: Any
@@ -267,18 +272,18 @@ class AsyncTikTokShop:
         self._creds = _Credentials(app_key, app_secret, access_token, shop_cipher)
         self._base_url = base_url.rstrip("/")
         self._timeout = timeout
-        self._transport: httpx.AsyncBaseTransport = (
-            transport if transport is not None else httpx.AsyncHTTPTransport()
-        )
+        self._transport: httpx.AsyncBaseTransport | None = transport
         self._init_groups(self._transport)
 
-    def _init_groups(self, transport: httpx.AsyncBaseTransport) -> None:
+    def _init_groups(self, transport: httpx.AsyncBaseTransport | None) -> None:
         self._client = Client(
             base_url=self._base_url,
             timeout=_timeout(self._timeout),
             httpx_args={
                 "auth": _SigningAuth(self._creds),
-                "transport": transport,
+                # No transport of our own unless the caller gave one: httpx then builds its default,
+                # which honours HTTP(S)_PROXY, ALL_PROXY, NO_PROXY and SSL_CERT_FILE.
+                **({"transport": transport} if transport is not None else {}),
                 "event_hooks": {"response": [_async_hook]},
             },
         )
@@ -296,7 +301,7 @@ class AsyncTikTokShop:
         child._base_url = self._base_url
         child._timeout = self._timeout
         child._transport = self._transport
-        child._init_groups(_SharedAsyncTransport(self._transport))
+        child._init_groups(None if self._transport is None else _SharedAsyncTransport(self._transport))
         return child
 
     async def aclose(self) -> None:
