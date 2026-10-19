@@ -451,7 +451,7 @@ func TestCallerContextCancellationIsReported(t *testing.T) {
 func TestWithShopDoesNotTouchTheOriginal(t *testing.T) {
 	s := newStub(t)
 	a := s.client()
-	b := a.WithShop(ShopOptions{AccessToken: "tok2", ShopCipher: "cipher2"})
+	b := a.WithShop(ShopAccessToken("tok2"), ShopCipher("cipher2"))
 	if _, _, err := b.Orders.GetOrderList(context.Background()).PageSize(1).Execute(); err != nil {
 		t.Fatal(err)
 	}
@@ -472,11 +472,64 @@ func TestWithShopDoesNotTouchTheOriginal(t *testing.T) {
 func TestWithShopSharesTheTransport(t *testing.T) {
 	rec := &recorder{}
 	a := New(Options{AppKey: "k", AppSecret: "s", BaseURL: "http://example.invalid", Transport: rec})
-	b := a.WithShop(ShopOptions{AccessToken: "t", ShopCipher: "c"})
+	b := a.WithShop(ShopAccessToken("t"), ShopCipher("c"))
 	if _, _, err := b.Authorization.GetAuthorizedShops(context.Background()).Execute(); err != nil {
 		t.Fatal(err)
 	}
 	if rec.got == nil || rec.got.Header.Get("x-tts-access-token") != "t" {
 		t.Error("the child did not use the shared inner transport")
+	}
+}
+
+// withShopSends calls GetOrderList on c and returns the shop_cipher (and its count) and the token header.
+func withShopSends(t *testing.T, s *stub, c *TikTokShop) (cipher string, n int, token string) {
+	t.Helper()
+	if _, _, err := c.Orders.GetOrderList(context.Background()).PageSize(1).Execute(); err != nil {
+		t.Fatal(err)
+	}
+	r := s.last(t)
+	cipher, n = qv(decodedQuery(t, r.RawQuery), "shop_cipher")
+	return cipher, n, r.Header.Get("x-tts-access-token")
+}
+
+func TestWithShopKeepsWhatIsOmitted(t *testing.T) {
+	s := newStub(t)
+	a := s.client()
+	if cipher, _, token := withShopSends(t, s, a.WithShop(ShopAccessToken("tok2"))); cipher != "cipher1" || token != "tok2" {
+		t.Errorf("token-only: cipher %q token %q", cipher, token)
+	}
+	if cipher, _, token := withShopSends(t, s, a.WithShop(ShopCipher("cipher2"))); cipher != "cipher2" || token != "tok" {
+		t.Errorf("cipher-only: cipher %q token %q", cipher, token)
+	}
+	if cipher, _, token := withShopSends(t, s, a.WithShop()); cipher != "cipher1" || token != "tok" {
+		t.Errorf("none: cipher %q token %q", cipher, token)
+	}
+	if cipher, _, token := withShopSends(t, s, a); cipher != "cipher1" || token != "tok" {
+		t.Errorf("original changed: cipher %q token %q", cipher, token)
+	}
+}
+
+func TestWithShopReplacesBoth(t *testing.T) {
+	s := newStub(t)
+	a := s.client()
+	if cipher, n, token := withShopSends(t, s, a.WithShop(ShopAccessToken("tok2"), ShopCipher("cipher2"))); cipher != "cipher2" || n != 1 || token != "tok2" {
+		t.Errorf("cipher %q (x%d) token %q", cipher, n, token)
+	}
+	if cipher, _, token := withShopSends(t, s, a); cipher != "cipher1" || token != "tok" {
+		t.Errorf("original changed: cipher %q token %q", cipher, token)
+	}
+}
+
+func TestWithShopEmptyValueClears(t *testing.T) {
+	s := newStub(t)
+	a := s.client()
+	if _, n, token := withShopSends(t, s, a.WithShop(ShopCipher(""))); n != 0 || token != "tok" {
+		t.Errorf("cipher cleared: shop_cipher x%d token %q", n, token)
+	}
+	if _, _, token := withShopSends(t, s, a.WithShop(ShopAccessToken(""))); token != "" {
+		t.Errorf("token cleared: token %q", token)
+	}
+	if cipher, n, token := withShopSends(t, s, a); cipher != "cipher1" || n != 1 || token != "tok" {
+		t.Errorf("original changed: cipher %q token %q", cipher, token)
 	}
 }

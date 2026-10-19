@@ -32,11 +32,14 @@ type Options struct {
 	Transport http.RoundTripper
 }
 
-// ShopOptions select another shop for [TikTokShop.WithShop]. An empty value means none.
-type ShopOptions struct {
-	AccessToken string
-	ShopCipher  string
-}
+// ShopOption selects what [TikTokShop.WithShop] changes. See [ShopAccessToken] and [ShopCipher].
+type ShopOption func(*Options)
+
+// ShopAccessToken sets the access token of the client WithShop returns. An empty token clears it.
+func ShopAccessToken(token string) ShopOption { return func(o *Options) { o.AccessToken = token } }
+
+// ShopCipher sets the shop cipher of the client WithShop returns. An empty cipher clears it.
+func ShopCipher(cipher string) ShopOption { return func(o *Options) { o.ShopCipher = cipher } }
 
 // TikTokShop is a client for the TikTok Shop API: one field per API group, each the concrete generated
 // service, e.g. client.Orders.GetOrderList(ctx).PageSize(20).Execute().
@@ -111,11 +114,19 @@ func New(o Options) *TikTokShop {
 	}
 }
 
-// WithShop returns a client for another shop and token that shares this client's transport, base URL
-// and timeout. The receiver is not changed.
-func (c *TikTokShop) WithShop(s ShopOptions) *TikTokShop {
+// WithShop returns a client for another shop or token that shares this client's transport, base URL
+// and timeout. A value you do not pass keeps this client's value; passing it empty clears it:
+//
+//	other := c.WithShop(tiktokshop.ShopAccessToken("t2"), tiktokshop.ShopCipher("c2"))
+//	keepsCipher := c.WithShop(tiktokshop.ShopAccessToken("t2"))
+//	noCipher := c.WithShop(tiktokshop.ShopCipher(""))
+//
+// The receiver is not changed.
+func (c *TikTokShop) WithShop(opts ...ShopOption) *TikTokShop {
 	o := c.opts
-	o.AccessToken, o.ShopCipher = s.AccessToken, s.ShopCipher
+	for _, f := range opts {
+		f(&o)
+	}
 	if o.Timeout == 0 {
 		o.Timeout = -1 // already resolved: 0 here means none
 	}
