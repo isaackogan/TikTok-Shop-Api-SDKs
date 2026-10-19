@@ -122,7 +122,47 @@ describe('stub transport', () => {
     const err = await make().authorization.getAuthorizedShops().catch((e) => e);
     expect(err).toBeInstanceOf(TikTokShopError);
     expect(err.httpStatus).toBe(500);
+    expect(err.code).toBe(1);
+    expect(err.message).toBe('boom');
     expect(err.requestId).toBe('r2');
+  });
+
+  it('raises TikTokShopError for a 2xx non-JSON body', async () => {
+    reply = { status: 200, body: '<html>nope</html>' };
+    const err = await make().authorization.getAuthorizedShops().catch((e) => e);
+    expect(err).toBeInstanceOf(TikTokShopError);
+    expect(err.httpStatus).toBe(200);
+    expect(err.cause).toBeDefined();
+  });
+
+  it('raises TikTokShopError with a cause when the port is closed', async () => {
+    const tmp = createServer();
+    await new Promise<void>((r) => tmp.listen(0, '127.0.0.1', r));
+    const port = (tmp.address() as AddressInfo).port;
+    await new Promise<void>((r) => tmp.close(() => r()));
+    const err = await make({ baseUrl: `http://127.0.0.1:${port}` })
+      .authorization.getAuthorizedShops()
+      .catch((e) => e);
+    expect(err).toBeInstanceOf(TikTokShopError);
+    expect(err.cause).toBeDefined();
+    expect(err.httpStatus).toBeUndefined();
+  });
+
+  it('raises TikTokShopError on timeout', async () => {
+    const hang = createServer(() => {});
+    await new Promise<void>((r) => hang.listen(0, '127.0.0.1', r));
+    const port = (hang.address() as AddressInfo).port;
+    try {
+      const err = await make({ baseUrl: `http://127.0.0.1:${port}`, timeoutMs: 100 })
+        .authorization.getAuthorizedShops()
+        .catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect(err.message).toMatch(/timed out/);
+      expect(err.cause).toBeDefined();
+    } finally {
+      hang.closeAllConnections();
+      await new Promise<void>((r) => hang.close(() => r()));
+    }
   });
 
   it('withShop changes token and cipher without touching the original', async () => {

@@ -54,7 +54,9 @@ export class TikTokShop {
     this.options = options;
     const cfg = new g.Configuration({
       basePath: (options.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, ''),
-      middleware: [{ pre: (ctx) => this.requestHook(ctx), post: (ctx) => this.responseHook(ctx) }],
+      middleware: [{ pre: (ctx) => this.requestHook(ctx), post: (ctx) => this.responseHook(ctx),
+        onError: (ctx) => this.errorHook(ctx),
+      }],
       fetchApi: this.buildFetch(),
     });
     this.affiliateCreator = new g.AffiliateCreatorApi(cfg);
@@ -121,11 +123,22 @@ export class TikTokShop {
 
   private async responseHook(ctx: g.ResponseContext): Promise<Response | void> {
     const res = ctx.response;
-    let envelope: { code?: unknown; message?: unknown; request_id?: unknown } | undefined;
+    let envelope: { code?: unknown; message?: unknown; request_id?: unknown } | null | undefined;
+    let parseError: unknown;
     try {
       envelope = JSON.parse(await res.clone().text());
-    } catch {
+    } catch (e) {
       envelope = undefined;
+      parseError = e;
+    }
+    if (res.ok && parseError !== undefined) {
+      throw new TikTokShopError({
+        code: 0,
+        message: `Response is not valid JSON (HTTP ${res.status})`,
+        requestId: '',
+        httpStatus: res.status,
+        cause: parseError,
+      });
     }
     const isObj = envelope !== null && typeof envelope === 'object';
     const code = isObj && typeof envelope!.code === 'number' ? envelope!.code : undefined;
@@ -142,5 +155,16 @@ export class TikTokShop {
     if (code !== undefined && code !== 0) {
       throw new TikTokShopError({ code, message: message ?? '', requestId });
     }
+  }
+
+  private async errorHook(ctx: g.ErrorContext): Promise<Response | void> {
+    const e = ctx.error;
+    const timedOut = e instanceof Error && (e.name === 'TimeoutError' || e.name === 'AbortError');
+    throw new TikTokShopError({
+      code: 0,
+      message: `${timedOut ? 'Request timed out or was aborted' : 'Request failed'}: ${e instanceof Error ? e.message : String(e)}`,
+      requestId: '',
+      cause: e,
+    });
   }
 }
