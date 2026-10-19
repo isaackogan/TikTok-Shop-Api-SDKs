@@ -99,6 +99,16 @@ export class TikTokShopAuth {
     if (typeof d !== 'object' || d === null || Array.isArray(d)) {
       throw new TikTokShopError({ code: -1, message: 'Token response has no data', requestId: env.request_id ?? '' });
     }
+    for (const k of ['access_token', 'refresh_token']) {
+      if (typeof d[k] !== 'string' || d[k] === '') {
+        throw new TikTokShopError({ code: -1, message: `Token response is missing ${k}`, requestId: env.request_id ?? '' });
+      }
+    }
+    for (const k of ['access_token_expire_in', 'refresh_token_expire_in']) {
+      if (typeof d[k] !== 'number') {
+        throw new TikTokShopError({ code: -1, message: `Token response is missing ${k}`, requestId: env.request_id ?? '' });
+      }
+    }
     return {
       accessToken: d.access_token,
       accessTokenExpireIn: d.access_token_expire_in,

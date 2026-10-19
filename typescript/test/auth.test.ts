@@ -128,3 +128,25 @@ describe('token errors never contain secrets', () => {
     for (const call of calls(auth)) await expectClean(call);
   });
 });
+
+describe('required token fields', () => {
+  const full: Record<string, unknown> = { access_token: 'a', access_token_expire_in: 1, refresh_token: 'r', refresh_token_expire_in: 2 };
+  for (const missing of Object.keys(full)) {
+    it(`rejects a response missing ${missing}`, async () => {
+      const data = { ...full };
+      delete data[missing];
+      replyBody = JSON.stringify({ code: 0, request_id: 'q7', data });
+      const err = await new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl }).exchangeCode('c').catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect(err.code).toBe(-1);
+      expect(err.requestId).toBe('q7');
+      expect(err.message).toContain(missing);
+    });
+  }
+  it('rejects wrong types on refresh', async () => {
+    replyBody = JSON.stringify({ code: 0, request_id: 'q8', data: { ...full, access_token: '' } });
+    const err = await new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl }).refresh('c').catch((e) => e);
+    expect(err).toBeInstanceOf(TikTokShopError);
+    expect(err.requestId).toBe('q8');
+  });
+});
