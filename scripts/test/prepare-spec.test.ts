@@ -45,6 +45,7 @@ describe('prepareSpec', () => {
     expect(props.sku_ids.items).toEqual({ type: 'string' });
     expect(props.big).toEqual({ type: ['string', 'null'], description: 'Large' });
     expect(props.count).toEqual({ type: 'integer', format: 'int32' });
+    expect(props.serial).toEqual({ type: 'integer', format: 'int64' }); // only a string example has 16+ digits
     const params = spec.paths['/order/202309/orders/search'].post.parameters;
     expect(params[0].schema.type).toBe('integer');
     expect(params[1].schema).toEqual({ type: 'string' });

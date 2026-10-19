@@ -16,7 +16,7 @@
           "content": {
             "application/json": {
               "schema": { "$ref": "#/components/schemas/OrderRequest" },
-              "example": { "product_id": 1729507467923261408, "count": 3, "big": 7494049642642441621 }
+              "example": { "product_id": 1729507467923261408, "count": 3, "big": 7494049642642441621, "serial": "1234567890123456" }
             }
           }
         },
@@ -72,6 +72,7 @@
           "product_id": { "type": "integer", "format": "int64", "description": "Product", "deprecated": true },
           "sku_ids": { "type": "array", "items": { "type": "integer", "format": "int64" } },
           "count": { "type": "integer", "format": "int32" },
+          "serial": { "type": "integer", "format": "int64" },
           "big": { "type": ["integer", "null"], "format": "int64", "description": "Large" }
         }
       },

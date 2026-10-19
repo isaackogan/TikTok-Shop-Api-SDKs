@@ -55,7 +55,6 @@ export function groupName(tag: string, groups: Record<string, string>): string {
 function digitsOf(v: unknown): number {
   if (isRaw(v)) return String((v as any).rawJSON).replace('-', '').length;
   if (typeof v === 'number' && Number.isInteger(v)) return BigInt(Math.abs(v)).toString().length;
-  if (typeof v === 'string' && /^\d+$/.test(v)) return v.length;
   return 0;
 }
 
