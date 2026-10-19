@@ -8,6 +8,7 @@
     "test": "turbo run test"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "2.41.0",
     "turbo": "^2.5.0"
   }
 }
