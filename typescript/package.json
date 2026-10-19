@@ -4,10 +4,10 @@
   "description": "Unofficial TypeScript client for the TikTok Shop Partner API. Not affiliated with or endorsed by TikTok or ByteDance.",
   "type": "module",
   "engines": { "node": ">=22" },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+    ".": { "types": "./dist/index.d.mts", "import": "./dist/index.mjs" }
   },
   "files": ["dist"],
   "scripts": {

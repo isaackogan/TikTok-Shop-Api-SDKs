@@ -103,16 +103,6 @@ describe('stub transport', () => {
     checkSigned(s);
   });
 
-  it('rewrites ID fields in the JSON body to bare numbers', async () => {
-    await make().affiliateSeller.createOpenCollaboration({
-      createOpenCollaborationRequest: { productId: '7494049642642441621' } as never,
-    });
-    const s = seen[0];
-    expect(s.body).toContain('"product_id":7494049642642441621');
-    expect(s.body).not.toContain('"7494049642642441621"');
-    checkSigned(s);
-  });
-
   it('omits the token header when there is no access token', async () => {
     await make({ accessToken: undefined }).authorization.getAuthorizedShops();
     expect(seen[0].headers['x-tts-access-token']).toBeUndefined();

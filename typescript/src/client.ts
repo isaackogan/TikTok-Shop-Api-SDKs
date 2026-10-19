@@ -1,5 +1,4 @@
 import * as g from './generated/index.ts';
-import { ID_FIELDS } from './generated/meta.ts';
 import { TikTokShopError } from './errors.ts';
 import { requiresShopCipher, sign } from './signing.ts';
 
@@ -17,9 +16,6 @@ export interface TikTokShopOptions {
   fetch?: typeof fetch;
 }
 
-const ID_SET = new Set<string>(ID_FIELDS);
-const SENTINEL = '\u0000id:';
-
 /** Parse a raw query string into decoded pairs. A literal `+` stays a `+`. */
 function parseQuery(raw: string): [string, string][] {
   if (raw === '') return [];
@@ -29,33 +25,6 @@ function parseQuery(raw: string): [string, string][] {
       ? ([decodeURIComponent(p), ''] as [string, string])
       : ([decodeURIComponent(p.slice(0, i)), decodeURIComponent(p.slice(i + 1))] as [string, string]);
   });
-}
-
-/** Rewrite ID fields holding digit strings to bare JSON numbers (keeps 19-digit IDs exact). */
-export function rewriteIdFields(json: string): string {
-  let changed = false;
-  const mark = (v: unknown): unknown =>
-    typeof v === 'string' && /^\d+$/.test(v) ? ((changed = true), SENTINEL + v) : v;
-  const walk = (v: unknown): unknown => {
-    if (Array.isArray(v)) return v.map(walk);
-    if (v && typeof v === 'object') {
-      const out: Record<string, unknown> = {};
-      for (const [k, x] of Object.entries(v)) {
-        out[k] = ID_SET.has(k) ? (Array.isArray(x) ? x.map(mark) : mark(x)) : walk(x);
-      }
-      return out;
-    }
-    return v;
-  };
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(json);
-  } catch {
-    return json;
-  }
-  const walked = walk(parsed);
-  if (!changed) return json;
-  return JSON.stringify(walked).replace(/"\u0000id:(\d+)"|"\\u0000id:(\d+)"/g, (_m, a, b) => a ?? b);
 }
 
 export class TikTokShop {
@@ -136,8 +105,7 @@ export class TikTokShop {
     const headers = new Headers(ctx.init.headers as HeadersInit | undefined);
     const contentType = headers.get('content-type');
     let body = ctx.init.body;
-    // 3. ID fields as bare numbers
-    if (typeof body === 'string' && /json/i.test(contentType ?? '')) body = rewriteIdFields(body);
+    // 3. TODO(Task 7): location-precise rewrite of integer ID fields in the JSON body goes here.
     // 4. access token
     if (o.accessToken) headers.set('x-tts-access-token', o.accessToken);
     // 5. sign over the final path, decoded query and body
