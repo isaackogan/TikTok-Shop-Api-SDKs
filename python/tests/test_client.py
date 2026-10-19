@@ -117,10 +117,55 @@ def test_no_token_header_without_access_token(stub):
     assert "x-tts-access-token" not in stub.seen[0].headers
 
 
-def test_hook_drops_caller_supplied_reserved_params(stub):
-    c = make(stub)
-    c.authorization.get_authorized_shops()
-    assert [k for k, _ in decoded_query(stub.seen[0])].count("app_key") == 1
+def test_hook_replaces_caller_supplied_reserved_params(stub):
+    from tiktok_shop_api.client import _Credentials, _SigningAuth
+
+    auth = _SigningAuth(_Credentials("k1", "s1", "tok", "cipher1"))
+    req = httpx.Request(
+        "POST",
+        "https://open-api.tiktokglobalshop.com/order/202309/orders/search?app_key=evil&sign=x&timestamp=1&shop_cipher=bad&page_size=3",
+    )
+    req.read()
+    out = next(auth.auth_flow(req))
+    pairs = decoded_query(out)
+    for key in ("app_key", "sign", "timestamp", "shop_cipher"):
+        assert [k for k, _ in pairs].count(key) == 1, key
+    assert q(out, "app_key") == "k1"
+    assert q(out, "shop_cipher") == "cipher1"
+    assert q(out, "timestamp") != "1" and q(out, "sign") != "x"
+    assert q(out, "page_size") == "3"
+    check_signed(out)
+
+
+def test_multipart_upload_is_sent_intact_and_signed_without_the_body(stub):
+    from tiktok_shop_api.generated.models.upload_product_image_request import UploadProductImageRequest
+    from tiktok_shop_api.generated.types import File
+
+    body = UploadProductImageRequest(data=File(payload=b"PNGDATA", file_name="a.png", mime_type="image/png"))
+    make(stub).products.upload_product_image(body=body)
+    r = stub.seen[0]
+    ct = r.headers["content-type"]
+    assert ct.startswith("multipart/form-data; boundary=")
+    boundary = ct.split("boundary=")[1]
+    assert f"--{boundary}".encode() in r.content and b"PNGDATA" in r.content
+    assert b'filename="a.png"' in r.content
+    pairs = decoded_query(r)
+    sent = next(v for k, v in pairs if k == "sign")
+    assert sent == Signer.sign(
+        path=r.url.path,
+        query=[p for p in pairs if p[0] != "sign"],
+        content_type=ct,
+        body=None,
+        app_secret="s1",
+    )
+    # a body-including signature must differ, so the check above is not vacuous
+    assert sent != Signer.sign(
+        path=r.url.path,
+        query=[p for p in pairs if p[0] != "sign"],
+        content_type="application/octet-stream",
+        body=r.content,
+        app_secret="s1",
+    )
 
 
 def test_get_with_body_sends_body_and_signs_it(stub):

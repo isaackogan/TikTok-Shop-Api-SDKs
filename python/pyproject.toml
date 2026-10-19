@@ -22,6 +22,7 @@ keywords = [
 dev = [
   "pytest>=8",
   "openapi-python-client==0.29.1",
+  "pyright==1.1.414",
 ]
 
 [project.urls]

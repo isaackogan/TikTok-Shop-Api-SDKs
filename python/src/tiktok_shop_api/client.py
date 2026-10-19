@@ -10,7 +10,48 @@ from urllib.parse import parse_qsl, quote
 import httpx
 
 from .errors import TikTokShopError
-from .generated._groups import ASYNC_GROUPS, SYNC_GROUPS
+from .generated._groups import (
+    ASYNC_GROUPS,
+    SYNC_GROUPS,
+    AffiliateCreatorApi,
+    AsyncAffiliateCreatorApi,
+    AffiliatePartnerApi,
+    AsyncAffiliatePartnerApi,
+    AffiliateSellerApi,
+    AsyncAffiliateSellerApi,
+    AnalyticsApi,
+    AsyncAnalyticsApi,
+    AuthorizationApi,
+    AsyncAuthorizationApi,
+    CustomerEngagementApi,
+    AsyncCustomerEngagementApi,
+    CustomerServiceApi,
+    AsyncCustomerServiceApi,
+    EventApi,
+    AsyncEventApi,
+    FinanceApi,
+    AsyncFinanceApi,
+    FulfilledByTikTokApi,
+    AsyncFulfilledByTikTokApi,
+    FulfillmentApi,
+    AsyncFulfillmentApi,
+    LogisticsApi,
+    AsyncLogisticsApi,
+    OrdersApi,
+    AsyncOrdersApi,
+    ProductsApi,
+    AsyncProductsApi,
+    PromotionApi,
+    AsyncPromotionApi,
+    ReturnAndRefundApi,
+    AsyncReturnAndRefundApi,
+    SellerApi,
+    AsyncSellerApi,
+    SupplyChainApi,
+    AsyncSupplyChainApi,
+    ToolsApi,
+    AsyncToolsApi,
+)
 from .generated.client import Client
 from .signing import Signer, requires_shop_cipher
 
@@ -152,25 +193,25 @@ def _timeout(value: float | httpx.Timeout | None) -> httpx.Timeout:
 class TikTokShop:
     """Synchronous TikTok Shop API client. One attribute per API group, e.g. ``client.orders``."""
 
-    affiliate_creator: Any
-    affiliate_partner: Any
-    affiliate_seller: Any
-    analytics: Any
-    authorization: Any
-    customer_engagement: Any
-    customer_service: Any
-    event: Any
-    finance: Any
-    fulfilled_by_tiktok: Any
-    fulfillment: Any
-    logistics: Any
-    orders: Any
-    products: Any
-    promotion: Any
-    return_and_refund: Any
-    seller: Any
-    supply_chain: Any
-    tools: Any
+    affiliate_creator: AffiliateCreatorApi
+    affiliate_partner: AffiliatePartnerApi
+    affiliate_seller: AffiliateSellerApi
+    analytics: AnalyticsApi
+    authorization: AuthorizationApi
+    customer_engagement: CustomerEngagementApi
+    customer_service: CustomerServiceApi
+    event: EventApi
+    finance: FinanceApi
+    fulfilled_by_tiktok: FulfilledByTikTokApi
+    fulfillment: FulfillmentApi
+    logistics: LogisticsApi
+    orders: OrdersApi
+    products: ProductsApi
+    promotion: PromotionApi
+    return_and_refund: ReturnAndRefundApi
+    seller: SellerApi
+    supply_chain: SupplyChainApi
+    tools: ToolsApi
 
     def __init__(
         self,
@@ -238,25 +279,25 @@ class TikTokShop:
 class AsyncTikTokShop:
     """Asynchronous TikTok Shop API client. One attribute per API group; every method is a coroutine."""
 
-    affiliate_creator: Any
-    affiliate_partner: Any
-    affiliate_seller: Any
-    analytics: Any
-    authorization: Any
-    customer_engagement: Any
-    customer_service: Any
-    event: Any
-    finance: Any
-    fulfilled_by_tiktok: Any
-    fulfillment: Any
-    logistics: Any
-    orders: Any
-    products: Any
-    promotion: Any
-    return_and_refund: Any
-    seller: Any
-    supply_chain: Any
-    tools: Any
+    affiliate_creator: AsyncAffiliateCreatorApi
+    affiliate_partner: AsyncAffiliatePartnerApi
+    affiliate_seller: AsyncAffiliateSellerApi
+    analytics: AsyncAnalyticsApi
+    authorization: AsyncAuthorizationApi
+    customer_engagement: AsyncCustomerEngagementApi
+    customer_service: AsyncCustomerServiceApi
+    event: AsyncEventApi
+    finance: AsyncFinanceApi
+    fulfilled_by_tiktok: AsyncFulfilledByTikTokApi
+    fulfillment: AsyncFulfillmentApi
+    logistics: AsyncLogisticsApi
+    orders: AsyncOrdersApi
+    products: AsyncProductsApi
+    promotion: AsyncPromotionApi
+    return_and_refund: AsyncReturnAndRefundApi
+    seller: AsyncSellerApi
+    supply_chain: AsyncSupplyChainApi
+    tools: AsyncToolsApi
 
     def __init__(
         self,

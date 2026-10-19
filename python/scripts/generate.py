@@ -60,10 +60,13 @@ class OperationSource:
         self.src = path.read_text(encoding="utf-8")
         self.imports: list[tuple[str, str]] = []  # (module, name) from `...models.x`
         self.needs_datetime = False
+        self.type_names: set[str] = set()  # names from `...types` other than Response
         for node in tree.body:
             if isinstance(node, ast.ImportFrom) and node.level == 3 and (node.module or "").startswith("models."):
                 for a in node.names:
                     self.imports.append((node.module, a.name))
+            elif isinstance(node, ast.ImportFrom) and node.level == 3 and node.module == "types":
+                self.type_names.update(a.name for a in node.names if a.name != "Response")
             elif isinstance(node, ast.Import) and any(a.name == "datetime" for a in node.names):
                 self.needs_datetime = True
         fn = next(n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name == "sync")
@@ -152,8 +155,10 @@ def write_meta(meta: dict) -> None:
 def write_groups(groups: dict[str, dict]) -> None:
     runtime_imports: set[tuple[str, str]] = set()
     needs_datetime = False
+    type_names: set[str] = {"UNSET", "Unset"}
     for g in groups.values():
         for _, src in g["ops"]:
+            type_names |= src.type_names
             runtime_imports.update(src.imports)
             needs_datetime |= src.needs_datetime
     seen: dict[str, str] = {}
@@ -162,7 +167,8 @@ def write_groups(groups: dict[str, dict]) -> None:
             raise SystemExit(f"model name {name} is imported from both {seen[name]} and {mod}")
 
     out = [HEADER, "from __future__ import annotations\n\n", "from typing import TYPE_CHECKING, Any\n\n"]
-    out.append("from .._base import AsyncGroup, SyncGroup\nfrom .types import UNSET, Unset\n\n")
+    out.append("from .._base import AsyncGroup, SyncGroup\n")
+    out.append(f"from .types import {', '.join(sorted(type_names))}\n\n")
     out.append("if TYPE_CHECKING:\n")
     if needs_datetime:
         out.append("    import datetime\n\n")
