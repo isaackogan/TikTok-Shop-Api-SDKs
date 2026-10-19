@@ -10,6 +10,7 @@ export {
 } from './auth.ts';
 export {
   EVENT_TYPES,
+  isUnknownWebhookEvent,
   Webhooks,
   WebhookSignatureError,
   type RawBody,

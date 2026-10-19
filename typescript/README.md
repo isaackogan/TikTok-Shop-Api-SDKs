@@ -33,6 +33,7 @@ const auth = new TikTokShopAuth({
 const url = auth.authorizationUrl({ type: 'seller', region: 'us', state: 'csrf-token' });
 
 // 2. TikTok redirects back with ?code=...; exchange it.
+const code = new URL(callbackUrl).searchParams.get('code')!;
 const tokens = await auth.exchangeCode(code);
 // tokens.accessToken, tokens.refreshToken, tokens.openId, tokens.grantedScopes, ...
 
@@ -79,29 +80,35 @@ const shopB = client.withShop({ accessToken: tokenB, shopCipher: cipherB });
 Verify the signature against the **raw** request body, then parse it into a typed event:
 
 ```ts
+import { createServer } from 'node:http';
 import { Webhooks, WebhookSignatureError } from 'tiktok-shop-api';
 
-// Express: use express.raw({ type: '*/*' }) so req.body is the untouched Buffer.
-app.post('/tiktok', express.raw({ type: '*/*' }), (req, res) => {
+createServer(async (req, res) => {
+  const chunks: Buffer[] = [];
+  for await (const chunk of req) chunks.push(chunk as Buffer);
+  const rawBody = Buffer.concat(chunks); // exactly as received
+
   try {
     const event = Webhooks.verifyAndParse({
       appKey: process.env.TTS_APP_KEY!,
       appSecret: process.env.TTS_APP_SECRET!,
-      rawBody: req.body, // string | Uint8Array, exactly as received
-      signature: req.header('authorization') ?? '',
+      rawBody,
+      signature: String(req.headers.authorization ?? ''),
     });
-    if (event.type === 1) {
-      // OrderStatusChangeWebhook: event.data?.orderStatus, event.shopId, ...
+    if ('raw' in event) {
+      console.log('unknown webhook type', event.type, event.raw);
+    } else if (event.type === 1) {
+      console.log(event.shopId, event.data?.orderStatus); // OrderStatusChangeWebhook
     }
-    res.sendStatus(200);
+    res.writeHead(200).end();
   } catch (e) {
-    res.sendStatus(e instanceof WebhookSignatureError ? 401 : 500);
+    res.writeHead(e instanceof WebhookSignatureError ? 401 : 500).end();
   }
-});
+}).listen(3000);
 ```
 
 - Never re-serialize the body before verifying. Changed whitespace or key order makes the signature fail.
-- A webhook type this SDK does not know comes back as `{ type, raw }`.
+- A webhook type this SDK does not know comes back as `{ type, raw }`. Known events never have a `raw` property, so `'raw' in event` (or `isUnknownWebhookEvent(event)`) separates the two. After that, `event.type` narrows to the specific webhook model.
 - `EVENT_TYPES` maps a type number to its name (`1` is `ORDER_STATUS_CHANGE`).
 
 ## IDs are strings

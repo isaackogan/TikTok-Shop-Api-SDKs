@@ -7,10 +7,18 @@ import type { WebhookEvent as GeneratedWebhookEvent } from './generated/models/W
 /** A typed webhook: one of the generated webhook models, discriminated by `type`. */
 export type WebhookEvent = GeneratedWebhookEvent;
 
-/** A webhook whose `type` this SDK does not know. `raw` is the parsed body. */
+/**
+ * A webhook whose `type` this SDK does not know. `raw` is the parsed body.
+ * Known events never have a `raw` property, so `'raw' in event` (or {@link isUnknownWebhookEvent})
+ * separates the two; after that, `event.type` narrows to a specific webhook model.
+ */
 export interface UnknownWebhookEvent {
   type: number;
   raw: unknown;
+}
+
+export function isUnknownWebhookEvent(event: WebhookEvent | UnknownWebhookEvent): event is UnknownWebhookEvent {
+  return 'raw' in event;
 }
 
 export class WebhookSignatureError extends Error {

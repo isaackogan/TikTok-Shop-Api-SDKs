@@ -64,3 +64,15 @@ describe('token calls', () => {
     }
   }
 });
+
+describe('token response without data', () => {
+  for (const body of ['{"code":0,"message":"ok","request_id":"r9"}', '{"code":0,"message":"ok","request_id":"r9","data":null}', '{"code":0,"message":"ok","request_id":"r9","data":"x"}']) {
+    it(body, async () => {
+      replyBody = body;
+      const auth = new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl });
+      const err = await auth.exchangeCode('c').catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect(err.requestId).toBe('r9');
+    });
+  }
+});

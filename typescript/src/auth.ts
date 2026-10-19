@@ -94,7 +94,10 @@ export class TikTokShopAuth {
         httpStatus: res.ok ? undefined : res.status,
       });
     }
-    const d = env.data ?? {};
+    const d = env.data;
+    if (typeof d !== 'object' || d === null || Array.isArray(d)) {
+      throw new TikTokShopError({ code: -1, message: 'Token response has no data', requestId: env.request_id ?? '' });
+    }
     return {
       accessToken: d.access_token,
       accessTokenExpireIn: d.access_token_expire_in,
