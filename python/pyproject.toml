@@ -7,6 +7,20 @@ name = "tiktok-shop-api"
 version = "0.1.0"
 description = "Python client for the TikTok Shop API (TikTok Shop Partner API): request signing, OAuth, multi-shop support and typed webhooks. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."
 license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Typing :: Typed",
+]
 # The generated client uses typing.Self and enum.StrEnum, both new in Python 3.11.
 requires-python = ">=3.11"
 dependencies = [
@@ -23,6 +37,7 @@ dev = [
   "pytest>=8",
   "openapi-python-client==0.29.1",
   "pyright==1.1.414",
+  "flask>=3",  # only to type-check the README example
 ]
 
 [project.urls]
@@ -35,3 +50,9 @@ packages = ["src/tiktok_shop_api"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.pyright]
+include = ["src", "tests/readme_examples.py", "tests/test_auth.py", "tests/test_webhooks.py", "tests/test_readme.py"]
+exclude = ["src/tiktok_shop_api/generated", "**/__pycache__"]
+venvPath = "."
+venv = ".venv"
