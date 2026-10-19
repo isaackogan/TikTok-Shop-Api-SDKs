@@ -1,0 +1,16 @@
+from enum import StrEnum
+
+
+class PackageUpdateWebhookDataScType(StrEnum):
+    ADDRESS_UPDATE_SPLIT = "ADDRESS_UPDATE_SPLIT"
+    CANCEL_COMBINE = "CANCEL_COMBINE"
+    CANCEL_FULFILL_SPLIT = "CANCEL_FULFILL_SPLIT"
+    CANCEL_SPLIT = "CANCEL_SPLIT"
+    COMBINE = "COMBINE"
+    FULFILL_UNCOMBINE = "FULFILL_UNCOMBINE"
+    PARTLY_CANCEL_SPLIT = "PARTLY_CANCEL_SPLIT"
+    SPLIT = "SPLIT"
+    SPLIT_BY_SKU_CANCEL = "SPLIT_BY_SKU_CANCEL"
+
+    def __str__(self) -> str:
+        return str(self.value)

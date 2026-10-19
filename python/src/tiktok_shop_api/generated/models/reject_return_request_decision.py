@@ -1,0 +1,12 @@
+from enum import StrEnum
+
+
+class RejectReturnRequestDecision(StrEnum):
+    OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG = "OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG"
+    REJECT_RECEIVED_PACKAGE = "REJECT_RECEIVED_PACKAGE"
+    REJECT_REFUND = "REJECT_REFUND"
+    REJECT_REPLACEMENT = "REJECT_REPLACEMENT"
+    REJECT_RETURN = "REJECT_RETURN"
+
+    def __str__(self) -> str:
+        return str(self.value)

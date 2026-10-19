@@ -1,0 +1,21 @@
+from enum import StrEnum
+
+
+class GetConversationsResponseDataConversationLatestMessageType(StrEnum):
+    ALLOCATED_SERVICE = "ALLOCATED_SERVICE"
+    BUYER_ENTER_FROM_ORDER = "BUYER_ENTER_FROM_ORDER"
+    BUYER_ENTER_FROM_PRODUCT = "BUYER_ENTER_FROM_PRODUCT"
+    BUYER_ENTER_FROM_TRANSFER = "BUYER_ENTER_FROM_TRANSFER"
+    COUPON_CARD = "COUPON_CARD"
+    EMOTICONS = "EMOTICONS"
+    IMAGE = "IMAGE"
+    NOTIFICATION = "NOTIFICATION"
+    ORDER_CARD = "ORDER_CARD"
+    OTHER = "OTHER"
+    PRODUCT_CARD = "PRODUCT_CARD"
+    RETURN_REFUND_CARD = "RETURN_REFUND_CARD"
+    TEXT = "TEXT"
+    VIDEO = "VIDEO"
+
+    def __str__(self) -> str:
+        return str(self.value)

@@ -1,0 +1,106 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.search_fbt_inventory_record_response_data_inventory_record import (
+        SearchFBTInventoryRecordResponseDataInventoryRecord,
+    )
+
+
+T = TypeVar("T", bound="SearchFBTInventoryRecordResponseData")
+
+
+@_attrs_define
+class SearchFBTInventoryRecordResponseData:
+    """
+    Attributes:
+        inventory_records (list[SearchFBTInventoryRecordResponseDataInventoryRecord] | Unset): A list of inventory
+            records information.
+        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
+            this value in the `page_token` parameter of your request if the current response does not return all the
+            results.
+        total_count (int | Unset): The total number of the search results.
+    """
+
+    inventory_records: list[SearchFBTInventoryRecordResponseDataInventoryRecord] | Unset = UNSET
+    next_page_token: str | Unset = UNSET
+    total_count: int | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        inventory_records: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.inventory_records, Unset):
+            inventory_records = []
+            for inventory_records_item_data in self.inventory_records:
+                inventory_records_item = inventory_records_item_data.to_dict()
+                inventory_records.append(inventory_records_item)
+
+        next_page_token = self.next_page_token
+
+        total_count = self.total_count
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if inventory_records is not UNSET:
+            field_dict["inventory_records"] = inventory_records
+        if next_page_token is not UNSET:
+            field_dict["next_page_token"] = next_page_token
+        if total_count is not UNSET:
+            field_dict["total_count"] = total_count
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.search_fbt_inventory_record_response_data_inventory_record import (
+            SearchFBTInventoryRecordResponseDataInventoryRecord,  # noqa: PLC0415
+        )
+
+        d = dict(src_dict)
+        _inventory_records = d.pop("inventory_records", UNSET)
+        inventory_records: list[SearchFBTInventoryRecordResponseDataInventoryRecord] | Unset = UNSET
+        if _inventory_records is not UNSET:
+            inventory_records = []
+            for inventory_records_item_data in _inventory_records:
+                inventory_records_item = SearchFBTInventoryRecordResponseDataInventoryRecord.from_dict(
+                    inventory_records_item_data
+                )
+
+                inventory_records.append(inventory_records_item)
+
+        next_page_token = d.pop("next_page_token", UNSET)
+
+        total_count = d.pop("total_count", UNSET)
+
+        search_fbt_inventory_record_response_data = cls(
+            inventory_records=inventory_records,
+            next_page_token=next_page_token,
+            total_count=total_count,
+        )
+
+        search_fbt_inventory_record_response_data.additional_properties = d
+        return search_fbt_inventory_record_response_data
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

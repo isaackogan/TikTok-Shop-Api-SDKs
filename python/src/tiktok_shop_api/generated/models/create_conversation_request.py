@@ -1,0 +1,63 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+T = TypeVar("T", bound="CreateConversationRequest")
+
+
+@_attrs_define
+class CreateConversationRequest:
+    """
+    Attributes:
+        buyer_user_id (str): Buyer's user ID
+            The value is the same as `data.orders.user_id` in the response data of [Get Order
+            Detail](650aa8ccc16ffe02b8f167a0).
+    """
+
+    buyer_user_id: str
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        buyer_user_id = self.buyer_user_id
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "buyer_user_id": buyer_user_id,
+            }
+        )
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        buyer_user_id = d.pop("buyer_user_id")
+
+        create_conversation_request = cls(
+            buyer_user_id=buyer_user_id,
+        )
+
+        create_conversation_request.additional_properties = d
+        return create_conversation_request
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

@@ -1,0 +1,11 @@
+from enum import StrEnum
+
+
+class SearchCancellationsResponseDataCancellationCancelStatus(StrEnum):
+    CANCELLATION_REQUEST_CANCEL = "CANCELLATION_REQUEST_CANCEL"
+    CANCELLATION_REQUEST_COMPLETE = "CANCELLATION_REQUEST_COMPLETE"
+    CANCELLATION_REQUEST_PENDING = "CANCELLATION_REQUEST_PENDING"
+    CANCELLATION_REQUEST_SUCCESS = "CANCELLATION_REQUEST_SUCCESS"
+
+    def __str__(self) -> str:
+        return str(self.value)

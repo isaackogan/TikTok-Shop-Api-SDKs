@@ -1,0 +1,110 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..models.get_conversations_response_data_conversation_latest_message_sender_role import (
+    GetConversationsResponseDataConversationLatestMessageSenderRole,
+)
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="GetConversationsResponseDataConversationLatestMessageSender")
+
+
+@_attrs_define
+class GetConversationsResponseDataConversationLatestMessageSender:
+    """
+    Attributes:
+        im_user_id (str | Unset): Sender's IM ID. Sender's unique identifier in TikTok Shop's IM system.
+        avatar (str | Unset): Sender's avatar URL.
+        role (GetConversationsResponseDataConversationLatestMessageSenderRole | Unset): Sender's role. Possible
+            enumerations:
+            - `BUYER`
+            - `SHOP`
+            - `CUSTOMER_SERVICE`
+            - `SYSTEM`
+            - `ROBOT`
+            For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the
+            `SHOP` role.
+        nickname (str | Unset): Sender's nickname.
+            - For shops, the nickname is the shop's name.
+            - For customer service, the nickname is the customer service's name.
+            - For buyers, the nickname is the buyer's nickname on TikTok.
+            You can set the nicknames for shops and customer service agents on Seller Center.
+    """
+
+    im_user_id: str | Unset = UNSET
+    avatar: str | Unset = UNSET
+    role: GetConversationsResponseDataConversationLatestMessageSenderRole | Unset = UNSET
+    nickname: str | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        im_user_id = self.im_user_id
+
+        avatar = self.avatar
+
+        role: str | Unset = UNSET
+        if not isinstance(self.role, Unset):
+            role = self.role.value
+
+        nickname = self.nickname
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if im_user_id is not UNSET:
+            field_dict["im_user_id"] = im_user_id
+        if avatar is not UNSET:
+            field_dict["avatar"] = avatar
+        if role is not UNSET:
+            field_dict["role"] = role
+        if nickname is not UNSET:
+            field_dict["nickname"] = nickname
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        im_user_id = d.pop("im_user_id", UNSET)
+
+        avatar = d.pop("avatar", UNSET)
+
+        _role = d.pop("role", UNSET)
+        role: GetConversationsResponseDataConversationLatestMessageSenderRole | Unset
+        if isinstance(_role, Unset):
+            role = UNSET
+        else:
+            role = GetConversationsResponseDataConversationLatestMessageSenderRole(_role)
+
+        nickname = d.pop("nickname", UNSET)
+
+        get_conversations_response_data_conversation_latest_message_sender = cls(
+            im_user_id=im_user_id,
+            avatar=avatar,
+            role=role,
+            nickname=nickname,
+        )
+
+        get_conversations_response_data_conversation_latest_message_sender.additional_properties = d
+        return get_conversations_response_data_conversation_latest_message_sender
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
