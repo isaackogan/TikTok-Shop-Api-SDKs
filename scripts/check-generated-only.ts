@@ -67,10 +67,19 @@ export function offendingPaths(porcelain: string): string[] {
   return touched.filter((p) => p !== '' && !allowed(p));
 }
 
+/** Raw `git status` output; the buffer is large because -uall lists every generated file. */
+export function readPorcelain(cwd: string): string {
+  return execFileSync('git', ['status', '--porcelain', '-z', '-uall'], {
+    cwd,
+    encoding: 'utf8',
+    maxBuffer: 1024 * 1024 * 1024,
+    
+  });
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const root = fileURLToPath(new URL('../', import.meta.url));
-  const out = execFileSync('git', ['status', '--porcelain', '-z', '-uall'], { cwd: root, encoding: 'utf8' });
-  const bad = offendingPaths(out);
+  const bad = offendingPaths(readPorcelain(root));
   if (bad.length > 0) {
     console.error('Generation touched files outside the generated folders:');
     for (const p of bad) console.error(`  ${p}`);

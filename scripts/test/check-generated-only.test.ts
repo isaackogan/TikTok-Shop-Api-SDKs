@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { offendingPaths } from '../check-generated-only.ts';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { offendingPaths, readPorcelain } from '../check-generated-only.ts';
 
 describe('offendingPaths', () => {
   it('allows changes inside a generated folder', () => {
@@ -58,4 +62,21 @@ describe('offendingPaths', () => {
   it('ignores empty output', () => {
     expect(offendingPaths('')).toEqual([]);
   });
+});
+
+describe('readPorcelain', () => {
+  it('handles git status output larger than the default 1 MiB buffer', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'guard-'));
+    try {
+      execFileSync('git', ['init', '-q'], { cwd: dir });
+      const gen = join(dir, 'go/generated');
+      mkdirSync(gen, { recursive: true });
+      for (let i = 0; i < 12000; i++) writeFileSync(join(gen, `${'x'.repeat(100)}_${i}.go`), '');
+      const out = readPorcelain(dir);
+      expect(out.length).toBeGreaterThan(1024 * 1024);
+      expect(offendingPaths(out)).toEqual([]);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  }, 60000);
 });
