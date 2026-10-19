@@ -1,15 +1,44 @@
 {
   "name": "tiktok-shop-api",
   "version": "0.1.0",
-  "description": "Unofficial TypeScript client for the TikTok Shop Partner API. Not affiliated with or endorsed by TikTok or ByteDance.",
+  "description": "TypeScript client for the TikTok Shop API (TikTok Shop Partner API): request signing, OAuth, multi-shop support, typed webhooks and exact 64-bit IDs. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
+  "keywords": [
+    "tiktok shop api",
+    "tiktok shop",
+    "tiktok shop partner api",
+    "tiktok shop sdk",
+    "tiktok shop webhooks",
+    "tiktok shop oauth",
+    "tiktok shop openapi",
+    "ecommerce",
+    "typescript",
+    "unofficial"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/typescript#readme",
+  "bugs": {
+    "url": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs.git",
+    "directory": "typescript"
+  },
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "exports": {
-    ".": { "types": "./dist/index.d.mts", "import": "./dist/index.mjs" }
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "generate": "tsx scripts/generate.ts",
     "build": "tsdown",
