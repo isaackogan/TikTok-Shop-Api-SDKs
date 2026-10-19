@@ -148,7 +148,7 @@ def test_numeric_open_id_stays_exact():
 
 
 def test_missing_token_field_is_a_tiktokshop_error():
-    with pytest.raises(TikTokShopError, match="access_token_expire_in"):
+    with pytest.raises(TikTokShopError, match="refresh_token"):
         TikTokShopAuth("k", "s", transport=stub(200, '{"code":0,"request_id":"q","data":{"access_token":"a"}}')).exchange_code("x")
 
 
@@ -235,3 +235,18 @@ def test_errors_never_contain_secrets_timeout():
         text = _chain_text(ei.value)
         for secret in SECRETS:
             assert secret not in text
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [("access_token", None), ("access_token", ""), ("refresh_token", 5), ("access_token_expire_in", "abc"), ("refresh_token_expire_in", None), ("access_token_expire_in", True)],
+)
+def test_wrong_typed_required_fields_are_errors(field, value):
+    data = {"access_token": "a", "access_token_expire_in": 1, "refresh_token": "r", "refresh_token_expire_in": 2, field: value}
+    body = json.dumps({"code": 0, "request_id": "q9", "data": data})
+    with pytest.raises(TikTokShopError, match=field) as ei:
+        TikTokShopAuth("k", "s", transport=stub(200, body)).exchange_code("x")
+    assert (ei.value.code, ei.value.request_id) == (-1, "q9")
+    with pytest.raises(TikTokShopError) as ei:
+        asyncio.run(AsyncTikTokShopAuth("k", "s", transport=_async_stub(200, body)).refresh("x"))
+    assert (ei.value.code, ei.value.request_id) == (-1, "q9")

@@ -150,3 +150,27 @@ describe('required token fields', () => {
     expect(err.requestId).toBe('q8');
   });
 });
+
+describe('wrong-typed token fields', () => {
+  const full: Record<string, unknown> = { access_token: 'a', access_token_expire_in: 1, refresh_token: 'r', refresh_token_expire_in: 2 };
+  const cases: [string, unknown][] = [
+    ['access_token_expire_in', '1'],
+    ['refresh_token_expire_in', '2'],
+    ['refresh_token', 5],
+    ['access_token', null],
+  ];
+  for (const [k, v] of cases) {
+    it(`${k} = ${JSON.stringify(v)}`, async () => {
+      replyBody = JSON.stringify({ code: 0, request_id: 'q5', data: { ...full, [k]: v } });
+      const err = await new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl }).exchangeCode('c').catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect(err.code).toBe(-1);
+      expect(err.requestId).toBe('q5');
+    });
+  }
+  it('normalises null optional fields to undefined', async () => {
+    replyBody = JSON.stringify({ code: 0, request_id: 'q', data: { ...full, open_id: null, seller_name: null, seller_base_region: null, user_type: null, granted_scopes: null } });
+    const t = await new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl }).exchangeCode('c');
+    for (const k of ['openId', 'sellerName', 'sellerBaseRegion', 'userType', 'grantedScopes'] as const) expect(t[k]).toBeUndefined();
+  });
+});

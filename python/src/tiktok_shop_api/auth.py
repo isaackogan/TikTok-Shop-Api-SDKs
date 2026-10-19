@@ -112,6 +112,14 @@ def _to_token_set(response: httpx.Response) -> TokenSet:
     d = env.get("data")
     if not isinstance(d, dict):
         raise TikTokShopError("Token response has no data", code=-1, request_id=request_id)
+    for k in ("access_token", "refresh_token"):
+        v = d.get(k)
+        if not isinstance(v, str) or v == "":
+            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id)
+    for k in ("access_token_expire_in", "refresh_token_expire_in"):
+        v = d.get(k)
+        if not isinstance(v, int) or isinstance(v, bool):
+            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id)
     try:
         return TokenSet(
             access_token=d["access_token"],

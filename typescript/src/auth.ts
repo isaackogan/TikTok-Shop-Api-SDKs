@@ -114,10 +114,10 @@ export class TikTokShopAuth {
       accessTokenExpireIn: d.access_token_expire_in,
       refreshToken: d.refresh_token,
       refreshTokenExpireIn: d.refresh_token_expire_in,
-      openId: d.open_id,
-      sellerName: d.seller_name,
-      sellerBaseRegion: d.seller_base_region,
-      userType: d.user_type,
+      openId: d.open_id ?? undefined,
+      sellerName: d.seller_name ?? undefined,
+      sellerBaseRegion: d.seller_base_region ?? undefined,
+      userType: d.user_type ?? undefined,
       grantedScopes: d.granted_scopes ?? undefined,
     };
   }
