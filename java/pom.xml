@@ -12,6 +12,27 @@
     <description>Unofficial Java client for the TikTok Shop Partner API, with request signing built in.</description>
     <url>https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/java</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Isaac Kogan</name>
+            <url>https://github.com/isaackogan</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/isaackogan/TikTok-Shop-Api-SDKs.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/isaackogan/TikTok-Shop-Api-SDKs.git</developerConnection>
+        <url>https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/java</url>
+    </scm>
+
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
