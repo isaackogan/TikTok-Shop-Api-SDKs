@@ -150,3 +150,88 @@ def test_numeric_open_id_stays_exact():
 def test_missing_token_field_is_a_tiktokshop_error():
     with pytest.raises(TikTokShopError, match="access_token_expire_in"):
         TikTokShopAuth("k", "s", transport=stub(200, '{"code":0,"request_id":"q","data":{"access_token":"a"}}')).exchange_code("x")
+
+
+MINIMAL_BODY = '{"code":0,"request_id":"r","data":{"access_token":"a","access_token_expire_in":1,"refresh_token":"r","refresh_token_expire_in":2}}'
+
+
+def test_minimal_token_response_succeeds_with_optional_fields_none():
+    for t in (
+        TikTokShopAuth("k", "s", transport=stub(200, MINIMAL_BODY)).exchange_code("x"),
+        asyncio.run(AsyncTikTokShopAuth("k", "s", transport=_async_stub(200, MINIMAL_BODY)).refresh("x")),
+    ):
+        assert (t.access_token, t.access_token_expire_in, t.refresh_token, t.refresh_token_expire_in) == ("a", 1, "r", 2)
+        assert t.open_id is None
+        assert t.seller_name is None
+        assert t.seller_base_region is None
+        assert t.user_type is None
+        assert t.granted_scopes is None
+
+
+@pytest.mark.parametrize("missing", ["access_token", "access_token_expire_in", "refresh_token", "refresh_token_expire_in"])
+def test_each_required_token_field_is_enforced(missing):
+    data = {"access_token": "a", "access_token_expire_in": 1, "refresh_token": "r", "refresh_token_expire_in": 2}
+    del data[missing]
+    body = json.dumps({"code": 0, "request_id": "q", "data": data})
+    with pytest.raises(TikTokShopError, match=missing):
+        TikTokShopAuth("k", "s", transport=stub(200, body)).exchange_code("x")
+
+
+SECRETS = ("SECRET-app-secret-9f3", "SECRET-auth-code-7c1", "SECRET-refresh-tok-2b8")
+
+
+def _chain_text(err: BaseException) -> str:
+    parts, seen, stack = [], set(), [err]
+    while stack:
+        e = stack.pop()
+        if e is None or id(e) in seen:
+            continue
+        seen.add(id(e))
+        parts += [str(e), repr(e), repr(e.args)]
+        stack += [e.__cause__, e.__context__]
+    return "\n".join(parts)
+
+
+def _free_port() -> int:
+    import socket
+
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        return s.getsockname()[1]
+
+
+def _calls(auth, aauth):
+    return [
+        lambda: auth.exchange_code(SECRETS[1]),
+        lambda: auth.refresh(SECRETS[2]),
+        lambda: asyncio.run(aauth.exchange_code(SECRETS[1])),
+        lambda: asyncio.run(aauth.refresh(SECRETS[2])),
+    ]
+
+
+def test_errors_never_contain_secrets_closed_port():
+    base = f"http://127.0.0.1:{_free_port()}"
+    for call in _calls(TikTokShopAuth("k", SECRETS[0], base_url=base), AsyncTikTokShopAuth("k", SECRETS[0], base_url=base)):
+        with pytest.raises(TikTokShopError) as ei:
+            call()
+        text = _chain_text(ei.value)
+        assert "refused" in text.lower() or "connect" in text.lower()
+        for secret in SECRETS:
+            assert secret not in text
+
+
+def test_errors_never_contain_secrets_timeout():
+    def slow(request):
+        raise httpx.ReadTimeout("timed out")
+
+    async def aslow(request):
+        raise httpx.ReadTimeout("timed out")
+
+    auth = TikTokShopAuth("k", SECRETS[0], transport=httpx.MockTransport(slow))
+    aauth = AsyncTikTokShopAuth("k", SECRETS[0], transport=httpx.MockTransport(aslow))
+    for call in _calls(auth, aauth):
+        with pytest.raises(TikTokShopError, match="timed out") as ei:
+            call()
+        text = _chain_text(ei.value)
+        for secret in SECRETS:
+            assert secret not in text

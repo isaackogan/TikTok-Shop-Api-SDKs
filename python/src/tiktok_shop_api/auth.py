@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Literal
 from urllib.parse import quote
 
@@ -37,11 +37,13 @@ class TokenSet:
     refresh_token: str
     #: Unix timestamp (seconds) at which the refresh token expires.
     refresh_token_expire_in: int
-    open_id: str
-    seller_name: str
-    seller_base_region: str
-    user_type: int
-    granted_scopes: list[str] = field(default_factory=list)
+    #: Everything below is optional: creator and partner tokens may lack the seller fields.
+    #: A field TikTok did not send is ``None`` (``granted_scopes`` is ``None``, not ``[]``, when absent).
+    open_id: str | None = None
+    seller_name: str | None = None
+    seller_base_region: str | None = None
+    user_type: int | None = None
+    granted_scopes: list[str] | None = None
 
 
 def _timeout(value: float | httpx.Timeout | None) -> httpx.Timeout:
@@ -116,11 +118,11 @@ def _to_token_set(response: httpx.Response) -> TokenSet:
             access_token_expire_in=d["access_token_expire_in"],
             refresh_token=d["refresh_token"],
             refresh_token_expire_in=d["refresh_token_expire_in"],
-            open_id=str(d["open_id"]),
-            seller_name=d["seller_name"],
-            seller_base_region=d["seller_base_region"],
-            user_type=d["user_type"],
-            granted_scopes=list(d.get("granted_scopes") or []),
+            open_id=None if d.get("open_id") is None else str(d["open_id"]),
+            seller_name=d.get("seller_name"),
+            seller_base_region=d.get("seller_base_region"),
+            user_type=d.get("user_type"),
+            granted_scopes=None if d.get("granted_scopes") is None else list(d["granted_scopes"]),
         )
     except KeyError as e:
         raise TikTokShopError(f"Token response is missing {e}", code=-1, request_id=request_id) from e

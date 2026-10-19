@@ -76,3 +76,55 @@ describe('token response without data', () => {
     });
   }
 });
+
+describe('optional token fields', () => {
+  it('accepts a response with only the four required fields', async () => {
+    replyBody = '{"code":0,"request_id":"r","data":{"access_token":"a","access_token_expire_in":1,"refresh_token":"r","refresh_token_expire_in":2}}';
+    const t = await new TikTokShopAuth({ appKey: 'a', appSecret: 's', baseUrl }).exchangeCode('c');
+    expect([t.accessToken, t.accessTokenExpireIn, t.refreshToken, t.refreshTokenExpireIn]).toEqual(['a', 1, 'r', 2]);
+    for (const k of ['openId', 'sellerName', 'sellerBaseRegion', 'userType', 'grantedScopes'] as const) expect(t[k]).toBeUndefined();
+  });
+});
+
+describe('token errors never contain secrets', () => {
+  const SECRETS = ['SECRET-app-secret-9f3', 'SECRET-auth-code-7c1', 'SECRET-refresh-tok-2b8'];
+  const chainText = (err: unknown): string => {
+    const parts: string[] = [];
+    const seen = new Set<unknown>();
+    for (let e = err; e !== undefined && e !== null && !seen.has(e); e = (e as any).cause) {
+      seen.add(e);
+      parts.push(String(e), JSON.stringify(e, Object.getOwnPropertyNames(Object(e))) ?? '', String((e as any).stack ?? ''));
+    }
+    return parts.join('\n');
+  };
+  const calls = (auth: TikTokShopAuth) => [() => auth.exchangeCode(SECRETS[1]!), () => auth.refresh(SECRETS[2]!)];
+  const expectClean = async (call: () => Promise<unknown>) => {
+    const err = await call().then(() => undefined, (e) => e);
+    expect(err).toBeDefined();
+    const text = chainText(err);
+    for (const s of SECRETS) expect(text).not.toContain(s);
+  };
+
+  it('closed port', async () => {
+    const closed = createServer();
+    await new Promise<void>((r) => closed.listen(0, '127.0.0.1', r));
+    const port = (closed.address() as AddressInfo).port;
+    await new Promise<void>((r) => closed.close(() => r()));
+    const auth = new TikTokShopAuth({ appKey: 'k', appSecret: SECRETS[0]!, baseUrl: `http://127.0.0.1:${port}` });
+    for (const call of calls(auth)) await expectClean(call);
+  });
+
+  it('timeout', async () => {
+    const auth = new TikTokShopAuth({
+      appKey: 'k',
+      appSecret: SECRETS[0]!,
+      baseUrl,
+      fetch: (_url, init) => new Promise((_, reject) => {
+        const signal = AbortSignal.timeout(20);
+        signal.addEventListener('abort', () => reject(signal.reason));
+        void init;
+      }),
+    });
+    for (const call of calls(auth)) await expectClean(call);
+  });
+});

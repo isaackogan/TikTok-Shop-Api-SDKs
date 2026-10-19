@@ -27,11 +27,12 @@ export interface TokenSet {
   refreshToken: string;
   /** Unix timestamp (seconds) at which the refresh token expires. */
   refreshTokenExpireIn: number;
-  openId: string;
-  sellerName: string;
-  sellerBaseRegion: string;
-  userType: number;
-  grantedScopes: string[];
+  /** The fields below are optional: creator and partner tokens may lack the seller fields. */
+  openId?: string;
+  sellerName?: string;
+  sellerBaseRegion?: string;
+  userType?: number;
+  grantedScopes?: string[];
 }
 
 const HOSTS = {
@@ -107,7 +108,7 @@ export class TikTokShopAuth {
       sellerName: d.seller_name,
       sellerBaseRegion: d.seller_base_region,
       userType: d.user_type,
-      grantedScopes: d.granted_scopes ?? [],
+      grantedScopes: d.granted_scopes ?? undefined,
     };
   }
 }
