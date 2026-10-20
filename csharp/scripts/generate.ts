@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { renderEvents } from './render-events.ts';
 import { renderMeta } from './render-meta.ts';
@@ -41,6 +41,12 @@ const dest = resolve(pkg, 'src/TikTokShop.Api/Generated');
 rmSync(dest, { recursive: true, force: true });
 mkdirSync(dest, { recursive: true });
 for (const d of ['Api', 'Client', 'Model']) cpSync(resolve(src, d), resolve(dest, d), { recursive: true });
+
+// The generated WebhookEvent oneOf union is never used (Webhooks.Parse dispatches on `type` itself) and its name would clash
+// with the hand-written WebhookEvent base class, so it is not shipped.
+const union = resolve(dest, 'Model/WebhookEvent.cs');
+if (!existsSync(union)) throw new Error('expected the generated Model/WebhookEvent.cs, found none: the generator changed');
+rmSync(union);
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
 renderEvents(resolve(pkg, 'build/meta.json'), dest);

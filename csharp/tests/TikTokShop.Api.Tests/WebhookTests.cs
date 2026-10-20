@@ -242,6 +242,17 @@ public class WebhookTests
     }
 
     [Fact]
+    public void ANullRequiredFieldIsRejectedLikeAMissingOne()
+    {
+        var type = TypeOf("AppealCompletedWebhook");
+        var top = "{\"type\":" + type + ",\"shop_id\":\"1\",\"tts_notification_id\":\"n\",\"timestamp\":1,\"data\":null}";
+        var nested = "{\"type\":" + type + ",\"shop_id\":\"1\",\"tts_notification_id\":\"n\",\"timestamp\":1,\"data\":{\"product_id\":\"9\",\"appeal_task\":null}}";
+
+        Assert.Contains("data", Assert.Throws<WebhookParseException>(() => Webhooks.Parse(top)).Message);
+        Assert.Contains("appeal_task", Assert.Throws<WebhookParseException>(() => Webhooks.Parse(nested)).Message);
+    }
+
+    [Fact]
     public void AFieldOfTheWrongTypeIsRejectedAsAParseError()
     {
         var e = Assert.Throws<WebhookParseException>(() => Webhooks.Parse("{\"type\":1,\"timestamp\":\"not a number\"}"));

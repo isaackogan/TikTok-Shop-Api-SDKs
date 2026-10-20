@@ -192,7 +192,6 @@ By default the SDK builds a `SocketsHttpHandler` that never follows redirects (a
 
 - Generated from [the spec](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml) in the [TikTok-Shop-Api-SDKs](https://github.com/isaackogan/TikTok-Shop-Api-SDKs) repository, which also has SDKs for TypeScript, Python, Go, Java, Kotlin, PHP and Rust.
 - Three operations are GETs with a body (`GetConversationList`, `MapTokopediaToTikTokShopProductIDs`, `GetShippingTemplateAvailability`). The SDK sends the body and signs it.
-- If you import `TikTokShop.Api.Generated.Model` too, its generated `WebhookEvent` model has the same name as this package's `WebhookEvent`: write `TikTokShop.Api.WebhookEvent` (or an alias) where you need the base class.
 
 ## License
 

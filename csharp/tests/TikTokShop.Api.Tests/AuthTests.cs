@@ -449,7 +449,15 @@ public class AuthTests
     {
         // Real transports (and wrappers) put the request URI, query and all, in their messages.
         var handler = new FailingHandler(request =>
-            new HttpRequestException($"An error occurred sending the request to {request.RequestUri} (and {Uri.EscapeDataString(Code)})"));
+        {
+            // Also prints each secret value of THIS request on its own, raw and percent-encoded, as some transports do.
+            var own = request.RequestUri!.Query.TrimStart('?').Split('&')
+                .Select(p => p.Split('=', 2))
+                .Where(p => p[0] is "app_secret" or "auth_code" or "refresh_token")
+                .Select(p => Uri.UnescapeDataString(p[1]));
+            var bare = string.Join(" and ", own.SelectMany(v => new[] { v, Uri.EscapeDataString(v) }));
+            return new HttpRequestException($"An error occurred sending the request to {request.RequestUri} (and {bare})");
+        });
         var auth = NewAuth("http://127.0.0.1:1", handler: handler);
 
         await AssertBothCallsFail(auth, e => Assert.Contains("/api/v2/token/", e.Message));

@@ -29,11 +29,28 @@ public static class Webhooks
     private static readonly JsonSerializer Serializer = JsonSerializer.Create(new JsonSerializerSettings
     {
         ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
-        ContractResolver = new DefaultContractResolver
+        ContractResolver = new RequiredResolver
         {
             NamingStrategy = new CamelCaseNamingStrategy { OverrideSpecifiedNames = false },
         },
     });
+
+    /// <summary>
+    /// Newtonsoft reads <c>[DataMember(IsRequired = true)]</c> as "may be null but must be present". A webhook field the spec
+    /// requires is missing when it is null too, so those members become <see cref="Required.Always"/>.
+    /// </summary>
+    private sealed class RequiredResolver : DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(System.Reflection.MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(member, memberSerialization);
+            if (System.Reflection.CustomAttributeExtensions.GetCustomAttribute<System.Runtime.Serialization.DataMemberAttribute>(member)?.IsRequired == true)
+            {
+                property.Required = Required.Always;
+            }
+            return property;
+        }
+    }
 
     /// <summary>Webhook type to event name, for example <c>1</c> to <c>ORDER_STATUS_CHANGE</c>.</summary>
     public static IReadOnlyDictionary<int, string> EventTypes => Meta.EventTypes;
