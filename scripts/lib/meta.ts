@@ -222,9 +222,15 @@ export interface RelaxStats {
 const isStringType = (t: unknown): boolean =>
   t === 'string' || (Array.isArray(t) && t.length > 0 && t.every((x) => x === 'string' || x === 'null') && t.includes('string'));
 
+const escapeRegExp = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** True when `value` occurs in `text` as a whole token: not glued to `[A-Za-z0-9_]` on either side. */
+const mentionsWhole = (text: string, value: string): boolean =>
+  new RegExp(`(?<![A-Za-z0-9_])${escapeRegExp(value)}(?![A-Za-z0-9_])`).test(text);
+
 function appendValues(schema: Json, values: string[]): void {
   const desc: string | undefined = typeof schema.description === 'string' && schema.description !== '' ? schema.description : undefined;
-  if (desc !== undefined && values.every((v) => desc.includes(v))) return;
+  if (desc !== undefined && values.every((v) => mentionsWhole(desc, v))) return;
   const list = `Possible values: ${values.map((v) => `\`${v}\``).join(', ')}`;
   schema.description = desc === undefined ? list : `${desc}\n\n${list}`;
 }

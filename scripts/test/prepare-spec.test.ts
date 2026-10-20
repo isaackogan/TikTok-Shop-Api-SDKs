@@ -135,6 +135,25 @@ describe('prepareSpec: R21 relaxes response and webhook string enums', () => {
     expect(spec).not.toHaveProperty('webhooks');
   });
 
+  it('appends a value that only appears inside a longer word in the description', () => {
+    const spec = prep(make({ response: { $ref: S + 'R' }, schemas: { R: { type: 'object', properties: { st: { type: 'string', enum: ['CANCEL', 'CANCELLED'], description: 'Order was CANCELLED' } } } } }));
+    expect(spec.components.schemas.R.properties.st.description).toBe('Order was CANCELLED\n\nPossible values: `CANCEL`, `CANCELLED`');
+  });
+
+  it('does not append when every value is already a whole token in the description', () => {
+    const spec = prep(make({ response: { $ref: S + 'R' }, schemas: { R: { type: 'object', properties: { st: { type: 'string', enum: ['CANCEL'], description: 'Use CANCEL, or (CANCEL).' } } } } }));
+    expect(spec.components.schemas.R.properties.st.description).toBe('Use CANCEL, or (CANCEL).');
+  });
+
+  it('matches values with regex metacharacters literally', () => {
+    const spec = prep(make({ response: { $ref: S + 'R' }, schemas: { R: { type: 'object', properties: {
+      a: { type: 'string', enum: ['A.B', 'C+'], description: 'AxB and CC' },
+      b: { type: 'string', enum: ['A.B', 'C+'], description: 'Either A.B or C+' },
+    } } } }));
+    expect(spec.components.schemas.R.properties.a.description).toContain('Possible values: `A.B`, `C+`');
+    expect(spec.components.schemas.R.properties.b.description).toBe('Either A.B or C+');
+  });
+
   it('keeps an enum that only a request body reaches', () => {
     const spec = prep(make({ request: { $ref: S + 'Q' }, schemas: { Q: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } } }));
     expect(spec.components.schemas.Q.properties.s.enum).toEqual(['A']);
