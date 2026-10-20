@@ -11,7 +11,7 @@ Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 - **Webhooks**: verify the signature, then get a typed event class for any of the webhook types.
 - **.NET 8+**, nullable-annotated, with the XML docs shipped in the package.
 
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 ## Install
 
@@ -133,7 +133,16 @@ catch (TikTokShopException e)
 }
 ```
 
-Every failure is a `TikTokShopException`: a non-zero `code` in a 200 reply, a non-2xx status, a reply that is not understood, and network errors and timeouts (`Code` -1, no `HttpStatus`). Messages and inner exceptions never contain the request URL or any secret, so a logged exception does not leak the signature or the app secret. The OAuth calls follow the same rules.
+Every failure is a `TikTokShopException`:
+
+| What happened | `Code` | `HttpStatus` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't decode into its model (the decoder's exception is the `InnerException`), or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | `null` |
+
+Messages and inner exceptions never contain the request URL or any secret, so a logged exception does not leak the signature or the app secret. The OAuth calls follow the same rules.
 
 ## Webhooks
 
@@ -176,7 +185,7 @@ static void HandleWebhook(string rawBody, string? authorizationHeader)
 
 - `Webhooks.Parse` returns one sealed event class per webhook type (`OrderStatusChangeEvent`, `PackageUpdateEvent`, and the rest, rendered from the spec), each with a typed `Payload`, or an `UnknownWebhookEvent`. Narrow with `switch` and pattern matching. All of them extend `WebhookEvent`, which has `Type` and `Raw` (the parsed JSON, unknown fields included).
 - Verify against the **raw body** as received: re-serializing the JSON changes the signature. `Verify`, `Parse` and `VerifyAndParse` take a `string` or the raw bytes (`byte[]` or `ReadOnlySpan<byte>`).
-- A body whose `type` is missing or not an integer, or whose payload lacks a property its model requires (the message names it), throws `WebhookParseException`. An integer `type` this SDK does not know becomes `UnknownWebhookEvent`. Unknown fields are accepted.
+- Parsing is strict. A body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required property missing or null (the message names it) throws `WebhookParseException`: a known type missing a required field is a parse error. An integer `type` this SDK does not know becomes `UnknownWebhookEvent`. Unknown fields are accepted.
 - 64-bit IDs keep their exact digits: a `shop_id` sent as the JSON number `7494049642642441621` arrives as the string `"7494049642642441621"`.
 - `Webhooks.EventTypes` maps a type to its name, for example `1` to `ORDER_STATUS_CHANGE`.
 
@@ -187,6 +196,8 @@ The client's properties are the API groups: `AffiliateCreator`, `AffiliatePartne
 ## HTTP client
 
 By default the SDK builds a `SocketsHttpHandler` that never follows redirects (a 3xx reply is a `TikTokShopException` with code 302), uses the system proxy, and recycles pooled connections every two minutes so DNS changes are picked up. The timeout is 30 seconds for the whole exchange (`timeout:`, `TimeSpan.Zero` for none). Pass your own `handler:`; it is used as is for API calls, so its redirect, proxy and certificate settings apply. The OAuth calls never follow redirects: a handler with `AllowAutoRedirect` set to true is refused, because the token URL holds your app secret.
+
+`baseUrl:` (on the client and on `TikTokShopAuth`) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path. Requests carry the User-Agent `tiktok-shop-api-csharp/<version>` (`TikTokShopClient.UserAgent`).
 
 ## Notes
 

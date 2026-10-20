@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { renderEvents } from './render-events.ts';
 import { renderMeta } from './render-meta.ts';
@@ -47,6 +47,38 @@ for (const d of ['Api', 'Client', 'Model']) cpSync(resolve(src, d), resolve(dest
 const union = resolve(dest, 'Model/WebhookEvent.cs');
 if (!existsSync(union)) throw new Error('expected the generated Model/WebhookEvent.cs, found none: the generator changed');
 rmSync(union);
+
+// Fix-up (R13d): a 2xx body that does not decode into its model throws the generator's ApiException(500). Make it a
+// TikTokShopException with code -1, the HTTP status, the request ID and the decoder's exception as inner exception.
+const apiClient = resolve(dest, 'Client/ApiClient.cs');
+const DECODE = [
+  '            try',
+  '            {',
+  '                return JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync().ConfigureAwait(false), type, _serializerSettings);',
+  '            }',
+  '            catch (Exception e)',
+  '            {',
+  '                throw new ApiException(500, e.Message);',
+  '            }',
+  '',
+].join('\n');
+const DECODE_FIXED = [
+  '            var decodeBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);',
+  '            try',
+  '            {',
+  '                return JsonConvert.DeserializeObject(decodeBody, type, _serializerSettings);',
+  '            }',
+  '            catch (Exception e)',
+  '            {',
+  '                // fix-up: scripts/generate.ts (R13d)',
+  '                throw global::TikTokShop.Api.TikTokShopException.DecodeFailure((int)response.StatusCode, decodeBody, e);',
+  '            }',
+  '',
+].join('\n');
+const clientSrc = readFileSync(apiClient, 'utf8');
+const decodes = clientSrc.split(DECODE).length - 1;
+if (decodes !== 1) throw new Error(`decode fix-up: expected the model decode block exactly once in Client/ApiClient.cs, found ${decodes}`);
+writeFileSync(apiClient, clientSrc.replace(DECODE, DECODE_FIXED));
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
 renderEvents(resolve(pkg, 'build/meta.json'), dest);

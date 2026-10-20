@@ -42,7 +42,7 @@ public sealed record TokenSet
         SellerName = sellerName;
         SellerBaseRegion = sellerBaseRegion;
         UserType = userType;
-        GrantedScopes = grantedScopes ?? Array.Empty<string>();
+        GrantedScopes = grantedScopes;
     }
 
     /// <summary>Sent as <c>x-tts-access-token</c>.</summary>
@@ -69,8 +69,8 @@ public sealed record TokenSet
     /// <summary>TikTok's user type; <c>null</c> when TikTok sent none.</summary>
     public int? UserType { get; init; }
 
-    /// <summary>The scopes the seller granted; empty when TikTok sent none.</summary>
-    public IReadOnlyList<string> GrantedScopes { get; init; }
+    /// <summary>The scopes the seller granted; <c>null</c> when TikTok sent none (or something other than a list of strings).</summary>
+    public IReadOnlyList<string>? GrantedScopes { get; init; }
 
     /// <summary>The members that are safe to print: no token.</summary>
     private bool PrintMembers(StringBuilder builder)
@@ -81,7 +81,7 @@ public sealed record TokenSet
             .Append(", SellerName = ").Append(SellerName ?? "null")
             .Append(", SellerBaseRegion = ").Append(SellerBaseRegion ?? "null")
             .Append(", UserType = ").Append(UserType?.ToString() ?? "null")
-            .Append(", GrantedScopes = [").Append(string.Join(", ", GrantedScopes)).Append(']');
+            .Append(", GrantedScopes = ").Append(GrantedScopes is null ? "null" : "[" + string.Join(", ", GrantedScopes) + "]");
         return true;
     }
 

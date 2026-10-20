@@ -250,6 +250,7 @@ public sealed class TikTokShopAuth
             try
             {
                 using var request = new HttpRequestMessage(HttpMethod.Get, uri);
+                request.Headers.TryAddWithoutValidation("User-Agent", TikTokShopClient.UserAgent);
                 using var response = await _http.SendAsync(request, cts.Token).ConfigureAwait(false);
                 status = (int)response.StatusCode;
                 reason = response.ReasonPhrase;
@@ -316,10 +317,12 @@ public sealed class TikTokShopAuth
         {
             userType = (int)utl;
         }
-        var scopes = new List<string>();
-        if (data.TryGetProperty("granted_scopes", out var gs) && gs.ValueKind == JsonValueKind.Array)
+        // Lesson 34: absent, null or ill-typed (not a list of strings) granted_scopes is null, never empty.
+        List<string>? scopes = null;
+        if (data.TryGetProperty("granted_scopes", out var gs) && gs.ValueKind == JsonValueKind.Array
+            && gs.EnumerateArray().All(s => s.ValueKind == JsonValueKind.String))
         {
-            scopes.AddRange(gs.EnumerateArray().Where(s => s.ValueKind == JsonValueKind.String).Select(s => s.GetString()!));
+            scopes = gs.EnumerateArray().Select(s => s.GetString()!).ToList();
         }
 
         return new TokenSet(

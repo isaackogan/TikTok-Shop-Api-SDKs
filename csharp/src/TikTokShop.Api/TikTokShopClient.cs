@@ -51,8 +51,8 @@ public sealed class TikTokShopOptions
 /// Create one client and reuse it for the life of your app: it owns a connection pool, and <see cref="WithShop"/> shares it.
 /// </para>
 /// <para>
-/// Every request is signed, and every failure is a <see cref="TikTokShopException"/>. A reply that does not decode into
-/// the generated model surfaces as the generator's own <c>ApiException</c>.
+/// Every request is signed, and every failure is a <see cref="TikTokShopException"/>, including a 2xx reply that does not
+/// decode into the generated model (code -1).
 /// </para>
 /// <para>
 /// HTTP: by default the SDK builds a <see cref="SocketsHttpHandler"/> that never follows redirects (a 3xx reply is thrown as a
@@ -68,6 +68,9 @@ public sealed class TikTokShopClient
 
     /// <summary>Used when no timeout is given.</summary>
     public static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
+
+    /// <summary>Sent on every API and token call. <c>scripts/bump-version.ts</c> keeps it in step with the csproj.</summary>
+    public const string UserAgent = "tiktok-shop-api-csharp/0.1.0";
 
     private readonly ShopCredentials _credentials;
     private readonly string _baseUrl;
@@ -179,7 +182,7 @@ public sealed class TikTokShopClient
             BasePath = _baseUrl,
             // The generated client would otherwise apply its own 100 s limit.
             Timeout = TimeSpan.Zero,
-            UserAgent = "TikTokShop.Api-csharp",
+            UserAgent = TikTokShopClient.UserAgent,
         };
         AffiliateCreator = new Generated.Api.AffiliateCreatorApi(http, configuration);
         AffiliatePartner = new Generated.Api.AffiliatePartnerApi(http, configuration);

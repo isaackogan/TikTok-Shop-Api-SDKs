@@ -167,13 +167,15 @@ namespace TikTokShop.Api.Generated.Client
             }
 
             // at this point, it must be a model (json)
+            var decodeBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             try
             {
-                return JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync().ConfigureAwait(false), type, _serializerSettings);
+                return JsonConvert.DeserializeObject(decodeBody, type, _serializerSettings);
             }
             catch (Exception e)
             {
-                throw new ApiException(500, e.Message);
+                // fix-up: scripts/generate.ts (R13d)
+                throw global::TikTokShop.Api.TikTokShopException.DecodeFailure((int)response.StatusCode, decodeBody, e);
             }
         }
 

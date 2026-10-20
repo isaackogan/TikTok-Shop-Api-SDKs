@@ -224,7 +224,7 @@ public class AuthTests
         Assert.Null(t.SellerName);
         Assert.Null(t.SellerBaseRegion);
         Assert.Null(t.UserType);
-        Assert.Empty(t.GrantedScopes);
+        Assert.Null(t.GrantedScopes);
     }
 
     [Fact]
@@ -239,7 +239,7 @@ public class AuthTests
         Assert.Null(t.SellerName);
         Assert.Null(t.SellerBaseRegion);
         Assert.Null(t.UserType);
-        Assert.Empty(t.GrantedScopes);
+        Assert.Null(t.GrantedScopes);
     }
 
     [Theory]
@@ -267,7 +267,7 @@ public class AuthTests
         Assert.Null(t.SellerName);
         Assert.Null(t.SellerBaseRegion);
         Assert.Null(t.UserType);
-        Assert.Equal(new[] { "a", "b" }, t.GrantedScopes);
+        Assert.Null(t.GrantedScopes); // a list with a non-string is ill-typed, so absent
     }
 
     public static IEnumerable<object[]> BadRequiredFields() => new[]
@@ -461,6 +461,72 @@ public class AuthTests
         var auth = NewAuth("http://127.0.0.1:1", handler: handler);
 
         await AssertBothCallsFail(auth, e => Assert.Contains("/api/v2/token/", e.Message));
+    }
+
+    [Fact]
+    public async Task SecretsWithPercentEncodableCharactersAreScrubbedRawAndEncoded()
+    {
+        // M15: + / = & and a space encode differently, so the Uri.EscapeDataString branch of ErrorScrub.Scrub must work.
+        const string secret = "s3c+r/e=t &x";
+        const string code = "CODE+/=& 1";
+        const string refresh = "RT+/= &2";
+        foreach (var s in new[] { secret, code, refresh })
+        {
+            Assert.NotEqual(s, Uri.EscapeDataString(s));
+        }
+        var handler = new FailingHandler(request =>
+        {
+            // Prints the request URI, and each secret of THIS request on its own, raw and percent-encoded.
+            var own = request.RequestUri!.Query.TrimStart('?').Split('&')
+                .Select(p => p.Split('=', 2))
+                .Where(p => p[0] is "app_secret" or "auth_code" or "refresh_token")
+                .Select(p => Uri.UnescapeDataString(p[1]));
+            var bare = string.Join(" and ", own.SelectMany(v => new[] { v, Uri.EscapeDataString(v) }));
+            return new HttpRequestException($"An error occurred sending the request to {request.RequestUri} (and {bare})");
+        });
+        var auth = new TikTokShopAuth(AppKey, secret, "7123456789", "http://127.0.0.1:1", TimeSpan.FromSeconds(10), handler);
+        var forbidden = new[]
+        {
+            secret, code, refresh, Uri.EscapeDataString(secret), Uri.EscapeDataString(code), Uri.EscapeDataString(refresh),
+            "app_secret=", "auth_code=", "refresh_token=",
+        };
+
+        var exchange = await Assert.ThrowsAsync<TikTokShopException>(() => auth.ExchangeCodeAsync(code));
+        var refreshed = await Assert.ThrowsAsync<TikTokShopException>(() => auth.RefreshAsync(refresh));
+        foreach (var e in new[] { exchange, refreshed })
+        {
+            Assert.Equal(-1, e.Code);
+            Assert.Null(e.HttpStatus);
+            Assert.Contains("***", e.Message);
+            ErrorAssert.NoneOf(e, forbidden);
+        }
+    }
+
+    [Fact]
+    public async Task TheUserAgentIsSentOnTokenCalls()
+    {
+        using var server = new RawServer(_ => new RawResponse(200, TokenJson(Data())));
+
+        await NewAuth(server.BaseUrl).RefreshAsync(RefreshToken);
+
+        Assert.Equal(TikTokShopClient.UserAgent, Assert.Single(server.Requests).Header("User-Agent"));
+    }
+
+    [Theory]
+    [InlineData("\"0\"")]
+    [InlineData("1.5")]
+    [InlineData("true")]
+    [InlineData("null")]
+    [InlineData("{}")]
+    public async Task ATokenReplyWithANonIntegerCodeIsMinusOne(string code)
+    {
+        var body = "{\"code\":" + code + ",\"request_id\":\"q6\",\"data\":" + Data() + "}";
+        using var server = new RawServer(_ => new RawResponse(200, body));
+
+        var e = await Assert.ThrowsAsync<TikTokShopException>(() => NewAuth(server.BaseUrl).ExchangeCodeAsync(Code));
+
+        Assert.Equal(-1, e.Code);
+        Assert.Equal(200, e.HttpStatus);
     }
 
     [Fact]

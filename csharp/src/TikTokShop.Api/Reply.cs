@@ -102,7 +102,8 @@ internal sealed class Reply : IDisposable
         if (isObject)
         {
             var root = doc!.RootElement;
-            if (root.TryGetProperty("code", out var c) && c.ValueKind != JsonValueKind.Null)
+            // Lesson 34: a code that is present but not an integer (null included) makes a 2xx reply unreadable.
+            if (root.TryGetProperty("code", out var c))
             {
                 if (TryGetInteger(c, out var ci))
                 {

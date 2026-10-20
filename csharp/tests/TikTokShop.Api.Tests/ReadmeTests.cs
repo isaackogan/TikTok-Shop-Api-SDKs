@@ -112,7 +112,8 @@ public class ReadmeTests
             .Descendants("PropertyGroup").Elements().GroupBy(e => e.Name.LocalName).ToDictionary(g => g.Key, g => g.Last().Value);
 
         Assert.Equal("TikTokShop.Api", props["PackageId"]);
-        Assert.Equal("0.1.0", props["Version"]);
+        // Any plain X.Y.Z: release.yml bumps it, so no test may pin a version.
+        Assert.Matches(@"^\d+\.\d+\.\d+$", props["Version"]);
         Assert.Equal("MIT", props["PackageLicenseExpression"]);
         Assert.Equal("README.md", props["PackageReadmeFile"]);
         Assert.Equal("Isaac Kogan", props["Authors"]);
@@ -121,8 +122,12 @@ public class ReadmeTests
         Assert.Equal("git", props["RepositoryType"]);
         Assert.Equal("true", props["PublishRepositoryUrl"]);
         Assert.Equal("true", props["GenerateDocumentationFile"]);
-        Assert.Contains("Unofficial", props["Description"]);
+        // NuGet shows the description, not the README.
+        Assert.EndsWith("Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.", props["Description"]);
         Assert.Contains("has not been verified against the live API", props["PackageReleaseNotes"]);
+        Assert.DoesNotContain("First release", props["PackageReleaseNotes"]);
+        // The User-Agent carries the package version.
+        Assert.Equal("tiktok-shop-api-csharp/" + props["Version"], TikTokShopClient.UserAgent);
         Assert.NotEmpty(props["PackageProjectUrl"]);
         // The XML docs ship; the missing-docs warning stays silenced for the generated models.
         Assert.Contains("CS1591", props["NoWarn"]);

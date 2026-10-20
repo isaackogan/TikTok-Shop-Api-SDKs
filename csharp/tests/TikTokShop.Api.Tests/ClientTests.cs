@@ -373,6 +373,58 @@ public class ClientTests
         Assert.Equal(200, e.HttpStatus);
     }
 
+    [Theory]
+    [InlineData("{\"code\":null,\"message\":\"odd\",\"request_id\":\"q\"}")]
+    [InlineData("{\"code\":true,\"message\":\"odd\",\"request_id\":\"q\"}")]
+    [InlineData("{\"code\":{},\"message\":\"odd\",\"request_id\":\"q\"}")]
+    public async Task ANullOrNonNumericCodeOnA2xxIsMinusOne(string body)
+    {
+        using var server = new RawServer(_ => new RawResponse(200, body));
+        var client = NewClient(server.BaseUrl);
+
+        var e = await Assert.ThrowsAsync<TikTokShopException>(() => client.Authorization.GetAuthorizedShopsAsync());
+
+        Assert.Equal(-1, e.Code);
+        Assert.Equal("q", e.RequestId);
+        Assert.Equal(200, e.HttpStatus);
+    }
+
+    [Fact]
+    public async Task A2xxBodyThatDoesNotFitItsModelIsMinusOneWithStatusRequestIdAndInner()
+    {
+        using var server = new RawServer(_ => new RawResponse(200, "{\"code\":0,\"message\":\"Success\",\"request_id\":\"q9\",\"data\":{\"shops\":\"not a list\"}}"));
+        var client = NewClient(server.BaseUrl);
+
+        var e = await Assert.ThrowsAsync<TikTokShopException>(() => client.Authorization.GetAuthorizedShopsAsync());
+
+        Assert.Equal(-1, e.Code);
+        Assert.Equal(200, e.HttpStatus);
+        Assert.Equal("q9", e.RequestId);
+        Assert.NotNull(e.InnerException);
+        Assert.IsNotType<ApiException>(e.InnerException);
+    }
+
+    [Fact]
+    public async Task TheUserAgentIsSentOnApiCalls()
+    {
+        using var server = new RawServer(_ => new RawResponse(200, "{\"code\":0,\"message\":\"Success\",\"request_id\":\"r\",\"data\":{}}"));
+
+        await NewClient(server.BaseUrl).Authorization.GetAuthorizedShopsAsync();
+
+        Assert.Matches(@"^tiktok-shop-api-csharp/\d+\.\d+\.\d+$", TikTokShopClient.UserAgent);
+        Assert.Equal(TikTokShopClient.UserAgent, Assert.Single(server.Requests).Header("User-Agent"));
+    }
+
+    [Fact]
+    public async Task AnIntegerEnumValueTheSpecDoesNotListStillDecodes()
+    {
+        using var server = new RawServer(_ => new RawResponse(200, "{\"code\":0,\"request_id\":\"r\",\"data\":{\"creators\":[{\"creator_profile\":{\"user_type_tag\":[1,3]}}]}}"));
+
+        var result = await NewClient(server.BaseUrl).AffiliateSeller.SearchCreatorsInCreatorMarketplaceAsync(1);
+
+        Assert.Equal(new long[] { 1, 3 }, result.Data.Creators[0].CreatorProfile.UserTypeTag);
+    }
+
     [Fact]
     public async Task AHandlerErrorThatPrintsTheSignedUrlIsScrubbedFromTheMessageToStringAndEveryInnerException()
     {
