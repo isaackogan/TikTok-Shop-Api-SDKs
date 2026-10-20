@@ -75,8 +75,18 @@ The release workflow (and the regenerate job in `sdk-generate.yml`) pushes commi
 
 ### If it fails halfway
 
-Registries can't unpublish, so a failure after some publishes leaves those languages live but untagged and uncommitted. Fix the cause and run again with **`skip` for the languages already published** and the same choice for the rest. If only the final commit/tag step failed, make the commit and tags by hand (the bumped manifests, `git tag <lang>/vX.Y.Z`, push) rather than re-publishing.
+Each language is committed, tagged and given a GitHub Release **as soon as its own publish succeeded**, even when another language's publish failed; the run then ends red with an error naming the languages that did not publish. Those are the only ones left to do:
 
-### Not bumped automatically
+1. Fix the cause (usually a missing or expired secret).
+2. Press the button again with **only the failed languages** set (the same choice as before). The already-released ones stay `skip`; their version is now in `main` and tagged, so a second run would bump them again.
 
-The bump edits each language's manifest only. A few hand-written strings also carry the version: the `User-Agent` constants in `go/client.go`, `java/.../TikTokShop.java` and `kotlin/.../SigningInterceptor.kt`, and the install snippets in the Java and Kotlin READMEs. Update those in a normal commit when you release.
+Notes for the awkward cases:
+
+- **PHP:** the mirror is pushed before the tag is recorded here. If the `packagist` job pushed the mirror's tag `vX.Y.Z` and then failed, delete that tag on the mirror (`git push <mirror> :refs/tags/vX.Y.Z`) before retrying, or the retry's tag push is rejected.
+- **Go:** the `go/vX.Y.Z` tag is pushed with the release commit even when another language failed. If only the final proxy warm-up failed, nothing to redo: run `GOPROXY=proxy.golang.org go list -m github.com/isaackogan/TikTok-Shop-Api-SDKs/go@vX.Y.Z` yourself.
+- If the final commit/push itself fails (all three attempts), the packages are live but untagged: make the commit with the bumped files, `git tag <lang>/vX.Y.Z`, push both.
+- Tags are placed on the commit pushed after the rebase onto `main`, which may include commits that landed after the SHA the packages were built from.
+
+### What the bump edits
+
+`scripts/bump-version.ts` edits each language's manifest (and Rust's `Cargo.lock` entry) plus the other places that hard-code the version, so they never drift: the `User-Agent` constants in `go/client.go`, `java/.../TikTokShop.java` and `kotlin/.../SigningInterceptor.kt`, and the install snippets in the Java and Kotlin READMEs. Rust derives its User-Agent from the crate version. Each locator must match exactly once or the bump fails; a test checks them against the real files.

@@ -32,7 +32,7 @@ class ReadmeTest {
         val readme = read("README.md")
         for (must in listOf(
             "Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
-            "com.isaackogan:tiktok-shop-api-kotlin:0.1.0",
+            "com.isaackogan:tiktok-shop-api-kotlin:",
             "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml",
             "has not been verified against the live API",
             "TikTokShopException", "withShop", "WebhookEvent", "JVM 11", "TikTok Shop API", "<artifactId>tiktok-shop-api-kotlin</artifactId>",

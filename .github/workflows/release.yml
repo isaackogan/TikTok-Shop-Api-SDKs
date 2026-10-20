@@ -431,24 +431,27 @@ jobs:
         run: |
           set -euo pipefail
           key="$RUNNER_TEMP/php-mirror-key"
+          trap 'rm -f "$key"' EXIT
           install -m 600 /dev/null "$key"
           printf '%s\n' "$PHP_MIRROR_DEPLOY_KEY" > "$key"
           export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           bash scripts/split-php.sh "$PHP_VERSION"
-          rm -f "$key"
 
-  # Commits the bumped manifests, tags every released language, creates the GitHub Releases.
-  # Runs only when every chosen publish succeeded (skipped publish jobs are fine).
+  # Commits the bumped manifests, tags and creates GitHub Releases for every language whose publish SUCCEEDED,
+  # even when another language's publish failed (so a re-run with just the failed ones is all it takes).
+  # Fails at the end if any chosen publish failed. Go has no publish job: its tag is its release.
   release:
     name: commit, tag and create releases
     needs: [prepare, generate, npm, pypi, maven-central, kotlin, crates, nuget, packagist]
-    if: ${{ always() && needs.prepare.result == 'success' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+    if: ${{ always() && needs.prepare.result == 'success' && needs.generate.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
       contents: write
+    outputs:
+      go_released: ${{ steps.tag.outputs.go_released }}
     steps:
       - name: Check out main
         uses: actions/checkout@v7
@@ -464,11 +467,14 @@ jobs:
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Bump manifests, commit and push
+        id: bump
         env:
           CHOICE_TYPESCRIPT: ${{ inputs.typescript }}
           CHOICE_PYTHON: ${{ inputs.python }}
+          CHOICE_GO: ${{ inputs.go }}
           CHOICE_JAVA: ${{ inputs.java }}
           CHOICE_KOTLIN: ${{ inputs.kotlin }}
+          CHOICE_PHP: ${{ inputs.php }}
           CHOICE_RUST: ${{ inputs.rust }}
           CHOICE_CSHARP: ${{ inputs.csharp }}
           V_TYPESCRIPT: ${{ needs.prepare.outputs.typescript_version }}
@@ -479,34 +485,56 @@ jobs:
           V_PHP: ${{ needs.prepare.outputs.php_version }}
           V_RUST: ${{ needs.prepare.outputs.rust_version }}
           V_CSHARP: ${{ needs.prepare.outputs.csharp_version }}
+          # Publish job results. Go has no publish job (success once generate passed); an empty version means skipped.
+          R_TYPESCRIPT: ${{ needs.npm.result }}
+          R_PYTHON: ${{ needs.pypi.result }}
+          R_GO: success
+          R_JAVA: ${{ needs.maven-central.result }}
+          R_KOTLIN: ${{ needs.kotlin.result }}
+          R_PHP: ${{ needs.packagist.result }}
+          R_RUST: ${{ needs.crates.result }}
+          R_CSHARP: ${{ needs.nuget.result }}
         run: |
           set -euo pipefail
-          declare -A MANIFEST=(
+          # Files each language's bump edits (bump-version.ts: manifest, Cargo.lock, version stamps).
+          declare -A FILES=(
             [typescript]="typescript/package.json"
             [python]="python/pyproject.toml"
-            [java]="java/pom.xml"
-            [kotlin]="kotlin/build.gradle.kts"
+            [go]="go/client.go"
+            [java]="java/pom.xml java/README.md java/src/main/java/com/isaackogan/tiktok/shop/TikTokShop.java"
+            [kotlin]="kotlin/build.gradle.kts kotlin/README.md kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/SigningInterceptor.kt"
             [rust]="rust/Cargo.toml rust/Cargo.lock"
             [csharp]="csharp/src/TikTokShop.Api/TikTokShop.Api.csproj"
           )
           released=()   # "lang@version", in release order
-          : > "$RUNNER_TEMP/first-releases"
+          failed=()
+          : > "$RUNNER_TEMP/released"
           for lang in typescript python go java kotlin php rust csharp; do
             var="V_${lang^^}"
             version="${!var}"
             [ -n "$version" ] || continue
+            rvar="R_${lang^^}"
+            if [ "${!rvar}" != "success" ]; then
+              echo "::warning::$lang publish ${!rvar}; not committed, tagged or released"
+              failed+=("$lang")
+              continue
+            fi
             released+=("$lang@$version")
-            # A language's first release is the one with no earlier <lang>/v* tag; its notes carry the disclaimers.
-            if [ -z "$(git tag --list "$lang/v*")" ]; then echo "$lang" >> "$RUNNER_TEMP/first-releases"; fi
-            if [ -n "${MANIFEST[$lang]:-}" ]; then
+            # Previous tag of this language (empty on a first release); the notes diff against it, and a first
+            # release carries the disclaimers. Read before this run creates its own tag.
+            prev="$(git tag --list "$lang/v*" --sort=-v:refname | head -n 1)"
+            printf '%s|%s|%s\n' "$lang" "$version" "$prev" >> "$RUNNER_TEMP/released"
+            if [ -n "${FILES[$lang]:-}" ]; then
               cvar="CHOICE_${lang^^}"
               got="$(pnpm exec tsx scripts/bump-version.ts "$lang" "${!cvar}")"
               [ "$got" = "$version" ] || { echo "::error::version drifted for $lang: $version vs $got"; exit 1; }
               # shellcheck disable=SC2086
-              git add -- ${MANIFEST[$lang]}
+              git add -- ${FILES[$lang]}
             fi
           done
-          printf '%s\n' "${released[@]}" > "$RUNNER_TEMP/released"
+          echo "failed=${failed[*]:-}" >> "$GITHUB_OUTPUT"
+          echo "any=$([ ${#released[@]} -gt 0 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+          [ ${#released[@]} -gt 0 ] || { echo "Nothing was published; nothing to commit."; exit 0; }
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --cached --quiet; then
@@ -515,7 +543,7 @@ jobs:
             summary="$(IFS=,; echo "${released[*]}")"
             summary="${summary//,/, }"
             git commit -m "chore: release $summary [skip ci]"
-            # main may have moved during the run (e.g. a regenerate commit); only the manifests differ, so a rebase is safe.
+            # main may have moved during the run (e.g. a regenerate commit); only the bumped files differ, so a rebase is safe.
             pushed=0
             for attempt in 1 2 3; do
               git pull --rebase origin main
@@ -529,14 +557,19 @@ jobs:
             fi
           fi
       - name: Tag every released language
+        id: tag
+        if: ${{ steps.bump.outputs.any == 'true' }}
         run: |
           set -euo pipefail
+          # The tag goes on the post-rebase HEAD, which may include commits that landed after the published SHA.
           sha="$(git rev-parse HEAD)"
-          while IFS='@' read -r lang version; do
+          while IFS='|' read -r lang version _; do
             git tag "$lang/v$version" "$sha"
             git push origin "refs/tags/$lang/v$version"
+            [ "$lang" != "go" ] || echo "go_released=true" >> "$GITHUB_OUTPUT"
           done < "$RUNNER_TEMP/released"
       - name: Create GitHub Releases
+        if: ${{ steps.bump.outputs.any == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -551,25 +584,36 @@ jobs:
             [rust]="cargo add tiktok-shop-api"
             [csharp]="dotnet add package TikTokShop.Api"
           )
-          while IFS='@' read -r lang version; do
+          while IFS='|' read -r lang version prev; do
             notes="$RUNNER_TEMP/notes-$lang.md"
             {
               echo "Install: \`${INSTALL[$lang]}\`"
               echo
               echo "Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."
-              if grep -qx "$lang" "$RUNNER_TEMP/first-releases"; then
+              if [ -z "$prev" ]; then
                 echo
                 echo "First release. Request signing follows TikTok's documentation and has not been verified against the live API."
               fi
             } > "$notes"
-            gh release create "$lang/v$version" --verify-tag --title "$lang $version" --notes-file "$notes" --generate-notes
+            # Generated notes diff against this language's previous tag, not another language's.
+            args=(--verify-tag --title "$lang $version" --notes-file "$notes" --generate-notes)
+            [ -z "$prev" ] || args+=(--notes-start-tag "$prev")
+            gh release create "$lang/v$version" "${args[@]}"
           done < "$RUNNER_TEMP/released"
+      - name: Fail if any publish failed
+        if: ${{ !cancelled() && steps.bump.outputs.failed != '' }}
+        env:
+          FAILED: ${{ steps.bump.outputs.failed }}
+        run: |
+          echo "::error::These languages did NOT publish: $FAILED. Everything else was committed, tagged and released. Run the release workflow again with only these set (see RELEASING.md)."
+          exit 1
 
   # Go has no upload: the tag is the release. Ask the module proxy for it so it is cached and shows on pkg.go.dev.
   go-proxy:
     name: warm the Go module proxy
     needs: [prepare, release]
-    if: ${{ needs.prepare.outputs.go_version != '' && needs.release.result == 'success' }}
+    # Runs whenever the go tag was pushed, even if the release job later failed over another language.
+    if: ${{ always() && needs.release.outputs.go_released == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:

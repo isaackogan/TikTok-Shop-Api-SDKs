@@ -26,6 +26,56 @@ export const MANIFESTS: Partial<Record<Lang, string>> = {
 };
 export const TAG_VERSIONED: readonly Lang[] = ['go', 'php'];
 
+const V = String.raw`(\d+\.\d+\.\d+)`;
+
+/**
+ * Other places that hard-code a language's version: User-Agent constants and README install snippets.
+ * Each locator must match exactly `count` times (group 2 is the version) or the bump fails loudly.
+ * Rust and the other languages derive theirs from the manifest and have none.
+ */
+export interface Stamp {
+  file: string;
+  pattern: RegExp;
+  count: number;
+}
+export const STAMPS: Partial<Record<Lang, Stamp[]>> = {
+  go: [{ file: 'go/client.go', pattern: new RegExp(`(tiktok-shop-api-go/)${V}(")`, 'g'), count: 1 }],
+  java: [
+    { file: 'java/src/main/java/com/isaackogan/tiktok/shop/TikTokShop.java', pattern: new RegExp(`(tiktok-shop-api-java/)${V}(")`, 'g'), count: 1 },
+    { file: 'java/README.md', pattern: new RegExp(`(Version \`)${V}(\`)`, 'g'), count: 1 },
+    { file: 'java/README.md', pattern: new RegExp(`(<artifactId>tiktok-shop-api</artifactId>\\s*<version>)${V}(</version>)`, 'g'), count: 1 },
+    { file: 'java/README.md', pattern: new RegExp(`(com\\.isaackogan:tiktok-shop-api:)${V}(')`, 'g'), count: 1 },
+  ],
+  kotlin: [
+    { file: 'kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/SigningInterceptor.kt', pattern: new RegExp(`(tiktok-shop-api-kotlin/)${V}(")`, 'g'), count: 1 },
+    { file: 'kotlin/README.md', pattern: new RegExp(`(com\\.isaackogan:tiktok-shop-api-kotlin:)${V}(")`, 'g'), count: 1 },
+    { file: 'kotlin/README.md', pattern: new RegExp(`(<artifactId>tiktok-shop-api-kotlin</artifactId>\\s*<version>)${V}(</version>)`, 'g'), count: 1 },
+  ],
+};
+
+/** Files the stamps touch, per language (for `git add`). */
+export function stampFiles(lang: Lang): string[] {
+  return [...new Set((STAMPS[lang] ?? []).map((s) => s.file))];
+}
+
+/** Applies (or, with version undefined, only checks) every stamp of a language. Returns the versions found. */
+export function applyStamps(root: string, lang: Lang, version: string | undefined): string[] {
+  const found: string[] = [];
+  const texts = new Map<string, string>();
+  for (const st of STAMPS[lang] ?? []) {
+    const file = join(root, st.file);
+    const text = texts.get(st.file) ?? readFileSync(file, 'utf8');
+    const matches = [...text.matchAll(st.pattern)];
+    if (matches.length !== st.count) {
+      throw new Error(`${st.file}: expected ${st.count} match(es) of ${st.pattern}, found ${matches.length}`);
+    }
+    found.push(...matches.map((m) => m[2]));
+    texts.set(st.file, version === undefined ? text : text.replace(st.pattern, `$1${version}$3`));
+  }
+  if (version !== undefined) for (const [f, t] of texts) writeFileSync(join(root, f), t);
+  return found;
+}
+
 export function bumpSemver(version: string, kind: Exclude<Bump, 'current'>): string {
   const m = SEMVER.exec(version);
   if (!m) throw new Error(`"${version}" is not a plain X.Y.Z version`);
@@ -53,8 +103,8 @@ function sectionScope(header: string): (text: string) => [number, number] {
 }
 
 const LOCATORS: Partial<Record<Lang, Locator>> = {
-  // The first "version" key is the package's own; dependency ranges come later.
-  typescript: { scope: (t) => [0, t.length], pattern: /^(\s*"version"\s*:\s*")([^"]+)(")/m },
+  // Only the top-level key (two-space indent): nested "version" keys sit deeper or on a line with other text.
+  typescript: { scope: (t) => [0, t.length], pattern: /^( {2}"version"\s*:\s*")([^"]+)(")/m },
   python: { scope: sectionScope('project'), pattern: /^(version\s*=\s*")([^"]+)(")/m },
   // The project's own <version> is the first one after <modelVersion> (and after a <parent> block, if any).
   java: {
@@ -78,6 +128,9 @@ function locate(lang: Lang, text: string): { index: number; length: number; vers
   const m = loc.pattern.exec(text.slice(start, end));
   if (!m) throw new Error(`no version found in the ${lang} manifest`);
   const index = start + m.index + m[1].length;
+  if (lang === 'typescript' && (JSON.parse(text) as { version?: string }).version !== m[2]) {
+    throw new Error('typescript: the located "version" is not package.json\'s top-level version');
+  }
   return { index, length: m[2].length, version: m[2] };
 }
 
@@ -120,7 +173,7 @@ export function syncCargoLock(lockFile: string, version: string): void {
 
 export interface BumpOptions {
   root: string;
-  /** Write the manifest. Defaults to true; tag-versioned languages never write. */
+  /** Write the manifest and stamps. Defaults to true. Tag-versioned languages write stamps only. */
   write?: boolean;
   /** Existing git tags (tag-versioned languages only). Defaults to `git tag --list` in root. */
   tags?: readonly string[];
@@ -132,11 +185,15 @@ export function bumpVersion(lang: Lang, kind: Bump, opts: BumpOptions): string {
 
   if (TAG_VERSIONED.includes(lang)) {
     const latest = latestTagVersion(lang, opts.tags ?? listTags(opts.root));
-    if (latest === undefined) return FIRST_VERSION;
-    if (kind === 'current') {
-      throw new Error(`${lang}/v${latest} already exists; "current" only applies to a first release. Choose patch, minor or major.`);
+    let next = FIRST_VERSION;
+    if (latest !== undefined) {
+      if (kind === 'current') {
+        throw new Error(`${lang}/v${latest} already exists; "current" only applies to a first release. Choose patch, minor or major.`);
+      }
+      next = bumpSemver(latest, kind);
     }
-    return bumpSemver(latest, kind);
+    if (opts.write !== false) applyStamps(opts.root, lang, next);
+    return next;
   }
 
   const file = join(opts.root, MANIFESTS[lang]!);
@@ -144,9 +201,13 @@ export function bumpVersion(lang: Lang, kind: Bump, opts: BumpOptions): string {
   const current = readManifestVersion(lang, text);
   if (!SEMVER.test(current)) throw new Error(`${lang} manifest version "${current}" is not a plain X.Y.Z`);
   const next = kind === 'current' ? current : bumpSemver(current, kind);
-  if (next !== current && opts.write !== false) {
-    writeFileSync(file, writeManifestVersion(lang, text, next));
-    if (lang === 'rust') syncCargoLock(join(opts.root, 'rust/Cargo.lock'), next);
+  if (opts.write !== false) {
+    if (next !== current) {
+      writeFileSync(file, writeManifestVersion(lang, text, next));
+      if (lang === 'rust') syncCargoLock(join(opts.root, 'rust/Cargo.lock'), next);
+    }
+    // Also on "current": re-stamps anything that drifted from the manifest.
+    applyStamps(opts.root, lang, next);
   }
   return next;
 }

@@ -41,7 +41,7 @@ class ReadmeTest {
         String readme = read("README.md");
         for (String must : Arrays.asList(
                 "Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
-                "com.isaackogan:tiktok-shop-api:0.1.0",
+                "com.isaackogan:tiktok-shop-api:",
                 "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml",
                 "has not been verified against the live API",
                 "ApiException", "withShop", "instanceof", "Java 11", "TikTok Shop API")) {
