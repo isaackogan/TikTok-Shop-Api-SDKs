@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { renderEvents } from './render-events.ts';
 import { renderMeta } from './render-meta.ts';
 
 const pkg = resolve(import.meta.dirname, '..');
@@ -52,3 +53,4 @@ const ops = (JSON.parse(readFileSync(resolve(pkg, 'build/meta.json'), 'utf8')) a
 if (patched !== ops) throw new Error(`async rejection fix-up: patched ${patched} handlers, expected ${ops} (one per operation)`);
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
+renderEvents(resolve(pkg, 'build/meta.json'), resolve(pkg, 'build/openapi.json'), dest);

@@ -9,6 +9,7 @@ use TikTokShop\Api\Generated\Model\GetConversationListRequest;
 use TikTokShop\Api\Signer;
 use TikTokShop\Api\Tests\Support\Stub;
 use TikTokShop\Api\TikTokShop;
+use TikTokShop\Api\TikTokShopAuth;
 use TikTokShop\Api\TikTokShopException;
 
 /**
@@ -198,6 +199,101 @@ final class ServerTest extends TestCase
             $this->assertSame(0, $e->getTikTokCode());
             $this->assertScrubbedOfRequest($e);
         }
+    }
+
+    private const CODE = 'AUTH-CODE-SECRET-0123456789';
+    private const REFRESH = 'REFRESH-TOKEN-SECRET-0123456789';
+
+    private function auth(string $prefix, ?float $timeout = null, int $port = 0): TikTokShopAuth
+    {
+        return new TikTokShopAuth(
+            appKey: 'k1',
+            appSecret: self::SECRET,
+            baseUrl: 'http://127.0.0.1:' . ($port ?: self::$port) . $prefix,
+            timeout: $timeout,
+        );
+    }
+
+    public function testATokenCallDoesNotFollowARedirect(): void
+    {
+        foreach (['exchange', 'refresh'] as $kind) {
+            file_put_contents(self::$log, '');
+            try {
+                $auth = $this->auth('/redirect');
+                $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
+                $this->fail('expected a TikTokShopException');
+            } catch (TikTokShopException $e) {
+                $this->assertSame(302, $e->getTikTokCode());
+                $this->assertSame(302, $e->getHttpStatus());
+            }
+
+            $paths = array_column(self::logged(), 'path');
+            $this->assertCount(1, $paths, 'only the original request reached the server');
+            $this->assertNotContains('/target/secret', $paths);
+        }
+    }
+
+    public function testARedirectIsNotFollowedEvenOnASuppliedClientThatFollowsThem(): void
+    {
+        $auth = new TikTokShopAuth('k1', self::SECRET, baseUrl: 'http://127.0.0.1:' . self::$port . '/redirect', httpClient: new \GuzzleHttp\Client(['allow_redirects' => true]));
+        try {
+            $auth->exchangeCode(self::CODE);
+            $this->fail('expected a TikTokShopException');
+        } catch (TikTokShopException $e) {
+            $this->assertSame(302, $e->getTikTokCode());
+        }
+        $this->assertNotContains('/target/secret', array_column(self::logged(), 'path'));
+    }
+
+    public function testATokenCallToAClosedPortLeaksNoSecrets(): void
+    {
+        $closed = self::freePort();
+        foreach (['exchange', 'refresh'] as $kind) {
+            try {
+                $auth = $this->auth('/x', 5.0, $closed);
+                $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
+                $this->fail('expected a TikTokShopException');
+            } catch (TikTokShopException $e) {
+                $this->assertSame(0, $e->getTikTokCode());
+                $this->assertNull($e->getHttpStatus());
+                $this->assertNotNull($e->getPrevious());
+                AuthTest::assertNoSecrets($this, $e, [self::SECRET, self::CODE, self::REFRESH]);
+            }
+        }
+    }
+
+    public function testATokenCallThatTimesOutLeaksNoSecrets(): void
+    {
+        $started = microtime(true);
+        foreach (['exchange', 'refresh'] as $kind) {
+            try {
+                $auth = $this->auth('/sleep-800', 0.5);
+                $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
+                $this->fail('expected a TikTokShopException');
+            } catch (TikTokShopException $e) {
+                $this->assertSame(0, $e->getTikTokCode());
+                $this->assertStringContainsString('timed out', $e->getMessage());
+                AuthTest::assertNoSecrets($this, $e, [self::SECRET, self::CODE, self::REFRESH]);
+            }
+        }
+        $this->assertLessThan(3.0, microtime(true) - $started);
+    }
+
+    public function testATokenCallSendsTheDocumentedQuery(): void
+    {
+        try {
+            $this->auth('/echo')->exchangeCode('c o+d/e=');
+        } catch (TikTokShopException) {
+            // The stub answers with no tokens; only what it received matters here.
+        }
+        $seen = self::logged();
+        $this->assertCount(1, $seen);
+        $this->assertSame('GET', $seen[0]['method']);
+        $this->assertSame('/echo/api/v2/token/get', $seen[0]['path']);
+        $this->assertSame(
+            'app_key=k1&app_secret=' . self::SECRET . '&auth_code=c%20o%2Bd%2Fe%3D&grant_type=authorized_code',
+            parse_url($seen[0]['uri'], PHP_URL_QUERY),
+        );
     }
 
     private function assertScrubbedOfRequest(\Throwable $e): void

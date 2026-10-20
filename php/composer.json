@@ -3,8 +3,30 @@
   "description": "PHP client for the TikTok Shop API (TikTok Shop Partner API): request signing, OAuth, multi-shop support and typed webhooks. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
   "type": "library",
   "license": "MIT",
-  "homepage": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/php#readme",
-  "keywords": ["tiktok shop api", "tiktok shop", "tiktok shop partner api", "tiktok shop sdk", "tiktok shop webhooks", "tiktok shop oauth", "ecommerce", "unofficial"],
+  "homepage": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs",
+  "authors": [
+    {
+      "name": "Isaac Kogan",
+      "homepage": "https://github.com/isaackogan"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues",
+    "source": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/php",
+    "docs": "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/php#readme"
+  },
+  "keywords": [
+    "tiktok shop api",
+    "tiktok shop",
+    "tiktok shop partner api",
+    "tiktok shop open api",
+    "tiktok shop sdk",
+    "tiktok shop php",
+    "tiktok shop webhooks",
+    "tiktok shop oauth",
+    "ecommerce",
+    "unofficial"
+  ],
   "require": {
     "php": ">=8.1",
     "ext-curl": "*",
@@ -17,10 +39,14 @@
     "phpunit/phpunit": "^10.5"
   },
   "autoload": {
-    "psr-4": { "TikTokShop\\Api\\": "src/" }
+    "psr-4": {
+      "TikTokShop\\Api\\": "src/"
+    }
   },
   "autoload-dev": {
-    "psr-4": { "TikTokShop\\Api\\Tests\\": "tests/" }
+    "psr-4": {
+      "TikTokShop\\Api\\Tests\\": "tests/"
+    }
   },
   "config": {
     "sort-packages": true
