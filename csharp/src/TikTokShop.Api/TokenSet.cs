@@ -22,7 +22,7 @@ public sealed record TokenSet
     /// <param name="sellerName">The seller's name; <c>null</c> when TikTok sent none.</param>
     /// <param name="sellerBaseRegion">The seller's base region; <c>null</c> when TikTok sent none.</param>
     /// <param name="userType">TikTok's user type; <c>null</c> when TikTok sent none.</param>
-    /// <param name="grantedScopes">The scopes the seller granted; empty when TikTok sent none.</param>
+    /// <param name="grantedScopes">The scopes the seller granted; null when TikTok sent none.</param>
     public TokenSet(
         string accessToken,
         long accessTokenExpireIn,
