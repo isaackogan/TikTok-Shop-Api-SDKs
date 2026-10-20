@@ -1,0 +1,6 @@
+# Build output and generated content
+.astro/
+dist/
+node_modules/
+.wrangler/
+public/openapi/

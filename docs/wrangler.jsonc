@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tiktok-shop-api-docs",
+  "compatibility_date": "2026-10-20",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "tiktok-shop-api.docs.isaackogan.com",
+      "custom_domain": true
+    }
+  ]
+}
