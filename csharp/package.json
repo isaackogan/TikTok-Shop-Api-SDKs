@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/csharp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "dotnet build TikTokShop.Api.sln -c Release",
+    "test": "dotnet test TikTokShop.Api.sln"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

@@ -18,6 +18,12 @@ importers:
         specifier: ^2.5.0
         version: 2.11.9
 
+  csharp:
+    devDependencies:
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
+
   go:
     devDependencies:
       tsx:

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>TikTokShop.Api</PackageId>
+    <AssemblyName>TikTokShop.Api</AssemblyName>
+    <RootNamespace>TikTokShop.Api</RootNamespace>
+    <Version>0.1.0</Version>
+    <!-- Hand-written code is nullable-aware. Generated code (Generated/) opts in or out per file and emits many warnings, so warnings are not errors. -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS8632;CS8618;CS8625;CS8600;CS8601;CS8602;CS8603;CS8604;CS8614;CS8765;CS8766;CS0108;CS0618;CS1591;CS1570;CS1572;CS1573;CS1587;CS1734</NoWarn>
+    <Description>Unofficial TikTok Shop Partner API client for .NET: signed requests, shop cipher handling and typed models for every operation. Not affiliated with or endorsed by TikTok or ByteDance.</Description>
+    <Authors>Isaac Kogan</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/isaackogan/TikTok-Shop-Api-SDKs</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+</Project>
