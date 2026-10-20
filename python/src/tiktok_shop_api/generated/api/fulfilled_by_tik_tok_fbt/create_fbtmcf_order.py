@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_fbtmcf_order_request import CreateFBTMCFOrderRequest
 from ...models.create_fbtmcf_order_response import CreateFBTMCFOrderResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateFBTMCFOrderRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreateFBTMCFOrderResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateFBTMCFOrderResponse | None:
     if response.status_code == 200:
         response_200 = CreateFBTMCFOrderResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateFBTMCFOrderResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateFBTMCFOrderResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTMCFOrderRequest,
+
 ) -> Response[CreateFBTMCFOrderResponse]:
-    """Create FBT MCF Order
+    """ Create FBT MCF Order
 
      For orders created on other sales channels that require fulfillment via FBT, this API enables you to
     create corresponding orders (hereinafter referred to as MCF Orders). Once MCF Orders are
@@ -74,10 +84,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateFBTMCFOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -86,13 +98,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTMCFOrderRequest,
+
 ) -> CreateFBTMCFOrderResponse | None:
-    """Create FBT MCF Order
+    """ Create FBT MCF Order
 
      For orders created on other sales channels that require fulfillment via FBT, this API enables you to
     create corresponding orders (hereinafter referred to as MCF Orders). Once MCF Orders are
@@ -107,20 +119,22 @@ def sync(
 
     Returns:
         CreateFBTMCFOrderResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTMCFOrderRequest,
+
 ) -> Response[CreateFBTMCFOrderResponse]:
-    """Create FBT MCF Order
+    """ Create FBT MCF Order
 
      For orders created on other sales channels that require fulfillment via FBT, this API enables you to
     create corresponding orders (hereinafter referred to as MCF Orders). Once MCF Orders are
@@ -135,23 +149,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateFBTMCFOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTMCFOrderRequest,
+
 ) -> CreateFBTMCFOrderResponse | None:
-    """Create FBT MCF Order
+    """ Create FBT MCF Order
 
      For orders created on other sales channels that require fulfillment via FBT, this API enables you to
     create corresponding orders (hereinafter referred to as MCF Orders). Once MCF Orders are
@@ -166,11 +184,11 @@ async def asyncio(
 
     Returns:
         CreateFBTMCFOrderResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

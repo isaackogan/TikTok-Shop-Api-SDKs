@@ -1,43 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="ProductAuditStatusChangeWebhookDataAudit")
+
 
 
 @_attrs_define
 class ProductAuditStatusChangeWebhookDataAudit:
-    """
-    Attributes:
-        status (str | Unset): The product audit status.
-             Possible values:
+    """ 
+        Attributes:
+            status (str | Unset): The product audit status.
+                 Possible values:
 
-             * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform,
-            or it is in a draft, frozen, or deactivated state.
-             * AUDITING: The product is currently being audited.
-             * FAILED: The product failed the audit, or the audit was cancelled.
-             * PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to
-            `pre_approved_reasons` for the prerequisites.
-             * APPROVED: The product passed the audit and has been listed on the platform.
-        pre_approved_reasons (list[str] | Unset): The reason why the audit status of the product is `PRE_APPROVED`.
-             Possible values:
+                 * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform,
+                or it is in a draft, frozen, or deactivated state.
+                 * AUDITING: The product is currently being audited.
+                 * FAILED: The product failed the audit, or the audit was cancelled.
+                 * PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to
+                `pre_approved_reasons` for the prerequisites.
+                 * APPROVED: The product passed the audit and has been listed on the platform.
+            pre_approved_reasons (list[str] | Unset): The reason why the audit status of the product is `PRE_APPROVED`.
+                 Possible values:
 
-             * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting
-            processing.
-             * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and
-            category approval is still pending. To request access, submit an application through the Qualification Center on
-            TikTok Shop Seller Center.
-    """
+                 * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting
+                processing.
+                 * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and
+                category approval is still pending. To request access, submit an application through the Qualification Center on
+                TikTok Shop Seller Center.
+     """
 
     status: str | Unset = UNSET
     pre_approved_reasons: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         status = self.status
@@ -46,15 +59,21 @@ class ProductAuditStatusChangeWebhookDataAudit:
         if not isinstance(self.pre_approved_reasons, Unset):
             pre_approved_reasons = self.pre_approved_reasons
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if status is not UNSET:
             field_dict["status"] = status
         if pre_approved_reasons is not UNSET:
             field_dict["pre_approved_reasons"] = pre_approved_reasons
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -63,10 +82,12 @@ class ProductAuditStatusChangeWebhookDataAudit:
 
         pre_approved_reasons = cast(list[str], d.pop("pre_approved_reasons", UNSET))
 
+
         product_audit_status_change_webhook_data_audit = cls(
             status=status,
             pre_approved_reasons=pre_approved_reasons,
         )
+
 
         product_audit_status_change_webhook_data_audit.additional_properties = d
         return product_audit_status_change_webhook_data_audit

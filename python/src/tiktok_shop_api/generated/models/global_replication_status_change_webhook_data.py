@@ -1,44 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.global_replication_status_change_webhook_data_replicated_product import (
-        GlobalReplicationStatusChangeWebhookDataReplicatedProduct,
-    )
+  from ..models.global_replication_status_change_webhook_data_replicated_product import GlobalReplicationStatusChangeWebhookDataReplicatedProduct
+
+
+
 
 
 T = TypeVar("T", bound="GlobalReplicationStatusChangeWebhookData")
 
 
+
 @_attrs_define
 class GlobalReplicationStatusChangeWebhookData:
-    """
-    Attributes:
-        source_product_id (str | Unset): The ID of the product that's being replicated to other markets.
-        replicated_product (GlobalReplicationStatusChangeWebhookDataReplicatedProduct | Unset):
-    """
+    """ 
+        Attributes:
+            source_product_id (str | Unset): The ID of the product that's being replicated to other markets.
+            replicated_product (GlobalReplicationStatusChangeWebhookDataReplicatedProduct | Unset):
+     """
 
     source_product_id: str | Unset = UNSET
     replicated_product: GlobalReplicationStatusChangeWebhookDataReplicatedProduct | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.global_replication_status_change_webhook_data_replicated_product import GlobalReplicationStatusChangeWebhookDataReplicatedProduct # noqa: PLC0415
         source_product_id = self.source_product_id
 
         replicated_product: dict[str, Any] | Unset = UNSET
         if not isinstance(self.replicated_product, Unset):
             replicated_product = self.replicated_product.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if source_product_id is not UNSET:
             field_dict["source_product_id"] = source_product_id
         if replicated_product is not UNSET:
@@ -46,28 +58,29 @@ class GlobalReplicationStatusChangeWebhookData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.global_replication_status_change_webhook_data_replicated_product import (
-            GlobalReplicationStatusChangeWebhookDataReplicatedProduct,  # noqa: PLC0415
-        )
-
+        from ..models.global_replication_status_change_webhook_data_replicated_product import GlobalReplicationStatusChangeWebhookDataReplicatedProduct # noqa: PLC0415
         d = dict(src_dict)
         source_product_id = d.pop("source_product_id", UNSET)
 
         _replicated_product = d.pop("replicated_product", UNSET)
         replicated_product: GlobalReplicationStatusChangeWebhookDataReplicatedProduct | Unset
-        if isinstance(_replicated_product, Unset):
+        if isinstance(_replicated_product,  Unset):
             replicated_product = UNSET
         else:
-            replicated_product = GlobalReplicationStatusChangeWebhookDataReplicatedProduct.from_dict(
-                _replicated_product
-            )
+            replicated_product = GlobalReplicationStatusChangeWebhookDataReplicatedProduct.from_dict(_replicated_product)
+
+
+
 
         global_replication_status_change_webhook_data = cls(
             source_product_id=source_product_id,
             replicated_product=replicated_product,
         )
+
 
         global_replication_status_change_webhook_data.additional_properties = d
         return global_replication_status_change_webhook_data

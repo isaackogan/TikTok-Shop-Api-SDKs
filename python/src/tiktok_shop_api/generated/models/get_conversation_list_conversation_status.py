@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetConversationListConversationStatus(StrEnum):
     ALL = "ALL"
     ARCHIVED = "ARCHIVED"

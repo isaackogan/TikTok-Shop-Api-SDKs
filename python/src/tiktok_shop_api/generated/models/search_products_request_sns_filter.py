@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchProductsRequestSnsFilter(StrEnum):
     CONFIGURED = "CONFIGURED"
     ELIGIBLE = "ELIGIBLE"

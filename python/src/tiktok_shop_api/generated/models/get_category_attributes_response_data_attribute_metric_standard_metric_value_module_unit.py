@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleUnit")
+
 
 
 @_attrs_define
 class GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleUnit:
-    """
-    Attributes:
-        id (str | Unset): Unit id.
-        name (str | Unset): Unit name.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unit id.
+            name (str | Unset): Unit name.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
             field_dict["name"] = name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleU
             id=id,
             name=name,
         )
+
 
         get_category_attributes_response_data_attribute_metric_standard_metric_value_module_unit.additional_properties = d
         return get_category_attributes_response_data_attribute_metric_standard_metric_value_module_unit

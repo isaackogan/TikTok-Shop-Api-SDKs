@@ -1,20 +1,29 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_customer_service_performance_response import GetCustomerServicePerformanceResponse
-from ...types import UNSET, Response
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
     *,
     support_date_ge: datetime.date,
     support_date_lt: datetime.date,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_support_date_ge = support_date_ge.isoformat()
@@ -23,7 +32,9 @@ def _get_kwargs(
     json_support_date_lt = support_date_lt.isoformat()
     params["support_date_lt"] = json_support_date_lt
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -31,14 +42,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetCustomerServicePerformanceResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCustomerServicePerformanceResponse | None:
     if response.status_code == 200:
         response_200 = GetCustomerServicePerformanceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +61,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetCustomerServicePerformanceResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetCustomerServicePerformanceResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +75,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     support_date_ge: datetime.date,
     support_date_lt: datetime.date,
+
 ) -> Response[GetCustomerServicePerformanceResponse]:
-    """Get Customer Service Performance
+    """ Get Customer Service Performance
 
      Retrieves customer service performance metrics for a shop over a selected time period.
 
@@ -79,11 +91,13 @@ def sync_detailed(
 
     Returns:
         Response[GetCustomerServicePerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         support_date_ge=support_date_ge,
-        support_date_lt=support_date_lt,
+support_date_lt=support_date_lt,
+
     )
 
     response = client.get_httpx_client().request(
@@ -92,14 +106,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     support_date_ge: datetime.date,
     support_date_lt: datetime.date,
+
 ) -> GetCustomerServicePerformanceResponse | None:
-    """Get Customer Service Performance
+    """ Get Customer Service Performance
 
      Retrieves customer service performance metrics for a shop over a selected time period.
 
@@ -113,22 +127,24 @@ def sync(
 
     Returns:
         GetCustomerServicePerformanceResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        support_date_ge=support_date_ge,
-        support_date_lt=support_date_lt,
-    ).parsed
+support_date_ge=support_date_ge,
+support_date_lt=support_date_lt,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     support_date_ge: datetime.date,
     support_date_lt: datetime.date,
+
 ) -> Response[GetCustomerServicePerformanceResponse]:
-    """Get Customer Service Performance
+    """ Get Customer Service Performance
 
      Retrieves customer service performance metrics for a shop over a selected time period.
 
@@ -142,25 +158,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCustomerServicePerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         support_date_ge=support_date_ge,
-        support_date_lt=support_date_lt,
+support_date_lt=support_date_lt,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     support_date_ge: datetime.date,
     support_date_lt: datetime.date,
+
 ) -> GetCustomerServicePerformanceResponse | None:
-    """Get Customer Service Performance
+    """ Get Customer Service Performance
 
      Retrieves customer service performance metrics for a shop over a selected time period.
 
@@ -174,12 +194,12 @@ async def asyncio(
 
     Returns:
         GetCustomerServicePerformanceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            support_date_ge=support_date_ge,
-            support_date_lt=support_date_lt,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+support_date_ge=support_date_ge,
+support_date_lt=support_date_lt,
+
+    )).parsed

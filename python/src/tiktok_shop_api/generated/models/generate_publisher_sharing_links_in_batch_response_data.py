@@ -1,44 +1,57 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.failed_material import FailedMaterial
-    from ..models.generate_publisher_sharing_links_in_batch_response_data_sharing_link import (
-        GeneratePublisherSharingLinksInBatchResponseDataSharingLink,
-    )
+  from ..models.failed_material import FailedMaterial
+  from ..models.generate_publisher_sharing_links_in_batch_response_data_sharing_link import GeneratePublisherSharingLinksInBatchResponseDataSharingLink
+
+
+
 
 
 T = TypeVar("T", bound="GeneratePublisherSharingLinksInBatchResponseData")
 
 
+
 @_attrs_define
 class GeneratePublisherSharingLinksInBatchResponseData:
-    """
-    Attributes:
-        sharing_links (list[GeneratePublisherSharingLinksInBatchResponseDataSharingLink] | Unset): Generated affiliate
-            sharing links for successfully processed materials for the publisher specified in the path.
-        failed_materials (list[FailedMaterial] | Unset): The list of materials which failed to generate sharing links
-            for.
-    """
+    """ 
+        Attributes:
+            sharing_links (list[GeneratePublisherSharingLinksInBatchResponseDataSharingLink] | Unset): Generated affiliate
+                sharing links for successfully processed materials for the publisher specified in the path.
+            failed_materials (list[FailedMaterial] | Unset): The list of materials which failed to generate sharing links
+                for.
+     """
 
     sharing_links: list[GeneratePublisherSharingLinksInBatchResponseDataSharingLink] | Unset = UNSET
     failed_materials: list[FailedMaterial] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.failed_material import FailedMaterial # noqa: PLC0415
+        from ..models.generate_publisher_sharing_links_in_batch_response_data_sharing_link import GeneratePublisherSharingLinksInBatchResponseDataSharingLink # noqa: PLC0415
         sharing_links: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sharing_links, Unset):
             sharing_links = []
             for sharing_links_item_data in self.sharing_links:
                 sharing_links_item = sharing_links_item_data.to_dict()
                 sharing_links.append(sharing_links_item)
+
+
 
         failed_materials: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.failed_materials, Unset):
@@ -47,9 +60,13 @@ class GeneratePublisherSharingLinksInBatchResponseData:
                 failed_materials_item = failed_materials_item_data.to_dict()
                 failed_materials.append(failed_materials_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if sharing_links is not UNSET:
             field_dict["sharing_links"] = sharing_links
         if failed_materials is not UNSET:
@@ -57,24 +74,24 @@ class GeneratePublisherSharingLinksInBatchResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.failed_material import FailedMaterial  # noqa: PLC0415
-        from ..models.generate_publisher_sharing_links_in_batch_response_data_sharing_link import (
-            GeneratePublisherSharingLinksInBatchResponseDataSharingLink,  # noqa: PLC0415
-        )
-
+        from ..models.failed_material import FailedMaterial # noqa: PLC0415
+        from ..models.generate_publisher_sharing_links_in_batch_response_data_sharing_link import GeneratePublisherSharingLinksInBatchResponseDataSharingLink # noqa: PLC0415
         d = dict(src_dict)
         _sharing_links = d.pop("sharing_links", UNSET)
         sharing_links: list[GeneratePublisherSharingLinksInBatchResponseDataSharingLink] | Unset = UNSET
         if _sharing_links is not UNSET:
             sharing_links = []
             for sharing_links_item_data in _sharing_links:
-                sharing_links_item = GeneratePublisherSharingLinksInBatchResponseDataSharingLink.from_dict(
-                    sharing_links_item_data
-                )
+                sharing_links_item = GeneratePublisherSharingLinksInBatchResponseDataSharingLink.from_dict(sharing_links_item_data)
+
+
 
                 sharing_links.append(sharing_links_item)
+
 
         _failed_materials = d.pop("failed_materials", UNSET)
         failed_materials: list[FailedMaterial] | Unset = UNSET
@@ -83,12 +100,16 @@ class GeneratePublisherSharingLinksInBatchResponseData:
             for failed_materials_item_data in _failed_materials:
                 failed_materials_item = FailedMaterial.from_dict(failed_materials_item_data)
 
+
+
                 failed_materials.append(failed_materials_item)
+
 
         generate_publisher_sharing_links_in_batch_response_data = cls(
             sharing_links=sharing_links,
             failed_materials=failed_materials,
         )
+
 
         generate_publisher_sharing_links_in_batch_response_data.additional_properties = d
         return generate_publisher_sharing_links_in_batch_response_data

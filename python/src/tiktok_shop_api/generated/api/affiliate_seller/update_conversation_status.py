@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.update_conversation_status_request import UpdateConversationStatusRequest
 from ...models.update_conversation_status_response import UpdateConversationStatusResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     conversation_id: str,
     *,
     body: UpdateConversationStatusRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/affiliate_seller/202608/conversations/{conversation_id}/status".format(
-            conversation_id=quote(str(conversation_id), safe=""),
-        ),
+        "url": "/affiliate_seller/202608/conversations/{conversation_id}/status".format(conversation_id=quote(str(conversation_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,11 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> UpdateConversationStatusResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UpdateConversationStatusResponse | None:
     if response.status_code == 200:
         response_200 = UpdateConversationStatusResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[UpdateConversationStatusResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UpdateConversationStatusResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdateConversationStatusRequest,
+
 ) -> Response[UpdateConversationStatusResponse]:
-    """Update Conversation Status
+    """ Update Conversation Status
 
      Support starring or archiving a given conversation with creator.
 
@@ -78,11 +85,13 @@ def sync_detailed(
 
     Returns:
         Response[UpdateConversationStatusResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -91,14 +100,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdateConversationStatusRequest,
+
 ) -> UpdateConversationStatusResponse | None:
-    """Update Conversation Status
+    """ Update Conversation Status
 
      Support starring or archiving a given conversation with creator.
 
@@ -112,22 +121,24 @@ def sync(
 
     Returns:
         UpdateConversationStatusResponse
-    """
+     """
+
 
     return sync_detailed(
         conversation_id=conversation_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdateConversationStatusRequest,
+
 ) -> Response[UpdateConversationStatusResponse]:
-    """Update Conversation Status
+    """ Update Conversation Status
 
      Support starring or archiving a given conversation with creator.
 
@@ -141,25 +152,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[UpdateConversationStatusResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdateConversationStatusRequest,
+
 ) -> UpdateConversationStatusResponse | None:
-    """Update Conversation Status
+    """ Update Conversation Status
 
      Support starring or archiving a given conversation with creator.
 
@@ -173,12 +188,12 @@ async def asyncio(
 
     Returns:
         UpdateConversationStatusResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            conversation_id=conversation_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        conversation_id=conversation_id,
+client=client,
+body=body,
+
+    )).parsed

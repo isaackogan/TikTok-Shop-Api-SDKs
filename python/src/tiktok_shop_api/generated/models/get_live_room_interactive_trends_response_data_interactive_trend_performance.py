@@ -1,36 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.data_point import DataPoint
+  from ..models.data_point import DataPoint
+
+
+
 
 
 T = TypeVar("T", bound="GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance")
 
 
+
 @_attrs_define
 class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
-    """
-    Attributes:
-        stats_type (str | Unset): The type of interactive trend metric. Possible values:
-            - `TREND_WATCH_PV`: Watch count for the live room.
-            - `TREND_COMMENT_PV`: Comment count for the live room.
-            - `TREND_SHARE_PV`: Share count for the live room.
-        data_points (list[DataPoint] | Unset): The data point of interactive trend
-    """
+    """ 
+        Attributes:
+            stats_type (str | Unset): The type of interactive trend metric. Possible values:
+                - `TREND_WATCH_PV`: Watch count for the live room.
+                - `TREND_COMMENT_PV`: Comment count for the live room.
+                - `TREND_SHARE_PV`: Share count for the live room.
+            data_points (list[DataPoint] | Unset): The data point of interactive trend
+     """
 
     stats_type: str | Unset = UNSET
     data_points: list[DataPoint] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.data_point import DataPoint # noqa: PLC0415
         stats_type = self.stats_type
 
         data_points: list[dict[str, Any]] | Unset = UNSET
@@ -40,9 +52,13 @@ class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
                 data_points_item = data_points_item_data.to_dict()
                 data_points.append(data_points_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if stats_type is not UNSET:
             field_dict["stats_type"] = stats_type
         if data_points is not UNSET:
@@ -50,10 +66,11 @@ class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.data_point import DataPoint  # noqa: PLC0415
-
+        from ..models.data_point import DataPoint # noqa: PLC0415
         d = dict(src_dict)
         stats_type = d.pop("stats_type", UNSET)
 
@@ -64,12 +81,16 @@ class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
             for data_points_item_data in _data_points:
                 data_points_item = DataPoint.from_dict(data_points_item_data)
 
+
+
                 data_points.append(data_points_item)
+
 
         get_live_room_interactive_trends_response_data_interactive_trend_performance = cls(
             stats_type=stats_type,
             data_points=data_points,
         )
+
 
         get_live_room_interactive_trends_response_data_interactive_trend_performance.additional_properties = d
         return get_live_room_interactive_trends_response_data_interactive_trend_performance

@@ -1,44 +1,60 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetProductResponseDataSkuCombinedSkuInventory")
+
 
 
 @_attrs_define
 class GetProductResponseDataSkuCombinedSkuInventory:
-    """
-    Attributes:
-        quantity (int | Unset): The total quantity available in the warehouse of the source SKU.
-        warehouse_id (str | Unset): The ID of the warehouse where the source SKU is stored.
-            Retrieve details of the warehouse from the [Get Warehouse List
-            API](https://partner.tiktokshop.com/docv2/page/get-warehouse-list-202309).
-    """
+    """ 
+        Attributes:
+            quantity (int | Unset): The total quantity available in the warehouse of the source SKU.
+            warehouse_id (str | Unset): The ID of the warehouse where the source SKU is stored.
+                Retrieve details of the warehouse from the [Get Warehouse List
+                API](https://partner.tiktokshop.com/docv2/page/get-warehouse-list-202309).
+     """
 
     quantity: int | Unset = UNSET
     warehouse_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         quantity = self.quantity
 
         warehouse_id = self.warehouse_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if quantity is not UNSET:
             field_dict["quantity"] = quantity
         if warehouse_id is not UNSET:
             field_dict["warehouse_id"] = warehouse_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -51,6 +67,7 @@ class GetProductResponseDataSkuCombinedSkuInventory:
             quantity=quantity,
             warehouse_id=warehouse_id,
         )
+
 
         get_product_response_data_sku_combined_sku_inventory.additional_properties = d
         return get_product_response_data_sku_combined_sku_inventory

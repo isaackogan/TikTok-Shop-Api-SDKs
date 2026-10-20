@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetProductResponseDataSkuExternalListPrice")
+
 
 
 @_attrs_define
 class GetProductResponseDataSkuExternalListPrice:
-    """
-    Attributes:
-        amount (str | Unset): The price amount.
-        currency (str | Unset): The currency.
-            Possible values: USD
-        source (str | Unset): The external ecommerce platform from which the price is sourced.
-            Possible values:
-            - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-    """
+    """ 
+        Attributes:
+            amount (str | Unset): The price amount.
+            currency (str | Unset): The currency.
+                Possible values: USD
+            source (str | Unset): The external ecommerce platform from which the price is sourced.
+                Possible values:
+                - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
+     """
 
     amount: str | Unset = UNSET
     currency: str | Unset = UNSET
     source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
@@ -35,9 +47,11 @@ class GetProductResponseDataSkuExternalListPrice:
 
         source = self.source
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if currency is not UNSET:
@@ -46,6 +60,8 @@ class GetProductResponseDataSkuExternalListPrice:
             field_dict["source"] = source
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,6 +77,7 @@ class GetProductResponseDataSkuExternalListPrice:
             currency=currency,
             source=source,
         )
+
 
         get_product_response_data_sku_external_list_price.additional_properties = d
         return get_product_response_data_sku_external_list_price

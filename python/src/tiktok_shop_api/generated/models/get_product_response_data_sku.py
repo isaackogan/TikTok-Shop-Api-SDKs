@@ -1,89 +1,92 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_product_response_data_sku_combined_sku import GetProductResponseDataSkuCombinedSku
-    from ..models.get_product_response_data_sku_combined_sku_sales_attribute import (
-        GetProductResponseDataSkuCombinedSkuSalesAttribute,
-    )
-    from ..models.get_product_response_data_sku_external_list_price import GetProductResponseDataSkuExternalListPrice
-    from ..models.get_product_response_data_sku_fee import GetProductResponseDataSkuFee
-    from ..models.get_product_response_data_sku_global_listing_policy import (
-        GetProductResponseDataSkuGlobalListingPolicy,
-    )
-    from ..models.get_product_response_data_sku_inventory import GetProductResponseDataSkuInventory
-    from ..models.get_product_response_data_sku_list_price import GetProductResponseDataSkuListPrice
-    from ..models.get_product_response_data_sku_pre_sale import GetProductResponseDataSkuPreSale
-    from ..models.get_product_response_data_sku_price import GetProductResponseDataSkuPrice
-    from ..models.get_product_response_data_sku_sku_dimension import GetProductResponseDataSkuSkuDimension
-    from ..models.get_product_response_data_sku_sku_weight import GetProductResponseDataSkuSkuWeight
-    from ..models.get_product_response_data_sku_status_info import GetProductResponseDataSkuStatusInfo
-    from ..models.identifier_code import IdentifierCode
-    from ..models.purchase_order_quantity_limit import PurchaseOrderQuantityLimit
+  from ..models.get_product_response_data_sku_combined_sku import GetProductResponseDataSkuCombinedSku
+  from ..models.get_product_response_data_sku_combined_sku_sales_attribute import GetProductResponseDataSkuCombinedSkuSalesAttribute
+  from ..models.get_product_response_data_sku_external_list_price import GetProductResponseDataSkuExternalListPrice
+  from ..models.get_product_response_data_sku_fee import GetProductResponseDataSkuFee
+  from ..models.get_product_response_data_sku_global_listing_policy import GetProductResponseDataSkuGlobalListingPolicy
+  from ..models.get_product_response_data_sku_inventory import GetProductResponseDataSkuInventory
+  from ..models.get_product_response_data_sku_list_price import GetProductResponseDataSkuListPrice
+  from ..models.get_product_response_data_sku_pre_sale import GetProductResponseDataSkuPreSale
+  from ..models.get_product_response_data_sku_price import GetProductResponseDataSkuPrice
+  from ..models.get_product_response_data_sku_sku_dimension import GetProductResponseDataSkuSkuDimension
+  from ..models.get_product_response_data_sku_sku_weight import GetProductResponseDataSkuSkuWeight
+  from ..models.get_product_response_data_sku_status_info import GetProductResponseDataSkuStatusInfo
+  from ..models.identifier_code import IdentifierCode
+  from ..models.purchase_order_quantity_limit import PurchaseOrderQuantityLimit
+
+
+
 
 
 T = TypeVar("T", bound="GetProductResponseDataSku")
 
 
+
 @_attrs_define
 class GetProductResponseDataSku:
-    """
-    Attributes:
-        combined_skus (list[GetProductResponseDataSkuCombinedSku] | Unset): If this SKU belongs to a virtual bundle,
-            this object contains the list of individual SKUs that form the bundle (e.g. gift basket, starter pack).
-        external_list_prices (list[GetProductResponseDataSkuExternalListPrice] | Unset): The SKU list price (e.g. MSRP,
-            RRP) or original price information on external ecommerce platforms.
-            Applicable only for selected sellers in the US market.
+    """ 
+        Attributes:
+            combined_skus (list[GetProductResponseDataSkuCombinedSku] | Unset): If this SKU belongs to a virtual bundle,
+                this object contains the list of individual SKUs that form the bundle (e.g. gift basket, starter pack).
+            external_list_prices (list[GetProductResponseDataSkuExternalListPrice] | Unset): The SKU list price (e.g. MSRP,
+                RRP) or original price information on external ecommerce platforms.
+                Applicable only for selected sellers in the US market.
 
-            **Note**: This value may appear as the strikethrough price on the product page. However, whether the
-            strikethrough price is shown and the amount shown are subject to the audit team's review and decision based on
-            various pricing information.
-        external_sku_id (str | Unset): An external identifier used in an external ecommerce platform. This is used to
-            associate the SKU between TikTok Shop and the external ecommerce platform.
-        external_urls (list[str] | Unset): A list of URLs for third-party product listing pages where consumers can
-            place orders.
-        extra_identifier_codes (list[str] | Unset): A list of up to 10 additional identifier codes if the SKU belongs to
-            a virtual bundle (containing multiple individual SKUs).
+                **Note**: This value may appear as the strikethrough price on the product page. However, whether the
+                strikethrough price is shown and the amount shown are subject to the audit team's review and decision based on
+                various pricing information.
+            external_sku_id (str | Unset): An external identifier used in an external ecommerce platform. This is used to
+                associate the SKU between TikTok Shop and the external ecommerce platform.
+            external_urls (list[str] | Unset): A list of URLs for third-party product listing pages where consumers can
+                place orders.
+            extra_identifier_codes (list[str] | Unset): A list of up to 10 additional identifier codes if the SKU belongs to
+                a virtual bundle (containing multiple individual SKUs).
 
-            **Note**: Applicable only for the EU market.
-        fees (list[GetProductResponseDataSkuFee] | Unset): The fees required for this product based on TikTok Shop
-            policies. Fees are required only for certain product categories, retrieve the requirements from the [Get
-            Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
-        global_listing_policy (GetProductResponseDataSkuGlobalListingPolicy | Unset):
-        id (str | Unset): The SKU ID generated by TikTok Shop.
-        identifier_code (IdentifierCode | Unset):
-        inventory (list[GetProductResponseDataSkuInventory] | Unset): SKU inventory details.
-            **Note**: This field is not supported in post-live drafts. Therefore, the values here will always reflect those
-            in the base version, even if you set `return_draft_version=true`.
-        list_price (GetProductResponseDataSkuListPrice | Unset):
-        pre_sale (GetProductResponseDataSkuPreSale | Unset):
-        price (GetProductResponseDataSkuPrice | Unset):
-        sales_attributes (list[GetProductResponseDataSkuCombinedSkuSalesAttribute] | Unset): A list of attributes  (e.g.
-            size, color, length) that define each variant of a product.
-        seller_sku (str | Unset): An internal code/name for managing SKUs, not visible to buyers.
-        sku_dimensions (GetProductResponseDataSkuSkuDimension | Unset):
-        sku_unit_count (str | Unset): The total quantity/volume of the product represented by the SKU.
-            For example, if the SKU represents 500ml of water, this value would be 500 if the unit type is defined as ml.
-            Applicable only for the EU market.
+                **Note**: Applicable only for the EU market.
+            fees (list[GetProductResponseDataSkuFee] | Unset): The fees required for this product based on TikTok Shop
+                policies. Fees are required only for certain product categories, retrieve the requirements from the [Get
+                Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
+            global_listing_policy (GetProductResponseDataSkuGlobalListingPolicy | Unset):
+            id (str | Unset): The SKU ID generated by TikTok Shop.
+            identifier_code (IdentifierCode | Unset):
+            inventory (list[GetProductResponseDataSkuInventory] | Unset): SKU inventory details.
+                **Note**: This field is not supported in post-live drafts. Therefore, the values here will always reflect those
+                in the base version, even if you set `return_draft_version=true`.
+            list_price (GetProductResponseDataSkuListPrice | Unset):
+            pre_sale (GetProductResponseDataSkuPreSale | Unset):
+            price (GetProductResponseDataSkuPrice | Unset):
+            sales_attributes (list[GetProductResponseDataSkuCombinedSkuSalesAttribute] | Unset): A list of attributes  (e.g.
+                size, color, length) that define each variant of a product.
+            seller_sku (str | Unset): An internal code/name for managing SKUs, not visible to buyers.
+            sku_dimensions (GetProductResponseDataSkuSkuDimension | Unset):
+            sku_unit_count (str | Unset): The total quantity/volume of the product represented by the SKU.
+                For example, if the SKU represents 500ml of water, this value would be 500 if the unit type is defined as ml.
+                Applicable only for the EU market.
 
-            **Note**:
-            - This is mainly used to calculate the unit price of the SKU, and is required only if you wish to display the
-            unit price to facilitate easier price comparisons across different products and packaging sizes.
-            - Unit price = Selling price/(SKU unit count/base unit count). Therefore if you want to obtain the unit price,
-            you would also need to define the "base unit count" and the "unit type" product attributes. Retrieve the
-            relevant information for these product attributes by using the [Get Attributes
-            API](https://partner.tiktokshop.com/docv2/page/6509c5784a0bb702c0561cc8).
-        sku_weight (GetProductResponseDataSkuSkuWeight | Unset):
-        status_info (GetProductResponseDataSkuStatusInfo | Unset):
-        purchase_order_quantity_limit (PurchaseOrderQuantityLimit | Unset):
-    """
+                **Note**:
+                - This is mainly used to calculate the unit price of the SKU, and is required only if you wish to display the
+                unit price to facilitate easier price comparisons across different products and packaging sizes.
+                - Unit price = Selling price/(SKU unit count/base unit count). Therefore if you want to obtain the unit price,
+                you would also need to define the "base unit count" and the "unit type" product attributes. Retrieve the
+                relevant information for these product attributes by using the [Get Attributes
+                API](https://partner.tiktokshop.com/docv2/page/6509c5784a0bb702c0561cc8).
+            sku_weight (GetProductResponseDataSkuSkuWeight | Unset):
+            status_info (GetProductResponseDataSkuStatusInfo | Unset):
+            purchase_order_quantity_limit (PurchaseOrderQuantityLimit | Unset):
+     """
 
     combined_skus: list[GetProductResponseDataSkuCombinedSku] | Unset = UNSET
     external_list_prices: list[GetProductResponseDataSkuExternalListPrice] | Unset = UNSET
@@ -107,13 +110,33 @@ class GetProductResponseDataSku:
     purchase_order_quantity_limit: PurchaseOrderQuantityLimit | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_product_response_data_sku_combined_sku import GetProductResponseDataSkuCombinedSku # noqa: PLC0415
+        from ..models.get_product_response_data_sku_combined_sku_sales_attribute import GetProductResponseDataSkuCombinedSkuSalesAttribute # noqa: PLC0415
+        from ..models.get_product_response_data_sku_external_list_price import GetProductResponseDataSkuExternalListPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_fee import GetProductResponseDataSkuFee # noqa: PLC0415
+        from ..models.get_product_response_data_sku_global_listing_policy import GetProductResponseDataSkuGlobalListingPolicy # noqa: PLC0415
+        from ..models.get_product_response_data_sku_inventory import GetProductResponseDataSkuInventory # noqa: PLC0415
+        from ..models.get_product_response_data_sku_list_price import GetProductResponseDataSkuListPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_pre_sale import GetProductResponseDataSkuPreSale # noqa: PLC0415
+        from ..models.get_product_response_data_sku_price import GetProductResponseDataSkuPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_sku_dimension import GetProductResponseDataSkuSkuDimension # noqa: PLC0415
+        from ..models.get_product_response_data_sku_sku_weight import GetProductResponseDataSkuSkuWeight # noqa: PLC0415
+        from ..models.get_product_response_data_sku_status_info import GetProductResponseDataSkuStatusInfo # noqa: PLC0415
+        from ..models.identifier_code import IdentifierCode # noqa: PLC0415
+        from ..models.purchase_order_quantity_limit import PurchaseOrderQuantityLimit # noqa: PLC0415
         combined_skus: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.combined_skus, Unset):
             combined_skus = []
             for combined_skus_item_data in self.combined_skus:
                 combined_skus_item = combined_skus_item_data.to_dict()
                 combined_skus.append(combined_skus_item)
+
+
 
         external_list_prices: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.external_list_prices, Unset):
@@ -122,15 +145,21 @@ class GetProductResponseDataSku:
                 external_list_prices_item = external_list_prices_item_data.to_dict()
                 external_list_prices.append(external_list_prices_item)
 
+
+
         external_sku_id = self.external_sku_id
 
         external_urls: list[str] | Unset = UNSET
         if not isinstance(self.external_urls, Unset):
             external_urls = self.external_urls
 
+
+
         extra_identifier_codes: list[str] | Unset = UNSET
         if not isinstance(self.extra_identifier_codes, Unset):
             extra_identifier_codes = self.extra_identifier_codes
+
+
 
         fees: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.fees, Unset):
@@ -138,6 +167,8 @@ class GetProductResponseDataSku:
             for fees_item_data in self.fees:
                 fees_item = fees_item_data.to_dict()
                 fees.append(fees_item)
+
+
 
         global_listing_policy: dict[str, Any] | Unset = UNSET
         if not isinstance(self.global_listing_policy, Unset):
@@ -155,6 +186,8 @@ class GetProductResponseDataSku:
             for inventory_item_data in self.inventory:
                 inventory_item = inventory_item_data.to_dict()
                 inventory.append(inventory_item)
+
+
 
         list_price: dict[str, Any] | Unset = UNSET
         if not isinstance(self.list_price, Unset):
@@ -174,6 +207,8 @@ class GetProductResponseDataSku:
             for sales_attributes_item_data in self.sales_attributes:
                 sales_attributes_item = sales_attributes_item_data.to_dict()
                 sales_attributes.append(sales_attributes_item)
+
+
 
         seller_sku = self.seller_sku
 
@@ -195,9 +230,11 @@ class GetProductResponseDataSku:
         if not isinstance(self.purchase_order_quantity_limit, Unset):
             purchase_order_quantity_limit = self.purchase_order_quantity_limit.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if combined_skus is not UNSET:
             field_dict["combined_skus"] = combined_skus
         if external_list_prices is not UNSET:
@@ -241,39 +278,24 @@ class GetProductResponseDataSku:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_product_response_data_sku_combined_sku import (
-            GetProductResponseDataSkuCombinedSku,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_combined_sku_sales_attribute import (
-            GetProductResponseDataSkuCombinedSkuSalesAttribute,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_external_list_price import (
-            GetProductResponseDataSkuExternalListPrice,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_fee import GetProductResponseDataSkuFee  # noqa: PLC0415
-        from ..models.get_product_response_data_sku_global_listing_policy import (
-            GetProductResponseDataSkuGlobalListingPolicy,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_inventory import GetProductResponseDataSkuInventory  # noqa: PLC0415
-        from ..models.get_product_response_data_sku_list_price import (
-            GetProductResponseDataSkuListPrice,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_pre_sale import GetProductResponseDataSkuPreSale  # noqa: PLC0415
-        from ..models.get_product_response_data_sku_price import GetProductResponseDataSkuPrice  # noqa: PLC0415
-        from ..models.get_product_response_data_sku_sku_dimension import (
-            GetProductResponseDataSkuSkuDimension,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_sku_weight import (
-            GetProductResponseDataSkuSkuWeight,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_sku_status_info import (
-            GetProductResponseDataSkuStatusInfo,  # noqa: PLC0415
-        )
-        from ..models.identifier_code import IdentifierCode  # noqa: PLC0415
-        from ..models.purchase_order_quantity_limit import PurchaseOrderQuantityLimit  # noqa: PLC0415
-
+        from ..models.get_product_response_data_sku_combined_sku import GetProductResponseDataSkuCombinedSku # noqa: PLC0415
+        from ..models.get_product_response_data_sku_combined_sku_sales_attribute import GetProductResponseDataSkuCombinedSkuSalesAttribute # noqa: PLC0415
+        from ..models.get_product_response_data_sku_external_list_price import GetProductResponseDataSkuExternalListPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_fee import GetProductResponseDataSkuFee # noqa: PLC0415
+        from ..models.get_product_response_data_sku_global_listing_policy import GetProductResponseDataSkuGlobalListingPolicy # noqa: PLC0415
+        from ..models.get_product_response_data_sku_inventory import GetProductResponseDataSkuInventory # noqa: PLC0415
+        from ..models.get_product_response_data_sku_list_price import GetProductResponseDataSkuListPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_pre_sale import GetProductResponseDataSkuPreSale # noqa: PLC0415
+        from ..models.get_product_response_data_sku_price import GetProductResponseDataSkuPrice # noqa: PLC0415
+        from ..models.get_product_response_data_sku_sku_dimension import GetProductResponseDataSkuSkuDimension # noqa: PLC0415
+        from ..models.get_product_response_data_sku_sku_weight import GetProductResponseDataSkuSkuWeight # noqa: PLC0415
+        from ..models.get_product_response_data_sku_status_info import GetProductResponseDataSkuStatusInfo # noqa: PLC0415
+        from ..models.identifier_code import IdentifierCode # noqa: PLC0415
+        from ..models.purchase_order_quantity_limit import PurchaseOrderQuantityLimit # noqa: PLC0415
         d = dict(src_dict)
         _combined_skus = d.pop("combined_skus", UNSET)
         combined_skus: list[GetProductResponseDataSkuCombinedSku] | Unset = UNSET
@@ -282,24 +304,30 @@ class GetProductResponseDataSku:
             for combined_skus_item_data in _combined_skus:
                 combined_skus_item = GetProductResponseDataSkuCombinedSku.from_dict(combined_skus_item_data)
 
+
+
                 combined_skus.append(combined_skus_item)
+
 
         _external_list_prices = d.pop("external_list_prices", UNSET)
         external_list_prices: list[GetProductResponseDataSkuExternalListPrice] | Unset = UNSET
         if _external_list_prices is not UNSET:
             external_list_prices = []
             for external_list_prices_item_data in _external_list_prices:
-                external_list_prices_item = GetProductResponseDataSkuExternalListPrice.from_dict(
-                    external_list_prices_item_data
-                )
+                external_list_prices_item = GetProductResponseDataSkuExternalListPrice.from_dict(external_list_prices_item_data)
+
+
 
                 external_list_prices.append(external_list_prices_item)
+
 
         external_sku_id = d.pop("external_sku_id", UNSET)
 
         external_urls = cast(list[str], d.pop("external_urls", UNSET))
 
+
         extra_identifier_codes = cast(list[str], d.pop("extra_identifier_codes", UNSET))
+
 
         _fees = d.pop("fees", UNSET)
         fees: list[GetProductResponseDataSkuFee] | Unset = UNSET
@@ -308,23 +336,32 @@ class GetProductResponseDataSku:
             for fees_item_data in _fees:
                 fees_item = GetProductResponseDataSkuFee.from_dict(fees_item_data)
 
+
+
                 fees.append(fees_item)
+
 
         _global_listing_policy = d.pop("global_listing_policy", UNSET)
         global_listing_policy: GetProductResponseDataSkuGlobalListingPolicy | Unset
-        if isinstance(_global_listing_policy, Unset):
+        if isinstance(_global_listing_policy,  Unset):
             global_listing_policy = UNSET
         else:
             global_listing_policy = GetProductResponseDataSkuGlobalListingPolicy.from_dict(_global_listing_policy)
+
+
+
 
         id = d.pop("id", UNSET)
 
         _identifier_code = d.pop("identifier_code", UNSET)
         identifier_code: IdentifierCode | Unset
-        if isinstance(_identifier_code, Unset):
+        if isinstance(_identifier_code,  Unset):
             identifier_code = UNSET
         else:
             identifier_code = IdentifierCode.from_dict(_identifier_code)
+
+
+
 
         _inventory = d.pop("inventory", UNSET)
         inventory: list[GetProductResponseDataSkuInventory] | Unset = UNSET
@@ -333,71 +370,96 @@ class GetProductResponseDataSku:
             for inventory_item_data in _inventory:
                 inventory_item = GetProductResponseDataSkuInventory.from_dict(inventory_item_data)
 
+
+
                 inventory.append(inventory_item)
+
 
         _list_price = d.pop("list_price", UNSET)
         list_price: GetProductResponseDataSkuListPrice | Unset
-        if isinstance(_list_price, Unset):
+        if isinstance(_list_price,  Unset):
             list_price = UNSET
         else:
             list_price = GetProductResponseDataSkuListPrice.from_dict(_list_price)
 
+
+
+
         _pre_sale = d.pop("pre_sale", UNSET)
         pre_sale: GetProductResponseDataSkuPreSale | Unset
-        if isinstance(_pre_sale, Unset):
+        if isinstance(_pre_sale,  Unset):
             pre_sale = UNSET
         else:
             pre_sale = GetProductResponseDataSkuPreSale.from_dict(_pre_sale)
 
+
+
+
         _price = d.pop("price", UNSET)
         price: GetProductResponseDataSkuPrice | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = GetProductResponseDataSkuPrice.from_dict(_price)
+
+
+
 
         _sales_attributes = d.pop("sales_attributes", UNSET)
         sales_attributes: list[GetProductResponseDataSkuCombinedSkuSalesAttribute] | Unset = UNSET
         if _sales_attributes is not UNSET:
             sales_attributes = []
             for sales_attributes_item_data in _sales_attributes:
-                sales_attributes_item = GetProductResponseDataSkuCombinedSkuSalesAttribute.from_dict(
-                    sales_attributes_item_data
-                )
+                sales_attributes_item = GetProductResponseDataSkuCombinedSkuSalesAttribute.from_dict(sales_attributes_item_data)
+
+
 
                 sales_attributes.append(sales_attributes_item)
+
 
         seller_sku = d.pop("seller_sku", UNSET)
 
         _sku_dimensions = d.pop("sku_dimensions", UNSET)
         sku_dimensions: GetProductResponseDataSkuSkuDimension | Unset
-        if isinstance(_sku_dimensions, Unset):
+        if isinstance(_sku_dimensions,  Unset):
             sku_dimensions = UNSET
         else:
             sku_dimensions = GetProductResponseDataSkuSkuDimension.from_dict(_sku_dimensions)
+
+
+
 
         sku_unit_count = d.pop("sku_unit_count", UNSET)
 
         _sku_weight = d.pop("sku_weight", UNSET)
         sku_weight: GetProductResponseDataSkuSkuWeight | Unset
-        if isinstance(_sku_weight, Unset):
+        if isinstance(_sku_weight,  Unset):
             sku_weight = UNSET
         else:
             sku_weight = GetProductResponseDataSkuSkuWeight.from_dict(_sku_weight)
 
+
+
+
         _status_info = d.pop("status_info", UNSET)
         status_info: GetProductResponseDataSkuStatusInfo | Unset
-        if isinstance(_status_info, Unset):
+        if isinstance(_status_info,  Unset):
             status_info = UNSET
         else:
             status_info = GetProductResponseDataSkuStatusInfo.from_dict(_status_info)
 
+
+
+
         _purchase_order_quantity_limit = d.pop("purchase_order_quantity_limit", UNSET)
         purchase_order_quantity_limit: PurchaseOrderQuantityLimit | Unset
-        if isinstance(_purchase_order_quantity_limit, Unset):
+        if isinstance(_purchase_order_quantity_limit,  Unset):
             purchase_order_quantity_limit = UNSET
         else:
             purchase_order_quantity_limit = PurchaseOrderQuantityLimit.from_dict(_purchase_order_quantity_limit)
+
+
+
 
         get_product_response_data_sku = cls(
             combined_skus=combined_skus,
@@ -421,6 +483,7 @@ class GetProductResponseDataSku:
             status_info=status_info,
             purchase_order_quantity_limit=purchase_order_quantity_limit,
         )
+
 
         get_product_response_data_sku.additional_properties = d
         return get_product_response_data_sku

@@ -1,39 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.live_attributed_gmv import LiveAttributedGmv
+  from ..models.live_attributed_gmv import LiveAttributedGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance:
-    """
-    Attributes:
-        live_attributed_gmv (LiveAttributedGmv | Unset):
-        new_live_count (int | Unset): Number of new live streams from affiliate.
-        product_impressions (int | Unset): Product impressions from affiliate live.
-        product_clicks (int | Unset): Product clicks from affiliate live.
-        ctr (str | Unset): Click-through rate from affiliate live.
-        add_cart_count (int | Unset): Number of times products were added to cart from affiliate live.
-        add_cart_rate (str | Unset): Add to cart rate from affiliate live.
-        click_order_rate (str | Unset): Click to order rate from affiliate live.
-        unique_product_impressions (int | Unset): Unique product impressions from affiliate live.
-        unique_clicks (int | Unset): Unique clicks from affiliate live.
-        unique_ctr (str | Unset): Unique click-through rate from affiliate live.
-        atc_users (int | Unset): Number of users who added to cart from affiliate live.
-        unique_atc_rate (str | Unset): Unique add to cart rate from affiliate live.
-        unique_click_order_rate (str | Unset): Unique click to order rate from affiliate live.
-    """
+    """ 
+        Attributes:
+            live_attributed_gmv (LiveAttributedGmv | Unset):
+            new_live_count (int | Unset): Number of new live streams from affiliate.
+            product_impressions (int | Unset): Product impressions from affiliate live.
+            product_clicks (int | Unset): Product clicks from affiliate live.
+            ctr (str | Unset): Click-through rate from affiliate live.
+            add_cart_count (int | Unset): Number of times products were added to cart from affiliate live.
+            add_cart_rate (str | Unset): Add to cart rate from affiliate live.
+            click_order_rate (str | Unset): Click to order rate from affiliate live.
+            unique_product_impressions (int | Unset): Unique product impressions from affiliate live.
+            unique_clicks (int | Unset): Unique clicks from affiliate live.
+            unique_ctr (str | Unset): Unique click-through rate from affiliate live.
+            atc_users (int | Unset): Number of users who added to cart from affiliate live.
+            unique_atc_rate (str | Unset): Unique add to cart rate from affiliate live.
+            unique_click_order_rate (str | Unset): Unique click to order rate from affiliate live.
+     """
 
     live_attributed_gmv: LiveAttributedGmv | Unset = UNSET
     new_live_count: int | Unset = UNSET
@@ -51,7 +58,12 @@ class GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance:
     unique_click_order_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
         live_attributed_gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.live_attributed_gmv, Unset):
             live_attributed_gmv = self.live_attributed_gmv.to_dict()
@@ -82,9 +94,11 @@ class GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance:
 
         unique_click_order_rate = self.unique_click_order_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if live_attributed_gmv is not UNSET:
             field_dict["live_attributed_gmv"] = live_attributed_gmv
         if new_live_count is not UNSET:
@@ -116,17 +130,21 @@ class GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.live_attributed_gmv import LiveAttributedGmv  # noqa: PLC0415
-
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
         d = dict(src_dict)
         _live_attributed_gmv = d.pop("live_attributed_gmv", UNSET)
         live_attributed_gmv: LiveAttributedGmv | Unset
-        if isinstance(_live_attributed_gmv, Unset):
+        if isinstance(_live_attributed_gmv,  Unset):
             live_attributed_gmv = UNSET
         else:
             live_attributed_gmv = LiveAttributedGmv.from_dict(_live_attributed_gmv)
+
+
+
 
         new_live_count = d.pop("new_live_count", UNSET)
 
@@ -170,6 +188,7 @@ class GetShopProductPerformanceListResponseDataProductAffiliateLivePerformance:
             unique_atc_rate=unique_atc_rate,
             unique_click_order_rate=unique_click_order_rate,
         )
+
 
         get_shop_product_performance_list_response_data_product_affiliate_live_performance.additional_properties = d
         return get_shop_product_performance_list_response_data_product_affiliate_live_performance

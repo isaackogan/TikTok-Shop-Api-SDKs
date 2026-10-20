@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.error import Error
+  from ..models.error import Error
+
+
+
 
 
 T = TypeVar("T", bound="DeleteProductsResponseData")
 
 
+
 @_attrs_define
 class DeleteProductsResponseData:
-    """
-    Attributes:
-        errors (list[Error] | Unset): The errors for individual products that could not be deleted. Check this list even
-            when the top-level `code` is `0`.
-    """
+    """ 
+        Attributes:
+            errors (list[Error] | Unset): The errors for individual products that could not be deleted. Check this list even
+                when the top-level `code` is `0`.
+     """
 
     errors: list[Error] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.error import Error # noqa: PLC0415
         errors: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.errors, Unset):
             errors = []
@@ -34,18 +46,23 @@ class DeleteProductsResponseData:
                 errors_item = errors_item_data.to_dict()
                 errors.append(errors_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if errors is not UNSET:
             field_dict["errors"] = errors
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.error import Error  # noqa: PLC0415
-
+        from ..models.error import Error # noqa: PLC0415
         d = dict(src_dict)
         _errors = d.pop("errors", UNSET)
         errors: list[Error] | Unset = UNSET
@@ -54,11 +71,15 @@ class DeleteProductsResponseData:
             for errors_item_data in _errors:
                 errors_item = Error.from_dict(errors_item_data)
 
+
+
                 errors.append(errors_item)
+
 
         delete_products_response_data = cls(
             errors=errors,
         )
+
 
         delete_products_response_data.additional_properties = d
         return delete_products_response_data

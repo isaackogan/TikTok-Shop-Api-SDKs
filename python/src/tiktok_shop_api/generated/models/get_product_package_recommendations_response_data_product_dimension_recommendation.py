@@ -1,37 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_height import (
-        GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight,
-    )
-    from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_length import (
-        GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength,
-    )
-    from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_width import (
-        GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth,
-    )
+  from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_height import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight
+  from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_length import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength
+  from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_width import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth
+
+
+
 
 
 T = TypeVar("T", bound="GetProductPackageRecommendationsResponseDataProductDimensionRecommendation")
 
 
+
 @_attrs_define
 class GetProductPackageRecommendationsResponseDataProductDimensionRecommendation:
-    """
-    Attributes:
-        unit (str | Unset): Unit of dimension, fixed as centimeter.
-        length (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength | Unset):
-        height (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight | Unset):
-        width (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth | Unset):
-    """
+    """ 
+        Attributes:
+            unit (str | Unset): Unit of dimension, fixed as centimeter.
+            length (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength | Unset):
+            height (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight | Unset):
+            width (GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth | Unset):
+     """
 
     unit: str | Unset = UNSET
     length: GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength | Unset = UNSET
@@ -39,7 +40,14 @@ class GetProductPackageRecommendationsResponseDataProductDimensionRecommendation
     width: GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_height import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight # noqa: PLC0415
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_length import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength # noqa: PLC0415
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_width import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth # noqa: PLC0415
         unit = self.unit
 
         length: dict[str, Any] | Unset = UNSET
@@ -54,9 +62,11 @@ class GetProductPackageRecommendationsResponseDataProductDimensionRecommendation
         if not isinstance(self.width, Unset):
             width = self.width.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if unit is not UNSET:
             field_dict["unit"] = unit
         if length is not UNSET:
@@ -68,41 +78,45 @@ class GetProductPackageRecommendationsResponseDataProductDimensionRecommendation
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_height import (
-            GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight,  # noqa: PLC0415
-        )
-        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_length import (
-            GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength,  # noqa: PLC0415
-        )
-        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_width import (
-            GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth,  # noqa: PLC0415
-        )
-
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_height import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight # noqa: PLC0415
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_length import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength # noqa: PLC0415
+        from ..models.get_product_package_recommendations_response_data_product_dimension_recommendation_width import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth # noqa: PLC0415
         d = dict(src_dict)
         unit = d.pop("unit", UNSET)
 
         _length = d.pop("length", UNSET)
         length: GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength | Unset
-        if isinstance(_length, Unset):
+        if isinstance(_length,  Unset):
             length = UNSET
         else:
             length = GetProductPackageRecommendationsResponseDataProductDimensionRecommendationLength.from_dict(_length)
 
+
+
+
         _height = d.pop("height", UNSET)
         height: GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight | Unset
-        if isinstance(_height, Unset):
+        if isinstance(_height,  Unset):
             height = UNSET
         else:
             height = GetProductPackageRecommendationsResponseDataProductDimensionRecommendationHeight.from_dict(_height)
 
+
+
+
         _width = d.pop("width", UNSET)
         width: GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth | Unset
-        if isinstance(_width, Unset):
+        if isinstance(_width,  Unset):
             width = UNSET
         else:
             width = GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth.from_dict(_width)
+
+
+
 
         get_product_package_recommendations_response_data_product_dimension_recommendation = cls(
             unit=unit,
@@ -110,6 +124,7 @@ class GetProductPackageRecommendationsResponseDataProductDimensionRecommendation
             height=height,
             width=width,
         )
+
 
         get_product_package_recommendations_response_data_product_dimension_recommendation.additional_properties = d
         return get_product_package_recommendations_response_data_product_dimension_recommendation

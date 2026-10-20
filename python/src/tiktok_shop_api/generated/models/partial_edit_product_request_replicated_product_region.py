@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PartialEditProductRequestReplicatedProductRegion(StrEnum):
     AT = "AT"
     BE = "BE"

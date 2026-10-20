@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_product_response_data_pod_info_pod_template import GetProductResponseDataPodInfoPodTemplate
+  from ..models.get_product_response_data_pod_info_pod_template import GetProductResponseDataPodInfoPodTemplate
+
+
+
 
 
 T = TypeVar("T", bound="GetProductResponseDataPodInfo")
 
 
+
 @_attrs_define
 class GetProductResponseDataPodInfo:
-    """
-    Attributes:
-        pod_templates (list[GetProductResponseDataPodInfoPodTemplate] | Unset): A list of POD customization templates.
-            Each template represents one customization plan and can be associated with one or more SKUs.
-    """
+    """ 
+        Attributes:
+            pod_templates (list[GetProductResponseDataPodInfoPodTemplate] | Unset): A list of POD customization templates.
+                Each template represents one customization plan and can be associated with one or more SKUs.
+     """
 
     pod_templates: list[GetProductResponseDataPodInfoPodTemplate] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_product_response_data_pod_info_pod_template import GetProductResponseDataPodInfoPodTemplate # noqa: PLC0415
         pod_templates: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.pod_templates, Unset):
             pod_templates = []
@@ -34,20 +46,23 @@ class GetProductResponseDataPodInfo:
                 pod_templates_item = pod_templates_item_data.to_dict()
                 pod_templates.append(pod_templates_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if pod_templates is not UNSET:
             field_dict["pod_templates"] = pod_templates
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_product_response_data_pod_info_pod_template import (
-            GetProductResponseDataPodInfoPodTemplate,  # noqa: PLC0415
-        )
-
+        from ..models.get_product_response_data_pod_info_pod_template import GetProductResponseDataPodInfoPodTemplate # noqa: PLC0415
         d = dict(src_dict)
         _pod_templates = d.pop("pod_templates", UNSET)
         pod_templates: list[GetProductResponseDataPodInfoPodTemplate] | Unset = UNSET
@@ -56,11 +71,15 @@ class GetProductResponseDataPodInfo:
             for pod_templates_item_data in _pod_templates:
                 pod_templates_item = GetProductResponseDataPodInfoPodTemplate.from_dict(pod_templates_item_data)
 
+
+
                 pod_templates.append(pod_templates_item)
+
 
         get_product_response_data_pod_info = cls(
             pod_templates=pod_templates,
         )
+
 
         get_product_response_data_pod_info.additional_properties = d
         return get_product_response_data_pod_info

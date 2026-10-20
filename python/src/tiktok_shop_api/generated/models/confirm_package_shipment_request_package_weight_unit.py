@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ConfirmPackageShipmentRequestPackageWeightUnit(StrEnum):
     GRAM = "GRAM"
     KILOGRAM = "KILOGRAM"

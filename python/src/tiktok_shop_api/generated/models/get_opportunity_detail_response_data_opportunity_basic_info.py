@@ -1,75 +1,84 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunityBasicInfo")
+
 
 
 @_attrs_define
 class GetOpportunityDetailResponseDataOpportunityBasicInfo:
-    """
-    Attributes:
-        opportunity_type (str | Unset): The opportunity type.
-            Possible values:
-            - PRODUCT: A product opportunity.
-            - KEYWORD: A keyword opportunity.
-            - CATEGORY: A category opportunity.
-        status (str | Unset): Opportunity status: ACTIVE / EXPIRED / FULFILLED(已提报)
-        create_time (int | Unset): The opportunity creation time as a Unix timestamp in seconds (UTC).
-        expire_time (int | Unset): Opportunity expiry date, second-level timestamp
-        title (str | Unset): Opportunity title.
-        category_id_level_1 (str | Unset): TikTok Shop L1 category ID.
-        category_id_level_2 (str | Unset): TikTok Shop L2 category ID.
-        category_id_level_3 (str | Unset): TikTok Shop L3 category ID.
-        category_name_level_1 (str | Unset): Category name of 1st level category.
-        category_name_level_2 (str | Unset): Category name of 2nd level category.
-        category_name_level_3 (str | Unset): Category name of 3rd level category.
-        reference_price (str | Unset): The reference price for the product to list, formatted with the applicable
-            currency symbol and three decimal places. If both price boundaries are available, the value is returned as a
-            range; if one is available, a single price is returned; if neither is available, an empty string is returned.
-        reference_images (list[str] | Unset): Reference product images of the product to list.
-        brand_info (str | Unset): Brand requirements for products specified by the opportunity.
-        reward_info (str | Unset): Comma-separated descriptions of rewards that sellers can gain by listing products as
-            required. Values are localized when a translation is available; otherwise, the configured reward description is
-            returned.
-        recom_info (str | Unset): Recommendation reason why this is an opportunity.
-        tags (str | Unset): Comma-separated display values for the opportunity tags. Each value is localized when a
-            translation is available; otherwise, the configured tag description or tag code is returned.
-        tag_codes (list[str] | Unset): Tag codes for the opportunity. The available codes depend on seller and market
-            configuration. Examples for Latam include `core_product` and `top_product`.
-        external_product_id (str | Unset): Product ID on the reference source.
-        reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
-            present.
-            Possible values:
-            - `1`: SHOPEE
-            - `2`: AMAZON
-            - `3`: LOOKFANTASTIC
-            - `4`: WALMART
-            - `5`: TTS
-            - `6`: ASOS
-            - `7`: UNIVERSAL_PRODUCT
-            - `8`: DTCNEXUS
-            - `9`: TEMU
-            - `10`: SHOPIFY
-            - `11`: NEXUS_SHOPIFY
-            - `12`: SHEIN
-            - `13`: PIXEL
-            - `14`: SHOPIFY_NON_1P
-            - `15`: MIRAVIA
-            - `16`: RAKUTEN
-            - `17`: EBAY
-            - `18`: ONBUY
-            - `19`: MERCADO_LIBRE
-            - `20`: ALLEGRO
-            - `21`: BOL
-            - `22`: DTC
-    """
+    """ 
+        Attributes:
+            opportunity_type (str | Unset): The opportunity type.
+                Possible values:
+                - PRODUCT: A product opportunity.
+                - KEYWORD: A keyword opportunity.
+                - CATEGORY: A category opportunity.
+            status (str | Unset): Opportunity status: ACTIVE / EXPIRED / FULFILLED(已提报)
+            create_time (int | Unset): The opportunity creation time as a Unix timestamp in seconds (UTC).
+            expire_time (int | Unset): Opportunity expiry date, second-level timestamp
+            title (str | Unset): Opportunity title.
+            category_id_level_1 (str | Unset): TikTok Shop L1 category ID.
+            category_id_level_2 (str | Unset): TikTok Shop L2 category ID.
+            category_id_level_3 (str | Unset): TikTok Shop L3 category ID.
+            category_name_level_1 (str | Unset): Category name of 1st level category.
+            category_name_level_2 (str | Unset): Category name of 2nd level category.
+            category_name_level_3 (str | Unset): Category name of 3rd level category.
+            reference_price (str | Unset): The reference price for the product to list, formatted with the applicable
+                currency symbol and three decimal places. If both price boundaries are available, the value is returned as a
+                range; if one is available, a single price is returned; if neither is available, an empty string is returned.
+            reference_images (list[str] | Unset): Reference product images of the product to list.
+            brand_info (str | Unset): Brand requirements for products specified by the opportunity.
+            reward_info (str | Unset): Comma-separated descriptions of rewards that sellers can gain by listing products as
+                required. Values are localized when a translation is available; otherwise, the configured reward description is
+                returned.
+            recom_info (str | Unset): Recommendation reason why this is an opportunity.
+            tags (str | Unset): Comma-separated display values for the opportunity tags. Each value is localized when a
+                translation is available; otherwise, the configured tag description or tag code is returned.
+            tag_codes (list[str] | Unset): Tag codes for the opportunity. The available codes depend on seller and market
+                configuration. Examples for Latam include `core_product` and `top_product`.
+            external_product_id (str | Unset): Product ID on the reference source.
+            reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
+                present.
+                Possible values:
+                - `1`: SHOPEE
+                - `2`: AMAZON
+                - `3`: LOOKFANTASTIC
+                - `4`: WALMART
+                - `5`: TTS
+                - `6`: ASOS
+                - `7`: UNIVERSAL_PRODUCT
+                - `8`: DTCNEXUS
+                - `9`: TEMU
+                - `10`: SHOPIFY
+                - `11`: NEXUS_SHOPIFY
+                - `12`: SHEIN
+                - `13`: PIXEL
+                - `14`: SHOPIFY_NON_1P
+                - `15`: MIRAVIA
+                - `16`: RAKUTEN
+                - `17`: EBAY
+                - `18`: ONBUY
+                - `19`: MERCADO_LIBRE
+                - `20`: ALLEGRO
+                - `21`: BOL
+                - `22`: DTC
+     """
 
     opportunity_type: str | Unset = UNSET
     status: str | Unset = UNSET
@@ -92,6 +101,10 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
     external_product_id: str | Unset = UNSET
     reference_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         opportunity_type = self.opportunity_type
@@ -122,6 +135,8 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
         if not isinstance(self.reference_images, Unset):
             reference_images = self.reference_images
 
+
+
         brand_info = self.brand_info
 
         reward_info = self.reward_info
@@ -134,13 +149,17 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
         if not isinstance(self.tag_codes, Unset):
             tag_codes = self.tag_codes
 
+
+
         external_product_id = self.external_product_id
 
         reference_source = self.reference_source
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if opportunity_type is not UNSET:
             field_dict["opportunity_type"] = opportunity_type
         if status is not UNSET:
@@ -184,6 +203,8 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -213,6 +234,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
 
         reference_images = cast(list[str], d.pop("reference_images", UNSET))
 
+
         brand_info = d.pop("brand_info", UNSET)
 
         reward_info = d.pop("reward_info", UNSET)
@@ -222,6 +244,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
         tags = d.pop("tags", UNSET)
 
         tag_codes = cast(list[str], d.pop("tag_codes", UNSET))
+
 
         external_product_id = d.pop("external_product_id", UNSET)
 
@@ -249,6 +272,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
             external_product_id=external_product_id,
             reference_source=reference_source,
         )
+
 
         get_opportunity_detail_response_data_opportunity_basic_info.additional_properties = d
         return get_opportunity_detail_response_data_opportunity_basic_info

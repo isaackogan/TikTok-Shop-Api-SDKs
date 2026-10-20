@@ -1,46 +1,65 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="DeleteGlobalProductsRequest")
+
 
 
 @_attrs_define
 class DeleteGlobalProductsRequest:
-    """
-    Attributes:
-        global_product_ids (list[str]): The global product IDs to delete.
-            Max number of IDs: 20
-    """
+    """ 
+        Attributes:
+            global_product_ids (list[str]): The global product IDs to delete.
+                Max number of IDs: 20
+     """
 
     global_product_ids: list[str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         global_product_ids = self.global_product_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "global_product_ids": global_product_ids,
-            }
-        )
+        field_dict.update({
+            "global_product_ids": global_product_ids,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         global_product_ids = cast(list[str], d.pop("global_product_ids"))
 
+
         delete_global_products_request = cls(
             global_product_ids=global_product_ids,
         )
+
 
         delete_global_products_request.additional_properties = d
         return delete_global_products_request

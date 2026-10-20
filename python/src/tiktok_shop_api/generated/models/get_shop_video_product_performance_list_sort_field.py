@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopVideoProductPerformanceListSortField(StrEnum):
     DAILY_AVG_BUYERS = "daily_avg_buyers"
     GMV = "gmv"

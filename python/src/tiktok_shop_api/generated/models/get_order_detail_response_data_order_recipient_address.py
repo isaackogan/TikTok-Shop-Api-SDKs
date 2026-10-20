@@ -1,53 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.district_info import DistrictInfo
-    from ..models.get_order_detail_response_data_order_recipient_address_delivery_preference import (
-        GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference,
-    )
+  from ..models.district_info import DistrictInfo
+  from ..models.get_order_detail_response_data_order_recipient_address_delivery_preference import GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference
+
+
+
 
 
 T = TypeVar("T", bound="GetOrderDetailResponseDataOrderRecipientAddress")
 
 
+
 @_attrs_define
 class GetOrderDetailResponseDataOrderRecipientAddress:
-    """
-    Attributes:
-        full_address (str | Unset): The complete recipient addresses information.
-        phone_number (str | Unset): The telephone number of the buyer. Please notice, if this order uses platform
-            logistics, phone number will be desensitized.
-        name (str | Unset): The name of the recipient. Please note, if this order uses platform logistics, recipient
-            name will be desensitized
-        first_name (str | Unset): The first name of the recipient. If the buyer does not provide their first and last
-            name separately, this parameter will have the same value as the "name" parameter.
-        last_name (str | Unset): The last name of the recipient. If the buyer does not provide their first and last name
-            separately, this parameter will be empty.
-        first_name_local_script (str | Unset): Recipient first name in katakana.
-            **Note**: Applicable only for the JP market.
-        last_name_local_script (str | Unset): Recipient last name in katakana.
-            **Note**: Applicable only for the JP market.
-        region_code (str | Unset): Region code.
-        postal_code (str | Unset): The postal code that can be used by seller for shipping (in the U.S, this is the ZIP
-            code).
-        post_town (str | Unset): Post town of the address
-            Note: Available only in UK market
-        address_line1 (str | Unset): The first line of the street address.
-        address_line2 (str | Unset): The second line of the street address
-        address_line3 (str | Unset): The third line of the street address.
-        address_line4 (str | Unset): The fourth line of the street address.
-        district_info (list[DistrictInfo] | Unset): District information list.
-        delivery_preferences (GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference | Unset):
-        address_detail (str | Unset): Full buyer detail address.
-    """
+    """ 
+        Attributes:
+            full_address (str | Unset): The complete recipient addresses information.
+            phone_number (str | Unset): The telephone number of the buyer. Please notice, if this order uses platform
+                logistics, phone number will be desensitized.
+            name (str | Unset): The name of the recipient. Please note, if this order uses platform logistics, recipient
+                name will be desensitized
+            first_name (str | Unset): The first name of the recipient. If the buyer does not provide their first and last
+                name separately, this parameter will have the same value as the "name" parameter.
+            last_name (str | Unset): The last name of the recipient. If the buyer does not provide their first and last name
+                separately, this parameter will be empty.
+            first_name_local_script (str | Unset): Recipient first name in katakana.
+                **Note**: Applicable only for the JP market.
+            last_name_local_script (str | Unset): Recipient last name in katakana.
+                **Note**: Applicable only for the JP market.
+            region_code (str | Unset): Region code.
+            postal_code (str | Unset): The postal code that can be used by seller for shipping (in the U.S, this is the ZIP
+                code).
+            post_town (str | Unset): Post town of the address
+                Note: Available only in UK market
+            address_line1 (str | Unset): The first line of the street address.
+            address_line2 (str | Unset): The second line of the street address
+            address_line3 (str | Unset): The third line of the street address.
+            address_line4 (str | Unset): The fourth line of the street address.
+            district_info (list[DistrictInfo] | Unset): District information list.
+            delivery_preferences (GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference | Unset):
+            address_detail (str | Unset): Full buyer detail address.
+     """
 
     full_address: str | Unset = UNSET
     phone_number: str | Unset = UNSET
@@ -68,7 +73,13 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
     address_detail: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.district_info import DistrictInfo # noqa: PLC0415
+        from ..models.get_order_detail_response_data_order_recipient_address_delivery_preference import GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference # noqa: PLC0415
         full_address = self.full_address
 
         phone_number = self.phone_number
@@ -104,15 +115,19 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
                 district_info_item = district_info_item_data.to_dict()
                 district_info.append(district_info_item)
 
+
+
         delivery_preferences: dict[str, Any] | Unset = UNSET
         if not isinstance(self.delivery_preferences, Unset):
             delivery_preferences = self.delivery_preferences.to_dict()
 
         address_detail = self.address_detail
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if full_address is not UNSET:
             field_dict["full_address"] = full_address
         if phone_number is not UNSET:
@@ -150,13 +165,12 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.district_info import DistrictInfo  # noqa: PLC0415
-        from ..models.get_order_detail_response_data_order_recipient_address_delivery_preference import (
-            GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference,  # noqa: PLC0415
-        )
-
+        from ..models.district_info import DistrictInfo # noqa: PLC0415
+        from ..models.get_order_detail_response_data_order_recipient_address_delivery_preference import GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference # noqa: PLC0415
         d = dict(src_dict)
         full_address = d.pop("full_address", UNSET)
 
@@ -193,16 +207,20 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
             for district_info_item_data in _district_info:
                 district_info_item = DistrictInfo.from_dict(district_info_item_data)
 
+
+
                 district_info.append(district_info_item)
+
 
         _delivery_preferences = d.pop("delivery_preferences", UNSET)
         delivery_preferences: GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference | Unset
-        if isinstance(_delivery_preferences, Unset):
+        if isinstance(_delivery_preferences,  Unset):
             delivery_preferences = UNSET
         else:
-            delivery_preferences = GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference.from_dict(
-                _delivery_preferences
-            )
+            delivery_preferences = GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference.from_dict(_delivery_preferences)
+
+
+
 
         address_detail = d.pop("address_detail", UNSET)
 
@@ -225,6 +243,7 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
             delivery_preferences=delivery_preferences,
             address_detail=address_detail,
         )
+
 
         get_order_detail_response_data_order_recipient_address.additional_properties = d
         return get_order_detail_response_data_order_recipient_address

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ShipInboundOrderRequestShipmentOptionFreightType(StrEnum):
     FTL = "FTL"
     LTL = "LTL"

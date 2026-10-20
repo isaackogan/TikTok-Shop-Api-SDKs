@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetVideoPerformancesResponseDataVideoPerformanceTimeRange")
+
 
 
 @_attrs_define
 class GetVideoPerformancesResponseDataVideoPerformanceTimeRange:
-    """
-    Attributes:
-        start_time (int | Unset): Date of the metrics.
-        end_time (int | Unset): Date of the metrics.
-    """
+    """ 
+        Attributes:
+            start_time (int | Unset): Date of the metrics.
+            end_time (int | Unset): Date of the metrics.
+     """
 
     start_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         start_time = self.start_time
 
         end_time = self.end_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if start_time is not UNSET:
             field_dict["start_time"] = start_time
         if end_time is not UNSET:
             field_dict["end_time"] = end_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetVideoPerformancesResponseDataVideoPerformanceTimeRange:
             start_time=start_time,
             end_time=end_time,
         )
+
 
         get_video_performances_response_data_video_performance_time_range.additional_properties = d
         return get_video_performances_response_data_video_performance_time_range

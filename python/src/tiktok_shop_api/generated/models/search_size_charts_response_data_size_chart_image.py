@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchSizeChartsResponseDataSizeChartImage")
+
 
 
 @_attrs_define
 class SearchSizeChartsResponseDataSizeChartImage:
-    """
-    Attributes:
-        uri (str | Unset): The URI to identify the image in API requests and responses.
-        url (str | Unset): The URL to access and view the image.
-        locale (str | Unset): The language of the size chart image.
-    """
+    """ 
+        Attributes:
+            uri (str | Unset): The URI to identify the image in API requests and responses.
+            url (str | Unset): The URL to access and view the image.
+            locale (str | Unset): The language of the size chart image.
+     """
 
     uri: str | Unset = UNSET
     url: str | Unset = UNSET
     locale: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         uri = self.uri
@@ -32,9 +44,11 @@ class SearchSizeChartsResponseDataSizeChartImage:
 
         locale = self.locale
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if uri is not UNSET:
             field_dict["uri"] = uri
         if url is not UNSET:
@@ -43,6 +57,8 @@ class SearchSizeChartsResponseDataSizeChartImage:
             field_dict["locale"] = locale
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class SearchSizeChartsResponseDataSizeChartImage:
             url=url,
             locale=locale,
         )
+
 
         search_size_charts_response_data_size_chart_image.additional_properties = d
         return search_size_charts_response_data_size_chart_image

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchCancellationsRequestCancelTypesItem(StrEnum):
     BUYER_CANCEL = "BUYER_CANCEL"
     CANCEL = "CANCEL"

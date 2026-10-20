@@ -1,28 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem")
+
 
 
 @_attrs_define
 class GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem:
-    """
-    Attributes:
-        aftersales_type_name (str | Unset): Aftersales type returned by TikTok Shop aftersales classification.
-        approve_duration_hours (str | Unset): Approval duration in hours.
-        inspect_duration_hours (str | Unset): Inspection duration in hours.
-        order_id (str | Unset): Order ID.
-        return_order_id (str | Unset): Return order ID.
-        review_count (int | Unset): Number of review rounds.
-        total_handle_duration_hours (str | Unset): Total aftersales handle duration in hours.
-    """
+    """ 
+        Attributes:
+            aftersales_type_name (str | Unset): Aftersales type returned by TikTok Shop aftersales classification.
+            approve_duration_hours (str | Unset): Approval duration in hours.
+            inspect_duration_hours (str | Unset): Inspection duration in hours.
+            order_id (str | Unset): Order ID.
+            return_order_id (str | Unset): Return order ID.
+            review_count (int | Unset): Number of review rounds.
+            total_handle_duration_hours (str | Unset): Total aftersales handle duration in hours.
+     """
 
     aftersales_type_name: str | Unset = UNSET
     approve_duration_hours: str | Unset = UNSET
@@ -32,6 +40,10 @@ class GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem:
     review_count: int | Unset = UNSET
     total_handle_duration_hours: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         aftersales_type_name = self.aftersales_type_name
@@ -48,9 +60,11 @@ class GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem:
 
         total_handle_duration_hours = self.total_handle_duration_hours
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if aftersales_type_name is not UNSET:
             field_dict["aftersales_type_name"] = aftersales_type_name
         if approve_duration_hours is not UNSET:
@@ -67,6 +81,8 @@ class GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem:
             field_dict["total_handle_duration_hours"] = total_handle_duration_hours
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,6 +110,7 @@ class GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem:
             review_count=review_count,
             total_handle_duration_hours=total_handle_duration_hours,
         )
+
 
         get_sps_metric_problem_details_response_data_aht_problem_order_item.additional_properties = d
         return get_sps_metric_problem_details_response_data_aht_problem_order_item

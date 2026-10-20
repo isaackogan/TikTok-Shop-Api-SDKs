@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetWarehouseListResponseDataWarehouseAddressGeolocation")
+
 
 
 @_attrs_define
 class GetWarehouseListResponseDataWarehouseAddressGeolocation:
-    """
-    Attributes:
-        latitude (str | Unset): The latitude of the address.
-        longitude (str | Unset): The longitude of the address.
-    """
+    """ 
+        Attributes:
+            latitude (str | Unset): The latitude of the address.
+            longitude (str | Unset): The longitude of the address.
+     """
 
     latitude: str | Unset = UNSET
     longitude: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         latitude = self.latitude
 
         longitude = self.longitude
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if latitude is not UNSET:
             field_dict["latitude"] = latitude
         if longitude is not UNSET:
             field_dict["longitude"] = longitude
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetWarehouseListResponseDataWarehouseAddressGeolocation:
             latitude=latitude,
             longitude=longitude,
         )
+
 
         get_warehouse_list_response_data_warehouse_address_geolocation.additional_properties = d
         return get_warehouse_list_response_data_warehouse_address_geolocation

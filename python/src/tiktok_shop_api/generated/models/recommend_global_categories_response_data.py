@@ -1,36 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.recommend_global_categories_response_data_category import (
-        RecommendGlobalCategoriesResponseDataCategory,
-    )
+  from ..models.recommend_global_categories_response_data_category import RecommendGlobalCategoriesResponseDataCategory
+
+
+
 
 
 T = TypeVar("T", bound="RecommendGlobalCategoriesResponseData")
 
 
+
 @_attrs_define
 class RecommendGlobalCategoriesResponseData:
-    """
-    Attributes:
-        leaf_category_id (str | Unset): The recommended category ID. This is always a leaf category.
-        categories (list[RecommendGlobalCategoriesResponseDataCategory] | Unset): The category hierarchy for the
-            recommended leaf category, ordered from the top-level category to the leaf category.
-    """
+    """ 
+        Attributes:
+            leaf_category_id (str | Unset): The recommended category ID. This is always a leaf category.
+            categories (list[RecommendGlobalCategoriesResponseDataCategory] | Unset): The category hierarchy for the
+                recommended leaf category, ordered from the top-level category to the leaf category.
+     """
 
     leaf_category_id: str | Unset = UNSET
     categories: list[RecommendGlobalCategoriesResponseDataCategory] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.recommend_global_categories_response_data_category import RecommendGlobalCategoriesResponseDataCategory # noqa: PLC0415
         leaf_category_id = self.leaf_category_id
 
         categories: list[dict[str, Any]] | Unset = UNSET
@@ -40,9 +50,13 @@ class RecommendGlobalCategoriesResponseData:
                 categories_item = categories_item_data.to_dict()
                 categories.append(categories_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if leaf_category_id is not UNSET:
             field_dict["leaf_category_id"] = leaf_category_id
         if categories is not UNSET:
@@ -50,12 +64,11 @@ class RecommendGlobalCategoriesResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.recommend_global_categories_response_data_category import (
-            RecommendGlobalCategoriesResponseDataCategory,  # noqa: PLC0415
-        )
-
+        from ..models.recommend_global_categories_response_data_category import RecommendGlobalCategoriesResponseDataCategory # noqa: PLC0415
         d = dict(src_dict)
         leaf_category_id = d.pop("leaf_category_id", UNSET)
 
@@ -66,12 +79,16 @@ class RecommendGlobalCategoriesResponseData:
             for categories_item_data in _categories:
                 categories_item = RecommendGlobalCategoriesResponseDataCategory.from_dict(categories_item_data)
 
+
+
                 categories.append(categories_item)
+
 
         recommend_global_categories_response_data = cls(
             leaf_category_id=leaf_category_id,
             categories=categories,
         )
+
 
         recommend_global_categories_response_data.additional_properties = d
         return recommend_global_categories_response_data

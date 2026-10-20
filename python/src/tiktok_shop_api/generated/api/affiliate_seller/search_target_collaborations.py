@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_target_collaborations_request import SearchTargetCollaborationsRequest
 from ...models.search_target_collaborations_response import SearchTargetCollaborationsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,8 +20,12 @@ def _get_kwargs(
     body: SearchTargetCollaborationsRequest,
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -24,7 +33,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -40,11 +51,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchTargetCollaborationsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchTargetCollaborationsResponse | None:
     if response.status_code == 200:
         response_200 = SearchTargetCollaborationsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -54,9 +66,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchTargetCollaborationsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchTargetCollaborationsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -71,8 +81,9 @@ def sync_detailed(
     body: SearchTargetCollaborationsRequest,
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchTargetCollaborationsResponse]:
-    """Search Target Collaborations
+    """ Search Target Collaborations
 
      This API is used by Seller to search for all existing target collaborations. Sellers can search
     based on filters such as Invitation name, Invitation ID, Product name, Product ID and Creator name.
@@ -88,12 +99,14 @@ def sync_detailed(
 
     Returns:
         Response[SearchTargetCollaborationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -102,15 +115,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchTargetCollaborationsRequest,
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchTargetCollaborationsResponse | None:
-    """Search Target Collaborations
+    """ Search Target Collaborations
 
      This API is used by Seller to search for all existing target collaborations. Sellers can search
     based on filters such as Invitation name, Invitation ID, Product name, Product ID and Creator name.
@@ -126,15 +139,16 @@ def sync(
 
     Returns:
         SearchTargetCollaborationsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+body=body,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -142,8 +156,9 @@ async def asyncio_detailed(
     body: SearchTargetCollaborationsRequest,
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchTargetCollaborationsResponse]:
-    """Search Target Collaborations
+    """ Search Target Collaborations
 
      This API is used by Seller to search for all existing target collaborations. Sellers can search
     based on filters such as Invitation name, Invitation ID, Product name, Product ID and Creator name.
@@ -159,18 +174,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchTargetCollaborationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -178,8 +196,9 @@ async def asyncio(
     body: SearchTargetCollaborationsRequest,
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchTargetCollaborationsResponse | None:
-    """Search Target Collaborations
+    """ Search Target Collaborations
 
      This API is used by Seller to search for all existing target collaborations. Sellers can search
     based on filters such as Invitation name, Invitation ID, Product name, Product ID and Creator name.
@@ -195,13 +214,13 @@ async def asyncio(
 
     Returns:
         SearchTargetCollaborationsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

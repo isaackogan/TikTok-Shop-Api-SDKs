@@ -1,44 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="ProductLinkInfo")
+
 
 
 @_attrs_define
 class ProductLinkInfo:
-    """
-    Attributes:
-        product_id (str): Use product_id to bind the product with the video.
-            The product_id from [Get Shop Products](https://api/affiliate_creator/202509/shop_products) or [Get Showcase
-            Products](https://api/affiliate_creator/202405/showcases/products)
-        title (str): The title to be shown on the product anchor. Anchor title should be shorter than 30 characters.
-            Titles may be rejected for punctuation, emoji, or offensive language.
-    """
+    """ 
+        Attributes:
+            product_id (str): Use product_id to bind the product with the video.
+                The product_id from [Get Shop Products](https://api/affiliate_creator/202509/shop_products) or [Get Showcase
+                Products](https://api/affiliate_creator/202405/showcases/products)
+            title (str): The title to be shown on the product anchor. Anchor title should be shorter than 30 characters.
+                Titles may be rejected for punctuation, emoji, or offensive language.
+     """
 
     product_id: str
     title: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
 
         title = self.title
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_id": product_id,
-                "title": title,
-            }
-        )
+        field_dict.update({
+            "product_id": product_id,
+            "title": title,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -51,6 +65,7 @@ class ProductLinkInfo:
             product_id=product_id,
             title=title,
         )
+
 
         product_link_info.additional_properties = d
         return product_link_info

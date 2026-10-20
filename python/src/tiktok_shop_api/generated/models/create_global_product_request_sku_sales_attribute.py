@@ -1,45 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.sku_img import SkuImg
+  from ..models.sku_img import SkuImg
+
+
+
 
 
 T = TypeVar("T", bound="CreateGlobalProductRequestSkuSalesAttribute")
 
 
+
 @_attrs_define
 class CreateGlobalProductRequestSkuSalesAttribute:
-    """
-    Attributes:
-        id (str | Unset): The ID of a built-in sales attribute, retrieved from [Get Global Attributes
-            API](https://partner.tiktokshop.com/docv2/page/650a0483c16ffe02b8dfc80a).
-        name (str | Unset): A self-defined custom sales attribute name if the built-in attributes do not satisfy your
-            needs. TikTok Shop generates an ID when the global product is created and returns it in
-            `data.global_skus[].sales_attributes[].id`.
+    """ 
+        Attributes:
+            id (str | Unset): The ID of a built-in sales attribute, retrieved from [Get Global Attributes
+                API](https://partner.tiktokshop.com/docv2/page/650a0483c16ffe02b8dfc80a).
+            name (str | Unset): A self-defined custom sales attribute name if the built-in attributes do not satisfy your
+                needs. TikTok Shop generates an ID when the global product is created and returns it in
+                `data.global_skus[].sales_attributes[].id`.
 
-            **Note**:
-            - Do not include sensitive characters.
-            - Max length: 20 characters
-        value_id (str | Unset): The ID of a built-in sales attribute value, retrieved from the [Get Global Attributes
-            API](https://partner.tiktokshop.com/docv2/page/650a0483c16ffe02b8dfc80a).
-        value_name (str | Unset): A self-defined custom sales attribute value if the built-in values do not satisfy your
-            needs. TikTok Shop generates an ID when the global product is created and returns it in
-            `data.global_skus[].sales_attributes[].value_id`.
+                **Note**:
+                - Do not include sensitive characters.
+                - Max length: 20 characters
+            value_id (str | Unset): The ID of a built-in sales attribute value, retrieved from the [Get Global Attributes
+                API](https://partner.tiktokshop.com/docv2/page/650a0483c16ffe02b8dfc80a).
+            value_name (str | Unset): A self-defined custom sales attribute value if the built-in values do not satisfy your
+                needs. TikTok Shop generates an ID when the global product is created and returns it in
+                `data.global_skus[].sales_attributes[].value_id`.
 
-            **Note**:
-            - No duplicates allowed under the same attribute.
-            - Max length: 50 characters.
-            - Supports only alphabets and numbers.
-        sku_img (SkuImg | Unset):
-    """
+                **Note**:
+                - No duplicates allowed under the same attribute.
+                - Max length: 50 characters.
+                - Supports only alphabets and numbers.
+            sku_img (SkuImg | Unset):
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -48,7 +55,12 @@ class CreateGlobalProductRequestSkuSalesAttribute:
     sku_img: SkuImg | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.sku_img import SkuImg # noqa: PLC0415
         id = self.id
 
         name = self.name
@@ -61,9 +73,11 @@ class CreateGlobalProductRequestSkuSalesAttribute:
         if not isinstance(self.sku_img, Unset):
             sku_img = self.sku_img.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -77,10 +91,11 @@ class CreateGlobalProductRequestSkuSalesAttribute:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.sku_img import SkuImg  # noqa: PLC0415
-
+        from ..models.sku_img import SkuImg # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -92,10 +107,13 @@ class CreateGlobalProductRequestSkuSalesAttribute:
 
         _sku_img = d.pop("sku_img", UNSET)
         sku_img: SkuImg | Unset
-        if isinstance(_sku_img, Unset):
+        if isinstance(_sku_img,  Unset):
             sku_img = UNSET
         else:
             sku_img = SkuImg.from_dict(_sku_img)
+
+
+
 
         create_global_product_request_sku_sales_attribute = cls(
             id=id,
@@ -104,6 +122,7 @@ class CreateGlobalProductRequestSkuSalesAttribute:
             value_name=value_name,
             sku_img=sku_img,
         )
+
 
         create_global_product_request_sku_sales_attribute.additional_properties = d
         return create_global_product_request_sku_sales_attribute

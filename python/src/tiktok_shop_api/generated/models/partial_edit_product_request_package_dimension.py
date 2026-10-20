@@ -1,42 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="PartialEditProductRequestPackageDimension")
+
 
 
 @_attrs_define
 class PartialEditProductRequestPackageDimension:
-    """
-    Attributes:
-        height (str): The package height. A positive whole number.
-            **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
-            to the nearest whole number.
-        length (str): The package length. A positive whole number.
-            **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
-            to the nearest whole number.
-        unit (str): The unit for the package dimensions.
-            Possible values based on region:
-            - US: CENTIMETER, INCH
-            - Other regions: CENTIMETER
+    """ 
+        Attributes:
+            height (str): The package height. A positive whole number.
+                **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
+                to the nearest whole number.
+            length (str): The package length. A positive whole number.
+                **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
+                to the nearest whole number.
+            unit (str): The unit for the package dimensions.
+                Possible values based on region:
+                - US: CENTIMETER, INCH
+                - Other regions: CENTIMETER
 
-            **Note**: You must use the same system of measurement (metric system or imperial system) for `package_weight`
-            and `package_dimensions`. In other words, if you are using KILOGRAM for the weight, you must use CENTIMETER for
-            the dimensions.
-        width (str): The package width. A positive whole number.
-            **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
-            to the nearest whole number.
-    """
+                **Note**: You must use the same system of measurement (metric system or imperial system) for `package_weight`
+                and `package_dimensions`. In other words, if you are using KILOGRAM for the weight, you must use CENTIMETER for
+                the dimensions.
+            width (str): The package width. A positive whole number.
+                **Note**: For the BR market, decimal values using `.` or `,` as separators are also accepted but will be rounded
+                to the nearest whole number.
+     """
 
     height: str
     length: str
     unit: str
     width: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -47,18 +60,19 @@ class PartialEditProductRequestPackageDimension:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "height": height,
-                "length": length,
-                "unit": unit,
-                "width": width,
-            }
-        )
+        field_dict.update({
+            "height": height,
+            "length": length,
+            "unit": unit,
+            "width": width,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -77,6 +91,7 @@ class PartialEditProductRequestPackageDimension:
             unit=unit,
             width=width,
         )
+
 
         partial_edit_product_request_package_dimension.additional_properties = d
         return partial_edit_product_request_package_dimension

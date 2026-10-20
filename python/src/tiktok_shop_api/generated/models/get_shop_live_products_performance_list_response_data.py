@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_live_products_performance_list_response_data_product import (
-        GetShopLIVEProductsPerformanceListResponseDataProduct,
-    )
+  from ..models.get_shop_live_products_performance_list_response_data_product import GetShopLIVEProductsPerformanceListResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEProductsPerformanceListResponseData")
 
 
+
 @_attrs_define
 class GetShopLIVEProductsPerformanceListResponseData:
-    """
-    Attributes:
-        products (list[GetShopLIVEProductsPerformanceListResponseDataProduct] | Unset): List of products and their sales
-            and traffic performance for the LIVE session.
-    """
+    """ 
+        Attributes:
+            products (list[GetShopLIVEProductsPerformanceListResponseDataProduct] | Unset): List of products and their sales
+                and traffic performance for the LIVE session.
+     """
 
     products: list[GetShopLIVEProductsPerformanceListResponseDataProduct] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_live_products_performance_list_response_data_product import GetShopLIVEProductsPerformanceListResponseDataProduct # noqa: PLC0415
         products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
@@ -36,20 +46,23 @@ class GetShopLIVEProductsPerformanceListResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if products is not UNSET:
             field_dict["products"] = products
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_live_products_performance_list_response_data_product import (
-            GetShopLIVEProductsPerformanceListResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_live_products_performance_list_response_data_product import GetShopLIVEProductsPerformanceListResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         _products = d.pop("products", UNSET)
         products: list[GetShopLIVEProductsPerformanceListResponseDataProduct] | Unset = UNSET
@@ -58,11 +71,15 @@ class GetShopLIVEProductsPerformanceListResponseData:
             for products_item_data in _products:
                 products_item = GetShopLIVEProductsPerformanceListResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         get_shop_live_products_performance_list_response_data = cls(
             products=products,
         )
+
 
         get_shop_live_products_performance_list_response_data.additional_properties = d
         return get_shop_live_products_performance_list_response_data

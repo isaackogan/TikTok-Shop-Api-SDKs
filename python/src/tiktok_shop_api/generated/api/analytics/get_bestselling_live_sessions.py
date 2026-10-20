@@ -1,14 +1,19 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_bestselling_live_sessions_response import GetBestsellingLIVESessionsResponse
 from ...models.get_bestselling_live_sessions_time_slot import GetBestsellingLiveSessionsTimeSlot
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -16,7 +21,12 @@ def _get_kwargs(
     date: datetime.date | Unset = UNSET,
     time_slot: GetBestsellingLiveSessionsTimeSlot | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_date: str | Unset = UNSET
@@ -32,7 +42,9 @@ def _get_kwargs(
 
     params["currency"] = currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -40,14 +52,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetBestsellingLIVESessionsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetBestsellingLIVESessionsResponse | None:
     if response.status_code == 200:
         response_200 = GetBestsellingLIVESessionsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -57,9 +71,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetBestsellingLIVESessionsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetBestsellingLIVESessionsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -74,8 +86,9 @@ def sync_detailed(
     date: datetime.date | Unset = UNSET,
     time_slot: GetBestsellingLiveSessionsTimeSlot | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetBestsellingLIVESessionsResponse]:
-    """Get Bestselling LIVE Sessions
+    """ Get Bestselling LIVE Sessions
 
      Get up to 100 LIVE sessions ranked by GMV for the period defined by `date` and `time_slot`.
 
@@ -90,12 +103,14 @@ def sync_detailed(
 
     Returns:
         Response[GetBestsellingLIVESessionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        currency=currency,
+time_slot=time_slot,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -104,15 +119,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     date: datetime.date | Unset = UNSET,
     time_slot: GetBestsellingLiveSessionsTimeSlot | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetBestsellingLIVESessionsResponse | None:
-    """Get Bestselling LIVE Sessions
+    """ Get Bestselling LIVE Sessions
 
      Get up to 100 LIVE sessions ranked by GMV for the period defined by `date` and `time_slot`.
 
@@ -127,15 +142,16 @@ def sync(
 
     Returns:
         GetBestsellingLIVESessionsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        date=date,
-        time_slot=time_slot,
-        currency=currency,
-    ).parsed
+date=date,
+time_slot=time_slot,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -143,8 +159,9 @@ async def asyncio_detailed(
     date: datetime.date | Unset = UNSET,
     time_slot: GetBestsellingLiveSessionsTimeSlot | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetBestsellingLIVESessionsResponse]:
-    """Get Bestselling LIVE Sessions
+    """ Get Bestselling LIVE Sessions
 
      Get up to 100 LIVE sessions ranked by GMV for the period defined by `date` and `time_slot`.
 
@@ -159,18 +176,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetBestsellingLIVESessionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        currency=currency,
+time_slot=time_slot,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -178,8 +198,9 @@ async def asyncio(
     date: datetime.date | Unset = UNSET,
     time_slot: GetBestsellingLiveSessionsTimeSlot | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetBestsellingLIVESessionsResponse | None:
-    """Get Bestselling LIVE Sessions
+    """ Get Bestselling LIVE Sessions
 
      Get up to 100 LIVE sessions ranked by GMV for the period defined by `date` and `time_slot`.
 
@@ -194,13 +215,13 @@ async def asyncio(
 
     Returns:
         GetBestsellingLIVESessionsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            date=date,
-            time_slot=time_slot,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+date=date,
+time_slot=time_slot,
+currency=currency,
+
+    )).parsed

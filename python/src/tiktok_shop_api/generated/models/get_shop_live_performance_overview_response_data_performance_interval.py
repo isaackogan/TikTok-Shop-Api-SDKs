@@ -1,49 +1,56 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+import datetime
+
 if TYPE_CHECKING:
-    from ..models.avg_live_auction_price import AvgLiveAuctionPrice
-    from ..models.live_attributed_gmv import LiveAttributedGmv
-    from ..models.live_auction_attributed_gmv import LiveAuctionAttributedGmv
-    from ..models.live_gmv import LiveGmv
-    from ..models.live_indirect_gmv import LiveIndirectGmv
-    from ..models.show_gpm import ShowGpm
+  from ..models.avg_live_auction_price import AvgLiveAuctionPrice
+  from ..models.live_attributed_gmv import LiveAttributedGmv
+  from ..models.live_auction_attributed_gmv import LiveAuctionAttributedGmv
+  from ..models.live_gmv import LiveGmv
+  from ..models.live_indirect_gmv import LiveIndirectGmv
+  from ..models.show_gpm import ShowGpm
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval")
 
 
+
 @_attrs_define
 class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
-    """
-    Attributes:
-        avg_live_auction_price (AvgLiveAuctionPrice | Unset):
-        avg_viewing_duration (int | Unset): Average viewing duration in seconds.
-        ctor_sku_order (str | Unset): Ratio of LIVE-attributed SKU orders to product clicks in raw decimal format.
-        end_date (datetime.date | Unset): End date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
-            timezone, exclusive.
-        live_attributed_gmv (LiveAttributedGmv | Unset):
-        live_attributed_items_sold (int | Unset): Number of items sold attributed to LIVE streams.
-        live_attributed_sku_orders (int | Unset): Number of paid SKU orders attributed to LIVE streams.
-        live_auction_attributed_gmv (LiveAuctionAttributedGmv | Unset):
-        live_auction_attributed_items_sold (int | Unset): Number of items sold attributed to LIVE auction products.
-        live_auction_attributed_sku_orders (int | Unset): Number of paid SKU orders attributed to LIVE auction products.
-        live_ctr (str | Unset): Ratio of product clicks to product impressions from LIVE streams in raw decimal format.
-        live_gmv (LiveGmv | Unset):
-        live_indirect_gmv (LiveIndirectGmv | Unset):
-        show_gpm (ShowGpm | Unset):
-        start_date (datetime.date | Unset): Start date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
-            timezone, inclusive.
-        views (int | Unset): Number of LIVE views.
-    """
+    """ 
+        Attributes:
+            avg_live_auction_price (AvgLiveAuctionPrice | Unset):
+            avg_viewing_duration (int | Unset): Average viewing duration in seconds.
+            ctor_sku_order (str | Unset): Ratio of LIVE-attributed SKU orders to product clicks in raw decimal format.
+            end_date (datetime.date | Unset): End date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
+                timezone, exclusive.
+            live_attributed_gmv (LiveAttributedGmv | Unset):
+            live_attributed_items_sold (int | Unset): Number of items sold attributed to LIVE streams.
+            live_attributed_sku_orders (int | Unset): Number of paid SKU orders attributed to LIVE streams.
+            live_auction_attributed_gmv (LiveAuctionAttributedGmv | Unset):
+            live_auction_attributed_items_sold (int | Unset): Number of items sold attributed to LIVE auction products.
+            live_auction_attributed_sku_orders (int | Unset): Number of paid SKU orders attributed to LIVE auction products.
+            live_ctr (str | Unset): Ratio of product clicks to product impressions from LIVE streams in raw decimal format.
+            live_gmv (LiveGmv | Unset):
+            live_indirect_gmv (LiveIndirectGmv | Unset):
+            show_gpm (ShowGpm | Unset):
+            start_date (datetime.date | Unset): Start date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
+                timezone, inclusive.
+            views (int | Unset): Number of LIVE views.
+     """
 
     avg_live_auction_price: AvgLiveAuctionPrice | Unset = UNSET
     avg_viewing_duration: int | Unset = UNSET
@@ -63,7 +70,17 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
     views: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.avg_live_auction_price import AvgLiveAuctionPrice # noqa: PLC0415
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
+        from ..models.live_auction_attributed_gmv import LiveAuctionAttributedGmv # noqa: PLC0415
+        from ..models.live_gmv import LiveGmv # noqa: PLC0415
+        from ..models.live_indirect_gmv import LiveIndirectGmv # noqa: PLC0415
+        from ..models.show_gpm import ShowGpm # noqa: PLC0415
         avg_live_auction_price: dict[str, Any] | Unset = UNSET
         if not isinstance(self.avg_live_auction_price, Unset):
             avg_live_auction_price = self.avg_live_auction_price.to_dict()
@@ -112,9 +129,11 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
 
         views = self.views
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if avg_live_auction_price is not UNSET:
             field_dict["avg_live_auction_price"] = avg_live_auction_price
         if avg_viewing_duration is not UNSET:
@@ -150,22 +169,26 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.avg_live_auction_price import AvgLiveAuctionPrice  # noqa: PLC0415
-        from ..models.live_attributed_gmv import LiveAttributedGmv  # noqa: PLC0415
-        from ..models.live_auction_attributed_gmv import LiveAuctionAttributedGmv  # noqa: PLC0415
-        from ..models.live_gmv import LiveGmv  # noqa: PLC0415
-        from ..models.live_indirect_gmv import LiveIndirectGmv  # noqa: PLC0415
-        from ..models.show_gpm import ShowGpm  # noqa: PLC0415
-
+        from ..models.avg_live_auction_price import AvgLiveAuctionPrice # noqa: PLC0415
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
+        from ..models.live_auction_attributed_gmv import LiveAuctionAttributedGmv # noqa: PLC0415
+        from ..models.live_gmv import LiveGmv # noqa: PLC0415
+        from ..models.live_indirect_gmv import LiveIndirectGmv # noqa: PLC0415
+        from ..models.show_gpm import ShowGpm # noqa: PLC0415
         d = dict(src_dict)
         _avg_live_auction_price = d.pop("avg_live_auction_price", UNSET)
         avg_live_auction_price: AvgLiveAuctionPrice | Unset
-        if isinstance(_avg_live_auction_price, Unset):
+        if isinstance(_avg_live_auction_price,  Unset):
             avg_live_auction_price = UNSET
         else:
             avg_live_auction_price = AvgLiveAuctionPrice.from_dict(_avg_live_auction_price)
+
+
+
 
         avg_viewing_duration = d.pop("avg_viewing_duration", UNSET)
 
@@ -173,17 +196,23 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
 
         _end_date = d.pop("end_date", UNSET)
         end_date: datetime.date | Unset
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = datetime.date.fromisoformat(_end_date)
 
+
+
+
         _live_attributed_gmv = d.pop("live_attributed_gmv", UNSET)
         live_attributed_gmv: LiveAttributedGmv | Unset
-        if isinstance(_live_attributed_gmv, Unset):
+        if isinstance(_live_attributed_gmv,  Unset):
             live_attributed_gmv = UNSET
         else:
             live_attributed_gmv = LiveAttributedGmv.from_dict(_live_attributed_gmv)
+
+
+
 
         live_attributed_items_sold = d.pop("live_attributed_items_sold", UNSET)
 
@@ -191,10 +220,13 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
 
         _live_auction_attributed_gmv = d.pop("live_auction_attributed_gmv", UNSET)
         live_auction_attributed_gmv: LiveAuctionAttributedGmv | Unset
-        if isinstance(_live_auction_attributed_gmv, Unset):
+        if isinstance(_live_auction_attributed_gmv,  Unset):
             live_auction_attributed_gmv = UNSET
         else:
             live_auction_attributed_gmv = LiveAuctionAttributedGmv.from_dict(_live_auction_attributed_gmv)
+
+
+
 
         live_auction_attributed_items_sold = d.pop("live_auction_attributed_items_sold", UNSET)
 
@@ -204,31 +236,43 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
 
         _live_gmv = d.pop("live_gmv", UNSET)
         live_gmv: LiveGmv | Unset
-        if isinstance(_live_gmv, Unset):
+        if isinstance(_live_gmv,  Unset):
             live_gmv = UNSET
         else:
             live_gmv = LiveGmv.from_dict(_live_gmv)
 
+
+
+
         _live_indirect_gmv = d.pop("live_indirect_gmv", UNSET)
         live_indirect_gmv: LiveIndirectGmv | Unset
-        if isinstance(_live_indirect_gmv, Unset):
+        if isinstance(_live_indirect_gmv,  Unset):
             live_indirect_gmv = UNSET
         else:
             live_indirect_gmv = LiveIndirectGmv.from_dict(_live_indirect_gmv)
 
+
+
+
         _show_gpm = d.pop("show_gpm", UNSET)
         show_gpm: ShowGpm | Unset
-        if isinstance(_show_gpm, Unset):
+        if isinstance(_show_gpm,  Unset):
             show_gpm = UNSET
         else:
             show_gpm = ShowGpm.from_dict(_show_gpm)
 
+
+
+
         _start_date = d.pop("start_date", UNSET)
         start_date: datetime.date | Unset
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = datetime.date.fromisoformat(_start_date)
+
+
+
 
         views = d.pop("views", UNSET)
 
@@ -250,6 +294,7 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval:
             start_date=start_date,
             views=views,
         )
+
 
         get_shop_live_performance_overview_response_data_performance_interval.additional_properties = d
         return get_shop_live_performance_overview_response_data_performance_interval

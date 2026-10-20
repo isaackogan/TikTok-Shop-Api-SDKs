@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.seo_word import SeoWord
+  from ..models.seo_word import SeoWord
+
+
+
 
 
 T = TypeVar("T", bound="GetProductsSEOWordsResponseDataProduct")
 
 
+
 @_attrs_define
 class GetProductsSEOWordsResponseDataProduct:
-    """
-    Attributes:
-        id (str | Unset): The product ID.
-        seo_words (list[SeoWord] | Unset): The list of SEO keyword suggestions for the product title.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product ID.
+            seo_words (list[SeoWord] | Unset): The list of SEO keyword suggestions for the product title.
+     """
 
     id: str | Unset = UNSET
     seo_words: list[SeoWord] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.seo_word import SeoWord # noqa: PLC0415
         id = self.id
 
         seo_words: list[dict[str, Any]] | Unset = UNSET
@@ -37,9 +49,13 @@ class GetProductsSEOWordsResponseDataProduct:
                 seo_words_item = seo_words_item_data.to_dict()
                 seo_words.append(seo_words_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if seo_words is not UNSET:
@@ -47,10 +63,11 @@ class GetProductsSEOWordsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.seo_word import SeoWord  # noqa: PLC0415
-
+        from ..models.seo_word import SeoWord # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -61,12 +78,16 @@ class GetProductsSEOWordsResponseDataProduct:
             for seo_words_item_data in _seo_words:
                 seo_words_item = SeoWord.from_dict(seo_words_item_data)
 
+
+
                 seo_words.append(seo_words_item)
+
 
         get_products_seo_words_response_data_product = cls(
             id=id,
             seo_words=seo_words,
         )
+
 
         get_products_seo_words_response_data_product.additional_properties = d
         return get_products_seo_words_response_data_product

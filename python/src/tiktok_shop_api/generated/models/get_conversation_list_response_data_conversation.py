@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetConversationListResponseDataConversation")
+
 
 
 @_attrs_define
 class GetConversationListResponseDataConversation:
-    """
-    Attributes:
-        id (str | Unset): Conversation unique ID.
-        unread_count (int | Unset): Number of unread messages.
-        username (str | Unset): The TikTok user name.
-        avatar (str | Unset): The URL for the TikTok creator's avatar image file.
-        creator_im_id (str | Unset): Creators' IM User ID.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Conversation unique ID.
+            unread_count (int | Unset): Number of unread messages.
+            username (str | Unset): The TikTok user name.
+            avatar (str | Unset): The URL for the TikTok creator's avatar image file.
+            creator_im_id (str | Unset): Creators' IM User ID.
+     """
 
     id: str | Unset = UNSET
     unread_count: int | Unset = UNSET
@@ -28,6 +36,10 @@ class GetConversationListResponseDataConversation:
     avatar: str | Unset = UNSET
     creator_im_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -40,9 +52,11 @@ class GetConversationListResponseDataConversation:
 
         creator_im_id = self.creator_im_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if unread_count is not UNSET:
@@ -55,6 +69,8 @@ class GetConversationListResponseDataConversation:
             field_dict["creator_im_id"] = creator_im_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class GetConversationListResponseDataConversation:
             avatar=avatar,
             creator_im_id=creator_im_id,
         )
+
 
         get_conversation_list_response_data_conversation.additional_properties = d
         return get_conversation_list_response_data_conversation

@@ -1,48 +1,64 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SellerNextActionResponse")
+
 
 
 @_attrs_define
 class SellerNextActionResponse:
-    """
-    Attributes:
-        action (str | Unset): Seller's next action.
-            Available values:
-            - `SELLER_RESPOND_REFUND`
-            - `SELLER_RESPOND_RETURN`
-            - `SELLER_RESPOND_RECEIVE_PACKAGE`
-            - `SELLER_RESPOND_REPLACEMENT`
-        deadline (int | Unset): The deadline for the seller to perform the specified action, as a Unix timestamp in
-            seconds.
-    """
+    """ 
+        Attributes:
+            action (str | Unset): Seller's next action.
+                Available values:
+                - `SELLER_RESPOND_REFUND`
+                - `SELLER_RESPOND_RETURN`
+                - `SELLER_RESPOND_RECEIVE_PACKAGE`
+                - `SELLER_RESPOND_REPLACEMENT`
+            deadline (int | Unset): The deadline for the seller to perform the specified action, as a Unix timestamp in
+                seconds.
+     """
 
     action: str | Unset = UNSET
     deadline: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         action = self.action
 
         deadline = self.deadline
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if action is not UNSET:
             field_dict["action"] = action
         if deadline is not UNSET:
             field_dict["deadline"] = deadline
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -55,6 +71,7 @@ class SellerNextActionResponse:
             action=action,
             deadline=deadline,
         )
+
 
         seller_next_action_response.additional_properties = d
         return seller_next_action_response

@@ -1,42 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetConversationsResponseDataConversationLatestMessageSender")
+
 
 
 @_attrs_define
 class GetConversationsResponseDataConversationLatestMessageSender:
-    """
-    Attributes:
-        im_user_id (str | Unset): Sender's IM ID. Sender's unique identifier in TikTok Shop's IM system.
-        avatar (str | Unset): Sender's avatar URL.
-        role (str | Unset): Sender's role. Possible enumerations:
-            - `BUYER`
-            - `SHOP`
-            - `CUSTOMER_SERVICE`
-            - `SYSTEM`
-            - `ROBOT`
-            For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the
-            `SHOP` role.
-        nickname (str | Unset): Sender's nickname.
-            - For shops, the nickname is the shop's name.
-            - For customer service, the nickname is the customer service's name.
-            - For buyers, the nickname is the buyer's nickname on TikTok.
-            You can set the nicknames for shops and customer service agents on Seller Center.
-    """
+    """ 
+        Attributes:
+            im_user_id (str | Unset): Sender's IM ID. Sender's unique identifier in TikTok Shop's IM system.
+            avatar (str | Unset): Sender's avatar URL.
+            role (str | Unset): Sender's role. Possible enumerations:
+                - `BUYER`
+                - `SHOP`
+                - `CUSTOMER_SERVICE`
+                - `SYSTEM`
+                - `ROBOT`
+                For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the
+                `SHOP` role.
+            nickname (str | Unset): Sender's nickname.
+                - For shops, the nickname is the shop's name.
+                - For customer service, the nickname is the customer service's name.
+                - For buyers, the nickname is the buyer's nickname on TikTok.
+                You can set the nicknames for shops and customer service agents on Seller Center.
+     """
 
     im_user_id: str | Unset = UNSET
     avatar: str | Unset = UNSET
     role: str | Unset = UNSET
     nickname: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         im_user_id = self.im_user_id
@@ -47,9 +59,11 @@ class GetConversationsResponseDataConversationLatestMessageSender:
 
         nickname = self.nickname
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if im_user_id is not UNSET:
             field_dict["im_user_id"] = im_user_id
         if avatar is not UNSET:
@@ -60,6 +74,8 @@ class GetConversationsResponseDataConversationLatestMessageSender:
             field_dict["nickname"] = nickname
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -78,6 +94,7 @@ class GetConversationsResponseDataConversationLatestMessageSender:
             role=role,
             nickname=nickname,
         )
+
 
         get_conversations_response_data_conversation_latest_message_sender.additional_properties = d
         return get_conversations_response_data_conversation_latest_message_sender

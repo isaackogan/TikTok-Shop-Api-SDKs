@@ -1,63 +1,66 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.attributed_gmv import AttributedGmv
-    from ..models.get_shop_video_performance_list_response_data_video_creator import (
-        GetShopVideoPerformanceListResponseDataVideoCreator,
-    )
-    from ..models.get_shop_video_performance_list_response_data_video_product import (
-        GetShopVideoPerformanceListResponseDataVideoProduct,
-    )
-    from ..models.gmv import Gmv
-    from ..models.gpm import Gpm
-    from ..models.indirect_gmv import IndirectGmv
+  from ..models.attributed_gmv import AttributedGmv
+  from ..models.get_shop_video_performance_list_response_data_video_creator import GetShopVideoPerformanceListResponseDataVideoCreator
+  from ..models.get_shop_video_performance_list_response_data_video_product import GetShopVideoPerformanceListResponseDataVideoProduct
+  from ..models.gmv import Gmv
+  from ..models.gpm import Gpm
+  from ..models.indirect_gmv import IndirectGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoPerformanceListResponseDataVideo")
 
 
+
 @_attrs_define
 class GetShopVideoPerformanceListResponseDataVideo:
-    """
-    Attributes:
-        advertisable (bool | Unset): Whether the video can be used for advertising.
-        attributed_gmv (AttributedGmv | Unset):
-        avg_customers (int | Unset): Daily average customers.
-        click_through_rate (str | Unset): Ratio of product clicks to video views in raw decimal format.
-        comments (int | Unset): Number of comments received by the video.
-        creator (GetShopVideoPerformanceListResponseDataVideoCreator | Unset):
-        ctor (str | Unset): Click-to-order rate in raw decimal format.
-        duration (int | Unset): Video duration in seconds.
-        gmv (Gmv | Unset):
-        gpm (Gpm | Unset):
-        hash_tags (list[str] | Unset): Hash tags of the video.
-        id (str | Unset): The unique identifier of the video in the performance list.
-        indirect_gmv (IndirectGmv | Unset):
-        items_sold (int | Unset): Number of units sold from the video.
-        likes (int | Unset): Number of likes received by the video.
-        new_followers (int | Unset): Number of new followers attributed to the video.
-        product_clicks (int | Unset): Number of product clicks from the video.
-        product_impressions (int | Unset): Number of product impressions from the video.
-        products (list[GetShopVideoPerformanceListResponseDataVideoProduct] | Unset): Products promoted in the video.
-        review_type (str | Unset): Review classification of the video.
-        shares (int | Unset): Number of times the video was shared.
-        sku_orders (int | Unset): The total number of paid SKU orders placed directly from the current video.
-        title (str | Unset): The title of the video.
-        username (str | Unset): The username associated with the video.
-        v_to_l_clicks (int | Unset): Number of clicks from the video to a LIVE session.
-        v_to_l_rate (str | Unset): Rate of clicks from the video to a LIVE session in raw decimal format.
-        video_finish_rate (str | Unset): Video completion rate in raw decimal format.
-        video_post_time (str | Unset): Date and time when the video was posted.
-        views (int | Unset): Number of video views during the selected time range.
-    """
+    """ 
+        Attributes:
+            advertisable (bool | Unset): Whether the video can be used for advertising.
+            attributed_gmv (AttributedGmv | Unset):
+            avg_customers (int | Unset): Daily average customers.
+            click_through_rate (str | Unset): Ratio of product clicks to video views in raw decimal format.
+            comments (int | Unset): Number of comments received by the video.
+            creator (GetShopVideoPerformanceListResponseDataVideoCreator | Unset):
+            ctor (str | Unset): Click-to-order rate in raw decimal format.
+            duration (int | Unset): Video duration in seconds.
+            gmv (Gmv | Unset):
+            gpm (Gpm | Unset):
+            hash_tags (list[str] | Unset): Hash tags of the video.
+            id (str | Unset): The unique identifier of the video in the performance list.
+            indirect_gmv (IndirectGmv | Unset):
+            items_sold (int | Unset): Number of units sold from the video.
+            likes (int | Unset): Number of likes received by the video.
+            new_followers (int | Unset): Number of new followers attributed to the video.
+            product_clicks (int | Unset): Number of product clicks from the video.
+            product_impressions (int | Unset): Number of product impressions from the video.
+            products (list[GetShopVideoPerformanceListResponseDataVideoProduct] | Unset): Products promoted in the video.
+            review_type (str | Unset): Review classification of the video.
+            shares (int | Unset): Number of times the video was shared.
+            sku_orders (int | Unset): The total number of paid SKU orders placed directly from the current video.
+            title (str | Unset): The title of the video.
+            username (str | Unset): The username associated with the video.
+            v_to_l_clicks (int | Unset): Number of clicks from the video to a LIVE session.
+            v_to_l_rate (str | Unset): Rate of clicks from the video to a LIVE session in raw decimal format.
+            video_finish_rate (str | Unset): Video completion rate in raw decimal format.
+            video_post_time (str | Unset): Date and time when the video was posted.
+            views (int | Unset): Number of video views during the selected time range.
+     """
 
     advertisable: bool | Unset = UNSET
     attributed_gmv: AttributedGmv | Unset = UNSET
@@ -90,7 +93,17 @@ class GetShopVideoPerformanceListResponseDataVideo:
     views: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.attributed_gmv import AttributedGmv # noqa: PLC0415
+        from ..models.get_shop_video_performance_list_response_data_video_creator import GetShopVideoPerformanceListResponseDataVideoCreator # noqa: PLC0415
+        from ..models.get_shop_video_performance_list_response_data_video_product import GetShopVideoPerformanceListResponseDataVideoProduct # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
+        from ..models.indirect_gmv import IndirectGmv # noqa: PLC0415
         advertisable = self.advertisable
 
         attributed_gmv: dict[str, Any] | Unset = UNSET
@@ -123,6 +136,8 @@ class GetShopVideoPerformanceListResponseDataVideo:
         if not isinstance(self.hash_tags, Unset):
             hash_tags = self.hash_tags
 
+
+
         id = self.id
 
         indirect_gmv: dict[str, Any] | Unset = UNSET
@@ -146,6 +161,8 @@ class GetShopVideoPerformanceListResponseDataVideo:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         review_type = self.review_type
 
         shares = self.shares
@@ -166,9 +183,11 @@ class GetShopVideoPerformanceListResponseDataVideo:
 
         views = self.views
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if advertisable is not UNSET:
             field_dict["advertisable"] = advertisable
         if attributed_gmv is not UNSET:
@@ -230,28 +249,28 @@ class GetShopVideoPerformanceListResponseDataVideo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.attributed_gmv import AttributedGmv  # noqa: PLC0415
-        from ..models.get_shop_video_performance_list_response_data_video_creator import (
-            GetShopVideoPerformanceListResponseDataVideoCreator,  # noqa: PLC0415
-        )
-        from ..models.get_shop_video_performance_list_response_data_video_product import (
-            GetShopVideoPerformanceListResponseDataVideoProduct,  # noqa: PLC0415
-        )
-        from ..models.gmv import Gmv  # noqa: PLC0415
-        from ..models.gpm import Gpm  # noqa: PLC0415
-        from ..models.indirect_gmv import IndirectGmv  # noqa: PLC0415
-
+        from ..models.attributed_gmv import AttributedGmv # noqa: PLC0415
+        from ..models.get_shop_video_performance_list_response_data_video_creator import GetShopVideoPerformanceListResponseDataVideoCreator # noqa: PLC0415
+        from ..models.get_shop_video_performance_list_response_data_video_product import GetShopVideoPerformanceListResponseDataVideoProduct # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
+        from ..models.indirect_gmv import IndirectGmv # noqa: PLC0415
         d = dict(src_dict)
         advertisable = d.pop("advertisable", UNSET)
 
         _attributed_gmv = d.pop("attributed_gmv", UNSET)
         attributed_gmv: AttributedGmv | Unset
-        if isinstance(_attributed_gmv, Unset):
+        if isinstance(_attributed_gmv,  Unset):
             attributed_gmv = UNSET
         else:
             attributed_gmv = AttributedGmv.from_dict(_attributed_gmv)
+
+
+
 
         avg_customers = d.pop("avg_customers", UNSET)
 
@@ -261,10 +280,13 @@ class GetShopVideoPerformanceListResponseDataVideo:
 
         _creator = d.pop("creator", UNSET)
         creator: GetShopVideoPerformanceListResponseDataVideoCreator | Unset
-        if isinstance(_creator, Unset):
+        if isinstance(_creator,  Unset):
             creator = UNSET
         else:
             creator = GetShopVideoPerformanceListResponseDataVideoCreator.from_dict(_creator)
+
+
+
 
         ctor = d.pop("ctor", UNSET)
 
@@ -272,28 +294,38 @@ class GetShopVideoPerformanceListResponseDataVideo:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
 
+
+
+
         _gpm = d.pop("gpm", UNSET)
         gpm: Gpm | Unset
-        if isinstance(_gpm, Unset):
+        if isinstance(_gpm,  Unset):
             gpm = UNSET
         else:
             gpm = Gpm.from_dict(_gpm)
 
+
+
+
         hash_tags = cast(list[str], d.pop("hash_tags", UNSET))
+
 
         id = d.pop("id", UNSET)
 
         _indirect_gmv = d.pop("indirect_gmv", UNSET)
         indirect_gmv: IndirectGmv | Unset
-        if isinstance(_indirect_gmv, Unset):
+        if isinstance(_indirect_gmv,  Unset):
             indirect_gmv = UNSET
         else:
             indirect_gmv = IndirectGmv.from_dict(_indirect_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
@@ -312,7 +344,10 @@ class GetShopVideoPerformanceListResponseDataVideo:
             for products_item_data in _products:
                 products_item = GetShopVideoPerformanceListResponseDataVideoProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         review_type = d.pop("review_type", UNSET)
 
@@ -365,6 +400,7 @@ class GetShopVideoPerformanceListResponseDataVideo:
             video_post_time=video_post_time,
             views=views,
         )
+
 
         get_shop_video_performance_list_response_data_video.additional_properties = d
         return get_shop_video_performance_list_response_data_video

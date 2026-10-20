@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.remove_promotion_activity_products_request import RemovePromotionActivityProductsRequest
 from ...models.remove_promotion_activity_products_response import RemovePromotionActivityProductsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     activity_id: str,
     *,
     body: RemovePromotionActivityProductsRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "delete",
-        "url": "/promotion/202309/activities/{activity_id}/products".format(
-            activity_id=quote(str(activity_id), safe=""),
-        ),
+        "url": "/promotion/202309/activities/{activity_id}/products".format(activity_id=quote(str(activity_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> RemovePromotionActivityProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> RemovePromotionActivityProductsResponse | None:
     if response.status_code == 200:
         response_200 = RemovePromotionActivityProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[RemovePromotionActivityProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[RemovePromotionActivityProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RemovePromotionActivityProductsRequest | Unset = UNSET,
+
 ) -> Response[RemovePromotionActivityProductsResponse]:
-    """Remove Promotion Activity Products
+    """ Remove Promotion Activity Products
 
      Use this API for `FIXED_PRICE`, `DIRECT_DISCOUNT`, `FLASHSALE`, `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`,
     `GIFT_WITH_PURCHASE`, and `SHIPPING_DISCOUNT` activities. Provide at least one non-empty removal
@@ -94,11 +103,13 @@ def sync_detailed(
 
     Returns:
         Response[RemovePromotionActivityProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -107,14 +118,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RemovePromotionActivityProductsRequest | Unset = UNSET,
+
 ) -> RemovePromotionActivityProductsResponse | None:
-    """Remove Promotion Activity Products
+    """ Remove Promotion Activity Products
 
      Use this API for `FIXED_PRICE`, `DIRECT_DISCOUNT`, `FLASHSALE`, `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`,
     `GIFT_WITH_PURCHASE`, and `SHIPPING_DISCOUNT` activities. Provide at least one non-empty removal
@@ -143,22 +154,24 @@ def sync(
 
     Returns:
         RemovePromotionActivityProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         activity_id=activity_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RemovePromotionActivityProductsRequest | Unset = UNSET,
+
 ) -> Response[RemovePromotionActivityProductsResponse]:
-    """Remove Promotion Activity Products
+    """ Remove Promotion Activity Products
 
      Use this API for `FIXED_PRICE`, `DIRECT_DISCOUNT`, `FLASHSALE`, `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`,
     `GIFT_WITH_PURCHASE`, and `SHIPPING_DISCOUNT` activities. Provide at least one non-empty removal
@@ -187,25 +200,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[RemovePromotionActivityProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RemovePromotionActivityProductsRequest | Unset = UNSET,
+
 ) -> RemovePromotionActivityProductsResponse | None:
-    """Remove Promotion Activity Products
+    """ Remove Promotion Activity Products
 
      Use this API for `FIXED_PRICE`, `DIRECT_DISCOUNT`, `FLASHSALE`, `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`,
     `GIFT_WITH_PURCHASE`, and `SHIPPING_DISCOUNT` activities. Provide at least one non-empty removal
@@ -234,12 +251,12 @@ async def asyncio(
 
     Returns:
         RemovePromotionActivityProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            activity_id=activity_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        activity_id=activity_id,
+client=client,
+body=body,
+
+    )).parsed

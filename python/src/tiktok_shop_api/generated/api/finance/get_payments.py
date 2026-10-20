@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_payments_response import GetPaymentsResponse
 from ...models.get_payments_sort_order import GetPaymentsSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -18,7 +23,12 @@ def _get_kwargs(
     sort_field: str,
     sort_order: GetPaymentsSortOrder | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["create_time_lt"] = create_time_lt
@@ -37,7 +47,9 @@ def _get_kwargs(
 
     params["create_time_ge"] = create_time_ge
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -45,12 +57,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetPaymentsResponse | None:
     if response.status_code == 200:
         response_200 = GetPaymentsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -78,8 +94,9 @@ def sync_detailed(
     sort_field: str,
     sort_order: GetPaymentsSortOrder | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetPaymentsResponse]:
-    """Get Payments
+    """ Get Payments
 
      **This API is currently unavailable to SEA markets.**
     Retrieves records of automated payments for a shop based on a specified date range.
@@ -100,15 +117,17 @@ def sync_detailed(
 
     Returns:
         Response[GetPaymentsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         create_time_lt=create_time_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        create_time_ge=create_time_ge,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+create_time_ge=create_time_ge,
+
     )
 
     response = client.get_httpx_client().request(
@@ -116,7 +135,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -127,8 +145,9 @@ def sync(
     sort_field: str,
     sort_order: GetPaymentsSortOrder | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> GetPaymentsResponse | None:
-    """Get Payments
+    """ Get Payments
 
      **This API is currently unavailable to SEA markets.**
     Retrieves records of automated payments for a shop based on a specified date range.
@@ -149,18 +168,19 @@ def sync(
 
     Returns:
         GetPaymentsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        create_time_lt=create_time_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        create_time_ge=create_time_ge,
-    ).parsed
+create_time_lt=create_time_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+create_time_ge=create_time_ge,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -171,8 +191,9 @@ async def asyncio_detailed(
     sort_field: str,
     sort_order: GetPaymentsSortOrder | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetPaymentsResponse]:
-    """Get Payments
+    """ Get Payments
 
      **This API is currently unavailable to SEA markets.**
     Retrieves records of automated payments for a shop based on a specified date range.
@@ -193,21 +214,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetPaymentsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         create_time_lt=create_time_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        create_time_ge=create_time_ge,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+create_time_ge=create_time_ge,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -218,8 +242,9 @@ async def asyncio(
     sort_field: str,
     sort_order: GetPaymentsSortOrder | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> GetPaymentsResponse | None:
-    """Get Payments
+    """ Get Payments
 
      **This API is currently unavailable to SEA markets.**
     Retrieves records of automated payments for a shop based on a specified date range.
@@ -240,16 +265,16 @@ async def asyncio(
 
     Returns:
         GetPaymentsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            create_time_lt=create_time_lt,
-            page_size=page_size,
-            page_token=page_token,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            create_time_ge=create_time_ge,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+create_time_lt=create_time_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+create_time_ge=create_time_ge,
+
+    )).parsed

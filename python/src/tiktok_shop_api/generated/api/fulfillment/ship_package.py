@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.ship_package_request import ShipPackageRequest
 from ...models.ship_package_response import ShipPackageResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     package_id: str,
     *,
     body: ShipPackageRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/fulfillment/202309/packages/{package_id}/ship".format(
-            package_id=quote(str(package_id), safe=""),
-        ),
+        "url": "/fulfillment/202309/packages/{package_id}/ship".format(package_id=quote(str(package_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,9 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ShipPackageResponse | None:
     if response.status_code == 200:
         response_200 = ShipPackageResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -60,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: ShipPackageRequest | Unset = UNSET,
+
 ) -> Response[ShipPackageResponse]:
-    """Ship Package
+    """ Ship Package
 
      Use this API to ship a package. There are two kinds of shipping options available: `TikTok Shipping`
     or `Seller Shipping`.
@@ -83,11 +96,13 @@ def sync_detailed(
 
     Returns:
         Response[ShipPackageResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -96,14 +111,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ShipPackageRequest | Unset = UNSET,
+
 ) -> ShipPackageResponse | None:
-    """Ship Package
+    """ Ship Package
 
      Use this API to ship a package. There are two kinds of shipping options available: `TikTok Shipping`
     or `Seller Shipping`.
@@ -125,22 +140,24 @@ def sync(
 
     Returns:
         ShipPackageResponse
-    """
+     """
+
 
     return sync_detailed(
         package_id=package_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ShipPackageRequest | Unset = UNSET,
+
 ) -> Response[ShipPackageResponse]:
-    """Ship Package
+    """ Ship Package
 
      Use this API to ship a package. There are two kinds of shipping options available: `TikTok Shipping`
     or `Seller Shipping`.
@@ -162,25 +179,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[ShipPackageResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ShipPackageRequest | Unset = UNSET,
+
 ) -> ShipPackageResponse | None:
-    """Ship Package
+    """ Ship Package
 
      Use this API to ship a package. There are two kinds of shipping options available: `TikTok Shipping`
     or `Seller Shipping`.
@@ -202,12 +223,12 @@ async def asyncio(
 
     Returns:
         ShipPackageResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            package_id=package_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        package_id=package_id,
+client=client,
+body=body,
+
+    )).parsed

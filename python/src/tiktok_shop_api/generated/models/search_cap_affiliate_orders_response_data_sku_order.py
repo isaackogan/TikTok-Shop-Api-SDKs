@@ -1,176 +1,151 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.actual_bonus_commission import ActualBonusCommission
-    from ..models.actual_commission_base import ActualCommissionBase
-    from ..models.actual_shop_ads_commission import ActualShopAdsCommission
-    from ..models.actual_standard_commission import ActualStandardCommission
-    from ..models.estimated_bonus_commission import EstimatedBonusCommission
-    from ..models.estimated_commission_base import EstimatedCommissionBase
-    from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission
-    from ..models.estimated_standard_commission import EstimatedStandardCommission
-    from ..models.price import Price
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_isr import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_iva import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_isr import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_iva import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_pit import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_total_earnings_after_tax import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_tap_bonus_commission import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_total_agency_commission import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_isr import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_iva import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_isr import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_iva import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_pit import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_total_earnings_after_tax import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_tap_bonus_commission import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission,
-    )
-    from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_total_agency_earning import (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning,
-    )
+  from ..models.actual_bonus_commission import ActualBonusCommission
+  from ..models.actual_commission_base import ActualCommissionBase
+  from ..models.actual_shop_ads_commission import ActualShopAdsCommission
+  from ..models.actual_standard_commission import ActualStandardCommission
+  from ..models.estimated_bonus_commission import EstimatedBonusCommission
+  from ..models.estimated_commission_base import EstimatedCommissionBase
+  from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission
+  from ..models.estimated_standard_commission import EstimatedStandardCommission
+  from ..models.price import Price
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_total_agency_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission
+  from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_total_agency_earning import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning
+
+
+
 
 
 T = TypeVar("T", bound="SearchCAPAffiliateOrdersResponseDataSkuOrder")
 
 
+
 @_attrs_define
 class SearchCAPAffiliateOrdersResponseDataSkuOrder:
-    """
-    Attributes:
-        id (str | Unset): Transaction main order ID
-        tags (str | Unset): The customizable ID for each order, used for tracking performance at difference front end
-            modules.
-        create_time (int | Unset): Unix timestamp in seconds when the order was created (UTC).
-        delivery_time (int | Unset): Unix timestamp in seconds when the order was delivered (UTC). This field is omitted
-            when no delivery timestamp is available.
-        settle_status (str | Unset): Settlement Status of the order.
-            Possible values:
-            1. "CUSTOMER UNPAID",  customer hasn't paid for the orders.
-            2. "PENDING", customers can still return or get a refund for this order. The earnings shown are estimates and
-            waiting for settlement.
-            3. "SETTLED", your earnings have already settled to your account
-            4. "INELIGIBLE", The order has been returned/refunded/canceled by the buyer, and no commission will be settled.
-            5. "FROZEN", Possible fraud has been detected regarding the order. The commission will be unfrozen after the
-            fraud is resolved.
-        sku_id (str | Unset): The SKU identifier.
-        open_collaboration_id (str | Unset): The open collaboration identifier associated with the order.
-        target_collaboration_id (str | Unset): The target collaboration identifier associated with the order.
-        creator_username (str | Unset): Creator username
-        product_name (str | Unset): The product name.
-        product_id (str | Unset): Unique identifier for Product
-        price (Price | Unset):
-        quantity (int | Unset): Number of SKU items in the order, including refunded items.
-        shop_name (str | Unset): Shop / Seller name
-        content_type (str | Unset): The content format of the creator content through which the order was created.
-            Possible values:
-            - SHOP
-            - VIDEO
-            - LIVE
-            - PRE_LIVE
-            - PROMOTION_PAGE
-            - LINKSHARE
-        content_id (str | Unset): Unique identifier for content
-        attribution_type (str | Unset): Attribution type for `LINKSHARE` content.
-            Possible values:
-            - `Direct`: same-shop attribution.
-            - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in
-            the Marketplace or target collaboration.
+    """ 
+        Attributes:
+            id (str | Unset): Transaction main order ID
+            tags (str | Unset): The customizable ID for each order, used for tracking performance at difference front end
+                modules.
+            create_time (int | Unset): Unix timestamp in seconds when the order was created (UTC).
+            delivery_time (int | Unset): Unix timestamp in seconds when the order was delivered (UTC). This field is omitted
+                when no delivery timestamp is available.
+            settle_status (str | Unset): Settlement Status of the order.
+                Possible values:
+                1. "CUSTOMER UNPAID",  customer hasn't paid for the orders.
+                2. "PENDING", customers can still return or get a refund for this order. The earnings shown are estimates and
+                waiting for settlement.
+                3. "SETTLED", your earnings have already settled to your account
+                4. "INELIGIBLE", The order has been returned/refunded/canceled by the buyer, and no commission will be settled.
+                5. "FROZEN", Possible fraud has been detected regarding the order. The commission will be unfrozen after the
+                fraud is resolved.
+            sku_id (str | Unset): The SKU identifier.
+            open_collaboration_id (str | Unset): The open collaboration identifier associated with the order.
+            target_collaboration_id (str | Unset): The target collaboration identifier associated with the order.
+            creator_username (str | Unset): Creator username
+            product_name (str | Unset): The product name.
+            product_id (str | Unset): Unique identifier for Product
+            price (Price | Unset):
+            quantity (int | Unset): Number of SKU items in the order, including refunded items.
+            shop_name (str | Unset): Shop / Seller name
+            content_type (str | Unset): The content format of the creator content through which the order was created.
+                Possible values:
+                - SHOP
+                - VIDEO
+                - LIVE
+                - PRE_LIVE
+                - PROMOTION_PAGE
+                - LINKSHARE
+            content_id (str | Unset): Unique identifier for content
+            attribution_type (str | Unset): Attribution type for `LINKSHARE` content.
+                Possible values:
+                - `Direct`: same-shop attribution.
+                - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in
+                the Marketplace or target collaboration.
 
-            For other content types, this field is an empty string.
-        commission_model (str | Unset): Commission calculation model.
-            Possible values:
-            - `Fixed commission`
-            - `Tiered commission`
-        commission_tier_setting (str | Unset): Seller-configured commission rates for a tiered commission model,
-            expressed as percentages and separated by ` OR `. Returns `-` for the fixed commission model.
-        standard_commission_rate (int | Unset): Seller-to-creator standard commission rate. Returned as an integer in
-            hundredths of a percent without a percent sign; for example, 3000 represents 30%.
-        commission_bonus_rate (int | Unset): TTS-to-creator commission bonus rate. Returned as an integer in hundredths
-            of a percent without a percent sign; for example, 3000 represents 30%.
-        shop_ads_commission_rate (int | Unset): Shop Ads commission rate paid to the creator. Returned as an integer in
-            hundredths of a percent without a percent sign; for example, 3000 represents 30%.
-        tap_bonus_commission_rate (int | Unset): Commission bonus rate that the affiliate partner allocates to the
-            creator. Returned as an integer in hundredths of a percent without a percent sign; for example, 3000 represents
-            30%.
-        revenue_sharing_portion_rate (int | Unset): Revenue-sharing portion between the creator and agency. Returned as
-            an integer in hundredths of a percent without a percent sign; for example, 3000 represents 30%.
-        estimated_commission_base (EstimatedCommissionBase | Unset):
-        estimated_standard_commission (EstimatedStandardCommission | Unset):
-        estimated_bonus_commission (EstimatedBonusCommission | Unset):
-        estimated_shop_ads_commission (EstimatedShopAdsCommission | Unset):
-        estimated_tap_bonus_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission |
-            Unset):
-        estimated_creator_tax_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr | Unset):
-        estimated_creator_tax_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva | Unset):
-        estimated_creator_tax_pit (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit | Unset):
-        estimated_creator_total_earnings_after_tax
-            (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset):
-        estimated_total_agency_earnings (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning |
-            Unset):
-        estimated_agency_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr | Unset):
-        estimated_agency_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva | Unset):
-        actual_commission_base (ActualCommissionBase | Unset):
-        actual_standard_commission (ActualStandardCommission | Unset):
-        actual_bonus_commission (ActualBonusCommission | Unset):
-        actual_shop_ads_commission (ActualShopAdsCommission | Unset):
-        actual_tap_bonus_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission | Unset):
-        actual_creator_tax_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr | Unset):
-        actual_creator_tax_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva | Unset):
-        actual_creator_tax_pit (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit | Unset):
-        actual_creator_total_earnings_after_tax
-            (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset):
-        actual_total_agency_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission |
-            Unset):
-        actual_agency_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset):
-        actual_agency_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset):
-        fully_return (str | Unset): Whether this SKU order was fully returned or refunded.
-            Possible values:
-            - `Yes`: this SKU order was fully returned or refunded, and no commission is paid.
-            - `No`: this SKU order was not fully returned or refunded.
-        settlement_time (int | Unset): Unix timestamp in seconds when the order commission was settled (UTC). This field
-            is omitted when no settlement timestamp is available.
-        last_update_time (int | Unset): Unix timestamp in seconds when the record was last updated (UTC).
-        is_carousel (bool | Unset): Carousel content may involve a commission rate discount. Returns true when the SKU
-            order is attributed to carousel content.
-    """
+                For other content types, this field is an empty string.
+            commission_model (str | Unset): Commission calculation model.
+                Possible values:
+                - `Fixed commission`
+                - `Tiered commission`
+            commission_tier_setting (str | Unset): Seller-configured commission rates for a tiered commission model,
+                expressed as percentages and separated by ` OR `. Returns `-` for the fixed commission model.
+            standard_commission_rate (int | Unset): Seller-to-creator standard commission rate. Returned as an integer in
+                hundredths of a percent without a percent sign; for example, 3000 represents 30%.
+            commission_bonus_rate (int | Unset): TTS-to-creator commission bonus rate. Returned as an integer in hundredths
+                of a percent without a percent sign; for example, 3000 represents 30%.
+            shop_ads_commission_rate (int | Unset): Shop Ads commission rate paid to the creator. Returned as an integer in
+                hundredths of a percent without a percent sign; for example, 3000 represents 30%.
+            tap_bonus_commission_rate (int | Unset): Commission bonus rate that the affiliate partner allocates to the
+                creator. Returned as an integer in hundredths of a percent without a percent sign; for example, 3000 represents
+                30%.
+            revenue_sharing_portion_rate (int | Unset): Revenue-sharing portion between the creator and agency. Returned as
+                an integer in hundredths of a percent without a percent sign; for example, 3000 represents 30%.
+            estimated_commission_base (EstimatedCommissionBase | Unset):
+            estimated_standard_commission (EstimatedStandardCommission | Unset):
+            estimated_bonus_commission (EstimatedBonusCommission | Unset):
+            estimated_shop_ads_commission (EstimatedShopAdsCommission | Unset):
+            estimated_tap_bonus_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission |
+                Unset):
+            estimated_creator_tax_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr | Unset):
+            estimated_creator_tax_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva | Unset):
+            estimated_creator_tax_pit (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit | Unset):
+            estimated_creator_total_earnings_after_tax
+                (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset):
+            estimated_total_agency_earnings (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning |
+                Unset):
+            estimated_agency_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr | Unset):
+            estimated_agency_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva | Unset):
+            actual_commission_base (ActualCommissionBase | Unset):
+            actual_standard_commission (ActualStandardCommission | Unset):
+            actual_bonus_commission (ActualBonusCommission | Unset):
+            actual_shop_ads_commission (ActualShopAdsCommission | Unset):
+            actual_tap_bonus_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission | Unset):
+            actual_creator_tax_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr | Unset):
+            actual_creator_tax_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva | Unset):
+            actual_creator_tax_pit (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit | Unset):
+            actual_creator_total_earnings_after_tax
+                (SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset):
+            actual_total_agency_commission (SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission |
+                Unset):
+            actual_agency_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset):
+            actual_agency_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset):
+            fully_return (str | Unset): Whether this SKU order was fully returned or refunded.
+                Possible values:
+                - `Yes`: this SKU order was fully returned or refunded, and no commission is paid.
+                - `No`: this SKU order was not fully returned or refunded.
+            settlement_time (int | Unset): Unix timestamp in seconds when the order commission was settled (UTC). This field
+                is omitted when no settlement timestamp is available.
+            last_update_time (int | Unset): Unix timestamp in seconds when the record was last updated (UTC).
+            is_carousel (bool | Unset): Carousel content may involve a commission rate discount. Returns true when the SKU
+                order is attributed to carousel content.
+     """
 
     id: str | Unset = UNSET
     tags: str | Unset = UNSET
@@ -200,18 +175,12 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
     estimated_standard_commission: EstimatedStandardCommission | Unset = UNSET
     estimated_bonus_commission: EstimatedBonusCommission | Unset = UNSET
     estimated_shop_ads_commission: EstimatedShopAdsCommission | Unset = UNSET
-    estimated_tap_bonus_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission | Unset = (
-        UNSET
-    )
+    estimated_tap_bonus_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission | Unset = UNSET
     estimated_creator_tax_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr | Unset = UNSET
     estimated_creator_tax_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva | Unset = UNSET
     estimated_creator_tax_pit: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit | Unset = UNSET
-    estimated_creator_total_earnings_after_tax: (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset
-    ) = UNSET
-    estimated_total_agency_earnings: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning | Unset = (
-        UNSET
-    )
+    estimated_creator_total_earnings_after_tax: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset = UNSET
+    estimated_total_agency_earnings: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning | Unset = UNSET
     estimated_agency_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr | Unset = UNSET
     estimated_agency_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva | Unset = UNSET
     actual_commission_base: ActualCommissionBase | Unset = UNSET
@@ -222,12 +191,8 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
     actual_creator_tax_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr | Unset = UNSET
     actual_creator_tax_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva | Unset = UNSET
     actual_creator_tax_pit: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit | Unset = UNSET
-    actual_creator_total_earnings_after_tax: (
-        SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset
-    ) = UNSET
-    actual_total_agency_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission | Unset = (
-        UNSET
-    )
+    actual_creator_total_earnings_after_tax: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset = UNSET
+    actual_total_agency_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission | Unset = UNSET
     actual_agency_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset = UNSET
     actual_agency_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset = UNSET
     fully_return: str | Unset = UNSET
@@ -236,7 +201,36 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
     is_carousel: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.actual_bonus_commission import ActualBonusCommission # noqa: PLC0415
+        from ..models.actual_commission_base import ActualCommissionBase # noqa: PLC0415
+        from ..models.actual_shop_ads_commission import ActualShopAdsCommission # noqa: PLC0415
+        from ..models.actual_standard_commission import ActualStandardCommission # noqa: PLC0415
+        from ..models.estimated_bonus_commission import EstimatedBonusCommission # noqa: PLC0415
+        from ..models.estimated_commission_base import EstimatedCommissionBase # noqa: PLC0415
+        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission # noqa: PLC0415
+        from ..models.estimated_standard_commission import EstimatedStandardCommission # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_total_agency_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_total_agency_earning import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning # noqa: PLC0415
         id = self.id
 
         tags = self.tags
@@ -391,9 +385,11 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         is_carousel = self.is_carousel
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if tags is not UNSET:
@@ -501,66 +497,35 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.actual_bonus_commission import ActualBonusCommission  # noqa: PLC0415
-        from ..models.actual_commission_base import ActualCommissionBase  # noqa: PLC0415
-        from ..models.actual_shop_ads_commission import ActualShopAdsCommission  # noqa: PLC0415
-        from ..models.actual_standard_commission import ActualStandardCommission  # noqa: PLC0415
-        from ..models.estimated_bonus_commission import EstimatedBonusCommission  # noqa: PLC0415
-        from ..models.estimated_commission_base import EstimatedCommissionBase  # noqa: PLC0415
-        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission  # noqa: PLC0415
-        from ..models.estimated_standard_commission import EstimatedStandardCommission  # noqa: PLC0415
-        from ..models.price import Price  # noqa: PLC0415
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_isr import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_iva import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_isr import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_iva import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_pit import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_total_earnings_after_tax import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_tap_bonus_commission import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_total_agency_commission import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_isr import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_iva import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_isr import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_iva import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_pit import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_total_earnings_after_tax import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_tap_bonus_commission import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission,  # noqa: PLC0415
-        )
-        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_total_agency_earning import (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning,  # noqa: PLC0415
-        )
-
+        from ..models.actual_bonus_commission import ActualBonusCommission # noqa: PLC0415
+        from ..models.actual_commission_base import ActualCommissionBase # noqa: PLC0415
+        from ..models.actual_shop_ads_commission import ActualShopAdsCommission # noqa: PLC0415
+        from ..models.actual_standard_commission import ActualStandardCommission # noqa: PLC0415
+        from ..models.estimated_bonus_commission import EstimatedBonusCommission # noqa: PLC0415
+        from ..models.estimated_commission_base import EstimatedCommissionBase # noqa: PLC0415
+        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission # noqa: PLC0415
+        from ..models.estimated_standard_commission import EstimatedStandardCommission # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_actual_total_agency_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_agency_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_isr import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_iva import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_tax_pit import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_creator_total_earnings_after_tax import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_tap_bonus_commission import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission # noqa: PLC0415
+        from ..models.search_cap_affiliate_orders_response_data_sku_order_estimated_total_agency_earning import SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -586,10 +551,13 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         _price = d.pop("price", UNSET)
         price: Price | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = Price.from_dict(_price)
+
+
+
 
         quantity = d.pop("quantity", UNSET)
 
@@ -617,219 +585,243 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         _estimated_commission_base = d.pop("estimated_commission_base", UNSET)
         estimated_commission_base: EstimatedCommissionBase | Unset
-        if isinstance(_estimated_commission_base, Unset):
+        if isinstance(_estimated_commission_base,  Unset):
             estimated_commission_base = UNSET
         else:
             estimated_commission_base = EstimatedCommissionBase.from_dict(_estimated_commission_base)
 
+
+
+
         _estimated_standard_commission = d.pop("estimated_standard_commission", UNSET)
         estimated_standard_commission: EstimatedStandardCommission | Unset
-        if isinstance(_estimated_standard_commission, Unset):
+        if isinstance(_estimated_standard_commission,  Unset):
             estimated_standard_commission = UNSET
         else:
             estimated_standard_commission = EstimatedStandardCommission.from_dict(_estimated_standard_commission)
 
+
+
+
         _estimated_bonus_commission = d.pop("estimated_bonus_commission", UNSET)
         estimated_bonus_commission: EstimatedBonusCommission | Unset
-        if isinstance(_estimated_bonus_commission, Unset):
+        if isinstance(_estimated_bonus_commission,  Unset):
             estimated_bonus_commission = UNSET
         else:
             estimated_bonus_commission = EstimatedBonusCommission.from_dict(_estimated_bonus_commission)
 
+
+
+
         _estimated_shop_ads_commission = d.pop("estimated_shop_ads_commission", UNSET)
         estimated_shop_ads_commission: EstimatedShopAdsCommission | Unset
-        if isinstance(_estimated_shop_ads_commission, Unset):
+        if isinstance(_estimated_shop_ads_commission,  Unset):
             estimated_shop_ads_commission = UNSET
         else:
             estimated_shop_ads_commission = EstimatedShopAdsCommission.from_dict(_estimated_shop_ads_commission)
 
+
+
+
         _estimated_tap_bonus_commission = d.pop("estimated_tap_bonus_commission", UNSET)
         estimated_tap_bonus_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission | Unset
-        if isinstance(_estimated_tap_bonus_commission, Unset):
+        if isinstance(_estimated_tap_bonus_commission,  Unset):
             estimated_tap_bonus_commission = UNSET
         else:
-            estimated_tap_bonus_commission = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission.from_dict(
-                    _estimated_tap_bonus_commission
-                )
-            )
+            estimated_tap_bonus_commission = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTapBonusCommission.from_dict(_estimated_tap_bonus_commission)
+
+
+
 
         _estimated_creator_tax_isr = d.pop("estimated_creator_tax_isr", UNSET)
         estimated_creator_tax_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr | Unset
-        if isinstance(_estimated_creator_tax_isr, Unset):
+        if isinstance(_estimated_creator_tax_isr,  Unset):
             estimated_creator_tax_isr = UNSET
         else:
-            estimated_creator_tax_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr.from_dict(
-                _estimated_creator_tax_isr
-            )
+            estimated_creator_tax_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIsr.from_dict(_estimated_creator_tax_isr)
+
+
+
 
         _estimated_creator_tax_iva = d.pop("estimated_creator_tax_iva", UNSET)
         estimated_creator_tax_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva | Unset
-        if isinstance(_estimated_creator_tax_iva, Unset):
+        if isinstance(_estimated_creator_tax_iva,  Unset):
             estimated_creator_tax_iva = UNSET
         else:
-            estimated_creator_tax_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva.from_dict(
-                _estimated_creator_tax_iva
-            )
+            estimated_creator_tax_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxIva.from_dict(_estimated_creator_tax_iva)
+
+
+
 
         _estimated_creator_tax_pit = d.pop("estimated_creator_tax_pit", UNSET)
         estimated_creator_tax_pit: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit | Unset
-        if isinstance(_estimated_creator_tax_pit, Unset):
+        if isinstance(_estimated_creator_tax_pit,  Unset):
             estimated_creator_tax_pit = UNSET
         else:
-            estimated_creator_tax_pit = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit.from_dict(
-                _estimated_creator_tax_pit
-            )
+            estimated_creator_tax_pit = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTaxPit.from_dict(_estimated_creator_tax_pit)
+
+
+
 
         _estimated_creator_total_earnings_after_tax = d.pop("estimated_creator_total_earnings_after_tax", UNSET)
-        estimated_creator_total_earnings_after_tax: (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset
-        )
-        if isinstance(_estimated_creator_total_earnings_after_tax, Unset):
+        estimated_creator_total_earnings_after_tax: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax | Unset
+        if isinstance(_estimated_creator_total_earnings_after_tax,  Unset):
             estimated_creator_total_earnings_after_tax = UNSET
         else:
-            estimated_creator_total_earnings_after_tax = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax.from_dict(
-                    _estimated_creator_total_earnings_after_tax
-                )
-            )
+            estimated_creator_total_earnings_after_tax = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedCreatorTotalEarningsAfterTax.from_dict(_estimated_creator_total_earnings_after_tax)
+
+
+
 
         _estimated_total_agency_earnings = d.pop("estimated_total_agency_earnings", UNSET)
         estimated_total_agency_earnings: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning | Unset
-        if isinstance(_estimated_total_agency_earnings, Unset):
+        if isinstance(_estimated_total_agency_earnings,  Unset):
             estimated_total_agency_earnings = UNSET
         else:
-            estimated_total_agency_earnings = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning.from_dict(
-                    _estimated_total_agency_earnings
-                )
-            )
+            estimated_total_agency_earnings = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedTotalAgencyEarning.from_dict(_estimated_total_agency_earnings)
+
+
+
 
         _estimated_agency_isr = d.pop("estimated_agency_isr", UNSET)
         estimated_agency_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr | Unset
-        if isinstance(_estimated_agency_isr, Unset):
+        if isinstance(_estimated_agency_isr,  Unset):
             estimated_agency_isr = UNSET
         else:
-            estimated_agency_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr.from_dict(
-                _estimated_agency_isr
-            )
+            estimated_agency_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIsr.from_dict(_estimated_agency_isr)
+
+
+
 
         _estimated_agency_iva = d.pop("estimated_agency_iva", UNSET)
         estimated_agency_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva | Unset
-        if isinstance(_estimated_agency_iva, Unset):
+        if isinstance(_estimated_agency_iva,  Unset):
             estimated_agency_iva = UNSET
         else:
-            estimated_agency_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva.from_dict(
-                _estimated_agency_iva
-            )
+            estimated_agency_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderEstimatedAgencyIva.from_dict(_estimated_agency_iva)
+
+
+
 
         _actual_commission_base = d.pop("actual_commission_base", UNSET)
         actual_commission_base: ActualCommissionBase | Unset
-        if isinstance(_actual_commission_base, Unset):
+        if isinstance(_actual_commission_base,  Unset):
             actual_commission_base = UNSET
         else:
             actual_commission_base = ActualCommissionBase.from_dict(_actual_commission_base)
 
+
+
+
         _actual_standard_commission = d.pop("actual_standard_commission", UNSET)
         actual_standard_commission: ActualStandardCommission | Unset
-        if isinstance(_actual_standard_commission, Unset):
+        if isinstance(_actual_standard_commission,  Unset):
             actual_standard_commission = UNSET
         else:
             actual_standard_commission = ActualStandardCommission.from_dict(_actual_standard_commission)
 
+
+
+
         _actual_bonus_commission = d.pop("actual_bonus_commission", UNSET)
         actual_bonus_commission: ActualBonusCommission | Unset
-        if isinstance(_actual_bonus_commission, Unset):
+        if isinstance(_actual_bonus_commission,  Unset):
             actual_bonus_commission = UNSET
         else:
             actual_bonus_commission = ActualBonusCommission.from_dict(_actual_bonus_commission)
 
+
+
+
         _actual_shop_ads_commission = d.pop("actual_shop_ads_commission", UNSET)
         actual_shop_ads_commission: ActualShopAdsCommission | Unset
-        if isinstance(_actual_shop_ads_commission, Unset):
+        if isinstance(_actual_shop_ads_commission,  Unset):
             actual_shop_ads_commission = UNSET
         else:
             actual_shop_ads_commission = ActualShopAdsCommission.from_dict(_actual_shop_ads_commission)
 
+
+
+
         _actual_tap_bonus_commission = d.pop("actual_tap_bonus_commission", UNSET)
         actual_tap_bonus_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission | Unset
-        if isinstance(_actual_tap_bonus_commission, Unset):
+        if isinstance(_actual_tap_bonus_commission,  Unset):
             actual_tap_bonus_commission = UNSET
         else:
-            actual_tap_bonus_commission = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission.from_dict(
-                    _actual_tap_bonus_commission
-                )
-            )
+            actual_tap_bonus_commission = SearchCAPAffiliateOrdersResponseDataSkuOrderActualTapBonusCommission.from_dict(_actual_tap_bonus_commission)
+
+
+
 
         _actual_creator_tax_isr = d.pop("actual_creator_tax_isr", UNSET)
         actual_creator_tax_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr | Unset
-        if isinstance(_actual_creator_tax_isr, Unset):
+        if isinstance(_actual_creator_tax_isr,  Unset):
             actual_creator_tax_isr = UNSET
         else:
-            actual_creator_tax_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr.from_dict(
-                _actual_creator_tax_isr
-            )
+            actual_creator_tax_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIsr.from_dict(_actual_creator_tax_isr)
+
+
+
 
         _actual_creator_tax_iva = d.pop("actual_creator_tax_iva", UNSET)
         actual_creator_tax_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva | Unset
-        if isinstance(_actual_creator_tax_iva, Unset):
+        if isinstance(_actual_creator_tax_iva,  Unset):
             actual_creator_tax_iva = UNSET
         else:
-            actual_creator_tax_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva.from_dict(
-                _actual_creator_tax_iva
-            )
+            actual_creator_tax_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxIva.from_dict(_actual_creator_tax_iva)
+
+
+
 
         _actual_creator_tax_pit = d.pop("actual_creator_tax_pit", UNSET)
         actual_creator_tax_pit: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit | Unset
-        if isinstance(_actual_creator_tax_pit, Unset):
+        if isinstance(_actual_creator_tax_pit,  Unset):
             actual_creator_tax_pit = UNSET
         else:
-            actual_creator_tax_pit = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit.from_dict(
-                _actual_creator_tax_pit
-            )
+            actual_creator_tax_pit = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTaxPit.from_dict(_actual_creator_tax_pit)
+
+
+
 
         _actual_creator_total_earnings_after_tax = d.pop("actual_creator_total_earnings_after_tax", UNSET)
-        actual_creator_total_earnings_after_tax: (
-            SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset
-        )
-        if isinstance(_actual_creator_total_earnings_after_tax, Unset):
+        actual_creator_total_earnings_after_tax: SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax | Unset
+        if isinstance(_actual_creator_total_earnings_after_tax,  Unset):
             actual_creator_total_earnings_after_tax = UNSET
         else:
-            actual_creator_total_earnings_after_tax = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax.from_dict(
-                    _actual_creator_total_earnings_after_tax
-                )
-            )
+            actual_creator_total_earnings_after_tax = SearchCAPAffiliateOrdersResponseDataSkuOrderActualCreatorTotalEarningsAfterTax.from_dict(_actual_creator_total_earnings_after_tax)
+
+
+
 
         _actual_total_agency_commission = d.pop("actual_total_agency_commission", UNSET)
         actual_total_agency_commission: SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission | Unset
-        if isinstance(_actual_total_agency_commission, Unset):
+        if isinstance(_actual_total_agency_commission,  Unset):
             actual_total_agency_commission = UNSET
         else:
-            actual_total_agency_commission = (
-                SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission.from_dict(
-                    _actual_total_agency_commission
-                )
-            )
+            actual_total_agency_commission = SearchCAPAffiliateOrdersResponseDataSkuOrderActualTotalAgencyCommission.from_dict(_actual_total_agency_commission)
+
+
+
 
         _actual_agency_isr = d.pop("actual_agency_isr", UNSET)
         actual_agency_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset
-        if isinstance(_actual_agency_isr, Unset):
+        if isinstance(_actual_agency_isr,  Unset):
             actual_agency_isr = UNSET
         else:
-            actual_agency_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr.from_dict(
-                _actual_agency_isr
-            )
+            actual_agency_isr = SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr.from_dict(_actual_agency_isr)
+
+
+
 
         _actual_agency_iva = d.pop("actual_agency_iva", UNSET)
         actual_agency_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset
-        if isinstance(_actual_agency_iva, Unset):
+        if isinstance(_actual_agency_iva,  Unset):
             actual_agency_iva = UNSET
         else:
-            actual_agency_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva.from_dict(
-                _actual_agency_iva
-            )
+            actual_agency_iva = SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva.from_dict(_actual_agency_iva)
+
+
+
 
         fully_return = d.pop("fully_return", UNSET)
 
@@ -893,6 +885,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
             last_update_time=last_update_time,
             is_carousel=is_carousel,
         )
+
 
         search_cap_affiliate_orders_response_data_sku_order.additional_properties = d
         return search_cap_affiliate_orders_response_data_sku_order

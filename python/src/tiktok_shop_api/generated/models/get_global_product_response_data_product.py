@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_global_product_response_data_product_sku_mapping import (
-        GetGlobalProductResponseDataProductSkuMapping,
-    )
+  from ..models.get_global_product_response_data_product_sku_mapping import GetGlobalProductResponseDataProductSkuMapping
+
+
+
 
 
 T = TypeVar("T", bound="GetGlobalProductResponseDataProduct")
 
 
+
 @_attrs_define
 class GetGlobalProductResponseDataProduct:
-    """
-    Attributes:
-        region (str | Unset): The market where the local product is listed.
-        id (str | Unset): The local product ID.
-        sku_mappings (list[GetGlobalProductResponseDataProductSkuMapping] | Unset): The list of sku mappings between the
-            global and local products.
-    """
+    """ 
+        Attributes:
+            region (str | Unset): The market where the local product is listed.
+            id (str | Unset): The local product ID.
+            sku_mappings (list[GetGlobalProductResponseDataProductSkuMapping] | Unset): The list of sku mappings between the
+                global and local products.
+     """
 
     region: str | Unset = UNSET
     id: str | Unset = UNSET
     sku_mappings: list[GetGlobalProductResponseDataProductSkuMapping] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_global_product_response_data_product_sku_mapping import GetGlobalProductResponseDataProductSkuMapping # noqa: PLC0415
         region = self.region
 
         id = self.id
@@ -44,9 +54,13 @@ class GetGlobalProductResponseDataProduct:
                 sku_mappings_item = sku_mappings_item_data.to_dict()
                 sku_mappings.append(sku_mappings_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if region is not UNSET:
             field_dict["region"] = region
         if id is not UNSET:
@@ -56,12 +70,11 @@ class GetGlobalProductResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_global_product_response_data_product_sku_mapping import (
-            GetGlobalProductResponseDataProductSkuMapping,  # noqa: PLC0415
-        )
-
+        from ..models.get_global_product_response_data_product_sku_mapping import GetGlobalProductResponseDataProductSkuMapping # noqa: PLC0415
         d = dict(src_dict)
         region = d.pop("region", UNSET)
 
@@ -74,13 +87,17 @@ class GetGlobalProductResponseDataProduct:
             for sku_mappings_item_data in _sku_mappings:
                 sku_mappings_item = GetGlobalProductResponseDataProductSkuMapping.from_dict(sku_mappings_item_data)
 
+
+
                 sku_mappings.append(sku_mappings_item)
+
 
         get_global_product_response_data_product = cls(
             region=region,
             id=id,
             sku_mappings=sku_mappings,
         )
+
 
         get_global_product_response_data_product.additional_properties = d
         return get_global_product_response_data_product

@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_target_collaboration_request import CreateTargetCollaborationRequest
 from ...models.create_target_collaboration_response import CreateTargetCollaborationResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateTargetCollaborationRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreateTargetCollaborationResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateTargetCollaborationResponse | None:
     if response.status_code == 200:
         response_200 = CreateTargetCollaborationResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateTargetCollaborationResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateTargetCollaborationResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateTargetCollaborationRequest,
+
 ) -> Response[CreateTargetCollaborationResponse]:
-    """Create Target Collaboration
+    """ Create Target Collaboration
 
      This API is used to create a target collaboration.
     A target collaboration is a collaboration between a seller selected set of products (including a
@@ -76,10 +86,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateTargetCollaborationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -88,13 +100,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateTargetCollaborationRequest,
+
 ) -> CreateTargetCollaborationResponse | None:
-    """Create Target Collaboration
+    """ Create Target Collaboration
 
      This API is used to create a target collaboration.
     A target collaboration is a collaboration between a seller selected set of products (including a
@@ -111,20 +123,22 @@ def sync(
 
     Returns:
         CreateTargetCollaborationResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateTargetCollaborationRequest,
+
 ) -> Response[CreateTargetCollaborationResponse]:
-    """Create Target Collaboration
+    """ Create Target Collaboration
 
      This API is used to create a target collaboration.
     A target collaboration is a collaboration between a seller selected set of products (including a
@@ -141,23 +155,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateTargetCollaborationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateTargetCollaborationRequest,
+
 ) -> CreateTargetCollaborationResponse | None:
-    """Create Target Collaboration
+    """ Create Target Collaboration
 
      This API is used to create a target collaboration.
     A target collaboration is a collaboration between a seller selected set of products (including a
@@ -174,11 +192,11 @@ async def asyncio(
 
     Returns:
         CreateTargetCollaborationResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

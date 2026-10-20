@@ -1,43 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_open_collaborations_response_data_open_collaboration_current_commission import (
-        SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission,
-    )
-    from ..models.search_open_collaborations_response_data_open_collaboration_product import (
-        SearchOpenCollaborationsResponseDataOpenCollaborationProduct,
-    )
+  from ..models.search_open_collaborations_response_data_open_collaboration_current_commission import SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission
+  from ..models.search_open_collaborations_response_data_open_collaboration_product import SearchOpenCollaborationsResponseDataOpenCollaborationProduct
+
+
+
 
 
 T = TypeVar("T", bound="SearchOpenCollaborationsResponseDataOpenCollaboration")
 
 
+
 @_attrs_define
 class SearchOpenCollaborationsResponseDataOpenCollaboration:
-    """
-    Attributes:
-        id (str | Unset): The open collaboration id
-        status (str | Unset): Status of open collaboration.
-            Field values:
-            - NORMAL：NORMAL means the current open collaboration status is normal and in effect.
-            - TERMINATING: TERMINATING means that the merchant has removed open collaboration and the open collaboration
-            will expire soon. The expiration time can be found at the end_time of current_commission.
-            The open collaborations which were removed and expired will not be returned in the response.
-        current_commission (SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission | Unset):
-        showcase_creator_count (int | Unset): This field indicates the number of creators who added the product to the
-            showcase from open collaboration.
-        content_creator_count (int | Unset): This field indicates the number of creators who posted the LIve or Video
-            from open collaboration.
-        product (SearchOpenCollaborationsResponseDataOpenCollaborationProduct | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The open collaboration id
+            status (str | Unset): Status of open collaboration.
+                Field values:
+                - NORMAL：NORMAL means the current open collaboration status is normal and in effect.
+                - TERMINATING: TERMINATING means that the merchant has removed open collaboration and the open collaboration
+                will expire soon. The expiration time can be found at the end_time of current_commission.
+                The open collaborations which were removed and expired will not be returned in the response.
+            current_commission (SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission | Unset):
+            showcase_creator_count (int | Unset): This field indicates the number of creators who added the product to the
+                showcase from open collaboration.
+            content_creator_count (int | Unset): This field indicates the number of creators who posted the LIve or Video
+                from open collaboration.
+            product (SearchOpenCollaborationsResponseDataOpenCollaborationProduct | Unset):
+     """
 
     id: str | Unset = UNSET
     status: str | Unset = UNSET
@@ -47,7 +50,13 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
     product: SearchOpenCollaborationsResponseDataOpenCollaborationProduct | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_open_collaborations_response_data_open_collaboration_current_commission import SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission # noqa: PLC0415
+        from ..models.search_open_collaborations_response_data_open_collaboration_product import SearchOpenCollaborationsResponseDataOpenCollaborationProduct # noqa: PLC0415
         id = self.id
 
         status = self.status
@@ -64,9 +73,11 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
         if not isinstance(self.product, Unset):
             product = self.product.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if status is not UNSET:
@@ -82,15 +93,12 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_open_collaborations_response_data_open_collaboration_current_commission import (
-            SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission,  # noqa: PLC0415
-        )
-        from ..models.search_open_collaborations_response_data_open_collaboration_product import (
-            SearchOpenCollaborationsResponseDataOpenCollaborationProduct,  # noqa: PLC0415
-        )
-
+        from ..models.search_open_collaborations_response_data_open_collaboration_current_commission import SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission # noqa: PLC0415
+        from ..models.search_open_collaborations_response_data_open_collaboration_product import SearchOpenCollaborationsResponseDataOpenCollaborationProduct # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -98,12 +106,13 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
 
         _current_commission = d.pop("current_commission", UNSET)
         current_commission: SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission | Unset
-        if isinstance(_current_commission, Unset):
+        if isinstance(_current_commission,  Unset):
             current_commission = UNSET
         else:
-            current_commission = SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission.from_dict(
-                _current_commission
-            )
+            current_commission = SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission.from_dict(_current_commission)
+
+
+
 
         showcase_creator_count = d.pop("showcase_creator_count", UNSET)
 
@@ -111,10 +120,13 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
 
         _product = d.pop("product", UNSET)
         product: SearchOpenCollaborationsResponseDataOpenCollaborationProduct | Unset
-        if isinstance(_product, Unset):
+        if isinstance(_product,  Unset):
             product = UNSET
         else:
             product = SearchOpenCollaborationsResponseDataOpenCollaborationProduct.from_dict(_product)
+
+
+
 
         search_open_collaborations_response_data_open_collaboration = cls(
             id=id,
@@ -124,6 +136,7 @@ class SearchOpenCollaborationsResponseDataOpenCollaboration:
             content_creator_count=content_creator_count,
             product=product,
         )
+
 
         search_open_collaborations_response_data_open_collaboration.additional_properties = d
         return search_open_collaborations_response_data_open_collaboration

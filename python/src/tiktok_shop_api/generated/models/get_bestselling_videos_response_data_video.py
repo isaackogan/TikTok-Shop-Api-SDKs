@@ -1,39 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_bestselling_videos_response_data_video_product_info import (
-        GetBestsellingVideosResponseDataVideoProductInfo,
-    )
+  from ..models.get_bestselling_videos_response_data_video_product_info import GetBestsellingVideosResponseDataVideoProductInfo
+
+
+
 
 
 T = TypeVar("T", bound="GetBestsellingVideosResponseDataVideo")
 
 
+
 @_attrs_define
 class GetBestsellingVideosResponseDataVideo:
-    """
-    Attributes:
-        rank (int | Unset): Gmv rank of the video
-        id (str | Unset): Video id
-        nick_name (str | Unset): Creator handle
-        gmv_range (str | Unset): Gmv range of the video
-        views (int | Unset): Accumulative number of video views since the video was published.
-        likes (int | Unset): Accumulative number of video likes since the video was published.
-        comments (int | Unset): Accumulative number of video comments since the video was published.
-        shares (int | Unset): Accumulative number of video shares since the video was published.
-        product_infos (list[GetBestsellingVideosResponseDataVideoProductInfo] | Unset): List of product anchors
-            associated with the video, including product IDs and product names. Excludes deactivated and sold-out products.
-        publish_time (int | Unset): The time when the video was published, as a Unix timestamp in seconds (UTC).
-        duration (int | Unset): Duration of the video, in seconds.
-    """
+    """ 
+        Attributes:
+            rank (int | Unset): Gmv rank of the video
+            id (str | Unset): Video id
+            nick_name (str | Unset): Creator handle
+            gmv_range (str | Unset): Gmv range of the video
+            views (int | Unset): Accumulative number of video views since the video was published.
+            likes (int | Unset): Accumulative number of video likes since the video was published.
+            comments (int | Unset): Accumulative number of video comments since the video was published.
+            shares (int | Unset): Accumulative number of video shares since the video was published.
+            product_infos (list[GetBestsellingVideosResponseDataVideoProductInfo] | Unset): List of product anchors
+                associated with the video, including product IDs and product names. Excludes deactivated and sold-out products.
+            publish_time (int | Unset): The time when the video was published, as a Unix timestamp in seconds (UTC).
+            duration (int | Unset): Duration of the video, in seconds.
+     """
 
     rank: int | Unset = UNSET
     id: str | Unset = UNSET
@@ -48,7 +53,12 @@ class GetBestsellingVideosResponseDataVideo:
     duration: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_bestselling_videos_response_data_video_product_info import GetBestsellingVideosResponseDataVideoProductInfo # noqa: PLC0415
         rank = self.rank
 
         id = self.id
@@ -72,13 +82,17 @@ class GetBestsellingVideosResponseDataVideo:
                 product_infos_item = product_infos_item_data.to_dict()
                 product_infos.append(product_infos_item)
 
+
+
         publish_time = self.publish_time
 
         duration = self.duration
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rank is not UNSET:
             field_dict["rank"] = rank
         if id is not UNSET:
@@ -104,12 +118,11 @@ class GetBestsellingVideosResponseDataVideo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_bestselling_videos_response_data_video_product_info import (
-            GetBestsellingVideosResponseDataVideoProductInfo,  # noqa: PLC0415
-        )
-
+        from ..models.get_bestselling_videos_response_data_video_product_info import GetBestsellingVideosResponseDataVideoProductInfo # noqa: PLC0415
         d = dict(src_dict)
         rank = d.pop("rank", UNSET)
 
@@ -134,7 +147,10 @@ class GetBestsellingVideosResponseDataVideo:
             for product_infos_item_data in _product_infos:
                 product_infos_item = GetBestsellingVideosResponseDataVideoProductInfo.from_dict(product_infos_item_data)
 
+
+
                 product_infos.append(product_infos_item)
+
 
         publish_time = d.pop("publish_time", UNSET)
 
@@ -153,6 +169,7 @@ class GetBestsellingVideosResponseDataVideo:
             publish_time=publish_time,
             duration=duration,
         )
+
 
         get_bestselling_videos_response_data_video.additional_properties = d
         return get_bestselling_videos_response_data_video

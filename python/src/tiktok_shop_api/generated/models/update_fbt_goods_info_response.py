@@ -1,29 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.update_fbt_goods_info_response_data import UpdateFBTGoodsInfoResponseData
+  from ..models.update_fbt_goods_info_response_data import UpdateFBTGoodsInfoResponseData
+
+
+
 
 
 T = TypeVar("T", bound="UpdateFBTGoodsInfoResponse")
 
 
+
 @_attrs_define
 class UpdateFBTGoodsInfoResponse:
-    """
-    Attributes:
-        code (int | Unset): Status code; 0 means success.
-        message (str | Unset): Success or failure message.
-        request_id (str | Unset): Request log ID.
-        data (UpdateFBTGoodsInfoResponseData | Unset):
-    """
+    """ 
+        Attributes:
+            code (int | Unset): Status code; 0 means success.
+            message (str | Unset): Success or failure message.
+            request_id (str | Unset): Request log ID.
+            data (UpdateFBTGoodsInfoResponseData | Unset):
+     """
 
     code: int | Unset = UNSET
     message: str | Unset = UNSET
@@ -31,7 +38,12 @@ class UpdateFBTGoodsInfoResponse:
     data: UpdateFBTGoodsInfoResponseData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_fbt_goods_info_response_data import UpdateFBTGoodsInfoResponseData # noqa: PLC0415
         code = self.code
 
         message = self.message
@@ -42,9 +54,11 @@ class UpdateFBTGoodsInfoResponse:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if message is not UNSET:
@@ -56,10 +70,11 @@ class UpdateFBTGoodsInfoResponse:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.update_fbt_goods_info_response_data import UpdateFBTGoodsInfoResponseData  # noqa: PLC0415
-
+        from ..models.update_fbt_goods_info_response_data import UpdateFBTGoodsInfoResponseData # noqa: PLC0415
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
@@ -69,10 +84,13 @@ class UpdateFBTGoodsInfoResponse:
 
         _data = d.pop("data", UNSET)
         data: UpdateFBTGoodsInfoResponseData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = UpdateFBTGoodsInfoResponseData.from_dict(_data)
+
+
+
 
         update_fbt_goods_info_response = cls(
             code=code,
@@ -80,6 +98,7 @@ class UpdateFBTGoodsInfoResponse:
             request_id=request_id,
             data=data,
         )
+
 
         update_fbt_goods_info_response.additional_properties = d
         return update_fbt_goods_info_response

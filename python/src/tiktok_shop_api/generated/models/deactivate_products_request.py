@@ -1,39 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.deactivate_products_request_listing_platforms_item import DeactivateProductsRequestListingPlatformsItem
 from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
 
 T = TypeVar("T", bound="DeactivateProductsRequest")
 
 
+
 @_attrs_define
 class DeactivateProductsRequest:
-    """
-    Attributes:
-        product_ids (list[str]): The product IDs to deactivate.
-            Max number of IDs: 20.
-        listing_platforms (list[DeactivateProductsRequestListingPlatformsItem] | Unset): The listing platforms where the
-            product will be deactivated.
-            Possible values:
-            - TOKOPEDIA
-            - TIKTOK_SHOP
-            Default: TIKTOK_SHOP
+    """ 
+        Attributes:
+            product_ids (list[str]): The product IDs to deactivate.
+                Max number of IDs: 20.
+            listing_platforms (list[DeactivateProductsRequestListingPlatformsItem] | Unset): The listing platforms where the
+                product will be deactivated.
+                Possible values:
+                - TOKOPEDIA
+                - TIKTOK_SHOP
+                Default: TIKTOK_SHOP
 
-            Applicable only for sellers that migrated from Tokopedia.
-    """
+                Applicable only for sellers that migrated from Tokopedia.
+     """
 
     product_ids: list[str]
     listing_platforms: list[DeactivateProductsRequestListingPlatformsItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         product_ids = self.product_ids
+
+
 
         listing_platforms: list[str] | Unset = UNSET
         if not isinstance(self.listing_platforms, Unset):
@@ -42,22 +57,26 @@ class DeactivateProductsRequest:
                 listing_platforms_item = listing_platforms_item_data.value
                 listing_platforms.append(listing_platforms_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_ids": product_ids,
-            }
-        )
+        field_dict.update({
+            "product_ids": product_ids,
+        })
         if listing_platforms is not UNSET:
             field_dict["listing_platforms"] = listing_platforms
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         product_ids = cast(list[str], d.pop("product_ids"))
+
 
         _listing_platforms = d.pop("listing_platforms", UNSET)
         listing_platforms: list[DeactivateProductsRequestListingPlatformsItem] | Unset = UNSET
@@ -66,12 +85,16 @@ class DeactivateProductsRequest:
             for listing_platforms_item_data in _listing_platforms:
                 listing_platforms_item = DeactivateProductsRequestListingPlatformsItem(listing_platforms_item_data)
 
+
+
                 listing_platforms.append(listing_platforms_item)
+
 
         deactivate_products_request = cls(
             product_ids=product_ids,
             listing_platforms=listing_platforms,
         )
+
 
         deactivate_products_request.additional_properties = d
         return deactivate_products_request

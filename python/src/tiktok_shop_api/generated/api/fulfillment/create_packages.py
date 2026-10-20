@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_packages_request import CreatePackagesRequest
 from ...models.create_packages_response import CreatePackagesResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreatePackagesRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,9 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreatePackagesResponse | None:
     if response.status_code == 200:
         response_200 = CreatePackagesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -41,9 +54,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreatePackagesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreatePackagesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -56,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreatePackagesRequest,
+
 ) -> Response[CreatePackagesResponse]:
-    """Create Packages
+    """ Create Packages
 
      Use this API to ship orders (purchase labels). This API is available in the US, UK, EMEA, and JP
     regions. The shipping fee and delivery time is an estimate only and is based on the package
@@ -72,10 +84,12 @@ def sync_detailed(
 
     Returns:
         Response[CreatePackagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -84,13 +98,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreatePackagesRequest,
+
 ) -> CreatePackagesResponse | None:
-    """Create Packages
+    """ Create Packages
 
      Use this API to ship orders (purchase labels). This API is available in the US, UK, EMEA, and JP
     regions. The shipping fee and delivery time is an estimate only and is based on the package
@@ -105,20 +119,22 @@ def sync(
 
     Returns:
         CreatePackagesResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreatePackagesRequest,
+
 ) -> Response[CreatePackagesResponse]:
-    """Create Packages
+    """ Create Packages
 
      Use this API to ship orders (purchase labels). This API is available in the US, UK, EMEA, and JP
     regions. The shipping fee and delivery time is an estimate only and is based on the package
@@ -133,23 +149,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreatePackagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreatePackagesRequest,
+
 ) -> CreatePackagesResponse | None:
-    """Create Packages
+    """ Create Packages
 
      Use this API to ship orders (purchase labels). This API is available in the US, UK, EMEA, and JP
     regions. The shipping fee and delivery time is an estimate only and is based on the package
@@ -164,11 +184,11 @@ async def asyncio(
 
     Returns:
         CreatePackagesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

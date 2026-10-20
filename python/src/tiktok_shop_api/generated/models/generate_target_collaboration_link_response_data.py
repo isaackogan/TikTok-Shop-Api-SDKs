@@ -1,37 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GenerateTargetCollaborationLinkResponseData")
+
 
 
 @_attrs_define
 class GenerateTargetCollaborationLinkResponseData:
-    """
-    Attributes:
-        link (str | Unset): The link of the target invitation, the creator can jump to the page of adding products after
-            clicking.
-    """
+    """ 
+        Attributes:
+            link (str | Unset): The link of the target invitation, the creator can jump to the page of adding products after
+                clicking.
+     """
 
     link: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         link = self.link
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if link is not UNSET:
             field_dict["link"] = link
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -41,6 +57,7 @@ class GenerateTargetCollaborationLinkResponseData:
         generate_target_collaboration_link_response_data = cls(
             link=link,
         )
+
 
         generate_target_collaboration_link_response_data.additional_properties = d
         return generate_target_collaboration_link_response_data

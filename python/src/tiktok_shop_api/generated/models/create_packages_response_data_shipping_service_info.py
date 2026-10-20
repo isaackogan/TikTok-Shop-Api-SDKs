@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreatePackagesResponseDataShippingServiceInfo")
+
 
 
 @_attrs_define
 class CreatePackagesResponseDataShippingServiceInfo:
-    """
-    Attributes:
-        id (str | Unset): Shipping service ID.
-        name (str | Unset): Shipping service name.
-        price (str | Unset): Estimated price for this service.
-        currency (str | Unset): Currency of the price.
-        earliest_delivery_days (int | Unset): The minimum estimated duration required for package delivery.US only.
-        latest_delivery_days (int | Unset): The maximum estimated duration required for package delivery.US only.
-        shipping_provider_id (str | Unset): Shipping provider ID.US only.
-        shipping_provider_name (str | Unset): Shipping provider name.US only.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Shipping service ID.
+            name (str | Unset): Shipping service name.
+            price (str | Unset): Estimated price for this service.
+            currency (str | Unset): Currency of the price.
+            earliest_delivery_days (int | Unset): The minimum estimated duration required for package delivery.US only.
+            latest_delivery_days (int | Unset): The maximum estimated duration required for package delivery.US only.
+            shipping_provider_id (str | Unset): Shipping provider ID.US only.
+            shipping_provider_name (str | Unset): Shipping provider name.US only.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -34,6 +42,10 @@ class CreatePackagesResponseDataShippingServiceInfo:
     shipping_provider_id: str | Unset = UNSET
     shipping_provider_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -52,9 +64,11 @@ class CreatePackagesResponseDataShippingServiceInfo:
 
         shipping_provider_name = self.shipping_provider_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -73,6 +87,8 @@ class CreatePackagesResponseDataShippingServiceInfo:
             field_dict["shipping_provider_name"] = shipping_provider_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,6 +119,7 @@ class CreatePackagesResponseDataShippingServiceInfo:
             shipping_provider_id=shipping_provider_id,
             shipping_provider_name=shipping_provider_name,
         )
+
 
         create_packages_response_data_shipping_service_info.additional_properties = d
         return create_packages_response_data_shipping_service_info

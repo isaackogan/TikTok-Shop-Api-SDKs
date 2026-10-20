@@ -1,21 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_product_skpp_detail_locale import GetProductSkppDetailLocale
 from ...models.get_product_skpp_detail_response import GetProductSKPPDetailResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     locale: GetProductSkppDetailLocale | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_locale: str | Unset = UNSET
@@ -24,24 +33,26 @@ def _get_kwargs(
 
     params["locale"] = json_locale
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202606/skpps/{product_id}".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202606/skpps/{product_id}".format(product_id=quote(str(product_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetProductSKPPDetailResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetProductSKPPDetailResponse | None:
     if response.status_code == 200:
         response_200 = GetProductSKPPDetailResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -51,9 +62,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetProductSKPPDetailResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetProductSKPPDetailResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -67,8 +76,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     locale: GetProductSkppDetailLocale | Unset = UNSET,
+
 ) -> Response[GetProductSKPPDetailResponse]:
-    """Get Product SKPP Detail
+    """ Get Product SKPP Detail
 
      Return the SKPP qualification status, current and target scores, task progress and suggested
     actions, reward eligibility and status, and offline snapshot time for one product. This API is
@@ -84,11 +94,13 @@ def sync_detailed(
 
     Returns:
         Response[GetProductSKPPDetailResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        locale=locale,
+locale=locale,
+
     )
 
     response = client.get_httpx_client().request(
@@ -97,14 +109,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     locale: GetProductSkppDetailLocale | Unset = UNSET,
+
 ) -> GetProductSKPPDetailResponse | None:
-    """Get Product SKPP Detail
+    """ Get Product SKPP Detail
 
      Return the SKPP qualification status, current and target scores, task progress and suggested
     actions, reward eligibility and status, and offline snapshot time for one product. This API is
@@ -120,22 +132,24 @@ def sync(
 
     Returns:
         GetProductSKPPDetailResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        locale=locale,
-    ).parsed
+client=client,
+locale=locale,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     locale: GetProductSkppDetailLocale | Unset = UNSET,
+
 ) -> Response[GetProductSKPPDetailResponse]:
-    """Get Product SKPP Detail
+    """ Get Product SKPP Detail
 
      Return the SKPP qualification status, current and target scores, task progress and suggested
     actions, reward eligibility and status, and offline snapshot time for one product. This API is
@@ -151,25 +165,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetProductSKPPDetailResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        locale=locale,
+locale=locale,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     locale: GetProductSkppDetailLocale | Unset = UNSET,
+
 ) -> GetProductSKPPDetailResponse | None:
-    """Get Product SKPP Detail
+    """ Get Product SKPP Detail
 
      Return the SKPP qualification status, current and target scores, task progress and suggested
     actions, reward eligibility and status, and offline snapshot time for one product. This API is
@@ -185,12 +203,12 @@ async def asyncio(
 
     Returns:
         GetProductSKPPDetailResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            locale=locale,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+locale=locale,
+
+    )).parsed

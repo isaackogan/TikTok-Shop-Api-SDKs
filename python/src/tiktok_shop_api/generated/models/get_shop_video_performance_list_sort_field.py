@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopVideoPerformanceListSortField(StrEnum):
     AVG_CUSTOMERS = "avg_customers"
     CLICK_THROUGH_RATE = "click_through_rate"

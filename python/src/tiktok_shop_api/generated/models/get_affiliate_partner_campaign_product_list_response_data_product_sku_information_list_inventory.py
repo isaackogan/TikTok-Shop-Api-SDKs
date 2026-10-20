@@ -1,36 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory")
+
 
 
 @_attrs_define
 class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory:
-    """
-    Attributes:
-        available_quantity (str | Unset): The total SKU quantity available in the warehouse.
-    """
+    """ 
+        Attributes:
+            available_quantity (str | Unset): The total SKU quantity available in the warehouse.
+     """
 
     available_quantity: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         available_quantity = self.available_quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if available_quantity is not UNSET:
             field_dict["available_quantity"] = available_quantity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -40,6 +56,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationLis
         get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list_inventory = cls(
             available_quantity=available_quantity,
         )
+
 
         get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list_inventory.additional_properties = d
         return get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list_inventory

@@ -1,42 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement")
+
 
 
 @_attrs_define
 class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement:
-    """
-    Attributes:
-        weight (str | Unset): Carton weight.
-        weight_unit (str | Unset): The unit used for the carton's `weight` value.
+    """ 
+        Attributes:
+            weight (str | Unset): Carton weight.
+            weight_unit (str | Unset): The unit used for the carton's `weight` value.
 
-            **Possible values:**
-            * `KILOGRAM` (kg)
-            * `GRAM` (g)
-            * `MILLIGRAM` (mg)
-            * `POUNDS` (lbs)
-            * `OUNCE` (oz)
-        width (str | Unset): Carton width.
-        height (str | Unset): Carton height.
-        length (str | Unset): Carton length.
-        length_unit (str | Unset): The unit used for the carton's `length`, `width`, and `height` values.
+                **Possible values:**
+                * `KILOGRAM` (kg)
+                * `GRAM` (g)
+                * `MILLIGRAM` (mg)
+                * `POUNDS` (lbs)
+                * `OUNCE` (oz)
+            width (str | Unset): Carton width.
+            height (str | Unset): Carton height.
+            length (str | Unset): Carton length.
+            length_unit (str | Unset): The unit used for the carton's `length`, `width`, and `height` values.
 
-            **Possible values:**
-            * `METER` (m)
-            * `CENTIMETER` (cm)
-            * `MILLIMETER` (mm)
-            * `FOOT` (ft)
-            * `MICRON` (μm)
-            * `INCH` (in)
-    """
+                **Possible values:**
+                * `METER` (m)
+                * `CENTIMETER` (cm)
+                * `MILLIMETER` (mm)
+                * `FOOT` (ft)
+                * `MICRON` (μm)
+                * `INCH` (in)
+     """
 
     weight: str | Unset = UNSET
     weight_unit: str | Unset = UNSET
@@ -45,6 +53,10 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasuremen
     length: str | Unset = UNSET
     length_unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         weight = self.weight
@@ -59,9 +71,11 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasuremen
 
         length_unit = self.length_unit
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if weight is not UNSET:
             field_dict["weight"] = weight
         if weight_unit is not UNSET:
@@ -76,6 +90,8 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasuremen
             field_dict["length_unit"] = length_unit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -100,6 +116,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasuremen
             length=length,
             length_unit=length_unit,
         )
+
 
         get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement.additional_properties = d
         return get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement

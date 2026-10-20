@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_global_categories_locale import GetGlobalCategoriesLocale
 from ...models.get_global_categories_response import GetGlobalCategoriesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,7 +20,12 @@ def _get_kwargs(
     locale: GetGlobalCategoriesLocale | Unset = UNSET,
     keyword: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_locale: str | Unset = UNSET
@@ -28,7 +38,9 @@ def _get_kwargs(
 
     params["category_version"] = category_version
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -36,14 +48,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetGlobalCategoriesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetGlobalCategoriesResponse | None:
     if response.status_code == 200:
         response_200 = GetGlobalCategoriesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -53,9 +67,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetGlobalCategoriesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetGlobalCategoriesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -70,8 +82,9 @@ def sync_detailed(
     locale: GetGlobalCategoriesLocale | Unset = UNSET,
     keyword: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetGlobalCategoriesResponse]:
-    """Get Global Categories
+    """ Get Global Categories
 
      Retrieve all available product categories, regardless of market variations.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -89,12 +102,14 @@ def sync_detailed(
 
     Returns:
         Response[GetGlobalCategoriesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
-        keyword=keyword,
-        category_version=category_version,
+keyword=keyword,
+category_version=category_version,
+
     )
 
     response = client.get_httpx_client().request(
@@ -103,15 +118,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     locale: GetGlobalCategoriesLocale | Unset = UNSET,
     keyword: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetGlobalCategoriesResponse | None:
-    """Get Global Categories
+    """ Get Global Categories
 
      Retrieve all available product categories, regardless of market variations.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -129,15 +144,16 @@ def sync(
 
     Returns:
         GetGlobalCategoriesResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        locale=locale,
-        keyword=keyword,
-        category_version=category_version,
-    ).parsed
+locale=locale,
+keyword=keyword,
+category_version=category_version,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -145,8 +161,9 @@ async def asyncio_detailed(
     locale: GetGlobalCategoriesLocale | Unset = UNSET,
     keyword: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetGlobalCategoriesResponse]:
-    """Get Global Categories
+    """ Get Global Categories
 
      Retrieve all available product categories, regardless of market variations.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -164,18 +181,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetGlobalCategoriesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
-        keyword=keyword,
-        category_version=category_version,
+keyword=keyword,
+category_version=category_version,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -183,8 +203,9 @@ async def asyncio(
     locale: GetGlobalCategoriesLocale | Unset = UNSET,
     keyword: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetGlobalCategoriesResponse | None:
-    """Get Global Categories
+    """ Get Global Categories
 
      Retrieve all available product categories, regardless of market variations.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -202,13 +223,13 @@ async def asyncio(
 
     Returns:
         GetGlobalCategoriesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            locale=locale,
-            keyword=keyword,
-            category_version=category_version,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+locale=locale,
+keyword=keyword,
+category_version=category_version,
+
+    )).parsed

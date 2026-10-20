@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatePromotionActivityRequestProductLevel(StrEnum):
     PRODUCT = "PRODUCT"
     SHOP = "SHOP"

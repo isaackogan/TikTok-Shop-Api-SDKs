@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ContactInfo")
+
 
 
 @_attrs_define
 class ContactInfo:
-    """
-    Attributes:
-        whatsapp (str | Unset): The partner's phone number registered in WhatsApp, in E.164 international format.
-            Applicable if the target market is MY, SG, GB, ID, or US.
-        email (str | Unset): The partner's email address.
-        phone (str | Unset): The partner's phone number in E.164 international format.
-        zalo (str | Unset): The partner's phone number registered in Zalo, in E.164 international format. Applicable if
-            the target market is VN.
-        viber (str | Unset): The partner's phone number registered in Viber, in E.164 international format. Applicable
-            if the target market is PH.
-        line (str | Unset): The partner's phone number registered in LINE, in E.164 international format. Applicable if
-            the target market is TH.
-    """
+    """ 
+        Attributes:
+            whatsapp (str | Unset): The partner's phone number registered in WhatsApp, in E.164 international format.
+                Applicable if the target market is MY, SG, GB, ID, or US.
+            email (str | Unset): The partner's email address.
+            phone (str | Unset): The partner's phone number in E.164 international format.
+            zalo (str | Unset): The partner's phone number registered in Zalo, in E.164 international format. Applicable if
+                the target market is VN.
+            viber (str | Unset): The partner's phone number registered in Viber, in E.164 international format. Applicable
+                if the target market is PH.
+            line (str | Unset): The partner's phone number registered in LINE, in E.164 international format. Applicable if
+                the target market is TH.
+     """
 
     whatsapp: str | Unset = UNSET
     email: str | Unset = UNSET
@@ -34,6 +42,10 @@ class ContactInfo:
     viber: str | Unset = UNSET
     line: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         whatsapp = self.whatsapp
@@ -48,9 +60,11 @@ class ContactInfo:
 
         line = self.line
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if whatsapp is not UNSET:
             field_dict["whatsapp"] = whatsapp
         if email is not UNSET:
@@ -65,6 +79,8 @@ class ContactInfo:
             field_dict["line"] = line
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -89,6 +105,7 @@ class ContactInfo:
             viber=viber,
             line=line,
         )
+
 
         contact_info.additional_properties = d
         return contact_info

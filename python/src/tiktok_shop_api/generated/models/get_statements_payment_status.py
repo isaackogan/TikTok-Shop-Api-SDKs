@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetStatementsPaymentStatus(StrEnum):
     FAILED = "FAILED"
     PAID = "PAID"

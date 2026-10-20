@@ -1,39 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.recommend_required_product_properties_response_data_recommended_property_value import (
-        RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue,
-    )
+  from ..models.recommend_required_product_properties_response_data_recommended_property_value import RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue
+
+
+
 
 
 T = TypeVar("T", bound="RecommendRequiredProductPropertiesResponseDataRecommendedProperty")
 
 
+
 @_attrs_define
 class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
-    """
-    Attributes:
-        id (str): ID of the recommended property.
-        is_customizable (bool): Whether the seller can enter a custom value when no recommended value applies.
-        is_multiple_selection (bool): Whether the seller can select more than one value for the property.
-        is_required (bool): Whether the property must be provided when the product is created or edited.
-        name (str): Display name of the recommended property for the shop's region.
-        type_ (str): Type of the recommended property.
-            Possible values:
-            - `UNSPECIFIED`: The service could not classify the property type.
-            - `KEY_PROPERTY`: A key property used to identify the product.
-            - `SALES_PROPERTY`: A sales property that defines product variants.
-            - `PRODUCT_PROPERTY`: A property that describes the product as a whole.
-        values (list[RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue]): Ordered values
-            recommended for the property. The array is empty when the property requires a custom value or no value is
-            recommended.
-    """
+    """ 
+        Attributes:
+            id (str): ID of the recommended property.
+            is_customizable (bool): Whether the seller can enter a custom value when no recommended value applies.
+            is_multiple_selection (bool): Whether the seller can select more than one value for the property.
+            is_required (bool): Whether the property must be provided when the product is created or edited.
+            name (str): Display name of the recommended property for the shop's region.
+            type_ (str): Type of the recommended property.
+                Possible values:
+                - `UNSPECIFIED`: The service could not classify the property type.
+                - `KEY_PROPERTY`: A key property used to identify the product.
+                - `SALES_PROPERTY`: A sales property that defines product variants.
+                - `PRODUCT_PROPERTY`: A property that describes the product as a whole.
+            values (list[RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue]): Ordered values
+                recommended for the property. The array is empty when the property requires a custom value or no value is
+                recommended.
+     """
 
     id: str
     is_customizable: bool
@@ -44,7 +50,12 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
     values: list[RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.recommend_required_product_properties_response_data_recommended_property_value import RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue # noqa: PLC0415
         id = self.id
 
         is_customizable = self.is_customizable
@@ -62,28 +73,28 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
             values_item = values_item_data.to_dict()
             values.append(values_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "is_customizable": is_customizable,
-                "is_multiple_selection": is_multiple_selection,
-                "is_required": is_required,
-                "name": name,
-                "type": type_,
-                "values": values,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "is_customizable": is_customizable,
+            "is_multiple_selection": is_multiple_selection,
+            "is_required": is_required,
+            "name": name,
+            "type": type_,
+            "values": values,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.recommend_required_product_properties_response_data_recommended_property_value import (
-            RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue,  # noqa: PLC0415
-        )
-
+        from ..models.recommend_required_product_properties_response_data_recommended_property_value import RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id")
 
@@ -99,12 +110,13 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
 
         values = []
         _values = d.pop("values")
-        for values_item_data in _values:
-            values_item = RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue.from_dict(
-                values_item_data
-            )
+        for values_item_data in (_values):
+            values_item = RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue.from_dict(values_item_data)
+
+
 
             values.append(values_item)
+
 
         recommend_required_product_properties_response_data_recommended_property = cls(
             id=id,
@@ -115,6 +127,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
             type_=type_,
             values=values,
         )
+
 
         recommend_required_product_properties_response_data_recommended_property.additional_properties = d
         return recommend_required_product_properties_response_data_recommended_property

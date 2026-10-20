@@ -1,43 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignDetailResponseDataTargetShop")
+
 
 
 @_attrs_define
 class GetAffiliatePartnerCampaignDetailResponseDataTargetShop:
-    """
-    Attributes:
-        code (str | Unset): The seller shop code in available in TikTok Shop Seller Central by clicking on the Seller
-            Profile icon in the top right of the user interface.
-        name (str | Unset): The TikTok Shop name.
-    """
+    """ 
+        Attributes:
+            code (str | Unset): The seller shop code in available in TikTok Shop Seller Central by clicking on the Seller
+                Profile icon in the top right of the user interface.
+            name (str | Unset): The TikTok Shop name.
+     """
 
     code: str | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         code = self.code
 
         name = self.name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if name is not UNSET:
             field_dict["name"] = name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -50,6 +66,7 @@ class GetAffiliatePartnerCampaignDetailResponseDataTargetShop:
             code=code,
             name=name,
         )
+
 
         get_affiliate_partner_campaign_detail_response_data_target_shop.additional_properties = d
         return get_affiliate_partner_campaign_detail_response_data_target_shop

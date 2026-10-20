@@ -1,16 +1,20 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_video_performance_details_currency import GetShopVideoPerformanceDetailsCurrency
 from ...models.get_shop_video_performance_details_granularity import GetShopVideoPerformanceDetailsGranularity
 from ...models.get_shop_video_performance_details_response import GetShopVideoPerformanceDetailsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -20,7 +24,12 @@ def _get_kwargs(
     end_date_lt: datetime.date,
     granularity: GetShopVideoPerformanceDetailsGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceDetailsCurrency | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_date_ge = start_date_ge.isoformat()
@@ -41,24 +50,26 @@ def _get_kwargs(
 
     params["currency"] = json_currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202509/shop_videos/{video_id}/performance".format(
-            video_id=quote(str(video_id), safe=""),
-        ),
+        "url": "/analytics/202509/shop_videos/{video_id}/performance".format(video_id=quote(str(video_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopVideoPerformanceDetailsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopVideoPerformanceDetailsResponse | None:
     if response.status_code == 200:
         response_200 = GetShopVideoPerformanceDetailsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -68,9 +79,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopVideoPerformanceDetailsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopVideoPerformanceDetailsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -87,8 +96,9 @@ def sync_detailed(
     end_date_lt: datetime.date,
     granularity: GetShopVideoPerformanceDetailsGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceDetailsCurrency | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceDetailsResponse]:
-    """Get Shop Video Performance Details
+    """ Get Shop Video Performance Details
 
      Returns detailed performance metrics for a (requested) video.
 
@@ -105,14 +115,16 @@ def sync_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         video_id=video_id,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -120,7 +132,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     video_id: str,
@@ -130,8 +141,9 @@ def sync(
     end_date_lt: datetime.date,
     granularity: GetShopVideoPerformanceDetailsGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceDetailsCurrency | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceDetailsResponse | None:
-    """Get Shop Video Performance Details
+    """ Get Shop Video Performance Details
 
      Returns detailed performance metrics for a (requested) video.
 
@@ -148,17 +160,18 @@ def sync(
 
     Returns:
         GetShopVideoPerformanceDetailsResponse
-    """
+     """
+
 
     return sync_detailed(
         video_id=video_id,
-        client=client,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
-    ).parsed
+client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     video_id: str,
@@ -168,8 +181,9 @@ async def asyncio_detailed(
     end_date_lt: datetime.date,
     granularity: GetShopVideoPerformanceDetailsGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceDetailsCurrency | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceDetailsResponse]:
-    """Get Shop Video Performance Details
+    """ Get Shop Video Performance Details
 
      Returns detailed performance metrics for a (requested) video.
 
@@ -186,20 +200,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         video_id=video_id,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     video_id: str,
@@ -209,8 +226,9 @@ async def asyncio(
     end_date_lt: datetime.date,
     granularity: GetShopVideoPerformanceDetailsGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceDetailsCurrency | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceDetailsResponse | None:
-    """Get Shop Video Performance Details
+    """ Get Shop Video Performance Details
 
      Returns detailed performance metrics for a (requested) video.
 
@@ -227,15 +245,15 @@ async def asyncio(
 
     Returns:
         GetShopVideoPerformanceDetailsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            video_id=video_id,
-            client=client,
-            start_date_ge=start_date_ge,
-            end_date_lt=end_date_lt,
-            granularity=granularity,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        video_id=video_id,
+client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
+    )).parsed

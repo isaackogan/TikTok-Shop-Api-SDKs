@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_authorized_shops_response_data_shop import GetAuthorizedShopsResponseDataShop
+  from ..models.get_authorized_shops_response_data_shop import GetAuthorizedShopsResponseDataShop
+
+
+
 
 
 T = TypeVar("T", bound="GetAuthorizedShopsResponseData")
 
 
+
 @_attrs_define
 class GetAuthorizedShopsResponseData:
-    """
-    Attributes:
-        shops (list[GetAuthorizedShopsResponseDataShop] | Unset): The list of shops that a seller has authorized for the
-            app.
-    """
+    """ 
+        Attributes:
+            shops (list[GetAuthorizedShopsResponseDataShop] | Unset): The list of shops that a seller has authorized for the
+                app.
+     """
 
     shops: list[GetAuthorizedShopsResponseDataShop] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_authorized_shops_response_data_shop import GetAuthorizedShopsResponseDataShop # noqa: PLC0415
         shops: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.shops, Unset):
             shops = []
@@ -34,18 +46,23 @@ class GetAuthorizedShopsResponseData:
                 shops_item = shops_item_data.to_dict()
                 shops.append(shops_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shops is not UNSET:
             field_dict["shops"] = shops
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_authorized_shops_response_data_shop import GetAuthorizedShopsResponseDataShop  # noqa: PLC0415
-
+        from ..models.get_authorized_shops_response_data_shop import GetAuthorizedShopsResponseDataShop # noqa: PLC0415
         d = dict(src_dict)
         _shops = d.pop("shops", UNSET)
         shops: list[GetAuthorizedShopsResponseDataShop] | Unset = UNSET
@@ -54,11 +71,15 @@ class GetAuthorizedShopsResponseData:
             for shops_item_data in _shops:
                 shops_item = GetAuthorizedShopsResponseDataShop.from_dict(shops_item_data)
 
+
+
                 shops.append(shops_item)
+
 
         get_authorized_shops_response_data = cls(
             shops=shops,
         )
+
 
         get_authorized_shops_response_data.additional_properties = d
         return get_authorized_shops_response_data

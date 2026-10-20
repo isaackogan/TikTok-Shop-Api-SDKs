@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ExternalListPriceCurrency(StrEnum):
     USD = "USD"
 

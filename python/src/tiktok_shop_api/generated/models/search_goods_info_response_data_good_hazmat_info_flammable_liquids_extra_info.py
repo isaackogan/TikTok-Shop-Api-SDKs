@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo")
+
 
 
 @_attrs_define
 class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
-    """
-    Attributes:
-        flammable_liquids_type (str | Unset): Flammable liquid type, possible values
-            -PAINT
-            -PERFUMERY
-            -ALCOHOLIC
-            -OTHER
-        flammable_liquids_volume (str | Unset): Volume of flammable liquid in the unit specified by volume_unit.
-        volume_unit (str | Unset): Unit for `flammable_liquids_volume`, such as `MILLILITER`.
-    """
+    """ 
+        Attributes:
+            flammable_liquids_type (str | Unset): Flammable liquid type, possible values
+                -PAINT
+                -PERFUMERY
+                -ALCOHOLIC
+                -OTHER
+            flammable_liquids_volume (str | Unset): Volume of flammable liquid in the unit specified by volume_unit.
+            volume_unit (str | Unset): Unit for `flammable_liquids_volume`, such as `MILLILITER`.
+     """
 
     flammable_liquids_type: str | Unset = UNSET
     flammable_liquids_volume: str | Unset = UNSET
     volume_unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         flammable_liquids_type = self.flammable_liquids_type
@@ -36,9 +48,11 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
 
         volume_unit = self.volume_unit
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if flammable_liquids_type is not UNSET:
             field_dict["flammable_liquids_type"] = flammable_liquids_type
         if flammable_liquids_volume is not UNSET:
@@ -47,6 +61,8 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
             field_dict["volume_unit"] = volume_unit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -62,6 +78,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
             flammable_liquids_volume=flammable_liquids_volume,
             volume_unit=volume_unit,
         )
+
 
         search_goods_info_response_data_good_hazmat_info_flammable_liquids_extra_info.additional_properties = d
         return search_goods_info_response_data_good_hazmat_info_flammable_liquids_extra_info

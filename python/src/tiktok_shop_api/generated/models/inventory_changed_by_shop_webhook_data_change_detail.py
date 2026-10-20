@@ -1,29 +1,39 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+import datetime
+
+
+
+
+
+
 T = TypeVar("T", bound="InventoryChangedByShopWebhookDataChangeDetail")
+
 
 
 @_attrs_define
 class InventoryChangedByShopWebhookDataChangeDetail:
-    """
-    Attributes:
-        idempotency_key (str): An identifier for an individual change; use it to deduplicate change details.
-        trigger_source (str): The cause of the change. See the trigger sources in Section 1.
-        occurred_at (datetime.datetime): The UTC time of the individual change.
-        total_quantity_delta (int): The change in `total_quantity`.
-        available_quantity_delta (int): The change in `total_available_quantity`.
-        committed_quantity_delta (int): The change in `total_committed_quantity`.
-        in_shop_quantity_delta (int): The change in `in_shop_quantity`.
-        campaign_locked_quantity_delta (int): The change in `campaign_locked_quantity`.
-        creator_locked_quantity_delta (int): The change in `creator_locked_quantity`.
-    """
+    """ 
+        Attributes:
+            idempotency_key (str): An identifier for an individual change; use it to deduplicate change details.
+            trigger_source (str): The cause of the change. See the trigger sources in Section 1.
+            occurred_at (datetime.datetime): The UTC time of the individual change.
+            total_quantity_delta (int): The change in `total_quantity`.
+            available_quantity_delta (int): The change in `total_available_quantity`.
+            committed_quantity_delta (int): The change in `total_committed_quantity`.
+            in_shop_quantity_delta (int): The change in `in_shop_quantity`.
+            campaign_locked_quantity_delta (int): The change in `campaign_locked_quantity`.
+            creator_locked_quantity_delta (int): The change in `creator_locked_quantity`.
+     """
 
     idempotency_key: str
     trigger_source: str
@@ -35,6 +45,10 @@ class InventoryChangedByShopWebhookDataChangeDetail:
     campaign_locked_quantity_delta: int
     creator_locked_quantity_delta: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         idempotency_key = self.idempotency_key
@@ -55,23 +69,24 @@ class InventoryChangedByShopWebhookDataChangeDetail:
 
         creator_locked_quantity_delta = self.creator_locked_quantity_delta
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "idempotency_key": idempotency_key,
-                "trigger_source": trigger_source,
-                "occurred_at": occurred_at,
-                "total_quantity_delta": total_quantity_delta,
-                "available_quantity_delta": available_quantity_delta,
-                "committed_quantity_delta": committed_quantity_delta,
-                "in_shop_quantity_delta": in_shop_quantity_delta,
-                "campaign_locked_quantity_delta": campaign_locked_quantity_delta,
-                "creator_locked_quantity_delta": creator_locked_quantity_delta,
-            }
-        )
+        field_dict.update({
+            "idempotency_key": idempotency_key,
+            "trigger_source": trigger_source,
+            "occurred_at": occurred_at,
+            "total_quantity_delta": total_quantity_delta,
+            "available_quantity_delta": available_quantity_delta,
+            "committed_quantity_delta": committed_quantity_delta,
+            "in_shop_quantity_delta": in_shop_quantity_delta,
+            "campaign_locked_quantity_delta": campaign_locked_quantity_delta,
+            "creator_locked_quantity_delta": creator_locked_quantity_delta,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -81,6 +96,9 @@ class InventoryChangedByShopWebhookDataChangeDetail:
         trigger_source = d.pop("trigger_source")
 
         occurred_at = datetime.datetime.fromisoformat(d.pop("occurred_at"))
+
+
+
 
         total_quantity_delta = d.pop("total_quantity_delta")
 
@@ -105,6 +123,7 @@ class InventoryChangedByShopWebhookDataChangeDetail:
             campaign_locked_quantity_delta=campaign_locked_quantity_delta,
             creator_locked_quantity_delta=creator_locked_quantity_delta,
         )
+
 
         inventory_changed_by_shop_webhook_data_change_detail.additional_properties = d
         return inventory_changed_by_shop_webhook_data_change_detail

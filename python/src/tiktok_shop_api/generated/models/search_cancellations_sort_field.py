@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchCancellationsSortField(StrEnum):
     CREATE_TIME = "create_time"
     UPDATE_TIME = "update_time"

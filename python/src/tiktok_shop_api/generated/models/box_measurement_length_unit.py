@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class BoxMeasurementLengthUnit(StrEnum):
     CENTIMETER = "CENTIMETER"
     FOOT = "FOOT"

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchPromotionActivitiesRequestActivityType(StrEnum):
     BUY_MORE_SAVE_MORE = "BUY_MORE_SAVE_MORE"
     BUY_X_GET_Y = "BUY_X_GET_Y"

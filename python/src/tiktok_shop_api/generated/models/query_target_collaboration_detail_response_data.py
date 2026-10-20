@@ -1,64 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.query_target_collaboration_detail_response_data_target_collaboration import (
-        QueryTargetCollaborationDetailResponseDataTargetCollaboration,
-    )
+  from ..models.query_target_collaboration_detail_response_data_target_collaboration import QueryTargetCollaborationDetailResponseDataTargetCollaboration
+
+
+
 
 
 T = TypeVar("T", bound="QueryTargetCollaborationDetailResponseData")
 
 
+
 @_attrs_define
 class QueryTargetCollaborationDetailResponseData:
-    """
-    Attributes:
-        target_collaboration (QueryTargetCollaborationDetailResponseDataTargetCollaboration | Unset):
-    """
+    """ 
+        Attributes:
+            target_collaboration (QueryTargetCollaborationDetailResponseDataTargetCollaboration | Unset):
+     """
 
     target_collaboration: QueryTargetCollaborationDetailResponseDataTargetCollaboration | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration import QueryTargetCollaborationDetailResponseDataTargetCollaboration # noqa: PLC0415
         target_collaboration: dict[str, Any] | Unset = UNSET
         if not isinstance(self.target_collaboration, Unset):
             target_collaboration = self.target_collaboration.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if target_collaboration is not UNSET:
             field_dict["target_collaboration"] = target_collaboration
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.query_target_collaboration_detail_response_data_target_collaboration import (
-            QueryTargetCollaborationDetailResponseDataTargetCollaboration,  # noqa: PLC0415
-        )
-
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration import QueryTargetCollaborationDetailResponseDataTargetCollaboration # noqa: PLC0415
         d = dict(src_dict)
         _target_collaboration = d.pop("target_collaboration", UNSET)
         target_collaboration: QueryTargetCollaborationDetailResponseDataTargetCollaboration | Unset
-        if isinstance(_target_collaboration, Unset):
+        if isinstance(_target_collaboration,  Unset):
             target_collaboration = UNSET
         else:
-            target_collaboration = QueryTargetCollaborationDetailResponseDataTargetCollaboration.from_dict(
-                _target_collaboration
-            )
+            target_collaboration = QueryTargetCollaborationDetailResponseDataTargetCollaboration.from_dict(_target_collaboration)
+
+
+
 
         query_target_collaboration_detail_response_data = cls(
             target_collaboration=target_collaboration,
         )
+
 
         query_target_collaboration_detail_response_data.additional_properties = d
         return query_target_collaboration_detail_response_data

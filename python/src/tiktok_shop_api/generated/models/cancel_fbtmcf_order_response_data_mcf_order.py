@@ -1,39 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order import (
-        CancelFBTMCFOrderResponseDataMcfOrderConsignOrder,
-    )
+  from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order import CancelFBTMCFOrderResponseDataMcfOrderConsignOrder
+
+
+
 
 
 T = TypeVar("T", bound="CancelFBTMCFOrderResponseDataMcfOrder")
 
 
+
 @_attrs_define
 class CancelFBTMCFOrderResponseDataMcfOrder:
-    """
-    Attributes:
-        external_order_id (str | Unset): The corresponding order ID in your OMS.
-        mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
-        consign_orders (list[CancelFBTMCFOrderResponseDataMcfOrderConsignOrder] | Unset): All consign orders in the MCF
-            order and their current statuses after the cancellation request. Match the requested consign order IDs to the
-            returned items; a status of `CLOSED` means that the consign order has been canceled.
-    """
+    """ 
+        Attributes:
+            external_order_id (str | Unset): The corresponding order ID in your OMS.
+            mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
+            consign_orders (list[CancelFBTMCFOrderResponseDataMcfOrderConsignOrder] | Unset): All consign orders in the MCF
+                order and their current statuses after the cancellation request. Match the requested consign order IDs to the
+                returned items; a status of `CLOSED` means that the consign order has been canceled.
+     """
 
     external_order_id: str | Unset = UNSET
     mcf_order_id: str | Unset = UNSET
     consign_orders: list[CancelFBTMCFOrderResponseDataMcfOrderConsignOrder] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order import CancelFBTMCFOrderResponseDataMcfOrderConsignOrder # noqa: PLC0415
         external_order_id = self.external_order_id
 
         mcf_order_id = self.mcf_order_id
@@ -45,9 +55,13 @@ class CancelFBTMCFOrderResponseDataMcfOrder:
                 consign_orders_item = consign_orders_item_data.to_dict()
                 consign_orders.append(consign_orders_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if external_order_id is not UNSET:
             field_dict["external_order_id"] = external_order_id
         if mcf_order_id is not UNSET:
@@ -57,12 +71,11 @@ class CancelFBTMCFOrderResponseDataMcfOrder:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order import (
-            CancelFBTMCFOrderResponseDataMcfOrderConsignOrder,  # noqa: PLC0415
-        )
-
+        from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order import CancelFBTMCFOrderResponseDataMcfOrderConsignOrder # noqa: PLC0415
         d = dict(src_dict)
         external_order_id = d.pop("external_order_id", UNSET)
 
@@ -73,17 +86,19 @@ class CancelFBTMCFOrderResponseDataMcfOrder:
         if _consign_orders is not UNSET:
             consign_orders = []
             for consign_orders_item_data in _consign_orders:
-                consign_orders_item = CancelFBTMCFOrderResponseDataMcfOrderConsignOrder.from_dict(
-                    consign_orders_item_data
-                )
+                consign_orders_item = CancelFBTMCFOrderResponseDataMcfOrderConsignOrder.from_dict(consign_orders_item_data)
+
+
 
                 consign_orders.append(consign_orders_item)
+
 
         cancel_fbtmcf_order_response_data_mcf_order = cls(
             external_order_id=external_order_id,
             mcf_order_id=mcf_order_id,
             consign_orders=consign_orders,
         )
+
 
         cancel_fbtmcf_order_response_data_mcf_order.additional_properties = d
         return cancel_fbtmcf_order_response_data_mcf_order

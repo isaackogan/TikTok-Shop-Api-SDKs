@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateProductRequestShippingInsuranceRequirement(StrEnum):
     NOT_SUPPORTED = "NOT_SUPPORTED"
     OPTIONAL = "OPTIONAL"

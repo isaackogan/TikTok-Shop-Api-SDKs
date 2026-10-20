@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShowcaseProductsResponseDataProductPriceOriginalPrice")
+
 
 
 @_attrs_define
 class GetShowcaseProductsResponseDataProductPriceOriginalPrice:
-    """
-    Attributes:
-        minimum_amount (str | Unset): The lowest original price for the product.
-        maximum_amount (str | Unset): The highest original price for the product.
-        currency (str | Unset): The ISO 4217 currency code.
-    """
+    """ 
+        Attributes:
+            minimum_amount (str | Unset): The lowest original price for the product.
+            maximum_amount (str | Unset): The highest original price for the product.
+            currency (str | Unset): The ISO 4217 currency code.
+     """
 
     minimum_amount: str | Unset = UNSET
     maximum_amount: str | Unset = UNSET
     currency: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         minimum_amount = self.minimum_amount
@@ -32,9 +44,11 @@ class GetShowcaseProductsResponseDataProductPriceOriginalPrice:
 
         currency = self.currency
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if minimum_amount is not UNSET:
             field_dict["minimum_amount"] = minimum_amount
         if maximum_amount is not UNSET:
@@ -43,6 +57,8 @@ class GetShowcaseProductsResponseDataProductPriceOriginalPrice:
             field_dict["currency"] = currency
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class GetShowcaseProductsResponseDataProductPriceOriginalPrice:
             maximum_amount=maximum_amount,
             currency=currency,
         )
+
 
         get_showcase_products_response_data_product_price_original_price.additional_properties = d
         return get_showcase_products_response_data_product_price_original_price

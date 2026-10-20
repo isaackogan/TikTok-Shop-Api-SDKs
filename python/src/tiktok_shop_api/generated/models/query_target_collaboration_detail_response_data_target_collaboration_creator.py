@@ -1,57 +1,64 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.avatar import Avatar
+  from ..models.avatar import Avatar
+
+
+
 
 
 T = TypeVar("T", bound="QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator")
 
 
+
 @_attrs_define
 class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
-    """
-    Attributes:
-        username (str | Unset): The TikTok user name.
-        nickname (str | Unset): The TikTok nick name.
-        avatar (Avatar | Unset):
-        selection_region (str | Unset): The regions in which the creator is eligible to promote products in showcases,
-            videos, and live streams.
-        showcase_product_count (int | Unset): This field indicates the number of products creator has added  to the
-            showcase from target collaboration.
-            The count includes NORMAL and DELETING states.
-        content_product_count (int | Unset): This field indicates the number of products creator has posted video or
-            live from target collaboration.
-            The count includes NORMAL and DELETING states.
-        collaboration_status (str | Unset): The status of the creator in the current target cooperation.
-            Field values:
-            - NORMAL: The status of the creator in the current target collaboration is normal.
-            - DELETING: The status of the creator in the current target collaboration is deleting.The creator's product
-            promotion relationship in the DELETING status will end the delayed effectiveness status and flow to the DELETED
-            status at 00:00 the next day.
-            - DELETED: The status of the creator in the current target collaboration is deleted.
-        product_effective_status (str | Unset): The effectiveness of the target collaboration's product commissions for
-            this creator.
-            Field values:
-            - EFFECTIVE_ALL: The commission is effective for this creator on all products in the target collaboration.
-            - EFFECTIVE_PARTIALLY: The commission is effective for this creator on some products in the target
-            collaboration.
-            - EFFECTIVE_NONE: The commission is not effective for this creator on any products in the target collaboration.
-            Normally, the commission rate for all products under Target Collaboration is effective.
-            If the merchant participates in TOP_CREATOR_PROGRAM, and TOP_CREATOR_PROGRAM includes the current creator and
-            some products, the commission rate will be based on TOP_CREATOR_PROGRAM. The products' commission under the
-            current Target Collaboration will only be partially effective for the creator, corresponding to
-            EFFECTIVE_PARTIALLY status.
-        creator_open_id (str | Unset): Creator Open ID. [More
-            details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
-    """
+    """ 
+        Attributes:
+            username (str | Unset): The TikTok user name.
+            nickname (str | Unset): The TikTok nick name.
+            avatar (Avatar | Unset):
+            selection_region (str | Unset): The regions in which the creator is eligible to promote products in showcases,
+                videos, and live streams.
+            showcase_product_count (int | Unset): This field indicates the number of products creator has added  to the
+                showcase from target collaboration.
+                The count includes NORMAL and DELETING states.
+            content_product_count (int | Unset): This field indicates the number of products creator has posted video or
+                live from target collaboration.
+                The count includes NORMAL and DELETING states.
+            collaboration_status (str | Unset): The status of the creator in the current target cooperation.
+                Field values:
+                - NORMAL: The status of the creator in the current target collaboration is normal.
+                - DELETING: The status of the creator in the current target collaboration is deleting.The creator's product
+                promotion relationship in the DELETING status will end the delayed effectiveness status and flow to the DELETED
+                status at 00:00 the next day.
+                - DELETED: The status of the creator in the current target collaboration is deleted.
+            product_effective_status (str | Unset): The effectiveness of the target collaboration's product commissions for
+                this creator.
+                Field values:
+                - EFFECTIVE_ALL: The commission is effective for this creator on all products in the target collaboration.
+                - EFFECTIVE_PARTIALLY: The commission is effective for this creator on some products in the target
+                collaboration.
+                - EFFECTIVE_NONE: The commission is not effective for this creator on any products in the target collaboration.
+                Normally, the commission rate for all products under Target Collaboration is effective.
+                If the merchant participates in TOP_CREATOR_PROGRAM, and TOP_CREATOR_PROGRAM includes the current creator and
+                some products, the commission rate will be based on TOP_CREATOR_PROGRAM. The products' commission under the
+                current Target Collaboration will only be partially effective for the creator, corresponding to
+                EFFECTIVE_PARTIALLY status.
+            creator_open_id (str | Unset): Creator Open ID. [More
+                details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
+     """
 
     username: str | Unset = UNSET
     nickname: str | Unset = UNSET
@@ -64,7 +71,12 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
     creator_open_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.avatar import Avatar # noqa: PLC0415
         username = self.username
 
         nickname = self.nickname
@@ -85,9 +97,11 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
 
         creator_open_id = self.creator_open_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if username is not UNSET:
             field_dict["username"] = username
         if nickname is not UNSET:
@@ -109,10 +123,11 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.avatar import Avatar  # noqa: PLC0415
-
+        from ..models.avatar import Avatar # noqa: PLC0415
         d = dict(src_dict)
         username = d.pop("username", UNSET)
 
@@ -120,10 +135,13 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
 
         _avatar = d.pop("avatar", UNSET)
         avatar: Avatar | Unset
-        if isinstance(_avatar, Unset):
+        if isinstance(_avatar,  Unset):
             avatar = UNSET
         else:
             avatar = Avatar.from_dict(_avatar)
+
+
+
 
         selection_region = d.pop("selection_region", UNSET)
 
@@ -148,6 +166,7 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
             product_effective_status=product_effective_status,
             creator_open_id=creator_open_id,
         )
+
 
         query_target_collaboration_detail_response_data_target_collaboration_creator.additional_properties = d
         return query_target_collaboration_detail_response_data_target_collaboration_creator

@@ -1,33 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown import (
-        GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown,
-    )
-    from ..models.gmv import Gmv
+  from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
-    """
-    Attributes:
-        gmv (Gmv | Unset):
-        orders (int | Unset): Total (sum of all) orders for the product.
-        items_sold (int | Unset): Number of items sold for the product.
-        breakdowns (list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown] | Unset): Sales
-            breakdowns.
-    """
+    """ 
+        Attributes:
+            gmv (Gmv | Unset):
+            orders (int | Unset): Total (sum of all) orders for the product.
+            items_sold (int | Unset): Number of items sold for the product.
+            breakdowns (list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown] | Unset): Sales
+                breakdowns.
+     """
 
     gmv: Gmv | Unset = UNSET
     orders: int | Unset = UNSET
@@ -35,7 +40,13 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
     breakdowns: list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
         gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.gmv, Unset):
             gmv = self.gmv.to_dict()
@@ -51,9 +62,13 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
                 breakdowns_item = breakdowns_item_data.to_dict()
                 breakdowns.append(breakdowns_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if gmv is not UNSET:
             field_dict["gmv"] = gmv
         if orders is not UNSET:
@@ -65,20 +80,22 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown import (
-            GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown,  # noqa: PLC0415
-        )
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         orders = d.pop("orders", UNSET)
 
@@ -89,11 +106,12 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
         if _breakdowns is not UNSET:
             breakdowns = []
             for breakdowns_item_data in _breakdowns:
-                breakdowns_item = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown.from_dict(
-                    breakdowns_item_data
-                )
+                breakdowns_item = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown.from_dict(breakdowns_item_data)
+
+
 
                 breakdowns.append(breakdowns_item)
+
 
         get_shop_product_performance_detail_response_data_performance_interval_sale = cls(
             gmv=gmv,
@@ -101,6 +119,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSale:
             items_sold=items_sold,
             breakdowns=breakdowns,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_interval_sale.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_interval_sale

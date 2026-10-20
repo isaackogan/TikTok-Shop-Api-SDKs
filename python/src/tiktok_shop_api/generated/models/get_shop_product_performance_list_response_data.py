@@ -1,35 +1,40 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+import datetime
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_list_response_data_product import (
-        GetShopProductPerformanceListResponseDataProduct,
-    )
+  from ..models.get_shop_product_performance_list_response_data_product import GetShopProductPerformanceListResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseData")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseData:
-    """
-    Attributes:
-        products (list[GetShopProductPerformanceListResponseDataProduct] | Unset): List of product performance metrics.
-        next_page_token (str | Unset): Page token for the next page. Pass this value as `page_token` in the next request
-            and reuse the same `start_date_ge`, `end_date_lt`, `sort_field`, `sort_order`, `currency`, `category_filter`,
-            `product_status_filter`, and `page_size` values. An empty value means there is no next page.
-        total_count (int | Unset): Total number of products that match the request filters across all pages.
-        latest_available_date (datetime.date | Unset): Latest date in local timezone where data is ready (ISO 8601
-            format).
-    """
+    """ 
+        Attributes:
+            products (list[GetShopProductPerformanceListResponseDataProduct] | Unset): List of product performance metrics.
+            next_page_token (str | Unset): Page token for the next page. Pass this value as `page_token` in the next request
+                and reuse the same `start_date_ge`, `end_date_lt`, `sort_field`, `sort_order`, `currency`, `category_filter`,
+                `product_status_filter`, and `page_size` values. An empty value means there is no next page.
+            total_count (int | Unset): Total number of products that match the request filters across all pages.
+            latest_available_date (datetime.date | Unset): Latest date in local timezone where data is ready (ISO 8601
+                format).
+     """
 
     products: list[GetShopProductPerformanceListResponseDataProduct] | Unset = UNSET
     next_page_token: str | Unset = UNSET
@@ -37,13 +42,20 @@ class GetShopProductPerformanceListResponseData:
     latest_available_date: datetime.date | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_list_response_data_product import GetShopProductPerformanceListResponseDataProduct # noqa: PLC0415
         products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
             for products_item_data in self.products:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
+
+
 
         next_page_token = self.next_page_token
 
@@ -53,9 +65,11 @@ class GetShopProductPerformanceListResponseData:
         if not isinstance(self.latest_available_date, Unset):
             latest_available_date = self.latest_available_date.isoformat()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if products is not UNSET:
             field_dict["products"] = products
         if next_page_token is not UNSET:
@@ -67,12 +81,11 @@ class GetShopProductPerformanceListResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_list_response_data_product import (
-            GetShopProductPerformanceListResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_product_performance_list_response_data_product import GetShopProductPerformanceListResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         _products = d.pop("products", UNSET)
         products: list[GetShopProductPerformanceListResponseDataProduct] | Unset = UNSET
@@ -81,7 +94,10 @@ class GetShopProductPerformanceListResponseData:
             for products_item_data in _products:
                 products_item = GetShopProductPerformanceListResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -89,10 +105,13 @@ class GetShopProductPerformanceListResponseData:
 
         _latest_available_date = d.pop("latest_available_date", UNSET)
         latest_available_date: datetime.date | Unset
-        if isinstance(_latest_available_date, Unset):
+        if isinstance(_latest_available_date,  Unset):
             latest_available_date = UNSET
         else:
             latest_available_date = datetime.date.fromisoformat(_latest_available_date)
+
+
+
 
         get_shop_product_performance_list_response_data = cls(
             products=products,
@@ -100,6 +119,7 @@ class GetShopProductPerformanceListResponseData:
             total_count=total_count,
             latest_available_date=latest_available_date,
         )
+
 
         get_shop_product_performance_list_response_data.additional_properties = d
         return get_shop_product_performance_list_response_data

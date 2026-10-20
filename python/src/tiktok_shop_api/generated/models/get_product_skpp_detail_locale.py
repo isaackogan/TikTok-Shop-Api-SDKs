@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetProductSkppDetailLocale(StrEnum):
     DE_DE = "de-DE"
     EN = "en"

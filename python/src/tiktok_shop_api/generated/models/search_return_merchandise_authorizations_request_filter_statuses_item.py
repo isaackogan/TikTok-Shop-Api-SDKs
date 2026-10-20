@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchReturnMerchandiseAuthorizationsRequestFilterStatusesItem(StrEnum):
     AWAITING_BUYER_RETURN = "AWAITING_BUYER_RETURN"
     INIT = "INIT"

@@ -1,69 +1,72 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_category_attributes_response_data_attribute_metric_standard import (
-        GetCategoryAttributesResponseDataAttributeMetricStandard,
-    )
-    from ..models.get_category_attributes_response_data_attribute_value import (
-        GetCategoryAttributesResponseDataAttributeValue,
-    )
-    from ..models.requirement_condition import RequirementCondition
+  from ..models.get_category_attributes_response_data_attribute_metric_standard import GetCategoryAttributesResponseDataAttributeMetricStandard
+  from ..models.get_category_attributes_response_data_attribute_value import GetCategoryAttributesResponseDataAttributeValue
+  from ..models.requirement_condition import RequirementCondition
+
+
+
 
 
 T = TypeVar("T", bound="GetCategoryAttributesResponseDataAttribute")
 
 
+
 @_attrs_define
 class GetCategoryAttributesResponseDataAttribute:
-    """
-    Attributes:
-        id (str | Unset): The ID of the built-in attribute.
-        name (str | Unset): The name of the built-in attribute.
-        type_ (str | Unset): The attribute type.
-            Possible values:
-            - SALES_PROPERTY: Indicates sales attributes that define product variants.
-            - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-        is_requried (bool | Unset): A flag to indicate if the product attribute is always required when creating or
-            editing a product.
-            - true: The attribute is always required.
-            - false: The attribute is not required, or required only if certain conditions are met. Refer to
-            `requirement_conditions` for the specific requirements.
+    """ 
+        Attributes:
+            id (str | Unset): The ID of the built-in attribute.
+            name (str | Unset): The name of the built-in attribute.
+            type_ (str | Unset): The attribute type.
+                Possible values:
+                - SALES_PROPERTY: Indicates sales attributes that define product variants.
+                - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
+            is_requried (bool | Unset): A flag to indicate if the product attribute is always required when creating or
+                editing a product.
+                - true: The attribute is always required.
+                - false: The attribute is not required, or required only if certain conditions are met. Refer to
+                `requirement_conditions` for the specific requirements.
 
-            Applicable only if `type=PRODUCT_PROPERTY`.
-        values (list[GetCategoryAttributesResponseDataAttributeValue] | Unset): A list of selectable values for the
-            attribute.
-        value_data_format (str | Unset): The data format for a free-form attribute value.
+                Applicable only if `type=PRODUCT_PROPERTY`.
+            values (list[GetCategoryAttributesResponseDataAttributeValue] | Unset): A list of selectable values for the
+                attribute.
+            value_data_format (str | Unset): The data format for a free-form attribute value.
 
-            Returned for customizable numeric attributes.
+                Returned for customizable numeric attributes.
 
-            Possible values:
-            - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers.
-        is_customizable (bool | Unset): A flag indicating whether sellers can enter a custom value for the attribute
-            when creating or editing a product.
-        requirement_conditions (list[RequirementCondition] | Unset): A list of conditions that determine if the product
-            attribute is required based on the seller's inputs for other attributes. If any of the conditions is met, the
-            attribute is required; otherwise, it is optional.
+                Possible values:
+                - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers.
+            is_customizable (bool | Unset): A flag indicating whether sellers can enter a custom value for the attribute
+                when creating or editing a product.
+            requirement_conditions (list[RequirementCondition] | Unset): A list of conditions that determine if the product
+                attribute is required based on the seller's inputs for other attributes. If any of the conditions is met, the
+                attribute is required; otherwise, it is optional.
 
-            For example, there's a condition that states that the "Battery type" attribute is required if the seller selects
-            the value "Batteries" for the attribute "Contains Batteries or Cells?". For more scenario-based guidance on
-            using this parameter, refer to the [Solution Guide - CAT-PRE-
-            HAZMAT](https://partner.tiktokshop.com/openlearn/guide/usecase?parent_id=7256668359046153985).
+                For example, there's a condition that states that the "Battery type" attribute is required if the seller selects
+                the value "Batteries" for the attribute "Contains Batteries or Cells?". For more scenario-based guidance on
+                using this parameter, refer to the [Solution Guide - CAT-PRE-
+                HAZMAT](https://partner.tiktokshop.com/openlearn/guide/usecase?parent_id=7256668359046153985).
 
-            Applicable only if `type=PRODUCT_PROPERTY` and `is_requried=false`.
-        is_multiple_selection (bool | Unset): A flag indicating whether sellers can select multiple values for the
-            attribute when creating or editing a product.
-        metric_standards (list[GetCategoryAttributesResponseDataAttributeMetricStandard] | Unset): Defines the
-            measurement template information used to describe the measurement standards and metric values configured for the
-            product.
-    """
+                Applicable only if `type=PRODUCT_PROPERTY` and `is_requried=false`.
+            is_multiple_selection (bool | Unset): A flag indicating whether sellers can select multiple values for the
+                attribute when creating or editing a product.
+            metric_standards (list[GetCategoryAttributesResponseDataAttributeMetricStandard] | Unset): Defines the
+                measurement template information used to describe the measurement standards and metric values configured for the
+                product.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -77,7 +80,14 @@ class GetCategoryAttributesResponseDataAttribute:
     metric_standards: list[GetCategoryAttributesResponseDataAttributeMetricStandard] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_category_attributes_response_data_attribute_metric_standard import GetCategoryAttributesResponseDataAttributeMetricStandard # noqa: PLC0415
+        from ..models.get_category_attributes_response_data_attribute_value import GetCategoryAttributesResponseDataAttributeValue # noqa: PLC0415
+        from ..models.requirement_condition import RequirementCondition # noqa: PLC0415
         id = self.id
 
         name = self.name
@@ -93,6 +103,8 @@ class GetCategoryAttributesResponseDataAttribute:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
+
+
         value_data_format = self.value_data_format
 
         is_customizable = self.is_customizable
@@ -104,6 +116,8 @@ class GetCategoryAttributesResponseDataAttribute:
                 requirement_conditions_item = requirement_conditions_item_data.to_dict()
                 requirement_conditions.append(requirement_conditions_item)
 
+
+
         is_multiple_selection = self.is_multiple_selection
 
         metric_standards: list[dict[str, Any]] | Unset = UNSET
@@ -113,9 +127,13 @@ class GetCategoryAttributesResponseDataAttribute:
                 metric_standards_item = metric_standards_item_data.to_dict()
                 metric_standards.append(metric_standards_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -139,16 +157,13 @@ class GetCategoryAttributesResponseDataAttribute:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_category_attributes_response_data_attribute_metric_standard import (
-            GetCategoryAttributesResponseDataAttributeMetricStandard,  # noqa: PLC0415
-        )
-        from ..models.get_category_attributes_response_data_attribute_value import (
-            GetCategoryAttributesResponseDataAttributeValue,  # noqa: PLC0415
-        )
-        from ..models.requirement_condition import RequirementCondition  # noqa: PLC0415
-
+        from ..models.get_category_attributes_response_data_attribute_metric_standard import GetCategoryAttributesResponseDataAttributeMetricStandard # noqa: PLC0415
+        from ..models.get_category_attributes_response_data_attribute_value import GetCategoryAttributesResponseDataAttributeValue # noqa: PLC0415
+        from ..models.requirement_condition import RequirementCondition # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -165,7 +180,10 @@ class GetCategoryAttributesResponseDataAttribute:
             for values_item_data in _values:
                 values_item = GetCategoryAttributesResponseDataAttributeValue.from_dict(values_item_data)
 
+
+
                 values.append(values_item)
+
 
         value_data_format = d.pop("value_data_format", UNSET)
 
@@ -178,7 +196,10 @@ class GetCategoryAttributesResponseDataAttribute:
             for requirement_conditions_item_data in _requirement_conditions:
                 requirement_conditions_item = RequirementCondition.from_dict(requirement_conditions_item_data)
 
+
+
                 requirement_conditions.append(requirement_conditions_item)
+
 
         is_multiple_selection = d.pop("is_multiple_selection", UNSET)
 
@@ -187,11 +208,12 @@ class GetCategoryAttributesResponseDataAttribute:
         if _metric_standards is not UNSET:
             metric_standards = []
             for metric_standards_item_data in _metric_standards:
-                metric_standards_item = GetCategoryAttributesResponseDataAttributeMetricStandard.from_dict(
-                    metric_standards_item_data
-                )
+                metric_standards_item = GetCategoryAttributesResponseDataAttributeMetricStandard.from_dict(metric_standards_item_data)
+
+
 
                 metric_standards.append(metric_standards_item)
+
 
         get_category_attributes_response_data_attribute = cls(
             id=id,
@@ -205,6 +227,7 @@ class GetCategoryAttributesResponseDataAttribute:
             is_multiple_selection=is_multiple_selection,
             metric_standards=metric_standards,
         )
+
 
         get_category_attributes_response_data_attribute.additional_properties = d
         return get_category_attributes_response_data_attribute

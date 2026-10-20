@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetBestsellingLIVESessionsResponseDataLive")
+
 
 
 @_attrs_define
 class GetBestsellingLIVESessionsResponseDataLive:
-    """
-    Attributes:
-        rank (int | Unset): GMV rank of the LIVE session
-        gmv_range (str | Unset): GMV range of the LIVE session.
-        id (str | Unset): LIVE session id
-        title (str | Unset): LIVE session  title
-        start_time (int | Unset): Start time of the LIVE session as a Unix timestamp in seconds (UTC+00:00).
-        duration (int | Unset): LIVE session duration, in seconds.
-        creator_name (str | Unset): The creator’s unique username used for system identification.
-        open_id (str | Unset): The creator’s unique ID, uniquely identifying the creator in the system.
-        creator_nick_name (str | Unset): The creator’s display nickname, visible externally.
-    """
+    """ 
+        Attributes:
+            rank (int | Unset): GMV rank of the LIVE session
+            gmv_range (str | Unset): GMV range of the LIVE session.
+            id (str | Unset): LIVE session id
+            title (str | Unset): LIVE session  title
+            start_time (int | Unset): Start time of the LIVE session as a Unix timestamp in seconds (UTC+00:00).
+            duration (int | Unset): LIVE session duration, in seconds.
+            creator_name (str | Unset): The creator’s unique username used for system identification.
+            open_id (str | Unset): The creator’s unique ID, uniquely identifying the creator in the system.
+            creator_nick_name (str | Unset): The creator’s display nickname, visible externally.
+     """
 
     rank: int | Unset = UNSET
     gmv_range: str | Unset = UNSET
@@ -36,6 +44,10 @@ class GetBestsellingLIVESessionsResponseDataLive:
     open_id: str | Unset = UNSET
     creator_nick_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         rank = self.rank
@@ -56,9 +68,11 @@ class GetBestsellingLIVESessionsResponseDataLive:
 
         creator_nick_name = self.creator_nick_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rank is not UNSET:
             field_dict["rank"] = rank
         if gmv_range is not UNSET:
@@ -79,6 +93,8 @@ class GetBestsellingLIVESessionsResponseDataLive:
             field_dict["creator_nick_name"] = creator_nick_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -112,6 +128,7 @@ class GetBestsellingLIVESessionsResponseDataLive:
             open_id=open_id,
             creator_nick_name=creator_nick_name,
         )
+
 
         get_bestselling_live_sessions_response_data_live.additional_properties = d
         return get_bestselling_live_sessions_response_data_live

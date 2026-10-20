@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.update_promotion_activity_products_request import UpdatePromotionActivityProductsRequest
 from ...models.update_promotion_activity_products_response import UpdatePromotionActivityProductsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     activity_id: str,
     *,
     body: UpdatePromotionActivityProductsRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/promotion/202309/activities/{activity_id}/products".format(
-            activity_id=quote(str(activity_id), safe=""),
-        ),
+        "url": "/promotion/202309/activities/{activity_id}/products".format(activity_id=quote(str(activity_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,11 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> UpdatePromotionActivityProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UpdatePromotionActivityProductsResponse | None:
     if response.status_code == 200:
         response_200 = UpdatePromotionActivityProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[UpdatePromotionActivityProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UpdatePromotionActivityProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityProductsRequest,
+
 ) -> Response[UpdatePromotionActivityProductsResponse]:
-    """Update Promotion Activity Products
+    """ Update Promotion Activity Products
 
      Use this API as follows:
     - For a `FIXED_PRICE`, `DIRECT_DISCOUNT`, or `FLASHSALE` activity with PRODUCT or VARIATION scope,
@@ -91,11 +98,13 @@ def sync_detailed(
 
     Returns:
         Response[UpdatePromotionActivityProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -104,14 +113,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityProductsRequest,
+
 ) -> UpdatePromotionActivityProductsResponse | None:
-    """Update Promotion Activity Products
+    """ Update Promotion Activity Products
 
      Use this API as follows:
     - For a `FIXED_PRICE`, `DIRECT_DISCOUNT`, or `FLASHSALE` activity with PRODUCT or VARIATION scope,
@@ -138,22 +147,24 @@ def sync(
 
     Returns:
         UpdatePromotionActivityProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         activity_id=activity_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityProductsRequest,
+
 ) -> Response[UpdatePromotionActivityProductsResponse]:
-    """Update Promotion Activity Products
+    """ Update Promotion Activity Products
 
      Use this API as follows:
     - For a `FIXED_PRICE`, `DIRECT_DISCOUNT`, or `FLASHSALE` activity with PRODUCT or VARIATION scope,
@@ -180,25 +191,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[UpdatePromotionActivityProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityProductsRequest,
+
 ) -> UpdatePromotionActivityProductsResponse | None:
-    """Update Promotion Activity Products
+    """ Update Promotion Activity Products
 
      Use this API as follows:
     - For a `FIXED_PRICE`, `DIRECT_DISCOUNT`, or `FLASHSALE` activity with PRODUCT or VARIATION scope,
@@ -225,12 +240,12 @@ async def asyncio(
 
     Returns:
         UpdatePromotionActivityProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            activity_id=activity_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        activity_id=activity_id,
+client=client,
+body=body,
+
+    )).parsed

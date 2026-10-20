@@ -1,46 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCreatorConversationMessagesResponseDataMessageMessageBody")
+
 
 
 @_attrs_define
 class GetCreatorConversationMessagesResponseDataMessageMessageBody:
-    """
-    Attributes:
-        id (str | Unset): Message ID.
-        conversation_id (str | Unset): Conversation ID to which the message belongs.
-        type_ (str | Unset): Message type. Possible values:
-            - TEXT
-            - PRODUCT_CARD
-            - TARGET_COLLABORATION_CARD
-            - FREE_SAMPLE_CARD
-            - IMAGE
-            - CRM_TEXT_WITH_IMAGE_CARD
-            - CRM_TEXT_WITH_PRODUCTS_CARD
-            - NOTIFICATION
-            - EMOTICONS
-            - SYSTEM
-        content (str | Unset): Message content serialized as a JSON string. The JSON object depends on `type`:
-            - `TEXT`: `{"content": "simple text"}`
-            - `PRODUCT_CARD`: `{"product_id": "12345"}`
-            - `TARGET_COLLABORATION_CARD`: `{"invitation_group_id": "1234"}`
-            - `FREE_SAMPLE_CARD`: `{"apply_id": "1234"}`
-            - `IMAGE`: `{"height": "290", "url": "<image_url>", "width": "304"}`
-            - `CRM_TEXT_WITH_IMAGE_CARD`: `{"title": "abc", "content": "efg", "url": "<image_url>"}`
-            - `CRM_TEXT_WITH_PRODUCTS_CARD`: `{"title": "abc", "content": "efg", "product_ids": [123, 456, 789, 222]}`
-            - `NOTIFICATION` or `SYSTEM`: `{"content": "notification/system message"}`
-            - `EMOTICONS`: `{"height": "110", "url": "<image_url>", "width": "110"}`
-        create_time (int | Unset): Message creation time, represented as a Unix timestamp (seconds).
-        sender_id (str | Unset): The message sender im id
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Message ID.
+            conversation_id (str | Unset): Conversation ID to which the message belongs.
+            type_ (str | Unset): Message type. Possible values:
+                - TEXT
+                - PRODUCT_CARD
+                - TARGET_COLLABORATION_CARD
+                - FREE_SAMPLE_CARD
+                - IMAGE
+                - CRM_TEXT_WITH_IMAGE_CARD
+                - CRM_TEXT_WITH_PRODUCTS_CARD
+                - NOTIFICATION
+                - EMOTICONS
+                - SYSTEM
+            content (str | Unset): Message content serialized as a JSON string. The JSON object depends on `type`:
+                - `TEXT`: `{"content": "simple text"}`
+                - `PRODUCT_CARD`: `{"product_id": "12345"}`
+                - `TARGET_COLLABORATION_CARD`: `{"invitation_group_id": "1234"}`
+                - `FREE_SAMPLE_CARD`: `{"apply_id": "1234"}`
+                - `IMAGE`: `{"height": "290", "url": "<image_url>", "width": "304"}`
+                - `CRM_TEXT_WITH_IMAGE_CARD`: `{"title": "abc", "content": "efg", "url": "<image_url>"}`
+                - `CRM_TEXT_WITH_PRODUCTS_CARD`: `{"title": "abc", "content": "efg", "product_ids": [123, 456, 789, 222]}`
+                - `NOTIFICATION` or `SYSTEM`: `{"content": "notification/system message"}`
+                - `EMOTICONS`: `{"height": "110", "url": "<image_url>", "width": "110"}`
+            create_time (int | Unset): Message creation time, represented as a Unix timestamp (seconds).
+            sender_id (str | Unset): The message sender im id
+     """
 
     id: str | Unset = UNSET
     conversation_id: str | Unset = UNSET
@@ -49,6 +57,10 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
     create_time: int | Unset = UNSET
     sender_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -63,9 +75,11 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
 
         sender_id = self.sender_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if conversation_id is not UNSET:
@@ -80,6 +94,8 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
             field_dict["sender_id"] = sender_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -104,6 +120,7 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
             create_time=create_time,
             sender_id=sender_id,
         )
+
 
         get_creator_conversation_messages_response_data_message_message_body.additional_properties = d
         return get_creator_conversation_messages_response_data_message_message_body

@@ -1,64 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_open_collaboration_settings_response_data_open_collaboration_setting_auto_add_product import (
-        GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct,
-    )
+  from ..models.get_open_collaboration_settings_response_data_open_collaboration_setting_auto_add_product import GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct
+
+
+
 
 
 T = TypeVar("T", bound="GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting")
 
 
+
 @_attrs_define
 class GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting:
-    """
-    Attributes:
-        auto_add_product (GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct | Unset):
-    """
+    """ 
+        Attributes:
+            auto_add_product (GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct | Unset):
+     """
 
     auto_add_product: GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_open_collaboration_settings_response_data_open_collaboration_setting_auto_add_product import GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct # noqa: PLC0415
         auto_add_product: dict[str, Any] | Unset = UNSET
         if not isinstance(self.auto_add_product, Unset):
             auto_add_product = self.auto_add_product.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if auto_add_product is not UNSET:
             field_dict["auto_add_product"] = auto_add_product
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_open_collaboration_settings_response_data_open_collaboration_setting_auto_add_product import (
-            GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct,  # noqa: PLC0415
-        )
-
+        from ..models.get_open_collaboration_settings_response_data_open_collaboration_setting_auto_add_product import GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct # noqa: PLC0415
         d = dict(src_dict)
         _auto_add_product = d.pop("auto_add_product", UNSET)
         auto_add_product: GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct | Unset
-        if isinstance(_auto_add_product, Unset):
+        if isinstance(_auto_add_product,  Unset):
             auto_add_product = UNSET
         else:
-            auto_add_product = GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct.from_dict(
-                _auto_add_product
-            )
+            auto_add_product = GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct.from_dict(_auto_add_product)
+
+
+
 
         get_open_collaboration_settings_response_data_open_collaboration_setting = cls(
             auto_add_product=auto_add_product,
         )
+
 
         get_open_collaboration_settings_response_data_open_collaboration_setting.additional_properties = d
         return get_open_collaboration_settings_response_data_open_collaboration_setting

@@ -1,30 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="RemoveShowcaseProductsResponseData")
+
 
 
 @_attrs_define
 class RemoveShowcaseProductsResponseData:
-    """
-    Attributes:
-        code (int | Unset): The success or failure status code returned in API response.
-        message (str | Unset): The success or failure messages are returned in API response. Reasons of failure will be
-            described in the message.
-        request_id (str | Unset): Every request generates a unique request_id for logging purposes.
-    """
+    """ 
+        Attributes:
+            code (int | Unset): The success or failure status code returned in API response.
+            message (str | Unset): The success or failure messages are returned in API response. Reasons of failure will be
+                described in the message.
+            request_id (str | Unset): Every request generates a unique request_id for logging purposes.
+     """
 
     code: int | Unset = UNSET
     message: str | Unset = UNSET
     request_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         code = self.code
@@ -33,9 +45,11 @@ class RemoveShowcaseProductsResponseData:
 
         request_id = self.request_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if message is not UNSET:
@@ -44,6 +58,8 @@ class RemoveShowcaseProductsResponseData:
             field_dict["request_id"] = request_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -59,6 +75,7 @@ class RemoveShowcaseProductsResponseData:
             message=message,
             request_id=request_id,
         )
+
 
         remove_showcase_products_response_data.additional_properties = d
         return remove_showcase_products_response_data

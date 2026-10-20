@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetBestsellingCreatorsAuthorType(StrEnum):
     AFFILIATE = "AFFILIATE"
     ALL = "ALL"

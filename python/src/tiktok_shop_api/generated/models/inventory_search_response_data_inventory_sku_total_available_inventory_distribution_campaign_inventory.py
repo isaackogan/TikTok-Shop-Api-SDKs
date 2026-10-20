@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory")
+
 
 
 @_attrs_define
 class InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventory:
-    """
-    Attributes:
-        quantity (int | Unset): The number of units allocated.
-        campaign_name (str | Unset): The name of the associated campaign.
-    """
+    """ 
+        Attributes:
+            quantity (int | Unset): The number of units allocated.
+            campaign_name (str | Unset): The name of the associated campaign.
+     """
 
     quantity: int | Unset = UNSET
     campaign_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         quantity = self.quantity
 
         campaign_name = self.campaign_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if quantity is not UNSET:
             field_dict["quantity"] = quantity
         if campaign_name is not UNSET:
             field_dict["campaign_name"] = campaign_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution
             quantity=quantity,
             campaign_name=campaign_name,
         )
+
 
         inventory_search_response_data_inventory_sku_total_available_inventory_distribution_campaign_inventory.additional_properties = d
         return inventory_search_response_data_inventory_sku_total_available_inventory_distribution_campaign_inventory

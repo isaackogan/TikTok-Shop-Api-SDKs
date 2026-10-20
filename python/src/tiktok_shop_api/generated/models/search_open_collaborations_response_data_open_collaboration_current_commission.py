@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission")
+
 
 
 @_attrs_define
 class SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission:
-    """
-    Attributes:
-        rate (int | Unset): The commission rate for this product is set by merchants for creators' public promotion.
-            The range of this value is [100, 8000].
-            This value is expressed in 1/10000 increments. For example: 3000 means the actual commission rate is 30.00%, and
-            3555 means 35.55%
-        start_time (int | Unset): The Unix timestamp, in seconds, when the commission rate becomes effective.
-        end_time (int | Unset): The Unix timestamp, in seconds, when the commission rate stops being effective.
-    """
+    """ 
+        Attributes:
+            rate (int | Unset): The commission rate for this product is set by merchants for creators' public promotion.
+                The range of this value is [100, 8000].
+                This value is expressed in 1/10000 increments. For example: 3000 means the actual commission rate is 30.00%, and
+                3555 means 35.55%
+            start_time (int | Unset): The Unix timestamp, in seconds, when the commission rate becomes effective.
+            end_time (int | Unset): The Unix timestamp, in seconds, when the commission rate stops being effective.
+     """
 
     rate: int | Unset = UNSET
     start_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         rate = self.rate
@@ -35,9 +47,11 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission:
 
         end_time = self.end_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rate is not UNSET:
             field_dict["rate"] = rate
         if start_time is not UNSET:
@@ -46,6 +60,8 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission:
             field_dict["end_time"] = end_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,6 +77,7 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationCurrentCommission:
             start_time=start_time,
             end_time=end_time,
         )
+
 
         search_open_collaborations_response_data_open_collaboration_current_commission.additional_properties = d
         return search_open_collaborations_response_data_open_collaboration_current_commission

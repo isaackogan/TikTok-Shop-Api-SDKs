@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateFBTGoodsRequestCreateGoodsDtoListReturnHandlingMethod(StrEnum):
     COLLECT_RETURN_UNITS = "COLLECT_RETURN_UNITS"
     DISPOSAL_WITHOUT_INSPECTION = "DISPOSAL_WITHOUT_INSPECTION"

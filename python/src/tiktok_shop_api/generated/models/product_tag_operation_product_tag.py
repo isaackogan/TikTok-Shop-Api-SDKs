@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ProductTagOperationProductTag(StrEnum):
     AUCTION = "AUCTION"
 

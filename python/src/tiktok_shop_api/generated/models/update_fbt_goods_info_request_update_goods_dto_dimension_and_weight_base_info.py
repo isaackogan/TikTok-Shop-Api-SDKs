@@ -1,44 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info_dimension_unit import (
-    UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit,
-)
-from ..models.update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info_weight_unit import (
-    UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit,
-)
+from ..types import UNSET, Unset
+
+from ..models.update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info_dimension_unit import UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit
+from ..models.update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info_weight_unit import UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit
+
+
+
+
+
 
 T = TypeVar("T", bound="UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo")
 
 
+
 @_attrs_define
 class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo:
-    """
-    Attributes:
-        weight_value (str): Weight of the goods in the specified weight_unit.
-        length_value (str): Length of the goods in the specified dimension_unit.
-        width_value (str): Width of the goods in the specified dimension_unit.
-        height_value (str): Height of the goods in the specified dimension_unit.
-        weight_unit (UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit): Weight unit.
-            Possible values:
-            - MILLIGRAM
-            - GRAM
-            - KILOGRAM
-            - POUND
-            - OUNCE
-        dimension_unit (UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit): Dimension unit.
-            Possible values:
-            - MILLIMETER
-            - CENTIMETER
-            - METER
-            - FOOT
-            - INCH
-    """
+    """ 
+        Attributes:
+            weight_value (str): Weight of the goods in the specified weight_unit.
+            length_value (str): Length of the goods in the specified dimension_unit.
+            width_value (str): Width of the goods in the specified dimension_unit.
+            height_value (str): Height of the goods in the specified dimension_unit.
+            weight_unit (UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit): Weight unit.
+                Possible values:
+                - MILLIGRAM
+                - GRAM
+                - KILOGRAM
+                - POUND
+                - OUNCE
+            dimension_unit (UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit): Dimension unit.
+                Possible values:
+                - MILLIMETER
+                - CENTIMETER
+                - METER
+                - FOOT
+                - INCH
+     """
 
     weight_value: str
     length_value: str
@@ -47,6 +51,10 @@ class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo:
     weight_unit: UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit
     dimension_unit: UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         weight_value = self.weight_value
@@ -61,20 +69,21 @@ class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo:
 
         dimension_unit = self.dimension_unit.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "weight_value": weight_value,
-                "length_value": length_value,
-                "width_value": width_value,
-                "height_value": height_value,
-                "weight_unit": weight_unit,
-                "dimension_unit": dimension_unit,
-            }
-        )
+        field_dict.update({
+            "weight_value": weight_value,
+            "length_value": length_value,
+            "width_value": width_value,
+            "height_value": height_value,
+            "weight_unit": weight_unit,
+            "dimension_unit": dimension_unit,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -89,9 +98,13 @@ class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo:
 
         weight_unit = UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit(d.pop("weight_unit"))
 
-        dimension_unit = UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit(
-            d.pop("dimension_unit")
-        )
+
+
+
+        dimension_unit = UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit(d.pop("dimension_unit"))
+
+
+
 
         update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info = cls(
             weight_value=weight_value,
@@ -101,6 +114,7 @@ class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfo:
             weight_unit=weight_unit,
             dimension_unit=dimension_unit,
         )
+
 
         update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info.additional_properties = d
         return update_fbt_goods_info_request_update_goods_dto_dimension_and_weight_base_info

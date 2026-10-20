@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.mark_buyer_messages_as_read_request import MarkBuyerMessagesAsReadRequest
 from ...models.mark_buyer_messages_as_read_response import MarkBuyerMessagesAsReadResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     conversation_id: str,
     *,
     body: MarkBuyerMessagesAsReadRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/customer_service/202309/conversations/{conversation_id}/messages/read".format(
-            conversation_id=quote(str(conversation_id), safe=""),
-        ),
+        "url": "/customer_service/202309/conversations/{conversation_id}/messages/read".format(conversation_id=quote(str(conversation_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> MarkBuyerMessagesAsReadResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> MarkBuyerMessagesAsReadResponse | None:
     if response.status_code == 200:
         response_200 = MarkBuyerMessagesAsReadResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[MarkBuyerMessagesAsReadResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[MarkBuyerMessagesAsReadResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: MarkBuyerMessagesAsReadRequest | Unset = UNSET,
+
 ) -> Response[MarkBuyerMessagesAsReadResponse]:
-    """Mark Buyer Messages as Read
+    """ Mark Buyer Messages as Read
 
      Use this API to mark all messages sent by the buyer as read. You are suggested to call this API
     before replying to their messages.
@@ -80,11 +89,13 @@ def sync_detailed(
 
     Returns:
         Response[MarkBuyerMessagesAsReadResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -93,14 +104,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: MarkBuyerMessagesAsReadRequest | Unset = UNSET,
+
 ) -> MarkBuyerMessagesAsReadResponse | None:
-    """Mark Buyer Messages as Read
+    """ Mark Buyer Messages as Read
 
      Use this API to mark all messages sent by the buyer as read. You are suggested to call this API
     before replying to their messages.
@@ -115,22 +126,24 @@ def sync(
 
     Returns:
         MarkBuyerMessagesAsReadResponse
-    """
+     """
+
 
     return sync_detailed(
         conversation_id=conversation_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: MarkBuyerMessagesAsReadRequest | Unset = UNSET,
+
 ) -> Response[MarkBuyerMessagesAsReadResponse]:
-    """Mark Buyer Messages as Read
+    """ Mark Buyer Messages as Read
 
      Use this API to mark all messages sent by the buyer as read. You are suggested to call this API
     before replying to their messages.
@@ -145,25 +158,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[MarkBuyerMessagesAsReadResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: MarkBuyerMessagesAsReadRequest | Unset = UNSET,
+
 ) -> MarkBuyerMessagesAsReadResponse | None:
-    """Mark Buyer Messages as Read
+    """ Mark Buyer Messages as Read
 
      Use this API to mark all messages sent by the buyer as read. You are suggested to call this API
     before replying to their messages.
@@ -178,12 +195,12 @@ async def asyncio(
 
     Returns:
         MarkBuyerMessagesAsReadResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            conversation_id=conversation_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        conversation_id=conversation_id,
+client=client,
+body=body,
+
+    )).parsed

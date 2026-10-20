@@ -1,32 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale")
 
 
+
 @_attrs_define
 class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale:
-    """
-    Attributes:
-        gmv (Gmv | Unset):
-        items_sold (int | Unset): The number of items sold directly within this interval.
-        customers (int | Unset): The total number of customers who placed orders within this interval, including
-            customers who made returns or refunds.
-        sku_orders (int | Unset): The total number of paid SKU orders placed within this interval.
-        main_orders (int | Unset): Total number of paid main orders placed. Main orders refer to the single purchase
-            transaction a customer makes.
-    """
+    """ 
+        Attributes:
+            gmv (Gmv | Unset):
+            items_sold (int | Unset): The number of items sold directly within this interval.
+            customers (int | Unset): The total number of customers who placed orders within this interval, including
+                customers who made returns or refunds.
+            sku_orders (int | Unset): The total number of paid SKU orders placed within this interval.
+            main_orders (int | Unset): Total number of paid main orders placed. Main orders refer to the single purchase
+                transaction a customer makes.
+     """
 
     gmv: Gmv | Unset = UNSET
     items_sold: int | Unset = UNSET
@@ -35,7 +42,12 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale:
     main_orders: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
         gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.gmv, Unset):
             gmv = self.gmv.to_dict()
@@ -48,9 +60,11 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale:
 
         main_orders = self.main_orders
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if gmv is not UNSET:
             field_dict["gmv"] = gmv
         if items_sold is not UNSET:
@@ -64,17 +78,21 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
@@ -91,6 +109,7 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalSale:
             sku_orders=sku_orders,
             main_orders=main_orders,
         )
+
 
         get_shop_live_minute_performance_response_data_performance_interval_sale.additional_properties = d
         return get_shop_live_minute_performance_response_data_performance_interval_sale

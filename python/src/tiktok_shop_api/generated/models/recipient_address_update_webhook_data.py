@@ -1,43 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="RecipientAddressUpdateWebhookData")
+
 
 
 @_attrs_define
 class RecipientAddressUpdateWebhookData:
-    """
-    Attributes:
-        order_id (str | Unset): The identification of a TikTok Shop order
-        update_time (int | Unset): The time when recipient address is updated, represented as a Unix timestamp
-            (seconds).
-    """
+    """ 
+        Attributes:
+            order_id (str | Unset): The identification of a TikTok Shop order
+            update_time (int | Unset): The time when recipient address is updated, represented as a Unix timestamp
+                (seconds).
+     """
 
     order_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_id is not UNSET:
             field_dict["order_id"] = order_id
         if update_time is not UNSET:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -50,6 +66,7 @@ class RecipientAddressUpdateWebhookData:
             order_id=order_id,
             update_time=update_time,
         )
+
 
         recipient_address_update_webhook_data.additional_properties = d
         return recipient_address_update_webhook_data

@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="UploadImageForBuyerMessagesResponseData")
+
 
 
 @_attrs_define
 class UploadImageForBuyerMessagesResponseData:
-    """
-    Attributes:
-        url (str | Unset): Image URL
-        width (int | Unset): Width of the uploaded image in pixels.
-        height (int | Unset): Height of the uploaded image in pixels.
-    """
+    """ 
+        Attributes:
+            url (str | Unset): Image URL
+            width (int | Unset): Width of the uploaded image in pixels.
+            height (int | Unset): Height of the uploaded image in pixels.
+     """
 
     url: str | Unset = UNSET
     width: int | Unset = UNSET
     height: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         url = self.url
@@ -32,9 +44,11 @@ class UploadImageForBuyerMessagesResponseData:
 
         height = self.height
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if url is not UNSET:
             field_dict["url"] = url
         if width is not UNSET:
@@ -43,6 +57,8 @@ class UploadImageForBuyerMessagesResponseData:
             field_dict["height"] = height
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class UploadImageForBuyerMessagesResponseData:
             width=width,
             height=height,
         )
+
 
         upload_image_for_buyer_messages_response_data.additional_properties = d
         return upload_image_for_buyer_messages_response_data

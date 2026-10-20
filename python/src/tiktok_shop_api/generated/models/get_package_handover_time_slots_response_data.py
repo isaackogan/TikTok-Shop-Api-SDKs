@@ -1,34 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_package_handover_time_slots_response_data_pickup_slot import (
-        GetPackageHandoverTimeSlotsResponseDataPickupSlot,
-    )
+  from ..models.get_package_handover_time_slots_response_data_pickup_slot import GetPackageHandoverTimeSlotsResponseDataPickupSlot
+
+
+
 
 
 T = TypeVar("T", bound="GetPackageHandoverTimeSlotsResponseData")
 
 
+
 @_attrs_define
 class GetPackageHandoverTimeSlotsResponseData:
-    """
-    Attributes:
-        can_pickup (bool | Unset): Whether this package supports door-to-door collection.
-        can_drop_off (bool | Unset): Whether this package be dropped off at a drop-off location
-        can_van_collection (bool | Unset): Specific to UK. Use this field to determine whether van collection is
-            available.
-        drop_off_point_url (str | Unset): View package drop-off locations  via provided URL.
-        pickup_slots (list[GetPackageHandoverTimeSlotsResponseDataPickupSlot] | Unset): Door-to-door collection time
-            slots. Check `avaliable` to determine whether each time slot can be scheduled.
-    """
+    """ 
+        Attributes:
+            can_pickup (bool | Unset): Whether this package supports door-to-door collection.
+            can_drop_off (bool | Unset): Whether this package be dropped off at a drop-off location
+            can_van_collection (bool | Unset): Specific to UK. Use this field to determine whether van collection is
+                available.
+            drop_off_point_url (str | Unset): View package drop-off locations  via provided URL.
+            pickup_slots (list[GetPackageHandoverTimeSlotsResponseDataPickupSlot] | Unset): Door-to-door collection time
+                slots. Check `avaliable` to determine whether each time slot can be scheduled.
+     """
 
     can_pickup: bool | Unset = UNSET
     can_drop_off: bool | Unset = UNSET
@@ -37,7 +42,12 @@ class GetPackageHandoverTimeSlotsResponseData:
     pickup_slots: list[GetPackageHandoverTimeSlotsResponseDataPickupSlot] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_package_handover_time_slots_response_data_pickup_slot import GetPackageHandoverTimeSlotsResponseDataPickupSlot # noqa: PLC0415
         can_pickup = self.can_pickup
 
         can_drop_off = self.can_drop_off
@@ -53,9 +63,13 @@ class GetPackageHandoverTimeSlotsResponseData:
                 pickup_slots_item = pickup_slots_item_data.to_dict()
                 pickup_slots.append(pickup_slots_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if can_pickup is not UNSET:
             field_dict["can_pickup"] = can_pickup
         if can_drop_off is not UNSET:
@@ -69,12 +83,11 @@ class GetPackageHandoverTimeSlotsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_package_handover_time_slots_response_data_pickup_slot import (
-            GetPackageHandoverTimeSlotsResponseDataPickupSlot,  # noqa: PLC0415
-        )
-
+        from ..models.get_package_handover_time_slots_response_data_pickup_slot import GetPackageHandoverTimeSlotsResponseDataPickupSlot # noqa: PLC0415
         d = dict(src_dict)
         can_pickup = d.pop("can_pickup", UNSET)
 
@@ -91,7 +104,10 @@ class GetPackageHandoverTimeSlotsResponseData:
             for pickup_slots_item_data in _pickup_slots:
                 pickup_slots_item = GetPackageHandoverTimeSlotsResponseDataPickupSlot.from_dict(pickup_slots_item_data)
 
+
+
                 pickup_slots.append(pickup_slots_item)
+
 
         get_package_handover_time_slots_response_data = cls(
             can_pickup=can_pickup,
@@ -100,6 +116,7 @@ class GetPackageHandoverTimeSlotsResponseData:
             drop_off_point_url=drop_off_point_url,
             pickup_slots=pickup_slots,
         )
+
 
         get_package_handover_time_slots_response_data.additional_properties = d
         return get_package_handover_time_slots_response_data

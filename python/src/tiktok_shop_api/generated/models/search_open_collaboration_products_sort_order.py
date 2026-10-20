@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchOpenCollaborationProductsSortOrder(StrEnum):
     ASC = "ASC"
     DESC = "DESC"

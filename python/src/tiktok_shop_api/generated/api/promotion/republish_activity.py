@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.republish_activity_request import RepublishActivityRequest
 from ...models.republish_activity_response import RepublishActivityResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     activity_id: str,
     *,
     body: RepublishActivityRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/promotion/202607/activities/{activity_id}/republish".format(
-            activity_id=quote(str(activity_id), safe=""),
-        ),
+        "url": "/promotion/202607/activities/{activity_id}/republish".format(activity_id=quote(str(activity_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> RepublishActivityResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> RepublishActivityResponse | None:
     if response.status_code == 200:
         response_200 = RepublishActivityResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[RepublishActivityResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[RepublishActivityResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RepublishActivityRequest | Unset = UNSET,
+
 ) -> Response[RepublishActivityResponse]:
-    """Republish Activity
+    """ Republish Activity
 
      Use this API to republish a product discount activity or a flash deal activity that expired or was
     deactivated within the last 7 days. This API only supports FIXED_PRICE, FLASHSALE, and
@@ -85,11 +94,13 @@ def sync_detailed(
 
     Returns:
         Response[RepublishActivityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -98,14 +109,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RepublishActivityRequest | Unset = UNSET,
+
 ) -> RepublishActivityResponse | None:
-    """Republish Activity
+    """ Republish Activity
 
      Use this API to republish a product discount activity or a flash deal activity that expired or was
     deactivated within the last 7 days. This API only supports FIXED_PRICE, FLASHSALE, and
@@ -125,22 +136,24 @@ def sync(
 
     Returns:
         RepublishActivityResponse
-    """
+     """
+
 
     return sync_detailed(
         activity_id=activity_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RepublishActivityRequest | Unset = UNSET,
+
 ) -> Response[RepublishActivityResponse]:
-    """Republish Activity
+    """ Republish Activity
 
      Use this API to republish a product discount activity or a flash deal activity that expired or was
     deactivated within the last 7 days. This API only supports FIXED_PRICE, FLASHSALE, and
@@ -160,25 +173,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[RepublishActivityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: RepublishActivityRequest | Unset = UNSET,
+
 ) -> RepublishActivityResponse | None:
-    """Republish Activity
+    """ Republish Activity
 
      Use this API to republish a product discount activity or a flash deal activity that expired or was
     deactivated within the last 7 days. This API only supports FIXED_PRICE, FLASHSALE, and
@@ -198,12 +215,12 @@ async def asyncio(
 
     Returns:
         RepublishActivityResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            activity_id=activity_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        activity_id=activity_id,
+client=client,
+body=body,
+
+    )).parsed

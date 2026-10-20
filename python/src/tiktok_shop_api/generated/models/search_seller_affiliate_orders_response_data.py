@@ -1,41 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_seller_affiliate_orders_response_data_order import SearchSellerAffiliateOrdersResponseDataOrder
+  from ..models.search_seller_affiliate_orders_response_data_order import SearchSellerAffiliateOrdersResponseDataOrder
+
+
+
 
 
 T = TypeVar("T", bound="SearchSellerAffiliateOrdersResponseData")
 
 
+
 @_attrs_define
 class SearchSellerAffiliateOrdersResponseData:
-    """
-    Attributes:
-        orders (list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset): The orders represented by the SKU-order
-            records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can
-            contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages.
-            Aggregate SKU entries with the same order ID across all retrieved pages.
-        next_page_token (str | Unset): An opaque token for retrieving the next page. To keep the effective time filter
-            fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this
-            value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same
-            `program_id` value or omission. An empty string indicates that there is no next page.
-        total_count (int | Unset): The total number of sku orders that matches the query conditions.
-    """
+    """ 
+        Attributes:
+            orders (list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset): The orders represented by the SKU-order
+                records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can
+                contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages.
+                Aggregate SKU entries with the same order ID across all retrieved pages.
+            next_page_token (str | Unset): An opaque token for retrieving the next page. To keep the effective time filter
+                fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this
+                value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same
+                `program_id` value or omission. An empty string indicates that there is no next page.
+            total_count (int | Unset): The total number of sku orders that matches the query conditions.
+     """
 
     orders: list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_seller_affiliate_orders_response_data_order import SearchSellerAffiliateOrdersResponseDataOrder # noqa: PLC0415
         orders: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.orders, Unset):
             orders = []
@@ -43,13 +55,17 @@ class SearchSellerAffiliateOrdersResponseData:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
 
+
+
         next_page_token = self.next_page_token
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if orders is not UNSET:
             field_dict["orders"] = orders
         if next_page_token is not UNSET:
@@ -59,12 +75,11 @@ class SearchSellerAffiliateOrdersResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_seller_affiliate_orders_response_data_order import (
-            SearchSellerAffiliateOrdersResponseDataOrder,  # noqa: PLC0415
-        )
-
+        from ..models.search_seller_affiliate_orders_response_data_order import SearchSellerAffiliateOrdersResponseDataOrder # noqa: PLC0415
         d = dict(src_dict)
         _orders = d.pop("orders", UNSET)
         orders: list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset = UNSET
@@ -73,7 +88,10 @@ class SearchSellerAffiliateOrdersResponseData:
             for orders_item_data in _orders:
                 orders_item = SearchSellerAffiliateOrdersResponseDataOrder.from_dict(orders_item_data)
 
+
+
                 orders.append(orders_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -84,6 +102,7 @@ class SearchSellerAffiliateOrdersResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         search_seller_affiliate_orders_response_data.additional_properties = d
         return search_seller_affiliate_orders_response_data

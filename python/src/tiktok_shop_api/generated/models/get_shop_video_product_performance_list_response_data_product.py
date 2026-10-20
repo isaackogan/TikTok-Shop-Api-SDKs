@@ -1,36 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
-    from ..models.gpm import Gpm
+  from ..models.gmv import Gmv
+  from ..models.gpm import Gpm
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoProductPerformanceListResponseDataProduct")
 
 
+
 @_attrs_define
 class GetShopVideoProductPerformanceListResponseDataProduct:
-    """
-    Attributes:
-        ctr (str | Unset): Ratio of product clicks to product impressions in raw decimal format.
-        customers (int | Unset): Number of customers who purchased the product.
-        daily_avg_buyers (str | Unset): Average number of buyers per day for the current product.
-        gmv (Gmv | Unset):
-        gpm (Gpm | Unset):
-        id (str | Unset): The ID of the product promoted in the video.
-        name (str | Unset): The name of the product promoted in the video.
-        product_clicks (int | Unset): Number of product clicks.
-        product_impressions (int | Unset): Number of product impressions.
-        units_sold (int | Unset): Number of units sold for the current product.
-    """
+    """ 
+        Attributes:
+            ctr (str | Unset): Ratio of product clicks to product impressions in raw decimal format.
+            customers (int | Unset): Number of customers who purchased the product.
+            daily_avg_buyers (str | Unset): Average number of buyers per day for the current product.
+            gmv (Gmv | Unset):
+            gpm (Gpm | Unset):
+            id (str | Unset): The ID of the product promoted in the video.
+            name (str | Unset): The name of the product promoted in the video.
+            product_clicks (int | Unset): Number of product clicks.
+            product_impressions (int | Unset): Number of product impressions.
+            units_sold (int | Unset): Number of units sold for the current product.
+     """
 
     ctr: str | Unset = UNSET
     customers: int | Unset = UNSET
@@ -44,7 +51,13 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
     units_sold: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
         ctr = self.ctr
 
         customers = self.customers
@@ -69,9 +82,11 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
         units_sold = self.units_sold
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if ctr is not UNSET:
             field_dict["ctr"] = ctr
         if customers is not UNSET:
@@ -95,11 +110,12 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-        from ..models.gpm import Gpm  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
         d = dict(src_dict)
         ctr = d.pop("ctr", UNSET)
 
@@ -109,17 +125,23 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
 
+
+
+
         _gpm = d.pop("gpm", UNSET)
         gpm: Gpm | Unset
-        if isinstance(_gpm, Unset):
+        if isinstance(_gpm,  Unset):
             gpm = UNSET
         else:
             gpm = Gpm.from_dict(_gpm)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -143,6 +165,7 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
             product_impressions=product_impressions,
             units_sold=units_sold,
         )
+
 
         get_shop_video_product_performance_list_response_data_product.additional_properties = d
         return get_shop_video_product_performance_list_response_data_product

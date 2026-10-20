@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse")
+
 
 
 @_attrs_define
 class GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse:
-    """
-    Attributes:
-        warehouse_id (str | Unset): The associated warehouse ID.
-        region (str | Unset): The country where the warehouse is located.
-    """
+    """ 
+        Attributes:
+            warehouse_id (str | Unset): The associated warehouse ID.
+            region (str | Unset): The country where the warehouse is located.
+     """
 
     warehouse_id: str | Unset = UNSET
     region: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         warehouse_id = self.warehouse_id
 
         region = self.region
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if warehouse_id is not UNSET:
             field_dict["warehouse_id"] = warehouse_id
         if region is not UNSET:
             field_dict["region"] = region
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetGlobalListingRulesResponseDataInventoryRuleAssociatedWarehouse:
             warehouse_id=warehouse_id,
             region=region,
         )
+
 
         get_global_listing_rules_response_data_inventory_rule_associated_warehouse.additional_properties = d
         return get_global_listing_rules_response_data_inventory_rule_associated_warehouse

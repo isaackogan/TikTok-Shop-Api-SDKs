@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ProductCategoryChangeWebhookData")
+
 
 
 @_attrs_define
 class ProductCategoryChangeWebhookData:
-    """
-    Attributes:
-        product_id (str | Unset): ID of the product promoted in the creator's video.
-        previous_category_id (str | Unset): The category ID of the product before the category update.
-        current_category_id (str | Unset): The category ID of the product after the category update.
-        update_time (int | Unset): The time when this category update happens, represented by Unix timestamp.
-    """
+    """ 
+        Attributes:
+            product_id (str | Unset): ID of the product promoted in the creator's video.
+            previous_category_id (str | Unset): The category ID of the product before the category update.
+            current_category_id (str | Unset): The category ID of the product after the category update.
+            update_time (int | Unset): The time when this category update happens, represented by Unix timestamp.
+     """
 
     product_id: str | Unset = UNSET
     previous_category_id: str | Unset = UNSET
     current_category_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
@@ -36,9 +48,11 @@ class ProductCategoryChangeWebhookData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_id is not UNSET:
             field_dict["product_id"] = product_id
         if previous_category_id is not UNSET:
@@ -49,6 +63,8 @@ class ProductCategoryChangeWebhookData:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class ProductCategoryChangeWebhookData:
             current_category_id=current_category_id,
             update_time=update_time,
         )
+
 
         product_category_change_webhook_data.additional_properties = d
         return product_category_change_webhook_data

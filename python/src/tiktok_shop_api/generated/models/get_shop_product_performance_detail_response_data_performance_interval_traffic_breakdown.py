@@ -1,48 +1,60 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic import (
-        GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic,
-    )
+  from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown:
-    """
-    Attributes:
-        traffic (GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset):
-        content_type (str | Unset): Traffic breakdown content type.
-            Possible values:
-            - VIDEO: Video content.
-            - LIVE: Live stream content.
-            - PRODUCT_CARD: Product card.
-    """
+    """ 
+        Attributes:
+            traffic (GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset):
+            content_type (str | Unset): Traffic breakdown content type.
+                Possible values:
+                - VIDEO: Video content.
+                - LIVE: Live stream content.
+                - PRODUCT_CARD: Product card.
+     """
 
     traffic: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset = UNSET
     content_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic # noqa: PLC0415
         traffic: dict[str, Any] | Unset = UNSET
         if not isinstance(self.traffic, Unset):
             traffic = self.traffic.to_dict()
 
         content_type = self.content_type
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if traffic is not UNSET:
             field_dict["traffic"] = traffic
         if content_type is not UNSET:
@@ -50,21 +62,21 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic import (
-            GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic # noqa: PLC0415
         d = dict(src_dict)
         _traffic = d.pop("traffic", UNSET)
         traffic: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset
-        if isinstance(_traffic, Unset):
+        if isinstance(_traffic,  Unset):
             traffic = UNSET
         else:
-            traffic = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic.from_dict(
-                _traffic
-            )
+            traffic = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic.from_dict(_traffic)
+
+
+
 
         content_type = d.pop("content_type", UNSET)
 
@@ -72,6 +84,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
             traffic=traffic,
             content_type=content_type,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown

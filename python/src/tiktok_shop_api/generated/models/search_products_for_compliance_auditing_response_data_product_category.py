@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchProductsForComplianceAuditingResponseDataProductCategory")
+
 
 
 @_attrs_define
 class SearchProductsForComplianceAuditingResponseDataProductCategory:
-    """
-    Attributes:
-        id (str | Unset): The ID of the category of this product.
-        name (str | Unset): The name of the category in the country where the shop operates.
-        level (int | Unset): The level of the category in the country where the shop operates.
-        parent_id (str | Unset): The parent category ID.
-            For the root category, the parent ID is 0
-        is_leaf (bool | Unset): A flag to indicate if the category is a leaf category.
+    """ 
+        Attributes:
+            id (str | Unset): The ID of the category of this product.
+            name (str | Unset): The name of the category in the country where the shop operates.
+            level (int | Unset): The level of the category in the country where the shop operates.
+            parent_id (str | Unset): The parent category ID.
+                For the root category, the parent ID is 0
+            is_leaf (bool | Unset): A flag to indicate if the category is a leaf category.
 
-            Note: You can only create or edit products that belong to a leaf category.
-    """
+                Note: You can only create or edit products that belong to a leaf category.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -31,6 +39,10 @@ class SearchProductsForComplianceAuditingResponseDataProductCategory:
     parent_id: str | Unset = UNSET
     is_leaf: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -43,9 +55,11 @@ class SearchProductsForComplianceAuditingResponseDataProductCategory:
 
         is_leaf = self.is_leaf
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -58,6 +72,8 @@ class SearchProductsForComplianceAuditingResponseDataProductCategory:
             field_dict["is_leaf"] = is_leaf
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +95,7 @@ class SearchProductsForComplianceAuditingResponseDataProductCategory:
             parent_id=parent_id,
             is_leaf=is_leaf,
         )
+
 
         search_products_for_compliance_auditing_response_data_product_category.additional_properties = d
         return search_products_for_compliance_auditing_response_data_product_category

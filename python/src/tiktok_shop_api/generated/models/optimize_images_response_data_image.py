@@ -1,39 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="OptimizeImagesResponseDataImage")
+
 
 
 @_attrs_define
 class OptimizeImagesResponseDataImage:
-    """
-    Attributes:
-        height (int | Unset): The height of the original image, in pixels.
-        width (int | Unset): The width of the original image, in pixels.
-        original_uri (str | Unset): The original URI of the image to be optimized.
-        original_url (str | Unset): The original URL of the image to be optimized.
-        optimized_uri (str | Unset): The URI of the image after optimization.
-            Pass this value when creating or editing a product to associate the image with the product.
+    """ 
+        Attributes:
+            height (int | Unset): The height of the original image, in pixels.
+            width (int | Unset): The width of the original image, in pixels.
+            original_uri (str | Unset): The original URI of the image to be optimized.
+            original_url (str | Unset): The original URL of the image to be optimized.
+            optimized_uri (str | Unset): The URI of the image after optimization.
+                Pass this value when creating or editing a product to associate the image with the product.
 
-            Applicable only if `optimize_status`is `SUCCESS`.
-        optimized_url (str | Unset): The URL of the image after optimization.
-            Use this URL in product descriptions by embedding it within an HTML `<img>` tag.
+                Applicable only if `optimize_status`is `SUCCESS`.
+            optimized_url (str | Unset): The URL of the image after optimization.
+                Use this URL in product descriptions by embedding it within an HTML `<img>` tag.
 
-            Applicable only if `optimize_status`is `SUCCESS`.
-        optimize_status (str | Unset): The optimization status.
-            Possible values:
-            - SUCCESS: The image has been successfully optimized.
-            - IGNORE: The image already has a white background, so no optimization was applied.
-            - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again
-            to obtain the final optimization status.
-    """
+                Applicable only if `optimize_status`is `SUCCESS`.
+            optimize_status (str | Unset): The optimization status.
+                Possible values:
+                - SUCCESS: The image has been successfully optimized.
+                - IGNORE: The image already has a white background, so no optimization was applied.
+                - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again
+                to obtain the final optimization status.
+     """
 
     height: int | Unset = UNSET
     width: int | Unset = UNSET
@@ -43,6 +51,10 @@ class OptimizeImagesResponseDataImage:
     optimized_url: str | Unset = UNSET
     optimize_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -59,9 +71,11 @@ class OptimizeImagesResponseDataImage:
 
         optimize_status = self.optimize_status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if width is not UNSET:
@@ -78,6 +92,8 @@ class OptimizeImagesResponseDataImage:
             field_dict["optimize_status"] = optimize_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -105,6 +121,7 @@ class OptimizeImagesResponseDataImage:
             optimized_url=optimized_url,
             optimize_status=optimize_status,
         )
+
 
         optimize_images_response_data_image.additional_properties = d
         return optimize_images_response_data_image

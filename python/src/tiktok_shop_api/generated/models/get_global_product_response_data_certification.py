@@ -1,34 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_global_product_response_data_certification_file import (
-        GetGlobalProductResponseDataCertificationFile,
-    )
-    from ..models.get_global_product_response_data_certification_image import (
-        GetGlobalProductResponseDataCertificationImage,
-    )
+  from ..models.get_global_product_response_data_certification_file import GetGlobalProductResponseDataCertificationFile
+  from ..models.get_global_product_response_data_certification_image import GetGlobalProductResponseDataCertificationImage
+
+
+
 
 
 T = TypeVar("T", bound="GetGlobalProductResponseDataCertification")
 
 
+
 @_attrs_define
 class GetGlobalProductResponseDataCertification:
-    """
-    Attributes:
-        id (str | Unset): The ID to identify the type of certification required for the product category.
-        title (str | Unset): The title of the certification type.
-        files (list[GetGlobalProductResponseDataCertificationFile] | Unset): A list of certification related files.
-        images (list[GetGlobalProductResponseDataCertificationImage] | Unset): A list of certification related images.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The ID to identify the type of certification required for the product category.
+            title (str | Unset): The title of the certification type.
+            files (list[GetGlobalProductResponseDataCertificationFile] | Unset): A list of certification related files.
+            images (list[GetGlobalProductResponseDataCertificationImage] | Unset): A list of certification related images.
+     """
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -36,7 +39,13 @@ class GetGlobalProductResponseDataCertification:
     images: list[GetGlobalProductResponseDataCertificationImage] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_global_product_response_data_certification_file import GetGlobalProductResponseDataCertificationFile # noqa: PLC0415
+        from ..models.get_global_product_response_data_certification_image import GetGlobalProductResponseDataCertificationImage # noqa: PLC0415
         id = self.id
 
         title = self.title
@@ -48,6 +57,8 @@ class GetGlobalProductResponseDataCertification:
                 files_item = files_item_data.to_dict()
                 files.append(files_item)
 
+
+
         images: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.images, Unset):
             images = []
@@ -55,9 +66,13 @@ class GetGlobalProductResponseDataCertification:
                 images_item = images_item_data.to_dict()
                 images.append(images_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if title is not UNSET:
@@ -69,15 +84,12 @@ class GetGlobalProductResponseDataCertification:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_global_product_response_data_certification_file import (
-            GetGlobalProductResponseDataCertificationFile,  # noqa: PLC0415
-        )
-        from ..models.get_global_product_response_data_certification_image import (
-            GetGlobalProductResponseDataCertificationImage,  # noqa: PLC0415
-        )
-
+        from ..models.get_global_product_response_data_certification_file import GetGlobalProductResponseDataCertificationFile # noqa: PLC0415
+        from ..models.get_global_product_response_data_certification_image import GetGlobalProductResponseDataCertificationImage # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -90,7 +102,10 @@ class GetGlobalProductResponseDataCertification:
             for files_item_data in _files:
                 files_item = GetGlobalProductResponseDataCertificationFile.from_dict(files_item_data)
 
+
+
                 files.append(files_item)
+
 
         _images = d.pop("images", UNSET)
         images: list[GetGlobalProductResponseDataCertificationImage] | Unset = UNSET
@@ -99,7 +114,10 @@ class GetGlobalProductResponseDataCertification:
             for images_item_data in _images:
                 images_item = GetGlobalProductResponseDataCertificationImage.from_dict(images_item_data)
 
+
+
                 images.append(images_item)
+
 
         get_global_product_response_data_certification = cls(
             id=id,
@@ -107,6 +125,7 @@ class GetGlobalProductResponseDataCertification:
             files=files,
             images=images,
         )
+
 
         get_global_product_response_data_certification.additional_properties = d
         return get_global_product_response_data_certification

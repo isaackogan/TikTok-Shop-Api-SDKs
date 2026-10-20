@@ -1,55 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_gmv_per_hour import (
-        GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour,
-    )
-    from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_watch_gpm import (
-        GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm,
-    )
-    from ..models.show_gpm import ShowGpm
+  from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_gmv_per_hour import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour
+  from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_watch_gpm import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm
+  from ..models.show_gpm import ShowGpm
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic")
 
 
+
 @_attrs_define
 class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
-    """
-    Attributes:
-        acu (int | Unset): Average concurrent users.
-        avg_viewing_duration (int | Unset): Average viewing duration in seconds.
-        avg_viewing_duration_per_viewer (int | Unset): Average viewing duration per viewer in seconds.
-        ctor (str | Unset): Click-to-order rate. Expressed as a raw decimal string.
-        ctor_sku_order (str | Unset): Ratio of attributed SKU orders to product clicks. Expressed as a raw decimal
-            string.
-        ctr (str | Unset): Click-through rate. Expressed as a raw decimal string.
-        gmv_per_hour (GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour | Unset):
-        impressions (int | Unset): Number of LIVE impressions.
-        impressions_per_hour (int | Unset): Average number of impressions per hour.
-        live_ctr (str | Unset): Ratio of product clicks to product impressions. Expressed as a raw decimal string.
-        order_rate_sku_orders (str | Unset): Ratio of attributed SKU orders to views. Expressed as a raw decimal string.
-        over_1m_live_viewing_rate (str | Unset): Ratio of views lasting longer than one minute. Expressed as a raw
-            decimal string.
-        over_1m_views (int | Unset): Number of views lasting longer than one minute.
-        pcu (int | Unset): Peak concurrent users.
-        product_clicks (int | Unset): Number of product clicks.
-        product_impressions (int | Unset): Number of product impressions.
-        products_added (int | Unset): Number of products added to the LIVE session.
-        show_gpm (ShowGpm | Unset):
-        tap_through_rate (str | Unset): Ratio of LIVE views to LIVE impressions. Expressed as a raw decimal string.
-        viewers (int | Unset): Number of unique viewers.
-        views (int | Unset): Number of LIVE views.
-        watch_gpm (GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm | Unset):
-    """
+    """ 
+        Attributes:
+            acu (int | Unset): Average concurrent users.
+            avg_viewing_duration (int | Unset): Average viewing duration in seconds.
+            avg_viewing_duration_per_viewer (int | Unset): Average viewing duration per viewer in seconds.
+            ctor (str | Unset): Click-to-order rate. Expressed as a raw decimal string.
+            ctor_sku_order (str | Unset): Ratio of attributed SKU orders to product clicks. Expressed as a raw decimal
+                string.
+            ctr (str | Unset): Click-through rate. Expressed as a raw decimal string.
+            gmv_per_hour (GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour | Unset):
+            impressions (int | Unset): Number of LIVE impressions.
+            impressions_per_hour (int | Unset): Average number of impressions per hour.
+            live_ctr (str | Unset): Ratio of product clicks to product impressions. Expressed as a raw decimal string.
+            order_rate_sku_orders (str | Unset): Ratio of attributed SKU orders to views. Expressed as a raw decimal string.
+            over_1m_live_viewing_rate (str | Unset): Ratio of views lasting longer than one minute. Expressed as a raw
+                decimal string.
+            over_1m_views (int | Unset): Number of views lasting longer than one minute.
+            pcu (int | Unset): Peak concurrent users.
+            product_clicks (int | Unset): Number of product clicks.
+            product_impressions (int | Unset): Number of product impressions.
+            products_added (int | Unset): Number of products added to the LIVE session.
+            show_gpm (ShowGpm | Unset):
+            tap_through_rate (str | Unset): Ratio of LIVE views to LIVE impressions. Expressed as a raw decimal string.
+            viewers (int | Unset): Number of unique viewers.
+            views (int | Unset): Number of LIVE views.
+            watch_gpm (GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm | Unset):
+     """
 
     acu: int | Unset = UNSET
     avg_viewing_duration: int | Unset = UNSET
@@ -75,7 +78,14 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
     watch_gpm: GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_gmv_per_hour import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour # noqa: PLC0415
+        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_watch_gpm import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm # noqa: PLC0415
+        from ..models.show_gpm import ShowGpm # noqa: PLC0415
         acu = self.acu
 
         avg_viewing_duration = self.avg_viewing_duration
@@ -126,9 +136,11 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
         if not isinstance(self.watch_gpm, Unset):
             watch_gpm = self.watch_gpm.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if acu is not UNSET:
             field_dict["acu"] = acu
         if avg_viewing_duration is not UNSET:
@@ -176,16 +188,13 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_gmv_per_hour import (
-            GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour,  # noqa: PLC0415
-        )
-        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_watch_gpm import (
-            GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm,  # noqa: PLC0415
-        )
-        from ..models.show_gpm import ShowGpm  # noqa: PLC0415
-
+        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_gmv_per_hour import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour # noqa: PLC0415
+        from ..models.get_shop_live_performance_list_response_data_live_stream_session_traffic_watch_gpm import GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm # noqa: PLC0415
+        from ..models.show_gpm import ShowGpm # noqa: PLC0415
         d = dict(src_dict)
         acu = d.pop("acu", UNSET)
 
@@ -201,12 +210,13 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
 
         _gmv_per_hour = d.pop("gmv_per_hour", UNSET)
         gmv_per_hour: GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour | Unset
-        if isinstance(_gmv_per_hour, Unset):
+        if isinstance(_gmv_per_hour,  Unset):
             gmv_per_hour = UNSET
         else:
-            gmv_per_hour = GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour.from_dict(
-                _gmv_per_hour
-            )
+            gmv_per_hour = GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficGmvPerHour.from_dict(_gmv_per_hour)
+
+
+
 
         impressions = d.pop("impressions", UNSET)
 
@@ -230,10 +240,13 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
 
         _show_gpm = d.pop("show_gpm", UNSET)
         show_gpm: ShowGpm | Unset
-        if isinstance(_show_gpm, Unset):
+        if isinstance(_show_gpm,  Unset):
             show_gpm = UNSET
         else:
             show_gpm = ShowGpm.from_dict(_show_gpm)
+
+
+
 
         tap_through_rate = d.pop("tap_through_rate", UNSET)
 
@@ -243,10 +256,13 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
 
         _watch_gpm = d.pop("watch_gpm", UNSET)
         watch_gpm: GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm | Unset
-        if isinstance(_watch_gpm, Unset):
+        if isinstance(_watch_gpm,  Unset):
             watch_gpm = UNSET
         else:
             watch_gpm = GetShopLIVEPerformanceListResponseDataLiveStreamSessionTrafficWatchGpm.from_dict(_watch_gpm)
+
+
+
 
         get_shop_live_performance_list_response_data_live_stream_session_traffic = cls(
             acu=acu,
@@ -272,6 +288,7 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionTraffic:
             views=views,
             watch_gpm=watch_gpm,
         )
+
 
         get_shop_live_performance_list_response_data_live_stream_session_traffic.additional_properties = d
         return get_shop_live_performance_list_response_data_live_stream_session_traffic

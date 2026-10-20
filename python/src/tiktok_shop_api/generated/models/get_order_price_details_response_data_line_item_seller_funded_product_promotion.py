@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion")
+
 
 
 @_attrs_define
 class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
-    """
-    Attributes:
-        activity_id (str | Unset): A unique ID that identifies different promotion activities.
-        discount_amount (str | Unset): Discount amount of this activity
-        discount_type (str | Unset): Discount type of this activity. Enumerations:
-            - COUPON
-            - ACTIVITY
-    """
+    """ 
+        Attributes:
+            activity_id (str | Unset): A unique ID that identifies different promotion activities.
+            discount_amount (str | Unset): Discount amount of this activity
+            discount_type (str | Unset): Discount type of this activity. Enumerations:
+                - COUPON
+                - ACTIVITY
+     """
 
     activity_id: str | Unset = UNSET
     discount_amount: str | Unset = UNSET
     discount_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         activity_id = self.activity_id
@@ -34,9 +46,11 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
 
         discount_type = self.discount_type
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if discount_amount is not UNSET:
@@ -45,6 +59,8 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
             field_dict["discount_type"] = discount_type
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -60,6 +76,7 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
             discount_amount=discount_amount,
             discount_type=discount_type,
         )
+
 
         get_order_price_details_response_data_line_item_seller_funded_product_promotion.additional_properties = d
         return get_order_price_details_response_data_line_item_seller_funded_product_promotion

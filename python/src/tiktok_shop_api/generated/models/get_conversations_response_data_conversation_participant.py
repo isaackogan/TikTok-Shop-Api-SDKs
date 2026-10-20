@@ -1,38 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetConversationsResponseDataConversationParticipant")
+
 
 
 @_attrs_define
 class GetConversationsResponseDataConversationParticipant:
-    """
-    Attributes:
-        im_user_id (str | Unset): Participant's ID, in IM system. This ID is used in IM system and can not be used to
-            query orders. To query orders, use `user_id` instead.
-        avatar (str | Unset): Participant's avatar URL.
-        user_id (str | Unset): Participant's ID.
-        role (str | Unset): Participant's role.
-            Possible enumerations:
-            - `BUYER`
-            - `SHOP`
-            - `CUSTOMER_SERVICE`
-        nickname (str | Unset): Participant's nickname.
-        buyer_platform (str | Unset): Which platform is the buyer from.
-            This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia.
-            Possible enumerations:
-            - TIKTOK_SHOP
-            - TOKOPEDIA
-            You cannot send platform-specific content to the buyer from a different platform. For example, when you send a
-            product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
-    """
+    """ 
+        Attributes:
+            im_user_id (str | Unset): Participant's ID, in IM system. This ID is used in IM system and can not be used to
+                query orders. To query orders, use `user_id` instead.
+            avatar (str | Unset): Participant's avatar URL.
+            user_id (str | Unset): Participant's ID.
+            role (str | Unset): Participant's role.
+                Possible enumerations:
+                - `BUYER`
+                - `SHOP`
+                - `CUSTOMER_SERVICE`
+            nickname (str | Unset): Participant's nickname.
+            buyer_platform (str | Unset): Which platform is the buyer from.
+                This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia.
+                Possible enumerations:
+                - TIKTOK_SHOP
+                - TOKOPEDIA
+                You cannot send platform-specific content to the buyer from a different platform. For example, when you send a
+                product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
+     """
 
     im_user_id: str | Unset = UNSET
     avatar: str | Unset = UNSET
@@ -41,6 +49,10 @@ class GetConversationsResponseDataConversationParticipant:
     nickname: str | Unset = UNSET
     buyer_platform: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         im_user_id = self.im_user_id
@@ -55,9 +67,11 @@ class GetConversationsResponseDataConversationParticipant:
 
         buyer_platform = self.buyer_platform
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if im_user_id is not UNSET:
             field_dict["im_user_id"] = im_user_id
         if avatar is not UNSET:
@@ -72,6 +86,8 @@ class GetConversationsResponseDataConversationParticipant:
             field_dict["buyer_platform"] = buyer_platform
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -96,6 +112,7 @@ class GetConversationsResponseDataConversationParticipant:
             nickname=nickname,
             buyer_platform=buyer_platform,
         )
+
 
         get_conversations_response_data_conversation_participant.additional_properties = d
         return get_conversations_response_data_conversation_participant

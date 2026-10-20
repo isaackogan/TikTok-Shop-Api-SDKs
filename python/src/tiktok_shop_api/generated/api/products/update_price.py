@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.update_price_request import UpdatePriceRequest
 from ...models.update_price_response import UpdatePriceResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     body: UpdatePriceRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202309/products/{product_id}/prices/update".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202309/products/{product_id}/prices/update".format(product_id=quote(str(product_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,9 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UpdatePriceResponse | None:
     if response.status_code == 200:
         response_200 = UpdatePriceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -59,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePriceRequest,
+
 ) -> Response[UpdatePriceResponse]:
-    """Update Price
+    """ Update Price
 
      Update the price of multiple SKUs belonging to a product in the `ACTIVATE` status and not included
     in any ongoing promotions.
@@ -76,11 +87,13 @@ def sync_detailed(
 
     Returns:
         Response[UpdatePriceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -89,14 +102,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePriceRequest,
+
 ) -> UpdatePriceResponse | None:
-    """Update Price
+    """ Update Price
 
      Update the price of multiple SKUs belonging to a product in the `ACTIVATE` status and not included
     in any ongoing promotions.
@@ -112,22 +125,24 @@ def sync(
 
     Returns:
         UpdatePriceResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePriceRequest,
+
 ) -> Response[UpdatePriceResponse]:
-    """Update Price
+    """ Update Price
 
      Update the price of multiple SKUs belonging to a product in the `ACTIVATE` status and not included
     in any ongoing promotions.
@@ -143,25 +158,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[UpdatePriceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePriceRequest,
+
 ) -> UpdatePriceResponse | None:
-    """Update Price
+    """ Update Price
 
      Update the price of multiple SKUs belonging to a product in the `ACTIVATE` status and not included
     in any ongoing promotions.
@@ -177,12 +196,12 @@ async def asyncio(
 
     Returns:
         UpdatePriceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+body=body,
+
+    )).parsed

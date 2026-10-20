@@ -1,31 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_video_product_performance_list_response_data import (
-        GetShopVideoProductPerformanceListResponseData,
-    )
+  from ..models.get_shop_video_product_performance_list_response_data import GetShopVideoProductPerformanceListResponseData
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoProductPerformanceListResponse")
 
 
+
 @_attrs_define
 class GetShopVideoProductPerformanceListResponse:
-    """
-    Attributes:
-        code (int | Unset): Status code; 0 means success.
-        message (str | Unset): Success or failure message.
-        request_id (str | Unset): Request log ID.
-        data (GetShopVideoProductPerformanceListResponseData | Unset):
-    """
+    """ 
+        Attributes:
+            code (int | Unset): Status code; 0 means success.
+            message (str | Unset): Success or failure message.
+            request_id (str | Unset): Request log ID.
+            data (GetShopVideoProductPerformanceListResponseData | Unset):
+     """
 
     code: int | Unset = UNSET
     message: str | Unset = UNSET
@@ -33,7 +38,12 @@ class GetShopVideoProductPerformanceListResponse:
     data: GetShopVideoProductPerformanceListResponseData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_video_product_performance_list_response_data import GetShopVideoProductPerformanceListResponseData # noqa: PLC0415
         code = self.code
 
         message = self.message
@@ -44,9 +54,11 @@ class GetShopVideoProductPerformanceListResponse:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if message is not UNSET:
@@ -58,12 +70,11 @@ class GetShopVideoProductPerformanceListResponse:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_video_product_performance_list_response_data import (
-            GetShopVideoProductPerformanceListResponseData,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_video_product_performance_list_response_data import GetShopVideoProductPerformanceListResponseData # noqa: PLC0415
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
@@ -73,10 +84,13 @@ class GetShopVideoProductPerformanceListResponse:
 
         _data = d.pop("data", UNSET)
         data: GetShopVideoProductPerformanceListResponseData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = GetShopVideoProductPerformanceListResponseData.from_dict(_data)
+
+
+
 
         get_shop_video_product_performance_list_response = cls(
             code=code,
@@ -84,6 +98,7 @@ class GetShopVideoProductPerformanceListResponse:
             request_id=request_id,
             data=data,
         )
+
 
         get_shop_video_product_performance_list_response.additional_properties = d
         return get_shop_video_product_performance_list_response

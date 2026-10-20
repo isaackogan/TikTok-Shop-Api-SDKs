@@ -1,35 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_bestselling_products_response_data_product_product_image import (
-        GetBestsellingProductsResponseDataProductProductImage,
-    )
+  from ..models.get_bestselling_products_response_data_product_product_image import GetBestsellingProductsResponseDataProductProductImage
+
+
+
 
 
 T = TypeVar("T", bound="GetBestsellingProductsResponseDataProduct")
 
 
+
 @_attrs_define
 class GetBestsellingProductsResponseDataProduct:
-    """
-    Attributes:
-        rank (int | Unset): GMV rank of the product.
-        gmv_range (str | Unset): GMV range of the product, in the currency specified by currency.
-        id (str | Unset): Product ID
-        name (str | Unset): Product name
-        rating (str | Unset): Product rating in history
-        product_image (GetBestsellingProductsResponseDataProductProductImage | Unset):
-        shop_name (str | Unset): The TikTok Shop name.
-        shop_id (str | Unset): The ID of the TikTok Shop associated with the product.
-    """
+    """ 
+        Attributes:
+            rank (int | Unset): GMV rank of the product.
+            gmv_range (str | Unset): GMV range of the product, in the currency specified by currency.
+            id (str | Unset): Product ID
+            name (str | Unset): Product name
+            rating (str | Unset): Product rating in history
+            product_image (GetBestsellingProductsResponseDataProductProductImage | Unset):
+            shop_name (str | Unset): The TikTok Shop name.
+            shop_id (str | Unset): The ID of the TikTok Shop associated with the product.
+     """
 
     rank: int | Unset = UNSET
     gmv_range: str | Unset = UNSET
@@ -41,7 +46,12 @@ class GetBestsellingProductsResponseDataProduct:
     shop_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_bestselling_products_response_data_product_product_image import GetBestsellingProductsResponseDataProductProductImage # noqa: PLC0415
         rank = self.rank
 
         gmv_range = self.gmv_range
@@ -60,9 +70,11 @@ class GetBestsellingProductsResponseDataProduct:
 
         shop_id = self.shop_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rank is not UNSET:
             field_dict["rank"] = rank
         if gmv_range is not UNSET:
@@ -82,12 +94,11 @@ class GetBestsellingProductsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_bestselling_products_response_data_product_product_image import (
-            GetBestsellingProductsResponseDataProductProductImage,  # noqa: PLC0415
-        )
-
+        from ..models.get_bestselling_products_response_data_product_product_image import GetBestsellingProductsResponseDataProductProductImage # noqa: PLC0415
         d = dict(src_dict)
         rank = d.pop("rank", UNSET)
 
@@ -101,10 +112,13 @@ class GetBestsellingProductsResponseDataProduct:
 
         _product_image = d.pop("product_image", UNSET)
         product_image: GetBestsellingProductsResponseDataProductProductImage | Unset
-        if isinstance(_product_image, Unset):
+        if isinstance(_product_image,  Unset):
             product_image = UNSET
         else:
             product_image = GetBestsellingProductsResponseDataProductProductImage.from_dict(_product_image)
+
+
+
 
         shop_name = d.pop("shop_name", UNSET)
 
@@ -120,6 +134,7 @@ class GetBestsellingProductsResponseDataProduct:
             shop_name=shop_name,
             shop_id=shop_id,
         )
+
 
         get_bestselling_products_response_data_product.additional_properties = d
         return get_bestselling_products_response_data_product

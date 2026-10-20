@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopSkuPerformanceListProductStatusFilter(StrEnum):
     ALL = "ALL"
     INACTIVE = "INACTIVE"

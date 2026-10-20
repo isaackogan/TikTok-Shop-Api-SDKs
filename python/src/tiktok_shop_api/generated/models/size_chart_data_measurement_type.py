@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SizeChartDataMeasurementType(StrEnum):
     BODY_MEASUREMENTS = "BODY_MEASUREMENTS"
     GENERIC_MEASUREMENTS = "GENERIC_MEASUREMENTS"

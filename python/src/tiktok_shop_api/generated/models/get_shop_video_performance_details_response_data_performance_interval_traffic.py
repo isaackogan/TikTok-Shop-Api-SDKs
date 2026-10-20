@@ -1,27 +1,35 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic")
+
 
 
 @_attrs_define
 class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic:
-    """
-    Attributes:
-        views (int | Unset): Number of times the requested video was watched during the interval. Repeat views by the
-            same user are counted separately.
-        new_followers (int | Unset): The number of times a user followed you after watching a video
-        shares (int | Unset): The cumulative number of times users shared the video
-        comments (int | Unset): The cumulative number of times users left comments on the video
-        likes (int | Unset): The cumulative number of times users liked the video
-    """
+    """ 
+        Attributes:
+            views (int | Unset): Number of times the requested video was watched during the interval. Repeat views by the
+                same user are counted separately.
+            new_followers (int | Unset): The number of times a user followed you after watching a video
+            shares (int | Unset): The cumulative number of times users shared the video
+            comments (int | Unset): The cumulative number of times users left comments on the video
+            likes (int | Unset): The cumulative number of times users liked the video
+     """
 
     views: int | Unset = UNSET
     new_followers: int | Unset = UNSET
@@ -29,6 +37,10 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic:
     comments: int | Unset = UNSET
     likes: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         views = self.views
@@ -41,9 +53,11 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic:
 
         likes = self.likes
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if views is not UNSET:
             field_dict["views"] = views
         if new_followers is not UNSET:
@@ -56,6 +70,8 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic:
             field_dict["likes"] = likes
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -77,6 +93,7 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalTraffic:
             comments=comments,
             likes=likes,
         )
+
 
         get_shop_video_performance_details_response_data_performance_interval_traffic.additional_properties = d
         return get_shop_video_performance_details_response_data_performance_interval_traffic

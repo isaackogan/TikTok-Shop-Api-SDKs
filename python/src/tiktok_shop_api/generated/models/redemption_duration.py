@@ -1,36 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="RedemptionDuration")
+
 
 
 @_attrs_define
 class RedemptionDuration:
-    """
-    Attributes:
-        type_ (str | Unset): Values:
-            - `ABSOLUTE`: the redemption period starts from `start_time` and ends at `end_time`.
-            - `RELATIVE`: the redemption period starts from the time the coupon is claimed and lasts for `relative_time`.
-        start_time (int | Unset): The UNIX timestamp, in seconds, at which the redemption period starts, if `type ==
-            'ABSOLUTE'`.
-        end_time (int | Unset): The UNIX timestamp, in seconds, at which the redemption period ends, if `type ==
-            'ABSOLUTE'`.
-        relative_time (int | Unset): The number of days after coupon claim time for which a coupon is valid to be
-            redeemed, `type = 'RELATIVE'`.
-    """
+    """ 
+        Attributes:
+            type_ (str | Unset): Values:
+                - `ABSOLUTE`: the redemption period starts from `start_time` and ends at `end_time`.
+                - `RELATIVE`: the redemption period starts from the time the coupon is claimed and lasts for `relative_time`.
+            start_time (int | Unset): The UNIX timestamp, in seconds, at which the redemption period starts, if `type ==
+                'ABSOLUTE'`.
+            end_time (int | Unset): The UNIX timestamp, in seconds, at which the redemption period ends, if `type ==
+                'ABSOLUTE'`.
+            relative_time (int | Unset): The number of days after coupon claim time for which a coupon is valid to be
+                redeemed, `type = 'RELATIVE'`.
+     """
 
     type_: str | Unset = UNSET
     start_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
     relative_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         type_ = self.type_
@@ -41,9 +53,11 @@ class RedemptionDuration:
 
         relative_time = self.relative_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if start_time is not UNSET:
@@ -54,6 +68,8 @@ class RedemptionDuration:
             field_dict["relative_time"] = relative_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -72,6 +88,7 @@ class RedemptionDuration:
             end_time=end_time,
             relative_time=relative_time,
         )
+
 
         redemption_duration.additional_properties = d
         return redemption_duration

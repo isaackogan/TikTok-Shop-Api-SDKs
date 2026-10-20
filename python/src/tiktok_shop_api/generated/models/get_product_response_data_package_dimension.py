@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetProductResponseDataPackageDimension")
+
 
 
 @_attrs_define
 class GetProductResponseDataPackageDimension:
-    """
-    Attributes:
-        height (str | Unset): The package height.
-        length (str | Unset): The package length.
-        unit (str | Unset): The unit for the package dimensions.
-        width (str | Unset): The package width.
-    """
+    """ 
+        Attributes:
+            height (str | Unset): The package height.
+            length (str | Unset): The package length.
+            unit (str | Unset): The unit for the package dimensions.
+            width (str | Unset): The package width.
+     """
 
     height: str | Unset = UNSET
     length: str | Unset = UNSET
     unit: str | Unset = UNSET
     width: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -36,9 +48,11 @@ class GetProductResponseDataPackageDimension:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if length is not UNSET:
@@ -49,6 +63,8 @@ class GetProductResponseDataPackageDimension:
             field_dict["width"] = width
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class GetProductResponseDataPackageDimension:
             unit=unit,
             width=width,
         )
+
 
         get_product_response_data_package_dimension.additional_properties = d
         return get_product_response_data_package_dimension

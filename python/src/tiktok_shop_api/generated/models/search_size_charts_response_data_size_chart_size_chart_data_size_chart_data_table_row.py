@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row_cell import (
-        SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell,
-    )
+  from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row_cell import SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell
+
+
+
 
 
 T = TypeVar("T", bound="SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRow")
 
 
+
 @_attrs_define
 class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRow:
-    """
-    Attributes:
-        cells (list[SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell] | Unset): Cells aligned
-            by index with table.headers.
-    """
+    """ 
+        Attributes:
+            cells (list[SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell] | Unset): Cells aligned
+                by index with table.headers.
+     """
 
     cells: list[SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row_cell import SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell # noqa: PLC0415
         cells: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.cells, Unset):
             cells = []
@@ -36,35 +46,40 @@ class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRow:
                 cells_item = cells_item_data.to_dict()
                 cells.append(cells_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if cells is not UNSET:
             field_dict["cells"] = cells
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row_cell import (
-            SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell,  # noqa: PLC0415
-        )
-
+        from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row_cell import SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell # noqa: PLC0415
         d = dict(src_dict)
         _cells = d.pop("cells", UNSET)
         cells: list[SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell] | Unset = UNSET
         if _cells is not UNSET:
             cells = []
             for cells_item_data in _cells:
-                cells_item = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell.from_dict(
-                    cells_item_data
-                )
+                cells_item = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableRowCell.from_dict(cells_item_data)
+
+
 
                 cells.append(cells_item)
+
 
         search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row = cls(
             cells=cells,
         )
+
 
         search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row.additional_properties = d
         return search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_table_row

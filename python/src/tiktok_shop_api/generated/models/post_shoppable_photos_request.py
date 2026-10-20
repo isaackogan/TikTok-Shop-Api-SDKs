@@ -1,34 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo
-    from ..models.post_shoppable_photos_request_photos_info import PostShoppablePhotosRequestPhotosInfo
+  from ..models.post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo
+  from ..models.post_shoppable_photos_request_photos_info import PostShoppablePhotosRequestPhotosInfo
+
+
+
 
 
 T = TypeVar("T", bound="PostShoppablePhotosRequest")
 
 
+
 @_attrs_define
 class PostShoppablePhotosRequest:
-    """
-    Attributes:
-        photos_info (list[PostShoppablePhotosRequestPhotosInfo]): Photo Info Metadata
-        music_id (str | Unset): Music ID
-        title (str | Unset): Post title:The maximum length is 5000 in UTF-16 runes. If not specified, the ticket post
-            will not have any captions.   - You can add relevant hashtags to increase discoverability. The format is simply
-            # followed by the topic name. Multiple hashtags are supported,e.g.,#humor#BFCM
-        link_info (PostShoppablePhotosRequestLinkInfo | Unset):
-        is_ai_generated (bool | Unset): Field to indicate whether the content was AI generated. Marking this field as
-            true will display a tag indicating this post as an AI generated post.
-    """
+    """ 
+        Attributes:
+            photos_info (list[PostShoppablePhotosRequestPhotosInfo]): Photo Info Metadata
+            music_id (str | Unset): Music ID
+            title (str | Unset): Post title:The maximum length is 5000 in UTF-16 runes. If not specified, the ticket post
+                will not have any captions.   - You can add relevant hashtags to increase discoverability. The format is simply
+                # followed by the topic name. Multiple hashtags are supported,e.g.,#humor#BFCM
+            link_info (PostShoppablePhotosRequestLinkInfo | Unset):
+            is_ai_generated (bool | Unset): Field to indicate whether the content was AI generated. Marking this field as
+                true will display a tag indicating this post as an AI generated post.
+     """
 
     photos_info: list[PostShoppablePhotosRequestPhotosInfo]
     music_id: str | Unset = UNSET
@@ -37,11 +44,19 @@ class PostShoppablePhotosRequest:
     is_ai_generated: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo # noqa: PLC0415
+        from ..models.post_shoppable_photos_request_photos_info import PostShoppablePhotosRequestPhotosInfo # noqa: PLC0415
         photos_info = []
         for photos_info_item_data in self.photos_info:
             photos_info_item = photos_info_item_data.to_dict()
             photos_info.append(photos_info_item)
+
+
 
         music_id = self.music_id
 
@@ -53,13 +68,12 @@ class PostShoppablePhotosRequest:
 
         is_ai_generated = self.is_ai_generated
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "photos_info": photos_info,
-            }
-        )
+        field_dict.update({
+            "photos_info": photos_info,
+        })
         if music_id is not UNSET:
             field_dict["music_id"] = music_id
         if title is not UNSET:
@@ -71,20 +85,22 @@ class PostShoppablePhotosRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo  # noqa: PLC0415
-        from ..models.post_shoppable_photos_request_photos_info import (
-            PostShoppablePhotosRequestPhotosInfo,  # noqa: PLC0415
-        )
-
+        from ..models.post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo # noqa: PLC0415
+        from ..models.post_shoppable_photos_request_photos_info import PostShoppablePhotosRequestPhotosInfo # noqa: PLC0415
         d = dict(src_dict)
         photos_info = []
         _photos_info = d.pop("photos_info")
-        for photos_info_item_data in _photos_info:
+        for photos_info_item_data in (_photos_info):
             photos_info_item = PostShoppablePhotosRequestPhotosInfo.from_dict(photos_info_item_data)
 
+
+
             photos_info.append(photos_info_item)
+
 
         music_id = d.pop("music_id", UNSET)
 
@@ -92,10 +108,13 @@ class PostShoppablePhotosRequest:
 
         _link_info = d.pop("link_info", UNSET)
         link_info: PostShoppablePhotosRequestLinkInfo | Unset
-        if isinstance(_link_info, Unset):
+        if isinstance(_link_info,  Unset):
             link_info = UNSET
         else:
             link_info = PostShoppablePhotosRequestLinkInfo.from_dict(_link_info)
+
+
+
 
         is_ai_generated = d.pop("is_ai_generated", UNSET)
 
@@ -106,6 +125,7 @@ class PostShoppablePhotosRequest:
             link_info=link_info,
             is_ai_generated=is_ai_generated,
         )
+
 
         post_shoppable_photos_request.additional_properties = d
         return post_shoppable_photos_request

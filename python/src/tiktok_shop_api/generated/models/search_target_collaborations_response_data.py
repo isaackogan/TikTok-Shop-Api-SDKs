@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_target_collaborations_response_data_target_collaboration import (
-        SearchTargetCollaborationsResponseDataTargetCollaboration,
-    )
+  from ..models.search_target_collaborations_response_data_target_collaboration import SearchTargetCollaborationsResponseDataTargetCollaboration
+
+
+
 
 
 T = TypeVar("T", bound="SearchTargetCollaborationsResponseData")
 
 
+
 @_attrs_define
 class SearchTargetCollaborationsResponseData:
-    """
-    Attributes:
-        total_count (int | Unset): Total number of target collaborations that match the request across all pages.
-        next_page_token (str | Unset): Cursor for the next page request.
-        target_collaborations (list[SearchTargetCollaborationsResponseDataTargetCollaboration] | Unset): The basic
-            information of target collaboration which creators can view in Targeted Invitation on TikTok EC Center.
-    """
+    """ 
+        Attributes:
+            total_count (int | Unset): Total number of target collaborations that match the request across all pages.
+            next_page_token (str | Unset): Cursor for the next page request.
+            target_collaborations (list[SearchTargetCollaborationsResponseDataTargetCollaboration] | Unset): The basic
+                information of target collaboration which creators can view in Targeted Invitation on TikTok EC Center.
+     """
 
     total_count: int | Unset = UNSET
     next_page_token: str | Unset = UNSET
     target_collaborations: list[SearchTargetCollaborationsResponseDataTargetCollaboration] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_target_collaborations_response_data_target_collaboration import SearchTargetCollaborationsResponseDataTargetCollaboration # noqa: PLC0415
         total_count = self.total_count
 
         next_page_token = self.next_page_token
@@ -44,9 +54,13 @@ class SearchTargetCollaborationsResponseData:
                 target_collaborations_item = target_collaborations_item_data.to_dict()
                 target_collaborations.append(target_collaborations_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_count is not UNSET:
             field_dict["total_count"] = total_count
         if next_page_token is not UNSET:
@@ -56,12 +70,11 @@ class SearchTargetCollaborationsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_target_collaborations_response_data_target_collaboration import (
-            SearchTargetCollaborationsResponseDataTargetCollaboration,  # noqa: PLC0415
-        )
-
+        from ..models.search_target_collaborations_response_data_target_collaboration import SearchTargetCollaborationsResponseDataTargetCollaboration # noqa: PLC0415
         d = dict(src_dict)
         total_count = d.pop("total_count", UNSET)
 
@@ -72,17 +85,19 @@ class SearchTargetCollaborationsResponseData:
         if _target_collaborations is not UNSET:
             target_collaborations = []
             for target_collaborations_item_data in _target_collaborations:
-                target_collaborations_item = SearchTargetCollaborationsResponseDataTargetCollaboration.from_dict(
-                    target_collaborations_item_data
-                )
+                target_collaborations_item = SearchTargetCollaborationsResponseDataTargetCollaboration.from_dict(target_collaborations_item_data)
+
+
 
                 target_collaborations.append(target_collaborations_item)
+
 
         search_target_collaborations_response_data = cls(
             total_count=total_count,
             next_page_token=next_page_token,
             target_collaborations=target_collaborations,
         )
+
 
         search_target_collaborations_response_data.additional_properties = d
         return search_target_collaborations_response_data

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PartialEditProductRequestSkuPriceCurrency(StrEnum):
     BRL = "BRL"
     CZK = "CZK"

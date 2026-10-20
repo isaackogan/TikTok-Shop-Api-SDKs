@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoDimensionUnit(StrEnum):
     CENTIMETER = "CENTIMETER"
     FOOT = "FOOT"

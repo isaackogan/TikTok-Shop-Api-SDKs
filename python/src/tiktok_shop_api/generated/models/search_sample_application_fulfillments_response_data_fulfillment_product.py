@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchSampleApplicationFulfillmentsResponseDataFulfillmentProduct")
+
 
 
 @_attrs_define
 class SearchSampleApplicationFulfillmentsResponseDataFulfillmentProduct:
-    """
-    Attributes:
-        id (str | Unset): The product identifier.
-        main_image_url (str | Unset): The cover image url of product.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product identifier.
+            main_image_url (str | Unset): The cover image url of product.
+     """
 
     id: str | Unset = UNSET
     main_image_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         main_image_url = self.main_image_url
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if main_image_url is not UNSET:
             field_dict["main_image_url"] = main_image_url
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class SearchSampleApplicationFulfillmentsResponseDataFulfillmentProduct:
             id=id,
             main_image_url=main_image_url,
         )
+
 
         search_sample_application_fulfillments_response_data_fulfillment_product.additional_properties = d
         return search_sample_application_fulfillments_response_data_fulfillment_product

@@ -1,36 +1,41 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+import datetime
+
 if TYPE_CHECKING:
-    from ..models.get_shop_video_product_performance_list_response_data_product import (
-        GetShopVideoProductPerformanceListResponseDataProduct,
-    )
+  from ..models.get_shop_video_product_performance_list_response_data_product import GetShopVideoProductPerformanceListResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoProductPerformanceListResponseData")
 
 
+
 @_attrs_define
 class GetShopVideoProductPerformanceListResponseData:
-    """
-    Attributes:
-        latest_available_date (datetime.date | Unset): Latest date in local timezone where data is ready (ISO 8601
-            format).
-        next_page_token (str | Unset): Page token for the next page request. If this value is nonempty, pass it as
-            `page_token` in the next request and reuse the same `video_id`, `start_date_ge`, `end_date_lt`, `sort_field`,
-            `sort_order`, `currency`, and `page_size` values. An empty value means that there are no more pages.
-        products (list[GetShopVideoProductPerformanceListResponseDataProduct] | Unset): List of product performance
-            metrics.
-        total_count (int | Unset): Total number of products matching the request across all pages.
-    """
+    """ 
+        Attributes:
+            latest_available_date (datetime.date | Unset): Latest date in local timezone where data is ready (ISO 8601
+                format).
+            next_page_token (str | Unset): Page token for the next page request. If this value is nonempty, pass it as
+                `page_token` in the next request and reuse the same `video_id`, `start_date_ge`, `end_date_lt`, `sort_field`,
+                `sort_order`, `currency`, and `page_size` values. An empty value means that there are no more pages.
+            products (list[GetShopVideoProductPerformanceListResponseDataProduct] | Unset): List of product performance
+                metrics.
+            total_count (int | Unset): Total number of products matching the request across all pages.
+     """
 
     latest_available_date: datetime.date | Unset = UNSET
     next_page_token: str | Unset = UNSET
@@ -38,7 +43,12 @@ class GetShopVideoProductPerformanceListResponseData:
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_video_product_performance_list_response_data_product import GetShopVideoProductPerformanceListResponseDataProduct # noqa: PLC0415
         latest_available_date: str | Unset = UNSET
         if not isinstance(self.latest_available_date, Unset):
             latest_available_date = self.latest_available_date.isoformat()
@@ -52,11 +62,15 @@ class GetShopVideoProductPerformanceListResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         total_count = self.total_count
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if latest_available_date is not UNSET:
             field_dict["latest_available_date"] = latest_available_date
         if next_page_token is not UNSET:
@@ -68,19 +82,21 @@ class GetShopVideoProductPerformanceListResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_video_product_performance_list_response_data_product import (
-            GetShopVideoProductPerformanceListResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_video_product_performance_list_response_data_product import GetShopVideoProductPerformanceListResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         _latest_available_date = d.pop("latest_available_date", UNSET)
         latest_available_date: datetime.date | Unset
-        if isinstance(_latest_available_date, Unset):
+        if isinstance(_latest_available_date,  Unset):
             latest_available_date = UNSET
         else:
             latest_available_date = datetime.date.fromisoformat(_latest_available_date)
+
+
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -91,7 +107,10 @@ class GetShopVideoProductPerformanceListResponseData:
             for products_item_data in _products:
                 products_item = GetShopVideoProductPerformanceListResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         total_count = d.pop("total_count", UNSET)
 
@@ -101,6 +120,7 @@ class GetShopVideoProductPerformanceListResponseData:
             products=products,
             total_count=total_count,
         )
+
 
         get_shop_video_product_performance_list_response_data.additional_properties = d
         return get_shop_video_product_performance_list_response_data

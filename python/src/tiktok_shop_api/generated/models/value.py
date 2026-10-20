@@ -1,48 +1,64 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Value")
+
 
 
 @_attrs_define
 class Value:
-    """
-    Attributes:
-        id (str | Unset): The ID of a built-in product attribute value, retrieved from the [Get Attributes
-            API](https://partner.tiktokshop.com/docv2/page/6509c5784a0bb702c0561cc8).
-        name (str | Unset): A self-defined custom product attribute value if the built-in values do not satisfy your
-            needs. The system will auto-generate an ID after listing.
+    """ 
+        Attributes:
+            id (str | Unset): The ID of a built-in product attribute value, retrieved from the [Get Attributes
+                API](https://partner.tiktokshop.com/docv2/page/6509c5784a0bb702c0561cc8).
+            name (str | Unset): A self-defined custom product attribute value if the built-in values do not satisfy your
+                needs. The system will auto-generate an ID after listing.
 
-            **Note**:
-            - No duplicates allowed under the same attribute.
-            - Max length: 2000 characters
-    """
+                **Note**:
+                - No duplicates allowed under the same attribute.
+                - Max length: 2000 characters
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
             field_dict["name"] = name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -55,6 +71,7 @@ class Value:
             id=id,
             name=name,
         )
+
 
         value.additional_properties = d
         return value

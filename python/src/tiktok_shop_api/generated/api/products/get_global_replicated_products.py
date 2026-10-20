@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_global_replicated_products_response import GetGlobalReplicatedProductsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202507/products/{product_id}/replicated_products".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202507/products/{product_id}/replicated_products".format(product_id=quote(str(product_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetGlobalReplicatedProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetGlobalReplicatedProductsResponse | None:
     if response.status_code == 200:
         response_200 = GetGlobalReplicatedProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetGlobalReplicatedProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetGlobalReplicatedProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetGlobalReplicatedProductsResponse]:
-    """Get Global Replicated Products
+    """ Get Global Replicated Products
 
      Retrieves the globally associated replicas in other markets if the product has been replicated
     through local replication.
@@ -68,10 +77,12 @@ def sync_detailed(
 
     Returns:
         Response[GetGlobalReplicatedProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -80,13 +91,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetGlobalReplicatedProductsResponse | None:
-    """Get Global Replicated Products
+    """ Get Global Replicated Products
 
      Retrieves the globally associated replicas in other markets if the product has been replicated
     through local replication.
@@ -101,20 +112,22 @@ def sync(
 
     Returns:
         GetGlobalReplicatedProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetGlobalReplicatedProductsResponse]:
-    """Get Global Replicated Products
+    """ Get Global Replicated Products
 
      Retrieves the globally associated replicas in other markets if the product has been replicated
     through local replication.
@@ -129,23 +142,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetGlobalReplicatedProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetGlobalReplicatedProductsResponse | None:
-    """Get Global Replicated Products
+    """ Get Global Replicated Products
 
      Retrieves the globally associated replicas in other markets if the product has been replicated
     through local replication.
@@ -160,11 +177,11 @@ async def asyncio(
 
     Returns:
         GetGlobalReplicatedProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+
+    )).parsed

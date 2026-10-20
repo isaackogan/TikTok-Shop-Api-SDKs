@@ -1,43 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCategoryRulesResponseDataFee")
+
 
 
 @_attrs_define
 class GetCategoryRulesResponseDataFee:
-    """
-    Attributes:
-        type_ (str | Unset): The type of fee.
-            Possible values: PFAND
-        is_required (bool | Unset): A flag to indicate whether information about the fee is required.
-    """
+    """ 
+        Attributes:
+            type_ (str | Unset): The type of fee.
+                Possible values: PFAND
+            is_required (bool | Unset): A flag to indicate whether information about the fee is required.
+     """
 
     type_: str | Unset = UNSET
     is_required: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         type_ = self.type_
 
         is_required = self.is_required
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if is_required is not UNSET:
             field_dict["is_required"] = is_required
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -50,6 +66,7 @@ class GetCategoryRulesResponseDataFee:
             type_=type_,
             is_required=is_required,
         )
+
 
         get_category_rules_response_data_fee.additional_properties = d
         return get_category_rules_response_data_fee

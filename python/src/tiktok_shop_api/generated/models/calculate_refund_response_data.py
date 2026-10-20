@@ -1,60 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.calculate_refund_response_data_order_refund_amount import CalculateRefundResponseDataOrderRefundAmount
+  from ..models.calculate_refund_response_data_order_refund_amount import CalculateRefundResponseDataOrderRefundAmount
+
+
+
 
 
 T = TypeVar("T", bound="CalculateRefundResponseData")
 
 
+
 @_attrs_define
 class CalculateRefundResponseData:
-    """
-    Attributes:
-        order_refund_amount (CalculateRefundResponseDataOrderRefundAmount | Unset):
-    """
+    """ 
+        Attributes:
+            order_refund_amount (CalculateRefundResponseDataOrderRefundAmount | Unset):
+     """
 
     order_refund_amount: CalculateRefundResponseDataOrderRefundAmount | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.calculate_refund_response_data_order_refund_amount import CalculateRefundResponseDataOrderRefundAmount # noqa: PLC0415
         order_refund_amount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.order_refund_amount, Unset):
             order_refund_amount = self.order_refund_amount.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_refund_amount is not UNSET:
             field_dict["order_refund_amount"] = order_refund_amount
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.calculate_refund_response_data_order_refund_amount import (
-            CalculateRefundResponseDataOrderRefundAmount,  # noqa: PLC0415
-        )
-
+        from ..models.calculate_refund_response_data_order_refund_amount import CalculateRefundResponseDataOrderRefundAmount # noqa: PLC0415
         d = dict(src_dict)
         _order_refund_amount = d.pop("order_refund_amount", UNSET)
         order_refund_amount: CalculateRefundResponseDataOrderRefundAmount | Unset
-        if isinstance(_order_refund_amount, Unset):
+        if isinstance(_order_refund_amount,  Unset):
             order_refund_amount = UNSET
         else:
             order_refund_amount = CalculateRefundResponseDataOrderRefundAmount.from_dict(_order_refund_amount)
 
+
+
+
         calculate_refund_response_data = cls(
             order_refund_amount=order_refund_amount,
         )
+
 
         calculate_refund_response_data.additional_properties = d
         return calculate_refund_response_data

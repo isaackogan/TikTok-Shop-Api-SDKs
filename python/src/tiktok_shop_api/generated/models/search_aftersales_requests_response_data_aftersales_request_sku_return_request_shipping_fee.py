@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee")
+
 
 
 @_attrs_define
 class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee:
-    """
-    Attributes:
-        seller_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee seller paid.
-        buyer_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee buyer paid.
-        platform_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee platform paid.
-    """
+    """ 
+        Attributes:
+            seller_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee seller paid.
+            buyer_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee buyer paid.
+            platform_paid_return_shipping_fee_amount (str | Unset): The amount of return shipping fee platform paid.
+     """
 
     seller_paid_return_shipping_fee_amount: str | Unset = UNSET
     buyer_paid_return_shipping_fee_amount: str | Unset = UNSET
     platform_paid_return_shipping_fee_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         seller_paid_return_shipping_fee_amount = self.seller_paid_return_shipping_fee_amount
@@ -32,9 +44,11 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShipp
 
         platform_paid_return_shipping_fee_amount = self.platform_paid_return_shipping_fee_amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if seller_paid_return_shipping_fee_amount is not UNSET:
             field_dict["seller_paid_return_shipping_fee_amount"] = seller_paid_return_shipping_fee_amount
         if buyer_paid_return_shipping_fee_amount is not UNSET:
@@ -43,6 +57,8 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShipp
             field_dict["platform_paid_return_shipping_fee_amount"] = platform_paid_return_shipping_fee_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShipp
             buyer_paid_return_shipping_fee_amount=buyer_paid_return_shipping_fee_amount,
             platform_paid_return_shipping_fee_amount=platform_paid_return_shipping_fee_amount,
         )
+
 
         search_aftersales_requests_response_data_aftersales_request_sku_return_request_shipping_fee.additional_properties = d
         return search_aftersales_requests_response_data_aftersales_request_sku_return_request_shipping_fee

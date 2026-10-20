@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetConversationMessagesSortOrder(StrEnum):
     ASC = "ASC"
     DESC = "DESC"

@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem")
+
 
 
 @_attrs_define
 class GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem:
-    """
-    Attributes:
-        actual_deliver_time (int | Unset): Actual deliver time. Unix timestamp in seconds.
-        expect_deliver_time (int | Unset): Expected deliver time. Unix timestamp in seconds.
-        order_id (str | Unset): Order ID.
-        product_name (str | Unset): Product name.
-        sku_id (str | Unset): SKU ID.
-    """
+    """ 
+        Attributes:
+            actual_deliver_time (int | Unset): Actual deliver time. Unix timestamp in seconds.
+            expect_deliver_time (int | Unset): Expected deliver time. Unix timestamp in seconds.
+            order_id (str | Unset): Order ID.
+            product_name (str | Unset): Product name.
+            sku_id (str | Unset): SKU ID.
+     """
 
     actual_deliver_time: int | Unset = UNSET
     expect_deliver_time: int | Unset = UNSET
@@ -28,6 +36,10 @@ class GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem:
     product_name: str | Unset = UNSET
     sku_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         actual_deliver_time = self.actual_deliver_time
@@ -40,9 +52,11 @@ class GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem:
 
         sku_id = self.sku_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if actual_deliver_time is not UNSET:
             field_dict["actual_deliver_time"] = actual_deliver_time
         if expect_deliver_time is not UNSET:
@@ -55,6 +69,8 @@ class GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem:
             field_dict["sku_id"] = sku_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem:
             product_name=product_name,
             sku_id=sku_id,
         )
+
 
         get_sps_metric_problem_details_response_data_otdr_problem_order_item.additional_properties = d
         return get_sps_metric_problem_details_response_data_otdr_problem_order_item

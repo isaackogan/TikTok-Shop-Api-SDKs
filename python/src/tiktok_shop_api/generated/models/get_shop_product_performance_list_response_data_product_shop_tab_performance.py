@@ -1,35 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_list_response_data_product_shop_tab_performance_shop_tab_gmv import (
-        GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv,
-    )
+  from ..models.get_shop_product_performance_list_response_data_product_shop_tab_performance_shop_tab_gmv import GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseDataProductShopTabPerformance")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
-    """
-    Attributes:
-        shop_tab_product_impressions (int | Unset): Number of product impressions from Shop Tab.
-        shop_tab_product_clicks (int | Unset): Number of product clicks from Shop Tab.
-        unique_shop_tab_product_clicks (int | Unset): Number of unique product clicks from Shop Tab.
-        estimated_shop_tab_customers (int | Unset): Estimated number of customers from Shop Tab.
-        shop_tab_ctr (str | Unset): Click-through rate from Shop Tab.
-        shop_tab_ctor_sku (str | Unset): Click-to-order rate (SKU level) from Shop Tab.
-        shop_tab_gmv (GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv | Unset):
-        shop_tab_sold_items (int | Unset): Items sold via shop tab.
-    """
+    """ 
+        Attributes:
+            shop_tab_product_impressions (int | Unset): Number of product impressions from Shop Tab.
+            shop_tab_product_clicks (int | Unset): Number of product clicks from Shop Tab.
+            unique_shop_tab_product_clicks (int | Unset): Number of unique product clicks from Shop Tab.
+            estimated_shop_tab_customers (int | Unset): Estimated number of customers from Shop Tab.
+            shop_tab_ctr (str | Unset): Click-through rate from Shop Tab.
+            shop_tab_ctor_sku (str | Unset): Click-to-order rate (SKU level) from Shop Tab.
+            shop_tab_gmv (GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv | Unset):
+            shop_tab_sold_items (int | Unset): Items sold via shop tab.
+     """
 
     shop_tab_product_impressions: int | Unset = UNSET
     shop_tab_product_clicks: int | Unset = UNSET
@@ -41,7 +46,12 @@ class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
     shop_tab_sold_items: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_list_response_data_product_shop_tab_performance_shop_tab_gmv import GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv # noqa: PLC0415
         shop_tab_product_impressions = self.shop_tab_product_impressions
 
         shop_tab_product_clicks = self.shop_tab_product_clicks
@@ -60,9 +70,11 @@ class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
 
         shop_tab_sold_items = self.shop_tab_sold_items
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shop_tab_product_impressions is not UNSET:
             field_dict["shop_tab_product_impressions"] = shop_tab_product_impressions
         if shop_tab_product_clicks is not UNSET:
@@ -82,12 +94,11 @@ class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_list_response_data_product_shop_tab_performance_shop_tab_gmv import (
-            GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_product_performance_list_response_data_product_shop_tab_performance_shop_tab_gmv import GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv # noqa: PLC0415
         d = dict(src_dict)
         shop_tab_product_impressions = d.pop("shop_tab_product_impressions", UNSET)
 
@@ -103,12 +114,13 @@ class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
 
         _shop_tab_gmv = d.pop("shop_tab_gmv", UNSET)
         shop_tab_gmv: GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv | Unset
-        if isinstance(_shop_tab_gmv, Unset):
+        if isinstance(_shop_tab_gmv,  Unset):
             shop_tab_gmv = UNSET
         else:
-            shop_tab_gmv = GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv.from_dict(
-                _shop_tab_gmv
-            )
+            shop_tab_gmv = GetShopProductPerformanceListResponseDataProductShopTabPerformanceShopTabGmv.from_dict(_shop_tab_gmv)
+
+
+
 
         shop_tab_sold_items = d.pop("shop_tab_sold_items", UNSET)
 
@@ -122,6 +134,7 @@ class GetShopProductPerformanceListResponseDataProductShopTabPerformance:
             shop_tab_gmv=shop_tab_gmv,
             shop_tab_sold_items=shop_tab_sold_items,
         )
+
 
         get_shop_product_performance_list_response_data_product_shop_tab_performance.additional_properties = d
         return get_shop_product_performance_list_response_data_product_shop_tab_performance

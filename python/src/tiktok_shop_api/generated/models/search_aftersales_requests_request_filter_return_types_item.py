@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchAftersalesRequestsRequestFilterReturnTypesItem(StrEnum):
     EXCHANGE = "EXCHANGE"
     REFUND = "REFUND"

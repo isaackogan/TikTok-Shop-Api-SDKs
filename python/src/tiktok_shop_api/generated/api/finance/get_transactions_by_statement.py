@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_transactions_by_statement_response import GetTransactionsByStatementResponse
 from ...models.get_transactions_by_statement_sort_order import GetTransactionsByStatementSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -18,7 +22,12 @@ def _get_kwargs(
     sort_field: str,
     sort_order: GetTransactionsByStatementSortOrder | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["page_token"] = page_token
@@ -33,24 +42,26 @@ def _get_kwargs(
 
     params["page_size"] = page_size
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/finance/202501/statements/{statement_id}/statement_transactions".format(
-            statement_id=quote(str(statement_id), safe=""),
-        ),
+        "url": "/finance/202501/statements/{statement_id}/statement_transactions".format(statement_id=quote(str(statement_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetTransactionsByStatementResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetTransactionsByStatementResponse | None:
     if response.status_code == 200:
         response_200 = GetTransactionsByStatementResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -60,9 +71,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetTransactionsByStatementResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetTransactionsByStatementResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,8 +88,9 @@ def sync_detailed(
     sort_field: str,
     sort_order: GetTransactionsByStatementSortOrder | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> Response[GetTransactionsByStatementResponse]:
-    """Get Transactions by Statement
+    """ Get Transactions by Statement
 
      Retrieves the details of a statement, including the transactions, which can be a standard order
     transaction, an adjustment transaction, or a reserve-related transaction. For the SKU-level details
@@ -101,14 +111,16 @@ def sync_detailed(
 
     Returns:
         Response[GetTransactionsByStatementResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         statement_id=statement_id,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+
     )
 
     response = client.get_httpx_client().request(
@@ -116,7 +128,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     statement_id: str,
@@ -126,8 +137,9 @@ def sync(
     sort_field: str,
     sort_order: GetTransactionsByStatementSortOrder | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> GetTransactionsByStatementResponse | None:
-    """Get Transactions by Statement
+    """ Get Transactions by Statement
 
      Retrieves the details of a statement, including the transactions, which can be a standard order
     transaction, an adjustment transaction, or a reserve-related transaction. For the SKU-level details
@@ -148,17 +160,18 @@ def sync(
 
     Returns:
         GetTransactionsByStatementResponse
-    """
+     """
+
 
     return sync_detailed(
         statement_id=statement_id,
-        client=client,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-    ).parsed
+client=client,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
 
+    ).parsed
 
 async def asyncio_detailed(
     statement_id: str,
@@ -168,8 +181,9 @@ async def asyncio_detailed(
     sort_field: str,
     sort_order: GetTransactionsByStatementSortOrder | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> Response[GetTransactionsByStatementResponse]:
-    """Get Transactions by Statement
+    """ Get Transactions by Statement
 
      Retrieves the details of a statement, including the transactions, which can be a standard order
     transaction, an adjustment transaction, or a reserve-related transaction. For the SKU-level details
@@ -190,20 +204,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetTransactionsByStatementResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         statement_id=statement_id,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     statement_id: str,
@@ -213,8 +230,9 @@ async def asyncio(
     sort_field: str,
     sort_order: GetTransactionsByStatementSortOrder | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> GetTransactionsByStatementResponse | None:
-    """Get Transactions by Statement
+    """ Get Transactions by Statement
 
      Retrieves the details of a statement, including the transactions, which can be a standard order
     transaction, an adjustment transaction, or a reserve-related transaction. For the SKU-level details
@@ -235,15 +253,15 @@ async def asyncio(
 
     Returns:
         GetTransactionsByStatementResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            statement_id=statement_id,
-            client=client,
-            page_token=page_token,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            page_size=page_size,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        statement_id=statement_id,
+client=client,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+
+    )).parsed

@@ -1,33 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetEligibleShippingServicesResponseDataShippingService")
+
 
 
 @_attrs_define
 class GetEligibleShippingServicesResponseDataShippingService:
-    """
-    Attributes:
-        id (str | Unset): Shipping service ID
-        name (str | Unset): Shipping service Name
-        price (str | Unset): Estimated total price for this Shipping services
-        currency (str | Unset): Currency of the price
-        earliest_delivery_days (int | Unset): The minimum estimated duration required for parcel delivery.US only.
-        latest_delivery_days (int | Unset): The maximum estimated duration required for parcel delivery.US only.
-        is_default (bool | Unset): Whether it is the default shipping service
-        shipping_provider_name (str | Unset): The name of shipping provider.US only.
-        shipping_provider_id (str | Unset): The ID of shipping provider.US only.
-        shipping_fee (str | Unset): Shipping fee
-        shipping_app_service_fee (str | Unset): Shipping surcharge paid to the ERPs
-        signature_fee (str | Unset): Signature service fee
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Shipping service ID
+            name (str | Unset): Shipping service Name
+            price (str | Unset): Estimated total price for this Shipping services
+            currency (str | Unset): Currency of the price
+            earliest_delivery_days (int | Unset): The minimum estimated duration required for parcel delivery.US only.
+            latest_delivery_days (int | Unset): The maximum estimated duration required for parcel delivery.US only.
+            is_default (bool | Unset): Whether it is the default shipping service
+            shipping_provider_name (str | Unset): The name of shipping provider.US only.
+            shipping_provider_id (str | Unset): The ID of shipping provider.US only.
+            shipping_fee (str | Unset): Shipping fee
+            shipping_app_service_fee (str | Unset): Shipping surcharge paid to the ERPs
+            signature_fee (str | Unset): Signature service fee
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -42,6 +50,10 @@ class GetEligibleShippingServicesResponseDataShippingService:
     shipping_app_service_fee: str | Unset = UNSET
     signature_fee: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -68,9 +80,11 @@ class GetEligibleShippingServicesResponseDataShippingService:
 
         signature_fee = self.signature_fee
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -97,6 +111,8 @@ class GetEligibleShippingServicesResponseDataShippingService:
             field_dict["signature_fee"] = signature_fee
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -139,6 +155,7 @@ class GetEligibleShippingServicesResponseDataShippingService:
             shipping_app_service_fee=shipping_app_service_fee,
             signature_fee=signature_fee,
         )
+
 
         get_eligible_shipping_services_response_data_shipping_service.additional_properties = d
         return get_eligible_shipping_services_response_data_shipping_service

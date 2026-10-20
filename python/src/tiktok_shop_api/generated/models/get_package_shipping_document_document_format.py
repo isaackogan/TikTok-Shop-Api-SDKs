@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetPackageShippingDocumentDocumentFormat(StrEnum):
     PDF = "PDF"
     ZPL = "ZPL"

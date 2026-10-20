@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_image_translation_tasks_response_data_translation_task import (
-        GetImageTranslationTasksResponseDataTranslationTask,
-    )
+  from ..models.get_image_translation_tasks_response_data_translation_task import GetImageTranslationTasksResponseDataTranslationTask
+
+
+
 
 
 T = TypeVar("T", bound="GetImageTranslationTasksResponseData")
 
 
+
 @_attrs_define
 class GetImageTranslationTasksResponseData:
-    """
-    Attributes:
-        translation_tasks (list[GetImageTranslationTasksResponseDataTranslationTask] | Unset): The requested translation
-            tasks and the corresponding results. Each task corresponds to the translation of 1 image into 1 target language.
-    """
+    """ 
+        Attributes:
+            translation_tasks (list[GetImageTranslationTasksResponseDataTranslationTask] | Unset): The requested translation
+                tasks and the corresponding results. Each task corresponds to the translation of 1 image into 1 target language.
+     """
 
     translation_tasks: list[GetImageTranslationTasksResponseDataTranslationTask] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_image_translation_tasks_response_data_translation_task import GetImageTranslationTasksResponseDataTranslationTask # noqa: PLC0415
         translation_tasks: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.translation_tasks, Unset):
             translation_tasks = []
@@ -36,35 +46,40 @@ class GetImageTranslationTasksResponseData:
                 translation_tasks_item = translation_tasks_item_data.to_dict()
                 translation_tasks.append(translation_tasks_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if translation_tasks is not UNSET:
             field_dict["translation_tasks"] = translation_tasks
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_image_translation_tasks_response_data_translation_task import (
-            GetImageTranslationTasksResponseDataTranslationTask,  # noqa: PLC0415
-        )
-
+        from ..models.get_image_translation_tasks_response_data_translation_task import GetImageTranslationTasksResponseDataTranslationTask # noqa: PLC0415
         d = dict(src_dict)
         _translation_tasks = d.pop("translation_tasks", UNSET)
         translation_tasks: list[GetImageTranslationTasksResponseDataTranslationTask] | Unset = UNSET
         if _translation_tasks is not UNSET:
             translation_tasks = []
             for translation_tasks_item_data in _translation_tasks:
-                translation_tasks_item = GetImageTranslationTasksResponseDataTranslationTask.from_dict(
-                    translation_tasks_item_data
-                )
+                translation_tasks_item = GetImageTranslationTasksResponseDataTranslationTask.from_dict(translation_tasks_item_data)
+
+
 
                 translation_tasks.append(translation_tasks_item)
+
 
         get_image_translation_tasks_response_data = cls(
             translation_tasks=translation_tasks,
         )
+
 
         get_image_translation_tasks_response_data.additional_properties = d
         return get_image_translation_tasks_response_data

@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="RejectCancellationRequestImage")
+
 
 
 @_attrs_define
 class RejectCancellationRequestImage:
-    """
-    Attributes:
-        image_id (str): Image ID.
-        mime_type (str | Unset): MIME type.
-        height (int | Unset): Image height.
-            Unit: px
-        width (int | Unset): Image width.
-            Unit: px
-    """
+    """ 
+        Attributes:
+            image_id (str): Image ID.
+            mime_type (str | Unset): MIME type.
+            height (int | Unset): Image height.
+                Unit: px
+            width (int | Unset): Image width.
+                Unit: px
+     """
 
     image_id: str
     mime_type: str | Unset = UNSET
     height: int | Unset = UNSET
     width: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         image_id = self.image_id
@@ -38,13 +50,12 @@ class RejectCancellationRequestImage:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "image_id": image_id,
-            }
-        )
+        field_dict.update({
+            "image_id": image_id,
+        })
         if mime_type is not UNSET:
             field_dict["mime_type"] = mime_type
         if height is not UNSET:
@@ -53,6 +64,8 @@ class RejectCancellationRequestImage:
             field_dict["width"] = width
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -71,6 +84,7 @@ class RejectCancellationRequestImage:
             height=height,
             width=width,
         )
+
 
         reject_cancellation_request_image.additional_properties = d
         return reject_cancellation_request_image

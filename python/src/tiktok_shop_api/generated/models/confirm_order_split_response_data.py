@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.confirm_order_split_response_data_package import ConfirmOrderSplitResponseDataPackage
+  from ..models.confirm_order_split_response_data_package import ConfirmOrderSplitResponseDataPackage
+
+
+
 
 
 T = TypeVar("T", bound="ConfirmOrderSplitResponseData")
 
 
+
 @_attrs_define
 class ConfirmOrderSplitResponseData:
-    """
-    Attributes:
-        packages (list[ConfirmOrderSplitResponseDataPackage] | Unset): Packages created by the split. Each returned
-            package includes the request group identifier in `splittable_group_id` and its new package ID in `id`.
-    """
+    """ 
+        Attributes:
+            packages (list[ConfirmOrderSplitResponseDataPackage] | Unset): Packages created by the split. Each returned
+                package includes the request group identifier in `splittable_group_id` and its new package ID in `id`.
+     """
 
     packages: list[ConfirmOrderSplitResponseDataPackage] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.confirm_order_split_response_data_package import ConfirmOrderSplitResponseDataPackage # noqa: PLC0415
         packages: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.packages, Unset):
             packages = []
@@ -34,20 +46,23 @@ class ConfirmOrderSplitResponseData:
                 packages_item = packages_item_data.to_dict()
                 packages.append(packages_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if packages is not UNSET:
             field_dict["packages"] = packages
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.confirm_order_split_response_data_package import (
-            ConfirmOrderSplitResponseDataPackage,  # noqa: PLC0415
-        )
-
+        from ..models.confirm_order_split_response_data_package import ConfirmOrderSplitResponseDataPackage # noqa: PLC0415
         d = dict(src_dict)
         _packages = d.pop("packages", UNSET)
         packages: list[ConfirmOrderSplitResponseDataPackage] | Unset = UNSET
@@ -56,11 +71,15 @@ class ConfirmOrderSplitResponseData:
             for packages_item_data in _packages:
                 packages_item = ConfirmOrderSplitResponseDataPackage.from_dict(packages_item_data)
 
+
+
                 packages.append(packages_item)
+
 
         confirm_order_split_response_data = cls(
             packages=packages,
         )
+
 
         confirm_order_split_response_data.additional_properties = d
         return confirm_order_split_response_data

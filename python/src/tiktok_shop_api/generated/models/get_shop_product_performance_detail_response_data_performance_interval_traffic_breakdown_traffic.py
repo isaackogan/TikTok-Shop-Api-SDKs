@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic")
+
 
 
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic:
-    """
-    Attributes:
-        impressions (int | Unset): Each time a link to your listing appears in the shop tab, it's counted as one
-            impression. Users can tap links to visit your listings page directly.
-        page_views (int | Unset): Total number of product details page views during the selected period, including
-            multiple views from unique users.
-        avg_unique_page_views (int | Unset): Daily average unique views visitors to your product details pages.
-        ctr (str | Unset): The percentage of viewers who clicked on product links after seeing them in the Shop tab.
-            Number of clicks divided by the number of views.
-        avg_conversion_rate (str | Unset): Average percentage of unique page views that result in sales.
-    """
+    """ 
+        Attributes:
+            impressions (int | Unset): Each time a link to your listing appears in the shop tab, it's counted as one
+                impression. Users can tap links to visit your listings page directly.
+            page_views (int | Unset): Total number of product details page views during the selected period, including
+                multiple views from unique users.
+            avg_unique_page_views (int | Unset): Daily average unique views visitors to your product details pages.
+            ctr (str | Unset): The percentage of viewers who clicked on product links after seeing them in the Shop tab.
+                Number of clicks divided by the number of views.
+            avg_conversion_rate (str | Unset): Average percentage of unique page views that result in sales.
+     """
 
     impressions: int | Unset = UNSET
     page_views: int | Unset = UNSET
@@ -31,6 +39,10 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
     ctr: str | Unset = UNSET
     avg_conversion_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         impressions = self.impressions
@@ -43,9 +55,11 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
 
         avg_conversion_rate = self.avg_conversion_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if impressions is not UNSET:
             field_dict["impressions"] = impressions
         if page_views is not UNSET:
@@ -58,6 +72,8 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
             field_dict["avg_conversion_rate"] = avg_conversion_rate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +95,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
             ctr=ctr,
             avg_conversion_rate=avg_conversion_rate,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_traffic

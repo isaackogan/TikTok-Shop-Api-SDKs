@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.replicate_product_request import ReplicateProductRequest
 from ...models.replicate_product_response import ReplicateProductResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     body: ReplicateProductRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202507/products/{product_id}/global_replicate".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202507/products/{product_id}/global_replicate".format(product_id=quote(str(product_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> ReplicateProductResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ReplicateProductResponse | None:
     if response.status_code == 200:
         response_200 = ReplicateProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[ReplicateProductResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ReplicateProductResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: ReplicateProductRequest | Unset = UNSET,
+
 ) -> Response[ReplicateProductResponse]:
-    """Replicate Product
+    """ Replicate Product
 
      Description of [POST]/product/:version/Replicate_Product
 
@@ -79,11 +88,13 @@ def sync_detailed(
 
     Returns:
         Response[ReplicateProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -92,14 +103,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ReplicateProductRequest | Unset = UNSET,
+
 ) -> ReplicateProductResponse | None:
-    """Replicate Product
+    """ Replicate Product
 
      Description of [POST]/product/:version/Replicate_Product
 
@@ -113,22 +124,24 @@ def sync(
 
     Returns:
         ReplicateProductResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ReplicateProductRequest | Unset = UNSET,
+
 ) -> Response[ReplicateProductResponse]:
-    """Replicate Product
+    """ Replicate Product
 
      Description of [POST]/product/:version/Replicate_Product
 
@@ -142,25 +155,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[ReplicateProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: ReplicateProductRequest | Unset = UNSET,
+
 ) -> ReplicateProductResponse | None:
-    """Replicate Product
+    """ Replicate Product
 
      Description of [POST]/product/:version/Replicate_Product
 
@@ -174,12 +191,12 @@ async def asyncio(
 
     Returns:
         ReplicateProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+body=body,
+
+    )).parsed

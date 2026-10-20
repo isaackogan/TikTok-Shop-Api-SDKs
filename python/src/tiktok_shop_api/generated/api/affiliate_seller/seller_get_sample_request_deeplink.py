@@ -1,12 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.seller_get_sample_request_deeplink_response import SellerGetSampleRequestDeeplinkResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,7 +21,12 @@ def _get_kwargs(
     campaign_id: str | Unset = UNSET,
     collaboration_id: str | Unset = UNSET,
     valid_days: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["product_id"] = product_id
@@ -29,7 +39,9 @@ def _get_kwargs(
 
     params["valid_days"] = valid_days
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -37,14 +49,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SellerGetSampleRequestDeeplinkResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SellerGetSampleRequestDeeplinkResponse | None:
     if response.status_code == 200:
         response_200 = SellerGetSampleRequestDeeplinkResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -54,9 +68,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SellerGetSampleRequestDeeplinkResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SellerGetSampleRequestDeeplinkResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,8 +85,9 @@ def sync_detailed(
     campaign_id: str | Unset = UNSET,
     collaboration_id: str | Unset = UNSET,
     valid_days: int | Unset = UNSET,
+
 ) -> Response[SellerGetSampleRequestDeeplinkResponse]:
-    """Seller Get Sample Request Deeplink
+    """ Seller Get Sample Request Deeplink
 
      Use this API to get a TikTok deeplink, use this deeplink to launch the TikTok app and land the user
     on the sample request page.
@@ -93,14 +106,16 @@ def sync_detailed(
 
     Returns:
         Response[SellerGetSampleRequestDeeplinkResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        sku_id=sku_id,
-        campaign_id=campaign_id,
-        collaboration_id=collaboration_id,
-        valid_days=valid_days,
+sku_id=sku_id,
+campaign_id=campaign_id,
+collaboration_id=collaboration_id,
+valid_days=valid_days,
+
     )
 
     response = client.get_httpx_client().request(
@@ -108,7 +123,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -118,8 +132,9 @@ def sync(
     campaign_id: str | Unset = UNSET,
     collaboration_id: str | Unset = UNSET,
     valid_days: int | Unset = UNSET,
+
 ) -> SellerGetSampleRequestDeeplinkResponse | None:
-    """Seller Get Sample Request Deeplink
+    """ Seller Get Sample Request Deeplink
 
      Use this API to get a TikTok deeplink, use this deeplink to launch the TikTok app and land the user
     on the sample request page.
@@ -138,17 +153,18 @@ def sync(
 
     Returns:
         SellerGetSampleRequestDeeplinkResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        product_id=product_id,
-        sku_id=sku_id,
-        campaign_id=campaign_id,
-        collaboration_id=collaboration_id,
-        valid_days=valid_days,
-    ).parsed
+product_id=product_id,
+sku_id=sku_id,
+campaign_id=campaign_id,
+collaboration_id=collaboration_id,
+valid_days=valid_days,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -158,8 +174,9 @@ async def asyncio_detailed(
     campaign_id: str | Unset = UNSET,
     collaboration_id: str | Unset = UNSET,
     valid_days: int | Unset = UNSET,
+
 ) -> Response[SellerGetSampleRequestDeeplinkResponse]:
-    """Seller Get Sample Request Deeplink
+    """ Seller Get Sample Request Deeplink
 
      Use this API to get a TikTok deeplink, use this deeplink to launch the TikTok app and land the user
     on the sample request page.
@@ -178,20 +195,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[SellerGetSampleRequestDeeplinkResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        sku_id=sku_id,
-        campaign_id=campaign_id,
-        collaboration_id=collaboration_id,
-        valid_days=valid_days,
+sku_id=sku_id,
+campaign_id=campaign_id,
+collaboration_id=collaboration_id,
+valid_days=valid_days,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -201,8 +221,9 @@ async def asyncio(
     campaign_id: str | Unset = UNSET,
     collaboration_id: str | Unset = UNSET,
     valid_days: int | Unset = UNSET,
+
 ) -> SellerGetSampleRequestDeeplinkResponse | None:
-    """Seller Get Sample Request Deeplink
+    """ Seller Get Sample Request Deeplink
 
      Use this API to get a TikTok deeplink, use this deeplink to launch the TikTok app and land the user
     on the sample request page.
@@ -221,15 +242,15 @@ async def asyncio(
 
     Returns:
         SellerGetSampleRequestDeeplinkResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            product_id=product_id,
-            sku_id=sku_id,
-            campaign_id=campaign_id,
-            collaboration_id=collaboration_id,
-            valid_days=valid_days,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+product_id=product_id,
+sku_id=sku_id,
+campaign_id=campaign_id,
+collaboration_id=collaboration_id,
+valid_days=valid_days,
+
+    )).parsed

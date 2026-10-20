@@ -1,49 +1,65 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.product_tag_operation_product_tag import ProductTagOperationProductTag
+
+
+
+
+
 
 T = TypeVar("T", bound="ProductTagOperation")
 
 
+
 @_attrs_define
 class ProductTagOperation:
-    """
-    Attributes:
-        product_tag (ProductTagOperationProductTag): Possible values: AUCTION
-        enable (bool): Whether to enable the specified product tag. Set to `true` to enable the `AUCTION` tag or `false`
-            to disable it.
-    """
+    """ 
+        Attributes:
+            product_tag (ProductTagOperationProductTag): Possible values: AUCTION
+            enable (bool): Whether to enable the specified product tag. Set to `true` to enable the `AUCTION` tag or `false`
+                to disable it.
+     """
 
     product_tag: ProductTagOperationProductTag
     enable: bool
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_tag = self.product_tag.value
 
         enable = self.enable
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_tag": product_tag,
-                "enable": enable,
-            }
-        )
+        field_dict.update({
+            "product_tag": product_tag,
+            "enable": enable,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         product_tag = ProductTagOperationProductTag(d.pop("product_tag"))
+
+
+
 
         enable = d.pop("enable")
 
@@ -51,6 +67,7 @@ class ProductTagOperation:
             product_tag=product_tag,
             enable=enable,
         )
+
 
         product_tag_operation.additional_properties = d
         return product_tag_operation

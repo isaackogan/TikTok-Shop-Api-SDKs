@@ -1,19 +1,20 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.seller_search_open_collaboration_products_request import SellerSearchOpenCollaborationProductsRequest
 from ...models.seller_search_open_collaboration_products_response import SellerSearchOpenCollaborationProductsResponse
-from ...models.seller_search_open_collaboration_products_sort_field import (
-    SellerSearchOpenCollaborationProductsSortField,
-)
-from ...models.seller_search_open_collaboration_products_sort_order import (
-    SellerSearchOpenCollaborationProductsSortOrder,
-)
-from ...types import UNSET, Response, Unset
+from ...models.seller_search_open_collaboration_products_sort_field import SellerSearchOpenCollaborationProductsSortField
+from ...models.seller_search_open_collaboration_products_sort_order import SellerSearchOpenCollaborationProductsSortOrder
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -23,8 +24,12 @@ def _get_kwargs(
     sort_field: SellerSearchOpenCollaborationProductsSortField | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -44,7 +49,9 @@ def _get_kwargs(
 
     params["page_size"] = page_size
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -52,6 +59,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -61,11 +69,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SellerSearchOpenCollaborationProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SellerSearchOpenCollaborationProductsResponse | None:
     if response.status_code == 200:
         response_200 = SellerSearchOpenCollaborationProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -75,9 +84,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SellerSearchOpenCollaborationProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SellerSearchOpenCollaborationProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -94,8 +101,9 @@ def sync_detailed(
     sort_field: SellerSearchOpenCollaborationProductsSortField | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> Response[SellerSearchOpenCollaborationProductsResponse]:
-    """Seller Search Open Collaboration Products
+    """ Seller Search Open Collaboration Products
 
      Searches for open-collaboration products on the TikTok Shop Affiliate Product Marketplace within the
     regions where the seller is registered to sell. Category, commission rate, sales price, and title
@@ -117,14 +125,16 @@ def sync_detailed(
 
     Returns:
         Response[SellerSearchOpenCollaborationProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        page_token=page_token,
-        page_size=page_size,
+sort_order=sort_order,
+sort_field=sort_field,
+page_token=page_token,
+page_size=page_size,
+
     )
 
     response = client.get_httpx_client().request(
@@ -132,7 +142,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -142,8 +151,9 @@ def sync(
     sort_field: SellerSearchOpenCollaborationProductsSortField | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> SellerSearchOpenCollaborationProductsResponse | None:
-    """Seller Search Open Collaboration Products
+    """ Seller Search Open Collaboration Products
 
      Searches for open-collaboration products on the TikTok Shop Affiliate Product Marketplace within the
     regions where the seller is registered to sell. Category, commission rate, sales price, and title
@@ -165,17 +175,18 @@ def sync(
 
     Returns:
         SellerSearchOpenCollaborationProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        page_token=page_token,
-        page_size=page_size,
-    ).parsed
+body=body,
+sort_order=sort_order,
+sort_field=sort_field,
+page_token=page_token,
+page_size=page_size,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -185,8 +196,9 @@ async def asyncio_detailed(
     sort_field: SellerSearchOpenCollaborationProductsSortField | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> Response[SellerSearchOpenCollaborationProductsResponse]:
-    """Seller Search Open Collaboration Products
+    """ Seller Search Open Collaboration Products
 
      Searches for open-collaboration products on the TikTok Shop Affiliate Product Marketplace within the
     regions where the seller is registered to sell. Category, commission rate, sales price, and title
@@ -208,20 +220,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[SellerSearchOpenCollaborationProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        page_token=page_token,
-        page_size=page_size,
+sort_order=sort_order,
+sort_field=sort_field,
+page_token=page_token,
+page_size=page_size,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -231,8 +246,9 @@ async def asyncio(
     sort_field: SellerSearchOpenCollaborationProductsSortField | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> SellerSearchOpenCollaborationProductsResponse | None:
-    """Seller Search Open Collaboration Products
+    """ Seller Search Open Collaboration Products
 
      Searches for open-collaboration products on the TikTok Shop Affiliate Product Marketplace within the
     regions where the seller is registered to sell. Category, commission rate, sales price, and title
@@ -254,15 +270,15 @@ async def asyncio(
 
     Returns:
         SellerSearchOpenCollaborationProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            sort_order=sort_order,
-            sort_field=sort_field,
-            page_token=page_token,
-            page_size=page_size,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+sort_order=sort_order,
+sort_field=sort_field,
+page_token=page_token,
+page_size=page_size,
+
+    )).parsed

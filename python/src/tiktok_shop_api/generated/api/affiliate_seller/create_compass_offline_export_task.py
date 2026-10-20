@@ -1,26 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_compass_offline_export_task_request import CreateCompassOfflineExportTaskRequest
 from ...models.create_compass_offline_export_task_response import CreateCompassOfflineExportTaskResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateCompassOfflineExportTaskRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/affiliate_seller/202603/compass/offline_task",
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -30,11 +42,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreateCompassOfflineExportTaskResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateCompassOfflineExportTaskResponse | None:
     if response.status_code == 200:
         response_200 = CreateCompassOfflineExportTaskResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -44,9 +57,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateCompassOfflineExportTaskResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateCompassOfflineExportTaskResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -59,8 +70,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCompassOfflineExportTaskRequest | Unset = UNSET,
+
 ) -> Response[CreateCompassOfflineExportTaskResponse]:
-    """Create Compass Offline Export Task
+    """ Create Compass Offline Export Task
 
      Create an asynchronous offline export task for the specified doc_type and plan_type within a given
     time window. Returns a task_id for subsequent status query and file download.
@@ -74,10 +86,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateCompassOfflineExportTaskResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -86,13 +100,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCompassOfflineExportTaskRequest | Unset = UNSET,
+
 ) -> CreateCompassOfflineExportTaskResponse | None:
-    """Create Compass Offline Export Task
+    """ Create Compass Offline Export Task
 
      Create an asynchronous offline export task for the specified doc_type and plan_type within a given
     time window. Returns a task_id for subsequent status query and file download.
@@ -106,20 +120,22 @@ def sync(
 
     Returns:
         CreateCompassOfflineExportTaskResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCompassOfflineExportTaskRequest | Unset = UNSET,
+
 ) -> Response[CreateCompassOfflineExportTaskResponse]:
-    """Create Compass Offline Export Task
+    """ Create Compass Offline Export Task
 
      Create an asynchronous offline export task for the specified doc_type and plan_type within a given
     time window. Returns a task_id for subsequent status query and file download.
@@ -133,23 +149,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateCompassOfflineExportTaskResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCompassOfflineExportTaskRequest | Unset = UNSET,
+
 ) -> CreateCompassOfflineExportTaskResponse | None:
-    """Create Compass Offline Export Task
+    """ Create Compass Offline Export Task
 
      Create an asynchronous offline export task for the specified doc_type and plan_type within a given
     time window. Returns a task_id for subsequent status query and file download.
@@ -163,11 +183,11 @@ async def asyncio(
 
     Returns:
         CreateCompassOfflineExportTaskResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

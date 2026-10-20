@@ -1,13 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_live_minute_performance_response import GetShopLIVEMinutePerformanceResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,31 +19,38 @@ def _get_kwargs(
     *,
     page_token: str | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["page_token"] = page_token
 
     params["currency"] = currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202510/shop_lives/{live_id}/performance_per_minutes".format(
-            live_id=quote(str(live_id), safe=""),
-        ),
+        "url": "/analytics/202510/shop_lives/{live_id}/performance_per_minutes".format(live_id=quote(str(live_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopLIVEMinutePerformanceResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopLIVEMinutePerformanceResponse | None:
     if response.status_code == 200:
         response_200 = GetShopLIVEMinutePerformanceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -49,9 +60,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopLIVEMinutePerformanceResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopLIVEMinutePerformanceResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +75,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetShopLIVEMinutePerformanceResponse]:
-    """Get Shop LIVE Minute Performance
+    """ Get Shop LIVE Minute Performance
 
      Returns minute-level performance for a LIVE session after the session is finished. This API only
     returns data for live streams hosted by the shop official account or marketing account.
@@ -83,12 +93,14 @@ def sync_detailed(
 
     Returns:
         Response[GetShopLIVEMinutePerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_id=live_id,
-        page_token=page_token,
-        currency=currency,
+page_token=page_token,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -97,15 +109,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     live_id: str,
     *,
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetShopLIVEMinutePerformanceResponse | None:
-    """Get Shop LIVE Minute Performance
+    """ Get Shop LIVE Minute Performance
 
      Returns minute-level performance for a LIVE session after the session is finished. This API only
     returns data for live streams hosted by the shop official account or marketing account.
@@ -121,15 +133,16 @@ def sync(
 
     Returns:
         GetShopLIVEMinutePerformanceResponse
-    """
+     """
+
 
     return sync_detailed(
         live_id=live_id,
-        client=client,
-        page_token=page_token,
-        currency=currency,
-    ).parsed
+client=client,
+page_token=page_token,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     live_id: str,
@@ -137,8 +150,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetShopLIVEMinutePerformanceResponse]:
-    """Get Shop LIVE Minute Performance
+    """ Get Shop LIVE Minute Performance
 
      Returns minute-level performance for a LIVE session after the session is finished. This API only
     returns data for live streams hosted by the shop official account or marketing account.
@@ -154,18 +168,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopLIVEMinutePerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_id=live_id,
-        page_token=page_token,
-        currency=currency,
+page_token=page_token,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     live_id: str,
@@ -173,8 +190,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetShopLIVEMinutePerformanceResponse | None:
-    """Get Shop LIVE Minute Performance
+    """ Get Shop LIVE Minute Performance
 
      Returns minute-level performance for a LIVE session after the session is finished. This API only
     returns data for live streams hosted by the shop official account or marketing account.
@@ -190,13 +208,13 @@ async def asyncio(
 
     Returns:
         GetShopLIVEMinutePerformanceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            live_id=live_id,
-            client=client,
-            page_token=page_token,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        live_id=live_id,
+client=client,
+page_token=page_token,
+currency=currency,
+
+    )).parsed

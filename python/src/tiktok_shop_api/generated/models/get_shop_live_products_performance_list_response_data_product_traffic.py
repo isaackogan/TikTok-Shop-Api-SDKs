@@ -1,38 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.click_to_order_rate import ClickToOrderRate
-    from ..models.get_shop_live_products_performance_list_response_data_product_traffic_gpm import (
-        GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm,
-    )
+  from ..models.click_to_order_rate import ClickToOrderRate
+  from ..models.get_shop_live_products_performance_list_response_data_product_traffic_gpm import GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEProductsPerformanceListResponseDataProductTraffic")
 
 
+
 @_attrs_define
 class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
-    """
-    Attributes:
-        product_impressions (int | Unset): Number of product impressions for this product during the LIVE video,
-            including for product lists and product cards
-        ctr (str | Unset): Click-through rate: The number of product clicks for this product from the LIVE video,
-            divided by the number of product impressions for this product from the LIVE video, including product clicks and
-            product impressions for product lists and product cards
-        add_to_cart_count (int | Unset): The number of times viewers add the product to their cart.
-        click_to_order_rate (ClickToOrderRate | Unset):
-        gpm (GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm | Unset):
-        produt_clicks (int | Unset): The total number of times the product was clicked from this LIVE, including from
-            the product list and product card
-    """
+    """ 
+        Attributes:
+            product_impressions (int | Unset): Number of product impressions for this product during the LIVE video,
+                including for product lists and product cards
+            ctr (str | Unset): Click-through rate: The number of product clicks for this product from the LIVE video,
+                divided by the number of product impressions for this product from the LIVE video, including product clicks and
+                product impressions for product lists and product cards
+            add_to_cart_count (int | Unset): The number of times viewers add the product to their cart.
+            click_to_order_rate (ClickToOrderRate | Unset):
+            gpm (GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm | Unset):
+            produt_clicks (int | Unset): The total number of times the product was clicked from this LIVE, including from
+                the product list and product card
+     """
 
     product_impressions: int | Unset = UNSET
     ctr: str | Unset = UNSET
@@ -42,7 +47,13 @@ class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
     produt_clicks: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.click_to_order_rate import ClickToOrderRate # noqa: PLC0415
+        from ..models.get_shop_live_products_performance_list_response_data_product_traffic_gpm import GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm # noqa: PLC0415
         product_impressions = self.product_impressions
 
         ctr = self.ctr
@@ -59,9 +70,11 @@ class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
 
         produt_clicks = self.produt_clicks
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_impressions is not UNSET:
             field_dict["product_impressions"] = product_impressions
         if ctr is not UNSET:
@@ -77,13 +90,12 @@ class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.click_to_order_rate import ClickToOrderRate  # noqa: PLC0415
-        from ..models.get_shop_live_products_performance_list_response_data_product_traffic_gpm import (
-            GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm,  # noqa: PLC0415
-        )
-
+        from ..models.click_to_order_rate import ClickToOrderRate # noqa: PLC0415
+        from ..models.get_shop_live_products_performance_list_response_data_product_traffic_gpm import GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm # noqa: PLC0415
         d = dict(src_dict)
         product_impressions = d.pop("product_impressions", UNSET)
 
@@ -93,17 +105,23 @@ class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
 
         _click_to_order_rate = d.pop("click_to_order_rate", UNSET)
         click_to_order_rate: ClickToOrderRate | Unset
-        if isinstance(_click_to_order_rate, Unset):
+        if isinstance(_click_to_order_rate,  Unset):
             click_to_order_rate = UNSET
         else:
             click_to_order_rate = ClickToOrderRate.from_dict(_click_to_order_rate)
 
+
+
+
         _gpm = d.pop("gpm", UNSET)
         gpm: GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm | Unset
-        if isinstance(_gpm, Unset):
+        if isinstance(_gpm,  Unset):
             gpm = UNSET
         else:
             gpm = GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm.from_dict(_gpm)
+
+
+
 
         produt_clicks = d.pop("produt_clicks", UNSET)
 
@@ -115,6 +133,7 @@ class GetShopLIVEProductsPerformanceListResponseDataProductTraffic:
             gpm=gpm,
             produt_clicks=produt_clicks,
         )
+
 
         get_shop_live_products_performance_list_response_data_product_traffic.additional_properties = d
         return get_shop_live_products_performance_list_response_data_product_traffic

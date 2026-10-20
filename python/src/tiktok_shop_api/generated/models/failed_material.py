@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="FailedMaterial")
+
 
 
 @_attrs_define
 class FailedMaterial:
-    """
-    Attributes:
-        material_id (str | Unset): Material ID.
-        fail_reason (str | Unset): Fail reason.
-    """
+    """ 
+        Attributes:
+            material_id (str | Unset): Material ID.
+            fail_reason (str | Unset): Fail reason.
+     """
 
     material_id: str | Unset = UNSET
     fail_reason: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         material_id = self.material_id
 
         fail_reason = self.fail_reason
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if material_id is not UNSET:
             field_dict["material_id"] = material_id
         if fail_reason is not UNSET:
             field_dict["fail_reason"] = fail_reason
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class FailedMaterial:
             material_id=material_id,
             fail_reason=fail_reason,
         )
+
 
         failed_material.additional_properties = d
         return failed_material

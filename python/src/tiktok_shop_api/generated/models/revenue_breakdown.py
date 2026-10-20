@@ -1,37 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="RevenueBreakdown")
+
 
 
 @_attrs_define
 class RevenueBreakdown:
-    """
-    Attributes:
-        subtotal_before_discount_amount (str | Unset): The total price of all order items before any seller discounts
-            and platform discounts are deducted. This is equivalent to the shop's gross sales.
-        seller_discount_amount (str | Unset): The total amount of discounts funded by the seller, including:
-            - Seller promotions (Product Discount, Flash Deal, Buy More Save More, Voucher and Bundle Deal)
-            - Seller's portion of a co-funded voucher discount in co-funding campaigns
-            - Seller discounts during a campaign
-        refund_subtotal_before_discount_amount (str | Unset): The total price of all refunded items before any seller
-            discounts. This is equivalent to the shop's gross sales refund.
-        seller_discount_refund_amount (str | Unset): Discounts returned to the sellers due to returns or refunds.
-        cod_service_fee_amount (str | Unset): The cash on delivery service fees charged to buyers.
-            Applicable only for Saudi Arabia.
-        refund_cod_service_fee_amount (str | Unset): The refund for cash on delivery service fees.
-            Applicable only for Saudi Arabia.
-        distant_item_fee_amount (str | Unset): The distance fee for items paid by the customer. With your current
-            settings for Horizon+ Program, this fee is included in product price for orders with shipping out of Java
-            island.
-    """
+    """ 
+        Attributes:
+            subtotal_before_discount_amount (str | Unset): The total price of all order items before any seller discounts
+                and platform discounts are deducted. This is equivalent to the shop's gross sales.
+            seller_discount_amount (str | Unset): The total amount of discounts funded by the seller, including:
+                - Seller promotions (Product Discount, Flash Deal, Buy More Save More, Voucher and Bundle Deal)
+                - Seller's portion of a co-funded voucher discount in co-funding campaigns
+                - Seller discounts during a campaign
+            refund_subtotal_before_discount_amount (str | Unset): The total price of all refunded items before any seller
+                discounts. This is equivalent to the shop's gross sales refund.
+            seller_discount_refund_amount (str | Unset): Discounts returned to the sellers due to returns or refunds.
+            cod_service_fee_amount (str | Unset): The cash on delivery service fees charged to buyers.
+                Applicable only for Saudi Arabia.
+            refund_cod_service_fee_amount (str | Unset): The refund for cash on delivery service fees.
+                Applicable only for Saudi Arabia.
+            distant_item_fee_amount (str | Unset): The distance fee for items paid by the customer. With your current
+                settings for Horizon+ Program, this fee is included in product price for orders with shipping out of Java
+                island.
+     """
 
     subtotal_before_discount_amount: str | Unset = UNSET
     seller_discount_amount: str | Unset = UNSET
@@ -41,6 +49,10 @@ class RevenueBreakdown:
     refund_cod_service_fee_amount: str | Unset = UNSET
     distant_item_fee_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         subtotal_before_discount_amount = self.subtotal_before_discount_amount
@@ -57,9 +69,11 @@ class RevenueBreakdown:
 
         distant_item_fee_amount = self.distant_item_fee_amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if subtotal_before_discount_amount is not UNSET:
             field_dict["subtotal_before_discount_amount"] = subtotal_before_discount_amount
         if seller_discount_amount is not UNSET:
@@ -76,6 +90,8 @@ class RevenueBreakdown:
             field_dict["distant_item_fee_amount"] = distant_item_fee_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,6 +119,7 @@ class RevenueBreakdown:
             refund_cod_service_fee_amount=refund_cod_service_fee_amount,
             distant_item_fee_amount=distant_item_fee_amount,
         )
+
 
         revenue_breakdown.additional_properties = d
         return revenue_breakdown

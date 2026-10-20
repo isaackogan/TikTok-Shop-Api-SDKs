@@ -1,16 +1,21 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_video_performance_overview_account_type import GetShopVideoPerformanceOverviewAccountType
 from ...models.get_shop_video_performance_overview_currency import GetShopVideoPerformanceOverviewCurrency
 from ...models.get_shop_video_performance_overview_granularity import GetShopVideoPerformanceOverviewGranularity
 from ...models.get_shop_video_performance_overview_response import GetShopVideoPerformanceOverviewResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -21,7 +26,12 @@ def _get_kwargs(
     granularity: GetShopVideoPerformanceOverviewGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceOverviewCurrency | Unset = UNSET,
     account_type: GetShopVideoPerformanceOverviewAccountType | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_date_ge = start_date_ge.isoformat()
@@ -50,7 +60,9 @@ def _get_kwargs(
 
     params["account_type"] = json_account_type
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -58,14 +70,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopVideoPerformanceOverviewResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopVideoPerformanceOverviewResponse | None:
     if response.status_code == 200:
         response_200 = GetShopVideoPerformanceOverviewResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -75,9 +89,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopVideoPerformanceOverviewResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopVideoPerformanceOverviewResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -95,8 +107,9 @@ def sync_detailed(
     granularity: GetShopVideoPerformanceOverviewGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceOverviewCurrency | Unset = UNSET,
     account_type: GetShopVideoPerformanceOverviewAccountType | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceOverviewResponse]:
-    """Get Shop Video Performance Overview
+    """ Get Shop Video Performance Overview
 
      Returns overall performance metrics for all videos under a shop.
 
@@ -114,15 +127,17 @@ def sync_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceOverviewResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        today=today,
-        granularity=granularity,
-        currency=currency,
-        account_type=account_type,
+end_date_lt=end_date_lt,
+today=today,
+granularity=granularity,
+currency=currency,
+account_type=account_type,
+
     )
 
     response = client.get_httpx_client().request(
@@ -130,7 +145,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -141,8 +155,9 @@ def sync(
     granularity: GetShopVideoPerformanceOverviewGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceOverviewCurrency | Unset = UNSET,
     account_type: GetShopVideoPerformanceOverviewAccountType | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceOverviewResponse | None:
-    """Get Shop Video Performance Overview
+    """ Get Shop Video Performance Overview
 
      Returns overall performance metrics for all videos under a shop.
 
@@ -160,18 +175,19 @@ def sync(
 
     Returns:
         GetShopVideoPerformanceOverviewResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        today=today,
-        granularity=granularity,
-        currency=currency,
-        account_type=account_type,
-    ).parsed
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+today=today,
+granularity=granularity,
+currency=currency,
+account_type=account_type,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -182,8 +198,9 @@ async def asyncio_detailed(
     granularity: GetShopVideoPerformanceOverviewGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceOverviewCurrency | Unset = UNSET,
     account_type: GetShopVideoPerformanceOverviewAccountType | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceOverviewResponse]:
-    """Get Shop Video Performance Overview
+    """ Get Shop Video Performance Overview
 
      Returns overall performance metrics for all videos under a shop.
 
@@ -201,21 +218,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceOverviewResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        today=today,
-        granularity=granularity,
-        currency=currency,
-        account_type=account_type,
+end_date_lt=end_date_lt,
+today=today,
+granularity=granularity,
+currency=currency,
+account_type=account_type,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -226,8 +246,9 @@ async def asyncio(
     granularity: GetShopVideoPerformanceOverviewGranularity | Unset = UNSET,
     currency: GetShopVideoPerformanceOverviewCurrency | Unset = UNSET,
     account_type: GetShopVideoPerformanceOverviewAccountType | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceOverviewResponse | None:
-    """Get Shop Video Performance Overview
+    """ Get Shop Video Performance Overview
 
      Returns overall performance metrics for all videos under a shop.
 
@@ -245,16 +266,16 @@ async def asyncio(
 
     Returns:
         GetShopVideoPerformanceOverviewResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            start_date_ge=start_date_ge,
-            end_date_lt=end_date_lt,
-            today=today,
-            granularity=granularity,
-            currency=currency,
-            account_type=account_type,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+today=today,
+granularity=granularity,
+currency=currency,
+account_type=account_type,
+
+    )).parsed

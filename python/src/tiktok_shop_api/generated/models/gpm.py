@@ -1,43 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Gpm")
+
 
 
 @_attrs_define
 class Gpm:
-    """
-    Attributes:
-        amount (str | Unset): GPM amount in the corresponding currency.
-        currency (str | Unset): GPM currency code (ISO 4217 standard). If LOCAL currency is requested, the value will be
-            the local currency code of where the shop is registered (e.g. GBP).
-    """
+    """ 
+        Attributes:
+            amount (str | Unset): GPM amount in the corresponding currency.
+            currency (str | Unset): GPM currency code (ISO 4217 standard). If LOCAL currency is requested, the value will be
+                the local currency code of where the shop is registered (e.g. GBP).
+     """
 
     amount: str | Unset = UNSET
     currency: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
         currency = self.currency
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if currency is not UNSET:
             field_dict["currency"] = currency
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -50,6 +66,7 @@ class Gpm:
             amount=amount,
             currency=currency,
         )
+
 
         gpm.additional_properties = d
         return gpm

@@ -1,48 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_payments_response_data_payment_amount import GetPaymentsResponseDataPaymentAmount
-    from ..models.get_payments_response_data_payment_payment_amount_before_exchange import (
-        GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange,
-    )
-    from ..models.get_payments_response_data_payment_settlement_amount import (
-        GetPaymentsResponseDataPaymentSettlementAmount,
-    )
+  from ..models.get_payments_response_data_payment_amount import GetPaymentsResponseDataPaymentAmount
+  from ..models.get_payments_response_data_payment_payment_amount_before_exchange import GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange
+  from ..models.get_payments_response_data_payment_settlement_amount import GetPaymentsResponseDataPaymentSettlementAmount
+
+
+
 
 
 T = TypeVar("T", bound="GetPaymentsResponseDataPayment")
 
 
+
 @_attrs_define
 class GetPaymentsResponseDataPayment:
-    """
-    Attributes:
-        create_time (int | Unset): The time when the payment was initiated in TikTok Shop, as a Unix timestamp in
-            seconds.
-        id (str | Unset): The payment ID.
-        status (str | Unset): The payment status, indicating whether payment has been transferred to the seller's bank
-            account.
-            Possible values:
-            - PAID: Payment has been transferred to the seller.
-            - FAILED: Payment transfer failed.
-            - PROCESSING: Payment is currently being processed.
-        amount (GetPaymentsResponseDataPaymentAmount | Unset):
-        settlement_amount (GetPaymentsResponseDataPaymentSettlementAmount | Unset):
-        payment_amount_before_exchange (GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange | Unset):
-        exchange_rate (str | Unset): The exchange rate, displayed with six decimal places.
-        paid_time (int | Unset): The time when payment processing finished in TikTok Shop, as a Unix timestamp in
-            seconds. Returns `0` when no finish time is available.
-        bank_account (str | Unset): The seller's bank account number masked, revealing only the last 4 digits for
-            privacy.
-    """
+    """ 
+        Attributes:
+            create_time (int | Unset): The time when the payment was initiated in TikTok Shop, as a Unix timestamp in
+                seconds.
+            id (str | Unset): The payment ID.
+            status (str | Unset): The payment status, indicating whether payment has been transferred to the seller's bank
+                account.
+                Possible values:
+                - PAID: Payment has been transferred to the seller.
+                - FAILED: Payment transfer failed.
+                - PROCESSING: Payment is currently being processed.
+            amount (GetPaymentsResponseDataPaymentAmount | Unset):
+            settlement_amount (GetPaymentsResponseDataPaymentSettlementAmount | Unset):
+            payment_amount_before_exchange (GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange | Unset):
+            exchange_rate (str | Unset): The exchange rate, displayed with six decimal places.
+            paid_time (int | Unset): The time when payment processing finished in TikTok Shop, as a Unix timestamp in
+                seconds. Returns `0` when no finish time is available.
+            bank_account (str | Unset): The seller's bank account number masked, revealing only the last 4 digits for
+                privacy.
+     """
 
     create_time: int | Unset = UNSET
     id: str | Unset = UNSET
@@ -55,7 +58,14 @@ class GetPaymentsResponseDataPayment:
     bank_account: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_payments_response_data_payment_amount import GetPaymentsResponseDataPaymentAmount # noqa: PLC0415
+        from ..models.get_payments_response_data_payment_payment_amount_before_exchange import GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange # noqa: PLC0415
+        from ..models.get_payments_response_data_payment_settlement_amount import GetPaymentsResponseDataPaymentSettlementAmount # noqa: PLC0415
         create_time = self.create_time
 
         id = self.id
@@ -80,9 +90,11 @@ class GetPaymentsResponseDataPayment:
 
         bank_account = self.bank_account
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if create_time is not UNSET:
             field_dict["create_time"] = create_time
         if id is not UNSET:
@@ -104,18 +116,13 @@ class GetPaymentsResponseDataPayment:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_payments_response_data_payment_amount import (
-            GetPaymentsResponseDataPaymentAmount,  # noqa: PLC0415
-        )
-        from ..models.get_payments_response_data_payment_payment_amount_before_exchange import (
-            GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange,  # noqa: PLC0415
-        )
-        from ..models.get_payments_response_data_payment_settlement_amount import (
-            GetPaymentsResponseDataPaymentSettlementAmount,  # noqa: PLC0415
-        )
-
+        from ..models.get_payments_response_data_payment_amount import GetPaymentsResponseDataPaymentAmount # noqa: PLC0415
+        from ..models.get_payments_response_data_payment_payment_amount_before_exchange import GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange # noqa: PLC0415
+        from ..models.get_payments_response_data_payment_settlement_amount import GetPaymentsResponseDataPaymentSettlementAmount # noqa: PLC0415
         d = dict(src_dict)
         create_time = d.pop("create_time", UNSET)
 
@@ -125,26 +132,33 @@ class GetPaymentsResponseDataPayment:
 
         _amount = d.pop("amount", UNSET)
         amount: GetPaymentsResponseDataPaymentAmount | Unset
-        if isinstance(_amount, Unset):
+        if isinstance(_amount,  Unset):
             amount = UNSET
         else:
             amount = GetPaymentsResponseDataPaymentAmount.from_dict(_amount)
 
+
+
+
         _settlement_amount = d.pop("settlement_amount", UNSET)
         settlement_amount: GetPaymentsResponseDataPaymentSettlementAmount | Unset
-        if isinstance(_settlement_amount, Unset):
+        if isinstance(_settlement_amount,  Unset):
             settlement_amount = UNSET
         else:
             settlement_amount = GetPaymentsResponseDataPaymentSettlementAmount.from_dict(_settlement_amount)
 
+
+
+
         _payment_amount_before_exchange = d.pop("payment_amount_before_exchange", UNSET)
         payment_amount_before_exchange: GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange | Unset
-        if isinstance(_payment_amount_before_exchange, Unset):
+        if isinstance(_payment_amount_before_exchange,  Unset):
             payment_amount_before_exchange = UNSET
         else:
-            payment_amount_before_exchange = GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange.from_dict(
-                _payment_amount_before_exchange
-            )
+            payment_amount_before_exchange = GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange.from_dict(_payment_amount_before_exchange)
+
+
+
 
         exchange_rate = d.pop("exchange_rate", UNSET)
 
@@ -163,6 +177,7 @@ class GetPaymentsResponseDataPayment:
             paid_time=paid_time,
             bank_account=bank_account,
         )
+
 
         get_payments_response_data_payment.additional_properties = d
         return get_payments_response_data_payment

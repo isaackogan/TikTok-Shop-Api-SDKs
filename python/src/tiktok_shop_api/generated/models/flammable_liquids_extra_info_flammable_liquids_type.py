@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class FlammableLiquidsExtraInfoFlammableLiquidsType(StrEnum):
     ALCOHOLIC = "ALCOHOLIC"
     OTHER = "OTHER"

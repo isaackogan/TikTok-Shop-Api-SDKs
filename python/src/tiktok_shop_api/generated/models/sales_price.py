@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SalesPrice")
+
 
 
 @_attrs_define
 class SalesPrice:
-    """
-    Attributes:
-        currency (str | Unset): Currency code for the promotional price.
-        minimum_amount (str | Unset): The  minimum promotion price of all skus of this product.
-        maximum_amount (str | Unset): The maximum promotion price of all skus of this product.
-    """
+    """ 
+        Attributes:
+            currency (str | Unset): Currency code for the promotional price.
+            minimum_amount (str | Unset): The  minimum promotion price of all skus of this product.
+            maximum_amount (str | Unset): The maximum promotion price of all skus of this product.
+     """
 
     currency: str | Unset = UNSET
     minimum_amount: str | Unset = UNSET
     maximum_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency
@@ -32,9 +44,11 @@ class SalesPrice:
 
         maximum_amount = self.maximum_amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if currency is not UNSET:
             field_dict["currency"] = currency
         if minimum_amount is not UNSET:
@@ -43,6 +57,8 @@ class SalesPrice:
             field_dict["maximum_amount"] = maximum_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class SalesPrice:
             minimum_amount=minimum_amount,
             maximum_amount=maximum_amount,
         )
+
 
         sales_price.additional_properties = d
         return sales_price

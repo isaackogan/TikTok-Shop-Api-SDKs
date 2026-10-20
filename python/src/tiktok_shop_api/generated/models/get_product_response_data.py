@@ -1,199 +1,200 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.brand import Brand
-    from ..models.get_product_response_data_audit import GetProductResponseDataAudit
-    from ..models.get_product_response_data_audit_failed_reason import GetProductResponseDataAuditFailedReason
-    from ..models.get_product_response_data_category_chain import GetProductResponseDataCategoryChain
-    from ..models.get_product_response_data_certification import GetProductResponseDataCertification
-    from ..models.get_product_response_data_delivery_option import GetProductResponseDataDeliveryOption
-    from ..models.get_product_response_data_global_product_association import (
-        GetProductResponseDataGlobalProductAssociation,
-    )
-    from ..models.get_product_response_data_integrated_platform_status import (
-        GetProductResponseDataIntegratedPlatformStatus,
-    )
-    from ..models.get_product_response_data_main_image import GetProductResponseDataMainImage
-    from ..models.get_product_response_data_package_dimension import GetProductResponseDataPackageDimension
-    from ..models.get_product_response_data_package_weight import GetProductResponseDataPackageWeight
-    from ..models.get_product_response_data_pod_info import GetProductResponseDataPodInfo
-    from ..models.get_product_response_data_prescription_requirement import (
-        GetProductResponseDataPrescriptionRequirement,
-    )
-    from ..models.get_product_response_data_product_attribute import GetProductResponseDataProductAttribute
-    from ..models.get_product_response_data_scheduled_sale import GetProductResponseDataScheduledSale
-    from ..models.get_product_response_data_size_chart import GetProductResponseDataSizeChart
-    from ..models.get_product_response_data_sku import GetProductResponseDataSku
-    from ..models.get_product_response_data_subscribe_info import GetProductResponseDataSubscribeInfo
-    from ..models.get_product_response_data_video import GetProductResponseDataVideo
-    from ..models.product_family import ProductFamily
-    from ..models.recommended_category import RecommendedCategory
+  from ..models.brand import Brand
+  from ..models.get_product_response_data_audit import GetProductResponseDataAudit
+  from ..models.get_product_response_data_audit_failed_reason import GetProductResponseDataAuditFailedReason
+  from ..models.get_product_response_data_category_chain import GetProductResponseDataCategoryChain
+  from ..models.get_product_response_data_certification import GetProductResponseDataCertification
+  from ..models.get_product_response_data_delivery_option import GetProductResponseDataDeliveryOption
+  from ..models.get_product_response_data_global_product_association import GetProductResponseDataGlobalProductAssociation
+  from ..models.get_product_response_data_integrated_platform_status import GetProductResponseDataIntegratedPlatformStatus
+  from ..models.get_product_response_data_main_image import GetProductResponseDataMainImage
+  from ..models.get_product_response_data_package_dimension import GetProductResponseDataPackageDimension
+  from ..models.get_product_response_data_package_weight import GetProductResponseDataPackageWeight
+  from ..models.get_product_response_data_pod_info import GetProductResponseDataPodInfo
+  from ..models.get_product_response_data_prescription_requirement import GetProductResponseDataPrescriptionRequirement
+  from ..models.get_product_response_data_product_attribute import GetProductResponseDataProductAttribute
+  from ..models.get_product_response_data_scheduled_sale import GetProductResponseDataScheduledSale
+  from ..models.get_product_response_data_size_chart import GetProductResponseDataSizeChart
+  from ..models.get_product_response_data_sku import GetProductResponseDataSku
+  from ..models.get_product_response_data_subscribe_info import GetProductResponseDataSubscribeInfo
+  from ..models.get_product_response_data_video import GetProductResponseDataVideo
+  from ..models.product_family import ProductFamily
+  from ..models.recommended_category import RecommendedCategory
+
+
+
 
 
 T = TypeVar("T", bound="GetProductResponseData")
 
 
+
 @_attrs_define
 class GetProductResponseData:
-    """
-    Attributes:
-        audit (GetProductResponseDataAudit | Unset):
-        audit_failed_reasons (list[GetProductResponseDataAuditFailedReason] | Unset): TikTok Shop audit failure
-            information.
-        brand (Brand | Unset):
-        category_chains (list[GetProductResponseDataCategoryChain] | Unset): Product category tree information.
-        certifications (list[GetProductResponseDataCertification] | Unset): The list of certifications for your product.
-        create_time (int | Unset): The time when the product was created, expressed as a Unix timestamp in seconds.
-        delivery_options (list[GetProductResponseDataDeliveryOption] | Unset): The custom delivery options applied to
-            this product, overriding the default warehouse delivery option.
-            **Note**: This field is not supported in post-live drafts, therefore the values here will always reflect those
-            in the base version, even if you set `return_draft_version=true`.
-        description (str | Unset): The product description in HTML format.
-        external_product_id (str | Unset): An external identifier used in an external ecommerce platform. This is used
-            to associate the product between TikTok Shop and the external ecommerce platform.
-        global_product_association (GetProductResponseDataGlobalProductAssociation | Unset):
-        has_draft (bool | Unset): A flag to indicate if the product has a draft.
-            - true: It has a draft.
-            - false: It does not have a draft.
-        id (str | Unset): The product ID generated by TikTok Shop.
-        integrated_platform_statuses (list[GetProductResponseDataIntegratedPlatformStatus] | Unset): The current status
-            of the product on platforms that are natively integrated with TikTok Shop (e.g. TOKOPEDIA).
+    """ 
+        Attributes:
+            audit (GetProductResponseDataAudit | Unset):
+            audit_failed_reasons (list[GetProductResponseDataAuditFailedReason] | Unset): TikTok Shop audit failure
+                information.
+            brand (Brand | Unset):
+            category_chains (list[GetProductResponseDataCategoryChain] | Unset): Product category tree information.
+            certifications (list[GetProductResponseDataCertification] | Unset): The list of certifications for your product.
+            create_time (int | Unset): The time when the product was created, expressed as a Unix timestamp in seconds.
+            delivery_options (list[GetProductResponseDataDeliveryOption] | Unset): The custom delivery options applied to
+                this product, overriding the default warehouse delivery option.
+                **Note**: This field is not supported in post-live drafts, therefore the values here will always reflect those
+                in the base version, even if you set `return_draft_version=true`.
+            description (str | Unset): The product description in HTML format.
+            external_product_id (str | Unset): An external identifier used in an external ecommerce platform. This is used
+                to associate the product between TikTok Shop and the external ecommerce platform.
+            global_product_association (GetProductResponseDataGlobalProductAssociation | Unset):
+            has_draft (bool | Unset): A flag to indicate if the product has a draft.
+                - true: It has a draft.
+                - false: It does not have a draft.
+            id (str | Unset): The product ID generated by TikTok Shop.
+            integrated_platform_statuses (list[GetProductResponseDataIntegratedPlatformStatus] | Unset): The current status
+                of the product on platforms that are natively integrated with TikTok Shop (e.g. TOKOPEDIA).
 
-            **Note**: For Indonesia sellers, if you did not set the listing platform as `TOKOPEDIA` when creating or editing
-            a product, this will be omitted.
-        is_cod_allowed (bool | Unset): A flag indicating whether to show the Cash On Delivery (COD) payment option
-            during checkout.
-            Applicable only for the following markets:
-            - Global sellers: MY, PH, SA, TH, VN
-            - Local sellers: ID, MY, PH, SA, TH, VN
-        is_not_for_sale (bool | Unset): A flag indicating whether the product is not for sale and only available through
-            Gift with Purchase (GWP) promotions. Such products won't appear in searches or recommendations
-            True: Not for sale
-            False: For sale
-        is_pre_owned (bool | Unset): A flag to indicate if the product is pre-owned.
-            Applicable only if TOKOPEDIA is the sole listing platform.
+                **Note**: For Indonesia sellers, if you did not set the listing platform as `TOKOPEDIA` when creating or editing
+                a product, this will be omitted.
+            is_cod_allowed (bool | Unset): A flag indicating whether to show the Cash On Delivery (COD) payment option
+                during checkout.
+                Applicable only for the following markets:
+                - Global sellers: MY, PH, SA, TH, VN
+                - Local sellers: ID, MY, PH, SA, TH, VN
+            is_not_for_sale (bool | Unset): A flag indicating whether the product is not for sale and only available through
+                Gift with Purchase (GWP) promotions. Such products won't appear in searches or recommendations
+                True: Not for sale
+                False: For sale
+            is_pre_owned (bool | Unset): A flag to indicate if the product is pre-owned.
+                Applicable only if TOKOPEDIA is the sole listing platform.
 
-            **Note**: Pre-owned products on the TikTok Shop platform are identified by the `category_id`, which must belong
-            to one of the designated pre-owned product categories (e.g. pre-owned luxury bags, luggage, and accessories).
-        is_replicated (bool | Unset): A flag to indicate if the product contains a replica (created through local
-            replication) in other local markets.
-        key_product_features (list[str] | Unset): Key Product Features. They will be displayed in the Product highlight
-            module on the product detail page and will be used by search engines to increase your search weight for more
-            traffic. The total number of items should not exceed 5, and the total character count should not exceed 1500.
-        listing_quality_tier (str | Unset): The current quality tier of this product listing. The quality tier of a
-            product listing depends on the quality of the content in its product fields such as the title, image, attributes
-            etc.
+                **Note**: Pre-owned products on the TikTok Shop platform are identified by the `category_id`, which must belong
+                to one of the designated pre-owned product categories (e.g. pre-owned luxury bags, luggage, and accessories).
+            is_replicated (bool | Unset): A flag to indicate if the product contains a replica (created through local
+                replication) in other local markets.
+            key_product_features (list[str] | Unset): Key Product Features. They will be displayed in the Product highlight
+                module on the product detail page and will be used by search engines to increase your search weight for more
+                traffic. The total number of items should not exceed 5, and the total character count should not exceed 1500.
+            listing_quality_tier (str | Unset): The current quality tier of this product listing. The quality tier of a
+                product listing depends on the quality of the content in its product fields such as the title, image, attributes
+                etc.
 
-            Possible values:
-            - POOR
-            - FAIR
-            - GOOD
-            - EXCELLENT
+                Possible values:
+                - POOR
+                - FAIR
+                - GOOD
+                - EXCELLENT
 
-            **Note**: Available only for the US market.
-        main_images (list[GetProductResponseDataMainImage] | Unset): A list of images to display in the product image
-            gallery.
-        manufacturer_ids (list[str] | Unset): The list of manufacturer IDs.
-            Pass this value to the `manufacturer_id` field in the [Search Manufacturers API](67066a580dcee902fa03ccf9) to
-            obtain more information about a manufacturer.
+                **Note**: Available only for the US market.
+            main_images (list[GetProductResponseDataMainImage] | Unset): A list of images to display in the product image
+                gallery.
+            manufacturer_ids (list[str] | Unset): The list of manufacturer IDs.
+                Pass this value to the `manufacturer_id` field in the [Search Manufacturers API](67066a580dcee902fa03ccf9) to
+                obtain more information about a manufacturer.
 
-            **Note**: Applicable only for the EU market in certain categories
-        minimum_order_quantity (int | Unset): The minimum order quantity for the product.
-            Valid range: [1, 20]
+                **Note**: Applicable only for the EU market in certain categories
+            minimum_order_quantity (int | Unset): The minimum order quantity for the product.
+                Valid range: [1, 20]
 
-            Applicable only for the Indonesia market and selected sellers in other SEA markets. Contact your account manager
-            for more information about gaining access to this field.
-        package_dimensions (GetProductResponseDataPackageDimension | Unset):
-        package_weight (GetProductResponseDataPackageWeight | Unset):
-        pod_info (GetProductResponseDataPodInfo | Unset):
-        prescription_requirement (GetProductResponseDataPrescriptionRequirement | Unset):
-        primary_combined_product_id (str | Unset): If the product is a virtual bundle, this value is the ID of the
-            primary product in the bundle. The value is omitted if the product is not a virtual bundle.
-        product_attributes (list[GetProductResponseDataProductAttribute] | Unset): A list of general attributes (e.g.
-            manufacturer, country of origin, materials used) that describe the product as a whole, regardless of variant.
-        product_families (list[ProductFamily] | Unset): The **live** product family that this product belongs to. A
-            product family is a virtual group of products that share common characteristics (such as flavor, version, or
-            size), allowing them to appear as selectable variations on the product page.
-            **Note**:
-            - Applicable only for US local sellers.
-            - Omitted if this product does not belong to any product family.
-        product_status (str | Unset): The product status in TikTok Shop unrelated to its audit status.
-            Possible values:
-            - INITIAL
-            - DRAFT
-            - ACTIVATE
-            - SELLER_DEACTIVATED
-            - PLATFORM_DEACTIVATED
-            - FREEZE
-            - DELETED
+                Applicable only for the Indonesia market and selected sellers in other SEA markets. Contact your account manager
+                for more information about gaining access to this field.
+            package_dimensions (GetProductResponseDataPackageDimension | Unset):
+            package_weight (GetProductResponseDataPackageWeight | Unset):
+            pod_info (GetProductResponseDataPodInfo | Unset):
+            prescription_requirement (GetProductResponseDataPrescriptionRequirement | Unset):
+            primary_combined_product_id (str | Unset): If the product is a virtual bundle, this value is the ID of the
+                primary product in the bundle. The value is omitted if the product is not a virtual bundle.
+            product_attributes (list[GetProductResponseDataProductAttribute] | Unset): A list of general attributes (e.g.
+                manufacturer, country of origin, materials used) that describe the product as a whole, regardless of variant.
+            product_families (list[ProductFamily] | Unset): The **live** product family that this product belongs to. A
+                product family is a virtual group of products that share common characteristics (such as flavor, version, or
+                size), allowing them to appear as selectable variations on the product page.
+                **Note**:
+                - Applicable only for US local sellers.
+                - Omitted if this product does not belong to any product family.
+            product_status (str | Unset): The product status in TikTok Shop unrelated to its audit status.
+                Possible values:
+                - INITIAL
+                - DRAFT
+                - ACTIVATE
+                - SELLER_DEACTIVATED
+                - PLATFORM_DEACTIVATED
+                - FREEZE
+                - DELETED
 
-            **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or
-            editing a product, this will be omitted.
-        product_tags (list[str] | Unset): Product tag to identity special type product
-            Possible values: AUCTION
-        product_types (list[str] | Unset): The product type.
-            Possible values:
-            - COMBINED_PRODUCT: Indicates this is a virtual bundle product.
-            - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle.
-            - GPR_TARGET_PRODUCT: Indicates this product is synchronized to global listings. Applicable only for the EU
-            market.
-        recommended_categories (list[RecommendedCategory] | Unset): Recommended categories for the product based on the
-            product title, description, and images.
-        responsible_person_ids (list[str] | Unset): The list of responsible person IDs.
-            Pass this value to the `responsible_person_id` field in the [Search Responsible Persons
-            API](67066a55f17b7d02f95d2fb1) to obtain more information about a responsible person.
+                **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or
+                editing a product, this will be omitted.
+            product_tags (list[str] | Unset): Product tag to identity special type product
+                Possible values: AUCTION
+            product_types (list[str] | Unset): The product type.
+                Possible values:
+                - COMBINED_PRODUCT: Indicates this is a virtual bundle product.
+                - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle.
+                - GPR_TARGET_PRODUCT: Indicates this product is synchronized to global listings. Applicable only for the EU
+                market.
+            recommended_categories (list[RecommendedCategory] | Unset): Recommended categories for the product based on the
+                product title, description, and images.
+            responsible_person_ids (list[str] | Unset): The list of responsible person IDs.
+                Pass this value to the `responsible_person_id` field in the [Search Responsible Persons
+                API](67066a55f17b7d02f95d2fb1) to obtain more information about a responsible person.
 
-            **Note**: Applicable only for the EU market in certain categories
-        scheduled_sale (GetProductResponseDataScheduledSale | Unset):
-        search_terms (list[str] | Unset): Search terms (ST words). ST words will not be displayed to consumers; they are
-            only used in search engines to increase your search weight and gain more traffic. Please ensure that ST words
-            are consistent with the product description, with a maximum of 15 terms and a total of no more than 250
-            characters.
-        shipping_insurance_requirement (str | Unset): The shipping insurance purchase requirement imposed on buyers for
-            the product.
+                **Note**: Applicable only for the EU market in certain categories
+            scheduled_sale (GetProductResponseDataScheduledSale | Unset):
+            search_terms (list[str] | Unset): Search terms (ST words). ST words will not be displayed to consumers; they are
+                only used in search engines to increase your search weight and gain more traffic. Please ensure that ST words
+                are consistent with the product description, with a maximum of 15 terms and a total of no more than 250
+                characters.
+            shipping_insurance_requirement (str | Unset): The shipping insurance purchase requirement imposed on buyers for
+                the product.
 
-            Possible values:
-            - REQUIRED: Shipping insurance is mandatory and buyers can't opt out.
-            - OPTIONAL: Buyers can choose to purchase shipping insurance through the platform.
-            - NOT_SUPPORTED: Shipping insurance is not supported for the product.
-            Default: OPTIONAL
+                Possible values:
+                - REQUIRED: Shipping insurance is mandatory and buyers can't opt out.
+                - OPTIONAL: Buyers can choose to purchase shipping insurance through the platform.
+                - NOT_SUPPORTED: Shipping insurance is not supported for the product.
+                Default: OPTIONAL
 
-            Applicable only if the listing platforms include TOKOPEDIA.
-        shipping_template_id (str | Unset): Identifier of the shipping template that was bound to the product
-        size_chart (GetProductResponseDataSizeChart | Unset):
-        skus (list[GetProductResponseDataSku] | Unset): A list of Stock Keeping Units (SKUs) used to identify distinct
-            variants of the product.
-        status (str | Unset): The product status in TikTok Shop. This status incorporates both the product status and
-            the audit status.
-            Possible values:
-            - DRAFT
-            - PENDING
-            - FAILED
-            - ACTIVATE
-            - SELLER_DEACTIVATED
-            - PLATFORM_DEACTIVATED
-            - FREEZE
-            - DELETED
-            - SCHEDULED
+                Applicable only if the listing platforms include TOKOPEDIA.
+            shipping_template_id (str | Unset): Identifier of the shipping template that was bound to the product
+            size_chart (GetProductResponseDataSizeChart | Unset):
+            skus (list[GetProductResponseDataSku] | Unset): A list of Stock Keeping Units (SKUs) used to identify distinct
+                variants of the product.
+            status (str | Unset): The product status in TikTok Shop. This status incorporates both the product status and
+                the audit status.
+                Possible values:
+                - DRAFT
+                - PENDING
+                - FAILED
+                - ACTIVATE
+                - SELLER_DEACTIVATED
+                - PLATFORM_DEACTIVATED
+                - FREEZE
+                - DELETED
+                - SCHEDULED
 
-            **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or
-            editing a product, this will be omitted.
-        subscribe_info (GetProductResponseDataSubscribeInfo | Unset):
-        title (str | Unset): The product title.
-        update_time (int | Unset): The time when the product was last updated, expressed as a Unix timestamp in seconds.
-        video (GetProductResponseDataVideo | Unset):
-        selling_format (str | Unset): The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION,
-            FIXED_PRICE_AND_LIVE_AUCTION.
-        is_blind_box (bool | Unset): Whether the product is a blind box of lucky bag. For example: PopMart
-    """
+                **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or
+                editing a product, this will be omitted.
+            subscribe_info (GetProductResponseDataSubscribeInfo | Unset):
+            title (str | Unset): The product title.
+            update_time (int | Unset): The time when the product was last updated, expressed as a Unix timestamp in seconds.
+            video (GetProductResponseDataVideo | Unset):
+            selling_format (str | Unset): The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION,
+                FIXED_PRICE_AND_LIVE_AUCTION.
+            is_blind_box (bool | Unset): Whether the product is a blind box of lucky bag. For example: PopMart
+     """
 
     audit: GetProductResponseDataAudit | Unset = UNSET
     audit_failed_reasons: list[GetProductResponseDataAuditFailedReason] | Unset = UNSET
@@ -244,7 +245,32 @@ class GetProductResponseData:
     is_blind_box: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.brand import Brand # noqa: PLC0415
+        from ..models.get_product_response_data_audit import GetProductResponseDataAudit # noqa: PLC0415
+        from ..models.get_product_response_data_audit_failed_reason import GetProductResponseDataAuditFailedReason # noqa: PLC0415
+        from ..models.get_product_response_data_category_chain import GetProductResponseDataCategoryChain # noqa: PLC0415
+        from ..models.get_product_response_data_certification import GetProductResponseDataCertification # noqa: PLC0415
+        from ..models.get_product_response_data_delivery_option import GetProductResponseDataDeliveryOption # noqa: PLC0415
+        from ..models.get_product_response_data_global_product_association import GetProductResponseDataGlobalProductAssociation # noqa: PLC0415
+        from ..models.get_product_response_data_integrated_platform_status import GetProductResponseDataIntegratedPlatformStatus # noqa: PLC0415
+        from ..models.get_product_response_data_main_image import GetProductResponseDataMainImage # noqa: PLC0415
+        from ..models.get_product_response_data_package_dimension import GetProductResponseDataPackageDimension # noqa: PLC0415
+        from ..models.get_product_response_data_package_weight import GetProductResponseDataPackageWeight # noqa: PLC0415
+        from ..models.get_product_response_data_pod_info import GetProductResponseDataPodInfo # noqa: PLC0415
+        from ..models.get_product_response_data_prescription_requirement import GetProductResponseDataPrescriptionRequirement # noqa: PLC0415
+        from ..models.get_product_response_data_product_attribute import GetProductResponseDataProductAttribute # noqa: PLC0415
+        from ..models.get_product_response_data_scheduled_sale import GetProductResponseDataScheduledSale # noqa: PLC0415
+        from ..models.get_product_response_data_size_chart import GetProductResponseDataSizeChart # noqa: PLC0415
+        from ..models.get_product_response_data_sku import GetProductResponseDataSku # noqa: PLC0415
+        from ..models.get_product_response_data_subscribe_info import GetProductResponseDataSubscribeInfo # noqa: PLC0415
+        from ..models.get_product_response_data_video import GetProductResponseDataVideo # noqa: PLC0415
+        from ..models.product_family import ProductFamily # noqa: PLC0415
+        from ..models.recommended_category import RecommendedCategory # noqa: PLC0415
         audit: dict[str, Any] | Unset = UNSET
         if not isinstance(self.audit, Unset):
             audit = self.audit.to_dict()
@@ -255,6 +281,8 @@ class GetProductResponseData:
             for audit_failed_reasons_item_data in self.audit_failed_reasons:
                 audit_failed_reasons_item = audit_failed_reasons_item_data.to_dict()
                 audit_failed_reasons.append(audit_failed_reasons_item)
+
+
 
         brand: dict[str, Any] | Unset = UNSET
         if not isinstance(self.brand, Unset):
@@ -267,12 +295,16 @@ class GetProductResponseData:
                 category_chains_item = category_chains_item_data.to_dict()
                 category_chains.append(category_chains_item)
 
+
+
         certifications: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.certifications, Unset):
             certifications = []
             for certifications_item_data in self.certifications:
                 certifications_item = certifications_item_data.to_dict()
                 certifications.append(certifications_item)
+
+
 
         create_time = self.create_time
 
@@ -282,6 +314,8 @@ class GetProductResponseData:
             for delivery_options_item_data in self.delivery_options:
                 delivery_options_item = delivery_options_item_data.to_dict()
                 delivery_options.append(delivery_options_item)
+
+
 
         description = self.description
 
@@ -302,6 +336,8 @@ class GetProductResponseData:
                 integrated_platform_statuses_item = integrated_platform_statuses_item_data.to_dict()
                 integrated_platform_statuses.append(integrated_platform_statuses_item)
 
+
+
         is_cod_allowed = self.is_cod_allowed
 
         is_not_for_sale = self.is_not_for_sale
@@ -314,6 +350,8 @@ class GetProductResponseData:
         if not isinstance(self.key_product_features, Unset):
             key_product_features = self.key_product_features
 
+
+
         listing_quality_tier = self.listing_quality_tier
 
         main_images: list[dict[str, Any]] | Unset = UNSET
@@ -323,9 +361,13 @@ class GetProductResponseData:
                 main_images_item = main_images_item_data.to_dict()
                 main_images.append(main_images_item)
 
+
+
         manufacturer_ids: list[str] | Unset = UNSET
         if not isinstance(self.manufacturer_ids, Unset):
             manufacturer_ids = self.manufacturer_ids
+
+
 
         minimum_order_quantity = self.minimum_order_quantity
 
@@ -354,6 +396,8 @@ class GetProductResponseData:
                 product_attributes_item = product_attributes_item_data.to_dict()
                 product_attributes.append(product_attributes_item)
 
+
+
         product_families: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.product_families, Unset):
             product_families = []
@@ -361,15 +405,21 @@ class GetProductResponseData:
                 product_families_item = product_families_item_data.to_dict()
                 product_families.append(product_families_item)
 
+
+
         product_status = self.product_status
 
         product_tags: list[str] | Unset = UNSET
         if not isinstance(self.product_tags, Unset):
             product_tags = self.product_tags
 
+
+
         product_types: list[str] | Unset = UNSET
         if not isinstance(self.product_types, Unset):
             product_types = self.product_types
+
+
 
         recommended_categories: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.recommended_categories, Unset):
@@ -378,9 +428,13 @@ class GetProductResponseData:
                 recommended_categories_item = recommended_categories_item_data.to_dict()
                 recommended_categories.append(recommended_categories_item)
 
+
+
         responsible_person_ids: list[str] | Unset = UNSET
         if not isinstance(self.responsible_person_ids, Unset):
             responsible_person_ids = self.responsible_person_ids
+
+
 
         scheduled_sale: dict[str, Any] | Unset = UNSET
         if not isinstance(self.scheduled_sale, Unset):
@@ -389,6 +443,8 @@ class GetProductResponseData:
         search_terms: list[str] | Unset = UNSET
         if not isinstance(self.search_terms, Unset):
             search_terms = self.search_terms
+
+
 
         shipping_insurance_requirement = self.shipping_insurance_requirement
 
@@ -404,6 +460,8 @@ class GetProductResponseData:
             for skus_item_data in self.skus:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
+
+
 
         status = self.status
 
@@ -423,9 +481,11 @@ class GetProductResponseData:
 
         is_blind_box = self.is_blind_box
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if audit is not UNSET:
             field_dict["audit"] = audit
         if audit_failed_reasons is not UNSET:
@@ -523,79 +583,63 @@ class GetProductResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.brand import Brand  # noqa: PLC0415
-        from ..models.get_product_response_data_audit import GetProductResponseDataAudit  # noqa: PLC0415
-        from ..models.get_product_response_data_audit_failed_reason import (
-            GetProductResponseDataAuditFailedReason,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_category_chain import (
-            GetProductResponseDataCategoryChain,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_certification import (
-            GetProductResponseDataCertification,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_delivery_option import (
-            GetProductResponseDataDeliveryOption,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_global_product_association import (
-            GetProductResponseDataGlobalProductAssociation,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_integrated_platform_status import (
-            GetProductResponseDataIntegratedPlatformStatus,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_main_image import GetProductResponseDataMainImage  # noqa: PLC0415
-        from ..models.get_product_response_data_package_dimension import (
-            GetProductResponseDataPackageDimension,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_package_weight import (
-            GetProductResponseDataPackageWeight,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_pod_info import GetProductResponseDataPodInfo  # noqa: PLC0415
-        from ..models.get_product_response_data_prescription_requirement import (
-            GetProductResponseDataPrescriptionRequirement,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_product_attribute import (
-            GetProductResponseDataProductAttribute,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_scheduled_sale import (
-            GetProductResponseDataScheduledSale,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_size_chart import GetProductResponseDataSizeChart  # noqa: PLC0415
-        from ..models.get_product_response_data_sku import GetProductResponseDataSku  # noqa: PLC0415
-        from ..models.get_product_response_data_subscribe_info import (
-            GetProductResponseDataSubscribeInfo,  # noqa: PLC0415
-        )
-        from ..models.get_product_response_data_video import GetProductResponseDataVideo  # noqa: PLC0415
-        from ..models.product_family import ProductFamily  # noqa: PLC0415
-        from ..models.recommended_category import RecommendedCategory  # noqa: PLC0415
-
+        from ..models.brand import Brand # noqa: PLC0415
+        from ..models.get_product_response_data_audit import GetProductResponseDataAudit # noqa: PLC0415
+        from ..models.get_product_response_data_audit_failed_reason import GetProductResponseDataAuditFailedReason # noqa: PLC0415
+        from ..models.get_product_response_data_category_chain import GetProductResponseDataCategoryChain # noqa: PLC0415
+        from ..models.get_product_response_data_certification import GetProductResponseDataCertification # noqa: PLC0415
+        from ..models.get_product_response_data_delivery_option import GetProductResponseDataDeliveryOption # noqa: PLC0415
+        from ..models.get_product_response_data_global_product_association import GetProductResponseDataGlobalProductAssociation # noqa: PLC0415
+        from ..models.get_product_response_data_integrated_platform_status import GetProductResponseDataIntegratedPlatformStatus # noqa: PLC0415
+        from ..models.get_product_response_data_main_image import GetProductResponseDataMainImage # noqa: PLC0415
+        from ..models.get_product_response_data_package_dimension import GetProductResponseDataPackageDimension # noqa: PLC0415
+        from ..models.get_product_response_data_package_weight import GetProductResponseDataPackageWeight # noqa: PLC0415
+        from ..models.get_product_response_data_pod_info import GetProductResponseDataPodInfo # noqa: PLC0415
+        from ..models.get_product_response_data_prescription_requirement import GetProductResponseDataPrescriptionRequirement # noqa: PLC0415
+        from ..models.get_product_response_data_product_attribute import GetProductResponseDataProductAttribute # noqa: PLC0415
+        from ..models.get_product_response_data_scheduled_sale import GetProductResponseDataScheduledSale # noqa: PLC0415
+        from ..models.get_product_response_data_size_chart import GetProductResponseDataSizeChart # noqa: PLC0415
+        from ..models.get_product_response_data_sku import GetProductResponseDataSku # noqa: PLC0415
+        from ..models.get_product_response_data_subscribe_info import GetProductResponseDataSubscribeInfo # noqa: PLC0415
+        from ..models.get_product_response_data_video import GetProductResponseDataVideo # noqa: PLC0415
+        from ..models.product_family import ProductFamily # noqa: PLC0415
+        from ..models.recommended_category import RecommendedCategory # noqa: PLC0415
         d = dict(src_dict)
         _audit = d.pop("audit", UNSET)
         audit: GetProductResponseDataAudit | Unset
-        if isinstance(_audit, Unset):
+        if isinstance(_audit,  Unset):
             audit = UNSET
         else:
             audit = GetProductResponseDataAudit.from_dict(_audit)
+
+
+
 
         _audit_failed_reasons = d.pop("audit_failed_reasons", UNSET)
         audit_failed_reasons: list[GetProductResponseDataAuditFailedReason] | Unset = UNSET
         if _audit_failed_reasons is not UNSET:
             audit_failed_reasons = []
             for audit_failed_reasons_item_data in _audit_failed_reasons:
-                audit_failed_reasons_item = GetProductResponseDataAuditFailedReason.from_dict(
-                    audit_failed_reasons_item_data
-                )
+                audit_failed_reasons_item = GetProductResponseDataAuditFailedReason.from_dict(audit_failed_reasons_item_data)
+
+
 
                 audit_failed_reasons.append(audit_failed_reasons_item)
 
+
         _brand = d.pop("brand", UNSET)
         brand: Brand | Unset
-        if isinstance(_brand, Unset):
+        if isinstance(_brand,  Unset):
             brand = UNSET
         else:
             brand = Brand.from_dict(_brand)
+
+
+
 
         _category_chains = d.pop("category_chains", UNSET)
         category_chains: list[GetProductResponseDataCategoryChain] | Unset = UNSET
@@ -604,7 +648,10 @@ class GetProductResponseData:
             for category_chains_item_data in _category_chains:
                 category_chains_item = GetProductResponseDataCategoryChain.from_dict(category_chains_item_data)
 
+
+
                 category_chains.append(category_chains_item)
+
 
         _certifications = d.pop("certifications", UNSET)
         certifications: list[GetProductResponseDataCertification] | Unset = UNSET
@@ -613,7 +660,10 @@ class GetProductResponseData:
             for certifications_item_data in _certifications:
                 certifications_item = GetProductResponseDataCertification.from_dict(certifications_item_data)
 
+
+
                 certifications.append(certifications_item)
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -624,7 +674,10 @@ class GetProductResponseData:
             for delivery_options_item_data in _delivery_options:
                 delivery_options_item = GetProductResponseDataDeliveryOption.from_dict(delivery_options_item_data)
 
+
+
                 delivery_options.append(delivery_options_item)
+
 
         description = d.pop("description", UNSET)
 
@@ -632,12 +685,13 @@ class GetProductResponseData:
 
         _global_product_association = d.pop("global_product_association", UNSET)
         global_product_association: GetProductResponseDataGlobalProductAssociation | Unset
-        if isinstance(_global_product_association, Unset):
+        if isinstance(_global_product_association,  Unset):
             global_product_association = UNSET
         else:
-            global_product_association = GetProductResponseDataGlobalProductAssociation.from_dict(
-                _global_product_association
-            )
+            global_product_association = GetProductResponseDataGlobalProductAssociation.from_dict(_global_product_association)
+
+
+
 
         has_draft = d.pop("has_draft", UNSET)
 
@@ -648,11 +702,12 @@ class GetProductResponseData:
         if _integrated_platform_statuses is not UNSET:
             integrated_platform_statuses = []
             for integrated_platform_statuses_item_data in _integrated_platform_statuses:
-                integrated_platform_statuses_item = GetProductResponseDataIntegratedPlatformStatus.from_dict(
-                    integrated_platform_statuses_item_data
-                )
+                integrated_platform_statuses_item = GetProductResponseDataIntegratedPlatformStatus.from_dict(integrated_platform_statuses_item_data)
+
+
 
                 integrated_platform_statuses.append(integrated_platform_statuses_item)
+
 
         is_cod_allowed = d.pop("is_cod_allowed", UNSET)
 
@@ -664,6 +719,7 @@ class GetProductResponseData:
 
         key_product_features = cast(list[str], d.pop("key_product_features", UNSET))
 
+
         listing_quality_tier = d.pop("listing_quality_tier", UNSET)
 
         _main_images = d.pop("main_images", UNSET)
@@ -673,41 +729,55 @@ class GetProductResponseData:
             for main_images_item_data in _main_images:
                 main_images_item = GetProductResponseDataMainImage.from_dict(main_images_item_data)
 
+
+
                 main_images.append(main_images_item)
 
+
         manufacturer_ids = cast(list[str], d.pop("manufacturer_ids", UNSET))
+
 
         minimum_order_quantity = d.pop("minimum_order_quantity", UNSET)
 
         _package_dimensions = d.pop("package_dimensions", UNSET)
         package_dimensions: GetProductResponseDataPackageDimension | Unset
-        if isinstance(_package_dimensions, Unset):
+        if isinstance(_package_dimensions,  Unset):
             package_dimensions = UNSET
         else:
             package_dimensions = GetProductResponseDataPackageDimension.from_dict(_package_dimensions)
 
+
+
+
         _package_weight = d.pop("package_weight", UNSET)
         package_weight: GetProductResponseDataPackageWeight | Unset
-        if isinstance(_package_weight, Unset):
+        if isinstance(_package_weight,  Unset):
             package_weight = UNSET
         else:
             package_weight = GetProductResponseDataPackageWeight.from_dict(_package_weight)
 
+
+
+
         _pod_info = d.pop("pod_info", UNSET)
         pod_info: GetProductResponseDataPodInfo | Unset
-        if isinstance(_pod_info, Unset):
+        if isinstance(_pod_info,  Unset):
             pod_info = UNSET
         else:
             pod_info = GetProductResponseDataPodInfo.from_dict(_pod_info)
 
+
+
+
         _prescription_requirement = d.pop("prescription_requirement", UNSET)
         prescription_requirement: GetProductResponseDataPrescriptionRequirement | Unset
-        if isinstance(_prescription_requirement, Unset):
+        if isinstance(_prescription_requirement,  Unset):
             prescription_requirement = UNSET
         else:
-            prescription_requirement = GetProductResponseDataPrescriptionRequirement.from_dict(
-                _prescription_requirement
-            )
+            prescription_requirement = GetProductResponseDataPrescriptionRequirement.from_dict(_prescription_requirement)
+
+
+
 
         primary_combined_product_id = d.pop("primary_combined_product_id", UNSET)
 
@@ -718,7 +788,10 @@ class GetProductResponseData:
             for product_attributes_item_data in _product_attributes:
                 product_attributes_item = GetProductResponseDataProductAttribute.from_dict(product_attributes_item_data)
 
+
+
                 product_attributes.append(product_attributes_item)
+
 
         _product_families = d.pop("product_families", UNSET)
         product_families: list[ProductFamily] | Unset = UNSET
@@ -727,13 +800,18 @@ class GetProductResponseData:
             for product_families_item_data in _product_families:
                 product_families_item = ProductFamily.from_dict(product_families_item_data)
 
+
+
                 product_families.append(product_families_item)
+
 
         product_status = d.pop("product_status", UNSET)
 
         product_tags = cast(list[str], d.pop("product_tags", UNSET))
 
+
         product_types = cast(list[str], d.pop("product_types", UNSET))
+
 
         _recommended_categories = d.pop("recommended_categories", UNSET)
         recommended_categories: list[RecommendedCategory] | Unset = UNSET
@@ -742,18 +820,26 @@ class GetProductResponseData:
             for recommended_categories_item_data in _recommended_categories:
                 recommended_categories_item = RecommendedCategory.from_dict(recommended_categories_item_data)
 
+
+
                 recommended_categories.append(recommended_categories_item)
+
 
         responsible_person_ids = cast(list[str], d.pop("responsible_person_ids", UNSET))
 
+
         _scheduled_sale = d.pop("scheduled_sale", UNSET)
         scheduled_sale: GetProductResponseDataScheduledSale | Unset
-        if isinstance(_scheduled_sale, Unset):
+        if isinstance(_scheduled_sale,  Unset):
             scheduled_sale = UNSET
         else:
             scheduled_sale = GetProductResponseDataScheduledSale.from_dict(_scheduled_sale)
 
+
+
+
         search_terms = cast(list[str], d.pop("search_terms", UNSET))
+
 
         shipping_insurance_requirement = d.pop("shipping_insurance_requirement", UNSET)
 
@@ -761,10 +847,13 @@ class GetProductResponseData:
 
         _size_chart = d.pop("size_chart", UNSET)
         size_chart: GetProductResponseDataSizeChart | Unset
-        if isinstance(_size_chart, Unset):
+        if isinstance(_size_chart,  Unset):
             size_chart = UNSET
         else:
             size_chart = GetProductResponseDataSizeChart.from_dict(_size_chart)
+
+
+
 
         _skus = d.pop("skus", UNSET)
         skus: list[GetProductResponseDataSku] | Unset = UNSET
@@ -773,16 +862,22 @@ class GetProductResponseData:
             for skus_item_data in _skus:
                 skus_item = GetProductResponseDataSku.from_dict(skus_item_data)
 
+
+
                 skus.append(skus_item)
+
 
         status = d.pop("status", UNSET)
 
         _subscribe_info = d.pop("subscribe_info", UNSET)
         subscribe_info: GetProductResponseDataSubscribeInfo | Unset
-        if isinstance(_subscribe_info, Unset):
+        if isinstance(_subscribe_info,  Unset):
             subscribe_info = UNSET
         else:
             subscribe_info = GetProductResponseDataSubscribeInfo.from_dict(_subscribe_info)
+
+
+
 
         title = d.pop("title", UNSET)
 
@@ -790,10 +885,13 @@ class GetProductResponseData:
 
         _video = d.pop("video", UNSET)
         video: GetProductResponseDataVideo | Unset
-        if isinstance(_video, Unset):
+        if isinstance(_video,  Unset):
             video = UNSET
         else:
             video = GetProductResponseDataVideo.from_dict(_video)
+
+
+
 
         selling_format = d.pop("selling_format", UNSET)
 
@@ -848,6 +946,7 @@ class GetProductResponseData:
             selling_format=selling_format,
             is_blind_box=is_blind_box,
         )
+
 
         get_product_response_data.additional_properties = d
         return get_product_response_data

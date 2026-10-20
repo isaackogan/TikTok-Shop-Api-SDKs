@@ -1,27 +1,35 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CheckProductListingResponseDataDiagnosisSuggestionImage")
+
 
 
 @_attrs_define
 class CheckProductListingResponseDataDiagnosisSuggestionImage:
-    """
-    Attributes:
-        uri (str | Unset): The original URI of the image.
-        url (str | Unset): The original URL of the image.
-        optimized_uri (str | Unset): The URI of the image after optimization.
-        optimized_url (str | Unset): The URL of the image after optimization.
-        height (int | Unset): The image height after optimization.
-        width (int | Unset): The image width after optimization.
-    """
+    """ 
+        Attributes:
+            uri (str | Unset): The original URI of the image.
+            url (str | Unset): The original URL of the image.
+            optimized_uri (str | Unset): The URI of the image after optimization.
+            optimized_url (str | Unset): The URL of the image after optimization.
+            height (int | Unset): The image height after optimization.
+            width (int | Unset): The image width after optimization.
+     """
 
     uri: str | Unset = UNSET
     url: str | Unset = UNSET
@@ -30,6 +38,10 @@ class CheckProductListingResponseDataDiagnosisSuggestionImage:
     height: int | Unset = UNSET
     width: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         uri = self.uri
@@ -44,9 +56,11 @@ class CheckProductListingResponseDataDiagnosisSuggestionImage:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if uri is not UNSET:
             field_dict["uri"] = uri
         if url is not UNSET:
@@ -61,6 +75,8 @@ class CheckProductListingResponseDataDiagnosisSuggestionImage:
             field_dict["width"] = width
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,6 +101,7 @@ class CheckProductListingResponseDataDiagnosisSuggestionImage:
             height=height,
             width=width,
         )
+
 
         check_product_listing_response_data_diagnosis_suggestion_image.additional_properties = d
         return check_product_listing_response_data_diagnosis_suggestion_image

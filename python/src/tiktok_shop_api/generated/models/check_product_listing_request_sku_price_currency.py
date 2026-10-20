@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CheckProductListingRequestSkuPriceCurrency(StrEnum):
     BRL = "BRL"
     CZK = "CZK"

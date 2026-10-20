@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetConversationsLocale(StrEnum):
     DE_DE = "de-DE"
     EN = "en"

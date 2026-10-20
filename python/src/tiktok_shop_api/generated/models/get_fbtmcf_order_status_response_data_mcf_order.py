@@ -1,33 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order import (
-        GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder,
-    )
+  from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order import GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder
+
+
+
 
 
 T = TypeVar("T", bound="GetFBTMCFOrderStatusResponseDataMcfOrder")
 
 
+
 @_attrs_define
 class GetFBTMCFOrderStatusResponseDataMcfOrder:
-    """
-    Attributes:
-        external_order_id (str | Unset): The corresponding order ID in your OMS.
-        mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
-        consign_orders (list[GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder] | Unset): The consign orders created
-            for the MCF order. If fulfillment is split across multiple packages, this array contains one entry for each
-            package.
-        create_time (int | Unset): The Unix timestamp, in seconds, when the MCF order was created.
-    """
+    """ 
+        Attributes:
+            external_order_id (str | Unset): The corresponding order ID in your OMS.
+            mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
+            consign_orders (list[GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder] | Unset): The consign orders created
+                for the MCF order. If fulfillment is split across multiple packages, this array contains one entry for each
+                package.
+            create_time (int | Unset): The Unix timestamp, in seconds, when the MCF order was created.
+     """
 
     external_order_id: str | Unset = UNSET
     mcf_order_id: str | Unset = UNSET
@@ -35,7 +40,12 @@ class GetFBTMCFOrderStatusResponseDataMcfOrder:
     create_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order import GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder # noqa: PLC0415
         external_order_id = self.external_order_id
 
         mcf_order_id = self.mcf_order_id
@@ -47,11 +57,15 @@ class GetFBTMCFOrderStatusResponseDataMcfOrder:
                 consign_orders_item = consign_orders_item_data.to_dict()
                 consign_orders.append(consign_orders_item)
 
+
+
         create_time = self.create_time
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if external_order_id is not UNSET:
             field_dict["external_order_id"] = external_order_id
         if mcf_order_id is not UNSET:
@@ -63,12 +77,11 @@ class GetFBTMCFOrderStatusResponseDataMcfOrder:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order import (
-            GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder,  # noqa: PLC0415
-        )
-
+        from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order import GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder # noqa: PLC0415
         d = dict(src_dict)
         external_order_id = d.pop("external_order_id", UNSET)
 
@@ -79,11 +92,12 @@ class GetFBTMCFOrderStatusResponseDataMcfOrder:
         if _consign_orders is not UNSET:
             consign_orders = []
             for consign_orders_item_data in _consign_orders:
-                consign_orders_item = GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder.from_dict(
-                    consign_orders_item_data
-                )
+                consign_orders_item = GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder.from_dict(consign_orders_item_data)
+
+
 
                 consign_orders.append(consign_orders_item)
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -93,6 +107,7 @@ class GetFBTMCFOrderStatusResponseDataMcfOrder:
             consign_orders=consign_orders,
             create_time=create_time,
         )
+
 
         get_fbtmcf_order_status_response_data_mcf_order.additional_properties = d
         return get_fbtmcf_order_status_response_data_mcf_order

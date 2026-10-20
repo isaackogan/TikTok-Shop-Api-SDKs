@@ -1,54 +1,62 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment")
+
 
 
 @_attrs_define
 class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
-    """
-    Attributes:
-        id (str | Unset): The fulfillment identifier.
-        shop_id (str | Unset): The TikTok Shop identifier.
-        application_id (str | Unset): The sample application identifier.
-        sample_application_type (str | Unset): The type of the sample application. Possible values:
-            - FREE_SAMPLE
-            - SAMPLE_COUPON
-            - SAMPLE_CAMPAIGN
-            - PLATFORM_FREE_SAMPLE
-            - REFUNDABLE_SAMPLE
-            - UNSPECIFIED
-        product_id (str | Unset): The product identifier.
-        expiration_time (int | Unset): Fulfillment deadline timestamp.
-            Usually the value is  `{you_receiving_sample_time} + 14Days`. But if you apply for fulfillment suspension, the
-            value is `{you_receiving_sample_time} + 14Days + total_suspend_duration`.
-        total_suspend_duration (int | Unset): The duration you applied for fulfillment suspension in seconds.
-        status (str | Unset): The fulfillment status.This is an enumerated type with values:
-            - PENDING: The creator has not yet fulfilled the content creation obligation.
-            - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
-            - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
-            - FAILED: Fulfillment failed; the content did not meet the required standards.
-            - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline.SUSPEND: Fulfillment has been
-            suspended.
-            - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
-            - EXEMPTED: The creator is exempt from the fulfillment obligation.
-        bound_product_status (str | Unset): The promotion status of the product associated with the fulfillment.
-            Possible values:
-            - UNKNOWN: The product's promotion status is unknown.
-            - LIVE: The product is available for promotion.
-            - OUT_OF_STOCK: The product is out of stock.
-            - SELLER_DEACTIVATE: The product has been deactivated by the seller.
-            - PLATFORM_DEACTIVATE: The product has been deactivated by the platform.
-            - NO_PLAN: There is no valid plan available for the creator to promote the product.
-            - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The fulfillment identifier.
+            shop_id (str | Unset): The TikTok Shop identifier.
+            application_id (str | Unset): The sample application identifier.
+            sample_application_type (str | Unset): The type of the sample application. Possible values:
+                - FREE_SAMPLE
+                - SAMPLE_COUPON
+                - SAMPLE_CAMPAIGN
+                - PLATFORM_FREE_SAMPLE
+                - REFUNDABLE_SAMPLE
+                - UNSPECIFIED
+            product_id (str | Unset): The product identifier.
+            expiration_time (int | Unset): Fulfillment deadline timestamp.
+                Usually the value is  `{you_receiving_sample_time} + 14Days`. But if you apply for fulfillment suspension, the
+                value is `{you_receiving_sample_time} + 14Days + total_suspend_duration`.
+            total_suspend_duration (int | Unset): The duration you applied for fulfillment suspension in seconds.
+            status (str | Unset): The fulfillment status.This is an enumerated type with values:
+                - PENDING: The creator has not yet fulfilled the content creation obligation.
+                - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
+                - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
+                - FAILED: Fulfillment failed; the content did not meet the required standards.
+                - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline.SUSPEND: Fulfillment has been
+                suspended.
+                - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
+                - EXEMPTED: The creator is exempt from the fulfillment obligation.
+            bound_product_status (str | Unset): The promotion status of the product associated with the fulfillment.
+                Possible values:
+                - UNKNOWN: The product's promotion status is unknown.
+                - LIVE: The product is available for promotion.
+                - OUT_OF_STOCK: The product is out of stock.
+                - SELLER_DEACTIVATE: The product has been deactivated by the seller.
+                - PLATFORM_DEACTIVATE: The product has been deactivated by the platform.
+                - NO_PLAN: There is no valid plan available for the creator to promote the product.
+                - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
+     """
 
     id: str | Unset = UNSET
     shop_id: str | Unset = UNSET
@@ -60,6 +68,10 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
     status: str | Unset = UNSET
     bound_product_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -80,9 +92,11 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
 
         bound_product_status = self.bound_product_status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if shop_id is not UNSET:
@@ -103,6 +117,8 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
             field_dict["bound_product_status"] = bound_product_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -136,6 +152,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
             status=status,
             bound_product_status=bound_product_status,
         )
+
 
         creator_search_sample_application_fulfillments_response_data_fulfillment.additional_properties = d
         return creator_search_sample_application_fulfillments_response_data_fulfillment

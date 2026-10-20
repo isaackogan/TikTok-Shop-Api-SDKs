@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SendMessageRequestType(StrEnum):
     COUPON_CARD = "COUPON_CARD"
     IMAGE = "IMAGE"

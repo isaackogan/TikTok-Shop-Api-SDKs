@@ -1,57 +1,60 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_creator import (
-        GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator,
-    )
-    from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_paid_amount import (
-        GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount,
-    )
+  from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_creator import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator
+  from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_paid_amount import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount
+
+
+
 
 
 T = TypeVar("T", bound="GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator")
 
 
+
 @_attrs_define
 class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
-    """
-    Attributes:
-        paid_amount (GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount | Unset):
-        room_count (int | Unset): The number of live broadcast rooms associated with this promotion.
-        video_count (int | Unset): The total number of videos associated with this promotion published by creators.
-        free_sample_status (str | Unset): Status of the Creator's sample application.
-            - NOT_REQUESTED
-            - PENDING
-            - AWAITING_SHIPMENT
-            - AWAITING_COLLECTION
-            - SHIPPED
-            - CONTENT_PENDING
-            - REJECT_CANCELLED
-            - OVERDUE_CANCELLED
-            - UNFULFIL_CANCELLED
-            - DEL_PLAN_CANCELLED
-            - SELLER_NOT_SHIP_CANCELLED
-            - WITHDRAW_CANCELLED
-            - UNFULFILLABLE_CANCELLED
-            - OPERATOR_MANUAL_CANCELLED
-            - OPERATOR_MANUAL_FAILED
-            - OPERATOR_MANUAL_COMPLETED
-            - COMPLETED
-        commission (str | Unset): The commission rate in hundredths of a percent (0.01%). For example, a value of 1000
-            is 10.00%.
-        effective_end_time (str | Unset): The effective end time for the collaboration in Unix epoch time format.
-        effective_start_time (str | Unset): The effective start time for the collaboration in Unix epoch time format.
-        creator (GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator | Unset):
-        affiliate_product_id (str | Unset): The affiliate product identifier.
-    """
+    """ 
+        Attributes:
+            paid_amount (GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount | Unset):
+            room_count (int | Unset): The number of live broadcast rooms associated with this promotion.
+            video_count (int | Unset): The total number of videos associated with this promotion published by creators.
+            free_sample_status (str | Unset): Status of the Creator's sample application.
+                - NOT_REQUESTED
+                - PENDING
+                - AWAITING_SHIPMENT
+                - AWAITING_COLLECTION
+                - SHIPPED
+                - CONTENT_PENDING
+                - REJECT_CANCELLED
+                - OVERDUE_CANCELLED
+                - UNFULFIL_CANCELLED
+                - DEL_PLAN_CANCELLED
+                - SELLER_NOT_SHIP_CANCELLED
+                - WITHDRAW_CANCELLED
+                - UNFULFILLABLE_CANCELLED
+                - OPERATOR_MANUAL_CANCELLED
+                - OPERATOR_MANUAL_FAILED
+                - OPERATOR_MANUAL_COMPLETED
+                - COMPLETED
+            commission (str | Unset): The commission rate in hundredths of a percent (0.01%). For example, a value of 1000
+                is 10.00%.
+            effective_end_time (str | Unset): The effective end time for the collaboration in Unix epoch time format.
+            effective_start_time (str | Unset): The effective start time for the collaboration in Unix epoch time format.
+            creator (GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator | Unset):
+            affiliate_product_id (str | Unset): The affiliate product identifier.
+     """
 
     paid_amount: GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount | Unset = UNSET
     room_count: int | Unset = UNSET
@@ -64,7 +67,13 @@ class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
     affiliate_product_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_creator import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator # noqa: PLC0415
+        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_paid_amount import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount # noqa: PLC0415
         paid_amount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.paid_amount, Unset):
             paid_amount = self.paid_amount.to_dict()
@@ -87,9 +96,11 @@ class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
 
         affiliate_product_id = self.affiliate_product_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if paid_amount is not UNSET:
             field_dict["paid_amount"] = paid_amount
         if room_count is not UNSET:
@@ -111,24 +122,22 @@ class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_creator import (
-            GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator,  # noqa: PLC0415
-        )
-        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_paid_amount import (
-            GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount,  # noqa: PLC0415
-        )
-
+        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_creator import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator # noqa: PLC0415
+        from ..models.get_creator_performance_for_campaign_product_response_data_promotion_creator_paid_amount import GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount # noqa: PLC0415
         d = dict(src_dict)
         _paid_amount = d.pop("paid_amount", UNSET)
         paid_amount: GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount | Unset
-        if isinstance(_paid_amount, Unset):
+        if isinstance(_paid_amount,  Unset):
             paid_amount = UNSET
         else:
-            paid_amount = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount.from_dict(
-                _paid_amount
-            )
+            paid_amount = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmount.from_dict(_paid_amount)
+
+
+
 
         room_count = d.pop("room_count", UNSET)
 
@@ -144,10 +153,13 @@ class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
 
         _creator = d.pop("creator", UNSET)
         creator: GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator | Unset
-        if isinstance(_creator, Unset):
+        if isinstance(_creator,  Unset):
             creator = UNSET
         else:
             creator = GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorCreator.from_dict(_creator)
+
+
+
 
         affiliate_product_id = d.pop("affiliate_product_id", UNSET)
 
@@ -162,6 +174,7 @@ class GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator:
             creator=creator,
             affiliate_product_id=affiliate_product_id,
         )
+
 
         get_creator_performance_for_campaign_product_response_data_promotion_creator.additional_properties = d
         return get_creator_performance_for_campaign_product_response_data_promotion_creator

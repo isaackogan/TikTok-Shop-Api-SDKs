@@ -1,13 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shipping_providers_response import GetShippingProvidersResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,31 +19,38 @@ def _get_kwargs(
     *,
     warehouse_region: str | Unset = UNSET,
     buyer_region: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["warehouse_region"] = warehouse_region
 
     params["buyer_region"] = buyer_region
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/logistics/202309/delivery_options/{delivery_option_id}/shipping_providers".format(
-            delivery_option_id=quote(str(delivery_option_id), safe=""),
-        ),
+        "url": "/logistics/202309/delivery_options/{delivery_option_id}/shipping_providers".format(delivery_option_id=quote(str(delivery_option_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShippingProvidersResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShippingProvidersResponse | None:
     if response.status_code == 200:
         response_200 = GetShippingProvidersResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -49,9 +60,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShippingProvidersResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShippingProvidersResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +75,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     warehouse_region: str | Unset = UNSET,
     buyer_region: str | Unset = UNSET,
+
 ) -> Response[GetShippingProvidersResponse]:
-    """Get Shipping Providers
+    """ Get Shipping Providers
 
      Returns the shipping providers available for the specified delivery option. If the delivery option
     is fulfilled by TikTok, the request returns an error and no shipping providers are returned.
@@ -83,12 +93,14 @@ def sync_detailed(
 
     Returns:
         Response[GetShippingProvidersResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         delivery_option_id=delivery_option_id,
-        warehouse_region=warehouse_region,
-        buyer_region=buyer_region,
+warehouse_region=warehouse_region,
+buyer_region=buyer_region,
+
     )
 
     response = client.get_httpx_client().request(
@@ -97,15 +109,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     delivery_option_id: str,
     *,
     client: AuthenticatedClient | Client,
     warehouse_region: str | Unset = UNSET,
     buyer_region: str | Unset = UNSET,
+
 ) -> GetShippingProvidersResponse | None:
-    """Get Shipping Providers
+    """ Get Shipping Providers
 
      Returns the shipping providers available for the specified delivery option. If the delivery option
     is fulfilled by TikTok, the request returns an error and no shipping providers are returned.
@@ -121,15 +133,16 @@ def sync(
 
     Returns:
         GetShippingProvidersResponse
-    """
+     """
+
 
     return sync_detailed(
         delivery_option_id=delivery_option_id,
-        client=client,
-        warehouse_region=warehouse_region,
-        buyer_region=buyer_region,
-    ).parsed
+client=client,
+warehouse_region=warehouse_region,
+buyer_region=buyer_region,
 
+    ).parsed
 
 async def asyncio_detailed(
     delivery_option_id: str,
@@ -137,8 +150,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     warehouse_region: str | Unset = UNSET,
     buyer_region: str | Unset = UNSET,
+
 ) -> Response[GetShippingProvidersResponse]:
-    """Get Shipping Providers
+    """ Get Shipping Providers
 
      Returns the shipping providers available for the specified delivery option. If the delivery option
     is fulfilled by TikTok, the request returns an error and no shipping providers are returned.
@@ -154,18 +168,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShippingProvidersResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         delivery_option_id=delivery_option_id,
-        warehouse_region=warehouse_region,
-        buyer_region=buyer_region,
+warehouse_region=warehouse_region,
+buyer_region=buyer_region,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     delivery_option_id: str,
@@ -173,8 +190,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     warehouse_region: str | Unset = UNSET,
     buyer_region: str | Unset = UNSET,
+
 ) -> GetShippingProvidersResponse | None:
-    """Get Shipping Providers
+    """ Get Shipping Providers
 
      Returns the shipping providers available for the specified delivery option. If the delivery option
     is fulfilled by TikTok, the request returns an error and no shipping providers are returned.
@@ -190,13 +208,13 @@ async def asyncio(
 
     Returns:
         GetShippingProvidersResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            delivery_option_id=delivery_option_id,
-            client=client,
-            warehouse_region=warehouse_region,
-            buyer_region=buyer_region,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        delivery_option_id=delivery_option_id,
+client=client,
+warehouse_region=warehouse_region,
+buyer_region=buyer_region,
+
+    )).parsed

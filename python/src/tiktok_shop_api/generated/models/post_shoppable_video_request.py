@@ -1,61 +1,82 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.post_shoppable_video_request_video_info import PostShoppableVideoRequestVideoInfo
-    from ..models.product_link_info import ProductLinkInfo
+  from ..models.post_shoppable_video_request_video_info import PostShoppableVideoRequestVideoInfo
+  from ..models.product_link_info import ProductLinkInfo
+
+
+
 
 
 T = TypeVar("T", bound="PostShoppableVideoRequest")
 
 
+
 @_attrs_define
 class PostShoppableVideoRequest:
-    """
-    Attributes:
-        video_info (PostShoppableVideoRequestVideoInfo):
-        product_link_info (ProductLinkInfo):
-    """
+    """ 
+        Attributes:
+            video_info (PostShoppableVideoRequestVideoInfo):
+            product_link_info (ProductLinkInfo):
+     """
 
     video_info: PostShoppableVideoRequestVideoInfo
     product_link_info: ProductLinkInfo
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.post_shoppable_video_request_video_info import PostShoppableVideoRequestVideoInfo # noqa: PLC0415
+        from ..models.product_link_info import ProductLinkInfo # noqa: PLC0415
         video_info = self.video_info.to_dict()
 
         product_link_info = self.product_link_info.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "video_info": video_info,
-                "product_link_info": product_link_info,
-            }
-        )
+        field_dict.update({
+            "video_info": video_info,
+            "product_link_info": product_link_info,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.post_shoppable_video_request_video_info import PostShoppableVideoRequestVideoInfo  # noqa: PLC0415
-        from ..models.product_link_info import ProductLinkInfo  # noqa: PLC0415
-
+        from ..models.post_shoppable_video_request_video_info import PostShoppableVideoRequestVideoInfo # noqa: PLC0415
+        from ..models.product_link_info import ProductLinkInfo # noqa: PLC0415
         d = dict(src_dict)
         video_info = PostShoppableVideoRequestVideoInfo.from_dict(d.pop("video_info"))
 
+
+
+
         product_link_info = ProductLinkInfo.from_dict(d.pop("product_link_info"))
+
+
+
 
         post_shoppable_video_request = cls(
             video_info=video_info,
             product_link_info=product_link_info,
         )
+
 
         post_shoppable_video_request.additional_properties = d
         return post_shoppable_video_request

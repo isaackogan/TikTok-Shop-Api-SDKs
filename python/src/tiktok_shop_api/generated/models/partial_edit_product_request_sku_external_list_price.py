@@ -1,39 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.partial_edit_product_request_sku_external_list_price_currency import (
-    PartialEditProductRequestSkuExternalListPriceCurrency,
-)
-from ..models.partial_edit_product_request_sku_external_list_price_source import (
-    PartialEditProductRequestSkuExternalListPriceSource,
-)
+from ..types import UNSET, Unset
+
+from ..models.partial_edit_product_request_sku_external_list_price_currency import PartialEditProductRequestSkuExternalListPriceCurrency
+from ..models.partial_edit_product_request_sku_external_list_price_source import PartialEditProductRequestSkuExternalListPriceSource
+
+
+
+
+
 
 T = TypeVar("T", bound="PartialEditProductRequestSkuExternalListPrice")
 
 
+
 @_attrs_define
 class PartialEditProductRequestSkuExternalListPrice:
-    """
-    Attributes:
-        amount (str): The price amount.
-            Valid range: [0.01, 7600]
-        currency (PartialEditProductRequestSkuExternalListPriceCurrency): The currency.
-            Possible values: USD
-        source (PartialEditProductRequestSkuExternalListPriceSource): The external ecommerce platform from which the
-            price is sourced.
-            Possible values:
-            - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-    """
+    """ 
+        Attributes:
+            amount (str): The price amount.
+                Valid range: [0.01, 7600]
+            currency (PartialEditProductRequestSkuExternalListPriceCurrency): The currency.
+                Possible values: USD
+            source (PartialEditProductRequestSkuExternalListPriceSource): The external ecommerce platform from which the
+                price is sourced.
+                Possible values:
+                - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
+     """
 
     amount: str
     currency: PartialEditProductRequestSkuExternalListPriceCurrency
     source: PartialEditProductRequestSkuExternalListPriceSource
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
@@ -42,17 +50,18 @@ class PartialEditProductRequestSkuExternalListPrice:
 
         source = self.source.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "amount": amount,
-                "currency": currency,
-                "source": source,
-            }
-        )
+        field_dict.update({
+            "amount": amount,
+            "currency": currency,
+            "source": source,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,13 +70,20 @@ class PartialEditProductRequestSkuExternalListPrice:
 
         currency = PartialEditProductRequestSkuExternalListPriceCurrency(d.pop("currency"))
 
+
+
+
         source = PartialEditProductRequestSkuExternalListPriceSource(d.pop("source"))
+
+
+
 
         partial_edit_product_request_sku_external_list_price = cls(
             amount=amount,
             currency=currency,
             source=source,
         )
+
 
         partial_edit_product_request_sku_external_list_price.additional_properties = d
         return partial_edit_product_request_sku_external_list_price

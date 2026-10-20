@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetFBTWarehouseListResponseDataWarehouseAddress")
+
 
 
 @_attrs_define
 class GetFBTWarehouseListResponseDataWarehouseAddress:
-    """
-    Attributes:
-        postal_code (str | Unset): Warehouse address postal code (also known as zip code).
-        region_code (str | Unset): Warehouse country or region code in two-character ISO 3166-1 alpha-2 format.
-        state (str | Unset): Warehouse address state or province.
-        district (str | Unset): Warehouse address district or county.
-        city (str | Unset): Warehouse address city.
-        address_line_1 (str | Unset): The detail address line 1.
-        address_line_2 (str | Unset): The detail address line 2, additional address information(optional).
-        address_line_3 (str | Unset): The detail address line 3, additional address information(optional).
-    """
+    """ 
+        Attributes:
+            postal_code (str | Unset): Warehouse address postal code (also known as zip code).
+            region_code (str | Unset): Warehouse country or region code in two-character ISO 3166-1 alpha-2 format.
+            state (str | Unset): Warehouse address state or province.
+            district (str | Unset): Warehouse address district or county.
+            city (str | Unset): Warehouse address city.
+            address_line_1 (str | Unset): The detail address line 1.
+            address_line_2 (str | Unset): The detail address line 2, additional address information(optional).
+            address_line_3 (str | Unset): The detail address line 3, additional address information(optional).
+     """
 
     postal_code: str | Unset = UNSET
     region_code: str | Unset = UNSET
@@ -34,6 +42,10 @@ class GetFBTWarehouseListResponseDataWarehouseAddress:
     address_line_2: str | Unset = UNSET
     address_line_3: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         postal_code = self.postal_code
@@ -52,9 +64,11 @@ class GetFBTWarehouseListResponseDataWarehouseAddress:
 
         address_line_3 = self.address_line_3
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if postal_code is not UNSET:
             field_dict["postal_code"] = postal_code
         if region_code is not UNSET:
@@ -73,6 +87,8 @@ class GetFBTWarehouseListResponseDataWarehouseAddress:
             field_dict["address_line_3"] = address_line_3
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,6 +119,7 @@ class GetFBTWarehouseListResponseDataWarehouseAddress:
             address_line_2=address_line_2,
             address_line_3=address_line_3,
         )
+
 
         get_fbt_warehouse_list_response_data_warehouse_address.additional_properties = d
         return get_fbt_warehouse_list_response_data_warehouse_address

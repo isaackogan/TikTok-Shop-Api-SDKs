@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetAuthorizedShopsResponseDataShop")
+
 
 
 @_attrs_define
 class GetAuthorizedShopsResponseDataShop:
-    """
-    Attributes:
-        id (str | Unset): An internal identifier for the TikTok Shop.
-        name (str | Unset): The TikTok Shop name.
-        region (str | Unset): The region of the shop.
-        seller_type (str | Unset): The type of seller.
-            Possible values:
-            - CROSS_BORDER: Cross border sellers with multiple shops in different countries.
-            - LOCAL: Local sellers with only 1 shop.
-        cipher (str | Unset): An encrypted token used to securely identify a shop in API requests. There is no need for
-            decryption on the receiving end.
-        code (str | Unset): The TikTok Shop code, which is also displayed on Seller Center.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): An internal identifier for the TikTok Shop.
+            name (str | Unset): The TikTok Shop name.
+            region (str | Unset): The region of the shop.
+            seller_type (str | Unset): The type of seller.
+                Possible values:
+                - CROSS_BORDER: Cross border sellers with multiple shops in different countries.
+                - LOCAL: Local sellers with only 1 shop.
+            cipher (str | Unset): An encrypted token used to securely identify a shop in API requests. There is no need for
+                decryption on the receiving end.
+            code (str | Unset): The TikTok Shop code, which is also displayed on Seller Center.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -34,6 +42,10 @@ class GetAuthorizedShopsResponseDataShop:
     cipher: str | Unset = UNSET
     code: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -48,9 +60,11 @@ class GetAuthorizedShopsResponseDataShop:
 
         code = self.code
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -65,6 +79,8 @@ class GetAuthorizedShopsResponseDataShop:
             field_dict["code"] = code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -89,6 +105,7 @@ class GetAuthorizedShopsResponseDataShop:
             cipher=cipher,
             code=code,
         )
+
 
         get_authorized_shops_response_data_shop.additional_properties = d
         return get_authorized_shops_response_data_shop

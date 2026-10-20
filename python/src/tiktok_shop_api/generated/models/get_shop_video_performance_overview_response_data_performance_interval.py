@@ -1,54 +1,57 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+import datetime
+
 if TYPE_CHECKING:
-    from ..models.get_shop_performance_response_data_performance_interval_sale_video_gmv import (
-        GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv,
-    )
-    from ..models.get_shop_video_performance_overview_response_data_performance_interval_shoppable_video_attributed_gmv import (
-        GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv,
-    )
-    from ..models.gpm import Gpm
-    from ..models.video_attributed_gmv import VideoAttributedGmv
-    from ..models.video_indirect_gmv import VideoIndirectGmv
+  from ..models.get_shop_performance_response_data_performance_interval_sale_video_gmv import GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv
+  from ..models.get_shop_video_performance_overview_response_data_performance_interval_shoppable_video_attributed_gmv import GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv
+  from ..models.gpm import Gpm
+  from ..models.video_attributed_gmv import VideoAttributedGmv
+  from ..models.video_indirect_gmv import VideoIndirectGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoPerformanceOverviewResponseDataPerformanceInterval")
 
 
+
 @_attrs_define
 class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
-    """
-    Attributes:
-        avg_daily_customers (int | Unset): Daily average number of customers.
-        ctor_sku_order (str | Unset): Conversion rate from product clicks to SKU orders in raw decimal format.
-        ctr (str | Unset): Ratio of product clicks to video views in raw decimal format.
-        end_date (datetime.date | Unset): End date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
-            timezone, exclusive.
-        gpm (Gpm | Unset):
-        product_clicks (int | Unset): The number of product clicks from videos.
-        product_impressions (int | Unset): The number of impressions of all video products.
-        shoppable_video_attributed_gmv
-            (GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset):
-        start_date (datetime.date | Unset): Start date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
-            timezone, inclusive.
-        today (bool | Unset): Whether the interval contains real-time data for today.
-        video_attributed_gmv (VideoAttributedGmv | Unset):
-        video_attributed_sku_orders (int | Unset): The number of paid SKU orders attributed to videos.
-        video_gmv (GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv | Unset):
-        video_indirect_gmv (VideoIndirectGmv | Unset):
-        video_product_viewers (int | Unset): The number of users who viewed products from videos. Returned only for
-            offline data.
-        video_views (int | Unset): The number of video views. Returned only for offline data.
-    """
+    """ 
+        Attributes:
+            avg_daily_customers (int | Unset): Daily average number of customers.
+            ctor_sku_order (str | Unset): Conversion rate from product clicks to SKU orders in raw decimal format.
+            ctr (str | Unset): Ratio of product clicks to video views in raw decimal format.
+            end_date (datetime.date | Unset): End date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
+                timezone, exclusive.
+            gpm (Gpm | Unset):
+            product_clicks (int | Unset): The number of product clicks from videos.
+            product_impressions (int | Unset): The number of impressions of all video products.
+            shoppable_video_attributed_gmv
+                (GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset):
+            start_date (datetime.date | Unset): Start date of the interval (ISO 8601 YYYY-MM-DD format) in shop registered
+                timezone, inclusive.
+            today (bool | Unset): Whether the interval contains real-time data for today.
+            video_attributed_gmv (VideoAttributedGmv | Unset):
+            video_attributed_sku_orders (int | Unset): The number of paid SKU orders attributed to videos.
+            video_gmv (GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv | Unset):
+            video_indirect_gmv (VideoIndirectGmv | Unset):
+            video_product_viewers (int | Unset): The number of users who viewed products from videos. Returned only for
+                offline data.
+            video_views (int | Unset): The number of video views. Returned only for offline data.
+     """
 
     avg_daily_customers: int | Unset = UNSET
     ctor_sku_order: str | Unset = UNSET
@@ -57,9 +60,7 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
     gpm: Gpm | Unset = UNSET
     product_clicks: int | Unset = UNSET
     product_impressions: int | Unset = UNSET
-    shoppable_video_attributed_gmv: (
-        GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset
-    ) = UNSET
+    shoppable_video_attributed_gmv: GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset = UNSET
     start_date: datetime.date | Unset = UNSET
     today: bool | Unset = UNSET
     video_attributed_gmv: VideoAttributedGmv | Unset = UNSET
@@ -70,7 +71,16 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
     video_views: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_performance_response_data_performance_interval_sale_video_gmv import GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv # noqa: PLC0415
+        from ..models.get_shop_video_performance_overview_response_data_performance_interval_shoppable_video_attributed_gmv import GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
+        from ..models.video_attributed_gmv import VideoAttributedGmv # noqa: PLC0415
+        from ..models.video_indirect_gmv import VideoIndirectGmv # noqa: PLC0415
         avg_daily_customers = self.avg_daily_customers
 
         ctor_sku_order = self.ctor_sku_order
@@ -117,9 +127,11 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
 
         video_views = self.video_views
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if avg_daily_customers is not UNSET:
             field_dict["avg_daily_customers"] = avg_daily_customers
         if ctor_sku_order is not UNSET:
@@ -155,18 +167,15 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_performance_response_data_performance_interval_sale_video_gmv import (
-            GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv,  # noqa: PLC0415
-        )
-        from ..models.get_shop_video_performance_overview_response_data_performance_interval_shoppable_video_attributed_gmv import (
-            GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv,  # noqa: PLC0415
-        )
-        from ..models.gpm import Gpm  # noqa: PLC0415
-        from ..models.video_attributed_gmv import VideoAttributedGmv  # noqa: PLC0415
-        from ..models.video_indirect_gmv import VideoIndirectGmv  # noqa: PLC0415
-
+        from ..models.get_shop_performance_response_data_performance_interval_sale_video_gmv import GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv # noqa: PLC0415
+        from ..models.get_shop_video_performance_overview_response_data_performance_interval_shoppable_video_attributed_gmv import GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
+        from ..models.video_attributed_gmv import VideoAttributedGmv # noqa: PLC0415
+        from ..models.video_indirect_gmv import VideoIndirectGmv # noqa: PLC0415
         d = dict(src_dict)
         avg_daily_customers = d.pop("avg_daily_customers", UNSET)
 
@@ -176,66 +185,81 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
 
         _end_date = d.pop("end_date", UNSET)
         end_date: datetime.date | Unset
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date,  Unset):
             end_date = UNSET
         else:
             end_date = datetime.date.fromisoformat(_end_date)
 
+
+
+
         _gpm = d.pop("gpm", UNSET)
         gpm: Gpm | Unset
-        if isinstance(_gpm, Unset):
+        if isinstance(_gpm,  Unset):
             gpm = UNSET
         else:
             gpm = Gpm.from_dict(_gpm)
+
+
+
 
         product_clicks = d.pop("product_clicks", UNSET)
 
         product_impressions = d.pop("product_impressions", UNSET)
 
         _shoppable_video_attributed_gmv = d.pop("shoppable_video_attributed_gmv", UNSET)
-        shoppable_video_attributed_gmv: (
-            GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset
-        )
-        if isinstance(_shoppable_video_attributed_gmv, Unset):
+        shoppable_video_attributed_gmv: GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv | Unset
+        if isinstance(_shoppable_video_attributed_gmv,  Unset):
             shoppable_video_attributed_gmv = UNSET
         else:
-            shoppable_video_attributed_gmv = (
-                GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv.from_dict(
-                    _shoppable_video_attributed_gmv
-                )
-            )
+            shoppable_video_attributed_gmv = GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalShoppableVideoAttributedGmv.from_dict(_shoppable_video_attributed_gmv)
+
+
+
 
         _start_date = d.pop("start_date", UNSET)
         start_date: datetime.date | Unset
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date,  Unset):
             start_date = UNSET
         else:
             start_date = datetime.date.fromisoformat(_start_date)
+
+
+
 
         today = d.pop("today", UNSET)
 
         _video_attributed_gmv = d.pop("video_attributed_gmv", UNSET)
         video_attributed_gmv: VideoAttributedGmv | Unset
-        if isinstance(_video_attributed_gmv, Unset):
+        if isinstance(_video_attributed_gmv,  Unset):
             video_attributed_gmv = UNSET
         else:
             video_attributed_gmv = VideoAttributedGmv.from_dict(_video_attributed_gmv)
+
+
+
 
         video_attributed_sku_orders = d.pop("video_attributed_sku_orders", UNSET)
 
         _video_gmv = d.pop("video_gmv", UNSET)
         video_gmv: GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv | Unset
-        if isinstance(_video_gmv, Unset):
+        if isinstance(_video_gmv,  Unset):
             video_gmv = UNSET
         else:
             video_gmv = GetShopPerformanceResponseDataPerformanceIntervalSaleVideoGmv.from_dict(_video_gmv)
 
+
+
+
         _video_indirect_gmv = d.pop("video_indirect_gmv", UNSET)
         video_indirect_gmv: VideoIndirectGmv | Unset
-        if isinstance(_video_indirect_gmv, Unset):
+        if isinstance(_video_indirect_gmv,  Unset):
             video_indirect_gmv = UNSET
         else:
             video_indirect_gmv = VideoIndirectGmv.from_dict(_video_indirect_gmv)
+
+
+
 
         video_product_viewers = d.pop("video_product_viewers", UNSET)
 
@@ -259,6 +283,7 @@ class GetShopVideoPerformanceOverviewResponseDataPerformanceInterval:
             video_product_viewers=video_product_viewers,
             video_views=video_views,
         )
+
 
         get_shop_video_performance_overview_response_data_performance_interval.additional_properties = d
         return get_shop_video_performance_overview_response_data_performance_interval

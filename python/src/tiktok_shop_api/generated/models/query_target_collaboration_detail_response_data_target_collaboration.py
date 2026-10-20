@@ -1,62 +1,63 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.query_target_collaboration_detail_response_data_target_collaboration_creator import (
-        QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator,
-    )
-    from ..models.query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import (
-        QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule,
-    )
-    from ..models.query_target_collaboration_detail_response_data_target_collaboration_product import (
-        QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct,
-    )
-    from ..models.seller_contact_info import SellerContactInfo
+  from ..models.query_target_collaboration_detail_response_data_target_collaboration_creator import QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator
+  from ..models.query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule
+  from ..models.query_target_collaboration_detail_response_data_target_collaboration_product import QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct
+  from ..models.seller_contact_info import SellerContactInfo
+
+
+
 
 
 T = TypeVar("T", bound="QueryTargetCollaborationDetailResponseDataTargetCollaboration")
 
 
+
 @_attrs_define
 class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
-    """
-    Attributes:
-        id (str | Unset): Target collaboration ID.
-        name (str | Unset): Target collaboration name.
-        message (str | Unset): Message seller has sent to creators about seller's  introduction and why excited to
-            collaborate.
-        seller_contact_info (SellerContactInfo | Unset):
-        start_time (int | Unset): The start time of the target collaboration, as a Unix timestamp in seconds.
-        end_time (int | Unset): The end time of the target collaboration, as a Unix timestamp in seconds.
-        update_time (int | Unset): The update time of the target collaboration, as a Unix timestamp in seconds.
-        creator_invited_count (int | Unset): The count of creators invited in the target collaboration.
-            The count will only include the NORMAL state.
-        showcase_creator_count (int | Unset): This field indicates the number of creators who added the product to the
-            showcase from target collaboration.
-            The count will only include the NORMAL state.
-        content_creator_count (int | Unset): The number of creators who posted content featuring products from target
-            collaboration.
-            The count will only include the NORMAL state.
-        product_count (int | Unset): The count of products added in the target collaboration.
-            The count will only include the NORMAL state.
-        free_sample_rule (QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule | Unset):
-        products (list[QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct] | Unset): The information
-            of products in the target collaboration.
-        creators (list[QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator] | Unset): The information
-            of creators in the target collaboration.
-        type_ (str | Unset): The type of target collaboration.
-            Field values:
-            - STANDARD: The target collaboration is created by sellers manually selecting products and creators.
-            - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program,
-            requiring only product submission.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Target collaboration ID.
+            name (str | Unset): Target collaboration name.
+            message (str | Unset): Message seller has sent to creators about seller's  introduction and why excited to
+                collaborate.
+            seller_contact_info (SellerContactInfo | Unset):
+            start_time (int | Unset): The start time of the target collaboration, as a Unix timestamp in seconds.
+            end_time (int | Unset): The end time of the target collaboration, as a Unix timestamp in seconds.
+            update_time (int | Unset): The update time of the target collaboration, as a Unix timestamp in seconds.
+            creator_invited_count (int | Unset): The count of creators invited in the target collaboration.
+                The count will only include the NORMAL state.
+            showcase_creator_count (int | Unset): This field indicates the number of creators who added the product to the
+                showcase from target collaboration.
+                The count will only include the NORMAL state.
+            content_creator_count (int | Unset): The number of creators who posted content featuring products from target
+                collaboration.
+                The count will only include the NORMAL state.
+            product_count (int | Unset): The count of products added in the target collaboration.
+                The count will only include the NORMAL state.
+            free_sample_rule (QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule | Unset):
+            products (list[QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct] | Unset): The information
+                of products in the target collaboration.
+            creators (list[QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator] | Unset): The information
+                of creators in the target collaboration.
+            type_ (str | Unset): The type of target collaboration.
+                Field values:
+                - STANDARD: The target collaboration is created by sellers manually selecting products and creators.
+                - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program,
+                requiring only product submission.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -75,7 +76,15 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
     type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_creator import QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator # noqa: PLC0415
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule # noqa: PLC0415
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_product import QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct # noqa: PLC0415
+        from ..models.seller_contact_info import SellerContactInfo # noqa: PLC0415
         id = self.id
 
         name = self.name
@@ -111,6 +120,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         creators: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.creators, Unset):
             creators = []
@@ -118,11 +129,15 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
                 creators_item = creators_item_data.to_dict()
                 creators.append(creators_item)
 
+
+
         type_ = self.type_
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -156,19 +171,14 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.query_target_collaboration_detail_response_data_target_collaboration_creator import (
-            QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator,  # noqa: PLC0415
-        )
-        from ..models.query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import (
-            QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule,  # noqa: PLC0415
-        )
-        from ..models.query_target_collaboration_detail_response_data_target_collaboration_product import (
-            QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct,  # noqa: PLC0415
-        )
-        from ..models.seller_contact_info import SellerContactInfo  # noqa: PLC0415
-
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_creator import QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator # noqa: PLC0415
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule # noqa: PLC0415
+        from ..models.query_target_collaboration_detail_response_data_target_collaboration_product import QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct # noqa: PLC0415
+        from ..models.seller_contact_info import SellerContactInfo # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -178,10 +188,13 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
 
         _seller_contact_info = d.pop("seller_contact_info", UNSET)
         seller_contact_info: SellerContactInfo | Unset
-        if isinstance(_seller_contact_info, Unset):
+        if isinstance(_seller_contact_info,  Unset):
             seller_contact_info = UNSET
         else:
             seller_contact_info = SellerContactInfo.from_dict(_seller_contact_info)
+
+
+
 
         start_time = d.pop("start_time", UNSET)
 
@@ -199,34 +212,37 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
 
         _free_sample_rule = d.pop("free_sample_rule", UNSET)
         free_sample_rule: QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule | Unset
-        if isinstance(_free_sample_rule, Unset):
+        if isinstance(_free_sample_rule,  Unset):
             free_sample_rule = UNSET
         else:
-            free_sample_rule = QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule.from_dict(
-                _free_sample_rule
-            )
+            free_sample_rule = QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule.from_dict(_free_sample_rule)
+
+
+
 
         _products = d.pop("products", UNSET)
         products: list[QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct] | Unset = UNSET
         if _products is not UNSET:
             products = []
             for products_item_data in _products:
-                products_item = QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct.from_dict(
-                    products_item_data
-                )
+                products_item = QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct.from_dict(products_item_data)
+
+
 
                 products.append(products_item)
+
 
         _creators = d.pop("creators", UNSET)
         creators: list[QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator] | Unset = UNSET
         if _creators is not UNSET:
             creators = []
             for creators_item_data in _creators:
-                creators_item = QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator.from_dict(
-                    creators_item_data
-                )
+                creators_item = QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator.from_dict(creators_item_data)
+
+
 
                 creators.append(creators_item)
+
 
         type_ = d.pop("type", UNSET)
 
@@ -247,6 +263,7 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
             creators=creators,
             type_=type_,
         )
+
 
         query_target_collaboration_detail_response_data_target_collaboration.additional_properties = d
         return query_target_collaboration_detail_response_data_target_collaboration

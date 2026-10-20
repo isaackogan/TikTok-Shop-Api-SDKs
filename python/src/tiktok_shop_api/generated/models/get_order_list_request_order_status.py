@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetOrderListRequestOrderStatus(StrEnum):
     AWAITING_COLLECTION = "AWAITING_COLLECTION"
     AWAITING_SHIPMENT = "AWAITING_SHIPMENT"

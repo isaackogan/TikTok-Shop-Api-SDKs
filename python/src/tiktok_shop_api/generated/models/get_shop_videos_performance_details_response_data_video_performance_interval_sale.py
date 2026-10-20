@@ -1,62 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_videos_performance_details_response_data_video_performance_interval_sale_overall import (
-        GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall,
-    )
+  from ..models.get_shop_videos_performance_details_response_data_video_performance_interval_sale_overall import GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale")
 
 
+
 @_attrs_define
 class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale:
-    """
-    Attributes:
-        overall (GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall | Unset):
-    """
+    """ 
+        Attributes:
+            overall (GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall | Unset):
+     """
 
     overall: GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_videos_performance_details_response_data_video_performance_interval_sale_overall import GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall # noqa: PLC0415
         overall: dict[str, Any] | Unset = UNSET
         if not isinstance(self.overall, Unset):
             overall = self.overall.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if overall is not UNSET:
             field_dict["overall"] = overall
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_videos_performance_details_response_data_video_performance_interval_sale_overall import (
-            GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_videos_performance_details_response_data_video_performance_interval_sale_overall import GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall # noqa: PLC0415
         d = dict(src_dict)
         _overall = d.pop("overall", UNSET)
         overall: GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall | Unset
-        if isinstance(_overall, Unset):
+        if isinstance(_overall,  Unset):
             overall = UNSET
         else:
             overall = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall.from_dict(_overall)
 
+
+
+
         get_shop_videos_performance_details_response_data_video_performance_interval_sale = cls(
             overall=overall,
         )
+
 
         get_shop_videos_performance_details_response_data_video_performance_interval_sale.additional_properties = d
         return get_shop_videos_performance_details_response_data_video_performance_interval_sale

@@ -1,57 +1,62 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_warehouse_list_response_data_warehouse_address_geolocation import (
-        GetWarehouseListResponseDataWarehouseAddressGeolocation,
-    )
+  from ..models.get_warehouse_list_response_data_warehouse_address_geolocation import GetWarehouseListResponseDataWarehouseAddressGeolocation
+
+
+
 
 
 T = TypeVar("T", bound="GetWarehouseListResponseDataWarehouseAddress")
 
 
+
 @_attrs_define
 class GetWarehouseListResponseDataWarehouseAddress:
-    """
-    Attributes:
-        region (str | Unset): The country or region of the warehouse address.
-        state (str | Unset): Warehouse state or province.
-        city (str | Unset): Warehouse city.
-        distict (str | Unset): Warehouse district.
-        town (str | Unset): Warehouse town.
-        contact_person (str | Unset): Warehouse contact person name.
-        first_name (str | Unset): Kanji first name
-            Applicable only for the JP market.
-        last_name (str | Unset): Kanji last name
-            Applicable only for the JP market.
-        first_name_local_script (str | Unset): Hiragana or Katakana first name
-            Applicable only for the JP market.
-        last_name_local_script (str | Unset): Hiragana or Katakana last name
-            Applicable only for the JP market.
-        postal_code (str | Unset): Warehouse address postal code (also known as zip code)
-        full_address (str | Unset): The combined warehouse address, including the street address and other address
-            information such as apartment number, building, floor..etc (optional)
-        region_code (str | Unset): The country or region code of the warehouse address.
-        phone_number (str | Unset): Warehouse phone number.
-        address_line1 (str | Unset): The first line of the warehouse address, like street name and street number.
-            Note:
-            - For Brazilian market, this represents the neighborhood or district.
-            - For the JP market, this represents the district (Chome), block (Banchi), building number (Go).
-        address_line2 (str | Unset): The second line of the warehouse address, like flat, apartment, or suit.
-            Note: For the Brazilian market, this represents the street name.
-        address_line3 (str | Unset): The street number. The literal value `s/n` indicates that no street number is
-            available. Available only in the Brazilian market.
-        address_line4 (str | Unset): This represents supplement information, like flat, apartment, or suit (optional).
-            Note: Available only in the Brazilian market.
-        geolocation (GetWarehouseListResponseDataWarehouseAddressGeolocation | Unset):
-    """
+    """ 
+        Attributes:
+            region (str | Unset): The country or region of the warehouse address.
+            state (str | Unset): Warehouse state or province.
+            city (str | Unset): Warehouse city.
+            distict (str | Unset): Warehouse district.
+            town (str | Unset): Warehouse town.
+            contact_person (str | Unset): Warehouse contact person name.
+            first_name (str | Unset): Kanji first name
+                Applicable only for the JP market.
+            last_name (str | Unset): Kanji last name
+                Applicable only for the JP market.
+            first_name_local_script (str | Unset): Hiragana or Katakana first name
+                Applicable only for the JP market.
+            last_name_local_script (str | Unset): Hiragana or Katakana last name
+                Applicable only for the JP market.
+            postal_code (str | Unset): Warehouse address postal code (also known as zip code)
+            full_address (str | Unset): The combined warehouse address, including the street address and other address
+                information such as apartment number, building, floor..etc (optional)
+            region_code (str | Unset): The country or region code of the warehouse address.
+            phone_number (str | Unset): Warehouse phone number.
+            address_line1 (str | Unset): The first line of the warehouse address, like street name and street number.
+                Note:
+                - For Brazilian market, this represents the neighborhood or district.
+                - For the JP market, this represents the district (Chome), block (Banchi), building number (Go).
+            address_line2 (str | Unset): The second line of the warehouse address, like flat, apartment, or suit.
+                Note: For the Brazilian market, this represents the street name.
+            address_line3 (str | Unset): The street number. The literal value `s/n` indicates that no street number is
+                available. Available only in the Brazilian market.
+            address_line4 (str | Unset): This represents supplement information, like flat, apartment, or suit (optional).
+                Note: Available only in the Brazilian market.
+            geolocation (GetWarehouseListResponseDataWarehouseAddressGeolocation | Unset):
+     """
 
     region: str | Unset = UNSET
     state: str | Unset = UNSET
@@ -74,7 +79,12 @@ class GetWarehouseListResponseDataWarehouseAddress:
     geolocation: GetWarehouseListResponseDataWarehouseAddressGeolocation | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_warehouse_list_response_data_warehouse_address_geolocation import GetWarehouseListResponseDataWarehouseAddressGeolocation # noqa: PLC0415
         region = self.region
 
         state = self.state
@@ -115,9 +125,11 @@ class GetWarehouseListResponseDataWarehouseAddress:
         if not isinstance(self.geolocation, Unset):
             geolocation = self.geolocation.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if region is not UNSET:
             field_dict["region"] = region
         if state is not UNSET:
@@ -159,12 +171,11 @@ class GetWarehouseListResponseDataWarehouseAddress:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_warehouse_list_response_data_warehouse_address_geolocation import (
-            GetWarehouseListResponseDataWarehouseAddressGeolocation,  # noqa: PLC0415
-        )
-
+        from ..models.get_warehouse_list_response_data_warehouse_address_geolocation import GetWarehouseListResponseDataWarehouseAddressGeolocation # noqa: PLC0415
         d = dict(src_dict)
         region = d.pop("region", UNSET)
 
@@ -204,10 +215,13 @@ class GetWarehouseListResponseDataWarehouseAddress:
 
         _geolocation = d.pop("geolocation", UNSET)
         geolocation: GetWarehouseListResponseDataWarehouseAddressGeolocation | Unset
-        if isinstance(_geolocation, Unset):
+        if isinstance(_geolocation,  Unset):
             geolocation = UNSET
         else:
             geolocation = GetWarehouseListResponseDataWarehouseAddressGeolocation.from_dict(_geolocation)
+
+
+
 
         get_warehouse_list_response_data_warehouse_address = cls(
             region=region,
@@ -230,6 +244,7 @@ class GetWarehouseListResponseDataWarehouseAddress:
             address_line4=address_line4,
             geolocation=geolocation,
         )
+
 
         get_warehouse_list_response_data_warehouse_address.additional_properties = d
         return get_warehouse_list_response_data_warehouse_address

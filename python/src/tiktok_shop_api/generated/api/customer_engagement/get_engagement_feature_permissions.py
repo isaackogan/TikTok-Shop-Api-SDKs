@@ -1,28 +1,42 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_engagement_feature_permissions_response import GetEngagementFeaturePermissionsResponse
-from ...types import Response
+from typing import cast
 
 
-def _get_kwargs() -> dict[str, Any]:
+
+def _get_kwargs(
+    
+) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/customer_engagement/202502/permissions",
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetEngagementFeaturePermissionsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetEngagementFeaturePermissionsResponse | None:
     if response.status_code == 200:
         response_200 = GetEngagementFeaturePermissionsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -32,9 +46,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetEngagementFeaturePermissionsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetEngagementFeaturePermissionsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -46,8 +58,9 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetEngagementFeaturePermissionsResponse]:
-    """Get Engagement Feature Permissions
+    """ Get Engagement Feature Permissions
 
      Retrieve the shop's authorization status for customer engagement features.
 
@@ -57,9 +70,12 @@ def sync_detailed(
 
     Returns:
         Response[GetEngagementFeaturePermissionsResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
+
+    kwargs = _get_kwargs(
+        
+    )
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -67,12 +83,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetEngagementFeaturePermissionsResponse | None:
-    """Get Engagement Feature Permissions
+    """ Get Engagement Feature Permissions
 
      Retrieve the shop's authorization status for customer engagement features.
 
@@ -82,18 +98,20 @@ def sync(
 
     Returns:
         GetEngagementFeaturePermissionsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-    ).parsed
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetEngagementFeaturePermissionsResponse]:
-    """Get Engagement Feature Permissions
+    """ Get Engagement Feature Permissions
 
      Retrieve the shop's authorization status for customer engagement features.
 
@@ -103,20 +121,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetEngagementFeaturePermissionsResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    kwargs = _get_kwargs(
+        
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetEngagementFeaturePermissionsResponse | None:
-    """Get Engagement Feature Permissions
+    """ Get Engagement Feature Permissions
 
      Retrieve the shop's authorization status for customer engagement features.
 
@@ -126,10 +149,10 @@ async def asyncio(
 
     Returns:
         GetEngagementFeaturePermissionsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+
+    )).parsed

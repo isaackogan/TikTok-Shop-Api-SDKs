@@ -1,46 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.update_promotion_activity_products_request_product_sku import (
-        UpdatePromotionActivityProductsRequestProductSku,
-    )
+  from ..models.update_promotion_activity_products_request_product_sku import UpdatePromotionActivityProductsRequestProductSku
+
+
+
 
 
 T = TypeVar("T", bound="UpdatePromotionActivityProductsRequestProduct")
 
 
+
 @_attrs_define
 class UpdatePromotionActivityProductsRequestProduct:
-    """
-    Attributes:
-        id (str): TikTok Shop product ID
-        quantity_limit (int): The quantity limit of the products involved in the activity. The range is `[1, 99]`, or
-            you can use `-1` for unlimited. If you are updating the value of an existing product, the value cannot be less
-            than the current value.
-            When `product_level==VARIATION`, you must specify `-1`.
-        quantity_per_user (int): Limit of product purchase per buyer. The range is `[1, 99]`, or you can use `-1` for
-            unlimited. If you are updating the value of an existing product, the value cannot be less than the current
-            value.
-            When `product_level==VARIATION`, you must specify `-1`.
-        activity_price_amount (str | Unset): Deal price in the product's currency. Specify this field when
-            `product_level==PRODUCT` and `activity_type` is `FIXED_PRICE` or `FLASHSALE`. Do not specify it when
-            `activity_type==DIRECT_DISCOUNT` or when `product_level==VARIATION`.
-        discount (str | Unset): Discount value. If the product is 10% off, the value is `10`.
-            You must specify the value when `product_level==PRODUCT` and `activity_type==DIRECT_DISCOUNT`; and you must not
-            specify it when it's not.
-        skus (list[UpdatePromotionActivityProductsRequestProductSku] | Unset): The SKUs to add to the list or to edit.
-            The number of the SKUs across all products must not exceed 300 in an API call.
-            For a product-discount or flash-deal activity with `product_level==VARIATION`, every product must contain at
-            least one SKU. For those activity types with `product_level==PRODUCT`, specify `[]`.
-    """
+    """ 
+        Attributes:
+            id (str): TikTok Shop product ID
+            quantity_limit (int): The quantity limit of the products involved in the activity. The range is `[1, 99]`, or
+                you can use `-1` for unlimited. If you are updating the value of an existing product, the value cannot be less
+                than the current value.
+                When `product_level==VARIATION`, you must specify `-1`.
+            quantity_per_user (int): Limit of product purchase per buyer. The range is `[1, 99]`, or you can use `-1` for
+                unlimited. If you are updating the value of an existing product, the value cannot be less than the current
+                value.
+                When `product_level==VARIATION`, you must specify `-1`.
+            activity_price_amount (str | Unset): Deal price in the product's currency. Specify this field when
+                `product_level==PRODUCT` and `activity_type` is `FIXED_PRICE` or `FLASHSALE`. Do not specify it when
+                `activity_type==DIRECT_DISCOUNT` or when `product_level==VARIATION`.
+            discount (str | Unset): Discount value. If the product is 10% off, the value is `10`.
+                You must specify the value when `product_level==PRODUCT` and `activity_type==DIRECT_DISCOUNT`; and you must not
+                specify it when it's not.
+            skus (list[UpdatePromotionActivityProductsRequestProductSku] | Unset): The SKUs to add to the list or to edit.
+                The number of the SKUs across all products must not exceed 300 in an API call.
+                For a product-discount or flash-deal activity with `product_level==VARIATION`, every product must contain at
+                least one SKU. For those activity types with `product_level==PRODUCT`, specify `[]`.
+     """
 
     id: str
     quantity_limit: int
@@ -50,7 +55,12 @@ class UpdatePromotionActivityProductsRequestProduct:
     skus: list[UpdatePromotionActivityProductsRequestProductSku] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_promotion_activity_products_request_product_sku import UpdatePromotionActivityProductsRequestProductSku # noqa: PLC0415
         id = self.id
 
         quantity_limit = self.quantity_limit
@@ -68,15 +78,16 @@ class UpdatePromotionActivityProductsRequestProduct:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "quantity_limit": quantity_limit,
-                "quantity_per_user": quantity_per_user,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "quantity_limit": quantity_limit,
+            "quantity_per_user": quantity_per_user,
+        })
         if activity_price_amount is not UNSET:
             field_dict["activity_price_amount"] = activity_price_amount
         if discount is not UNSET:
@@ -86,12 +97,11 @@ class UpdatePromotionActivityProductsRequestProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.update_promotion_activity_products_request_product_sku import (
-            UpdatePromotionActivityProductsRequestProductSku,  # noqa: PLC0415
-        )
-
+        from ..models.update_promotion_activity_products_request_product_sku import UpdatePromotionActivityProductsRequestProductSku # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id")
 
@@ -110,7 +120,10 @@ class UpdatePromotionActivityProductsRequestProduct:
             for skus_item_data in _skus:
                 skus_item = UpdatePromotionActivityProductsRequestProductSku.from_dict(skus_item_data)
 
+
+
                 skus.append(skus_item)
+
 
         update_promotion_activity_products_request_product = cls(
             id=id,
@@ -120,6 +133,7 @@ class UpdatePromotionActivityProductsRequestProduct:
             discount=discount,
             skus=skus,
         )
+
 
         update_promotion_activity_products_request_product.additional_properties = d
         return update_promotion_activity_products_request_product

@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShippingTemplateAvailabilityRequestProductAttributeDimension")
+
 
 
 @_attrs_define
 class GetShippingTemplateAvailabilityRequestProductAttributeDimension:
-    """
-    Attributes:
-        length (str | Unset): The length of the product
-        width (str | Unset): The width of the product
-        height (str | Unset): The height of the product
-        unit (int | Unset): 1: centimeter
-            2:inch
-            3:foot
-            4:millimeter
-            5:meter
-    """
+    """ 
+        Attributes:
+            length (str | Unset): The length of the product
+            width (str | Unset): The width of the product
+            height (str | Unset): The height of the product
+            unit (int | Unset): 1: centimeter
+                2:inch
+                3:foot
+                4:millimeter
+                5:meter
+     """
 
     length: str | Unset = UNSET
     width: str | Unset = UNSET
     height: str | Unset = UNSET
     unit: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         length = self.length
@@ -40,9 +52,11 @@ class GetShippingTemplateAvailabilityRequestProductAttributeDimension:
 
         unit = self.unit
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if length is not UNSET:
             field_dict["length"] = length
         if width is not UNSET:
@@ -53,6 +67,8 @@ class GetShippingTemplateAvailabilityRequestProductAttributeDimension:
             field_dict["unit"] = unit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -71,6 +87,7 @@ class GetShippingTemplateAvailabilityRequestProductAttributeDimension:
             height=height,
             unit=unit,
         )
+
 
         get_shipping_template_availability_request_product_attribute_dimension.additional_properties = d
         return get_shipping_template_availability_request_product_attribute_dimension

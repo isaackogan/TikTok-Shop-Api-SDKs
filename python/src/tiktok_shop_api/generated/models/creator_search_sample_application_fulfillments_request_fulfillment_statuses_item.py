@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatorSearchSampleApplicationFulfillmentsRequestFulfillmentStatusesItem(StrEnum):
     CANCELLED = "CANCELLED"
     EXEMPTED = "EXEMPTED"

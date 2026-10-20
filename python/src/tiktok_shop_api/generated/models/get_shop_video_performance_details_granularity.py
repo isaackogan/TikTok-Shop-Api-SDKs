@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopVideoPerformanceDetailsGranularity(StrEnum):
     ALL = "ALL"
     VALUE_1 = "1D"

@@ -1,28 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="GiftDetail")
+
 
 
 @_attrs_define
 class GiftDetail:
-    """
-    Attributes:
-        product_id (str): TikTok Shop product id of gift.
-        sku_id (str): TikTok Shop sku id of gift.
-        total_claim_limit (str): The total claim limit for the gift SKU in this activity. Enter an integer from `1` to
-            `99999`.
-    """
+    """ 
+        Attributes:
+            product_id (str): TikTok Shop product id of gift.
+            sku_id (str): TikTok Shop sku id of gift.
+            total_claim_limit (str): The total claim limit for the gift SKU in this activity. Enter an integer from `1` to
+                `99999`.
+     """
 
     product_id: str
     sku_id: str
     total_claim_limit: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
@@ -31,17 +44,18 @@ class GiftDetail:
 
         total_claim_limit = self.total_claim_limit
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_id": product_id,
-                "sku_id": sku_id,
-                "total_claim_limit": total_claim_limit,
-            }
-        )
+        field_dict.update({
+            "product_id": product_id,
+            "sku_id": sku_id,
+            "total_claim_limit": total_claim_limit,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -57,6 +71,7 @@ class GiftDetail:
             sku_id=sku_id,
             total_claim_limit=total_claim_limit,
         )
+
 
         gift_detail.additional_properties = d
         return gift_detail

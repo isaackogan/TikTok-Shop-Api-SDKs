@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditProductRequestListingPlatformsItem(StrEnum):
     TIKTOK_SHOP = "TIKTOK_SHOP"
     TOKOPEDIA = "TOKOPEDIA"

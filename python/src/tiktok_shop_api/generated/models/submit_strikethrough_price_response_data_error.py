@@ -1,63 +1,75 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.submit_strikethrough_price_response_data_error_detail import (
-        SubmitStrikethroughPriceResponseDataErrorDetail,
-    )
+  from ..models.submit_strikethrough_price_response_data_error_detail import SubmitStrikethroughPriceResponseDataErrorDetail
+
+
+
 
 
 T = TypeVar("T", bound="SubmitStrikethroughPriceResponseDataError")
 
 
+
 @_attrs_define
 class SubmitStrikethroughPriceResponseDataError:
-    """
-    Attributes:
-        code (int): The stable business failure code for this SKU.
-        detail (SubmitStrikethroughPriceResponseDataErrorDetail):
-        message (str): A human-readable description of the failure and the action needed to correct it.
-    """
+    """ 
+        Attributes:
+            code (int): The stable business failure code for this SKU.
+            detail (SubmitStrikethroughPriceResponseDataErrorDetail):
+            message (str): A human-readable description of the failure and the action needed to correct it.
+     """
 
     code: int
     detail: SubmitStrikethroughPriceResponseDataErrorDetail
     message: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.submit_strikethrough_price_response_data_error_detail import SubmitStrikethroughPriceResponseDataErrorDetail # noqa: PLC0415
         code = self.code
 
         detail = self.detail.to_dict()
 
         message = self.message
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "code": code,
-                "detail": detail,
-                "message": message,
-            }
-        )
+        field_dict.update({
+            "code": code,
+            "detail": detail,
+            "message": message,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.submit_strikethrough_price_response_data_error_detail import (
-            SubmitStrikethroughPriceResponseDataErrorDetail,  # noqa: PLC0415
-        )
-
+        from ..models.submit_strikethrough_price_response_data_error_detail import SubmitStrikethroughPriceResponseDataErrorDetail # noqa: PLC0415
         d = dict(src_dict)
         code = d.pop("code")
 
         detail = SubmitStrikethroughPriceResponseDataErrorDetail.from_dict(d.pop("detail"))
+
+
+
 
         message = d.pop("message")
 
@@ -66,6 +78,7 @@ class SubmitStrikethroughPriceResponseDataError:
             detail=detail,
             message=message,
         )
+
 
         submit_strikethrough_price_response_data_error.additional_properties = d
         return submit_strikethrough_price_response_data_error

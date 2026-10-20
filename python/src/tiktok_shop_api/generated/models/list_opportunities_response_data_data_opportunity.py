@@ -1,82 +1,91 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="ListOpportunitiesResponseDataDataOpportunity")
+
 
 
 @_attrs_define
 class ListOpportunitiesResponseDataDataOpportunity:
-    """
-    Attributes:
-        id (str | Unset): Unique ID of the opportunity
-        title (str | Unset): Opportunity title.
-        reference_images (list[str] | Unset): Reference product images of the product to list.
-        category_id_level_1 (str | Unset): TikTok Shop L1 category ID.
-        category_id_level_2 (str | Unset): TikTok Shop L2 category ID.
-        category_id_level_3 (str | Unset): TikTok Shop L3 category ID.
-        category_name_level_1 (str | Unset): Category name of 1st level category.
-        category_name_level_2 (str | Unset): Category name of 2nd level category.
-        category_name_level_3 (str | Unset): Category name of 3rd level category.
-        is_collected (bool | Unset): Whether the authorized seller has saved this opportunity to their collection.
-        query_words (str | Unset): Comma-separated TikTok Shop in-site search keywords associated with the opportunity.
-        opportunity_type (str | Unset): Type of opportunity: PRODUCT（品线索）/ KEYWORD（词线索）/ CATEGORY（类目线索）
-            Empty return for a specific opportunity type indicates the business team has not enabled merchant submission for
-            this lead type in the corresponding market.
-        brand_name (str | Unset): The brand name for products specified by the opportunity.
-        create_time (int | Unset): The opportunity creation time as a Unix timestamp in seconds (UTC).
-        expire_time (int | Unset): Opportunity expiry date, second-level timestamp
-        est_market_sales_volume (str | Unset): Estimated market sales volume for the last 30 days, returned as an
-            approximate bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or
-            `100M+`.
-        est_market_gmv (str | Unset): Estimated market sales GMV in USD for the last 30 days, returned as an approximate
-            bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or `100M+`.
-        search_volume (str | Unset): TikTok Shop in-site search volume, rounded to the nearest whole number and returned
-            as a decimal string.
-        competitor_product_count (str | Unset): Approximate number of competing products listed in the last 30 days,
-            returned as one of `< 10`, `< 50`, `< 100`, or `100+`.
-        video_view_pv (str | Unset): The cumulative short video view count of all videos associated with this product
-            opportunity.
-        tags (str | Unset): Comma-separated display values for the opportunity tags. Each value is localized when a
-            translation is available; otherwise, the configured tag description or tag code is returned.
-        tag_codes (list[str] | Unset): Tag codes for the opportunity. The available codes depend on seller and market
-            configuration. Examples for Latam include `core_product` and `top_product`.
-        reward_info (str | Unset): Comma-separated descriptions of rewards that sellers can gain by listing products as
-            required. Values are localized when a translation is available; otherwise, the configured reward description is
-            returned.
-        external_product_id (str | Unset): Product ID on the reference source.
-        reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
-            present.
-            Possible values:
-            - `1`: SHOPEE
-            - `2`: AMAZON
-            - `3`: LOOKFANTASTIC
-            - `4`: WALMART
-            - `5`: TTS
-            - `6`: ASOS
-            - `7`: UNIVERSAL_PRODUCT
-            - `8`: DTCNEXUS
-            - `9`: TEMU
-            - `10`: SHOPIFY
-            - `11`: NEXUS_SHOPIFY
-            - `12`: SHEIN
-            - `13`: PIXEL
-            - `14`: SHOPIFY_NON_1P
-            - `15`: MIRAVIA
-            - `16`: RAKUTEN
-            - `17`: EBAY
-            - `18`: ONBUY
-            - `19`: MERCADO_LIBRE
-            - `20`: ALLEGRO
-            - `21`: BOL
-            - `22`: DTC
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unique ID of the opportunity
+            title (str | Unset): Opportunity title.
+            reference_images (list[str] | Unset): Reference product images of the product to list.
+            category_id_level_1 (str | Unset): TikTok Shop L1 category ID.
+            category_id_level_2 (str | Unset): TikTok Shop L2 category ID.
+            category_id_level_3 (str | Unset): TikTok Shop L3 category ID.
+            category_name_level_1 (str | Unset): Category name of 1st level category.
+            category_name_level_2 (str | Unset): Category name of 2nd level category.
+            category_name_level_3 (str | Unset): Category name of 3rd level category.
+            is_collected (bool | Unset): Whether the authorized seller has saved this opportunity to their collection.
+            query_words (str | Unset): Comma-separated TikTok Shop in-site search keywords associated with the opportunity.
+            opportunity_type (str | Unset): Type of opportunity: PRODUCT（品线索）/ KEYWORD（词线索）/ CATEGORY（类目线索）
+                Empty return for a specific opportunity type indicates the business team has not enabled merchant submission for
+                this lead type in the corresponding market.
+            brand_name (str | Unset): The brand name for products specified by the opportunity.
+            create_time (int | Unset): The opportunity creation time as a Unix timestamp in seconds (UTC).
+            expire_time (int | Unset): Opportunity expiry date, second-level timestamp
+            est_market_sales_volume (str | Unset): Estimated market sales volume for the last 30 days, returned as an
+                approximate bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or
+                `100M+`.
+            est_market_gmv (str | Unset): Estimated market sales GMV in USD for the last 30 days, returned as an approximate
+                bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or `100M+`.
+            search_volume (str | Unset): TikTok Shop in-site search volume, rounded to the nearest whole number and returned
+                as a decimal string.
+            competitor_product_count (str | Unset): Approximate number of competing products listed in the last 30 days,
+                returned as one of `< 10`, `< 50`, `< 100`, or `100+`.
+            video_view_pv (str | Unset): The cumulative short video view count of all videos associated with this product
+                opportunity.
+            tags (str | Unset): Comma-separated display values for the opportunity tags. Each value is localized when a
+                translation is available; otherwise, the configured tag description or tag code is returned.
+            tag_codes (list[str] | Unset): Tag codes for the opportunity. The available codes depend on seller and market
+                configuration. Examples for Latam include `core_product` and `top_product`.
+            reward_info (str | Unset): Comma-separated descriptions of rewards that sellers can gain by listing products as
+                required. Values are localized when a translation is available; otherwise, the configured reward description is
+                returned.
+            external_product_id (str | Unset): Product ID on the reference source.
+            reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
+                present.
+                Possible values:
+                - `1`: SHOPEE
+                - `2`: AMAZON
+                - `3`: LOOKFANTASTIC
+                - `4`: WALMART
+                - `5`: TTS
+                - `6`: ASOS
+                - `7`: UNIVERSAL_PRODUCT
+                - `8`: DTCNEXUS
+                - `9`: TEMU
+                - `10`: SHOPIFY
+                - `11`: NEXUS_SHOPIFY
+                - `12`: SHEIN
+                - `13`: PIXEL
+                - `14`: SHOPIFY_NON_1P
+                - `15`: MIRAVIA
+                - `16`: RAKUTEN
+                - `17`: EBAY
+                - `18`: ONBUY
+                - `19`: MERCADO_LIBRE
+                - `20`: ALLEGRO
+                - `21`: BOL
+                - `22`: DTC
+     """
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -105,6 +114,10 @@ class ListOpportunitiesResponseDataDataOpportunity:
     reference_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
@@ -113,6 +126,8 @@ class ListOpportunitiesResponseDataDataOpportunity:
         reference_images: list[str] | Unset = UNSET
         if not isinstance(self.reference_images, Unset):
             reference_images = self.reference_images
+
+
 
         category_id_level_1 = self.category_id_level_1
 
@@ -154,15 +169,19 @@ class ListOpportunitiesResponseDataDataOpportunity:
         if not isinstance(self.tag_codes, Unset):
             tag_codes = self.tag_codes
 
+
+
         reward_info = self.reward_info
 
         external_product_id = self.external_product_id
 
         reference_source = self.reference_source
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if title is not UNSET:
@@ -216,6 +235,8 @@ class ListOpportunitiesResponseDataDataOpportunity:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -224,6 +245,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
         title = d.pop("title", UNSET)
 
         reference_images = cast(list[str], d.pop("reference_images", UNSET))
+
 
         category_id_level_1 = d.pop("category_id_level_1", UNSET)
 
@@ -263,6 +285,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
 
         tag_codes = cast(list[str], d.pop("tag_codes", UNSET))
 
+
         reward_info = d.pop("reward_info", UNSET)
 
         external_product_id = d.pop("external_product_id", UNSET)
@@ -296,6 +319,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
             external_product_id=external_product_id,
             reference_source=reference_source,
         )
+
 
         list_opportunities_response_data_data_opportunity.additional_properties = d
         return list_opportunities_response_data_data_opportunity

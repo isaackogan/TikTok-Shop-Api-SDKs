@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditProductRequestSkuPreSaleType(StrEnum):
     CUSTOM = "CUSTOM"
     MADE_TO_ORDER = "MADE_TO_ORDER"

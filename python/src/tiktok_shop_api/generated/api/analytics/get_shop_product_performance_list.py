@@ -1,19 +1,22 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_product_performance_list_currency import GetShopProductPerformanceListCurrency
-from ...models.get_shop_product_performance_list_product_status_filter import (
-    GetShopProductPerformanceListProductStatusFilter,
-)
+from ...models.get_shop_product_performance_list_product_status_filter import GetShopProductPerformanceListProductStatusFilter
 from ...models.get_shop_product_performance_list_response import GetShopProductPerformanceListResponse
 from ...models.get_shop_product_performance_list_sort_field import GetShopProductPerformanceListSortField
 from ...models.get_shop_product_performance_list_sort_order import GetShopProductPerformanceListSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -27,7 +30,12 @@ def _get_kwargs(
     currency: GetShopProductPerformanceListCurrency | Unset = UNSET,
     category_filter: list[str] | Unset = UNSET,
     product_status_filter: GetShopProductPerformanceListProductStatusFilter | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_date_ge = start_date_ge.isoformat()
@@ -62,6 +70,7 @@ def _get_kwargs(
     if not isinstance(category_filter, Unset):
         json_category_filter = category_filter
 
+
     params["category_filter"] = json_category_filter
 
     json_product_status_filter: str | Unset = UNSET
@@ -70,7 +79,9 @@ def _get_kwargs(
 
     params["product_status_filter"] = json_product_status_filter
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -78,14 +89,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopProductPerformanceListResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopProductPerformanceListResponse | None:
     if response.status_code == 200:
         response_200 = GetShopProductPerformanceListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -95,9 +108,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopProductPerformanceListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopProductPerformanceListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -118,8 +129,9 @@ def sync_detailed(
     currency: GetShopProductPerformanceListCurrency | Unset = UNSET,
     category_filter: list[str] | Unset = UNSET,
     product_status_filter: GetShopProductPerformanceListProductStatusFilter | Unset = UNSET,
+
 ) -> Response[GetShopProductPerformanceListResponse]:
-    """Get Shop Product Performance List
+    """ Get Shop Product Performance List
 
      Returns a paginated list of shop products and their total, seller-channel, affiliate-channel, and
     Shop Tab performance metrics for the specified date range.
@@ -141,18 +153,20 @@ def sync_detailed(
 
     Returns:
         Response[GetShopProductPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        category_filter=category_filter,
-        product_status_filter=product_status_filter,
+end_date_lt=end_date_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+category_filter=category_filter,
+product_status_filter=product_status_filter,
+
     )
 
     response = client.get_httpx_client().request(
@@ -160,7 +174,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -174,8 +187,9 @@ def sync(
     currency: GetShopProductPerformanceListCurrency | Unset = UNSET,
     category_filter: list[str] | Unset = UNSET,
     product_status_filter: GetShopProductPerformanceListProductStatusFilter | Unset = UNSET,
+
 ) -> GetShopProductPerformanceListResponse | None:
-    """Get Shop Product Performance List
+    """ Get Shop Product Performance List
 
      Returns a paginated list of shop products and their total, seller-channel, affiliate-channel, and
     Shop Tab performance metrics for the specified date range.
@@ -197,21 +211,22 @@ def sync(
 
     Returns:
         GetShopProductPerformanceListResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        category_filter=category_filter,
-        product_status_filter=product_status_filter,
-    ).parsed
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+category_filter=category_filter,
+product_status_filter=product_status_filter,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -225,8 +240,9 @@ async def asyncio_detailed(
     currency: GetShopProductPerformanceListCurrency | Unset = UNSET,
     category_filter: list[str] | Unset = UNSET,
     product_status_filter: GetShopProductPerformanceListProductStatusFilter | Unset = UNSET,
+
 ) -> Response[GetShopProductPerformanceListResponse]:
-    """Get Shop Product Performance List
+    """ Get Shop Product Performance List
 
      Returns a paginated list of shop products and their total, seller-channel, affiliate-channel, and
     Shop Tab performance metrics for the specified date range.
@@ -248,24 +264,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopProductPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        category_filter=category_filter,
-        product_status_filter=product_status_filter,
+end_date_lt=end_date_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+category_filter=category_filter,
+product_status_filter=product_status_filter,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -279,8 +298,9 @@ async def asyncio(
     currency: GetShopProductPerformanceListCurrency | Unset = UNSET,
     category_filter: list[str] | Unset = UNSET,
     product_status_filter: GetShopProductPerformanceListProductStatusFilter | Unset = UNSET,
+
 ) -> GetShopProductPerformanceListResponse | None:
-    """Get Shop Product Performance List
+    """ Get Shop Product Performance List
 
      Returns a paginated list of shop products and their total, seller-channel, affiliate-channel, and
     Shop Tab performance metrics for the specified date range.
@@ -302,19 +322,19 @@ async def asyncio(
 
     Returns:
         GetShopProductPerformanceListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            start_date_ge=start_date_ge,
-            end_date_lt=end_date_lt,
-            page_size=page_size,
-            page_token=page_token,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            currency=currency,
-            category_filter=category_filter,
-            product_status_filter=product_status_filter,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+category_filter=category_filter,
+product_status_filter=product_status_filter,
+
+    )).parsed

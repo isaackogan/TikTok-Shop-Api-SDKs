@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.partial_edit_manufacturer_request import PartialEditManufacturerRequest
 from ...models.partial_edit_manufacturer_response import PartialEditManufacturerResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     manufacturer_id: str,
     *,
     body: PartialEditManufacturerRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202409/compliance/manufacturers/{manufacturer_id}/partial_edit".format(
-            manufacturer_id=quote(str(manufacturer_id), safe=""),
-        ),
+        "url": "/product/202409/compliance/manufacturers/{manufacturer_id}/partial_edit".format(manufacturer_id=quote(str(manufacturer_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> PartialEditManufacturerResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> PartialEditManufacturerResponse | None:
     if response.status_code == 200:
         response_200 = PartialEditManufacturerResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[PartialEditManufacturerResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[PartialEditManufacturerResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditManufacturerRequest | Unset = UNSET,
+
 ) -> Response[PartialEditManufacturerResponse]:
-    """Partial Edit Manufacturer
+    """ Partial Edit Manufacturer
 
      Edit the details of a manufacturer in the EU languages supported by TikTok Shop. Include the locale
     code to edit the manufacturer's information in a particular language.
@@ -94,11 +103,13 @@ def sync_detailed(
 
     Returns:
         Response[PartialEditManufacturerResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         manufacturer_id=manufacturer_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -107,14 +118,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     manufacturer_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditManufacturerRequest | Unset = UNSET,
+
 ) -> PartialEditManufacturerResponse | None:
-    """Partial Edit Manufacturer
+    """ Partial Edit Manufacturer
 
      Edit the details of a manufacturer in the EU languages supported by TikTok Shop. Include the locale
     code to edit the manufacturer's information in a particular language.
@@ -143,22 +154,24 @@ def sync(
 
     Returns:
         PartialEditManufacturerResponse
-    """
+     """
+
 
     return sync_detailed(
         manufacturer_id=manufacturer_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     manufacturer_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditManufacturerRequest | Unset = UNSET,
+
 ) -> Response[PartialEditManufacturerResponse]:
-    """Partial Edit Manufacturer
+    """ Partial Edit Manufacturer
 
      Edit the details of a manufacturer in the EU languages supported by TikTok Shop. Include the locale
     code to edit the manufacturer's information in a particular language.
@@ -187,25 +200,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[PartialEditManufacturerResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         manufacturer_id=manufacturer_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     manufacturer_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditManufacturerRequest | Unset = UNSET,
+
 ) -> PartialEditManufacturerResponse | None:
-    """Partial Edit Manufacturer
+    """ Partial Edit Manufacturer
 
      Edit the details of a manufacturer in the EU languages supported by TikTok Shop. Include the locale
     code to edit the manufacturer's information in a particular language.
@@ -234,12 +251,12 @@ async def asyncio(
 
     Returns:
         PartialEditManufacturerResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            manufacturer_id=manufacturer_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        manufacturer_id=manufacturer_id,
+client=client,
+body=body,
+
+    )).parsed

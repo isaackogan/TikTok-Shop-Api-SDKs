@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditProductRequestReplicatedProductRegion(StrEnum):
     DE = "DE"
     ES = "ES"

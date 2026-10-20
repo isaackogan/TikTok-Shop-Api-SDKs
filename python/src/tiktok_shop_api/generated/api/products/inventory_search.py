@@ -1,26 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.inventory_search_request import InventorySearchRequest
 from ...models.inventory_search_response import InventorySearchResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: InventorySearchRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/product/202309/inventory/search",
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -30,11 +42,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> InventorySearchResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> InventorySearchResponse | None:
     if response.status_code == 200:
         response_200 = InventorySearchResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -44,9 +57,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[InventorySearchResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[InventorySearchResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -59,8 +70,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: InventorySearchRequest | Unset = UNSET,
+
 ) -> Response[InventorySearchResponse]:
-    """Inventory Search
+    """ Inventory Search
 
      Retrieve inventory information for multiple products or SKUs.
     **Note**:
@@ -78,10 +90,12 @@ def sync_detailed(
 
     Returns:
         Response[InventorySearchResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -90,13 +104,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: InventorySearchRequest | Unset = UNSET,
+
 ) -> InventorySearchResponse | None:
-    """Inventory Search
+    """ Inventory Search
 
      Retrieve inventory information for multiple products or SKUs.
     **Note**:
@@ -114,20 +128,22 @@ def sync(
 
     Returns:
         InventorySearchResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: InventorySearchRequest | Unset = UNSET,
+
 ) -> Response[InventorySearchResponse]:
-    """Inventory Search
+    """ Inventory Search
 
      Retrieve inventory information for multiple products or SKUs.
     **Note**:
@@ -145,23 +161,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[InventorySearchResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: InventorySearchRequest | Unset = UNSET,
+
 ) -> InventorySearchResponse | None:
-    """Inventory Search
+    """ Inventory Search
 
      Retrieve inventory information for multiple products or SKUs.
     **Note**:
@@ -179,11 +199,11 @@ async def asyncio(
 
     Returns:
         InventorySearchResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

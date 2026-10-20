@@ -1,23 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_sps_overview_response import GetSPSOverviewResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     locale: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["locale"] = locale
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -25,12 +37,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetSPSOverviewResponse | None:
     if response.status_code == 200:
         response_200 = GetSPSOverviewResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -40,9 +56,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetSPSOverviewResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetSPSOverviewResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -55,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     locale: str | Unset = UNSET,
+
 ) -> Response[GetSPSOverviewResponse]:
-    """Get SPS Overview
+    """ Get SPS Overview
 
      Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
     and top issues.
@@ -78,10 +93,12 @@ def sync_detailed(
 
     Returns:
         Response[GetSPSOverviewResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
+
     )
 
     response = client.get_httpx_client().request(
@@ -90,13 +107,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     locale: str | Unset = UNSET,
+
 ) -> GetSPSOverviewResponse | None:
-    """Get SPS Overview
+    """ Get SPS Overview
 
      Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
     and top issues.
@@ -118,20 +135,22 @@ def sync(
 
     Returns:
         GetSPSOverviewResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        locale=locale,
-    ).parsed
+locale=locale,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     locale: str | Unset = UNSET,
+
 ) -> Response[GetSPSOverviewResponse]:
-    """Get SPS Overview
+    """ Get SPS Overview
 
      Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
     and top issues.
@@ -153,23 +172,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetSPSOverviewResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     locale: str | Unset = UNSET,
+
 ) -> GetSPSOverviewResponse | None:
-    """Get SPS Overview
+    """ Get SPS Overview
 
      Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
     and top issues.
@@ -191,11 +214,11 @@ async def asyncio(
 
     Returns:
         GetSPSOverviewResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            locale=locale,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+locale=locale,
+
+    )).parsed

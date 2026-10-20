@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_product_locale import GetProductLocale
 from ...models.get_product_response import GetProductResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +21,12 @@ def _get_kwargs(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["return_under_review_version"] = return_under_review_version
@@ -30,22 +39,26 @@ def _get_kwargs(
 
     params["locale"] = json_locale
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202309/products/{product_id}".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202309/products/{product_id}".format(product_id=quote(str(product_id), safe=""),),
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetProductResponse | None:
     if response.status_code == 200:
         response_200 = GetProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -71,8 +84,9 @@ def sync_detailed(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+
 ) -> Response[GetProductResponse]:
-    """Get Product
+    """ Get Product
 
      Retrieve product details by product ID, including products in the `FREEZE` or `DELETED` status.
 
@@ -88,13 +102,15 @@ def sync_detailed(
 
     Returns:
         Response[GetProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        return_under_review_version=return_under_review_version,
-        return_draft_version=return_draft_version,
-        locale=locale,
+return_under_review_version=return_under_review_version,
+return_draft_version=return_draft_version,
+locale=locale,
+
     )
 
     response = client.get_httpx_client().request(
@@ -103,7 +119,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
@@ -111,8 +126,9 @@ def sync(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+
 ) -> GetProductResponse | None:
-    """Get Product
+    """ Get Product
 
      Retrieve product details by product ID, including products in the `FREEZE` or `DELETED` status.
 
@@ -128,16 +144,17 @@ def sync(
 
     Returns:
         GetProductResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        return_under_review_version=return_under_review_version,
-        return_draft_version=return_draft_version,
-        locale=locale,
-    ).parsed
+client=client,
+return_under_review_version=return_under_review_version,
+return_draft_version=return_draft_version,
+locale=locale,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
@@ -146,8 +163,9 @@ async def asyncio_detailed(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+
 ) -> Response[GetProductResponse]:
-    """Get Product
+    """ Get Product
 
      Retrieve product details by product ID, including products in the `FREEZE` or `DELETED` status.
 
@@ -163,19 +181,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        return_under_review_version=return_under_review_version,
-        return_draft_version=return_draft_version,
-        locale=locale,
+return_under_review_version=return_under_review_version,
+return_draft_version=return_draft_version,
+locale=locale,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
@@ -184,8 +205,9 @@ async def asyncio(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+
 ) -> GetProductResponse | None:
-    """Get Product
+    """ Get Product
 
      Retrieve product details by product ID, including products in the `FREEZE` or `DELETED` status.
 
@@ -201,14 +223,14 @@ async def asyncio(
 
     Returns:
         GetProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            return_under_review_version=return_under_review_version,
-            return_draft_version=return_draft_version,
-            locale=locale,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+return_under_review_version=return_under_review_version,
+return_draft_version=return_draft_version,
+locale=locale,
+
+    )).parsed

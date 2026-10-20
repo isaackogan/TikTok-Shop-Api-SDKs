@@ -1,57 +1,69 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.partial_edit_product_request_sku_price_currency import PartialEditProductRequestSkuPriceCurrency
 from ..types import UNSET, Unset
+
+
+
+
+
 
 T = TypeVar("T", bound="PartialEditProductRequestSkuPrice")
 
 
+
 @_attrs_define
 class PartialEditProductRequestSkuPrice:
-    """
-    Attributes:
-        currency (PartialEditProductRequestSkuPriceCurrency): The currency.
-            Possible values based on the region:
-            - BRL: Brazil
-            - CZK: Czech Republic
-            - EUR: France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal
-            - GBP: United Kingdom
-            - HUF: Hungary
-            - IDR: Indonesia
-            - JPY: Japan
-            - MXN: Mexico
-            - MYR: Malaysia
-            - PHP: Philippines
-            - PLN: Poland
-            - SGD: Singapore
-            - THB: Thailand
-            - USD: United States
-            - VND: Vietnam
-        amount (str | Unset): **Local sellers/Intra-EU sellers**
-            The SKU's **local display price** shown on the product page before any discounts. Refer to [Product
-            Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed price ranges in
-            each market.
-        sale_price (str | Unset): **Global sellers**
-            The SKU's **local display price** shown on the product page before any discounts.
-            Refer to [Product Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed
-            price ranges in each market.
+    """ 
+        Attributes:
+            currency (PartialEditProductRequestSkuPriceCurrency): The currency.
+                Possible values based on the region:
+                - BRL: Brazil
+                - CZK: Czech Republic
+                - EUR: France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal
+                - GBP: United Kingdom
+                - HUF: Hungary
+                - IDR: Indonesia
+                - JPY: Japan
+                - MXN: Mexico
+                - MYR: Malaysia
+                - PHP: Philippines
+                - PLN: Poland
+                - SGD: Singapore
+                - THB: Thailand
+                - USD: United States
+                - VND: Vietnam
+            amount (str | Unset): **Local sellers/Intra-EU sellers**
+                The SKU's **local display price** shown on the product page before any discounts. Refer to [Product
+                Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed price ranges in
+                each market.
+            sale_price (str | Unset): **Global sellers**
+                The SKU's **local display price** shown on the product page before any discounts.
+                Refer to [Product Pricing](https://partner.tiktokshop.com/docv2/page/67e1288d76cfee049d9af858) for the allowed
+                price ranges in each market.
 
-            **Note**:
-            - Applicable for all global sellers.
-            - Required for JP and US shops using China warehouses. Optional for others.
-            - This is the definitive final price shown on the product page, all other prices will be ignored.
-    """
+                **Note**:
+                - Applicable for all global sellers.
+                - Required for JP and US shops using China warehouses. Optional for others.
+                - This is the definitive final price shown on the product page, all other prices will be ignored.
+     """
 
     currency: PartialEditProductRequestSkuPriceCurrency
     amount: str | Unset = UNSET
     sale_price: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency.value
@@ -60,13 +72,12 @@ class PartialEditProductRequestSkuPrice:
 
         sale_price = self.sale_price
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "currency": currency,
-            }
-        )
+        field_dict.update({
+            "currency": currency,
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if sale_price is not UNSET:
@@ -74,10 +85,15 @@ class PartialEditProductRequestSkuPrice:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         currency = PartialEditProductRequestSkuPriceCurrency(d.pop("currency"))
+
+
+
 
         amount = d.pop("amount", UNSET)
 
@@ -88,6 +104,7 @@ class PartialEditProductRequestSkuPrice:
             amount=amount,
             sale_price=sale_price,
         )
+
 
         partial_edit_product_request_sku_price.additional_properties = d
         return partial_edit_product_request_sku_price

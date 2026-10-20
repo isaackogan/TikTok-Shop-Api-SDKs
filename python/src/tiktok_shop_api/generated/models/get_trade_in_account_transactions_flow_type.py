@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetTradeInAccountTransactionsFlowType(StrEnum):
     RECHARGE = "RECHARGE"
     REVERSE = "REVERSE"

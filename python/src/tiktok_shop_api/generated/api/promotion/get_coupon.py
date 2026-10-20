@@ -1,31 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_coupon_response import GetCouponResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     coupon_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/promotion/202406/coupons/{coupon_id}".format(
-            coupon_id=quote(str(coupon_id), safe=""),
-        ),
+        "url": "/promotion/202406/coupons/{coupon_id}".format(coupon_id=quote(str(coupon_id), safe=""),),
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCouponResponse | None:
     if response.status_code == 200:
         response_200 = GetCouponResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,8 +60,9 @@ def sync_detailed(
     coupon_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetCouponResponse]:
-    """Get Coupon
+    """ Get Coupon
 
      Use this API to get the full details of a coupon matching the {coupon_id}.
 
@@ -62,10 +75,12 @@ def sync_detailed(
 
     Returns:
         Response[GetCouponResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         coupon_id=coupon_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -74,13 +89,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     coupon_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetCouponResponse | None:
-    """Get Coupon
+    """ Get Coupon
 
      Use this API to get the full details of a coupon matching the {coupon_id}.
 
@@ -93,20 +108,22 @@ def sync(
 
     Returns:
         GetCouponResponse
-    """
+     """
+
 
     return sync_detailed(
         coupon_id=coupon_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     coupon_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetCouponResponse]:
-    """Get Coupon
+    """ Get Coupon
 
      Use this API to get the full details of a coupon matching the {coupon_id}.
 
@@ -119,23 +136,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCouponResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         coupon_id=coupon_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     coupon_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetCouponResponse | None:
-    """Get Coupon
+    """ Get Coupon
 
      Use this API to get the full details of a coupon matching the {coupon_id}.
 
@@ -148,11 +169,11 @@ async def asyncio(
 
     Returns:
         GetCouponResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            coupon_id=coupon_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        coupon_id=coupon_id,
+client=client,
+
+    )).parsed

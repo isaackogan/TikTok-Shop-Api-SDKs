@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="AreaPlacement")
+
 
 
 @_attrs_define
 class AreaPlacement:
-    """
-    Attributes:
-        height (str | Unset): The height of the customizable area.
-            Supports two decimal places.
-        rotate_degree (str | Unset): The rotation angle of the customizable area, in degrees.
-            Supports two decimal places.
-        width (str | Unset): The width of the customizable area.
-            Supports two decimal places.
-        x_coordinate (str | Unset): The X-coordinate of the customizable area's starting point on the surface.
-            Supports two decimal places.
-        y_coordinate (str | Unset): The Y-coordinate of the customizable area's starting point on the surface.
-            Supports two decimal places.
-    """
+    """ 
+        Attributes:
+            height (str | Unset): The height of the customizable area.
+                Supports two decimal places.
+            rotate_degree (str | Unset): The rotation angle of the customizable area, in degrees.
+                Supports two decimal places.
+            width (str | Unset): The width of the customizable area.
+                Supports two decimal places.
+            x_coordinate (str | Unset): The X-coordinate of the customizable area's starting point on the surface.
+                Supports two decimal places.
+            y_coordinate (str | Unset): The Y-coordinate of the customizable area's starting point on the surface.
+                Supports two decimal places.
+     """
 
     height: str | Unset = UNSET
     rotate_degree: str | Unset = UNSET
@@ -33,6 +41,10 @@ class AreaPlacement:
     x_coordinate: str | Unset = UNSET
     y_coordinate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -45,9 +57,11 @@ class AreaPlacement:
 
         y_coordinate = self.y_coordinate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if rotate_degree is not UNSET:
@@ -60,6 +74,8 @@ class AreaPlacement:
             field_dict["y_coordinate"] = y_coordinate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -81,6 +97,7 @@ class AreaPlacement:
             x_coordinate=x_coordinate,
             y_coordinate=y_coordinate,
         )
+
 
         area_placement.additional_properties = d
         return area_placement

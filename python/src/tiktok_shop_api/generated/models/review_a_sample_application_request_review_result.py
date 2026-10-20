@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReviewASampleApplicationRequestReviewResult(StrEnum):
     APPROVE = "APPROVE"
     REJECT = "REJECT"

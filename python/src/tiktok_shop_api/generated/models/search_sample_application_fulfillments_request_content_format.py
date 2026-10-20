@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchSampleApplicationFulfillmentsRequestContentFormat(StrEnum):
     LIVE = "LIVE"
     VIDEO = "VIDEO"

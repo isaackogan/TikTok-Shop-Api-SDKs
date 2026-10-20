@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount")
+
 
 
 @_attrs_define
 class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount:
-    """
-    Attributes:
-        product_platform_discount (str | Unset): The refund amount of platform discount.
-        product_seller_discount (str | Unset): The refund amount of product seller discount.
-        shipping_fee_platform_discount (str | Unset): The refund amount of shipping fee platform discount.
-        shipping_fee_seller_discount (str | Unset): The refund amount of shipping fee seller discount.
-    """
+    """ 
+        Attributes:
+            product_platform_discount (str | Unset): The refund amount of platform discount.
+            product_seller_discount (str | Unset): The refund amount of product seller discount.
+            shipping_fee_platform_discount (str | Unset): The refund amount of shipping fee platform discount.
+            shipping_fee_seller_discount (str | Unset): The refund amount of shipping fee seller discount.
+     """
 
     product_platform_discount: str | Unset = UNSET
     product_seller_discount: str | Unset = UNSET
     shipping_fee_platform_discount: str | Unset = UNSET
     shipping_fee_seller_discount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_platform_discount = self.product_platform_discount
@@ -36,9 +48,11 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDisco
 
         shipping_fee_seller_discount = self.shipping_fee_seller_discount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_platform_discount is not UNSET:
             field_dict["product_platform_discount"] = product_platform_discount
         if product_seller_discount is not UNSET:
@@ -49,6 +63,8 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDisco
             field_dict["shipping_fee_seller_discount"] = shipping_fee_seller_discount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDisco
             shipping_fee_platform_discount=shipping_fee_platform_discount,
             shipping_fee_seller_discount=shipping_fee_seller_discount,
         )
+
 
         search_aftersales_requests_response_data_aftersales_request_sku_return_request_discount.additional_properties = d
         return search_aftersales_requests_response_data_aftersales_request_sku_return_request_discount

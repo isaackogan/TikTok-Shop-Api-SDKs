@@ -1,55 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_showcase_products_response_data_product_addition import (
-        GetShowcaseProductsResponseDataProductAddition,
-    )
-    from ..models.get_showcase_products_response_data_product_collaboration import (
-        GetShowcaseProductsResponseDataProductCollaboration,
-    )
-    from ..models.get_showcase_products_response_data_product_commission import (
-        GetShowcaseProductsResponseDataProductCommission,
-    )
-    from ..models.get_showcase_products_response_data_product_main_image import (
-        GetShowcaseProductsResponseDataProductMainImage,
-    )
-    from ..models.get_showcase_products_response_data_product_price import GetShowcaseProductsResponseDataProductPrice
-    from ..models.get_showcase_products_response_data_product_status import GetShowcaseProductsResponseDataProductStatus
-    from ..models.shop import Shop
+  from ..models.get_showcase_products_response_data_product_addition import GetShowcaseProductsResponseDataProductAddition
+  from ..models.get_showcase_products_response_data_product_collaboration import GetShowcaseProductsResponseDataProductCollaboration
+  from ..models.get_showcase_products_response_data_product_commission import GetShowcaseProductsResponseDataProductCommission
+  from ..models.get_showcase_products_response_data_product_main_image import GetShowcaseProductsResponseDataProductMainImage
+  from ..models.get_showcase_products_response_data_product_price import GetShowcaseProductsResponseDataProductPrice
+  from ..models.get_showcase_products_response_data_product_status import GetShowcaseProductsResponseDataProductStatus
+  from ..models.shop import Shop
+
+
+
 
 
 T = TypeVar("T", bound="GetShowcaseProductsResponseDataProduct")
 
 
+
 @_attrs_define
 class GetShowcaseProductsResponseDataProduct:
-    """
-    Attributes:
-        id (str | Unset): The product's product ID
-        shop (Shop | Unset):
-        addition (GetShowcaseProductsResponseDataProductAddition | Unset):
-        price (GetShowcaseProductsResponseDataProductPrice | Unset):
-        title (str | Unset): The product's display title.
-        main_images (list[GetShowcaseProductsResponseDataProductMainImage] | Unset): A list of product images.
-        status (GetShowcaseProductsResponseDataProductStatus | Unset):
-        source (str | Unset): The product source. This is an enumerated type with values:
-            - THIRD_PARTY
-            - AFFILIATE
-            - TIKTOK_STORE
-        detail_link (str | Unset): The product detail page URL.
-        third_party_link (str | Unset): The off-TikTok Shop product detail page URL.
-        sale_regions (list[str] | Unset): A list of regions in which the product is offered for sale.
-        commission (GetShowcaseProductsResponseDataProductCommission | Unset):
-        collaboration (GetShowcaseProductsResponseDataProductCollaboration | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product's product ID
+            shop (Shop | Unset):
+            addition (GetShowcaseProductsResponseDataProductAddition | Unset):
+            price (GetShowcaseProductsResponseDataProductPrice | Unset):
+            title (str | Unset): The product's display title.
+            main_images (list[GetShowcaseProductsResponseDataProductMainImage] | Unset): A list of product images.
+            status (GetShowcaseProductsResponseDataProductStatus | Unset):
+            source (str | Unset): The product source. This is an enumerated type with values:
+                - THIRD_PARTY
+                - AFFILIATE
+                - TIKTOK_STORE
+            detail_link (str | Unset): The product detail page URL.
+            third_party_link (str | Unset): The off-TikTok Shop product detail page URL.
+            sale_regions (list[str] | Unset): A list of regions in which the product is offered for sale.
+            commission (GetShowcaseProductsResponseDataProductCommission | Unset):
+            collaboration (GetShowcaseProductsResponseDataProductCollaboration | Unset):
+     """
 
     id: str | Unset = UNSET
     shop: Shop | Unset = UNSET
@@ -66,7 +65,18 @@ class GetShowcaseProductsResponseDataProduct:
     collaboration: GetShowcaseProductsResponseDataProductCollaboration | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_showcase_products_response_data_product_addition import GetShowcaseProductsResponseDataProductAddition # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_collaboration import GetShowcaseProductsResponseDataProductCollaboration # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_commission import GetShowcaseProductsResponseDataProductCommission # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_main_image import GetShowcaseProductsResponseDataProductMainImage # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_price import GetShowcaseProductsResponseDataProductPrice # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_status import GetShowcaseProductsResponseDataProductStatus # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         id = self.id
 
         shop: dict[str, Any] | Unset = UNSET
@@ -90,6 +100,8 @@ class GetShowcaseProductsResponseDataProduct:
                 main_images_item = main_images_item_data.to_dict()
                 main_images.append(main_images_item)
 
+
+
         status: dict[str, Any] | Unset = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.to_dict()
@@ -104,6 +116,8 @@ class GetShowcaseProductsResponseDataProduct:
         if not isinstance(self.sale_regions, Unset):
             sale_regions = self.sale_regions
 
+
+
         commission: dict[str, Any] | Unset = UNSET
         if not isinstance(self.commission, Unset):
             commission = self.commission.to_dict()
@@ -112,9 +126,11 @@ class GetShowcaseProductsResponseDataProduct:
         if not isinstance(self.collaboration, Unset):
             collaboration = self.collaboration.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if shop is not UNSET:
@@ -144,51 +160,49 @@ class GetShowcaseProductsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_showcase_products_response_data_product_addition import (
-            GetShowcaseProductsResponseDataProductAddition,  # noqa: PLC0415
-        )
-        from ..models.get_showcase_products_response_data_product_collaboration import (
-            GetShowcaseProductsResponseDataProductCollaboration,  # noqa: PLC0415
-        )
-        from ..models.get_showcase_products_response_data_product_commission import (
-            GetShowcaseProductsResponseDataProductCommission,  # noqa: PLC0415
-        )
-        from ..models.get_showcase_products_response_data_product_main_image import (
-            GetShowcaseProductsResponseDataProductMainImage,  # noqa: PLC0415
-        )
-        from ..models.get_showcase_products_response_data_product_price import (
-            GetShowcaseProductsResponseDataProductPrice,  # noqa: PLC0415
-        )
-        from ..models.get_showcase_products_response_data_product_status import (
-            GetShowcaseProductsResponseDataProductStatus,  # noqa: PLC0415
-        )
-        from ..models.shop import Shop  # noqa: PLC0415
-
+        from ..models.get_showcase_products_response_data_product_addition import GetShowcaseProductsResponseDataProductAddition # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_collaboration import GetShowcaseProductsResponseDataProductCollaboration # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_commission import GetShowcaseProductsResponseDataProductCommission # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_main_image import GetShowcaseProductsResponseDataProductMainImage # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_price import GetShowcaseProductsResponseDataProductPrice # noqa: PLC0415
+        from ..models.get_showcase_products_response_data_product_status import GetShowcaseProductsResponseDataProductStatus # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         _shop = d.pop("shop", UNSET)
         shop: Shop | Unset
-        if isinstance(_shop, Unset):
+        if isinstance(_shop,  Unset):
             shop = UNSET
         else:
             shop = Shop.from_dict(_shop)
 
+
+
+
         _addition = d.pop("addition", UNSET)
         addition: GetShowcaseProductsResponseDataProductAddition | Unset
-        if isinstance(_addition, Unset):
+        if isinstance(_addition,  Unset):
             addition = UNSET
         else:
             addition = GetShowcaseProductsResponseDataProductAddition.from_dict(_addition)
 
+
+
+
         _price = d.pop("price", UNSET)
         price: GetShowcaseProductsResponseDataProductPrice | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = GetShowcaseProductsResponseDataProductPrice.from_dict(_price)
+
+
+
 
         title = d.pop("title", UNSET)
 
@@ -199,14 +213,20 @@ class GetShowcaseProductsResponseDataProduct:
             for main_images_item_data in _main_images:
                 main_images_item = GetShowcaseProductsResponseDataProductMainImage.from_dict(main_images_item_data)
 
+
+
                 main_images.append(main_images_item)
+
 
         _status = d.pop("status", UNSET)
         status: GetShowcaseProductsResponseDataProductStatus | Unset
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = GetShowcaseProductsResponseDataProductStatus.from_dict(_status)
+
+
+
 
         source = d.pop("source", UNSET)
 
@@ -216,19 +236,26 @@ class GetShowcaseProductsResponseDataProduct:
 
         sale_regions = cast(list[str], d.pop("sale_regions", UNSET))
 
+
         _commission = d.pop("commission", UNSET)
         commission: GetShowcaseProductsResponseDataProductCommission | Unset
-        if isinstance(_commission, Unset):
+        if isinstance(_commission,  Unset):
             commission = UNSET
         else:
             commission = GetShowcaseProductsResponseDataProductCommission.from_dict(_commission)
 
+
+
+
         _collaboration = d.pop("collaboration", UNSET)
         collaboration: GetShowcaseProductsResponseDataProductCollaboration | Unset
-        if isinstance(_collaboration, Unset):
+        if isinstance(_collaboration,  Unset):
             collaboration = UNSET
         else:
             collaboration = GetShowcaseProductsResponseDataProductCollaboration.from_dict(_collaboration)
+
+
+
 
         get_showcase_products_response_data_product = cls(
             id=id,
@@ -245,6 +272,7 @@ class GetShowcaseProductsResponseDataProduct:
             commission=commission,
             collaboration=collaboration,
         )
+
 
         get_showcase_products_response_data_product.additional_properties = d
         return get_showcase_products_response_data_product

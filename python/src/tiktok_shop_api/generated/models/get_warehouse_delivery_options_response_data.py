@@ -1,36 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_warehouse_delivery_options_response_data_delivery_option import (
-        GetWarehouseDeliveryOptionsResponseDataDeliveryOption,
-    )
+  from ..models.get_warehouse_delivery_options_response_data_delivery_option import GetWarehouseDeliveryOptionsResponseDataDeliveryOption
+
+
+
 
 
 T = TypeVar("T", bound="GetWarehouseDeliveryOptionsResponseData")
 
 
+
 @_attrs_define
 class GetWarehouseDeliveryOptionsResponseData:
-    """
-    Attributes:
-        delivery_options (list[GetWarehouseDeliveryOptionsResponseDataDeliveryOption] | Unset): Delivery options
-            available for the seller's warehouse or assignable to a product, depending on `scope`. Each option identifies
-            its supported platforms. Options returned for `WAREHOUSE` may also include applicable weight and dimension
-            limits.
-    """
+    """ 
+        Attributes:
+            delivery_options (list[GetWarehouseDeliveryOptionsResponseDataDeliveryOption] | Unset): Delivery options
+                available for the seller's warehouse or assignable to a product, depending on `scope`. Each option identifies
+                its supported platforms. Options returned for `WAREHOUSE` may also include applicable weight and dimension
+                limits.
+     """
 
     delivery_options: list[GetWarehouseDeliveryOptionsResponseDataDeliveryOption] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_warehouse_delivery_options_response_data_delivery_option import GetWarehouseDeliveryOptionsResponseDataDeliveryOption # noqa: PLC0415
         delivery_options: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.delivery_options, Unset):
             delivery_options = []
@@ -38,35 +48,40 @@ class GetWarehouseDeliveryOptionsResponseData:
                 delivery_options_item = delivery_options_item_data.to_dict()
                 delivery_options.append(delivery_options_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if delivery_options is not UNSET:
             field_dict["delivery_options"] = delivery_options
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_warehouse_delivery_options_response_data_delivery_option import (
-            GetWarehouseDeliveryOptionsResponseDataDeliveryOption,  # noqa: PLC0415
-        )
-
+        from ..models.get_warehouse_delivery_options_response_data_delivery_option import GetWarehouseDeliveryOptionsResponseDataDeliveryOption # noqa: PLC0415
         d = dict(src_dict)
         _delivery_options = d.pop("delivery_options", UNSET)
         delivery_options: list[GetWarehouseDeliveryOptionsResponseDataDeliveryOption] | Unset = UNSET
         if _delivery_options is not UNSET:
             delivery_options = []
             for delivery_options_item_data in _delivery_options:
-                delivery_options_item = GetWarehouseDeliveryOptionsResponseDataDeliveryOption.from_dict(
-                    delivery_options_item_data
-                )
+                delivery_options_item = GetWarehouseDeliveryOptionsResponseDataDeliveryOption.from_dict(delivery_options_item_data)
+
+
 
                 delivery_options.append(delivery_options_item)
+
 
         get_warehouse_delivery_options_response_data = cls(
             delivery_options=delivery_options,
         )
+
 
         get_warehouse_delivery_options_response_data.additional_properties = d
         return get_warehouse_delivery_options_response_data

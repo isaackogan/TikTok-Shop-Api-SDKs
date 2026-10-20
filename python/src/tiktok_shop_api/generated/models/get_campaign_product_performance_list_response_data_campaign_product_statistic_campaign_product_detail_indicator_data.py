@@ -1,34 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
-T = TypeVar(
-    "T", bound="GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData"
-)
+from ..types import UNSET, Unset
+
+
+
+
+
+
+T = TypeVar("T", bound="GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData")
+
 
 
 @_attrs_define
 class GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailIndicatorData:
-    """
-    Attributes:
-        paid_order_num (str | Unset): The total number of paid orders. `paid_order_num` = `actual_order_num` + {number
-            of paid but returned orders}
-        actual_order_num (str | Unset): The actual number of paid orders.
-        estimated_amount (str | Unset): The total payment amount corresponding to `paid_order_num`.
-        actual_amount (str | Unset): GMV, the total payment amount corresponding to `actual_order_num`.
-        estimated_partner_commission (str | Unset): The partner commission amount corresponding to paid_order_num.
-        actual_partner_commission (str | Unset): The partner commission amount corresponding to actual_order_num.
-        creator_sales_num (str | Unset): The number of creators credited with at least one product sale.
-        collaborated_creators_num (str | Unset): The total number of creators collaborating on the campaign.
-        promoted_creator_num (str | Unset): The number of creators involved in the partner plan.
-        sample_requested_creator_num (str | Unset): The total number of creators that applied for a sample.
-    """
+    """ 
+        Attributes:
+            paid_order_num (str | Unset): The total number of paid orders. `paid_order_num` = `actual_order_num` + {number
+                of paid but returned orders}
+            actual_order_num (str | Unset): The actual number of paid orders.
+            estimated_amount (str | Unset): The total payment amount corresponding to `paid_order_num`.
+            actual_amount (str | Unset): GMV, the total payment amount corresponding to `actual_order_num`.
+            estimated_partner_commission (str | Unset): The partner commission amount corresponding to paid_order_num.
+            actual_partner_commission (str | Unset): The partner commission amount corresponding to actual_order_num.
+            creator_sales_num (str | Unset): The number of creators credited with at least one product sale.
+            collaborated_creators_num (str | Unset): The total number of creators collaborating on the campaign.
+            promoted_creator_num (str | Unset): The number of creators involved in the partner plan.
+            sample_requested_creator_num (str | Unset): The total number of creators that applied for a sample.
+     """
 
     paid_order_num: str | Unset = UNSET
     actual_order_num: str | Unset = UNSET
@@ -41,6 +47,10 @@ class GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampa
     promoted_creator_num: str | Unset = UNSET
     sample_requested_creator_num: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         paid_order_num = self.paid_order_num
@@ -63,9 +73,11 @@ class GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampa
 
         sample_requested_creator_num = self.sample_requested_creator_num
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if paid_order_num is not UNSET:
             field_dict["paid_order_num"] = paid_order_num
         if actual_order_num is not UNSET:
@@ -88,6 +100,8 @@ class GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampa
             field_dict["sample_requested_creator_num"] = sample_requested_creator_num
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -124,6 +138,7 @@ class GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampa
             promoted_creator_num=promoted_creator_num,
             sample_requested_creator_num=sample_requested_creator_num,
         )
+
 
         get_campaign_product_performance_list_response_data_campaign_product_statistic_campaign_product_detail_indicator_data.additional_properties = d
         return get_campaign_product_performance_list_response_data_campaign_product_statistic_campaign_product_detail_indicator_data

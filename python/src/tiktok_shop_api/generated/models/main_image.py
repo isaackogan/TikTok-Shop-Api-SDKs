@@ -1,39 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="MainImage")
+
 
 
 @_attrs_define
 class MainImage:
-    """
-    Attributes:
-        uri (str): The URI of the image.
-            Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
-            `use_case=MAIN_IMAGE`. You can use the returned URI directly, or process it through the [Optimize Images
-            API](665692b35d39dc02deb49a97) first and use the resulting URI.
-    """
+    """ 
+        Attributes:
+            uri (str): The URI of the image.
+                Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
+                `use_case=MAIN_IMAGE`. You can use the returned URI directly, or process it through the [Optimize Images
+                API](665692b35d39dc02deb49a97) first and use the resulting URI.
+     """
 
     uri: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         uri = self.uri
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "uri": uri,
-            }
-        )
+        field_dict.update({
+            "uri": uri,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -43,6 +57,7 @@ class MainImage:
         main_image = cls(
             uri=uri,
         )
+
 
         main_image.additional_properties = d
         return main_image

@@ -1,64 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_trade_in_supplier_account_balance_response_data_available_balance import (
-        GetTradeInSupplierAccountBalanceResponseDataAvailableBalance,
-    )
+  from ..models.get_trade_in_supplier_account_balance_response_data_available_balance import GetTradeInSupplierAccountBalanceResponseDataAvailableBalance
+
+
+
 
 
 T = TypeVar("T", bound="GetTradeInSupplierAccountBalanceResponseData")
 
 
+
 @_attrs_define
 class GetTradeInSupplierAccountBalanceResponseData:
-    """
-    Attributes:
-        available_balance (GetTradeInSupplierAccountBalanceResponseDataAvailableBalance | Unset):
-    """
+    """ 
+        Attributes:
+            available_balance (GetTradeInSupplierAccountBalanceResponseDataAvailableBalance | Unset):
+     """
 
     available_balance: GetTradeInSupplierAccountBalanceResponseDataAvailableBalance | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_trade_in_supplier_account_balance_response_data_available_balance import GetTradeInSupplierAccountBalanceResponseDataAvailableBalance # noqa: PLC0415
         available_balance: dict[str, Any] | Unset = UNSET
         if not isinstance(self.available_balance, Unset):
             available_balance = self.available_balance.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if available_balance is not UNSET:
             field_dict["available_balance"] = available_balance
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_trade_in_supplier_account_balance_response_data_available_balance import (
-            GetTradeInSupplierAccountBalanceResponseDataAvailableBalance,  # noqa: PLC0415
-        )
-
+        from ..models.get_trade_in_supplier_account_balance_response_data_available_balance import GetTradeInSupplierAccountBalanceResponseDataAvailableBalance # noqa: PLC0415
         d = dict(src_dict)
         _available_balance = d.pop("available_balance", UNSET)
         available_balance: GetTradeInSupplierAccountBalanceResponseDataAvailableBalance | Unset
-        if isinstance(_available_balance, Unset):
+        if isinstance(_available_balance,  Unset):
             available_balance = UNSET
         else:
-            available_balance = GetTradeInSupplierAccountBalanceResponseDataAvailableBalance.from_dict(
-                _available_balance
-            )
+            available_balance = GetTradeInSupplierAccountBalanceResponseDataAvailableBalance.from_dict(_available_balance)
+
+
+
 
         get_trade_in_supplier_account_balance_response_data = cls(
             available_balance=available_balance,
         )
+
 
         get_trade_in_supplier_account_balance_response_data.additional_properties = d
         return get_trade_in_supplier_account_balance_response_data

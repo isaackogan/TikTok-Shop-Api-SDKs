@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory")
+
 
 
 @_attrs_define
 class InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCreatorInventory:
-    """
-    Attributes:
-        quantity (int | Unset): The number of units allocated.
-        creator_name (str | Unset): The name of the associated TikTok creator.
-    """
+    """ 
+        Attributes:
+            quantity (int | Unset): The number of units allocated.
+            creator_name (str | Unset): The name of the associated TikTok creator.
+     """
 
     quantity: int | Unset = UNSET
     creator_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         quantity = self.quantity
 
         creator_name = self.creator_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if quantity is not UNSET:
             field_dict["quantity"] = quantity
         if creator_name is not UNSET:
             field_dict["creator_name"] = creator_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution
             quantity=quantity,
             creator_name=creator_name,
         )
+
 
         inventory_search_response_data_inventory_sku_total_available_inventory_distribution_creator_inventory.additional_properties = d
         return inventory_search_response_data_inventory_sku_total_available_inventory_distribution_creator_inventory

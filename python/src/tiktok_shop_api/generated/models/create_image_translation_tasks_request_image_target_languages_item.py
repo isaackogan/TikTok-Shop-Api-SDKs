@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateImageTranslationTasksRequestImageTargetLanguagesItem(StrEnum):
     CS_CZ = "cs-CZ"
     DA_DK = "da-DK"

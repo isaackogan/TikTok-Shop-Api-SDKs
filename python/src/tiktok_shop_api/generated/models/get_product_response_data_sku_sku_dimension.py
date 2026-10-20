@@ -1,43 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetProductResponseDataSkuSkuDimension")
+
 
 
 @_attrs_define
 class GetProductResponseDataSkuSkuDimension:
-    """
-    Attributes:
-        height (str | Unset): The package height. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-        length (str | Unset): The package length. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-        unit (str | Unset): The unit for the SKU dimensions.
-            Possible values based on region:
-            - US: CENTIMETER, INCH
-            - Other regions: CENTIMETER
+    """ 
+        Attributes:
+            height (str | Unset): The package height. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+            length (str | Unset): The package length. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+            unit (str | Unset): The unit for the SKU dimensions.
+                Possible values based on region:
+                - US: CENTIMETER, INCH
+                - Other regions: CENTIMETER
 
-            Note: Use the same measurement system for `sku_weight` and `sku_dimensions`. For example, use `KILOGRAM` with
-            `CENTIMETER`.
-        width (str | Unset): The package width. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-    """
+                Note: Use the same measurement system for `sku_weight` and `sku_dimensions`. For example, use `KILOGRAM` with
+                `CENTIMETER`.
+            width (str | Unset): The package width. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+     """
 
     height: str | Unset = UNSET
     length: str | Unset = UNSET
     unit: str | Unset = UNSET
     width: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -48,9 +60,11 @@ class GetProductResponseDataSkuSkuDimension:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if length is not UNSET:
@@ -61,6 +75,8 @@ class GetProductResponseDataSkuSkuDimension:
             field_dict["width"] = width
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +95,7 @@ class GetProductResponseDataSkuSkuDimension:
             unit=unit,
             width=width,
         )
+
 
         get_product_response_data_sku_sku_dimension.additional_properties = d
         return get_product_response_data_sku_sku_dimension

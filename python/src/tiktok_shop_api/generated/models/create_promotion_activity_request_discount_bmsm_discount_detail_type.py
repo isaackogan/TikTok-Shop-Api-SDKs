@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatePromotionActivityRequestDiscountBmsmDiscountDetailType(StrEnum):
     AMOUNT_OFF = "AMOUNT_OFF"
     PERCENTAGE_OFF = "PERCENTAGE_OFF"

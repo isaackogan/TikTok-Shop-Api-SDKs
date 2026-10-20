@@ -1,39 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_open_collaborations_response_data_open_collaboration import (
-        SearchOpenCollaborationsResponseDataOpenCollaboration,
-    )
+  from ..models.search_open_collaborations_response_data_open_collaboration import SearchOpenCollaborationsResponseDataOpenCollaboration
+
+
+
 
 
 T = TypeVar("T", bound="SearchOpenCollaborationsResponseData")
 
 
+
 @_attrs_define
 class SearchOpenCollaborationsResponseData:
-    """
-    Attributes:
-        next_page_token (str | Unset): Pagination token for the next page. Pass this value as `page_token` in the next
-            request. An empty value indicates that there are no more results.
-        total_count (int | Unset): Total count of products that satisfy all the input search conditions.
-        open_collaborations (list[SearchOpenCollaborationsResponseDataOpenCollaboration] | Unset): Open collaborations
-            matching the search criteria on the current page.
-    """
+    """ 
+        Attributes:
+            next_page_token (str | Unset): Pagination token for the next page. Pass this value as `page_token` in the next
+                request. An empty value indicates that there are no more results.
+            total_count (int | Unset): Total count of products that satisfy all the input search conditions.
+            open_collaborations (list[SearchOpenCollaborationsResponseDataOpenCollaboration] | Unset): Open collaborations
+                matching the search criteria on the current page.
+     """
 
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     open_collaborations: list[SearchOpenCollaborationsResponseDataOpenCollaboration] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_open_collaborations_response_data_open_collaboration import SearchOpenCollaborationsResponseDataOpenCollaboration # noqa: PLC0415
         next_page_token = self.next_page_token
 
         total_count = self.total_count
@@ -45,9 +55,13 @@ class SearchOpenCollaborationsResponseData:
                 open_collaborations_item = open_collaborations_item_data.to_dict()
                 open_collaborations.append(open_collaborations_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if next_page_token is not UNSET:
             field_dict["next_page_token"] = next_page_token
         if total_count is not UNSET:
@@ -57,12 +71,11 @@ class SearchOpenCollaborationsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_open_collaborations_response_data_open_collaboration import (
-            SearchOpenCollaborationsResponseDataOpenCollaboration,  # noqa: PLC0415
-        )
-
+        from ..models.search_open_collaborations_response_data_open_collaboration import SearchOpenCollaborationsResponseDataOpenCollaboration # noqa: PLC0415
         d = dict(src_dict)
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -73,17 +86,19 @@ class SearchOpenCollaborationsResponseData:
         if _open_collaborations is not UNSET:
             open_collaborations = []
             for open_collaborations_item_data in _open_collaborations:
-                open_collaborations_item = SearchOpenCollaborationsResponseDataOpenCollaboration.from_dict(
-                    open_collaborations_item_data
-                )
+                open_collaborations_item = SearchOpenCollaborationsResponseDataOpenCollaboration.from_dict(open_collaborations_item_data)
+
+
 
                 open_collaborations.append(open_collaborations_item)
+
 
         search_open_collaborations_response_data = cls(
             next_page_token=next_page_token,
             total_count=total_count,
             open_collaborations=open_collaborations,
         )
+
 
         search_open_collaborations_response_data.additional_properties = d
         return search_open_collaborations_response_data

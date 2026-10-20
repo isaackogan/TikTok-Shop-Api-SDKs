@@ -1,39 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.update_inbound_order_tracking_request_parcel_tracking_info import (
-        UpdateInboundOrderTrackingRequestParcelTrackingInfo,
-    )
+  from ..models.update_inbound_order_tracking_request_parcel_tracking_info import UpdateInboundOrderTrackingRequestParcelTrackingInfo
+
+
+
 
 
 T = TypeVar("T", bound="UpdateInboundOrderTrackingRequest")
 
 
+
 @_attrs_define
 class UpdateInboundOrderTrackingRequest:
-    """
-    Attributes:
-        order_id (str): The numeric identifier of the inbound order to update tracking information for.
-            **Note:** Provide the numeric sequence only; do not include the "IBR" prefix (e.g., use `123456` instead of
-            `IBR123456`).
-        parcel_tracking_info (list[UpdateInboundOrderTrackingRequestParcelTrackingInfo] | Unset): Carton-level parcel
-            tracking information for the inbound order, including carton number, logistics provider name, and tracking
-            number.
-    """
+    """ 
+        Attributes:
+            order_id (str): The numeric identifier of the inbound order to update tracking information for.
+                **Note:** Provide the numeric sequence only; do not include the "IBR" prefix (e.g., use `123456` instead of
+                `IBR123456`).
+            parcel_tracking_info (list[UpdateInboundOrderTrackingRequestParcelTrackingInfo] | Unset): Carton-level parcel
+                tracking information for the inbound order, including carton number, logistics provider name, and tracking
+                number.
+     """
 
     order_id: str
     parcel_tracking_info: list[UpdateInboundOrderTrackingRequestParcelTrackingInfo] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_inbound_order_tracking_request_parcel_tracking_info import UpdateInboundOrderTrackingRequestParcelTrackingInfo # noqa: PLC0415
         order_id = self.order_id
 
         parcel_tracking_info: list[dict[str, Any]] | Unset = UNSET
@@ -43,24 +53,24 @@ class UpdateInboundOrderTrackingRequest:
                 parcel_tracking_info_item = parcel_tracking_info_item_data.to_dict()
                 parcel_tracking_info.append(parcel_tracking_info_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "order_id": order_id,
-            }
-        )
+        field_dict.update({
+            "order_id": order_id,
+        })
         if parcel_tracking_info is not UNSET:
             field_dict["parcel_tracking_info"] = parcel_tracking_info
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.update_inbound_order_tracking_request_parcel_tracking_info import (
-            UpdateInboundOrderTrackingRequestParcelTrackingInfo,  # noqa: PLC0415
-        )
-
+        from ..models.update_inbound_order_tracking_request_parcel_tracking_info import UpdateInboundOrderTrackingRequestParcelTrackingInfo # noqa: PLC0415
         d = dict(src_dict)
         order_id = d.pop("order_id")
 
@@ -69,16 +79,18 @@ class UpdateInboundOrderTrackingRequest:
         if _parcel_tracking_info is not UNSET:
             parcel_tracking_info = []
             for parcel_tracking_info_item_data in _parcel_tracking_info:
-                parcel_tracking_info_item = UpdateInboundOrderTrackingRequestParcelTrackingInfo.from_dict(
-                    parcel_tracking_info_item_data
-                )
+                parcel_tracking_info_item = UpdateInboundOrderTrackingRequestParcelTrackingInfo.from_dict(parcel_tracking_info_item_data)
+
+
 
                 parcel_tracking_info.append(parcel_tracking_info_item)
+
 
         update_inbound_order_tracking_request = cls(
             order_id=order_id,
             parcel_tracking_info=parcel_tracking_info,
         )
+
 
         update_inbound_order_tracking_request.additional_properties = d
         return update_inbound_order_tracking_request

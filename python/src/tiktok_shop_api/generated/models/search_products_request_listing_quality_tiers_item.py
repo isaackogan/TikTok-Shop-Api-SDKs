@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchProductsRequestListingQualityTiersItem(StrEnum):
     EXCELLENT = "EXCELLENT"
     FAIR = "FAIR"

@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.mark_conversations_as_read_request import MarkConversationsAsReadRequest
 from ...models.mark_conversations_as_read_response import MarkConversationsAsReadResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: MarkConversationsAsReadRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> MarkConversationsAsReadResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> MarkConversationsAsReadResponse | None:
     if response.status_code == 200:
         response_200 = MarkConversationsAsReadResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[MarkConversationsAsReadResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[MarkConversationsAsReadResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: MarkConversationsAsReadRequest,
+
 ) -> Response[MarkConversationsAsReadResponse]:
-    """Mark Conversations as Read
+    """ Mark Conversations as Read
 
      Mark the messages in the specified conversations to be read.
 
@@ -72,10 +82,12 @@ def sync_detailed(
 
     Returns:
         Response[MarkConversationsAsReadResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -84,13 +96,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: MarkConversationsAsReadRequest,
+
 ) -> MarkConversationsAsReadResponse | None:
-    """Mark Conversations as Read
+    """ Mark Conversations as Read
 
      Mark the messages in the specified conversations to be read.
 
@@ -103,20 +115,22 @@ def sync(
 
     Returns:
         MarkConversationsAsReadResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: MarkConversationsAsReadRequest,
+
 ) -> Response[MarkConversationsAsReadResponse]:
-    """Mark Conversations as Read
+    """ Mark Conversations as Read
 
      Mark the messages in the specified conversations to be read.
 
@@ -129,23 +143,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[MarkConversationsAsReadResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: MarkConversationsAsReadRequest,
+
 ) -> MarkConversationsAsReadResponse | None:
-    """Mark Conversations as Read
+    """ Mark Conversations as Read
 
      Mark the messages in the specified conversations to be read.
 
@@ -158,11 +176,11 @@ async def asyncio(
 
     Returns:
         MarkConversationsAsReadResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

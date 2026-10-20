@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ListOpportunitiesRequestOpportunityType(StrEnum):
     CATEGORY = "CATEGORY"
     KEYWORD = "KEYWORD"

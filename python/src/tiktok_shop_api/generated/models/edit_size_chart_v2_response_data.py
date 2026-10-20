@@ -1,36 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="EditSizeChartV2ResponseData")
+
 
 
 @_attrs_define
 class EditSizeChartV2ResponseData:
-    """
-    Attributes:
-        size_chart_id (str | Unset): The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
-    """
+    """ 
+        Attributes:
+            size_chart_id (str | Unset): The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
+     """
 
     size_chart_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         size_chart_id = self.size_chart_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if size_chart_id is not UNSET:
             field_dict["size_chart_id"] = size_chart_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -40,6 +56,7 @@ class EditSizeChartV2ResponseData:
         edit_size_chart_v2_response_data = cls(
             size_chart_id=size_chart_id,
         )
+
 
         edit_size_chart_v2_response_data.additional_properties = d
         return edit_size_chart_v2_response_data

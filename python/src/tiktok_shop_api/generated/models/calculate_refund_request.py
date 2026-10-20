@@ -1,50 +1,57 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.order_line_list import OrderLineList
-    from ..models.sku import Sku
+  from ..models.order_line_list import OrderLineList
+  from ..models.sku import Sku
+
+
+
 
 
 T = TypeVar("T", bound="CalculateRefundRequest")
 
 
+
 @_attrs_define
 class CalculateRefundRequest:
-    """
-    Attributes:
-        order_id (str): TikTok Shop order id.
-        request_type (str): Request type
-            - CANCEL
-            - REFUND
-            - RETURN_AND_REFUND
-            Note: different request types are used for different aftersales scenarios. Also, different request types might
-            have different refund amounts, because the refund amount calculation policy is different.
-        reason_name (str): Seller's reason for the selected cancellation, refund, or return-and-refund request. Use the
-            [Get Aftersale Eligibility](https://partner.tiktokshop.com/docv2/page/69c3070c66dee40493fdfe2e) endpoint to
-            retrieve the currently available reasons, and submit the returned reason name in this field.
-        shipment_type (str | Unset): How buyer ships items to seller when in a return request, could be:
-            - `PLATFORM`
-            - `BUYER_ARRANGE`
-        handover_method (str | Unset): Which handover method buyer chooses to use when returning goods to seller by
-            platform
-            - `DROP_OFF`: buyer drops off the parcel in logistics service collect point.
-            - `PICKUP`: logistics service picks up the buyer package.
-        order_line_item_ids (list[str] | Unset): TikTok Shop order line item IDs to include in the refund calculation.
-            Do not provide non-empty values in both `order_line_item_ids` and `order_line_list` in the same request.
-        skus (list[Sku] | Unset): skus
-        order_line_list (list[OrderLineList] | Unset): Order lines to include in the refund calculation. Use this field
-            when you need to identify individual sub-items in a bundle product. **Note:** This field is completely backward
-            compatible with the previous `order_line_item_ids` field. Do not provide non-empty values in both
-            `order_line_list` and `order_line_item_ids` in the same request.
-    """
+    """ 
+        Attributes:
+            order_id (str): TikTok Shop order id.
+            request_type (str): Request type
+                - CANCEL
+                - REFUND
+                - RETURN_AND_REFUND
+                Note: different request types are used for different aftersales scenarios. Also, different request types might
+                have different refund amounts, because the refund amount calculation policy is different.
+            reason_name (str): Seller's reason for the selected cancellation, refund, or return-and-refund request. Use the
+                [Get Aftersale Eligibility](https://partner.tiktokshop.com/docv2/page/69c3070c66dee40493fdfe2e) endpoint to
+                retrieve the currently available reasons, and submit the returned reason name in this field.
+            shipment_type (str | Unset): How buyer ships items to seller when in a return request, could be:
+                - `PLATFORM`
+                - `BUYER_ARRANGE`
+            handover_method (str | Unset): Which handover method buyer chooses to use when returning goods to seller by
+                platform
+                - `DROP_OFF`: buyer drops off the parcel in logistics service collect point.
+                - `PICKUP`: logistics service picks up the buyer package.
+            order_line_item_ids (list[str] | Unset): TikTok Shop order line item IDs to include in the refund calculation.
+                Do not provide non-empty values in both `order_line_item_ids` and `order_line_list` in the same request.
+            skus (list[Sku] | Unset): skus
+            order_line_list (list[OrderLineList] | Unset): Order lines to include in the refund calculation. Use this field
+                when you need to identify individual sub-items in a bundle product. **Note:** This field is completely backward
+                compatible with the previous `order_line_item_ids` field. Do not provide non-empty values in both
+                `order_line_list` and `order_line_item_ids` in the same request.
+     """
 
     order_id: str
     request_type: str
@@ -56,7 +63,13 @@ class CalculateRefundRequest:
     order_line_list: list[OrderLineList] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.order_line_list import OrderLineList # noqa: PLC0415
+        from ..models.sku import Sku # noqa: PLC0415
         order_id = self.order_id
 
         request_type = self.request_type
@@ -71,12 +84,16 @@ class CalculateRefundRequest:
         if not isinstance(self.order_line_item_ids, Unset):
             order_line_item_ids = self.order_line_item_ids
 
+
+
         skus: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.skus, Unset):
             skus = []
             for skus_item_data in self.skus:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
+
+
 
         order_line_list: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.order_line_list, Unset):
@@ -85,15 +102,16 @@ class CalculateRefundRequest:
                 order_line_list_item = order_line_list_item_data.to_dict()
                 order_line_list.append(order_line_list_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "order_id": order_id,
-                "request_type": request_type,
-                "reason_name": reason_name,
-            }
-        )
+        field_dict.update({
+            "order_id": order_id,
+            "request_type": request_type,
+            "reason_name": reason_name,
+        })
         if shipment_type is not UNSET:
             field_dict["shipment_type"] = shipment_type
         if handover_method is not UNSET:
@@ -107,11 +125,12 @@ class CalculateRefundRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.order_line_list import OrderLineList  # noqa: PLC0415
-        from ..models.sku import Sku  # noqa: PLC0415
-
+        from ..models.order_line_list import OrderLineList # noqa: PLC0415
+        from ..models.sku import Sku # noqa: PLC0415
         d = dict(src_dict)
         order_id = d.pop("order_id")
 
@@ -125,6 +144,7 @@ class CalculateRefundRequest:
 
         order_line_item_ids = cast(list[str], d.pop("order_line_item_ids", UNSET))
 
+
         _skus = d.pop("skus", UNSET)
         skus: list[Sku] | Unset = UNSET
         if _skus is not UNSET:
@@ -132,7 +152,10 @@ class CalculateRefundRequest:
             for skus_item_data in _skus:
                 skus_item = Sku.from_dict(skus_item_data)
 
+
+
                 skus.append(skus_item)
+
 
         _order_line_list = d.pop("order_line_list", UNSET)
         order_line_list: list[OrderLineList] | Unset = UNSET
@@ -141,7 +164,10 @@ class CalculateRefundRequest:
             for order_line_list_item_data in _order_line_list:
                 order_line_list_item = OrderLineList.from_dict(order_line_list_item_data)
 
+
+
                 order_line_list.append(order_line_list_item)
+
 
         calculate_refund_request = cls(
             order_id=order_id,
@@ -153,6 +179,7 @@ class CalculateRefundRequest:
             skus=skus,
             order_line_list=order_line_list,
         )
+
 
         calculate_refund_request.additional_properties = d
         return calculate_refund_request

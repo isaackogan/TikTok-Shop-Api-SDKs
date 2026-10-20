@@ -1,33 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.price_detail import PriceDetail
-    from ..models.product_image import ProductImage
+  from ..models.price_detail import PriceDetail
+  from ..models.product_image import ProductImage
+
+
+
 
 
 T = TypeVar("T", bound="ExchangeOrderLine")
 
 
+
 @_attrs_define
 class ExchangeOrderLine:
-    """
-    Attributes:
-        order_line_id (str | Unset): Ignore this field. It is not yet supported.
-        sku_id (str | Unset): Ignore this field. It is not yet supported.
-        sku_name (str | Unset): Ignore this field. It is not yet supported.
-        product_name (str | Unset): Ignore this field. It is not yet supported.
-        seller_sku_name (str | Unset): Ignore this field. It is not yet supported.
-        product_image (ProductImage | Unset):
-        price_detail (PriceDetail | Unset):
-    """
+    """ 
+        Attributes:
+            order_line_id (str | Unset): Ignore this field. It is not yet supported.
+            sku_id (str | Unset): Ignore this field. It is not yet supported.
+            sku_name (str | Unset): Ignore this field. It is not yet supported.
+            product_name (str | Unset): Ignore this field. It is not yet supported.
+            seller_sku_name (str | Unset): Ignore this field. It is not yet supported.
+            product_image (ProductImage | Unset):
+            price_detail (PriceDetail | Unset):
+     """
 
     order_line_id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
@@ -38,7 +45,13 @@ class ExchangeOrderLine:
     price_detail: PriceDetail | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.price_detail import PriceDetail # noqa: PLC0415
+        from ..models.product_image import ProductImage # noqa: PLC0415
         order_line_id = self.order_line_id
 
         sku_id = self.sku_id
@@ -57,9 +70,11 @@ class ExchangeOrderLine:
         if not isinstance(self.price_detail, Unset):
             price_detail = self.price_detail.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_line_id is not UNSET:
             field_dict["order_line_id"] = order_line_id
         if sku_id is not UNSET:
@@ -77,11 +92,12 @@ class ExchangeOrderLine:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.price_detail import PriceDetail  # noqa: PLC0415
-        from ..models.product_image import ProductImage  # noqa: PLC0415
-
+        from ..models.price_detail import PriceDetail # noqa: PLC0415
+        from ..models.product_image import ProductImage # noqa: PLC0415
         d = dict(src_dict)
         order_line_id = d.pop("order_line_id", UNSET)
 
@@ -95,17 +111,23 @@ class ExchangeOrderLine:
 
         _product_image = d.pop("product_image", UNSET)
         product_image: ProductImage | Unset
-        if isinstance(_product_image, Unset):
+        if isinstance(_product_image,  Unset):
             product_image = UNSET
         else:
             product_image = ProductImage.from_dict(_product_image)
 
+
+
+
         _price_detail = d.pop("price_detail", UNSET)
         price_detail: PriceDetail | Unset
-        if isinstance(_price_detail, Unset):
+        if isinstance(_price_detail,  Unset):
             price_detail = UNSET
         else:
             price_detail = PriceDetail.from_dict(_price_detail)
+
+
+
 
         exchange_order_line = cls(
             order_line_id=order_line_id,
@@ -116,6 +138,7 @@ class ExchangeOrderLine:
             product_image=product_image,
             price_detail=price_detail,
         )
+
 
         exchange_order_line.additional_properties = d
         return exchange_order_line

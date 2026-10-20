@@ -1,27 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="CombinedSku")
+
 
 
 @_attrs_define
 class CombinedSku:
-    """
-    Attributes:
-        product_id (str): The ID of the source product included in the virtual bundle.
-        sku_id (str): The ID of the source SKU included in the virtual bundle.
-        sku_count (int): The quantity of the source SKU included in the virtual bundle.
-    """
+    """ 
+        Attributes:
+            product_id (str): The ID of the source product included in the virtual bundle.
+            sku_id (str): The ID of the source SKU included in the virtual bundle.
+            sku_count (int): The quantity of the source SKU included in the virtual bundle.
+     """
 
     product_id: str
     sku_id: str
     sku_count: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
@@ -30,17 +43,18 @@ class CombinedSku:
 
         sku_count = self.sku_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_id": product_id,
-                "sku_id": sku_id,
-                "sku_count": sku_count,
-            }
-        )
+        field_dict.update({
+            "product_id": product_id,
+            "sku_id": sku_id,
+            "sku_count": sku_count,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -56,6 +70,7 @@ class CombinedSku:
             sku_id=sku_id,
             sku_count=sku_count,
         )
+
 
         combined_sku.additional_properties = d
         return combined_sku

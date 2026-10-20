@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail")
+
 
 
 @_attrs_define
 class SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail:
-    """
-    Attributes:
-        total_quantity (int | Unset): The total number of units for current SKU, consist of `available_quantity` and
-            `reserved_quantity`.
-        available_quantity (int | Unset): The number of units available for sale.
-            Note:
-            The number does not include reserved units.
-        reserved_quantity (int | Unset): The number of units reserved for customer orders or return to supplier
-            shipment.
-    """
+    """ 
+        Attributes:
+            total_quantity (int | Unset): The total number of units for current SKU, consist of `available_quantity` and
+                `reserved_quantity`.
+            available_quantity (int | Unset): The number of units available for sale.
+                Note:
+                The number does not include reserved units.
+            reserved_quantity (int | Unset): The number of units reserved for customer orders or return to supplier
+                shipment.
+     """
 
     total_quantity: int | Unset = UNSET
     available_quantity: int | Unset = UNSET
     reserved_quantity: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         total_quantity = self.total_quantity
@@ -36,9 +48,11 @@ class SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail:
 
         reserved_quantity = self.reserved_quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_quantity is not UNSET:
             field_dict["total_quantity"] = total_quantity
         if available_quantity is not UNSET:
@@ -47,6 +61,8 @@ class SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail:
             field_dict["reserved_quantity"] = reserved_quantity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -62,6 +78,7 @@ class SearchFBTInventoryResponseDataInventoryGoodSkuOnHandDetail:
             available_quantity=available_quantity,
             reserved_quantity=reserved_quantity,
         )
+
 
         search_fbt_inventory_response_data_inventory_good_sku_on_hand_detail.additional_properties = d
         return search_fbt_inventory_response_data_inventory_good_sku_on_hand_detail

@@ -1,39 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_promotion_activities_response_data_activity import (
-        SearchPromotionActivitiesResponseDataActivity,
-    )
+  from ..models.search_promotion_activities_response_data_activity import SearchPromotionActivitiesResponseDataActivity
+
+
+
 
 
 T = TypeVar("T", bound="SearchPromotionActivitiesResponseData")
 
 
+
 @_attrs_define
 class SearchPromotionActivitiesResponseData:
-    """
-    Attributes:
-        total_count (int | Unset): Total number of activities matching the supplied filters. This value can be greater
-            than the number of entries in activities.
-        next_page_token (str | Unset): Page cursor for the next request. Pass a non-empty returned token as `page_token`
-            to retrieve the next page. Stop when `next_page_token` is omitted or empty.
-        activities (list[SearchPromotionActivitiesResponseDataActivity] | Unset): Activities list information.
-    """
+    """ 
+        Attributes:
+            total_count (int | Unset): Total number of activities matching the supplied filters. This value can be greater
+                than the number of entries in activities.
+            next_page_token (str | Unset): Page cursor for the next request. Pass a non-empty returned token as `page_token`
+                to retrieve the next page. Stop when `next_page_token` is omitted or empty.
+            activities (list[SearchPromotionActivitiesResponseDataActivity] | Unset): Activities list information.
+     """
 
     total_count: int | Unset = UNSET
     next_page_token: str | Unset = UNSET
     activities: list[SearchPromotionActivitiesResponseDataActivity] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_promotion_activities_response_data_activity import SearchPromotionActivitiesResponseDataActivity # noqa: PLC0415
         total_count = self.total_count
 
         next_page_token = self.next_page_token
@@ -45,9 +55,13 @@ class SearchPromotionActivitiesResponseData:
                 activities_item = activities_item_data.to_dict()
                 activities.append(activities_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_count is not UNSET:
             field_dict["total_count"] = total_count
         if next_page_token is not UNSET:
@@ -57,12 +71,11 @@ class SearchPromotionActivitiesResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_promotion_activities_response_data_activity import (
-            SearchPromotionActivitiesResponseDataActivity,  # noqa: PLC0415
-        )
-
+        from ..models.search_promotion_activities_response_data_activity import SearchPromotionActivitiesResponseDataActivity # noqa: PLC0415
         d = dict(src_dict)
         total_count = d.pop("total_count", UNSET)
 
@@ -75,13 +88,17 @@ class SearchPromotionActivitiesResponseData:
             for activities_item_data in _activities:
                 activities_item = SearchPromotionActivitiesResponseDataActivity.from_dict(activities_item_data)
 
+
+
                 activities.append(activities_item)
+
 
         search_promotion_activities_response_data = cls(
             total_count=total_count,
             next_page_token=next_page_token,
             activities=activities,
         )
+
 
         search_promotion_activities_response_data.additional_properties = d
         return search_promotion_activities_response_data

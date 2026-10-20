@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.delete_global_products_response_data_error_detail import DeleteGlobalProductsResponseDataErrorDetail
+  from ..models.delete_global_products_response_data_error_detail import DeleteGlobalProductsResponseDataErrorDetail
+
+
+
 
 
 T = TypeVar("T", bound="DeleteGlobalProductsResponseDataError")
 
 
+
 @_attrs_define
 class DeleteGlobalProductsResponseDataError:
-    """
-    Attributes:
-        message (str | Unset): The error message.
-        code (int | Unset): The error code.
-        detail (DeleteGlobalProductsResponseDataErrorDetail | Unset):
-    """
+    """ 
+        Attributes:
+            message (str | Unset): The error message.
+            code (int | Unset): The error code.
+            detail (DeleteGlobalProductsResponseDataErrorDetail | Unset):
+     """
 
     message: str | Unset = UNSET
     code: int | Unset = UNSET
     detail: DeleteGlobalProductsResponseDataErrorDetail | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.delete_global_products_response_data_error_detail import DeleteGlobalProductsResponseDataErrorDetail # noqa: PLC0415
         message = self.message
 
         code = self.code
@@ -38,9 +50,11 @@ class DeleteGlobalProductsResponseDataError:
         if not isinstance(self.detail, Unset):
             detail = self.detail.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if message is not UNSET:
             field_dict["message"] = message
         if code is not UNSET:
@@ -50,12 +64,11 @@ class DeleteGlobalProductsResponseDataError:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.delete_global_products_response_data_error_detail import (
-            DeleteGlobalProductsResponseDataErrorDetail,  # noqa: PLC0415
-        )
-
+        from ..models.delete_global_products_response_data_error_detail import DeleteGlobalProductsResponseDataErrorDetail # noqa: PLC0415
         d = dict(src_dict)
         message = d.pop("message", UNSET)
 
@@ -63,16 +76,20 @@ class DeleteGlobalProductsResponseDataError:
 
         _detail = d.pop("detail", UNSET)
         detail: DeleteGlobalProductsResponseDataErrorDetail | Unset
-        if isinstance(_detail, Unset):
+        if isinstance(_detail,  Unset):
             detail = UNSET
         else:
             detail = DeleteGlobalProductsResponseDataErrorDetail.from_dict(_detail)
+
+
+
 
         delete_global_products_response_data_error = cls(
             message=message,
             code=code,
             detail=detail,
         )
+
 
         delete_global_products_response_data_error.additional_properties = d
         return delete_global_products_response_data_error

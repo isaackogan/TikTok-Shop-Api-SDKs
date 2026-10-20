@@ -1,55 +1,71 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ListingQuality")
+
 
 
 @_attrs_define
 class ListingQuality:
-    """
-    Attributes:
-        current_tier (str | Unset): The current quality tier of this product listing. The quality tier of a product
-            listing depends on the quality of the content in its product fields such as the title, image, attributes etc.
+    """ 
+        Attributes:
+            current_tier (str | Unset): The current quality tier of this product listing. The quality tier of a product
+                listing depends on the quality of the content in its product fields such as the title, image, attributes etc.
 
-            Possible values:
-            - POOR
-            - FAIR
-            - GOOD
+                Possible values:
+                - POOR
+                - FAIR
+                - GOOD
 
-            **NOTE**: Available only for the US market.
-        remaining_recommendations (int | Unset): The remaining number of recommendations (see `diagnosis_results`) that
-            must be implemented for the product to advance to the highest tier.
+                **NOTE**: Available only for the US market.
+            remaining_recommendations (int | Unset): The remaining number of recommendations (see `diagnosis_results`) that
+                must be implemented for the product to advance to the highest tier.
 
-            **Note**:
-            - To advance to the highest tier, you must implement all recommendations listed in `diagnosis_results`.
-            - Available only for the US market.
-    """
+                **Note**:
+                - To advance to the highest tier, you must implement all recommendations listed in `diagnosis_results`.
+                - Available only for the US market.
+     """
 
     current_tier: str | Unset = UNSET
     remaining_recommendations: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         current_tier = self.current_tier
 
         remaining_recommendations = self.remaining_recommendations
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if current_tier is not UNSET:
             field_dict["current_tier"] = current_tier
         if remaining_recommendations is not UNSET:
             field_dict["remaining_recommendations"] = remaining_recommendations
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -62,6 +78,7 @@ class ListingQuality:
             current_tier=current_tier,
             remaining_recommendations=remaining_recommendations,
         )
+
 
         listing_quality.additional_properties = d
         return listing_quality

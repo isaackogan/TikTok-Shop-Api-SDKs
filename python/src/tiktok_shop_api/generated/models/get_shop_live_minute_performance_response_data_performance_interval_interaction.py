@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction")
+
 
 
 @_attrs_define
 class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction:
-    """
-    Attributes:
-        new_followers (int | Unset): Number of viewers who followed creator from the LIVE video
-        shares (int | Unset): Total number of shares of a LIVE.
-        comments (int | Unset): Total number of comments for a LIVE.
-        likes (int | Unset): The number of likes in the LIVE room.
-        comment_rate (str | Unset): Total number of comments during the LIVE divided by the number of views.
-        follow_rate (str | Unset): Number of users that followed the creator during the LIVE divided by the number of
-            views.
-        like_rate (str | Unset): Total number of likes during the LIVE divided by the number of views.
-        share_rate (str | Unset): Total number of times the LIVE was shared divided by the total number of views.
-    """
+    """ 
+        Attributes:
+            new_followers (int | Unset): Number of viewers who followed creator from the LIVE video
+            shares (int | Unset): Total number of shares of a LIVE.
+            comments (int | Unset): Total number of comments for a LIVE.
+            likes (int | Unset): The number of likes in the LIVE room.
+            comment_rate (str | Unset): Total number of comments during the LIVE divided by the number of views.
+            follow_rate (str | Unset): Number of users that followed the creator during the LIVE divided by the number of
+                views.
+            like_rate (str | Unset): Total number of likes during the LIVE divided by the number of views.
+            share_rate (str | Unset): Total number of times the LIVE was shared divided by the total number of views.
+     """
 
     new_followers: int | Unset = UNSET
     shares: int | Unset = UNSET
@@ -35,6 +43,10 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction:
     like_rate: str | Unset = UNSET
     share_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         new_followers = self.new_followers
@@ -53,9 +65,11 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction:
 
         share_rate = self.share_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if new_followers is not UNSET:
             field_dict["new_followers"] = new_followers
         if shares is not UNSET:
@@ -74,6 +88,8 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction:
             field_dict["share_rate"] = share_rate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -104,6 +120,7 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalInteraction:
             like_rate=like_rate,
             share_rate=share_rate,
         )
+
 
         get_shop_live_minute_performance_response_data_performance_interval_interaction.additional_properties = d
         return get_shop_live_minute_performance_response_data_performance_interval_interaction

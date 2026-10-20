@@ -1,14 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.upload_return_shipping_information_request import UploadReturnShippingInformationRequest
 from ...models.upload_return_shipping_information_response import UploadReturnShippingInformationResponse
 from ...models.upload_return_shipping_information_return_id_type import UploadReturnShippingInformationReturnIdType
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,12 +21,17 @@ def _get_kwargs(
     body: UploadReturnShippingInformationRequest,
     return_ids: list[str],
     return_id_type: UploadReturnShippingInformationReturnIdType | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
     json_return_ids = return_ids
+
 
     params["return_ids"] = json_return_ids
 
@@ -31,7 +41,9 @@ def _get_kwargs(
 
     params["return_id_type"] = json_return_id_type
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -47,11 +59,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> UploadReturnShippingInformationResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UploadReturnShippingInformationResponse | None:
     if response.status_code == 200:
         response_200 = UploadReturnShippingInformationResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -61,9 +74,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[UploadReturnShippingInformationResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UploadReturnShippingInformationResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -78,8 +89,9 @@ def sync_detailed(
     body: UploadReturnShippingInformationRequest,
     return_ids: list[str],
     return_id_type: UploadReturnShippingInformationReturnIdType | Unset = UNSET,
+
 ) -> Response[UploadReturnShippingInformationResponse]:
-    """Upload Return Shipping Information
+    """ Upload Return Shipping Information
 
      Use this API to upload return shipping documents, tracking numbers, and carriers for buyers.
 
@@ -94,12 +106,14 @@ def sync_detailed(
 
     Returns:
         Response[UploadReturnShippingInformationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        return_ids=return_ids,
-        return_id_type=return_id_type,
+return_ids=return_ids,
+return_id_type=return_id_type,
+
     )
 
     response = client.get_httpx_client().request(
@@ -108,15 +122,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: UploadReturnShippingInformationRequest,
     return_ids: list[str],
     return_id_type: UploadReturnShippingInformationReturnIdType | Unset = UNSET,
+
 ) -> UploadReturnShippingInformationResponse | None:
-    """Upload Return Shipping Information
+    """ Upload Return Shipping Information
 
      Use this API to upload return shipping documents, tracking numbers, and carriers for buyers.
 
@@ -131,15 +145,16 @@ def sync(
 
     Returns:
         UploadReturnShippingInformationResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        return_ids=return_ids,
-        return_id_type=return_id_type,
-    ).parsed
+body=body,
+return_ids=return_ids,
+return_id_type=return_id_type,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -147,8 +162,9 @@ async def asyncio_detailed(
     body: UploadReturnShippingInformationRequest,
     return_ids: list[str],
     return_id_type: UploadReturnShippingInformationReturnIdType | Unset = UNSET,
+
 ) -> Response[UploadReturnShippingInformationResponse]:
-    """Upload Return Shipping Information
+    """ Upload Return Shipping Information
 
      Use this API to upload return shipping documents, tracking numbers, and carriers for buyers.
 
@@ -163,18 +179,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[UploadReturnShippingInformationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        return_ids=return_ids,
-        return_id_type=return_id_type,
+return_ids=return_ids,
+return_id_type=return_id_type,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -182,8 +201,9 @@ async def asyncio(
     body: UploadReturnShippingInformationRequest,
     return_ids: list[str],
     return_id_type: UploadReturnShippingInformationReturnIdType | Unset = UNSET,
+
 ) -> UploadReturnShippingInformationResponse | None:
-    """Upload Return Shipping Information
+    """ Upload Return Shipping Information
 
      Use this API to upload return shipping documents, tracking numbers, and carriers for buyers.
 
@@ -198,13 +218,13 @@ async def asyncio(
 
     Returns:
         UploadReturnShippingInformationResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            return_ids=return_ids,
-            return_id_type=return_id_type,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+return_ids=return_ids,
+return_id_type=return_id_type,
+
+    )).parsed

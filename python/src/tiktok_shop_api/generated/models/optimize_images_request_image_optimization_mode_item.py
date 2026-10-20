@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class OptimizeImagesRequestImageOptimizationModeItem(StrEnum):
     WHITE_BACKGROUND = "WHITE_BACKGROUND"
 

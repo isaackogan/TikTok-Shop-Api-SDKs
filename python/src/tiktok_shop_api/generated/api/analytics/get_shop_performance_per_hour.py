@@ -1,22 +1,31 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_performance_per_hour_currency import GetShopPerformancePerHourCurrency
 from ...models.get_shop_performance_per_hour_response import GetShopPerformancePerHourResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
     date: datetime.date,
     *,
     currency: GetShopPerformancePerHourCurrency | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_currency: str | Unset = UNSET
@@ -25,24 +34,26 @@ def _get_kwargs(
 
     params["currency"] = json_currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202510/shop/performance/{date}/performance_per_hour".format(
-            date=quote(str(date), safe=""),
-        ),
+        "url": "/analytics/202510/shop/performance/{date}/performance_per_hour".format(date=quote(str(date), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopPerformancePerHourResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopPerformancePerHourResponse | None:
     if response.status_code == 200:
         response_200 = GetShopPerformancePerHourResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -52,9 +63,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopPerformancePerHourResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopPerformancePerHourResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,8 +77,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     currency: GetShopPerformancePerHourCurrency | Unset = UNSET,
+
 ) -> Response[GetShopPerformancePerHourResponse]:
-    """Get Shop Performance Per Hour
+    """ Get Shop Performance Per Hour
 
      Returns hourly shop performance details for the requested date. The date can be within the last 30
     days, including today.
@@ -84,11 +94,13 @@ def sync_detailed(
 
     Returns:
         Response[GetShopPerformancePerHourResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        currency=currency,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -97,14 +109,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     date: datetime.date,
     *,
     client: AuthenticatedClient | Client,
     currency: GetShopPerformancePerHourCurrency | Unset = UNSET,
+
 ) -> GetShopPerformancePerHourResponse | None:
-    """Get Shop Performance Per Hour
+    """ Get Shop Performance Per Hour
 
      Returns hourly shop performance details for the requested date. The date can be within the last 30
     days, including today.
@@ -119,22 +131,24 @@ def sync(
 
     Returns:
         GetShopPerformancePerHourResponse
-    """
+     """
+
 
     return sync_detailed(
         date=date,
-        client=client,
-        currency=currency,
-    ).parsed
+client=client,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     date: datetime.date,
     *,
     client: AuthenticatedClient | Client,
     currency: GetShopPerformancePerHourCurrency | Unset = UNSET,
+
 ) -> Response[GetShopPerformancePerHourResponse]:
-    """Get Shop Performance Per Hour
+    """ Get Shop Performance Per Hour
 
      Returns hourly shop performance details for the requested date. The date can be within the last 30
     days, including today.
@@ -149,25 +163,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopPerformancePerHourResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        currency=currency,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     date: datetime.date,
     *,
     client: AuthenticatedClient | Client,
     currency: GetShopPerformancePerHourCurrency | Unset = UNSET,
+
 ) -> GetShopPerformancePerHourResponse | None:
-    """Get Shop Performance Per Hour
+    """ Get Shop Performance Per Hour
 
      Returns hourly shop performance details for the requested date. The date can be within the last 30
     days, including today.
@@ -182,12 +200,12 @@ async def asyncio(
 
     Returns:
         GetShopPerformancePerHourResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            date=date,
-            client=client,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        date=date,
+client=client,
+currency=currency,
+
+    )).parsed

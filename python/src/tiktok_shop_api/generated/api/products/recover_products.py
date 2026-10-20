@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.recover_products_request import RecoverProductsRequest
 from ...models.recover_products_response import RecoverProductsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: RecoverProductsRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> RecoverProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> RecoverProductsResponse | None:
     if response.status_code == 200:
         response_200 = RecoverProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[RecoverProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[RecoverProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RecoverProductsRequest,
+
 ) -> Response[RecoverProductsResponse]:
-    """Recover Products
+    """ Recover Products
 
      Recover products that are in the `Deleted` status. The status changes to `Seller_deactivated` after
     recovery.
@@ -73,10 +83,12 @@ def sync_detailed(
 
     Returns:
         Response[RecoverProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -85,13 +97,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: RecoverProductsRequest,
+
 ) -> RecoverProductsResponse | None:
-    """Recover Products
+    """ Recover Products
 
      Recover products that are in the `Deleted` status. The status changes to `Seller_deactivated` after
     recovery.
@@ -105,20 +117,22 @@ def sync(
 
     Returns:
         RecoverProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: RecoverProductsRequest,
+
 ) -> Response[RecoverProductsResponse]:
-    """Recover Products
+    """ Recover Products
 
      Recover products that are in the `Deleted` status. The status changes to `Seller_deactivated` after
     recovery.
@@ -132,23 +146,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[RecoverProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: RecoverProductsRequest,
+
 ) -> RecoverProductsResponse | None:
-    """Recover Products
+    """ Recover Products
 
      Recover products that are in the `Deleted` status. The status changes to `Seller_deactivated` after
     recovery.
@@ -162,11 +180,11 @@ async def asyncio(
 
     Returns:
         RecoverProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

@@ -1,28 +1,42 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_inbox_category_counts_response import GetInboxCategoryCountsResponse
-from ...types import Response
+from typing import cast
 
 
-def _get_kwargs() -> dict[str, Any]:
+
+def _get_kwargs(
+    
+) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/affiliate_seller/202608/conversations/group_counts",
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetInboxCategoryCountsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetInboxCategoryCountsResponse | None:
     if response.status_code == 200:
         response_200 = GetInboxCategoryCountsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -32,9 +46,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetInboxCategoryCountsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetInboxCategoryCountsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -46,8 +58,9 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetInboxCategoryCountsResponse]:
-    """Get Inbox Category Counts
+    """ Get Inbox Category Counts
 
      Query the number of sessions grouped by status such as read, unread, starred and archived.
 
@@ -57,9 +70,12 @@ def sync_detailed(
 
     Returns:
         Response[GetInboxCategoryCountsResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
+
+    kwargs = _get_kwargs(
+        
+    )
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -67,12 +83,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetInboxCategoryCountsResponse | None:
-    """Get Inbox Category Counts
+    """ Get Inbox Category Counts
 
      Query the number of sessions grouped by status such as read, unread, starred and archived.
 
@@ -82,18 +98,20 @@ def sync(
 
     Returns:
         GetInboxCategoryCountsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-    ).parsed
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetInboxCategoryCountsResponse]:
-    """Get Inbox Category Counts
+    """ Get Inbox Category Counts
 
      Query the number of sessions grouped by status such as read, unread, starred and archived.
 
@@ -103,20 +121,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetInboxCategoryCountsResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    kwargs = _get_kwargs(
+        
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetInboxCategoryCountsResponse | None:
-    """Get Inbox Category Counts
+    """ Get Inbox Category Counts
 
      Query the number of sessions grouped by status such as read, unread, starred and archived.
 
@@ -126,10 +149,10 @@ async def asyncio(
 
     Returns:
         GetInboxCategoryCountsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+
+    )).parsed

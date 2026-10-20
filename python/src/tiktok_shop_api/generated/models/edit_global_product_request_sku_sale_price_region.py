@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditGlobalProductRequestSkuSalePriceRegion(StrEnum):
     AT = "AT"
     BE = "BE"

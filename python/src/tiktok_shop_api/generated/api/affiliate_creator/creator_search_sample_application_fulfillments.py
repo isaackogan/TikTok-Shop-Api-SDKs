@@ -1,20 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.creator_search_sample_application_fulfillments_request import (
-    CreatorSearchSampleApplicationFulfillmentsRequest,
-)
-from ...models.creator_search_sample_application_fulfillments_response import (
-    CreatorSearchSampleApplicationFulfillmentsResponse,
-)
-from ...models.creator_search_sample_application_fulfillments_sort_field import (
-    CreatorSearchSampleApplicationFulfillmentsSortField,
-)
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.creator_search_sample_application_fulfillments_request import CreatorSearchSampleApplicationFulfillmentsRequest
+from ...models.creator_search_sample_application_fulfillments_response import CreatorSearchSampleApplicationFulfillmentsResponse
+from ...models.creator_search_sample_application_fulfillments_sort_field import CreatorSearchSampleApplicationFulfillmentsSortField
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -22,8 +21,12 @@ def _get_kwargs(
     body: CreatorSearchSampleApplicationFulfillmentsRequest,
     sort_order: str | Unset = UNSET,
     sort_field: CreatorSearchSampleApplicationFulfillmentsSortField | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -35,7 +38,9 @@ def _get_kwargs(
 
     params["sort_field"] = json_sort_field
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -51,11 +56,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreatorSearchSampleApplicationFulfillmentsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreatorSearchSampleApplicationFulfillmentsResponse | None:
     if response.status_code == 200:
         response_200 = CreatorSearchSampleApplicationFulfillmentsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -65,9 +71,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreatorSearchSampleApplicationFulfillmentsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreatorSearchSampleApplicationFulfillmentsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,8 +86,9 @@ def sync_detailed(
     body: CreatorSearchSampleApplicationFulfillmentsRequest,
     sort_order: str | Unset = UNSET,
     sort_field: CreatorSearchSampleApplicationFulfillmentsSortField | Unset = UNSET,
+
 ) -> Response[CreatorSearchSampleApplicationFulfillmentsResponse]:
-    """Creator Search Sample Application Fulfillments
+    """ Creator Search Sample Application Fulfillments
 
      You, the creator, can use this API to query the fulfillment status for the received sample
     applications.
@@ -99,12 +104,14 @@ def sync_detailed(
 
     Returns:
         Response[CreatorSearchSampleApplicationFulfillmentsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
+sort_order=sort_order,
+sort_field=sort_field,
+
     )
 
     response = client.get_httpx_client().request(
@@ -113,15 +120,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreatorSearchSampleApplicationFulfillmentsRequest,
     sort_order: str | Unset = UNSET,
     sort_field: CreatorSearchSampleApplicationFulfillmentsSortField | Unset = UNSET,
+
 ) -> CreatorSearchSampleApplicationFulfillmentsResponse | None:
-    """Creator Search Sample Application Fulfillments
+    """ Creator Search Sample Application Fulfillments
 
      You, the creator, can use this API to query the fulfillment status for the received sample
     applications.
@@ -137,15 +144,16 @@ def sync(
 
     Returns:
         CreatorSearchSampleApplicationFulfillmentsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
-    ).parsed
+body=body,
+sort_order=sort_order,
+sort_field=sort_field,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -153,8 +161,9 @@ async def asyncio_detailed(
     body: CreatorSearchSampleApplicationFulfillmentsRequest,
     sort_order: str | Unset = UNSET,
     sort_field: CreatorSearchSampleApplicationFulfillmentsSortField | Unset = UNSET,
+
 ) -> Response[CreatorSearchSampleApplicationFulfillmentsResponse]:
-    """Creator Search Sample Application Fulfillments
+    """ Creator Search Sample Application Fulfillments
 
      You, the creator, can use this API to query the fulfillment status for the received sample
     applications.
@@ -170,18 +179,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreatorSearchSampleApplicationFulfillmentsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_order=sort_order,
-        sort_field=sort_field,
+sort_order=sort_order,
+sort_field=sort_field,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -189,8 +201,9 @@ async def asyncio(
     body: CreatorSearchSampleApplicationFulfillmentsRequest,
     sort_order: str | Unset = UNSET,
     sort_field: CreatorSearchSampleApplicationFulfillmentsSortField | Unset = UNSET,
+
 ) -> CreatorSearchSampleApplicationFulfillmentsResponse | None:
-    """Creator Search Sample Application Fulfillments
+    """ Creator Search Sample Application Fulfillments
 
      You, the creator, can use this API to query the fulfillment status for the received sample
     applications.
@@ -206,13 +219,13 @@ async def asyncio(
 
     Returns:
         CreatorSearchSampleApplicationFulfillmentsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            sort_order=sort_order,
-            sort_field=sort_field,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+sort_order=sort_order,
+sort_field=sort_field,
+
+    )).parsed

@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData
+  from ..models.invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="InvoiceStatusChangeWebhook")
 
 
+
 @_attrs_define
 class InvoiceStatusChangeWebhook:
-    """
-    Attributes:
-        type_ (Literal[36]): The ID of the webhook type.
-        shop_id (str | Unset): The TikTok Shop ID.
-        tts_notification_id (str | Unset): The ID of this webhook notification.
-        timestamp (int | Unset): The time when this webhook is triggered. Unix timestamp.
-        data (InvoiceStatusChangeWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[36]): The ID of the webhook type.
+            shop_id (str | Unset): The TikTok Shop ID.
+            tts_notification_id (str | Unset): The ID of this webhook notification.
+            timestamp (int | Unset): The time when this webhook is triggered. Unix timestamp.
+            data (InvoiceStatusChangeWebhookData | Unset):
+     """
 
     type_: Literal[36]
     shop_id: str | Unset = UNSET
@@ -33,7 +41,12 @@ class InvoiceStatusChangeWebhook:
     data: InvoiceStatusChangeWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData # noqa: PLC0415
         type_ = self.type_
 
         shop_id = self.shop_id
@@ -46,13 +59,12 @@ class InvoiceStatusChangeWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if shop_id is not UNSET:
             field_dict["shop_id"] = shop_id
         if tts_notification_id is not UNSET:
@@ -64,12 +76,13 @@ class InvoiceStatusChangeWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData  # noqa: PLC0415
-
+        from ..models.invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[36], d.pop("type"))
+        type_ = cast(Literal[36] , d.pop("type"))
         if type_ != 36:
             raise ValueError(f"type must match const 36, got '{type_}'")
 
@@ -81,10 +94,13 @@ class InvoiceStatusChangeWebhook:
 
         _data = d.pop("data", UNSET)
         data: InvoiceStatusChangeWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = InvoiceStatusChangeWebhookData.from_dict(_data)
+
+
+
 
         invoice_status_change_webhook = cls(
             type_=type_,
@@ -93,6 +109,7 @@ class InvoiceStatusChangeWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         invoice_status_change_webhook.additional_properties = d
         return invoice_status_change_webhook

@@ -1,27 +1,35 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopVideoPerformanceListResponseDataVideoCreator")
+
 
 
 @_attrs_define
 class GetShopVideoPerformanceListResponseDataVideoCreator:
-    """
-    Attributes:
-        author_type (str | Unset): Creator account type.
-        creator_country (str | Unset): Country or region of the creator.
-        creator_id (str | Unset): The creator ID.
-        nick_name (str | Unset): Creator nickname.
-        open_id (str | Unset): The creator open ID.
-        user_name (str | Unset): Creator username (handle).
-    """
+    """ 
+        Attributes:
+            author_type (str | Unset): Creator account type.
+            creator_country (str | Unset): Country or region of the creator.
+            creator_id (str | Unset): The creator ID.
+            nick_name (str | Unset): Creator nickname.
+            open_id (str | Unset): The creator open ID.
+            user_name (str | Unset): Creator username (handle).
+     """
 
     author_type: str | Unset = UNSET
     creator_country: str | Unset = UNSET
@@ -30,6 +38,10 @@ class GetShopVideoPerformanceListResponseDataVideoCreator:
     open_id: str | Unset = UNSET
     user_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         author_type = self.author_type
@@ -44,9 +56,11 @@ class GetShopVideoPerformanceListResponseDataVideoCreator:
 
         user_name = self.user_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if author_type is not UNSET:
             field_dict["author_type"] = author_type
         if creator_country is not UNSET:
@@ -61,6 +75,8 @@ class GetShopVideoPerformanceListResponseDataVideoCreator:
             field_dict["user_name"] = user_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,6 +101,7 @@ class GetShopVideoPerformanceListResponseDataVideoCreator:
             open_id=open_id,
             user_name=user_name,
         )
+
 
         get_shop_video_performance_list_response_data_video_creator.additional_properties = d
         return get_shop_video_performance_list_response_data_video_creator

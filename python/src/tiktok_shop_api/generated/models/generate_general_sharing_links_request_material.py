@@ -1,56 +1,73 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GenerateGeneralSharingLinksRequestMaterial")
+
 
 
 @_attrs_define
 class GenerateGeneralSharingLinksRequestMaterial:
-    """
-    Attributes:
-        ids (list[str]): The list of material IDs. For `PRODUCT` requests, provide 1 to 50 product IDs.
-        type_ (str): Right now, the only possible value is `PRODUCT`.
-            When `type` is `PRODUCT`, use product IDs for `ids`.
-        promotion_campaign_schema (str | Unset): When type is set to CAMPAIGN, this field is required. This schema is
-            associated with the Campaign page.
-    """
+    """ 
+        Attributes:
+            ids (list[str]): The list of material IDs. For `PRODUCT` requests, provide 1 to 50 product IDs.
+            type_ (str): Right now, the only possible value is `PRODUCT`.
+                When `type` is `PRODUCT`, use product IDs for `ids`.
+            promotion_campaign_schema (str | Unset): When type is set to CAMPAIGN, this field is required. This schema is
+                associated with the Campaign page.
+     """
 
     ids: list[str]
     type_: str
     promotion_campaign_schema: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         ids = self.ids
+
+
 
         type_ = self.type_
 
         promotion_campaign_schema = self.promotion_campaign_schema
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "ids": ids,
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "ids": ids,
+            "type": type_,
+        })
         if promotion_campaign_schema is not UNSET:
             field_dict["promotion_campaign_schema"] = promotion_campaign_schema
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         ids = cast(list[str], d.pop("ids"))
+
 
         type_ = d.pop("type")
 
@@ -61,6 +78,7 @@ class GenerateGeneralSharingLinksRequestMaterial:
             type_=type_,
             promotion_campaign_schema=promotion_campaign_schema,
         )
+
 
         generate_general_sharing_links_request_material.additional_properties = d
         return generate_general_sharing_links_request_material

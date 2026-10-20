@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_package_detail_response import GetPackageDetailResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     package_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/fulfillment/202309/packages/{package_id}".format(
-            package_id=quote(str(package_id), safe=""),
-        ),
+        "url": "/fulfillment/202309/packages/{package_id}".format(package_id=quote(str(package_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetPackageDetailResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetPackageDetailResponse | None:
     if response.status_code == 200:
         response_200 = GetPackageDetailResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetPackageDetailResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetPackageDetailResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetPackageDetailResponse]:
-    """Get Package Detail
+    """ Get Package Detail
 
      Returns information about a package, including handover time slot, tracking number, and shipping
     provider information.
@@ -67,10 +76,12 @@ def sync_detailed(
 
     Returns:
         Response[GetPackageDetailResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -79,13 +90,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetPackageDetailResponse | None:
-    """Get Package Detail
+    """ Get Package Detail
 
      Returns information about a package, including handover time slot, tracking number, and shipping
     provider information.
@@ -99,20 +110,22 @@ def sync(
 
     Returns:
         GetPackageDetailResponse
-    """
+     """
+
 
     return sync_detailed(
         package_id=package_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetPackageDetailResponse]:
-    """Get Package Detail
+    """ Get Package Detail
 
      Returns information about a package, including handover time slot, tracking number, and shipping
     provider information.
@@ -126,23 +139,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetPackageDetailResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     package_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetPackageDetailResponse | None:
-    """Get Package Detail
+    """ Get Package Detail
 
      Returns information about a package, including handover time slot, tracking number, and shipping
     provider information.
@@ -156,11 +173,11 @@ async def asyncio(
 
     Returns:
         GetPackageDetailResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            package_id=package_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        package_id=package_id,
+client=client,
+
+    )).parsed

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReplicateProductRequestInventoryMode(StrEnum):
     EXCLUSIVE = "EXCLUSIVE"
     SHARED = "SHARED"

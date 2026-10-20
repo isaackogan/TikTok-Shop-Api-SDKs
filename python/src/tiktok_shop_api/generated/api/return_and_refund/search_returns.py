@@ -1,15 +1,20 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_returns_request import SearchReturnsRequest
 from ...models.search_returns_response import SearchReturnsResponse
 from ...models.search_returns_sort_field import SearchReturnsSortField
 from ...models.search_returns_sort_order import SearchReturnsSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,8 +24,12 @@ def _get_kwargs(
     sort_order: SearchReturnsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -40,7 +49,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -48,6 +59,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -57,9 +69,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchReturnsResponse | None:
     if response.status_code == 200:
         response_200 = SearchReturnsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -69,9 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchReturnsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchReturnsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,8 +101,9 @@ def sync_detailed(
     sort_order: SearchReturnsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchReturnsResponse]:
-    """Search Returns
+    """ Search Returns
 
      Use this API to search returns by return ID, order ID, buyer, return type, return status,
     arbitration status, or create/update time window. The response is paginated. To retrieve the next
@@ -109,14 +123,16 @@ def sync_detailed(
 
     Returns:
         Response[SearchReturnsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -124,7 +140,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -134,8 +149,9 @@ def sync(
     sort_order: SearchReturnsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchReturnsResponse | None:
-    """Search Returns
+    """ Search Returns
 
      Use this API to search returns by return ID, order ID, buyer, return type, return status,
     arbitration status, or create/update time window. The response is paginated. To retrieve the next
@@ -155,17 +171,18 @@ def sync(
 
     Returns:
         SearchReturnsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+body=body,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -175,8 +192,9 @@ async def asyncio_detailed(
     sort_order: SearchReturnsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchReturnsResponse]:
-    """Search Returns
+    """ Search Returns
 
      Use this API to search returns by return ID, order ID, buyer, return type, return status,
     arbitration status, or create/update time window. The response is paginated. To retrieve the next
@@ -196,20 +214,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchReturnsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -219,8 +240,9 @@ async def asyncio(
     sort_order: SearchReturnsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchReturnsResponse | None:
-    """Search Returns
+    """ Search Returns
 
      Use this API to search returns by return ID, order ID, buyer, return type, return status,
     arbitration status, or create/update time window. The response is paginated. To retrieve the next
@@ -240,15 +262,15 @@ async def asyncio(
 
     Returns:
         SearchReturnsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

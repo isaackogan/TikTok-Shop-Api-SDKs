@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_live_room_view_trends_response import GetLiveRoomViewTrendsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     live_room_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202502/live_rooms/{live_room_id}/view_trend_performances".format(
-            live_room_id=quote(str(live_room_id), safe=""),
-        ),
+        "url": "/analytics/202502/live_rooms/{live_room_id}/view_trend_performances".format(live_room_id=quote(str(live_room_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetLiveRoomViewTrendsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetLiveRoomViewTrendsResponse | None:
     if response.status_code == 200:
         response_200 = GetLiveRoomViewTrendsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetLiveRoomViewTrendsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetLiveRoomViewTrendsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     live_room_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetLiveRoomViewTrendsResponse]:
-    """Get Live Room View Trends
+    """ Get Live Room View Trends
 
      Returns viewer count trend data points for the specified live room, grouped by online, entering, and
     leaving viewers.
@@ -67,10 +76,12 @@ def sync_detailed(
 
     Returns:
         Response[GetLiveRoomViewTrendsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_room_id=live_room_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -79,13 +90,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     live_room_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetLiveRoomViewTrendsResponse | None:
-    """Get Live Room View Trends
+    """ Get Live Room View Trends
 
      Returns viewer count trend data points for the specified live room, grouped by online, entering, and
     leaving viewers.
@@ -99,20 +110,22 @@ def sync(
 
     Returns:
         GetLiveRoomViewTrendsResponse
-    """
+     """
+
 
     return sync_detailed(
         live_room_id=live_room_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     live_room_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetLiveRoomViewTrendsResponse]:
-    """Get Live Room View Trends
+    """ Get Live Room View Trends
 
      Returns viewer count trend data points for the specified live room, grouped by online, entering, and
     leaving viewers.
@@ -126,23 +139,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetLiveRoomViewTrendsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_room_id=live_room_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     live_room_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetLiveRoomViewTrendsResponse | None:
-    """Get Live Room View Trends
+    """ Get Live Room View Trends
 
      Returns viewer count trend data points for the specified live room, grouped by online, entering, and
     leaving viewers.
@@ -156,11 +173,11 @@ async def asyncio(
 
     Returns:
         GetLiveRoomViewTrendsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            live_room_id=live_room_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        live_room_id=live_room_id,
+client=client,
+
+    )).parsed

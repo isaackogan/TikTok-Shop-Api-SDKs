@@ -1,35 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.create_packages_response_data_shipping_service_info import (
-        CreatePackagesResponseDataShippingServiceInfo,
-    )
-    from ..models.dimension import Dimension
-    from ..models.weight import Weight
+  from ..models.create_packages_response_data_shipping_service_info import CreatePackagesResponseDataShippingServiceInfo
+  from ..models.dimension import Dimension
+  from ..models.weight import Weight
+
+
+
 
 
 T = TypeVar("T", bound="CreatePackagesResponseData")
 
 
+
 @_attrs_define
 class CreatePackagesResponseData:
-    """
-    Attributes:
-        dimension (Dimension | Unset):
-        shipping_service_info (CreatePackagesResponseDataShippingServiceInfo | Unset):
-        package_id (str | Unset): Package ID.
-        weight (Weight | Unset):
-        create_time (int | Unset): The time when the product was created.
-            Unix timestamp.
-    """
+    """ 
+        Attributes:
+            dimension (Dimension | Unset):
+            shipping_service_info (CreatePackagesResponseDataShippingServiceInfo | Unset):
+            package_id (str | Unset): Package ID.
+            weight (Weight | Unset):
+            create_time (int | Unset): The time when the product was created.
+                Unix timestamp.
+     """
 
     dimension: Dimension | Unset = UNSET
     shipping_service_info: CreatePackagesResponseDataShippingServiceInfo | Unset = UNSET
@@ -38,7 +43,14 @@ class CreatePackagesResponseData:
     create_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.create_packages_response_data_shipping_service_info import CreatePackagesResponseDataShippingServiceInfo # noqa: PLC0415
+        from ..models.dimension import Dimension # noqa: PLC0415
+        from ..models.weight import Weight # noqa: PLC0415
         dimension: dict[str, Any] | Unset = UNSET
         if not isinstance(self.dimension, Unset):
             dimension = self.dimension.to_dict()
@@ -55,9 +67,11 @@ class CreatePackagesResponseData:
 
         create_time = self.create_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if dimension is not UNSET:
             field_dict["dimension"] = dimension
         if shipping_service_info is not UNSET:
@@ -71,37 +85,45 @@ class CreatePackagesResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.create_packages_response_data_shipping_service_info import (
-            CreatePackagesResponseDataShippingServiceInfo,  # noqa: PLC0415
-        )
-        from ..models.dimension import Dimension  # noqa: PLC0415
-        from ..models.weight import Weight  # noqa: PLC0415
-
+        from ..models.create_packages_response_data_shipping_service_info import CreatePackagesResponseDataShippingServiceInfo # noqa: PLC0415
+        from ..models.dimension import Dimension # noqa: PLC0415
+        from ..models.weight import Weight # noqa: PLC0415
         d = dict(src_dict)
         _dimension = d.pop("dimension", UNSET)
         dimension: Dimension | Unset
-        if isinstance(_dimension, Unset):
+        if isinstance(_dimension,  Unset):
             dimension = UNSET
         else:
             dimension = Dimension.from_dict(_dimension)
 
+
+
+
         _shipping_service_info = d.pop("shipping_service_info", UNSET)
         shipping_service_info: CreatePackagesResponseDataShippingServiceInfo | Unset
-        if isinstance(_shipping_service_info, Unset):
+        if isinstance(_shipping_service_info,  Unset):
             shipping_service_info = UNSET
         else:
             shipping_service_info = CreatePackagesResponseDataShippingServiceInfo.from_dict(_shipping_service_info)
+
+
+
 
         package_id = d.pop("package_id", UNSET)
 
         _weight = d.pop("weight", UNSET)
         weight: Weight | Unset
-        if isinstance(_weight, Unset):
+        if isinstance(_weight,  Unset):
             weight = UNSET
         else:
             weight = Weight.from_dict(_weight)
+
+
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -112,6 +134,7 @@ class CreatePackagesResponseData:
             weight=weight,
             create_time=create_time,
         )
+
 
         create_packages_response_data.additional_properties = d
         return create_packages_response_data

@@ -1,40 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchProductsResponseDataProductSkuInventory")
+
 
 
 @_attrs_define
 class SearchProductsResponseDataProductSkuInventory:
-    """
-    Attributes:
-        warehouse_id (str | Unset): The ID of the warehouse where the SKU is stored.
-            Retrieve details of the warehouse from the [Get Warehouse List
-            API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
-        quantity (int | Unset): The total SKU quantity available in the warehouse.
-            Valid range: [1, 99,999]
+    """ 
+        Attributes:
+            warehouse_id (str | Unset): The ID of the warehouse where the SKU is stored.
+                Retrieve details of the warehouse from the [Get Warehouse List
+                API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
+            quantity (int | Unset): The total SKU quantity available in the warehouse.
+                Valid range: [1, 99,999]
 
-            Note: This quantity specifically refers to the in-stock inventory that can be shipped immediately.
-        backorder_quantity (int | Unset): The `backorder_quantity` will automatically be converted to `quantity` once
-            in-stock inventory is sold out. The fulfillment of this inventory follows the `handling_time` specified below.
-            Note: Made-to-order (MTO), pre-order, and custom products cannot be backordered, and thus are incompatible with
-            backorder_quantity.
-        handling_time (int | Unset): The estimated number of working days needed for a backorder to be shipped.
-            Currently, different warehouses for the same SKU are not allowed to have different `handling_time`
-    """
+                Note: This quantity specifically refers to the in-stock inventory that can be shipped immediately.
+            backorder_quantity (int | Unset): The `backorder_quantity` will automatically be converted to `quantity` once
+                in-stock inventory is sold out. The fulfillment of this inventory follows the `handling_time` specified below.
+                Note: Made-to-order (MTO), pre-order, and custom products cannot be backordered, and thus are incompatible with
+                backorder_quantity.
+            handling_time (int | Unset): The estimated number of working days needed for a backorder to be shipped.
+                Currently, different warehouses for the same SKU are not allowed to have different `handling_time`
+     """
 
     warehouse_id: str | Unset = UNSET
     quantity: int | Unset = UNSET
     backorder_quantity: int | Unset = UNSET
     handling_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         warehouse_id = self.warehouse_id
@@ -45,9 +57,11 @@ class SearchProductsResponseDataProductSkuInventory:
 
         handling_time = self.handling_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if warehouse_id is not UNSET:
             field_dict["warehouse_id"] = warehouse_id
         if quantity is not UNSET:
@@ -58,6 +72,8 @@ class SearchProductsResponseDataProductSkuInventory:
             field_dict["handling_time"] = handling_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class SearchProductsResponseDataProductSkuInventory:
             backorder_quantity=backorder_quantity,
             handling_time=handling_time,
         )
+
 
         search_products_response_data_product_sku_inventory.additional_properties = d
         return search_products_response_data_product_sku_inventory

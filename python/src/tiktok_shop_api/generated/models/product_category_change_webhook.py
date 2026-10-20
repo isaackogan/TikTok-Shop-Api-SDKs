@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.product_category_change_webhook_data import ProductCategoryChangeWebhookData
+  from ..models.product_category_change_webhook_data import ProductCategoryChangeWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="ProductCategoryChangeWebhook")
 
 
+
 @_attrs_define
 class ProductCategoryChangeWebhook:
-    """
-    Attributes:
-        type_ (Literal[18]): The ID of the webhook type.
-        tts_notification_id (str | Unset): The ID of the notification.
-        shop_id (str | Unset): The ID of the shop.
-        timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
-        data (ProductCategoryChangeWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[18]): The ID of the webhook type.
+            tts_notification_id (str | Unset): The ID of the notification.
+            shop_id (str | Unset): The ID of the shop.
+            timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
+            data (ProductCategoryChangeWebhookData | Unset):
+     """
 
     type_: Literal[18]
     tts_notification_id: str | Unset = UNSET
@@ -33,7 +41,12 @@ class ProductCategoryChangeWebhook:
     data: ProductCategoryChangeWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.product_category_change_webhook_data import ProductCategoryChangeWebhookData # noqa: PLC0415
         type_ = self.type_
 
         tts_notification_id = self.tts_notification_id
@@ -46,13 +59,12 @@ class ProductCategoryChangeWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if tts_notification_id is not UNSET:
             field_dict["tts_notification_id"] = tts_notification_id
         if shop_id is not UNSET:
@@ -64,12 +76,13 @@ class ProductCategoryChangeWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.product_category_change_webhook_data import ProductCategoryChangeWebhookData  # noqa: PLC0415
-
+        from ..models.product_category_change_webhook_data import ProductCategoryChangeWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[18], d.pop("type"))
+        type_ = cast(Literal[18] , d.pop("type"))
         if type_ != 18:
             raise ValueError(f"type must match const 18, got '{type_}'")
 
@@ -81,10 +94,13 @@ class ProductCategoryChangeWebhook:
 
         _data = d.pop("data", UNSET)
         data: ProductCategoryChangeWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = ProductCategoryChangeWebhookData.from_dict(_data)
+
+
+
 
         product_category_change_webhook = cls(
             type_=type_,
@@ -93,6 +109,7 @@ class ProductCategoryChangeWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         product_category_change_webhook.additional_properties = d
         return product_category_change_webhook

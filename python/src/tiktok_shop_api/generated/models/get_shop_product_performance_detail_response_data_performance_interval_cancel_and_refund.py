@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund")
+
 
 
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRefund:
-    """
-    Attributes:
-        returned (int | Unset): Returned refers to units that were returned and refunded.
-        canceled (int | Unset): Canceled refers to units included in orders that were either "Unpaid" or "Awaiting
-            Shipment."
-        refunded (int | Unset): Refunded refers to units that were refunded but not returned.
-        replacements (int | Unset): Replacements refers to units that were returned and replaced.
-    """
+    """ 
+        Attributes:
+            returned (int | Unset): Returned refers to units that were returned and refunded.
+            canceled (int | Unset): Canceled refers to units included in orders that were either "Unpaid" or "Awaiting
+                Shipment."
+            refunded (int | Unset): Refunded refers to units that were refunded but not returned.
+            replacements (int | Unset): Replacements refers to units that were returned and replaced.
+     """
 
     returned: int | Unset = UNSET
     canceled: int | Unset = UNSET
     refunded: int | Unset = UNSET
     replacements: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         returned = self.returned
@@ -37,9 +49,11 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRef
 
         replacements = self.replacements
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if returned is not UNSET:
             field_dict["returned"] = returned
         if canceled is not UNSET:
@@ -50,6 +64,8 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRef
             field_dict["replacements"] = replacements
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -68,6 +84,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalCancelAndRef
             refunded=refunded,
             replacements=replacements,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_interval_cancel_and_refund.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_interval_cancel_and_refund

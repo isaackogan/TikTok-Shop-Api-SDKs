@@ -1,38 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.category import Category
-    from ..models.sales_price_range import SalesPriceRange
-    from ..models.seller_search_open_collaboration_products_request_commission_rate_range import (
-        SellerSearchOpenCollaborationProductsRequestCommissionRateRange,
-    )
+  from ..models.category import Category
+  from ..models.sales_price_range import SalesPriceRange
+  from ..models.seller_search_open_collaboration_products_request_commission_rate_range import SellerSearchOpenCollaborationProductsRequestCommissionRateRange
+
+
+
 
 
 T = TypeVar("T", bound="SellerSearchOpenCollaborationProductsRequest")
 
 
+
 @_attrs_define
 class SellerSearchOpenCollaborationProductsRequest:
-    """
-    Attributes:
-        title_keywords (list[str] | Unset): A list of product keywords. Product titles, or names, are loosely matched.
-            Keywords in the list form a query and the resulting set of matching product names is based on the conjunctive
-            operator `AND` between each keyword. For example, the keyword list `["Men", "Fashion"]` creates a query `"Men"
-            AND "Fashion"` and the resulting set of matching product names contains the loosely matched conjuction of "Men"
-            and "Fashion" such as "Male Fashionable". Maximum length of the list is 20 keywords. Maximum keyword string
-            length is 255 characters.
-        sales_price_range (SalesPriceRange | Unset):
-        category (Category | Unset):
-        commission_rate_range (SellerSearchOpenCollaborationProductsRequestCommissionRateRange | Unset):
-    """
+    """ 
+        Attributes:
+            title_keywords (list[str] | Unset): A list of product keywords. Product titles, or names, are loosely matched.
+                Keywords in the list form a query and the resulting set of matching product names is based on the conjunctive
+                operator `AND` between each keyword. For example, the keyword list `["Men", "Fashion"]` creates a query `"Men"
+                AND "Fashion"` and the resulting set of matching product names contains the loosely matched conjuction of "Men"
+                and "Fashion" such as "Male Fashionable". Maximum length of the list is 20 keywords. Maximum keyword string
+                length is 255 characters.
+            sales_price_range (SalesPriceRange | Unset):
+            category (Category | Unset):
+            commission_rate_range (SellerSearchOpenCollaborationProductsRequestCommissionRateRange | Unset):
+     """
 
     title_keywords: list[str] | Unset = UNSET
     sales_price_range: SalesPriceRange | Unset = UNSET
@@ -40,10 +45,19 @@ class SellerSearchOpenCollaborationProductsRequest:
     commission_rate_range: SellerSearchOpenCollaborationProductsRequestCommissionRateRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.category import Category # noqa: PLC0415
+        from ..models.sales_price_range import SalesPriceRange # noqa: PLC0415
+        from ..models.seller_search_open_collaboration_products_request_commission_rate_range import SellerSearchOpenCollaborationProductsRequestCommissionRateRange # noqa: PLC0415
         title_keywords: list[str] | Unset = UNSET
         if not isinstance(self.title_keywords, Unset):
             title_keywords = self.title_keywords
+
+
 
         sales_price_range: dict[str, Any] | Unset = UNSET
         if not isinstance(self.sales_price_range, Unset):
@@ -57,9 +71,11 @@ class SellerSearchOpenCollaborationProductsRequest:
         if not isinstance(self.commission_rate_range, Unset):
             commission_rate_range = self.commission_rate_range.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if title_keywords is not UNSET:
             field_dict["title_keywords"] = title_keywords
         if sales_price_range is not UNSET:
@@ -71,39 +87,46 @@ class SellerSearchOpenCollaborationProductsRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.category import Category  # noqa: PLC0415
-        from ..models.sales_price_range import SalesPriceRange  # noqa: PLC0415
-        from ..models.seller_search_open_collaboration_products_request_commission_rate_range import (
-            SellerSearchOpenCollaborationProductsRequestCommissionRateRange,  # noqa: PLC0415
-        )
-
+        from ..models.category import Category # noqa: PLC0415
+        from ..models.sales_price_range import SalesPriceRange # noqa: PLC0415
+        from ..models.seller_search_open_collaboration_products_request_commission_rate_range import SellerSearchOpenCollaborationProductsRequestCommissionRateRange # noqa: PLC0415
         d = dict(src_dict)
         title_keywords = cast(list[str], d.pop("title_keywords", UNSET))
 
+
         _sales_price_range = d.pop("sales_price_range", UNSET)
         sales_price_range: SalesPriceRange | Unset
-        if isinstance(_sales_price_range, Unset):
+        if isinstance(_sales_price_range,  Unset):
             sales_price_range = UNSET
         else:
             sales_price_range = SalesPriceRange.from_dict(_sales_price_range)
 
+
+
+
         _category = d.pop("category", UNSET)
         category: Category | Unset
-        if isinstance(_category, Unset):
+        if isinstance(_category,  Unset):
             category = UNSET
         else:
             category = Category.from_dict(_category)
 
+
+
+
         _commission_rate_range = d.pop("commission_rate_range", UNSET)
         commission_rate_range: SellerSearchOpenCollaborationProductsRequestCommissionRateRange | Unset
-        if isinstance(_commission_rate_range, Unset):
+        if isinstance(_commission_rate_range,  Unset):
             commission_rate_range = UNSET
         else:
-            commission_rate_range = SellerSearchOpenCollaborationProductsRequestCommissionRateRange.from_dict(
-                _commission_rate_range
-            )
+            commission_rate_range = SellerSearchOpenCollaborationProductsRequestCommissionRateRange.from_dict(_commission_rate_range)
+
+
+
 
         seller_search_open_collaboration_products_request = cls(
             title_keywords=title_keywords,
@@ -111,6 +134,7 @@ class SellerSearchOpenCollaborationProductsRequest:
             category=category,
             commission_rate_range=commission_rate_range,
         )
+
 
         seller_search_open_collaboration_products_request.additional_properties = d
         return seller_search_open_collaboration_products_request

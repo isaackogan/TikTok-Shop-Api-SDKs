@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_seller_financial_transactions_response_data_withdrawal import (
-        GetSellerFinancialTransactionsResponseDataWithdrawal,
-    )
+  from ..models.get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal
+
+
+
 
 
 T = TypeVar("T", bound="GetSellerFinancialTransactionsResponseData")
 
 
+
 @_attrs_define
 class GetSellerFinancialTransactionsResponseData:
-    """
-    Attributes:
-        next_page_token (str | Unset): Cursor used for searching for more information
-        total_count (int | Unset): The total num of the withdraws
-        withdrawals (list[GetSellerFinancialTransactionsResponseDataWithdrawal] | Unset): The list of transaction
-            records matching the request filters.
-    """
+    """ 
+        Attributes:
+            next_page_token (str | Unset): Cursor used for searching for more information
+            total_count (int | Unset): The total num of the withdraws
+            withdrawals (list[GetSellerFinancialTransactionsResponseDataWithdrawal] | Unset): The list of transaction
+                records matching the request filters.
+     """
 
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     withdrawals: list[GetSellerFinancialTransactionsResponseDataWithdrawal] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal # noqa: PLC0415
         next_page_token = self.next_page_token
 
         total_count = self.total_count
@@ -44,9 +54,13 @@ class GetSellerFinancialTransactionsResponseData:
                 withdrawals_item = withdrawals_item_data.to_dict()
                 withdrawals.append(withdrawals_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if next_page_token is not UNSET:
             field_dict["next_page_token"] = next_page_token
         if total_count is not UNSET:
@@ -56,12 +70,11 @@ class GetSellerFinancialTransactionsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_seller_financial_transactions_response_data_withdrawal import (
-            GetSellerFinancialTransactionsResponseDataWithdrawal,  # noqa: PLC0415
-        )
-
+        from ..models.get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal # noqa: PLC0415
         d = dict(src_dict)
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -74,13 +87,17 @@ class GetSellerFinancialTransactionsResponseData:
             for withdrawals_item_data in _withdrawals:
                 withdrawals_item = GetSellerFinancialTransactionsResponseDataWithdrawal.from_dict(withdrawals_item_data)
 
+
+
                 withdrawals.append(withdrawals_item)
+
 
         get_seller_financial_transactions_response_data = cls(
             next_page_token=next_page_token,
             total_count=total_count,
             withdrawals=withdrawals,
         )
+
 
         get_seller_financial_transactions_response_data.additional_properties = d
         return get_seller_financial_transactions_response_data

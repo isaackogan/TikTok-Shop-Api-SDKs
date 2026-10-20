@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class BoxMeasurementWeightUnit(StrEnum):
     GRAM = "GRAM"
     KILOGRAM = "KILOGRAM"

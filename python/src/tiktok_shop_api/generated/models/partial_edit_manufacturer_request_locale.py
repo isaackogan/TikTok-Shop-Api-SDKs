@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PartialEditManufacturerRequestLocale(StrEnum):
     DE_DE = "de-DE"
     EN_IE = "en-IE"

@@ -1,37 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.size_chart_data_measurement_type import SizeChartDataMeasurementType
 from ..models.size_chart_data_unit_system import SizeChartDataUnitSystem
 from ..types import UNSET, Unset
+from typing import cast
 
 if TYPE_CHECKING:
-    from ..models.table import Table
+  from ..models.table import Table
+
+
+
 
 
 T = TypeVar("T", bound="SizeChartData")
 
 
+
 @_attrs_define
 class SizeChartData:
-    """
-    Attributes:
-        measurement_type (SizeChartDataMeasurementType): Possible values: GENERIC_MEASUREMENTS: generic measurements;
-            BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
-        table (Table):
-        unit_system (SizeChartDataUnitSystem): Possible values: METRIC: metric units; IMPERIAL: imperial units.
-        description (str | Unset): Additional size chart description.
-        is_one_size (bool | Unset): Whether this is a one-size chart.
-        size_types (list[str] | Unset): Possible values: size_chart_common_size_type: Common;
-            size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus;
-            size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the
-            category.
-    """
+    """ 
+        Attributes:
+            measurement_type (SizeChartDataMeasurementType): Possible values: GENERIC_MEASUREMENTS: generic measurements;
+                BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
+            table (Table):
+            unit_system (SizeChartDataUnitSystem): Possible values: METRIC: metric units; IMPERIAL: imperial units.
+            description (str | Unset): Additional size chart description.
+            is_one_size (bool | Unset): Whether this is a one-size chart.
+            size_types (list[str] | Unset): Possible values: size_chart_common_size_type: Common;
+                size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus;
+                size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the
+                category.
+     """
 
     measurement_type: SizeChartDataMeasurementType
     table: Table
@@ -41,7 +48,12 @@ class SizeChartData:
     size_types: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.table import Table # noqa: PLC0415
         measurement_type = self.measurement_type.value
 
         table = self.table.to_dict()
@@ -56,15 +68,16 @@ class SizeChartData:
         if not isinstance(self.size_types, Unset):
             size_types = self.size_types
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "measurement_type": measurement_type,
-                "table": table,
-                "unit_system": unit_system,
-            }
-        )
+        field_dict.update({
+            "measurement_type": measurement_type,
+            "table": table,
+            "unit_system": unit_system,
+        })
         if description is not UNSET:
             field_dict["description"] = description
         if is_one_size is not UNSET:
@@ -74,22 +87,33 @@ class SizeChartData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.table import Table  # noqa: PLC0415
-
+        from ..models.table import Table # noqa: PLC0415
         d = dict(src_dict)
         measurement_type = SizeChartDataMeasurementType(d.pop("measurement_type"))
 
+
+
+
         table = Table.from_dict(d.pop("table"))
 
+
+
+
         unit_system = SizeChartDataUnitSystem(d.pop("unit_system"))
+
+
+
 
         description = d.pop("description", UNSET)
 
         is_one_size = d.pop("is_one_size", UNSET)
 
         size_types = cast(list[str], d.pop("size_types", UNSET))
+
 
         size_chart_data = cls(
             measurement_type=measurement_type,
@@ -99,6 +123,7 @@ class SizeChartData:
             is_one_size=is_one_size,
             size_types=size_types,
         )
+
 
         size_chart_data.additional_properties = d
         return size_chart_data

@@ -1,62 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.create_or_update_inbound_plan_response_data_inbound_plan import (
-        CreateOrUpdateInboundPlanResponseDataInboundPlan,
-    )
+  from ..models.create_or_update_inbound_plan_response_data_inbound_plan import CreateOrUpdateInboundPlanResponseDataInboundPlan
+
+
+
 
 
 T = TypeVar("T", bound="CreateOrUpdateInboundPlanResponseData")
 
 
+
 @_attrs_define
 class CreateOrUpdateInboundPlanResponseData:
-    """
-    Attributes:
-        inbound_plan (CreateOrUpdateInboundPlanResponseDataInboundPlan | Unset):
-    """
+    """ 
+        Attributes:
+            inbound_plan (CreateOrUpdateInboundPlanResponseDataInboundPlan | Unset):
+     """
 
     inbound_plan: CreateOrUpdateInboundPlanResponseDataInboundPlan | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.create_or_update_inbound_plan_response_data_inbound_plan import CreateOrUpdateInboundPlanResponseDataInboundPlan # noqa: PLC0415
         inbound_plan: dict[str, Any] | Unset = UNSET
         if not isinstance(self.inbound_plan, Unset):
             inbound_plan = self.inbound_plan.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if inbound_plan is not UNSET:
             field_dict["inbound_plan"] = inbound_plan
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.create_or_update_inbound_plan_response_data_inbound_plan import (
-            CreateOrUpdateInboundPlanResponseDataInboundPlan,  # noqa: PLC0415
-        )
-
+        from ..models.create_or_update_inbound_plan_response_data_inbound_plan import CreateOrUpdateInboundPlanResponseDataInboundPlan # noqa: PLC0415
         d = dict(src_dict)
         _inbound_plan = d.pop("inbound_plan", UNSET)
         inbound_plan: CreateOrUpdateInboundPlanResponseDataInboundPlan | Unset
-        if isinstance(_inbound_plan, Unset):
+        if isinstance(_inbound_plan,  Unset):
             inbound_plan = UNSET
         else:
             inbound_plan = CreateOrUpdateInboundPlanResponseDataInboundPlan.from_dict(_inbound_plan)
 
+
+
+
         create_or_update_inbound_plan_response_data = cls(
             inbound_plan=inbound_plan,
         )
+
 
         create_or_update_inbound_plan_response_data.additional_properties = d
         return create_or_update_inbound_plan_response_data

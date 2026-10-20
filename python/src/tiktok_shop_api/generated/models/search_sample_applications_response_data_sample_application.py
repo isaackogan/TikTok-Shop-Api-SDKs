@@ -1,78 +1,81 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_sample_applications_response_data_sample_application_creator import (
-        SearchSampleApplicationsResponseDataSampleApplicationCreator,
-    )
-    from ..models.search_sample_applications_response_data_sample_application_product import (
-        SearchSampleApplicationsResponseDataSampleApplicationProduct,
-    )
+  from ..models.search_sample_applications_response_data_sample_application_creator import SearchSampleApplicationsResponseDataSampleApplicationCreator
+  from ..models.search_sample_applications_response_data_sample_application_product import SearchSampleApplicationsResponseDataSampleApplicationProduct
+
+
+
 
 
 T = TypeVar("T", bound="SearchSampleApplicationsResponseDataSampleApplication")
 
 
+
 @_attrs_define
 class SearchSampleApplicationsResponseDataSampleApplication:
-    """
-    Attributes:
-        id (str | Unset): The unique id of sample request application ID
-        commission_rate (str | Unset): The commission rate set by the merchant for creators for this product,
-            represented as a decimal fraction with two decimal places. For example, `0.20` represents 20%. The range is
-            [0.01, 0.8].
-        status (str | Unset): The status of sample applications.
-            The possible enumerated values are:
-            - PENDING: The sample application is waiting for the seller's review.
-            - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample.
-            - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package.
-            - CONTENT_PENDING: The creator has received the sample package and is expected to create content.
-            - REJECT_CANCELLED: The sample application has been rejected by the seller.
-            - OVERDUE_CANCELLED: The sample application has expired due to being overdue.
-            - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe.
-            - DEL_OPEN_COLLAB: The open collaboration plan has been deleted.
-            - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe.
-            - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it.
-            - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator's control, making it
-            impossible to create content.
-            - OPS_CANCELLED: The application was manually cancelled by operations staff.
-            - OPS_FAILED: The application was marked as failed by operations staff.
-            - OPS_COMPLETED: The application was manually marked as completed by operations staff.
-            - COMPLETED: The application is complete, and the creator has finished creating the content.
-        order_id (str | Unset): The sample order is generated after the sample application is approved by seller
-        available_quantity (int | Unset): The remaining stock quota of a sample product.
-        approve_expiration_time (int | Unset): The seller approval deadline for the sample application, expressed as a
-            Unix timestamp in seconds.
-        shipment_expiration_time (int | Unset): The deadline for the seller to ship the sample for the application,
-            expressed as a Unix timestamp in seconds.
-        tracking_number (str | Unset): The logistics tracking number for the sample application order
-        fulfillment_status (str | Unset): It indicates the current status of the fulfillment process. The possible
-            values are:
-            - PENDING: The creator is yet to fulfill the content creation obligation.
-            - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
-            - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
-            - FAILED: Fulfillment failed; the content did not meet the required standards.
-            - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline.
-            - SUSPEND: Fulfillment has been suspended.
-            - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
-            - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-        is_approvable (bool | Unset): The sample application can be approved or not.
-        disapprovable_reasons (list[str] | Unset): Reasons the sample application cannot be approved. This list may be
-            absent or empty even when `is_approvable` is `false`; always check `is_approvable` to determine whether approval
-            is allowed.
-        partner_name (str | Unset): The name of the partner if the sample application is submitted on behalf of a
-            creator by an agency. It is only populated when an agency handles the application process instead of the creator
-            directly.
-        creator (SearchSampleApplicationsResponseDataSampleApplicationCreator | Unset):
-        product (SearchSampleApplicationsResponseDataSampleApplicationProduct | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The unique id of sample request application ID
+            commission_rate (str | Unset): The commission rate set by the merchant for creators for this product,
+                represented as a decimal fraction with two decimal places. For example, `0.20` represents 20%. The range is
+                [0.01, 0.8].
+            status (str | Unset): The status of sample applications.
+                The possible enumerated values are:
+                - PENDING: The sample application is waiting for the seller's review.
+                - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample.
+                - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package.
+                - CONTENT_PENDING: The creator has received the sample package and is expected to create content.
+                - REJECT_CANCELLED: The sample application has been rejected by the seller.
+                - OVERDUE_CANCELLED: The sample application has expired due to being overdue.
+                - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe.
+                - DEL_OPEN_COLLAB: The open collaboration plan has been deleted.
+                - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe.
+                - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it.
+                - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator's control, making it
+                impossible to create content.
+                - OPS_CANCELLED: The application was manually cancelled by operations staff.
+                - OPS_FAILED: The application was marked as failed by operations staff.
+                - OPS_COMPLETED: The application was manually marked as completed by operations staff.
+                - COMPLETED: The application is complete, and the creator has finished creating the content.
+            order_id (str | Unset): The sample order is generated after the sample application is approved by seller
+            available_quantity (int | Unset): The remaining stock quota of a sample product.
+            approve_expiration_time (int | Unset): The seller approval deadline for the sample application, expressed as a
+                Unix timestamp in seconds.
+            shipment_expiration_time (int | Unset): The deadline for the seller to ship the sample for the application,
+                expressed as a Unix timestamp in seconds.
+            tracking_number (str | Unset): The logistics tracking number for the sample application order
+            fulfillment_status (str | Unset): It indicates the current status of the fulfillment process. The possible
+                values are:
+                - PENDING: The creator is yet to fulfill the content creation obligation.
+                - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
+                - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
+                - FAILED: Fulfillment failed; the content did not meet the required standards.
+                - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline.
+                - SUSPEND: Fulfillment has been suspended.
+                - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
+                - EXEMPTED: The creator has been exempted from the fulfillment obligation.
+            is_approvable (bool | Unset): The sample application can be approved or not.
+            disapprovable_reasons (list[str] | Unset): Reasons the sample application cannot be approved. This list may be
+                absent or empty even when `is_approvable` is `false`; always check `is_approvable` to determine whether approval
+                is allowed.
+            partner_name (str | Unset): The name of the partner if the sample application is submitted on behalf of a
+                creator by an agency. It is only populated when an agency handles the application process instead of the creator
+                directly.
+            creator (SearchSampleApplicationsResponseDataSampleApplicationCreator | Unset):
+            product (SearchSampleApplicationsResponseDataSampleApplicationProduct | Unset):
+     """
 
     id: str | Unset = UNSET
     commission_rate: str | Unset = UNSET
@@ -90,7 +93,13 @@ class SearchSampleApplicationsResponseDataSampleApplication:
     product: SearchSampleApplicationsResponseDataSampleApplicationProduct | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_sample_applications_response_data_sample_application_creator import SearchSampleApplicationsResponseDataSampleApplicationCreator # noqa: PLC0415
+        from ..models.search_sample_applications_response_data_sample_application_product import SearchSampleApplicationsResponseDataSampleApplicationProduct # noqa: PLC0415
         id = self.id
 
         commission_rate = self.commission_rate
@@ -115,6 +124,8 @@ class SearchSampleApplicationsResponseDataSampleApplication:
         if not isinstance(self.disapprovable_reasons, Unset):
             disapprovable_reasons = self.disapprovable_reasons
 
+
+
         partner_name = self.partner_name
 
         creator: dict[str, Any] | Unset = UNSET
@@ -125,9 +136,11 @@ class SearchSampleApplicationsResponseDataSampleApplication:
         if not isinstance(self.product, Unset):
             product = self.product.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if commission_rate is not UNSET:
@@ -159,15 +172,12 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_sample_applications_response_data_sample_application_creator import (
-            SearchSampleApplicationsResponseDataSampleApplicationCreator,  # noqa: PLC0415
-        )
-        from ..models.search_sample_applications_response_data_sample_application_product import (
-            SearchSampleApplicationsResponseDataSampleApplicationProduct,  # noqa: PLC0415
-        )
-
+        from ..models.search_sample_applications_response_data_sample_application_creator import SearchSampleApplicationsResponseDataSampleApplicationCreator # noqa: PLC0415
+        from ..models.search_sample_applications_response_data_sample_application_product import SearchSampleApplicationsResponseDataSampleApplicationProduct # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -191,21 +201,28 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         disapprovable_reasons = cast(list[str], d.pop("disapprovable_reasons", UNSET))
 
+
         partner_name = d.pop("partner_name", UNSET)
 
         _creator = d.pop("creator", UNSET)
         creator: SearchSampleApplicationsResponseDataSampleApplicationCreator | Unset
-        if isinstance(_creator, Unset):
+        if isinstance(_creator,  Unset):
             creator = UNSET
         else:
             creator = SearchSampleApplicationsResponseDataSampleApplicationCreator.from_dict(_creator)
 
+
+
+
         _product = d.pop("product", UNSET)
         product: SearchSampleApplicationsResponseDataSampleApplicationProduct | Unset
-        if isinstance(_product, Unset):
+        if isinstance(_product,  Unset):
             product = UNSET
         else:
             product = SearchSampleApplicationsResponseDataSampleApplicationProduct.from_dict(_product)
+
+
+
 
         search_sample_applications_response_data_sample_application = cls(
             id=id,
@@ -223,6 +240,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
             creator=creator,
             product=product,
         )
+
 
         search_sample_applications_response_data_sample_application.additional_properties = d
         return search_sample_applications_response_data_sample_application

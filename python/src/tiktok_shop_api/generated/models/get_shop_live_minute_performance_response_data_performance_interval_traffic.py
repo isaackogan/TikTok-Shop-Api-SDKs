@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic")
+
 
 
 @_attrs_define
 class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic:
-    """
-    Attributes:
-        viewers (int | Unset): The number of viewers within this interval.
-        views (int | Unset): The number of views or viewings in the LIVE room.
-        product_impressions (int | Unset): Total number of times a product was viewed in LIVE, including product list
-            and product card impressions.
-        ctr (str | Unset): The number of clicks divided by numbers of views of the LIVE during selected time period
-            including clicks on product lists and product cards
-        enter_room_rate (str | Unset): LIVE views per LIVE room impressions.
-        product_clicks (int | Unset): Total number of product link clicks from LIVE streams, including product list and
-            product card clicks.
-        impressions (int | Unset): The total number of times the LIVE was displayed to viewers.
-    """
+    """ 
+        Attributes:
+            viewers (int | Unset): The number of viewers within this interval.
+            views (int | Unset): The number of views or viewings in the LIVE room.
+            product_impressions (int | Unset): Total number of times a product was viewed in LIVE, including product list
+                and product card impressions.
+            ctr (str | Unset): The number of clicks divided by numbers of views of the LIVE during selected time period
+                including clicks on product lists and product cards
+            enter_room_rate (str | Unset): LIVE views per LIVE room impressions.
+            product_clicks (int | Unset): Total number of product link clicks from LIVE streams, including product list and
+                product card clicks.
+            impressions (int | Unset): The total number of times the LIVE was displayed to viewers.
+     """
 
     viewers: int | Unset = UNSET
     views: int | Unset = UNSET
@@ -35,6 +43,10 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic:
     product_clicks: int | Unset = UNSET
     impressions: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         viewers = self.viewers
@@ -51,9 +63,11 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic:
 
         impressions = self.impressions
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if viewers is not UNSET:
             field_dict["viewers"] = viewers
         if views is not UNSET:
@@ -70,6 +84,8 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic:
             field_dict["impressions"] = impressions
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -97,6 +113,7 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic:
             product_clicks=product_clicks,
             impressions=impressions,
         )
+
 
         get_shop_live_minute_performance_response_data_performance_interval_traffic.additional_properties = d
         return get_shop_live_minute_performance_response_data_performance_interval_traffic

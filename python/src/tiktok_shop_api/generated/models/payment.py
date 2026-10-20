@@ -1,74 +1,82 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Payment")
+
 
 
 @_attrs_define
 class Payment:
-    """
-    Attributes:
-        currency (str | Unset): Currency for payment.
-        sub_total (str | Unset): Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax
-            total amount.
-            `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
-        shipping_fee (str | Unset): Buyer paid shipping fee.
-            `shipping_fee` = `original_shipping_fee` - `shipping_fee_seller_discount` - `shipping_fee_platform_discount`
-            For the US market, this is pre-tax total amount.
-        seller_discount (str | Unset): Product discount by seller.
-        platform_discount (str | Unset): Product discount by platform.
-        payment_platform_discount (str | Unset): Discount applied to the order funded by a payment platform
-        payment_discount_service_fee (str | Unset): Service fee as paid by the buyer to apply payment platform discount
-        total_amount (str | Unset): Buyer paid total amount.
-            `total_amount` = `sub_total` + `shipping_fee` + `taxes` + `retail_delivery_fee`
-        original_total_product_price (str | Unset): Total original price of products (VAT included for crossborder
-            shop).
-            For the US market, this is pre-tax total amount.
-        original_shipping_fee (str | Unset): Shipping fee before discount
-        shipping_fee_seller_discount (str | Unset): Shipping fee discount provided by seller for an order that will not
-            qualify for co-funded reimbursement. **Note**: If an order meets the minimum order value for co-funded
-            reimbursement, this will be 0. In this case, refer to `shipping_fee_cofunded_discount` for the shipping discount
-            the buyer received.
-        shipping_fee_platform_discount (str | Unset): Shipping fee discount by platform.
-        shipping_fee_cofunded_discount (str | Unset): Shipping fee discount provided by seller, eligible for co-funded
-            reimbursement upon order delivery, based on Co-Funded Free Shipping program terms. **Note**: This will be 0 for
-            orders that did not meet minimum order value for co-funded reimbursement. In this case, refer to
-            `shipping_fee_seller_discount` for the shipping discount the buyer received.
-        tax (str | Unset): Buyer paid total taxes of the order. Applicable to crossborder shops and the US market.
-        small_order_fee (str | Unset): Small order fee for TH.
-            Small order fee is for Thailand only. small order fee means that the platform will set a minimum order spending
-            amount, when the order amount is lower than the minimum order spending amount, the user needs to pay small order
-            fee to meet the platform minimum spending amount.
-            e.g. Minimum order spending amount is 100, order amount is 80. So the small order fee will be 20.
-        shipping_fee_tax (str | Unset): The tax on the shipping price.
-        product_tax (str | Unset): The tax on the total item price.
-        retail_delivery_fee (str | Unset): RDF (retail delivery fee). Available only in the US market.
-        buyer_service_fee (str | Unset): A service fee is charged on every transaction made. The charge is applied from
-            the fifth order onwards and collected directly from customers during checkout. Only available in Indonesia
-            market.
-        handling_fee (str | Unset): A fee charged to buyers to cover the additional processing, handling, and/or
-            installment costs associated with the chosen payment method.
-        shipping_insurance_fee (str | Unset): The cost incurred by the buyers for coverage against loss or damage to
-            goods during transit.
-            **Note**: Available only in the Indonesia market.
-        item_insurance_fee (str | Unset): The cost incurred by the buyers for coverage against defects or damage to the
-            product after purchase.
-            **Note**: Only available in the US and Indonesia markets.
-        item_insurance_tax (str | Unset): The tax paid on the insurance purchased by buyers.
+    """ 
+        Attributes:
+            currency (str | Unset): Currency for payment.
+            sub_total (str | Unset): Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax
+                total amount.
+                `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
+            shipping_fee (str | Unset): Buyer paid shipping fee.
+                `shipping_fee` = `original_shipping_fee` - `shipping_fee_seller_discount` - `shipping_fee_platform_discount`
+                For the US market, this is pre-tax total amount.
+            seller_discount (str | Unset): Product discount by seller.
+            platform_discount (str | Unset): Product discount by platform.
+            payment_platform_discount (str | Unset): Discount applied to the order funded by a payment platform
+            payment_discount_service_fee (str | Unset): Service fee as paid by the buyer to apply payment platform discount
+            total_amount (str | Unset): Buyer paid total amount.
+                `total_amount` = `sub_total` + `shipping_fee` + `taxes` + `retail_delivery_fee`
+            original_total_product_price (str | Unset): Total original price of products (VAT included for crossborder
+                shop).
+                For the US market, this is pre-tax total amount.
+            original_shipping_fee (str | Unset): Shipping fee before discount
+            shipping_fee_seller_discount (str | Unset): Shipping fee discount provided by seller for an order that will not
+                qualify for co-funded reimbursement. **Note**: If an order meets the minimum order value for co-funded
+                reimbursement, this will be 0. In this case, refer to `shipping_fee_cofunded_discount` for the shipping discount
+                the buyer received.
+            shipping_fee_platform_discount (str | Unset): Shipping fee discount by platform.
+            shipping_fee_cofunded_discount (str | Unset): Shipping fee discount provided by seller, eligible for co-funded
+                reimbursement upon order delivery, based on Co-Funded Free Shipping program terms. **Note**: This will be 0 for
+                orders that did not meet minimum order value for co-funded reimbursement. In this case, refer to
+                `shipping_fee_seller_discount` for the shipping discount the buyer received.
+            tax (str | Unset): Buyer paid total taxes of the order. Applicable to crossborder shops and the US market.
+            small_order_fee (str | Unset): Small order fee for TH.
+                Small order fee is for Thailand only. small order fee means that the platform will set a minimum order spending
+                amount, when the order amount is lower than the minimum order spending amount, the user needs to pay small order
+                fee to meet the platform minimum spending amount.
+                e.g. Minimum order spending amount is 100, order amount is 80. So the small order fee will be 20.
+            shipping_fee_tax (str | Unset): The tax on the shipping price.
+            product_tax (str | Unset): The tax on the total item price.
+            retail_delivery_fee (str | Unset): RDF (retail delivery fee). Available only in the US market.
+            buyer_service_fee (str | Unset): A service fee is charged on every transaction made. The charge is applied from
+                the fifth order onwards and collected directly from customers during checkout. Only available in Indonesia
+                market.
+            handling_fee (str | Unset): A fee charged to buyers to cover the additional processing, handling, and/or
+                installment costs associated with the chosen payment method.
+            shipping_insurance_fee (str | Unset): The cost incurred by the buyers for coverage against loss or damage to
+                goods during transit.
+                **Note**: Available only in the Indonesia market.
+            item_insurance_fee (str | Unset): The cost incurred by the buyers for coverage against defects or damage to the
+                product after purchase.
+                **Note**: Only available in the US and Indonesia markets.
+            item_insurance_tax (str | Unset): The tax paid on the insurance purchased by buyers.
 
-            Note: Only applicable in US market.
-        distance_shipping_fee (str | Unset): Distance shipping fee is fee that charged charged by our logistics partner
-            and covers the separate distance-based cost for deliveries outside Java island as a part of Horizon+ Program.
-            Only applicable in ID Market.
-        distance_fee (str | Unset): Total distance fee for Horizon+ Program. Only applicable for ID market
-    """
+                Note: Only applicable in US market.
+            distance_shipping_fee (str | Unset): Distance shipping fee is fee that charged charged by our logistics partner
+                and covers the separate distance-based cost for deliveries outside Java island as a part of Horizon+ Program.
+                Only applicable in ID Market.
+            distance_fee (str | Unset): Total distance fee for Horizon+ Program. Only applicable for ID market
+     """
 
     currency: str | Unset = UNSET
     sub_total: str | Unset = UNSET
@@ -96,6 +104,10 @@ class Payment:
     distance_shipping_fee: str | Unset = UNSET
     distance_fee: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency
@@ -148,9 +160,11 @@ class Payment:
 
         distance_fee = self.distance_fee
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if currency is not UNSET:
             field_dict["currency"] = currency
         if sub_total is not UNSET:
@@ -203,6 +217,8 @@ class Payment:
             field_dict["distance_fee"] = distance_fee
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -284,6 +300,7 @@ class Payment:
             distance_shipping_fee=distance_shipping_fee,
             distance_fee=distance_fee,
         )
+
 
         payment.additional_properties = d
         return payment

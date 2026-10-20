@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_global_category_rules_locale import GetGlobalCategoryRulesLocale
 from ...models.get_global_category_rules_response import GetGlobalCategoryRulesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,7 +20,12 @@ def _get_kwargs(
     *,
     category_version: str | Unset = UNSET,
     locale: GetGlobalCategoryRulesLocale | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["category_version"] = category_version
@@ -27,24 +36,26 @@ def _get_kwargs(
 
     params["locale"] = json_locale
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202309/categories/{category_id}/global_rules".format(
-            category_id=quote(str(category_id), safe=""),
-        ),
+        "url": "/product/202309/categories/{category_id}/global_rules".format(category_id=quote(str(category_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetGlobalCategoryRulesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetGlobalCategoryRulesResponse | None:
     if response.status_code == 200:
         response_200 = GetGlobalCategoryRulesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -54,9 +65,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetGlobalCategoryRulesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetGlobalCategoryRulesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -71,8 +80,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     category_version: str | Unset = UNSET,
     locale: GetGlobalCategoryRulesLocale | Unset = UNSET,
+
 ) -> Response[GetGlobalCategoryRulesResponse]:
-    """Get Global Category Rules
+    """ Get Global Category Rules
 
      Retrieve the additional requirements (beyond mandatory product attributes) for listing a global
     product in a particular category, regardless of market variations. Requirements may include product
@@ -93,12 +103,14 @@ def sync_detailed(
 
     Returns:
         Response[GetGlobalCategoryRulesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        category_version=category_version,
-        locale=locale,
+category_version=category_version,
+locale=locale,
+
     )
 
     response = client.get_httpx_client().request(
@@ -107,15 +119,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     category_id: str,
     *,
     client: AuthenticatedClient | Client,
     category_version: str | Unset = UNSET,
     locale: GetGlobalCategoryRulesLocale | Unset = UNSET,
+
 ) -> GetGlobalCategoryRulesResponse | None:
-    """Get Global Category Rules
+    """ Get Global Category Rules
 
      Retrieve the additional requirements (beyond mandatory product attributes) for listing a global
     product in a particular category, regardless of market variations. Requirements may include product
@@ -136,15 +148,16 @@ def sync(
 
     Returns:
         GetGlobalCategoryRulesResponse
-    """
+     """
+
 
     return sync_detailed(
         category_id=category_id,
-        client=client,
-        category_version=category_version,
-        locale=locale,
-    ).parsed
+client=client,
+category_version=category_version,
+locale=locale,
 
+    ).parsed
 
 async def asyncio_detailed(
     category_id: str,
@@ -152,8 +165,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     category_version: str | Unset = UNSET,
     locale: GetGlobalCategoryRulesLocale | Unset = UNSET,
+
 ) -> Response[GetGlobalCategoryRulesResponse]:
-    """Get Global Category Rules
+    """ Get Global Category Rules
 
      Retrieve the additional requirements (beyond mandatory product attributes) for listing a global
     product in a particular category, regardless of market variations. Requirements may include product
@@ -174,18 +188,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetGlobalCategoryRulesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        category_version=category_version,
-        locale=locale,
+category_version=category_version,
+locale=locale,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     category_id: str,
@@ -193,8 +210,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     category_version: str | Unset = UNSET,
     locale: GetGlobalCategoryRulesLocale | Unset = UNSET,
+
 ) -> GetGlobalCategoryRulesResponse | None:
-    """Get Global Category Rules
+    """ Get Global Category Rules
 
      Retrieve the additional requirements (beyond mandatory product attributes) for listing a global
     product in a particular category, regardless of market variations. Requirements may include product
@@ -215,13 +233,13 @@ async def asyncio(
 
     Returns:
         GetGlobalCategoryRulesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            category_id=category_id,
-            client=client,
-            category_version=category_version,
-            locale=locale,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        category_id=category_id,
+client=client,
+category_version=category_version,
+locale=locale,
+
+    )).parsed

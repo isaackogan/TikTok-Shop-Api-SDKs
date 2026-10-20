@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_products_request import SearchProductsRequest
 from ...models.search_products_response import SearchProductsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,8 +20,12 @@ def _get_kwargs(
     body: SearchProductsRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -24,7 +33,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -32,6 +43,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -41,9 +53,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchProductsResponse | None:
     if response.status_code == 200:
         response_200 = SearchProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -53,9 +68,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -70,8 +83,9 @@ def sync_detailed(
     body: SearchProductsRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchProductsResponse]:
-    """Search Products
+    """ Search Products
 
      Retrieve a list of products that meet the specified conditions.
     This API will only return the key product properties. You can pass a returned product ID to the [Get
@@ -89,12 +103,14 @@ def sync_detailed(
 
     Returns:
         Response[SearchProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -103,15 +119,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchProductsRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> SearchProductsResponse | None:
-    """Search Products
+    """ Search Products
 
      Retrieve a list of products that meet the specified conditions.
     This API will only return the key product properties. You can pass a returned product ID to the [Get
@@ -129,15 +145,16 @@ def sync(
 
     Returns:
         SearchProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+body=body,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -145,8 +162,9 @@ async def asyncio_detailed(
     body: SearchProductsRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchProductsResponse]:
-    """Search Products
+    """ Search Products
 
      Retrieve a list of products that meet the specified conditions.
     This API will only return the key product properties. You can pass a returned product ID to the [Get
@@ -164,18 +182,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -183,8 +204,9 @@ async def asyncio(
     body: SearchProductsRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> SearchProductsResponse | None:
-    """Search Products
+    """ Search Products
 
      Retrieve a list of products that meet the specified conditions.
     This API will only return the key product properties. You can pass a returned product ID to the [Get
@@ -202,13 +224,13 @@ async def asyncio(
 
     Returns:
         SearchProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

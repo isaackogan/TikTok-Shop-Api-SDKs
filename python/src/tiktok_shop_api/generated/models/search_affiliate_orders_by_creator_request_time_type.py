@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchAffiliateOrdersByCreatorRequestTimeType(StrEnum):
     CREATE_TIME = "CREATE_TIME"
     DELIVERY_TIME = "DELIVERY_TIME"

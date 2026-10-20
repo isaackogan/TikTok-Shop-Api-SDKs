@@ -1,36 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCompassTaskListResponseDataTask")
+
 
 
 @_attrs_define
 class GetCompassTaskListResponseDataTask:
-    """
-    Attributes:
-        module_type (str | Unset): Allowed values: CREATOR, BASE.
-        id (str | Unset): The ID of the offline report task. When the task status is `SUCCEEDED`, use this value as the
-            `task_id` path parameter in `GET /affiliate_seller/202603/compass/offline_tasks/{task_id}/file` to download the
-            completed export task's result file.
-        file_name (str | Unset): the name of the final download file.
-        status (str | Unset): The status of the task.
-            - RUNNING
-            - SUCCEEDED
-            - FAILED
-    """
+    """ 
+        Attributes:
+            module_type (str | Unset): Allowed values: CREATOR, BASE.
+            id (str | Unset): The ID of the offline report task. When the task status is `SUCCEEDED`, use this value as the
+                `task_id` path parameter in `GET /affiliate_seller/202603/compass/offline_tasks/{task_id}/file` to download the
+                completed export task's result file.
+            file_name (str | Unset): the name of the final download file.
+            status (str | Unset): The status of the task.
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+     """
 
     module_type: str | Unset = UNSET
     id: str | Unset = UNSET
     file_name: str | Unset = UNSET
     status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         module_type = self.module_type
@@ -41,9 +53,11 @@ class GetCompassTaskListResponseDataTask:
 
         status = self.status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if module_type is not UNSET:
             field_dict["module_type"] = module_type
         if id is not UNSET:
@@ -54,6 +68,8 @@ class GetCompassTaskListResponseDataTask:
             field_dict["status"] = status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -72,6 +88,7 @@ class GetCompassTaskListResponseDataTask:
             file_name=file_name,
             status=status,
         )
+
 
         get_compass_task_list_response_data_task.additional_properties = d
         return get_compass_task_list_response_data_task

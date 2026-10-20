@@ -1,14 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_statements_payment_status import GetStatementsPaymentStatus
 from ...models.get_statements_response import GetStatementsResponse
 from ...models.get_statements_sort_order import GetStatementsSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -20,7 +25,12 @@ def _get_kwargs(
     sort_field: str,
     sort_order: GetStatementsSortOrder | Unset = UNSET,
     statement_time_ge: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["statement_time_lt"] = statement_time_lt
@@ -45,7 +55,9 @@ def _get_kwargs(
 
     params["statement_time_ge"] = statement_time_ge
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -53,12 +65,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetStatementsResponse | None:
     if response.status_code == 200:
         response_200 = GetStatementsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -68,9 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetStatementsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetStatementsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -89,8 +103,9 @@ def sync_detailed(
     sort_field: str,
     sort_order: GetStatementsSortOrder | Unset = UNSET,
     statement_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetStatementsResponse]:
-    """Get Statements
+    """ Get Statements
 
      Retrieves the statements generated for a shop and the key statement information based on a specified
     date range or their payment status. Use this API to get an overview of your daily statements over a
@@ -114,16 +129,18 @@ def sync_detailed(
 
     Returns:
         Response[GetStatementsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         statement_time_lt=statement_time_lt,
-        payment_status=payment_status,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        statement_time_ge=statement_time_ge,
+payment_status=payment_status,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+statement_time_ge=statement_time_ge,
+
     )
 
     response = client.get_httpx_client().request(
@@ -131,7 +148,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -143,8 +159,9 @@ def sync(
     sort_field: str,
     sort_order: GetStatementsSortOrder | Unset = UNSET,
     statement_time_ge: int | Unset = UNSET,
+
 ) -> GetStatementsResponse | None:
-    """Get Statements
+    """ Get Statements
 
      Retrieves the statements generated for a shop and the key statement information based on a specified
     date range or their payment status. Use this API to get an overview of your daily statements over a
@@ -168,19 +185,20 @@ def sync(
 
     Returns:
         GetStatementsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        statement_time_lt=statement_time_lt,
-        payment_status=payment_status,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        statement_time_ge=statement_time_ge,
-    ).parsed
+statement_time_lt=statement_time_lt,
+payment_status=payment_status,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+statement_time_ge=statement_time_ge,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -192,8 +210,9 @@ async def asyncio_detailed(
     sort_field: str,
     sort_order: GetStatementsSortOrder | Unset = UNSET,
     statement_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetStatementsResponse]:
-    """Get Statements
+    """ Get Statements
 
      Retrieves the statements generated for a shop and the key statement information based on a specified
     date range or their payment status. Use this API to get an overview of your daily statements over a
@@ -217,22 +236,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetStatementsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         statement_time_lt=statement_time_lt,
-        payment_status=payment_status,
-        page_size=page_size,
-        page_token=page_token,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        statement_time_ge=statement_time_ge,
+payment_status=payment_status,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+statement_time_ge=statement_time_ge,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -244,8 +266,9 @@ async def asyncio(
     sort_field: str,
     sort_order: GetStatementsSortOrder | Unset = UNSET,
     statement_time_ge: int | Unset = UNSET,
+
 ) -> GetStatementsResponse | None:
-    """Get Statements
+    """ Get Statements
 
      Retrieves the statements generated for a shop and the key statement information based on a specified
     date range or their payment status. Use this API to get an overview of your daily statements over a
@@ -269,17 +292,17 @@ async def asyncio(
 
     Returns:
         GetStatementsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            statement_time_lt=statement_time_lt,
-            payment_status=payment_status,
-            page_size=page_size,
-            page_token=page_token,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            statement_time_ge=statement_time_ge,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+statement_time_lt=statement_time_lt,
+payment_status=payment_status,
+page_size=page_size,
+page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+statement_time_ge=statement_time_ge,
+
+    )).parsed

@@ -1,50 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetStatementsResponseDataStatement")
+
 
 
 @_attrs_define
 class GetStatementsResponseDataStatement:
-    """
-    Attributes:
-        id (str | Unset): The statement ID.
-        statement_time (int | Unset): The time when the statement was generated, expressed as a Unix timestamp in
-            seconds.
-            Statements are generated daily at 00:00 UTC and include all transactions from the previous day.
-        settlement_amount (str | Unset): The settlement amount.
-        currency (str | Unset): The currency code in ISO 4217 format.
-        revenue_amount (str | Unset): The final revenue amount at the time of order settlement.
-            Applicable for all regions except UK and US.
-        fee_amount (str | Unset): The fees charged by TikTok Shop at the time of order settlement. An order is deemed
-            settled a certain number of days after delivery (varies by region) if no returns or refunds are pending.
+    """ 
+        Attributes:
+            id (str | Unset): The statement ID.
+            statement_time (int | Unset): The time when the statement was generated, expressed as a Unix timestamp in
+                seconds.
+                Statements are generated daily at 00:00 UTC and include all transactions from the previous day.
+            settlement_amount (str | Unset): The settlement amount.
+            currency (str | Unset): The currency code in ISO 4217 format.
+            revenue_amount (str | Unset): The final revenue amount at the time of order settlement.
+                Applicable for all regions except UK and US.
+            fee_amount (str | Unset): The fees charged by TikTok Shop at the time of order settlement. An order is deemed
+                settled a certain number of days after delivery (varies by region) if no returns or refunds are pending.
 
-            **Note**: Shipping-related costs are excluded, except for local sellers in the SEA region, where they are
-            included.
-        adjustment_amount (str | Unset): The adjustment amount.
-            For more details about the reason for adjustment, refer to the [Get Statement Transactions
-            API](https://partner.tiktokshop.com/docv2/page/650a6749defece02be67da87).
-        payment_status (str | Unset): The payment status, indicating whether payment has been transferred to the
-            seller's bank account or settled to the seller's account.
-            Possible values:
-            - PAID: Payment has been transferred to the seller.
-            - FAILED: Payment transfer failed.
-            - PROCESSING: Payment is currently being processed.
-            - SETTLED: Funds have been settled to the seller's account.
-        payment_id (str | Unset): The payment ID.
-        net_sales_amount (str | Unset): The final revenue amount after seller discounts are deducted.
-            Applicable only for local sellers outside the SEA region.
-        shipping_cost_amount (str | Unset): The shipping fees.
-            Applicable only for local sellers outside the SEA region.
-        payment_time (int | Unset): The Unix payment timestamp
-    """
+                **Note**: Shipping-related costs are excluded, except for local sellers in the SEA region, where they are
+                included.
+            adjustment_amount (str | Unset): The adjustment amount.
+                For more details about the reason for adjustment, refer to the [Get Statement Transactions
+                API](https://partner.tiktokshop.com/docv2/page/650a6749defece02be67da87).
+            payment_status (str | Unset): The payment status, indicating whether payment has been transferred to the
+                seller's bank account or settled to the seller's account.
+                Possible values:
+                - PAID: Payment has been transferred to the seller.
+                - FAILED: Payment transfer failed.
+                - PROCESSING: Payment is currently being processed.
+                - SETTLED: Funds have been settled to the seller's account.
+            payment_id (str | Unset): The payment ID.
+            net_sales_amount (str | Unset): The final revenue amount after seller discounts are deducted.
+                Applicable only for local sellers outside the SEA region.
+            shipping_cost_amount (str | Unset): The shipping fees.
+                Applicable only for local sellers outside the SEA region.
+            payment_time (int | Unset): The Unix payment timestamp
+     """
 
     id: str | Unset = UNSET
     statement_time: int | Unset = UNSET
@@ -59,6 +67,10 @@ class GetStatementsResponseDataStatement:
     shipping_cost_amount: str | Unset = UNSET
     payment_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -85,9 +97,11 @@ class GetStatementsResponseDataStatement:
 
         payment_time = self.payment_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if statement_time is not UNSET:
@@ -114,6 +128,8 @@ class GetStatementsResponseDataStatement:
             field_dict["payment_time"] = payment_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -156,6 +172,7 @@ class GetStatementsResponseDataStatement:
             shipping_cost_amount=shipping_cost_amount,
             payment_time=payment_time,
         )
+
 
         get_statements_response_data_statement.additional_properties = d
         return get_statements_response_data_statement

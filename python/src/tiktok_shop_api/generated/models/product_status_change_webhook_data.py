@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ProductStatusChangeWebhookData")
+
 
 
 @_attrs_define
 class ProductStatusChangeWebhookData:
-    """
-    Attributes:
-        product_id (int | Unset): The identification of a TikTok Shop product
-        status (str | Unset): Product audit status, with possible values:
+    """ 
+        Attributes:
+            product_id (int | Unset): The identification of a TikTok Shop product
+            status (str | Unset): Product audit status, with possible values:
 
-             * PRODUCT_FIRST_PASS_REVIEW
-             * PRODUCT_STATUS_CHANGED
-             * PRODUCT_AUDIT_FAILURE
-        suspended_reason (str | Unset): The reason a product audit was rejected or frozen
-        update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
-    """
+                 * PRODUCT_FIRST_PASS_REVIEW
+                 * PRODUCT_STATUS_CHANGED
+                 * PRODUCT_AUDIT_FAILURE
+            suspended_reason (str | Unset): The reason a product audit was rejected or frozen
+            update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
+     """
 
     product_id: int | Unset = UNSET
     status: str | Unset = UNSET
     suspended_reason: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
@@ -40,9 +52,11 @@ class ProductStatusChangeWebhookData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_id is not UNSET:
             field_dict["product_id"] = product_id
         if status is not UNSET:
@@ -53,6 +67,8 @@ class ProductStatusChangeWebhookData:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -71,6 +87,7 @@ class ProductStatusChangeWebhookData:
             suspended_reason=suspended_reason,
             update_time=update_time,
         )
+
 
         product_status_change_webhook_data.additional_properties = d
         return product_status_change_webhook_data

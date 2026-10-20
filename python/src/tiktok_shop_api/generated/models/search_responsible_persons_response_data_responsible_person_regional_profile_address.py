@@ -1,42 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress")
+
 
 
 @_attrs_define
 class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress:
-    """
-    Attributes:
-        street_address_line1 (str | Unset): The detailed street address of the location, including the building number,
-            street name, district, city, province, and any relevant details.
-            Max length: 500 characters
-        street_address_line2 (str | Unset): (**Deprecated**: This field is deprecated and will return an empty string.
-            Please refer to `street_address_line1` instead for the relevant details.)
+    """ 
+        Attributes:
+            street_address_line1 (str | Unset): The detailed street address of the location, including the building number,
+                street name, district, city, province, and any relevant details.
+                Max length: 500 characters
+            street_address_line2 (str | Unset): (**Deprecated**: This field is deprecated and will return an empty string.
+                Please refer to `street_address_line1` instead for the relevant details.)
 
-            An optional secondary line for additional address details, if necessary.
-            Max length: 500 characters
-        district (str | Unset): (**Deprecated**: This field is deprecated and will return an empty string. Please refer
-            to `street_address_line1` instead for the district name.)
+                An optional secondary line for additional address details, if necessary.
+                Max length: 500 characters
+            district (str | Unset): (**Deprecated**: This field is deprecated and will return an empty string. Please refer
+                to `street_address_line1` instead for the district name.)
 
-            The district name.
-            Max length: 500 characters
-        city (str | Unset): **Deprecated**: This field returns an empty string. Use `street_address_line1` for the city
-            name.
-        postal_code (str | Unset): The postal code.
-            Max length: 500 characters
-        province (str | Unset): **Deprecated**: This field returns an empty string. Use `street_address_line1` for the
-            province, state, or region name.
-        country (str | Unset): The two letter ISO 3166 country code representing the country of the address. It must be
-            an EU country.
-    """
+                The district name.
+                Max length: 500 characters
+            city (str | Unset): **Deprecated**: This field returns an empty string. Use `street_address_line1` for the city
+                name.
+            postal_code (str | Unset): The postal code.
+                Max length: 500 characters
+            province (str | Unset): **Deprecated**: This field returns an empty string. Use `street_address_line1` for the
+                province, state, or region name.
+            country (str | Unset): The two letter ISO 3166 country code representing the country of the address. It must be
+                an EU country.
+     """
 
     street_address_line1: str | Unset = UNSET
     street_address_line2: str | Unset = UNSET
@@ -46,6 +54,10 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddres
     province: str | Unset = UNSET
     country: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         street_address_line1 = self.street_address_line1
@@ -62,9 +74,11 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddres
 
         country = self.country
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if street_address_line1 is not UNSET:
             field_dict["street_address_line1"] = street_address_line1
         if street_address_line2 is not UNSET:
@@ -81,6 +95,8 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddres
             field_dict["country"] = country
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -108,6 +124,7 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddres
             province=province,
             country=country,
         )
+
 
         search_responsible_persons_response_data_responsible_person_regional_profile_address.additional_properties = d
         return search_responsible_persons_response_data_responsible_person_regional_profile_address

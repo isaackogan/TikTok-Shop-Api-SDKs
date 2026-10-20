@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CartonCartonType(StrEnum):
     MULTI_SKU = "MULTI_SKU"
     SINGLE_SKU = "SINGLE_SKU"

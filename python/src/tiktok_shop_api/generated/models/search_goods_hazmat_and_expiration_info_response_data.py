@@ -1,66 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_goods_hazmat_and_expiration_info_response_data_hazmat_and_expiration_info import (
-        SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo,
-    )
+  from ..models.search_goods_hazmat_and_expiration_info_response_data_hazmat_and_expiration_info import SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo
+
+
+
 
 
 T = TypeVar("T", bound="SearchGoodsHazmatAndExpirationInfoResponseData")
 
 
+
 @_attrs_define
 class SearchGoodsHazmatAndExpirationInfoResponseData:
-    """
-    Attributes:
-        hazmat_and_expiration_info (SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo | Unset):
-    """
+    """ 
+        Attributes:
+            hazmat_and_expiration_info (SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo | Unset):
+     """
 
     hazmat_and_expiration_info: SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_goods_hazmat_and_expiration_info_response_data_hazmat_and_expiration_info import SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo # noqa: PLC0415
         hazmat_and_expiration_info: dict[str, Any] | Unset = UNSET
         if not isinstance(self.hazmat_and_expiration_info, Unset):
             hazmat_and_expiration_info = self.hazmat_and_expiration_info.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if hazmat_and_expiration_info is not UNSET:
             field_dict["hazmat_and_expiration_info"] = hazmat_and_expiration_info
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_goods_hazmat_and_expiration_info_response_data_hazmat_and_expiration_info import (
-            SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo,  # noqa: PLC0415
-        )
-
+        from ..models.search_goods_hazmat_and_expiration_info_response_data_hazmat_and_expiration_info import SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo # noqa: PLC0415
         d = dict(src_dict)
         _hazmat_and_expiration_info = d.pop("hazmat_and_expiration_info", UNSET)
         hazmat_and_expiration_info: SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo | Unset
-        if isinstance(_hazmat_and_expiration_info, Unset):
+        if isinstance(_hazmat_and_expiration_info,  Unset):
             hazmat_and_expiration_info = UNSET
         else:
-            hazmat_and_expiration_info = (
-                SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo.from_dict(
-                    _hazmat_and_expiration_info
-                )
-            )
+            hazmat_and_expiration_info = SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfo.from_dict(_hazmat_and_expiration_info)
+
+
+
 
         search_goods_hazmat_and_expiration_info_response_data = cls(
             hazmat_and_expiration_info=hazmat_and_expiration_info,
         )
+
 
         search_goods_hazmat_and_expiration_info_response_data.additional_properties = d
         return search_goods_hazmat_and_expiration_info_response_data

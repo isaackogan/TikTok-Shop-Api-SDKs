@@ -1,46 +1,60 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="PredictProductPackageDimensionsAndWeightResponseDataPackageWeight")
+
 
 
 @_attrs_define
 class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight:
-    """
-    Attributes:
-        unit (str): Unit of the predicted package weight.
-            Possible values:
-            - `GRAM`
-            - `POUND`
-            - `OUNCE`
-            - `KILOGRAM`
-        value (str): Predicted positive package weight.
-    """
+    """ 
+        Attributes:
+            unit (str): Unit of the predicted package weight.
+                Possible values:
+                - `GRAM`
+                - `POUND`
+                - `OUNCE`
+                - `KILOGRAM`
+            value (str): Predicted positive package weight.
+     """
 
     unit: str
     value: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         unit = self.unit
 
         value = self.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "unit": unit,
-                "value": value,
-            }
-        )
+        field_dict.update({
+            "unit": unit,
+            "value": value,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -53,6 +67,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight:
             unit=unit,
             value=value,
         )
+
 
         predict_product_package_dimensions_and_weight_response_data_package_weight.additional_properties = d
         return predict_product_package_dimensions_and_weight_response_data_package_weight

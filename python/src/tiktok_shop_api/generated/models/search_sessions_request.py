@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchSessionsRequest")
+
 
 
 @_attrs_define
 class SearchSessionsRequest:
-    """
-    Attributes:
-        begin_time_ge (int): Return sessions whose begin_time is greater than or equal to this Unix timestamp, in
-            seconds. Only data from the last 90 days is supported.
-        begin_time_lt (int): Return sessions whose begin_time is less than this Unix timestamp, in seconds. The value
-            must be greater than or equal to begin_time_ge.
-        buyer_nickname (str | Unset): Filter sessions by the buyer's nickname.
-    """
+    """ 
+        Attributes:
+            begin_time_ge (int): Return sessions whose begin_time is greater than or equal to this Unix timestamp, in
+                seconds. Only data from the last 90 days is supported.
+            begin_time_lt (int): Return sessions whose begin_time is less than this Unix timestamp, in seconds. The value
+                must be greater than or equal to begin_time_ge.
+            buyer_nickname (str | Unset): Filter sessions by the buyer's nickname.
+     """
 
     begin_time_ge: int
     begin_time_lt: int
     buyer_nickname: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         begin_time_ge = self.begin_time_ge
@@ -34,18 +46,19 @@ class SearchSessionsRequest:
 
         buyer_nickname = self.buyer_nickname
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "begin_time_ge": begin_time_ge,
-                "begin_time_lt": begin_time_lt,
-            }
-        )
+        field_dict.update({
+            "begin_time_ge": begin_time_ge,
+            "begin_time_lt": begin_time_lt,
+        })
         if buyer_nickname is not UNSET:
             field_dict["buyer_nickname"] = buyer_nickname
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,6 +74,7 @@ class SearchSessionsRequest:
             begin_time_lt=begin_time_lt,
             buyer_nickname=buyer_nickname,
         )
+
 
         search_sessions_request.additional_properties = d
         return search_sessions_request

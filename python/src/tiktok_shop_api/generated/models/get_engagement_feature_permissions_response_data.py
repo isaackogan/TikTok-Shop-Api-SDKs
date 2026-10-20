@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_engagement_feature_permissions_response_data_feature import (
-        GetEngagementFeaturePermissionsResponseDataFeature,
-    )
+  from ..models.get_engagement_feature_permissions_response_data_feature import GetEngagementFeaturePermissionsResponseDataFeature
+
+
+
 
 
 T = TypeVar("T", bound="GetEngagementFeaturePermissionsResponseData")
 
 
+
 @_attrs_define
 class GetEngagementFeaturePermissionsResponseData:
-    """
-    Attributes:
-        features (list[GetEngagementFeaturePermissionsResponseDataFeature] | Unset): The list of customer engagement
-            features that has access control.
-    """
+    """ 
+        Attributes:
+            features (list[GetEngagementFeaturePermissionsResponseDataFeature] | Unset): The list of customer engagement
+                features that has access control.
+     """
 
     features: list[GetEngagementFeaturePermissionsResponseDataFeature] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_engagement_feature_permissions_response_data_feature import GetEngagementFeaturePermissionsResponseDataFeature # noqa: PLC0415
         features: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.features, Unset):
             features = []
@@ -36,20 +46,23 @@ class GetEngagementFeaturePermissionsResponseData:
                 features_item = features_item_data.to_dict()
                 features.append(features_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if features is not UNSET:
             field_dict["features"] = features
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_engagement_feature_permissions_response_data_feature import (
-            GetEngagementFeaturePermissionsResponseDataFeature,  # noqa: PLC0415
-        )
-
+        from ..models.get_engagement_feature_permissions_response_data_feature import GetEngagementFeaturePermissionsResponseDataFeature # noqa: PLC0415
         d = dict(src_dict)
         _features = d.pop("features", UNSET)
         features: list[GetEngagementFeaturePermissionsResponseDataFeature] | Unset = UNSET
@@ -58,11 +71,15 @@ class GetEngagementFeaturePermissionsResponseData:
             for features_item_data in _features:
                 features_item = GetEngagementFeaturePermissionsResponseDataFeature.from_dict(features_item_data)
 
+
+
                 features.append(features_item)
+
 
         get_engagement_feature_permissions_response_data = cls(
             features=features,
         )
+
 
         get_engagement_feature_permissions_response_data.additional_properties = d
         return get_engagement_feature_permissions_response_data

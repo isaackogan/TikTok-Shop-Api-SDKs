@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateFirstMileBundleV2RequestHandoverMethod(StrEnum):
     DROP_OFF = "DROP_OFF"
     PICKUP = "PICKUP"

@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="NewConversationWebhookData")
+
 
 
 @_attrs_define
 class NewConversationWebhookData:
-    """
-    Attributes:
-        conversation_id (str | Unset): The identification of the conversation
-        create_time (int | Unset): Conversation creation time, represented as a Unix timestamp (in seconds).
-    """
+    """ 
+        Attributes:
+            conversation_id (str | Unset): The identification of the conversation
+            create_time (int | Unset): Conversation creation time, represented as a Unix timestamp (in seconds).
+     """
 
     conversation_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         conversation_id = self.conversation_id
 
         create_time = self.create_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if conversation_id is not UNSET:
             field_dict["conversation_id"] = conversation_id
         if create_time is not UNSET:
             field_dict["create_time"] = create_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class NewConversationWebhookData:
             conversation_id=conversation_id,
             create_time=create_time,
         )
+
 
         new_conversation_webhook_data.additional_properties = d
         return new_conversation_webhook_data

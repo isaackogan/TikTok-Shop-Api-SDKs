@@ -1,15 +1,20 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_order_list_request import GetOrderListRequest
 from ...models.get_order_list_response import GetOrderListResponse
 from ...models.get_order_list_sort_field import GetOrderListSortField
 from ...models.get_order_list_sort_order import GetOrderListSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,8 +24,12 @@ def _get_kwargs(
     sort_order: GetOrderListSortOrder | Unset = UNSET,
     page_token: str | Unset = UNSET,
     sort_field: GetOrderListSortField | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -40,7 +49,9 @@ def _get_kwargs(
 
     params["sort_field"] = json_sort_field
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -48,6 +59,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -57,9 +69,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetOrderListResponse | None:
     if response.status_code == 200:
         response_200 = GetOrderListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -69,9 +84,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetOrderListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetOrderListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -88,8 +101,9 @@ def sync_detailed(
     sort_order: GetOrderListSortOrder | Unset = UNSET,
     page_token: str | Unset = UNSET,
     sort_field: GetOrderListSortField | Unset = UNSET,
+
 ) -> Response[GetOrderListResponse]:
-    """Get Order List
+    """ Get Order List
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
@@ -108,14 +122,16 @@ def sync_detailed(
 
     Returns:
         Response[GetOrderListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        sort_order=sort_order,
-        page_token=page_token,
-        sort_field=sort_field,
+page_size=page_size,
+sort_order=sort_order,
+page_token=page_token,
+sort_field=sort_field,
+
     )
 
     response = client.get_httpx_client().request(
@@ -123,7 +139,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -133,8 +148,9 @@ def sync(
     sort_order: GetOrderListSortOrder | Unset = UNSET,
     page_token: str | Unset = UNSET,
     sort_field: GetOrderListSortField | Unset = UNSET,
+
 ) -> GetOrderListResponse | None:
-    """Get Order List
+    """ Get Order List
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
@@ -153,17 +169,18 @@ def sync(
 
     Returns:
         GetOrderListResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_size=page_size,
-        sort_order=sort_order,
-        page_token=page_token,
-        sort_field=sort_field,
-    ).parsed
+body=body,
+page_size=page_size,
+sort_order=sort_order,
+page_token=page_token,
+sort_field=sort_field,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -173,8 +190,9 @@ async def asyncio_detailed(
     sort_order: GetOrderListSortOrder | Unset = UNSET,
     page_token: str | Unset = UNSET,
     sort_field: GetOrderListSortField | Unset = UNSET,
+
 ) -> Response[GetOrderListResponse]:
-    """Get Order List
+    """ Get Order List
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
@@ -193,20 +211,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetOrderListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        sort_order=sort_order,
-        page_token=page_token,
-        sort_field=sort_field,
+page_size=page_size,
+sort_order=sort_order,
+page_token=page_token,
+sort_field=sort_field,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -216,8 +237,9 @@ async def asyncio(
     sort_order: GetOrderListSortOrder | Unset = UNSET,
     page_token: str | Unset = UNSET,
     sort_field: GetOrderListSortField | Unset = UNSET,
+
 ) -> GetOrderListResponse | None:
-    """Get Order List
+    """ Get Order List
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
@@ -236,15 +258,15 @@ async def asyncio(
 
     Returns:
         GetOrderListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_size=page_size,
-            sort_order=sort_order,
-            page_token=page_token,
-            sort_field=sort_field,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_size=page_size,
+sort_order=sort_order,
+page_token=page_token,
+sort_field=sort_field,
+
+    )).parsed

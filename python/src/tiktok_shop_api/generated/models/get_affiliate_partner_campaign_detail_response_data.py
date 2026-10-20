@@ -1,55 +1,60 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.contact_info import ContactInfo
-    from ..models.get_affiliate_partner_campaign_detail_response_data_target_shop import (
-        GetAffiliatePartnerCampaignDetailResponseDataTargetShop,
-    )
+  from ..models.contact_info import ContactInfo
+  from ..models.get_affiliate_partner_campaign_detail_response_data_target_shop import GetAffiliatePartnerCampaignDetailResponseDataTargetShop
+
+
+
 
 
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignDetailResponseData")
 
 
+
 @_attrs_define
 class GetAffiliatePartnerCampaignDetailResponseData:
-    """
-    Attributes:
-        id (str | Unset): The campaign identifier.
-        name (str | Unset): The campaign name. Maximum length: 50 characters.
-        description (str | Unset): The campaign description. Maximum length: 1000 characters.
-        status (str | Unset): The campaign status. The status is an enumerated type with values:
-            - READY
-            - UPCOMING
-            - ONGOING
-            - CLOSED
-        region (str | Unset): The region to which the campaign is associated.
-        registration_start_time (int | Unset): The scheduled start time for seller product registration as a Unix
-            timestamp in seconds. This field can be updated only when the campaign status is `READY` or `UPCOMING`.
-        registration_end_time (int | Unset): The scheduled end time for seller product registration as a Unix timestamp
-            in seconds. This field is no longer editable when the campaign status is `CLOSED`.
-        campaign_start_time (int | Unset): The scheduled campaign start time as a Unix timestamp in seconds. This field
-            can be updated only when the campaign status is `READY` or `UPCOMING`.
-        campaign_end_time (int | Unset): The scheduled end time in Unix epoch time format for the campaign. Note that
-            the end time must be less than 360 days from the start date. This field is no longer editable when the campaign
-            status is set to `CLOSED`.
-        commission_rate (int | Unset): The total commission rate in hundredths of a percent (0.01%) units proposed by
-            the affiliate partner for display to sellers. Commission rate must be greater than 100 and less than 8000.
-        contact_info (ContactInfo | Unset):
-        target_shops (list[GetAffiliatePartnerCampaignDetailResponseDataTargetShop] | Unset): A list of TikTok Shop
-            seller shop codes and names with permission to register for the campaign.
-        target_seller_types (list[str] | Unset): A list of seller types eligible to register for the campaign. Use this
-            field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values:
-            - LOCAL
-            - CROSS_BORDER
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The campaign identifier.
+            name (str | Unset): The campaign name. Maximum length: 50 characters.
+            description (str | Unset): The campaign description. Maximum length: 1000 characters.
+            status (str | Unset): The campaign status. The status is an enumerated type with values:
+                - READY
+                - UPCOMING
+                - ONGOING
+                - CLOSED
+            region (str | Unset): The region to which the campaign is associated.
+            registration_start_time (int | Unset): The scheduled start time for seller product registration as a Unix
+                timestamp in seconds. This field can be updated only when the campaign status is `READY` or `UPCOMING`.
+            registration_end_time (int | Unset): The scheduled end time for seller product registration as a Unix timestamp
+                in seconds. This field is no longer editable when the campaign status is `CLOSED`.
+            campaign_start_time (int | Unset): The scheduled campaign start time as a Unix timestamp in seconds. This field
+                can be updated only when the campaign status is `READY` or `UPCOMING`.
+            campaign_end_time (int | Unset): The scheduled end time in Unix epoch time format for the campaign. Note that
+                the end time must be less than 360 days from the start date. This field is no longer editable when the campaign
+                status is set to `CLOSED`.
+            commission_rate (int | Unset): The total commission rate in hundredths of a percent (0.01%) units proposed by
+                the affiliate partner for display to sellers. Commission rate must be greater than 100 and less than 8000.
+            contact_info (ContactInfo | Unset):
+            target_shops (list[GetAffiliatePartnerCampaignDetailResponseDataTargetShop] | Unset): A list of TikTok Shop
+                seller shop codes and names with permission to register for the campaign.
+            target_seller_types (list[str] | Unset): A list of seller types eligible to register for the campaign. Use this
+                field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values:
+                - LOCAL
+                - CROSS_BORDER
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -66,7 +71,13 @@ class GetAffiliatePartnerCampaignDetailResponseData:
     target_seller_types: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.contact_info import ContactInfo # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_detail_response_data_target_shop import GetAffiliatePartnerCampaignDetailResponseDataTargetShop # noqa: PLC0415
         id = self.id
 
         name = self.name
@@ -98,13 +109,19 @@ class GetAffiliatePartnerCampaignDetailResponseData:
                 target_shops_item = target_shops_item_data.to_dict()
                 target_shops.append(target_shops_item)
 
+
+
         target_seller_types: list[str] | Unset = UNSET
         if not isinstance(self.target_seller_types, Unset):
             target_seller_types = self.target_seller_types
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -134,13 +151,12 @@ class GetAffiliatePartnerCampaignDetailResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.contact_info import ContactInfo  # noqa: PLC0415
-        from ..models.get_affiliate_partner_campaign_detail_response_data_target_shop import (
-            GetAffiliatePartnerCampaignDetailResponseDataTargetShop,  # noqa: PLC0415
-        )
-
+        from ..models.contact_info import ContactInfo # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_detail_response_data_target_shop import GetAffiliatePartnerCampaignDetailResponseDataTargetShop # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -164,23 +180,28 @@ class GetAffiliatePartnerCampaignDetailResponseData:
 
         _contact_info = d.pop("contact_info", UNSET)
         contact_info: ContactInfo | Unset
-        if isinstance(_contact_info, Unset):
+        if isinstance(_contact_info,  Unset):
             contact_info = UNSET
         else:
             contact_info = ContactInfo.from_dict(_contact_info)
+
+
+
 
         _target_shops = d.pop("target_shops", UNSET)
         target_shops: list[GetAffiliatePartnerCampaignDetailResponseDataTargetShop] | Unset = UNSET
         if _target_shops is not UNSET:
             target_shops = []
             for target_shops_item_data in _target_shops:
-                target_shops_item = GetAffiliatePartnerCampaignDetailResponseDataTargetShop.from_dict(
-                    target_shops_item_data
-                )
+                target_shops_item = GetAffiliatePartnerCampaignDetailResponseDataTargetShop.from_dict(target_shops_item_data)
+
+
 
                 target_shops.append(target_shops_item)
 
+
         target_seller_types = cast(list[str], d.pop("target_seller_types", UNSET))
+
 
         get_affiliate_partner_campaign_detail_response_data = cls(
             id=id,
@@ -197,6 +218,7 @@ class GetAffiliatePartnerCampaignDetailResponseData:
             target_shops=target_shops,
             target_seller_types=target_seller_types,
         )
+
 
         get_affiliate_partner_campaign_detail_response_data.additional_properties = d
         return get_affiliate_partner_campaign_detail_response_data

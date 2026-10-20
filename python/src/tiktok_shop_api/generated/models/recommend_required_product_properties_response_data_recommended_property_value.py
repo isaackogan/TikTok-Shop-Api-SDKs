@@ -1,41 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue")
+
 
 
 @_attrs_define
 class RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue:
-    """
-    Attributes:
-        id (str): ID of the recommended property value.
-        name (str): Display name of the recommended property value for the shop's region.
-    """
+    """ 
+        Attributes:
+            id (str): ID of the recommended property value.
+            name (str): Display name of the recommended property value for the shop's region.
+     """
 
     id: str
     name: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         name = self.name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "name": name,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "name": name,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -48,6 +62,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue:
             id=id,
             name=name,
         )
+
 
         recommend_required_product_properties_response_data_recommended_property_value.additional_properties = d
         return recommend_required_product_properties_response_data_recommended_property_value

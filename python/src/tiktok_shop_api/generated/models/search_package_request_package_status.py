@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchPackageRequestPackageStatus(StrEnum):
     CANCELLED = "CANCELLED"
     COMPLETED = "COMPLETED"

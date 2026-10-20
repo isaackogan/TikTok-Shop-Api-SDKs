@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ConfirmPackageShipmentRequestPackageDimensionUnit(StrEnum):
     CENTIMETER = "CENTIMETER"
     FOOT = "FOOT"

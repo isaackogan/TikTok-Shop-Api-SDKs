@@ -1,43 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.box_measurement_length_unit import BoxMeasurementLengthUnit
 from ..models.box_measurement_weight_unit import BoxMeasurementWeightUnit
+
+
+
+
+
 
 T = TypeVar("T", bound="BoxMeasurement")
 
 
+
 @_attrs_define
 class BoxMeasurement:
-    """
-    Attributes:
-        weight (str): Carton weight.
-        weight_unit (BoxMeasurementWeightUnit): The unit used for the carton's `weight` value.
+    """ 
+        Attributes:
+            weight (str): Carton weight.
+            weight_unit (BoxMeasurementWeightUnit): The unit used for the carton's `weight` value.
 
-            **Possible values:**
-            * `KILOGRAM` (kg)
-            * `GRAM` (g)
-            * `MILLIGRAM` (mg)
-            * `POUNDS` (lbs)
-            * `OUNCE` (oz)
-        width (str): Carton width.
-        height (str): Carton height.
-        length (str): Carton length.
-        length_unit (BoxMeasurementLengthUnit): The unit used for the carton's `length`, `width`, and `height` values.
+                **Possible values:**
+                * `KILOGRAM` (kg)
+                * `GRAM` (g)
+                * `MILLIGRAM` (mg)
+                * `POUNDS` (lbs)
+                * `OUNCE` (oz)
+            width (str): Carton width.
+            height (str): Carton height.
+            length (str): Carton length.
+            length_unit (BoxMeasurementLengthUnit): The unit used for the carton's `length`, `width`, and `height` values.
 
-            **Possible values:**
-            * `METER` (m)
-            * `CENTIMETER` (cm)
-            * `MILLIMETER` (mm)
-            * `FOOT` (ft)
-            * `MICRON` (μm)
-            * `INCH` (in)
-    """
+                **Possible values:**
+                * `METER` (m)
+                * `CENTIMETER` (cm)
+                * `MILLIMETER` (mm)
+                * `FOOT` (ft)
+                * `MICRON` (μm)
+                * `INCH` (in)
+     """
 
     weight: str
     weight_unit: BoxMeasurementWeightUnit
@@ -46,6 +54,10 @@ class BoxMeasurement:
     length: str
     length_unit: BoxMeasurementLengthUnit
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         weight = self.weight
@@ -60,20 +72,21 @@ class BoxMeasurement:
 
         length_unit = self.length_unit.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "weight": weight,
-                "weight_unit": weight_unit,
-                "width": width,
-                "height": height,
-                "length": length,
-                "length_unit": length_unit,
-            }
-        )
+        field_dict.update({
+            "weight": weight,
+            "weight_unit": weight_unit,
+            "width": width,
+            "height": height,
+            "length": length,
+            "length_unit": length_unit,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -81,6 +94,9 @@ class BoxMeasurement:
         weight = d.pop("weight")
 
         weight_unit = BoxMeasurementWeightUnit(d.pop("weight_unit"))
+
+
+
 
         width = d.pop("width")
 
@@ -90,6 +106,9 @@ class BoxMeasurement:
 
         length_unit = BoxMeasurementLengthUnit(d.pop("length_unit"))
 
+
+
+
         box_measurement = cls(
             weight=weight,
             weight_unit=weight_unit,
@@ -98,6 +117,7 @@ class BoxMeasurement:
             length=length,
             length_unit=length_unit,
         )
+
 
         box_measurement.additional_properties = d
         return box_measurement

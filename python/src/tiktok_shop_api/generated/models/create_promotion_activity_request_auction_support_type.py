@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatePromotionActivityRequestAuctionSupportType(StrEnum):
     ALL = "ALL"
     EXCLUDE_AUCTION = "EXCLUDE_AUCTION"

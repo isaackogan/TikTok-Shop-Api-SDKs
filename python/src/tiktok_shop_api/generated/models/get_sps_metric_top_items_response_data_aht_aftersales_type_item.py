@@ -1,28 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem")
+
 
 
 @_attrs_define
 class GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem:
-    """
-    Attributes:
-        handle_duration_hours (str | Unset): Average handle duration in hours.
-        product_id (str | Unset): Product ID.
-        product_name (str | Unset): Product name.
-        return_order_count (int | Unset): Total number of return orders.
-        top_aftersales_type_name (str | Unset): Top aftersales type returned by TikTok Shop aftersales classification.
-        top_type_order_count (int | Unset): Number of orders associated with the top aftersales type.
-        image_url (str | Unset): Product image URL.
-    """
+    """ 
+        Attributes:
+            handle_duration_hours (str | Unset): Average handle duration in hours.
+            product_id (str | Unset): Product ID.
+            product_name (str | Unset): Product name.
+            return_order_count (int | Unset): Total number of return orders.
+            top_aftersales_type_name (str | Unset): Top aftersales type returned by TikTok Shop aftersales classification.
+            top_type_order_count (int | Unset): Number of orders associated with the top aftersales type.
+            image_url (str | Unset): Product image URL.
+     """
 
     handle_duration_hours: str | Unset = UNSET
     product_id: str | Unset = UNSET
@@ -32,6 +40,10 @@ class GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem:
     top_type_order_count: int | Unset = UNSET
     image_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         handle_duration_hours = self.handle_duration_hours
@@ -48,9 +60,11 @@ class GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem:
 
         image_url = self.image_url
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if handle_duration_hours is not UNSET:
             field_dict["handle_duration_hours"] = handle_duration_hours
         if product_id is not UNSET:
@@ -67,6 +81,8 @@ class GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem:
             field_dict["image_url"] = image_url
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,6 +110,7 @@ class GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem:
             top_type_order_count=top_type_order_count,
             image_url=image_url,
         )
+
 
         get_sps_metric_top_items_response_data_aht_aftersales_type_item.additional_properties = d
         return get_sps_metric_top_items_response_data_aht_aftersales_type_item

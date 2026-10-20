@@ -1,29 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="RemovePromotionActivityProductsRequest")
+
 
 
 @_attrs_define
 class RemovePromotionActivityProductsRequest:
-    """
-    Attributes:
-        product_ids (list[str] | Unset): IDs of the products to remove.
-            Max count: 300.
-        sku_ids (list[str] | Unset): IDs of the SKUs to remove. Do not specify this field for a product-level activity.
-            Max count: 300.
-        benefit_product_ids (list[str] | Unset): IDs of benefit-product relations to remove from a `BUY_MORE_SAVE_MORE`
-            or `BUY_X_GET_Y` activity. Maximum: 100 IDs.
-        exclude_product_ids (list[str] | Unset): IDs of excluded-product relations to remove from a SHOP-scoped
-            `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`, or `SHIPPING_DISCOUNT` activity. Maximum: 100 IDs.
-    """
+    """ 
+        Attributes:
+            product_ids (list[str] | Unset): IDs of the products to remove.
+                Max count: 300.
+            sku_ids (list[str] | Unset): IDs of the SKUs to remove. Do not specify this field for a product-level activity.
+                Max count: 300.
+            benefit_product_ids (list[str] | Unset): IDs of benefit-product relations to remove from a `BUY_MORE_SAVE_MORE`
+                or `BUY_X_GET_Y` activity. Maximum: 100 IDs.
+            exclude_product_ids (list[str] | Unset): IDs of excluded-product relations to remove from a SHOP-scoped
+                `BUY_MORE_SAVE_MORE`, `BUY_X_GET_Y`, or `SHIPPING_DISCOUNT` activity. Maximum: 100 IDs.
+     """
 
     product_ids: list[str] | Unset = UNSET
     sku_ids: list[str] | Unset = UNSET
@@ -31,26 +40,40 @@ class RemovePromotionActivityProductsRequest:
     exclude_product_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         product_ids: list[str] | Unset = UNSET
         if not isinstance(self.product_ids, Unset):
             product_ids = self.product_ids
 
+
+
         sku_ids: list[str] | Unset = UNSET
         if not isinstance(self.sku_ids, Unset):
             sku_ids = self.sku_ids
+
+
 
         benefit_product_ids: list[str] | Unset = UNSET
         if not isinstance(self.benefit_product_ids, Unset):
             benefit_product_ids = self.benefit_product_ids
 
+
+
         exclude_product_ids: list[str] | Unset = UNSET
         if not isinstance(self.exclude_product_ids, Unset):
             exclude_product_ids = self.exclude_product_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_ids is not UNSET:
             field_dict["product_ids"] = product_ids
         if sku_ids is not UNSET:
@@ -62,16 +85,22 @@ class RemovePromotionActivityProductsRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         product_ids = cast(list[str], d.pop("product_ids", UNSET))
 
+
         sku_ids = cast(list[str], d.pop("sku_ids", UNSET))
+
 
         benefit_product_ids = cast(list[str], d.pop("benefit_product_ids", UNSET))
 
+
         exclude_product_ids = cast(list[str], d.pop("exclude_product_ids", UNSET))
+
 
         remove_promotion_activity_products_request = cls(
             product_ids=product_ids,
@@ -79,6 +108,7 @@ class RemovePromotionActivityProductsRequest:
             benefit_product_ids=benefit_product_ids,
             exclude_product_ids=exclude_product_ids,
         )
+
 
         remove_promotion_activity_products_request.additional_properties = d
         return remove_promotion_activity_products_request

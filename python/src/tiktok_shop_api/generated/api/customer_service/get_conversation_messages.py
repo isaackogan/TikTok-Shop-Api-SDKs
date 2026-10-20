@@ -1,15 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_conversation_messages_locale import GetConversationMessagesLocale
 from ...models.get_conversation_messages_response import GetConversationMessagesResponse
 from ...models.get_conversation_messages_sort_order import GetConversationMessagesSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -23,7 +27,12 @@ def _get_kwargs(
     need_data: bool | Unset = UNSET,
     need_plaintext: bool | Unset = UNSET,
     time_zone: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["page_token"] = page_token
@@ -50,24 +59,26 @@ def _get_kwargs(
 
     params["time_zone"] = time_zone
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/customer_service/202309/conversations/{conversation_id}/messages".format(
-            conversation_id=quote(str(conversation_id), safe=""),
-        ),
+        "url": "/customer_service/202309/conversations/{conversation_id}/messages".format(conversation_id=quote(str(conversation_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetConversationMessagesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetConversationMessagesResponse | None:
     if response.status_code == 200:
         response_200 = GetConversationMessagesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -77,9 +88,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetConversationMessagesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetConversationMessagesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -100,8 +109,9 @@ def sync_detailed(
     need_data: bool | Unset = UNSET,
     need_plaintext: bool | Unset = UNSET,
     time_zone: str | Unset = UNSET,
+
 ) -> Response[GetConversationMessagesResponse]:
-    """Get Conversation Messages
+    """ Get Conversation Messages
 
      Use this API to retrieve a page of messages in a conversation between a buyer and a shop.
     Calling this API does not mark messages as read. Call [Read Message](650a59f7c16ffe02b8e8db3f) to
@@ -124,18 +134,20 @@ def sync_detailed(
 
     Returns:
         Response[GetConversationMessagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        page_token=page_token,
-        page_size=page_size,
-        locale=locale,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        need_data=need_data,
-        need_plaintext=need_plaintext,
-        time_zone=time_zone,
+page_token=page_token,
+page_size=page_size,
+locale=locale,
+sort_order=sort_order,
+sort_field=sort_field,
+need_data=need_data,
+need_plaintext=need_plaintext,
+time_zone=time_zone,
+
     )
 
     response = client.get_httpx_client().request(
@@ -143,7 +155,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     conversation_id: str,
@@ -157,8 +168,9 @@ def sync(
     need_data: bool | Unset = UNSET,
     need_plaintext: bool | Unset = UNSET,
     time_zone: str | Unset = UNSET,
+
 ) -> GetConversationMessagesResponse | None:
-    """Get Conversation Messages
+    """ Get Conversation Messages
 
      Use this API to retrieve a page of messages in a conversation between a buyer and a shop.
     Calling this API does not mark messages as read. Call [Read Message](650a59f7c16ffe02b8e8db3f) to
@@ -181,21 +193,22 @@ def sync(
 
     Returns:
         GetConversationMessagesResponse
-    """
+     """
+
 
     return sync_detailed(
         conversation_id=conversation_id,
-        client=client,
-        page_token=page_token,
-        page_size=page_size,
-        locale=locale,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        need_data=need_data,
-        need_plaintext=need_plaintext,
-        time_zone=time_zone,
-    ).parsed
+client=client,
+page_token=page_token,
+page_size=page_size,
+locale=locale,
+sort_order=sort_order,
+sort_field=sort_field,
+need_data=need_data,
+need_plaintext=need_plaintext,
+time_zone=time_zone,
 
+    ).parsed
 
 async def asyncio_detailed(
     conversation_id: str,
@@ -209,8 +222,9 @@ async def asyncio_detailed(
     need_data: bool | Unset = UNSET,
     need_plaintext: bool | Unset = UNSET,
     time_zone: str | Unset = UNSET,
+
 ) -> Response[GetConversationMessagesResponse]:
-    """Get Conversation Messages
+    """ Get Conversation Messages
 
      Use this API to retrieve a page of messages in a conversation between a buyer and a shop.
     Calling this API does not mark messages as read. Call [Read Message](650a59f7c16ffe02b8e8db3f) to
@@ -233,24 +247,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetConversationMessagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        page_token=page_token,
-        page_size=page_size,
-        locale=locale,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        need_data=need_data,
-        need_plaintext=need_plaintext,
-        time_zone=time_zone,
+page_token=page_token,
+page_size=page_size,
+locale=locale,
+sort_order=sort_order,
+sort_field=sort_field,
+need_data=need_data,
+need_plaintext=need_plaintext,
+time_zone=time_zone,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     conversation_id: str,
@@ -264,8 +281,9 @@ async def asyncio(
     need_data: bool | Unset = UNSET,
     need_plaintext: bool | Unset = UNSET,
     time_zone: str | Unset = UNSET,
+
 ) -> GetConversationMessagesResponse | None:
-    """Get Conversation Messages
+    """ Get Conversation Messages
 
      Use this API to retrieve a page of messages in a conversation between a buyer and a shop.
     Calling this API does not mark messages as read. Call [Read Message](650a59f7c16ffe02b8e8db3f) to
@@ -288,19 +306,19 @@ async def asyncio(
 
     Returns:
         GetConversationMessagesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            conversation_id=conversation_id,
-            client=client,
-            page_token=page_token,
-            page_size=page_size,
-            locale=locale,
-            sort_order=sort_order,
-            sort_field=sort_field,
-            need_data=need_data,
-            need_plaintext=need_plaintext,
-            time_zone=time_zone,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        conversation_id=conversation_id,
+client=client,
+page_token=page_token,
+page_size=page_size,
+locale=locale,
+sort_order=sort_order,
+sort_field=sort_field,
+need_data=need_data,
+need_plaintext=need_plaintext,
+time_zone=time_zone,
+
+    )).parsed

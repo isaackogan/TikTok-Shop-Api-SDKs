@@ -1,44 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateResponsiblePersonRequestPhoneNumber")
+
 
 
 @_attrs_define
 class CreateResponsiblePersonRequestPhoneNumber:
-    """
-    Attributes:
-        country_code (str): The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for Ireland.
-            Only EU country codes are allowed.
-            Max digits: 4
-        local_number (str): The local number.
-            Length: 7 - 11 digits
-    """
+    """ 
+        Attributes:
+            country_code (str): The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for Ireland.
+                Only EU country codes are allowed.
+                Max digits: 4
+            local_number (str): The local number.
+                Length: 7 - 11 digits
+     """
 
     country_code: str
     local_number: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         country_code = self.country_code
 
         local_number = self.local_number
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "country_code": country_code,
-                "local_number": local_number,
-            }
-        )
+        field_dict.update({
+            "country_code": country_code,
+            "local_number": local_number,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -51,6 +65,7 @@ class CreateResponsiblePersonRequestPhoneNumber:
             country_code=country_code,
             local_number=local_number,
         )
+
 
         create_responsible_person_request_phone_number.additional_properties = d
         return create_responsible_person_request_phone_number

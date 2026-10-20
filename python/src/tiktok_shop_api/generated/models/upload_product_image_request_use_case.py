@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UploadProductImageRequestUseCase(StrEnum):
     ATTRIBUTE_IMAGE = "ATTRIBUTE_IMAGE"
     CERTIFICATION_IMAGE = "CERTIFICATION_IMAGE"

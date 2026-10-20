@@ -1,40 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="OrderStatusChangeWebhookData")
+
 
 
 @_attrs_define
 class OrderStatusChangeWebhookData:
-    """
-    Attributes:
-        order_id (str | Unset): The identification of a TikTok Shop order
-        order_status (str | Unset): The most recent order status, with possible values:
+    """ 
+        Attributes:
+            order_id (str | Unset): The identification of a TikTok Shop order
+            order_status (str | Unset): The most recent order status, with possible values:
 
-             * `UNPAID`
-             * `ON_HOLD`
-             * `AWAITING_SHIPMENT`
-             * `AWAITING_COLLECTION`
-             * `CANCEL`
-             * `IN_TRANSIT`
-             * `DELIVERED`
-             * `COMPLETED`
-        is_on_hold_order (bool | Unset): Indicates whether the order has experienced or will experience `ON_HOLD` status
-        update_time (int | Unset): The order status update time, represented as a Unix timestamp (seconds).
-    """
+                 * `UNPAID`
+                 * `ON_HOLD`
+                 * `AWAITING_SHIPMENT`
+                 * `AWAITING_COLLECTION`
+                 * `CANCEL`
+                 * `IN_TRANSIT`
+                 * `DELIVERED`
+                 * `COMPLETED`
+            is_on_hold_order (bool | Unset): Indicates whether the order has experienced or will experience `ON_HOLD` status
+            update_time (int | Unset): The order status update time, represented as a Unix timestamp (seconds).
+     """
 
     order_id: str | Unset = UNSET
     order_status: str | Unset = UNSET
     is_on_hold_order: bool | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
@@ -45,9 +57,11 @@ class OrderStatusChangeWebhookData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_id is not UNSET:
             field_dict["order_id"] = order_id
         if order_status is not UNSET:
@@ -58,6 +72,8 @@ class OrderStatusChangeWebhookData:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class OrderStatusChangeWebhookData:
             is_on_hold_order=is_on_hold_order,
             update_time=update_time,
         )
+
 
         order_status_change_webhook_data.additional_properties = d
         return order_status_change_webhook_data

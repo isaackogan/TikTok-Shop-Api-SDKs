@@ -1,51 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetTransactionsByStatementResponseDataTransactionSupplementaryComponent")
+
 
 
 @_attrs_define
 class GetTransactionsByStatementResponseDataTransactionSupplementaryComponent:
-    """
-    Attributes:
-        customer_payment_amount (str | Unset): The total amount paid by the customer.
-        customer_refund_amount (str | Unset): The exact amount refunded to the customer.
-        platform_discount_amount (str | Unset): The discounts funded by the platform, such as coupons and campaign
-            discounts.
-        platform_discount_refund_amount (str | Unset): The platform discounts to be reversed (and deducted from the
-            final settlement) if the order was refunded as a result of the seller's responsibility.
-        seller_cofunded_discount_amount (str | Unset): The seller's portion of a co-funded voucher discount in co-
-            funding campaigns.
-        seller_cofunded_discount_refund_amount (str | Unset): The seller's portion of a co-funded voucher discount in
-            co-funding campaigns that was refunded to the seller.
-        platform_cofunded_discount_amount (str | Unset): The platform's portion of a co-funded voucher discount in co-
-            funding campaigns.
-        platform_cofunded_discount_refund_amount (str | Unset): The platform's portion of a co-funded voucher discount
-            in co-funding campaigns that was refunded to the platform.
-        retail_delivery_fee_amount (str | Unset): The final retail delivery fee for deliveries in Colorado, US. For more
-            information, see [Colorado Retail Delivery Fee FAQ](https://seller-
-            us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
+    """ 
+        Attributes:
+            customer_payment_amount (str | Unset): The total amount paid by the customer.
+            customer_refund_amount (str | Unset): The exact amount refunded to the customer.
+            platform_discount_amount (str | Unset): The discounts funded by the platform, such as coupons and campaign
+                discounts.
+            platform_discount_refund_amount (str | Unset): The platform discounts to be reversed (and deducted from the
+                final settlement) if the order was refunded as a result of the seller's responsibility.
+            seller_cofunded_discount_amount (str | Unset): The seller's portion of a co-funded voucher discount in co-
+                funding campaigns.
+            seller_cofunded_discount_refund_amount (str | Unset): The seller's portion of a co-funded voucher discount in
+                co-funding campaigns that was refunded to the seller.
+            platform_cofunded_discount_amount (str | Unset): The platform's portion of a co-funded voucher discount in co-
+                funding campaigns.
+            platform_cofunded_discount_refund_amount (str | Unset): The platform's portion of a co-funded voucher discount
+                in co-funding campaigns that was refunded to the platform.
+            retail_delivery_fee_amount (str | Unset): The final retail delivery fee for deliveries in Colorado, US. For more
+                information, see [Colorado Retail Delivery Fee FAQ](https://seller-
+                us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
 
-            Formula: retail_delivery_fee_payment_amount + retail_delivery_fee_refund_amount
-        retail_delivery_fee_payment_amount (str | Unset): The retail delivery fee for deliveries in Colorado, US. For
-            more information, see [Colorado Retail Delivery Fee FAQ](https://seller-
-            us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
-        retail_delivery_fee_refund_amount (str | Unset): The retail delivery fee subsidy by the platform for losses due
-            to returns, refunds, or other issues in Colorado, US.
-        sales_tax_amount (str | Unset): The final sales tax to be paid by the customer for the product and delivery.
+                Formula: retail_delivery_fee_payment_amount + retail_delivery_fee_refund_amount
+            retail_delivery_fee_payment_amount (str | Unset): The retail delivery fee for deliveries in Colorado, US. For
+                more information, see [Colorado Retail Delivery Fee FAQ](https://seller-
+                us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
+            retail_delivery_fee_refund_amount (str | Unset): The retail delivery fee subsidy by the platform for losses due
+                to returns, refunds, or other issues in Colorado, US.
+            sales_tax_amount (str | Unset): The final sales tax to be paid by the customer for the product and delivery.
 
-            Formula: sales_tax_payment_amount - sales_tax_refund_amount
-        sales_tax_payment_amount (str | Unset): The expected sales tax to be paid by the customer for the product and
-            delivery.
-        sales_tax_refund_amount (str | Unset): The sales tax amount returned to the customer in the event of a refund.
-    """
+                Formula: sales_tax_payment_amount - sales_tax_refund_amount
+            sales_tax_payment_amount (str | Unset): The expected sales tax to be paid by the customer for the product and
+                delivery.
+            sales_tax_refund_amount (str | Unset): The sales tax amount returned to the customer in the event of a refund.
+     """
 
     customer_payment_amount: str | Unset = UNSET
     customer_refund_amount: str | Unset = UNSET
@@ -62,6 +70,10 @@ class GetTransactionsByStatementResponseDataTransactionSupplementaryComponent:
     sales_tax_payment_amount: str | Unset = UNSET
     sales_tax_refund_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         customer_payment_amount = self.customer_payment_amount
@@ -92,9 +104,11 @@ class GetTransactionsByStatementResponseDataTransactionSupplementaryComponent:
 
         sales_tax_refund_amount = self.sales_tax_refund_amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if customer_payment_amount is not UNSET:
             field_dict["customer_payment_amount"] = customer_payment_amount
         if customer_refund_amount is not UNSET:
@@ -125,6 +139,8 @@ class GetTransactionsByStatementResponseDataTransactionSupplementaryComponent:
             field_dict["sales_tax_refund_amount"] = sales_tax_refund_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -173,6 +189,7 @@ class GetTransactionsByStatementResponseDataTransactionSupplementaryComponent:
             sales_tax_payment_amount=sales_tax_payment_amount,
             sales_tax_refund_amount=sales_tax_refund_amount,
         )
+
 
         get_transactions_by_statement_response_data_transaction_supplementary_component.additional_properties = d
         return get_transactions_by_statement_response_data_transaction_supplementary_component

@@ -1,38 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_product_skpp_detail_response_data_reward_claim_condition import (
-        GetProductSKPPDetailResponseDataRewardClaimCondition,
-    )
+  from ..models.get_product_skpp_detail_response_data_reward_claim_condition import GetProductSKPPDetailResponseDataRewardClaimCondition
+
+
+
 
 
 T = TypeVar("T", bound="GetProductSKPPDetailResponseDataReward")
 
 
+
 @_attrs_define
 class GetProductSKPPDetailResponseDataReward:
-    """
-    Attributes:
-        reward_type (str | Unset): Possible values: ADS_CREDIT / TOP_CREATOR_MATCHMAKING / SHOPTAB_PV /
-            BIG_PROMOTION_CAMPAIGN / OFF_PLATFORM_BESTSELLER_ADS_CREDIT.
-        title (str | Unset): Localized reward name, resolved from the shared Seller-Center content by the request
-            locale.
-        status (str | Unset): Possible values: NOT_GRANTED / PENDING / AVAILABLE
-        ad_credit_claim_status (str | Unset): Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and
-            status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed).
-        value (str | Unset): Granted amount/quantity; currency-typed values lead with the currency symbol.
-        claim_conditions (list[GetProductSKPPDetailResponseDataRewardClaimCondition] | Unset): Thresholds to unlock the
-            reward; used by ADS_CREDIT.
-        campaign_id (str | Unset): Returned only for reward_type = BIG_PROMOTION_CAMPAIGN.
-    """
+    """ 
+        Attributes:
+            reward_type (str | Unset): Possible values: ADS_CREDIT / TOP_CREATOR_MATCHMAKING / SHOPTAB_PV /
+                BIG_PROMOTION_CAMPAIGN / OFF_PLATFORM_BESTSELLER_ADS_CREDIT.
+            title (str | Unset): Localized reward name, resolved from the shared Seller-Center content by the request
+                locale.
+            status (str | Unset): Possible values: NOT_GRANTED / PENDING / AVAILABLE
+            ad_credit_claim_status (str | Unset): Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and
+                status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed).
+            value (str | Unset): Granted amount/quantity; currency-typed values lead with the currency symbol.
+            claim_conditions (list[GetProductSKPPDetailResponseDataRewardClaimCondition] | Unset): Thresholds to unlock the
+                reward; used by ADS_CREDIT.
+            campaign_id (str | Unset): Returned only for reward_type = BIG_PROMOTION_CAMPAIGN.
+     """
 
     reward_type: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -43,7 +48,12 @@ class GetProductSKPPDetailResponseDataReward:
     campaign_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_product_skpp_detail_response_data_reward_claim_condition import GetProductSKPPDetailResponseDataRewardClaimCondition # noqa: PLC0415
         reward_type = self.reward_type
 
         title = self.title
@@ -61,11 +71,15 @@ class GetProductSKPPDetailResponseDataReward:
                 claim_conditions_item = claim_conditions_item_data.to_dict()
                 claim_conditions.append(claim_conditions_item)
 
+
+
         campaign_id = self.campaign_id
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if reward_type is not UNSET:
             field_dict["reward_type"] = reward_type
         if title is not UNSET:
@@ -83,12 +97,11 @@ class GetProductSKPPDetailResponseDataReward:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_product_skpp_detail_response_data_reward_claim_condition import (
-            GetProductSKPPDetailResponseDataRewardClaimCondition,  # noqa: PLC0415
-        )
-
+        from ..models.get_product_skpp_detail_response_data_reward_claim_condition import GetProductSKPPDetailResponseDataRewardClaimCondition # noqa: PLC0415
         d = dict(src_dict)
         reward_type = d.pop("reward_type", UNSET)
 
@@ -105,11 +118,12 @@ class GetProductSKPPDetailResponseDataReward:
         if _claim_conditions is not UNSET:
             claim_conditions = []
             for claim_conditions_item_data in _claim_conditions:
-                claim_conditions_item = GetProductSKPPDetailResponseDataRewardClaimCondition.from_dict(
-                    claim_conditions_item_data
-                )
+                claim_conditions_item = GetProductSKPPDetailResponseDataRewardClaimCondition.from_dict(claim_conditions_item_data)
+
+
 
                 claim_conditions.append(claim_conditions_item)
+
 
         campaign_id = d.pop("campaign_id", UNSET)
 
@@ -122,6 +136,7 @@ class GetProductSKPPDetailResponseDataReward:
             claim_conditions=claim_conditions,
             campaign_id=campaign_id,
         )
+
 
         get_product_skpp_detail_response_data_reward.additional_properties = d
         return get_product_skpp_detail_response_data_reward

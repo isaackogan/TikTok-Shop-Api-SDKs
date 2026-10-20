@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditAffiliatePartnerCampaignRequestTargetSellerTypesItem(StrEnum):
     CROSS_BORDER = "CROSS_BORDER"
     LOCAL = "LOCAL"

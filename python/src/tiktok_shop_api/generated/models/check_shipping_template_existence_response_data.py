@@ -1,36 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CheckShippingTemplateExistenceResponseData")
+
 
 
 @_attrs_define
 class CheckShippingTemplateExistenceResponseData:
-    """
-    Attributes:
-        template_exist (bool | Unset): if template exists, return true
-    """
+    """ 
+        Attributes:
+            template_exist (bool | Unset): if template exists, return true
+     """
 
     template_exist: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         template_exist = self.template_exist
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if template_exist is not UNSET:
             field_dict["template_exist"] = template_exist
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -40,6 +56,7 @@ class CheckShippingTemplateExistenceResponseData:
         check_shipping_template_existence_response_data = cls(
             template_exist=template_exist,
         )
+
 
         check_shipping_template_existence_response_data.additional_properties = d
         return check_shipping_template_existence_response_data

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdatePackageDeliveryStatusRequestPackageFailDeliveryReason(StrEnum):
     BUYER_REFUSED = "BUYER_REFUSED"
     DELAY_DELIVERY = "DELAY_DELIVERY"

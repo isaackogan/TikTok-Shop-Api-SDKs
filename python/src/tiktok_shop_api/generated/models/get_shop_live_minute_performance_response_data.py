@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_live_minute_performance_response_data_performance import (
-        GetShopLIVEMinutePerformanceResponseDataPerformance,
-    )
+  from ..models.get_shop_live_minute_performance_response_data_performance import GetShopLIVEMinutePerformanceResponseDataPerformance
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEMinutePerformanceResponseData")
 
 
+
 @_attrs_define
 class GetShopLIVEMinutePerformanceResponseData:
-    """
-    Attributes:
-        performance (GetShopLIVEMinutePerformanceResponseDataPerformance | Unset):
-        next_page_token (str | Unset): Page token for retrieving the next page. An empty value means there are no more
-            pages.
-        total_count (int | Unset): Total number of minute-level intervals across all pages.
-    """
+    """ 
+        Attributes:
+            performance (GetShopLIVEMinutePerformanceResponseDataPerformance | Unset):
+            next_page_token (str | Unset): Page token for retrieving the next page. An empty value means there are no more
+                pages.
+            total_count (int | Unset): Total number of minute-level intervals across all pages.
+     """
 
     performance: GetShopLIVEMinutePerformanceResponseDataPerformance | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_live_minute_performance_response_data_performance import GetShopLIVEMinutePerformanceResponseDataPerformance # noqa: PLC0415
         performance: dict[str, Any] | Unset = UNSET
         if not isinstance(self.performance, Unset):
             performance = self.performance.to_dict()
@@ -41,9 +51,11 @@ class GetShopLIVEMinutePerformanceResponseData:
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if performance is not UNSET:
             field_dict["performance"] = performance
         if next_page_token is not UNSET:
@@ -53,19 +65,21 @@ class GetShopLIVEMinutePerformanceResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_live_minute_performance_response_data_performance import (
-            GetShopLIVEMinutePerformanceResponseDataPerformance,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_live_minute_performance_response_data_performance import GetShopLIVEMinutePerformanceResponseDataPerformance # noqa: PLC0415
         d = dict(src_dict)
         _performance = d.pop("performance", UNSET)
         performance: GetShopLIVEMinutePerformanceResponseDataPerformance | Unset
-        if isinstance(_performance, Unset):
+        if isinstance(_performance,  Unset):
             performance = UNSET
         else:
             performance = GetShopLIVEMinutePerformanceResponseDataPerformance.from_dict(_performance)
+
+
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -76,6 +90,7 @@ class GetShopLIVEMinutePerformanceResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         get_shop_live_minute_performance_response_data.additional_properties = d
         return get_shop_live_minute_performance_response_data

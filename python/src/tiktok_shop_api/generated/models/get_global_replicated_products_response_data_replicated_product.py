@@ -1,65 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalReplicatedProductsResponseDataReplicatedProduct")
+
 
 
 @_attrs_define
 class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
-    """
-    Attributes:
-        region (str | Unset): The market associated with the replicated product.
-            Possible values:
-            - AT: Austria
-            - BE:Belgium
-            - CZ:Czech Republic
-            - DE: Germany
-            - ES: Spain
-            - FR: France
-            - GB: United Kingdom
-            - GR: Greece
-            - HU:Hungary
-            - ID: Indonesia
-            - IE: Ireland
-            - IT: Italy
-            - JP: Japan
-            - MY: Malaysia
-            - NL: Netherlands(NL)
-            - PH: Philippines
-            - PO: Poland
-            - PT:Portugal
-            - SG: Singapore
-            - TH: Thailand
-            - US: United States
-            - VN: Vietnam
-            - MX: Mexico
-        shop_id (str | Unset): The TikTok Shop ID.
-        product_id (str | Unset): The ID of the product.
-        product_status (str | Unset): The status of the replicated product.
-            Possible values:
-            - UNKNOWN
-            - DRAFT
-            - PENDING
-            - FAILED
-            - ACTIVATE
-            - SELLER_DEACTIVATED
-            - PLATFORM_DEACTIVATED
-            - FREEZE
-            - DELETED
-    """
+    """ 
+        Attributes:
+            region (str | Unset): The market associated with the replicated product.
+                Possible values:
+                - AT: Austria
+                - BE:Belgium
+                - CZ:Czech Republic
+                - DE: Germany
+                - ES: Spain
+                - FR: France
+                - GB: United Kingdom
+                - GR: Greece
+                - HU:Hungary
+                - ID: Indonesia
+                - IE: Ireland
+                - IT: Italy
+                - JP: Japan
+                - MY: Malaysia
+                - NL: Netherlands(NL)
+                - PH: Philippines
+                - PO: Poland
+                - PT:Portugal
+                - SG: Singapore
+                - TH: Thailand
+                - US: United States
+                - VN: Vietnam
+                - MX: Mexico
+            shop_id (str | Unset): The TikTok Shop ID.
+            product_id (str | Unset): The ID of the product.
+            product_status (str | Unset): The status of the replicated product.
+                Possible values:
+                - UNKNOWN
+                - DRAFT
+                - PENDING
+                - FAILED
+                - ACTIVATE
+                - SELLER_DEACTIVATED
+                - PLATFORM_DEACTIVATED
+                - FREEZE
+                - DELETED
+     """
 
     region: str | Unset = UNSET
     shop_id: str | Unset = UNSET
     product_id: str | Unset = UNSET
     product_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         region = self.region
@@ -70,9 +82,11 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
 
         product_status = self.product_status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if region is not UNSET:
             field_dict["region"] = region
         if shop_id is not UNSET:
@@ -83,6 +97,8 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
             field_dict["product_status"] = product_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -101,6 +117,7 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
             product_id=product_id,
             product_status=product_status,
         )
+
 
         get_global_replicated_products_response_data_replicated_product.additional_properties = d
         return get_global_replicated_products_response_data_replicated_product

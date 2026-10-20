@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice")
+
 
 
 @_attrs_define
 class GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice:
-    """
-    Attributes:
-        currency (str | Unset): The currency code for the region in which the product is sold.
-        amount (str | Unset): The highest price amount.
-    """
+    """ 
+        Attributes:
+            currency (str | Unset): The currency code for the region in which the product is sold.
+            amount (str | Unset): The highest price amount.
+     """
 
     currency: str | Unset = UNSET
     amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency
 
         amount = self.amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if currency is not UNSET:
             field_dict["currency"] = currency
         if amount is not UNSET:
             field_dict["amount"] = amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice:
             currency=currency,
             amount=amount,
         )
+
 
         get_affiliate_partner_campaign_product_list_response_data_product_highest_price.additional_properties = d
         return get_affiliate_partner_campaign_product_list_response_data_product_highest_price

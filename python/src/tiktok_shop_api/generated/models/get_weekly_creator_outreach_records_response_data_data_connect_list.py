@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList")
+
 
 
 @_attrs_define
 class GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList:
-    """
-    Attributes:
-        id (str | Unset): Record ID
-        creator_open_id (str | Unset): Creator open id
-        has_sent_im_message (bool | Unset): Has send im message to creator
-        has_sent_invitation (bool | Unset): Has send invitation to creator
-        is_paired (bool | Unset): Is shop creator paired
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Record ID
+            creator_open_id (str | Unset): Creator open id
+            has_sent_im_message (bool | Unset): Has send im message to creator
+            has_sent_invitation (bool | Unset): Has send invitation to creator
+            is_paired (bool | Unset): Is shop creator paired
+     """
 
     id: str | Unset = UNSET
     creator_open_id: str | Unset = UNSET
@@ -28,6 +36,10 @@ class GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList:
     has_sent_invitation: bool | Unset = UNSET
     is_paired: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -40,9 +52,11 @@ class GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList:
 
         is_paired = self.is_paired
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if creator_open_id is not UNSET:
@@ -55,6 +69,8 @@ class GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList:
             field_dict["is_paired"] = is_paired
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class GetWeeklyCreatorOutreachRecordsResponseDataDataConnectList:
             has_sent_invitation=has_sent_invitation,
             is_paired=is_paired,
         )
+
 
         get_weekly_creator_outreach_records_response_data_data_connect_list.additional_properties = d
         return get_weekly_creator_outreach_records_response_data_data_connect_list

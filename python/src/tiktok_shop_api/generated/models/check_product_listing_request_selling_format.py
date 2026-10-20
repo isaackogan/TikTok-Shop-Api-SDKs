@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CheckProductListingRequestSellingFormat(StrEnum):
     FIXED_PRICE = "FIXED_PRICE"
     FIXED_PRICE_AND_LIVE_AUCTION = "FIXED_PRICE_AND_LIVE_AUCTION"

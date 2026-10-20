@@ -1,40 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalProductResponseDataSkuPrice")
+
 
 
 @_attrs_define
 class GetGlobalProductResponseDataSkuPrice:
-    """
-    Attributes:
-        amount (str | Unset): The price amount.
-        currency (str | Unset): The currency.
-            Possible values:
-            - `USD`: Applicable for global sellers
-            - `EUR`: Applicable for intra-EU sellers
-        unit_price (str | Unset): The unit price of the SKU.
-            You can display the unit price to facilitate easier price comparisons across different products and packaging
-            sizes.
-            Applicable only for the EU market.
+    """ 
+        Attributes:
+            amount (str | Unset): The price amount.
+            currency (str | Unset): The currency.
+                Possible values:
+                - `USD`: Applicable for global sellers
+                - `EUR`: Applicable for intra-EU sellers
+            unit_price (str | Unset): The unit price of the SKU.
+                You can display the unit price to facilitate easier price comparisons across different products and packaging
+                sizes.
+                Applicable only for the EU market.
 
-            **Note**:
-            - This value is available only if you have defined the elements used to calculate this price when creating the
-            product.
-            - Unit price = Selling price/(SKU unit count/base unit count)
-    """
+                **Note**:
+                - This value is available only if you have defined the elements used to calculate this price when creating the
+                product.
+                - Unit price = Selling price/(SKU unit count/base unit count)
+     """
 
     amount: str | Unset = UNSET
     currency: str | Unset = UNSET
     unit_price: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
@@ -43,9 +55,11 @@ class GetGlobalProductResponseDataSkuPrice:
 
         unit_price = self.unit_price
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if currency is not UNSET:
@@ -54,6 +68,8 @@ class GetGlobalProductResponseDataSkuPrice:
             field_dict["unit_price"] = unit_price
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -69,6 +85,7 @@ class GetGlobalProductResponseDataSkuPrice:
             currency=currency,
             unit_price=unit_price,
         )
+
 
         get_global_product_response_data_sku_price.additional_properties = d
         return get_global_product_response_data_sku_price

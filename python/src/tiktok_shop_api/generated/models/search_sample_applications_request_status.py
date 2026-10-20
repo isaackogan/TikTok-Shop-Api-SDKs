@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchSampleApplicationsRequestStatus(StrEnum):
     AWAITING_SHIPMENT = "AWAITING_SHIPMENT"
     COMPLETED = "COMPLETED"

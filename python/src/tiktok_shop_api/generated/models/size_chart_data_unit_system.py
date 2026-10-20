@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SizeChartDataUnitSystem(StrEnum):
     IMPERIAL = "IMPERIAL"
     METRIC = "METRIC"

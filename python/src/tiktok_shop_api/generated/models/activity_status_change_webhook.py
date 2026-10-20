@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.activity_status_change_webhook_data import ActivityStatusChangeWebhookData
+  from ..models.activity_status_change_webhook_data import ActivityStatusChangeWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="ActivityStatusChangeWebhook")
 
 
+
 @_attrs_define
 class ActivityStatusChangeWebhook:
-    """
-    Attributes:
-        type_ (Literal[39]): The ID of the webhook type.
-        tts_notification_id (str | Unset): The ID of the notification.
-        shop_id (str | Unset): The ID of the shop.
-        timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
-        data (ActivityStatusChangeWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[39]): The ID of the webhook type.
+            tts_notification_id (str | Unset): The ID of the notification.
+            shop_id (str | Unset): The ID of the shop.
+            timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
+            data (ActivityStatusChangeWebhookData | Unset):
+     """
 
     type_: Literal[39]
     tts_notification_id: str | Unset = UNSET
@@ -33,7 +41,12 @@ class ActivityStatusChangeWebhook:
     data: ActivityStatusChangeWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.activity_status_change_webhook_data import ActivityStatusChangeWebhookData # noqa: PLC0415
         type_ = self.type_
 
         tts_notification_id = self.tts_notification_id
@@ -46,13 +59,12 @@ class ActivityStatusChangeWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if tts_notification_id is not UNSET:
             field_dict["tts_notification_id"] = tts_notification_id
         if shop_id is not UNSET:
@@ -64,12 +76,13 @@ class ActivityStatusChangeWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.activity_status_change_webhook_data import ActivityStatusChangeWebhookData  # noqa: PLC0415
-
+        from ..models.activity_status_change_webhook_data import ActivityStatusChangeWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[39], d.pop("type"))
+        type_ = cast(Literal[39] , d.pop("type"))
         if type_ != 39:
             raise ValueError(f"type must match const 39, got '{type_}'")
 
@@ -81,10 +94,13 @@ class ActivityStatusChangeWebhook:
 
         _data = d.pop("data", UNSET)
         data: ActivityStatusChangeWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = ActivityStatusChangeWebhookData.from_dict(_data)
+
+
+
 
         activity_status_change_webhook = cls(
             type_=type_,
@@ -93,6 +109,7 @@ class ActivityStatusChangeWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         activity_status_change_webhook.additional_properties = d
         return activity_status_change_webhook

@@ -1,40 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="SearchSampleApplicationsResponseDataSampleApplicationCreator")
 
 
+
 @_attrs_define
 class SearchSampleApplicationsResponseDataSampleApplicationCreator:
-    """
-    Attributes:
-        creator_open_id (str | Unset): Creator Open ID. [More
-            details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
-        username (str | Unset): TikTok User Name of a creator
-        nickname (str | Unset): TikTok Nick Name of a creator
-        follower_count (int | Unset): The number of creator's followers
-        avatar_url (str | Unset): The URL of the creator's avatar image
-        gmv (Gmv | Unset):
-        content_count (int | Unset): The number of contents a creator has posted in the last 30 days. It is formatted as
-            an integer. If the creator has not authorized the sharing of this information, the field returns an empty
-            string.
-        fulfillment_percentage (str | Unset): The creator's sample fulfillment rate over the past 90 days, returned as a
-            percentage string with no percent sign (for example, `60.85`). If the creator has not authorized disclosure of
-            this information, the field returns an empty string.
-        ec_video_view (int | Unset): The median number of creators' shoppable video views over the past 30 days. If the
-            creator has not authorized the sharing of this information, the field returns an empty string.
-    """
+    """ 
+        Attributes:
+            creator_open_id (str | Unset): Creator Open ID. [More
+                details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
+            username (str | Unset): TikTok User Name of a creator
+            nickname (str | Unset): TikTok Nick Name of a creator
+            follower_count (int | Unset): The number of creator's followers
+            avatar_url (str | Unset): The URL of the creator's avatar image
+            gmv (Gmv | Unset):
+            content_count (int | Unset): The number of contents a creator has posted in the last 30 days. It is formatted as
+                an integer. If the creator has not authorized the sharing of this information, the field returns an empty
+                string.
+            fulfillment_percentage (str | Unset): The creator's sample fulfillment rate over the past 90 days, returned as a
+                percentage string with no percent sign (for example, `60.85`). If the creator has not authorized disclosure of
+                this information, the field returns an empty string.
+            ec_video_view (int | Unset): The median number of creators' shoppable video views over the past 30 days. If the
+                creator has not authorized the sharing of this information, the field returns an empty string.
+     """
 
     creator_open_id: str | Unset = UNSET
     username: str | Unset = UNSET
@@ -47,7 +54,12 @@ class SearchSampleApplicationsResponseDataSampleApplicationCreator:
     ec_video_view: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
         creator_open_id = self.creator_open_id
 
         username = self.username
@@ -68,9 +80,11 @@ class SearchSampleApplicationsResponseDataSampleApplicationCreator:
 
         ec_video_view = self.ec_video_view
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if creator_open_id is not UNSET:
             field_dict["creator_open_id"] = creator_open_id
         if username is not UNSET:
@@ -92,10 +106,11 @@ class SearchSampleApplicationsResponseDataSampleApplicationCreator:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         creator_open_id = d.pop("creator_open_id", UNSET)
 
@@ -109,10 +124,13 @@ class SearchSampleApplicationsResponseDataSampleApplicationCreator:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         content_count = d.pop("content_count", UNSET)
 
@@ -131,6 +149,7 @@ class SearchSampleApplicationsResponseDataSampleApplicationCreator:
             fulfillment_percentage=fulfillment_percentage,
             ec_video_view=ec_video_view,
         )
+
 
         search_sample_applications_response_data_sample_application_creator.additional_properties = d
         return search_sample_applications_response_data_sample_application_creator

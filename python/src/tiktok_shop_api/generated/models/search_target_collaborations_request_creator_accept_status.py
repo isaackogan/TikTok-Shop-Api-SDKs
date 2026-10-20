@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchTargetCollaborationsRequestCreatorAcceptStatus(StrEnum):
     ACCEPT = "ACCEPT"
     ALL = "ALL"

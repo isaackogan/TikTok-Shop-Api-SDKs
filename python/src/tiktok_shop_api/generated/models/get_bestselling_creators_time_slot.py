@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetBestsellingCreatorsTimeSlot(StrEnum):
     VALUE_0 = "1D"
     VALUE_1 = "7D"

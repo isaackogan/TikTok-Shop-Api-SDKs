@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_responsible_person_request import CreateResponsiblePersonRequest
 from ...models.create_responsible_person_response import CreateResponsiblePersonResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateResponsiblePersonRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreateResponsiblePersonResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateResponsiblePersonResponse | None:
     if response.status_code == 200:
         response_200 = CreateResponsiblePersonResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateResponsiblePersonResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateResponsiblePersonResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateResponsiblePersonRequest,
+
 ) -> Response[CreateResponsiblePersonResponse]:
-    """Create Responsible Person
+    """ Create Responsible Person
 
      Add a new EU responsible person who ensures a seller's products comply with EU regulations. The
     provided information will be automatically translated into all EU languages supported by TikTok
@@ -81,10 +91,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateResponsiblePersonResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -93,13 +105,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateResponsiblePersonRequest,
+
 ) -> CreateResponsiblePersonResponse | None:
-    """Create Responsible Person
+    """ Create Responsible Person
 
      Add a new EU responsible person who ensures a seller's products comply with EU regulations. The
     provided information will be automatically translated into all EU languages supported by TikTok
@@ -121,20 +133,22 @@ def sync(
 
     Returns:
         CreateResponsiblePersonResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateResponsiblePersonRequest,
+
 ) -> Response[CreateResponsiblePersonResponse]:
-    """Create Responsible Person
+    """ Create Responsible Person
 
      Add a new EU responsible person who ensures a seller's products comply with EU regulations. The
     provided information will be automatically translated into all EU languages supported by TikTok
@@ -156,23 +170,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateResponsiblePersonResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateResponsiblePersonRequest,
+
 ) -> CreateResponsiblePersonResponse | None:
-    """Create Responsible Person
+    """ Create Responsible Person
 
      Add a new EU responsible person who ensures a seller's products comply with EU regulations. The
     provided information will be automatically translated into all EU languages supported by TikTok
@@ -194,11 +212,11 @@ async def asyncio(
 
     Returns:
         CreateResponsiblePersonResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

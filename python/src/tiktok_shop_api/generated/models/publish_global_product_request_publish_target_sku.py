@@ -1,36 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.fee import Fee
-    from ..models.partial_edit_product_request_sku_price import PartialEditProductRequestSkuPrice
-    from ..models.publish_global_product_request_publish_target_sku_inventory import (
-        PublishGlobalProductRequestPublishTargetSkuInventory,
-    )
+  from ..models.fee import Fee
+  from ..models.partial_edit_product_request_sku_price import PartialEditProductRequestSkuPrice
+  from ..models.publish_global_product_request_publish_target_sku_inventory import PublishGlobalProductRequestPublishTargetSkuInventory
+
+
+
 
 
 T = TypeVar("T", bound="PublishGlobalProductRequestPublishTargetSku")
 
 
+
 @_attrs_define
 class PublishGlobalProductRequestPublishTargetSku:
-    """
-    Attributes:
-        related_global_sku_id (str): The global SKU ID to be published.
-            After publishing, a corresponding local product SKU will be created and linked to the global SKU.
-        price (PartialEditProductRequestSkuPrice | Unset):
-        inventory (PublishGlobalProductRequestPublishTargetSkuInventory | Unset):
-        fees (list[Fee] | Unset): The fees required for this product based on TikTok Shop policies. Fees are required
-            only for certain product categories, retrieve the requirements from the [Get Category Rules
-            API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
-    """
+    """ 
+        Attributes:
+            related_global_sku_id (str): The global SKU ID to be published.
+                After publishing, a corresponding local product SKU will be created and linked to the global SKU.
+            price (PartialEditProductRequestSkuPrice | Unset):
+            inventory (PublishGlobalProductRequestPublishTargetSkuInventory | Unset):
+            fees (list[Fee] | Unset): The fees required for this product based on TikTok Shop policies. Fees are required
+                only for certain product categories, retrieve the requirements from the [Get Category Rules
+                API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9).
+     """
 
     related_global_sku_id: str
     price: PartialEditProductRequestSkuPrice | Unset = UNSET
@@ -38,7 +43,14 @@ class PublishGlobalProductRequestPublishTargetSku:
     fees: list[Fee] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.fee import Fee # noqa: PLC0415
+        from ..models.partial_edit_product_request_sku_price import PartialEditProductRequestSkuPrice # noqa: PLC0415
+        from ..models.publish_global_product_request_publish_target_sku_inventory import PublishGlobalProductRequestPublishTargetSkuInventory # noqa: PLC0415
         related_global_sku_id = self.related_global_sku_id
 
         price: dict[str, Any] | Unset = UNSET
@@ -56,13 +68,14 @@ class PublishGlobalProductRequestPublishTargetSku:
                 fees_item = fees_item_data.to_dict()
                 fees.append(fees_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "related_global_sku_id": related_global_sku_id,
-            }
-        )
+        field_dict.update({
+            "related_global_sku_id": related_global_sku_id,
+        })
         if price is not UNSET:
             field_dict["price"] = price
         if inventory is not UNSET:
@@ -72,30 +85,35 @@ class PublishGlobalProductRequestPublishTargetSku:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.fee import Fee  # noqa: PLC0415
-        from ..models.partial_edit_product_request_sku_price import PartialEditProductRequestSkuPrice  # noqa: PLC0415
-        from ..models.publish_global_product_request_publish_target_sku_inventory import (
-            PublishGlobalProductRequestPublishTargetSkuInventory,  # noqa: PLC0415
-        )
-
+        from ..models.fee import Fee # noqa: PLC0415
+        from ..models.partial_edit_product_request_sku_price import PartialEditProductRequestSkuPrice # noqa: PLC0415
+        from ..models.publish_global_product_request_publish_target_sku_inventory import PublishGlobalProductRequestPublishTargetSkuInventory # noqa: PLC0415
         d = dict(src_dict)
         related_global_sku_id = d.pop("related_global_sku_id")
 
         _price = d.pop("price", UNSET)
         price: PartialEditProductRequestSkuPrice | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = PartialEditProductRequestSkuPrice.from_dict(_price)
 
+
+
+
         _inventory = d.pop("inventory", UNSET)
         inventory: PublishGlobalProductRequestPublishTargetSkuInventory | Unset
-        if isinstance(_inventory, Unset):
+        if isinstance(_inventory,  Unset):
             inventory = UNSET
         else:
             inventory = PublishGlobalProductRequestPublishTargetSkuInventory.from_dict(_inventory)
+
+
+
 
         _fees = d.pop("fees", UNSET)
         fees: list[Fee] | Unset = UNSET
@@ -104,7 +122,10 @@ class PublishGlobalProductRequestPublishTargetSku:
             for fees_item_data in _fees:
                 fees_item = Fee.from_dict(fees_item_data)
 
+
+
                 fees.append(fees_item)
+
 
         publish_global_product_request_publish_target_sku = cls(
             related_global_sku_id=related_global_sku_id,
@@ -112,6 +133,7 @@ class PublishGlobalProductRequestPublishTargetSku:
             inventory=inventory,
             fees=fees,
         )
+
 
         publish_global_product_request_publish_target_sku.additional_properties = d
         return publish_global_product_request_publish_target_sku

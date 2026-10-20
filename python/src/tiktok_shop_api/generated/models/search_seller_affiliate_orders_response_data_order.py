@@ -1,33 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_seller_affiliate_orders_response_data_order_sku import (
-        SearchSellerAffiliateOrdersResponseDataOrderSku,
-    )
+  from ..models.search_seller_affiliate_orders_response_data_order_sku import SearchSellerAffiliateOrdersResponseDataOrderSku
+
+
+
 
 
 T = TypeVar("T", bound="SearchSellerAffiliateOrdersResponseDataOrder")
 
 
+
 @_attrs_define
 class SearchSellerAffiliateOrdersResponseDataOrder:
-    """
-    Attributes:
-        id (str | Unset): The order ID.
-        delivery_time (int | Unset): The date and time when the order was delivered. Unix timestamp.
-        create_time (int | Unset): The Unix timestamp, in seconds, when the order was created.
-        status (str | Unset): Deprecated. This field is not returned. Use each SKU's `settlement_status` instead.
-        skus (list[SearchSellerAffiliateOrdersResponseDataOrderSku] | Unset): The list of SKUs that are included in this
-            order.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The order ID.
+            delivery_time (int | Unset): The date and time when the order was delivered. Unix timestamp.
+            create_time (int | Unset): The Unix timestamp, in seconds, when the order was created.
+            status (str | Unset): Deprecated. This field is not returned. Use each SKU's `settlement_status` instead.
+            skus (list[SearchSellerAffiliateOrdersResponseDataOrderSku] | Unset): The list of SKUs that are included in this
+                order.
+     """
 
     id: str | Unset = UNSET
     delivery_time: int | Unset = UNSET
@@ -36,7 +41,12 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
     skus: list[SearchSellerAffiliateOrdersResponseDataOrderSku] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_seller_affiliate_orders_response_data_order_sku import SearchSellerAffiliateOrdersResponseDataOrderSku # noqa: PLC0415
         id = self.id
 
         delivery_time = self.delivery_time
@@ -52,9 +62,13 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if delivery_time is not UNSET:
@@ -68,12 +82,11 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_seller_affiliate_orders_response_data_order_sku import (
-            SearchSellerAffiliateOrdersResponseDataOrderSku,  # noqa: PLC0415
-        )
-
+        from ..models.search_seller_affiliate_orders_response_data_order_sku import SearchSellerAffiliateOrdersResponseDataOrderSku # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -90,7 +103,10 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
             for skus_item_data in _skus:
                 skus_item = SearchSellerAffiliateOrdersResponseDataOrderSku.from_dict(skus_item_data)
 
+
+
                 skus.append(skus_item)
+
 
         search_seller_affiliate_orders_response_data_order = cls(
             id=id,
@@ -99,6 +115,7 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
             status=status,
             skus=skus,
         )
+
 
         search_seller_affiliate_orders_response_data_order.additional_properties = d
         return search_seller_affiliate_orders_response_data_order

@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator")
+
 
 
 @_attrs_define
 class GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator:
-    """
-    Attributes:
-        author_type (str | Unset): The creator account type.
-        creator_country (str | Unset): The creator's country or region code.
-        nick_name (str | Unset): The creator's nickname.
-        open_id (str | Unset): The creator's Open ID.
-        user_name (str | Unset): The creator's username.
-    """
+    """ 
+        Attributes:
+            author_type (str | Unset): The creator account type.
+            creator_country (str | Unset): The creator's country or region code.
+            nick_name (str | Unset): The creator's nickname.
+            open_id (str | Unset): The creator's Open ID.
+            user_name (str | Unset): The creator's username.
+     """
 
     author_type: str | Unset = UNSET
     creator_country: str | Unset = UNSET
@@ -28,6 +36,10 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator:
     open_id: str | Unset = UNSET
     user_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         author_type = self.author_type
@@ -40,9 +52,11 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator:
 
         user_name = self.user_name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if author_type is not UNSET:
             field_dict["author_type"] = author_type
         if creator_country is not UNSET:
@@ -55,6 +69,8 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator:
             field_dict["user_name"] = user_name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator:
             open_id=open_id,
             user_name=user_name,
         )
+
 
         get_shop_live_performance_list_response_data_live_stream_session_creator.additional_properties = d
         return get_shop_live_performance_list_response_data_live_stream_session_creator

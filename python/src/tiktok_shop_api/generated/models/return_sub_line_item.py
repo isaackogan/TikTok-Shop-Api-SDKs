@@ -1,36 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.product_image import ProductImage
-    from ..models.refund_amount import RefundAmount
+  from ..models.product_image import ProductImage
+  from ..models.refund_amount import RefundAmount
+
+
+
 
 
 T = TypeVar("T", bound="ReturnSubLineItem")
 
 
+
 @_attrs_define
 class ReturnSubLineItem:
-    """
-    Attributes:
-        return_sub_line_item_id (str | Unset): Return sub order line ID.
-        return_line_item_id (str | Unset): Return order line ID.
-        sub_order_line_item_id (str | Unset): Sub order line ID.
-        order_line_item_id (str | Unset): Order line ID.
-        sku_id (str | Unset): SKU ID.
-        sku_name (str | Unset): SKU name.
-        product_image (ProductImage | Unset):
-        product_name (str | Unset): Product name.
-        seller_sku (str | Unset): SKU name defined by seller.
-        refund_amount (RefundAmount | Unset):
-    """
+    """ 
+        Attributes:
+            return_sub_line_item_id (str | Unset): Return sub order line ID.
+            return_line_item_id (str | Unset): Return order line ID.
+            sub_order_line_item_id (str | Unset): Sub order line ID.
+            order_line_item_id (str | Unset): Order line ID.
+            sku_id (str | Unset): SKU ID.
+            sku_name (str | Unset): SKU name.
+            product_image (ProductImage | Unset):
+            product_name (str | Unset): Product name.
+            seller_sku (str | Unset): SKU name defined by seller.
+            refund_amount (RefundAmount | Unset):
+     """
 
     return_sub_line_item_id: str | Unset = UNSET
     return_line_item_id: str | Unset = UNSET
@@ -44,7 +51,13 @@ class ReturnSubLineItem:
     refund_amount: RefundAmount | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.product_image import ProductImage # noqa: PLC0415
+        from ..models.refund_amount import RefundAmount # noqa: PLC0415
         return_sub_line_item_id = self.return_sub_line_item_id
 
         return_line_item_id = self.return_line_item_id
@@ -69,9 +82,11 @@ class ReturnSubLineItem:
         if not isinstance(self.refund_amount, Unset):
             refund_amount = self.refund_amount.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if return_sub_line_item_id is not UNSET:
             field_dict["return_sub_line_item_id"] = return_sub_line_item_id
         if return_line_item_id is not UNSET:
@@ -95,11 +110,12 @@ class ReturnSubLineItem:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.product_image import ProductImage  # noqa: PLC0415
-        from ..models.refund_amount import RefundAmount  # noqa: PLC0415
-
+        from ..models.product_image import ProductImage # noqa: PLC0415
+        from ..models.refund_amount import RefundAmount # noqa: PLC0415
         d = dict(src_dict)
         return_sub_line_item_id = d.pop("return_sub_line_item_id", UNSET)
 
@@ -115,10 +131,13 @@ class ReturnSubLineItem:
 
         _product_image = d.pop("product_image", UNSET)
         product_image: ProductImage | Unset
-        if isinstance(_product_image, Unset):
+        if isinstance(_product_image,  Unset):
             product_image = UNSET
         else:
             product_image = ProductImage.from_dict(_product_image)
+
+
+
 
         product_name = d.pop("product_name", UNSET)
 
@@ -126,10 +145,13 @@ class ReturnSubLineItem:
 
         _refund_amount = d.pop("refund_amount", UNSET)
         refund_amount: RefundAmount | Unset
-        if isinstance(_refund_amount, Unset):
+        if isinstance(_refund_amount,  Unset):
             refund_amount = UNSET
         else:
             refund_amount = RefundAmount.from_dict(_refund_amount)
+
+
+
 
         return_sub_line_item = cls(
             return_sub_line_item_id=return_sub_line_item_id,
@@ -143,6 +165,7 @@ class ReturnSubLineItem:
             seller_sku=seller_sku,
             refund_amount=refund_amount,
         )
+
 
         return_sub_line_item.additional_properties = d
         return return_sub_line_item

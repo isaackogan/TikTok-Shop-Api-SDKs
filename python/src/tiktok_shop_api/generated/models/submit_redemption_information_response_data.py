@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.submit_redemption_information_response_data_order_status import (
-        SubmitRedemptionInformationResponseDataOrderStatus,
-    )
+  from ..models.submit_redemption_information_response_data_order_status import SubmitRedemptionInformationResponseDataOrderStatus
+
+
+
 
 
 T = TypeVar("T", bound="SubmitRedemptionInformationResponseData")
 
 
+
 @_attrs_define
 class SubmitRedemptionInformationResponseData:
-    """
-    Attributes:
-        order_statuses (list[SubmitRedemptionInformationResponseDataOrderStatus] | Unset): Callback result.For partial
-            failure usage, if some of order line id in the request fail, it will be recorded with a none zero status_code.
-    """
+    """ 
+        Attributes:
+            order_statuses (list[SubmitRedemptionInformationResponseDataOrderStatus] | Unset): Callback result.For partial
+                failure usage, if some of order line id in the request fail, it will be recorded with a none zero status_code.
+     """
 
     order_statuses: list[SubmitRedemptionInformationResponseDataOrderStatus] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.submit_redemption_information_response_data_order_status import SubmitRedemptionInformationResponseDataOrderStatus # noqa: PLC0415
         order_statuses: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.order_statuses, Unset):
             order_statuses = []
@@ -36,35 +46,40 @@ class SubmitRedemptionInformationResponseData:
                 order_statuses_item = order_statuses_item_data.to_dict()
                 order_statuses.append(order_statuses_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_statuses is not UNSET:
             field_dict["order_statuses"] = order_statuses
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.submit_redemption_information_response_data_order_status import (
-            SubmitRedemptionInformationResponseDataOrderStatus,  # noqa: PLC0415
-        )
-
+        from ..models.submit_redemption_information_response_data_order_status import SubmitRedemptionInformationResponseDataOrderStatus # noqa: PLC0415
         d = dict(src_dict)
         _order_statuses = d.pop("order_statuses", UNSET)
         order_statuses: list[SubmitRedemptionInformationResponseDataOrderStatus] | Unset = UNSET
         if _order_statuses is not UNSET:
             order_statuses = []
             for order_statuses_item_data in _order_statuses:
-                order_statuses_item = SubmitRedemptionInformationResponseDataOrderStatus.from_dict(
-                    order_statuses_item_data
-                )
+                order_statuses_item = SubmitRedemptionInformationResponseDataOrderStatus.from_dict(order_statuses_item_data)
+
+
 
                 order_statuses.append(order_statuses_item)
+
 
         submit_redemption_information_response_data = cls(
             order_statuses=order_statuses,
         )
+
 
         submit_redemption_information_response_data.additional_properties = d
         return submit_redemption_information_response_data

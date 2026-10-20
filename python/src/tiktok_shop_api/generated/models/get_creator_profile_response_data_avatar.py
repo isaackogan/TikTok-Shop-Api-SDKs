@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCreatorProfileResponseDataAvatar")
+
 
 
 @_attrs_define
 class GetCreatorProfileResponseDataAvatar:
-    """
-    Attributes:
-        width (int | Unset): The avatar image width in pixels.
-        height (int | Unset): The avatar image height in pixels.
-        url (str | Unset): The URL for the TikTok creator's avatar image file.
-    """
+    """ 
+        Attributes:
+            width (int | Unset): The avatar image width in pixels.
+            height (int | Unset): The avatar image height in pixels.
+            url (str | Unset): The URL for the TikTok creator's avatar image file.
+     """
 
     width: int | Unset = UNSET
     height: int | Unset = UNSET
     url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         width = self.width
@@ -32,9 +44,11 @@ class GetCreatorProfileResponseDataAvatar:
 
         url = self.url
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if width is not UNSET:
             field_dict["width"] = width
         if height is not UNSET:
@@ -43,6 +57,8 @@ class GetCreatorProfileResponseDataAvatar:
             field_dict["url"] = url
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class GetCreatorProfileResponseDataAvatar:
             height=height,
             url=url,
         )
+
 
         get_creator_profile_response_data_avatar.additional_properties = d
         return get_creator_profile_response_data_avatar

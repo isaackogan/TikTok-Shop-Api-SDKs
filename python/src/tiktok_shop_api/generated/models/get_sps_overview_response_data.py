@@ -1,41 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit
-    from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension
-    from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory
-    from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue
+  from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit
+  from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension
+  from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory
+  from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue
+
+
+
 
 
 T = TypeVar("T", bound="GetSPSOverviewResponseData")
 
 
+
 @_attrs_define
 class GetSPSOverviewResponseData:
-    """
-    Attributes:
-        benefits (list[GetSPSOverviewResponseDataBenefit] | Unset): Fixed complete set of benefits associated with the
-            shop SPS score.
-        dimensions (list[GetSPSOverviewResponseDataDimension] | Unset): Score details by SPS dimension.
-        evaluate_duration_days (int | Unset): The number of days included in the score evaluation period.
-        end_evaluation_time (int | Unset): The evaluation period end time. Unix timestamp in seconds.
-        start_evaluation_time (int | Unset): The evaluation period start time. Unix timestamp in seconds.
-        peer_percentile (str | Unset): The shop's percentile among peers, from 0 to 100.
-        primary_category (GetSPSOverviewResponseDataPrimaryCategory | Unset):
-        sps_score (str | Unset): The shop SPS score, from 0 to 5 with one decimal place.
-        sps_tier (str | Unset): The SPS tier. Possible values include EXCELLENT, GOOD, POOR, CRITICAL and NIL.
-        sps_tier_text (str | Unset): The SPS tier. Values like Excellent, Good, Normal, Attention.
-        top_issues (GetSPSOverviewResponseDataTopIssue | Unset):
-        update_time (int | Unset): The latest score refresh time. Unix timestamp in seconds.
-    """
+    """ 
+        Attributes:
+            benefits (list[GetSPSOverviewResponseDataBenefit] | Unset): Fixed complete set of benefits associated with the
+                shop SPS score.
+            dimensions (list[GetSPSOverviewResponseDataDimension] | Unset): Score details by SPS dimension.
+            evaluate_duration_days (int | Unset): The number of days included in the score evaluation period.
+            end_evaluation_time (int | Unset): The evaluation period end time. Unix timestamp in seconds.
+            start_evaluation_time (int | Unset): The evaluation period start time. Unix timestamp in seconds.
+            peer_percentile (str | Unset): The shop's percentile among peers, from 0 to 100.
+            primary_category (GetSPSOverviewResponseDataPrimaryCategory | Unset):
+            sps_score (str | Unset): The shop SPS score, from 0 to 5 with one decimal place.
+            sps_tier (str | Unset): The SPS tier. Possible values include EXCELLENT, GOOD, POOR, CRITICAL and NIL.
+            sps_tier_text (str | Unset): The SPS tier. Values like Excellent, Good, Normal, Attention.
+            top_issues (GetSPSOverviewResponseDataTopIssue | Unset):
+            update_time (int | Unset): The latest score refresh time. Unix timestamp in seconds.
+     """
 
     benefits: list[GetSPSOverviewResponseDataBenefit] | Unset = UNSET
     dimensions: list[GetSPSOverviewResponseDataDimension] | Unset = UNSET
@@ -51,7 +58,15 @@ class GetSPSOverviewResponseData:
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue # noqa: PLC0415
         benefits: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.benefits, Unset):
             benefits = []
@@ -59,12 +74,16 @@ class GetSPSOverviewResponseData:
                 benefits_item = benefits_item_data.to_dict()
                 benefits.append(benefits_item)
 
+
+
         dimensions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.dimensions, Unset):
             dimensions = []
             for dimensions_item_data in self.dimensions:
                 dimensions_item = dimensions_item_data.to_dict()
                 dimensions.append(dimensions_item)
+
+
 
         evaluate_duration_days = self.evaluate_duration_days
 
@@ -90,9 +109,11 @@ class GetSPSOverviewResponseData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if benefits is not UNSET:
             field_dict["benefits"] = benefits
         if dimensions is not UNSET:
@@ -120,19 +141,14 @@ class GetSPSOverviewResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit  # noqa: PLC0415
-        from ..models.get_sps_overview_response_data_dimension import (
-            GetSPSOverviewResponseDataDimension,  # noqa: PLC0415
-        )
-        from ..models.get_sps_overview_response_data_primary_category import (
-            GetSPSOverviewResponseDataPrimaryCategory,  # noqa: PLC0415
-        )
-        from ..models.get_sps_overview_response_data_top_issue import (
-            GetSPSOverviewResponseDataTopIssue,  # noqa: PLC0415
-        )
-
+        from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory # noqa: PLC0415
+        from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue # noqa: PLC0415
         d = dict(src_dict)
         _benefits = d.pop("benefits", UNSET)
         benefits: list[GetSPSOverviewResponseDataBenefit] | Unset = UNSET
@@ -141,7 +157,10 @@ class GetSPSOverviewResponseData:
             for benefits_item_data in _benefits:
                 benefits_item = GetSPSOverviewResponseDataBenefit.from_dict(benefits_item_data)
 
+
+
                 benefits.append(benefits_item)
+
 
         _dimensions = d.pop("dimensions", UNSET)
         dimensions: list[GetSPSOverviewResponseDataDimension] | Unset = UNSET
@@ -150,7 +169,10 @@ class GetSPSOverviewResponseData:
             for dimensions_item_data in _dimensions:
                 dimensions_item = GetSPSOverviewResponseDataDimension.from_dict(dimensions_item_data)
 
+
+
                 dimensions.append(dimensions_item)
+
 
         evaluate_duration_days = d.pop("evaluate_duration_days", UNSET)
 
@@ -162,10 +184,13 @@ class GetSPSOverviewResponseData:
 
         _primary_category = d.pop("primary_category", UNSET)
         primary_category: GetSPSOverviewResponseDataPrimaryCategory | Unset
-        if isinstance(_primary_category, Unset):
+        if isinstance(_primary_category,  Unset):
             primary_category = UNSET
         else:
             primary_category = GetSPSOverviewResponseDataPrimaryCategory.from_dict(_primary_category)
+
+
+
 
         sps_score = d.pop("sps_score", UNSET)
 
@@ -175,10 +200,13 @@ class GetSPSOverviewResponseData:
 
         _top_issues = d.pop("top_issues", UNSET)
         top_issues: GetSPSOverviewResponseDataTopIssue | Unset
-        if isinstance(_top_issues, Unset):
+        if isinstance(_top_issues,  Unset):
             top_issues = UNSET
         else:
             top_issues = GetSPSOverviewResponseDataTopIssue.from_dict(_top_issues)
+
+
+
 
         update_time = d.pop("update_time", UNSET)
 
@@ -196,6 +224,7 @@ class GetSPSOverviewResponseData:
             top_issues=top_issues,
             update_time=update_time,
         )
+
 
         get_sps_overview_response_data.additional_properties = d
         return get_sps_overview_response_data

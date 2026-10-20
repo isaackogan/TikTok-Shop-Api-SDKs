@@ -1,33 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEMinutePerformanceResponseDataPerformanceOverall")
 
 
+
 @_attrs_define
 class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
-    """
-    Attributes:
-        live_title (str | Unset): LIVE session title
-        start_time (int | Unset): Start time of the LIVE session as a Unix timestamp in seconds (UTC).
-        end_time (int | Unset): End time of the LIVE session as a Unix timestamp in seconds (UTC).
-        duration (int | Unset): LIVE session duration in seconds
-        gmv (Gmv | Unset):
-        items_sold (int | Unset): The number of items sold directly from the LIVE.
-        unique_viewers (int | Unset): The number of unique viewers in the LIVE room.
-        impressions (int | Unset): The total number of times the LIVE was displayed to viewers.
-    """
+    """ 
+        Attributes:
+            live_title (str | Unset): LIVE session title
+            start_time (int | Unset): Start time of the LIVE session as a Unix timestamp in seconds (UTC).
+            end_time (int | Unset): End time of the LIVE session as a Unix timestamp in seconds (UTC).
+            duration (int | Unset): LIVE session duration in seconds
+            gmv (Gmv | Unset):
+            items_sold (int | Unset): The number of items sold directly from the LIVE.
+            unique_viewers (int | Unset): The number of unique viewers in the LIVE room.
+            impressions (int | Unset): The total number of times the LIVE was displayed to viewers.
+     """
 
     live_title: str | Unset = UNSET
     start_time: int | Unset = UNSET
@@ -39,7 +46,12 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
     impressions: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
         live_title = self.live_title
 
         start_time = self.start_time
@@ -58,9 +70,11 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
 
         impressions = self.impressions
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if live_title is not UNSET:
             field_dict["live_title"] = live_title
         if start_time is not UNSET:
@@ -80,10 +94,11 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         live_title = d.pop("live_title", UNSET)
 
@@ -95,10 +110,13 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
@@ -116,6 +134,7 @@ class GetShopLIVEMinutePerformanceResponseDataPerformanceOverall:
             unique_viewers=unique_viewers,
             impressions=impressions,
         )
+
 
         get_shop_live_minute_performance_response_data_performance_overall.additional_properties = d
         return get_shop_live_minute_performance_response_data_performance_overall

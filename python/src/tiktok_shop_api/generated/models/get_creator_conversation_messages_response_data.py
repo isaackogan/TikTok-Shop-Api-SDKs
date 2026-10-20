@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_creator_conversation_messages_response_data_message import (
-        GetCreatorConversationMessagesResponseDataMessage,
-    )
+  from ..models.get_creator_conversation_messages_response_data_message import GetCreatorConversationMessagesResponseDataMessage
+
+
+
 
 
 T = TypeVar("T", bound="GetCreatorConversationMessagesResponseData")
 
 
+
 @_attrs_define
 class GetCreatorConversationMessagesResponseData:
-    """
-    Attributes:
-        has_more (bool | Unset): Whether there are any more messages.
-        next_page_token (str | Unset): When `has_more` is `true`, pass this cursor as `page_token` in the next request.
-            It is empty when `has_more` is `false`.
-        messages (list[GetCreatorConversationMessagesResponseDataMessage] | Unset):
-    """
+    """ 
+        Attributes:
+            has_more (bool | Unset): Whether there are any more messages.
+            next_page_token (str | Unset): When `has_more` is `true`, pass this cursor as `page_token` in the next request.
+                It is empty when `has_more` is `false`.
+            messages (list[GetCreatorConversationMessagesResponseDataMessage] | Unset):
+     """
 
     has_more: bool | Unset = UNSET
     next_page_token: str | Unset = UNSET
     messages: list[GetCreatorConversationMessagesResponseDataMessage] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_creator_conversation_messages_response_data_message import GetCreatorConversationMessagesResponseDataMessage # noqa: PLC0415
         has_more = self.has_more
 
         next_page_token = self.next_page_token
@@ -44,9 +54,13 @@ class GetCreatorConversationMessagesResponseData:
                 messages_item = messages_item_data.to_dict()
                 messages.append(messages_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if has_more is not UNSET:
             field_dict["has_more"] = has_more
         if next_page_token is not UNSET:
@@ -56,12 +70,11 @@ class GetCreatorConversationMessagesResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_creator_conversation_messages_response_data_message import (
-            GetCreatorConversationMessagesResponseDataMessage,  # noqa: PLC0415
-        )
-
+        from ..models.get_creator_conversation_messages_response_data_message import GetCreatorConversationMessagesResponseDataMessage # noqa: PLC0415
         d = dict(src_dict)
         has_more = d.pop("has_more", UNSET)
 
@@ -74,13 +87,17 @@ class GetCreatorConversationMessagesResponseData:
             for messages_item_data in _messages:
                 messages_item = GetCreatorConversationMessagesResponseDataMessage.from_dict(messages_item_data)
 
+
+
                 messages.append(messages_item)
+
 
         get_creator_conversation_messages_response_data = cls(
             has_more=has_more,
             next_page_token=next_page_token,
             messages=messages,
         )
+
 
         get_creator_conversation_messages_response_data.additional_properties = d
         return get_creator_conversation_messages_response_data

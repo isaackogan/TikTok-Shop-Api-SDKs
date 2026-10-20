@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_fbt_inventory_record_request import SearchFBTInventoryRecordRequest
 from ...models.search_fbt_inventory_record_response import SearchFBTInventoryRecordResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,8 +20,12 @@ def _get_kwargs(
     body: SearchFBTInventoryRecordRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -24,7 +33,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -32,6 +43,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -41,11 +53,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchFBTInventoryRecordResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchFBTInventoryRecordResponse | None:
     if response.status_code == 200:
         response_200 = SearchFBTInventoryRecordResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -55,9 +68,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchFBTInventoryRecordResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchFBTInventoryRecordResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -72,8 +83,9 @@ def sync_detailed(
     body: SearchFBTInventoryRecordRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchFBTInventoryRecordResponse]:
-    """Search FBT Inventory Record
+    """ Search FBT Inventory Record
 
      This API is used to retrieve detailed inventory change records for goods at the warehouse level.
 
@@ -88,12 +100,14 @@ def sync_detailed(
 
     Returns:
         Response[SearchFBTInventoryRecordResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -102,15 +116,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchFBTInventoryRecordRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> SearchFBTInventoryRecordResponse | None:
-    """Search FBT Inventory Record
+    """ Search FBT Inventory Record
 
      This API is used to retrieve detailed inventory change records for goods at the warehouse level.
 
@@ -125,15 +139,16 @@ def sync(
 
     Returns:
         SearchFBTInventoryRecordResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+body=body,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -141,8 +156,9 @@ async def asyncio_detailed(
     body: SearchFBTInventoryRecordRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchFBTInventoryRecordResponse]:
-    """Search FBT Inventory Record
+    """ Search FBT Inventory Record
 
      This API is used to retrieve detailed inventory change records for goods at the warehouse level.
 
@@ -157,18 +173,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchFBTInventoryRecordResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_size=page_size,
-        page_token=page_token,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -176,8 +195,9 @@ async def asyncio(
     body: SearchFBTInventoryRecordRequest | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> SearchFBTInventoryRecordResponse | None:
-    """Search FBT Inventory Record
+    """ Search FBT Inventory Record
 
      This API is used to retrieve detailed inventory change records for goods at the warehouse level.
 
@@ -192,13 +212,13 @@ async def asyncio(
 
     Returns:
         SearchFBTInventoryRecordResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

@@ -1,28 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem")
+
 
 
 @_attrs_define
 class GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem:
-    """
-    Attributes:
-        deliver_time (int | Unset): Delivery time. Unix timestamp in seconds.
-        order_create_time (int | Unset): Order creation time. Unix timestamp in seconds.
-        order_id (str | Unset): Order ID.
-        product_id (str | Unset): Product ID, when available.
-        product_name (str | Unset): Product name.
-        sku_id (str | Unset): SKU ID.
-        user_review_rating (int | Unset): User review rating from 1 to 5.
-    """
+    """ 
+        Attributes:
+            deliver_time (int | Unset): Delivery time. Unix timestamp in seconds.
+            order_create_time (int | Unset): Order creation time. Unix timestamp in seconds.
+            order_id (str | Unset): Order ID.
+            product_id (str | Unset): Product ID, when available.
+            product_name (str | Unset): Product name.
+            sku_id (str | Unset): SKU ID.
+            user_review_rating (int | Unset): User review rating from 1 to 5.
+     """
 
     deliver_time: int | Unset = UNSET
     order_create_time: int | Unset = UNSET
@@ -32,6 +40,10 @@ class GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem:
     sku_id: str | Unset = UNSET
     user_review_rating: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         deliver_time = self.deliver_time
@@ -48,9 +60,11 @@ class GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem:
 
         user_review_rating = self.user_review_rating
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if deliver_time is not UNSET:
             field_dict["deliver_time"] = deliver_time
         if order_create_time is not UNSET:
@@ -67,6 +81,8 @@ class GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem:
             field_dict["user_review_rating"] = user_review_rating
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,6 +110,7 @@ class GetSPSMetricProblemDetailsResponseDataNrrProblemOrderItem:
             sku_id=sku_id,
             user_review_rating=user_review_rating,
         )
+
 
         get_sps_metric_problem_details_response_data_nrr_problem_order_item.additional_properties = d
         return get_sps_metric_problem_details_response_data_nrr_problem_order_item

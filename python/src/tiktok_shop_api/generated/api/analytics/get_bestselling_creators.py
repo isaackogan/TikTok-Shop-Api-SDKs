@@ -1,16 +1,21 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_bestselling_creators_author_type import GetBestsellingCreatorsAuthorType
 from ...models.get_bestselling_creators_currency import GetBestsellingCreatorsCurrency
 from ...models.get_bestselling_creators_response import GetBestsellingCreatorsResponse
 from ...models.get_bestselling_creators_time_slot import GetBestsellingCreatorsTimeSlot
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -19,7 +24,12 @@ def _get_kwargs(
     time_slot: GetBestsellingCreatorsTimeSlot,
     author_type: GetBestsellingCreatorsAuthorType,
     currency: GetBestsellingCreatorsCurrency | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_date = date.isoformat()
@@ -37,7 +47,9 @@ def _get_kwargs(
 
     params["currency"] = json_currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -45,14 +57,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetBestsellingCreatorsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetBestsellingCreatorsResponse | None:
     if response.status_code == 200:
         response_200 = GetBestsellingCreatorsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -62,9 +76,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetBestsellingCreatorsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetBestsellingCreatorsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -80,8 +92,9 @@ def sync_detailed(
     time_slot: GetBestsellingCreatorsTimeSlot,
     author_type: GetBestsellingCreatorsAuthorType,
     currency: GetBestsellingCreatorsCurrency | Unset = UNSET,
+
 ) -> Response[GetBestsellingCreatorsResponse]:
-    """Get Bestselling Creators
+    """ Get Bestselling Creators
 
      Returns up to 100 creators, filtered by `author_type`, ranked by GMV in the selected `currency` for
     the reporting period ending on `date` and defined by `time_slot`.
@@ -98,13 +111,15 @@ def sync_detailed(
 
     Returns:
         Response[GetBestsellingCreatorsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        author_type=author_type,
-        currency=currency,
+time_slot=time_slot,
+author_type=author_type,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -113,7 +128,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
@@ -121,8 +135,9 @@ def sync(
     time_slot: GetBestsellingCreatorsTimeSlot,
     author_type: GetBestsellingCreatorsAuthorType,
     currency: GetBestsellingCreatorsCurrency | Unset = UNSET,
+
 ) -> GetBestsellingCreatorsResponse | None:
-    """Get Bestselling Creators
+    """ Get Bestselling Creators
 
      Returns up to 100 creators, filtered by `author_type`, ranked by GMV in the selected `currency` for
     the reporting period ending on `date` and defined by `time_slot`.
@@ -139,16 +154,17 @@ def sync(
 
     Returns:
         GetBestsellingCreatorsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        date=date,
-        time_slot=time_slot,
-        author_type=author_type,
-        currency=currency,
-    ).parsed
+date=date,
+time_slot=time_slot,
+author_type=author_type,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -157,8 +173,9 @@ async def asyncio_detailed(
     time_slot: GetBestsellingCreatorsTimeSlot,
     author_type: GetBestsellingCreatorsAuthorType,
     currency: GetBestsellingCreatorsCurrency | Unset = UNSET,
+
 ) -> Response[GetBestsellingCreatorsResponse]:
-    """Get Bestselling Creators
+    """ Get Bestselling Creators
 
      Returns up to 100 creators, filtered by `author_type`, ranked by GMV in the selected `currency` for
     the reporting period ending on `date` and defined by `time_slot`.
@@ -175,19 +192,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetBestsellingCreatorsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        author_type=author_type,
-        currency=currency,
+time_slot=time_slot,
+author_type=author_type,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -196,8 +216,9 @@ async def asyncio(
     time_slot: GetBestsellingCreatorsTimeSlot,
     author_type: GetBestsellingCreatorsAuthorType,
     currency: GetBestsellingCreatorsCurrency | Unset = UNSET,
+
 ) -> GetBestsellingCreatorsResponse | None:
-    """Get Bestselling Creators
+    """ Get Bestselling Creators
 
      Returns up to 100 creators, filtered by `author_type`, ranked by GMV in the selected `currency` for
     the reporting period ending on `date` and defined by `time_slot`.
@@ -214,14 +235,14 @@ async def asyncio(
 
     Returns:
         GetBestsellingCreatorsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            date=date,
-            time_slot=time_slot,
-            author_type=author_type,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+date=date,
+time_slot=time_slot,
+author_type=author_type,
+currency=currency,
+
+    )).parsed

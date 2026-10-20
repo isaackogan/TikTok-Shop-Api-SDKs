@@ -1,32 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSubmissionRecordsResponseDataDataSubmission")
+
 
 
 @_attrs_define
 class GetSubmissionRecordsResponseDataDataSubmission:
-    """
-    Attributes:
-        id (str | Unset): Unique ID of this submission.
-        opportunity_id (str | Unset): The opportunity ID this submission is linked to.
-        opportunity_title (str | Unset): Opportunity title for reference.
-        status (str | Unset): Current status: PENDING_REVIEW / APPROVED / REJECTED
-        product_id (str | Unset): The submitted product ID.
-        product_name (str | Unset): Product name for reference.
-        submit_time (int | Unset): The time when the product was submitted, expressed as a Unix timestamp in seconds.
-        review_time (int | Unset): Review completion timestamp
-        rejection_reason (None | str | Unset): Rejection reason if status is REJECTED. Null otherwise.
-        product_orders (int | Unset): The total number of units sold for the product in the last 30 days.
-        product_pv (int | Unset): The product page view count for the last 30 days.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unique ID of this submission.
+            opportunity_id (str | Unset): The opportunity ID this submission is linked to.
+            opportunity_title (str | Unset): Opportunity title for reference.
+            status (str | Unset): Current status: PENDING_REVIEW / APPROVED / REJECTED
+            product_id (str | Unset): The submitted product ID.
+            product_name (str | Unset): Product name for reference.
+            submit_time (int | Unset): The time when the product was submitted, expressed as a Unix timestamp in seconds.
+            review_time (int | Unset): Review completion timestamp
+            rejection_reason (None | str | Unset): Rejection reason if status is REJECTED. Null otherwise.
+            product_orders (int | Unset): The total number of units sold for the product in the last 30 days.
+            product_pv (int | Unset): The product page view count for the last 30 days.
+     """
 
     id: str | Unset = UNSET
     opportunity_id: str | Unset = UNSET
@@ -40,6 +49,10 @@ class GetSubmissionRecordsResponseDataDataSubmission:
     product_orders: int | Unset = UNSET
     product_pv: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -68,9 +81,11 @@ class GetSubmissionRecordsResponseDataDataSubmission:
 
         product_pv = self.product_pv
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if opportunity_id is not UNSET:
@@ -95,6 +110,8 @@ class GetSubmissionRecordsResponseDataDataSubmission:
             field_dict["product_pv"] = product_pv
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -124,6 +141,7 @@ class GetSubmissionRecordsResponseDataDataSubmission:
 
         rejection_reason = _parse_rejection_reason(d.pop("rejection_reason", UNSET))
 
+
         product_orders = d.pop("product_orders", UNSET)
 
         product_pv = d.pop("product_pv", UNSET)
@@ -141,6 +159,7 @@ class GetSubmissionRecordsResponseDataDataSubmission:
             product_orders=product_orders,
             product_pv=product_pv,
         )
+
 
         get_submission_records_response_data_data_submission.additional_properties = d
         return get_submission_records_response_data_data_submission

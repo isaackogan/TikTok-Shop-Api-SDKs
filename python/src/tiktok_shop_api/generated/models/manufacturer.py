@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Manufacturer")
+
 
 
 @_attrs_define
 class Manufacturer:
-    """
-    Attributes:
-        name (str | Unset): The name of the manufacturer.
-        address (str | Unset): The address of the manufacturer.
-        phone_number (str | Unset): The phone number of the manufacturer, prefixed by a plus `+` symbol.
-            There must be a space or hyphen between the country code and the local phone number.
-        email (str | Unset): The email address of the manufacturer.
-    """
+    """ 
+        Attributes:
+            name (str | Unset): The name of the manufacturer.
+            address (str | Unset): The address of the manufacturer.
+            phone_number (str | Unset): The phone number of the manufacturer, prefixed by a plus `+` symbol.
+                There must be a space or hyphen between the country code and the local phone number.
+            email (str | Unset): The email address of the manufacturer.
+     """
 
     name: str | Unset = UNSET
     address: str | Unset = UNSET
     phone_number: str | Unset = UNSET
     email: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         name = self.name
@@ -37,9 +49,11 @@ class Manufacturer:
 
         email = self.email
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if name is not UNSET:
             field_dict["name"] = name
         if address is not UNSET:
@@ -50,6 +64,8 @@ class Manufacturer:
             field_dict["email"] = email
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -68,6 +84,7 @@ class Manufacturer:
             phone_number=phone_number,
             email=email,
         )
+
 
         manufacturer.additional_properties = d
         return manufacturer

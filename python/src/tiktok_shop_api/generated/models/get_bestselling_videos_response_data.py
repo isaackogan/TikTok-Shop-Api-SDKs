@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_bestselling_videos_response_data_video import GetBestsellingVideosResponseDataVideo
+  from ..models.get_bestselling_videos_response_data_video import GetBestsellingVideosResponseDataVideo
+
+
+
 
 
 T = TypeVar("T", bound="GetBestsellingVideosResponseData")
 
 
+
 @_attrs_define
 class GetBestsellingVideosResponseData:
-    """
-    Attributes:
-        videos (list[GetBestsellingVideosResponseDataVideo] | Unset): List of bestselling video records for the target
-            date range.
-    """
+    """ 
+        Attributes:
+            videos (list[GetBestsellingVideosResponseDataVideo] | Unset): List of bestselling video records for the target
+                date range.
+     """
 
     videos: list[GetBestsellingVideosResponseDataVideo] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_bestselling_videos_response_data_video import GetBestsellingVideosResponseDataVideo # noqa: PLC0415
         videos: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.videos, Unset):
             videos = []
@@ -34,20 +46,23 @@ class GetBestsellingVideosResponseData:
                 videos_item = videos_item_data.to_dict()
                 videos.append(videos_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if videos is not UNSET:
             field_dict["videos"] = videos
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_bestselling_videos_response_data_video import (
-            GetBestsellingVideosResponseDataVideo,  # noqa: PLC0415
-        )
-
+        from ..models.get_bestselling_videos_response_data_video import GetBestsellingVideosResponseDataVideo # noqa: PLC0415
         d = dict(src_dict)
         _videos = d.pop("videos", UNSET)
         videos: list[GetBestsellingVideosResponseDataVideo] | Unset = UNSET
@@ -56,11 +71,15 @@ class GetBestsellingVideosResponseData:
             for videos_item_data in _videos:
                 videos_item = GetBestsellingVideosResponseDataVideo.from_dict(videos_item_data)
 
+
+
                 videos.append(videos_item)
+
 
         get_bestselling_videos_response_data = cls(
             videos=videos,
         )
+
 
         get_bestselling_videos_response_data.additional_properties = d
         return get_bestselling_videos_response_data

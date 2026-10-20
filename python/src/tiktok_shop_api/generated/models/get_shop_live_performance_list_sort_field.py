@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopLivePerformanceListSortField(StrEnum):
     ATTRIBUTED_CUSTOMERS = "attributed_customers"
     LIVE_ATTRIBUTED_GMV = "live_attributed_gmv"

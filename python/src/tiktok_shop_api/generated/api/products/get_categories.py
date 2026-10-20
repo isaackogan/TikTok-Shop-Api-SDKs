@@ -1,14 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_categories_listing_platform import GetCategoriesListingPlatform
 from ...models.get_categories_locale import GetCategoriesLocale
 from ...models.get_categories_response import GetCategoriesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,7 +24,12 @@ def _get_kwargs(
     listing_platform: GetCategoriesListingPlatform | Unset = UNSET,
     include_prohibited_categories: bool | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_locale: str | Unset = UNSET
@@ -42,7 +52,9 @@ def _get_kwargs(
 
     params["is_live_quick"] = is_live_quick
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -50,12 +62,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCategoriesResponse | None:
     if response.status_code == 200:
         response_200 = GetCategoriesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -65,9 +81,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetCategoriesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetCategoriesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -85,8 +99,9 @@ def sync_detailed(
     listing_platform: GetCategoriesListingPlatform | Unset = UNSET,
     include_prohibited_categories: bool | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> Response[GetCategoriesResponse]:
-    """Get Categories
+    """ Get Categories
 
      Retrieve the list of product categories available for your shop.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -111,15 +126,17 @@ def sync_detailed(
 
     Returns:
         Response[GetCategoriesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
-        keyword=keyword,
-        category_version=category_version,
-        listing_platform=listing_platform,
-        include_prohibited_categories=include_prohibited_categories,
-        is_live_quick=is_live_quick,
+keyword=keyword,
+category_version=category_version,
+listing_platform=listing_platform,
+include_prohibited_categories=include_prohibited_categories,
+is_live_quick=is_live_quick,
+
     )
 
     response = client.get_httpx_client().request(
@@ -127,7 +144,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -138,8 +154,9 @@ def sync(
     listing_platform: GetCategoriesListingPlatform | Unset = UNSET,
     include_prohibited_categories: bool | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> GetCategoriesResponse | None:
-    """Get Categories
+    """ Get Categories
 
      Retrieve the list of product categories available for your shop.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -164,18 +181,19 @@ def sync(
 
     Returns:
         GetCategoriesResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        locale=locale,
-        keyword=keyword,
-        category_version=category_version,
-        listing_platform=listing_platform,
-        include_prohibited_categories=include_prohibited_categories,
-        is_live_quick=is_live_quick,
-    ).parsed
+locale=locale,
+keyword=keyword,
+category_version=category_version,
+listing_platform=listing_platform,
+include_prohibited_categories=include_prohibited_categories,
+is_live_quick=is_live_quick,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -186,8 +204,9 @@ async def asyncio_detailed(
     listing_platform: GetCategoriesListingPlatform | Unset = UNSET,
     include_prohibited_categories: bool | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> Response[GetCategoriesResponse]:
-    """Get Categories
+    """ Get Categories
 
      Retrieve the list of product categories available for your shop.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -212,21 +231,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCategoriesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         locale=locale,
-        keyword=keyword,
-        category_version=category_version,
-        listing_platform=listing_platform,
-        include_prohibited_categories=include_prohibited_categories,
-        is_live_quick=is_live_quick,
+keyword=keyword,
+category_version=category_version,
+listing_platform=listing_platform,
+include_prohibited_categories=include_prohibited_categories,
+is_live_quick=is_live_quick,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -237,8 +259,9 @@ async def asyncio(
     listing_platform: GetCategoriesListingPlatform | Unset = UNSET,
     include_prohibited_categories: bool | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> GetCategoriesResponse | None:
-    """Get Categories
+    """ Get Categories
 
      Retrieve the list of product categories available for your shop.
     Product categories are updated frequently, so it's recommended to call the API in real time to
@@ -263,16 +286,16 @@ async def asyncio(
 
     Returns:
         GetCategoriesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            locale=locale,
-            keyword=keyword,
-            category_version=category_version,
-            listing_platform=listing_platform,
-            include_prohibited_categories=include_prohibited_categories,
-            is_live_quick=is_live_quick,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+locale=locale,
+keyword=keyword,
+category_version=category_version,
+listing_platform=listing_platform,
+include_prohibited_categories=include_prohibited_categories,
+is_live_quick=is_live_quick,
+
+    )).parsed

@@ -1,46 +1,62 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator")
+
 
 
 @_attrs_define
 class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator:
-    """
-    Attributes:
-        type_ (str | Unset): The gender category represented by this indicator.
-            Possible values:
-            - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender.
-            - USER_PORTRAIT_GENDER_M: Male.
-            - USER_PORTRAIT_GENDER_F: Female.
-        value (str | Unset): The count for the corresponding paid-advertising gender indicator.
-    """
+    """ 
+        Attributes:
+            type_ (str | Unset): The gender category represented by this indicator.
+                Possible values:
+                - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender.
+                - USER_PORTRAIT_GENDER_M: Male.
+                - USER_PORTRAIT_GENDER_F: Female.
+            value (str | Unset): The count for the corresponding paid-advertising gender indicator.
+     """
 
     type_: str | Unset = UNSET
     value: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         type_ = self.type_
 
         value = self.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if value is not UNSET:
             field_dict["value"] = value
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -53,6 +69,7 @@ class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator:
             type_=type_,
             value=value,
         )
+
 
         get_live_room_user_portraits_response_data_paid_ads_gender_indicator.additional_properties = d
         return get_live_room_user_portraits_response_data_paid_ads_gender_indicator

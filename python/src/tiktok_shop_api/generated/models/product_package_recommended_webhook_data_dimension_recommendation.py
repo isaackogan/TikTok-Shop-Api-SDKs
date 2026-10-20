@@ -1,37 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.product_package_recommended_webhook_data_dimension_recommendation_height import (
-        ProductPackageRecommendedWebhookDataDimensionRecommendationHeight,
-    )
-    from ..models.product_package_recommended_webhook_data_dimension_recommendation_length import (
-        ProductPackageRecommendedWebhookDataDimensionRecommendationLength,
-    )
-    from ..models.product_package_recommended_webhook_data_dimension_recommendation_width import (
-        ProductPackageRecommendedWebhookDataDimensionRecommendationWidth,
-    )
+  from ..models.product_package_recommended_webhook_data_dimension_recommendation_height import ProductPackageRecommendedWebhookDataDimensionRecommendationHeight
+  from ..models.product_package_recommended_webhook_data_dimension_recommendation_length import ProductPackageRecommendedWebhookDataDimensionRecommendationLength
+  from ..models.product_package_recommended_webhook_data_dimension_recommendation_width import ProductPackageRecommendedWebhookDataDimensionRecommendationWidth
+
+
+
 
 
 T = TypeVar("T", bound="ProductPackageRecommendedWebhookDataDimensionRecommendation")
 
 
+
 @_attrs_define
 class ProductPackageRecommendedWebhookDataDimensionRecommendation:
-    """
-    Attributes:
-        unit (str | Unset): Recommended value unit
-        length (ProductPackageRecommendedWebhookDataDimensionRecommendationLength | Unset):
-        width (ProductPackageRecommendedWebhookDataDimensionRecommendationWidth | Unset):
-        height (ProductPackageRecommendedWebhookDataDimensionRecommendationHeight | Unset):
-    """
+    """ 
+        Attributes:
+            unit (str | Unset): Recommended value unit
+            length (ProductPackageRecommendedWebhookDataDimensionRecommendationLength | Unset):
+            width (ProductPackageRecommendedWebhookDataDimensionRecommendationWidth | Unset):
+            height (ProductPackageRecommendedWebhookDataDimensionRecommendationHeight | Unset):
+     """
 
     unit: str | Unset = UNSET
     length: ProductPackageRecommendedWebhookDataDimensionRecommendationLength | Unset = UNSET
@@ -39,7 +40,14 @@ class ProductPackageRecommendedWebhookDataDimensionRecommendation:
     height: ProductPackageRecommendedWebhookDataDimensionRecommendationHeight | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_height import ProductPackageRecommendedWebhookDataDimensionRecommendationHeight # noqa: PLC0415
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_length import ProductPackageRecommendedWebhookDataDimensionRecommendationLength # noqa: PLC0415
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_width import ProductPackageRecommendedWebhookDataDimensionRecommendationWidth # noqa: PLC0415
         unit = self.unit
 
         length: dict[str, Any] | Unset = UNSET
@@ -54,9 +62,11 @@ class ProductPackageRecommendedWebhookDataDimensionRecommendation:
         if not isinstance(self.height, Unset):
             height = self.height.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if unit is not UNSET:
             field_dict["unit"] = unit
         if length is not UNSET:
@@ -68,41 +78,45 @@ class ProductPackageRecommendedWebhookDataDimensionRecommendation:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.product_package_recommended_webhook_data_dimension_recommendation_height import (
-            ProductPackageRecommendedWebhookDataDimensionRecommendationHeight,  # noqa: PLC0415
-        )
-        from ..models.product_package_recommended_webhook_data_dimension_recommendation_length import (
-            ProductPackageRecommendedWebhookDataDimensionRecommendationLength,  # noqa: PLC0415
-        )
-        from ..models.product_package_recommended_webhook_data_dimension_recommendation_width import (
-            ProductPackageRecommendedWebhookDataDimensionRecommendationWidth,  # noqa: PLC0415
-        )
-
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_height import ProductPackageRecommendedWebhookDataDimensionRecommendationHeight # noqa: PLC0415
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_length import ProductPackageRecommendedWebhookDataDimensionRecommendationLength # noqa: PLC0415
+        from ..models.product_package_recommended_webhook_data_dimension_recommendation_width import ProductPackageRecommendedWebhookDataDimensionRecommendationWidth # noqa: PLC0415
         d = dict(src_dict)
         unit = d.pop("unit", UNSET)
 
         _length = d.pop("length", UNSET)
         length: ProductPackageRecommendedWebhookDataDimensionRecommendationLength | Unset
-        if isinstance(_length, Unset):
+        if isinstance(_length,  Unset):
             length = UNSET
         else:
             length = ProductPackageRecommendedWebhookDataDimensionRecommendationLength.from_dict(_length)
 
+
+
+
         _width = d.pop("width", UNSET)
         width: ProductPackageRecommendedWebhookDataDimensionRecommendationWidth | Unset
-        if isinstance(_width, Unset):
+        if isinstance(_width,  Unset):
             width = UNSET
         else:
             width = ProductPackageRecommendedWebhookDataDimensionRecommendationWidth.from_dict(_width)
 
+
+
+
         _height = d.pop("height", UNSET)
         height: ProductPackageRecommendedWebhookDataDimensionRecommendationHeight | Unset
-        if isinstance(_height, Unset):
+        if isinstance(_height,  Unset):
             height = UNSET
         else:
             height = ProductPackageRecommendedWebhookDataDimensionRecommendationHeight.from_dict(_height)
+
+
+
 
         product_package_recommended_webhook_data_dimension_recommendation = cls(
             unit=unit,
@@ -110,6 +124,7 @@ class ProductPackageRecommendedWebhookDataDimensionRecommendation:
             width=width,
             height=height,
         )
+
 
         product_package_recommended_webhook_data_dimension_recommendation.additional_properties = d
         return product_package_recommended_webhook_data_dimension_recommendation

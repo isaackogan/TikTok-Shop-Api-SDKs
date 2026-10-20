@@ -1,44 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.category_chain import CategoryChain
-    from ..models.commission import Commission
-    from ..models.original_price import OriginalPrice
-    from ..models.sales_price import SalesPrice
-    from ..models.shop import Shop
+  from ..models.category_chain import CategoryChain
+  from ..models.commission import Commission
+  from ..models.original_price import OriginalPrice
+  from ..models.sales_price import SalesPrice
+  from ..models.shop import Shop
+
+
+
 
 
 T = TypeVar("T", bound="SearchOpenCollaborationProductsResponseDataProduct")
 
 
+
 @_attrs_define
 class SearchOpenCollaborationProductsResponseDataProduct:
-    """
-    Attributes:
-        shop (Shop | Unset):
-        id (str | Unset): The product identifier.
-        has_inventory (bool | Unset): Set to `true` if there are more than zero units of the product in inventory. Set
-            to `false` if there are zero units in inventory.
-        units_sold (int | Unset): Total number of units sold. Units are indexed to SKU. Note that if the creator has not
-            given permission for precise data sharing, this property will not be present.
-        title (str | Unset): The product name.
-        sale_region (str | Unset): The region where the product is offered for sale.
-        main_image_url (str | Unset): The product image URL.
-        detail_link (str | Unset): The URL for the product's detail page.
-        original_price (OriginalPrice | Unset):
-        category_chains (list[CategoryChain] | Unset): A list of categories associated with the product. Maximum length
-            of the list is `3` categories.
-        commission (Commission | Unset):
-        sales_price (SalesPrice | Unset):
-    """
+    """ 
+        Attributes:
+            shop (Shop | Unset):
+            id (str | Unset): The product identifier.
+            has_inventory (bool | Unset): Set to `true` if there are more than zero units of the product in inventory. Set
+                to `false` if there are zero units in inventory.
+            units_sold (int | Unset): Total number of units sold. Units are indexed to SKU. Note that if the creator has not
+                given permission for precise data sharing, this property will not be present.
+            title (str | Unset): The product name.
+            sale_region (str | Unset): The region where the product is offered for sale.
+            main_image_url (str | Unset): The product image URL.
+            detail_link (str | Unset): The URL for the product's detail page.
+            original_price (OriginalPrice | Unset):
+            category_chains (list[CategoryChain] | Unset): A list of categories associated with the product. Maximum length
+                of the list is `3` categories.
+            commission (Commission | Unset):
+            sales_price (SalesPrice | Unset):
+     """
 
     shop: Shop | Unset = UNSET
     id: str | Unset = UNSET
@@ -54,7 +61,16 @@ class SearchOpenCollaborationProductsResponseDataProduct:
     sales_price: SalesPrice | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.category_chain import CategoryChain # noqa: PLC0415
+        from ..models.commission import Commission # noqa: PLC0415
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
+        from ..models.sales_price import SalesPrice # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         shop: dict[str, Any] | Unset = UNSET
         if not isinstance(self.shop, Unset):
             shop = self.shop.to_dict()
@@ -84,6 +100,8 @@ class SearchOpenCollaborationProductsResponseDataProduct:
                 category_chains_item = category_chains_item_data.to_dict()
                 category_chains.append(category_chains_item)
 
+
+
         commission: dict[str, Any] | Unset = UNSET
         if not isinstance(self.commission, Unset):
             commission = self.commission.to_dict()
@@ -92,9 +110,11 @@ class SearchOpenCollaborationProductsResponseDataProduct:
         if not isinstance(self.sales_price, Unset):
             sales_price = self.sales_price.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shop is not UNSET:
             field_dict["shop"] = shop
         if id is not UNSET:
@@ -122,21 +142,25 @@ class SearchOpenCollaborationProductsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.category_chain import CategoryChain  # noqa: PLC0415
-        from ..models.commission import Commission  # noqa: PLC0415
-        from ..models.original_price import OriginalPrice  # noqa: PLC0415
-        from ..models.sales_price import SalesPrice  # noqa: PLC0415
-        from ..models.shop import Shop  # noqa: PLC0415
-
+        from ..models.category_chain import CategoryChain # noqa: PLC0415
+        from ..models.commission import Commission # noqa: PLC0415
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
+        from ..models.sales_price import SalesPrice # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         d = dict(src_dict)
         _shop = d.pop("shop", UNSET)
         shop: Shop | Unset
-        if isinstance(_shop, Unset):
+        if isinstance(_shop,  Unset):
             shop = UNSET
         else:
             shop = Shop.from_dict(_shop)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -154,10 +178,13 @@ class SearchOpenCollaborationProductsResponseDataProduct:
 
         _original_price = d.pop("original_price", UNSET)
         original_price: OriginalPrice | Unset
-        if isinstance(_original_price, Unset):
+        if isinstance(_original_price,  Unset):
             original_price = UNSET
         else:
             original_price = OriginalPrice.from_dict(_original_price)
+
+
+
 
         _category_chains = d.pop("category_chains", UNSET)
         category_chains: list[CategoryChain] | Unset = UNSET
@@ -166,21 +193,30 @@ class SearchOpenCollaborationProductsResponseDataProduct:
             for category_chains_item_data in _category_chains:
                 category_chains_item = CategoryChain.from_dict(category_chains_item_data)
 
+
+
                 category_chains.append(category_chains_item)
+
 
         _commission = d.pop("commission", UNSET)
         commission: Commission | Unset
-        if isinstance(_commission, Unset):
+        if isinstance(_commission,  Unset):
             commission = UNSET
         else:
             commission = Commission.from_dict(_commission)
 
+
+
+
         _sales_price = d.pop("sales_price", UNSET)
         sales_price: SalesPrice | Unset
-        if isinstance(_sales_price, Unset):
+        if isinstance(_sales_price,  Unset):
             sales_price = UNSET
         else:
             sales_price = SalesPrice.from_dict(_sales_price)
+
+
+
 
         search_open_collaboration_products_response_data_product = cls(
             shop=shop,
@@ -196,6 +232,7 @@ class SearchOpenCollaborationProductsResponseDataProduct:
             commission=commission,
             sales_price=sales_price,
         )
+
 
         search_open_collaboration_products_response_data_product.additional_properties = d
         return search_open_collaboration_products_response_data_product

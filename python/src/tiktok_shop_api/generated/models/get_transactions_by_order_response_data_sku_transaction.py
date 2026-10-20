@@ -1,47 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_transactions_by_order_response_data_sku_transaction_fee_tax_breakdown import (
-        GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown,
-    )
-    from ..models.get_transactions_by_order_response_data_sku_transaction_shipping_cost_breakdown import (
-        GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown,
-    )
-    from ..models.revenue_breakdown import RevenueBreakdown
+  from ..models.get_transactions_by_order_response_data_sku_transaction_fee_tax_breakdown import GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown
+  from ..models.get_transactions_by_order_response_data_sku_transaction_shipping_cost_breakdown import GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown
+  from ..models.revenue_breakdown import RevenueBreakdown
+
+
+
 
 
 T = TypeVar("T", bound="GetTransactionsByOrderResponseDataSkuTransaction")
 
 
+
 @_attrs_define
 class GetTransactionsByOrderResponseDataSkuTransaction:
-    """
-    Attributes:
-        sku_id (str | Unset): The SKU ID in TikTok Shop.
-        sku_name (str | Unset): The SKU name.
-        statement_id (str | Unset): The statement ID.
-        product_name (str | Unset): The product title.
-        quantity (str | Unset): The SKU quantity included in the order settlement.
-        settlement_amount (str | Unset): The settlement amount for the SKU.
-        revenue_amount (str | Unset): The revenue amount at the time of order settlement. This is equivalent to the sum
-            of all amounts in `revenue_breakdown`.
-        revenue_breakdown (RevenueBreakdown | Unset):
-        shipping_cost_amount (str | Unset): The shipping costs at the time of order settlement. This is equivalent to
-            the sum of all contributory amounts in `shipping_cost_breakdown`.
-        shipping_cost_breakdown (GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown | Unset):
-        fee_tax_amount (str | Unset): The total fees and taxes charged by TikTok Shop at the time of order settlement.
-            Shipping-related costs are excluded. This is equivalent to the sum of all contributory amounts in
-            `fee_tax_breakdown`.
-        fee_tax_breakdown (GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown | Unset):
-    """
+    """ 
+        Attributes:
+            sku_id (str | Unset): The SKU ID in TikTok Shop.
+            sku_name (str | Unset): The SKU name.
+            statement_id (str | Unset): The statement ID.
+            product_name (str | Unset): The product title.
+            quantity (str | Unset): The SKU quantity included in the order settlement.
+            settlement_amount (str | Unset): The settlement amount for the SKU.
+            revenue_amount (str | Unset): The revenue amount at the time of order settlement. This is equivalent to the sum
+                of all amounts in `revenue_breakdown`.
+            revenue_breakdown (RevenueBreakdown | Unset):
+            shipping_cost_amount (str | Unset): The shipping costs at the time of order settlement. This is equivalent to
+                the sum of all contributory amounts in `shipping_cost_breakdown`.
+            shipping_cost_breakdown (GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown | Unset):
+            fee_tax_amount (str | Unset): The total fees and taxes charged by TikTok Shop at the time of order settlement.
+                Shipping-related costs are excluded. This is equivalent to the sum of all contributory amounts in
+                `fee_tax_breakdown`.
+            fee_tax_breakdown (GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown | Unset):
+     """
 
     sku_id: str | Unset = UNSET
     sku_name: str | Unset = UNSET
@@ -57,7 +60,14 @@ class GetTransactionsByOrderResponseDataSkuTransaction:
     fee_tax_breakdown: GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_transactions_by_order_response_data_sku_transaction_fee_tax_breakdown import GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown # noqa: PLC0415
+        from ..models.get_transactions_by_order_response_data_sku_transaction_shipping_cost_breakdown import GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown # noqa: PLC0415
+        from ..models.revenue_breakdown import RevenueBreakdown # noqa: PLC0415
         sku_id = self.sku_id
 
         sku_name = self.sku_name
@@ -88,9 +98,11 @@ class GetTransactionsByOrderResponseDataSkuTransaction:
         if not isinstance(self.fee_tax_breakdown, Unset):
             fee_tax_breakdown = self.fee_tax_breakdown.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if sku_id is not UNSET:
             field_dict["sku_id"] = sku_id
         if sku_name is not UNSET:
@@ -118,16 +130,13 @@ class GetTransactionsByOrderResponseDataSkuTransaction:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_transactions_by_order_response_data_sku_transaction_fee_tax_breakdown import (
-            GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown,  # noqa: PLC0415
-        )
-        from ..models.get_transactions_by_order_response_data_sku_transaction_shipping_cost_breakdown import (
-            GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown,  # noqa: PLC0415
-        )
-        from ..models.revenue_breakdown import RevenueBreakdown  # noqa: PLC0415
-
+        from ..models.get_transactions_by_order_response_data_sku_transaction_fee_tax_breakdown import GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown # noqa: PLC0415
+        from ..models.get_transactions_by_order_response_data_sku_transaction_shipping_cost_breakdown import GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown # noqa: PLC0415
+        from ..models.revenue_breakdown import RevenueBreakdown # noqa: PLC0415
         d = dict(src_dict)
         sku_id = d.pop("sku_id", UNSET)
 
@@ -145,32 +154,37 @@ class GetTransactionsByOrderResponseDataSkuTransaction:
 
         _revenue_breakdown = d.pop("revenue_breakdown", UNSET)
         revenue_breakdown: RevenueBreakdown | Unset
-        if isinstance(_revenue_breakdown, Unset):
+        if isinstance(_revenue_breakdown,  Unset):
             revenue_breakdown = UNSET
         else:
             revenue_breakdown = RevenueBreakdown.from_dict(_revenue_breakdown)
+
+
+
 
         shipping_cost_amount = d.pop("shipping_cost_amount", UNSET)
 
         _shipping_cost_breakdown = d.pop("shipping_cost_breakdown", UNSET)
         shipping_cost_breakdown: GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown | Unset
-        if isinstance(_shipping_cost_breakdown, Unset):
+        if isinstance(_shipping_cost_breakdown,  Unset):
             shipping_cost_breakdown = UNSET
         else:
-            shipping_cost_breakdown = GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown.from_dict(
-                _shipping_cost_breakdown
-            )
+            shipping_cost_breakdown = GetTransactionsByOrderResponseDataSkuTransactionShippingCostBreakdown.from_dict(_shipping_cost_breakdown)
+
+
+
 
         fee_tax_amount = d.pop("fee_tax_amount", UNSET)
 
         _fee_tax_breakdown = d.pop("fee_tax_breakdown", UNSET)
         fee_tax_breakdown: GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown | Unset
-        if isinstance(_fee_tax_breakdown, Unset):
+        if isinstance(_fee_tax_breakdown,  Unset):
             fee_tax_breakdown = UNSET
         else:
-            fee_tax_breakdown = GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown.from_dict(
-                _fee_tax_breakdown
-            )
+            fee_tax_breakdown = GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdown.from_dict(_fee_tax_breakdown)
+
+
+
 
         get_transactions_by_order_response_data_sku_transaction = cls(
             sku_id=sku_id,
@@ -186,6 +200,7 @@ class GetTransactionsByOrderResponseDataSkuTransaction:
             fee_tax_amount=fee_tax_amount,
             fee_tax_breakdown=fee_tax_breakdown,
         )
+
 
         get_transactions_by_order_response_data_sku_transaction.additional_properties = d
         return get_transactions_by_order_response_data_sku_transaction

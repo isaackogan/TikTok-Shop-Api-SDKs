@@ -1,45 +1,57 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_inbound_method_detail_response_data_info import GetInboundMethodDetailResponseDataInfo
+  from ..models.get_inbound_method_detail_response_data_info import GetInboundMethodDetailResponseDataInfo
+
+
+
 
 
 T = TypeVar("T", bound="GetInboundMethodDetailResponseData")
 
 
+
 @_attrs_define
 class GetInboundMethodDetailResponseData:
-    """
-    Attributes:
-        info (list[GetInboundMethodDetailResponseDataInfo] | Unset): Placement options for the current placement task.
-            If `placement_task_status` is `Executing`, repeat this request with the same `plan_id`, `inbound_method`, and
-            estimated arrival window to retrieve the latest status. When the status is `Succeed`, select an option from
-            `info` and pass its `placement_option_id` to the Confirm Inbound Method API. Do not confirm an option when the
-            status is `Failed`. After `expiration_timestamp`, call this API again with the same selection inputs to obtain a
-            new placement option or task.
-        placement_task_status (str | Unset): **Possible values:**
-            * `Executing`
-            * `Succeed`
-            * `Failed`
-        expiration_timestamp (str | Unset): Unix timestamp in seconds when the placement result expires. For `ONE_HUB`,
-            the expiration is set to 24 hours after this API processes the request. For other methods, it is 24 hours after
-            the placement task's trigger time. After expiration, call this API again to generate a new placement task.
-    """
+    """ 
+        Attributes:
+            info (list[GetInboundMethodDetailResponseDataInfo] | Unset): Placement options for the current placement task.
+                If `placement_task_status` is `Executing`, repeat this request with the same `plan_id`, `inbound_method`, and
+                estimated arrival window to retrieve the latest status. When the status is `Succeed`, select an option from
+                `info` and pass its `placement_option_id` to the Confirm Inbound Method API. Do not confirm an option when the
+                status is `Failed`. After `expiration_timestamp`, call this API again with the same selection inputs to obtain a
+                new placement option or task.
+            placement_task_status (str | Unset): **Possible values:**
+                * `Executing`
+                * `Succeed`
+                * `Failed`
+            expiration_timestamp (str | Unset): Unix timestamp in seconds when the placement result expires. For `ONE_HUB`,
+                the expiration is set to 24 hours after this API processes the request. For other methods, it is 24 hours after
+                the placement task's trigger time. After expiration, call this API again to generate a new placement task.
+     """
 
     info: list[GetInboundMethodDetailResponseDataInfo] | Unset = UNSET
     placement_task_status: str | Unset = UNSET
     expiration_timestamp: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_inbound_method_detail_response_data_info import GetInboundMethodDetailResponseDataInfo # noqa: PLC0415
         info: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.info, Unset):
             info = []
@@ -47,13 +59,17 @@ class GetInboundMethodDetailResponseData:
                 info_item = info_item_data.to_dict()
                 info.append(info_item)
 
+
+
         placement_task_status = self.placement_task_status
 
         expiration_timestamp = self.expiration_timestamp
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if info is not UNSET:
             field_dict["info"] = info
         if placement_task_status is not UNSET:
@@ -63,12 +79,11 @@ class GetInboundMethodDetailResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_inbound_method_detail_response_data_info import (
-            GetInboundMethodDetailResponseDataInfo,  # noqa: PLC0415
-        )
-
+        from ..models.get_inbound_method_detail_response_data_info import GetInboundMethodDetailResponseDataInfo # noqa: PLC0415
         d = dict(src_dict)
         _info = d.pop("info", UNSET)
         info: list[GetInboundMethodDetailResponseDataInfo] | Unset = UNSET
@@ -77,7 +92,10 @@ class GetInboundMethodDetailResponseData:
             for info_item_data in _info:
                 info_item = GetInboundMethodDetailResponseDataInfo.from_dict(info_item_data)
 
+
+
                 info.append(info_item)
+
 
         placement_task_status = d.pop("placement_task_status", UNSET)
 
@@ -88,6 +106,7 @@ class GetInboundMethodDetailResponseData:
             placement_task_status=placement_task_status,
             expiration_timestamp=expiration_timestamp,
         )
+
 
         get_inbound_method_detail_response_data.additional_properties = d
         return get_inbound_method_detail_response_data

@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_warehouse_list_response_data_warehouse import GetWarehouseListResponseDataWarehouse
+  from ..models.get_warehouse_list_response_data_warehouse import GetWarehouseListResponseDataWarehouse
+
+
+
 
 
 T = TypeVar("T", bound="GetWarehouseListResponseData")
 
 
+
 @_attrs_define
 class GetWarehouseListResponseData:
-    """
-    Attributes:
-        warehouses (list[GetWarehouseListResponseDataWarehouse] | Unset): Warehouses returned for the seller. This field
-            is omitted when the result contains no warehouse.
-    """
+    """ 
+        Attributes:
+            warehouses (list[GetWarehouseListResponseDataWarehouse] | Unset): Warehouses returned for the seller. This field
+                is omitted when the result contains no warehouse.
+     """
 
     warehouses: list[GetWarehouseListResponseDataWarehouse] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_warehouse_list_response_data_warehouse import GetWarehouseListResponseDataWarehouse # noqa: PLC0415
         warehouses: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.warehouses, Unset):
             warehouses = []
@@ -34,20 +46,23 @@ class GetWarehouseListResponseData:
                 warehouses_item = warehouses_item_data.to_dict()
                 warehouses.append(warehouses_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if warehouses is not UNSET:
             field_dict["warehouses"] = warehouses
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_warehouse_list_response_data_warehouse import (
-            GetWarehouseListResponseDataWarehouse,  # noqa: PLC0415
-        )
-
+        from ..models.get_warehouse_list_response_data_warehouse import GetWarehouseListResponseDataWarehouse # noqa: PLC0415
         d = dict(src_dict)
         _warehouses = d.pop("warehouses", UNSET)
         warehouses: list[GetWarehouseListResponseDataWarehouse] | Unset = UNSET
@@ -56,11 +71,15 @@ class GetWarehouseListResponseData:
             for warehouses_item_data in _warehouses:
                 warehouses_item = GetWarehouseListResponseDataWarehouse.from_dict(warehouses_item_data)
 
+
+
                 warehouses.append(warehouses_item)
+
 
         get_warehouse_list_response_data = cls(
             warehouses=warehouses,
         )
+
 
         get_warehouse_list_response_data.additional_properties = d
         return get_warehouse_list_response_data

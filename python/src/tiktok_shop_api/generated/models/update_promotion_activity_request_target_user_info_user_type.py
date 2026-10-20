@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdatePromotionActivityRequestTargetUserInfoUserType(StrEnum):
     ALL_USER = "ALL_USER"
     SHOP_EXISTING_CUSTOMER = "SHOP_EXISTING_CUSTOMER"

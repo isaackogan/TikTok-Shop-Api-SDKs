@@ -1,28 +1,41 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_fbt_inbound_order_details_response import GetFBTInboundOrderDetailsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     order_ids: list[str],
     include_carton_details: bool | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_order_ids = order_ids
+
 
     params["order_ids"] = json_order_ids
 
     params["include_carton_details"] = include_carton_details
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -30,14 +43,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetFBTInboundOrderDetailsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetFBTInboundOrderDetailsResponse | None:
     if response.status_code == 200:
         response_200 = GetFBTInboundOrderDetailsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +62,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetFBTInboundOrderDetailsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetFBTInboundOrderDetailsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +76,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     order_ids: list[str],
     include_carton_details: bool | Unset = UNSET,
+
 ) -> Response[GetFBTInboundOrderDetailsResponse]:
-    """Get FBT Inbound Order Details
+    """ Get FBT Inbound Order Details
 
      Retrieves details for the specified FBT inbound orders, including planned and actual receiving
     information and status history. Set `include_carton_details` to `true` to request carton dimensions
@@ -80,11 +94,13 @@ def sync_detailed(
 
     Returns:
         Response[GetFBTInboundOrderDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_ids=order_ids,
-        include_carton_details=include_carton_details,
+include_carton_details=include_carton_details,
+
     )
 
     response = client.get_httpx_client().request(
@@ -93,14 +109,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     order_ids: list[str],
     include_carton_details: bool | Unset = UNSET,
+
 ) -> GetFBTInboundOrderDetailsResponse | None:
-    """Get FBT Inbound Order Details
+    """ Get FBT Inbound Order Details
 
      Retrieves details for the specified FBT inbound orders, including planned and actual receiving
     information and status history. Set `include_carton_details` to `true` to request carton dimensions
@@ -116,22 +132,24 @@ def sync(
 
     Returns:
         GetFBTInboundOrderDetailsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        order_ids=order_ids,
-        include_carton_details=include_carton_details,
-    ).parsed
+order_ids=order_ids,
+include_carton_details=include_carton_details,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     order_ids: list[str],
     include_carton_details: bool | Unset = UNSET,
+
 ) -> Response[GetFBTInboundOrderDetailsResponse]:
-    """Get FBT Inbound Order Details
+    """ Get FBT Inbound Order Details
 
      Retrieves details for the specified FBT inbound orders, including planned and actual receiving
     information and status history. Set `include_carton_details` to `true` to request carton dimensions
@@ -147,25 +165,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetFBTInboundOrderDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_ids=order_ids,
-        include_carton_details=include_carton_details,
+include_carton_details=include_carton_details,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     order_ids: list[str],
     include_carton_details: bool | Unset = UNSET,
+
 ) -> GetFBTInboundOrderDetailsResponse | None:
-    """Get FBT Inbound Order Details
+    """ Get FBT Inbound Order Details
 
      Retrieves details for the specified FBT inbound orders, including planned and actual receiving
     information and status history. Set `include_carton_details` to `true` to request carton dimensions
@@ -181,12 +203,12 @@ async def asyncio(
 
     Returns:
         GetFBTInboundOrderDetailsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            order_ids=order_ids,
-            include_carton_details=include_carton_details,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+order_ids=order_ids,
+include_carton_details=include_carton_details,
+
+    )).parsed

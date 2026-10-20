@@ -1,77 +1,82 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown_supplementary_component import (
-        GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent,
-    )
+  from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown_supplementary_component import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent
+
+
+
 
 
 T = TypeVar("T", bound="GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown")
 
 
+
 @_attrs_define
 class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
-    """
-    Attributes:
-        actual_shipping_fee_amount (str | Unset): The actual shipping fee calculated based on the weight/dimensions
-            measured by the carrier. For details, check ` shipping_cost_breakdown.supplementary_component`.
-        international_leg_logistics_amount (str | Unset): The delivery fee charged to the seller for the international
-            leg of a cross-border shipment
-        shipping_fee_discount_amount (str | Unset): The shipping fee subsidies and incentives provided by the platform.
-            This includes all subsidies regardless of fulfillment channels or policies. For details, check `
-            shipping_cost_breakdown.supplementary_component`.
-        customer_paid_shipping_fee_amount (str | Unset): The actual shipping fee borne by the customer, calculated based
-            on the product weight uploaded by the seller.
-        return_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of returns.
-        replacement_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of goods
-            replacement.
-            Applicable only for Indonesia.
-        exchange_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of goods
-            exchange.
-            Applicable only for Indonesia.
-        signature_confirmation_fee_amount (str | Unset): The fee incurred for packages requiring signature confirmation
-            services
-        shipping_insurance_fee_amount (str | Unset): The shipping insurance fee incurred by the seller for purchasing
-            additional TikTok shipping insurance services.
-        distant_shipping_fee_amount (str | Unset): The distance fee for shipping paid by the customer. With your current
-            settings for Horizon+ Program, this fee is included in product price for orders with shipping out of Java
-            island.
-        shipping_app_service_fee_amount (str | Unset): Shipping App Service Fee for using shipping fee to generate
-            shipping labels
-        logistics_service_fee (str | Unset): A fee charged to sellers throughout the order lifecycle for logistics-
-            related services, including processing, coordination, handling of delivery-related matters, and basic shipping
-            incentives. It is an amount per order, which is based on the parcel's weight tier and shipping route. It allows
-            the platform to continuously enhance a high-quality, sustainable logistics network that serves both sellers and
-            customers better over the long term, amidst changing global conditions.
-        fbt_overall_merchant_subsidy (str | Unset): Subsidy applied to your orders and offered to all FBT (Fulfilled by
-            TikTok) merchants for the statement period. The amount is calculated based on your qualifying FBT order volume
-            during this period.
-        fbt_key_merchant_subsidy (str | Unset): Subsidy applied to your orders based on eligibility for the key merchant
-            program. The amount is calculated based on your qualifying FBT (Fulfilled by TikTok) order volume during the
-            statement period.
-        supplementary_component
-            (GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset):
-        sfr_reimbursement (str | Unset): Reimbursement from the Shipping Fee Reimbursement Program for failed deliveries
-            or returns.
-        tiktok_shop_shipping_incentive_amount (str | Unset): The shipping fee incentive provided by TikTok Shop.
-        hazmat_noncompliance_fee (str | Unset): Fee charged when a parcel containing hazardous materials is shipped
-            without the required declaration or compliant packaging, as assessed by the carrier. Charged when the parcel is
-            delivered.
-        hazmat_handling_fee (str | Unset): Fee charged for the additional handling required to ship a parcel containing
-            hazardous materials. Charged when the parcel is delivered.
-        non_standard_weight_fee (str | Unset): Fee charged when a parcel exceeds the standard weight range. The rate is
-            set by TikTok Shop and charged when the parcel is delivered.
-        non_standard_dimension_fee (str | Unset): Fee charged when a parcel exceeds the standard size range. The rate is
-            set by TikTok Shop and charged when the parcel is delivered.
-    """
+    """ 
+        Attributes:
+            actual_shipping_fee_amount (str | Unset): The actual shipping fee calculated based on the weight/dimensions
+                measured by the carrier. For details, check ` shipping_cost_breakdown.supplementary_component`.
+            international_leg_logistics_amount (str | Unset): The delivery fee charged to the seller for the international
+                leg of a cross-border shipment
+            shipping_fee_discount_amount (str | Unset): The shipping fee subsidies and incentives provided by the platform.
+                This includes all subsidies regardless of fulfillment channels or policies. For details, check `
+                shipping_cost_breakdown.supplementary_component`.
+            customer_paid_shipping_fee_amount (str | Unset): The actual shipping fee borne by the customer, calculated based
+                on the product weight uploaded by the seller.
+            return_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of returns.
+            replacement_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of goods
+                replacement.
+                Applicable only for Indonesia.
+            exchange_shipping_fee_amount (str | Unset): The shipping fee paid by the seller for the delivery of goods
+                exchange.
+                Applicable only for Indonesia.
+            signature_confirmation_fee_amount (str | Unset): The fee incurred for packages requiring signature confirmation
+                services
+            shipping_insurance_fee_amount (str | Unset): The shipping insurance fee incurred by the seller for purchasing
+                additional TikTok shipping insurance services.
+            distant_shipping_fee_amount (str | Unset): The distance fee for shipping paid by the customer. With your current
+                settings for Horizon+ Program, this fee is included in product price for orders with shipping out of Java
+                island.
+            shipping_app_service_fee_amount (str | Unset): Shipping App Service Fee for using shipping fee to generate
+                shipping labels
+            logistics_service_fee (str | Unset): A fee charged to sellers throughout the order lifecycle for logistics-
+                related services, including processing, coordination, handling of delivery-related matters, and basic shipping
+                incentives. It is an amount per order, which is based on the parcel's weight tier and shipping route. It allows
+                the platform to continuously enhance a high-quality, sustainable logistics network that serves both sellers and
+                customers better over the long term, amidst changing global conditions.
+            fbt_overall_merchant_subsidy (str | Unset): Subsidy applied to your orders and offered to all FBT (Fulfilled by
+                TikTok) merchants for the statement period. The amount is calculated based on your qualifying FBT order volume
+                during this period.
+            fbt_key_merchant_subsidy (str | Unset): Subsidy applied to your orders based on eligibility for the key merchant
+                program. The amount is calculated based on your qualifying FBT (Fulfilled by TikTok) order volume during the
+                statement period.
+            supplementary_component
+                (GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset):
+            sfr_reimbursement (str | Unset): Reimbursement from the Shipping Fee Reimbursement Program for failed deliveries
+                or returns.
+            tiktok_shop_shipping_incentive_amount (str | Unset): The shipping fee incentive provided by TikTok Shop.
+            hazmat_noncompliance_fee (str | Unset): Fee charged when a parcel containing hazardous materials is shipped
+                without the required declaration or compliant packaging, as assessed by the carrier. Charged when the parcel is
+                delivered.
+            hazmat_handling_fee (str | Unset): Fee charged for the additional handling required to ship a parcel containing
+                hazardous materials. Charged when the parcel is delivered.
+            non_standard_weight_fee (str | Unset): Fee charged when a parcel exceeds the standard weight range. The rate is
+                set by TikTok Shop and charged when the parcel is delivered.
+            non_standard_dimension_fee (str | Unset): Fee charged when a parcel exceeds the standard size range. The rate is
+                set by TikTok Shop and charged when the parcel is delivered.
+     """
 
     actual_shipping_fee_amount: str | Unset = UNSET
     international_leg_logistics_amount: str | Unset = UNSET
@@ -87,9 +92,7 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
     logistics_service_fee: str | Unset = UNSET
     fbt_overall_merchant_subsidy: str | Unset = UNSET
     fbt_key_merchant_subsidy: str | Unset = UNSET
-    supplementary_component: (
-        GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset
-    ) = UNSET
+    supplementary_component: GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset = UNSET
     sfr_reimbursement: str | Unset = UNSET
     tiktok_shop_shipping_incentive_amount: str | Unset = UNSET
     hazmat_noncompliance_fee: str | Unset = UNSET
@@ -98,7 +101,12 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
     non_standard_dimension_fee: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown_supplementary_component import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent # noqa: PLC0415
         actual_shipping_fee_amount = self.actual_shipping_fee_amount
 
         international_leg_logistics_amount = self.international_leg_logistics_amount
@@ -143,9 +151,11 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
 
         non_standard_dimension_fee = self.non_standard_dimension_fee
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if actual_shipping_fee_amount is not UNSET:
             field_dict["actual_shipping_fee_amount"] = actual_shipping_fee_amount
         if international_leg_logistics_amount is not UNSET:
@@ -191,12 +201,11 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown_supplementary_component import (
-            GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent,  # noqa: PLC0415
-        )
-
+        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown_supplementary_component import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent # noqa: PLC0415
         d = dict(src_dict)
         actual_shipping_fee_amount = d.pop("actual_shipping_fee_amount", UNSET)
 
@@ -227,17 +236,14 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
         fbt_key_merchant_subsidy = d.pop("fbt_key_merchant_subsidy", UNSET)
 
         _supplementary_component = d.pop("supplementary_component", UNSET)
-        supplementary_component: (
-            GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset
-        )
-        if isinstance(_supplementary_component, Unset):
+        supplementary_component: GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent | Unset
+        if isinstance(_supplementary_component,  Unset):
             supplementary_component = UNSET
         else:
-            supplementary_component = (
-                GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent.from_dict(
-                    _supplementary_component
-                )
-            )
+            supplementary_component = GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdownSupplementaryComponent.from_dict(_supplementary_component)
+
+
+
 
         sfr_reimbursement = d.pop("sfr_reimbursement", UNSET)
 
@@ -274,6 +280,7 @@ class GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown:
             non_standard_weight_fee=non_standard_weight_fee,
             non_standard_dimension_fee=non_standard_dimension_fee,
         )
+
 
         get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown.additional_properties = d
         return get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown

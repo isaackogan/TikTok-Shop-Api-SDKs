@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.update_promotion_activity_request import UpdatePromotionActivityRequest
 from ...models.update_promotion_activity_response import UpdatePromotionActivityResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     activity_id: str,
     *,
     body: UpdatePromotionActivityRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/promotion/202309/activities/{activity_id}".format(
-            activity_id=quote(str(activity_id), safe=""),
-        ),
+        "url": "/promotion/202309/activities/{activity_id}".format(activity_id=quote(str(activity_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,11 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> UpdatePromotionActivityResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UpdatePromotionActivityResponse | None:
     if response.status_code == 200:
         response_200 = UpdatePromotionActivityResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[UpdatePromotionActivityResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UpdatePromotionActivityResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityRequest,
+
 ) -> Response[UpdatePromotionActivityResponse]:
-    """Update Promotion Activity
+    """ Update Promotion Activity
 
      Update an existing promotion activity. The stored activity type determines which request fields are
     processed:
@@ -93,11 +100,13 @@ def sync_detailed(
 
     Returns:
         Response[UpdatePromotionActivityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -106,14 +115,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityRequest,
+
 ) -> UpdatePromotionActivityResponse | None:
-    """Update Promotion Activity
+    """ Update Promotion Activity
 
      Update an existing promotion activity. The stored activity type determines which request fields are
     processed:
@@ -142,22 +151,24 @@ def sync(
 
     Returns:
         UpdatePromotionActivityResponse
-    """
+     """
+
 
     return sync_detailed(
         activity_id=activity_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityRequest,
+
 ) -> Response[UpdatePromotionActivityResponse]:
-    """Update Promotion Activity
+    """ Update Promotion Activity
 
      Update an existing promotion activity. The stored activity type determines which request fields are
     processed:
@@ -186,25 +197,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[UpdatePromotionActivityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         activity_id=activity_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     activity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: UpdatePromotionActivityRequest,
+
 ) -> UpdatePromotionActivityResponse | None:
-    """Update Promotion Activity
+    """ Update Promotion Activity
 
      Update an existing promotion activity. The stored activity type determines which request fields are
     processed:
@@ -233,12 +248,12 @@ async def asyncio(
 
     Returns:
         UpdatePromotionActivityResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            activity_id=activity_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        activity_id=activity_id,
+client=client,
+body=body,
+
+    )).parsed

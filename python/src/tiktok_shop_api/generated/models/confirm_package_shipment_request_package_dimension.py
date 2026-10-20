@@ -1,41 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.confirm_package_shipment_request_package_dimension_unit import (
-    ConfirmPackageShipmentRequestPackageDimensionUnit,
-)
 from ..types import UNSET, Unset
+
+from ..models.confirm_package_shipment_request_package_dimension_unit import ConfirmPackageShipmentRequestPackageDimensionUnit
+from ..types import UNSET, Unset
+
+
+
+
+
 
 T = TypeVar("T", bound="ConfirmPackageShipmentRequestPackageDimension")
 
 
+
 @_attrs_define
 class ConfirmPackageShipmentRequestPackageDimension:
-    """
-    Attributes:
-        length (int | Unset): Package length. Must be greater than or equal to `0`.
-        width (int | Unset): Package width. Must be greater than or equal to `0`.
-        height (int | Unset): Package height. Must be greater than or equal to `0`.
-        unit (ConfirmPackageShipmentRequestPackageDimensionUnit | Unset): Package dimension unit
-            Possible values:
-            - METER
-            - CENTIMETER
-            - MILLIMETER
-            - MICRON
-            - FOOT
-            - INCH
-    """
+    """ 
+        Attributes:
+            length (int | Unset): Package length. Must be greater than or equal to `0`.
+            width (int | Unset): Package width. Must be greater than or equal to `0`.
+            height (int | Unset): Package height. Must be greater than or equal to `0`.
+            unit (ConfirmPackageShipmentRequestPackageDimensionUnit | Unset): Package dimension unit
+                Possible values:
+                - METER
+                - CENTIMETER
+                - MILLIMETER
+                - MICRON
+                - FOOT
+                - INCH
+     """
 
     length: int | Unset = UNSET
     width: int | Unset = UNSET
     height: int | Unset = UNSET
     unit: ConfirmPackageShipmentRequestPackageDimensionUnit | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         length = self.length
@@ -48,9 +58,12 @@ class ConfirmPackageShipmentRequestPackageDimension:
         if not isinstance(self.unit, Unset):
             unit = self.unit.value
 
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if length is not UNSET:
             field_dict["length"] = length
         if width is not UNSET:
@@ -61,6 +74,8 @@ class ConfirmPackageShipmentRequestPackageDimension:
             field_dict["unit"] = unit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -73,10 +88,13 @@ class ConfirmPackageShipmentRequestPackageDimension:
 
         _unit = d.pop("unit", UNSET)
         unit: ConfirmPackageShipmentRequestPackageDimensionUnit | Unset
-        if isinstance(_unit, Unset):
+        if isinstance(_unit,  Unset):
             unit = UNSET
         else:
             unit = ConfirmPackageShipmentRequestPackageDimensionUnit(_unit)
+
+
+
 
         confirm_package_shipment_request_package_dimension = cls(
             length=length,
@@ -84,6 +102,7 @@ class ConfirmPackageShipmentRequestPackageDimension:
             height=height,
             unit=unit,
         )
+
 
         confirm_package_shipment_request_package_dimension.additional_properties = d
         return confirm_package_shipment_request_package_dimension

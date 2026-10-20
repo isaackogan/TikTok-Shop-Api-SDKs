@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_global_product_response import GetGlobalProductResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     global_product_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202309/global_products/{global_product_id}".format(
-            global_product_id=quote(str(global_product_id), safe=""),
-        ),
+        "url": "/product/202309/global_products/{global_product_id}".format(global_product_id=quote(str(global_product_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetGlobalProductResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetGlobalProductResponse | None:
     if response.status_code == 200:
         response_200 = GetGlobalProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetGlobalProductResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetGlobalProductResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     global_product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetGlobalProductResponse]:
-    """Get Global Product
+    """ Get Global Product
 
      Retrieve all properties of a global product that is in the "DRAFT", "UNPUBLISHED", or "PUBLISHED"
     status, and the corresponding local product IDs in the published markets.
@@ -67,10 +76,12 @@ def sync_detailed(
 
     Returns:
         Response[GetGlobalProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         global_product_id=global_product_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -79,13 +90,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     global_product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetGlobalProductResponse | None:
-    """Get Global Product
+    """ Get Global Product
 
      Retrieve all properties of a global product that is in the "DRAFT", "UNPUBLISHED", or "PUBLISHED"
     status, and the corresponding local product IDs in the published markets.
@@ -99,20 +110,22 @@ def sync(
 
     Returns:
         GetGlobalProductResponse
-    """
+     """
+
 
     return sync_detailed(
         global_product_id=global_product_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     global_product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetGlobalProductResponse]:
-    """Get Global Product
+    """ Get Global Product
 
      Retrieve all properties of a global product that is in the "DRAFT", "UNPUBLISHED", or "PUBLISHED"
     status, and the corresponding local product IDs in the published markets.
@@ -126,23 +139,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetGlobalProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         global_product_id=global_product_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     global_product_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetGlobalProductResponse | None:
-    """Get Global Product
+    """ Get Global Product
 
      Retrieve all properties of a global product that is in the "DRAFT", "UNPUBLISHED", or "PUBLISHED"
     status, and the corresponding local product IDs in the published markets.
@@ -156,11 +173,11 @@ async def asyncio(
 
     Returns:
         GetGlobalProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            global_product_id=global_product_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        global_product_id=global_product_id,
+client=client,
+
+    )).parsed

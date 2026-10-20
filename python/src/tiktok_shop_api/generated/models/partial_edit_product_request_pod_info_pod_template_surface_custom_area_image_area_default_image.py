@@ -1,38 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage")
+
 
 
 @_attrs_define
 class PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImage:
-    """
-    Attributes:
-        uri (str | Unset): The URI of the default image.
-            Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
-            `use_case=CUSTOMIZATION_IMAGE`.
-    """
+    """ 
+        Attributes:
+            uri (str | Unset): The URI of the default image.
+                Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
+                `use_case=CUSTOMIZATION_IMAGE`.
+     """
 
     uri: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         uri = self.uri
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if uri is not UNSET:
             field_dict["uri"] = uri
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -42,6 +58,7 @@ class PartialEditProductRequestPodInfoPodTemplateSurfaceCustomAreaImageAreaDefau
         partial_edit_product_request_pod_info_pod_template_surface_custom_area_image_area_default_image = cls(
             uri=uri,
         )
+
 
         partial_edit_product_request_pod_info_pod_template_surface_custom_area_image_area_default_image.additional_properties = d
         return partial_edit_product_request_pod_info_pod_template_surface_custom_area_image_area_default_image

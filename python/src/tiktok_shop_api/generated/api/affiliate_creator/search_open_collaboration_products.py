@@ -1,15 +1,20 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_open_collaboration_products_request import SearchOpenCollaborationProductsRequest
 from ...models.search_open_collaboration_products_response import SearchOpenCollaborationProductsResponse
 from ...models.search_open_collaboration_products_sort_field import SearchOpenCollaborationProductsSortField
 from ...models.search_open_collaboration_products_sort_order import SearchOpenCollaborationProductsSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,8 +24,12 @@ def _get_kwargs(
     page_size: int,
     sort_field: SearchOpenCollaborationProductsSortField | Unset = UNSET,
     sort_order: SearchOpenCollaborationProductsSortOrder | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -40,7 +49,9 @@ def _get_kwargs(
 
     params["sort_order"] = json_sort_order
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -48,6 +59,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -57,11 +69,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchOpenCollaborationProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchOpenCollaborationProductsResponse | None:
     if response.status_code == 200:
         response_200 = SearchOpenCollaborationProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -71,9 +84,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchOpenCollaborationProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchOpenCollaborationProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -90,8 +101,9 @@ def sync_detailed(
     page_size: int,
     sort_field: SearchOpenCollaborationProductsSortField | Unset = UNSET,
     sort_order: SearchOpenCollaborationProductsSortOrder | Unset = UNSET,
+
 ) -> Response[SearchOpenCollaborationProductsResponse]:
-    """Search Open Collaboration Products
+    """ Search Open Collaboration Products
 
      This API is used to search the information of products with open collaboration by category,
     commission rate, and keywords. It will return all products on the TikTok Shop Affiliate Product
@@ -112,14 +124,16 @@ def sync_detailed(
 
     Returns:
         Response[SearchOpenCollaborationProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_token=page_token,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
+page_token=page_token,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+
     )
 
     response = client.get_httpx_client().request(
@@ -127,7 +141,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -137,8 +150,9 @@ def sync(
     page_size: int,
     sort_field: SearchOpenCollaborationProductsSortField | Unset = UNSET,
     sort_order: SearchOpenCollaborationProductsSortOrder | Unset = UNSET,
+
 ) -> SearchOpenCollaborationProductsResponse | None:
-    """Search Open Collaboration Products
+    """ Search Open Collaboration Products
 
      This API is used to search the information of products with open collaboration by category,
     commission rate, and keywords. It will return all products on the TikTok Shop Affiliate Product
@@ -159,17 +173,18 @@ def sync(
 
     Returns:
         SearchOpenCollaborationProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_token=page_token,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
-    ).parsed
+body=body,
+page_token=page_token,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -179,8 +194,9 @@ async def asyncio_detailed(
     page_size: int,
     sort_field: SearchOpenCollaborationProductsSortField | Unset = UNSET,
     sort_order: SearchOpenCollaborationProductsSortOrder | Unset = UNSET,
+
 ) -> Response[SearchOpenCollaborationProductsResponse]:
-    """Search Open Collaboration Products
+    """ Search Open Collaboration Products
 
      This API is used to search the information of products with open collaboration by category,
     commission rate, and keywords. It will return all products on the TikTok Shop Affiliate Product
@@ -201,20 +217,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchOpenCollaborationProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_token=page_token,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
+page_token=page_token,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -224,8 +243,9 @@ async def asyncio(
     page_size: int,
     sort_field: SearchOpenCollaborationProductsSortField | Unset = UNSET,
     sort_order: SearchOpenCollaborationProductsSortOrder | Unset = UNSET,
+
 ) -> SearchOpenCollaborationProductsResponse | None:
-    """Search Open Collaboration Products
+    """ Search Open Collaboration Products
 
      This API is used to search the information of products with open collaboration by category,
     commission rate, and keywords. It will return all products on the TikTok Shop Affiliate Product
@@ -246,15 +266,15 @@ async def asyncio(
 
     Returns:
         SearchOpenCollaborationProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_token=page_token,
-            page_size=page_size,
-            sort_field=sort_field,
-            sort_order=sort_order,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_token=page_token,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+
+    )).parsed

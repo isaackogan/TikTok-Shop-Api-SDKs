@@ -1,61 +1,76 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.submit_size_chart_appeal_request_appeal_message import SubmitSizeChartAppealRequestAppealMessage
+  from ..models.submit_size_chart_appeal_request_appeal_message import SubmitSizeChartAppealRequestAppealMessage
+
+
+
 
 
 T = TypeVar("T", bound="SubmitSizeChartAppealRequest")
 
 
+
 @_attrs_define
 class SubmitSizeChartAppealRequest:
-    """
-    Attributes:
-        product_id (int): product_id
-        appeal_message (SubmitSizeChartAppealRequestAppealMessage):
-    """
+    """ 
+        Attributes:
+            product_id (int): product_id
+            appeal_message (SubmitSizeChartAppealRequestAppealMessage):
+     """
 
     product_id: int
     appeal_message: SubmitSizeChartAppealRequestAppealMessage
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.submit_size_chart_appeal_request_appeal_message import SubmitSizeChartAppealRequestAppealMessage # noqa: PLC0415
         product_id = self.product_id
 
         appeal_message = self.appeal_message.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_id": product_id,
-                "appeal_message": appeal_message,
-            }
-        )
+        field_dict.update({
+            "product_id": product_id,
+            "appeal_message": appeal_message,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.submit_size_chart_appeal_request_appeal_message import (
-            SubmitSizeChartAppealRequestAppealMessage,  # noqa: PLC0415
-        )
-
+        from ..models.submit_size_chart_appeal_request_appeal_message import SubmitSizeChartAppealRequestAppealMessage # noqa: PLC0415
         d = dict(src_dict)
         product_id = d.pop("product_id")
 
         appeal_message = SubmitSizeChartAppealRequestAppealMessage.from_dict(d.pop("appeal_message"))
 
+
+
+
         submit_size_chart_appeal_request = cls(
             product_id=product_id,
             appeal_message=appeal_message,
         )
+
 
         submit_size_chart_appeal_request.additional_properties = d
         return submit_size_chart_appeal_request

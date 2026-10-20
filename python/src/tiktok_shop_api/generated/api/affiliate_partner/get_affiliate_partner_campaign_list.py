@@ -1,12 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_affiliate_partner_campaign_list_response import GetAffiliatePartnerCampaignListResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +22,12 @@ def _get_kwargs(
     status: str | Unset = UNSET,
     type_: str | Unset = UNSET,
     query_type_filter: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["category_asset_cipher"] = category_asset_cipher
@@ -32,7 +42,9 @@ def _get_kwargs(
 
     params["query_type_filter"] = query_type_filter
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -40,14 +52,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetAffiliatePartnerCampaignListResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetAffiliatePartnerCampaignListResponse | None:
     if response.status_code == 200:
         response_200 = GetAffiliatePartnerCampaignListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -57,9 +71,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetAffiliatePartnerCampaignListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetAffiliatePartnerCampaignListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -77,8 +89,9 @@ def sync_detailed(
     status: str | Unset = UNSET,
     type_: str | Unset = UNSET,
     query_type_filter: str | Unset = UNSET,
+
 ) -> Response[GetAffiliatePartnerCampaignListResponse]:
-    """Get Affiliate Partner Campaign List
+    """ Get Affiliate Partner Campaign List
 
      Lists campaigns for an affiliate partner, filtered by campaign category, participation state, and
     campaign status.
@@ -97,15 +110,17 @@ def sync_detailed(
 
     Returns:
         Response[GetAffiliatePartnerCampaignListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        status=status,
-        type_=type_,
-        query_type_filter=query_type_filter,
+page_size=page_size,
+page_token=page_token,
+status=status,
+type_=type_,
+query_type_filter=query_type_filter,
+
     )
 
     response = client.get_httpx_client().request(
@@ -113,7 +128,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -124,8 +138,9 @@ def sync(
     status: str | Unset = UNSET,
     type_: str | Unset = UNSET,
     query_type_filter: str | Unset = UNSET,
+
 ) -> GetAffiliatePartnerCampaignListResponse | None:
-    """Get Affiliate Partner Campaign List
+    """ Get Affiliate Partner Campaign List
 
      Lists campaigns for an affiliate partner, filtered by campaign category, participation state, and
     campaign status.
@@ -144,18 +159,19 @@ def sync(
 
     Returns:
         GetAffiliatePartnerCampaignListResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        status=status,
-        type_=type_,
-        query_type_filter=query_type_filter,
-    ).parsed
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+status=status,
+type_=type_,
+query_type_filter=query_type_filter,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -166,8 +182,9 @@ async def asyncio_detailed(
     status: str | Unset = UNSET,
     type_: str | Unset = UNSET,
     query_type_filter: str | Unset = UNSET,
+
 ) -> Response[GetAffiliatePartnerCampaignListResponse]:
-    """Get Affiliate Partner Campaign List
+    """ Get Affiliate Partner Campaign List
 
      Lists campaigns for an affiliate partner, filtered by campaign category, participation state, and
     campaign status.
@@ -186,21 +203,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetAffiliatePartnerCampaignListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        status=status,
-        type_=type_,
-        query_type_filter=query_type_filter,
+page_size=page_size,
+page_token=page_token,
+status=status,
+type_=type_,
+query_type_filter=query_type_filter,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -211,8 +231,9 @@ async def asyncio(
     status: str | Unset = UNSET,
     type_: str | Unset = UNSET,
     query_type_filter: str | Unset = UNSET,
+
 ) -> GetAffiliatePartnerCampaignListResponse | None:
-    """Get Affiliate Partner Campaign List
+    """ Get Affiliate Partner Campaign List
 
      Lists campaigns for an affiliate partner, filtered by campaign category, participation state, and
     campaign status.
@@ -231,16 +252,16 @@ async def asyncio(
 
     Returns:
         GetAffiliatePartnerCampaignListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            category_asset_cipher=category_asset_cipher,
-            page_size=page_size,
-            page_token=page_token,
-            status=status,
-            type_=type_,
-            query_type_filter=query_type_filter,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+status=status,
+type_=type_,
+query_type_filter=query_type_filter,
+
+    )).parsed

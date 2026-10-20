@@ -1,54 +1,68 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.appeal_completed_webhook_data_appeal_task import AppealCompletedWebhookDataAppealTask
+  from ..models.appeal_completed_webhook_data_appeal_task import AppealCompletedWebhookDataAppealTask
+
+
+
 
 
 T = TypeVar("T", bound="AppealCompletedWebhookData")
 
 
+
 @_attrs_define
 class AppealCompletedWebhookData:
-    """
-    Attributes:
-        appeal_task (AppealCompletedWebhookDataAppealTask):
-        product_id (int):
-    """
+    """ 
+        Attributes:
+            appeal_task (AppealCompletedWebhookDataAppealTask):
+            product_id (int):
+     """
 
     appeal_task: AppealCompletedWebhookDataAppealTask
     product_id: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.appeal_completed_webhook_data_appeal_task import AppealCompletedWebhookDataAppealTask # noqa: PLC0415
         appeal_task = self.appeal_task.to_dict()
 
         product_id = self.product_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "appeal_task": appeal_task,
-                "product_id": product_id,
-            }
-        )
+        field_dict.update({
+            "appeal_task": appeal_task,
+            "product_id": product_id,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.appeal_completed_webhook_data_appeal_task import (
-            AppealCompletedWebhookDataAppealTask,  # noqa: PLC0415
-        )
-
+        from ..models.appeal_completed_webhook_data_appeal_task import AppealCompletedWebhookDataAppealTask # noqa: PLC0415
         d = dict(src_dict)
         appeal_task = AppealCompletedWebhookDataAppealTask.from_dict(d.pop("appeal_task"))
+
+
+
 
         product_id = d.pop("product_id")
 
@@ -56,6 +70,7 @@ class AppealCompletedWebhookData:
             appeal_task=appeal_task,
             product_id=product_id,
         )
+
 
         appeal_completed_webhook_data.additional_properties = d
         return appeal_completed_webhook_data

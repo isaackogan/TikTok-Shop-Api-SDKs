@@ -1,42 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.original_price import OriginalPrice
+  from ..models.original_price import OriginalPrice
+
+
+
 
 
 T = TypeVar("T", bound="SearchOpenCollaborationsResponseDataOpenCollaborationProduct")
 
 
+
 @_attrs_define
 class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
-    """
-    Attributes:
-        id (str | Unset): Product's unique id.
-        title (str | Unset): Product's name.
-        main_image_url (str | Unset): The product image url.
-        status (str | Unset): Product's status.
-            Field values:
-            - LIVE: When the product is normal for sale, return to the LIVE status
-            - OUT_OF_STOCK: When the product is out of stock for the consumer, the OUT_OF_STOCK state is returned
-            - SELLER_DEACTIVATE:  When the product is deactivated by the merchant, the SELLER_DEACTIVATE status is returned
-            - PLATFORM_DEACTIVATE: When the product is deactivated by the platform or is not available for sale, the
-            PLATFORM_DEACTIVATE status is returned
-            - GNE_REJECT: When the product is governed or the open collaboration is dismissed, the GNE_REJECT state is
-            returned
-            - DELETE: When the product is deleted, the DELETE status is returned
-            - OTHER: When the product is in an unsaleable state, such as draft, frozen, review, etc, the OTHER status is
-            returned
-        inventory (int | Unset): The inventory of this product.
-        original_price (OriginalPrice | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Product's unique id.
+            title (str | Unset): Product's name.
+            main_image_url (str | Unset): The product image url.
+            status (str | Unset): Product's status.
+                Field values:
+                - LIVE: When the product is normal for sale, return to the LIVE status
+                - OUT_OF_STOCK: When the product is out of stock for the consumer, the OUT_OF_STOCK state is returned
+                - SELLER_DEACTIVATE:  When the product is deactivated by the merchant, the SELLER_DEACTIVATE status is returned
+                - PLATFORM_DEACTIVATE: When the product is deactivated by the platform or is not available for sale, the
+                PLATFORM_DEACTIVATE status is returned
+                - GNE_REJECT: When the product is governed or the open collaboration is dismissed, the GNE_REJECT state is
+                returned
+                - DELETE: When the product is deleted, the DELETE status is returned
+                - OTHER: When the product is in an unsaleable state, such as draft, frozen, review, etc, the OTHER status is
+                returned
+            inventory (int | Unset): The inventory of this product.
+            original_price (OriginalPrice | Unset):
+     """
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -46,7 +53,12 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
     original_price: OriginalPrice | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
         id = self.id
 
         title = self.title
@@ -61,9 +73,11 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
         if not isinstance(self.original_price, Unset):
             original_price = self.original_price.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if title is not UNSET:
@@ -79,10 +93,11 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.original_price import OriginalPrice  # noqa: PLC0415
-
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -96,10 +111,13 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
 
         _original_price = d.pop("original_price", UNSET)
         original_price: OriginalPrice | Unset
-        if isinstance(_original_price, Unset):
+        if isinstance(_original_price,  Unset):
             original_price = UNSET
         else:
             original_price = OriginalPrice.from_dict(_original_price)
+
+
+
 
         search_open_collaborations_response_data_open_collaboration_product = cls(
             id=id,
@@ -109,6 +127,7 @@ class SearchOpenCollaborationsResponseDataOpenCollaborationProduct:
             inventory=inventory,
             original_price=original_price,
         )
+
 
         search_open_collaborations_response_data_open_collaboration_product.additional_properties = d
         return search_open_collaborations_response_data_open_collaboration_product

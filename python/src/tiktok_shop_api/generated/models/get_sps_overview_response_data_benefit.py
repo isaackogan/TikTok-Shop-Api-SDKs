@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSOverviewResponseDataBenefit")
+
 
 
 @_attrs_define
 class GetSPSOverviewResponseDataBenefit:
-    """
-    Attributes:
-        benefit_name (str | Unset): Benefit display name localized by the requested locale.
-        is_unlocked (bool | Unset): Whether the shop has unlocked this benefit.
-        unlock_score (str | Unset): Score required to unlock the benefit, from 0 to 5.
-    """
+    """ 
+        Attributes:
+            benefit_name (str | Unset): Benefit display name localized by the requested locale.
+            is_unlocked (bool | Unset): Whether the shop has unlocked this benefit.
+            unlock_score (str | Unset): Score required to unlock the benefit, from 0 to 5.
+     """
 
     benefit_name: str | Unset = UNSET
     is_unlocked: bool | Unset = UNSET
     unlock_score: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         benefit_name = self.benefit_name
@@ -32,9 +44,11 @@ class GetSPSOverviewResponseDataBenefit:
 
         unlock_score = self.unlock_score
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if benefit_name is not UNSET:
             field_dict["benefit_name"] = benefit_name
         if is_unlocked is not UNSET:
@@ -43,6 +57,8 @@ class GetSPSOverviewResponseDataBenefit:
             field_dict["unlock_score"] = unlock_score
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class GetSPSOverviewResponseDataBenefit:
             is_unlocked=is_unlocked,
             unlock_score=unlock_score,
         )
+
 
         get_sps_overview_response_data_benefit.additional_properties = d
         return get_sps_overview_response_data_benefit

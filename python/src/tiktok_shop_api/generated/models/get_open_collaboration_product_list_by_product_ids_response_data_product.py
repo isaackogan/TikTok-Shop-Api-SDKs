@@ -1,46 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.category_chain import CategoryChain
-    from ..models.commission import Commission
-    from ..models.get_open_collaboration_product_list_by_product_ids_response_data_product_shop_ads_commission import (
-        GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission,
-    )
-    from ..models.original_price import OriginalPrice
-    from ..models.sales_price import SalesPrice
-    from ..models.shop import Shop
+  from ..models.category_chain import CategoryChain
+  from ..models.commission import Commission
+  from ..models.get_open_collaboration_product_list_by_product_ids_response_data_product_shop_ads_commission import GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission
+  from ..models.original_price import OriginalPrice
+  from ..models.sales_price import SalesPrice
+  from ..models.shop import Shop
+
+
+
 
 
 T = TypeVar("T", bound="GetOpenCollaborationProductListByProductIdsResponseDataProduct")
 
 
+
 @_attrs_define
 class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
-    """
-    Attributes:
-        shop (Shop | Unset):
-        id (str | Unset): Product's unique id.
-        has_inventory (bool | Unset): Whether this product has inventory.
-        units_sold (int | Unset): The total number of units sold for this product.
-        title (str | Unset): Product's name.
-        sale_region (str | Unset): The region represents the areas where the product can be sold.
-        main_image_url (str | Unset): The product image url.
-        detail_link (str | Unset): Product's detail link which is used to get product details on mobile clients.
-        original_price (OriginalPrice | Unset):
-        category_chains (list[CategoryChain] | Unset): The categories of this product.
-            Return to the top three categories at most
-        commission (Commission | Unset):
-        sales_price (SalesPrice | Unset):
-        shop_ads_commission (GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission | Unset):
-    """
+    """ 
+        Attributes:
+            shop (Shop | Unset):
+            id (str | Unset): Product's unique id.
+            has_inventory (bool | Unset): Whether this product has inventory.
+            units_sold (int | Unset): The total number of units sold for this product.
+            title (str | Unset): Product's name.
+            sale_region (str | Unset): The region represents the areas where the product can be sold.
+            main_image_url (str | Unset): The product image url.
+            detail_link (str | Unset): Product's detail link which is used to get product details on mobile clients.
+            original_price (OriginalPrice | Unset):
+            category_chains (list[CategoryChain] | Unset): The categories of this product.
+                Return to the top three categories at most
+            commission (Commission | Unset):
+            sales_price (SalesPrice | Unset):
+            shop_ads_commission (GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission | Unset):
+     """
 
     shop: Shop | Unset = UNSET
     id: str | Unset = UNSET
@@ -57,7 +62,17 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
     shop_ads_commission: GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.category_chain import CategoryChain # noqa: PLC0415
+        from ..models.commission import Commission # noqa: PLC0415
+        from ..models.get_open_collaboration_product_list_by_product_ids_response_data_product_shop_ads_commission import GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission # noqa: PLC0415
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
+        from ..models.sales_price import SalesPrice # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         shop: dict[str, Any] | Unset = UNSET
         if not isinstance(self.shop, Unset):
             shop = self.shop.to_dict()
@@ -87,6 +102,8 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
                 category_chains_item = category_chains_item_data.to_dict()
                 category_chains.append(category_chains_item)
 
+
+
         commission: dict[str, Any] | Unset = UNSET
         if not isinstance(self.commission, Unset):
             commission = self.commission.to_dict()
@@ -99,9 +116,11 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
         if not isinstance(self.shop_ads_commission, Unset):
             shop_ads_commission = self.shop_ads_commission.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shop is not UNSET:
             field_dict["shop"] = shop
         if id is not UNSET:
@@ -131,24 +150,26 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.category_chain import CategoryChain  # noqa: PLC0415
-        from ..models.commission import Commission  # noqa: PLC0415
-        from ..models.get_open_collaboration_product_list_by_product_ids_response_data_product_shop_ads_commission import (
-            GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission,  # noqa: PLC0415
-        )
-        from ..models.original_price import OriginalPrice  # noqa: PLC0415
-        from ..models.sales_price import SalesPrice  # noqa: PLC0415
-        from ..models.shop import Shop  # noqa: PLC0415
-
+        from ..models.category_chain import CategoryChain # noqa: PLC0415
+        from ..models.commission import Commission # noqa: PLC0415
+        from ..models.get_open_collaboration_product_list_by_product_ids_response_data_product_shop_ads_commission import GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission # noqa: PLC0415
+        from ..models.original_price import OriginalPrice # noqa: PLC0415
+        from ..models.sales_price import SalesPrice # noqa: PLC0415
+        from ..models.shop import Shop # noqa: PLC0415
         d = dict(src_dict)
         _shop = d.pop("shop", UNSET)
         shop: Shop | Unset
-        if isinstance(_shop, Unset):
+        if isinstance(_shop,  Unset):
             shop = UNSET
         else:
             shop = Shop.from_dict(_shop)
+
+
+
 
         id = d.pop("id", UNSET)
 
@@ -166,10 +187,13 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
 
         _original_price = d.pop("original_price", UNSET)
         original_price: OriginalPrice | Unset
-        if isinstance(_original_price, Unset):
+        if isinstance(_original_price,  Unset):
             original_price = UNSET
         else:
             original_price = OriginalPrice.from_dict(_original_price)
+
+
+
 
         _category_chains = d.pop("category_chains", UNSET)
         category_chains: list[CategoryChain] | Unset = UNSET
@@ -178,32 +202,40 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
             for category_chains_item_data in _category_chains:
                 category_chains_item = CategoryChain.from_dict(category_chains_item_data)
 
+
+
                 category_chains.append(category_chains_item)
+
 
         _commission = d.pop("commission", UNSET)
         commission: Commission | Unset
-        if isinstance(_commission, Unset):
+        if isinstance(_commission,  Unset):
             commission = UNSET
         else:
             commission = Commission.from_dict(_commission)
 
+
+
+
         _sales_price = d.pop("sales_price", UNSET)
         sales_price: SalesPrice | Unset
-        if isinstance(_sales_price, Unset):
+        if isinstance(_sales_price,  Unset):
             sales_price = UNSET
         else:
             sales_price = SalesPrice.from_dict(_sales_price)
 
+
+
+
         _shop_ads_commission = d.pop("shop_ads_commission", UNSET)
         shop_ads_commission: GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission | Unset
-        if isinstance(_shop_ads_commission, Unset):
+        if isinstance(_shop_ads_commission,  Unset):
             shop_ads_commission = UNSET
         else:
-            shop_ads_commission = (
-                GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission.from_dict(
-                    _shop_ads_commission
-                )
-            )
+            shop_ads_commission = GetOpenCollaborationProductListByProductIdsResponseDataProductShopAdsCommission.from_dict(_shop_ads_commission)
+
+
+
 
         get_open_collaboration_product_list_by_product_ids_response_data_product = cls(
             shop=shop,
@@ -220,6 +252,7 @@ class GetOpenCollaborationProductListByProductIdsResponseDataProduct:
             sales_price=sales_price,
             shop_ads_commission=shop_ads_commission,
         )
+
 
         get_open_collaboration_product_list_by_product_ids_response_data_product.additional_properties = d
         return get_open_collaboration_product_list_by_product_ids_response_data_product

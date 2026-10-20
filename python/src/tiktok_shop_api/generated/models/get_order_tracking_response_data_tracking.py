@@ -1,30 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOrderTrackingResponseDataTracking")
+
 
 
 @_attrs_define
 class GetOrderTrackingResponseDataTracking:
-    """
-    Attributes:
-        description (str | Unset): Tracking status description.
-        update_time_millis (int | Unset): Tracking status update time. Unix timestamp in milliseconds.
-        action_code (int | Unset): Code that identifies the tracking event type. Use `description` for the human-
-            readable event message.
-    """
+    """ 
+        Attributes:
+            description (str | Unset): Tracking status description.
+            update_time_millis (int | Unset): Tracking status update time. Unix timestamp in milliseconds.
+            action_code (int | Unset): Code that identifies the tracking event type. Use `description` for the human-
+                readable event message.
+     """
 
     description: str | Unset = UNSET
     update_time_millis: int | Unset = UNSET
     action_code: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         description = self.description
@@ -33,9 +45,11 @@ class GetOrderTrackingResponseDataTracking:
 
         action_code = self.action_code
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if description is not UNSET:
             field_dict["description"] = description
         if update_time_millis is not UNSET:
@@ -44,6 +58,8 @@ class GetOrderTrackingResponseDataTracking:
             field_dict["action_code"] = action_code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -59,6 +75,7 @@ class GetOrderTrackingResponseDataTracking:
             update_time_millis=update_time_millis,
             action_code=action_code,
         )
+
 
         get_order_tracking_response_data_tracking.additional_properties = d
         return get_order_tracking_response_data_tracking

@@ -1,33 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail")
+
 
 
 @_attrs_define
 class GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveItemDetail:
-    """
-    Attributes:
-        goods_id (str | Unset): The unique numeric identifier of the goods within Fulfilled by TikTok.
-        lot_code (str | Unset): The batch or lot number assigned by the manufacturer for this group of items. This field
-            is non-empty only for goods with lot code management.
-        expiration_time (int | Unset): The expiration date of the items in this lot, represented as a Unix timestamp in
-            seconds. This value is non-zero only for goods with expiration-date management.
-        planned_count (int | Unset): The total quantity of this specific lot expected to be received as part of the
-            inbound order.
-        normal_received_count (int | Unset): The quantity of items received at **fulfillment centers** in sellable
-            (good) condition for this lot. If the inbound order is sent to a hub, this value will only be updated when the
-            goods are subsequently transferred to the fulfillment center.
-        defective_received_count (int | Unset): The quantity of items received in a damaged or unsellable state.
-        total_received_count (int | Unset): The sum of both `normal_received_count` and `defective_received_count`.
-    """
+    """ 
+        Attributes:
+            goods_id (str | Unset): The unique numeric identifier of the goods within Fulfilled by TikTok.
+            lot_code (str | Unset): The batch or lot number assigned by the manufacturer for this group of items. This field
+                is non-empty only for goods with lot code management.
+            expiration_time (int | Unset): The expiration date of the items in this lot, represented as a Unix timestamp in
+                seconds. This value is non-zero only for goods with expiration-date management.
+            planned_count (int | Unset): The total quantity of this specific lot expected to be received as part of the
+                inbound order.
+            normal_received_count (int | Unset): The quantity of items received at **fulfillment centers** in sellable
+                (good) condition for this lot. If the inbound order is sent to a hub, this value will only be updated when the
+                goods are subsequently transferred to the fulfillment center.
+            defective_received_count (int | Unset): The quantity of items received in a damaged or unsellable state.
+            total_received_count (int | Unset): The sum of both `normal_received_count` and `defective_received_count`.
+     """
 
     goods_id: str | Unset = UNSET
     lot_code: str | Unset = UNSET
@@ -37,6 +45,10 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveIte
     defective_received_count: int | Unset = UNSET
     total_received_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         goods_id = self.goods_id
@@ -53,9 +65,11 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveIte
 
         total_received_count = self.total_received_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if goods_id is not UNSET:
             field_dict["goods_id"] = goods_id
         if lot_code is not UNSET:
@@ -72,6 +86,8 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveIte
             field_dict["total_received_count"] = total_received_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -99,6 +115,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderInboundGoodsLotReceiveIte
             defective_received_count=defective_received_count,
             total_received_count=total_received_count,
         )
+
 
         get_fbt_inbound_order_details_response_data_inbound_order_inbound_goods_lot_receive_item_detail.additional_properties = d
         return get_fbt_inbound_order_details_response_data_inbound_order_inbound_goods_lot_receive_item_detail

@@ -1,38 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.discount_detail import DiscountDetail
+  from ..models.discount_detail import DiscountDetail
+
+
+
 
 
 T = TypeVar("T", bound="EditProductRequestSubscribeInfoEdit")
 
 
+
 @_attrs_define
 class EditProductRequestSubscribeInfoEdit:
-    """
-    Attributes:
-        subscribe_status (str | Unset): An enum outlining whether the given product has an active Subscribe and Save
-            promotion:
-            - ENABLED
-            - NOT_ENABLED
+    """ 
+        Attributes:
+            subscribe_status (str | Unset): An enum outlining whether the given product has an active Subscribe and Save
+                promotion:
+                - ENABLED
+                - NOT_ENABLED
 
-            This field is required if the subscription is being created or modified.
-        discount_details (list[DiscountDetail] | Unset): All of the Save and Subscribe discount details.
-    """
+                This field is required if the subscription is being created or modified.
+            discount_details (list[DiscountDetail] | Unset): All of the Save and Subscribe discount details.
+     """
 
     subscribe_status: str | Unset = UNSET
     discount_details: list[DiscountDetail] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.discount_detail import DiscountDetail # noqa: PLC0415
         subscribe_status = self.subscribe_status
 
         discount_details: list[dict[str, Any]] | Unset = UNSET
@@ -42,9 +54,13 @@ class EditProductRequestSubscribeInfoEdit:
                 discount_details_item = discount_details_item_data.to_dict()
                 discount_details.append(discount_details_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if subscribe_status is not UNSET:
             field_dict["subscribe_status"] = subscribe_status
         if discount_details is not UNSET:
@@ -52,10 +68,11 @@ class EditProductRequestSubscribeInfoEdit:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.discount_detail import DiscountDetail  # noqa: PLC0415
-
+        from ..models.discount_detail import DiscountDetail # noqa: PLC0415
         d = dict(src_dict)
         subscribe_status = d.pop("subscribe_status", UNSET)
 
@@ -66,12 +83,16 @@ class EditProductRequestSubscribeInfoEdit:
             for discount_details_item_data in _discount_details:
                 discount_details_item = DiscountDetail.from_dict(discount_details_item_data)
 
+
+
                 discount_details.append(discount_details_item)
+
 
         edit_product_request_subscribe_info_edit = cls(
             subscribe_status=subscribe_status,
             discount_details=discount_details,
         )
+
 
         edit_product_request_subscribe_info_edit.additional_properties = d
         return edit_product_request_subscribe_info_edit

@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.edit_product_request import EditProductRequest
 from ...models.edit_product_response import EditProductResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     body: EditProductRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "put",
-        "url": "/product/202509/products/{product_id}".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202509/products/{product_id}".format(product_id=quote(str(product_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,9 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> EditProductResponse | None:
     if response.status_code == 200:
         response_200 = EditProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -59,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: EditProductRequest,
+
 ) -> Response[EditProductResponse]:
-    """Edit Product
+    """ Edit Product
 
      Edit all properties (e.g. description, brand, images) of an existing product that is not in the
     `FREEZE` or `DELETED` state.
@@ -112,11 +123,13 @@ def sync_detailed(
 
     Returns:
         Response[EditProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -125,14 +138,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: EditProductRequest,
+
 ) -> EditProductResponse | None:
-    """Edit Product
+    """ Edit Product
 
      Edit all properties (e.g. description, brand, images) of an existing product that is not in the
     `FREEZE` or `DELETED` state.
@@ -184,22 +197,24 @@ def sync(
 
     Returns:
         EditProductResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: EditProductRequest,
+
 ) -> Response[EditProductResponse]:
-    """Edit Product
+    """ Edit Product
 
      Edit all properties (e.g. description, brand, images) of an existing product that is not in the
     `FREEZE` or `DELETED` state.
@@ -251,25 +266,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[EditProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: EditProductRequest,
+
 ) -> EditProductResponse | None:
-    """Edit Product
+    """ Edit Product
 
      Edit all properties (e.g. description, brand, images) of an existing product that is not in the
     `FREEZE` or `DELETED` state.
@@ -321,12 +340,12 @@ async def asyncio(
 
     Returns:
         EditProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+body=body,
+
+    )).parsed

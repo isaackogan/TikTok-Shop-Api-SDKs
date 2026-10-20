@@ -1,45 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.aov import Aov
-    from ..models.attributed_gmv import AttributedGmv
+  from ..models.aov import Aov
+  from ..models.attributed_gmv import AttributedGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseDataProductSellerLivePerformance")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
-    """
-    Attributes:
-        attributed_gmv (AttributedGmv | Unset):
-        attributed_orders (int | Unset): Number of attributed orders.
-        attributed_sku_orders (int | Unset): Number of attributed SKU orders.
-        attributed_sold_items (int | Unset): Number of attributed items sold.
-        estimated_customers (int | Unset): Estimated number of customers.
-        aov (Aov | Unset):
-        new_live_count (int | Unset): Number of new live streams.
-        product_impressions (int | Unset): Number of product impressions.
-        product_clicks (int | Unset): Number of product clicks.
-        ctr (str | Unset): Click-through rate.
-        add_cart_count (int | Unset): Number of times products were added to the cart.
-        add_cart_rate (str | Unset): Add to cart rate.
-        click_order_rate (str | Unset): Click to order rate.
-        unique_product_impressions (int | Unset): Number of unique product impressions from seller live streaming.
-        unique_clicks (int | Unset): Number of unique product clicks from seller live streaming.
-        unique_ctr (str | Unset): Unique click-through rate.
-        add_cart_users (int | Unset): Number of users who added to cart.
-        unique_atc_rate (str | Unset): Unique add to cart rate.
-        unique_click_order_rate (str | Unset): Unique click to order rate.
-    """
+    """ 
+        Attributes:
+            attributed_gmv (AttributedGmv | Unset):
+            attributed_orders (int | Unset): Number of attributed orders.
+            attributed_sku_orders (int | Unset): Number of attributed SKU orders.
+            attributed_sold_items (int | Unset): Number of attributed items sold.
+            estimated_customers (int | Unset): Estimated number of customers.
+            aov (Aov | Unset):
+            new_live_count (int | Unset): Number of new live streams.
+            product_impressions (int | Unset): Number of product impressions.
+            product_clicks (int | Unset): Number of product clicks.
+            ctr (str | Unset): Click-through rate.
+            add_cart_count (int | Unset): Number of times products were added to the cart.
+            add_cart_rate (str | Unset): Add to cart rate.
+            click_order_rate (str | Unset): Click to order rate.
+            unique_product_impressions (int | Unset): Number of unique product impressions from seller live streaming.
+            unique_clicks (int | Unset): Number of unique product clicks from seller live streaming.
+            unique_ctr (str | Unset): Unique click-through rate.
+            add_cart_users (int | Unset): Number of users who added to cart.
+            unique_atc_rate (str | Unset): Unique add to cart rate.
+            unique_click_order_rate (str | Unset): Unique click to order rate.
+     """
 
     attributed_gmv: AttributedGmv | Unset = UNSET
     attributed_orders: int | Unset = UNSET
@@ -62,7 +69,13 @@ class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
     unique_click_order_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.aov import Aov # noqa: PLC0415
+        from ..models.attributed_gmv import AttributedGmv # noqa: PLC0415
         attributed_gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.attributed_gmv, Unset):
             attributed_gmv = self.attributed_gmv.to_dict()
@@ -105,9 +118,11 @@ class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
 
         unique_click_order_rate = self.unique_click_order_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if attributed_gmv is not UNSET:
             field_dict["attributed_gmv"] = attributed_gmv
         if attributed_orders is not UNSET:
@@ -149,18 +164,22 @@ class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.aov import Aov  # noqa: PLC0415
-        from ..models.attributed_gmv import AttributedGmv  # noqa: PLC0415
-
+        from ..models.aov import Aov # noqa: PLC0415
+        from ..models.attributed_gmv import AttributedGmv # noqa: PLC0415
         d = dict(src_dict)
         _attributed_gmv = d.pop("attributed_gmv", UNSET)
         attributed_gmv: AttributedGmv | Unset
-        if isinstance(_attributed_gmv, Unset):
+        if isinstance(_attributed_gmv,  Unset):
             attributed_gmv = UNSET
         else:
             attributed_gmv = AttributedGmv.from_dict(_attributed_gmv)
+
+
+
 
         attributed_orders = d.pop("attributed_orders", UNSET)
 
@@ -172,10 +191,13 @@ class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
 
         _aov = d.pop("aov", UNSET)
         aov: Aov | Unset
-        if isinstance(_aov, Unset):
+        if isinstance(_aov,  Unset):
             aov = UNSET
         else:
             aov = Aov.from_dict(_aov)
+
+
+
 
         new_live_count = d.pop("new_live_count", UNSET)
 
@@ -224,6 +246,7 @@ class GetShopProductPerformanceListResponseDataProductSellerLivePerformance:
             unique_atc_rate=unique_atc_rate,
             unique_click_order_rate=unique_click_order_rate,
         )
+
 
         get_shop_product_performance_list_response_data_product_seller_live_performance.additional_properties = d
         return get_shop_product_performance_list_response_data_product_seller_live_performance

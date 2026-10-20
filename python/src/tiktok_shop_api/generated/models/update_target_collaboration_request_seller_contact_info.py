@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="UpdateTargetCollaborationRequestSellerContactInfo")
+
 
 
 @_attrs_define
 class UpdateTargetCollaborationRequestSellerContactInfo:
-    """
-    Attributes:
-        email (str): Seller's email contact information
-        phone_number (str | Unset): The phone number of the seller.
-        whatsapp (str | Unset): The phone number used by the seller to register for WhatsApp.
-        telegram (str | Unset): The  seller's Telegram username or phone number.
-        line (str | Unset): The phone number used by the seller to register for the Line app
-    """
+    """ 
+        Attributes:
+            email (str): Seller's email contact information
+            phone_number (str | Unset): The phone number of the seller.
+            whatsapp (str | Unset): The phone number used by the seller to register for WhatsApp.
+            telegram (str | Unset): The  seller's Telegram username or phone number.
+            line (str | Unset): The phone number used by the seller to register for the Line app
+     """
 
     email: str
     phone_number: str | Unset = UNSET
@@ -28,6 +36,10 @@ class UpdateTargetCollaborationRequestSellerContactInfo:
     telegram: str | Unset = UNSET
     line: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
@@ -40,13 +52,12 @@ class UpdateTargetCollaborationRequestSellerContactInfo:
 
         line = self.line
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "email": email,
-            }
-        )
+        field_dict.update({
+            "email": email,
+        })
         if phone_number is not UNSET:
             field_dict["phone_number"] = phone_number
         if whatsapp is not UNSET:
@@ -57,6 +68,8 @@ class UpdateTargetCollaborationRequestSellerContactInfo:
             field_dict["line"] = line
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -78,6 +91,7 @@ class UpdateTargetCollaborationRequestSellerContactInfo:
             telegram=telegram,
             line=line,
         )
+
 
         update_target_collaboration_request_seller_contact_info.additional_properties = d
         return update_target_collaboration_request_seller_contact_info

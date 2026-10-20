@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateProductRequestLocale(StrEnum):
     DE_DE = "de-DE"
     EN_GB = "en-GB"

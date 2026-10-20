@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchSizeChartsLocalesItem(StrEnum):
     DE_DE = "de-DE"
     EN_GB = "en-GB"

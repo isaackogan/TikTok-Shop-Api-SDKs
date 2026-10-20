@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class AddExternalOrderReferencesRequestOrderExternalOrderPlatform(StrEnum):
     AMAZON = "AMAZON"
     BIGCOMMERCE = "BIGCOMMERCE"

@@ -1,41 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_live_products_performance_list_response_data_product_sale_avg_price import (
-        GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice,
-    )
-    from ..models.get_shop_live_products_performance_list_response_data_product_sale_direct_gmv import (
-        GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv,
-    )
+  from ..models.get_shop_live_products_performance_list_response_data_product_sale_avg_price import GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice
+  from ..models.get_shop_live_products_performance_list_response_data_product_sale_direct_gmv import GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEProductsPerformanceListResponseDataProductSale")
 
 
+
 @_attrs_define
 class GetShopLIVEProductsPerformanceListResponseDataProductSale:
-    """
-    Attributes:
-        direct_gmv (GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv | Unset):
-        items_sold (int | Unset): The number of product items sold
-        customers (int | Unset): The total numbers of customers who ordered this product directly from the LIVE,
-            including customers who made returns or refunds.
-        created_sku_orders (int | Unset): The total number of SKU orders created directly from the LIVE for this
-            product.
-        avg_price (GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice | Unset):
-        sku_orders (int | Unset): The total number of paid SKU orders placed directly from the LIVE for this product.
-        main_orders (int | Unset): Total number of paid main orders placed. Main orders refer to the single purchase
-            transaction a customer makes.
-        payment_rate (str | Unset): Main order paid / Main order created of this product
-    """
+    """ 
+        Attributes:
+            direct_gmv (GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv | Unset):
+            items_sold (int | Unset): The number of product items sold
+            customers (int | Unset): The total numbers of customers who ordered this product directly from the LIVE,
+                including customers who made returns or refunds.
+            created_sku_orders (int | Unset): The total number of SKU orders created directly from the LIVE for this
+                product.
+            avg_price (GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice | Unset):
+            sku_orders (int | Unset): The total number of paid SKU orders placed directly from the LIVE for this product.
+            main_orders (int | Unset): Total number of paid main orders placed. Main orders refer to the single purchase
+                transaction a customer makes.
+            payment_rate (str | Unset): Main order paid / Main order created of this product
+     """
 
     direct_gmv: GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv | Unset = UNSET
     items_sold: int | Unset = UNSET
@@ -47,7 +50,13 @@ class GetShopLIVEProductsPerformanceListResponseDataProductSale:
     payment_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_live_products_performance_list_response_data_product_sale_avg_price import GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice # noqa: PLC0415
+        from ..models.get_shop_live_products_performance_list_response_data_product_sale_direct_gmv import GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv # noqa: PLC0415
         direct_gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.direct_gmv, Unset):
             direct_gmv = self.direct_gmv.to_dict()
@@ -68,9 +77,11 @@ class GetShopLIVEProductsPerformanceListResponseDataProductSale:
 
         payment_rate = self.payment_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if direct_gmv is not UNSET:
             field_dict["direct_gmv"] = direct_gmv
         if items_sold is not UNSET:
@@ -90,22 +101,22 @@ class GetShopLIVEProductsPerformanceListResponseDataProductSale:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_live_products_performance_list_response_data_product_sale_avg_price import (
-            GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice,  # noqa: PLC0415
-        )
-        from ..models.get_shop_live_products_performance_list_response_data_product_sale_direct_gmv import (
-            GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_live_products_performance_list_response_data_product_sale_avg_price import GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice # noqa: PLC0415
+        from ..models.get_shop_live_products_performance_list_response_data_product_sale_direct_gmv import GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv # noqa: PLC0415
         d = dict(src_dict)
         _direct_gmv = d.pop("direct_gmv", UNSET)
         direct_gmv: GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv | Unset
-        if isinstance(_direct_gmv, Unset):
+        if isinstance(_direct_gmv,  Unset):
             direct_gmv = UNSET
         else:
             direct_gmv = GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmv.from_dict(_direct_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
@@ -115,10 +126,13 @@ class GetShopLIVEProductsPerformanceListResponseDataProductSale:
 
         _avg_price = d.pop("avg_price", UNSET)
         avg_price: GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice | Unset
-        if isinstance(_avg_price, Unset):
+        if isinstance(_avg_price,  Unset):
             avg_price = UNSET
         else:
             avg_price = GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice.from_dict(_avg_price)
+
+
+
 
         sku_orders = d.pop("sku_orders", UNSET)
 
@@ -136,6 +150,7 @@ class GetShopLIVEProductsPerformanceListResponseDataProductSale:
             main_orders=main_orders,
             payment_rate=payment_rate,
         )
+
 
         get_shop_live_products_performance_list_response_data_product_sale.additional_properties = d
         return get_shop_live_products_performance_list_response_data_product_sale

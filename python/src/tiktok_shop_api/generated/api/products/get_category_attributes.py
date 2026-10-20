@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_category_attributes_locale import GetCategoryAttributesLocale
 from ...models.get_category_attributes_response import GetCategoryAttributesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +21,12 @@ def _get_kwargs(
     locale: GetCategoryAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_locale: str | Unset = UNSET
@@ -30,24 +39,26 @@ def _get_kwargs(
 
     params["is_live_quick"] = is_live_quick
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202309/categories/{category_id}/attributes".format(
-            category_id=quote(str(category_id), safe=""),
-        ),
+        "url": "/product/202309/categories/{category_id}/attributes".format(category_id=quote(str(category_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetCategoryAttributesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCategoryAttributesResponse | None:
     if response.status_code == 200:
         response_200 = GetCategoryAttributesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -57,9 +68,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetCategoryAttributesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetCategoryAttributesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,8 +84,9 @@ def sync_detailed(
     locale: GetCategoryAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> Response[GetCategoryAttributesResponse]:
-    """Get Category Attributes
+    """ Get Category Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a product in a particular
     category based on your shop's location.
@@ -102,13 +112,15 @@ def sync_detailed(
 
     Returns:
         Response[GetCategoryAttributesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        locale=locale,
-        category_version=category_version,
-        is_live_quick=is_live_quick,
+locale=locale,
+category_version=category_version,
+is_live_quick=is_live_quick,
+
     )
 
     response = client.get_httpx_client().request(
@@ -117,7 +129,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     category_id: str,
     *,
@@ -125,8 +136,9 @@ def sync(
     locale: GetCategoryAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> GetCategoryAttributesResponse | None:
-    """Get Category Attributes
+    """ Get Category Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a product in a particular
     category based on your shop's location.
@@ -152,16 +164,17 @@ def sync(
 
     Returns:
         GetCategoryAttributesResponse
-    """
+     """
+
 
     return sync_detailed(
         category_id=category_id,
-        client=client,
-        locale=locale,
-        category_version=category_version,
-        is_live_quick=is_live_quick,
-    ).parsed
+client=client,
+locale=locale,
+category_version=category_version,
+is_live_quick=is_live_quick,
 
+    ).parsed
 
 async def asyncio_detailed(
     category_id: str,
@@ -170,8 +183,9 @@ async def asyncio_detailed(
     locale: GetCategoryAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> Response[GetCategoryAttributesResponse]:
-    """Get Category Attributes
+    """ Get Category Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a product in a particular
     category based on your shop's location.
@@ -197,19 +211,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCategoryAttributesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        locale=locale,
-        category_version=category_version,
-        is_live_quick=is_live_quick,
+locale=locale,
+category_version=category_version,
+is_live_quick=is_live_quick,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     category_id: str,
@@ -218,8 +235,9 @@ async def asyncio(
     locale: GetCategoryAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
     is_live_quick: bool | Unset = UNSET,
+
 ) -> GetCategoryAttributesResponse | None:
-    """Get Category Attributes
+    """ Get Category Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a product in a particular
     category based on your shop's location.
@@ -245,14 +263,14 @@ async def asyncio(
 
     Returns:
         GetCategoryAttributesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            category_id=category_id,
-            client=client,
-            locale=locale,
-            category_version=category_version,
-            is_live_quick=is_live_quick,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        category_id=category_id,
+client=client,
+locale=locale,
+category_version=category_version,
+is_live_quick=is_live_quick,
+
+    )).parsed

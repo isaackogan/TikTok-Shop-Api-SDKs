@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.batch_ship_packages_request import BatchShipPackagesRequest
 from ...models.batch_ship_packages_response import BatchShipPackagesResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: BatchShipPackagesRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> BatchShipPackagesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> BatchShipPackagesResponse | None:
     if response.status_code == 200:
         response_200 = BatchShipPackagesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[BatchShipPackagesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[BatchShipPackagesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: BatchShipPackagesRequest,
+
 ) -> Response[BatchShipPackagesResponse]:
-    """Batch Ship Packages
+    """ Batch Ship Packages
 
      Use this API to ship one or more packages in a single request. The API supports TikTok Shipping,
     Seller Shipping, and In-store Pickup.
@@ -83,10 +93,12 @@ def sync_detailed(
 
     Returns:
         Response[BatchShipPackagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -95,13 +107,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: BatchShipPackagesRequest,
+
 ) -> BatchShipPackagesResponse | None:
-    """Batch Ship Packages
+    """ Batch Ship Packages
 
      Use this API to ship one or more packages in a single request. The API supports TikTok Shipping,
     Seller Shipping, and In-store Pickup.
@@ -125,20 +137,22 @@ def sync(
 
     Returns:
         BatchShipPackagesResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: BatchShipPackagesRequest,
+
 ) -> Response[BatchShipPackagesResponse]:
-    """Batch Ship Packages
+    """ Batch Ship Packages
 
      Use this API to ship one or more packages in a single request. The API supports TikTok Shipping,
     Seller Shipping, and In-store Pickup.
@@ -162,23 +176,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[BatchShipPackagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: BatchShipPackagesRequest,
+
 ) -> BatchShipPackagesResponse | None:
-    """Batch Ship Packages
+    """ Batch Ship Packages
 
      Use this API to ship one or more packages in a single request. The API supports TikTok Shipping,
     Seller Shipping, and In-store Pickup.
@@ -202,11 +220,11 @@ async def asyncio(
 
     Returns:
         BatchShipPackagesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

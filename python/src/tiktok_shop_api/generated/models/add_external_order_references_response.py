@@ -1,29 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.add_external_order_references_response_data import AddExternalOrderReferencesResponseData
+  from ..models.add_external_order_references_response_data import AddExternalOrderReferencesResponseData
+
+
+
 
 
 T = TypeVar("T", bound="AddExternalOrderReferencesResponse")
 
 
+
 @_attrs_define
 class AddExternalOrderReferencesResponse:
-    """
-    Attributes:
-        code (int | Unset): Status code; 0 means success.
-        message (str | Unset): Success or failure message.
-        request_id (str | Unset): Request log ID.
-        data (AddExternalOrderReferencesResponseData | Unset):
-    """
+    """ 
+        Attributes:
+            code (int | Unset): Status code; 0 means success.
+            message (str | Unset): Success or failure message.
+            request_id (str | Unset): Request log ID.
+            data (AddExternalOrderReferencesResponseData | Unset):
+     """
 
     code: int | Unset = UNSET
     message: str | Unset = UNSET
@@ -31,7 +38,12 @@ class AddExternalOrderReferencesResponse:
     data: AddExternalOrderReferencesResponseData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.add_external_order_references_response_data import AddExternalOrderReferencesResponseData # noqa: PLC0415
         code = self.code
 
         message = self.message
@@ -42,9 +54,11 @@ class AddExternalOrderReferencesResponse:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if message is not UNSET:
@@ -56,12 +70,11 @@ class AddExternalOrderReferencesResponse:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.add_external_order_references_response_data import (
-            AddExternalOrderReferencesResponseData,  # noqa: PLC0415
-        )
-
+        from ..models.add_external_order_references_response_data import AddExternalOrderReferencesResponseData # noqa: PLC0415
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
@@ -71,10 +84,13 @@ class AddExternalOrderReferencesResponse:
 
         _data = d.pop("data", UNSET)
         data: AddExternalOrderReferencesResponseData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = AddExternalOrderReferencesResponseData.from_dict(_data)
+
+
+
 
         add_external_order_references_response = cls(
             code=code,
@@ -82,6 +98,7 @@ class AddExternalOrderReferencesResponse:
             request_id=request_id,
             data=data,
         )
+
 
         add_external_order_references_response.additional_properties = d
         return add_external_order_references_response

@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.cancel_inbound_order_request import CancelInboundOrderRequest
 from ...models.cancel_inbound_order_response import CancelInboundOrderResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CancelInboundOrderRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CancelInboundOrderResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CancelInboundOrderResponse | None:
     if response.status_code == 200:
         response_200 = CancelInboundOrderResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CancelInboundOrderResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CancelInboundOrderResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CancelInboundOrderRequest,
+
 ) -> Response[CancelInboundOrderResponse]:
-    """Cancel Inbound Order
+    """ Cancel Inbound Order
 
      This API is used to cancel one inbound order per request prior to warehouse arrival, preventing
     further processing and updating the order status.
@@ -76,10 +86,12 @@ def sync_detailed(
 
     Returns:
         Response[CancelInboundOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -88,13 +100,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CancelInboundOrderRequest,
+
 ) -> CancelInboundOrderResponse | None:
-    """Cancel Inbound Order
+    """ Cancel Inbound Order
 
      This API is used to cancel one inbound order per request prior to warehouse arrival, preventing
     further processing and updating the order status.
@@ -111,20 +123,22 @@ def sync(
 
     Returns:
         CancelInboundOrderResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CancelInboundOrderRequest,
+
 ) -> Response[CancelInboundOrderResponse]:
-    """Cancel Inbound Order
+    """ Cancel Inbound Order
 
      This API is used to cancel one inbound order per request prior to warehouse arrival, preventing
     further processing and updating the order status.
@@ -141,23 +155,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CancelInboundOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CancelInboundOrderRequest,
+
 ) -> CancelInboundOrderResponse | None:
-    """Cancel Inbound Order
+    """ Cancel Inbound Order
 
      This API is used to cancel one inbound order per request prior to warehouse arrival, preventing
     further processing and updating the order status.
@@ -174,11 +192,11 @@ async def asyncio(
 
     Returns:
         CancelInboundOrderResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

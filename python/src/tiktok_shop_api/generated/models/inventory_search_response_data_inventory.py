@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.inventory_search_response_data_inventory_sku import InventorySearchResponseDataInventorySku
+  from ..models.inventory_search_response_data_inventory_sku import InventorySearchResponseDataInventorySku
+
+
+
 
 
 T = TypeVar("T", bound="InventorySearchResponseDataInventory")
 
 
+
 @_attrs_define
 class InventorySearchResponseDataInventory:
-    """
-    Attributes:
-        product_id (str | Unset): The ID of the requested product.
-        skus (list[InventorySearchResponseDataInventorySku] | Unset): The list of requested SKUs.
-    """
+    """ 
+        Attributes:
+            product_id (str | Unset): The ID of the requested product.
+            skus (list[InventorySearchResponseDataInventorySku] | Unset): The list of requested SKUs.
+     """
 
     product_id: str | Unset = UNSET
     skus: list[InventorySearchResponseDataInventorySku] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.inventory_search_response_data_inventory_sku import InventorySearchResponseDataInventorySku # noqa: PLC0415
         product_id = self.product_id
 
         skus: list[dict[str, Any]] | Unset = UNSET
@@ -37,9 +49,13 @@ class InventorySearchResponseDataInventory:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_id is not UNSET:
             field_dict["product_id"] = product_id
         if skus is not UNSET:
@@ -47,12 +63,11 @@ class InventorySearchResponseDataInventory:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.inventory_search_response_data_inventory_sku import (
-            InventorySearchResponseDataInventorySku,  # noqa: PLC0415
-        )
-
+        from ..models.inventory_search_response_data_inventory_sku import InventorySearchResponseDataInventorySku # noqa: PLC0415
         d = dict(src_dict)
         product_id = d.pop("product_id", UNSET)
 
@@ -63,12 +78,16 @@ class InventorySearchResponseDataInventory:
             for skus_item_data in _skus:
                 skus_item = InventorySearchResponseDataInventorySku.from_dict(skus_item_data)
 
+
+
                 skus.append(skus_item)
+
 
         inventory_search_response_data_inventory = cls(
             product_id=product_id,
             skus=skus,
         )
+
 
         inventory_search_response_data_inventory.additional_properties = d
         return inventory_search_response_data_inventory

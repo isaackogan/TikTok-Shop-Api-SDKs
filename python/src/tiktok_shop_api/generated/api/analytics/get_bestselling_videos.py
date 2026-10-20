@@ -1,14 +1,19 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_bestselling_videos_response import GetBestsellingVideosResponse
 from ...models.get_bestselling_videos_time_slot import GetBestsellingVideosTimeSlot
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -16,7 +21,12 @@ def _get_kwargs(
     date: datetime.date,
     time_slot: GetBestsellingVideosTimeSlot,
     currency: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_date = date.isoformat()
@@ -27,7 +37,9 @@ def _get_kwargs(
 
     params["currency"] = currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -35,14 +47,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetBestsellingVideosResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetBestsellingVideosResponse | None:
     if response.status_code == 200:
         response_200 = GetBestsellingVideosResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -52,9 +66,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetBestsellingVideosResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetBestsellingVideosResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,8 +81,9 @@ def sync_detailed(
     date: datetime.date,
     time_slot: GetBestsellingVideosTimeSlot,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetBestsellingVideosResponse]:
-    """Get Bestselling Videos
+    """ Get Bestselling Videos
 
      Returns up to 100 videos ranked by gross merchandise value (GMV) in descending order for the date
     range selected by `date` and `time_slot`.
@@ -86,12 +99,14 @@ def sync_detailed(
 
     Returns:
         Response[GetBestsellingVideosResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        currency=currency,
+time_slot=time_slot,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -100,15 +115,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     date: datetime.date,
     time_slot: GetBestsellingVideosTimeSlot,
     currency: str | Unset = UNSET,
+
 ) -> GetBestsellingVideosResponse | None:
-    """Get Bestselling Videos
+    """ Get Bestselling Videos
 
      Returns up to 100 videos ranked by gross merchandise value (GMV) in descending order for the date
     range selected by `date` and `time_slot`.
@@ -124,15 +139,16 @@ def sync(
 
     Returns:
         GetBestsellingVideosResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        date=date,
-        time_slot=time_slot,
-        currency=currency,
-    ).parsed
+date=date,
+time_slot=time_slot,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -140,8 +156,9 @@ async def asyncio_detailed(
     date: datetime.date,
     time_slot: GetBestsellingVideosTimeSlot,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetBestsellingVideosResponse]:
-    """Get Bestselling Videos
+    """ Get Bestselling Videos
 
      Returns up to 100 videos ranked by gross merchandise value (GMV) in descending order for the date
     range selected by `date` and `time_slot`.
@@ -157,18 +174,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetBestsellingVideosResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         date=date,
-        time_slot=time_slot,
-        currency=currency,
+time_slot=time_slot,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -176,8 +196,9 @@ async def asyncio(
     date: datetime.date,
     time_slot: GetBestsellingVideosTimeSlot,
     currency: str | Unset = UNSET,
+
 ) -> GetBestsellingVideosResponse | None:
-    """Get Bestselling Videos
+    """ Get Bestselling Videos
 
      Returns up to 100 videos ranked by gross merchandise value (GMV) in descending order for the date
     range selected by `date` and `time_slot`.
@@ -193,13 +214,13 @@ async def asyncio(
 
     Returns:
         GetBestsellingVideosResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            date=date,
-            time_slot=time_slot,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+date=date,
+time_slot=time_slot,
+currency=currency,
+
+    )).parsed

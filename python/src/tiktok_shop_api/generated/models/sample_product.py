@@ -1,29 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="SampleProduct")
+
 
 
 @_attrs_define
 class SampleProduct:
-    """
-    Attributes:
-        id (str | Unset): The product identifier.
-        sku_id (str | Unset): The SKU identifier.
-        sku_sale_property_value_names (list[str] | Unset): Sku property name list for this sku id.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product identifier.
+            sku_id (str | Unset): The SKU identifier.
+            sku_sale_property_value_names (list[str] | Unset): Sku property name list for this sku id.
+     """
 
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
     sku_sale_property_value_names: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -34,9 +47,13 @@ class SampleProduct:
         if not isinstance(self.sku_sale_property_value_names, Unset):
             sku_sale_property_value_names = self.sku_sale_property_value_names
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if sku_id is not UNSET:
@@ -45,6 +62,8 @@ class SampleProduct:
             field_dict["sku_sale_property_value_names"] = sku_sale_property_value_names
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -55,11 +74,13 @@ class SampleProduct:
 
         sku_sale_property_value_names = cast(list[str], d.pop("sku_sale_property_value_names", UNSET))
 
+
         sample_product = cls(
             id=id,
             sku_id=sku_id,
             sku_sale_property_value_names=sku_sale_property_value_names,
         )
+
 
         sample_product.additional_properties = d
         return sample_product

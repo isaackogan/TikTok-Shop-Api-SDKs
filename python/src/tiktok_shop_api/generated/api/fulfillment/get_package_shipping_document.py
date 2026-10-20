@@ -1,15 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_package_shipping_document_document_format import GetPackageShippingDocumentDocumentFormat
 from ...models.get_package_shipping_document_document_size import GetPackageShippingDocumentDocumentSize
 from ...models.get_package_shipping_document_response import GetPackageShippingDocumentResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,7 +23,12 @@ def _get_kwargs(
     document_size: GetPackageShippingDocumentDocumentSize | Unset = UNSET,
     document_format: GetPackageShippingDocumentDocumentFormat | Unset = UNSET,
     shipping_period: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["document_type"] = document_type
@@ -38,24 +47,26 @@ def _get_kwargs(
 
     params["shipping_period"] = shipping_period
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/fulfillment/202309/packages/{package_id}/shipping_documents".format(
-            package_id=quote(str(package_id), safe=""),
-        ),
+        "url": "/fulfillment/202309/packages/{package_id}/shipping_documents".format(package_id=quote(str(package_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetPackageShippingDocumentResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetPackageShippingDocumentResponse | None:
     if response.status_code == 200:
         response_200 = GetPackageShippingDocumentResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -65,9 +76,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetPackageShippingDocumentResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetPackageShippingDocumentResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -84,8 +93,9 @@ def sync_detailed(
     document_size: GetPackageShippingDocumentDocumentSize | Unset = UNSET,
     document_format: GetPackageShippingDocumentDocumentFormat | Unset = UNSET,
     shipping_period: str | Unset = UNSET,
+
 ) -> Response[GetPackageShippingDocumentResponse]:
-    """Get Package Shipping Document
+    """ Get Package Shipping Document
 
      For packages shipped with TikTok Shipping, use this API to retrieve the URL of the shipping document
     selected by `document_type` for the package specified by `package_id`. First call `Ship Package` to
@@ -104,14 +114,16 @@ def sync_detailed(
 
     Returns:
         Response[GetPackageShippingDocumentResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
-        document_type=document_type,
-        document_size=document_size,
-        document_format=document_format,
-        shipping_period=shipping_period,
+document_type=document_type,
+document_size=document_size,
+document_format=document_format,
+shipping_period=shipping_period,
+
     )
 
     response = client.get_httpx_client().request(
@@ -119,7 +131,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     package_id: str,
@@ -129,8 +140,9 @@ def sync(
     document_size: GetPackageShippingDocumentDocumentSize | Unset = UNSET,
     document_format: GetPackageShippingDocumentDocumentFormat | Unset = UNSET,
     shipping_period: str | Unset = UNSET,
+
 ) -> GetPackageShippingDocumentResponse | None:
-    """Get Package Shipping Document
+    """ Get Package Shipping Document
 
      For packages shipped with TikTok Shipping, use this API to retrieve the URL of the shipping document
     selected by `document_type` for the package specified by `package_id`. First call `Ship Package` to
@@ -149,17 +161,18 @@ def sync(
 
     Returns:
         GetPackageShippingDocumentResponse
-    """
+     """
+
 
     return sync_detailed(
         package_id=package_id,
-        client=client,
-        document_type=document_type,
-        document_size=document_size,
-        document_format=document_format,
-        shipping_period=shipping_period,
-    ).parsed
+client=client,
+document_type=document_type,
+document_size=document_size,
+document_format=document_format,
+shipping_period=shipping_period,
 
+    ).parsed
 
 async def asyncio_detailed(
     package_id: str,
@@ -169,8 +182,9 @@ async def asyncio_detailed(
     document_size: GetPackageShippingDocumentDocumentSize | Unset = UNSET,
     document_format: GetPackageShippingDocumentDocumentFormat | Unset = UNSET,
     shipping_period: str | Unset = UNSET,
+
 ) -> Response[GetPackageShippingDocumentResponse]:
-    """Get Package Shipping Document
+    """ Get Package Shipping Document
 
      For packages shipped with TikTok Shipping, use this API to retrieve the URL of the shipping document
     selected by `document_type` for the package specified by `package_id`. First call `Ship Package` to
@@ -189,20 +203,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetPackageShippingDocumentResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         package_id=package_id,
-        document_type=document_type,
-        document_size=document_size,
-        document_format=document_format,
-        shipping_period=shipping_period,
+document_type=document_type,
+document_size=document_size,
+document_format=document_format,
+shipping_period=shipping_period,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     package_id: str,
@@ -212,8 +229,9 @@ async def asyncio(
     document_size: GetPackageShippingDocumentDocumentSize | Unset = UNSET,
     document_format: GetPackageShippingDocumentDocumentFormat | Unset = UNSET,
     shipping_period: str | Unset = UNSET,
+
 ) -> GetPackageShippingDocumentResponse | None:
-    """Get Package Shipping Document
+    """ Get Package Shipping Document
 
      For packages shipped with TikTok Shipping, use this API to retrieve the URL of the shipping document
     selected by `document_type` for the package specified by `package_id`. First call `Ship Package` to
@@ -232,15 +250,15 @@ async def asyncio(
 
     Returns:
         GetPackageShippingDocumentResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            package_id=package_id,
-            client=client,
-            document_type=document_type,
-            document_size=document_size,
-            document_format=document_format,
-            shipping_period=shipping_period,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        package_id=package_id,
+client=client,
+document_type=document_type,
+document_size=document_size,
+document_format=document_format,
+shipping_period=shipping_period,
+
+    )).parsed

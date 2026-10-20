@@ -1,48 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_affiliate_campaign_creator_product_sample_status_response_data_sample_status_tracking_result import (
-        GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult,
-    )
+  from ..models.get_affiliate_campaign_creator_product_sample_status_response_data_sample_status_tracking_result import GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult
+
+
+
 
 
 T = TypeVar("T", bound="GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus")
 
 
+
 @_attrs_define
 class GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus:
-    """
-    Attributes:
-        shipping_provider_name (str | Unset): The name of the shipping provider
-        delivery_option (str | Unset): The delivery option:
-            - ECONOMY_SHIPPING
-            - PREMIUM_SHIPPING
-        estimated_earliest_delivery_date (str | Unset): The earliest estimated delivery date in Unix epoch format.
-        estimated_latest_delivery_date (str | Unset): The latest estimated delivery date in Unix epoch format.
-        quantity (int | Unset): The quantity of products delivered.
-        tracking_results (list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] |
-            Unset): A list of objects representing tracking events.
-    """
+    """ 
+        Attributes:
+            shipping_provider_name (str | Unset): The name of the shipping provider
+            delivery_option (str | Unset): The delivery option:
+                - ECONOMY_SHIPPING
+                - PREMIUM_SHIPPING
+            estimated_earliest_delivery_date (str | Unset): The earliest estimated delivery date in Unix epoch format.
+            estimated_latest_delivery_date (str | Unset): The latest estimated delivery date in Unix epoch format.
+            quantity (int | Unset): The quantity of products delivered.
+            tracking_results (list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] |
+                Unset): A list of objects representing tracking events.
+     """
 
     shipping_provider_name: str | Unset = UNSET
     delivery_option: str | Unset = UNSET
     estimated_earliest_delivery_date: str | Unset = UNSET
     estimated_latest_delivery_date: str | Unset = UNSET
     quantity: int | Unset = UNSET
-    tracking_results: (
-        list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] | Unset
-    ) = UNSET
+    tracking_results: list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_affiliate_campaign_creator_product_sample_status_response_data_sample_status_tracking_result import GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult # noqa: PLC0415
         shipping_provider_name = self.shipping_provider_name
 
         delivery_option = self.delivery_option
@@ -60,9 +68,13 @@ class GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus:
                 tracking_results_item = tracking_results_item_data.to_dict()
                 tracking_results.append(tracking_results_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shipping_provider_name is not UNSET:
             field_dict["shipping_provider_name"] = shipping_provider_name
         if delivery_option is not UNSET:
@@ -78,12 +90,11 @@ class GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_affiliate_campaign_creator_product_sample_status_response_data_sample_status_tracking_result import (
-            GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult,  # noqa: PLC0415
-        )
-
+        from ..models.get_affiliate_campaign_creator_product_sample_status_response_data_sample_status_tracking_result import GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult # noqa: PLC0415
         d = dict(src_dict)
         shipping_provider_name = d.pop("shipping_provider_name", UNSET)
 
@@ -96,19 +107,16 @@ class GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus:
         quantity = d.pop("quantity", UNSET)
 
         _tracking_results = d.pop("tracking_results", UNSET)
-        tracking_results: (
-            list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] | Unset
-        ) = UNSET
+        tracking_results: list[GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult] | Unset = UNSET
         if _tracking_results is not UNSET:
             tracking_results = []
             for tracking_results_item_data in _tracking_results:
-                tracking_results_item = (
-                    GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult.from_dict(
-                        tracking_results_item_data
-                    )
-                )
+                tracking_results_item = GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult.from_dict(tracking_results_item_data)
+
+
 
                 tracking_results.append(tracking_results_item)
+
 
         get_affiliate_campaign_creator_product_sample_status_response_data_sample_status = cls(
             shipping_provider_name=shipping_provider_name,
@@ -118,6 +126,7 @@ class GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatus:
             quantity=quantity,
             tracking_results=tracking_results,
         )
+
 
         get_affiliate_campaign_creator_product_sample_status_response_data_sample_status.additional_properties = d
         return get_affiliate_campaign_creator_product_sample_status_response_data_sample_status

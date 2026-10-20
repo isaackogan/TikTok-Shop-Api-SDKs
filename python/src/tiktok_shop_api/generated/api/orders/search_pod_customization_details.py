@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_pod_customization_details_request import SearchPODCustomizationDetailsRequest
 from ...models.search_pod_customization_details_response import SearchPODCustomizationDetailsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: SearchPODCustomizationDetailsRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchPODCustomizationDetailsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchPODCustomizationDetailsResponse | None:
     if response.status_code == 200:
         response_200 = SearchPODCustomizationDetailsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchPODCustomizationDetailsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchPODCustomizationDetailsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SearchPODCustomizationDetailsRequest,
+
 ) -> Response[SearchPODCustomizationDetailsResponse]:
-    """Search POD Customization Details
+    """ Search POD Customization Details
 
      Search for POD customization details for the specified order lines.
 
@@ -72,10 +82,12 @@ def sync_detailed(
 
     Returns:
         Response[SearchPODCustomizationDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -84,13 +96,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchPODCustomizationDetailsRequest,
+
 ) -> SearchPODCustomizationDetailsResponse | None:
-    """Search POD Customization Details
+    """ Search POD Customization Details
 
      Search for POD customization details for the specified order lines.
 
@@ -103,20 +115,22 @@ def sync(
 
     Returns:
         SearchPODCustomizationDetailsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SearchPODCustomizationDetailsRequest,
+
 ) -> Response[SearchPODCustomizationDetailsResponse]:
-    """Search POD Customization Details
+    """ Search POD Customization Details
 
      Search for POD customization details for the specified order lines.
 
@@ -129,23 +143,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchPODCustomizationDetailsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: SearchPODCustomizationDetailsRequest,
+
 ) -> SearchPODCustomizationDetailsResponse | None:
-    """Search POD Customization Details
+    """ Search POD Customization Details
 
      Search for POD customization details for the specified order lines.
 
@@ -158,11 +176,11 @@ async def asyncio(
 
     Returns:
         SearchPODCustomizationDetailsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

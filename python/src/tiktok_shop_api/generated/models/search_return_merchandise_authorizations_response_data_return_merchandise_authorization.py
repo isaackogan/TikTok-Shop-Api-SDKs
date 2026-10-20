@@ -1,41 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.line_item import LineItem
-    from ..models.sku_return_request import SkuReturnRequest
+  from ..models.line_item import LineItem
+  from ..models.sku_return_request import SkuReturnRequest
+
+
+
 
 
 T = TypeVar("T", bound="SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization")
 
 
+
 @_attrs_define
 class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization:
-    """
-    Attributes:
-        id (str | Unset): Unique identifier for this RMA data.
-        package_id (str | Unset): Identifier of the associated physical return package.
-        aftersales_request_id (str | Unset): Identifier of the parent aftersales request.
-        status (str | Unset): The current state of this RMA data.
-            Possible values:
-            - `INIT`
-            - `AWAITING_BUYER_RETURN`
-            - `RETURN_IN_TRANSIT`
-            - `PENDING_PACKAGE_REVIEW`
-            - `PACKAGE_REVIEW_COMPLETED`
-        line_items (list[LineItem] | Unset): Item units expected in this return package. This field is returned only
-            when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
-        sku_return_requests (list[SkuReturnRequest] | Unset): SKU-level sub return requests associated with this RMA.
-            This field is returned only when `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching
-            data is available.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unique identifier for this RMA data.
+            package_id (str | Unset): Identifier of the associated physical return package.
+            aftersales_request_id (str | Unset): Identifier of the parent aftersales request.
+            status (str | Unset): The current state of this RMA data.
+                Possible values:
+                - `INIT`
+                - `AWAITING_BUYER_RETURN`
+                - `RETURN_IN_TRANSIT`
+                - `PENDING_PACKAGE_REVIEW`
+                - `PACKAGE_REVIEW_COMPLETED`
+            line_items (list[LineItem] | Unset): Item units expected in this return package. This field is returned only
+                when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
+            sku_return_requests (list[SkuReturnRequest] | Unset): SKU-level sub return requests associated with this RMA.
+                This field is returned only when `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching
+                data is available.
+     """
 
     id: str | Unset = UNSET
     package_id: str | Unset = UNSET
@@ -45,7 +52,13 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
     sku_return_requests: list[SkuReturnRequest] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.line_item import LineItem # noqa: PLC0415
+        from ..models.sku_return_request import SkuReturnRequest # noqa: PLC0415
         id = self.id
 
         package_id = self.package_id
@@ -61,6 +74,8 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
                 line_items_item = line_items_item_data.to_dict()
                 line_items.append(line_items_item)
 
+
+
         sku_return_requests: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sku_return_requests, Unset):
             sku_return_requests = []
@@ -68,9 +83,13 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
                 sku_return_requests_item = sku_return_requests_item_data.to_dict()
                 sku_return_requests.append(sku_return_requests_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if package_id is not UNSET:
@@ -86,11 +105,12 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.line_item import LineItem  # noqa: PLC0415
-        from ..models.sku_return_request import SkuReturnRequest  # noqa: PLC0415
-
+        from ..models.line_item import LineItem # noqa: PLC0415
+        from ..models.sku_return_request import SkuReturnRequest # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -107,7 +127,10 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
             for line_items_item_data in _line_items:
                 line_items_item = LineItem.from_dict(line_items_item_data)
 
+
+
                 line_items.append(line_items_item)
+
 
         _sku_return_requests = d.pop("sku_return_requests", UNSET)
         sku_return_requests: list[SkuReturnRequest] | Unset = UNSET
@@ -116,7 +139,10 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
             for sku_return_requests_item_data in _sku_return_requests:
                 sku_return_requests_item = SkuReturnRequest.from_dict(sku_return_requests_item_data)
 
+
+
                 sku_return_requests.append(sku_return_requests_item)
+
 
         search_return_merchandise_authorizations_response_data_return_merchandise_authorization = cls(
             id=id,
@@ -126,6 +152,7 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
             line_items=line_items,
             sku_return_requests=sku_return_requests,
         )
+
 
         search_return_merchandise_authorizations_response_data_return_merchandise_authorization.additional_properties = d
         return search_return_merchandise_authorizations_response_data_return_merchandise_authorization

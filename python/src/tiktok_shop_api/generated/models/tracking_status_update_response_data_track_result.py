@@ -1,32 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="TrackingStatusUpdateResponseDataTrackResult")
+
 
 
 @_attrs_define
 class TrackingStatusUpdateResponseDataTrackResult:
-    """
-    Attributes:
-        action_code (int | Unset): The standard trajectory node code must belong to the allowlist. See the below action
-            code.
-        occur_time (int | Unset): Actual Trajectory Occurrence Time. Unix timestamp GMT (UTC+00:00). The unit is
-            milliseconds.
-        description (str | Unset): The original trajectory description of the caller.
-        code (int | Unset): The success or failure status of the trace corresponding to this action code, see the below
-            error code
-        message (str | Unset): The success or failure messages returned in the trace corresponding to this action code.
-            Reasons of failure will be described in the message.
-        tracking_no (str | Unset): The waybill number used when placing an order. If there is no tracking code, fill in
-            the invoice id instead. And it may change in split shipment, it may change in different track in this scene.
-    """
+    """ 
+        Attributes:
+            action_code (int | Unset): The standard trajectory node code must belong to the allowlist. See the below action
+                code.
+            occur_time (int | Unset): Actual Trajectory Occurrence Time. Unix timestamp GMT (UTC+00:00). The unit is
+                milliseconds.
+            description (str | Unset): The original trajectory description of the caller.
+            code (int | Unset): The success or failure status of the trace corresponding to this action code, see the below
+                error code
+            message (str | Unset): The success or failure messages returned in the trace corresponding to this action code.
+                Reasons of failure will be described in the message.
+            tracking_no (str | Unset): The waybill number used when placing an order. If there is no tracking code, fill in
+                the invoice id instead. And it may change in split shipment, it may change in different track in this scene.
+     """
 
     action_code: int | Unset = UNSET
     occur_time: int | Unset = UNSET
@@ -35,6 +43,10 @@ class TrackingStatusUpdateResponseDataTrackResult:
     message: str | Unset = UNSET
     tracking_no: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         action_code = self.action_code
@@ -49,9 +61,11 @@ class TrackingStatusUpdateResponseDataTrackResult:
 
         tracking_no = self.tracking_no
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if action_code is not UNSET:
             field_dict["action_code"] = action_code
         if occur_time is not UNSET:
@@ -66,6 +80,8 @@ class TrackingStatusUpdateResponseDataTrackResult:
             field_dict["tracking_no"] = tracking_no
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -90,6 +106,7 @@ class TrackingStatusUpdateResponseDataTrackResult:
             message=message,
             tracking_no=tracking_no,
         )
+
 
         tracking_status_update_response_data_track_result.additional_properties = d
         return tracking_status_update_response_data_track_result

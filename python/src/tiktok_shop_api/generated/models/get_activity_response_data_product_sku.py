@@ -1,33 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.activity_price import ActivityPrice
+  from ..models.activity_price import ActivityPrice
+
+
+
 
 
 T = TypeVar("T", bound="GetActivityResponseDataProductSku")
 
 
+
 @_attrs_define
 class GetActivityResponseDataProductSku:
-    """
-    Attributes:
-        id (str | Unset): TikTok Shop SKU ID.
-        discount (str | Unset): Discount value. If the SKU is 10% off, the value is `10`. Available only if
-            `activity_type==DIRECT_DISCOUNT`.
-        quantity_limit (int | Unset): The quantity limit of the SKU involved in the activity. The range is `[1, 99]`, or
-            `-1` for unlimited.
-        quantity_per_user (int | Unset): Limit of SKU purchase per buyer. The range is `[1, 99]`, or `-1` for unlimited.
-        activity_price (ActivityPrice | Unset):
-        used_quantity (int | Unset): The quantity of SKU that have already taken effect in the activity.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): TikTok Shop SKU ID.
+            discount (str | Unset): Discount value. If the SKU is 10% off, the value is `10`. Available only if
+                `activity_type==DIRECT_DISCOUNT`.
+            quantity_limit (int | Unset): The quantity limit of the SKU involved in the activity. The range is `[1, 99]`, or
+                `-1` for unlimited.
+            quantity_per_user (int | Unset): Limit of SKU purchase per buyer. The range is `[1, 99]`, or `-1` for unlimited.
+            activity_price (ActivityPrice | Unset):
+            used_quantity (int | Unset): The quantity of SKU that have already taken effect in the activity.
+     """
 
     id: str | Unset = UNSET
     discount: str | Unset = UNSET
@@ -37,7 +44,12 @@ class GetActivityResponseDataProductSku:
     used_quantity: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.activity_price import ActivityPrice # noqa: PLC0415
         id = self.id
 
         discount = self.discount
@@ -52,9 +64,11 @@ class GetActivityResponseDataProductSku:
 
         used_quantity = self.used_quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if discount is not UNSET:
@@ -70,10 +84,11 @@ class GetActivityResponseDataProductSku:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.activity_price import ActivityPrice  # noqa: PLC0415
-
+        from ..models.activity_price import ActivityPrice # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -85,10 +100,13 @@ class GetActivityResponseDataProductSku:
 
         _activity_price = d.pop("activity_price", UNSET)
         activity_price: ActivityPrice | Unset
-        if isinstance(_activity_price, Unset):
+        if isinstance(_activity_price,  Unset):
             activity_price = UNSET
         else:
             activity_price = ActivityPrice.from_dict(_activity_price)
+
+
+
 
         used_quantity = d.pop("used_quantity", UNSET)
 
@@ -100,6 +118,7 @@ class GetActivityResponseDataProductSku:
             activity_price=activity_price,
             used_quantity=used_quantity,
         )
+
 
         get_activity_response_data_product_sku.additional_properties = d
         return get_activity_response_data_product_sku

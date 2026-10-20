@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult")
+
 
 
 @_attrs_define
 class CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult:
-    """
-    Attributes:
-        creator_level (int | Unset): Creator level evaluated by the quota rules.
-        creator_open_id (str | Unset): Creator Open ID from the request.
-        is_blocked (bool | Unset): Whether a blocking relationship prevents the shop and creator from connecting.
-        is_connected (bool | Unset): Whether the shop is already connected with the creator.
-        is_creator_follower_count_threshold_met (bool | Unset): Whether the creator meets the follower count threshold
-            required for the shop to initiate creator outreach.
-        is_creator_level_quota_available (bool | Unset): Whether outreach quota is available for the creator's level.
-        is_paired (bool | Unset): Whether the shop is paired with the creator.
-    """
+    """ 
+        Attributes:
+            creator_level (int | Unset): Creator level evaluated by the quota rules.
+            creator_open_id (str | Unset): Creator Open ID from the request.
+            is_blocked (bool | Unset): Whether a blocking relationship prevents the shop and creator from connecting.
+            is_connected (bool | Unset): Whether the shop is already connected with the creator.
+            is_creator_follower_count_threshold_met (bool | Unset): Whether the creator meets the follower count threshold
+                required for the shop to initiate creator outreach.
+            is_creator_level_quota_available (bool | Unset): Whether outreach quota is available for the creator's level.
+            is_paired (bool | Unset): Whether the shop is paired with the creator.
+     """
 
     creator_level: int | Unset = UNSET
     creator_open_id: str | Unset = UNSET
@@ -33,6 +41,10 @@ class CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult:
     is_creator_level_quota_available: bool | Unset = UNSET
     is_paired: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         creator_level = self.creator_level
@@ -49,9 +61,11 @@ class CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult:
 
         is_paired = self.is_paired
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if creator_level is not UNSET:
             field_dict["creator_level"] = creator_level
         if creator_open_id is not UNSET:
@@ -68,6 +82,8 @@ class CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult:
             field_dict["is_paired"] = is_paired
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -95,6 +111,7 @@ class CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult:
             is_creator_level_quota_available=is_creator_level_quota_available,
             is_paired=is_paired,
         )
+
 
         check_creator_outreach_eligibility_response_data_creator_eligibility_result.additional_properties = d
         return check_creator_outreach_eligibility_response_data_creator_eligibility_result

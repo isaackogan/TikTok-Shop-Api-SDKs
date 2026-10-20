@@ -1,62 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_marketplace_creator_performance_response_data_creator import (
-        GetMarketplaceCreatorPerformanceResponseDataCreator,
-    )
+  from ..models.get_marketplace_creator_performance_response_data_creator import GetMarketplaceCreatorPerformanceResponseDataCreator
+
+
+
 
 
 T = TypeVar("T", bound="GetMarketplaceCreatorPerformanceResponseData")
 
 
+
 @_attrs_define
 class GetMarketplaceCreatorPerformanceResponseData:
-    """
-    Attributes:
-        creator (GetMarketplaceCreatorPerformanceResponseDataCreator | Unset):
-    """
+    """ 
+        Attributes:
+            creator (GetMarketplaceCreatorPerformanceResponseDataCreator | Unset):
+     """
 
     creator: GetMarketplaceCreatorPerformanceResponseDataCreator | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_marketplace_creator_performance_response_data_creator import GetMarketplaceCreatorPerformanceResponseDataCreator # noqa: PLC0415
         creator: dict[str, Any] | Unset = UNSET
         if not isinstance(self.creator, Unset):
             creator = self.creator.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if creator is not UNSET:
             field_dict["creator"] = creator
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_marketplace_creator_performance_response_data_creator import (
-            GetMarketplaceCreatorPerformanceResponseDataCreator,  # noqa: PLC0415
-        )
-
+        from ..models.get_marketplace_creator_performance_response_data_creator import GetMarketplaceCreatorPerformanceResponseDataCreator # noqa: PLC0415
         d = dict(src_dict)
         _creator = d.pop("creator", UNSET)
         creator: GetMarketplaceCreatorPerformanceResponseDataCreator | Unset
-        if isinstance(_creator, Unset):
+        if isinstance(_creator,  Unset):
             creator = UNSET
         else:
             creator = GetMarketplaceCreatorPerformanceResponseDataCreator.from_dict(_creator)
 
+
+
+
         get_marketplace_creator_performance_response_data = cls(
             creator=creator,
         )
+
 
         get_marketplace_creator_performance_response_data.additional_properties = d
         return get_marketplace_creator_performance_response_data

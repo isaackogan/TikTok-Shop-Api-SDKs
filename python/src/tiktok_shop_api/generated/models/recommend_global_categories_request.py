@@ -1,60 +1,63 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.recommend_global_categories_request_category_version import (
-    RecommendGlobalCategoriesRequestCategoryVersion,
-)
 from ..types import UNSET, Unset
 
+from ..models.recommend_global_categories_request_category_version import RecommendGlobalCategoriesRequestCategoryVersion
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.diagnose_and_optimize_product_request_size_chart_image import (
-        DiagnoseAndOptimizeProductRequestSizeChartImage,
-    )
+  from ..models.diagnose_and_optimize_product_request_size_chart_image import DiagnoseAndOptimizeProductRequestSizeChartImage
+
+
+
 
 
 T = TypeVar("T", bound="RecommendGlobalCategoriesRequest")
 
 
+
 @_attrs_define
 class RecommendGlobalCategoriesRequest:
-    """
-    Attributes:
-        product_title (str): The product title.
-            Title length:
-            - DE, ES, FR, IE, IT, JP, UK, US: [1, 255]
-            - MX:[1,300]
-            - Other regions: [25, 255]
-        description (str | Unset): The product description in HTML format.
+    """ 
+        Attributes:
+            product_title (str): The product title.
+                Title length:
+                - DE, ES, FR, IE, IT, JP, UK, US: [1, 255]
+                - MX:[1,300]
+                - Other regions: [25, 255]
+            description (str | Unset): The product description in HTML format.
 
-            **Note**:
-            - The content must conform to the [HTML syntax](https://html.spec.whatwg.org/). All HTML tags are accepted but
-            to optimize display on the TikTok Shop product detail page, the system will automatically convert certain tags
-            into alternative formats, such as rendering `<table>` tags as images.
-            - Max length: 10,000 characters.
-            - Image guidelines: You must use [TikTok Shop image URLs](6509df95defece02be598a22). Max 30 `<img>` tags, each
-            under 4000px with `src`, `width`, and `height` attributes.
+                **Note**:
+                - The content must conform to the [HTML syntax](https://html.spec.whatwg.org/). All HTML tags are accepted but
+                to optimize display on the TikTok Shop product detail page, the system will automatically convert certain tags
+                into alternative formats, such as rendering `<table>` tags as images.
+                - Max length: 10,000 characters.
+                - Image guidelines: You must use [TikTok Shop image URLs](6509df95defece02be598a22). Max 30 `<img>` tags, each
+                under 4000px with `src`, `width`, and `height` attributes.
 
-            **Recommendations**:
-            - If you are syncing a pre-existing description from another platform, include the full HTML source description
-            here.
-            - Provide a detailed description, ideally over 300 characters.
-            - Include 3-5 key selling points, each under 250 characters, with supporting images.
-            - Use 1600x1600 px for the image dimensions.
-        images (list[DiagnoseAndOptimizeProductRequestSizeChartImage] | Unset): Product images, including gallery
-            images, images that appear in the description, product variant images.
-        category_version (RecommendGlobalCategoriesRequestCategoryVersion | Unset): The category tree version to use for
-            this product.
-            Possible values based on region:
-            - US: `v2`, represents the 7-level category tree.
-              **Important**: If the seller account contains an active US shop, you must pass `v2` when using this API.
-            - Other regions: `v1`, represents the 3-level category tree.
-            Default: `v1`
-    """
+                **Recommendations**:
+                - If you are syncing a pre-existing description from another platform, include the full HTML source description
+                here.
+                - Provide a detailed description, ideally over 300 characters.
+                - Include 3-5 key selling points, each under 250 characters, with supporting images.
+                - Use 1600x1600 px for the image dimensions.
+            images (list[DiagnoseAndOptimizeProductRequestSizeChartImage] | Unset): Product images, including gallery
+                images, images that appear in the description, product variant images.
+            category_version (RecommendGlobalCategoriesRequestCategoryVersion | Unset): The category tree version to use for
+                this product.
+                Possible values based on region:
+                - US: `v2`, represents the 7-level category tree.
+                  **Important**: If the seller account contains an active US shop, you must pass `v2` when using this API.
+                - Other regions: `v1`, represents the 3-level category tree.
+                Default: `v1`
+     """
 
     product_title: str
     description: str | Unset = UNSET
@@ -62,7 +65,12 @@ class RecommendGlobalCategoriesRequest:
     category_version: RecommendGlobalCategoriesRequestCategoryVersion | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.diagnose_and_optimize_product_request_size_chart_image import DiagnoseAndOptimizeProductRequestSizeChartImage # noqa: PLC0415
         product_title = self.product_title
 
         description = self.description
@@ -74,17 +82,19 @@ class RecommendGlobalCategoriesRequest:
                 images_item = images_item_data.to_dict()
                 images.append(images_item)
 
+
+
         category_version: str | Unset = UNSET
         if not isinstance(self.category_version, Unset):
             category_version = self.category_version.value
 
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_title": product_title,
-            }
-        )
+        field_dict.update({
+            "product_title": product_title,
+        })
         if description is not UNSET:
             field_dict["description"] = description
         if images is not UNSET:
@@ -94,12 +104,11 @@ class RecommendGlobalCategoriesRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.diagnose_and_optimize_product_request_size_chart_image import (
-            DiagnoseAndOptimizeProductRequestSizeChartImage,  # noqa: PLC0415
-        )
-
+        from ..models.diagnose_and_optimize_product_request_size_chart_image import DiagnoseAndOptimizeProductRequestSizeChartImage # noqa: PLC0415
         d = dict(src_dict)
         product_title = d.pop("product_title")
 
@@ -112,14 +121,20 @@ class RecommendGlobalCategoriesRequest:
             for images_item_data in _images:
                 images_item = DiagnoseAndOptimizeProductRequestSizeChartImage.from_dict(images_item_data)
 
+
+
                 images.append(images_item)
+
 
         _category_version = d.pop("category_version", UNSET)
         category_version: RecommendGlobalCategoriesRequestCategoryVersion | Unset
-        if isinstance(_category_version, Unset):
+        if isinstance(_category_version,  Unset):
             category_version = UNSET
         else:
             category_version = RecommendGlobalCategoriesRequestCategoryVersion(_category_version)
+
+
+
 
         recommend_global_categories_request = cls(
             product_title=product_title,
@@ -127,6 +142,7 @@ class RecommendGlobalCategoriesRequest:
             images=images,
             category_version=category_version,
         )
+
 
         recommend_global_categories_request.additional_properties = d
         return recommend_global_categories_request

@@ -1,12 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_showcase_products_response import GetShowcaseProductsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -14,7 +19,12 @@ def _get_kwargs(
     page_size: int,
     page_token: str | Unset = UNSET,
     origin: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["page_size"] = page_size
@@ -23,7 +33,9 @@ def _get_kwargs(
 
     params["origin"] = origin
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -31,14 +43,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShowcaseProductsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShowcaseProductsResponse | None:
     if response.status_code == 200:
         response_200 = GetShowcaseProductsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +62,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShowcaseProductsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShowcaseProductsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,8 +77,9 @@ def sync_detailed(
     page_size: int,
     page_token: str | Unset = UNSET,
     origin: str,
+
 ) -> Response[GetShowcaseProductsResponse]:
-    """Get Showcase Products
+    """ Get Showcase Products
 
      This API lists the products in the creator's showcase, paginated by specified page size and iterated
     through pages by page token for up to 2000 products in the showcase. This API is generally used when
@@ -84,12 +97,14 @@ def sync_detailed(
 
     Returns:
         Response[GetShowcaseProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         page_size=page_size,
-        page_token=page_token,
-        origin=origin,
+page_token=page_token,
+origin=origin,
+
     )
 
     response = client.get_httpx_client().request(
@@ -98,15 +113,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     page_size: int,
     page_token: str | Unset = UNSET,
     origin: str,
+
 ) -> GetShowcaseProductsResponse | None:
-    """Get Showcase Products
+    """ Get Showcase Products
 
      This API lists the products in the creator's showcase, paginated by specified page size and iterated
     through pages by page token for up to 2000 products in the showcase. This API is generally used when
@@ -124,15 +139,16 @@ def sync(
 
     Returns:
         GetShowcaseProductsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        page_size=page_size,
-        page_token=page_token,
-        origin=origin,
-    ).parsed
+page_size=page_size,
+page_token=page_token,
+origin=origin,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -140,8 +156,9 @@ async def asyncio_detailed(
     page_size: int,
     page_token: str | Unset = UNSET,
     origin: str,
+
 ) -> Response[GetShowcaseProductsResponse]:
-    """Get Showcase Products
+    """ Get Showcase Products
 
      This API lists the products in the creator's showcase, paginated by specified page size and iterated
     through pages by page token for up to 2000 products in the showcase. This API is generally used when
@@ -159,18 +176,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShowcaseProductsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         page_size=page_size,
-        page_token=page_token,
-        origin=origin,
+page_token=page_token,
+origin=origin,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -178,8 +198,9 @@ async def asyncio(
     page_size: int,
     page_token: str | Unset = UNSET,
     origin: str,
+
 ) -> GetShowcaseProductsResponse | None:
-    """Get Showcase Products
+    """ Get Showcase Products
 
      This API lists the products in the creator's showcase, paginated by specified page size and iterated
     through pages by page token for up to 2000 products in the showcase. This API is generally used when
@@ -197,13 +218,13 @@ async def asyncio(
 
     Returns:
         GetShowcaseProductsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            page_size=page_size,
-            page_token=page_token,
-            origin=origin,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+page_size=page_size,
+page_token=page_token,
+origin=origin,
+
+    )).parsed

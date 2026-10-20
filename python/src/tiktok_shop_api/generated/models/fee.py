@@ -1,38 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Fee")
+
 
 
 @_attrs_define
 class Fee:
-    """
-    Attributes:
-        type_ (str | Unset): The type of fee.
-            Possible values: PFAND
-        amount (str | Unset): The fee amount.
-            Valid range:
-            - PFAND: [0.00 - 6300.00]
-        additional_attribute (str | Unset): An optional attribute that provides additional context for the fee. The
-            accepted values may vary by fee type and market.
+    """ 
+        Attributes:
+            type_ (str | Unset): The type of fee.
+                Possible values: PFAND
+            amount (str | Unset): The fee amount.
+                Valid range:
+                - PFAND: [0.00 - 6300.00]
+            additional_attribute (str | Unset): An optional attribute that provides additional context for the fee. The
+                accepted values may vary by fee type and market.
 
-            Possible values for Pfand:
-            - SINGLE_USE
-            - REUSABLE
-            - NOT_APPLICABLE
-    """
+                Possible values for Pfand:
+                - SINGLE_USE
+                - REUSABLE
+                - NOT_APPLICABLE
+     """
 
     type_: str | Unset = UNSET
     amount: str | Unset = UNSET
     additional_attribute: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         type_ = self.type_
@@ -41,9 +53,11 @@ class Fee:
 
         additional_attribute = self.additional_attribute
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if amount is not UNSET:
@@ -52,6 +66,8 @@ class Fee:
             field_dict["additional_attribute"] = additional_attribute
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class Fee:
             amount=amount,
             additional_attribute=additional_attribute,
         )
+
 
         fee.additional_properties = d
         return fee

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchCancellationsRequestCancelStatusItem(StrEnum):
     CANCELLATION_REQUEST_CANCEL = "CANCELLATION_REQUEST_CANCEL"
     CANCELLATION_REQUEST_COMPLETE = "CANCELLATION_REQUEST_COMPLETE"

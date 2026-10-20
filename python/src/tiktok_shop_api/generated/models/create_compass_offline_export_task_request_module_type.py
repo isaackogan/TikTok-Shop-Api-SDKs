@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateCompassOfflineExportTaskRequestModuleType(StrEnum):
     BASE = "BASE"
     CREATOR = "CREATOR"

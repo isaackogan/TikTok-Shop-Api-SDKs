@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatorSearchSampleApplicationFulfillmentsSortField(StrEnum):
     CREATE_TIME = "create_time"
     EXPIRED_TIME = "expired_time"

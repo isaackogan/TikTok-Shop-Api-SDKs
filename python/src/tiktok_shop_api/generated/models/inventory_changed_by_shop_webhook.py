@@ -1,28 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.inventory_changed_by_shop_webhook_data import InventoryChangedByShopWebhookData
+  from ..models.inventory_changed_by_shop_webhook_data import InventoryChangedByShopWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="InventoryChangedByShopWebhook")
 
 
+
 @_attrs_define
 class InventoryChangedByShopWebhook:
-    """
-    Attributes:
-        type_ (Literal[71]): The ID of the webhook type.
-        tts_notification_id (str): The notification ID.
-        shop_id (str): The shop ID.
-        timestamp (int): The time when the webhook is triggered, expressed as a Unix timestamp.
-        data (InventoryChangedByShopWebhookData):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[71]): The ID of the webhook type.
+            tts_notification_id (str): The notification ID.
+            shop_id (str): The shop ID.
+            timestamp (int): The time when the webhook is triggered, expressed as a Unix timestamp.
+            data (InventoryChangedByShopWebhookData):
+     """
 
     type_: Literal[71]
     tts_notification_id: str
@@ -31,7 +40,12 @@ class InventoryChangedByShopWebhook:
     data: InventoryChangedByShopWebhookData
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.inventory_changed_by_shop_webhook_data import InventoryChangedByShopWebhookData # noqa: PLC0415
         type_ = self.type_
 
         tts_notification_id = self.tts_notification_id
@@ -42,26 +56,26 @@ class InventoryChangedByShopWebhook:
 
         data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-                "tts_notification_id": tts_notification_id,
-                "shop_id": shop_id,
-                "timestamp": timestamp,
-                "data": data,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+            "tts_notification_id": tts_notification_id,
+            "shop_id": shop_id,
+            "timestamp": timestamp,
+            "data": data,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.inventory_changed_by_shop_webhook_data import InventoryChangedByShopWebhookData  # noqa: PLC0415
-
+        from ..models.inventory_changed_by_shop_webhook_data import InventoryChangedByShopWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[71], d.pop("type"))
+        type_ = cast(Literal[71] , d.pop("type"))
         if type_ != 71:
             raise ValueError(f"type must match const 71, got '{type_}'")
 
@@ -73,6 +87,9 @@ class InventoryChangedByShopWebhook:
 
         data = InventoryChangedByShopWebhookData.from_dict(d.pop("data"))
 
+
+
+
         inventory_changed_by_shop_webhook = cls(
             type_=type_,
             tts_notification_id=tts_notification_id,
@@ -80,6 +97,7 @@ class InventoryChangedByShopWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         inventory_changed_by_shop_webhook.additional_properties = d
         return inventory_changed_by_shop_webhook

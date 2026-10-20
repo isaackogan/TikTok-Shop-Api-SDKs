@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchProductsRequestStatus(StrEnum):
     ACTIVATE = "ACTIVATE"
     ALL = "ALL"

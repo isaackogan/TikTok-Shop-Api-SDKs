@@ -1,32 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalCategoriesResponseDataCategory")
+
 
 
 @_attrs_define
 class GetGlobalCategoriesResponseDataCategory:
-    """
-    Attributes:
-        id (str | Unset): The category ID.
-        parent_id (str | Unset): The parent category ID.
-            For the root category, the parent ID is `0`.
-        local_name (str | Unset): The name of the category.
-        is_leaf (bool | Unset): A flag to indicate if the category is a leaf category.
-            **Note**: You can only create or edit products that belong to a leaf category.
-        permission_statuses (list[str] | Unset): The shop's permission status for this category.
-            Possible values:
-            - AVAILABLE: You have the permission to create products in this category.
-            - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.
-            Contact your account manager for assistance.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The category ID.
+            parent_id (str | Unset): The parent category ID.
+                For the root category, the parent ID is `0`.
+            local_name (str | Unset): The name of the category.
+            is_leaf (bool | Unset): A flag to indicate if the category is a leaf category.
+                **Note**: You can only create or edit products that belong to a leaf category.
+            permission_statuses (list[str] | Unset): The shop's permission status for this category.
+                Possible values:
+                - AVAILABLE: You have the permission to create products in this category.
+                - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.
+                Contact your account manager for assistance.
+     """
 
     id: str | Unset = UNSET
     parent_id: str | Unset = UNSET
@@ -34,6 +43,10 @@ class GetGlobalCategoriesResponseDataCategory:
     is_leaf: bool | Unset = UNSET
     permission_statuses: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -48,9 +61,13 @@ class GetGlobalCategoriesResponseDataCategory:
         if not isinstance(self.permission_statuses, Unset):
             permission_statuses = self.permission_statuses
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if parent_id is not UNSET:
@@ -63,6 +80,8 @@ class GetGlobalCategoriesResponseDataCategory:
             field_dict["permission_statuses"] = permission_statuses
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -77,6 +96,7 @@ class GetGlobalCategoriesResponseDataCategory:
 
         permission_statuses = cast(list[str], d.pop("permission_statuses", UNSET))
 
+
         get_global_categories_response_data_category = cls(
             id=id,
             parent_id=parent_id,
@@ -84,6 +104,7 @@ class GetGlobalCategoriesResponseDataCategory:
             is_leaf=is_leaf,
             permission_statuses=permission_statuses,
         )
+
 
         get_global_categories_response_data_category.additional_properties = d
         return get_global_categories_response_data_category

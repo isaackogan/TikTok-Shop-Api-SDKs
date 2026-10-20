@@ -1,46 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.partial_edit_manufacturer_request_locale import PartialEditManufacturerRequestLocale
 from ..types import UNSET, Unset
 
+from ..models.partial_edit_manufacturer_request_locale import PartialEditManufacturerRequestLocale
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.phone_number import PhoneNumber
+  from ..models.phone_number import PhoneNumber
+
+
+
 
 
 T = TypeVar("T", bound="PartialEditManufacturerRequest")
 
 
+
 @_attrs_define
 class PartialEditManufacturerRequest:
-    """
-    Attributes:
-        name (str | Unset): The manufacturer name.
-            Max length: 255 characters
-        registered_trade_name (str | Unset): The registered trade name of the manufacturer.
-            Max length: 200 characters
-        email (str | Unset): The manufacturer's email address. Use a valid email format such as `name@example.com`.
-        phone_number (PhoneNumber | Unset):
-        address (str | Unset): The postal address of the manufacturer.
-            Max length: 500 characters
-        locale (PartialEditManufacturerRequestLocale | Unset): The BCP-47 locale code representing the language of the
-            manufacturer information to update.
-            Possible values:
-            - de-DE
-            - en-IE
-            - es-ES
-            - fr-FR
-            - it-IT
-            Default: The locale of the seller's registered business address.
+    """ 
+        Attributes:
+            name (str | Unset): The manufacturer name.
+                Max length: 255 characters
+            registered_trade_name (str | Unset): The registered trade name of the manufacturer.
+                Max length: 200 characters
+            email (str | Unset): The manufacturer's email address. Use a valid email format such as `name@example.com`.
+            phone_number (PhoneNumber | Unset):
+            address (str | Unset): The postal address of the manufacturer.
+                Max length: 500 characters
+            locale (PartialEditManufacturerRequestLocale | Unset): The BCP-47 locale code representing the language of the
+                manufacturer information to update.
+                Possible values:
+                - de-DE
+                - en-IE
+                - es-ES
+                - fr-FR
+                - it-IT
+                Default: The locale of the seller's registered business address.
 
-            **Note**: Only the language version selected by this locale is updated; other language versions remain
-            unchanged. Ensure the locale matches the language used in the supplied field values.
-    """
+                **Note**: Only the language version selected by this locale is updated; other language versions remain
+                unchanged. Ensure the locale matches the language used in the supplied field values.
+     """
 
     name: str | Unset = UNSET
     registered_trade_name: str | Unset = UNSET
@@ -50,7 +57,12 @@ class PartialEditManufacturerRequest:
     locale: PartialEditManufacturerRequestLocale | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.phone_number import PhoneNumber # noqa: PLC0415
         name = self.name
 
         registered_trade_name = self.registered_trade_name
@@ -67,9 +79,12 @@ class PartialEditManufacturerRequest:
         if not isinstance(self.locale, Unset):
             locale = self.locale.value
 
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if name is not UNSET:
             field_dict["name"] = name
         if registered_trade_name is not UNSET:
@@ -85,10 +100,11 @@ class PartialEditManufacturerRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.phone_number import PhoneNumber  # noqa: PLC0415
-
+        from ..models.phone_number import PhoneNumber # noqa: PLC0415
         d = dict(src_dict)
         name = d.pop("name", UNSET)
 
@@ -98,19 +114,25 @@ class PartialEditManufacturerRequest:
 
         _phone_number = d.pop("phone_number", UNSET)
         phone_number: PhoneNumber | Unset
-        if isinstance(_phone_number, Unset):
+        if isinstance(_phone_number,  Unset):
             phone_number = UNSET
         else:
             phone_number = PhoneNumber.from_dict(_phone_number)
+
+
+
 
         address = d.pop("address", UNSET)
 
         _locale = d.pop("locale", UNSET)
         locale: PartialEditManufacturerRequestLocale | Unset
-        if isinstance(_locale, Unset):
+        if isinstance(_locale,  Unset):
             locale = UNSET
         else:
             locale = PartialEditManufacturerRequestLocale(_locale)
+
+
+
 
         partial_edit_manufacturer_request = cls(
             name=name,
@@ -120,6 +142,7 @@ class PartialEditManufacturerRequest:
             address=address,
             locale=locale,
         )
+
 
         partial_edit_manufacturer_request.additional_properties = d
         return partial_edit_manufacturer_request

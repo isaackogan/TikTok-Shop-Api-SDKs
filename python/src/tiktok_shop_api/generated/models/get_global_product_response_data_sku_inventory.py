@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalProductResponseDataSkuInventory")
+
 
 
 @_attrs_define
 class GetGlobalProductResponseDataSkuInventory:
-    """
-    Attributes:
-        global_warehouse_id (str | Unset): The ID of the global warehouse where the SKU is stored.
-        quantity (int | Unset): The SKU quantity available in the warehouse.
-    """
+    """ 
+        Attributes:
+            global_warehouse_id (str | Unset): The ID of the global warehouse where the SKU is stored.
+            quantity (int | Unset): The SKU quantity available in the warehouse.
+     """
 
     global_warehouse_id: str | Unset = UNSET
     quantity: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         global_warehouse_id = self.global_warehouse_id
 
         quantity = self.quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if global_warehouse_id is not UNSET:
             field_dict["global_warehouse_id"] = global_warehouse_id
         if quantity is not UNSET:
             field_dict["quantity"] = quantity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetGlobalProductResponseDataSkuInventory:
             global_warehouse_id=global_warehouse_id,
             quantity=quantity,
         )
+
 
         get_global_product_response_data_sku_inventory.additional_properties = d
         return get_global_product_response_data_sku_inventory

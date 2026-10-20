@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopSkuPerformanceListSortOrder(StrEnum):
     ASC = "ASC"
     DESC = "DESC"

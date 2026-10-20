@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.replicate_product_response_data_error_detail import ReplicateProductResponseDataErrorDetail
+  from ..models.replicate_product_response_data_error_detail import ReplicateProductResponseDataErrorDetail
+
+
+
 
 
 T = TypeVar("T", bound="ReplicateProductResponseDataError")
 
 
+
 @_attrs_define
 class ReplicateProductResponseDataError:
-    """
-    Attributes:
-        code (int | Unset): The error code.
-        detail (ReplicateProductResponseDataErrorDetail | Unset):
-        message (str | Unset): The error message.
-    """
+    """ 
+        Attributes:
+            code (int | Unset): The error code.
+            detail (ReplicateProductResponseDataErrorDetail | Unset):
+            message (str | Unset): The error message.
+     """
 
     code: int | Unset = UNSET
     detail: ReplicateProductResponseDataErrorDetail | Unset = UNSET
     message: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.replicate_product_response_data_error_detail import ReplicateProductResponseDataErrorDetail # noqa: PLC0415
         code = self.code
 
         detail: dict[str, Any] | Unset = UNSET
@@ -38,9 +50,11 @@ class ReplicateProductResponseDataError:
 
         message = self.message
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if code is not UNSET:
             field_dict["code"] = code
         if detail is not UNSET:
@@ -50,21 +64,23 @@ class ReplicateProductResponseDataError:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.replicate_product_response_data_error_detail import (
-            ReplicateProductResponseDataErrorDetail,  # noqa: PLC0415
-        )
-
+        from ..models.replicate_product_response_data_error_detail import ReplicateProductResponseDataErrorDetail # noqa: PLC0415
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
         _detail = d.pop("detail", UNSET)
         detail: ReplicateProductResponseDataErrorDetail | Unset
-        if isinstance(_detail, Unset):
+        if isinstance(_detail,  Unset):
             detail = UNSET
         else:
             detail = ReplicateProductResponseDataErrorDetail.from_dict(_detail)
+
+
+
 
         message = d.pop("message", UNSET)
 
@@ -73,6 +89,7 @@ class ReplicateProductResponseDataError:
             detail=detail,
             message=message,
         )
+
 
         replicate_product_response_data_error.additional_properties = d
         return replicate_product_response_data_error

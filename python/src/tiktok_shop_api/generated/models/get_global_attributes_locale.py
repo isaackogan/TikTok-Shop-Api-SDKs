@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetGlobalAttributesLocale(StrEnum):
     CS_CZ = "cs-CZ"
     DE_AT = "de-AT"

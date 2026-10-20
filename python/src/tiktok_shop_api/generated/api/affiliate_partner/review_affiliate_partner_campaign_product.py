@@ -1,14 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.review_affiliate_partner_campaign_product_request import ReviewAffiliatePartnerCampaignProductRequest
 from ...models.review_affiliate_partner_campaign_product_response import ReviewAffiliatePartnerCampaignProductResponse
-from ...types import UNSET, Response
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,21 +20,24 @@ def _get_kwargs(
     *,
     body: ReviewAffiliatePartnerCampaignProductRequest,
     category_asset_cipher: str,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
     params["category_asset_cipher"] = category_asset_cipher
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/products/{product_id}/review".format(
-            campaign_id=quote(str(campaign_id), safe=""),
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/products/{product_id}/review".format(campaign_id=quote(str(campaign_id), safe=""),product_id=quote(str(product_id), safe=""),),
         "params": params,
     }
 
@@ -43,11 +49,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> ReviewAffiliatePartnerCampaignProductResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> ReviewAffiliatePartnerCampaignProductResponse | None:
     if response.status_code == 200:
         response_200 = ReviewAffiliatePartnerCampaignProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -57,9 +64,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[ReviewAffiliatePartnerCampaignProductResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[ReviewAffiliatePartnerCampaignProductResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,8 +80,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     body: ReviewAffiliatePartnerCampaignProductRequest,
     category_asset_cipher: str,
+
 ) -> Response[ReviewAffiliatePartnerCampaignProductResponse]:
-    """Review Affiliate Partner Campaign Product
+    """ Review Affiliate Partner Campaign Product
 
      Use this API as a TikTok Affiliate Partner to approve or reject a product submitted by a seller to a
     campaign. The product must be in a pending state.
@@ -93,13 +99,15 @@ def sync_detailed(
 
     Returns:
         Response[ReviewAffiliatePartnerCampaignProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        product_id=product_id,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
+product_id=product_id,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
     )
 
     response = client.get_httpx_client().request(
@@ -108,7 +116,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     campaign_id: str,
     product_id: str,
@@ -116,8 +123,9 @@ def sync(
     client: AuthenticatedClient | Client,
     body: ReviewAffiliatePartnerCampaignProductRequest,
     category_asset_cipher: str,
+
 ) -> ReviewAffiliatePartnerCampaignProductResponse | None:
-    """Review Affiliate Partner Campaign Product
+    """ Review Affiliate Partner Campaign Product
 
      Use this API as a TikTok Affiliate Partner to approve or reject a product submitted by a seller to a
     campaign. The product must be in a pending state.
@@ -134,16 +142,17 @@ def sync(
 
     Returns:
         ReviewAffiliatePartnerCampaignProductResponse
-    """
+     """
+
 
     return sync_detailed(
         campaign_id=campaign_id,
-        product_id=product_id,
-        client=client,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
-    ).parsed
+product_id=product_id,
+client=client,
+body=body,
+category_asset_cipher=category_asset_cipher,
 
+    ).parsed
 
 async def asyncio_detailed(
     campaign_id: str,
@@ -152,8 +161,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     body: ReviewAffiliatePartnerCampaignProductRequest,
     category_asset_cipher: str,
+
 ) -> Response[ReviewAffiliatePartnerCampaignProductResponse]:
-    """Review Affiliate Partner Campaign Product
+    """ Review Affiliate Partner Campaign Product
 
      Use this API as a TikTok Affiliate Partner to approve or reject a product submitted by a seller to a
     campaign. The product must be in a pending state.
@@ -170,19 +180,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[ReviewAffiliatePartnerCampaignProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        product_id=product_id,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
+product_id=product_id,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     campaign_id: str,
@@ -191,8 +204,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     body: ReviewAffiliatePartnerCampaignProductRequest,
     category_asset_cipher: str,
+
 ) -> ReviewAffiliatePartnerCampaignProductResponse | None:
-    """Review Affiliate Partner Campaign Product
+    """ Review Affiliate Partner Campaign Product
 
      Use this API as a TikTok Affiliate Partner to approve or reject a product submitted by a seller to a
     campaign. The product must be in a pending state.
@@ -209,14 +223,14 @@ async def asyncio(
 
     Returns:
         ReviewAffiliatePartnerCampaignProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            campaign_id=campaign_id,
-            product_id=product_id,
-            client=client,
-            body=body,
-            category_asset_cipher=category_asset_cipher,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        campaign_id=campaign_id,
+product_id=product_id,
+client=client,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
+    )).parsed

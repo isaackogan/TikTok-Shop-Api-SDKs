@@ -1,32 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="AftersalesRequestStatusUpdateWebhookData")
+
 
 
 @_attrs_define
 class AftersalesRequestStatusUpdateWebhookData:
-    """
-    Attributes:
-        aftersales_request_id (str | Unset): Unique identifier of the aftersales request.
-        return_role (str | Unset): Role that initiated the return flow. Possible enumerations:
+    """ 
+        Attributes:
+            aftersales_request_id (str | Unset): Unique identifier of the aftersales request.
+            return_role (str | Unset): Role that initiated the return flow. Possible enumerations:
 
-             * `BUYER`
-             * `SELLER`
-        aftersales_request_status (str | Unset): Current aftersales request status. Possible enumerations:
+                 * `BUYER`
+                 * `SELLER`
+            aftersales_request_status (str | Unset): Current aftersales request status. Possible enumerations:
 
-             * `PENDING_REQUEST_REVIEW`
-             * `REQUEST_REVIEW_COMPLETED`
-        aftersales_request_create_time (int | Unset): Creation time of the aftersales request in Unix seconds.
-        aftersales_request_update_time (int | Unset): Last update time of the aftersales request in Unix seconds.
-    """
+                 * `PENDING_REQUEST_REVIEW`
+                 * `REQUEST_REVIEW_COMPLETED`
+            aftersales_request_create_time (int | Unset): Creation time of the aftersales request in Unix seconds.
+            aftersales_request_update_time (int | Unset): Last update time of the aftersales request in Unix seconds.
+     """
 
     aftersales_request_id: str | Unset = UNSET
     return_role: str | Unset = UNSET
@@ -34,6 +42,10 @@ class AftersalesRequestStatusUpdateWebhookData:
     aftersales_request_create_time: int | Unset = UNSET
     aftersales_request_update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         aftersales_request_id = self.aftersales_request_id
@@ -46,9 +58,11 @@ class AftersalesRequestStatusUpdateWebhookData:
 
         aftersales_request_update_time = self.aftersales_request_update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if aftersales_request_id is not UNSET:
             field_dict["aftersales_request_id"] = aftersales_request_id
         if return_role is not UNSET:
@@ -61,6 +75,8 @@ class AftersalesRequestStatusUpdateWebhookData:
             field_dict["aftersales_request_update_time"] = aftersales_request_update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -82,6 +98,7 @@ class AftersalesRequestStatusUpdateWebhookData:
             aftersales_request_create_time=aftersales_request_create_time,
             aftersales_request_update_time=aftersales_request_update_time,
         )
+
 
         aftersales_request_status_update_webhook_data.additional_properties = d
         return aftersales_request_status_update_webhook_data

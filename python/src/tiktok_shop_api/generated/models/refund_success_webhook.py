@@ -1,30 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.refund_success_webhook_data import RefundSuccessWebhookData
+  from ..models.refund_success_webhook_data import RefundSuccessWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="RefundSuccessWebhook")
 
 
+
 @_attrs_define
 class RefundSuccessWebhook:
-    """
-    Attributes:
-        type_ (Literal[67]): The ID of the webhook type.
-        shop_id (str | Unset): TikTok Shop identifier associated with the event.
-        timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
-        tts_notification_id (str | Unset): Unique notification identifier for deduplication and tracing.
-        data (RefundSuccessWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[67]): The ID of the webhook type.
+            shop_id (str | Unset): TikTok Shop identifier associated with the event.
+            timestamp (int | Unset): The time when this webhook was triggered, represented by Unix timestamp.
+            tts_notification_id (str | Unset): Unique notification identifier for deduplication and tracing.
+            data (RefundSuccessWebhookData | Unset):
+     """
 
     type_: Literal[67]
     shop_id: str | Unset = UNSET
@@ -33,7 +41,12 @@ class RefundSuccessWebhook:
     data: RefundSuccessWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.refund_success_webhook_data import RefundSuccessWebhookData # noqa: PLC0415
         type_ = self.type_
 
         shop_id = self.shop_id
@@ -46,13 +59,12 @@ class RefundSuccessWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if shop_id is not UNSET:
             field_dict["shop_id"] = shop_id
         if timestamp is not UNSET:
@@ -64,12 +76,13 @@ class RefundSuccessWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.refund_success_webhook_data import RefundSuccessWebhookData  # noqa: PLC0415
-
+        from ..models.refund_success_webhook_data import RefundSuccessWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[67], d.pop("type"))
+        type_ = cast(Literal[67] , d.pop("type"))
         if type_ != 67:
             raise ValueError(f"type must match const 67, got '{type_}'")
 
@@ -81,10 +94,13 @@ class RefundSuccessWebhook:
 
         _data = d.pop("data", UNSET)
         data: RefundSuccessWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = RefundSuccessWebhookData.from_dict(_data)
+
+
+
 
         refund_success_webhook = cls(
             type_=type_,
@@ -93,6 +109,7 @@ class RefundSuccessWebhook:
             tts_notification_id=tts_notification_id,
             data=data,
         )
+
 
         refund_success_webhook.additional_properties = d
         return refund_success_webhook

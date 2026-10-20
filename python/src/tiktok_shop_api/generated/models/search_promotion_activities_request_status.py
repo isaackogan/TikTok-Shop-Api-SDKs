@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchPromotionActivitiesRequestStatus(StrEnum):
     DEACTIVATED = "DEACTIVATED"
     EXPIRED = "EXPIRED"

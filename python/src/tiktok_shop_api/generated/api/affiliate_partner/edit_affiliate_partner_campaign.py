@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.edit_affiliate_partner_campaign_request import EditAffiliatePartnerCampaignRequest
 from ...models.edit_affiliate_partner_campaign_response import EditAffiliatePartnerCampaignResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,23 +20,28 @@ def _get_kwargs(
     *,
     body: EditAffiliatePartnerCampaignRequest | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
     params["category_asset_cipher"] = category_asset_cipher
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/partial_edit".format(
-            campaign_id=quote(str(campaign_id), safe=""),
-        ),
+        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/partial_edit".format(campaign_id=quote(str(campaign_id), safe=""),),
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -42,11 +51,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> EditAffiliatePartnerCampaignResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> EditAffiliatePartnerCampaignResponse | None:
     if response.status_code == 200:
         response_200 = EditAffiliatePartnerCampaignResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -56,9 +66,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[EditAffiliatePartnerCampaignResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[EditAffiliatePartnerCampaignResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -73,8 +81,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     body: EditAffiliatePartnerCampaignRequest | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> Response[EditAffiliatePartnerCampaignResponse]:
-    """Edit Affiliate Partner Campaign
+    """ Edit Affiliate Partner Campaign
 
      Partially updates an Affiliate Partner campaign. Fields omitted from the request retain their
     current values, including omitted fields within `contact_info`. `target_seller_types` and
@@ -93,12 +102,14 @@ def sync_detailed(
 
     Returns:
         Response[EditAffiliatePartnerCampaignResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
     )
 
     response = client.get_httpx_client().request(
@@ -107,15 +118,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     campaign_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: EditAffiliatePartnerCampaignRequest | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> EditAffiliatePartnerCampaignResponse | None:
-    """Edit Affiliate Partner Campaign
+    """ Edit Affiliate Partner Campaign
 
      Partially updates an Affiliate Partner campaign. Fields omitted from the request retain their
     current values, including omitted fields within `contact_info`. `target_seller_types` and
@@ -134,15 +145,16 @@ def sync(
 
     Returns:
         EditAffiliatePartnerCampaignResponse
-    """
+     """
+
 
     return sync_detailed(
         campaign_id=campaign_id,
-        client=client,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
-    ).parsed
+client=client,
+body=body,
+category_asset_cipher=category_asset_cipher,
 
+    ).parsed
 
 async def asyncio_detailed(
     campaign_id: str,
@@ -150,8 +162,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     body: EditAffiliatePartnerCampaignRequest | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> Response[EditAffiliatePartnerCampaignResponse]:
-    """Edit Affiliate Partner Campaign
+    """ Edit Affiliate Partner Campaign
 
      Partially updates an Affiliate Partner campaign. Fields omitted from the request retain their
     current values, including omitted fields within `contact_info`. `target_seller_types` and
@@ -170,18 +183,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[EditAffiliatePartnerCampaignResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        body=body,
-        category_asset_cipher=category_asset_cipher,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     campaign_id: str,
@@ -189,8 +205,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     body: EditAffiliatePartnerCampaignRequest | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> EditAffiliatePartnerCampaignResponse | None:
-    """Edit Affiliate Partner Campaign
+    """ Edit Affiliate Partner Campaign
 
      Partially updates an Affiliate Partner campaign. Fields omitted from the request retain their
     current values, including omitted fields within `contact_info`. `target_seller_types` and
@@ -209,13 +226,13 @@ async def asyncio(
 
     Returns:
         EditAffiliatePartnerCampaignResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            campaign_id=campaign_id,
-            client=client,
-            body=body,
-            category_asset_cipher=category_asset_cipher,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        campaign_id=campaign_id,
+client=client,
+body=body,
+category_asset_cipher=category_asset_cipher,
+
+    )).parsed

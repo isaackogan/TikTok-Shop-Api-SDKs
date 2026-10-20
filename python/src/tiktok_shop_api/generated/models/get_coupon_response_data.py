@@ -1,58 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_coupon_response_data_coupon import GetCouponResponseDataCoupon
+  from ..models.get_coupon_response_data_coupon import GetCouponResponseDataCoupon
+
+
+
 
 
 T = TypeVar("T", bound="GetCouponResponseData")
 
 
+
 @_attrs_define
 class GetCouponResponseData:
-    """
-    Attributes:
-        coupon (GetCouponResponseDataCoupon | Unset):
-    """
+    """ 
+        Attributes:
+            coupon (GetCouponResponseDataCoupon | Unset):
+     """
 
     coupon: GetCouponResponseDataCoupon | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_coupon_response_data_coupon import GetCouponResponseDataCoupon # noqa: PLC0415
         coupon: dict[str, Any] | Unset = UNSET
         if not isinstance(self.coupon, Unset):
             coupon = self.coupon.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if coupon is not UNSET:
             field_dict["coupon"] = coupon
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_coupon_response_data_coupon import GetCouponResponseDataCoupon  # noqa: PLC0415
-
+        from ..models.get_coupon_response_data_coupon import GetCouponResponseDataCoupon # noqa: PLC0415
         d = dict(src_dict)
         _coupon = d.pop("coupon", UNSET)
         coupon: GetCouponResponseDataCoupon | Unset
-        if isinstance(_coupon, Unset):
+        if isinstance(_coupon,  Unset):
             coupon = UNSET
         else:
             coupon = GetCouponResponseDataCoupon.from_dict(_coupon)
 
+
+
+
         get_coupon_response_data = cls(
             coupon=coupon,
         )
+
 
         get_coupon_response_data.additional_properties = d
         return get_coupon_response_data

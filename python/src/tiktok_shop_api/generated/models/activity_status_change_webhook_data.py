@@ -1,40 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ActivityStatusChangeWebhookData")
+
 
 
 @_attrs_define
 class ActivityStatusChangeWebhookData:
-    """
-    Attributes:
-        activity_id (str | Unset): The ID of the promotion activity.
-        update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
-        activity_type (str | Unset): The type of the promotion activity. Possible values are:
+    """ 
+        Attributes:
+            activity_id (str | Unset): The ID of the promotion activity.
+            update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
+            activity_type (str | Unset): The type of the promotion activity. Possible values are:
 
-             * `FIXED_PRICE`
-             * `DIRECT_DISCOUNT`
-             * `SHIPPING_DISCOUNT`
-             * `BUY_MORE_SAVE_MORE`
-             * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
-        product_level (str | Unset): Activity product dimension, values are:
+                 * `FIXED_PRICE`
+                 * `DIRECT_DISCOUNT`
+                 * `SHIPPING_DISCOUNT`
+                 * `BUY_MORE_SAVE_MORE`
+                 * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
+            product_level (str | Unset): Activity product dimension, values are:
 
-             * `PRODUCT`
-             * `VARIATION`
-             * `SHOP`
-        status (str | Unset): The current status of the promotion activity. Possible values are:
+                 * `PRODUCT`
+                 * `VARIATION`
+                 * `SHOP`
+            status (str | Unset): The current status of the promotion activity. Possible values are:
 
-             * `ONGOING`
-             * `EXPIRED`
-             * `DEACTIVATED`
-    """
+                 * `ONGOING`
+                 * `EXPIRED`
+                 * `DEACTIVATED`
+     """
 
     activity_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
@@ -42,6 +50,10 @@ class ActivityStatusChangeWebhookData:
     product_level: str | Unset = UNSET
     status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         activity_id = self.activity_id
@@ -54,9 +66,11 @@ class ActivityStatusChangeWebhookData:
 
         status = self.status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if update_time is not UNSET:
@@ -69,6 +83,8 @@ class ActivityStatusChangeWebhookData:
             field_dict["status"] = status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -90,6 +106,7 @@ class ActivityStatusChangeWebhookData:
             product_level=product_level,
             status=status,
         )
+
 
         activity_status_change_webhook_data.additional_properties = d
         return activity_status_change_webhook_data

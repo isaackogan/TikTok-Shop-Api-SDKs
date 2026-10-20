@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ListProductSKPPStatusesResponseDataProductReward")
+
 
 
 @_attrs_define
 class ListProductSKPPStatusesResponseDataProductReward:
-    """
-    Attributes:
-        reward_type (str | Unset): Possible values: ADS_CREDIT / TOP_CREATOR_MATCHMAKING / SHOPTAB_PV.
-        status (str | Unset): Possible values: NOT_GRANTED (below threshold, locked) / PENDING (qualified, not yet
-            granted) / AVAILABLE (granted).
-        value (str | Unset): Granted amount/quantity; present only when status = AVAILABLE. Currency-typed (ADS_CREDIT)
-            leads with the currency symbol (e.g. $15); count-typed (TOP_CREATOR_MATCHMAKING, SHOPTAB_PV) are bare numbers.
-        ad_credit_claim_status (str | Unset): Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and
-            status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed). Ad credit must
-            be claimed manually.
-    """
+    """ 
+        Attributes:
+            reward_type (str | Unset): Possible values: ADS_CREDIT / TOP_CREATOR_MATCHMAKING / SHOPTAB_PV.
+            status (str | Unset): Possible values: NOT_GRANTED (below threshold, locked) / PENDING (qualified, not yet
+                granted) / AVAILABLE (granted).
+            value (str | Unset): Granted amount/quantity; present only when status = AVAILABLE. Currency-typed (ADS_CREDIT)
+                leads with the currency symbol (e.g. $15); count-typed (TOP_CREATOR_MATCHMAKING, SHOPTAB_PV) are bare numbers.
+            ad_credit_claim_status (str | Unset): Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and
+                status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed). Ad credit must
+                be claimed manually.
+     """
 
     reward_type: str | Unset = UNSET
     status: str | Unset = UNSET
     value: str | Unset = UNSET
     ad_credit_claim_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         reward_type = self.reward_type
@@ -40,9 +52,11 @@ class ListProductSKPPStatusesResponseDataProductReward:
 
         ad_credit_claim_status = self.ad_credit_claim_status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if reward_type is not UNSET:
             field_dict["reward_type"] = reward_type
         if status is not UNSET:
@@ -53,6 +67,8 @@ class ListProductSKPPStatusesResponseDataProductReward:
             field_dict["ad_credit_claim_status"] = ad_credit_claim_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -71,6 +87,7 @@ class ListProductSKPPStatusesResponseDataProductReward:
             value=value,
             ad_credit_claim_status=ad_credit_claim_status,
         )
+
 
         list_product_skpp_statuses_response_data_product_reward.additional_properties = d
         return list_product_skpp_statuses_response_data_product_reward

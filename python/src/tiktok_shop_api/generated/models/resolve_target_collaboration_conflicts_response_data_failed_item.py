@@ -1,43 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ResolveTargetCollaborationConflictsResponseDataFailedItem")
+
 
 
 @_attrs_define
 class ResolveTargetCollaborationConflictsResponseDataFailedItem:
-    """
-    Attributes:
-        creator_open_id (str | Unset): Creator Open ID. [More
-            details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
-        existing_collaboration_id (str | Unset): The confict target collaboration id
-    """
+    """ 
+        Attributes:
+            creator_open_id (str | Unset): Creator Open ID. [More
+                details](https://partner.tiktokshop.com/docv2/page/3obfokj6)
+            existing_collaboration_id (str | Unset): The confict target collaboration id
+     """
 
     creator_open_id: str | Unset = UNSET
     existing_collaboration_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         creator_open_id = self.creator_open_id
 
         existing_collaboration_id = self.existing_collaboration_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if creator_open_id is not UNSET:
             field_dict["creator_open_id"] = creator_open_id
         if existing_collaboration_id is not UNSET:
             field_dict["existing_collaboration_id"] = existing_collaboration_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -50,6 +66,7 @@ class ResolveTargetCollaborationConflictsResponseDataFailedItem:
             creator_open_id=creator_open_id,
             existing_collaboration_id=existing_collaboration_id,
         )
+
 
         resolve_target_collaboration_conflicts_response_data_failed_item.additional_properties = d
         return resolve_target_collaboration_conflicts_response_data_failed_item

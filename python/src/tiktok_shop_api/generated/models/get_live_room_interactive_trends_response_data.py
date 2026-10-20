@@ -1,36 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance import (
-        GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance,
-    )
+  from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance import GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance
+
+
+
 
 
 T = TypeVar("T", bound="GetLiveRoomInteractiveTrendsResponseData")
 
 
+
 @_attrs_define
 class GetLiveRoomInteractiveTrendsResponseData:
-    """
-    Attributes:
-        interactive_trend_performances (list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] |
-            Unset): The trend data of living room
-    """
+    """ 
+        Attributes:
+            interactive_trend_performances (list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] |
+                Unset): The trend data of living room
+     """
 
-    interactive_trend_performances: (
-        list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] | Unset
-    ) = UNSET
+    interactive_trend_performances: list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance import GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance # noqa: PLC0415
         interactive_trend_performances: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.interactive_trend_performances, Unset):
             interactive_trend_performances = []
@@ -38,39 +46,40 @@ class GetLiveRoomInteractiveTrendsResponseData:
                 interactive_trend_performances_item = interactive_trend_performances_item_data.to_dict()
                 interactive_trend_performances.append(interactive_trend_performances_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if interactive_trend_performances is not UNSET:
             field_dict["interactive_trend_performances"] = interactive_trend_performances
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance import (
-            GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance,  # noqa: PLC0415
-        )
-
+        from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance import GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance # noqa: PLC0415
         d = dict(src_dict)
         _interactive_trend_performances = d.pop("interactive_trend_performances", UNSET)
-        interactive_trend_performances: (
-            list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] | Unset
-        ) = UNSET
+        interactive_trend_performances: list[GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance] | Unset = UNSET
         if _interactive_trend_performances is not UNSET:
             interactive_trend_performances = []
             for interactive_trend_performances_item_data in _interactive_trend_performances:
-                interactive_trend_performances_item = (
-                    GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance.from_dict(
-                        interactive_trend_performances_item_data
-                    )
-                )
+                interactive_trend_performances_item = GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance.from_dict(interactive_trend_performances_item_data)
+
+
 
                 interactive_trend_performances.append(interactive_trend_performances_item)
+
 
         get_live_room_interactive_trends_response_data = cls(
             interactive_trend_performances=interactive_trend_performances,
         )
+
 
         get_live_room_interactive_trends_response_data.additional_properties = d
         return get_live_room_interactive_trends_response_data

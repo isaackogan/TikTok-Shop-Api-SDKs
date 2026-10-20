@@ -1,35 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="PredictProductPackageDimensionsAndWeightResponseDataPackageDimension")
+
 
 
 @_attrs_define
 class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
-    """
-    Attributes:
-        height (int): Predicted positive package height.
-        length (int): Predicted positive package length.
-        unit (str): Unit of the predicted package dimensions.
-            Possible values:
-            - `CENTIMETER`
-            - `INCH`
-            - `FOOT`
-            - `MILLIMETER`
-            - `METER`
-        width (int): Predicted positive package width.
-    """
+    """ 
+        Attributes:
+            height (int): Predicted positive package height.
+            length (int): Predicted positive package length.
+            unit (str): Unit of the predicted package dimensions.
+                Possible values:
+                - `CENTIMETER`
+                - `INCH`
+                - `FOOT`
+                - `MILLIMETER`
+                - `METER`
+            width (int): Predicted positive package width.
+     """
 
     height: int
     length: int
     unit: str
     width: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -40,18 +53,19 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "height": height,
-                "length": length,
-                "unit": unit,
-                "width": width,
-            }
-        )
+        field_dict.update({
+            "height": height,
+            "length": length,
+            "unit": unit,
+            "width": width,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -70,6 +84,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
             unit=unit,
             width=width,
         )
+
 
         predict_product_package_dimensions_and_weight_response_data_package_dimension.additional_properties = d
         return predict_product_package_dimensions_and_weight_response_data_package_dimension

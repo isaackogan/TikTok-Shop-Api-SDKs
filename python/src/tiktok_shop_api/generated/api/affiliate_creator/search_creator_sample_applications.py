@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_creator_sample_applications_request import SearchCreatorSampleApplicationsRequest
 from ...models.search_creator_sample_applications_response import SearchCreatorSampleApplicationsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,8 +20,12 @@ def _get_kwargs(
     body: SearchCreatorSampleApplicationsRequest | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -24,7 +33,9 @@ def _get_kwargs(
 
     params["page_size"] = page_size
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -32,6 +43,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -41,11 +53,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchCreatorSampleApplicationsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchCreatorSampleApplicationsResponse | None:
     if response.status_code == 200:
         response_200 = SearchCreatorSampleApplicationsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -55,9 +68,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchCreatorSampleApplicationsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchCreatorSampleApplicationsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -72,8 +83,9 @@ def sync_detailed(
     body: SearchCreatorSampleApplicationsRequest | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> Response[SearchCreatorSampleApplicationsResponse]:
-    """Search Creator Sample Applications
+    """ Search Creator Sample Applications
 
      Search sample applications for the authenticated creator.
 
@@ -88,12 +100,14 @@ def sync_detailed(
 
     Returns:
         Response[SearchCreatorSampleApplicationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_token=page_token,
-        page_size=page_size,
+page_token=page_token,
+page_size=page_size,
+
     )
 
     response = client.get_httpx_client().request(
@@ -102,15 +116,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchCreatorSampleApplicationsRequest | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> SearchCreatorSampleApplicationsResponse | None:
-    """Search Creator Sample Applications
+    """ Search Creator Sample Applications
 
      Search sample applications for the authenticated creator.
 
@@ -125,15 +139,16 @@ def sync(
 
     Returns:
         SearchCreatorSampleApplicationsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        page_token=page_token,
-        page_size=page_size,
-    ).parsed
+body=body,
+page_token=page_token,
+page_size=page_size,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -141,8 +156,9 @@ async def asyncio_detailed(
     body: SearchCreatorSampleApplicationsRequest | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> Response[SearchCreatorSampleApplicationsResponse]:
-    """Search Creator Sample Applications
+    """ Search Creator Sample Applications
 
      Search sample applications for the authenticated creator.
 
@@ -157,18 +173,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchCreatorSampleApplicationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        page_token=page_token,
-        page_size=page_size,
+page_token=page_token,
+page_size=page_size,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -176,8 +195,9 @@ async def asyncio(
     body: SearchCreatorSampleApplicationsRequest | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int | Unset = UNSET,
+
 ) -> SearchCreatorSampleApplicationsResponse | None:
-    """Search Creator Sample Applications
+    """ Search Creator Sample Applications
 
      Search sample applications for the authenticated creator.
 
@@ -192,13 +212,13 @@ async def asyncio(
 
     Returns:
         SearchCreatorSampleApplicationsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            page_token=page_token,
-            page_size=page_size,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+page_token=page_token,
+page_size=page_size,
+
+    )).parsed

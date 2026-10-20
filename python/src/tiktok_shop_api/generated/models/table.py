@@ -1,77 +1,102 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.header import Header
-    from ..models.table_row import TableRow
+  from ..models.header import Header
+  from ..models.table_row import TableRow
+
+
+
 
 
 T = TypeVar("T", bound="Table")
 
 
+
 @_attrs_define
 class Table:
-    """
-    Attributes:
-        headers (list[Header]): Ordered header definitions. Provide 1 to 20 headers.
-        rows (list[TableRow]): Rows of the size chart. Provide 1 to 45 rows.
-    """
+    """ 
+        Attributes:
+            headers (list[Header]): Ordered header definitions. Provide 1 to 20 headers.
+            rows (list[TableRow]): Rows of the size chart. Provide 1 to 45 rows.
+     """
 
     headers: list[Header]
     rows: list[TableRow]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.header import Header # noqa: PLC0415
+        from ..models.table_row import TableRow # noqa: PLC0415
         headers = []
         for headers_item_data in self.headers:
             headers_item = headers_item_data.to_dict()
             headers.append(headers_item)
+
+
 
         rows = []
         for rows_item_data in self.rows:
             rows_item = rows_item_data.to_dict()
             rows.append(rows_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "headers": headers,
-                "rows": rows,
-            }
-        )
+        field_dict.update({
+            "headers": headers,
+            "rows": rows,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.header import Header  # noqa: PLC0415
-        from ..models.table_row import TableRow  # noqa: PLC0415
-
+        from ..models.header import Header # noqa: PLC0415
+        from ..models.table_row import TableRow # noqa: PLC0415
         d = dict(src_dict)
         headers = []
         _headers = d.pop("headers")
-        for headers_item_data in _headers:
+        for headers_item_data in (_headers):
             headers_item = Header.from_dict(headers_item_data)
+
+
 
             headers.append(headers_item)
 
+
         rows = []
         _rows = d.pop("rows")
-        for rows_item_data in _rows:
+        for rows_item_data in (_rows):
             rows_item = TableRow.from_dict(rows_item_data)
 
+
+
             rows.append(rows_item)
+
 
         table = cls(
             headers=headers,
             rows=rows,
         )
+
 
         table.additional_properties = d
         return table

@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SellerContactInfo")
+
 
 
 @_attrs_define
 class SellerContactInfo:
-    """
-    Attributes:
-        email (str | Unset): The seller's email address.
-        phone_number (str | Unset): The phone number of the seller.
-        whatsapp (str | Unset): The phone number used by the seller to register for WhatsApp.
-        telegram (str | Unset): The  seller's Telegram username or phone number.
-        line (str | Unset): The phone number used by the seller to register for the Line app.
-    """
+    """ 
+        Attributes:
+            email (str | Unset): The seller's email address.
+            phone_number (str | Unset): The phone number of the seller.
+            whatsapp (str | Unset): The phone number used by the seller to register for WhatsApp.
+            telegram (str | Unset): The  seller's Telegram username or phone number.
+            line (str | Unset): The phone number used by the seller to register for the Line app.
+     """
 
     email: str | Unset = UNSET
     phone_number: str | Unset = UNSET
@@ -28,6 +36,10 @@ class SellerContactInfo:
     telegram: str | Unset = UNSET
     line: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         email = self.email
@@ -40,9 +52,11 @@ class SellerContactInfo:
 
         line = self.line
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if email is not UNSET:
             field_dict["email"] = email
         if phone_number is not UNSET:
@@ -55,6 +69,8 @@ class SellerContactInfo:
             field_dict["line"] = line
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class SellerContactInfo:
             telegram=telegram,
             line=line,
         )
+
 
         seller_contact_info.additional_properties = d
         return seller_contact_info

@@ -1,41 +1,46 @@
 from __future__ import annotations
 
-import datetime
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+import datetime
+
 if TYPE_CHECKING:
-    from ..models.get_trade_in_account_transactions_response_data_flow_amount import (
-        GetTradeInAccountTransactionsResponseDataFlowAmount,
-    )
+  from ..models.get_trade_in_account_transactions_response_data_flow_amount import GetTradeInAccountTransactionsResponseDataFlowAmount
+
+
+
 
 
 T = TypeVar("T", bound="GetTradeInAccountTransactionsResponseDataFlow")
 
 
+
 @_attrs_define
 class GetTradeInAccountTransactionsResponseDataFlow:
-    """
-    Attributes:
-        amount (GetTradeInAccountTransactionsResponseDataFlowAmount | Unset):
-        create_time (datetime.datetime | Unset): The time when the account transaction was created, in RFC 3339 format.
-        direction (str | Unset): The direction of the account transaction.
-            - IN: Funds credited to the supplier's account.
-            - OUT: Funds debited from the supplier's account.
-        origin_transaction_id (str | Unset): The original account transaction ID associated with a reversed transaction.
-            This field is returned only for a REVERSE transaction when available.
-        reference_id (str | Unset): The TradeIn business order ID associated with the account transaction.
-        transaction_id (str | Unset): The unique ID of the account transaction.
-        type_ (str | Unset): The TradeIn business transaction type.
-            - RECHARGE: Funds credited through a recharge.
-            - WITHDRAW: Funds debited through a payout.
-            - REVERSE: Funds returned after a payout reversal.
-    """
+    """ 
+        Attributes:
+            amount (GetTradeInAccountTransactionsResponseDataFlowAmount | Unset):
+            create_time (datetime.datetime | Unset): The time when the account transaction was created, in RFC 3339 format.
+            direction (str | Unset): The direction of the account transaction.
+                - IN: Funds credited to the supplier's account.
+                - OUT: Funds debited from the supplier's account.
+            origin_transaction_id (str | Unset): The original account transaction ID associated with a reversed transaction.
+                This field is returned only for a REVERSE transaction when available.
+            reference_id (str | Unset): The TradeIn business order ID associated with the account transaction.
+            transaction_id (str | Unset): The unique ID of the account transaction.
+            type_ (str | Unset): The TradeIn business transaction type.
+                - RECHARGE: Funds credited through a recharge.
+                - WITHDRAW: Funds debited through a payout.
+                - REVERSE: Funds returned after a payout reversal.
+     """
 
     amount: GetTradeInAccountTransactionsResponseDataFlowAmount | Unset = UNSET
     create_time: datetime.datetime | Unset = UNSET
@@ -46,7 +51,12 @@ class GetTradeInAccountTransactionsResponseDataFlow:
     type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_trade_in_account_transactions_response_data_flow_amount import GetTradeInAccountTransactionsResponseDataFlowAmount # noqa: PLC0415
         amount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.amount, Unset):
             amount = self.amount.to_dict()
@@ -65,9 +75,11 @@ class GetTradeInAccountTransactionsResponseDataFlow:
 
         type_ = self.type_
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if amount is not UNSET:
             field_dict["amount"] = amount
         if create_time is not UNSET:
@@ -85,26 +97,31 @@ class GetTradeInAccountTransactionsResponseDataFlow:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_trade_in_account_transactions_response_data_flow_amount import (
-            GetTradeInAccountTransactionsResponseDataFlowAmount,  # noqa: PLC0415
-        )
-
+        from ..models.get_trade_in_account_transactions_response_data_flow_amount import GetTradeInAccountTransactionsResponseDataFlowAmount # noqa: PLC0415
         d = dict(src_dict)
         _amount = d.pop("amount", UNSET)
         amount: GetTradeInAccountTransactionsResponseDataFlowAmount | Unset
-        if isinstance(_amount, Unset):
+        if isinstance(_amount,  Unset):
             amount = UNSET
         else:
             amount = GetTradeInAccountTransactionsResponseDataFlowAmount.from_dict(_amount)
 
+
+
+
         _create_time = d.pop("create_time", UNSET)
         create_time: datetime.datetime | Unset
-        if isinstance(_create_time, Unset):
+        if isinstance(_create_time,  Unset):
             create_time = UNSET
         else:
             create_time = datetime.datetime.fromisoformat(_create_time)
+
+
+
 
         direction = d.pop("direction", UNSET)
 
@@ -125,6 +142,7 @@ class GetTradeInAccountTransactionsResponseDataFlow:
             transaction_id=transaction_id,
             type_=type_,
         )
+
 
         get_trade_in_account_transactions_response_data_flow.additional_properties = d
         return get_trade_in_account_transactions_response_data_flow

@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.global_listing_method_change_webhook_data import GlobalListingMethodChangeWebhookData
+  from ..models.global_listing_method_change_webhook_data import GlobalListingMethodChangeWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="GlobalListingMethodChangeWebhook")
 
 
+
 @_attrs_define
 class GlobalListingMethodChangeWebhook:
-    """
-    Attributes:
-        type_ (Literal[52]): The ID of the webhook type.
-        tts_notification_id (str | Unset): The ID of this webhook notification.
-        timestamp (int | Unset): The time when this webhook is triggered. Unix timestamp.
-        seller_open_id (str | Unset): The open_id of the seller. For more information, refer to [Authorization
-            overview](https://partner.tiktokshop.com/docv2/page/authorization-overview-202407).
-        data (GlobalListingMethodChangeWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[52]): The ID of the webhook type.
+            tts_notification_id (str | Unset): The ID of this webhook notification.
+            timestamp (int | Unset): The time when this webhook is triggered. Unix timestamp.
+            seller_open_id (str | Unset): The open_id of the seller. For more information, refer to [Authorization
+                overview](https://partner.tiktokshop.com/docv2/page/authorization-overview-202407).
+            data (GlobalListingMethodChangeWebhookData | Unset):
+     """
 
     type_: Literal[52]
     tts_notification_id: str | Unset = UNSET
@@ -34,7 +42,12 @@ class GlobalListingMethodChangeWebhook:
     data: GlobalListingMethodChangeWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.global_listing_method_change_webhook_data import GlobalListingMethodChangeWebhookData # noqa: PLC0415
         type_ = self.type_
 
         tts_notification_id = self.tts_notification_id
@@ -47,13 +60,12 @@ class GlobalListingMethodChangeWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if tts_notification_id is not UNSET:
             field_dict["tts_notification_id"] = tts_notification_id
         if timestamp is not UNSET:
@@ -65,14 +77,13 @@ class GlobalListingMethodChangeWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.global_listing_method_change_webhook_data import (
-            GlobalListingMethodChangeWebhookData,  # noqa: PLC0415
-        )
-
+        from ..models.global_listing_method_change_webhook_data import GlobalListingMethodChangeWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[52], d.pop("type"))
+        type_ = cast(Literal[52] , d.pop("type"))
         if type_ != 52:
             raise ValueError(f"type must match const 52, got '{type_}'")
 
@@ -84,10 +95,13 @@ class GlobalListingMethodChangeWebhook:
 
         _data = d.pop("data", UNSET)
         data: GlobalListingMethodChangeWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = GlobalListingMethodChangeWebhookData.from_dict(_data)
+
+
+
 
         global_listing_method_change_webhook = cls(
             type_=type_,
@@ -96,6 +110,7 @@ class GlobalListingMethodChangeWebhook:
             seller_open_id=seller_open_id,
             data=data,
         )
+
 
         global_listing_method_change_webhook.additional_properties = d
         return global_listing_method_change_webhook

@@ -1,60 +1,75 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.edit_product_request_sku_pre_sale_type import EditProductRequestSkuPreSaleType
 from ..types import UNSET, Unset
 
+from ..models.edit_product_request_sku_pre_sale_type import EditProductRequestSkuPreSaleType
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.fulfillment_type import FulfillmentType
+  from ..models.fulfillment_type import FulfillmentType
+
+
+
 
 
 T = TypeVar("T", bound="EditProductRequestSkuPreSale")
 
 
+
 @_attrs_define
 class EditProductRequestSkuPreSale:
-    """
-    Attributes:
-        type_ (EditProductRequestSkuPreSaleType | Unset): The type of pre-sale.
-            Possible values based on the region:
-            **US**
-            - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a
-            **release date**.
-            - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by
-            specifying a **duration**.
-            - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors.
-            Fulfillment can be extended by specifying a **duration**.
+    """ 
+        Attributes:
+            type_ (EditProductRequestSkuPreSaleType | Unset): The type of pre-sale.
+                Possible values based on the region:
+                **US**
+                - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a
+                **release date**.
+                - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by
+                specifying a **duration**.
+                - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors.
+                Fulfillment can be extended by specifying a **duration**.
 
-            **UK, EU, SEA, JP, and LATAM**
-            - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a
-            **duration**.
+                **UK, EU, SEA, JP, and LATAM**
+                - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a
+                **duration**.
 
-            **ALL**
-            - `NONE`: To convert the product to a regular (non-presale) product.
-        fulfillment_type (FulfillmentType | Unset):
-    """
+                **ALL**
+                - `NONE`: To convert the product to a regular (non-presale) product.
+            fulfillment_type (FulfillmentType | Unset):
+     """
 
     type_: EditProductRequestSkuPreSaleType | Unset = UNSET
     fulfillment_type: FulfillmentType | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.fulfillment_type import FulfillmentType # noqa: PLC0415
         type_: str | Unset = UNSET
         if not isinstance(self.type_, Unset):
             type_ = self.type_.value
+
 
         fulfillment_type: dict[str, Any] | Unset = UNSET
         if not isinstance(self.fulfillment_type, Unset):
             fulfillment_type = self.fulfillment_type.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if fulfillment_type is not UNSET:
@@ -62,29 +77,37 @@ class EditProductRequestSkuPreSale:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.fulfillment_type import FulfillmentType  # noqa: PLC0415
-
+        from ..models.fulfillment_type import FulfillmentType # noqa: PLC0415
         d = dict(src_dict)
         _type_ = d.pop("type", UNSET)
         type_: EditProductRequestSkuPreSaleType | Unset
-        if isinstance(_type_, Unset):
+        if isinstance(_type_,  Unset):
             type_ = UNSET
         else:
             type_ = EditProductRequestSkuPreSaleType(_type_)
 
+
+
+
         _fulfillment_type = d.pop("fulfillment_type", UNSET)
         fulfillment_type: FulfillmentType | Unset
-        if isinstance(_fulfillment_type, Unset):
+        if isinstance(_fulfillment_type,  Unset):
             fulfillment_type = UNSET
         else:
             fulfillment_type = FulfillmentType.from_dict(_fulfillment_type)
+
+
+
 
         edit_product_request_sku_pre_sale = cls(
             type_=type_,
             fulfillment_type=fulfillment_type,
         )
+
 
         edit_product_request_sku_pre_sale.additional_properties = d
         return edit_product_request_sku_pre_sale

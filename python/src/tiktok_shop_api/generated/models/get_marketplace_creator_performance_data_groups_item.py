@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetMarketplaceCreatorPerformanceDataGroupsItem(StrEnum):
     BASIC_CREATOR_INFORMATION = "BASIC_CREATOR_INFORMATION"
     COLLABORATION = "COLLABORATION"

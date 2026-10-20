@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ClaimDuration")
+
 
 
 @_attrs_define
 class ClaimDuration:
-    """
-    Attributes:
-        start_time (int | Unset): The UNIX timestamp, in seconds, from which a shopper can claim the coupon.
-        end_time (int | Unset): The UNIX timestamp, in seconds, after which a shopper can no longer claim the coupon.
-    """
+    """ 
+        Attributes:
+            start_time (int | Unset): The UNIX timestamp, in seconds, from which a shopper can claim the coupon.
+            end_time (int | Unset): The UNIX timestamp, in seconds, after which a shopper can no longer claim the coupon.
+     """
 
     start_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         start_time = self.start_time
 
         end_time = self.end_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if start_time is not UNSET:
             field_dict["start_time"] = start_time
         if end_time is not UNSET:
             field_dict["end_time"] = end_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class ClaimDuration:
             start_time=start_time,
             end_time=end_time,
         )
+
 
         claim_duration.additional_properties = d
         return claim_duration

@@ -1,40 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.reject_cancellation_request_image import RejectCancellationRequestImage
+  from ..models.reject_cancellation_request_image import RejectCancellationRequestImage
+
+
+
 
 
 T = TypeVar("T", bound="RejectCancellationRequest")
 
 
+
 @_attrs_define
 class RejectCancellationRequest:
-    """
-    Attributes:
-        reject_reason (str): Seller's reason for rejecting the buyer's order cancellation request. Use the [Get Decision
-            Eligibility](https://partner.tiktokshop.com/docv2/page/69844a11eeba77049695c7f6) endpoint to retrieve the
-            currently available rejection reasons for the same cancellation request, and submit the returned rejection
-            reason name in this field.
-        comment (str | Unset): Seller's comment on rejection decision. This is where a seller will provide more
-            information about rejecting the request.
-        images (list[RejectCancellationRequestImage] | Unset): List of images provided by the seller to support seller's
-            decision to reject the order cancellation request.
-    """
+    """ 
+        Attributes:
+            reject_reason (str): Seller's reason for rejecting the buyer's order cancellation request. Use the [Get Decision
+                Eligibility](https://partner.tiktokshop.com/docv2/page/69844a11eeba77049695c7f6) endpoint to retrieve the
+                currently available rejection reasons for the same cancellation request, and submit the returned rejection
+                reason name in this field.
+            comment (str | Unset): Seller's comment on rejection decision. This is where a seller will provide more
+                information about rejecting the request.
+            images (list[RejectCancellationRequestImage] | Unset): List of images provided by the seller to support seller's
+                decision to reject the order cancellation request.
+     """
 
     reject_reason: str
     comment: str | Unset = UNSET
     images: list[RejectCancellationRequestImage] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.reject_cancellation_request_image import RejectCancellationRequestImage # noqa: PLC0415
         reject_reason = self.reject_reason
 
         comment = self.comment
@@ -46,13 +58,14 @@ class RejectCancellationRequest:
                 images_item = images_item_data.to_dict()
                 images.append(images_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "reject_reason": reject_reason,
-            }
-        )
+        field_dict.update({
+            "reject_reason": reject_reason,
+        })
         if comment is not UNSET:
             field_dict["comment"] = comment
         if images is not UNSET:
@@ -60,10 +73,11 @@ class RejectCancellationRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.reject_cancellation_request_image import RejectCancellationRequestImage  # noqa: PLC0415
-
+        from ..models.reject_cancellation_request_image import RejectCancellationRequestImage # noqa: PLC0415
         d = dict(src_dict)
         reject_reason = d.pop("reject_reason")
 
@@ -76,13 +90,17 @@ class RejectCancellationRequest:
             for images_item_data in _images:
                 images_item = RejectCancellationRequestImage.from_dict(images_item_data)
 
+
+
                 images.append(images_item)
+
 
         reject_cancellation_request = cls(
             reject_reason=reject_reason,
             comment=comment,
             images=images,
         )
+
 
         reject_cancellation_request.additional_properties = d
         return reject_cancellation_request

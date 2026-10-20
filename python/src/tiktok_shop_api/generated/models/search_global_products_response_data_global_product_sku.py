@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchGlobalProductsResponseDataGlobalProductSku")
+
 
 
 @_attrs_define
 class SearchGlobalProductsResponseDataGlobalProductSku:
-    """
-    Attributes:
-        id (str | Unset): The global SKU ID in TikTok Shop. One product can contain multiple SKU IDs.
-        seller_sku (str | Unset): An internal code/name for managing SKUs, not visible to buyers.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The global SKU ID in TikTok Shop. One product can contain multiple SKU IDs.
+            seller_sku (str | Unset): An internal code/name for managing SKUs, not visible to buyers.
+     """
 
     id: str | Unset = UNSET
     seller_sku: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         seller_sku = self.seller_sku
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if seller_sku is not UNSET:
             field_dict["seller_sku"] = seller_sku
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class SearchGlobalProductsResponseDataGlobalProductSku:
             id=id,
             seller_sku=seller_sku,
         )
+
 
         search_global_products_response_data_global_product_sku.additional_properties = d
         return search_global_products_response_data_global_product_sku

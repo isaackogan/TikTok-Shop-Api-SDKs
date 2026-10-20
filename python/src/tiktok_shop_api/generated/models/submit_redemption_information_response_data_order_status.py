@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SubmitRedemptionInformationResponseDataOrderStatus")
+
 
 
 @_attrs_define
 class SubmitRedemptionInformationResponseDataOrderStatus:
-    """
-    Attributes:
-        order_line_id (str | Unset): Line order id, same as the input line order id.
-        status_code (int | Unset): Callback status of this line order id. A none zero code represent a failure callback.
-    """
+    """ 
+        Attributes:
+            order_line_id (str | Unset): Line order id, same as the input line order id.
+            status_code (int | Unset): Callback status of this line order id. A none zero code represent a failure callback.
+     """
 
     order_line_id: str | Unset = UNSET
     status_code: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         order_line_id = self.order_line_id
 
         status_code = self.status_code
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_line_id is not UNSET:
             field_dict["order_line_id"] = order_line_id
         if status_code is not UNSET:
             field_dict["status_code"] = status_code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class SubmitRedemptionInformationResponseDataOrderStatus:
             order_line_id=order_line_id,
             status_code=status_code,
         )
+
 
         submit_redemption_information_response_data_order_status.additional_properties = d
         return submit_redemption_information_response_data_order_status

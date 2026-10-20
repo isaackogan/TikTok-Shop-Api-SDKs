@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalProductResponseDataMainImage")
+
 
 
 @_attrs_define
 class GetGlobalProductResponseDataMainImage:
-    """
-    Attributes:
-        height (int | Unset): The image height.
-            Unit: px
-        width (int | Unset): The image width.
-            Unit: px
-        uri (str | Unset): The URI of the image.
-    """
+    """ 
+        Attributes:
+            height (int | Unset): The image height.
+                Unit: px
+            width (int | Unset): The image width.
+                Unit: px
+            uri (str | Unset): The URI of the image.
+     """
 
     height: int | Unset = UNSET
     width: int | Unset = UNSET
     uri: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -34,9 +46,11 @@ class GetGlobalProductResponseDataMainImage:
 
         uri = self.uri
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if width is not UNSET:
@@ -45,6 +59,8 @@ class GetGlobalProductResponseDataMainImage:
             field_dict["uri"] = uri
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -60,6 +76,7 @@ class GetGlobalProductResponseDataMainImage:
             width=width,
             uri=uri,
         )
+
 
         get_global_product_response_data_main_image.additional_properties = d
         return get_global_product_response_data_main_image

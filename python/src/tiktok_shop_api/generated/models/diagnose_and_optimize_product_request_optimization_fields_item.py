@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class DiagnoseAndOptimizeProductRequestOptimizationFieldsItem(StrEnum):
     ALL = "ALL"
     DESCRIPTION = "DESCRIPTION"

@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SampleApplicationStatusChangeWebhookDataProduct")
+
 
 
 @_attrs_define
 class SampleApplicationStatusChangeWebhookDataProduct:
-    """
-    Attributes:
-        id (str | Unset): The product identifier.
-        sku_id (str | Unset): The unique id of product sku which the creator applied for as a sample.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product identifier.
+            sku_id (str | Unset): The unique id of product sku which the creator applied for as a sample.
+     """
 
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
         sku_id = self.sku_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if sku_id is not UNSET:
             field_dict["sku_id"] = sku_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class SampleApplicationStatusChangeWebhookDataProduct:
             id=id,
             sku_id=sku_id,
         )
+
 
         sample_application_status_change_webhook_data_product.additional_properties = d
         return sample_application_status_change_webhook_data_product

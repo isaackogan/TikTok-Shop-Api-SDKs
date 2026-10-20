@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReviewASampleApplicationRequestRejectReason(StrEnum):
     NOT_MATCH = "NOT_MATCH"
     OFFLINE = "OFFLINE"

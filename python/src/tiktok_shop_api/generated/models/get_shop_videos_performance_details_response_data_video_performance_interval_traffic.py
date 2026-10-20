@@ -1,26 +1,34 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic")
+
 
 
 @_attrs_define
 class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic:
-    """
-    Attributes:
-        comments (int | Unset): The number of comments received by the video.
-        likes (int | Unset): The number of likes received by the video.
-        new_followers (int | Unset): The number of new followers attributed to the video.
-        shares (int | Unset): The number of times the video was shared.
-        views (int | Unset): The number of video views.
-    """
+    """ 
+        Attributes:
+            comments (int | Unset): The number of comments received by the video.
+            likes (int | Unset): The number of likes received by the video.
+            new_followers (int | Unset): The number of new followers attributed to the video.
+            shares (int | Unset): The number of times the video was shared.
+            views (int | Unset): The number of video views.
+     """
 
     comments: int | Unset = UNSET
     likes: int | Unset = UNSET
@@ -28,6 +36,10 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic
     shares: int | Unset = UNSET
     views: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         comments = self.comments
@@ -40,9 +52,11 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic
 
         views = self.views
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if comments is not UNSET:
             field_dict["comments"] = comments
         if likes is not UNSET:
@@ -55,6 +69,8 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic
             field_dict["views"] = views
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalTraffic
             shares=shares,
             views=views,
         )
+
 
         get_shop_videos_performance_details_response_data_video_performance_interval_traffic.additional_properties = d
         return get_shop_videos_performance_details_response_data_video_performance_interval_traffic

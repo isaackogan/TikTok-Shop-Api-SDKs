@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopPerformanceGranularity(StrEnum):
     ALL = "ALL"
     VALUE_1 = "1D"

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateCompassOfflineExportTaskRequestPlanType(StrEnum):
     ALL = "ALL"
     OPEN = "OPEN"

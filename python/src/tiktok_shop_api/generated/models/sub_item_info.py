@@ -1,77 +1,84 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.item_tax import ItemTax
+  from ..models.item_tax import ItemTax
+
+
+
 
 
 T = TypeVar("T", bound="SubItemInfo")
 
 
+
 @_attrs_define
 class SubItemInfo:
-    """
-    Attributes:
-        id (str | Unset): Line item id of the sub_item. This unique identifier can be used when performing split/line-
-            level fulfillment events.
-        sku_id (str | Unset): SKU ID.
-        display_status (str | Unset): Available values:
-            - `UNPAID`: The order has been placed, but payment has not yet completed.
-            - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.
-            - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.
-            - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.
-            - `DELIVERED`: The package has been delivered to the buyer.
-            - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
-            - `CANCELLED`: The order has been cancelled.
-        product_name (str | Unset): Product name.
-        seller_sku (str | Unset): The seller stock keeping unit (SKU) of the item.
-        sku_image (str | Unset): SKU image.
-        sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. e.g. "Black,
-            26"
-        product_id (str | Unset): Product ID.
-        sale_price (str | Unset): Item sale price. Please refer to the currency of `payment_info`.
-        platform_discount (str | Unset): Platform discount amount. Please refer to the currency of `payment_info`.
-        seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
-        cancel_reason (str | Unset): The cancellation reason. Please visit [our list of cancel
-            reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
-        original_price (str | Unset): Item original price. Please refer to the currency of `payment_info`.
-        rts_time (int | Unset): The time sellers shipped the order (called [Ship Package
-            API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
-        package_status (str | Unset): The package status of the item.
-            Available values:
-            - `TO_FULFILL`: Package awaiting seller to arrange shipment.
-            - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.
-            - `FULFILLING`: Package has been collected by carrier and is in transit.
-            - `COMPLETED`: Package has been delivered.
-            - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
-            damaged.
-        currency (str | Unset): Currency for payment.
-        shipping_provider_name (str | Unset): The shipping provider name.
-        cancel_user (str | Unset): Cancellation request initiator.
-            Available values:
-            - `BUYER`
-            - `SELLER`
-            - `OPERATOR`
-            - `SYSTEM`
-        shipping_provider_id (str | Unset): The shipping provider ID of the item.
-        item_tax (list[ItemTax] | Unset): Item tax detail.
-        tracking_number (str | Unset): Tracking number. Available after package has been shipped.
-        package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
-            Each package has a unique `package_id` and `tracking_id`.
-        retail_delivery_fee (str | Unset): Retail delivery fee (RDF).
-            **Note**: Only available in the US market.
-        is_dangerous_good (bool | Unset): Whether the SKU is a hazmat item. When creating the label for a hazmat item,
-            you must follow the platform rules to put certain items into one package. Please refer to the relationship
-            between `sku_id` and `package_id` to determine how to follow platform rules.
-        warehouse_id (str | Unset): Seller warehouse ID.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Line item id of the sub_item. This unique identifier can be used when performing split/line-
+                level fulfillment events.
+            sku_id (str | Unset): SKU ID.
+            display_status (str | Unset): Available values:
+                - `UNPAID`: The order has been placed, but payment has not yet completed.
+                - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.
+                - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.
+                - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress.
+                - `DELIVERED`: The package has been delivered to the buyer.
+                - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
+                - `CANCELLED`: The order has been cancelled.
+            product_name (str | Unset): Product name.
+            seller_sku (str | Unset): The seller stock keeping unit (SKU) of the item.
+            sku_image (str | Unset): SKU image.
+            sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. e.g. "Black,
+                26"
+            product_id (str | Unset): Product ID.
+            sale_price (str | Unset): Item sale price. Please refer to the currency of `payment_info`.
+            platform_discount (str | Unset): Platform discount amount. Please refer to the currency of `payment_info`.
+            seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
+            cancel_reason (str | Unset): The cancellation reason. Please visit [our list of cancel
+                reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
+            original_price (str | Unset): Item original price. Please refer to the currency of `payment_info`.
+            rts_time (int | Unset): The time sellers shipped the order (called [Ship Package
+                API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+            package_status (str | Unset): The package status of the item.
+                Available values:
+                - `TO_FULFILL`: Package awaiting seller to arrange shipment.
+                - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.
+                - `FULFILLING`: Package has been collected by carrier and is in transit.
+                - `COMPLETED`: Package has been delivered.
+                - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
+                damaged.
+            currency (str | Unset): Currency for payment.
+            shipping_provider_name (str | Unset): The shipping provider name.
+            cancel_user (str | Unset): Cancellation request initiator.
+                Available values:
+                - `BUYER`
+                - `SELLER`
+                - `OPERATOR`
+                - `SYSTEM`
+            shipping_provider_id (str | Unset): The shipping provider ID of the item.
+            item_tax (list[ItemTax] | Unset): Item tax detail.
+            tracking_number (str | Unset): Tracking number. Available after package has been shipped.
+            package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
+                Each package has a unique `package_id` and `tracking_id`.
+            retail_delivery_fee (str | Unset): Retail delivery fee (RDF).
+                **Note**: Only available in the US market.
+            is_dangerous_good (bool | Unset): Whether the SKU is a hazmat item. When creating the label for a hazmat item,
+                you must follow the platform rules to put certain items into one package. Please refer to the relationship
+                between `sku_id` and `package_id` to determine how to follow platform rules.
+            warehouse_id (str | Unset): Seller warehouse ID.
+     """
 
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
@@ -100,7 +107,12 @@ class SubItemInfo:
     warehouse_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.item_tax import ItemTax # noqa: PLC0415
         id = self.id
 
         sku_id = self.sku_id
@@ -146,6 +158,8 @@ class SubItemInfo:
                 item_tax_item = item_tax_item_data.to_dict()
                 item_tax.append(item_tax_item)
 
+
+
         tracking_number = self.tracking_number
 
         package_id = self.package_id
@@ -156,9 +170,11 @@ class SubItemInfo:
 
         warehouse_id = self.warehouse_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if sku_id is not UNSET:
@@ -212,10 +228,11 @@ class SubItemInfo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.item_tax import ItemTax  # noqa: PLC0415
-
+        from ..models.item_tax import ItemTax # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -262,7 +279,10 @@ class SubItemInfo:
             for item_tax_item_data in _item_tax:
                 item_tax_item = ItemTax.from_dict(item_tax_item_data)
 
+
+
                 item_tax.append(item_tax_item)
+
 
         tracking_number = d.pop("tracking_number", UNSET)
 
@@ -301,6 +321,7 @@ class SubItemInfo:
             is_dangerous_good=is_dangerous_good,
             warehouse_id=warehouse_id,
         )
+
 
         sub_item_info.additional_properties = d
         return sub_item_info

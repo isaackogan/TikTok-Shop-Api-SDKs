@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunityListingCriteria")
+
 
 
 @_attrs_define
 class GetOpportunityDetailResponseDataOpportunityListingCriteria:
-    """
-    Attributes:
-        product_brand (str | Unset): Requirement for product brand.
-        product_category (str | Unset): Requirement for product category.
-        product_status (str | Unset): Requirement for product status : LIVE / DRAFT
-        keywords (str | Unset): A comma-separated list of keywords that must be included in the product's title,
-            attributes, description, or other applicable content.
-    """
+    """ 
+        Attributes:
+            product_brand (str | Unset): Requirement for product brand.
+            product_category (str | Unset): Requirement for product category.
+            product_status (str | Unset): Requirement for product status : LIVE / DRAFT
+            keywords (str | Unset): A comma-separated list of keywords that must be included in the product's title,
+                attributes, description, or other applicable content.
+     """
 
     product_brand: str | Unset = UNSET
     product_category: str | Unset = UNSET
     product_status: str | Unset = UNSET
     keywords: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         product_brand = self.product_brand
@@ -37,9 +49,11 @@ class GetOpportunityDetailResponseDataOpportunityListingCriteria:
 
         keywords = self.keywords
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if product_brand is not UNSET:
             field_dict["product_brand"] = product_brand
         if product_category is not UNSET:
@@ -50,6 +64,8 @@ class GetOpportunityDetailResponseDataOpportunityListingCriteria:
             field_dict["keywords"] = keywords
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -68,6 +84,7 @@ class GetOpportunityDetailResponseDataOpportunityListingCriteria:
             product_status=product_status,
             keywords=keywords,
         )
+
 
         get_opportunity_detail_response_data_opportunity_listing_criteria.additional_properties = d
         return get_opportunity_detail_response_data_opportunity_listing_criteria

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdateFBTGoodsInfoRequestUpdateGoodsDtoDimensionAndWeightBaseInfoWeightUnit(StrEnum):
     GRAM = "GRAM"
     KILOGRAM = "KILOGRAM"

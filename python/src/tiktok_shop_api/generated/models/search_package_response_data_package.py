@@ -1,40 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.order import Order
+  from ..models.order import Order
+
+
+
 
 
 T = TypeVar("T", bound="SearchPackageResponseDataPackage")
 
 
+
 @_attrs_define
 class SearchPackageResponseDataPackage:
-    """
-    Attributes:
-        id (str | Unset): Package ID.
-        orders (list[Order] | Unset): The response list of TikTok Shop orders.
-        create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
-        update_time (int | Unset): The time when the package was last updated. Unix timestamp, in seconds.
-        status (str | Unset): Possible values:
-            - `TO_FULFILL`
-            - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
-            - `FULFILLING`: Package has been collected by carrier and in transit.
-            - `COMPLETED`: Package has been delivered.
-            - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
-            damaged.
-        tracking_number (str | Unset): Package tracking number.
-        shipping_provider_name (str | Unset): Package shipping provider.
-        shipping_provider_id (str | Unset): Package shipping provider ID.
-        order_line_item_ids (list[str] | Unset): The order line item ID contained in the package.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Package ID.
+            orders (list[Order] | Unset): The response list of TikTok Shop orders.
+            create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
+            update_time (int | Unset): The time when the package was last updated. Unix timestamp, in seconds.
+            status (str | Unset): Possible values:
+                - `TO_FULFILL`
+                - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
+                - `FULFILLING`: Package has been collected by carrier and in transit.
+                - `COMPLETED`: Package has been delivered.
+                - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
+                damaged.
+            tracking_number (str | Unset): Package tracking number.
+            shipping_provider_name (str | Unset): Package shipping provider.
+            shipping_provider_id (str | Unset): Package shipping provider ID.
+            order_line_item_ids (list[str] | Unset): The order line item ID contained in the package.
+     """
 
     id: str | Unset = UNSET
     orders: list[Order] | Unset = UNSET
@@ -47,7 +54,12 @@ class SearchPackageResponseDataPackage:
     order_line_item_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.order import Order # noqa: PLC0415
         id = self.id
 
         orders: list[dict[str, Any]] | Unset = UNSET
@@ -56,6 +68,8 @@ class SearchPackageResponseDataPackage:
             for orders_item_data in self.orders:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
+
+
 
         create_time = self.create_time
 
@@ -73,9 +87,13 @@ class SearchPackageResponseDataPackage:
         if not isinstance(self.order_line_item_ids, Unset):
             order_line_item_ids = self.order_line_item_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if orders is not UNSET:
@@ -97,10 +115,11 @@ class SearchPackageResponseDataPackage:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.order import Order  # noqa: PLC0415
-
+        from ..models.order import Order # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -111,7 +130,10 @@ class SearchPackageResponseDataPackage:
             for orders_item_data in _orders:
                 orders_item = Order.from_dict(orders_item_data)
 
+
+
                 orders.append(orders_item)
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -127,6 +149,7 @@ class SearchPackageResponseDataPackage:
 
         order_line_item_ids = cast(list[str], d.pop("order_line_item_ids", UNSET))
 
+
         search_package_response_data_package = cls(
             id=id,
             orders=orders,
@@ -138,6 +161,7 @@ class SearchPackageResponseDataPackage:
             shipping_provider_id=shipping_provider_id,
             order_line_item_ids=order_line_item_ids,
         )
+
 
         search_package_response_data_package.additional_properties = d
         return search_package_response_data_package

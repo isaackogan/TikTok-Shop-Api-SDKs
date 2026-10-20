@@ -1,15 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_live_products_performance_list_response import GetShopLIVEProductsPerformanceListResponse
 from ...models.get_shop_live_products_performance_list_sort_field import GetShopLiveProductsPerformanceListSortField
 from ...models.get_shop_live_products_performance_list_sort_order import GetShopLiveProductsPerformanceListSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -18,7 +22,12 @@ def _get_kwargs(
     sort_order: GetShopLiveProductsPerformanceListSortOrder | Unset = UNSET,
     sort_field: GetShopLiveProductsPerformanceListSortField | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_sort_order: str | Unset = UNSET
@@ -35,24 +44,26 @@ def _get_kwargs(
 
     params["currency"] = currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202512/shop/{live_id}/products_performance".format(
-            live_id=quote(str(live_id), safe=""),
-        ),
+        "url": "/analytics/202512/shop/{live_id}/products_performance".format(live_id=quote(str(live_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopLIVEProductsPerformanceListResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopLIVEProductsPerformanceListResponse | None:
     if response.status_code == 200:
         response_200 = GetShopLIVEProductsPerformanceListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -62,9 +73,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopLIVEProductsPerformanceListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopLIVEProductsPerformanceListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -80,8 +89,9 @@ def sync_detailed(
     sort_order: GetShopLiveProductsPerformanceListSortOrder | Unset = UNSET,
     sort_field: GetShopLiveProductsPerformanceListSortField | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetShopLIVEProductsPerformanceListResponse]:
-    """Get Shop LIVE Products Performance List
+    """ Get Shop LIVE Products Performance List
 
      Returns sale performance for each product in a shop-related LIVE session from the official account
     or marketing accounts.
@@ -98,13 +108,15 @@ def sync_detailed(
 
     Returns:
         Response[GetShopLIVEProductsPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_id=live_id,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        currency=currency,
+sort_order=sort_order,
+sort_field=sort_field,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -113,7 +125,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     live_id: str,
     *,
@@ -121,8 +132,9 @@ def sync(
     sort_order: GetShopLiveProductsPerformanceListSortOrder | Unset = UNSET,
     sort_field: GetShopLiveProductsPerformanceListSortField | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetShopLIVEProductsPerformanceListResponse | None:
-    """Get Shop LIVE Products Performance List
+    """ Get Shop LIVE Products Performance List
 
      Returns sale performance for each product in a shop-related LIVE session from the official account
     or marketing accounts.
@@ -139,16 +151,17 @@ def sync(
 
     Returns:
         GetShopLIVEProductsPerformanceListResponse
-    """
+     """
+
 
     return sync_detailed(
         live_id=live_id,
-        client=client,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        currency=currency,
-    ).parsed
+client=client,
+sort_order=sort_order,
+sort_field=sort_field,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     live_id: str,
@@ -157,8 +170,9 @@ async def asyncio_detailed(
     sort_order: GetShopLiveProductsPerformanceListSortOrder | Unset = UNSET,
     sort_field: GetShopLiveProductsPerformanceListSortField | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> Response[GetShopLIVEProductsPerformanceListResponse]:
-    """Get Shop LIVE Products Performance List
+    """ Get Shop LIVE Products Performance List
 
      Returns sale performance for each product in a shop-related LIVE session from the official account
     or marketing accounts.
@@ -175,19 +189,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopLIVEProductsPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         live_id=live_id,
-        sort_order=sort_order,
-        sort_field=sort_field,
-        currency=currency,
+sort_order=sort_order,
+sort_field=sort_field,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     live_id: str,
@@ -196,8 +213,9 @@ async def asyncio(
     sort_order: GetShopLiveProductsPerformanceListSortOrder | Unset = UNSET,
     sort_field: GetShopLiveProductsPerformanceListSortField | Unset = UNSET,
     currency: str | Unset = UNSET,
+
 ) -> GetShopLIVEProductsPerformanceListResponse | None:
-    """Get Shop LIVE Products Performance List
+    """ Get Shop LIVE Products Performance List
 
      Returns sale performance for each product in a shop-related LIVE session from the official account
     or marketing accounts.
@@ -214,14 +232,14 @@ async def asyncio(
 
     Returns:
         GetShopLIVEProductsPerformanceListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            live_id=live_id,
-            client=client,
-            sort_order=sort_order,
-            sort_field=sort_field,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        live_id=live_id,
+client=client,
+sort_order=sort_order,
+sort_field=sort_field,
+currency=currency,
+
+    )).parsed

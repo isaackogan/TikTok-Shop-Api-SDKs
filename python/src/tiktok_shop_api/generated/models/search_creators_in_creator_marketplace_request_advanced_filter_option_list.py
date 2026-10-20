@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.option import Option
+  from ..models.option import Option
+
+
+
 
 
 T = TypeVar("T", bound="SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList")
 
 
+
 @_attrs_define
 class SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList:
-    """
-    Attributes:
-        options (list[Option] | Unset): Options in this option type
-        option_type (str | Unset): option type
-    """
+    """ 
+        Attributes:
+            options (list[Option] | Unset): Options in this option type
+            option_type (str | Unset): option type
+     """
 
     options: list[Option] | Unset = UNSET
     option_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.option import Option # noqa: PLC0415
         options: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.options, Unset):
             options = []
@@ -35,11 +47,15 @@ class SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList:
                 options_item = options_item_data.to_dict()
                 options.append(options_item)
 
+
+
         option_type = self.option_type
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if options is not UNSET:
             field_dict["options"] = options
         if option_type is not UNSET:
@@ -47,10 +63,11 @@ class SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.option import Option  # noqa: PLC0415
-
+        from ..models.option import Option # noqa: PLC0415
         d = dict(src_dict)
         _options = d.pop("options", UNSET)
         options: list[Option] | Unset = UNSET
@@ -59,7 +76,10 @@ class SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList:
             for options_item_data in _options:
                 options_item = Option.from_dict(options_item_data)
 
+
+
                 options.append(options_item)
+
 
         option_type = d.pop("option_type", UNSET)
 
@@ -67,6 +87,7 @@ class SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterOptionList:
             options=options,
             option_type=option_type,
         )
+
 
         search_creators_in_creator_marketplace_request_advanced_filter_option_list.additional_properties = d
         return search_creators_in_creator_marketplace_request_advanced_filter_option_list

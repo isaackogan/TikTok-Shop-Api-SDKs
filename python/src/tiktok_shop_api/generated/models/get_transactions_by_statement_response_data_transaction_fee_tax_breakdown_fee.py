@@ -1,123 +1,131 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee")
+
 
 
 @_attrs_define
 class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee:
-    """
-    Attributes:
-        platform_commission_amount (str | Unset): The commission amount charged by the platform.
-        referral_fee_amount (str | Unset): The referral fee charged for processing successful orders.
+    """ 
+        Attributes:
+            platform_commission_amount (str | Unset): The commission amount charged by the platform.
+            referral_fee_amount (str | Unset): The referral fee charged for processing successful orders.
 
-            Applicable only for the US.
-        refund_administration_fee_amount (str | Unset): The 20% refund administration fee deducted from the total
-            refunded referral fee amount.
-        transaction_fee_amount (str | Unset): The transaction fee charged for processing successful orders.
-        credit_card_handling_fee_amount (str | Unset): The handling fee charged when the buyer pays with a credit card.
-        affiliate_commission_amount (str | Unset): The commission amount charged to the seller for payment to the
-            creator.
-        affiliate_commission_amount_before_pit (str | Unset): The affiliate ads commission paid to a creator before any
-            personal income tax withholding.
+                Applicable only for the US.
+            refund_administration_fee_amount (str | Unset): The 20% refund administration fee deducted from the total
+                refunded referral fee amount.
+            transaction_fee_amount (str | Unset): The transaction fee charged for processing successful orders.
+            credit_card_handling_fee_amount (str | Unset): The handling fee charged when the buyer pays with a credit card.
+            affiliate_commission_amount (str | Unset): The commission amount charged to the seller for payment to the
+                creator.
+            affiliate_commission_amount_before_pit (str | Unset): The affiliate ads commission paid to a creator before any
+                personal income tax withholding.
 
-            Applicable only for SEA markets.
-        affiliate_partner_commission_amount (str | Unset): The commission amount for purchases through affiliate partner
-            links.
-        affiliate_ads_commission_amount (str | Unset): The commission for eligible orders from ads.
-        sfp_service_fee_amount (str | Unset): The service fee charged for participation in the [Seller Free Shipping
-            Programme].
-        live_specials_fee_amount (str | Unset): The service fee charged for participation in the [LIVE Specials
-            Programme].
-        bonus_cashback_service_fee_amount (str | Unset): The service fee charged for participation in the bonus cashback
-            program.
-        mall_service_fee_amount (str | Unset): The service fee charged for using TikTok Shop Mall.
-        voucher_xtra_service_fee_amount (str | Unset): The service fee charged for participation in the Voucher Xtra
-            program.
-        flash_sales_service_fee_amount (str | Unset): The service fee charged for participation in flash sales.
-        cofunded_promotion_service_fee_amount (str | Unset): The service fee charged for co-funded promotions.
-        pre_order_service_fee_amount (str | Unset): The service fee charged for participation in the pre-order program.
-        tsp_commission_amount (str | Unset): The commission amount charged by TikTok Shop Partners (TSP).
-        dt_handling_fee_amount (str | Unset): The handling fee charged for orders that are fulfilled by Dilayani
-            Tokopedia.
-        epr_pob_service_fee_amount (str | Unset): The eco-contributions TikTok Shop pays on your behalf to the qualified
-            producer responsibility organization (PRO).
-        seller_paylater_handling_fee_amount (str | Unset): The handling fee charged to the seller for participation in
-            the PayLater program.
-        fee_per_item_sold_amount (str | Unset): The fee charged to sellers by the platform for each item sold. This is
-            equivalent to the sum of all per-item fees for all SKUs in the order.
-            Applicable only for the Brazil market.
-        cofunded_creator_bonus_amount (str | Unset): The portion of the creator bonus that you co-fund as part of the
-            commission boost campaign.
-        dynamic_commission_amount (str | Unset): The dynamic commission fee is the amount that the platform charges to
-            all sellers for every successfully delivered order.
-            Applicable only for Indonesia.
-        external_affiliate_marketing_fee_amount (str | Unset): The service fee for participating in the External
-            Affiliate Marketing Solution Program, as stated during registration.
-        vn_fix_infrastructure_fee (str | Unset): Infrastructure fees are a fixed service fee that TikTok Shop charges
-            for providing, maintaining, and developing infrastructure for delivery services. It applies to delivered orders
-            on the main order level.
-        affiliate_commission_deposit (str | Unset): The amount reserved for creator commissions after an order is paid.
-            Applies only to commissions tied to order volume and is based on the highest earning rate.
-        affiliate_commission_release (str | Unset): The commission deposit refunded to you after order settlement.
-            Applies only to commissions tied to order volume.
-        tap_shop_ads_commission (str | Unset): The advertising commission cost a merchant pays to TikTok Shop Affiliate
-            Partner (TAP).
-        shipping_fee_guarantee_service_fee (str | Unset): A flat service fee charged for each order under the Shipping
-            Fee Guarantee Program
-        installation_service_fee (str | Unset): The fee TikTok Shop charges you for using platform installation service
-        campaign_resource_fee (str | Unset): Amount of campaign resource fee from program seller joining in
-        platform_special_service_fee_amount (str | Unset): The portion of the Distance Shipping Fee paid by the customer
-            that exceeds the logistics service provider's charge, retained by TikTok Shop to support a secure fulfillment
-            experience
-        smart_promotion_fee_amount (str | Unset): This fee includes funds from TikTok Shop to help provide promotions to
-            customers
-        gmv_max_ad_fee_amount (str | Unset): A percentage deducted from your net sales per order for GMV Max (net sales
-            performance goal) advertising.
-        platform_semi_managed_commission_fee (str | Unset): Calculated as a percentage of (original price − seller
-            discount + customer-paid shipping fee).
-        platform_semi_managed_commission_fee_tax (str | Unset): This amount is collected on behalf of the government.
-        campaign_period_fee_cfp_amount (str | Unset): Fee charged during Co-funded Promotion campaigns.
-        campaign_period_fee_sp_amount (str | Unset): Fee charged during Smart Promotion campaigns.
-        campaign_period_fee_sp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Smart
-            Promotion.
-        campaign_period_fee_cfp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Co-funded
-            Promotion.
-        seller_growth_fee_amount (str | Unset): A fee charged on each successful order to provide Bonus Cashback and
-            other growth benefits.
-        category_led_campaign_fee_amount (str | Unset): Fee charged for participating in the Category-led campaign.
-        category_led_campaign_fee_tax_amount (str | Unset): Sales tax charged for the fee.
-        brand_amplification_program_commission (str | Unset): Commission fee charged for participating in the Brand
-            Amplification Program.
-        brand_amplification_program_fee_tax (str | Unset): Sales tax charged for the fee.
-        brand_campaign_fee (str | Unset): Fee charged for participating in the Brand campaign.
-        brand_campaign_fee_tax (str | Unset): Sales tax charged for the fee.
-        failed_delivery_shipping_fee (str | Unset): Shipping fee for order that failed to be delivered to the customer.
-            In some cases, the fee may be shared between seller and platform.
-        buyer_fault_return_shipping_fee (str | Unset): Shipping fee for buyer-fault returns. In some cases, the fee may
-            be shared between seller and platform.
-        insurance_fee (str | Unset): Premium charged per order for insurance coverage
-        gmv_max_coupon_fee (str | Unset): The cost of GMV Max coupons.
-        cps_shop_ads_commission_tax_amount (str | Unset): Sales tax applied to GMV Max ad fee
-        shipping_insurance_fee_tax_amount (str | Unset): The tax amount charged on the shipping insurance fee.
-        new_customer_growth_package_fee (str | Unset): Fee for using the New Customer Growth Package to offer discounts
-            that attract new customers to your shop.
-        target_product_gmv_growth_package_fee (str | Unset): Fee for using the Product GMV Growth Package to offer
-            discounts on selected products and increase their sales.
-        store_gmv_growth_package_fee (str | Unset): Fee for using the Shop GMV Growth Package to offer store-wide
-            discounts and grow your overall sales.
-        auto_post_shoppable_video_commission_fee (str | Unset): The commission fee charged to the seller for orders
-            attributed to the AI-generated, auto-post shoppable videos.
-        seller_funded_user_spoint_service_fee (str | Unset): Service fee charged for seller-funded user S-Points issued
-            to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
-    """
+                Applicable only for SEA markets.
+            affiliate_partner_commission_amount (str | Unset): The commission amount for purchases through affiliate partner
+                links.
+            affiliate_ads_commission_amount (str | Unset): The commission for eligible orders from ads.
+            sfp_service_fee_amount (str | Unset): The service fee charged for participation in the [Seller Free Shipping
+                Programme].
+            live_specials_fee_amount (str | Unset): The service fee charged for participation in the [LIVE Specials
+                Programme].
+            bonus_cashback_service_fee_amount (str | Unset): The service fee charged for participation in the bonus cashback
+                program.
+            mall_service_fee_amount (str | Unset): The service fee charged for using TikTok Shop Mall.
+            voucher_xtra_service_fee_amount (str | Unset): The service fee charged for participation in the Voucher Xtra
+                program.
+            flash_sales_service_fee_amount (str | Unset): The service fee charged for participation in flash sales.
+            cofunded_promotion_service_fee_amount (str | Unset): The service fee charged for co-funded promotions.
+            pre_order_service_fee_amount (str | Unset): The service fee charged for participation in the pre-order program.
+            tsp_commission_amount (str | Unset): The commission amount charged by TikTok Shop Partners (TSP).
+            dt_handling_fee_amount (str | Unset): The handling fee charged for orders that are fulfilled by Dilayani
+                Tokopedia.
+            epr_pob_service_fee_amount (str | Unset): The eco-contributions TikTok Shop pays on your behalf to the qualified
+                producer responsibility organization (PRO).
+            seller_paylater_handling_fee_amount (str | Unset): The handling fee charged to the seller for participation in
+                the PayLater program.
+            fee_per_item_sold_amount (str | Unset): The fee charged to sellers by the platform for each item sold. This is
+                equivalent to the sum of all per-item fees for all SKUs in the order.
+                Applicable only for the Brazil market.
+            cofunded_creator_bonus_amount (str | Unset): The portion of the creator bonus that you co-fund as part of the
+                commission boost campaign.
+            dynamic_commission_amount (str | Unset): The dynamic commission fee is the amount that the platform charges to
+                all sellers for every successfully delivered order.
+                Applicable only for Indonesia.
+            external_affiliate_marketing_fee_amount (str | Unset): The service fee for participating in the External
+                Affiliate Marketing Solution Program, as stated during registration.
+            vn_fix_infrastructure_fee (str | Unset): Infrastructure fees are a fixed service fee that TikTok Shop charges
+                for providing, maintaining, and developing infrastructure for delivery services. It applies to delivered orders
+                on the main order level.
+            affiliate_commission_deposit (str | Unset): The amount reserved for creator commissions after an order is paid.
+                Applies only to commissions tied to order volume and is based on the highest earning rate.
+            affiliate_commission_release (str | Unset): The commission deposit refunded to you after order settlement.
+                Applies only to commissions tied to order volume.
+            tap_shop_ads_commission (str | Unset): The advertising commission cost a merchant pays to TikTok Shop Affiliate
+                Partner (TAP).
+            shipping_fee_guarantee_service_fee (str | Unset): A flat service fee charged for each order under the Shipping
+                Fee Guarantee Program
+            installation_service_fee (str | Unset): The fee TikTok Shop charges you for using platform installation service
+            campaign_resource_fee (str | Unset): Amount of campaign resource fee from program seller joining in
+            platform_special_service_fee_amount (str | Unset): The portion of the Distance Shipping Fee paid by the customer
+                that exceeds the logistics service provider's charge, retained by TikTok Shop to support a secure fulfillment
+                experience
+            smart_promotion_fee_amount (str | Unset): This fee includes funds from TikTok Shop to help provide promotions to
+                customers
+            gmv_max_ad_fee_amount (str | Unset): A percentage deducted from your net sales per order for GMV Max (net sales
+                performance goal) advertising.
+            platform_semi_managed_commission_fee (str | Unset): Calculated as a percentage of (original price − seller
+                discount + customer-paid shipping fee).
+            platform_semi_managed_commission_fee_tax (str | Unset): This amount is collected on behalf of the government.
+            campaign_period_fee_cfp_amount (str | Unset): Fee charged during Co-funded Promotion campaigns.
+            campaign_period_fee_sp_amount (str | Unset): Fee charged during Smart Promotion campaigns.
+            campaign_period_fee_sp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Smart
+                Promotion.
+            campaign_period_fee_cfp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Co-funded
+                Promotion.
+            seller_growth_fee_amount (str | Unset): A fee charged on each successful order to provide Bonus Cashback and
+                other growth benefits.
+            category_led_campaign_fee_amount (str | Unset): Fee charged for participating in the Category-led campaign.
+            category_led_campaign_fee_tax_amount (str | Unset): Sales tax charged for the fee.
+            brand_amplification_program_commission (str | Unset): Commission fee charged for participating in the Brand
+                Amplification Program.
+            brand_amplification_program_fee_tax (str | Unset): Sales tax charged for the fee.
+            brand_campaign_fee (str | Unset): Fee charged for participating in the Brand campaign.
+            brand_campaign_fee_tax (str | Unset): Sales tax charged for the fee.
+            failed_delivery_shipping_fee (str | Unset): Shipping fee for order that failed to be delivered to the customer.
+                In some cases, the fee may be shared between seller and platform.
+            buyer_fault_return_shipping_fee (str | Unset): Shipping fee for buyer-fault returns. In some cases, the fee may
+                be shared between seller and platform.
+            insurance_fee (str | Unset): Premium charged per order for insurance coverage
+            gmv_max_coupon_fee (str | Unset): The cost of GMV Max coupons.
+            cps_shop_ads_commission_tax_amount (str | Unset): Sales tax applied to GMV Max ad fee
+            shipping_insurance_fee_tax_amount (str | Unset): The tax amount charged on the shipping insurance fee.
+            new_customer_growth_package_fee (str | Unset): Fee for using the New Customer Growth Package to offer discounts
+                that attract new customers to your shop.
+            target_product_gmv_growth_package_fee (str | Unset): Fee for using the Product GMV Growth Package to offer
+                discounts on selected products and increase their sales.
+            store_gmv_growth_package_fee (str | Unset): Fee for using the Shop GMV Growth Package to offer store-wide
+                discounts and grow your overall sales.
+            auto_post_shoppable_video_commission_fee (str | Unset): The commission fee charged to the seller for orders
+                attributed to the AI-generated, auto-post shoppable videos.
+            seller_funded_user_spoint_service_fee (str | Unset): Service fee charged for seller-funded user S-Points issued
+                to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
+     """
 
     platform_commission_amount: str | Unset = UNSET
     referral_fee_amount: str | Unset = UNSET
@@ -179,6 +187,10 @@ class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee:
     auto_post_shoppable_video_commission_fee: str | Unset = UNSET
     seller_funded_user_spoint_service_fee: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         platform_commission_amount = self.platform_commission_amount
@@ -299,9 +311,11 @@ class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee:
 
         seller_funded_user_spoint_service_fee = self.seller_funded_user_spoint_service_fee
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if platform_commission_amount is not UNSET:
             field_dict["platform_commission_amount"] = platform_commission_amount
         if referral_fee_amount is not UNSET:
@@ -422,6 +436,8 @@ class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee:
             field_dict["seller_funded_user_spoint_service_fee"] = seller_funded_user_spoint_service_fee
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -605,6 +621,7 @@ class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee:
             auto_post_shoppable_video_commission_fee=auto_post_shoppable_video_commission_fee,
             seller_funded_user_spoint_service_fee=seller_funded_user_spoint_service_fee,
         )
+
 
         get_transactions_by_statement_response_data_transaction_fee_tax_breakdown_fee.additional_properties = d
         return get_transactions_by_statement_response_data_transaction_fee_tax_breakdown_fee

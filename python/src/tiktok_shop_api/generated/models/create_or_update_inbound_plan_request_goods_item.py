@@ -1,42 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateOrUpdateInboundPlanRequestGoodsItem")
+
 
 
 @_attrs_define
 class CreateOrUpdateInboundPlanRequestGoodsItem:
-    """
-    Attributes:
-        goods_id (str): The Fulfilled by TikTok goods identifier for this inbound plan item. The goods must belong to
-            the merchant associated with the authenticated seller, be approved for fulfillment, and be matched to an SKU.
-        quantity (int): Quantity of this goods item in the inbound plan. Must be greater than 0.
-    """
+    """ 
+        Attributes:
+            goods_id (str): The Fulfilled by TikTok goods identifier for this inbound plan item. The goods must belong to
+                the merchant associated with the authenticated seller, be approved for fulfillment, and be matched to an SKU.
+            quantity (int): Quantity of this goods item in the inbound plan. Must be greater than 0.
+     """
 
     goods_id: str
     quantity: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         goods_id = self.goods_id
 
         quantity = self.quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "goods_id": goods_id,
-                "quantity": quantity,
-            }
-        )
+        field_dict.update({
+            "goods_id": goods_id,
+            "quantity": quantity,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +63,7 @@ class CreateOrUpdateInboundPlanRequestGoodsItem:
             goods_id=goods_id,
             quantity=quantity,
         )
+
 
         create_or_update_inbound_plan_request_goods_item.additional_properties = d
         return create_or_update_inbound_plan_request_goods_item

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PartialEditGlobalProductRequestCategoryVersion(StrEnum):
     V1 = "v1"
     V2 = "v2"

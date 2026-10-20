@@ -1,37 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_open_collaboration_products_response_data_product import (
-        SearchOpenCollaborationProductsResponseDataProduct,
-    )
+  from ..models.search_open_collaboration_products_response_data_product import SearchOpenCollaborationProductsResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="SearchOpenCollaborationProductsResponseData")
 
 
+
 @_attrs_define
 class SearchOpenCollaborationProductsResponseData:
-    """
-    Attributes:
-        products (list[SearchOpenCollaborationProductsResponseDataProduct] | Unset): A list of products.
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
-        total_count (int | Unset): Total count of products meeting the search criteria expressed in the request body.
-    """
+    """ 
+        Attributes:
+            products (list[SearchOpenCollaborationProductsResponseDataProduct] | Unset): A list of products.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
+            total_count (int | Unset): Total count of products meeting the search criteria expressed in the request body.
+     """
 
     products: list[SearchOpenCollaborationProductsResponseDataProduct] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_open_collaboration_products_response_data_product import SearchOpenCollaborationProductsResponseDataProduct # noqa: PLC0415
         products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
@@ -39,13 +49,17 @@ class SearchOpenCollaborationProductsResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         next_page_token = self.next_page_token
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if products is not UNSET:
             field_dict["products"] = products
         if next_page_token is not UNSET:
@@ -55,12 +69,11 @@ class SearchOpenCollaborationProductsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_open_collaboration_products_response_data_product import (
-            SearchOpenCollaborationProductsResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.search_open_collaboration_products_response_data_product import SearchOpenCollaborationProductsResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         _products = d.pop("products", UNSET)
         products: list[SearchOpenCollaborationProductsResponseDataProduct] | Unset = UNSET
@@ -69,7 +82,10 @@ class SearchOpenCollaborationProductsResponseData:
             for products_item_data in _products:
                 products_item = SearchOpenCollaborationProductsResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -80,6 +96,7 @@ class SearchOpenCollaborationProductsResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         search_open_collaboration_products_response_data.additional_properties = d
         return search_open_collaboration_products_response_data

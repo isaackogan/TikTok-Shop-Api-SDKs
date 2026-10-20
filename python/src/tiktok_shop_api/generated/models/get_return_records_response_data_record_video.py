@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetReturnRecordsResponseDataRecordVideo")
+
 
 
 @_attrs_define
 class GetReturnRecordsResponseDataRecordVideo:
-    """
-    Attributes:
-        url (str | Unset): Video URL.
-        cover (str | Unset): Video thumbnail image.
-        width (int | Unset): Video image width.
-            Unit: px
-        height (int | Unset): Video image height.
-            Unit: px
-        duration_millis (int | Unset): Video duration.
-            Unit: milliseconds
-    """
+    """ 
+        Attributes:
+            url (str | Unset): Video URL.
+            cover (str | Unset): Video thumbnail image.
+            width (int | Unset): Video image width.
+                Unit: px
+            height (int | Unset): Video image height.
+                Unit: px
+            duration_millis (int | Unset): Video duration.
+                Unit: milliseconds
+     """
 
     url: str | Unset = UNSET
     cover: str | Unset = UNSET
@@ -31,6 +39,10 @@ class GetReturnRecordsResponseDataRecordVideo:
     height: int | Unset = UNSET
     duration_millis: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         url = self.url
@@ -43,9 +55,11 @@ class GetReturnRecordsResponseDataRecordVideo:
 
         duration_millis = self.duration_millis
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if url is not UNSET:
             field_dict["url"] = url
         if cover is not UNSET:
@@ -58,6 +72,8 @@ class GetReturnRecordsResponseDataRecordVideo:
             field_dict["duration_millis"] = duration_millis
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +95,7 @@ class GetReturnRecordsResponseDataRecordVideo:
             height=height,
             duration_millis=duration_millis,
         )
+
 
         get_return_records_response_data_record_video.additional_properties = d
         return get_return_records_response_data_record_video

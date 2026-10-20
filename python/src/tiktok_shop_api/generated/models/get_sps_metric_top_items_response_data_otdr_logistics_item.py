@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricTopItemsResponseDataOtdrLogisticsItem")
+
 
 
 @_attrs_define
 class GetSPSMetricTopItemsResponseDataOtdrLogisticsItem:
-    """
-    Attributes:
-        delivered_order_count (int | Unset): Total number of delivered orders.
-        logistics_provider (str | Unset): Logistics provider name.
-        on_time_deliver_order_count (int | Unset): Number of orders delivered on time.
-        on_time_deliver_rate (str | Unset): On-time delivery rate as a ratio from 0 to 1.
-    """
+    """ 
+        Attributes:
+            delivered_order_count (int | Unset): Total number of delivered orders.
+            logistics_provider (str | Unset): Logistics provider name.
+            on_time_deliver_order_count (int | Unset): Number of orders delivered on time.
+            on_time_deliver_rate (str | Unset): On-time delivery rate as a ratio from 0 to 1.
+     """
 
     delivered_order_count: int | Unset = UNSET
     logistics_provider: str | Unset = UNSET
     on_time_deliver_order_count: int | Unset = UNSET
     on_time_deliver_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         delivered_order_count = self.delivered_order_count
@@ -36,9 +48,11 @@ class GetSPSMetricTopItemsResponseDataOtdrLogisticsItem:
 
         on_time_deliver_rate = self.on_time_deliver_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if delivered_order_count is not UNSET:
             field_dict["delivered_order_count"] = delivered_order_count
         if logistics_provider is not UNSET:
@@ -49,6 +63,8 @@ class GetSPSMetricTopItemsResponseDataOtdrLogisticsItem:
             field_dict["on_time_deliver_rate"] = on_time_deliver_rate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class GetSPSMetricTopItemsResponseDataOtdrLogisticsItem:
             on_time_deliver_order_count=on_time_deliver_order_count,
             on_time_deliver_rate=on_time_deliver_rate,
         )
+
 
         get_sps_metric_top_items_response_data_otdr_logistics_item.additional_properties = d
         return get_sps_metric_top_items_response_data_otdr_logistics_item

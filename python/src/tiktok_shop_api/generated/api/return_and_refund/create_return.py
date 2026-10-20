@@ -1,27 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_return_request import CreateReturnRequest
 from ...models.create_return_response import CreateReturnResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateReturnRequest,
     idempotency_key: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
     params["idempotency_key"] = idempotency_key
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -37,9 +48,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateReturnResponse | None:
     if response.status_code == 200:
         response_200 = CreateReturnResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -49,9 +63,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateReturnResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateReturnResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -65,8 +77,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     body: CreateReturnRequest,
     idempotency_key: str | Unset = UNSET,
+
 ) -> Response[CreateReturnResponse]:
-    """Create Return
+    """ Create Return
 
      Use this API to create a seller-initiated aftersales request for an order on behalf of the buyer.
     Supported request types are `REFUND` and `RETURN_AND_REFUND`. Before submitting the request, confirm
@@ -83,11 +96,13 @@ def sync_detailed(
 
     Returns:
         Response[CreateReturnResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        idempotency_key=idempotency_key,
+idempotency_key=idempotency_key,
+
     )
 
     response = client.get_httpx_client().request(
@@ -96,14 +111,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateReturnRequest,
     idempotency_key: str | Unset = UNSET,
+
 ) -> CreateReturnResponse | None:
-    """Create Return
+    """ Create Return
 
      Use this API to create a seller-initiated aftersales request for an order on behalf of the buyer.
     Supported request types are `REFUND` and `RETURN_AND_REFUND`. Before submitting the request, confirm
@@ -120,22 +135,24 @@ def sync(
 
     Returns:
         CreateReturnResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        idempotency_key=idempotency_key,
-    ).parsed
+body=body,
+idempotency_key=idempotency_key,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateReturnRequest,
     idempotency_key: str | Unset = UNSET,
+
 ) -> Response[CreateReturnResponse]:
-    """Create Return
+    """ Create Return
 
      Use this API to create a seller-initiated aftersales request for an order on behalf of the buyer.
     Supported request types are `REFUND` and `RETURN_AND_REFUND`. Before submitting the request, confirm
@@ -152,25 +169,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateReturnResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        idempotency_key=idempotency_key,
+idempotency_key=idempotency_key,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateReturnRequest,
     idempotency_key: str | Unset = UNSET,
+
 ) -> CreateReturnResponse | None:
-    """Create Return
+    """ Create Return
 
      Use this API to create a seller-initiated aftersales request for an order on behalf of the buyer.
     Supported request types are `REFUND` and `RETURN_AND_REFUND`. Before submitting the request, confirm
@@ -187,12 +208,12 @@ async def asyncio(
 
     Returns:
         CreateReturnResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            idempotency_key=idempotency_key,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+idempotency_key=idempotency_key,
+
+    )).parsed

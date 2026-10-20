@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReviewAftersalesRequestsRequestAftersalesRequestDecisionRequestIdType(StrEnum):
     AFTERSALES = "AFTERSALES"
     RMA = "RMA"

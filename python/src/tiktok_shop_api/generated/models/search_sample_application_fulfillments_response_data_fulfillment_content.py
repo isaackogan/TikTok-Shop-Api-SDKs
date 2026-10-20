@@ -1,39 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent")
+
 
 
 @_attrs_define
 class SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent:
-    """
-    Attributes:
-        id (str | Unset): The video or live room identifier.
-        format_ (str | Unset): The format of the generated content:
-            - LIVE
-            - `VIDEO`
-        url (str | Unset): The content source link.
-        view_count (int | Unset): The cumulative number of views of the content.
-        like_count (int | Unset): The cumulative number of likes on the content.
-        comment_count (int | Unset): The cumulative number of comments on the content.
-        paid_order_count (int | Unset): The cumulative total number of orders paid for content.
-        page_link (str | Unset): Content page url of TikTok.
-        description (str | Unset): The title of video or the description of the live room.
-        create_time (int | Unset): - When `format` is `VIDEO`, this is the Unix timestamp, in seconds, when the video is
-            first made public and linked to the product.
-            - When `format` is `LIVE`, this is the Unix timestamp, in seconds, when the product link is first added to the
-            live stream.
-        live_end_time (int | Unset): Only when `format==LIVE`.
-            It refers to the time when the product link is removed from the live room. If the product link remains active
-            and is not removed, then it is the end of the live stream.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The video or live room identifier.
+            format_ (str | Unset): The format of the generated content:
+                - LIVE
+                - `VIDEO`
+            url (str | Unset): The content source link.
+            view_count (int | Unset): The cumulative number of views of the content.
+            like_count (int | Unset): The cumulative number of likes on the content.
+            comment_count (int | Unset): The cumulative number of comments on the content.
+            paid_order_count (int | Unset): The cumulative total number of orders paid for content.
+            page_link (str | Unset): Content page url of TikTok.
+            description (str | Unset): The title of video or the description of the live room.
+            create_time (int | Unset): - When `format` is `VIDEO`, this is the Unix timestamp, in seconds, when the video is
+                first made public and linked to the product.
+                - When `format` is `LIVE`, this is the Unix timestamp, in seconds, when the product link is first added to the
+                live stream.
+            live_end_time (int | Unset): Only when `format==LIVE`.
+                It refers to the time when the product link is removed from the live room. If the product link remains active
+                and is not removed, then it is the end of the live stream.
+     """
 
     id: str | Unset = UNSET
     format_: str | Unset = UNSET
@@ -47,6 +55,10 @@ class SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent:
     create_time: int | Unset = UNSET
     live_end_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -71,9 +83,11 @@ class SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent:
 
         live_end_time = self.live_end_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if format_ is not UNSET:
@@ -98,6 +112,8 @@ class SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent:
             field_dict["live_end_time"] = live_end_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -137,6 +153,7 @@ class SearchSampleApplicationFulfillmentsResponseDataFulfillmentContent:
             create_time=create_time,
             live_end_time=live_end_time,
         )
+
 
         search_sample_application_fulfillments_response_data_fulfillment_content.additional_properties = d
         return search_sample_application_fulfillments_response_data_fulfillment_content

@@ -1,15 +1,20 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_performance_currency import GetShopPerformanceCurrency
 from ...models.get_shop_performance_granularity import GetShopPerformanceGranularity
 from ...models.get_shop_performance_response import GetShopPerformanceResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -18,7 +23,12 @@ def _get_kwargs(
     end_date_lt: datetime.date,
     granularity: GetShopPerformanceGranularity | Unset = UNSET,
     currency: GetShopPerformanceCurrency | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_date_ge = start_date_ge.isoformat()
@@ -39,7 +49,9 @@ def _get_kwargs(
 
     params["currency"] = json_currency
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -47,14 +59,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopPerformanceResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopPerformanceResponse | None:
     if response.status_code == 200:
         response_200 = GetShopPerformanceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -64,9 +78,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopPerformanceResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopPerformanceResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -82,8 +94,9 @@ def sync_detailed(
     end_date_lt: datetime.date,
     granularity: GetShopPerformanceGranularity | Unset = UNSET,
     currency: GetShopPerformanceCurrency | Unset = UNSET,
+
 ) -> Response[GetShopPerformanceResponse]:
-    """Get Shop Performance
+    """ Get Shop Performance
 
      Returns performance metrics at shop/seller level.
 
@@ -99,13 +112,15 @@ def sync_detailed(
 
     Returns:
         Response[GetShopPerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
     )
 
     response = client.get_httpx_client().request(
@@ -114,7 +129,6 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
@@ -122,8 +136,9 @@ def sync(
     end_date_lt: datetime.date,
     granularity: GetShopPerformanceGranularity | Unset = UNSET,
     currency: GetShopPerformanceCurrency | Unset = UNSET,
+
 ) -> GetShopPerformanceResponse | None:
-    """Get Shop Performance
+    """ Get Shop Performance
 
      Returns performance metrics at shop/seller level.
 
@@ -139,16 +154,17 @@ def sync(
 
     Returns:
         GetShopPerformanceResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
-    ).parsed
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -157,8 +173,9 @@ async def asyncio_detailed(
     end_date_lt: datetime.date,
     granularity: GetShopPerformanceGranularity | Unset = UNSET,
     currency: GetShopPerformanceCurrency | Unset = UNSET,
+
 ) -> Response[GetShopPerformanceResponse]:
-    """Get Shop Performance
+    """ Get Shop Performance
 
      Returns performance metrics at shop/seller level.
 
@@ -174,19 +191,22 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopPerformanceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        granularity=granularity,
-        currency=currency,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -195,8 +215,9 @@ async def asyncio(
     end_date_lt: datetime.date,
     granularity: GetShopPerformanceGranularity | Unset = UNSET,
     currency: GetShopPerformanceCurrency | Unset = UNSET,
+
 ) -> GetShopPerformanceResponse | None:
-    """Get Shop Performance
+    """ Get Shop Performance
 
      Returns performance metrics at shop/seller level.
 
@@ -212,14 +233,14 @@ async def asyncio(
 
     Returns:
         GetShopPerformanceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            start_date_ge=start_date_ge,
-            end_date_lt=end_date_lt,
-            granularity=granularity,
-            currency=currency,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+granularity=granularity,
+currency=currency,
+
+    )).parsed

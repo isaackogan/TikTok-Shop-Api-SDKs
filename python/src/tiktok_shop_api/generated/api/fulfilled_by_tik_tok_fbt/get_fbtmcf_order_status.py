@@ -1,23 +1,34 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_fbtmcf_order_status_response import GetFBTMCFOrderStatusResponse
-from ...types import UNSET, Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     mcf_order_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["mcf_order_id"] = mcf_order_id
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -25,14 +36,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetFBTMCFOrderStatusResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetFBTMCFOrderStatusResponse | None:
     if response.status_code == 200:
         response_200 = GetFBTMCFOrderStatusResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -42,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetFBTMCFOrderStatusResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetFBTMCFOrderStatusResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,8 +68,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     mcf_order_id: str,
+
 ) -> Response[GetFBTMCFOrderStatusResponse]:
-    """Get FBT MCF Order Status
+    """ Get FBT MCF Order Status
 
      Use this API to retrieve an MCF order and the current status and fulfillment details of its consign
     orders. If the order requires multiple packages because of carrier restrictions or package-size
@@ -74,10 +86,12 @@ def sync_detailed(
 
     Returns:
         Response[GetFBTMCFOrderStatusResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         mcf_order_id=mcf_order_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -86,13 +100,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     mcf_order_id: str,
+
 ) -> GetFBTMCFOrderStatusResponse | None:
-    """Get FBT MCF Order Status
+    """ Get FBT MCF Order Status
 
      Use this API to retrieve an MCF order and the current status and fulfillment details of its consign
     orders. If the order requires multiple packages because of carrier restrictions or package-size
@@ -108,20 +122,22 @@ def sync(
 
     Returns:
         GetFBTMCFOrderStatusResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        mcf_order_id=mcf_order_id,
-    ).parsed
+mcf_order_id=mcf_order_id,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     mcf_order_id: str,
+
 ) -> Response[GetFBTMCFOrderStatusResponse]:
-    """Get FBT MCF Order Status
+    """ Get FBT MCF Order Status
 
      Use this API to retrieve an MCF order and the current status and fulfillment details of its consign
     orders. If the order requires multiple packages because of carrier restrictions or package-size
@@ -137,23 +153,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetFBTMCFOrderStatusResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         mcf_order_id=mcf_order_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     mcf_order_id: str,
+
 ) -> GetFBTMCFOrderStatusResponse | None:
-    """Get FBT MCF Order Status
+    """ Get FBT MCF Order Status
 
      Use this API to retrieve an MCF order and the current status and fulfillment details of its consign
     orders. If the order requires multiple packages because of carrier restrictions or package-size
@@ -169,11 +189,11 @@ async def asyncio(
 
     Returns:
         GetFBTMCFOrderStatusResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            mcf_order_id=mcf_order_id,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+mcf_order_id=mcf_order_id,
+
+    )).parsed

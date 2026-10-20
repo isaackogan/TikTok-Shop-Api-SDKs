@@ -1,34 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission")
+
 
 
 @_attrs_define
 class QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission:
-    """
-    Attributes:
-        rate (int | Unset): The commission rate in hundredths of a percent. For example, 3587 is a commission rate of
-            35.87%. This value must a minimum of 1000.  The range of this value is [100, 8000].
-        effective_time (str | Unset): The time when the commission becomes effective, as a Unix timestamp in seconds
-            represented as a string.
-        currency (str | Unset): The currency code.
-        minimum_amount (str | Unset): The minimum estimated commission amount for all SKUs of this product.
-        maximum_amount (str | Unset): The maximum estimated commission amount for all SKUs of this product.
-        shop_ads_commission_rate (int | Unset): The commission rate applies only to orders generated from ads. If a
-            creator’s video is used as an ad without this rate being set, the resulting orders will instead earn either:
-            - The Shop Ads commission you configured in open collaboration, or
-            - The standard commission defined in this invitation.
-            The commission rate is specified in increments of 1/10,000.
-            For example, 1000 stands for 0.1 or 10%.
-    """
+    """ 
+        Attributes:
+            rate (int | Unset): The commission rate in hundredths of a percent. For example, 3587 is a commission rate of
+                35.87%. This value must a minimum of 1000.  The range of this value is [100, 8000].
+            effective_time (str | Unset): The time when the commission becomes effective, as a Unix timestamp in seconds
+                represented as a string.
+            currency (str | Unset): The currency code.
+            minimum_amount (str | Unset): The minimum estimated commission amount for all SKUs of this product.
+            maximum_amount (str | Unset): The maximum estimated commission amount for all SKUs of this product.
+            shop_ads_commission_rate (int | Unset): The commission rate applies only to orders generated from ads. If a
+                creator’s video is used as an ad without this rate being set, the resulting orders will instead earn either:
+                - The Shop Ads commission you configured in open collaboration, or
+                - The standard commission defined in this invitation.
+                The commission rate is specified in increments of 1/10,000.
+                For example, 1000 stands for 0.1 or 10%.
+     """
 
     rate: int | Unset = UNSET
     effective_time: str | Unset = UNSET
@@ -37,6 +45,10 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommis
     maximum_amount: str | Unset = UNSET
     shop_ads_commission_rate: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         rate = self.rate
@@ -51,9 +63,11 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommis
 
         shop_ads_commission_rate = self.shop_ads_commission_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rate is not UNSET:
             field_dict["rate"] = rate
         if effective_time is not UNSET:
@@ -68,6 +82,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommis
             field_dict["shop_ads_commission_rate"] = shop_ads_commission_rate
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -92,6 +108,7 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommis
             maximum_amount=maximum_amount,
             shop_ads_commission_rate=shop_ads_commission_rate,
         )
+
 
         query_target_collaboration_detail_response_data_target_collaboration_product_commission.additional_properties = d
         return query_target_collaboration_detail_response_data_target_collaboration_product_commission

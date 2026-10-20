@@ -1,35 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.activity_change_webhook_data_product_remove_list import ActivityChangeWebhookDataProductRemoveList
-    from ..models.activity_change_webhook_data_product_update_list import ActivityChangeWebhookDataProductUpdateList
+  from ..models.activity_change_webhook_data_product_remove_list import ActivityChangeWebhookDataProductRemoveList
+  from ..models.activity_change_webhook_data_product_update_list import ActivityChangeWebhookDataProductUpdateList
+
+
+
 
 
 T = TypeVar("T", bound="ActivityChangeWebhookData")
 
 
+
 @_attrs_define
 class ActivityChangeWebhookData:
-    """
-    Attributes:
-        activity_id (str | Unset): The ID of the promotion activity.
-        update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
-        change_type (str | Unset): The type of activity changes.
+    """ 
+        Attributes:
+            activity_id (str | Unset): The ID of the promotion activity.
+            update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
+            change_type (str | Unset): The type of activity changes.
 
-             * CREATE
-             * UPDATE
-             * DEACTIVATE
-        product_update_list (ActivityChangeWebhookDataProductUpdateList | Unset):
-        product_remove_list (ActivityChangeWebhookDataProductRemoveList | Unset):
-    """
+                 * CREATE
+                 * UPDATE
+                 * DEACTIVATE
+            product_update_list (ActivityChangeWebhookDataProductUpdateList | Unset):
+            product_remove_list (ActivityChangeWebhookDataProductRemoveList | Unset):
+     """
 
     activity_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
@@ -38,7 +45,13 @@ class ActivityChangeWebhookData:
     product_remove_list: ActivityChangeWebhookDataProductRemoveList | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.activity_change_webhook_data_product_remove_list import ActivityChangeWebhookDataProductRemoveList # noqa: PLC0415
+        from ..models.activity_change_webhook_data_product_update_list import ActivityChangeWebhookDataProductUpdateList # noqa: PLC0415
         activity_id = self.activity_id
 
         update_time = self.update_time
@@ -53,9 +66,11 @@ class ActivityChangeWebhookData:
         if not isinstance(self.product_remove_list, Unset):
             product_remove_list = self.product_remove_list.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if update_time is not UNSET:
@@ -69,15 +84,12 @@ class ActivityChangeWebhookData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.activity_change_webhook_data_product_remove_list import (
-            ActivityChangeWebhookDataProductRemoveList,  # noqa: PLC0415
-        )
-        from ..models.activity_change_webhook_data_product_update_list import (
-            ActivityChangeWebhookDataProductUpdateList,  # noqa: PLC0415
-        )
-
+        from ..models.activity_change_webhook_data_product_remove_list import ActivityChangeWebhookDataProductRemoveList # noqa: PLC0415
+        from ..models.activity_change_webhook_data_product_update_list import ActivityChangeWebhookDataProductUpdateList # noqa: PLC0415
         d = dict(src_dict)
         activity_id = d.pop("activity_id", UNSET)
 
@@ -87,17 +99,23 @@ class ActivityChangeWebhookData:
 
         _product_update_list = d.pop("product_update_list", UNSET)
         product_update_list: ActivityChangeWebhookDataProductUpdateList | Unset
-        if isinstance(_product_update_list, Unset):
+        if isinstance(_product_update_list,  Unset):
             product_update_list = UNSET
         else:
             product_update_list = ActivityChangeWebhookDataProductUpdateList.from_dict(_product_update_list)
 
+
+
+
         _product_remove_list = d.pop("product_remove_list", UNSET)
         product_remove_list: ActivityChangeWebhookDataProductRemoveList | Unset
-        if isinstance(_product_remove_list, Unset):
+        if isinstance(_product_remove_list,  Unset):
             product_remove_list = UNSET
         else:
             product_remove_list = ActivityChangeWebhookDataProductRemoveList.from_dict(_product_remove_list)
+
+
+
 
         activity_change_webhook_data = cls(
             activity_id=activity_id,
@@ -106,6 +124,7 @@ class ActivityChangeWebhookData:
             product_update_list=product_update_list,
             product_remove_list=product_remove_list,
         )
+
 
         activity_change_webhook_data.additional_properties = d
         return activity_change_webhook_data

@@ -1,38 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateConversationRequest")
+
 
 
 @_attrs_define
 class CreateConversationRequest:
-    """
-    Attributes:
-        buyer_user_id (str): Buyer's user ID
-            The value is the same as `data.orders.user_id` in the response data of [Get Order
-            Detail](650aa8ccc16ffe02b8f167a0).
-    """
+    """ 
+        Attributes:
+            buyer_user_id (str): Buyer's user ID
+                The value is the same as `data.orders.user_id` in the response data of [Get Order
+                Detail](650aa8ccc16ffe02b8f167a0).
+     """
 
     buyer_user_id: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         buyer_user_id = self.buyer_user_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "buyer_user_id": buyer_user_id,
-            }
-        )
+        field_dict.update({
+            "buyer_user_id": buyer_user_id,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -42,6 +56,7 @@ class CreateConversationRequest:
         create_conversation_request = cls(
             buyer_user_id=buyer_user_id,
         )
+
 
         create_conversation_request.additional_properties = d
         return create_conversation_request

@@ -1,46 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.local_gmv import LocalGmv
-    from ..models.local_unit_price import LocalUnitPrice
+  from ..models.local_gmv import LocalGmv
+  from ..models.local_unit_price import LocalUnitPrice
+
+
+
 
 
 T = TypeVar("T", bound="GetLiveRoomCoreStatsResponseDataStat")
 
 
+
 @_attrs_define
 class GetLiveRoomCoreStatsResponseDataStat:
-    """
-    Attributes:
-        sales (int | Unset): The number of product units sold from the livestream
-        local_gmv (LocalGmv | Unset):
-        created_order_count (int | Unset): The number of SKU orders created by users from the livestream
-        current_visitor_count (int | Unset): The number of viewers currently watching the livestream.
-        paid_order_count (int | Unset): The number of SKU orders created and paid by users from the livestream
-        local_unit_price (LocalUnitPrice | Unset):
-        product_reach_count (int | Unset): The number of product clicks from the livestream, including product list and
-            product card clicks
-        watch_pv (int | Unset): The number of views of the livestream
-        click_through_rate (str | Unset): Click through rate，product clicks / views
-        accumulated_new_follower_count (int | Unset): The number of times users clicked to follow the creator
-        buyer_count (int | Unset): The number of unique users who paid for orders made from livestream, including
-            returned/refunded orders
-        accumulated_comment_count (int | Unset): The cumulative number of times users left comments on the livestream
-        product_view_count (int | Unset): The number of impressions of all livestream products, including product list
-            and product card impressions
-        click_order_rate (str | Unset): Click to order，paid sku orders/ product clicks
-        avg_watching_duration (int | Unset): The average length of time each unique viewer watches the livestream.
-        accumulated_sharing_count (int | Unset): The cumulative number of times users shared the livestream
-        peak_concurrent_user_count (int | Unset): The peak number of concurrent viewers of the livestream
-    """
+    """ 
+        Attributes:
+            sales (int | Unset): The number of product units sold from the livestream
+            local_gmv (LocalGmv | Unset):
+            created_order_count (int | Unset): The number of SKU orders created by users from the livestream
+            current_visitor_count (int | Unset): The number of viewers currently watching the livestream.
+            paid_order_count (int | Unset): The number of SKU orders created and paid by users from the livestream
+            local_unit_price (LocalUnitPrice | Unset):
+            product_reach_count (int | Unset): The number of product clicks from the livestream, including product list and
+                product card clicks
+            watch_pv (int | Unset): The number of views of the livestream
+            click_through_rate (str | Unset): Click through rate，product clicks / views
+            accumulated_new_follower_count (int | Unset): The number of times users clicked to follow the creator
+            buyer_count (int | Unset): The number of unique users who paid for orders made from livestream, including
+                returned/refunded orders
+            accumulated_comment_count (int | Unset): The cumulative number of times users left comments on the livestream
+            product_view_count (int | Unset): The number of impressions of all livestream products, including product list
+                and product card impressions
+            click_order_rate (str | Unset): Click to order，paid sku orders/ product clicks
+            avg_watching_duration (int | Unset): The average length of time each unique viewer watches the livestream.
+            accumulated_sharing_count (int | Unset): The cumulative number of times users shared the livestream
+            peak_concurrent_user_count (int | Unset): The peak number of concurrent viewers of the livestream
+     """
 
     sales: int | Unset = UNSET
     local_gmv: LocalGmv | Unset = UNSET
@@ -61,7 +68,13 @@ class GetLiveRoomCoreStatsResponseDataStat:
     peak_concurrent_user_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.local_gmv import LocalGmv # noqa: PLC0415
+        from ..models.local_unit_price import LocalUnitPrice # noqa: PLC0415
         sales = self.sales
 
         local_gmv: dict[str, Any] | Unset = UNSET
@@ -100,9 +113,11 @@ class GetLiveRoomCoreStatsResponseDataStat:
 
         peak_concurrent_user_count = self.peak_concurrent_user_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if sales is not UNSET:
             field_dict["sales"] = sales
         if local_gmv is not UNSET:
@@ -140,20 +155,24 @@ class GetLiveRoomCoreStatsResponseDataStat:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.local_gmv import LocalGmv  # noqa: PLC0415
-        from ..models.local_unit_price import LocalUnitPrice  # noqa: PLC0415
-
+        from ..models.local_gmv import LocalGmv # noqa: PLC0415
+        from ..models.local_unit_price import LocalUnitPrice # noqa: PLC0415
         d = dict(src_dict)
         sales = d.pop("sales", UNSET)
 
         _local_gmv = d.pop("local_gmv", UNSET)
         local_gmv: LocalGmv | Unset
-        if isinstance(_local_gmv, Unset):
+        if isinstance(_local_gmv,  Unset):
             local_gmv = UNSET
         else:
             local_gmv = LocalGmv.from_dict(_local_gmv)
+
+
+
 
         created_order_count = d.pop("created_order_count", UNSET)
 
@@ -163,10 +182,13 @@ class GetLiveRoomCoreStatsResponseDataStat:
 
         _local_unit_price = d.pop("local_unit_price", UNSET)
         local_unit_price: LocalUnitPrice | Unset
-        if isinstance(_local_unit_price, Unset):
+        if isinstance(_local_unit_price,  Unset):
             local_unit_price = UNSET
         else:
             local_unit_price = LocalUnitPrice.from_dict(_local_unit_price)
+
+
+
 
         product_reach_count = d.pop("product_reach_count", UNSET)
 
@@ -209,6 +231,7 @@ class GetLiveRoomCoreStatsResponseDataStat:
             accumulated_sharing_count=accumulated_sharing_count,
             peak_concurrent_user_count=peak_concurrent_user_count,
         )
+
 
         get_live_room_core_stats_response_data_stat.additional_properties = d
         return get_live_room_core_stats_response_data_stat

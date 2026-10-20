@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopLiveProductsPerformanceListSortField(StrEnum):
     CREATED_SKU_ORDERS = "created_sku_orders"
     CUSTOMERS = "customers"

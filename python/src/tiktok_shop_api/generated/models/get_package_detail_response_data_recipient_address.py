@@ -1,35 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetPackageDetailResponseDataRecipientAddress")
+
 
 
 @_attrs_define
 class GetPackageDetailResponseDataRecipientAddress:
-    """
-    Attributes:
-        full_address (str | Unset): The recipient's complete address, including geographic and detailed street-address
-            information.
-        phone_number (str | Unset): The telephone number of the buyer. Please note, if this order use platform
-            logistics, phone number will be desensitized.
-        name (str | Unset): The name of the recipient. Please note, if this order uses platform logistics, recipient
-            name will be desensitized
-        postal_code (str | Unset): The postal code that can be used by seller for shipping (in the U.S, this refers to
-            the ZIP code).
-        address_detail (str | Unset): The detailed street-address portion of the recipient's address.
-        region_code (str | Unset): The country or region code of the recipient address.
-        address_line1 (str | Unset): The first line of the street address
-        address_line2 (str | Unset): The second line of the street address.
-        address_line3 (str | Unset): The third line of the street address. Usually only for the Brazilian market.
-        address_line4 (str | Unset): The fourth line of the street address. Usually only for the Brazilian market.
-    """
+    """ 
+        Attributes:
+            full_address (str | Unset): The recipient's complete address, including geographic and detailed street-address
+                information.
+            phone_number (str | Unset): The telephone number of the buyer. Please note, if this order use platform
+                logistics, phone number will be desensitized.
+            name (str | Unset): The name of the recipient. Please note, if this order uses platform logistics, recipient
+                name will be desensitized
+            postal_code (str | Unset): The postal code that can be used by seller for shipping (in the U.S, this refers to
+                the ZIP code).
+            address_detail (str | Unset): The detailed street-address portion of the recipient's address.
+            region_code (str | Unset): The country or region code of the recipient address.
+            address_line1 (str | Unset): The first line of the street address
+            address_line2 (str | Unset): The second line of the street address.
+            address_line3 (str | Unset): The third line of the street address. Usually only for the Brazilian market.
+            address_line4 (str | Unset): The fourth line of the street address. Usually only for the Brazilian market.
+     """
 
     full_address: str | Unset = UNSET
     phone_number: str | Unset = UNSET
@@ -42,6 +50,10 @@ class GetPackageDetailResponseDataRecipientAddress:
     address_line3: str | Unset = UNSET
     address_line4: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         full_address = self.full_address
@@ -64,9 +76,11 @@ class GetPackageDetailResponseDataRecipientAddress:
 
         address_line4 = self.address_line4
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if full_address is not UNSET:
             field_dict["full_address"] = full_address
         if phone_number is not UNSET:
@@ -89,6 +103,8 @@ class GetPackageDetailResponseDataRecipientAddress:
             field_dict["address_line4"] = address_line4
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -125,6 +141,7 @@ class GetPackageDetailResponseDataRecipientAddress:
             address_line3=address_line3,
             address_line4=address_line4,
         )
+
 
         get_package_detail_response_data_recipient_address.additional_properties = d
         return get_package_detail_response_data_recipient_address

@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue")
+
 
 
 @_attrs_define
 class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue:
-    """
-    Attributes:
-        risk (str | Unset): Risk type.
-        suggestions (str | Unset): Suggestions on how to fix the risk.
-    """
+    """ 
+        Attributes:
+            risk (str | Unset): Risk type.
+            suggestions (str | Unset): Suggestions on how to fix the risk.
+     """
 
     risk: str | Unset = UNSET
     suggestions: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         risk = self.risk
 
         suggestions = self.suggestions
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if risk is not UNSET:
             field_dict["risk"] = risk
         if suggestions is not UNSET:
             field_dict["suggestions"] = suggestions
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue:
             risk=risk,
             suggestions=suggestions,
         )
+
 
         shoppable_video_precheck_tasks_result_webhook_data_violation_check_result_issue.additional_properties = d
         return shoppable_video_precheck_tasks_result_webhook_data_violation_check_result_issue

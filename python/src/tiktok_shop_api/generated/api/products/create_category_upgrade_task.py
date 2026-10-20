@@ -1,26 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_category_upgrade_task_request import CreateCategoryUpgradeTaskRequest
 from ...models.create_category_upgrade_task_response import CreateCategoryUpgradeTaskResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateCategoryUpgradeTaskRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/product/202407/products/category_upgrade_task",
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -30,11 +42,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> CreateCategoryUpgradeTaskResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateCategoryUpgradeTaskResponse | None:
     if response.status_code == 200:
         response_200 = CreateCategoryUpgradeTaskResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -44,9 +57,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateCategoryUpgradeTaskResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateCategoryUpgradeTaskResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -59,8 +70,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCategoryUpgradeTaskRequest | Unset = UNSET,
+
 ) -> Response[CreateCategoryUpgradeTaskResponse]:
-    """Create Category Upgrade Task
+    """ Create Category Upgrade Task
 
      Create a task to upgrade live products (status: `ACTIVATE`) from a 3-level to a 7-level category
     tree.
@@ -81,10 +93,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateCategoryUpgradeTaskResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -93,13 +107,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCategoryUpgradeTaskRequest | Unset = UNSET,
+
 ) -> CreateCategoryUpgradeTaskResponse | None:
-    """Create Category Upgrade Task
+    """ Create Category Upgrade Task
 
      Create a task to upgrade live products (status: `ACTIVATE`) from a 3-level to a 7-level category
     tree.
@@ -120,20 +134,22 @@ def sync(
 
     Returns:
         CreateCategoryUpgradeTaskResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCategoryUpgradeTaskRequest | Unset = UNSET,
+
 ) -> Response[CreateCategoryUpgradeTaskResponse]:
-    """Create Category Upgrade Task
+    """ Create Category Upgrade Task
 
      Create a task to upgrade live products (status: `ACTIVATE`) from a 3-level to a 7-level category
     tree.
@@ -154,23 +170,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateCategoryUpgradeTaskResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateCategoryUpgradeTaskRequest | Unset = UNSET,
+
 ) -> CreateCategoryUpgradeTaskResponse | None:
-    """Create Category Upgrade Task
+    """ Create Category Upgrade Task
 
      Create a task to upgrade live products (status: `ACTIVATE`) from a 3-level to a 7-level category
     tree.
@@ -191,11 +211,11 @@ async def asyncio(
 
     Returns:
         CreateCategoryUpgradeTaskResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

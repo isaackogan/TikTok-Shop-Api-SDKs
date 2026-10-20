@@ -1,34 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.recommend_required_product_properties_request_sales_property_value import (
-        RecommendRequiredProductPropertiesRequestSalesPropertyValue,
-    )
+  from ..models.recommend_required_product_properties_request_sales_property_value import RecommendRequiredProductPropertiesRequestSalesPropertyValue
+
+
+
 
 
 T = TypeVar("T", bound="RecommendRequiredProductPropertiesRequestSalesProperty")
 
 
+
 @_attrs_define
 class RecommendRequiredProductPropertiesRequestSalesProperty:
-    """
-    Attributes:
-        id (str): ID of the sales property.
-        values (list[RecommendRequiredProductPropertiesRequestSalesPropertyValue]): Existing values selected for the
-            sales property.
-    """
+    """ 
+        Attributes:
+            id (str): ID of the sales property.
+            values (list[RecommendRequiredProductPropertiesRequestSalesPropertyValue]): Existing values selected for the
+                sales property.
+     """
 
     id: str
     values: list[RecommendRequiredProductPropertiesRequestSalesPropertyValue]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.recommend_required_product_properties_request_sales_property_value import RecommendRequiredProductPropertiesRequestSalesPropertyValue # noqa: PLC0415
         id = self.id
 
         values = []
@@ -36,37 +47,41 @@ class RecommendRequiredProductPropertiesRequestSalesProperty:
             values_item = values_item_data.to_dict()
             values.append(values_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "values": values,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "values": values,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.recommend_required_product_properties_request_sales_property_value import (
-            RecommendRequiredProductPropertiesRequestSalesPropertyValue,  # noqa: PLC0415
-        )
-
+        from ..models.recommend_required_product_properties_request_sales_property_value import RecommendRequiredProductPropertiesRequestSalesPropertyValue # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id")
 
         values = []
         _values = d.pop("values")
-        for values_item_data in _values:
+        for values_item_data in (_values):
             values_item = RecommendRequiredProductPropertiesRequestSalesPropertyValue.from_dict(values_item_data)
 
+
+
             values.append(values_item)
+
 
         recommend_required_product_properties_request_sales_property = cls(
             id=id,
             values=values,
         )
+
 
         recommend_required_product_properties_request_sales_property.additional_properties = d
         return recommend_required_product_properties_request_sales_property

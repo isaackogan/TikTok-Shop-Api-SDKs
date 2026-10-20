@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.submit_product_via_opportunity_request import SubmitProductViaOpportunityRequest
 from ...models.submit_product_via_opportunity_response import SubmitProductViaOpportunityResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     opportunity_id: str,
     *,
     body: SubmitProductViaOpportunityRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202604/opportunities/{opportunity_id}/submit".format(
-            opportunity_id=quote(str(opportunity_id), safe=""),
-        ),
+        "url": "/product/202604/opportunities/{opportunity_id}/submit".format(opportunity_id=quote(str(opportunity_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,11 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SubmitProductViaOpportunityResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SubmitProductViaOpportunityResponse | None:
     if response.status_code == 200:
         response_200 = SubmitProductViaOpportunityResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SubmitProductViaOpportunityResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SubmitProductViaOpportunityResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitProductViaOpportunityRequest,
+
 ) -> Response[SubmitProductViaOpportunityResponse]:
-    """Submit Product via Opportunity
+    """ Submit Product via Opportunity
 
      Submit an existing product as a response to a specific opportunity lead. The product must belong to
     the authorized shop and be in `ACTIVATE` status. It will be linked to the opportunity and enter the
@@ -95,11 +102,13 @@ def sync_detailed(
 
     Returns:
         Response[SubmitProductViaOpportunityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         opportunity_id=opportunity_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -108,14 +117,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     opportunity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitProductViaOpportunityRequest,
+
 ) -> SubmitProductViaOpportunityResponse | None:
-    """Submit Product via Opportunity
+    """ Submit Product via Opportunity
 
      Submit an existing product as a response to a specific opportunity lead. The product must belong to
     the authorized shop and be in `ACTIVATE` status. It will be linked to the opportunity and enter the
@@ -146,22 +155,24 @@ def sync(
 
     Returns:
         SubmitProductViaOpportunityResponse
-    """
+     """
+
 
     return sync_detailed(
         opportunity_id=opportunity_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     opportunity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitProductViaOpportunityRequest,
+
 ) -> Response[SubmitProductViaOpportunityResponse]:
-    """Submit Product via Opportunity
+    """ Submit Product via Opportunity
 
      Submit an existing product as a response to a specific opportunity lead. The product must belong to
     the authorized shop and be in `ACTIVATE` status. It will be linked to the opportunity and enter the
@@ -192,25 +203,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[SubmitProductViaOpportunityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         opportunity_id=opportunity_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     opportunity_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitProductViaOpportunityRequest,
+
 ) -> SubmitProductViaOpportunityResponse | None:
-    """Submit Product via Opportunity
+    """ Submit Product via Opportunity
 
      Submit an existing product as a response to a specific opportunity lead. The product must belong to
     the authorized shop and be in `ACTIVATE` status. It will be linked to the opportunity and enter the
@@ -241,12 +256,12 @@ async def asyncio(
 
     Returns:
         SubmitProductViaOpportunityResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            opportunity_id=opportunity_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        opportunity_id=opportunity_id,
+client=client,
+body=body,
+
+    )).parsed

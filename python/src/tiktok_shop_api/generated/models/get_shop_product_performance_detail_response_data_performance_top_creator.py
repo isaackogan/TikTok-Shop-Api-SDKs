@@ -1,30 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceTopCreator")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
-    """
-    Attributes:
-        creator_open_id (str | Unset): Creator/s open id, use this open id to identify the unique creator.
-        creator_name (str | Unset): Creator name shown on the profile page.
-        creator_profile (str | Unset): The URL to the creator's profile picture.
-        gmv (Gmv | Unset):
-        items_sold (int | Unset): Number of items sold by this creator.
-    """
+    """ 
+        Attributes:
+            creator_open_id (str | Unset): Creator/s open id, use this open id to identify the unique creator.
+            creator_name (str | Unset): Creator name shown on the profile page.
+            creator_profile (str | Unset): The URL to the creator's profile picture.
+            gmv (Gmv | Unset):
+            items_sold (int | Unset): Number of items sold by this creator.
+     """
 
     creator_open_id: str | Unset = UNSET
     creator_name: str | Unset = UNSET
@@ -33,7 +40,12 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
     items_sold: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
         creator_open_id = self.creator_open_id
 
         creator_name = self.creator_name
@@ -46,9 +58,11 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
 
         items_sold = self.items_sold
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if creator_open_id is not UNSET:
             field_dict["creator_open_id"] = creator_open_id
         if creator_name is not UNSET:
@@ -62,10 +76,11 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         creator_open_id = d.pop("creator_open_id", UNSET)
 
@@ -75,10 +90,13 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
@@ -89,6 +107,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopCreator:
             gmv=gmv,
             items_sold=items_sold,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_top_creator.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_top_creator

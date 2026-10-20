@@ -1,36 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage
-    from ..models.price import Price
+  from ..models.get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage
+  from ..models.price import Price
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductsResponseDataProduct")
 
 
+
 @_attrs_define
 class GetShopProductsResponseDataProduct:
-    """
-    Attributes:
-        id (str | Unset): TikTok product ID.
-        title (str | Unset): Product name.
-        price (Price | Unset):
-        added_status (str | Unset): Showcase add status with possible values:
-            - ADDABLE
-            - ADDED
-            - REJECTED
-        brand_name (str | Unset): The brand name a seller has set for a product.
-        images (list[GetReturnRecordsResponseDataRecordImage] | Unset): Images of a product.
-        sales_count (int | Unset): The number of products that have been sold.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): TikTok product ID.
+            title (str | Unset): Product name.
+            price (Price | Unset):
+            added_status (str | Unset): Showcase add status with possible values:
+                - ADDABLE
+                - ADDED
+                - REJECTED
+            brand_name (str | Unset): The brand name a seller has set for a product.
+            images (list[GetReturnRecordsResponseDataRecordImage] | Unset): Images of a product.
+            sales_count (int | Unset): The number of products that have been sold.
+     """
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -41,7 +48,13 @@ class GetShopProductsResponseDataProduct:
     sales_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
         id = self.id
 
         title = self.title
@@ -61,11 +74,15 @@ class GetShopProductsResponseDataProduct:
                 images_item = images_item_data.to_dict()
                 images.append(images_item)
 
+
+
         sales_count = self.sales_count
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if title is not UNSET:
@@ -83,13 +100,12 @@ class GetShopProductsResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_return_records_response_data_record_image import (
-            GetReturnRecordsResponseDataRecordImage,  # noqa: PLC0415
-        )
-        from ..models.price import Price  # noqa: PLC0415
-
+        from ..models.get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -97,10 +113,13 @@ class GetShopProductsResponseDataProduct:
 
         _price = d.pop("price", UNSET)
         price: Price | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = Price.from_dict(_price)
+
+
+
 
         added_status = d.pop("added_status", UNSET)
 
@@ -113,7 +132,10 @@ class GetShopProductsResponseDataProduct:
             for images_item_data in _images:
                 images_item = GetReturnRecordsResponseDataRecordImage.from_dict(images_item_data)
 
+
+
                 images.append(images_item)
+
 
         sales_count = d.pop("sales_count", UNSET)
 
@@ -126,6 +148,7 @@ class GetShopProductsResponseDataProduct:
             images=images,
             sales_count=sales_count,
         )
+
 
         get_shop_products_response_data_product.additional_properties = d
         return get_shop_products_response_data_product

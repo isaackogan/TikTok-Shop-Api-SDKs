@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchProductsRequestAuditStatusItem(StrEnum):
     APPROVED = "APPROVED"
     AUDITING = "AUDITING"

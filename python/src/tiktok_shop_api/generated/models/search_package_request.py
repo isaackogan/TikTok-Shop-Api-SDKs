@@ -1,37 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.search_package_request_package_status import SearchPackageRequestPackageStatus
 from ..types import UNSET, Unset
+
+
+
+
+
 
 T = TypeVar("T", bound="SearchPackageRequest")
 
 
+
 @_attrs_define
 class SearchPackageRequest:
-    """
-    Attributes:
-        create_time_ge (int | Unset): Filter packages to those created at or after the specified time. Unix timestamp,
-            in seconds.
-        create_time_lt (int | Unset): Filter packages to those created before the specified time. Unix timestamp, in
-            seconds.
-        update_time_ge (int | Unset): Filter packages to those updated at or after the specified time. Unix timestamp,
-            in seconds.
-        update_time_lt (int | Unset): Filter packages to those updated before the specified time. Unix timestamp, in
-            seconds.
-        package_status (SearchPackageRequestPackageStatus | Unset): Possible values:
-            - `TO_FULFILL`
-            - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
-            - `FULFILLING`: Package has been collected by carrier and in transit.
-            - `COMPLETED`: Package has been delivered.
-            - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
-            damaged.
-    """
+    """ 
+        Attributes:
+            create_time_ge (int | Unset): Filter packages to those created at or after the specified time. Unix timestamp,
+                in seconds.
+            create_time_lt (int | Unset): Filter packages to those created before the specified time. Unix timestamp, in
+                seconds.
+            update_time_ge (int | Unset): Filter packages to those updated at or after the specified time. Unix timestamp,
+                in seconds.
+            update_time_lt (int | Unset): Filter packages to those updated before the specified time. Unix timestamp, in
+                seconds.
+            package_status (SearchPackageRequestPackageStatus | Unset): Possible values:
+                - `TO_FULFILL`
+                - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
+                - `FULFILLING`: Package has been collected by carrier and in transit.
+                - `COMPLETED`: Package has been delivered.
+                - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
+                damaged.
+     """
 
     create_time_ge: int | Unset = UNSET
     create_time_lt: int | Unset = UNSET
@@ -39,6 +47,10 @@ class SearchPackageRequest:
     update_time_lt: int | Unset = UNSET
     package_status: SearchPackageRequestPackageStatus | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         create_time_ge = self.create_time_ge
@@ -53,9 +65,12 @@ class SearchPackageRequest:
         if not isinstance(self.package_status, Unset):
             package_status = self.package_status.value
 
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if create_time_ge is not UNSET:
             field_dict["create_time_ge"] = create_time_ge
         if create_time_lt is not UNSET:
@@ -68,6 +83,8 @@ class SearchPackageRequest:
             field_dict["package_status"] = package_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -82,10 +99,13 @@ class SearchPackageRequest:
 
         _package_status = d.pop("package_status", UNSET)
         package_status: SearchPackageRequestPackageStatus | Unset
-        if isinstance(_package_status, Unset):
+        if isinstance(_package_status,  Unset):
             package_status = UNSET
         else:
             package_status = SearchPackageRequestPackageStatus(_package_status)
+
+
+
 
         search_package_request = cls(
             create_time_ge=create_time_ge,
@@ -94,6 +114,7 @@ class SearchPackageRequest:
             update_time_lt=update_time_lt,
             package_status=package_status,
         )
+
 
         search_package_request.additional_properties = d
         return search_package_request

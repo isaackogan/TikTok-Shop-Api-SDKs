@@ -1,28 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage")
+
 
 
 @_attrs_define
 class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
-    """
-    Attributes:
-        height (int | Unset): The height of the mask image, in pixels.
-        thumb_urls (list[str] | Unset): A list of thumbnail URLs for the mask image.
-        uri (str | Unset): The URI of the mask image.
-            Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
-            `use_case=CUSTOMIZATION_IMAGE`.
-        urls (list[str] | Unset): A list of URLs for the mask image.
-        width (int | Unset): The width of the mask image, in pixels.
-    """
+    """ 
+        Attributes:
+            height (int | Unset): The height of the mask image, in pixels.
+            thumb_urls (list[str] | Unset): A list of thumbnail URLs for the mask image.
+            uri (str | Unset): The URI of the mask image.
+                Obtain this URI by uploading the images through the [Upload Product Image API](6509df95defece02be598a22)  with
+                `use_case=CUSTOMIZATION_IMAGE`.
+            urls (list[str] | Unset): A list of URLs for the mask image.
+            width (int | Unset): The width of the mask image, in pixels.
+     """
 
     height: int | Unset = UNSET
     thumb_urls: list[str] | Unset = UNSET
@@ -31,6 +40,10 @@ class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
     width: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         height = self.height
 
@@ -38,17 +51,23 @@ class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
         if not isinstance(self.thumb_urls, Unset):
             thumb_urls = self.thumb_urls
 
+
+
         uri = self.uri
 
         urls: list[str] | Unset = UNSET
         if not isinstance(self.urls, Unset):
             urls = self.urls
 
+
+
         width = self.width
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if height is not UNSET:
             field_dict["height"] = height
         if thumb_urls is not UNSET:
@@ -62,6 +81,8 @@ class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -69,9 +90,11 @@ class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
 
         thumb_urls = cast(list[str], d.pop("thumb_urls", UNSET))
 
+
         uri = d.pop("uri", UNSET)
 
         urls = cast(list[str], d.pop("urls", UNSET))
+
 
         width = d.pop("width", UNSET)
 
@@ -82,6 +105,7 @@ class GetProductResponseDataPodInfoPodTemplateSurfaceMaskImage:
             urls=urls,
             width=width,
         )
+
 
         get_product_response_data_pod_info_pod_template_surface_mask_image.additional_properties = d
         return get_product_response_data_pod_info_pod_template_surface_mask_image

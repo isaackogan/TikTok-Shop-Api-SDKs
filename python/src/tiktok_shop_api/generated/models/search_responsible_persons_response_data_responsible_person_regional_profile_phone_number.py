@@ -1,45 +1,61 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfilePhoneNumber")
+
 
 
 @_attrs_define
 class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfilePhoneNumber:
-    """
-    Attributes:
-        country_code (str | Unset): The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for
-            Ireland. Only EU country codes are allowed.
-            Max digits: 4
-        local_number (str | Unset): The local number.
-            Length: 7 - 11 digits
-    """
+    """ 
+        Attributes:
+            country_code (str | Unset): The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for
+                Ireland. Only EU country codes are allowed.
+                Max digits: 4
+            local_number (str | Unset): The local number.
+                Length: 7 - 11 digits
+     """
 
     country_code: str | Unset = UNSET
     local_number: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         country_code = self.country_code
 
         local_number = self.local_number
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if country_code is not UNSET:
             field_dict["country_code"] = country_code
         if local_number is not UNSET:
             field_dict["local_number"] = local_number
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -52,6 +68,7 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfilePhoneN
             country_code=country_code,
             local_number=local_number,
         )
+
 
         search_responsible_persons_response_data_responsible_person_regional_profile_phone_number.additional_properties = d
         return search_responsible_persons_response_data_responsible_person_regional_profile_phone_number

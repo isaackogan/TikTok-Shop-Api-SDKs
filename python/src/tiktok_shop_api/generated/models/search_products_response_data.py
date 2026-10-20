@@ -1,37 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_products_response_data_product import SearchProductsResponseDataProduct
+  from ..models.search_products_response_data_product import SearchProductsResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="SearchProductsResponseData")
 
 
+
 @_attrs_define
 class SearchProductsResponseData:
-    """
-    Attributes:
-        total_count (int | Unset): The total number of products that meet the query conditions.
-        products (list[SearchProductsResponseDataProduct] | Unset): The list of products that meet the query conditions.
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
-            this value in the `page_token` parameter of your request if the current response does not return all the
-            results.
-    """
+    """ 
+        Attributes:
+            total_count (int | Unset): The total number of products that meet the query conditions.
+            products (list[SearchProductsResponseDataProduct] | Unset): The list of products that meet the query conditions.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
+                this value in the `page_token` parameter of your request if the current response does not return all the
+                results.
+     """
 
     total_count: int | Unset = UNSET
     products: list[SearchProductsResponseDataProduct] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_products_response_data_product import SearchProductsResponseDataProduct # noqa: PLC0415
         total_count = self.total_count
 
         products: list[dict[str, Any]] | Unset = UNSET
@@ -41,11 +53,15 @@ class SearchProductsResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         next_page_token = self.next_page_token
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_count is not UNSET:
             field_dict["total_count"] = total_count
         if products is not UNSET:
@@ -55,10 +71,11 @@ class SearchProductsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_products_response_data_product import SearchProductsResponseDataProduct  # noqa: PLC0415
-
+        from ..models.search_products_response_data_product import SearchProductsResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         total_count = d.pop("total_count", UNSET)
 
@@ -69,7 +86,10 @@ class SearchProductsResponseData:
             for products_item_data in _products:
                 products_item = SearchProductsResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -78,6 +98,7 @@ class SearchProductsResponseData:
             products=products,
             next_page_token=next_page_token,
         )
+
 
         search_products_response_data.additional_properties = d
         return search_products_response_data

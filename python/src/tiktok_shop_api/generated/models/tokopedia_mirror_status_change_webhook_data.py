@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="TokopediaMirrorStatusChangeWebhookData")
+
 
 
 @_attrs_define
 class TokopediaMirrorStatusChangeWebhookData:
-    """
-    Attributes:
-        tts_shop_id (str | Unset): The shop ID in TikTok Shop.
-        update_time (int | Unset): The time when the change occurred. Unix timestamp.
-        mirror_status (str | Unset): The shop mirroring status:
-             - MIRRORED
-             - ROLLED_BACK
-             - CANCELED
-    """
+    """ 
+        Attributes:
+            tts_shop_id (str | Unset): The shop ID in TikTok Shop.
+            update_time (int | Unset): The time when the change occurred. Unix timestamp.
+            mirror_status (str | Unset): The shop mirroring status:
+                 - MIRRORED
+                 - ROLLED_BACK
+                 - CANCELED
+     """
 
     tts_shop_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
     mirror_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         tts_shop_id = self.tts_shop_id
@@ -35,9 +47,11 @@ class TokopediaMirrorStatusChangeWebhookData:
 
         mirror_status = self.mirror_status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if tts_shop_id is not UNSET:
             field_dict["tts_shop_id"] = tts_shop_id
         if update_time is not UNSET:
@@ -46,6 +60,8 @@ class TokopediaMirrorStatusChangeWebhookData:
             field_dict["mirror_status"] = mirror_status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,6 +77,7 @@ class TokopediaMirrorStatusChangeWebhookData:
             update_time=update_time,
             mirror_status=mirror_status,
         )
+
 
         tokopedia_mirror_status_change_webhook_data.additional_properties = d
         return tokopedia_mirror_status_change_webhook_data

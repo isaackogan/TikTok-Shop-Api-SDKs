@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAction(StrEnum):
     APPROVE_REQUEST = "APPROVE_REQUEST"
     APPROVE_RETURN_PACKAGE = "APPROVE_RETURN_PACKAGE"

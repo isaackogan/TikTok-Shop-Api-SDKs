@@ -1,14 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_orders_by_external_order_reference_platform import SearchOrdersByExternalOrderReferencePlatform
 from ...models.search_orders_by_external_order_reference_request import SearchOrdersByExternalOrderReferenceRequest
 from ...models.search_orders_by_external_order_reference_response import SearchOrdersByExternalOrderReferenceResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,8 +21,12 @@ def _get_kwargs(
     body: SearchOrdersByExternalOrderReferenceRequest | Unset = UNSET,
     platform: SearchOrdersByExternalOrderReferencePlatform,
     external_order_id: str,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -26,7 +35,9 @@ def _get_kwargs(
 
     params["external_order_id"] = external_order_id
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -34,6 +45,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -43,11 +55,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchOrdersByExternalOrderReferenceResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchOrdersByExternalOrderReferenceResponse | None:
     if response.status_code == 200:
         response_200 = SearchOrdersByExternalOrderReferenceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -57,9 +70,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchOrdersByExternalOrderReferenceResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchOrdersByExternalOrderReferenceResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -74,8 +85,9 @@ def sync_detailed(
     body: SearchOrdersByExternalOrderReferenceRequest | Unset = UNSET,
     platform: SearchOrdersByExternalOrderReferencePlatform,
     external_order_id: str,
+
 ) -> Response[SearchOrdersByExternalOrderReferenceResponse]:
-    """Search Orders by External Order Reference
+    """ Search Orders by External Order Reference
 
      If you have used the `Add External Order References` API to sync information from your external
     order management system (OMS) to corresponding orders in TikTok Shop, you may call this API to
@@ -92,12 +104,14 @@ def sync_detailed(
 
     Returns:
         Response[SearchOrdersByExternalOrderReferenceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        platform=platform,
-        external_order_id=external_order_id,
+platform=platform,
+external_order_id=external_order_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -106,15 +120,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SearchOrdersByExternalOrderReferenceRequest | Unset = UNSET,
     platform: SearchOrdersByExternalOrderReferencePlatform,
     external_order_id: str,
+
 ) -> SearchOrdersByExternalOrderReferenceResponse | None:
-    """Search Orders by External Order Reference
+    """ Search Orders by External Order Reference
 
      If you have used the `Add External Order References` API to sync information from your external
     order management system (OMS) to corresponding orders in TikTok Shop, you may call this API to
@@ -131,15 +145,16 @@ def sync(
 
     Returns:
         SearchOrdersByExternalOrderReferenceResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        platform=platform,
-        external_order_id=external_order_id,
-    ).parsed
+body=body,
+platform=platform,
+external_order_id=external_order_id,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -147,8 +162,9 @@ async def asyncio_detailed(
     body: SearchOrdersByExternalOrderReferenceRequest | Unset = UNSET,
     platform: SearchOrdersByExternalOrderReferencePlatform,
     external_order_id: str,
+
 ) -> Response[SearchOrdersByExternalOrderReferenceResponse]:
-    """Search Orders by External Order Reference
+    """ Search Orders by External Order Reference
 
      If you have used the `Add External Order References` API to sync information from your external
     order management system (OMS) to corresponding orders in TikTok Shop, you may call this API to
@@ -165,18 +181,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchOrdersByExternalOrderReferenceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        platform=platform,
-        external_order_id=external_order_id,
+platform=platform,
+external_order_id=external_order_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -184,8 +203,9 @@ async def asyncio(
     body: SearchOrdersByExternalOrderReferenceRequest | Unset = UNSET,
     platform: SearchOrdersByExternalOrderReferencePlatform,
     external_order_id: str,
+
 ) -> SearchOrdersByExternalOrderReferenceResponse | None:
-    """Search Orders by External Order Reference
+    """ Search Orders by External Order Reference
 
      If you have used the `Add External Order References` API to sync information from your external
     order management system (OMS) to corresponding orders in TikTok Shop, you may call this API to
@@ -202,13 +222,13 @@ async def asyncio(
 
     Returns:
         SearchOrdersByExternalOrderReferenceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            platform=platform,
-            external_order_id=external_order_id,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+platform=platform,
+external_order_id=external_order_id,
+
+    )).parsed

@@ -1,61 +1,64 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.aov import Aov
-    from ..models.get_shop_product_performance_list_response_data_product_total_performance_gmv_incl_tax import (
-        GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax,
-    )
-    from ..models.get_shop_product_performance_list_response_data_product_total_performance_gross_merchandise_value import (
-        GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue,
-    )
-    from ..models.gmv import Gmv
-    from ..models.refund import Refund
-    from ..models.shipping_fee import ShippingFee
-    from ..models.tax import Tax
+  from ..models.aov import Aov
+  from ..models.get_shop_product_performance_list_response_data_product_total_performance_gmv_incl_tax import GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax
+  from ..models.get_shop_product_performance_list_response_data_product_total_performance_gross_merchandise_value import GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue
+  from ..models.gmv import Gmv
+  from ..models.refund import Refund
+  from ..models.shipping_fee import ShippingFee
+  from ..models.tax import Tax
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseDataProductTotalPerformance")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseDataProductTotalPerformance:
-    """
-    Attributes:
-        gmv (Gmv | Unset):
-        orders (int | Unset): Number of orders.
-        sku_orders (int | Unset): Number of SKU orders.
-        items_sold (int | Unset): Number of items sold.
-        estimated_customers (int | Unset): Estimated number of customers.
-        aov (Aov | Unset):
-        product_impressions (int | Unset): Number of product impressions.
-        product_clicks (int | Unset): Number of product clicks.
-        ctr (str | Unset): Click-through rate.
-        add_cart_count (int | Unset): Number of times products were added to the cart.
-        add_cart_rate (str | Unset): Add to cart rate.
-        click_order_rate (str | Unset): Click to order rate.
-        unique_product_impressions (int | Unset): Unique product impressions.
-        unique_clicks (int | Unset): Total number of unique product clicks across the product performance channels.
-        unique_ctr (str | Unset): Unique click-through rate.
-        add_cart_users (int | Unset): Number of users who added to cart.
-        unique_atc_rate (str | Unset): Unique add to cart rate.
-        unique_click_order_rate (str | Unset): Unique click to order rate.
-        gmv_incl_tax (GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax | Unset):
-        tax (Tax | Unset):
-        gross_merchandise_value (GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue |
-            Unset):
-        shipping_fees (ShippingFee | Unset):
-        refunds (Refund | Unset):
-        refunded_items (int | Unset): Number of items refunded.
-        refund_customers (int | Unset): Number of customers who received refunds.
-    """
+    """ 
+        Attributes:
+            gmv (Gmv | Unset):
+            orders (int | Unset): Number of orders.
+            sku_orders (int | Unset): Number of SKU orders.
+            items_sold (int | Unset): Number of items sold.
+            estimated_customers (int | Unset): Estimated number of customers.
+            aov (Aov | Unset):
+            product_impressions (int | Unset): Number of product impressions.
+            product_clicks (int | Unset): Number of product clicks.
+            ctr (str | Unset): Click-through rate.
+            add_cart_count (int | Unset): Number of times products were added to the cart.
+            add_cart_rate (str | Unset): Add to cart rate.
+            click_order_rate (str | Unset): Click to order rate.
+            unique_product_impressions (int | Unset): Unique product impressions.
+            unique_clicks (int | Unset): Total number of unique product clicks across the product performance channels.
+            unique_ctr (str | Unset): Unique click-through rate.
+            add_cart_users (int | Unset): Number of users who added to cart.
+            unique_atc_rate (str | Unset): Unique add to cart rate.
+            unique_click_order_rate (str | Unset): Unique click to order rate.
+            gmv_incl_tax (GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax | Unset):
+            tax (Tax | Unset):
+            gross_merchandise_value (GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue |
+                Unset):
+            shipping_fees (ShippingFee | Unset):
+            refunds (Refund | Unset):
+            refunded_items (int | Unset): Number of items refunded.
+            refund_customers (int | Unset): Number of customers who received refunds.
+     """
 
     gmv: Gmv | Unset = UNSET
     orders: int | Unset = UNSET
@@ -77,16 +80,25 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
     unique_click_order_rate: str | Unset = UNSET
     gmv_incl_tax: GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax | Unset = UNSET
     tax: Tax | Unset = UNSET
-    gross_merchandise_value: (
-        GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue | Unset
-    ) = UNSET
+    gross_merchandise_value: GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue | Unset = UNSET
     shipping_fees: ShippingFee | Unset = UNSET
     refunds: Refund | Unset = UNSET
     refunded_items: int | Unset = UNSET
     refund_customers: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.aov import Aov # noqa: PLC0415
+        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gmv_incl_tax import GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax # noqa: PLC0415
+        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gross_merchandise_value import GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.refund import Refund # noqa: PLC0415
+        from ..models.shipping_fee import ShippingFee # noqa: PLC0415
+        from ..models.tax import Tax # noqa: PLC0415
         gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.gmv, Unset):
             gmv = self.gmv.to_dict()
@@ -151,9 +163,11 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
 
         refund_customers = self.refund_customers
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if gmv is not UNSET:
             field_dict["gmv"] = gmv
         if orders is not UNSET:
@@ -207,27 +221,27 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.aov import Aov  # noqa: PLC0415
-        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gmv_incl_tax import (
-            GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax,  # noqa: PLC0415
-        )
-        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gross_merchandise_value import (
-            GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue,  # noqa: PLC0415
-        )
-        from ..models.gmv import Gmv  # noqa: PLC0415
-        from ..models.refund import Refund  # noqa: PLC0415
-        from ..models.shipping_fee import ShippingFee  # noqa: PLC0415
-        from ..models.tax import Tax  # noqa: PLC0415
-
+        from ..models.aov import Aov # noqa: PLC0415
+        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gmv_incl_tax import GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax # noqa: PLC0415
+        from ..models.get_shop_product_performance_list_response_data_product_total_performance_gross_merchandise_value import GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.refund import Refund # noqa: PLC0415
+        from ..models.shipping_fee import ShippingFee # noqa: PLC0415
+        from ..models.tax import Tax # noqa: PLC0415
         d = dict(src_dict)
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         orders = d.pop("orders", UNSET)
 
@@ -239,10 +253,13 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
 
         _aov = d.pop("aov", UNSET)
         aov: Aov | Unset
-        if isinstance(_aov, Unset):
+        if isinstance(_aov,  Unset):
             aov = UNSET
         else:
             aov = Aov.from_dict(_aov)
+
+
+
 
         product_impressions = d.pop("product_impressions", UNSET)
 
@@ -270,46 +287,53 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
 
         _gmv_incl_tax = d.pop("gmv_incl_tax", UNSET)
         gmv_incl_tax: GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax | Unset
-        if isinstance(_gmv_incl_tax, Unset):
+        if isinstance(_gmv_incl_tax,  Unset):
             gmv_incl_tax = UNSET
         else:
-            gmv_incl_tax = GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax.from_dict(
-                _gmv_incl_tax
-            )
+            gmv_incl_tax = GetShopProductPerformanceListResponseDataProductTotalPerformanceGmvInclTax.from_dict(_gmv_incl_tax)
+
+
+
 
         _tax = d.pop("tax", UNSET)
         tax: Tax | Unset
-        if isinstance(_tax, Unset):
+        if isinstance(_tax,  Unset):
             tax = UNSET
         else:
             tax = Tax.from_dict(_tax)
 
+
+
+
         _gross_merchandise_value = d.pop("gross_merchandise_value", UNSET)
-        gross_merchandise_value: (
-            GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue | Unset
-        )
-        if isinstance(_gross_merchandise_value, Unset):
+        gross_merchandise_value: GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue | Unset
+        if isinstance(_gross_merchandise_value,  Unset):
             gross_merchandise_value = UNSET
         else:
-            gross_merchandise_value = (
-                GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue.from_dict(
-                    _gross_merchandise_value
-                )
-            )
+            gross_merchandise_value = GetShopProductPerformanceListResponseDataProductTotalPerformanceGrossMerchandiseValue.from_dict(_gross_merchandise_value)
+
+
+
 
         _shipping_fees = d.pop("shipping_fees", UNSET)
         shipping_fees: ShippingFee | Unset
-        if isinstance(_shipping_fees, Unset):
+        if isinstance(_shipping_fees,  Unset):
             shipping_fees = UNSET
         else:
             shipping_fees = ShippingFee.from_dict(_shipping_fees)
 
+
+
+
         _refunds = d.pop("refunds", UNSET)
         refunds: Refund | Unset
-        if isinstance(_refunds, Unset):
+        if isinstance(_refunds,  Unset):
             refunds = UNSET
         else:
             refunds = Refund.from_dict(_refunds)
+
+
+
 
         refunded_items = d.pop("refunded_items", UNSET)
 
@@ -342,6 +366,7 @@ class GetShopProductPerformanceListResponseDataProductTotalPerformance:
             refunded_items=refunded_items,
             refund_customers=refund_customers,
         )
+
 
         get_shop_product_performance_list_response_data_product_total_performance.additional_properties = d
         return get_shop_product_performance_list_response_data_product_total_performance

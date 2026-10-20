@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopSKPPSummaryResponseDataShopSummary")
+
 
 
 @_attrs_define
 class GetShopSKPPSummaryResponseDataShopSummary:
-    """
-    Attributes:
-        qualified_products_count (int | Unset): Number of products that are already SKPP.
-        eligible_products_count (int | Unset): Number of products that are already SKPP, plus those that have not yet
-            met the standard but can take SKPP tasks.
-        earned_ad_credit (str | Unset): Total ad credit earned by the shop, currency-prefixed.
-        increased_visibility_l30d (str | Unset): Incremental visibility gained from SKPP rewards in the last 30 days.
-    """
+    """ 
+        Attributes:
+            qualified_products_count (int | Unset): Number of products that are already SKPP.
+            eligible_products_count (int | Unset): Number of products that are already SKPP, plus those that have not yet
+                met the standard but can take SKPP tasks.
+            earned_ad_credit (str | Unset): Total ad credit earned by the shop, currency-prefixed.
+            increased_visibility_l30d (str | Unset): Incremental visibility gained from SKPP rewards in the last 30 days.
+     """
 
     qualified_products_count: int | Unset = UNSET
     eligible_products_count: int | Unset = UNSET
     earned_ad_credit: str | Unset = UNSET
     increased_visibility_l30d: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         qualified_products_count = self.qualified_products_count
@@ -37,9 +49,11 @@ class GetShopSKPPSummaryResponseDataShopSummary:
 
         increased_visibility_l30d = self.increased_visibility_l30d
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if qualified_products_count is not UNSET:
             field_dict["qualified_products_count"] = qualified_products_count
         if eligible_products_count is not UNSET:
@@ -50,6 +64,8 @@ class GetShopSKPPSummaryResponseDataShopSummary:
             field_dict["increased_visibility_l30d"] = increased_visibility_l30d
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -68,6 +84,7 @@ class GetShopSKPPSummaryResponseDataShopSummary:
             earned_ad_credit=earned_ad_credit,
             increased_visibility_l30d=increased_visibility_l30d,
         )
+
 
         get_shop_skpp_summary_response_data_shop_summary.additional_properties = d
         return get_shop_skpp_summary_response_data_shop_summary

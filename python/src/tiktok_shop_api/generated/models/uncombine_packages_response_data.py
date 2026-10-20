@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.package import Package
+  from ..models.package import Package
+
+
+
 
 
 T = TypeVar("T", bound="UncombinePackagesResponseData")
 
 
+
 @_attrs_define
 class UncombinePackagesResponseData:
-    """
-    Attributes:
-        packages (list[Package] | Unset): The packages created after the specified orders are removed from the original
-            combined package.
-    """
+    """ 
+        Attributes:
+            packages (list[Package] | Unset): The packages created after the specified orders are removed from the original
+                combined package.
+     """
 
     packages: list[Package] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.package import Package # noqa: PLC0415
         packages: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.packages, Unset):
             packages = []
@@ -34,18 +46,23 @@ class UncombinePackagesResponseData:
                 packages_item = packages_item_data.to_dict()
                 packages.append(packages_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if packages is not UNSET:
             field_dict["packages"] = packages
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.package import Package  # noqa: PLC0415
-
+        from ..models.package import Package # noqa: PLC0415
         d = dict(src_dict)
         _packages = d.pop("packages", UNSET)
         packages: list[Package] | Unset = UNSET
@@ -54,11 +71,15 @@ class UncombinePackagesResponseData:
             for packages_item_data in _packages:
                 packages_item = Package.from_dict(packages_item_data)
 
+
+
                 packages.append(packages_item)
+
 
         uncombine_packages_response_data = cls(
             packages=packages,
         )
+
 
         uncombine_packages_response_data.additional_properties = d
         return uncombine_packages_response_data

@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.generate_affiliate_product_promotion_link_request import GenerateAffiliateProductPromotionLinkRequest
 from ...models.generate_affiliate_product_promotion_link_response import GenerateAffiliateProductPromotionLinkResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/affiliate_seller/202405/products/{product_id}/promotion_link/generate".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/affiliate_seller/202405/products/{product_id}/promotion_link/generate".format(product_id=quote(str(product_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GenerateAffiliateProductPromotionLinkResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GenerateAffiliateProductPromotionLinkResponse | None:
     if response.status_code == 200:
         response_200 = GenerateAffiliateProductPromotionLinkResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GenerateAffiliateProductPromotionLinkResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GenerateAffiliateProductPromotionLinkResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
+
 ) -> Response[GenerateAffiliateProductPromotionLinkResponse]:
-    """Generate Affiliate Product Promotion Link
+    """ Generate Affiliate Product Promotion Link
 
      Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
     promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
@@ -85,11 +94,13 @@ def sync_detailed(
 
     Returns:
         Response[GenerateAffiliateProductPromotionLinkResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -98,14 +109,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
+
 ) -> GenerateAffiliateProductPromotionLinkResponse | None:
-    """Generate Affiliate Product Promotion Link
+    """ Generate Affiliate Product Promotion Link
 
      Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
     promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
@@ -125,22 +136,24 @@ def sync(
 
     Returns:
         GenerateAffiliateProductPromotionLinkResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
+
 ) -> Response[GenerateAffiliateProductPromotionLinkResponse]:
-    """Generate Affiliate Product Promotion Link
+    """ Generate Affiliate Product Promotion Link
 
      Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
     promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
@@ -160,25 +173,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[GenerateAffiliateProductPromotionLinkResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
+
 ) -> GenerateAffiliateProductPromotionLinkResponse | None:
-    """Generate Affiliate Product Promotion Link
+    """ Generate Affiliate Product Promotion Link
 
      Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
     promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
@@ -198,12 +215,12 @@ async def asyncio(
 
     Returns:
         GenerateAffiliateProductPromotionLinkResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+body=body,
+
+    )).parsed

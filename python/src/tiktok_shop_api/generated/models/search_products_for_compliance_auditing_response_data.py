@@ -1,40 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_products_for_compliance_auditing_response_data_product import (
-        SearchProductsForComplianceAuditingResponseDataProduct,
-    )
+  from ..models.search_products_for_compliance_auditing_response_data_product import SearchProductsForComplianceAuditingResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="SearchProductsForComplianceAuditingResponseData")
 
 
+
 @_attrs_define
 class SearchProductsForComplianceAuditingResponseData:
-    """
-    Attributes:
-        next_page_token (str | Unset): The opaque token returned for a subsequent page. When this value is non-empty,
-            pass it in the next request's `page_token`.
-        total_count (int | Unset): The total number of products selected by the active mode. For direct product-ID
-            lookup, this is the number of product IDs used for the lookup. For shop search, this is the total number of
-            products matching the seller, product-title, category, and brand filters.
-        products (list[SearchProductsForComplianceAuditingResponseDataProduct] | Unset): Product information
-    """
+    """ 
+        Attributes:
+            next_page_token (str | Unset): The opaque token returned for a subsequent page. When this value is non-empty,
+                pass it in the next request's `page_token`.
+            total_count (int | Unset): The total number of products selected by the active mode. For direct product-ID
+                lookup, this is the number of product IDs used for the lookup. For shop search, this is the total number of
+                products matching the seller, product-title, category, and brand filters.
+            products (list[SearchProductsForComplianceAuditingResponseDataProduct] | Unset): Product information
+     """
 
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     products: list[SearchProductsForComplianceAuditingResponseDataProduct] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_products_for_compliance_auditing_response_data_product import SearchProductsForComplianceAuditingResponseDataProduct # noqa: PLC0415
         next_page_token = self.next_page_token
 
         total_count = self.total_count
@@ -46,9 +56,13 @@ class SearchProductsForComplianceAuditingResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if next_page_token is not UNSET:
             field_dict["next_page_token"] = next_page_token
         if total_count is not UNSET:
@@ -58,12 +72,11 @@ class SearchProductsForComplianceAuditingResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_products_for_compliance_auditing_response_data_product import (
-            SearchProductsForComplianceAuditingResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.search_products_for_compliance_auditing_response_data_product import SearchProductsForComplianceAuditingResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -76,13 +89,17 @@ class SearchProductsForComplianceAuditingResponseData:
             for products_item_data in _products:
                 products_item = SearchProductsForComplianceAuditingResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         search_products_for_compliance_auditing_response_data = cls(
             next_page_token=next_page_token,
             total_count=total_count,
             products=products,
         )
+
 
         search_products_for_compliance_auditing_response_data.additional_properties = d
         return search_products_for_compliance_auditing_response_data

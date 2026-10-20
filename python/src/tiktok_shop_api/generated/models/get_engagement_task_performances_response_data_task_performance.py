@@ -1,37 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetEngagementTaskPerformancesResponseDataTaskPerformance")
+
 
 
 @_attrs_define
 class GetEngagementTaskPerformancesResponseDataTaskPerformance:
-    """
-    Attributes:
-        id (str | Unset): The customer engagement task ID for this performance record.
-        status (str | Unset): The status of the task.
-            Possible values:
-            - `UNKNOWN`: The task status is unknown.
-            - `DRAFT`: The task is in draft status.
-            - `WAITING`: The task is waiting.
-            - `SENDING`: The task is sending messages.
-            - `FAILED`: The task failed to send messages.
-            - `CANCELED`: The task was canceled.
-            - `SUCCESS`: The task completed successfully.
-            - `DELETED`: The task was deleted.
-        sent_recipient_count (int | Unset): The number of users that received the message.
-        read_recipient_count (int | Unset): The number of users that read the message.
-        order_count (int | Unset): The number of orders resulting from the message.
-        gmv_amount (str | Unset): The revenue from the converted orders.
-        claimed_coupons_count (int | Unset): The number of coupons claimed.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The customer engagement task ID for this performance record.
+            status (str | Unset): The status of the task.
+                Possible values:
+                - `UNKNOWN`: The task status is unknown.
+                - `DRAFT`: The task is in draft status.
+                - `WAITING`: The task is waiting.
+                - `SENDING`: The task is sending messages.
+                - `FAILED`: The task failed to send messages.
+                - `CANCELED`: The task was canceled.
+                - `SUCCESS`: The task completed successfully.
+                - `DELETED`: The task was deleted.
+            sent_recipient_count (int | Unset): The number of users that received the message.
+            read_recipient_count (int | Unset): The number of users that read the message.
+            order_count (int | Unset): The number of orders resulting from the message.
+            gmv_amount (str | Unset): The revenue from the converted orders.
+            claimed_coupons_count (int | Unset): The number of coupons claimed.
+     """
 
     id: str | Unset = UNSET
     status: str | Unset = UNSET
@@ -41,6 +49,10 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
     gmv_amount: str | Unset = UNSET
     claimed_coupons_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -57,9 +69,11 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
 
         claimed_coupons_count = self.claimed_coupons_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if status is not UNSET:
@@ -76,6 +90,8 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
             field_dict["claimed_coupons_count"] = claimed_coupons_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,6 +119,7 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
             gmv_amount=gmv_amount,
             claimed_coupons_count=claimed_coupons_count,
         )
+
 
         get_engagement_task_performances_response_data_task_performance.additional_properties = d
         return get_engagement_task_performances_response_data_task_performance

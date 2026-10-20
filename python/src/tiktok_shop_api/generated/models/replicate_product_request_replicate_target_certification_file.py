@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ReplicateProductRequestReplicateTargetCertificationFile")
+
 
 
 @_attrs_define
 class ReplicateProductRequestReplicateTargetCertificationFile:
-    """
-    Attributes:
-        id (str): The ID of the certification file.
-            Use the [Upload Product File API](https://partner.tiktokshop.com/docv2/page/6509dffdc16ffe02b8dc10c5) to upload
-            the files first and obtain the corresponding file ID.
-        name (str): The name of the certification file, including the file extension.
-        format_ (str | Unset): The format of the certification file. Only PDF is supported.
-    """
+    """ 
+        Attributes:
+            id (str): The ID of the certification file.
+                Use the [Upload Product File API](https://partner.tiktokshop.com/docv2/page/6509dffdc16ffe02b8dc10c5) to upload
+                the files first and obtain the corresponding file ID.
+            name (str): The name of the certification file, including the file extension.
+            format_ (str | Unset): The format of the certification file. Only PDF is supported.
+     """
 
     id: str
     name: str
     format_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -34,18 +46,19 @@ class ReplicateProductRequestReplicateTargetCertificationFile:
 
         format_ = self.format_
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "name": name,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "name": name,
+        })
         if format_ is not UNSET:
             field_dict["format"] = format_
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -61,6 +74,7 @@ class ReplicateProductRequestReplicateTargetCertificationFile:
             name=name,
             format_=format_,
         )
+
 
         replicate_product_request_replicate_target_certification_file.additional_properties = d
         return replicate_product_request_replicate_target_certification_file

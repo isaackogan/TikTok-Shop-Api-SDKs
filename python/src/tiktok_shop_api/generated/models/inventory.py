@@ -1,44 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Inventory")
+
 
 
 @_attrs_define
 class Inventory:
-    """
-    Attributes:
-        warehouse_id (str): The ID of the warehouse where the SKU is stored.
-            Retrieve the list of warehouses available for your shop from the [Get Warehouse List
-            API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
-        quantity (int | Unset): The total SKU quantity available in the warehouse.
-            Valid range: [1, 99,999]
+    """ 
+        Attributes:
+            warehouse_id (str): The ID of the warehouse where the SKU is stored.
+                Retrieve the list of warehouses available for your shop from the [Get Warehouse List
+                API](https://partner.tiktokshop.com/docv2/page/650aa418defece02be6e66b6).
+            quantity (int | Unset): The total SKU quantity available in the warehouse.
+                Valid range: [1, 99,999]
 
-            Note: This quantity specifically refers to the in-stock inventory that can be shipped immediately.
-        backorder_quantity (int | Unset): The `backorder_quantity` will automatically be converted to `quantity` once
-            in-stock inventory is sold out. The fulfillment of this inventory follows the `handling_time` specified below.
+                Note: This quantity specifically refers to the in-stock inventory that can be shipped immediately.
+            backorder_quantity (int | Unset): The `backorder_quantity` will automatically be converted to `quantity` once
+                in-stock inventory is sold out. The fulfillment of this inventory follows the `handling_time` specified below.
 
-            **Note**:
-            - For non-virtual product categories, provide `backorder_quantity` and `handling_time` together.
-            - Made-to-order (MTO), pre-order, and custom products cannot be backordered and are incompatible with
-            `backorder_quantity`.
-        handling_time (int | Unset): The estimated number of working days needed for a backorder to be shipped. For non-
-            virtual product categories, provide `handling_time` and `backorder_quantity` together. All warehouses for the
-            same SKU must use the same `handling_time`.
-    """
+                **Note**:
+                - For non-virtual product categories, provide `backorder_quantity` and `handling_time` together.
+                - Made-to-order (MTO), pre-order, and custom products cannot be backordered and are incompatible with
+                `backorder_quantity`.
+            handling_time (int | Unset): The estimated number of working days needed for a backorder to be shipped. For non-
+                virtual product categories, provide `handling_time` and `backorder_quantity` together. All warehouses for the
+                same SKU must use the same `handling_time`.
+     """
 
     warehouse_id: str
     quantity: int | Unset = UNSET
     backorder_quantity: int | Unset = UNSET
     handling_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         warehouse_id = self.warehouse_id
@@ -49,13 +61,12 @@ class Inventory:
 
         handling_time = self.handling_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "warehouse_id": warehouse_id,
-            }
-        )
+        field_dict.update({
+            "warehouse_id": warehouse_id,
+        })
         if quantity is not UNSET:
             field_dict["quantity"] = quantity
         if backorder_quantity is not UNSET:
@@ -64,6 +75,8 @@ class Inventory:
             field_dict["handling_time"] = handling_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -82,6 +95,7 @@ class Inventory:
             backorder_quantity=backorder_quantity,
             handling_time=handling_time,
         )
+
 
         inventory.additional_properties = d
         return inventory

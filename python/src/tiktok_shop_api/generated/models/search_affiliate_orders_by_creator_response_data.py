@@ -1,37 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_affiliate_orders_by_creator_response_data_order import (
-        SearchAffiliateOrdersByCreatorResponseDataOrder,
-    )
+  from ..models.search_affiliate_orders_by_creator_response_data_order import SearchAffiliateOrdersByCreatorResponseDataOrder
+
+
+
 
 
 T = TypeVar("T", bound="SearchAffiliateOrdersByCreatorResponseData")
 
 
+
 @_attrs_define
 class SearchAffiliateOrdersByCreatorResponseData:
-    """
-    Attributes:
-        orders (list[SearchAffiliateOrdersByCreatorResponseDataOrder] | Unset): The order resource.
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
-        total_count (int | Unset): Total count of orders in the response.
-    """
+    """ 
+        Attributes:
+            orders (list[SearchAffiliateOrdersByCreatorResponseDataOrder] | Unset): The order resource.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
+            total_count (int | Unset): Total count of orders in the response.
+     """
 
     orders: list[SearchAffiliateOrdersByCreatorResponseDataOrder] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_affiliate_orders_by_creator_response_data_order import SearchAffiliateOrdersByCreatorResponseDataOrder # noqa: PLC0415
         orders: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.orders, Unset):
             orders = []
@@ -39,13 +49,17 @@ class SearchAffiliateOrdersByCreatorResponseData:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
 
+
+
         next_page_token = self.next_page_token
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if orders is not UNSET:
             field_dict["orders"] = orders
         if next_page_token is not UNSET:
@@ -55,12 +69,11 @@ class SearchAffiliateOrdersByCreatorResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_affiliate_orders_by_creator_response_data_order import (
-            SearchAffiliateOrdersByCreatorResponseDataOrder,  # noqa: PLC0415
-        )
-
+        from ..models.search_affiliate_orders_by_creator_response_data_order import SearchAffiliateOrdersByCreatorResponseDataOrder # noqa: PLC0415
         d = dict(src_dict)
         _orders = d.pop("orders", UNSET)
         orders: list[SearchAffiliateOrdersByCreatorResponseDataOrder] | Unset = UNSET
@@ -69,7 +82,10 @@ class SearchAffiliateOrdersByCreatorResponseData:
             for orders_item_data in _orders:
                 orders_item = SearchAffiliateOrdersByCreatorResponseDataOrder.from_dict(orders_item_data)
 
+
+
                 orders.append(orders_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -80,6 +96,7 @@ class SearchAffiliateOrdersByCreatorResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         search_affiliate_orders_by_creator_response_data.additional_properties = d
         return search_affiliate_orders_by_creator_response_data

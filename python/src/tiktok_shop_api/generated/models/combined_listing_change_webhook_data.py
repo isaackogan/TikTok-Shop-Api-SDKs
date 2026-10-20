@@ -1,45 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.combined_listing_change_webhook_data_product import CombinedListingChangeWebhookDataProduct
+  from ..models.combined_listing_change_webhook_data_product import CombinedListingChangeWebhookDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="CombinedListingChangeWebhookData")
 
 
+
 @_attrs_define
 class CombinedListingChangeWebhookData:
-    """
-    Attributes:
-        combined_listing_id (str | Unset): The combined listing ID.
-        products (list[CombinedListingChangeWebhookDataProduct] | Unset): The current list of products in this combined
-            listing after the change.
-        status (str | Unset): The status of the combined listing.
-             Possible values:
+    """ 
+        Attributes:
+            combined_listing_id (str | Unset): The combined listing ID.
+            products (list[CombinedListingChangeWebhookDataProduct] | Unset): The current list of products in this combined
+                listing after the change.
+            status (str | Unset): The status of the combined listing.
+                 Possible values:
 
-             * LIVE
-             * SYSTEM_DEACTIVATED
-             * SELLER_DEACTIVATED
-             * DELETED
+                 * LIVE
+                 * SYSTEM_DEACTIVATED
+                 * SELLER_DEACTIVATED
+                 * DELETED
 
-             Note: Only products in LIVE combined listings will appear on the product display page.
-        change_type (str | Unset): The type of change made to this combined listing.
-             Possible values:
+                 Note: Only products in LIVE combined listings will appear on the product display page.
+            change_type (str | Unset): The type of change made to this combined listing.
+                 Possible values:
 
-             * CREATE: The combined listing was created.
-             * UPDATE: The combined listing was updated to add or remove products.
-             * DELETE: The combined listing was deleted.
-        added_product_ids (list[str] | Unset): The list of products that were newly added to the combined listing.
-        removed_product_ids (list[str] | Unset): The list of products that were removed from the combined listing.
-    """
+                 * CREATE: The combined listing was created.
+                 * UPDATE: The combined listing was updated to add or remove products.
+                 * DELETE: The combined listing was deleted.
+            added_product_ids (list[str] | Unset): The list of products that were newly added to the combined listing.
+            removed_product_ids (list[str] | Unset): The list of products that were removed from the combined listing.
+     """
 
     combined_listing_id: str | Unset = UNSET
     products: list[CombinedListingChangeWebhookDataProduct] | Unset = UNSET
@@ -49,7 +56,12 @@ class CombinedListingChangeWebhookData:
     removed_product_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.combined_listing_change_webhook_data_product import CombinedListingChangeWebhookDataProduct # noqa: PLC0415
         combined_listing_id = self.combined_listing_id
 
         products: list[dict[str, Any]] | Unset = UNSET
@@ -59,6 +71,8 @@ class CombinedListingChangeWebhookData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         status = self.status
 
         change_type = self.change_type
@@ -67,13 +81,19 @@ class CombinedListingChangeWebhookData:
         if not isinstance(self.added_product_ids, Unset):
             added_product_ids = self.added_product_ids
 
+
+
         removed_product_ids: list[str] | Unset = UNSET
         if not isinstance(self.removed_product_ids, Unset):
             removed_product_ids = self.removed_product_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if combined_listing_id is not UNSET:
             field_dict["combined_listing_id"] = combined_listing_id
         if products is not UNSET:
@@ -89,12 +109,11 @@ class CombinedListingChangeWebhookData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.combined_listing_change_webhook_data_product import (
-            CombinedListingChangeWebhookDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.combined_listing_change_webhook_data_product import CombinedListingChangeWebhookDataProduct # noqa: PLC0415
         d = dict(src_dict)
         combined_listing_id = d.pop("combined_listing_id", UNSET)
 
@@ -105,7 +124,10 @@ class CombinedListingChangeWebhookData:
             for products_item_data in _products:
                 products_item = CombinedListingChangeWebhookDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         status = d.pop("status", UNSET)
 
@@ -113,7 +135,9 @@ class CombinedListingChangeWebhookData:
 
         added_product_ids = cast(list[str], d.pop("added_product_ids", UNSET))
 
+
         removed_product_ids = cast(list[str], d.pop("removed_product_ids", UNSET))
+
 
         combined_listing_change_webhook_data = cls(
             combined_listing_id=combined_listing_id,
@@ -123,6 +147,7 @@ class CombinedListingChangeWebhookData:
             added_product_ids=added_product_ids,
             removed_product_ids=removed_product_ids,
         )
+
 
         combined_listing_change_webhook_data.additional_properties = d
         return combined_listing_change_webhook_data

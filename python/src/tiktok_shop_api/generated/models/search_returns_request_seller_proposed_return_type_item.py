@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchReturnsRequestSellerProposedReturnTypeItem(StrEnum):
     PARTIAL_REFUND = "PARTIAL_REFUND"
 

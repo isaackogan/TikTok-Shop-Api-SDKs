@@ -1,40 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_creator_target_collaborations_request_keyword_type import (
-    SearchCreatorTargetCollaborationsRequestKeywordType,
-)
 from ..types import UNSET, Unset
+
+from ..models.search_creator_target_collaborations_request_keyword_type import SearchCreatorTargetCollaborationsRequestKeywordType
+from ..types import UNSET, Unset
+
+
+
+
+
 
 T = TypeVar("T", bound="SearchCreatorTargetCollaborationsRequest")
 
 
+
 @_attrs_define
 class SearchCreatorTargetCollaborationsRequest:
-    """
-    Attributes:
-        shop_id (str): The TikTok Shop identifier.
-        keyword_type (SearchCreatorTargetCollaborationsRequestKeywordType | Unset): The type of value specified in
-            `keyword`. Provide `keyword` and `keyword_type` together to filter by ID or name. Omit both fields to search
-            without an ID or name filter. Possible values:
-            - `TARGET_COLLABORATIONS_ID`: Match by target collaboration ID and return matching collaborations in the `LIVE`,
-            `EXPIRED`, `DELETED`, or `ENDED` state.
-            - `TARGET_COLLABORATIONS_NAME`: Match by target collaboration name and return matching collaborations in the
-            `LIVE` state only.
-        keyword (str | Unset): The target collaboration ID or name to search for, as specified by `keyword_type`. For
-            `TARGET_COLLABORATIONS_ID`, provide a base-10 integer. For `TARGET_COLLABORATIONS_NAME`, provide a value shorter
-            than 500 bytes.
-    """
+    """ 
+        Attributes:
+            shop_id (str): The TikTok Shop identifier.
+            keyword_type (SearchCreatorTargetCollaborationsRequestKeywordType | Unset): The type of value specified in
+                `keyword`. Provide `keyword` and `keyword_type` together to filter by ID or name. Omit both fields to search
+                without an ID or name filter. Possible values:
+                - `TARGET_COLLABORATIONS_ID`: Match by target collaboration ID and return matching collaborations in the `LIVE`,
+                `EXPIRED`, `DELETED`, or `ENDED` state.
+                - `TARGET_COLLABORATIONS_NAME`: Match by target collaboration name and return matching collaborations in the
+                `LIVE` state only.
+            keyword (str | Unset): The target collaboration ID or name to search for, as specified by `keyword_type`. For
+                `TARGET_COLLABORATIONS_ID`, provide a base-10 integer. For `TARGET_COLLABORATIONS_NAME`, provide a value shorter
+                than 500 bytes.
+     """
 
     shop_id: str
     keyword_type: SearchCreatorTargetCollaborationsRequestKeywordType | Unset = UNSET
     keyword: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         shop_id = self.shop_id
@@ -43,21 +53,23 @@ class SearchCreatorTargetCollaborationsRequest:
         if not isinstance(self.keyword_type, Unset):
             keyword_type = self.keyword_type.value
 
+
         keyword = self.keyword
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "shop_id": shop_id,
-            }
-        )
+        field_dict.update({
+            "shop_id": shop_id,
+        })
         if keyword_type is not UNSET:
             field_dict["keyword_type"] = keyword_type
         if keyword is not UNSET:
             field_dict["keyword"] = keyword
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -66,10 +78,13 @@ class SearchCreatorTargetCollaborationsRequest:
 
         _keyword_type = d.pop("keyword_type", UNSET)
         keyword_type: SearchCreatorTargetCollaborationsRequestKeywordType | Unset
-        if isinstance(_keyword_type, Unset):
+        if isinstance(_keyword_type,  Unset):
             keyword_type = UNSET
         else:
             keyword_type = SearchCreatorTargetCollaborationsRequestKeywordType(_keyword_type)
+
+
+
 
         keyword = d.pop("keyword", UNSET)
 
@@ -78,6 +93,7 @@ class SearchCreatorTargetCollaborationsRequest:
             keyword_type=keyword_type,
             keyword=keyword,
         )
+
 
         search_creator_target_collaborations_request.additional_properties = d
         return search_creator_target_collaborations_request

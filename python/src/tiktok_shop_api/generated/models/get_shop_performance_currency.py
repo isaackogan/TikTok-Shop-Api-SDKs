@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopPerformanceCurrency(StrEnum):
     LOCAL = "LOCAL"
     USD = "USD"

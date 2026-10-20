@@ -1,39 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement import (
-        GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement,
-    )
-    from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_item import (
-        GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem,
-    )
+  from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement
+  from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_item import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem
+
+
+
 
 
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail")
 
 
+
 @_attrs_define
 class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
-    """
-    Attributes:
-        carton_no (str | Unset): Carton number.
-        carton_type (str | Unset): Whether this carton is single-SKU or multi-SKU.
+    """ 
+        Attributes:
+            carton_no (str | Unset): Carton number.
+            carton_type (str | Unset): Whether this carton is single-SKU or multi-SKU.
 
-            **Possible values:**
-            * `SINGLE_SKU`
-            * `MULTI_SKU`
-        box_measurements (GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset):
-        items (list[GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem] | Unset): List of items in this
-            carton.
-    """
+                **Possible values:**
+                * `SINGLE_SKU`
+                * `MULTI_SKU`
+            box_measurements (GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset):
+            items (list[GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem] | Unset): List of items in this
+                carton.
+     """
 
     carton_no: str | Unset = UNSET
     carton_type: str | Unset = UNSET
@@ -41,7 +44,13 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
     items: list[GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement # noqa: PLC0415
+        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_item import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem # noqa: PLC0415
         carton_no = self.carton_no
 
         carton_type = self.carton_type
@@ -57,9 +66,13 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
                 items_item = items_item_data.to_dict()
                 items.append(items_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if carton_no is not UNSET:
             field_dict["carton_no"] = carton_no
         if carton_type is not UNSET:
@@ -71,15 +84,12 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement import (
-            GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement,  # noqa: PLC0415
-        )
-        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_item import (
-            GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem,  # noqa: PLC0415
-        )
-
+        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_box_measurement import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement # noqa: PLC0415
+        from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_item import GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem # noqa: PLC0415
         d = dict(src_dict)
         carton_no = d.pop("carton_no", UNSET)
 
@@ -87,23 +97,25 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
 
         _box_measurements = d.pop("box_measurements", UNSET)
         box_measurements: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset
-        if isinstance(_box_measurements, Unset):
+        if isinstance(_box_measurements,  Unset):
             box_measurements = UNSET
         else:
-            box_measurements = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement.from_dict(
-                _box_measurements
-            )
+            box_measurements = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement.from_dict(_box_measurements)
+
+
+
 
         _items = d.pop("items", UNSET)
         items: list[GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem] | Unset = UNSET
         if _items is not UNSET:
             items = []
             for items_item_data in _items:
-                items_item = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem.from_dict(
-                    items_item_data
-                )
+                items_item = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem.from_dict(items_item_data)
+
+
 
                 items.append(items_item)
+
 
         get_fbt_inbound_order_details_response_data_inbound_order_carton_detail = cls(
             carton_no=carton_no,
@@ -111,6 +123,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
             box_measurements=box_measurements,
             items=items,
         )
+
 
         get_fbt_inbound_order_details_response_data_inbound_order_carton_detail.additional_properties = d
         return get_fbt_inbound_order_details_response_data_inbound_order_carton_detail

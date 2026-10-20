@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchProductsRequestCategoryVersion(StrEnum):
     V1 = "v1"
     V2 = "v2"

@@ -1,41 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="PartialEditProductRequestSkuSkuDimension")
+
 
 
 @_attrs_define
 class PartialEditProductRequestSkuSkuDimension:
-    """
-    Attributes:
-        height (str): The package height. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-        length (str): The package length. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-        unit (str): The unit for the SKU dimensions.
-            Possible values based on region:
-            - US: CENTIMETER, INCH
-            - Other regions: CENTIMETER
+    """ 
+        Attributes:
+            height (str): The package height. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+            length (str): The package length. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+            unit (str): The unit for the SKU dimensions.
+                Possible values based on region:
+                - US: CENTIMETER, INCH
+                - Other regions: CENTIMETER
 
-            Note: Use the same measurement system (metric or imperial) for `sku_weight` and `sku_dimensions`. For example,
-            use `KILOGRAM` with `CENTIMETER`.
-        width (str): The package width. A positive whole number.
-            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
-            nearest whole number.
-    """
+                Note: Use the same measurement system (metric or imperial) for `sku_weight` and `sku_dimensions`. For example,
+                use `KILOGRAM` with `CENTIMETER`.
+            width (str): The package width. A positive whole number.
+                Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+                nearest whole number.
+     """
 
     height: str
     length: str
     unit: str
     width: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         height = self.height
@@ -46,18 +59,19 @@ class PartialEditProductRequestSkuSkuDimension:
 
         width = self.width
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "height": height,
-                "length": length,
-                "unit": unit,
-                "width": width,
-            }
-        )
+        field_dict.update({
+            "height": height,
+            "length": length,
+            "unit": unit,
+            "width": width,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +90,7 @@ class PartialEditProductRequestSkuSkuDimension:
             unit=unit,
             width=width,
         )
+
 
         partial_edit_product_request_sku_sku_dimension.additional_properties = d
         return partial_edit_product_request_sku_sku_dimension

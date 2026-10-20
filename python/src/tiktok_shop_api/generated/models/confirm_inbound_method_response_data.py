@@ -1,48 +1,69 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="ConfirmInboundMethodResponseData")
+
 
 
 @_attrs_define
 class ConfirmInboundMethodResponseData:
-    """
-    Attributes:
-        inbound_order_ids (list[str] | Unset): List of child inbound order IDs generated for the confirmed FBT inbound
-            plan.
-    """
+    """ 
+        Attributes:
+            inbound_order_ids (list[str] | Unset): List of child inbound order IDs generated for the confirmed FBT inbound
+                plan.
+     """
 
     inbound_order_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         inbound_order_ids: list[str] | Unset = UNSET
         if not isinstance(self.inbound_order_ids, Unset):
             inbound_order_ids = self.inbound_order_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if inbound_order_ids is not UNSET:
             field_dict["inbound_order_ids"] = inbound_order_ids
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         inbound_order_ids = cast(list[str], d.pop("inbound_order_ids", UNSET))
 
+
         confirm_inbound_method_response_data = cls(
             inbound_order_ids=inbound_order_ids,
         )
+
 
         confirm_inbound_method_response_data.additional_properties = d
         return confirm_inbound_method_response_data

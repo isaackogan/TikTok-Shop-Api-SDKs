@@ -1,30 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateOpenCollaborationResponseDataOpenCollaboration")
+
 
 
 @_attrs_define
 class CreateOpenCollaborationResponseDataOpenCollaboration:
-    """
-    Attributes:
-        id (str | Unset): The open collaboration identifier.
-        product_id (str | Unset): The product identifier.
-        effective_time (int | Unset): The time from which the open collaboration commission is effective, expressed as a
-            Unix timestamp in seconds.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The open collaboration identifier.
+            product_id (str | Unset): The product identifier.
+            effective_time (int | Unset): The time from which the open collaboration commission is effective, expressed as a
+                Unix timestamp in seconds.
+     """
 
     id: str | Unset = UNSET
     product_id: str | Unset = UNSET
     effective_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -33,9 +45,11 @@ class CreateOpenCollaborationResponseDataOpenCollaboration:
 
         effective_time = self.effective_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if product_id is not UNSET:
@@ -44,6 +58,8 @@ class CreateOpenCollaborationResponseDataOpenCollaboration:
             field_dict["effective_time"] = effective_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -59,6 +75,7 @@ class CreateOpenCollaborationResponseDataOpenCollaboration:
             product_id=product_id,
             effective_time=effective_time,
         )
+
 
         create_open_collaboration_response_data_open_collaboration.additional_properties = d
         return create_open_collaboration_response_data_open_collaboration

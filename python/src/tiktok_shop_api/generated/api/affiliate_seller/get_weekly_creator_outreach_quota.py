@@ -1,28 +1,42 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_weekly_creator_outreach_quota_response import GetWeeklyCreatorOutreachQuotaResponse
-from ...types import Response
+from typing import cast
 
 
-def _get_kwargs() -> dict[str, Any]:
+
+def _get_kwargs(
+    
+) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
         "url": "/affiliate_seller/202607/creator_outreach/quota",
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetWeeklyCreatorOutreachQuotaResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetWeeklyCreatorOutreachQuotaResponse | None:
     if response.status_code == 200:
         response_200 = GetWeeklyCreatorOutreachQuotaResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -32,9 +46,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetWeeklyCreatorOutreachQuotaResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetWeeklyCreatorOutreachQuotaResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -46,8 +58,9 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetWeeklyCreatorOutreachQuotaResponse]:
-    """Get Weekly Creator Outreach Quota
+    """ Get Weekly Creator Outreach Quota
 
      Query the weekly outreach invitation quota for a shop. It returns the current GMV tier, maximum
     reachable creator follower count corresponding to the tier, consumed quota, remaining quota and
@@ -59,9 +72,12 @@ def sync_detailed(
 
     Returns:
         Response[GetWeeklyCreatorOutreachQuotaResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
+
+    kwargs = _get_kwargs(
+        
+    )
 
     response = client.get_httpx_client().request(
         **kwargs,
@@ -69,12 +85,12 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetWeeklyCreatorOutreachQuotaResponse | None:
-    """Get Weekly Creator Outreach Quota
+    """ Get Weekly Creator Outreach Quota
 
      Query the weekly outreach invitation quota for a shop. It returns the current GMV tier, maximum
     reachable creator follower count corresponding to the tier, consumed quota, remaining quota and
@@ -86,18 +102,20 @@ def sync(
 
     Returns:
         GetWeeklyCreatorOutreachQuotaResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-    ).parsed
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetWeeklyCreatorOutreachQuotaResponse]:
-    """Get Weekly Creator Outreach Quota
+    """ Get Weekly Creator Outreach Quota
 
      Query the weekly outreach invitation quota for a shop. It returns the current GMV tier, maximum
     reachable creator follower count corresponding to the tier, consumed quota, remaining quota and
@@ -109,20 +127,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetWeeklyCreatorOutreachQuotaResponse]
-    """
+     """
 
-    kwargs = _get_kwargs()
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    kwargs = _get_kwargs(
+        
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetWeeklyCreatorOutreachQuotaResponse | None:
-    """Get Weekly Creator Outreach Quota
+    """ Get Weekly Creator Outreach Quota
 
      Query the weekly outreach invitation quota for a shop. It returns the current GMV tier, maximum
     reachable creator follower count corresponding to the tier, consumed quota, remaining quota and
@@ -134,10 +157,10 @@ async def asyncio(
 
     Returns:
         GetWeeklyCreatorOutreachQuotaResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+
+    )).parsed

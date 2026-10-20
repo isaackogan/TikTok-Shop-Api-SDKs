@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetCategoriesListingPlatform(StrEnum):
     TIKTOK_SHOP = "TIKTOK_SHOP"
     TOKOPEDIA = "TOKOPEDIA"

@@ -1,17 +1,22 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_shop_video_performance_list_account_type import GetShopVideoPerformanceListAccountType
 from ...models.get_shop_video_performance_list_currency import GetShopVideoPerformanceListCurrency
 from ...models.get_shop_video_performance_list_response import GetShopVideoPerformanceListResponse
 from ...models.get_shop_video_performance_list_sort_field import GetShopVideoPerformanceListSortField
 from ...models.get_shop_video_performance_list_sort_order import GetShopVideoPerformanceListSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -24,7 +29,12 @@ def _get_kwargs(
     currency: GetShopVideoPerformanceListCurrency | Unset = UNSET,
     page_token: str | Unset = UNSET,
     account_type: GetShopVideoPerformanceListAccountType | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_date_ge = start_date_ge.isoformat()
@@ -61,7 +71,9 @@ def _get_kwargs(
 
     params["account_type"] = json_account_type
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -69,14 +81,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetShopVideoPerformanceListResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetShopVideoPerformanceListResponse | None:
     if response.status_code == 200:
         response_200 = GetShopVideoPerformanceListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -86,9 +100,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetShopVideoPerformanceListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetShopVideoPerformanceListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -108,8 +120,9 @@ def sync_detailed(
     currency: GetShopVideoPerformanceListCurrency | Unset = UNSET,
     page_token: str | Unset = UNSET,
     account_type: GetShopVideoPerformanceListAccountType | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceListResponse]:
-    """Get Shop Video Performance List
+    """ Get Shop Video Performance List
 
      Returns a list of videos and associated metrics for a shop.
 
@@ -129,17 +142,19 @@ def sync_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        page_token=page_token,
-        account_type=account_type,
+end_date_lt=end_date_lt,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+page_token=page_token,
+account_type=account_type,
+
     )
 
     response = client.get_httpx_client().request(
@@ -147,7 +162,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -160,8 +174,9 @@ def sync(
     currency: GetShopVideoPerformanceListCurrency | Unset = UNSET,
     page_token: str | Unset = UNSET,
     account_type: GetShopVideoPerformanceListAccountType | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceListResponse | None:
-    """Get Shop Video Performance List
+    """ Get Shop Video Performance List
 
      Returns a list of videos and associated metrics for a shop.
 
@@ -181,20 +196,21 @@ def sync(
 
     Returns:
         GetShopVideoPerformanceListResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        page_token=page_token,
-        account_type=account_type,
-    ).parsed
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+page_token=page_token,
+account_type=account_type,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -207,8 +223,9 @@ async def asyncio_detailed(
     currency: GetShopVideoPerformanceListCurrency | Unset = UNSET,
     page_token: str | Unset = UNSET,
     account_type: GetShopVideoPerformanceListAccountType | Unset = UNSET,
+
 ) -> Response[GetShopVideoPerformanceListResponse]:
-    """Get Shop Video Performance List
+    """ Get Shop Video Performance List
 
      Returns a list of videos and associated metrics for a shop.
 
@@ -228,23 +245,26 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetShopVideoPerformanceListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_date_ge=start_date_ge,
-        end_date_lt=end_date_lt,
-        page_size=page_size,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        currency=currency,
-        page_token=page_token,
-        account_type=account_type,
+end_date_lt=end_date_lt,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+page_token=page_token,
+account_type=account_type,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -257,8 +277,9 @@ async def asyncio(
     currency: GetShopVideoPerformanceListCurrency | Unset = UNSET,
     page_token: str | Unset = UNSET,
     account_type: GetShopVideoPerformanceListAccountType | Unset = UNSET,
+
 ) -> GetShopVideoPerformanceListResponse | None:
-    """Get Shop Video Performance List
+    """ Get Shop Video Performance List
 
      Returns a list of videos and associated metrics for a shop.
 
@@ -278,18 +299,18 @@ async def asyncio(
 
     Returns:
         GetShopVideoPerformanceListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            start_date_ge=start_date_ge,
-            end_date_lt=end_date_lt,
-            page_size=page_size,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            currency=currency,
-            page_token=page_token,
-            account_type=account_type,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+start_date_ge=start_date_ge,
+end_date_lt=end_date_lt,
+page_size=page_size,
+sort_field=sort_field,
+sort_order=sort_order,
+currency=currency,
+page_token=page_token,
+account_type=account_type,
+
+    )).parsed

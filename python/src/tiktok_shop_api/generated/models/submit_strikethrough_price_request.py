@@ -1,33 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.submit_strikethrough_price_request_sku import SubmitStrikethroughPriceRequestSku
+  from ..models.submit_strikethrough_price_request_sku import SubmitStrikethroughPriceRequestSku
+
+
+
 
 
 T = TypeVar("T", bound="SubmitStrikethroughPriceRequest")
 
 
+
 @_attrs_define
 class SubmitStrikethroughPriceRequest:
-    """
-    Attributes:
-        external_product_id (str): An external product identifier used on an external ecommerce platform. This value
-            must match the `external_product_id` used when the product was created.
-        skus (list[SubmitStrikethroughPriceRequestSku]): A list of SKUs whose external pricing information is submitted
-            for verification. All SKU IDs must belong to the product identified by `product_id`.
-    """
+    """ 
+        Attributes:
+            external_product_id (str): An external product identifier used on an external ecommerce platform. This value
+                must match the `external_product_id` used when the product was created.
+            skus (list[SubmitStrikethroughPriceRequestSku]): A list of SKUs whose external pricing information is submitted
+                for verification. All SKU IDs must belong to the product identified by `product_id`.
+     """
 
     external_product_id: str
     skus: list[SubmitStrikethroughPriceRequestSku]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.submit_strikethrough_price_request_sku import SubmitStrikethroughPriceRequestSku # noqa: PLC0415
         external_product_id = self.external_product_id
 
         skus = []
@@ -35,35 +48,41 @@ class SubmitStrikethroughPriceRequest:
             skus_item = skus_item_data.to_dict()
             skus.append(skus_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "external_product_id": external_product_id,
-                "skus": skus,
-            }
-        )
+        field_dict.update({
+            "external_product_id": external_product_id,
+            "skus": skus,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.submit_strikethrough_price_request_sku import SubmitStrikethroughPriceRequestSku  # noqa: PLC0415
-
+        from ..models.submit_strikethrough_price_request_sku import SubmitStrikethroughPriceRequestSku # noqa: PLC0415
         d = dict(src_dict)
         external_product_id = d.pop("external_product_id")
 
         skus = []
         _skus = d.pop("skus")
-        for skus_item_data in _skus:
+        for skus_item_data in (_skus):
             skus_item = SubmitStrikethroughPriceRequestSku.from_dict(skus_item_data)
 
+
+
             skus.append(skus_item)
+
 
         submit_strikethrough_price_request = cls(
             external_product_id=external_product_id,
             skus=skus,
         )
+
 
         submit_strikethrough_price_request.additional_properties = d
         return submit_strikethrough_price_request

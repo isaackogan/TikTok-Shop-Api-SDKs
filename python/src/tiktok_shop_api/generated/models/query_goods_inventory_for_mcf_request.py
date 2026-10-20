@@ -1,61 +1,78 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.query_goods_inventory_for_mcf_request_good import QueryGoodsInventoryForMCFRequestGood
+  from ..models.query_goods_inventory_for_mcf_request_good import QueryGoodsInventoryForMCFRequestGood
+
+
+
 
 
 T = TypeVar("T", bound="QueryGoodsInventoryForMCFRequest")
 
 
+
 @_attrs_define
 class QueryGoodsInventoryForMCFRequest:
-    """
-    Attributes:
-        goods (list[QueryGoodsInventoryForMCFRequestGood]): Goods to query. The array must contain 1 to 50 entries.
-    """
+    """ 
+        Attributes:
+            goods (list[QueryGoodsInventoryForMCFRequestGood]): Goods to query. The array must contain 1 to 50 entries.
+     """
 
     goods: list[QueryGoodsInventoryForMCFRequestGood]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.query_goods_inventory_for_mcf_request_good import QueryGoodsInventoryForMCFRequestGood # noqa: PLC0415
         goods = []
         for goods_item_data in self.goods:
             goods_item = goods_item_data.to_dict()
             goods.append(goods_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "goods": goods,
-            }
-        )
+        field_dict.update({
+            "goods": goods,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.query_goods_inventory_for_mcf_request_good import (
-            QueryGoodsInventoryForMCFRequestGood,  # noqa: PLC0415
-        )
-
+        from ..models.query_goods_inventory_for_mcf_request_good import QueryGoodsInventoryForMCFRequestGood # noqa: PLC0415
         d = dict(src_dict)
         goods = []
         _goods = d.pop("goods")
-        for goods_item_data in _goods:
+        for goods_item_data in (_goods):
             goods_item = QueryGoodsInventoryForMCFRequestGood.from_dict(goods_item_data)
 
+
+
             goods.append(goods_item)
+
 
         query_goods_inventory_for_mcf_request = cls(
             goods=goods,
         )
+
 
         query_goods_inventory_for_mcf_request.additional_properties = d
         return query_goods_inventory_for_mcf_request

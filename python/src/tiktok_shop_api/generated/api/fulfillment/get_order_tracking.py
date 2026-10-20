@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_order_tracking_response import GetOrderTrackingResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     order_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/fulfillment/202309/orders/{order_id}/tracking".format(
-            order_id=quote(str(order_id), safe=""),
-        ),
+        "url": "/fulfillment/202309/orders/{order_id}/tracking".format(order_id=quote(str(order_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetOrderTrackingResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetOrderTrackingResponse | None:
     if response.status_code == 200:
         response_200 = GetOrderTrackingResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetOrderTrackingResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetOrderTrackingResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     order_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetOrderTrackingResponse]:
-    """Get Order Tracking
+    """ Get Order Tracking
 
      This API can use the order number to obtain the corresponding logistics tracking information.
 
@@ -66,10 +75,12 @@ def sync_detailed(
 
     Returns:
         Response[GetOrderTrackingResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_id=order_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -78,13 +89,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     order_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetOrderTrackingResponse | None:
-    """Get Order Tracking
+    """ Get Order Tracking
 
      This API can use the order number to obtain the corresponding logistics tracking information.
 
@@ -97,20 +108,22 @@ def sync(
 
     Returns:
         GetOrderTrackingResponse
-    """
+     """
+
 
     return sync_detailed(
         order_id=order_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     order_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[GetOrderTrackingResponse]:
-    """Get Order Tracking
+    """ Get Order Tracking
 
      This API can use the order number to obtain the corresponding logistics tracking information.
 
@@ -123,23 +136,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetOrderTrackingResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_id=order_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     order_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> GetOrderTrackingResponse | None:
-    """Get Order Tracking
+    """ Get Order Tracking
 
      This API can use the order number to obtain the corresponding logistics tracking information.
 
@@ -152,11 +169,11 @@ async def asyncio(
 
     Returns:
         GetOrderTrackingResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            order_id=order_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        order_id=order_id,
+client=client,
+
+    )).parsed

@@ -1,26 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.optimize_images_request import OptimizeImagesRequest
 from ...models.optimize_images_response import OptimizeImagesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: OptimizeImagesRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/product/202404/images/optimize",
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -30,9 +42,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> OptimizeImagesResponse | None:
     if response.status_code == 200:
         response_200 = OptimizeImagesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -42,9 +57,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[OptimizeImagesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[OptimizeImagesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -57,8 +70,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: OptimizeImagesRequest | Unset = UNSET,
+
 ) -> Response[OptimizeImagesResponse]:
-    """Optimize Images
+    """ Optimize Images
 
      Optimize images used in your TikTok Shop by changing the background to white.
     This is especially useful for images displayed in the product image gallery as it enhances product
@@ -83,10 +97,12 @@ def sync_detailed(
 
     Returns:
         Response[OptimizeImagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -95,13 +111,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: OptimizeImagesRequest | Unset = UNSET,
+
 ) -> OptimizeImagesResponse | None:
-    """Optimize Images
+    """ Optimize Images
 
      Optimize images used in your TikTok Shop by changing the background to white.
     This is especially useful for images displayed in the product image gallery as it enhances product
@@ -126,20 +142,22 @@ def sync(
 
     Returns:
         OptimizeImagesResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: OptimizeImagesRequest | Unset = UNSET,
+
 ) -> Response[OptimizeImagesResponse]:
-    """Optimize Images
+    """ Optimize Images
 
      Optimize images used in your TikTok Shop by changing the background to white.
     This is especially useful for images displayed in the product image gallery as it enhances product
@@ -164,23 +182,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[OptimizeImagesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: OptimizeImagesRequest | Unset = UNSET,
+
 ) -> OptimizeImagesResponse | None:
-    """Optimize Images
+    """ Optimize Images
 
      Optimize images used in your TikTok Shop by changing the background to white.
     This is especially useful for images displayed in the product image gallery as it enhances product
@@ -205,11 +227,11 @@ async def asyncio(
 
     Returns:
         OptimizeImagesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

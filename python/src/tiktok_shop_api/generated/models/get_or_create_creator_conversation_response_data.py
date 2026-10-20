@@ -1,27 +1,35 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOrCreateCreatorConversationResponseData")
+
 
 
 @_attrs_define
 class GetOrCreateCreatorConversationResponseData:
-    """
-    Attributes:
-        conversation_id (str | Unset): The unique ID of the conversation.
-        is_new (bool | Unset): Whether this is a new conversation.
-        username (str | Unset): The TikTok creator's username.
-        avatar (str | Unset): The URL for the TikTok creator's avatar image file.
-        unread_count (int | Unset): Number of messages unread by the shop.
-        creator_im_id (str | Unset): Creators' IM User ID.
-    """
+    """ 
+        Attributes:
+            conversation_id (str | Unset): The unique ID of the conversation.
+            is_new (bool | Unset): Whether this is a new conversation.
+            username (str | Unset): The TikTok creator's username.
+            avatar (str | Unset): The URL for the TikTok creator's avatar image file.
+            unread_count (int | Unset): Number of messages unread by the shop.
+            creator_im_id (str | Unset): Creators' IM User ID.
+     """
 
     conversation_id: str | Unset = UNSET
     is_new: bool | Unset = UNSET
@@ -30,6 +38,10 @@ class GetOrCreateCreatorConversationResponseData:
     unread_count: int | Unset = UNSET
     creator_im_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         conversation_id = self.conversation_id
@@ -44,9 +56,11 @@ class GetOrCreateCreatorConversationResponseData:
 
         creator_im_id = self.creator_im_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if conversation_id is not UNSET:
             field_dict["conversation_id"] = conversation_id
         if is_new is not UNSET:
@@ -61,6 +75,8 @@ class GetOrCreateCreatorConversationResponseData:
             field_dict["creator_im_id"] = creator_im_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -85,6 +101,7 @@ class GetOrCreateCreatorConversationResponseData:
             unread_count=unread_count,
             creator_im_id=creator_im_id,
         )
+
 
         get_or_create_creator_conversation_response_data.additional_properties = d
         return get_or_create_creator_conversation_response_data

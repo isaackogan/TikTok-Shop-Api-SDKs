@@ -1,37 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="UpdatePromotionActivityProductsResponseData")
+
 
 
 @_attrs_define
 class UpdatePromotionActivityProductsResponseData:
-    """
-    Attributes:
-        activity_id (str | Unset): A unique ID that identifies different activities.
-        title (str | Unset): Activity name set by the merchant.
-        update_time (int | Unset): The time when the response was generated, as a Unix timestamp in seconds (UTC).
-        status (str | Unset): Activity status.
-            Possible values:
-            - DRAFT: Promotion activities with this status are not available to TikTok users.
-            - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
-            start time.
-            - ONGOING: Promotion activities with this status are available to TikTok users.
-            - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
-            - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
-            - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-        total_count (int | Unset): The number of items in this request.
-            When `product_level==PRODUCT`, this is the number of products. When `product_level==VARIATION`, this is the
-            total number of SKUs across all products. When `product_level==SHOP`, this value is `0`. IDs in
-            `benefit_product_ids` and `exclude_product_ids` are not included.
-    """
+    """ 
+        Attributes:
+            activity_id (str | Unset): A unique ID that identifies different activities.
+            title (str | Unset): Activity name set by the merchant.
+            update_time (int | Unset): The time when the response was generated, as a Unix timestamp in seconds (UTC).
+            status (str | Unset): Activity status.
+                Possible values:
+                - DRAFT: Promotion activities with this status are not available to TikTok users.
+                - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
+                start time.
+                - ONGOING: Promotion activities with this status are available to TikTok users.
+                - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
+                - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
+                - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
+            total_count (int | Unset): The number of items in this request.
+                When `product_level==PRODUCT`, this is the number of products. When `product_level==VARIATION`, this is the
+                total number of SKUs across all products. When `product_level==SHOP`, this value is `0`. IDs in
+                `benefit_product_ids` and `exclude_product_ids` are not included.
+     """
 
     activity_id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -39,6 +47,10 @@ class UpdatePromotionActivityProductsResponseData:
     status: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         activity_id = self.activity_id
@@ -51,9 +63,11 @@ class UpdatePromotionActivityProductsResponseData:
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if title is not UNSET:
@@ -66,6 +80,8 @@ class UpdatePromotionActivityProductsResponseData:
             field_dict["total_count"] = total_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -87,6 +103,7 @@ class UpdatePromotionActivityProductsResponseData:
             status=status,
             total_count=total_count,
         )
+
 
         update_promotion_activity_products_response_data.additional_properties = d
         return update_promotion_activity_products_response_data

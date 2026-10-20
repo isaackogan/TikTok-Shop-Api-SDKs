@@ -1,46 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_list_response_data_product_affiliate_video_performance_attributed_video_gmv import (
-        GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv,
-    )
+  from ..models.get_shop_product_performance_list_response_data_product_affiliate_video_performance_attributed_video_gmv import GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance:
-    """
-    Attributes:
-        attributed_video_gmv
-            (GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset):
-        new_video_count (int | Unset): Number of new videos from affiliate.
-        product_impressions (int | Unset): Product impressions from affiliate video.
-        product_clicks (int | Unset): Product clicks from affiliate video.
-        ctr (str | Unset): Click-through rate from affiliate video.
-        add_cart_count (int | Unset): Number of times products were added to cart from affiliate video.
-        add_cart_rate (str | Unset): Add to cart rate from affiliate video.
-        click_order_rate (str | Unset): Click to order rate from affiliate video.
-        unique_product_impressions (int | Unset): Unique product impressions from affiliate video.
-        unique_clicks (int | Unset): Unique clicks from affiliate video.
-        unique_ctr (str | Unset): Unique click-through rate from affiliate video.
-        atc_users (int | Unset): Number of users who added to cart from affiliate video.
-        unique_atc_rate (str | Unset): Unique add to cart rate from affiliate video.
-        unique_click_order_rate (str | Unset): Unique click to order rate from affiliate video.
-    """
+    """ 
+        Attributes:
+            attributed_video_gmv
+                (GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset):
+            new_video_count (int | Unset): Number of new videos from affiliate.
+            product_impressions (int | Unset): Product impressions from affiliate video.
+            product_clicks (int | Unset): Product clicks from affiliate video.
+            ctr (str | Unset): Click-through rate from affiliate video.
+            add_cart_count (int | Unset): Number of times products were added to cart from affiliate video.
+            add_cart_rate (str | Unset): Add to cart rate from affiliate video.
+            click_order_rate (str | Unset): Click to order rate from affiliate video.
+            unique_product_impressions (int | Unset): Unique product impressions from affiliate video.
+            unique_clicks (int | Unset): Unique clicks from affiliate video.
+            unique_ctr (str | Unset): Unique click-through rate from affiliate video.
+            atc_users (int | Unset): Number of users who added to cart from affiliate video.
+            unique_atc_rate (str | Unset): Unique add to cart rate from affiliate video.
+            unique_click_order_rate (str | Unset): Unique click to order rate from affiliate video.
+     """
 
-    attributed_video_gmv: (
-        GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset
-    ) = UNSET
+    attributed_video_gmv: GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset = UNSET
     new_video_count: int | Unset = UNSET
     product_impressions: int | Unset = UNSET
     product_clicks: int | Unset = UNSET
@@ -56,7 +59,12 @@ class GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance:
     unique_click_order_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_list_response_data_product_affiliate_video_performance_attributed_video_gmv import GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv # noqa: PLC0415
         attributed_video_gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.attributed_video_gmv, Unset):
             attributed_video_gmv = self.attributed_video_gmv.to_dict()
@@ -87,9 +95,11 @@ class GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance:
 
         unique_click_order_rate = self.unique_click_order_rate
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if attributed_video_gmv is not UNSET:
             field_dict["attributed_video_gmv"] = attributed_video_gmv
         if new_video_count is not UNSET:
@@ -121,25 +131,21 @@ class GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_list_response_data_product_affiliate_video_performance_attributed_video_gmv import (
-            GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_product_performance_list_response_data_product_affiliate_video_performance_attributed_video_gmv import GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv # noqa: PLC0415
         d = dict(src_dict)
         _attributed_video_gmv = d.pop("attributed_video_gmv", UNSET)
-        attributed_video_gmv: (
-            GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset
-        )
-        if isinstance(_attributed_video_gmv, Unset):
+        attributed_video_gmv: GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv | Unset
+        if isinstance(_attributed_video_gmv,  Unset):
             attributed_video_gmv = UNSET
         else:
-            attributed_video_gmv = (
-                GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv.from_dict(
-                    _attributed_video_gmv
-                )
-            )
+            attributed_video_gmv = GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmv.from_dict(_attributed_video_gmv)
+
+
+
 
         new_video_count = d.pop("new_video_count", UNSET)
 
@@ -183,6 +189,7 @@ class GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance:
             unique_atc_rate=unique_atc_rate,
             unique_click_order_rate=unique_click_order_rate,
         )
+
 
         get_shop_product_performance_list_response_data_product_affiliate_video_performance.additional_properties = d
         return get_shop_product_performance_list_response_data_product_affiliate_video_performance

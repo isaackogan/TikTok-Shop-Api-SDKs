@@ -1,38 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight import (
-        SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight,
-    )
-    from ..models.search_goods_info_response_data_good_warehouse_confirmation_info_dimension import (
-        SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension,
-    )
+  from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight import SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight
+  from ..models.search_goods_info_response_data_good_warehouse_confirmation_info_dimension import SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension
+
+
+
 
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfo")
 
 
+
 @_attrs_define
 class SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfo:
-    """
-    Attributes:
-        weight (SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight | Unset):
-        dimension (SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension | Unset):
-    """
+    """ 
+        Attributes:
+            weight (SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight | Unset):
+            dimension (SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension | Unset):
+     """
 
     weight: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight | Unset = UNSET
     dimension: SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight import SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight # noqa: PLC0415
+        from ..models.search_goods_info_response_data_good_warehouse_confirmation_info_dimension import SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension # noqa: PLC0415
         weight: dict[str, Any] | Unset = UNSET
         if not isinstance(self.weight, Unset):
             weight = self.weight.to_dict()
@@ -41,9 +50,11 @@ class SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfo:
         if not isinstance(self.dimension, Unset):
             dimension = self.dimension.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if weight is not UNSET:
             field_dict["weight"] = weight
         if dimension is not UNSET:
@@ -51,34 +62,38 @@ class SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight import (
-            SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight,  # noqa: PLC0415
-        )
-        from ..models.search_goods_info_response_data_good_warehouse_confirmation_info_dimension import (
-            SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension,  # noqa: PLC0415
-        )
-
+        from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight import SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight # noqa: PLC0415
+        from ..models.search_goods_info_response_data_good_warehouse_confirmation_info_dimension import SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension # noqa: PLC0415
         d = dict(src_dict)
         _weight = d.pop("weight", UNSET)
         weight: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight | Unset
-        if isinstance(_weight, Unset):
+        if isinstance(_weight,  Unset):
             weight = UNSET
         else:
             weight = SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight.from_dict(_weight)
 
+
+
+
         _dimension = d.pop("dimension", UNSET)
         dimension: SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension | Unset
-        if isinstance(_dimension, Unset):
+        if isinstance(_dimension,  Unset):
             dimension = UNSET
         else:
             dimension = SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension.from_dict(_dimension)
+
+
+
 
         search_goods_info_response_data_good_warehouse_confirmation_info = cls(
             weight=weight,
             dimension=dimension,
         )
+
 
         search_goods_info_response_data_good_warehouse_confirmation_info.additional_properties = d
         return search_goods_info_response_data_good_warehouse_confirmation_info

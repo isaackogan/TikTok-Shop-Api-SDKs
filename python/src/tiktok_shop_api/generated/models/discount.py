@@ -1,32 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.bxgy_discount import BxgyDiscount
-    from ..models.discount_bmsm_discount import DiscountBmsmDiscount
-    from ..models.gift_discount import GiftDiscount
-    from ..models.shipping_discount import ShippingDiscount
+  from ..models.bxgy_discount import BxgyDiscount
+  from ..models.discount_bmsm_discount import DiscountBmsmDiscount
+  from ..models.gift_discount import GiftDiscount
+  from ..models.shipping_discount import ShippingDiscount
+
+
+
 
 
 T = TypeVar("T", bound="Discount")
 
 
+
 @_attrs_define
 class Discount:
-    """
-    Attributes:
-        shipping_discount (ShippingDiscount | Unset):
-        bmsm_discount (DiscountBmsmDiscount | Unset):
-        gift_discount (GiftDiscount | Unset):
-        bxgy_discount (BxgyDiscount | Unset):
-    """
+    """ 
+        Attributes:
+            shipping_discount (ShippingDiscount | Unset):
+            bmsm_discount (DiscountBmsmDiscount | Unset):
+            gift_discount (GiftDiscount | Unset):
+            bxgy_discount (BxgyDiscount | Unset):
+     """
 
     shipping_discount: ShippingDiscount | Unset = UNSET
     bmsm_discount: DiscountBmsmDiscount | Unset = UNSET
@@ -34,7 +41,15 @@ class Discount:
     bxgy_discount: BxgyDiscount | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.bxgy_discount import BxgyDiscount # noqa: PLC0415
+        from ..models.discount_bmsm_discount import DiscountBmsmDiscount # noqa: PLC0415
+        from ..models.gift_discount import GiftDiscount # noqa: PLC0415
+        from ..models.shipping_discount import ShippingDiscount # noqa: PLC0415
         shipping_discount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.shipping_discount, Unset):
             shipping_discount = self.shipping_discount.to_dict()
@@ -51,9 +66,11 @@ class Discount:
         if not isinstance(self.bxgy_discount, Unset):
             bxgy_discount = self.bxgy_discount.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shipping_discount is not UNSET:
             field_dict["shipping_discount"] = shipping_discount
         if bmsm_discount is not UNSET:
@@ -65,41 +82,54 @@ class Discount:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.bxgy_discount import BxgyDiscount  # noqa: PLC0415
-        from ..models.discount_bmsm_discount import DiscountBmsmDiscount  # noqa: PLC0415
-        from ..models.gift_discount import GiftDiscount  # noqa: PLC0415
-        from ..models.shipping_discount import ShippingDiscount  # noqa: PLC0415
-
+        from ..models.bxgy_discount import BxgyDiscount # noqa: PLC0415
+        from ..models.discount_bmsm_discount import DiscountBmsmDiscount # noqa: PLC0415
+        from ..models.gift_discount import GiftDiscount # noqa: PLC0415
+        from ..models.shipping_discount import ShippingDiscount # noqa: PLC0415
         d = dict(src_dict)
         _shipping_discount = d.pop("shipping_discount", UNSET)
         shipping_discount: ShippingDiscount | Unset
-        if isinstance(_shipping_discount, Unset):
+        if isinstance(_shipping_discount,  Unset):
             shipping_discount = UNSET
         else:
             shipping_discount = ShippingDiscount.from_dict(_shipping_discount)
 
+
+
+
         _bmsm_discount = d.pop("bmsm_discount", UNSET)
         bmsm_discount: DiscountBmsmDiscount | Unset
-        if isinstance(_bmsm_discount, Unset):
+        if isinstance(_bmsm_discount,  Unset):
             bmsm_discount = UNSET
         else:
             bmsm_discount = DiscountBmsmDiscount.from_dict(_bmsm_discount)
 
+
+
+
         _gift_discount = d.pop("gift_discount", UNSET)
         gift_discount: GiftDiscount | Unset
-        if isinstance(_gift_discount, Unset):
+        if isinstance(_gift_discount,  Unset):
             gift_discount = UNSET
         else:
             gift_discount = GiftDiscount.from_dict(_gift_discount)
 
+
+
+
         _bxgy_discount = d.pop("bxgy_discount", UNSET)
         bxgy_discount: BxgyDiscount | Unset
-        if isinstance(_bxgy_discount, Unset):
+        if isinstance(_bxgy_discount,  Unset):
             bxgy_discount = UNSET
         else:
             bxgy_discount = BxgyDiscount.from_dict(_bxgy_discount)
+
+
+
 
         discount = cls(
             shipping_discount=shipping_discount,
@@ -107,6 +137,7 @@ class Discount:
             gift_discount=gift_discount,
             bxgy_discount=bxgy_discount,
         )
+
 
         discount.additional_properties = d
         return discount

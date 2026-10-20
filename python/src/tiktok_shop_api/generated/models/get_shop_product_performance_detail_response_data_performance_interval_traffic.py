@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown import (
-        GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown,
-    )
+  from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown
+
+
+
 
 
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic")
 
 
+
 @_attrs_define
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic:
-    """
-    Attributes:
-        breakdowns (list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown] | Unset):
-            Traffic breakdowns.
-    """
+    """ 
+        Attributes:
+            breakdowns (list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown] | Unset):
+                Traffic breakdowns.
+     """
 
     breakdowns: list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown # noqa: PLC0415
         breakdowns: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.breakdowns, Unset):
             breakdowns = []
@@ -36,37 +46,40 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic:
                 breakdowns_item = breakdowns_item_data.to_dict()
                 breakdowns.append(breakdowns_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if breakdowns is not UNSET:
             field_dict["breakdowns"] = breakdowns
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown import (
-            GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown import GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown # noqa: PLC0415
         d = dict(src_dict)
         _breakdowns = d.pop("breakdowns", UNSET)
         breakdowns: list[GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown] | Unset = UNSET
         if _breakdowns is not UNSET:
             breakdowns = []
             for breakdowns_item_data in _breakdowns:
-                breakdowns_item = (
-                    GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown.from_dict(
-                        breakdowns_item_data
-                    )
-                )
+                breakdowns_item = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown.from_dict(breakdowns_item_data)
+
+
 
                 breakdowns.append(breakdowns_item)
+
 
         get_shop_product_performance_detail_response_data_performance_interval_traffic = cls(
             breakdowns=breakdowns,
         )
+
 
         get_shop_product_performance_detail_response_data_performance_interval_traffic.additional_properties = d
         return get_shop_product_performance_detail_response_data_performance_interval_traffic

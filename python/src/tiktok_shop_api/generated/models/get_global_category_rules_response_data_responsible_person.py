@@ -1,53 +1,66 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetGlobalCategoryRulesResponseDataResponsiblePerson")
+
 
 
 @_attrs_define
 class GetGlobalCategoryRulesResponseDataResponsiblePerson:
-    """
-    Attributes:
-        is_required (bool | Unset): A flag to indicate whether the responsible person is required for **all EU
-            markets**.
-            - true: The manufacturer is required in all EU markets.
-            - false: The manufacturer is required only in some EU markets. Refer to `required_regions` and
-            `optional_regions` for details.
-        optional_regions (list[str] | Unset): The markets where the responsible person is optional.
-            Possible values:
-            - DE: Germany
-            - ES: Spain
-            - FR: France
-            - IT: Italy
-            - IE: Ireland
-        required_regions (list[str] | Unset): The markets where the responsible person is required.
-            Possible values:
-            - AT: Austria
-            - BE: Belgium
-            - CZ: Czechia
-            - DE: Germany
-            - ES: Spain
-            - FR: France
-            - GR: Greece
-            - HU: Hungary
-            - IE: Ireland
-            - IT: Italy
-            - NL: Netherlands
-            - PL: Poland
-            - PT: Portugal
-    """
+    """ 
+        Attributes:
+            is_required (bool | Unset): A flag to indicate whether the responsible person is required for **all EU
+                markets**.
+                - true: The manufacturer is required in all EU markets.
+                - false: The manufacturer is required only in some EU markets. Refer to `required_regions` and
+                `optional_regions` for details.
+            optional_regions (list[str] | Unset): The markets where the responsible person is optional.
+                Possible values:
+                - DE: Germany
+                - ES: Spain
+                - FR: France
+                - IT: Italy
+                - IE: Ireland
+            required_regions (list[str] | Unset): The markets where the responsible person is required.
+                Possible values:
+                - AT: Austria
+                - BE: Belgium
+                - CZ: Czechia
+                - DE: Germany
+                - ES: Spain
+                - FR: France
+                - GR: Greece
+                - HU: Hungary
+                - IE: Ireland
+                - IT: Italy
+                - NL: Netherlands
+                - PL: Poland
+                - PT: Portugal
+     """
 
     is_required: bool | Unset = UNSET
     optional_regions: list[str] | Unset = UNSET
     required_regions: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         is_required = self.is_required
@@ -56,13 +69,19 @@ class GetGlobalCategoryRulesResponseDataResponsiblePerson:
         if not isinstance(self.optional_regions, Unset):
             optional_regions = self.optional_regions
 
+
+
         required_regions: list[str] | Unset = UNSET
         if not isinstance(self.required_regions, Unset):
             required_regions = self.required_regions
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_required is not UNSET:
             field_dict["is_required"] = is_required
         if optional_regions is not UNSET:
@@ -72,6 +91,8 @@ class GetGlobalCategoryRulesResponseDataResponsiblePerson:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -79,13 +100,16 @@ class GetGlobalCategoryRulesResponseDataResponsiblePerson:
 
         optional_regions = cast(list[str], d.pop("optional_regions", UNSET))
 
+
         required_regions = cast(list[str], d.pop("required_regions", UNSET))
+
 
         get_global_category_rules_response_data_responsible_person = cls(
             is_required=is_required,
             optional_regions=optional_regions,
             required_regions=required_regions,
         )
+
 
         get_global_category_rules_response_data_responsible_person.additional_properties = d
         return get_global_category_rules_response_data_responsible_person

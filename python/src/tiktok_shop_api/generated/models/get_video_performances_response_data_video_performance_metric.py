@@ -1,30 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
+  from ..models.gmv import Gmv
+
+
+
 
 
 T = TypeVar("T", bound="GetVideoPerformancesResponseDataVideoPerformanceMetric")
 
 
+
 @_attrs_define
 class GetVideoPerformancesResponseDataVideoPerformanceMetric:
-    """
-    Attributes:
-        anchor_display_rate (str | Unset): Display rate for anchors, specified with two decimal numbers.
-        click_through_rate (str | Unset): Click through rate, specified with two decimal numbers.
-        order_count (int | Unset): Number of orders in this date.
-        item_sold_count (int | Unset): Number of sold items in this date.
-        gmv (Gmv | Unset):
-    """
+    """ 
+        Attributes:
+            anchor_display_rate (str | Unset): Display rate for anchors, specified with two decimal numbers.
+            click_through_rate (str | Unset): Click through rate, specified with two decimal numbers.
+            order_count (int | Unset): Number of orders in this date.
+            item_sold_count (int | Unset): Number of sold items in this date.
+            gmv (Gmv | Unset):
+     """
 
     anchor_display_rate: str | Unset = UNSET
     click_through_rate: str | Unset = UNSET
@@ -33,7 +40,12 @@ class GetVideoPerformancesResponseDataVideoPerformanceMetric:
     gmv: Gmv | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
         anchor_display_rate = self.anchor_display_rate
 
         click_through_rate = self.click_through_rate
@@ -46,9 +58,11 @@ class GetVideoPerformancesResponseDataVideoPerformanceMetric:
         if not isinstance(self.gmv, Unset):
             gmv = self.gmv.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if anchor_display_rate is not UNSET:
             field_dict["anchor_display_rate"] = anchor_display_rate
         if click_through_rate is not UNSET:
@@ -62,10 +76,11 @@ class GetVideoPerformancesResponseDataVideoPerformanceMetric:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
         d = dict(src_dict)
         anchor_display_rate = d.pop("anchor_display_rate", UNSET)
 
@@ -77,10 +92,13 @@ class GetVideoPerformancesResponseDataVideoPerformanceMetric:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         get_video_performances_response_data_video_performance_metric = cls(
             anchor_display_rate=anchor_display_rate,
@@ -89,6 +107,7 @@ class GetVideoPerformancesResponseDataVideoPerformanceMetric:
             item_sold_count=item_sold_count,
             gmv=gmv,
         )
+
 
         get_video_performances_response_data_video_performance_metric.additional_properties = d
         return get_video_performances_response_data_video_performance_metric

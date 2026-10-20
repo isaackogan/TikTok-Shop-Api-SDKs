@@ -1,48 +1,51 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_weekly_creator_outreach_quota_response_data_data_gmv_level_rule import (
-        GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule,
-    )
-    from ..models.get_weekly_creator_outreach_quota_response_data_data_quota_detail import (
-        GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail,
-    )
+  from ..models.get_weekly_creator_outreach_quota_response_data_data_gmv_level_rule import GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule
+  from ..models.get_weekly_creator_outreach_quota_response_data_data_quota_detail import GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail
+
+
+
 
 
 T = TypeVar("T", bound="GetWeeklyCreatorOutreachQuotaResponseDataData")
 
 
+
 @_attrs_define
 class GetWeeklyCreatorOutreachQuotaResponseDataData:
-    """
-    Attributes:
-        shop_id (str | Unset): Shop id
-        quota_type (str | Unset): Quota type, e.g.
-            bouns quota;
-            period quota
-        gmv_tier (str | Unset): Shop gmv tier
-        quota_sum (str | Unset): Shop quota sum
-        quota_use (str | Unset): Shop quota used
-        unlimited (bool | Unset): Whether the shop has unlimited creator outreach quota.
-        reached_max_follower_cnt (str | Unset): Max creator follower count this shop can reach
-        new_connect_count (str | Unset): New connect creator count during this quota period
-        pair_connect_count (str | Unset): Connect paired creator count during this quota period
-        start_time (str | Unset): Quota period start time
-        end_time (str | Unset): Quota period end time
-        gmv_level_rule (list[GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule] | Unset): Quota GMV level rules
-        quota_details (list[GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail] | Unset): Creator-level quota
-            detail information
-        bonus_exposure_post_percentile_threshold (str | Unset): Threshold for exposure posts percentile  for shops to
-            obtain additional reward of creator-level quota, 0.8 means the 80th percentile.
-    """
+    """ 
+        Attributes:
+            shop_id (str | Unset): Shop id
+            quota_type (str | Unset): Quota type, e.g.
+                bouns quota;
+                period quota
+            gmv_tier (str | Unset): Shop gmv tier
+            quota_sum (str | Unset): Shop quota sum
+            quota_use (str | Unset): Shop quota used
+            unlimited (bool | Unset): Whether the shop has unlimited creator outreach quota.
+            reached_max_follower_cnt (str | Unset): Max creator follower count this shop can reach
+            new_connect_count (str | Unset): New connect creator count during this quota period
+            pair_connect_count (str | Unset): Connect paired creator count during this quota period
+            start_time (str | Unset): Quota period start time
+            end_time (str | Unset): Quota period end time
+            gmv_level_rule (list[GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule] | Unset): Quota GMV level rules
+            quota_details (list[GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail] | Unset): Creator-level quota
+                detail information
+            bonus_exposure_post_percentile_threshold (str | Unset): Threshold for exposure posts percentile  for shops to
+                obtain additional reward of creator-level quota, 0.8 means the 80th percentile.
+     """
 
     shop_id: str | Unset = UNSET
     quota_type: str | Unset = UNSET
@@ -60,7 +63,13 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
     bonus_exposure_post_percentile_threshold: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_weekly_creator_outreach_quota_response_data_data_gmv_level_rule import GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule # noqa: PLC0415
+        from ..models.get_weekly_creator_outreach_quota_response_data_data_quota_detail import GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail # noqa: PLC0415
         shop_id = self.shop_id
 
         quota_type = self.quota_type
@@ -90,6 +99,8 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
                 gmv_level_rule_item = gmv_level_rule_item_data.to_dict()
                 gmv_level_rule.append(gmv_level_rule_item)
 
+
+
         quota_details: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.quota_details, Unset):
             quota_details = []
@@ -97,11 +108,15 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
                 quota_details_item = quota_details_item_data.to_dict()
                 quota_details.append(quota_details_item)
 
+
+
         bonus_exposure_post_percentile_threshold = self.bonus_exposure_post_percentile_threshold
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shop_id is not UNSET:
             field_dict["shop_id"] = shop_id
         if quota_type is not UNSET:
@@ -133,15 +148,12 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_weekly_creator_outreach_quota_response_data_data_gmv_level_rule import (
-            GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule,  # noqa: PLC0415
-        )
-        from ..models.get_weekly_creator_outreach_quota_response_data_data_quota_detail import (
-            GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail,  # noqa: PLC0415
-        )
-
+        from ..models.get_weekly_creator_outreach_quota_response_data_data_gmv_level_rule import GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule # noqa: PLC0415
+        from ..models.get_weekly_creator_outreach_quota_response_data_data_quota_detail import GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail # noqa: PLC0415
         d = dict(src_dict)
         shop_id = d.pop("shop_id", UNSET)
 
@@ -170,22 +182,24 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
         if _gmv_level_rule is not UNSET:
             gmv_level_rule = []
             for gmv_level_rule_item_data in _gmv_level_rule:
-                gmv_level_rule_item = GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule.from_dict(
-                    gmv_level_rule_item_data
-                )
+                gmv_level_rule_item = GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule.from_dict(gmv_level_rule_item_data)
+
+
 
                 gmv_level_rule.append(gmv_level_rule_item)
+
 
         _quota_details = d.pop("quota_details", UNSET)
         quota_details: list[GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail] | Unset = UNSET
         if _quota_details is not UNSET:
             quota_details = []
             for quota_details_item_data in _quota_details:
-                quota_details_item = GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail.from_dict(
-                    quota_details_item_data
-                )
+                quota_details_item = GetWeeklyCreatorOutreachQuotaResponseDataDataQuotaDetail.from_dict(quota_details_item_data)
+
+
 
                 quota_details.append(quota_details_item)
+
 
         bonus_exposure_post_percentile_threshold = d.pop("bonus_exposure_post_percentile_threshold", UNSET)
 
@@ -205,6 +219,7 @@ class GetWeeklyCreatorOutreachQuotaResponseDataData:
             quota_details=quota_details,
             bonus_exposure_post_percentile_threshold=bonus_exposure_post_percentile_threshold,
         )
+
 
         get_weekly_creator_outreach_quota_response_data_data.additional_properties = d
         return get_weekly_creator_outreach_quota_response_data_data

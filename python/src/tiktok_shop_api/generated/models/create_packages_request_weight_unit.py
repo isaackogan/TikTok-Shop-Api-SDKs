@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatePackagesRequestWeightUnit(StrEnum):
     GRAM = "GRAM"
     POUND = "POUND"

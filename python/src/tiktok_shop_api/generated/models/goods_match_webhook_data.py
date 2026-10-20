@@ -1,28 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GoodsMatchWebhookData")
+
 
 
 @_attrs_define
 class GoodsMatchWebhookData:
-    """
-    Attributes:
-        match_type (str | Unset): Indicates whether the seller is matching or unmatching products. Possible enumerations
-            are: `MATCH` and `UNMATCH`.
-        product_type (str | Unset): Possible enumerations are: `LOCAL` and `GLOBAL`.
-        goods_id (str | Unset): FBT Goods ID.
-        product_id (str | Unset): TikTok Shop product ID.
-        sku_id (str | Unset): TikTok Shop SKU ID.
-        update_time (int | Unset): The time when the action occurred. Unix timestamp.
-    """
+    """ 
+        Attributes:
+            match_type (str | Unset): Indicates whether the seller is matching or unmatching products. Possible enumerations
+                are: `MATCH` and `UNMATCH`.
+            product_type (str | Unset): Possible enumerations are: `LOCAL` and `GLOBAL`.
+            goods_id (str | Unset): FBT Goods ID.
+            product_id (str | Unset): TikTok Shop product ID.
+            sku_id (str | Unset): TikTok Shop SKU ID.
+            update_time (int | Unset): The time when the action occurred. Unix timestamp.
+     """
 
     match_type: str | Unset = UNSET
     product_type: str | Unset = UNSET
@@ -31,6 +39,10 @@ class GoodsMatchWebhookData:
     sku_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         match_type = self.match_type
@@ -45,9 +57,11 @@ class GoodsMatchWebhookData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if match_type is not UNSET:
             field_dict["match_type"] = match_type
         if product_type is not UNSET:
@@ -62,6 +76,8 @@ class GoodsMatchWebhookData:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -86,6 +102,7 @@ class GoodsMatchWebhookData:
             sku_id=sku_id,
             update_time=update_time,
         )
+
 
         goods_match_webhook_data.additional_properties = d
         return goods_match_webhook_data

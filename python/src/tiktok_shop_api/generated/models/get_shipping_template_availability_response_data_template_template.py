@@ -1,32 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShippingTemplateAvailabilityResponseDataTemplateTemplate")
+
 
 
 @_attrs_define
 class GetShippingTemplateAvailabilityResponseDataTemplateTemplate:
-    """
-    Attributes:
-        template_name (str | Unset): The template name
-        template_id (str | Unset): The template_id
-        is_default (bool | Unset): Is default template or not
-        template_party (int | Unset): 1 for shipping by platform template
-            2 for shipping by seller template
-    """
+    """ 
+        Attributes:
+            template_name (str | Unset): The template name
+            template_id (str | Unset): The template_id
+            is_default (bool | Unset): Is default template or not
+            template_party (int | Unset): 1 for shipping by platform template
+                2 for shipping by seller template
+     """
 
     template_name: str | Unset = UNSET
     template_id: str | Unset = UNSET
     is_default: bool | Unset = UNSET
     template_party: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         template_name = self.template_name
@@ -37,9 +49,11 @@ class GetShippingTemplateAvailabilityResponseDataTemplateTemplate:
 
         template_party = self.template_party
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if template_name is not UNSET:
             field_dict["template_name"] = template_name
         if template_id is not UNSET:
@@ -50,6 +64,8 @@ class GetShippingTemplateAvailabilityResponseDataTemplateTemplate:
             field_dict["template_party"] = template_party
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -68,6 +84,7 @@ class GetShippingTemplateAvailabilityResponseDataTemplateTemplate:
             is_default=is_default,
             template_party=template_party,
         )
+
 
         get_shipping_template_availability_response_data_template_template.additional_properties = d
         return get_shipping_template_availability_response_data_template_template

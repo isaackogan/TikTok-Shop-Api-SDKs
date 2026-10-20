@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PrintInboundOrderLabelsRequestPrintItemsItem(StrEnum):
     CARTON_PALLET_LABEL = "CARTON_PALLET_LABEL"
     FBT_BARCODE = "FBT_BARCODE"

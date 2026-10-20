@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange")
+
 
 
 @_attrs_define
 class GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange:
-    """
-    Attributes:
-        currency (str | Unset): The currency code.
-        minimum_amount (str | Unset): The smallest average GMV per buyer.
-        maximum_amount (str | Unset): The largest average GMV per buyer.
-        formatted_range (str | Unset): The formatted range of average GMV per buyer associated with the creator.
-    """
+    """ 
+        Attributes:
+            currency (str | Unset): The currency code.
+            minimum_amount (str | Unset): The smallest average GMV per buyer.
+            maximum_amount (str | Unset): The largest average GMV per buyer.
+            formatted_range (str | Unset): The formatted range of average GMV per buyer associated with the creator.
+     """
 
     currency: str | Unset = UNSET
     minimum_amount: str | Unset = UNSET
     maximum_amount: str | Unset = UNSET
     formatted_range: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         currency = self.currency
@@ -36,9 +48,11 @@ class GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange:
 
         formatted_range = self.formatted_range
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if currency is not UNSET:
             field_dict["currency"] = currency
         if minimum_amount is not UNSET:
@@ -49,6 +63,8 @@ class GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange:
             field_dict["formatted_range"] = formatted_range
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -67,6 +83,7 @@ class GetMarketplaceCreatorPerformanceResponseDataCreatorAvgGmvPerBuyerRange:
             maximum_amount=maximum_amount,
             formatted_range=formatted_range,
         )
+
 
         get_marketplace_creator_performance_response_data_creator_avg_gmv_per_buyer_range.additional_properties = d
         return get_marketplace_creator_performance_response_data_creator_avg_gmv_per_buyer_range

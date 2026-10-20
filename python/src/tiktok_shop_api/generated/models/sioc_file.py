@@ -1,45 +1,61 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SiocFile")
+
 
 
 @_attrs_define
 class SiocFile:
-    """
-    Attributes:
-        sioc_certification_url (str | Unset): sico attachment url
-        sioc_file_type (str | Unset): sioc attachment type:
-            - PHOTO
-            - DOCUMENT
-            - DROP_TEST_VIDEO
-    """
+    """ 
+        Attributes:
+            sioc_certification_url (str | Unset): sico attachment url
+            sioc_file_type (str | Unset): sioc attachment type:
+                - PHOTO
+                - DOCUMENT
+                - DROP_TEST_VIDEO
+     """
 
     sioc_certification_url: str | Unset = UNSET
     sioc_file_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         sioc_certification_url = self.sioc_certification_url
 
         sioc_file_type = self.sioc_file_type
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if sioc_certification_url is not UNSET:
             field_dict["sioc_certification_url"] = sioc_certification_url
         if sioc_file_type is not UNSET:
             field_dict["sioc_file_type"] = sioc_file_type
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -52,6 +68,7 @@ class SiocFile:
             sioc_certification_url=sioc_certification_url,
             sioc_file_type=sioc_file_type,
         )
+
 
         sioc_file.additional_properties = d
         return sioc_file

@@ -1,35 +1,47 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_showcase_products_response_data_product import GetShowcaseProductsResponseDataProduct
+  from ..models.get_showcase_products_response_data_product import GetShowcaseProductsResponseDataProduct
+
+
+
 
 
 T = TypeVar("T", bound="GetShowcaseProductsResponseData")
 
 
+
 @_attrs_define
 class GetShowcaseProductsResponseData:
-    """
-    Attributes:
-        products (list[GetShowcaseProductsResponseDataProduct] | Unset): A list of products.
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
-        total_count (int | Unset): Total count of products in the response.
-    """
+    """ 
+        Attributes:
+            products (list[GetShowcaseProductsResponseDataProduct] | Unset): A list of products.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set.
+            total_count (int | Unset): Total count of products in the response.
+     """
 
     products: list[GetShowcaseProductsResponseDataProduct] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_showcase_products_response_data_product import GetShowcaseProductsResponseDataProduct # noqa: PLC0415
         products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
@@ -37,13 +49,17 @@ class GetShowcaseProductsResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
+
+
         next_page_token = self.next_page_token
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if products is not UNSET:
             field_dict["products"] = products
         if next_page_token is not UNSET:
@@ -53,12 +69,11 @@ class GetShowcaseProductsResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_showcase_products_response_data_product import (
-            GetShowcaseProductsResponseDataProduct,  # noqa: PLC0415
-        )
-
+        from ..models.get_showcase_products_response_data_product import GetShowcaseProductsResponseDataProduct # noqa: PLC0415
         d = dict(src_dict)
         _products = d.pop("products", UNSET)
         products: list[GetShowcaseProductsResponseDataProduct] | Unset = UNSET
@@ -67,7 +82,10 @@ class GetShowcaseProductsResponseData:
             for products_item_data in _products:
                 products_item = GetShowcaseProductsResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -78,6 +96,7 @@ class GetShowcaseProductsResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         get_showcase_products_response_data.additional_properties = d
         return get_showcase_products_response_data

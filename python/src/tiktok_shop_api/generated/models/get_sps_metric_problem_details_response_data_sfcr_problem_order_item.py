@@ -1,27 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem")
+
 
 
 @_attrs_define
 class GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem:
-    """
-    Attributes:
-        cancellation_reasons (list[str] | Unset): Cancellation reasons.
-        order_create_time (int | Unset): Order creation time. Unix timestamp in seconds.
-        order_id (str | Unset): Order ID.
-        product_id (str | Unset): Product ID, when available.
-        product_name (str | Unset): Product name.
-        sku_id (str | Unset): SKU ID.
-    """
+    """ 
+        Attributes:
+            cancellation_reasons (list[str] | Unset): Cancellation reasons.
+            order_create_time (int | Unset): Order creation time. Unix timestamp in seconds.
+            order_id (str | Unset): Order ID.
+            product_id (str | Unset): Product ID, when available.
+            product_name (str | Unset): Product name.
+            sku_id (str | Unset): SKU ID.
+     """
 
     cancellation_reasons: list[str] | Unset = UNSET
     order_create_time: int | Unset = UNSET
@@ -31,10 +40,16 @@ class GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem:
     sku_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         cancellation_reasons: list[str] | Unset = UNSET
         if not isinstance(self.cancellation_reasons, Unset):
             cancellation_reasons = self.cancellation_reasons
+
+
 
         order_create_time = self.order_create_time
 
@@ -46,9 +61,11 @@ class GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem:
 
         sku_id = self.sku_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if cancellation_reasons is not UNSET:
             field_dict["cancellation_reasons"] = cancellation_reasons
         if order_create_time is not UNSET:
@@ -64,10 +81,13 @@ class GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         cancellation_reasons = cast(list[str], d.pop("cancellation_reasons", UNSET))
+
 
         order_create_time = d.pop("order_create_time", UNSET)
 
@@ -87,6 +107,7 @@ class GetSPSMetricProblemDetailsResponseDataSfcrProblemOrderItem:
             product_name=product_name,
             sku_id=sku_id,
         )
+
 
         get_sps_metric_problem_details_response_data_sfcr_problem_order_item.additional_properties = d
         return get_sps_metric_problem_details_response_data_sfcr_problem_order_item

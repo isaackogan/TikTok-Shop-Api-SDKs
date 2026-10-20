@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricDiagnosisResponseDataDistributionDetail")
+
 
 
 @_attrs_define
 class GetSPSMetricDiagnosisResponseDataDistributionDetail:
-    """
-    Attributes:
-        count (int | Unset): Number of items in the distribution bucket.
-        name (str | Unset): Distribution detail name.
-        percent (str | Unset): Percentage of items in the distribution bucket, from 0 to 100.
-    """
+    """ 
+        Attributes:
+            count (int | Unset): Number of items in the distribution bucket.
+            name (str | Unset): Distribution detail name.
+            percent (str | Unset): Percentage of items in the distribution bucket, from 0 to 100.
+     """
 
     count: int | Unset = UNSET
     name: str | Unset = UNSET
     percent: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         count = self.count
@@ -32,9 +44,11 @@ class GetSPSMetricDiagnosisResponseDataDistributionDetail:
 
         percent = self.percent
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if count is not UNSET:
             field_dict["count"] = count
         if name is not UNSET:
@@ -43,6 +57,8 @@ class GetSPSMetricDiagnosisResponseDataDistributionDetail:
             field_dict["percent"] = percent
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class GetSPSMetricDiagnosisResponseDataDistributionDetail:
             name=name,
             percent=percent,
         )
+
 
         get_sps_metric_diagnosis_response_data_distribution_detail.additional_properties = d
         return get_sps_metric_diagnosis_response_data_distribution_detail

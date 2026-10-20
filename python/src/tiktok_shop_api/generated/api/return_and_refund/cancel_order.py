@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.cancel_order_request import CancelOrderRequest
 from ...models.cancel_order_response import CancelOrderResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CancelOrderRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,9 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CancelOrderResponse | None:
     if response.status_code == 200:
         response_200 = CancelOrderResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -54,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CancelOrderRequest,
+
 ) -> Response[CancelOrderResponse]:
-    """Cancel Order
+    """ Cancel Order
 
      Use this API to cancel an order on behalf of a seller. In the US and UK markets, when an item is out
     of stock, partial cancellation on the single item level is supported by this API.
@@ -69,10 +83,12 @@ def sync_detailed(
 
     Returns:
         Response[CancelOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -81,13 +97,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CancelOrderRequest,
+
 ) -> CancelOrderResponse | None:
-    """Cancel Order
+    """ Cancel Order
 
      Use this API to cancel an order on behalf of a seller. In the US and UK markets, when an item is out
     of stock, partial cancellation on the single item level is supported by this API.
@@ -101,20 +117,22 @@ def sync(
 
     Returns:
         CancelOrderResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CancelOrderRequest,
+
 ) -> Response[CancelOrderResponse]:
-    """Cancel Order
+    """ Cancel Order
 
      Use this API to cancel an order on behalf of a seller. In the US and UK markets, when an item is out
     of stock, partial cancellation on the single item level is supported by this API.
@@ -128,23 +146,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CancelOrderResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CancelOrderRequest,
+
 ) -> CancelOrderResponse | None:
-    """Cancel Order
+    """ Cancel Order
 
      Use this API to cancel an order on behalf of a seller. In the US and UK markets, when an item is out
     of stock, partial cancellation on the single item level is supported by this API.
@@ -158,11 +180,11 @@ async def asyncio(
 
     Returns:
         CancelOrderResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

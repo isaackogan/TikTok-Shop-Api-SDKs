@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class DeleteWebhookForAnEventRequestEventType(StrEnum):
     CANCELLATION_STATUS_CHANGE = "CANCELLATION_STATUS_CHANGE"
     INVOICE_STATUS_CHANGE = "INVOICE_STATUS_CHANGE"

@@ -1,40 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreatePromotionActivityResponseData")
+
 
 
 @_attrs_define
 class CreatePromotionActivityResponseData:
-    """
-    Attributes:
-        activity_id (str | Unset): On success, the ID of the created activity. Use it as `activity_id` when adding
-            products or SKUs with [Update Activity
-            Product](https://partner.tiktokshop.com/docv2/page/650d32c42aaa3602b86ccb5c).
-        create_time (int | Unset): The time when the activity was created.
-        update_time (int | Unset): The time when the activity was last updated.
-        status (str | Unset): Possible values:
-            - DRAFT: Promotion activities with this status are not available to TikTok users.
-            - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
-            start time.
-            - ONGOING: Promotion activities with this status are available to TikTok users.
-            - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
-            - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
-            - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-    """
+    """ 
+        Attributes:
+            activity_id (str | Unset): On success, the ID of the created activity. Use it as `activity_id` when adding
+                products or SKUs with [Update Activity
+                Product](https://partner.tiktokshop.com/docv2/page/650d32c42aaa3602b86ccb5c).
+            create_time (int | Unset): The time when the activity was created.
+            update_time (int | Unset): The time when the activity was last updated.
+            status (str | Unset): Possible values:
+                - DRAFT: Promotion activities with this status are not available to TikTok users.
+                - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
+                start time.
+                - ONGOING: Promotion activities with this status are available to TikTok users.
+                - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
+                - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
+                - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
+     """
 
     activity_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
     status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         activity_id = self.activity_id
@@ -45,9 +57,11 @@ class CreatePromotionActivityResponseData:
 
         status = self.status
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if create_time is not UNSET:
@@ -58,6 +72,8 @@ class CreatePromotionActivityResponseData:
             field_dict["status"] = status
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -76,6 +92,7 @@ class CreatePromotionActivityResponseData:
             update_time=update_time,
             status=status,
         )
+
 
         create_promotion_activity_response_data.additional_properties = d
         return create_promotion_activity_response_data

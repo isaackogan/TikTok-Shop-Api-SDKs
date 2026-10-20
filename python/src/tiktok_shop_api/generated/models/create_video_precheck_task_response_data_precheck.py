@@ -1,37 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateVideoPrecheckTaskResponseDataPrecheck")
+
 
 
 @_attrs_define
 class CreateVideoPrecheckTaskResponseDataPrecheck:
-    """
-    Attributes:
-        task_id (str | Unset): The ID of the created video pre-check task. Pass this value as the `task_id` path
-            parameter to `GET /affiliate_creator/202511/videos/precheck_tasks/{task_id}` to retrieve the result.
-    """
+    """ 
+        Attributes:
+            task_id (str | Unset): The ID of the created video pre-check task. Pass this value as the `task_id` path
+                parameter to `GET /affiliate_creator/202511/videos/precheck_tasks/{task_id}` to retrieve the result.
+     """
 
     task_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         task_id = self.task_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if task_id is not UNSET:
             field_dict["task_id"] = task_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -41,6 +57,7 @@ class CreateVideoPrecheckTaskResponseDataPrecheck:
         create_video_precheck_task_response_data_precheck = cls(
             task_id=task_id,
         )
+
 
         create_video_precheck_task_response_data_precheck.additional_properties = d
         return create_video_precheck_task_response_data_precheck

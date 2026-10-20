@@ -1,37 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption")
+
 
 
 @_attrs_define
 class GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption:
-    """
-    Attributes:
-        shipping_method (str | Unset): Shipping method for this shipment option. Possible values: SMALL_PARCEL, a parcel
-            shipment method; FREIGHT, a freight shipment method.
-    """
+    """ 
+        Attributes:
+            shipping_method (str | Unset): Shipping method for this shipment option. Possible values: SMALL_PARCEL, a parcel
+                shipment method; FREIGHT, a freight shipment method.
+     """
 
     shipping_method: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         shipping_method = self.shipping_method
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if shipping_method is not UNSET:
             field_dict["shipping_method"] = shipping_method
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -41,6 +57,7 @@ class GetInboundMethodDetailResponseDataInfoAllocationShipmentShipmentOption:
         get_inbound_method_detail_response_data_info_allocation_shipment_shipment_option = cls(
             shipping_method=shipping_method,
         )
+
 
         get_inbound_method_detail_response_data_info_allocation_shipment_shipment_option.additional_properties = d
         return get_inbound_method_detail_response_data_info_allocation_shipment_shipment_option

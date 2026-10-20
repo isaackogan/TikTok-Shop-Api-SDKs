@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodBulkyItemAttribute")
+
 
 
 @_attrs_define
 class SearchGoodsInfoResponseDataGoodBulkyItemAttribute:
-    """
-    Attributes:
-        is_bulky_item (bool | Unset): whether the goods is_bulky_item
-        is_bulky_item_accessories (bool | Unset): whether the goods is bulky accessories
-    """
+    """ 
+        Attributes:
+            is_bulky_item (bool | Unset): whether the goods is_bulky_item
+            is_bulky_item_accessories (bool | Unset): whether the goods is bulky accessories
+     """
 
     is_bulky_item: bool | Unset = UNSET
     is_bulky_item_accessories: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         is_bulky_item = self.is_bulky_item
 
         is_bulky_item_accessories = self.is_bulky_item_accessories
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_bulky_item is not UNSET:
             field_dict["is_bulky_item"] = is_bulky_item
         if is_bulky_item_accessories is not UNSET:
             field_dict["is_bulky_item_accessories"] = is_bulky_item_accessories
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class SearchGoodsInfoResponseDataGoodBulkyItemAttribute:
             is_bulky_item=is_bulky_item,
             is_bulky_item_accessories=is_bulky_item_accessories,
         )
+
 
         search_goods_info_response_data_good_bulky_item_attribute.additional_properties = d
         return search_goods_info_response_data_good_bulky_item_attribute

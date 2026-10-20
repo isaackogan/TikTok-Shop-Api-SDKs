@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GeneratePublisherSharingLinksInBatchRequestMaterialType(StrEnum):
     CAMPAIGN = "CAMPAIGN"
     PRODUCT = "PRODUCT"

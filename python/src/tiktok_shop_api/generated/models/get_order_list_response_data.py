@@ -1,37 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_order_list_response_data_order import GetOrderListResponseDataOrder
+  from ..models.get_order_list_response_data_order import GetOrderListResponseDataOrder
+
+
+
 
 
 T = TypeVar("T", bound="GetOrderListResponseData")
 
 
+
 @_attrs_define
 class GetOrderListResponseData:
-    """
-    Attributes:
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
-            this value in the `page_token` parameter of your request if the current response does not return all the
-            results.
-        total_count (int | Unset): Total number of orders in the search result.
-        orders (list[GetOrderListResponseDataOrder] | Unset): Order information.
-    """
+    """ 
+        Attributes:
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
+                this value in the `page_token` parameter of your request if the current response does not return all the
+                results.
+            total_count (int | Unset): Total number of orders in the search result.
+            orders (list[GetOrderListResponseDataOrder] | Unset): Order information.
+     """
 
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     orders: list[GetOrderListResponseDataOrder] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_order_list_response_data_order import GetOrderListResponseDataOrder # noqa: PLC0415
         next_page_token = self.next_page_token
 
         total_count = self.total_count
@@ -43,9 +55,13 @@ class GetOrderListResponseData:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if next_page_token is not UNSET:
             field_dict["next_page_token"] = next_page_token
         if total_count is not UNSET:
@@ -55,10 +71,11 @@ class GetOrderListResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_order_list_response_data_order import GetOrderListResponseDataOrder  # noqa: PLC0415
-
+        from ..models.get_order_list_response_data_order import GetOrderListResponseDataOrder # noqa: PLC0415
         d = dict(src_dict)
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -71,13 +88,17 @@ class GetOrderListResponseData:
             for orders_item_data in _orders:
                 orders_item = GetOrderListResponseDataOrder.from_dict(orders_item_data)
 
+
+
                 orders.append(orders_item)
+
 
         get_order_list_response_data = cls(
             next_page_token=next_page_token,
             total_count=total_count,
             orders=orders,
         )
+
 
         get_order_list_response_data.additional_properties = d
         return get_order_list_response_data

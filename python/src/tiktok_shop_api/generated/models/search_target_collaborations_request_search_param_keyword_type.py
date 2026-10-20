@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchTargetCollaborationsRequestSearchParamKeywordType(StrEnum):
     PRODUCT_ID = "PRODUCT_ID"
     PRODUCT_NAME = "PRODUCT_NAME"

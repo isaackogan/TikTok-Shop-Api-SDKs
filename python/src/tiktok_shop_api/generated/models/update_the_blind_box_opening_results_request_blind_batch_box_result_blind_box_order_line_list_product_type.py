@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineListProductType(StrEnum):
     GIFT = "GIFT"
     NORMAL = "NORMAL"

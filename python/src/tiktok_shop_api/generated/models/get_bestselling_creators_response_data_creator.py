@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetBestsellingCreatorsResponseDataCreator")
+
 
 
 @_attrs_define
 class GetBestsellingCreatorsResponseDataCreator:
-    """
-    Attributes:
-        rank (int | Unset): GMV rank of the creator.
-        gmv_range (str | Unset): The creator's GMV range for the selected reporting period, expressed in the currency
-            selected by `currency`.
-        open_id (str | Unset): Creator's open id, use this open id to identify a creator.
-        user_name (str | Unset): The creator's account handle.
-        nick_name (str | Unset): The creator's display name.
-        followers_count (int | Unset): Number of followers
-        likes_count (int | Unset): Number of likes
-    """
+    """ 
+        Attributes:
+            rank (int | Unset): GMV rank of the creator.
+            gmv_range (str | Unset): The creator's GMV range for the selected reporting period, expressed in the currency
+                selected by `currency`.
+            open_id (str | Unset): Creator's open id, use this open id to identify a creator.
+            user_name (str | Unset): The creator's account handle.
+            nick_name (str | Unset): The creator's display name.
+            followers_count (int | Unset): Number of followers
+            likes_count (int | Unset): Number of likes
+     """
 
     rank: int | Unset = UNSET
     gmv_range: str | Unset = UNSET
@@ -33,6 +41,10 @@ class GetBestsellingCreatorsResponseDataCreator:
     followers_count: int | Unset = UNSET
     likes_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         rank = self.rank
@@ -49,9 +61,11 @@ class GetBestsellingCreatorsResponseDataCreator:
 
         likes_count = self.likes_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if rank is not UNSET:
             field_dict["rank"] = rank
         if gmv_range is not UNSET:
@@ -68,6 +82,8 @@ class GetBestsellingCreatorsResponseDataCreator:
             field_dict["likes_count"] = likes_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -95,6 +111,7 @@ class GetBestsellingCreatorsResponseDataCreator:
             followers_count=followers_count,
             likes_count=likes_count,
         )
+
 
         get_bestselling_creators_response_data_creator.additional_properties = d
         return get_bestselling_creators_response_data_creator

@@ -1,27 +1,36 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetSPSMetricTopItemsResponseDataNrrTopProductItem")
+
 
 
 @_attrs_define
 class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
-    """
-    Attributes:
-        delivered_order_count (int | Unset): Total number of delivered orders.
-        image_url (str | Unset): Product image URL.
-        negative_order_count (int | Unset): Number of orders with negative reviews.
-        product_id (str | Unset): Product ID.
-        product_name (str | Unset): Product name.
-        top_review_reasons (list[str] | Unset): Top negative review reasons.
-    """
+    """ 
+        Attributes:
+            delivered_order_count (int | Unset): Total number of delivered orders.
+            image_url (str | Unset): Product image URL.
+            negative_order_count (int | Unset): Number of orders with negative reviews.
+            product_id (str | Unset): Product ID.
+            product_name (str | Unset): Product name.
+            top_review_reasons (list[str] | Unset): Top negative review reasons.
+     """
 
     delivered_order_count: int | Unset = UNSET
     image_url: str | Unset = UNSET
@@ -30,6 +39,10 @@ class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
     product_name: str | Unset = UNSET
     top_review_reasons: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         delivered_order_count = self.delivered_order_count
@@ -46,9 +59,13 @@ class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
         if not isinstance(self.top_review_reasons, Unset):
             top_review_reasons = self.top_review_reasons
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if delivered_order_count is not UNSET:
             field_dict["delivered_order_count"] = delivered_order_count
         if image_url is not UNSET:
@@ -63,6 +80,8 @@ class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
             field_dict["top_review_reasons"] = top_review_reasons
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +98,7 @@ class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
 
         top_review_reasons = cast(list[str], d.pop("top_review_reasons", UNSET))
 
+
         get_sps_metric_top_items_response_data_nrr_top_product_item = cls(
             delivered_order_count=delivered_order_count,
             image_url=image_url,
@@ -87,6 +107,7 @@ class GetSPSMetricTopItemsResponseDataNrrTopProductItem:
             product_name=product_name,
             top_review_reasons=top_review_reasons,
         )
+
 
         get_sps_metric_top_items_response_data_nrr_top_product_item.additional_properties = d
         return get_sps_metric_top_items_response_data_nrr_top_product_item

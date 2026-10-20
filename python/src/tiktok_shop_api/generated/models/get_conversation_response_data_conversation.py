@@ -1,38 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.cur_session import CurSession
-    from ..models.get_conversation_response_data_conversation_participant import (
-        GetConversationResponseDataConversationParticipant,
-    )
+  from ..models.cur_session import CurSession
+  from ..models.get_conversation_response_data_conversation_participant import GetConversationResponseDataConversationParticipant
+
+
+
 
 
 T = TypeVar("T", bound="GetConversationResponseDataConversation")
 
 
+
 @_attrs_define
 class GetConversationResponseDataConversation:
-    """
-    Attributes:
-        id (str | Unset): Conversation ID
-        participant_count (int | Unset): Number of participants in the conversation.
-            - If there has been no customer service agent in the conversation, the value is `2`: the shop and the buyer;
-            - Otherwise, the value is `3`: the shop, the buyer, and the customer service agent.
-        participants (list[GetConversationResponseDataConversationParticipant] | Unset): Conversation participants.
-        create_time (int | Unset): Unix timestamp when the conversation was created. In seconds.
-        unread_count (int | Unset): Number of messages unread by the customer service agent.
-        cur_session_id (str | Unset): ID of the current open session. This field is returned when `need_session_id` or
-            `need_session_info` is `true` and current open session information is available.
-        cur_session (CurSession | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Conversation ID
+            participant_count (int | Unset): Number of participants in the conversation.
+                - If there has been no customer service agent in the conversation, the value is `2`: the shop and the buyer;
+                - Otherwise, the value is `3`: the shop, the buyer, and the customer service agent.
+            participants (list[GetConversationResponseDataConversationParticipant] | Unset): Conversation participants.
+            create_time (int | Unset): Unix timestamp when the conversation was created. In seconds.
+            unread_count (int | Unset): Number of messages unread by the customer service agent.
+            cur_session_id (str | Unset): ID of the current open session. This field is returned when `need_session_id` or
+                `need_session_info` is `true` and current open session information is available.
+            cur_session (CurSession | Unset):
+     """
 
     id: str | Unset = UNSET
     participant_count: int | Unset = UNSET
@@ -43,7 +48,13 @@ class GetConversationResponseDataConversation:
     cur_session: CurSession | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.cur_session import CurSession # noqa: PLC0415
+        from ..models.get_conversation_response_data_conversation_participant import GetConversationResponseDataConversationParticipant # noqa: PLC0415
         id = self.id
 
         participant_count = self.participant_count
@@ -55,6 +66,8 @@ class GetConversationResponseDataConversation:
                 participants_item = participants_item_data.to_dict()
                 participants.append(participants_item)
 
+
+
         create_time = self.create_time
 
         unread_count = self.unread_count
@@ -65,9 +78,11 @@ class GetConversationResponseDataConversation:
         if not isinstance(self.cur_session, Unset):
             cur_session = self.cur_session.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if participant_count is not UNSET:
@@ -85,13 +100,12 @@ class GetConversationResponseDataConversation:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.cur_session import CurSession  # noqa: PLC0415
-        from ..models.get_conversation_response_data_conversation_participant import (
-            GetConversationResponseDataConversationParticipant,  # noqa: PLC0415
-        )
-
+        from ..models.cur_session import CurSession # noqa: PLC0415
+        from ..models.get_conversation_response_data_conversation_participant import GetConversationResponseDataConversationParticipant # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -104,7 +118,10 @@ class GetConversationResponseDataConversation:
             for participants_item_data in _participants:
                 participants_item = GetConversationResponseDataConversationParticipant.from_dict(participants_item_data)
 
+
+
                 participants.append(participants_item)
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -114,10 +131,13 @@ class GetConversationResponseDataConversation:
 
         _cur_session = d.pop("cur_session", UNSET)
         cur_session: CurSession | Unset
-        if isinstance(_cur_session, Unset):
+        if isinstance(_cur_session,  Unset):
             cur_session = UNSET
         else:
             cur_session = CurSession.from_dict(_cur_session)
+
+
+
 
         get_conversation_response_data_conversation = cls(
             id=id,
@@ -128,6 +148,7 @@ class GetConversationResponseDataConversation:
             cur_session_id=cur_session_id,
             cur_session=cur_session,
         )
+
 
         get_conversation_response_data_conversation.additional_properties = d
         return get_conversation_response_data_conversation

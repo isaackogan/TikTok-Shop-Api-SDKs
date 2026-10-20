@@ -1,78 +1,83 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.actual_bonus_commission import ActualBonusCommission
-    from ..models.actual_commission import ActualCommission
-    from ..models.actual_commission_base import ActualCommissionBase
-    from ..models.actual_creator_commission_reward_fee import ActualCreatorCommissionRewardFee
-    from ..models.actual_shop_ads_commission import ActualShopAdsCommission
-    from ..models.estimated_bonus_commission import EstimatedBonusCommission
-    from ..models.estimated_commission import EstimatedCommission
-    from ..models.estimated_commission_base import EstimatedCommissionBase
-    from ..models.estimated_creator_commission_reward_fee import EstimatedCreatorCommissionRewardFee
-    from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission
-    from ..models.price import Price
-    from ..models.search_affiliate_orders_by_creator_response_data_order_sku_trace import (
-        SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace,
-    )
+  from ..models.actual_bonus_commission import ActualBonusCommission
+  from ..models.actual_commission import ActualCommission
+  from ..models.actual_commission_base import ActualCommissionBase
+  from ..models.actual_creator_commission_reward_fee import ActualCreatorCommissionRewardFee
+  from ..models.actual_shop_ads_commission import ActualShopAdsCommission
+  from ..models.estimated_bonus_commission import EstimatedBonusCommission
+  from ..models.estimated_commission import EstimatedCommission
+  from ..models.estimated_commission_base import EstimatedCommissionBase
+  from ..models.estimated_creator_commission_reward_fee import EstimatedCreatorCommissionRewardFee
+  from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission
+  from ..models.price import Price
+  from ..models.search_affiliate_orders_by_creator_response_data_order_sku_trace import SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace
+
+
+
 
 
 T = TypeVar("T", bound="SearchAffiliateOrdersByCreatorResponseDataOrderSku")
 
 
+
 @_attrs_define
 class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
-    """
-    Attributes:
-        id (str | Unset): The SKU identifier.
-        product_id (str | Unset): The product identifier.
-        price (Price | Unset):
-        quantity (int | Unset): The quantity of this SKU in the order.
-        commission_rate (int | Unset): The commission rate associated with the collaboration, in hundredths of a
-            percent. The value does not include a percent sign. For example, `3000` represents 30%.
-        estimated_commission_base (EstimatedCommissionBase | Unset):
-        actual_commission (ActualCommission | Unset):
-        shop_ads_commission_rate (int | Unset): The commission rate received by a creator for a sale associated with a
-            specific piece of content, in hundredths of a percent. The value does not include a percent sign. For example,
-            `3000` represents 30%.
-        commission_bonus_rate (int | Unset): The commission bonus rate associated with the collaboration, in hundredths
-            of a percent. The value does not include a percent sign. For example, `3000` represents 30%.
-        product_name (str | Unset): The product name in the TikTok Shop.
-        shop_name (str | Unset): The name of the TIkTok Shop in which the product is offered for sale.
-        returned_quantity (int | Unset): The returned quantity of this SKU in the order.
-        refunded_quantity (int | Unset): The refunded quantity of this SKU in the order.
-        campaign_id (str | Unset): The campaign identifier associated with the order.
-        actual_commission_base (ActualCommissionBase | Unset):
-        actual_shop_ads_commission (ActualShopAdsCommission | Unset):
-        estimated_shop_ads_commission (EstimatedShopAdsCommission | Unset):
-        estimated_bonus_commission (EstimatedBonusCommission | Unset):
-        delivery_time (int | Unset): Time and date order delivered, UTC+0 timing
-        creator_commission_reward_rate (int | Unset): The commission reward rate that affiliate partners allocate to
-            creators, in hundredths of a percent. The value does not include a percent sign. For example, `1000` represents
-            10%.
-        estimated_creator_commission_reward_fee (EstimatedCreatorCommissionRewardFee | Unset):
-        actual_creator_commission_reward_fee (ActualCreatorCommissionRewardFee | Unset):
-        content_type (str | Unset): The content format of the creator content through which the order was created.
-            Possible values:
-            - SHOP
-            - VIDEO
-            - LIVE
-            - PRE_LIVE
-            - PROMOTION_PAGE
-            - LINKSHARE
-        content_id (str | Unset): The content identifier for the creator content through which the order was created.
-        trace (SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace | Unset):
-        estimated_commission (EstimatedCommission | Unset):
-        actual_bonus_commission (ActualBonusCommission | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The SKU identifier.
+            product_id (str | Unset): The product identifier.
+            price (Price | Unset):
+            quantity (int | Unset): The quantity of this SKU in the order.
+            commission_rate (int | Unset): The commission rate associated with the collaboration, in hundredths of a
+                percent. The value does not include a percent sign. For example, `3000` represents 30%.
+            estimated_commission_base (EstimatedCommissionBase | Unset):
+            actual_commission (ActualCommission | Unset):
+            shop_ads_commission_rate (int | Unset): The commission rate received by a creator for a sale associated with a
+                specific piece of content, in hundredths of a percent. The value does not include a percent sign. For example,
+                `3000` represents 30%.
+            commission_bonus_rate (int | Unset): The commission bonus rate associated with the collaboration, in hundredths
+                of a percent. The value does not include a percent sign. For example, `3000` represents 30%.
+            product_name (str | Unset): The product name in the TikTok Shop.
+            shop_name (str | Unset): The name of the TIkTok Shop in which the product is offered for sale.
+            returned_quantity (int | Unset): The returned quantity of this SKU in the order.
+            refunded_quantity (int | Unset): The refunded quantity of this SKU in the order.
+            campaign_id (str | Unset): The campaign identifier associated with the order.
+            actual_commission_base (ActualCommissionBase | Unset):
+            actual_shop_ads_commission (ActualShopAdsCommission | Unset):
+            estimated_shop_ads_commission (EstimatedShopAdsCommission | Unset):
+            estimated_bonus_commission (EstimatedBonusCommission | Unset):
+            delivery_time (int | Unset): Time and date order delivered, UTC+0 timing
+            creator_commission_reward_rate (int | Unset): The commission reward rate that affiliate partners allocate to
+                creators, in hundredths of a percent. The value does not include a percent sign. For example, `1000` represents
+                10%.
+            estimated_creator_commission_reward_fee (EstimatedCreatorCommissionRewardFee | Unset):
+            actual_creator_commission_reward_fee (ActualCreatorCommissionRewardFee | Unset):
+            content_type (str | Unset): The content format of the creator content through which the order was created.
+                Possible values:
+                - SHOP
+                - VIDEO
+                - LIVE
+                - PRE_LIVE
+                - PROMOTION_PAGE
+                - LINKSHARE
+            content_id (str | Unset): The content identifier for the creator content through which the order was created.
+            trace (SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace | Unset):
+            estimated_commission (EstimatedCommission | Unset):
+            actual_bonus_commission (ActualBonusCommission | Unset):
+     """
 
     id: str | Unset = UNSET
     product_id: str | Unset = UNSET
@@ -103,7 +108,23 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
     actual_bonus_commission: ActualBonusCommission | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.actual_bonus_commission import ActualBonusCommission # noqa: PLC0415
+        from ..models.actual_commission import ActualCommission # noqa: PLC0415
+        from ..models.actual_commission_base import ActualCommissionBase # noqa: PLC0415
+        from ..models.actual_creator_commission_reward_fee import ActualCreatorCommissionRewardFee # noqa: PLC0415
+        from ..models.actual_shop_ads_commission import ActualShopAdsCommission # noqa: PLC0415
+        from ..models.estimated_bonus_commission import EstimatedBonusCommission # noqa: PLC0415
+        from ..models.estimated_commission import EstimatedCommission # noqa: PLC0415
+        from ..models.estimated_commission_base import EstimatedCommissionBase # noqa: PLC0415
+        from ..models.estimated_creator_commission_reward_fee import EstimatedCreatorCommissionRewardFee # noqa: PLC0415
+        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
+        from ..models.search_affiliate_orders_by_creator_response_data_order_sku_trace import SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace # noqa: PLC0415
         id = self.id
 
         product_id = self.product_id
@@ -182,9 +203,11 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
         if not isinstance(self.actual_bonus_commission, Unset):
             actual_bonus_commission = self.actual_bonus_commission.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if product_id is not UNSET:
@@ -242,25 +265,22 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.actual_bonus_commission import ActualBonusCommission  # noqa: PLC0415
-        from ..models.actual_commission import ActualCommission  # noqa: PLC0415
-        from ..models.actual_commission_base import ActualCommissionBase  # noqa: PLC0415
-        from ..models.actual_creator_commission_reward_fee import ActualCreatorCommissionRewardFee  # noqa: PLC0415
-        from ..models.actual_shop_ads_commission import ActualShopAdsCommission  # noqa: PLC0415
-        from ..models.estimated_bonus_commission import EstimatedBonusCommission  # noqa: PLC0415
-        from ..models.estimated_commission import EstimatedCommission  # noqa: PLC0415
-        from ..models.estimated_commission_base import EstimatedCommissionBase  # noqa: PLC0415
-        from ..models.estimated_creator_commission_reward_fee import (
-            EstimatedCreatorCommissionRewardFee,  # noqa: PLC0415
-        )
-        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission  # noqa: PLC0415
-        from ..models.price import Price  # noqa: PLC0415
-        from ..models.search_affiliate_orders_by_creator_response_data_order_sku_trace import (
-            SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace,  # noqa: PLC0415
-        )
-
+        from ..models.actual_bonus_commission import ActualBonusCommission # noqa: PLC0415
+        from ..models.actual_commission import ActualCommission # noqa: PLC0415
+        from ..models.actual_commission_base import ActualCommissionBase # noqa: PLC0415
+        from ..models.actual_creator_commission_reward_fee import ActualCreatorCommissionRewardFee # noqa: PLC0415
+        from ..models.actual_shop_ads_commission import ActualShopAdsCommission # noqa: PLC0415
+        from ..models.estimated_bonus_commission import EstimatedBonusCommission # noqa: PLC0415
+        from ..models.estimated_commission import EstimatedCommission # noqa: PLC0415
+        from ..models.estimated_commission_base import EstimatedCommissionBase # noqa: PLC0415
+        from ..models.estimated_creator_commission_reward_fee import EstimatedCreatorCommissionRewardFee # noqa: PLC0415
+        from ..models.estimated_shop_ads_commission import EstimatedShopAdsCommission # noqa: PLC0415
+        from ..models.price import Price # noqa: PLC0415
+        from ..models.search_affiliate_orders_by_creator_response_data_order_sku_trace import SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -268,10 +288,13 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         _price = d.pop("price", UNSET)
         price: Price | Unset
-        if isinstance(_price, Unset):
+        if isinstance(_price,  Unset):
             price = UNSET
         else:
             price = Price.from_dict(_price)
+
+
+
 
         quantity = d.pop("quantity", UNSET)
 
@@ -279,17 +302,23 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         _estimated_commission_base = d.pop("estimated_commission_base", UNSET)
         estimated_commission_base: EstimatedCommissionBase | Unset
-        if isinstance(_estimated_commission_base, Unset):
+        if isinstance(_estimated_commission_base,  Unset):
             estimated_commission_base = UNSET
         else:
             estimated_commission_base = EstimatedCommissionBase.from_dict(_estimated_commission_base)
 
+
+
+
         _actual_commission = d.pop("actual_commission", UNSET)
         actual_commission: ActualCommission | Unset
-        if isinstance(_actual_commission, Unset):
+        if isinstance(_actual_commission,  Unset):
             actual_commission = UNSET
         else:
             actual_commission = ActualCommission.from_dict(_actual_commission)
+
+
+
 
         shop_ads_commission_rate = d.pop("shop_ads_commission_rate", UNSET)
 
@@ -307,31 +336,43 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         _actual_commission_base = d.pop("actual_commission_base", UNSET)
         actual_commission_base: ActualCommissionBase | Unset
-        if isinstance(_actual_commission_base, Unset):
+        if isinstance(_actual_commission_base,  Unset):
             actual_commission_base = UNSET
         else:
             actual_commission_base = ActualCommissionBase.from_dict(_actual_commission_base)
 
+
+
+
         _actual_shop_ads_commission = d.pop("actual_shop_ads_commission", UNSET)
         actual_shop_ads_commission: ActualShopAdsCommission | Unset
-        if isinstance(_actual_shop_ads_commission, Unset):
+        if isinstance(_actual_shop_ads_commission,  Unset):
             actual_shop_ads_commission = UNSET
         else:
             actual_shop_ads_commission = ActualShopAdsCommission.from_dict(_actual_shop_ads_commission)
 
+
+
+
         _estimated_shop_ads_commission = d.pop("estimated_shop_ads_commission", UNSET)
         estimated_shop_ads_commission: EstimatedShopAdsCommission | Unset
-        if isinstance(_estimated_shop_ads_commission, Unset):
+        if isinstance(_estimated_shop_ads_commission,  Unset):
             estimated_shop_ads_commission = UNSET
         else:
             estimated_shop_ads_commission = EstimatedShopAdsCommission.from_dict(_estimated_shop_ads_commission)
 
+
+
+
         _estimated_bonus_commission = d.pop("estimated_bonus_commission", UNSET)
         estimated_bonus_commission: EstimatedBonusCommission | Unset
-        if isinstance(_estimated_bonus_commission, Unset):
+        if isinstance(_estimated_bonus_commission,  Unset):
             estimated_bonus_commission = UNSET
         else:
             estimated_bonus_commission = EstimatedBonusCommission.from_dict(_estimated_bonus_commission)
+
+
+
 
         delivery_time = d.pop("delivery_time", UNSET)
 
@@ -339,21 +380,23 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         _estimated_creator_commission_reward_fee = d.pop("estimated_creator_commission_reward_fee", UNSET)
         estimated_creator_commission_reward_fee: EstimatedCreatorCommissionRewardFee | Unset
-        if isinstance(_estimated_creator_commission_reward_fee, Unset):
+        if isinstance(_estimated_creator_commission_reward_fee,  Unset):
             estimated_creator_commission_reward_fee = UNSET
         else:
-            estimated_creator_commission_reward_fee = EstimatedCreatorCommissionRewardFee.from_dict(
-                _estimated_creator_commission_reward_fee
-            )
+            estimated_creator_commission_reward_fee = EstimatedCreatorCommissionRewardFee.from_dict(_estimated_creator_commission_reward_fee)
+
+
+
 
         _actual_creator_commission_reward_fee = d.pop("actual_creator_commission_reward_fee", UNSET)
         actual_creator_commission_reward_fee: ActualCreatorCommissionRewardFee | Unset
-        if isinstance(_actual_creator_commission_reward_fee, Unset):
+        if isinstance(_actual_creator_commission_reward_fee,  Unset):
             actual_creator_commission_reward_fee = UNSET
         else:
-            actual_creator_commission_reward_fee = ActualCreatorCommissionRewardFee.from_dict(
-                _actual_creator_commission_reward_fee
-            )
+            actual_creator_commission_reward_fee = ActualCreatorCommissionRewardFee.from_dict(_actual_creator_commission_reward_fee)
+
+
+
 
         content_type = d.pop("content_type", UNSET)
 
@@ -361,24 +404,33 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
 
         _trace = d.pop("trace", UNSET)
         trace: SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace | Unset
-        if isinstance(_trace, Unset):
+        if isinstance(_trace,  Unset):
             trace = UNSET
         else:
             trace = SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace.from_dict(_trace)
 
+
+
+
         _estimated_commission = d.pop("estimated_commission", UNSET)
         estimated_commission: EstimatedCommission | Unset
-        if isinstance(_estimated_commission, Unset):
+        if isinstance(_estimated_commission,  Unset):
             estimated_commission = UNSET
         else:
             estimated_commission = EstimatedCommission.from_dict(_estimated_commission)
 
+
+
+
         _actual_bonus_commission = d.pop("actual_bonus_commission", UNSET)
         actual_bonus_commission: ActualBonusCommission | Unset
-        if isinstance(_actual_bonus_commission, Unset):
+        if isinstance(_actual_bonus_commission,  Unset):
             actual_bonus_commission = UNSET
         else:
             actual_bonus_commission = ActualBonusCommission.from_dict(_actual_bonus_commission)
+
+
+
 
         search_affiliate_orders_by_creator_response_data_order_sku = cls(
             id=id,
@@ -409,6 +461,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
             estimated_commission=estimated_commission,
             actual_bonus_commission=actual_bonus_commission,
         )
+
 
         search_affiliate_orders_by_creator_response_data_order_sku.additional_properties = d
         return search_affiliate_orders_by_creator_response_data_order_sku

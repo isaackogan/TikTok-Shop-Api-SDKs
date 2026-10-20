@@ -1,34 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_shop_live_performance_overview_response_data_performance_interval import (
-        GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval,
-    )
+  from ..models.get_shop_live_performance_overview_response_data_performance_interval import GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval
+
+
+
 
 
 T = TypeVar("T", bound="GetShopLIVEPerformanceOverviewResponseDataPerformance")
 
 
+
 @_attrs_define
 class GetShopLIVEPerformanceOverviewResponseDataPerformance:
-    """
-    Attributes:
-        intervals (list[GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval] | Unset): Interval data for the
-            requested time range. The time range of each interval is determined by the granularity.
-    """
+    """ 
+        Attributes:
+            intervals (list[GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval] | Unset): Interval data for the
+                requested time range. The time range of each interval is determined by the granularity.
+     """
 
     intervals: list[GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_live_performance_overview_response_data_performance_interval import GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval # noqa: PLC0415
         intervals: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.intervals, Unset):
             intervals = []
@@ -36,35 +46,40 @@ class GetShopLIVEPerformanceOverviewResponseDataPerformance:
                 intervals_item = intervals_item_data.to_dict()
                 intervals.append(intervals_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if intervals is not UNSET:
             field_dict["intervals"] = intervals
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_shop_live_performance_overview_response_data_performance_interval import (
-            GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval,  # noqa: PLC0415
-        )
-
+        from ..models.get_shop_live_performance_overview_response_data_performance_interval import GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval # noqa: PLC0415
         d = dict(src_dict)
         _intervals = d.pop("intervals", UNSET)
         intervals: list[GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval] | Unset = UNSET
         if _intervals is not UNSET:
             intervals = []
             for intervals_item_data in _intervals:
-                intervals_item = GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval.from_dict(
-                    intervals_item_data
-                )
+                intervals_item = GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval.from_dict(intervals_item_data)
+
+
 
                 intervals.append(intervals_item)
+
 
         get_shop_live_performance_overview_response_data_performance = cls(
             intervals=intervals,
         )
+
 
         get_shop_live_performance_overview_response_data_performance.additional_properties = d
         return get_shop_live_performance_overview_response_data_performance

@@ -1,38 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.submit_customs_clearance_information_request_order_list_item_list_item_detail import (
-        SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail,
-    )
+  from ..models.submit_customs_clearance_information_request_order_list_item_list_item_detail import SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail
+
+
+
 
 
 T = TypeVar("T", bound="SubmitCustomsClearanceInformationRequestOrderListItemList")
 
 
+
 @_attrs_define
 class SubmitCustomsClearanceInformationRequestOrderListItemList:
-    """
-    Attributes:
-        order_line_id (str | Unset): Sub order ID; order_line_id and sku_id should not be both empty.
-        sku_id (str | Unset): SKU ID; order_line_id and sku_id should not be both empty.
-        item_detail (list[SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail] | Unset): List of SKU-
-            level customs clearance details for the order line.
-    """
+    """ 
+        Attributes:
+            order_line_id (str | Unset): Sub order ID; order_line_id and sku_id should not be both empty.
+            sku_id (str | Unset): SKU ID; order_line_id and sku_id should not be both empty.
+            item_detail (list[SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail] | Unset): List of SKU-
+                level customs clearance details for the order line.
+     """
 
     order_line_id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
     item_detail: list[SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.submit_customs_clearance_information_request_order_list_item_list_item_detail import SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail # noqa: PLC0415
         order_line_id = self.order_line_id
 
         sku_id = self.sku_id
@@ -44,9 +54,13 @@ class SubmitCustomsClearanceInformationRequestOrderListItemList:
                 item_detail_item = item_detail_item_data.to_dict()
                 item_detail.append(item_detail_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_line_id is not UNSET:
             field_dict["order_line_id"] = order_line_id
         if sku_id is not UNSET:
@@ -56,12 +70,11 @@ class SubmitCustomsClearanceInformationRequestOrderListItemList:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.submit_customs_clearance_information_request_order_list_item_list_item_detail import (
-            SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail,  # noqa: PLC0415
-        )
-
+        from ..models.submit_customs_clearance_information_request_order_list_item_list_item_detail import SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail # noqa: PLC0415
         d = dict(src_dict)
         order_line_id = d.pop("order_line_id", UNSET)
 
@@ -72,17 +85,19 @@ class SubmitCustomsClearanceInformationRequestOrderListItemList:
         if _item_detail is not UNSET:
             item_detail = []
             for item_detail_item_data in _item_detail:
-                item_detail_item = SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail.from_dict(
-                    item_detail_item_data
-                )
+                item_detail_item = SubmitCustomsClearanceInformationRequestOrderListItemListItemDetail.from_dict(item_detail_item_data)
+
+
 
                 item_detail.append(item_detail_item)
+
 
         submit_customs_clearance_information_request_order_list_item_list = cls(
             order_line_id=order_line_id,
             sku_id=sku_id,
             item_detail=item_detail,
         )
+
 
         submit_customs_clearance_information_request_order_list_item_list.additional_properties = d
         return submit_customs_clearance_information_request_order_list_item_list

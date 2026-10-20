@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.update_stock_operation_settings_request import UpdateStockOperationSettingsRequest
 from ...models.update_stock_operation_settings_response import UpdateStockOperationSettingsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: UpdateStockOperationSettingsRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> UpdateStockOperationSettingsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> UpdateStockOperationSettingsResponse | None:
     if response.status_code == 200:
         response_200 = UpdateStockOperationSettingsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[UpdateStockOperationSettingsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[UpdateStockOperationSettingsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdateStockOperationSettingsRequest,
+
 ) -> Response[UpdateStockOperationSettingsResponse]:
-    """Update Stock Operation Settings
+    """ Update Stock Operation Settings
 
      Configure auto-restock behavior for 1 to 500 SKUs in one request. For seller-fulfilled orders, this
     setting controls whether inventory reserved for a canceled order is returned to the SKU's available
@@ -74,10 +84,12 @@ def sync_detailed(
 
     Returns:
         Response[UpdateStockOperationSettingsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -86,13 +98,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: UpdateStockOperationSettingsRequest,
+
 ) -> UpdateStockOperationSettingsResponse | None:
-    """Update Stock Operation Settings
+    """ Update Stock Operation Settings
 
      Configure auto-restock behavior for 1 to 500 SKUs in one request. For seller-fulfilled orders, this
     setting controls whether inventory reserved for a canceled order is returned to the SKU's available
@@ -107,20 +119,22 @@ def sync(
 
     Returns:
         UpdateStockOperationSettingsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: UpdateStockOperationSettingsRequest,
+
 ) -> Response[UpdateStockOperationSettingsResponse]:
-    """Update Stock Operation Settings
+    """ Update Stock Operation Settings
 
      Configure auto-restock behavior for 1 to 500 SKUs in one request. For seller-fulfilled orders, this
     setting controls whether inventory reserved for a canceled order is returned to the SKU's available
@@ -135,23 +149,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[UpdateStockOperationSettingsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: UpdateStockOperationSettingsRequest,
+
 ) -> UpdateStockOperationSettingsResponse | None:
-    """Update Stock Operation Settings
+    """ Update Stock Operation Settings
 
      Configure auto-restock behavior for 1 to 500 SKUs in one request. For seller-fulfilled orders, this
     setting controls whether inventory reserved for a canceled order is returned to the SKU's available
@@ -166,11 +184,11 @@ async def asyncio(
 
     Returns:
         UpdateStockOperationSettingsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

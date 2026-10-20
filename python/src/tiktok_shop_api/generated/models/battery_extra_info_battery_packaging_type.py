@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class BatteryExtraInfoBatteryPackagingType(StrEnum):
     IN_EQUIPMENT = "IN_EQUIPMENT"
     OTHER = "OTHER"

@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.submit_strikethrough_price_request import SubmitStrikethroughPriceRequest
 from ...models.submit_strikethrough_price_response import SubmitStrikethroughPriceResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     product_id: str,
     *,
     body: SubmitStrikethroughPriceRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202609/products/{product_id}/strikethrough_price/submit".format(
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/product/202609/products/{product_id}/strikethrough_price/submit".format(product_id=quote(str(product_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,11 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SubmitStrikethroughPriceResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SubmitStrikethroughPriceResponse | None:
     if response.status_code == 200:
         response_200 = SubmitStrikethroughPriceResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -47,9 +55,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SubmitStrikethroughPriceResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SubmitStrikethroughPriceResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitStrikethroughPriceRequest,
+
 ) -> Response[SubmitStrikethroughPriceResponse]:
-    """Submit Strikethrough Price
+    """ Submit Strikethrough Price
 
      Submit external pricing information for a product's SKUs so that TikTok Shop can verify the
     product's list price for use as a strikethrough price. If the submitted information is approved, the
@@ -83,11 +90,13 @@ def sync_detailed(
 
     Returns:
         Response[SubmitStrikethroughPriceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -96,14 +105,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitStrikethroughPriceRequest,
+
 ) -> SubmitStrikethroughPriceResponse | None:
-    """Submit Strikethrough Price
+    """ Submit Strikethrough Price
 
      Submit external pricing information for a product's SKUs so that TikTok Shop can verify the
     product's list price for use as a strikethrough price. If the submitted information is approved, the
@@ -122,22 +131,24 @@ def sync(
 
     Returns:
         SubmitStrikethroughPriceResponse
-    """
+     """
+
 
     return sync_detailed(
         product_id=product_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitStrikethroughPriceRequest,
+
 ) -> Response[SubmitStrikethroughPriceResponse]:
-    """Submit Strikethrough Price
+    """ Submit Strikethrough Price
 
      Submit external pricing information for a product's SKUs so that TikTok Shop can verify the
     product's list price for use as a strikethrough price. If the submitted information is approved, the
@@ -156,25 +167,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[SubmitStrikethroughPriceResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         product_id=product_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     product_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SubmitStrikethroughPriceRequest,
+
 ) -> SubmitStrikethroughPriceResponse | None:
-    """Submit Strikethrough Price
+    """ Submit Strikethrough Price
 
      Submit external pricing information for a product's SKUs so that TikTok Shop can verify the
     product's list price for use as a strikethrough price. If the submitted information is approved, the
@@ -193,12 +208,12 @@ async def asyncio(
 
     Returns:
         SubmitStrikethroughPriceResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            product_id=product_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        product_id=product_id,
+client=client,
+body=body,
+
+    )).parsed

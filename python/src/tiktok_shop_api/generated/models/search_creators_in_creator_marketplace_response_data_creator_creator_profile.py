@@ -1,37 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile")
+
 
 
 @_attrs_define
 class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
-    """
-    Attributes:
-        is_official_recommend (bool | Unset): Creator has official recommend tag or not
-        creator_bind_mcn_name (str | Unset): Creator bind MCN name
-        is_fast_growing (bool | Unset): Creator has fast growing tag or not
-        has_collaborated (bool | Unset): Has collaborated with this creator or not
-        user_type_tag (list[int] | Unset): User type tag.
-            Possible values:
-            - 1: Privacy creator
-            - 2: Carve-out creator
-        has_invited_90d (bool | Unset): Has invited creaor before 90 days
-        is_creator_blocked (bool | Unset): Is this creator blocked by shop or not
-        pps_score (str | Unset): Creator promotion performance score(PPS).The score reflects the quality of a creator's
-            shoppable content and product selection over the past 30 days. A high score may indicate a better shopping
-            experience, with fewer potential refunds or negative reviews. e.g. 4.3/5.0
-        is_eligible_flat_fee (bool | Unset): Is creator eligible for flat fee, only available for US local seller
-        is_rising_star (bool | Unset): Creator has rising star tag or not
-        creator_level (int | Unset): Creator level
-    """
+    """ 
+        Attributes:
+            is_official_recommend (bool | Unset): Creator has official recommend tag or not
+            creator_bind_mcn_name (str | Unset): Creator bind MCN name
+            is_fast_growing (bool | Unset): Creator has fast growing tag or not
+            has_collaborated (bool | Unset): Has collaborated with this creator or not
+            user_type_tag (list[int] | Unset): User type tag.
+                Possible values:
+                - 1: Privacy creator
+                - 2: Carve-out creator
+            has_invited_90d (bool | Unset): Has invited creaor before 90 days
+            is_creator_blocked (bool | Unset): Is this creator blocked by shop or not
+            pps_score (str | Unset): Creator promotion performance score(PPS).The score reflects the quality of a creator's
+                shoppable content and product selection over the past 30 days. A high score may indicate a better shopping
+                experience, with fewer potential refunds or negative reviews. e.g. 4.3/5.0
+            is_eligible_flat_fee (bool | Unset): Is creator eligible for flat fee, only available for US local seller
+            is_rising_star (bool | Unset): Creator has rising star tag or not
+            creator_level (int | Unset): Creator level
+     """
 
     is_official_recommend: bool | Unset = UNSET
     creator_bind_mcn_name: str | Unset = UNSET
@@ -46,6 +55,10 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
     creator_level: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         is_official_recommend = self.is_official_recommend
 
@@ -59,6 +72,8 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
         if not isinstance(self.user_type_tag, Unset):
             user_type_tag = self.user_type_tag
 
+
+
         has_invited_90d = self.has_invited_90d
 
         is_creator_blocked = self.is_creator_blocked
@@ -71,9 +86,11 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
 
         creator_level = self.creator_level
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if is_official_recommend is not UNSET:
             field_dict["is_official_recommend"] = is_official_recommend
         if creator_bind_mcn_name is not UNSET:
@@ -99,6 +116,8 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -111,6 +130,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
         has_collaborated = d.pop("has_collaborated", UNSET)
 
         user_type_tag = cast(list[int], d.pop("user_type_tag", UNSET))
+
 
         has_invited_90d = d.pop("has_invited_90d", UNSET)
 
@@ -137,6 +157,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
             is_rising_star=is_rising_star,
             creator_level=creator_level,
         )
+
 
         search_creators_in_creator_marketplace_response_data_creator_creator_profile.additional_properties = d
         return search_creators_in_creator_marketplace_response_data_creator_creator_profile

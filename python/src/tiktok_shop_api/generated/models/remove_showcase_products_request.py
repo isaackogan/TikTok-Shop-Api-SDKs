@@ -1,46 +1,65 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="RemoveShowcaseProductsRequest")
+
 
 
 @_attrs_define
 class RemoveShowcaseProductsRequest:
-    """
-    Attributes:
-        product_ids (list[str]): The product IDs to remove from the creator's showcase. Specify at least one product ID.
-            The maximum number of products to delete at once is 200.
-    """
+    """ 
+        Attributes:
+            product_ids (list[str]): The product IDs to remove from the creator's showcase. Specify at least one product ID.
+                The maximum number of products to delete at once is 200.
+     """
 
     product_ids: list[str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         product_ids = self.product_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "product_ids": product_ids,
-            }
-        )
+        field_dict.update({
+            "product_ids": product_ids,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         product_ids = cast(list[str], d.pop("product_ids"))
 
+
         remove_showcase_products_request = cls(
             product_ids=product_ids,
         )
+
 
         remove_showcase_products_request.additional_properties = d
         return remove_showcase_products_request

@@ -1,36 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ShoppableContentPostingWebhookDataEvent")
+
 
 
 @_attrs_define
 class ShoppableContentPostingWebhookDataEvent:
-    """
-    Attributes:
-        type_ (str | Unset): The action which the creator takes to the product promoted in the video or live stream. The
-            possible enumerations are:
+    """ 
+        Attributes:
+            type_ (str | Unset): The action which the creator takes to the product promoted in the video or live stream. The
+                possible enumerations are:
 
-             * `ADD`: Add the product.
-             * `UPDATE`: Update the product.
-             * `REMOVE`: Remove the product.
-        scene (str | Unset): The scene where the creator promotes the product. The possible enumerations are:
+                 * `ADD`: Add the product.
+                 * `UPDATE`: Update the product.
+                 * `REMOVE`: Remove the product.
+            scene (str | Unset): The scene where the creator promotes the product. The possible enumerations are:
 
-             * `VIDEO`: short video.
-        content_id (str | Unset): The ID of the short video.
-    """
+                 * `VIDEO`: short video.
+            content_id (str | Unset): The ID of the short video.
+     """
 
     type_: str | Unset = UNSET
     scene: str | Unset = UNSET
     content_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         type_ = self.type_
@@ -39,9 +51,11 @@ class ShoppableContentPostingWebhookDataEvent:
 
         content_id = self.content_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if scene is not UNSET:
@@ -50,6 +64,8 @@ class ShoppableContentPostingWebhookDataEvent:
             field_dict["content_id"] = content_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -65,6 +81,7 @@ class ShoppableContentPostingWebhookDataEvent:
             scene=scene,
             content_id=content_id,
         )
+
 
         shoppable_content_posting_webhook_data_event.additional_properties = d
         return shoppable_content_posting_webhook_data_event

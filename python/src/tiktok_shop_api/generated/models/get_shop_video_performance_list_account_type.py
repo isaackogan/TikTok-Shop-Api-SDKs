@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopVideoPerformanceListAccountType(StrEnum):
     AFFILIATE_ACCOUNTS = "AFFILIATE_ACCOUNTS"
     ALL = "ALL"

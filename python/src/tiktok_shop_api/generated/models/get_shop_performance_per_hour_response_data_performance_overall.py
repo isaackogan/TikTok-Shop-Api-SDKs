@@ -1,49 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.avg_order_value import AvgOrderValue
-    from ..models.avg_sku_order_value import AvgSkuOrderValue
-    from ..models.gmv import Gmv
-    from ..models.live_attributed_gmv import LiveAttributedGmv
-    from ..models.product_card_attributed_gmv import ProductCardAttributedGmv
-    from ..models.video_attributed_gmv import VideoAttributedGmv
+  from ..models.avg_order_value import AvgOrderValue
+  from ..models.avg_sku_order_value import AvgSkuOrderValue
+  from ..models.gmv import Gmv
+  from ..models.live_attributed_gmv import LiveAttributedGmv
+  from ..models.product_card_attributed_gmv import ProductCardAttributedGmv
+  from ..models.video_attributed_gmv import VideoAttributedGmv
+
+
+
 
 
 T = TypeVar("T", bound="GetShopPerformancePerHourResponseDataPerformanceOverall")
 
 
+
 @_attrs_define
 class GetShopPerformancePerHourResponseDataPerformanceOverall:
-    """
-    Attributes:
-        avg_order_value (AvgOrderValue | Unset):
-        avg_sku_order_value (AvgSkuOrderValue | Unset):
-        customers (int | Unset): The number of individual customers who made a purchase. This metric counts each
-            customer once, even if they made multiple purchases.
-        customers_count (int | Unset): Number of unique users who paid for orders during the requested date.
-        gmv (Gmv | Unset):
-        items_sold (int | Unset): The total number of individual items sold. Example: If a customer buys 3 units of SKU
-            A and 2 units of SKU B, the items sold would be 5.
-        live_attributed_gmv (LiveAttributedGmv | Unset):
-        orders_count (int | Unset): The number of paid orders during the requested date.
-        product_card_attributed_gmv (ProductCardAttributedGmv | Unset):
-        product_clicks (int | Unset): Total number of product clicks during the requested date.
-        product_impressions (int | Unset): Total number of product impressions during the requested date.
-        sku_orders_count (int | Unset): The number of distinct SKUs sold during the requested date.
-        unique_clicks (int | Unset): Total number of unique product clicks during the requested date.
-        unique_product_impressions (int | Unset): Total number of unique product impressions during the requested date.
-        video_attributed_gmv (VideoAttributedGmv | Unset):
-        visitors (int | Unset): Number of unique users who visited your product detail pages before the most recent
-            update time.
-    """
+    """ 
+        Attributes:
+            avg_order_value (AvgOrderValue | Unset):
+            avg_sku_order_value (AvgSkuOrderValue | Unset):
+            customers (int | Unset): The number of individual customers who made a purchase. This metric counts each
+                customer once, even if they made multiple purchases.
+            customers_count (int | Unset): Number of unique users who paid for orders during the requested date.
+            gmv (Gmv | Unset):
+            items_sold (int | Unset): The total number of individual items sold. Example: If a customer buys 3 units of SKU
+                A and 2 units of SKU B, the items sold would be 5.
+            live_attributed_gmv (LiveAttributedGmv | Unset):
+            orders_count (int | Unset): The number of paid orders during the requested date.
+            product_card_attributed_gmv (ProductCardAttributedGmv | Unset):
+            product_clicks (int | Unset): Total number of product clicks during the requested date.
+            product_impressions (int | Unset): Total number of product impressions during the requested date.
+            sku_orders_count (int | Unset): The number of distinct SKUs sold during the requested date.
+            unique_clicks (int | Unset): Total number of unique product clicks during the requested date.
+            unique_product_impressions (int | Unset): Total number of unique product impressions during the requested date.
+            video_attributed_gmv (VideoAttributedGmv | Unset):
+            visitors (int | Unset): Number of unique users who visited your product detail pages before the most recent
+                update time.
+     """
 
     avg_order_value: AvgOrderValue | Unset = UNSET
     avg_sku_order_value: AvgSkuOrderValue | Unset = UNSET
@@ -63,7 +70,17 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
     visitors: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.avg_order_value import AvgOrderValue # noqa: PLC0415
+        from ..models.avg_sku_order_value import AvgSkuOrderValue # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
+        from ..models.product_card_attributed_gmv import ProductCardAttributedGmv # noqa: PLC0415
+        from ..models.video_attributed_gmv import VideoAttributedGmv # noqa: PLC0415
         avg_order_value: dict[str, Any] | Unset = UNSET
         if not isinstance(self.avg_order_value, Unset):
             avg_order_value = self.avg_order_value.to_dict()
@@ -108,9 +125,11 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
 
         visitors = self.visitors
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if avg_order_value is not UNSET:
             field_dict["avg_order_value"] = avg_order_value
         if avg_sku_order_value is not UNSET:
@@ -146,29 +165,36 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.avg_order_value import AvgOrderValue  # noqa: PLC0415
-        from ..models.avg_sku_order_value import AvgSkuOrderValue  # noqa: PLC0415
-        from ..models.gmv import Gmv  # noqa: PLC0415
-        from ..models.live_attributed_gmv import LiveAttributedGmv  # noqa: PLC0415
-        from ..models.product_card_attributed_gmv import ProductCardAttributedGmv  # noqa: PLC0415
-        from ..models.video_attributed_gmv import VideoAttributedGmv  # noqa: PLC0415
-
+        from ..models.avg_order_value import AvgOrderValue # noqa: PLC0415
+        from ..models.avg_sku_order_value import AvgSkuOrderValue # noqa: PLC0415
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.live_attributed_gmv import LiveAttributedGmv # noqa: PLC0415
+        from ..models.product_card_attributed_gmv import ProductCardAttributedGmv # noqa: PLC0415
+        from ..models.video_attributed_gmv import VideoAttributedGmv # noqa: PLC0415
         d = dict(src_dict)
         _avg_order_value = d.pop("avg_order_value", UNSET)
         avg_order_value: AvgOrderValue | Unset
-        if isinstance(_avg_order_value, Unset):
+        if isinstance(_avg_order_value,  Unset):
             avg_order_value = UNSET
         else:
             avg_order_value = AvgOrderValue.from_dict(_avg_order_value)
 
+
+
+
         _avg_sku_order_value = d.pop("avg_sku_order_value", UNSET)
         avg_sku_order_value: AvgSkuOrderValue | Unset
-        if isinstance(_avg_sku_order_value, Unset):
+        if isinstance(_avg_sku_order_value,  Unset):
             avg_sku_order_value = UNSET
         else:
             avg_sku_order_value = AvgSkuOrderValue.from_dict(_avg_sku_order_value)
+
+
+
 
         customers = d.pop("customers", UNSET)
 
@@ -176,28 +202,37 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
+
+
+
 
         items_sold = d.pop("items_sold", UNSET)
 
         _live_attributed_gmv = d.pop("live_attributed_gmv", UNSET)
         live_attributed_gmv: LiveAttributedGmv | Unset
-        if isinstance(_live_attributed_gmv, Unset):
+        if isinstance(_live_attributed_gmv,  Unset):
             live_attributed_gmv = UNSET
         else:
             live_attributed_gmv = LiveAttributedGmv.from_dict(_live_attributed_gmv)
+
+
+
 
         orders_count = d.pop("orders_count", UNSET)
 
         _product_card_attributed_gmv = d.pop("product_card_attributed_gmv", UNSET)
         product_card_attributed_gmv: ProductCardAttributedGmv | Unset
-        if isinstance(_product_card_attributed_gmv, Unset):
+        if isinstance(_product_card_attributed_gmv,  Unset):
             product_card_attributed_gmv = UNSET
         else:
             product_card_attributed_gmv = ProductCardAttributedGmv.from_dict(_product_card_attributed_gmv)
+
+
+
 
         product_clicks = d.pop("product_clicks", UNSET)
 
@@ -211,10 +246,13 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
 
         _video_attributed_gmv = d.pop("video_attributed_gmv", UNSET)
         video_attributed_gmv: VideoAttributedGmv | Unset
-        if isinstance(_video_attributed_gmv, Unset):
+        if isinstance(_video_attributed_gmv,  Unset):
             video_attributed_gmv = UNSET
         else:
             video_attributed_gmv = VideoAttributedGmv.from_dict(_video_attributed_gmv)
+
+
+
 
         visitors = d.pop("visitors", UNSET)
 
@@ -236,6 +274,7 @@ class GetShopPerformancePerHourResponseDataPerformanceOverall:
             video_attributed_gmv=video_attributed_gmv,
             visitors=visitors,
         )
+
 
         get_shop_performance_per_hour_response_data_performance_overall.additional_properties = d
         return get_shop_performance_per_hour_response_data_performance_overall

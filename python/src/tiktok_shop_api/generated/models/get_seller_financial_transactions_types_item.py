@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetSellerFinancialTransactionsTypesItem(StrEnum):
     PAYMENT = "PAYMENT"
     REFUND = "REFUND"

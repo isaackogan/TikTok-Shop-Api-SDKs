@@ -1,28 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.appeal_completed_webhook_data import AppealCompletedWebhookData
+  from ..models.appeal_completed_webhook_data import AppealCompletedWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="AppealCompletedWebhook")
 
 
+
 @_attrs_define
 class AppealCompletedWebhook:
-    """
-    Attributes:
-        shop_id (str):
-        type_ (Literal[66]): The ID of the webhook type.
-        tts_notification_id (str):
-        timestamp (int):
-        data (AppealCompletedWebhookData):
-    """
+    """ 
+        Attributes:
+            shop_id (str):
+            type_ (Literal[66]): The ID of the webhook type.
+            tts_notification_id (str):
+            timestamp (int):
+            data (AppealCompletedWebhookData):
+     """
 
     shop_id: str
     type_: Literal[66]
@@ -31,7 +40,12 @@ class AppealCompletedWebhook:
     data: AppealCompletedWebhookData
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.appeal_completed_webhook_data import AppealCompletedWebhookData # noqa: PLC0415
         shop_id = self.shop_id
 
         type_ = self.type_
@@ -42,28 +56,28 @@ class AppealCompletedWebhook:
 
         data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "shop_id": shop_id,
-                "type": type_,
-                "tts_notification_id": tts_notification_id,
-                "timestamp": timestamp,
-                "data": data,
-            }
-        )
+        field_dict.update({
+            "shop_id": shop_id,
+            "type": type_,
+            "tts_notification_id": tts_notification_id,
+            "timestamp": timestamp,
+            "data": data,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.appeal_completed_webhook_data import AppealCompletedWebhookData  # noqa: PLC0415
-
+        from ..models.appeal_completed_webhook_data import AppealCompletedWebhookData # noqa: PLC0415
         d = dict(src_dict)
         shop_id = d.pop("shop_id")
 
-        type_ = cast(Literal[66], d.pop("type"))
+        type_ = cast(Literal[66] , d.pop("type"))
         if type_ != 66:
             raise ValueError(f"type must match const 66, got '{type_}'")
 
@@ -73,6 +87,9 @@ class AppealCompletedWebhook:
 
         data = AppealCompletedWebhookData.from_dict(d.pop("data"))
 
+
+
+
         appeal_completed_webhook = cls(
             shop_id=shop_id,
             type_=type_,
@@ -80,6 +97,7 @@ class AppealCompletedWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         appeal_completed_webhook.additional_properties = d
         return appeal_completed_webhook

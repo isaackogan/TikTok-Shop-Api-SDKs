@@ -1,56 +1,66 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.line_item import LineItem
-    from ..models.search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import (
-        SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization,
-    )
-    from ..models.sku_return_request import SkuReturnRequest
+  from ..models.line_item import LineItem
+  from ..models.search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization
+  from ..models.sku_return_request import SkuReturnRequest
+
+
+
 
 
 T = TypeVar("T", bound="SearchAftersalesRequestsResponseDataAftersalesRequest")
 
 
+
 @_attrs_define
 class SearchAftersalesRequestsResponseDataAftersalesRequest:
-    """
-    Attributes:
-        id (str | Unset): Unique identifier for this aftersales request.
-        line_items (list[LineItem] | Unset): List of items associated with this aftersales request. This field is
-            returned only when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
-        status (str | Unset): Current state of this aftersales request.
-            Possible values:
-            - `INIT`
-            - `PENDING_REQUEST_REVIEW`
-            - `REQUEST_REVIEW_COMPLETED`
-        sku_return_requests (list[SkuReturnRequest] | Unset): SKU-level sub return requests associated with this
-            aftersales request, also known as reverse orders or return requests. This field is returned only when
-            `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching data is available.
-        return_merchandise_authorizations
-            (list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset): Return
-            merchandise authorization (RMA) records associated with this aftersales request. This field is returned only
-            when `RETURN_MERCHANDISE_AUTHORIZATIONS` is included in `whitelisted_data_fields` and matching RMA data is
-            available.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unique identifier for this aftersales request.
+            line_items (list[LineItem] | Unset): List of items associated with this aftersales request. This field is
+                returned only when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
+            status (str | Unset): Current state of this aftersales request.
+                Possible values:
+                - `INIT`
+                - `PENDING_REQUEST_REVIEW`
+                - `REQUEST_REVIEW_COMPLETED`
+            sku_return_requests (list[SkuReturnRequest] | Unset): SKU-level sub return requests associated with this
+                aftersales request, also known as reverse orders or return requests. This field is returned only when
+                `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching data is available.
+            return_merchandise_authorizations
+                (list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset): Return
+                merchandise authorization (RMA) records associated with this aftersales request. This field is returned only
+                when `RETURN_MERCHANDISE_AUTHORIZATIONS` is included in `whitelisted_data_fields` and matching RMA data is
+                available.
+     """
 
     id: str | Unset = UNSET
     line_items: list[LineItem] | Unset = UNSET
     status: str | Unset = UNSET
     sku_return_requests: list[SkuReturnRequest] | Unset = UNSET
-    return_merchandise_authorizations: (
-        list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset
-    ) = UNSET
+    return_merchandise_authorizations: list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.line_item import LineItem # noqa: PLC0415
+        from ..models.search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization # noqa: PLC0415
+        from ..models.sku_return_request import SkuReturnRequest # noqa: PLC0415
         id = self.id
 
         line_items: list[dict[str, Any]] | Unset = UNSET
@@ -59,6 +69,8 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
             for line_items_item_data in self.line_items:
                 line_items_item = line_items_item_data.to_dict()
                 line_items.append(line_items_item)
+
+
 
         status = self.status
 
@@ -69,6 +81,8 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
                 sku_return_requests_item = sku_return_requests_item_data.to_dict()
                 sku_return_requests.append(sku_return_requests_item)
 
+
+
         return_merchandise_authorizations: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.return_merchandise_authorizations, Unset):
             return_merchandise_authorizations = []
@@ -76,9 +90,13 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
                 return_merchandise_authorizations_item = return_merchandise_authorizations_item_data.to_dict()
                 return_merchandise_authorizations.append(return_merchandise_authorizations_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if line_items is not UNSET:
@@ -92,14 +110,13 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.line_item import LineItem  # noqa: PLC0415
-        from ..models.search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import (
-            SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization,  # noqa: PLC0415
-        )
-        from ..models.sku_return_request import SkuReturnRequest  # noqa: PLC0415
-
+        from ..models.line_item import LineItem # noqa: PLC0415
+        from ..models.search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization # noqa: PLC0415
+        from ..models.sku_return_request import SkuReturnRequest # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -110,7 +127,10 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
             for line_items_item_data in _line_items:
                 line_items_item = LineItem.from_dict(line_items_item_data)
 
+
+
                 line_items.append(line_items_item)
+
 
         status = d.pop("status", UNSET)
 
@@ -121,22 +141,22 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
             for sku_return_requests_item_data in _sku_return_requests:
                 sku_return_requests_item = SkuReturnRequest.from_dict(sku_return_requests_item_data)
 
+
+
                 sku_return_requests.append(sku_return_requests_item)
 
+
         _return_merchandise_authorizations = d.pop("return_merchandise_authorizations", UNSET)
-        return_merchandise_authorizations: (
-            list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset
-        ) = UNSET
+        return_merchandise_authorizations: list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset = UNSET
         if _return_merchandise_authorizations is not UNSET:
             return_merchandise_authorizations = []
             for return_merchandise_authorizations_item_data in _return_merchandise_authorizations:
-                return_merchandise_authorizations_item = (
-                    SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization.from_dict(
-                        return_merchandise_authorizations_item_data
-                    )
-                )
+                return_merchandise_authorizations_item = SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization.from_dict(return_merchandise_authorizations_item_data)
+
+
 
                 return_merchandise_authorizations.append(return_merchandise_authorizations_item)
+
 
         search_aftersales_requests_response_data_aftersales_request = cls(
             id=id,
@@ -145,6 +165,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
             sku_return_requests=sku_return_requests,
             return_merchandise_authorizations=return_merchandise_authorizations,
         )
+
 
         search_aftersales_requests_response_data_aftersales_request.additional_properties = d
         return search_aftersales_requests_response_data_aftersales_request

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditProductRequestSaveMode(StrEnum):
     AS_DRAFT = "AS_DRAFT"
     LISTING = "LISTING"

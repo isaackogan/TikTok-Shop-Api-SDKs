@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchReturnsSortOrder(StrEnum):
     ASC = "ASC"
     DESC = "DESC"

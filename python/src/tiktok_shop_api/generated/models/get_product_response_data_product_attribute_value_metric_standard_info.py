@@ -1,41 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_product_response_data_product_attribute_value_metric_standard_info_metric_value_module_info import (
-        GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo,
-    )
+  from ..models.get_product_response_data_product_attribute_value_metric_standard_info_metric_value_module_info import GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo
+
+
+
 
 
 T = TypeVar("T", bound="GetProductResponseDataProductAttributeValueMetricStandardInfo")
 
 
+
 @_attrs_define
 class GetProductResponseDataProductAttributeValueMetricStandardInfo:
-    """
-    Attributes:
-        id (str | Unset): The unique ID of the measurement template. Use this ID to identify which measurement standard
-            template applies to the product.
-        metric_value_module_infos
-            (list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset): The list of
-            metric value entries under the measurement template. Each object represents the value submitted by the seller
-            for a specific metric in the template.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The unique ID of the measurement template. Use this ID to identify which measurement standard
+                template applies to the product.
+            metric_value_module_infos
+                (list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset): The list of
+                metric value entries under the measurement template. Each object represents the value submitted by the seller
+                for a specific metric in the template.
+     """
 
     id: str | Unset = UNSET
-    metric_value_module_infos: (
-        list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset
-    ) = UNSET
+    metric_value_module_infos: list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_product_response_data_product_attribute_value_metric_standard_info_metric_value_module_info import GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo # noqa: PLC0415
         id = self.id
 
         metric_value_module_infos: list[dict[str, Any]] | Unset = UNSET
@@ -45,9 +53,13 @@ class GetProductResponseDataProductAttributeValueMetricStandardInfo:
                 metric_value_module_infos_item = metric_value_module_infos_item_data.to_dict()
                 metric_value_module_infos.append(metric_value_module_infos_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if metric_value_module_infos is not UNSET:
@@ -55,34 +67,31 @@ class GetProductResponseDataProductAttributeValueMetricStandardInfo:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_product_response_data_product_attribute_value_metric_standard_info_metric_value_module_info import (
-            GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo,  # noqa: PLC0415
-        )
-
+        from ..models.get_product_response_data_product_attribute_value_metric_standard_info_metric_value_module_info import GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
         _metric_value_module_infos = d.pop("metric_value_module_infos", UNSET)
-        metric_value_module_infos: (
-            list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset
-        ) = UNSET
+        metric_value_module_infos: list[GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo] | Unset = UNSET
         if _metric_value_module_infos is not UNSET:
             metric_value_module_infos = []
             for metric_value_module_infos_item_data in _metric_value_module_infos:
-                metric_value_module_infos_item = (
-                    GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo.from_dict(
-                        metric_value_module_infos_item_data
-                    )
-                )
+                metric_value_module_infos_item = GetProductResponseDataProductAttributeValueMetricStandardInfoMetricValueModuleInfo.from_dict(metric_value_module_infos_item_data)
+
+
 
                 metric_value_module_infos.append(metric_value_module_infos_item)
+
 
         get_product_response_data_product_attribute_value_metric_standard_info = cls(
             id=id,
             metric_value_module_infos=metric_value_module_infos,
         )
+
 
         get_product_response_data_product_attribute_value_metric_standard_info.additional_properties = d
         return get_product_response_data_product_attribute_value_metric_standard_info

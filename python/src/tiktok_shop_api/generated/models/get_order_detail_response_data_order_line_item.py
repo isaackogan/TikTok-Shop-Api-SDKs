@@ -1,143 +1,148 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.combined_listing_sku import CombinedListingSku
-    from ..models.get_order_detail_response_data_order_line_item_item_tax import (
-        GetOrderDetailResponseDataOrderLineItemItemTax,
-    )
-    from ..models.sub_item_info import SubItemInfo
-    from ..models.unboxing_case_list import UnboxingCaseList
+  from ..models.combined_listing_sku import CombinedListingSku
+  from ..models.get_order_detail_response_data_order_line_item_item_tax import GetOrderDetailResponseDataOrderLineItemItemTax
+  from ..models.sub_item_info import SubItemInfo
+  from ..models.unboxing_case_list import UnboxingCaseList
+
+
+
 
 
 T = TypeVar("T", bound="GetOrderDetailResponseDataOrderLineItem")
 
 
+
 @_attrs_define
 class GetOrderDetailResponseDataOrderLineItem:
-    """
-    Attributes:
-        id (str | Unset): Line item ID.
-        sku_id (str | Unset): SKU ID.
-        combined_listing_skus (list[CombinedListingSku] | Unset): For a virtual bundle SKU, returns an array of related
-            product SKUs that compose the virtual bundle SKU.
-        product_id (str | Unset): Product ID.
-        product_name (str | Unset): Product name.
-        sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. For example,
-            "Black, 26."
-        sku_image (str | Unset): SKU image.
-        original_price (str | Unset): Item original price, please refer to the currency of `payment_info`.
-        sale_price (str | Unset): Item sale price, please refer to the currency of `payment_info`.
-        pfand_fee (str | Unset): Deposit fee that is applied to certain products, typically beverage containers such as
-            bottles or cans.
-            **Note** Only available in Germany market
-        platform_discount (str | Unset): Platform discount amount, please refer to the currency of `payment_info`.
-        display_status (str | Unset): - `UNPAID`: The order is placed, but payment is not yet completed.
-            - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet.
-            - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier.
-            - `IN_TRANSIT`: The package is collected by the carrier and delivery is in progress.
-            - `DELIVERED`: The package is delivered to buyer.
-            - `COMPLETED`: The order is completed, and no further returns or refunds are allowed.
-            - `CANCELLED`: The order is canceled.
-        cancel_user (str | Unset): The initiator of a cancellation request:
-            - `BUYER`
-            - `SELLER`
-            - `OPERATOR`
-            - `SYSTEM`
-        sku_type (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future API version.
-            Use `order_type` instead.]
-            The order line type:
-            Possible values based on region:
-            **All regions**
-            - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.
-            - `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE.
-            - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.
-            **US**
-            - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the
-            future.
-            - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the
-            product is produced.
-        seller_sku (str | Unset): The seller stock keeping unit (SKU) of the item.
-        shipping_provider_id (str | Unset): The shipping provider ID of the item.
-        seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
-        currency (str | Unset): Currency for payment.
-        package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
-            Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the
-            package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status`
-            property will not be returned before the package is shipped
-        rts_time (int | Unset): The time seller shipped line order (call Ship Order endpoint successfully).
-            Unix timestamp.
-        item_tax (list[GetOrderDetailResponseDataOrderLineItemItemTax] | Unset): Item tax detail.
-        package_status (str | Unset): The package status of the item:
-            - `TO_FULFILL`: package waiting seller to arrange shipment.
-            - `PROCESSING`: package shipment has been arranged by seller. Waiting carrier to collect the parcel.
-            - `FULFILLING`: package has been collected by carrier and in transit.
-            - `COMPLETED`: package has been delivered.
-            - `CANCELLED`: package has been canceled. Normally, the package is canceled due to the package being lost or
-            damaged.
-        shipping_provider_name (str | Unset): The shipping provider name of the item.
-        is_gift (bool | Unset): Indicates whether the current order line is a gift.
-        cancel_reason (str | Unset): Item cancellation reason.
-        small_order_fee (str | Unset): Small order fee for TH.
-        retail_delivery_fee (str | Unset): RDF (retail delivery fee). Available only in the US market.
-        tracking_number (str | Unset): Tracking number. Available after package has been shipped.
-        buyer_service_fee (str | Unset): A service fee is charged on every transaction made. The charge is applied from
-            the fifth order onwards and collected directly from customers during checkout. Only available in Indonesia
-            market.
-        handling_duration_days (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future
-            API version. Use `handling_duration` instead.]
-            The number of business days required for the seller to process the order and hand it over to a shipping carrier
-            after the order is placed.
-            Applicable only if the value for `sku_type` is `MADE_TO_ORDER`.
-        is_dangerous_good (bool | Unset): Whether the SKU is a hazmat item. When creating the label for a hazmat item,
-            you must follow the platform rules to put certain items into one package. Please refer to the relationship
-            between `sku_id` and `package_id` to determine how to follow platform rules.
-        needs_prescription (bool | Unset): A flag to indicate whether the included product requires a prescription.
-        gift_retail_price (str | Unset): Retail price of the free item in orders Live giveaway, free sample and gift
-            with purchase. For other orders, this field always returns 0.
-            This amount can be used for free samples and live giveaway order invoice in Brazil
-        is_unboxing_item (bool | Unset): If `true`, indicates the sku is a blind box item that will need be unboxed to
-            reveal the actual product to the buyer. The actual product sku name and picture can also be updated to TikTok
-            after the unboxing is completed.
+    """ 
+        Attributes:
+            id (str | Unset): Line item ID.
+            sku_id (str | Unset): SKU ID.
+            combined_listing_skus (list[CombinedListingSku] | Unset): For a virtual bundle SKU, returns an array of related
+                product SKUs that compose the virtual bundle SKU.
+            product_id (str | Unset): Product ID.
+            product_name (str | Unset): Product name.
+            sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. For example,
+                "Black, 26."
+            sku_image (str | Unset): SKU image.
+            original_price (str | Unset): Item original price, please refer to the currency of `payment_info`.
+            sale_price (str | Unset): Item sale price, please refer to the currency of `payment_info`.
+            pfand_fee (str | Unset): Deposit fee that is applied to certain products, typically beverage containers such as
+                bottles or cans.
+                **Note** Only available in Germany market
+            platform_discount (str | Unset): Platform discount amount, please refer to the currency of `payment_info`.
+            display_status (str | Unset): - `UNPAID`: The order is placed, but payment is not yet completed.
+                - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet.
+                - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier.
+                - `IN_TRANSIT`: The package is collected by the carrier and delivery is in progress.
+                - `DELIVERED`: The package is delivered to buyer.
+                - `COMPLETED`: The order is completed, and no further returns or refunds are allowed.
+                - `CANCELLED`: The order is canceled.
+            cancel_user (str | Unset): The initiator of a cancellation request:
+                - `BUYER`
+                - `SELLER`
+                - `OPERATOR`
+                - `SYSTEM`
+            sku_type (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future API version.
+                Use `order_type` instead.]
+                The order line type:
+                Possible values based on region:
+                **All regions**
+                - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.
+                - `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE.
+                - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.
+                **US**
+                - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the
+                future.
+                - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the
+                product is produced.
+            seller_sku (str | Unset): The seller stock keeping unit (SKU) of the item.
+            shipping_provider_id (str | Unset): The shipping provider ID of the item.
+            seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
+            currency (str | Unset): Currency for payment.
+            package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
+                Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the
+                package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status`
+                property will not be returned before the package is shipped
+            rts_time (int | Unset): The time seller shipped line order (call Ship Order endpoint successfully).
+                Unix timestamp.
+            item_tax (list[GetOrderDetailResponseDataOrderLineItemItemTax] | Unset): Item tax detail.
+            package_status (str | Unset): The package status of the item:
+                - `TO_FULFILL`: package waiting seller to arrange shipment.
+                - `PROCESSING`: package shipment has been arranged by seller. Waiting carrier to collect the parcel.
+                - `FULFILLING`: package has been collected by carrier and in transit.
+                - `COMPLETED`: package has been delivered.
+                - `CANCELLED`: package has been canceled. Normally, the package is canceled due to the package being lost or
+                damaged.
+            shipping_provider_name (str | Unset): The shipping provider name of the item.
+            is_gift (bool | Unset): Indicates whether the current order line is a gift.
+            cancel_reason (str | Unset): Item cancellation reason.
+            small_order_fee (str | Unset): Small order fee for TH.
+            retail_delivery_fee (str | Unset): RDF (retail delivery fee). Available only in the US market.
+            tracking_number (str | Unset): Tracking number. Available after package has been shipped.
+            buyer_service_fee (str | Unset): A service fee is charged on every transaction made. The charge is applied from
+                the fifth order onwards and collected directly from customers during checkout. Only available in Indonesia
+                market.
+            handling_duration_days (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future
+                API version. Use `handling_duration` instead.]
+                The number of business days required for the seller to process the order and hand it over to a shipping carrier
+                after the order is placed.
+                Applicable only if the value for `sku_type` is `MADE_TO_ORDER`.
+            is_dangerous_good (bool | Unset): Whether the SKU is a hazmat item. When creating the label for a hazmat item,
+                you must follow the platform rules to put certain items into one package. Please refer to the relationship
+                between `sku_id` and `package_id` to determine how to follow platform rules.
+            needs_prescription (bool | Unset): A flag to indicate whether the included product requires a prescription.
+            gift_retail_price (str | Unset): Retail price of the free item in orders Live giveaway, free sample and gift
+                with purchase. For other orders, this field always returns 0.
+                This amount can be used for free samples and live giveaway order invoice in Brazil
+            is_unboxing_item (bool | Unset): If `true`, indicates the sku is a blind box item that will need be unboxed to
+                reveal the actual product to the buyer. The actual product sku name and picture can also be updated to TikTok
+                after the unboxing is completed.
 
-            Note: This is currently only available in the US market.
-        unboxing_sku_code (str | Unset): A seller's third party sku code for the actual unboxed item, which warehouse
-            fulfillment operations can reference to identify the accurate product they are shipping.
+                Note: This is currently only available in the US market.
+            unboxing_sku_code (str | Unset): A seller's third party sku code for the actual unboxed item, which warehouse
+                fulfillment operations can reference to identify the accurate product they are shipping.
 
-            Note: This is currently only available in the US market.
-        unboxing_case_list (list[UnboxingCaseList] | Unset): A seller's third party sku code for the case unboxed item,
-            which warehouse fulfillment operations can reference to identify the accurate product they are shipping.
+                Note: This is currently only available in the US market.
+            unboxing_case_list (list[UnboxingCaseList] | Unset): A seller's third party sku code for the case unboxed item,
+                which warehouse fulfillment operations can reference to identify the accurate product they are shipping.
 
-            Note: This is currently only available in the US market.
-        sub_item_info (list[SubItemInfo] | Unset): Sub items represent skus that belong to a "virtual bundle" that has
-            been defined by a seller. The sub_item_info will include all relevant information about each item that is
-            required to be fulfilled as part of the virtual bundle.
-            Note: Each quantity of any sku has a unique sub_item_info "id", which allows the seller to perform line-level
-            fulfillments, in the event the items are split across different warehouse locations.
-        distance_shipping_fee (str | Unset): Distance shipping fee is fee that charged charged by our logistics partner
-            and covers the separate distance-based cost for deliveries outside Java island as a part of Horizon+ Program.
-            Only applicable in ID Market.
-        distance_fee (str | Unset): Total distance fee for Horizon+ Program. Only applicable for ID market
-        shipping_vat_amount (str | Unset): Shipping vat amount
-            Available in EU market
-        shipping_vat_rate (str | Unset): Shipping vat rate
-            Available in EU market
-        is_pod_customized (bool | Unset): Identifies if this SKU contains print on demand customization
-        pod_info_id (str | Unset): ID of the print on demand customization details. This ID can be used to query for the
-            exact details of the customization
-        room_id (str | Unset): The unique ID of the LIVE session where the order line item was created. If the order
-            line item was not created from a LIVE session, this field returns an empty string.
-        product_listing_type (str | Unset): This describes the product listing type of the SKU.
-            Possible values:
-            - `TEMPORARY_LISTING`
-    """
+                Note: This is currently only available in the US market.
+            sub_item_info (list[SubItemInfo] | Unset): Sub items represent skus that belong to a "virtual bundle" that has
+                been defined by a seller. The sub_item_info will include all relevant information about each item that is
+                required to be fulfilled as part of the virtual bundle.
+                Note: Each quantity of any sku has a unique sub_item_info "id", which allows the seller to perform line-level
+                fulfillments, in the event the items are split across different warehouse locations.
+            distance_shipping_fee (str | Unset): Distance shipping fee is fee that charged charged by our logistics partner
+                and covers the separate distance-based cost for deliveries outside Java island as a part of Horizon+ Program.
+                Only applicable in ID Market.
+            distance_fee (str | Unset): Total distance fee for Horizon+ Program. Only applicable for ID market
+            shipping_vat_amount (str | Unset): Shipping vat amount
+                Available in EU market
+            shipping_vat_rate (str | Unset): Shipping vat rate
+                Available in EU market
+            is_pod_customized (bool | Unset): Identifies if this SKU contains print on demand customization
+            pod_info_id (str | Unset): ID of the print on demand customization details. This ID can be used to query for the
+                exact details of the customization
+            room_id (str | Unset): The unique ID of the LIVE session where the order line item was created. If the order
+                line item was not created from a LIVE session, this field returns an empty string.
+            product_listing_type (str | Unset): This describes the product listing type of the SKU.
+                Possible values:
+                - `TEMPORARY_LISTING`
+     """
 
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
@@ -186,7 +191,15 @@ class GetOrderDetailResponseDataOrderLineItem:
     product_listing_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.combined_listing_sku import CombinedListingSku # noqa: PLC0415
+        from ..models.get_order_detail_response_data_order_line_item_item_tax import GetOrderDetailResponseDataOrderLineItemItemTax # noqa: PLC0415
+        from ..models.sub_item_info import SubItemInfo # noqa: PLC0415
+        from ..models.unboxing_case_list import UnboxingCaseList # noqa: PLC0415
         id = self.id
 
         sku_id = self.sku_id
@@ -197,6 +210,8 @@ class GetOrderDetailResponseDataOrderLineItem:
             for combined_listing_skus_item_data in self.combined_listing_skus:
                 combined_listing_skus_item = combined_listing_skus_item_data.to_dict()
                 combined_listing_skus.append(combined_listing_skus_item)
+
+
 
         product_id = self.product_id
 
@@ -239,6 +254,8 @@ class GetOrderDetailResponseDataOrderLineItem:
                 item_tax_item = item_tax_item_data.to_dict()
                 item_tax.append(item_tax_item)
 
+
+
         package_status = self.package_status
 
         shipping_provider_name = self.shipping_provider_name
@@ -274,12 +291,16 @@ class GetOrderDetailResponseDataOrderLineItem:
                 unboxing_case_list_item = unboxing_case_list_item_data.to_dict()
                 unboxing_case_list.append(unboxing_case_list_item)
 
+
+
         sub_item_info: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sub_item_info, Unset):
             sub_item_info = []
             for sub_item_info_item_data in self.sub_item_info:
                 sub_item_info_item = sub_item_info_item_data.to_dict()
                 sub_item_info.append(sub_item_info_item)
+
+
 
         distance_shipping_fee = self.distance_shipping_fee
 
@@ -297,9 +318,11 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         product_listing_type = self.product_listing_type
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if sku_id is not UNSET:
@@ -393,15 +416,14 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.combined_listing_sku import CombinedListingSku  # noqa: PLC0415
-        from ..models.get_order_detail_response_data_order_line_item_item_tax import (
-            GetOrderDetailResponseDataOrderLineItemItemTax,  # noqa: PLC0415
-        )
-        from ..models.sub_item_info import SubItemInfo  # noqa: PLC0415
-        from ..models.unboxing_case_list import UnboxingCaseList  # noqa: PLC0415
-
+        from ..models.combined_listing_sku import CombinedListingSku # noqa: PLC0415
+        from ..models.get_order_detail_response_data_order_line_item_item_tax import GetOrderDetailResponseDataOrderLineItemItemTax # noqa: PLC0415
+        from ..models.sub_item_info import SubItemInfo # noqa: PLC0415
+        from ..models.unboxing_case_list import UnboxingCaseList # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -414,7 +436,10 @@ class GetOrderDetailResponseDataOrderLineItem:
             for combined_listing_skus_item_data in _combined_listing_skus:
                 combined_listing_skus_item = CombinedListingSku.from_dict(combined_listing_skus_item_data)
 
+
+
                 combined_listing_skus.append(combined_listing_skus_item)
+
 
         product_id = d.pop("product_id", UNSET)
 
@@ -457,7 +482,10 @@ class GetOrderDetailResponseDataOrderLineItem:
             for item_tax_item_data in _item_tax:
                 item_tax_item = GetOrderDetailResponseDataOrderLineItemItemTax.from_dict(item_tax_item_data)
 
+
+
                 item_tax.append(item_tax_item)
+
 
         package_status = d.pop("package_status", UNSET)
 
@@ -494,7 +522,10 @@ class GetOrderDetailResponseDataOrderLineItem:
             for unboxing_case_list_item_data in _unboxing_case_list:
                 unboxing_case_list_item = UnboxingCaseList.from_dict(unboxing_case_list_item_data)
 
+
+
                 unboxing_case_list.append(unboxing_case_list_item)
+
 
         _sub_item_info = d.pop("sub_item_info", UNSET)
         sub_item_info: list[SubItemInfo] | Unset = UNSET
@@ -503,7 +534,10 @@ class GetOrderDetailResponseDataOrderLineItem:
             for sub_item_info_item_data in _sub_item_info:
                 sub_item_info_item = SubItemInfo.from_dict(sub_item_info_item_data)
 
+
+
                 sub_item_info.append(sub_item_info_item)
+
 
         distance_shipping_fee = d.pop("distance_shipping_fee", UNSET)
 
@@ -568,6 +602,7 @@ class GetOrderDetailResponseDataOrderLineItem:
             room_id=room_id,
             product_listing_type=product_listing_type,
         )
+
 
         get_order_detail_response_data_order_line_item.additional_properties = d
         return get_order_detail_response_data_order_line_item

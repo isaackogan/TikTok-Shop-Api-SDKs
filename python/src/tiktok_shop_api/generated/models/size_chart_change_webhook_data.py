@@ -1,34 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SizeChartChangeWebhookData")
+
 
 
 @_attrs_define
 class SizeChartChangeWebhookData:
-    """
-    Attributes:
-        size_chart_template_id (str | Unset): The ID of the size chart template that's being changed.
-        size_chart_template_name (str | Unset): The name of the size chart template that's being changed.
-        event_type (str | Unset): The change that occurred for the size chart. Possible values:
-             - `CREATE`: A new size chart is created
-             - `EDIT`: The size chart is edited
-             - `DELETE`: The size chart is deleted
-        update_time (int | Unset): The time when the change occurred. Unix timestamp.
-    """
+    """ 
+        Attributes:
+            size_chart_template_id (str | Unset): The ID of the size chart template that's being changed.
+            size_chart_template_name (str | Unset): The name of the size chart template that's being changed.
+            event_type (str | Unset): The change that occurred for the size chart. Possible values:
+                 - `CREATE`: A new size chart is created
+                 - `EDIT`: The size chart is edited
+                 - `DELETE`: The size chart is deleted
+            update_time (int | Unset): The time when the change occurred. Unix timestamp.
+     """
 
     size_chart_template_id: str | Unset = UNSET
     size_chart_template_name: str | Unset = UNSET
     event_type: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         size_chart_template_id = self.size_chart_template_id
@@ -39,9 +51,11 @@ class SizeChartChangeWebhookData:
 
         update_time = self.update_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if size_chart_template_id is not UNSET:
             field_dict["size_chart_template_id"] = size_chart_template_id
         if size_chart_template_name is not UNSET:
@@ -52,6 +66,8 @@ class SizeChartChangeWebhookData:
             field_dict["update_time"] = update_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -70,6 +86,7 @@ class SizeChartChangeWebhookData:
             event_type=event_type,
             update_time=update_time,
         )
+
 
         size_chart_change_webhook_data.additional_properties = d
         return size_chart_change_webhook_data

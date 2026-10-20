@@ -1,15 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.get_creator_performance_for_campaign_product_response import (
-    GetCreatorPerformanceForCampaignProductResponse,
-)
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.get_creator_performance_for_campaign_product_response import GetCreatorPerformanceForCampaignProductResponse
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,7 +21,12 @@ def _get_kwargs(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["page_size"] = page_size
@@ -28,25 +35,26 @@ def _get_kwargs(
 
     params["category_asset_cipher"] = category_asset_cipher
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/affiliate_partner/202508/campaigns/{campaign_id}/products/{product_id}/performance".format(
-            campaign_id=quote(str(campaign_id), safe=""),
-            product_id=quote(str(product_id), safe=""),
-        ),
+        "url": "/affiliate_partner/202508/campaigns/{campaign_id}/products/{product_id}/performance".format(campaign_id=quote(str(campaign_id), safe=""),product_id=quote(str(product_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetCreatorPerformanceForCampaignProductResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCreatorPerformanceForCampaignProductResponse | None:
     if response.status_code == 200:
         response_200 = GetCreatorPerformanceForCampaignProductResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -56,9 +64,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetCreatorPerformanceForCampaignProductResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetCreatorPerformanceForCampaignProductResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -75,8 +81,9 @@ def sync_detailed(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> Response[GetCreatorPerformanceForCampaignProductResponse]:
-    """Get Creator Performance for Campaign Product
+    """ Get Creator Performance for Campaign Product
 
      Returns a paginated list of creators associated with a product in an affiliate partner campaign,
     together with available collaboration and performance details such as commission, free-sample
@@ -95,14 +102,16 @@ def sync_detailed(
 
     Returns:
         Response[GetCreatorPerformanceForCampaignProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        product_id=product_id,
-        page_size=page_size,
-        page_token=page_token,
-        category_asset_cipher=category_asset_cipher,
+product_id=product_id,
+page_size=page_size,
+page_token=page_token,
+category_asset_cipher=category_asset_cipher,
+
     )
 
     response = client.get_httpx_client().request(
@@ -110,7 +119,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     campaign_id: str,
@@ -120,8 +128,9 @@ def sync(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> GetCreatorPerformanceForCampaignProductResponse | None:
-    """Get Creator Performance for Campaign Product
+    """ Get Creator Performance for Campaign Product
 
      Returns a paginated list of creators associated with a product in an affiliate partner campaign,
     together with available collaboration and performance details such as commission, free-sample
@@ -140,17 +149,18 @@ def sync(
 
     Returns:
         GetCreatorPerformanceForCampaignProductResponse
-    """
+     """
+
 
     return sync_detailed(
         campaign_id=campaign_id,
-        product_id=product_id,
-        client=client,
-        page_size=page_size,
-        page_token=page_token,
-        category_asset_cipher=category_asset_cipher,
-    ).parsed
+product_id=product_id,
+client=client,
+page_size=page_size,
+page_token=page_token,
+category_asset_cipher=category_asset_cipher,
 
+    ).parsed
 
 async def asyncio_detailed(
     campaign_id: str,
@@ -160,8 +170,9 @@ async def asyncio_detailed(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> Response[GetCreatorPerformanceForCampaignProductResponse]:
-    """Get Creator Performance for Campaign Product
+    """ Get Creator Performance for Campaign Product
 
      Returns a paginated list of creators associated with a product in an affiliate partner campaign,
     together with available collaboration and performance details such as commission, free-sample
@@ -180,20 +191,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCreatorPerformanceForCampaignProductResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        product_id=product_id,
-        page_size=page_size,
-        page_token=page_token,
-        category_asset_cipher=category_asset_cipher,
+product_id=product_id,
+page_size=page_size,
+page_token=page_token,
+category_asset_cipher=category_asset_cipher,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     campaign_id: str,
@@ -203,8 +217,9 @@ async def asyncio(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     category_asset_cipher: str,
+
 ) -> GetCreatorPerformanceForCampaignProductResponse | None:
-    """Get Creator Performance for Campaign Product
+    """ Get Creator Performance for Campaign Product
 
      Returns a paginated list of creators associated with a product in an affiliate partner campaign,
     together with available collaboration and performance details such as commission, free-sample
@@ -223,15 +238,15 @@ async def asyncio(
 
     Returns:
         GetCreatorPerformanceForCampaignProductResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            campaign_id=campaign_id,
-            product_id=product_id,
-            client=client,
-            page_size=page_size,
-            page_token=page_token,
-            category_asset_cipher=category_asset_cipher,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        campaign_id=campaign_id,
+product_id=product_id,
+client=client,
+page_size=page_size,
+page_token=page_token,
+category_asset_cipher=category_asset_cipher,
+
+    )).parsed

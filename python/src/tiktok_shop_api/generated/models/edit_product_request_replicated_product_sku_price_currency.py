@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class EditProductRequestReplicatedProductSkuPriceCurrency(StrEnum):
     EUR = "EUR"
     GBP = "GBP"

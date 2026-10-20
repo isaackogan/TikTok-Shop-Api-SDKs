@@ -1,28 +1,35 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.send_message_request import SendMessageRequest
 from ...models.send_message_response import SendMessageResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     conversation_id: str,
     *,
     body: SendMessageRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/customer_service/202606/conversations/{conversation_id}/messages".format(
-            conversation_id=quote(str(conversation_id), safe=""),
-        ),
+        "url": "/customer_service/202606/conversations/{conversation_id}/messages".format(conversation_id=quote(str(conversation_id), safe=""),),
     }
 
     _kwargs["json"] = body.to_dict()
@@ -33,9 +40,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SendMessageResponse | None:
     if response.status_code == 200:
         response_200 = SendMessageResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -59,8 +69,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SendMessageRequest,
+
 ) -> Response[SendMessageResponse]:
-    """Send Message
+    """ Send Message
 
      Use this API to send a message to the buyer in a conversation.
 
@@ -74,11 +85,13 @@ def sync_detailed(
 
     Returns:
         Response[SendMessageResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -87,14 +100,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SendMessageRequest,
+
 ) -> SendMessageResponse | None:
-    """Send Message
+    """ Send Message
 
      Use this API to send a message to the buyer in a conversation.
 
@@ -108,22 +121,24 @@ def sync(
 
     Returns:
         SendMessageResponse
-    """
+     """
+
 
     return sync_detailed(
         conversation_id=conversation_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SendMessageRequest,
+
 ) -> Response[SendMessageResponse]:
-    """Send Message
+    """ Send Message
 
      Use this API to send a message to the buyer in a conversation.
 
@@ -137,25 +152,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[SendMessageResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: SendMessageRequest,
+
 ) -> SendMessageResponse | None:
-    """Send Message
+    """ Send Message
 
      Use this API to send a message to the buyer in a conversation.
 
@@ -169,12 +188,12 @@ async def asyncio(
 
     Returns:
         SendMessageResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            conversation_id=conversation_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        conversation_id=conversation_id,
+client=client,
+body=body,
+
+    )).parsed

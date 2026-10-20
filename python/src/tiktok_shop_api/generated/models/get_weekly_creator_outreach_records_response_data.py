@@ -1,62 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_weekly_creator_outreach_records_response_data_data import (
-        GetWeeklyCreatorOutreachRecordsResponseDataData,
-    )
+  from ..models.get_weekly_creator_outreach_records_response_data_data import GetWeeklyCreatorOutreachRecordsResponseDataData
+
+
+
 
 
 T = TypeVar("T", bound="GetWeeklyCreatorOutreachRecordsResponseData")
 
 
+
 @_attrs_define
 class GetWeeklyCreatorOutreachRecordsResponseData:
-    """
-    Attributes:
-        data (GetWeeklyCreatorOutreachRecordsResponseDataData | Unset):
-    """
+    """ 
+        Attributes:
+            data (GetWeeklyCreatorOutreachRecordsResponseDataData | Unset):
+     """
 
     data: GetWeeklyCreatorOutreachRecordsResponseDataData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_weekly_creator_outreach_records_response_data_data import GetWeeklyCreatorOutreachRecordsResponseDataData # noqa: PLC0415
         data: dict[str, Any] | Unset = UNSET
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if data is not UNSET:
             field_dict["data"] = data
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_weekly_creator_outreach_records_response_data_data import (
-            GetWeeklyCreatorOutreachRecordsResponseDataData,  # noqa: PLC0415
-        )
-
+        from ..models.get_weekly_creator_outreach_records_response_data_data import GetWeeklyCreatorOutreachRecordsResponseDataData # noqa: PLC0415
         d = dict(src_dict)
         _data = d.pop("data", UNSET)
         data: GetWeeklyCreatorOutreachRecordsResponseDataData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = GetWeeklyCreatorOutreachRecordsResponseDataData.from_dict(_data)
 
+
+
+
         get_weekly_creator_outreach_records_response_data = cls(
             data=data,
         )
+
 
         get_weekly_creator_outreach_records_response_data.additional_properties = d
         return get_weekly_creator_outreach_records_response_data

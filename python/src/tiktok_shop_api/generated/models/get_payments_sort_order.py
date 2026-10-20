@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetPaymentsSortOrder(StrEnum):
     ASC = "ASC"
     DESC = "DESC"

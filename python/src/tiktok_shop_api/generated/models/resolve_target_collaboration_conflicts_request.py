@@ -1,67 +1,80 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.resolve_target_collaboration_conflicts_request_conflict_item import (
-        ResolveTargetCollaborationConflictsRequestConflictItem,
-    )
+  from ..models.resolve_target_collaboration_conflicts_request_conflict_item import ResolveTargetCollaborationConflictsRequestConflictItem
+
+
+
 
 
 T = TypeVar("T", bound="ResolveTargetCollaborationConflictsRequest")
 
 
+
 @_attrs_define
 class ResolveTargetCollaborationConflictsRequest:
-    """
-    Attributes:
-        conflict_items (list[ResolveTargetCollaborationConflictsRequestConflictItem]): A list of creators and their
-            existing target collaborations involved in conflicts that caused target collaboration failure. Each item
-            identifies a creator and the existing target collaboration from which that creator will be removed.
-    """
+    """ 
+        Attributes:
+            conflict_items (list[ResolveTargetCollaborationConflictsRequestConflictItem]): A list of creators and their
+                existing target collaborations involved in conflicts that caused target collaboration failure. Each item
+                identifies a creator and the existing target collaboration from which that creator will be removed.
+     """
 
     conflict_items: list[ResolveTargetCollaborationConflictsRequestConflictItem]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.resolve_target_collaboration_conflicts_request_conflict_item import ResolveTargetCollaborationConflictsRequestConflictItem # noqa: PLC0415
         conflict_items = []
         for conflict_items_item_data in self.conflict_items:
             conflict_items_item = conflict_items_item_data.to_dict()
             conflict_items.append(conflict_items_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "conflict_items": conflict_items,
-            }
-        )
+        field_dict.update({
+            "conflict_items": conflict_items,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.resolve_target_collaboration_conflicts_request_conflict_item import (
-            ResolveTargetCollaborationConflictsRequestConflictItem,  # noqa: PLC0415
-        )
-
+        from ..models.resolve_target_collaboration_conflicts_request_conflict_item import ResolveTargetCollaborationConflictsRequestConflictItem # noqa: PLC0415
         d = dict(src_dict)
         conflict_items = []
         _conflict_items = d.pop("conflict_items")
-        for conflict_items_item_data in _conflict_items:
-            conflict_items_item = ResolveTargetCollaborationConflictsRequestConflictItem.from_dict(
-                conflict_items_item_data
-            )
+        for conflict_items_item_data in (_conflict_items):
+            conflict_items_item = ResolveTargetCollaborationConflictsRequestConflictItem.from_dict(conflict_items_item_data)
+
+
 
             conflict_items.append(conflict_items_item)
+
 
         resolve_target_collaboration_conflicts_request = cls(
             conflict_items=conflict_items,
         )
+
 
         resolve_target_collaboration_conflicts_request.additional_properties = d
         return resolve_target_collaboration_conflicts_request

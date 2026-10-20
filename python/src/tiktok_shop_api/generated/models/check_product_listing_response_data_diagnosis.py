@@ -1,44 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.check_product_listing_response_data_diagnosis_suggestion import (
-        CheckProductListingResponseDataDiagnosisSuggestion,
-    )
-    from ..models.diagnosis_result import DiagnosisResult
+  from ..models.check_product_listing_response_data_diagnosis_suggestion import CheckProductListingResponseDataDiagnosisSuggestion
+  from ..models.diagnosis_result import DiagnosisResult
+
+
+
 
 
 T = TypeVar("T", bound="CheckProductListingResponseDataDiagnosis")
 
 
+
 @_attrs_define
 class CheckProductListingResponseDataDiagnosis:
-    """
-    Attributes:
-        field (str | Unset): The product field being diagnosed.
-            Possible values:
-            - TITLE: Product title
-            - DESCRIPTION: Product description
-            - IMAGE: Product image displayed in the image gallery
-            - ATTRIBUTE: Product attribute
-            - SIZE_CHART: Product size chart
-        diagnosis_results (list[DiagnosisResult] | Unset): The diagnosis results.
-        suggestions (CheckProductListingResponseDataDiagnosisSuggestion | Unset):
-    """
+    """ 
+        Attributes:
+            field (str | Unset): The product field being diagnosed.
+                Possible values:
+                - TITLE: Product title
+                - DESCRIPTION: Product description
+                - IMAGE: Product image displayed in the image gallery
+                - ATTRIBUTE: Product attribute
+                - SIZE_CHART: Product size chart
+            diagnosis_results (list[DiagnosisResult] | Unset): The diagnosis results.
+            suggestions (CheckProductListingResponseDataDiagnosisSuggestion | Unset):
+     """
 
     field: str | Unset = UNSET
     diagnosis_results: list[DiagnosisResult] | Unset = UNSET
     suggestions: CheckProductListingResponseDataDiagnosisSuggestion | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.check_product_listing_response_data_diagnosis_suggestion import CheckProductListingResponseDataDiagnosisSuggestion # noqa: PLC0415
+        from ..models.diagnosis_result import DiagnosisResult # noqa: PLC0415
         field = self.field
 
         diagnosis_results: list[dict[str, Any]] | Unset = UNSET
@@ -48,13 +59,17 @@ class CheckProductListingResponseDataDiagnosis:
                 diagnosis_results_item = diagnosis_results_item_data.to_dict()
                 diagnosis_results.append(diagnosis_results_item)
 
+
+
         suggestions: dict[str, Any] | Unset = UNSET
         if not isinstance(self.suggestions, Unset):
             suggestions = self.suggestions.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if field is not UNSET:
             field_dict["field"] = field
         if diagnosis_results is not UNSET:
@@ -64,13 +79,12 @@ class CheckProductListingResponseDataDiagnosis:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.check_product_listing_response_data_diagnosis_suggestion import (
-            CheckProductListingResponseDataDiagnosisSuggestion,  # noqa: PLC0415
-        )
-        from ..models.diagnosis_result import DiagnosisResult  # noqa: PLC0415
-
+        from ..models.check_product_listing_response_data_diagnosis_suggestion import CheckProductListingResponseDataDiagnosisSuggestion # noqa: PLC0415
+        from ..models.diagnosis_result import DiagnosisResult # noqa: PLC0415
         d = dict(src_dict)
         field = d.pop("field", UNSET)
 
@@ -81,20 +95,27 @@ class CheckProductListingResponseDataDiagnosis:
             for diagnosis_results_item_data in _diagnosis_results:
                 diagnosis_results_item = DiagnosisResult.from_dict(diagnosis_results_item_data)
 
+
+
                 diagnosis_results.append(diagnosis_results_item)
+
 
         _suggestions = d.pop("suggestions", UNSET)
         suggestions: CheckProductListingResponseDataDiagnosisSuggestion | Unset
-        if isinstance(_suggestions, Unset):
+        if isinstance(_suggestions,  Unset):
             suggestions = UNSET
         else:
             suggestions = CheckProductListingResponseDataDiagnosisSuggestion.from_dict(_suggestions)
+
+
+
 
         check_product_listing_response_data_diagnosis = cls(
             field=field,
             diagnosis_results=diagnosis_results,
             suggestions=suggestions,
         )
+
 
         check_product_listing_response_data_diagnosis.additional_properties = d
         return check_product_listing_response_data_diagnosis

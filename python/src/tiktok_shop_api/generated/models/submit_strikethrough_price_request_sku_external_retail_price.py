@@ -1,41 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
+
 T = TypeVar("T", bound="SubmitStrikethroughPriceRequestSkuExternalRetailPrice")
+
 
 
 @_attrs_define
 class SubmitStrikethroughPriceRequestSkuExternalRetailPrice:
-    """
-    Attributes:
-        amount (str): The retail price amount. The valid range is 0.01 to 7600.
-        currency (str): The ISO 4217 currency code. The supported value is `USD`.
-    """
+    """ 
+        Attributes:
+            amount (str): The retail price amount. The valid range is 0.01 to 7600.
+            currency (str): The ISO 4217 currency code. The supported value is `USD`.
+     """
 
     amount: str
     currency: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
         currency = self.currency
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "amount": amount,
-                "currency": currency,
-            }
-        )
+        field_dict.update({
+            "amount": amount,
+            "currency": currency,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -48,6 +62,7 @@ class SubmitStrikethroughPriceRequestSkuExternalRetailPrice:
             amount=amount,
             currency=currency,
         )
+
 
         submit_strikethrough_price_request_sku_external_retail_price.additional_properties = d
         return submit_strikethrough_price_request_sku_external_retail_price

@@ -1,40 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.search_combinable_packages_response_data_combinable_package import (
-        SearchCombinablePackagesResponseDataCombinablePackage,
-    )
+  from ..models.search_combinable_packages_response_data_combinable_package import SearchCombinablePackagesResponseDataCombinablePackage
+
+
+
 
 
 T = TypeVar("T", bound="SearchCombinablePackagesResponseData")
 
 
+
 @_attrs_define
 class SearchCombinablePackagesResponseData:
-    """
-    Attributes:
-        combinable_packages (list[SearchCombinablePackagesResponseDataCombinablePackage] | Unset): List of eligible
-            packages that can be combined.
-        next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
-            this value in the `page_token` parameter of your request if the current response does not return all the
-            results.
-        total_count (int | Unset): The number of combinable packages counted by this result.
-    """
+    """ 
+        Attributes:
+            combinable_packages (list[SearchCombinablePackagesResponseDataCombinablePackage] | Unset): List of eligible
+                packages that can be combined.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
+                this value in the `page_token` parameter of your request if the current response does not return all the
+                results.
+            total_count (int | Unset): The number of combinable packages counted by this result.
+     """
 
     combinable_packages: list[SearchCombinablePackagesResponseDataCombinablePackage] | Unset = UNSET
     next_page_token: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.search_combinable_packages_response_data_combinable_package import SearchCombinablePackagesResponseDataCombinablePackage # noqa: PLC0415
         combinable_packages: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.combinable_packages, Unset):
             combinable_packages = []
@@ -42,13 +52,17 @@ class SearchCombinablePackagesResponseData:
                 combinable_packages_item = combinable_packages_item_data.to_dict()
                 combinable_packages.append(combinable_packages_item)
 
+
+
         next_page_token = self.next_page_token
 
         total_count = self.total_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if combinable_packages is not UNSET:
             field_dict["combinable_packages"] = combinable_packages
         if next_page_token is not UNSET:
@@ -58,23 +72,23 @@ class SearchCombinablePackagesResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.search_combinable_packages_response_data_combinable_package import (
-            SearchCombinablePackagesResponseDataCombinablePackage,  # noqa: PLC0415
-        )
-
+        from ..models.search_combinable_packages_response_data_combinable_package import SearchCombinablePackagesResponseDataCombinablePackage # noqa: PLC0415
         d = dict(src_dict)
         _combinable_packages = d.pop("combinable_packages", UNSET)
         combinable_packages: list[SearchCombinablePackagesResponseDataCombinablePackage] | Unset = UNSET
         if _combinable_packages is not UNSET:
             combinable_packages = []
             for combinable_packages_item_data in _combinable_packages:
-                combinable_packages_item = SearchCombinablePackagesResponseDataCombinablePackage.from_dict(
-                    combinable_packages_item_data
-                )
+                combinable_packages_item = SearchCombinablePackagesResponseDataCombinablePackage.from_dict(combinable_packages_item_data)
+
+
 
                 combinable_packages.append(combinable_packages_item)
+
 
         next_page_token = d.pop("next_page_token", UNSET)
 
@@ -85,6 +99,7 @@ class SearchCombinablePackagesResponseData:
             next_page_token=next_page_token,
             total_count=total_count,
         )
+
 
         search_combinable_packages_response_data.additional_properties = d
         return search_combinable_packages_response_data

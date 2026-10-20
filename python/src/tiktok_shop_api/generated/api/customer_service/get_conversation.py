@@ -1,13 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_conversation_response import GetConversationResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -15,31 +19,38 @@ def _get_kwargs(
     *,
     need_session_id: bool | Unset = UNSET,
     need_session_info: bool | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["need_session_id"] = need_session_id
 
     params["need_session_info"] = need_session_info
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/customer_service/202601/conversations/{conversation_id}".format(
-            conversation_id=quote(str(conversation_id), safe=""),
-        ),
+        "url": "/customer_service/202601/conversations/{conversation_id}".format(conversation_id=quote(str(conversation_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetConversationResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetConversationResponse | None:
     if response.status_code == 200:
         response_200 = GetConversationResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -49,9 +60,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetConversationResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetConversationResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -66,8 +75,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     need_session_id: bool | Unset = UNSET,
     need_session_info: bool | Unset = UNSET,
+
 ) -> Response[GetConversationResponse]:
-    """Get Conversation
+    """ Get Conversation
 
      Use this API to retrieve information about a conversation by ID.
 
@@ -82,12 +92,14 @@ def sync_detailed(
 
     Returns:
         Response[GetConversationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        need_session_id=need_session_id,
-        need_session_info=need_session_info,
+need_session_id=need_session_id,
+need_session_info=need_session_info,
+
     )
 
     response = client.get_httpx_client().request(
@@ -96,15 +108,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     conversation_id: str,
     *,
     client: AuthenticatedClient | Client,
     need_session_id: bool | Unset = UNSET,
     need_session_info: bool | Unset = UNSET,
+
 ) -> GetConversationResponse | None:
-    """Get Conversation
+    """ Get Conversation
 
      Use this API to retrieve information about a conversation by ID.
 
@@ -119,15 +131,16 @@ def sync(
 
     Returns:
         GetConversationResponse
-    """
+     """
+
 
     return sync_detailed(
         conversation_id=conversation_id,
-        client=client,
-        need_session_id=need_session_id,
-        need_session_info=need_session_info,
-    ).parsed
+client=client,
+need_session_id=need_session_id,
+need_session_info=need_session_info,
 
+    ).parsed
 
 async def asyncio_detailed(
     conversation_id: str,
@@ -135,8 +148,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     need_session_id: bool | Unset = UNSET,
     need_session_info: bool | Unset = UNSET,
+
 ) -> Response[GetConversationResponse]:
-    """Get Conversation
+    """ Get Conversation
 
      Use this API to retrieve information about a conversation by ID.
 
@@ -151,18 +165,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetConversationResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         conversation_id=conversation_id,
-        need_session_id=need_session_id,
-        need_session_info=need_session_info,
+need_session_id=need_session_id,
+need_session_info=need_session_info,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     conversation_id: str,
@@ -170,8 +187,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     need_session_id: bool | Unset = UNSET,
     need_session_info: bool | Unset = UNSET,
+
 ) -> GetConversationResponse | None:
-    """Get Conversation
+    """ Get Conversation
 
      Use this API to retrieve information about a conversation by ID.
 
@@ -186,13 +204,13 @@ async def asyncio(
 
     Returns:
         GetConversationResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            conversation_id=conversation_id,
-            client=client,
-            need_session_id=need_session_id,
-            need_session_info=need_session_info,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        conversation_id=conversation_id,
+client=client,
+need_session_id=need_session_id,
+need_session_info=need_session_info,
+
+    )).parsed

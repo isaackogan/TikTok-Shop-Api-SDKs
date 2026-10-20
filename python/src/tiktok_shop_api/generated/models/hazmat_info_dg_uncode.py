@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class HazmatInfoDgUncode(StrEnum):
     OTHER = "OTHER"
     UN1263 = "UN1263"

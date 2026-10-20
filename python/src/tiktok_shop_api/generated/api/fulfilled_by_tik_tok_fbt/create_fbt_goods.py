@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.create_fbt_goods_request import CreateFBTGoodsRequest
 from ...models.create_fbt_goods_response import CreateFBTGoodsResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: CreateFBTGoodsRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,9 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
+
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> CreateFBTGoodsResponse | None:
     if response.status_code == 200:
         response_200 = CreateFBTGoodsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -41,9 +54,7 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[CreateFBTGoodsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[CreateFBTGoodsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -56,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTGoodsRequest,
+
 ) -> Response[CreateFBTGoodsResponse]:
-    """Create FBT Goods
+    """ Create FBT Goods
 
      Create FBT goods records and link each record to a TikTok Shop SKU. Request-level errors can be
     returned before per-item results are populated. When `create_result_info.create_result_list`
@@ -76,10 +88,12 @@ def sync_detailed(
 
     Returns:
         Response[CreateFBTGoodsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -88,13 +102,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTGoodsRequest,
+
 ) -> CreateFBTGoodsResponse | None:
-    """Create FBT Goods
+    """ Create FBT Goods
 
      Create FBT goods records and link each record to a TikTok Shop SKU. Request-level errors can be
     returned before per-item results are populated. When `create_result_info.create_result_list`
@@ -113,20 +127,22 @@ def sync(
 
     Returns:
         CreateFBTGoodsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTGoodsRequest,
+
 ) -> Response[CreateFBTGoodsResponse]:
-    """Create FBT Goods
+    """ Create FBT Goods
 
      Create FBT goods records and link each record to a TikTok Shop SKU. Request-level errors can be
     returned before per-item results are populated. When `create_result_info.create_result_list`
@@ -145,23 +161,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[CreateFBTGoodsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: CreateFBTGoodsRequest,
+
 ) -> CreateFBTGoodsResponse | None:
-    """Create FBT Goods
+    """ Create FBT Goods
 
      Create FBT goods records and link each record to a TikTok Shop SKU. Request-level errors can be
     returned before per-item results are populated. When `create_result_info.create_result_list`
@@ -180,11 +200,11 @@ async def asyncio(
 
     Returns:
         CreateFBTGoodsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

@@ -1,30 +1,38 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.get_creator_marketplace_advanced_search_filters_request import (
-    GetCreatorMarketplaceAdvancedSearchFiltersRequest,
-)
-from ...models.get_creator_marketplace_advanced_search_filters_response import (
-    GetCreatorMarketplaceAdvancedSearchFiltersResponse,
-)
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.get_creator_marketplace_advanced_search_filters_request import GetCreatorMarketplaceAdvancedSearchFiltersRequest
+from ...models.get_creator_marketplace_advanced_search_filters_response import GetCreatorMarketplaceAdvancedSearchFiltersResponse
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: GetCreatorMarketplaceAdvancedSearchFiltersRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
         "url": "/affiliate_seller/202608/marketplace_creators/search/filter",
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +42,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetCreatorMarketplaceAdvancedSearchFiltersResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetCreatorMarketplaceAdvancedSearchFiltersResponse | None:
     if response.status_code == 200:
         response_200 = GetCreatorMarketplaceAdvancedSearchFiltersResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +57,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -63,8 +70,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: GetCreatorMarketplaceAdvancedSearchFiltersRequest | Unset = UNSET,
+
 ) -> Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]:
-    """Get Creator Marketplace Advanced Search Filters
+    """ Get Creator Marketplace Advanced Search Filters
 
      This API allows you to obtain the advanced filters available in Seller Search Creator Marketplace.
     Because we are constantly releasing new filters which are specific to each country or region, this
@@ -79,10 +87,12 @@ def sync_detailed(
 
     Returns:
         Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -91,13 +101,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: GetCreatorMarketplaceAdvancedSearchFiltersRequest | Unset = UNSET,
+
 ) -> GetCreatorMarketplaceAdvancedSearchFiltersResponse | None:
-    """Get Creator Marketplace Advanced Search Filters
+    """ Get Creator Marketplace Advanced Search Filters
 
      This API allows you to obtain the advanced filters available in Seller Search Creator Marketplace.
     Because we are constantly releasing new filters which are specific to each country or region, this
@@ -112,20 +122,22 @@ def sync(
 
     Returns:
         GetCreatorMarketplaceAdvancedSearchFiltersResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: GetCreatorMarketplaceAdvancedSearchFiltersRequest | Unset = UNSET,
+
 ) -> Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]:
-    """Get Creator Marketplace Advanced Search Filters
+    """ Get Creator Marketplace Advanced Search Filters
 
      This API allows you to obtain the advanced filters available in Seller Search Creator Marketplace.
     Because we are constantly releasing new filters which are specific to each country or region, this
@@ -140,23 +152,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetCreatorMarketplaceAdvancedSearchFiltersResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: GetCreatorMarketplaceAdvancedSearchFiltersRequest | Unset = UNSET,
+
 ) -> GetCreatorMarketplaceAdvancedSearchFiltersResponse | None:
-    """Get Creator Marketplace Advanced Search Filters
+    """ Get Creator Marketplace Advanced Search Filters
 
      This API allows you to obtain the advanced filters available in Seller Search Creator Marketplace.
     Because we are constantly releasing new filters which are specific to each country or region, this
@@ -171,11 +187,11 @@ async def asyncio(
 
     Returns:
         GetCreatorMarketplaceAdvancedSearchFiltersResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

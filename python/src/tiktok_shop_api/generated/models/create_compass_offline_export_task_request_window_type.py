@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreateCompassOfflineExportTaskRequestWindowType(StrEnum):
     PAST_24H = "PAST_24H"
     PAST_30_DAYS = "PAST_30_DAYS"

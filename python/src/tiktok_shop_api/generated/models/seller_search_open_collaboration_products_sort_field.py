@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SellerSearchOpenCollaborationProductsSortField(StrEnum):
     COMMISSION = "commission"
     COMMISSION_RATE = "commission_rate"

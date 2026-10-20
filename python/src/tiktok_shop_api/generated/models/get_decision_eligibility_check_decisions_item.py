@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetDecisionEligibilityCheckDecisionsItem(StrEnum):
     APPROVE_RECEIVED_PACKAGE = "APPROVE_RECEIVED_PACKAGE"
     APPROVE_REFUND = "APPROVE_REFUND"

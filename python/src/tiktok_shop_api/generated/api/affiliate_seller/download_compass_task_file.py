@@ -1,33 +1,43 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.download_compass_task_file_response import DownloadCompassTaskFileResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     task_id: str,
+
 ) -> dict[str, Any]:
+    
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/affiliate_seller/202603/compass/offline_tasks/{task_id}/file".format(
-            task_id=quote(str(task_id), safe=""),
-        ),
+        "url": "/affiliate_seller/202603/compass/offline_tasks/{task_id}/file".format(task_id=quote(str(task_id), safe=""),),
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> DownloadCompassTaskFileResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> DownloadCompassTaskFileResponse | None:
     if response.status_code == 200:
         response_200 = DownloadCompassTaskFileResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -37,9 +47,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[DownloadCompassTaskFileResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[DownloadCompassTaskFileResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -52,8 +60,9 @@ def sync_detailed(
     task_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[DownloadCompassTaskFileResponse]:
-    """Download Compass Task File
+    """ Download Compass Task File
 
      Download the result file of a completed export task by taskId. Requires ownership validation;
     returns file.
@@ -67,10 +76,12 @@ def sync_detailed(
 
     Returns:
         Response[DownloadCompassTaskFileResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         task_id=task_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -79,13 +90,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     task_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> DownloadCompassTaskFileResponse | None:
-    """Download Compass Task File
+    """ Download Compass Task File
 
      Download the result file of a completed export task by taskId. Requires ownership validation;
     returns file.
@@ -99,20 +110,22 @@ def sync(
 
     Returns:
         DownloadCompassTaskFileResponse
-    """
+     """
+
 
     return sync_detailed(
         task_id=task_id,
-        client=client,
-    ).parsed
+client=client,
 
+    ).parsed
 
 async def asyncio_detailed(
     task_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> Response[DownloadCompassTaskFileResponse]:
-    """Download Compass Task File
+    """ Download Compass Task File
 
      Download the result file of a completed export task by taskId. Requires ownership validation;
     returns file.
@@ -126,23 +139,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[DownloadCompassTaskFileResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         task_id=task_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     task_id: str,
     *,
     client: AuthenticatedClient | Client,
+
 ) -> DownloadCompassTaskFileResponse | None:
-    """Download Compass Task File
+    """ Download Compass Task File
 
      Download the result file of a completed export task by taskId. Requires ownership validation;
     returns file.
@@ -156,11 +173,11 @@ async def asyncio(
 
     Returns:
         DownloadCompassTaskFileResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            task_id=task_id,
-            client=client,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        task_id=task_id,
+client=client,
+
+    )).parsed

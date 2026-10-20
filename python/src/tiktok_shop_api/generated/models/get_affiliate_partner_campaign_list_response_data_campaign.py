@@ -1,37 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignListResponseDataCampaign")
+
 
 
 @_attrs_define
 class GetAffiliatePartnerCampaignListResponseDataCampaign:
-    """
-    Attributes:
-        id (str | Unset): The campaign identifier.
-        name (str | Unset): The campaign name.
-        status (str | Unset): The campaign status. The status is an enumerated type with values:
-            - READY
-            - UPCOMING
-            - ONGOING
-            - CLOSED
-        registration_start_time (int | Unset): The scheduled start time in Unix epoch format for seller product
-            registration. Note that this field can be updated when the campaign status is set to `READY` or `UPCOMING` only.
-        registration_end_time (int | Unset): The scheduled end time in Unix epoch time format for seller product
-            registration. This field is no longer editable when the campaign status is set to `CLOSED`.
-        campaign_start_time (int | Unset): The scheduled start time in Unix epoch time format for the campaign. Note
-            that this field can be updated when the campaign status is set to `READY` or `UPCOMING` only.
-        campaign_end_time (int | Unset): The scheduled end time in Unix epoch time format for the campaign. Note that
-            the end time must be less than 360 days from the start date. This field is no longer editable when the campaign
-            status is set to `CLOSED`.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The campaign identifier.
+            name (str | Unset): The campaign name.
+            status (str | Unset): The campaign status. The status is an enumerated type with values:
+                - READY
+                - UPCOMING
+                - ONGOING
+                - CLOSED
+            registration_start_time (int | Unset): The scheduled start time in Unix epoch format for seller product
+                registration. Note that this field can be updated when the campaign status is set to `READY` or `UPCOMING` only.
+            registration_end_time (int | Unset): The scheduled end time in Unix epoch time format for seller product
+                registration. This field is no longer editable when the campaign status is set to `CLOSED`.
+            campaign_start_time (int | Unset): The scheduled start time in Unix epoch time format for the campaign. Note
+                that this field can be updated when the campaign status is set to `READY` or `UPCOMING` only.
+            campaign_end_time (int | Unset): The scheduled end time in Unix epoch time format for the campaign. Note that
+                the end time must be less than 360 days from the start date. This field is no longer editable when the campaign
+                status is set to `CLOSED`.
+     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
@@ -41,6 +49,10 @@ class GetAffiliatePartnerCampaignListResponseDataCampaign:
     campaign_start_time: int | Unset = UNSET
     campaign_end_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -57,9 +69,11 @@ class GetAffiliatePartnerCampaignListResponseDataCampaign:
 
         campaign_end_time = self.campaign_end_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if name is not UNSET:
@@ -76,6 +90,8 @@ class GetAffiliatePartnerCampaignListResponseDataCampaign:
             field_dict["campaign_end_time"] = campaign_end_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -103,6 +119,7 @@ class GetAffiliatePartnerCampaignListResponseDataCampaign:
             campaign_start_time=campaign_start_time,
             campaign_end_time=campaign_end_time,
         )
+
 
         get_affiliate_partner_campaign_list_response_data_campaign.additional_properties = d
         return get_affiliate_partner_campaign_list_response_data_campaign

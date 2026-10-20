@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopProductsSortField(StrEnum):
     PRICE = "PRICE"
     PRODUCT_ID = "PRODUCT_ID"

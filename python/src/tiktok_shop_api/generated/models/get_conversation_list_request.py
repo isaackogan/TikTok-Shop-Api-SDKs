@@ -1,39 +1,55 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetConversationListRequest")
+
 
 
 @_attrs_define
 class GetConversationListRequest:
-    """
-    Attributes:
-        only_need_conversation_id (bool | Unset): - If `true`, only `conversation_id` in `data.conversation` is
-            returned.
-            - If `false`, all fields in `data.conversation` are returned.
-            `true` by default.
-    """
+    """ 
+        Attributes:
+            only_need_conversation_id (bool | Unset): - If `true`, only `conversation_id` in `data.conversation` is
+                returned.
+                - If `false`, all fields in `data.conversation` are returned.
+                `true` by default.
+     """
 
     only_need_conversation_id: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         only_need_conversation_id = self.only_need_conversation_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if only_need_conversation_id is not UNSET:
             field_dict["only_need_conversation_id"] = only_need_conversation_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -43,6 +59,7 @@ class GetConversationListRequest:
         get_conversation_list_request = cls(
             only_need_conversation_id=only_need_conversation_id,
         )
+
 
         get_conversation_list_request.additional_properties = d
         return get_conversation_list_request

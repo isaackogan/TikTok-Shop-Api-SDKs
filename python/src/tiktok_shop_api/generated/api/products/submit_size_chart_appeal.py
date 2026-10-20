@@ -1,20 +1,30 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.submit_size_chart_appeal_request import SubmitSizeChartAppealRequest
 from ...models.submit_size_chart_appeal_response import SubmitSizeChartAppealResponse
-from ...types import Response
+from typing import cast
+
 
 
 def _get_kwargs(
     *,
     body: SubmitSizeChartAppealRequest,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
+
+    
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -29,11 +39,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SubmitSizeChartAppealResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SubmitSizeChartAppealResponse | None:
     if response.status_code == 200:
         response_200 = SubmitSizeChartAppealResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -43,9 +54,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SubmitSizeChartAppealResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SubmitSizeChartAppealResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -58,8 +67,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitSizeChartAppealRequest,
+
 ) -> Response[SubmitSizeChartAppealResponse]:
-    """Submit Size Chart Appeal
+    """ Submit Size Chart Appeal
 
      #### Appeal Size Chart Verification
     Initiates an appeal process for a product that was blocked during the listing phase due to a size
@@ -88,10 +98,12 @@ def sync_detailed(
 
     Returns:
         Response[SubmitSizeChartAppealResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -100,13 +112,13 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitSizeChartAppealRequest,
+
 ) -> SubmitSizeChartAppealResponse | None:
-    """Submit Size Chart Appeal
+    """ Submit Size Chart Appeal
 
      #### Appeal Size Chart Verification
     Initiates an appeal process for a product that was blocked during the listing phase due to a size
@@ -135,20 +147,22 @@ def sync(
 
     Returns:
         SubmitSizeChartAppealResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-    ).parsed
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitSizeChartAppealRequest,
+
 ) -> Response[SubmitSizeChartAppealResponse]:
-    """Submit Size Chart Appeal
+    """ Submit Size Chart Appeal
 
      #### Appeal Size Chart Verification
     Initiates an appeal process for a product that was blocked during the listing phase due to a size
@@ -177,23 +191,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[SubmitSizeChartAppealResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     body: SubmitSizeChartAppealRequest,
+
 ) -> SubmitSizeChartAppealResponse | None:
-    """Submit Size Chart Appeal
+    """ Submit Size Chart Appeal
 
      #### Appeal Size Chart Verification
     Initiates an appeal process for a product that was blocked during the listing phase due to a size
@@ -222,11 +240,11 @@ async def asyncio(
 
     Returns:
         SubmitSizeChartAppealResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+
+    )).parsed

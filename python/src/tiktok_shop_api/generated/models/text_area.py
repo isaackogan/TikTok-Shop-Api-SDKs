@@ -1,29 +1,38 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="TextArea")
+
 
 
 @_attrs_define
 class TextArea:
-    """
-    Attributes:
-        align_type (str | Unset): The text alignment type. Enum values: `LEFT`, `CENTER`, `RIGHT`.
-        colors (list[str] | Unset): A list of text colors available for consumers to choose from, using hexadecimal
-            color values such as `#FFFFFF`.
-        default_text (str | Unset): Optional default text displayed in this area. If the consumer does not customize
-            this area, the default text may be used.
-        fonts (list[str] | Unset): A list of font keys available for consumers to choose from, based on the platform-
-            supported font library.
-        max_text_length (int | Unset): The maximum number of characters allowed for consumer text input.
-    """
+    """ 
+        Attributes:
+            align_type (str | Unset): The text alignment type. Enum values: `LEFT`, `CENTER`, `RIGHT`.
+            colors (list[str] | Unset): A list of text colors available for consumers to choose from, using hexadecimal
+                color values such as `#FFFFFF`.
+            default_text (str | Unset): Optional default text displayed in this area. If the consumer does not customize
+                this area, the default text may be used.
+            fonts (list[str] | Unset): A list of font keys available for consumers to choose from, based on the platform-
+                supported font library.
+            max_text_length (int | Unset): The maximum number of characters allowed for consumer text input.
+     """
 
     align_type: str | Unset = UNSET
     colors: list[str] | Unset = UNSET
@@ -32,6 +41,10 @@ class TextArea:
     max_text_length: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         align_type = self.align_type
 
@@ -39,17 +52,23 @@ class TextArea:
         if not isinstance(self.colors, Unset):
             colors = self.colors
 
+
+
         default_text = self.default_text
 
         fonts: list[str] | Unset = UNSET
         if not isinstance(self.fonts, Unset):
             fonts = self.fonts
 
+
+
         max_text_length = self.max_text_length
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if align_type is not UNSET:
             field_dict["align_type"] = align_type
         if colors is not UNSET:
@@ -63,6 +82,8 @@ class TextArea:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
@@ -70,9 +91,11 @@ class TextArea:
 
         colors = cast(list[str], d.pop("colors", UNSET))
 
+
         default_text = d.pop("default_text", UNSET)
 
         fonts = cast(list[str], d.pop("fonts", UNSET))
+
 
         max_text_length = d.pop("max_text_length", UNSET)
 
@@ -83,6 +106,7 @@ class TextArea:
             fonts=fonts,
             max_text_length=max_text_length,
         )
+
 
         text_area.additional_properties = d
         return text_area

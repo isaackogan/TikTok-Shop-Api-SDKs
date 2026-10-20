@@ -1,37 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_order_split_attributes_response_data_split_attribute_must_split_reason import (
-        GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason,
-    )
+  from ..models.get_order_split_attributes_response_data_split_attribute_must_split_reason import GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason
+
+
+
 
 
 T = TypeVar("T", bound="GetOrderSplitAttributesResponseDataSplitAttribute")
 
 
+
 @_attrs_define
 class GetOrderSplitAttributesResponseDataSplitAttribute:
-    """
-    Attributes:
-        order_id (str | Unset): TikTok Shop order ID.
-        can_split (bool | Unset): Whether an order can be split:
-            - `true`: The order can be split into multiple packages.
-            - `false`: The order cannot be split into multiple packages.
-        reason (str | Unset): The reason why the order cannot be split. Only return this field when `can_split = false`.
-        must_split (bool | Unset): Whether an order must be split:
-            - true: The order must be split into multiple packages.
-            - false: The order does not have to be split into multiple packages.
-        must_split_reasons (list[GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason] | Unset): The reason
-            why the order must be split. Only return this field when must_split = true.
-    """
+    """ 
+        Attributes:
+            order_id (str | Unset): TikTok Shop order ID.
+            can_split (bool | Unset): Whether an order can be split:
+                - `true`: The order can be split into multiple packages.
+                - `false`: The order cannot be split into multiple packages.
+            reason (str | Unset): The reason why the order cannot be split. Only return this field when `can_split = false`.
+            must_split (bool | Unset): Whether an order must be split:
+                - true: The order must be split into multiple packages.
+                - false: The order does not have to be split into multiple packages.
+            must_split_reasons (list[GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason] | Unset): The reason
+                why the order must be split. Only return this field when must_split = true.
+     """
 
     order_id: str | Unset = UNSET
     can_split: bool | Unset = UNSET
@@ -40,7 +45,12 @@ class GetOrderSplitAttributesResponseDataSplitAttribute:
     must_split_reasons: list[GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_order_split_attributes_response_data_split_attribute_must_split_reason import GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason # noqa: PLC0415
         order_id = self.order_id
 
         can_split = self.can_split
@@ -56,9 +66,13 @@ class GetOrderSplitAttributesResponseDataSplitAttribute:
                 must_split_reasons_item = must_split_reasons_item_data.to_dict()
                 must_split_reasons.append(must_split_reasons_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if order_id is not UNSET:
             field_dict["order_id"] = order_id
         if can_split is not UNSET:
@@ -72,12 +86,11 @@ class GetOrderSplitAttributesResponseDataSplitAttribute:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_order_split_attributes_response_data_split_attribute_must_split_reason import (
-            GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason,  # noqa: PLC0415
-        )
-
+        from ..models.get_order_split_attributes_response_data_split_attribute_must_split_reason import GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason # noqa: PLC0415
         d = dict(src_dict)
         order_id = d.pop("order_id", UNSET)
 
@@ -92,11 +105,12 @@ class GetOrderSplitAttributesResponseDataSplitAttribute:
         if _must_split_reasons is not UNSET:
             must_split_reasons = []
             for must_split_reasons_item_data in _must_split_reasons:
-                must_split_reasons_item = GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason.from_dict(
-                    must_split_reasons_item_data
-                )
+                must_split_reasons_item = GetOrderSplitAttributesResponseDataSplitAttributeMustSplitReason.from_dict(must_split_reasons_item_data)
+
+
 
                 must_split_reasons.append(must_split_reasons_item)
+
 
         get_order_split_attributes_response_data_split_attribute = cls(
             order_id=order_id,
@@ -105,6 +119,7 @@ class GetOrderSplitAttributesResponseDataSplitAttribute:
             must_split=must_split,
             must_split_reasons=must_split_reasons,
         )
+
 
         get_order_split_attributes_response_data_split_attribute.additional_properties = d
         return get_order_split_attributes_response_data_split_attribute

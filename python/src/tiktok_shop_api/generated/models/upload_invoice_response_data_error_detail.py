@@ -1,27 +1,40 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="UploadInvoiceResponseDataErrorDetail")
+
 
 
 @_attrs_define
 class UploadInvoiceResponseDataErrorDetail:
-    """
-    Attributes:
-        package_id (str | Unset): The package ID where the error occurred.
-        order_ids (list[str] | Unset): The order IDs where errors occurred.
-    """
+    """ 
+        Attributes:
+            package_id (str | Unset): The package ID where the error occurred.
+            order_ids (list[str] | Unset): The order IDs where errors occurred.
+     """
 
     package_id: str | Unset = UNSET
     order_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         package_id = self.package_id
@@ -30,15 +43,21 @@ class UploadInvoiceResponseDataErrorDetail:
         if not isinstance(self.order_ids, Unset):
             order_ids = self.order_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if package_id is not UNSET:
             field_dict["package_id"] = package_id
         if order_ids is not UNSET:
             field_dict["order_ids"] = order_ids
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -47,10 +66,12 @@ class UploadInvoiceResponseDataErrorDetail:
 
         order_ids = cast(list[str], d.pop("order_ids", UNSET))
 
+
         upload_invoice_response_data_error_detail = cls(
             package_id=package_id,
             order_ids=order_ids,
         )
+
 
         upload_invoice_response_data_error_detail.additional_properties = d
         return upload_invoice_response_data_error_detail

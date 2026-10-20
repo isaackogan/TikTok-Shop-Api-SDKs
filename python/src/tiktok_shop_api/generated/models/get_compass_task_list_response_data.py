@@ -1,31 +1,43 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_compass_task_list_response_data_task import GetCompassTaskListResponseDataTask
+  from ..models.get_compass_task_list_response_data_task import GetCompassTaskListResponseDataTask
+
+
+
 
 
 T = TypeVar("T", bound="GetCompassTaskListResponseData")
 
 
+
 @_attrs_define
 class GetCompassTaskListResponseData:
-    """
-    Attributes:
-        tasks (list[GetCompassTaskListResponseDataTask] | Unset): The list of the task
-    """
+    """ 
+        Attributes:
+            tasks (list[GetCompassTaskListResponseDataTask] | Unset): The list of the task
+     """
 
     tasks: list[GetCompassTaskListResponseDataTask] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_compass_task_list_response_data_task import GetCompassTaskListResponseDataTask # noqa: PLC0415
         tasks: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.tasks, Unset):
             tasks = []
@@ -33,20 +45,23 @@ class GetCompassTaskListResponseData:
                 tasks_item = tasks_item_data.to_dict()
                 tasks.append(tasks_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if tasks is not UNSET:
             field_dict["tasks"] = tasks
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_compass_task_list_response_data_task import (
-            GetCompassTaskListResponseDataTask,  # noqa: PLC0415
-        )
-
+        from ..models.get_compass_task_list_response_data_task import GetCompassTaskListResponseDataTask # noqa: PLC0415
         d = dict(src_dict)
         _tasks = d.pop("tasks", UNSET)
         tasks: list[GetCompassTaskListResponseDataTask] | Unset = UNSET
@@ -55,11 +70,15 @@ class GetCompassTaskListResponseData:
             for tasks_item_data in _tasks:
                 tasks_item = GetCompassTaskListResponseDataTask.from_dict(tasks_item_data)
 
+
+
                 tasks.append(tasks_item)
+
 
         get_compass_task_list_response_data = cls(
             tasks=tasks,
         )
+
 
         get_compass_task_list_response_data.additional_properties = d
         return get_compass_task_list_response_data

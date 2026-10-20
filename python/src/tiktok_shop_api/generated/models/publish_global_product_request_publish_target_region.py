@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class PublishGlobalProductRequestPublishTargetRegion(StrEnum):
     AT = "AT"
     BE = "BE"

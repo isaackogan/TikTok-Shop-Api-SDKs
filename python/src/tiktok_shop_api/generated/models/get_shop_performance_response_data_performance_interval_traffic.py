@@ -1,31 +1,39 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetShopPerformanceResponseDataPerformanceIntervalTraffic")
+
 
 
 @_attrs_define
 class GetShopPerformanceResponseDataPerformanceIntervalTraffic:
-    """
-    Attributes:
-        avg_conversation_rate (str | Unset): The daily average percentage of unique users who paid for orders after
-            viewing product detail pages during the selected period.
-        avg_page_views (int | Unset): Daily average number of page views for all of your product detail pages during the
-            selected period.
-        avg_visitors (int | Unset): Daily average number of unique users who visited your product detail pages during
-            the selected period
-        product_clicks (int | Unset): Total number of product clicks during the selected period.
-        product_impressions (int | Unset): Total number of product impressions during the selected period.
-        unique_clicks (int | Unset): Total number of unique clicks during the selected period.
-        unique_product_impressions (int | Unset): Total number of unique product impressions during the selected period.
-    """
+    """ 
+        Attributes:
+            avg_conversation_rate (str | Unset): The daily average percentage of unique users who paid for orders after
+                viewing product detail pages during the selected period.
+            avg_page_views (int | Unset): Daily average number of page views for all of your product detail pages during the
+                selected period.
+            avg_visitors (int | Unset): Daily average number of unique users who visited your product detail pages during
+                the selected period
+            product_clicks (int | Unset): Total number of product clicks during the selected period.
+            product_impressions (int | Unset): Total number of product impressions during the selected period.
+            unique_clicks (int | Unset): Total number of unique clicks during the selected period.
+            unique_product_impressions (int | Unset): Total number of unique product impressions during the selected period.
+     """
 
     avg_conversation_rate: str | Unset = UNSET
     avg_page_views: int | Unset = UNSET
@@ -35,6 +43,10 @@ class GetShopPerformanceResponseDataPerformanceIntervalTraffic:
     unique_clicks: int | Unset = UNSET
     unique_product_impressions: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         avg_conversation_rate = self.avg_conversation_rate
@@ -51,9 +63,11 @@ class GetShopPerformanceResponseDataPerformanceIntervalTraffic:
 
         unique_product_impressions = self.unique_product_impressions
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if avg_conversation_rate is not UNSET:
             field_dict["avg_conversation_rate"] = avg_conversation_rate
         if avg_page_views is not UNSET:
@@ -70,6 +84,8 @@ class GetShopPerformanceResponseDataPerformanceIntervalTraffic:
             field_dict["unique_product_impressions"] = unique_product_impressions
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -97,6 +113,7 @@ class GetShopPerformanceResponseDataPerformanceIntervalTraffic:
             unique_clicks=unique_clicks,
             unique_product_impressions=unique_product_impressions,
         )
+
 
         get_shop_performance_response_data_performance_interval_traffic.additional_properties = d
         return get_shop_performance_response_data_performance_interval_traffic

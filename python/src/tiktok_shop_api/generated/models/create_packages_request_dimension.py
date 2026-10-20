@@ -1,42 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
 from ..models.create_packages_request_dimension_unit import CreatePackagesRequestDimensionUnit
+
+
+
+
+
 
 T = TypeVar("T", bound="CreatePackagesRequestDimension")
 
 
+
 @_attrs_define
 class CreatePackagesRequestDimension:
-    """
-    Attributes:
-        length (str): Package length.
+    """ 
+        Attributes:
+            length (str): Package length.
 
-            The length, width, and height must be passed together.
-        width (str): Package width.
+                The length, width, and height must be passed together.
+            width (str): Package width.
 
-            The length, width, and height must be passed together.
-        height (str): Package height.
+                The length, width, and height must be passed together.
+            height (str): Package height.
 
-            The length, width, and height must be passed together.
-        unit (CreatePackagesRequestDimensionUnit): The unit of measurement for the package dimensions. For packages in
-            the US, use `INCH`.
+                The length, width, and height must be passed together.
+            unit (CreatePackagesRequestDimensionUnit): The unit of measurement for the package dimensions. For packages in
+                the US, use `INCH`.
 
-            Available values:
-            - `CM`
-            - `INCH`
-    """
+                Available values:
+                - `CM`
+                - `INCH`
+     """
 
     length: str
     width: str
     height: str
     unit: CreatePackagesRequestDimensionUnit
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         length = self.length
@@ -47,18 +59,19 @@ class CreatePackagesRequestDimension:
 
         unit = self.unit.value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "length": length,
-                "width": width,
-                "height": height,
-                "unit": unit,
-            }
-        )
+        field_dict.update({
+            "length": length,
+            "width": width,
+            "height": height,
+            "unit": unit,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -71,12 +84,16 @@ class CreatePackagesRequestDimension:
 
         unit = CreatePackagesRequestDimensionUnit(d.pop("unit"))
 
+
+
+
         create_packages_request_dimension = cls(
             length=length,
             width=width,
             height=height,
             unit=unit,
         )
+
 
         create_packages_request_dimension.additional_properties = d
         return create_packages_request_dimension

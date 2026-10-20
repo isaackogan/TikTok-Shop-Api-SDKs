@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetCreatorMarketplaceAdvancedSearchFiltersRequestOptionOptionType(StrEnum):
     OPTION_BRAND = "OPTION_BRAND"
     OPTION_CREATOR_LEVEL = "OPTION_CREATOR_LEVEL"

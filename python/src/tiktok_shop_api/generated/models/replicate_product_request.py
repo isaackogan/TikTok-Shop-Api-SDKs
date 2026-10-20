@@ -1,43 +1,56 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.replicate_product_request_inventory_mode import ReplicateProductRequestInventoryMode
 from ..types import UNSET, Unset
 
+from ..models.replicate_product_request_inventory_mode import ReplicateProductRequestInventoryMode
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.replicate_product_request_replicate_target import ReplicateProductRequestReplicateTarget
+  from ..models.replicate_product_request_replicate_target import ReplicateProductRequestReplicateTarget
+
+
+
 
 
 T = TypeVar("T", bound="ReplicateProductRequest")
 
 
+
 @_attrs_define
 class ReplicateProductRequest:
-    """
-    Attributes:
-        inventory_mode (ReplicateProductRequestInventoryMode | Unset): The inventory mode for the source product in the
-            source shop. This field is applicable only to EU markets. Possible values:
-            - SHARED: Inventory for interconnected products must remain consistent; otherwise, an error is returned.
-            - EXCLUSIVE: Inventory for each product can be set independently without affecting the others.
+    """ 
+        Attributes:
+            inventory_mode (ReplicateProductRequestInventoryMode | Unset): The inventory mode for the source product in the
+                source shop. This field is applicable only to EU markets. Possible values:
+                - SHARED: Inventory for interconnected products must remain consistent; otherwise, an error is returned.
+                - EXCLUSIVE: Inventory for each product can be set independently without affecting the others.
 
-            If omitted, the inventory mode defaults to EXCLUSIVE.
-        replicate_target (list[ReplicateProductRequestReplicateTarget] | Unset): Target markets for replicating the
-            local product.
-    """
+                If omitted, the inventory mode defaults to EXCLUSIVE.
+            replicate_target (list[ReplicateProductRequestReplicateTarget] | Unset): Target markets for replicating the
+                local product.
+     """
 
     inventory_mode: ReplicateProductRequestInventoryMode | Unset = UNSET
     replicate_target: list[ReplicateProductRequestReplicateTarget] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.replicate_product_request_replicate_target import ReplicateProductRequestReplicateTarget # noqa: PLC0415
         inventory_mode: str | Unset = UNSET
         if not isinstance(self.inventory_mode, Unset):
             inventory_mode = self.inventory_mode.value
+
 
         replicate_target: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.replicate_target, Unset):
@@ -46,9 +59,13 @@ class ReplicateProductRequest:
                 replicate_target_item = replicate_target_item_data.to_dict()
                 replicate_target.append(replicate_target_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if inventory_mode is not UNSET:
             field_dict["inventory_mode"] = inventory_mode
         if replicate_target is not UNSET:
@@ -56,19 +73,21 @@ class ReplicateProductRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.replicate_product_request_replicate_target import (
-            ReplicateProductRequestReplicateTarget,  # noqa: PLC0415
-        )
-
+        from ..models.replicate_product_request_replicate_target import ReplicateProductRequestReplicateTarget # noqa: PLC0415
         d = dict(src_dict)
         _inventory_mode = d.pop("inventory_mode", UNSET)
         inventory_mode: ReplicateProductRequestInventoryMode | Unset
-        if isinstance(_inventory_mode, Unset):
+        if isinstance(_inventory_mode,  Unset):
             inventory_mode = UNSET
         else:
             inventory_mode = ReplicateProductRequestInventoryMode(_inventory_mode)
+
+
+
 
         _replicate_target = d.pop("replicate_target", UNSET)
         replicate_target: list[ReplicateProductRequestReplicateTarget] | Unset = UNSET
@@ -77,12 +96,16 @@ class ReplicateProductRequest:
             for replicate_target_item_data in _replicate_target:
                 replicate_target_item = ReplicateProductRequestReplicateTarget.from_dict(replicate_target_item_data)
 
+
+
                 replicate_target.append(replicate_target_item)
+
 
         replicate_product_request = cls(
             inventory_mode=inventory_mode,
             replicate_target=replicate_target,
         )
+
 
         replicate_product_request.additional_properties = d
         return replicate_product_request

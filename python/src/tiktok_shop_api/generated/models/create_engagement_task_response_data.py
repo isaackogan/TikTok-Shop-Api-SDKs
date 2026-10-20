@@ -1,37 +1,53 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateEngagementTaskResponseData")
+
 
 
 @_attrs_define
 class CreateEngagementTaskResponseData:
-    """
-    Attributes:
-        task_id (str | Unset): The unique identifier for the customer engagement task. Pass this value in the [Send
-            Engagement Message API](67777e448e882e030d29676e) to associate the task with the message sending operation.
-    """
+    """ 
+        Attributes:
+            task_id (str | Unset): The unique identifier for the customer engagement task. Pass this value in the [Send
+                Engagement Message API](67777e448e882e030d29676e) to associate the task with the message sending operation.
+     """
 
     task_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         task_id = self.task_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if task_id is not UNSET:
             field_dict["task_id"] = task_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -41,6 +57,7 @@ class CreateEngagementTaskResponseData:
         create_engagement_task_response_data = cls(
             task_id=task_id,
         )
+
 
         create_engagement_task_response_data.additional_properties = d
         return create_engagement_task_response_data

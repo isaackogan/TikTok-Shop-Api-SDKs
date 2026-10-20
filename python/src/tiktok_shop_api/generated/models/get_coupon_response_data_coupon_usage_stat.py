@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCouponResponseDataCouponUsageStat")
+
 
 
 @_attrs_define
 class GetCouponResponseDataCouponUsageStat:
-    """
-    Attributes:
-        claimed_count (int | Unset): The number of times that the coupon has been claimed.
-        redeemed_count (int | Unset): The number of times that a coupon has been redeemed (i.e. applied to an order).
-    """
+    """ 
+        Attributes:
+            claimed_count (int | Unset): The number of times that the coupon has been claimed.
+            redeemed_count (int | Unset): The number of times that a coupon has been redeemed (i.e. applied to an order).
+     """
 
     claimed_count: int | Unset = UNSET
     redeemed_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         claimed_count = self.claimed_count
 
         redeemed_count = self.redeemed_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if claimed_count is not UNSET:
             field_dict["claimed_count"] = claimed_count
         if redeemed_count is not UNSET:
             field_dict["redeemed_count"] = redeemed_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetCouponResponseDataCouponUsageStat:
             claimed_count=claimed_count,
             redeemed_count=redeemed_count,
         )
+
 
         get_coupon_response_data_coupon_usage_stat.additional_properties = d
         return get_coupon_response_data_coupon_usage_stat

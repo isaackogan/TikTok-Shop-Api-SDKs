@@ -1,30 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SuggestBrandsResponseDataBrand")
+
 
 
 @_attrs_define
 class SuggestBrandsResponseDataBrand:
-    """
-    Attributes:
-        id (str | Unset): Brand ID.
-        is_authorized (bool | Unset): Whether the brand is authorized for the shop. False if authorization status is
-            absent.
-        name (str | Unset): Brand name.
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Brand ID.
+            is_authorized (bool | Unset): Whether the brand is authorized for the shop. False if authorization status is
+                absent.
+            name (str | Unset): Brand name.
+     """
 
     id: str | Unset = UNSET
     is_authorized: bool | Unset = UNSET
     name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
@@ -33,9 +45,11 @@ class SuggestBrandsResponseDataBrand:
 
         name = self.name
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if is_authorized is not UNSET:
@@ -44,6 +58,8 @@ class SuggestBrandsResponseDataBrand:
             field_dict["name"] = name
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -59,6 +75,7 @@ class SuggestBrandsResponseDataBrand:
             is_authorized=is_authorized,
             name=name,
         )
+
 
         suggest_brands_response_data_brand.additional_properties = d
         return suggest_brands_response_data_brand

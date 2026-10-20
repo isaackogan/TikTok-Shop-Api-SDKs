@@ -9796,7 +9796,7 @@ class FulfillmentApi(SyncGroup):
         """Upload Proof of Delivery Image
 
          This API is used for the seller to upload the proof of delivery image for a package, and to generate
-        the URL of the corresponding file. The generated URL is used in the [Update Package Delivery Status
+        the URL of the corresponding file. The generated URL is used in the [Update Package Delivery Status 
         API](https://partner.tiktokshop.com/docv2/page/650aa332c16ffe02b8f0ba82?external_id=650aa332c16ffe02
         b8f0ba82) to indicate that the parcel has been delivered.
 
@@ -10507,7 +10507,7 @@ class AsyncFulfillmentApi(AsyncGroup):
         """Upload Proof of Delivery Image
 
          This API is used for the seller to upload the proof of delivery image for a package, and to generate
-        the URL of the corresponding file. The generated URL is used in the [Update Package Delivery Status
+        the URL of the corresponding file. The generated URL is used in the [Update Package Delivery Status 
         API](https://partner.tiktokshop.com/docv2/page/650aa332c16ffe02b8f0ba82?external_id=650aa332c16ffe02
         b8f0ba82) to indicate that the parcel has been delivered.
 

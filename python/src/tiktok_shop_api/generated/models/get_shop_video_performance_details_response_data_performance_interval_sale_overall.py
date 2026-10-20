@@ -1,34 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.gmv import Gmv
-    from ..models.gpm import Gpm
+  from ..models.gmv import Gmv
+  from ..models.gpm import Gpm
+
+
+
 
 
 T = TypeVar("T", bound="GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall")
 
 
+
 @_attrs_define
 class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall:
-    """
-    Attributes:
-        gmv (Gmv | Unset):
-        gpm (Gpm | Unset):
-        customers (int | Unset): The total number of customers who placed orders directly from the shoppable video.
-        items_sold (int | Unset): The total number of items sold directly from the shoppable video.
-        ctr (str | Unset): Ratio of product clicks from the video to impressions of all products in the video, expressed
-            as a decimal fraction.
-        product_impressions (int | Unset): The number of impressions of all video products
-        product_clicks (int | Unset): The number of product clicks from the video
-    """
+    """ 
+        Attributes:
+            gmv (Gmv | Unset):
+            gpm (Gpm | Unset):
+            customers (int | Unset): The total number of customers who placed orders directly from the shoppable video.
+            items_sold (int | Unset): The total number of items sold directly from the shoppable video.
+            ctr (str | Unset): Ratio of product clicks from the video to impressions of all products in the video, expressed
+                as a decimal fraction.
+            product_impressions (int | Unset): The number of impressions of all video products
+            product_clicks (int | Unset): The number of product clicks from the video
+     """
 
     gmv: Gmv | Unset = UNSET
     gpm: Gpm | Unset = UNSET
@@ -39,7 +46,13 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall:
     product_clicks: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
         gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.gmv, Unset):
             gmv = self.gmv.to_dict()
@@ -58,9 +71,11 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall:
 
         product_clicks = self.product_clicks
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if gmv is not UNSET:
             field_dict["gmv"] = gmv
         if gpm is not UNSET:
@@ -78,25 +93,32 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.gmv import Gmv  # noqa: PLC0415
-        from ..models.gpm import Gpm  # noqa: PLC0415
-
+        from ..models.gmv import Gmv # noqa: PLC0415
+        from ..models.gpm import Gpm # noqa: PLC0415
         d = dict(src_dict)
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset
-        if isinstance(_gmv, Unset):
+        if isinstance(_gmv,  Unset):
             gmv = UNSET
         else:
             gmv = Gmv.from_dict(_gmv)
 
+
+
+
         _gpm = d.pop("gpm", UNSET)
         gpm: Gpm | Unset
-        if isinstance(_gpm, Unset):
+        if isinstance(_gpm,  Unset):
             gpm = UNSET
         else:
             gpm = Gpm.from_dict(_gpm)
+
+
+
 
         customers = d.pop("customers", UNSET)
 
@@ -117,6 +139,7 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceIntervalSaleOverall:
             product_impressions=product_impressions,
             product_clicks=product_clicks,
         )
+
 
         get_shop_video_performance_details_response_data_performance_interval_sale_overall.additional_properties = d
         return get_shop_video_performance_details_response_data_performance_interval_sale_overall

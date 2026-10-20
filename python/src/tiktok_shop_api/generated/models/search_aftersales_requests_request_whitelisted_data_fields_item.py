@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchAftersalesRequestsRequestWhitelistedDataFieldsItem(StrEnum):
     LINE_ITEMS = "LINE_ITEMS"
     RETURN_MERCHANDISE_AUTHORIZATIONS = "RETURN_MERCHANDISE_AUTHORIZATIONS"

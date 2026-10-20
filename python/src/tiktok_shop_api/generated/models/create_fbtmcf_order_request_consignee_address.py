@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateFBTMCFOrderRequestConsigneeAddress")
+
 
 
 @_attrs_define
 class CreateFBTMCFOrderRequestConsigneeAddress:
-    """
-    Attributes:
-        country_code (str): The consignee address country code in two-character ISO 3166-1 alpha-2 format. Only `US` is
-            accepted.
-        state_or_region (str): Consignee address state or region
-        city (str): Consignee address city
-        address_line_1 (str): The detail address line 1
-        district_or_county (str | Unset): Consignee address district or county
-        address_line_2 (str | Unset): The detail address line 2
-        postal_code (str | Unset): The 5-digit US ZIP code for the consignee address.
-    """
+    """ 
+        Attributes:
+            country_code (str): The consignee address country code in two-character ISO 3166-1 alpha-2 format. Only `US` is
+                accepted.
+            state_or_region (str): Consignee address state or region
+            city (str): Consignee address city
+            address_line_1 (str): The detail address line 1
+            district_or_county (str | Unset): Consignee address district or county
+            address_line_2 (str | Unset): The detail address line 2
+            postal_code (str | Unset): The 5-digit US ZIP code for the consignee address.
+     """
 
     country_code: str
     state_or_region: str
@@ -33,6 +41,10 @@ class CreateFBTMCFOrderRequestConsigneeAddress:
     address_line_2: str | Unset = UNSET
     postal_code: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         country_code = self.country_code
@@ -49,16 +61,15 @@ class CreateFBTMCFOrderRequestConsigneeAddress:
 
         postal_code = self.postal_code
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "country_code": country_code,
-                "state_or_region": state_or_region,
-                "city": city,
-                "address_line_1": address_line_1,
-            }
-        )
+        field_dict.update({
+            "country_code": country_code,
+            "state_or_region": state_or_region,
+            "city": city,
+            "address_line_1": address_line_1,
+        })
         if district_or_county is not UNSET:
             field_dict["district_or_county"] = district_or_county
         if address_line_2 is not UNSET:
@@ -67,6 +78,8 @@ class CreateFBTMCFOrderRequestConsigneeAddress:
             field_dict["postal_code"] = postal_code
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -94,6 +107,7 @@ class CreateFBTMCFOrderRequestConsigneeAddress:
             address_line_2=address_line_2,
             postal_code=postal_code,
         )
+
 
         create_fbtmcf_order_request_consignee_address.additional_properties = d
         return create_fbtmcf_order_request_consignee_address

@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="CreateFBTMCFOrderResponseDataMcfOrder")
+
 
 
 @_attrs_define
 class CreateFBTMCFOrderResponseDataMcfOrder:
-    """
-    Attributes:
-        external_order_id (str | Unset): The corresponding order ID in your OMS.
-        mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
-        create_time (int | Unset): The Unix timestamp, in seconds, when the MCF order was created.
-    """
+    """ 
+        Attributes:
+            external_order_id (str | Unset): The corresponding order ID in your OMS.
+            mcf_order_id (str | Unset): A unique ID that identifies different MCF orders
+            create_time (int | Unset): The Unix timestamp, in seconds, when the MCF order was created.
+     """
 
     external_order_id: str | Unset = UNSET
     mcf_order_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         external_order_id = self.external_order_id
@@ -32,9 +44,11 @@ class CreateFBTMCFOrderResponseDataMcfOrder:
 
         create_time = self.create_time
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if external_order_id is not UNSET:
             field_dict["external_order_id"] = external_order_id
         if mcf_order_id is not UNSET:
@@ -43,6 +57,8 @@ class CreateFBTMCFOrderResponseDataMcfOrder:
             field_dict["create_time"] = create_time
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class CreateFBTMCFOrderResponseDataMcfOrder:
             mcf_order_id=mcf_order_id,
             create_time=create_time,
         )
+
 
         create_fbtmcf_order_response_data_mcf_order.additional_properties = d
         return create_fbtmcf_order_response_data_mcf_order

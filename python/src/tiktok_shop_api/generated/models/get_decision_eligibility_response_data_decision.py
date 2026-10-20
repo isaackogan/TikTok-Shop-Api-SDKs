@@ -1,47 +1,54 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.available_reject_reason import AvailableRejectReason
+  from ..models.available_reject_reason import AvailableRejectReason
+
+
+
 
 
 T = TypeVar("T", bound="GetDecisionEligibilityResponseDataDecision")
 
 
+
 @_attrs_define
 class GetDecisionEligibilityResponseDataDecision:
-    """
-    Attributes:
-        decision (str | Unset): One eligibility result for one evaluated seller decision. Possible Values:
-            - `APPROVE_REQUEST_CANCEL`
-            - `APPROVE_REFUND`
-            - `APPROVE_RETURN`
-            - `APPROVE_RECEIVED_PACKAGE`
-            - `APPROVE_REPLACEMENT`
-            - `ISSUE_REPLACEMENT_REFUND`
-            - `DIRECT_REFUND`
-            - `REJECT_REQUEST_CANCEL`
-            - `REJECT_REFUND`
-            - `REJECT_RETURN`
-            - `REJECT_RECEIVED_PACKAGE`
-            - `REJECT_REPLACEMENT`
-            -`ISSUE_EXCHANGE_REFUND`
-        eligible (bool | Unset): Whether this seller decision is currently eligible for the specified aftersales
-            request. `true` means eligible; `false` means ineligible.
-        ineligible_code (int | Unset): The reason code for an ineligible decision. This field is returned when eligible
-            is false.
-        ineligible_reason (str | Unset): The reason for an ineligible decision. This field is returned when eligible is
-            false.
-        available_reject_reasons (list[AvailableRejectReason] | Unset): The reject reasons available for an eligible
-            reject decision. Each reason includes a name and localized display text.
-    """
+    """ 
+        Attributes:
+            decision (str | Unset): One eligibility result for one evaluated seller decision. Possible Values:
+                - `APPROVE_REQUEST_CANCEL`
+                - `APPROVE_REFUND`
+                - `APPROVE_RETURN`
+                - `APPROVE_RECEIVED_PACKAGE`
+                - `APPROVE_REPLACEMENT`
+                - `ISSUE_REPLACEMENT_REFUND`
+                - `DIRECT_REFUND`
+                - `REJECT_REQUEST_CANCEL`
+                - `REJECT_REFUND`
+                - `REJECT_RETURN`
+                - `REJECT_RECEIVED_PACKAGE`
+                - `REJECT_REPLACEMENT`
+                -`ISSUE_EXCHANGE_REFUND`
+            eligible (bool | Unset): Whether this seller decision is currently eligible for the specified aftersales
+                request. `true` means eligible; `false` means ineligible.
+            ineligible_code (int | Unset): The reason code for an ineligible decision. This field is returned when eligible
+                is false.
+            ineligible_reason (str | Unset): The reason for an ineligible decision. This field is returned when eligible is
+                false.
+            available_reject_reasons (list[AvailableRejectReason] | Unset): The reject reasons available for an eligible
+                reject decision. Each reason includes a name and localized display text.
+     """
 
     decision: str | Unset = UNSET
     eligible: bool | Unset = UNSET
@@ -50,7 +57,12 @@ class GetDecisionEligibilityResponseDataDecision:
     available_reject_reasons: list[AvailableRejectReason] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.available_reject_reason import AvailableRejectReason # noqa: PLC0415
         decision = self.decision
 
         eligible = self.eligible
@@ -66,9 +78,13 @@ class GetDecisionEligibilityResponseDataDecision:
                 available_reject_reasons_item = available_reject_reasons_item_data.to_dict()
                 available_reject_reasons.append(available_reject_reasons_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if decision is not UNSET:
             field_dict["decision"] = decision
         if eligible is not UNSET:
@@ -82,10 +98,11 @@ class GetDecisionEligibilityResponseDataDecision:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.available_reject_reason import AvailableRejectReason  # noqa: PLC0415
-
+        from ..models.available_reject_reason import AvailableRejectReason # noqa: PLC0415
         d = dict(src_dict)
         decision = d.pop("decision", UNSET)
 
@@ -102,7 +119,10 @@ class GetDecisionEligibilityResponseDataDecision:
             for available_reject_reasons_item_data in _available_reject_reasons:
                 available_reject_reasons_item = AvailableRejectReason.from_dict(available_reject_reasons_item_data)
 
+
+
                 available_reject_reasons.append(available_reject_reasons_item)
+
 
         get_decision_eligibility_response_data_decision = cls(
             decision=decision,
@@ -111,6 +131,7 @@ class GetDecisionEligibilityResponseDataDecision:
             ineligible_reason=ineligible_reason,
             available_reject_reasons=available_reject_reasons,
         )
+
 
         get_decision_eligibility_response_data_decision.additional_properties = d
         return get_decision_eligibility_response_data_decision

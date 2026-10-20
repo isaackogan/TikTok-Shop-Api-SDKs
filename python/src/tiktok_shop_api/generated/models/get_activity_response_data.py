@@ -1,80 +1,87 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_activity_response_data_benefit_product import GetActivityResponseDataBenefitProduct
-    from ..models.get_activity_response_data_discount import GetActivityResponseDataDiscount
-    from ..models.get_activity_response_data_participation_limit import GetActivityResponseDataParticipationLimit
-    from ..models.get_activity_response_data_product import GetActivityResponseDataProduct
-    from ..models.get_activity_response_data_target_user_info import GetActivityResponseDataTargetUserInfo
+  from ..models.get_activity_response_data_benefit_product import GetActivityResponseDataBenefitProduct
+  from ..models.get_activity_response_data_discount import GetActivityResponseDataDiscount
+  from ..models.get_activity_response_data_participation_limit import GetActivityResponseDataParticipationLimit
+  from ..models.get_activity_response_data_product import GetActivityResponseDataProduct
+  from ..models.get_activity_response_data_target_user_info import GetActivityResponseDataTargetUserInfo
+
+
+
 
 
 T = TypeVar("T", bound="GetActivityResponseData")
 
 
+
 @_attrs_define
 class GetActivityResponseData:
-    """
-    Attributes:
-        activity_id (str | Unset): A unique ID that identifies different activities.
-        title (str | Unset): Activity name (50 characters max.) The name must be unique.
-        activity_type (str | Unset): The activity type.
-            Possible values:
-            - `FIXED_PRICE`: A product discount activity with a fixed price.
-            - `DIRECT_DISCOUNT`: A product discount activity with a percentage discount.
-            - `FLASHSALE`: A flash sale activity.
-            - `SHIPPING_DISCOUNT`: A shipping fee discount activity.
-            - `BUY_MORE_SAVE_MORE`: A Buy More Save More promotion.
-            - `GIFT_WITH_PURCHASE`: A Gift With Purchase promotion.
-            - `BUY_X_GET_Y`: A Buy X Get Y promotion.
-        duration_type (str | Unset): The effective time type of the current activity
-            - NORMAL:  `begin_time` and `end_time` must be filled
-            - INDEFINITE: `begin_time` and `end_time` aren't required, and the promotion will be a long-term activity which
-            runs indefinitely.
-            1.  `INDEFINITE` is only valid when `activity_type` is `SHIPPING_DISCOUNT`,
-            2. If `duration_type` is `INDEFINITE`, `start_time` and `end_time` should be 0
-            Default: NORMAL
-        begin_time (int | Unset): Activity start time as a UNIX timestamp in seconds.
-        end_time (int | Unset): Activity end time as a UNIX timestamp in seconds.
-        participation_limit (list[GetActivityResponseDataParticipationLimit] | Unset): The number of times a buyer can
-            participate in the promotion.
-        products (list[GetActivityResponseDataProduct] | Unset): Product List.
-            Note:If  `FIXED_PRICE`, `DIRECT_DISCOUNT` and `FLASHSALE` activity that ended more than 180 days,this field is
-            empty.
-        status (str | Unset): Activity status.
-            Possible values:
-            - DRAFT: Promotion activities with this status are not available to TikTok users.
-            - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
-            start time.
-            - ONGOING: Promotion activities with this status are available to TikTok users.
-            - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
-            - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
-            - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-        create_time (int | Unset): Activity creation time as a UNIX timestamp in milliseconds.
-        update_time (int | Unset): Activity update time as a UNIX timestamp in milliseconds.
-        product_level (str | Unset): Activity product dimension, values are:
-            - PRODUCT: Product level promotion activity.
-            - VARIATION: SKU level promotion activity.
-            - SHOP: Shop level promotion activity.
-        activity_commands (list[str] | Unset): Applicable commands to the activity:
-            - IMMUTABLE: The activity cann't be editable or deactivated
-        discount (GetActivityResponseDataDiscount | Unset):
-        target_user_info (GetActivityResponseDataTargetUserInfo | Unset):
-        benefit_products (list[GetActivityResponseDataBenefitProduct] | Unset): Benefit products in BXGY promotions
-        auction_support_type (str | Unset): Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field
-            is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-
-            support data is unavailable.
-            Possible values:
-            - `ALL`: The activity supports both normal products and auction products.
-            - `EXCLUDE_AUCTION`: The activity does not support auction products.
-    """
+    """ 
+        Attributes:
+            activity_id (str | Unset): A unique ID that identifies different activities.
+            title (str | Unset): Activity name (50 characters max.) The name must be unique.
+            activity_type (str | Unset): The activity type.
+                Possible values:
+                - `FIXED_PRICE`: A product discount activity with a fixed price.
+                - `DIRECT_DISCOUNT`: A product discount activity with a percentage discount.
+                - `FLASHSALE`: A flash sale activity.
+                - `SHIPPING_DISCOUNT`: A shipping fee discount activity.
+                - `BUY_MORE_SAVE_MORE`: A Buy More Save More promotion.
+                - `GIFT_WITH_PURCHASE`: A Gift With Purchase promotion.
+                - `BUY_X_GET_Y`: A Buy X Get Y promotion.
+            duration_type (str | Unset): The effective time type of the current activity
+                - NORMAL:  `begin_time` and `end_time` must be filled
+                - INDEFINITE: `begin_time` and `end_time` aren't required, and the promotion will be a long-term activity which
+                runs indefinitely.
+                1.  `INDEFINITE` is only valid when `activity_type` is `SHIPPING_DISCOUNT`,
+                2. If `duration_type` is `INDEFINITE`, `start_time` and `end_time` should be 0
+                Default: NORMAL
+            begin_time (int | Unset): Activity start time as a UNIX timestamp in seconds.
+            end_time (int | Unset): Activity end time as a UNIX timestamp in seconds.
+            participation_limit (list[GetActivityResponseDataParticipationLimit] | Unset): The number of times a buyer can
+                participate in the promotion.
+            products (list[GetActivityResponseDataProduct] | Unset): Product List.
+                Note:If  `FIXED_PRICE`, `DIRECT_DISCOUNT` and `FLASHSALE` activity that ended more than 180 days,this field is
+                empty.
+            status (str | Unset): Activity status.
+                Possible values:
+                - DRAFT: Promotion activities with this status are not available to TikTok users.
+                - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
+                start time.
+                - ONGOING: Promotion activities with this status are available to TikTok users.
+                - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
+                - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
+                - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
+            create_time (int | Unset): Activity creation time as a UNIX timestamp in milliseconds.
+            update_time (int | Unset): Activity update time as a UNIX timestamp in milliseconds.
+            product_level (str | Unset): Activity product dimension, values are:
+                - PRODUCT: Product level promotion activity.
+                - VARIATION: SKU level promotion activity.
+                - SHOP: Shop level promotion activity.
+            activity_commands (list[str] | Unset): Applicable commands to the activity:
+                - IMMUTABLE: The activity cann't be editable or deactivated
+            discount (GetActivityResponseDataDiscount | Unset):
+            target_user_info (GetActivityResponseDataTargetUserInfo | Unset):
+            benefit_products (list[GetActivityResponseDataBenefitProduct] | Unset): Benefit products in BXGY promotions
+            auction_support_type (str | Unset): Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field
+                is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-
+                support data is unavailable.
+                Possible values:
+                - `ALL`: The activity supports both normal products and auction products.
+                - `EXCLUDE_AUCTION`: The activity does not support auction products.
+     """
 
     activity_id: str | Unset = UNSET
     title: str | Unset = UNSET
@@ -95,7 +102,16 @@ class GetActivityResponseData:
     auction_support_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_activity_response_data_benefit_product import GetActivityResponseDataBenefitProduct # noqa: PLC0415
+        from ..models.get_activity_response_data_discount import GetActivityResponseDataDiscount # noqa: PLC0415
+        from ..models.get_activity_response_data_participation_limit import GetActivityResponseDataParticipationLimit # noqa: PLC0415
+        from ..models.get_activity_response_data_product import GetActivityResponseDataProduct # noqa: PLC0415
+        from ..models.get_activity_response_data_target_user_info import GetActivityResponseDataTargetUserInfo # noqa: PLC0415
         activity_id = self.activity_id
 
         title = self.title
@@ -115,12 +131,16 @@ class GetActivityResponseData:
                 participation_limit_item = participation_limit_item_data.to_dict()
                 participation_limit.append(participation_limit_item)
 
+
+
         products: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.products, Unset):
             products = []
             for products_item_data in self.products:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
+
+
 
         status = self.status
 
@@ -133,6 +153,8 @@ class GetActivityResponseData:
         activity_commands: list[str] | Unset = UNSET
         if not isinstance(self.activity_commands, Unset):
             activity_commands = self.activity_commands
+
+
 
         discount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.discount, Unset):
@@ -149,11 +171,15 @@ class GetActivityResponseData:
                 benefit_products_item = benefit_products_item_data.to_dict()
                 benefit_products.append(benefit_products_item)
 
+
+
         auction_support_type = self.auction_support_type
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if activity_id is not UNSET:
             field_dict["activity_id"] = activity_id
         if title is not UNSET:
@@ -191,20 +217,15 @@ class GetActivityResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_activity_response_data_benefit_product import (
-            GetActivityResponseDataBenefitProduct,  # noqa: PLC0415
-        )
-        from ..models.get_activity_response_data_discount import GetActivityResponseDataDiscount  # noqa: PLC0415
-        from ..models.get_activity_response_data_participation_limit import (
-            GetActivityResponseDataParticipationLimit,  # noqa: PLC0415
-        )
-        from ..models.get_activity_response_data_product import GetActivityResponseDataProduct  # noqa: PLC0415
-        from ..models.get_activity_response_data_target_user_info import (
-            GetActivityResponseDataTargetUserInfo,  # noqa: PLC0415
-        )
-
+        from ..models.get_activity_response_data_benefit_product import GetActivityResponseDataBenefitProduct # noqa: PLC0415
+        from ..models.get_activity_response_data_discount import GetActivityResponseDataDiscount # noqa: PLC0415
+        from ..models.get_activity_response_data_participation_limit import GetActivityResponseDataParticipationLimit # noqa: PLC0415
+        from ..models.get_activity_response_data_product import GetActivityResponseDataProduct # noqa: PLC0415
+        from ..models.get_activity_response_data_target_user_info import GetActivityResponseDataTargetUserInfo # noqa: PLC0415
         d = dict(src_dict)
         activity_id = d.pop("activity_id", UNSET)
 
@@ -223,11 +244,12 @@ class GetActivityResponseData:
         if _participation_limit is not UNSET:
             participation_limit = []
             for participation_limit_item_data in _participation_limit:
-                participation_limit_item = GetActivityResponseDataParticipationLimit.from_dict(
-                    participation_limit_item_data
-                )
+                participation_limit_item = GetActivityResponseDataParticipationLimit.from_dict(participation_limit_item_data)
+
+
 
                 participation_limit.append(participation_limit_item)
+
 
         _products = d.pop("products", UNSET)
         products: list[GetActivityResponseDataProduct] | Unset = UNSET
@@ -236,7 +258,10 @@ class GetActivityResponseData:
             for products_item_data in _products:
                 products_item = GetActivityResponseDataProduct.from_dict(products_item_data)
 
+
+
                 products.append(products_item)
+
 
         status = d.pop("status", UNSET)
 
@@ -248,19 +273,26 @@ class GetActivityResponseData:
 
         activity_commands = cast(list[str], d.pop("activity_commands", UNSET))
 
+
         _discount = d.pop("discount", UNSET)
         discount: GetActivityResponseDataDiscount | Unset
-        if isinstance(_discount, Unset):
+        if isinstance(_discount,  Unset):
             discount = UNSET
         else:
             discount = GetActivityResponseDataDiscount.from_dict(_discount)
 
+
+
+
         _target_user_info = d.pop("target_user_info", UNSET)
         target_user_info: GetActivityResponseDataTargetUserInfo | Unset
-        if isinstance(_target_user_info, Unset):
+        if isinstance(_target_user_info,  Unset):
             target_user_info = UNSET
         else:
             target_user_info = GetActivityResponseDataTargetUserInfo.from_dict(_target_user_info)
+
+
+
 
         _benefit_products = d.pop("benefit_products", UNSET)
         benefit_products: list[GetActivityResponseDataBenefitProduct] | Unset = UNSET
@@ -269,7 +301,10 @@ class GetActivityResponseData:
             for benefit_products_item_data in _benefit_products:
                 benefit_products_item = GetActivityResponseDataBenefitProduct.from_dict(benefit_products_item_data)
 
+
+
                 benefit_products.append(benefit_products_item)
+
 
         auction_support_type = d.pop("auction_support_type", UNSET)
 
@@ -292,6 +327,7 @@ class GetActivityResponseData:
             benefit_products=benefit_products,
             auction_support_type=auction_support_type,
         )
+
 
         get_activity_response_data.additional_properties = d
         return get_activity_response_data

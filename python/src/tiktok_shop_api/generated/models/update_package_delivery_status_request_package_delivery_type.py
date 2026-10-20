@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class UpdatePackageDeliveryStatusRequestPackageDeliveryType(StrEnum):
     DELIVERY_FAILED = "DELIVERY_FAILED"
     DELIVERY_SUCCESS = "DELIVERY_SUCCESS"

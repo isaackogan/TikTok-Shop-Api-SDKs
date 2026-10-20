@@ -1,41 +1,49 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo")
+
 
 
 @_attrs_define
 class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
-    """
-    Attributes:
-        battery_type (str | Unset): Battery type
-            Possible values:
-            LITHIUM_ION
-            LITHIUM_METAL
-            OTHER
-        battery_packaging_type (str | Unset): Battery packaging type.
-            Possible values:
-            - STANDALONE
-            - IN_EQUIPMENT
-            - WITH_EQUIPMENT
-            - OTHER
-        total_battery_weight (str | Unset): Total battery weight in the unit specified by total_battery_weight_unit.
-        total_battery_weight_unit (str | Unset): Unit for total_battery_weight. Possible value: GRAM.
-        total_battery_capacity (str | Unset): Total battery capacity in the unit specified by
-            total_battery_capacity_unit.
-        battery_count_per_package (str | Unset): per package battery count
-        is_need_un_38_3_test (bool | Unset): UN38.3 testing ensures that batteries meet specific safety criteria. Please
-            send the report in the field if it's not included in the MSDS.
-        un_38_3_test_file_url (str | Unset): UN38.3 testing file URL
-        total_battery_capacity_unit (str | Unset): Unit for `total_battery_capacity`, such as `WATT_HOURS`.
-    """
+    """ 
+        Attributes:
+            battery_type (str | Unset): Battery type
+                Possible values:
+                LITHIUM_ION
+                LITHIUM_METAL
+                OTHER
+            battery_packaging_type (str | Unset): Battery packaging type.
+                Possible values:
+                - STANDALONE
+                - IN_EQUIPMENT
+                - WITH_EQUIPMENT
+                - OTHER
+            total_battery_weight (str | Unset): Total battery weight in the unit specified by total_battery_weight_unit.
+            total_battery_weight_unit (str | Unset): Unit for total_battery_weight. Possible value: GRAM.
+            total_battery_capacity (str | Unset): Total battery capacity in the unit specified by
+                total_battery_capacity_unit.
+            battery_count_per_package (str | Unset): per package battery count
+            is_need_un_38_3_test (bool | Unset): UN38.3 testing ensures that batteries meet specific safety criteria. Please
+                send the report in the field if it's not included in the MSDS.
+            un_38_3_test_file_url (str | Unset): UN38.3 testing file URL
+            total_battery_capacity_unit (str | Unset): Unit for `total_battery_capacity`, such as `WATT_HOURS`.
+     """
 
     battery_type: str | Unset = UNSET
     battery_packaging_type: str | Unset = UNSET
@@ -47,6 +55,10 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
     un_38_3_test_file_url: str | Unset = UNSET
     total_battery_capacity_unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         battery_type = self.battery_type
@@ -67,9 +79,11 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
 
         total_battery_capacity_unit = self.total_battery_capacity_unit
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if battery_type is not UNSET:
             field_dict["battery_type"] = battery_type
         if battery_packaging_type is not UNSET:
@@ -90,6 +104,8 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
             field_dict["total_battery_capacity_unit"] = total_battery_capacity_unit
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -123,6 +139,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
             un_38_3_test_file_url=un_38_3_test_file_url,
             total_battery_capacity_unit=total_battery_capacity_unit,
         )
+
 
         search_goods_info_response_data_good_hazmat_info_battery_extra_info.additional_properties = d
         return search_goods_info_response_data_good_hazmat_info_battery_extra_info

@@ -1,34 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunityMarketData")
+
 
 
 @_attrs_define
 class GetOpportunityDetailResponseDataOpportunityMarketData:
-    """
-    Attributes:
-        est_market_sales_volume (str | Unset): Estimated market sales volume for the last 30 days, returned as an
-            approximate bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or
-            `100M+`.
-        est_market_gmv (str | Unset): Estimated market sales GMV in USD for the last 30 days, returned as an approximate
-            bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or `100M+`.
-        market_buzz (str | Unset): Popularity level of the product: HOT / HIGH / MEDIUM
-        search_volume (str | Unset): TikTok Shop in-site search volume, rounded to the nearest whole number and returned
-            as a decimal string.
-        search_keyword (str | Unset): Comma-separated TikTok Shop in-site search keywords associated with the
-            opportunity.
-        competitor_product_count (str | Unset): Approximate number of competing products listed in the last 30 days,
-            returned as one of `< 10`, `< 50`, `< 100`, or `100+`.
-        competitor_seller_count (str | Unset): Number of competing sellers with the products currently listed.
-    """
+    """ 
+        Attributes:
+            est_market_sales_volume (str | Unset): Estimated market sales volume for the last 30 days, returned as an
+                approximate bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or
+                `100M+`.
+            est_market_gmv (str | Unset): Estimated market sales GMV in USD for the last 30 days, returned as an approximate
+                bucket: `<100`, a value rounded down to a hundreds bucket ending in `00+`, a `k+` or `M+` value, or `100M+`.
+            market_buzz (str | Unset): Popularity level of the product: HOT / HIGH / MEDIUM
+            search_volume (str | Unset): TikTok Shop in-site search volume, rounded to the nearest whole number and returned
+                as a decimal string.
+            search_keyword (str | Unset): Comma-separated TikTok Shop in-site search keywords associated with the
+                opportunity.
+            competitor_product_count (str | Unset): Approximate number of competing products listed in the last 30 days,
+                returned as one of `< 10`, `< 50`, `< 100`, or `100+`.
+            competitor_seller_count (str | Unset): Number of competing sellers with the products currently listed.
+     """
 
     est_market_sales_volume: str | Unset = UNSET
     est_market_gmv: str | Unset = UNSET
@@ -38,6 +46,10 @@ class GetOpportunityDetailResponseDataOpportunityMarketData:
     competitor_product_count: str | Unset = UNSET
     competitor_seller_count: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         est_market_sales_volume = self.est_market_sales_volume
@@ -54,9 +66,11 @@ class GetOpportunityDetailResponseDataOpportunityMarketData:
 
         competitor_seller_count = self.competitor_seller_count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if est_market_sales_volume is not UNSET:
             field_dict["est_market_sales_volume"] = est_market_sales_volume
         if est_market_gmv is not UNSET:
@@ -73,6 +87,8 @@ class GetOpportunityDetailResponseDataOpportunityMarketData:
             field_dict["competitor_seller_count"] = competitor_seller_count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -100,6 +116,7 @@ class GetOpportunityDetailResponseDataOpportunityMarketData:
             competitor_product_count=competitor_product_count,
             competitor_seller_count=competitor_seller_count,
         )
+
 
         get_opportunity_detail_response_data_opportunity_market_data.additional_properties = d
         return get_opportunity_detail_response_data_opportunity_market_data

@@ -1,63 +1,62 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_affiliate_partner_campaign_product_list_response_data_product_category import (
-        GetAffiliatePartnerCampaignProductListResponseDataProductCategory,
-    )
-    from ..models.get_affiliate_partner_campaign_product_list_response_data_product_highest_price import (
-        GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice,
-    )
-    from ..models.get_affiliate_partner_campaign_product_list_response_data_product_lowest_price import (
-        GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice,
-    )
-    from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list import (
-        GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList,
-    )
+  from ..models.get_affiliate_partner_campaign_product_list_response_data_product_category import GetAffiliatePartnerCampaignProductListResponseDataProductCategory
+  from ..models.get_affiliate_partner_campaign_product_list_response_data_product_highest_price import GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice
+  from ..models.get_affiliate_partner_campaign_product_list_response_data_product_lowest_price import GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice
+  from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list import GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList
+
+
+
 
 
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignProductListResponseDataProduct")
 
 
+
 @_attrs_define
 class GetAffiliatePartnerCampaignProductListResponseDataProduct:
-    """
-    Attributes:
-        id (str | Unset): The product identifier.
-        review_status (str | Unset): The product review status. This an enumerated type with values:
-            - PENDING
-            - APPROVED
-            - REJECTED
-            - PENDING_CLOSED
-            - CLOSED
-        name (str | Unset): The product name.
-        main_image_url (str | Unset): The product image URL.
-        lowest_price (GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice | Unset):
-        highest_price (GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice | Unset):
-        inventory (int | Unset): The number of in-stock units of all SKUs for this product.
-        shop_name (str | Unset): The TikTok Shop name.
-        total_commission_rate (int | Unset): The total commission rate in hundredths of a percent (0.01%) units.
-        creator_commission_rate (int | Unset): The creator commission rate in hundredths of a percent (0.01%) units.
-        partner_commission_rate (int | Unset): The partner commission rate in hundredths of a percent (0.01%) units.
-        open_collaboration_commission_rate (int | Unset): The product open collaboration commission rate in hundredths
-            of a percent (0.01%) units.
-        is_available (bool | Unset): Set to `true` if a product URL is available. Set to `false` if no product URL is
-            available.
-        product_sales (int | Unset): The total number of units sold of this product for this campaign.
-        category (GetAffiliatePartnerCampaignProductListResponseDataProductCategory | Unset):
-        sample_quota (int | Unset): The total amount of sample inventory available for allocation to creators by the
-            seller.
-        sku_information_list (list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] |
-            Unset): A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
-        product_description (str | Unset): Return product description
-    """
+    """ 
+        Attributes:
+            id (str | Unset): The product identifier.
+            review_status (str | Unset): The product review status. This an enumerated type with values:
+                - PENDING
+                - APPROVED
+                - REJECTED
+                - PENDING_CLOSED
+                - CLOSED
+            name (str | Unset): The product name.
+            main_image_url (str | Unset): The product image URL.
+            lowest_price (GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice | Unset):
+            highest_price (GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice | Unset):
+            inventory (int | Unset): The number of in-stock units of all SKUs for this product.
+            shop_name (str | Unset): The TikTok Shop name.
+            total_commission_rate (int | Unset): The total commission rate in hundredths of a percent (0.01%) units.
+            creator_commission_rate (int | Unset): The creator commission rate in hundredths of a percent (0.01%) units.
+            partner_commission_rate (int | Unset): The partner commission rate in hundredths of a percent (0.01%) units.
+            open_collaboration_commission_rate (int | Unset): The product open collaboration commission rate in hundredths
+                of a percent (0.01%) units.
+            is_available (bool | Unset): Set to `true` if a product URL is available. Set to `false` if no product URL is
+                available.
+            product_sales (int | Unset): The total number of units sold of this product for this campaign.
+            category (GetAffiliatePartnerCampaignProductListResponseDataProductCategory | Unset):
+            sample_quota (int | Unset): The total amount of sample inventory available for allocation to creators by the
+                seller.
+            sku_information_list (list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] |
+                Unset): A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
+            product_description (str | Unset): Return product description
+     """
 
     id: str | Unset = UNSET
     review_status: str | Unset = UNSET
@@ -75,13 +74,19 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
     product_sales: int | Unset = UNSET
     category: GetAffiliatePartnerCampaignProductListResponseDataProductCategory | Unset = UNSET
     sample_quota: int | Unset = UNSET
-    sku_information_list: list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] | Unset = (
-        UNSET
-    )
+    sku_information_list: list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] | Unset = UNSET
     product_description: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_category import GetAffiliatePartnerCampaignProductListResponseDataProductCategory # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_highest_price import GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_lowest_price import GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list import GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList # noqa: PLC0415
         id = self.id
 
         review_status = self.review_status
@@ -127,11 +132,15 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
                 sku_information_list_item = sku_information_list_item_data.to_dict()
                 sku_information_list.append(sku_information_list_item)
 
+
+
         product_description = self.product_description
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if review_status is not UNSET:
@@ -171,21 +180,14 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_category import (
-            GetAffiliatePartnerCampaignProductListResponseDataProductCategory,  # noqa: PLC0415
-        )
-        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_highest_price import (
-            GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice,  # noqa: PLC0415
-        )
-        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_lowest_price import (
-            GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice,  # noqa: PLC0415
-        )
-        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list import (
-            GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList,  # noqa: PLC0415
-        )
-
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_category import GetAffiliatePartnerCampaignProductListResponseDataProductCategory # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_highest_price import GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_lowest_price import GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice # noqa: PLC0415
+        from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list import GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -197,19 +199,23 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
 
         _lowest_price = d.pop("lowest_price", UNSET)
         lowest_price: GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice | Unset
-        if isinstance(_lowest_price, Unset):
+        if isinstance(_lowest_price,  Unset):
             lowest_price = UNSET
         else:
             lowest_price = GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice.from_dict(_lowest_price)
 
+
+
+
         _highest_price = d.pop("highest_price", UNSET)
         highest_price: GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice | Unset
-        if isinstance(_highest_price, Unset):
+        if isinstance(_highest_price,  Unset):
             highest_price = UNSET
         else:
-            highest_price = GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice.from_dict(
-                _highest_price
-            )
+            highest_price = GetAffiliatePartnerCampaignProductListResponseDataProductHighestPrice.from_dict(_highest_price)
+
+
+
 
         inventory = d.pop("inventory", UNSET)
 
@@ -229,27 +235,27 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
 
         _category = d.pop("category", UNSET)
         category: GetAffiliatePartnerCampaignProductListResponseDataProductCategory | Unset
-        if isinstance(_category, Unset):
+        if isinstance(_category,  Unset):
             category = UNSET
         else:
             category = GetAffiliatePartnerCampaignProductListResponseDataProductCategory.from_dict(_category)
 
+
+
+
         sample_quota = d.pop("sample_quota", UNSET)
 
         _sku_information_list = d.pop("sku_information_list", UNSET)
-        sku_information_list: (
-            list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] | Unset
-        ) = UNSET
+        sku_information_list: list[GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList] | Unset = UNSET
         if _sku_information_list is not UNSET:
             sku_information_list = []
             for sku_information_list_item_data in _sku_information_list:
-                sku_information_list_item = (
-                    GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList.from_dict(
-                        sku_information_list_item_data
-                    )
-                )
+                sku_information_list_item = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationList.from_dict(sku_information_list_item_data)
+
+
 
                 sku_information_list.append(sku_information_list_item)
+
 
         product_description = d.pop("product_description", UNSET)
 
@@ -273,6 +279,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProduct:
             sku_information_list=sku_information_list,
             product_description=product_description,
         )
+
 
         get_affiliate_partner_campaign_product_list_response_data_product.additional_properties = d
         return get_affiliate_partner_campaign_product_list_response_data_product

@@ -1,51 +1,59 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="Address")
+
 
 
 @_attrs_define
 class Address:
-    """
-    Attributes:
-        street_address_line1 (str): The detailed street address of the location, including the building number, street
-            name, district, city, province, and any relevant details.
-            Max length: 500 characters
-        postal_code (str): The postal code.
-            Max length: 500 characters
-        country (str): The two letter ISO 3166 country code representing the country of the address. It must be an EU
-            country.
-        street_address_line2 (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future
-            API version. If provided, its value will be merged into `street_address_line1`. It is recommended to specify
-            `street_address_line1` directly.)
-            An optional secondary line for additional address details, if necessary.
-            Max length: 500 characters
-        district (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version.
-            If provided, its value will be merged into `street_address_line1`. It is recommended to specify
-            `street_address_line1` directly.)
+    """ 
+        Attributes:
+            street_address_line1 (str): The detailed street address of the location, including the building number, street
+                name, district, city, province, and any relevant details.
+                Max length: 500 characters
+            postal_code (str): The postal code.
+                Max length: 500 characters
+            country (str): The two letter ISO 3166 country code representing the country of the address. It must be an EU
+                country.
+            street_address_line2 (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future
+                API version. If provided, its value will be merged into `street_address_line1`. It is recommended to specify
+                `street_address_line1` directly.)
+                An optional secondary line for additional address details, if necessary.
+                Max length: 500 characters
+            district (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version.
+                If provided, its value will be merged into `street_address_line1`. It is recommended to specify
+                `street_address_line1` directly.)
 
-            The district name.
-            Max length: 500 characters
-        city (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version. If
-            provided, its value will be merged into `street_address_line1`. It is recommended to specify
-            `street_address_line1` directly.)
+                The district name.
+                Max length: 500 characters
+            city (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version. If
+                provided, its value will be merged into `street_address_line1`. It is recommended to specify
+                `street_address_line1` directly.)
 
-            The city name.
-            Max length: 500 characters
-        province (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version.
-            If provided, its value will be merged into `street_address_line1`. It is recommended to specify
-            `street_address_line1` directly.)
+                The city name.
+                Max length: 500 characters
+            province (str | Unset): (**Deprecated**: This field is deprecated and will be removed in a future API version.
+                If provided, its value will be merged into `street_address_line1`. It is recommended to specify
+                `street_address_line1` directly.)
 
-            The province, state, or region name.
-            Max length: 500 characters
-    """
+                The province, state, or region name.
+                Max length: 500 characters
+     """
 
     street_address_line1: str
     postal_code: str
@@ -55,6 +63,10 @@ class Address:
     city: str | Unset = UNSET
     province: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         street_address_line1 = self.street_address_line1
@@ -71,15 +83,14 @@ class Address:
 
         province = self.province
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "street_address_line1": street_address_line1,
-                "postal_code": postal_code,
-                "country": country,
-            }
-        )
+        field_dict.update({
+            "street_address_line1": street_address_line1,
+            "postal_code": postal_code,
+            "country": country,
+        })
         if street_address_line2 is not UNSET:
             field_dict["street_address_line2"] = street_address_line2
         if district is not UNSET:
@@ -90,6 +101,8 @@ class Address:
             field_dict["province"] = province
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -117,6 +130,7 @@ class Address:
             city=city,
             province=province,
         )
+
 
         address.additional_properties = d
         return address

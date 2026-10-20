@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+from typing import Literal, cast
+
 if TYPE_CHECKING:
-    from ..models.recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData
+  from ..models.recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData
+
+
+
 
 
 T = TypeVar("T", bound="RecipientAddressUpdateWebhook")
 
 
+
 @_attrs_define
 class RecipientAddressUpdateWebhook:
-    """
-    Attributes:
-        type_ (Literal[3]): The ID of the webhook type.
-        shop_id (str | Unset): The shop ID.
-        timestamp (int | Unset): The Unix timestamp when the webhook was triggered.
-        data (RecipientAddressUpdateWebhookData | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (Literal[3]): The ID of the webhook type.
+            shop_id (str | Unset): The shop ID.
+            timestamp (int | Unset): The Unix timestamp when the webhook was triggered.
+            data (RecipientAddressUpdateWebhookData | Unset):
+     """
 
     type_: Literal[3]
     shop_id: str | Unset = UNSET
@@ -31,7 +39,12 @@ class RecipientAddressUpdateWebhook:
     data: RecipientAddressUpdateWebhookData | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData # noqa: PLC0415
         type_ = self.type_
 
         shop_id = self.shop_id
@@ -42,13 +55,12 @@ class RecipientAddressUpdateWebhook:
         if not isinstance(self.data, Unset):
             data = self.data.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "type": type_,
-            }
-        )
+        field_dict.update({
+            "type": type_,
+        })
         if shop_id is not UNSET:
             field_dict["shop_id"] = shop_id
         if timestamp is not UNSET:
@@ -58,12 +70,13 @@ class RecipientAddressUpdateWebhook:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData  # noqa: PLC0415
-
+        from ..models.recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData # noqa: PLC0415
         d = dict(src_dict)
-        type_ = cast(Literal[3], d.pop("type"))
+        type_ = cast(Literal[3] , d.pop("type"))
         if type_ != 3:
             raise ValueError(f"type must match const 3, got '{type_}'")
 
@@ -73,10 +86,13 @@ class RecipientAddressUpdateWebhook:
 
         _data = d.pop("data", UNSET)
         data: RecipientAddressUpdateWebhookData | Unset
-        if isinstance(_data, Unset):
+        if isinstance(_data,  Unset):
             data = UNSET
         else:
             data = RecipientAddressUpdateWebhookData.from_dict(_data)
+
+
+
 
         recipient_address_update_webhook = cls(
             type_=type_,
@@ -84,6 +100,7 @@ class RecipientAddressUpdateWebhook:
             timestamp=timestamp,
             data=data,
         )
+
 
         recipient_address_update_webhook.additional_properties = d
         return recipient_address_update_webhook

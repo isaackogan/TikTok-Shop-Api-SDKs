@@ -1,29 +1,37 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="InventoryStatusChangeWebhookDataInventoryDistribution")
+
 
 
 @_attrs_define
 class InventoryStatusChangeWebhookDataInventoryDistribution:
-    """
-    Attributes:
-        total_quantity (int | Unset): The total quantity of the stock physically in the warehouses.
-            `total_quantity`=`available_quantity` + `creator_reserved_quantity` + `campaign_reserved_quantity` +
-            `committed_quantity`.
-        available_quantity (int | Unset): The total number of SKUs available for ordering in the warehouses.
-        creator_reserved_quantity (int | Unset): The total number of SKUs reserved for creators in the warehouses.
-        campaign_reserved_quantity (int | Unset): The total number of SKUs reserved for campaigns in the warehouses.
-        committed_quantity (int | Unset): The total number of SKUs reserved by existing customer orders in the
-            warehouses.
-    """
+    """ 
+        Attributes:
+            total_quantity (int | Unset): The total quantity of the stock physically in the warehouses.
+                `total_quantity`=`available_quantity` + `creator_reserved_quantity` + `campaign_reserved_quantity` +
+                `committed_quantity`.
+            available_quantity (int | Unset): The total number of SKUs available for ordering in the warehouses.
+            creator_reserved_quantity (int | Unset): The total number of SKUs reserved for creators in the warehouses.
+            campaign_reserved_quantity (int | Unset): The total number of SKUs reserved for campaigns in the warehouses.
+            committed_quantity (int | Unset): The total number of SKUs reserved by existing customer orders in the
+                warehouses.
+     """
 
     total_quantity: int | Unset = UNSET
     available_quantity: int | Unset = UNSET
@@ -31,6 +39,10 @@ class InventoryStatusChangeWebhookDataInventoryDistribution:
     campaign_reserved_quantity: int | Unset = UNSET
     committed_quantity: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         total_quantity = self.total_quantity
@@ -43,9 +55,11 @@ class InventoryStatusChangeWebhookDataInventoryDistribution:
 
         committed_quantity = self.committed_quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_quantity is not UNSET:
             field_dict["total_quantity"] = total_quantity
         if available_quantity is not UNSET:
@@ -58,6 +72,8 @@ class InventoryStatusChangeWebhookDataInventoryDistribution:
             field_dict["committed_quantity"] = committed_quantity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -79,6 +95,7 @@ class InventoryStatusChangeWebhookDataInventoryDistribution:
             campaign_reserved_quantity=campaign_reserved_quantity,
             committed_quantity=committed_quantity,
         )
+
 
         inventory_status_change_webhook_data_inventory_distribution.additional_properties = d
         return inventory_status_change_webhook_data_inventory_distribution

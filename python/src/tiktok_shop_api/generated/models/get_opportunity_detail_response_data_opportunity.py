@@ -1,45 +1,44 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_opportunity_detail_response_data_opportunity_basic_info import (
-        GetOpportunityDetailResponseDataOpportunityBasicInfo,
-    )
-    from ..models.get_opportunity_detail_response_data_opportunity_content_data import (
-        GetOpportunityDetailResponseDataOpportunityContentData,
-    )
-    from ..models.get_opportunity_detail_response_data_opportunity_listing_criteria import (
-        GetOpportunityDetailResponseDataOpportunityListingCriteria,
-    )
-    from ..models.get_opportunity_detail_response_data_opportunity_market_data import (
-        GetOpportunityDetailResponseDataOpportunityMarketData,
-    )
+  from ..models.get_opportunity_detail_response_data_opportunity_basic_info import GetOpportunityDetailResponseDataOpportunityBasicInfo
+  from ..models.get_opportunity_detail_response_data_opportunity_content_data import GetOpportunityDetailResponseDataOpportunityContentData
+  from ..models.get_opportunity_detail_response_data_opportunity_listing_criteria import GetOpportunityDetailResponseDataOpportunityListingCriteria
+  from ..models.get_opportunity_detail_response_data_opportunity_market_data import GetOpportunityDetailResponseDataOpportunityMarketData
+
+
+
 
 
 T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunity")
 
 
+
 @_attrs_define
 class GetOpportunityDetailResponseDataOpportunity:
-    """
-    Attributes:
-        id (str | Unset): Unique ID of the opportunity
-        action_type (str | Unset): The recommended action.
-            Possible values:
-            - LIST_SAME: List the same product.
-            - LIST_SIMILAR: List a similar product.
-        listing_criteria (GetOpportunityDetailResponseDataOpportunityListingCriteria | Unset):
-        content_data (GetOpportunityDetailResponseDataOpportunityContentData | Unset):
-        market_data (GetOpportunityDetailResponseDataOpportunityMarketData | Unset):
-        basic_info (GetOpportunityDetailResponseDataOpportunityBasicInfo | Unset):
-    """
+    """ 
+        Attributes:
+            id (str | Unset): Unique ID of the opportunity
+            action_type (str | Unset): The recommended action.
+                Possible values:
+                - LIST_SAME: List the same product.
+                - LIST_SIMILAR: List a similar product.
+            listing_criteria (GetOpportunityDetailResponseDataOpportunityListingCriteria | Unset):
+            content_data (GetOpportunityDetailResponseDataOpportunityContentData | Unset):
+            market_data (GetOpportunityDetailResponseDataOpportunityMarketData | Unset):
+            basic_info (GetOpportunityDetailResponseDataOpportunityBasicInfo | Unset):
+     """
 
     id: str | Unset = UNSET
     action_type: str | Unset = UNSET
@@ -49,7 +48,15 @@ class GetOpportunityDetailResponseDataOpportunity:
     basic_info: GetOpportunityDetailResponseDataOpportunityBasicInfo | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_opportunity_detail_response_data_opportunity_basic_info import GetOpportunityDetailResponseDataOpportunityBasicInfo # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_content_data import GetOpportunityDetailResponseDataOpportunityContentData # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_listing_criteria import GetOpportunityDetailResponseDataOpportunityListingCriteria # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_market_data import GetOpportunityDetailResponseDataOpportunityMarketData # noqa: PLC0415
         id = self.id
 
         action_type = self.action_type
@@ -70,9 +77,11 @@ class GetOpportunityDetailResponseDataOpportunity:
         if not isinstance(self.basic_info, Unset):
             basic_info = self.basic_info.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if id is not UNSET:
             field_dict["id"] = id
         if action_type is not UNSET:
@@ -88,21 +97,14 @@ class GetOpportunityDetailResponseDataOpportunity:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_opportunity_detail_response_data_opportunity_basic_info import (
-            GetOpportunityDetailResponseDataOpportunityBasicInfo,  # noqa: PLC0415
-        )
-        from ..models.get_opportunity_detail_response_data_opportunity_content_data import (
-            GetOpportunityDetailResponseDataOpportunityContentData,  # noqa: PLC0415
-        )
-        from ..models.get_opportunity_detail_response_data_opportunity_listing_criteria import (
-            GetOpportunityDetailResponseDataOpportunityListingCriteria,  # noqa: PLC0415
-        )
-        from ..models.get_opportunity_detail_response_data_opportunity_market_data import (
-            GetOpportunityDetailResponseDataOpportunityMarketData,  # noqa: PLC0415
-        )
-
+        from ..models.get_opportunity_detail_response_data_opportunity_basic_info import GetOpportunityDetailResponseDataOpportunityBasicInfo # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_content_data import GetOpportunityDetailResponseDataOpportunityContentData # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_listing_criteria import GetOpportunityDetailResponseDataOpportunityListingCriteria # noqa: PLC0415
+        from ..models.get_opportunity_detail_response_data_opportunity_market_data import GetOpportunityDetailResponseDataOpportunityMarketData # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
@@ -110,31 +112,43 @@ class GetOpportunityDetailResponseDataOpportunity:
 
         _listing_criteria = d.pop("listing_criteria", UNSET)
         listing_criteria: GetOpportunityDetailResponseDataOpportunityListingCriteria | Unset
-        if isinstance(_listing_criteria, Unset):
+        if isinstance(_listing_criteria,  Unset):
             listing_criteria = UNSET
         else:
             listing_criteria = GetOpportunityDetailResponseDataOpportunityListingCriteria.from_dict(_listing_criteria)
 
+
+
+
         _content_data = d.pop("content_data", UNSET)
         content_data: GetOpportunityDetailResponseDataOpportunityContentData | Unset
-        if isinstance(_content_data, Unset):
+        if isinstance(_content_data,  Unset):
             content_data = UNSET
         else:
             content_data = GetOpportunityDetailResponseDataOpportunityContentData.from_dict(_content_data)
 
+
+
+
         _market_data = d.pop("market_data", UNSET)
         market_data: GetOpportunityDetailResponseDataOpportunityMarketData | Unset
-        if isinstance(_market_data, Unset):
+        if isinstance(_market_data,  Unset):
             market_data = UNSET
         else:
             market_data = GetOpportunityDetailResponseDataOpportunityMarketData.from_dict(_market_data)
 
+
+
+
         _basic_info = d.pop("basic_info", UNSET)
         basic_info: GetOpportunityDetailResponseDataOpportunityBasicInfo | Unset
-        if isinstance(_basic_info, Unset):
+        if isinstance(_basic_info,  Unset):
             basic_info = UNSET
         else:
             basic_info = GetOpportunityDetailResponseDataOpportunityBasicInfo.from_dict(_basic_info)
+
+
+
 
         get_opportunity_detail_response_data_opportunity = cls(
             id=id,
@@ -144,6 +158,7 @@ class GetOpportunityDetailResponseDataOpportunity:
             market_data=market_data,
             basic_info=basic_info,
         )
+
 
         get_opportunity_detail_response_data_opportunity.additional_properties = d
         return get_opportunity_detail_response_data_opportunity

@@ -1,13 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_seller_financial_transactions_response import GetSellerFinancialTransactionsResponse
 from ...models.get_seller_financial_transactions_types_item import GetSellerFinancialTransactionsTypesItem
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +22,12 @@ def _get_kwargs(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["create_time_lt"] = create_time_lt
@@ -27,6 +37,7 @@ def _get_kwargs(
         types_item = types_item_data.value
         json_types.append(types_item)
 
+
     params["types"] = json_types
 
     params["page_size"] = page_size
@@ -35,7 +46,9 @@ def _get_kwargs(
 
     params["create_time_ge"] = create_time_ge
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -43,14 +56,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetSellerFinancialTransactionsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetSellerFinancialTransactionsResponse | None:
     if response.status_code == 200:
         response_200 = GetSellerFinancialTransactionsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -60,9 +75,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetSellerFinancialTransactionsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetSellerFinancialTransactionsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,8 +92,9 @@ def sync_detailed(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetSellerFinancialTransactionsResponse]:
-    """Get Seller Financial Transactions
+    """ Get Seller Financial Transactions
 
      Retrieves seller financial transaction records within an optional creation-time range, filtered by
     the required transaction types.
@@ -98,14 +112,16 @@ def sync_detailed(
 
     Returns:
         Response[GetSellerFinancialTransactionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         create_time_lt=create_time_lt,
-        types=types,
-        page_size=page_size,
-        page_token=page_token,
-        create_time_ge=create_time_ge,
+types=types,
+page_size=page_size,
+page_token=page_token,
+create_time_ge=create_time_ge,
+
     )
 
     response = client.get_httpx_client().request(
@@ -113,7 +129,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -123,8 +138,9 @@ def sync(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> GetSellerFinancialTransactionsResponse | None:
-    """Get Seller Financial Transactions
+    """ Get Seller Financial Transactions
 
      Retrieves seller financial transaction records within an optional creation-time range, filtered by
     the required transaction types.
@@ -142,17 +158,18 @@ def sync(
 
     Returns:
         GetSellerFinancialTransactionsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        create_time_lt=create_time_lt,
-        types=types,
-        page_size=page_size,
-        page_token=page_token,
-        create_time_ge=create_time_ge,
-    ).parsed
+create_time_lt=create_time_lt,
+types=types,
+page_size=page_size,
+page_token=page_token,
+create_time_ge=create_time_ge,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -162,8 +179,9 @@ async def asyncio_detailed(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> Response[GetSellerFinancialTransactionsResponse]:
-    """Get Seller Financial Transactions
+    """ Get Seller Financial Transactions
 
      Retrieves seller financial transaction records within an optional creation-time range, filtered by
     the required transaction types.
@@ -181,20 +199,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetSellerFinancialTransactionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         create_time_lt=create_time_lt,
-        types=types,
-        page_size=page_size,
-        page_token=page_token,
-        create_time_ge=create_time_ge,
+types=types,
+page_size=page_size,
+page_token=page_token,
+create_time_ge=create_time_ge,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -204,8 +225,9 @@ async def asyncio(
     page_size: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     create_time_ge: int | Unset = UNSET,
+
 ) -> GetSellerFinancialTransactionsResponse | None:
-    """Get Seller Financial Transactions
+    """ Get Seller Financial Transactions
 
      Retrieves seller financial transaction records within an optional creation-time range, filtered by
     the required transaction types.
@@ -223,15 +245,15 @@ async def asyncio(
 
     Returns:
         GetSellerFinancialTransactionsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            create_time_lt=create_time_lt,
-            types=types,
-            page_size=page_size,
-            page_token=page_token,
-            create_time_ge=create_time_ge,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+create_time_lt=create_time_lt,
+types=types,
+page_size=page_size,
+page_token=page_token,
+create_time_ge=create_time_ge,
+
+    )).parsed

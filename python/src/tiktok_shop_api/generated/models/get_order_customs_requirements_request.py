@@ -1,45 +1,64 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
+
+
+
+
+
 T = TypeVar("T", bound="GetOrderCustomsRequirementsRequest")
+
 
 
 @_attrs_define
 class GetOrderCustomsRequirementsRequest:
-    """
-    Attributes:
-        order_ids (list[str]): TikTok Shop order IDs to query. When providing a request body, include 1 to 50 order IDs.
-    """
+    """ 
+        Attributes:
+            order_ids (list[str]): TikTok Shop order IDs to query. When providing a request body, include 1 to 50 order IDs.
+     """
 
     order_ids: list[str]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         order_ids = self.order_ids
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "order_ids": order_ids,
-            }
-        )
+        field_dict.update({
+            "order_ids": order_ids,
+        })
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         order_ids = cast(list[str], d.pop("order_ids"))
 
+
         get_order_customs_requirements_request = cls(
             order_ids=order_ids,
         )
+
 
         get_order_customs_requirements_request.additional_properties = d
         return get_order_customs_requirements_request

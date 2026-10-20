@@ -1,14 +1,18 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_global_attributes_locale import GetGlobalAttributesLocale
 from ...models.get_global_attributes_response import GetGlobalAttributesResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -16,7 +20,12 @@ def _get_kwargs(
     *,
     locale: GetGlobalAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_locale: str | Unset = UNSET
@@ -27,24 +36,26 @@ def _get_kwargs(
 
     params["category_version"] = category_version
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/product/202309/categories/{category_id}/global_attributes".format(
-            category_id=quote(str(category_id), safe=""),
-        ),
+        "url": "/product/202309/categories/{category_id}/global_attributes".format(category_id=quote(str(category_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetGlobalAttributesResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetGlobalAttributesResponse | None:
     if response.status_code == 200:
         response_200 = GetGlobalAttributesResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -54,9 +65,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetGlobalAttributesResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetGlobalAttributesResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -71,8 +80,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     locale: GetGlobalAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetGlobalAttributesResponse]:
-    """Get Global Attributes
+    """ Get Global Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a global product in a
     particular category across the seller's markets.
@@ -98,12 +108,14 @@ def sync_detailed(
 
     Returns:
         Response[GetGlobalAttributesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        locale=locale,
-        category_version=category_version,
+locale=locale,
+category_version=category_version,
+
     )
 
     response = client.get_httpx_client().request(
@@ -112,15 +124,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     category_id: str,
     *,
     client: AuthenticatedClient | Client,
     locale: GetGlobalAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetGlobalAttributesResponse | None:
-    """Get Global Attributes
+    """ Get Global Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a global product in a
     particular category across the seller's markets.
@@ -146,15 +158,16 @@ def sync(
 
     Returns:
         GetGlobalAttributesResponse
-    """
+     """
+
 
     return sync_detailed(
         category_id=category_id,
-        client=client,
-        locale=locale,
-        category_version=category_version,
-    ).parsed
+client=client,
+locale=locale,
+category_version=category_version,
 
+    ).parsed
 
 async def asyncio_detailed(
     category_id: str,
@@ -162,8 +175,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     locale: GetGlobalAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetGlobalAttributesResponse]:
-    """Get Global Attributes
+    """ Get Global Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a global product in a
     particular category across the seller's markets.
@@ -189,18 +203,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetGlobalAttributesResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        locale=locale,
-        category_version=category_version,
+locale=locale,
+category_version=category_version,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     category_id: str,
@@ -208,8 +225,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     locale: GetGlobalAttributesLocale | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetGlobalAttributesResponse | None:
-    """Get Global Attributes
+    """ Get Global Attributes
 
      Retrieve the standard built-in product and sales attributes for listing a global product in a
     particular category across the seller's markets.
@@ -235,13 +253,13 @@ async def asyncio(
 
     Returns:
         GetGlobalAttributesResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            category_id=category_id,
-            client=client,
-            locale=locale,
-            category_version=category_version,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        category_id=category_id,
+client=client,
+locale=locale,
+category_version=category_version,
+
+    )).parsed

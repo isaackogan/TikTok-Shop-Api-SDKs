@@ -1,60 +1,77 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_fbtmcf_order_status_webhook_data_mcf_order import GetFBTMCFOrderStatusWebhookDataMcfOrder
+  from ..models.get_fbtmcf_order_status_webhook_data_mcf_order import GetFBTMCFOrderStatusWebhookDataMcfOrder
+
+
+
 
 
 T = TypeVar("T", bound="GetFBTMCFOrderStatusWebhookData")
 
 
+
 @_attrs_define
 class GetFBTMCFOrderStatusWebhookData:
-    """
-    Attributes:
-        mcf_order (GetFBTMCFOrderStatusWebhookDataMcfOrder | Unset):
-    """
+    """ 
+        Attributes:
+            mcf_order (GetFBTMCFOrderStatusWebhookDataMcfOrder | Unset):
+     """
 
     mcf_order: GetFBTMCFOrderStatusWebhookDataMcfOrder | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_fbtmcf_order_status_webhook_data_mcf_order import GetFBTMCFOrderStatusWebhookDataMcfOrder # noqa: PLC0415
         mcf_order: dict[str, Any] | Unset = UNSET
         if not isinstance(self.mcf_order, Unset):
             mcf_order = self.mcf_order.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if mcf_order is not UNSET:
             field_dict["mcf_order"] = mcf_order
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_fbtmcf_order_status_webhook_data_mcf_order import (
-            GetFBTMCFOrderStatusWebhookDataMcfOrder,  # noqa: PLC0415
-        )
-
+        from ..models.get_fbtmcf_order_status_webhook_data_mcf_order import GetFBTMCFOrderStatusWebhookDataMcfOrder # noqa: PLC0415
         d = dict(src_dict)
         _mcf_order = d.pop("mcf_order", UNSET)
         mcf_order: GetFBTMCFOrderStatusWebhookDataMcfOrder | Unset
-        if isinstance(_mcf_order, Unset):
+        if isinstance(_mcf_order,  Unset):
             mcf_order = UNSET
         else:
             mcf_order = GetFBTMCFOrderStatusWebhookDataMcfOrder.from_dict(_mcf_order)
 
+
+
+
         get_fbtmcf_order_status_webhook_data = cls(
             mcf_order=mcf_order,
         )
+
 
         get_fbtmcf_order_status_webhook_data.additional_properties = d
         return get_fbtmcf_order_status_webhook_data

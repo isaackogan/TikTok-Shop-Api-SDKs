@@ -1,35 +1,46 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.update_global_inventory_request_global_sku_inventory import (
-        UpdateGlobalInventoryRequestGlobalSkuInventory,
-    )
+  from ..models.update_global_inventory_request_global_sku_inventory import UpdateGlobalInventoryRequestGlobalSkuInventory
+
+
+
 
 
 T = TypeVar("T", bound="UpdateGlobalInventoryRequestGlobalSku")
 
 
+
 @_attrs_define
 class UpdateGlobalInventoryRequestGlobalSku:
-    """
-    Attributes:
-        id (str): The global SKU ID in TikTok Shop.
-        inventory (list[UpdateGlobalInventoryRequestGlobalSkuInventory]): The inventory quantities to set for this
-            global SKU, with one entry for each global warehouse to update. Existing global warehouses omitted from this
-            array retain their current quantities.
-    """
+    """ 
+        Attributes:
+            id (str): The global SKU ID in TikTok Shop.
+            inventory (list[UpdateGlobalInventoryRequestGlobalSkuInventory]): The inventory quantities to set for this
+                global SKU, with one entry for each global warehouse to update. Existing global warehouses omitted from this
+                array retain their current quantities.
+     """
 
     id: str
     inventory: list[UpdateGlobalInventoryRequestGlobalSkuInventory]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_global_inventory_request_global_sku_inventory import UpdateGlobalInventoryRequestGlobalSkuInventory # noqa: PLC0415
         id = self.id
 
         inventory = []
@@ -37,37 +48,41 @@ class UpdateGlobalInventoryRequestGlobalSku:
             inventory_item = inventory_item_data.to_dict()
             inventory.append(inventory_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "id": id,
-                "inventory": inventory,
-            }
-        )
+        field_dict.update({
+            "id": id,
+            "inventory": inventory,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.update_global_inventory_request_global_sku_inventory import (
-            UpdateGlobalInventoryRequestGlobalSkuInventory,  # noqa: PLC0415
-        )
-
+        from ..models.update_global_inventory_request_global_sku_inventory import UpdateGlobalInventoryRequestGlobalSkuInventory # noqa: PLC0415
         d = dict(src_dict)
         id = d.pop("id")
 
         inventory = []
         _inventory = d.pop("inventory")
-        for inventory_item_data in _inventory:
+        for inventory_item_data in (_inventory):
             inventory_item = UpdateGlobalInventoryRequestGlobalSkuInventory.from_dict(inventory_item_data)
 
+
+
             inventory.append(inventory_item)
+
 
         update_global_inventory_request_global_sku = cls(
             id=id,
             inventory=inventory,
         )
+
 
         update_global_inventory_request_global_sku.additional_properties = d
         return update_global_inventory_request_global_sku

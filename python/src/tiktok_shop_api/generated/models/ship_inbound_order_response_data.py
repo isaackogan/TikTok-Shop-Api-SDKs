@@ -1,36 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="ShipInboundOrderResponseData")
+
 
 
 @_attrs_define
 class ShipInboundOrderResponseData:
-    """
-    Attributes:
-        inbound_order_id (str | Unset): Identifier of the shipped inbound order.
-    """
+    """ 
+        Attributes:
+            inbound_order_id (str | Unset): Identifier of the shipped inbound order.
+     """
 
     inbound_order_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         inbound_order_id = self.inbound_order_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if inbound_order_id is not UNSET:
             field_dict["inbound_order_id"] = inbound_order_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -40,6 +56,7 @@ class ShipInboundOrderResponseData:
         ship_inbound_order_response_data = cls(
             inbound_order_id=inbound_order_id,
         )
+
 
         ship_inbound_order_response_data.additional_properties = d
         return ship_inbound_order_response_data

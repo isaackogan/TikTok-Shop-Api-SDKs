@@ -1,46 +1,62 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetInboxCategoryCountsResponseDataDataGroupCount")
+
 
 
 @_attrs_define
 class GetInboxCategoryCountsResponseDataDataGroupCount:
-    """
-    Attributes:
-        group_type (str | Unset): Group type name, e.g.
-            - UNREAD
-            -UNREPLIED
-            -STARRED
-            -ARCHIVED
-        count (int | Unset): Conversation count in this group
-    """
+    """ 
+        Attributes:
+            group_type (str | Unset): Group type name, e.g.
+                - UNREAD
+                -UNREPLIED
+                -STARRED
+                -ARCHIVED
+            count (int | Unset): Conversation count in this group
+     """
 
     group_type: str | Unset = UNSET
     count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         group_type = self.group_type
 
         count = self.count
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if group_type is not UNSET:
             field_dict["group_type"] = group_type
         if count is not UNSET:
             field_dict["count"] = count
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -53,6 +69,7 @@ class GetInboxCategoryCountsResponseDataDataGroupCount:
             group_type=group_type,
             count=count,
         )
+
 
         get_inbox_category_counts_response_data_data_group_count.additional_properties = d
         return get_inbox_category_counts_response_data_data_group_count

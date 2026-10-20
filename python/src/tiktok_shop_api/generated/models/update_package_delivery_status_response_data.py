@@ -1,33 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.batch_ship_packages_response_data_error import BatchShipPackagesResponseDataError
+  from ..models.batch_ship_packages_response_data_error import BatchShipPackagesResponseDataError
+
+
+
 
 
 T = TypeVar("T", bound="UpdatePackageDeliveryStatusResponseData")
 
 
+
 @_attrs_define
 class UpdatePackageDeliveryStatusResponseData:
-    """
-    Attributes:
-        errors (list[BatchShipPackagesResponseDataError] | Unset): Package-level failures from the batch request. Each
-            entry identifies the affected package and contains the returned failure code and message fields. Check this list
-            even when the top-level response code is `0`.
-    """
+    """ 
+        Attributes:
+            errors (list[BatchShipPackagesResponseDataError] | Unset): Package-level failures from the batch request. Each
+                entry identifies the affected package and contains the returned failure code and message fields. Check this list
+                even when the top-level response code is `0`.
+     """
 
     errors: list[BatchShipPackagesResponseDataError] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.batch_ship_packages_response_data_error import BatchShipPackagesResponseDataError # noqa: PLC0415
         errors: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.errors, Unset):
             errors = []
@@ -35,18 +47,23 @@ class UpdatePackageDeliveryStatusResponseData:
                 errors_item = errors_item_data.to_dict()
                 errors.append(errors_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if errors is not UNSET:
             field_dict["errors"] = errors
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.batch_ship_packages_response_data_error import BatchShipPackagesResponseDataError  # noqa: PLC0415
-
+        from ..models.batch_ship_packages_response_data_error import BatchShipPackagesResponseDataError # noqa: PLC0415
         d = dict(src_dict)
         _errors = d.pop("errors", UNSET)
         errors: list[BatchShipPackagesResponseDataError] | Unset = UNSET
@@ -55,11 +72,15 @@ class UpdatePackageDeliveryStatusResponseData:
             for errors_item_data in _errors:
                 errors_item = BatchShipPackagesResponseDataError.from_dict(errors_item_data)
 
+
+
                 errors.append(errors_item)
+
 
         update_package_delivery_status_response_data = cls(
             errors=errors,
         )
+
 
         update_package_delivery_status_response_data.additional_properties = d
         return update_package_delivery_status_response_data

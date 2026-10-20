@@ -1,103 +1,106 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.get_unsettled_transactions_response_data_transaction_fee_tax_breakdown import (
-        GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown,
-    )
-    from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown import (
-        GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown,
-    )
-    from ..models.revenue_breakdown import RevenueBreakdown
+  from ..models.get_unsettled_transactions_response_data_transaction_fee_tax_breakdown import GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown
+  from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown
+  from ..models.revenue_breakdown import RevenueBreakdown
+
+
+
 
 
 T = TypeVar("T", bound="GetUnsettledTransactionsResponseDataTransaction")
 
 
+
 @_attrs_define
 class GetUnsettledTransactionsResponseDataTransaction:
-    """
-    Attributes:
-        type_ (str | Unset): The transaction type.
-            Standard transactions
-            - `ORDER`: A transaction related to an order settlement.
-            - If the transaction is an adjustment, it returns one of the following values:
-            Platform-related adjustments
-            - `CHARGE_BACK`: Charges returned to a payment card after a customer has successfully disputed an item on their
-            account statement or transactions report.
-            - `CUSTOMER_SERVICE_COMPENSATION`: Extra compensation or compensation paid to a customer after the after-sales
-            period by customer service.
-            - `DEDUCTIONS_INCURRED_BY_SELLER`: Deduction arising from customer dissatisfaction as a result of the seller's
-            responsibility. This includes issues such as fraud, empty packages, items that do not match the product display
-            page, or items of lower value than advertised.
-            - `GMV_PAYMENT_FOR_ADS`: Amount used to pay for your advertisement if you are enabled "auto pay ads with shop
-            GMV", or to pay for Tiktok Promote ads orders.
-            - `PLATFORM_COMMISSION_ADJUSTMENT`: Adjustment when there are differences in the platform commission paid by the
-            seller.
-            - `PLATFORM_COMMISSION_COMPENSATION`: Compensation paid to the seller when there are differences in the platform
-            commission paid by the seller.
-            - `PLATFORM_PENALTY`: Penalty imposed for a violation of TikTok Shop policies (the corresponding amount has been
-            deducted from the seller's account). For details, please refer to the email notification sent to the seller.
-            - `PROMOTION_ADJUSTMENT`: Adjustment when a seller takes part in a platform promotion and there are differences
-            between the promotion price and the actual amount paid by the seller.
-            - `REBATE`: A discount on referral fees offered by TikTok Shop to eligible sellers.
-            - `PLATFORM_COMPENSATION`: Compensation paid to the seller after the seller successfully appealed for a customer
-            dispute.
-            - `PLATFORM_REIMBURSEMENT`: Reimbursement paid by TikTok Shop for an order refunded under TikTok's refund
-            without return policy (the seller is not responsible).
-            Logistics-related adjustments
-            - `FBT_WAREHOUSE_SERVICE_FEE`: Amount charged by TikTok Fulfillment Portal (Pipak) for warehousing-related bills
-            incurred by the seller under the Fulfilled by TikTok (FBT) service.
-            - `LOGISTICS_REIMBURSEMENT`: Reimbursement paid by TikTok Shop for an order refunded due to logistics-related
-            issues (e.g. lost or damaged order).
-            - `SHIPPING_FEE_ADJUSTMENT`: Adjustment when there are differences or mistakes with the shipping fee paid by the
-            seller.
-            - `SHIPPING_FEE_COMPENSATION`: Compensation given to sellers due to differences between the actual shipping fee
-            and the pre-paid shipping fee.
-            - `SHIPPING_FEE_REBATE`: Shipping fee rebate provided to the seller as part of their participation in a platform
-            campaign.
-            - `SAMPLE_SHIPPING_FEE`: Fees charged for sending samples using the TikTok logistics provider.
-            Miscellaneous adjustments
-            `OTHER_ADJUSTMENT`: Adjustment for other reasons.
-        id (str | Unset): The transaction ID.
-        status (str | Unset): The transaction status. Only supports `UNSETTLED`.
-        currency (str | Unset): The three-letter currency code in ISO 4217 format.
-        estimated_settlement (str | Unset): Estimated settlement time for the transaction.
-            Possible return values:
-            - A relative settlement schedule, such as `Delivered + N days`, when the order has not been delivered and only
-            an approximate settlement policy is available.
-            - A Unix timestamp in seconds when the order has been delivered and the estimated settlement time is available.
-        unsettled_reason (str | Unset): reason for why transaction is pending for settlement
-        order_create_time (int | Unset): The time when the order was created, as a Unix timestamp in seconds.
-        order_delivery_time (int | Unset): The time when the order was delivered, as a Unix timestamp in seconds. No
-            delivery time is available if the order has not been delivered.
-        order_id (str | Unset): The order ID.
-            Each transaction can only be associated with an order ID or an adjustment ID.
-        adjustment_id (str | Unset): The adjustment ID if the transaction is an adjustment.
-            Each transaction can only be associated with an order ID or an adjustment ID.
-        adjustment_order_id (str | Unset): The order ID associated with the adjustment, if any.
-        est_adjustment_amount (str | Unset): The estimated adjustment amount based on TikTok Shop policy.
-            Refer to `transactions.type` for the list of adjustment-related policies.
-        est_settlement_amount (str | Unset): The estimated settlement amount for the order.
-            Formula: revenue_amount - shipping_cost_amount - fee_tax_amount - adjustment_amount
-        est_revenue_amount (str | Unset): The estimated revenue amount. This is equivalent to the sum of all amounts in
-            `revenue_breakdown`.
-        revenue_breakdown (RevenueBreakdown | Unset):
-        est_shipping_cost_amount (str | Unset): The estimated shipping costs, please note that when order hasn't been
-            delivered, no complete shipping cost can be provided. This is equivalent to the sum of all contributory amounts
-            in `shipping_cost_breakdown`.
-        shipping_cost_breakdown (GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown | Unset):
-        est_fee_tax_amount (str | Unset): The estimated total fees and taxes charged by TikTok Shop. Shipping-related
-            costs are excluded. This is equivalent to the sum of all contributory amounts in `fee_tax_breakdown`.
-        fee_tax_breakdown (GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown | Unset):
-    """
+    """ 
+        Attributes:
+            type_ (str | Unset): The transaction type.
+                Standard transactions
+                - `ORDER`: A transaction related to an order settlement.
+                - If the transaction is an adjustment, it returns one of the following values:
+                Platform-related adjustments
+                - `CHARGE_BACK`: Charges returned to a payment card after a customer has successfully disputed an item on their
+                account statement or transactions report.
+                - `CUSTOMER_SERVICE_COMPENSATION`: Extra compensation or compensation paid to a customer after the after-sales
+                period by customer service.
+                - `DEDUCTIONS_INCURRED_BY_SELLER`: Deduction arising from customer dissatisfaction as a result of the seller's
+                responsibility. This includes issues such as fraud, empty packages, items that do not match the product display
+                page, or items of lower value than advertised.
+                - `GMV_PAYMENT_FOR_ADS`: Amount used to pay for your advertisement if you are enabled "auto pay ads with shop
+                GMV", or to pay for Tiktok Promote ads orders.
+                - `PLATFORM_COMMISSION_ADJUSTMENT`: Adjustment when there are differences in the platform commission paid by the
+                seller.
+                - `PLATFORM_COMMISSION_COMPENSATION`: Compensation paid to the seller when there are differences in the platform
+                commission paid by the seller.
+                - `PLATFORM_PENALTY`: Penalty imposed for a violation of TikTok Shop policies (the corresponding amount has been
+                deducted from the seller's account). For details, please refer to the email notification sent to the seller.
+                - `PROMOTION_ADJUSTMENT`: Adjustment when a seller takes part in a platform promotion and there are differences
+                between the promotion price and the actual amount paid by the seller.
+                - `REBATE`: A discount on referral fees offered by TikTok Shop to eligible sellers.
+                - `PLATFORM_COMPENSATION`: Compensation paid to the seller after the seller successfully appealed for a customer
+                dispute.
+                - `PLATFORM_REIMBURSEMENT`: Reimbursement paid by TikTok Shop for an order refunded under TikTok's refund
+                without return policy (the seller is not responsible).
+                Logistics-related adjustments
+                - `FBT_WAREHOUSE_SERVICE_FEE`: Amount charged by TikTok Fulfillment Portal (Pipak) for warehousing-related bills
+                incurred by the seller under the Fulfilled by TikTok (FBT) service.
+                - `LOGISTICS_REIMBURSEMENT`: Reimbursement paid by TikTok Shop for an order refunded due to logistics-related
+                issues (e.g. lost or damaged order).
+                - `SHIPPING_FEE_ADJUSTMENT`: Adjustment when there are differences or mistakes with the shipping fee paid by the
+                seller.
+                - `SHIPPING_FEE_COMPENSATION`: Compensation given to sellers due to differences between the actual shipping fee
+                and the pre-paid shipping fee.
+                - `SHIPPING_FEE_REBATE`: Shipping fee rebate provided to the seller as part of their participation in a platform
+                campaign.
+                - `SAMPLE_SHIPPING_FEE`: Fees charged for sending samples using the TikTok logistics provider.
+                Miscellaneous adjustments
+                `OTHER_ADJUSTMENT`: Adjustment for other reasons.
+            id (str | Unset): The transaction ID.
+            status (str | Unset): The transaction status. Only supports `UNSETTLED`.
+            currency (str | Unset): The three-letter currency code in ISO 4217 format.
+            estimated_settlement (str | Unset): Estimated settlement time for the transaction.
+                Possible return values:
+                - A relative settlement schedule, such as `Delivered + N days`, when the order has not been delivered and only
+                an approximate settlement policy is available.
+                - A Unix timestamp in seconds when the order has been delivered and the estimated settlement time is available.
+            unsettled_reason (str | Unset): reason for why transaction is pending for settlement
+            order_create_time (int | Unset): The time when the order was created, as a Unix timestamp in seconds.
+            order_delivery_time (int | Unset): The time when the order was delivered, as a Unix timestamp in seconds. No
+                delivery time is available if the order has not been delivered.
+            order_id (str | Unset): The order ID.
+                Each transaction can only be associated with an order ID or an adjustment ID.
+            adjustment_id (str | Unset): The adjustment ID if the transaction is an adjustment.
+                Each transaction can only be associated with an order ID or an adjustment ID.
+            adjustment_order_id (str | Unset): The order ID associated with the adjustment, if any.
+            est_adjustment_amount (str | Unset): The estimated adjustment amount based on TikTok Shop policy.
+                Refer to `transactions.type` for the list of adjustment-related policies.
+            est_settlement_amount (str | Unset): The estimated settlement amount for the order.
+                Formula: revenue_amount - shipping_cost_amount - fee_tax_amount - adjustment_amount
+            est_revenue_amount (str | Unset): The estimated revenue amount. This is equivalent to the sum of all amounts in
+                `revenue_breakdown`.
+            revenue_breakdown (RevenueBreakdown | Unset):
+            est_shipping_cost_amount (str | Unset): The estimated shipping costs, please note that when order hasn't been
+                delivered, no complete shipping cost can be provided. This is equivalent to the sum of all contributory amounts
+                in `shipping_cost_breakdown`.
+            shipping_cost_breakdown (GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown | Unset):
+            est_fee_tax_amount (str | Unset): The estimated total fees and taxes charged by TikTok Shop. Shipping-related
+                costs are excluded. This is equivalent to the sum of all contributory amounts in `fee_tax_breakdown`.
+            fee_tax_breakdown (GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown | Unset):
+     """
 
     type_: str | Unset = UNSET
     id: str | Unset = UNSET
@@ -120,7 +123,14 @@ class GetUnsettledTransactionsResponseDataTransaction:
     fee_tax_breakdown: GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_unsettled_transactions_response_data_transaction_fee_tax_breakdown import GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown # noqa: PLC0415
+        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown # noqa: PLC0415
+        from ..models.revenue_breakdown import RevenueBreakdown # noqa: PLC0415
         type_ = self.type_
 
         id = self.id
@@ -165,9 +175,11 @@ class GetUnsettledTransactionsResponseDataTransaction:
         if not isinstance(self.fee_tax_breakdown, Unset):
             fee_tax_breakdown = self.fee_tax_breakdown.to_dict()
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if type_ is not UNSET:
             field_dict["type"] = type_
         if id is not UNSET:
@@ -209,16 +221,13 @@ class GetUnsettledTransactionsResponseDataTransaction:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_unsettled_transactions_response_data_transaction_fee_tax_breakdown import (
-            GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown,  # noqa: PLC0415
-        )
-        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown import (
-            GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown,  # noqa: PLC0415
-        )
-        from ..models.revenue_breakdown import RevenueBreakdown  # noqa: PLC0415
-
+        from ..models.get_unsettled_transactions_response_data_transaction_fee_tax_breakdown import GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown # noqa: PLC0415
+        from ..models.get_unsettled_transactions_response_data_transaction_shipping_cost_breakdown import GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown # noqa: PLC0415
+        from ..models.revenue_breakdown import RevenueBreakdown # noqa: PLC0415
         d = dict(src_dict)
         type_ = d.pop("type", UNSET)
 
@@ -250,32 +259,37 @@ class GetUnsettledTransactionsResponseDataTransaction:
 
         _revenue_breakdown = d.pop("revenue_breakdown", UNSET)
         revenue_breakdown: RevenueBreakdown | Unset
-        if isinstance(_revenue_breakdown, Unset):
+        if isinstance(_revenue_breakdown,  Unset):
             revenue_breakdown = UNSET
         else:
             revenue_breakdown = RevenueBreakdown.from_dict(_revenue_breakdown)
+
+
+
 
         est_shipping_cost_amount = d.pop("est_shipping_cost_amount", UNSET)
 
         _shipping_cost_breakdown = d.pop("shipping_cost_breakdown", UNSET)
         shipping_cost_breakdown: GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown | Unset
-        if isinstance(_shipping_cost_breakdown, Unset):
+        if isinstance(_shipping_cost_breakdown,  Unset):
             shipping_cost_breakdown = UNSET
         else:
-            shipping_cost_breakdown = GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown.from_dict(
-                _shipping_cost_breakdown
-            )
+            shipping_cost_breakdown = GetUnsettledTransactionsResponseDataTransactionShippingCostBreakdown.from_dict(_shipping_cost_breakdown)
+
+
+
 
         est_fee_tax_amount = d.pop("est_fee_tax_amount", UNSET)
 
         _fee_tax_breakdown = d.pop("fee_tax_breakdown", UNSET)
         fee_tax_breakdown: GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown | Unset
-        if isinstance(_fee_tax_breakdown, Unset):
+        if isinstance(_fee_tax_breakdown,  Unset):
             fee_tax_breakdown = UNSET
         else:
-            fee_tax_breakdown = GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown.from_dict(
-                _fee_tax_breakdown
-            )
+            fee_tax_breakdown = GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdown.from_dict(_fee_tax_breakdown)
+
+
+
 
         get_unsettled_transactions_response_data_transaction = cls(
             type_=type_,
@@ -298,6 +312,7 @@ class GetUnsettledTransactionsResponseDataTransaction:
             est_fee_tax_amount=est_fee_tax_amount,
             fee_tax_breakdown=fee_tax_breakdown,
         )
+
 
         get_unsettled_transactions_response_data_transaction.additional_properties = d
         return get_unsettled_transactions_response_data_transaction

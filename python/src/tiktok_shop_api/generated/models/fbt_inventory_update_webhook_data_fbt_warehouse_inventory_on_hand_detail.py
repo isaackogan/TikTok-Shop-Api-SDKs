@@ -1,29 +1,41 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail")
+
 
 
 @_attrs_define
 class FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail:
-    """
-    Attributes:
-        total_quantity (int | Unset): The total number of units.
-        reserved_quantity (int | Unset): The number of units reserved for confirmed orders and yet to be outbound.
-        available_quantity (int | Unset): The number of units available for sale. This does not include reserved units.
-    """
+    """ 
+        Attributes:
+            total_quantity (int | Unset): The total number of units.
+            reserved_quantity (int | Unset): The number of units reserved for confirmed orders and yet to be outbound.
+            available_quantity (int | Unset): The number of units available for sale. This does not include reserved units.
+     """
 
     total_quantity: int | Unset = UNSET
     reserved_quantity: int | Unset = UNSET
     available_quantity: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         total_quantity = self.total_quantity
@@ -32,9 +44,11 @@ class FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail:
 
         available_quantity = self.available_quantity
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if total_quantity is not UNSET:
             field_dict["total_quantity"] = total_quantity
         if reserved_quantity is not UNSET:
@@ -43,6 +57,8 @@ class FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail:
             field_dict["available_quantity"] = available_quantity
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -58,6 +74,7 @@ class FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail:
             reserved_quantity=reserved_quantity,
             available_quantity=available_quantity,
         )
+
 
         fbt_inventory_update_webhook_data_fbt_warehouse_inventory_on_hand_detail.additional_properties = d
         return fbt_inventory_update_webhook_data_fbt_warehouse_inventory_on_hand_detail

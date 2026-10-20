@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class HazmatInfoHazmatType(StrEnum):
     AEROSOLS = "AEROSOLS"
     BATTERY = "BATTERY"

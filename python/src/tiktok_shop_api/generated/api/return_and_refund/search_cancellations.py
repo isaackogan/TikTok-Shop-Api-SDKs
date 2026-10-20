@@ -1,15 +1,20 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.search_cancellations_request import SearchCancellationsRequest
 from ...models.search_cancellations_response import SearchCancellationsResponse
 from ...models.search_cancellations_sort_field import SearchCancellationsSortField
 from ...models.search_cancellations_sort_order import SearchCancellationsSortOrder
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -19,8 +24,12 @@ def _get_kwargs(
     sort_order: SearchCancellationsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
+
+
+    
 
     params: dict[str, Any] = {}
 
@@ -40,7 +49,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -48,6 +59,7 @@ def _get_kwargs(
         "params": params,
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -57,11 +69,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> SearchCancellationsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> SearchCancellationsResponse | None:
     if response.status_code == 200:
         response_200 = SearchCancellationsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -71,9 +84,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[SearchCancellationsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[SearchCancellationsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -90,8 +101,9 @@ def sync_detailed(
     sort_order: SearchCancellationsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchCancellationsResponse]:
-    """Search Cancellations
+    """ Search Cancellations
 
      Use this API to search and retrieve one or more order cancellations.
 
@@ -108,14 +120,16 @@ def sync_detailed(
 
     Returns:
         Response[SearchCancellationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -123,7 +137,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -133,8 +146,9 @@ def sync(
     sort_order: SearchCancellationsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchCancellationsResponse | None:
-    """Search Cancellations
+    """ Search Cancellations
 
      Use this API to search and retrieve one or more order cancellations.
 
@@ -151,17 +165,18 @@ def sync(
 
     Returns:
         SearchCancellationsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+body=body,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -171,8 +186,9 @@ async def asyncio_detailed(
     sort_order: SearchCancellationsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> Response[SearchCancellationsResponse]:
-    """Search Cancellations
+    """ Search Cancellations
 
      Use this API to search and retrieve one or more order cancellations.
 
@@ -189,20 +205,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[SearchCancellationsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         body=body,
-        sort_field=sort_field,
-        sort_order=sort_order,
-        page_size=page_size,
-        page_token=page_token,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -212,8 +231,9 @@ async def asyncio(
     sort_order: SearchCancellationsSortOrder | Unset = UNSET,
     page_size: str | Unset = UNSET,
     page_token: str | Unset = UNSET,
+
 ) -> SearchCancellationsResponse | None:
-    """Search Cancellations
+    """ Search Cancellations
 
      Use this API to search and retrieve one or more order cancellations.
 
@@ -230,15 +250,15 @@ async def asyncio(
 
     Returns:
         SearchCancellationsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            body=body,
-            sort_field=sort_field,
-            sort_order=sort_order,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+body=body,
+sort_field=sort_field,
+sort_order=sort_order,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

@@ -1,96 +1,103 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.dimension import Dimension
-    from ..models.get_package_detail_response_data_insurance import GetPackageDetailResponseDataInsurance
-    from ..models.get_package_detail_response_data_recipient_address import GetPackageDetailResponseDataRecipientAddress
-    from ..models.get_package_detail_response_data_sender_address import GetPackageDetailResponseDataSenderAddress
-    from ..models.order import Order
-    from ..models.pickup_slot import PickupSlot
-    from ..models.weight import Weight
+  from ..models.dimension import Dimension
+  from ..models.get_package_detail_response_data_insurance import GetPackageDetailResponseDataInsurance
+  from ..models.get_package_detail_response_data_recipient_address import GetPackageDetailResponseDataRecipientAddress
+  from ..models.get_package_detail_response_data_sender_address import GetPackageDetailResponseDataSenderAddress
+  from ..models.order import Order
+  from ..models.pickup_slot import PickupSlot
+  from ..models.weight import Weight
+
+
+
 
 
 T = TypeVar("T", bound="GetPackageDetailResponseData")
 
 
+
 @_attrs_define
 class GetPackageDetailResponseData:
-    """
-    Attributes:
-        package_id (str | Unset): TikTok Shop package ID.
-        orders (list[Order] | Unset): The response list of TikTok Shop orders.
-        package_status (str | Unset): Possible values:
-            - `TO_FULFILL`：Waiting for the merchant or warehouse to ship the package.
-            - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
-            - `FULFILLING`: Package has been collected by carrier and in transit.
-            - `COMPLETED`: Package has been delivered.
-            - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
-            damaged.
-        package_sub_status (str | Unset): Package sub-status.
-            Possible values:
-            - `CREATED`: The package has been created.
-            - `ISSUE`: Package allocation failed; contact platform support.
-            - `STOCKING`: Platform verification is complete and the package is waiting for the seller to ship it.
-            - `RTSING`: The shipping label is being purchased and the carrier result is pending.
-            - `HBW`: For FBT orders only; the package has been created in the warehouse.
-            - `HBWING`: For FBT orders only; the package is being created in the warehouse.
-            - `TSP_PENDING`: Authorization for third-party service-provider fulfillment is pending.
-            - `RTS`: The shipping label has been purchased and the seller can print it.
-            - `TTS`: The carrier has picked up the package.
-            - `DELIVERED`: The package has been delivered to the buyer.
-            - `SHIP_EXCEPTION`: The package cannot be delivered, for example because it is damaged or lost. See
-            `ship_exception_reason` for the detailed reason.
-            - `PART_DELIVERED_AND_EXCEPTION`: Part of the package delivery completed and another part encountered a shipping
-            exception.
-            - `CANCELLED`: The package has been canceled.
-        ship_exception_reason (str | Unset): -PACKAGE_DAMAGAED
-            -PACKAGE_LOST
-            -RETURNED_TO_SHIPPER
-            -PACKAGE_SCRAP
-        split_and_combine_tag (str | Unset): Possible values:
-            - `DEFAULT`: The package has not undergone any combine or split operation.
-            - `COMBINE`: The package has been consolidated with another order.
-            - `SPLIT`: The order has been split into multiple orders.
-        has_multi_skus (bool | Unset): Whether there are multiple SKU IDs in a package.
-        note_tag (str | Unset): Possible values:
-            - `BUYER_UNNOTED`: The order has not been noted by buyer.
-            - `BUYER_NOTED`: The order has been noted by buyer.
-        shipping_provider_name (str | Unset): Package shipping provider name.
-        shipping_provider_id (str | Unset): Package shipping provider ID.
-        shipping_type (str | Unset): Indicates who provides the shipping service. Possible values:
-            - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok.
-            - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the
-            seller's behalf.
-        delivery_option_name (str | Unset): Delivery option name. For display purposes only.
-        delivery_option_id (str | Unset): Order delivery option ID. Delivery option ID is mapped to seller configured
-            logistics templates ID.
-        tracking_number (str | Unset): Package tracking number.
-        last_mile_tracking_number (str | Unset): For cross-border order only. Cross-border order last mile tracking
-            number.
-        pickup_slot (PickupSlot | Unset):
-        create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
-        handover_method (str | Unset): Whether the package is delivered by pick up or drop off. Possible values:
-            - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address.
-            - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location.
-        order_line_item_ids (list[str] | Unset): The order line item ID contained in the package.
-        recipient_address (GetPackageDetailResponseDataRecipientAddress | Unset):
-        sender_address (GetPackageDetailResponseDataSenderAddress | Unset):
-        weight (Weight | Unset):
-        dimension (Dimension | Unset):
-        update_time (int | Unset): The time when the package was last updated, as a Unix timestamp in seconds.
-        insurance (GetPackageDetailResponseDataInsurance | Unset):
-        biz_extension_tags (list[str] | Unset): Special tags for current package if any.
-            - `NON_MCF`: whether this package was shipped as a MCF order while in fact it is not.
-        warehouse_id (str | Unset): Seller Warehouse id for this package
-    """
+    """ 
+        Attributes:
+            package_id (str | Unset): TikTok Shop package ID.
+            orders (list[Order] | Unset): The response list of TikTok Shop orders.
+            package_status (str | Unset): Possible values:
+                - `TO_FULFILL`：Waiting for the merchant or warehouse to ship the package.
+                - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
+                - `FULFILLING`: Package has been collected by carrier and in transit.
+                - `COMPLETED`: Package has been delivered.
+                - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
+                damaged.
+            package_sub_status (str | Unset): Package sub-status.
+                Possible values:
+                - `CREATED`: The package has been created.
+                - `ISSUE`: Package allocation failed; contact platform support.
+                - `STOCKING`: Platform verification is complete and the package is waiting for the seller to ship it.
+                - `RTSING`: The shipping label is being purchased and the carrier result is pending.
+                - `HBW`: For FBT orders only; the package has been created in the warehouse.
+                - `HBWING`: For FBT orders only; the package is being created in the warehouse.
+                - `TSP_PENDING`: Authorization for third-party service-provider fulfillment is pending.
+                - `RTS`: The shipping label has been purchased and the seller can print it.
+                - `TTS`: The carrier has picked up the package.
+                - `DELIVERED`: The package has been delivered to the buyer.
+                - `SHIP_EXCEPTION`: The package cannot be delivered, for example because it is damaged or lost. See
+                `ship_exception_reason` for the detailed reason.
+                - `PART_DELIVERED_AND_EXCEPTION`: Part of the package delivery completed and another part encountered a shipping
+                exception.
+                - `CANCELLED`: The package has been canceled.
+            ship_exception_reason (str | Unset): -PACKAGE_DAMAGAED
+                -PACKAGE_LOST
+                -RETURNED_TO_SHIPPER
+                -PACKAGE_SCRAP
+            split_and_combine_tag (str | Unset): Possible values:
+                - `DEFAULT`: The package has not undergone any combine or split operation.
+                - `COMBINE`: The package has been consolidated with another order.
+                - `SPLIT`: The order has been split into multiple orders.
+            has_multi_skus (bool | Unset): Whether there are multiple SKU IDs in a package.
+            note_tag (str | Unset): Possible values:
+                - `BUYER_UNNOTED`: The order has not been noted by buyer.
+                - `BUYER_NOTED`: The order has been noted by buyer.
+            shipping_provider_name (str | Unset): Package shipping provider name.
+            shipping_provider_id (str | Unset): Package shipping provider ID.
+            shipping_type (str | Unset): Indicates who provides the shipping service. Possible values:
+                - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok.
+                - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the
+                seller's behalf.
+            delivery_option_name (str | Unset): Delivery option name. For display purposes only.
+            delivery_option_id (str | Unset): Order delivery option ID. Delivery option ID is mapped to seller configured
+                logistics templates ID.
+            tracking_number (str | Unset): Package tracking number.
+            last_mile_tracking_number (str | Unset): For cross-border order only. Cross-border order last mile tracking
+                number.
+            pickup_slot (PickupSlot | Unset):
+            create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
+            handover_method (str | Unset): Whether the package is delivered by pick up or drop off. Possible values:
+                - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address.
+                - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location.
+            order_line_item_ids (list[str] | Unset): The order line item ID contained in the package.
+            recipient_address (GetPackageDetailResponseDataRecipientAddress | Unset):
+            sender_address (GetPackageDetailResponseDataSenderAddress | Unset):
+            weight (Weight | Unset):
+            dimension (Dimension | Unset):
+            update_time (int | Unset): The time when the package was last updated, as a Unix timestamp in seconds.
+            insurance (GetPackageDetailResponseDataInsurance | Unset):
+            biz_extension_tags (list[str] | Unset): Special tags for current package if any.
+                - `NON_MCF`: whether this package was shipped as a MCF order while in fact it is not.
+            warehouse_id (str | Unset): Seller Warehouse id for this package
+     """
 
     package_id: str | Unset = UNSET
     orders: list[Order] | Unset = UNSET
@@ -121,7 +128,18 @@ class GetPackageDetailResponseData:
     warehouse_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.dimension import Dimension # noqa: PLC0415
+        from ..models.get_package_detail_response_data_insurance import GetPackageDetailResponseDataInsurance # noqa: PLC0415
+        from ..models.get_package_detail_response_data_recipient_address import GetPackageDetailResponseDataRecipientAddress # noqa: PLC0415
+        from ..models.get_package_detail_response_data_sender_address import GetPackageDetailResponseDataSenderAddress # noqa: PLC0415
+        from ..models.order import Order # noqa: PLC0415
+        from ..models.pickup_slot import PickupSlot # noqa: PLC0415
+        from ..models.weight import Weight # noqa: PLC0415
         package_id = self.package_id
 
         orders: list[dict[str, Any]] | Unset = UNSET
@@ -130,6 +148,8 @@ class GetPackageDetailResponseData:
             for orders_item_data in self.orders:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
+
+
 
         package_status = self.package_status
 
@@ -169,6 +189,8 @@ class GetPackageDetailResponseData:
         if not isinstance(self.order_line_item_ids, Unset):
             order_line_item_ids = self.order_line_item_ids
 
+
+
         recipient_address: dict[str, Any] | Unset = UNSET
         if not isinstance(self.recipient_address, Unset):
             recipient_address = self.recipient_address.to_dict()
@@ -195,11 +217,15 @@ class GetPackageDetailResponseData:
         if not isinstance(self.biz_extension_tags, Unset):
             biz_extension_tags = self.biz_extension_tags
 
+
+
         warehouse_id = self.warehouse_id
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if package_id is not UNSET:
             field_dict["package_id"] = package_id
         if orders is not UNSET:
@@ -257,22 +283,17 @@ class GetPackageDetailResponseData:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.dimension import Dimension  # noqa: PLC0415
-        from ..models.get_package_detail_response_data_insurance import (
-            GetPackageDetailResponseDataInsurance,  # noqa: PLC0415
-        )
-        from ..models.get_package_detail_response_data_recipient_address import (
-            GetPackageDetailResponseDataRecipientAddress,  # noqa: PLC0415
-        )
-        from ..models.get_package_detail_response_data_sender_address import (
-            GetPackageDetailResponseDataSenderAddress,  # noqa: PLC0415
-        )
-        from ..models.order import Order  # noqa: PLC0415
-        from ..models.pickup_slot import PickupSlot  # noqa: PLC0415
-        from ..models.weight import Weight  # noqa: PLC0415
-
+        from ..models.dimension import Dimension # noqa: PLC0415
+        from ..models.get_package_detail_response_data_insurance import GetPackageDetailResponseDataInsurance # noqa: PLC0415
+        from ..models.get_package_detail_response_data_recipient_address import GetPackageDetailResponseDataRecipientAddress # noqa: PLC0415
+        from ..models.get_package_detail_response_data_sender_address import GetPackageDetailResponseDataSenderAddress # noqa: PLC0415
+        from ..models.order import Order # noqa: PLC0415
+        from ..models.pickup_slot import PickupSlot # noqa: PLC0415
+        from ..models.weight import Weight # noqa: PLC0415
         d = dict(src_dict)
         package_id = d.pop("package_id", UNSET)
 
@@ -283,7 +304,10 @@ class GetPackageDetailResponseData:
             for orders_item_data in _orders:
                 orders_item = Order.from_dict(orders_item_data)
 
+
+
                 orders.append(orders_item)
+
 
         package_status = d.pop("package_status", UNSET)
 
@@ -313,10 +337,13 @@ class GetPackageDetailResponseData:
 
         _pickup_slot = d.pop("pickup_slot", UNSET)
         pickup_slot: PickupSlot | Unset
-        if isinstance(_pickup_slot, Unset):
+        if isinstance(_pickup_slot,  Unset):
             pickup_slot = UNSET
         else:
             pickup_slot = PickupSlot.from_dict(_pickup_slot)
+
+
+
 
         create_time = d.pop("create_time", UNSET)
 
@@ -324,44 +351,61 @@ class GetPackageDetailResponseData:
 
         order_line_item_ids = cast(list[str], d.pop("order_line_item_ids", UNSET))
 
+
         _recipient_address = d.pop("recipient_address", UNSET)
         recipient_address: GetPackageDetailResponseDataRecipientAddress | Unset
-        if isinstance(_recipient_address, Unset):
+        if isinstance(_recipient_address,  Unset):
             recipient_address = UNSET
         else:
             recipient_address = GetPackageDetailResponseDataRecipientAddress.from_dict(_recipient_address)
 
+
+
+
         _sender_address = d.pop("sender_address", UNSET)
         sender_address: GetPackageDetailResponseDataSenderAddress | Unset
-        if isinstance(_sender_address, Unset):
+        if isinstance(_sender_address,  Unset):
             sender_address = UNSET
         else:
             sender_address = GetPackageDetailResponseDataSenderAddress.from_dict(_sender_address)
 
+
+
+
         _weight = d.pop("weight", UNSET)
         weight: Weight | Unset
-        if isinstance(_weight, Unset):
+        if isinstance(_weight,  Unset):
             weight = UNSET
         else:
             weight = Weight.from_dict(_weight)
 
+
+
+
         _dimension = d.pop("dimension", UNSET)
         dimension: Dimension | Unset
-        if isinstance(_dimension, Unset):
+        if isinstance(_dimension,  Unset):
             dimension = UNSET
         else:
             dimension = Dimension.from_dict(_dimension)
+
+
+
 
         update_time = d.pop("update_time", UNSET)
 
         _insurance = d.pop("insurance", UNSET)
         insurance: GetPackageDetailResponseDataInsurance | Unset
-        if isinstance(_insurance, Unset):
+        if isinstance(_insurance,  Unset):
             insurance = UNSET
         else:
             insurance = GetPackageDetailResponseDataInsurance.from_dict(_insurance)
 
+
+
+
         biz_extension_tags = cast(list[str], d.pop("biz_extension_tags", UNSET))
+
 
         warehouse_id = d.pop("warehouse_id", UNSET)
 
@@ -394,6 +438,7 @@ class GetPackageDetailResponseData:
             biz_extension_tags=biz_extension_tags,
             warehouse_id=warehouse_id,
         )
+
 
         get_package_detail_response_data.additional_properties = d
         return get_package_detail_response_data

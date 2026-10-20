@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ReviewAffiliatePartnerCampaignProductRequestRejectReasonsItem(StrEnum):
     COMMISSION_TOO_LOW = "COMMISSION_TOO_LOW"
     NO_SUITABLE_CREATOR = "NO_SUITABLE_CREATOR"

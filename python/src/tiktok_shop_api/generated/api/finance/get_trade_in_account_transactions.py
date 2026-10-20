@@ -1,14 +1,19 @@
-import datetime
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_trade_in_account_transactions_flow_type import GetTradeInAccountTransactionsFlowType
 from ...models.get_trade_in_account_transactions_response import GetTradeInAccountTransactionsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+import datetime
+
 
 
 def _get_kwargs(
@@ -18,7 +23,12 @@ def _get_kwargs(
     flow_type: GetTradeInAccountTransactionsFlowType | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_start_time: str | Unset = UNSET
@@ -41,7 +51,9 @@ def _get_kwargs(
 
     params["page_token"] = page_token
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -49,14 +61,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetTradeInAccountTransactionsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetTradeInAccountTransactionsResponse | None:
     if response.status_code == 200:
         response_200 = GetTradeInAccountTransactionsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -66,9 +80,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetTradeInAccountTransactionsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetTradeInAccountTransactionsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -85,8 +97,9 @@ def sync_detailed(
     flow_type: GetTradeInAccountTransactionsFlowType | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[GetTradeInAccountTransactionsResponse]:
-    """Get TradeIn Account Transactions
+    """ Get TradeIn Account Transactions
 
      Retrieves account transaction records for the currently authorized TradeIn supplier.
     The supplier identity and associated seller identity are resolved from the authorization context.
@@ -106,14 +119,16 @@ def sync_detailed(
 
     Returns:
         Response[GetTradeInAccountTransactionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_time=start_time,
-        end_time=end_time,
-        flow_type=flow_type,
-        page_size=page_size,
-        page_token=page_token,
+end_time=end_time,
+flow_type=flow_type,
+page_size=page_size,
+page_token=page_token,
+
     )
 
     response = client.get_httpx_client().request(
@@ -121,7 +136,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -131,8 +145,9 @@ def sync(
     flow_type: GetTradeInAccountTransactionsFlowType | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> GetTradeInAccountTransactionsResponse | None:
-    """Get TradeIn Account Transactions
+    """ Get TradeIn Account Transactions
 
      Retrieves account transaction records for the currently authorized TradeIn supplier.
     The supplier identity and associated seller identity are resolved from the authorization context.
@@ -152,17 +167,18 @@ def sync(
 
     Returns:
         GetTradeInAccountTransactionsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        start_time=start_time,
-        end_time=end_time,
-        flow_type=flow_type,
-        page_size=page_size,
-        page_token=page_token,
-    ).parsed
+start_time=start_time,
+end_time=end_time,
+flow_type=flow_type,
+page_size=page_size,
+page_token=page_token,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -172,8 +188,9 @@ async def asyncio_detailed(
     flow_type: GetTradeInAccountTransactionsFlowType | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> Response[GetTradeInAccountTransactionsResponse]:
-    """Get TradeIn Account Transactions
+    """ Get TradeIn Account Transactions
 
      Retrieves account transaction records for the currently authorized TradeIn supplier.
     The supplier identity and associated seller identity are resolved from the authorization context.
@@ -193,20 +210,23 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetTradeInAccountTransactionsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         start_time=start_time,
-        end_time=end_time,
-        flow_type=flow_type,
-        page_size=page_size,
-        page_token=page_token,
+end_time=end_time,
+flow_type=flow_type,
+page_size=page_size,
+page_token=page_token,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -216,8 +236,9 @@ async def asyncio(
     flow_type: GetTradeInAccountTransactionsFlowType | Unset = UNSET,
     page_size: int,
     page_token: str | Unset = UNSET,
+
 ) -> GetTradeInAccountTransactionsResponse | None:
-    """Get TradeIn Account Transactions
+    """ Get TradeIn Account Transactions
 
      Retrieves account transaction records for the currently authorized TradeIn supplier.
     The supplier identity and associated seller identity are resolved from the authorization context.
@@ -237,15 +258,15 @@ async def asyncio(
 
     Returns:
         GetTradeInAccountTransactionsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            start_time=start_time,
-            end_time=end_time,
-            flow_type=flow_type,
-            page_size=page_size,
-            page_token=page_token,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+start_time=start_time,
+end_time=end_time,
+flow_type=flow_type,
+page_size=page_size,
+page_token=page_token,
+
+    )).parsed

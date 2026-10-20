@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchGlobalProductsRequestStatus(StrEnum):
     DELETED = "DELETED"
     DRAFT = "DRAFT"

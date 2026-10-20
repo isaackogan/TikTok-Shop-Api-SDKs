@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class CreatePackagesRequestDimensionUnit(StrEnum):
     CM = "CM"
     INCH = "INCH"

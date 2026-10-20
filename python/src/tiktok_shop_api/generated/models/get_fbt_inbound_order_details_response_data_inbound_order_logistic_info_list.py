@@ -1,36 +1,48 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList")
+
 
 
 @_attrs_define
 class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
-    """
-    Attributes:
-        provider_name (str | Unset): Name of the logistics service provider
+    """ 
+        Attributes:
+            provider_name (str | Unset): Name of the logistics service provider
 
-            Possible values:
-            * `FEDEX` (Federal Express)
-            * `UPS` (United Parcel Service)
-            * `DHL` (DHL Express)
-            * `USPS` (United States Postal Service)
-            * `OTHER` (All other logistics providers)
-        waybill_number (str | Unset): The tracking number for the current inbound shipment with the carrier.
-        related_number (str | Unset): Carton number tied to the logistics information.
-    """
+                Possible values:
+                * `FEDEX` (Federal Express)
+                * `UPS` (United Parcel Service)
+                * `DHL` (DHL Express)
+                * `USPS` (United States Postal Service)
+                * `OTHER` (All other logistics providers)
+            waybill_number (str | Unset): The tracking number for the current inbound shipment with the carrier.
+            related_number (str | Unset): Carton number tied to the logistics information.
+     """
 
     provider_name: str | Unset = UNSET
     waybill_number: str | Unset = UNSET
     related_number: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         provider_name = self.provider_name
@@ -39,9 +51,11 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
 
         related_number = self.related_number
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if provider_name is not UNSET:
             field_dict["provider_name"] = provider_name
         if waybill_number is not UNSET:
@@ -50,6 +64,8 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
             field_dict["related_number"] = related_number
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -65,6 +81,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
             waybill_number=waybill_number,
             related_number=related_number,
         )
+
 
         get_fbt_inbound_order_details_response_data_inbound_order_logistic_info_list.additional_properties = d
         return get_fbt_inbound_order_details_response_data_inbound_order_logistic_info_list

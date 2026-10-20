@@ -1,30 +1,39 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.partial_edit_responsible_person_request import PartialEditResponsiblePersonRequest
 from ...models.partial_edit_responsible_person_response import PartialEditResponsiblePersonResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
     responsible_person_id: str,
     *,
     body: PartialEditResponsiblePersonRequest | Unset = UNSET,
+
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
 
+
+    
+
+    
+
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/product/202409/compliance/responsible_persons/{responsible_person_id}/partial_edit".format(
-            responsible_person_id=quote(str(responsible_person_id), safe=""),
-        ),
+        "url": "/product/202409/compliance/responsible_persons/{responsible_person_id}/partial_edit".format(responsible_person_id=quote(str(responsible_person_id), safe=""),),
     }
 
+    
     if not isinstance(body, Unset):
         _kwargs["json"] = body.to_dict()
 
@@ -34,11 +43,12 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> PartialEditResponsiblePersonResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> PartialEditResponsiblePersonResponse | None:
     if response.status_code == 200:
         response_200 = PartialEditResponsiblePersonResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -48,9 +58,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[PartialEditResponsiblePersonResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[PartialEditResponsiblePersonResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -64,8 +72,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditResponsiblePersonRequest | Unset = UNSET,
+
 ) -> Response[PartialEditResponsiblePersonResponse]:
-    """Partial Edit Responsible Person
+    """ Partial Edit Responsible Person
 
      Edit the details of an EU responsible person in the EU languages supported by TikTok Shop. Include
     the locale code to edit the responsible person's information in a particular language.
@@ -90,11 +99,13 @@ def sync_detailed(
 
     Returns:
         Response[PartialEditResponsiblePersonResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         responsible_person_id=responsible_person_id,
-        body=body,
+body=body,
+
     )
 
     response = client.get_httpx_client().request(
@@ -103,14 +114,14 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     responsible_person_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditResponsiblePersonRequest | Unset = UNSET,
+
 ) -> PartialEditResponsiblePersonResponse | None:
-    """Partial Edit Responsible Person
+    """ Partial Edit Responsible Person
 
      Edit the details of an EU responsible person in the EU languages supported by TikTok Shop. Include
     the locale code to edit the responsible person's information in a particular language.
@@ -135,22 +146,24 @@ def sync(
 
     Returns:
         PartialEditResponsiblePersonResponse
-    """
+     """
+
 
     return sync_detailed(
         responsible_person_id=responsible_person_id,
-        client=client,
-        body=body,
-    ).parsed
+client=client,
+body=body,
 
+    ).parsed
 
 async def asyncio_detailed(
     responsible_person_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditResponsiblePersonRequest | Unset = UNSET,
+
 ) -> Response[PartialEditResponsiblePersonResponse]:
-    """Partial Edit Responsible Person
+    """ Partial Edit Responsible Person
 
      Edit the details of an EU responsible person in the EU languages supported by TikTok Shop. Include
     the locale code to edit the responsible person's information in a particular language.
@@ -175,25 +188,29 @@ async def asyncio_detailed(
 
     Returns:
         Response[PartialEditResponsiblePersonResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         responsible_person_id=responsible_person_id,
-        body=body,
+body=body,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     responsible_person_id: str,
     *,
     client: AuthenticatedClient | Client,
     body: PartialEditResponsiblePersonRequest | Unset = UNSET,
+
 ) -> PartialEditResponsiblePersonResponse | None:
-    """Partial Edit Responsible Person
+    """ Partial Edit Responsible Person
 
      Edit the details of an EU responsible person in the EU languages supported by TikTok Shop. Include
     the locale code to edit the responsible person's information in a particular language.
@@ -218,12 +235,12 @@ async def asyncio(
 
     Returns:
         PartialEditResponsiblePersonResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            responsible_person_id=responsible_person_id,
-            client=client,
-            body=body,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        responsible_person_id=responsible_person_id,
+client=client,
+body=body,
+
+    )).parsed

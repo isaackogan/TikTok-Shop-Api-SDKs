@@ -1,60 +1,79 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..types import UNSET, Unset
+
+from typing import cast
+
 if TYPE_CHECKING:
-    from ..models.update_inventory_request_sku import UpdateInventoryRequestSku
+  from ..models.update_inventory_request_sku import UpdateInventoryRequestSku
+
+
+
 
 
 T = TypeVar("T", bound="UpdateInventoryRequest")
 
 
+
 @_attrs_define
 class UpdateInventoryRequest:
-    """
-    Attributes:
-        skus (list[UpdateInventoryRequestSku]): A list of Stock Keeping Units (SKUs) used to identify distinct variants
-            of the product.
-    """
+    """ 
+        Attributes:
+            skus (list[UpdateInventoryRequestSku]): A list of Stock Keeping Units (SKUs) used to identify distinct variants
+                of the product.
+     """
 
     skus: list[UpdateInventoryRequestSku]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
+        from ..models.update_inventory_request_sku import UpdateInventoryRequestSku # noqa: PLC0415
         skus = []
         for skus_item_data in self.skus:
             skus_item = skus_item_data.to_dict()
             skus.append(skus_item)
 
+
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "skus": skus,
-            }
-        )
+        field_dict.update({
+            "skus": skus,
+        })
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.update_inventory_request_sku import UpdateInventoryRequestSku  # noqa: PLC0415
-
+        from ..models.update_inventory_request_sku import UpdateInventoryRequestSku # noqa: PLC0415
         d = dict(src_dict)
         skus = []
         _skus = d.pop("skus")
-        for skus_item_data in _skus:
+        for skus_item_data in (_skus):
             skus_item = UpdateInventoryRequestSku.from_dict(skus_item_data)
 
+
+
             skus.append(skus_item)
+
 
         update_inventory_request = cls(
             skus=skus,
         )
+
 
         update_inventory_request.additional_properties = d
         return update_inventory_request

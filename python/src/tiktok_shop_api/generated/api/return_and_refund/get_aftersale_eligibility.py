@@ -1,15 +1,19 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_aftersale_eligibility_initiate_aftersale_user import GetAftersaleEligibilityInitiateAftersaleUser
 from ...models.get_aftersale_eligibility_request_types_item import GetAftersaleEligibilityRequestTypesItem
 from ...models.get_aftersale_eligibility_response import GetAftersaleEligibilityResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +21,12 @@ def _get_kwargs(
     *,
     initiate_aftersale_user: GetAftersaleEligibilityInitiateAftersaleUser | Unset = UNSET,
     request_types: list[GetAftersaleEligibilityRequestTypesItem] | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     json_initiate_aftersale_user: str | Unset = UNSET
@@ -33,26 +42,29 @@ def _get_kwargs(
             request_types_item = request_types_item_data.value
             json_request_types.append(request_types_item)
 
+
     params["request_types"] = json_request_types
+
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
+
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/return_refund/202602/orders/{order_id}/aftersale_eligibility".format(
-            order_id=quote(str(order_id), safe=""),
-        ),
+        "url": "/return_refund/202602/orders/{order_id}/aftersale_eligibility".format(order_id=quote(str(order_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetAftersaleEligibilityResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetAftersaleEligibilityResponse | None:
     if response.status_code == 200:
         response_200 = GetAftersaleEligibilityResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -62,9 +74,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetAftersaleEligibilityResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetAftersaleEligibilityResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -79,8 +89,9 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     initiate_aftersale_user: GetAftersaleEligibilityInitiateAftersaleUser | Unset = UNSET,
     request_types: list[GetAftersaleEligibilityRequestTypesItem] | Unset = UNSET,
+
 ) -> Response[GetAftersaleEligibilityResponse]:
-    """Get Aftersale Eligibility
+    """ Get Aftersale Eligibility
 
      Use this API to check whether a seller or buyer can initiate refund-only, return-and-refund, or
     cancellation requests for an order. The response groups eligibility by SKU, order line item, and
@@ -97,12 +108,14 @@ def sync_detailed(
 
     Returns:
         Response[GetAftersaleEligibilityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_id=order_id,
-        initiate_aftersale_user=initiate_aftersale_user,
-        request_types=request_types,
+initiate_aftersale_user=initiate_aftersale_user,
+request_types=request_types,
+
     )
 
     response = client.get_httpx_client().request(
@@ -111,15 +124,15 @@ def sync_detailed(
 
     return _build_response(client=client, response=response)
 
-
 def sync(
     order_id: str,
     *,
     client: AuthenticatedClient | Client,
     initiate_aftersale_user: GetAftersaleEligibilityInitiateAftersaleUser | Unset = UNSET,
     request_types: list[GetAftersaleEligibilityRequestTypesItem] | Unset = UNSET,
+
 ) -> GetAftersaleEligibilityResponse | None:
-    """Get Aftersale Eligibility
+    """ Get Aftersale Eligibility
 
      Use this API to check whether a seller or buyer can initiate refund-only, return-and-refund, or
     cancellation requests for an order. The response groups eligibility by SKU, order line item, and
@@ -136,15 +149,16 @@ def sync(
 
     Returns:
         GetAftersaleEligibilityResponse
-    """
+     """
+
 
     return sync_detailed(
         order_id=order_id,
-        client=client,
-        initiate_aftersale_user=initiate_aftersale_user,
-        request_types=request_types,
-    ).parsed
+client=client,
+initiate_aftersale_user=initiate_aftersale_user,
+request_types=request_types,
 
+    ).parsed
 
 async def asyncio_detailed(
     order_id: str,
@@ -152,8 +166,9 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     initiate_aftersale_user: GetAftersaleEligibilityInitiateAftersaleUser | Unset = UNSET,
     request_types: list[GetAftersaleEligibilityRequestTypesItem] | Unset = UNSET,
+
 ) -> Response[GetAftersaleEligibilityResponse]:
-    """Get Aftersale Eligibility
+    """ Get Aftersale Eligibility
 
      Use this API to check whether a seller or buyer can initiate refund-only, return-and-refund, or
     cancellation requests for an order. The response groups eligibility by SKU, order line item, and
@@ -170,18 +185,21 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetAftersaleEligibilityResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         order_id=order_id,
-        initiate_aftersale_user=initiate_aftersale_user,
-        request_types=request_types,
+initiate_aftersale_user=initiate_aftersale_user,
+request_types=request_types,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     order_id: str,
@@ -189,8 +207,9 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     initiate_aftersale_user: GetAftersaleEligibilityInitiateAftersaleUser | Unset = UNSET,
     request_types: list[GetAftersaleEligibilityRequestTypesItem] | Unset = UNSET,
+
 ) -> GetAftersaleEligibilityResponse | None:
-    """Get Aftersale Eligibility
+    """ Get Aftersale Eligibility
 
      Use this API to check whether a seller or buyer can initiate refund-only, return-and-refund, or
     cancellation requests for an order. The response groups eligibility by SKU, order line item, and
@@ -207,13 +226,13 @@ async def asyncio(
 
     Returns:
         GetAftersaleEligibilityResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            order_id=order_id,
-            client=client,
-            initiate_aftersale_user=initiate_aftersale_user,
-            request_types=request_types,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        order_id=order_id,
+client=client,
+initiate_aftersale_user=initiate_aftersale_user,
+request_types=request_types,
+
+    )).parsed

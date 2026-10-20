@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class ShelfLifeAttributeInfoHandlingMethodExpiredGoods(StrEnum):
     DISPOSE = "DISPOSE"
     RETURN_TO_SELLER = "RETURN_TO_SELLER"

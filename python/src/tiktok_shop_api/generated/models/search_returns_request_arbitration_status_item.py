@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class SearchReturnsRequestArbitrationStatusItem(StrEnum):
     CLOSED = "CLOSED"
     IN_PROGRESS = "IN_PROGRESS"

@@ -1,95 +1,103 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee")
+
 
 
 @_attrs_define
 class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
-    """
-    Attributes:
-        platform_commission_amount (str | Unset): The commission amount charged by the platform.
-        referral_fee_amount (str | Unset): The referral fee charged for processing successful orders.
-            Applicable only for the US.
-        refund_administration_fee_amount (str | Unset): The 20% refund administration fee deducted from the total
-            refunded referral fee amount.
-        transaction_fee_amount (str | Unset): The transaction fee charged for processing successful orders.
-        credit_card_handling_fee_amount (str | Unset): The handling fee charged when the buyer pays with a credit card.
-        affiliate_commission_amount (str | Unset): The commission amount charged to the seller for payment to the
-            creator.
-        affiliate_commission_before_pit_amount (str | Unset): The affiliate ads commission paid to a creator before any
-            personal income tax withholding.
-            Applicable only for SEA markets.
-        pit_withheld_from_ads_commission_amount (str | Unset): The creator's personal income tax withholding amount,
-            deducted from the affiliate ads commission.
-            Sellers are responsible for declaration and remittance to the tax authority, as well as providing finalized
-            personal income tax documentation to creators.
-            Applicable only for SEA markets.
-        affiliate_partner_commission_amount (str | Unset): The commission amount for purchases through affiliate partner
-            links.
-        affiliate_ads_commission_amount (str | Unset): The commission for eligible orders from ads.
-        sfp_service_fee_amount (str | Unset): The service fee charged for participation in the [Seller Free Shipping
-            Programme].
-        live_specials_fee_amount (str | Unset): The service fee charged for participation in the [LIVE Specials
-            Programme].
-        bonus_cashback_service_fee_amount (str | Unset): The service fee charged for participation in the bonus cashback
-            program.
-        mall_service_fee_amount (str | Unset): The service fee charged for using TikTok Shop Mall.
-        retail_delivery_fee_amount (str | Unset): The final retail delivery fee for deliveries in Colorado, US. For more
-            information, see [Colorado Retail Delivery Fee FAQ](https://seller-
-            us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
+    """ 
+        Attributes:
+            platform_commission_amount (str | Unset): The commission amount charged by the platform.
+            referral_fee_amount (str | Unset): The referral fee charged for processing successful orders.
+                Applicable only for the US.
+            refund_administration_fee_amount (str | Unset): The 20% refund administration fee deducted from the total
+                refunded referral fee amount.
+            transaction_fee_amount (str | Unset): The transaction fee charged for processing successful orders.
+            credit_card_handling_fee_amount (str | Unset): The handling fee charged when the buyer pays with a credit card.
+            affiliate_commission_amount (str | Unset): The commission amount charged to the seller for payment to the
+                creator.
+            affiliate_commission_before_pit_amount (str | Unset): The affiliate ads commission paid to a creator before any
+                personal income tax withholding.
+                Applicable only for SEA markets.
+            pit_withheld_from_ads_commission_amount (str | Unset): The creator's personal income tax withholding amount,
+                deducted from the affiliate ads commission.
+                Sellers are responsible for declaration and remittance to the tax authority, as well as providing finalized
+                personal income tax documentation to creators.
+                Applicable only for SEA markets.
+            affiliate_partner_commission_amount (str | Unset): The commission amount for purchases through affiliate partner
+                links.
+            affiliate_ads_commission_amount (str | Unset): The commission for eligible orders from ads.
+            sfp_service_fee_amount (str | Unset): The service fee charged for participation in the [Seller Free Shipping
+                Programme].
+            live_specials_fee_amount (str | Unset): The service fee charged for participation in the [LIVE Specials
+                Programme].
+            bonus_cashback_service_fee_amount (str | Unset): The service fee charged for participation in the bonus cashback
+                program.
+            mall_service_fee_amount (str | Unset): The service fee charged for using TikTok Shop Mall.
+            retail_delivery_fee_amount (str | Unset): The final retail delivery fee for deliveries in Colorado, US. For more
+                information, see [Colorado Retail Delivery Fee FAQ](https://seller-
+                us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
 
-            Formula: retail_delivery_fee_payment_amount + retail_delivery_fee_refund_amount
-        retail_delivery_fee_payment_amount (str | Unset): The retail delivery fee for deliveries in Colorado, US. For
-            more information, see [Colorado Retail Delivery Fee FAQ](https://seller-
-            us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
-        retail_delivery_fee_refund_amount (str | Unset): The retail delivery fee subsidy by the platform for losses due
-            to returns, refunds, or other issues in Colorado, US.
-        platform_special_service_fee_amount (str | Unset): The portion of the Distance Shipping Fee paid by the customer
-            that exceeds the logistics service provider's charge, retained by TikTok Shop to support a secure fulfillment
-            experience
-        smart_promotion_fee_amount (str | Unset): This fee includes funds from TikTok Shop to help provide promotions to
-            customers
-        vn_fix_infrastructure_fee (str | Unset): Infrastructure fees are a fixed service fee that TikTok Shop charges
-            for providing, maintaining, and developing infrastructure for delivery services. It applies to delivered orders
-            on the main order level.
-        dynamic_commission_amount (str | Unset): The dynamic commission fee is the amount that the platform charges to
-            all sellers for every successfully delivered order.
-            Applicable only for Indonesia.
-        campaign_period_fee_cfp_amount (str | Unset): Fee charged during Co-funded Promotion campaigns.
-        campaign_period_fee_sp_amount (str | Unset): Fee charged during Smart Promotion campaigns.
-        campaign_period_fee_sp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Smart
-            Promotion.
-        campaign_period_fee_cfp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Co-funded
-            Promotion.
-        seller_growth_fee_amount (str | Unset): A fee charged on each successful order to provide Bonus Cashback and
-            other growth benefits.
-        failed_delivery_shipping_fee (str | Unset): Shipping fee for order that failed to be delivered to the customer.
-            In some cases, the fee may be shared between seller and platform.
-        buyer_fault_return_shipping_fee (str | Unset): Shipping fee for buyer-fault returns. In some cases, the fee may
-            be shared between seller and platform.
-        insurance_fee (str | Unset): Premium charged per order for insurance coverage
-        cps_shop_ads_commission_tax_amount (str | Unset): Sales tax applied to GMV Max ad fee
-        shipping_insurance_fee_tax_amount (str | Unset): Tax applied to the shipping protection fee.
-        new_customer_growth_package_fee (str | Unset): Fee for using the New Customer Growth Package to offer discounts
-            that attract new customers to your shop.
-        target_product_gmv_growth_package_fee (str | Unset): Fee for using the Product GMV Growth Package to offer
-            discounts on selected products and increase their sales.
-        store_gmv_growth_package_fee (str | Unset): Fee for using the Shop GMV Growth Package to offer store-wide
-            discounts and grow your overall sales.
-        auto_post_shoppable_video_commission_fee (str | Unset): The commission fee charged to the seller for orders
-            attributed to the AI-generated, auto-post shoppable videos.
-        seller_funded_user_spoint_service_fee (str | Unset): Service fee charged for seller-funded user S-Points issued
-            to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
-        flash_sales_service_fee_amount (str | Unset): The service fee charged for participation in flash sales.
-    """
+                Formula: retail_delivery_fee_payment_amount + retail_delivery_fee_refund_amount
+            retail_delivery_fee_payment_amount (str | Unset): The retail delivery fee for deliveries in Colorado, US. For
+                more information, see [Colorado Retail Delivery Fee FAQ](https://seller-
+                us.tiktok.com/university/essay?knowledge_id=2459780628350762&default_language=en&identity=1).
+            retail_delivery_fee_refund_amount (str | Unset): The retail delivery fee subsidy by the platform for losses due
+                to returns, refunds, or other issues in Colorado, US.
+            platform_special_service_fee_amount (str | Unset): The portion of the Distance Shipping Fee paid by the customer
+                that exceeds the logistics service provider's charge, retained by TikTok Shop to support a secure fulfillment
+                experience
+            smart_promotion_fee_amount (str | Unset): This fee includes funds from TikTok Shop to help provide promotions to
+                customers
+            vn_fix_infrastructure_fee (str | Unset): Infrastructure fees are a fixed service fee that TikTok Shop charges
+                for providing, maintaining, and developing infrastructure for delivery services. It applies to delivered orders
+                on the main order level.
+            dynamic_commission_amount (str | Unset): The dynamic commission fee is the amount that the platform charges to
+                all sellers for every successfully delivered order.
+                Applicable only for Indonesia.
+            campaign_period_fee_cfp_amount (str | Unset): Fee charged during Co-funded Promotion campaigns.
+            campaign_period_fee_sp_amount (str | Unset): Fee charged during Smart Promotion campaigns.
+            campaign_period_fee_sp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Smart
+                Promotion.
+            campaign_period_fee_cfp_tax_amount (str | Unset): Sales tax applied to the campaign period fee under Co-funded
+                Promotion.
+            seller_growth_fee_amount (str | Unset): A fee charged on each successful order to provide Bonus Cashback and
+                other growth benefits.
+            failed_delivery_shipping_fee (str | Unset): Shipping fee for order that failed to be delivered to the customer.
+                In some cases, the fee may be shared between seller and platform.
+            buyer_fault_return_shipping_fee (str | Unset): Shipping fee for buyer-fault returns. In some cases, the fee may
+                be shared between seller and platform.
+            insurance_fee (str | Unset): Premium charged per order for insurance coverage
+            cps_shop_ads_commission_tax_amount (str | Unset): Sales tax applied to GMV Max ad fee
+            shipping_insurance_fee_tax_amount (str | Unset): Tax applied to the shipping protection fee.
+            new_customer_growth_package_fee (str | Unset): Fee for using the New Customer Growth Package to offer discounts
+                that attract new customers to your shop.
+            target_product_gmv_growth_package_fee (str | Unset): Fee for using the Product GMV Growth Package to offer
+                discounts on selected products and increase their sales.
+            store_gmv_growth_package_fee (str | Unset): Fee for using the Shop GMV Growth Package to offer store-wide
+                discounts and grow your overall sales.
+            auto_post_shoppable_video_commission_fee (str | Unset): The commission fee charged to the seller for orders
+                attributed to the AI-generated, auto-post shoppable videos.
+            seller_funded_user_spoint_service_fee (str | Unset): Service fee charged for seller-funded user S-Points issued
+                to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
+            flash_sales_service_fee_amount (str | Unset): The service fee charged for participation in flash sales.
+     """
 
     platform_commission_amount: str | Unset = UNSET
     referral_fee_amount: str | Unset = UNSET
@@ -129,6 +137,10 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
     seller_funded_user_spoint_service_fee: str | Unset = UNSET
     flash_sales_service_fee_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         platform_commission_amount = self.platform_commission_amount
@@ -205,9 +217,11 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
 
         flash_sales_service_fee_amount = self.flash_sales_service_fee_amount
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if platform_commission_amount is not UNSET:
             field_dict["platform_commission_amount"] = platform_commission_amount
         if referral_fee_amount is not UNSET:
@@ -284,6 +298,8 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
             field_dict["flash_sales_service_fee_amount"] = flash_sales_service_fee_amount
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -401,6 +417,7 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
             seller_funded_user_spoint_service_fee=seller_funded_user_spoint_service_fee,
             flash_sales_service_fee_amount=flash_sales_service_fee_amount,
         )
+
 
         get_unsettled_transactions_response_data_transaction_fee_tax_breakdown_fee.additional_properties = d
         return get_unsettled_transactions_response_data_transaction_fee_tax_breakdown_fee

@@ -1,42 +1,50 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.search_promotion_activities_request_activity_type import SearchPromotionActivitiesRequestActivityType
 from ..models.search_promotion_activities_request_status import SearchPromotionActivitiesRequestStatus
 from ..types import UNSET, Unset
 
+
+
+
+
+
 T = TypeVar("T", bound="SearchPromotionActivitiesRequest")
+
 
 
 @_attrs_define
 class SearchPromotionActivitiesRequest:
-    """
-    Attributes:
-        status (SearchPromotionActivitiesRequestStatus | Unset): Filter activities by status. If omitted, activities
-            with `NOT_START`, `ONGOING`, `EXPIRED`, or `DEACTIVATED` status are returned. Possible values:
-            - `NOT_START`: The activity is not available to TikTok users until its start time.
-            - `ONGOING`: The activity is available to TikTok users.
-            - `EXPIRED`: The activity is no longer available because it has expired.
-            - `DEACTIVATED`: The activity was deactivated by the seller and is not available to TikTok users.
-        activity_title (str | Unset): Activity title key words. No fuzzy matching.
-        page_size (int | Unset): Number of activities to return per page. Range: 0 to 100. If omitted or set to 0, the
-            effective page size is 10.
-        page_token (str | Unset): Specify the value for the page. Use `""` for the first page.
-        activity_type (SearchPromotionActivitiesRequestActivityType | Unset): The type of promotion activity to return.
-            If `activity_type` is omitted, activities of all supported types are returned. Possible values:
-            - `FIXED_PRICE`: Product discount activity with a fixed price.
-            - `DIRECT_DISCOUNT`: Product discount activity with a percentage off.
-            - `FLASHSALE`: Flash sale activity.
-            - `SHIPPING_DISCOUNT`: Shipping fee discount activity.
-            - `BUY_MORE_SAVE_MORE`: Buy More Save More activity.
-            - `GIFT_WITH_PURCHASE`: Gift With Purchase activity.
-            - `BUY_X_GET_Y`: Buy X Get Y activity.
-    """
+    """ 
+        Attributes:
+            status (SearchPromotionActivitiesRequestStatus | Unset): Filter activities by status. If omitted, activities
+                with `NOT_START`, `ONGOING`, `EXPIRED`, or `DEACTIVATED` status are returned. Possible values:
+                - `NOT_START`: The activity is not available to TikTok users until its start time.
+                - `ONGOING`: The activity is available to TikTok users.
+                - `EXPIRED`: The activity is no longer available because it has expired.
+                - `DEACTIVATED`: The activity was deactivated by the seller and is not available to TikTok users.
+            activity_title (str | Unset): Activity title key words. No fuzzy matching.
+            page_size (int | Unset): Number of activities to return per page. Range: 0 to 100. If omitted or set to 0, the
+                effective page size is 10.
+            page_token (str | Unset): Specify the value for the page. Use `""` for the first page.
+            activity_type (SearchPromotionActivitiesRequestActivityType | Unset): The type of promotion activity to return.
+                If `activity_type` is omitted, activities of all supported types are returned. Possible values:
+                - `FIXED_PRICE`: Product discount activity with a fixed price.
+                - `DIRECT_DISCOUNT`: Product discount activity with a percentage off.
+                - `FLASHSALE`: Flash sale activity.
+                - `SHIPPING_DISCOUNT`: Shipping fee discount activity.
+                - `BUY_MORE_SAVE_MORE`: Buy More Save More activity.
+                - `GIFT_WITH_PURCHASE`: Gift With Purchase activity.
+                - `BUY_X_GET_Y`: Buy X Get Y activity.
+     """
 
     status: SearchPromotionActivitiesRequestStatus | Unset = UNSET
     activity_title: str | Unset = UNSET
@@ -45,10 +53,15 @@ class SearchPromotionActivitiesRequest:
     activity_type: SearchPromotionActivitiesRequestActivityType | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         status: str | Unset = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
+
 
         activity_title = self.activity_title
 
@@ -60,9 +73,12 @@ class SearchPromotionActivitiesRequest:
         if not isinstance(self.activity_type, Unset):
             activity_type = self.activity_type.value
 
+
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if status is not UNSET:
             field_dict["status"] = status
         if activity_title is not UNSET:
@@ -76,15 +92,20 @@ class SearchPromotionActivitiesRequest:
 
         return field_dict
 
+
+
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
         _status = d.pop("status", UNSET)
         status: SearchPromotionActivitiesRequestStatus | Unset
-        if isinstance(_status, Unset):
+        if isinstance(_status,  Unset):
             status = UNSET
         else:
             status = SearchPromotionActivitiesRequestStatus(_status)
+
+
+
 
         activity_title = d.pop("activity_title", UNSET)
 
@@ -94,10 +115,13 @@ class SearchPromotionActivitiesRequest:
 
         _activity_type = d.pop("activity_type", UNSET)
         activity_type: SearchPromotionActivitiesRequestActivityType | Unset
-        if isinstance(_activity_type, Unset):
+        if isinstance(_activity_type,  Unset):
             activity_type = UNSET
         else:
             activity_type = SearchPromotionActivitiesRequestActivityType(_activity_type)
+
+
+
 
         search_promotion_activities_request = cls(
             status=status,
@@ -106,6 +130,7 @@ class SearchPromotionActivitiesRequest:
             page_token=page_token,
             activity_type=activity_type,
         )
+
 
         search_promotion_activities_request.additional_properties = d
         return search_promotion_activities_request

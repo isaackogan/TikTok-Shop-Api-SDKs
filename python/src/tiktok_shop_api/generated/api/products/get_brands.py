@@ -1,12 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_brands_response import GetBrandsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -17,7 +22,12 @@ def _get_kwargs(
     page_size: int,
     page_token: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["category_id"] = category_id
@@ -32,7 +42,9 @@ def _get_kwargs(
 
     params["category_version"] = category_version
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -40,12 +52,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
+
 
 
 def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetBrandsResponse | None:
     if response.status_code == 200:
         response_200 = GetBrandsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -73,8 +89,9 @@ def sync_detailed(
     page_size: int,
     page_token: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetBrandsResponse]:
-    """Get Brands
+    """ Get Brands
 
      Retrieve brands for your shop, including the built-in brands and any custom brands created using the
     [Create Custom Brands API](650a0926f1fd3102b91bbfb0). Pass the returned brand ID when creating or
@@ -115,15 +132,17 @@ def sync_detailed(
 
     Returns:
         Response[GetBrandsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        is_authorized=is_authorized,
-        brand_name=brand_name,
-        page_size=page_size,
-        page_token=page_token,
-        category_version=category_version,
+is_authorized=is_authorized,
+brand_name=brand_name,
+page_size=page_size,
+page_token=page_token,
+category_version=category_version,
+
     )
 
     response = client.get_httpx_client().request(
@@ -131,7 +150,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -142,8 +160,9 @@ def sync(
     page_size: int,
     page_token: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetBrandsResponse | None:
-    """Get Brands
+    """ Get Brands
 
      Retrieve brands for your shop, including the built-in brands and any custom brands created using the
     [Create Custom Brands API](650a0926f1fd3102b91bbfb0). Pass the returned brand ID when creating or
@@ -184,18 +203,19 @@ def sync(
 
     Returns:
         GetBrandsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        category_id=category_id,
-        is_authorized=is_authorized,
-        brand_name=brand_name,
-        page_size=page_size,
-        page_token=page_token,
-        category_version=category_version,
-    ).parsed
+category_id=category_id,
+is_authorized=is_authorized,
+brand_name=brand_name,
+page_size=page_size,
+page_token=page_token,
+category_version=category_version,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -206,8 +226,9 @@ async def asyncio_detailed(
     page_size: int,
     page_token: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> Response[GetBrandsResponse]:
-    """Get Brands
+    """ Get Brands
 
      Retrieve brands for your shop, including the built-in brands and any custom brands created using the
     [Create Custom Brands API](650a0926f1fd3102b91bbfb0). Pass the returned brand ID when creating or
@@ -248,21 +269,24 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetBrandsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         category_id=category_id,
-        is_authorized=is_authorized,
-        brand_name=brand_name,
-        page_size=page_size,
-        page_token=page_token,
-        category_version=category_version,
+is_authorized=is_authorized,
+brand_name=brand_name,
+page_size=page_size,
+page_token=page_token,
+category_version=category_version,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -273,8 +297,9 @@ async def asyncio(
     page_size: int,
     page_token: str | Unset = UNSET,
     category_version: str | Unset = UNSET,
+
 ) -> GetBrandsResponse | None:
-    """Get Brands
+    """ Get Brands
 
      Retrieve brands for your shop, including the built-in brands and any custom brands created using the
     [Create Custom Brands API](650a0926f1fd3102b91bbfb0). Pass the returned brand ID when creating or
@@ -315,16 +340,16 @@ async def asyncio(
 
     Returns:
         GetBrandsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            category_id=category_id,
-            is_authorized=is_authorized,
-            brand_name=brand_name,
-            page_size=page_size,
-            page_token=page_token,
-            category_version=category_version,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+category_id=category_id,
+is_authorized=is_authorized,
+brand_name=brand_name,
+page_size=page_size,
+page_token=page_token,
+category_version=category_version,
+
+    )).parsed

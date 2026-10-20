@@ -1,42 +1,58 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit")
+
 
 
 @_attrs_define
 class GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleValueLimitNumLimit:
-    """
-    Attributes:
-        min_value (int | Unset): Metric value num limit min value.
-        max_value (int | Unset): Metric value num limit max value.
-    """
+    """ 
+        Attributes:
+            min_value (int | Unset): Metric value num limit min value.
+            max_value (int | Unset): Metric value num limit max value.
+     """
 
     min_value: int | Unset = UNSET
     max_value: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+
+
+
 
     def to_dict(self) -> dict[str, Any]:
         min_value = self.min_value
 
         max_value = self.max_value
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if min_value is not UNSET:
             field_dict["min_value"] = min_value
         if max_value is not UNSET:
             field_dict["max_value"] = max_value
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -49,6 +65,7 @@ class GetCategoryAttributesResponseDataAttributeMetricStandardMetricValueModuleV
             min_value=min_value,
             max_value=max_value,
         )
+
 
         get_category_attributes_response_data_attribute_metric_standard_metric_value_module_value_limit_num_limit.additional_properties = d
         return get_category_attributes_response_data_attribute_metric_standard_metric_value_module_value_limit_num_limit

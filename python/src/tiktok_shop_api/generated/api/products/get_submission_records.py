@@ -1,12 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
+from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
 from ...models.get_submission_records_response import GetSubmissionRecordsResponse
-from ...types import UNSET, Response, Unset
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -18,7 +23,12 @@ def _get_kwargs(
     submit_time_lt: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["status"] = status
@@ -35,7 +45,9 @@ def _get_kwargs(
 
     params["page_size"] = page_size
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
@@ -43,14 +55,16 @@ def _get_kwargs(
         "params": params,
     }
 
+
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetSubmissionRecordsResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetSubmissionRecordsResponse | None:
     if response.status_code == 200:
         response_200 = GetSubmissionRecordsResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -60,9 +74,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetSubmissionRecordsResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetSubmissionRecordsResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -81,8 +93,9 @@ def sync_detailed(
     submit_time_lt: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> Response[GetSubmissionRecordsResponse]:
-    """Get Submission Records
+    """ Get Submission Records
 
      Retrieve a paginated list of submission records for the authorized seller, including submission
     status, review results, and linked opportunity/product information. Useful for tracking submission
@@ -103,16 +116,18 @@ def sync_detailed(
 
     Returns:
         Response[GetSubmissionRecordsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         status=status,
-        opportunity_id=opportunity_id,
-        product_id=product_id,
-        submit_time_ge=submit_time_ge,
-        submit_time_lt=submit_time_lt,
-        page_token=page_token,
-        page_size=page_size,
+opportunity_id=opportunity_id,
+product_id=product_id,
+submit_time_ge=submit_time_ge,
+submit_time_lt=submit_time_lt,
+page_token=page_token,
+page_size=page_size,
+
     )
 
     response = client.get_httpx_client().request(
@@ -120,7 +135,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     *,
@@ -132,8 +146,9 @@ def sync(
     submit_time_lt: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> GetSubmissionRecordsResponse | None:
-    """Get Submission Records
+    """ Get Submission Records
 
      Retrieve a paginated list of submission records for the authorized seller, including submission
     status, review results, and linked opportunity/product information. Useful for tracking submission
@@ -154,19 +169,20 @@ def sync(
 
     Returns:
         GetSubmissionRecordsResponse
-    """
+     """
+
 
     return sync_detailed(
         client=client,
-        status=status,
-        opportunity_id=opportunity_id,
-        product_id=product_id,
-        submit_time_ge=submit_time_ge,
-        submit_time_lt=submit_time_lt,
-        page_token=page_token,
-        page_size=page_size,
-    ).parsed
+status=status,
+opportunity_id=opportunity_id,
+product_id=product_id,
+submit_time_ge=submit_time_ge,
+submit_time_lt=submit_time_lt,
+page_token=page_token,
+page_size=page_size,
 
+    ).parsed
 
 async def asyncio_detailed(
     *,
@@ -178,8 +194,9 @@ async def asyncio_detailed(
     submit_time_lt: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> Response[GetSubmissionRecordsResponse]:
-    """Get Submission Records
+    """ Get Submission Records
 
      Retrieve a paginated list of submission records for the authorized seller, including submission
     status, review results, and linked opportunity/product information. Useful for tracking submission
@@ -200,22 +217,25 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetSubmissionRecordsResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         status=status,
-        opportunity_id=opportunity_id,
-        product_id=product_id,
-        submit_time_ge=submit_time_ge,
-        submit_time_lt=submit_time_lt,
-        page_token=page_token,
-        page_size=page_size,
+opportunity_id=opportunity_id,
+product_id=product_id,
+submit_time_ge=submit_time_ge,
+submit_time_lt=submit_time_lt,
+page_token=page_token,
+page_size=page_size,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     *,
@@ -227,8 +247,9 @@ async def asyncio(
     submit_time_lt: int | Unset = UNSET,
     page_token: str | Unset = UNSET,
     page_size: int,
+
 ) -> GetSubmissionRecordsResponse | None:
-    """Get Submission Records
+    """ Get Submission Records
 
      Retrieve a paginated list of submission records for the authorized seller, including submission
     status, review results, and linked opportunity/product information. Useful for tracking submission
@@ -249,17 +270,17 @@ async def asyncio(
 
     Returns:
         GetSubmissionRecordsResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            client=client,
-            status=status,
-            opportunity_id=opportunity_id,
-            product_id=product_id,
-            submit_time_ge=submit_time_ge,
-            submit_time_lt=submit_time_lt,
-            page_token=page_token,
-            page_size=page_size,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        client=client,
+status=status,
+opportunity_id=opportunity_id,
+product_id=product_id,
+submit_time_ge=submit_time_ge,
+submit_time_lt=submit_time_lt,
+page_token=page_token,
+page_size=page_size,
+
+    )).parsed

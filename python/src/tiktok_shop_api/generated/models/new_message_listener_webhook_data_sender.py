@@ -1,36 +1,52 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, BinaryIO, TextIO, TYPE_CHECKING, Generator
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
+
+
+
+
+
+
 T = TypeVar("T", bound="NewMessageListenerWebhookDataSender")
+
 
 
 @_attrs_define
 class NewMessageListenerWebhookDataSender:
-    """
-    Attributes:
-        sender_im_user_id (str | Unset): ID in IM system for the sender.
-    """
+    """ 
+        Attributes:
+            sender_im_user_id (str | Unset): ID in IM system for the sender.
+     """
 
     sender_im_user_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
+
+
+
+
     def to_dict(self) -> dict[str, Any]:
         sender_im_user_id = self.sender_im_user_id
 
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
+        field_dict.update({
+        })
         if sender_im_user_id is not UNSET:
             field_dict["sender_im_user_id"] = sender_im_user_id
 
         return field_dict
+
+
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
@@ -40,6 +56,7 @@ class NewMessageListenerWebhookDataSender:
         new_message_listener_webhook_data_sender = cls(
             sender_im_user_id=sender_im_user_id,
         )
+
 
         new_message_listener_webhook_data_sender.additional_properties = d
         return new_message_listener_webhook_data_sender

@@ -1,6 +1,5 @@
 from enum import StrEnum
 
-
 class GetShopLivePerformanceOverviewAccountType(StrEnum):
     AFFILIATE_ACCOUNTS = "AFFILIATE_ACCOUNTS"
     ALL = "ALL"

@@ -1,15 +1,17 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, cast
 from urllib.parse import quote
 
 import httpx
 
-from ... import errors
 from ...client import AuthenticatedClient, Client
-from ...models.get_affiliate_partner_campaign_product_list_response import (
-    GetAffiliatePartnerCampaignProductListResponse,
-)
-from ...types import UNSET, Response, Unset
+from ...types import Response, UNSET
+from ... import errors
+
+from ...models.get_affiliate_partner_campaign_product_list_response import GetAffiliatePartnerCampaignProductListResponse
+from ...types import UNSET, Unset
+from typing import cast
+
 
 
 def _get_kwargs(
@@ -23,7 +25,12 @@ def _get_kwargs(
     product_id: str | Unset = UNSET,
     shop_name: str | Unset = UNSET,
     category_id: str | Unset = UNSET,
+
 ) -> dict[str, Any]:
+    
+
+    
+
     params: dict[str, Any] = {}
 
     params["category_asset_cipher"] = category_asset_cipher
@@ -42,24 +49,26 @@ def _get_kwargs(
 
     params["category_id"] = category_id
 
+
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
+
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/products".format(
-            campaign_id=quote(str(campaign_id), safe=""),
-        ),
+        "url": "/affiliate_partner/202405/campaigns/{campaign_id}/products".format(campaign_id=quote(str(campaign_id), safe=""),),
         "params": params,
     }
+
 
     return _kwargs
 
 
-def _parse_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetAffiliatePartnerCampaignProductListResponse | None:
+
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> GetAffiliatePartnerCampaignProductListResponse | None:
     if response.status_code == 200:
         response_200 = GetAffiliatePartnerCampaignProductListResponse.from_dict(response.json())
+
+
 
         return response_200
 
@@ -69,9 +78,7 @@ def _parse_response(
         return None
 
 
-def _build_response(
-    *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetAffiliatePartnerCampaignProductListResponse]:
+def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[GetAffiliatePartnerCampaignProductListResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,8 +99,9 @@ def sync_detailed(
     product_id: str | Unset = UNSET,
     shop_name: str | Unset = UNSET,
     category_id: str | Unset = UNSET,
+
 ) -> Response[GetAffiliatePartnerCampaignProductListResponse]:
-    """Get Affiliate Partner Campaign Product List
+    """ Get Affiliate Partner Campaign Product List
 
      This API offers the ability to list products submitted by sellers in an Affiliate Partner campaign.
 
@@ -114,18 +122,20 @@ def sync_detailed(
 
     Returns:
         Response[GetAffiliatePartnerCampaignProductListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        review_status=review_status,
-        product_name=product_name,
-        product_id=product_id,
-        shop_name=shop_name,
-        category_id=category_id,
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+review_status=review_status,
+product_name=product_name,
+product_id=product_id,
+shop_name=shop_name,
+category_id=category_id,
+
     )
 
     response = client.get_httpx_client().request(
@@ -133,7 +143,6 @@ def sync_detailed(
     )
 
     return _build_response(client=client, response=response)
-
 
 def sync(
     campaign_id: str,
@@ -147,8 +156,9 @@ def sync(
     product_id: str | Unset = UNSET,
     shop_name: str | Unset = UNSET,
     category_id: str | Unset = UNSET,
+
 ) -> GetAffiliatePartnerCampaignProductListResponse | None:
-    """Get Affiliate Partner Campaign Product List
+    """ Get Affiliate Partner Campaign Product List
 
      This API offers the ability to list products submitted by sellers in an Affiliate Partner campaign.
 
@@ -169,21 +179,22 @@ def sync(
 
     Returns:
         GetAffiliatePartnerCampaignProductListResponse
-    """
+     """
+
 
     return sync_detailed(
         campaign_id=campaign_id,
-        client=client,
-        category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        review_status=review_status,
-        product_name=product_name,
-        product_id=product_id,
-        shop_name=shop_name,
-        category_id=category_id,
-    ).parsed
+client=client,
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+review_status=review_status,
+product_name=product_name,
+product_id=product_id,
+shop_name=shop_name,
+category_id=category_id,
 
+    ).parsed
 
 async def asyncio_detailed(
     campaign_id: str,
@@ -197,8 +208,9 @@ async def asyncio_detailed(
     product_id: str | Unset = UNSET,
     shop_name: str | Unset = UNSET,
     category_id: str | Unset = UNSET,
+
 ) -> Response[GetAffiliatePartnerCampaignProductListResponse]:
-    """Get Affiliate Partner Campaign Product List
+    """ Get Affiliate Partner Campaign Product List
 
      This API offers the ability to list products submitted by sellers in an Affiliate Partner campaign.
 
@@ -219,24 +231,27 @@ async def asyncio_detailed(
 
     Returns:
         Response[GetAffiliatePartnerCampaignProductListResponse]
-    """
+     """
+
 
     kwargs = _get_kwargs(
         campaign_id=campaign_id,
-        category_asset_cipher=category_asset_cipher,
-        page_size=page_size,
-        page_token=page_token,
-        review_status=review_status,
-        product_name=product_name,
-        product_id=product_id,
-        shop_name=shop_name,
-        category_id=category_id,
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+review_status=review_status,
+product_name=product_name,
+product_id=product_id,
+shop_name=shop_name,
+category_id=category_id,
+
     )
 
-    response = await client.get_async_httpx_client().request(**kwargs)
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
 
     return _build_response(client=client, response=response)
-
 
 async def asyncio(
     campaign_id: str,
@@ -250,8 +265,9 @@ async def asyncio(
     product_id: str | Unset = UNSET,
     shop_name: str | Unset = UNSET,
     category_id: str | Unset = UNSET,
+
 ) -> GetAffiliatePartnerCampaignProductListResponse | None:
-    """Get Affiliate Partner Campaign Product List
+    """ Get Affiliate Partner Campaign Product List
 
      This API offers the ability to list products submitted by sellers in an Affiliate Partner campaign.
 
@@ -272,19 +288,19 @@ async def asyncio(
 
     Returns:
         GetAffiliatePartnerCampaignProductListResponse
-    """
+     """
 
-    return (
-        await asyncio_detailed(
-            campaign_id=campaign_id,
-            client=client,
-            category_asset_cipher=category_asset_cipher,
-            page_size=page_size,
-            page_token=page_token,
-            review_status=review_status,
-            product_name=product_name,
-            product_id=product_id,
-            shop_name=shop_name,
-            category_id=category_id,
-        )
-    ).parsed
+
+    return (await asyncio_detailed(
+        campaign_id=campaign_id,
+client=client,
+category_asset_cipher=category_asset_cipher,
+page_size=page_size,
+page_token=page_token,
+review_status=review_status,
+product_name=product_name,
+product_id=product_id,
+shop_name=shop_name,
+category_id=category_id,
+
+    )).parsed
