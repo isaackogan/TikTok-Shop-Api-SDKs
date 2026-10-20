@@ -123,7 +123,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -144,6 +144,9 @@ jobs:
         run: pnpm --filter tiktok-shop-api exec tsc --noEmit
       - name: Test
         run: pnpm --filter tiktok-shop-api run test
+      - name: Packaging dry run
+        working-directory: typescript
+        run: npm pack --dry-run
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -165,7 +168,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -186,6 +189,12 @@ jobs:
       - name: Type-check with pyright
         working-directory: python
         run: .venv/bin/pyright
+      - name: Packaging dry run (sdist and wheel)
+        working-directory: python
+        run: |
+          set -euo pipefail
+          .venv/bin/pip install -q build
+          .venv/bin/python -m build --outdir "$RUNNER_TEMP/python-dist" .
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -210,7 +219,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -225,7 +234,7 @@ jobs:
         uses: actions/setup-go@v7
         with:
           go-version-file: go/go.mod
-          cache-dependency-path: go/go.sum
+          cache-dependency-path: go/go.mod
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate
@@ -234,6 +243,17 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/go run build
       - name: Test
         run: pnpm --filter @tiktok-shop-api/go run test
+      - name: Check that go.mod is tidy
+        working-directory: go
+        run: |
+          set -euo pipefail
+          go mod tidy
+          # go mod tidy -diff needs Go 1.23; this job runs the go.mod floor (1.22).
+          if [ -n "$(git status --porcelain -- go.mod go.sum)" ]; then
+            git --no-pager diff -- go.mod go.sum
+            echo "::error::go.mod or go.sum is not tidy: run 'go mod tidy' in go/"
+            exit 1
+          fi
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -255,7 +275,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -275,6 +295,14 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/java run build
       - name: Test
         run: pnpm --filter @tiktok-shop-api/java run test
+      - name: Packaging dry run (release profile, unsigned)
+        working-directory: java
+        run: |
+          set -euo pipefail
+          mvn -B -q -P release -Dgpg.skip -DskipTests package
+          for jar in sources javadoc; do
+            ls target/tiktok-shop-api-*-"$jar".jar > /dev/null || { echo "::error::no -$jar.jar was built"; exit 1; }
+          done
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -296,7 +324,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -316,6 +344,9 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/kotlin run build
       - name: Test
         run: pnpm --filter @tiktok-shop-api/kotlin run test
+      - name: Packaging dry run (publish to the local Maven repository)
+        working-directory: kotlin
+        run: ./gradlew --no-daemon -q publishToMavenLocal
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -337,7 +368,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -349,7 +380,7 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Set up PHP
-        uses: shivammathur/setup-php@2.40.0
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
         with:
           php-version: "8.3"
           tools: composer
@@ -363,6 +394,8 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/php run build
       - name: Test
         run: pnpm --filter @tiktok-shop-api/php run test
+      - name: Packaging dry run
+        run: composer validate --strict --no-check-lock --working-dir=php
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -384,7 +417,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -396,8 +429,9 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master, 2026-10-16
         with:
+          toolchain: stable
           components: clippy
       - name: Cache cargo
         uses: actions/cache@v6
@@ -420,8 +454,11 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/rust run test
       - name: Clippy
         run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
+      - name: Packaging dry run
+        # --allow-dirty: on main the regenerated code is not committed yet.
+        run: cargo package --list --allow-dirty --manifest-path rust/Cargo.toml
       - name: Set up Rust 1.88 (MSRV)
-        uses: dtolnay/rust-toolchain@master
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master, 2026-10-16
         with:
           toolchain: "1.88"
       - name: Check MSRV
@@ -447,7 +484,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -489,7 +526,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:

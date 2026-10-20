@@ -4,7 +4,14 @@ Every SDK is released from the **release** workflow (`.github/workflows/release.
 
 ## One-time setup
 
-Add each secret under **Settings → Secrets and variables → Actions → New repository secret**.
+### The `release` environment (do this first)
+
+The publish jobs read their registry secrets from an environment called `release`, so a workflow run from any other branch (whose copy of `release.yml` could be edited) cannot reach them.
+
+- [ ] Create it: **Settings → Environments → New environment**, name `release`.
+- [ ] Under **Deployment branches and tags**, choose **Selected branches and tags** and add only `main`.
+- [ ] Add every secret below to **this environment** (Environment secrets), not as a repository secret. If you added any as repository secrets before, delete those.
+- [ ] Do the same for the `pypi` environment (created in the PyPI step): restrict it to `main`, and put `PYPI_TOKEN` there if you use one.
 
 ### Maven Central (Java and Kotlin)
 
@@ -17,8 +24,9 @@ Add each secret under **Settings → Secrets and variables → Actions → New r
 
 ### npm (TypeScript)
 
-- [ ] Create an npm automation token (npm → Access Tokens → Granular, with publish rights on `tiktok-shop-api`, or on the whole account for the first publish). Store it as `NPM_TOKEN`.
+- [ ] Create a **granular access token** (npm → Access Tokens → Generate New Token → Granular). Give it read and write on packages, scoped to `tiktok-shop-api` (or to all packages for the very first publish, before the package exists), and tick **Bypass two-factor authentication (2FA)**: CI cannot answer a 2FA prompt. npm's write tokens are short-lived (at most 90 days), so note when it expires. Store it as `NPM_TOKEN`.
 - [ ] Provenance needs nothing more: the job has `id-token: write`, and the repo must be public.
+- [ ] After the first publish, switch to a **trusted publisher** so no token is needed: on npmjs.com open the package → Settings → Trusted Publisher → GitHub Actions, with owner `isaackogan`, repository `TikTok-Shop-Api-SDKs`, workflow `release.yml` and environment `release`. The job installs npm 11.5.1 or later, which trusted publishing needs. Then delete `NPM_TOKEN` (and revoke the token on npm).
 
 ### PyPI (Python)
 
@@ -68,7 +76,7 @@ The release workflow (and the regenerate job in `sdk-generate.yml`) pushes commi
    1. computes each version and fails early if its tag already exists;
    2. runs `sdk-generate.yml` for the chosen languages (generate, build, test);
    3. publishes each chosen language to its registry;
-   4. **only if every publish succeeded**, commits the bumped manifests (`chore: release <lang>@<ver>, … [skip ci]`), tags `<lang>/vX.Y.Z` for each (Go and PHP included) and creates a GitHub Release per language. A language's first release note says it is unofficial and that request signing follows TikTok's documentation but has not been verified against the live API;
+   4. for **every language whose publish succeeded** (even if another one failed), commits the bumped manifests (`chore: release <lang>@<ver>, … [skip ci]`), tags `<lang>/vX.Y.Z` (Go and PHP included) and creates a GitHub Release; then the run fails if any chosen publish failed (see below). A language's first release note says it is unofficial, that request signing follows TikTok's documentation but has not been verified against the live API, and asks for an issue if TikTok rejects a signature;
    5. for Go, asks `proxy.golang.org` for the new tag so it is cached.
 
    The version bump is applied inside each publish job before building, so the published package carries the new version; the repository only gets it in step 4.
@@ -89,4 +97,4 @@ Notes for the awkward cases:
 
 ### What the bump edits
 
-`scripts/bump-version.ts` edits each language's manifest (and Rust's `Cargo.lock` entry) plus the other places that hard-code the version, so they never drift: the `User-Agent` constants in `go/client.go`, `java/.../TikTokShop.java` and `kotlin/.../SigningInterceptor.kt`, and the install snippets in the Java and Kotlin READMEs. Rust derives its User-Agent from the crate version. Each locator must match exactly once or the bump fails; a test checks them against the real files.
+`scripts/bump-version.ts` edits each language's manifest (and Rust's `Cargo.lock` entry) plus the other places that hard-code the version, so they never drift: the `User-Agent` constants in `typescript/src/version.ts`, `python/.../_version.py`, `go/client.go`, `java/.../TikTokShop.java`, `kotlin/.../SigningInterceptor.kt`, `php/src/TikTokShop.php` and `csharp/.../TikTokShopClient.cs`, and the install snippets in the Java and Kotlin READMEs. Rust derives its User-Agent from the crate version. PHP's constant is only the fallback for a checkout: the mirror is pushed before the release commit, so an installed package reports the version Composer recorded. A test also bumps a copy of each language's real files and checks that no test pins the old version. Each locator must match exactly once or the bump fails; a test checks them against the real files.

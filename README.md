@@ -20,7 +20,7 @@ The spec is generated automatically from TikTok Shop's official partner document
 | [`rust/`](rust) | Rust SDK, [crates.io](https://crates.io/crates/tiktok-shop-api) | `cargo add tiktok-shop-api` |
 | [`csharp/`](csharp) | C# SDK, [NuGet](https://www.nuget.org/packages/TikTokShop.Api) | `dotnet add package TikTokShop.Api` |
 
-Every SDK is generated from the spec and adds the parts a generator can't: request signing, shop cipher handling, an OAuth helper (authorization URL, token exchange and refresh) and typed webhooks. Request signing follows TikTok's documentation and has not been verified against the live API yet. Releases are cut with the button described in [RELEASING.md](RELEASING.md).
+Every SDK is generated from the spec and adds the parts a generator can't: request signing, shop cipher handling, an OAuth helper (authorization URL, token exchange and refresh) and typed webhooks. Request signing follows TikTok's documentation and has not been verified against the live API yet. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues. Releases are cut with the button described in [RELEASING.md](RELEASING.md).
 
 ## Coverage
 

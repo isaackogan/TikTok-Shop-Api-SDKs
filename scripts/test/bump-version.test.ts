@@ -1,11 +1,14 @@
 import { afterEach, describe, expect, it } from 'vitest';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LANGS, type Lang } from '../lib/meta.ts';
 import {
+  FIRST_VERSION,
   MANIFESTS,
   STAMPS,
+  TAG_VERSIONED,
   applyStamps,
   stampFiles,
   bumpSemver,
@@ -24,6 +27,10 @@ const FIXTURES: Record<string, string> = {
   'rust/Cargo.toml': '[package]\nname = "x"\nversion = "0.1.0"\nedition = "2021"\n\n[dependencies]\nserde = { version = "4.4.4" }\n\n[dev-dependencies.y]\nversion = "2.0.0"\n',
   'csharp/src/TikTokShop.Api/TikTokShop.Api.csproj': '<Project>\n  <PropertyGroup>\n    <Version>0.1.0</Version>\n    <TargetFramework>net8.0</TargetFramework>\n  </PropertyGroup>\n  <ItemGroup><PackageReference Include="a" Version="1.2.3" /></ItemGroup>\n</Project>\n',
   'go/client.go': 'package x\n\tcfg.UserAgent = "tiktok-shop-api-go/0.1.0"\n\t// other/0.1.0\n',
+  'typescript/src/version.ts': "export const USER_AGENT = 'tiktok-shop-api-typescript/0.1.0';\n",
+  'python/src/tiktok_shop_api/_version.py': '__version__ = "0.1.0"\n',
+  'php/src/TikTokShop.php': "    private const VERSION = '0.1.0';\n",
+  'csharp/src/TikTokShop.Api/TikTokShopClient.cs': '    public const string UserAgent = "tiktok-shop-api-csharp/0.1.0";\n',
   'java/src/main/java/com/isaackogan/tiktok/shop/TikTokShop.java': 'api.setUserAgent("tiktok-shop-api-java/0.1.0");\n',
   'java/README.md': 'Version `0.1.0`.\n<dependency>\n  <artifactId>tiktok-shop-api</artifactId>\n  <version>0.1.0</version>\n</dependency>\nimplementation \'com.isaackogan:tiktok-shop-api:0.1.0\'\nother 0.1.0\n',
   'kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/SigningInterceptor.kt': 'const val USER_AGENT = "tiktok-shop-api-kotlin/0.1.0"\n',
@@ -201,7 +208,7 @@ describe('version stamps (User-Agent constants, README snippets)', () => {
     it(`${lang}: every locator matches the real files exactly once (drift guard)`, () => {
       const found = applyStamps(REAL_ROOT, lang, undefined);
       expect(found.length).toBeGreaterThan(0);
-      if (lang !== 'go') {
+      if (!TAG_VERSIONED.includes(lang)) {
         const manifest = readManifestVersion(lang, readFileSync(join(REAL_ROOT, MANIFESTS[lang]!), 'utf8'));
         expect(new Set(found)).toEqual(new Set([manifest]));
       }
@@ -213,6 +220,55 @@ describe('version stamps (User-Agent constants, README snippets)', () => {
       expect(wf, f).toContain(f);
     }
   });
+});
+
+describe('no language test pins a version (I7)', () => {
+  const REAL_ROOT = fileURLToPath(new URL('../../', import.meta.url));
+  // Each language's test sources. A literal of the current version in any of them breaks CI after the first bump.
+  const TESTS: Record<Lang, string[]> = {
+    typescript: ['typescript/test'],
+    python: ['python/tests'],
+    go: ['go'],
+    java: ['java/src/test'],
+    kotlin: ['kotlin/src/test'],
+    rust: ['rust/tests', 'rust/examples'],
+    php: ['php/tests'],
+    csharp: ['csharp/tests'],
+  };
+  const isTest = (lang: Lang, file: string): boolean =>
+    lang === 'go' ? file.endsWith('_test.go') && !file.includes('/generated/') && !file.includes('/build/') : /\.(ts|py|java|kt|rs|php|cs)$/.test(file);
+  const files = (dir: string): string[] =>
+    readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) return ['node_modules', 'bin', 'obj', '__pycache__', 'build', 'generated'].includes(e.name) ? [] : files(p);
+      return [p];
+    });
+
+  for (const lang of LANGS) {
+    it(`${lang}: a patch bump of a copy of the real files leaves no test pinned to the old version`, () => {
+      // Copy the real manifest (and Cargo.lock) and every stamped file into a temp root, and bump that.
+      const root = mkdtempSync(join(tmpdir(), 'bump-real-'));
+      dirs.push(root);
+      const copied = [MANIFESTS[lang], ...stampFiles(lang), lang === 'rust' ? 'rust/Cargo.lock' : undefined].filter((f): f is string => !!f);
+      for (const f of copied) {
+        mkdirSync(dirname(join(root, f)), { recursive: true });
+        writeFileSync(join(root, f), readFileSync(join(REAL_ROOT, f)));
+      }
+      const tagged = TAG_VERSIONED.includes(lang);
+      const old = tagged ? FIRST_VERSION : readManifestVersion(lang, readFileSync(join(REAL_ROOT, MANIFESTS[lang]!), 'utf8'));
+      const next = bumpVersion(lang, 'patch', { root, tags: tagged ? [`${lang}/v${old}`] : undefined });
+      expect(next).not.toBe(old);
+      // Every stamp now says the new version.
+      if (STAMPS[lang]) expect(new Set(applyStamps(root, lang, undefined))).toEqual(new Set([next]));
+      // And no test of the language spells the old one.
+      const literal = new RegExp(`(?<![\\w.])${old.replace(/\./g, '\\.')}(?![\\w.])`);
+      const pinned = TESTS[lang]
+        .flatMap((d) => files(join(REAL_ROOT, d)))
+        .filter((f) => isTest(lang, f.slice(REAL_ROOT.length)))
+        .filter((f) => literal.test(readFileSync(f, 'utf8')));
+      expect(pinned.map((f) => f.slice(REAL_ROOT.length))).toEqual([]);
+    });
+  }
 });
 
 import { execFileSync } from 'node:child_process';

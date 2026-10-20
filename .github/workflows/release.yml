@@ -5,7 +5,10 @@
 #   patch|minor|major  bump the manifest (Go and PHP: the latest go/vX.Y.Z or php/vX.Y.Z tag) and publish that
 # Flow: prepare (compute versions) -> generate (sdk-generate.yml: generate, build, test the chosen SDKs)
 #   -> one publish job per chosen language -> release (commit bumped manifests, tag, GitHub Releases)
-#   -> go-proxy (warm proxy.golang.org). Nothing is committed or tagged unless every chosen publish succeeded.
+#   -> go-proxy (warm proxy.golang.org). The release job commits, tags and releases exactly the languages whose
+#   publish succeeded, then fails if any chosen publish failed; re-run with just those (RELEASING.md).
+# Publish jobs read their registry secrets from the "release" environment (restrict it to main, RELEASING.md);
+# PyPI uses its own "pypi" environment for trusted publishing.
 # One-time setup (tokens, Maven Central namespace, the PHP mirror repo) is in RELEASING.md.
 name: release
 
@@ -87,7 +90,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -160,6 +163,8 @@ jobs:
     name: publish typescript to npm
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.typescript_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -169,7 +174,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -188,9 +193,13 @@ jobs:
           [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
       - name: Build
         run: pnpm --filter tiktok-shop-api run build
+      - name: Use npm 11.5.1 or later (trusted publishing needs it; Node 22 ships npm 10)
+        run: npm install -g npm@^11.5.1
       - name: Publish with provenance
         working-directory: typescript
         env:
+          # A granular token with "bypass 2FA" until npm trusted publishing is set up (RELEASING.md); with a trusted
+          # publisher configured, OIDC is used and this may be empty.
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish --provenance --access public
 
@@ -209,7 +218,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -235,7 +244,7 @@ jobs:
           python -m pip install build
           python -m build python --outdir dist
       - name: Publish
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
         with:
           packages-dir: dist
           # Trusted publishing needs no secret. To use an API token instead, add the PYPI_TOKEN secret
@@ -246,6 +255,8 @@ jobs:
     name: publish java to Maven Central
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.java_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -254,7 +265,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -294,6 +305,8 @@ jobs:
     name: publish kotlin to Maven Central
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.kotlin_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -302,7 +315,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -340,6 +353,8 @@ jobs:
     name: publish rust to crates.io
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.rust_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -348,14 +363,16 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
           node-version: "22"
           cache: pnpm
       - name: Set up Rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master, 2026-10-16
+        with:
+          toolchain: stable
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Set version
@@ -376,6 +393,8 @@ jobs:
     name: publish csharp to NuGet
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.csharp_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -384,7 +403,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -415,6 +434,8 @@ jobs:
     name: publish php to the Packagist mirror
     needs: [prepare, generate]
     if: ${{ needs.prepare.outputs.php_version != '' }}
+    # Registry secrets live in this environment, which only main may use (RELEASING.md).
+    environment: release
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -431,10 +452,17 @@ jobs:
         run: |
           set -euo pipefail
           key="$RUNNER_TEMP/php-mirror-key"
-          trap 'rm -f "$key"' EXIT
+          trap 'rm -f "$key" "$RUNNER_TEMP/github-known-hosts"' EXIT
           install -m 600 /dev/null "$key"
           printf '%s\n' "$PHP_MIRROR_DEPLOY_KEY" > "$key"
-          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+          # GitHub's published SSH host keys (gh api meta, .ssh_keys), so the mirror push never trusts a key on first use.
+          hosts="$RUNNER_TEMP/github-known-hosts"
+          {
+            echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
+            echo "github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg="
+            echo "github.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk="
+          } > "$hosts"
+          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$hosts"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           bash scripts/split-php.sh "$PHP_VERSION"
@@ -458,7 +486,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
@@ -498,13 +526,14 @@ jobs:
           set -euo pipefail
           # Files each language's bump edits (bump-version.ts: manifest, Cargo.lock, version stamps).
           declare -A FILES=(
-            [typescript]="typescript/package.json"
-            [python]="python/pyproject.toml"
+            [typescript]="typescript/package.json typescript/src/version.ts"
+            [python]="python/pyproject.toml python/src/tiktok_shop_api/_version.py"
             [go]="go/client.go"
             [java]="java/pom.xml java/README.md java/src/main/java/com/isaackogan/tiktok/shop/TikTokShop.java"
             [kotlin]="kotlin/build.gradle.kts kotlin/README.md kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/SigningInterceptor.kt"
+            [php]="php/src/TikTokShop.php"
             [rust]="rust/Cargo.toml rust/Cargo.lock"
-            [csharp]="csharp/src/TikTokShop.Api/TikTokShop.Api.csproj"
+            [csharp]="csharp/src/TikTokShop.Api/TikTokShop.Api.csproj csharp/src/TikTokShop.Api/TikTokShopClient.cs"
           )
           released=()   # "lang@version", in release order
           failed=()
@@ -593,6 +622,7 @@ jobs:
               if [ -z "$prev" ]; then
                 echo
                 echo "First release. Request signing follows TikTok's documentation and has not been verified against the live API."
+                echo "If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues."
               fi
             } > "$notes"
             # Generated notes diff against this language's previous tag, not another language's.

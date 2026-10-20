@@ -31,7 +31,8 @@ const V = String.raw`(\d+\.\d+\.\d+)`;
 /**
  * Other places that hard-code a language's version: User-Agent constants and README install snippets.
  * Each locator must match exactly `count` times (group 2 is the version) or the bump fails loudly.
- * Rust and the other languages derive theirs from the manifest and have none.
+ * Rust derives its User-Agent from the manifest (CARGO_PKG_VERSION) and has none. PHP's is the fallback for a
+ * checkout: an installed package reports the version Composer recorded.
  */
 export interface Stamp {
   file: string;
@@ -39,7 +40,11 @@ export interface Stamp {
   count: number;
 }
 export const STAMPS: Partial<Record<Lang, Stamp[]>> = {
+  typescript: [{ file: 'typescript/src/version.ts', pattern: new RegExp(`(tiktok-shop-api-typescript/)${V}(')`, 'g'), count: 1 }],
+  python: [{ file: 'python/src/tiktok_shop_api/_version.py', pattern: new RegExp(`(__version__ = ")${V}(")`, 'g'), count: 1 }],
   go: [{ file: 'go/client.go', pattern: new RegExp(`(tiktok-shop-api-go/)${V}(")`, 'g'), count: 1 }],
+  php: [{ file: 'php/src/TikTokShop.php', pattern: new RegExp(`(private const VERSION = ')${V}(')`, 'g'), count: 1 }],
+  csharp: [{ file: 'csharp/src/TikTokShop.Api/TikTokShopClient.cs', pattern: new RegExp(`(tiktok-shop-api-csharp/)${V}(")`, 'g'), count: 1 }],
   java: [
     { file: 'java/src/main/java/com/isaackogan/tiktok/shop/TikTokShop.java', pattern: new RegExp(`(tiktok-shop-api-java/)${V}(")`, 'g'), count: 1 },
     { file: 'java/README.md', pattern: new RegExp(`(Version \`)${V}(\`)`, 'g'), count: 1 },
