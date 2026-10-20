@@ -134,6 +134,46 @@ class WebhooksTest {
         assertTrue(inList.message!!.contains("data.appeal_task.appeal_audit_result.indicator_type"), inList.message)
     }
 
+    // type 71: required Long properties at the top level, in a nested object and inside a list element.
+    private val inventory = """{"type":71,"tts_notification_id":"1","shop_id":"2","timestamp":3,"data":{"event_id":"e","occurred_at":"2025-01-01T00:00:00Z","shop_id":4,"product_id":5,"sku_id":6,
+        "quantity_snapshot_after_change":{"total_quantity":1,"total_available_quantity":1,"total_committed_quantity":1,"in_shop_quantity":1,"campaign_locked_quantity":1,"creator_locked_quantity":1},
+        "change_detail":[{"idempotency_key":"k","trigger_source":"s","occurred_at":"2025-01-01T00:00:00Z","total_quantity_delta":1,"available_quantity_delta":1,"committed_quantity_delta":1,"in_shop_quantity_delta":1,"campaign_locked_quantity_delta":1,"creator_locked_quantity_delta":1}]}}"""
+
+    private fun without(vararg path: String): String {
+        val root = JsonParser.parseString(inventory).asJsonObject
+        var o: com.google.gson.JsonElement = root
+        for (key in path.dropLast(1)) o = if (key == "[0]") o.asJsonArray[0] else o.asJsonObject[key]
+        o.asJsonObject.remove(path.last())
+        return root.toString()
+    }
+
+    @Test
+    fun aMissingRequiredPrimitiveIsRejectedNotReadAsZero() {
+        assertEquals(71, Webhooks.parse(inventory).type)
+        val cases = mapOf(
+            arrayOf("timestamp") to "timestamp",
+            arrayOf("data", "shop_id") to "data.shop_id",
+            arrayOf("data", "quantity_snapshot_after_change", "in_shop_quantity") to "data.quantity_snapshot_after_change.in_shop_quantity",
+            arrayOf("data", "change_detail", "[0]", "total_quantity_delta") to "data.change_detail.total_quantity_delta",
+        )
+        for ((path, expected) in cases) {
+            val ex = assertFailsWith<IllegalArgumentException>(expected) { Webhooks.parse(without(*path)) }
+            assertTrue(ex.message!!.contains("\"$expected\""), ex.message)
+        }
+    }
+
+    @Test
+    fun aJsonNullInARequiredPropertyCountsAsMissing() {
+        val body = inventory.replace("\"timestamp\":3", "\"timestamp\":null")
+        assertTrue(assertFailsWith<IllegalArgumentException> { Webhooks.parse(body) }.message!!.contains("\"timestamp\""))
+    }
+
+    @Test
+    fun theSealedBasePayloadIsTheTypedModel() {
+        val e = Webhooks.parse(inventory)
+        assertIs<com.isaackogan.tiktok.shop.generated.models.InventoryChangedByShopWebhook>(e.payload)
+    }
+
     @Test
     fun verifyAndParseRoundTripsWithBytesAsReceived() {
         val body = "{ \"type\" : 9999 ,\n \"data\": {} }".toByteArray()

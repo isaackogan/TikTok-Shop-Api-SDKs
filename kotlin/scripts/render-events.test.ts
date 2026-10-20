@@ -59,12 +59,12 @@ test('renderEvents writes a sealed subclass per webhook and the required-propert
   const ev = readFileSync(join(dir, 'WebhookEvent.kt'), 'utf8');
   assert.match(ev, /^package com\.isaackogan\.tiktok\.shop$/m);
   assert.match(ev, /sealed class WebhookEvent/);
-  assert.match(ev, /class Foo\(\s*[^)]*val payload: FooWebhook,/);
+  assert.match(ev, /class Foo\(\s*[^)]*override val payload: FooWebhook,/);
   assert.match(ev, /const val TYPE: Int = 7/);
   assert.match(ev, /7 -> WebhookEvent\.Foo\(gson\.fromJson\(raw, FooWebhook::class\.java\), raw\)/);
   const req = readFileSync(join(dir, 'WebhookRequired.kt'), 'utf8');
-  assert.match(req, /"FooWebhook" to listOf\("type" to "type", "data" to "data"\)/);
-  assert.match(req, /"FooWebhookData" to listOf\(\)/);
+  assert.match(req, /"FooWebhook" to Model\(listOf\("type", "data"\), mapOf\("data" to Child\("FooWebhookData", Kind\.OBJECT\)\)\)/);
+  assert.match(req, /"FooWebhookData" to Model\(listOf\(\), mapOf\("items" to Child\("FooWebhookData", Kind\.LIST\)\)\)/);
 });
 
 test('a webhook schema without a model is an error', () => {

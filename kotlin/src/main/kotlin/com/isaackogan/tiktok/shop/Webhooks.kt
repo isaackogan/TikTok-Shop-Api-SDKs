@@ -7,7 +7,6 @@ import com.google.gson.JsonParser
 import com.google.gson.JsonPrimitive
 import com.isaackogan.tiktok.shop.generated.Meta
 import com.isaackogan.tiktok.shop.generated.WebhookRequired
-import java.lang.reflect.Modifier
 import java.security.MessageDigest
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -65,8 +64,7 @@ object Webhooks {
                 throw IllegalArgumentException("webhook of type $type does not match its model: ${e.message}", e)
             }
         if (event == null) return WebhookEvent.Unknown(type, obj)
-        val payload = event.javaClass.getMethod("getPayload").invoke(event)
-        val missing = firstMissing(payload, "")
+        val missing = firstMissing(SCHEMAS.getValue(type), obj, "")
         require(missing == null) { "webhook of type $type does not match its model: required property \"$missing\" is missing" }
         return event
     }
@@ -92,26 +90,29 @@ object Webhooks {
         return digits.toIntOrNull() ?: throw IllegalArgumentException("webhook \"type\" is out of range: $digits")
     }
 
+    private val SCHEMAS: Map<Int, String> = Meta.WEBHOOKS.associate { it.type to it.schema }
+
     /**
-     * gson builds a model without running its constructor, so a required (non-null) property the body lacks stays null and would
-     * surface later as a NullPointerException in the caller's code. This finds the first such property, as a JSON path, or null.
+     * gson builds a model without running its constructor, so a required (non-null) property the body lacks stays null, or 0 or
+     * false for a primitive, and would surface later in the caller's code as a wrong value. Presence is therefore checked on the
+     * parsed JSON, where a missing key and a JSON null both count as missing. Returns the first missing property as a JSON path,
+     * or null.
      */
-    private fun firstMissing(value: Any?, path: String): String? {
-        when (value) {
-            null -> return null
-            is Iterable<*> -> return value.firstNotNullOfOrNull { firstMissing(it, path) }
-            is Map<*, *> -> return value.values.firstNotNullOfOrNull { firstMissing(it, path) }
+    private fun firstMissing(model: String, json: JsonObject, path: String): String? {
+        val m = WebhookRequired.MODELS[model] ?: return null
+        for (name in m.required) {
+            val v = json[name]
+            if (v == null || v.isJsonNull) return path + name
         }
-        val required = WebhookRequired.MODELS[value!!.javaClass.simpleName] ?: return null
-        val fields = value.javaClass.declaredFields.filter { !Modifier.isStatic(it.modifiers) }.onEach { it.isAccessible = true }
-        for ((kotlin, json) in required) {
-            val f = fields.firstOrNull { it.name == kotlin } ?: continue
-            if (f.get(value) == null) return path + json
+        for ((name, child) in m.children) {
+            val v = json[name] ?: continue
+            val found = when (child.kind) {
+                WebhookRequired.Kind.OBJECT -> (v as? JsonObject)?.let { firstMissing(child.model, it, "$path$name.") }
+                WebhookRequired.Kind.LIST -> (v as? JsonArray)?.firstNotNullOfOrNull { (it as? JsonObject)?.let { o -> firstMissing(child.model, o, "$path$name.") } }
+                WebhookRequired.Kind.MAP -> (v as? JsonObject)?.entrySet()?.firstNotNullOfOrNull { (_, e) -> (e as? JsonObject)?.let { o -> firstMissing(child.model, o, "$path$name.") } }
+            }
+            if (found != null) return found
         }
-        for (f in fields) firstMissing(f.get(value), path + jsonName(f) + ".")?.let { return it }
         return null
     }
-
-    private fun jsonName(f: java.lang.reflect.Field): String =
-        f.getAnnotation(com.google.gson.annotations.SerializedName::class.java)?.value ?: f.name
 }

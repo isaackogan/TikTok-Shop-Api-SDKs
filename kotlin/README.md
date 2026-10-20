@@ -139,7 +139,6 @@ The client's properties are the API groups: `affiliateCreator`, `affiliatePartne
 
 - Generated from [the spec](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml) in the [TikTok-Shop-Api-SDKs](https://github.com/isaackogan/TikTok-Shop-Api-SDKs) repository, which also has SDKs for TypeScript, Python, Go, Java, PHP, Rust and C#.
 - Three operations are GETs with a body (`getConversationList`, `mapTokopediaToTikTokShopProductIDs`, `getShippingTemplateAvailability`). OkHttp cannot send those, so they go through the JDK's HTTP client; see `TikTokShopOptions.httpClient` for which of your client's settings apply.
-- Request signing follows TikTok's documentation and has not been verified against the live API.
 
 ## License
 

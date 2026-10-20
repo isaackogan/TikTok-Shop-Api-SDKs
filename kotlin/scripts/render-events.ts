@@ -68,7 +68,7 @@ export function renderEvents(metaPath: string, generatedDir: string): void {
     classes.push(`    /** A webhook of type ${w.type}${w.eventType ? ` (${w.eventType})` : ''}. */
     class ${cls}(
         /** The parsed body. */
-        val payload: ${w.schema},
+        override val payload: ${w.schema},
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.${cls}(payload=$payload)"
@@ -90,7 +90,7 @@ import com.isaackogan.tiktok.shop.generated.infrastructure.Serializer
 ${hooks.map((w) => `import com.isaackogan.tiktok.shop.generated.models.${w.schema}`).sort().join('\n')}
 
 /**
- * A parsed webhook. Narrow it with \`when\`, which needs no \`else\` branch:
+ * A parsed webhook. Narrow it with \`when\`; add an \`else\` branch unless you list every subclass:
  *
  * \`\`\`
  * when (event) {
@@ -109,9 +109,15 @@ sealed class WebhookEvent(
     /** The body as received, parsed. */
     val raw: JsonObject,
 ) {
+    /** The parsed body, as the generated model of this webhook's type. Subclasses narrow it. */
+    abstract val payload: Any
+
 ${classes.join('\n')}
     /** A webhook whose \`type\` this SDK does not know. [raw] holds the whole body. */
     class Unknown(type: Int, raw: JsonObject) : WebhookEvent(type, raw) {
+        /** The same as [raw]: there is no model for this type. */
+        override val payload: Any get() = raw
+
         override fun toString(): String = "WebhookEvent.Unknown(type=$type)"
     }
 }
@@ -137,11 +143,20 @@ ${cases.join('\n')}
     for (const p of props) for (const id of p.type.match(/\w+/g) ?? []) visit(id);
   };
   for (const w of hooks) visit(w.schema);
+  const known = new Set(reach.keys());
   const rows = [...reach.entries()]
     .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
     .map(([name, props]) => {
-      const req = props.filter((p) => p.required).map((p) => `${q(p.kotlin)} to ${q(p.json)}`);
-      return `        ${q(name)} to listOf(${req.join(', ')})`;
+      const req = props.filter((p) => p.required).map((p) => q(p.json));
+      const kids: string[] = [];
+      for (const p of props) {
+        // `Foo.Type` is an enum nested in the model itself, not another model.
+        const child = (p.type.split(`${name}.`).join('').match(/\w+/g) ?? []).find((id) => known.has(id));
+        if (!child) continue;
+        const kind = /\bMap</.test(p.type) ? 'MAP' : /\b(List|Set|Collection)</.test(p.type) ? 'LIST' : 'OBJECT';
+        kids.push(`${q(p.json)} to Child(${q(child)}, Kind.${kind})`);
+      }
+      return `        ${q(name)} to Model(listOf(${req.join(', ')}), mapOf(${kids.join(', ')}))`;
     });
   mkdirSync(generatedDir, { recursive: true });
   writeFileSync(
@@ -149,11 +164,18 @@ ${cases.join('\n')}
     `${HEADER}package com.isaackogan.tiktok.shop.generated
 
 /**
- * Every model a webhook can contain, by simple class name, with its required non-null properties as (Kotlin name to JSON name).
- * gson leaves a missing one as null.
+ * Every model a webhook can contain, by simple class name: the JSON names of its required (non-null) properties, and which of its
+ * properties hold other such models. gson builds models without running constructors, so a missing required property stays null
+ * (or 0 / false for a primitive); presence is therefore checked on the parsed JSON.
  */
 internal object WebhookRequired {
-    val MODELS: Map<String, List<Pair<String, String>>> = mapOf(
+    enum class Kind { OBJECT, LIST, MAP }
+
+    class Child(val model: String, val kind: Kind)
+
+    class Model(val required: List<String>, val children: Map<String, Child>)
+
+    val MODELS: Map<String, Model> = mapOf(
 ${rows.join(',\n')},
     )
 }

@@ -50,7 +50,7 @@ import com.isaackogan.tiktok.shop.generated.models.UpcomingAuthorizationExpirati
 import com.isaackogan.tiktok.shop.generated.models.VideoPrecheckResultWebhook
 
 /**
- * A parsed webhook. Narrow it with `when`, which needs no `else` branch:
+ * A parsed webhook. Narrow it with `when`; add an `else` branch unless you list every subclass:
  *
  * ```
  * when (event) {
@@ -69,10 +69,13 @@ sealed class WebhookEvent(
     /** The body as received, parsed. */
     val raw: JsonObject,
 ) {
+    /** The parsed body, as the generated model of this webhook's type. Subclasses narrow it. */
+    abstract val payload: Any
+
     /** A webhook of type 63. */
     class ActivityChange(
         /** The parsed body. */
-        val payload: ActivityChangeWebhook,
+        override val payload: ActivityChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ActivityChange(payload=$payload)"
@@ -86,7 +89,7 @@ sealed class WebhookEvent(
     /** A webhook of type 39. */
     class ActivityStatusChange(
         /** The parsed body. */
-        val payload: ActivityStatusChangeWebhook,
+        override val payload: ActivityStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ActivityStatusChange(payload=$payload)"
@@ -100,7 +103,7 @@ sealed class WebhookEvent(
     /** A webhook of type 64. */
     class AftersalesRequestStatusUpdate(
         /** The parsed body. */
-        val payload: AftersalesRequestStatusUpdateWebhook,
+        override val payload: AftersalesRequestStatusUpdateWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.AftersalesRequestStatusUpdate(payload=$payload)"
@@ -114,7 +117,7 @@ sealed class WebhookEvent(
     /** A webhook of type 66. */
     class AppealCompleted(
         /** The parsed body. */
-        val payload: AppealCompletedWebhook,
+        override val payload: AppealCompletedWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.AppealCompleted(payload=$payload)"
@@ -128,7 +131,7 @@ sealed class WebhookEvent(
     /** A webhook of type 11 (CANCELLATION_STATUS_CHANGE). */
     class CancellationStatusChange(
         /** The parsed body. */
-        val payload: CancellationStatusChangeWebhook,
+        override val payload: CancellationStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.CancellationStatusChange(payload=$payload)"
@@ -142,7 +145,7 @@ sealed class WebhookEvent(
     /** A webhook of type 42. */
     class CombinedListingChange(
         /** The parsed body. */
-        val payload: CombinedListingChangeWebhook,
+        override val payload: CombinedListingChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.CombinedListingChange(payload=$payload)"
@@ -156,7 +159,7 @@ sealed class WebhookEvent(
     /** A webhook of type 20. */
     class CreatorDeauthorization(
         /** The parsed body. */
-        val payload: CreatorDeauthorizationWebhook,
+        override val payload: CreatorDeauthorizationWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.CreatorDeauthorization(payload=$payload)"
@@ -170,7 +173,7 @@ sealed class WebhookEvent(
     /** A webhook of type 24. */
     class FBTInventoryUpdate(
         /** The parsed body. */
-        val payload: FBTInventoryUpdateWebhook,
+        override val payload: FBTInventoryUpdateWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.FBTInventoryUpdate(payload=$payload)"
@@ -184,7 +187,7 @@ sealed class WebhookEvent(
     /** A webhook of type 22. */
     class FBTMerchantOnboarding(
         /** The parsed body. */
-        val payload: FBTMerchantOnboardingWebhook,
+        override val payload: FBTMerchantOnboardingWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.FBTMerchantOnboarding(payload=$payload)"
@@ -198,7 +201,7 @@ sealed class WebhookEvent(
     /** A webhook of type 58. */
     class GetFBTMCFOrderStatus(
         /** The parsed body. */
-        val payload: GetFBTMCFOrderStatusWebhook,
+        override val payload: GetFBTMCFOrderStatusWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.GetFBTMCFOrderStatus(payload=$payload)"
@@ -212,7 +215,7 @@ sealed class WebhookEvent(
     /** A webhook of type 52. */
     class GlobalListingMethodChange(
         /** The parsed body. */
-        val payload: GlobalListingMethodChangeWebhook,
+        override val payload: GlobalListingMethodChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.GlobalListingMethodChange(payload=$payload)"
@@ -226,7 +229,7 @@ sealed class WebhookEvent(
     /** A webhook of type 51. */
     class GlobalReplicationStatusChange(
         /** The parsed body. */
-        val payload: GlobalReplicationStatusChangeWebhook,
+        override val payload: GlobalReplicationStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.GlobalReplicationStatusChange(payload=$payload)"
@@ -240,7 +243,7 @@ sealed class WebhookEvent(
     /** A webhook of type 23. */
     class GoodsMatch(
         /** The parsed body. */
-        val payload: GoodsMatchWebhook,
+        override val payload: GoodsMatchWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.GoodsMatch(payload=$payload)"
@@ -254,7 +257,7 @@ sealed class WebhookEvent(
     /** A webhook of type 46. */
     class ImageTranslationCompleted(
         /** The parsed body. */
-        val payload: ImageTranslationCompletedWebhook,
+        override val payload: ImageTranslationCompletedWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ImageTranslationCompleted(payload=$payload)"
@@ -268,7 +271,7 @@ sealed class WebhookEvent(
     /** A webhook of type 21. */
     class InboundFBTOrderStatusChange(
         /** The parsed body. */
-        val payload: InboundFBTOrderStatusChangeWebhook,
+        override val payload: InboundFBTOrderStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.InboundFBTOrderStatusChange(payload=$payload)"
@@ -282,7 +285,7 @@ sealed class WebhookEvent(
     /** A webhook of type 71. */
     class InventoryChangedByShop(
         /** The parsed body. */
-        val payload: InventoryChangedByShopWebhook,
+        override val payload: InventoryChangedByShopWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.InventoryChangedByShop(payload=$payload)"
@@ -296,7 +299,7 @@ sealed class WebhookEvent(
     /** A webhook of type 27. */
     class InventoryStatusChange(
         /** The parsed body. */
-        val payload: InventoryStatusChangeWebhook,
+        override val payload: InventoryStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.InventoryStatusChange(payload=$payload)"
@@ -310,7 +313,7 @@ sealed class WebhookEvent(
     /** A webhook of type 36 (INVOICE_STATUS_CHANGE). */
     class InvoiceStatusChange(
         /** The parsed body. */
-        val payload: InvoiceStatusChangeWebhook,
+        override val payload: InvoiceStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.InvoiceStatusChange(payload=$payload)"
@@ -324,7 +327,7 @@ sealed class WebhookEvent(
     /** A webhook of type 13 (NEW_CONVERSATION). */
     class NewConversation(
         /** The parsed body. */
-        val payload: NewConversationWebhook,
+        override val payload: NewConversationWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.NewConversation(payload=$payload)"
@@ -338,7 +341,7 @@ sealed class WebhookEvent(
     /** A webhook of type 14 (NEW_MESSAGE). */
     class NewMessage(
         /** The parsed body. */
-        val payload: NewMessageWebhook,
+        override val payload: NewMessageWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.NewMessage(payload=$payload)"
@@ -352,7 +355,7 @@ sealed class WebhookEvent(
     /** A webhook of type 33 (NEW_MESSAGE_LISTENER). */
     class NewMessageListener(
         /** The parsed body. */
-        val payload: NewMessageListenerWebhook,
+        override val payload: NewMessageListenerWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.NewMessageListener(payload=$payload)"
@@ -366,7 +369,7 @@ sealed class WebhookEvent(
     /** A webhook of type 25. */
     class OpportunityMatchingStatusChange(
         /** The parsed body. */
-        val payload: OpportunityMatchingStatusChangeWebhook,
+        override val payload: OpportunityMatchingStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.OpportunityMatchingStatusChange(payload=$payload)"
@@ -380,7 +383,7 @@ sealed class WebhookEvent(
     /** A webhook of type 1 (ORDER_STATUS_CHANGE). */
     class OrderStatusChange(
         /** The parsed body. */
-        val payload: OrderStatusChangeWebhook,
+        override val payload: OrderStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.OrderStatusChange(payload=$payload)"
@@ -394,7 +397,7 @@ sealed class WebhookEvent(
     /** A webhook of type 4 (PACKAGE_UPDATE). */
     class PackageUpdate(
         /** The parsed body. */
-        val payload: PackageUpdateWebhook,
+        override val payload: PackageUpdateWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.PackageUpdate(payload=$payload)"
@@ -408,7 +411,7 @@ sealed class WebhookEvent(
     /** A webhook of type 37 (PRODUCT_AUDIT_STATUS_CHANGE). */
     class ProductAuditStatusChange(
         /** The parsed body. */
-        val payload: ProductAuditStatusChangeWebhook,
+        override val payload: ProductAuditStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductAuditStatusChange(payload=$payload)"
@@ -422,7 +425,7 @@ sealed class WebhookEvent(
     /** A webhook of type 18 (PRODUCT_CATEGORY_CHANGE). */
     class ProductCategoryChange(
         /** The parsed body. */
-        val payload: ProductCategoryChangeWebhook,
+        override val payload: ProductCategoryChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductCategoryChange(payload=$payload)"
@@ -436,7 +439,7 @@ sealed class WebhookEvent(
     /** A webhook of type 16 (PRODUCT_CREATION). */
     class ProductCreation(
         /** The parsed body. */
-        val payload: ProductCreationWebhook,
+        override val payload: ProductCreationWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductCreation(payload=$payload)"
@@ -450,7 +453,7 @@ sealed class WebhookEvent(
     /** A webhook of type 15 (PRODUCT_INFORMATION_CHANGE). */
     class ProductInformationChange(
         /** The parsed body. */
-        val payload: ProductInformationChangeWebhook,
+        override val payload: ProductInformationChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductInformationChange(payload=$payload)"
@@ -464,7 +467,7 @@ sealed class WebhookEvent(
     /** A webhook of type 62. */
     class ProductPackageRecommended(
         /** The parsed body. */
-        val payload: ProductPackageRecommendedWebhook,
+        override val payload: ProductPackageRecommendedWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductPackageRecommended(payload=$payload)"
@@ -478,7 +481,7 @@ sealed class WebhookEvent(
     /** A webhook of type 5 (PRODUCT_STATUS_CHANGE). */
     class ProductStatusChange(
         /** The parsed body. */
-        val payload: ProductStatusChangeWebhook,
+        override val payload: ProductStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ProductStatusChange(payload=$payload)"
@@ -492,7 +495,7 @@ sealed class WebhookEvent(
     /** A webhook of type 3 (RECIPIENT_ADDRESS_UPDATE). */
     class RecipientAddressUpdate(
         /** The parsed body. */
-        val payload: RecipientAddressUpdateWebhook,
+        override val payload: RecipientAddressUpdateWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.RecipientAddressUpdate(payload=$payload)"
@@ -506,7 +509,7 @@ sealed class WebhookEvent(
     /** A webhook of type 67. */
     class RefundSuccess(
         /** The parsed body. */
-        val payload: RefundSuccessWebhook,
+        override val payload: RefundSuccessWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.RefundSuccess(payload=$payload)"
@@ -520,7 +523,7 @@ sealed class WebhookEvent(
     /** A webhook of type 12 (RETURN_STATUS_CHANGE). */
     class ReturnStatusChange(
         /** The parsed body. */
-        val payload: ReturnStatusChangeWebhook,
+        override val payload: ReturnStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ReturnStatusChange(payload=$payload)"
@@ -534,7 +537,7 @@ sealed class WebhookEvent(
     /** A webhook of type 65. */
     class RMAStatusUpdate(
         /** The parsed body. */
-        val payload: RMAStatusUpdateWebhook,
+        override val payload: RMAStatusUpdateWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.RMAStatusUpdate(payload=$payload)"
@@ -548,7 +551,7 @@ sealed class WebhookEvent(
     /** A webhook of type 56. */
     class SampleApplicationStatusChange(
         /** The parsed body. */
-        val payload: SampleApplicationStatusChangeWebhook,
+        override val payload: SampleApplicationStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.SampleApplicationStatusChange(payload=$payload)"
@@ -562,7 +565,7 @@ sealed class WebhookEvent(
     /** A webhook of type 6 (SELLER_DEAUTHORIZATION). */
     class SellerDeauthorization(
         /** The parsed body. */
-        val payload: SellerDeauthorizationWebhook,
+        override val payload: SellerDeauthorizationWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.SellerDeauthorization(payload=$payload)"
@@ -576,7 +579,7 @@ sealed class WebhookEvent(
     /** A webhook of type 17. */
     class ShoppableContentPosting(
         /** The parsed body. */
-        val payload: ShoppableContentPostingWebhook,
+        override val payload: ShoppableContentPostingWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ShoppableContentPosting(payload=$payload)"
@@ -590,7 +593,7 @@ sealed class WebhookEvent(
     /** A webhook of type 59. */
     class ShoppableVideoPrecheckTasksResult(
         /** The parsed body. */
-        val payload: ShoppableVideoPrecheckTasksResultWebhook,
+        override val payload: ShoppableVideoPrecheckTasksResultWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.ShoppableVideoPrecheckTasksResult(payload=$payload)"
@@ -604,7 +607,7 @@ sealed class WebhookEvent(
     /** A webhook of type 19. */
     class SizeChartChange(
         /** The parsed body. */
-        val payload: SizeChartChangeWebhook,
+        override val payload: SizeChartChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.SizeChartChange(payload=$payload)"
@@ -618,7 +621,7 @@ sealed class WebhookEvent(
     /** A webhook of type 50. */
     class SKUStatusChange(
         /** The parsed body. */
-        val payload: SKUStatusChangeWebhook,
+        override val payload: SKUStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.SKUStatusChange(payload=$payload)"
@@ -632,7 +635,7 @@ sealed class WebhookEvent(
     /** A webhook of type 38. */
     class StrikethroughPriceExpired(
         /** The parsed body. */
-        val payload: StrikethroughPriceExpiredWebhook,
+        override val payload: StrikethroughPriceExpiredWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.StrikethroughPriceExpired(payload=$payload)"
@@ -646,7 +649,7 @@ sealed class WebhookEvent(
     /** A webhook of type 35. */
     class TokopediaMirrorStatusChange(
         /** The parsed body. */
-        val payload: TokopediaMirrorStatusChangeWebhook,
+        override val payload: TokopediaMirrorStatusChangeWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.TokopediaMirrorStatusChange(payload=$payload)"
@@ -660,7 +663,7 @@ sealed class WebhookEvent(
     /** A webhook of type 7 (UPCOMING_AUTHORIZATION_EXPIRATION). */
     class UpcomingAuthorizationExpiration(
         /** The parsed body. */
-        val payload: UpcomingAuthorizationExpirationWebhook,
+        override val payload: UpcomingAuthorizationExpirationWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.UpcomingAuthorizationExpiration(payload=$payload)"
@@ -674,7 +677,7 @@ sealed class WebhookEvent(
     /** A webhook of type 55. */
     class VideoPrecheckResult(
         /** The parsed body. */
-        val payload: VideoPrecheckResultWebhook,
+        override val payload: VideoPrecheckResultWebhook,
         raw: JsonObject,
     ) : WebhookEvent(TYPE, raw) {
         override fun toString(): String = "WebhookEvent.VideoPrecheckResult(payload=$payload)"
@@ -687,6 +690,9 @@ sealed class WebhookEvent(
 
     /** A webhook whose `type` this SDK does not know. [raw] holds the whole body. */
     class Unknown(type: Int, raw: JsonObject) : WebhookEvent(type, raw) {
+        /** The same as [raw]: there is no model for this type. */
+        override val payload: Any get() = raw
+
         override fun toString(): String = "WebhookEvent.Unknown(type=$type)"
     }
 }

@@ -279,7 +279,6 @@ class AuthTest {
     fun tokenSetAndAuthOptionsNeverPrintSecrets() {
         val t = exchange(data("""$tok,"open_id":"OID","seller_name":"Shop","granted_scopes":["s.read"]"""))
         val s = t.toString()
-        assertFalse(s.contains("AT") && s.contains("RT") && s.contains("\"AT\""))
         assertFalse(Regex("\\bAT\\b|\\bRT\\b").containsMatchIn(s), s)
         assertTrue(s.contains("OID") && s.contains("Shop"), s)
         val o = TikTokShopAuthOptions(appKey = "pubkey", appSecret = "SEKRET-VALUE", serviceId = "123").toString()
