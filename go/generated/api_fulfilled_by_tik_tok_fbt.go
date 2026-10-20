@@ -140,11 +140,7 @@ func (a *FulfilledByTikTokFBTAPIService) CancelFBTMCFOrderExecute(r ApiCancelFBT
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -266,11 +262,7 @@ func (a *FulfilledByTikTokFBTAPIService) CancelInboundOrderExecute(r ApiCancelIn
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -390,11 +382,7 @@ func (a *FulfilledByTikTokFBTAPIService) ConfirmInboundMethodExecute(r ApiConfir
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -516,11 +504,7 @@ func (a *FulfilledByTikTokFBTAPIService) CreateFBTGoodsExecute(r ApiCreateFBTGoo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -640,11 +624,7 @@ func (a *FulfilledByTikTokFBTAPIService) CreateFBTMCFOrderExecute(r ApiCreateFBT
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -763,11 +743,7 @@ func (a *FulfilledByTikTokFBTAPIService) CreateOrUpdateInboundPlanExecute(r ApiC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -897,11 +873,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetFBTInboundOrderDetailsExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1021,11 +993,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetFBTMCFOrderStatusExecute(r ApiGetFBT
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1134,11 +1102,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetFBTMerchantMCFStatusExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1247,11 +1211,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetFBTMerchantOnboardedRegionsExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1360,11 +1320,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetFBTWarehouseListExecute(r ApiGetFBTW
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1484,11 +1440,7 @@ func (a *FulfilledByTikTokFBTAPIService) GetInboundMethodDetailExecute(r ApiGetI
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1608,11 +1560,7 @@ func (a *FulfilledByTikTokFBTAPIService) ListAvailableInboundMethodsExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1743,11 +1691,7 @@ func (a *FulfilledByTikTokFBTAPIService) PrintInboundOrderLabelsExecute(r ApiPri
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1867,11 +1811,7 @@ func (a *FulfilledByTikTokFBTAPIService) QueryGoodsInventoryForMCFExecute(r ApiQ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2015,11 +1955,7 @@ func (a *FulfilledByTikTokFBTAPIService) SearchFBTInventoryExecute(r ApiSearchFB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2163,11 +2099,7 @@ func (a *FulfilledByTikTokFBTAPIService) SearchFBTInventoryRecordExecute(r ApiSe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2287,11 +2219,7 @@ func (a *FulfilledByTikTokFBTAPIService) SearchGoodsHazmatAndExpirationInfoExecu
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2435,11 +2363,7 @@ func (a *FulfilledByTikTokFBTAPIService) SearchGoodsInfoExecute(r ApiSearchGoods
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2559,11 +2483,7 @@ func (a *FulfilledByTikTokFBTAPIService) ShipInboundOrderExecute(r ApiShipInboun
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2680,11 +2600,7 @@ func (a *FulfilledByTikTokFBTAPIService) UpdateFBTGoodsInfoExecute(r ApiUpdateFB
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2804,11 +2720,7 @@ func (a *FulfilledByTikTokFBTAPIService) UpdateGoodsSKURelationsExecute(r ApiUpd
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2928,11 +2840,7 @@ func (a *FulfilledByTikTokFBTAPIService) UpdateInboundOrderTrackingExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil

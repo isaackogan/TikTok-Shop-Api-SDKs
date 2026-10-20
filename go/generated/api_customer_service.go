@@ -138,11 +138,7 @@ func (a *CustomerServiceAPIService) CreateConversationExecute(r ApiCreateConvers
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -267,11 +263,7 @@ func (a *CustomerServiceAPIService) EndSessionExecute(r ApiEndSessionRequest) (*
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -380,11 +372,7 @@ func (a *CustomerServiceAPIService) GetAgentSettingsExecute(r ApiGetAgentSetting
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -517,11 +505,7 @@ func (a *CustomerServiceAPIService) GetConversationExecute(r ApiGetConversationR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -716,11 +700,7 @@ func (a *CustomerServiceAPIService) GetConversationMessagesExecute(r ApiGetConve
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -880,11 +860,7 @@ func (a *CustomerServiceAPIService) GetConversationsExecute(r ApiGetConversation
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1015,11 +991,7 @@ func (a *CustomerServiceAPIService) GetCustomerServicePerformanceExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1140,11 +1112,7 @@ func (a *CustomerServiceAPIService) MarkBuyerMessagesAsReadExecute(r ApiMarkBuye
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1301,11 +1269,7 @@ func (a *CustomerServiceAPIService) SearchSessionsExecute(r ApiSearchSessionsReq
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1429,11 +1393,7 @@ func (a *CustomerServiceAPIService) SendMessageExecute(r ApiSendMessageRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1553,11 +1513,7 @@ func (a *CustomerServiceAPIService) UpdateAgentSettingsExecute(r ApiUpdateAgentS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1691,11 +1647,7 @@ func (a *CustomerServiceAPIService) UploadImageForBuyerMessagesExecute(r ApiUplo
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil

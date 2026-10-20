@@ -149,11 +149,7 @@ func (a *ReturnAndRefundAPIService) ApproveCancellationExecute(r ApiApproveCance
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -287,11 +283,7 @@ func (a *ReturnAndRefundAPIService) ApproveReturnExecute(r ApiApproveReturnReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -411,11 +403,7 @@ func (a *ReturnAndRefundAPIService) CalculateRefundExecute(r ApiCalculateRefundR
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -535,11 +523,7 @@ func (a *ReturnAndRefundAPIService) CancelOrderExecute(r ApiCancelOrderRequest) 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -669,11 +653,7 @@ func (a *ReturnAndRefundAPIService) CreateReturnExecute(r ApiCreateReturnRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -806,11 +786,7 @@ func (a *ReturnAndRefundAPIService) GetAftersaleEligibilityExecute(r ApiGetAfter
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -961,11 +937,7 @@ func (a *ReturnAndRefundAPIService) GetAvailableReviewDecisionsExecute(r ApiGetA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1105,11 +1077,7 @@ func (a *ReturnAndRefundAPIService) GetDecisionEligibilityExecute(r ApiGetDecisi
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1239,11 +1207,7 @@ func (a *ReturnAndRefundAPIService) GetRejectReasonsExecute(r ApiGetRejectReason
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1366,11 +1330,7 @@ func (a *ReturnAndRefundAPIService) GetReturnRecordsExecute(r ApiGetReturnRecord
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1504,11 +1464,7 @@ func (a *ReturnAndRefundAPIService) RejectCancellationExecute(r ApiRejectCancell
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1642,11 +1598,7 @@ func (a *ReturnAndRefundAPIService) RejectReturnExecute(r ApiRejectReturnRequest
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1763,11 +1715,7 @@ func (a *ReturnAndRefundAPIService) ReviewAftersalesRequestsExecute(r ApiReviewA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1894,11 +1842,7 @@ func (a *ReturnAndRefundAPIService) SearchAftersalesRequestsExecute(r ApiSearchA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2055,11 +1999,7 @@ func (a *ReturnAndRefundAPIService) SearchCancellationsExecute(r ApiSearchCancel
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2186,11 +2126,7 @@ func (a *ReturnAndRefundAPIService) SearchReturnMerchandiseAuthorizationsExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2347,11 +2283,7 @@ func (a *ReturnAndRefundAPIService) SearchReturnsExecute(r ApiSearchReturnsReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2547,11 +2479,7 @@ func (a *ReturnAndRefundAPIService) UploadReturnShippingInformationExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil

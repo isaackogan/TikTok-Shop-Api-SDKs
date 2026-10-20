@@ -138,11 +138,7 @@ func (a *AffiliateSellerAPIService) CheckCreatorOutreachEligibilityExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -262,11 +258,7 @@ func (a *AffiliateSellerAPIService) CheckTargetCollaborationConflictsExecute(r A
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -383,11 +375,7 @@ func (a *AffiliateSellerAPIService) CreateCompassOfflineExportTaskExecute(r ApiC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -507,11 +495,7 @@ func (a *AffiliateSellerAPIService) CreateOpenCollaborationExecute(r ApiCreateOp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -632,11 +616,7 @@ func (a *AffiliateSellerAPIService) CreateTargetCollaborationExecute(r ApiCreate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -749,11 +729,7 @@ func (a *AffiliateSellerAPIService) DownloadCompassTaskFileExecute(r ApiDownload
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -873,11 +849,7 @@ func (a *AffiliateSellerAPIService) EditOpenCollaborationSampleRuleExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -994,11 +966,7 @@ func (a *AffiliateSellerAPIService) EditOpenCollaborationSettingsExecute(r ApiEd
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1121,11 +1089,7 @@ func (a *AffiliateSellerAPIService) GenerateAffiliateProductPromotionLinkExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1246,11 +1210,7 @@ func (a *AffiliateSellerAPIService) GenerateTargetCollaborationLinkExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1370,11 +1330,7 @@ func (a *AffiliateSellerAPIService) GetCompassTaskListExecute(r ApiGetCompassTas
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1532,11 +1488,7 @@ func (a *AffiliateSellerAPIService) GetConversationListExecute(r ApiGetConversat
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1670,11 +1622,7 @@ func (a *AffiliateSellerAPIService) GetCreatorConversationMessagesExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1791,11 +1739,7 @@ func (a *AffiliateSellerAPIService) GetCreatorMarketplaceAdvancedSearchFiltersEx
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -1904,11 +1848,7 @@ func (a *AffiliateSellerAPIService) GetInboxCategoryCountsExecute(r ApiGetInboxC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2018,11 +1958,7 @@ func (a *AffiliateSellerAPIService) GetLatestUnreadMessagesExecute(r ApiGetLates
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2145,11 +2081,7 @@ func (a *AffiliateSellerAPIService) GetMarketplaceCreatorPerformanceExecute(r Ap
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2296,11 +2228,7 @@ func (a *AffiliateSellerAPIService) GetOpenCollaborationCreatorContentDetailsExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2420,11 +2348,7 @@ func (a *AffiliateSellerAPIService) GetOpenCollaborationSampleRulesExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2533,11 +2457,7 @@ func (a *AffiliateSellerAPIService) GetOpenCollaborationSettingsExecute(r ApiGet
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2657,11 +2577,7 @@ func (a *AffiliateSellerAPIService) GetOrCreateCreatorConversationExecute(r ApiG
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2770,11 +2686,7 @@ func (a *AffiliateSellerAPIService) GetWeeklyCreatorOutreachQuotaExecute(r ApiGe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -2894,11 +2806,7 @@ func (a *AffiliateSellerAPIService) GetWeeklyCreatorOutreachRecordsExecute(r Api
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3018,11 +2926,7 @@ func (a *AffiliateSellerAPIService) MarkConversationsAsReadExecute(r ApiMarkConv
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3142,11 +3046,7 @@ func (a *AffiliateSellerAPIService) QueryCreatorPromotionDetailsInTargetCollabor
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3259,11 +3159,7 @@ func (a *AffiliateSellerAPIService) QueryTargetCollaborationDetailExecute(r ApiQ
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3387,11 +3283,7 @@ func (a *AffiliateSellerAPIService) RemoveCreatorFromOpenCollaborationProductExe
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3512,11 +3404,7 @@ func (a *AffiliateSellerAPIService) RemoveOpenCollaborationExecute(r ApiRemoveOp
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3637,11 +3525,7 @@ func (a *AffiliateSellerAPIService) RemoveTargetCollaborationExecute(r ApiRemove
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3761,11 +3645,7 @@ func (a *AffiliateSellerAPIService) ResolveTargetCollaborationConflictsExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -3889,11 +3769,7 @@ func (a *AffiliateSellerAPIService) ReviewASampleApplicationExecute(r ApiReviewA
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4031,11 +3907,7 @@ func (a *AffiliateSellerAPIService) SearchCreatorsInCreatorMarketplaceExecute(r 
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4199,11 +4071,7 @@ func (a *AffiliateSellerAPIService) SearchOpenCollaborationsExecute(r ApiSearchO
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4324,11 +4192,7 @@ func (a *AffiliateSellerAPIService) SearchSampleApplicationFulfillmentsExecute(r
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4465,11 +4329,7 @@ func (a *AffiliateSellerAPIService) SearchSampleApplicationsExecute(r ApiSearchS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4613,11 +4473,7 @@ func (a *AffiliateSellerAPIService) SearchSellerAffiliateOrdersExecute(r ApiSear
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4757,11 +4613,7 @@ func (a *AffiliateSellerAPIService) SearchTargetCollaborationsExecute(r ApiSearc
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -4923,11 +4775,7 @@ func (a *AffiliateSellerAPIService) SellerGetSampleRequestDeeplinkExecute(r ApiS
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5091,11 +4939,7 @@ func (a *AffiliateSellerAPIService) SellerSearchOpenCollaborationProductsExecute
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5219,11 +5063,7 @@ func (a *AffiliateSellerAPIService) SendIMMessageExecute(r ApiSendIMMessageReque
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5347,11 +5187,7 @@ func (a *AffiliateSellerAPIService) UpdateConversationStatusExecute(r ApiUpdateC
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5475,11 +5311,7 @@ func (a *AffiliateSellerAPIService) UpdateTargetCollaborationExecute(r ApiUpdate
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5613,11 +5445,7 @@ func (a *AffiliateSellerAPIService) UploadMessageImageExecute(r ApiUploadMessage
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
@@ -5751,11 +5579,7 @@ func (a *AffiliateSellerAPIService) UploadMessageImageV2Execute(r ApiUploadMessa
 
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, DecodeError(localVarHTTPResponse, localVarBody, err)
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil

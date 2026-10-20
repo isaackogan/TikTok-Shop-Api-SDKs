@@ -5,9 +5,11 @@ import "fmt"
 // Error is returned (wrapped in a *url.Error by net/http) for every failed call. See the package
 // documentation for the failure classes.
 type Error struct {
-	// Code is TikTok's non-zero error code when the reply has one. For a non-2xx reply without one it is the
-	// HTTP status (HTTPStatus is then always set). It is -1 only for a 2xx reply that cannot be understood
-	// (not a JSON object, or code 0 without data on a token call), and 0 for network errors.
+	// Code is TikTok's non-zero error code when the reply has one, even on HTTP 200. For a non-2xx reply without
+	// one it is the HTTP status (HTTPStatus is then always set). It is -1 for a 2xx reply that cannot be understood
+	// (not a JSON object, a code that is not an integer, code 0 without data on a token call, or a body that does
+	// not decode into its model; HTTPStatus is set), and -1 for a transport failure with no HTTP response at all
+	// (connection refused, DNS, TLS, timeout; HTTPStatus is 0).
 	Code int
 	// Message is TikTok's message, or a description of what went wrong.
 	Message string

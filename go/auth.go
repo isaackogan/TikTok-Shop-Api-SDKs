@@ -181,19 +181,22 @@ func (a *Auth) token(ctx context.Context, endpoint string, extra [][2]string) (*
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, a.opts.BaseURL+"/api/v2/token/"+endpoint+"?"+strings.Join(parts, "&"), nil)
 	if err != nil {
 		err = withoutURL(err)
-		return nil, &Error{Message: "invalid token request: " + err.Error(), Cause: err}
+		return nil, &Error{Code: -1, Message: "invalid token request: " + err.Error(), Cause: err}
 	}
+	req.Header.Set("User-Agent", userAgent)
 	res, err := a.client.Do(req)
 	var body []byte
+	status := 0
 	if err == nil {
+		status = res.StatusCode
 		body, err = io.ReadAll(res.Body)
 		res.Body.Close()
 	}
 	if err != nil {
-		// net/http's *url.Error carries the full URL, whose query holds the app secret and the code or
-		// refresh token, so neither the message nor the cause may include it.
+		// R13c: -1, with no HTTPStatus when no response arrived. net/http's *url.Error carries the full URL, whose
+		// query holds the app secret and the code or refresh token, so neither the message nor the cause may include it.
 		err = withoutURL(err)
-		return nil, &Error{Message: "token request to /api/v2/token/" + endpoint + " failed: " + err.Error(), Cause: err}
+		return nil, &Error{Code: -1, Message: "token request to /api/v2/token/" + endpoint + " failed: " + err.Error(), HTTPStatus: status, Cause: err}
 	}
 	return toTokenSet(res.StatusCode, body)
 }
@@ -225,8 +228,9 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 	var requestID, message string
 	_ = json.Unmarshal(env["request_id"], &requestID)
 	_ = json.Unmarshal(env["message"], &message)
-	var code int
-	if err := json.Unmarshal(env["code"], &code); err != nil {
+	// Lesson 34: a code that is missing or not an integer makes a 2xx unreadable (-1); on a non-2xx the status is the code.
+	code, isInt := intCode(env["code"])
+	if !isInt {
 		code = -1
 		if !ok {
 			code = status
@@ -278,6 +282,9 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 	// Creator and partner tokens may lack the seller fields, so only the token fields are required.
 	if d.AccessToken == nil || d.AccessTokenExpireIn == nil || d.RefreshToken == nil || d.RefreshTokenExpireIn == nil {
 		return fail("token response is missing token fields", nil)
+	}
+	if *d.AccessToken == "" || *d.RefreshToken == "" {
+		return fail("token response has an empty access_token or refresh_token", nil)
 	}
 	return &TokenSet{
 		AccessToken:          *d.AccessToken,

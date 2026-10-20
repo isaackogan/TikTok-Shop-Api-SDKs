@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"io"
 	"reflect"
+	"sort"
 	"strings"
 
 	"github.com/isaackogan/TikTok-Shop-Api-SDKs/go/generated"
@@ -78,8 +79,8 @@ func (webhooks) Verify(o WebhookVerifyOptions) bool {
 }
 
 // Parse decodes a body into the generated model for its integer `type`. An unknown type returns an
-// [UnknownWebhookEvent]. A body that is not a JSON object, has no integer `type`, or does not fit its
-// model is an error. 64-bit IDs keep every digit even when TikTok sends them as JSON numbers; fields a
+// [UnknownWebhookEvent]. Parsing is strict: a body that is not a JSON object, has no integer `type`, or does not
+// fit its model is an error, and so is a known type with a required field missing or null at any depth. 64-bit IDs keep every digit even when TikTok sends them as JSON numbers; fields a
 // model does not know are kept in its AdditionalProperties.
 func (webhooks) Parse(rawBody []byte) (WebhookEvent, error) {
 	dec := json.NewDecoder(bytes.NewReader(rawBody))
@@ -110,6 +111,10 @@ func (webhooks) Parse(rawBody []byte) (WebhookEvent, error) {
 	if model == nil {
 		return UnknownWebhookEvent{Type: t, Raw: body}, nil
 	}
+	// R28: the generated models decode a JSON null in a required field to its zero value, so check first.
+	if missing := firstMissing(webhookSchemas[int(t)], body, ""); missing != "" {
+		return nil, fmt.Errorf("tiktokshop: webhook type %d does not match %T: required field %q is missing or null", t, model, missing)
+	}
 	fixed, err := json.Marshal(fit(body, reflect.TypeOf(model).Elem()))
 	if err == nil {
 		err = json.Unmarshal(fixed, model)
@@ -118,6 +123,69 @@ func (webhooks) Parse(rawBody []byte) (WebhookEvent, error) {
 		return nil, fmt.Errorf("tiktokshop: webhook type %d does not match %T: %w", t, model, err)
 	}
 	return model, nil
+}
+
+// webhookSchemas maps a webhook type to its schema name.
+var webhookSchemas = func() map[int]string {
+	m := make(map[int]string, len(generated.Webhooks))
+	for _, w := range generated.Webhooks {
+		m[w.Type] = w.Schema
+	}
+	return m
+}()
+
+// firstMissing returns the first required property (a dotted path) that is missing or null in a model's JSON,
+// checking the models it holds directly, in lists and in maps. Values of an unexpected shape are left to the decoder.
+func firstMissing(schema string, obj map[string]any, path string) string {
+	m, ok := generated.WebhookRequiredFields[schema]
+	if !ok {
+		return ""
+	}
+	for _, name := range m.Required {
+		if v, found := obj[name]; !found || v == nil {
+			return path + name
+		}
+	}
+	names := make([]string, 0, len(m.Children))
+	for name := range m.Children {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	for _, name := range names {
+		child := m.Children[name]
+		switch v := obj[name].(type) {
+		case map[string]any:
+			if child.Kind == "object" {
+				if found := firstMissing(child.Model, v, path+name+"."); found != "" {
+					return found
+				}
+			} else if child.Kind == "map" {
+				keys := make([]string, 0, len(v))
+				for k := range v {
+					keys = append(keys, k)
+				}
+				sort.Strings(keys)
+				for _, k := range keys {
+					if item, ok := v[k].(map[string]any); ok {
+						if found := firstMissing(child.Model, item, path+name+"."+k+"."); found != "" {
+							return found
+						}
+					}
+				}
+			}
+		case []any:
+			if child.Kind == "list" {
+				for i, it := range v {
+					if item, ok := it.(map[string]any); ok {
+						if found := firstMissing(child.Model, item, fmt.Sprintf("%s%s[%d].", path, name, i)); found != "" {
+							return found
+						}
+					}
+				}
+			}
+		}
+	}
+	return ""
 }
 
 // VerifyAndParse verifies, then parses. It returns [ErrWebhookSignature] on a mismatch.

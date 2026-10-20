@@ -11,6 +11,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/isaackogan/TikTok-Shop-Api-SDKs/go/generated"
 )
 
 type credentials struct {
@@ -68,12 +70,21 @@ func (t *signingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 		b, err := io.ReadAll(req.Body)
 		_ = req.Body.Close()
 		if err != nil {
-			return nil, &Error{Message: "reading the request body: " + err.Error(), Cause: err}
+			return nil, &Error{Code: -1, Message: "reading the request body: " + err.Error(), Cause: err}
 		}
 		body = b
 	}
+	// An omitted optional body reaches here as a JSON null (the generated code encodes a typed nil pointer). It is
+	// no body at all: send none, with no Content-Type, and sign it as empty (as the other SDKs do).
+	contentType := req.Header.Get("Content-Type")
+	if bytes.Equal(bytes.TrimSpace(body), []byte("null")) {
+		body, contentType = nil, ""
+	}
 
 	out := req.Clone(req.Context())
+	if contentType == "" {
+		out.Header.Del("Content-Type")
+	}
 	c := t.creds
 	var query []QueryParam
 	for _, p := range decodeQuery(req.URL.RawQuery) {
@@ -91,7 +102,7 @@ func (t *signingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	sign := Signer{}.Sign(SignRequest{
 		Path:        req.URL.EscapedPath(),
 		Query:       query,
-		ContentType: req.Header.Get("Content-Type"),
+		ContentType: contentType,
 		Body:        body,
 		AppSecret:   c.appSecret,
 	})
@@ -122,12 +133,13 @@ func (t *signingTransport) RoundTrip(req *http.Request) (*http.Response, error) 
 	}
 	resp, err := inner.RoundTrip(out)
 	if err != nil {
-		return nil, &Error{Message: "request failed: " + err.Error(), Cause: err}
+		// R13c: no HTTP response at all (connect, DNS, TLS, timeout): -1 with no HTTPStatus.
+		return nil, &Error{Code: -1, Message: "request failed: " + err.Error(), Cause: err}
 	}
 	data, err := io.ReadAll(resp.Body)
 	_ = resp.Body.Close()
 	if err != nil {
-		return nil, &Error{Message: "reading the response: " + err.Error(), HTTPStatus: resp.StatusCode, Cause: err}
+		return nil, &Error{Code: -1, Message: "reading the response: " + err.Error(), HTTPStatus: resp.StatusCode, Cause: err}
 	}
 	if err := checkResponse(resp.StatusCode, resp.Status, data); err != nil {
 		return nil, err
@@ -147,13 +159,9 @@ func checkResponse(status int, statusText string, data []byte) error {
 	var code *int
 	var message *string
 	requestID := ""
-	if raw, found := env["code"]; found {
-		var n json.Number
-		if json.Unmarshal(raw, &n) == nil {
-			if v, err := strconv.Atoi(n.String()); err == nil {
-				code = &v
-			}
-		}
+	rawCode, hasCode := env["code"]
+	if v, ok := intCode(rawCode); hasCode && ok {
+		code = &v
 	}
 	if raw, found := env["message"]; found {
 		var s string
@@ -180,6 +188,9 @@ func checkResponse(status int, statusText string, data []byte) error {
 		}
 		return e
 	}
+	if hasCode && code == nil { // lesson 34: a code that is present but not an integer makes the reply unreadable
+		return &Error{Code: -1, Message: fmt.Sprintf("Response has a non-integer code (HTTP %d)", status), RequestID: requestID, HTTPStatus: status}
+	}
 	if code != nil && *code != 0 {
 		m := ""
 		if message != nil {
@@ -189,3 +200,29 @@ func checkResponse(status int, statusText string, data []byte) error {
 	}
 	return nil
 }
+
+// intCode reads a JSON integer: digits with an optional minus sign, nothing else (no string, float, exponent or null).
+func intCode(raw json.RawMessage) (int, bool) {
+	s := string(bytes.TrimSpace(raw))
+	digits := strings.TrimPrefix(s, "-")
+	if digits == "" || strings.Trim(digits, "0123456789") != "" {
+		return 0, false
+	}
+	v, err := strconv.Atoi(s)
+	return v, err == nil
+}
+
+// decodeError is generated.DecodeError: a 2xx body that does not decode into its model (R13d).
+func decodeError(resp *http.Response, body []byte, err error) error {
+	e := &Error{Code: -1, Message: "response does not match its model: " + err.Error(), Cause: err}
+	if resp != nil {
+		e.HTTPStatus = resp.StatusCode
+	}
+	var env map[string]json.RawMessage
+	if json.Unmarshal(body, &env) == nil {
+		_ = json.Unmarshal(env["request_id"], &e.RequestID)
+	}
+	return e
+}
+
+func init() { generated.DecodeError = decodeError }

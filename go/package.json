@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "tsx scripts/generate.ts",
     "build": "go build ./...",
-    "test": "go vet ./... && go test ./..."
+    "test": "tsx --test scripts/fix-decode.test.ts && go vet ./... && go test ./..."
   },
   "devDependencies": {
     "tsx": "4.20.6"

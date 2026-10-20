@@ -14,6 +14,9 @@ const (
 	DefaultBaseURL = "https://open-api.tiktokglobalshop.com"
 	// DefaultTimeout bounds one request, response body included.
 	DefaultTimeout = 30 * time.Second
+
+	// userAgent is sent on every API and token call. scripts/bump-version.ts keeps it in step with the release tag.
+	userAgent = "tiktok-shop-api-go/0.1.0"
 )
 
 // Options configure [New].
@@ -115,7 +118,7 @@ func New(o Options) *TikTokShop {
 	}
 	cfg := generated.NewConfiguration()
 	cfg.Servers = generated.ServerConfigurations{{URL: o.BaseURL}}
-	cfg.UserAgent = "tiktok-shop-api-go/0.1.0"
+	cfg.UserAgent = userAgent
 	// No http.Client.Timeout: net/http would replace our *Error with its own string error. The
 	// transport applies the timeout itself.
 	cfg.HTTPClient = newHTTPClient(t)

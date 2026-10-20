@@ -186,7 +186,7 @@ func TestEventTypesAndDispatchCoverMeta(t *testing.T) {
 		}
 		var _ WebhookEvent = m
 		// Every model is reachable through Parse: the only acceptable failure is a missing required field.
-		if _, err := Webhooks.Parse([]byte(`{"type":` + itoa(w.Type) + `}`)); err != nil && !strings.Contains(err.Error(), "no value given for required property") {
+		if _, err := Webhooks.Parse([]byte(`{"type":` + itoa(w.Type) + `}`)); err != nil && !strings.Contains(err.Error(), "is missing or null") {
 			t.Errorf("%s: %v", w.Schema, err)
 		}
 	}

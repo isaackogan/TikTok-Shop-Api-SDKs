@@ -1,7 +1,8 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdirSync, readdirSync, rmSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { renderMeta } from './render-meta.ts';
+import { fixDecodeErrors, DECODE_ERROR_GO } from './fix-decode.ts';
 
 const pkg = resolve(import.meta.dirname, '..');
 const root = resolve(pkg, '..');
@@ -30,8 +31,18 @@ mkdirSync(dest, { recursive: true });
 for (const f of readdirSync(out).filter((n) => n.endsWith('.go'))) cpSync(resolve(out, f), resolve(dest, f));
 
 // The generated WebhookEvent oneOf union is never used (webhooks.go dispatches on `type` itself) and its
-// unmarshaller has unreachable code that fails `go vet`, so it is not shipped.
-rmSync(resolve(dest, 'model_webhook_event.go'), { force: true });
+// unmarshaller has unreachable code that fails `go vet`, so it is not shipped. Asserted: a rename fails loudly.
+const union = resolve(dest, 'model_webhook_event.go');
+if (!existsSync(union)) throw new Error('fix-up: generated/model_webhook_event.go (the WebhookEvent union) was not generated');
+rmSync(union);
 
-renderMeta(resolve(pkg, 'build/meta.json'), dest);
-run('gofmt', ['-w', 'generated/meta.go', 'generated/webhook_models.go'], pkg);
+// R13d: a 2xx body that does not decode into its model returns generated.DecodeError(...), which the tiktokshop
+// package sets to build a *tiktokshop.Error, instead of a *GenericOpenAPIError. Asserted per file.
+for (const f of readdirSync(dest).filter((n) => /^api_.*\.go$/.test(n))) {
+  const path = resolve(dest, f);
+  writeFileSync(path, fixDecodeErrors(readFileSync(path, 'utf8'), f));
+}
+writeFileSync(resolve(dest, 'decode_error.go'), DECODE_ERROR_GO);
+
+renderMeta(resolve(pkg, 'build/meta.json'), dest, resolve(pkg, 'build/openapi.json'));
+run('gofmt', ['-w', 'generated/meta.go', 'generated/webhook_models.go', 'generated/webhook_required.go', 'generated/decode_error.go'], pkg);

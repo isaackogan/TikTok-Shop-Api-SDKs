@@ -4,7 +4,7 @@ A typed Go client for the **TikTok Shop API** (the TikTok Shop Partner API): ove
 
 Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 
-> Request signing follows TikTok's documentation and has not been verified against the live API. The OpenAPI spec this client is generated from is published at <https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml>.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues. The OpenAPI spec this client is generated from is published at <https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml>.
 
 ## Install
 
@@ -90,7 +90,7 @@ func listOrders(ctx context.Context) error {
 }
 ```
 
-Every failure is a `*tiktokshop.Error` (an envelope with a non-zero `code`, even on HTTP 200; a non-2xx response; a body that is not JSON; a network error or timeout). Use `errors.As`:
+Every failure of a call that was sent is a `*tiktokshop.Error`. Use `errors.As`:
 
 ```go
 import (
@@ -110,6 +110,15 @@ func handleErrors(ctx context.Context, client *tiktokshop.TikTokShop) {
 	}
 }
 ```
+
+| What happened | `Code` | `HTTPStatus` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't decode into its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | 0 |
+
+`Cause` holds the original error (the decoder's error, or the network error), so `errors.Is(err, context.DeadlineExceeded)` works.
 
 ## Several shops: `WithShop`
 
@@ -131,6 +140,8 @@ func otherShop(client *tiktokshop.TikTokShop) *tiktokshop.TikTokShop {
 ## Webhooks
 
 `Webhooks.VerifyAndParse` checks the signature (HMAC-SHA256 over the app key plus the raw body) and returns a typed event. Pass the body exactly as received: never re-serialize it. Type-switch on the result; each case is a generated model. A type this SDK does not know comes back as `tiktokshop.UnknownWebhookEvent`.
+
+Parsing is strict: a body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required field missing or null is an error. In short, a known type missing a required field is a parse error.
 
 ```go
 import (
@@ -183,7 +194,10 @@ IDs such as `shop_id` keep every digit whether TikTok sends them as strings or a
 
 - Query values are signed decoded, exactly as the server receives them.
 - Honours `HTTP_PROXY`/`HTTPS_PROXY` through `http.DefaultTransport` unless you pass your own `Transport`.
-- `Options.BaseURL` and `AuthOptions.BaseURL` can point at a test server.
+- `Options.BaseURL` and `AuthOptions.BaseURL` can point at a test server. Either must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path.
+- `Options.Timeout` and `AuthOptions.Timeout` bound one request, response body included. 0 means `DefaultTimeout` (30 seconds); a negative value means no limit.
+- Requests carry the User-Agent `tiktok-shop-api-go/<version>`.
+- An operation whose optional request body you leave unset sends no body at all.
 
 ## License
 
