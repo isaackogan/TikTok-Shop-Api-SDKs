@@ -50,7 +50,7 @@ mavenPublishing {
     coordinates("com.isaackogan", "tiktok-shop-api-kotlin", version.toString())
     pom {
         name.set("TikTok Shop API for Kotlin")
-        description.set("Unofficial Kotlin and JVM client for the TikTok Shop API: signed requests, OAuth helper, typed webhook events.")
+        description.set("Kotlin and JVM client for the TikTok Shop API: signed requests, OAuth helper, typed webhook events. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.")
         url.set("https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/kotlin")
         licenses {
             license {

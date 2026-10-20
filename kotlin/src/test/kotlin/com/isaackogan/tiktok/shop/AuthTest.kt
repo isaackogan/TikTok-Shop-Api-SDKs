@@ -128,7 +128,7 @@ class AuthTest {
         assertNull(t.sellerName)
         assertNull(t.sellerBaseRegion)
         assertNull(t.userType)
-        assertEquals(emptyList(), t.grantedScopes)
+        assertNull(t.grantedScopes)
     }
 
     private fun data(fields: String) = """{"code":0,"message":"success","request_id":"rq","data":{$fields}}"""
@@ -142,8 +142,8 @@ class AuthTest {
         assertNull(t.sellerName)
         assertNull(t.sellerBaseRegion)
         assertNull(t.userType)
-        assertTrue(t.grantedScopes.isEmpty())
-        assertEquals(listOf("a", "b"), exchange(data("""$tok,"granted_scopes":["a",1,null,"b"]""")).grantedScopes)
+        assertNull(t.grantedScopes)
+        assertNull(exchange(data("""$tok,"granted_scopes":["a",1,null,"b"]""")).grantedScopes, "a list with a non-string is ill-typed, so absent")
     }
 
     @Test

@@ -349,7 +349,11 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
                 if (bodyContent.isEmpty()) {
                     return null
                 }
-                Serializer.gson.fromJson(bodyContent, (object: TypeToken<T>(){}).getType())
+                try { // fix-up: scripts/fix-decode.ts (R13d)
+                    Serializer.gson.fromJson(bodyContent, (object: TypeToken<T>(){}).getType())
+                } catch (e: RuntimeException) {
+                    throw com.isaackogan.tiktok.shop.decodeFailure(response.code, bodyContent, e)
+                }
             }
             mediaType == OCTET_MEDIA_TYPE -> body.bytes() as? T
             mediaType == TEXT_MEDIA_TYPE -> body.string() as? T

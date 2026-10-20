@@ -11,7 +11,7 @@ Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 - **Webhooks**: verify the signature, then get a `WebhookEvent` for any of the webhook types.
 - **JVM 11+**, on OkHttp and gson. No other runtime dependencies.
 
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 ## Install
 
@@ -84,7 +84,20 @@ class FirstCall {
 }
 ```
 
-Pass `shopCipher = "..."` in the options and every operation that needs one gets it. Every failure is a `TikTokShopException` with `code`, `message`, `requestId` and (for HTTP errors) `httpStatus`: an envelope with `code != 0`, a non-2xx status, a body that is not JSON, a network error or a timeout. `TikTokShopOptions` also takes `baseUrl`, `timeout` and your own `OkHttpClient`.
+Pass `shopCipher = "..."` in the options and every operation that needs one gets it. `TikTokShopOptions` also takes `baseUrl`, `timeout` and your own `OkHttpClient`. `baseUrl` (here and in `TikTokShopAuthOptions`) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path. Requests carry the User-Agent `tiktok-shop-api-kotlin/<version>`.
+
+## Errors
+
+Every failure is a `TikTokShopException` with `code`, `message`, `requestId`, `httpStatus` and the original exception as `cause`:
+
+| What happened | `code` | `httpStatus` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body gson can't decode into its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | `null` |
+
+gson does not check required properties of a response model: one TikTok leaves out arrives as `null` even where the Kotlin type is non-null.
 
 ## Many shops
 
@@ -128,7 +141,7 @@ class WebhookExample {
 
 - `WebhookEvent` is a sealed class with one subclass per webhook type (each holds the generated payload model in `payload`) plus `Unknown(type, raw)`. The subclasses are rendered from the spec, so they stay in sync. They live in the generated folder but in the package `com.isaackogan.tiktok.shop`, because a sealed class's subclasses must share its package.
 - Verify against the **raw bytes** as received: re-serializing the JSON changes the signature.
-- A body whose `type` is missing or not an integer, or whose payload lacks a property its model requires, throws `IllegalArgumentException`. An integer `type` this SDK does not know becomes `WebhookEvent.Unknown`. Unknown fields are ignored.
+- Parsing is strict. A body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required property missing or null throws `IllegalArgumentException`: a known type missing a required field is a parse error. An integer `type` this SDK does not know becomes `WebhookEvent.Unknown`. Unknown fields are ignored.
 - `Webhooks.EVENT_TYPES` maps a type to its name, for example `1` to `ORDER_STATUS_CHANGE`.
 
 ## API surface
@@ -138,7 +151,7 @@ The client's properties are the API groups: `affiliateCreator`, `affiliatePartne
 ## Notes
 
 - Generated from [the spec](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml) in the [TikTok-Shop-Api-SDKs](https://github.com/isaackogan/TikTok-Shop-Api-SDKs) repository, which also has SDKs for TypeScript, Python, Go, Java, PHP, Rust and C#.
-- Three operations are GETs with a body (`getConversationList`, `mapTokopediaToTikTokShopProductIDs`, `getShippingTemplateAvailability`). OkHttp cannot send those, so they go through the JDK's HTTP client; see `TikTokShopOptions.httpClient` for which of your client's settings apply.
+- Three operations are GETs with a body (`getConversationList`, `mapTokopediaToTikTokShopProductIDs`, `getShippingTemplateAvailability`). OkHttp cannot send those, so they go through the JDK's HTTP client; see `TikTokShopOptions.httpClient` for which of your client's settings apply. The JDK client cannot use a SOCKS proxy: with one set on your `OkHttpClient`, those three calls fail with a `TikTokShopException` (code -1) instead of going direct.
 
 ## License
 

@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "tsx scripts/generate.ts",
     "build": "./gradlew --no-daemon -q compileKotlin",
-    "test": "tsx --test scripts/fix-get-body.test.ts scripts/render-events.test.ts && ./gradlew --no-daemon -q test"
+    "test": "tsx --test scripts/fix-get-body.test.ts scripts/render-events.test.ts scripts/fix-decode.test.ts && ./gradlew --no-daemon -q test"
   },
   "devDependencies": {
     "tsx": "4.20.6"

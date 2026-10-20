@@ -347,11 +347,11 @@ class ClientStubTest {
     }
 
     @Test
-    fun anExplicitDirectOrSocksProxyMeansNoProxyForTheJdkClient() {
-        for (p in listOf(Proxy.NO_PROXY, Proxy(Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", 9)))) {
-            val c = TikTokShop(TikTokShopOptions(appKey = "k", appSecret = "s", httpClient = OkHttpClient.Builder().proxy(p).build()))
-            assertEquals(Proxy.Type.DIRECT, c.jdkClient.proxy().get().select(URI.create("http://example.com"))[0].type())
-        }
+    fun anExplicitDirectProxyMeansNoProxyForTheJdkClientAndSocksIsRefused() {
+        val c = TikTokShop(TikTokShopOptions(appKey = "k", appSecret = "s", httpClient = OkHttpClient.Builder().proxy(Proxy.NO_PROXY).build()))
+        assertEquals(Proxy.Type.DIRECT, c.jdkClient.proxy().get().select(URI.create("http://example.com"))[0].type())
+        val socks = OkHttpClient.Builder().proxy(Proxy(Proxy.Type.SOCKS, InetSocketAddress("127.0.0.1", 9))).build()
+        assertEquals(-1, assertFailsWith<TikTokShopException> { TikTokShop(TikTokShopOptions(appKey = "k", appSecret = "s", httpClient = socks)).jdkClient }.code)
     }
 
     @Test

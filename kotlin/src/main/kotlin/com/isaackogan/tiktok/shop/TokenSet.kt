@@ -16,8 +16,8 @@ class TokenSet(
     val sellerBaseRegion: String? = null,
     /** Null when TikTok sent none. */
     val userType: Int? = null,
-    /** Empty when TikTok sent none. */
-    val grantedScopes: List<String> = emptyList(),
+    /** Null when TikTok sent none (or something other than a list of strings). */
+    val grantedScopes: List<String>? = null,
 ) {
     // Tokens are secrets: keep them out of logs.
     override fun toString(): String = "TokenSet(openId=$openId, sellerName=$sellerName, grantedScopes=$grantedScopes, tokens redacted)"

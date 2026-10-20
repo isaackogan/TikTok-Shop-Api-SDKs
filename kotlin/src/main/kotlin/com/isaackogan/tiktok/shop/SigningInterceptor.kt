@@ -92,7 +92,8 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
             }
         } catch (e: IOException) {
             // Only the exception's class: its message can carry the request URL.
-            throw TikTokShopException(0, "request failed: " + e.javaClass.simpleName, "", null, e)
+            // R13c: no HTTP response at all is -1 with no status.
+            throw TikTokShopException(-1, "request failed: " + e.javaClass.simpleName, "", null, e)
         }
 
         checkResponse(status, data)
@@ -170,9 +171,11 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
                 throw TikTokShopException(-1, "Response is not valid JSON (HTTP $status)", "", status, parseError)
             }
             var code: Long? = null
+            var hasCode = false
             var message: String? = null
             var requestId = ""
             if (env != null) {
+                hasCode = env.has("code")
                 code = longOf(env, "code")
                 message = stringOf(env, "message")
                 requestId = stringOf(env, "request_id") ?: ""
@@ -181,6 +184,10 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
                 // R13a: a body without a code, or with code 0, still failed, so the HTTP status is the code.
                 val c = if (code != null && code != 0L && code in Int.MIN_VALUE..Int.MAX_VALUE) code.toInt() else status
                 throw TikTokShopException(c, message ?: "HTTP $status", requestId, status)
+            }
+            if (hasCode && code == null) {
+                // Lesson 34: a code that is present but not an integer makes the reply unreadable.
+                throw TikTokShopException(-1, "Response has a non-integer code (HTTP $status)", requestId, status)
             }
             if (code != null && code != 0L) {
                 val c = if (code in Int.MIN_VALUE..Int.MAX_VALUE) code.toInt() else -1

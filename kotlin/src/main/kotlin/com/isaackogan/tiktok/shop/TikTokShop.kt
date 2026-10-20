@@ -151,8 +151,14 @@ class TikTokShop private constructor(private val shared: Shared, private val cre
                         proxy(http.proxySelector)
                     } else if (proxy.type() == Proxy.Type.HTTP && address is InetSocketAddress) {
                         proxy(ProxySelector.of(address))
+                    } else if (proxy.type() == Proxy.Type.SOCKS) {
+                        // java.net.http cannot use a SOCKS proxy. Fail rather than silently send the request direct.
+                        throw TikTokShopException(
+                            -1,
+                            "a GET with a body is sent with java.net.http, which cannot use the configured SOCKS proxy; configure an HTTP proxy or none",
+                        )
                     } else {
-                        proxy(NO_PROXY) // an explicit DIRECT: none; SOCKS cannot be expressed: none, never the JVM default
+                        proxy(NO_PROXY) // an explicit DIRECT: none, never the JVM default
                     }
                 }.build()
         }

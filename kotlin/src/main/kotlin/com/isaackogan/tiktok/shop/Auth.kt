@@ -114,7 +114,7 @@ class TikTokShopAuth(options: TikTokShopAuthOptions) {
         val status: Int
         val body: String
         try {
-            http.newCall(Request.Builder().url(full).get().build()).execute().use { res ->
+            http.newCall(Request.Builder().url(full).header("User-Agent", SigningInterceptor.USER_AGENT).get().build()).execute().use { res ->
                 status = res.code
                 body = res.body.string()
             }
@@ -159,7 +159,8 @@ class TikTokShopAuth(options: TikTokShopAuthOptions) {
         val o = data["open_id"]
         val openId = if (o is JsonPrimitive && (o.isString || o.isNumber)) o.asString else null
         val userType = integer(data["user_type"])?.takeIf { it in Int.MIN_VALUE..Int.MAX_VALUE }?.toInt()
-        val scopes = (data["granted_scopes"] as? com.google.gson.JsonArray)?.mapNotNull { str(it) } ?: emptyList()
+        // Lesson 34: absent, null or ill-typed (not a list of strings) granted_scopes is null, never an empty list.
+        val scopes = (data["granted_scopes"] as? com.google.gson.JsonArray)?.map { str(it) }?.takeIf { l -> l.all { it != null } }?.filterNotNull()
         return TokenSet(access, accessExp, refresh, refreshExp, openId, str(data["seller_name"]), str(data["seller_base_region"]), userType, scopes)
     }
 

@@ -48,5 +48,14 @@ class ReadmeTest {
     fun publishedMetadataNamesThePackage() {
         val gradle = read("build.gradle.kts")
         for (must in listOf("tiktok-shop-api-kotlin", "MIT", "Isaac Kogan", "isaackogan/TikTok-Shop-Api-SDKs")) assertTrue(gradle.contains(must), "build.gradle.kts lacks: $must")
+        // Maven Central and mvnrepository show the POM description, not the README.
+        val description = Regex("""description\.set\("([^"]*)"\)""").find(gradle)?.groupValues?.get(1)
+        assertTrue(description != null && description.endsWith("Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."), "POM description: $description")
+    }
+
+    @Test
+    fun theGradleWrapperPinsTheDistributionChecksum() {
+        val props = read("gradle/wrapper/gradle-wrapper.properties")
+        assertTrue(Regex("(?m)^distributionSha256Sum=[0-9a-f]{64}$").containsMatchIn(props), props)
     }
 }
