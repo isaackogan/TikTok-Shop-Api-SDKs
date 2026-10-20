@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { decodeFailure } from '../errors.ts';
 /**
  * TikTok Shop Partner API
  * Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
@@ -425,7 +426,12 @@ export class JSONApiResponse<T> {
     constructor(public raw: Response, private transformer: ResponseTransformer<T> = (jsonValue: any) => jsonValue) {}
 
     async value(): Promise<T> {
-        return this.transformer(await this.raw.json());
+        const json = await this.raw.json();
+        try {
+            return this.transformer(json);
+        } catch (e) {
+            throw decodeFailure(this.raw, json, e);
+        }
     }
 }
 

@@ -4,6 +4,7 @@ import { ID_BODY_PATHS } from './generated/meta.ts';
 import { rewriteIdNumbers } from './json.ts';
 import { operationFor, requiresShopCipher, sign } from './signing.ts';
 import { createFetchApi } from './transport.ts';
+import { USER_AGENT } from './version.ts';
 
 export const DEFAULT_BASE_URL = 'https://open-api.tiktokglobalshop.com';
 
@@ -12,8 +13,12 @@ export interface TikTokShopOptions {
   appSecret: string;
   accessToken?: string;
   shopCipher?: string;
+  /**
+   * API host, an origin only (`https://host[:port]`): any path prefix breaks signing and shop-cipher matching, which use
+   * the request path. Defaults to {@link DEFAULT_BASE_URL}.
+   */
   baseUrl?: string;
-  /** Per-request timeout in milliseconds. */
+  /** Per-request timeout in milliseconds. Defaults to 30 000 ({@link DEFAULT_TIMEOUT_MS}); 0 means no limit. */
   timeoutMs?: number;
   /**
    * HTTP client override (defaults to the global `fetch`). A GET with a body, which `fetch`
@@ -123,6 +128,7 @@ export class TikTokShop {
     }
     // 4. access token
     if (o.accessToken) headers.set('x-tts-access-token', o.accessToken);
+    headers.set('user-agent', USER_AGENT);
     // 5. sign over the final path, decoded query and body
     const bodyBytes = body == null ? null : typeof body === 'string' ? body : null;
     query.push([
@@ -155,28 +161,39 @@ export class TikTokShop {
         cause: parseError,
       });
     }
-    const code = isObj && typeof envelope!.code === 'number' ? envelope!.code : undefined;
+    const rawCode = isObj ? envelope!.code : undefined;
+    const code = Number.isSafeInteger(rawCode) ? (rawCode as number) : undefined;
     const message = isObj && typeof envelope!.message === 'string' ? envelope!.message : undefined;
     const requestId = isObj && typeof envelope!.request_id === 'string' ? envelope!.request_id : '';
     if (!res.ok) {
       throw new TikTokShopError({
-        // R13a: a body with no code, or code 0, still failed, so the HTTP status is the code.
+        // R13a: a body with no integer code, or code 0, still failed, so the HTTP status is the code.
         code: code || res.status,
-        message: message ?? res.statusText ?? `HTTP ${res.status}`,
+        message: message || res.statusText || `HTTP ${res.status}`,
+        requestId,
+        httpStatus: res.status,
+      });
+    }
+    // Lesson 34: a `code` that is present but not an integer makes the reply unreadable.
+    if (rawCode !== undefined && code === undefined) {
+      throw new TikTokShopError({
+        code: -1,
+        message: `Response has a non-integer code (HTTP ${res.status})`,
         requestId,
         httpStatus: res.status,
       });
     }
     if (code !== undefined && code !== 0) {
-      throw new TikTokShopError({ code, message: message ?? '', requestId });
+      throw new TikTokShopError({ code, message: message ?? '', requestId, httpStatus: res.status });
     }
   }
 
   private async errorHook(ctx: g.ErrorContext): Promise<Response | void> {
+    // R13c: no HTTP response at all (connection refused, DNS, TLS, timeout): -1, no httpStatus.
     const e = ctx.error;
     const timedOut = e instanceof Error && (e.name === 'TimeoutError' || e.name === 'AbortError');
     throw new TikTokShopError({
-      code: 0,
+      code: -1,
       message: `${timedOut ? 'Request timed out or was aborted' : 'Request failed'}: ${e instanceof Error ? e.message : String(e)}`,
       requestId: '',
       cause: e,

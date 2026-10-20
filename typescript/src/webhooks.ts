@@ -1,7 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { parseJsonExact } from './json.ts';
 import * as models from './generated/models/index.ts';
-import { EVENT_TYPES as GENERATED_EVENT_TYPES, ID_FIELDS, WEBHOOKS } from './generated/meta.ts';
+import { EVENT_TYPES as GENERATED_EVENT_TYPES, ID_FIELDS, WEBHOOK_MODELS, WEBHOOKS } from './generated/meta.ts';
 import type { WebhookEvent as GeneratedWebhookEvent } from './generated/models/WebhookEvent.ts';
 
 /** A typed webhook: one of the generated webhook models, discriminated by `type`. */
@@ -19,6 +19,18 @@ export interface UnknownWebhookEvent {
 
 export function isUnknownWebhookEvent(event: WebhookEvent | UnknownWebhookEvent): event is UnknownWebhookEvent {
   return 'raw' in event;
+}
+
+/**
+ * The body is not a webhook this SDK can read: not JSON, not a JSON object, no integer `type`, or a known `type` whose
+ * required fields are missing or null (R28). Only an integer `type` the SDK does not know gives an
+ * {@link UnknownWebhookEvent}.
+ */
+export class WebhookParseError extends Error {
+  override name = 'WebhookParseError';
+  constructor(message: string, options?: { cause?: unknown }) {
+    super(message, options);
+  }
 }
 
 export class WebhookSignatureError extends Error {
@@ -42,9 +54,47 @@ export interface VerifyOptions {
   signature: string;
 }
 
-const converters = new Map<number, (json: any) => unknown>(
-  WEBHOOKS.map((w) => [w.type, (models as unknown as Record<string, (j: any) => unknown>)[`${w.schema}FromJSON`]!]),
+interface Hook {
+  schema: string;
+  fromJson: (json: any) => unknown;
+  instanceOf: (value: object) => boolean;
+}
+const generated = models as unknown as Record<string, (j: any) => any>;
+const hooks = new Map<number, Hook>(
+  WEBHOOKS.map((w) => [
+    w.type,
+    { schema: w.schema, fromJson: generated[`${w.schema}FromJSON`]!, instanceOf: generated[`instanceOf${w.schema}`]! },
+  ]),
 );
+
+const isPlainObject = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+/** The first required property (dotted path) that is missing or null, checking nested models, lists and maps. */
+function firstMissing(model: string, json: Record<string, unknown>, path: string): string | undefined {
+  const entry = WEBHOOK_MODELS[model];
+  if (!entry) return undefined;
+  for (const name of entry.required) {
+    if (json[name] === undefined || json[name] === null) return path + name;
+  }
+  for (const [name, [kind, child]] of Object.entries(entry.children)) {
+    const value = json[name];
+    if (kind === 'object') {
+      const found = isPlainObject(value) ? firstMissing(child, value, `${path}${name}.`) : undefined;
+      if (found) return found;
+    } else if (kind === 'list' && Array.isArray(value)) {
+      for (const [i, item] of value.entries()) {
+        const found = isPlainObject(item) ? firstMissing(child, item, `${path}${name}[${i}].`) : undefined;
+        if (found) return found;
+      }
+    } else if (kind === 'map' && isPlainObject(value)) {
+      for (const [k, item] of Object.entries(value)) {
+        const found = isPlainObject(item) ? firstMissing(child, item, `${path}${name}.${k}.`) : undefined;
+        if (found) return found;
+      }
+    }
+  }
+  return undefined;
+}
 
 const toBuffer = (b: RawBody) => (typeof b === 'string' ? Buffer.from(b, 'utf8') : Buffer.from(b.buffer, b.byteOffset, b.byteLength));
 
@@ -58,13 +108,39 @@ export const Webhooks = {
     return a.length === b.length && timingSafeEqual(a, b);
   },
 
-  /** Parses a body to its typed model; unknown types come back as `{type, raw}`. 64-bit IDs stay exact. */
+  /**
+   * Parses a body to its typed model; an integer `type` this SDK does not know comes back as `{type, raw}`. 64-bit IDs
+   * stay exact.
+   *
+   * Parsing is strict (R28): it throws {@link WebhookParseError} when the body is not a JSON object, its `type` is
+   * missing or not an integer (a string, bool, null or float), or a known type lacks a required field or has it null,
+   * at any depth.
+   */
   parse(rawBody: RawBody): WebhookEvent | UnknownWebhookEvent {
-    const text = typeof rawBody === 'string' ? rawBody : new TextDecoder().decode(rawBody);
-    const json = parseJsonExact(text, ID_FIELDS) as any;
-    const convert = typeof json?.type === 'number' ? converters.get(json.type) : undefined;
-    if (!convert) return { type: json?.type, raw: json };
-    return convert(json) as WebhookEvent;
+    let json: unknown;
+    try {
+      const text = typeof rawBody === 'string' ? rawBody : new TextDecoder('utf-8', { fatal: true }).decode(rawBody);
+      json = parseJsonExact(text, ID_FIELDS);
+    } catch (e) {
+      throw new WebhookParseError(`Webhook body is not valid JSON: ${e instanceof Error ? e.message : String(e)}`, { cause: e });
+    }
+    if (!isPlainObject(json)) throw new WebhookParseError('Webhook body is not a JSON object');
+    const type = json.type;
+    if (typeof type !== 'number' || !Number.isSafeInteger(type)) throw new WebhookParseError('Webhook body has no integer "type"');
+    const hook = hooks.get(type);
+    if (!hook) return { type, raw: json };
+    const missing = firstMissing(hook.schema, json, '');
+    if (missing !== undefined) {
+      throw new WebhookParseError(`Webhook type ${type} does not match ${hook.schema}: required field "${missing}" is missing or null`);
+    }
+    let event: unknown;
+    try {
+      event = hook.fromJson(json);
+    } catch (e) {
+      throw new WebhookParseError(`Webhook type ${type} does not match ${hook.schema}: ${e instanceof Error ? e.message : String(e)}`, { cause: e });
+    }
+    if (!isPlainObject(event) || !hook.instanceOf(event)) throw new WebhookParseError(`Webhook type ${type} does not match ${hook.schema}`);
+    return event as unknown as WebhookEvent;
   },
 
   /** Verifies, then parses. Throws {@link WebhookSignatureError} on a mismatch. */

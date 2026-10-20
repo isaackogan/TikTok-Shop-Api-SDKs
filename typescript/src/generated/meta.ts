@@ -2855,3 +2855,1082 @@ export const ID_BODY_PATHS: Readonly<Record<string, readonly string[]>> = {
     "product_id"
   ]
 };
+
+export interface WebhookModel {
+  /** JSON names of the properties that must be present and non-null. */
+  readonly required: readonly string[];
+  /** Properties holding another model: directly, as a list, or as a string-keyed map. */
+  readonly children: Readonly<Record<string, readonly ['object' | 'list' | 'map', string]>>;
+}
+
+/** Every model reachable from a webhook, by schema name. */
+export const WEBHOOK_MODELS: Readonly<Record<string, WebhookModel>> = {
+  "ActivityChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ActivityChangeWebhookData"
+      ]
+    }
+  },
+  "ActivityChangeWebhookData": {
+    "required": [],
+    "children": {
+      "product_update_list": [
+        "object",
+        "ActivityChangeWebhookDataProductUpdateList"
+      ],
+      "product_remove_list": [
+        "object",
+        "ActivityChangeWebhookDataProductRemoveList"
+      ]
+    }
+  },
+  "ActivityChangeWebhookDataProductRemoveList": {
+    "required": [],
+    "children": {}
+  },
+  "ActivityChangeWebhookDataProductUpdateList": {
+    "required": [],
+    "children": {}
+  },
+  "ActivityStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ActivityStatusChangeWebhookData"
+      ]
+    }
+  },
+  "ActivityStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "AftersalesRequestStatusUpdateWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "AftersalesRequestStatusUpdateWebhookData"
+      ]
+    }
+  },
+  "AftersalesRequestStatusUpdateWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "AppealCompletedWebhook": {
+    "required": [
+      "type",
+      "shop_id",
+      "tts_notification_id",
+      "timestamp",
+      "data"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "AppealCompletedWebhookData"
+      ]
+    }
+  },
+  "AppealCompletedWebhookData": {
+    "required": [
+      "appeal_task",
+      "product_id"
+    ],
+    "children": {
+      "appeal_task": [
+        "object",
+        "AppealCompletedWebhookDataAppealTask"
+      ]
+    }
+  },
+  "AppealCompletedWebhookDataAppealTask": {
+    "required": [
+      "appeal_audit_result"
+    ],
+    "children": {
+      "appeal_audit_result": [
+        "list",
+        "AppealCompletedWebhookDataAppealTaskAppealAuditResult"
+      ]
+    }
+  },
+  "AppealCompletedWebhookDataAppealTaskAppealAuditResult": {
+    "required": [
+      "indicator_type",
+      "status"
+    ],
+    "children": {}
+  },
+  "CancellationStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "CancellationStatusChangeWebhookData"
+      ]
+    }
+  },
+  "CancellationStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "CombinedListingChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "CombinedListingChangeWebhookData"
+      ]
+    }
+  },
+  "CombinedListingChangeWebhookData": {
+    "required": [],
+    "children": {
+      "products": [
+        "list",
+        "CombinedListingChangeWebhookDataProduct"
+      ]
+    }
+  },
+  "CombinedListingChangeWebhookDataProduct": {
+    "required": [],
+    "children": {}
+  },
+  "CreatorDeauthorizationWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "CreatorDeauthorizationWebhookData"
+      ]
+    }
+  },
+  "CreatorDeauthorizationWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "FBTInventoryUpdateWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "FBTInventoryUpdateWebhookData"
+      ]
+    }
+  },
+  "FBTInventoryUpdateWebhookData": {
+    "required": [],
+    "children": {
+      "fbt_warehouse_inventory": [
+        "list",
+        "FBTInventoryUpdateWebhookDataFbtWarehouseInventory"
+      ]
+    }
+  },
+  "FBTInventoryUpdateWebhookDataFbtWarehouseInventory": {
+    "required": [],
+    "children": {
+      "on_hand_detail": [
+        "object",
+        "FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail"
+      ]
+    }
+  },
+  "FBTInventoryUpdateWebhookDataFbtWarehouseInventoryOnHandDetail": {
+    "required": [],
+    "children": {}
+  },
+  "FBTMerchantOnboardingWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "FBTMerchantOnboardingWebhookData"
+      ]
+    }
+  },
+  "FBTMerchantOnboardingWebhookData": {
+    "required": [],
+    "children": {
+      "onboarded_regions": [
+        "list",
+        "FBTMerchantOnboardingWebhookDataOnboardedRegion"
+      ]
+    }
+  },
+  "FBTMerchantOnboardingWebhookDataOnboardedRegion": {
+    "required": [],
+    "children": {}
+  },
+  "GetFBTMCFOrderStatusWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "GetFBTMCFOrderStatusWebhookData"
+      ]
+    }
+  },
+  "GetFBTMCFOrderStatusWebhookData": {
+    "required": [],
+    "children": {
+      "mcf_order": [
+        "object",
+        "GetFBTMCFOrderStatusWebhookDataMcfOrder"
+      ]
+    }
+  },
+  "GetFBTMCFOrderStatusWebhookDataMcfOrder": {
+    "required": [],
+    "children": {
+      "consign_orders": [
+        "list",
+        "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrder"
+      ]
+    }
+  },
+  "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrder": {
+    "required": [],
+    "children": {
+      "goods": [
+        "list",
+        "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood"
+      ],
+      "shipping_provider": [
+        "object",
+        "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderShippingProvider"
+      ]
+    }
+  },
+  "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderGood": {
+    "required": [],
+    "children": {}
+  },
+  "GetFBTMCFOrderStatusWebhookDataMcfOrderConsignOrderShippingProvider": {
+    "required": [],
+    "children": {}
+  },
+  "GlobalListingMethodChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "GlobalListingMethodChangeWebhookData"
+      ]
+    }
+  },
+  "GlobalListingMethodChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "GlobalReplicationStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "GlobalReplicationStatusChangeWebhookData"
+      ]
+    }
+  },
+  "GlobalReplicationStatusChangeWebhookData": {
+    "required": [],
+    "children": {
+      "replicated_product": [
+        "object",
+        "GlobalReplicationStatusChangeWebhookDataReplicatedProduct"
+      ]
+    }
+  },
+  "GlobalReplicationStatusChangeWebhookDataReplicatedProduct": {
+    "required": [],
+    "children": {
+      "fail_reasons": [
+        "list",
+        "GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason"
+      ]
+    }
+  },
+  "GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason": {
+    "required": [],
+    "children": {}
+  },
+  "GoodsMatchWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "GoodsMatchWebhookData"
+      ]
+    }
+  },
+  "GoodsMatchWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "ImageTranslationCompletedWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ImageTranslationCompletedWebhookData"
+      ]
+    }
+  },
+  "ImageTranslationCompletedWebhookData": {
+    "required": [],
+    "children": {
+      "translation_task": [
+        "object",
+        "ImageTranslationCompletedWebhookDataTranslationTask"
+      ]
+    }
+  },
+  "ImageTranslationCompletedWebhookDataTranslationTask": {
+    "required": [],
+    "children": {
+      "original_image": [
+        "object",
+        "ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage"
+      ],
+      "translated_image": [
+        "object",
+        "ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage"
+      ]
+    }
+  },
+  "ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage": {
+    "required": [],
+    "children": {}
+  },
+  "ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage": {
+    "required": [],
+    "children": {}
+  },
+  "InboundFBTOrderStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "InboundFBTOrderStatusChangeWebhookData"
+      ]
+    }
+  },
+  "InboundFBTOrderStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "InventoryChangedByShopWebhook": {
+    "required": [
+      "type",
+      "tts_notification_id",
+      "shop_id",
+      "timestamp",
+      "data"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "InventoryChangedByShopWebhookData"
+      ]
+    }
+  },
+  "InventoryChangedByShopWebhookData": {
+    "required": [
+      "event_id",
+      "occurred_at",
+      "shop_id",
+      "product_id",
+      "sku_id",
+      "quantity_snapshot_after_change",
+      "change_detail"
+    ],
+    "children": {
+      "quantity_snapshot_after_change": [
+        "object",
+        "InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange"
+      ],
+      "change_detail": [
+        "list",
+        "InventoryChangedByShopWebhookDataChangeDetail"
+      ]
+    }
+  },
+  "InventoryChangedByShopWebhookDataChangeDetail": {
+    "required": [
+      "idempotency_key",
+      "trigger_source",
+      "occurred_at",
+      "total_quantity_delta",
+      "available_quantity_delta",
+      "committed_quantity_delta",
+      "in_shop_quantity_delta",
+      "campaign_locked_quantity_delta",
+      "creator_locked_quantity_delta"
+    ],
+    "children": {}
+  },
+  "InventoryChangedByShopWebhookDataQuantitySnapshotAfterChange": {
+    "required": [
+      "total_quantity",
+      "total_available_quantity",
+      "total_committed_quantity",
+      "in_shop_quantity",
+      "campaign_locked_quantity",
+      "creator_locked_quantity"
+    ],
+    "children": {}
+  },
+  "InventoryStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "InventoryStatusChangeWebhookData"
+      ]
+    }
+  },
+  "InventoryStatusChangeWebhookData": {
+    "required": [],
+    "children": {
+      "trigger_reason": [
+        "object",
+        "InventoryStatusChangeWebhookDataTriggerReason"
+      ],
+      "inventory_distribution": [
+        "object",
+        "InventoryStatusChangeWebhookDataInventoryDistribution"
+      ]
+    }
+  },
+  "InventoryStatusChangeWebhookDataInventoryDistribution": {
+    "required": [],
+    "children": {}
+  },
+  "InventoryStatusChangeWebhookDataTriggerReason": {
+    "required": [],
+    "children": {}
+  },
+  "InvoiceStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "InvoiceStatusChangeWebhookData"
+      ]
+    }
+  },
+  "InvoiceStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "NewConversationWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "NewConversationWebhookData"
+      ]
+    }
+  },
+  "NewConversationWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "NewMessageListenerWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "NewMessageListenerWebhookData"
+      ]
+    }
+  },
+  "NewMessageListenerWebhookData": {
+    "required": [],
+    "children": {
+      "sender": [
+        "object",
+        "NewMessageListenerWebhookDataSender"
+      ]
+    }
+  },
+  "NewMessageListenerWebhookDataSender": {
+    "required": [],
+    "children": {}
+  },
+  "NewMessageWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "NewMessageWebhookData"
+      ]
+    }
+  },
+  "NewMessageWebhookData": {
+    "required": [],
+    "children": {
+      "sender": [
+        "object",
+        "NewMessageWebhookDataSender"
+      ]
+    }
+  },
+  "NewMessageWebhookDataSender": {
+    "required": [],
+    "children": {}
+  },
+  "OpportunityMatchingStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "OpportunityMatchingStatusChangeWebhookData"
+      ]
+    }
+  },
+  "OpportunityMatchingStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "OrderStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "OrderStatusChangeWebhookData"
+      ]
+    }
+  },
+  "OrderStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "PackageUpdateWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "PackageUpdateWebhookData"
+      ]
+    }
+  },
+  "PackageUpdateWebhookData": {
+    "required": [],
+    "children": {
+      "package_list": [
+        "list",
+        "PackageUpdateWebhookDataPackageList"
+      ]
+    }
+  },
+  "PackageUpdateWebhookDataPackageList": {
+    "required": [],
+    "children": {}
+  },
+  "ProductAuditStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductAuditStatusChangeWebhookData"
+      ]
+    }
+  },
+  "ProductAuditStatusChangeWebhookData": {
+    "required": [],
+    "children": {
+      "audit": [
+        "object",
+        "ProductAuditStatusChangeWebhookDataAudit"
+      ],
+      "integrated_platform_statuses": [
+        "object",
+        "ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus"
+      ]
+    }
+  },
+  "ProductAuditStatusChangeWebhookDataAudit": {
+    "required": [],
+    "children": {}
+  },
+  "ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus": {
+    "required": [],
+    "children": {}
+  },
+  "ProductCategoryChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductCategoryChangeWebhookData"
+      ]
+    }
+  },
+  "ProductCategoryChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "ProductCreationWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductCreationWebhookData"
+      ]
+    }
+  },
+  "ProductCreationWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "ProductInformationChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductInformationChangeWebhookData"
+      ]
+    }
+  },
+  "ProductInformationChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "ProductPackageRecommendedWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductPackageRecommendedWebhookData"
+      ]
+    }
+  },
+  "ProductPackageRecommendedWebhookData": {
+    "required": [],
+    "children": {
+      "weight_recommendation": [
+        "object",
+        "ProductPackageRecommendedWebhookDataWeightRecommendation"
+      ],
+      "dimension_recommendation": [
+        "object",
+        "ProductPackageRecommendedWebhookDataDimensionRecommendation"
+      ]
+    }
+  },
+  "ProductPackageRecommendedWebhookDataDimensionRecommendation": {
+    "required": [],
+    "children": {
+      "length": [
+        "object",
+        "ProductPackageRecommendedWebhookDataDimensionRecommendationLength"
+      ],
+      "width": [
+        "object",
+        "ProductPackageRecommendedWebhookDataDimensionRecommendationWidth"
+      ],
+      "height": [
+        "object",
+        "ProductPackageRecommendedWebhookDataDimensionRecommendationHeight"
+      ]
+    }
+  },
+  "ProductPackageRecommendedWebhookDataDimensionRecommendationHeight": {
+    "required": [],
+    "children": {}
+  },
+  "ProductPackageRecommendedWebhookDataDimensionRecommendationLength": {
+    "required": [],
+    "children": {}
+  },
+  "ProductPackageRecommendedWebhookDataDimensionRecommendationWidth": {
+    "required": [],
+    "children": {}
+  },
+  "ProductPackageRecommendedWebhookDataWeightRecommendation": {
+    "required": [],
+    "children": {
+      "weight": [
+        "object",
+        "ProductPackageRecommendedWebhookDataWeightRecommendationWeight"
+      ]
+    }
+  },
+  "ProductPackageRecommendedWebhookDataWeightRecommendationWeight": {
+    "required": [],
+    "children": {}
+  },
+  "ProductStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ProductStatusChangeWebhookData"
+      ]
+    }
+  },
+  "ProductStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "RMAStatusUpdateWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "RMAStatusUpdateWebhookData"
+      ]
+    }
+  },
+  "RMAStatusUpdateWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "RecipientAddressUpdateWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "RecipientAddressUpdateWebhookData"
+      ]
+    }
+  },
+  "RecipientAddressUpdateWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "RefundSuccessWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "RefundSuccessWebhookData"
+      ]
+    }
+  },
+  "RefundSuccessWebhookData": {
+    "required": [],
+    "children": {
+      "line_items": [
+        "list",
+        "RefundSuccessWebhookDataLineItem"
+      ]
+    }
+  },
+  "RefundSuccessWebhookDataLineItem": {
+    "required": [],
+    "children": {}
+  },
+  "ReturnStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ReturnStatusChangeWebhookData"
+      ]
+    }
+  },
+  "ReturnStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "SKUStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "SKUStatusChangeWebhookData"
+      ]
+    }
+  },
+  "SKUStatusChangeWebhookData": {
+    "required": [],
+    "children": {
+      "skus": [
+        "list",
+        "SKUStatusChangeWebhookDataSku"
+      ]
+    }
+  },
+  "SKUStatusChangeWebhookDataSku": {
+    "required": [],
+    "children": {}
+  },
+  "SampleApplicationStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "SampleApplicationStatusChangeWebhookData"
+      ]
+    }
+  },
+  "SampleApplicationStatusChangeWebhookData": {
+    "required": [],
+    "children": {
+      "creator": [
+        "list",
+        "SampleApplicationStatusChangeWebhookDataCreator"
+      ],
+      "product": [
+        "list",
+        "SampleApplicationStatusChangeWebhookDataProduct"
+      ]
+    }
+  },
+  "SampleApplicationStatusChangeWebhookDataCreator": {
+    "required": [],
+    "children": {}
+  },
+  "SampleApplicationStatusChangeWebhookDataProduct": {
+    "required": [],
+    "children": {}
+  },
+  "SellerDeauthorizationWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "SellerDeauthorizationWebhookData"
+      ]
+    }
+  },
+  "SellerDeauthorizationWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "ShoppableContentPostingWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ShoppableContentPostingWebhookData"
+      ]
+    }
+  },
+  "ShoppableContentPostingWebhookData": {
+    "required": [],
+    "children": {
+      "event": [
+        "object",
+        "ShoppableContentPostingWebhookDataEvent"
+      ]
+    }
+  },
+  "ShoppableContentPostingWebhookDataEvent": {
+    "required": [],
+    "children": {}
+  },
+  "ShoppableVideoPrecheckTasksResultWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "ShoppableVideoPrecheckTasksResultWebhookData"
+      ]
+    }
+  },
+  "ShoppableVideoPrecheckTasksResultWebhookData": {
+    "required": [],
+    "children": {
+      "violation_check_result": [
+        "object",
+        "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult"
+      ],
+      "good_quality_check_result": [
+        "object",
+        "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult"
+      ]
+    }
+  },
+  "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult": {
+    "required": [],
+    "children": {
+      "issues": [
+        "list",
+        "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue"
+      ]
+    }
+  },
+  "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue": {
+    "required": [],
+    "children": {}
+  },
+  "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult": {
+    "required": [],
+    "children": {
+      "issues": [
+        "list",
+        "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue"
+      ]
+    }
+  },
+  "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue": {
+    "required": [],
+    "children": {}
+  },
+  "SizeChartChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "SizeChartChangeWebhookData"
+      ]
+    }
+  },
+  "SizeChartChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "StrikethroughPriceExpiredWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "StrikethroughPriceExpiredWebhookData"
+      ]
+    }
+  },
+  "StrikethroughPriceExpiredWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "TokopediaMirrorStatusChangeWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "TokopediaMirrorStatusChangeWebhookData"
+      ]
+    }
+  },
+  "TokopediaMirrorStatusChangeWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "UpcomingAuthorizationExpirationWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "UpcomingAuthorizationExpirationWebhookData"
+      ]
+    }
+  },
+  "UpcomingAuthorizationExpirationWebhookData": {
+    "required": [],
+    "children": {}
+  },
+  "VideoPrecheckResultWebhook": {
+    "required": [
+      "type"
+    ],
+    "children": {
+      "data": [
+        "object",
+        "VideoPrecheckResultWebhookData"
+      ]
+    }
+  },
+  "VideoPrecheckResultWebhookData": {
+    "required": [],
+    "children": {
+      "issues": [
+        "list",
+        "VideoPrecheckResultWebhookDataIssue"
+      ]
+    }
+  },
+  "VideoPrecheckResultWebhookDataIssue": {
+    "required": [],
+    "children": {}
+  }
+};

@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { EVENT_TYPES, Webhooks, WebhookSignatureError } from '../src/index.ts';
+import { EVENT_TYPES, isUnknownWebhookEvent, WebhookParseError, Webhooks, WebhookSignatureError } from '../src/index.ts';
 
 const vectors = JSON.parse(readFileSync(new URL('../../shared/test-vectors/webhooks.json', import.meta.url), 'utf8'));
 
@@ -45,6 +45,81 @@ describe('parse', () => {
   });
   it('accepts bytes', () => {
     expect((Webhooks.parse(Buffer.from('{"type":1,"shop_id":"1"}')) as any).shopId).toBe('1');
+  });
+});
+
+// Lesson 16 + R28: parsing is strict. Only an integer `type` the SDK doesn't know becomes an UnknownWebhookEvent.
+describe('strict parsing (lesson 16, R28)', () => {
+  // Type 66 (AppealCompletedWebhook) has required fields at every level, including inside a list.
+  const appeal = () => ({
+    type: 66,
+    shop_id: '1',
+    tts_notification_id: 'n1',
+    timestamp: 1,
+    data: { product_id: 'p1', appeal_task: { appeal_audit_result: [{ indicator_type: 'A', status: 'S' }] } },
+  });
+  it('parses a complete known event', () => {
+    const ev = Webhooks.parse(JSON.stringify(appeal())) as any;
+    expect(isUnknownWebhookEvent(ev)).toBe(false);
+    expect(ev.data.appealTask.appealAuditResult[0].status).toBe('S');
+  });
+  const bad: [string, string][] = [
+    ['not JSON', 'nope'],
+    ['an array', '[{"type":1}]'],
+    ['a number', '1'],
+    ['a string', '"x"'],
+    ['null', 'null'],
+    ['no type', '{"shop_id":"1"}'],
+    ['a string type', '{"type":"1"}'],
+    ['a bool type', '{"type":true}'],
+    ['a null type', '{"type":null}'],
+    ['a float type', '{"type":1.5}'],
+    ['an unsafe integer type', '{"type":9007199254740993}'],
+  ];
+  for (const [name, body] of bad) {
+    it(`rejects ${name}`, () => {
+      expect(() => Webhooks.parse(body)).toThrow(WebhookParseError);
+    });
+  }
+  const broken: [string, (j: any) => void, string][] = [
+    ['a missing top-level required field', (j) => delete j.shop_id, 'shop_id'],
+    ['a null top-level required field', (j) => (j.timestamp = null), 'timestamp'],
+    ['a missing nested required field', (j) => delete j.data.product_id, 'data.product_id'],
+    ['a null required field inside a list', (j) => (j.data.appeal_task.appeal_audit_result[0].status = null), 'data.appeal_task.appeal_audit_result[0].status'],
+  ];
+  for (const [name, edit, path] of broken) {
+    it(`rejects a known type with ${name}`, () => {
+      const j = appeal();
+      edit(j);
+      expect(() => Webhooks.parse(JSON.stringify(j))).toThrow(WebhookParseError);
+      expect(() => Webhooks.parse(JSON.stringify(j))).toThrow(path);
+    });
+  }
+  it('rejects a known type whose list field is not a list (FromJSON would throw a TypeError)', () => {
+    const j = appeal() as any;
+    j.data.appeal_task.appeal_audit_result = 'x';
+    expect(() => Webhooks.parse(JSON.stringify(j))).toThrow(WebhookParseError);
+  });
+  it('rejects bytes that are not UTF-8', () => {
+    expect(() => Webhooks.parse(new Uint8Array([0x7b, 0xff, 0x7d]))).toThrow(WebhookParseError);
+  });
+  it('an integer type it does not know is an UnknownWebhookEvent, not an error', () => {
+    const ev = Webhooks.parse('{"type":9999,"anything":[1]}');
+    expect(isUnknownWebhookEvent(ev)).toBe(true);
+    expect(ev.type).toBe(9999);
+  });
+  it('verifyAndParse is strict too', () => {
+    const ok = vectors.verify[0];
+    expect(() => Webhooks.verifyAndParse({ appKey: ok.appKey, appSecret: ok.appSecret, rawBody: '[]', signature: 'x' })).toThrow(WebhookSignatureError);
+  });
+});
+
+describe('R12: unknown fields are kept out of the way, never an error', () => {
+  it('parses a known event with extra fields at the top level and inside data', () => {
+    const j = { type: 1, shop_id: '1', brand_new: { x: 1 }, data: { order_id: '5', order_status: 'UNPAID', future_field: [1, 2] } };
+    const ev = Webhooks.parse(JSON.stringify(j)) as any;
+    expect(isUnknownWebhookEvent(ev)).toBe(false);
+    expect(ev.data.orderStatus).toBe('UNPAID');
   });
 });
 

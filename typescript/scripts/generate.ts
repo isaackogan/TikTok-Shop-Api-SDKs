@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdirSync, rmSync } from 'node:fs';
+import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { renderMeta } from './render-meta.ts';
 
@@ -27,4 +27,25 @@ for (const item of ['apis', 'models', 'runtime.ts', 'index.ts']) {
   cpSync(resolve(out, item), resolve(dest, item), { recursive: true });
 }
 
-renderMeta(resolve(pkg, 'build/meta.json'), dest);
+// R13d: a 2xx body that FromJSON cannot read (a list or object of the wrong shape) becomes a TikTokShopError with
+// code -1, not a raw TypeError. The one place a model transformer runs is JSONApiResponse.value().
+const runtimePath = resolve(dest, 'runtime.ts');
+const runtime = readFileSync(runtimePath, 'utf8');
+const VALUE = '    async value(): Promise<T> {\n        return this.transformer(await this.raw.json());\n    }\n';
+const IMPORT_AFTER = '/* eslint-disable */\n';
+for (const [what, needle] of [['JSONApiResponse.value', VALUE], ['the eslint header', IMPORT_AFTER]] as const) {
+  const count = runtime.split(needle).length - 1;
+  if (count !== 1) throw new Error(`runtime.ts fix-up: expected ${what} exactly once, found ${count}`);
+}
+writeFileSync(
+  runtimePath,
+  runtime
+    .replace(IMPORT_AFTER, `${IMPORT_AFTER}import { decodeFailure } from '../errors.ts';\n`)
+    .replace(
+      VALUE,
+      '    async value(): Promise<T> {\n        const json = await this.raw.json();\n        try {\n            return this.transformer(json);\n' +
+        '        } catch (e) {\n            throw decodeFailure(this.raw, json, e);\n        }\n    }\n',
+    ),
+);
+
+renderMeta(resolve(pkg, 'build/meta.json'), dest, resolve(pkg, 'build/openapi.json'));

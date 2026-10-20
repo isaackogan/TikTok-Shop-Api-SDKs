@@ -3,10 +3,23 @@ import { request as httpsRequest } from 'node:https';
 import { ID_FIELDS } from './generated/meta.ts';
 import { parseJsonExact } from './json.ts';
 
+/** The per-request timeout of API and token calls when none is given: 30 seconds. */
+export const DEFAULT_TIMEOUT_MS = 30_000;
+
+/** The signal a request runs under: its own, else a timeout (`undefined` → {@link DEFAULT_TIMEOUT_MS}; 0 → no limit). */
+export function timeoutSignal(timeoutMs: number | undefined, own?: AbortSignal | null): AbortSignal | undefined {
+  if (own) return own;
+  const ms = timeoutMs ?? DEFAULT_TIMEOUT_MS;
+  return ms > 0 ? AbortSignal.timeout(ms) : undefined;
+}
+
 export interface TransportOptions {
   /** Sends every request except a GET with a body. Defaults to the global `fetch`. */
   fetch?: typeof fetch;
-  /** Per-request timeout in milliseconds, used when the request carries no signal of its own. */
+  /**
+   * Per-request timeout in milliseconds, used when the request carries no signal of its own. Defaults to
+   * {@link DEFAULT_TIMEOUT_MS}; 0 means no limit.
+   */
   timeoutMs?: number;
 }
 
@@ -18,9 +31,8 @@ export interface TransportOptions {
  */
 export function createFetchApi(options: TransportOptions = {}): typeof fetch {
   const base = options.fetch ?? ((...a: Parameters<typeof fetch>) => fetch(...a));
-  const ms = options.timeoutMs;
   return async (input, init) => {
-    const signal = init?.signal ?? (ms ? AbortSignal.timeout(ms) : undefined);
+    const signal = timeoutSignal(options.timeoutMs, init?.signal);
     const method = (init?.method ?? 'GET').toUpperCase();
     const res =
       method === 'GET' && init?.body != null && !(input instanceof Request)

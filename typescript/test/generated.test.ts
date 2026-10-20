@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import * as generated from '../src/generated/index.ts';
-import { EVENT_TYPES, GROUPS, ID_BODY_PATHS, ID_FIELDS, OPERATIONS, WEBHOOKS } from '../src/generated/meta.ts';
+import { EVENT_TYPES, GROUPS, ID_BODY_PATHS, ID_FIELDS, OPERATIONS, WEBHOOK_MODELS, WEBHOOKS } from '../src/generated/meta.ts';
 import { findGroupClasses } from '../scripts/render-meta.ts';
 
 const groups = Object.values(
@@ -84,5 +84,12 @@ describe('findGroupClasses', () => {
   });
   it('throws when the generated index does not re-export apis', () => {
     expect(() => findGroupClasses([api('AApi.ts', 'AApi', ['foo'])], [op('foo')], idx, '')).toThrow(/re-export/);
+  });
+});
+
+describe('the rendered webhook required-field table', () => {
+  it('the committed table covers every webhook schema', () => {
+    for (const w of WEBHOOKS) expect(WEBHOOK_MODELS[w.schema], w.schema).toBeDefined();
+    expect(Object.values(WEBHOOK_MODELS).some((m) => m.required.length > 1)).toBe(true);
   });
 });

@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { webhookModels, type SchemaNode } from '../../scripts/lib/webhook-models.ts';
 
 interface Operation {
   operationId: string;
@@ -65,9 +66,11 @@ export function findGroupClasses(
   return groups;
 }
 
-/** Write `<generatedDir>/meta.ts` from `meta.json`. */
-export function renderMeta(metaPath: string, generatedDir: string): void {
+/** Write `<generatedDir>/meta.ts` from `meta.json` and the prepared spec. */
+export function renderMeta(metaPath: string, generatedDir: string, specPath: string): void {
   const meta = JSON.parse(readFileSync(metaPath, 'utf8')) as Meta;
+  const spec = JSON.parse(readFileSync(specPath, 'utf8')) as { components?: { schemas?: Record<string, SchemaNode> } };
+  const models = webhookModels(spec.components?.schemas ?? {}, meta.webhooks);
   if (!meta.idFields || !meta.idBodyPaths) {
     throw new Error('meta.json has no idFields/idBodyPaths (was it prepared with --lang typescript?)');
   }
@@ -113,6 +116,16 @@ export const ID_FIELDS: readonly string[] = ${json(meta.idFields)};
 
 /** Per operationId, the JSON request-body locations of integer IDs, e.g. \`products[].product_id\`. */
 export const ID_BODY_PATHS: Readonly<Record<string, readonly string[]>> = ${json(meta.idBodyPaths)};
+
+export interface WebhookModel {
+  /** JSON names of the properties that must be present and non-null. */
+  readonly required: readonly string[];
+  /** Properties holding another model: directly, as a list, or as a string-keyed map. */
+  readonly children: Readonly<Record<string, readonly ['object' | 'list' | 'map', string]>>;
+}
+
+/** Every model reachable from a webhook, by schema name. */
+export const WEBHOOK_MODELS: Readonly<Record<string, WebhookModel>> = ${json(models)};
 `;
   writeFileSync(join(generatedDir, 'meta.ts'), out);
 }

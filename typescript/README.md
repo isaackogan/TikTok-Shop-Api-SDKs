@@ -6,7 +6,7 @@ It signs requests for you, handles OAuth, works with many shops at once, and ver
 
 > **Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.**
 >
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 The client is generated from an OpenAPI spec that is itself built from the TikTok Shop Partner Center docs: [tiktok-shop.openapi.yaml](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml).
 
@@ -41,7 +41,7 @@ const tokens = await auth.exchangeCode(code);
 const renewed = await auth.refresh(tokens.refreshToken);
 ```
 
-A non-zero `code` in TikTok's response throws a `TikTokShopError` with `code`, `message` and `requestId`.
+A non-zero `code` in TikTok's response throws a `TikTokShopError` with `code`, `message` and `requestId` (see [Errors](#errors)).
 
 ## Make your first call
 
@@ -81,7 +81,7 @@ Verify the signature against the **raw** request body, then parse it into a type
 
 ```ts
 import { createServer } from 'node:http';
-import { Webhooks, WebhookSignatureError } from 'tiktok-shop-api';
+import { WebhookParseError, Webhooks, WebhookSignatureError } from 'tiktok-shop-api';
 
 createServer(async (req, res) => {
   const chunks: Buffer[] = [];
@@ -102,12 +102,13 @@ createServer(async (req, res) => {
     }
     res.writeHead(200).end();
   } catch (e) {
-    res.writeHead(e instanceof WebhookSignatureError ? 401 : 500).end();
+    res.writeHead(e instanceof WebhookSignatureError ? 401 : e instanceof WebhookParseError ? 400 : 500).end();
   }
 }).listen(3000);
 ```
 
 - Never re-serialize the body before verifying. Changed whitespace or key order makes the signature fail.
+- Parsing is strict. A body that is not a JSON object, or whose `type` is missing or not an integer, throws `WebhookParseError`, and so does a known type with a required field missing or null: a known type missing a required field is a parse error.
 - A webhook type this SDK does not know comes back as `{ type, raw }`. Known events never have a `raw` property, so `'raw' in event` (or `isUnknownWebhookEvent(event)`) separates the two. After that, `event.type` narrows to the specific webhook model.
 - `EVENT_TYPES` maps a type number to its name (`1` is `ORDER_STATUS_CHANGE`).
 
@@ -115,9 +116,24 @@ createServer(async (req, res) => {
 
 TikTok Shop IDs (`shop_id`, `order_id`, `product_id`, ...) are 64-bit integers, which JavaScript numbers cannot hold exactly. This client reads them as **strings** in every response and webhook, and sends them back as the numbers TikTok expects. For example, `7494049642642441621` stays `"7494049642642441621"`.
 
+## Options
+
+- `baseUrl` (on `TikTokShop` and `TikTokShopAuth`) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path.
+- `timeoutMs` (on both) is the per-request timeout. It defaults to 30 seconds (`DEFAULT_TIMEOUT_MS`); 0 means no limit.
+- Requests carry the User-Agent `tiktok-shop-api-typescript/<version>`.
+
 ## Errors
 
-A response with `code != 0`, or a non-2xx status, throws `TikTokShopError` with `code`, `message`, `requestId` and (for HTTP failures) `httpStatus`.
+Every failed call throws `TikTokShopError`, with `code`, `message`, `requestId`, `httpStatus` and the original error as `cause`:
+
+| What happened | `code` | `httpStatus` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | unset |
+
+The generated models copy scalar fields as sent, without checking their type. A list or object of the wrong shape is the -1 error above.
 
 ## About
 

@@ -1,5 +1,7 @@
 import { TikTokShopError } from './errors.ts';
 import { parseJsonExact } from './json.ts';
+import { timeoutSignal } from './transport.ts';
+import { USER_AGENT } from './version.ts';
 
 export const DEFAULT_AUTH_BASE_URL = 'https://auth.tiktok-shops.com';
 
@@ -8,8 +10,10 @@ export interface TikTokShopAuthOptions {
   appSecret: string;
   /** Your Partner Center service ID. Needed for `seller` and `partner` authorization URLs. */
   serviceId?: string;
-  /** Token endpoint host. Defaults to `https://auth.tiktok-shops.com`. */
+  /** Token endpoint host, an origin only (no path prefix). Defaults to `https://auth.tiktok-shops.com`. */
   baseUrl?: string;
+  /** Per-request timeout in milliseconds. Defaults to 30 000 (`DEFAULT_TIMEOUT_MS`); 0 means no limit. */
+  timeoutMs?: number;
   /**
    * HTTP client override (defaults to the global `fetch`). The default never follows a redirect: a 3xx reply is thrown
    * as a {@link TikTokShopError} whose `code` and `httpStatus` are the status, so the app secret and the code are never
@@ -71,7 +75,8 @@ export class TikTokShopAuth {
       if (!this.#opts.serviceId) throw new Error(`serviceId is required for ${type} authorization URLs`);
       first = `service_id=${enc(this.#opts.serviceId)}`;
     }
-    return `${host}${h.path}?${first}${state === undefined ? '' : `&state=${enc(state)}`}`;
+    // Lesson 34: an empty state is omitted, like an absent one.
+    return `${host}${h.path}?${first}${state === undefined || state === '' ? '' : `&state=${enc(state)}`}`;
   }
 
   exchangeCode(code: string): Promise<TokenSet> {
@@ -86,9 +91,23 @@ export class TikTokShopAuth {
     const params: [string, string][] = [['app_key', this.#opts.appKey], ['app_secret', this.#opts.appSecret], ...extra];
     const base = (this.#opts.baseUrl ?? DEFAULT_AUTH_BASE_URL).replace(/\/+$/, '');
     const url = `${base}/api/v2/token/${endpoint}?${params.map(([k, v]) => `${k}=${enc(v)}`).join('&')}`;
+    const signal = timeoutSignal(this.#opts.timeoutMs);
+    const init: RequestInit = { method: 'GET', headers: { 'user-agent': USER_AGENT }, ...(signal ? { signal } : {}) };
     // 'manual' targets Node, where a 3xx comes back as a normal response; in a browser it would be an opaque status-0 response.
-    const res = await (this.#opts.fetch ?? fetch)(url, this.#opts.fetch ? { method: 'GET' } : { method: 'GET', redirect: 'manual' });
-    const text = await res.text();
+    if (!this.#opts.fetch) init.redirect = 'manual';
+    let res: Response;
+    try {
+      res = await (this.#opts.fetch ?? fetch)(url, init);
+    } catch (e) {
+      // R13c: no HTTP response at all. The URL carries the secrets, so the message never includes it (fetch's errors don't).
+      throw transportError(e);
+    }
+    let text: string;
+    try {
+      text = await res.text();
+    } catch (e) {
+      throw new TikTokShopError({ code: -1, message: `Token response could not be read (HTTP ${res.status})`, requestId: '', httpStatus: res.status, cause: e });
+    }
     // R13b: a reply with no usable TikTok code has the HTTP status as its code if it is non-2xx (a redirect included,
     // since it is never followed); -1 only when a 2xx reply cannot be understood.
     const noCode = res.ok ? -1 : res.status;
@@ -101,40 +120,49 @@ export class TikTokShopAuth {
     if (typeof env !== 'object' || env === null || Array.isArray(env)) {
       throw new TikTokShopError({ code: noCode, message: `Unexpected token response (HTTP ${res.status})`, requestId: '', httpStatus: res.status });
     }
-    let code = typeof env.code === 'number' ? env.code : res.ok ? -1 : res.status;
+    const requestId = typeof env.request_id === 'string' ? env.request_id : '';
+    // Lesson 34: a code that is missing or not an integer makes a 2xx unreadable (-1); on a non-2xx the status is the code.
+    let code = Number.isSafeInteger(env.code) ? (env.code as number) : res.ok ? -1 : res.status;
     if (code !== 0 || !res.ok) {
       if (code === 0) code = res.status; // R13a: a failure that carries no TikTok code uses the HTTP status
       throw new TikTokShopError({
         code,
-        message: env?.message ?? `HTTP ${res.status}`,
-        requestId: env?.request_id ?? '',
-        httpStatus: res.ok ? undefined : res.status,
+        message: (typeof env.message === 'string' && env.message) || `HTTP ${res.status}`,
+        requestId,
+        httpStatus: res.status,
       });
     }
+    const fail = (message: string) => new TikTokShopError({ code: -1, message, requestId, httpStatus: res.status });
     const d = env.data;
-    if (typeof d !== 'object' || d === null || Array.isArray(d)) {
-      throw new TikTokShopError({ code: -1, message: 'Token response has no data', requestId: env.request_id ?? '' });
-    }
+    if (typeof d !== 'object' || d === null || Array.isArray(d)) throw fail('Token response has no data');
     for (const k of ['access_token', 'refresh_token']) {
-      if (typeof d[k] !== 'string' || d[k] === '') {
-        throw new TikTokShopError({ code: -1, message: `Token response is missing ${k}`, requestId: env.request_id ?? '' });
-      }
+      if (typeof d[k] !== 'string' || d[k] === '') throw fail(`Token response is missing ${k}`);
     }
     for (const k of ['access_token_expire_in', 'refresh_token_expire_in']) {
-      if (typeof d[k] !== 'number') {
-        throw new TikTokShopError({ code: -1, message: `Token response is missing ${k}`, requestId: env.request_id ?? '' });
-      }
+      if (!Number.isSafeInteger(d[k])) throw fail(`Token response is missing ${k}`);
     }
+    // Lesson 21: an optional field of the wrong type is treated as absent.
+    const str = (v: unknown) => (typeof v === 'string' ? v : undefined);
     return {
       accessToken: d.access_token,
       accessTokenExpireIn: d.access_token_expire_in,
       refreshToken: d.refresh_token,
       refreshTokenExpireIn: d.refresh_token_expire_in,
-      openId: d.open_id ?? undefined,
-      sellerName: d.seller_name ?? undefined,
-      sellerBaseRegion: d.seller_base_region ?? undefined,
-      userType: d.user_type ?? undefined,
-      grantedScopes: d.granted_scopes ?? undefined,
+      openId: str(d.open_id),
+      sellerName: str(d.seller_name),
+      sellerBaseRegion: str(d.seller_base_region),
+      userType: Number.isSafeInteger(d.user_type) ? d.user_type : undefined,
+      grantedScopes: Array.isArray(d.granted_scopes) && d.granted_scopes.every((x: unknown) => typeof x === 'string') ? d.granted_scopes : undefined,
     };
   }
+}
+
+function transportError(e: unknown): TikTokShopError {
+  const timedOut = e instanceof Error && (e.name === 'TimeoutError' || e.name === 'AbortError');
+  return new TikTokShopError({
+    code: -1,
+    message: `${timedOut ? 'Token request timed out or was aborted' : 'Token request failed'}: ${e instanceof Error ? e.message : String(e)}`,
+    requestId: '',
+    cause: e,
+  });
 }

@@ -1,7 +1,7 @@
 // Type-checked copy of the README's code (the statements are verbatim; imports point at ../src).
 // `test/readme.test.ts` fails if the README and this file drift apart.
 import { createServer } from 'node:http';
-import { isUnknownWebhookEvent, TikTokShop, TikTokShopAuth, Webhooks, WebhookSignatureError } from '../src/index.ts';
+import { isUnknownWebhookEvent, TikTokShop, TikTokShopAuth, WebhookParseError, Webhooks, WebhookSignatureError } from '../src/index.ts';
 import type { OrderStatusChangeWebhook, UnknownWebhookEvent, WebhookEvent } from '../src/index.ts';
 
 export async function oauthAndCalls(callbackUrl: string, tokenA: string, tokenB: string, cipherA: string, cipherB: string) {
@@ -60,7 +60,7 @@ export function webhookServer() {
       }
       res.writeHead(200).end();
     } catch (e) {
-      res.writeHead(e instanceof WebhookSignatureError ? 401 : 500).end();
+      res.writeHead(e instanceof WebhookSignatureError ? 401 : e instanceof WebhookParseError ? 400 : 500).end();
     }
   }).listen(3000);
 }
