@@ -23,7 +23,7 @@ Authored pages live in `src/content/docs/`. The API reference under `/openapi/re
 
 ## Hosting
 
-The site is served from Cloudflare Workers static assets at <https://tiktok-shop-api.docs.isaackogan.com/>. `wrangler.jsonc` in this directory declares the asset directory and the custom domain; there is no Worker script. The GitHub workflow validates every change and deploys pushes to `main` when the repository has the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
+The site is served from Cloudflare Workers static assets at <https://ttspa.docs.isaackogan.com/>. `wrangler.jsonc` in this directory declares the asset directory and the custom domain; there is no Worker script. The GitHub workflow validates every change and deploys pushes to `main` when the repository has the `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets.
 
 To deploy from a checkout after the install above:
 

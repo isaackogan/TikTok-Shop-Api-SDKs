@@ -6,6 +6,8 @@ The spec is generated automatically from TikTok Shop's official partner document
 
 > Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 
+**Documentation:** [ttspa.docs.isaackogan.com](https://ttspa.docs.isaackogan.com/): Getting Started in every language, a section per SDK, and a browsable reference for every operation and webhook.
+
 ## What's here
 
 | Path | Contents | Install |

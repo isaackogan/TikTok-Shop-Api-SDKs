@@ -30,14 +30,14 @@ function versionCode() {
 }
 
 export default defineConfig({
-  site: process.env.DOCS_SITE || 'https://tiktok-shop-api.docs.isaackogan.com',
+  site: process.env.DOCS_SITE || 'https://ttspa.docs.isaackogan.com',
   base,
   trailingSlash: 'always',
   markdown: { processor: unified({ remarkPlugins: [prefixLinks, versionCode] }) },
   integrations: [
     starlight({
-      title: 'TikTok Shop API SDKs',
-      description: 'Typed TikTok Shop API clients for TypeScript, Python, Go, Java, Kotlin, PHP, Rust and C#, generated from one OpenAPI spec.',
+      title: 'TikTok Shop Partner API',
+      description: 'TikTok Shop Partner API docs: typed SDKs for TypeScript, Python, Go, Java, Kotlin, PHP, Rust and C#, and the OpenAPI spec they are generated from.',
       favicon: '/favicon.svg',
       social: [{ icon: 'github', label: 'GitHub', href: repo }],
       editLink: { baseUrl: `${repo}/edit/main/docs/` },

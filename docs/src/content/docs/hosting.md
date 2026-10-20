@@ -3,13 +3,13 @@ title: Cloudflare Workers hosting
 description: Host the static documentation on Cloudflare Workers static assets under a custom domain.
 ---
 
-The site is deployed to Cloudflare Workers as static assets and served at `https://tiktok-shop-api.docs.isaackogan.com/`. There is no Worker script: `docs/wrangler.jsonc` only declares the asset directory, the HTML handling and the custom domain. The site needs no Pages Functions, no Cloudflare Astro adapter and no TikTok credentials.
+The site is deployed to Cloudflare Workers as static assets and served at `https://ttspa.docs.isaackogan.com/`. There is no Worker script: `docs/wrangler.jsonc` only declares the asset directory, the HTML handling and the custom domain. The site needs no Pages Functions, no Cloudflare Astro adapter and no TikTok credentials.
 
 ## Configuration
 
 ```jsonc
 {
-  "name": "tiktok-shop-api-docs",
+  "name": "tiktok-shop-partner-api-docs",
   "compatibility_date": "2026-10-20",
   "assets": {
     "directory": "./dist",
@@ -18,7 +18,7 @@ The site is deployed to Cloudflare Workers as static assets and served at `https
   },
   "workers_dev": false,
   "routes": [
-    { "pattern": "tiktok-shop-api.docs.isaackogan.com", "custom_domain": true }
+    { "pattern": "ttspa.docs.isaackogan.com", "custom_domain": true }
   ]
 }
 ```
@@ -63,10 +63,10 @@ The spec is regenerated daily. A push that changes `.openapi/` therefore redeplo
 ## Verify a deployment
 
 ```sh
-curl -I https://tiktok-shop-api.docs.isaackogan.com/sdks/python/
-curl -I https://tiktok-shop-api.docs.isaackogan.com/sdks/python
-curl -I https://tiktok-shop-api.docs.isaackogan.com/missing/
-curl -I https://tiktok-shop-api.docs.isaackogan.com/openapi/tiktok-shop.openapi.yaml
+curl -I https://ttspa.docs.isaackogan.com/sdks/python/
+curl -I https://ttspa.docs.isaackogan.com/sdks/python
+curl -I https://ttspa.docs.isaackogan.com/missing/
+curl -I https://ttspa.docs.isaackogan.com/openapi/tiktok-shop.openapi.yaml
 ```
 
 Expect a 200, a 307 redirect to the trailing-slash form, a 404 and a 200, in that order. Then:

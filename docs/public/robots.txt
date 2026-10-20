@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tiktok-shop-api.docs.isaackogan.com/sitemap-index.xml
+Sitemap: https://ttspa.docs.isaackogan.com/sitemap-index.xml
