@@ -119,13 +119,47 @@ def test_token_non_2xx_without_a_code_uses_the_http_status(body):
     assert e2.value.code == 503 and e2.value.http_status == 503
 
 
-def test_token_no_tiktok_code_at_all_stays_minus_one():
-    for status, body in ((503, "down"), (200, "<html>"), (200, "[1]")):
-        transport = httpx.MockTransport(lambda req, s=status, b=body: httpx.Response(s, content=b.encode()))
-        with pytest.raises(TikTokShopError) as e:
-            TikTokShopAuth("k", "s", transport=transport).refresh("r")
-        assert e.value.code == -1, (status, body)
-    ok_no_data = httpx.MockTransport(lambda req: httpx.Response(200, json={"code": 0, "request_id": "r"}))
+# R13b: a non-2xx has TikTok's non-zero code if the body has one, else the HTTP status; -1 only for an unreadable 2xx.
+R13B = [
+    (503, '{"message":"x"}', 503),
+    (503, '{"code":0}', 503),
+    (503, "down", 503),
+    (503, "", 503),
+    (503, "[1]", 503),
+    (302, "", 302),
+    (503, '{"code":12345,"message":"m"}', 12345),
+    (200, "<html>", -1),
+    (200, "[1]", -1),
+]
+
+
+@pytest.mark.parametrize("status,body,want", R13B)
+def test_r13b_api_codes(status, body, want):
+    transport = httpx.MockTransport(lambda req: httpx.Response(status, content=body.encode()))
     with pytest.raises(TikTokShopError) as e:
-        TikTokShopAuth("k", "s", transport=ok_no_data).refresh("r")
+        TikTokShop("k", "s", transport=transport).authorization.get_authorized_shops()
+    assert (e.value.code, e.value.http_status) == (want, status)
+    with pytest.raises(TikTokShopError) as e2:
+        async def go():
+            async with AsyncTikTokShop("k", "s", transport=httpx.MockTransport(lambda req: httpx.Response(status, content=body.encode()))) as c:
+                await c.authorization.get_authorized_shops()
+        asyncio.run(go())
+    assert (e2.value.code, e2.value.http_status) == (want, status)
+
+
+@pytest.mark.parametrize("status,body,want", R13B)
+def test_r13b_token_codes(status, body, want):
+    transport = httpx.MockTransport(lambda req: httpx.Response(status, content=body.encode()))
+    with pytest.raises(TikTokShopError) as e:
+        TikTokShopAuth("k", "s", transport=transport).refresh("r")
+    assert (e.value.code, e.value.http_status) == (want, status)
+    with pytest.raises(TikTokShopError) as e2:
+        asyncio.run(AsyncTikTokShopAuth("k", "s", transport=transport).exchange_code("c"))
+    assert (e2.value.code, e2.value.http_status) == (want, status)
+
+
+def test_token_code_zero_without_data_on_a_2xx_is_minus_one():
+    transport = httpx.MockTransport(lambda req: httpx.Response(200, json={"code": 0, "request_id": "r"}))
+    with pytest.raises(TikTokShopError) as e:
+        TikTokShopAuth("k", "s", transport=transport).refresh("r")
     assert e.value.code == -1

@@ -141,8 +141,8 @@ func checkResponse(status int, statusText string, data []byte) error {
 	ok := status >= 200 && status < 300
 	var env map[string]json.RawMessage
 	parseErr := json.Unmarshal(data, &env)
-	if ok && parseErr != nil && !json.Valid(data) {
-		return &Error{Message: fmt.Sprintf("Response is not valid JSON (HTTP %d)", status), HTTPStatus: status, Cause: parseErr}
+	if ok && env == nil { // R13b: a 2xx reply that is not a JSON object cannot be understood
+		return &Error{Code: -1, Message: fmt.Sprintf("Response is not valid JSON (HTTP %d)", status), HTTPStatus: status, Cause: parseErr}
 	}
 	var code *int
 	var message *string

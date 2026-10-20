@@ -214,9 +214,11 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		if err == nil {
 			err = fmt.Errorf("body is not a JSON object")
 		}
+		// R13b: a non-2xx reply (a redirect included, since it is never followed) has the HTTP status as its code
+		// whatever the body; only an unreadable 2xx is -1.
 		code := -1
-		if status >= 300 && status < 400 {
-			code = status // a redirect is never followed; report it by its status
+		if !ok {
+			code = status
 		}
 		return nil, &Error{Code: code, Message: fmt.Sprintf("unparseable token response (HTTP %d)", status), HTTPStatus: status, Cause: err}
 	}

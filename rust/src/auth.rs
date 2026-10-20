@@ -233,7 +233,11 @@ fn to_token_set(status: u16, body: &[u8]) -> Result<TokenSet, Error> {
     };
     let env = match serde_json::from_slice::<Value>(body) {
         Ok(v @ Value::Object(_)) => v,
-        _ => return Err(api(-1, format!("unparseable token response (HTTP {status})"), String::new())),
+        // R13b: a non-2xx reply has the HTTP status as its code whatever the body; only an unreadable 2xx is -1.
+        _ => {
+            let code = if ok { -1 } else { i64::from(status) };
+            return Err(api(code, format!("unparseable token response (HTTP {status})"), String::new()));
+        }
     };
     let text = |name: &str| env.get(name).and_then(Value::as_str).unwrap_or_default().to_owned();
     let request_id = text("request_id");

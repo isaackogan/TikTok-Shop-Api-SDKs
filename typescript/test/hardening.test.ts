@@ -155,13 +155,41 @@ describe('R13a: a failure without a TikTok code uses the HTTP status as its code
     });
   }
 
-  it('token: -1 only when there is no TikTok code at all', async () => {
-    const auth = new TikTokShopAuth({ appKey: 'k', appSecret: 's', baseUrl });
-    for (const [status, body] of [[503, 'down'], [200, '<html>'], [503, '[1]'], [200, '{"code":0,"request_id":"r"}']] as const) {
+  // R13b: a non-2xx has TikTok's non-zero code if the body has one, else the HTTP status; -1 only for an unreadable 2xx.
+  const table: [number, string, number][] = [
+    [503, '{"message":"x"}', 503],
+    [503, '{"code":0}', 503],
+    [503, 'down', 503],
+    [503, '', 503],
+    [503, '[1]', 503],
+    [302, '', 302],
+    [503, '{"code":12345,"message":"m"}', 12345],
+    [200, '<html>', -1],
+    [200, '[1]', -1],
+  ];
+  for (const [status, body, want] of table) {
+    it(`R13b API ${status} ${JSON.stringify(body)} -> ${want}`, async () => {
       reply = { status, body };
-      const err = await auth.refresh('r').catch((e) => e);
-      expect(err, `${status} ${body}`).toBeInstanceOf(TikTokShopError);
-      expect(err.code, `${status} ${body}`).toBe(-1);
-    }
+      const err = await new TikTokShop({ appKey: 'k', appSecret: 's', baseUrl }).authorization.getAuthorizedShops().catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect(err.code).toBe(want);
+      expect(err.httpStatus).toBe(status);
+    });
+    it(`R13b token ${status} ${JSON.stringify(body)} -> ${want}`, async () => {
+      reply = { status, body };
+      const auth = new TikTokShopAuth({ appKey: 'k', appSecret: 's', baseUrl });
+      for (const call of [() => auth.exchangeCode('c'), () => auth.refresh('r')]) {
+        const err = await call().catch((e) => e);
+        expect(err).toBeInstanceOf(TikTokShopError);
+        expect(err.code).toBe(want);
+        expect(err.httpStatus).toBe(status);
+      }
+    });
+  }
+
+  it('token: code 0 without data on a 2xx is -1', async () => {
+    reply = { status: 200, body: '{"code":0,"request_id":"r"}' };
+    const err = await new TikTokShopAuth({ appKey: 'k', appSecret: 's', baseUrl }).refresh('r').catch((e) => e);
+    expect(err.code).toBe(-1);
   });
 });

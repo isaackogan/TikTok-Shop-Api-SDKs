@@ -13,8 +13,9 @@ use crate::generated::apis;
 pub enum Error {
     /// TikTok answered with an error, or with something that is not an API reply.
     Api {
-        /// TikTok's error code. For a non-2xx reply without one it is the HTTP status; it is `-1` for a 2xx
-        /// reply that is not JSON.
+        /// TikTok's error code (R13b). For a non-2xx reply it is TikTok's non-zero `code` if the body has one,
+        /// else the HTTP status, whatever the body. It is `-1` only for a 2xx reply that cannot be understood
+        /// (not a JSON object, or `code` 0 without `data` on a token call).
         code: i64,
         /// TikTok's message, or a description of what went wrong.
         message: String,

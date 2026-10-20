@@ -124,9 +124,10 @@ def _check_response(response: httpx.Response) -> None:
         envelope = json.loads(response.content)
     except ValueError as e:
         parse_error = e
-    if ok and parse_error is not None:
-        raise TikTokShopError(f"Response is not valid JSON (HTTP {status})", http_status=status) from parse_error
     is_obj = isinstance(envelope, dict)
+    # R13b: -1 only for a 2xx reply that cannot be understood (not a JSON object).
+    if ok and not is_obj:
+        raise TikTokShopError(f"Response is not valid JSON (HTTP {status})", code=-1, http_status=status) from parse_error
     code = envelope.get("code") if is_obj else None
     message = envelope.get("message") if is_obj else None
     request_id = envelope.get("request_id") if is_obj else None

@@ -213,7 +213,8 @@ final class SigningInterceptor implements Interceptor {
             parseError = e;
         }
         if (ok && env == null) {
-            throw new TikTokShopException(0, "Response is not valid JSON (HTTP " + status + ")", "", status, parseError);
+            // R13b: -1 only for a 2xx reply that cannot be understood (not a JSON object).
+            throw new TikTokShopException(-1, "Response is not valid JSON (HTTP " + status + ")", "", status, parseError);
         }
         Long code = null;
         String message = null;

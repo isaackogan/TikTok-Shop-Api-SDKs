@@ -86,10 +86,12 @@ export class TikTokShopAuth {
     const params: [string, string][] = [['app_key', this.#opts.appKey], ['app_secret', this.#opts.appSecret], ...extra];
     const base = (this.#opts.baseUrl ?? DEFAULT_AUTH_BASE_URL).replace(/\/+$/, '');
     const url = `${base}/api/v2/token/${endpoint}?${params.map(([k, v]) => `${k}=${enc(v)}`).join('&')}`;
+    // 'manual' targets Node, where a 3xx comes back as a normal response; in a browser it would be an opaque status-0 response.
     const res = await (this.#opts.fetch ?? fetch)(url, this.#opts.fetch ? { method: 'GET' } : { method: 'GET', redirect: 'manual' });
     const text = await res.text();
-    // No TikTok code at all (R13): -1, except a redirect, which is never followed and so is reported by its status.
-    const noCode = res.status >= 300 && res.status < 400 ? res.status : -1;
+    // R13b: a reply with no usable TikTok code has the HTTP status as its code if it is non-2xx (a redirect included,
+    // since it is never followed); -1 only when a 2xx reply cannot be understood.
+    const noCode = res.ok ? -1 : res.status;
     let env: any;
     try {
       env = parseJsonExact(text, ['open_id']);

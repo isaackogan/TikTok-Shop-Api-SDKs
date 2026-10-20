@@ -7,6 +7,10 @@ class TikTokShopError(Exception):
     Covers an envelope with ``code != 0`` (even on HTTP 200), a non-2xx status (``http_status`` is set,
     ``code`` and ``message`` come from the body when it has them), a 2xx response whose body is not JSON,
     and network errors and timeouts. The original exception, if any, is ``__cause__``.
+
+    ``code`` is TikTok's non-zero ``code`` when the reply has one; for a non-2xx reply without one it is the HTTP status
+    (``http_status`` is then always set); it is -1 only for a 2xx reply that cannot be understood (not a JSON object, or
+    ``code`` 0 without ``data`` on a token call); it is 0 for network errors and timeouts.
     """
 
     def __init__(

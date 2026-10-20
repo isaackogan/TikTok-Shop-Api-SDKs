@@ -224,8 +224,8 @@ async fn code_zero_without_object_data_is_code_minus_one() {
 }
 
 #[tokio::test]
-async fn failures_with_no_tiktok_code_use_minus_one() {
-    for (status, body) in [(200, "<html>no</html>"), (200, "[]"), (200, ""), (502, "bad gateway")] {
+async fn unreadable_2xx_replies_use_minus_one() {
+    for (status, body) in [(200, "<html>no</html>"), (200, "[]"), (200, "")] {
         let server = token_server(status, body).await;
         let err = auth_for(&server).exchange_code("c").await.unwrap_err();
         match err {
@@ -345,4 +345,33 @@ fn debug_output_redacts_every_secret() {
         }
     }
     assert!(format!("{o:?}").contains("123abc"), "the app key is not a secret");
+}
+
+/// R13b: any non-2xx without a non-zero TikTok code uses the HTTP status; -1 is only for an unreadable 2xx or code 0 without data.
+#[tokio::test]
+async fn r13b_token_codes() {
+    let cases: [(u16, &str, i64); 9] = [
+        (503, r#"{"message":"x"}"#, 503),
+        (503, r#"{"code":0}"#, 503),
+        (503, "down", 503),
+        (503, "", 503),
+        (503, "[1]", 503),
+        (302, "", 302),
+        (503, r#"{"code":12345,"message":"m"}"#, 12345),
+        (200, "<html>", -1),
+        (200, r#"{"code":0,"request_id":"r"}"#, -1),
+    ];
+    for (status, body, want) in cases {
+        let server = token_server(status, body).await;
+        for refresh in [false, true] {
+            let a = auth_for(&server);
+            let err = if refresh { a.refresh("r").await } else { a.exchange_code("c").await }.unwrap_err();
+            match err {
+                Error::Api { code, http_status, .. } => {
+                    assert_eq!((code, http_status), (want, Some(status)), "{status} {body:?}");
+                }
+                other => panic!("{other:?}"),
+            }
+        }
+    }
 }

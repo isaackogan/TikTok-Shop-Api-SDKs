@@ -99,8 +99,9 @@ def _transport_error(e: httpx.HTTPError | httpx.InvalidURL) -> TikTokShopError:
 
 
 def _no_code(status: int) -> int:
-    """The code for a reply with no TikTok code at all: -1, except a redirect (never followed), which has its status."""
-    return status if 300 <= status < 400 else -1
+    """R13b: the code of a reply with no readable TikTok code: the HTTP status if it is non-2xx (a redirect included,
+    since it is never followed), -1 only for an unreadable 2xx."""
+    return -1 if 200 <= status < 300 else status
 
 
 def _to_token_set(response: httpx.Response) -> TokenSet:

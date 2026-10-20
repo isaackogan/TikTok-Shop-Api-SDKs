@@ -436,3 +436,27 @@ async fn redirects_are_not_followed_by_the_default_client() {
     }
     assert!(target.received_requests().await.unwrap().is_empty(), "the redirect target must not be contacted");
 }
+
+/// R13b for API calls: non-2xx -> non-zero body code else the status; an unreadable 2xx -> -1.
+#[tokio::test]
+async fn r13b_api_codes() {
+    let cases: [(u16, &str, i64); 9] = [
+        (503, r#"{"message":"x"}"#, 503),
+        (503, r#"{"code":0}"#, 503),
+        (503, "down", 503),
+        (503, "", 503),
+        (503, "[1]", 503),
+        (302, "", 302),
+        (503, r#"{"code":12345,"message":"m"}"#, 12345),
+        (200, "<html>", -1),
+        (200, "[1]", -1),
+    ];
+    for (status, body, want) in cases {
+        let server = stub_with(ResponseTemplate::new(status).set_body_raw(body, "application/json")).await;
+        let err = client(&server).orders.get_order_list(20, None, None, None, None).await.unwrap_err();
+        match err {
+            Error::Api { code, http_status, .. } => assert_eq!((code, http_status), (want, Some(status)), "{status} {body:?}"),
+            other => panic!("{other:?}"),
+        }
+    }
+}

@@ -144,16 +144,17 @@ export class TikTokShop {
       envelope = undefined;
       parseError = e;
     }
-    if (res.ok && parseError !== undefined) {
+    const isObj = envelope !== null && typeof envelope === 'object' && !Array.isArray(envelope);
+    // R13b: -1 only for a 2xx reply that cannot be understood (not a JSON object).
+    if (res.ok && !isObj) {
       throw new TikTokShopError({
-        code: 0,
+        code: -1,
         message: `Response is not valid JSON (HTTP ${res.status})`,
         requestId: '',
         httpStatus: res.status,
         cause: parseError,
       });
     }
-    const isObj = envelope !== null && typeof envelope === 'object';
     const code = isObj && typeof envelope!.code === 'number' ? envelope!.code : undefined;
     const message = isObj && typeof envelope!.message === 'string' ? envelope!.message : undefined;
     const requestId = isObj && typeof envelope!.request_id === 'string' ? envelope!.request_id : '';

@@ -183,10 +183,10 @@ class AuthTest {
     }
 
     @Test
-    fun nonJsonBodiesUseCodeMinusOne() {
+    fun nonJsonBodiesUseMinusOneOn2xxAndTheStatusOtherwise() {
         for (status in listOf(200, 502)) {
             val ex = exchangeFails("<html>nope</html>", status)
-            assertEquals(-1, ex.code)
+            assertEquals(if (status == 200) -1 else status, ex.code)
             assertEquals(status, ex.httpStatus)
         }
         assertEquals(-1, exchangeFails("[1]").code)
@@ -303,13 +303,18 @@ class AuthTest {
         }
     }
 
+    /** R13b: non-2xx -> TikTok's non-zero code else the HTTP status; an unreadable 2xx, or code 0 without data -> -1. */
     @Test
-    fun aTokenFailureWithNoCodeOrCodeZeroUsesTheHttpStatus() {
-        for (body in listOf("""{"message":"x"}""", """{"code":0}""")) {
-            val ex = exchangeFails(body, 503)
-            assertEquals(503, ex.code, body)
-            assertEquals(503, ex.httpStatus, body)
+    fun r13bTokenCodes() {
+        val cases = listOf(
+            Triple(503, """{"message":"x"}""", 503), Triple(503, """{"code":0}""", 503), Triple(503, "down", 503), Triple(503, "", 503),
+            Triple(503, "[1]", 503), Triple(302, "", 302), Triple(503, """{"code":12345,"message":"m"}""", 12345),
+            Triple(200, "<html>", -1), Triple(200, """{"code":0,"request_id":"r"}""", -1),
+        )
+        for ((status, body, want) in cases) {
+            val ex = exchangeFails(body, status)
+            assertEquals(want, ex.code, "$status $body")
+            assertEquals(status, ex.httpStatus, "$status $body")
         }
-        assertEquals(-1, exchangeFails("down", 503).code)
     }
 }

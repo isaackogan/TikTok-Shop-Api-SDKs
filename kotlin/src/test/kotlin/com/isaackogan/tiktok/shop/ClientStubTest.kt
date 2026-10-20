@@ -406,4 +406,20 @@ class ClientStubTest {
             assertEquals(503, e.httpStatus, body)
         }
     }
+
+    /** R13b: non-2xx -> TikTok's non-zero code else the HTTP status; an unreadable 2xx -> -1. */
+    @Test
+    fun r13bApiCodes() {
+        val cases = listOf(
+            Triple(503, """{"message":"x"}""", 503), Triple(503, """{"code":0}""", 503), Triple(503, "down", 503), Triple(503, "", 503),
+            Triple(503, "[1]", 503), Triple(302, "", 302), Triple(503, """{"code":12345,"message":"m"}""", 12345),
+            Triple(200, "<html>", -1), Triple(200, "[1]", -1),
+        )
+        for ((status, body, want) in cases) {
+            server.enqueue(MockResponse.Builder().code(status).body(body).build())
+            val e = assertFailsWith<TikTokShopException> { client().authorization.getAuthorizedShops() }
+            assertEquals(want, e.code, "$status $body")
+            assertEquals(status, e.httpStatus, "$status $body")
+        }
+    }
 }

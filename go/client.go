@@ -36,6 +36,10 @@ type Options struct {
 }
 
 // String describes the options without the app secret, the access token or the shop cipher.
+//
+// This protects only a value formatted directly. fmt reflects into struct fields without calling their String method,
+// so an Options copied into an unexported field of your own struct is still printed in full by %v, %+v and %#v:
+// keep secrets out of structs you log.
 func (o Options) String() string {
 	return fmt.Sprintf("Options{AppKey:%s AppSecret:%s AccessToken:%s ShopCipher:%s BaseURL:%s Timeout:%s Transport:%t}",
 		o.AppKey, redact(o.AppSecret), redact(o.AccessToken), redact(o.ShopCipher), o.BaseURL, o.Timeout, o.Transport != nil)
@@ -114,7 +118,7 @@ func New(o Options) *TikTokShop {
 	cfg.UserAgent = "tiktok-shop-api-go/0.1.0"
 	// No http.Client.Timeout: net/http would replace our *Error with its own string error. The
 	// transport applies the timeout itself.
-	cfg.HTTPClient = &http.Client{Transport: t, CheckRedirect: noRedirect}
+	cfg.HTTPClient = newHTTPClient(t)
 	api := generated.NewAPIClient(cfg)
 	return &TikTokShop{
 		AffiliateCreator:   api.AffiliateCreatorAPI,
@@ -157,6 +161,11 @@ func (c *TikTokShop) WithShop(opts ...ShopOption) *TikTokShop {
 		o.Timeout = -1 // already resolved: 0 here means none
 	}
 	return New(o)
+}
+
+// newHTTPClient is the client the SDK builds around the signing transport: it never follows a redirect.
+func newHTTPClient(rt http.RoundTripper) *http.Client {
+	return &http.Client{Transport: rt, CheckRedirect: noRedirect}
 }
 
 // noRedirect makes an http.Client hand back a 3xx reply instead of following it.

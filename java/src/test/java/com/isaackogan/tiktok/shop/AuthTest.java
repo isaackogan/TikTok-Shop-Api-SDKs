@@ -204,10 +204,10 @@ class AuthTest {
     }
 
     @Test
-    void nonJsonBodiesUseCodeMinusOne() throws Exception {
+    void nonJsonBodiesUseMinusOneOn2xxAndTheStatusOtherwise() throws Exception {
         for (int status : new int[] {200, 502}) {
             TikTokShopException ex = exchangeFails("<html>nope</html>", status);
-            assertEquals(-1, ex.getCode());
+            assertEquals(status == 200 ? -1 : status, ex.getCode());
             assertEquals(Integer.valueOf(status), ex.getHttpStatus());
         }
         assertEquals(-1, exchangeFails("[1]", 200).getCode());
@@ -300,13 +300,18 @@ class AuthTest {
         }
     }
 
+    /** R13b: non-2xx -> TikTok's non-zero code else the HTTP status; an unreadable 2xx, or code 0 without data -> -1. */
     @Test
-    void aTokenFailureWithNoCodeOrCodeZeroUsesTheHttpStatus() throws Exception {
-        for (String body : new String[] {"{\"message\":\"x\"}", "{\"code\":0}"}) {
-            TikTokShopException ex = exchangeFails(body, 503);
-            assertEquals(503, ex.getCode(), body);
-            assertEquals(Integer.valueOf(503), ex.getHttpStatus(), body);
+    void r13bTokenCodes() throws Exception {
+        Object[][] cases = {
+            {503, "{\"message\":\"x\"}", 503}, {503, "{\"code\":0}", 503}, {503, "down", 503}, {503, "", 503}, {503, "[1]", 503},
+            {302, "", 302}, {503, "{\"code\":12345,\"message\":\"m\"}", 12345}, {200, "<html>", -1},
+            {200, "{\"code\":0,\"request_id\":\"r\"}", -1},
+        };
+        for (Object[] c : cases) {
+            TikTokShopException ex = exchangeFails((String) c[1], (Integer) c[0]);
+            assertEquals((Integer) c[2], ex.getCode(), c[0] + " " + c[1]);
+            assertEquals(c[0], ex.getHttpStatus(), c[0] + " " + c[1]);
         }
-        assertEquals(-1, exchangeFails("down", 503).getCode());
     }
 }

@@ -27,7 +27,11 @@ class TikTokShopAuthOptions(
     val baseUrl: String = DEFAULT_AUTH_BASE_URL,
     /** Bounds one token request. Without it, [DEFAULT_AUTH_TIMEOUT] applies unless you supply an [httpClient]. */
     val timeout: Duration? = null,
-    /** Carries the requests (proxy, TLS, ...). Redirects are never followed, whatever this client says. */
+    /**
+     * Carries the requests (proxy, TLS, ...). Unlike [TikTokShopOptions.httpClient], which is used as is, the token calls
+     * never follow a redirect even on a client you supply, because the URL holds the app secret and the code. A 3xx reply is
+     * thrown as a [TikTokShopException] whose code is the status.
+     */
     val httpClient: OkHttpClient? = null,
 ) {
     /** Never prints the app secret. */
@@ -131,8 +135,9 @@ class TikTokShopAuth(options: TikTokShopAuthOptions) {
                 require(json.isJsonObject) { "body is not a JSON object" }
                 json.asJsonObject
             } catch (e: RuntimeException) {
-                // No TikTok code at all: -1, except a redirect, which is never followed and so is reported by its status.
-                throw TikTokShopException(if (status in 300..399) status else -1, "unparseable token response (HTTP $status)", httpStatus = status, cause = e)
+                // R13b: a non-2xx reply (a redirect included, since it is never followed) has the HTTP status as its code whatever
+                // the body; only an unreadable 2xx is -1.
+                throw TikTokShopException(if (ok) -1 else status, "unparseable token response (HTTP $status)", httpStatus = status, cause = e)
             }
         val requestId = str(env["request_id"]) ?: ""
         val message = str(env["message"])

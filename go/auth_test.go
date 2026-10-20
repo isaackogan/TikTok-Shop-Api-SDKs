@@ -194,7 +194,7 @@ func TestTokenResponseFailuresAreErrors(t *testing.T) {
 		"json not an object":     {200, `[1]`, -1},
 		"500 with envelope":      {500, `{"code":1234,"message":"boom","request_id":"r9"}`, 1234},
 		"500 with code 0":        {500, `{"code":0,"message":"weird","request_id":"r9","data":{}}`, 500},
-		"503 without json":       {503, `down`, -1},
+		"503 without json":       {503, `down`, 503},
 		"code != 0 on 200":       {200, `{"code":36004004,"message":"bad","request_id":"r2","data":{}}`, 36004004},
 	}
 	for name, c := range cases {

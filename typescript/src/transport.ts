@@ -25,6 +25,7 @@ export function createFetchApi(options: TransportOptions = {}): typeof fetch {
     const res =
       method === 'GET' && init?.body != null && !(input instanceof Request)
         ? await sendWithBody(String(input), init, signal)
+        // 'manual' targets Node, where a 3xx comes back as a normal response; in a browser it would be an opaque status-0 response.
         : await base(input, { ...init, ...(signal ? { signal } : {}), ...(options.fetch ? {} : { redirect: 'manual' as const }) });
     return exactJson(res);
   };

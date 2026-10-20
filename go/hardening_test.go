@@ -140,3 +140,84 @@ func TestTokenSetJSONIsUnchanged(t *testing.T) {
 		t.Errorf("round trip: %v %+v", err, back)
 	}
 }
+
+// R13b: a non-2xx has TikTok's non-zero code if the body has one, else the HTTP status; -1 only for an unreadable 2xx.
+var r13b = []struct {
+	status int
+	body   string
+	want   int
+}{
+	{503, `{"message":"x"}`, 503},
+	{503, `{"code":0}`, 503},
+	{503, `down`, 503},
+	{503, ``, 503},
+	{503, `[1]`, 503},
+	{302, ``, 302},
+	{503, `{"code":12345,"message":"m"}`, 12345},
+	{200, `<html>`, -1},
+	{200, `[1]`, -1},
+}
+
+func TestR13bAPIAndTokenCodes(t *testing.T) {
+	for _, c := range r13b {
+		s := newStub(t)
+		s.status, s.body = c.status, c.body
+		// A 302 from the stub carries no Location, so nothing follows either way.
+		_, _, err := s.client().Authorization.GetAuthorizedShops(context.Background()).Execute()
+		var e *Error
+		if !errors.As(err, &e) || e.Code != c.want || e.HTTPStatus != c.status {
+			t.Errorf("api %d %q: %+v", c.status, c.body, e)
+		}
+		srv, _ := authStub(t, c.status, c.body)
+		for _, refresh := range []bool{false, true} {
+			a := NewAuth(AuthOptions{AppKey: "k", AppSecret: "s", BaseURL: srv.URL})
+			if refresh {
+				_, err = a.Refresh(context.Background(), "r")
+			} else {
+				_, err = a.ExchangeCode(context.Background(), "c")
+			}
+			e = nil
+			if !errors.As(err, &e) || e.Code != c.want || e.HTTPStatus != c.status {
+				t.Errorf("token %d %q: %+v", c.status, c.body, e)
+			}
+		}
+	}
+	srv, _ := authStub(t, 200, `{"code":0,"request_id":"r"}`)
+	_, err := NewAuth(AuthOptions{AppKey: "k", AppSecret: "s", BaseURL: srv.URL}).Refresh(context.Background(), "r")
+	var e *Error
+	if !errors.As(err, &e) || e.Code != -1 {
+		t.Errorf("code 0 without data: %+v", e)
+	}
+}
+
+// The SDK-built http.Client itself refuses to follow a redirect. The signing transport would error on a 3xx first, so
+// this drives the clients through a transport that passes the 302 straight back, which only CheckRedirect can stop.
+func TestSDKBuiltClientsRefuseRedirectsThemselves(t *testing.T) {
+	target, hits := redirectTarget(t)
+	passthrough := roundTripFunc(func(r *http.Request) (*http.Response, error) {
+		if strings.HasPrefix(target.URL, "http://"+r.URL.Host) {
+			hits.Add(1)
+			return &http.Response{StatusCode: 200, Header: http.Header{}, Body: http.NoBody, Request: r}, nil
+		}
+		h := http.Header{}
+		h.Set("Location", target.URL+"/stolen")
+		return &http.Response{StatusCode: 302, Header: h, Body: http.NoBody, Request: r}, nil
+	})
+	for name, client := range map[string]*http.Client{
+		"API client":  newHTTPClient(passthrough),
+		"auth client": NewAuth(AuthOptions{Transport: passthrough}).client,
+	} {
+		req, _ := http.NewRequest(http.MethodGet, "http://origin.example/x", nil)
+		res, err := client.Do(req)
+		if err != nil || res.StatusCode != http.StatusFound {
+			t.Errorf("%s: status %v err %v, want the 302 handed back", name, res, err)
+		}
+	}
+	if hits.Load() != 0 {
+		t.Errorf("the redirect target got %d request(s)", hits.Load())
+	}
+}
+
+type roundTripFunc func(*http.Request) (*http.Response, error)
+
+func (f roundTripFunc) RoundTrip(r *http.Request) (*http.Response, error) { return f(r) }

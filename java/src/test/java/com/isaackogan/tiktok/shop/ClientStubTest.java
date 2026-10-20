@@ -437,4 +437,19 @@ class ClientStubTest {
             assertEquals(Integer.valueOf(503), e.getHttpStatus(), body);
         }
     }
+
+    /** R13b: non-2xx -> TikTok's non-zero code else the HTTP status; an unreadable 2xx -> -1. */
+    @Test
+    void r13bApiCodes() {
+        Object[][] cases = {
+            {503, "{\"message\":\"x\"}", 503}, {503, "{\"code\":0}", 503}, {503, "down", 503}, {503, "", 503}, {503, "[1]", 503},
+            {302, "", 302}, {503, "{\"code\":12345,\"message\":\"m\"}", 12345}, {200, "<html>", -1}, {200, "[1]", -1},
+        };
+        for (Object[] c : cases) {
+            server.enqueue(new MockResponse().setResponseCode((Integer) c[0]).setBody((String) c[1]));
+            TikTokShopException e = assertThrows(TikTokShopException.class, () -> builder().build().authorization().getAuthorizedShops());
+            assertEquals((Integer) c[2], e.getCode(), c[0] + " " + c[1]);
+            assertEquals(c[0], e.getHttpStatus(), c[0] + " " + c[1]);
+        }
+    }
 }

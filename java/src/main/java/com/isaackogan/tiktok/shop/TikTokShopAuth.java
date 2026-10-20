@@ -162,8 +162,9 @@ public final class TikTokShopAuth {
             }
             env = json.getAsJsonObject();
         } catch (RuntimeException e) {
-            // No TikTok code at all: -1, except a redirect, which is never followed and so is reported by its status.
-            throw new TikTokShopException(status >= 300 && status < 400 ? status : -1, "unparseable token response (HTTP " + status + ")",
+            // R13b: a non-2xx reply (a redirect included, since it is never followed) has the HTTP status as its code whatever
+            // the body; only an unreadable 2xx is -1.
+            throw new TikTokShopException(ok ? -1 : status, "unparseable token response (HTTP " + status + ")",
                     "", status, e);
         }
         String requestId = str(env.get("request_id"));

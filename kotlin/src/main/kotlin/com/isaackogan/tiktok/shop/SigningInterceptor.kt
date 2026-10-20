@@ -166,7 +166,8 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
                 parseError = e
             }
             if (ok && env == null) {
-                throw TikTokShopException(0, "Response is not valid JSON (HTTP $status)", "", status, parseError)
+                // R13b: -1 only for a 2xx reply that cannot be understood (not a JSON object).
+                throw TikTokShopException(-1, "Response is not valid JSON (HTTP $status)", "", status, parseError)
             }
             var code: Long? = null
             var message: String? = null

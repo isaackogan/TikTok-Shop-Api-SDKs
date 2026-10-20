@@ -234,7 +234,7 @@ impl Middleware for SigningMiddleware {
 pub(crate) fn check_response(status: u16, reason: Option<&str>, data: &[u8]) -> Result<(), Error> {
     let ok = (200..300).contains(&status);
     let parsed: Result<Value, _> = serde_json::from_slice(data);
-    if ok && parsed.is_err() {
+    if ok && !matches!(parsed, Ok(Value::Object(_))) {
         return Err(Error::Api {
             code: -1,
             message: format!("Response is not valid JSON (HTTP {status})"),
