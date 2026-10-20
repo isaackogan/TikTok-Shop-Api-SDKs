@@ -244,13 +244,23 @@ pub(crate) fn check_response(status: u16, reason: Option<&str>, data: &[u8]) -> 
     }
     let env = parsed.ok();
     let field = |name: &str| env.as_ref().and_then(|v| v.get(name));
-    let code = field("code").and_then(Value::as_i64);
+    let raw_code = field("code");
+    let code = raw_code.and_then(Value::as_i64);
     let message = field("message").and_then(Value::as_str).map(str::to_owned);
     let request_id = field("request_id").and_then(Value::as_str).unwrap_or_default().to_owned();
     if !ok {
         return Err(Error::Api {
             code: code.filter(|c| *c != 0).unwrap_or(i64::from(status)),
             message: message.or_else(|| reason.map(str::to_owned)).unwrap_or_else(|| format!("HTTP {status}")),
+            request_id,
+            http_status: Some(status),
+        });
+    }
+    if raw_code.is_some() && code.is_none() {
+        // Lesson 34: a code that is present but not an integer makes the reply unreadable.
+        return Err(Error::Api {
+            code: -1,
+            message: format!("Response has a non-integer code (HTTP {status})"),
             request_id,
             http_status: Some(status),
         });

@@ -4,7 +4,7 @@ A typed Rust client for the **TikTok Shop API** (the TikTok Shop Partner API): e
 
 Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 
-> Request signing follows TikTok's documentation and has not been verified against the live API. The OpenAPI spec this client is generated from is published at <https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml>.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues. The OpenAPI spec this client is generated from is published at <https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml>.
 
 ## Install
 
@@ -69,7 +69,11 @@ async fn main() -> Result<(), tiktok_shop_api::Error> {
 }
 ```
 
-Every failure is a `tiktok_shop_api::Error`: `Error::Api` for an envelope with a non-zero `code` (even on HTTP 200), a non-2xx reply or a body that is not JSON; `Error::Timeout`; `Error::Http` for a network failure. Errors never contain the request URL.
+Every failure is a `tiktok_shop_api::Error`. Errors never contain the request URL.
+
+- `Error::Api` for an envelope with a non-zero `code`, even on HTTP 200 (TikTok's code); a non-2xx reply (TikTok's non-zero code if the body has one, else the HTTP status); or a 2xx reply that can't be read, such as a body that is not a JSON object or a `code` that isn't an integer (code -1). `http_status` is always set.
+- `Error::Decode` for a 2xx envelope whose `data` doesn't fit its generated model.
+- `Error::Timeout`, and `Error::Http` for a network failure with no response.
 
 ```rust
 use tiktok_shop_api::{Error, Options, TikTokShop};
@@ -112,6 +116,8 @@ fn main() -> Result<(), tiktok_shop_api::Error> {
 
 `webhooks::verify_and_parse` checks the signature (HMAC-SHA256 over the app key plus the raw body) and returns a `WebhookEvent`, an enum with one variant per webhook holding that webhook's generated model. Pass the body exactly as received: never re-serialize it. A type this SDK does not know comes back as `WebhookEvent::Unknown`.
 
+Parsing is strict: a body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required field missing or null is an `Error::Webhook`. In short, a known type missing a required field is a parse error.
+
 ```rust
 use tiktok_shop_api::{webhooks, Error, WebhookEvent};
 
@@ -151,7 +157,8 @@ IDs such as `shop_id` keep every digit whether TikTok sends them as strings or a
 - Query values are signed decoded, exactly as the server receives them.
 - The default HTTP client honours `HTTP_PROXY`/`HTTPS_PROXY`/`NO_PROXY`, follows no redirects and times out after 30 seconds. Pass your own `reqwest::Client` with `Options::http_client` (or `AuthOptions::http_client`) to change that.
 - A custom `http_client` follows redirects unless you build it with `redirect::Policy::none()`. Do that for `AuthOptions::http_client`: the token query holds your app secret, and a followed redirect would forward it.
-- `Options::base_url` and `AuthOptions::base_url` can point at a test server.
+- `Options::base_url` and `AuthOptions::base_url` can point at a test server. Either must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path.
+- Requests carry the User-Agent `tiktok-shop-api-rust/<version>`.
 - `Debug` for `Options`, `AuthOptions`, `TokenSet` and the clients hides every secret.
 
 ## License

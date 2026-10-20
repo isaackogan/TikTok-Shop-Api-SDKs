@@ -32,18 +32,28 @@ cpSync(resolve(out, 'src/apis'), resolve(dest, 'apis'), { recursive: true });
 cpSync(resolve(out, 'src/models'), resolve(dest, 'models'), { recursive: true });
 
 // The generated code names its own modules `crate::apis` and `crate::models`; here they live under `crate::generated`.
+// Asserted: every `crate::` path the generator writes names one of those two (directly, or in the
+// `crate::{apis::ResponseContent, models}` import), and there are some.
+const CRATE_PATH = /\bcrate::(?!generated\b)/g;
+let rewritten = 0;
+let modulePaths = 0;
 function rewrite(dir: string): void {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name);
     if (statSync(p).isDirectory()) rewrite(p);
     else if (name.endsWith('.rs')) {
       const src = readFileSync(p, 'utf8');
-      const fixed = src.replace(/\bcrate::(?!generated\b)/g, 'crate::generated::');
+      rewritten += (src.match(CRATE_PATH) ?? []).length;
+      modulePaths += (src.match(/\bcrate::(?:apis\b|models\b|\{apis::ResponseContent, models\})/g) ?? []).length;
+      const fixed = src.replace(CRATE_PATH, 'crate::generated::');
       if (fixed !== src) writeFileSync(p, fixed);
     }
   }
 }
 rewrite(dest);
+if (rewritten === 0 || rewritten !== modulePaths) {
+  throw new Error(`crate:: rewrite: expected every one of ${rewritten} crate:: path(s) to name crate::apis or crate::models, found ${modulePaths}`);
+}
 
 // src/generated/mod.rs: the generator's own `pub mod` lines, plus the rendered files.
 const lib = readFileSync(resolve(out, 'src/lib.rs'), 'utf8');

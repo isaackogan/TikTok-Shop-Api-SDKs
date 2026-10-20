@@ -54,3 +54,13 @@ fn the_readme_carries_the_required_lines() {
     }
     assert!(!readme.to_lowercase().contains("official tiktok") && !readme.to_lowercase().contains("an official"));
 }
+
+#[test]
+fn the_crates_io_description_carries_the_disclaimer() {
+    let manifest = fs::read_to_string(concat!(env!("CARGO_MANIFEST_DIR"), "/Cargo.toml")).unwrap();
+    let description = manifest.lines().find_map(|l| l.strip_prefix("description = \"")).expect("a description");
+    assert!(
+        description.ends_with("Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.\""),
+        "{description}"
+    );
+}
