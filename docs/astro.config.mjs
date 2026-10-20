@@ -40,6 +40,8 @@ export default defineConfig({
       description: 'TikTok Shop Partner API docs: typed SDKs for TypeScript, Python, Go, Java, Kotlin, PHP, Rust and C#, and the OpenAPI spec they are generated from.',
       favicon: '/favicon.svg',
       social: [{ icon: 'github', label: 'GitHub', href: repo }],
+      // Adds the "Unofficial Community SDKs" subtitle under the site title.
+      customCss: ['./src/styles/custom.css'],
       editLink: { baseUrl: `${repo}/edit/main/docs/` },
       sidebar: [
         { label: 'Start here', items: [
