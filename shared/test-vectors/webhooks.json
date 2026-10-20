@@ -1,0 +1,60 @@
+{
+  "verify": [
+    {
+      "name": "docs-reproducible-example",
+      "appKey": "abcdef",
+      "appSecret": "123",
+      "rawBody": "{\"type\":1,\"tts_notification_id\":\"7380066284010030890\",\"shop_id\":\"7495540735365777507\",\"timestamp\":1718305585,\"data\":{\"is_on_hold_order\":true,\"order_id\":\"576653688135258178\",\"order_status\":\"UNPAID\",\"update_time\":1718305585}}",
+      "signature": "5dec0f11ec2f6783b8deee53c9ffbf8d024302f7c7e7fa55a35d17629031ac05",
+      "valid": true
+    },
+    {
+      "name": "tampered-body",
+      "appKey": "abcdef",
+      "appSecret": "123",
+      "rawBody": "{\"type\":1,\"tts_notification_id\":\"7380066284010030890\",\"shop_id\":\"7495540735365777507\",\"timestamp\":1718305585,\"data\":{\"is_on_hold_order\":true,\"order_id\":\"576653688135258178\",\"order_status\":\"PAID\",\"update_time\":1718305585}}",
+      "signature": "5dec0f11ec2f6783b8deee53c9ffbf8d024302f7c7e7fa55a35d17629031ac05",
+      "valid": false
+    },
+    {
+      "name": "reserialized-body",
+      "appKey": "abcdef",
+      "appSecret": "123",
+      "rawBody": "{\n  \"type\": 1,\n  \"tts_notification_id\": \"7380066284010030890\",\n  \"shop_id\": \"7495540735365777507\",\n  \"timestamp\": 1718305585,\n  \"data\": {\n    \"is_on_hold_order\": true,\n    \"order_id\": \"576653688135258178\",\n    \"order_status\": \"UNPAID\",\n    \"update_time\": 1718305585\n  }\n}",
+      "signature": "5dec0f11ec2f6783b8deee53c9ffbf8d024302f7c7e7fa55a35d17629031ac05",
+      "valid": false
+    },
+    {
+      "name": "uppercase-signature",
+      "appKey": "abcdef",
+      "appSecret": "123",
+      "rawBody": "{\"type\":1,\"tts_notification_id\":\"7380066284010030890\",\"shop_id\":\"7495540735365777507\",\"timestamp\":1718305585,\"data\":{\"is_on_hold_order\":true,\"order_id\":\"576653688135258178\",\"order_status\":\"UNPAID\",\"update_time\":1718305585}}",
+      "signature": "5DEC0F11EC2F6783B8DEEE53C9FFBF8D024302F7C7E7FA55A35D17629031AC05",
+      "valid": false
+    },
+    {
+      "name": "empty-signature",
+      "appKey": "abcdef",
+      "appSecret": "123",
+      "rawBody": "{\"type\":1,\"tts_notification_id\":\"7380066284010030890\",\"shop_id\":\"7495540735365777507\",\"timestamp\":1718305585,\"data\":{\"is_on_hold_order\":true,\"order_id\":\"576653688135258178\",\"order_status\":\"UNPAID\",\"update_time\":1718305585}}",
+      "signature": "",
+      "valid": false
+    }
+  ],
+  "parse": [
+    {
+      "name": "docs-order-status-change",
+      "rawBody": "{\"type\":1,\"tts_notification_id\":\"7380066284010030890\",\"shop_id\":\"7495540735365777507\",\"timestamp\":1718305585,\"data\":{\"is_on_hold_order\":true,\"order_id\":\"576653688135258178\",\"order_status\":\"UNPAID\",\"update_time\":1718305585}}",
+      "type": 1,
+      "schema": "OrderStatusChangeWebhook",
+      "known": true
+    },
+    {
+      "name": "unknown-type",
+      "rawBody": "{\"type\":9999,\"shop_id\":\"1\",\"data\":{}}",
+      "type": 9999,
+      "schema": null,
+      "known": false
+    }
+  ]
+}

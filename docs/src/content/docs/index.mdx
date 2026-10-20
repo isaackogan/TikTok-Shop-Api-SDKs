@@ -1,0 +1,459 @@
+---
+title: Getting Started
+description: Install a TikTok Shop API SDK, authorize a shop with OAuth, and make your first signed call in TypeScript, Python, Go, Java, Kotlin, PHP, Rust or C#.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The TikTok Shop API SDKs are typed clients for the TikTok Shop Partner API in eight languages. Every SDK is generated from one [OpenAPI 3.1 spec](/openapi/), which is itself generated from TikTok Shop's partner documentation, so the eight cover the same 318 operations and 44 webhooks with the same names and behavior.
+
+The generator can't write some parts, so each SDK adds them by hand:
+- request signing and shop cipher handling;
+- an OAuth helper for the authorization URL, token exchange and refresh;
+- webhook verification with typed events;
+- a single error type.
+
+This is an unofficial project, not affiliated with or endorsed by TikTok or ByteDance. Request signing follows TikTok's documentation and has not been verified against the live API yet. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
+
+## Prerequisites
+
+- **A TikTok Shop app.** Register it in TikTok Shop Partner Center. It gives you an **app key** and an **app secret**. Seller and partner apps also have a **service ID**, which authorization URLs need. Keep the app secret on your server.
+- **A redirect URL** registered on the app. TikTok sends the seller back there with an authorization `code`.
+- **A supported runtime:** Node.js 22, Python 3.11, Go 1.22, Java 11, PHP 8.2, Rust 1.88 or .NET 8, or newer.
+
+The [concepts](/getting-started/concepts/) page explains each credential and how they fit together.
+
+## Install
+
+<Tabs syncKey="sdk">
+  <TabItem label="TypeScript">
+    ```sh
+    npm install tiktok-shop-api
+    ```
+  </TabItem>
+  <TabItem label="Python">
+    ```sh
+    pip install tiktok-shop-api
+    ```
+  </TabItem>
+  <TabItem label="Go">
+    ```sh
+    go get github.com/isaackogan/TikTok-Shop-Api-SDKs/go
+    ```
+  </TabItem>
+  <TabItem label="Java">
+    ```xml
+    <dependency>
+      <groupId>com.isaackogan</groupId>
+      <artifactId>tiktok-shop-api</artifactId>
+      <version>{{version:java}}</version>
+    </dependency>
+    ```
+  </TabItem>
+  <TabItem label="Kotlin">
+    ```kts
+    dependencies {
+        implementation("com.isaackogan:tiktok-shop-api-kotlin:{{version:kotlin}}")
+    }
+    ```
+  </TabItem>
+  <TabItem label="PHP">
+    ```bash
+    composer require isaackogan/tiktok-shop-api
+    ```
+  </TabItem>
+  <TabItem label="Rust">
+    ```sh
+    cargo add tiktok-shop-api
+    ```
+  </TabItem>
+  <TabItem label="C#">
+    ```bash
+    dotnet add package TikTokShop.Api
+    ```
+  </TabItem>
+</Tabs>
+
+## Authorize a shop
+
+A seller authorizes your app in three steps:
+1. You send them to an authorization URL.
+2. TikTok redirects them back with a `code`.
+3. You trade that code for an access token and a refresh token.
+
+The access token expires, so refresh it before it does. Each SDK's OAuth helper builds the URL and calls the token endpoints.
+
+<Tabs syncKey="sdk">
+  <TabItem label="TypeScript">
+    ```ts
+    import { TikTokShopAuth } from 'tiktok-shop-api';
+
+    const auth = new TikTokShopAuth({
+      appKey: process.env.TTS_APP_KEY!,
+      appSecret: process.env.TTS_APP_SECRET!,
+      serviceId: process.env.TTS_SERVICE_ID!, // seller and partner flows
+    });
+
+    // 1. Send the seller here. `type` is 'seller' | 'partner' | 'creator'; `region` is 'us' | 'row'.
+    const url = auth.authorizationUrl({ type: 'seller', region: 'us', state: 'csrf-token' });
+
+    // 2. TikTok redirects back with ?code=...; exchange it.
+    const code = new URL(callbackUrl).searchParams.get('code')!;
+    const tokens = await auth.exchangeCode(code);
+    // tokens.accessToken, tokens.refreshToken, tokens.openId, tokens.grantedScopes, ...
+
+    // 3. Before the access token expires (accessTokenExpireIn is a Unix timestamp):
+    const renewed = await auth.refresh(tokens.refreshToken);
+    ```
+  </TabItem>
+  <TabItem label="Python">
+    ```python
+    import os
+
+    from tiktok_shop_api import TikTokShopAuth
+
+    code_from_redirect = "the ?code= value from your redirect URL"
+
+    auth = TikTokShopAuth(
+        os.environ["TTS_APP_KEY"],
+        os.environ["TTS_APP_SECRET"],
+        service_id=os.environ["TTS_SERVICE_ID"],  # seller and partner flows
+    )
+
+    # 1. Send the seller here. `type` is "seller", "partner" or "creator"; `region` is "us" or "row".
+    url = auth.authorization_url(type="seller", region="us", state="csrf-token")
+
+    # 2. TikTok redirects back with ?code=...; exchange it.
+    tokens = auth.exchange_code(code_from_redirect)
+    # tokens.access_token, tokens.refresh_token, tokens.open_id, tokens.granted_scopes, ...
+
+    # 3. Before the access token expires (access_token_expire_in is a Unix timestamp):
+    renewed = auth.refresh(tokens.refresh_token)
+    ```
+  </TabItem>
+  <TabItem label="Go">
+    ```go
+    import (
+    	"context"
+    	"fmt"
+
+    	tiktokshop "github.com/isaackogan/TikTok-Shop-Api-SDKs/go"
+    )
+
+    func authorize(ctx context.Context) error {
+    	auth := tiktokshop.NewAuth(tiktokshop.AuthOptions{
+    		AppKey:    "APP_KEY",
+    		AppSecret: "APP_SECRET",
+    		ServiceID: "SERVICE_ID",
+    	})
+
+    	url, err := auth.AuthorizationURL(tiktokshop.AuthorizationURLOptions{
+    		Type:   tiktokshop.AuthSeller,
+    		Region: tiktokshop.RegionUS,
+    		State:  "my-csrf-token",
+    	})
+    	if err != nil {
+    		return err
+    	}
+    	fmt.Println("send the seller to", url)
+
+    	tokens, err := auth.ExchangeCode(ctx, "CODE_FROM_THE_REDIRECT")
+    	if err != nil {
+    		return err
+    	}
+    	fmt.Println(tokens.AccessToken, tokens.OpenID, tokens.GrantedScopes)
+
+    	tokens, err = auth.Refresh(ctx, tokens.RefreshToken)
+    	if err != nil {
+    		return err
+    	}
+    	fmt.Println("expires at", tokens.AccessTokenExpireIn)
+    	return nil
+    }
+    ```
+  </TabItem>
+  <TabItem label="Java">
+    ```java
+    import com.isaackogan.tiktok.shop.TikTokShopAuth;
+    import com.isaackogan.tiktok.shop.TokenSet;
+
+    class OAuthExample {
+        void run() {
+            TikTokShopAuth auth = TikTokShopAuth.builder()
+                    .appKey("YOUR_APP_KEY")
+                    .appSecret("YOUR_APP_SECRET")
+                    .serviceId("YOUR_SERVICE_ID")
+                    .build();
+
+            // 1. Send the seller to this page.
+            String url = auth.authorizationUrl(TikTokShopAuth.AuthType.SELLER, TikTokShopAuth.Region.US, "my-state");
+
+            // 2. TikTok redirects back with ?code=...; trade it for tokens.
+            TokenSet tokens = auth.exchangeCode("CODE_FROM_THE_REDIRECT");
+
+            // 3. Later, trade the refresh token for new tokens.
+            TokenSet fresh = auth.refresh(tokens.getRefreshToken());
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Kotlin">
+    ```kotlin
+    import com.isaackogan.tiktok.shop.TikTokShopAuth
+    import com.isaackogan.tiktok.shop.TikTokShopAuthOptions
+
+    class OAuthExample {
+        fun run() {
+            val auth = TikTokShopAuth(
+                TikTokShopAuthOptions(appKey = "YOUR_APP_KEY", appSecret = "YOUR_APP_SECRET", serviceId = "YOUR_SERVICE_ID"),
+            )
+
+            // 1. Send the seller to this page.
+            val url = auth.authorizationUrl(TikTokShopAuth.AuthType.SELLER, TikTokShopAuth.Region.US, state = "my-state")
+
+            // 2. TikTok redirects back with ?code=...; trade it for tokens.
+            val tokens = auth.exchangeCode("CODE_FROM_THE_REDIRECT")
+
+            // 3. Later, trade the refresh token for new tokens.
+            val fresh = auth.refresh(tokens.refreshToken)
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem label="PHP">
+    ```php
+    use TikTokShop\Api\TikTokShopAuth;
+
+    $auth = new TikTokShopAuth(appKey: 'YOUR_APP_KEY', appSecret: 'YOUR_APP_SECRET', serviceId: 'YOUR_SERVICE_ID');
+
+    // 1. Send the seller to this page. Use TikTokShopAuth::PARTNER or CREATOR for the other kinds,
+    //    and TikTokShopAuth::ROW outside the United States.
+    $url = $auth->authorizationUrl(TikTokShopAuth::SELLER, TikTokShopAuth::US, state: 'a-random-csrf-token');
+    header('Location: ' . $url);
+
+    // 2. TikTok redirects back to your redirect URL with ?code=...
+    $tokens = $auth->exchangeCode($_GET['code']);
+
+    echo $tokens->getAccessToken(), ' expires at ', $tokens->accessTokenExpireIn, PHP_EOL;
+    echo $tokens->sellerName, ' (', $tokens->sellerBaseRegion, ')', PHP_EOL;
+    ```
+  </TabItem>
+  <TabItem label="Rust">
+    ```rust
+    use tiktok_shop_api::{AuthOptions, AuthType, Region, TikTokShopAuth};
+
+    #[tokio::main]
+    async fn main() -> Result<(), tiktok_shop_api::Error> {
+        let auth = TikTokShopAuth::new(AuthOptions::new("APP_KEY", "APP_SECRET").service_id("SERVICE_ID"))?;
+
+        // Send the seller here; TikTok redirects back to your app with ?code=...
+        let url = auth.authorization_url(AuthType::Seller, Region::Us, Some("my-csrf-token"))?;
+        println!("send the seller to {url}");
+
+        let tokens = auth.exchange_code("CODE_FROM_THE_REDIRECT").await?;
+        println!("{:?} {:?}", tokens.open_id, tokens.granted_scopes);
+
+        // Refresh before the access token expires. `Debug` hides the tokens themselves.
+        let tokens = auth.refresh(&tokens.refresh_token).await?;
+        println!("expires at {}", tokens.access_token_expire_in);
+        Ok(())
+    }
+    ```
+  </TabItem>
+  <TabItem label="C#">
+    ```csharp
+    using System;
+    using TikTokShop.Api;
+
+    var auth = new TikTokShopAuth(appKey: "YOUR_APP_KEY", appSecret: "YOUR_APP_SECRET", serviceId: "YOUR_SERVICE_ID");
+
+    // 1. Send the seller to this page. Use AuthorizationType.Partner or Creator for the other kinds,
+    //    and AuthorizationRegion.Row outside the United States.
+    string url = auth.AuthorizationUrl(AuthorizationType.Seller, AuthorizationRegion.Us, state: "a-random-csrf-token");
+    Console.WriteLine(url);
+
+    // 2. TikTok redirects back to your redirect URL with ?code=...
+    TokenSet tokens = await auth.ExchangeCodeAsync("CODE_FROM_THE_REDIRECT");
+
+    Console.WriteLine($"{tokens.SellerName} ({tokens.SellerBaseRegion}), access token expires at {tokens.AccessTokenExpireIn}");
+    ```
+  </TabItem>
+</Tabs>
+
+Use the `state` parameter to tie the redirect to the session that started it, and check it when TikTok redirects back. See [authorization](/getting-started/authorization/) for the authorization kinds, regions and token lifetimes.
+
+## Make your first call
+
+Most operations act on one shop, identified by its **shop cipher**. Find it with the authorized-shops call, then give it to the client. The client:
+- signs each request;
+- adds `app_key` and `timestamp`;
+- sends your access token in the `x-tts-access-token` header;
+- adds `shop_cipher` to the operations that need it.
+
+<Tabs syncKey="sdk">
+  <TabItem label="TypeScript">
+    ```ts
+    import { TikTokShop } from 'tiktok-shop-api';
+
+    const client = new TikTokShop({
+      appKey: process.env.TTS_APP_KEY!,
+      appSecret: process.env.TTS_APP_SECRET!,
+      accessToken: tokens.accessToken,
+    });
+
+    // Find the shop cipher
+    const shops = await client.authorization.getAuthorizedShops();
+    const shopCipher = shops.data?.shops?.[0]?.cipher;
+
+    const seller = client.withShop({ accessToken: tokens.accessToken, shopCipher });
+    const orders = await seller.orders.getOrderList({ pageSize: 20 });
+    ```
+  </TabItem>
+  <TabItem label="Python">
+    ```python
+    import os
+
+    from tiktok_shop_api import TikTokShop
+
+    access_token = os.environ["TTS_ACCESS_TOKEN"]
+
+    with TikTokShop(os.environ["TTS_APP_KEY"], os.environ["TTS_APP_SECRET"], access_token=access_token) as client:
+        # Find the shop cipher
+        shops = client.authorization.get_authorized_shops()
+        assert shops is not None
+        shop_cipher = shops.to_dict()["data"]["shops"][0]["cipher"]
+
+        seller = client.with_shop(access_token=access_token, shop_cipher=shop_cipher)
+        orders = seller.orders.get_order_list(page_size=20)
+    ```
+  </TabItem>
+  <TabItem label="Go">
+    ```go
+    import (
+    	"context"
+    	"fmt"
+
+    	tiktokshop "github.com/isaackogan/TikTok-Shop-Api-SDKs/go"
+    )
+
+    func listOrders(ctx context.Context) error {
+    	client := tiktokshop.New(tiktokshop.Options{
+    		AppKey:      "APP_KEY",
+    		AppSecret:   "APP_SECRET",
+    		AccessToken: "ACCESS_TOKEN",
+    		ShopCipher:  "SHOP_CIPHER",
+    	})
+
+    	orders, _, err := client.Orders.GetOrderList(ctx).PageSize(20).Execute()
+    	if err != nil {
+    		return err
+    	}
+    	data := orders.GetData()
+    	fmt.Println(data.GetTotalCount(), "orders; request", orders.GetRequestId())
+    	return nil
+    }
+    ```
+  </TabItem>
+  <TabItem label="Java">
+    ```java
+    import com.isaackogan.tiktok.shop.TikTokShop;
+    import com.isaackogan.tiktok.shop.generated.ApiException;
+    import com.isaackogan.tiktok.shop.generated.model.GetAuthorizedShopsResponse;
+
+    class FirstCall {
+        void run() throws ApiException {
+            TikTokShop client = TikTokShop.builder()
+                    .appKey("YOUR_APP_KEY")
+                    .appSecret("YOUR_APP_SECRET")
+                    .accessToken("ACCESS_TOKEN")
+                    .build();
+
+            GetAuthorizedShopsResponse shops = client.authorization().getAuthorizedShops();
+            System.out.println(shops.getData().getShops().get(0).getCipher());
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Kotlin">
+    ```kotlin
+    import com.isaackogan.tiktok.shop.TikTokShop
+    import com.isaackogan.tiktok.shop.TikTokShopException
+    import com.isaackogan.tiktok.shop.TikTokShopOptions
+
+    class FirstCall {
+        fun run() {
+            val client = TikTokShop(
+                TikTokShopOptions(appKey = "YOUR_APP_KEY", appSecret = "YOUR_APP_SECRET", accessToken = "ACCESS_TOKEN"),
+            )
+
+            try {
+                val shops = client.authorization.getAuthorizedShops()
+                println(shops.data?.shops?.firstOrNull()?.cipher)
+            } catch (e: TikTokShopException) {
+                println("TikTok said ${e.code}: ${e.message} (request ${e.requestId})")
+            }
+        }
+    }
+    ```
+  </TabItem>
+  <TabItem label="PHP">
+    ```php
+    use TikTokShop\Api\TikTokShop;
+
+    $shop = new TikTokShop(
+        appKey: 'YOUR_APP_KEY',
+        appSecret: 'YOUR_APP_SECRET',
+        accessToken: 'THE_SELLER_ACCESS_TOKEN',
+        shopCipher: 'THE_SHOP_CIPHER',
+    );
+
+    // Every request is signed, and shop_cipher is added to the operations that take one.
+    $orders = $shop->orders->getOrderList(20);
+    foreach ($orders->getData()->getOrders() as $order) {
+        echo $order->getId(), PHP_EOL;
+    }
+    ```
+  </TabItem>
+  <TabItem label="Rust">
+    ```rust
+    use tiktok_shop_api::{Options, TikTokShop};
+
+    #[tokio::main]
+    async fn main() -> Result<(), tiktok_shop_api::Error> {
+        let client =
+            TikTokShop::new(Options::new("APP_KEY", "APP_SECRET").access_token("ACCESS_TOKEN").shop_cipher("SHOP_CIPHER"))?;
+
+        // page_size, then sort_order, page_token, sort_field and the request body, all optional.
+        let orders = client.orders.get_order_list(20, None, None, None, None).await?;
+        if let Some(data) = orders.data {
+            println!("{:?} orders; request {:?}", data.total_count, orders.request_id);
+        }
+        Ok(())
+    }
+    ```
+  </TabItem>
+  <TabItem label="C#">
+    ```csharp
+    using System;
+    using TikTokShop.Api;
+
+    var client = new TikTokShopClient(
+        appKey: "YOUR_APP_KEY",
+        appSecret: "YOUR_APP_SECRET",
+        accessToken: "THE_SELLER_ACCESS_TOKEN",
+        shopCipher: "THE_SHOP_CIPHER");
+
+    // Every request is signed, and shop_cipher is added to the operations that take one.
+    var orders = await client.Orders.GetOrderListAsync(pageSize: 20);
+    Console.WriteLine($"{orders.Data.TotalCount} orders");
+    ```
+  </TabItem>
+</Tabs>
+
+Every SDK groups its operations by API area, with the same names as the spec's tags: orders, products, fulfillment, logistics, finance, the three affiliate areas, and so on. A failed call raises the SDK's error type, carrying TikTok's `code`, `message` and `request_id`; see [errors](/getting-started/errors/).
+
+## Next steps
+
+- [Concepts](/getting-started/concepts/): credentials, shop ciphers, signing and IDs.
+- [Webhooks](/getting-started/webhooks/): verify TikTok's signature and parse typed events.
+- [Choose an SDK](/sdks/): each language's section covers its client, OAuth helper, webhooks and errors in detail.
+- [OpenAPI](/openapi/): download the spec, or browse every operation and webhook in the [API reference](/openapi/reference/).

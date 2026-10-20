@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>TikTokShop.Api</PackageId>
+    <AssemblyName>TikTokShop.Api</AssemblyName>
+    <RootNamespace>TikTokShop.Api</RootNamespace>
+    <Version>0.1.0</Version>
+    <!-- Hand-written code is nullable-aware. Generated code (Generated/) opts in or out per file and emits many warnings, so warnings are not errors. -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS8632;CS8618;CS8625;CS8600;CS8601;CS8602;CS8603;CS8604;CS8614;CS8765;CS8766;CS0108;CS0618;CS1591;CS1570;CS1572;CS1573;CS1587;CS1734</NoWarn>
+
+    <!-- NuGet package page -->
+    <Title>TikTok Shop API client for .NET</Title>
+    <Description>TikTok Shop API client for .NET 8+: signed requests, shop cipher handling, the OAuth helper, webhook verification with typed events, and typed models for every Partner API operation. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.</Description>
+    <Authors>Isaac Kogan</Authors>
+    <PackageTags>tiktok;tiktok-shop;tiktok-shop-api;ecommerce;sdk;openapi</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/csharp</PackageProjectUrl>
+    <PackageReleaseNotes>Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues. Release notes: https://github.com/isaackogan/TikTok-Shop-Api-SDKs/releases</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/isaackogan/TikTok-Shop-Api-SDKs</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- Reproducible builds, and symbols for the debugger -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JsonSubTypes" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Polly" Version="8.1.0" />
+  </ItemGroup>
+
+</Project>

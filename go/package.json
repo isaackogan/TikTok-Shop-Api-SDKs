@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/go",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "go build ./...",
+    "test": "tsx --test scripts/fix-decode.test.ts && go vet ./... && go test ./..."
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

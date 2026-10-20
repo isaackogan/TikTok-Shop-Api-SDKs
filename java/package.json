@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/java",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "mvn -B -q compile",
+    "test": "mvn -B -q verify"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

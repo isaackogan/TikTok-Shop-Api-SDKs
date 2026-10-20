@@ -1,0 +1,12 @@
+**/build/
+node_modules/
+target/
+bin/
+obj/
+vendor/
+.gradle/
+__pycache__/
+*.egg-info/
+dist/
+.venv/
+.turbo/

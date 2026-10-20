@@ -1,0 +1,110 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import TYPE_CHECKING, Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.failed_material import FailedMaterial
+    from ..models.generate_general_sharing_links_response_data_sharing_link import (
+        GenerateGeneralSharingLinksResponseDataSharingLink,
+    )
+
+
+T = TypeVar("T", bound="GenerateGeneralSharingLinksResponseData")
+
+
+@_attrs_define
+class GenerateGeneralSharingLinksResponseData:
+    """
+    Attributes:
+        sharing_links (list[GenerateGeneralSharingLinksResponseDataSharingLink] | Unset): The successfully generated
+            sharing links.
+        failed_materials (list[FailedMaterial] | Unset): The list of materials which failed to generate sharing links
+            for.
+    """
+
+    sharing_links: list[GenerateGeneralSharingLinksResponseDataSharingLink] | Unset = UNSET
+    failed_materials: list[FailedMaterial] | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        sharing_links: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.sharing_links, Unset):
+            sharing_links = []
+            for sharing_links_item_data in self.sharing_links:
+                sharing_links_item = sharing_links_item_data.to_dict()
+                sharing_links.append(sharing_links_item)
+
+        failed_materials: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.failed_materials, Unset):
+            failed_materials = []
+            for failed_materials_item_data in self.failed_materials:
+                failed_materials_item = failed_materials_item_data.to_dict()
+                failed_materials.append(failed_materials_item)
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if sharing_links is not UNSET:
+            field_dict["sharing_links"] = sharing_links
+        if failed_materials is not UNSET:
+            field_dict["failed_materials"] = failed_materials
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.failed_material import FailedMaterial  # noqa: PLC0415
+        from ..models.generate_general_sharing_links_response_data_sharing_link import (
+            GenerateGeneralSharingLinksResponseDataSharingLink,  # noqa: PLC0415
+        )
+
+        d = dict(src_dict)
+        _sharing_links = d.pop("sharing_links", UNSET)
+        sharing_links: list[GenerateGeneralSharingLinksResponseDataSharingLink] | Unset = UNSET
+        if _sharing_links is not UNSET:
+            sharing_links = []
+            for sharing_links_item_data in _sharing_links:
+                sharing_links_item = GenerateGeneralSharingLinksResponseDataSharingLink.from_dict(
+                    sharing_links_item_data
+                )
+
+                sharing_links.append(sharing_links_item)
+
+        _failed_materials = d.pop("failed_materials", UNSET)
+        failed_materials: list[FailedMaterial] | Unset = UNSET
+        if _failed_materials is not UNSET:
+            failed_materials = []
+            for failed_materials_item_data in _failed_materials:
+                failed_materials_item = FailedMaterial.from_dict(failed_materials_item_data)
+
+                failed_materials.append(failed_materials_item)
+
+        generate_general_sharing_links_response_data = cls(
+            sharing_links=sharing_links,
+            failed_materials=failed_materials,
+        )
+
+        generate_general_sharing_links_response_data.additional_properties = d
+        return generate_general_sharing_links_response_data
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

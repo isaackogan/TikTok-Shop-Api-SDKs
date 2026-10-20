@@ -1,0 +1,9 @@
+# Packagist installs from the split mirror of this folder: ship only the library.
+/tests export-ignore
+/scripts export-ignore
+/build export-ignore
+/package.json export-ignore
+/phpunit.xml export-ignore
+/.gitignore export-ignore
+/.gitattributes export-ignore
+/.phpunit.cache export-ignore

@@ -1,0 +1,47 @@
+[package]
+name = "tiktok-shop-api"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+description = "TikTok Shop Partner API client for Rust: generated from the documentation, with request signing. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."
+license = "MIT"
+repository = "https://github.com/isaackogan/TikTok-Shop-Api-SDKs"
+homepage = "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/rust"
+readme = "README.md"
+documentation = "https://docs.rs/tiktok-shop-api"
+keywords = ["tiktok", "tiktok-shop", "api", "sdk", "openapi"]
+categories = ["api-bindings"]
+# The tests read ../shared/test-vectors, which is outside the package.
+exclude = ["build/", "scripts/", "package.json", "node_modules/", "tests/"]
+
+[lib]
+# The generated doc comments are TikTok's prose, not Rust examples.
+doctest = false
+
+[dependencies]
+# What the generated code needs.
+serde = { version = "^1.0", features = ["derive"] }
+serde_with = { version = "^3.8", default-features = false, features = ["base64", "std", "macros"] }
+serde_json = "^1.0"
+serde_repr = "^0.1"
+url = "^2.5"
+chrono = { version = "^0.4", features = ["serde"] }
+tokio = { version = "^1.46.0", features = ["fs"] }
+tokio-util = { version = "^0.7", features = ["codec"] }
+reqwest = { version = "^0.13", default-features = false, features = ["json", "multipart", "stream", "query", "form"] }
+reqwest-middleware = { version = "^0.5", features = ["json", "multipart", "query", "form"] }
+# What the hand-written layer needs.
+async-trait = "0.1"
+hex = "0.4"
+hmac = "0.12"
+http = "1"
+sha2 = "0.10"
+
+[dev-dependencies]
+tokio = { version = "^1.46.0", features = ["fs", "macros", "rt-multi-thread", "time"] }
+wiremock = "0.6"
+
+[features]
+default = ["native-tls"]
+native-tls = ["reqwest/native-tls"]
+rustls = ["reqwest/rustls"]

@@ -1,0 +1,98 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "mini", "version": "1" },
+  "paths": {
+    "/order/202309/orders/search": {
+      "post": {
+        "operationId": "getOrderList",
+        "tags": ["Orders"],
+        "x-tts-requires-shop-cipher": true,
+        "parameters": [
+          { "$ref": "#/components/parameters/ShopCipher" },
+          { "name": "page_size", "in": "query", "schema": { "type": "integer", "format": "int64" } },
+          { "name": "shop_id", "in": "query", "description": "Shop", "schema": { "type": "integer", "format": "int64" } }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/OrderRequest" },
+              "example": { "product_id": 1729507467923261408, "count": 3, "big": 7494049642642441621, "serial": "1234567890123456" }
+            }
+          }
+        },
+        "responses": { "200": { "description": "ok" } }
+      }
+    },
+    "/authorization/202309/shops": {
+      "get": {
+        "operationId": "getAuthorizedShops",
+        "tags": ["Authorization"],
+        "parameters": [{ "name": "app_key", "in": "query", "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "ok" } }
+      }
+    },
+    "/chat/202309/conversations": {
+      "get": {
+        "operationId": "getConversationList",
+        "tags": ["Mystery tools (beta)"],
+        "x-tts-requires-shop-cipher": true,
+        "parameters": [{ "$ref": "#/components/parameters/ShopCipher" }],
+        "requestBody": {
+          "content": {
+            "application/json": { "schema": { "type": "object", "properties": { "count": { "type": "integer", "format": "int32" } } } },
+            "multipart/form-data": { "schema": { "type": "object", "properties": { "file_id": { "type": "integer", "format": "int64" } } } }
+          }
+        },
+        "responses": { "200": { "description": "ok" } }
+      }
+    }
+  },
+  "webhooks": {
+    "order_status_change": {
+      "post": {
+        "operationId": "orderStatusChangeWebhook",
+        "x-tts-webhook-type": 1,
+        "x-tts-event-type": "ORDER_STATUS_CHANGE",
+        "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/OrderStatusChangeWebhook" } } } }
+      }
+    },
+    "package_update": {
+      "post": {
+        "operationId": "packageUpdateWebhook",
+        "x-tts-webhook-type": 4,
+        "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PackageUpdateWebhook" } } } }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "ShopCipher": { "name": "shop_cipher", "in": "query", "required": true, "schema": { "type": "string" } }
+    },
+    "schemas": {
+      "OrderRequest": {
+        "type": "object",
+        "properties": {
+          "product_id": { "type": "integer", "format": "int64", "description": "Product", "deprecated": true },
+          "sku_ids": { "type": "array", "items": { "type": "integer", "format": "int64" } },
+          "count": { "type": "integer", "format": "int32" },
+          "serial": { "type": "integer", "format": "int64" },
+          "big": { "type": ["integer", "null"], "format": "int64", "description": "Large" },
+          "lines": { "type": "array", "items": { "$ref": "#/components/schemas/OrderLine" } },
+          "buyer": { "anyOf": [{ "$ref": "#/components/schemas/Buyer" }, { "type": "null" }] },
+          "notes": { "type": "array", "items": { "$ref": "#/components/schemas/Note" } }
+        }
+      },
+      "OrderLine": {
+        "type": "object",
+        "properties": { "sku_id": { "type": "integer", "format": "int64" }, "note_id": { "type": "string" } }
+      },
+      "Buyer": { "type": "object", "properties": { "user_id": { "type": "integer", "format": "int64" }, "age": { "type": "integer" } } },
+      "Note": {
+        "type": "object",
+        "properties": { "text": { "type": "string" }, "replies": { "type": "array", "items": { "$ref": "#/components/schemas/Note" } } }
+      },
+      "OrderStatusChangeWebhook": { "type": "object", "properties": { "shop_id": { "type": "string" } } },
+      "PackageUpdateWebhook": { "type": "object", "properties": { "shop_id": { "type": "string" } } }
+    }
+  }
+}

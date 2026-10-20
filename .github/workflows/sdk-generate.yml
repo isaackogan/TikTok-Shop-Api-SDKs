@@ -1,0 +1,600 @@
+# Regenerates every SDK from .openapi/tiktok-shop.openapi.json, builds and tests it,
+# and (on main) commits the regenerated folders back. Generated code is never edited by hand:
+# each job runs its generator, then scripts/check-generated-only.ts fails the job if
+# anything outside a generated folder changed.
+name: sdk-generate
+
+on:
+  push:
+    branches: [main]
+    paths: 
+      - ".openapi/**"
+      - "typescript/**"
+      - "python/**"
+      - "go/**"
+      - "java/**"
+      - "kotlin/**"
+      - "php/**"
+      - "rust/**"
+      - "csharp/**"
+      - "shared/**"
+      - "scripts/**"
+      - ".github/workflows/sdk-generate.yml"
+  pull_request:
+    paths: 
+      - ".openapi/**"
+      - "typescript/**"
+      - "python/**"
+      - "go/**"
+      - "java/**"
+      - "kotlin/**"
+      - "php/**"
+      - "rust/**"
+      - "csharp/**"
+      - "shared/**"
+      - "scripts/**"
+      - ".github/workflows/sdk-generate.yml"
+  workflow_dispatch:
+    inputs:
+      typescript:
+        description: Run the typescript job
+        type: boolean
+        default: true
+      python:
+        description: Run the python job
+        type: boolean
+        default: true
+      go:
+        description: Run the go job
+        type: boolean
+        default: true
+      java:
+        description: Run the java job
+        type: boolean
+        default: true
+      kotlin:
+        description: Run the kotlin job
+        type: boolean
+        default: true
+      php:
+        description: Run the php job
+        type: boolean
+        default: true
+      rust:
+        description: Run the rust job
+        type: boolean
+        default: true
+      csharp:
+        description: Run the csharp job
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      typescript:
+        description: Run the typescript job
+        type: boolean
+        default: true
+      python:
+        description: Run the python job
+        type: boolean
+        default: true
+      go:
+        description: Run the go job
+        type: boolean
+        default: true
+      java:
+        description: Run the java job
+        type: boolean
+        default: true
+      kotlin:
+        description: Run the kotlin job
+        type: boolean
+        default: true
+      php:
+        description: Run the php job
+        type: boolean
+        default: true
+      rust:
+        description: Run the rust job
+        type: boolean
+        default: true
+      csharp:
+        description: Run the csharp job
+        type: boolean
+        default: true
+
+# One run per ref. A newer push to a PR cancels the older run; runs on main queue instead,
+# so a commit job is never cancelled halfway through.
+concurrency:
+  group: sdk-generate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  typescript:
+    name: typescript
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.typescript) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter tiktok-shop-api run generate
+      - name: Build
+        run: pnpm --filter tiktok-shop-api run build
+      - name: Typecheck
+        run: pnpm --filter tiktok-shop-api exec tsc --noEmit
+      - name: Test
+        run: pnpm --filter tiktok-shop-api run test
+      - name: Packaging dry run
+        working-directory: typescript
+        run: npm pack --dry-run
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-typescript
+          path: typescript/src/generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  python:
+    name: python
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.python) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/python run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/python run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/python run test
+      - name: Type-check with pyright
+        working-directory: python
+        run: .venv/bin/pyright
+      - name: Packaging dry run (sdist and wheel)
+        working-directory: python
+        run: |
+          set -euo pipefail
+          .venv/bin/pip install -q build
+          .venv/bin/python -m build --outdir "$RUNNER_TEMP/python-dist" .
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-python
+          path: |
+            python/src/tiktok_shop_api/generated
+            !python/src/tiktok_shop_api/generated/**/__pycache__
+            !python/src/tiktok_shop_api/generated/**/*.pyc
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  go:
+    name: go
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.go) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version-file: go/go.mod
+          cache-dependency-path: go/go.mod
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/go run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/go run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/go run test
+      - name: Check that go.mod is tidy
+        working-directory: go
+        run: |
+          set -euo pipefail
+          go mod tidy
+          # go mod tidy -diff needs Go 1.23; this job runs the go.mod floor (1.22).
+          if [ -n "$(git status --porcelain -- go.mod go.sum)" ]; then
+            git --no-pager diff -- go.mod go.sum
+            echo "::error::go.mod or go.sum is not tidy: run 'go mod tidy' in go/"
+            exit 1
+          fi
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-go
+          path: go/generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  java:
+    name: java
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.java) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/java run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/java run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/java run test
+      - name: Packaging dry run (release profile, unsigned)
+        working-directory: java
+        run: |
+          set -euo pipefail
+          mvn -B -q -P release -Dgpg.skip -DskipTests package
+          for jar in sources javadoc; do
+            ls target/tiktok-shop-api-*-"$jar".jar > /dev/null || { echo "::error::no -$jar.jar was built"; exit 1; }
+          done
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-java
+          path: java/src/main/java/com/isaackogan/tiktok/shop/generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  kotlin:
+    name: kotlin
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.kotlin) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/kotlin run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/kotlin run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/kotlin run test
+      - name: Packaging dry run (publish to the local Maven repository)
+        working-directory: kotlin
+        run: ./gradlew --no-daemon -q publishToMavenLocal
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-kotlin
+          path: kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  php:
+    name: php
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.php) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Set up PHP
+        uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: "8.3"
+          tools: composer
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --working-dir=php
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/php run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/php run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/php run test
+      - name: Packaging dry run
+        run: composer validate --strict --no-check-lock --working-dir=php
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-php
+          path: php/src/Generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  rust:
+    name: rust
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.rust) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master, 2026-10-16
+        with:
+          toolchain: stable
+          components: clippy
+      - name: Cache cargo
+        uses: actions/cache@v6
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: "cargo-${{ runner.os }}-${{ hashFiles('rust/Cargo.lock') }}"
+          restore-keys: "cargo-${{ runner.os }}-"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/rust run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/rust run build
+      - name: Build examples
+        run: cargo build --examples --manifest-path rust/Cargo.toml
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/rust run test
+      - name: Clippy
+        run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
+      - name: Packaging dry run
+        # --allow-dirty: on main the regenerated code is not committed yet.
+        run: cargo package --list --allow-dirty --manifest-path rust/Cargo.toml
+      - name: Set up Rust 1.88 (MSRV)
+        uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master, 2026-10-16
+        with:
+          toolchain: "1.88"
+      - name: Check MSRV
+        run: cargo +1.88 check --all-targets --manifest-path rust/Cargo.toml
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-rust
+          path: rust/src/generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  csharp:
+    name: csharp
+    # Push, pull_request and workflow_dispatch pass no input; format() turns "unset" into "" so only an explicit false skips the job.
+    if: ${{ format('{0}', inputs.csharp) != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java (openapi-generator jar)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Generate
+        run: pnpm --filter @tiktok-shop-api/csharp run generate
+      - name: Build
+        run: pnpm --filter @tiktok-shop-api/csharp run build
+      - name: Test
+        run: pnpm --filter @tiktok-shop-api/csharp run test
+      - name: Check that only generated folders changed
+        run: pnpm exec tsx scripts/check-generated-only.ts
+      - name: Upload generated code
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-csharp
+          path: csharp/src/TikTokShop.Api/Generated
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: "7"
+
+  scripts:
+    name: scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test scripts
+        run: pnpm --filter @tiktok-shop-api/scripts run test
+
+  commit:
+    name: commit regenerated SDKs
+    needs: [scripts, typescript, python, go, java, kotlin, php, rust, csharp]
+    # Only for a push to main, and only when every enabled job succeeded (skipped = disabled).
+    if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+      - name: Download generated code
+        uses: actions/download-artifact@v8
+        with:
+          pattern: sdk-*
+          path: artifacts
+      - name: Copy generated folders back
+        run: |
+          set -euo pipefail
+          declare -A DIRS=(
+            [typescript]="typescript/src/generated"
+            [python]="python/src/tiktok_shop_api/generated"
+            [go]="go/generated"
+            [java]="java/src/main/java/com/isaackogan/tiktok/shop/generated"
+            [kotlin]="kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/generated"
+            [php]="php/src/Generated"
+            [rust]="rust/src/generated"
+            [csharp]="csharp/src/TikTokShop.Api/Generated"
+          )
+          for lang in "${!DIRS[@]}"; do
+            if [ -d "artifacts/sdk-$lang" ]; then
+              mkdir -p "${DIRS[$lang]}"
+              rsync -a --delete "artifacts/sdk-$lang/" "${DIRS[$lang]}/"
+            fi
+          done
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          version="$(jq -r '.info.version' .openapi/tiktok-shop.openapi.json)"
+          git add -A -- typescript/src/generated python/src/tiktok_shop_api/generated go/generated java/src/main/java/com/isaackogan/tiktok/shop/generated kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/generated php/src/Generated rust/src/generated csharp/src/TikTokShop.Api/Generated
+          if git diff --cached --quiet; then
+            echo "Generated code is up to date; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(sdk): regenerate from spec $version"
+          # main may have moved during the run; only generated folders differ, so a rebase is safe.
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "push attempt $attempt failed; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::could not push the regenerated SDKs to main after 3 attempts"
+          exit 1

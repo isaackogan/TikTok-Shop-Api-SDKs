@@ -1,0 +1,14 @@
+packages:
+  - typescript
+  - python
+  - go
+  - java
+  - kotlin
+  - php
+  - rust
+  - csharp
+  - scripts
+
+allowBuilds:
+  '@openapitools/openapi-generator-cli': false
+  esbuild: true

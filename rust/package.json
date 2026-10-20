@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/rust",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "cargo build",
+    "test": "tsx --test scripts/render-webhooks.test.ts && cargo test"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}

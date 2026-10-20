@@ -1,0 +1,82 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar, cast
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+T = TypeVar("T", bound="GenerateGeneralSharingLinksRequestMaterial")
+
+
+@_attrs_define
+class GenerateGeneralSharingLinksRequestMaterial:
+    """
+    Attributes:
+        ids (list[str]): The list of material IDs. For `PRODUCT` requests, provide 1 to 50 product IDs.
+        type_ (str): Right now, the only possible value is `PRODUCT`.
+            When `type` is `PRODUCT`, use product IDs for `ids`.
+        promotion_campaign_schema (str | Unset): When type is set to CAMPAIGN, this field is required. This schema is
+            associated with the Campaign page.
+    """
+
+    ids: list[str]
+    type_: str
+    promotion_campaign_schema: str | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        ids = self.ids
+
+        type_ = self.type_
+
+        promotion_campaign_schema = self.promotion_campaign_schema
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "ids": ids,
+                "type": type_,
+            }
+        )
+        if promotion_campaign_schema is not UNSET:
+            field_dict["promotion_campaign_schema"] = promotion_campaign_schema
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        ids = cast(list[str], d.pop("ids"))
+
+        type_ = d.pop("type")
+
+        promotion_campaign_schema = d.pop("promotion_campaign_schema", UNSET)
+
+        generate_general_sharing_links_request_material = cls(
+            ids=ids,
+            type_=type_,
+            promotion_campaign_schema=promotion_campaign_schema,
+        )
+
+        generate_general_sharing_links_request_material.additional_properties = d
+        return generate_general_sharing_links_request_material
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

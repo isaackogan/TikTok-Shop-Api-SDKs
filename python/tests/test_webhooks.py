@@ -1,0 +1,153 @@
+import json
+from pathlib import Path
+
+import pytest
+
+from tiktok_shop_api import EVENT_TYPES, UnknownWebhookEvent, WebhookSignatureError, Webhooks
+from tiktok_shop_api.generated.models import OrderStatusChangeWebhook
+from tiktok_shop_api.generated.types import Unset
+
+VECTORS = json.loads((Path(__file__).parents[2] / "shared/test-vectors/webhooks.json").read_text())
+
+
+@pytest.mark.parametrize("c", VECTORS["verify"], ids=lambda c: c["name"])
+def test_verify(c):
+    kw = dict(app_key=c["appKey"], app_secret=c["appSecret"], signature=c["signature"])
+    assert Webhooks.verify(raw_body=c["rawBody"], **kw) is c["valid"]
+    assert Webhooks.verify(raw_body=c["rawBody"].encode(), **kw) is c["valid"]
+    if c["valid"]:
+        assert Webhooks.verify_and_parse(raw_body=c["rawBody"], **kw)
+    else:
+        with pytest.raises(WebhookSignatureError):
+            Webhooks.verify_and_parse(raw_body=c["rawBody"], **kw)
+
+
+def test_verify_uses_raw_bytes_not_text():
+    import hashlib
+    import hmac
+
+    body = b'{"type":1,"x":"\xff"}'  # not valid UTF-8
+    sig = hmac.new(b"sec", b"key" + body, hashlib.sha256).hexdigest()
+    assert Webhooks.verify(app_key="key", app_secret="sec", raw_body=body, signature=sig)
+
+
+@pytest.mark.parametrize("c", VECTORS["parse"], ids=lambda c: c["name"])
+def test_parse(c):
+    for body in (c["rawBody"], c["rawBody"].encode()):
+        ev = Webhooks.parse(body)
+        if c["known"]:
+            assert type(ev).__name__ == c["schema"]
+            assert isinstance(ev, OrderStatusChangeWebhook)
+            assert ev.type_ == c["type"]
+        else:
+            assert isinstance(ev, UnknownWebhookEvent)
+            assert ev.type == c["type"]
+            assert ev.raw == json.loads(c["rawBody"])
+
+
+def test_numeric_shop_id_is_exact():
+    ev = Webhooks.parse('{"type":1,"shop_id":7494049642642441621,"data":{"order_id":"1"}}')
+    assert isinstance(ev, OrderStatusChangeWebhook)
+    assert ev.shop_id == 7494049642642441621
+    unk = Webhooks.parse('{"type":424242,"shop_id":7494049642642441621}')
+    assert isinstance(unk, UnknownWebhookEvent) and unk.raw["shop_id"] == 7494049642642441621
+
+
+def test_unknown_order_status_is_kept_as_a_string():
+    ev = Webhooks.parse('{"type":1,"shop_id":"1","data":{"order_status":"SOME_NEW_STATUS"}}')
+    assert isinstance(ev, OrderStatusChangeWebhook)
+    assert not isinstance(ev.data, Unset)
+    assert ev.data.order_status == "SOME_NEW_STATUS"
+
+
+def test_event_types():
+    from tiktok_shop_api.generated._meta import EVENT_TYPES as META_EVENT_TYPES
+
+    assert EVENT_TYPES and EVENT_TYPES == META_EVENT_TYPES
+    assert EVENT_TYPES[1] == "ORDER_STATUS_CHANGE"
+    assert Webhooks.EVENT_TYPES is EVENT_TYPES
+
+
+def test_every_known_type_resolves_to_a_model():
+    from tiktok_shop_api.generated._meta import WEBHOOKS
+    from tiktok_shop_api.webhooks import _model
+
+    assert len(WEBHOOKS) > 0
+    for w in WEBHOOKS:
+        assert _model(w["schema"]).__name__ == w["schema"]
+
+
+def test_known_type_with_missing_required_fields_raises_value_error():
+    # AppealCompletedWebhook requires shop_id; the generated model's KeyError must not leak
+    t = next(w["type"] for w in __import__("tiktok_shop_api.generated._meta", fromlist=["x"]).WEBHOOKS if w["schema"] == "AppealCompletedWebhook")
+    with pytest.raises(ValueError, match="AppealCompletedWebhook"):
+        Webhooks.parse(json.dumps({"type": t}))
+
+
+def test_malformed_body_raises_value_error():
+    with pytest.raises(ValueError):
+        Webhooks.parse("not json")
+    with pytest.raises(ValueError):
+        Webhooks.parse("[1]")
+
+
+@pytest.mark.parametrize("body", ['{"shop_id":"1"}', '{"type":"1"}', '{"type":true}', '{"type":1.5}', '{"type":null}'])
+def test_missing_or_non_integer_type_raises_value_error(body):
+    with pytest.raises(ValueError, match="type"):
+        Webhooks.parse(body)
+
+
+# --- R28: strict parsing. A known type's required fields must be present and non-null, at any depth. -------------------
+
+def _appeal():
+    return {
+        "type": 66,
+        "shop_id": "1",
+        "tts_notification_id": "n1",
+        "timestamp": 1,
+        "data": {"product_id": 5, "appeal_task": {"appeal_audit_result": [{"indicator_type": "A", "status": "S"}]}},
+    }
+
+
+def test_complete_known_event_parses():
+    ev = Webhooks.parse(json.dumps(_appeal()))
+    assert type(ev).__name__ == "AppealCompletedWebhook"
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        ("shop_id",),
+        ("timestamp",),
+        ("data",),
+        ("data", "product_id"),
+        ("data", "appeal_task", "appeal_audit_result", 0, "status"),
+    ],
+)
+def test_null_required_field_is_a_parse_error(path):
+    body = _appeal()
+    node = body
+    for p in path[:-1]:
+        node = node[p]
+    node[path[-1]] = None
+    with pytest.raises(ValueError, match="AppealCompletedWebhook"):
+        Webhooks.parse(json.dumps(body))
+
+
+def test_missing_nested_required_field_is_a_parse_error():
+    body = _appeal()
+    del body["data"]["appeal_task"]["appeal_audit_result"][0]["indicator_type"]
+    with pytest.raises(ValueError):
+        Webhooks.parse(json.dumps(body))
+
+
+@pytest.mark.parametrize("body", ["null", "1", '"x"', "[]", '{"type":9007199254740993.0}'])
+def test_non_object_or_non_integer_bodies_are_parse_errors(body):
+    with pytest.raises(ValueError):
+        Webhooks.parse(body)
+
+
+def test_unknown_fields_in_a_webhook_are_accepted():
+    body = {"type": 1, "shop_id": "1", "brand_new": {"x": 1}, "data": {"order_id": "5", "order_status": "UNPAID", "future": [1]}}
+    ev = Webhooks.parse(json.dumps(body))
+    assert isinstance(ev, OrderStatusChangeWebhook)

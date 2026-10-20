@@ -1,0 +1,10 @@
+{
+  "name": "@tiktok-shop-api/python",
+  "private": true,
+  "scripts": {
+    "setup": "[ -x .venv/bin/python ] || (python3 -m venv .venv && .venv/bin/pip install -q -e '.[dev]')",
+    "generate": "pnpm run setup && .venv/bin/python scripts/generate.py",
+    "build": "pnpm run setup && .venv/bin/python -c 'import tiktok_shop_api'",
+    "test": "pnpm run setup && .venv/bin/pytest"
+  }
+}

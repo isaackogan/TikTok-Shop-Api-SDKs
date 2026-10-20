@@ -1,0 +1,14 @@
+from enum import StrEnum
+
+
+class ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAction(StrEnum):
+    APPROVE_REQUEST = "APPROVE_REQUEST"
+    APPROVE_RETURN_PACKAGE = "APPROVE_RETURN_PACKAGE"
+    OFFER_PARTIAL_REFUND = "OFFER_PARTIAL_REFUND"
+    OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG = "OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG"
+    REFUND_INSTEAD = "REFUND_INSTEAD"
+    REJECT_REQUEST = "REJECT_REQUEST"
+    REJECT_RETURN_PACKAGE = "REJECT_RETURN_PACKAGE"
+
+    def __str__(self) -> str:
+        return str(self.value)

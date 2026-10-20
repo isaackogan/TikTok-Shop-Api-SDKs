@@ -1,0 +1,97 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+T = TypeVar("T", bound="PartialEditProductRequestSkuSkuDimension")
+
+
+@_attrs_define
+class PartialEditProductRequestSkuSkuDimension:
+    """
+    Attributes:
+        height (str): The package height. A positive whole number.
+            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+            nearest whole number.
+        length (str): The package length. A positive whole number.
+            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+            nearest whole number.
+        unit (str): The unit for the SKU dimensions.
+            Possible values based on region:
+            - US: CENTIMETER, INCH
+            - Other regions: CENTIMETER
+
+            Note: Use the same measurement system (metric or imperial) for `sku_weight` and `sku_dimensions`. For example,
+            use `KILOGRAM` with `CENTIMETER`.
+        width (str): The package width. A positive whole number.
+            Note: For the BR market, decimal values using . or , as separators are also accepted but will be rounded to the
+            nearest whole number.
+    """
+
+    height: str
+    length: str
+    unit: str
+    width: str
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        height = self.height
+
+        length = self.length
+
+        unit = self.unit
+
+        width = self.width
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "height": height,
+                "length": length,
+                "unit": unit,
+                "width": width,
+            }
+        )
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        d = dict(src_dict)
+        height = d.pop("height")
+
+        length = d.pop("length")
+
+        unit = d.pop("unit")
+
+        width = d.pop("width")
+
+        partial_edit_product_request_sku_sku_dimension = cls(
+            height=height,
+            length=length,
+            unit=unit,
+            width=width,
+        )
+
+        partial_edit_product_request_sku_sku_dimension.additional_properties = d
+        return partial_edit_product_request_sku_sku_dimension
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties
