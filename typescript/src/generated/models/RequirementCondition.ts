@@ -23,10 +23,10 @@ export interface RequirementCondition {
      * The type of condition.
      * Possible values:
      * - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     * @type {RequirementConditionConditionTypeEnum}
+     * @type {string}
      * @memberof RequirementCondition
      */
-    conditionType?: RequirementConditionConditionTypeEnum;
+    conditionType?: string;
     /**
      * The ID of the product attribute that is being evaluated by the condition.
      * @type {string}
@@ -40,16 +40,6 @@ export interface RequirementCondition {
      */
     attributeValueId?: string;
 }
-
-
-/**
- * @export
- */
-export const RequirementConditionConditionTypeEnum = {
-    ValueIdMatch: 'VALUE_ID_MATCH'
-} as const;
-export type RequirementConditionConditionTypeEnum = typeof RequirementConditionConditionTypeEnum[keyof typeof RequirementConditionConditionTypeEnum];
-
 
 /**
  * Check if a given object implements the RequirementCondition interface.

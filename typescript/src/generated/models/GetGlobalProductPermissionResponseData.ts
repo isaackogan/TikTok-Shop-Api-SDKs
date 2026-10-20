@@ -24,21 +24,11 @@ export interface GetGlobalProductPermissionResponseData {
      * Possible values:
      * - MANAGE_GLOBAL_PRODUCT: Indicates the seller is permitted to manage global products listed in TikTok Shops across multiple countries.
      * An empty array means the seller does not have the MANAGE_GLOBAL_PRODUCT permission.
-     * @type {Array<GetGlobalProductPermissionResponseDataPermissionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalProductPermissionResponseData
      */
-    permissions?: Array<GetGlobalProductPermissionResponseDataPermissionsEnum>;
+    permissions?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalProductPermissionResponseDataPermissionsEnum = {
-    ManageGlobalProduct: 'MANAGE_GLOBAL_PRODUCT'
-} as const;
-export type GetGlobalProductPermissionResponseDataPermissionsEnum = typeof GetGlobalProductPermissionResponseDataPermissionsEnum[keyof typeof GetGlobalProductPermissionResponseDataPermissionsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalProductPermissionResponseData interface.

@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_creator_sample_applications_response_data_sample_application_creator_fulfillment_bound_product_status import (
-    SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatus,
-)
-from ..models.search_creator_sample_applications_response_data_sample_application_creator_fulfillment_status import (
-    SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment")
@@ -24,8 +18,8 @@ class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfill
         id (str | Unset): Fulfillment ID.
         expiration_time (int | Unset): Fulfillment deadline timestamp, in seconds.
         total_suspend_duration (int | Unset): Total suspension duration for fulfillment, in seconds.
-        status (SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatus | Unset):
-            Fulfillment status, It indicates the current status of the fulfillment process. The possible values are:
+        status (str | Unset): Fulfillment status, It indicates the current status of the fulfillment process. The
+            possible values are:
             - PENDING: The creator is yet to fulfill the content creation obligation.
             - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
             - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
@@ -34,10 +28,8 @@ class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfill
             - SUSPEND: Fulfillment has been suspended.
             - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
             - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-        bound_product_status
-            (SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatus | Unset):
-            Represents the marketing status of a product associated with a fulfillment order. It indicates whether the
-            product is available for marketing and fulfillment. The possible values are:
+        bound_product_status (str | Unset): Represents the marketing status of a product associated with a fulfillment
+            order. It indicates whether the product is available for marketing and fulfillment. The possible values are:
             - UNKNOWN: The marketing status of the product is unknown.
             - LIVE: The product is available and can be used for fulfillment.
             - OUT_OF_STOCK: The product is out of stock and cannot be fulfilled.
@@ -53,10 +45,8 @@ class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfill
     id: str | Unset = UNSET
     expiration_time: int | Unset = UNSET
     total_suspend_duration: int | Unset = UNSET
-    status: SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatus | Unset = UNSET
-    bound_product_status: (
-        SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatus | Unset
-    ) = UNSET
+    status: str | Unset = UNSET
+    bound_product_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -66,13 +56,9 @@ class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfill
 
         total_suspend_duration = self.total_suspend_duration
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
-        bound_product_status: str | Unset = UNSET
-        if not isinstance(self.bound_product_status, Unset):
-            bound_product_status = self.bound_product_status.value
+        bound_product_status = self.bound_product_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -99,25 +85,9 @@ class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfill
 
         total_suspend_duration = d.pop("total_suspend_duration", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _bound_product_status = d.pop("bound_product_status", UNSET)
-        bound_product_status: (
-            SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatus | Unset
-        )
-        if isinstance(_bound_product_status, Unset):
-            bound_product_status = UNSET
-        else:
-            bound_product_status = (
-                SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatus(
-                    _bound_product_status
-                )
-            )
+        bound_product_status = d.pop("bound_product_status", UNSET)
 
         search_creator_sample_applications_response_data_sample_application_creator_fulfillment = cls(
             id=id,

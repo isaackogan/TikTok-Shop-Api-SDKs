@@ -60,10 +60,10 @@ export interface SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchand
      * - `RETURN_IN_TRANSIT`
      * - `PENDING_PACKAGE_REVIEW`
      * - `PACKAGE_REVIEW_COMPLETED`
-     * @type {SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum}
+     * @type {string}
      * @memberof SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization
      */
-    status?: SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum;
+    status?: string;
     /**
      * Item units expected in this return package. This field is returned only when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
      * @type {Array<LineItem>}
@@ -77,20 +77,6 @@ export interface SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchand
      */
     skuReturnRequests?: Array<SkuReturnRequest>;
 }
-
-
-/**
- * @export
- */
-export const SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum = {
-    Init: 'INIT',
-    AwaitingBuyerReturn: 'AWAITING_BUYER_RETURN',
-    ReturnInTransit: 'RETURN_IN_TRANSIT',
-    PendingPackageReview: 'PENDING_PACKAGE_REVIEW',
-    PackageReviewCompleted: 'PACKAGE_REVIEW_COMPLETED'
-} as const;
-export type SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum = typeof SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum[keyof typeof SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization interface.

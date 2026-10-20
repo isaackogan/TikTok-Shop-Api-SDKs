@@ -46,7 +46,7 @@ data class GetSellerFinancialTransactionsResponseDataWithdrawal (
 
     /* The transaction type. Possible values: - WITHDRAW: The seller withdraws the settlement amount to a bank card. - SETTLE: The platform settles the amount to the seller. - TRANSFER: A platform subsidy or deduction due to platform policies. - REVERSE: A withdrawal failure caused by incorrect bank card information. - POLICY_VIOLATION_DEDUCTION: A deduction for a policy violation. - REWARD: A reward transaction. - PAYMENT: A payment transaction. - REFUND: A refund transaction. - UNKNOWN: An unrecognized transaction type. */
     @SerializedName("type")
-    val type: GetSellerFinancialTransactionsResponseDataWithdrawal.Type? = null,
+    val type: kotlin.String? = null,
 
     /* The transaction amount, in the currency specified by currency. */
     @SerializedName("amount")
@@ -58,7 +58,7 @@ data class GetSellerFinancialTransactionsResponseDataWithdrawal (
 
     /* The processing status of the transaction. Possible values: - SUCCESS: The transaction completed successfully. For a WITHDRAW transaction, this means that the withdrawal has been transferred to the seller. - INIT: The withdrawal was initialized. This status applies only to WITHDRAW transactions. - ORDERED: The transaction order was created. - PROCESSING: The withdrawal is being processed. - RECEIVED: The withdrawal was received. - PROCESSED: The payout completed successfully. - FAILED: The payout failed. - REVERSED: The transaction was refunded. - EXCEPTION: The transaction was partially refunded. - CLOSED: The transaction was closed. - UNKNOWN: The status could not be mapped. */
     @SerializedName("status")
-    val status: GetSellerFinancialTransactionsResponseDataWithdrawal.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The transaction creation time, expressed as a Unix timestamp in seconds. */
     @SerializedName("create_time")
@@ -66,40 +66,6 @@ data class GetSellerFinancialTransactionsResponseDataWithdrawal (
 
 ) {
 
-    /**
-     * The transaction type. Possible values: - WITHDRAW: The seller withdraws the settlement amount to a bank card. - SETTLE: The platform settles the amount to the seller. - TRANSFER: A platform subsidy or deduction due to platform policies. - REVERSE: A withdrawal failure caused by incorrect bank card information. - POLICY_VIOLATION_DEDUCTION: A deduction for a policy violation. - REWARD: A reward transaction. - PAYMENT: A payment transaction. - REFUND: A refund transaction. - UNKNOWN: An unrecognized transaction type.
-     *
-     * Values: WITHDRAW,SETTLE,TRANSFER,REVERSE,POLICY_VIOLATION_DEDUCTION,REWARD,PAYMENT,REFUND,UNKNOWN
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "WITHDRAW") WITHDRAW("WITHDRAW"),
-        @SerializedName(value = "SETTLE") SETTLE("SETTLE"),
-        @SerializedName(value = "TRANSFER") TRANSFER("TRANSFER"),
-        @SerializedName(value = "REVERSE") REVERSE("REVERSE"),
-        @SerializedName(value = "POLICY_VIOLATION_DEDUCTION") POLICY_VIOLATION_DEDUCTION("POLICY_VIOLATION_DEDUCTION"),
-        @SerializedName(value = "REWARD") REWARD("REWARD"),
-        @SerializedName(value = "PAYMENT") PAYMENT("PAYMENT"),
-        @SerializedName(value = "REFUND") REFUND("REFUND"),
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN");
-    }
-    /**
-     * The processing status of the transaction. Possible values: - SUCCESS: The transaction completed successfully. For a WITHDRAW transaction, this means that the withdrawal has been transferred to the seller. - INIT: The withdrawal was initialized. This status applies only to WITHDRAW transactions. - ORDERED: The transaction order was created. - PROCESSING: The withdrawal is being processed. - RECEIVED: The withdrawal was received. - PROCESSED: The payout completed successfully. - FAILED: The payout failed. - REVERSED: The transaction was refunded. - EXCEPTION: The transaction was partially refunded. - CLOSED: The transaction was closed. - UNKNOWN: The status could not be mapped.
-     *
-     * Values: SUCCESS,INIT,ORDERED,PROCESSING,RECEIVED,PROCESSED,FAILED,REVERSED,EXCEPTION,CLOSED,UNKNOWN
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "INIT") INIT("INIT"),
-        @SerializedName(value = "ORDERED") ORDERED("ORDERED"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "RECEIVED") RECEIVED("RECEIVED"),
-        @SerializedName(value = "PROCESSED") PROCESSED("PROCESSED"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "REVERSED") REVERSED("REVERSED"),
-        @SerializedName(value = "EXCEPTION") EXCEPTION("EXCEPTION"),
-        @SerializedName(value = "CLOSED") CLOSED("CLOSED"),
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN");
-    }
 
 }
 

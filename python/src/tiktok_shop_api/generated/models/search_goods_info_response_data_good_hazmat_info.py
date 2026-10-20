@@ -6,15 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_hazmat_info_dg_class import (
-    SearchGoodsInfoResponseDataGoodHazmatInfoDgClass,
-)
-from ..models.search_goods_info_response_data_good_hazmat_info_dg_uncode import (
-    SearchGoodsInfoResponseDataGoodHazmatInfoDgUncode,
-)
-from ..models.search_goods_info_response_data_good_hazmat_info_hazmat_type import (
-    SearchGoodsInfoResponseDataGoodHazmatInfoHazmatType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +25,7 @@ T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfo")
 class SearchGoodsInfoResponseDataGoodHazmatInfo:
     """
     Attributes:
-        hazmat_type (SearchGoodsInfoResponseDataGoodHazmatInfoHazmatType | Unset): hazardous goods type
+        hazmat_type (str | Unset): hazardous goods type
             Possible values:
             -MAGNETIZED
             -BATTERY
@@ -43,13 +34,13 @@ class SearchGoodsInfoResponseDataGoodHazmatInfo:
         battery_extra_info (SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo | Unset):
         flammable_liquids_extra_info (SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo | Unset):
         aerosol_extra_info (AerosolExtraInfo | Unset):
-        dg_class (SearchGoodsInfoResponseDataGoodHazmatInfoDgClass | Unset): Hazmat class
+        dg_class (str | Unset): Hazmat class
             Possible values:
             -CLASS_2
             -CLASS_3
             -CLASS_9
-        dg_uncode (SearchGoodsInfoResponseDataGoodHazmatInfoDgUncode | Unset): UN identifier for the hazardous
-            substance. Standard UN values use the `UN` prefix followed by four digits; `OTHER` is also supported.
+        dg_uncode (str | Unset): UN identifier for the hazardous substance. Standard UN values use the `UN` prefix
+            followed by four digits; `OTHER` is also supported.
             Possible values:
             - UN2807
             - UN3480
@@ -64,19 +55,17 @@ class SearchGoodsInfoResponseDataGoodHazmatInfo:
             compliance in FBT
     """
 
-    hazmat_type: SearchGoodsInfoResponseDataGoodHazmatInfoHazmatType | Unset = UNSET
+    hazmat_type: str | Unset = UNSET
     battery_extra_info: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo | Unset = UNSET
     flammable_liquids_extra_info: SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo | Unset = UNSET
     aerosol_extra_info: AerosolExtraInfo | Unset = UNSET
-    dg_class: SearchGoodsInfoResponseDataGoodHazmatInfoDgClass | Unset = UNSET
-    dg_uncode: SearchGoodsInfoResponseDataGoodHazmatInfoDgUncode | Unset = UNSET
+    dg_class: str | Unset = UNSET
+    dg_uncode: str | Unset = UNSET
     msds_file_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        hazmat_type: str | Unset = UNSET
-        if not isinstance(self.hazmat_type, Unset):
-            hazmat_type = self.hazmat_type.value
+        hazmat_type = self.hazmat_type
 
         battery_extra_info: dict[str, Any] | Unset = UNSET
         if not isinstance(self.battery_extra_info, Unset):
@@ -90,13 +79,9 @@ class SearchGoodsInfoResponseDataGoodHazmatInfo:
         if not isinstance(self.aerosol_extra_info, Unset):
             aerosol_extra_info = self.aerosol_extra_info.to_dict()
 
-        dg_class: str | Unset = UNSET
-        if not isinstance(self.dg_class, Unset):
-            dg_class = self.dg_class.value
+        dg_class = self.dg_class
 
-        dg_uncode: str | Unset = UNSET
-        if not isinstance(self.dg_uncode, Unset):
-            dg_uncode = self.dg_uncode.value
+        dg_uncode = self.dg_uncode
 
         msds_file_url = self.msds_file_url
 
@@ -131,12 +116,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfo:
         )
 
         d = dict(src_dict)
-        _hazmat_type = d.pop("hazmat_type", UNSET)
-        hazmat_type: SearchGoodsInfoResponseDataGoodHazmatInfoHazmatType | Unset
-        if isinstance(_hazmat_type, Unset):
-            hazmat_type = UNSET
-        else:
-            hazmat_type = SearchGoodsInfoResponseDataGoodHazmatInfoHazmatType(_hazmat_type)
+        hazmat_type = d.pop("hazmat_type", UNSET)
 
         _battery_extra_info = d.pop("battery_extra_info", UNSET)
         battery_extra_info: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo | Unset
@@ -163,19 +143,9 @@ class SearchGoodsInfoResponseDataGoodHazmatInfo:
         else:
             aerosol_extra_info = AerosolExtraInfo.from_dict(_aerosol_extra_info)
 
-        _dg_class = d.pop("dg_class", UNSET)
-        dg_class: SearchGoodsInfoResponseDataGoodHazmatInfoDgClass | Unset
-        if isinstance(_dg_class, Unset):
-            dg_class = UNSET
-        else:
-            dg_class = SearchGoodsInfoResponseDataGoodHazmatInfoDgClass(_dg_class)
+        dg_class = d.pop("dg_class", UNSET)
 
-        _dg_uncode = d.pop("dg_uncode", UNSET)
-        dg_uncode: SearchGoodsInfoResponseDataGoodHazmatInfoDgUncode | Unset
-        if isinstance(_dg_uncode, Unset):
-            dg_uncode = UNSET
-        else:
-            dg_uncode = SearchGoodsInfoResponseDataGoodHazmatInfoDgUncode(_dg_uncode)
+        dg_uncode = d.pop("dg_uncode", UNSET)
 
         msds_file_url = d.pop("msds_file_url", UNSET)
 

@@ -45,10 +45,10 @@ export interface CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillme
      * - PLATFORM_FREE_SAMPLE
      * - REFUNDABLE_SAMPLE
      * - UNSPECIFIED
-     * @type {CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum}
+     * @type {string}
      * @memberof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment
      */
-    sampleApplicationType?: CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum;
+    sampleApplicationType?: string;
     /**
      * The product identifier.
      * @type {string}
@@ -90,40 +90,11 @@ export interface CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillme
      * - PLATFORM_DEACTIVATE: The product has been deactivated by the platform.
      * - NO_PLAN: There is no valid plan available for the creator to promote the product.
      * - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
-     * @type {CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum}
+     * @type {string}
      * @memberof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment
      */
-    boundProductStatus?: CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum;
+    boundProductStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum = {
-    FreeSample: 'FREE_SAMPLE',
-    SampleCoupon: 'SAMPLE_COUPON',
-    SampleCampaign: 'SAMPLE_CAMPAIGN',
-    PlatformFreeSample: 'PLATFORM_FREE_SAMPLE',
-    RefundableSample: 'REFUNDABLE_SAMPLE',
-    Unspecified: 'UNSPECIFIED'
-} as const;
-export type CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum = typeof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum[keyof typeof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationTypeEnum];
-
-/**
- * @export
- */
-export const CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Live: 'LIVE',
-    OutOfStock: 'OUT_OF_STOCK',
-    SellerDeactivate: 'SELLER_DEACTIVATE',
-    PlatformDeactivate: 'PLATFORM_DEACTIVATE',
-    NoPlan: 'NO_PLAN',
-    PermanentDeleted: 'PERMANENT_DELETED'
-} as const;
-export type CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum = typeof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum[keyof typeof CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatusEnum];
-
 
 /**
  * Check if a given object implements the CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment interface.

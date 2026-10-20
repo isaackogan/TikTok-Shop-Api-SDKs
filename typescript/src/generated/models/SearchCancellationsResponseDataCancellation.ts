@@ -52,10 +52,10 @@ export interface SearchCancellationsResponseDataCancellation {
      * Possible values:
      * - `CANCEL`: Cancel by seller or system.
      * - `BUYER_CANCEL`: Cancel by buyer. Need to be approved by seller or system.
-     * @type {SearchCancellationsResponseDataCancellationCancelTypeEnum}
+     * @type {string}
      * @memberof SearchCancellationsResponseDataCancellation
      */
-    cancelType?: SearchCancellationsResponseDataCancellationCancelTypeEnum;
+    cancelType?: string;
     /**
      * Order cancellation status.
      * Possible values:
@@ -63,10 +63,10 @@ export interface SearchCancellationsResponseDataCancellation {
      * - `CANCELLATION_REQUEST_SUCCESS`
      * - `CANCELLATION_REQUEST_CANCEL`
      * - `CANCELLATION_REQUEST_COMPLETE`
-     * @type {SearchCancellationsResponseDataCancellationCancelStatusEnum}
+     * @type {string}
      * @memberof SearchCancellationsResponseDataCancellation
      */
-    cancelStatus?: SearchCancellationsResponseDataCancellationCancelStatusEnum;
+    cancelStatus?: string;
     /**
      * Order cancellation initiator.
      * Possible values:
@@ -74,10 +74,10 @@ export interface SearchCancellationsResponseDataCancellation {
      * - `SELLER`
      * - `OPERATOR`
      * - `SYSTEM`
-     * @type {SearchCancellationsResponseDataCancellationRoleEnum}
+     * @type {string}
      * @memberof SearchCancellationsResponseDataCancellation
      */
-    role?: SearchCancellationsResponseDataCancellationRoleEnum;
+    role?: string;
     /**
      * Order cancellation reason.
      * @type {string}
@@ -134,39 +134,6 @@ export interface SearchCancellationsResponseDataCancellation {
      */
     shouldReplenishStock?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchCancellationsResponseDataCancellationCancelTypeEnum = {
-    Cancel: 'CANCEL',
-    BuyerCancel: 'BUYER_CANCEL'
-} as const;
-export type SearchCancellationsResponseDataCancellationCancelTypeEnum = typeof SearchCancellationsResponseDataCancellationCancelTypeEnum[keyof typeof SearchCancellationsResponseDataCancellationCancelTypeEnum];
-
-/**
- * @export
- */
-export const SearchCancellationsResponseDataCancellationCancelStatusEnum = {
-    CancellationRequestPending: 'CANCELLATION_REQUEST_PENDING',
-    CancellationRequestSuccess: 'CANCELLATION_REQUEST_SUCCESS',
-    CancellationRequestCancel: 'CANCELLATION_REQUEST_CANCEL',
-    CancellationRequestComplete: 'CANCELLATION_REQUEST_COMPLETE'
-} as const;
-export type SearchCancellationsResponseDataCancellationCancelStatusEnum = typeof SearchCancellationsResponseDataCancellationCancelStatusEnum[keyof typeof SearchCancellationsResponseDataCancellationCancelStatusEnum];
-
-/**
- * @export
- */
-export const SearchCancellationsResponseDataCancellationRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type SearchCancellationsResponseDataCancellationRoleEnum = typeof SearchCancellationsResponseDataCancellationRoleEnum[keyof typeof SearchCancellationsResponseDataCancellationRoleEnum];
-
 
 /**
  * Check if a given object implements the SearchCancellationsResponseDataCancellation interface.

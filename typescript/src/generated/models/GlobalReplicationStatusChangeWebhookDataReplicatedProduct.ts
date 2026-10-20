@@ -47,10 +47,10 @@ export interface GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
      *  * SUCCESS: The product was successfully replicated to the local shop, submitted for listing, and is now under review. 
      *  * DRAFT: The product was successfully replicated to the local shop but saved as a draft local product due to validation errors. You need to call [GET Product](https://partner.tiktokshop.com/docv2/page/get-product-202309) to obtain the original submitted data, pass that data to [POST Check Product Listing](https://partner.tiktokshop.com/docv2/page/check-product-listing-202309) to identify the errors, then call [PUT Edit Product](https://partner.tiktokshop.com/docv2/page/edit-product-202309) to rectify the errors and send for review. 
      *  * FAILED: Replication of the product to the local shop was unsuccessful.
-     * @type {GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum}
+     * @type {string}
      * @memberof GlobalReplicationStatusChangeWebhookDataReplicatedProduct
      */
-    result?: GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum;
+    result?: string;
     /**
      * The list of reasons for why the replication failed.
      * @type {Array<GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason>}
@@ -58,18 +58,6 @@ export interface GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
      */
     failReasons?: Array<GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason>;
 }
-
-
-/**
- * @export
- */
-export const GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum = {
-    Success: 'SUCCESS',
-    Draft: 'DRAFT',
-    Failed: 'FAILED'
-} as const;
-export type GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum = typeof GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum[keyof typeof GlobalReplicationStatusChangeWebhookDataReplicatedProductResultEnum];
-
 
 /**
  * Check if a given object implements the GlobalReplicationStatusChangeWebhookDataReplicatedProduct interface.

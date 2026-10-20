@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_fbtmcf_order_status_response_data_mcf_order_consign_order_status import (
-    GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -32,7 +29,7 @@ class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder:
             handed over to the logistics carrier, this field may be a null value.
         carrier (None | str | Unset): The shipping carrier of this consign order. If the order has not yet been handed
             over to the logistics carrier, this field may be a null value.
-        status (GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatus | Unset): The status of the consign order.
+        status (str | Unset): The status of the consign order.
 
             Possible values:
             - **PENDING** - The order is pending warehouse processing.
@@ -59,7 +56,7 @@ class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder:
     goods: list[GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderGood] | Unset = UNSET
     tracking_number: None | str | Unset = UNSET
     carrier: None | str | Unset = UNSET
-    status: GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatus | Unset = UNSET
+    status: str | Unset = UNSET
     is_platform_closed: bool | Unset = UNSET
     issue: str | Unset = UNSET
     shipping_provider: None | ShippingProvider | Unset = UNSET
@@ -89,9 +86,7 @@ class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder:
         else:
             carrier = self.carrier
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         is_platform_closed = self.is_platform_closed
 
@@ -164,12 +159,7 @@ class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder:
 
         carrier = _parse_carrier(d.pop("carrier", UNSET))
 
-        _status = d.pop("status", UNSET)
-        status: GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatus(_status)
+        status = d.pop("status", UNSET)
 
         is_platform_closed = d.pop("is_platform_closed", UNSET)
 

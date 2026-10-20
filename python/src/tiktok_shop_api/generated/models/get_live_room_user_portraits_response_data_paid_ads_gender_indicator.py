@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_live_room_user_portraits_response_data_paid_ads_gender_indicator_type import (
-    GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator")
@@ -18,8 +15,7 @@ T = TypeVar("T", bound="GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicat
 class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator:
     """
     Attributes:
-        type_ (GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorType | Unset): The gender category represented
-            by this indicator.
+        type_ (str | Unset): The gender category represented by this indicator.
             Possible values:
             - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender.
             - USER_PORTRAIT_GENDER_M: Male.
@@ -27,14 +23,12 @@ class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator:
         value (str | Unset): The count for the corresponding paid-advertising gender indicator.
     """
 
-    type_: GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorType | Unset = UNSET
+    type_: str | Unset = UNSET
     value: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         value = self.value
 
@@ -51,12 +45,7 @@ class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorType(_type_)
+        type_ = d.pop("type", UNSET)
 
         value = d.pop("value", UNSET)
 

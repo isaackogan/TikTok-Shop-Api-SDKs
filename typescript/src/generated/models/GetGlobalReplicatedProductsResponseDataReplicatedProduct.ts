@@ -45,10 +45,10 @@ export interface GetGlobalReplicatedProductsResponseDataReplicatedProduct {
      * - US: United States
      * - VN: Vietnam
      * - MX: Mexico
-     * @type {GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum}
+     * @type {string}
      * @memberof GetGlobalReplicatedProductsResponseDataReplicatedProduct
      */
-    region?: GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum;
+    region?: string;
     /**
      * The TikTok Shop ID.
      * @type {string}
@@ -73,59 +73,11 @@ export interface GetGlobalReplicatedProductsResponseDataReplicatedProduct {
      * - PLATFORM_DEACTIVATED
      * - FREEZE
      * - DELETED
-     * @type {GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum}
+     * @type {string}
      * @memberof GetGlobalReplicatedProductsResponseDataReplicatedProduct
      */
-    productStatus?: GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum;
+    productStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Po: 'PO',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum = typeof GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum[keyof typeof GetGlobalReplicatedProductsResponseDataReplicatedProductRegionEnum];
-
-/**
- * @export
- */
-export const GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Draft: 'DRAFT',
-    Pending: 'PENDING',
-    Failed: 'FAILED',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED'
-} as const;
-export type GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum = typeof GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum[keyof typeof GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatusEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalReplicatedProductsResponseDataReplicatedProduct interface.

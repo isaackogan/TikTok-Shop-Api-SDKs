@@ -24,10 +24,10 @@ export interface GetCouponResponseDataCouponLiveTask {
      * - `NONE`: Any shopper in the LIVE room may claim the coupon.
      * - `FOLLOW_HOST`: Shoppers must follow the LIVE host before being able to claim the coupon.
      * - `WATCH_FOR_MIN_TIME`: Shoppers must watch the LIVE for the time specified by `min_watch_time` before being able to claim the coupon.
-     * @type {GetCouponResponseDataCouponLiveTaskTypeEnum}
+     * @type {string}
      * @memberof GetCouponResponseDataCouponLiveTask
      */
-    type?: GetCouponResponseDataCouponLiveTaskTypeEnum;
+    type?: string;
     /**
      * Number of seconds for which the shopper must watch the LIVE in order to claim the coupon.
      * @type {string}
@@ -35,18 +35,6 @@ export interface GetCouponResponseDataCouponLiveTask {
      */
     minWatchTime?: string;
 }
-
-
-/**
- * @export
- */
-export const GetCouponResponseDataCouponLiveTaskTypeEnum = {
-    None: 'NONE',
-    FollowHost: 'FOLLOW_HOST',
-    WatchForMinTime: 'WATCH_FOR_MIN_TIME'
-} as const;
-export type GetCouponResponseDataCouponLiveTaskTypeEnum = typeof GetCouponResponseDataCouponLiveTaskTypeEnum[keyof typeof GetCouponResponseDataCouponLiveTaskTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCouponResponseDataCouponLiveTask interface.

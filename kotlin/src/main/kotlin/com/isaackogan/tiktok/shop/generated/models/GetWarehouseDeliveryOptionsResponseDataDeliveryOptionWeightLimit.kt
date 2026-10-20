@@ -47,21 +47,10 @@ data class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit (
 
     /* The unit of measurement for the weight. Possible values: - GRAM - POUND - OUNCE - KILOGRAM */
     @SerializedName("unit")
-    val unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * The unit of measurement for the weight. Possible values: - GRAM - POUND - OUNCE - KILOGRAM
-     *
-     * Values: GRAM,POUND,OUNCE,KILOGRAM
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "GRAM") GRAM("GRAM"),
-        @SerializedName(value = "POUND") POUND("POUND"),
-        @SerializedName(value = "OUNCE") OUNCE("OUNCE"),
-        @SerializedName(value = "KILOGRAM") KILOGRAM("KILOGRAM");
-    }
 
 }
 

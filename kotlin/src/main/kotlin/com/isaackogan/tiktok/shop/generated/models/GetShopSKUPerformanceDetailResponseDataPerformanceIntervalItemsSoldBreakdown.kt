@@ -42,20 +42,10 @@ data class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBr
 
     /* Items-sold breakdown type. Possible values: - LIVE: Live stream content. - VIDEO: Video content. - PRODUCT_CARD: Product card. */
     @SerializedName("type")
-    val type: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdown.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * Items-sold breakdown type. Possible values: - LIVE: Live stream content. - VIDEO: Video content. - PRODUCT_CARD: Product card.
-     *
-     * Values: LIVE,VIDEO,PRODUCT_CARD
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO"),
-        @SerializedName(value = "PRODUCT_CARD") PRODUCT_CARD("PRODUCT_CARD");
-    }
 
 }
 

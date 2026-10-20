@@ -39,23 +39,13 @@ data class ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult (
 
     /* Possible enumerations:    `SUCCESS`   `FAIL`   `PROCESSING` */
     @SerializedName("status")
-    val status: ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult.Status? = null,
+    val status: kotlin.String? = null,
 
     @SerializedName("issues")
     val issues: kotlin.collections.List<ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue>? = null
 
 ) {
 
-    /**
-     * Possible enumerations:    `SUCCESS`   `FAIL`   `PROCESSING`
-     *
-     * Values: SUCCESS,FAIL,PROCESSING
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "FAIL") FAIL("FAIL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING");
-    }
 
 }
 

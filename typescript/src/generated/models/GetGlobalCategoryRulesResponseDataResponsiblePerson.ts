@@ -35,10 +35,10 @@ export interface GetGlobalCategoryRulesResponseDataResponsiblePerson {
      * - FR: France
      * - IT: Italy
      * - IE: Ireland
-     * @type {Array<GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataResponsiblePerson
      */
-    optionalRegions?: Array<GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum>;
+    optionalRegions?: Array<string>;
     /**
      * The markets where the responsible person is required.
      * Possible values:
@@ -55,45 +55,11 @@ export interface GetGlobalCategoryRulesResponseDataResponsiblePerson {
      * - NL: Netherlands
      * - PL: Poland
      * - PT: Portugal
-     * @type {Array<GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataResponsiblePerson
      */
-    requiredRegions?: Array<GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum>;
+    requiredRegions?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum = {
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    It: 'IT',
-    Ie: 'IE'
-} as const;
-export type GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum = typeof GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataResponsiblePersonOptionalRegionsEnum];
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gr: 'GR',
-    Hu: 'HU',
-    Ie: 'IE',
-    It: 'IT',
-    Nl: 'NL',
-    Pl: 'PL',
-    Pt: 'PT'
-} as const;
-export type GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum = typeof GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataResponsiblePersonRequiredRegionsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalCategoryRulesResponseDataResponsiblePerson interface.

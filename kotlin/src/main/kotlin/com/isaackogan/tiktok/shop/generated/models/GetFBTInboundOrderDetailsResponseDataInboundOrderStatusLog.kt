@@ -44,11 +44,11 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog (
 
     /* The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.  **Possible values:** * `WORKING` * `READY_TO_SHIP` * `TO_BE_RECEIVED` * `ARRIVED_HUB` * `INTERNAL_TRANSFER` * `RECEIVING` * `PARTIALLY_RECEIVED` * `RECEIVED` * `CANCELLED` * `DELIVERED` */
     @SerializedName("new_status")
-    val newStatus: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog.NewStatus? = null,
+    val newStatus: kotlin.String? = null,
 
     /* The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.  **Possible values:** * `WORKING` * `READY_TO_SHIP` * `TO_BE_RECEIVED` * `ARRIVED_HUB` * `INTERNAL_TRANSFER` * `RECEIVING` * `PARTIALLY_RECEIVED` * `RECEIVED` * `CANCELLED` * `DELIVERED` */
     @SerializedName("previous_status")
-    val previousStatus: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog.PreviousStatus? = null,
+    val previousStatus: kotlin.String? = null,
 
     /* The unique identifier or name of the user or system entity that performed the status change. */
     @SerializedName("operator")
@@ -56,40 +56,6 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog (
 
 ) {
 
-    /**
-     * The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.  **Possible values:** * `WORKING` * `READY_TO_SHIP` * `TO_BE_RECEIVED` * `ARRIVED_HUB` * `INTERNAL_TRANSFER` * `RECEIVING` * `PARTIALLY_RECEIVED` * `RECEIVED` * `CANCELLED` * `DELIVERED`
-     *
-     * Values: WORKING,READY_TO_SHIP,TO_BE_RECEIVED,ARRIVED_HUB,INTERNAL_TRANSFER,RECEIVING,PARTIALLY_RECEIVED,RECEIVED,CANCELLED,DELIVERED
-     */
-    enum class NewStatus(val value: kotlin.String) {
-        @SerializedName(value = "WORKING") WORKING("WORKING"),
-        @SerializedName(value = "READY_TO_SHIP") READY_TO_SHIP("READY_TO_SHIP"),
-        @SerializedName(value = "TO_BE_RECEIVED") TO_BE_RECEIVED("TO_BE_RECEIVED"),
-        @SerializedName(value = "ARRIVED_HUB") ARRIVED_HUB("ARRIVED_HUB"),
-        @SerializedName(value = "INTERNAL_TRANSFER") INTERNAL_TRANSFER("INTERNAL_TRANSFER"),
-        @SerializedName(value = "RECEIVING") RECEIVING("RECEIVING"),
-        @SerializedName(value = "PARTIALLY_RECEIVED") PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-        @SerializedName(value = "RECEIVED") RECEIVED("RECEIVED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED");
-    }
-    /**
-     * The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.  **Possible values:** * `WORKING` * `READY_TO_SHIP` * `TO_BE_RECEIVED` * `ARRIVED_HUB` * `INTERNAL_TRANSFER` * `RECEIVING` * `PARTIALLY_RECEIVED` * `RECEIVED` * `CANCELLED` * `DELIVERED`
-     *
-     * Values: WORKING,READY_TO_SHIP,TO_BE_RECEIVED,ARRIVED_HUB,INTERNAL_TRANSFER,RECEIVING,PARTIALLY_RECEIVED,RECEIVED,CANCELLED,DELIVERED
-     */
-    enum class PreviousStatus(val value: kotlin.String) {
-        @SerializedName(value = "WORKING") WORKING("WORKING"),
-        @SerializedName(value = "READY_TO_SHIP") READY_TO_SHIP("READY_TO_SHIP"),
-        @SerializedName(value = "TO_BE_RECEIVED") TO_BE_RECEIVED("TO_BE_RECEIVED"),
-        @SerializedName(value = "ARRIVED_HUB") ARRIVED_HUB("ARRIVED_HUB"),
-        @SerializedName(value = "INTERNAL_TRANSFER") INTERNAL_TRANSFER("INTERNAL_TRANSFER"),
-        @SerializedName(value = "RECEIVING") RECEIVING("RECEIVING"),
-        @SerializedName(value = "PARTIALLY_RECEIVED") PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-        @SerializedName(value = "RECEIVED") RECEIVED("RECEIVED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED");
-    }
 
 }
 

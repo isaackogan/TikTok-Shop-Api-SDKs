@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_video_performance_details_response_data_performance_viewer_profile_type import (
-    GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetShopVideoPerformanceDetailsResponseDataPerformanceVie
 class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile:
     """
     Attributes:
-        type_ (GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileType | Unset): Viewer profile type.
-            Possible values:
+        type_ (str | Unset): Viewer profile type. Possible values:
 
             - NEW_FOLLOWER: viewers who newly followed after watching the video
 
@@ -35,16 +31,14 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile:
         country_distribution (list[CountryDistribution] | Unset): Viewer country distribution.
     """
 
-    type_: GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileType | Unset = UNSET
+    type_: str | Unset = UNSET
     gender_distribution: list[GenderDistribution] | Unset = UNSET
     age_distribution: list[AgeDistribution] | Unset = UNSET
     country_distribution: list[CountryDistribution] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         gender_distribution: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.gender_distribution, Unset):
@@ -88,12 +82,7 @@ class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile:
         from ..models.gender_distribution import GenderDistribution  # noqa: PLC0415
 
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileType(_type_)
+        type_ = d.pop("type", UNSET)
 
         _gender_distribution = d.pop("gender_distribution", UNSET)
         gender_distribution: list[GenderDistribution] | Unset = UNSET

@@ -21,16 +21,16 @@ import { mapValues } from '../runtime';
 export interface GoodsMatchWebhookData {
     /**
      * Indicates whether the seller is matching or unmatching products. Possible enumerations are: `MATCH` and `UNMATCH`.
-     * @type {GoodsMatchWebhookDataMatchTypeEnum}
+     * @type {string}
      * @memberof GoodsMatchWebhookData
      */
-    matchType?: GoodsMatchWebhookDataMatchTypeEnum;
+    matchType?: string;
     /**
      * Possible enumerations are: `LOCAL` and `GLOBAL`.
-     * @type {GoodsMatchWebhookDataProductTypeEnum}
+     * @type {string}
      * @memberof GoodsMatchWebhookData
      */
-    productType?: GoodsMatchWebhookDataProductTypeEnum;
+    productType?: string;
     /**
      * FBT Goods ID.
      * @type {string}
@@ -56,26 +56,6 @@ export interface GoodsMatchWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GoodsMatchWebhookDataMatchTypeEnum = {
-    Match: 'MATCH',
-    Unmatch: 'UNMATCH'
-} as const;
-export type GoodsMatchWebhookDataMatchTypeEnum = typeof GoodsMatchWebhookDataMatchTypeEnum[keyof typeof GoodsMatchWebhookDataMatchTypeEnum];
-
-/**
- * @export
- */
-export const GoodsMatchWebhookDataProductTypeEnum = {
-    Local: 'LOCAL',
-    Global: 'GLOBAL'
-} as const;
-export type GoodsMatchWebhookDataProductTypeEnum = typeof GoodsMatchWebhookDataProductTypeEnum[keyof typeof GoodsMatchWebhookDataProductTypeEnum];
-
 
 /**
  * Check if a given object implements the GoodsMatchWebhookData interface.

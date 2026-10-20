@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.optimize_images_response_data_image_optimize_status import OptimizeImagesResponseDataImageOptimizeStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OptimizeImagesResponseDataImage")
@@ -28,7 +27,7 @@ class OptimizeImagesResponseDataImage:
             Use this URL in product descriptions by embedding it within an HTML `<img>` tag.
 
             Applicable only if `optimize_status`is `SUCCESS`.
-        optimize_status (OptimizeImagesResponseDataImageOptimizeStatus | Unset): The optimization status.
+        optimize_status (str | Unset): The optimization status.
             Possible values:
             - SUCCESS: The image has been successfully optimized.
             - IGNORE: The image already has a white background, so no optimization was applied.
@@ -42,7 +41,7 @@ class OptimizeImagesResponseDataImage:
     original_url: str | Unset = UNSET
     optimized_uri: str | Unset = UNSET
     optimized_url: str | Unset = UNSET
-    optimize_status: OptimizeImagesResponseDataImageOptimizeStatus | Unset = UNSET
+    optimize_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,9 +57,7 @@ class OptimizeImagesResponseDataImage:
 
         optimized_url = self.optimized_url
 
-        optimize_status: str | Unset = UNSET
-        if not isinstance(self.optimize_status, Unset):
-            optimize_status = self.optimize_status.value
+        optimize_status = self.optimize_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -97,12 +94,7 @@ class OptimizeImagesResponseDataImage:
 
         optimized_url = d.pop("optimized_url", UNSET)
 
-        _optimize_status = d.pop("optimize_status", UNSET)
-        optimize_status: OptimizeImagesResponseDataImageOptimizeStatus | Unset
-        if isinstance(_optimize_status, Unset):
-            optimize_status = UNSET
-        else:
-            optimize_status = OptimizeImagesResponseDataImageOptimizeStatus(_optimize_status)
+        optimize_status = d.pop("optimize_status", UNSET)
 
         optimize_images_response_data_image = cls(
             height=height,

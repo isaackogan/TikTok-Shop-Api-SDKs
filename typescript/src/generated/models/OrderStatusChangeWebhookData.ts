@@ -36,10 +36,10 @@ export interface OrderStatusChangeWebhookData {
      *  * `IN_TRANSIT` 
      *  * `DELIVERED` 
      *  * `COMPLETED`
-     * @type {OrderStatusChangeWebhookDataOrderStatusEnum}
+     * @type {string}
      * @memberof OrderStatusChangeWebhookData
      */
-    orderStatus?: OrderStatusChangeWebhookDataOrderStatusEnum;
+    orderStatus?: string;
     /**
      * Indicates whether the order has experienced or will experience `ON_HOLD` status
      * @type {boolean}
@@ -53,23 +53,6 @@ export interface OrderStatusChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const OrderStatusChangeWebhookDataOrderStatusEnum = {
-    Unpaid: 'UNPAID',
-    OnHold: 'ON_HOLD',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    AwaitingCollection: 'AWAITING_COLLECTION',
-    Cancel: 'CANCEL',
-    InTransit: 'IN_TRANSIT',
-    Delivered: 'DELIVERED',
-    Completed: 'COMPLETED'
-} as const;
-export type OrderStatusChangeWebhookDataOrderStatusEnum = typeof OrderStatusChangeWebhookDataOrderStatusEnum[keyof typeof OrderStatusChangeWebhookDataOrderStatusEnum];
-
 
 /**
  * Check if a given object implements the OrderStatusChangeWebhookData interface.

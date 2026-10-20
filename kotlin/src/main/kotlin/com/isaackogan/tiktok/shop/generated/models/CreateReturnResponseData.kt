@@ -42,25 +42,10 @@ data class CreateReturnResponseData (
 
     /* Return status, available values: - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform - REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request - AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform - BUYER_SHIPPED_ITEM: Buyer has shipped items to seller. - REJECT_RECEIVE_PACKAGE: Seller reject return package - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded. - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded. */
     @SerializedName("return_status")
-    val returnStatus: CreateReturnResponseData.ReturnStatus? = null
+    val returnStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * Return status, available values: - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform - REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request - AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform - BUYER_SHIPPED_ITEM: Buyer has shipped items to seller. - REJECT_RECEIVE_PACKAGE: Seller reject return package - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded. - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded.
-     *
-     * Values: RETURN_OR_REFUND_REQUEST_PENDING,REFUND_OR_RETURN_REQUEST_REJECT,AWAITING_BUYER_SHIP,BUYER_SHIPPED_ITEM,REJECT_RECEIVE_PACKAGE,RETURN_OR_REFUND_REQUEST_SUCCESS,RETURN_OR_REFUND_REQUEST_CANCEL,RETURN_OR_REFUND_REQUEST_COMPLETE
-     */
-    enum class ReturnStatus(val value: kotlin.String) {
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_PENDING") RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-        @SerializedName(value = "REFUND_OR_RETURN_REQUEST_REJECT") REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-        @SerializedName(value = "AWAITING_BUYER_SHIP") AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-        @SerializedName(value = "BUYER_SHIPPED_ITEM") BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-        @SerializedName(value = "REJECT_RECEIVE_PACKAGE") REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_SUCCESS") RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_CANCEL") RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_COMPLETE") RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE");
-    }
 
 }
 

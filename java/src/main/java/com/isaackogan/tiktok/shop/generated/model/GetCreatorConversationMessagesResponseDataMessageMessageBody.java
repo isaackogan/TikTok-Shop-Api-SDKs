@@ -60,78 +60,10 @@ public class GetCreatorConversationMessagesResponseDataMessageMessageBody {
   @javax.annotation.Nullable
   private String conversationId;
 
-  /**
-   * Message type. Possible values: - TEXT - PRODUCT_CARD - TARGET_COLLABORATION_CARD - FREE_SAMPLE_CARD - IMAGE - CRM_TEXT_WITH_IMAGE_CARD - CRM_TEXT_WITH_PRODUCTS_CARD - NOTIFICATION - EMOTICONS - SYSTEM
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    TEXT("TEXT"),
-    
-    PRODUCT_CARD("PRODUCT_CARD"),
-    
-    TARGET_COLLABORATION_CARD("TARGET_COLLABORATION_CARD"),
-    
-    FREE_SAMPLE_CARD("FREE_SAMPLE_CARD"),
-    
-    IMAGE("IMAGE"),
-    
-    CRM_TEXT_WITH_IMAGE_CARD("CRM_TEXT_WITH_IMAGE_CARD"),
-    
-    CRM_TEXT_WITH_PRODUCTS_CARD("CRM_TEXT_WITH_PRODUCTS_CARD"),
-    
-    NOTIFICATION("NOTIFICATION"),
-    
-    EMOTICONS("EMOTICONS"),
-    
-    SYSTEM("SYSTEM");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
@@ -189,7 +121,7 @@ public class GetCreatorConversationMessagesResponseDataMessageMessageBody {
   }
 
 
-  public GetCreatorConversationMessagesResponseDataMessageMessageBody type(@javax.annotation.Nullable TypeEnum type) {
+  public GetCreatorConversationMessagesResponseDataMessageMessageBody type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -199,11 +131,11 @@ public class GetCreatorConversationMessagesResponseDataMessageMessageBody {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -389,10 +321,6 @@ public class GetCreatorConversationMessagesResponseDataMessageMessageBody {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if ((jsonObj.get("content") != null && !jsonObj.get("content").isJsonNull()) && !jsonObj.get("content").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content").toString()));

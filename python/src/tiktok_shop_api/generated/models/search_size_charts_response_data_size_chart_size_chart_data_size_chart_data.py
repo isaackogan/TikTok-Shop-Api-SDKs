@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_measurement_type import (
-    SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementType,
-)
-from ..models.search_size_charts_response_data_size_chart_size_chart_data_size_chart_data_unit_system import (
-    SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -30,11 +24,9 @@ class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData:
         table (SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable | Unset):
         description (str | Unset): Additional size chart description.
         is_one_size (bool | Unset): Whether this is a one-size chart.
-        measurement_type (SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementType | Unset):
-            Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements;
-            PRODUCT_MEASUREMENTS: finished-product measurements.
-        unit_system (SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystem | Unset): Possible
-            values: METRIC: metric units; IMPERIAL: imperial units.
+        measurement_type (str | Unset): Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS:
+            shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
+        unit_system (str | Unset): Possible values: METRIC: metric units; IMPERIAL: imperial units.
         size_types (list[str] | Unset): Possible values include: size_chart_common_size_type: Common;
             size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus;
             size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the
@@ -44,8 +36,8 @@ class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData:
     table: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable | Unset = UNSET
     description: str | Unset = UNSET
     is_one_size: bool | Unset = UNSET
-    measurement_type: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementType | Unset = UNSET
-    unit_system: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystem | Unset = UNSET
+    measurement_type: str | Unset = UNSET
+    unit_system: str | Unset = UNSET
     size_types: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -58,13 +50,9 @@ class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData:
 
         is_one_size = self.is_one_size
 
-        measurement_type: str | Unset = UNSET
-        if not isinstance(self.measurement_type, Unset):
-            measurement_type = self.measurement_type.value
+        measurement_type = self.measurement_type
 
-        unit_system: str | Unset = UNSET
-        if not isinstance(self.unit_system, Unset):
-            unit_system = self.unit_system.value
+        unit_system = self.unit_system
 
         size_types: list[str] | Unset = UNSET
         if not isinstance(self.size_types, Unset):
@@ -106,21 +94,9 @@ class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData:
 
         is_one_size = d.pop("is_one_size", UNSET)
 
-        _measurement_type = d.pop("measurement_type", UNSET)
-        measurement_type: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementType | Unset
-        if isinstance(_measurement_type, Unset):
-            measurement_type = UNSET
-        else:
-            measurement_type = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementType(
-                _measurement_type
-            )
+        measurement_type = d.pop("measurement_type", UNSET)
 
-        _unit_system = d.pop("unit_system", UNSET)
-        unit_system: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystem | Unset
-        if isinstance(_unit_system, Unset):
-            unit_system = UNSET
-        else:
-            unit_system = SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystem(_unit_system)
+        unit_system = d.pop("unit_system", UNSET)
 
         size_types = cast(list[str], d.pop("size_types", UNSET))
 

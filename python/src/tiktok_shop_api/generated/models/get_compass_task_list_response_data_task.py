@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_compass_task_list_response_data_task_module_type import GetCompassTaskListResponseDataTaskModuleType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCompassTaskListResponseDataTask")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GetCompassTaskListResponseDataTask")
 class GetCompassTaskListResponseDataTask:
     """
     Attributes:
-        module_type (GetCompassTaskListResponseDataTaskModuleType | Unset): Allowed values: CREATOR, BASE.
+        module_type (str | Unset): Allowed values: CREATOR, BASE.
         id (str | Unset): The ID of the offline report task. When the task status is `SUCCEEDED`, use this value as the
             `task_id` path parameter in `GET /affiliate_seller/202603/compass/offline_tasks/{task_id}/file` to download the
             completed export task's result file.
@@ -27,16 +26,14 @@ class GetCompassTaskListResponseDataTask:
             - FAILED
     """
 
-    module_type: GetCompassTaskListResponseDataTaskModuleType | Unset = UNSET
+    module_type: str | Unset = UNSET
     id: str | Unset = UNSET
     file_name: str | Unset = UNSET
     status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        module_type: str | Unset = UNSET
-        if not isinstance(self.module_type, Unset):
-            module_type = self.module_type.value
+        module_type = self.module_type
 
         id = self.id
 
@@ -61,12 +58,7 @@ class GetCompassTaskListResponseDataTask:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _module_type = d.pop("module_type", UNSET)
-        module_type: GetCompassTaskListResponseDataTaskModuleType | Unset
-        if isinstance(_module_type, Unset):
-            module_type = UNSET
-        else:
-            module_type = GetCompassTaskListResponseDataTaskModuleType(_module_type)
+        module_type = d.pop("module_type", UNSET)
 
         id = d.pop("id", UNSET)
 

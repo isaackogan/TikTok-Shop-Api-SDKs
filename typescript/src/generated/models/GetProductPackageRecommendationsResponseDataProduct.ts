@@ -45,10 +45,10 @@ export interface GetProductPackageRecommendationsResponseDataProduct {
      * - `None`: No weight or dimension anomaly was detected.
      * - `Dimension`: A dimension correction is recommended.
      * - `Weight`: A weight correction is recommended.
-     * @type {Array<GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum>}
+     * @type {Array<string>}
      * @memberof GetProductPackageRecommendationsResponseDataProduct
      */
-    abnormalityTypes?: Array<GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum>;
+    abnormalityTypes?: Array<string>;
     /**
      * Weight correction recommendation (Returned only when the weight of product has been recommended ).
      * @type {GetProductPackageRecommendationsResponseDataProductWeightRecommendation}
@@ -62,18 +62,6 @@ export interface GetProductPackageRecommendationsResponseDataProduct {
      */
     dimensionRecommendation?: GetProductPackageRecommendationsResponseDataProductDimensionRecommendation;
 }
-
-
-/**
- * @export
- */
-export const GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum = {
-    None: 'None',
-    Dimension: 'Dimension',
-    Weight: 'Weight'
-} as const;
-export type GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum = typeof GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum[keyof typeof GetProductPackageRecommendationsResponseDataProductAbnormalityTypesEnum];
-
 
 /**
  * Check if a given object implements the GetProductPackageRecommendationsResponseDataProduct interface.

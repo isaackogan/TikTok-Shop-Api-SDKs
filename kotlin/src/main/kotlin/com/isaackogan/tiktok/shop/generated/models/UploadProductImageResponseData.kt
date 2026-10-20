@@ -57,23 +57,10 @@ data class UploadProductImageResponseData (
 
     /* The usage scenario specified during upload. Possible values: - MAIN_IMAGE - ATTRIBUTE_IMAGE - DESCRIPTION_IMAGE - CERTIFICATION_IMAGE - SIZE_CHART_IMAGE - CUSTOMIZATION_IMAGE */
     @SerializedName("use_case")
-    val useCase: UploadProductImageResponseData.UseCase? = null
+    val useCase: kotlin.String? = null
 
 ) {
 
-    /**
-     * The usage scenario specified during upload. Possible values: - MAIN_IMAGE - ATTRIBUTE_IMAGE - DESCRIPTION_IMAGE - CERTIFICATION_IMAGE - SIZE_CHART_IMAGE - CUSTOMIZATION_IMAGE
-     *
-     * Values: MAIN_IMAGE,ATTRIBUTE_IMAGE,DESCRIPTION_IMAGE,CERTIFICATION_IMAGE,SIZE_CHART_IMAGE,CUSTOMIZATION_IMAGE
-     */
-    enum class UseCase(val value: kotlin.String) {
-        @SerializedName(value = "MAIN_IMAGE") MAIN_IMAGE("MAIN_IMAGE"),
-        @SerializedName(value = "ATTRIBUTE_IMAGE") ATTRIBUTE_IMAGE("ATTRIBUTE_IMAGE"),
-        @SerializedName(value = "DESCRIPTION_IMAGE") DESCRIPTION_IMAGE("DESCRIPTION_IMAGE"),
-        @SerializedName(value = "CERTIFICATION_IMAGE") CERTIFICATION_IMAGE("CERTIFICATION_IMAGE"),
-        @SerializedName(value = "SIZE_CHART_IMAGE") SIZE_CHART_IMAGE("SIZE_CHART_IMAGE"),
-        @SerializedName(value = "CUSTOMIZATION_IMAGE") CUSTOMIZATION_IMAGE("CUSTOMIZATION_IMAGE");
-    }
 
 }
 

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sample_application_status_change_webhook_data_new_status import (
-    SampleApplicationStatusChangeWebhookDataNewStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,7 +25,7 @@ class SampleApplicationStatusChangeWebhookData:
     """
     Attributes:
         application_id (str | Unset): The id of the sample application
-        new_status (SampleApplicationStatusChangeWebhookDataNewStatus | Unset): The status of sample applications.
+        new_status (str | Unset): The status of sample applications.
              The possible enumerated values are:
 
              * `PENDING`: The sample application is waiting for the seller's review.
@@ -57,7 +54,7 @@ class SampleApplicationStatusChangeWebhookData:
     """
 
     application_id: str | Unset = UNSET
-    new_status: SampleApplicationStatusChangeWebhookDataNewStatus | Unset = UNSET
+    new_status: str | Unset = UNSET
     creator: list[SampleApplicationStatusChangeWebhookDataCreator] | Unset = UNSET
     product: list[SampleApplicationStatusChangeWebhookDataProduct] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -65,9 +62,7 @@ class SampleApplicationStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         application_id = self.application_id
 
-        new_status: str | Unset = UNSET
-        if not isinstance(self.new_status, Unset):
-            new_status = self.new_status.value
+        new_status = self.new_status
 
         creator: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.creator, Unset):
@@ -109,12 +104,7 @@ class SampleApplicationStatusChangeWebhookData:
         d = dict(src_dict)
         application_id = d.pop("application_id", UNSET)
 
-        _new_status = d.pop("new_status", UNSET)
-        new_status: SampleApplicationStatusChangeWebhookDataNewStatus | Unset
-        if isinstance(_new_status, Unset):
-            new_status = UNSET
-        else:
-            new_status = SampleApplicationStatusChangeWebhookDataNewStatus(_new_status)
+        new_status = d.pop("new_status", UNSET)
 
         _creator = d.pop("creator", UNSET)
         creator: list[SampleApplicationStatusChangeWebhookDataCreator] | Unset = UNSET

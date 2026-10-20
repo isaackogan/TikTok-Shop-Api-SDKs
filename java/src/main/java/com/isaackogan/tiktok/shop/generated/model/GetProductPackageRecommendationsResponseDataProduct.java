@@ -59,73 +59,10 @@ public class GetProductPackageRecommendationsResponseDataProduct {
   @javax.annotation.Nullable
   private String productId;
 
-  /**
-   * Gets or Sets abnormalityTypes
-   */
-  @JsonAdapter(AbnormalityTypesEnum.Adapter.class)
-  public enum AbnormalityTypesEnum {
-    /**
-     * No weight or dimension anomaly was detected.
-     */
-    NONE("None"),
-    
-    /**
-     * A dimension correction is recommended.
-     */
-    DIMENSION("Dimension"),
-    
-    /**
-     * A weight correction is recommended.
-     */
-    WEIGHT("Weight");
-
-    private String value;
-
-    AbnormalityTypesEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AbnormalityTypesEnum fromValue(String value) {
-      for (AbnormalityTypesEnum b : AbnormalityTypesEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AbnormalityTypesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AbnormalityTypesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AbnormalityTypesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AbnormalityTypesEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AbnormalityTypesEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ABNORMALITY_TYPES = "abnormality_types";
   @SerializedName(SERIALIZED_NAME_ABNORMALITY_TYPES)
   @javax.annotation.Nullable
-  private List<AbnormalityTypesEnum> abnormalityTypes = new ArrayList<>();
+  private List<String> abnormalityTypes = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_WEIGHT_RECOMMENDATION = "weight_recommendation";
   @SerializedName(SERIALIZED_NAME_WEIGHT_RECOMMENDATION)
@@ -159,12 +96,12 @@ public class GetProductPackageRecommendationsResponseDataProduct {
   }
 
 
-  public GetProductPackageRecommendationsResponseDataProduct abnormalityTypes(@javax.annotation.Nullable List<AbnormalityTypesEnum> abnormalityTypes) {
+  public GetProductPackageRecommendationsResponseDataProduct abnormalityTypes(@javax.annotation.Nullable List<String> abnormalityTypes) {
     this.abnormalityTypes = abnormalityTypes;
     return this;
   }
 
-  public GetProductPackageRecommendationsResponseDataProduct addAbnormalityTypesItem(AbnormalityTypesEnum abnormalityTypesItem) {
+  public GetProductPackageRecommendationsResponseDataProduct addAbnormalityTypesItem(String abnormalityTypesItem) {
     if (this.abnormalityTypes == null) {
       this.abnormalityTypes = new ArrayList<>();
     }
@@ -177,11 +114,11 @@ public class GetProductPackageRecommendationsResponseDataProduct {
    * @return abnormalityTypes
    */
   @javax.annotation.Nullable
-  public List<AbnormalityTypesEnum> getAbnormalityTypes() {
+  public List<String> getAbnormalityTypes() {
     return abnormalityTypes;
   }
 
-  public void setAbnormalityTypes(@javax.annotation.Nullable List<AbnormalityTypesEnum> abnormalityTypes) {
+  public void setAbnormalityTypes(@javax.annotation.Nullable List<String> abnormalityTypes) {
     this.abnormalityTypes = abnormalityTypes;
   }
 

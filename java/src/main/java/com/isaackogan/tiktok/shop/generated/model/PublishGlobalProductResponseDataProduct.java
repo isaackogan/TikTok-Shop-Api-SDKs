@@ -53,173 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PublishGlobalProductResponseDataProduct {
-  /**
-   * The market of this local product. Possible values: - AT: Austria - BE:Belgium - CZ:Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU:Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands(NL) - PH: Philippines - PO: Poland - PT:Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-   */
-  @JsonAdapter(RegionEnum.Adapter.class)
-  public enum RegionEnum {
-    /**
-     * Austria
-     */
-    AT("AT"),
-    
-    /**
-     * Belgium
-     */
-    BE("BE"),
-    
-    /**
-     * Czech Republic
-     */
-    CZ("CZ"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Greece
-     */
-    GR("GR"),
-    
-    /**
-     * Hungary
-     */
-    HU("HU"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Netherlands(NL)
-     */
-    NL("NL"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Poland
-     */
-    PO("PO"),
-    
-    /**
-     * Portugal
-     */
-    PT("PT"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX");
-
-    private String value;
-
-    RegionEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RegionEnum fromValue(String value) {
-      for (RegionEnum b : RegionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RegionEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RegionEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RegionEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RegionEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RegionEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_REGION = "region";
   @SerializedName(SERIALIZED_NAME_REGION)
   @javax.annotation.Nullable
-  private RegionEnum region;
+  private String region;
 
   public static final String SERIALIZED_NAME_SHOP_ID = "shop_id";
   @SerializedName(SERIALIZED_NAME_SHOP_ID)
@@ -239,7 +76,7 @@ public class PublishGlobalProductResponseDataProduct {
   public PublishGlobalProductResponseDataProduct() {
   }
 
-  public PublishGlobalProductResponseDataProduct region(@javax.annotation.Nullable RegionEnum region) {
+  public PublishGlobalProductResponseDataProduct region(@javax.annotation.Nullable String region) {
     this.region = region;
     return this;
   }
@@ -249,11 +86,11 @@ public class PublishGlobalProductResponseDataProduct {
    * @return region
    */
   @javax.annotation.Nullable
-  public RegionEnum getRegion() {
+  public String getRegion() {
     return region;
   }
 
-  public void setRegion(@javax.annotation.Nullable RegionEnum region) {
+  public void setRegion(@javax.annotation.Nullable String region) {
     this.region = region;
   }
 
@@ -437,10 +274,6 @@ public class PublishGlobalProductResponseDataProduct {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) && !jsonObj.get("region").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
-      }
-      // validate the optional field `region`
-      if (jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) {
-        RegionEnum.validateJsonElement(jsonObj.get("region"));
       }
       if ((jsonObj.get("shop_id") != null && !jsonObj.get("shop_id").isJsonNull()) && !jsonObj.get("shop_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shop_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shop_id").toString()));

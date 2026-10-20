@@ -261,10 +261,10 @@ export interface GetGlobalProductResponseData {
      * - th-TH
      * - vi-VN
      * - zh-CN
-     * @type {GetGlobalProductResponseDataSourceLocaleEnum}
+     * @type {string}
      * @memberof GetGlobalProductResponseData
      */
-    sourceLocale?: GetGlobalProductResponseDataSourceLocaleEnum;
+    sourceLocale?: string;
     /**
      * An external identifier used in an external ecommerce platform. This is used to associate the product between TikTok Shop and the external ecommerce platform.
      * @type {string}
@@ -272,40 +272,6 @@ export interface GetGlobalProductResponseData {
      */
     externalGlobalProductId?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalProductResponseDataSourceLocaleEnum = {
-    CsCz: 'cs-CZ',
-    DeAt: 'de-AT',
-    DeBe: 'de-BE',
-    DeDe: 'de-DE',
-    ElGr: 'el-GR',
-    EnGb: 'en-GB',
-    EnIe: 'en-IE',
-    EnUs: 'en-US',
-    EsEs: 'es-ES',
-    EsMx: 'es-MX',
-    FrFr: 'fr-FR',
-    FrBe: 'fr-BE',
-    HuHu: 'hu-HU',
-    IdId: 'id-ID',
-    ItIt: 'it-IT',
-    JaJp: 'ja-JP',
-    MsMy: 'ms-MY',
-    NlNl: 'nl-NL',
-    NlBe: 'nl-BE',
-    PlPl: 'pl-PL',
-    PtBr: 'pt-BR',
-    PtPt: 'pt-PT',
-    ThTh: 'th-TH',
-    ViVn: 'vi-VN',
-    ZhCn: 'zh-CN'
-} as const;
-export type GetGlobalProductResponseDataSourceLocaleEnum = typeof GetGlobalProductResponseDataSourceLocaleEnum[keyof typeof GetGlobalProductResponseDataSourceLocaleEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalProductResponseData interface.

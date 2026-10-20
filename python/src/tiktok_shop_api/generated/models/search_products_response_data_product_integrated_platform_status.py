@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_products_response_data_product_integrated_platform_status_platform import (
-    SearchProductsResponseDataProductIntegratedPlatformStatusPlatform,
-)
-from ..models.search_products_response_data_product_integrated_platform_status_status import (
-    SearchProductsResponseDataProductIntegratedPlatformStatusStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchProductsResponseDataProductIntegratedPlatformStatus")
@@ -21,12 +15,10 @@ T = TypeVar("T", bound="SearchProductsResponseDataProductIntegratedPlatformStatu
 class SearchProductsResponseDataProductIntegratedPlatformStatus:
     """
     Attributes:
-        platform (SearchProductsResponseDataProductIntegratedPlatformStatusPlatform | Unset): The integrated platform
-            name.
+        platform (str | Unset): The integrated platform name.
             Possible values:
             - TOKOPEDIA
-        status (SearchProductsResponseDataProductIntegratedPlatformStatusStatus | Unset): The product status in the
-            integrated platform.
+        status (str | Unset): The product status in the integrated platform.
             Possible values:
             - DRAFT
             - PENDING
@@ -38,18 +30,14 @@ class SearchProductsResponseDataProductIntegratedPlatformStatus:
             - DELETED
     """
 
-    platform: SearchProductsResponseDataProductIntegratedPlatformStatusPlatform | Unset = UNSET
-    status: SearchProductsResponseDataProductIntegratedPlatformStatusStatus | Unset = UNSET
+    platform: str | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        platform: str | Unset = UNSET
-        if not isinstance(self.platform, Unset):
-            platform = self.platform.value
+        platform = self.platform
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -64,19 +52,9 @@ class SearchProductsResponseDataProductIntegratedPlatformStatus:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _platform = d.pop("platform", UNSET)
-        platform: SearchProductsResponseDataProductIntegratedPlatformStatusPlatform | Unset
-        if isinstance(_platform, Unset):
-            platform = UNSET
-        else:
-            platform = SearchProductsResponseDataProductIntegratedPlatformStatusPlatform(_platform)
+        platform = d.pop("platform", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchProductsResponseDataProductIntegratedPlatformStatusStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchProductsResponseDataProductIntegratedPlatformStatusStatus(_status)
+        status = d.pop("status", UNSET)
 
         search_products_response_data_product_integrated_platform_status = cls(
             platform=platform,

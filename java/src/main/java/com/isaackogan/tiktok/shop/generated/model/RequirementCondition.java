@@ -50,63 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class RequirementCondition {
-  /**
-   * The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-   */
-  @JsonAdapter(ConditionTypeEnum.Adapter.class)
-  public enum ConditionTypeEnum {
-    /**
-     * The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     */
-    VALUE_ID_MATCH("VALUE_ID_MATCH");
-
-    private String value;
-
-    ConditionTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ConditionTypeEnum fromValue(String value) {
-      for (ConditionTypeEnum b : ConditionTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ConditionTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ConditionTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ConditionTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ConditionTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ConditionTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CONDITION_TYPE = "condition_type";
   @SerializedName(SERIALIZED_NAME_CONDITION_TYPE)
   @javax.annotation.Nullable
-  private ConditionTypeEnum conditionType;
+  private String conditionType;
 
   public static final String SERIALIZED_NAME_ATTRIBUTE_ID = "attribute_id";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTE_ID)
@@ -121,7 +68,7 @@ public class RequirementCondition {
   public RequirementCondition() {
   }
 
-  public RequirementCondition conditionType(@javax.annotation.Nullable ConditionTypeEnum conditionType) {
+  public RequirementCondition conditionType(@javax.annotation.Nullable String conditionType) {
     this.conditionType = conditionType;
     return this;
   }
@@ -131,11 +78,11 @@ public class RequirementCondition {
    * @return conditionType
    */
   @javax.annotation.Nullable
-  public ConditionTypeEnum getConditionType() {
+  public String getConditionType() {
     return conditionType;
   }
 
-  public void setConditionType(@javax.annotation.Nullable ConditionTypeEnum conditionType) {
+  public void setConditionType(@javax.annotation.Nullable String conditionType) {
     this.conditionType = conditionType;
   }
 
@@ -290,10 +237,6 @@ public class RequirementCondition {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("condition_type") != null && !jsonObj.get("condition_type").isJsonNull()) && !jsonObj.get("condition_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `condition_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("condition_type").toString()));
-      }
-      // validate the optional field `condition_type`
-      if (jsonObj.get("condition_type") != null && !jsonObj.get("condition_type").isJsonNull()) {
-        ConditionTypeEnum.validateJsonElement(jsonObj.get("condition_type"));
       }
       if ((jsonObj.get("attribute_id") != null && !jsonObj.get("attribute_id").isJsonNull()) && !jsonObj.get("attribute_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `attribute_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("attribute_id").toString()));

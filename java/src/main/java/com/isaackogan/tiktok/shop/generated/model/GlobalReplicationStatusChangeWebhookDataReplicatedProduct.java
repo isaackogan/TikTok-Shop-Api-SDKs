@@ -63,73 +63,10 @@ public class GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
   @javax.annotation.Nullable
   private String region;
 
-  /**
-   * The result of replicating the product.   Possible values:      * SUCCESS: The product was successfully replicated to the local shop, submitted for listing, and is now under review.   * DRAFT: The product was successfully replicated to the local shop but saved as a draft local product due to validation errors. You need to call [GET Product](https://partner.tiktokshop.com/docv2/page/get-product-202309) to obtain the original submitted data, pass that data to [POST Check Product Listing](https://partner.tiktokshop.com/docv2/page/check-product-listing-202309) to identify the errors, then call [PUT Edit Product](https://partner.tiktokshop.com/docv2/page/edit-product-202309) to rectify the errors and send for review.   * FAILED: Replication of the product to the local shop was unsuccessful.
-   */
-  @JsonAdapter(ResultEnum.Adapter.class)
-  public enum ResultEnum {
-    /**
-     * The product was successfully replicated to the local shop, submitted for listing, and is now under review.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * The product was successfully replicated to the local shop but saved as a draft local product due to validation errors. You need to call [GET Product](https://partner.tiktokshop.com/docv2/page/get-product-202309) to obtain the original submitted data, pass that data to [POST Check Product Listing](https://partner.tiktokshop.com/docv2/page/check-product-listing-202309) to identify the errors, then call [PUT Edit Product](https://partner.tiktokshop.com/docv2/page/edit-product-202309) to rectify the errors and send for review.
-     */
-    DRAFT("DRAFT"),
-    
-    /**
-     * Replication of the product to the local shop was unsuccessful.
-     */
-    FAILED("FAILED");
-
-    private String value;
-
-    ResultEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ResultEnum fromValue(String value) {
-      for (ResultEnum b : ResultEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ResultEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ResultEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ResultEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ResultEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ResultEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RESULT = "result";
   @SerializedName(SERIALIZED_NAME_RESULT)
   @javax.annotation.Nullable
-  private ResultEnum result;
+  private String result;
 
   public static final String SERIALIZED_NAME_FAIL_REASONS = "fail_reasons";
   @SerializedName(SERIALIZED_NAME_FAIL_REASONS)
@@ -177,7 +114,7 @@ public class GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
   }
 
 
-  public GlobalReplicationStatusChangeWebhookDataReplicatedProduct result(@javax.annotation.Nullable ResultEnum result) {
+  public GlobalReplicationStatusChangeWebhookDataReplicatedProduct result(@javax.annotation.Nullable String result) {
     this.result = result;
     return this;
   }
@@ -187,11 +124,11 @@ public class GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
    * @return result
    */
   @javax.annotation.Nullable
-  public ResultEnum getResult() {
+  public String getResult() {
     return result;
   }
 
-  public void setResult(@javax.annotation.Nullable ResultEnum result) {
+  public void setResult(@javax.annotation.Nullable String result) {
     this.result = result;
   }
 
@@ -343,10 +280,6 @@ public class GlobalReplicationStatusChangeWebhookDataReplicatedProduct {
       }
       if ((jsonObj.get("result") != null && !jsonObj.get("result").isJsonNull()) && !jsonObj.get("result").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `result` to be a primitive type in the JSON string but got `%s`", jsonObj.get("result").toString()));
-      }
-      // validate the optional field `result`
-      if (jsonObj.get("result") != null && !jsonObj.get("result").isJsonNull()) {
-        ResultEnum.validateJsonElement(jsonObj.get("result"));
       }
       if (jsonObj.get("fail_reasons") != null && !jsonObj.get("fail_reasons").isJsonNull()) {
         JsonArray jsonArrayfailReasons = jsonObj.getAsJsonArray("fail_reasons");

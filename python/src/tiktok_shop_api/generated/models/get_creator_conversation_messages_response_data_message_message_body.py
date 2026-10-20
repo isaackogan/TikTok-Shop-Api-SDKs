@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_creator_conversation_messages_response_data_message_message_body_type import (
-    GetCreatorConversationMessagesResponseDataMessageMessageBodyType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCreatorConversationMessagesResponseDataMessageMessageBody")
@@ -20,7 +17,7 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
     Attributes:
         id (str | Unset): Message ID.
         conversation_id (str | Unset): Conversation ID to which the message belongs.
-        type_ (GetCreatorConversationMessagesResponseDataMessageMessageBodyType | Unset): Message type. Possible values:
+        type_ (str | Unset): Message type. Possible values:
             - TEXT
             - PRODUCT_CARD
             - TARGET_COLLABORATION_CARD
@@ -47,7 +44,7 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
 
     id: str | Unset = UNSET
     conversation_id: str | Unset = UNSET
-    type_: GetCreatorConversationMessagesResponseDataMessageMessageBodyType | Unset = UNSET
+    type_: str | Unset = UNSET
     content: str | Unset = UNSET
     create_time: int | Unset = UNSET
     sender_id: str | Unset = UNSET
@@ -58,9 +55,7 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
 
         conversation_id = self.conversation_id
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         content = self.content
 
@@ -93,12 +88,7 @@ class GetCreatorConversationMessagesResponseDataMessageMessageBody:
 
         conversation_id = d.pop("conversation_id", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetCreatorConversationMessagesResponseDataMessageMessageBodyType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCreatorConversationMessagesResponseDataMessageMessageBodyType(_type_)
+        type_ = d.pop("type", UNSET)
 
         content = d.pop("content", UNSET)
 

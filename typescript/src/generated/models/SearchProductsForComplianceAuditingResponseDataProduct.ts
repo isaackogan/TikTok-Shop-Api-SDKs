@@ -69,10 +69,10 @@ export interface SearchProductsForComplianceAuditingResponseDataProduct {
      * - TH: Thailand
      * - US: United States
      * - VN: Vietnam
-     * @type {SearchProductsForComplianceAuditingResponseDataProductCountryEnum}
+     * @type {string}
      * @memberof SearchProductsForComplianceAuditingResponseDataProduct
      */
-    country?: SearchProductsForComplianceAuditingResponseDataProductCountryEnum;
+    country?: string;
     /**
      * The product description in HTML format.
      * @type {string}
@@ -128,31 +128,6 @@ export interface SearchProductsForComplianceAuditingResponseDataProduct {
      */
     categories?: Array<SearchProductsForComplianceAuditingResponseDataProductCategory>;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsForComplianceAuditingResponseDataProductCountryEnum = {
-    Br: 'BR',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    Mx: 'MX',
-    My: 'MY',
-    Ph: 'PH',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN'
-} as const;
-export type SearchProductsForComplianceAuditingResponseDataProductCountryEnum = typeof SearchProductsForComplianceAuditingResponseDataProductCountryEnum[keyof typeof SearchProductsForComplianceAuditingResponseDataProductCountryEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsForComplianceAuditingResponseDataProduct interface.

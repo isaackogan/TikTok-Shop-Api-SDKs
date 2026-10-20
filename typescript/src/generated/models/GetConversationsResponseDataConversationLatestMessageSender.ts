@@ -39,10 +39,10 @@ export interface GetConversationsResponseDataConversationLatestMessageSender {
      * - `SYSTEM`
      * - `ROBOT`
      * For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the `SHOP` role.
-     * @type {GetConversationsResponseDataConversationLatestMessageSenderRoleEnum}
+     * @type {string}
      * @memberof GetConversationsResponseDataConversationLatestMessageSender
      */
-    role?: GetConversationsResponseDataConversationLatestMessageSenderRoleEnum;
+    role?: string;
     /**
      * Sender's nickname.
      * - For shops, the nickname is the shop's name. 
@@ -54,20 +54,6 @@ export interface GetConversationsResponseDataConversationLatestMessageSender {
      */
     nickname?: string;
 }
-
-
-/**
- * @export
- */
-export const GetConversationsResponseDataConversationLatestMessageSenderRoleEnum = {
-    Buyer: 'BUYER',
-    Shop: 'SHOP',
-    CustomerService: 'CUSTOMER_SERVICE',
-    System: 'SYSTEM',
-    Robot: 'ROBOT'
-} as const;
-export type GetConversationsResponseDataConversationLatestMessageSenderRoleEnum = typeof GetConversationsResponseDataConversationLatestMessageSenderRoleEnum[keyof typeof GetConversationsResponseDataConversationLatestMessageSenderRoleEnum];
-
 
 /**
  * Check if a given object implements the GetConversationsResponseDataConversationLatestMessageSender interface.

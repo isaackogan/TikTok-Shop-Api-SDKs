@@ -29,10 +29,10 @@ export interface CheckProductListingResponseDataListingQuality {
      * - EXCELLENT
      * 
      * **Note**: Available only for the US market.
-     * @type {CheckProductListingResponseDataListingQualityCurrentTierEnum}
+     * @type {string}
      * @memberof CheckProductListingResponseDataListingQuality
      */
-    currentTier?: CheckProductListingResponseDataListingQualityCurrentTierEnum;
+    currentTier?: string;
     /**
      * The remaining number of recommendations (see `diagnosis_results`) that must be implemented for the product to reach the highest tier.
      * 
@@ -44,19 +44,6 @@ export interface CheckProductListingResponseDataListingQuality {
      */
     remainingRecommendations?: number;
 }
-
-
-/**
- * @export
- */
-export const CheckProductListingResponseDataListingQualityCurrentTierEnum = {
-    Poor: 'POOR',
-    Fair: 'FAIR',
-    Good: 'GOOD',
-    Excellent: 'EXCELLENT'
-} as const;
-export type CheckProductListingResponseDataListingQualityCurrentTierEnum = typeof CheckProductListingResponseDataListingQualityCurrentTierEnum[keyof typeof CheckProductListingResponseDataListingQualityCurrentTierEnum];
-
 
 /**
  * Check if a given object implements the CheckProductListingResponseDataListingQuality interface.

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_videos_performance_details_response_data_video_performance_viewer_profile_type import (
-    GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfileType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -27,14 +24,13 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile:
         age_distribution (list[AgeDistribution] | Unset): Distribution of viewers by age range.
         country_distribution (list[CountryDistribution] | Unset): Distribution of viewers by country or region.
         gender_distribution (list[GenderDistribution] | Unset): Distribution of viewers by gender.
-        type_ (GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfileType | Unset): Viewer profile
-            type. Possible values: NEW_FOLLOWER, VIEWERS.
+        type_ (str | Unset): Viewer profile type. Possible values: NEW_FOLLOWER, VIEWERS.
     """
 
     age_distribution: list[AgeDistribution] | Unset = UNSET
     country_distribution: list[CountryDistribution] | Unset = UNSET
     gender_distribution: list[GenderDistribution] | Unset = UNSET
-    type_: GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfileType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -59,9 +55,7 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile:
                 gender_distribution_item = gender_distribution_item_data.to_dict()
                 gender_distribution.append(gender_distribution_item)
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -111,12 +105,7 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile:
 
                 gender_distribution.append(gender_distribution_item)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfileType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfileType(_type_)
+        type_ = d.pop("type", UNSET)
 
         get_shop_videos_performance_details_response_data_video_performance_viewer_profile = cls(
             age_distribution=age_distribution,

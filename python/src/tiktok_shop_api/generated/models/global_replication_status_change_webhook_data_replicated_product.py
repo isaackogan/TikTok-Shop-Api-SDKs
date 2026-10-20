@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.global_replication_status_change_webhook_data_replicated_product_result import (
-    GlobalReplicationStatusChangeWebhookDataReplicatedProductResult,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,8 +25,7 @@ class GlobalReplicationStatusChangeWebhookDataReplicatedProduct:
              Pass this ID to the [GET Product](https://partner.tiktokshop.com/docv2/page/get-product-202309) endpoint for
             more details about the product.
         region (str | Unset): The market where the product has been replicated.
-        result (GlobalReplicationStatusChangeWebhookDataReplicatedProductResult | Unset): The result of replicating the
-            product.
+        result (str | Unset): The result of replicating the product.
              Possible values:
 
              * SUCCESS: The product was successfully replicated to the local shop, submitted for listing, and is now under
@@ -47,7 +43,7 @@ class GlobalReplicationStatusChangeWebhookDataReplicatedProduct:
 
     product_id: str | Unset = UNSET
     region: str | Unset = UNSET
-    result: GlobalReplicationStatusChangeWebhookDataReplicatedProductResult | Unset = UNSET
+    result: str | Unset = UNSET
     fail_reasons: list[GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -56,9 +52,7 @@ class GlobalReplicationStatusChangeWebhookDataReplicatedProduct:
 
         region = self.region
 
-        result: str | Unset = UNSET
-        if not isinstance(self.result, Unset):
-            result = self.result.value
+        result = self.result
 
         fail_reasons: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.fail_reasons, Unset):
@@ -92,12 +86,7 @@ class GlobalReplicationStatusChangeWebhookDataReplicatedProduct:
 
         region = d.pop("region", UNSET)
 
-        _result = d.pop("result", UNSET)
-        result: GlobalReplicationStatusChangeWebhookDataReplicatedProductResult | Unset
-        if isinstance(_result, Unset):
-            result = UNSET
-        else:
-            result = GlobalReplicationStatusChangeWebhookDataReplicatedProductResult(_result)
+        result = d.pop("result", UNSET)
 
         _fail_reasons = d.pop("fail_reasons", UNSET)
         fail_reasons: list[GlobalReplicationStatusChangeWebhookDataReplicatedProductFailReason] | Unset = UNSET

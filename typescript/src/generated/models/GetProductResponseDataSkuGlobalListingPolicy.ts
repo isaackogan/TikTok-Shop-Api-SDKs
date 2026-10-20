@@ -32,10 +32,10 @@ export interface GetProductResponseDataSkuGlobalListingPolicy {
      * Possible values:
      * - SHARED: Inventory Area Sharing
      * - EXCLUSIVE: Inventory Exclusive
-     * @type {GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuGlobalListingPolicy
      */
-    inventoryType?: GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum;
+    inventoryType?: string;
     /**
      * A flag indicating whether the product price is synchronized.
      * @type {boolean}
@@ -49,17 +49,6 @@ export interface GetProductResponseDataSkuGlobalListingPolicy {
      */
     replicateSource?: GetProductResponseDataSkuGlobalListingPolicyReplicateSource;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum = {
-    Shared: 'SHARED',
-    Exclusive: 'EXCLUSIVE'
-} as const;
-export type GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum = typeof GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum[keyof typeof GetProductResponseDataSkuGlobalListingPolicyInventoryTypeEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuGlobalListingPolicy interface.

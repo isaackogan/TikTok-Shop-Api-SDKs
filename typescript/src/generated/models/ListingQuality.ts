@@ -28,10 +28,10 @@ export interface ListingQuality {
      * - GOOD
      * 
      * **NOTE**: Available only for the US market.
-     * @type {ListingQualityCurrentTierEnum}
+     * @type {string}
      * @memberof ListingQuality
      */
-    currentTier?: ListingQualityCurrentTierEnum;
+    currentTier?: string;
     /**
      * The remaining number of recommendations (see `diagnosis_results`) that must be implemented for the product to advance to the highest tier.
      * 
@@ -43,18 +43,6 @@ export interface ListingQuality {
      */
     remainingRecommendations?: number;
 }
-
-
-/**
- * @export
- */
-export const ListingQualityCurrentTierEnum = {
-    Poor: 'POOR',
-    Fair: 'FAIR',
-    Good: 'GOOD'
-} as const;
-export type ListingQualityCurrentTierEnum = typeof ListingQualityCurrentTierEnum[keyof typeof ListingQualityCurrentTierEnum];
-
 
 /**
  * Check if a given object implements the ListingQuality interface.

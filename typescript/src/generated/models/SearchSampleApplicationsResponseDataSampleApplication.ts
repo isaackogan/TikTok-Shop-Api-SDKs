@@ -64,10 +64,10 @@ export interface SearchSampleApplicationsResponseDataSampleApplication {
      * - OPS_FAILED: The application was marked as failed by operations staff.
      * - OPS_COMPLETED: The application was manually marked as completed by operations staff.
      * - COMPLETED: The application is complete, and the creator has finished creating the content.
-     * @type {SearchSampleApplicationsResponseDataSampleApplicationStatusEnum}
+     * @type {string}
      * @memberof SearchSampleApplicationsResponseDataSampleApplication
      */
-    status?: SearchSampleApplicationsResponseDataSampleApplicationStatusEnum;
+    status?: string;
     /**
      * The sample order is generated after the sample application is approved by seller
      * @type {string}
@@ -108,10 +108,10 @@ export interface SearchSampleApplicationsResponseDataSampleApplication {
      * - SUSPEND: Fulfillment has been suspended.
      * - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
      * - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-     * @type {SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum}
+     * @type {string}
      * @memberof SearchSampleApplicationsResponseDataSampleApplication
      */
-    fulfillmentStatus?: SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum;
+    fulfillmentStatus?: string;
     /**
      * The sample application can be approved or not.
      * @type {boolean}
@@ -143,45 +143,6 @@ export interface SearchSampleApplicationsResponseDataSampleApplication {
      */
     product?: SearchSampleApplicationsResponseDataSampleApplicationProduct;
 }
-
-
-/**
- * @export
- */
-export const SearchSampleApplicationsResponseDataSampleApplicationStatusEnum = {
-    Pending: 'PENDING',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    Shipped: 'SHIPPED',
-    ContentPending: 'CONTENT_PENDING',
-    RejectCancelled: 'REJECT_CANCELLED',
-    OverdueCancelled: 'OVERDUE_CANCELLED',
-    UnfulfillCancelled: 'UNFULFILL_CANCELLED',
-    DelOpenCollab: 'DEL_OPEN_COLLAB',
-    SellerNotShipCancelled: 'SELLER_NOT_SHIP_CANCELLED',
-    WithdrawCancelled: 'WITHDRAW_CANCELLED',
-    UnfulfillableCancelled: 'UNFULFILLABLE_CANCELLED',
-    OpsCancelled: 'OPS_CANCELLED',
-    OpsFailed: 'OPS_FAILED',
-    OpsCompleted: 'OPS_COMPLETED',
-    Completed: 'COMPLETED'
-} as const;
-export type SearchSampleApplicationsResponseDataSampleApplicationStatusEnum = typeof SearchSampleApplicationsResponseDataSampleApplicationStatusEnum[keyof typeof SearchSampleApplicationsResponseDataSampleApplicationStatusEnum];
-
-/**
- * @export
- */
-export const SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum = {
-    Pending: 'PENDING',
-    Ongoing: 'ONGOING',
-    Succeed: 'SUCCEED',
-    Failed: 'FAILED',
-    Overdue: 'OVERDUE',
-    Suspend: 'SUSPEND',
-    Cancelled: 'CANCELLED',
-    Exempted: 'EXEMPTED'
-} as const;
-export type SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum = typeof SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum[keyof typeof SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchSampleApplicationsResponseDataSampleApplication interface.

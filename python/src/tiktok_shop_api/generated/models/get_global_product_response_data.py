@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_product_response_data_source_locale import GetGlobalProductResponseDataSourceLocale
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -63,8 +62,7 @@ class GetGlobalProductResponseData:
         manufacturer_ids (list[str] | Unset): A list of manufacturer IDs. Retrieve the IDs from the [Search
             Manufacturers API](67066a580dcee902fa03ccf9).
             **Note**: Applicable only for the EU market in certain categories.
-        source_locale (GetGlobalProductResponseDataSourceLocale | Unset): The BCP-47 locale codes for displaying
-            category information.
+        source_locale (str | Unset): The BCP-47 locale codes for displaying category information.
             Default: The default locale of your shop.
             Possible values:
             - cs-CZ
@@ -116,7 +114,7 @@ class GetGlobalProductResponseData:
     manufacturer: Manufacturer | Unset = UNSET
     responsible_person_ids: list[str] | Unset = UNSET
     manufacturer_ids: list[str] | Unset = UNSET
-    source_locale: GetGlobalProductResponseDataSourceLocale | Unset = UNSET
+    source_locale: str | Unset = UNSET
     external_global_product_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -204,9 +202,7 @@ class GetGlobalProductResponseData:
         if not isinstance(self.manufacturer_ids, Unset):
             manufacturer_ids = self.manufacturer_ids
 
-        source_locale: str | Unset = UNSET
-        if not isinstance(self.source_locale, Unset):
-            source_locale = self.source_locale.value
+        source_locale = self.source_locale
 
         external_global_product_id = self.external_global_product_id
 
@@ -402,12 +398,7 @@ class GetGlobalProductResponseData:
 
         manufacturer_ids = cast(list[str], d.pop("manufacturer_ids", UNSET))
 
-        _source_locale = d.pop("source_locale", UNSET)
-        source_locale: GetGlobalProductResponseDataSourceLocale | Unset
-        if isinstance(_source_locale, Unset):
-            source_locale = UNSET
-        else:
-            source_locale = GetGlobalProductResponseDataSourceLocale(_source_locale)
+        source_locale = d.pop("source_locale", UNSET)
 
         external_global_product_id = d.pop("external_global_product_id", UNSET)
 

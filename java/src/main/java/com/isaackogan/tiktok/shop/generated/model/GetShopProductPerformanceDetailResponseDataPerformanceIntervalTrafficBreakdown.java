@@ -56,73 +56,10 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraff
   @javax.annotation.Nullable
   private GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic traffic;
 
-  /**
-   * Traffic breakdown content type. Possible values: - VIDEO: Video content. - LIVE: Live stream content. - PRODUCT_CARD: Product card.
-   */
-  @JsonAdapter(ContentTypeEnum.Adapter.class)
-  public enum ContentTypeEnum {
-    /**
-     * Video content.
-     */
-    VIDEO("VIDEO"),
-    
-    /**
-     * Live stream content.
-     */
-    LIVE("LIVE"),
-    
-    /**
-     * Product card.
-     */
-    PRODUCT_CARD("PRODUCT_CARD");
-
-    private String value;
-
-    ContentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ContentTypeEnum fromValue(String value) {
-      for (ContentTypeEnum b : ContentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ContentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ContentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ContentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ContentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ContentTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CONTENT_TYPE = "content_type";
   @SerializedName(SERIALIZED_NAME_CONTENT_TYPE)
   @javax.annotation.Nullable
-  private ContentTypeEnum contentType;
+  private String contentType;
 
   public GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown() {
   }
@@ -146,7 +83,7 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraff
   }
 
 
-  public GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown contentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown contentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
     return this;
   }
@@ -156,11 +93,11 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraff
    * @return contentType
    */
   @javax.annotation.Nullable
-  public ContentTypeEnum getContentType() {
+  public String getContentType() {
     return contentType;
   }
 
-  public void setContentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public void setContentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
   }
 
@@ -279,10 +216,6 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraff
       }
       if ((jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) && !jsonObj.get("content_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_type").toString()));
-      }
-      // validate the optional field `content_type`
-      if (jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) {
-        ContentTypeEnum.validateJsonElement(jsonObj.get("content_type"));
       }
   }
 

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_inbound_method_detail_response_data_placement_task_status import (
-    GetInboundMethodDetailResponseDataPlacementTaskStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,7 +25,7 @@ class GetInboundMethodDetailResponseData:
             `info` and pass its `placement_option_id` to the Confirm Inbound Method API. Do not confirm an option when the
             status is `Failed`. After `expiration_timestamp`, call this API again with the same selection inputs to obtain a
             new placement option or task.
-        placement_task_status (GetInboundMethodDetailResponseDataPlacementTaskStatus | Unset): **Possible values:**
+        placement_task_status (str | Unset): **Possible values:**
             * `Executing`
             * `Succeed`
             * `Failed`
@@ -38,7 +35,7 @@ class GetInboundMethodDetailResponseData:
     """
 
     info: list[GetInboundMethodDetailResponseDataInfo] | Unset = UNSET
-    placement_task_status: GetInboundMethodDetailResponseDataPlacementTaskStatus | Unset = UNSET
+    placement_task_status: str | Unset = UNSET
     expiration_timestamp: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -50,9 +47,7 @@ class GetInboundMethodDetailResponseData:
                 info_item = info_item_data.to_dict()
                 info.append(info_item)
 
-        placement_task_status: str | Unset = UNSET
-        if not isinstance(self.placement_task_status, Unset):
-            placement_task_status = self.placement_task_status.value
+        placement_task_status = self.placement_task_status
 
         expiration_timestamp = self.expiration_timestamp
 
@@ -84,12 +79,7 @@ class GetInboundMethodDetailResponseData:
 
                 info.append(info_item)
 
-        _placement_task_status = d.pop("placement_task_status", UNSET)
-        placement_task_status: GetInboundMethodDetailResponseDataPlacementTaskStatus | Unset
-        if isinstance(_placement_task_status, Unset):
-            placement_task_status = UNSET
-        else:
-            placement_task_status = GetInboundMethodDetailResponseDataPlacementTaskStatus(_placement_task_status)
+        placement_task_status = d.pop("placement_task_status", UNSET)
 
         expiration_timestamp = d.pop("expiration_timestamp", UNSET)
 

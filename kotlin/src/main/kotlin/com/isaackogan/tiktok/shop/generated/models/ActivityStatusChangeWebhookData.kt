@@ -49,50 +49,18 @@ data class ActivityStatusChangeWebhookData (
 
     /* The type of the promotion activity. Possible values are:      * `FIXED_PRICE`   * `DIRECT_DISCOUNT`   * `SHIPPING_DISCOUNT`   * `BUY_MORE_SAVE_MORE`   * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN) */
     @SerializedName("activity_type")
-    val activityType: ActivityStatusChangeWebhookData.ActivityType? = null,
+    val activityType: kotlin.String? = null,
 
     /* Activity product dimension, values are:      * `PRODUCT`   * `VARIATION`   * `SHOP` */
     @SerializedName("product_level")
-    val productLevel: ActivityStatusChangeWebhookData.ProductLevel? = null,
+    val productLevel: kotlin.String? = null,
 
     /* The current status of the promotion activity. Possible values are:      * `ONGOING`   * `EXPIRED`   * `DEACTIVATED` */
     @SerializedName("status")
-    val status: ActivityStatusChangeWebhookData.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The type of the promotion activity. Possible values are:      * `FIXED_PRICE`   * `DIRECT_DISCOUNT`   * `SHIPPING_DISCOUNT`   * `BUY_MORE_SAVE_MORE`   * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
-     *
-     * Values: FIXED_PRICE,DIRECT_DISCOUNT,SHIPPING_DISCOUNT,BUY_MORE_SAVE_MORE,FLASHSALE
-     */
-    enum class ActivityType(val value: kotlin.String) {
-        @SerializedName(value = "FIXED_PRICE") FIXED_PRICE("FIXED_PRICE"),
-        @SerializedName(value = "DIRECT_DISCOUNT") DIRECT_DISCOUNT("DIRECT_DISCOUNT"),
-        @SerializedName(value = "SHIPPING_DISCOUNT") SHIPPING_DISCOUNT("SHIPPING_DISCOUNT"),
-        @SerializedName(value = "BUY_MORE_SAVE_MORE") BUY_MORE_SAVE_MORE("BUY_MORE_SAVE_MORE"),
-        @SerializedName(value = "FLASHSALE") FLASHSALE("FLASHSALE");
-    }
-    /**
-     * Activity product dimension, values are:      * `PRODUCT`   * `VARIATION`   * `SHOP`
-     *
-     * Values: PRODUCT,VARIATION,SHOP
-     */
-    enum class ProductLevel(val value: kotlin.String) {
-        @SerializedName(value = "PRODUCT") PRODUCT("PRODUCT"),
-        @SerializedName(value = "VARIATION") VARIATION("VARIATION"),
-        @SerializedName(value = "SHOP") SHOP("SHOP");
-    }
-    /**
-     * The current status of the promotion activity. Possible values are:      * `ONGOING`   * `EXPIRED`   * `DEACTIVATED`
-     *
-     * Values: ONGOING,EXPIRED,DEACTIVATED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "ONGOING") ONGOING("ONGOING"),
-        @SerializedName(value = "EXPIRED") EXPIRED("EXPIRED"),
-        @SerializedName(value = "DEACTIVATED") DEACTIVATED("DEACTIVATED");
-    }
 
 }
 

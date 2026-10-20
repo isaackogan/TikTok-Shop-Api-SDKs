@@ -53,7 +53,7 @@ data class GetWarehouseDeliveryOptionsResponseDataDeliveryOption (
 
     /* Delivery option type. Possible values: - STANDARD - EXPRESS - ECONOMY - SEND_BY_SELLER - INSTANT - SAMEDAY - NEXTDAY - CARGO */
     @SerializedName("type")
-    val type: GetWarehouseDeliveryOptionsResponseDataDeliveryOption.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Delivery option description. */
     @SerializedName("description")
@@ -69,34 +69,10 @@ data class GetWarehouseDeliveryOptionsResponseDataDeliveryOption (
 
     /* The platform on which the delivery option is available Possible values: - TIKTOK_SHOP - TOKOPEDIA */
     @SerializedName("platform")
-    val platform: kotlin.collections.List<GetWarehouseDeliveryOptionsResponseDataDeliveryOption.Platform>? = null
+    val platform: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * Delivery option type. Possible values: - STANDARD - EXPRESS - ECONOMY - SEND_BY_SELLER - INSTANT - SAMEDAY - NEXTDAY - CARGO
-     *
-     * Values: STANDARD,EXPRESS,ECONOMY,SEND_BY_SELLER,INSTANT,SAMEDAY,NEXTDAY,CARGO
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "STANDARD") STANDARD("STANDARD"),
-        @SerializedName(value = "EXPRESS") EXPRESS("EXPRESS"),
-        @SerializedName(value = "ECONOMY") ECONOMY("ECONOMY"),
-        @SerializedName(value = "SEND_BY_SELLER") SEND_BY_SELLER("SEND_BY_SELLER"),
-        @SerializedName(value = "INSTANT") INSTANT("INSTANT"),
-        @SerializedName(value = "SAMEDAY") SAMEDAY("SAMEDAY"),
-        @SerializedName(value = "NEXTDAY") NEXTDAY("NEXTDAY"),
-        @SerializedName(value = "CARGO") CARGO("CARGO");
-    }
-    /**
-     * The platform on which the delivery option is available Possible values: - TIKTOK_SHOP - TOKOPEDIA
-     *
-     * Values: TIKTOK_SHOP,TOKOPEDIA
-     */
-    enum class Platform(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK_SHOP") TIKTOK_SHOP("TIKTOK_SHOP"),
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
 
 }
 

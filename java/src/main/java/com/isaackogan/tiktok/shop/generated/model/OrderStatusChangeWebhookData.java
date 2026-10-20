@@ -55,74 +55,10 @@ public class OrderStatusChangeWebhookData {
   @javax.annotation.Nullable
   private String orderId;
 
-  /**
-   * The most recent order status, with possible values:      * &#x60;UNPAID&#x60;   * &#x60;ON_HOLD&#x60;   * &#x60;AWAITING_SHIPMENT&#x60;   * &#x60;AWAITING_COLLECTION&#x60;   * &#x60;CANCEL&#x60;   * &#x60;IN_TRANSIT&#x60;   * &#x60;DELIVERED&#x60;   * &#x60;COMPLETED&#x60;
-   */
-  @JsonAdapter(OrderStatusEnum.Adapter.class)
-  public enum OrderStatusEnum {
-    UNPAID("UNPAID"),
-    
-    ON_HOLD("ON_HOLD"),
-    
-    AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-    
-    AWAITING_COLLECTION("AWAITING_COLLECTION"),
-    
-    CANCEL("CANCEL"),
-    
-    IN_TRANSIT("IN_TRANSIT"),
-    
-    DELIVERED("DELIVERED"),
-    
-    COMPLETED("COMPLETED");
-
-    private String value;
-
-    OrderStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OrderStatusEnum fromValue(String value) {
-      for (OrderStatusEnum b : OrderStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OrderStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OrderStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OrderStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OrderStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ORDER_STATUS = "order_status";
   @SerializedName(SERIALIZED_NAME_ORDER_STATUS)
   @javax.annotation.Nullable
-  private OrderStatusEnum orderStatus;
+  private String orderStatus;
 
   public static final String SERIALIZED_NAME_IS_ON_HOLD_ORDER = "is_on_hold_order";
   @SerializedName(SERIALIZED_NAME_IS_ON_HOLD_ORDER)
@@ -156,7 +92,7 @@ public class OrderStatusChangeWebhookData {
   }
 
 
-  public OrderStatusChangeWebhookData orderStatus(@javax.annotation.Nullable OrderStatusEnum orderStatus) {
+  public OrderStatusChangeWebhookData orderStatus(@javax.annotation.Nullable String orderStatus) {
     this.orderStatus = orderStatus;
     return this;
   }
@@ -166,11 +102,11 @@ public class OrderStatusChangeWebhookData {
    * @return orderStatus
    */
   @javax.annotation.Nullable
-  public OrderStatusEnum getOrderStatus() {
+  public String getOrderStatus() {
     return orderStatus;
   }
 
-  public void setOrderStatus(@javax.annotation.Nullable OrderStatusEnum orderStatus) {
+  public void setOrderStatus(@javax.annotation.Nullable String orderStatus) {
     this.orderStatus = orderStatus;
   }
 
@@ -330,10 +266,6 @@ public class OrderStatusChangeWebhookData {
       }
       if ((jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) && !jsonObj.get("order_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_status").toString()));
-      }
-      // validate the optional field `order_status`
-      if (jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) {
-        OrderStatusEnum.validateJsonElement(jsonObj.get("order_status"));
       }
   }
 

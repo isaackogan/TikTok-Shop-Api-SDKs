@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_size_charts_response_data_size_chart_size_chart_mode import (
-    SearchSizeChartsResponseDataSizeChartSizeChartMode,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -31,10 +28,9 @@ class SearchSizeChartsResponseDataSizeChart:
         related_category_ids (list[str] | Unset): Leaf category IDs applicable to this size chart.
         size_chart_datas (list[SearchSizeChartsResponseDataSizeChartSizeChartData] | Unset): Localized structured size
             chart data. Each item contains a locale and the structured data for that locale.
-        size_chart_mode (SearchSizeChartsResponseDataSizeChartSizeChartMode | Unset): Filter size charts by usage mode.
-            Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products.
-            PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior
-            is preserved.
+        size_chart_mode (str | Unset): Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size
+            chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by
+            a single product. If omitted, the existing search behavior is preserved.
     """
 
     template_id: str | Unset = UNSET
@@ -42,7 +38,7 @@ class SearchSizeChartsResponseDataSizeChart:
     images: list[SearchSizeChartsResponseDataSizeChartImage] | Unset = UNSET
     related_category_ids: list[str] | Unset = UNSET
     size_chart_datas: list[SearchSizeChartsResponseDataSizeChartSizeChartData] | Unset = UNSET
-    size_chart_mode: SearchSizeChartsResponseDataSizeChartSizeChartMode | Unset = UNSET
+    size_chart_mode: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -68,9 +64,7 @@ class SearchSizeChartsResponseDataSizeChart:
                 size_chart_datas_item = size_chart_datas_item_data.to_dict()
                 size_chart_datas.append(size_chart_datas_item)
 
-        size_chart_mode: str | Unset = UNSET
-        if not isinstance(self.size_chart_mode, Unset):
-            size_chart_mode = self.size_chart_mode.value
+        size_chart_mode = self.size_chart_mode
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -126,12 +120,7 @@ class SearchSizeChartsResponseDataSizeChart:
 
                 size_chart_datas.append(size_chart_datas_item)
 
-        _size_chart_mode = d.pop("size_chart_mode", UNSET)
-        size_chart_mode: SearchSizeChartsResponseDataSizeChartSizeChartMode | Unset
-        if isinstance(_size_chart_mode, Unset):
-            size_chart_mode = UNSET
-        else:
-            size_chart_mode = SearchSizeChartsResponseDataSizeChartSizeChartMode(_size_chart_mode)
+        size_chart_mode = d.pop("size_chart_mode", UNSET)
 
         search_size_charts_response_data_size_chart = cls(
             template_id=template_id,

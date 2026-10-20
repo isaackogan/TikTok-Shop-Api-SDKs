@@ -85,78 +85,10 @@ public class GetStatementsResponseDataStatement {
   @javax.annotation.Nullable
   private String adjustmentAmount;
 
-  /**
-   * The payment status, indicating whether payment has been transferred to the seller&#39;s bank account or settled to the seller&#39;s account. Possible values: - PAID: Payment has been transferred to the seller. - FAILED: Payment transfer failed. - PROCESSING: Payment is currently being processed. - SETTLED: Funds have been settled to the seller&#39;s account.
-   */
-  @JsonAdapter(PaymentStatusEnum.Adapter.class)
-  public enum PaymentStatusEnum {
-    /**
-     * Payment has been transferred to the seller.
-     */
-    PAID("PAID"),
-    
-    /**
-     * Payment transfer failed.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * Payment is currently being processed.
-     */
-    PROCESSING("PROCESSING"),
-    
-    /**
-     * Funds have been settled to the seller&#39;s account.
-     */
-    SETTLED("SETTLED");
-
-    private String value;
-
-    PaymentStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PaymentStatusEnum fromValue(String value) {
-      for (PaymentStatusEnum b : PaymentStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PaymentStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PaymentStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PaymentStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PaymentStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PaymentStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PAYMENT_STATUS = "payment_status";
   @SerializedName(SERIALIZED_NAME_PAYMENT_STATUS)
   @javax.annotation.Nullable
-  private PaymentStatusEnum paymentStatus;
+  private String paymentStatus;
 
   public static final String SERIALIZED_NAME_PAYMENT_ID = "payment_id";
   @SerializedName(SERIALIZED_NAME_PAYMENT_ID)
@@ -314,7 +246,7 @@ public class GetStatementsResponseDataStatement {
   }
 
 
-  public GetStatementsResponseDataStatement paymentStatus(@javax.annotation.Nullable PaymentStatusEnum paymentStatus) {
+  public GetStatementsResponseDataStatement paymentStatus(@javax.annotation.Nullable String paymentStatus) {
     this.paymentStatus = paymentStatus;
     return this;
   }
@@ -324,11 +256,11 @@ public class GetStatementsResponseDataStatement {
    * @return paymentStatus
    */
   @javax.annotation.Nullable
-  public PaymentStatusEnum getPaymentStatus() {
+  public String getPaymentStatus() {
     return paymentStatus;
   }
 
-  public void setPaymentStatus(@javax.annotation.Nullable PaymentStatusEnum paymentStatus) {
+  public void setPaymentStatus(@javax.annotation.Nullable String paymentStatus) {
     this.paymentStatus = paymentStatus;
   }
 
@@ -557,10 +489,6 @@ public class GetStatementsResponseDataStatement {
       }
       if ((jsonObj.get("payment_status") != null && !jsonObj.get("payment_status").isJsonNull()) && !jsonObj.get("payment_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `payment_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_status").toString()));
-      }
-      // validate the optional field `payment_status`
-      if (jsonObj.get("payment_status") != null && !jsonObj.get("payment_status").isJsonNull()) {
-        PaymentStatusEnum.validateJsonElement(jsonObj.get("payment_status"));
       }
       if ((jsonObj.get("payment_id") != null && !jsonObj.get("payment_id").isJsonNull()) && !jsonObj.get("payment_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `payment_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("payment_id").toString()));

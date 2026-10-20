@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.edit_product_response_data_audit_status import EditProductResponseDataAuditStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="EditProductResponseDataAudit")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="EditProductResponseDataAudit")
 class EditProductResponseDataAudit:
     """
     Attributes:
-        status (EditProductResponseDataAuditStatus | Unset): The product audit status.
+        status (str | Unset): The product audit status.
             Possible values:
             - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform,
             or it is in a draft, frozen, or deactivated state.
@@ -25,13 +24,11 @@ class EditProductResponseDataAudit:
             approved and the new information is immediately published on the platform.
     """
 
-    status: EditProductResponseDataAuditStatus | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -44,12 +41,7 @@ class EditProductResponseDataAudit:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _status = d.pop("status", UNSET)
-        status: EditProductResponseDataAuditStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = EditProductResponseDataAuditStatus(_status)
+        status = d.pop("status", UNSET)
 
         edit_product_response_data_audit = cls(
             status=status,

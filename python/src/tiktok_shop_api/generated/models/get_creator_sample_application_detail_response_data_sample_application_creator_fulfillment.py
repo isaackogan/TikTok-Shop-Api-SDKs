@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_creator_sample_application_detail_response_data_sample_application_creator_fulfillment_status import (
-    GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment")
@@ -21,8 +18,8 @@ class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfi
         id (str | Unset): Fulfillment identifier.
         expiration_time (int | Unset): Fulfillment deadline timestamp, in seconds.
         total_suspend_duration (int | Unset): Total suspension duration for fulfillment, in seconds.
-        status (GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatus | Unset):
-            Fulfillment status, It indicates the current status of the fulfillment process. The possible values are:
+        status (str | Unset): Fulfillment status, It indicates the current status of the fulfillment process. The
+            possible values are:
             - PENDING: The creator is yet to fulfill the content creation obligation.
             - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
             - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
@@ -38,7 +35,7 @@ class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfi
     id: str | Unset = UNSET
     expiration_time: int | Unset = UNSET
     total_suspend_duration: int | Unset = UNSET
-    status: GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatus | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -48,9 +45,7 @@ class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfi
 
         total_suspend_duration = self.total_suspend_duration
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -75,12 +70,7 @@ class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfi
 
         total_suspend_duration = d.pop("total_suspend_duration", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatus(_status)
+        status = d.pop("status", UNSET)
 
         get_creator_sample_application_detail_response_data_sample_application_creator_fulfillment = cls(
             id=id,

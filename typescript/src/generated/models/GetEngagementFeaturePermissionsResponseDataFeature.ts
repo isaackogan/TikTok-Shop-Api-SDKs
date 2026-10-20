@@ -24,10 +24,10 @@ export interface GetEngagementFeaturePermissionsResponseDataFeature {
      * Possible values:
      * - `FUNDAMENTAL`: The ability to use any customer engagement APIs or features. This is the prerequisite for all other customer engagement features.
      * - `CUSTOM_MSG`: The ability to define and send custom messages.
-     * @type {GetEngagementFeaturePermissionsResponseDataFeatureNameEnum}
+     * @type {string}
      * @memberof GetEngagementFeaturePermissionsResponseDataFeature
      */
-    name?: GetEngagementFeaturePermissionsResponseDataFeatureNameEnum;
+    name?: string;
     /**
      * A flag to indicate whether the shop has permission to use this feature.
      * Possible values:
@@ -38,17 +38,6 @@ export interface GetEngagementFeaturePermissionsResponseDataFeature {
      */
     isAuthorized?: boolean;
 }
-
-
-/**
- * @export
- */
-export const GetEngagementFeaturePermissionsResponseDataFeatureNameEnum = {
-    Fundamental: 'FUNDAMENTAL',
-    CustomMsg: 'CUSTOM_MSG'
-} as const;
-export type GetEngagementFeaturePermissionsResponseDataFeatureNameEnum = typeof GetEngagementFeaturePermissionsResponseDataFeatureNameEnum[keyof typeof GetEngagementFeaturePermissionsResponseDataFeatureNameEnum];
-
 
 /**
  * Check if a given object implements the GetEngagementFeaturePermissionsResponseDataFeature interface.

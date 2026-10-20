@@ -43,7 +43,7 @@ data class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile 
 
     /* The BCP-47 locale code representing the language used for specifying the responsible person information. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT */
     @SerializedName("locale")
-    val locale: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile.Locale? = null,
+    val locale: kotlin.String? = null,
 
     /* The responsible person name. Max length: 200 characters */
     @SerializedName("name")
@@ -63,18 +63,6 @@ data class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile 
 
 ) {
 
-    /**
-     * The BCP-47 locale code representing the language used for specifying the responsible person information. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT
-     *
-     * Values: deMinusDE,enMinusIE,esMinusES,frMinusFR,itMinusIT
-     */
-    enum class Locale(val value: kotlin.String) {
-        @SerializedName(value = "de-DE") deMinusDE("de-DE"),
-        @SerializedName(value = "en-IE") enMinusIE("en-IE"),
-        @SerializedName(value = "es-ES") esMinusES("es-ES"),
-        @SerializedName(value = "fr-FR") frMinusFR("fr-FR"),
-        @SerializedName(value = "it-IT") itMinusIT("it-IT");
-    }
 
 }
 

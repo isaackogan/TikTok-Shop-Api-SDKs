@@ -47,10 +47,10 @@ export interface SearchCreatorSampleApplicationsResponseDataSampleApplicationCre
      * - SUSPEND: Fulfillment has been suspended.
      * - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
      * - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-     * @type {SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum}
+     * @type {string}
      * @memberof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment
      */
-    status?: SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum;
+    status?: string;
     /**
      * Represents the marketing status of a product associated with a fulfillment order. It indicates whether the product is available for marketing and fulfillment. The possible values are:
      * - UNKNOWN: The marketing status of the product is unknown.
@@ -61,42 +61,11 @@ export interface SearchCreatorSampleApplicationsResponseDataSampleApplicationCre
      * - NO_PLAN: There is no valid plan available for the creator to market the product.
      * - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
      * This field helps sellers and creators understand the current status of products associated with fulfillment orders, ensuring that all parties are aware of the availability and marketing status of the products involved in sample applications and collaborations.
-     * @type {SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum}
+     * @type {string}
      * @memberof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment
      */
-    boundProductStatus?: SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum;
+    boundProductStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum = {
-    Pending: 'PENDING',
-    Ongoing: 'ONGOING',
-    Succeed: 'SUCCEED',
-    Failed: 'FAILED',
-    Overdue: 'OVERDUE',
-    Suspend: 'SUSPEND',
-    Cancelled: 'CANCELLED',
-    Exempted: 'EXEMPTED'
-} as const;
-export type SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum = typeof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum[keyof typeof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentStatusEnum];
-
-/**
- * @export
- */
-export const SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Live: 'LIVE',
-    OutOfStock: 'OUT_OF_STOCK',
-    SellerDeactivate: 'SELLER_DEACTIVATE',
-    PlatformDeactivate: 'PLATFORM_DEACTIVATE',
-    NoPlan: 'NO_PLAN',
-    PermanentDeleted: 'PERMANENT_DELETED'
-} as const;
-export type SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum = typeof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum[keyof typeof SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillmentBoundProductStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment interface.

@@ -57,7 +57,7 @@ data class GetFBTWarehouseListResponseDataWarehouse (
 
     /* The Fulfilled by TikTok warehouse type. Possible values: - `PLATFORM_WAREHOUSE`: A warehouse operated by TikTok. - `OTHER_WAREHOUSE`: A warehouse that is not classified as a platform warehouse. */
     @SerializedName("type")
-    val type: GetFBTWarehouseListResponseDataWarehouse.Type? = null,
+    val type: kotlin.String? = null,
 
     /* A flag indicating whether the warehouse is subscribed. True: Subscribed. False: Not subscribed. */
     @SerializedName("subscribed")
@@ -73,15 +73,6 @@ data class GetFBTWarehouseListResponseDataWarehouse (
 
 ) {
 
-    /**
-     * The Fulfilled by TikTok warehouse type. Possible values: - `PLATFORM_WAREHOUSE`: A warehouse operated by TikTok. - `OTHER_WAREHOUSE`: A warehouse that is not classified as a platform warehouse.
-     *
-     * Values: PLATFORM_WAREHOUSE,OTHER_WAREHOUSE
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PLATFORM_WAREHOUSE") PLATFORM_WAREHOUSE("PLATFORM_WAREHOUSE"),
-        @SerializedName(value = "OTHER_WAREHOUSE") OTHER_WAREHOUSE("OTHER_WAREHOUSE");
-    }
 
 }
 

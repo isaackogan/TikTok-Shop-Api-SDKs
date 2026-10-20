@@ -39,7 +39,7 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList (
 
     /* Name of the logistics service provider  Possible values: * `FEDEX` (Federal Express) * `UPS` (United Parcel Service) * `DHL` (DHL Express) * `USPS` (United States Postal Service) * `OTHER` (All other logistics providers) */
     @SerializedName("provider_name")
-    val providerName: GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList.ProviderName? = null,
+    val providerName: kotlin.String? = null,
 
     /* The tracking number for the current inbound shipment with the carrier. */
     @SerializedName("waybill_number")
@@ -51,18 +51,6 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList (
 
 ) {
 
-    /**
-     * Name of the logistics service provider  Possible values: * `FEDEX` (Federal Express) * `UPS` (United Parcel Service) * `DHL` (DHL Express) * `USPS` (United States Postal Service) * `OTHER` (All other logistics providers)
-     *
-     * Values: FEDEX,UPS,DHL,USPS,OTHER
-     */
-    enum class ProviderName(val value: kotlin.String) {
-        @SerializedName(value = "FEDEX") FEDEX("FEDEX"),
-        @SerializedName(value = "UPS") UPS("UPS"),
-        @SerializedName(value = "DHL") DHL("DHL"),
-        @SerializedName(value = "USPS") USPS("USPS"),
-        @SerializedName(value = "OTHER") OTHER("OTHER");
-    }
 
 }
 

@@ -53,62 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion {
-  /**
-   * The applicable product field. Possible values: - TITLE - DESCRIPTION
-   */
-  @JsonAdapter(FieldEnum.Adapter.class)
-  public enum FieldEnum {
-    TITLE("TITLE"),
-    
-    DESCRIPTION("DESCRIPTION");
-
-    private String value;
-
-    FieldEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FieldEnum fromValue(String value) {
-      for (FieldEnum b : FieldEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FieldEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FieldEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FieldEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FieldEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FieldEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FIELD = "field";
   @SerializedName(SERIALIZED_NAME_FIELD)
   @javax.annotation.Nullable
-  private FieldEnum field;
+  private String field;
 
   public static final String SERIALIZED_NAME_ITEMS = "items";
   @SerializedName(SERIALIZED_NAME_ITEMS)
@@ -118,7 +66,7 @@ public class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggesti
   public GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion() {
   }
 
-  public GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion field(@javax.annotation.Nullable FieldEnum field) {
+  public GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion field(@javax.annotation.Nullable String field) {
     this.field = field;
     return this;
   }
@@ -128,11 +76,11 @@ public class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggesti
    * @return field
    */
   @javax.annotation.Nullable
-  public FieldEnum getField() {
+  public String getField() {
     return field;
   }
 
-  public void setField(@javax.annotation.Nullable FieldEnum field) {
+  public void setField(@javax.annotation.Nullable String field) {
     this.field = field;
   }
 
@@ -274,10 +222,6 @@ public class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggesti
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("field") != null && !jsonObj.get("field").isJsonNull()) && !jsonObj.get("field").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `field` to be a primitive type in the JSON string but got `%s`", jsonObj.get("field").toString()));
-      }
-      // validate the optional field `field`
-      if (jsonObj.get("field") != null && !jsonObj.get("field").isJsonNull()) {
-        FieldEnum.validateJsonElement(jsonObj.get("field"));
       }
       if (jsonObj.get("items") != null && !jsonObj.get("items").isJsonNull()) {
         JsonArray jsonArrayitems = jsonObj.getAsJsonArray("items");

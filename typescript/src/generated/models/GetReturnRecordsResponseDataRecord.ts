@@ -46,10 +46,10 @@ export interface GetReturnRecordsResponseDataRecord {
      * - `SELLER`
      * - `OPERATOR`: The action was triggered manually by a customer service agent.
      * - `SYSTEM`: The action was triggered automatically due to a policy reason.
-     * @type {GetReturnRecordsResponseDataRecordRoleEnum}
+     * @type {string}
      * @memberof GetReturnRecordsResponseDataRecord
      */
-    role?: GetReturnRecordsResponseDataRecordRoleEnum;
+    role?: string;
     /**
      * A human-readable description of this lifecycle event.
      * @type {string}
@@ -87,19 +87,6 @@ export interface GetReturnRecordsResponseDataRecord {
      */
     createTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetReturnRecordsResponseDataRecordRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type GetReturnRecordsResponseDataRecordRoleEnum = typeof GetReturnRecordsResponseDataRecordRoleEnum[keyof typeof GetReturnRecordsResponseDataRecordRoleEnum];
-
 
 /**
  * Check if a given object implements the GetReturnRecordsResponseDataRecord interface.

@@ -62,7 +62,7 @@ data class SearchPackageResponseDataPackage (
 
     /* Possible values: - `TO_FULFILL` - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel. - `FULFILLING`: Package has been collected by carrier and in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged. */
     @SerializedName("status")
-    val status: SearchPackageResponseDataPackage.Status? = null,
+    val status: kotlin.String? = null,
 
     /* Package tracking number. */
     @SerializedName("tracking_number")
@@ -82,18 +82,6 @@ data class SearchPackageResponseDataPackage (
 
 ) {
 
-    /**
-     * Possible values: - `TO_FULFILL` - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel. - `FULFILLING`: Package has been collected by carrier and in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     *
-     * Values: TO_FULFILL,PROCESSING,FULFILLING,COMPLETED,CANCELLED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "TO_FULFILL") TO_FULFILL("TO_FULFILL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "FULFILLING") FULFILLING("FULFILLING"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
 
 }
 

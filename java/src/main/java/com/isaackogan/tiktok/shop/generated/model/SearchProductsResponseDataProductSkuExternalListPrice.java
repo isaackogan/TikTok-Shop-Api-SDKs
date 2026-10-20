@@ -55,118 +55,15 @@ public class SearchProductsResponseDataProductSkuExternalListPrice {
   @javax.annotation.Nullable
   private String amount;
 
-  /**
-   * The currency. Possible values: USD
-   */
-  @JsonAdapter(CurrencyEnum.Adapter.class)
-  public enum CurrencyEnum {
-    USD("USD");
-
-    private String value;
-
-    CurrencyEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CurrencyEnum fromValue(String value) {
-      for (CurrencyEnum b : CurrencyEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CurrencyEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CurrencyEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CurrencyEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CurrencyEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CurrencyEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
   @javax.annotation.Nullable
-  private CurrencyEnum currency;
-
-  /**
-   * The external ecommerce platform from which the price is sourced. Possible values: - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-   */
-  @JsonAdapter(SourceEnum.Adapter.class)
-  public enum SourceEnum {
-    /**
-     * The compare_at_price in Shopify.
-     */
-    SHOPIFY_COMPARE_AT_PRICE("SHOPIFY_COMPARE_AT_PRICE");
-
-    private String value;
-
-    SourceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SourceEnum fromValue(String value) {
-      for (SourceEnum b : SourceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SourceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SourceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SourceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SourceEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SourceEnum.fromValue(value);
-    }
-  }
+  private String currency;
 
   public static final String SERIALIZED_NAME_SOURCE = "source";
   @SerializedName(SERIALIZED_NAME_SOURCE)
   @javax.annotation.Nullable
-  private SourceEnum source;
+  private String source;
 
   public SearchProductsResponseDataProductSkuExternalListPrice() {
   }
@@ -190,7 +87,7 @@ public class SearchProductsResponseDataProductSkuExternalListPrice {
   }
 
 
-  public SearchProductsResponseDataProductSkuExternalListPrice currency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public SearchProductsResponseDataProductSkuExternalListPrice currency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
     return this;
   }
@@ -200,16 +97,16 @@ public class SearchProductsResponseDataProductSkuExternalListPrice {
    * @return currency
    */
   @javax.annotation.Nullable
-  public CurrencyEnum getCurrency() {
+  public String getCurrency() {
     return currency;
   }
 
-  public void setCurrency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public void setCurrency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
   }
 
 
-  public SearchProductsResponseDataProductSkuExternalListPrice source(@javax.annotation.Nullable SourceEnum source) {
+  public SearchProductsResponseDataProductSkuExternalListPrice source(@javax.annotation.Nullable String source) {
     this.source = source;
     return this;
   }
@@ -219,11 +116,11 @@ public class SearchProductsResponseDataProductSkuExternalListPrice {
    * @return source
    */
   @javax.annotation.Nullable
-  public SourceEnum getSource() {
+  public String getSource() {
     return source;
   }
 
-  public void setSource(@javax.annotation.Nullable SourceEnum source) {
+  public void setSource(@javax.annotation.Nullable String source) {
     this.source = source;
   }
 
@@ -344,16 +241,8 @@ public class SearchProductsResponseDataProductSkuExternalListPrice {
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));
       }
-      // validate the optional field `currency`
-      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        CurrencyEnum.validateJsonElement(jsonObj.get("currency"));
-      }
       if ((jsonObj.get("source") != null && !jsonObj.get("source").isJsonNull()) && !jsonObj.get("source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source").toString()));
-      }
-      // validate the optional field `source`
-      if (jsonObj.get("source") != null && !jsonObj.get("source").isJsonNull()) {
-        SourceEnum.validateJsonElement(jsonObj.get("source"));
       }
   }
 

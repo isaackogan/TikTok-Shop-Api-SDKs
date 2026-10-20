@@ -52,19 +52,10 @@ data class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit (
 
     /* The unit of measurement for the dimensions, with possible values: - CM - INCH */
     @SerializedName("unit")
-    val unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * The unit of measurement for the dimensions, with possible values: - CM - INCH
-     *
-     * Values: CM,INCH
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "CM") CM("CM"),
-        @SerializedName(value = "INCH") INCH("INCH");
-    }
 
 }
 

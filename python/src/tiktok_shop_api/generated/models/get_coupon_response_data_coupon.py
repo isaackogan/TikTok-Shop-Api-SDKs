@@ -6,8 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_coupon_response_data_coupon_product_scope import GetCouponResponseDataCouponProductScope
-from ..models.get_coupon_response_data_coupon_target_buyer_segment import GetCouponResponseDataCouponTargetBuyerSegment
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -63,8 +61,7 @@ class GetCouponResponseDataCoupon:
             - `SHOWCASE`: Only in showcases.
         promo_code (str | Unset): Promotion code. Returned only when `display_type == 'PROMO_CODE'`. The string contains
             only Unicode letters or digits. The length of the string is in the range of `[6, 12]`.
-        target_buyer_segment (GetCouponResponseDataCouponTargetBuyerSegment | Unset): The target buyer segment of the
-            coupon. Possible enumerations are:
+        target_buyer_segment (str | Unset): The target buyer segment of the coupon. Possible enumerations are:
             - `ALL`: May be discovered and claimed by all TTS buyers.
             - `NEW`:Customers who have never purchased from your shop.
             - `REPEAT_CUSTOMERS`: People who have previously placed orders in your shop and made another purchase within
@@ -81,8 +78,8 @@ class GetCouponResponseDataCoupon:
         usage_stats (GetCouponResponseDataCouponUsageStat | Unset):
         discount (GetCouponResponseDataCouponDiscount | Unset):
         threshold (GetCouponResponseDataCouponThreshold | Unset):
-        product_scope (GetCouponResponseDataCouponProductScope | Unset): The range of the products which the coupon
-            applies to. The possible enumerations are:
+        product_scope (str | Unset): The range of the products which the coupon applies to. The possible enumerations
+            are:
             - `FULL_SHOP`: All products sold in the shop are eligible for the coupon.
             - `SPECIFIC_PRODUCTS`: Only specified products are eligible for the coupon. The list of specified products are
             returned in the response of the `get_coupon` API.
@@ -107,12 +104,12 @@ class GetCouponResponseDataCoupon:
     redemption_duration: RedemptionDuration | Unset = UNSET
     display_channels: list[str] | Unset = UNSET
     promo_code: str | Unset = UNSET
-    target_buyer_segment: GetCouponResponseDataCouponTargetBuyerSegment | Unset = UNSET
+    target_buyer_segment: str | Unset = UNSET
     usage_limits: UsageLimit | Unset = UNSET
     usage_stats: GetCouponResponseDataCouponUsageStat | Unset = UNSET
     discount: GetCouponResponseDataCouponDiscount | Unset = UNSET
     threshold: GetCouponResponseDataCouponThreshold | Unset = UNSET
-    product_scope: GetCouponResponseDataCouponProductScope | Unset = UNSET
+    product_scope: str | Unset = UNSET
     product_ids: list[str] | Unset = UNSET
     seller_tnc: str | Unset = UNSET
     creation_source: str | Unset = UNSET
@@ -146,9 +143,7 @@ class GetCouponResponseDataCoupon:
 
         promo_code = self.promo_code
 
-        target_buyer_segment: str | Unset = UNSET
-        if not isinstance(self.target_buyer_segment, Unset):
-            target_buyer_segment = self.target_buyer_segment.value
+        target_buyer_segment = self.target_buyer_segment
 
         usage_limits: dict[str, Any] | Unset = UNSET
         if not isinstance(self.usage_limits, Unset):
@@ -166,9 +161,7 @@ class GetCouponResponseDataCoupon:
         if not isinstance(self.threshold, Unset):
             threshold = self.threshold.to_dict()
 
-        product_scope: str | Unset = UNSET
-        if not isinstance(self.product_scope, Unset):
-            product_scope = self.product_scope.value
+        product_scope = self.product_scope
 
         product_ids: list[str] | Unset = UNSET
         if not isinstance(self.product_ids, Unset):
@@ -280,12 +273,7 @@ class GetCouponResponseDataCoupon:
 
         promo_code = d.pop("promo_code", UNSET)
 
-        _target_buyer_segment = d.pop("target_buyer_segment", UNSET)
-        target_buyer_segment: GetCouponResponseDataCouponTargetBuyerSegment | Unset
-        if isinstance(_target_buyer_segment, Unset):
-            target_buyer_segment = UNSET
-        else:
-            target_buyer_segment = GetCouponResponseDataCouponTargetBuyerSegment(_target_buyer_segment)
+        target_buyer_segment = d.pop("target_buyer_segment", UNSET)
 
         _usage_limits = d.pop("usage_limits", UNSET)
         usage_limits: UsageLimit | Unset
@@ -315,12 +303,7 @@ class GetCouponResponseDataCoupon:
         else:
             threshold = GetCouponResponseDataCouponThreshold.from_dict(_threshold)
 
-        _product_scope = d.pop("product_scope", UNSET)
-        product_scope: GetCouponResponseDataCouponProductScope | Unset
-        if isinstance(_product_scope, Unset):
-            product_scope = UNSET
-        else:
-            product_scope = GetCouponResponseDataCouponProductScope(_product_scope)
+        product_scope = d.pop("product_scope", UNSET)
 
         product_ids = cast(list[str], d.pop("product_ids", UNSET))
 

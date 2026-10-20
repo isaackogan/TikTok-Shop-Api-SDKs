@@ -26,10 +26,10 @@ export interface PhoneNumber {
      * - `UNAVAILABLE`: No phone number is available.
      * 
      * Default: AVAILABLE
-     * @type {PhoneNumberAvailabilityEnum}
+     * @type {string}
      * @memberof PhoneNumber
      */
-    availability?: PhoneNumberAvailabilityEnum;
+    availability?: string;
     /**
      * The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for Ireland.
      * Max digits: 4
@@ -47,17 +47,6 @@ export interface PhoneNumber {
      */
     localNumber?: string;
 }
-
-
-/**
- * @export
- */
-export const PhoneNumberAvailabilityEnum = {
-    Available: 'AVAILABLE',
-    Unavailable: 'UNAVAILABLE'
-} as const;
-export type PhoneNumberAvailabilityEnum = typeof PhoneNumberAvailabilityEnum[keyof typeof PhoneNumberAvailabilityEnum];
-
 
 /**
  * Check if a given object implements the PhoneNumber interface.

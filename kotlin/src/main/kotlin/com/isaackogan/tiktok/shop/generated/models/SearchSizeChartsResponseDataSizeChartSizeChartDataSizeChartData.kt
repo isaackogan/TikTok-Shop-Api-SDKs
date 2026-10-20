@@ -55,11 +55,11 @@ data class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData (
 
     /* Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements. */
     @SerializedName("measurement_type")
-    val measurementType: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData.MeasurementType? = null,
+    val measurementType: kotlin.String? = null,
 
     /* Possible values: METRIC: metric units; IMPERIAL: imperial units. */
     @SerializedName("unit_system")
-    val unitSystem: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData.UnitSystem? = null,
+    val unitSystem: kotlin.String? = null,
 
     /* Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category. */
     @SerializedName("size_types")
@@ -67,25 +67,6 @@ data class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData (
 
 ) {
 
-    /**
-     * Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
-     *
-     * Values: GENERIC_MEASUREMENTS,BODY_MEASUREMENTS,PRODUCT_MEASUREMENTS
-     */
-    enum class MeasurementType(val value: kotlin.String) {
-        @SerializedName(value = "GENERIC_MEASUREMENTS") GENERIC_MEASUREMENTS("GENERIC_MEASUREMENTS"),
-        @SerializedName(value = "BODY_MEASUREMENTS") BODY_MEASUREMENTS("BODY_MEASUREMENTS"),
-        @SerializedName(value = "PRODUCT_MEASUREMENTS") PRODUCT_MEASUREMENTS("PRODUCT_MEASUREMENTS");
-    }
-    /**
-     * Possible values: METRIC: metric units; IMPERIAL: imperial units.
-     *
-     * Values: METRIC,IMPERIAL
-     */
-    enum class UnitSystem(val value: kotlin.String) {
-        @SerializedName(value = "METRIC") METRIC("METRIC"),
-        @SerializedName(value = "IMPERIAL") IMPERIAL("IMPERIAL");
-    }
 
 }
 

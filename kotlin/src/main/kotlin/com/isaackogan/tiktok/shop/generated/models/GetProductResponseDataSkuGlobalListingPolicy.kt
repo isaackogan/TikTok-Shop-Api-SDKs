@@ -40,7 +40,7 @@ data class GetProductResponseDataSkuGlobalListingPolicy (
 
     /* The type of inventory to synchronize. Possible values: - SHARED: Inventory Area Sharing - EXCLUSIVE: Inventory Exclusive */
     @SerializedName("inventory_type")
-    val inventoryType: GetProductResponseDataSkuGlobalListingPolicy.InventoryType? = null,
+    val inventoryType: kotlin.String? = null,
 
     /* A flag indicating whether the product price is synchronized. */
     @SerializedName("price_sync")
@@ -52,15 +52,6 @@ data class GetProductResponseDataSkuGlobalListingPolicy (
 
 ) {
 
-    /**
-     * The type of inventory to synchronize. Possible values: - SHARED: Inventory Area Sharing - EXCLUSIVE: Inventory Exclusive
-     *
-     * Values: SHARED,EXCLUSIVE
-     */
-    enum class InventoryType(val value: kotlin.String) {
-        @SerializedName(value = "SHARED") SHARED("SHARED"),
-        @SerializedName(value = "EXCLUSIVE") EXCLUSIVE("EXCLUSIVE");
-    }
 
 }
 

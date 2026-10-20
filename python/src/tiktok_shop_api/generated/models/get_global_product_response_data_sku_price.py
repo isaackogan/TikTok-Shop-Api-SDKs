@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_product_response_data_sku_price_currency import GetGlobalProductResponseDataSkuPriceCurrency
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetGlobalProductResponseDataSkuPrice")
@@ -17,7 +16,7 @@ class GetGlobalProductResponseDataSkuPrice:
     """
     Attributes:
         amount (str | Unset): The price amount.
-        currency (GetGlobalProductResponseDataSkuPriceCurrency | Unset): The currency.
+        currency (str | Unset): The currency.
             Possible values:
             - `USD`: Applicable for global sellers
             - `EUR`: Applicable for intra-EU sellers
@@ -33,16 +32,14 @@ class GetGlobalProductResponseDataSkuPrice:
     """
 
     amount: str | Unset = UNSET
-    currency: GetGlobalProductResponseDataSkuPriceCurrency | Unset = UNSET
+    currency: str | Unset = UNSET
     unit_price: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
         unit_price = self.unit_price
 
@@ -63,12 +60,7 @@ class GetGlobalProductResponseDataSkuPrice:
         d = dict(src_dict)
         amount = d.pop("amount", UNSET)
 
-        _currency = d.pop("currency", UNSET)
-        currency: GetGlobalProductResponseDataSkuPriceCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetGlobalProductResponseDataSkuPriceCurrency(_currency)
+        currency = d.pop("currency", UNSET)
 
         unit_price = d.pop("unit_price", UNSET)
 

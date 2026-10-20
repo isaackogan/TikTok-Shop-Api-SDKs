@@ -50,22 +50,11 @@ export interface GetGlobalCategoriesResponseDataCategory {
      * Possible values:
      * - AVAILABLE: You have the permission to create products in this category.
      * - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.  Contact your account manager for assistance.
-     * @type {Array<GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoriesResponseDataCategory
      */
-    permissionStatuses?: Array<GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum>;
+    permissionStatuses?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum = {
-    Available: 'AVAILABLE',
-    NonMainCategory: 'NON_MAIN_CATEGORY'
-} as const;
-export type GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum = typeof GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum[keyof typeof GetGlobalCategoriesResponseDataCategoryPermissionStatusesEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalCategoriesResponseDataCategory interface.

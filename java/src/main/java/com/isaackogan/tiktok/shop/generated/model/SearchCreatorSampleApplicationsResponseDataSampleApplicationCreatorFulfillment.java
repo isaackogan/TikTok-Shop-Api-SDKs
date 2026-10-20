@@ -65,186 +65,15 @@ public class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreator
   @javax.annotation.Nullable
   private Long totalSuspendDuration;
 
-  /**
-   * Fulfillment status, It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The creator is yet to fulfill the content creation obligation.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * Fulfillment is in progress; content has been created and is being evaluated against criteria.
-     */
-    ONGOING("ONGOING"),
-    
-    /**
-     * Fulfillment has been successfully completed; the content meets the required standards.
-     */
-    SUCCEED("SUCCEED"),
-    
-    /**
-     * Fulfillment failed; the content did not meet the required standards.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * Fulfillment is overdue; the creator did not meet the deadline.
-     */
-    OVERDUE("OVERDUE"),
-    
-    /**
-     * Fulfillment has been suspended.
-     */
-    SUSPEND("SUSPEND"),
-    
-    /**
-     * Fulfillment has been cancelled, either by the creator or due to operational reasons.
-     */
-    CANCELLED("CANCELLED"),
-    
-    /**
-     * The creator has been exempted from the fulfillment obligation.
-     */
-    EXEMPTED("EXEMPTED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * Represents the marketing status of a product associated with a fulfillment order. It indicates whether the product is available for marketing and fulfillment. The possible values are: - UNKNOWN: The marketing status of the product is unknown. - LIVE: The product is available and can be used for fulfillment. - OUT_OF_STOCK: The product is out of stock and cannot be fulfilled. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to market the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available. This field helps sellers and creators understand the current status of products associated with fulfillment orders, ensuring that all parties are aware of the availability and marketing status of the products involved in sample applications and collaborations.
-   */
-  @JsonAdapter(BoundProductStatusEnum.Adapter.class)
-  public enum BoundProductStatusEnum {
-    /**
-     * The marketing status of the product is unknown.
-     */
-    UNKNOWN("UNKNOWN"),
-    
-    /**
-     * The product is available and can be used for fulfillment.
-     */
-    LIVE("LIVE"),
-    
-    /**
-     * The product is out of stock and cannot be fulfilled.
-     */
-    OUT_OF_STOCK("OUT_OF_STOCK"),
-    
-    /**
-     * The product has been deactivated by the seller.
-     */
-    SELLER_DEACTIVATE("SELLER_DEACTIVATE"),
-    
-    /**
-     * The product has been deactivated by the platform.
-     */
-    PLATFORM_DEACTIVATE("PLATFORM_DEACTIVATE"),
-    
-    /**
-     * There is no valid plan available for the creator to market the product.
-     */
-    NO_PLAN("NO_PLAN"),
-    
-    /**
-     * The product has been permanently deleted and is no longer available.
-     */
-    PERMANENT_DELETED("PERMANENT_DELETED");
-
-    private String value;
-
-    BoundProductStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BoundProductStatusEnum fromValue(String value) {
-      for (BoundProductStatusEnum b : BoundProductStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BoundProductStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BoundProductStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BoundProductStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BoundProductStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      BoundProductStatusEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_BOUND_PRODUCT_STATUS = "bound_product_status";
   @SerializedName(SERIALIZED_NAME_BOUND_PRODUCT_STATUS)
   @javax.annotation.Nullable
-  private BoundProductStatusEnum boundProductStatus;
+  private String boundProductStatus;
 
   public SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment() {
   }
@@ -306,7 +135,7 @@ public class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreator
   }
 
 
-  public SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -316,16 +145,16 @@ public class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreator
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment boundProductStatus(@javax.annotation.Nullable BoundProductStatusEnum boundProductStatus) {
+  public SearchCreatorSampleApplicationsResponseDataSampleApplicationCreatorFulfillment boundProductStatus(@javax.annotation.Nullable String boundProductStatus) {
     this.boundProductStatus = boundProductStatus;
     return this;
   }
@@ -335,11 +164,11 @@ public class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreator
    * @return boundProductStatus
    */
   @javax.annotation.Nullable
-  public BoundProductStatusEnum getBoundProductStatus() {
+  public String getBoundProductStatus() {
     return boundProductStatus;
   }
 
-  public void setBoundProductStatus(@javax.annotation.Nullable BoundProductStatusEnum boundProductStatus) {
+  public void setBoundProductStatus(@javax.annotation.Nullable String boundProductStatus) {
     this.boundProductStatus = boundProductStatus;
   }
 
@@ -464,16 +293,8 @@ public class SearchCreatorSampleApplicationsResponseDataSampleApplicationCreator
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("bound_product_status") != null && !jsonObj.get("bound_product_status").isJsonNull()) && !jsonObj.get("bound_product_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bound_product_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bound_product_status").toString()));
-      }
-      // validate the optional field `bound_product_status`
-      if (jsonObj.get("bound_product_status") != null && !jsonObj.get("bound_product_status").isJsonNull()) {
-        BoundProductStatusEnum.validateJsonElement(jsonObj.get("bound_product_status"));
       }
   }
 

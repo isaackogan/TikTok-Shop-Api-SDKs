@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.activity_status_change_webhook_data_activity_type import ActivityStatusChangeWebhookDataActivityType
-from ..models.activity_status_change_webhook_data_product_level import ActivityStatusChangeWebhookDataProductLevel
-from ..models.activity_status_change_webhook_data_status import ActivityStatusChangeWebhookDataStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ActivityStatusChangeWebhookData")
@@ -20,21 +17,19 @@ class ActivityStatusChangeWebhookData:
     Attributes:
         activity_id (str | Unset): The ID of the promotion activity.
         update_time (int | Unset): The time when the status changed, represented as a Unix timestamp (seconds).
-        activity_type (ActivityStatusChangeWebhookDataActivityType | Unset): The type of the promotion activity.
-            Possible values are:
+        activity_type (str | Unset): The type of the promotion activity. Possible values are:
 
              * `FIXED_PRICE`
              * `DIRECT_DISCOUNT`
              * `SHIPPING_DISCOUNT`
              * `BUY_MORE_SAVE_MORE`
              * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
-        product_level (ActivityStatusChangeWebhookDataProductLevel | Unset): Activity product dimension, values are:
+        product_level (str | Unset): Activity product dimension, values are:
 
              * `PRODUCT`
              * `VARIATION`
              * `SHOP`
-        status (ActivityStatusChangeWebhookDataStatus | Unset): The current status of the promotion activity. Possible
-            values are:
+        status (str | Unset): The current status of the promotion activity. Possible values are:
 
              * `ONGOING`
              * `EXPIRED`
@@ -43,9 +38,9 @@ class ActivityStatusChangeWebhookData:
 
     activity_id: str | Unset = UNSET
     update_time: int | Unset = UNSET
-    activity_type: ActivityStatusChangeWebhookDataActivityType | Unset = UNSET
-    product_level: ActivityStatusChangeWebhookDataProductLevel | Unset = UNSET
-    status: ActivityStatusChangeWebhookDataStatus | Unset = UNSET
+    activity_type: str | Unset = UNSET
+    product_level: str | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -53,17 +48,11 @@ class ActivityStatusChangeWebhookData:
 
         update_time = self.update_time
 
-        activity_type: str | Unset = UNSET
-        if not isinstance(self.activity_type, Unset):
-            activity_type = self.activity_type.value
+        activity_type = self.activity_type
 
-        product_level: str | Unset = UNSET
-        if not isinstance(self.product_level, Unset):
-            product_level = self.product_level.value
+        product_level = self.product_level
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -88,26 +77,11 @@ class ActivityStatusChangeWebhookData:
 
         update_time = d.pop("update_time", UNSET)
 
-        _activity_type = d.pop("activity_type", UNSET)
-        activity_type: ActivityStatusChangeWebhookDataActivityType | Unset
-        if isinstance(_activity_type, Unset):
-            activity_type = UNSET
-        else:
-            activity_type = ActivityStatusChangeWebhookDataActivityType(_activity_type)
+        activity_type = d.pop("activity_type", UNSET)
 
-        _product_level = d.pop("product_level", UNSET)
-        product_level: ActivityStatusChangeWebhookDataProductLevel | Unset
-        if isinstance(_product_level, Unset):
-            product_level = UNSET
-        else:
-            product_level = ActivityStatusChangeWebhookDataProductLevel(_product_level)
+        product_level = d.pop("product_level", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: ActivityStatusChangeWebhookDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = ActivityStatusChangeWebhookDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         activity_status_change_webhook_data = cls(
             activity_id=activity_id,

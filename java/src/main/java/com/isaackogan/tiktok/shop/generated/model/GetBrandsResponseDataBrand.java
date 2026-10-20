@@ -60,124 +60,20 @@ public class GetBrandsResponseDataBrand {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * A status to indicate whether the seller has obtained prior authorization to sell goods bearing the brand&#39;s trademark, name, or logo.  Possible values: - UNAUTHORIEZD - AUTHORIZED  **Note**: If the brand is unauthorized, check &#x60;is_t1_brand&#x60; to determine if you can use it during product creation.
-   */
-  @JsonAdapter(AuthorizedStatusEnum.Adapter.class)
-  public enum AuthorizedStatusEnum {
-    UNAUTHORIEZD("UNAUTHORIEZD"),
-    
-    AUTHORIZED("AUTHORIZED");
-
-    private String value;
-
-    AuthorizedStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AuthorizedStatusEnum fromValue(String value) {
-      for (AuthorizedStatusEnum b : AuthorizedStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AuthorizedStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AuthorizedStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AuthorizedStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AuthorizedStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AuthorizedStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_AUTHORIZED_STATUS = "authorized_status";
   @SerializedName(SERIALIZED_NAME_AUTHORIZED_STATUS)
   @javax.annotation.Nullable
-  private AuthorizedStatusEnum authorizedStatus;
+  private String authorizedStatus;
 
   public static final String SERIALIZED_NAME_IS_T1_BRAND = "is_t1_brand";
   @SerializedName(SERIALIZED_NAME_IS_T1_BRAND)
   @javax.annotation.Nullable
   private Boolean isT1Brand;
 
-  /**
-   * The availability of an **authorized brand** in the requested category. Possible values: - AVAILABLE - UNAVAILABLE  **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized.
-   */
-  @JsonAdapter(BrandStatusEnum.Adapter.class)
-  public enum BrandStatusEnum {
-    AVAILABLE("AVAILABLE"),
-    
-    UNAVAILABLE("UNAVAILABLE");
-
-    private String value;
-
-    BrandStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BrandStatusEnum fromValue(String value) {
-      for (BrandStatusEnum b : BrandStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BrandStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BrandStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BrandStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BrandStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      BrandStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_BRAND_STATUS = "brand_status";
   @SerializedName(SERIALIZED_NAME_BRAND_STATUS)
   @javax.annotation.Nullable
-  private BrandStatusEnum brandStatus;
+  private String brandStatus;
 
   public GetBrandsResponseDataBrand() {
   }
@@ -220,7 +116,7 @@ public class GetBrandsResponseDataBrand {
   }
 
 
-  public GetBrandsResponseDataBrand authorizedStatus(@javax.annotation.Nullable AuthorizedStatusEnum authorizedStatus) {
+  public GetBrandsResponseDataBrand authorizedStatus(@javax.annotation.Nullable String authorizedStatus) {
     this.authorizedStatus = authorizedStatus;
     return this;
   }
@@ -230,11 +126,11 @@ public class GetBrandsResponseDataBrand {
    * @return authorizedStatus
    */
   @javax.annotation.Nullable
-  public AuthorizedStatusEnum getAuthorizedStatus() {
+  public String getAuthorizedStatus() {
     return authorizedStatus;
   }
 
-  public void setAuthorizedStatus(@javax.annotation.Nullable AuthorizedStatusEnum authorizedStatus) {
+  public void setAuthorizedStatus(@javax.annotation.Nullable String authorizedStatus) {
     this.authorizedStatus = authorizedStatus;
   }
 
@@ -258,7 +154,7 @@ public class GetBrandsResponseDataBrand {
   }
 
 
-  public GetBrandsResponseDataBrand brandStatus(@javax.annotation.Nullable BrandStatusEnum brandStatus) {
+  public GetBrandsResponseDataBrand brandStatus(@javax.annotation.Nullable String brandStatus) {
     this.brandStatus = brandStatus;
     return this;
   }
@@ -268,11 +164,11 @@ public class GetBrandsResponseDataBrand {
    * @return brandStatus
    */
   @javax.annotation.Nullable
-  public BrandStatusEnum getBrandStatus() {
+  public String getBrandStatus() {
     return brandStatus;
   }
 
-  public void setBrandStatus(@javax.annotation.Nullable BrandStatusEnum brandStatus) {
+  public void setBrandStatus(@javax.annotation.Nullable String brandStatus) {
     this.brandStatus = brandStatus;
   }
 
@@ -400,16 +296,8 @@ public class GetBrandsResponseDataBrand {
       if ((jsonObj.get("authorized_status") != null && !jsonObj.get("authorized_status").isJsonNull()) && !jsonObj.get("authorized_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `authorized_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authorized_status").toString()));
       }
-      // validate the optional field `authorized_status`
-      if (jsonObj.get("authorized_status") != null && !jsonObj.get("authorized_status").isJsonNull()) {
-        AuthorizedStatusEnum.validateJsonElement(jsonObj.get("authorized_status"));
-      }
       if ((jsonObj.get("brand_status") != null && !jsonObj.get("brand_status").isJsonNull()) && !jsonObj.get("brand_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `brand_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brand_status").toString()));
-      }
-      // validate the optional field `brand_status`
-      if (jsonObj.get("brand_status") != null && !jsonObj.get("brand_status").isJsonNull()) {
-        BrandStatusEnum.validateJsonElement(jsonObj.get("brand_status"));
       }
   }
 

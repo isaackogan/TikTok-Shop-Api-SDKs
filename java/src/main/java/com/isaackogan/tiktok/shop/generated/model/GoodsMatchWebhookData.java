@@ -50,119 +50,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GoodsMatchWebhookData {
-  /**
-   * Indicates whether the seller is matching or unmatching products. Possible enumerations are: &#x60;MATCH&#x60; and &#x60;UNMATCH&#x60;.
-   */
-  @JsonAdapter(MatchTypeEnum.Adapter.class)
-  public enum MatchTypeEnum {
-    MATCH("MATCH"),
-    
-    UNMATCH("UNMATCH");
-
-    private String value;
-
-    MatchTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static MatchTypeEnum fromValue(String value) {
-      for (MatchTypeEnum b : MatchTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<MatchTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final MatchTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public MatchTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return MatchTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      MatchTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_MATCH_TYPE = "match_type";
   @SerializedName(SERIALIZED_NAME_MATCH_TYPE)
   @javax.annotation.Nullable
-  private MatchTypeEnum matchType;
-
-  /**
-   * Possible enumerations are: &#x60;LOCAL&#x60; and &#x60;GLOBAL&#x60;.
-   */
-  @JsonAdapter(ProductTypeEnum.Adapter.class)
-  public enum ProductTypeEnum {
-    LOCAL("LOCAL"),
-    
-    GLOBAL("GLOBAL");
-
-    private String value;
-
-    ProductTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProductTypeEnum fromValue(String value) {
-      for (ProductTypeEnum b : ProductTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProductTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProductTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProductTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProductTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProductTypeEnum.fromValue(value);
-    }
-  }
+  private String matchType;
 
   public static final String SERIALIZED_NAME_PRODUCT_TYPE = "product_type";
   @SerializedName(SERIALIZED_NAME_PRODUCT_TYPE)
   @javax.annotation.Nullable
-  private ProductTypeEnum productType;
+  private String productType;
 
   public static final String SERIALIZED_NAME_GOODS_ID = "goods_id";
   @SerializedName(SERIALIZED_NAME_GOODS_ID)
@@ -187,7 +83,7 @@ public class GoodsMatchWebhookData {
   public GoodsMatchWebhookData() {
   }
 
-  public GoodsMatchWebhookData matchType(@javax.annotation.Nullable MatchTypeEnum matchType) {
+  public GoodsMatchWebhookData matchType(@javax.annotation.Nullable String matchType) {
     this.matchType = matchType;
     return this;
   }
@@ -197,16 +93,16 @@ public class GoodsMatchWebhookData {
    * @return matchType
    */
   @javax.annotation.Nullable
-  public MatchTypeEnum getMatchType() {
+  public String getMatchType() {
     return matchType;
   }
 
-  public void setMatchType(@javax.annotation.Nullable MatchTypeEnum matchType) {
+  public void setMatchType(@javax.annotation.Nullable String matchType) {
     this.matchType = matchType;
   }
 
 
-  public GoodsMatchWebhookData productType(@javax.annotation.Nullable ProductTypeEnum productType) {
+  public GoodsMatchWebhookData productType(@javax.annotation.Nullable String productType) {
     this.productType = productType;
     return this;
   }
@@ -216,11 +112,11 @@ public class GoodsMatchWebhookData {
    * @return productType
    */
   @javax.annotation.Nullable
-  public ProductTypeEnum getProductType() {
+  public String getProductType() {
     return productType;
   }
 
-  public void setProductType(@javax.annotation.Nullable ProductTypeEnum productType) {
+  public void setProductType(@javax.annotation.Nullable String productType) {
     this.productType = productType;
   }
 
@@ -420,16 +316,8 @@ public class GoodsMatchWebhookData {
       if ((jsonObj.get("match_type") != null && !jsonObj.get("match_type").isJsonNull()) && !jsonObj.get("match_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `match_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("match_type").toString()));
       }
-      // validate the optional field `match_type`
-      if (jsonObj.get("match_type") != null && !jsonObj.get("match_type").isJsonNull()) {
-        MatchTypeEnum.validateJsonElement(jsonObj.get("match_type"));
-      }
       if ((jsonObj.get("product_type") != null && !jsonObj.get("product_type").isJsonNull()) && !jsonObj.get("product_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_type").toString()));
-      }
-      // validate the optional field `product_type`
-      if (jsonObj.get("product_type") != null && !jsonObj.get("product_type").isJsonNull()) {
-        ProductTypeEnum.validateJsonElement(jsonObj.get("product_type"));
       }
       if ((jsonObj.get("goods_id") != null && !jsonObj.get("goods_id").isJsonNull()) && !jsonObj.get("goods_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `goods_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("goods_id").toString()));

@@ -31,23 +31,11 @@ export interface GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItems
      * - LIVE: Live stream content.
      * - VIDEO: Video content.
      * - PRODUCT_CARD: Product card.
-     * @type {GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum}
+     * @type {string}
      * @memberof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdown
      */
-    type?: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum = {
-    Live: 'LIVE',
-    Video: 'VIDEO',
-    ProductCard: 'PRODUCT_CARD'
-} as const;
-export type GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum = typeof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum[keyof typeof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdown interface.

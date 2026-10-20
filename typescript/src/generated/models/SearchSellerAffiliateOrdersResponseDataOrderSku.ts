@@ -159,10 +159,10 @@ export interface SearchSellerAffiliateOrdersResponseDataOrderSku {
      * - PRE_LIVE
      * - PROMOTION_PAGE
      * - LINKSHARE
-     * @type {SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum}
+     * @type {string}
      * @memberof SearchSellerAffiliateOrdersResponseDataOrderSku
      */
-    contentType?: SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum;
+    contentType?: string;
     /**
      * The content identifier.
      * @type {string}
@@ -296,10 +296,10 @@ export interface SearchSellerAffiliateOrdersResponseDataOrderSku {
      * Indicates whether the entire SKU order was returned or refunded. Possible values:
      * - `Yes`: The full quantity was returned or refunded, so no commission is paid.
      * - `No`: The full quantity was not returned or refunded.
-     * @type {SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum}
+     * @type {string}
      * @memberof SearchSellerAffiliateOrdersResponseDataOrderSku
      */
-    fullyReturn?: SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum;
+    fullyReturn?: string;
     /**
      * Indicates whether the SKU order is attributed to carousel content. Carousel content may involve a commission rate discount. Returns `true` for a carousel-attributed SKU order and `false` otherwise.
      * @type {boolean}
@@ -307,30 +307,6 @@ export interface SearchSellerAffiliateOrdersResponseDataOrderSku {
      */
     isCarousel?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum = {
-    Shop: 'SHOP',
-    Video: 'VIDEO',
-    Live: 'LIVE',
-    PreLive: 'PRE_LIVE',
-    PromotionPage: 'PROMOTION_PAGE',
-    Linkshare: 'LINKSHARE'
-} as const;
-export type SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum = typeof SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum[keyof typeof SearchSellerAffiliateOrdersResponseDataOrderSkuContentTypeEnum];
-
-/**
- * @export
- */
-export const SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum = {
-    Yes: 'Yes',
-    No: 'No'
-} as const;
-export type SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum = typeof SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum[keyof typeof SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturnEnum];
-
 
 /**
  * Check if a given object implements the SearchSellerAffiliateOrdersResponseDataOrderSku interface.

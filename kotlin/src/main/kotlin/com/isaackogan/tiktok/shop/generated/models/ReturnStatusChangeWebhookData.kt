@@ -47,15 +47,15 @@ data class ReturnStatusChangeWebhookData (
 
     /* Return or refund request user, with possible values:      * BUYER   * SELLER   * SYSTEM */
     @SerializedName("return_role")
-    val returnRole: ReturnStatusChangeWebhookData.ReturnRole? = null,
+    val returnRole: kotlin.String? = null,
 
     /* The return or refund request type, with possible values:      * REFUND   * REPLACEMENT   * RETURN_AND_REFUND */
     @SerializedName("return_type")
-    val returnType: ReturnStatusChangeWebhookData.ReturnType? = null,
+    val returnType: kotlin.String? = null,
 
     /* The return status for a request, with possible values:      * AWAITING_BUYER_SHIP   * BUYER_SHIPPED_ITEM   * REFUND_OR_RETURN_REQUEST_REJECT   * REJECT_RECEIVE_PACKAGE   * REPLACEMENT_REQUEST_CANCEL   * REPLACEMENT_REQUEST_COMPLETE   * REPLACEMENT_REQUEST_PENDING   * REPLACEMENT_REQUEST_REFUND_SUCCESS   * REPLACEMENT_REQUEST_REJECT   * RETURN_OR_REFUND_REQUEST_CANCEL   * RETURN_OR_REFUND_REQUEST_COMPLETE   * RETURN_OR_REFUND_REQUEST_PENDING   * RETURN_OR_REFUND_REQUEST_SUCCESS */
     @SerializedName("return_status")
-    val returnStatus: ReturnStatusChangeWebhookData.ReturnStatus? = null,
+    val returnStatus: kotlin.String? = null,
 
     /* The identifier of a specific return */
     @SerializedName("return_id")
@@ -71,46 +71,6 @@ data class ReturnStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * Return or refund request user, with possible values:      * BUYER   * SELLER   * SYSTEM
-     *
-     * Values: BUYER,SELLER,SYSTEM
-     */
-    enum class ReturnRole(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
-    /**
-     * The return or refund request type, with possible values:      * REFUND   * REPLACEMENT   * RETURN_AND_REFUND
-     *
-     * Values: REFUND,REPLACEMENT,RETURN_AND_REFUND
-     */
-    enum class ReturnType(val value: kotlin.String) {
-        @SerializedName(value = "REFUND") REFUND("REFUND"),
-        @SerializedName(value = "REPLACEMENT") REPLACEMENT("REPLACEMENT"),
-        @SerializedName(value = "RETURN_AND_REFUND") RETURN_AND_REFUND("RETURN_AND_REFUND");
-    }
-    /**
-     * The return status for a request, with possible values:      * AWAITING_BUYER_SHIP   * BUYER_SHIPPED_ITEM   * REFUND_OR_RETURN_REQUEST_REJECT   * REJECT_RECEIVE_PACKAGE   * REPLACEMENT_REQUEST_CANCEL   * REPLACEMENT_REQUEST_COMPLETE   * REPLACEMENT_REQUEST_PENDING   * REPLACEMENT_REQUEST_REFUND_SUCCESS   * REPLACEMENT_REQUEST_REJECT   * RETURN_OR_REFUND_REQUEST_CANCEL   * RETURN_OR_REFUND_REQUEST_COMPLETE   * RETURN_OR_REFUND_REQUEST_PENDING   * RETURN_OR_REFUND_REQUEST_SUCCESS
-     *
-     * Values: AWAITING_BUYER_SHIP,BUYER_SHIPPED_ITEM,REFUND_OR_RETURN_REQUEST_REJECT,REJECT_RECEIVE_PACKAGE,REPLACEMENT_REQUEST_CANCEL,REPLACEMENT_REQUEST_COMPLETE,REPLACEMENT_REQUEST_PENDING,REPLACEMENT_REQUEST_REFUND_SUCCESS,REPLACEMENT_REQUEST_REJECT,RETURN_OR_REFUND_REQUEST_CANCEL,RETURN_OR_REFUND_REQUEST_COMPLETE,RETURN_OR_REFUND_REQUEST_PENDING,RETURN_OR_REFUND_REQUEST_SUCCESS
-     */
-    enum class ReturnStatus(val value: kotlin.String) {
-        @SerializedName(value = "AWAITING_BUYER_SHIP") AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-        @SerializedName(value = "BUYER_SHIPPED_ITEM") BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-        @SerializedName(value = "REFUND_OR_RETURN_REQUEST_REJECT") REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-        @SerializedName(value = "REJECT_RECEIVE_PACKAGE") REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_CANCEL") REPLACEMENT_REQUEST_CANCEL("REPLACEMENT_REQUEST_CANCEL"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_COMPLETE") REPLACEMENT_REQUEST_COMPLETE("REPLACEMENT_REQUEST_COMPLETE"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_PENDING") REPLACEMENT_REQUEST_PENDING("REPLACEMENT_REQUEST_PENDING"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_REFUND_SUCCESS") REPLACEMENT_REQUEST_REFUND_SUCCESS("REPLACEMENT_REQUEST_REFUND_SUCCESS"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_REJECT") REPLACEMENT_REQUEST_REJECT("REPLACEMENT_REQUEST_REJECT"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_CANCEL") RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_COMPLETE") RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_PENDING") RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_SUCCESS") RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS");
-    }
 
 }
 

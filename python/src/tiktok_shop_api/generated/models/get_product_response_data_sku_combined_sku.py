@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_combined_sku_combined_listing_not_live_reasons_item import (
-    GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsItem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -38,9 +35,8 @@ class GetProductResponseDataSkuCombinedSku:
         brand (Brand | Unset):
         categories (list[GetProductResponseDataSkuCombinedSkuCategory] | Unset): The category tree information of the
             source product included in the virtual bundle.
-        combined_listing_not_live_reasons (list[GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsItem] |
-            Unset): The reasons linked to the source product included in the virtual bundle that are keeping the virtual
-            bundle status from being live.
+        combined_listing_not_live_reasons (list[str] | Unset): The reasons linked to the source product included in the
+            virtual bundle that are keeping the virtual bundle status from being live.
             Possible values:
             - SUB_PRODUCT_DEACTIVATE: Indicate the source product has been deactivated.
             - SUB_PRODUCT_DELETE: Indicate the source product has been deleted.
@@ -64,9 +60,7 @@ class GetProductResponseDataSkuCombinedSku:
 
     brand: Brand | Unset = UNSET
     categories: list[GetProductResponseDataSkuCombinedSkuCategory] | Unset = UNSET
-    combined_listing_not_live_reasons: (
-        list[GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsItem] | Unset
-    ) = UNSET
+    combined_listing_not_live_reasons: list[str] | Unset = UNSET
     inventory: list[GetProductResponseDataSkuCombinedSkuInventory] | Unset = UNSET
     price: GetProductResponseDataSkuCombinedSkuPrice | Unset = UNSET
     product_id: str | Unset = UNSET
@@ -92,10 +86,7 @@ class GetProductResponseDataSkuCombinedSku:
 
         combined_listing_not_live_reasons: list[str] | Unset = UNSET
         if not isinstance(self.combined_listing_not_live_reasons, Unset):
-            combined_listing_not_live_reasons = []
-            for combined_listing_not_live_reasons_item_data in self.combined_listing_not_live_reasons:
-                combined_listing_not_live_reasons_item = combined_listing_not_live_reasons_item_data.value
-                combined_listing_not_live_reasons.append(combined_listing_not_live_reasons_item)
+            combined_listing_not_live_reasons = self.combined_listing_not_live_reasons
 
         inventory: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.inventory, Unset):
@@ -195,20 +186,7 @@ class GetProductResponseDataSkuCombinedSku:
 
                 categories.append(categories_item)
 
-        _combined_listing_not_live_reasons = d.pop("combined_listing_not_live_reasons", UNSET)
-        combined_listing_not_live_reasons: (
-            list[GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsItem] | Unset
-        ) = UNSET
-        if _combined_listing_not_live_reasons is not UNSET:
-            combined_listing_not_live_reasons = []
-            for combined_listing_not_live_reasons_item_data in _combined_listing_not_live_reasons:
-                combined_listing_not_live_reasons_item = (
-                    GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsItem(
-                        combined_listing_not_live_reasons_item_data
-                    )
-                )
-
-                combined_listing_not_live_reasons.append(combined_listing_not_live_reasons_item)
+        combined_listing_not_live_reasons = cast(list[str], d.pop("combined_listing_not_live_reasons", UNSET))
 
         _inventory = d.pop("inventory", UNSET)
         inventory: list[GetProductResponseDataSkuCombinedSkuInventory] | Unset = UNSET

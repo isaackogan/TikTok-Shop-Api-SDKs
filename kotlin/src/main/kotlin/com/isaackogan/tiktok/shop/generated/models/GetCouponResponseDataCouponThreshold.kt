@@ -39,7 +39,7 @@ data class GetCouponResponseDataCouponThreshold (
 
     /* The type of purchase criteria. Possible enumerations are: - `NONE`: No minimum purchase criteria. - `MIN_SPEND`: Buyer must meet or exceed the minimum spend criteria with eligible products. */
     @SerializedName("type")
-    val type: GetCouponResponseDataCouponThreshold.Type? = null,
+    val type: kotlin.String? = null,
 
     /* When `threshold.type == 'MIN_SPEND'`, a customer must purchase products from the range defined by `product_scope` with a monetary amount greater than or equal to this value, or the customer cannot use the coupon. */
     @SerializedName("min_spend")
@@ -47,15 +47,6 @@ data class GetCouponResponseDataCouponThreshold (
 
 ) {
 
-    /**
-     * The type of purchase criteria. Possible enumerations are: - `NONE`: No minimum purchase criteria. - `MIN_SPEND`: Buyer must meet or exceed the minimum spend criteria with eligible products.
-     *
-     * Values: NONE,MIN_SPEND
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "MIN_SPEND") MIN_SPEND("MIN_SPEND");
-    }
 
 }
 

@@ -38,33 +38,14 @@ data class GetProductResponseDataSkuStatusInfo (
 
     /* The deactivation source of the SKU with `DEACTIVATED` status. Possible values: - SELLER: Indicates that the seller deactivated the SKU - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons - COMBO_RELATION: Indicates that the platform de-activated the bundle-SKU due to the deactivation of sub-SKU. */
     @SerializedName("deactivation_source")
-    val deactivationSource: GetProductResponseDataSkuStatusInfo.DeactivationSource? = null,
+    val deactivationSource: kotlin.String? = null,
 
     /* The SKU status in TikTok Shop. Possible values:  - NORMAL - DEACTIVATED */
     @SerializedName("status")
-    val status: GetProductResponseDataSkuStatusInfo.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The deactivation source of the SKU with `DEACTIVATED` status. Possible values: - SELLER: Indicates that the seller deactivated the SKU - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons - COMBO_RELATION: Indicates that the platform de-activated the bundle-SKU due to the deactivation of sub-SKU.
-     *
-     * Values: SELLER,PLATFORM,COMBO_RELATION
-     */
-    enum class DeactivationSource(val value: kotlin.String) {
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "PLATFORM") PLATFORM("PLATFORM"),
-        @SerializedName(value = "COMBO_RELATION") COMBO_RELATION("COMBO_RELATION");
-    }
-    /**
-     * The SKU status in TikTok Shop. Possible values:  - NORMAL - DEACTIVATED
-     *
-     * Values: NORMAL,DEACTIVATED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "DEACTIVATED") DEACTIVATED("DEACTIVATED");
-    }
 
 }
 

@@ -54,20 +54,20 @@ export interface GetImageTranslationTasksResponseDataTranslationTask {
      * - es-ES
      * - fr-FR
      * - it-IT
-     * @type {GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum}
+     * @type {string}
      * @memberof GetImageTranslationTasksResponseDataTranslationTask
      */
-    targetLanguage?: GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum;
+    targetLanguage?: string;
     /**
      * The translation result.
      * Possible values:
      * - PROCESSING: Translation is underway and has not yet completed.
      * - COMPLETED: Translation has completed and results are ready.
      * - FAILED: Translation did not complete due to an error.
-     * @type {GetImageTranslationTasksResponseDataTranslationTaskStatusEnum}
+     * @type {string}
      * @memberof GetImageTranslationTasksResponseDataTranslationTask
      */
-    status?: GetImageTranslationTasksResponseDataTranslationTaskStatusEnum;
+    status?: string;
     /**
      * The reason why the translation task failed.
      * Possible values:
@@ -85,30 +85,6 @@ export interface GetImageTranslationTasksResponseDataTranslationTask {
      */
     translatedImage?: GetImageTranslationTasksResponseDataTranslationTaskTranslatedImage;
 }
-
-
-/**
- * @export
- */
-export const GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum = {
-    DeDe: 'de-DE',
-    EnIe: 'en-IE',
-    EsEs: 'es-ES',
-    FrFr: 'fr-FR',
-    ItIt: 'it-IT'
-} as const;
-export type GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum = typeof GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum[keyof typeof GetImageTranslationTasksResponseDataTranslationTaskTargetLanguageEnum];
-
-/**
- * @export
- */
-export const GetImageTranslationTasksResponseDataTranslationTaskStatusEnum = {
-    Processing: 'PROCESSING',
-    Completed: 'COMPLETED',
-    Failed: 'FAILED'
-} as const;
-export type GetImageTranslationTasksResponseDataTranslationTaskStatusEnum = typeof GetImageTranslationTasksResponseDataTranslationTaskStatusEnum[keyof typeof GetImageTranslationTasksResponseDataTranslationTaskStatusEnum];
-
 
 /**
  * Check if a given object implements the GetImageTranslationTasksResponseDataTranslationTask interface.

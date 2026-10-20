@@ -38,33 +38,14 @@ data class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus (
 
     /* The integrated platform name.   Possible values:      * TOKOPEDIA. */
     @SerializedName("platform")
-    val platform: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus.Platform? = null,
+    val platform: kotlin.String? = null,
 
     /* The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit or the audit was cancelled.   * APPROVED: The product passed the audit and has been listed on the platform. */
     @SerializedName("status")
-    val status: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The integrated platform name.   Possible values:      * TOKOPEDIA.
-     *
-     * Values: TOKOPEDIA
-     */
-    enum class Platform(val value: kotlin.String) {
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
-    /**
-     * The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit or the audit was cancelled.   * APPROVED: The product passed the audit and has been listed on the platform.
-     *
-     * Values: NONE,AUDITING,FAILED,APPROVED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "AUDITING") AUDITING("AUDITING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "APPROVED") APPROVED("APPROVED");
-    }
 
 }
 

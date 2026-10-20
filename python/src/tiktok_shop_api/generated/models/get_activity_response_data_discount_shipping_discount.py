@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_activity_response_data_discount_shipping_discount_threshold_type import (
-    GetActivityResponseDataDiscountShippingDiscountThresholdType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetActivityResponseDataDiscountShippingDiscount")
 class GetActivityResponseDataDiscountShippingDiscount:
     """
     Attributes:
-        threshold_type (GetActivityResponseDataDiscountShippingDiscountThresholdType | Unset): The type of purchase
-            criteria. Possible enumerations are:
+        threshold_type (str | Unset): The type of purchase criteria. Possible enumerations are:
             - `NO_THRESHOLD`: No minimum purchase criteria.
             - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products.
             - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order.
@@ -60,7 +56,7 @@ class GetActivityResponseDataDiscountShippingDiscount:
         area_scope (GetActivityResponseDataDiscountShippingDiscountAreaScope | Unset):
     """
 
-    threshold_type: GetActivityResponseDataDiscountShippingDiscountThresholdType | Unset = UNSET
+    threshold_type: str | Unset = UNSET
     threshold_value: str | Unset = UNSET
     type_: str | Unset = UNSET
     value: str | Unset = UNSET
@@ -70,9 +66,7 @@ class GetActivityResponseDataDiscountShippingDiscount:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        threshold_type: str | Unset = UNSET
-        if not isinstance(self.threshold_type, Unset):
-            threshold_type = self.threshold_type.value
+        threshold_type = self.threshold_type
 
         threshold_value = self.threshold_value
 
@@ -115,12 +109,7 @@ class GetActivityResponseDataDiscountShippingDiscount:
         )
 
         d = dict(src_dict)
-        _threshold_type = d.pop("threshold_type", UNSET)
-        threshold_type: GetActivityResponseDataDiscountShippingDiscountThresholdType | Unset
-        if isinstance(_threshold_type, Unset):
-            threshold_type = UNSET
-        else:
-            threshold_type = GetActivityResponseDataDiscountShippingDiscountThresholdType(_threshold_type)
+        threshold_type = d.pop("threshold_type", UNSET)
 
         threshold_value = d.pop("threshold_value", UNSET)
 

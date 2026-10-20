@@ -46,10 +46,10 @@ export interface UpdatePromotionActivityProductsResponseData {
      * - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
      * - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
      * - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     * @type {UpdatePromotionActivityProductsResponseDataStatusEnum}
+     * @type {string}
      * @memberof UpdatePromotionActivityProductsResponseData
      */
-    status?: UpdatePromotionActivityProductsResponseDataStatusEnum;
+    status?: string;
     /**
      * The number of items in this request.
      * When `product_level==PRODUCT`, this is the number of products. When `product_level==VARIATION`, this is the total number of SKUs across all products. When `product_level==SHOP`, this value is `0`. IDs in `benefit_product_ids` and `exclude_product_ids` are not included.
@@ -58,21 +58,6 @@ export interface UpdatePromotionActivityProductsResponseData {
      */
     totalCount?: number;
 }
-
-
-/**
- * @export
- */
-export const UpdatePromotionActivityProductsResponseDataStatusEnum = {
-    Draft: 'DRAFT',
-    NotStart: 'NOT_START',
-    Ongoing: 'ONGOING',
-    Expired: 'EXPIRED',
-    Deactivated: 'DEACTIVATED',
-    NotEffective: 'NOT_EFFECTIVE'
-} as const;
-export type UpdatePromotionActivityProductsResponseDataStatusEnum = typeof UpdatePromotionActivityProductsResponseDataStatusEnum[keyof typeof UpdatePromotionActivityProductsResponseDataStatusEnum];
-
 
 /**
  * Check if a given object implements the UpdatePromotionActivityProductsResponseData interface.

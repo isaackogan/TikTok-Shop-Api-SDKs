@@ -24,10 +24,10 @@ export interface GetProductResponseDataSkuFee {
      * - SINGLE_USE
      * - REUSABLE
      * - NOT_APPLICABLE
-     * @type {GetProductResponseDataSkuFeeAdditionalAttributeEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuFee
      */
-    additionalAttribute?: GetProductResponseDataSkuFeeAdditionalAttributeEnum;
+    additionalAttribute?: string;
     /**
      * The fee amount.
      * Valid range:
@@ -39,31 +39,11 @@ export interface GetProductResponseDataSkuFee {
     /**
      * The type of fee.
      * Possible values: PFAND
-     * @type {GetProductResponseDataSkuFeeTypeEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuFee
      */
-    type?: GetProductResponseDataSkuFeeTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuFeeAdditionalAttributeEnum = {
-    SingleUse: 'SINGLE_USE',
-    Reusable: 'REUSABLE',
-    NotApplicable: 'NOT_APPLICABLE'
-} as const;
-export type GetProductResponseDataSkuFeeAdditionalAttributeEnum = typeof GetProductResponseDataSkuFeeAdditionalAttributeEnum[keyof typeof GetProductResponseDataSkuFeeAdditionalAttributeEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuFeeTypeEnum = {
-    Pfand: 'PFAND'
-} as const;
-export type GetProductResponseDataSkuFeeTypeEnum = typeof GetProductResponseDataSkuFeeTypeEnum[keyof typeof GetProductResponseDataSkuFeeTypeEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuFee interface.

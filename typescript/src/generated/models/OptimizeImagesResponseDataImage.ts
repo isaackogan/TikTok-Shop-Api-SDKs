@@ -67,23 +67,11 @@ export interface OptimizeImagesResponseDataImage {
      * - SUCCESS: The image has been successfully optimized.
      * - IGNORE: The image already has a white background, so no optimization was applied.
      * - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status.
-     * @type {OptimizeImagesResponseDataImageOptimizeStatusEnum}
+     * @type {string}
      * @memberof OptimizeImagesResponseDataImage
      */
-    optimizeStatus?: OptimizeImagesResponseDataImageOptimizeStatusEnum;
+    optimizeStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const OptimizeImagesResponseDataImageOptimizeStatusEnum = {
-    Success: 'SUCCESS',
-    Ignore: 'IGNORE',
-    Processing: 'PROCESSING'
-} as const;
-export type OptimizeImagesResponseDataImageOptimizeStatusEnum = typeof OptimizeImagesResponseDataImageOptimizeStatusEnum[keyof typeof OptimizeImagesResponseDataImageOptimizeStatusEnum];
-
 
 /**
  * Check if a given object implements the OptimizeImagesResponseDataImage interface.

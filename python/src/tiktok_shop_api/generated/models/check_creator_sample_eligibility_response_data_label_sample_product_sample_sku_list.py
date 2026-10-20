@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.check_creator_sample_eligibility_response_data_label_sample_product_sample_sku_list_unavailable_reason import (
-    CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReason,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -32,10 +29,9 @@ class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList:
         sale_properties (list[CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty] |
             Unset): The SKU property information.
         is_available (bool | Unset): Whether this SKU is available for the creator to apply for as a sample.
-        unavailable_reason (CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReason |
-            Unset): The reason code associated with SKU sample availability. Interpret a specific unavailability reason only
-            when `is_available` is `false`. `UNKNOWN` can also be returned when `is_available` is `true` because no
-            unavailability reason applies.
+        unavailable_reason (str | Unset): The reason code associated with SKU sample availability. Interpret a specific
+            unavailability reason only when `is_available` is `false`. `UNKNOWN` can also be returned when `is_available` is
+            `true` because no unavailability reason applies.
             Possible values:
             - IS_PREORDER: The product is a preorder product and does not support free samples.
             - IS_GIFT: The product is a gift and does not support free samples.
@@ -52,9 +48,7 @@ class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList:
         list[CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListSaleProperty] | Unset
     ) = UNSET
     is_available: bool | Unset = UNSET
-    unavailable_reason: (
-        CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReason | Unset
-    ) = UNSET
+    unavailable_reason: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -75,9 +69,7 @@ class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList:
 
         is_available = self.is_available
 
-        unavailable_reason: str | Unset = UNSET
-        if not isinstance(self.unavailable_reason, Unset):
-            unavailable_reason = self.unavailable_reason.value
+        unavailable_reason = self.unavailable_reason
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -133,18 +125,7 @@ class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList:
 
         is_available = d.pop("is_available", UNSET)
 
-        _unavailable_reason = d.pop("unavailable_reason", UNSET)
-        unavailable_reason: (
-            CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReason | Unset
-        )
-        if isinstance(_unavailable_reason, Unset):
-            unavailable_reason = UNSET
-        else:
-            unavailable_reason = (
-                CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReason(
-                    _unavailable_reason
-                )
-            )
+        unavailable_reason = d.pop("unavailable_reason", UNSET)
 
         check_creator_sample_eligibility_response_data_label_sample_product_sample_sku_list = cls(
             id=id,

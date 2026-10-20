@@ -63,10 +63,10 @@ export interface SearchFBTInventoryRecordResponseDataInventoryRecord {
      * Possible values: 
      * - NORMAL 
      * - DEFECTIVE
-     * @type {SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum}
+     * @type {string}
      * @memberof SearchFBTInventoryRecordResponseDataInventoryRecord
      */
-    inventoryGoodsType?: SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum;
+    inventoryGoodsType?: string;
     /**
      * The number of goods units physically in the Fulfilled by TikTok warehouse before current inventory change, excluding those in transit.
      * @type {number}
@@ -86,17 +86,6 @@ export interface SearchFBTInventoryRecordResponseDataInventoryRecord {
      */
     changedQuantity?: number;
 }
-
-
-/**
- * @export
- */
-export const SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum = {
-    Normal: 'NORMAL',
-    Defective: 'DEFECTIVE'
-} as const;
-export type SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum = typeof SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum[keyof typeof SearchFBTInventoryRecordResponseDataInventoryRecordInventoryGoodsTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchFBTInventoryRecordResponseDataInventoryRecord interface.

@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shoppable_video_status_response_data_video_post_status import (
-    GetShoppableVideoStatusResponseDataVideoPostStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetShoppableVideoStatusResponseDataVideo")
@@ -19,7 +16,7 @@ class GetShoppableVideoStatusResponseDataVideo:
     """
     Attributes:
         id (str | Unset): Video id
-        post_status (GetShoppableVideoStatusResponseDataVideoPostStatus | Unset): Video posting status. Possible values:
+        post_status (str | Unset): Video posting status. Possible values:
             - SUCCESS: The video was posted successfully.
             - FAIL: The video failed to post.
             - PROCESSING: The video is still being processed. Call this API again later to get the latest status.
@@ -28,16 +25,14 @@ class GetShoppableVideoStatusResponseDataVideo:
     """
 
     id: str | Unset = UNSET
-    post_status: GetShoppableVideoStatusResponseDataVideoPostStatus | Unset = UNSET
+    post_status: str | Unset = UNSET
     post_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        post_status: str | Unset = UNSET
-        if not isinstance(self.post_status, Unset):
-            post_status = self.post_status.value
+        post_status = self.post_status
 
         post_time = self.post_time
 
@@ -58,12 +53,7 @@ class GetShoppableVideoStatusResponseDataVideo:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _post_status = d.pop("post_status", UNSET)
-        post_status: GetShoppableVideoStatusResponseDataVideoPostStatus | Unset
-        if isinstance(_post_status, Unset):
-            post_status = UNSET
-        else:
-            post_status = GetShoppableVideoStatusResponseDataVideoPostStatus(_post_status)
+        post_status = d.pop("post_status", UNSET)
 
         post_time = d.pop("post_time", UNSET)
 

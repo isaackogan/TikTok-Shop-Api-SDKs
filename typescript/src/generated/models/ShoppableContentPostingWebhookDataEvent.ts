@@ -25,18 +25,18 @@ export interface ShoppableContentPostingWebhookDataEvent {
      *  * `ADD`: Add the product. 
      *  * `UPDATE`: Update the product. 
      *  * `REMOVE`: Remove the product.
-     * @type {ShoppableContentPostingWebhookDataEventTypeEnum}
+     * @type {string}
      * @memberof ShoppableContentPostingWebhookDataEvent
      */
-    type?: ShoppableContentPostingWebhookDataEventTypeEnum;
+    type?: string;
     /**
      * The scene where the creator promotes the product. The possible enumerations are: 
      *   
      *  * `VIDEO`: short video.
-     * @type {ShoppableContentPostingWebhookDataEventSceneEnum}
+     * @type {string}
      * @memberof ShoppableContentPostingWebhookDataEvent
      */
-    scene?: ShoppableContentPostingWebhookDataEventSceneEnum;
+    scene?: string;
     /**
      * The ID of the short video.
      * @type {string}
@@ -44,26 +44,6 @@ export interface ShoppableContentPostingWebhookDataEvent {
      */
     contentId?: string;
 }
-
-
-/**
- * @export
- */
-export const ShoppableContentPostingWebhookDataEventTypeEnum = {
-    Add: 'ADD',
-    Update: 'UPDATE',
-    Remove: 'REMOVE'
-} as const;
-export type ShoppableContentPostingWebhookDataEventTypeEnum = typeof ShoppableContentPostingWebhookDataEventTypeEnum[keyof typeof ShoppableContentPostingWebhookDataEventTypeEnum];
-
-/**
- * @export
- */
-export const ShoppableContentPostingWebhookDataEventSceneEnum = {
-    Video: 'VIDEO'
-} as const;
-export type ShoppableContentPostingWebhookDataEventSceneEnum = typeof ShoppableContentPostingWebhookDataEventSceneEnum[keyof typeof ShoppableContentPostingWebhookDataEventSceneEnum];
-
 
 /**
  * Check if a given object implements the ShoppableContentPostingWebhookDataEvent interface.

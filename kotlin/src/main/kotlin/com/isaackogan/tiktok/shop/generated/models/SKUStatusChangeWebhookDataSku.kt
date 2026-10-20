@@ -43,35 +43,14 @@ data class SKUStatusChangeWebhookDataSku (
 
     /* The new SKU status. Possible values: `CREATED`, `DELETED`, `ACTIVATED`, `DEACTIVATED`. */
     @SerializedName("status")
-    val status: SKUStatusChangeWebhookDataSku.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The source of deactivation. This field is returned only when `status` is `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`. */
     @SerializedName("deactivation_source")
-    val deactivationSource: SKUStatusChangeWebhookDataSku.DeactivationSource? = null
+    val deactivationSource: kotlin.String? = null
 
 ) {
 
-    /**
-     * The new SKU status. Possible values: `CREATED`, `DELETED`, `ACTIVATED`, `DEACTIVATED`.
-     *
-     * Values: CREATED,DELETED,ACTIVATED,DEACTIVATED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "CREATED") CREATED("CREATED"),
-        @SerializedName(value = "DELETED") DELETED("DELETED"),
-        @SerializedName(value = "ACTIVATED") ACTIVATED("ACTIVATED"),
-        @SerializedName(value = "DEACTIVATED") DEACTIVATED("DEACTIVATED");
-    }
-    /**
-     * The source of deactivation. This field is returned only when `status` is `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`.
-     *
-     * Values: SELLER,PLATFORM,COMBO_RELATION
-     */
-    enum class DeactivationSource(val value: kotlin.String) {
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "PLATFORM") PLATFORM("PLATFORM"),
-        @SerializedName(value = "COMBO_RELATION") COMBO_RELATION("COMBO_RELATION");
-    }
 
 }
 

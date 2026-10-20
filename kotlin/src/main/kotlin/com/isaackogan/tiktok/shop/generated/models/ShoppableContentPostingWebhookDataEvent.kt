@@ -39,11 +39,11 @@ data class ShoppableContentPostingWebhookDataEvent (
 
     /* The action which the creator takes to the product promoted in the video or live stream. The possible enumerations are:      * `ADD`: Add the product.   * `UPDATE`: Update the product.   * `REMOVE`: Remove the product. */
     @SerializedName("type")
-    val type: ShoppableContentPostingWebhookDataEvent.Type? = null,
+    val type: kotlin.String? = null,
 
     /* The scene where the creator promotes the product. The possible enumerations are:      * `VIDEO`: short video. */
     @SerializedName("scene")
-    val scene: ShoppableContentPostingWebhookDataEvent.Scene? = null,
+    val scene: kotlin.String? = null,
 
     /* The ID of the short video. */
     @SerializedName("content_id")
@@ -51,24 +51,6 @@ data class ShoppableContentPostingWebhookDataEvent (
 
 ) {
 
-    /**
-     * The action which the creator takes to the product promoted in the video or live stream. The possible enumerations are:      * `ADD`: Add the product.   * `UPDATE`: Update the product.   * `REMOVE`: Remove the product.
-     *
-     * Values: ADD,UPDATE,REMOVE
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "ADD") ADD("ADD"),
-        @SerializedName(value = "UPDATE") UPDATE("UPDATE"),
-        @SerializedName(value = "REMOVE") REMOVE("REMOVE");
-    }
-    /**
-     * The scene where the creator promotes the product. The possible enumerations are:      * `VIDEO`: short video.
-     *
-     * Values: VIDEO
-     */
-    enum class Scene(val value: kotlin.String) {
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO");
-    }
 
 }
 

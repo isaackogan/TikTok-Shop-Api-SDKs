@@ -37,22 +37,10 @@ data class GetActivityResponseDataTargetUserInfo (
 
     /* The targeted user type. Possible values: - `ALL_USER` - `SHOP_NEW_CUSTOMER` - `SHOP_EXISTING_CUSTOMER` - `SHOP_REPEAT_CUSTOMER` - `SHOP_ABANDONED_CHECKOUTS_CUSTOMER` */
     @SerializedName("user_type")
-    val userType: GetActivityResponseDataTargetUserInfo.UserType? = null
+    val userType: kotlin.String? = null
 
 ) {
 
-    /**
-     * The targeted user type. Possible values: - `ALL_USER` - `SHOP_NEW_CUSTOMER` - `SHOP_EXISTING_CUSTOMER` - `SHOP_REPEAT_CUSTOMER` - `SHOP_ABANDONED_CHECKOUTS_CUSTOMER`
-     *
-     * Values: ALL_USER,SHOP_NEW_CUSTOMER,SHOP_EXISTING_CUSTOMER,SHOP_REPEAT_CUSTOMER,SHOP_ABANDONED_CHECKOUTS_CUSTOMER
-     */
-    enum class UserType(val value: kotlin.String) {
-        @SerializedName(value = "ALL_USER") ALL_USER("ALL_USER"),
-        @SerializedName(value = "SHOP_NEW_CUSTOMER") SHOP_NEW_CUSTOMER("SHOP_NEW_CUSTOMER"),
-        @SerializedName(value = "SHOP_EXISTING_CUSTOMER") SHOP_EXISTING_CUSTOMER("SHOP_EXISTING_CUSTOMER"),
-        @SerializedName(value = "SHOP_REPEAT_CUSTOMER") SHOP_REPEAT_CUSTOMER("SHOP_REPEAT_CUSTOMER"),
-        @SerializedName(value = "SHOP_ABANDONED_CHECKOUTS_CUSTOMER") SHOP_ABANDONED_CHECKOUTS_CUSTOMER("SHOP_ABANDONED_CHECKOUTS_CUSTOMER");
-    }
 
 }
 

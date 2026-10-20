@@ -55,78 +55,10 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecordOrder {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The type of order. Possible values: - INBOUND_ORDER - RETURN_TO_SUPPLIER_ORDER - DISPOSAL - INVENTORY_STATUS_ADJUSTMENT_ORDER - CONSIGN_ORDER - INVENTORY_COUNT_ORDER - FAILED_DELIVERY - CUSTOMER_RETURN - INVENTORY_QUANTITY_ADJUSTMENT_ORDER - INVENTORY_TRANSFER_ORDER
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    INBOUND_ORDER("INBOUND_ORDER"),
-    
-    RETURN_TO_SUPPLIER_ORDER("RETURN_TO_SUPPLIER_ORDER"),
-    
-    DISPOSAL("DISPOSAL"),
-    
-    INVENTORY_STATUS_ADJUSTMENT_ORDER("INVENTORY_STATUS_ADJUSTMENT_ORDER"),
-    
-    CONSIGN_ORDER("CONSIGN_ORDER"),
-    
-    INVENTORY_COUNT_ORDER("INVENTORY_COUNT_ORDER"),
-    
-    FAILED_DELIVERY("FAILED_DELIVERY"),
-    
-    CUSTOMER_RETURN("CUSTOMER_RETURN"),
-    
-    INVENTORY_QUANTITY_ADJUSTMENT_ORDER("INVENTORY_QUANTITY_ADJUSTMENT_ORDER"),
-    
-    INVENTORY_TRANSFER_ORDER("INVENTORY_TRANSFER_ORDER");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public SearchFBTInventoryRecordResponseDataInventoryRecordOrder() {
   }
@@ -150,7 +82,7 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecordOrder {
   }
 
 
-  public SearchFBTInventoryRecordResponseDataInventoryRecordOrder type(@javax.annotation.Nullable TypeEnum type) {
+  public SearchFBTInventoryRecordResponseDataInventoryRecordOrder type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -160,11 +92,11 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecordOrder {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -282,10 +214,6 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecordOrder {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 

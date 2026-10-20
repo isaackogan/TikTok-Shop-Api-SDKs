@@ -39,7 +39,7 @@ data class PreSale (
 
     /* The type of pre-sale. Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a release date. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a duration. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.  **UK, EU, SEA, JP, and LATAM** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration. */
     @SerializedName("type")
-    val type: PreSale.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Information about the type of pre-sale order fulfillment and the corresponding timeframe. - `handling_duration_days` is for fulfillment with an extended duration. - `release_date` is for starting fulfillment on a fixed date.  **Note**: Provide either the `handling_duration_days` or the `release_date`, depending on the value of `pre_sale.type` and your shop's region. */
     @SerializedName("fulfillment_type")
@@ -47,16 +47,6 @@ data class PreSale (
 
 ) {
 
-    /**
-     * The type of pre-sale. Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a release date. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a duration. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.  **UK, EU, SEA, JP, and LATAM** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration.
-     *
-     * Values: PRE_ORDER,MADE_TO_ORDER,CUSTOM
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER"),
-        @SerializedName(value = "CUSTOM") CUSTOM("CUSTOM");
-    }
 
 }
 

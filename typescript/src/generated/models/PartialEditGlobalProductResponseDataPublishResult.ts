@@ -45,19 +45,19 @@ export interface PartialEditGlobalProductResponseDataPublishResult {
      * - TH: Thailand
      * - US: United States
      * - VN: Vietnam
-     * @type {PartialEditGlobalProductResponseDataPublishResultRegionEnum}
+     * @type {string}
      * @memberof PartialEditGlobalProductResponseDataPublishResult
      */
-    region?: PartialEditGlobalProductResponseDataPublishResultRegionEnum;
+    region?: string;
     /**
      * The status of syncing the product to the market.
      * Possible values:
      * - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product status change](650956aff1fd3102b90b6261) webhook to track subsequent audit status changes and completion.
      * - FAILED: Synchronization of the global product to the local shop was unsuccessful.
-     * @type {PartialEditGlobalProductResponseDataPublishResultStatusEnum}
+     * @type {string}
      * @memberof PartialEditGlobalProductResponseDataPublishResult
      */
-    status?: PartialEditGlobalProductResponseDataPublishResultStatusEnum;
+    status?: string;
     /**
      * The list of errors that occurred.
      * @type {Array<FailReason>}
@@ -65,39 +65,6 @@ export interface PartialEditGlobalProductResponseDataPublishResult {
      */
     failReasons?: Array<FailReason>;
 }
-
-
-/**
- * @export
- */
-export const PartialEditGlobalProductResponseDataPublishResultRegionEnum = {
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    Mx: 'MX',
-    My: 'MY',
-    Ph: 'PH',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN'
-} as const;
-export type PartialEditGlobalProductResponseDataPublishResultRegionEnum = typeof PartialEditGlobalProductResponseDataPublishResultRegionEnum[keyof typeof PartialEditGlobalProductResponseDataPublishResultRegionEnum];
-
-/**
- * @export
- */
-export const PartialEditGlobalProductResponseDataPublishResultStatusEnum = {
-    Success: 'SUCCESS',
-    Failed: 'FAILED'
-} as const;
-export type PartialEditGlobalProductResponseDataPublishResultStatusEnum = typeof PartialEditGlobalProductResponseDataPublishResultStatusEnum[keyof typeof PartialEditGlobalProductResponseDataPublishResultStatusEnum];
-
 
 /**
  * Check if a given object implements the PartialEditGlobalProductResponseDataPublishResult interface.

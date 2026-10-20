@@ -38,7 +38,7 @@ data class GenderDistribution (
 
     /* Viewer gender. Possible values:  - MALE: male viewers  - FEMALE: female viewers */
     @SerializedName("gender")
-    val gender: GenderDistribution.Gender? = null,
+    val gender: kotlin.String? = null,
 
     /* Proportion for the corresponding gender within this viewer profile, expressed as a decimal fraction. */
     @SerializedName("percentage")
@@ -46,15 +46,6 @@ data class GenderDistribution (
 
 ) {
 
-    /**
-     * Viewer gender. Possible values:  - MALE: male viewers  - FEMALE: female viewers
-     *
-     * Values: MALE,FEMALE
-     */
-    enum class Gender(val value: kotlin.String) {
-        @SerializedName(value = "MALE") MALE("MALE"),
-        @SerializedName(value = "FEMALE") FEMALE("FEMALE");
-    }
 
 }
 

@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.pre_sale_type import PreSaleType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -20,7 +19,7 @@ T = TypeVar("T", bound="PreSale")
 class PreSale:
     """
     Attributes:
-        type_ (PreSaleType | Unset): The type of pre-sale.
+        type_ (str | Unset): The type of pre-sale.
             Possible values based on the region:
             **US**
             - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a release
@@ -36,14 +35,12 @@ class PreSale:
         fulfillment_type (FulfillmentType | Unset):
     """
 
-    type_: PreSaleType | Unset = UNSET
+    type_: str | Unset = UNSET
     fulfillment_type: FulfillmentType | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         fulfillment_type: dict[str, Any] | Unset = UNSET
         if not isinstance(self.fulfillment_type, Unset):
@@ -64,12 +61,7 @@ class PreSale:
         from ..models.fulfillment_type import FulfillmentType  # noqa: PLC0415
 
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: PreSaleType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = PreSaleType(_type_)
+        type_ = d.pop("type", UNSET)
 
         _fulfillment_type = d.pop("fulfillment_type", UNSET)
         fulfillment_type: FulfillmentType | Unset

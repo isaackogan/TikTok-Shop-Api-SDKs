@@ -69,68 +69,10 @@ public class GetFBTWarehouseListResponseDataWarehouse {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * The Fulfilled by TikTok warehouse type. Possible values: - &#x60;PLATFORM_WAREHOUSE&#x60;: A warehouse operated by TikTok. - &#x60;OTHER_WAREHOUSE&#x60;: A warehouse that is not classified as a platform warehouse.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * A warehouse operated by TikTok.
-     */
-    PLATFORM_WAREHOUSE("PLATFORM_WAREHOUSE"),
-    
-    /**
-     * A warehouse that is not classified as a platform warehouse.
-     */
-    OTHER_WAREHOUSE("OTHER_WAREHOUSE");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_SUBSCRIBED = "subscribed";
   @SerializedName(SERIALIZED_NAME_SUBSCRIBED)
@@ -215,7 +157,7 @@ public class GetFBTWarehouseListResponseDataWarehouse {
   }
 
 
-  public GetFBTWarehouseListResponseDataWarehouse type(@javax.annotation.Nullable TypeEnum type) {
+  public GetFBTWarehouseListResponseDataWarehouse type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -225,11 +167,11 @@ public class GetFBTWarehouseListResponseDataWarehouse {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -437,10 +379,6 @@ public class GetFBTWarehouseListResponseDataWarehouse {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if (jsonObj.get("addresses") != null && !jsonObj.get("addresses").isJsonNull()) {
         JsonArray jsonArrayaddresses = jsonObj.getAsJsonArray("addresses");

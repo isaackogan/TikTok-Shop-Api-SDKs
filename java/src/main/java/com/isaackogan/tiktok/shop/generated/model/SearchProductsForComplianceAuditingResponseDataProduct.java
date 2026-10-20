@@ -64,138 +64,10 @@ public class SearchProductsForComplianceAuditingResponseDataProduct {
   @javax.annotation.Nullable
   private String title;
 
-  /**
-   * The regions where the product is sold. Possible values: - BR: Brazil - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam
-   */
-  @JsonAdapter(CountryEnum.Adapter.class)
-  public enum CountryEnum {
-    /**
-     * Brazil
-     */
-    BR("BR"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN");
-
-    private String value;
-
-    CountryEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CountryEnum fromValue(String value) {
-      for (CountryEnum b : CountryEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CountryEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CountryEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CountryEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CountryEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CountryEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_COUNTRY = "country";
   @SerializedName(SERIALIZED_NAME_COUNTRY)
   @javax.annotation.Nullable
-  private CountryEnum country;
+  private String country;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -283,7 +155,7 @@ public class SearchProductsForComplianceAuditingResponseDataProduct {
   }
 
 
-  public SearchProductsForComplianceAuditingResponseDataProduct country(@javax.annotation.Nullable CountryEnum country) {
+  public SearchProductsForComplianceAuditingResponseDataProduct country(@javax.annotation.Nullable String country) {
     this.country = country;
     return this;
   }
@@ -293,11 +165,11 @@ public class SearchProductsForComplianceAuditingResponseDataProduct {
    * @return country
    */
   @javax.annotation.Nullable
-  public CountryEnum getCountry() {
+  public String getCountry() {
     return country;
   }
 
-  public void setCountry(@javax.annotation.Nullable CountryEnum country) {
+  public void setCountry(@javax.annotation.Nullable String country) {
     this.country = country;
   }
 
@@ -633,10 +505,6 @@ public class SearchProductsForComplianceAuditingResponseDataProduct {
       }
       if ((jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) && !jsonObj.get("country").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
-      }
-      // validate the optional field `country`
-      if (jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) {
-        CountryEnum.validateJsonElement(jsonObj.get("country"));
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));

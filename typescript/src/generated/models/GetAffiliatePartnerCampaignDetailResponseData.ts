@@ -114,22 +114,11 @@ export interface GetAffiliatePartnerCampaignDetailResponseData {
      * A list of seller types eligible to register for the campaign. Use this field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values:
      * - LOCAL
      * - CROSS_BORDER
-     * @type {Array<GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum>}
+     * @type {Array<string>}
      * @memberof GetAffiliatePartnerCampaignDetailResponseData
      */
-    targetSellerTypes?: Array<GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum>;
+    targetSellerTypes?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum = {
-    Local: 'LOCAL',
-    CrossBorder: 'CROSS_BORDER'
-} as const;
-export type GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum = typeof GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum[keyof typeof GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesEnum];
-
 
 /**
  * Check if a given object implements the GetAffiliatePartnerCampaignDetailResponseData interface.

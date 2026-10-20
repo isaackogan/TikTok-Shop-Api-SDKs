@@ -39,7 +39,7 @@ data class GetCategoryRulesResponseDataSizeChartMeasurementAndOption (
 
     /* Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements. */
     @SerializedName("measurement_type")
-    val measurementType: GetCategoryRulesResponseDataSizeChartMeasurementAndOption.MeasurementType? = null,
+    val measurementType: kotlin.String? = null,
 
     /* Online measurement options for this group. */
     @SerializedName("options")
@@ -47,16 +47,6 @@ data class GetCategoryRulesResponseDataSizeChartMeasurementAndOption (
 
 ) {
 
-    /**
-     * Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements.
-     *
-     * Values: GENERIC_MEASUREMENTS,BODY_MEASUREMENTS,PRODUCT_MEASUREMENTS
-     */
-    enum class MeasurementType(val value: kotlin.String) {
-        @SerializedName(value = "GENERIC_MEASUREMENTS") GENERIC_MEASUREMENTS("GENERIC_MEASUREMENTS"),
-        @SerializedName(value = "BODY_MEASUREMENTS") BODY_MEASUREMENTS("BODY_MEASUREMENTS"),
-        @SerializedName(value = "PRODUCT_MEASUREMENTS") PRODUCT_MEASUREMENTS("PRODUCT_MEASUREMENTS");
-    }
 
 }
 

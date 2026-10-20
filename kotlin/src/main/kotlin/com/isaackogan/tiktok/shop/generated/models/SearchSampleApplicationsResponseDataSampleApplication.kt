@@ -60,7 +60,7 @@ data class SearchSampleApplicationsResponseDataSampleApplication (
 
     /* The status of sample applications. The possible enumerated values are: - PENDING: The sample application is waiting for the seller's review. - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample. - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package. - CONTENT_PENDING: The creator has received the sample package and is expected to create content. - REJECT_CANCELLED: The sample application has been rejected by the seller. - OVERDUE_CANCELLED: The sample application has expired due to being overdue. - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe. - DEL_OPEN_COLLAB: The open collaboration plan has been deleted. - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe. - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it. - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator's control, making it impossible to create content. - OPS_CANCELLED: The application was manually cancelled by operations staff. - OPS_FAILED: The application was marked as failed by operations staff. - OPS_COMPLETED: The application was manually marked as completed by operations staff. - COMPLETED: The application is complete, and the creator has finished creating the content. */
     @SerializedName("status")
-    val status: SearchSampleApplicationsResponseDataSampleApplication.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The sample order is generated after the sample application is approved by seller */
     @SerializedName("order_id")
@@ -84,7 +84,7 @@ data class SearchSampleApplicationsResponseDataSampleApplication (
 
     /* It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation. */
     @SerializedName("fulfillment_status")
-    val fulfillmentStatus: SearchSampleApplicationsResponseDataSampleApplication.FulfillmentStatus? = null,
+    val fulfillmentStatus: kotlin.String? = null,
 
     /* The sample application can be approved or not. */
     @SerializedName("is_approvable")
@@ -108,43 +108,6 @@ data class SearchSampleApplicationsResponseDataSampleApplication (
 
 ) {
 
-    /**
-     * The status of sample applications. The possible enumerated values are: - PENDING: The sample application is waiting for the seller's review. - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample. - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package. - CONTENT_PENDING: The creator has received the sample package and is expected to create content. - REJECT_CANCELLED: The sample application has been rejected by the seller. - OVERDUE_CANCELLED: The sample application has expired due to being overdue. - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe. - DEL_OPEN_COLLAB: The open collaboration plan has been deleted. - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe. - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it. - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator's control, making it impossible to create content. - OPS_CANCELLED: The application was manually cancelled by operations staff. - OPS_FAILED: The application was marked as failed by operations staff. - OPS_COMPLETED: The application was manually marked as completed by operations staff. - COMPLETED: The application is complete, and the creator has finished creating the content.
-     *
-     * Values: PENDING,AWAITING_SHIPMENT,SHIPPED,CONTENT_PENDING,REJECT_CANCELLED,OVERDUE_CANCELLED,UNFULFILL_CANCELLED,DEL_OPEN_COLLAB,SELLER_NOT_SHIP_CANCELLED,WITHDRAW_CANCELLED,UNFULFILLABLE_CANCELLED,OPS_CANCELLED,OPS_FAILED,OPS_COMPLETED,COMPLETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "AWAITING_SHIPMENT") AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-        @SerializedName(value = "SHIPPED") SHIPPED("SHIPPED"),
-        @SerializedName(value = "CONTENT_PENDING") CONTENT_PENDING("CONTENT_PENDING"),
-        @SerializedName(value = "REJECT_CANCELLED") REJECT_CANCELLED("REJECT_CANCELLED"),
-        @SerializedName(value = "OVERDUE_CANCELLED") OVERDUE_CANCELLED("OVERDUE_CANCELLED"),
-        @SerializedName(value = "UNFULFILL_CANCELLED") UNFULFILL_CANCELLED("UNFULFILL_CANCELLED"),
-        @SerializedName(value = "DEL_OPEN_COLLAB") DEL_OPEN_COLLAB("DEL_OPEN_COLLAB"),
-        @SerializedName(value = "SELLER_NOT_SHIP_CANCELLED") SELLER_NOT_SHIP_CANCELLED("SELLER_NOT_SHIP_CANCELLED"),
-        @SerializedName(value = "WITHDRAW_CANCELLED") WITHDRAW_CANCELLED("WITHDRAW_CANCELLED"),
-        @SerializedName(value = "UNFULFILLABLE_CANCELLED") UNFULFILLABLE_CANCELLED("UNFULFILLABLE_CANCELLED"),
-        @SerializedName(value = "OPS_CANCELLED") OPS_CANCELLED("OPS_CANCELLED"),
-        @SerializedName(value = "OPS_FAILED") OPS_FAILED("OPS_FAILED"),
-        @SerializedName(value = "OPS_COMPLETED") OPS_COMPLETED("OPS_COMPLETED"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED");
-    }
-    /**
-     * It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-     *
-     * Values: PENDING,ONGOING,SUCCEED,FAILED,OVERDUE,SUSPEND,CANCELLED,EXEMPTED
-     */
-    enum class FulfillmentStatus(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "ONGOING") ONGOING("ONGOING"),
-        @SerializedName(value = "SUCCEED") SUCCEED("SUCCEED"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "OVERDUE") OVERDUE("OVERDUE"),
-        @SerializedName(value = "SUSPEND") SUSPEND("SUSPEND"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED"),
-        @SerializedName(value = "EXEMPTED") EXEMPTED("EXEMPTED");
-    }
 
 }
 

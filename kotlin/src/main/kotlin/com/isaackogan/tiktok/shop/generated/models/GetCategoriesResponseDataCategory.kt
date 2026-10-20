@@ -57,21 +57,10 @@ data class GetCategoriesResponseDataCategory (
 
     /* The shop's permission statuses for this category. Possible values: - `AVAILABLE`: None of the category-permission restrictions listed below applies to this category. To create or edit a product in the category, `is_leaf` must be `true`. - `INVITE_ONLY`: This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, `INVITE_ONLY` is also known as \"restricted\". - `NON_MAIN_CATEGORY`: This category is out of scope for this shop, and you do not have permission to use it. Contact your account manager for assistance. - `PROHIBITED`: This category is prohibited on TikTok Shop. Do not attempt to list products in this category as they will be rejected during audit. Applicable only for BR, MX, EU and SEA markets. */
     @SerializedName("permission_statuses")
-    val permissionStatuses: kotlin.collections.List<GetCategoriesResponseDataCategory.PermissionStatuses>? = null
+    val permissionStatuses: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The shop's permission statuses for this category. Possible values: - `AVAILABLE`: None of the category-permission restrictions listed below applies to this category. To create or edit a product in the category, `is_leaf` must be `true`. - `INVITE_ONLY`: This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, `INVITE_ONLY` is also known as \"restricted\". - `NON_MAIN_CATEGORY`: This category is out of scope for this shop, and you do not have permission to use it. Contact your account manager for assistance. - `PROHIBITED`: This category is prohibited on TikTok Shop. Do not attempt to list products in this category as they will be rejected during audit. Applicable only for BR, MX, EU and SEA markets.
-     *
-     * Values: AVAILABLE,INVITE_ONLY,NON_MAIN_CATEGORY,PROHIBITED
-     */
-    enum class PermissionStatuses(val value: kotlin.String) {
-        @SerializedName(value = "AVAILABLE") AVAILABLE("AVAILABLE"),
-        @SerializedName(value = "INVITE_ONLY") INVITE_ONLY("INVITE_ONLY"),
-        @SerializedName(value = "NON_MAIN_CATEGORY") NON_MAIN_CATEGORY("NON_MAIN_CATEGORY"),
-        @SerializedName(value = "PROHIBITED") PROHIBITED("PROHIBITED");
-    }
 
 }
 

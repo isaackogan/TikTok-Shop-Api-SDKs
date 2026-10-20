@@ -55,83 +55,10 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
   @javax.annotation.Nullable
   private String weight;
 
-  /**
-   * The unit used for the carton&#39;s &#x60;weight&#x60; value.  **Possible values:** * &#x60;KILOGRAM&#x60; (kg) * &#x60;GRAM&#x60; (g) * &#x60;MILLIGRAM&#x60; (mg) * &#x60;POUNDS&#x60; (lbs) * &#x60;OUNCE&#x60; (oz)
-   */
-  @JsonAdapter(WeightUnitEnum.Adapter.class)
-  public enum WeightUnitEnum {
-    /**
-     * kg
-     */
-    KILOGRAM("KILOGRAM"),
-    
-    /**
-     * g
-     */
-    GRAM("GRAM"),
-    
-    /**
-     * mg
-     */
-    MILLIGRAM("MILLIGRAM"),
-    
-    /**
-     * lbs
-     */
-    POUNDS("POUNDS"),
-    
-    /**
-     * oz
-     */
-    OUNCE("OUNCE");
-
-    private String value;
-
-    WeightUnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static WeightUnitEnum fromValue(String value) {
-      for (WeightUnitEnum b : WeightUnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<WeightUnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final WeightUnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public WeightUnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return WeightUnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      WeightUnitEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_WEIGHT_UNIT = "weight_unit";
   @SerializedName(SERIALIZED_NAME_WEIGHT_UNIT)
   @javax.annotation.Nullable
-  private WeightUnitEnum weightUnit;
+  private String weightUnit;
 
   public static final String SERIALIZED_NAME_WIDTH = "width";
   @SerializedName(SERIALIZED_NAME_WIDTH)
@@ -148,88 +75,10 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
   @javax.annotation.Nullable
   private String length;
 
-  /**
-   * The unit used for the carton&#39;s &#x60;length&#x60;, &#x60;width&#x60;, and &#x60;height&#x60; values.  **Possible values:** * &#x60;METER&#x60; (m) * &#x60;CENTIMETER&#x60; (cm) * &#x60;MILLIMETER&#x60; (mm) * &#x60;FOOT&#x60; (ft) * &#x60;MICRON&#x60; (μm) * &#x60;INCH&#x60; (in)
-   */
-  @JsonAdapter(LengthUnitEnum.Adapter.class)
-  public enum LengthUnitEnum {
-    /**
-     * m
-     */
-    METER("METER"),
-    
-    /**
-     * cm
-     */
-    CENTIMETER("CENTIMETER"),
-    
-    /**
-     * mm
-     */
-    MILLIMETER("MILLIMETER"),
-    
-    /**
-     * ft
-     */
-    FOOT("FOOT"),
-    
-    /**
-     * μm
-     */
-    MICRON("MICRON"),
-    
-    /**
-     * in
-     */
-    INCH("INCH");
-
-    private String value;
-
-    LengthUnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static LengthUnitEnum fromValue(String value) {
-      for (LengthUnitEnum b : LengthUnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<LengthUnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final LengthUnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public LengthUnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return LengthUnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      LengthUnitEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LENGTH_UNIT = "length_unit";
   @SerializedName(SERIALIZED_NAME_LENGTH_UNIT)
   @javax.annotation.Nullable
-  private LengthUnitEnum lengthUnit;
+  private String lengthUnit;
 
   public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement() {
   }
@@ -253,7 +102,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement weightUnit(@javax.annotation.Nullable WeightUnitEnum weightUnit) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement weightUnit(@javax.annotation.Nullable String weightUnit) {
     this.weightUnit = weightUnit;
     return this;
   }
@@ -263,11 +112,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
    * @return weightUnit
    */
   @javax.annotation.Nullable
-  public WeightUnitEnum getWeightUnit() {
+  public String getWeightUnit() {
     return weightUnit;
   }
 
-  public void setWeightUnit(@javax.annotation.Nullable WeightUnitEnum weightUnit) {
+  public void setWeightUnit(@javax.annotation.Nullable String weightUnit) {
     this.weightUnit = weightUnit;
   }
 
@@ -329,7 +178,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement lengthUnit(@javax.annotation.Nullable LengthUnitEnum lengthUnit) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement lengthUnit(@javax.annotation.Nullable String lengthUnit) {
     this.lengthUnit = lengthUnit;
     return this;
   }
@@ -339,11 +188,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
    * @return lengthUnit
    */
   @javax.annotation.Nullable
-  public LengthUnitEnum getLengthUnit() {
+  public String getLengthUnit() {
     return lengthUnit;
   }
 
-  public void setLengthUnit(@javax.annotation.Nullable LengthUnitEnum lengthUnit) {
+  public void setLengthUnit(@javax.annotation.Nullable String lengthUnit) {
     this.lengthUnit = lengthUnit;
   }
 
@@ -470,10 +319,6 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
       if ((jsonObj.get("weight_unit") != null && !jsonObj.get("weight_unit").isJsonNull()) && !jsonObj.get("weight_unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `weight_unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("weight_unit").toString()));
       }
-      // validate the optional field `weight_unit`
-      if (jsonObj.get("weight_unit") != null && !jsonObj.get("weight_unit").isJsonNull()) {
-        WeightUnitEnum.validateJsonElement(jsonObj.get("weight_unit"));
-      }
       if ((jsonObj.get("width") != null && !jsonObj.get("width").isJsonNull()) && !jsonObj.get("width").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `width` to be a primitive type in the JSON string but got `%s`", jsonObj.get("width").toString()));
       }
@@ -485,10 +330,6 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMea
       }
       if ((jsonObj.get("length_unit") != null && !jsonObj.get("length_unit").isJsonNull()) && !jsonObj.get("length_unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `length_unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("length_unit").toString()));
-      }
-      // validate the optional field `length_unit`
-      if (jsonObj.get("length_unit") != null && !jsonObj.get("length_unit").isJsonNull()) {
-        LengthUnitEnum.validateJsonElement(jsonObj.get("length_unit"));
       }
   }
 

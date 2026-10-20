@@ -40,7 +40,7 @@ data class GetProductResponseDataAuditFailedReason (
 
     /* The platform for listing the product. Possible values: - TIKTOK_SHOP - TOKOPEDIA */
     @SerializedName("listing_platform")
-    val listingPlatform: GetProductResponseDataAuditFailedReason.ListingPlatform? = null,
+    val listingPlatform: kotlin.String? = null,
 
     /* The audit failure reason name. */
     @SerializedName("position")
@@ -56,15 +56,6 @@ data class GetProductResponseDataAuditFailedReason (
 
 ) {
 
-    /**
-     * The platform for listing the product. Possible values: - TIKTOK_SHOP - TOKOPEDIA
-     *
-     * Values: TIKTOK_SHOP,TOKOPEDIA
-     */
-    enum class ListingPlatform(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK_SHOP") TIKTOK_SHOP("TIKTOK_SHOP"),
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
 
 }
 

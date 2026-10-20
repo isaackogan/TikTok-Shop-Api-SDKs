@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.remove_promotion_activity_products_response_data_status import (
-    RemovePromotionActivityProductsResponseDataStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RemovePromotionActivityProductsResponseData")
@@ -19,7 +16,7 @@ class RemovePromotionActivityProductsResponseData:
     """
     Attributes:
         activity_id (str | Unset): A unique ID that identifies activities.
-        status (RemovePromotionActivityProductsResponseDataStatus | Unset): Activity status.
+        status (str | Unset): Activity status.
             Possible values:
             - DRAFT: Promotion activities with this status are not available to TikTok users.
             - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
@@ -32,16 +29,14 @@ class RemovePromotionActivityProductsResponseData:
     """
 
     activity_id: str | Unset = UNSET
-    status: RemovePromotionActivityProductsResponseDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         activity_id = self.activity_id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         update_time = self.update_time
 
@@ -62,12 +57,7 @@ class RemovePromotionActivityProductsResponseData:
         d = dict(src_dict)
         activity_id = d.pop("activity_id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: RemovePromotionActivityProductsResponseDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = RemovePromotionActivityProductsResponseDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         update_time = d.pop("update_time", UNSET)
 

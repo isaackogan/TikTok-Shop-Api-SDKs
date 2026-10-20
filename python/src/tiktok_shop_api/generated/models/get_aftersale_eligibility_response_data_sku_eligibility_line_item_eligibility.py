@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_aftersale_eligibility_response_data_sku_eligibility_line_item_eligibility_request_type import (
-    GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,8 +19,7 @@ T = TypeVar("T", bound="GetAftersaleEligibilityResponseDataSkuEligibilityLineIte
 class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility:
     """
     Attributes:
-        request_type (GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestType | Unset):
-            Aftersale request type.
+        request_type (str | Unset): Aftersale request type.
             Possible values:
             - `CANCEL`
             - `REFUND`
@@ -42,7 +38,7 @@ class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility:
             completely backward compatible with the previous `order_line_items_ids` field.
     """
 
-    request_type: GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestType | Unset = UNSET
+    request_type: str | Unset = UNSET
     order_line_items_ids: list[str] | Unset = UNSET
     eligible: bool | Unset = UNSET
     ineligible_code: int | Unset = UNSET
@@ -52,9 +48,7 @@ class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        request_type: str | Unset = UNSET
-        if not isinstance(self.request_type, Unset):
-            request_type = self.request_type.value
+        request_type = self.request_type
 
         order_line_items_ids: list[str] | Unset = UNSET
         if not isinstance(self.order_line_items_ids, Unset):
@@ -102,14 +96,7 @@ class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility:
         from ..models.order_line_list import OrderLineList  # noqa: PLC0415
 
         d = dict(src_dict)
-        _request_type = d.pop("request_type", UNSET)
-        request_type: GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestType | Unset
-        if isinstance(_request_type, Unset):
-            request_type = UNSET
-        else:
-            request_type = GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestType(
-                _request_type
-            )
+        request_type = d.pop("request_type", UNSET)
 
         order_line_items_ids = cast(list[str], d.pop("order_line_items_ids", UNSET))
 

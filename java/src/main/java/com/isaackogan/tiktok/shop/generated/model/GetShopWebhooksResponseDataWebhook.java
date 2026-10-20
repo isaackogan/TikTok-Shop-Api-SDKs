@@ -50,143 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetShopWebhooksResponseDataWebhook {
-  /**
-   * The topic of the webhook event. Possible values: - &#x60;ORDER_STATUS_CHANGE&#x60;: Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a). - &#x60;RECIPIENT_ADDRESS_UPDATE&#x60;: Triggers when the recipient&#39;s address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9). - &#x60;PACKAGE_UPDATE&#x60;: Triggers when a package is updated (e.g., combined, split, or address changed). See [Package update](650955cabace3e02b73cc886). - &#x60;PRODUCT_STATUS_CHANGE&#x60;: Triggers when product audit results are updated. See [Product status change](650956aff1fd3102b90b6261). - &#x60;SELLER_DEAUTHORIZATION&#x60;: Triggers when a seller is deauthorized to inform developers and avoid misunderstandings about platform authorization issues. See [Seller deauthorization](65095746defece02be4d749d). - &#x60;UPCOMING_AUTHORIZATION_EXPIRATION&#x60;: Triggers 30 days before authorization expiration, with daily notifications at 0:00 until re-authorization is completed. See [Upcoming authorization expiration](6509579c0fcef602bf11312c). - &#x60;CANCELLATION_STATUS_CHANGE&#x60;: Triggers when an order&#39;s cancellation status changes. See [Cancellation status change](65030150746462028285f657). - &#x60;RETURN_STATUS_CHANGE&#x60;: Triggers when an order&#39;s return status changes. See [Return status change](65030162bb2a4d028d50cc51). - &#x60;NEW_CONVERSATION&#x60;: Triggers when a customer service agent joins or leaves a conversation. See [New conversation](6614330bfe9fdc02e002abfd). - &#x60;NEW_MESSAGE&#x60;: Triggers when a new message is sent in a customer service conversation. See [New Message](66143486ef8a1202dc323258). - &#x60;PRODUCT_INFORMATION_CHANGE&#x60;: Triggers when changes to a product&#39;s title, description, main images, or attributes go live. See [Product information change](65d6f41411a60f02dc1cf8bf). - &#x60;PRODUCT_CREATION&#x60;: Triggers when a new product is created. See [Product creation](663c98b566828e02e4515580). - &#x60;PRODUCT_CATEGORY_CHANGE&#x60;: Triggers when the category of a product is changed. See [Product category change](668764a371f16d02eef1f393). - &#x60;NEW_MESSAGE_LISTENER&#x60;: Triggers when a creator sends a message to the seller. See [New message listener](6790b76eb59cf9030997b783). - &#x60;INVOICE_STATUS_CHANGE&#x60;: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d). - &#x60;PRODUCT_AUDIT_STATUS_CHANGE&#x60;: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062). - &#x60;REVERSE_STATUS_UPDATE&#x60;: Triggers when buyer raises cancellation, refund only, or return &amp; refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
-   */
-  @JsonAdapter(EventTypeEnum.Adapter.class)
-  public enum EventTypeEnum {
-    /**
-     * Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a).
-     */
-    ORDER_STATUS_CHANGE("ORDER_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when the recipient&#39;s address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9).
-     */
-    RECIPIENT_ADDRESS_UPDATE("RECIPIENT_ADDRESS_UPDATE"),
-    
-    /**
-     * Triggers when a package is updated (e.g., combined, split, or address changed). See [Package update](650955cabace3e02b73cc886).
-     */
-    PACKAGE_UPDATE("PACKAGE_UPDATE"),
-    
-    /**
-     * Triggers when product audit results are updated. See [Product status change](650956aff1fd3102b90b6261).
-     */
-    PRODUCT_STATUS_CHANGE("PRODUCT_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when a seller is deauthorized to inform developers and avoid misunderstandings about platform authorization issues. See [Seller deauthorization](65095746defece02be4d749d).
-     */
-    SELLER_DEAUTHORIZATION("SELLER_DEAUTHORIZATION"),
-    
-    /**
-     * Triggers 30 days before authorization expiration, with daily notifications at 0:00 until re-authorization is completed. See [Upcoming authorization expiration](6509579c0fcef602bf11312c).
-     */
-    UPCOMING_AUTHORIZATION_EXPIRATION("UPCOMING_AUTHORIZATION_EXPIRATION"),
-    
-    /**
-     * Triggers when an order&#39;s cancellation status changes. See [Cancellation status change](65030150746462028285f657).
-     */
-    CANCELLATION_STATUS_CHANGE("CANCELLATION_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when an order&#39;s return status changes. See [Return status change](65030162bb2a4d028d50cc51).
-     */
-    RETURN_STATUS_CHANGE("RETURN_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when a customer service agent joins or leaves a conversation. See [New conversation](6614330bfe9fdc02e002abfd).
-     */
-    NEW_CONVERSATION("NEW_CONVERSATION"),
-    
-    /**
-     * Triggers when a new message is sent in a customer service conversation. See [New Message](66143486ef8a1202dc323258).
-     */
-    NEW_MESSAGE("NEW_MESSAGE"),
-    
-    /**
-     * Triggers when changes to a product&#39;s title, description, main images, or attributes go live. See [Product information change](65d6f41411a60f02dc1cf8bf).
-     */
-    PRODUCT_INFORMATION_CHANGE("PRODUCT_INFORMATION_CHANGE"),
-    
-    /**
-     * Triggers when a new product is created. See [Product creation](663c98b566828e02e4515580).
-     */
-    PRODUCT_CREATION("PRODUCT_CREATION"),
-    
-    /**
-     * Triggers when the category of a product is changed. See [Product category change](668764a371f16d02eef1f393).
-     */
-    PRODUCT_CATEGORY_CHANGE("PRODUCT_CATEGORY_CHANGE"),
-    
-    /**
-     * Triggers when a creator sends a message to the seller. See [New message listener](6790b76eb59cf9030997b783).
-     */
-    NEW_MESSAGE_LISTENER("NEW_MESSAGE_LISTENER"),
-    
-    /**
-     * Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
-     */
-    INVOICE_STATUS_CHANGE("INVOICE_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
-     */
-    PRODUCT_AUDIT_STATUS_CHANGE("PRODUCT_AUDIT_STATUS_CHANGE"),
-    
-    /**
-     * Triggers when buyer raises cancellation, refund only, or return &amp; refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
-     */
-    REVERSE_STATUS_UPDATE("REVERSE_STATUS_UPDATE");
-
-    private String value;
-
-    EventTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static EventTypeEnum fromValue(String value) {
-      for (EventTypeEnum b : EventTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<EventTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final EventTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public EventTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return EventTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      EventTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_EVENT_TYPE = "event_type";
   @SerializedName(SERIALIZED_NAME_EVENT_TYPE)
   @javax.annotation.Nullable
-  private EventTypeEnum eventType;
+  private String eventType;
 
   public static final String SERIALIZED_NAME_ADDRESS = "address";
   @SerializedName(SERIALIZED_NAME_ADDRESS)
@@ -206,7 +73,7 @@ public class GetShopWebhooksResponseDataWebhook {
   public GetShopWebhooksResponseDataWebhook() {
   }
 
-  public GetShopWebhooksResponseDataWebhook eventType(@javax.annotation.Nullable EventTypeEnum eventType) {
+  public GetShopWebhooksResponseDataWebhook eventType(@javax.annotation.Nullable String eventType) {
     this.eventType = eventType;
     return this;
   }
@@ -216,11 +83,11 @@ public class GetShopWebhooksResponseDataWebhook {
    * @return eventType
    */
   @javax.annotation.Nullable
-  public EventTypeEnum getEventType() {
+  public String getEventType() {
     return eventType;
   }
 
-  public void setEventType(@javax.annotation.Nullable EventTypeEnum eventType) {
+  public void setEventType(@javax.annotation.Nullable String eventType) {
     this.eventType = eventType;
   }
 
@@ -396,10 +263,6 @@ public class GetShopWebhooksResponseDataWebhook {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("event_type") != null && !jsonObj.get("event_type").isJsonNull()) && !jsonObj.get("event_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `event_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("event_type").toString()));
-      }
-      // validate the optional field `event_type`
-      if (jsonObj.get("event_type") != null && !jsonObj.get("event_type").isJsonNull()) {
-        EventTypeEnum.validateJsonElement(jsonObj.get("event_type"));
       }
       if ((jsonObj.get("address") != null && !jsonObj.get("address").isJsonNull()) && !jsonObj.get("address").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `address` to be a primitive type in the JSON string but got `%s`", jsonObj.get("address").toString()));

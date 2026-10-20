@@ -37,10 +37,10 @@ export interface PreSale {
      * 
      * **UK, EU, SEA, JP, and LATAM**
      * - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration.
-     * @type {PreSaleTypeEnum}
+     * @type {string}
      * @memberof PreSale
      */
-    type?: PreSaleTypeEnum;
+    type?: string;
     /**
      * Information about the type of pre-sale order fulfillment and the corresponding timeframe.
      * - `handling_duration_days` is for fulfillment with an extended duration.
@@ -52,18 +52,6 @@ export interface PreSale {
      */
     fulfillmentType?: FulfillmentType;
 }
-
-
-/**
- * @export
- */
-export const PreSaleTypeEnum = {
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER',
-    Custom: 'CUSTOM'
-} as const;
-export type PreSaleTypeEnum = typeof PreSaleTypeEnum[keyof typeof PreSaleTypeEnum];
-
 
 /**
  * Check if a given object implements the PreSale interface.

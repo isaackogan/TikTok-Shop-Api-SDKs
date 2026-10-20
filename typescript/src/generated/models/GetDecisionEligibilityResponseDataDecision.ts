@@ -42,10 +42,10 @@ export interface GetDecisionEligibilityResponseDataDecision {
      * - `REJECT_RECEIVED_PACKAGE`
      * - `REJECT_REPLACEMENT`
      * -`ISSUE_EXCHANGE_REFUND`
-     * @type {GetDecisionEligibilityResponseDataDecisionDecisionEnum}
+     * @type {string}
      * @memberof GetDecisionEligibilityResponseDataDecision
      */
-    decision?: GetDecisionEligibilityResponseDataDecisionDecisionEnum;
+    decision?: string;
     /**
      * Whether this seller decision is currently eligible for the specified aftersales request. `true` means eligible; `false` means ineligible.
      * @type {boolean}
@@ -71,28 +71,6 @@ export interface GetDecisionEligibilityResponseDataDecision {
      */
     availableRejectReasons?: Array<AvailableRejectReason>;
 }
-
-
-/**
- * @export
- */
-export const GetDecisionEligibilityResponseDataDecisionDecisionEnum = {
-    ApproveRequestCancel: 'APPROVE_REQUEST_CANCEL',
-    ApproveRefund: 'APPROVE_REFUND',
-    ApproveReturn: 'APPROVE_RETURN',
-    ApproveReceivedPackage: 'APPROVE_RECEIVED_PACKAGE',
-    ApproveReplacement: 'APPROVE_REPLACEMENT',
-    IssueReplacementRefund: 'ISSUE_REPLACEMENT_REFUND',
-    DirectRefund: 'DIRECT_REFUND',
-    RejectRequestCancel: 'REJECT_REQUEST_CANCEL',
-    RejectRefund: 'REJECT_REFUND',
-    RejectReturn: 'REJECT_RETURN',
-    RejectReceivedPackage: 'REJECT_RECEIVED_PACKAGE',
-    RejectReplacement: 'REJECT_REPLACEMENT',
-    IssueExchangeRefund: 'ISSUE_EXCHANGE_REFUND'
-} as const;
-export type GetDecisionEligibilityResponseDataDecisionDecisionEnum = typeof GetDecisionEligibilityResponseDataDecisionDecisionEnum[keyof typeof GetDecisionEligibilityResponseDataDecisionDecisionEnum];
-
 
 /**
  * Check if a given object implements the GetDecisionEligibilityResponseDataDecision interface.

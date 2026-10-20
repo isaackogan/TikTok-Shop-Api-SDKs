@@ -60,190 +60,20 @@ public class SearchCancellationsResponseDataCancellation {
   @javax.annotation.Nullable
   private String orderId;
 
-  /**
-   * Order cancellation type. Possible values: - &#x60;CANCEL&#x60;: Cancel by seller or system. - &#x60;BUYER_CANCEL&#x60;: Cancel by buyer. Need to be approved by seller or system.
-   */
-  @JsonAdapter(CancelTypeEnum.Adapter.class)
-  public enum CancelTypeEnum {
-    /**
-     * Cancel by seller or system.
-     */
-    CANCEL("CANCEL"),
-    
-    /**
-     * Cancel by buyer. Need to be approved by seller or system.
-     */
-    BUYER_CANCEL("BUYER_CANCEL");
-
-    private String value;
-
-    CancelTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CancelTypeEnum fromValue(String value) {
-      for (CancelTypeEnum b : CancelTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CancelTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CancelTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CancelTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CancelTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CancelTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CANCEL_TYPE = "cancel_type";
   @SerializedName(SERIALIZED_NAME_CANCEL_TYPE)
   @javax.annotation.Nullable
-  private CancelTypeEnum cancelType;
-
-  /**
-   * Order cancellation status. Possible values: - &#x60;CANCELLATION_REQUEST_PENDING&#x60; - &#x60;CANCELLATION_REQUEST_SUCCESS&#x60; - &#x60;CANCELLATION_REQUEST_CANCEL&#x60; - &#x60;CANCELLATION_REQUEST_COMPLETE&#x60;
-   */
-  @JsonAdapter(CancelStatusEnum.Adapter.class)
-  public enum CancelStatusEnum {
-    CANCELLATION_REQUEST_PENDING("CANCELLATION_REQUEST_PENDING"),
-    
-    CANCELLATION_REQUEST_SUCCESS("CANCELLATION_REQUEST_SUCCESS"),
-    
-    CANCELLATION_REQUEST_CANCEL("CANCELLATION_REQUEST_CANCEL"),
-    
-    CANCELLATION_REQUEST_COMPLETE("CANCELLATION_REQUEST_COMPLETE");
-
-    private String value;
-
-    CancelStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CancelStatusEnum fromValue(String value) {
-      for (CancelStatusEnum b : CancelStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CancelStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CancelStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CancelStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CancelStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CancelStatusEnum.fromValue(value);
-    }
-  }
+  private String cancelType;
 
   public static final String SERIALIZED_NAME_CANCEL_STATUS = "cancel_status";
   @SerializedName(SERIALIZED_NAME_CANCEL_STATUS)
   @javax.annotation.Nullable
-  private CancelStatusEnum cancelStatus;
-
-  /**
-   * Order cancellation initiator. Possible values: - &#x60;BUYER&#x60; - &#x60;SELLER&#x60; - &#x60;OPERATOR&#x60; - &#x60;SYSTEM&#x60;
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    BUYER("BUYER"),
-    
-    SELLER("SELLER"),
-    
-    OPERATOR("OPERATOR"),
-    
-    SYSTEM("SYSTEM");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
+  private String cancelStatus;
 
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
+  private String role;
 
   public static final String SERIALIZED_NAME_CANCEL_REASON = "cancel_reason";
   @SerializedName(SERIALIZED_NAME_CANCEL_REASON)
@@ -312,7 +142,7 @@ public class SearchCancellationsResponseDataCancellation {
   }
 
 
-  public SearchCancellationsResponseDataCancellation cancelType(@javax.annotation.Nullable CancelTypeEnum cancelType) {
+  public SearchCancellationsResponseDataCancellation cancelType(@javax.annotation.Nullable String cancelType) {
     this.cancelType = cancelType;
     return this;
   }
@@ -322,16 +152,16 @@ public class SearchCancellationsResponseDataCancellation {
    * @return cancelType
    */
   @javax.annotation.Nullable
-  public CancelTypeEnum getCancelType() {
+  public String getCancelType() {
     return cancelType;
   }
 
-  public void setCancelType(@javax.annotation.Nullable CancelTypeEnum cancelType) {
+  public void setCancelType(@javax.annotation.Nullable String cancelType) {
     this.cancelType = cancelType;
   }
 
 
-  public SearchCancellationsResponseDataCancellation cancelStatus(@javax.annotation.Nullable CancelStatusEnum cancelStatus) {
+  public SearchCancellationsResponseDataCancellation cancelStatus(@javax.annotation.Nullable String cancelStatus) {
     this.cancelStatus = cancelStatus;
     return this;
   }
@@ -341,16 +171,16 @@ public class SearchCancellationsResponseDataCancellation {
    * @return cancelStatus
    */
   @javax.annotation.Nullable
-  public CancelStatusEnum getCancelStatus() {
+  public String getCancelStatus() {
     return cancelStatus;
   }
 
-  public void setCancelStatus(@javax.annotation.Nullable CancelStatusEnum cancelStatus) {
+  public void setCancelStatus(@javax.annotation.Nullable String cancelStatus) {
     this.cancelStatus = cancelStatus;
   }
 
 
-  public SearchCancellationsResponseDataCancellation role(@javax.annotation.Nullable RoleEnum role) {
+  public SearchCancellationsResponseDataCancellation role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -360,11 +190,11 @@ public class SearchCancellationsResponseDataCancellation {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
@@ -692,23 +522,11 @@ public class SearchCancellationsResponseDataCancellation {
       if ((jsonObj.get("cancel_type") != null && !jsonObj.get("cancel_type").isJsonNull()) && !jsonObj.get("cancel_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cancel_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cancel_type").toString()));
       }
-      // validate the optional field `cancel_type`
-      if (jsonObj.get("cancel_type") != null && !jsonObj.get("cancel_type").isJsonNull()) {
-        CancelTypeEnum.validateJsonElement(jsonObj.get("cancel_type"));
-      }
       if ((jsonObj.get("cancel_status") != null && !jsonObj.get("cancel_status").isJsonNull()) && !jsonObj.get("cancel_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cancel_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cancel_status").toString()));
       }
-      // validate the optional field `cancel_status`
-      if (jsonObj.get("cancel_status") != null && !jsonObj.get("cancel_status").isJsonNull()) {
-        CancelStatusEnum.validateJsonElement(jsonObj.get("cancel_status"));
-      }
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
-      }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
       }
       if ((jsonObj.get("cancel_reason") != null && !jsonObj.get("cancel_reason").isJsonNull()) && !jsonObj.get("cancel_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cancel_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cancel_reason").toString()));

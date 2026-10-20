@@ -50,73 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetCouponResponseDataCouponLiveTask {
-  /**
-   * Possible enumerations: - &#x60;NONE&#x60;: Any shopper in the LIVE room may claim the coupon. - &#x60;FOLLOW_HOST&#x60;: Shoppers must follow the LIVE host before being able to claim the coupon. - &#x60;WATCH_FOR_MIN_TIME&#x60;: Shoppers must watch the LIVE for the time specified by &#x60;min_watch_time&#x60; before being able to claim the coupon.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * Any shopper in the LIVE room may claim the coupon.
-     */
-    NONE("NONE"),
-    
-    /**
-     * Shoppers must follow the LIVE host before being able to claim the coupon.
-     */
-    FOLLOW_HOST("FOLLOW_HOST"),
-    
-    /**
-     * Shoppers must watch the LIVE for the time specified by &#x60;min_watch_time&#x60; before being able to claim the coupon.
-     */
-    WATCH_FOR_MIN_TIME("WATCH_FOR_MIN_TIME");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_MIN_WATCH_TIME = "min_watch_time";
   @SerializedName(SERIALIZED_NAME_MIN_WATCH_TIME)
@@ -126,7 +63,7 @@ public class GetCouponResponseDataCouponLiveTask {
   public GetCouponResponseDataCouponLiveTask() {
   }
 
-  public GetCouponResponseDataCouponLiveTask type(@javax.annotation.Nullable TypeEnum type) {
+  public GetCouponResponseDataCouponLiveTask type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -136,11 +73,11 @@ public class GetCouponResponseDataCouponLiveTask {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -274,10 +211,6 @@ public class GetCouponResponseDataCouponLiveTask {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if ((jsonObj.get("min_watch_time") != null && !jsonObj.get("min_watch_time").isJsonNull()) && !jsonObj.get("min_watch_time").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `min_watch_time` to be a primitive type in the JSON string but got `%s`", jsonObj.get("min_watch_time").toString()));

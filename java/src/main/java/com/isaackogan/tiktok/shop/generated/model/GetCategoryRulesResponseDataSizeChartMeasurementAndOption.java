@@ -53,73 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
-  /**
-   * Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements.
-   */
-  @JsonAdapter(MeasurementTypeEnum.Adapter.class)
-  public enum MeasurementTypeEnum {
-    /**
-     * generic measurements for categories that do not distinguish body and product measurements
-     */
-    GENERIC_MEASUREMENTS("GENERIC_MEASUREMENTS"),
-    
-    /**
-     * shopper body measurements
-     */
-    BODY_MEASUREMENTS("BODY_MEASUREMENTS"),
-    
-    /**
-     * finished-product or garment measurements.
-     */
-    PRODUCT_MEASUREMENTS("PRODUCT_MEASUREMENTS");
-
-    private String value;
-
-    MeasurementTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static MeasurementTypeEnum fromValue(String value) {
-      for (MeasurementTypeEnum b : MeasurementTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<MeasurementTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final MeasurementTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public MeasurementTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return MeasurementTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      MeasurementTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_MEASUREMENT_TYPE = "measurement_type";
   @SerializedName(SERIALIZED_NAME_MEASUREMENT_TYPE)
   @javax.annotation.Nullable
-  private MeasurementTypeEnum measurementType;
+  private String measurementType;
 
   public static final String SERIALIZED_NAME_OPTIONS = "options";
   @SerializedName(SERIALIZED_NAME_OPTIONS)
@@ -129,7 +66,7 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
   public GetCategoryRulesResponseDataSizeChartMeasurementAndOption() {
   }
 
-  public GetCategoryRulesResponseDataSizeChartMeasurementAndOption measurementType(@javax.annotation.Nullable MeasurementTypeEnum measurementType) {
+  public GetCategoryRulesResponseDataSizeChartMeasurementAndOption measurementType(@javax.annotation.Nullable String measurementType) {
     this.measurementType = measurementType;
     return this;
   }
@@ -139,11 +76,11 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
    * @return measurementType
    */
   @javax.annotation.Nullable
-  public MeasurementTypeEnum getMeasurementType() {
+  public String getMeasurementType() {
     return measurementType;
   }
 
-  public void setMeasurementType(@javax.annotation.Nullable MeasurementTypeEnum measurementType) {
+  public void setMeasurementType(@javax.annotation.Nullable String measurementType) {
     this.measurementType = measurementType;
   }
 
@@ -285,10 +222,6 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("measurement_type") != null && !jsonObj.get("measurement_type").isJsonNull()) && !jsonObj.get("measurement_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `measurement_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("measurement_type").toString()));
-      }
-      // validate the optional field `measurement_type`
-      if (jsonObj.get("measurement_type") != null && !jsonObj.get("measurement_type").isJsonNull()) {
-        MeasurementTypeEnum.validateJsonElement(jsonObj.get("measurement_type"));
       }
       if (jsonObj.get("options") != null && !jsonObj.get("options").isJsonNull()) {
         JsonArray jsonArrayoptions = jsonObj.getAsJsonArray("options");

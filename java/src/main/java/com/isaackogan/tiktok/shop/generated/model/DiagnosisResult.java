@@ -60,62 +60,10 @@ public class DiagnosisResult {
   @javax.annotation.Nullable
   private String howToSolve;
 
-  /**
-   * The listing quality tier you can reach by implementing the recommendation. Possible values: - FAIR - GOOD  **Note**:  - To reach a higher tier, you must implement all recommendations from the destination tier and all preceding tiers. For example, a product will reach the \&quot;GOOD\&quot; tier once all \&quot;FAIR\&quot; and \&quot;GOOD\&quot; recommendations are addressed or implemented. - Available only for the US market.
-   */
-  @JsonAdapter(QualityTierEnum.Adapter.class)
-  public enum QualityTierEnum {
-    FAIR("FAIR"),
-    
-    GOOD("GOOD");
-
-    private String value;
-
-    QualityTierEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static QualityTierEnum fromValue(String value) {
-      for (QualityTierEnum b : QualityTierEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<QualityTierEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final QualityTierEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public QualityTierEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return QualityTierEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      QualityTierEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_QUALITY_TIER = "quality_tier";
   @SerializedName(SERIALIZED_NAME_QUALITY_TIER)
   @javax.annotation.Nullable
-  private QualityTierEnum qualityTier;
+  private String qualityTier;
 
   public DiagnosisResult() {
   }
@@ -158,7 +106,7 @@ public class DiagnosisResult {
   }
 
 
-  public DiagnosisResult qualityTier(@javax.annotation.Nullable QualityTierEnum qualityTier) {
+  public DiagnosisResult qualityTier(@javax.annotation.Nullable String qualityTier) {
     this.qualityTier = qualityTier;
     return this;
   }
@@ -168,11 +116,11 @@ public class DiagnosisResult {
    * @return qualityTier
    */
   @javax.annotation.Nullable
-  public QualityTierEnum getQualityTier() {
+  public String getQualityTier() {
     return qualityTier;
   }
 
-  public void setQualityTier(@javax.annotation.Nullable QualityTierEnum qualityTier) {
+  public void setQualityTier(@javax.annotation.Nullable String qualityTier) {
     this.qualityTier = qualityTier;
   }
 
@@ -295,10 +243,6 @@ public class DiagnosisResult {
       }
       if ((jsonObj.get("quality_tier") != null && !jsonObj.get("quality_tier").isJsonNull()) && !jsonObj.get("quality_tier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `quality_tier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quality_tier").toString()));
-      }
-      // validate the optional field `quality_tier`
-      if (jsonObj.get("quality_tier") != null && !jsonObj.get("quality_tier").isJsonNull()) {
-        QualityTierEnum.validateJsonElement(jsonObj.get("quality_tier"));
       }
   }
 

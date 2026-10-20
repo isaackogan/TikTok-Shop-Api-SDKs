@@ -40,11 +40,11 @@ data class PublishResult (
 
     /* The market associated with this synchronization result. Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands (NL) - PH: Philippines - PO: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico */
     @SerializedName("region")
-    val region: PublishResult.Region? = null,
+    val region: kotlin.String? = null,
 
     /* The status of syncing the product to the market. Possible values: - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product Status Change webhook](https://partner.tiktokshop.com/docv2/page/650956aff1fd3102b90b6261) to track the final audit status. - DRAFT: Synchronization did not complete, and the local product remains in draft. - FAILED: Synchronization of the global product to the local shop was unsuccessful. */
     @SerializedName("status")
-    val status: PublishResult.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The list of errors that occurred. */
     @SerializedName("fail_reasons")
@@ -52,46 +52,6 @@ data class PublishResult (
 
 ) {
 
-    /**
-     * The market associated with this synchronization result. Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands (NL) - PH: Philippines - PO: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IE,IT,JP,MY,NL,PH,PO,PT,SG,TH,US,VN,MX
-     */
-    enum class Region(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PO") PO("PO"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN"),
-        @SerializedName(value = "MX") MX("MX");
-    }
-    /**
-     * The status of syncing the product to the market. Possible values: - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product Status Change webhook](https://partner.tiktokshop.com/docv2/page/650956aff1fd3102b90b6261) to track the final audit status. - DRAFT: Synchronization did not complete, and the local product remains in draft. - FAILED: Synchronization of the global product to the local shop was unsuccessful.
-     *
-     * Values: SUCCESS,DRAFT,FAILED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "FAILED") FAILED("FAILED");
-    }
 
 }
 

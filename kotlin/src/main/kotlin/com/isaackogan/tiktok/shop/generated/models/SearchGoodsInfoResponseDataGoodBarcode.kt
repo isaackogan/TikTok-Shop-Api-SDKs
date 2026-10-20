@@ -42,23 +42,10 @@ data class SearchGoodsInfoResponseDataGoodBarcode (
 
     /* The barcode type. Possible values: - UPC - EAN - GTIN - ASIN_OR_FNSKU - MERCHANT_SKU_ID - FBT_SPECIFIC_BARCODE */
     @SerializedName("type")
-    val type: SearchGoodsInfoResponseDataGoodBarcode.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * The barcode type. Possible values: - UPC - EAN - GTIN - ASIN_OR_FNSKU - MERCHANT_SKU_ID - FBT_SPECIFIC_BARCODE
-     *
-     * Values: UPC,EAN,GTIN,ASIN_OR_FNSKU,MERCHANT_SKU_ID,FBT_SPECIFIC_BARCODE
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "UPC") UPC("UPC"),
-        @SerializedName(value = "EAN") EAN("EAN"),
-        @SerializedName(value = "GTIN") GTIN("GTIN"),
-        @SerializedName(value = "ASIN_OR_FNSKU") ASIN_OR_FNSKU("ASIN_OR_FNSKU"),
-        @SerializedName(value = "MERCHANT_SKU_ID") MERCHANT_SKU_ID("MERCHANT_SKU_ID"),
-        @SerializedName(value = "FBT_SPECIFIC_BARCODE") FBT_SPECIFIC_BARCODE("FBT_SPECIFIC_BARCODE");
-    }
 
 }
 

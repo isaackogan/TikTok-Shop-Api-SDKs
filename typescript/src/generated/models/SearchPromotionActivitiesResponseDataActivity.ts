@@ -55,10 +55,10 @@ export interface SearchPromotionActivitiesResponseDataActivity {
      * - `BUY_MORE_SAVE_MORE`: Buy More Save More activity.
      * - `GIFT_WITH_PURCHASE`: Gift With Purchase activity.
      * - `BUY_X_GET_Y`: Buy X Get Y activity.
-     * @type {SearchPromotionActivitiesResponseDataActivityActivityTypeEnum}
+     * @type {string}
      * @memberof SearchPromotionActivitiesResponseDataActivity
      */
-    activityType?: SearchPromotionActivitiesResponseDataActivityActivityTypeEnum;
+    activityType?: string;
     /**
      * The effective time type of the current activity
      * - NORMAL:  `begin_time` and `end_time` must be filled
@@ -91,10 +91,10 @@ export interface SearchPromotionActivitiesResponseDataActivity {
      * - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
      * - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
      * - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     * @type {SearchPromotionActivitiesResponseDataActivityStatusEnum}
+     * @type {string}
      * @memberof SearchPromotionActivitiesResponseDataActivity
      */
-    status?: SearchPromotionActivitiesResponseDataActivityStatusEnum;
+    status?: string;
     /**
      * The time when the activity was created, as a Unix timestamp in milliseconds.
      * @type {number}
@@ -140,49 +140,11 @@ export interface SearchPromotionActivitiesResponseDataActivity {
      * Possible values:
      * - `ALL`: The activity supports both normal products and auction products.
      * - `EXCLUDE_AUCTION`: The activity does not support auction products.
-     * @type {SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum}
+     * @type {string}
      * @memberof SearchPromotionActivitiesResponseDataActivity
      */
-    auctionSupportType?: SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum;
+    auctionSupportType?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchPromotionActivitiesResponseDataActivityActivityTypeEnum = {
-    FixedPrice: 'FIXED_PRICE',
-    DirectDiscount: 'DIRECT_DISCOUNT',
-    Flashsale: 'FLASHSALE',
-    ShippingDiscount: 'SHIPPING_DISCOUNT',
-    BuyMoreSaveMore: 'BUY_MORE_SAVE_MORE',
-    GiftWithPurchase: 'GIFT_WITH_PURCHASE',
-    BuyXGetY: 'BUY_X_GET_Y'
-} as const;
-export type SearchPromotionActivitiesResponseDataActivityActivityTypeEnum = typeof SearchPromotionActivitiesResponseDataActivityActivityTypeEnum[keyof typeof SearchPromotionActivitiesResponseDataActivityActivityTypeEnum];
-
-/**
- * @export
- */
-export const SearchPromotionActivitiesResponseDataActivityStatusEnum = {
-    Draft: 'DRAFT',
-    NotStart: 'NOT_START',
-    Ongoing: 'ONGOING',
-    Expired: 'EXPIRED',
-    Deactivated: 'DEACTIVATED',
-    NotEffective: 'NOT_EFFECTIVE'
-} as const;
-export type SearchPromotionActivitiesResponseDataActivityStatusEnum = typeof SearchPromotionActivitiesResponseDataActivityStatusEnum[keyof typeof SearchPromotionActivitiesResponseDataActivityStatusEnum];
-
-/**
- * @export
- */
-export const SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum = {
-    All: 'ALL',
-    ExcludeAuction: 'EXCLUDE_AUCTION'
-} as const;
-export type SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum = typeof SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum[keyof typeof SearchPromotionActivitiesResponseDataActivityAuctionSupportTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchPromotionActivitiesResponseDataActivity interface.

@@ -68,88 +68,10 @@ public class GetProductResponseDataSkuCombinedSku {
   @javax.annotation.Nullable
   private List<GetProductResponseDataSkuCombinedSkuCategory> categories = new ArrayList<>();
 
-  /**
-   * Gets or Sets combinedListingNotLiveReasons
-   */
-  @JsonAdapter(CombinedListingNotLiveReasonsEnum.Adapter.class)
-  public enum CombinedListingNotLiveReasonsEnum {
-    /**
-     * Indicate the source product has been deactivated.
-     */
-    SUB_PRODUCT_DEACTIVATE("SUB_PRODUCT_DEACTIVATE"),
-    
-    /**
-     * Indicate the source product has been deleted.
-     */
-    SUB_PRODUCT_DELETE("SUB_PRODUCT_DELETE"),
-    
-    /**
-     * Indicate the source product has been frozen.
-     */
-    SUB_PRODUCT_FROZEN("SUB_PRODUCT_FROZEN"),
-    
-    /**
-     * Indicate the source SKU has been deleted.
-     */
-    SUB_SKU_DELETE("SUB_SKU_DELETE"),
-    
-    /**
-     * Indicate the level one category of the virtual bundle does not match that of the source product.
-     */
-    SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR("SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR"),
-    
-    /**
-     * Indicate the level one category of the source product is not in the set of restricted categories.
-     */
-    SUB_PRODUCT_CATEGORY_OVER_RESTRICTION("SUB_PRODUCT_CATEGORY_OVER_RESTRICTION");
-
-    private String value;
-
-    CombinedListingNotLiveReasonsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CombinedListingNotLiveReasonsEnum fromValue(String value) {
-      for (CombinedListingNotLiveReasonsEnum b : CombinedListingNotLiveReasonsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CombinedListingNotLiveReasonsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CombinedListingNotLiveReasonsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CombinedListingNotLiveReasonsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CombinedListingNotLiveReasonsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CombinedListingNotLiveReasonsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_COMBINED_LISTING_NOT_LIVE_REASONS = "combined_listing_not_live_reasons";
   @SerializedName(SERIALIZED_NAME_COMBINED_LISTING_NOT_LIVE_REASONS)
   @javax.annotation.Nullable
-  private List<CombinedListingNotLiveReasonsEnum> combinedListingNotLiveReasons = new ArrayList<>();
+  private List<String> combinedListingNotLiveReasons = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_INVENTORY = "inventory";
   @SerializedName(SERIALIZED_NAME_INVENTORY)
@@ -245,12 +167,12 @@ public class GetProductResponseDataSkuCombinedSku {
   }
 
 
-  public GetProductResponseDataSkuCombinedSku combinedListingNotLiveReasons(@javax.annotation.Nullable List<CombinedListingNotLiveReasonsEnum> combinedListingNotLiveReasons) {
+  public GetProductResponseDataSkuCombinedSku combinedListingNotLiveReasons(@javax.annotation.Nullable List<String> combinedListingNotLiveReasons) {
     this.combinedListingNotLiveReasons = combinedListingNotLiveReasons;
     return this;
   }
 
-  public GetProductResponseDataSkuCombinedSku addCombinedListingNotLiveReasonsItem(CombinedListingNotLiveReasonsEnum combinedListingNotLiveReasonsItem) {
+  public GetProductResponseDataSkuCombinedSku addCombinedListingNotLiveReasonsItem(String combinedListingNotLiveReasonsItem) {
     if (this.combinedListingNotLiveReasons == null) {
       this.combinedListingNotLiveReasons = new ArrayList<>();
     }
@@ -263,11 +185,11 @@ public class GetProductResponseDataSkuCombinedSku {
    * @return combinedListingNotLiveReasons
    */
   @javax.annotation.Nullable
-  public List<CombinedListingNotLiveReasonsEnum> getCombinedListingNotLiveReasons() {
+  public List<String> getCombinedListingNotLiveReasons() {
     return combinedListingNotLiveReasons;
   }
 
-  public void setCombinedListingNotLiveReasons(@javax.annotation.Nullable List<CombinedListingNotLiveReasonsEnum> combinedListingNotLiveReasons) {
+  public void setCombinedListingNotLiveReasons(@javax.annotation.Nullable List<String> combinedListingNotLiveReasons) {
     this.combinedListingNotLiveReasons = combinedListingNotLiveReasons;
   }
 

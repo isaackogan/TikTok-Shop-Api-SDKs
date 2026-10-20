@@ -50,7 +50,7 @@ data class GetReturnRecordsResponseDataRecord (
 
     /* The actor that initiated this lifecycle event. Possible values: - `BUYER` - `SELLER` - `OPERATOR`: The action was triggered manually by a customer service agent. - `SYSTEM`: The action was triggered automatically due to a policy reason. */
     @SerializedName("role")
-    val role: GetReturnRecordsResponseDataRecord.Role? = null,
+    val role: kotlin.String? = null,
 
     /* A human-readable description of this lifecycle event. */
     @SerializedName("description")
@@ -78,17 +78,6 @@ data class GetReturnRecordsResponseDataRecord (
 
 ) {
 
-    /**
-     * The actor that initiated this lifecycle event. Possible values: - `BUYER` - `SELLER` - `OPERATOR`: The action was triggered manually by a customer service agent. - `SYSTEM`: The action was triggered automatically due to a policy reason.
-     *
-     * Values: BUYER,SELLER,OPERATOR,SYSTEM
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "OPERATOR") OPERATOR("OPERATOR"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_return_response_data_return_status import CreateReturnResponseDataReturnStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreateReturnResponseData")
@@ -17,7 +16,7 @@ class CreateReturnResponseData:
     """
     Attributes:
         return_id (str | Unset): The identifier of a specific return request.
-        return_status (CreateReturnResponseDataReturnStatus | Unset): Return status, available values:
+        return_status (str | Unset): Return status, available values:
             - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform
             - REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request
             - AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by
@@ -30,15 +29,13 @@ class CreateReturnResponseData:
     """
 
     return_id: str | Unset = UNSET
-    return_status: CreateReturnResponseDataReturnStatus | Unset = UNSET
+    return_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return_id = self.return_id
 
-        return_status: str | Unset = UNSET
-        if not isinstance(self.return_status, Unset):
-            return_status = self.return_status.value
+        return_status = self.return_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -55,12 +52,7 @@ class CreateReturnResponseData:
         d = dict(src_dict)
         return_id = d.pop("return_id", UNSET)
 
-        _return_status = d.pop("return_status", UNSET)
-        return_status: CreateReturnResponseDataReturnStatus | Unset
-        if isinstance(_return_status, Unset):
-            return_status = UNSET
-        else:
-            return_status = CreateReturnResponseDataReturnStatus(_return_status)
+        return_status = d.pop("return_status", UNSET)
 
         create_return_response_data = cls(
             return_id=return_id,

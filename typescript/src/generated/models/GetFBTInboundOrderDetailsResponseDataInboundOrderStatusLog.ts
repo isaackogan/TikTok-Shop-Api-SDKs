@@ -39,10 +39,10 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
      * * `RECEIVED`
      * * `CANCELLED`
      * * `DELIVERED`
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog
      */
-    newStatus?: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum;
+    newStatus?: string;
     /**
      * The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.
      * 
@@ -57,10 +57,10 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
      * * `RECEIVED`
      * * `CANCELLED`
      * * `DELIVERED`
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog
      */
-    previousStatus?: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum;
+    previousStatus?: string;
     /**
      * The unique identifier or name of the user or system entity that performed the status change.
      * @type {string}
@@ -68,42 +68,6 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
      */
     operator?: string;
 }
-
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum = {
-    Working: 'WORKING',
-    ReadyToShip: 'READY_TO_SHIP',
-    ToBeReceived: 'TO_BE_RECEIVED',
-    ArrivedHub: 'ARRIVED_HUB',
-    InternalTransfer: 'INTERNAL_TRANSFER',
-    Receiving: 'RECEIVING',
-    PartiallyReceived: 'PARTIALLY_RECEIVED',
-    Received: 'RECEIVED',
-    Cancelled: 'CANCELLED',
-    Delivered: 'DELIVERED'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatusEnum];
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum = {
-    Working: 'WORKING',
-    ReadyToShip: 'READY_TO_SHIP',
-    ToBeReceived: 'TO_BE_RECEIVED',
-    ArrivedHub: 'ARRIVED_HUB',
-    InternalTransfer: 'INTERNAL_TRANSFER',
-    Receiving: 'RECEIVING',
-    PartiallyReceived: 'PARTIALLY_RECEIVED',
-    Received: 'RECEIVED',
-    Cancelled: 'CANCELLED',
-    Delivered: 'DELIVERED'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatusEnum];
-
 
 /**
  * Check if a given object implements the GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog interface.

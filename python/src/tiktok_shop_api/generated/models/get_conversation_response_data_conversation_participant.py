@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversation_response_data_conversation_participant_platform import (
-    GetConversationResponseDataConversationParticipantPlatform,
-)
-from ..models.get_conversation_response_data_conversation_participant_role import (
-    GetConversationResponseDataConversationParticipantRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetConversationResponseDataConversationParticipant")
@@ -23,7 +17,7 @@ class GetConversationResponseDataConversationParticipant:
     Attributes:
         im_user_id (str | Unset): Participant's ID, in IM system. This ID is used in IM system and can not be used to
             query orders. To query orders, use `user_id` instead.
-        role (GetConversationResponseDataConversationParticipantRole | Unset): Participant's role.
+        role (str | Unset): Participant's role.
             Possible enumerations:
             - `BUYER`
             - `SHOP`
@@ -31,7 +25,7 @@ class GetConversationResponseDataConversationParticipant:
         nickname (str | Unset): Participant's nickname.
         avatar (str | Unset): Participant's avatar URL.
         user_id (str | Unset): Participant's ID.
-        platform (GetConversationResponseDataConversationParticipantPlatform | Unset): Platform the buyer is from.
+        platform (str | Unset): Platform the buyer is from.
             This field is returned only when the participant role is `BUYER` and the shop region is Indonesia. Possible
             values:
             - `TIKTOK_SHOP`
@@ -41,19 +35,17 @@ class GetConversationResponseDataConversationParticipant:
     """
 
     im_user_id: str | Unset = UNSET
-    role: GetConversationResponseDataConversationParticipantRole | Unset = UNSET
+    role: str | Unset = UNSET
     nickname: str | Unset = UNSET
     avatar: str | Unset = UNSET
     user_id: str | Unset = UNSET
-    platform: GetConversationResponseDataConversationParticipantPlatform | Unset = UNSET
+    platform: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         im_user_id = self.im_user_id
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         nickname = self.nickname
 
@@ -61,9 +53,7 @@ class GetConversationResponseDataConversationParticipant:
 
         user_id = self.user_id
 
-        platform: str | Unset = UNSET
-        if not isinstance(self.platform, Unset):
-            platform = self.platform.value
+        platform = self.platform
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -88,12 +78,7 @@ class GetConversationResponseDataConversationParticipant:
         d = dict(src_dict)
         im_user_id = d.pop("im_user_id", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetConversationResponseDataConversationParticipantRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetConversationResponseDataConversationParticipantRole(_role)
+        role = d.pop("role", UNSET)
 
         nickname = d.pop("nickname", UNSET)
 
@@ -101,12 +86,7 @@ class GetConversationResponseDataConversationParticipant:
 
         user_id = d.pop("user_id", UNSET)
 
-        _platform = d.pop("platform", UNSET)
-        platform: GetConversationResponseDataConversationParticipantPlatform | Unset
-        if isinstance(_platform, Unset):
-            platform = UNSET
-        else:
-            platform = GetConversationResponseDataConversationParticipantPlatform(_platform)
+        platform = d.pop("platform", UNSET)
 
         get_conversation_response_data_conversation_participant = cls(
             im_user_id=im_user_id,

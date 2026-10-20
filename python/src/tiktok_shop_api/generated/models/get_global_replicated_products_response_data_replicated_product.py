@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_replicated_products_response_data_replicated_product_product_status import (
-    GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatus,
-)
-from ..models.get_global_replicated_products_response_data_replicated_product_region import (
-    GetGlobalReplicatedProductsResponseDataReplicatedProductRegion,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetGlobalReplicatedProductsResponseDataReplicatedProduct")
@@ -21,8 +15,7 @@ T = TypeVar("T", bound="GetGlobalReplicatedProductsResponseDataReplicatedProduct
 class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
     """
     Attributes:
-        region (GetGlobalReplicatedProductsResponseDataReplicatedProductRegion | Unset): The market associated with the
-            replicated product.
+        region (str | Unset): The market associated with the replicated product.
             Possible values:
             - AT: Austria
             - BE:Belgium
@@ -49,8 +42,7 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
             - MX: Mexico
         shop_id (str | Unset): The TikTok Shop ID.
         product_id (str | Unset): The ID of the product.
-        product_status (GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatus | Unset): The status of
-            the replicated product.
+        product_status (str | Unset): The status of the replicated product.
             Possible values:
             - UNKNOWN
             - DRAFT
@@ -63,24 +55,20 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
             - DELETED
     """
 
-    region: GetGlobalReplicatedProductsResponseDataReplicatedProductRegion | Unset = UNSET
+    region: str | Unset = UNSET
     shop_id: str | Unset = UNSET
     product_id: str | Unset = UNSET
-    product_status: GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatus | Unset = UNSET
+    product_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        region: str | Unset = UNSET
-        if not isinstance(self.region, Unset):
-            region = self.region.value
+        region = self.region
 
         shop_id = self.shop_id
 
         product_id = self.product_id
 
-        product_status: str | Unset = UNSET
-        if not isinstance(self.product_status, Unset):
-            product_status = self.product_status.value
+        product_status = self.product_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -99,23 +87,13 @@ class GetGlobalReplicatedProductsResponseDataReplicatedProduct:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _region = d.pop("region", UNSET)
-        region: GetGlobalReplicatedProductsResponseDataReplicatedProductRegion | Unset
-        if isinstance(_region, Unset):
-            region = UNSET
-        else:
-            region = GetGlobalReplicatedProductsResponseDataReplicatedProductRegion(_region)
+        region = d.pop("region", UNSET)
 
         shop_id = d.pop("shop_id", UNSET)
 
         product_id = d.pop("product_id", UNSET)
 
-        _product_status = d.pop("product_status", UNSET)
-        product_status: GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatus | Unset
-        if isinstance(_product_status, Unset):
-            product_status = UNSET
-        else:
-            product_status = GetGlobalReplicatedProductsResponseDataReplicatedProductProductStatus(_product_status)
+        product_status = d.pop("product_status", UNSET)
 
         get_global_replicated_products_response_data_replicated_product = cls(
             region=region,

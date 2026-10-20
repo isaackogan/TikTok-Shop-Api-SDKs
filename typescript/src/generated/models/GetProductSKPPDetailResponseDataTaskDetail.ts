@@ -41,10 +41,10 @@ export interface GetProductSKPPDetailResponseDataTaskDetail {
      * - SHOPPABLE_VIDEOS
      * - INFORMATION_QUALITY
      * - CRM_HOSTING
-     * @type {GetProductSKPPDetailResponseDataTaskDetailCategoryEnum}
+     * @type {string}
      * @memberof GetProductSKPPDetailResponseDataTaskDetail
      */
-    category?: GetProductSKPPDetailResponseDataTaskDetailCategoryEnum;
+    category?: string;
     /**
      * Localized category name, resolved from category via the shared content by the request locale.
      * @type {string}
@@ -76,26 +76,6 @@ export interface GetProductSKPPDetailResponseDataTaskDetail {
      */
     actionSuggestions?: Array<GetProductSKPPDetailResponseDataTaskDetailActionSuggestion>;
 }
-
-
-/**
- * @export
- */
-export const GetProductSKPPDetailResponseDataTaskDetailCategoryEnum = {
-    CommissionRate: 'COMMISSION_RATE',
-    Fulfilment: 'FULFILMENT',
-    Pricing: 'PRICING',
-    FreeShiping: 'FREE_SHIPING',
-    FollowerBenefits: 'FOLLOWER_BENEFITS',
-    Sampling: 'SAMPLING',
-    AdsSpend: 'ADS_SPEND',
-    Stock: 'STOCK',
-    ShoppableVideos: 'SHOPPABLE_VIDEOS',
-    InformationQuality: 'INFORMATION_QUALITY',
-    CrmHosting: 'CRM_HOSTING'
-} as const;
-export type GetProductSKPPDetailResponseDataTaskDetailCategoryEnum = typeof GetProductSKPPDetailResponseDataTaskDetailCategoryEnum[keyof typeof GetProductSKPPDetailResponseDataTaskDetailCategoryEnum];
-
 
 /**
  * Check if a given object implements the GetProductSKPPDetailResponseDataTaskDetail interface.

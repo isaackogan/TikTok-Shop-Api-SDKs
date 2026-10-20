@@ -175,6 +175,18 @@ func TestOrderListSendsCipherAndPageTokenIntact(t *testing.T) {
 	checkSigned(t, r, "s1")
 }
 
+func TestUnknownStatusValueIsKept(t *testing.T) {
+	s := newStub(t)
+	s.body = `{"code":0,"message":"Success","request_id":"r1","data":{"orders":[{"id":"1","status":"SOME_NEW_STATUS"}]}}`
+	res, _, err := s.client().Orders.GetOrderList(context.Background()).PageSize(1).Execute()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := res.Data.Orders[0].GetStatus(); got != "SOME_NEW_STATUS" {
+		t.Errorf("status = %q", got)
+	}
+}
+
 func TestSpaceIsPercent20AndSignedDecoded(t *testing.T) {
 	s := newStub(t)
 	_, _, err := s.client().Orders.GetOrderList(context.Background()).PageSize(1).PageToken("a b+c").Execute()

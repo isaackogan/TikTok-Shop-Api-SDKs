@@ -38,7 +38,7 @@ data class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight (
 
     /* Unit of the predicted package weight. Possible values: - `GRAM` - `POUND` - `OUNCE` - `KILOGRAM` */
     @SerializedName("unit")
-    val unit: PredictProductPackageDimensionsAndWeightResponseDataPackageWeight.Unit,
+    val unit: kotlin.String,
 
     /* Predicted positive package weight. */
     @SerializedName("value")
@@ -46,17 +46,6 @@ data class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight (
 
 ) {
 
-    /**
-     * Unit of the predicted package weight. Possible values: - `GRAM` - `POUND` - `OUNCE` - `KILOGRAM`
-     *
-     * Values: GRAM,POUND,OUNCE,KILOGRAM
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "GRAM") GRAM("GRAM"),
-        @SerializedName(value = "POUND") POUND("POUND"),
-        @SerializedName(value = "OUNCE") OUNCE("OUNCE"),
-        @SerializedName(value = "KILOGRAM") KILOGRAM("KILOGRAM");
-    }
 
 }
 

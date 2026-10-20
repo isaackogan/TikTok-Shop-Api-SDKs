@@ -64,133 +64,10 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
   @javax.annotation.Nullable
   private String commissionRate;
 
-  /**
-   * The status of sample applications. The possible enumerated values are: - PENDING: The sample application is waiting for the seller&#39;s review. - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample. - SHIPPED: The sample has been shipped by the seller and is waiting for the creator to receive the package. - CONTENT_PENDING: The creator has received the sample package and is expected to create content. - REJECT_CANCELLED: The sample application has been rejected by the seller. - OVERDUE_CANCELLED: The sample application has expired due to being overdue. - UNFULFILL_CANCELLED: The creator did not fulfill the commitment to create content within the agreed timeframe. - DEL_OPEN_COLLAB: The open collaboration plan has been deleted. - SELLER_NOT_SHIP_CANCELLED: The seller did not ship the sample within the required timeframe. - WITHDRAW_CANCELLED: The creator withdrew the sample application before the seller approved it. - UNFULFILLABLE_CANCELLED: The application was cancelled due to reasons beyond the creator&#39;s control, making it impossible to create content. - OPS_CANCELLED: The application was manually cancelled by operations staff. - OPS_FAILED: The application was marked as failed by operations staff. - OPS_COMPLETED: The application was manually marked as completed by operations staff. - COMPLETED: The application is complete, and the creator has finished creating the content.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The sample application is waiting for the seller&#39;s review.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * The application is approved, and the seller needs to ship the sample.
-     */
-    AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-    
-    /**
-     * The sample has been shipped by the seller and is waiting for the creator to receive the package.
-     */
-    SHIPPED("SHIPPED"),
-    
-    /**
-     * The creator has received the sample package and is expected to create content.
-     */
-    CONTENT_PENDING("CONTENT_PENDING"),
-    
-    /**
-     * The sample application has been rejected by the seller.
-     */
-    REJECT_CANCELLED("REJECT_CANCELLED"),
-    
-    /**
-     * The sample application has expired due to being overdue.
-     */
-    OVERDUE_CANCELLED("OVERDUE_CANCELLED"),
-    
-    /**
-     * The creator did not fulfill the commitment to create content within the agreed timeframe.
-     */
-    UNFULFILL_CANCELLED("UNFULFILL_CANCELLED"),
-    
-    /**
-     * The open collaboration plan has been deleted.
-     */
-    DEL_OPEN_COLLAB("DEL_OPEN_COLLAB"),
-    
-    /**
-     * The seller did not ship the sample within the required timeframe.
-     */
-    SELLER_NOT_SHIP_CANCELLED("SELLER_NOT_SHIP_CANCELLED"),
-    
-    /**
-     * The creator withdrew the sample application before the seller approved it.
-     */
-    WITHDRAW_CANCELLED("WITHDRAW_CANCELLED"),
-    
-    /**
-     * The application was cancelled due to reasons beyond the creator&#39;s control, making it impossible to create content.
-     */
-    UNFULFILLABLE_CANCELLED("UNFULFILLABLE_CANCELLED"),
-    
-    /**
-     * The application was manually cancelled by operations staff.
-     */
-    OPS_CANCELLED("OPS_CANCELLED"),
-    
-    /**
-     * The application was marked as failed by operations staff.
-     */
-    OPS_FAILED("OPS_FAILED"),
-    
-    /**
-     * The application was manually marked as completed by operations staff.
-     */
-    OPS_COMPLETED("OPS_COMPLETED"),
-    
-    /**
-     * The application is complete, and the creator has finished creating the content.
-     */
-    COMPLETED("COMPLETED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_ORDER_ID = "order_id";
   @SerializedName(SERIALIZED_NAME_ORDER_ID)
@@ -217,98 +94,10 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
   @javax.annotation.Nullable
   private String trackingNumber;
 
-  /**
-   * It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation.
-   */
-  @JsonAdapter(FulfillmentStatusEnum.Adapter.class)
-  public enum FulfillmentStatusEnum {
-    /**
-     * The creator is yet to fulfill the content creation obligation.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * Fulfillment is in progress; content has been created and is being evaluated against criteria.
-     */
-    ONGOING("ONGOING"),
-    
-    /**
-     * Fulfillment has been successfully completed; the content meets the required standards.
-     */
-    SUCCEED("SUCCEED"),
-    
-    /**
-     * Fulfillment failed; the content did not meet the required standards.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * Fulfillment is overdue; the creator did not meet the deadline.
-     */
-    OVERDUE("OVERDUE"),
-    
-    /**
-     * Fulfillment has been suspended.
-     */
-    SUSPEND("SUSPEND"),
-    
-    /**
-     * Fulfillment has been cancelled, either by the creator or due to operational reasons.
-     */
-    CANCELLED("CANCELLED"),
-    
-    /**
-     * The creator has been exempted from the fulfillment obligation.
-     */
-    EXEMPTED("EXEMPTED");
-
-    private String value;
-
-    FulfillmentStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FulfillmentStatusEnum fromValue(String value) {
-      for (FulfillmentStatusEnum b : FulfillmentStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FulfillmentStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FulfillmentStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FulfillmentStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FulfillmentStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FulfillmentStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FULFILLMENT_STATUS = "fulfillment_status";
   @SerializedName(SERIALIZED_NAME_FULFILLMENT_STATUS)
   @javax.annotation.Nullable
-  private FulfillmentStatusEnum fulfillmentStatus;
+  private String fulfillmentStatus;
 
   public static final String SERIALIZED_NAME_IS_APPROVABLE = "is_approvable";
   @SerializedName(SERIALIZED_NAME_IS_APPROVABLE)
@@ -376,7 +165,7 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
   }
 
 
-  public SearchSampleApplicationsResponseDataSampleApplication status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchSampleApplicationsResponseDataSampleApplication status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -386,11 +175,11 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -490,7 +279,7 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
   }
 
 
-  public SearchSampleApplicationsResponseDataSampleApplication fulfillmentStatus(@javax.annotation.Nullable FulfillmentStatusEnum fulfillmentStatus) {
+  public SearchSampleApplicationsResponseDataSampleApplication fulfillmentStatus(@javax.annotation.Nullable String fulfillmentStatus) {
     this.fulfillmentStatus = fulfillmentStatus;
     return this;
   }
@@ -500,11 +289,11 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
    * @return fulfillmentStatus
    */
   @javax.annotation.Nullable
-  public FulfillmentStatusEnum getFulfillmentStatus() {
+  public String getFulfillmentStatus() {
     return fulfillmentStatus;
   }
 
-  public void setFulfillmentStatus(@javax.annotation.Nullable FulfillmentStatusEnum fulfillmentStatus) {
+  public void setFulfillmentStatus(@javax.annotation.Nullable String fulfillmentStatus) {
     this.fulfillmentStatus = fulfillmentStatus;
   }
 
@@ -753,10 +542,6 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("order_id") != null && !jsonObj.get("order_id").isJsonNull()) && !jsonObj.get("order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_id").toString()));
       }
@@ -765,10 +550,6 @@ public class SearchSampleApplicationsResponseDataSampleApplication {
       }
       if ((jsonObj.get("fulfillment_status") != null && !jsonObj.get("fulfillment_status").isJsonNull()) && !jsonObj.get("fulfillment_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fulfillment_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fulfillment_status").toString()));
-      }
-      // validate the optional field `fulfillment_status`
-      if (jsonObj.get("fulfillment_status") != null && !jsonObj.get("fulfillment_status").isJsonNull()) {
-        FulfillmentStatusEnum.validateJsonElement(jsonObj.get("fulfillment_status"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("disapprovable_reasons") != null && !jsonObj.get("disapprovable_reasons").isJsonNull() && !jsonObj.get("disapprovable_reasons").isJsonArray()) {

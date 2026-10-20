@@ -46,7 +46,7 @@ data class GetConversationResponseDataConversationParticipant (
 
     /* Participant's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE` */
     @SerializedName("role")
-    val role: GetConversationResponseDataConversationParticipant.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Participant's nickname. */
     @SerializedName("nickname")
@@ -62,29 +62,10 @@ data class GetConversationResponseDataConversationParticipant (
 
     /* Platform the buyer is from. This field is returned only when the participant role is `BUYER` and the shop region is Indonesia. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` You cannot send platform-specific content to a buyer from another platform. For example, when sending a product card to a Tokopedia buyer, ensure that the product is listed on Tokopedia. */
     @SerializedName("platform")
-    val platform: GetConversationResponseDataConversationParticipant.Platform? = null
+    val platform: kotlin.String? = null
 
 ) {
 
-    /**
-     * Participant's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE`
-     *
-     * Values: BUYER,SHOP,CUSTOMER_SERVICE
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "CUSTOMER_SERVICE") CUSTOMER_SERVICE("CUSTOMER_SERVICE");
-    }
-    /**
-     * Platform the buyer is from. This field is returned only when the participant role is `BUYER` and the shop region is Indonesia. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` You cannot send platform-specific content to a buyer from another platform. For example, when sending a product card to a Tokopedia buyer, ensure that the product is listed on Tokopedia.
-     *
-     * Values: TIKTOK_SHOP,TOKOPEDIA
-     */
-    enum class Platform(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK_SHOP") TIKTOK_SHOP("TIKTOK_SHOP"),
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
 
 }
 

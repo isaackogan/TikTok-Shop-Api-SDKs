@@ -39,7 +39,7 @@ data class GetGlobalListingRulesResponseData (
 
     /* The methods at which sellers can list products in this shop. Possible values: - GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets. - LOCAL_REPLICATION: Create local product, then replicate it to other target local markets. */
     @SerializedName("listing_methods")
-    val listingMethods: kotlin.collections.List<GetGlobalListingRulesResponseData.ListingMethods>? = null,
+    val listingMethods: kotlin.collections.List<kotlin.String>? = null,
 
     /* A list of inventory allocation rules for all warehouses linked to the shop. */
     @SerializedName("inventory_rules")
@@ -47,15 +47,6 @@ data class GetGlobalListingRulesResponseData (
 
 ) {
 
-    /**
-     * The methods at which sellers can list products in this shop. Possible values: - GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets. - LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
-     *
-     * Values: GLOBAL_PUBLISHING,LOCAL_REPLICATION
-     */
-    enum class ListingMethods(val value: kotlin.String) {
-        @SerializedName(value = "GLOBAL_PUBLISHING") GLOBAL_PUBLISHING("GLOBAL_PUBLISHING"),
-        @SerializedName(value = "LOCAL_REPLICATION") LOCAL_REPLICATION("LOCAL_REPLICATION");
-    }
 
 }
 

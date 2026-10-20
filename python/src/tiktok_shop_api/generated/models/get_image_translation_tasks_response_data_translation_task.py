@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_image_translation_tasks_response_data_translation_task_status import (
-    GetImageTranslationTasksResponseDataTranslationTaskStatus,
-)
-from ..models.get_image_translation_tasks_response_data_translation_task_target_language import (
-    GetImageTranslationTasksResponseDataTranslationTaskTargetLanguage,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -32,15 +26,14 @@ class GetImageTranslationTasksResponseDataTranslationTask:
     Attributes:
         original_image (GetImageTranslationTasksResponseDataTranslationTaskOriginalImage | Unset):
         id (str | Unset): The ID to identify the image translation task.
-        target_language (GetImageTranslationTasksResponseDataTranslationTaskTargetLanguage | Unset): The target language
-            to translate the image into.
+        target_language (str | Unset): The target language to translate the image into.
             Possible values:
             - de-DE
             - en-IE
             - es-ES
             - fr-FR
             - it-IT
-        status (GetImageTranslationTasksResponseDataTranslationTaskStatus | Unset): The translation result.
+        status (str | Unset): The translation result.
             Possible values:
             - PROCESSING: Translation is underway and has not yet completed.
             - COMPLETED: Translation has completed and results are ready.
@@ -55,8 +48,8 @@ class GetImageTranslationTasksResponseDataTranslationTask:
 
     original_image: GetImageTranslationTasksResponseDataTranslationTaskOriginalImage | Unset = UNSET
     id: str | Unset = UNSET
-    target_language: GetImageTranslationTasksResponseDataTranslationTaskTargetLanguage | Unset = UNSET
-    status: GetImageTranslationTasksResponseDataTranslationTaskStatus | Unset = UNSET
+    target_language: str | Unset = UNSET
+    status: str | Unset = UNSET
     fail_reason: str | Unset = UNSET
     translated_image: GetImageTranslationTasksResponseDataTranslationTaskTranslatedImage | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -68,13 +61,9 @@ class GetImageTranslationTasksResponseDataTranslationTask:
 
         id = self.id
 
-        target_language: str | Unset = UNSET
-        if not isinstance(self.target_language, Unset):
-            target_language = self.target_language.value
+        target_language = self.target_language
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         fail_reason = self.fail_reason
 
@@ -119,19 +108,9 @@ class GetImageTranslationTasksResponseDataTranslationTask:
 
         id = d.pop("id", UNSET)
 
-        _target_language = d.pop("target_language", UNSET)
-        target_language: GetImageTranslationTasksResponseDataTranslationTaskTargetLanguage | Unset
-        if isinstance(_target_language, Unset):
-            target_language = UNSET
-        else:
-            target_language = GetImageTranslationTasksResponseDataTranslationTaskTargetLanguage(_target_language)
+        target_language = d.pop("target_language", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetImageTranslationTasksResponseDataTranslationTaskStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetImageTranslationTasksResponseDataTranslationTaskStatus(_status)
+        status = d.pop("status", UNSET)
 
         fail_reason = d.pop("fail_reason", UNSET)
 

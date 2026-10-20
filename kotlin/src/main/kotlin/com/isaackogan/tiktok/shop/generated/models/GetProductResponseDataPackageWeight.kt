@@ -38,7 +38,7 @@ data class GetProductResponseDataPackageWeight (
 
     /* The unit for the package weight. Possible values: - `KILOGRAM` - `POUND` */
     @SerializedName("unit")
-    val unit: GetProductResponseDataPackageWeight.Unit? = null,
+    val unit: kotlin.String? = null,
 
     /* The package weight. */
     @SerializedName("value")
@@ -46,15 +46,6 @@ data class GetProductResponseDataPackageWeight (
 
 ) {
 
-    /**
-     * The unit for the package weight. Possible values: - `KILOGRAM` - `POUND`
-     *
-     * Values: KILOGRAM,POUND
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "KILOGRAM") KILOGRAM("KILOGRAM"),
-        @SerializedName(value = "POUND") POUND("POUND");
-    }
 
 }
 

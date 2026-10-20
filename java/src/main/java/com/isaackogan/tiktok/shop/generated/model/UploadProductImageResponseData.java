@@ -70,70 +70,10 @@ public class UploadProductImageResponseData {
   @javax.annotation.Nullable
   private Long width;
 
-  /**
-   * The usage scenario specified during upload. Possible values: - MAIN_IMAGE - ATTRIBUTE_IMAGE - DESCRIPTION_IMAGE - CERTIFICATION_IMAGE - SIZE_CHART_IMAGE - CUSTOMIZATION_IMAGE
-   */
-  @JsonAdapter(UseCaseEnum.Adapter.class)
-  public enum UseCaseEnum {
-    MAIN_IMAGE("MAIN_IMAGE"),
-    
-    ATTRIBUTE_IMAGE("ATTRIBUTE_IMAGE"),
-    
-    DESCRIPTION_IMAGE("DESCRIPTION_IMAGE"),
-    
-    CERTIFICATION_IMAGE("CERTIFICATION_IMAGE"),
-    
-    SIZE_CHART_IMAGE("SIZE_CHART_IMAGE"),
-    
-    CUSTOMIZATION_IMAGE("CUSTOMIZATION_IMAGE");
-
-    private String value;
-
-    UseCaseEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UseCaseEnum fromValue(String value) {
-      for (UseCaseEnum b : UseCaseEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UseCaseEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UseCaseEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UseCaseEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UseCaseEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UseCaseEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_USE_CASE = "use_case";
   @SerializedName(SERIALIZED_NAME_USE_CASE)
   @javax.annotation.Nullable
-  private UseCaseEnum useCase;
+  private String useCase;
 
   public UploadProductImageResponseData() {
   }
@@ -214,7 +154,7 @@ public class UploadProductImageResponseData {
   }
 
 
-  public UploadProductImageResponseData useCase(@javax.annotation.Nullable UseCaseEnum useCase) {
+  public UploadProductImageResponseData useCase(@javax.annotation.Nullable String useCase) {
     this.useCase = useCase;
     return this;
   }
@@ -224,11 +164,11 @@ public class UploadProductImageResponseData {
    * @return useCase
    */
   @javax.annotation.Nullable
-  public UseCaseEnum getUseCase() {
+  public String getUseCase() {
     return useCase;
   }
 
-  public void setUseCase(@javax.annotation.Nullable UseCaseEnum useCase) {
+  public void setUseCase(@javax.annotation.Nullable String useCase) {
     this.useCase = useCase;
   }
 
@@ -355,10 +295,6 @@ public class UploadProductImageResponseData {
       }
       if ((jsonObj.get("use_case") != null && !jsonObj.get("use_case").isJsonNull()) && !jsonObj.get("use_case").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `use_case` to be a primitive type in the JSON string but got `%s`", jsonObj.get("use_case").toString()));
-      }
-      // validate the optional field `use_case`
-      if (jsonObj.get("use_case") != null && !jsonObj.get("use_case").isJsonNull()) {
-        UseCaseEnum.validateJsonElement(jsonObj.get("use_case"));
       }
   }
 

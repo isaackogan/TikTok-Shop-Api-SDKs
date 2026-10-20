@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_return_merchandise_authorizations_response_data_return_merchandise_authorization_status import (
-    SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -26,8 +23,7 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
         id (str | Unset): Unique identifier for this RMA data.
         package_id (str | Unset): Identifier of the associated physical return package.
         aftersales_request_id (str | Unset): Identifier of the parent aftersales request.
-        status (SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatus | Unset): The
-            current state of this RMA data.
+        status (str | Unset): The current state of this RMA data.
             Possible values:
             - `INIT`
             - `AWAITING_BUYER_RETURN`
@@ -44,7 +40,7 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
     id: str | Unset = UNSET
     package_id: str | Unset = UNSET
     aftersales_request_id: str | Unset = UNSET
-    status: SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatus | Unset = UNSET
+    status: str | Unset = UNSET
     line_items: list[LineItem] | Unset = UNSET
     sku_return_requests: list[SkuReturnRequest] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -56,9 +52,7 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
 
         aftersales_request_id = self.aftersales_request_id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         line_items: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.line_items, Unset):
@@ -104,12 +98,7 @@ class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthoriz
 
         aftersales_request_id = d.pop("aftersales_request_id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationStatus(_status)
+        status = d.pop("status", UNSET)
 
         _line_items = d.pop("line_items", UNSET)
         line_items: list[LineItem] | Unset = UNSET

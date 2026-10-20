@@ -27,10 +27,10 @@ export interface GetShopProductPerformanceDetailResponseDataPerformanceRating {
      * - 3_STAR: Three-star rating.
      * - 4_STAR: Four-star rating.
      * - 5_STAR: Five-star rating.
-     * @type {GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum}
+     * @type {string}
      * @memberof GetShopProductPerformanceDetailResponseDataPerformanceRating
      */
-    stars?: GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum;
+    stars?: string;
     /**
      * Number of reviews in the corresponding rating.
      * @type {number}
@@ -44,20 +44,6 @@ export interface GetShopProductPerformanceDetailResponseDataPerformanceRating {
      */
     percentage?: string;
 }
-
-
-/**
- * @export
- */
-export const GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum = {
-    _1Star: '1_STAR',
-    _2Star: '2_STAR',
-    _3Star: '3_STAR',
-    _4Star: '4_STAR',
-    _5Star: '5_STAR'
-} as const;
-export type GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum = typeof GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum[keyof typeof GetShopProductPerformanceDetailResponseDataPerformanceRatingStarsEnum];
-
 
 /**
  * Check if a given object implements the GetShopProductPerformanceDetailResponseDataPerformanceRating interface.

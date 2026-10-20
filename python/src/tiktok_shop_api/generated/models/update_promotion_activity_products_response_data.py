@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.update_promotion_activity_products_response_data_status import (
-    UpdatePromotionActivityProductsResponseDataStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UpdatePromotionActivityProductsResponseData")
@@ -21,7 +18,7 @@ class UpdatePromotionActivityProductsResponseData:
         activity_id (str | Unset): A unique ID that identifies different activities.
         title (str | Unset): Activity name set by the merchant.
         update_time (int | Unset): The time when the response was generated, as a Unix timestamp in seconds (UTC).
-        status (UpdatePromotionActivityProductsResponseDataStatus | Unset): Activity status.
+        status (str | Unset): Activity status.
             Possible values:
             - DRAFT: Promotion activities with this status are not available to TikTok users.
             - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
@@ -39,7 +36,7 @@ class UpdatePromotionActivityProductsResponseData:
     activity_id: str | Unset = UNSET
     title: str | Unset = UNSET
     update_time: int | Unset = UNSET
-    status: UpdatePromotionActivityProductsResponseDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     total_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -50,9 +47,7 @@ class UpdatePromotionActivityProductsResponseData:
 
         update_time = self.update_time
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         total_count = self.total_count
 
@@ -81,12 +76,7 @@ class UpdatePromotionActivityProductsResponseData:
 
         update_time = d.pop("update_time", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: UpdatePromotionActivityProductsResponseDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = UpdatePromotionActivityProductsResponseDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         total_count = d.pop("total_count", UNSET)
 

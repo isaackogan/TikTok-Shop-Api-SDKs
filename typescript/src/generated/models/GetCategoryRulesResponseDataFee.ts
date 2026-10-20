@@ -22,10 +22,10 @@ export interface GetCategoryRulesResponseDataFee {
     /**
      * The type of fee.
      * Possible values: PFAND
-     * @type {GetCategoryRulesResponseDataFeeTypeEnum}
+     * @type {string}
      * @memberof GetCategoryRulesResponseDataFee
      */
-    type?: GetCategoryRulesResponseDataFeeTypeEnum;
+    type?: string;
     /**
      * A flag to indicate whether information about the fee is required.
      * @type {boolean}
@@ -33,16 +33,6 @@ export interface GetCategoryRulesResponseDataFee {
      */
     isRequired?: boolean;
 }
-
-
-/**
- * @export
- */
-export const GetCategoryRulesResponseDataFeeTypeEnum = {
-    Pfand: 'PFAND'
-} as const;
-export type GetCategoryRulesResponseDataFeeTypeEnum = typeof GetCategoryRulesResponseDataFeeTypeEnum[keyof typeof GetCategoryRulesResponseDataFeeTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCategoryRulesResponseDataFee interface.

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_product_performance_detail_response_data_performance_interval_sale_breakdown_content_type import (
-    GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownContentType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceIn
 class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdown:
     """
     Attributes:
-        content_type (GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownContentType | Unset):
-            Sales breakdown content type.
+        content_type (str | Unset): Sales breakdown content type.
             Possible values:
             - VIDEO: Video content.
             - LIVE: Live stream content.
@@ -33,14 +29,12 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdow
         sales (GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale | Unset):
     """
 
-    content_type: GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownContentType | Unset = UNSET
+    content_type: str | Unset = UNSET
     sales: GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         sales: dict[str, Any] | Unset = UNSET
         if not isinstance(self.sales, Unset):
@@ -63,14 +57,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdow
         )
 
         d = dict(src_dict)
-        _content_type = d.pop("content_type", UNSET)
-        content_type: GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownContentType(
-                _content_type
-            )
+        content_type = d.pop("content_type", UNSET)
 
         _sales = d.pop("sales", UNSET)
         sales: GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale | Unset

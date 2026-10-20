@@ -39,7 +39,7 @@ data class ItemTax (
 
     /* Tax type. Available values: - `SALES_TAX` (US market sales tax)  **Note**: Currently only sales tax is available. */
     @SerializedName("tax_type")
-    val taxType: ItemTax.TaxType? = null,
+    val taxType: kotlin.String? = null,
 
     /* Tax amount. */
     @SerializedName("tax_amount")
@@ -51,14 +51,6 @@ data class ItemTax (
 
 ) {
 
-    /**
-     * Tax type. Available values: - `SALES_TAX` (US market sales tax)  **Note**: Currently only sales tax is available.
-     *
-     * Values: SALES_TAX
-     */
-    enum class TaxType(val value: kotlin.String) {
-        @SerializedName(value = "SALES_TAX") SALES_TAX("SALES_TAX");
-    }
 
 }
 

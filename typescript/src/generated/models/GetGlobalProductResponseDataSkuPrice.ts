@@ -30,10 +30,10 @@ export interface GetGlobalProductResponseDataSkuPrice {
      * Possible values:
      * - `USD`: Applicable for global sellers
      * - `EUR`: Applicable for intra-EU sellers
-     * @type {GetGlobalProductResponseDataSkuPriceCurrencyEnum}
+     * @type {string}
      * @memberof GetGlobalProductResponseDataSkuPrice
      */
-    currency?: GetGlobalProductResponseDataSkuPriceCurrencyEnum;
+    currency?: string;
     /**
      * The unit price of the SKU. 
      * You can display the unit price to facilitate easier price comparisons across different products and packaging sizes.
@@ -47,17 +47,6 @@ export interface GetGlobalProductResponseDataSkuPrice {
      */
     unitPrice?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalProductResponseDataSkuPriceCurrencyEnum = {
-    Usd: 'USD',
-    Eur: 'EUR'
-} as const;
-export type GetGlobalProductResponseDataSkuPriceCurrencyEnum = typeof GetGlobalProductResponseDataSkuPriceCurrencyEnum[keyof typeof GetGlobalProductResponseDataSkuPriceCurrencyEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalProductResponseDataSkuPrice interface.

@@ -40,7 +40,7 @@ data class GetCompassTaskListResponseDataTask (
 
     /* Allowed values: CREATOR, BASE. */
     @SerializedName("module_type")
-    val moduleType: GetCompassTaskListResponseDataTask.ModuleType? = null,
+    val moduleType: kotlin.String? = null,
 
     /* The ID of the offline report task. When the task status is `SUCCEEDED`, use this value as the `task_id` path parameter in `GET /affiliate_seller/202603/compass/offline_tasks/{task_id}/file` to download the completed export task's result file. */
     @SerializedName("id")
@@ -56,15 +56,6 @@ data class GetCompassTaskListResponseDataTask (
 
 ) {
 
-    /**
-     * Allowed values: CREATOR, BASE.
-     *
-     * Values: CREATOR,BASE
-     */
-    enum class ModuleType(val value: kotlin.String) {
-        @SerializedName(value = "CREATOR") CREATOR("CREATOR"),
-        @SerializedName(value = "BASE") BASE("BASE");
-    }
 
 }
 

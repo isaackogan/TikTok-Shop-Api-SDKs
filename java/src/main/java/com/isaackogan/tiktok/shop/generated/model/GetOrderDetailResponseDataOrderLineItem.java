@@ -121,84 +121,11 @@ public class GetOrderDetailResponseDataOrderLineItem {
   @javax.annotation.Nullable
   private String cancelUser;
 
-  /**
-   * [**Deprecated**: This field is deprecated and will be removed in a future API version. Use &#x60;order_type&#x60; instead.] The order line type: Possible values based on region: **All regions** - &#x60;NORMAL&#x60;: An item that is in stock and available for immediate purchase and fulfillment. - &#x60;ZERO_LOTTERY:&#x60; An item purchased during a lottery event in TikTok LIVE. - &#x60;SHOP_PARTNER&#x60;: An item purchased from a TikTok Shop partner store. **US** - &#x60;PRE_ORDER&#x60;: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - &#x60;MADE_TO_ORDER&#x60;: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-   */
-  @JsonAdapter(SkuTypeEnum.Adapter.class)
-  public enum SkuTypeEnum {
-    /**
-     * An item that is in stock and available for immediate purchase and fulfillment.
-     */
-    NORMAL("NORMAL"),
-    
-    /**
-     * &#x60; An item purchased during a lottery event in TikTok LIVE.
-     */
-    ZERO_LOTTERY("ZERO_LOTTERY"),
-    
-    /**
-     * An item purchased from a TikTok Shop partner store.
-     */
-    SHOP_PARTNER("SHOP_PARTNER"),
-    
-    /**
-     * An item that is not yet available or released. Fulfillment starts on a specific date in the future.
-     */
-    PRE_ORDER("PRE_ORDER"),
-    
-    /**
-     * An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-     */
-    MADE_TO_ORDER("MADE_TO_ORDER");
-
-    private String value;
-
-    SkuTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SkuTypeEnum fromValue(String value) {
-      for (SkuTypeEnum b : SkuTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SkuTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SkuTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SkuTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SkuTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SkuTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SKU_TYPE = "sku_type";
   @Deprecated
   @SerializedName(SERIALIZED_NAME_SKU_TYPE)
   @javax.annotation.Nullable
-  private SkuTypeEnum skuType;
+  private String skuType;
 
   public static final String SERIALIZED_NAME_SELLER_SKU = "seller_sku";
   @SerializedName(SERIALIZED_NAME_SELLER_SKU)
@@ -351,60 +278,10 @@ public class GetOrderDetailResponseDataOrderLineItem {
   @javax.annotation.Nullable
   private String roomId;
 
-  /**
-   * This describes the product listing type of the SKU.  Possible values: - &#x60;TEMPORARY_LISTING&#x60;
-   */
-  @JsonAdapter(ProductListingTypeEnum.Adapter.class)
-  public enum ProductListingTypeEnum {
-    TEMPORARY_LISTING("TEMPORARY_LISTING");
-
-    private String value;
-
-    ProductListingTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProductListingTypeEnum fromValue(String value) {
-      for (ProductListingTypeEnum b : ProductListingTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProductListingTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProductListingTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProductListingTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProductListingTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProductListingTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PRODUCT_LISTING_TYPE = "product_listing_type";
   @SerializedName(SERIALIZED_NAME_PRODUCT_LISTING_TYPE)
   @javax.annotation.Nullable
-  private ProductListingTypeEnum productListingType;
+  private String productListingType;
 
   public GetOrderDetailResponseDataOrderLineItem() {
   }
@@ -665,7 +542,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
 
 
   @Deprecated
-  public GetOrderDetailResponseDataOrderLineItem skuType(@javax.annotation.Nullable SkuTypeEnum skuType) {
+  public GetOrderDetailResponseDataOrderLineItem skuType(@javax.annotation.Nullable String skuType) {
     this.skuType = skuType;
     return this;
   }
@@ -677,12 +554,12 @@ public class GetOrderDetailResponseDataOrderLineItem {
    */
   @Deprecated
   @javax.annotation.Nullable
-  public SkuTypeEnum getSkuType() {
+  public String getSkuType() {
     return skuType;
   }
 
   @Deprecated
-  public void setSkuType(@javax.annotation.Nullable SkuTypeEnum skuType) {
+  public void setSkuType(@javax.annotation.Nullable String skuType) {
     this.skuType = skuType;
   }
 
@@ -1285,7 +1162,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
 
-  public GetOrderDetailResponseDataOrderLineItem productListingType(@javax.annotation.Nullable ProductListingTypeEnum productListingType) {
+  public GetOrderDetailResponseDataOrderLineItem productListingType(@javax.annotation.Nullable String productListingType) {
     this.productListingType = productListingType;
     return this;
   }
@@ -1295,11 +1172,11 @@ public class GetOrderDetailResponseDataOrderLineItem {
    * @return productListingType
    */
   @javax.annotation.Nullable
-  public ProductListingTypeEnum getProductListingType() {
+  public String getProductListingType() {
     return productListingType;
   }
 
-  public void setProductListingType(@javax.annotation.Nullable ProductListingTypeEnum productListingType) {
+  public void setProductListingType(@javax.annotation.Nullable String productListingType) {
     this.productListingType = productListingType;
   }
 
@@ -1551,10 +1428,6 @@ public class GetOrderDetailResponseDataOrderLineItem {
       if ((jsonObj.get("sku_type") != null && !jsonObj.get("sku_type").isJsonNull()) && !jsonObj.get("sku_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sku_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sku_type").toString()));
       }
-      // validate the optional field `sku_type`
-      if (jsonObj.get("sku_type") != null && !jsonObj.get("sku_type").isJsonNull()) {
-        SkuTypeEnum.validateJsonElement(jsonObj.get("sku_type"));
-      }
       if ((jsonObj.get("seller_sku") != null && !jsonObj.get("seller_sku").isJsonNull()) && !jsonObj.get("seller_sku").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `seller_sku` to be a primitive type in the JSON string but got `%s`", jsonObj.get("seller_sku").toString()));
       }
@@ -1662,10 +1535,6 @@ public class GetOrderDetailResponseDataOrderLineItem {
       }
       if ((jsonObj.get("product_listing_type") != null && !jsonObj.get("product_listing_type").isJsonNull()) && !jsonObj.get("product_listing_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_listing_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_listing_type").toString()));
-      }
-      // validate the optional field `product_listing_type`
-      if (jsonObj.get("product_listing_type") != null && !jsonObj.get("product_listing_type").isJsonNull()) {
-        ProductListingTypeEnum.validateJsonElement(jsonObj.get("product_listing_type"));
       }
   }
 

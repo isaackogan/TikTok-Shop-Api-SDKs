@@ -42,20 +42,10 @@ data class CurSession (
 
     /* Current phase of the session. Possible enumerations: - `AUTO_REPLY` — The session is being handled by automatic replies or chatbot responses. - `QUEUED` — The session is waiting to be assigned to an agent. - `ASSIGNED` — The session has been assigned to an agent. */
     @SerializedName("phase")
-    val phase: CurSession.Phase? = null
+    val phase: kotlin.String? = null
 
 ) {
 
-    /**
-     * Current phase of the session. Possible enumerations: - `AUTO_REPLY` — The session is being handled by automatic replies or chatbot responses. - `QUEUED` — The session is waiting to be assigned to an agent. - `ASSIGNED` — The session has been assigned to an agent.
-     *
-     * Values: AUTO_REPLY,QUEUED,ASSIGNED
-     */
-    enum class Phase(val value: kotlin.String) {
-        @SerializedName(value = "AUTO_REPLY") AUTO_REPLY("AUTO_REPLY"),
-        @SerializedName(value = "QUEUED") QUEUED("QUEUED"),
-        @SerializedName(value = "ASSIGNED") ASSIGNED("ASSIGNED");
-    }
 
 }
 

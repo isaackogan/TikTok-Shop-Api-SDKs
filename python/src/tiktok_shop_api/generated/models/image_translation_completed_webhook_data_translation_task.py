@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.image_translation_completed_webhook_data_translation_task_status import (
-    ImageTranslationCompletedWebhookDataTranslationTaskStatus,
-)
-from ..models.image_translation_completed_webhook_data_translation_task_target_language import (
-    ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguage,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -31,14 +25,13 @@ class ImageTranslationCompletedWebhookDataTranslationTask:
     """
     Attributes:
         id (str | Unset): The ID to identify the image translation task.
-        status (ImageTranslationCompletedWebhookDataTranslationTaskStatus | Unset): The translation status.
+        status (str | Unset): The translation status.
              Possible values:
              - PROCESSING: Translation is underway and has not yet completed.
              - COMPLETED: Translation has completed and results are ready.
              - FAILED: Translation did not complete due to an error.
         fail_reason (str | Unset): The reason why the translation task failed.
-        target_language (ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguage | Unset): The target language
-            to translate the image into.
+        target_language (str | Unset): The target language to translate the image into.
              Possible values:
              - de-DE
              - en-IE
@@ -50,9 +43,9 @@ class ImageTranslationCompletedWebhookDataTranslationTask:
     """
 
     id: str | Unset = UNSET
-    status: ImageTranslationCompletedWebhookDataTranslationTaskStatus | Unset = UNSET
+    status: str | Unset = UNSET
     fail_reason: str | Unset = UNSET
-    target_language: ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguage | Unset = UNSET
+    target_language: str | Unset = UNSET
     original_image: ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage | Unset = UNSET
     translated_image: ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -60,15 +53,11 @@ class ImageTranslationCompletedWebhookDataTranslationTask:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         fail_reason = self.fail_reason
 
-        target_language: str | Unset = UNSET
-        if not isinstance(self.target_language, Unset):
-            target_language = self.target_language.value
+        target_language = self.target_language
 
         original_image: dict[str, Any] | Unset = UNSET
         if not isinstance(self.original_image, Unset):
@@ -108,21 +97,11 @@ class ImageTranslationCompletedWebhookDataTranslationTask:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: ImageTranslationCompletedWebhookDataTranslationTaskStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = ImageTranslationCompletedWebhookDataTranslationTaskStatus(_status)
+        status = d.pop("status", UNSET)
 
         fail_reason = d.pop("fail_reason", UNSET)
 
-        _target_language = d.pop("target_language", UNSET)
-        target_language: ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguage | Unset
-        if isinstance(_target_language, Unset):
-            target_language = UNSET
-        else:
-            target_language = ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguage(_target_language)
+        target_language = d.pop("target_language", UNSET)
 
         _original_image = d.pop("original_image", UNSET)
         original_image: ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage | Unset

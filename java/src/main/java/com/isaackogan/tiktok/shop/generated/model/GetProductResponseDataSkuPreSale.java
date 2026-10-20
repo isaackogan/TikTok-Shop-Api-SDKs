@@ -56,73 +56,10 @@ public class GetProductResponseDataSkuPreSale {
   @javax.annotation.Nullable
   private FulfillmentType fulfillmentType;
 
-  /**
-   * The type of pre-sale. Possible values based on the region: **US** - &#x60;PRE_ORDER&#x60;: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**. - &#x60;MADE_TO_ORDER&#x60;: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**. - &#x60;CUSTOM&#x60;: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.  **UK, EU, SEA, JP, and LATAM** - &#x60;PRE_ORDER&#x60;: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * The product is not yet available or released. Fulfillment can be extended by specifying a release date.
-     */
-    PRE_ORDER("PRE_ORDER"),
-    
-    /**
-     * The product is produced only after the order is received. Fulfillment can be extended by specifying a duration.
-     */
-    MADE_TO_ORDER("MADE_TO_ORDER"),
-    
-    /**
-     * The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.
-     */
-    CUSTOM("CUSTOM");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public GetProductResponseDataSkuPreSale() {
   }
@@ -146,7 +83,7 @@ public class GetProductResponseDataSkuPreSale {
   }
 
 
-  public GetProductResponseDataSkuPreSale type(@javax.annotation.Nullable TypeEnum type) {
+  public GetProductResponseDataSkuPreSale type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -156,11 +93,11 @@ public class GetProductResponseDataSkuPreSale {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -279,10 +216,6 @@ public class GetProductResponseDataSkuPreSale {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 

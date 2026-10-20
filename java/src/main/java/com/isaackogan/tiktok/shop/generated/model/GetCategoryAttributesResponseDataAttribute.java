@@ -65,68 +65,10 @@ public class GetCategoryAttributesResponseDataAttribute {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * Indicates sales attributes that define product variants.
-     */
-    SALES_PROPERTY("SALES_PROPERTY"),
-    
-    /**
-     * Indicates product attributes that describe the product as a whole.
-     */
-    PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_IS_REQURIED = "is_requried";
   @SerializedName(SERIALIZED_NAME_IS_REQURIED)
@@ -138,63 +80,10 @@ public class GetCategoryAttributesResponseDataAttribute {
   @javax.annotation.Nullable
   private List<GetCategoryAttributesResponseDataAttributeValue> values = new ArrayList<>();
 
-  /**
-   * The data format for a free-form attribute value.  Returned for customizable numeric attributes.  Possible values: - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers.
-   */
-  @JsonAdapter(ValueDataFormatEnum.Adapter.class)
-  public enum ValueDataFormatEnum {
-    /**
-     * Positive integers or decimal numbers.
-     */
-    POSITIVE_INT_OR_DECIMAL("POSITIVE_INT_OR_DECIMAL");
-
-    private String value;
-
-    ValueDataFormatEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ValueDataFormatEnum fromValue(String value) {
-      for (ValueDataFormatEnum b : ValueDataFormatEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ValueDataFormatEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ValueDataFormatEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ValueDataFormatEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ValueDataFormatEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ValueDataFormatEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_VALUE_DATA_FORMAT = "value_data_format";
   @SerializedName(SERIALIZED_NAME_VALUE_DATA_FORMAT)
   @javax.annotation.Nullable
-  private ValueDataFormatEnum valueDataFormat;
+  private String valueDataFormat;
 
   public static final String SERIALIZED_NAME_IS_CUSTOMIZABLE = "is_customizable";
   @SerializedName(SERIALIZED_NAME_IS_CUSTOMIZABLE)
@@ -257,7 +146,7 @@ public class GetCategoryAttributesResponseDataAttribute {
   }
 
 
-  public GetCategoryAttributesResponseDataAttribute type(@javax.annotation.Nullable TypeEnum type) {
+  public GetCategoryAttributesResponseDataAttribute type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -267,11 +156,11 @@ public class GetCategoryAttributesResponseDataAttribute {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -322,7 +211,7 @@ public class GetCategoryAttributesResponseDataAttribute {
   }
 
 
-  public GetCategoryAttributesResponseDataAttribute valueDataFormat(@javax.annotation.Nullable ValueDataFormatEnum valueDataFormat) {
+  public GetCategoryAttributesResponseDataAttribute valueDataFormat(@javax.annotation.Nullable String valueDataFormat) {
     this.valueDataFormat = valueDataFormat;
     return this;
   }
@@ -332,11 +221,11 @@ public class GetCategoryAttributesResponseDataAttribute {
    * @return valueDataFormat
    */
   @javax.annotation.Nullable
-  public ValueDataFormatEnum getValueDataFormat() {
+  public String getValueDataFormat() {
     return valueDataFormat;
   }
 
-  public void setValueDataFormat(@javax.annotation.Nullable ValueDataFormatEnum valueDataFormat) {
+  public void setValueDataFormat(@javax.annotation.Nullable String valueDataFormat) {
     this.valueDataFormat = valueDataFormat;
   }
 
@@ -566,10 +455,6 @@ public class GetCategoryAttributesResponseDataAttribute {
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
-      }
       if (jsonObj.get("values") != null && !jsonObj.get("values").isJsonNull()) {
         JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");
         if (jsonArrayvalues != null) {
@@ -586,10 +471,6 @@ public class GetCategoryAttributesResponseDataAttribute {
       }
       if ((jsonObj.get("value_data_format") != null && !jsonObj.get("value_data_format").isJsonNull()) && !jsonObj.get("value_data_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `value_data_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("value_data_format").toString()));
-      }
-      // validate the optional field `value_data_format`
-      if (jsonObj.get("value_data_format") != null && !jsonObj.get("value_data_format").isJsonNull()) {
-        ValueDataFormatEnum.validateJsonElement(jsonObj.get("value_data_format"));
       }
       if (jsonObj.get("requirement_conditions") != null && !jsonObj.get("requirement_conditions").isJsonNull()) {
         JsonArray jsonArrayrequirementConditions = jsonObj.getAsJsonArray("requirement_conditions");

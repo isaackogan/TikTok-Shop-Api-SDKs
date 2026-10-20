@@ -53,24 +53,11 @@ export interface GetCategoriesResponseDataCategory {
      * - `INVITE_ONLY`: This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, `INVITE_ONLY` is also known as "restricted".
      * - `NON_MAIN_CATEGORY`: This category is out of scope for this shop, and you do not have permission to use it. Contact your account manager for assistance.
      * - `PROHIBITED`: This category is prohibited on TikTok Shop. Do not attempt to list products in this category as they will be rejected during audit. Applicable only for BR, MX, EU and SEA markets.
-     * @type {Array<GetCategoriesResponseDataCategoryPermissionStatusesEnum>}
+     * @type {Array<string>}
      * @memberof GetCategoriesResponseDataCategory
      */
-    permissionStatuses?: Array<GetCategoriesResponseDataCategoryPermissionStatusesEnum>;
+    permissionStatuses?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetCategoriesResponseDataCategoryPermissionStatusesEnum = {
-    Available: 'AVAILABLE',
-    InviteOnly: 'INVITE_ONLY',
-    NonMainCategory: 'NON_MAIN_CATEGORY',
-    Prohibited: 'PROHIBITED'
-} as const;
-export type GetCategoriesResponseDataCategoryPermissionStatusesEnum = typeof GetCategoriesResponseDataCategoryPermissionStatusesEnum[keyof typeof GetCategoriesResponseDataCategoryPermissionStatusesEnum];
-
 
 /**
  * Check if a given object implements the GetCategoriesResponseDataCategory interface.

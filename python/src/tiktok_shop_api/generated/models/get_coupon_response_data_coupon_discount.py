@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_coupon_response_data_coupon_discount_type import GetCouponResponseDataCouponDiscountType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,8 +20,7 @@ T = TypeVar("T", bound="GetCouponResponseDataCouponDiscount")
 class GetCouponResponseDataCouponDiscount:
     """
     Attributes:
-        type_ (GetCouponResponseDataCouponDiscountType | Unset): The type of discount offered by the coupon. Possible
-            enumerations are:
+        type_ (str | Unset): The type of discount offered by the coupon. Possible enumerations are:
             - `AMOUNT_OFF`: Reduces the final price of the item by the specified `reduction_amount`
             - `PERCENT_OFF`: Reduces the final price by the specified `percentage`.
         reduction_amount (ReductionAmount | Unset):
@@ -31,16 +29,14 @@ class GetCouponResponseDataCouponDiscount:
         max_discount (MaxDiscount | Unset):
     """
 
-    type_: GetCouponResponseDataCouponDiscountType | Unset = UNSET
+    type_: str | Unset = UNSET
     reduction_amount: ReductionAmount | Unset = UNSET
     percentage: str | Unset = UNSET
     max_discount: MaxDiscount | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         reduction_amount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.reduction_amount, Unset):
@@ -72,12 +68,7 @@ class GetCouponResponseDataCouponDiscount:
         from ..models.reduction_amount import ReductionAmount  # noqa: PLC0415
 
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetCouponResponseDataCouponDiscountType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCouponResponseDataCouponDiscountType(_type_)
+        type_ = d.pop("type", UNSET)
 
         _reduction_amount = d.pop("reduction_amount", UNSET)
         reduction_amount: ReductionAmount | Unset

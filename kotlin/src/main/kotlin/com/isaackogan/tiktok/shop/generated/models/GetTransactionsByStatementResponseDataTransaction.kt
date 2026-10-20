@@ -132,7 +132,7 @@ data class GetTransactionsByStatementResponseDataTransaction (
 
     /* The status of the reserve funds. Possible values: - COLLECTED: A portion of the order's settlement amount has been withheld as reserve funds. - RELEASED: The previously reserved funds have been released and paid out to the seller. */
     @SerializedName("reserve_status")
-    val reserveStatus: GetTransactionsByStatementResponseDataTransaction.ReserveStatus? = null,
+    val reserveStatus: kotlin.String? = null,
 
     /* The estimated date when the reserve funds will be released and paid out to the seller. Unix timestamp.  Returns an empty value if the reserve funds have already been released. */
     @SerializedName("estimated_release_time")
@@ -140,15 +140,6 @@ data class GetTransactionsByStatementResponseDataTransaction (
 
 ) {
 
-    /**
-     * The status of the reserve funds. Possible values: - COLLECTED: A portion of the order's settlement amount has been withheld as reserve funds. - RELEASED: The previously reserved funds have been released and paid out to the seller.
-     *
-     * Values: COLLECTED,RELEASED
-     */
-    enum class ReserveStatus(val value: kotlin.String) {
-        @SerializedName(value = "COLLECTED") COLLECTED("COLLECTED"),
-        @SerializedName(value = "RELEASED") RELEASED("RELEASED");
-    }
 
 }
 

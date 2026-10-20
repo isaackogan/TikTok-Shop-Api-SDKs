@@ -38,10 +38,10 @@ export interface GetInboundMethodDetailResponseData {
      * * `Executing`
      * * `Succeed`
      * * `Failed`
-     * @type {GetInboundMethodDetailResponseDataPlacementTaskStatusEnum}
+     * @type {string}
      * @memberof GetInboundMethodDetailResponseData
      */
-    placementTaskStatus?: GetInboundMethodDetailResponseDataPlacementTaskStatusEnum;
+    placementTaskStatus?: string;
     /**
      * Unix timestamp in seconds when the placement result expires. For `ONE_HUB`, the expiration is set to 24 hours after this API processes the request. For other methods, it is 24 hours after the placement task's trigger time. After expiration, call this API again to generate a new placement task.
      * @type {string}
@@ -49,18 +49,6 @@ export interface GetInboundMethodDetailResponseData {
      */
     expirationTimestamp?: string;
 }
-
-
-/**
- * @export
- */
-export const GetInboundMethodDetailResponseDataPlacementTaskStatusEnum = {
-    Executing: 'Executing',
-    Succeed: 'Succeed',
-    Failed: 'Failed'
-} as const;
-export type GetInboundMethodDetailResponseDataPlacementTaskStatusEnum = typeof GetInboundMethodDetailResponseDataPlacementTaskStatusEnum[keyof typeof GetInboundMethodDetailResponseDataPlacementTaskStatusEnum];
-
 
 /**
  * Check if a given object implements the GetInboundMethodDetailResponseData interface.

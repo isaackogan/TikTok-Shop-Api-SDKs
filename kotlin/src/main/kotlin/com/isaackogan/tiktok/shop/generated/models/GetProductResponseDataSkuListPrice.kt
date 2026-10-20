@@ -42,18 +42,10 @@ data class GetProductResponseDataSkuListPrice (
 
     /* The currency. Possible values: USD */
     @SerializedName("currency")
-    val currency: GetProductResponseDataSkuListPrice.Currency? = null
+    val currency: kotlin.String? = null
 
 ) {
 
-    /**
-     * The currency. Possible values: USD
-     *
-     * Values: USD
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "USD") USD("USD");
-    }
 
 }
 

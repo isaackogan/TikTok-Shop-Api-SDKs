@@ -50,11 +50,11 @@ data class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption (
 
     /* Possible values: KEY: a key category measurement; RECOMMEND: a useful recommended measurement. */
     @SerializedName("role")
-    val role: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Possible values: NONE: no unit conversion; LENGTH: length values such as cm or in; WEIGHT: weight values such as kg or lb; HEIGHT: person-height values such as cm or ft/in. */
     @SerializedName("unit")
-    val unit: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption.Unit? = null,
+    val unit: kotlin.String? = null,
 
     /* Allowed metric range in [minimum, maximum] order. */
     @SerializedName("metric_value_range")
@@ -66,26 +66,6 @@ data class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption (
 
 ) {
 
-    /**
-     * Possible values: KEY: a key category measurement; RECOMMEND: a useful recommended measurement.
-     *
-     * Values: KEY,RECOMMEND
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "KEY") KEY("KEY"),
-        @SerializedName(value = "RECOMMEND") RECOMMEND("RECOMMEND");
-    }
-    /**
-     * Possible values: NONE: no unit conversion; LENGTH: length values such as cm or in; WEIGHT: weight values such as kg or lb; HEIGHT: person-height values such as cm or ft/in.
-     *
-     * Values: NONE,LENGTH,WEIGHT,HEIGHT
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "LENGTH") LENGTH("LENGTH"),
-        @SerializedName(value = "WEIGHT") WEIGHT("WEIGHT"),
-        @SerializedName(value = "HEIGHT") HEIGHT("HEIGHT");
-    }
 
 }
 

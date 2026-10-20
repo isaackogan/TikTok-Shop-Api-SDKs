@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_categories_response_data_category_permission_statuses_item import (
-    GetGlobalCategoriesResponseDataCategoryPermissionStatusesItem,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetGlobalCategoriesResponseDataCategory")
@@ -24,8 +21,7 @@ class GetGlobalCategoriesResponseDataCategory:
         local_name (str | Unset): The name of the category.
         is_leaf (bool | Unset): A flag to indicate if the category is a leaf category.
             **Note**: You can only create or edit products that belong to a leaf category.
-        permission_statuses (list[GetGlobalCategoriesResponseDataCategoryPermissionStatusesItem] | Unset): The shop's
-            permission status for this category.
+        permission_statuses (list[str] | Unset): The shop's permission status for this category.
             Possible values:
             - AVAILABLE: You have the permission to create products in this category.
             - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.
@@ -36,7 +32,7 @@ class GetGlobalCategoriesResponseDataCategory:
     parent_id: str | Unset = UNSET
     local_name: str | Unset = UNSET
     is_leaf: bool | Unset = UNSET
-    permission_statuses: list[GetGlobalCategoriesResponseDataCategoryPermissionStatusesItem] | Unset = UNSET
+    permission_statuses: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -50,10 +46,7 @@ class GetGlobalCategoriesResponseDataCategory:
 
         permission_statuses: list[str] | Unset = UNSET
         if not isinstance(self.permission_statuses, Unset):
-            permission_statuses = []
-            for permission_statuses_item_data in self.permission_statuses:
-                permission_statuses_item = permission_statuses_item_data.value
-                permission_statuses.append(permission_statuses_item)
+            permission_statuses = self.permission_statuses
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -82,16 +75,7 @@ class GetGlobalCategoriesResponseDataCategory:
 
         is_leaf = d.pop("is_leaf", UNSET)
 
-        _permission_statuses = d.pop("permission_statuses", UNSET)
-        permission_statuses: list[GetGlobalCategoriesResponseDataCategoryPermissionStatusesItem] | Unset = UNSET
-        if _permission_statuses is not UNSET:
-            permission_statuses = []
-            for permission_statuses_item_data in _permission_statuses:
-                permission_statuses_item = GetGlobalCategoriesResponseDataCategoryPermissionStatusesItem(
-                    permission_statuses_item_data
-                )
-
-                permission_statuses.append(permission_statuses_item)
+        permission_statuses = cast(list[str], d.pop("permission_statuses", UNSET))
 
         get_global_categories_response_data_category = cls(
             id=id,

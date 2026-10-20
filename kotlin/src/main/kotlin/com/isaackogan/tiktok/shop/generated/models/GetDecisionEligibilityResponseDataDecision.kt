@@ -42,7 +42,7 @@ data class GetDecisionEligibilityResponseDataDecision (
 
     /* One eligibility result for one evaluated seller decision. Possible Values:  - `APPROVE_REQUEST_CANCEL` - `APPROVE_REFUND` - `APPROVE_RETURN` - `APPROVE_RECEIVED_PACKAGE` - `APPROVE_REPLACEMENT` - `ISSUE_REPLACEMENT_REFUND` - `DIRECT_REFUND` - `REJECT_REQUEST_CANCEL` - `REJECT_REFUND` - `REJECT_RETURN` - `REJECT_RECEIVED_PACKAGE` - `REJECT_REPLACEMENT` -`ISSUE_EXCHANGE_REFUND` */
     @SerializedName("decision")
-    val decision: GetDecisionEligibilityResponseDataDecision.Decision? = null,
+    val decision: kotlin.String? = null,
 
     /* Whether this seller decision is currently eligible for the specified aftersales request. `true` means eligible; `false` means ineligible. */
     @SerializedName("eligible")
@@ -62,26 +62,6 @@ data class GetDecisionEligibilityResponseDataDecision (
 
 ) {
 
-    /**
-     * One eligibility result for one evaluated seller decision. Possible Values:  - `APPROVE_REQUEST_CANCEL` - `APPROVE_REFUND` - `APPROVE_RETURN` - `APPROVE_RECEIVED_PACKAGE` - `APPROVE_REPLACEMENT` - `ISSUE_REPLACEMENT_REFUND` - `DIRECT_REFUND` - `REJECT_REQUEST_CANCEL` - `REJECT_REFUND` - `REJECT_RETURN` - `REJECT_RECEIVED_PACKAGE` - `REJECT_REPLACEMENT` -`ISSUE_EXCHANGE_REFUND`
-     *
-     * Values: APPROVE_REQUEST_CANCEL,APPROVE_REFUND,APPROVE_RETURN,APPROVE_RECEIVED_PACKAGE,APPROVE_REPLACEMENT,ISSUE_REPLACEMENT_REFUND,DIRECT_REFUND,REJECT_REQUEST_CANCEL,REJECT_REFUND,REJECT_RETURN,REJECT_RECEIVED_PACKAGE,REJECT_REPLACEMENT,ISSUE_EXCHANGE_REFUND
-     */
-    enum class Decision(val value: kotlin.String) {
-        @SerializedName(value = "APPROVE_REQUEST_CANCEL") APPROVE_REQUEST_CANCEL("APPROVE_REQUEST_CANCEL"),
-        @SerializedName(value = "APPROVE_REFUND") APPROVE_REFUND("APPROVE_REFUND"),
-        @SerializedName(value = "APPROVE_RETURN") APPROVE_RETURN("APPROVE_RETURN"),
-        @SerializedName(value = "APPROVE_RECEIVED_PACKAGE") APPROVE_RECEIVED_PACKAGE("APPROVE_RECEIVED_PACKAGE"),
-        @SerializedName(value = "APPROVE_REPLACEMENT") APPROVE_REPLACEMENT("APPROVE_REPLACEMENT"),
-        @SerializedName(value = "ISSUE_REPLACEMENT_REFUND") ISSUE_REPLACEMENT_REFUND("ISSUE_REPLACEMENT_REFUND"),
-        @SerializedName(value = "DIRECT_REFUND") DIRECT_REFUND("DIRECT_REFUND"),
-        @SerializedName(value = "REJECT_REQUEST_CANCEL") REJECT_REQUEST_CANCEL("REJECT_REQUEST_CANCEL"),
-        @SerializedName(value = "REJECT_REFUND") REJECT_REFUND("REJECT_REFUND"),
-        @SerializedName(value = "REJECT_RETURN") REJECT_RETURN("REJECT_RETURN"),
-        @SerializedName(value = "REJECT_RECEIVED_PACKAGE") REJECT_RECEIVED_PACKAGE("REJECT_RECEIVED_PACKAGE"),
-        @SerializedName(value = "REJECT_REPLACEMENT") REJECT_REPLACEMENT("REJECT_REPLACEMENT"),
-        @SerializedName(value = "ISSUE_EXCHANGE_REFUND") ISSUE_EXCHANGE_REFUND("ISSUE_EXCHANGE_REFUND");
-    }
 
 }
 

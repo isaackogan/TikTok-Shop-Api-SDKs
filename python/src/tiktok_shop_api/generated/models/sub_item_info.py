@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sub_item_info_cancel_user import SubItemInfoCancelUser
-from ..models.sub_item_info_display_status import SubItemInfoDisplayStatus
-from ..models.sub_item_info_package_status import SubItemInfoPackageStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,7 +22,7 @@ class SubItemInfo:
         id (str | Unset): Line item id of the sub_item. This unique identifier can be used when performing split/line-
             level fulfillment events.
         sku_id (str | Unset): SKU ID.
-        display_status (SubItemInfoDisplayStatus | Unset): Available values:
+        display_status (str | Unset): Available values:
             - `UNPAID`: The order has been placed, but payment has not yet completed.
             - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.
             - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.
@@ -47,7 +44,7 @@ class SubItemInfo:
         original_price (str | Unset): Item original price. Please refer to the currency of `payment_info`.
         rts_time (int | Unset): The time sellers shipped the order (called [Ship Package
             API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
-        package_status (SubItemInfoPackageStatus | Unset): The package status of the item.
+        package_status (str | Unset): The package status of the item.
             Available values:
             - `TO_FULFILL`: Package awaiting seller to arrange shipment.
             - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.
@@ -57,7 +54,7 @@ class SubItemInfo:
             damaged.
         currency (str | Unset): Currency for payment.
         shipping_provider_name (str | Unset): The shipping provider name.
-        cancel_user (SubItemInfoCancelUser | Unset): Cancellation request initiator.
+        cancel_user (str | Unset): Cancellation request initiator.
             Available values:
             - `BUYER`
             - `SELLER`
@@ -78,7 +75,7 @@ class SubItemInfo:
 
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
-    display_status: SubItemInfoDisplayStatus | Unset = UNSET
+    display_status: str | Unset = UNSET
     product_name: str | Unset = UNSET
     seller_sku: str | Unset = UNSET
     sku_image: str | Unset = UNSET
@@ -90,10 +87,10 @@ class SubItemInfo:
     cancel_reason: str | Unset = UNSET
     original_price: str | Unset = UNSET
     rts_time: int | Unset = UNSET
-    package_status: SubItemInfoPackageStatus | Unset = UNSET
+    package_status: str | Unset = UNSET
     currency: str | Unset = UNSET
     shipping_provider_name: str | Unset = UNSET
-    cancel_user: SubItemInfoCancelUser | Unset = UNSET
+    cancel_user: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
     item_tax: list[ItemTax] | Unset = UNSET
     tracking_number: str | Unset = UNSET
@@ -108,9 +105,7 @@ class SubItemInfo:
 
         sku_id = self.sku_id
 
-        display_status: str | Unset = UNSET
-        if not isinstance(self.display_status, Unset):
-            display_status = self.display_status.value
+        display_status = self.display_status
 
         product_name = self.product_name
 
@@ -134,17 +129,13 @@ class SubItemInfo:
 
         rts_time = self.rts_time
 
-        package_status: str | Unset = UNSET
-        if not isinstance(self.package_status, Unset):
-            package_status = self.package_status.value
+        package_status = self.package_status
 
         currency = self.currency
 
         shipping_provider_name = self.shipping_provider_name
 
-        cancel_user: str | Unset = UNSET
-        if not isinstance(self.cancel_user, Unset):
-            cancel_user = self.cancel_user.value
+        cancel_user = self.cancel_user
 
         shipping_provider_id = self.shipping_provider_id
 
@@ -230,12 +221,7 @@ class SubItemInfo:
 
         sku_id = d.pop("sku_id", UNSET)
 
-        _display_status = d.pop("display_status", UNSET)
-        display_status: SubItemInfoDisplayStatus | Unset
-        if isinstance(_display_status, Unset):
-            display_status = UNSET
-        else:
-            display_status = SubItemInfoDisplayStatus(_display_status)
+        display_status = d.pop("display_status", UNSET)
 
         product_name = d.pop("product_name", UNSET)
 
@@ -259,23 +245,13 @@ class SubItemInfo:
 
         rts_time = d.pop("rts_time", UNSET)
 
-        _package_status = d.pop("package_status", UNSET)
-        package_status: SubItemInfoPackageStatus | Unset
-        if isinstance(_package_status, Unset):
-            package_status = UNSET
-        else:
-            package_status = SubItemInfoPackageStatus(_package_status)
+        package_status = d.pop("package_status", UNSET)
 
         currency = d.pop("currency", UNSET)
 
         shipping_provider_name = d.pop("shipping_provider_name", UNSET)
 
-        _cancel_user = d.pop("cancel_user", UNSET)
-        cancel_user: SubItemInfoCancelUser | Unset
-        if isinstance(_cancel_user, Unset):
-            cancel_user = UNSET
-        else:
-            cancel_user = SubItemInfoCancelUser(_cancel_user)
+        cancel_user = d.pop("cancel_user", UNSET)
 
         shipping_provider_id = d.pop("shipping_provider_id", UNSET)
 

@@ -62,141 +62,15 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * Possible values: KEY: a key category measurement; RECOMMEND: a useful recommended measurement.
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    /**
-     * a key category measurement
-     */
-    KEY("KEY"),
-    
-    /**
-     * a useful recommended measurement.
-     */
-    RECOMMEND("RECOMMEND");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
-
-  /**
-   * Possible values: NONE: no unit conversion; LENGTH: length values such as cm or in; WEIGHT: weight values such as kg or lb; HEIGHT: person-height values such as cm or ft/in.
-   */
-  @JsonAdapter(UnitEnum.Adapter.class)
-  public enum UnitEnum {
-    /**
-     * no unit conversion
-     */
-    NONE("NONE"),
-    
-    /**
-     * length values such as cm or in
-     */
-    LENGTH("LENGTH"),
-    
-    /**
-     * weight values such as kg or lb
-     */
-    WEIGHT("WEIGHT"),
-    
-    /**
-     * person-height values such as cm or ft/in.
-     */
-    HEIGHT("HEIGHT");
-
-    private String value;
-
-    UnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnitEnum fromValue(String value) {
-      for (UnitEnum b : UnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnitEnum.fromValue(value);
-    }
-  }
+  private String role;
 
   public static final String SERIALIZED_NAME_UNIT = "unit";
   @SerializedName(SERIALIZED_NAME_UNIT)
   @javax.annotation.Nullable
-  private UnitEnum unit;
+  private String unit;
 
   public static final String SERIALIZED_NAME_METRIC_VALUE_RANGE = "metric_value_range";
   @SerializedName(SERIALIZED_NAME_METRIC_VALUE_RANGE)
@@ -249,7 +123,7 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption {
   }
 
 
-  public GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption role(@javax.annotation.Nullable RoleEnum role) {
+  public GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -259,16 +133,16 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
 
-  public GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption unit(@javax.annotation.Nullable UnitEnum unit) {
+  public GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption unit(@javax.annotation.Nullable String unit) {
     this.unit = unit;
     return this;
   }
@@ -278,11 +152,11 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption {
    * @return unit
    */
   @javax.annotation.Nullable
-  public UnitEnum getUnit() {
+  public String getUnit() {
     return unit;
   }
 
-  public void setUnit(@javax.annotation.Nullable UnitEnum unit) {
+  public void setUnit(@javax.annotation.Nullable String unit) {
     this.unit = unit;
   }
 
@@ -466,16 +340,8 @@ public class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption {
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
       }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
-      }
       if ((jsonObj.get("unit") != null && !jsonObj.get("unit").isJsonNull()) && !jsonObj.get("unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit").toString()));
-      }
-      // validate the optional field `unit`
-      if (jsonObj.get("unit") != null && !jsonObj.get("unit").isJsonNull()) {
-        UnitEnum.validateJsonElement(jsonObj.get("unit"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("metric_value_range") != null && !jsonObj.get("metric_value_range").isJsonNull() && !jsonObj.get("metric_value_range").isJsonArray()) {

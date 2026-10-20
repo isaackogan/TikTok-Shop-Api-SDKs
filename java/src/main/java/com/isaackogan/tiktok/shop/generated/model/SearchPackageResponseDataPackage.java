@@ -73,83 +73,10 @@ public class SearchPackageResponseDataPackage {
   @javax.annotation.Nullable
   private Long updateTime;
 
-  /**
-   * Possible values: - &#x60;TO_FULFILL&#x60; - &#x60;PROCESSING&#x60;: Package has been arranged by seller. Waiting for carrier to collect the parcel. - &#x60;FULFILLING&#x60;: Package has been collected by carrier and in transit. - &#x60;COMPLETED&#x60;: Package has been delivered. - &#x60;CANCELLED&#x60;: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * 
-     */
-    TO_FULFILL("TO_FULFILL"),
-    
-    /**
-     * Package has been arranged by seller. Waiting for carrier to collect the parcel.
-     */
-    PROCESSING("PROCESSING"),
-    
-    /**
-     * Package has been collected by carrier and in transit.
-     */
-    FULFILLING("FULFILLING"),
-    
-    /**
-     * Package has been delivered.
-     */
-    COMPLETED("COMPLETED"),
-    
-    /**
-     * Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     */
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_TRACKING_NUMBER = "tracking_number";
   @SerializedName(SERIALIZED_NAME_TRACKING_NUMBER)
@@ -258,7 +185,7 @@ public class SearchPackageResponseDataPackage {
   }
 
 
-  public SearchPackageResponseDataPackage status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchPackageResponseDataPackage status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -268,11 +195,11 @@ public class SearchPackageResponseDataPackage {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -502,10 +429,6 @@ public class SearchPackageResponseDataPackage {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if ((jsonObj.get("tracking_number") != null && !jsonObj.get("tracking_number").isJsonNull()) && !jsonObj.get("tracking_number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tracking_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tracking_number").toString()));

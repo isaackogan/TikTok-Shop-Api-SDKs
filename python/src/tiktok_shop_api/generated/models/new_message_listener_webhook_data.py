@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_message_listener_webhook_data_msg_type import NewMessageListenerWebhookDataMsgType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +23,7 @@ class NewMessageListenerWebhookData:
             message.
         message_id (str | Unset): Message ID.
         conversation_id (str | Unset): ID of the conversation to which the message belongs.
-        msg_type (NewMessageListenerWebhookDataMsgType | Unset): Message type, with possible values:
+        msg_type (str | Unset): Message type, with possible values:
 
              * TEXT
              * PRODUCT_CARD
@@ -43,7 +42,7 @@ class NewMessageListenerWebhookData:
     index: str | Unset = UNSET
     message_id: str | Unset = UNSET
     conversation_id: str | Unset = UNSET
-    msg_type: NewMessageListenerWebhookDataMsgType | Unset = UNSET
+    msg_type: str | Unset = UNSET
     content: str | Unset = UNSET
     create_time: str | Unset = UNSET
     sender: NewMessageListenerWebhookDataSender | Unset = UNSET
@@ -56,9 +55,7 @@ class NewMessageListenerWebhookData:
 
         conversation_id = self.conversation_id
 
-        msg_type: str | Unset = UNSET
-        if not isinstance(self.msg_type, Unset):
-            msg_type = self.msg_type.value
+        msg_type = self.msg_type
 
         content = self.content
 
@@ -101,12 +98,7 @@ class NewMessageListenerWebhookData:
 
         conversation_id = d.pop("conversation_id", UNSET)
 
-        _msg_type = d.pop("msg_type", UNSET)
-        msg_type: NewMessageListenerWebhookDataMsgType | Unset
-        if isinstance(_msg_type, Unset):
-            msg_type = UNSET
-        else:
-            msg_type = NewMessageListenerWebhookDataMsgType(_msg_type)
+        msg_type = d.pop("msg_type", UNSET)
 
         content = d.pop("content", UNSET)
 

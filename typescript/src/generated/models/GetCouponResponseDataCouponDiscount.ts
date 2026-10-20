@@ -38,10 +38,10 @@ export interface GetCouponResponseDataCouponDiscount {
      * The type of discount offered by the coupon. Possible enumerations are:
      * - `AMOUNT_OFF`: Reduces the final price of the item by the specified `reduction_amount`
      * - `PERCENT_OFF`: Reduces the final price by the specified `percentage`.
-     * @type {GetCouponResponseDataCouponDiscountTypeEnum}
+     * @type {string}
      * @memberof GetCouponResponseDataCouponDiscount
      */
-    type?: GetCouponResponseDataCouponDiscountTypeEnum;
+    type?: string;
     /**
      * Will appear when `type == 'AMOUNT_OFF'`.
      * @type {ReductionAmount}
@@ -61,17 +61,6 @@ export interface GetCouponResponseDataCouponDiscount {
      */
     maxDiscount?: MaxDiscount;
 }
-
-
-/**
- * @export
- */
-export const GetCouponResponseDataCouponDiscountTypeEnum = {
-    AmountOff: 'AMOUNT_OFF',
-    PercentOff: 'PERCENT_OFF'
-} as const;
-export type GetCouponResponseDataCouponDiscountTypeEnum = typeof GetCouponResponseDataCouponDiscountTypeEnum[keyof typeof GetCouponResponseDataCouponDiscountTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCouponResponseDataCouponDiscount interface.

@@ -6,8 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.rma_status_update_webhook_data_return_role import RMAStatusUpdateWebhookDataReturnRole
-from ..models.rma_status_update_webhook_data_rma_status import RMAStatusUpdateWebhookDataRmaStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="RMAStatusUpdateWebhookData")
@@ -19,12 +17,11 @@ class RMAStatusUpdateWebhookData:
     Attributes:
         rma_id (str | Unset): Unique identifier of the RMA.
         aftersales_request_id (str | Unset): Parent aftersales request identifier.
-        return_role (RMAStatusUpdateWebhookDataReturnRole | Unset): Role that initiated the return flow. Possible
-            enumerations:
+        return_role (str | Unset): Role that initiated the return flow. Possible enumerations:
 
              * `BUYER`
              * `SELLER`
-        rma_status (RMAStatusUpdateWebhookDataRmaStatus | Unset): Current RMA status. Possible enumerations:
+        rma_status (str | Unset): Current RMA status. Possible enumerations:
 
              * `INIT` = The RMA has been created
              * `AWAITING_BUYER_SHIPPED` = Awaiting buyer's action to ship the return package with carrier
@@ -40,8 +37,8 @@ class RMAStatusUpdateWebhookData:
 
     rma_id: str | Unset = UNSET
     aftersales_request_id: str | Unset = UNSET
-    return_role: RMAStatusUpdateWebhookDataReturnRole | Unset = UNSET
-    rma_status: RMAStatusUpdateWebhookDataRmaStatus | Unset = UNSET
+    return_role: str | Unset = UNSET
+    rma_status: str | Unset = UNSET
     rma_request_create_time: int | Unset = UNSET
     rma_request_update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -51,13 +48,9 @@ class RMAStatusUpdateWebhookData:
 
         aftersales_request_id = self.aftersales_request_id
 
-        return_role: str | Unset = UNSET
-        if not isinstance(self.return_role, Unset):
-            return_role = self.return_role.value
+        return_role = self.return_role
 
-        rma_status: str | Unset = UNSET
-        if not isinstance(self.rma_status, Unset):
-            rma_status = self.rma_status.value
+        rma_status = self.rma_status
 
         rma_request_create_time = self.rma_request_create_time
 
@@ -88,19 +81,9 @@ class RMAStatusUpdateWebhookData:
 
         aftersales_request_id = d.pop("aftersales_request_id", UNSET)
 
-        _return_role = d.pop("return_role", UNSET)
-        return_role: RMAStatusUpdateWebhookDataReturnRole | Unset
-        if isinstance(_return_role, Unset):
-            return_role = UNSET
-        else:
-            return_role = RMAStatusUpdateWebhookDataReturnRole(_return_role)
+        return_role = d.pop("return_role", UNSET)
 
-        _rma_status = d.pop("rma_status", UNSET)
-        rma_status: RMAStatusUpdateWebhookDataRmaStatus | Unset
-        if isinstance(_rma_status, Unset):
-            rma_status = UNSET
-        else:
-            rma_status = RMAStatusUpdateWebhookDataRmaStatus(_rma_status)
+        rma_status = d.pop("rma_status", UNSET)
 
         rma_request_create_time = d.pop("rma_request_create_time", UNSET)
 

@@ -46,10 +46,10 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
      * **Possible values:**
      * * `SINGLE_SKU`
      * * `MULTI_SKU`
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail
      */
-    cartonType?: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum;
+    cartonType?: string;
     /**
      * Carton measurement.
      * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement}
@@ -63,17 +63,6 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
      */
     items?: Array<GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem>;
 }
-
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum = {
-    SingleSku: 'SINGLE_SKU',
-    MultiSku: 'MULTI_SKU'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonTypeEnum];
-
 
 /**
  * Check if a given object implements the GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail interface.

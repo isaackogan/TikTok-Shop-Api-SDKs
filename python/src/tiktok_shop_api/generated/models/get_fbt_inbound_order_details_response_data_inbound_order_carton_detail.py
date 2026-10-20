@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_fbt_inbound_order_details_response_data_inbound_order_carton_detail_carton_type import (
-    GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -28,8 +25,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
     """
     Attributes:
         carton_no (str | Unset): Carton number.
-        carton_type (GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonType | Unset): Whether this
-            carton is single-SKU or multi-SKU.
+        carton_type (str | Unset): Whether this carton is single-SKU or multi-SKU.
 
             **Possible values:**
             * `SINGLE_SKU`
@@ -40,7 +36,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
     """
 
     carton_no: str | Unset = UNSET
-    carton_type: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonType | Unset = UNSET
+    carton_type: str | Unset = UNSET
     box_measurements: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset = UNSET
     items: list[GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -48,9 +44,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
     def to_dict(self) -> dict[str, Any]:
         carton_no = self.carton_no
 
-        carton_type: str | Unset = UNSET
-        if not isinstance(self.carton_type, Unset):
-            carton_type = self.carton_type.value
+        carton_type = self.carton_type
 
         box_measurements: dict[str, Any] | Unset = UNSET
         if not isinstance(self.box_measurements, Unset):
@@ -89,12 +83,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail:
         d = dict(src_dict)
         carton_no = d.pop("carton_no", UNSET)
 
-        _carton_type = d.pop("carton_type", UNSET)
-        carton_type: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonType | Unset
-        if isinstance(_carton_type, Unset):
-            carton_type = UNSET
-        else:
-            carton_type = GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailCartonType(_carton_type)
+        carton_type = d.pop("carton_type", UNSET)
 
         _box_measurements = d.pop("box_measurements", UNSET)
         box_measurements: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset

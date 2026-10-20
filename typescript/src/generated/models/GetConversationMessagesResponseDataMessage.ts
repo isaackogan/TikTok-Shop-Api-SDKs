@@ -51,10 +51,10 @@ export interface GetConversationMessagesResponseDataMessage {
      * - COUPON_CARD
      * - LOGISTICS_CARD
      * - OTHER: Messages of types not supported in this API.
-     * @type {GetConversationMessagesResponseDataMessageTypeEnum}
+     * @type {string}
      * @memberof GetConversationMessagesResponseDataMessage
      */
-    type?: GetConversationMessagesResponseDataMessageTypeEnum;
+    type?: string;
     /**
      * Message content, in JSON serialized string.
      * Examples of content for each type of message are listed below:
@@ -232,30 +232,6 @@ export interface GetConversationMessagesResponseDataMessage {
      */
     plaintext?: string;
 }
-
-
-/**
- * @export
- */
-export const GetConversationMessagesResponseDataMessageTypeEnum = {
-    Text: 'TEXT',
-    Image: 'IMAGE',
-    AllocatedService: 'ALLOCATED_SERVICE',
-    Notification: 'NOTIFICATION',
-    BuyerEnterFromTransfer: 'BUYER_ENTER_FROM_TRANSFER',
-    BuyerEnterFromProduct: 'BUYER_ENTER_FROM_PRODUCT',
-    BuyerEnterFromOrder: 'BUYER_ENTER_FROM_ORDER',
-    ProductCard: 'PRODUCT_CARD',
-    Emoticons: 'EMOTICONS',
-    OrderCard: 'ORDER_CARD',
-    Video: 'VIDEO',
-    ReturnRefundCard: 'RETURN_REFUND_CARD',
-    CouponCard: 'COUPON_CARD',
-    LogisticsCard: 'LOGISTICS_CARD',
-    Other: 'OTHER'
-} as const;
-export type GetConversationMessagesResponseDataMessageTypeEnum = typeof GetConversationMessagesResponseDataMessageTypeEnum[keyof typeof GetConversationMessagesResponseDataMessageTypeEnum];
-
 
 /**
  * Check if a given object implements the GetConversationMessagesResponseDataMessage interface.

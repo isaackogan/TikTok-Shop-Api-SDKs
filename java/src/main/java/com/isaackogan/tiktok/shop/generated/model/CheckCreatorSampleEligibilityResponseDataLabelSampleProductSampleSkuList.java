@@ -79,88 +79,10 @@ public class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSk
   @javax.annotation.Nullable
   private Boolean isAvailable;
 
-  /**
-   * The reason code associated with SKU sample availability. Interpret a specific unavailability reason only when &#x60;is_available&#x60; is &#x60;false&#x60;. &#x60;UNKNOWN&#x60; can also be returned when &#x60;is_available&#x60; is &#x60;true&#x60; because no unavailability reason applies. Possible values: - IS_PREORDER: The product is a preorder product and does not support free samples. - IS_GIFT: The product is a gift and does not support free samples. - OUT_OF_STOCK: The product is out of stock. - EXCEED_CB_PRICE_THRESHOLD: The SKU price exceeds the applicable cross-border price threshold. - ALREADY_APPLYED: The creator has already applied for this SKU. - UNKNOWN: No mapped unavailability reason is available.
-   */
-  @JsonAdapter(UnavailableReasonEnum.Adapter.class)
-  public enum UnavailableReasonEnum {
-    /**
-     * The product is a preorder product and does not support free samples.
-     */
-    IS_PREORDER("IS_PREORDER"),
-    
-    /**
-     * The product is a gift and does not support free samples.
-     */
-    IS_GIFT("IS_GIFT"),
-    
-    /**
-     * The product is out of stock.
-     */
-    OUT_OF_STOCK("OUT_OF_STOCK"),
-    
-    /**
-     * The SKU price exceeds the applicable cross-border price threshold.
-     */
-    EXCEED_CB_PRICE_THRESHOLD("EXCEED_CB_PRICE_THRESHOLD"),
-    
-    /**
-     * The creator has already applied for this SKU.
-     */
-    ALREADY_APPLYED("ALREADY_APPLYED"),
-    
-    /**
-     * No mapped unavailability reason is available.
-     */
-    UNKNOWN("UNKNOWN");
-
-    private String value;
-
-    UnavailableReasonEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnavailableReasonEnum fromValue(String value) {
-      for (UnavailableReasonEnum b : UnavailableReasonEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnavailableReasonEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnavailableReasonEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnavailableReasonEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnavailableReasonEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnavailableReasonEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_UNAVAILABLE_REASON = "unavailable_reason";
   @SerializedName(SERIALIZED_NAME_UNAVAILABLE_REASON)
   @javax.annotation.Nullable
-  private UnavailableReasonEnum unavailableReason;
+  private String unavailableReason;
 
   public CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList() {
   }
@@ -268,7 +190,7 @@ public class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSk
   }
 
 
-  public CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList unavailableReason(@javax.annotation.Nullable UnavailableReasonEnum unavailableReason) {
+  public CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList unavailableReason(@javax.annotation.Nullable String unavailableReason) {
     this.unavailableReason = unavailableReason;
     return this;
   }
@@ -278,11 +200,11 @@ public class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSk
    * @return unavailableReason
    */
   @javax.annotation.Nullable
-  public UnavailableReasonEnum getUnavailableReason() {
+  public String getUnavailableReason() {
     return unavailableReason;
   }
 
-  public void setUnavailableReason(@javax.annotation.Nullable UnavailableReasonEnum unavailableReason) {
+  public void setUnavailableReason(@javax.annotation.Nullable String unavailableReason) {
     this.unavailableReason = unavailableReason;
   }
 
@@ -429,10 +351,6 @@ public class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSk
       }
       if ((jsonObj.get("unavailable_reason") != null && !jsonObj.get("unavailable_reason").isJsonNull()) && !jsonObj.get("unavailable_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unavailable_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unavailable_reason").toString()));
-      }
-      // validate the optional field `unavailable_reason`
-      if (jsonObj.get("unavailable_reason") != null && !jsonObj.get("unavailable_reason").isJsonNull()) {
-        UnavailableReasonEnum.validateJsonElement(jsonObj.get("unavailable_reason"));
       }
   }
 

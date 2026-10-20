@@ -41,32 +41,11 @@ export interface CancelFBTMCFOrderResponseDataMcfOrderConsignOrder {
      * 10. **RETURNED** - Order has been returned
      * 11. **SCRAP** - Order has been scrapped
      * 12. **UNKNOWN** - Order status is unknown
-     * @type {CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum}
+     * @type {string}
      * @memberof CancelFBTMCFOrderResponseDataMcfOrderConsignOrder
      */
-    status?: CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum = {
-    Pending: 'PENDING',
-    HandleByWarehouse: 'HANDLE_BY_WAREHOUSE',
-    Shipped: 'SHIPPED',
-    Handover: 'HANDOVER',
-    Closed: 'CLOSED',
-    Lost: 'LOST',
-    Damage: 'DAMAGE',
-    Completed: 'COMPLETED',
-    Abnormal: 'ABNORMAL',
-    Returned: 'RETURNED',
-    Scrap: 'SCRAP',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum = typeof CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum[keyof typeof CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatusEnum];
-
 
 /**
  * Check if a given object implements the CancelFBTMCFOrderResponseDataMcfOrderConsignOrder interface.

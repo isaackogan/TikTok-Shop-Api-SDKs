@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_product_performance_detail_response_data_performance_rating_stars import (
-    GetShopProductPerformanceDetailResponseDataPerformanceRatingStars,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceRating")
@@ -18,7 +15,7 @@ T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceRa
 class GetShopProductPerformanceDetailResponseDataPerformanceRating:
     """
     Attributes:
-        stars (GetShopProductPerformanceDetailResponseDataPerformanceRatingStars | Unset): Rating star bucket.
+        stars (str | Unset): Rating star bucket.
             Possible values:
             - 1_STAR: One-star rating.
             - 2_STAR: Two-star rating.
@@ -31,15 +28,13 @@ class GetShopProductPerformanceDetailResponseDataPerformanceRating:
             rounded to four decimal places. For example, `0.23` means 23%.
     """
 
-    stars: GetShopProductPerformanceDetailResponseDataPerformanceRatingStars | Unset = UNSET
+    stars: str | Unset = UNSET
     count: int | Unset = UNSET
     percentage: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        stars: str | Unset = UNSET
-        if not isinstance(self.stars, Unset):
-            stars = self.stars.value
+        stars = self.stars
 
         count = self.count
 
@@ -60,12 +55,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceRating:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _stars = d.pop("stars", UNSET)
-        stars: GetShopProductPerformanceDetailResponseDataPerformanceRatingStars | Unset
-        if isinstance(_stars, Unset):
-            stars = UNSET
-        else:
-            stars = GetShopProductPerformanceDetailResponseDataPerformanceRatingStars(_stars)
+        stars = d.pop("stars", UNSET)
 
         count = d.pop("count", UNSET)
 

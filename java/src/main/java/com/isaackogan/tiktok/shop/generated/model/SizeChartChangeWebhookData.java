@@ -60,73 +60,10 @@ public class SizeChartChangeWebhookData {
   @javax.annotation.Nullable
   private String sizeChartTemplateName;
 
-  /**
-   * The change that occurred for the size chart. Possible values:   - &#x60;CREATE&#x60;: A new size chart is created   - &#x60;EDIT&#x60;: The size chart is edited   - &#x60;DELETE&#x60;: The size chart is deleted
-   */
-  @JsonAdapter(EventTypeEnum.Adapter.class)
-  public enum EventTypeEnum {
-    /**
-     * A new size chart is created
-     */
-    CREATE("CREATE"),
-    
-    /**
-     * The size chart is edited
-     */
-    EDIT("EDIT"),
-    
-    /**
-     * The size chart is deleted
-     */
-    DELETE("DELETE");
-
-    private String value;
-
-    EventTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static EventTypeEnum fromValue(String value) {
-      for (EventTypeEnum b : EventTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<EventTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final EventTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public EventTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return EventTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      EventTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_EVENT_TYPE = "event_type";
   @SerializedName(SERIALIZED_NAME_EVENT_TYPE)
   @javax.annotation.Nullable
-  private EventTypeEnum eventType;
+  private String eventType;
 
   public static final String SERIALIZED_NAME_UPDATE_TIME = "update_time";
   @SerializedName(SERIALIZED_NAME_UPDATE_TIME)
@@ -174,7 +111,7 @@ public class SizeChartChangeWebhookData {
   }
 
 
-  public SizeChartChangeWebhookData eventType(@javax.annotation.Nullable EventTypeEnum eventType) {
+  public SizeChartChangeWebhookData eventType(@javax.annotation.Nullable String eventType) {
     this.eventType = eventType;
     return this;
   }
@@ -184,11 +121,11 @@ public class SizeChartChangeWebhookData {
    * @return eventType
    */
   @javax.annotation.Nullable
-  public EventTypeEnum getEventType() {
+  public String getEventType() {
     return eventType;
   }
 
-  public void setEventType(@javax.annotation.Nullable EventTypeEnum eventType) {
+  public void setEventType(@javax.annotation.Nullable String eventType) {
     this.eventType = eventType;
   }
 
@@ -332,10 +269,6 @@ public class SizeChartChangeWebhookData {
       }
       if ((jsonObj.get("event_type") != null && !jsonObj.get("event_type").isJsonNull()) && !jsonObj.get("event_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `event_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("event_type").toString()));
-      }
-      // validate the optional field `event_type`
-      if (jsonObj.get("event_type") != null && !jsonObj.get("event_type").isJsonNull()) {
-        EventTypeEnum.validateJsonElement(jsonObj.get("event_type"));
       }
   }
 

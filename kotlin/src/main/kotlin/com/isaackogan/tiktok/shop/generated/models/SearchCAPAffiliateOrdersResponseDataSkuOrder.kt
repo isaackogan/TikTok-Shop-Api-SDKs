@@ -169,7 +169,7 @@ data class SearchCAPAffiliateOrdersResponseDataSkuOrder (
 
     /* The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE */
     @SerializedName("content_type")
-    val contentType: SearchCAPAffiliateOrdersResponseDataSkuOrder.ContentType? = null,
+    val contentType: kotlin.String? = null,
 
     /* Unique identifier for content */
     @SerializedName("content_id")
@@ -177,7 +177,7 @@ data class SearchCAPAffiliateOrdersResponseDataSkuOrder (
 
     /* Attribution type for `LINKSHARE` content. Possible values: - `Direct`: same-shop attribution. - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in the Marketplace or target collaboration.  For other content types, this field is an empty string. */
     @SerializedName("attribution_type")
-    val attributionType: SearchCAPAffiliateOrdersResponseDataSkuOrder.AttributionType? = null,
+    val attributionType: kotlin.String? = null,
 
     /* Commission calculation model. Possible values: - `Fixed commission` - `Tiered commission` */
     @SerializedName("commission_model")
@@ -305,7 +305,7 @@ data class SearchCAPAffiliateOrdersResponseDataSkuOrder (
 
     /* Whether this SKU order was fully returned or refunded. Possible values: - `Yes`: this SKU order was fully returned or refunded, and no commission is paid. - `No`: this SKU order was not fully returned or refunded. */
     @SerializedName("fully_return")
-    val fullyReturn: SearchCAPAffiliateOrdersResponseDataSkuOrder.FullyReturn? = null,
+    val fullyReturn: kotlin.String? = null,
 
     /* Unix timestamp in seconds when the order commission was settled (UTC). This field is omitted when no settlement timestamp is available. */
     @SerializedName("settlement_time")
@@ -321,37 +321,6 @@ data class SearchCAPAffiliateOrdersResponseDataSkuOrder (
 
 ) {
 
-    /**
-     * The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE
-     *
-     * Values: SHOP,VIDEO,LIVE,PRE_LIVE,PROMOTION_PAGE,LINKSHARE
-     */
-    enum class ContentType(val value: kotlin.String) {
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO"),
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "PRE_LIVE") PRE_LIVE("PRE_LIVE"),
-        @SerializedName(value = "PROMOTION_PAGE") PROMOTION_PAGE("PROMOTION_PAGE"),
-        @SerializedName(value = "LINKSHARE") LINKSHARE("LINKSHARE");
-    }
-    /**
-     * Attribution type for `LINKSHARE` content. Possible values: - `Direct`: same-shop attribution. - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in the Marketplace or target collaboration.  For other content types, this field is an empty string.
-     *
-     * Values: Direct,Indirect
-     */
-    enum class AttributionType(val value: kotlin.String) {
-        @SerializedName(value = "Direct") Direct("Direct"),
-        @SerializedName(value = "Indirect") Indirect("Indirect");
-    }
-    /**
-     * Whether this SKU order was fully returned or refunded. Possible values: - `Yes`: this SKU order was fully returned or refunded, and no commission is paid. - `No`: this SKU order was not fully returned or refunded.
-     *
-     * Values: Yes,No
-     */
-    enum class FullyReturn(val value: kotlin.String) {
-        @SerializedName(value = "Yes") Yes("Yes"),
-        @SerializedName(value = "No") No("No");
-    }
 
 }
 

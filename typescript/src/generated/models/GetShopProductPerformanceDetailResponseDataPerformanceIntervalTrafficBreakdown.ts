@@ -39,23 +39,11 @@ export interface GetShopProductPerformanceDetailResponseDataPerformanceIntervalT
      * - VIDEO: Video content.
      * - LIVE: Live stream content.
      * - PRODUCT_CARD: Product card.
-     * @type {GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum}
+     * @type {string}
      * @memberof GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown
      */
-    contentType?: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum;
+    contentType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum = {
-    Video: 'VIDEO',
-    Live: 'LIVE',
-    ProductCard: 'PRODUCT_CARD'
-} as const;
-export type GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum = typeof GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum[keyof typeof GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdown interface.

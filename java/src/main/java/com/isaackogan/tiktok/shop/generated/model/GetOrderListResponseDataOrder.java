@@ -67,64 +67,10 @@ public class GetOrderListResponseDataOrder {
   @javax.annotation.Nullable
   private String buyerMessage;
 
-  /**
-   * Cancellation request initiator.  Available values:  - &#x60;SELLER&#x60; - &#x60;BUYER&#x60; - &#x60;SYSTEM&#x60;
-   */
-  @JsonAdapter(CancellationInitiatorEnum.Adapter.class)
-  public enum CancellationInitiatorEnum {
-    SELLER("SELLER"),
-    
-    BUYER("BUYER"),
-    
-    SYSTEM("SYSTEM");
-
-    private String value;
-
-    CancellationInitiatorEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CancellationInitiatorEnum fromValue(String value) {
-      for (CancellationInitiatorEnum b : CancellationInitiatorEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CancellationInitiatorEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CancellationInitiatorEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CancellationInitiatorEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CancellationInitiatorEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CancellationInitiatorEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CANCELLATION_INITIATOR = "cancellation_initiator";
   @SerializedName(SERIALIZED_NAME_CANCELLATION_INITIATOR)
   @javax.annotation.Nullable
-  private CancellationInitiatorEnum cancellationInitiator;
+  private String cancellationInitiator;
 
   public static final String SERIALIZED_NAME_SHIPPING_PROVIDER_ID = "shipping_provider_id";
   @SerializedName(SERIALIZED_NAME_SHIPPING_PROVIDER_ID)
@@ -156,234 +102,20 @@ public class GetOrderListResponseDataOrder {
   @javax.annotation.Nullable
   private GetOrderListResponseDataOrderRecipientAddress recipientAddress;
 
-  /**
-   * Specific order status. Available values: - &#x60;UNPAID&#x60;: The order has been placed, but payment has not been completed. - &#x60;ON_HOLD&#x60;: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If &#x60;order_type&#x3D;PRE_ORDER&#x60;, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release. - &#x60;AWAITING_SHIPMENT&#x60;: The order is ready to be shipped, but no items have been shipped yet. - &#x60;PARTIALLY_SHIPPING&#x60;: Some items in the order have been shipped, but not all. - &#x60;AWAITING_COLLECTION&#x60;: Shipping has been arranged, but the package is waiting to be collected by the carrier. - &#x60;IN_TRANSIT&#x60;: The package has been collected by the carrier and delivery is in progress. - &#x60;DELIVERED&#x60;: The package has been delivered to the buyer. - &#x60;COMPLETED&#x60;: The order has been completed, and no further returns or refunds are allowed. - &#x60;CANCELLED&#x60;: The order has been cancelled.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The order has been placed, but payment has not been completed.
-     */
-    UNPAID("UNPAID"),
-    
-    /**
-     * The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If &#x60;order_type&#x3D;PRE_ORDER&#x60;, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release.
-     */
-    ON_HOLD("ON_HOLD"),
-    
-    /**
-     * The order is ready to be shipped, but no items have been shipped yet.
-     */
-    AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-    
-    /**
-     * Some items in the order have been shipped, but not all.
-     */
-    PARTIALLY_SHIPPING("PARTIALLY_SHIPPING"),
-    
-    /**
-     * Shipping has been arranged, but the package is waiting to be collected by the carrier.
-     */
-    AWAITING_COLLECTION("AWAITING_COLLECTION"),
-    
-    /**
-     * The package has been collected by the carrier and delivery is in progress.
-     */
-    IN_TRANSIT("IN_TRANSIT"),
-    
-    /**
-     * The package has been delivered to the buyer.
-     */
-    DELIVERED("DELIVERED"),
-    
-    /**
-     * The order has been completed, and no further returns or refunds are allowed.
-     */
-    COMPLETED("COMPLETED"),
-    
-    /**
-     * The order has been cancelled.
-     */
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - &#x60;FULFILLMENT_BY_SELLER&#x60;: a method where sellers fulfill orders directly from their own inventory, without using TikTok&#39;s fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - &#x60;FULFILLMENT_BY_TIKTOK&#x60;: a service offered by TikTok where sellers can send their products to TikTok&#39;s fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - &#x60;FULFILLMENT_BY_DILAYANI_TOKOPEDIA&#x60;: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
-   */
-  @JsonAdapter(FulfillmentTypeEnum.Adapter.class)
-  public enum FulfillmentTypeEnum {
-    /**
-     * a method where sellers fulfill orders directly from their own inventory, without using TikTok&#39;s fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.
-     */
-    FULFILLMENT_BY_SELLER("FULFILLMENT_BY_SELLER"),
-    
-    /**
-     * a service offered by TikTok where sellers can send their products to TikTok&#39;s fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.
-     */
-    FULFILLMENT_BY_TIKTOK("FULFILLMENT_BY_TIKTOK"),
-    
-    /**
-     * a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
-     */
-    FULFILLMENT_BY_DILAYANI_TOKOPEDIA("FULFILLMENT_BY_DILAYANI_TOKOPEDIA");
-
-    private String value;
-
-    FulfillmentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FulfillmentTypeEnum fromValue(String value) {
-      for (FulfillmentTypeEnum b : FulfillmentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FulfillmentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FulfillmentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FulfillmentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FulfillmentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FulfillmentTypeEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_FULFILLMENT_TYPE = "fulfillment_type";
   @SerializedName(SERIALIZED_NAME_FULFILLMENT_TYPE)
   @javax.annotation.Nullable
-  private FulfillmentTypeEnum fulfillmentType;
-
-  /**
-   * Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders. Available values: - &#x60;HOME_DELIVERY&#x60;: not a PUDO location - &#x60;COLLECTION_POINT&#x60;: a PUDO location
-   */
-  @JsonAdapter(DeliveryTypeEnum.Adapter.class)
-  public enum DeliveryTypeEnum {
-    /**
-     * not a PUDO location
-     */
-    HOME_DELIVERY("HOME_DELIVERY"),
-    
-    /**
-     * a PUDO location
-     */
-    COLLECTION_POINT("COLLECTION_POINT");
-
-    private String value;
-
-    DeliveryTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DeliveryTypeEnum fromValue(String value) {
-      for (DeliveryTypeEnum b : DeliveryTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DeliveryTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DeliveryTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DeliveryTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DeliveryTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DeliveryTypeEnum.fromValue(value);
-    }
-  }
+  private String fulfillmentType;
 
   public static final String SERIALIZED_NAME_DELIVERY_TYPE = "delivery_type";
   @SerializedName(SERIALIZED_NAME_DELIVERY_TYPE)
   @javax.annotation.Nullable
-  private DeliveryTypeEnum deliveryType;
+  private String deliveryType;
 
   public static final String SERIALIZED_NAME_PAID_TIME = "paid_time";
   @SerializedName(SERIALIZED_NAME_PAID_TIME)
@@ -450,73 +182,10 @@ public class GetOrderListResponseDataOrder {
   @javax.annotation.Nullable
   private Long requestCancelTime;
 
-  /**
-   * Delivery method. Available values: - &#x60;TIKTOK&#x60;: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - &#x60;SELLER&#x60;: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - &#x60;TIKTOK_DIGITAL&#x60;: Tiktok delivers virtual goods directly to buyers. There is no action needed.
-   */
-  @JsonAdapter(ShippingTypeEnum.Adapter.class)
-  public enum ShippingTypeEnum {
-    /**
-     * Shipping service provided by TikTok. The seller should obtain shipping label from TikTok.
-     */
-    TIKTOK("TIKTOK"),
-    
-    /**
-     * Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller.
-     */
-    SELLER("SELLER"),
-    
-    /**
-     * Tiktok delivers virtual goods directly to buyers. There is no action needed.
-     */
-    TIKTOK_DIGITAL("TIKTOK_DIGITAL");
-
-    private String value;
-
-    ShippingTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ShippingTypeEnum fromValue(String value) {
-      for (ShippingTypeEnum b : ShippingTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ShippingTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ShippingTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ShippingTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ShippingTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ShippingTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SHIPPING_TYPE = "shipping_type";
   @SerializedName(SERIALIZED_NAME_SHIPPING_TYPE)
   @javax.annotation.Nullable
-  private ShippingTypeEnum shippingType;
+  private String shippingType;
 
   public static final String SERIALIZED_NAME_USER_ID = "user_id";
   @SerializedName(SERIALIZED_NAME_USER_ID)
@@ -653,150 +322,15 @@ public class GetOrderListResponseDataOrder {
   @javax.annotation.Nullable
   private Long fastDispatchSlaTime;
 
-  /**
-   * The platform where the order was placed. Possible values: - &#x60;TIKTOK_SHOP&#x60; - &#x60;TOKOPEDIA&#x60;  **Note**: Available only in the Indonesia market.
-   */
-  @JsonAdapter(CommercePlatformEnum.Adapter.class)
-  public enum CommercePlatformEnum {
-    TIKTOK_SHOP("TIKTOK_SHOP"),
-    
-    TOKOPEDIA("TOKOPEDIA");
-
-    private String value;
-
-    CommercePlatformEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CommercePlatformEnum fromValue(String value) {
-      for (CommercePlatformEnum b : CommercePlatformEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CommercePlatformEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CommercePlatformEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CommercePlatformEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CommercePlatformEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CommercePlatformEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_COMMERCE_PLATFORM = "commerce_platform";
   @SerializedName(SERIALIZED_NAME_COMMERCE_PLATFORM)
   @javax.annotation.Nullable
-  private CommercePlatformEnum commercePlatform;
-
-  /**
-   * The order type. Possible values based on region:  **All regions** - &#x60;NORMAL&#x60;: An item that is in stock and available for immediate purchase and fulfillment. - &#x60;ZERO_LOTTERY&#x60;: An order placed during a lottery event in TikTok LIVE. - &#x60;AUCTION&#x60;: An order placed during auction, where the price of the product is not fixed. **US** - &#x60;PRE_ORDER&#x60;: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - &#x60;MADE_TO_ORDER&#x60;: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - &#x60;BACK_ORDER&#x60;: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - &#x60;VIRTUAL_ORDER&#x60;: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.  Returns an empty value for standard orders or other types that don&#39;t fall into the above categories.
-   */
-  @JsonAdapter(OrderTypeEnum.Adapter.class)
-  public enum OrderTypeEnum {
-    /**
-     * An item that is in stock and available for immediate purchase and fulfillment.
-     */
-    NORMAL("NORMAL"),
-    
-    /**
-     * An order placed during a lottery event in TikTok LIVE.
-     */
-    ZERO_LOTTERY("ZERO_LOTTERY"),
-    
-    /**
-     * An order placed during auction, where the price of the product is not fixed.
-     */
-    AUCTION("AUCTION"),
-    
-    /**
-     * An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future.
-     */
-    PRE_ORDER("PRE_ORDER"),
-    
-    /**
-     * An order for items that are produced only after the order is received. Fulfillment starts after the product is produced.
-     */
-    MADE_TO_ORDER("MADE_TO_ORDER"),
-    
-    /**
-     * An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.
-     */
-    BACK_ORDER("BACK_ORDER"),
-    
-    /**
-     * An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.
-     */
-    VIRTUAL_ORDER("VIRTUAL_ORDER");
-
-    private String value;
-
-    OrderTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OrderTypeEnum fromValue(String value) {
-      for (OrderTypeEnum b : OrderTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OrderTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OrderTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OrderTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OrderTypeEnum.fromValue(value);
-    }
-  }
+  private String commercePlatform;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
   @javax.annotation.Nullable
-  private OrderTypeEnum orderType;
+  private String orderType;
 
   public static final String SERIALIZED_NAME_RELEASE_DATE = "release_date";
   @SerializedName(SERIALIZED_NAME_RELEASE_DATE)
@@ -833,64 +367,10 @@ public class GetOrderListResponseDataOrder {
   @javax.annotation.Nullable
   private String consultationId;
 
-  /**
-   * A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - &#x60;3_DAY_DELIVERY&#x60; - &#x60;3_DAY_POTENTIAL_SHIPPING&#x60; - &#x60;3_DAY_POTENTIAL_TRANSIT&#x60; Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market.
-   */
-  @JsonAdapter(FastDeliveryProgramEnum.Adapter.class)
-  public enum FastDeliveryProgramEnum {
-    _3_DAY_DELIVERY("3_DAY_DELIVERY"),
-    
-    _3_DAY_POTENTIAL_SHIPPING("3_DAY_POTENTIAL_SHIPPING"),
-    
-    _3_DAY_POTENTIAL_TRANSIT("3_DAY_POTENTIAL_TRANSIT");
-
-    private String value;
-
-    FastDeliveryProgramEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FastDeliveryProgramEnum fromValue(String value) {
-      for (FastDeliveryProgramEnum b : FastDeliveryProgramEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FastDeliveryProgramEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FastDeliveryProgramEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FastDeliveryProgramEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FastDeliveryProgramEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FastDeliveryProgramEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FAST_DELIVERY_PROGRAM = "fast_delivery_program";
   @SerializedName(SERIALIZED_NAME_FAST_DELIVERY_PROGRAM)
   @javax.annotation.Nullable
-  private FastDeliveryProgramEnum fastDeliveryProgram;
+  private String fastDeliveryProgram;
 
   public static final String SERIALIZED_NAME_FULFILLMENT_PRIORITY_LEVEL = "fulfillment_priority_level";
   @SerializedName(SERIALIZED_NAME_FULFILLMENT_PRIORITY_LEVEL)
@@ -973,7 +453,7 @@ public class GetOrderListResponseDataOrder {
   }
 
 
-  public GetOrderListResponseDataOrder cancellationInitiator(@javax.annotation.Nullable CancellationInitiatorEnum cancellationInitiator) {
+  public GetOrderListResponseDataOrder cancellationInitiator(@javax.annotation.Nullable String cancellationInitiator) {
     this.cancellationInitiator = cancellationInitiator;
     return this;
   }
@@ -983,11 +463,11 @@ public class GetOrderListResponseDataOrder {
    * @return cancellationInitiator
    */
   @javax.annotation.Nullable
-  public CancellationInitiatorEnum getCancellationInitiator() {
+  public String getCancellationInitiator() {
     return cancellationInitiator;
   }
 
-  public void setCancellationInitiator(@javax.annotation.Nullable CancellationInitiatorEnum cancellationInitiator) {
+  public void setCancellationInitiator(@javax.annotation.Nullable String cancellationInitiator) {
     this.cancellationInitiator = cancellationInitiator;
   }
 
@@ -1114,7 +594,7 @@ public class GetOrderListResponseDataOrder {
   }
 
 
-  public GetOrderListResponseDataOrder status(@javax.annotation.Nullable StatusEnum status) {
+  public GetOrderListResponseDataOrder status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -1124,16 +604,16 @@ public class GetOrderListResponseDataOrder {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public GetOrderListResponseDataOrder fulfillmentType(@javax.annotation.Nullable FulfillmentTypeEnum fulfillmentType) {
+  public GetOrderListResponseDataOrder fulfillmentType(@javax.annotation.Nullable String fulfillmentType) {
     this.fulfillmentType = fulfillmentType;
     return this;
   }
@@ -1143,16 +623,16 @@ public class GetOrderListResponseDataOrder {
    * @return fulfillmentType
    */
   @javax.annotation.Nullable
-  public FulfillmentTypeEnum getFulfillmentType() {
+  public String getFulfillmentType() {
     return fulfillmentType;
   }
 
-  public void setFulfillmentType(@javax.annotation.Nullable FulfillmentTypeEnum fulfillmentType) {
+  public void setFulfillmentType(@javax.annotation.Nullable String fulfillmentType) {
     this.fulfillmentType = fulfillmentType;
   }
 
 
-  public GetOrderListResponseDataOrder deliveryType(@javax.annotation.Nullable DeliveryTypeEnum deliveryType) {
+  public GetOrderListResponseDataOrder deliveryType(@javax.annotation.Nullable String deliveryType) {
     this.deliveryType = deliveryType;
     return this;
   }
@@ -1162,11 +642,11 @@ public class GetOrderListResponseDataOrder {
    * @return deliveryType
    */
   @javax.annotation.Nullable
-  public DeliveryTypeEnum getDeliveryType() {
+  public String getDeliveryType() {
     return deliveryType;
   }
 
-  public void setDeliveryType(@javax.annotation.Nullable DeliveryTypeEnum deliveryType) {
+  public void setDeliveryType(@javax.annotation.Nullable String deliveryType) {
     this.deliveryType = deliveryType;
   }
 
@@ -1418,7 +898,7 @@ public class GetOrderListResponseDataOrder {
   }
 
 
-  public GetOrderListResponseDataOrder shippingType(@javax.annotation.Nullable ShippingTypeEnum shippingType) {
+  public GetOrderListResponseDataOrder shippingType(@javax.annotation.Nullable String shippingType) {
     this.shippingType = shippingType;
     return this;
   }
@@ -1428,11 +908,11 @@ public class GetOrderListResponseDataOrder {
    * @return shippingType
    */
   @javax.annotation.Nullable
-  public ShippingTypeEnum getShippingType() {
+  public String getShippingType() {
     return shippingType;
   }
 
-  public void setShippingType(@javax.annotation.Nullable ShippingTypeEnum shippingType) {
+  public void setShippingType(@javax.annotation.Nullable String shippingType) {
     this.shippingType = shippingType;
   }
 
@@ -1958,7 +1438,7 @@ public class GetOrderListResponseDataOrder {
   }
 
 
-  public GetOrderListResponseDataOrder commercePlatform(@javax.annotation.Nullable CommercePlatformEnum commercePlatform) {
+  public GetOrderListResponseDataOrder commercePlatform(@javax.annotation.Nullable String commercePlatform) {
     this.commercePlatform = commercePlatform;
     return this;
   }
@@ -1968,16 +1448,16 @@ public class GetOrderListResponseDataOrder {
    * @return commercePlatform
    */
   @javax.annotation.Nullable
-  public CommercePlatformEnum getCommercePlatform() {
+  public String getCommercePlatform() {
     return commercePlatform;
   }
 
-  public void setCommercePlatform(@javax.annotation.Nullable CommercePlatformEnum commercePlatform) {
+  public void setCommercePlatform(@javax.annotation.Nullable String commercePlatform) {
     this.commercePlatform = commercePlatform;
   }
 
 
-  public GetOrderListResponseDataOrder orderType(@javax.annotation.Nullable OrderTypeEnum orderType) {
+  public GetOrderListResponseDataOrder orderType(@javax.annotation.Nullable String orderType) {
     this.orderType = orderType;
     return this;
   }
@@ -1987,11 +1467,11 @@ public class GetOrderListResponseDataOrder {
    * @return orderType
    */
   @javax.annotation.Nullable
-  public OrderTypeEnum getOrderType() {
+  public String getOrderType() {
     return orderType;
   }
 
-  public void setOrderType(@javax.annotation.Nullable OrderTypeEnum orderType) {
+  public void setOrderType(@javax.annotation.Nullable String orderType) {
     this.orderType = orderType;
   }
 
@@ -2129,7 +1609,7 @@ public class GetOrderListResponseDataOrder {
   }
 
 
-  public GetOrderListResponseDataOrder fastDeliveryProgram(@javax.annotation.Nullable FastDeliveryProgramEnum fastDeliveryProgram) {
+  public GetOrderListResponseDataOrder fastDeliveryProgram(@javax.annotation.Nullable String fastDeliveryProgram) {
     this.fastDeliveryProgram = fastDeliveryProgram;
     return this;
   }
@@ -2139,11 +1619,11 @@ public class GetOrderListResponseDataOrder {
    * @return fastDeliveryProgram
    */
   @javax.annotation.Nullable
-  public FastDeliveryProgramEnum getFastDeliveryProgram() {
+  public String getFastDeliveryProgram() {
     return fastDeliveryProgram;
   }
 
-  public void setFastDeliveryProgram(@javax.annotation.Nullable FastDeliveryProgramEnum fastDeliveryProgram) {
+  public void setFastDeliveryProgram(@javax.annotation.Nullable String fastDeliveryProgram) {
     this.fastDeliveryProgram = fastDeliveryProgram;
   }
 
@@ -2563,10 +2043,6 @@ public class GetOrderListResponseDataOrder {
       if ((jsonObj.get("cancellation_initiator") != null && !jsonObj.get("cancellation_initiator").isJsonNull()) && !jsonObj.get("cancellation_initiator").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cancellation_initiator` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cancellation_initiator").toString()));
       }
-      // validate the optional field `cancellation_initiator`
-      if (jsonObj.get("cancellation_initiator") != null && !jsonObj.get("cancellation_initiator").isJsonNull()) {
-        CancellationInitiatorEnum.validateJsonElement(jsonObj.get("cancellation_initiator"));
-      }
       if ((jsonObj.get("shipping_provider_id") != null && !jsonObj.get("shipping_provider_id").isJsonNull()) && !jsonObj.get("shipping_provider_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shipping_provider_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shipping_provider_id").toString()));
       }
@@ -2598,23 +2074,11 @@ public class GetOrderListResponseDataOrder {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("fulfillment_type") != null && !jsonObj.get("fulfillment_type").isJsonNull()) && !jsonObj.get("fulfillment_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fulfillment_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fulfillment_type").toString()));
       }
-      // validate the optional field `fulfillment_type`
-      if (jsonObj.get("fulfillment_type") != null && !jsonObj.get("fulfillment_type").isJsonNull()) {
-        FulfillmentTypeEnum.validateJsonElement(jsonObj.get("fulfillment_type"));
-      }
       if ((jsonObj.get("delivery_type") != null && !jsonObj.get("delivery_type").isJsonNull()) && !jsonObj.get("delivery_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `delivery_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("delivery_type").toString()));
-      }
-      // validate the optional field `delivery_type`
-      if (jsonObj.get("delivery_type") != null && !jsonObj.get("delivery_type").isJsonNull()) {
-        DeliveryTypeEnum.validateJsonElement(jsonObj.get("delivery_type"));
       }
       if ((jsonObj.get("cancel_reason") != null && !jsonObj.get("cancel_reason").isJsonNull()) && !jsonObj.get("cancel_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cancel_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cancel_reason").toString()));
@@ -2633,10 +2097,6 @@ public class GetOrderListResponseDataOrder {
       }
       if ((jsonObj.get("shipping_type") != null && !jsonObj.get("shipping_type").isJsonNull()) && !jsonObj.get("shipping_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shipping_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shipping_type").toString()));
-      }
-      // validate the optional field `shipping_type`
-      if (jsonObj.get("shipping_type") != null && !jsonObj.get("shipping_type").isJsonNull()) {
-        ShippingTypeEnum.validateJsonElement(jsonObj.get("shipping_type"));
       }
       if ((jsonObj.get("user_id") != null && !jsonObj.get("user_id").isJsonNull()) && !jsonObj.get("user_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_id").toString()));
@@ -2679,16 +2139,8 @@ public class GetOrderListResponseDataOrder {
       if ((jsonObj.get("commerce_platform") != null && !jsonObj.get("commerce_platform").isJsonNull()) && !jsonObj.get("commerce_platform").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `commerce_platform` to be a primitive type in the JSON string but got `%s`", jsonObj.get("commerce_platform").toString()));
       }
-      // validate the optional field `commerce_platform`
-      if (jsonObj.get("commerce_platform") != null && !jsonObj.get("commerce_platform").isJsonNull()) {
-        CommercePlatformEnum.validateJsonElement(jsonObj.get("commerce_platform"));
-      }
       if ((jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
-      }
-      // validate the optional field `order_type`
-      if (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) {
-        OrderTypeEnum.validateJsonElement(jsonObj.get("order_type"));
       }
       // validate the optional field `handling_duration`
       if (jsonObj.get("handling_duration") != null && !jsonObj.get("handling_duration").isJsonNull()) {
@@ -2708,10 +2160,6 @@ public class GetOrderListResponseDataOrder {
       }
       if ((jsonObj.get("fast_delivery_program") != null && !jsonObj.get("fast_delivery_program").isJsonNull()) && !jsonObj.get("fast_delivery_program").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fast_delivery_program` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fast_delivery_program").toString()));
-      }
-      // validate the optional field `fast_delivery_program`
-      if (jsonObj.get("fast_delivery_program") != null && !jsonObj.get("fast_delivery_program").isJsonNull()) {
-        FastDeliveryProgramEnum.validateJsonElement(jsonObj.get("fast_delivery_program"));
       }
       if ((jsonObj.get("buyer_nickname") != null && !jsonObj.get("buyer_nickname").isJsonNull()) && !jsonObj.get("buyer_nickname").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `buyer_nickname` to be a primitive type in the JSON string but got `%s`", jsonObj.get("buyer_nickname").toString()));

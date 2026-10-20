@@ -66,23 +66,11 @@ export interface SearchGoodsInfoResponseDataGoodLotExpirationInfo {
      * - `STORE_UNITS`: Move the units to defective inventory.
      * - `RETURN_TO_SELLER`: Return the units to the seller.
      * - `DISPOSE`: Dispose of the units.
-     * @type {SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodLotExpirationInfo
      */
-    handlingMethod?: SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum;
+    handlingMethod?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum = {
-    StoreUnits: 'STORE_UNITS',
-    ReturnToSeller: 'RETURN_TO_SELLER',
-    Dispose: 'DISPOSE'
-} as const;
-export type SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum = typeof SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum[keyof typeof SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethodEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodLotExpirationInfo interface.

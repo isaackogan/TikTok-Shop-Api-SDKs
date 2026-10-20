@@ -32,10 +32,10 @@ export interface GetRecommendedProductTitleAndDescriptionResponseDataProductSugg
      * Possible values:
      * - TITLE
      * - DESCRIPTION
-     * @type {GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum}
+     * @type {string}
      * @memberof GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion
      */
-    field?: GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum;
+    field?: string;
     /**
      * The list of optimized text.
      * @type {Array<GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem>}
@@ -43,17 +43,6 @@ export interface GetRecommendedProductTitleAndDescriptionResponseDataProductSugg
      */
     items?: Array<GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem>;
 }
-
-
-/**
- * @export
- */
-export const GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum = {
-    Title: 'TITLE',
-    Description: 'DESCRIPTION'
-} as const;
-export type GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum = typeof GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum[keyof typeof GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionFieldEnum];
-
 
 /**
  * Check if a given object implements the GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion interface.

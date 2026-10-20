@@ -52,21 +52,10 @@ data class GetPackageDetailResponseDataInsurance (
 
     /* The insurance claim status. Available values: - `NOT_STARTED`: Claim has not been initiated for this package. - `CLAIM_PENDING`: Claim is currently under review. - `APPROVED`: Claim has been approved. - `DECLINED`: Claim has been declined. */
     @SerializedName("claim_status")
-    val claimStatus: GetPackageDetailResponseDataInsurance.ClaimStatus? = null
+    val claimStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * The insurance claim status. Available values: - `NOT_STARTED`: Claim has not been initiated for this package. - `CLAIM_PENDING`: Claim is currently under review. - `APPROVED`: Claim has been approved. - `DECLINED`: Claim has been declined.
-     *
-     * Values: NOT_STARTED,CLAIM_PENDING,APPROVED,DECLINED
-     */
-    enum class ClaimStatus(val value: kotlin.String) {
-        @SerializedName(value = "NOT_STARTED") NOT_STARTED("NOT_STARTED"),
-        @SerializedName(value = "CLAIM_PENDING") CLAIM_PENDING("CLAIM_PENDING"),
-        @SerializedName(value = "APPROVED") APPROVED("APPROVED"),
-        @SerializedName(value = "DECLINED") DECLINED("DECLINED");
-    }
 
 }
 

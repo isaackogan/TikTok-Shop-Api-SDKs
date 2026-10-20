@@ -53,20 +53,20 @@ export interface PublishResult {
      * - US: United States
      * - VN: Vietnam
      * - MX: Mexico
-     * @type {PublishResultRegionEnum}
+     * @type {string}
      * @memberof PublishResult
      */
-    region?: PublishResultRegionEnum;
+    region?: string;
     /**
      * The status of syncing the product to the market.
      * Possible values:
      * - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product Status Change webhook](https://partner.tiktokshop.com/docv2/page/650956aff1fd3102b90b6261) to track the final audit status.
      * - DRAFT: Synchronization did not complete, and the local product remains in draft.
      * - FAILED: Synchronization of the global product to the local shop was unsuccessful.
-     * @type {PublishResultStatusEnum}
+     * @type {string}
      * @memberof PublishResult
      */
-    status?: PublishResultStatusEnum;
+    status?: string;
     /**
      * The list of errors that occurred.
      * @type {Array<FailReason>}
@@ -74,48 +74,6 @@ export interface PublishResult {
      */
     failReasons?: Array<FailReason>;
 }
-
-
-/**
- * @export
- */
-export const PublishResultRegionEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Po: 'PO',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type PublishResultRegionEnum = typeof PublishResultRegionEnum[keyof typeof PublishResultRegionEnum];
-
-/**
- * @export
- */
-export const PublishResultStatusEnum = {
-    Success: 'SUCCESS',
-    Draft: 'DRAFT',
-    Failed: 'FAILED'
-} as const;
-export type PublishResultStatusEnum = typeof PublishResultStatusEnum[keyof typeof PublishResultStatusEnum];
-
 
 /**
  * Check if a given object implements the PublishResult interface.

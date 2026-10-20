@@ -58,10 +58,10 @@ export interface GetCategoryAttributesResponseDataAttribute {
      * Possible values:
      * - SALES_PROPERTY: Indicates sales attributes that define product variants.
      * - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-     * @type {GetCategoryAttributesResponseDataAttributeTypeEnum}
+     * @type {string}
      * @memberof GetCategoryAttributesResponseDataAttribute
      */
-    type?: GetCategoryAttributesResponseDataAttributeTypeEnum;
+    type?: string;
     /**
      * A flag to indicate if the product attribute is always required when creating or editing a product.
      * - true: The attribute is always required.
@@ -85,10 +85,10 @@ export interface GetCategoryAttributesResponseDataAttribute {
      * 
      * Possible values:
      * - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers.
-     * @type {GetCategoryAttributesResponseDataAttributeValueDataFormatEnum}
+     * @type {string}
      * @memberof GetCategoryAttributesResponseDataAttribute
      */
-    valueDataFormat?: GetCategoryAttributesResponseDataAttributeValueDataFormatEnum;
+    valueDataFormat?: string;
     /**
      * A flag indicating whether sellers can enter a custom value for the attribute when creating or editing a product.
      * @type {boolean}
@@ -118,25 +118,6 @@ export interface GetCategoryAttributesResponseDataAttribute {
      */
     metricStandards?: Array<GetCategoryAttributesResponseDataAttributeMetricStandard>;
 }
-
-
-/**
- * @export
- */
-export const GetCategoryAttributesResponseDataAttributeTypeEnum = {
-    SalesProperty: 'SALES_PROPERTY',
-    ProductProperty: 'PRODUCT_PROPERTY'
-} as const;
-export type GetCategoryAttributesResponseDataAttributeTypeEnum = typeof GetCategoryAttributesResponseDataAttributeTypeEnum[keyof typeof GetCategoryAttributesResponseDataAttributeTypeEnum];
-
-/**
- * @export
- */
-export const GetCategoryAttributesResponseDataAttributeValueDataFormatEnum = {
-    PositiveIntOrDecimal: 'POSITIVE_INT_OR_DECIMAL'
-} as const;
-export type GetCategoryAttributesResponseDataAttributeValueDataFormatEnum = typeof GetCategoryAttributesResponseDataAttributeValueDataFormatEnum[keyof typeof GetCategoryAttributesResponseDataAttributeValueDataFormatEnum];
-
 
 /**
  * Check if a given object implements the GetCategoryAttributesResponseDataAttribute interface.

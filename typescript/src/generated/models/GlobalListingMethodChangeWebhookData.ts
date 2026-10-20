@@ -37,22 +37,11 @@ export interface GlobalListingMethodChangeWebhookData {
      *   
      *  * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets. 
      *  * LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
-     * @type {GlobalListingMethodChangeWebhookDataListingMethodEnum}
+     * @type {string}
      * @memberof GlobalListingMethodChangeWebhookData
      */
-    listingMethod?: GlobalListingMethodChangeWebhookDataListingMethodEnum;
+    listingMethod?: string;
 }
-
-
-/**
- * @export
- */
-export const GlobalListingMethodChangeWebhookDataListingMethodEnum = {
-    GlobalPublishing: 'GLOBAL_PUBLISHING',
-    LocalReplication: 'LOCAL_REPLICATION'
-} as const;
-export type GlobalListingMethodChangeWebhookDataListingMethodEnum = typeof GlobalListingMethodChangeWebhookDataListingMethodEnum[keyof typeof GlobalListingMethodChangeWebhookDataListingMethodEnum];
-
 
 /**
  * Check if a given object implements the GlobalListingMethodChangeWebhookData interface.

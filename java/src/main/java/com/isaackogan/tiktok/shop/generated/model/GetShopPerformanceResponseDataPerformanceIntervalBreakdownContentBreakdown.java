@@ -52,119 +52,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown {
-  /**
-   * Channel type. Possible values: CREATOR, SELLER
-   */
-  @JsonAdapter(ChannelEnum.Adapter.class)
-  public enum ChannelEnum {
-    CREATOR("CREATOR"),
-    
-    SELLER("SELLER");
-
-    private String value;
-
-    ChannelEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ChannelEnum fromValue(String value) {
-      for (ChannelEnum b : ChannelEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ChannelEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ChannelEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ChannelEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ChannelEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ChannelEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CHANNEL = "channel";
   @SerializedName(SERIALIZED_NAME_CHANNEL)
   @javax.annotation.Nullable
-  private ChannelEnum channel;
-
-  /**
-   * Content type. Possible values: LIVE, VIDEO
-   */
-  @JsonAdapter(ContentTypeEnum.Adapter.class)
-  public enum ContentTypeEnum {
-    LIVE("LIVE"),
-    
-    VIDEO("VIDEO");
-
-    private String value;
-
-    ContentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ContentTypeEnum fromValue(String value) {
-      for (ContentTypeEnum b : ContentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ContentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ContentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ContentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ContentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ContentTypeEnum.fromValue(value);
-    }
-  }
+  private String channel;
 
   public static final String SERIALIZED_NAME_CONTENT_TYPE = "content_type";
   @SerializedName(SERIALIZED_NAME_CONTENT_TYPE)
   @javax.annotation.Nullable
-  private ContentTypeEnum contentType;
+  private String contentType;
 
   public static final String SERIALIZED_NAME_GMV = "gmv";
   @SerializedName(SERIALIZED_NAME_GMV)
@@ -179,7 +75,7 @@ public class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBr
   public GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown() {
   }
 
-  public GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown channel(@javax.annotation.Nullable ChannelEnum channel) {
+  public GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown channel(@javax.annotation.Nullable String channel) {
     this.channel = channel;
     return this;
   }
@@ -189,16 +85,16 @@ public class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBr
    * @return channel
    */
   @javax.annotation.Nullable
-  public ChannelEnum getChannel() {
+  public String getChannel() {
     return channel;
   }
 
-  public void setChannel(@javax.annotation.Nullable ChannelEnum channel) {
+  public void setChannel(@javax.annotation.Nullable String channel) {
     this.channel = channel;
   }
 
 
-  public GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown contentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown contentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
     return this;
   }
@@ -208,11 +104,11 @@ public class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBr
    * @return contentType
    */
   @javax.annotation.Nullable
-  public ContentTypeEnum getContentType() {
+  public String getContentType() {
     return contentType;
   }
 
-  public void setContentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public void setContentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
   }
 
@@ -370,16 +266,8 @@ public class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBr
       if ((jsonObj.get("channel") != null && !jsonObj.get("channel").isJsonNull()) && !jsonObj.get("channel").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `channel` to be a primitive type in the JSON string but got `%s`", jsonObj.get("channel").toString()));
       }
-      // validate the optional field `channel`
-      if (jsonObj.get("channel") != null && !jsonObj.get("channel").isJsonNull()) {
-        ChannelEnum.validateJsonElement(jsonObj.get("channel"));
-      }
       if ((jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) && !jsonObj.get("content_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_type").toString()));
-      }
-      // validate the optional field `content_type`
-      if (jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) {
-        ContentTypeEnum.validateJsonElement(jsonObj.get("content_type"));
       }
       // validate the optional field `gmv`
       if (jsonObj.get("gmv") != null && !jsonObj.get("gmv").isJsonNull()) {

@@ -58,64 +58,10 @@ public class GetInboundMethodDetailResponseData {
   @javax.annotation.Nullable
   private List<GetInboundMethodDetailResponseDataInfo> info = new ArrayList<>();
 
-  /**
-   * **Possible values:** * &#x60;Executing&#x60; * &#x60;Succeed&#x60; * &#x60;Failed&#x60;
-   */
-  @JsonAdapter(PlacementTaskStatusEnum.Adapter.class)
-  public enum PlacementTaskStatusEnum {
-    EXECUTING("Executing"),
-    
-    SUCCEED("Succeed"),
-    
-    FAILED("Failed");
-
-    private String value;
-
-    PlacementTaskStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PlacementTaskStatusEnum fromValue(String value) {
-      for (PlacementTaskStatusEnum b : PlacementTaskStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PlacementTaskStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PlacementTaskStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PlacementTaskStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PlacementTaskStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PlacementTaskStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PLACEMENT_TASK_STATUS = "placement_task_status";
   @SerializedName(SERIALIZED_NAME_PLACEMENT_TASK_STATUS)
   @javax.annotation.Nullable
-  private PlacementTaskStatusEnum placementTaskStatus;
+  private String placementTaskStatus;
 
   public static final String SERIALIZED_NAME_EXPIRATION_TIMESTAMP = "expiration_timestamp";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_TIMESTAMP)
@@ -152,7 +98,7 @@ public class GetInboundMethodDetailResponseData {
   }
 
 
-  public GetInboundMethodDetailResponseData placementTaskStatus(@javax.annotation.Nullable PlacementTaskStatusEnum placementTaskStatus) {
+  public GetInboundMethodDetailResponseData placementTaskStatus(@javax.annotation.Nullable String placementTaskStatus) {
     this.placementTaskStatus = placementTaskStatus;
     return this;
   }
@@ -162,11 +108,11 @@ public class GetInboundMethodDetailResponseData {
    * @return placementTaskStatus
    */
   @javax.annotation.Nullable
-  public PlacementTaskStatusEnum getPlacementTaskStatus() {
+  public String getPlacementTaskStatus() {
     return placementTaskStatus;
   }
 
-  public void setPlacementTaskStatus(@javax.annotation.Nullable PlacementTaskStatusEnum placementTaskStatus) {
+  public void setPlacementTaskStatus(@javax.annotation.Nullable String placementTaskStatus) {
     this.placementTaskStatus = placementTaskStatus;
   }
 
@@ -316,10 +262,6 @@ public class GetInboundMethodDetailResponseData {
       }
       if ((jsonObj.get("placement_task_status") != null && !jsonObj.get("placement_task_status").isJsonNull()) && !jsonObj.get("placement_task_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `placement_task_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("placement_task_status").toString()));
-      }
-      // validate the optional field `placement_task_status`
-      if (jsonObj.get("placement_task_status") != null && !jsonObj.get("placement_task_status").isJsonNull()) {
-        PlacementTaskStatusEnum.validateJsonElement(jsonObj.get("placement_task_status"));
       }
       if ((jsonObj.get("expiration_timestamp") != null && !jsonObj.get("expiration_timestamp").isJsonNull()) && !jsonObj.get("expiration_timestamp").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `expiration_timestamp` to be a primitive type in the JSON string but got `%s`", jsonObj.get("expiration_timestamp").toString()));

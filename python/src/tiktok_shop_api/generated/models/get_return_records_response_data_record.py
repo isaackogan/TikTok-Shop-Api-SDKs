@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_return_records_response_data_record_role import GetReturnRecordsResponseDataRecordRole
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +23,7 @@ class GetReturnRecordsResponseDataRecord:
         event (str | Unset): The event type that represents which lifecycle event this record describes. It can vary
             depending on the current status and the return flow of the request, including the initial request, seller
             actions, shipment events, and timeout or system events.
-        role (GetReturnRecordsResponseDataRecordRole | Unset): The actor that initiated this lifecycle event. Possible
-            values:
+        role (str | Unset): The actor that initiated this lifecycle event. Possible values:
             - `BUYER`
             - `SELLER`
             - `OPERATOR`: The action was triggered manually by a customer service agent.
@@ -42,7 +40,7 @@ class GetReturnRecordsResponseDataRecord:
     """
 
     event: str | Unset = UNSET
-    role: GetReturnRecordsResponseDataRecordRole | Unset = UNSET
+    role: str | Unset = UNSET
     description: str | Unset = UNSET
     reason_text: str | Unset = UNSET
     note: str | Unset = UNSET
@@ -54,9 +52,7 @@ class GetReturnRecordsResponseDataRecord:
     def to_dict(self) -> dict[str, Any]:
         event = self.event
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         description = self.description
 
@@ -114,12 +110,7 @@ class GetReturnRecordsResponseDataRecord:
         d = dict(src_dict)
         event = d.pop("event", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetReturnRecordsResponseDataRecordRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetReturnRecordsResponseDataRecordRole(_role)
+        role = d.pop("role", UNSET)
 
         description = d.pop("description", UNSET)
 

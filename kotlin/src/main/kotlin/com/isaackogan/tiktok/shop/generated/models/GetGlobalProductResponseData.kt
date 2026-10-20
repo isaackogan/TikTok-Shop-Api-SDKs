@@ -151,7 +151,7 @@ data class GetGlobalProductResponseData (
 
     /* The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN */
     @SerializedName("source_locale")
-    val sourceLocale: GetGlobalProductResponseData.SourceLocale? = null,
+    val sourceLocale: kotlin.String? = null,
 
     /* An external identifier used in an external ecommerce platform. This is used to associate the product between TikTok Shop and the external ecommerce platform. */
     @SerializedName("external_global_product_id")
@@ -159,38 +159,6 @@ data class GetGlobalProductResponseData (
 
 ) {
 
-    /**
-     * The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN
-     *
-     * Values: csMinusCZ,deMinusAT,deMinusBE,deMinusDE,elMinusGR,enMinusGB,enMinusIE,enMinusUS,esMinusES,esMinusMX,frMinusFR,frMinusBE,huMinusHU,idMinusID,itMinusIT,jaMinusJP,msMinusMY,nlMinusNL,nlMinusBE,plMinusPL,ptMinusBR,ptMinusPT,thMinusTH,viMinusVN,zhMinusCN
-     */
-    enum class SourceLocale(val value: kotlin.String) {
-        @SerializedName(value = "cs-CZ") csMinusCZ("cs-CZ"),
-        @SerializedName(value = "de-AT") deMinusAT("de-AT"),
-        @SerializedName(value = "de-BE") deMinusBE("de-BE"),
-        @SerializedName(value = "de-DE") deMinusDE("de-DE"),
-        @SerializedName(value = "el-GR") elMinusGR("el-GR"),
-        @SerializedName(value = "en-GB") enMinusGB("en-GB"),
-        @SerializedName(value = "en-IE") enMinusIE("en-IE"),
-        @SerializedName(value = "en-US") enMinusUS("en-US"),
-        @SerializedName(value = "es-ES") esMinusES("es-ES"),
-        @SerializedName(value = "es-MX") esMinusMX("es-MX"),
-        @SerializedName(value = "fr-FR") frMinusFR("fr-FR"),
-        @SerializedName(value = "fr-BE") frMinusBE("fr-BE"),
-        @SerializedName(value = "hu-HU") huMinusHU("hu-HU"),
-        @SerializedName(value = "id-ID") idMinusID("id-ID"),
-        @SerializedName(value = "it-IT") itMinusIT("it-IT"),
-        @SerializedName(value = "ja-JP") jaMinusJP("ja-JP"),
-        @SerializedName(value = "ms-MY") msMinusMY("ms-MY"),
-        @SerializedName(value = "nl-NL") nlMinusNL("nl-NL"),
-        @SerializedName(value = "nl-BE") nlMinusBE("nl-BE"),
-        @SerializedName(value = "pl-PL") plMinusPL("pl-PL"),
-        @SerializedName(value = "pt-BR") ptMinusBR("pt-BR"),
-        @SerializedName(value = "pt-PT") ptMinusPT("pt-PT"),
-        @SerializedName(value = "th-TH") thMinusTH("th-TH"),
-        @SerializedName(value = "vi-VN") viMinusVN("vi-VN"),
-        @SerializedName(value = "zh-CN") zhMinusCN("zh-CN");
-    }
 
 }
 

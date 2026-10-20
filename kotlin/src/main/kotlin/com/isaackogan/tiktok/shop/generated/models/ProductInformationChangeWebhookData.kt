@@ -44,11 +44,11 @@ data class ProductInformationChangeWebhookData (
 
     /* The originating source of the change.   Possible values:   - `SELLER_CENTER`   - `OPEN_API` */
     @SerializedName("change_source")
-    val changeSource: ProductInformationChangeWebhookData.ChangeSource? = null,
+    val changeSource: kotlin.String? = null,
 
     /* The product properties that were changed.   Possible values:   - `title`: The product name was changed.   - `description`: The product description was changed.   - `main_images`: Product images that appear in the image gallery were added, removed, or changed.   - `product_attributes`: Product attributes were added, removed, or edited.   - `size_chart_image`: The size chart image was added, removed, or changed.   - `size_chart_template`: The associated size chart template was removed or its details were edited, or a new size chart template was associated.   - `others`: Other product properties not specified above were changed. */
     @SerializedName("changed_fields")
-    val changedFields: kotlin.collections.List<ProductInformationChangeWebhookData.ChangedFields>? = null,
+    val changedFields: kotlin.collections.List<kotlin.String>? = null,
 
     /* The time when the change occurred. Unix timestamp. */
     @SerializedName("update_time")
@@ -56,29 +56,6 @@ data class ProductInformationChangeWebhookData (
 
 ) {
 
-    /**
-     * The originating source of the change.   Possible values:   - `SELLER_CENTER`   - `OPEN_API`
-     *
-     * Values: SELLER_CENTER,OPEN_API
-     */
-    enum class ChangeSource(val value: kotlin.String) {
-        @SerializedName(value = "SELLER_CENTER") SELLER_CENTER("SELLER_CENTER"),
-        @SerializedName(value = "OPEN_API") OPEN_API("OPEN_API");
-    }
-    /**
-     * The product properties that were changed.   Possible values:   - `title`: The product name was changed.   - `description`: The product description was changed.   - `main_images`: Product images that appear in the image gallery were added, removed, or changed.   - `product_attributes`: Product attributes were added, removed, or edited.   - `size_chart_image`: The size chart image was added, removed, or changed.   - `size_chart_template`: The associated size chart template was removed or its details were edited, or a new size chart template was associated.   - `others`: Other product properties not specified above were changed.
-     *
-     * Values: title,description,main_images,product_attributes,size_chart_image,size_chart_template,others
-     */
-    enum class ChangedFields(val value: kotlin.String) {
-        @SerializedName(value = "title") title("title"),
-        @SerializedName(value = "description") description("description"),
-        @SerializedName(value = "main_images") main_images("main_images"),
-        @SerializedName(value = "product_attributes") product_attributes("product_attributes"),
-        @SerializedName(value = "size_chart_image") size_chart_image("size_chart_image"),
-        @SerializedName(value = "size_chart_template") size_chart_template("size_chart_template"),
-        @SerializedName(value = "others") others("others");
-    }
 
 }
 

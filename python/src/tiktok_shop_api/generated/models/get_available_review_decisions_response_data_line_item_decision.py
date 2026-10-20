@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_available_review_decisions_response_data_line_item_decision_decision import (
-    GetAvailableReviewDecisionsResponseDataLineItemDecisionDecision,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,8 +22,7 @@ T = TypeVar("T", bound="GetAvailableReviewDecisionsResponseDataLineItemDecision"
 class GetAvailableReviewDecisionsResponseDataLineItemDecision:
     """
     Attributes:
-        decision (GetAvailableReviewDecisionsResponseDataLineItemDecisionDecision | Unset): Seller review decision
-            evaluated for this line item.
+        decision (str | Unset): Seller review decision evaluated for this line item.
             Possible values:
             - `APPROVE_REQUEST_CANCEL`
             - `APPROVE_REFUND`
@@ -54,7 +50,7 @@ class GetAvailableReviewDecisionsResponseDataLineItemDecision:
             Unset):
     """
 
-    decision: GetAvailableReviewDecisionsResponseDataLineItemDecisionDecision | Unset = UNSET
+    decision: str | Unset = UNSET
     eligible: bool | Unset = UNSET
     ineligible_code: int | Unset = UNSET
     ineligible_reason: str | Unset = UNSET
@@ -65,9 +61,7 @@ class GetAvailableReviewDecisionsResponseDataLineItemDecision:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        decision: str | Unset = UNSET
-        if not isinstance(self.decision, Unset):
-            decision = self.decision.value
+        decision = self.decision
 
         eligible = self.eligible
 
@@ -112,12 +106,7 @@ class GetAvailableReviewDecisionsResponseDataLineItemDecision:
         )
 
         d = dict(src_dict)
-        _decision = d.pop("decision", UNSET)
-        decision: GetAvailableReviewDecisionsResponseDataLineItemDecisionDecision | Unset
-        if isinstance(_decision, Unset):
-            decision = UNSET
-        else:
-            decision = GetAvailableReviewDecisionsResponseDataLineItemDecisionDecision(_decision)
+        decision = d.pop("decision", UNSET)
 
         eligible = d.pop("eligible", UNSET)
 

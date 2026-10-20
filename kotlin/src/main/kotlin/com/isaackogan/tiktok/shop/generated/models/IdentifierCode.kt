@@ -42,22 +42,10 @@ data class IdentifierCode (
 
     /* The type of identifier code. Possible values: - GTIN - EAN - UPC - ISBN - JAN */
     @SerializedName("type")
-    val type: IdentifierCode.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * The type of identifier code. Possible values: - GTIN - EAN - UPC - ISBN - JAN
-     *
-     * Values: GTIN,EAN,UPC,ISBN,JAN
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "GTIN") GTIN("GTIN"),
-        @SerializedName(value = "EAN") EAN("EAN"),
-        @SerializedName(value = "UPC") UPC("UPC"),
-        @SerializedName(value = "ISBN") ISBN("ISBN"),
-        @SerializedName(value = "JAN") JAN("JAN");
-    }
 
 }
 

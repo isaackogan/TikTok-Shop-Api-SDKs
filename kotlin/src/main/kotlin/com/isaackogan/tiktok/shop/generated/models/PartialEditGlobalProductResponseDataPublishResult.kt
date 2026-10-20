@@ -40,11 +40,11 @@ data class PartialEditGlobalProductResponseDataPublishResult (
 
     /* The market where the product is published Possible values: - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam */
     @SerializedName("region")
-    val region: PartialEditGlobalProductResponseDataPublishResult.Region? = null,
+    val region: kotlin.String? = null,
 
     /* The status of syncing the product to the market. Possible values: - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product status change](650956aff1fd3102b90b6261) webhook to track subsequent audit status changes and completion. - FAILED: Synchronization of the global product to the local shop was unsuccessful. */
     @SerializedName("status")
-    val status: PartialEditGlobalProductResponseDataPublishResult.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The list of errors that occurred. */
     @SerializedName("fail_reasons")
@@ -52,37 +52,6 @@ data class PartialEditGlobalProductResponseDataPublishResult (
 
 ) {
 
-    /**
-     * The market where the product is published Possible values: - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam
-     *
-     * Values: DE,ES,FR,GB,ID,IE,IT,JP,MX,MY,PH,SG,TH,US,VN
-     */
-    enum class Region(val value: kotlin.String) {
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MX") MX("MX"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN");
-    }
-    /**
-     * The status of syncing the product to the market. Possible values: - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product status change](650956aff1fd3102b90b6261) webhook to track subsequent audit status changes and completion. - FAILED: Synchronization of the global product to the local shop was unsuccessful.
-     *
-     * Values: SUCCESS,FAILED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "FAILED") FAILED("FAILED");
-    }
 
 }
 

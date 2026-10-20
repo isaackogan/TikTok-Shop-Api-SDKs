@@ -66,22 +66,11 @@ export interface SearchSizeChartsResponseDataSizeChart {
     sizeChartDatas?: Array<SearchSizeChartsResponseDataSizeChartSizeChartData>;
     /**
      * Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
-     * @type {SearchSizeChartsResponseDataSizeChartSizeChartModeEnum}
+     * @type {string}
      * @memberof SearchSizeChartsResponseDataSizeChart
      */
-    sizeChartMode?: SearchSizeChartsResponseDataSizeChartSizeChartModeEnum;
+    sizeChartMode?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchSizeChartsResponseDataSizeChartSizeChartModeEnum = {
-    ReusableTemplate: 'REUSABLE_TEMPLATE',
-    ProductScoped: 'PRODUCT_SCOPED'
-} as const;
-export type SearchSizeChartsResponseDataSizeChartSizeChartModeEnum = typeof SearchSizeChartsResponseDataSizeChartSizeChartModeEnum[keyof typeof SearchSizeChartsResponseDataSizeChartSizeChartModeEnum];
-
 
 /**
  * Check if a given object implements the SearchSizeChartsResponseDataSizeChart interface.

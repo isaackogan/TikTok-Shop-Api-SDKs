@@ -52,10 +52,10 @@ export interface NewMessageListenerWebhookData {
      *  * PRODUCT_CARD 
      *  * TARGET_COLLABORATION_CARD 
      *  * FREE_SAMPLE_CARD
-     * @type {NewMessageListenerWebhookDataMsgTypeEnum}
+     * @type {string}
      * @memberof NewMessageListenerWebhookData
      */
-    msgType?: NewMessageListenerWebhookDataMsgTypeEnum;
+    msgType?: string;
     /**
      * Message content, in JSON serialized string. 
      *   
@@ -80,19 +80,6 @@ export interface NewMessageListenerWebhookData {
      */
     sender?: NewMessageListenerWebhookDataSender;
 }
-
-
-/**
- * @export
- */
-export const NewMessageListenerWebhookDataMsgTypeEnum = {
-    Text: 'TEXT',
-    ProductCard: 'PRODUCT_CARD',
-    TargetCollaborationCard: 'TARGET_COLLABORATION_CARD',
-    FreeSampleCard: 'FREE_SAMPLE_CARD'
-} as const;
-export type NewMessageListenerWebhookDataMsgTypeEnum = typeof NewMessageListenerWebhookDataMsgTypeEnum[keyof typeof NewMessageListenerWebhookDataMsgTypeEnum];
-
 
 /**
  * Check if a given object implements the NewMessageListenerWebhookData interface.

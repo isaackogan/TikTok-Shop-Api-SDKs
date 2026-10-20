@@ -6,8 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.goods_match_webhook_data_match_type import GoodsMatchWebhookDataMatchType
-from ..models.goods_match_webhook_data_product_type import GoodsMatchWebhookDataProductType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GoodsMatchWebhookData")
@@ -17,17 +15,17 @@ T = TypeVar("T", bound="GoodsMatchWebhookData")
 class GoodsMatchWebhookData:
     """
     Attributes:
-        match_type (GoodsMatchWebhookDataMatchType | Unset): Indicates whether the seller is matching or unmatching
-            products. Possible enumerations are: `MATCH` and `UNMATCH`.
-        product_type (GoodsMatchWebhookDataProductType | Unset): Possible enumerations are: `LOCAL` and `GLOBAL`.
+        match_type (str | Unset): Indicates whether the seller is matching or unmatching products. Possible enumerations
+            are: `MATCH` and `UNMATCH`.
+        product_type (str | Unset): Possible enumerations are: `LOCAL` and `GLOBAL`.
         goods_id (str | Unset): FBT Goods ID.
         product_id (str | Unset): TikTok Shop product ID.
         sku_id (str | Unset): TikTok Shop SKU ID.
         update_time (int | Unset): The time when the action occurred. Unix timestamp.
     """
 
-    match_type: GoodsMatchWebhookDataMatchType | Unset = UNSET
-    product_type: GoodsMatchWebhookDataProductType | Unset = UNSET
+    match_type: str | Unset = UNSET
+    product_type: str | Unset = UNSET
     goods_id: str | Unset = UNSET
     product_id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
@@ -35,13 +33,9 @@ class GoodsMatchWebhookData:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        match_type: str | Unset = UNSET
-        if not isinstance(self.match_type, Unset):
-            match_type = self.match_type.value
+        match_type = self.match_type
 
-        product_type: str | Unset = UNSET
-        if not isinstance(self.product_type, Unset):
-            product_type = self.product_type.value
+        product_type = self.product_type
 
         goods_id = self.goods_id
 
@@ -72,19 +66,9 @@ class GoodsMatchWebhookData:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _match_type = d.pop("match_type", UNSET)
-        match_type: GoodsMatchWebhookDataMatchType | Unset
-        if isinstance(_match_type, Unset):
-            match_type = UNSET
-        else:
-            match_type = GoodsMatchWebhookDataMatchType(_match_type)
+        match_type = d.pop("match_type", UNSET)
 
-        _product_type = d.pop("product_type", UNSET)
-        product_type: GoodsMatchWebhookDataProductType | Unset
-        if isinstance(_product_type, Unset):
-            product_type = UNSET
-        else:
-            product_type = GoodsMatchWebhookDataProductType(_product_type)
+        product_type = d.pop("product_type", UNSET)
 
         goods_id = d.pop("goods_id", UNSET)
 

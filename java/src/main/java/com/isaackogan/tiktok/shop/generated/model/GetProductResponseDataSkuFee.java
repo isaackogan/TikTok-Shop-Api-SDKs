@@ -50,129 +50,25 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetProductResponseDataSkuFee {
-  /**
-   * Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE
-   */
-  @JsonAdapter(AdditionalAttributeEnum.Adapter.class)
-  public enum AdditionalAttributeEnum {
-    SINGLE_USE("SINGLE_USE"),
-    
-    REUSABLE("REUSABLE"),
-    
-    NOT_APPLICABLE("NOT_APPLICABLE");
-
-    private String value;
-
-    AdditionalAttributeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AdditionalAttributeEnum fromValue(String value) {
-      for (AdditionalAttributeEnum b : AdditionalAttributeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AdditionalAttributeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AdditionalAttributeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AdditionalAttributeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AdditionalAttributeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AdditionalAttributeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ADDITIONAL_ATTRIBUTE = "additional_attribute";
   @SerializedName(SERIALIZED_NAME_ADDITIONAL_ATTRIBUTE)
   @javax.annotation.Nullable
-  private AdditionalAttributeEnum additionalAttribute;
+  private String additionalAttribute;
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
   @javax.annotation.Nullable
   private String amount;
 
-  /**
-   * The type of fee. Possible values: PFAND
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    PFAND("PFAND");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public GetProductResponseDataSkuFee() {
   }
 
-  public GetProductResponseDataSkuFee additionalAttribute(@javax.annotation.Nullable AdditionalAttributeEnum additionalAttribute) {
+  public GetProductResponseDataSkuFee additionalAttribute(@javax.annotation.Nullable String additionalAttribute) {
     this.additionalAttribute = additionalAttribute;
     return this;
   }
@@ -182,11 +78,11 @@ public class GetProductResponseDataSkuFee {
    * @return additionalAttribute
    */
   @javax.annotation.Nullable
-  public AdditionalAttributeEnum getAdditionalAttribute() {
+  public String getAdditionalAttribute() {
     return additionalAttribute;
   }
 
-  public void setAdditionalAttribute(@javax.annotation.Nullable AdditionalAttributeEnum additionalAttribute) {
+  public void setAdditionalAttribute(@javax.annotation.Nullable String additionalAttribute) {
     this.additionalAttribute = additionalAttribute;
   }
 
@@ -210,7 +106,7 @@ public class GetProductResponseDataSkuFee {
   }
 
 
-  public GetProductResponseDataSkuFee type(@javax.annotation.Nullable TypeEnum type) {
+  public GetProductResponseDataSkuFee type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -220,11 +116,11 @@ public class GetProductResponseDataSkuFee {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -342,19 +238,11 @@ public class GetProductResponseDataSkuFee {
       if ((jsonObj.get("additional_attribute") != null && !jsonObj.get("additional_attribute").isJsonNull()) && !jsonObj.get("additional_attribute").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `additional_attribute` to be a primitive type in the JSON string but got `%s`", jsonObj.get("additional_attribute").toString()));
       }
-      // validate the optional field `additional_attribute`
-      if (jsonObj.get("additional_attribute") != null && !jsonObj.get("additional_attribute").isJsonNull()) {
-        AdditionalAttributeEnum.validateJsonElement(jsonObj.get("additional_attribute"));
-      }
       if ((jsonObj.get("amount") != null && !jsonObj.get("amount").isJsonNull()) && !jsonObj.get("amount").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 

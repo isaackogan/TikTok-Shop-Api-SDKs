@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_aftersales_requests_response_data_aftersales_request_status import (
-    SearchAftersalesRequestsResponseDataAftersalesRequestStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,8 +26,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
         id (str | Unset): Unique identifier for this aftersales request.
         line_items (list[LineItem] | Unset): List of items associated with this aftersales request. This field is
             returned only when `LINE_ITEMS` is included in `whitelisted_data_fields` and matching item data is available.
-        status (SearchAftersalesRequestsResponseDataAftersalesRequestStatus | Unset): Current state of this aftersales
-            request.
+        status (str | Unset): Current state of this aftersales request.
             Possible values:
             - `INIT`
             - `PENDING_REQUEST_REVIEW`
@@ -47,7 +43,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
 
     id: str | Unset = UNSET
     line_items: list[LineItem] | Unset = UNSET
-    status: SearchAftersalesRequestsResponseDataAftersalesRequestStatus | Unset = UNSET
+    status: str | Unset = UNSET
     sku_return_requests: list[SkuReturnRequest] | Unset = UNSET
     return_merchandise_authorizations: (
         list[SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization] | Unset
@@ -64,9 +60,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
                 line_items_item = line_items_item_data.to_dict()
                 line_items.append(line_items_item)
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         sku_return_requests: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sku_return_requests, Unset):
@@ -118,12 +112,7 @@ class SearchAftersalesRequestsResponseDataAftersalesRequest:
 
                 line_items.append(line_items_item)
 
-        _status = d.pop("status", UNSET)
-        status: SearchAftersalesRequestsResponseDataAftersalesRequestStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchAftersalesRequestsResponseDataAftersalesRequestStatus(_status)
+        status = d.pop("status", UNSET)
 
         _sku_return_requests = d.pop("sku_return_requests", UNSET)
         sku_return_requests: list[SkuReturnRequest] | Unset = UNSET

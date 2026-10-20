@@ -70,7 +70,7 @@ data class SubItemInfo (
 
     /* Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled. */
     @SerializedName("display_status")
-    val displayStatus: SubItemInfo.DisplayStatus? = null,
+    val displayStatus: kotlin.String? = null,
 
     /* Product name. */
     @SerializedName("product_name")
@@ -118,7 +118,7 @@ data class SubItemInfo (
 
     /* The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged. */
     @SerializedName("package_status")
-    val packageStatus: SubItemInfo.PackageStatus? = null,
+    val packageStatus: kotlin.String? = null,
 
     /* Currency for payment. */
     @SerializedName("currency")
@@ -130,7 +130,7 @@ data class SubItemInfo (
 
     /* Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM` */
     @SerializedName("cancel_user")
-    val cancelUser: SubItemInfo.CancelUser? = null,
+    val cancelUser: kotlin.String? = null,
 
     /* The shipping provider ID of the item. */
     @SerializedName("shipping_provider_id")
@@ -162,43 +162,6 @@ data class SubItemInfo (
 
 ) {
 
-    /**
-     * Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
-     *
-     * Values: UNPAID,AWAITING_SHIPMENT,AWAITING_COLLECTION,IN_TRANSIT,DELIVERED,COMPLETED,CANCELLED
-     */
-    enum class DisplayStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNPAID") UNPAID("UNPAID"),
-        @SerializedName(value = "AWAITING_SHIPMENT") AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-        @SerializedName(value = "AWAITING_COLLECTION") AWAITING_COLLECTION("AWAITING_COLLECTION"),
-        @SerializedName(value = "IN_TRANSIT") IN_TRANSIT("IN_TRANSIT"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     *
-     * Values: TO_FULFILL,PROCESSING,FULFILLING,COMPLETED,CANCELLED
-     */
-    enum class PackageStatus(val value: kotlin.String) {
-        @SerializedName(value = "TO_FULFILL") TO_FULFILL("TO_FULFILL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "FULFILLING") FULFILLING("FULFILLING"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
-     *
-     * Values: BUYER,SELLER,OPERATOR,SYSTEM
-     */
-    enum class CancelUser(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "OPERATOR") OPERATOR("OPERATOR"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

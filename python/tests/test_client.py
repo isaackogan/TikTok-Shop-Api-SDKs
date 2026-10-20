@@ -84,6 +84,12 @@ def test_get_authorized_shops_signed_with_token_and_no_cipher(stub):
     check_signed(r)
 
 
+def test_unknown_status_value_is_kept_as_a_string(stub):
+    stub.body = '{"code":0,"message":"Success","request_id":"r1","data":{"orders":[{"id":"1","status":"SOME_NEW_STATUS"}]}}'
+    res = make(stub).orders.get_order_list(page_size=1)
+    assert res.data.orders[0].status == "SOME_NEW_STATUS"
+
+
 def test_get_order_list_sends_cipher_and_page_token_intact(stub):
     make(stub).orders.get_order_list(page_size=20, page_token="b2Zmc2V0PTEw+/x==")
     r = stub.seen[0]

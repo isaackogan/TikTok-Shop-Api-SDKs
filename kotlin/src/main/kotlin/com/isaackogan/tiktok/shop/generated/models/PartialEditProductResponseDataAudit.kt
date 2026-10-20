@@ -37,20 +37,10 @@ data class PartialEditProductResponseDataAudit (
 
     /* The product audit status. Possible values: - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state. - AUDITING: The product is currently being audited. - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the edits are immediately published on the platform. */
     @SerializedName("status")
-    val status: PartialEditProductResponseDataAudit.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The product audit status. Possible values: - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state. - AUDITING: The product is currently being audited. - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the edits are immediately published on the platform.
-     *
-     * Values: NONE,AUDITING,APPROVED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "AUDITING") AUDITING("AUDITING"),
-        @SerializedName(value = "APPROVED") APPROVED("APPROVED");
-    }
 
 }
 

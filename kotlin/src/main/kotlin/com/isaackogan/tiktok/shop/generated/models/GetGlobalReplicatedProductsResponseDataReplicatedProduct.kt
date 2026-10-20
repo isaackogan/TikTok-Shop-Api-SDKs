@@ -40,7 +40,7 @@ data class GetGlobalReplicatedProductsResponseDataReplicatedProduct (
 
     /* The market associated with the replicated product. Possible values: - AT: Austria - BE:Belgium - CZ:Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU:Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands(NL) - PH: Philippines - PO: Poland - PT:Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico */
     @SerializedName("region")
-    val region: GetGlobalReplicatedProductsResponseDataReplicatedProduct.Region? = null,
+    val region: kotlin.String? = null,
 
     /* The TikTok Shop ID. */
     @SerializedName("shop_id")
@@ -52,56 +52,10 @@ data class GetGlobalReplicatedProductsResponseDataReplicatedProduct (
 
     /* The status of the replicated product. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED */
     @SerializedName("product_status")
-    val productStatus: GetGlobalReplicatedProductsResponseDataReplicatedProduct.ProductStatus? = null
+    val productStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * The market associated with the replicated product. Possible values: - AT: Austria - BE:Belgium - CZ:Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU:Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands(NL) - PH: Philippines - PO: Poland - PT:Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IE,IT,JP,MY,NL,PH,PO,PT,SG,TH,US,VN,MX
-     */
-    enum class Region(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PO") PO("PO"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN"),
-        @SerializedName(value = "MX") MX("MX");
-    }
-    /**
-     * The status of the replicated product. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED
-     *
-     * Values: UNKNOWN,DRAFT,PENDING,FAILED,ACTIVATE,SELLER_DEACTIVATED,PLATFORM_DEACTIVATED,FREEZE,DELETED
-     */
-    enum class ProductStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "ACTIVATE") ACTIVATE("ACTIVATE"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "PLATFORM_DEACTIVATED") PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-        @SerializedName(value = "FREEZE") FREEZE("FREEZE"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
 
 }
 

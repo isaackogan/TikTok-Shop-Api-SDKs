@@ -66,7 +66,7 @@ data class GetActivityResponseData (
 
     /* The activity type. Possible values: - `FIXED_PRICE`: A product discount activity with a fixed price. - `DIRECT_DISCOUNT`: A product discount activity with a percentage discount. - `FLASHSALE`: A flash sale activity. - `SHIPPING_DISCOUNT`: A shipping fee discount activity. - `BUY_MORE_SAVE_MORE`: A Buy More Save More promotion. - `GIFT_WITH_PURCHASE`: A Gift With Purchase promotion. - `BUY_X_GET_Y`: A Buy X Get Y promotion. */
     @SerializedName("activity_type")
-    val activityType: GetActivityResponseData.ActivityType? = null,
+    val activityType: kotlin.String? = null,
 
     /* The effective time type of the current activity - NORMAL:  `begin_time` and `end_time` must be filled - INDEFINITE: `begin_time` and `end_time` aren't required, and the promotion will be a long-term activity which runs indefinitely.  1.  `INDEFINITE` is only valid when `activity_type` is `SHIPPING_DISCOUNT`, 2. If `duration_type` is `INDEFINITE`, `start_time` and `end_time` should be 0 Default: NORMAL */
     @SerializedName("duration_type")
@@ -90,7 +90,7 @@ data class GetActivityResponseData (
 
     /* Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users. */
     @SerializedName("status")
-    val status: GetActivityResponseData.Status? = null,
+    val status: kotlin.String? = null,
 
     /* Activity creation time as a UNIX timestamp in milliseconds. */
     @SerializedName("create_time")
@@ -102,7 +102,7 @@ data class GetActivityResponseData (
 
     /* Activity product dimension, values are:  - PRODUCT: Product level promotion activity. - VARIATION: SKU level promotion activity. - SHOP: Shop level promotion activity. */
     @SerializedName("product_level")
-    val productLevel: GetActivityResponseData.ProductLevel? = null,
+    val productLevel: kotlin.String? = null,
 
     /* Applicable commands to the activity: - IMMUTABLE: The activity cann't be editable or deactivated */
     @SerializedName("activity_commands")
@@ -122,56 +122,10 @@ data class GetActivityResponseData (
 
     /* Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-support data is unavailable. Possible values: - `ALL`: The activity supports both normal products and auction products. - `EXCLUDE_AUCTION`: The activity does not support auction products. */
     @SerializedName("auction_support_type")
-    val auctionSupportType: GetActivityResponseData.AuctionSupportType? = null
+    val auctionSupportType: kotlin.String? = null
 
 ) {
 
-    /**
-     * The activity type. Possible values: - `FIXED_PRICE`: A product discount activity with a fixed price. - `DIRECT_DISCOUNT`: A product discount activity with a percentage discount. - `FLASHSALE`: A flash sale activity. - `SHIPPING_DISCOUNT`: A shipping fee discount activity. - `BUY_MORE_SAVE_MORE`: A Buy More Save More promotion. - `GIFT_WITH_PURCHASE`: A Gift With Purchase promotion. - `BUY_X_GET_Y`: A Buy X Get Y promotion.
-     *
-     * Values: FIXED_PRICE,DIRECT_DISCOUNT,FLASHSALE,SHIPPING_DISCOUNT,BUY_MORE_SAVE_MORE,GIFT_WITH_PURCHASE,BUY_X_GET_Y
-     */
-    enum class ActivityType(val value: kotlin.String) {
-        @SerializedName(value = "FIXED_PRICE") FIXED_PRICE("FIXED_PRICE"),
-        @SerializedName(value = "DIRECT_DISCOUNT") DIRECT_DISCOUNT("DIRECT_DISCOUNT"),
-        @SerializedName(value = "FLASHSALE") FLASHSALE("FLASHSALE"),
-        @SerializedName(value = "SHIPPING_DISCOUNT") SHIPPING_DISCOUNT("SHIPPING_DISCOUNT"),
-        @SerializedName(value = "BUY_MORE_SAVE_MORE") BUY_MORE_SAVE_MORE("BUY_MORE_SAVE_MORE"),
-        @SerializedName(value = "GIFT_WITH_PURCHASE") GIFT_WITH_PURCHASE("GIFT_WITH_PURCHASE"),
-        @SerializedName(value = "BUY_X_GET_Y") BUY_X_GET_Y("BUY_X_GET_Y");
-    }
-    /**
-     * Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     *
-     * Values: DRAFT,NOT_START,ONGOING,EXPIRED,DEACTIVATED,NOT_EFFECTIVE
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "NOT_START") NOT_START("NOT_START"),
-        @SerializedName(value = "ONGOING") ONGOING("ONGOING"),
-        @SerializedName(value = "EXPIRED") EXPIRED("EXPIRED"),
-        @SerializedName(value = "DEACTIVATED") DEACTIVATED("DEACTIVATED"),
-        @SerializedName(value = "NOT_EFFECTIVE") NOT_EFFECTIVE("NOT_EFFECTIVE");
-    }
-    /**
-     * Activity product dimension, values are:  - PRODUCT: Product level promotion activity. - VARIATION: SKU level promotion activity. - SHOP: Shop level promotion activity.
-     *
-     * Values: PRODUCT,VARIATION,SHOP
-     */
-    enum class ProductLevel(val value: kotlin.String) {
-        @SerializedName(value = "PRODUCT") PRODUCT("PRODUCT"),
-        @SerializedName(value = "VARIATION") VARIATION("VARIATION"),
-        @SerializedName(value = "SHOP") SHOP("SHOP");
-    }
-    /**
-     * Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-support data is unavailable. Possible values: - `ALL`: The activity supports both normal products and auction products. - `EXCLUDE_AUCTION`: The activity does not support auction products.
-     *
-     * Values: ALL,EXCLUDE_AUCTION
-     */
-    enum class AuctionSupportType(val value: kotlin.String) {
-        @SerializedName(value = "ALL") ALL("ALL"),
-        @SerializedName(value = "EXCLUDE_AUCTION") EXCLUDE_AUCTION("EXCLUDE_AUCTION");
-    }
 
 }
 

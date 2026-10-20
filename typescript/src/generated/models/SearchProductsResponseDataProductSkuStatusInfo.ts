@@ -24,42 +24,21 @@ export interface SearchProductsResponseDataProductSkuStatusInfo {
      * Possible values: 
      * - NORMAL
      * - DEACTIVATED
-     * @type {SearchProductsResponseDataProductSkuStatusInfoStatusEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductSkuStatusInfo
      */
-    status?: SearchProductsResponseDataProductSkuStatusInfoStatusEnum;
+    status?: string;
     /**
      * The deactivation source of the SKU with `DEACTIVATED` status.
      * Possible values:
      * - SELLER: Indicates that the seller deactivated the SKU
      * - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons
      * - COMBO_RELATION: Indicates that the platform de-activated the combined-SKU due to the deactivation of sub-SKU.
-     * @type {SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductSkuStatusInfo
      */
-    deactivationSource?: SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum;
+    deactivationSource?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSkuStatusInfoStatusEnum = {
-    Normal: 'NORMAL',
-    Deactivated: 'DEACTIVATED'
-} as const;
-export type SearchProductsResponseDataProductSkuStatusInfoStatusEnum = typeof SearchProductsResponseDataProductSkuStatusInfoStatusEnum[keyof typeof SearchProductsResponseDataProductSkuStatusInfoStatusEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum = {
-    Seller: 'SELLER',
-    Platform: 'PLATFORM',
-    ComboRelation: 'COMBO_RELATION'
-} as const;
-export type SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum = typeof SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum[keyof typeof SearchProductsResponseDataProductSkuStatusInfoDeactivationSourceEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProductSkuStatusInfo interface.

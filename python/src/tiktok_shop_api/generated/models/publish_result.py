@@ -6,8 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.publish_result_region import PublishResultRegion
-from ..models.publish_result_status import PublishResultStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,7 +19,7 @@ T = TypeVar("T", bound="PublishResult")
 class PublishResult:
     """
     Attributes:
-        region (PublishResultRegion | Unset): The market associated with this synchronization result.
+        region (str | Unset): The market associated with this synchronization result.
             Possible values:
             - AT: Austria
             - BE: Belgium
@@ -46,7 +44,7 @@ class PublishResult:
             - US: United States
             - VN: Vietnam
             - MX: Mexico
-        status (PublishResultStatus | Unset): The status of syncing the product to the market.
+        status (str | Unset): The status of syncing the product to the market.
             Possible values:
             - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now
             under review. Use the [Product Status Change
@@ -56,19 +54,15 @@ class PublishResult:
         fail_reasons (list[FailReason] | Unset): The list of errors that occurred.
     """
 
-    region: PublishResultRegion | Unset = UNSET
-    status: PublishResultStatus | Unset = UNSET
+    region: str | Unset = UNSET
+    status: str | Unset = UNSET
     fail_reasons: list[FailReason] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        region: str | Unset = UNSET
-        if not isinstance(self.region, Unset):
-            region = self.region.value
+        region = self.region
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         fail_reasons: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.fail_reasons, Unset):
@@ -94,19 +88,9 @@ class PublishResult:
         from ..models.fail_reason import FailReason  # noqa: PLC0415
 
         d = dict(src_dict)
-        _region = d.pop("region", UNSET)
-        region: PublishResultRegion | Unset
-        if isinstance(_region, Unset):
-            region = UNSET
-        else:
-            region = PublishResultRegion(_region)
+        region = d.pop("region", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: PublishResultStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = PublishResultStatus(_status)
+        status = d.pop("status", UNSET)
 
         _fail_reasons = d.pop("fail_reasons", UNSET)
         fail_reasons: list[FailReason] | Unset = UNSET

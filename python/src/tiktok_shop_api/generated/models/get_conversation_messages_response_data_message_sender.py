@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversation_messages_response_data_message_sender_role import (
-    GetConversationMessagesResponseDataMessageSenderRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetConversationMessagesResponseDataMessageSender")
@@ -20,7 +17,7 @@ class GetConversationMessagesResponseDataMessageSender:
     Attributes:
         im_user_id (str | Unset): Sender's ID.
             These are IM IDs, and can not be used to query orders.
-        role (GetConversationMessagesResponseDataMessageSenderRole | Unset): Sender's role. Possible enumerations:
+        role (str | Unset): Sender's role. Possible enumerations:
             - `BUYER`
             - `SHOP`
             - `CUSTOMER_SERVICE`
@@ -37,7 +34,7 @@ class GetConversationMessagesResponseDataMessageSender:
     """
 
     im_user_id: str | Unset = UNSET
-    role: GetConversationMessagesResponseDataMessageSenderRole | Unset = UNSET
+    role: str | Unset = UNSET
     nickname: str | Unset = UNSET
     avatar: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -45,9 +42,7 @@ class GetConversationMessagesResponseDataMessageSender:
     def to_dict(self) -> dict[str, Any]:
         im_user_id = self.im_user_id
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         nickname = self.nickname
 
@@ -72,12 +67,7 @@ class GetConversationMessagesResponseDataMessageSender:
         d = dict(src_dict)
         im_user_id = d.pop("im_user_id", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetConversationMessagesResponseDataMessageSenderRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetConversationMessagesResponseDataMessageSenderRole(_role)
+        role = d.pop("role", UNSET)
 
         nickname = d.pop("nickname", UNSET)
 

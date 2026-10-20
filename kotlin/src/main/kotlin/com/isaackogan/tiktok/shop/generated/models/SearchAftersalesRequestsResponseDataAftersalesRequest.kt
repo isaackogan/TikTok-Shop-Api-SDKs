@@ -52,7 +52,7 @@ data class SearchAftersalesRequestsResponseDataAftersalesRequest (
 
     /* Current state of this aftersales request. Possible values: - `INIT` - `PENDING_REQUEST_REVIEW` - `REQUEST_REVIEW_COMPLETED` */
     @SerializedName("status")
-    val status: SearchAftersalesRequestsResponseDataAftersalesRequest.Status? = null,
+    val status: kotlin.String? = null,
 
     /* SKU-level sub return requests associated with this aftersales request, also known as reverse orders or return requests. This field is returned only when `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching data is available. */
     @SerializedName("sku_return_requests")
@@ -64,16 +64,6 @@ data class SearchAftersalesRequestsResponseDataAftersalesRequest (
 
 ) {
 
-    /**
-     * Current state of this aftersales request. Possible values: - `INIT` - `PENDING_REQUEST_REVIEW` - `REQUEST_REVIEW_COMPLETED`
-     *
-     * Values: INIT,PENDING_REQUEST_REVIEW,REQUEST_REVIEW_COMPLETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "INIT") INIT("INIT"),
-        @SerializedName(value = "PENDING_REQUEST_REVIEW") PENDING_REQUEST_REVIEW("PENDING_REQUEST_REVIEW"),
-        @SerializedName(value = "REQUEST_REVIEW_COMPLETED") REQUEST_REVIEW_COMPLETED("REQUEST_REVIEW_COMPLETED");
-    }
 
 }
 

@@ -72,62 +72,10 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecord {
   @javax.annotation.Nullable
   private Long createTime;
 
-  /**
-   * The type of goods in current inventory record. Possible values:  - NORMAL  - DEFECTIVE
-   */
-  @JsonAdapter(InventoryGoodsTypeEnum.Adapter.class)
-  public enum InventoryGoodsTypeEnum {
-    NORMAL("NORMAL"),
-    
-    DEFECTIVE("DEFECTIVE");
-
-    private String value;
-
-    InventoryGoodsTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static InventoryGoodsTypeEnum fromValue(String value) {
-      for (InventoryGoodsTypeEnum b : InventoryGoodsTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<InventoryGoodsTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InventoryGoodsTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InventoryGoodsTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return InventoryGoodsTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      InventoryGoodsTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_INVENTORY_GOODS_TYPE = "inventory_goods_type";
   @SerializedName(SERIALIZED_NAME_INVENTORY_GOODS_TYPE)
   @javax.annotation.Nullable
-  private InventoryGoodsTypeEnum inventoryGoodsType;
+  private String inventoryGoodsType;
 
   public static final String SERIALIZED_NAME_INITIAL_ON_HAND_QUANTITY = "initial_on_hand_quantity";
   @SerializedName(SERIALIZED_NAME_INITIAL_ON_HAND_QUANTITY)
@@ -223,7 +171,7 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecord {
   }
 
 
-  public SearchFBTInventoryRecordResponseDataInventoryRecord inventoryGoodsType(@javax.annotation.Nullable InventoryGoodsTypeEnum inventoryGoodsType) {
+  public SearchFBTInventoryRecordResponseDataInventoryRecord inventoryGoodsType(@javax.annotation.Nullable String inventoryGoodsType) {
     this.inventoryGoodsType = inventoryGoodsType;
     return this;
   }
@@ -233,11 +181,11 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecord {
    * @return inventoryGoodsType
    */
   @javax.annotation.Nullable
-  public InventoryGoodsTypeEnum getInventoryGoodsType() {
+  public String getInventoryGoodsType() {
     return inventoryGoodsType;
   }
 
-  public void setInventoryGoodsType(@javax.annotation.Nullable InventoryGoodsTypeEnum inventoryGoodsType) {
+  public void setInventoryGoodsType(@javax.annotation.Nullable String inventoryGoodsType) {
     this.inventoryGoodsType = inventoryGoodsType;
   }
 
@@ -432,10 +380,6 @@ public class SearchFBTInventoryRecordResponseDataInventoryRecord {
       }
       if ((jsonObj.get("inventory_goods_type") != null && !jsonObj.get("inventory_goods_type").isJsonNull()) && !jsonObj.get("inventory_goods_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `inventory_goods_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("inventory_goods_type").toString()));
-      }
-      // validate the optional field `inventory_goods_type`
-      if (jsonObj.get("inventory_goods_type") != null && !jsonObj.get("inventory_goods_type").isJsonNull()) {
-        InventoryGoodsTypeEnum.validateJsonElement(jsonObj.get("inventory_goods_type"));
       }
   }
 

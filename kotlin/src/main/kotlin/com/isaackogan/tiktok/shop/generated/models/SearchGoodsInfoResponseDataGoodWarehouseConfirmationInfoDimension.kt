@@ -52,23 +52,10 @@ data class SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension (
 
     /* Dimension unit.  Possible values: - MILLIMETER  - CENTIMETER - METER  - FOOT  - INCH - MICRO */
     @SerializedName("unit")
-    val unit: SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * Dimension unit.  Possible values: - MILLIMETER  - CENTIMETER - METER  - FOOT  - INCH - MICRO
-     *
-     * Values: MILLIMETER,CENTIMETER,METER,FOOT,INCH,MICRO
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "MILLIMETER") MILLIMETER("MILLIMETER"),
-        @SerializedName(value = "CENTIMETER") CENTIMETER("CENTIMETER"),
-        @SerializedName(value = "METER") METER("METER"),
-        @SerializedName(value = "FOOT") FOOT("FOOT"),
-        @SerializedName(value = "INCH") INCH("INCH"),
-        @SerializedName(value = "MICRO") MICRO("MICRO");
-    }
 
 }
 

@@ -50,66 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight {
-  /**
-   * Unit of the predicted package weight. Possible values: - &#x60;GRAM&#x60; - &#x60;POUND&#x60; - &#x60;OUNCE&#x60; - &#x60;KILOGRAM&#x60;
-   */
-  @JsonAdapter(UnitEnum.Adapter.class)
-  public enum UnitEnum {
-    GRAM("GRAM"),
-    
-    POUND("POUND"),
-    
-    OUNCE("OUNCE"),
-    
-    KILOGRAM("KILOGRAM");
-
-    private String value;
-
-    UnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnitEnum fromValue(String value) {
-      for (UnitEnum b : UnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnitEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_UNIT = "unit";
   @SerializedName(SERIALIZED_NAME_UNIT)
   @javax.annotation.Nonnull
-  private UnitEnum unit;
+  private String unit;
 
   public static final String SERIALIZED_NAME_VALUE = "value";
   @SerializedName(SERIALIZED_NAME_VALUE)
@@ -119,7 +63,7 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight {
   public PredictProductPackageDimensionsAndWeightResponseDataPackageWeight() {
   }
 
-  public PredictProductPackageDimensionsAndWeightResponseDataPackageWeight unit(@javax.annotation.Nonnull UnitEnum unit) {
+  public PredictProductPackageDimensionsAndWeightResponseDataPackageWeight unit(@javax.annotation.Nonnull String unit) {
     this.unit = unit;
     return this;
   }
@@ -129,11 +73,11 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight {
    * @return unit
    */
   @javax.annotation.Nonnull
-  public UnitEnum getUnit() {
+  public String getUnit() {
     return unit;
   }
 
-  public void setUnit(@javax.annotation.Nonnull UnitEnum unit) {
+  public void setUnit(@javax.annotation.Nonnull String unit) {
     this.unit = unit;
   }
 
@@ -275,8 +219,6 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight {
       if (!jsonObj.get("unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit").toString()));
       }
-      // validate the required field `unit`
-      UnitEnum.validateJsonElement(jsonObj.get("unit"));
       if (!jsonObj.get("value").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("value").toString()));
       }

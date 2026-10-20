@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_inbound_method_detail_response_data_info_allocation_shipment_carton_carton_type import (
-    GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -27,8 +24,7 @@ T = TypeVar("T", bound="GetInboundMethodDetailResponseDataInfoAllocationShipment
 class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton:
     """
     Attributes:
-        carton_type (GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonType | Unset): Indicates if
-            this is a single SKU carton or multi SKU carton.
+        carton_type (str | Unset): Indicates if this is a single SKU carton or multi SKU carton.
             **Possible values:**
             * `SINGLE_SKU`
             * `MULTI_SKU`
@@ -39,7 +35,7 @@ class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton:
         box_measurements (GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement | Unset):
     """
 
-    carton_type: GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonType | Unset = UNSET
+    carton_type: str | Unset = UNSET
     items: list[GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem] | Unset = UNSET
     quantity: int | Unset = UNSET
     carton_nums: list[str] | Unset = UNSET
@@ -47,9 +43,7 @@ class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        carton_type: str | Unset = UNSET
-        if not isinstance(self.carton_type, Unset):
-            carton_type = self.carton_type.value
+        carton_type = self.carton_type
 
         items: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.items, Unset):
@@ -94,12 +88,7 @@ class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton:
         )
 
         d = dict(src_dict)
-        _carton_type = d.pop("carton_type", UNSET)
-        carton_type: GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonType | Unset
-        if isinstance(_carton_type, Unset):
-            carton_type = UNSET
-        else:
-            carton_type = GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonType(_carton_type)
+        carton_type = d.pop("carton_type", UNSET)
 
         _items = d.pop("items", UNSET)
         items: list[GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem] | Unset = UNSET

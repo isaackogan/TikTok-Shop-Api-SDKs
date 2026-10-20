@@ -55,73 +55,10 @@ public class CurSession {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * Current phase of the session. Possible enumerations: - &#x60;AUTO_REPLY&#x60; — The session is being handled by automatic replies or chatbot responses. - &#x60;QUEUED&#x60; — The session is waiting to be assigned to an agent. - &#x60;ASSIGNED&#x60; — The session has been assigned to an agent.
-   */
-  @JsonAdapter(PhaseEnum.Adapter.class)
-  public enum PhaseEnum {
-    /**
-     * The session is being handled by automatic replies or chatbot responses.
-     */
-    AUTO_REPLY("AUTO_REPLY"),
-    
-    /**
-     * The session is waiting to be assigned to an agent.
-     */
-    QUEUED("QUEUED"),
-    
-    /**
-     * The session has been assigned to an agent.
-     */
-    ASSIGNED("ASSIGNED");
-
-    private String value;
-
-    PhaseEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PhaseEnum fromValue(String value) {
-      for (PhaseEnum b : PhaseEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PhaseEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PhaseEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PhaseEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PhaseEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PhaseEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PHASE = "phase";
   @SerializedName(SERIALIZED_NAME_PHASE)
   @javax.annotation.Nullable
-  private PhaseEnum phase;
+  private String phase;
 
   public CurSession() {
   }
@@ -145,7 +82,7 @@ public class CurSession {
   }
 
 
-  public CurSession phase(@javax.annotation.Nullable PhaseEnum phase) {
+  public CurSession phase(@javax.annotation.Nullable String phase) {
     this.phase = phase;
     return this;
   }
@@ -155,11 +92,11 @@ public class CurSession {
    * @return phase
    */
   @javax.annotation.Nullable
-  public PhaseEnum getPhase() {
+  public String getPhase() {
     return phase;
   }
 
-  public void setPhase(@javax.annotation.Nullable PhaseEnum phase) {
+  public void setPhase(@javax.annotation.Nullable String phase) {
     this.phase = phase;
   }
 
@@ -277,10 +214,6 @@ public class CurSession {
       }
       if ((jsonObj.get("phase") != null && !jsonObj.get("phase").isJsonNull()) && !jsonObj.get("phase").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `phase` to be a primitive type in the JSON string but got `%s`", jsonObj.get("phase").toString()));
-      }
-      // validate the optional field `phase`
-      if (jsonObj.get("phase") != null && !jsonObj.get("phase").isJsonNull()) {
-        PhaseEnum.validateJsonElement(jsonObj.get("phase"));
       }
   }
 

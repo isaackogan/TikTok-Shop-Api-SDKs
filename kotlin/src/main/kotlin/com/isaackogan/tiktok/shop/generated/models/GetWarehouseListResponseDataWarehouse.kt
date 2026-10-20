@@ -57,15 +57,15 @@ data class GetWarehouseListResponseDataWarehouse (
 
     /* Indicates whether inventory at the warehouse is available for sale. Possible values: - `ENABLED`: All products in stock are available for sale. - `DISABLED`: All products in stock are unavailable for sale. - `RESTRICTED`: The warehouse is in holiday mode or order limit mode, so all products in stock are unavailable for sale.  The seller can enable holiday mode in Seller Center when the seller cannot fulfill orders from the warehouse. Order limit mode is applied when TikTok Shop limits the order volume that can be fulfilled by the warehouse because of policy violations. */
     @SerializedName("effect_status")
-    val effectStatus: GetWarehouseListResponseDataWarehouse.EffectStatus? = null,
+    val effectStatus: kotlin.String? = null,
 
     /* Possible values: - SALES_WAREHOUSE: Warehouse for shipping products.   - RETURN_WAREHOUSE: Warehouse for receiving returned products.  You can have the same warehouse for both shipping and receiving returns, but they will have different warehouse IDs with the same address. */
     @SerializedName("type")
-    val type: GetWarehouseListResponseDataWarehouse.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Possible values: - DOMESTIC_WAREHOUSE: The warehouse is in the same country as the target market and the seller. - CB_OVERSEA_WAREHOUSE: For cross-border sellers, a local warehouse in the target market.  - CB_DIRECT_SHIPPING_WAREHOUSE: For cross-border sellers, a warehouse in the seller's base country, e.g., Mainland China or Hong Kong. */
     @SerializedName("sub_type")
-    val subType: GetWarehouseListResponseDataWarehouse.SubType? = null,
+    val subType: kotlin.String? = null,
 
     /* The default warehouse.  If a product is listed with no designated warehouse, the default warehouse will be used. */
     @SerializedName("is_default")
@@ -77,35 +77,6 @@ data class GetWarehouseListResponseDataWarehouse (
 
 ) {
 
-    /**
-     * Indicates whether inventory at the warehouse is available for sale. Possible values: - `ENABLED`: All products in stock are available for sale. - `DISABLED`: All products in stock are unavailable for sale. - `RESTRICTED`: The warehouse is in holiday mode or order limit mode, so all products in stock are unavailable for sale.  The seller can enable holiday mode in Seller Center when the seller cannot fulfill orders from the warehouse. Order limit mode is applied when TikTok Shop limits the order volume that can be fulfilled by the warehouse because of policy violations.
-     *
-     * Values: ENABLED,DISABLED,RESTRICTED
-     */
-    enum class EffectStatus(val value: kotlin.String) {
-        @SerializedName(value = "ENABLED") ENABLED("ENABLED"),
-        @SerializedName(value = "DISABLED") DISABLED("DISABLED"),
-        @SerializedName(value = "RESTRICTED") RESTRICTED("RESTRICTED");
-    }
-    /**
-     * Possible values: - SALES_WAREHOUSE: Warehouse for shipping products.   - RETURN_WAREHOUSE: Warehouse for receiving returned products.  You can have the same warehouse for both shipping and receiving returns, but they will have different warehouse IDs with the same address.
-     *
-     * Values: SALES_WAREHOUSE,RETURN_WAREHOUSE
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "SALES_WAREHOUSE") SALES_WAREHOUSE("SALES_WAREHOUSE"),
-        @SerializedName(value = "RETURN_WAREHOUSE") RETURN_WAREHOUSE("RETURN_WAREHOUSE");
-    }
-    /**
-     * Possible values: - DOMESTIC_WAREHOUSE: The warehouse is in the same country as the target market and the seller. - CB_OVERSEA_WAREHOUSE: For cross-border sellers, a local warehouse in the target market.  - CB_DIRECT_SHIPPING_WAREHOUSE: For cross-border sellers, a warehouse in the seller's base country, e.g., Mainland China or Hong Kong.
-     *
-     * Values: DOMESTIC_WAREHOUSE,CB_OVERSEA_WAREHOUSE,CB_DIRECT_SHIPPING_WAREHOUSE
-     */
-    enum class SubType(val value: kotlin.String) {
-        @SerializedName(value = "DOMESTIC_WAREHOUSE") DOMESTIC_WAREHOUSE("DOMESTIC_WAREHOUSE"),
-        @SerializedName(value = "CB_OVERSEA_WAREHOUSE") CB_OVERSEA_WAREHOUSE("CB_OVERSEA_WAREHOUSE"),
-        @SerializedName(value = "CB_DIRECT_SHIPPING_WAREHOUSE") CB_DIRECT_SHIPPING_WAREHOUSE("CB_DIRECT_SHIPPING_WAREHOUSE");
-    }
 
 }
 

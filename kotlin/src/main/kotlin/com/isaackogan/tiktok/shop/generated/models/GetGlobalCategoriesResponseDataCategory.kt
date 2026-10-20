@@ -57,19 +57,10 @@ data class GetGlobalCategoriesResponseDataCategory (
 
     /* The shop's permission status for this category. Possible values: - AVAILABLE: You have the permission to create products in this category. - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.  Contact your account manager for assistance. */
     @SerializedName("permission_statuses")
-    val permissionStatuses: kotlin.collections.List<GetGlobalCategoriesResponseDataCategory.PermissionStatuses>? = null
+    val permissionStatuses: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The shop's permission status for this category. Possible values: - AVAILABLE: You have the permission to create products in this category. - NON_MAIN_CATEGORY: This category is out of scope for this seller, and you do not have permission to use it.  Contact your account manager for assistance.
-     *
-     * Values: AVAILABLE,NON_MAIN_CATEGORY
-     */
-    enum class PermissionStatuses(val value: kotlin.String) {
-        @SerializedName(value = "AVAILABLE") AVAILABLE("AVAILABLE"),
-        @SerializedName(value = "NON_MAIN_CATEGORY") NON_MAIN_CATEGORY("NON_MAIN_CATEGORY");
-    }
 
 }
 

@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.listing_quality_current_tier import ListingQualityCurrentTier
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ListingQuality")
@@ -16,9 +15,8 @@ T = TypeVar("T", bound="ListingQuality")
 class ListingQuality:
     """
     Attributes:
-        current_tier (ListingQualityCurrentTier | Unset): The current quality tier of this product listing. The quality
-            tier of a product listing depends on the quality of the content in its product fields such as the title, image,
-            attributes etc.
+        current_tier (str | Unset): The current quality tier of this product listing. The quality tier of a product
+            listing depends on the quality of the content in its product fields such as the title, image, attributes etc.
 
             Possible values:
             - POOR
@@ -34,14 +32,12 @@ class ListingQuality:
             - Available only for the US market.
     """
 
-    current_tier: ListingQualityCurrentTier | Unset = UNSET
+    current_tier: str | Unset = UNSET
     remaining_recommendations: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        current_tier: str | Unset = UNSET
-        if not isinstance(self.current_tier, Unset):
-            current_tier = self.current_tier.value
+        current_tier = self.current_tier
 
         remaining_recommendations = self.remaining_recommendations
 
@@ -58,12 +54,7 @@ class ListingQuality:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _current_tier = d.pop("current_tier", UNSET)
-        current_tier: ListingQualityCurrentTier | Unset
-        if isinstance(_current_tier, Unset):
-            current_tier = UNSET
-        else:
-            current_tier = ListingQualityCurrentTier(_current_tier)
+        current_tier = d.pop("current_tier", UNSET)
 
         remaining_recommendations = d.pop("remaining_recommendations", UNSET)
 

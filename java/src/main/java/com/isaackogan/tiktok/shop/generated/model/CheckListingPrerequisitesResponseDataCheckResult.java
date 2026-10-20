@@ -52,78 +52,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class CheckListingPrerequisitesResponseDataCheckResult {
-  /**
-   * A requirement that the shop needs to satisfy. Possible values: - SHOP_STATUS - SHOP_TAX - PICKUP_WAREHOUSE - RETURN_WAREHOUSE - DELIVERY_OPTION - SHIPPING_TEMPLATE - PRODUCT_QUANTITY_LIMIT - EXTENDED_PRODUCER_RESPONSIBILITY - BANk_ACCOUNT - CONTACT_INFO
-   */
-  @JsonAdapter(CheckItemEnum.Adapter.class)
-  public enum CheckItemEnum {
-    SHOP_STATUS("SHOP_STATUS"),
-    
-    SHOP_TAX("SHOP_TAX"),
-    
-    PICKUP_WAREHOUSE("PICKUP_WAREHOUSE"),
-    
-    RETURN_WAREHOUSE("RETURN_WAREHOUSE"),
-    
-    DELIVERY_OPTION("DELIVERY_OPTION"),
-    
-    SHIPPING_TEMPLATE("SHIPPING_TEMPLATE"),
-    
-    PRODUCT_QUANTITY_LIMIT("PRODUCT_QUANTITY_LIMIT"),
-    
-    EXTENDED_PRODUCER_RESPONSIBILITY("EXTENDED_PRODUCER_RESPONSIBILITY"),
-    
-    BANK_ACCOUNT("BANk_ACCOUNT"),
-    
-    CONTACT_INFO("CONTACT_INFO");
-
-    private String value;
-
-    CheckItemEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CheckItemEnum fromValue(String value) {
-      for (CheckItemEnum b : CheckItemEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CheckItemEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CheckItemEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CheckItemEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CheckItemEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CheckItemEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CHECK_ITEM = "check_item";
   @SerializedName(SERIALIZED_NAME_CHECK_ITEM)
   @javax.annotation.Nullable
-  private CheckItemEnum checkItem;
+  private String checkItem;
 
   public static final String SERIALIZED_NAME_IS_FAILED = "is_failed";
   @SerializedName(SERIALIZED_NAME_IS_FAILED)
@@ -138,7 +70,7 @@ public class CheckListingPrerequisitesResponseDataCheckResult {
   public CheckListingPrerequisitesResponseDataCheckResult() {
   }
 
-  public CheckListingPrerequisitesResponseDataCheckResult checkItem(@javax.annotation.Nullable CheckItemEnum checkItem) {
+  public CheckListingPrerequisitesResponseDataCheckResult checkItem(@javax.annotation.Nullable String checkItem) {
     this.checkItem = checkItem;
     return this;
   }
@@ -148,11 +80,11 @@ public class CheckListingPrerequisitesResponseDataCheckResult {
    * @return checkItem
    */
   @javax.annotation.Nullable
-  public CheckItemEnum getCheckItem() {
+  public String getCheckItem() {
     return checkItem;
   }
 
-  public void setCheckItem(@javax.annotation.Nullable CheckItemEnum checkItem) {
+  public void setCheckItem(@javax.annotation.Nullable String checkItem) {
     this.checkItem = checkItem;
   }
 
@@ -315,10 +247,6 @@ public class CheckListingPrerequisitesResponseDataCheckResult {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("check_item") != null && !jsonObj.get("check_item").isJsonNull()) && !jsonObj.get("check_item").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `check_item` to be a primitive type in the JSON string but got `%s`", jsonObj.get("check_item").toString()));
-      }
-      // validate the optional field `check_item`
-      if (jsonObj.get("check_item") != null && !jsonObj.get("check_item").isJsonNull()) {
-        CheckItemEnum.validateJsonElement(jsonObj.get("check_item"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("fail_reasons") != null && !jsonObj.get("fail_reasons").isJsonNull() && !jsonObj.get("fail_reasons").isJsonArray()) {

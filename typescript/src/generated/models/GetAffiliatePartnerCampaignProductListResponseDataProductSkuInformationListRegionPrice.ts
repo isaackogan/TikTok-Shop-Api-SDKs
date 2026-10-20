@@ -40,10 +40,10 @@ export interface GetAffiliatePartnerCampaignProductListResponseDataProductSkuInf
      * - THB: Thailand
      * - USD: United States
      * - VND: Vietnam
-     * @type {GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum}
+     * @type {string}
      * @memberof GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice
      */
-    currency?: GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum;
+    currency?: string;
     /**
      * The SKU's list price information that has been verified to be legitimate by the audit team. This is equivalent to the manufacturer's suggested retail price (MSRP), or the recommended retail price (RRP).
      * @type {string}
@@ -64,27 +64,6 @@ export interface GetAffiliatePartnerCampaignProductListResponseDataProductSkuInf
      */
     localizedDutiablePrice?: string;
 }
-
-
-/**
- * @export
- */
-export const GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum = {
-    Brl: 'BRL',
-    Eur: 'EUR',
-    Gbp: 'GBP',
-    Idr: 'IDR',
-    Jpy: 'JPY',
-    Mxn: 'MXN',
-    Myr: 'MYR',
-    Php: 'PHP',
-    Sgd: 'SGD',
-    Thb: 'THB',
-    Usd: 'USD',
-    Vnd: 'VND'
-} as const;
-export type GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum = typeof GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum[keyof typeof GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrencyEnum];
-
 
 /**
  * Check if a given object implements the GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice interface.

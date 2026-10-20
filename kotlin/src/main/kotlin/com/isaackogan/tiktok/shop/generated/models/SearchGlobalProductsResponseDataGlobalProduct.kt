@@ -51,7 +51,7 @@ data class SearchGlobalProductsResponseDataGlobalProduct (
 
     /* The status of the product. Possible values: - PUBLISHED - UNPUBLISHED - DRAFT - DELETED */
     @SerializedName("status")
-    val status: SearchGlobalProductsResponseDataGlobalProduct.Status? = null,
+    val status: kotlin.String? = null,
 
     /* A list of global Stock Keeping Units (SKUs) used to identify distinct variants of the product. */
     @SerializedName("skus")
@@ -67,17 +67,6 @@ data class SearchGlobalProductsResponseDataGlobalProduct (
 
 ) {
 
-    /**
-     * The status of the product. Possible values: - PUBLISHED - UNPUBLISHED - DRAFT - DELETED
-     *
-     * Values: PUBLISHED,UNPUBLISHED,DRAFT,DELETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PUBLISHED") PUBLISHED("PUBLISHED"),
-        @SerializedName(value = "UNPUBLISHED") UNPUBLISHED("UNPUBLISHED"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
 
 }
 

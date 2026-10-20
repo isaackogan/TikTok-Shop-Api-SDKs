@@ -46,7 +46,7 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail (
 
     /* Whether this carton is single-SKU or multi-SKU.  **Possible values:** * `SINGLE_SKU` * `MULTI_SKU` */
     @SerializedName("carton_type")
-    val cartonType: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail.CartonType? = null,
+    val cartonType: kotlin.String? = null,
 
     /* Carton measurement. */
     @SerializedName("box_measurements")
@@ -58,15 +58,6 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail (
 
 ) {
 
-    /**
-     * Whether this carton is single-SKU or multi-SKU.  **Possible values:** * `SINGLE_SKU` * `MULTI_SKU`
-     *
-     * Values: SINGLE_SKU,MULTI_SKU
-     */
-    enum class CartonType(val value: kotlin.String) {
-        @SerializedName(value = "SINGLE_SKU") SINGLE_SKU("SINGLE_SKU"),
-        @SerializedName(value = "MULTI_SKU") MULTI_SKU("MULTI_SKU");
-    }
 
 }
 

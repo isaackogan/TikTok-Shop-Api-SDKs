@@ -38,37 +38,14 @@ data class SearchProductsResponseDataProductIntegratedPlatformStatus (
 
     /* The integrated platform name. Possible values: - TOKOPEDIA */
     @SerializedName("platform")
-    val platform: SearchProductsResponseDataProductIntegratedPlatformStatus.Platform? = null,
+    val platform: kotlin.String? = null,
 
     /* The product status in the integrated platform. Possible values: - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED */
     @SerializedName("status")
-    val status: SearchProductsResponseDataProductIntegratedPlatformStatus.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The integrated platform name. Possible values: - TOKOPEDIA
-     *
-     * Values: TOKOPEDIA
-     */
-    enum class Platform(val value: kotlin.String) {
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
-    /**
-     * The product status in the integrated platform. Possible values: - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED
-     *
-     * Values: DRAFT,PENDING,FAILED,ACTIVATE,SELLER_DEACTIVATED,PLATFORM_DEACTIVATED,FREEZE,DELETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "ACTIVATE") ACTIVATE("ACTIVATE"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "PLATFORM_DEACTIVATED") PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-        @SerializedName(value = "FREEZE") FREEZE("FREEZE"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
 
 }
 

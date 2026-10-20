@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.handling_duration_type import HandlingDurationType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="HandlingDuration")
@@ -17,7 +16,7 @@ class HandlingDuration:
     """
     Attributes:
         days (str | Unset): The number of days.
-        type_ (HandlingDurationType | Unset): Indicates if the duration is calculated in calendar days or business days.
+        type_ (str | Unset): Indicates if the duration is calculated in calendar days or business days.
             Possible values:
             - `CALENDAR_DAY`: Represents consecutive days, including weekends and holidays.
             - `BUSINESS_DAY`: Represents business days, excluding weekends and public holidays.
@@ -25,15 +24,13 @@ class HandlingDuration:
     """
 
     days: str | Unset = UNSET
-    type_: HandlingDurationType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         days = self.days
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,12 +47,7 @@ class HandlingDuration:
         d = dict(src_dict)
         days = d.pop("days", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: HandlingDurationType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = HandlingDurationType(_type_)
+        type_ = d.pop("type", UNSET)
 
         handling_duration = cls(
             days=days,

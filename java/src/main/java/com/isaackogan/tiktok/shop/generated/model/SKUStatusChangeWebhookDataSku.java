@@ -55,125 +55,15 @@ public class SKUStatusChangeWebhookDataSku {
   @javax.annotation.Nullable
   private String skuId;
 
-  /**
-   * The new SKU status. Possible values: &#x60;CREATED&#x60;, &#x60;DELETED&#x60;, &#x60;ACTIVATED&#x60;, &#x60;DEACTIVATED&#x60;.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    CREATED("CREATED"),
-    
-    DELETED("DELETED"),
-    
-    ACTIVATED("ACTIVATED"),
-    
-    DEACTIVATED("DEACTIVATED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * The source of deactivation. This field is returned only when &#x60;status&#x60; is &#x60;DEACTIVATED&#x60;. Possible values: &#x60;SELLER&#x60;, &#x60;PLATFORM&#x60;, &#x60;COMBO_RELATION&#x60;.
-   */
-  @JsonAdapter(DeactivationSourceEnum.Adapter.class)
-  public enum DeactivationSourceEnum {
-    SELLER("SELLER"),
-    
-    PLATFORM("PLATFORM"),
-    
-    COMBO_RELATION("COMBO_RELATION");
-
-    private String value;
-
-    DeactivationSourceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DeactivationSourceEnum fromValue(String value) {
-      for (DeactivationSourceEnum b : DeactivationSourceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DeactivationSourceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DeactivationSourceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DeactivationSourceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DeactivationSourceEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DeactivationSourceEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_DEACTIVATION_SOURCE = "deactivation_source";
   @SerializedName(SERIALIZED_NAME_DEACTIVATION_SOURCE)
   @javax.annotation.Nullable
-  private DeactivationSourceEnum deactivationSource;
+  private String deactivationSource;
 
   public SKUStatusChangeWebhookDataSku() {
   }
@@ -197,7 +87,7 @@ public class SKUStatusChangeWebhookDataSku {
   }
 
 
-  public SKUStatusChangeWebhookDataSku status(@javax.annotation.Nullable StatusEnum status) {
+  public SKUStatusChangeWebhookDataSku status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -207,16 +97,16 @@ public class SKUStatusChangeWebhookDataSku {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public SKUStatusChangeWebhookDataSku deactivationSource(@javax.annotation.Nullable DeactivationSourceEnum deactivationSource) {
+  public SKUStatusChangeWebhookDataSku deactivationSource(@javax.annotation.Nullable String deactivationSource) {
     this.deactivationSource = deactivationSource;
     return this;
   }
@@ -226,11 +116,11 @@ public class SKUStatusChangeWebhookDataSku {
    * @return deactivationSource
    */
   @javax.annotation.Nullable
-  public DeactivationSourceEnum getDeactivationSource() {
+  public String getDeactivationSource() {
     return deactivationSource;
   }
 
-  public void setDeactivationSource(@javax.annotation.Nullable DeactivationSourceEnum deactivationSource) {
+  public void setDeactivationSource(@javax.annotation.Nullable String deactivationSource) {
     this.deactivationSource = deactivationSource;
   }
 
@@ -351,16 +241,8 @@ public class SKUStatusChangeWebhookDataSku {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("deactivation_source") != null && !jsonObj.get("deactivation_source").isJsonNull()) && !jsonObj.get("deactivation_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `deactivation_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deactivation_source").toString()));
-      }
-      // validate the optional field `deactivation_source`
-      if (jsonObj.get("deactivation_source") != null && !jsonObj.get("deactivation_source").isJsonNull()) {
-        DeactivationSourceEnum.validateJsonElement(jsonObj.get("deactivation_source"));
       }
   }
 

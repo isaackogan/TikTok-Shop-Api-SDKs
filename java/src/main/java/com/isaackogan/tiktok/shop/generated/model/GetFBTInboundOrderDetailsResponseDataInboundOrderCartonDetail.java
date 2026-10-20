@@ -59,62 +59,10 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
   @javax.annotation.Nullable
   private String cartonNo;
 
-  /**
-   * Whether this carton is single-SKU or multi-SKU.  **Possible values:** * &#x60;SINGLE_SKU&#x60; * &#x60;MULTI_SKU&#x60;
-   */
-  @JsonAdapter(CartonTypeEnum.Adapter.class)
-  public enum CartonTypeEnum {
-    SINGLE_SKU("SINGLE_SKU"),
-    
-    MULTI_SKU("MULTI_SKU");
-
-    private String value;
-
-    CartonTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CartonTypeEnum fromValue(String value) {
-      for (CartonTypeEnum b : CartonTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CartonTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CartonTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CartonTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CartonTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CartonTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CARTON_TYPE = "carton_type";
   @SerializedName(SERIALIZED_NAME_CARTON_TYPE)
   @javax.annotation.Nullable
-  private CartonTypeEnum cartonType;
+  private String cartonType;
 
   public static final String SERIALIZED_NAME_BOX_MEASUREMENTS = "box_measurements";
   @SerializedName(SERIALIZED_NAME_BOX_MEASUREMENTS)
@@ -148,7 +96,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail cartonType(@javax.annotation.Nullable CartonTypeEnum cartonType) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail cartonType(@javax.annotation.Nullable String cartonType) {
     this.cartonType = cartonType;
     return this;
   }
@@ -158,11 +106,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
    * @return cartonType
    */
   @javax.annotation.Nullable
-  public CartonTypeEnum getCartonType() {
+  public String getCartonType() {
     return cartonType;
   }
 
-  public void setCartonType(@javax.annotation.Nullable CartonTypeEnum cartonType) {
+  public void setCartonType(@javax.annotation.Nullable String cartonType) {
     this.cartonType = cartonType;
   }
 
@@ -330,10 +278,6 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetail {
       }
       if ((jsonObj.get("carton_type") != null && !jsonObj.get("carton_type").isJsonNull()) && !jsonObj.get("carton_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `carton_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("carton_type").toString()));
-      }
-      // validate the optional field `carton_type`
-      if (jsonObj.get("carton_type") != null && !jsonObj.get("carton_type").isJsonNull()) {
-        CartonTypeEnum.validateJsonElement(jsonObj.get("carton_type"));
       }
       // validate the optional field `box_measurements`
       if (jsonObj.get("box_measurements") != null && !jsonObj.get("box_measurements").isJsonNull()) {

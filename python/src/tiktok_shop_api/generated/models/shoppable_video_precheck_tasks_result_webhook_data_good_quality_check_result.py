@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.shoppable_video_precheck_tasks_result_webhook_data_good_quality_check_result_status import (
-    ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,22 +21,19 @@ T = TypeVar("T", bound="ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityC
 class ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult:
     """
     Attributes:
-        status (ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultStatus | Unset): Possible
-            enumerations:
+        status (str | Unset): Possible enumerations:
              `SUCCESS`
              `FAIL`
              `PROCESSING`
         issues (list[ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue] | Unset):
     """
 
-    status: ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultStatus | Unset = UNSET
+    status: str | Unset = UNSET
     issues: list[ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         issues: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.issues, Unset):
@@ -65,12 +59,7 @@ class ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult:
         )
 
         d = dict(src_dict)
-        _status = d.pop("status", UNSET)
-        status: ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultStatus(_status)
+        status = d.pop("status", UNSET)
 
         _issues = d.pop("issues", UNSET)
         issues: list[ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue] | Unset = UNSET

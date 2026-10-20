@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_sku_performance_detail_response_data_performance_interval_items_sold_breakdown_type import (
-    GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdown")
@@ -19,8 +16,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdo
     """
     Attributes:
         amount (int | Unset): Number of units sold for the corresponding type.
-        type_ (GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownType | Unset): Items-sold
-            breakdown type.
+        type_ (str | Unset): Items-sold breakdown type.
             Possible values:
             - LIVE: Live stream content.
             - VIDEO: Video content.
@@ -28,15 +24,13 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdo
     """
 
     amount: int | Unset = UNSET
-    type_: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -53,12 +47,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdo
         d = dict(src_dict)
         amount = d.pop("amount", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetShopSKUPerformanceDetailResponseDataPerformanceIntervalItemsSoldBreakdownType(_type_)
+        type_ = d.pop("type", UNSET)
 
         get_shop_sku_performance_detail_response_data_performance_interval_items_sold_breakdown = cls(
             amount=amount,

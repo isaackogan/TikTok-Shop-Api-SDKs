@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_engagement_feature_permissions_response_data_feature_name import (
-    GetEngagementFeaturePermissionsResponseDataFeatureName,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetEngagementFeaturePermissionsResponseDataFeature")
@@ -18,7 +15,7 @@ T = TypeVar("T", bound="GetEngagementFeaturePermissionsResponseDataFeature")
 class GetEngagementFeaturePermissionsResponseDataFeature:
     """
     Attributes:
-        name (GetEngagementFeaturePermissionsResponseDataFeatureName | Unset): The feature name.
+        name (str | Unset): The feature name.
             Possible values:
             - `FUNDAMENTAL`: The ability to use any customer engagement APIs or features. This is the prerequisite for all
             other customer engagement features.
@@ -29,14 +26,12 @@ class GetEngagementFeaturePermissionsResponseDataFeature:
             - `false`: Not authorized to use this feature.
     """
 
-    name: GetEngagementFeaturePermissionsResponseDataFeatureName | Unset = UNSET
+    name: str | Unset = UNSET
     is_authorized: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        name: str | Unset = UNSET
-        if not isinstance(self.name, Unset):
-            name = self.name.value
+        name = self.name
 
         is_authorized = self.is_authorized
 
@@ -53,12 +48,7 @@ class GetEngagementFeaturePermissionsResponseDataFeature:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _name = d.pop("name", UNSET)
-        name: GetEngagementFeaturePermissionsResponseDataFeatureName | Unset
-        if isinstance(_name, Unset):
-            name = UNSET
-        else:
-            name = GetEngagementFeaturePermissionsResponseDataFeatureName(_name)
+        name = d.pop("name", UNSET)
 
         is_authorized = d.pop("is_authorized", UNSET)
 

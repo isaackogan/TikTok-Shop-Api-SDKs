@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_products_for_compliance_auditing_response_data_product_country import (
-    SearchProductsForComplianceAuditingResponseDataProductCountry,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -33,8 +30,7 @@ class SearchProductsForComplianceAuditingResponseDataProduct:
             - DE, ES, FR, IE, IT, JP, UK, US: [1, 255]
             - BR, MX: [1, 300]
             - Other regions: [25, 255]
-        country (SearchProductsForComplianceAuditingResponseDataProductCountry | Unset): The regions where the product
-            is sold.
+        country (str | Unset): The regions where the product is sold.
             Possible values:
             - BR: Brazil
             - DE: Germany
@@ -67,7 +63,7 @@ class SearchProductsForComplianceAuditingResponseDataProduct:
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
-    country: SearchProductsForComplianceAuditingResponseDataProductCountry | Unset = UNSET
+    country: str | Unset = UNSET
     description: str | Unset = UNSET
     variants: list[SearchProductsForComplianceAuditingResponseDataProductVariant] | Unset = UNSET
     listing_url: str | Unset = UNSET
@@ -84,9 +80,7 @@ class SearchProductsForComplianceAuditingResponseDataProduct:
 
         title = self.title
 
-        country: str | Unset = UNSET
-        if not isinstance(self.country, Unset):
-            country = self.country.value
+        country = self.country
 
         description = self.description
 
@@ -162,12 +156,7 @@ class SearchProductsForComplianceAuditingResponseDataProduct:
 
         title = d.pop("title", UNSET)
 
-        _country = d.pop("country", UNSET)
-        country: SearchProductsForComplianceAuditingResponseDataProductCountry | Unset
-        if isinstance(_country, Unset):
-            country = UNSET
-        else:
-            country = SearchProductsForComplianceAuditingResponseDataProductCountry(_country)
+        country = d.pop("country", UNSET)
 
         description = d.pop("description", UNSET)
 

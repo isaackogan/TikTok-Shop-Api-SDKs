@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversations_response_data_conversation_latest_message_sender_role import (
-    GetConversationsResponseDataConversationLatestMessageSenderRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetConversationsResponseDataConversationLatestMessageSender")
@@ -20,8 +17,7 @@ class GetConversationsResponseDataConversationLatestMessageSender:
     Attributes:
         im_user_id (str | Unset): Sender's IM ID. Sender's unique identifier in TikTok Shop's IM system.
         avatar (str | Unset): Sender's avatar URL.
-        role (GetConversationsResponseDataConversationLatestMessageSenderRole | Unset): Sender's role. Possible
-            enumerations:
+        role (str | Unset): Sender's role. Possible enumerations:
             - `BUYER`
             - `SHOP`
             - `CUSTOMER_SERVICE`
@@ -38,7 +34,7 @@ class GetConversationsResponseDataConversationLatestMessageSender:
 
     im_user_id: str | Unset = UNSET
     avatar: str | Unset = UNSET
-    role: GetConversationsResponseDataConversationLatestMessageSenderRole | Unset = UNSET
+    role: str | Unset = UNSET
     nickname: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -47,9 +43,7 @@ class GetConversationsResponseDataConversationLatestMessageSender:
 
         avatar = self.avatar
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         nickname = self.nickname
 
@@ -74,12 +68,7 @@ class GetConversationsResponseDataConversationLatestMessageSender:
 
         avatar = d.pop("avatar", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetConversationsResponseDataConversationLatestMessageSenderRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetConversationsResponseDataConversationLatestMessageSenderRole(_role)
+        role = d.pop("role", UNSET)
 
         nickname = d.pop("nickname", UNSET)
 

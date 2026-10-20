@@ -47,19 +47,10 @@ data class GlobalListingMethodChangeWebhookData (
 
     /* The listing method applicable to the local product.   Possible values:      * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.   * LOCAL_REPLICATION: Create local product, then replicate it to other target local markets. */
     @SerializedName("listing_method")
-    val listingMethod: GlobalListingMethodChangeWebhookData.ListingMethod? = null
+    val listingMethod: kotlin.String? = null
 
 ) {
 
-    /**
-     * The listing method applicable to the local product.   Possible values:      * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.   * LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
-     *
-     * Values: GLOBAL_PUBLISHING,LOCAL_REPLICATION
-     */
-    enum class ListingMethod(val value: kotlin.String) {
-        @SerializedName(value = "GLOBAL_PUBLISHING") GLOBAL_PUBLISHING("GLOBAL_PUBLISHING"),
-        @SerializedName(value = "LOCAL_REPLICATION") LOCAL_REPLICATION("LOCAL_REPLICATION");
-    }
 
 }
 

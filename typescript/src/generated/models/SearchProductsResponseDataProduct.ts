@@ -88,10 +88,10 @@ export interface SearchProductsResponseDataProduct {
      * - DELETED
      * 
      * **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     * @type {SearchProductsResponseDataProductStatusEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProduct
      */
-    status?: SearchProductsResponseDataProductStatusEnum;
+    status?: string;
     /**
      * A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
      * @type {Array<SearchProductsResponseDataProductSku>}
@@ -117,10 +117,10 @@ export interface SearchProductsResponseDataProduct {
      * - TH: Thailand
      * - US: United States
      * - VN: Vietnam
-     * @type {Array<SearchProductsResponseDataProductSalesRegionsEnum>}
+     * @type {Array<string>}
      * @memberof SearchProductsResponseDataProduct
      */
-    salesRegions?: Array<SearchProductsResponseDataProductSalesRegionsEnum>;
+    salesRegions?: Array<string>;
     /**
      * The time when the product is created.
      * Unix timestamp in seconds.
@@ -166,10 +166,10 @@ export interface SearchProductsResponseDataProduct {
      * - EXCELLENT
      * 
      * **Note**: Available only for the US market.
-     * @type {SearchProductsResponseDataProductListingQualityTierEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProduct
      */
-    listingQualityTier?: SearchProductsResponseDataProductListingQualityTierEnum;
+    listingQualityTier?: string;
     /**
      * The current status of the product on platforms that are natively integrated with TikTok Shop (e.g. TOKOPEDIA).
      * 
@@ -211,88 +211,17 @@ export interface SearchProductsResponseDataProduct {
     /**
      * Product tag to identity special type product
      * Possible values: AUCTION、LIVE_QUICK
-     * @type {Array<SearchProductsResponseDataProductProductTagsEnum>}
+     * @type {Array<string>}
      * @memberof SearchProductsResponseDataProduct
      */
-    productTags?: Array<SearchProductsResponseDataProductProductTagsEnum>;
+    productTags?: Array<string>;
     /**
      * The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
-     * @type {SearchProductsResponseDataProductSellingFormatEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProduct
      */
-    sellingFormat?: SearchProductsResponseDataProductSellingFormatEnum;
+    sellingFormat?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Draft: 'DRAFT',
-    Pending: 'PENDING',
-    Failed: 'FAILED',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED'
-} as const;
-export type SearchProductsResponseDataProductStatusEnum = typeof SearchProductsResponseDataProductStatusEnum[keyof typeof SearchProductsResponseDataProductStatusEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSalesRegionsEnum = {
-    Br: 'BR',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    Mx: 'MX',
-    My: 'MY',
-    Ph: 'PH',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN'
-} as const;
-export type SearchProductsResponseDataProductSalesRegionsEnum = typeof SearchProductsResponseDataProductSalesRegionsEnum[keyof typeof SearchProductsResponseDataProductSalesRegionsEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductListingQualityTierEnum = {
-    Poor: 'POOR',
-    Fair: 'FAIR',
-    Good: 'GOOD',
-    Excellent: 'EXCELLENT'
-} as const;
-export type SearchProductsResponseDataProductListingQualityTierEnum = typeof SearchProductsResponseDataProductListingQualityTierEnum[keyof typeof SearchProductsResponseDataProductListingQualityTierEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductProductTagsEnum = {
-    Auction: 'AUCTION',
-    LiveQuick: 'LIVE_QUICK'
-} as const;
-export type SearchProductsResponseDataProductProductTagsEnum = typeof SearchProductsResponseDataProductProductTagsEnum[keyof typeof SearchProductsResponseDataProductProductTagsEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSellingFormatEnum = {
-    FixedPrice: 'FIXED_PRICE',
-    LiveAuction: 'LIVE_AUCTION',
-    FixedPriceAndLiveAuction: 'FIXED_PRICE_AND_LIVE_AUCTION'
-} as const;
-export type SearchProductsResponseDataProductSellingFormatEnum = typeof SearchProductsResponseDataProductSellingFormatEnum[keyof typeof SearchProductsResponseDataProductSellingFormatEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProduct interface.

@@ -54,7 +54,7 @@ data class GetConversationsResponseDataConversationParticipant (
 
     /* Participant's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE` */
     @SerializedName("role")
-    val role: GetConversationsResponseDataConversationParticipant.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Participant's nickname. */
     @SerializedName("nickname")
@@ -62,29 +62,10 @@ data class GetConversationsResponseDataConversationParticipant (
 
     /* Which platform is the buyer from.  This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia. Possible enumerations: - TIKTOK_SHOP - TOKOPEDIA You cannot send platform-specific content to the buyer from a different platform. For example, when you send a product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia. */
     @SerializedName("buyer_platform")
-    val buyerPlatform: GetConversationsResponseDataConversationParticipant.BuyerPlatform? = null
+    val buyerPlatform: kotlin.String? = null
 
 ) {
 
-    /**
-     * Participant's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE`
-     *
-     * Values: BUYER,SHOP,CUSTOMER_SERVICE
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "CUSTOMER_SERVICE") CUSTOMER_SERVICE("CUSTOMER_SERVICE");
-    }
-    /**
-     * Which platform is the buyer from.  This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia. Possible enumerations: - TIKTOK_SHOP - TOKOPEDIA You cannot send platform-specific content to the buyer from a different platform. For example, when you send a product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
-     *
-     * Values: TIKTOK_SHOP,TOKOPEDIA
-     */
-    enum class BuyerPlatform(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK_SHOP") TIKTOK_SHOP("TIKTOK_SHOP"),
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
 
 }
 

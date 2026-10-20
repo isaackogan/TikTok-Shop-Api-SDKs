@@ -64,10 +64,10 @@ export interface RecommendRequiredProductPropertiesResponseDataRecommendedProper
      * - `KEY_PROPERTY`: A key property used to identify the product.
      * - `SALES_PROPERTY`: A sales property that defines product variants.
      * - `PRODUCT_PROPERTY`: A property that describes the product as a whole.
-     * @type {RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum}
+     * @type {string}
      * @memberof RecommendRequiredProductPropertiesResponseDataRecommendedProperty
      */
-    type: RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum;
+    type: string;
     /**
      * Ordered values recommended for the property. The array is empty when the property requires a custom value or no value is recommended.
      * @type {Array<RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue>}
@@ -75,19 +75,6 @@ export interface RecommendRequiredProductPropertiesResponseDataRecommendedProper
      */
     values: Array<RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue>;
 }
-
-
-/**
- * @export
- */
-export const RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum = {
-    Unspecified: 'UNSPECIFIED',
-    KeyProperty: 'KEY_PROPERTY',
-    SalesProperty: 'SALES_PROPERTY',
-    ProductProperty: 'PRODUCT_PROPERTY'
-} as const;
-export type RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum = typeof RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum[keyof typeof RecommendRequiredProductPropertiesResponseDataRecommendedPropertyTypeEnum];
-
 
 /**
  * Check if a given object implements the RecommendRequiredProductPropertiesResponseDataRecommendedProperty interface.

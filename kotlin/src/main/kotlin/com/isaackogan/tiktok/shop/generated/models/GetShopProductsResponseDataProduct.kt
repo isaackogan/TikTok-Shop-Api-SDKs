@@ -57,7 +57,7 @@ data class GetShopProductsResponseDataProduct (
 
     /* Showcase add status with possible values: - ADDABLE - ADDED - REJECTED */
     @SerializedName("added_status")
-    val addedStatus: GetShopProductsResponseDataProduct.AddedStatus? = null,
+    val addedStatus: kotlin.String? = null,
 
     /* The brand name a seller has set for a product. */
     @SerializedName("brand_name")
@@ -73,16 +73,6 @@ data class GetShopProductsResponseDataProduct (
 
 ) {
 
-    /**
-     * Showcase add status with possible values: - ADDABLE - ADDED - REJECTED
-     *
-     * Values: ADDABLE,ADDED,REJECTED
-     */
-    enum class AddedStatus(val value: kotlin.String) {
-        @SerializedName(value = "ADDABLE") ADDABLE("ADDABLE"),
-        @SerializedName(value = "ADDED") ADDED("ADDED"),
-        @SerializedName(value = "REJECTED") REJECTED("REJECTED");
-    }
 
 }
 

@@ -34,10 +34,10 @@ export interface SearchProductsResponseDataProductSkuPrice {
      * - THB: Thailand
      * - USD: United States
      * - VND: Vietnam
-     * @type {SearchProductsResponseDataProductSkuPriceCurrencyEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductSkuPrice
      */
-    currency?: SearchProductsResponseDataProductSkuPriceCurrencyEnum;
+    currency?: string;
     /**
      * **Local sellers/Intra-EU sellers**
      * The SKU's **local display price** shown on the product page before any discounts.
@@ -64,27 +64,6 @@ export interface SearchProductsResponseDataProductSkuPrice {
      */
     startingBidPrice?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSkuPriceCurrencyEnum = {
-    Brl: 'BRL',
-    Eur: 'EUR',
-    Gbp: 'GBP',
-    Idr: 'IDR',
-    Jpy: 'JPY',
-    Mxn: 'MXN',
-    Myr: 'MYR',
-    Php: 'PHP',
-    Sgd: 'SGD',
-    Thb: 'THB',
-    Usd: 'USD',
-    Vnd: 'VND'
-} as const;
-export type SearchProductsResponseDataProductSkuPriceCurrencyEnum = typeof SearchProductsResponseDataProductSkuPriceCurrencyEnum[keyof typeof SearchProductsResponseDataProductSkuPriceCurrencyEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProductSkuPrice interface.

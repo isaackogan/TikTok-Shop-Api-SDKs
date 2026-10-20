@@ -58,10 +58,10 @@ export interface SearchPackageResponseDataPackage {
      * - `FULFILLING`: Package has been collected by carrier and in transit.
      * - `COMPLETED`: Package has been delivered.
      * - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     * @type {SearchPackageResponseDataPackageStatusEnum}
+     * @type {string}
      * @memberof SearchPackageResponseDataPackage
      */
-    status?: SearchPackageResponseDataPackageStatusEnum;
+    status?: string;
     /**
      * Package tracking number.
      * @type {string}
@@ -87,20 +87,6 @@ export interface SearchPackageResponseDataPackage {
      */
     orderLineItemIds?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const SearchPackageResponseDataPackageStatusEnum = {
-    ToFulfill: 'TO_FULFILL',
-    Processing: 'PROCESSING',
-    Fulfilling: 'FULFILLING',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type SearchPackageResponseDataPackageStatusEnum = typeof SearchPackageResponseDataPackageStatusEnum[keyof typeof SearchPackageResponseDataPackageStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchPackageResponseDataPackage interface.

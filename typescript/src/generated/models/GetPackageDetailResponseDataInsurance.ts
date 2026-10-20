@@ -44,24 +44,11 @@ export interface GetPackageDetailResponseDataInsurance {
      * - `CLAIM_PENDING`: Claim is currently under review.
      * - `APPROVED`: Claim has been approved.
      * - `DECLINED`: Claim has been declined.
-     * @type {GetPackageDetailResponseDataInsuranceClaimStatusEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseDataInsurance
      */
-    claimStatus?: GetPackageDetailResponseDataInsuranceClaimStatusEnum;
+    claimStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataInsuranceClaimStatusEnum = {
-    NotStarted: 'NOT_STARTED',
-    ClaimPending: 'CLAIM_PENDING',
-    Approved: 'APPROVED',
-    Declined: 'DECLINED'
-} as const;
-export type GetPackageDetailResponseDataInsuranceClaimStatusEnum = typeof GetPackageDetailResponseDataInsuranceClaimStatusEnum[keyof typeof GetPackageDetailResponseDataInsuranceClaimStatusEnum];
-
 
 /**
  * Check if a given object implements the GetPackageDetailResponseDataInsurance interface.

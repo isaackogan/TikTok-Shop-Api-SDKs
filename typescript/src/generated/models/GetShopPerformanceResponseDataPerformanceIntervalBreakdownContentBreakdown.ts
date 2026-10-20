@@ -37,17 +37,17 @@ export interface GetShopPerformanceResponseDataPerformanceIntervalBreakdownConte
     /**
      * Channel type.
      * Possible values: CREATOR, SELLER
-     * @type {GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum}
+     * @type {string}
      * @memberof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown
      */
-    channel?: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum;
+    channel?: string;
     /**
      * Content type.
      * Possible values: LIVE, VIDEO
-     * @type {GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum}
+     * @type {string}
      * @memberof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown
      */
-    contentType?: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum;
+    contentType?: string;
     /**
      * GMV for this content type and channel.
      * @type {Gmv}
@@ -61,26 +61,6 @@ export interface GetShopPerformanceResponseDataPerformanceIntervalBreakdownConte
      */
     indirectGmv?: IndirectGmv;
 }
-
-
-/**
- * @export
- */
-export const GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum = {
-    Creator: 'CREATOR',
-    Seller: 'SELLER'
-} as const;
-export type GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum = typeof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum[keyof typeof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannelEnum];
-
-/**
- * @export
- */
-export const GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum = {
-    Live: 'LIVE',
-    Video: 'VIDEO'
-} as const;
-export type GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum = typeof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum[keyof typeof GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown interface.

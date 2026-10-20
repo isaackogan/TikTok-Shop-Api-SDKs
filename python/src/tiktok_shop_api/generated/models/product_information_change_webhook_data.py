@@ -1,17 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.product_information_change_webhook_data_change_source import (
-    ProductInformationChangeWebhookDataChangeSource,
-)
-from ..models.product_information_change_webhook_data_changed_fields_item import (
-    ProductInformationChangeWebhookDataChangedFieldsItem,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ProductInformationChangeWebhookData")
@@ -22,12 +16,11 @@ class ProductInformationChangeWebhookData:
     """
     Attributes:
         product_id (str | Unset): The ID of the product that's being changed.
-        change_source (ProductInformationChangeWebhookDataChangeSource | Unset): The originating source of the change.
+        change_source (str | Unset): The originating source of the change.
              Possible values:
              - `SELLER_CENTER`
              - `OPEN_API`
-        changed_fields (list[ProductInformationChangeWebhookDataChangedFieldsItem] | Unset): The product properties that
-            were changed.
+        changed_fields (list[str] | Unset): The product properties that were changed.
              Possible values:
              - `title`: The product name was changed.
              - `description`: The product description was changed.
@@ -41,24 +34,19 @@ class ProductInformationChangeWebhookData:
     """
 
     product_id: str | Unset = UNSET
-    change_source: ProductInformationChangeWebhookDataChangeSource | Unset = UNSET
-    changed_fields: list[ProductInformationChangeWebhookDataChangedFieldsItem] | Unset = UNSET
+    change_source: str | Unset = UNSET
+    changed_fields: list[str] | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
 
-        change_source: str | Unset = UNSET
-        if not isinstance(self.change_source, Unset):
-            change_source = self.change_source.value
+        change_source = self.change_source
 
         changed_fields: list[str] | Unset = UNSET
         if not isinstance(self.changed_fields, Unset):
-            changed_fields = []
-            for changed_fields_item_data in self.changed_fields:
-                changed_fields_item = changed_fields_item_data.value
-                changed_fields.append(changed_fields_item)
+            changed_fields = self.changed_fields
 
         update_time = self.update_time
 
@@ -81,21 +69,9 @@ class ProductInformationChangeWebhookData:
         d = dict(src_dict)
         product_id = d.pop("product_id", UNSET)
 
-        _change_source = d.pop("change_source", UNSET)
-        change_source: ProductInformationChangeWebhookDataChangeSource | Unset
-        if isinstance(_change_source, Unset):
-            change_source = UNSET
-        else:
-            change_source = ProductInformationChangeWebhookDataChangeSource(_change_source)
+        change_source = d.pop("change_source", UNSET)
 
-        _changed_fields = d.pop("changed_fields", UNSET)
-        changed_fields: list[ProductInformationChangeWebhookDataChangedFieldsItem] | Unset = UNSET
-        if _changed_fields is not UNSET:
-            changed_fields = []
-            for changed_fields_item_data in _changed_fields:
-                changed_fields_item = ProductInformationChangeWebhookDataChangedFieldsItem(changed_fields_item_data)
-
-                changed_fields.append(changed_fields_item)
+        changed_fields = cast(list[str], d.pop("changed_fields", UNSET))
 
         update_time = d.pop("update_time", UNSET)
 

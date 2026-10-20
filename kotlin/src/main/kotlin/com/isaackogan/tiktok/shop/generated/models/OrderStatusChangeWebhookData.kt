@@ -44,7 +44,7 @@ data class OrderStatusChangeWebhookData (
 
     /* The most recent order status, with possible values:      * `UNPAID`   * `ON_HOLD`   * `AWAITING_SHIPMENT`   * `AWAITING_COLLECTION`   * `CANCEL`   * `IN_TRANSIT`   * `DELIVERED`   * `COMPLETED` */
     @SerializedName("order_status")
-    val orderStatus: OrderStatusChangeWebhookData.OrderStatus? = null,
+    val orderStatus: kotlin.String? = null,
 
     /* Indicates whether the order has experienced or will experience `ON_HOLD` status */
     @SerializedName("is_on_hold_order")
@@ -56,21 +56,6 @@ data class OrderStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * The most recent order status, with possible values:      * `UNPAID`   * `ON_HOLD`   * `AWAITING_SHIPMENT`   * `AWAITING_COLLECTION`   * `CANCEL`   * `IN_TRANSIT`   * `DELIVERED`   * `COMPLETED`
-     *
-     * Values: UNPAID,ON_HOLD,AWAITING_SHIPMENT,AWAITING_COLLECTION,CANCEL,IN_TRANSIT,DELIVERED,COMPLETED
-     */
-    enum class OrderStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNPAID") UNPAID("UNPAID"),
-        @SerializedName(value = "ON_HOLD") ON_HOLD("ON_HOLD"),
-        @SerializedName(value = "AWAITING_SHIPMENT") AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-        @SerializedName(value = "AWAITING_COLLECTION") AWAITING_COLLECTION("AWAITING_COLLECTION"),
-        @SerializedName(value = "CANCEL") CANCEL("CANCEL"),
-        @SerializedName(value = "IN_TRANSIT") IN_TRANSIT("IN_TRANSIT"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED");
-    }
 
 }
 

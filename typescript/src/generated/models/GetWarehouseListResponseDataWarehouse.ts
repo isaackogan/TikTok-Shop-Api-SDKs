@@ -53,28 +53,28 @@ export interface GetWarehouseListResponseDataWarehouse {
      * - `RESTRICTED`: The warehouse is in holiday mode or order limit mode, so all products in stock are unavailable for sale.
      * 
      * The seller can enable holiday mode in Seller Center when the seller cannot fulfill orders from the warehouse. Order limit mode is applied when TikTok Shop limits the order volume that can be fulfilled by the warehouse because of policy violations.
-     * @type {GetWarehouseListResponseDataWarehouseEffectStatusEnum}
+     * @type {string}
      * @memberof GetWarehouseListResponseDataWarehouse
      */
-    effectStatus?: GetWarehouseListResponseDataWarehouseEffectStatusEnum;
+    effectStatus?: string;
     /**
      * Possible values:
      * - SALES_WAREHOUSE: Warehouse for shipping products.  
      * - RETURN_WAREHOUSE: Warehouse for receiving returned products. 
      * You can have the same warehouse for both shipping and receiving returns, but they will have different warehouse IDs with the same address.
-     * @type {GetWarehouseListResponseDataWarehouseTypeEnum}
+     * @type {string}
      * @memberof GetWarehouseListResponseDataWarehouse
      */
-    type?: GetWarehouseListResponseDataWarehouseTypeEnum;
+    type?: string;
     /**
      * Possible values:
      * - DOMESTIC_WAREHOUSE: The warehouse is in the same country as the target market and the seller.
      * - CB_OVERSEA_WAREHOUSE: For cross-border sellers, a local warehouse in the target market. 
      * - CB_DIRECT_SHIPPING_WAREHOUSE: For cross-border sellers, a warehouse in the seller's base country, e.g., Mainland China or Hong Kong.
-     * @type {GetWarehouseListResponseDataWarehouseSubTypeEnum}
+     * @type {string}
      * @memberof GetWarehouseListResponseDataWarehouse
      */
-    subType?: GetWarehouseListResponseDataWarehouseSubTypeEnum;
+    subType?: string;
     /**
      * The default warehouse.  If a product is listed with no designated warehouse, the default warehouse will be used.
      * @type {boolean}
@@ -88,37 +88,6 @@ export interface GetWarehouseListResponseDataWarehouse {
      */
     address?: GetWarehouseListResponseDataWarehouseAddress;
 }
-
-
-/**
- * @export
- */
-export const GetWarehouseListResponseDataWarehouseEffectStatusEnum = {
-    Enabled: 'ENABLED',
-    Disabled: 'DISABLED',
-    Restricted: 'RESTRICTED'
-} as const;
-export type GetWarehouseListResponseDataWarehouseEffectStatusEnum = typeof GetWarehouseListResponseDataWarehouseEffectStatusEnum[keyof typeof GetWarehouseListResponseDataWarehouseEffectStatusEnum];
-
-/**
- * @export
- */
-export const GetWarehouseListResponseDataWarehouseTypeEnum = {
-    SalesWarehouse: 'SALES_WAREHOUSE',
-    ReturnWarehouse: 'RETURN_WAREHOUSE'
-} as const;
-export type GetWarehouseListResponseDataWarehouseTypeEnum = typeof GetWarehouseListResponseDataWarehouseTypeEnum[keyof typeof GetWarehouseListResponseDataWarehouseTypeEnum];
-
-/**
- * @export
- */
-export const GetWarehouseListResponseDataWarehouseSubTypeEnum = {
-    DomesticWarehouse: 'DOMESTIC_WAREHOUSE',
-    CbOverseaWarehouse: 'CB_OVERSEA_WAREHOUSE',
-    CbDirectShippingWarehouse: 'CB_DIRECT_SHIPPING_WAREHOUSE'
-} as const;
-export type GetWarehouseListResponseDataWarehouseSubTypeEnum = typeof GetWarehouseListResponseDataWarehouseSubTypeEnum[keyof typeof GetWarehouseListResponseDataWarehouseSubTypeEnum];
-
 
 /**
  * Check if a given object implements the GetWarehouseListResponseDataWarehouse interface.

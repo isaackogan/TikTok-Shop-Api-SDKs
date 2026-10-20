@@ -30,10 +30,10 @@ export interface ProductInformationChangeWebhookData {
      *  Possible values: 
      *  - `SELLER_CENTER` 
      *  - `OPEN_API`
-     * @type {ProductInformationChangeWebhookDataChangeSourceEnum}
+     * @type {string}
      * @memberof ProductInformationChangeWebhookData
      */
-    changeSource?: ProductInformationChangeWebhookDataChangeSourceEnum;
+    changeSource?: string;
     /**
      * The product properties that were changed. 
      *  Possible values: 
@@ -44,10 +44,10 @@ export interface ProductInformationChangeWebhookData {
      *  - `size_chart_image`: The size chart image was added, removed, or changed. 
      *  - `size_chart_template`: The associated size chart template was removed or its details were edited, or a new size chart template was associated. 
      *  - `others`: Other product properties not specified above were changed.
-     * @type {Array<ProductInformationChangeWebhookDataChangedFieldsEnum>}
+     * @type {Array<string>}
      * @memberof ProductInformationChangeWebhookData
      */
-    changedFields?: Array<ProductInformationChangeWebhookDataChangedFieldsEnum>;
+    changedFields?: Array<string>;
     /**
      * The time when the change occurred. Unix timestamp.
      * @type {number}
@@ -55,31 +55,6 @@ export interface ProductInformationChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const ProductInformationChangeWebhookDataChangeSourceEnum = {
-    SellerCenter: 'SELLER_CENTER',
-    OpenApi: 'OPEN_API'
-} as const;
-export type ProductInformationChangeWebhookDataChangeSourceEnum = typeof ProductInformationChangeWebhookDataChangeSourceEnum[keyof typeof ProductInformationChangeWebhookDataChangeSourceEnum];
-
-/**
- * @export
- */
-export const ProductInformationChangeWebhookDataChangedFieldsEnum = {
-    Title: 'title',
-    Description: 'description',
-    MainImages: 'main_images',
-    ProductAttributes: 'product_attributes',
-    SizeChartImage: 'size_chart_image',
-    SizeChartTemplate: 'size_chart_template',
-    Others: 'others'
-} as const;
-export type ProductInformationChangeWebhookDataChangedFieldsEnum = typeof ProductInformationChangeWebhookDataChangedFieldsEnum[keyof typeof ProductInformationChangeWebhookDataChangedFieldsEnum];
-
 
 /**
  * Check if a given object implements the ProductInformationChangeWebhookData interface.

@@ -24,10 +24,10 @@ export interface GetProductResponseDataPackageWeight {
      * Possible values:
      * - `KILOGRAM`
      * - `POUND`
-     * @type {GetProductResponseDataPackageWeightUnitEnum}
+     * @type {string}
      * @memberof GetProductResponseDataPackageWeight
      */
-    unit?: GetProductResponseDataPackageWeightUnitEnum;
+    unit?: string;
     /**
      * The package weight.
      * @type {string}
@@ -35,17 +35,6 @@ export interface GetProductResponseDataPackageWeight {
      */
     value?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataPackageWeightUnitEnum = {
-    Kilogram: 'KILOGRAM',
-    Pound: 'POUND'
-} as const;
-export type GetProductResponseDataPackageWeightUnitEnum = typeof GetProductResponseDataPackageWeightUnitEnum[keyof typeof GetProductResponseDataPackageWeightUnitEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataPackageWeight interface.

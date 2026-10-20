@@ -35,10 +35,10 @@ export interface SearchManufacturersResponseDataManufacturerRegionalProfile {
      * - es-ES
      * - fr-FR
      * - it-IT
-     * @type {SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum}
+     * @type {string}
      * @memberof SearchManufacturersResponseDataManufacturerRegionalProfile
      */
-    locale?: SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum;
+    locale?: string;
     /**
      * The manufacturer name.
      * Max length: 255 characters
@@ -73,20 +73,6 @@ export interface SearchManufacturersResponseDataManufacturerRegionalProfile {
      */
     address?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum = {
-    DeDe: 'de-DE',
-    EnIe: 'en-IE',
-    EsEs: 'es-ES',
-    FrFr: 'fr-FR',
-    ItIt: 'it-IT'
-} as const;
-export type SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum = typeof SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum[keyof typeof SearchManufacturersResponseDataManufacturerRegionalProfileLocaleEnum];
-
 
 /**
  * Check if a given object implements the SearchManufacturersResponseDataManufacturerRegionalProfile interface.

@@ -43,46 +43,14 @@ data class GetGlobalCategoryRulesResponseDataResponsiblePerson (
 
     /* The markets where the responsible person is optional. Possible values: - DE: Germany - ES: Spain - FR: France - IT: Italy - IE: Ireland */
     @SerializedName("optional_regions")
-    val optionalRegions: kotlin.collections.List<GetGlobalCategoryRulesResponseDataResponsiblePerson.OptionalRegions>? = null,
+    val optionalRegions: kotlin.collections.List<kotlin.String>? = null,
 
     /* The markets where the responsible person is required. Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GR: Greece - HU: Hungary - IE: Ireland - IT: Italy - NL: Netherlands - PL: Poland - PT: Portugal */
     @SerializedName("required_regions")
-    val requiredRegions: kotlin.collections.List<GetGlobalCategoryRulesResponseDataResponsiblePerson.RequiredRegions>? = null
+    val requiredRegions: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The markets where the responsible person is optional. Possible values: - DE: Germany - ES: Spain - FR: France - IT: Italy - IE: Ireland
-     *
-     * Values: DE,ES,FR,IT,IE
-     */
-    enum class OptionalRegions(val value: kotlin.String) {
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "IE") IE("IE");
-    }
-    /**
-     * The markets where the responsible person is required. Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GR: Greece - HU: Hungary - IE: Ireland - IT: Italy - NL: Netherlands - PL: Poland - PT: Portugal
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GR,HU,IE,IT,NL,PL,PT
-     */
-    enum class RequiredRegions(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PL") PL("PL"),
-        @SerializedName(value = "PT") PT("PT");
-    }
 
 }
 

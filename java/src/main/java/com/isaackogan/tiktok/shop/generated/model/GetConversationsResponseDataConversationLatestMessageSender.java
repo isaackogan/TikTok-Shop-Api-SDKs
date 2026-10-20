@@ -60,68 +60,10 @@ public class GetConversationsResponseDataConversationLatestMessageSender {
   @javax.annotation.Nullable
   private String avatar;
 
-  /**
-   * Sender&#39;s role. Possible enumerations: - &#x60;BUYER&#x60; - &#x60;SHOP&#x60; - &#x60;CUSTOMER_SERVICE&#x60; - &#x60;SYSTEM&#x60; - &#x60;ROBOT&#x60; For &#x60;SYSTEM&#x60; and &#x60;ROBOT&#x60; role, the value of &#x60;im_user_id&#x60;, &#x60;nickname&#x60;, and &#x60;avatar&#x60; are the same as those of the &#x60;SHOP&#x60; role.
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    BUYER("BUYER"),
-    
-    SHOP("SHOP"),
-    
-    CUSTOMER_SERVICE("CUSTOMER_SERVICE"),
-    
-    SYSTEM("SYSTEM"),
-    
-    ROBOT("ROBOT");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
+  private String role;
 
   public static final String SERIALIZED_NAME_NICKNAME = "nickname";
   @SerializedName(SERIALIZED_NAME_NICKNAME)
@@ -169,7 +111,7 @@ public class GetConversationsResponseDataConversationLatestMessageSender {
   }
 
 
-  public GetConversationsResponseDataConversationLatestMessageSender role(@javax.annotation.Nullable RoleEnum role) {
+  public GetConversationsResponseDataConversationLatestMessageSender role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -179,11 +121,11 @@ public class GetConversationsResponseDataConversationLatestMessageSender {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
@@ -327,10 +269,6 @@ public class GetConversationsResponseDataConversationLatestMessageSender {
       }
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
-      }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
       }
       if ((jsonObj.get("nickname") != null && !jsonObj.get("nickname").isJsonNull()) && !jsonObj.get("nickname").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nickname` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nickname").toString()));

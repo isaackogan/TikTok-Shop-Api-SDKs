@@ -78,78 +78,10 @@ public class RecommendRequiredProductPropertiesResponseDataRecommendedProperty {
   @javax.annotation.Nonnull
   private String name;
 
-  /**
-   * Type of the recommended property. Possible values: - &#x60;UNSPECIFIED&#x60;: The service could not classify the property type. - &#x60;KEY_PROPERTY&#x60;: A key property used to identify the product. - &#x60;SALES_PROPERTY&#x60;: A sales property that defines product variants. - &#x60;PRODUCT_PROPERTY&#x60;: A property that describes the product as a whole.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * The service could not classify the property type.
-     */
-    UNSPECIFIED("UNSPECIFIED"),
-    
-    /**
-     * A key property used to identify the product.
-     */
-    KEY_PROPERTY("KEY_PROPERTY"),
-    
-    /**
-     * A sales property that defines product variants.
-     */
-    SALES_PROPERTY("SALES_PROPERTY"),
-    
-    /**
-     * A property that describes the product as a whole.
-     */
-    PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nonnull
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_VALUES = "values";
   @SerializedName(SERIALIZED_NAME_VALUES)
@@ -254,7 +186,7 @@ public class RecommendRequiredProductPropertiesResponseDataRecommendedProperty {
   }
 
 
-  public RecommendRequiredProductPropertiesResponseDataRecommendedProperty type(@javax.annotation.Nonnull TypeEnum type) {
+  public RecommendRequiredProductPropertiesResponseDataRecommendedProperty type(@javax.annotation.Nonnull String type) {
     this.type = type;
     return this;
   }
@@ -264,11 +196,11 @@ public class RecommendRequiredProductPropertiesResponseDataRecommendedProperty {
    * @return type
    */
   @javax.annotation.Nonnull
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nonnull TypeEnum type) {
+  public void setType(@javax.annotation.Nonnull String type) {
     this.type = type;
   }
 
@@ -434,8 +366,6 @@ public class RecommendRequiredProductPropertiesResponseDataRecommendedProperty {
       if (!jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      // validate the required field `type`
-      TypeEnum.validateJsonElement(jsonObj.get("type"));
       if (jsonObj.get("values") != null) {
         if (!jsonObj.get("values").isJsonArray()) {
           throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `values` to be an array in the JSON string but got `%s`", jsonObj.get("values").toString()));

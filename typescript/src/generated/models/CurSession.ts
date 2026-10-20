@@ -31,23 +31,11 @@ export interface CurSession {
      * - `AUTO_REPLY` — The session is being handled by automatic replies or chatbot responses.
      * - `QUEUED` — The session is waiting to be assigned to an agent.
      * - `ASSIGNED` — The session has been assigned to an agent.
-     * @type {CurSessionPhaseEnum}
+     * @type {string}
      * @memberof CurSession
      */
-    phase?: CurSessionPhaseEnum;
+    phase?: string;
 }
-
-
-/**
- * @export
- */
-export const CurSessionPhaseEnum = {
-    AutoReply: 'AUTO_REPLY',
-    Queued: 'QUEUED',
-    Assigned: 'ASSIGNED'
-} as const;
-export type CurSessionPhaseEnum = typeof CurSessionPhaseEnum[keyof typeof CurSessionPhaseEnum];
-
 
 /**
  * Check if a given object implements the CurSession interface.

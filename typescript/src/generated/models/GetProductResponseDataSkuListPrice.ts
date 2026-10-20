@@ -28,21 +28,11 @@ export interface GetProductResponseDataSkuListPrice {
     /**
      * The currency.
      * Possible values: USD
-     * @type {GetProductResponseDataSkuListPriceCurrencyEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuListPrice
      */
-    currency?: GetProductResponseDataSkuListPriceCurrencyEnum;
+    currency?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuListPriceCurrencyEnum = {
-    Usd: 'USD'
-} as const;
-export type GetProductResponseDataSkuListPriceCurrencyEnum = typeof GetProductResponseDataSkuListPriceCurrencyEnum[keyof typeof GetProductResponseDataSkuListPriceCurrencyEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuListPrice interface.

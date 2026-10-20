@@ -50,66 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class CheckProductListingResponseDataListingQuality {
-  /**
-   * The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market.
-   */
-  @JsonAdapter(CurrentTierEnum.Adapter.class)
-  public enum CurrentTierEnum {
-    POOR("POOR"),
-    
-    FAIR("FAIR"),
-    
-    GOOD("GOOD"),
-    
-    EXCELLENT("EXCELLENT");
-
-    private String value;
-
-    CurrentTierEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CurrentTierEnum fromValue(String value) {
-      for (CurrentTierEnum b : CurrentTierEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CurrentTierEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CurrentTierEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CurrentTierEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CurrentTierEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CurrentTierEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CURRENT_TIER = "current_tier";
   @SerializedName(SERIALIZED_NAME_CURRENT_TIER)
   @javax.annotation.Nullable
-  private CurrentTierEnum currentTier;
+  private String currentTier;
 
   public static final String SERIALIZED_NAME_REMAINING_RECOMMENDATIONS = "remaining_recommendations";
   @SerializedName(SERIALIZED_NAME_REMAINING_RECOMMENDATIONS)
@@ -119,7 +63,7 @@ public class CheckProductListingResponseDataListingQuality {
   public CheckProductListingResponseDataListingQuality() {
   }
 
-  public CheckProductListingResponseDataListingQuality currentTier(@javax.annotation.Nullable CurrentTierEnum currentTier) {
+  public CheckProductListingResponseDataListingQuality currentTier(@javax.annotation.Nullable String currentTier) {
     this.currentTier = currentTier;
     return this;
   }
@@ -129,11 +73,11 @@ public class CheckProductListingResponseDataListingQuality {
    * @return currentTier
    */
   @javax.annotation.Nullable
-  public CurrentTierEnum getCurrentTier() {
+  public String getCurrentTier() {
     return currentTier;
   }
 
-  public void setCurrentTier(@javax.annotation.Nullable CurrentTierEnum currentTier) {
+  public void setCurrentTier(@javax.annotation.Nullable String currentTier) {
     this.currentTier = currentTier;
   }
 
@@ -267,10 +211,6 @@ public class CheckProductListingResponseDataListingQuality {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("current_tier") != null && !jsonObj.get("current_tier").isJsonNull()) && !jsonObj.get("current_tier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `current_tier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("current_tier").toString()));
-      }
-      // validate the optional field `current_tier`
-      if (jsonObj.get("current_tier") != null && !jsonObj.get("current_tier").isJsonNull()) {
-        CurrentTierEnum.validateJsonElement(jsonObj.get("current_tier"));
       }
   }
 

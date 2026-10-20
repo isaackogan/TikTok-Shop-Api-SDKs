@@ -65,88 +65,10 @@ public class UpdatePromotionActivityProductsResponseData {
   @javax.annotation.Nullable
   private Long updateTime;
 
-  /**
-   * Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * Promotion activities with this status are not available to TikTok users.
-     */
-    DRAFT("DRAFT"),
-    
-    /**
-     * Promotion activities with this status are not available to TikTok users until the set activity start time.
-     */
-    NOT_START("NOT_START"),
-    
-    /**
-     * Promotion activities with this status are available to TikTok users.
-     */
-    ONGOING("ONGOING"),
-    
-    /**
-     * Promotion activities with this status are not available to TikTok users because it has expired.
-     */
-    EXPIRED("EXPIRED"),
-    
-    /**
-     * The activity has been deactivated by the seller and is not available to TikTok users.
-     */
-    DEACTIVATED("DEACTIVATED"),
-    
-    /**
-     * The activity is terminated by the platform and is not available to TikTok users.
-     */
-    NOT_EFFECTIVE("NOT_EFFECTIVE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_TOTAL_COUNT = "total_count";
   @SerializedName(SERIALIZED_NAME_TOTAL_COUNT)
@@ -213,7 +135,7 @@ public class UpdatePromotionActivityProductsResponseData {
   }
 
 
-  public UpdatePromotionActivityProductsResponseData status(@javax.annotation.Nullable StatusEnum status) {
+  public UpdatePromotionActivityProductsResponseData status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -223,11 +145,11 @@ public class UpdatePromotionActivityProductsResponseData {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -373,10 +295,6 @@ public class UpdatePromotionActivityProductsResponseData {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

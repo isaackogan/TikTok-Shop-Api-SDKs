@@ -27,44 +27,21 @@ export interface SearchProductsResponseDataProductAudit {
      * - FAILED: The product failed the audit, or the audit was cancelled.
      * - PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites.
      * - APPROVED: The product passed the audit and has been listed on the platform.
-     * @type {SearchProductsResponseDataProductAuditStatusEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductAudit
      */
-    status?: SearchProductsResponseDataProductAuditStatusEnum;
+    status?: string;
     /**
      * The reason why the product is pre-approved.
      * Applicable only if `audit.status=PRE_APPROVED`, otherwise returns an empty array.
      * Possible values:
      * - KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.
      * - RESTRICTED_CATEGORY_PENDING: The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center. Applicable only for the US market.
-     * @type {Array<SearchProductsResponseDataProductAuditPreApprovedReasonsEnum>}
+     * @type {Array<string>}
      * @memberof SearchProductsResponseDataProductAudit
      */
-    preApprovedReasons?: Array<SearchProductsResponseDataProductAuditPreApprovedReasonsEnum>;
+    preApprovedReasons?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductAuditStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Failed: 'FAILED',
-    PreApproved: 'PRE_APPROVED',
-    Approved: 'APPROVED'
-} as const;
-export type SearchProductsResponseDataProductAuditStatusEnum = typeof SearchProductsResponseDataProductAuditStatusEnum[keyof typeof SearchProductsResponseDataProductAuditStatusEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductAuditPreApprovedReasonsEnum = {
-    KycPending: 'KYC_PENDING',
-    RestrictedCategoryPending: 'RESTRICTED_CATEGORY_PENDING'
-} as const;
-export type SearchProductsResponseDataProductAuditPreApprovedReasonsEnum = typeof SearchProductsResponseDataProductAuditPreApprovedReasonsEnum[keyof typeof SearchProductsResponseDataProductAuditPreApprovedReasonsEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProductAudit interface.

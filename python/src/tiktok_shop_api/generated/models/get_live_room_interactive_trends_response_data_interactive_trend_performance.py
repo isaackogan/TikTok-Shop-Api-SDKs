@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_live_room_interactive_trends_response_data_interactive_trend_performance_stats_type import (
-    GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,22 +19,19 @@ T = TypeVar("T", bound="GetLiveRoomInteractiveTrendsResponseDataInteractiveTrend
 class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
     """
     Attributes:
-        stats_type (GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsType | Unset): The type of
-            interactive trend metric. Possible values:
+        stats_type (str | Unset): The type of interactive trend metric. Possible values:
             - `TREND_WATCH_PV`: Watch count for the live room.
             - `TREND_COMMENT_PV`: Comment count for the live room.
             - `TREND_SHARE_PV`: Share count for the live room.
         data_points (list[DataPoint] | Unset): The data point of interactive trend
     """
 
-    stats_type: GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsType | Unset = UNSET
+    stats_type: str | Unset = UNSET
     data_points: list[DataPoint] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        stats_type: str | Unset = UNSET
-        if not isinstance(self.stats_type, Unset):
-            stats_type = self.stats_type.value
+        stats_type = self.stats_type
 
         data_points: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.data_points, Unset):
@@ -61,12 +55,7 @@ class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance:
         from ..models.data_point import DataPoint  # noqa: PLC0415
 
         d = dict(src_dict)
-        _stats_type = d.pop("stats_type", UNSET)
-        stats_type: GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsType | Unset
-        if isinstance(_stats_type, Unset):
-            stats_type = UNSET
-        else:
-            stats_type = GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsType(_stats_type)
+        stats_type = d.pop("stats_type", UNSET)
 
         _data_points = d.pop("data_points", UNSET)
         data_points: list[DataPoint] | Unset = UNSET

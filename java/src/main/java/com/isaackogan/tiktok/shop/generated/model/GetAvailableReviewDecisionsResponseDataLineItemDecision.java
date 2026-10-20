@@ -54,88 +54,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetAvailableReviewDecisionsResponseDataLineItemDecision {
-  /**
-   * Seller review decision evaluated for this line item. Possible values: - &#x60;APPROVE_REQUEST_CANCEL&#x60; - &#x60;APPROVE_REFUND&#x60; - &#x60;APPROVE_RETURN&#x60; - &#x60;APPROVE_RECEIVED_PACKAGE&#x60; - &#x60;APPROVE_REPLACEMENT&#x60; - &#x60;ISSUE_REPLACEMENT_REFUND&#x60; - &#x60;DIRECT_REFUND&#x60; - &#x60;REJECT_REQUEST_CANCEL&#x60; - &#x60;REJECT_REFUND&#x60; - &#x60;REJECT_RETURN&#x60; - &#x60;REJECT_RECEIVED_PACKAGE&#x60; - &#x60;REJECT_REPLACEMENT&#x60; - &#x60;ISSUE_EXCHANGE_REFUND&#x60; - &#x60;OFFER_PARTIAL_REFUND&#x60; - &#x60;OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG&#x60;
-   */
-  @JsonAdapter(DecisionEnum.Adapter.class)
-  public enum DecisionEnum {
-    APPROVE_REQUEST_CANCEL("APPROVE_REQUEST_CANCEL"),
-    
-    APPROVE_REFUND("APPROVE_REFUND"),
-    
-    APPROVE_RETURN("APPROVE_RETURN"),
-    
-    APPROVE_RECEIVED_PACKAGE("APPROVE_RECEIVED_PACKAGE"),
-    
-    APPROVE_REPLACEMENT("APPROVE_REPLACEMENT"),
-    
-    ISSUE_REPLACEMENT_REFUND("ISSUE_REPLACEMENT_REFUND"),
-    
-    DIRECT_REFUND("DIRECT_REFUND"),
-    
-    REJECT_REQUEST_CANCEL("REJECT_REQUEST_CANCEL"),
-    
-    REJECT_REFUND("REJECT_REFUND"),
-    
-    REJECT_RETURN("REJECT_RETURN"),
-    
-    REJECT_RECEIVED_PACKAGE("REJECT_RECEIVED_PACKAGE"),
-    
-    REJECT_REPLACEMENT("REJECT_REPLACEMENT"),
-    
-    ISSUE_EXCHANGE_REFUND("ISSUE_EXCHANGE_REFUND"),
-    
-    OFFER_PARTIAL_REFUND("OFFER_PARTIAL_REFUND"),
-    
-    OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG("OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG");
-
-    private String value;
-
-    DecisionEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DecisionEnum fromValue(String value) {
-      for (DecisionEnum b : DecisionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DecisionEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DecisionEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DecisionEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DecisionEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DecisionEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_DECISION = "decision";
   @SerializedName(SERIALIZED_NAME_DECISION)
   @javax.annotation.Nullable
-  private DecisionEnum decision;
+  private String decision;
 
   public static final String SERIALIZED_NAME_ELIGIBLE = "eligible";
   @SerializedName(SERIALIZED_NAME_ELIGIBLE)
@@ -165,7 +87,7 @@ public class GetAvailableReviewDecisionsResponseDataLineItemDecision {
   public GetAvailableReviewDecisionsResponseDataLineItemDecision() {
   }
 
-  public GetAvailableReviewDecisionsResponseDataLineItemDecision decision(@javax.annotation.Nullable DecisionEnum decision) {
+  public GetAvailableReviewDecisionsResponseDataLineItemDecision decision(@javax.annotation.Nullable String decision) {
     this.decision = decision;
     return this;
   }
@@ -175,11 +97,11 @@ public class GetAvailableReviewDecisionsResponseDataLineItemDecision {
    * @return decision
    */
   @javax.annotation.Nullable
-  public DecisionEnum getDecision() {
+  public String getDecision() {
     return decision;
   }
 
-  public void setDecision(@javax.annotation.Nullable DecisionEnum decision) {
+  public void setDecision(@javax.annotation.Nullable String decision) {
     this.decision = decision;
   }
 
@@ -405,10 +327,6 @@ public class GetAvailableReviewDecisionsResponseDataLineItemDecision {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("decision") != null && !jsonObj.get("decision").isJsonNull()) && !jsonObj.get("decision").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `decision` to be a primitive type in the JSON string but got `%s`", jsonObj.get("decision").toString()));
-      }
-      // validate the optional field `decision`
-      if (jsonObj.get("decision") != null && !jsonObj.get("decision").isJsonNull()) {
-        DecisionEnum.validateJsonElement(jsonObj.get("decision"));
       }
       if ((jsonObj.get("ineligible_reason") != null && !jsonObj.get("ineligible_reason").isJsonNull()) && !jsonObj.get("ineligible_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ineligible_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ineligible_reason").toString()));

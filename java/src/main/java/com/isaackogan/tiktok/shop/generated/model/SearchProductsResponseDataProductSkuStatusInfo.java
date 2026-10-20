@@ -50,135 +50,20 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SearchProductsResponseDataProductSkuStatusInfo {
-  /**
-   * The SKU status in TikTok Shop. Possible values:  - NORMAL - DEACTIVATED
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    NORMAL("NORMAL"),
-    
-    DEACTIVATED("DEACTIVATED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * The deactivation source of the SKU with &#x60;DEACTIVATED&#x60; status. Possible values: - SELLER: Indicates that the seller deactivated the SKU - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons - COMBO_RELATION: Indicates that the platform de-activated the combined-SKU due to the deactivation of sub-SKU.
-   */
-  @JsonAdapter(DeactivationSourceEnum.Adapter.class)
-  public enum DeactivationSourceEnum {
-    /**
-     * Indicates that the seller deactivated the SKU
-     */
-    SELLER("SELLER"),
-    
-    /**
-     * Indicates that the platform de-activated the SKU due to violation reasons
-     */
-    PLATFORM("PLATFORM"),
-    
-    /**
-     * Indicates that the platform de-activated the combined-SKU due to the deactivation of sub-SKU.
-     */
-    COMBO_RELATION("COMBO_RELATION");
-
-    private String value;
-
-    DeactivationSourceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DeactivationSourceEnum fromValue(String value) {
-      for (DeactivationSourceEnum b : DeactivationSourceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DeactivationSourceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DeactivationSourceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DeactivationSourceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DeactivationSourceEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DeactivationSourceEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_DEACTIVATION_SOURCE = "deactivation_source";
   @SerializedName(SERIALIZED_NAME_DEACTIVATION_SOURCE)
   @javax.annotation.Nullable
-  private DeactivationSourceEnum deactivationSource;
+  private String deactivationSource;
 
   public SearchProductsResponseDataProductSkuStatusInfo() {
   }
 
-  public SearchProductsResponseDataProductSkuStatusInfo status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchProductsResponseDataProductSkuStatusInfo status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -188,16 +73,16 @@ public class SearchProductsResponseDataProductSkuStatusInfo {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public SearchProductsResponseDataProductSkuStatusInfo deactivationSource(@javax.annotation.Nullable DeactivationSourceEnum deactivationSource) {
+  public SearchProductsResponseDataProductSkuStatusInfo deactivationSource(@javax.annotation.Nullable String deactivationSource) {
     this.deactivationSource = deactivationSource;
     return this;
   }
@@ -207,11 +92,11 @@ public class SearchProductsResponseDataProductSkuStatusInfo {
    * @return deactivationSource
    */
   @javax.annotation.Nullable
-  public DeactivationSourceEnum getDeactivationSource() {
+  public String getDeactivationSource() {
     return deactivationSource;
   }
 
-  public void setDeactivationSource(@javax.annotation.Nullable DeactivationSourceEnum deactivationSource) {
+  public void setDeactivationSource(@javax.annotation.Nullable String deactivationSource) {
     this.deactivationSource = deactivationSource;
   }
 
@@ -327,16 +212,8 @@ public class SearchProductsResponseDataProductSkuStatusInfo {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("deactivation_source") != null && !jsonObj.get("deactivation_source").isJsonNull()) && !jsonObj.get("deactivation_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `deactivation_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("deactivation_source").toString()));
-      }
-      // validate the optional field `deactivation_source`
-      if (jsonObj.get("deactivation_source") != null && !jsonObj.get("deactivation_source").isJsonNull()) {
-        DeactivationSourceEnum.validateJsonElement(jsonObj.get("deactivation_source"));
       }
   }
 

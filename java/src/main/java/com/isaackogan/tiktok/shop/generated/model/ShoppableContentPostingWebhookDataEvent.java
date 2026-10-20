@@ -50,131 +50,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class ShoppableContentPostingWebhookDataEvent {
-  /**
-   * The action which the creator takes to the product promoted in the video or live stream. The possible enumerations are:      * &#x60;ADD&#x60;: Add the product.   * &#x60;UPDATE&#x60;: Update the product.   * &#x60;REMOVE&#x60;: Remove the product.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * Add the product.
-     */
-    ADD("ADD"),
-    
-    /**
-     * Update the product.
-     */
-    UPDATE("UPDATE"),
-    
-    /**
-     * Remove the product.
-     */
-    REMOVE("REMOVE");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
-
-  /**
-   * The scene where the creator promotes the product. The possible enumerations are:      * &#x60;VIDEO&#x60;: short video.
-   */
-  @JsonAdapter(SceneEnum.Adapter.class)
-  public enum SceneEnum {
-    /**
-     * short video.
-     */
-    VIDEO("VIDEO");
-
-    private String value;
-
-    SceneEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SceneEnum fromValue(String value) {
-      for (SceneEnum b : SceneEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SceneEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SceneEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SceneEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SceneEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SceneEnum.fromValue(value);
-    }
-  }
+  private String type;
 
   public static final String SERIALIZED_NAME_SCENE = "scene";
   @SerializedName(SERIALIZED_NAME_SCENE)
   @javax.annotation.Nullable
-  private SceneEnum scene;
+  private String scene;
 
   public static final String SERIALIZED_NAME_CONTENT_ID = "content_id";
   @SerializedName(SERIALIZED_NAME_CONTENT_ID)
@@ -184,7 +68,7 @@ public class ShoppableContentPostingWebhookDataEvent {
   public ShoppableContentPostingWebhookDataEvent() {
   }
 
-  public ShoppableContentPostingWebhookDataEvent type(@javax.annotation.Nullable TypeEnum type) {
+  public ShoppableContentPostingWebhookDataEvent type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -194,16 +78,16 @@ public class ShoppableContentPostingWebhookDataEvent {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
 
-  public ShoppableContentPostingWebhookDataEvent scene(@javax.annotation.Nullable SceneEnum scene) {
+  public ShoppableContentPostingWebhookDataEvent scene(@javax.annotation.Nullable String scene) {
     this.scene = scene;
     return this;
   }
@@ -213,11 +97,11 @@ public class ShoppableContentPostingWebhookDataEvent {
    * @return scene
    */
   @javax.annotation.Nullable
-  public SceneEnum getScene() {
+  public String getScene() {
     return scene;
   }
 
-  public void setScene(@javax.annotation.Nullable SceneEnum scene) {
+  public void setScene(@javax.annotation.Nullable String scene) {
     this.scene = scene;
   }
 
@@ -354,16 +238,8 @@ public class ShoppableContentPostingWebhookDataEvent {
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
-      }
       if ((jsonObj.get("scene") != null && !jsonObj.get("scene").isJsonNull()) && !jsonObj.get("scene").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `scene` to be a primitive type in the JSON string but got `%s`", jsonObj.get("scene").toString()));
-      }
-      // validate the optional field `scene`
-      if (jsonObj.get("scene") != null && !jsonObj.get("scene").isJsonNull()) {
-        SceneEnum.validateJsonElement(jsonObj.get("scene"));
       }
       if ((jsonObj.get("content_id") != null && !jsonObj.get("content_id").isJsonNull()) && !jsonObj.get("content_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_id").toString()));

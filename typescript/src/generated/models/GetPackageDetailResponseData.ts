@@ -88,10 +88,10 @@ export interface GetPackageDetailResponseData {
      * - `FULFILLING`: Package has been collected by carrier and in transit.
      * - `COMPLETED`: Package has been delivered.
      * - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     * @type {GetPackageDetailResponseDataPackageStatusEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    packageStatus?: GetPackageDetailResponseDataPackageStatusEnum;
+    packageStatus?: string;
     /**
      * Package sub-status.
      * Possible values:
@@ -108,10 +108,10 @@ export interface GetPackageDetailResponseData {
      * - `SHIP_EXCEPTION`: The package cannot be delivered, for example because it is damaged or lost. See `ship_exception_reason` for the detailed reason.
      * - `PART_DELIVERED_AND_EXCEPTION`: Part of the package delivery completed and another part encountered a shipping exception.
      * - `CANCELLED`: The package has been canceled.
-     * @type {GetPackageDetailResponseDataPackageSubStatusEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    packageSubStatus?: GetPackageDetailResponseDataPackageSubStatusEnum;
+    packageSubStatus?: string;
     /**
      * -PACKAGE_DAMAGAED
      * -PACKAGE_LOST
@@ -126,10 +126,10 @@ export interface GetPackageDetailResponseData {
      * - `DEFAULT`: The package has not undergone any combine or split operation.
      * - `COMBINE`: The package has been consolidated with another order.
      * - `SPLIT`: The order has been split into multiple orders.
-     * @type {GetPackageDetailResponseDataSplitAndCombineTagEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    splitAndCombineTag?: GetPackageDetailResponseDataSplitAndCombineTagEnum;
+    splitAndCombineTag?: string;
     /**
      * Whether there are multiple SKU IDs in a package.
      * @type {boolean}
@@ -140,10 +140,10 @@ export interface GetPackageDetailResponseData {
      * Possible values:
      * - `BUYER_UNNOTED`: The order has not been noted by buyer.
      * - `BUYER_NOTED`: The order has been noted by buyer.
-     * @type {GetPackageDetailResponseDataNoteTagEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    noteTag?: GetPackageDetailResponseDataNoteTagEnum;
+    noteTag?: string;
     /**
      * Package shipping provider name.
      * @type {string}
@@ -160,10 +160,10 @@ export interface GetPackageDetailResponseData {
      * Indicates who provides the shipping service. Possible values:
      * - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok.
      * - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the seller's behalf.
-     * @type {GetPackageDetailResponseDataShippingTypeEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    shippingType?: GetPackageDetailResponseDataShippingTypeEnum;
+    shippingType?: string;
     /**
      * Delivery option name. For display purposes only.
      * @type {string}
@@ -204,10 +204,10 @@ export interface GetPackageDetailResponseData {
      * Whether the package is delivered by pick up or drop off. Possible values:
      * - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address.
      * - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location.
-     * @type {GetPackageDetailResponseDataHandoverMethodEnum}
+     * @type {string}
      * @memberof GetPackageDetailResponseData
      */
-    handoverMethod?: GetPackageDetailResponseDataHandoverMethodEnum;
+    handoverMethod?: string;
     /**
      * The order line item ID contained in the package.
      * @type {Array<string>}
@@ -264,77 +264,6 @@ export interface GetPackageDetailResponseData {
      */
     warehouseId?: string;
 }
-
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataPackageStatusEnum = {
-    ToFulfill: 'TO_FULFILL',
-    Processing: 'PROCESSING',
-    Fulfilling: 'FULFILLING',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type GetPackageDetailResponseDataPackageStatusEnum = typeof GetPackageDetailResponseDataPackageStatusEnum[keyof typeof GetPackageDetailResponseDataPackageStatusEnum];
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataPackageSubStatusEnum = {
-    Created: 'CREATED',
-    Issue: 'ISSUE',
-    Stocking: 'STOCKING',
-    Rtsing: 'RTSING',
-    Hbw: 'HBW',
-    Hbwing: 'HBWING',
-    TspPending: 'TSP_PENDING',
-    Rts: 'RTS',
-    Tts: 'TTS',
-    Delivered: 'DELIVERED',
-    ShipException: 'SHIP_EXCEPTION',
-    PartDeliveredAndException: 'PART_DELIVERED_AND_EXCEPTION',
-    Cancelled: 'CANCELLED'
-} as const;
-export type GetPackageDetailResponseDataPackageSubStatusEnum = typeof GetPackageDetailResponseDataPackageSubStatusEnum[keyof typeof GetPackageDetailResponseDataPackageSubStatusEnum];
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataSplitAndCombineTagEnum = {
-    Default: 'DEFAULT',
-    Combine: 'COMBINE',
-    Split: 'SPLIT'
-} as const;
-export type GetPackageDetailResponseDataSplitAndCombineTagEnum = typeof GetPackageDetailResponseDataSplitAndCombineTagEnum[keyof typeof GetPackageDetailResponseDataSplitAndCombineTagEnum];
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataNoteTagEnum = {
-    BuyerUnnoted: 'BUYER_UNNOTED',
-    BuyerNoted: 'BUYER_NOTED'
-} as const;
-export type GetPackageDetailResponseDataNoteTagEnum = typeof GetPackageDetailResponseDataNoteTagEnum[keyof typeof GetPackageDetailResponseDataNoteTagEnum];
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataShippingTypeEnum = {
-    Tiktok: 'TIKTOK',
-    Seller: 'SELLER'
-} as const;
-export type GetPackageDetailResponseDataShippingTypeEnum = typeof GetPackageDetailResponseDataShippingTypeEnum[keyof typeof GetPackageDetailResponseDataShippingTypeEnum];
-
-/**
- * @export
- */
-export const GetPackageDetailResponseDataHandoverMethodEnum = {
-    Pickup: 'PICKUP',
-    DropOff: 'DROP_OFF'
-} as const;
-export type GetPackageDetailResponseDataHandoverMethodEnum = typeof GetPackageDetailResponseDataHandoverMethodEnum[keyof typeof GetPackageDetailResponseDataHandoverMethodEnum];
-
 
 /**
  * Check if a given object implements the GetPackageDetailResponseData interface.

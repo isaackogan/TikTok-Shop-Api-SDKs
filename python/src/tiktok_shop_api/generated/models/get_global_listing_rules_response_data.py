@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_listing_rules_response_data_listing_methods_item import (
-    GetGlobalListingRulesResponseDataListingMethodsItem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetGlobalListingRulesResponseData")
 class GetGlobalListingRulesResponseData:
     """
     Attributes:
-        listing_methods (list[GetGlobalListingRulesResponseDataListingMethodsItem] | Unset): The methods at which
-            sellers can list products in this shop.
+        listing_methods (list[str] | Unset): The methods at which sellers can list products in this shop.
             Possible values:
             - GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.
             - LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
@@ -33,17 +29,14 @@ class GetGlobalListingRulesResponseData:
             rules for all warehouses linked to the shop.
     """
 
-    listing_methods: list[GetGlobalListingRulesResponseDataListingMethodsItem] | Unset = UNSET
+    listing_methods: list[str] | Unset = UNSET
     inventory_rules: list[GetGlobalListingRulesResponseDataInventoryRule] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         listing_methods: list[str] | Unset = UNSET
         if not isinstance(self.listing_methods, Unset):
-            listing_methods = []
-            for listing_methods_item_data in self.listing_methods:
-                listing_methods_item = listing_methods_item_data.value
-                listing_methods.append(listing_methods_item)
+            listing_methods = self.listing_methods
 
         inventory_rules: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.inventory_rules, Unset):
@@ -69,14 +62,7 @@ class GetGlobalListingRulesResponseData:
         )
 
         d = dict(src_dict)
-        _listing_methods = d.pop("listing_methods", UNSET)
-        listing_methods: list[GetGlobalListingRulesResponseDataListingMethodsItem] | Unset = UNSET
-        if _listing_methods is not UNSET:
-            listing_methods = []
-            for listing_methods_item_data in _listing_methods:
-                listing_methods_item = GetGlobalListingRulesResponseDataListingMethodsItem(listing_methods_item_data)
-
-                listing_methods.append(listing_methods_item)
+        listing_methods = cast(list[str], d.pop("listing_methods", UNSET))
 
         _inventory_rules = d.pop("inventory_rules", UNSET)
         inventory_rules: list[GetGlobalListingRulesResponseDataInventoryRule] | Unset = UNSET

@@ -41,11 +41,11 @@ data class PackageUpdateWebhookData (
 
     /* Type of the event trigger, with possible values:      * COMBINE   * CANCEL_COMBINE   * SPLIT   * CANCEL_SPLIT   * ADDRESS_UPDATE_SPLIT   * CANCEL_FULFILL_SPLIT   * FULFILL_UNCOMBINE   * PARTLY_CANCEL_SPLIT   * SPLIT_BY_SKU_CANCEL */
     @SerializedName("sc_type")
-    val scType: PackageUpdateWebhookData.ScType? = null,
+    val scType: kotlin.String? = null,
 
     /* Operator of the event trigger, with possible values:      * ROLE_USER   * ROLE_SELLER   * ROLE_OPERATOR   * ROLE_SYSTEM */
     @SerializedName("role_type")
-    val roleType: PackageUpdateWebhookData.RoleType? = null,
+    val roleType: kotlin.String? = null,
 
     /* Package list updated by the event trigger */
     @SerializedName("package_list")
@@ -57,33 +57,6 @@ data class PackageUpdateWebhookData (
 
 ) {
 
-    /**
-     * Type of the event trigger, with possible values:      * COMBINE   * CANCEL_COMBINE   * SPLIT   * CANCEL_SPLIT   * ADDRESS_UPDATE_SPLIT   * CANCEL_FULFILL_SPLIT   * FULFILL_UNCOMBINE   * PARTLY_CANCEL_SPLIT   * SPLIT_BY_SKU_CANCEL
-     *
-     * Values: COMBINE,CANCEL_COMBINE,SPLIT,CANCEL_SPLIT,ADDRESS_UPDATE_SPLIT,CANCEL_FULFILL_SPLIT,FULFILL_UNCOMBINE,PARTLY_CANCEL_SPLIT,SPLIT_BY_SKU_CANCEL
-     */
-    enum class ScType(val value: kotlin.String) {
-        @SerializedName(value = "COMBINE") COMBINE("COMBINE"),
-        @SerializedName(value = "CANCEL_COMBINE") CANCEL_COMBINE("CANCEL_COMBINE"),
-        @SerializedName(value = "SPLIT") SPLIT("SPLIT"),
-        @SerializedName(value = "CANCEL_SPLIT") CANCEL_SPLIT("CANCEL_SPLIT"),
-        @SerializedName(value = "ADDRESS_UPDATE_SPLIT") ADDRESS_UPDATE_SPLIT("ADDRESS_UPDATE_SPLIT"),
-        @SerializedName(value = "CANCEL_FULFILL_SPLIT") CANCEL_FULFILL_SPLIT("CANCEL_FULFILL_SPLIT"),
-        @SerializedName(value = "FULFILL_UNCOMBINE") FULFILL_UNCOMBINE("FULFILL_UNCOMBINE"),
-        @SerializedName(value = "PARTLY_CANCEL_SPLIT") PARTLY_CANCEL_SPLIT("PARTLY_CANCEL_SPLIT"),
-        @SerializedName(value = "SPLIT_BY_SKU_CANCEL") SPLIT_BY_SKU_CANCEL("SPLIT_BY_SKU_CANCEL");
-    }
-    /**
-     * Operator of the event trigger, with possible values:      * ROLE_USER   * ROLE_SELLER   * ROLE_OPERATOR   * ROLE_SYSTEM
-     *
-     * Values: ROLE_USER,ROLE_SELLER,ROLE_OPERATOR,ROLE_SYSTEM
-     */
-    enum class RoleType(val value: kotlin.String) {
-        @SerializedName(value = "ROLE_USER") ROLE_USER("ROLE_USER"),
-        @SerializedName(value = "ROLE_SELLER") ROLE_SELLER("ROLE_SELLER"),
-        @SerializedName(value = "ROLE_OPERATOR") ROLE_OPERATOR("ROLE_OPERATOR"),
-        @SerializedName(value = "ROLE_SYSTEM") ROLE_SYSTEM("ROLE_SYSTEM");
-    }
 
 }
 

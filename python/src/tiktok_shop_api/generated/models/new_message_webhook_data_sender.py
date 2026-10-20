@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_message_webhook_data_sender_role import NewMessageWebhookDataSenderRole
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="NewMessageWebhookDataSender")
@@ -18,7 +17,7 @@ class NewMessageWebhookDataSender:
     Attributes:
         im_user_id (str | Unset): Sender's ID
              These are IM IDs, and can not be used to query orders.
-        role (NewMessageWebhookDataSenderRole | Unset): Sender's role, with possible values:
+        role (str | Unset): Sender's role, with possible values:
              * BUYER
              * SHOP
              * CUSTOMER_SERVICE
@@ -27,15 +26,13 @@ class NewMessageWebhookDataSender:
     """
 
     im_user_id: str | Unset = UNSET
-    role: NewMessageWebhookDataSenderRole | Unset = UNSET
+    role: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         im_user_id = self.im_user_id
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -52,12 +49,7 @@ class NewMessageWebhookDataSender:
         d = dict(src_dict)
         im_user_id = d.pop("im_user_id", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: NewMessageWebhookDataSenderRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = NewMessageWebhookDataSenderRole(_role)
+        role = d.pop("role", UNSET)
 
         new_message_webhook_data_sender = cls(
             im_user_id=im_user_id,

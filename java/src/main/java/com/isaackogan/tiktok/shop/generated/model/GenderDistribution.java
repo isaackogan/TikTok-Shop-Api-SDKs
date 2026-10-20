@@ -50,68 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GenderDistribution {
-  /**
-   * Viewer gender. Possible values:  - MALE: male viewers  - FEMALE: female viewers
-   */
-  @JsonAdapter(GenderEnum.Adapter.class)
-  public enum GenderEnum {
-    /**
-     * male viewers
-     */
-    MALE("MALE"),
-    
-    /**
-     * female viewers
-     */
-    FEMALE("FEMALE");
-
-    private String value;
-
-    GenderEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static GenderEnum fromValue(String value) {
-      for (GenderEnum b : GenderEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<GenderEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final GenderEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public GenderEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return GenderEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      GenderEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_GENDER = "gender";
   @SerializedName(SERIALIZED_NAME_GENDER)
   @javax.annotation.Nullable
-  private GenderEnum gender;
+  private String gender;
 
   public static final String SERIALIZED_NAME_PERCENTAGE = "percentage";
   @SerializedName(SERIALIZED_NAME_PERCENTAGE)
@@ -121,7 +63,7 @@ public class GenderDistribution {
   public GenderDistribution() {
   }
 
-  public GenderDistribution gender(@javax.annotation.Nullable GenderEnum gender) {
+  public GenderDistribution gender(@javax.annotation.Nullable String gender) {
     this.gender = gender;
     return this;
   }
@@ -131,11 +73,11 @@ public class GenderDistribution {
    * @return gender
    */
   @javax.annotation.Nullable
-  public GenderEnum getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(@javax.annotation.Nullable GenderEnum gender) {
+  public void setGender(@javax.annotation.Nullable String gender) {
     this.gender = gender;
   }
 
@@ -269,10 +211,6 @@ public class GenderDistribution {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("gender") != null && !jsonObj.get("gender").isJsonNull()) && !jsonObj.get("gender").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `gender` to be a primitive type in the JSON string but got `%s`", jsonObj.get("gender").toString()));
-      }
-      // validate the optional field `gender`
-      if (jsonObj.get("gender") != null && !jsonObj.get("gender").isJsonNull()) {
-        GenderEnum.validateJsonElement(jsonObj.get("gender"));
       }
       if ((jsonObj.get("percentage") != null && !jsonObj.get("percentage").isJsonNull()) && !jsonObj.get("percentage").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `percentage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("percentage").toString()));

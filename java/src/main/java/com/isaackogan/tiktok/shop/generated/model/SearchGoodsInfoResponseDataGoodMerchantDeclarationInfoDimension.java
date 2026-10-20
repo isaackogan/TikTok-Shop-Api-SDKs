@@ -65,70 +65,10 @@ public class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension {
   @javax.annotation.Nullable
   private String height;
 
-  /**
-   * Dimension unit.  Possible values: - MILLIMETER  - CENTIMETER - METER  - FOOT  - INCH - MICROMETER
-   */
-  @JsonAdapter(UnitEnum.Adapter.class)
-  public enum UnitEnum {
-    MILLIMETER("MILLIMETER"),
-    
-    CENTIMETER("CENTIMETER"),
-    
-    METER("METER"),
-    
-    FOOT("FOOT"),
-    
-    INCH("INCH"),
-    
-    MICROMETER("MICROMETER");
-
-    private String value;
-
-    UnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnitEnum fromValue(String value) {
-      for (UnitEnum b : UnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnitEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_UNIT = "unit";
   @SerializedName(SERIALIZED_NAME_UNIT)
   @javax.annotation.Nullable
-  private UnitEnum unit;
+  private String unit;
 
   public SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension() {
   }
@@ -190,7 +130,7 @@ public class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension {
   }
 
 
-  public SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension unit(@javax.annotation.Nullable UnitEnum unit) {
+  public SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension unit(@javax.annotation.Nullable String unit) {
     this.unit = unit;
     return this;
   }
@@ -200,11 +140,11 @@ public class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension {
    * @return unit
    */
   @javax.annotation.Nullable
-  public UnitEnum getUnit() {
+  public String getUnit() {
     return unit;
   }
 
-  public void setUnit(@javax.annotation.Nullable UnitEnum unit) {
+  public void setUnit(@javax.annotation.Nullable String unit) {
     this.unit = unit;
   }
 
@@ -332,10 +272,6 @@ public class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension {
       }
       if ((jsonObj.get("unit") != null && !jsonObj.get("unit").isJsonNull()) && !jsonObj.get("unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit").toString()));
-      }
-      // validate the optional field `unit`
-      if (jsonObj.get("unit") != null && !jsonObj.get("unit").isJsonNull()) {
-        UnitEnum.validateJsonElement(jsonObj.get("unit"));
       }
   }
 

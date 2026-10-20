@@ -39,7 +39,7 @@ data class GetProductResponseDataSkuCombinedSkuPrice (
 
     /* The currency. Possible values based on the region: - BRL: Brazil - CZK: Czech Republic - EUR: France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal - GBP: United Kingdom - HUF: Hungary - IDR: Indonesia - JPY: Japan - MXN: Mexico - MYR: Malaysia - PHP: Philippines - PLN: Poland - SGD: Singapore - THB: Thailand - USD: United States - VND: Vietnam */
     @SerializedName("currency")
-    val currency: GetProductResponseDataSkuCombinedSkuPrice.Currency? = null,
+    val currency: kotlin.String? = null,
 
     /* All sellers The source SKU's local display price shown on the product page before any discounts. */
     @SerializedName("sale_price")
@@ -51,28 +51,6 @@ data class GetProductResponseDataSkuCombinedSkuPrice (
 
 ) {
 
-    /**
-     * The currency. Possible values based on the region: - BRL: Brazil - CZK: Czech Republic - EUR: France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal - GBP: United Kingdom - HUF: Hungary - IDR: Indonesia - JPY: Japan - MXN: Mexico - MYR: Malaysia - PHP: Philippines - PLN: Poland - SGD: Singapore - THB: Thailand - USD: United States - VND: Vietnam
-     *
-     * Values: BRL,CZK,EUR,GBP,HUF,IDR,JPY,MXN,MYR,PHP,PLN,SGD,THB,USD,VND
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "BRL") BRL("BRL"),
-        @SerializedName(value = "CZK") CZK("CZK"),
-        @SerializedName(value = "EUR") EUR("EUR"),
-        @SerializedName(value = "GBP") GBP("GBP"),
-        @SerializedName(value = "HUF") HUF("HUF"),
-        @SerializedName(value = "IDR") IDR("IDR"),
-        @SerializedName(value = "JPY") JPY("JPY"),
-        @SerializedName(value = "MXN") MXN("MXN"),
-        @SerializedName(value = "MYR") MYR("MYR"),
-        @SerializedName(value = "PHP") PHP("PHP"),
-        @SerializedName(value = "PLN") PLN("PLN"),
-        @SerializedName(value = "SGD") SGD("SGD"),
-        @SerializedName(value = "THB") THB("THB"),
-        @SerializedName(value = "USD") USD("USD"),
-        @SerializedName(value = "VND") VND("VND");
-    }
 
 }
 

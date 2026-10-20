@@ -48,29 +48,11 @@ export interface GetCreatorSampleApplicationDetailResponseDataSampleApplicationC
      * - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
      * - EXEMPTED: The creator has been exempted from the fulfillment obligation.
      * - REPEATED: The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure.
-     * @type {GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum}
+     * @type {string}
      * @memberof GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment
      */
-    status?: GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum = {
-    Pending: 'PENDING',
-    Ongoing: 'ONGOING',
-    Succeed: 'SUCCEED',
-    Failed: 'FAILED',
-    Overdue: 'OVERDUE',
-    Suspend: 'SUSPEND',
-    Cancelled: 'CANCELLED',
-    Exempted: 'EXEMPTED',
-    Repeated: 'REPEATED'
-} as const;
-export type GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum = typeof GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum[keyof typeof GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillmentStatusEnum];
-
 
 /**
  * Check if a given object implements the GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment interface.

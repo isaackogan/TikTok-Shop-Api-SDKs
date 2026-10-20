@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_message_templates_response_data_message_template_coupon_card_rule_coupon_type_item import (
-    GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeItem,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetMessageTemplatesResponseDataMessageTemplateCouponCardRule")
@@ -20,8 +17,7 @@ class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule:
     Attributes:
         min_count (int | Unset): The minimum number of coupon cards that must be included.
         max_count (int | Unset): The maximum number of coupon cards that can be included.
-        coupon_type (list[GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeItem] | Unset): The
-            types of coupon that can be included in the message.
+        coupon_type (list[str] | Unset): The types of coupon that can be included in the message.
             Possible values:
             - REGULAR_ALL: Regular coupons that target all buyers.
             Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search
@@ -33,7 +29,7 @@ class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule:
 
     min_count: int | Unset = UNSET
     max_count: int | Unset = UNSET
-    coupon_type: list[GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeItem] | Unset = UNSET
+    coupon_type: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -43,10 +39,7 @@ class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule:
 
         coupon_type: list[str] | Unset = UNSET
         if not isinstance(self.coupon_type, Unset):
-            coupon_type = []
-            for coupon_type_item_data in self.coupon_type:
-                coupon_type_item = coupon_type_item_data.value
-                coupon_type.append(coupon_type_item)
+            coupon_type = self.coupon_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,16 +60,7 @@ class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule:
 
         max_count = d.pop("max_count", UNSET)
 
-        _coupon_type = d.pop("coupon_type", UNSET)
-        coupon_type: list[GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeItem] | Unset = UNSET
-        if _coupon_type is not UNSET:
-            coupon_type = []
-            for coupon_type_item_data in _coupon_type:
-                coupon_type_item = GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeItem(
-                    coupon_type_item_data
-                )
-
-                coupon_type.append(coupon_type_item)
+        coupon_type = cast(list[str], d.pop("coupon_type", UNSET))
 
         get_message_templates_response_data_message_template_coupon_card_rule = cls(
             min_count=min_count,

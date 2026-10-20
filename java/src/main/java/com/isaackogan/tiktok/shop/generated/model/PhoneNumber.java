@@ -50,68 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PhoneNumber {
-  /**
-   * Indicates the availability of the phone number. Possible values: - &#x60;AVAILABLE&#x60;: The phone number is available and required. - &#x60;UNAVAILABLE&#x60;: No phone number is available.  Default: AVAILABLE
-   */
-  @JsonAdapter(AvailabilityEnum.Adapter.class)
-  public enum AvailabilityEnum {
-    /**
-     * The phone number is available and required.
-     */
-    AVAILABLE("AVAILABLE"),
-    
-    /**
-     * No phone number is available.
-     */
-    UNAVAILABLE("UNAVAILABLE");
-
-    private String value;
-
-    AvailabilityEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AvailabilityEnum fromValue(String value) {
-      for (AvailabilityEnum b : AvailabilityEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AvailabilityEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AvailabilityEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AvailabilityEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AvailabilityEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AvailabilityEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_AVAILABILITY = "availability";
   @SerializedName(SERIALIZED_NAME_AVAILABILITY)
   @javax.annotation.Nullable
-  private AvailabilityEnum availability;
+  private String availability;
 
   public static final String SERIALIZED_NAME_COUNTRY_CODE = "country_code";
   @SerializedName(SERIALIZED_NAME_COUNTRY_CODE)
@@ -126,7 +68,7 @@ public class PhoneNumber {
   public PhoneNumber() {
   }
 
-  public PhoneNumber availability(@javax.annotation.Nullable AvailabilityEnum availability) {
+  public PhoneNumber availability(@javax.annotation.Nullable String availability) {
     this.availability = availability;
     return this;
   }
@@ -136,11 +78,11 @@ public class PhoneNumber {
    * @return availability
    */
   @javax.annotation.Nullable
-  public AvailabilityEnum getAvailability() {
+  public String getAvailability() {
     return availability;
   }
 
-  public void setAvailability(@javax.annotation.Nullable AvailabilityEnum availability) {
+  public void setAvailability(@javax.annotation.Nullable String availability) {
     this.availability = availability;
   }
 
@@ -295,10 +237,6 @@ public class PhoneNumber {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("availability") != null && !jsonObj.get("availability").isJsonNull()) && !jsonObj.get("availability").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `availability` to be a primitive type in the JSON string but got `%s`", jsonObj.get("availability").toString()));
-      }
-      // validate the optional field `availability`
-      if (jsonObj.get("availability") != null && !jsonObj.get("availability").isJsonNull()) {
-        AvailabilityEnum.validateJsonElement(jsonObj.get("availability"));
       }
       if ((jsonObj.get("country_code") != null && !jsonObj.get("country_code").isJsonNull()) && !jsonObj.get("country_code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `country_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country_code").toString()));

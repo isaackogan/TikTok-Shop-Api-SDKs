@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_affiliate_orders_by_creator_response_data_order_status import (
-    SearchAffiliateOrdersByCreatorResponseDataOrderStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,8 +22,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrder:
     """
     Attributes:
         id (int | Unset): The order identifier.
-        status (SearchAffiliateOrdersByCreatorResponseDataOrderStatus | Unset): The current status of the order.
-            Possible values:
+        status (str | Unset): The current status of the order. Possible values:
             - UNSPECIFIED: The status is undefined and may be updated later.
             - ORDERED: The order has been placed, but commission has not been settled. The estimated commission is
             available.
@@ -47,7 +43,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrder:
     """
 
     id: int | Unset = UNSET
-    status: SearchAffiliateOrdersByCreatorResponseDataOrderStatus | Unset = UNSET
+    status: str | Unset = UNSET
     skus: list[SearchAffiliateOrdersByCreatorResponseDataOrderSku] | Unset = UNSET
     create_time: int | Unset = UNSET
     delivery_time: int | Unset = UNSET
@@ -56,9 +52,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrder:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         skus: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.skus, Unset):
@@ -96,12 +90,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrder:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchAffiliateOrdersByCreatorResponseDataOrderStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchAffiliateOrdersByCreatorResponseDataOrderStatus(_status)
+        status = d.pop("status", UNSET)
 
         _skus = d.pop("skus", UNSET)
         skus: list[SearchAffiliateOrdersByCreatorResponseDataOrderSku] | Unset = UNSET

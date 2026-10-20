@@ -51,11 +51,11 @@ data class CombinedListingChangeWebhookData (
 
     /* The status of the combined listing.   Possible values:      * LIVE   * SYSTEM_DEACTIVATED   * SELLER_DEACTIVATED   * DELETED      Note: Only products in LIVE combined listings will appear on the product display page. */
     @SerializedName("status")
-    val status: CombinedListingChangeWebhookData.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The type of change made to this combined listing.   Possible values:      * CREATE: The combined listing was created.   * UPDATE: The combined listing was updated to add or remove products.   * DELETE: The combined listing was deleted. */
     @SerializedName("change_type")
-    val changeType: CombinedListingChangeWebhookData.ChangeType? = null,
+    val changeType: kotlin.String? = null,
 
     /* The list of products that were newly added to the combined listing. */
     @SerializedName("added_product_ids")
@@ -67,27 +67,6 @@ data class CombinedListingChangeWebhookData (
 
 ) {
 
-    /**
-     * The status of the combined listing.   Possible values:      * LIVE   * SYSTEM_DEACTIVATED   * SELLER_DEACTIVATED   * DELETED      Note: Only products in LIVE combined listings will appear on the product display page.
-     *
-     * Values: LIVE,SYSTEM_DEACTIVATED,SELLER_DEACTIVATED,DELETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "SYSTEM_DEACTIVATED") SYSTEM_DEACTIVATED("SYSTEM_DEACTIVATED"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
-    /**
-     * The type of change made to this combined listing.   Possible values:      * CREATE: The combined listing was created.   * UPDATE: The combined listing was updated to add or remove products.   * DELETE: The combined listing was deleted.
-     *
-     * Values: CREATE,UPDATE,DELETE
-     */
-    enum class ChangeType(val value: kotlin.String) {
-        @SerializedName(value = "CREATE") CREATE("CREATE"),
-        @SerializedName(value = "UPDATE") UPDATE("UPDATE"),
-        @SerializedName(value = "DELETE") DELETE("DELETE");
-    }
 
 }
 

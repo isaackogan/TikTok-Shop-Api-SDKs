@@ -57,141 +57,20 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The translation status.   Possible values:   - PROCESSING: Translation is underway and has not yet completed.   - COMPLETED: Translation has completed and results are ready.   - FAILED: Translation did not complete due to an error.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * Translation is underway and has not yet completed.
-     */
-    PROCESSING("PROCESSING"),
-    
-    /**
-     * Translation has completed and results are ready.
-     */
-    COMPLETED("COMPLETED"),
-    
-    /**
-     * Translation did not complete due to an error.
-     */
-    FAILED("FAILED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_FAIL_REASON = "fail_reason";
   @SerializedName(SERIALIZED_NAME_FAIL_REASON)
   @javax.annotation.Nullable
   private String failReason;
 
-  /**
-   * The target language to translate the image into.   Possible values:   - de-DE   - en-IE   - es-ES   - fr-FR   - it-IT
-   */
-  @JsonAdapter(TargetLanguageEnum.Adapter.class)
-  public enum TargetLanguageEnum {
-    DE_DE("de-DE"),
-    
-    EN_IE("en-IE"),
-    
-    ES_ES("es-ES"),
-    
-    FR_FR("fr-FR"),
-    
-    IT_IT("it-IT");
-
-    private String value;
-
-    TargetLanguageEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TargetLanguageEnum fromValue(String value) {
-      for (TargetLanguageEnum b : TargetLanguageEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TargetLanguageEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TargetLanguageEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TargetLanguageEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TargetLanguageEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TargetLanguageEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TARGET_LANGUAGE = "target_language";
   @SerializedName(SERIALIZED_NAME_TARGET_LANGUAGE)
   @javax.annotation.Nullable
-  private TargetLanguageEnum targetLanguage;
+  private String targetLanguage;
 
   public static final String SERIALIZED_NAME_ORIGINAL_IMAGE = "original_image";
   @SerializedName(SERIALIZED_NAME_ORIGINAL_IMAGE)
@@ -225,7 +104,7 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
   }
 
 
-  public ImageTranslationCompletedWebhookDataTranslationTask status(@javax.annotation.Nullable StatusEnum status) {
+  public ImageTranslationCompletedWebhookDataTranslationTask status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -235,11 +114,11 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -263,7 +142,7 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
   }
 
 
-  public ImageTranslationCompletedWebhookDataTranslationTask targetLanguage(@javax.annotation.Nullable TargetLanguageEnum targetLanguage) {
+  public ImageTranslationCompletedWebhookDataTranslationTask targetLanguage(@javax.annotation.Nullable String targetLanguage) {
     this.targetLanguage = targetLanguage;
     return this;
   }
@@ -273,11 +152,11 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
    * @return targetLanguage
    */
   @javax.annotation.Nullable
-  public TargetLanguageEnum getTargetLanguage() {
+  public String getTargetLanguage() {
     return targetLanguage;
   }
 
-  public void setTargetLanguage(@javax.annotation.Nullable TargetLanguageEnum targetLanguage) {
+  public void setTargetLanguage(@javax.annotation.Nullable String targetLanguage) {
     this.targetLanguage = targetLanguage;
   }
 
@@ -442,19 +321,11 @@ public class ImageTranslationCompletedWebhookDataTranslationTask {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("fail_reason") != null && !jsonObj.get("fail_reason").isJsonNull()) && !jsonObj.get("fail_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fail_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fail_reason").toString()));
       }
       if ((jsonObj.get("target_language") != null && !jsonObj.get("target_language").isJsonNull()) && !jsonObj.get("target_language").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `target_language` to be a primitive type in the JSON string but got `%s`", jsonObj.get("target_language").toString()));
-      }
-      // validate the optional field `target_language`
-      if (jsonObj.get("target_language") != null && !jsonObj.get("target_language").isJsonNull()) {
-        TargetLanguageEnum.validateJsonElement(jsonObj.get("target_language"));
       }
       // validate the optional field `original_image`
       if (jsonObj.get("original_image") != null && !jsonObj.get("original_image").isJsonNull()) {

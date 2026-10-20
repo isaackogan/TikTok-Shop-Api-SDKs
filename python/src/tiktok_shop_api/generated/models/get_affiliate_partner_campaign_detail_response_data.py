@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_affiliate_partner_campaign_detail_response_data_target_seller_types_item import (
-    GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesItem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -48,9 +45,8 @@ class GetAffiliatePartnerCampaignDetailResponseData:
         contact_info (ContactInfo | Unset):
         target_shops (list[GetAffiliatePartnerCampaignDetailResponseDataTargetShop] | Unset): A list of TikTok Shop
             seller shop codes and names with permission to register for the campaign.
-        target_seller_types (list[GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesItem] | Unset): A list
-            of seller types eligible to register for the campaign. Use this field to broadly target seller types instead of
-            the specific shops listed in `target_shops`. Possible values:
+        target_seller_types (list[str] | Unset): A list of seller types eligible to register for the campaign. Use this
+            field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values:
             - LOCAL
             - CROSS_BORDER
     """
@@ -67,7 +63,7 @@ class GetAffiliatePartnerCampaignDetailResponseData:
     commission_rate: int | Unset = UNSET
     contact_info: ContactInfo | Unset = UNSET
     target_shops: list[GetAffiliatePartnerCampaignDetailResponseDataTargetShop] | Unset = UNSET
-    target_seller_types: list[GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesItem] | Unset = UNSET
+    target_seller_types: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -104,10 +100,7 @@ class GetAffiliatePartnerCampaignDetailResponseData:
 
         target_seller_types: list[str] | Unset = UNSET
         if not isinstance(self.target_seller_types, Unset):
-            target_seller_types = []
-            for target_seller_types_item_data in self.target_seller_types:
-                target_seller_types_item = target_seller_types_item_data.value
-                target_seller_types.append(target_seller_types_item)
+            target_seller_types = self.target_seller_types
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -187,16 +180,7 @@ class GetAffiliatePartnerCampaignDetailResponseData:
 
                 target_shops.append(target_shops_item)
 
-        _target_seller_types = d.pop("target_seller_types", UNSET)
-        target_seller_types: list[GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesItem] | Unset = UNSET
-        if _target_seller_types is not UNSET:
-            target_seller_types = []
-            for target_seller_types_item_data in _target_seller_types:
-                target_seller_types_item = GetAffiliatePartnerCampaignDetailResponseDataTargetSellerTypesItem(
-                    target_seller_types_item_data
-                )
-
-                target_seller_types.append(target_seller_types_item)
+        target_seller_types = cast(list[str], d.pop("target_seller_types", UNSET))
 
         get_affiliate_partner_campaign_detail_response_data = cls(
             id=id,

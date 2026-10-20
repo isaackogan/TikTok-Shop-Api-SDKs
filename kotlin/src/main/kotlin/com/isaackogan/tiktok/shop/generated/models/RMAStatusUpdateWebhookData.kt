@@ -50,11 +50,11 @@ data class RMAStatusUpdateWebhookData (
 
     /* Role that initiated the return flow. Possible enumerations:      * `BUYER`   * `SELLER` */
     @SerializedName("return_role")
-    val returnRole: RMAStatusUpdateWebhookData.ReturnRole? = null,
+    val returnRole: kotlin.String? = null,
 
     /* Current RMA status. Possible enumerations:      * `INIT` = The RMA has been created   * `AWAITING_BUYER_SHIPPED` = Awaiting buyer's action to ship the return package with carrier   * `RETURN_IN_TRANSIT` = Buyer has shipped the return and is in transit to the sellers destination warehouse   * `PENDING_PACKAGE_REVIEW` = The return package has been delivered and is pending seller package review. The seller has **2-4 business days** **SLA** to respond with a refund review/decision. Please refer to the latest seller academy document.   * `PACKAGE_REVIEW_COMPLETED` = The package review lifecycle is complete, and the RMA refund has either been approved or rejected. */
     @SerializedName("rma_status")
-    val rmaStatus: RMAStatusUpdateWebhookData.RmaStatus? = null,
+    val rmaStatus: kotlin.String? = null,
 
     /* Creation time of the RMA in Unix seconds. */
     @SerializedName("rma_request_create_time")
@@ -66,27 +66,6 @@ data class RMAStatusUpdateWebhookData (
 
 ) {
 
-    /**
-     * Role that initiated the return flow. Possible enumerations:      * `BUYER`   * `SELLER`
-     *
-     * Values: BUYER,SELLER
-     */
-    enum class ReturnRole(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER");
-    }
-    /**
-     * Current RMA status. Possible enumerations:      * `INIT` = The RMA has been created   * `AWAITING_BUYER_SHIPPED` = Awaiting buyer's action to ship the return package with carrier   * `RETURN_IN_TRANSIT` = Buyer has shipped the return and is in transit to the sellers destination warehouse   * `PENDING_PACKAGE_REVIEW` = The return package has been delivered and is pending seller package review. The seller has **2-4 business days** **SLA** to respond with a refund review/decision. Please refer to the latest seller academy document.   * `PACKAGE_REVIEW_COMPLETED` = The package review lifecycle is complete, and the RMA refund has either been approved or rejected.
-     *
-     * Values: INIT,AWAITING_BUYER_SHIPPED,RETURN_IN_TRANSIT,PENDING_PACKAGE_REVIEW,PACKAGE_REVIEW_COMPLETED
-     */
-    enum class RmaStatus(val value: kotlin.String) {
-        @SerializedName(value = "INIT") INIT("INIT"),
-        @SerializedName(value = "AWAITING_BUYER_SHIPPED") AWAITING_BUYER_SHIPPED("AWAITING_BUYER_SHIPPED"),
-        @SerializedName(value = "RETURN_IN_TRANSIT") RETURN_IN_TRANSIT("RETURN_IN_TRANSIT"),
-        @SerializedName(value = "PENDING_PACKAGE_REVIEW") PENDING_PACKAGE_REVIEW("PENDING_PACKAGE_REVIEW"),
-        @SerializedName(value = "PACKAGE_REVIEW_COMPLETED") PACKAGE_REVIEW_COMPLETED("PACKAGE_REVIEW_COMPLETED");
-    }
 
 }
 

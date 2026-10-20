@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_package_detail_response_data_insurance_claim_status import (
-    GetPackageDetailResponseDataInsuranceClaimStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetPackageDetailResponseDataInsurance")
@@ -22,7 +19,7 @@ class GetPackageDetailResponseDataInsurance:
         coverage_amount (str | Unset): The insurance coverage amount for the package. Units: USD.
         is_claim_eligible (bool | Unset): Whether the package is eligible for an insurance claim, based on eligible
             refund reasons.
-        claim_status (GetPackageDetailResponseDataInsuranceClaimStatus | Unset): The insurance claim status.
+        claim_status (str | Unset): The insurance claim status.
             Available values:
             - `NOT_STARTED`: Claim has not been initiated for this package.
             - `CLAIM_PENDING`: Claim is currently under review.
@@ -33,7 +30,7 @@ class GetPackageDetailResponseDataInsurance:
     is_purchased: bool | Unset = UNSET
     coverage_amount: str | Unset = UNSET
     is_claim_eligible: bool | Unset = UNSET
-    claim_status: GetPackageDetailResponseDataInsuranceClaimStatus | Unset = UNSET
+    claim_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -43,9 +40,7 @@ class GetPackageDetailResponseDataInsurance:
 
         is_claim_eligible = self.is_claim_eligible
 
-        claim_status: str | Unset = UNSET
-        if not isinstance(self.claim_status, Unset):
-            claim_status = self.claim_status.value
+        claim_status = self.claim_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -70,12 +65,7 @@ class GetPackageDetailResponseDataInsurance:
 
         is_claim_eligible = d.pop("is_claim_eligible", UNSET)
 
-        _claim_status = d.pop("claim_status", UNSET)
-        claim_status: GetPackageDetailResponseDataInsuranceClaimStatus | Unset
-        if isinstance(_claim_status, Unset):
-            claim_status = UNSET
-        else:
-            claim_status = GetPackageDetailResponseDataInsuranceClaimStatus(_claim_status)
+        claim_status = d.pop("claim_status", UNSET)
 
         get_package_detail_response_data_insurance = cls(
             is_purchased=is_purchased,

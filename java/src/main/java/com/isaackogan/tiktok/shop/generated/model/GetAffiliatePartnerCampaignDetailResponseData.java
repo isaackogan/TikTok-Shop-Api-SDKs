@@ -114,62 +114,10 @@ public class GetAffiliatePartnerCampaignDetailResponseData {
   @javax.annotation.Nullable
   private List<GetAffiliatePartnerCampaignDetailResponseDataTargetShop> targetShops = new ArrayList<>();
 
-  /**
-   * Gets or Sets targetSellerTypes
-   */
-  @JsonAdapter(TargetSellerTypesEnum.Adapter.class)
-  public enum TargetSellerTypesEnum {
-    LOCAL("LOCAL"),
-    
-    CROSS_BORDER("CROSS_BORDER");
-
-    private String value;
-
-    TargetSellerTypesEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TargetSellerTypesEnum fromValue(String value) {
-      for (TargetSellerTypesEnum b : TargetSellerTypesEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TargetSellerTypesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TargetSellerTypesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TargetSellerTypesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TargetSellerTypesEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TargetSellerTypesEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TARGET_SELLER_TYPES = "target_seller_types";
   @SerializedName(SERIALIZED_NAME_TARGET_SELLER_TYPES)
   @javax.annotation.Nullable
-  private List<TargetSellerTypesEnum> targetSellerTypes = new ArrayList<>();
+  private List<String> targetSellerTypes = new ArrayList<>();
 
   public GetAffiliatePartnerCampaignDetailResponseData() {
   }
@@ -410,12 +358,12 @@ public class GetAffiliatePartnerCampaignDetailResponseData {
   }
 
 
-  public GetAffiliatePartnerCampaignDetailResponseData targetSellerTypes(@javax.annotation.Nullable List<TargetSellerTypesEnum> targetSellerTypes) {
+  public GetAffiliatePartnerCampaignDetailResponseData targetSellerTypes(@javax.annotation.Nullable List<String> targetSellerTypes) {
     this.targetSellerTypes = targetSellerTypes;
     return this;
   }
 
-  public GetAffiliatePartnerCampaignDetailResponseData addTargetSellerTypesItem(TargetSellerTypesEnum targetSellerTypesItem) {
+  public GetAffiliatePartnerCampaignDetailResponseData addTargetSellerTypesItem(String targetSellerTypesItem) {
     if (this.targetSellerTypes == null) {
       this.targetSellerTypes = new ArrayList<>();
     }
@@ -428,11 +376,11 @@ public class GetAffiliatePartnerCampaignDetailResponseData {
    * @return targetSellerTypes
    */
   @javax.annotation.Nullable
-  public List<TargetSellerTypesEnum> getTargetSellerTypes() {
+  public List<String> getTargetSellerTypes() {
     return targetSellerTypes;
   }
 
-  public void setTargetSellerTypes(@javax.annotation.Nullable List<TargetSellerTypesEnum> targetSellerTypes) {
+  public void setTargetSellerTypes(@javax.annotation.Nullable List<String> targetSellerTypes) {
     this.targetSellerTypes = targetSellerTypes;
   }
 

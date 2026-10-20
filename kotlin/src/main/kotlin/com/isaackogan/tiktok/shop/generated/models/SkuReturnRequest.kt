@@ -88,19 +88,19 @@ data class SkuReturnRequest (
 
     /* Return type. Available values: - `REFUND`: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller. - `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer. - `REPLACEMENT`: The buyer requires the seller to replace the item(s). - `EXCHANGE`: The buyer requires the seller to exchange the item(s). */
     @SerializedName("return_type")
-    val returnType: SkuReturnRequest.ReturnType? = null,
+    val returnType: kotlin.String? = null,
 
     /* Return status. Available values: - `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending review by seller or platform. - `REFUND_OR_RETURN_REQUEST_REJECT`: The return or refund request was rejected. - `AWAITING_BUYER_SHIP`: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request. - `BUYER_SHIPPED_ITEM`: Buyer has shipped the approved items to seller. - `REJECT_RECEIVE_PACKAGE`: Seller inspected the returned items and rejected the return package. - `RETURN_OR_REFUND_REQUEST_SUCCESS`: The return/refund request was approved. The buyer will be refunded. - `RETURN_OR_REFUND_REQUEST_CANCEL`: The request has been cancelled by the buyer or system. - `RETURN_OR_REFUND_REQUEST_COMPLETE`: The return/refund was processed successfully. The buyer has been refunded. - `REPLACEMENT_REQUEST_PENDING`: Buyer has initiated a replacement request. The request is pending review by seller. - `REPLACEMENT_REQUEST_REJECT`: Seller reject the buyer replacement request. - `REPLACEMENT_REQUEST_REFUND_SUCCESS`: Buyer's replacement request was resolved by refund due to insufficient inventory. - `REPLACEMENT_REQUEST_CANCEL`: Buyer canceled the replacement request. - `REPLACEMENT_REQUEST_COMPLETE`: Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill. - `AWAITING_BUYER_RESPONSE`: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`. - `EXCHANGE_REQUEST_PENDING`: Buyer has initiated an exchange request. The request is pending review by seller. - `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory. - `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request. - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill. */
     @SerializedName("return_status")
-    val returnStatus: SkuReturnRequest.ReturnStatus? = null,
+    val returnStatus: kotlin.String? = null,
 
     /* Arbitration status. Available values: - `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration and may request additional information from the seller. - `SUPPORT_BUYER`: The platform operator supports the buyer. - `SUPPORT_SELLER`: The platform operator supports the seller. - `CLOSED`: Arbitration is closed. */
     @SerializedName("arbitration_status")
-    val arbitrationStatus: SkuReturnRequest.ArbitrationStatus? = null,
+    val arbitrationStatus: kotlin.String? = null,
 
     /* Return initiation role. Available values: - `BUYER` - `SELLER` - `OPERATOR` : TikTok Shop platform operator. - `SYSTEM`: TikTok Shop system. Please see \"API overview\" to learn more about roles. */
     @SerializedName("role")
-    val role: SkuReturnRequest.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Machine-readable reason code for the return. Use `return_reason_text` for localized display text. */
     @SerializedName("return_reason")
@@ -116,7 +116,7 @@ data class SkuReturnRequest (
 
     /* The shipment method selected by the buyer for sending the item(s) back to the seller. Available values: - `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`. - `BUYER_ARRANGE`: The buyer arranges the return shipment. */
     @SerializedName("shipment_type")
-    val shipmentType: SkuReturnRequest.ShipmentType? = null,
+    val shipmentType: kotlin.String? = null,
 
     /* The handover method buyer chooses to use when returning item(s) to seller using platform's shipping service. - `DROP_OFF`: buyer will drop off the item(s) at courier - `PICKUP`: buyer is scheduling a pick up service offered by the courier. */
     @SerializedName("handover_method")
@@ -172,7 +172,7 @@ data class SkuReturnRequest (
 
     /* The type of return shipping document selected by the buyer. Available values: - `SHIPPING_LABEL` - `QR_CODE` - QR Code with Box - `QR_CODE_NBNL` - QR Code with No Box No Label */
     @SerializedName("return_shipping_document_type")
-    val returnShippingDocumentType: SkuReturnRequest.ReturnShippingDocumentType? = null,
+    val returnShippingDocumentType: kotlin.String? = null,
 
     /* Return method: - `SELLER_SHIPPED`: Seller offers the return shipping service. - `BUYER_SHIPPED`: Buyer offers the return shipping service. - `PLATFORM_SHIPPED`: TikTok Shop offers the return shipping service. */
     @SerializedName("return_method")
@@ -221,83 +221,6 @@ data class SkuReturnRequest (
 
 ) {
 
-    /**
-     * Return type. Available values: - `REFUND`: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller. - `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer. - `REPLACEMENT`: The buyer requires the seller to replace the item(s). - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
-     *
-     * Values: REFUND,RETURN_AND_REFUND,REPLACEMENT,EXCHANGE
-     */
-    enum class ReturnType(val value: kotlin.String) {
-        @SerializedName(value = "REFUND") REFUND("REFUND"),
-        @SerializedName(value = "RETURN_AND_REFUND") RETURN_AND_REFUND("RETURN_AND_REFUND"),
-        @SerializedName(value = "REPLACEMENT") REPLACEMENT("REPLACEMENT"),
-        @SerializedName(value = "EXCHANGE") EXCHANGE("EXCHANGE");
-    }
-    /**
-     * Return status. Available values: - `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending review by seller or platform. - `REFUND_OR_RETURN_REQUEST_REJECT`: The return or refund request was rejected. - `AWAITING_BUYER_SHIP`: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn't ship the items to the seller before the deadline, the platform will close the request. - `BUYER_SHIPPED_ITEM`: Buyer has shipped the approved items to seller. - `REJECT_RECEIVE_PACKAGE`: Seller inspected the returned items and rejected the return package. - `RETURN_OR_REFUND_REQUEST_SUCCESS`: The return/refund request was approved. The buyer will be refunded. - `RETURN_OR_REFUND_REQUEST_CANCEL`: The request has been cancelled by the buyer or system. - `RETURN_OR_REFUND_REQUEST_COMPLETE`: The return/refund was processed successfully. The buyer has been refunded. - `REPLACEMENT_REQUEST_PENDING`: Buyer has initiated a replacement request. The request is pending review by seller. - `REPLACEMENT_REQUEST_REJECT`: Seller reject the buyer replacement request. - `REPLACEMENT_REQUEST_REFUND_SUCCESS`: Buyer's replacement request was resolved by refund due to insufficient inventory. - `REPLACEMENT_REQUEST_CANCEL`: Buyer canceled the replacement request. - `REPLACEMENT_REQUEST_COMPLETE`: Seller has approved the buyer's replacement request, platform will generate a new order for seller to fulfill. - `AWAITING_BUYER_RESPONSE`: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the `seller_proposed_return_type`. - `EXCHANGE_REQUEST_PENDING`: Buyer has initiated an exchange request. The request is pending review by seller. - `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory. - `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request. - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
-     *
-     * Values: RETURN_OR_REFUND_REQUEST_PENDING,REFUND_OR_RETURN_REQUEST_REJECT,AWAITING_BUYER_SHIP,BUYER_SHIPPED_ITEM,REJECT_RECEIVE_PACKAGE,RETURN_OR_REFUND_REQUEST_SUCCESS,RETURN_OR_REFUND_REQUEST_CANCEL,RETURN_OR_REFUND_REQUEST_COMPLETE,REPLACEMENT_REQUEST_PENDING,REPLACEMENT_REQUEST_REJECT,REPLACEMENT_REQUEST_REFUND_SUCCESS,REPLACEMENT_REQUEST_CANCEL,REPLACEMENT_REQUEST_COMPLETE,AWAITING_BUYER_RESPONSE,EXCHANGE_REQUEST_PENDING,EXCHANGE_REQUEST_REFUND_SUCCESS,EXCHANGE_REQUEST_CANCEL,EXCHANGE_REQUEST_COMPLETE
-     */
-    enum class ReturnStatus(val value: kotlin.String) {
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_PENDING") RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-        @SerializedName(value = "REFUND_OR_RETURN_REQUEST_REJECT") REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-        @SerializedName(value = "AWAITING_BUYER_SHIP") AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-        @SerializedName(value = "BUYER_SHIPPED_ITEM") BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-        @SerializedName(value = "REJECT_RECEIVE_PACKAGE") REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_SUCCESS") RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_CANCEL") RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-        @SerializedName(value = "RETURN_OR_REFUND_REQUEST_COMPLETE") RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_PENDING") REPLACEMENT_REQUEST_PENDING("REPLACEMENT_REQUEST_PENDING"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_REJECT") REPLACEMENT_REQUEST_REJECT("REPLACEMENT_REQUEST_REJECT"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_REFUND_SUCCESS") REPLACEMENT_REQUEST_REFUND_SUCCESS("REPLACEMENT_REQUEST_REFUND_SUCCESS"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_CANCEL") REPLACEMENT_REQUEST_CANCEL("REPLACEMENT_REQUEST_CANCEL"),
-        @SerializedName(value = "REPLACEMENT_REQUEST_COMPLETE") REPLACEMENT_REQUEST_COMPLETE("REPLACEMENT_REQUEST_COMPLETE"),
-        @SerializedName(value = "AWAITING_BUYER_RESPONSE") AWAITING_BUYER_RESPONSE("AWAITING_BUYER_RESPONSE"),
-        @SerializedName(value = "EXCHANGE_REQUEST_PENDING") EXCHANGE_REQUEST_PENDING("EXCHANGE_REQUEST_PENDING"),
-        @SerializedName(value = "EXCHANGE_REQUEST_REFUND_SUCCESS") EXCHANGE_REQUEST_REFUND_SUCCESS("EXCHANGE_REQUEST_REFUND_SUCCESS"),
-        @SerializedName(value = "EXCHANGE_REQUEST_CANCEL") EXCHANGE_REQUEST_CANCEL("EXCHANGE_REQUEST_CANCEL"),
-        @SerializedName(value = "EXCHANGE_REQUEST_COMPLETE") EXCHANGE_REQUEST_COMPLETE("EXCHANGE_REQUEST_COMPLETE");
-    }
-    /**
-     * Arbitration status. Available values: - `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration and may request additional information from the seller. - `SUPPORT_BUYER`: The platform operator supports the buyer. - `SUPPORT_SELLER`: The platform operator supports the seller. - `CLOSED`: Arbitration is closed.
-     *
-     * Values: IN_PROGRESS,SUPPORT_BUYER,SUPPORT_SELLER,CLOSED
-     */
-    enum class ArbitrationStatus(val value: kotlin.String) {
-        @SerializedName(value = "IN_PROGRESS") IN_PROGRESS("IN_PROGRESS"),
-        @SerializedName(value = "SUPPORT_BUYER") SUPPORT_BUYER("SUPPORT_BUYER"),
-        @SerializedName(value = "SUPPORT_SELLER") SUPPORT_SELLER("SUPPORT_SELLER"),
-        @SerializedName(value = "CLOSED") CLOSED("CLOSED");
-    }
-    /**
-     * Return initiation role. Available values: - `BUYER` - `SELLER` - `OPERATOR` : TikTok Shop platform operator. - `SYSTEM`: TikTok Shop system. Please see \"API overview\" to learn more about roles.
-     *
-     * Values: BUYER,SELLER,OPERATOR,SYSTEM
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "OPERATOR") OPERATOR("OPERATOR"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
-    /**
-     * The shipment method selected by the buyer for sending the item(s) back to the seller. Available values: - `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`. - `BUYER_ARRANGE`: The buyer arranges the return shipment.
-     *
-     * Values: PLATFORM,BUYER_ARRANGE
-     */
-    enum class ShipmentType(val value: kotlin.String) {
-        @SerializedName(value = "PLATFORM") PLATFORM("PLATFORM"),
-        @SerializedName(value = "BUYER_ARRANGE") BUYER_ARRANGE("BUYER_ARRANGE");
-    }
-    /**
-     * The type of return shipping document selected by the buyer. Available values: - `SHIPPING_LABEL` - `QR_CODE` - QR Code with Box - `QR_CODE_NBNL` - QR Code with No Box No Label
-     *
-     * Values: SHIPPING_LABEL,QR_CODE,QR_CODE_NBNL
-     */
-    enum class ReturnShippingDocumentType(val value: kotlin.String) {
-        @SerializedName(value = "SHIPPING_LABEL") SHIPPING_LABEL("SHIPPING_LABEL"),
-        @SerializedName(value = "QR_CODE") QR_CODE("QR_CODE"),
-        @SerializedName(value = "QR_CODE_NBNL") QR_CODE_NBNL("QR_CODE_NBNL");
-    }
 
 }
 

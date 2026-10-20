@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_products_response_data_product_added_status import GetShopProductsResponseDataProductAddedStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +23,7 @@ class GetShopProductsResponseDataProduct:
         id (str | Unset): TikTok product ID.
         title (str | Unset): Product name.
         price (Price | Unset):
-        added_status (GetShopProductsResponseDataProductAddedStatus | Unset): Showcase add status with possible values:
+        added_status (str | Unset): Showcase add status with possible values:
             - ADDABLE
             - ADDED
             - REJECTED
@@ -36,7 +35,7 @@ class GetShopProductsResponseDataProduct:
     id: str | Unset = UNSET
     title: str | Unset = UNSET
     price: Price | Unset = UNSET
-    added_status: GetShopProductsResponseDataProductAddedStatus | Unset = UNSET
+    added_status: str | Unset = UNSET
     brand_name: str | Unset = UNSET
     images: list[GetReturnRecordsResponseDataRecordImage] | Unset = UNSET
     sales_count: int | Unset = UNSET
@@ -51,9 +50,7 @@ class GetShopProductsResponseDataProduct:
         if not isinstance(self.price, Unset):
             price = self.price.to_dict()
 
-        added_status: str | Unset = UNSET
-        if not isinstance(self.added_status, Unset):
-            added_status = self.added_status.value
+        added_status = self.added_status
 
         brand_name = self.brand_name
 
@@ -105,12 +102,7 @@ class GetShopProductsResponseDataProduct:
         else:
             price = Price.from_dict(_price)
 
-        _added_status = d.pop("added_status", UNSET)
-        added_status: GetShopProductsResponseDataProductAddedStatus | Unset
-        if isinstance(_added_status, Unset):
-            added_status = UNSET
-        else:
-            added_status = GetShopProductsResponseDataProductAddedStatus(_added_status)
+        added_status = d.pop("added_status", UNSET)
 
         brand_name = d.pop("brand_name", UNSET)
 

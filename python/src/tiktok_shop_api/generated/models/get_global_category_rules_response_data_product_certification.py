@@ -1,17 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_category_rules_response_data_product_certification_optional_regions_item import (
-    GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsItem,
-)
-from ..models.get_global_category_rules_response_data_product_certification_required_regions_item import (
-    GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsItem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,8 +28,7 @@ class GetGlobalCategoryRulesResponseDataProductCertification:
             - false: The certification is required only in some regions, or if certain conditions are met. Refer to
             `required_regions` and `requirement_conditions` for the specific requirements.
         sample_image_url (str | Unset): The URL to view an image of the sample certification document.
-        required_regions (list[GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsItem] | Unset): The
-            markets where the certification is required, without conditions.
+        required_regions (list[str] | Unset): The markets where the certification is required, without conditions.
             Possible values:
             - DE: Germany
             - ES: Spain
@@ -54,9 +47,9 @@ class GetGlobalCategoryRulesResponseDataProductCertification:
             - MX: Mexico
 
             Applicable only if `is_required=false`.
-        optional_regions (list[GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsItem] | Unset): The
-            markets where the certification is purely optional, or required only under certain conditions. Refer to
-            `requirement_conditions` for details on markets with conditional requirements.
+        optional_regions (list[str] | Unset): The markets where the certification is purely optional, or required only
+            under certain conditions. Refer to `requirement_conditions` for details on markets with conditional
+            requirements.
 
             Possible values:
             - AT: Austria
@@ -101,8 +94,8 @@ class GetGlobalCategoryRulesResponseDataProductCertification:
     name: str | Unset = UNSET
     is_required: bool | Unset = UNSET
     sample_image_url: str | Unset = UNSET
-    required_regions: list[GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsItem] | Unset = UNSET
-    optional_regions: list[GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsItem] | Unset = UNSET
+    required_regions: list[str] | Unset = UNSET
+    optional_regions: list[str] | Unset = UNSET
     requirement_conditions: list[GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition] | Unset = (
         UNSET
     )
@@ -119,17 +112,11 @@ class GetGlobalCategoryRulesResponseDataProductCertification:
 
         required_regions: list[str] | Unset = UNSET
         if not isinstance(self.required_regions, Unset):
-            required_regions = []
-            for required_regions_item_data in self.required_regions:
-                required_regions_item = required_regions_item_data.value
-                required_regions.append(required_regions_item)
+            required_regions = self.required_regions
 
         optional_regions: list[str] | Unset = UNSET
         if not isinstance(self.optional_regions, Unset):
-            optional_regions = []
-            for optional_regions_item_data in self.optional_regions:
-                optional_regions_item = optional_regions_item_data.value
-                optional_regions.append(optional_regions_item)
+            optional_regions = self.optional_regions
 
         requirement_conditions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.requirement_conditions, Unset):
@@ -173,31 +160,9 @@ class GetGlobalCategoryRulesResponseDataProductCertification:
 
         sample_image_url = d.pop("sample_image_url", UNSET)
 
-        _required_regions = d.pop("required_regions", UNSET)
-        required_regions: list[GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsItem] | Unset = (
-            UNSET
-        )
-        if _required_regions is not UNSET:
-            required_regions = []
-            for required_regions_item_data in _required_regions:
-                required_regions_item = GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsItem(
-                    required_regions_item_data
-                )
+        required_regions = cast(list[str], d.pop("required_regions", UNSET))
 
-                required_regions.append(required_regions_item)
-
-        _optional_regions = d.pop("optional_regions", UNSET)
-        optional_regions: list[GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsItem] | Unset = (
-            UNSET
-        )
-        if _optional_regions is not UNSET:
-            optional_regions = []
-            for optional_regions_item_data in _optional_regions:
-                optional_regions_item = GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsItem(
-                    optional_regions_item_data
-                )
-
-                optional_regions.append(optional_regions_item)
+        optional_regions = cast(list[str], d.pop("optional_regions", UNSET))
 
         _requirement_conditions = d.pop("requirement_conditions", UNSET)
         requirement_conditions: (

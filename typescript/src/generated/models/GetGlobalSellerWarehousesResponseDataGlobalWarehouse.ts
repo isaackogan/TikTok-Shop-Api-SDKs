@@ -35,22 +35,11 @@ export interface GetGlobalSellerWarehousesResponseDataGlobalWarehouse {
      * Possible values:
      * - SELLER: Warehouse owned by the seller. 
      * - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop.
-     * @type {GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum}
+     * @type {string}
      * @memberof GetGlobalSellerWarehousesResponseDataGlobalWarehouse
      */
-    ownership?: GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum;
+    ownership?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum = {
-    Seller: 'SELLER',
-    PlatformCooperation: 'PLATFORM_COOPERATION'
-} as const;
-export type GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum = typeof GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum[keyof typeof GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnershipEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalSellerWarehousesResponseDataGlobalWarehouse interface.

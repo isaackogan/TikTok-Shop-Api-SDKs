@@ -35,10 +35,10 @@ export interface GetGlobalCategoryRulesResponseDataManufacturer {
      * - FR: France
      * - IT: Italy
      * - IE: Ireland
-     * @type {Array<GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataManufacturer
      */
-    optionalRegions?: Array<GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum>;
+    optionalRegions?: Array<string>;
     /**
      * The markets where the manufacturer is required.
      * Possible values:
@@ -55,45 +55,11 @@ export interface GetGlobalCategoryRulesResponseDataManufacturer {
      * - NL: Netherlands
      * - PL: Poland
      * - PT: Portugal
-     * @type {Array<GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataManufacturer
      */
-    requiredRegions?: Array<GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum>;
+    requiredRegions?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum = {
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    It: 'IT',
-    Ie: 'IE'
-} as const;
-export type GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum = typeof GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataManufacturerOptionalRegionsEnum];
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gr: 'GR',
-    Hu: 'HU',
-    Ie: 'IE',
-    It: 'IT',
-    Nl: 'NL',
-    Pl: 'PL',
-    Pt: 'PT'
-} as const;
-export type GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum = typeof GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataManufacturerRequiredRegionsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalCategoryRulesResponseDataManufacturer interface.

@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversation_messages_response_data_message_type import GetConversationMessagesResponseDataMessageType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -23,7 +22,7 @@ class GetConversationMessagesResponseDataMessage:
     """
     Attributes:
         id (str | Unset): Message ID.
-        type_ (GetConversationMessagesResponseDataMessageType | Unset): Message type.
+        type_ (str | Unset): Message type.
             Possible enumerations:
             - TEXT
             - IMAGE
@@ -196,7 +195,7 @@ class GetConversationMessagesResponseDataMessage:
     """
 
     id: str | Unset = UNSET
-    type_: GetConversationMessagesResponseDataMessageType | Unset = UNSET
+    type_: str | Unset = UNSET
     content: str | Unset = UNSET
     create_time: int | Unset = UNSET
     is_visible: bool | Unset = UNSET
@@ -209,9 +208,7 @@ class GetConversationMessagesResponseDataMessage:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         content = self.content
 
@@ -262,12 +259,7 @@ class GetConversationMessagesResponseDataMessage:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetConversationMessagesResponseDataMessageType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetConversationMessagesResponseDataMessageType(_type_)
+        type_ = d.pop("type", UNSET)
 
         content = d.pop("content", UNSET)
 

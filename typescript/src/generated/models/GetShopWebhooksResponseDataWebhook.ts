@@ -39,10 +39,10 @@ export interface GetShopWebhooksResponseDataWebhook {
      * - `INVOICE_STATUS_CHANGE`: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
      * - `PRODUCT_AUDIT_STATUS_CHANGE`: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
      * - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
-     * @type {GetShopWebhooksResponseDataWebhookEventTypeEnum}
+     * @type {string}
      * @memberof GetShopWebhooksResponseDataWebhook
      */
-    eventType?: GetShopWebhooksResponseDataWebhookEventTypeEnum;
+    eventType?: string;
     /**
      * The webhook URL used to receive the event data.
      * @type {string}
@@ -62,32 +62,6 @@ export interface GetShopWebhooksResponseDataWebhook {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetShopWebhooksResponseDataWebhookEventTypeEnum = {
-    OrderStatusChange: 'ORDER_STATUS_CHANGE',
-    RecipientAddressUpdate: 'RECIPIENT_ADDRESS_UPDATE',
-    PackageUpdate: 'PACKAGE_UPDATE',
-    ProductStatusChange: 'PRODUCT_STATUS_CHANGE',
-    SellerDeauthorization: 'SELLER_DEAUTHORIZATION',
-    UpcomingAuthorizationExpiration: 'UPCOMING_AUTHORIZATION_EXPIRATION',
-    CancellationStatusChange: 'CANCELLATION_STATUS_CHANGE',
-    ReturnStatusChange: 'RETURN_STATUS_CHANGE',
-    NewConversation: 'NEW_CONVERSATION',
-    NewMessage: 'NEW_MESSAGE',
-    ProductInformationChange: 'PRODUCT_INFORMATION_CHANGE',
-    ProductCreation: 'PRODUCT_CREATION',
-    ProductCategoryChange: 'PRODUCT_CATEGORY_CHANGE',
-    NewMessageListener: 'NEW_MESSAGE_LISTENER',
-    InvoiceStatusChange: 'INVOICE_STATUS_CHANGE',
-    ProductAuditStatusChange: 'PRODUCT_AUDIT_STATUS_CHANGE',
-    ReverseStatusUpdate: 'REVERSE_STATUS_UPDATE'
-} as const;
-export type GetShopWebhooksResponseDataWebhookEventTypeEnum = typeof GetShopWebhooksResponseDataWebhookEventTypeEnum[keyof typeof GetShopWebhooksResponseDataWebhookEventTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopWebhooksResponseDataWebhook interface.

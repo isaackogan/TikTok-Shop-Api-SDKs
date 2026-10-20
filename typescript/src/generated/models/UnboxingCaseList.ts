@@ -28,22 +28,11 @@ export interface UnboxingCaseList {
     /**
      * Indicates if the unboxed sku is a gift item
      * Enumerations: NORMAL or GIFT
-     * @type {UnboxingCaseListUnboxSkuTypeEnum}
+     * @type {string}
      * @memberof UnboxingCaseList
      */
-    unboxSkuType?: UnboxingCaseListUnboxSkuTypeEnum;
+    unboxSkuType?: string;
 }
-
-
-/**
- * @export
- */
-export const UnboxingCaseListUnboxSkuTypeEnum = {
-    Normal: 'NORMAL',
-    Gift: 'GIFT'
-} as const;
-export type UnboxingCaseListUnboxSkuTypeEnum = typeof UnboxingCaseListUnboxSkuTypeEnum[keyof typeof UnboxingCaseListUnboxSkuTypeEnum];
-
 
 /**
  * Check if a given object implements the UnboxingCaseList interface.

@@ -64,23 +64,10 @@ data class CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuL
 
     /* The reason code associated with SKU sample availability. Interpret a specific unavailability reason only when `is_available` is `false`. `UNKNOWN` can also be returned when `is_available` is `true` because no unavailability reason applies. Possible values: - IS_PREORDER: The product is a preorder product and does not support free samples. - IS_GIFT: The product is a gift and does not support free samples. - OUT_OF_STOCK: The product is out of stock. - EXCEED_CB_PRICE_THRESHOLD: The SKU price exceeds the applicable cross-border price threshold. - ALREADY_APPLYED: The creator has already applied for this SKU. - UNKNOWN: No mapped unavailability reason is available. */
     @SerializedName("unavailable_reason")
-    val unavailableReason: CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList.UnavailableReason? = null
+    val unavailableReason: kotlin.String? = null
 
 ) {
 
-    /**
-     * The reason code associated with SKU sample availability. Interpret a specific unavailability reason only when `is_available` is `false`. `UNKNOWN` can also be returned when `is_available` is `true` because no unavailability reason applies. Possible values: - IS_PREORDER: The product is a preorder product and does not support free samples. - IS_GIFT: The product is a gift and does not support free samples. - OUT_OF_STOCK: The product is out of stock. - EXCEED_CB_PRICE_THRESHOLD: The SKU price exceeds the applicable cross-border price threshold. - ALREADY_APPLYED: The creator has already applied for this SKU. - UNKNOWN: No mapped unavailability reason is available.
-     *
-     * Values: IS_PREORDER,IS_GIFT,OUT_OF_STOCK,EXCEED_CB_PRICE_THRESHOLD,ALREADY_APPLYED,UNKNOWN
-     */
-    enum class UnavailableReason(val value: kotlin.String) {
-        @SerializedName(value = "IS_PREORDER") IS_PREORDER("IS_PREORDER"),
-        @SerializedName(value = "IS_GIFT") IS_GIFT("IS_GIFT"),
-        @SerializedName(value = "OUT_OF_STOCK") OUT_OF_STOCK("OUT_OF_STOCK"),
-        @SerializedName(value = "EXCEED_CB_PRICE_THRESHOLD") EXCEED_CB_PRICE_THRESHOLD("EXCEED_CB_PRICE_THRESHOLD"),
-        @SerializedName(value = "ALREADY_APPLYED") ALREADY_APPLYED("ALREADY_APPLYED"),
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN");
-    }
 
 }
 

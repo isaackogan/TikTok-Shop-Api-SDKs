@@ -38,10 +38,10 @@ export interface InvoiceStatusChangeWebhookData {
      *  * `PROCESSING` 
      *  * `FAILED` 
      *  * `INVALID`
-     * @type {InvoiceStatusChangeWebhookDataInvoiceStatusEnum}
+     * @type {string}
      * @memberof InvoiceStatusChangeWebhookData
      */
-    invoiceStatus?: InvoiceStatusChangeWebhookDataInvoiceStatusEnum;
+    invoiceStatus?: string;
     /**
      * The reason why `invoice_status = INVALID`. Possible values: 
      *   
@@ -54,40 +54,11 @@ export interface InvoiceStatusChangeWebhookData {
      *  * `UF_Inconsistent_Required`: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. 
      *  * `UF_Inconsistent_Dismisse_Retirada_missing`: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e. 
      *  * `UF_Inconsistent_Dismissed_Retirada_Inconsistent`: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.
-     * @type {InvoiceStatusChangeWebhookDataInvalidReasonEnum}
+     * @type {string}
      * @memberof InvoiceStatusChangeWebhookData
      */
-    invalidReason?: InvoiceStatusChangeWebhookDataInvalidReasonEnum;
+    invalidReason?: string;
 }
-
-
-/**
- * @export
- */
-export const InvoiceStatusChangeWebhookDataInvoiceStatusEnum = {
-    Success: 'SUCCESS',
-    Processing: 'PROCESSING',
-    Failed: 'FAILED',
-    Invalid: 'INVALID'
-} as const;
-export type InvoiceStatusChangeWebhookDataInvoiceStatusEnum = typeof InvoiceStatusChangeWebhookDataInvoiceStatusEnum[keyof typeof InvoiceStatusChangeWebhookDataInvoiceStatusEnum];
-
-/**
- * @export
- */
-export const InvoiceStatusChangeWebhookDataInvalidReasonEnum = {
-    Unknown: 'UNKNOWN',
-    Failed: 'FAILED',
-    NotFound: 'NOT_FOUND',
-    NotAuthorized: 'NOT_AUTHORIZED',
-    AccessKeyDuplicate: 'ACCESS_KEY_DUPLICATE',
-    CnpjNotMatch: 'CNPJ_NOT_MATCH',
-    UfInconsistentRequired: 'UF_Inconsistent_Required',
-    UfInconsistentDismisseRetiradaMissing: 'UF_Inconsistent_Dismisse_Retirada_missing',
-    UfInconsistentDismissedRetiradaInconsistent: 'UF_Inconsistent_Dismissed_Retirada_Inconsistent'
-} as const;
-export type InvoiceStatusChangeWebhookDataInvalidReasonEnum = typeof InvoiceStatusChangeWebhookDataInvalidReasonEnum[keyof typeof InvoiceStatusChangeWebhookDataInvalidReasonEnum];
-
 
 /**
  * Check if a given object implements the InvoiceStatusChangeWebhookData interface.

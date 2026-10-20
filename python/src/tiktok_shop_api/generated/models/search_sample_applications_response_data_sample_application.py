@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_sample_applications_response_data_sample_application_fulfillment_status import (
-    SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatus,
-)
-from ..models.search_sample_applications_response_data_sample_application_status import (
-    SearchSampleApplicationsResponseDataSampleApplicationStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +28,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
         commission_rate (str | Unset): The commission rate set by the merchant for creators for this product,
             represented as a decimal fraction with two decimal places. For example, `0.20` represents 20%. The range is
             [0.01, 0.8].
-        status (SearchSampleApplicationsResponseDataSampleApplicationStatus | Unset): The status of sample applications.
+        status (str | Unset): The status of sample applications.
             The possible enumerated values are:
             - PENDING: The sample application is waiting for the seller's review.
             - AWAITING_SHIPMENT: The application is approved, and the seller needs to ship the sample.
@@ -59,8 +53,8 @@ class SearchSampleApplicationsResponseDataSampleApplication:
         shipment_expiration_time (int | Unset): The deadline for the seller to ship the sample for the application,
             expressed as a Unix timestamp in seconds.
         tracking_number (str | Unset): The logistics tracking number for the sample application order
-        fulfillment_status (SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatus | Unset): It
-            indicates the current status of the fulfillment process. The possible values are:
+        fulfillment_status (str | Unset): It indicates the current status of the fulfillment process. The possible
+            values are:
             - PENDING: The creator is yet to fulfill the content creation obligation.
             - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria.
             - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards.
@@ -82,13 +76,13 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
     id: str | Unset = UNSET
     commission_rate: str | Unset = UNSET
-    status: SearchSampleApplicationsResponseDataSampleApplicationStatus | Unset = UNSET
+    status: str | Unset = UNSET
     order_id: str | Unset = UNSET
     available_quantity: int | Unset = UNSET
     approve_expiration_time: int | Unset = UNSET
     shipment_expiration_time: int | Unset = UNSET
     tracking_number: str | Unset = UNSET
-    fulfillment_status: SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatus | Unset = UNSET
+    fulfillment_status: str | Unset = UNSET
     is_approvable: bool | Unset = UNSET
     disapprovable_reasons: list[str] | Unset = UNSET
     partner_name: str | Unset = UNSET
@@ -101,9 +95,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         commission_rate = self.commission_rate
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         order_id = self.order_id
 
@@ -115,9 +107,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         tracking_number = self.tracking_number
 
-        fulfillment_status: str | Unset = UNSET
-        if not isinstance(self.fulfillment_status, Unset):
-            fulfillment_status = self.fulfillment_status.value
+        fulfillment_status = self.fulfillment_status
 
         is_approvable = self.is_approvable
 
@@ -183,12 +173,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         commission_rate = d.pop("commission_rate", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchSampleApplicationsResponseDataSampleApplicationStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchSampleApplicationsResponseDataSampleApplicationStatus(_status)
+        status = d.pop("status", UNSET)
 
         order_id = d.pop("order_id", UNSET)
 
@@ -200,14 +185,7 @@ class SearchSampleApplicationsResponseDataSampleApplication:
 
         tracking_number = d.pop("tracking_number", UNSET)
 
-        _fulfillment_status = d.pop("fulfillment_status", UNSET)
-        fulfillment_status: SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatus | Unset
-        if isinstance(_fulfillment_status, Unset):
-            fulfillment_status = UNSET
-        else:
-            fulfillment_status = SearchSampleApplicationsResponseDataSampleApplicationFulfillmentStatus(
-                _fulfillment_status
-            )
+        fulfillment_status = d.pop("fulfillment_status", UNSET)
 
         is_approvable = d.pop("is_approvable", UNSET)
 

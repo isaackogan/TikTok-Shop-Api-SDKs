@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.upload_product_image_response_data_use_case import UploadProductImageResponseDataUseCase
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UploadProductImageResponseData")
@@ -22,7 +21,7 @@ class UploadProductImageResponseData:
             Use this URL in product descriptions by embedding it within an HTML `<img>` tag.
         height (int | Unset): The height of the image after aspect ratio adjustment.
         width (int | Unset): The width of the image after aspect ratio adjustment.
-        use_case (UploadProductImageResponseDataUseCase | Unset): The usage scenario specified during upload.
+        use_case (str | Unset): The usage scenario specified during upload.
             Possible values:
             - MAIN_IMAGE
             - ATTRIBUTE_IMAGE
@@ -36,7 +35,7 @@ class UploadProductImageResponseData:
     url: str | Unset = UNSET
     height: int | Unset = UNSET
     width: int | Unset = UNSET
-    use_case: UploadProductImageResponseDataUseCase | Unset = UNSET
+    use_case: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -48,9 +47,7 @@ class UploadProductImageResponseData:
 
         width = self.width
 
-        use_case: str | Unset = UNSET
-        if not isinstance(self.use_case, Unset):
-            use_case = self.use_case.value
+        use_case = self.use_case
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -79,12 +76,7 @@ class UploadProductImageResponseData:
 
         width = d.pop("width", UNSET)
 
-        _use_case = d.pop("use_case", UNSET)
-        use_case: UploadProductImageResponseDataUseCase | Unset
-        if isinstance(_use_case, Unset):
-            use_case = UNSET
-        else:
-            use_case = UploadProductImageResponseDataUseCase(_use_case)
+        use_case = d.pop("use_case", UNSET)
 
         upload_product_image_response_data = cls(
             uri=uri,

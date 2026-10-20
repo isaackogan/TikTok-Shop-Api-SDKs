@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_hazmat_approval_status import (
-    SearchGoodsInfoResponseDataGoodHazmatApprovalStatus,
-)
-from ..models.search_goods_info_response_data_good_sioc_approval_status import (
-    SearchGoodsInfoResponseDataGoodSiocApprovalStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -54,17 +48,16 @@ class SearchGoodsInfoResponseDataGood:
         lot_expiration_info (SearchGoodsInfoResponseDataGoodLotExpirationInfo | Unset):
         is_hazmat (bool | Unset): whether is hazmat goods
         hazmat_info (SearchGoodsInfoResponseDataGoodHazmatInfo | Unset):
-        sioc_approval_status (SearchGoodsInfoResponseDataGoodSiocApprovalStatus | Unset): SIOC-specific approval status.
-            This field is returned when `is_sioc` is `true` and an SIOC approval status is available.
+        sioc_approval_status (str | Unset): SIOC-specific approval status. This field is returned when `is_sioc` is
+            `true` and an SIOC approval status is available.
             Possible values:
             - SIOC_APPROVAL_STATUS_INVALID
             - SIOC_APPROVAL_STATUS_INIT
             - SIOC_APPROVAL_STATUS_UNDER_REVIEW
             - SIOC_APPROVAL_STATUS_APPROVE
             - SIOC_APPROVAL_STATUS_REJECT
-        hazmat_approval_status (SearchGoodsInfoResponseDataGoodHazmatApprovalStatus | Unset): FBT fulfillment approval
-            status. This field is returned for goods that are hazardous materials or managed as Ships in Own Container
-            (SIOC).
+        hazmat_approval_status (str | Unset): FBT fulfillment approval status. This field is returned for goods that are
+            hazardous materials or managed as Ships in Own Container (SIOC).
             Possible values:
             - APPROVAL_STATUS_INVALID
             - APPROVAL_STATUS_INIT
@@ -88,8 +81,8 @@ class SearchGoodsInfoResponseDataGood:
     lot_expiration_info: SearchGoodsInfoResponseDataGoodLotExpirationInfo | Unset = UNSET
     is_hazmat: bool | Unset = UNSET
     hazmat_info: SearchGoodsInfoResponseDataGoodHazmatInfo | Unset = UNSET
-    sioc_approval_status: SearchGoodsInfoResponseDataGoodSiocApprovalStatus | Unset = UNSET
-    hazmat_approval_status: SearchGoodsInfoResponseDataGoodHazmatApprovalStatus | Unset = UNSET
+    sioc_approval_status: str | Unset = UNSET
+    hazmat_approval_status: str | Unset = UNSET
     bulky_item_attribute: SearchGoodsInfoResponseDataGoodBulkyItemAttribute | Unset = UNSET
     goods_safety_attributes: GoodsSafetyAttribute | Unset = UNSET
     is_sioc: bool | Unset = UNSET
@@ -137,13 +130,9 @@ class SearchGoodsInfoResponseDataGood:
         if not isinstance(self.hazmat_info, Unset):
             hazmat_info = self.hazmat_info.to_dict()
 
-        sioc_approval_status: str | Unset = UNSET
-        if not isinstance(self.sioc_approval_status, Unset):
-            sioc_approval_status = self.sioc_approval_status.value
+        sioc_approval_status = self.sioc_approval_status
 
-        hazmat_approval_status: str | Unset = UNSET
-        if not isinstance(self.hazmat_approval_status, Unset):
-            hazmat_approval_status = self.hazmat_approval_status.value
+        hazmat_approval_status = self.hazmat_approval_status
 
         bulky_item_attribute: dict[str, Any] | Unset = UNSET
         if not isinstance(self.bulky_item_attribute, Unset):
@@ -286,19 +275,9 @@ class SearchGoodsInfoResponseDataGood:
         else:
             hazmat_info = SearchGoodsInfoResponseDataGoodHazmatInfo.from_dict(_hazmat_info)
 
-        _sioc_approval_status = d.pop("sioc_approval_status", UNSET)
-        sioc_approval_status: SearchGoodsInfoResponseDataGoodSiocApprovalStatus | Unset
-        if isinstance(_sioc_approval_status, Unset):
-            sioc_approval_status = UNSET
-        else:
-            sioc_approval_status = SearchGoodsInfoResponseDataGoodSiocApprovalStatus(_sioc_approval_status)
+        sioc_approval_status = d.pop("sioc_approval_status", UNSET)
 
-        _hazmat_approval_status = d.pop("hazmat_approval_status", UNSET)
-        hazmat_approval_status: SearchGoodsInfoResponseDataGoodHazmatApprovalStatus | Unset
-        if isinstance(_hazmat_approval_status, Unset):
-            hazmat_approval_status = UNSET
-        else:
-            hazmat_approval_status = SearchGoodsInfoResponseDataGoodHazmatApprovalStatus(_hazmat_approval_status)
+        hazmat_approval_status = d.pop("hazmat_approval_status", UNSET)
 
         _bulky_item_attribute = d.pop("bulky_item_attribute", UNSET)
         bulky_item_attribute: SearchGoodsInfoResponseDataGoodBulkyItemAttribute | Unset

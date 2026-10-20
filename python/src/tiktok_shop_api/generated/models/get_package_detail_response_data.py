@@ -6,14 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_package_detail_response_data_handover_method import GetPackageDetailResponseDataHandoverMethod
-from ..models.get_package_detail_response_data_note_tag import GetPackageDetailResponseDataNoteTag
-from ..models.get_package_detail_response_data_package_status import GetPackageDetailResponseDataPackageStatus
-from ..models.get_package_detail_response_data_package_sub_status import GetPackageDetailResponseDataPackageSubStatus
-from ..models.get_package_detail_response_data_shipping_type import GetPackageDetailResponseDataShippingType
-from ..models.get_package_detail_response_data_split_and_combine_tag import (
-    GetPackageDetailResponseDataSplitAndCombineTag,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -35,14 +27,14 @@ class GetPackageDetailResponseData:
     Attributes:
         package_id (str | Unset): TikTok Shop package ID.
         orders (list[Order] | Unset): The response list of TikTok Shop orders.
-        package_status (GetPackageDetailResponseDataPackageStatus | Unset): Possible values:
+        package_status (str | Unset): Possible values:
             - `TO_FULFILL`：Waiting for the merchant or warehouse to ship the package.
             - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
             - `FULFILLING`: Package has been collected by carrier and in transit.
             - `COMPLETED`: Package has been delivered.
             - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
             damaged.
-        package_sub_status (GetPackageDetailResponseDataPackageSubStatus | Unset): Package sub-status.
+        package_sub_status (str | Unset): Package sub-status.
             Possible values:
             - `CREATED`: The package has been created.
             - `ISSUE`: Package allocation failed; contact platform support.
@@ -63,18 +55,17 @@ class GetPackageDetailResponseData:
             -PACKAGE_LOST
             -RETURNED_TO_SHIPPER
             -PACKAGE_SCRAP
-        split_and_combine_tag (GetPackageDetailResponseDataSplitAndCombineTag | Unset): Possible values:
+        split_and_combine_tag (str | Unset): Possible values:
             - `DEFAULT`: The package has not undergone any combine or split operation.
             - `COMBINE`: The package has been consolidated with another order.
             - `SPLIT`: The order has been split into multiple orders.
         has_multi_skus (bool | Unset): Whether there are multiple SKU IDs in a package.
-        note_tag (GetPackageDetailResponseDataNoteTag | Unset): Possible values:
+        note_tag (str | Unset): Possible values:
             - `BUYER_UNNOTED`: The order has not been noted by buyer.
             - `BUYER_NOTED`: The order has been noted by buyer.
         shipping_provider_name (str | Unset): Package shipping provider name.
         shipping_provider_id (str | Unset): Package shipping provider ID.
-        shipping_type (GetPackageDetailResponseDataShippingType | Unset): Indicates who provides the shipping service.
-            Possible values:
+        shipping_type (str | Unset): Indicates who provides the shipping service. Possible values:
             - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok.
             - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the
             seller's behalf.
@@ -86,8 +77,7 @@ class GetPackageDetailResponseData:
             number.
         pickup_slot (PickupSlot | Unset):
         create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
-        handover_method (GetPackageDetailResponseDataHandoverMethod | Unset): Whether the package is delivered by pick
-            up or drop off. Possible values:
+        handover_method (str | Unset): Whether the package is delivered by pick up or drop off. Possible values:
             - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address.
             - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location.
         order_line_item_ids (list[str] | Unset): The order line item ID contained in the package.
@@ -104,22 +94,22 @@ class GetPackageDetailResponseData:
 
     package_id: str | Unset = UNSET
     orders: list[Order] | Unset = UNSET
-    package_status: GetPackageDetailResponseDataPackageStatus | Unset = UNSET
-    package_sub_status: GetPackageDetailResponseDataPackageSubStatus | Unset = UNSET
+    package_status: str | Unset = UNSET
+    package_sub_status: str | Unset = UNSET
     ship_exception_reason: str | Unset = UNSET
-    split_and_combine_tag: GetPackageDetailResponseDataSplitAndCombineTag | Unset = UNSET
+    split_and_combine_tag: str | Unset = UNSET
     has_multi_skus: bool | Unset = UNSET
-    note_tag: GetPackageDetailResponseDataNoteTag | Unset = UNSET
+    note_tag: str | Unset = UNSET
     shipping_provider_name: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
-    shipping_type: GetPackageDetailResponseDataShippingType | Unset = UNSET
+    shipping_type: str | Unset = UNSET
     delivery_option_name: str | Unset = UNSET
     delivery_option_id: str | Unset = UNSET
     tracking_number: str | Unset = UNSET
     last_mile_tracking_number: str | Unset = UNSET
     pickup_slot: PickupSlot | Unset = UNSET
     create_time: int | Unset = UNSET
-    handover_method: GetPackageDetailResponseDataHandoverMethod | Unset = UNSET
+    handover_method: str | Unset = UNSET
     order_line_item_ids: list[str] | Unset = UNSET
     recipient_address: GetPackageDetailResponseDataRecipientAddress | Unset = UNSET
     sender_address: GetPackageDetailResponseDataSenderAddress | Unset = UNSET
@@ -141,33 +131,23 @@ class GetPackageDetailResponseData:
                 orders_item = orders_item_data.to_dict()
                 orders.append(orders_item)
 
-        package_status: str | Unset = UNSET
-        if not isinstance(self.package_status, Unset):
-            package_status = self.package_status.value
+        package_status = self.package_status
 
-        package_sub_status: str | Unset = UNSET
-        if not isinstance(self.package_sub_status, Unset):
-            package_sub_status = self.package_sub_status.value
+        package_sub_status = self.package_sub_status
 
         ship_exception_reason = self.ship_exception_reason
 
-        split_and_combine_tag: str | Unset = UNSET
-        if not isinstance(self.split_and_combine_tag, Unset):
-            split_and_combine_tag = self.split_and_combine_tag.value
+        split_and_combine_tag = self.split_and_combine_tag
 
         has_multi_skus = self.has_multi_skus
 
-        note_tag: str | Unset = UNSET
-        if not isinstance(self.note_tag, Unset):
-            note_tag = self.note_tag.value
+        note_tag = self.note_tag
 
         shipping_provider_name = self.shipping_provider_name
 
         shipping_provider_id = self.shipping_provider_id
 
-        shipping_type: str | Unset = UNSET
-        if not isinstance(self.shipping_type, Unset):
-            shipping_type = self.shipping_type.value
+        shipping_type = self.shipping_type
 
         delivery_option_name = self.delivery_option_name
 
@@ -183,9 +163,7 @@ class GetPackageDetailResponseData:
 
         create_time = self.create_time
 
-        handover_method: str | Unset = UNSET
-        if not isinstance(self.handover_method, Unset):
-            handover_method = self.handover_method.value
+        handover_method = self.handover_method
 
         order_line_item_ids: list[str] | Unset = UNSET
         if not isinstance(self.order_line_item_ids, Unset):
@@ -307,48 +285,23 @@ class GetPackageDetailResponseData:
 
                 orders.append(orders_item)
 
-        _package_status = d.pop("package_status", UNSET)
-        package_status: GetPackageDetailResponseDataPackageStatus | Unset
-        if isinstance(_package_status, Unset):
-            package_status = UNSET
-        else:
-            package_status = GetPackageDetailResponseDataPackageStatus(_package_status)
+        package_status = d.pop("package_status", UNSET)
 
-        _package_sub_status = d.pop("package_sub_status", UNSET)
-        package_sub_status: GetPackageDetailResponseDataPackageSubStatus | Unset
-        if isinstance(_package_sub_status, Unset):
-            package_sub_status = UNSET
-        else:
-            package_sub_status = GetPackageDetailResponseDataPackageSubStatus(_package_sub_status)
+        package_sub_status = d.pop("package_sub_status", UNSET)
 
         ship_exception_reason = d.pop("ship_exception_reason", UNSET)
 
-        _split_and_combine_tag = d.pop("split_and_combine_tag", UNSET)
-        split_and_combine_tag: GetPackageDetailResponseDataSplitAndCombineTag | Unset
-        if isinstance(_split_and_combine_tag, Unset):
-            split_and_combine_tag = UNSET
-        else:
-            split_and_combine_tag = GetPackageDetailResponseDataSplitAndCombineTag(_split_and_combine_tag)
+        split_and_combine_tag = d.pop("split_and_combine_tag", UNSET)
 
         has_multi_skus = d.pop("has_multi_skus", UNSET)
 
-        _note_tag = d.pop("note_tag", UNSET)
-        note_tag: GetPackageDetailResponseDataNoteTag | Unset
-        if isinstance(_note_tag, Unset):
-            note_tag = UNSET
-        else:
-            note_tag = GetPackageDetailResponseDataNoteTag(_note_tag)
+        note_tag = d.pop("note_tag", UNSET)
 
         shipping_provider_name = d.pop("shipping_provider_name", UNSET)
 
         shipping_provider_id = d.pop("shipping_provider_id", UNSET)
 
-        _shipping_type = d.pop("shipping_type", UNSET)
-        shipping_type: GetPackageDetailResponseDataShippingType | Unset
-        if isinstance(_shipping_type, Unset):
-            shipping_type = UNSET
-        else:
-            shipping_type = GetPackageDetailResponseDataShippingType(_shipping_type)
+        shipping_type = d.pop("shipping_type", UNSET)
 
         delivery_option_name = d.pop("delivery_option_name", UNSET)
 
@@ -367,12 +320,7 @@ class GetPackageDetailResponseData:
 
         create_time = d.pop("create_time", UNSET)
 
-        _handover_method = d.pop("handover_method", UNSET)
-        handover_method: GetPackageDetailResponseDataHandoverMethod | Unset
-        if isinstance(_handover_method, Unset):
-            handover_method = UNSET
-        else:
-            handover_method = GetPackageDetailResponseDataHandoverMethod(_handover_method)
+        handover_method = d.pop("handover_method", UNSET)
 
         order_line_item_ids = cast(list[str], d.pop("order_line_item_ids", UNSET))
 

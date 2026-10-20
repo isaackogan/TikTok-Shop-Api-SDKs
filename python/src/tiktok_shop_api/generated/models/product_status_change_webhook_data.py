@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.product_status_change_webhook_data_status import ProductStatusChangeWebhookDataStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ProductStatusChangeWebhookData")
@@ -17,7 +16,7 @@ class ProductStatusChangeWebhookData:
     """
     Attributes:
         product_id (int | Unset): The identification of a TikTok Shop product
-        status (ProductStatusChangeWebhookDataStatus | Unset): Product audit status, with possible values:
+        status (str | Unset): Product audit status, with possible values:
 
              * PRODUCT_FIRST_PASS_REVIEW
              * PRODUCT_STATUS_CHANGED
@@ -27,7 +26,7 @@ class ProductStatusChangeWebhookData:
     """
 
     product_id: int | Unset = UNSET
-    status: ProductStatusChangeWebhookDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     suspended_reason: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -35,9 +34,7 @@ class ProductStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         product_id = self.product_id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         suspended_reason = self.suspended_reason
 
@@ -62,12 +59,7 @@ class ProductStatusChangeWebhookData:
         d = dict(src_dict)
         product_id = d.pop("product_id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: ProductStatusChangeWebhookDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = ProductStatusChangeWebhookDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         suspended_reason = d.pop("suspended_reason", UNSET)
 

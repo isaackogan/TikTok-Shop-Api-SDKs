@@ -32,10 +32,10 @@ export interface ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResul
      *  `SUCCESS` 
      *  `FAIL` 
      *  `PROCESSING`
-     * @type {ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum}
+     * @type {string}
      * @memberof ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult
      */
-    status?: ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum;
+    status?: string;
     /**
      * 
      * @type {Array<ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue>}
@@ -43,18 +43,6 @@ export interface ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResul
      */
     issues?: Array<ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue>;
 }
-
-
-/**
- * @export
- */
-export const ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum = {
-    Success: 'SUCCESS',
-    Fail: 'FAIL',
-    Processing: 'PROCESSING'
-} as const;
-export type ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum = typeof ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum[keyof typeof ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultStatusEnum];
-
 
 /**
  * Check if a given object implements the ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult interface.

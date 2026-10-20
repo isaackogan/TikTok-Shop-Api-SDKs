@@ -97,7 +97,7 @@ data class GetOrderListResponseDataOrderLineItem (
 
     /* Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled. */
     @SerializedName("display_status")
-    val displayStatus: GetOrderListResponseDataOrderLineItem.DisplayStatus? = null,
+    val displayStatus: kotlin.String? = null,
 
     /* Product name. */
     @SerializedName("product_name")
@@ -138,7 +138,7 @@ data class GetOrderListResponseDataOrderLineItem (
     /* [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]  The order line type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.  **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced. */
     @SerializedName("sku_type")
     @Deprecated(message = "This property is deprecated.")
-    val skuType: GetOrderListResponseDataOrderLineItem.SkuType? = null,
+    val skuType: kotlin.String? = null,
 
     /* The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information. */
     @SerializedName("cancel_reason")
@@ -154,7 +154,7 @@ data class GetOrderListResponseDataOrderLineItem (
 
     /* The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged. */
     @SerializedName("package_status")
-    val packageStatus: GetOrderListResponseDataOrderLineItem.PackageStatus? = null,
+    val packageStatus: kotlin.String? = null,
 
     /* Currency for payment. */
     @SerializedName("currency")
@@ -166,7 +166,7 @@ data class GetOrderListResponseDataOrderLineItem (
 
     /* Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM` */
     @SerializedName("cancel_user")
-    val cancelUser: GetOrderListResponseDataOrderLineItem.CancelUser? = null,
+    val cancelUser: kotlin.String? = null,
 
     /* The shipping provider ID of the item. */
     @SerializedName("shipping_provider_id")
@@ -267,55 +267,6 @@ data class GetOrderListResponseDataOrderLineItem (
 
 ) {
 
-    /**
-     * Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
-     *
-     * Values: UNPAID,AWAITING_SHIPMENT,AWAITING_COLLECTION,IN_TRANSIT,DELIVERED,COMPLETED,CANCELLED
-     */
-    enum class DisplayStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNPAID") UNPAID("UNPAID"),
-        @SerializedName(value = "AWAITING_SHIPMENT") AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-        @SerializedName(value = "AWAITING_COLLECTION") AWAITING_COLLECTION("AWAITING_COLLECTION"),
-        @SerializedName(value = "IN_TRANSIT") IN_TRANSIT("IN_TRANSIT"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]  The order line type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.  **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-     *
-     * Values: NORMAL,ZERO_LOTTERY,SHOP_PARTNER,PRE_ORDER,MADE_TO_ORDER
-     */
-    enum class SkuType(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "ZERO_LOTTERY") ZERO_LOTTERY("ZERO_LOTTERY"),
-        @SerializedName(value = "SHOP_PARTNER") SHOP_PARTNER("SHOP_PARTNER"),
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER");
-    }
-    /**
-     * The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     *
-     * Values: TO_FULFILL,PROCESSING,FULFILLING,COMPLETED,CANCELLED
-     */
-    enum class PackageStatus(val value: kotlin.String) {
-        @SerializedName(value = "TO_FULFILL") TO_FULFILL("TO_FULFILL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "FULFILLING") FULFILLING("FULFILLING"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
-     *
-     * Values: BUYER,SELLER,OPERATOR,SYSTEM
-     */
-    enum class CancelUser(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "OPERATOR") OPERATOR("OPERATOR"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

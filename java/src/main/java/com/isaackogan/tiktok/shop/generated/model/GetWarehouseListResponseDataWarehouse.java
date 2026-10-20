@@ -66,204 +66,20 @@ public class GetWarehouseListResponseDataWarehouse {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Indicates whether inventory at the warehouse is available for sale. Possible values: - &#x60;ENABLED&#x60;: All products in stock are available for sale. - &#x60;DISABLED&#x60;: All products in stock are unavailable for sale. - &#x60;RESTRICTED&#x60;: The warehouse is in holiday mode or order limit mode, so all products in stock are unavailable for sale.  The seller can enable holiday mode in Seller Center when the seller cannot fulfill orders from the warehouse. Order limit mode is applied when TikTok Shop limits the order volume that can be fulfilled by the warehouse because of policy violations.
-   */
-  @JsonAdapter(EffectStatusEnum.Adapter.class)
-  public enum EffectStatusEnum {
-    /**
-     * All products in stock are available for sale.
-     */
-    ENABLED("ENABLED"),
-    
-    /**
-     * All products in stock are unavailable for sale.
-     */
-    DISABLED("DISABLED"),
-    
-    /**
-     * The warehouse is in holiday mode or order limit mode, so all products in stock are unavailable for sale.
-     */
-    RESTRICTED("RESTRICTED");
-
-    private String value;
-
-    EffectStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static EffectStatusEnum fromValue(String value) {
-      for (EffectStatusEnum b : EffectStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<EffectStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final EffectStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public EffectStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return EffectStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      EffectStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_EFFECT_STATUS = "effect_status";
   @SerializedName(SERIALIZED_NAME_EFFECT_STATUS)
   @javax.annotation.Nullable
-  private EffectStatusEnum effectStatus;
-
-  /**
-   * Possible values: - SALES_WAREHOUSE: Warehouse for shipping products.   - RETURN_WAREHOUSE: Warehouse for receiving returned products.  You can have the same warehouse for both shipping and receiving returns, but they will have different warehouse IDs with the same address.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * Warehouse for shipping products.
-     */
-    SALES_WAREHOUSE("SALES_WAREHOUSE"),
-    
-    /**
-     * Warehouse for receiving returned products.
-     */
-    RETURN_WAREHOUSE("RETURN_WAREHOUSE");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
+  private String effectStatus;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
-
-  /**
-   * Possible values: - DOMESTIC_WAREHOUSE: The warehouse is in the same country as the target market and the seller. - CB_OVERSEA_WAREHOUSE: For cross-border sellers, a local warehouse in the target market.  - CB_DIRECT_SHIPPING_WAREHOUSE: For cross-border sellers, a warehouse in the seller&#39;s base country, e.g., Mainland China or Hong Kong.
-   */
-  @JsonAdapter(SubTypeEnum.Adapter.class)
-  public enum SubTypeEnum {
-    /**
-     * The warehouse is in the same country as the target market and the seller.
-     */
-    DOMESTIC_WAREHOUSE("DOMESTIC_WAREHOUSE"),
-    
-    /**
-     * For cross-border sellers, a local warehouse in the target market.
-     */
-    CB_OVERSEA_WAREHOUSE("CB_OVERSEA_WAREHOUSE"),
-    
-    /**
-     * For cross-border sellers, a warehouse in the seller&#39;s base country, e.g., Mainland China or Hong Kong.
-     */
-    CB_DIRECT_SHIPPING_WAREHOUSE("CB_DIRECT_SHIPPING_WAREHOUSE");
-
-    private String value;
-
-    SubTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SubTypeEnum fromValue(String value) {
-      for (SubTypeEnum b : SubTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SubTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SubTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SubTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SubTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SubTypeEnum.fromValue(value);
-    }
-  }
+  private String type;
 
   public static final String SERIALIZED_NAME_SUB_TYPE = "sub_type";
   @SerializedName(SERIALIZED_NAME_SUB_TYPE)
   @javax.annotation.Nullable
-  private SubTypeEnum subType;
+  private String subType;
 
   public static final String SERIALIZED_NAME_IS_DEFAULT = "is_default";
   @SerializedName(SERIALIZED_NAME_IS_DEFAULT)
@@ -335,7 +151,7 @@ public class GetWarehouseListResponseDataWarehouse {
   }
 
 
-  public GetWarehouseListResponseDataWarehouse effectStatus(@javax.annotation.Nullable EffectStatusEnum effectStatus) {
+  public GetWarehouseListResponseDataWarehouse effectStatus(@javax.annotation.Nullable String effectStatus) {
     this.effectStatus = effectStatus;
     return this;
   }
@@ -345,16 +161,16 @@ public class GetWarehouseListResponseDataWarehouse {
    * @return effectStatus
    */
   @javax.annotation.Nullable
-  public EffectStatusEnum getEffectStatus() {
+  public String getEffectStatus() {
     return effectStatus;
   }
 
-  public void setEffectStatus(@javax.annotation.Nullable EffectStatusEnum effectStatus) {
+  public void setEffectStatus(@javax.annotation.Nullable String effectStatus) {
     this.effectStatus = effectStatus;
   }
 
 
-  public GetWarehouseListResponseDataWarehouse type(@javax.annotation.Nullable TypeEnum type) {
+  public GetWarehouseListResponseDataWarehouse type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -364,16 +180,16 @@ public class GetWarehouseListResponseDataWarehouse {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
 
-  public GetWarehouseListResponseDataWarehouse subType(@javax.annotation.Nullable SubTypeEnum subType) {
+  public GetWarehouseListResponseDataWarehouse subType(@javax.annotation.Nullable String subType) {
     this.subType = subType;
     return this;
   }
@@ -383,11 +199,11 @@ public class GetWarehouseListResponseDataWarehouse {
    * @return subType
    */
   @javax.annotation.Nullable
-  public SubTypeEnum getSubType() {
+  public String getSubType() {
     return subType;
   }
 
-  public void setSubType(@javax.annotation.Nullable SubTypeEnum subType) {
+  public void setSubType(@javax.annotation.Nullable String subType) {
     this.subType = subType;
   }
 
@@ -562,23 +378,11 @@ public class GetWarehouseListResponseDataWarehouse {
       if ((jsonObj.get("effect_status") != null && !jsonObj.get("effect_status").isJsonNull()) && !jsonObj.get("effect_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `effect_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("effect_status").toString()));
       }
-      // validate the optional field `effect_status`
-      if (jsonObj.get("effect_status") != null && !jsonObj.get("effect_status").isJsonNull()) {
-        EffectStatusEnum.validateJsonElement(jsonObj.get("effect_status"));
-      }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
-      }
       if ((jsonObj.get("sub_type") != null && !jsonObj.get("sub_type").isJsonNull()) && !jsonObj.get("sub_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sub_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sub_type").toString()));
-      }
-      // validate the optional field `sub_type`
-      if (jsonObj.get("sub_type") != null && !jsonObj.get("sub_type").isJsonNull()) {
-        SubTypeEnum.validateJsonElement(jsonObj.get("sub_type"));
       }
       // validate the optional field `address`
       if (jsonObj.get("address") != null && !jsonObj.get("address").isJsonNull()) {

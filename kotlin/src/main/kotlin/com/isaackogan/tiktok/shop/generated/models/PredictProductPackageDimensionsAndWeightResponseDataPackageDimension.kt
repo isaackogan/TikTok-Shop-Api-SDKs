@@ -48,7 +48,7 @@ data class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension 
 
     /* Unit of the predicted package dimensions. Possible values: - `CENTIMETER` - `INCH` - `FOOT` - `MILLIMETER` - `METER` */
     @SerializedName("unit")
-    val unit: PredictProductPackageDimensionsAndWeightResponseDataPackageDimension.Unit,
+    val unit: kotlin.String,
 
     /* Predicted positive package width. */
     @SerializedName("width")
@@ -56,18 +56,6 @@ data class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension 
 
 ) {
 
-    /**
-     * Unit of the predicted package dimensions. Possible values: - `CENTIMETER` - `INCH` - `FOOT` - `MILLIMETER` - `METER`
-     *
-     * Values: CENTIMETER,INCH,FOOT,MILLIMETER,METER
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "CENTIMETER") CENTIMETER("CENTIMETER"),
-        @SerializedName(value = "INCH") INCH("INCH"),
-        @SerializedName(value = "FOOT") FOOT("FOOT"),
-        @SerializedName(value = "MILLIMETER") MILLIMETER("MILLIMETER"),
-        @SerializedName(value = "METER") METER("METER");
-    }
 
 }
 

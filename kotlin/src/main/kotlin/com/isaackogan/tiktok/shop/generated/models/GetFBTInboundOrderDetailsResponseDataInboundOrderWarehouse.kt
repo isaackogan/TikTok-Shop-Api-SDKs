@@ -52,19 +52,10 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse (
 
     /* Type of warehouse associated with the inbound order.  Possible values: * `HUB` * `FC` (Fulfillment Center) */
     @SerializedName("type")
-    val type: GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * Type of warehouse associated with the inbound order.  Possible values: * `HUB` * `FC` (Fulfillment Center)
-     *
-     * Values: HUB,FC
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "HUB") HUB("HUB"),
-        @SerializedName(value = "FC") FC("FC");
-    }
 
 }
 

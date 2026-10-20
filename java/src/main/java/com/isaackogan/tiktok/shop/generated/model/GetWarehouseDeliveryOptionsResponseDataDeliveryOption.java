@@ -64,74 +64,10 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Delivery option type. Possible values: - STANDARD - EXPRESS - ECONOMY - SEND_BY_SELLER - INSTANT - SAMEDAY - NEXTDAY - CARGO
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    STANDARD("STANDARD"),
-    
-    EXPRESS("EXPRESS"),
-    
-    ECONOMY("ECONOMY"),
-    
-    SEND_BY_SELLER("SEND_BY_SELLER"),
-    
-    INSTANT("INSTANT"),
-    
-    SAMEDAY("SAMEDAY"),
-    
-    NEXTDAY("NEXTDAY"),
-    
-    CARGO("CARGO");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
@@ -148,62 +84,10 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
   @javax.annotation.Nullable
   private GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit weightLimit;
 
-  /**
-   * Gets or Sets platform
-   */
-  @JsonAdapter(PlatformEnum.Adapter.class)
-  public enum PlatformEnum {
-    TIKTOK_SHOP("TIKTOK_SHOP"),
-    
-    TOKOPEDIA("TOKOPEDIA");
-
-    private String value;
-
-    PlatformEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PlatformEnum fromValue(String value) {
-      for (PlatformEnum b : PlatformEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PlatformEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PlatformEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PlatformEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PlatformEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PlatformEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PLATFORM = "platform";
   @SerializedName(SERIALIZED_NAME_PLATFORM)
   @javax.annotation.Nullable
-  private List<PlatformEnum> platform = new ArrayList<>();
+  private List<String> platform = new ArrayList<>();
 
   public GetWarehouseDeliveryOptionsResponseDataDeliveryOption() {
   }
@@ -246,7 +130,7 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
   }
 
 
-  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption type(@javax.annotation.Nullable TypeEnum type) {
+  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -256,11 +140,11 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -322,12 +206,12 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
   }
 
 
-  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption platform(@javax.annotation.Nullable List<PlatformEnum> platform) {
+  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption platform(@javax.annotation.Nullable List<String> platform) {
     this.platform = platform;
     return this;
   }
 
-  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption addPlatformItem(PlatformEnum platformItem) {
+  public GetWarehouseDeliveryOptionsResponseDataDeliveryOption addPlatformItem(String platformItem) {
     if (this.platform == null) {
       this.platform = new ArrayList<>();
     }
@@ -340,11 +224,11 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
    * @return platform
    */
   @javax.annotation.Nullable
-  public List<PlatformEnum> getPlatform() {
+  public List<String> getPlatform() {
     return platform;
   }
 
-  public void setPlatform(@javax.annotation.Nullable List<PlatformEnum> platform) {
+  public void setPlatform(@javax.annotation.Nullable List<String> platform) {
     this.platform = platform;
   }
 
@@ -475,10 +359,6 @@ public class GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));

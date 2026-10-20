@@ -39,10 +39,10 @@ export interface PredictProductPackageDimensionsAndWeightResponseDataPackageDime
      * - `FOOT`
      * - `MILLIMETER`
      * - `METER`
-     * @type {PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum}
+     * @type {string}
      * @memberof PredictProductPackageDimensionsAndWeightResponseDataPackageDimension
      */
-    unit: PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum;
+    unit: string;
     /**
      * Predicted positive package width.
      * @type {number}
@@ -50,20 +50,6 @@ export interface PredictProductPackageDimensionsAndWeightResponseDataPackageDime
      */
     width: number;
 }
-
-
-/**
- * @export
- */
-export const PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum = {
-    Centimeter: 'CENTIMETER',
-    Inch: 'INCH',
-    Foot: 'FOOT',
-    Millimeter: 'MILLIMETER',
-    Meter: 'METER'
-} as const;
-export type PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum = typeof PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum[keyof typeof PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnitEnum];
-
 
 /**
  * Check if a given object implements the PredictProductPackageDimensionsAndWeightResponseDataPackageDimension interface.

@@ -189,42 +189,11 @@ export interface ListOpportunitiesResponseDataDataOpportunity {
      * - `20`: ALLEGRO
      * - `21`: BOL
      * - `22`: DTC
-     * @type {ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum}
+     * @type {string}
      * @memberof ListOpportunitiesResponseDataDataOpportunity
      */
-    referenceSource?: ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum;
+    referenceSource?: string;
 }
-
-
-/**
- * @export
- */
-export const ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum = {
-    _1: '1',
-    _2: '2',
-    _3: '3',
-    _4: '4',
-    _5: '5',
-    _6: '6',
-    _7: '7',
-    _8: '8',
-    _9: '9',
-    _10: '10',
-    _11: '11',
-    _12: '12',
-    _13: '13',
-    _14: '14',
-    _15: '15',
-    _16: '16',
-    _17: '17',
-    _18: '18',
-    _19: '19',
-    _20: '20',
-    _21: '21',
-    _22: '22'
-} as const;
-export type ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum = typeof ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum[keyof typeof ListOpportunitiesResponseDataDataOpportunityReferenceSourceEnum];
-
 
 /**
  * Check if a given object implements the ListOpportunitiesResponseDataDataOpportunity interface.

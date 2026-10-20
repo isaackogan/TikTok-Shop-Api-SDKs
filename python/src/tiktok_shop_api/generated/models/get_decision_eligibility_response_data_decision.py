@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_decision_eligibility_response_data_decision_decision import (
-    GetDecisionEligibilityResponseDataDecisionDecision,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,8 +19,7 @@ T = TypeVar("T", bound="GetDecisionEligibilityResponseDataDecision")
 class GetDecisionEligibilityResponseDataDecision:
     """
     Attributes:
-        decision (GetDecisionEligibilityResponseDataDecisionDecision | Unset): One eligibility result for one evaluated
-            seller decision. Possible Values:
+        decision (str | Unset): One eligibility result for one evaluated seller decision. Possible Values:
             - `APPROVE_REQUEST_CANCEL`
             - `APPROVE_REFUND`
             - `APPROVE_RETURN`
@@ -47,7 +43,7 @@ class GetDecisionEligibilityResponseDataDecision:
             reject decision. Each reason includes a name and localized display text.
     """
 
-    decision: GetDecisionEligibilityResponseDataDecisionDecision | Unset = UNSET
+    decision: str | Unset = UNSET
     eligible: bool | Unset = UNSET
     ineligible_code: int | Unset = UNSET
     ineligible_reason: str | Unset = UNSET
@@ -55,9 +51,7 @@ class GetDecisionEligibilityResponseDataDecision:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        decision: str | Unset = UNSET
-        if not isinstance(self.decision, Unset):
-            decision = self.decision.value
+        decision = self.decision
 
         eligible = self.eligible
 
@@ -93,12 +87,7 @@ class GetDecisionEligibilityResponseDataDecision:
         from ..models.available_reject_reason import AvailableRejectReason  # noqa: PLC0415
 
         d = dict(src_dict)
-        _decision = d.pop("decision", UNSET)
-        decision: GetDecisionEligibilityResponseDataDecisionDecision | Unset
-        if isinstance(_decision, Unset):
-            decision = UNSET
-        else:
-            decision = GetDecisionEligibilityResponseDataDecisionDecision(_decision)
+        decision = d.pop("decision", UNSET)
 
         eligible = d.pop("eligible", UNSET)
 

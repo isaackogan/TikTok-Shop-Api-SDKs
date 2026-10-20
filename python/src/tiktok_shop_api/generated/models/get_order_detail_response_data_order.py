@@ -6,23 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_order_detail_response_data_order_cancellation_initiator import (
-    GetOrderDetailResponseDataOrderCancellationInitiator,
-)
-from ..models.get_order_detail_response_data_order_commerce_platform import (
-    GetOrderDetailResponseDataOrderCommercePlatform,
-)
-from ..models.get_order_detail_response_data_order_fast_delivery_program import (
-    GetOrderDetailResponseDataOrderFastDeliveryProgram,
-)
-from ..models.get_order_detail_response_data_order_fulfillment_type import (
-    GetOrderDetailResponseDataOrderFulfillmentType,
-)
-from ..models.get_order_detail_response_data_order_order_type import GetOrderDetailResponseDataOrderOrderType
-from ..models.get_order_detail_response_data_order_payment_card_type import (
-    GetOrderDetailResponseDataOrderPaymentCardType,
-)
-from ..models.get_order_detail_response_data_order_status import GetOrderDetailResponseDataOrderStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -43,8 +26,7 @@ class GetOrderDetailResponseDataOrder:
     """
     Attributes:
         id (str | Unset): A unique identifier for a TikTok Shop order.
-        cancellation_initiator (GetOrderDetailResponseDataOrderCancellationInitiator | Unset): The initiator of a
-            cancellation request.
+        cancellation_initiator (str | Unset): The initiator of a cancellation request.
             Possible values:
             - `SELLER`
             - `BUYER`
@@ -52,7 +34,7 @@ class GetOrderDetailResponseDataOrder:
         shipping_provider (str | Unset): The name of the current shipping provider.
         shipping_provider_id (str | Unset): The ID of the current shipping provider.
         user_id (str | Unset): The buyer's user ID.
-        status (GetOrderDetailResponseDataOrderStatus | Unset): The order status.
+        status (str | Unset): The order status.
             Possible values:
             - `UNPAID`: The order is placed, but payment is not yet completed.
             - `ON_HOLD`: The order is accepted and is waiting for fulfillment so the buyer may still cancel without the
@@ -78,7 +60,7 @@ class GetOrderDetailResponseDataOrder:
             [See here](https://partner.tiktokshop.com/docv2/page/cancel-reasons) for more details on cancellation reasons.
         rts_sla_time (int | Unset): The latest shipping time specified by the platform. Unix timestamp.
         paid_time (int | Unset): The date and time that the order was paid. Unix timestamp.
-        fulfillment_type (GetOrderDetailResponseDataOrderFulfillmentType | Unset): Fulfillment type.
+        fulfillment_type (str | Unset): Fulfillment type.
             Only orders with fulfillment type can be shipped by sellers.
             Possible values:
             - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without
@@ -115,9 +97,8 @@ class GetOrderDetailResponseDataOrder:
         delivery_sla_time (int | Unset): Order should arrive by this date to be considered on-time and to avoid late
             delivery penalties.
         payment_method_name (str | Unset): Payment method name, only for display
-        payment_card_type (GetOrderDetailResponseDataOrderPaymentCardType | Unset): Code to distinguish different
-            payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit,
-            Prepaid
+        payment_card_type (str | Unset): Code to distinguish different payment method. Only assigned when the payment
+            method is using bank card. Possible values are: Debit, Credit, Prepaid
         channel_entity_national_registry_id (str | Unset): The national channel entity registration ID  of payment
             institution/creditor. In Brazil, it is the CNPJ of payment instituion.
         payment_method_code (str | Unset): Payment method code identifying current transaction. It will contains payment
@@ -168,13 +149,12 @@ class GetOrderDetailResponseDataOrder:
         fast_dispatch_sla_time (int | Unset): The latest collection time to gain incentives of NDD (Next Day Delivery)
             project. Unix timestamp
             Only available in Thailand and Philippines.
-        commerce_platform (GetOrderDetailResponseDataOrderCommercePlatform | Unset): The platform where the order was
-            placed.
+        commerce_platform (str | Unset): The platform where the order was placed.
             Possible values:
             - TIKTOK_SHOP
             - TOKOPEDIA
             **Note**: Available only in the Indonesia market.
-        order_type (GetOrderDetailResponseDataOrderOrderType | Unset): The order type.
+        order_type (str | Unset): The order type.
             Possible values based on region:
             **All regions**
             - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment.
@@ -212,9 +192,8 @@ class GetOrderDetailResponseDataOrder:
         consultation_id (str | Unset): An ID to identify the corresponding ePharmacy consultation.
             Applicable only if an ePharmacy consultation was initiated. Not applicable if the prescription was provided by
             the customer through an image upload.
-        fast_delivery_program (GetOrderDetailResponseDataOrderFastDeliveryProgram | Unset): A badge presented on the
-            merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order
-            should arrive in a promised time period.
+        fast_delivery_program (str | Unset): A badge presented on the merchandise to tell the buyer that the seller
+            participates in the fast delivery program, such that the order should arrive in a promised time period.
             Possible values:
             - `3_DAY_DELIVERY`
             - `3_DAY_POTENTIAL_SHIPPING`
@@ -254,11 +233,11 @@ class GetOrderDetailResponseDataOrder:
     """
 
     id: str | Unset = UNSET
-    cancellation_initiator: GetOrderDetailResponseDataOrderCancellationInitiator | Unset = UNSET
+    cancellation_initiator: str | Unset = UNSET
     shipping_provider: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
     user_id: str | Unset = UNSET
-    status: GetOrderDetailResponseDataOrderStatus | Unset = UNSET
+    status: str | Unset = UNSET
     rts_time: int | Unset = UNSET
     payment: Payment | Unset = UNSET
     recipient_address: GetOrderDetailResponseDataOrderRecipientAddress | Unset = UNSET
@@ -268,7 +247,7 @@ class GetOrderDetailResponseDataOrder:
     cancel_reason: str | Unset = UNSET
     rts_sla_time: int | Unset = UNSET
     paid_time: int | Unset = UNSET
-    fulfillment_type: GetOrderDetailResponseDataOrderFulfillmentType | Unset = UNSET
+    fulfillment_type: str | Unset = UNSET
     seller_note: str | Unset = UNSET
     tts_sla_time: int | Unset = UNSET
     cancel_order_sla_time: int | Unset = UNSET
@@ -283,7 +262,7 @@ class GetOrderDetailResponseDataOrder:
     delivery_option_id: str | Unset = UNSET
     delivery_sla_time: int | Unset = UNSET
     payment_method_name: str | Unset = UNSET
-    payment_card_type: GetOrderDetailResponseDataOrderPaymentCardType | Unset = UNSET
+    payment_card_type: str | Unset = UNSET
     channel_entity_national_registry_id: str | Unset = UNSET
     payment_method_code: str | Unset = UNSET
     payment_auth_code: str | Unset = UNSET
@@ -307,8 +286,8 @@ class GetOrderDetailResponseDataOrder:
     collection_due_time: int | Unset = UNSET
     pick_up_cut_off_time: int | Unset = UNSET
     fast_dispatch_sla_time: int | Unset = UNSET
-    commerce_platform: GetOrderDetailResponseDataOrderCommercePlatform | Unset = UNSET
-    order_type: GetOrderDetailResponseDataOrderOrderType | Unset = UNSET
+    commerce_platform: str | Unset = UNSET
+    order_type: str | Unset = UNSET
     release_date: int | Unset = UNSET
     handling_duration: HandlingDuration | Unset = UNSET
     auto_combine_group_id: str | Unset = UNSET
@@ -319,7 +298,7 @@ class GetOrderDetailResponseDataOrder:
     is_refundable_sample: bool | Unset = UNSET
     authentication_required: bool | Unset = UNSET
     consultation_id: str | Unset = UNSET
-    fast_delivery_program: GetOrderDetailResponseDataOrderFastDeliveryProgram | Unset = UNSET
+    fast_delivery_program: str | Unset = UNSET
     buyer_nickname: str | Unset = UNSET
     buyer_avatar: str | Unset = UNSET
     order_rights: list[int] | Unset = UNSET
@@ -333,9 +312,7 @@ class GetOrderDetailResponseDataOrder:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        cancellation_initiator: str | Unset = UNSET
-        if not isinstance(self.cancellation_initiator, Unset):
-            cancellation_initiator = self.cancellation_initiator.value
+        cancellation_initiator = self.cancellation_initiator
 
         shipping_provider = self.shipping_provider
 
@@ -343,9 +320,7 @@ class GetOrderDetailResponseDataOrder:
 
         user_id = self.user_id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         rts_time = self.rts_time
 
@@ -369,9 +344,7 @@ class GetOrderDetailResponseDataOrder:
 
         paid_time = self.paid_time
 
-        fulfillment_type: str | Unset = UNSET
-        if not isinstance(self.fulfillment_type, Unset):
-            fulfillment_type = self.fulfillment_type.value
+        fulfillment_type = self.fulfillment_type
 
         seller_note = self.seller_note
 
@@ -406,9 +379,7 @@ class GetOrderDetailResponseDataOrder:
 
         payment_method_name = self.payment_method_name
 
-        payment_card_type: str | Unset = UNSET
-        if not isinstance(self.payment_card_type, Unset):
-            payment_card_type = self.payment_card_type.value
+        payment_card_type = self.payment_card_type
 
         channel_entity_national_registry_id = self.channel_entity_national_registry_id
 
@@ -461,13 +432,9 @@ class GetOrderDetailResponseDataOrder:
 
         fast_dispatch_sla_time = self.fast_dispatch_sla_time
 
-        commerce_platform: str | Unset = UNSET
-        if not isinstance(self.commerce_platform, Unset):
-            commerce_platform = self.commerce_platform.value
+        commerce_platform = self.commerce_platform
 
-        order_type: str | Unset = UNSET
-        if not isinstance(self.order_type, Unset):
-            order_type = self.order_type.value
+        order_type = self.order_type
 
         release_date = self.release_date
 
@@ -491,9 +458,7 @@ class GetOrderDetailResponseDataOrder:
 
         consultation_id = self.consultation_id
 
-        fast_delivery_program: str | Unset = UNSET
-        if not isinstance(self.fast_delivery_program, Unset):
-            fast_delivery_program = self.fast_delivery_program.value
+        fast_delivery_program = self.fast_delivery_program
 
         buyer_nickname = self.buyer_nickname
 
@@ -686,12 +651,7 @@ class GetOrderDetailResponseDataOrder:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _cancellation_initiator = d.pop("cancellation_initiator", UNSET)
-        cancellation_initiator: GetOrderDetailResponseDataOrderCancellationInitiator | Unset
-        if isinstance(_cancellation_initiator, Unset):
-            cancellation_initiator = UNSET
-        else:
-            cancellation_initiator = GetOrderDetailResponseDataOrderCancellationInitiator(_cancellation_initiator)
+        cancellation_initiator = d.pop("cancellation_initiator", UNSET)
 
         shipping_provider = d.pop("shipping_provider", UNSET)
 
@@ -699,12 +659,7 @@ class GetOrderDetailResponseDataOrder:
 
         user_id = d.pop("user_id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetOrderDetailResponseDataOrderStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetOrderDetailResponseDataOrderStatus(_status)
+        status = d.pop("status", UNSET)
 
         rts_time = d.pop("rts_time", UNSET)
 
@@ -734,12 +689,7 @@ class GetOrderDetailResponseDataOrder:
 
         paid_time = d.pop("paid_time", UNSET)
 
-        _fulfillment_type = d.pop("fulfillment_type", UNSET)
-        fulfillment_type: GetOrderDetailResponseDataOrderFulfillmentType | Unset
-        if isinstance(_fulfillment_type, Unset):
-            fulfillment_type = UNSET
-        else:
-            fulfillment_type = GetOrderDetailResponseDataOrderFulfillmentType(_fulfillment_type)
+        fulfillment_type = d.pop("fulfillment_type", UNSET)
 
         seller_note = d.pop("seller_note", UNSET)
 
@@ -776,12 +726,7 @@ class GetOrderDetailResponseDataOrder:
 
         payment_method_name = d.pop("payment_method_name", UNSET)
 
-        _payment_card_type = d.pop("payment_card_type", UNSET)
-        payment_card_type: GetOrderDetailResponseDataOrderPaymentCardType | Unset
-        if isinstance(_payment_card_type, Unset):
-            payment_card_type = UNSET
-        else:
-            payment_card_type = GetOrderDetailResponseDataOrderPaymentCardType(_payment_card_type)
+        payment_card_type = d.pop("payment_card_type", UNSET)
 
         channel_entity_national_registry_id = d.pop("channel_entity_national_registry_id", UNSET)
 
@@ -836,19 +781,9 @@ class GetOrderDetailResponseDataOrder:
 
         fast_dispatch_sla_time = d.pop("fast_dispatch_sla_time", UNSET)
 
-        _commerce_platform = d.pop("commerce_platform", UNSET)
-        commerce_platform: GetOrderDetailResponseDataOrderCommercePlatform | Unset
-        if isinstance(_commerce_platform, Unset):
-            commerce_platform = UNSET
-        else:
-            commerce_platform = GetOrderDetailResponseDataOrderCommercePlatform(_commerce_platform)
+        commerce_platform = d.pop("commerce_platform", UNSET)
 
-        _order_type = d.pop("order_type", UNSET)
-        order_type: GetOrderDetailResponseDataOrderOrderType | Unset
-        if isinstance(_order_type, Unset):
-            order_type = UNSET
-        else:
-            order_type = GetOrderDetailResponseDataOrderOrderType(_order_type)
+        order_type = d.pop("order_type", UNSET)
 
         release_date = d.pop("release_date", UNSET)
 
@@ -875,12 +810,7 @@ class GetOrderDetailResponseDataOrder:
 
         consultation_id = d.pop("consultation_id", UNSET)
 
-        _fast_delivery_program = d.pop("fast_delivery_program", UNSET)
-        fast_delivery_program: GetOrderDetailResponseDataOrderFastDeliveryProgram | Unset
-        if isinstance(_fast_delivery_program, Unset):
-            fast_delivery_program = UNSET
-        else:
-            fast_delivery_program = GetOrderDetailResponseDataOrderFastDeliveryProgram(_fast_delivery_program)
+        fast_delivery_program = d.pop("fast_delivery_program", UNSET)
 
         buyer_nickname = d.pop("buyer_nickname", UNSET)
 

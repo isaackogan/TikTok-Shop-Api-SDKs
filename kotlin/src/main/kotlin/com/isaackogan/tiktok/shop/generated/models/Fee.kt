@@ -39,7 +39,7 @@ data class Fee (
 
     /* The type of fee. Possible values: PFAND */
     @SerializedName("type")
-    val type: Fee.Type? = null,
+    val type: kotlin.String? = null,
 
     /* The fee amount. Valid range: - PFAND: [0.00 - 6300.00] */
     @SerializedName("amount")
@@ -47,28 +47,10 @@ data class Fee (
 
     /* An optional attribute that provides additional context for the fee. The accepted values may vary by fee type and market.  Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE */
     @SerializedName("additional_attribute")
-    val additionalAttribute: Fee.AdditionalAttribute? = null
+    val additionalAttribute: kotlin.String? = null
 
 ) {
 
-    /**
-     * The type of fee. Possible values: PFAND
-     *
-     * Values: PFAND
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PFAND") PFAND("PFAND");
-    }
-    /**
-     * An optional attribute that provides additional context for the fee. The accepted values may vary by fee type and market.  Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE
-     *
-     * Values: SINGLE_USE,REUSABLE,NOT_APPLICABLE
-     */
-    enum class AdditionalAttribute(val value: kotlin.String) {
-        @SerializedName(value = "SINGLE_USE") SINGLE_USE("SINGLE_USE"),
-        @SerializedName(value = "REUSABLE") REUSABLE("REUSABLE"),
-        @SerializedName(value = "NOT_APPLICABLE") NOT_APPLICABLE("NOT_APPLICABLE");
-    }
 
 }
 

@@ -50,63 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class ItemTax {
-  /**
-   * Tax type. Available values: - &#x60;SALES_TAX&#x60; (US market sales tax)  **Note**: Currently only sales tax is available.
-   */
-  @JsonAdapter(TaxTypeEnum.Adapter.class)
-  public enum TaxTypeEnum {
-    /**
-     * US market sales tax
-     */
-    SALES_TAX("SALES_TAX");
-
-    private String value;
-
-    TaxTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TaxTypeEnum fromValue(String value) {
-      for (TaxTypeEnum b : TaxTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TaxTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TaxTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TaxTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TaxTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TaxTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TAX_TYPE = "tax_type";
   @SerializedName(SERIALIZED_NAME_TAX_TYPE)
   @javax.annotation.Nullable
-  private TaxTypeEnum taxType;
+  private String taxType;
 
   public static final String SERIALIZED_NAME_TAX_AMOUNT = "tax_amount";
   @SerializedName(SERIALIZED_NAME_TAX_AMOUNT)
@@ -121,7 +68,7 @@ public class ItemTax {
   public ItemTax() {
   }
 
-  public ItemTax taxType(@javax.annotation.Nullable TaxTypeEnum taxType) {
+  public ItemTax taxType(@javax.annotation.Nullable String taxType) {
     this.taxType = taxType;
     return this;
   }
@@ -131,11 +78,11 @@ public class ItemTax {
    * @return taxType
    */
   @javax.annotation.Nullable
-  public TaxTypeEnum getTaxType() {
+  public String getTaxType() {
     return taxType;
   }
 
-  public void setTaxType(@javax.annotation.Nullable TaxTypeEnum taxType) {
+  public void setTaxType(@javax.annotation.Nullable String taxType) {
     this.taxType = taxType;
   }
 
@@ -290,10 +237,6 @@ public class ItemTax {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("tax_type") != null && !jsonObj.get("tax_type").isJsonNull()) && !jsonObj.get("tax_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tax_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_type").toString()));
-      }
-      // validate the optional field `tax_type`
-      if (jsonObj.get("tax_type") != null && !jsonObj.get("tax_type").isJsonNull()) {
-        TaxTypeEnum.validateJsonElement(jsonObj.get("tax_type"));
       }
       if ((jsonObj.get("tax_amount") != null && !jsonObj.get("tax_amount").isJsonNull()) && !jsonObj.get("tax_amount").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `tax_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("tax_amount").toString()));

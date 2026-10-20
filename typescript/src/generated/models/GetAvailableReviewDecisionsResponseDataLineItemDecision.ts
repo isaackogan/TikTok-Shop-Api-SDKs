@@ -52,10 +52,10 @@ export interface GetAvailableReviewDecisionsResponseDataLineItemDecision {
      * - `ISSUE_EXCHANGE_REFUND`
      * - `OFFER_PARTIAL_REFUND`
      * - `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`
-     * @type {GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum}
+     * @type {string}
      * @memberof GetAvailableReviewDecisionsResponseDataLineItemDecision
      */
-    decision?: GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum;
+    decision?: string;
     /**
      * Whether this decision is currently eligible for the line item. When `false`, `ineligible_code` and `ineligible_reason` explain why the decision is ineligible; these fields are omitted when `true`.
      * @type {boolean}
@@ -87,30 +87,6 @@ export interface GetAvailableReviewDecisionsResponseDataLineItemDecision {
      */
     partialRefundAmountRange?: GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange;
 }
-
-
-/**
- * @export
- */
-export const GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum = {
-    ApproveRequestCancel: 'APPROVE_REQUEST_CANCEL',
-    ApproveRefund: 'APPROVE_REFUND',
-    ApproveReturn: 'APPROVE_RETURN',
-    ApproveReceivedPackage: 'APPROVE_RECEIVED_PACKAGE',
-    ApproveReplacement: 'APPROVE_REPLACEMENT',
-    IssueReplacementRefund: 'ISSUE_REPLACEMENT_REFUND',
-    DirectRefund: 'DIRECT_REFUND',
-    RejectRequestCancel: 'REJECT_REQUEST_CANCEL',
-    RejectRefund: 'REJECT_REFUND',
-    RejectReturn: 'REJECT_RETURN',
-    RejectReceivedPackage: 'REJECT_RECEIVED_PACKAGE',
-    RejectReplacement: 'REJECT_REPLACEMENT',
-    IssueExchangeRefund: 'ISSUE_EXCHANGE_REFUND',
-    OfferPartialRefund: 'OFFER_PARTIAL_REFUND',
-    OfferPartialRefundAfterReceivingPkg: 'OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG'
-} as const;
-export type GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum = typeof GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum[keyof typeof GetAvailableReviewDecisionsResponseDataLineItemDecisionDecisionEnum];
-
 
 /**
  * Check if a given object implements the GetAvailableReviewDecisionsResponseDataLineItemDecision interface.

@@ -41,7 +41,7 @@ data class Diagnosis (
 
     /* The product field being diagnosed. Possible values: - TITLE: Product title - DESCRIPTION: Product description - IMAGE: Product image displayed in the image gallery - ATTRIBUTE: Product attribute - SIZE_CHART: Product size chart */
     @SerializedName("field")
-    val `field`: Diagnosis.`Field`? = null,
+    val `field`: kotlin.String? = null,
 
     /* The results of diagnosing the specified field. */
     @SerializedName("diagnosis_results")
@@ -53,18 +53,6 @@ data class Diagnosis (
 
 ) {
 
-    /**
-     * The product field being diagnosed. Possible values: - TITLE: Product title - DESCRIPTION: Product description - IMAGE: Product image displayed in the image gallery - ATTRIBUTE: Product attribute - SIZE_CHART: Product size chart
-     *
-     * Values: TITLE,DESCRIPTION,IMAGE,ATTRIBUTE,SIZE_CHART
-     */
-    enum class `Field`(val value: kotlin.String) {
-        @SerializedName(value = "TITLE") TITLE("TITLE"),
-        @SerializedName(value = "DESCRIPTION") DESCRIPTION("DESCRIPTION"),
-        @SerializedName(value = "IMAGE") IMAGE("IMAGE"),
-        @SerializedName(value = "ATTRIBUTE") ATTRIBUTE("ATTRIBUTE"),
-        @SerializedName(value = "SIZE_CHART") SIZE_CHART("SIZE_CHART");
-    }
 
 }
 

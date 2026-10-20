@@ -96,73 +96,10 @@ public class GetCategoryRulesResponseData {
   @javax.annotation.Nullable
   private GetCategoryRulesResponseDataManufacturer manufacturer;
 
-  /**
-   * Gets or Sets allowedSpecialProductTypes
-   */
-  @JsonAdapter(AllowedSpecialProductTypesEnum.Adapter.class)
-  public enum AllowedSpecialProductTypesEnum {
-    /**
-     * The product is not yet available or released. Fulfillment can be extended by specifying a release date.
-     */
-    PRE_ORDER("PRE_ORDER"),
-    
-    /**
-     * The product is produced only after the order is received. Fulfillment can be extended by specifying a duration.
-     */
-    MADE_TO_ORDER("MADE_TO_ORDER"),
-    
-    /**
-     * The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.
-     */
-    CUSTOM("CUSTOM");
-
-    private String value;
-
-    AllowedSpecialProductTypesEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AllowedSpecialProductTypesEnum fromValue(String value) {
-      for (AllowedSpecialProductTypesEnum b : AllowedSpecialProductTypesEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AllowedSpecialProductTypesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AllowedSpecialProductTypesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AllowedSpecialProductTypesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AllowedSpecialProductTypesEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AllowedSpecialProductTypesEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ALLOWED_SPECIAL_PRODUCT_TYPES = "allowed_special_product_types";
   @SerializedName(SERIALIZED_NAME_ALLOWED_SPECIAL_PRODUCT_TYPES)
   @javax.annotation.Nullable
-  private List<AllowedSpecialProductTypesEnum> allowedSpecialProductTypes = new ArrayList<>();
+  private List<String> allowedSpecialProductTypes = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_FEES = "fees";
   @SerializedName(SERIALIZED_NAME_FEES)
@@ -318,12 +255,12 @@ public class GetCategoryRulesResponseData {
   }
 
 
-  public GetCategoryRulesResponseData allowedSpecialProductTypes(@javax.annotation.Nullable List<AllowedSpecialProductTypesEnum> allowedSpecialProductTypes) {
+  public GetCategoryRulesResponseData allowedSpecialProductTypes(@javax.annotation.Nullable List<String> allowedSpecialProductTypes) {
     this.allowedSpecialProductTypes = allowedSpecialProductTypes;
     return this;
   }
 
-  public GetCategoryRulesResponseData addAllowedSpecialProductTypesItem(AllowedSpecialProductTypesEnum allowedSpecialProductTypesItem) {
+  public GetCategoryRulesResponseData addAllowedSpecialProductTypesItem(String allowedSpecialProductTypesItem) {
     if (this.allowedSpecialProductTypes == null) {
       this.allowedSpecialProductTypes = new ArrayList<>();
     }
@@ -336,11 +273,11 @@ public class GetCategoryRulesResponseData {
    * @return allowedSpecialProductTypes
    */
   @javax.annotation.Nullable
-  public List<AllowedSpecialProductTypesEnum> getAllowedSpecialProductTypes() {
+  public List<String> getAllowedSpecialProductTypes() {
     return allowedSpecialProductTypes;
   }
 
-  public void setAllowedSpecialProductTypes(@javax.annotation.Nullable List<AllowedSpecialProductTypesEnum> allowedSpecialProductTypes) {
+  public void setAllowedSpecialProductTypes(@javax.annotation.Nullable List<String> allowedSpecialProductTypes) {
     this.allowedSpecialProductTypes = allowedSpecialProductTypes;
   }
 

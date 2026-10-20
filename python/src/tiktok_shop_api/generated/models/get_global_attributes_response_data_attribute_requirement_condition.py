@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_attributes_response_data_attribute_requirement_condition_condition_type import (
-    GetGlobalAttributesResponseDataAttributeRequirementConditionConditionType,
-)
-from ..models.get_global_attributes_response_data_attribute_requirement_condition_region import (
-    GetGlobalAttributesResponseDataAttributeRequirementConditionRegion,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetGlobalAttributesResponseDataAttributeRequirementCondition")
@@ -21,8 +15,7 @@ T = TypeVar("T", bound="GetGlobalAttributesResponseDataAttributeRequirementCondi
 class GetGlobalAttributesResponseDataAttributeRequirementCondition:
     """
     Attributes:
-        region (GetGlobalAttributesResponseDataAttributeRequirementConditionRegion | Unset): The market where the
-            attribute is required when the conditions are met.
+        region (str | Unset): The market where the attribute is required when the conditions are met.
             Possible values:
             - AT: Austria
             - BE: Belgium
@@ -47,8 +40,7 @@ class GetGlobalAttributesResponseDataAttributeRequirementCondition:
             - US: United States
             - VN: Vietnam
             - MX: Mexico
-        condition_type (GetGlobalAttributesResponseDataAttributeRequirementConditionConditionType | Unset): The type of
-            condition.
+        condition_type (str | Unset): The type of condition.
             Possible values:
             - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in
             this condition.
@@ -57,20 +49,16 @@ class GetGlobalAttributesResponseDataAttributeRequirementCondition:
             the condition to be true.
     """
 
-    region: GetGlobalAttributesResponseDataAttributeRequirementConditionRegion | Unset = UNSET
-    condition_type: GetGlobalAttributesResponseDataAttributeRequirementConditionConditionType | Unset = UNSET
+    region: str | Unset = UNSET
+    condition_type: str | Unset = UNSET
     attribute_id: str | Unset = UNSET
     attribute_value_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        region: str | Unset = UNSET
-        if not isinstance(self.region, Unset):
-            region = self.region.value
+        region = self.region
 
-        condition_type: str | Unset = UNSET
-        if not isinstance(self.condition_type, Unset):
-            condition_type = self.condition_type.value
+        condition_type = self.condition_type
 
         attribute_id = self.attribute_id
 
@@ -93,19 +81,9 @@ class GetGlobalAttributesResponseDataAttributeRequirementCondition:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _region = d.pop("region", UNSET)
-        region: GetGlobalAttributesResponseDataAttributeRequirementConditionRegion | Unset
-        if isinstance(_region, Unset):
-            region = UNSET
-        else:
-            region = GetGlobalAttributesResponseDataAttributeRequirementConditionRegion(_region)
+        region = d.pop("region", UNSET)
 
-        _condition_type = d.pop("condition_type", UNSET)
-        condition_type: GetGlobalAttributesResponseDataAttributeRequirementConditionConditionType | Unset
-        if isinstance(_condition_type, Unset):
-            condition_type = UNSET
-        else:
-            condition_type = GetGlobalAttributesResponseDataAttributeRequirementConditionConditionType(_condition_type)
+        condition_type = d.pop("condition_type", UNSET)
 
         attribute_id = d.pop("attribute_id", UNSET)
 

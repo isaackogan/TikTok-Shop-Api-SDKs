@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.cur_session_phase import CurSessionPhase
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CurSession")
@@ -17,7 +16,7 @@ class CurSession:
     """
     Attributes:
         id (str | Unset): Current session id.
-        phase (CurSessionPhase | Unset): Current phase of the session.
+        phase (str | Unset): Current phase of the session.
             Possible enumerations:
             - `AUTO_REPLY` — The session is being handled by automatic replies or chatbot responses.
             - `QUEUED` — The session is waiting to be assigned to an agent.
@@ -25,15 +24,13 @@ class CurSession:
     """
 
     id: str | Unset = UNSET
-    phase: CurSessionPhase | Unset = UNSET
+    phase: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        phase: str | Unset = UNSET
-        if not isinstance(self.phase, Unset):
-            phase = self.phase.value
+        phase = self.phase
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,12 +47,7 @@ class CurSession:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _phase = d.pop("phase", UNSET)
-        phase: CurSessionPhase | Unset
-        if isinstance(_phase, Unset):
-            phase = UNSET
-        else:
-            phase = CurSessionPhase(_phase)
+        phase = d.pop("phase", UNSET)
 
         cur_session = cls(
             id=id,

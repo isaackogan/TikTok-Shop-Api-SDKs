@@ -52,27 +52,10 @@ data class UploadProductFileResponseData (
 
     /* The format of the file. Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG */
     @SerializedName("format")
-    val format: UploadProductFileResponseData.Format? = null
+    val format: kotlin.String? = null
 
 ) {
 
-    /**
-     * The format of the file. Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG
-     *
-     * Values: PDF,MP4,MOV,MKV,WMV,WEBM,AVI,_3GP,FLV,MPEG
-     */
-    enum class Format(val value: kotlin.String) {
-        @SerializedName(value = "PDF") PDF("PDF"),
-        @SerializedName(value = "MP4") MP4("MP4"),
-        @SerializedName(value = "MOV") MOV("MOV"),
-        @SerializedName(value = "MKV") MKV("MKV"),
-        @SerializedName(value = "WMV") WMV("WMV"),
-        @SerializedName(value = "WEBM") WEBM("WEBM"),
-        @SerializedName(value = "AVI") AVI("AVI"),
-        @SerializedName(value = "3GP") _3GP("3GP"),
-        @SerializedName(value = "FLV") FLV("FLV"),
-        @SerializedName(value = "MPEG") MPEG("MPEG");
-    }
 
 }
 

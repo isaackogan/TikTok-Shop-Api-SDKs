@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_lot_expiration_info_handling_method import (
-    SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethod,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodLotExpirationInfo")
@@ -35,8 +32,7 @@ class SearchGoodsInfoResponseDataGoodLotExpirationInfo:
             platform send expiration reminder alerts to the merchant.
         sales_cutoff_days (int | Unset): The goods sales cut off days before expired, represent the period of time
             before expiration in which the goods will no longer be available for sale.
-        handling_method (SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethod | Unset): The handling method
-            for expired inventory.
+        handling_method (str | Unset): The handling method for expired inventory.
             Possible values:
             - `STORE_UNITS`: Move the units to defective inventory.
             - `RETURN_TO_SELLER`: Return the units to the seller.
@@ -49,7 +45,7 @@ class SearchGoodsInfoResponseDataGoodLotExpirationInfo:
     inbound_cutoff_days: int | Unset = UNSET
     expiration_alert_days: int | Unset = UNSET
     sales_cutoff_days: int | Unset = UNSET
-    handling_method: SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethod | Unset = UNSET
+    handling_method: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -65,9 +61,7 @@ class SearchGoodsInfoResponseDataGoodLotExpirationInfo:
 
         sales_cutoff_days = self.sales_cutoff_days
 
-        handling_method: str | Unset = UNSET
-        if not isinstance(self.handling_method, Unset):
-            handling_method = self.handling_method.value
+        handling_method = self.handling_method
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -104,12 +98,7 @@ class SearchGoodsInfoResponseDataGoodLotExpirationInfo:
 
         sales_cutoff_days = d.pop("sales_cutoff_days", UNSET)
 
-        _handling_method = d.pop("handling_method", UNSET)
-        handling_method: SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethod | Unset
-        if isinstance(_handling_method, Unset):
-            handling_method = UNSET
-        else:
-            handling_method = SearchGoodsInfoResponseDataGoodLotExpirationInfoHandlingMethod(_handling_method)
+        handling_method = d.pop("handling_method", UNSET)
 
         search_goods_info_response_data_good_lot_expiration_info = cls(
             is_lot_control=is_lot_control,

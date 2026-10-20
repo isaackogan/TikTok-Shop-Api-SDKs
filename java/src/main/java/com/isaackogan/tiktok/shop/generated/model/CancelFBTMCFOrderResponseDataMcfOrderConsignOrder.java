@@ -55,118 +55,10 @@ public class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The current status of this consign order. In a cancellation response, &#x60;CLOSED&#x60; means that the consign order has been canceled.  Possible Status Enumerations 1. **PENDING** - Order is pending warehouse processing 2. **HANDLE_BY_WAREHOUSE** - Order is being processed by the warehouse 3. **SHIPPED** - Order has been shipped out from the warehouse 4. **HANDOVER** - Order has been received by the logistics carrier and is in transit 5. **CLOSED** - Order has been canceled 6. **LOST** - Order is lost 7. **DAMAGE** - Order is damaged 8. **COMPLETED** - Order has been completed 9. **ABNORMAL** - There is an issue related to this order and cannot be fulfilled 10. **RETURNED** - Order has been returned 11. **SCRAP** - Order has been scrapped 12. **UNKNOWN** - Order status is unknown
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * Order is pending warehouse processing
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * Order is being processed by the warehouse
-     */
-    HANDLE_BY_WAREHOUSE("HANDLE_BY_WAREHOUSE"),
-    
-    /**
-     * Order has been shipped out from the warehouse
-     */
-    SHIPPED("SHIPPED"),
-    
-    /**
-     * Order has been received by the logistics carrier and is in transit
-     */
-    HANDOVER("HANDOVER"),
-    
-    /**
-     * Order has been canceled
-     */
-    CLOSED("CLOSED"),
-    
-    /**
-     * Order is lost
-     */
-    LOST("LOST"),
-    
-    /**
-     * Order is damaged
-     */
-    DAMAGE("DAMAGE"),
-    
-    /**
-     * Order has been completed
-     */
-    COMPLETED("COMPLETED"),
-    
-    /**
-     * There is an issue related to this order and cannot be fulfilled
-     */
-    ABNORMAL("ABNORMAL"),
-    
-    /**
-     * Order has been returned
-     */
-    RETURNED("RETURNED"),
-    
-    /**
-     * Order has been scrapped
-     */
-    SCRAP("SCRAP"),
-    
-    /**
-     * Order status is unknown
-     */
-    UNKNOWN("UNKNOWN");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public CancelFBTMCFOrderResponseDataMcfOrderConsignOrder() {
   }
@@ -190,7 +82,7 @@ public class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder {
   }
 
 
-  public CancelFBTMCFOrderResponseDataMcfOrderConsignOrder status(@javax.annotation.Nullable StatusEnum status) {
+  public CancelFBTMCFOrderResponseDataMcfOrderConsignOrder status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -200,11 +92,11 @@ public class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -322,10 +214,6 @@ public class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

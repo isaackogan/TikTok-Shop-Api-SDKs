@@ -67,10 +67,10 @@ export interface GetOrderDetailResponseDataOrder {
      * - `SELLER`
      * - `BUYER`
      * - `SYSTEM`
-     * @type {GetOrderDetailResponseDataOrderCancellationInitiatorEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    cancellationInitiator?: GetOrderDetailResponseDataOrderCancellationInitiatorEnum;
+    cancellationInitiator?: string;
     /**
      * The name of the current shipping provider.
      * @type {string}
@@ -101,10 +101,10 @@ export interface GetOrderDetailResponseDataOrder {
      * - `DELIVERED`: The package is delivered to buyer.
      * - `COMPLETED`: The order is completed, and no further returns or refunds are allowed.
      * - `CANCELLED`: The order is cancelled.
-     * @type {GetOrderDetailResponseDataOrderStatusEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    status?: GetOrderDetailResponseDataOrderStatusEnum;
+    status?: string;
     /**
      * The time seller shipped the order (call Ship Order endpoint successfully).
      * Unix timestamp.
@@ -170,10 +170,10 @@ export interface GetOrderDetailResponseDataOrder {
      * - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the product to customers.
      * - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok that enables sellers to send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.
      * - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
-     * @type {GetOrderDetailResponseDataOrderFulfillmentTypeEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    fulfillmentType?: GetOrderDetailResponseDataOrderFulfillmentTypeEnum;
+    fulfillmentType?: string;
     /**
      * This field return the note, which seller notes in TikTok Seller Center.
      * @type {string}
@@ -270,10 +270,10 @@ export interface GetOrderDetailResponseDataOrder {
     paymentMethodName?: string;
     /**
      * Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
-     * @type {GetOrderDetailResponseDataOrderPaymentCardTypeEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    paymentCardType?: GetOrderDetailResponseDataOrderPaymentCardTypeEnum;
+    paymentCardType?: string;
     /**
      * The national channel entity registration ID  of payment institution/creditor. In Brazil, it is the CNPJ of payment instituion.
      * @type {string}
@@ -428,10 +428,10 @@ export interface GetOrderDetailResponseDataOrder {
      * - TIKTOK_SHOP
      * - TOKOPEDIA
      * **Note**: Available only in the Indonesia market.
-     * @type {GetOrderDetailResponseDataOrderCommercePlatformEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    commercePlatform?: GetOrderDetailResponseDataOrderCommercePlatformEnum;
+    commercePlatform?: string;
     /**
      * The order type.
      * Possible values based on region:
@@ -445,10 +445,10 @@ export interface GetOrderDetailResponseDataOrder {
      * - `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked.
      * - `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.
      * Returns an empty value for standard orders or other types that don't fall into the above categories.
-     * @type {GetOrderDetailResponseDataOrderOrderTypeEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    orderType?: GetOrderDetailResponseDataOrderOrderTypeEnum;
+    orderType?: string;
     /**
      * The date on which order handling starts and the status of the order changes to [`AWAITING_SHIPMENT`](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011).
      * Applicable only if the `order_type` is `PRE_ORDER`.
@@ -524,10 +524,10 @@ export interface GetOrderDetailResponseDataOrder {
      * Not returned if order did not meet fast delivery
      * program requirements.
      * Note: Applicable only for the US market.
-     * @type {GetOrderDetailResponseDataOrderFastDeliveryProgramEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
-    fastDeliveryProgram?: GetOrderDetailResponseDataOrderFastDeliveryProgramEnum;
+    fastDeliveryProgram?: string;
     /**
      * The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
      * @type {string}
@@ -588,87 +588,6 @@ export interface GetOrderDetailResponseDataOrder {
      */
     fastCollectionSlaTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderCancellationInitiatorEnum = {
-    Seller: 'SELLER',
-    Buyer: 'BUYER',
-    System: 'SYSTEM'
-} as const;
-export type GetOrderDetailResponseDataOrderCancellationInitiatorEnum = typeof GetOrderDetailResponseDataOrderCancellationInitiatorEnum[keyof typeof GetOrderDetailResponseDataOrderCancellationInitiatorEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderStatusEnum = {
-    Unpaid: 'UNPAID',
-    OnHold: 'ON_HOLD',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    PartiallyShipping: 'PARTIALLY_SHIPPING',
-    AwaitingCollection: 'AWAITING_COLLECTION',
-    InTransit: 'IN_TRANSIT',
-    Delivered: 'DELIVERED',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type GetOrderDetailResponseDataOrderStatusEnum = typeof GetOrderDetailResponseDataOrderStatusEnum[keyof typeof GetOrderDetailResponseDataOrderStatusEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderFulfillmentTypeEnum = {
-    FulfillmentBySeller: 'FULFILLMENT_BY_SELLER',
-    FulfillmentByTiktok: 'FULFILLMENT_BY_TIKTOK',
-    FulfillmentByDilayaniTokopedia: 'FULFILLMENT_BY_DILAYANI_TOKOPEDIA'
-} as const;
-export type GetOrderDetailResponseDataOrderFulfillmentTypeEnum = typeof GetOrderDetailResponseDataOrderFulfillmentTypeEnum[keyof typeof GetOrderDetailResponseDataOrderFulfillmentTypeEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderPaymentCardTypeEnum = {
-    Debit: 'Debit',
-    Credit: 'Credit',
-    Prepaid: 'Prepaid'
-} as const;
-export type GetOrderDetailResponseDataOrderPaymentCardTypeEnum = typeof GetOrderDetailResponseDataOrderPaymentCardTypeEnum[keyof typeof GetOrderDetailResponseDataOrderPaymentCardTypeEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderCommercePlatformEnum = {
-    TiktokShop: 'TIKTOK_SHOP',
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetOrderDetailResponseDataOrderCommercePlatformEnum = typeof GetOrderDetailResponseDataOrderCommercePlatformEnum[keyof typeof GetOrderDetailResponseDataOrderCommercePlatformEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderOrderTypeEnum = {
-    Normal: 'NORMAL',
-    ZeroLottery: 'ZERO_LOTTERY',
-    Auction: 'AUCTION',
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER',
-    BackOrder: 'BACK_ORDER',
-    VirtualOrder: 'VIRTUAL_ORDER'
-} as const;
-export type GetOrderDetailResponseDataOrderOrderTypeEnum = typeof GetOrderDetailResponseDataOrderOrderTypeEnum[keyof typeof GetOrderDetailResponseDataOrderOrderTypeEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderFastDeliveryProgramEnum = {
-    _3DayDelivery: '3_DAY_DELIVERY',
-    _3DayPotentialShipping: '3_DAY_POTENTIAL_SHIPPING',
-    _3DayPotentialTransit: '3_DAY_POTENTIAL_TRANSIT'
-} as const;
-export type GetOrderDetailResponseDataOrderFastDeliveryProgramEnum = typeof GetOrderDetailResponseDataOrderFastDeliveryProgramEnum[keyof typeof GetOrderDetailResponseDataOrderFastDeliveryProgramEnum];
-
 
 /**
  * Check if a given object implements the GetOrderDetailResponseDataOrder interface.

@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.dimension_unit import DimensionUnit
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Dimension")
@@ -19,7 +18,7 @@ class Dimension:
         length (str | Unset): Package length.
         width (str | Unset): Package width.
         height (str | Unset): Package height.
-        unit (DimensionUnit | Unset): The unit of measurement for the package dimensions.
+        unit (str | Unset): The unit of measurement for the package dimensions.
 
             Available values:
             - `CM`
@@ -29,7 +28,7 @@ class Dimension:
     length: str | Unset = UNSET
     width: str | Unset = UNSET
     height: str | Unset = UNSET
-    unit: DimensionUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,9 +38,7 @@ class Dimension:
 
         height = self.height
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -66,12 +63,7 @@ class Dimension:
 
         height = d.pop("height", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: DimensionUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = DimensionUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         dimension = cls(
             length=length,

@@ -30,19 +30,19 @@ export interface AftersalesRequestStatusUpdateWebhookData {
      *   
      *  * `BUYER` 
      *  * `SELLER`
-     * @type {AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum}
+     * @type {string}
      * @memberof AftersalesRequestStatusUpdateWebhookData
      */
-    returnRole?: AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum;
+    returnRole?: string;
     /**
      * Current aftersales request status. Possible enumerations: 
      *   
      *  * `PENDING_REQUEST_REVIEW` 
      *  * `REQUEST_REVIEW_COMPLETED`
-     * @type {AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum}
+     * @type {string}
      * @memberof AftersalesRequestStatusUpdateWebhookData
      */
-    aftersalesRequestStatus?: AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum;
+    aftersalesRequestStatus?: string;
     /**
      * Creation time of the aftersales request in Unix seconds.
      * @type {number}
@@ -56,26 +56,6 @@ export interface AftersalesRequestStatusUpdateWebhookData {
      */
     aftersalesRequestUpdateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER'
-} as const;
-export type AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum = typeof AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum[keyof typeof AftersalesRequestStatusUpdateWebhookDataReturnRoleEnum];
-
-/**
- * @export
- */
-export const AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum = {
-    PendingRequestReview: 'PENDING_REQUEST_REVIEW',
-    RequestReviewCompleted: 'REQUEST_REVIEW_COMPLETED'
-} as const;
-export type AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum = typeof AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum[keyof typeof AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatusEnum];
-
 
 /**
  * Check if a given object implements the AftersalesRequestStatusUpdateWebhookData interface.

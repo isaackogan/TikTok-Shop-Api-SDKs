@@ -38,7 +38,7 @@ data class SellerNextActionResponse (
 
     /* Seller's next action. Available values: - `SELLER_RESPOND_REFUND` - `SELLER_RESPOND_RETURN` - `SELLER_RESPOND_RECEIVE_PACKAGE` - `SELLER_RESPOND_REPLACEMENT` */
     @SerializedName("action")
-    val action: SellerNextActionResponse.Action? = null,
+    val action: kotlin.String? = null,
 
     /* The deadline for the seller to perform the specified action, as a Unix timestamp in seconds. */
     @SerializedName("deadline")
@@ -46,17 +46,6 @@ data class SellerNextActionResponse (
 
 ) {
 
-    /**
-     * Seller's next action. Available values: - `SELLER_RESPOND_REFUND` - `SELLER_RESPOND_RETURN` - `SELLER_RESPOND_RECEIVE_PACKAGE` - `SELLER_RESPOND_REPLACEMENT`
-     *
-     * Values: SELLER_RESPOND_REFUND,SELLER_RESPOND_RETURN,SELLER_RESPOND_RECEIVE_PACKAGE,SELLER_RESPOND_REPLACEMENT
-     */
-    enum class Action(val value: kotlin.String) {
-        @SerializedName(value = "SELLER_RESPOND_REFUND") SELLER_RESPOND_REFUND("SELLER_RESPOND_REFUND"),
-        @SerializedName(value = "SELLER_RESPOND_RETURN") SELLER_RESPOND_RETURN("SELLER_RESPOND_RETURN"),
-        @SerializedName(value = "SELLER_RESPOND_RECEIVE_PACKAGE") SELLER_RESPOND_RECEIVE_PACKAGE("SELLER_RESPOND_RECEIVE_PACKAGE"),
-        @SerializedName(value = "SELLER_RESPOND_REPLACEMENT") SELLER_RESPOND_REPLACEMENT("SELLER_RESPOND_REPLACEMENT");
-    }
 
 }
 

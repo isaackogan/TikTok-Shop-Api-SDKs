@@ -31,22 +31,11 @@ export interface HandlingDuration {
      * - `CALENDAR_DAY`: Represents consecutive days, including weekends and holidays.
      * - `BUSINESS_DAY`: Represents business days, excluding weekends and public holidays.
      * Default: `BUSINESS_DAY`
-     * @type {HandlingDurationTypeEnum}
+     * @type {string}
      * @memberof HandlingDuration
      */
-    type?: HandlingDurationTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const HandlingDurationTypeEnum = {
-    CalendarDay: 'CALENDAR_DAY',
-    BusinessDay: 'BUSINESS_DAY'
-} as const;
-export type HandlingDurationTypeEnum = typeof HandlingDurationTypeEnum[keyof typeof HandlingDurationTypeEnum];
-
 
 /**
  * Check if a given object implements the HandlingDuration interface.

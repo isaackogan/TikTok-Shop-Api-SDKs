@@ -103,6 +103,13 @@ describe('stub transport', () => {
     checkSigned(s);
   });
 
+  it('keeps a status value the spec does not list (R21)', async () => {
+    reply.body = '{"code":0,"message":"Success","request_id":"r1","data":{"orders":[{"id":"1","status":"SOME_NEW_STATUS"}]}}';
+    const res = await make().orders.getOrderList({ pageSize: 1 });
+    const status: string | undefined = res.data?.orders?.[0]?.status;
+    expect(status).toBe('SOME_NEW_STATUS');
+  });
+
   it('omits the token header when there is no access token', async () => {
     await make({ accessToken: undefined }).authorization.getAuthorizedShops();
     expect(seen[0].headers['x-tts-access-token']).toBeUndefined();

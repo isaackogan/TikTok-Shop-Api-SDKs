@@ -43,30 +43,14 @@ data class SearchProductsResponseDataProductSkuExternalListPrice (
 
     /* The currency. Possible values: USD */
     @SerializedName("currency")
-    val currency: SearchProductsResponseDataProductSkuExternalListPrice.Currency? = null,
+    val currency: kotlin.String? = null,
 
     /* The external ecommerce platform from which the price is sourced. Possible values: - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify. */
     @SerializedName("source")
-    val source: SearchProductsResponseDataProductSkuExternalListPrice.Source? = null
+    val source: kotlin.String? = null
 
 ) {
 
-    /**
-     * The currency. Possible values: USD
-     *
-     * Values: USD
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "USD") USD("USD");
-    }
-    /**
-     * The external ecommerce platform from which the price is sourced. Possible values: - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-     *
-     * Values: SHOPIFY_COMPARE_AT_PRICE
-     */
-    enum class Source(val value: kotlin.String) {
-        @SerializedName(value = "SHOPIFY_COMPARE_AT_PRICE") SHOPIFY_COMPARE_AT_PRICE("SHOPIFY_COMPARE_AT_PRICE");
-    }
 
 }
 

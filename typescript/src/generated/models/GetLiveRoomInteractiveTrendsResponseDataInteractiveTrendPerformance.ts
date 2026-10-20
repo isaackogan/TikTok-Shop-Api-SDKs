@@ -32,10 +32,10 @@ export interface GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerform
      * - `TREND_WATCH_PV`: Watch count for the live room.
      * - `TREND_COMMENT_PV`: Comment count for the live room.
      * - `TREND_SHARE_PV`: Share count for the live room.
-     * @type {GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum}
+     * @type {string}
      * @memberof GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance
      */
-    statsType?: GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum;
+    statsType?: string;
     /**
      * The data point of interactive trend
      * @type {Array<DataPoint>}
@@ -43,18 +43,6 @@ export interface GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerform
      */
     dataPoints?: Array<DataPoint>;
 }
-
-
-/**
- * @export
- */
-export const GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum = {
-    TrendWatchPv: 'TREND_WATCH_PV',
-    TrendCommentPv: 'TREND_COMMENT_PV',
-    TrendSharePv: 'TREND_SHARE_PV'
-} as const;
-export type GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum = typeof GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum[keyof typeof GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceStatsTypeEnum];
-
 
 /**
  * Check if a given object implements the GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance interface.

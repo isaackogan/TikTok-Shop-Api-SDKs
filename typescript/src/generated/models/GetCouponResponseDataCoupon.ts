@@ -158,10 +158,10 @@ export interface GetCouponResponseDataCoupon {
      * - `LAPSED_CUSTOMERS`: Customers with at least 1 purchase in the past 365 days but no purchases within the last certain days(90 days for non-US and 30 days for US).
      * - `NEW_FOLLOWERS`: People who started following the TikTok account of your shop in the past 30 days.
      * - `EXISTING_ACTIVE_FOLLOWERS`: People who followed the TikTok account of your shop and engaged with your shop through LIVE, short videos or product cards in the past 30 days.
-     * @type {GetCouponResponseDataCouponTargetBuyerSegmentEnum}
+     * @type {string}
      * @memberof GetCouponResponseDataCoupon
      */
-    targetBuyerSegment?: GetCouponResponseDataCouponTargetBuyerSegmentEnum;
+    targetBuyerSegment?: string;
     /**
      * Limitations for the use of the coupons.
      * @type {UsageLimit}
@@ -190,10 +190,10 @@ export interface GetCouponResponseDataCoupon {
      * The range of the products which the coupon applies to. The possible enumerations are:
      * - `FULL_SHOP`: All products sold in the shop are eligible for the coupon.
      * - `SPECIFIC_PRODUCTS`: Only specified products are eligible for the coupon. The list of specified products are returned in the response of the `get_coupon` API.
-     * @type {GetCouponResponseDataCouponProductScopeEnum}
+     * @type {string}
      * @memberof GetCouponResponseDataCoupon
      */
-    productScope?: GetCouponResponseDataCouponProductScopeEnum;
+    productScope?: string;
     /**
      * The IDs of the eligible products when `product_scope == 'SPECIFIC_PRODUCTS'`.
      * @type {Array<string>}
@@ -222,32 +222,6 @@ export interface GetCouponResponseDataCoupon {
      */
     liveTasks?: Array<GetCouponResponseDataCouponLiveTask>;
 }
-
-
-/**
- * @export
- */
-export const GetCouponResponseDataCouponTargetBuyerSegmentEnum = {
-    All: 'ALL',
-    New: 'NEW',
-    RepeatCustomers: 'REPEAT_CUSTOMERS',
-    RecentCustomers: 'RECENT_CUSTOMERS',
-    FrequentCustomers: 'FREQUENT_CUSTOMERS',
-    LapsedCustomers: 'LAPSED_CUSTOMERS',
-    NewFollowers: 'NEW_FOLLOWERS',
-    ExistingActiveFollowers: 'EXISTING_ACTIVE_FOLLOWERS'
-} as const;
-export type GetCouponResponseDataCouponTargetBuyerSegmentEnum = typeof GetCouponResponseDataCouponTargetBuyerSegmentEnum[keyof typeof GetCouponResponseDataCouponTargetBuyerSegmentEnum];
-
-/**
- * @export
- */
-export const GetCouponResponseDataCouponProductScopeEnum = {
-    FullShop: 'FULL_SHOP',
-    SpecificProducts: 'SPECIFIC_PRODUCTS'
-} as const;
-export type GetCouponResponseDataCouponProductScopeEnum = typeof GetCouponResponseDataCouponProductScopeEnum[keyof typeof GetCouponResponseDataCouponProductScopeEnum];
-
 
 /**
  * Check if a given object implements the GetCouponResponseDataCoupon interface.

@@ -43,7 +43,7 @@ data class GetProductSKPPDetailResponseDataTaskDetail (
 
     /* Key for the scoring category. Possible values: - COMMISSION_RATE - FULFILMENT - PRICING - FREE_SHIPING - FOLLOWER_BENEFITS - SAMPLING - ADS_SPEND - STOCK - SHOPPABLE_VIDEOS - INFORMATION_QUALITY - CRM_HOSTING */
     @SerializedName("category")
-    val category: GetProductSKPPDetailResponseDataTaskDetail.Category? = null,
+    val category: kotlin.String? = null,
 
     /* Localized category name, resolved from category via the shared content by the request locale. */
     @SerializedName("name")
@@ -67,24 +67,6 @@ data class GetProductSKPPDetailResponseDataTaskDetail (
 
 ) {
 
-    /**
-     * Key for the scoring category. Possible values: - COMMISSION_RATE - FULFILMENT - PRICING - FREE_SHIPING - FOLLOWER_BENEFITS - SAMPLING - ADS_SPEND - STOCK - SHOPPABLE_VIDEOS - INFORMATION_QUALITY - CRM_HOSTING
-     *
-     * Values: COMMISSION_RATE,FULFILMENT,PRICING,FREE_SHIPING,FOLLOWER_BENEFITS,SAMPLING,ADS_SPEND,STOCK,SHOPPABLE_VIDEOS,INFORMATION_QUALITY,CRM_HOSTING
-     */
-    enum class Category(val value: kotlin.String) {
-        @SerializedName(value = "COMMISSION_RATE") COMMISSION_RATE("COMMISSION_RATE"),
-        @SerializedName(value = "FULFILMENT") FULFILMENT("FULFILMENT"),
-        @SerializedName(value = "PRICING") PRICING("PRICING"),
-        @SerializedName(value = "FREE_SHIPING") FREE_SHIPING("FREE_SHIPING"),
-        @SerializedName(value = "FOLLOWER_BENEFITS") FOLLOWER_BENEFITS("FOLLOWER_BENEFITS"),
-        @SerializedName(value = "SAMPLING") SAMPLING("SAMPLING"),
-        @SerializedName(value = "ADS_SPEND") ADS_SPEND("ADS_SPEND"),
-        @SerializedName(value = "STOCK") STOCK("STOCK"),
-        @SerializedName(value = "SHOPPABLE_VIDEOS") SHOPPABLE_VIDEOS("SHOPPABLE_VIDEOS"),
-        @SerializedName(value = "INFORMATION_QUALITY") INFORMATION_QUALITY("INFORMATION_QUALITY"),
-        @SerializedName(value = "CRM_HOSTING") CRM_HOSTING("CRM_HOSTING");
-    }
 
 }
 

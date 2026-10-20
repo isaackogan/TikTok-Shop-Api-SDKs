@@ -38,10 +38,10 @@ export interface GetBrandsResponseDataBrand {
      * - AUTHORIZED
      * 
      * **Note**: If the brand is unauthorized, check `is_t1_brand` to determine if you can use it during product creation.
-     * @type {GetBrandsResponseDataBrandAuthorizedStatusEnum}
+     * @type {string}
      * @memberof GetBrandsResponseDataBrand
      */
-    authorizedStatus?: GetBrandsResponseDataBrandAuthorizedStatusEnum;
+    authorizedStatus?: string;
     /**
      * A flag to indicate whether the brand is a T1 brand, which refers to internationally renowned brands that may have compliance risks and require sellers to obtain brand authorization.
      * 
@@ -60,31 +60,11 @@ export interface GetBrandsResponseDataBrand {
      * - UNAVAILABLE
      * 
      * **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized.
-     * @type {GetBrandsResponseDataBrandBrandStatusEnum}
+     * @type {string}
      * @memberof GetBrandsResponseDataBrand
      */
-    brandStatus?: GetBrandsResponseDataBrandBrandStatusEnum;
+    brandStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const GetBrandsResponseDataBrandAuthorizedStatusEnum = {
-    Unauthoriezd: 'UNAUTHORIEZD',
-    Authorized: 'AUTHORIZED'
-} as const;
-export type GetBrandsResponseDataBrandAuthorizedStatusEnum = typeof GetBrandsResponseDataBrandAuthorizedStatusEnum[keyof typeof GetBrandsResponseDataBrandAuthorizedStatusEnum];
-
-/**
- * @export
- */
-export const GetBrandsResponseDataBrandBrandStatusEnum = {
-    Available: 'AVAILABLE',
-    Unavailable: 'UNAVAILABLE'
-} as const;
-export type GetBrandsResponseDataBrandBrandStatusEnum = typeof GetBrandsResponseDataBrandBrandStatusEnum[keyof typeof GetBrandsResponseDataBrandBrandStatusEnum];
-
 
 /**
  * Check if a given object implements the GetBrandsResponseDataBrand interface.

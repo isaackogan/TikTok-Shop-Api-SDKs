@@ -157,10 +157,10 @@ export interface SearchGoodsInfoResponseDataGood {
      * - SIOC_APPROVAL_STATUS_UNDER_REVIEW
      * - SIOC_APPROVAL_STATUS_APPROVE
      * - SIOC_APPROVAL_STATUS_REJECT
-     * @type {SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGood
      */
-    siocApprovalStatus?: SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum;
+    siocApprovalStatus?: string;
     /**
      * FBT fulfillment approval status. This field is returned for goods that are hazardous materials or managed as Ships in Own Container (SIOC).
      * Possible values:
@@ -169,10 +169,10 @@ export interface SearchGoodsInfoResponseDataGood {
      * - APPROVAL_STATUS_UNDER_REVIEW
      * - APPROVAL_STATUS_FULFILLABLE
      * - APPROVAL_STATUS_UNFULFILLABLE
-     * @type {SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGood
      */
-    hazmatApprovalStatus?: SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum;
+    hazmatApprovalStatus?: string;
     /**
      * bulky item info
      * @type {SearchGoodsInfoResponseDataGoodBulkyItemAttribute}
@@ -198,32 +198,6 @@ export interface SearchGoodsInfoResponseDataGood {
      */
     siocAttribute?: SiocAttribute;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum = {
-    SiocApprovalStatusInvalid: 'SIOC_APPROVAL_STATUS_INVALID',
-    SiocApprovalStatusInit: 'SIOC_APPROVAL_STATUS_INIT',
-    SiocApprovalStatusUnderReview: 'SIOC_APPROVAL_STATUS_UNDER_REVIEW',
-    SiocApprovalStatusApprove: 'SIOC_APPROVAL_STATUS_APPROVE',
-    SiocApprovalStatusReject: 'SIOC_APPROVAL_STATUS_REJECT'
-} as const;
-export type SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum = typeof SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum[keyof typeof SearchGoodsInfoResponseDataGoodSiocApprovalStatusEnum];
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum = {
-    ApprovalStatusInvalid: 'APPROVAL_STATUS_INVALID',
-    ApprovalStatusInit: 'APPROVAL_STATUS_INIT',
-    ApprovalStatusUnderReview: 'APPROVAL_STATUS_UNDER_REVIEW',
-    ApprovalStatusFulfillable: 'APPROVAL_STATUS_FULFILLABLE',
-    ApprovalStatusUnfulfillable: 'APPROVAL_STATUS_UNFULFILLABLE'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum = typeof SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatApprovalStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGood interface.

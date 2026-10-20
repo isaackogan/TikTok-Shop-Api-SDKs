@@ -52,151 +52,20 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SearchProductsResponseDataProductAudit {
-  /**
-   * The product audit status. Possible values:  - NONE: The product is not applicable for audit as it is still in a draft, frozen, or deactivated state. - AUDITING: The product is currently being audited. - FAILED: The product failed the audit, or the audit was cancelled. - PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. - APPROVED: The product passed the audit and has been listed on the platform.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The product is not applicable for audit as it is still in a draft, frozen, or deactivated state.
-     */
-    NONE("NONE"),
-    
-    /**
-     * The product is currently being audited.
-     */
-    AUDITING("AUDITING"),
-    
-    /**
-     * The product failed the audit, or the audit was cancelled.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * The product has passed the audit but is not yet listed due to pending prerequisites.
-     */
-    PRE_APPROVED("PRE_APPROVED"),
-    
-    /**
-     * The product passed the audit and has been listed on the platform.
-     */
-    APPROVED("APPROVED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * Gets or Sets preApprovedReasons
-   */
-  @JsonAdapter(PreApprovedReasonsEnum.Adapter.class)
-  public enum PreApprovedReasonsEnum {
-    /**
-     * The seller&#39;s onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.
-     */
-    KYC_PENDING("KYC_PENDING"),
-    
-    /**
-     * The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center. Applicable only for the US market.
-     */
-    RESTRICTED_CATEGORY_PENDING("RESTRICTED_CATEGORY_PENDING");
-
-    private String value;
-
-    PreApprovedReasonsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PreApprovedReasonsEnum fromValue(String value) {
-      for (PreApprovedReasonsEnum b : PreApprovedReasonsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PreApprovedReasonsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PreApprovedReasonsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PreApprovedReasonsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PreApprovedReasonsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PreApprovedReasonsEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_PRE_APPROVED_REASONS = "pre_approved_reasons";
   @SerializedName(SERIALIZED_NAME_PRE_APPROVED_REASONS)
   @javax.annotation.Nullable
-  private List<PreApprovedReasonsEnum> preApprovedReasons = new ArrayList<>();
+  private List<String> preApprovedReasons = new ArrayList<>();
 
   public SearchProductsResponseDataProductAudit() {
   }
 
-  public SearchProductsResponseDataProductAudit status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchProductsResponseDataProductAudit status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -206,21 +75,21 @@ public class SearchProductsResponseDataProductAudit {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public SearchProductsResponseDataProductAudit preApprovedReasons(@javax.annotation.Nullable List<PreApprovedReasonsEnum> preApprovedReasons) {
+  public SearchProductsResponseDataProductAudit preApprovedReasons(@javax.annotation.Nullable List<String> preApprovedReasons) {
     this.preApprovedReasons = preApprovedReasons;
     return this;
   }
 
-  public SearchProductsResponseDataProductAudit addPreApprovedReasonsItem(PreApprovedReasonsEnum preApprovedReasonsItem) {
+  public SearchProductsResponseDataProductAudit addPreApprovedReasonsItem(String preApprovedReasonsItem) {
     if (this.preApprovedReasons == null) {
       this.preApprovedReasons = new ArrayList<>();
     }
@@ -233,11 +102,11 @@ public class SearchProductsResponseDataProductAudit {
    * @return preApprovedReasons
    */
   @javax.annotation.Nullable
-  public List<PreApprovedReasonsEnum> getPreApprovedReasons() {
+  public List<String> getPreApprovedReasons() {
     return preApprovedReasons;
   }
 
-  public void setPreApprovedReasons(@javax.annotation.Nullable List<PreApprovedReasonsEnum> preApprovedReasons) {
+  public void setPreApprovedReasons(@javax.annotation.Nullable List<String> preApprovedReasons) {
     this.preApprovedReasons = preApprovedReasons;
   }
 
@@ -352,10 +221,6 @@ public class SearchProductsResponseDataProductAudit {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("pre_approved_reasons") != null && !jsonObj.get("pre_approved_reasons").isJsonNull() && !jsonObj.get("pre_approved_reasons").isJsonArray()) {

@@ -25,10 +25,10 @@ export interface ItemTax {
      * - `SALES_TAX` (US market sales tax)
      * 
      * **Note**: Currently only sales tax is available.
-     * @type {ItemTaxTaxTypeEnum}
+     * @type {string}
      * @memberof ItemTax
      */
-    taxType?: ItemTaxTaxTypeEnum;
+    taxType?: string;
     /**
      * Tax amount.
      * @type {string}
@@ -42,16 +42,6 @@ export interface ItemTax {
      */
     taxRate?: string;
 }
-
-
-/**
- * @export
- */
-export const ItemTaxTaxTypeEnum = {
-    SalesTax: 'SALES_TAX'
-} as const;
-export type ItemTaxTaxTypeEnum = typeof ItemTaxTaxTypeEnum[keyof typeof ItemTaxTaxTypeEnum];
-
 
 /**
  * Check if a given object implements the ItemTax interface.

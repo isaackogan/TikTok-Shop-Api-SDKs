@@ -87,6 +87,13 @@ class ClientStubTest {
     }
 
     @Test
+    void aStatusValueTheSpecDoesNotListIsKept() throws Exception {
+        reply("{\"code\":0,\"message\":\"ok\",\"request_id\":\"r\",\"data\":{\"orders\":[{\"id\":\"1\",\"status\":\"SOME_NEW_STATUS\"}]}}");
+        GetOrderListResponse resp = builder().build().orders().getOrderList(1L, null, null, null, null);
+        assertEquals("SOME_NEW_STATUS", resp.getData().getOrders().get(0).getStatus());
+    }
+
+    @Test
     void noTokenAndNoCipherSendsNeither() throws Exception {
         reply(OK);
         TikTokShop.builder().appKey("key1").appSecret(SECRET).baseUrl(server.url("/").toString()).build()
@@ -301,9 +308,9 @@ class ClientStubTest {
         assertEquals(3L, d.getHeight());
         assertEquals(4L, d.getLength());
         assertEquals(5L, d.getWidth());
-        assertEquals("CENTIMETER", d.getUnit().getValue());
+        assertEquals("CENTIMETER", d.getUnit());
         assertEquals("1.5", resp.getData().getPackageWeight().getValue());
-        assertEquals("KILOGRAM", resp.getData().getPackageWeight().getUnit().getValue());
+        assertEquals("KILOGRAM", resp.getData().getPackageWeight().getUnit());
     }
 
     @Test

@@ -37,10 +37,10 @@ export interface GetProductResponseDataSkuCombinedSkuPrice {
      * - THB: Thailand
      * - USD: United States
      * - VND: Vietnam
-     * @type {GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuCombinedSkuPrice
      */
-    currency?: GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum;
+    currency?: string;
     /**
      * All sellers
      * The source SKU's local display price shown on the product page before any discounts.
@@ -58,30 +58,6 @@ export interface GetProductResponseDataSkuCombinedSkuPrice {
      */
     taxExclusivePrice?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum = {
-    Brl: 'BRL',
-    Czk: 'CZK',
-    Eur: 'EUR',
-    Gbp: 'GBP',
-    Huf: 'HUF',
-    Idr: 'IDR',
-    Jpy: 'JPY',
-    Mxn: 'MXN',
-    Myr: 'MYR',
-    Php: 'PHP',
-    Pln: 'PLN',
-    Sgd: 'SGD',
-    Thb: 'THB',
-    Usd: 'USD',
-    Vnd: 'VND'
-} as const;
-export type GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum = typeof GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum[keyof typeof GetProductResponseDataSkuCombinedSkuPriceCurrencyEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuCombinedSkuPrice interface.

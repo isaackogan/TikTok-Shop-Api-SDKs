@@ -42,10 +42,10 @@ export interface GetAuthorizedShopsResponseDataShop {
      * Possible values:
      * - CROSS_BORDER: Cross border sellers with multiple shops in different countries.
      * - LOCAL: Local sellers with only 1 shop.
-     * @type {GetAuthorizedShopsResponseDataShopSellerTypeEnum}
+     * @type {string}
      * @memberof GetAuthorizedShopsResponseDataShop
      */
-    sellerType?: GetAuthorizedShopsResponseDataShopSellerTypeEnum;
+    sellerType?: string;
     /**
      * An encrypted token used to securely identify a shop in API requests. There is no need for decryption on the receiving end.
      * @type {string}
@@ -59,17 +59,6 @@ export interface GetAuthorizedShopsResponseDataShop {
      */
     code?: string;
 }
-
-
-/**
- * @export
- */
-export const GetAuthorizedShopsResponseDataShopSellerTypeEnum = {
-    CrossBorder: 'CROSS_BORDER',
-    Local: 'LOCAL'
-} as const;
-export type GetAuthorizedShopsResponseDataShopSellerTypeEnum = typeof GetAuthorizedShopsResponseDataShopSellerTypeEnum[keyof typeof GetAuthorizedShopsResponseDataShopSellerTypeEnum];
-
 
 /**
  * Check if a given object implements the GetAuthorizedShopsResponseDataShop interface.

@@ -60,68 +60,10 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageDimensio
   @javax.annotation.Nonnull
   private Long length;
 
-  /**
-   * Unit of the predicted package dimensions. Possible values: - &#x60;CENTIMETER&#x60; - &#x60;INCH&#x60; - &#x60;FOOT&#x60; - &#x60;MILLIMETER&#x60; - &#x60;METER&#x60;
-   */
-  @JsonAdapter(UnitEnum.Adapter.class)
-  public enum UnitEnum {
-    CENTIMETER("CENTIMETER"),
-    
-    INCH("INCH"),
-    
-    FOOT("FOOT"),
-    
-    MILLIMETER("MILLIMETER"),
-    
-    METER("METER");
-
-    private String value;
-
-    UnitEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnitEnum fromValue(String value) {
-      for (UnitEnum b : UnitEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnitEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnitEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnitEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnitEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnitEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_UNIT = "unit";
   @SerializedName(SERIALIZED_NAME_UNIT)
   @javax.annotation.Nonnull
-  private UnitEnum unit;
+  private String unit;
 
   public static final String SERIALIZED_NAME_WIDTH = "width";
   @SerializedName(SERIALIZED_NAME_WIDTH)
@@ -169,7 +111,7 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageDimensio
   }
 
 
-  public PredictProductPackageDimensionsAndWeightResponseDataPackageDimension unit(@javax.annotation.Nonnull UnitEnum unit) {
+  public PredictProductPackageDimensionsAndWeightResponseDataPackageDimension unit(@javax.annotation.Nonnull String unit) {
     this.unit = unit;
     return this;
   }
@@ -179,11 +121,11 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageDimensio
    * @return unit
    */
   @javax.annotation.Nonnull
-  public UnitEnum getUnit() {
+  public String getUnit() {
     return unit;
   }
 
-  public void setUnit(@javax.annotation.Nonnull UnitEnum unit) {
+  public void setUnit(@javax.annotation.Nonnull String unit) {
     this.unit = unit;
   }
 
@@ -329,8 +271,6 @@ public class PredictProductPackageDimensionsAndWeightResponseDataPackageDimensio
       if (!jsonObj.get("unit").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit").toString()));
       }
-      // validate the required field `unit`
-      UnitEnum.validateJsonElement(jsonObj.get("unit"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

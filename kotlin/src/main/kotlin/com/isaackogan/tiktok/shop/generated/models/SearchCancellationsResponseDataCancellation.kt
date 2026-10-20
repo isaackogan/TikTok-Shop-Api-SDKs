@@ -56,15 +56,15 @@ data class SearchCancellationsResponseDataCancellation (
 
     /* Order cancellation type. Possible values: - `CANCEL`: Cancel by seller or system. - `BUYER_CANCEL`: Cancel by buyer. Need to be approved by seller or system. */
     @SerializedName("cancel_type")
-    val cancelType: SearchCancellationsResponseDataCancellation.CancelType? = null,
+    val cancelType: kotlin.String? = null,
 
     /* Order cancellation status. Possible values: - `CANCELLATION_REQUEST_PENDING` - `CANCELLATION_REQUEST_SUCCESS` - `CANCELLATION_REQUEST_CANCEL` - `CANCELLATION_REQUEST_COMPLETE` */
     @SerializedName("cancel_status")
-    val cancelStatus: SearchCancellationsResponseDataCancellation.CancelStatus? = null,
+    val cancelStatus: kotlin.String? = null,
 
     /* Order cancellation initiator. Possible values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM` */
     @SerializedName("role")
-    val role: SearchCancellationsResponseDataCancellation.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Order cancellation reason. */
     @SerializedName("cancel_reason")
@@ -104,37 +104,6 @@ data class SearchCancellationsResponseDataCancellation (
 
 ) {
 
-    /**
-     * Order cancellation type. Possible values: - `CANCEL`: Cancel by seller or system. - `BUYER_CANCEL`: Cancel by buyer. Need to be approved by seller or system.
-     *
-     * Values: CANCEL,BUYER_CANCEL
-     */
-    enum class CancelType(val value: kotlin.String) {
-        @SerializedName(value = "CANCEL") CANCEL("CANCEL"),
-        @SerializedName(value = "BUYER_CANCEL") BUYER_CANCEL("BUYER_CANCEL");
-    }
-    /**
-     * Order cancellation status. Possible values: - `CANCELLATION_REQUEST_PENDING` - `CANCELLATION_REQUEST_SUCCESS` - `CANCELLATION_REQUEST_CANCEL` - `CANCELLATION_REQUEST_COMPLETE`
-     *
-     * Values: CANCELLATION_REQUEST_PENDING,CANCELLATION_REQUEST_SUCCESS,CANCELLATION_REQUEST_CANCEL,CANCELLATION_REQUEST_COMPLETE
-     */
-    enum class CancelStatus(val value: kotlin.String) {
-        @SerializedName(value = "CANCELLATION_REQUEST_PENDING") CANCELLATION_REQUEST_PENDING("CANCELLATION_REQUEST_PENDING"),
-        @SerializedName(value = "CANCELLATION_REQUEST_SUCCESS") CANCELLATION_REQUEST_SUCCESS("CANCELLATION_REQUEST_SUCCESS"),
-        @SerializedName(value = "CANCELLATION_REQUEST_CANCEL") CANCELLATION_REQUEST_CANCEL("CANCELLATION_REQUEST_CANCEL"),
-        @SerializedName(value = "CANCELLATION_REQUEST_COMPLETE") CANCELLATION_REQUEST_COMPLETE("CANCELLATION_REQUEST_COMPLETE");
-    }
-    /**
-     * Order cancellation initiator. Possible values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
-     *
-     * Values: BUYER,SELLER,OPERATOR,SYSTEM
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "OPERATOR") OPERATOR("OPERATOR"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

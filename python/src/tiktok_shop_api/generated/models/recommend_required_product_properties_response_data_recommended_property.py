@@ -6,10 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.recommend_required_product_properties_response_data_recommended_property_type import (
-    RecommendRequiredProductPropertiesResponseDataRecommendedPropertyType,
-)
-
 if TYPE_CHECKING:
     from ..models.recommend_required_product_properties_response_data_recommended_property_value import (
         RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue,
@@ -28,7 +24,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
         is_multiple_selection (bool): Whether the seller can select more than one value for the property.
         is_required (bool): Whether the property must be provided when the product is created or edited.
         name (str): Display name of the recommended property for the shop's region.
-        type_ (RecommendRequiredProductPropertiesResponseDataRecommendedPropertyType): Type of the recommended property.
+        type_ (str): Type of the recommended property.
             Possible values:
             - `UNSPECIFIED`: The service could not classify the property type.
             - `KEY_PROPERTY`: A key property used to identify the product.
@@ -44,7 +40,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
     is_multiple_selection: bool
     is_required: bool
     name: str
-    type_: RecommendRequiredProductPropertiesResponseDataRecommendedPropertyType
+    type_: str
     values: list[RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -59,7 +55,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
 
         name = self.name
 
-        type_ = self.type_.value
+        type_ = self.type_
 
         values = []
         for values_item_data in self.values:
@@ -99,7 +95,7 @@ class RecommendRequiredProductPropertiesResponseDataRecommendedProperty:
 
         name = d.pop("name")
 
-        type_ = RecommendRequiredProductPropertiesResponseDataRecommendedPropertyType(d.pop("type"))
+        type_ = d.pop("type")
 
         values = []
         _values = d.pop("values")

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown_content_type import (
-    GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,8 +22,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
     """
     Attributes:
         traffic (GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset):
-        content_type (GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentType |
-            Unset): Traffic breakdown content type.
+        content_type (str | Unset): Traffic breakdown content type.
             Possible values:
             - VIDEO: Video content.
             - LIVE: Live stream content.
@@ -34,9 +30,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
     """
 
     traffic: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownTraffic | Unset = UNSET
-    content_type: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentType | Unset = (
-        UNSET
-    )
+    content_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -44,9 +38,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
         if not isinstance(self.traffic, Unset):
             traffic = self.traffic.to_dict()
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -74,14 +66,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreak
                 _traffic
             )
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownContentType(
-                _content_type
-            )
+        content_type = d.pop("content_type", UNSET)
 
         get_shop_product_performance_detail_response_data_performance_interval_traffic_breakdown = cls(
             traffic=traffic,

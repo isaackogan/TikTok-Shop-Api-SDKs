@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_seller_warehouses_response_data_global_warehouse_ownership import (
-    GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnership,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetGlobalSellerWarehousesResponseDataGlobalWarehouse")
@@ -21,14 +18,14 @@ class GetGlobalSellerWarehousesResponseDataGlobalWarehouse:
         id (str | Unset): Global warehouse ID, a unique and immutable primary key, used for all global warehouse
             logistics.
         name (str | Unset): Global warehouse name. This name is not unique across the TikTok Shop system.
-        ownership (GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnership | Unset): Possible values:
+        ownership (str | Unset): Possible values:
             - SELLER: Warehouse owned by the seller.
             - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop.
     """
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
-    ownership: GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnership | Unset = UNSET
+    ownership: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -36,9 +33,7 @@ class GetGlobalSellerWarehousesResponseDataGlobalWarehouse:
 
         name = self.name
 
-        ownership: str | Unset = UNSET
-        if not isinstance(self.ownership, Unset):
-            ownership = self.ownership.value
+        ownership = self.ownership
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,12 +54,7 @@ class GetGlobalSellerWarehousesResponseDataGlobalWarehouse:
 
         name = d.pop("name", UNSET)
 
-        _ownership = d.pop("ownership", UNSET)
-        ownership: GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnership | Unset
-        if isinstance(_ownership, Unset):
-            ownership = UNSET
-        else:
-            ownership = GetGlobalSellerWarehousesResponseDataGlobalWarehouseOwnership(_ownership)
+        ownership = d.pop("ownership", UNSET)
 
         get_global_seller_warehouses_response_data_global_warehouse = cls(
             id=id,

@@ -67,20 +67,10 @@ data class OptimizeImagesResponseDataImage (
 
     /* The optimization status. Possible values: - SUCCESS: The image has been successfully optimized. - IGNORE: The image already has a white background, so no optimization was applied. - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status. */
     @SerializedName("optimize_status")
-    val optimizeStatus: OptimizeImagesResponseDataImage.OptimizeStatus? = null
+    val optimizeStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * The optimization status. Possible values: - SUCCESS: The image has been successfully optimized. - IGNORE: The image already has a white background, so no optimization was applied. - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status.
-     *
-     * Values: SUCCESS,IGNORE,PROCESSING
-     */
-    enum class OptimizeStatus(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "IGNORE") IGNORE("IGNORE"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING");
-    }
 
 }
 

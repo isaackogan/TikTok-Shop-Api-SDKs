@@ -53,241 +53,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PublishResult {
-  /**
-   * The market associated with this synchronization result. Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MY: Malaysia - NL: Netherlands (NL) - PH: Philippines - PO: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-   */
-  @JsonAdapter(RegionEnum.Adapter.class)
-  public enum RegionEnum {
-    /**
-     * Austria
-     */
-    AT("AT"),
-    
-    /**
-     * Belgium
-     */
-    BE("BE"),
-    
-    /**
-     * Czech Republic
-     */
-    CZ("CZ"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Greece
-     */
-    GR("GR"),
-    
-    /**
-     * Hungary
-     */
-    HU("HU"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Netherlands (NL)
-     */
-    NL("NL"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Poland
-     */
-    PO("PO"),
-    
-    /**
-     * Portugal
-     */
-    PT("PT"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX");
-
-    private String value;
-
-    RegionEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RegionEnum fromValue(String value) {
-      for (RegionEnum b : RegionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RegionEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RegionEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RegionEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RegionEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RegionEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_REGION = "region";
   @SerializedName(SERIALIZED_NAME_REGION)
   @javax.annotation.Nullable
-  private RegionEnum region;
-
-  /**
-   * The status of syncing the product to the market. Possible values: - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product Status Change webhook](https://partner.tiktokshop.com/docv2/page/650956aff1fd3102b90b6261) to track the final audit status. - DRAFT: Synchronization did not complete, and the local product remains in draft. - FAILED: Synchronization of the global product to the local shop was unsuccessful.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The global product was successfully synchronized to the local shop, submitted for listing, and is now under review. Use the [Product Status Change webhook](https://partner.tiktokshop.com/docv2/page/650956aff1fd3102b90b6261) to track the final audit status.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * Synchronization did not complete, and the local product remains in draft.
-     */
-    DRAFT("DRAFT"),
-    
-    /**
-     * Synchronization of the global product to the local shop was unsuccessful.
-     */
-    FAILED("FAILED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
+  private String region;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_FAIL_REASONS = "fail_reasons";
   @SerializedName(SERIALIZED_NAME_FAIL_REASONS)
@@ -297,7 +71,7 @@ public class PublishResult {
   public PublishResult() {
   }
 
-  public PublishResult region(@javax.annotation.Nullable RegionEnum region) {
+  public PublishResult region(@javax.annotation.Nullable String region) {
     this.region = region;
     return this;
   }
@@ -307,16 +81,16 @@ public class PublishResult {
    * @return region
    */
   @javax.annotation.Nullable
-  public RegionEnum getRegion() {
+  public String getRegion() {
     return region;
   }
 
-  public void setRegion(@javax.annotation.Nullable RegionEnum region) {
+  public void setRegion(@javax.annotation.Nullable String region) {
     this.region = region;
   }
 
 
-  public PublishResult status(@javax.annotation.Nullable StatusEnum status) {
+  public PublishResult status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -326,11 +100,11 @@ public class PublishResult {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -475,16 +249,8 @@ public class PublishResult {
       if ((jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) && !jsonObj.get("region").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
       }
-      // validate the optional field `region`
-      if (jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) {
-        RegionEnum.validateJsonElement(jsonObj.get("region"));
-      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if (jsonObj.get("fail_reasons") != null && !jsonObj.get("fail_reasons").isJsonNull()) {
         JsonArray jsonArrayfailReasons = jsonObj.getAsJsonArray("fail_reasons");

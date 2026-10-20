@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_category_rules_response_data_size_chart_measurement_and_option_measurement_type import (
-    GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,22 +21,19 @@ T = TypeVar("T", bound="GetCategoryRulesResponseDataSizeChartMeasurementAndOptio
 class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
     """
     Attributes:
-        measurement_type (GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementType | Unset): Possible
-            values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product
-            measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment
-            measurements.
+        measurement_type (str | Unset): Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that
+            do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements;
+            PRODUCT_MEASUREMENTS: finished-product or garment measurements.
         options (list[GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption] | Unset): Online measurement
             options for this group.
     """
 
-    measurement_type: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementType | Unset = UNSET
+    measurement_type: str | Unset = UNSET
     options: list[GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        measurement_type: str | Unset = UNSET
-        if not isinstance(self.measurement_type, Unset):
-            measurement_type = self.measurement_type.value
+        measurement_type = self.measurement_type
 
         options: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.options, Unset):
@@ -65,14 +59,7 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
         )
 
         d = dict(src_dict)
-        _measurement_type = d.pop("measurement_type", UNSET)
-        measurement_type: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementType | Unset
-        if isinstance(_measurement_type, Unset):
-            measurement_type = UNSET
-        else:
-            measurement_type = GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementType(
-                _measurement_type
-            )
+        measurement_type = d.pop("measurement_type", UNSET)
 
         _options = d.pop("options", UNSET)
         options: list[GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption] | Unset = UNSET

@@ -47,19 +47,10 @@ data class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule (
 
     /* The types of coupon that can be included in the message.  Possible values: - REGULAR_ALL: Regular coupons that target all buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd). - REGULAR_REPEAT: Regular coupons that target only repeat buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=REPEAT_CUSTOMERS` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd). */
     @SerializedName("coupon_type")
-    val couponType: kotlin.collections.List<GetMessageTemplatesResponseDataMessageTemplateCouponCardRule.CouponType>? = null
+    val couponType: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The types of coupon that can be included in the message.  Possible values: - REGULAR_ALL: Regular coupons that target all buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd). - REGULAR_REPEAT: Regular coupons that target only repeat buyers.  Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=REPEAT_CUSTOMERS` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).
-     *
-     * Values: REGULAR_ALL,REGULAR_REPEAT
-     */
-    enum class CouponType(val value: kotlin.String) {
-        @SerializedName(value = "REGULAR_ALL") REGULAR_ALL("REGULAR_ALL"),
-        @SerializedName(value = "REGULAR_REPEAT") REGULAR_REPEAT("REGULAR_REPEAT");
-    }
 
 }
 

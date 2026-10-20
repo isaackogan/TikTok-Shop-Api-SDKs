@@ -53,66 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SearchGoodsInfoResponseDataGoodHazmatInfo {
-  /**
-   * hazardous goods type Possible values: -MAGNETIZED -BATTERY  -FLAMMABLE_LIQUID -AEROSOLS
-   */
-  @JsonAdapter(HazmatTypeEnum.Adapter.class)
-  public enum HazmatTypeEnum {
-    MAGNETIZED("MAGNETIZED"),
-    
-    BATTERY("BATTERY"),
-    
-    FLAMMABLE_LIQUID("FLAMMABLE_LIQUID"),
-    
-    AEROSOLS("AEROSOLS");
-
-    private String value;
-
-    HazmatTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static HazmatTypeEnum fromValue(String value) {
-      for (HazmatTypeEnum b : HazmatTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<HazmatTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final HazmatTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public HazmatTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return HazmatTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      HazmatTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_HAZMAT_TYPE = "hazmat_type";
   @SerializedName(SERIALIZED_NAME_HAZMAT_TYPE)
   @javax.annotation.Nullable
-  private HazmatTypeEnum hazmatType;
+  private String hazmatType;
 
   public static final String SERIALIZED_NAME_BATTERY_EXTRA_INFO = "battery_extra_info";
   @SerializedName(SERIALIZED_NAME_BATTERY_EXTRA_INFO)
@@ -129,135 +73,15 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
   @javax.annotation.Nullable
   private AerosolExtraInfo aerosolExtraInfo;
 
-  /**
-   * Hazmat class Possible values: -CLASS_2 -CLASS_3 -CLASS_9
-   */
-  @JsonAdapter(DgClassEnum.Adapter.class)
-  public enum DgClassEnum {
-    CLASS_2("CLASS_2"),
-    
-    CLASS_3("CLASS_3"),
-    
-    CLASS_9("CLASS_9");
-
-    private String value;
-
-    DgClassEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DgClassEnum fromValue(String value) {
-      for (DgClassEnum b : DgClassEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DgClassEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DgClassEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DgClassEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DgClassEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DgClassEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_DG_CLASS = "dg_class";
   @SerializedName(SERIALIZED_NAME_DG_CLASS)
   @javax.annotation.Nullable
-  private DgClassEnum dgClass;
-
-  /**
-   * UN identifier for the hazardous substance. Standard UN values use the &#x60;UN&#x60; prefix followed by four digits; &#x60;OTHER&#x60; is also supported. Possible values: - UN2807 - UN3480 - UN3090 - UN3481 - UN3091 - UN1263 - UN1266 - UN3065 - OTHER
-   */
-  @JsonAdapter(DgUncodeEnum.Adapter.class)
-  public enum DgUncodeEnum {
-    UN2807("UN2807"),
-    
-    UN3480("UN3480"),
-    
-    UN3090("UN3090"),
-    
-    UN3481("UN3481"),
-    
-    UN3091("UN3091"),
-    
-    UN1263("UN1263"),
-    
-    UN1266("UN1266"),
-    
-    UN3065("UN3065"),
-    
-    OTHER("OTHER");
-
-    private String value;
-
-    DgUncodeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DgUncodeEnum fromValue(String value) {
-      for (DgUncodeEnum b : DgUncodeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DgUncodeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DgUncodeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DgUncodeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DgUncodeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DgUncodeEnum.fromValue(value);
-    }
-  }
+  private String dgClass;
 
   public static final String SERIALIZED_NAME_DG_UNCODE = "dg_uncode";
   @SerializedName(SERIALIZED_NAME_DG_UNCODE)
   @javax.annotation.Nullable
-  private DgUncodeEnum dgUncode;
+  private String dgUncode;
 
   public static final String SERIALIZED_NAME_MSDS_FILE_URL = "msds_file_url";
   @SerializedName(SERIALIZED_NAME_MSDS_FILE_URL)
@@ -267,7 +91,7 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
   public SearchGoodsInfoResponseDataGoodHazmatInfo() {
   }
 
-  public SearchGoodsInfoResponseDataGoodHazmatInfo hazmatType(@javax.annotation.Nullable HazmatTypeEnum hazmatType) {
+  public SearchGoodsInfoResponseDataGoodHazmatInfo hazmatType(@javax.annotation.Nullable String hazmatType) {
     this.hazmatType = hazmatType;
     return this;
   }
@@ -277,11 +101,11 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
    * @return hazmatType
    */
   @javax.annotation.Nullable
-  public HazmatTypeEnum getHazmatType() {
+  public String getHazmatType() {
     return hazmatType;
   }
 
-  public void setHazmatType(@javax.annotation.Nullable HazmatTypeEnum hazmatType) {
+  public void setHazmatType(@javax.annotation.Nullable String hazmatType) {
     this.hazmatType = hazmatType;
   }
 
@@ -343,7 +167,7 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
   }
 
 
-  public SearchGoodsInfoResponseDataGoodHazmatInfo dgClass(@javax.annotation.Nullable DgClassEnum dgClass) {
+  public SearchGoodsInfoResponseDataGoodHazmatInfo dgClass(@javax.annotation.Nullable String dgClass) {
     this.dgClass = dgClass;
     return this;
   }
@@ -353,16 +177,16 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
    * @return dgClass
    */
   @javax.annotation.Nullable
-  public DgClassEnum getDgClass() {
+  public String getDgClass() {
     return dgClass;
   }
 
-  public void setDgClass(@javax.annotation.Nullable DgClassEnum dgClass) {
+  public void setDgClass(@javax.annotation.Nullable String dgClass) {
     this.dgClass = dgClass;
   }
 
 
-  public SearchGoodsInfoResponseDataGoodHazmatInfo dgUncode(@javax.annotation.Nullable DgUncodeEnum dgUncode) {
+  public SearchGoodsInfoResponseDataGoodHazmatInfo dgUncode(@javax.annotation.Nullable String dgUncode) {
     this.dgUncode = dgUncode;
     return this;
   }
@@ -372,11 +196,11 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
    * @return dgUncode
    */
   @javax.annotation.Nullable
-  public DgUncodeEnum getDgUncode() {
+  public String getDgUncode() {
     return dgUncode;
   }
 
-  public void setDgUncode(@javax.annotation.Nullable DgUncodeEnum dgUncode) {
+  public void setDgUncode(@javax.annotation.Nullable String dgUncode) {
     this.dgUncode = dgUncode;
   }
 
@@ -521,10 +345,6 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
       if ((jsonObj.get("hazmat_type") != null && !jsonObj.get("hazmat_type").isJsonNull()) && !jsonObj.get("hazmat_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `hazmat_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("hazmat_type").toString()));
       }
-      // validate the optional field `hazmat_type`
-      if (jsonObj.get("hazmat_type") != null && !jsonObj.get("hazmat_type").isJsonNull()) {
-        HazmatTypeEnum.validateJsonElement(jsonObj.get("hazmat_type"));
-      }
       // validate the optional field `battery_extra_info`
       if (jsonObj.get("battery_extra_info") != null && !jsonObj.get("battery_extra_info").isJsonNull()) {
         SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo.validateJsonElement(jsonObj.get("battery_extra_info"));
@@ -540,16 +360,8 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfo {
       if ((jsonObj.get("dg_class") != null && !jsonObj.get("dg_class").isJsonNull()) && !jsonObj.get("dg_class").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `dg_class` to be a primitive type in the JSON string but got `%s`", jsonObj.get("dg_class").toString()));
       }
-      // validate the optional field `dg_class`
-      if (jsonObj.get("dg_class") != null && !jsonObj.get("dg_class").isJsonNull()) {
-        DgClassEnum.validateJsonElement(jsonObj.get("dg_class"));
-      }
       if ((jsonObj.get("dg_uncode") != null && !jsonObj.get("dg_uncode").isJsonNull()) && !jsonObj.get("dg_uncode").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `dg_uncode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("dg_uncode").toString()));
-      }
-      // validate the optional field `dg_uncode`
-      if (jsonObj.get("dg_uncode") != null && !jsonObj.get("dg_uncode").isJsonNull()) {
-        DgUncodeEnum.validateJsonElement(jsonObj.get("dg_uncode"));
       }
       if ((jsonObj.get("msds_file_url") != null && !jsonObj.get("msds_file_url").isJsonNull()) && !jsonObj.get("msds_file_url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `msds_file_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("msds_file_url").toString()));

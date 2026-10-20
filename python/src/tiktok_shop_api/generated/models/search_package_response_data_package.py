@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_package_response_data_package_status import SearchPackageResponseDataPackageStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +23,7 @@ class SearchPackageResponseDataPackage:
         orders (list[Order] | Unset): The response list of TikTok Shop orders.
         create_time (int | Unset): Package creation time. Unix timestamp, in seconds.
         update_time (int | Unset): The time when the package was last updated. Unix timestamp, in seconds.
-        status (SearchPackageResponseDataPackageStatus | Unset): Possible values:
+        status (str | Unset): Possible values:
             - `TO_FULFILL`
             - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel.
             - `FULFILLING`: Package has been collected by carrier and in transit.
@@ -41,7 +40,7 @@ class SearchPackageResponseDataPackage:
     orders: list[Order] | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
-    status: SearchPackageResponseDataPackageStatus | Unset = UNSET
+    status: str | Unset = UNSET
     tracking_number: str | Unset = UNSET
     shipping_provider_name: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
@@ -62,9 +61,7 @@ class SearchPackageResponseDataPackage:
 
         update_time = self.update_time
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         tracking_number = self.tracking_number
 
@@ -120,12 +117,7 @@ class SearchPackageResponseDataPackage:
 
         update_time = d.pop("update_time", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchPackageResponseDataPackageStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchPackageResponseDataPackageStatus(_status)
+        status = d.pop("status", UNSET)
 
         tracking_number = d.pop("tracking_number", UNSET)
 

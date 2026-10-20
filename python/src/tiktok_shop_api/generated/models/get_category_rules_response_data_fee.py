@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_category_rules_response_data_fee_type import GetCategoryRulesResponseDataFeeType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCategoryRulesResponseDataFee")
@@ -16,19 +15,17 @@ T = TypeVar("T", bound="GetCategoryRulesResponseDataFee")
 class GetCategoryRulesResponseDataFee:
     """
     Attributes:
-        type_ (GetCategoryRulesResponseDataFeeType | Unset): The type of fee.
+        type_ (str | Unset): The type of fee.
             Possible values: PFAND
         is_required (bool | Unset): A flag to indicate whether information about the fee is required.
     """
 
-    type_: GetCategoryRulesResponseDataFeeType | Unset = UNSET
+    type_: str | Unset = UNSET
     is_required: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         is_required = self.is_required
 
@@ -45,12 +42,7 @@ class GetCategoryRulesResponseDataFee:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetCategoryRulesResponseDataFeeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCategoryRulesResponseDataFeeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         is_required = d.pop("is_required", UNSET)
 

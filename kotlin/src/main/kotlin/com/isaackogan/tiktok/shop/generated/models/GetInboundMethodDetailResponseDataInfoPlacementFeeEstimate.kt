@@ -42,22 +42,10 @@ data class GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate (
 
     /* The currency of the placement fee amount.  **Possible values:** * `USD` * `CNY` * `EUR` * `GBP` * `SAR` */
     @SerializedName("currency")
-    val currency: GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate.Currency? = null
+    val currency: kotlin.String? = null
 
 ) {
 
-    /**
-     * The currency of the placement fee amount.  **Possible values:** * `USD` * `CNY` * `EUR` * `GBP` * `SAR`
-     *
-     * Values: USD,CNY,EUR,GBP,SAR
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "USD") USD("USD"),
-        @SerializedName(value = "CNY") CNY("CNY"),
-        @SerializedName(value = "EUR") EUR("EUR"),
-        @SerializedName(value = "GBP") GBP("GBP"),
-        @SerializedName(value = "SAR") SAR("SAR");
-    }
 
 }
 

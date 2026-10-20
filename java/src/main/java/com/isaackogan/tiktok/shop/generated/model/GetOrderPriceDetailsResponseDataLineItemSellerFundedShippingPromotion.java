@@ -60,62 +60,10 @@ public class GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromoti
   @javax.annotation.Nullable
   private String discountAmount;
 
-  /**
-   * Discount type of this activity. Enumerations: - COUPON - ACTIVITY
-   */
-  @JsonAdapter(DiscountTypeEnum.Adapter.class)
-  public enum DiscountTypeEnum {
-    COUPON("COUPON"),
-    
-    ACTIVITY("ACTIVITY");
-
-    private String value;
-
-    DiscountTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DiscountTypeEnum fromValue(String value) {
-      for (DiscountTypeEnum b : DiscountTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DiscountTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DiscountTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DiscountTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DiscountTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DiscountTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_DISCOUNT_TYPE = "discount_type";
   @SerializedName(SERIALIZED_NAME_DISCOUNT_TYPE)
   @javax.annotation.Nullable
-  private DiscountTypeEnum discountType;
+  private String discountType;
 
   public GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion() {
   }
@@ -158,7 +106,7 @@ public class GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromoti
   }
 
 
-  public GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion discountType(@javax.annotation.Nullable DiscountTypeEnum discountType) {
+  public GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion discountType(@javax.annotation.Nullable String discountType) {
     this.discountType = discountType;
     return this;
   }
@@ -168,11 +116,11 @@ public class GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromoti
    * @return discountType
    */
   @javax.annotation.Nullable
-  public DiscountTypeEnum getDiscountType() {
+  public String getDiscountType() {
     return discountType;
   }
 
-  public void setDiscountType(@javax.annotation.Nullable DiscountTypeEnum discountType) {
+  public void setDiscountType(@javax.annotation.Nullable String discountType) {
     this.discountType = discountType;
   }
 
@@ -295,10 +243,6 @@ public class GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromoti
       }
       if ((jsonObj.get("discount_type") != null && !jsonObj.get("discount_type").isJsonNull()) && !jsonObj.get("discount_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `discount_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("discount_type").toString()));
-      }
-      // validate the optional field `discount_type`
-      if (jsonObj.get("discount_type") != null && !jsonObj.get("discount_type").isJsonNull()) {
-        DiscountTypeEnum.validateJsonElement(jsonObj.get("discount_type"));
       }
   }
 

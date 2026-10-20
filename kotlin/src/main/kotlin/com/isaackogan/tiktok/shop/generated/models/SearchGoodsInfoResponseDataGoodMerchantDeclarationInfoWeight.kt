@@ -42,22 +42,10 @@ data class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight (
 
     /* Weight unit. Possible values: - MILLIGRAM  - GRAM - KILOGRAM  - POUND  - OUNCE */
     @SerializedName("unit")
-    val unit: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * Weight unit. Possible values: - MILLIGRAM  - GRAM - KILOGRAM  - POUND  - OUNCE
-     *
-     * Values: MILLIGRAM,GRAM,KILOGRAM,POUND,OUNCE
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "MILLIGRAM") MILLIGRAM("MILLIGRAM"),
-        @SerializedName(value = "GRAM") GRAM("GRAM"),
-        @SerializedName(value = "KILOGRAM") KILOGRAM("KILOGRAM"),
-        @SerializedName(value = "POUND") POUND("POUND"),
-        @SerializedName(value = "OUNCE") OUNCE("OUNCE");
-    }
 
 }
 

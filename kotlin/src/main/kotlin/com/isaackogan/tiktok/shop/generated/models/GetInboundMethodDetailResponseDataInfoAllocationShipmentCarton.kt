@@ -43,7 +43,7 @@ data class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton (
 
     /* Indicates if this is a single SKU carton or multi SKU carton. **Possible values:** * `SINGLE_SKU` * `MULTI_SKU` */
     @SerializedName("carton_type")
-    val cartonType: GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton.CartonType? = null,
+    val cartonType: kotlin.String? = null,
 
     /* Goods item list of a carton. */
     @SerializedName("items")
@@ -63,15 +63,6 @@ data class GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton (
 
 ) {
 
-    /**
-     * Indicates if this is a single SKU carton or multi SKU carton. **Possible values:** * `SINGLE_SKU` * `MULTI_SKU`
-     *
-     * Values: SINGLE_SKU,MULTI_SKU
-     */
-    enum class CartonType(val value: kotlin.String) {
-        @SerializedName(value = "SINGLE_SKU") SINGLE_SKU("SINGLE_SKU"),
-        @SerializedName(value = "MULTI_SKU") MULTI_SKU("MULTI_SKU");
-    }
 
 }
 

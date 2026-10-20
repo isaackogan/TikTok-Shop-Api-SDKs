@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_activity_response_data_discount_bxgy_discount_discount_type import (
-    GetActivityResponseDataDiscountBxgyDiscountDiscountType,
-)
-from ..models.get_activity_response_data_discount_bxgy_discount_threshold_type import (
-    GetActivityResponseDataDiscountBxgyDiscountThresholdType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetActivityResponseDataDiscountBxgyDiscount")
@@ -21,8 +15,7 @@ T = TypeVar("T", bound="GetActivityResponseDataDiscountBxgyDiscount")
 class GetActivityResponseDataDiscountBxgyDiscount:
     """
     Attributes:
-        threshold_type (GetActivityResponseDataDiscountBxgyDiscountThresholdType | Unset): The purchase criterion
-            returned for the activity.
+        threshold_type (str | Unset): The purchase criterion returned for the activity.
             Possible values:
             - `MINIMAL_ITEM_QUANTITY`: The buyer must purchase at least the specified quantity of eligible products.
             - `MINIMAL_ORDER_AMOUNT`: The eligible-product subtotal must reach the specified amount.
@@ -31,8 +24,8 @@ class GetActivityResponseDataDiscountBxgyDiscount:
             and must be an integer.
             - When `threshold_type==MINIMAL_ORDER_AMOUNT`, this is the eligible-product subtotal the buyer must reach, in
             local currency.
-        discount_type (GetActivityResponseDataDiscountBxgyDiscountDiscountType | Unset): The type of discount awarded as
-            a benefit. For PERCENTAGE_OFF and AMOUNT_OFF_EACH, the discount amount is determined by `discount_value`.
+        discount_type (str | Unset): The type of discount awarded as a benefit. For PERCENTAGE_OFF and AMOUNT_OFF_EACH,
+            the discount amount is determined by `discount_value`.
             Possible enumerations are:
             - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products.
             - `FREE`: Buyer will receive X eligible products for free.
@@ -48,24 +41,20 @@ class GetActivityResponseDataDiscountBxgyDiscount:
             applied within a single order. This value must be a positive integer.
     """
 
-    threshold_type: GetActivityResponseDataDiscountBxgyDiscountThresholdType | Unset = UNSET
+    threshold_type: str | Unset = UNSET
     threshold_value: str | Unset = UNSET
-    discount_type: GetActivityResponseDataDiscountBxgyDiscountDiscountType | Unset = UNSET
+    discount_type: str | Unset = UNSET
     discount_value: str | Unset = UNSET
     benefit_max_applicable_quantity: str | Unset = UNSET
     benefit_max_applicable_times: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        threshold_type: str | Unset = UNSET
-        if not isinstance(self.threshold_type, Unset):
-            threshold_type = self.threshold_type.value
+        threshold_type = self.threshold_type
 
         threshold_value = self.threshold_value
 
-        discount_type: str | Unset = UNSET
-        if not isinstance(self.discount_type, Unset):
-            discount_type = self.discount_type.value
+        discount_type = self.discount_type
 
         discount_value = self.discount_value
 
@@ -94,21 +83,11 @@ class GetActivityResponseDataDiscountBxgyDiscount:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _threshold_type = d.pop("threshold_type", UNSET)
-        threshold_type: GetActivityResponseDataDiscountBxgyDiscountThresholdType | Unset
-        if isinstance(_threshold_type, Unset):
-            threshold_type = UNSET
-        else:
-            threshold_type = GetActivityResponseDataDiscountBxgyDiscountThresholdType(_threshold_type)
+        threshold_type = d.pop("threshold_type", UNSET)
 
         threshold_value = d.pop("threshold_value", UNSET)
 
-        _discount_type = d.pop("discount_type", UNSET)
-        discount_type: GetActivityResponseDataDiscountBxgyDiscountDiscountType | Unset
-        if isinstance(_discount_type, Unset):
-            discount_type = UNSET
-        else:
-            discount_type = GetActivityResponseDataDiscountBxgyDiscountDiscountType(_discount_type)
+        discount_type = d.pop("discount_type", UNSET)
 
         discount_value = d.pop("discount_value", UNSET)
 

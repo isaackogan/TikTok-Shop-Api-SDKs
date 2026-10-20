@@ -50,10 +50,10 @@ export interface GetConversationsResponseDataConversationLatestMessage {
      * - RETURN_REFUND_CARD: Return/refund card.
      * - COUPON_CARD
      * - OTHER: Messages of types not supported in this API.
-     * @type {GetConversationsResponseDataConversationLatestMessageTypeEnum}
+     * @type {string}
      * @memberof GetConversationsResponseDataConversationLatestMessage
      */
-    type?: GetConversationsResponseDataConversationLatestMessageTypeEnum;
+    type?: string;
     /**
      * Message content, in JSON serialized string.
      * Examples of content for each type of message are listed below:
@@ -158,29 +158,6 @@ export interface GetConversationsResponseDataConversationLatestMessage {
      */
     index?: string;
 }
-
-
-/**
- * @export
- */
-export const GetConversationsResponseDataConversationLatestMessageTypeEnum = {
-    Text: 'TEXT',
-    Image: 'IMAGE',
-    AllocatedService: 'ALLOCATED_SERVICE',
-    Notification: 'NOTIFICATION',
-    BuyerEnterFromTransfer: 'BUYER_ENTER_FROM_TRANSFER',
-    BuyerEnterFromProduct: 'BUYER_ENTER_FROM_PRODUCT',
-    BuyerEnterFromOrder: 'BUYER_ENTER_FROM_ORDER',
-    ProductCard: 'PRODUCT_CARD',
-    Emoticons: 'EMOTICONS',
-    OrderCard: 'ORDER_CARD',
-    Video: 'VIDEO',
-    ReturnRefundCard: 'RETURN_REFUND_CARD',
-    CouponCard: 'COUPON_CARD',
-    Other: 'OTHER'
-} as const;
-export type GetConversationsResponseDataConversationLatestMessageTypeEnum = typeof GetConversationsResponseDataConversationLatestMessageTypeEnum[keyof typeof GetConversationsResponseDataConversationLatestMessageTypeEnum];
-
 
 /**
  * Check if a given object implements the GetConversationsResponseDataConversationLatestMessage interface.

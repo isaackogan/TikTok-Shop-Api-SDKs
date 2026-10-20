@@ -57,150 +57,15 @@ public class ProductInformationChangeWebhookData {
   @javax.annotation.Nullable
   private String productId;
 
-  /**
-   * The originating source of the change.   Possible values:   - &#x60;SELLER_CENTER&#x60;   - &#x60;OPEN_API&#x60;
-   */
-  @JsonAdapter(ChangeSourceEnum.Adapter.class)
-  public enum ChangeSourceEnum {
-    SELLER_CENTER("SELLER_CENTER"),
-    
-    OPEN_API("OPEN_API");
-
-    private String value;
-
-    ChangeSourceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ChangeSourceEnum fromValue(String value) {
-      for (ChangeSourceEnum b : ChangeSourceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ChangeSourceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ChangeSourceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ChangeSourceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ChangeSourceEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ChangeSourceEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CHANGE_SOURCE = "change_source";
   @SerializedName(SERIALIZED_NAME_CHANGE_SOURCE)
   @javax.annotation.Nullable
-  private ChangeSourceEnum changeSource;
-
-  /**
-   * Gets or Sets changedFields
-   */
-  @JsonAdapter(ChangedFieldsEnum.Adapter.class)
-  public enum ChangedFieldsEnum {
-    /**
-     * The product name was changed.
-     */
-    TITLE("title"),
-    
-    /**
-     * The product description was changed.
-     */
-    DESCRIPTION("description"),
-    
-    /**
-     * Product images that appear in the image gallery were added, removed, or changed.
-     */
-    MAIN_IMAGES("main_images"),
-    
-    /**
-     * Product attributes were added, removed, or edited.
-     */
-    PRODUCT_ATTRIBUTES("product_attributes"),
-    
-    /**
-     * The size chart image was added, removed, or changed.
-     */
-    SIZE_CHART_IMAGE("size_chart_image"),
-    
-    /**
-     * The associated size chart template was removed or its details were edited, or a new size chart template was associated.
-     */
-    SIZE_CHART_TEMPLATE("size_chart_template"),
-    
-    /**
-     * Other product properties not specified above were changed.
-     */
-    OTHERS("others");
-
-    private String value;
-
-    ChangedFieldsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ChangedFieldsEnum fromValue(String value) {
-      for (ChangedFieldsEnum b : ChangedFieldsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ChangedFieldsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ChangedFieldsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ChangedFieldsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ChangedFieldsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ChangedFieldsEnum.fromValue(value);
-    }
-  }
+  private String changeSource;
 
   public static final String SERIALIZED_NAME_CHANGED_FIELDS = "changed_fields";
   @SerializedName(SERIALIZED_NAME_CHANGED_FIELDS)
   @javax.annotation.Nullable
-  private List<ChangedFieldsEnum> changedFields = new ArrayList<>();
+  private List<String> changedFields = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_UPDATE_TIME = "update_time";
   @SerializedName(SERIALIZED_NAME_UPDATE_TIME)
@@ -229,7 +94,7 @@ public class ProductInformationChangeWebhookData {
   }
 
 
-  public ProductInformationChangeWebhookData changeSource(@javax.annotation.Nullable ChangeSourceEnum changeSource) {
+  public ProductInformationChangeWebhookData changeSource(@javax.annotation.Nullable String changeSource) {
     this.changeSource = changeSource;
     return this;
   }
@@ -239,21 +104,21 @@ public class ProductInformationChangeWebhookData {
    * @return changeSource
    */
   @javax.annotation.Nullable
-  public ChangeSourceEnum getChangeSource() {
+  public String getChangeSource() {
     return changeSource;
   }
 
-  public void setChangeSource(@javax.annotation.Nullable ChangeSourceEnum changeSource) {
+  public void setChangeSource(@javax.annotation.Nullable String changeSource) {
     this.changeSource = changeSource;
   }
 
 
-  public ProductInformationChangeWebhookData changedFields(@javax.annotation.Nullable List<ChangedFieldsEnum> changedFields) {
+  public ProductInformationChangeWebhookData changedFields(@javax.annotation.Nullable List<String> changedFields) {
     this.changedFields = changedFields;
     return this;
   }
 
-  public ProductInformationChangeWebhookData addChangedFieldsItem(ChangedFieldsEnum changedFieldsItem) {
+  public ProductInformationChangeWebhookData addChangedFieldsItem(String changedFieldsItem) {
     if (this.changedFields == null) {
       this.changedFields = new ArrayList<>();
     }
@@ -266,11 +131,11 @@ public class ProductInformationChangeWebhookData {
    * @return changedFields
    */
   @javax.annotation.Nullable
-  public List<ChangedFieldsEnum> getChangedFields() {
+  public List<String> getChangedFields() {
     return changedFields;
   }
 
-  public void setChangedFields(@javax.annotation.Nullable List<ChangedFieldsEnum> changedFields) {
+  public void setChangedFields(@javax.annotation.Nullable List<String> changedFields) {
     this.changedFields = changedFields;
   }
 
@@ -411,10 +276,6 @@ public class ProductInformationChangeWebhookData {
       }
       if ((jsonObj.get("change_source") != null && !jsonObj.get("change_source").isJsonNull()) && !jsonObj.get("change_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `change_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("change_source").toString()));
-      }
-      // validate the optional field `change_source`
-      if (jsonObj.get("change_source") != null && !jsonObj.get("change_source").isJsonNull()) {
-        ChangeSourceEnum.validateJsonElement(jsonObj.get("change_source"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("changed_fields") != null && !jsonObj.get("changed_fields").isJsonNull() && !jsonObj.get("changed_fields").isJsonArray()) {

@@ -32,10 +32,10 @@ export interface GetGlobalListingRulesResponseData {
      * Possible values:
      * - GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.
      * - LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
-     * @type {Array<GetGlobalListingRulesResponseDataListingMethodsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalListingRulesResponseData
      */
-    listingMethods?: Array<GetGlobalListingRulesResponseDataListingMethodsEnum>;
+    listingMethods?: Array<string>;
     /**
      * A list of inventory allocation rules for all warehouses linked to the shop.
      * @type {Array<GetGlobalListingRulesResponseDataInventoryRule>}
@@ -43,17 +43,6 @@ export interface GetGlobalListingRulesResponseData {
      */
     inventoryRules?: Array<GetGlobalListingRulesResponseDataInventoryRule>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalListingRulesResponseDataListingMethodsEnum = {
-    GlobalPublishing: 'GLOBAL_PUBLISHING',
-    LocalReplication: 'LOCAL_REPLICATION'
-} as const;
-export type GetGlobalListingRulesResponseDataListingMethodsEnum = typeof GetGlobalListingRulesResponseDataListingMethodsEnum[keyof typeof GetGlobalListingRulesResponseDataListingMethodsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalListingRulesResponseData interface.

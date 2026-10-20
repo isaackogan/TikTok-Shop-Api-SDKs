@@ -28,37 +28,19 @@ export interface SearchProductsResponseDataProductSkuExternalListPrice {
     /**
      * The currency.
      * Possible values: USD
-     * @type {SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductSkuExternalListPrice
      */
-    currency?: SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum;
+    currency?: string;
     /**
      * The external ecommerce platform from which the price is sourced.
      * Possible values:
      * - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-     * @type {SearchProductsResponseDataProductSkuExternalListPriceSourceEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductSkuExternalListPrice
      */
-    source?: SearchProductsResponseDataProductSkuExternalListPriceSourceEnum;
+    source?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum = {
-    Usd: 'USD'
-} as const;
-export type SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum = typeof SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum[keyof typeof SearchProductsResponseDataProductSkuExternalListPriceCurrencyEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductSkuExternalListPriceSourceEnum = {
-    ShopifyCompareAtPrice: 'SHOPIFY_COMPARE_AT_PRICE'
-} as const;
-export type SearchProductsResponseDataProductSkuExternalListPriceSourceEnum = typeof SearchProductsResponseDataProductSkuExternalListPriceSourceEnum[keyof typeof SearchProductsResponseDataProductSkuExternalListPriceSourceEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProductSkuExternalListPrice interface.

@@ -62,68 +62,10 @@ public class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule {
   @javax.annotation.Nullable
   private Long maxCount;
 
-  /**
-   * Gets or Sets couponType
-   */
-  @JsonAdapter(CouponTypeEnum.Adapter.class)
-  public enum CouponTypeEnum {
-    /**
-     * Regular coupons that target all buyers.
-     */
-    REGULAR_ALL("REGULAR_ALL"),
-    
-    /**
-     * Regular coupons that target only repeat buyers.
-     */
-    REGULAR_REPEAT("REGULAR_REPEAT");
-
-    private String value;
-
-    CouponTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CouponTypeEnum fromValue(String value) {
-      for (CouponTypeEnum b : CouponTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CouponTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CouponTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CouponTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CouponTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CouponTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_COUPON_TYPE = "coupon_type";
   @SerializedName(SERIALIZED_NAME_COUPON_TYPE)
   @javax.annotation.Nullable
-  private List<CouponTypeEnum> couponType = new ArrayList<>();
+  private List<String> couponType = new ArrayList<>();
 
   public GetMessageTemplatesResponseDataMessageTemplateCouponCardRule() {
   }
@@ -166,12 +108,12 @@ public class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule {
   }
 
 
-  public GetMessageTemplatesResponseDataMessageTemplateCouponCardRule couponType(@javax.annotation.Nullable List<CouponTypeEnum> couponType) {
+  public GetMessageTemplatesResponseDataMessageTemplateCouponCardRule couponType(@javax.annotation.Nullable List<String> couponType) {
     this.couponType = couponType;
     return this;
   }
 
-  public GetMessageTemplatesResponseDataMessageTemplateCouponCardRule addCouponTypeItem(CouponTypeEnum couponTypeItem) {
+  public GetMessageTemplatesResponseDataMessageTemplateCouponCardRule addCouponTypeItem(String couponTypeItem) {
     if (this.couponType == null) {
       this.couponType = new ArrayList<>();
     }
@@ -184,11 +126,11 @@ public class GetMessageTemplatesResponseDataMessageTemplateCouponCardRule {
    * @return couponType
    */
   @javax.annotation.Nullable
-  public List<CouponTypeEnum> getCouponType() {
+  public List<String> getCouponType() {
     return couponType;
   }
 
-  public void setCouponType(@javax.annotation.Nullable List<CouponTypeEnum> couponType) {
+  public void setCouponType(@javax.annotation.Nullable List<String> couponType) {
     this.couponType = couponType;
   }
 

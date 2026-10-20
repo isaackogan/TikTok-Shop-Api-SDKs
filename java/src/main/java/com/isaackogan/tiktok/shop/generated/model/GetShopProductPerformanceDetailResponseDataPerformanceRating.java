@@ -50,83 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetShopProductPerformanceDetailResponseDataPerformanceRating {
-  /**
-   * Rating star bucket. Possible values: - 1_STAR: One-star rating. - 2_STAR: Two-star rating. - 3_STAR: Three-star rating. - 4_STAR: Four-star rating. - 5_STAR: Five-star rating.
-   */
-  @JsonAdapter(StarsEnum.Adapter.class)
-  public enum StarsEnum {
-    /**
-     * One-star rating.
-     */
-    _1_STAR("1_STAR"),
-    
-    /**
-     * Two-star rating.
-     */
-    _2_STAR("2_STAR"),
-    
-    /**
-     * Three-star rating.
-     */
-    _3_STAR("3_STAR"),
-    
-    /**
-     * Four-star rating.
-     */
-    _4_STAR("4_STAR"),
-    
-    /**
-     * Five-star rating.
-     */
-    _5_STAR("5_STAR");
-
-    private String value;
-
-    StarsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StarsEnum fromValue(String value) {
-      for (StarsEnum b : StarsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StarsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StarsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StarsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StarsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StarsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STARS = "stars";
   @SerializedName(SERIALIZED_NAME_STARS)
   @javax.annotation.Nullable
-  private StarsEnum stars;
+  private String stars;
 
   public static final String SERIALIZED_NAME_COUNT = "count";
   @SerializedName(SERIALIZED_NAME_COUNT)
@@ -141,7 +68,7 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceRating {
   public GetShopProductPerformanceDetailResponseDataPerformanceRating() {
   }
 
-  public GetShopProductPerformanceDetailResponseDataPerformanceRating stars(@javax.annotation.Nullable StarsEnum stars) {
+  public GetShopProductPerformanceDetailResponseDataPerformanceRating stars(@javax.annotation.Nullable String stars) {
     this.stars = stars;
     return this;
   }
@@ -151,11 +78,11 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceRating {
    * @return stars
    */
   @javax.annotation.Nullable
-  public StarsEnum getStars() {
+  public String getStars() {
     return stars;
   }
 
-  public void setStars(@javax.annotation.Nullable StarsEnum stars) {
+  public void setStars(@javax.annotation.Nullable String stars) {
     this.stars = stars;
   }
 
@@ -310,10 +237,6 @@ public class GetShopProductPerformanceDetailResponseDataPerformanceRating {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("stars") != null && !jsonObj.get("stars").isJsonNull()) && !jsonObj.get("stars").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `stars` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stars").toString()));
-      }
-      // validate the optional field `stars`
-      if (jsonObj.get("stars") != null && !jsonObj.get("stars").isJsonNull()) {
-        StarsEnum.validateJsonElement(jsonObj.get("stars"));
       }
       if ((jsonObj.get("percentage") != null && !jsonObj.get("percentage").isJsonNull()) && !jsonObj.get("percentage").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `percentage` to be a primitive type in the JSON string but got `%s`", jsonObj.get("percentage").toString()));

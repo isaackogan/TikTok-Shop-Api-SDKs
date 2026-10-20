@@ -63,134 +63,15 @@ public class CombinedListingChangeWebhookData {
   @javax.annotation.Nullable
   private List<CombinedListingChangeWebhookDataProduct> products = new ArrayList<>();
 
-  /**
-   * The status of the combined listing.   Possible values:      * LIVE   * SYSTEM_DEACTIVATED   * SELLER_DEACTIVATED   * DELETED      Note: Only products in LIVE combined listings will appear on the product display page.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    LIVE("LIVE"),
-    
-    SYSTEM_DEACTIVATED("SYSTEM_DEACTIVATED"),
-    
-    SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-    
-    DELETED("DELETED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
-
-  /**
-   * The type of change made to this combined listing.   Possible values:      * CREATE: The combined listing was created.   * UPDATE: The combined listing was updated to add or remove products.   * DELETE: The combined listing was deleted.
-   */
-  @JsonAdapter(ChangeTypeEnum.Adapter.class)
-  public enum ChangeTypeEnum {
-    /**
-     * The combined listing was created.
-     */
-    CREATE("CREATE"),
-    
-    /**
-     * The combined listing was updated to add or remove products.
-     */
-    UPDATE("UPDATE"),
-    
-    /**
-     * The combined listing was deleted.
-     */
-    DELETE("DELETE");
-
-    private String value;
-
-    ChangeTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ChangeTypeEnum fromValue(String value) {
-      for (ChangeTypeEnum b : ChangeTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ChangeTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ChangeTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ChangeTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ChangeTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ChangeTypeEnum.fromValue(value);
-    }
-  }
+  private String status;
 
   public static final String SERIALIZED_NAME_CHANGE_TYPE = "change_type";
   @SerializedName(SERIALIZED_NAME_CHANGE_TYPE)
   @javax.annotation.Nullable
-  private ChangeTypeEnum changeType;
+  private String changeType;
 
   public static final String SERIALIZED_NAME_ADDED_PRODUCT_IDS = "added_product_ids";
   @SerializedName(SERIALIZED_NAME_ADDED_PRODUCT_IDS)
@@ -251,7 +132,7 @@ public class CombinedListingChangeWebhookData {
   }
 
 
-  public CombinedListingChangeWebhookData status(@javax.annotation.Nullable StatusEnum status) {
+  public CombinedListingChangeWebhookData status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -261,16 +142,16 @@ public class CombinedListingChangeWebhookData {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
 
-  public CombinedListingChangeWebhookData changeType(@javax.annotation.Nullable ChangeTypeEnum changeType) {
+  public CombinedListingChangeWebhookData changeType(@javax.annotation.Nullable String changeType) {
     this.changeType = changeType;
     return this;
   }
@@ -280,11 +161,11 @@ public class CombinedListingChangeWebhookData {
    * @return changeType
    */
   @javax.annotation.Nullable
-  public ChangeTypeEnum getChangeType() {
+  public String getChangeType() {
     return changeType;
   }
 
-  public void setChangeType(@javax.annotation.Nullable ChangeTypeEnum changeType) {
+  public void setChangeType(@javax.annotation.Nullable String changeType) {
     this.changeType = changeType;
   }
 
@@ -479,16 +360,8 @@ public class CombinedListingChangeWebhookData {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if ((jsonObj.get("change_type") != null && !jsonObj.get("change_type").isJsonNull()) && !jsonObj.get("change_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `change_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("change_type").toString()));
-      }
-      // validate the optional field `change_type`
-      if (jsonObj.get("change_type") != null && !jsonObj.get("change_type").isJsonNull()) {
-        ChangeTypeEnum.validateJsonElement(jsonObj.get("change_type"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("added_product_ids") != null && !jsonObj.get("added_product_ids").isJsonNull() && !jsonObj.get("added_product_ids").isJsonArray()) {

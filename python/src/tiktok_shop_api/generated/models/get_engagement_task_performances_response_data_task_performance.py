@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_engagement_task_performances_response_data_task_performance_status import (
-    GetEngagementTaskPerformancesResponseDataTaskPerformanceStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetEngagementTaskPerformancesResponseDataTaskPerformance")
@@ -19,7 +16,7 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
     """
     Attributes:
         id (str | Unset): The customer engagement task ID for this performance record.
-        status (GetEngagementTaskPerformancesResponseDataTaskPerformanceStatus | Unset): The status of the task.
+        status (str | Unset): The status of the task.
             Possible values:
             - `UNKNOWN`: The task status is unknown.
             - `DRAFT`: The task is in draft status.
@@ -37,7 +34,7 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
     """
 
     id: str | Unset = UNSET
-    status: GetEngagementTaskPerformancesResponseDataTaskPerformanceStatus | Unset = UNSET
+    status: str | Unset = UNSET
     sent_recipient_count: int | Unset = UNSET
     read_recipient_count: int | Unset = UNSET
     order_count: int | Unset = UNSET
@@ -48,9 +45,7 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         sent_recipient_count = self.sent_recipient_count
 
@@ -87,12 +82,7 @@ class GetEngagementTaskPerformancesResponseDataTaskPerformance:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetEngagementTaskPerformancesResponseDataTaskPerformanceStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetEngagementTaskPerformancesResponseDataTaskPerformanceStatus(_status)
+        status = d.pop("status", UNSET)
 
         sent_recipient_count = d.pop("sent_recipient_count", UNSET)
 

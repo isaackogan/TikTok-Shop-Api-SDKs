@@ -6,16 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_order_list_response_data_order_line_item_cancel_user import (
-    GetOrderListResponseDataOrderLineItemCancelUser,
-)
-from ..models.get_order_list_response_data_order_line_item_display_status import (
-    GetOrderListResponseDataOrderLineItemDisplayStatus,
-)
-from ..models.get_order_list_response_data_order_line_item_package_status import (
-    GetOrderListResponseDataOrderLineItemPackageStatus,
-)
-from ..models.get_order_list_response_data_order_line_item_sku_type import GetOrderListResponseDataOrderLineItemSkuType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -36,7 +26,7 @@ class GetOrderListResponseDataOrderLineItem:
         sku_id (str | Unset): SKU ID.
         combined_listing_skus (list[CombinedListingSku] | Unset): For a virtual bundle SKU, returns an array of related
             product SKUs that compose the virtual bundle.
-        display_status (GetOrderListResponseDataOrderLineItemDisplayStatus | Unset): Available values:
+        display_status (str | Unset): Available values:
             - `UNPAID`: The order has been placed, but payment has not yet completed.
             - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet.
             - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier.
@@ -56,8 +46,8 @@ class GetOrderListResponseDataOrderLineItem:
             **Note** Only available in Germany market
         platform_discount (str | Unset): Platform discount amount. Please refer to the currency of `payment_info`.
         seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
-        sku_type (GetOrderListResponseDataOrderLineItemSkuType | Unset): [**Deprecated**: This field is deprecated and
-            will be removed in a future API version. Use `order_type` instead.]
+        sku_type (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future API version.
+            Use `order_type` instead.]
 
             The order line type.
             Possible values based on region:
@@ -77,7 +67,7 @@ class GetOrderListResponseDataOrderLineItem:
         original_price (str | Unset): Item original price. Please refer to the currency of `payment_info`.
         rts_time (int | Unset): The time sellers shipped the order (called [Ship Package
             API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
-        package_status (GetOrderListResponseDataOrderLineItemPackageStatus | Unset): The package status of the item.
+        package_status (str | Unset): The package status of the item.
             Available values:
             - `TO_FULFILL`: Package awaiting seller to arrange shipment.
             - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection.
@@ -87,7 +77,7 @@ class GetOrderListResponseDataOrderLineItem:
             damaged.
         currency (str | Unset): Currency for payment.
         shipping_provider_name (str | Unset): The shipping provider name.
-        cancel_user (GetOrderListResponseDataOrderLineItemCancelUser | Unset): Cancellation request initiator.
+        cancel_user (str | Unset): Cancellation request initiator.
             Available values:
             - `BUYER`
             - `SELLER`
@@ -159,7 +149,7 @@ class GetOrderListResponseDataOrderLineItem:
     id: str | Unset = UNSET
     sku_id: str | Unset = UNSET
     combined_listing_skus: list[CombinedListingSku] | Unset = UNSET
-    display_status: GetOrderListResponseDataOrderLineItemDisplayStatus | Unset = UNSET
+    display_status: str | Unset = UNSET
     product_name: str | Unset = UNSET
     seller_sku: str | Unset = UNSET
     sku_image: str | Unset = UNSET
@@ -169,14 +159,14 @@ class GetOrderListResponseDataOrderLineItem:
     pfand_fee: str | Unset = UNSET
     platform_discount: str | Unset = UNSET
     seller_discount: str | Unset = UNSET
-    sku_type: GetOrderListResponseDataOrderLineItemSkuType | Unset = UNSET
+    sku_type: str | Unset = UNSET
     cancel_reason: str | Unset = UNSET
     original_price: str | Unset = UNSET
     rts_time: int | Unset = UNSET
-    package_status: GetOrderListResponseDataOrderLineItemPackageStatus | Unset = UNSET
+    package_status: str | Unset = UNSET
     currency: str | Unset = UNSET
     shipping_provider_name: str | Unset = UNSET
-    cancel_user: GetOrderListResponseDataOrderLineItemCancelUser | Unset = UNSET
+    cancel_user: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
     is_gift: bool | Unset = UNSET
     item_tax: list[ItemTax] | Unset = UNSET
@@ -215,9 +205,7 @@ class GetOrderListResponseDataOrderLineItem:
                 combined_listing_skus_item = combined_listing_skus_item_data.to_dict()
                 combined_listing_skus.append(combined_listing_skus_item)
 
-        display_status: str | Unset = UNSET
-        if not isinstance(self.display_status, Unset):
-            display_status = self.display_status.value
+        display_status = self.display_status
 
         product_name = self.product_name
 
@@ -237,9 +225,7 @@ class GetOrderListResponseDataOrderLineItem:
 
         seller_discount = self.seller_discount
 
-        sku_type: str | Unset = UNSET
-        if not isinstance(self.sku_type, Unset):
-            sku_type = self.sku_type.value
+        sku_type = self.sku_type
 
         cancel_reason = self.cancel_reason
 
@@ -247,17 +233,13 @@ class GetOrderListResponseDataOrderLineItem:
 
         rts_time = self.rts_time
 
-        package_status: str | Unset = UNSET
-        if not isinstance(self.package_status, Unset):
-            package_status = self.package_status.value
+        package_status = self.package_status
 
         currency = self.currency
 
         shipping_provider_name = self.shipping_provider_name
 
-        cancel_user: str | Unset = UNSET
-        if not isinstance(self.cancel_user, Unset):
-            cancel_user = self.cancel_user.value
+        cancel_user = self.cancel_user
 
         shipping_provider_id = self.shipping_provider_id
 
@@ -439,12 +421,7 @@ class GetOrderListResponseDataOrderLineItem:
 
                 combined_listing_skus.append(combined_listing_skus_item)
 
-        _display_status = d.pop("display_status", UNSET)
-        display_status: GetOrderListResponseDataOrderLineItemDisplayStatus | Unset
-        if isinstance(_display_status, Unset):
-            display_status = UNSET
-        else:
-            display_status = GetOrderListResponseDataOrderLineItemDisplayStatus(_display_status)
+        display_status = d.pop("display_status", UNSET)
 
         product_name = d.pop("product_name", UNSET)
 
@@ -464,12 +441,7 @@ class GetOrderListResponseDataOrderLineItem:
 
         seller_discount = d.pop("seller_discount", UNSET)
 
-        _sku_type = d.pop("sku_type", UNSET)
-        sku_type: GetOrderListResponseDataOrderLineItemSkuType | Unset
-        if isinstance(_sku_type, Unset):
-            sku_type = UNSET
-        else:
-            sku_type = GetOrderListResponseDataOrderLineItemSkuType(_sku_type)
+        sku_type = d.pop("sku_type", UNSET)
 
         cancel_reason = d.pop("cancel_reason", UNSET)
 
@@ -477,23 +449,13 @@ class GetOrderListResponseDataOrderLineItem:
 
         rts_time = d.pop("rts_time", UNSET)
 
-        _package_status = d.pop("package_status", UNSET)
-        package_status: GetOrderListResponseDataOrderLineItemPackageStatus | Unset
-        if isinstance(_package_status, Unset):
-            package_status = UNSET
-        else:
-            package_status = GetOrderListResponseDataOrderLineItemPackageStatus(_package_status)
+        package_status = d.pop("package_status", UNSET)
 
         currency = d.pop("currency", UNSET)
 
         shipping_provider_name = d.pop("shipping_provider_name", UNSET)
 
-        _cancel_user = d.pop("cancel_user", UNSET)
-        cancel_user: GetOrderListResponseDataOrderLineItemCancelUser | Unset
-        if isinstance(_cancel_user, Unset):
-            cancel_user = UNSET
-        else:
-            cancel_user = GetOrderListResponseDataOrderLineItemCancelUser(_cancel_user)
+        cancel_user = d.pop("cancel_user", UNSET)
 
         shipping_provider_id = d.pop("shipping_provider_id", UNSET)
 

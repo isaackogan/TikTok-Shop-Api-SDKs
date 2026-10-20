@@ -31,10 +31,10 @@ export interface ProductStatusChangeWebhookData {
      *  * PRODUCT_FIRST_PASS_REVIEW 
      *  * PRODUCT_STATUS_CHANGED 
      *  * PRODUCT_AUDIT_FAILURE
-     * @type {ProductStatusChangeWebhookDataStatusEnum}
+     * @type {string}
      * @memberof ProductStatusChangeWebhookData
      */
-    status?: ProductStatusChangeWebhookDataStatusEnum;
+    status?: string;
     /**
      * The reason a product audit was rejected or frozen
      * @type {string}
@@ -48,18 +48,6 @@ export interface ProductStatusChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const ProductStatusChangeWebhookDataStatusEnum = {
-    ProductFirstPassReview: 'PRODUCT_FIRST_PASS_REVIEW',
-    ProductStatusChanged: 'PRODUCT_STATUS_CHANGED',
-    ProductAuditFailure: 'PRODUCT_AUDIT_FAILURE'
-} as const;
-export type ProductStatusChangeWebhookDataStatusEnum = typeof ProductStatusChangeWebhookDataStatusEnum[keyof typeof ProductStatusChangeWebhookDataStatusEnum];
-
 
 /**
  * Check if a given object implements the ProductStatusChangeWebhookData interface.

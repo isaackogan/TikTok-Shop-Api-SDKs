@@ -39,7 +39,7 @@ data class CheckListingPrerequisitesResponseDataCheckResult (
 
     /* A requirement that the shop needs to satisfy. Possible values: - SHOP_STATUS - SHOP_TAX - PICKUP_WAREHOUSE - RETURN_WAREHOUSE - DELIVERY_OPTION - SHIPPING_TEMPLATE - PRODUCT_QUANTITY_LIMIT - EXTENDED_PRODUCER_RESPONSIBILITY - BANk_ACCOUNT - CONTACT_INFO */
     @SerializedName("check_item")
-    val checkItem: CheckListingPrerequisitesResponseDataCheckResult.CheckItem? = null,
+    val checkItem: kotlin.String? = null,
 
     /* A flag indicating whether the shop has failed a `check_item`. */
     @SerializedName("is_failed")
@@ -51,23 +51,6 @@ data class CheckListingPrerequisitesResponseDataCheckResult (
 
 ) {
 
-    /**
-     * A requirement that the shop needs to satisfy. Possible values: - SHOP_STATUS - SHOP_TAX - PICKUP_WAREHOUSE - RETURN_WAREHOUSE - DELIVERY_OPTION - SHIPPING_TEMPLATE - PRODUCT_QUANTITY_LIMIT - EXTENDED_PRODUCER_RESPONSIBILITY - BANk_ACCOUNT - CONTACT_INFO
-     *
-     * Values: SHOP_STATUS,SHOP_TAX,PICKUP_WAREHOUSE,RETURN_WAREHOUSE,DELIVERY_OPTION,SHIPPING_TEMPLATE,PRODUCT_QUANTITY_LIMIT,EXTENDED_PRODUCER_RESPONSIBILITY,BANk_ACCOUNT,CONTACT_INFO
-     */
-    enum class CheckItem(val value: kotlin.String) {
-        @SerializedName(value = "SHOP_STATUS") SHOP_STATUS("SHOP_STATUS"),
-        @SerializedName(value = "SHOP_TAX") SHOP_TAX("SHOP_TAX"),
-        @SerializedName(value = "PICKUP_WAREHOUSE") PICKUP_WAREHOUSE("PICKUP_WAREHOUSE"),
-        @SerializedName(value = "RETURN_WAREHOUSE") RETURN_WAREHOUSE("RETURN_WAREHOUSE"),
-        @SerializedName(value = "DELIVERY_OPTION") DELIVERY_OPTION("DELIVERY_OPTION"),
-        @SerializedName(value = "SHIPPING_TEMPLATE") SHIPPING_TEMPLATE("SHIPPING_TEMPLATE"),
-        @SerializedName(value = "PRODUCT_QUANTITY_LIMIT") PRODUCT_QUANTITY_LIMIT("PRODUCT_QUANTITY_LIMIT"),
-        @SerializedName(value = "EXTENDED_PRODUCER_RESPONSIBILITY") EXTENDED_PRODUCER_RESPONSIBILITY("EXTENDED_PRODUCER_RESPONSIBILITY"),
-        @SerializedName(value = "BANk_ACCOUNT") BANk_ACCOUNT("BANk_ACCOUNT"),
-        @SerializedName(value = "CONTACT_INFO") CONTACT_INFO("CONTACT_INFO");
-    }
 
 }
 

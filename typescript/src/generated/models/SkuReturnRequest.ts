@@ -102,10 +102,10 @@ export interface SkuReturnRequest {
      * - `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.
      * - `REPLACEMENT`: The buyer requires the seller to replace the item(s).
      * - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
-     * @type {SkuReturnRequestReturnTypeEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    returnType?: SkuReturnRequestReturnTypeEnum;
+    returnType?: string;
     /**
      * Return status.
      * Available values:
@@ -127,10 +127,10 @@ export interface SkuReturnRequest {
      * - `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory.
      * - `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.
      * - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
-     * @type {SkuReturnRequestReturnStatusEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    returnStatus?: SkuReturnRequestReturnStatusEnum;
+    returnStatus?: string;
     /**
      * Arbitration status.
      * Available values:
@@ -138,10 +138,10 @@ export interface SkuReturnRequest {
      * - `SUPPORT_BUYER`: The platform operator supports the buyer.
      * - `SUPPORT_SELLER`: The platform operator supports the seller.
      * - `CLOSED`: Arbitration is closed.
-     * @type {SkuReturnRequestArbitrationStatusEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    arbitrationStatus?: SkuReturnRequestArbitrationStatusEnum;
+    arbitrationStatus?: string;
     /**
      * Return initiation role.
      * Available values:
@@ -150,10 +150,10 @@ export interface SkuReturnRequest {
      * - `OPERATOR` : TikTok Shop platform operator.
      * - `SYSTEM`: TikTok Shop system.
      * Please see "API overview" to learn more about roles.
-     * @type {SkuReturnRequestRoleEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    role?: SkuReturnRequestRoleEnum;
+    role?: string;
     /**
      * Machine-readable reason code for the return. Use `return_reason_text` for localized display text.
      * @type {string}
@@ -178,10 +178,10 @@ export interface SkuReturnRequest {
      * Available values:
      * - `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.
      * - `BUYER_ARRANGE`: The buyer arranges the return shipment.
-     * @type {SkuReturnRequestShipmentTypeEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    shipmentType?: SkuReturnRequestShipmentTypeEnum;
+    shipmentType?: string;
     /**
      * The handover method buyer chooses to use when returning item(s) to seller using platform's shipping service.
      * - `DROP_OFF`: buyer will drop off the item(s) at courier
@@ -268,10 +268,10 @@ export interface SkuReturnRequest {
      * - `SHIPPING_LABEL`
      * - `QR_CODE` - QR Code with Box
      * - `QR_CODE_NBNL` - QR Code with No Box No Label
-     * @type {SkuReturnRequestReturnShippingDocumentTypeEnum}
+     * @type {string}
      * @memberof SkuReturnRequest
      */
-    returnShippingDocumentType?: SkuReturnRequestReturnShippingDocumentTypeEnum;
+    returnShippingDocumentType?: string;
     /**
      * Return method:
      * - `SELLER_SHIPPED`: Seller offers the return shipping service.
@@ -347,85 +347,6 @@ export interface SkuReturnRequest {
      */
     returnSubLineItems?: Array<ReturnSubLineItem>;
 }
-
-
-/**
- * @export
- */
-export const SkuReturnRequestReturnTypeEnum = {
-    Refund: 'REFUND',
-    ReturnAndRefund: 'RETURN_AND_REFUND',
-    Replacement: 'REPLACEMENT',
-    Exchange: 'EXCHANGE'
-} as const;
-export type SkuReturnRequestReturnTypeEnum = typeof SkuReturnRequestReturnTypeEnum[keyof typeof SkuReturnRequestReturnTypeEnum];
-
-/**
- * @export
- */
-export const SkuReturnRequestReturnStatusEnum = {
-    ReturnOrRefundRequestPending: 'RETURN_OR_REFUND_REQUEST_PENDING',
-    RefundOrReturnRequestReject: 'REFUND_OR_RETURN_REQUEST_REJECT',
-    AwaitingBuyerShip: 'AWAITING_BUYER_SHIP',
-    BuyerShippedItem: 'BUYER_SHIPPED_ITEM',
-    RejectReceivePackage: 'REJECT_RECEIVE_PACKAGE',
-    ReturnOrRefundRequestSuccess: 'RETURN_OR_REFUND_REQUEST_SUCCESS',
-    ReturnOrRefundRequestCancel: 'RETURN_OR_REFUND_REQUEST_CANCEL',
-    ReturnOrRefundRequestComplete: 'RETURN_OR_REFUND_REQUEST_COMPLETE',
-    ReplacementRequestPending: 'REPLACEMENT_REQUEST_PENDING',
-    ReplacementRequestReject: 'REPLACEMENT_REQUEST_REJECT',
-    ReplacementRequestRefundSuccess: 'REPLACEMENT_REQUEST_REFUND_SUCCESS',
-    ReplacementRequestCancel: 'REPLACEMENT_REQUEST_CANCEL',
-    ReplacementRequestComplete: 'REPLACEMENT_REQUEST_COMPLETE',
-    AwaitingBuyerResponse: 'AWAITING_BUYER_RESPONSE',
-    ExchangeRequestPending: 'EXCHANGE_REQUEST_PENDING',
-    ExchangeRequestRefundSuccess: 'EXCHANGE_REQUEST_REFUND_SUCCESS',
-    ExchangeRequestCancel: 'EXCHANGE_REQUEST_CANCEL',
-    ExchangeRequestComplete: 'EXCHANGE_REQUEST_COMPLETE'
-} as const;
-export type SkuReturnRequestReturnStatusEnum = typeof SkuReturnRequestReturnStatusEnum[keyof typeof SkuReturnRequestReturnStatusEnum];
-
-/**
- * @export
- */
-export const SkuReturnRequestArbitrationStatusEnum = {
-    InProgress: 'IN_PROGRESS',
-    SupportBuyer: 'SUPPORT_BUYER',
-    SupportSeller: 'SUPPORT_SELLER',
-    Closed: 'CLOSED'
-} as const;
-export type SkuReturnRequestArbitrationStatusEnum = typeof SkuReturnRequestArbitrationStatusEnum[keyof typeof SkuReturnRequestArbitrationStatusEnum];
-
-/**
- * @export
- */
-export const SkuReturnRequestRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type SkuReturnRequestRoleEnum = typeof SkuReturnRequestRoleEnum[keyof typeof SkuReturnRequestRoleEnum];
-
-/**
- * @export
- */
-export const SkuReturnRequestShipmentTypeEnum = {
-    Platform: 'PLATFORM',
-    BuyerArrange: 'BUYER_ARRANGE'
-} as const;
-export type SkuReturnRequestShipmentTypeEnum = typeof SkuReturnRequestShipmentTypeEnum[keyof typeof SkuReturnRequestShipmentTypeEnum];
-
-/**
- * @export
- */
-export const SkuReturnRequestReturnShippingDocumentTypeEnum = {
-    ShippingLabel: 'SHIPPING_LABEL',
-    QrCode: 'QR_CODE',
-    QrCodeNbnl: 'QR_CODE_NBNL'
-} as const;
-export type SkuReturnRequestReturnShippingDocumentTypeEnum = typeof SkuReturnRequestReturnShippingDocumentTypeEnum[keyof typeof SkuReturnRequestReturnShippingDocumentTypeEnum];
-
 
 /**
  * Check if a given object implements the SkuReturnRequest interface.

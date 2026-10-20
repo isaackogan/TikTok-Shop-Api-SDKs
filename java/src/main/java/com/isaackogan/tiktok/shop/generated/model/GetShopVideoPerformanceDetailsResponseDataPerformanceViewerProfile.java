@@ -55,68 +55,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile {
-  /**
-   * Viewer profile type. Possible values:  - NEW_FOLLOWER: viewers who newly followed after watching the video  - VIEWERS: viewers of the video
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * viewers who newly followed after watching the video
-     */
-    NEW_FOLLOWER("NEW_FOLLOWER"),
-    
-    /**
-     * viewers of the video
-     */
-    VIEWERS("VIEWERS");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_GENDER_DISTRIBUTION = "gender_distribution";
   @SerializedName(SERIALIZED_NAME_GENDER_DISTRIBUTION)
@@ -136,7 +78,7 @@ public class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile 
   public GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile() {
   }
 
-  public GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile type(@javax.annotation.Nullable TypeEnum type) {
+  public GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -146,11 +88,11 @@ public class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile 
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -350,10 +292,6 @@ public class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile 
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if (jsonObj.get("gender_distribution") != null && !jsonObj.get("gender_distribution").isJsonNull()) {
         JsonArray jsonArraygenderDistribution = jsonObj.getAsJsonArray("gender_distribution");

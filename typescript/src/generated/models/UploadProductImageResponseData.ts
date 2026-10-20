@@ -54,26 +54,11 @@ export interface UploadProductImageResponseData {
      * - CERTIFICATION_IMAGE
      * - SIZE_CHART_IMAGE
      * - CUSTOMIZATION_IMAGE
-     * @type {UploadProductImageResponseDataUseCaseEnum}
+     * @type {string}
      * @memberof UploadProductImageResponseData
      */
-    useCase?: UploadProductImageResponseDataUseCaseEnum;
+    useCase?: string;
 }
-
-
-/**
- * @export
- */
-export const UploadProductImageResponseDataUseCaseEnum = {
-    MainImage: 'MAIN_IMAGE',
-    AttributeImage: 'ATTRIBUTE_IMAGE',
-    DescriptionImage: 'DESCRIPTION_IMAGE',
-    CertificationImage: 'CERTIFICATION_IMAGE',
-    SizeChartImage: 'SIZE_CHART_IMAGE',
-    CustomizationImage: 'CUSTOMIZATION_IMAGE'
-} as const;
-export type UploadProductImageResponseDataUseCaseEnum = typeof UploadProductImageResponseDataUseCaseEnum[keyof typeof UploadProductImageResponseDataUseCaseEnum];
-
 
 /**
  * Check if a given object implements the UploadProductImageResponseData interface.

@@ -38,7 +38,7 @@ data class GetCouponResponseDataCouponLiveTask (
 
     /* Possible enumerations: - `NONE`: Any shopper in the LIVE room may claim the coupon. - `FOLLOW_HOST`: Shoppers must follow the LIVE host before being able to claim the coupon. - `WATCH_FOR_MIN_TIME`: Shoppers must watch the LIVE for the time specified by `min_watch_time` before being able to claim the coupon. */
     @SerializedName("type")
-    val type: GetCouponResponseDataCouponLiveTask.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Number of seconds for which the shopper must watch the LIVE in order to claim the coupon. */
     @SerializedName("min_watch_time")
@@ -46,16 +46,6 @@ data class GetCouponResponseDataCouponLiveTask (
 
 ) {
 
-    /**
-     * Possible enumerations: - `NONE`: Any shopper in the LIVE room may claim the coupon. - `FOLLOW_HOST`: Shoppers must follow the LIVE host before being able to claim the coupon. - `WATCH_FOR_MIN_TIME`: Shoppers must watch the LIVE for the time specified by `min_watch_time` before being able to claim the coupon.
-     *
-     * Values: NONE,FOLLOW_HOST,WATCH_FOR_MIN_TIME
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "FOLLOW_HOST") FOLLOW_HOST("FOLLOW_HOST"),
-        @SerializedName(value = "WATCH_FOR_MIN_TIME") WATCH_FOR_MIN_TIME("WATCH_FOR_MIN_TIME");
-    }
 
 }
 

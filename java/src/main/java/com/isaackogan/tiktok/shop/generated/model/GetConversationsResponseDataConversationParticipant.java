@@ -65,126 +65,20 @@ public class GetConversationsResponseDataConversationParticipant {
   @javax.annotation.Nullable
   private String userId;
 
-  /**
-   * Participant&#39;s role. Possible enumerations: - &#x60;BUYER&#x60; - &#x60;SHOP&#x60; - &#x60;CUSTOMER_SERVICE&#x60;
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    BUYER("BUYER"),
-    
-    SHOP("SHOP"),
-    
-    CUSTOMER_SERVICE("CUSTOMER_SERVICE");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
+  private String role;
 
   public static final String SERIALIZED_NAME_NICKNAME = "nickname";
   @SerializedName(SERIALIZED_NAME_NICKNAME)
   @javax.annotation.Nullable
   private String nickname;
 
-  /**
-   * Which platform is the buyer from.  This field will only be returned when the participant&#39;s &#x60;role&#x60; is &#x60;BUYER&#x60; and the shop&#39;s region is Indonesia. Possible enumerations: - TIKTOK_SHOP - TOKOPEDIA You cannot send platform-specific content to the buyer from a different platform. For example, when you send a product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
-   */
-  @JsonAdapter(BuyerPlatformEnum.Adapter.class)
-  public enum BuyerPlatformEnum {
-    TIKTOK_SHOP("TIKTOK_SHOP"),
-    
-    TOKOPEDIA("TOKOPEDIA");
-
-    private String value;
-
-    BuyerPlatformEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BuyerPlatformEnum fromValue(String value) {
-      for (BuyerPlatformEnum b : BuyerPlatformEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BuyerPlatformEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BuyerPlatformEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BuyerPlatformEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BuyerPlatformEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      BuyerPlatformEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_BUYER_PLATFORM = "buyer_platform";
   @SerializedName(SERIALIZED_NAME_BUYER_PLATFORM)
   @javax.annotation.Nullable
-  private BuyerPlatformEnum buyerPlatform;
+  private String buyerPlatform;
 
   public GetConversationsResponseDataConversationParticipant() {
   }
@@ -246,7 +140,7 @@ public class GetConversationsResponseDataConversationParticipant {
   }
 
 
-  public GetConversationsResponseDataConversationParticipant role(@javax.annotation.Nullable RoleEnum role) {
+  public GetConversationsResponseDataConversationParticipant role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -256,11 +150,11 @@ public class GetConversationsResponseDataConversationParticipant {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
@@ -284,7 +178,7 @@ public class GetConversationsResponseDataConversationParticipant {
   }
 
 
-  public GetConversationsResponseDataConversationParticipant buyerPlatform(@javax.annotation.Nullable BuyerPlatformEnum buyerPlatform) {
+  public GetConversationsResponseDataConversationParticipant buyerPlatform(@javax.annotation.Nullable String buyerPlatform) {
     this.buyerPlatform = buyerPlatform;
     return this;
   }
@@ -294,11 +188,11 @@ public class GetConversationsResponseDataConversationParticipant {
    * @return buyerPlatform
    */
   @javax.annotation.Nullable
-  public BuyerPlatformEnum getBuyerPlatform() {
+  public String getBuyerPlatform() {
     return buyerPlatform;
   }
 
-  public void setBuyerPlatform(@javax.annotation.Nullable BuyerPlatformEnum buyerPlatform) {
+  public void setBuyerPlatform(@javax.annotation.Nullable String buyerPlatform) {
     this.buyerPlatform = buyerPlatform;
   }
 
@@ -431,19 +325,11 @@ public class GetConversationsResponseDataConversationParticipant {
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
       }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
-      }
       if ((jsonObj.get("nickname") != null && !jsonObj.get("nickname").isJsonNull()) && !jsonObj.get("nickname").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `nickname` to be a primitive type in the JSON string but got `%s`", jsonObj.get("nickname").toString()));
       }
       if ((jsonObj.get("buyer_platform") != null && !jsonObj.get("buyer_platform").isJsonNull()) && !jsonObj.get("buyer_platform").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `buyer_platform` to be a primitive type in the JSON string but got `%s`", jsonObj.get("buyer_platform").toString()));
-      }
-      // validate the optional field `buyer_platform`
-      if (jsonObj.get("buyer_platform") != null && !jsonObj.get("buyer_platform").isJsonNull()) {
-        BuyerPlatformEnum.validateJsonElement(jsonObj.get("buyer_platform"));
       }
   }
 

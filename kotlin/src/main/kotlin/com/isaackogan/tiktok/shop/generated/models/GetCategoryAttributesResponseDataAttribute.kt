@@ -57,7 +57,7 @@ data class GetCategoryAttributesResponseDataAttribute (
 
     /* The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole. */
     @SerializedName("type")
-    val type: GetCategoryAttributesResponseDataAttribute.Type? = null,
+    val type: kotlin.String? = null,
 
     /* A flag to indicate if the product attribute is always required when creating or editing a product. - true: The attribute is always required. - false: The attribute is not required, or required only if certain conditions are met. Refer to `requirement_conditions` for the specific requirements.  Applicable only if `type=PRODUCT_PROPERTY`. */
     @SerializedName("is_requried")
@@ -69,7 +69,7 @@ data class GetCategoryAttributesResponseDataAttribute (
 
     /* The data format for a free-form attribute value.  Returned for customizable numeric attributes.  Possible values: - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers. */
     @SerializedName("value_data_format")
-    val valueDataFormat: GetCategoryAttributesResponseDataAttribute.ValueDataFormat? = null,
+    val valueDataFormat: kotlin.String? = null,
 
     /* A flag indicating whether sellers can enter a custom value for the attribute when creating or editing a product. */
     @SerializedName("is_customizable")
@@ -89,23 +89,6 @@ data class GetCategoryAttributesResponseDataAttribute (
 
 ) {
 
-    /**
-     * The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-     *
-     * Values: SALES_PROPERTY,PRODUCT_PROPERTY
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "SALES_PROPERTY") SALES_PROPERTY("SALES_PROPERTY"),
-        @SerializedName(value = "PRODUCT_PROPERTY") PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-    }
-    /**
-     * The data format for a free-form attribute value.  Returned for customizable numeric attributes.  Possible values: - POSITIVE_INT_OR_DECIMAL: Positive integers or decimal numbers.
-     *
-     * Values: POSITIVE_INT_OR_DECIMAL
-     */
-    enum class ValueDataFormat(val value: kotlin.String) {
-        @SerializedName(value = "POSITIVE_INT_OR_DECIMAL") POSITIVE_INT_OR_DECIMAL("POSITIVE_INT_OR_DECIMAL");
-    }
 
 }
 

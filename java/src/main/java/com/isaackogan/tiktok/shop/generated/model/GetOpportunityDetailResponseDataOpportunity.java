@@ -59,68 +59,10 @@ public class GetOpportunityDetailResponseDataOpportunity {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The recommended action. Possible values: - LIST_SAME: List the same product. - LIST_SIMILAR: List a similar product.
-   */
-  @JsonAdapter(ActionTypeEnum.Adapter.class)
-  public enum ActionTypeEnum {
-    /**
-     * List the same product.
-     */
-    LIST_SAME("LIST_SAME"),
-    
-    /**
-     * List a similar product.
-     */
-    LIST_SIMILAR("LIST_SIMILAR");
-
-    private String value;
-
-    ActionTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ActionTypeEnum fromValue(String value) {
-      for (ActionTypeEnum b : ActionTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ActionTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ActionTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ActionTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ActionTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ActionTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ACTION_TYPE = "action_type";
   @SerializedName(SERIALIZED_NAME_ACTION_TYPE)
   @javax.annotation.Nullable
-  private ActionTypeEnum actionType;
+  private String actionType;
 
   public static final String SERIALIZED_NAME_LISTING_CRITERIA = "listing_criteria";
   @SerializedName(SERIALIZED_NAME_LISTING_CRITERIA)
@@ -164,7 +106,7 @@ public class GetOpportunityDetailResponseDataOpportunity {
   }
 
 
-  public GetOpportunityDetailResponseDataOpportunity actionType(@javax.annotation.Nullable ActionTypeEnum actionType) {
+  public GetOpportunityDetailResponseDataOpportunity actionType(@javax.annotation.Nullable String actionType) {
     this.actionType = actionType;
     return this;
   }
@@ -174,11 +116,11 @@ public class GetOpportunityDetailResponseDataOpportunity {
    * @return actionType
    */
   @javax.annotation.Nullable
-  public ActionTypeEnum getActionType() {
+  public String getActionType() {
     return actionType;
   }
 
-  public void setActionType(@javax.annotation.Nullable ActionTypeEnum actionType) {
+  public void setActionType(@javax.annotation.Nullable String actionType) {
     this.actionType = actionType;
   }
 
@@ -380,10 +322,6 @@ public class GetOpportunityDetailResponseDataOpportunity {
       }
       if ((jsonObj.get("action_type") != null && !jsonObj.get("action_type").isJsonNull()) && !jsonObj.get("action_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `action_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action_type").toString()));
-      }
-      // validate the optional field `action_type`
-      if (jsonObj.get("action_type") != null && !jsonObj.get("action_type").isJsonNull()) {
-        ActionTypeEnum.validateJsonElement(jsonObj.get("action_type"));
       }
       // validate the optional field `listing_criteria`
       if (jsonObj.get("listing_criteria") != null && !jsonObj.get("listing_criteria").isJsonNull()) {

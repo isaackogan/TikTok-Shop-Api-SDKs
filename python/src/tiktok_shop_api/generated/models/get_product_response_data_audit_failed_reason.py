@@ -6,9 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_audit_failed_reason_listing_platform import (
-    GetProductResponseDataAuditFailedReasonListingPlatform,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataAuditFailedReason")
@@ -18,8 +15,7 @@ T = TypeVar("T", bound="GetProductResponseDataAuditFailedReason")
 class GetProductResponseDataAuditFailedReason:
     """
     Attributes:
-        listing_platform (GetProductResponseDataAuditFailedReasonListingPlatform | Unset): The platform for listing the
-            product.
+        listing_platform (str | Unset): The platform for listing the product.
             Possible values:
             - TIKTOK_SHOP
             - TOKOPEDIA
@@ -28,16 +24,14 @@ class GetProductResponseDataAuditFailedReason:
         suggestions (list[str] | Unset): A detailed explanation of the reason for failure.
     """
 
-    listing_platform: GetProductResponseDataAuditFailedReasonListingPlatform | Unset = UNSET
+    listing_platform: str | Unset = UNSET
     position: str | Unset = UNSET
     reasons: list[str] | Unset = UNSET
     suggestions: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        listing_platform: str | Unset = UNSET
-        if not isinstance(self.listing_platform, Unset):
-            listing_platform = self.listing_platform.value
+        listing_platform = self.listing_platform
 
         position = self.position
 
@@ -66,12 +60,7 @@ class GetProductResponseDataAuditFailedReason:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _listing_platform = d.pop("listing_platform", UNSET)
-        listing_platform: GetProductResponseDataAuditFailedReasonListingPlatform | Unset
-        if isinstance(_listing_platform, Unset):
-            listing_platform = UNSET
-        else:
-            listing_platform = GetProductResponseDataAuditFailedReasonListingPlatform(_listing_platform)
+        listing_platform = d.pop("listing_platform", UNSET)
 
         position = d.pop("position", UNSET)
 

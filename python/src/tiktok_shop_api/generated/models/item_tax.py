@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.item_tax_tax_type import ItemTaxTaxType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ItemTax")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="ItemTax")
 class ItemTax:
     """
     Attributes:
-        tax_type (ItemTaxTaxType | Unset): Tax type.
+        tax_type (str | Unset): Tax type.
             Available values:
             - `SALES_TAX` (US market sales tax)
 
@@ -25,15 +24,13 @@ class ItemTax:
         tax_rate (str | Unset): Tax rate.
     """
 
-    tax_type: ItemTaxTaxType | Unset = UNSET
+    tax_type: str | Unset = UNSET
     tax_amount: str | Unset = UNSET
     tax_rate: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        tax_type: str | Unset = UNSET
-        if not isinstance(self.tax_type, Unset):
-            tax_type = self.tax_type.value
+        tax_type = self.tax_type
 
         tax_amount = self.tax_amount
 
@@ -54,12 +51,7 @@ class ItemTax:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _tax_type = d.pop("tax_type", UNSET)
-        tax_type: ItemTaxTaxType | Unset
-        if isinstance(_tax_type, Unset):
-            tax_type = UNSET
-        else:
-            tax_type = ItemTaxTaxType(_tax_type)
+        tax_type = d.pop("tax_type", UNSET)
 
         tax_amount = d.pop("tax_amount", UNSET)
 

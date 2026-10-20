@@ -34,10 +34,10 @@ export interface RemovePromotionActivityProductsResponseData {
      * - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
      * - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
      * - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     * @type {RemovePromotionActivityProductsResponseDataStatusEnum}
+     * @type {string}
      * @memberof RemovePromotionActivityProductsResponseData
      */
-    status?: RemovePromotionActivityProductsResponseDataStatusEnum;
+    status?: string;
     /**
      * The time when the response was generated, as a Unix timestamp in seconds (UTC).
      * @type {number}
@@ -45,21 +45,6 @@ export interface RemovePromotionActivityProductsResponseData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const RemovePromotionActivityProductsResponseDataStatusEnum = {
-    Draft: 'DRAFT',
-    NotStart: 'NOT_START',
-    Ongoing: 'ONGOING',
-    Expired: 'EXPIRED',
-    Deactivated: 'DEACTIVATED',
-    NotEffective: 'NOT_EFFECTIVE'
-} as const;
-export type RemovePromotionActivityProductsResponseDataStatusEnum = typeof RemovePromotionActivityProductsResponseDataStatusEnum[keyof typeof RemovePromotionActivityProductsResponseDataStatusEnum];
-
 
 /**
  * Check if a given object implements the RemovePromotionActivityProductsResponseData interface.

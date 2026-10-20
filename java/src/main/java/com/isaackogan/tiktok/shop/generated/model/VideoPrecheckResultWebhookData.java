@@ -58,62 +58,10 @@ public class VideoPrecheckResultWebhookData {
   @javax.annotation.Nullable
   private String precheckTaskId;
 
-  /**
-   * Possible enumerations:    &#x60;PASS&#x60;   &#x60;FAIL&#x60;
-   */
-  @JsonAdapter(ResultEnum.Adapter.class)
-  public enum ResultEnum {
-    PASS("PASS"),
-    
-    FAIL("FAIL");
-
-    private String value;
-
-    ResultEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ResultEnum fromValue(String value) {
-      for (ResultEnum b : ResultEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ResultEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ResultEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ResultEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ResultEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ResultEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RESULT = "result";
   @SerializedName(SERIALIZED_NAME_RESULT)
   @javax.annotation.Nullable
-  private ResultEnum result;
+  private String result;
 
   public static final String SERIALIZED_NAME_ISSUES = "issues";
   @SerializedName(SERIALIZED_NAME_ISSUES)
@@ -142,7 +90,7 @@ public class VideoPrecheckResultWebhookData {
   }
 
 
-  public VideoPrecheckResultWebhookData result(@javax.annotation.Nullable ResultEnum result) {
+  public VideoPrecheckResultWebhookData result(@javax.annotation.Nullable String result) {
     this.result = result;
     return this;
   }
@@ -152,11 +100,11 @@ public class VideoPrecheckResultWebhookData {
    * @return result
    */
   @javax.annotation.Nullable
-  public ResultEnum getResult() {
+  public String getResult() {
     return result;
   }
 
-  public void setResult(@javax.annotation.Nullable ResultEnum result) {
+  public void setResult(@javax.annotation.Nullable String result) {
     this.result = result;
   }
 
@@ -303,10 +251,6 @@ public class VideoPrecheckResultWebhookData {
       }
       if ((jsonObj.get("result") != null && !jsonObj.get("result").isJsonNull()) && !jsonObj.get("result").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `result` to be a primitive type in the JSON string but got `%s`", jsonObj.get("result").toString()));
-      }
-      // validate the optional field `result`
-      if (jsonObj.get("result") != null && !jsonObj.get("result").isJsonNull()) {
-        ResultEnum.validateJsonElement(jsonObj.get("result"));
       }
       if (jsonObj.get("issues") != null && !jsonObj.get("issues").isJsonNull()) {
         JsonArray jsonArrayissues = jsonObj.getAsJsonArray("issues");

@@ -46,7 +46,7 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfo (
 
     /* hazardous goods type Possible values: -MAGNETIZED -BATTERY  -FLAMMABLE_LIQUID -AEROSOLS */
     @SerializedName("hazmat_type")
-    val hazmatType: SearchGoodsInfoResponseDataGoodHazmatInfo.HazmatType? = null,
+    val hazmatType: kotlin.String? = null,
 
     /* Additional battery information for hazmat goods. */
     @SerializedName("battery_extra_info")
@@ -62,11 +62,11 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfo (
 
     /* Hazmat class Possible values: -CLASS_2 -CLASS_3 -CLASS_9 */
     @SerializedName("dg_class")
-    val dgClass: SearchGoodsInfoResponseDataGoodHazmatInfo.DgClass? = null,
+    val dgClass: kotlin.String? = null,
 
     /* UN identifier for the hazardous substance. Standard UN values use the `UN` prefix followed by four digits; `OTHER` is also supported. Possible values: - UN2807 - UN3480 - UN3090 - UN3481 - UN3091 - UN1263 - UN1266 - UN3065 - OTHER */
     @SerializedName("dg_uncode")
-    val dgUncode: SearchGoodsInfoResponseDataGoodHazmatInfo.DgUncode? = null,
+    val dgUncode: kotlin.String? = null,
 
     /* Material safety data sheet of the hazmat goods to support review the goods' safety compliance in FBT */
     @SerializedName("msds_file_url")
@@ -74,43 +74,6 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfo (
 
 ) {
 
-    /**
-     * hazardous goods type Possible values: -MAGNETIZED -BATTERY  -FLAMMABLE_LIQUID -AEROSOLS
-     *
-     * Values: MAGNETIZED,BATTERY,FLAMMABLE_LIQUID,AEROSOLS
-     */
-    enum class HazmatType(val value: kotlin.String) {
-        @SerializedName(value = "MAGNETIZED") MAGNETIZED("MAGNETIZED"),
-        @SerializedName(value = "BATTERY") BATTERY("BATTERY"),
-        @SerializedName(value = "FLAMMABLE_LIQUID") FLAMMABLE_LIQUID("FLAMMABLE_LIQUID"),
-        @SerializedName(value = "AEROSOLS") AEROSOLS("AEROSOLS");
-    }
-    /**
-     * Hazmat class Possible values: -CLASS_2 -CLASS_3 -CLASS_9
-     *
-     * Values: CLASS_2,CLASS_3,CLASS_9
-     */
-    enum class DgClass(val value: kotlin.String) {
-        @SerializedName(value = "CLASS_2") CLASS_2("CLASS_2"),
-        @SerializedName(value = "CLASS_3") CLASS_3("CLASS_3"),
-        @SerializedName(value = "CLASS_9") CLASS_9("CLASS_9");
-    }
-    /**
-     * UN identifier for the hazardous substance. Standard UN values use the `UN` prefix followed by four digits; `OTHER` is also supported. Possible values: - UN2807 - UN3480 - UN3090 - UN3481 - UN3091 - UN1263 - UN1266 - UN3065 - OTHER
-     *
-     * Values: UN2807,UN3480,UN3090,UN3481,UN3091,UN1263,UN1266,UN3065,OTHER
-     */
-    enum class DgUncode(val value: kotlin.String) {
-        @SerializedName(value = "UN2807") UN2807("UN2807"),
-        @SerializedName(value = "UN3480") UN3480("UN3480"),
-        @SerializedName(value = "UN3090") UN3090("UN3090"),
-        @SerializedName(value = "UN3481") UN3481("UN3481"),
-        @SerializedName(value = "UN3091") UN3091("UN3091"),
-        @SerializedName(value = "UN1263") UN1263("UN1263"),
-        @SerializedName(value = "UN1266") UN1266("UN1266"),
-        @SerializedName(value = "UN3065") UN3065("UN3065"),
-        @SerializedName(value = "OTHER") OTHER("OTHER");
-    }
 
 }
 

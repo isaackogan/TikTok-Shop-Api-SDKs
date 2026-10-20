@@ -6,15 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_cap_affiliate_orders_response_data_sku_order_attribution_type import (
-    SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionType,
-)
-from ..models.search_cap_affiliate_orders_response_data_sku_order_content_type import (
-    SearchCAPAffiliateOrdersResponseDataSkuOrderContentType,
-)
-from ..models.search_cap_affiliate_orders_response_data_sku_order_fully_return import (
-    SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturn,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -108,8 +99,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
         price (Price | Unset):
         quantity (int | Unset): Number of SKU items in the order, including refunded items.
         shop_name (str | Unset): Shop / Seller name
-        content_type (SearchCAPAffiliateOrdersResponseDataSkuOrderContentType | Unset): The content format of the
-            creator content through which the order was created.
+        content_type (str | Unset): The content format of the creator content through which the order was created.
             Possible values:
             - SHOP
             - VIDEO
@@ -118,8 +108,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
             - PROMOTION_PAGE
             - LINKSHARE
         content_id (str | Unset): Unique identifier for content
-        attribution_type (SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionType | Unset): Attribution type for
-            `LINKSHARE` content.
+        attribution_type (str | Unset): Attribution type for `LINKSHARE` content.
             Possible values:
             - `Direct`: same-shop attribution.
             - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in
@@ -172,8 +161,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
             Unset):
         actual_agency_isr (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset):
         actual_agency_iva (SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset):
-        fully_return (SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset): Whether this SKU order was fully
-            returned or refunded.
+        fully_return (str | Unset): Whether this SKU order was fully returned or refunded.
             Possible values:
             - `Yes`: this SKU order was fully returned or refunded, and no commission is paid.
             - `No`: this SKU order was not fully returned or refunded.
@@ -198,9 +186,9 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
     price: Price | Unset = UNSET
     quantity: int | Unset = UNSET
     shop_name: str | Unset = UNSET
-    content_type: SearchCAPAffiliateOrdersResponseDataSkuOrderContentType | Unset = UNSET
+    content_type: str | Unset = UNSET
     content_id: str | Unset = UNSET
-    attribution_type: SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionType | Unset = UNSET
+    attribution_type: str | Unset = UNSET
     commission_model: str | Unset = UNSET
     commission_tier_setting: str | Unset = UNSET
     standard_commission_rate: int | Unset = UNSET
@@ -242,7 +230,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
     )
     actual_agency_isr: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIsr | Unset = UNSET
     actual_agency_iva: SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva | Unset = UNSET
-    fully_return: SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset = UNSET
+    fully_return: str | Unset = UNSET
     settlement_time: int | Unset = UNSET
     last_update_time: int | Unset = UNSET
     is_carousel: bool | Unset = UNSET
@@ -279,15 +267,11 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         shop_name = self.shop_name
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         content_id = self.content_id
 
-        attribution_type: str | Unset = UNSET
-        if not isinstance(self.attribution_type, Unset):
-            attribution_type = self.attribution_type.value
+        attribution_type = self.attribution_type
 
         commission_model = self.commission_model
 
@@ -399,9 +383,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
         if not isinstance(self.actual_agency_iva, Unset):
             actual_agency_iva = self.actual_agency_iva.to_dict()
 
-        fully_return: str | Unset = UNSET
-        if not isinstance(self.fully_return, Unset):
-            fully_return = self.fully_return.value
+        fully_return = self.fully_return
 
         settlement_time = self.settlement_time
 
@@ -613,21 +595,11 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
 
         shop_name = d.pop("shop_name", UNSET)
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: SearchCAPAffiliateOrdersResponseDataSkuOrderContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = SearchCAPAffiliateOrdersResponseDataSkuOrderContentType(_content_type)
+        content_type = d.pop("content_type", UNSET)
 
         content_id = d.pop("content_id", UNSET)
 
-        _attribution_type = d.pop("attribution_type", UNSET)
-        attribution_type: SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionType | Unset
-        if isinstance(_attribution_type, Unset):
-            attribution_type = UNSET
-        else:
-            attribution_type = SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionType(_attribution_type)
+        attribution_type = d.pop("attribution_type", UNSET)
 
         commission_model = d.pop("commission_model", UNSET)
 
@@ -859,12 +831,7 @@ class SearchCAPAffiliateOrdersResponseDataSkuOrder:
                 _actual_agency_iva
             )
 
-        _fully_return = d.pop("fully_return", UNSET)
-        fully_return: SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset
-        if isinstance(_fully_return, Unset):
-            fully_return = UNSET
-        else:
-            fully_return = SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturn(_fully_return)
+        fully_return = d.pop("fully_return", UNSET)
 
         settlement_time = d.pop("settlement_time", UNSET)
 

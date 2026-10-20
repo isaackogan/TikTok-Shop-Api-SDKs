@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_merchant_declaration_info_weight_unit import (
-    SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnit,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight")
@@ -19,7 +16,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight:
     """
     Attributes:
         value (str | Unset): Weight value, up to three decimal places.
-        unit (SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnit | Unset): Weight unit.
+        unit (str | Unset): Weight unit.
             Possible values:
             - MILLIGRAM
             - GRAM
@@ -29,15 +26,13 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight:
     """
 
     value: str | Unset = UNSET
-    unit: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         value = self.value
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -54,12 +49,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight:
         d = dict(src_dict)
         value = d.pop("value", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         search_goods_info_response_data_good_merchant_declaration_info_weight = cls(
             value=value,

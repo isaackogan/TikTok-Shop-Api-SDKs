@@ -50,141 +50,20 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetActivityResponseDataDiscountBxgyDiscount {
-  /**
-   * The purchase criterion returned for the activity. Possible values: - &#x60;MINIMAL_ITEM_QUANTITY&#x60;: The buyer must purchase at least the specified quantity of eligible products. - &#x60;MINIMAL_ORDER_AMOUNT&#x60;: The eligible-product subtotal must reach the specified amount.
-   */
-  @JsonAdapter(ThresholdTypeEnum.Adapter.class)
-  public enum ThresholdTypeEnum {
-    /**
-     * The buyer must purchase at least the specified quantity of eligible products.
-     */
-    MINIMAL_ITEM_QUANTITY("MINIMAL_ITEM_QUANTITY"),
-    
-    /**
-     * The eligible-product subtotal must reach the specified amount.
-     */
-    MINIMAL_ORDER_AMOUNT("MINIMAL_ORDER_AMOUNT");
-
-    private String value;
-
-    ThresholdTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ThresholdTypeEnum fromValue(String value) {
-      for (ThresholdTypeEnum b : ThresholdTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ThresholdTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ThresholdTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ThresholdTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ThresholdTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ThresholdTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_THRESHOLD_TYPE = "threshold_type";
   @SerializedName(SERIALIZED_NAME_THRESHOLD_TYPE)
   @javax.annotation.Nullable
-  private ThresholdTypeEnum thresholdType;
+  private String thresholdType;
 
   public static final String SERIALIZED_NAME_THRESHOLD_VALUE = "threshold_value";
   @SerializedName(SERIALIZED_NAME_THRESHOLD_VALUE)
   @javax.annotation.Nullable
   private String thresholdValue;
 
-  /**
-   * The type of discount awarded as a benefit. For PERCENTAGE_OFF and AMOUNT_OFF_EACH, the discount amount is determined by &#x60;discount_value&#x60;. Possible enumerations are: - &#x60;PERCENTAGE_OFF&#x60;: Buyer will receive X% off the price of the eligible products. - &#x60;FREE&#x60;: Buyer will receive X eligible products for free. - &#x60;AMOUNT_OFF_EACH&#x60;: Buyer will receive X units of local currency off the price of each eligible product.
-   */
-  @JsonAdapter(DiscountTypeEnum.Adapter.class)
-  public enum DiscountTypeEnum {
-    /**
-     * Buyer will receive X% off the price of the eligible products.
-     */
-    PERCENTAGE_OFF("PERCENTAGE_OFF"),
-    
-    /**
-     * Buyer will receive X eligible products for free.
-     */
-    FREE("FREE"),
-    
-    /**
-     * Buyer will receive X units of local currency off the price of each eligible product.
-     */
-    AMOUNT_OFF_EACH("AMOUNT_OFF_EACH");
-
-    private String value;
-
-    DiscountTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static DiscountTypeEnum fromValue(String value) {
-      for (DiscountTypeEnum b : DiscountTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<DiscountTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final DiscountTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public DiscountTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return DiscountTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      DiscountTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_DISCOUNT_TYPE = "discount_type";
   @SerializedName(SERIALIZED_NAME_DISCOUNT_TYPE)
   @javax.annotation.Nullable
-  private DiscountTypeEnum discountType;
+  private String discountType;
 
   public static final String SERIALIZED_NAME_DISCOUNT_VALUE = "discount_value";
   @SerializedName(SERIALIZED_NAME_DISCOUNT_VALUE)
@@ -204,7 +83,7 @@ public class GetActivityResponseDataDiscountBxgyDiscount {
   public GetActivityResponseDataDiscountBxgyDiscount() {
   }
 
-  public GetActivityResponseDataDiscountBxgyDiscount thresholdType(@javax.annotation.Nullable ThresholdTypeEnum thresholdType) {
+  public GetActivityResponseDataDiscountBxgyDiscount thresholdType(@javax.annotation.Nullable String thresholdType) {
     this.thresholdType = thresholdType;
     return this;
   }
@@ -214,11 +93,11 @@ public class GetActivityResponseDataDiscountBxgyDiscount {
    * @return thresholdType
    */
   @javax.annotation.Nullable
-  public ThresholdTypeEnum getThresholdType() {
+  public String getThresholdType() {
     return thresholdType;
   }
 
-  public void setThresholdType(@javax.annotation.Nullable ThresholdTypeEnum thresholdType) {
+  public void setThresholdType(@javax.annotation.Nullable String thresholdType) {
     this.thresholdType = thresholdType;
   }
 
@@ -242,7 +121,7 @@ public class GetActivityResponseDataDiscountBxgyDiscount {
   }
 
 
-  public GetActivityResponseDataDiscountBxgyDiscount discountType(@javax.annotation.Nullable DiscountTypeEnum discountType) {
+  public GetActivityResponseDataDiscountBxgyDiscount discountType(@javax.annotation.Nullable String discountType) {
     this.discountType = discountType;
     return this;
   }
@@ -252,11 +131,11 @@ public class GetActivityResponseDataDiscountBxgyDiscount {
    * @return discountType
    */
   @javax.annotation.Nullable
-  public DiscountTypeEnum getDiscountType() {
+  public String getDiscountType() {
     return discountType;
   }
 
-  public void setDiscountType(@javax.annotation.Nullable DiscountTypeEnum discountType) {
+  public void setDiscountType(@javax.annotation.Nullable String discountType) {
     this.discountType = discountType;
   }
 
@@ -437,19 +316,11 @@ public class GetActivityResponseDataDiscountBxgyDiscount {
       if ((jsonObj.get("threshold_type") != null && !jsonObj.get("threshold_type").isJsonNull()) && !jsonObj.get("threshold_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `threshold_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("threshold_type").toString()));
       }
-      // validate the optional field `threshold_type`
-      if (jsonObj.get("threshold_type") != null && !jsonObj.get("threshold_type").isJsonNull()) {
-        ThresholdTypeEnum.validateJsonElement(jsonObj.get("threshold_type"));
-      }
       if ((jsonObj.get("threshold_value") != null && !jsonObj.get("threshold_value").isJsonNull()) && !jsonObj.get("threshold_value").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `threshold_value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("threshold_value").toString()));
       }
       if ((jsonObj.get("discount_type") != null && !jsonObj.get("discount_type").isJsonNull()) && !jsonObj.get("discount_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `discount_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("discount_type").toString()));
-      }
-      // validate the optional field `discount_type`
-      if (jsonObj.get("discount_type") != null && !jsonObj.get("discount_type").isJsonNull()) {
-        DiscountTypeEnum.validateJsonElement(jsonObj.get("discount_type"));
       }
       if ((jsonObj.get("discount_value") != null && !jsonObj.get("discount_value").isJsonNull()) && !jsonObj.get("discount_value").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `discount_value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("discount_value").toString()));

@@ -56,7 +56,7 @@ data class GetOpportunityDetailResponseDataOpportunityBasicInfo (
 
     /* The opportunity type. Possible values: - PRODUCT: A product opportunity. - KEYWORD: A keyword opportunity. - CATEGORY: A category opportunity. */
     @SerializedName("opportunity_type")
-    val opportunityType: GetOpportunityDetailResponseDataOpportunityBasicInfo.OpportunityType? = null,
+    val opportunityType: kotlin.String? = null,
 
     /* Opportunity status: ACTIVE / EXPIRED / FULFILLED(已提报) */
     @SerializedName("status")
@@ -132,49 +132,10 @@ data class GetOpportunityDetailResponseDataOpportunityBasicInfo (
 
     /* The reference platform code, returned only when `external_product_id` is present. Possible values: - `1`: SHOPEE - `2`: AMAZON - `3`: LOOKFANTASTIC - `4`: WALMART - `5`: TTS - `6`: ASOS - `7`: UNIVERSAL_PRODUCT - `8`: DTCNEXUS - `9`: TEMU - `10`: SHOPIFY - `11`: NEXUS_SHOPIFY - `12`: SHEIN - `13`: PIXEL - `14`: SHOPIFY_NON_1P - `15`: MIRAVIA - `16`: RAKUTEN - `17`: EBAY - `18`: ONBUY - `19`: MERCADO_LIBRE - `20`: ALLEGRO - `21`: BOL - `22`: DTC */
     @SerializedName("reference_source")
-    val referenceSource: GetOpportunityDetailResponseDataOpportunityBasicInfo.ReferenceSource? = null
+    val referenceSource: kotlin.String? = null
 
 ) {
 
-    /**
-     * The opportunity type. Possible values: - PRODUCT: A product opportunity. - KEYWORD: A keyword opportunity. - CATEGORY: A category opportunity.
-     *
-     * Values: PRODUCT,KEYWORD,CATEGORY
-     */
-    enum class OpportunityType(val value: kotlin.String) {
-        @SerializedName(value = "PRODUCT") PRODUCT("PRODUCT"),
-        @SerializedName(value = "KEYWORD") KEYWORD("KEYWORD"),
-        @SerializedName(value = "CATEGORY") CATEGORY("CATEGORY");
-    }
-    /**
-     * The reference platform code, returned only when `external_product_id` is present. Possible values: - `1`: SHOPEE - `2`: AMAZON - `3`: LOOKFANTASTIC - `4`: WALMART - `5`: TTS - `6`: ASOS - `7`: UNIVERSAL_PRODUCT - `8`: DTCNEXUS - `9`: TEMU - `10`: SHOPIFY - `11`: NEXUS_SHOPIFY - `12`: SHEIN - `13`: PIXEL - `14`: SHOPIFY_NON_1P - `15`: MIRAVIA - `16`: RAKUTEN - `17`: EBAY - `18`: ONBUY - `19`: MERCADO_LIBRE - `20`: ALLEGRO - `21`: BOL - `22`: DTC
-     *
-     * Values: _1,_2,_3,_4,_5,_6,_7,_8,_9,_10,_11,_12,_13,_14,_15,_16,_17,_18,_19,_20,_21,_22
-     */
-    enum class ReferenceSource(val value: kotlin.String) {
-        @SerializedName(value = "1") _1("1"),
-        @SerializedName(value = "2") _2("2"),
-        @SerializedName(value = "3") _3("3"),
-        @SerializedName(value = "4") _4("4"),
-        @SerializedName(value = "5") _5("5"),
-        @SerializedName(value = "6") _6("6"),
-        @SerializedName(value = "7") _7("7"),
-        @SerializedName(value = "8") _8("8"),
-        @SerializedName(value = "9") _9("9"),
-        @SerializedName(value = "10") _10("10"),
-        @SerializedName(value = "11") _11("11"),
-        @SerializedName(value = "12") _12("12"),
-        @SerializedName(value = "13") _13("13"),
-        @SerializedName(value = "14") _14("14"),
-        @SerializedName(value = "15") _15("15"),
-        @SerializedName(value = "16") _16("16"),
-        @SerializedName(value = "17") _17("17"),
-        @SerializedName(value = "18") _18("18"),
-        @SerializedName(value = "19") _19("19"),
-        @SerializedName(value = "20") _20("20"),
-        @SerializedName(value = "21") _21("21"),
-        @SerializedName(value = "22") _22("22");
-    }
 
 }
 

@@ -57,10 +57,10 @@ export interface GetFBTWarehouseListResponseDataWarehouse {
      * Possible values:
      * - `PLATFORM_WAREHOUSE`: A warehouse operated by TikTok.
      * - `OTHER_WAREHOUSE`: A warehouse that is not classified as a platform warehouse.
-     * @type {GetFBTWarehouseListResponseDataWarehouseTypeEnum}
+     * @type {string}
      * @memberof GetFBTWarehouseListResponseDataWarehouse
      */
-    type?: GetFBTWarehouseListResponseDataWarehouseTypeEnum;
+    type?: string;
     /**
      * A flag indicating whether the warehouse is subscribed.
      * True: Subscribed.
@@ -82,17 +82,6 @@ export interface GetFBTWarehouseListResponseDataWarehouse {
      */
     logisticsServices?: Array<GetFBTWarehouseListResponseDataWarehouseLogisticsService>;
 }
-
-
-/**
- * @export
- */
-export const GetFBTWarehouseListResponseDataWarehouseTypeEnum = {
-    PlatformWarehouse: 'PLATFORM_WAREHOUSE',
-    OtherWarehouse: 'OTHER_WAREHOUSE'
-} as const;
-export type GetFBTWarehouseListResponseDataWarehouseTypeEnum = typeof GetFBTWarehouseListResponseDataWarehouseTypeEnum[keyof typeof GetFBTWarehouseListResponseDataWarehouseTypeEnum];
-
 
 /**
  * Check if a given object implements the GetFBTWarehouseListResponseDataWarehouse interface.

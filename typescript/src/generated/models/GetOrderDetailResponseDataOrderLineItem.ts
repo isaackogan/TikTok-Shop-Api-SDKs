@@ -148,11 +148,11 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      * **US**
      * - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future.
      * - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-     * @type {GetOrderDetailResponseDataOrderLineItemSkuTypeEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      * @deprecated
      */
-    skuType?: GetOrderDetailResponseDataOrderLineItemSkuTypeEnum;
+    skuType?: string;
     /**
      * The seller stock keeping unit (SKU) of the item.
      * @type {string}
@@ -357,33 +357,11 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      * This describes the product listing type of the SKU. 
      * Possible values:
      * - `TEMPORARY_LISTING`
-     * @type {GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum}
+     * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
-    productListingType?: GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum;
+    productListingType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderLineItemSkuTypeEnum = {
-    Normal: 'NORMAL',
-    ZeroLottery: 'ZERO_LOTTERY',
-    ShopPartner: 'SHOP_PARTNER',
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER'
-} as const;
-export type GetOrderDetailResponseDataOrderLineItemSkuTypeEnum = typeof GetOrderDetailResponseDataOrderLineItemSkuTypeEnum[keyof typeof GetOrderDetailResponseDataOrderLineItemSkuTypeEnum];
-
-/**
- * @export
- */
-export const GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum = {
-    TemporaryListing: 'TEMPORARY_LISTING'
-} as const;
-export type GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum = typeof GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum[keyof typeof GetOrderDetailResponseDataOrderLineItemProductListingTypeEnum];
-
 
 /**
  * Check if a given object implements the GetOrderDetailResponseDataOrderLineItem interface.

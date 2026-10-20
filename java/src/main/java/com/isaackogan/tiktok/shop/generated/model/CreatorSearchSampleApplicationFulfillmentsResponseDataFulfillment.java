@@ -65,70 +65,10 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
   @javax.annotation.Nullable
   private String applicationId;
 
-  /**
-   * The type of the sample application. Possible values: - FREE_SAMPLE - SAMPLE_COUPON - SAMPLE_CAMPAIGN - PLATFORM_FREE_SAMPLE - REFUNDABLE_SAMPLE - UNSPECIFIED
-   */
-  @JsonAdapter(SampleApplicationTypeEnum.Adapter.class)
-  public enum SampleApplicationTypeEnum {
-    FREE_SAMPLE("FREE_SAMPLE"),
-    
-    SAMPLE_COUPON("SAMPLE_COUPON"),
-    
-    SAMPLE_CAMPAIGN("SAMPLE_CAMPAIGN"),
-    
-    PLATFORM_FREE_SAMPLE("PLATFORM_FREE_SAMPLE"),
-    
-    REFUNDABLE_SAMPLE("REFUNDABLE_SAMPLE"),
-    
-    UNSPECIFIED("UNSPECIFIED");
-
-    private String value;
-
-    SampleApplicationTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SampleApplicationTypeEnum fromValue(String value) {
-      for (SampleApplicationTypeEnum b : SampleApplicationTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SampleApplicationTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SampleApplicationTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SampleApplicationTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SampleApplicationTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SampleApplicationTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SAMPLE_APPLICATION_TYPE = "sample_application_type";
   @SerializedName(SERIALIZED_NAME_SAMPLE_APPLICATION_TYPE)
   @javax.annotation.Nullable
-  private SampleApplicationTypeEnum sampleApplicationType;
+  private String sampleApplicationType;
 
   public static final String SERIALIZED_NAME_PRODUCT_ID = "product_id";
   @SerializedName(SERIALIZED_NAME_PRODUCT_ID)
@@ -150,93 +90,10 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
   @javax.annotation.Nullable
   private String status;
 
-  /**
-   * The promotion status of the product associated with the fulfillment. Possible values: - UNKNOWN: The product&#39;s promotion status is unknown. - LIVE: The product is available for promotion. - OUT_OF_STOCK: The product is out of stock. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to promote the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
-   */
-  @JsonAdapter(BoundProductStatusEnum.Adapter.class)
-  public enum BoundProductStatusEnum {
-    /**
-     * The product&#39;s promotion status is unknown.
-     */
-    UNKNOWN("UNKNOWN"),
-    
-    /**
-     * The product is available for promotion.
-     */
-    LIVE("LIVE"),
-    
-    /**
-     * The product is out of stock.
-     */
-    OUT_OF_STOCK("OUT_OF_STOCK"),
-    
-    /**
-     * The product has been deactivated by the seller.
-     */
-    SELLER_DEACTIVATE("SELLER_DEACTIVATE"),
-    
-    /**
-     * The product has been deactivated by the platform.
-     */
-    PLATFORM_DEACTIVATE("PLATFORM_DEACTIVATE"),
-    
-    /**
-     * There is no valid plan available for the creator to promote the product.
-     */
-    NO_PLAN("NO_PLAN"),
-    
-    /**
-     * The product has been permanently deleted and is no longer available.
-     */
-    PERMANENT_DELETED("PERMANENT_DELETED");
-
-    private String value;
-
-    BoundProductStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BoundProductStatusEnum fromValue(String value) {
-      for (BoundProductStatusEnum b : BoundProductStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BoundProductStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BoundProductStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BoundProductStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BoundProductStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      BoundProductStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_BOUND_PRODUCT_STATUS = "bound_product_status";
   @SerializedName(SERIALIZED_NAME_BOUND_PRODUCT_STATUS)
   @javax.annotation.Nullable
-  private BoundProductStatusEnum boundProductStatus;
+  private String boundProductStatus;
 
   public CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment() {
   }
@@ -298,7 +155,7 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
   }
 
 
-  public CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment sampleApplicationType(@javax.annotation.Nullable SampleApplicationTypeEnum sampleApplicationType) {
+  public CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment sampleApplicationType(@javax.annotation.Nullable String sampleApplicationType) {
     this.sampleApplicationType = sampleApplicationType;
     return this;
   }
@@ -308,11 +165,11 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
    * @return sampleApplicationType
    */
   @javax.annotation.Nullable
-  public SampleApplicationTypeEnum getSampleApplicationType() {
+  public String getSampleApplicationType() {
     return sampleApplicationType;
   }
 
-  public void setSampleApplicationType(@javax.annotation.Nullable SampleApplicationTypeEnum sampleApplicationType) {
+  public void setSampleApplicationType(@javax.annotation.Nullable String sampleApplicationType) {
     this.sampleApplicationType = sampleApplicationType;
   }
 
@@ -393,7 +250,7 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
   }
 
 
-  public CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment boundProductStatus(@javax.annotation.Nullable BoundProductStatusEnum boundProductStatus) {
+  public CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment boundProductStatus(@javax.annotation.Nullable String boundProductStatus) {
     this.boundProductStatus = boundProductStatus;
     return this;
   }
@@ -403,11 +260,11 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
    * @return boundProductStatus
    */
   @javax.annotation.Nullable
-  public BoundProductStatusEnum getBoundProductStatus() {
+  public String getBoundProductStatus() {
     return boundProductStatus;
   }
 
-  public void setBoundProductStatus(@javax.annotation.Nullable BoundProductStatusEnum boundProductStatus) {
+  public void setBoundProductStatus(@javax.annotation.Nullable String boundProductStatus) {
     this.boundProductStatus = boundProductStatus;
   }
 
@@ -546,10 +403,6 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
       if ((jsonObj.get("sample_application_type") != null && !jsonObj.get("sample_application_type").isJsonNull()) && !jsonObj.get("sample_application_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sample_application_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sample_application_type").toString()));
       }
-      // validate the optional field `sample_application_type`
-      if (jsonObj.get("sample_application_type") != null && !jsonObj.get("sample_application_type").isJsonNull()) {
-        SampleApplicationTypeEnum.validateJsonElement(jsonObj.get("sample_application_type"));
-      }
       if ((jsonObj.get("product_id") != null && !jsonObj.get("product_id").isJsonNull()) && !jsonObj.get("product_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_id").toString()));
       }
@@ -558,10 +411,6 @@ public class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment {
       }
       if ((jsonObj.get("bound_product_status") != null && !jsonObj.get("bound_product_status").isJsonNull()) && !jsonObj.get("bound_product_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `bound_product_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bound_product_status").toString()));
-      }
-      // validate the optional field `bound_product_status`
-      if (jsonObj.get("bound_product_status") != null && !jsonObj.get("bound_product_status").isJsonNull()) {
-        BoundProductStatusEnum.validateJsonElement(jsonObj.get("bound_product_status"));
       }
   }
 

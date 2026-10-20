@@ -57,10 +57,10 @@ export interface GetShopProductsResponseDataProduct {
      * - ADDABLE
      * - ADDED
      * - REJECTED
-     * @type {GetShopProductsResponseDataProductAddedStatusEnum}
+     * @type {string}
      * @memberof GetShopProductsResponseDataProduct
      */
-    addedStatus?: GetShopProductsResponseDataProductAddedStatusEnum;
+    addedStatus?: string;
     /**
      * The brand name a seller has set for a product.
      * @type {string}
@@ -80,18 +80,6 @@ export interface GetShopProductsResponseDataProduct {
      */
     salesCount?: number;
 }
-
-
-/**
- * @export
- */
-export const GetShopProductsResponseDataProductAddedStatusEnum = {
-    Addable: 'ADDABLE',
-    Added: 'ADDED',
-    Rejected: 'REJECTED'
-} as const;
-export type GetShopProductsResponseDataProductAddedStatusEnum = typeof GetShopProductsResponseDataProductAddedStatusEnum[keyof typeof GetShopProductsResponseDataProductAddedStatusEnum];
-
 
 /**
  * Check if a given object implements the GetShopProductsResponseDataProduct interface.

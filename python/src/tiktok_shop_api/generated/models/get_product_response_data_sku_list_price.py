@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_list_price_currency import GetProductResponseDataSkuListPriceCurrency
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataSkuListPrice")
@@ -17,20 +16,18 @@ class GetProductResponseDataSkuListPrice:
     """
     Attributes:
         amount (str | Unset): The price amount.
-        currency (GetProductResponseDataSkuListPriceCurrency | Unset): The currency.
+        currency (str | Unset): The currency.
             Possible values: USD
     """
 
     amount: str | Unset = UNSET
-    currency: GetProductResponseDataSkuListPriceCurrency | Unset = UNSET
+    currency: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -47,12 +44,7 @@ class GetProductResponseDataSkuListPrice:
         d = dict(src_dict)
         amount = d.pop("amount", UNSET)
 
-        _currency = d.pop("currency", UNSET)
-        currency: GetProductResponseDataSkuListPriceCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetProductResponseDataSkuListPriceCurrency(_currency)
+        currency = d.pop("currency", UNSET)
 
         get_product_response_data_sku_list_price = cls(
             amount=amount,

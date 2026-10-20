@@ -42,19 +42,10 @@ data class HandlingDuration (
 
     /* Indicates if the duration is calculated in calendar days or business days. Possible values: - `CALENDAR_DAY`: Represents consecutive days, including weekends and holidays. - `BUSINESS_DAY`: Represents business days, excluding weekends and public holidays. Default: `BUSINESS_DAY` */
     @SerializedName("type")
-    val type: HandlingDuration.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * Indicates if the duration is calculated in calendar days or business days. Possible values: - `CALENDAR_DAY`: Represents consecutive days, including weekends and holidays. - `BUSINESS_DAY`: Represents business days, excluding weekends and public holidays. Default: `BUSINESS_DAY`
-     *
-     * Values: CALENDAR_DAY,BUSINESS_DAY
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "CALENDAR_DAY") CALENDAR_DAY("CALENDAR_DAY"),
-        @SerializedName(value = "BUSINESS_DAY") BUSINESS_DAY("BUSINESS_DAY");
-    }
 
 }
 

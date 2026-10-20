@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_recommended_product_title_and_description_response_data_product_suggestion_field import (
-    GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionField,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetRecommendedProductTitleAndDescriptionResponseDataProd
 class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion:
     """
     Attributes:
-        field (GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionField | Unset): The applicable
-            product field.
+        field (str | Unset): The applicable product field.
             Possible values:
             - TITLE
             - DESCRIPTION
@@ -33,14 +29,12 @@ class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion:
             optimized text.
     """
 
-    field: GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionField | Unset = UNSET
+    field: str | Unset = UNSET
     items: list[GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        field: str | Unset = UNSET
-        if not isinstance(self.field, Unset):
-            field = self.field.value
+        field = self.field
 
         items: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.items, Unset):
@@ -66,12 +60,7 @@ class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion:
         )
 
         d = dict(src_dict)
-        _field = d.pop("field", UNSET)
-        field: GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionField | Unset
-        if isinstance(_field, Unset):
-            field = UNSET
-        else:
-            field = GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionField(_field)
+        field = d.pop("field", UNSET)
 
         _items = d.pop("items", UNSET)
         items: list[GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem] | Unset = UNSET

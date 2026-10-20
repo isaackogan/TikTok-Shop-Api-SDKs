@@ -53,64 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility {
-  /**
-   * Aftersale request type. Possible values: - &#x60;CANCEL&#x60; - &#x60;REFUND&#x60; - &#x60;RETURN_AND_REFUND&#x60;
-   */
-  @JsonAdapter(RequestTypeEnum.Adapter.class)
-  public enum RequestTypeEnum {
-    CANCEL("CANCEL"),
-    
-    REFUND("REFUND"),
-    
-    RETURN_AND_REFUND("RETURN_AND_REFUND");
-
-    private String value;
-
-    RequestTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RequestTypeEnum fromValue(String value) {
-      for (RequestTypeEnum b : RequestTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RequestTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RequestTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RequestTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RequestTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RequestTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_REQUEST_TYPE = "request_type";
   @SerializedName(SERIALIZED_NAME_REQUEST_TYPE)
   @javax.annotation.Nullable
-  private RequestTypeEnum requestType;
+  private String requestType;
 
   public static final String SERIALIZED_NAME_ORDER_LINE_ITEMS_IDS = "order_line_items_ids";
   @SerializedName(SERIALIZED_NAME_ORDER_LINE_ITEMS_IDS)
@@ -145,7 +91,7 @@ public class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilit
   public GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility() {
   }
 
-  public GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility requestType(@javax.annotation.Nullable RequestTypeEnum requestType) {
+  public GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility requestType(@javax.annotation.Nullable String requestType) {
     this.requestType = requestType;
     return this;
   }
@@ -155,11 +101,11 @@ public class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilit
    * @return requestType
    */
   @javax.annotation.Nullable
-  public RequestTypeEnum getRequestType() {
+  public String getRequestType() {
     return requestType;
   }
 
-  public void setRequestType(@javax.annotation.Nullable RequestTypeEnum requestType) {
+  public void setRequestType(@javax.annotation.Nullable String requestType) {
     this.requestType = requestType;
   }
 
@@ -422,10 +368,6 @@ public class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilit
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("request_type") != null && !jsonObj.get("request_type").isJsonNull()) && !jsonObj.get("request_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `request_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("request_type").toString()));
-      }
-      // validate the optional field `request_type`
-      if (jsonObj.get("request_type") != null && !jsonObj.get("request_type").isJsonNull()) {
-        RequestTypeEnum.validateJsonElement(jsonObj.get("request_type"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("order_line_items_ids") != null && !jsonObj.get("order_line_items_ids").isJsonNull() && !jsonObj.get("order_line_items_ids").isJsonArray()) {

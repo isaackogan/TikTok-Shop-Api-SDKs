@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_coupon_response_data_coupon_threshold_type import GetCouponResponseDataCouponThresholdType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -20,21 +19,18 @@ T = TypeVar("T", bound="GetCouponResponseDataCouponThreshold")
 class GetCouponResponseDataCouponThreshold:
     """
     Attributes:
-        type_ (GetCouponResponseDataCouponThresholdType | Unset): The type of purchase criteria. Possible enumerations
-            are:
+        type_ (str | Unset): The type of purchase criteria. Possible enumerations are:
             - `NONE`: No minimum purchase criteria.
             - `MIN_SPEND`: Buyer must meet or exceed the minimum spend criteria with eligible products.
         min_spend (MinSpend | Unset):
     """
 
-    type_: GetCouponResponseDataCouponThresholdType | Unset = UNSET
+    type_: str | Unset = UNSET
     min_spend: MinSpend | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         min_spend: dict[str, Any] | Unset = UNSET
         if not isinstance(self.min_spend, Unset):
@@ -55,12 +51,7 @@ class GetCouponResponseDataCouponThreshold:
         from ..models.min_spend import MinSpend  # noqa: PLC0415
 
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetCouponResponseDataCouponThresholdType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCouponResponseDataCouponThresholdType(_type_)
+        type_ = d.pop("type", UNSET)
 
         _min_spend = d.pop("min_spend", UNSET)
         min_spend: MinSpend | Unset

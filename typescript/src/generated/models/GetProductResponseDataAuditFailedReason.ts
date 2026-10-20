@@ -24,10 +24,10 @@ export interface GetProductResponseDataAuditFailedReason {
      * Possible values:
      * - TIKTOK_SHOP
      * - TOKOPEDIA
-     * @type {GetProductResponseDataAuditFailedReasonListingPlatformEnum}
+     * @type {string}
      * @memberof GetProductResponseDataAuditFailedReason
      */
-    listingPlatform?: GetProductResponseDataAuditFailedReasonListingPlatformEnum;
+    listingPlatform?: string;
     /**
      * The audit failure reason name.
      * @type {string}
@@ -47,17 +47,6 @@ export interface GetProductResponseDataAuditFailedReason {
      */
     suggestions?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataAuditFailedReasonListingPlatformEnum = {
-    TiktokShop: 'TIKTOK_SHOP',
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetProductResponseDataAuditFailedReasonListingPlatformEnum = typeof GetProductResponseDataAuditFailedReasonListingPlatformEnum[keyof typeof GetProductResponseDataAuditFailedReasonListingPlatformEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataAuditFailedReason interface.

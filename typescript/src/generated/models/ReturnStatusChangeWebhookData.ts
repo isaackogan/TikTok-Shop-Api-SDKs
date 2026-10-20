@@ -31,20 +31,20 @@ export interface ReturnStatusChangeWebhookData {
      *  * BUYER 
      *  * SELLER 
      *  * SYSTEM
-     * @type {ReturnStatusChangeWebhookDataReturnRoleEnum}
+     * @type {string}
      * @memberof ReturnStatusChangeWebhookData
      */
-    returnRole?: ReturnStatusChangeWebhookDataReturnRoleEnum;
+    returnRole?: string;
     /**
      * The return or refund request type, with possible values: 
      *   
      *  * REFUND 
      *  * REPLACEMENT 
      *  * RETURN_AND_REFUND
-     * @type {ReturnStatusChangeWebhookDataReturnTypeEnum}
+     * @type {string}
      * @memberof ReturnStatusChangeWebhookData
      */
-    returnType?: ReturnStatusChangeWebhookDataReturnTypeEnum;
+    returnType?: string;
     /**
      * The return status for a request, with possible values: 
      *   
@@ -61,10 +61,10 @@ export interface ReturnStatusChangeWebhookData {
      *  * RETURN_OR_REFUND_REQUEST_COMPLETE 
      *  * RETURN_OR_REFUND_REQUEST_PENDING 
      *  * RETURN_OR_REFUND_REQUEST_SUCCESS
-     * @type {ReturnStatusChangeWebhookDataReturnStatusEnum}
+     * @type {string}
      * @memberof ReturnStatusChangeWebhookData
      */
-    returnStatus?: ReturnStatusChangeWebhookDataReturnStatusEnum;
+    returnStatus?: string;
     /**
      * The identifier of a specific return
      * @type {string}
@@ -84,48 +84,6 @@ export interface ReturnStatusChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const ReturnStatusChangeWebhookDataReturnRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    System: 'SYSTEM'
-} as const;
-export type ReturnStatusChangeWebhookDataReturnRoleEnum = typeof ReturnStatusChangeWebhookDataReturnRoleEnum[keyof typeof ReturnStatusChangeWebhookDataReturnRoleEnum];
-
-/**
- * @export
- */
-export const ReturnStatusChangeWebhookDataReturnTypeEnum = {
-    Refund: 'REFUND',
-    Replacement: 'REPLACEMENT',
-    ReturnAndRefund: 'RETURN_AND_REFUND'
-} as const;
-export type ReturnStatusChangeWebhookDataReturnTypeEnum = typeof ReturnStatusChangeWebhookDataReturnTypeEnum[keyof typeof ReturnStatusChangeWebhookDataReturnTypeEnum];
-
-/**
- * @export
- */
-export const ReturnStatusChangeWebhookDataReturnStatusEnum = {
-    AwaitingBuyerShip: 'AWAITING_BUYER_SHIP',
-    BuyerShippedItem: 'BUYER_SHIPPED_ITEM',
-    RefundOrReturnRequestReject: 'REFUND_OR_RETURN_REQUEST_REJECT',
-    RejectReceivePackage: 'REJECT_RECEIVE_PACKAGE',
-    ReplacementRequestCancel: 'REPLACEMENT_REQUEST_CANCEL',
-    ReplacementRequestComplete: 'REPLACEMENT_REQUEST_COMPLETE',
-    ReplacementRequestPending: 'REPLACEMENT_REQUEST_PENDING',
-    ReplacementRequestRefundSuccess: 'REPLACEMENT_REQUEST_REFUND_SUCCESS',
-    ReplacementRequestReject: 'REPLACEMENT_REQUEST_REJECT',
-    ReturnOrRefundRequestCancel: 'RETURN_OR_REFUND_REQUEST_CANCEL',
-    ReturnOrRefundRequestComplete: 'RETURN_OR_REFUND_REQUEST_COMPLETE',
-    ReturnOrRefundRequestPending: 'RETURN_OR_REFUND_REQUEST_PENDING',
-    ReturnOrRefundRequestSuccess: 'RETURN_OR_REFUND_REQUEST_SUCCESS'
-} as const;
-export type ReturnStatusChangeWebhookDataReturnStatusEnum = typeof ReturnStatusChangeWebhookDataReturnStatusEnum[keyof typeof ReturnStatusChangeWebhookDataReturnStatusEnum];
-
 
 /**
  * Check if a given object implements the ReturnStatusChangeWebhookData interface.

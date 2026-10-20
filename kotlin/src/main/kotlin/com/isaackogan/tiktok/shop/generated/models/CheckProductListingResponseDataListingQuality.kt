@@ -38,7 +38,7 @@ data class CheckProductListingResponseDataListingQuality (
 
     /* The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market. */
     @SerializedName("current_tier")
-    val currentTier: CheckProductListingResponseDataListingQuality.CurrentTier? = null,
+    val currentTier: kotlin.String? = null,
 
     /* The remaining number of recommendations (see `diagnosis_results`) that must be implemented for the product to reach the highest tier.  **Note**: - To reach the highest tier, you must implement all recommendations listed in `diagnosis_results`.  - Available only for the US market. */
     @SerializedName("remaining_recommendations")
@@ -46,17 +46,6 @@ data class CheckProductListingResponseDataListingQuality (
 
 ) {
 
-    /**
-     * The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market.
-     *
-     * Values: POOR,FAIR,GOOD,EXCELLENT
-     */
-    enum class CurrentTier(val value: kotlin.String) {
-        @SerializedName(value = "POOR") POOR("POOR"),
-        @SerializedName(value = "FAIR") FAIR("FAIR"),
-        @SerializedName(value = "GOOD") GOOD("GOOD"),
-        @SerializedName(value = "EXCELLENT") EXCELLENT("EXCELLENT");
-    }
 
 }
 

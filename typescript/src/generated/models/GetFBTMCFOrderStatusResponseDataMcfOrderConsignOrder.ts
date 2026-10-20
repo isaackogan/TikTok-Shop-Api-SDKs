@@ -74,10 +74,10 @@ export interface GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder {
      * - **UNKNOWN** - The consign-order status or shipping-exception subtype is unknown.
      * - **COMPLETED** - The order is complete.
      * - **ABNORMAL** - An issue prevents the order from being fulfilled.
-     * @type {GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum}
+     * @type {string}
      * @memberof GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder
      */
-    status?: GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum;
+    status?: string;
     /**
      * Indicates who canceled the consign order when `status` is `CLOSED`. `true` means the FBT platform canceled the order; `false` means it was canceled through your OMS.
      * @type {boolean}
@@ -97,27 +97,6 @@ export interface GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder {
      */
     shippingProvider?: ShippingProvider | null;
 }
-
-
-/**
- * @export
- */
-export const GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum = {
-    Pending: 'PENDING',
-    HandleByWarehouse: 'HANDLE_BY_WAREHOUSE',
-    Shipped: 'SHIPPED',
-    Handover: 'HANDOVER',
-    Closed: 'CLOSED',
-    Lost: 'LOST',
-    Damage: 'DAMAGE',
-    Returned: 'RETURNED',
-    Scrap: 'SCRAP',
-    Unknown: 'UNKNOWN',
-    Completed: 'COMPLETED',
-    Abnormal: 'ABNORMAL'
-} as const;
-export type GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum = typeof GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum[keyof typeof GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrderStatusEnum];
-
 
 /**
  * Check if a given object implements the GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder interface.

@@ -50,7 +50,7 @@ data class GetOpportunityDetailResponseDataOpportunity (
 
     /* The recommended action. Possible values: - LIST_SAME: List the same product. - LIST_SIMILAR: List a similar product. */
     @SerializedName("action_type")
-    val actionType: GetOpportunityDetailResponseDataOpportunity.ActionType? = null,
+    val actionType: kotlin.String? = null,
 
     /* The criteria for products that match the opportunity lead. */
     @SerializedName("listing_criteria")
@@ -70,15 +70,6 @@ data class GetOpportunityDetailResponseDataOpportunity (
 
 ) {
 
-    /**
-     * The recommended action. Possible values: - LIST_SAME: List the same product. - LIST_SIMILAR: List a similar product.
-     *
-     * Values: LIST_SAME,LIST_SIMILAR
-     */
-    enum class ActionType(val value: kotlin.String) {
-        @SerializedName(value = "LIST_SAME") LIST_SAME("LIST_SAME"),
-        @SerializedName(value = "LIST_SIMILAR") LIST_SIMILAR("LIST_SIMILAR");
-    }
 
 }
 

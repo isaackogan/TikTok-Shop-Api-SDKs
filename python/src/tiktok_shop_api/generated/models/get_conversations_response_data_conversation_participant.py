@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversations_response_data_conversation_participant_buyer_platform import (
-    GetConversationsResponseDataConversationParticipantBuyerPlatform,
-)
-from ..models.get_conversations_response_data_conversation_participant_role import (
-    GetConversationsResponseDataConversationParticipantRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetConversationsResponseDataConversationParticipant")
@@ -25,14 +19,13 @@ class GetConversationsResponseDataConversationParticipant:
             query orders. To query orders, use `user_id` instead.
         avatar (str | Unset): Participant's avatar URL.
         user_id (str | Unset): Participant's ID.
-        role (GetConversationsResponseDataConversationParticipantRole | Unset): Participant's role.
+        role (str | Unset): Participant's role.
             Possible enumerations:
             - `BUYER`
             - `SHOP`
             - `CUSTOMER_SERVICE`
         nickname (str | Unset): Participant's nickname.
-        buyer_platform (GetConversationsResponseDataConversationParticipantBuyerPlatform | Unset): Which platform is the
-            buyer from.
+        buyer_platform (str | Unset): Which platform is the buyer from.
             This field will only be returned when the participant's `role` is `BUYER` and the shop's region is Indonesia.
             Possible enumerations:
             - TIKTOK_SHOP
@@ -44,9 +37,9 @@ class GetConversationsResponseDataConversationParticipant:
     im_user_id: str | Unset = UNSET
     avatar: str | Unset = UNSET
     user_id: str | Unset = UNSET
-    role: GetConversationsResponseDataConversationParticipantRole | Unset = UNSET
+    role: str | Unset = UNSET
     nickname: str | Unset = UNSET
-    buyer_platform: GetConversationsResponseDataConversationParticipantBuyerPlatform | Unset = UNSET
+    buyer_platform: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -56,15 +49,11 @@ class GetConversationsResponseDataConversationParticipant:
 
         user_id = self.user_id
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         nickname = self.nickname
 
-        buyer_platform: str | Unset = UNSET
-        if not isinstance(self.buyer_platform, Unset):
-            buyer_platform = self.buyer_platform.value
+        buyer_platform = self.buyer_platform
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -93,21 +82,11 @@ class GetConversationsResponseDataConversationParticipant:
 
         user_id = d.pop("user_id", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetConversationsResponseDataConversationParticipantRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetConversationsResponseDataConversationParticipantRole(_role)
+        role = d.pop("role", UNSET)
 
         nickname = d.pop("nickname", UNSET)
 
-        _buyer_platform = d.pop("buyer_platform", UNSET)
-        buyer_platform: GetConversationsResponseDataConversationParticipantBuyerPlatform | Unset
-        if isinstance(_buyer_platform, Unset):
-            buyer_platform = UNSET
-        else:
-            buyer_platform = GetConversationsResponseDataConversationParticipantBuyerPlatform(_buyer_platform)
+        buyer_platform = d.pop("buyer_platform", UNSET)
 
         get_conversations_response_data_conversation_participant = cls(
             im_user_id=im_user_id,

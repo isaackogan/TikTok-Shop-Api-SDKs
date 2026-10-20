@@ -6,10 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_activity_response_data_activity_type import GetActivityResponseDataActivityType
-from ..models.get_activity_response_data_auction_support_type import GetActivityResponseDataAuctionSupportType
-from ..models.get_activity_response_data_product_level import GetActivityResponseDataProductLevel
-from ..models.get_activity_response_data_status import GetActivityResponseDataStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,7 +25,7 @@ class GetActivityResponseData:
     Attributes:
         activity_id (str | Unset): A unique ID that identifies different activities.
         title (str | Unset): Activity name (50 characters max.) The name must be unique.
-        activity_type (GetActivityResponseDataActivityType | Unset): The activity type.
+        activity_type (str | Unset): The activity type.
             Possible values:
             - `FIXED_PRICE`: A product discount activity with a fixed price.
             - `DIRECT_DISCOUNT`: A product discount activity with a percentage discount.
@@ -52,7 +48,7 @@ class GetActivityResponseData:
         products (list[GetActivityResponseDataProduct] | Unset): Product List.
             Note:If  `FIXED_PRICE`, `DIRECT_DISCOUNT` and `FLASHSALE` activity that ended more than 180 days,this field is
             empty.
-        status (GetActivityResponseDataStatus | Unset): Activity status.
+        status (str | Unset): Activity status.
             Possible values:
             - DRAFT: Promotion activities with this status are not available to TikTok users.
             - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
@@ -63,7 +59,7 @@ class GetActivityResponseData:
             - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
         create_time (int | Unset): Activity creation time as a UNIX timestamp in milliseconds.
         update_time (int | Unset): Activity update time as a UNIX timestamp in milliseconds.
-        product_level (GetActivityResponseDataProductLevel | Unset): Activity product dimension, values are:
+        product_level (str | Unset): Activity product dimension, values are:
             - PRODUCT: Product level promotion activity.
             - VARIATION: SKU level promotion activity.
             - SHOP: Shop level promotion activity.
@@ -72,9 +68,9 @@ class GetActivityResponseData:
         discount (GetActivityResponseDataDiscount | Unset):
         target_user_info (GetActivityResponseDataTargetUserInfo | Unset):
         benefit_products (list[GetActivityResponseDataBenefitProduct] | Unset): Benefit products in BXGY promotions
-        auction_support_type (GetActivityResponseDataAuctionSupportType | Unset): Whether a `SHIPPING_DISCOUNT` activity
-            supports auction products. This field is omitted for other activity types and can also be omitted for a
-            shipping-discount activity when auction-support data is unavailable.
+        auction_support_type (str | Unset): Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field
+            is omitted for other activity types and can also be omitted for a shipping-discount activity when auction-
+            support data is unavailable.
             Possible values:
             - `ALL`: The activity supports both normal products and auction products.
             - `EXCLUDE_AUCTION`: The activity does not support auction products.
@@ -82,21 +78,21 @@ class GetActivityResponseData:
 
     activity_id: str | Unset = UNSET
     title: str | Unset = UNSET
-    activity_type: GetActivityResponseDataActivityType | Unset = UNSET
+    activity_type: str | Unset = UNSET
     duration_type: str | Unset = UNSET
     begin_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
     participation_limit: list[GetActivityResponseDataParticipationLimit] | Unset = UNSET
     products: list[GetActivityResponseDataProduct] | Unset = UNSET
-    status: GetActivityResponseDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
-    product_level: GetActivityResponseDataProductLevel | Unset = UNSET
+    product_level: str | Unset = UNSET
     activity_commands: list[str] | Unset = UNSET
     discount: GetActivityResponseDataDiscount | Unset = UNSET
     target_user_info: GetActivityResponseDataTargetUserInfo | Unset = UNSET
     benefit_products: list[GetActivityResponseDataBenefitProduct] | Unset = UNSET
-    auction_support_type: GetActivityResponseDataAuctionSupportType | Unset = UNSET
+    auction_support_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -104,9 +100,7 @@ class GetActivityResponseData:
 
         title = self.title
 
-        activity_type: str | Unset = UNSET
-        if not isinstance(self.activity_type, Unset):
-            activity_type = self.activity_type.value
+        activity_type = self.activity_type
 
         duration_type = self.duration_type
 
@@ -128,17 +122,13 @@ class GetActivityResponseData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         create_time = self.create_time
 
         update_time = self.update_time
 
-        product_level: str | Unset = UNSET
-        if not isinstance(self.product_level, Unset):
-            product_level = self.product_level.value
+        product_level = self.product_level
 
         activity_commands: list[str] | Unset = UNSET
         if not isinstance(self.activity_commands, Unset):
@@ -159,9 +149,7 @@ class GetActivityResponseData:
                 benefit_products_item = benefit_products_item_data.to_dict()
                 benefit_products.append(benefit_products_item)
 
-        auction_support_type: str | Unset = UNSET
-        if not isinstance(self.auction_support_type, Unset):
-            auction_support_type = self.auction_support_type.value
+        auction_support_type = self.auction_support_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -222,12 +210,7 @@ class GetActivityResponseData:
 
         title = d.pop("title", UNSET)
 
-        _activity_type = d.pop("activity_type", UNSET)
-        activity_type: GetActivityResponseDataActivityType | Unset
-        if isinstance(_activity_type, Unset):
-            activity_type = UNSET
-        else:
-            activity_type = GetActivityResponseDataActivityType(_activity_type)
+        activity_type = d.pop("activity_type", UNSET)
 
         duration_type = d.pop("duration_type", UNSET)
 
@@ -255,23 +238,13 @@ class GetActivityResponseData:
 
                 products.append(products_item)
 
-        _status = d.pop("status", UNSET)
-        status: GetActivityResponseDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetActivityResponseDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         create_time = d.pop("create_time", UNSET)
 
         update_time = d.pop("update_time", UNSET)
 
-        _product_level = d.pop("product_level", UNSET)
-        product_level: GetActivityResponseDataProductLevel | Unset
-        if isinstance(_product_level, Unset):
-            product_level = UNSET
-        else:
-            product_level = GetActivityResponseDataProductLevel(_product_level)
+        product_level = d.pop("product_level", UNSET)
 
         activity_commands = cast(list[str], d.pop("activity_commands", UNSET))
 
@@ -298,12 +271,7 @@ class GetActivityResponseData:
 
                 benefit_products.append(benefit_products_item)
 
-        _auction_support_type = d.pop("auction_support_type", UNSET)
-        auction_support_type: GetActivityResponseDataAuctionSupportType | Unset
-        if isinstance(_auction_support_type, Unset):
-            auction_support_type = UNSET
-        else:
-            auction_support_type = GetActivityResponseDataAuctionSupportType(_auction_support_type)
+        auction_support_type = d.pop("auction_support_type", UNSET)
 
         get_activity_response_data = cls(
             activity_id=activity_id,

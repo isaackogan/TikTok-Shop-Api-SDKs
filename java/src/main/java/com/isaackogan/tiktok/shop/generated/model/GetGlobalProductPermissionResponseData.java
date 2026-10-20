@@ -52,73 +52,20 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetGlobalProductPermissionResponseData {
-  /**
-   * Gets or Sets permissions
-   */
-  @JsonAdapter(PermissionsEnum.Adapter.class)
-  public enum PermissionsEnum {
-    /**
-     * Indicates the seller is permitted to manage global products listed in TikTok Shops across multiple countries.
-     */
-    MANAGE_GLOBAL_PRODUCT("MANAGE_GLOBAL_PRODUCT");
-
-    private String value;
-
-    PermissionsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PermissionsEnum fromValue(String value) {
-      for (PermissionsEnum b : PermissionsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PermissionsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PermissionsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PermissionsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PermissionsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PermissionsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PERMISSIONS = "permissions";
   @SerializedName(SERIALIZED_NAME_PERMISSIONS)
   @javax.annotation.Nullable
-  private List<PermissionsEnum> permissions = new ArrayList<>();
+  private List<String> permissions = new ArrayList<>();
 
   public GetGlobalProductPermissionResponseData() {
   }
 
-  public GetGlobalProductPermissionResponseData permissions(@javax.annotation.Nullable List<PermissionsEnum> permissions) {
+  public GetGlobalProductPermissionResponseData permissions(@javax.annotation.Nullable List<String> permissions) {
     this.permissions = permissions;
     return this;
   }
 
-  public GetGlobalProductPermissionResponseData addPermissionsItem(PermissionsEnum permissionsItem) {
+  public GetGlobalProductPermissionResponseData addPermissionsItem(String permissionsItem) {
     if (this.permissions == null) {
       this.permissions = new ArrayList<>();
     }
@@ -131,11 +78,11 @@ public class GetGlobalProductPermissionResponseData {
    * @return permissions
    */
   @javax.annotation.Nullable
-  public List<PermissionsEnum> getPermissions() {
+  public List<String> getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(@javax.annotation.Nullable List<PermissionsEnum> permissions) {
+  public void setPermissions(@javax.annotation.Nullable List<String> permissions) {
     this.permissions = permissions;
   }
 

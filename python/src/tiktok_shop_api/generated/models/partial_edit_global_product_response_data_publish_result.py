@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.partial_edit_global_product_response_data_publish_result_region import (
-    PartialEditGlobalProductResponseDataPublishResultRegion,
-)
-from ..models.partial_edit_global_product_response_data_publish_result_status import (
-    PartialEditGlobalProductResponseDataPublishResultStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,8 +19,7 @@ T = TypeVar("T", bound="PartialEditGlobalProductResponseDataPublishResult")
 class PartialEditGlobalProductResponseDataPublishResult:
     """
     Attributes:
-        region (PartialEditGlobalProductResponseDataPublishResultRegion | Unset): The market where the product is
-            published
+        region (str | Unset): The market where the product is published
             Possible values:
             - DE: Germany
             - ES: Spain
@@ -43,8 +36,7 @@ class PartialEditGlobalProductResponseDataPublishResult:
             - TH: Thailand
             - US: United States
             - VN: Vietnam
-        status (PartialEditGlobalProductResponseDataPublishResultStatus | Unset): The status of syncing the product to
-            the market.
+        status (str | Unset): The status of syncing the product to the market.
             Possible values:
             - SUCCESS: The global product was successfully synchronized to the local shop, submitted for listing, and is now
             under review. Use the [Product status change](650956aff1fd3102b90b6261) webhook to track subsequent audit status
@@ -53,19 +45,15 @@ class PartialEditGlobalProductResponseDataPublishResult:
         fail_reasons (list[FailReason] | Unset): The list of errors that occurred.
     """
 
-    region: PartialEditGlobalProductResponseDataPublishResultRegion | Unset = UNSET
-    status: PartialEditGlobalProductResponseDataPublishResultStatus | Unset = UNSET
+    region: str | Unset = UNSET
+    status: str | Unset = UNSET
     fail_reasons: list[FailReason] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        region: str | Unset = UNSET
-        if not isinstance(self.region, Unset):
-            region = self.region.value
+        region = self.region
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         fail_reasons: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.fail_reasons, Unset):
@@ -91,19 +79,9 @@ class PartialEditGlobalProductResponseDataPublishResult:
         from ..models.fail_reason import FailReason  # noqa: PLC0415
 
         d = dict(src_dict)
-        _region = d.pop("region", UNSET)
-        region: PartialEditGlobalProductResponseDataPublishResultRegion | Unset
-        if isinstance(_region, Unset):
-            region = UNSET
-        else:
-            region = PartialEditGlobalProductResponseDataPublishResultRegion(_region)
+        region = d.pop("region", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: PartialEditGlobalProductResponseDataPublishResultStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = PartialEditGlobalProductResponseDataPublishResultStatus(_status)
+        status = d.pop("status", UNSET)
 
         _fail_reasons = d.pop("fail_reasons", UNSET)
         fail_reasons: list[FailReason] | Unset = UNSET

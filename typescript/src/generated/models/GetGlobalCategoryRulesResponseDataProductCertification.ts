@@ -73,10 +73,10 @@ export interface GetGlobalCategoryRulesResponseDataProductCertification {
      * - MX: Mexico
      * 
      * Applicable only if `is_required=false`.
-     * @type {Array<GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataProductCertification
      */
-    requiredRegions?: Array<GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum>;
+    requiredRegions?: Array<string>;
     /**
      * The markets where the certification is purely optional, or required only under certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements.
      * 
@@ -106,10 +106,10 @@ export interface GetGlobalCategoryRulesResponseDataProductCertification {
      * - VN: Vietnam
      * 
      * Applicable only if `is_required=false`.
-     * @type {Array<GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalCategoryRulesResponseDataProductCertification
      */
-    optionalRegions?: Array<GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum>;
+    optionalRegions?: Array<string>;
     /**
      * A list of conditions that determine if the certification is required in a market based on the seller's inputs for a product attribute. If any of the conditions is met, the certification is required; otherwise, it is optional.
      * 
@@ -121,60 +121,6 @@ export interface GetGlobalCategoryRulesResponseDataProductCertification {
      */
     requirementConditions?: Array<GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum = {
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Id: 'ID',
-    It: 'IT',
-    Ie: 'IE',
-    Jp: 'JP',
-    My: 'MY',
-    Ph: 'PH',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum = typeof GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataProductCertificationRequiredRegionsEnum];
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    Mx: 'MX',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Pl: 'PL',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN'
-} as const;
-export type GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum = typeof GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum[keyof typeof GetGlobalCategoryRulesResponseDataProductCertificationOptionalRegionsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalCategoryRulesResponseDataProductCertification interface.

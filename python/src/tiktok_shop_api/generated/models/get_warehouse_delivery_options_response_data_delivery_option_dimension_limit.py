@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_warehouse_delivery_options_response_data_delivery_option_dimension_limit_unit import (
-    GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnit,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit")
@@ -21,8 +18,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit:
         max_height (int | Unset): Maximum height limit.
         max_length (int | Unset): Maximum length limit.
         max_width (int | Unset): Maximum width limit.
-        unit (GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnit | Unset): The unit of measurement
-            for the dimensions, with possible values:
+        unit (str | Unset): The unit of measurement for the dimensions, with possible values:
             - CM
             - INCH
     """
@@ -30,7 +26,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit:
     max_height: int | Unset = UNSET
     max_length: int | Unset = UNSET
     max_width: int | Unset = UNSET
-    unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -40,9 +36,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit:
 
         max_width = self.max_width
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -67,12 +61,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit:
 
         max_width = d.pop("max_width", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         get_warehouse_delivery_options_response_data_delivery_option_dimension_limit = cls(
             max_height=max_height,

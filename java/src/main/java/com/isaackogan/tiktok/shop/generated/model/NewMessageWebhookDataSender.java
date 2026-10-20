@@ -55,68 +55,10 @@ public class NewMessageWebhookDataSender {
   @javax.annotation.Nullable
   private String imUserId;
 
-  /**
-   * Sender&#39;s role, with possible values:   * BUYER   * SHOP   * CUSTOMER_SERVICE   * SYSTEM   * ROBOT
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    BUYER("BUYER"),
-    
-    SHOP("SHOP"),
-    
-    CUSTOMER_SERVICE("CUSTOMER_SERVICE"),
-    
-    SYSTEM("SYSTEM"),
-    
-    ROBOT("ROBOT");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
+  private String role;
 
   public NewMessageWebhookDataSender() {
   }
@@ -140,7 +82,7 @@ public class NewMessageWebhookDataSender {
   }
 
 
-  public NewMessageWebhookDataSender role(@javax.annotation.Nullable RoleEnum role) {
+  public NewMessageWebhookDataSender role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -150,11 +92,11 @@ public class NewMessageWebhookDataSender {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
@@ -272,10 +214,6 @@ public class NewMessageWebhookDataSender {
       }
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
-      }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
       }
   }
 

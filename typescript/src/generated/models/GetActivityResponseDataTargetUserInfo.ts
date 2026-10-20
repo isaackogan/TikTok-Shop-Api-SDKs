@@ -27,25 +27,11 @@ export interface GetActivityResponseDataTargetUserInfo {
      * - `SHOP_EXISTING_CUSTOMER`
      * - `SHOP_REPEAT_CUSTOMER`
      * - `SHOP_ABANDONED_CHECKOUTS_CUSTOMER`
-     * @type {GetActivityResponseDataTargetUserInfoUserTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataTargetUserInfo
      */
-    userType?: GetActivityResponseDataTargetUserInfoUserTypeEnum;
+    userType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataTargetUserInfoUserTypeEnum = {
-    AllUser: 'ALL_USER',
-    ShopNewCustomer: 'SHOP_NEW_CUSTOMER',
-    ShopExistingCustomer: 'SHOP_EXISTING_CUSTOMER',
-    ShopRepeatCustomer: 'SHOP_REPEAT_CUSTOMER',
-    ShopAbandonedCheckoutsCustomer: 'SHOP_ABANDONED_CHECKOUTS_CUSTOMER'
-} as const;
-export type GetActivityResponseDataTargetUserInfoUserTypeEnum = typeof GetActivityResponseDataTargetUserInfoUserTypeEnum[keyof typeof GetActivityResponseDataTargetUserInfoUserTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseDataTargetUserInfo interface.

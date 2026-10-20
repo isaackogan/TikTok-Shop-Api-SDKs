@@ -6,12 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_category_rules_response_data_size_chart_measurement_and_option_option_role import (
-    GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRole,
-)
-from ..models.get_category_rules_response_data_size_chart_measurement_and_option_option_unit import (
-    GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnit,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption")
@@ -24,19 +18,18 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption:
         name (str | Unset): Localized measurement name resolved using the request locale.
         id (str | Unset): Platform-defined standard measurement ID, for example size_chart_option_bust. Use this ID as
             table.headers[].id for the corresponding standard measurement.
-        role (GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRole | Unset): Possible values: KEY: a key
-            category measurement; RECOMMEND: a useful recommended measurement.
-        unit (GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnit | Unset): Possible values: NONE: no
-            unit conversion; LENGTH: length values such as cm or in; WEIGHT: weight values such as kg or lb; HEIGHT: person-
-            height values such as cm or ft/in.
+        role (str | Unset): Possible values: KEY: a key category measurement; RECOMMEND: a useful recommended
+            measurement.
+        unit (str | Unset): Possible values: NONE: no unit conversion; LENGTH: length values such as cm or in; WEIGHT:
+            weight values such as kg or lb; HEIGHT: person-height values such as cm or ft/in.
         metric_value_range (list[str] | Unset): Allowed metric range in [minimum, maximum] order.
         imperial_value_range (list[str] | Unset): Allowed imperial range in [minimum, maximum] order.
     """
 
     name: str | Unset = UNSET
     id: str | Unset = UNSET
-    role: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRole | Unset = UNSET
-    unit: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnit | Unset = UNSET
+    role: str | Unset = UNSET
+    unit: str | Unset = UNSET
     metric_value_range: list[str] | Unset = UNSET
     imperial_value_range: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -46,13 +39,9 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption:
 
         id = self.id
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         metric_value_range: list[str] | Unset = UNSET
         if not isinstance(self.metric_value_range, Unset):
@@ -87,19 +76,9 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption:
 
         id = d.pop("id", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRole(_role)
+        role = d.pop("role", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         metric_value_range = cast(list[str], d.pop("metric_value_range", UNSET))
 

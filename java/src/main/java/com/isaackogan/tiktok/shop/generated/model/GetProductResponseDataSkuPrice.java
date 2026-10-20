@@ -50,133 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetProductResponseDataSkuPrice {
-  /**
-   * The currency. Possible values based on the region: - BRL: Brazil - CZK: Czech Republic - EUR: France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal - GBP: United Kingdom - HUF: Hungary - IDR: Indonesia - JPY: Japan - MXN: Mexico - MYR: Malaysia - PHP: Philippines - PLN: Poland - SGD: Singapore - THB: Thailand - USD: United States - VND: Vietnam
-   */
-  @JsonAdapter(CurrencyEnum.Adapter.class)
-  public enum CurrencyEnum {
-    /**
-     * Brazil
-     */
-    BRL("BRL"),
-    
-    /**
-     * Czech Republic
-     */
-    CZK("CZK"),
-    
-    /**
-     * France, Germany, Ireland, Italy, Spain, Netherlands, Belgium, Austria, Greece, Portugal
-     */
-    EUR("EUR"),
-    
-    /**
-     * United Kingdom
-     */
-    GBP("GBP"),
-    
-    /**
-     * Hungary
-     */
-    HUF("HUF"),
-    
-    /**
-     * Indonesia
-     */
-    IDR("IDR"),
-    
-    /**
-     * Japan
-     */
-    JPY("JPY"),
-    
-    /**
-     * Mexico
-     */
-    MXN("MXN"),
-    
-    /**
-     * Malaysia
-     */
-    MYR("MYR"),
-    
-    /**
-     * Philippines
-     */
-    PHP("PHP"),
-    
-    /**
-     * Poland
-     */
-    PLN("PLN"),
-    
-    /**
-     * Singapore
-     */
-    SGD("SGD"),
-    
-    /**
-     * Thailand
-     */
-    THB("THB"),
-    
-    /**
-     * United States
-     */
-    USD("USD"),
-    
-    /**
-     * Vietnam
-     */
-    VND("VND");
-
-    private String value;
-
-    CurrencyEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CurrencyEnum fromValue(String value) {
-      for (CurrencyEnum b : CurrencyEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CurrencyEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CurrencyEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CurrencyEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CurrencyEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CurrencyEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
   @javax.annotation.Nullable
-  private CurrencyEnum currency;
+  private String currency;
 
   public static final String SERIALIZED_NAME_SALE_PRICE = "sale_price";
   @SerializedName(SERIALIZED_NAME_SALE_PRICE)
@@ -201,7 +78,7 @@ public class GetProductResponseDataSkuPrice {
   public GetProductResponseDataSkuPrice() {
   }
 
-  public GetProductResponseDataSkuPrice currency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public GetProductResponseDataSkuPrice currency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
     return this;
   }
@@ -211,11 +88,11 @@ public class GetProductResponseDataSkuPrice {
    * @return currency
    */
   @javax.annotation.Nullable
-  public CurrencyEnum getCurrency() {
+  public String getCurrency() {
     return currency;
   }
 
-  public void setCurrency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public void setCurrency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
   }
 
@@ -412,10 +289,6 @@ public class GetProductResponseDataSkuPrice {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));
-      }
-      // validate the optional field `currency`
-      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        CurrencyEnum.validateJsonElement(jsonObj.get("currency"));
       }
       if ((jsonObj.get("sale_price") != null && !jsonObj.get("sale_price").isJsonNull()) && !jsonObj.get("sale_price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sale_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sale_price").toString()));

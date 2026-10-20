@@ -144,10 +144,10 @@ export interface GetCategoryRulesResponseData {
      * - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration. 
      * 
      * **Note**: This field is omitted if you lack the permission to list special product types. Contact your account manager for assistance if you wish to list such products.
-     * @type {Array<GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum>}
+     * @type {Array<string>}
      * @memberof GetCategoryRulesResponseData
      */
-    allowedSpecialProductTypes?: Array<GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum>;
+    allowedSpecialProductTypes?: Array<string>;
     /**
      * Product fees related rules.
      * @type {Array<GetCategoryRulesResponseDataFee>}
@@ -161,18 +161,6 @@ export interface GetCategoryRulesResponseData {
      */
     sellerSku?: GetCategoryRulesResponseDataSellerSku;
 }
-
-
-/**
- * @export
- */
-export const GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum = {
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER',
-    Custom: 'CUSTOM'
-} as const;
-export type GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum = typeof GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum[keyof typeof GetCategoryRulesResponseDataAllowedSpecialProductTypesEnum];
-
 
 /**
  * Check if a given object implements the GetCategoryRulesResponseData interface.

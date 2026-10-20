@@ -59,133 +59,10 @@ public class SampleApplicationStatusChangeWebhookData {
   @javax.annotation.Nullable
   private String applicationId;
 
-  /**
-   * The status of sample applications.   The possible enumerated values are:      * &#x60;PENDING&#x60;: The sample application is waiting for the seller&#39;s review.   * &#x60;AWAITING_SHIPMENT&#x60;: The application is approved, and the seller needs to ship the sample.   * &#x60;SHIPPED&#x60;: The sample has been shipped by the seller and is waiting for the creator to receive the package.   * &#x60;CONTENT_PENDING&#x60;: The creator has received the sample package and is expected to create content.   * &#x60;REJECT_CANCELLED&#x60;: The sample application has been rejected by the seller.   * &#x60;OVERDUE_CANCELLED&#x60;: The sample application has expired due to being overdue.   * &#x60;UNFULFILL_CANCELLED&#x60;: The creator did not fulfill the commitment to create content within the agreed timeframe.   * &#x60;DEL_OPEN_COLLAB&#x60;: Open collaboration has been deleted.   * &#x60;SELLER_NOT_SHIP_CANCELLED&#x60;: The seller did not ship the sample within the required timeframe.   * &#x60;WITHDRAW_CANCELLED&#x60;: The creator withdrew the sample application before the seller approved it.   * &#x60;UNFULFILLABLE_CANCELLED&#x60;: The application was cancelled due to reasons beyond the creator&#39;s control, making it impossible to create content.   * &#x60;OPS_CANCELLED&#x60;: The application was manually cancelled by operations staff.   * &#x60;OPS_FAILED&#x60;: The application was marked as failed by operations staff.   * &#x60;OPS_COMPLETED&#x60;: The application was manually marked as completed by operations staff.   * &#x60;COMPLETED&#x60;: The application is complete, and the creator has posted the content.      This field allows for tracking the status of a sample application throughout its lifecycle, providing visibility into each stage of the process for sellers and creators.
-   */
-  @JsonAdapter(NewStatusEnum.Adapter.class)
-  public enum NewStatusEnum {
-    /**
-     * The sample application is waiting for the seller&#39;s review.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * The application is approved, and the seller needs to ship the sample.
-     */
-    AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-    
-    /**
-     * The sample has been shipped by the seller and is waiting for the creator to receive the package.
-     */
-    SHIPPED("SHIPPED"),
-    
-    /**
-     * The creator has received the sample package and is expected to create content.
-     */
-    CONTENT_PENDING("CONTENT_PENDING"),
-    
-    /**
-     * The sample application has been rejected by the seller.
-     */
-    REJECT_CANCELLED("REJECT_CANCELLED"),
-    
-    /**
-     * The sample application has expired due to being overdue.
-     */
-    OVERDUE_CANCELLED("OVERDUE_CANCELLED"),
-    
-    /**
-     * The creator did not fulfill the commitment to create content within the agreed timeframe.
-     */
-    UNFULFILL_CANCELLED("UNFULFILL_CANCELLED"),
-    
-    /**
-     * Open collaboration has been deleted.
-     */
-    DEL_OPEN_COLLAB("DEL_OPEN_COLLAB"),
-    
-    /**
-     * The seller did not ship the sample within the required timeframe.
-     */
-    SELLER_NOT_SHIP_CANCELLED("SELLER_NOT_SHIP_CANCELLED"),
-    
-    /**
-     * The creator withdrew the sample application before the seller approved it.
-     */
-    WITHDRAW_CANCELLED("WITHDRAW_CANCELLED"),
-    
-    /**
-     * The application was cancelled due to reasons beyond the creator&#39;s control, making it impossible to create content.
-     */
-    UNFULFILLABLE_CANCELLED("UNFULFILLABLE_CANCELLED"),
-    
-    /**
-     * The application was manually cancelled by operations staff.
-     */
-    OPS_CANCELLED("OPS_CANCELLED"),
-    
-    /**
-     * The application was marked as failed by operations staff.
-     */
-    OPS_FAILED("OPS_FAILED"),
-    
-    /**
-     * The application was manually marked as completed by operations staff.
-     */
-    OPS_COMPLETED("OPS_COMPLETED"),
-    
-    /**
-     * The application is complete, and the creator has posted the content.
-     */
-    COMPLETED("COMPLETED");
-
-    private String value;
-
-    NewStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static NewStatusEnum fromValue(String value) {
-      for (NewStatusEnum b : NewStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<NewStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final NewStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public NewStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return NewStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      NewStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_NEW_STATUS = "new_status";
   @SerializedName(SERIALIZED_NAME_NEW_STATUS)
   @javax.annotation.Nullable
-  private NewStatusEnum newStatus;
+  private String newStatus;
 
   public static final String SERIALIZED_NAME_CREATOR = "creator";
   @SerializedName(SERIALIZED_NAME_CREATOR)
@@ -219,7 +96,7 @@ public class SampleApplicationStatusChangeWebhookData {
   }
 
 
-  public SampleApplicationStatusChangeWebhookData newStatus(@javax.annotation.Nullable NewStatusEnum newStatus) {
+  public SampleApplicationStatusChangeWebhookData newStatus(@javax.annotation.Nullable String newStatus) {
     this.newStatus = newStatus;
     return this;
   }
@@ -229,11 +106,11 @@ public class SampleApplicationStatusChangeWebhookData {
    * @return newStatus
    */
   @javax.annotation.Nullable
-  public NewStatusEnum getNewStatus() {
+  public String getNewStatus() {
     return newStatus;
   }
 
-  public void setNewStatus(@javax.annotation.Nullable NewStatusEnum newStatus) {
+  public void setNewStatus(@javax.annotation.Nullable String newStatus) {
     this.newStatus = newStatus;
   }
 
@@ -409,10 +286,6 @@ public class SampleApplicationStatusChangeWebhookData {
       }
       if ((jsonObj.get("new_status") != null && !jsonObj.get("new_status").isJsonNull()) && !jsonObj.get("new_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `new_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("new_status").toString()));
-      }
-      // validate the optional field `new_status`
-      if (jsonObj.get("new_status") != null && !jsonObj.get("new_status").isJsonNull()) {
-        NewStatusEnum.validateJsonElement(jsonObj.get("new_status"));
       }
       if (jsonObj.get("creator") != null && !jsonObj.get("creator").isJsonNull()) {
         JsonArray jsonArraycreator = jsonObj.getAsJsonArray("creator");

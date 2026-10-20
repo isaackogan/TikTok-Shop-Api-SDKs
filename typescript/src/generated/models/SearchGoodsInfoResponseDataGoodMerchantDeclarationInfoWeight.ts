@@ -33,25 +33,11 @@ export interface SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight {
      * - KILOGRAM 
      * - POUND 
      * - OUNCE
-     * @type {SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight
      */
-    unit?: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum = {
-    Milligram: 'MILLIGRAM',
-    Gram: 'GRAM',
-    Kilogram: 'KILOGRAM',
-    Pound: 'POUND',
-    Ounce: 'OUNCE'
-} as const;
-export type SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum = typeof SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum[keyof typeof SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeightUnitEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoWeight interface.

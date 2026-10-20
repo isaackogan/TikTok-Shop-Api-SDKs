@@ -140,7 +140,7 @@ data class SearchTAPAffiliateOrdersResponseDataSkuOrder (
 
     /* The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE */
     @SerializedName("content_type")
-    val contentType: SearchTAPAffiliateOrdersResponseDataSkuOrder.ContentType? = null,
+    val contentType: kotlin.String? = null,
 
     /* Unique identifier for content */
     @SerializedName("content_id")
@@ -244,7 +244,7 @@ data class SearchTAPAffiliateOrdersResponseDataSkuOrder (
 
     /* Whether the SKU was fully returned or refunded. Possible values: - `Yes`: The SKU was fully returned or refunded, and no commission is paid. - `No`: The SKU was not fully returned or refunded. */
     @SerializedName("fully_return")
-    val fullyReturn: SearchTAPAffiliateOrdersResponseDataSkuOrder.FullyReturn? = null,
+    val fullyReturn: kotlin.String? = null,
 
     /* The time when the order commission was settled, as a Unix timestamp in seconds (UTC). */
     @SerializedName("settlement_time")
@@ -260,28 +260,6 @@ data class SearchTAPAffiliateOrdersResponseDataSkuOrder (
 
 ) {
 
-    /**
-     * The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE
-     *
-     * Values: SHOP,VIDEO,LIVE,PRE_LIVE,PROMOTION_PAGE,LINKSHARE
-     */
-    enum class ContentType(val value: kotlin.String) {
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO"),
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "PRE_LIVE") PRE_LIVE("PRE_LIVE"),
-        @SerializedName(value = "PROMOTION_PAGE") PROMOTION_PAGE("PROMOTION_PAGE"),
-        @SerializedName(value = "LINKSHARE") LINKSHARE("LINKSHARE");
-    }
-    /**
-     * Whether the SKU was fully returned or refunded. Possible values: - `Yes`: The SKU was fully returned or refunded, and no commission is paid. - `No`: The SKU was not fully returned or refunded.
-     *
-     * Values: Yes,No
-     */
-    enum class FullyReturn(val value: kotlin.String) {
-        @SerializedName(value = "Yes") Yes("Yes"),
-        @SerializedName(value = "No") No("No");
-    }
 
 }
 

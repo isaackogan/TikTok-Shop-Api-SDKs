@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.diagnosis_result_quality_tier import DiagnosisResultQualityTier
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="DiagnosisResult")
@@ -23,8 +22,7 @@ class DiagnosisResult:
             locale language of the shop.
             Refer to [Listing quality diagnosis](https://partner.tiktokshop.com/docv2/page/66eb8f5c6f2da702e96a49dd) for the
             full list of recommendations.
-        quality_tier (DiagnosisResultQualityTier | Unset): The listing quality tier you can reach by implementing the
-            recommendation.
+        quality_tier (str | Unset): The listing quality tier you can reach by implementing the recommendation.
             Possible values:
             - FAIR
             - GOOD
@@ -38,7 +36,7 @@ class DiagnosisResult:
 
     code: str | Unset = UNSET
     how_to_solve: str | Unset = UNSET
-    quality_tier: DiagnosisResultQualityTier | Unset = UNSET
+    quality_tier: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -46,9 +44,7 @@ class DiagnosisResult:
 
         how_to_solve = self.how_to_solve
 
-        quality_tier: str | Unset = UNSET
-        if not isinstance(self.quality_tier, Unset):
-            quality_tier = self.quality_tier.value
+        quality_tier = self.quality_tier
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -69,12 +65,7 @@ class DiagnosisResult:
 
         how_to_solve = d.pop("how_to_solve", UNSET)
 
-        _quality_tier = d.pop("quality_tier", UNSET)
-        quality_tier: DiagnosisResultQualityTier | Unset
-        if isinstance(_quality_tier, Unset):
-            quality_tier = UNSET
-        else:
-            quality_tier = DiagnosisResultQualityTier(_quality_tier)
+        quality_tier = d.pop("quality_tier", UNSET)
 
         diagnosis_result = cls(
             code=code,

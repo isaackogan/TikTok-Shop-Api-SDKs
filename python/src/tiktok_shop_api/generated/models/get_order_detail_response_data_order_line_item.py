@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_order_detail_response_data_order_line_item_product_listing_type import (
-    GetOrderDetailResponseDataOrderLineItemProductListingType,
-)
-from ..models.get_order_detail_response_data_order_line_item_sku_type import (
-    GetOrderDetailResponseDataOrderLineItemSkuType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -57,8 +51,8 @@ class GetOrderDetailResponseDataOrderLineItem:
             - `SELLER`
             - `OPERATOR`
             - `SYSTEM`
-        sku_type (GetOrderDetailResponseDataOrderLineItemSkuType | Unset): [**Deprecated**: This field is deprecated and
-            will be removed in a future API version. Use `order_type` instead.]
+        sku_type (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future API version.
+            Use `order_type` instead.]
             The order line type:
             Possible values based on region:
             **All regions**
@@ -140,8 +134,7 @@ class GetOrderDetailResponseDataOrderLineItem:
             exact details of the customization
         room_id (str | Unset): The unique ID of the LIVE session where the order line item was created. If the order
             line item was not created from a LIVE session, this field returns an empty string.
-        product_listing_type (GetOrderDetailResponseDataOrderLineItemProductListingType | Unset): This describes the
-            product listing type of the SKU.
+        product_listing_type (str | Unset): This describes the product listing type of the SKU.
             Possible values:
             - `TEMPORARY_LISTING`
     """
@@ -159,7 +152,7 @@ class GetOrderDetailResponseDataOrderLineItem:
     platform_discount: str | Unset = UNSET
     display_status: str | Unset = UNSET
     cancel_user: str | Unset = UNSET
-    sku_type: GetOrderDetailResponseDataOrderLineItemSkuType | Unset = UNSET
+    sku_type: str | Unset = UNSET
     seller_sku: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
     seller_discount: str | Unset = UNSET
@@ -190,7 +183,7 @@ class GetOrderDetailResponseDataOrderLineItem:
     is_pod_customized: bool | Unset = UNSET
     pod_info_id: str | Unset = UNSET
     room_id: str | Unset = UNSET
-    product_listing_type: GetOrderDetailResponseDataOrderLineItemProductListingType | Unset = UNSET
+    product_listing_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -225,9 +218,7 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         cancel_user = self.cancel_user
 
-        sku_type: str | Unset = UNSET
-        if not isinstance(self.sku_type, Unset):
-            sku_type = self.sku_type.value
+        sku_type = self.sku_type
 
         seller_sku = self.seller_sku
 
@@ -304,9 +295,7 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         room_id = self.room_id
 
-        product_listing_type: str | Unset = UNSET
-        if not isinstance(self.product_listing_type, Unset):
-            product_listing_type = self.product_listing_type.value
+        product_listing_type = self.product_listing_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -447,12 +436,7 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         cancel_user = d.pop("cancel_user", UNSET)
 
-        _sku_type = d.pop("sku_type", UNSET)
-        sku_type: GetOrderDetailResponseDataOrderLineItemSkuType | Unset
-        if isinstance(_sku_type, Unset):
-            sku_type = UNSET
-        else:
-            sku_type = GetOrderDetailResponseDataOrderLineItemSkuType(_sku_type)
+        sku_type = d.pop("sku_type", UNSET)
 
         seller_sku = d.pop("seller_sku", UNSET)
 
@@ -535,12 +519,7 @@ class GetOrderDetailResponseDataOrderLineItem:
 
         room_id = d.pop("room_id", UNSET)
 
-        _product_listing_type = d.pop("product_listing_type", UNSET)
-        product_listing_type: GetOrderDetailResponseDataOrderLineItemProductListingType | Unset
-        if isinstance(_product_listing_type, Unset):
-            product_listing_type = UNSET
-        else:
-            product_listing_type = GetOrderDetailResponseDataOrderLineItemProductListingType(_product_listing_type)
+        product_listing_type = d.pop("product_listing_type", UNSET)
 
         get_order_detail_response_data_order_line_item = cls(
             id=id,

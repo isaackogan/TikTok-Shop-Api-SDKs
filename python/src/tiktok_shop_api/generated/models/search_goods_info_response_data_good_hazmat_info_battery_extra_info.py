@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_hazmat_info_battery_extra_info_battery_packaging_type import (
-    SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo")
@@ -23,8 +20,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
             LITHIUM_ION
             LITHIUM_METAL
             OTHER
-        battery_packaging_type (SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingType | Unset):
-            Battery packaging type.
+        battery_packaging_type (str | Unset): Battery packaging type.
             Possible values:
             - STANDALONE
             - IN_EQUIPMENT
@@ -42,9 +38,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
     """
 
     battery_type: str | Unset = UNSET
-    battery_packaging_type: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingType | Unset = (
-        UNSET
-    )
+    battery_packaging_type: str | Unset = UNSET
     total_battery_weight: str | Unset = UNSET
     total_battery_weight_unit: str | Unset = UNSET
     total_battery_capacity: str | Unset = UNSET
@@ -57,9 +51,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
     def to_dict(self) -> dict[str, Any]:
         battery_type = self.battery_type
 
-        battery_packaging_type: str | Unset = UNSET
-        if not isinstance(self.battery_packaging_type, Unset):
-            battery_packaging_type = self.battery_packaging_type.value
+        battery_packaging_type = self.battery_packaging_type
 
         total_battery_weight = self.total_battery_weight
 
@@ -104,14 +96,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo:
         d = dict(src_dict)
         battery_type = d.pop("battery_type", UNSET)
 
-        _battery_packaging_type = d.pop("battery_packaging_type", UNSET)
-        battery_packaging_type: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingType | Unset
-        if isinstance(_battery_packaging_type, Unset):
-            battery_packaging_type = UNSET
-        else:
-            battery_packaging_type = SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingType(
-                _battery_packaging_type
-            )
+        battery_packaging_type = d.pop("battery_packaging_type", UNSET)
 
         total_battery_weight = d.pop("total_battery_weight", UNSET)
 

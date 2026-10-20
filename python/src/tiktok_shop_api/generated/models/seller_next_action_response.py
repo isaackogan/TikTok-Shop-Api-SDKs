@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.seller_next_action_response_action import SellerNextActionResponseAction
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SellerNextActionResponse")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="SellerNextActionResponse")
 class SellerNextActionResponse:
     """
     Attributes:
-        action (SellerNextActionResponseAction | Unset): Seller's next action.
+        action (str | Unset): Seller's next action.
             Available values:
             - `SELLER_RESPOND_REFUND`
             - `SELLER_RESPOND_RETURN`
@@ -26,14 +25,12 @@ class SellerNextActionResponse:
             seconds.
     """
 
-    action: SellerNextActionResponseAction | Unset = UNSET
+    action: str | Unset = UNSET
     deadline: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        action: str | Unset = UNSET
-        if not isinstance(self.action, Unset):
-            action = self.action.value
+        action = self.action
 
         deadline = self.deadline
 
@@ -50,12 +47,7 @@ class SellerNextActionResponse:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _action = d.pop("action", UNSET)
-        action: SellerNextActionResponseAction | Unset
-        if isinstance(_action, Unset):
-            action = UNSET
-        else:
-            action = SellerNextActionResponseAction(_action)
+        action = d.pop("action", UNSET)
 
         deadline = d.pop("deadline", UNSET)
 

@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_seller_affiliate_orders_response_data_order_sku_content_type import (
-    SearchSellerAffiliateOrdersResponseDataOrderSkuContentType,
-)
-from ..models.search_seller_affiliate_orders_response_data_order_sku_fully_return import (
-    SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturn,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -65,8 +59,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
             as an empty string for affiliate partner campaign orders.
         price (Price | Unset):
         quantity (int | Unset): The number of units of the SKU in the order, including units that were later refunded.
-        content_type (SearchSellerAffiliateOrdersResponseDataOrderSkuContentType | Unset): The content format of the
-            creator content through which the order was created.
+        content_type (str | Unset): The content format of the creator content through which the order was created.
             Possible values:
             - SHOP
             - VIDEO
@@ -113,8 +106,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
             the SKU order was fully returned or refunded.
         returned_quantity (int | Unset): Deprecated. This field is not returned. Use `fully_return` to determine whether
             the SKU order was fully returned or refunded.
-        fully_return (SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturn | Unset): Indicates whether the entire
-            SKU order was returned or refunded. Possible values:
+        fully_return (str | Unset): Indicates whether the entire SKU order was returned or refunded. Possible values:
             - `Yes`: The full quantity was returned or refunded, so no commission is paid.
             - `No`: The full quantity was not returned or refunded.
         is_carousel (bool | Unset): Indicates whether the SKU order is attributed to carousel content. Carousel content
@@ -130,7 +122,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
     creator_username: str | Unset = UNSET
     price: Price | Unset = UNSET
     quantity: int | Unset = UNSET
-    content_type: SearchSellerAffiliateOrdersResponseDataOrderSkuContentType | Unset = UNSET
+    content_type: str | Unset = UNSET
     content_id: str | Unset = UNSET
     product_id: str | Unset = UNSET
     commission_model: str | Unset = UNSET
@@ -162,7 +154,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
     ) = UNSET
     refunded_quantity: int | Unset = UNSET
     returned_quantity: int | Unset = UNSET
-    fully_return: SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturn | Unset = UNSET
+    fully_return: str | Unset = UNSET
     is_carousel: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -185,9 +177,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         quantity = self.quantity
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         content_id = self.content_id
 
@@ -247,9 +237,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         returned_quantity = self.returned_quantity
 
-        fully_return: str | Unset = UNSET
-        if not isinstance(self.fully_return, Unset):
-            fully_return = self.fully_return.value
+        fully_return = self.fully_return
 
         is_carousel = self.is_carousel
 
@@ -371,12 +359,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         quantity = d.pop("quantity", UNSET)
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: SearchSellerAffiliateOrdersResponseDataOrderSkuContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = SearchSellerAffiliateOrdersResponseDataOrderSkuContentType(_content_type)
+        content_type = d.pop("content_type", UNSET)
 
         content_id = d.pop("content_id", UNSET)
 
@@ -508,12 +491,7 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         returned_quantity = d.pop("returned_quantity", UNSET)
 
-        _fully_return = d.pop("fully_return", UNSET)
-        fully_return: SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturn | Unset
-        if isinstance(_fully_return, Unset):
-            fully_return = UNSET
-        else:
-            fully_return = SearchSellerAffiliateOrdersResponseDataOrderSkuFullyReturn(_fully_return)
+        fully_return = d.pop("fully_return", UNSET)
 
         is_carousel = d.pop("is_carousel", UNSET)
 

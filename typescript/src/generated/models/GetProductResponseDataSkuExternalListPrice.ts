@@ -28,37 +28,19 @@ export interface GetProductResponseDataSkuExternalListPrice {
     /**
      * The currency.
      * Possible values: USD
-     * @type {GetProductResponseDataSkuExternalListPriceCurrencyEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuExternalListPrice
      */
-    currency?: GetProductResponseDataSkuExternalListPriceCurrencyEnum;
+    currency?: string;
     /**
      * The external ecommerce platform from which the price is sourced.
      * Possible values:
      * - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
-     * @type {GetProductResponseDataSkuExternalListPriceSourceEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuExternalListPrice
      */
-    source?: GetProductResponseDataSkuExternalListPriceSourceEnum;
+    source?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuExternalListPriceCurrencyEnum = {
-    Usd: 'USD'
-} as const;
-export type GetProductResponseDataSkuExternalListPriceCurrencyEnum = typeof GetProductResponseDataSkuExternalListPriceCurrencyEnum[keyof typeof GetProductResponseDataSkuExternalListPriceCurrencyEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuExternalListPriceSourceEnum = {
-    ShopifyCompareAtPrice: 'SHOPIFY_COMPARE_AT_PRICE'
-} as const;
-export type GetProductResponseDataSkuExternalListPriceSourceEnum = typeof GetProductResponseDataSkuExternalListPriceSourceEnum[keyof typeof GetProductResponseDataSkuExternalListPriceSourceEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuExternalListPrice interface.

@@ -38,22 +38,11 @@ export interface GetMessageTemplatesResponseDataMessageTemplateCouponCardRule {
      * Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=ALL` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).
      * - REGULAR_REPEAT: Regular coupons that target only repeat buyers. 
      * Required coupon properties: `coupons.display_type=REGULAR` and `coupons.target_buyer_segment=REPEAT_CUSTOMERS` in the [Search Coupons API](https://partner.tiktokshop.com/docv2/page/6699dcdf115ebe02f841e4cd).
-     * @type {Array<GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum>}
+     * @type {Array<string>}
      * @memberof GetMessageTemplatesResponseDataMessageTemplateCouponCardRule
      */
-    couponType?: Array<GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum>;
+    couponType?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum = {
-    RegularAll: 'REGULAR_ALL',
-    RegularRepeat: 'REGULAR_REPEAT'
-} as const;
-export type GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum = typeof GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum[keyof typeof GetMessageTemplatesResponseDataMessageTemplateCouponCardRuleCouponTypeEnum];
-
 
 /**
  * Check if a given object implements the GetMessageTemplatesResponseDataMessageTemplateCouponCardRule interface.

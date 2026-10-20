@@ -138,7 +138,7 @@ data class GetOrderDetailResponseDataOrderLineItem (
     /* [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.] The order line type: Possible values based on region: **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store. **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced. */
     @SerializedName("sku_type")
     @Deprecated(message = "This property is deprecated.")
-    val skuType: GetOrderDetailResponseDataOrderLineItem.SkuType? = null,
+    val skuType: kotlin.String? = null,
 
     /* The seller stock keeping unit (SKU) of the item. */
     @SerializedName("seller_sku")
@@ -263,30 +263,10 @@ data class GetOrderDetailResponseDataOrderLineItem (
 
     /* This describes the product listing type of the SKU.  Possible values: - `TEMPORARY_LISTING` */
     @SerializedName("product_listing_type")
-    val productListingType: GetOrderDetailResponseDataOrderLineItem.ProductListingType? = null
+    val productListingType: kotlin.String? = null
 
 ) {
 
-    /**
-     * [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.] The order line type: Possible values based on region: **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store. **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-     *
-     * Values: NORMAL,ZERO_LOTTERY,SHOP_PARTNER,PRE_ORDER,MADE_TO_ORDER
-     */
-    enum class SkuType(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "ZERO_LOTTERY") ZERO_LOTTERY("ZERO_LOTTERY"),
-        @SerializedName(value = "SHOP_PARTNER") SHOP_PARTNER("SHOP_PARTNER"),
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER");
-    }
-    /**
-     * This describes the product listing type of the SKU.  Possible values: - `TEMPORARY_LISTING`
-     *
-     * Values: TEMPORARY_LISTING
-     */
-    enum class ProductListingType(val value: kotlin.String) {
-        @SerializedName(value = "TEMPORARY_LISTING") TEMPORARY_LISTING("TEMPORARY_LISTING");
-    }
 
 }
 

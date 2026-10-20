@@ -48,10 +48,10 @@ export interface SubItemInfo {
      * - `DELIVERED`: The package has been delivered to the buyer.
      * - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
      * - `CANCELLED`: The order has been cancelled.
-     * @type {SubItemInfoDisplayStatusEnum}
+     * @type {string}
      * @memberof SubItemInfo
      */
-    displayStatus?: SubItemInfoDisplayStatusEnum;
+    displayStatus?: string;
     /**
      * Product name.
      * @type {string}
@@ -126,10 +126,10 @@ export interface SubItemInfo {
      * - `FULFILLING`: Package has been collected by carrier and is in transit.
      * - `COMPLETED`: Package has been delivered.
      * - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     * @type {SubItemInfoPackageStatusEnum}
+     * @type {string}
      * @memberof SubItemInfo
      */
-    packageStatus?: SubItemInfoPackageStatusEnum;
+    packageStatus?: string;
     /**
      * Currency for payment.
      * @type {string}
@@ -149,10 +149,10 @@ export interface SubItemInfo {
      * - `SELLER`
      * - `OPERATOR`
      * - `SYSTEM`
-     * @type {SubItemInfoCancelUserEnum}
+     * @type {string}
      * @memberof SubItemInfo
      */
-    cancelUser?: SubItemInfoCancelUserEnum;
+    cancelUser?: string;
     /**
      * The shipping provider ID of the item.
      * @type {string}
@@ -197,45 +197,6 @@ export interface SubItemInfo {
      */
     warehouseId?: string;
 }
-
-
-/**
- * @export
- */
-export const SubItemInfoDisplayStatusEnum = {
-    Unpaid: 'UNPAID',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    AwaitingCollection: 'AWAITING_COLLECTION',
-    InTransit: 'IN_TRANSIT',
-    Delivered: 'DELIVERED',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type SubItemInfoDisplayStatusEnum = typeof SubItemInfoDisplayStatusEnum[keyof typeof SubItemInfoDisplayStatusEnum];
-
-/**
- * @export
- */
-export const SubItemInfoPackageStatusEnum = {
-    ToFulfill: 'TO_FULFILL',
-    Processing: 'PROCESSING',
-    Fulfilling: 'FULFILLING',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type SubItemInfoPackageStatusEnum = typeof SubItemInfoPackageStatusEnum[keyof typeof SubItemInfoPackageStatusEnum];
-
-/**
- * @export
- */
-export const SubItemInfoCancelUserEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type SubItemInfoCancelUserEnum = typeof SubItemInfoCancelUserEnum[keyof typeof SubItemInfoCancelUserEnum];
-
 
 /**
  * Check if a given object implements the SubItemInfo interface.

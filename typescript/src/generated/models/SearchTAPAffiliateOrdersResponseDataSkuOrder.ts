@@ -234,10 +234,10 @@ export interface SearchTAPAffiliateOrdersResponseDataSkuOrder {
      * - PRE_LIVE
      * - PROMOTION_PAGE
      * - LINKSHARE
-     * @type {SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum}
+     * @type {string}
      * @memberof SearchTAPAffiliateOrdersResponseDataSkuOrder
      */
-    contentType?: SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum;
+    contentType?: string;
     /**
      * Unique identifier for content
      * @type {string}
@@ -393,10 +393,10 @@ export interface SearchTAPAffiliateOrdersResponseDataSkuOrder {
      * Possible values:
      * - `Yes`: The SKU was fully returned or refunded, and no commission is paid.
      * - `No`: The SKU was not fully returned or refunded.
-     * @type {SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum}
+     * @type {string}
      * @memberof SearchTAPAffiliateOrdersResponseDataSkuOrder
      */
-    fullyReturn?: SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum;
+    fullyReturn?: string;
     /**
      * The time when the order commission was settled, as a Unix timestamp in seconds (UTC).
      * @type {number}
@@ -416,30 +416,6 @@ export interface SearchTAPAffiliateOrdersResponseDataSkuOrder {
      */
     isCarousel?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum = {
-    Shop: 'SHOP',
-    Video: 'VIDEO',
-    Live: 'LIVE',
-    PreLive: 'PRE_LIVE',
-    PromotionPage: 'PROMOTION_PAGE',
-    Linkshare: 'LINKSHARE'
-} as const;
-export type SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum = typeof SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum[keyof typeof SearchTAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum];
-
-/**
- * @export
- */
-export const SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum = {
-    Yes: 'Yes',
-    No: 'No'
-} as const;
-export type SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum = typeof SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum[keyof typeof SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum];
-
 
 /**
  * Check if a given object implements the SearchTAPAffiliateOrdersResponseDataSkuOrder interface.

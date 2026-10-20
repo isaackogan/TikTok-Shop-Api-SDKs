@@ -37,6 +37,12 @@ describe('parse', () => {
     expect(ev.shopId).toBe('7494049642642441621');
     expect(ev.data.orderId).toBe('576653688135258178');
   });
+  it('keeps an order_status the spec does not list (R21)', () => {
+    const ev = Webhooks.parse('{"type":1,"shop_id":"1","data":{"order_status":"SOME_NEW_STATUS"}}') as any;
+    expect(ev.raw).toBeUndefined();
+    const status: string | undefined = ev.data.orderStatus;
+    expect(status).toBe('SOME_NEW_STATUS');
+  });
   it('accepts bytes', () => {
     expect((Webhooks.parse(Buffer.from('{"type":1,"shop_id":"1"}')) as any).shopId).toBe('1');
   });

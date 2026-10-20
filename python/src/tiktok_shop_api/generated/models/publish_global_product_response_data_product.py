@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.publish_global_product_response_data_product_region import PublishGlobalProductResponseDataProductRegion
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -20,7 +19,7 @@ T = TypeVar("T", bound="PublishGlobalProductResponseDataProduct")
 class PublishGlobalProductResponseDataProduct:
     """
     Attributes:
-        region (PublishGlobalProductResponseDataProductRegion | Unset): The market of this local product.
+        region (str | Unset): The market of this local product.
             Possible values:
             - AT: Austria
             - BE:Belgium
@@ -52,16 +51,14 @@ class PublishGlobalProductResponseDataProduct:
         id (str | Unset): The newly generated local product ID.
     """
 
-    region: PublishGlobalProductResponseDataProductRegion | Unset = UNSET
+    region: str | Unset = UNSET
     shop_id: str | Unset = UNSET
     skus: list[PublishGlobalProductResponseDataProductSku] | Unset = UNSET
     id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        region: str | Unset = UNSET
-        if not isinstance(self.region, Unset):
-            region = self.region.value
+        region = self.region
 
         shop_id = self.shop_id
 
@@ -95,12 +92,7 @@ class PublishGlobalProductResponseDataProduct:
         )
 
         d = dict(src_dict)
-        _region = d.pop("region", UNSET)
-        region: PublishGlobalProductResponseDataProductRegion | Unset
-        if isinstance(_region, Unset):
-            region = UNSET
-        else:
-            region = PublishGlobalProductResponseDataProductRegion(_region)
+        region = d.pop("region", UNSET)
 
         shop_id = d.pop("shop_id", UNSET)
 

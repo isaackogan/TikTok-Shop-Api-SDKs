@@ -57,7 +57,7 @@ data class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment (
 
     /* The type of the sample application. Possible values: - FREE_SAMPLE - SAMPLE_COUPON - SAMPLE_CAMPAIGN - PLATFORM_FREE_SAMPLE - REFUNDABLE_SAMPLE - UNSPECIFIED */
     @SerializedName("sample_application_type")
-    val sampleApplicationType: CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment.SampleApplicationType? = null,
+    val sampleApplicationType: kotlin.String? = null,
 
     /* The product identifier. */
     @SerializedName("product_id")
@@ -77,37 +77,10 @@ data class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment (
 
     /* The promotion status of the product associated with the fulfillment. Possible values: - UNKNOWN: The product's promotion status is unknown. - LIVE: The product is available for promotion. - OUT_OF_STOCK: The product is out of stock. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to promote the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available. */
     @SerializedName("bound_product_status")
-    val boundProductStatus: CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment.BoundProductStatus? = null
+    val boundProductStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * The type of the sample application. Possible values: - FREE_SAMPLE - SAMPLE_COUPON - SAMPLE_CAMPAIGN - PLATFORM_FREE_SAMPLE - REFUNDABLE_SAMPLE - UNSPECIFIED
-     *
-     * Values: FREE_SAMPLE,SAMPLE_COUPON,SAMPLE_CAMPAIGN,PLATFORM_FREE_SAMPLE,REFUNDABLE_SAMPLE,UNSPECIFIED
-     */
-    enum class SampleApplicationType(val value: kotlin.String) {
-        @SerializedName(value = "FREE_SAMPLE") FREE_SAMPLE("FREE_SAMPLE"),
-        @SerializedName(value = "SAMPLE_COUPON") SAMPLE_COUPON("SAMPLE_COUPON"),
-        @SerializedName(value = "SAMPLE_CAMPAIGN") SAMPLE_CAMPAIGN("SAMPLE_CAMPAIGN"),
-        @SerializedName(value = "PLATFORM_FREE_SAMPLE") PLATFORM_FREE_SAMPLE("PLATFORM_FREE_SAMPLE"),
-        @SerializedName(value = "REFUNDABLE_SAMPLE") REFUNDABLE_SAMPLE("REFUNDABLE_SAMPLE"),
-        @SerializedName(value = "UNSPECIFIED") UNSPECIFIED("UNSPECIFIED");
-    }
-    /**
-     * The promotion status of the product associated with the fulfillment. Possible values: - UNKNOWN: The product's promotion status is unknown. - LIVE: The product is available for promotion. - OUT_OF_STOCK: The product is out of stock. - SELLER_DEACTIVATE: The product has been deactivated by the seller. - PLATFORM_DEACTIVATE: The product has been deactivated by the platform. - NO_PLAN: There is no valid plan available for the creator to promote the product. - PERMANENT_DELETED: The product has been permanently deleted and is no longer available.
-     *
-     * Values: UNKNOWN,LIVE,OUT_OF_STOCK,SELLER_DEACTIVATE,PLATFORM_DEACTIVATE,NO_PLAN,PERMANENT_DELETED
-     */
-    enum class BoundProductStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN"),
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "OUT_OF_STOCK") OUT_OF_STOCK("OUT_OF_STOCK"),
-        @SerializedName(value = "SELLER_DEACTIVATE") SELLER_DEACTIVATE("SELLER_DEACTIVATE"),
-        @SerializedName(value = "PLATFORM_DEACTIVATE") PLATFORM_DEACTIVATE("PLATFORM_DEACTIVATE"),
-        @SerializedName(value = "NO_PLAN") NO_PLAN("NO_PLAN"),
-        @SerializedName(value = "PERMANENT_DELETED") PERMANENT_DELETED("PERMANENT_DELETED");
-    }
 
 }
 

@@ -54,7 +54,7 @@ data class SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandis
 
     /* The current state of this RMA data. Possible values: - `INIT` - `AWAITING_BUYER_RETURN` - `RETURN_IN_TRANSIT` - `PENDING_PACKAGE_REVIEW` - `PACKAGE_REVIEW_COMPLETED` */
     @SerializedName("status")
-    val status: SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization.Status? = null,
+    val status: kotlin.String? = null,
 
     /* List of items associated with this return merchandise authorization (RMA). */
     @SerializedName("line_items")
@@ -62,18 +62,6 @@ data class SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandis
 
 ) {
 
-    /**
-     * The current state of this RMA data. Possible values: - `INIT` - `AWAITING_BUYER_RETURN` - `RETURN_IN_TRANSIT` - `PENDING_PACKAGE_REVIEW` - `PACKAGE_REVIEW_COMPLETED`
-     *
-     * Values: INIT,AWAITING_BUYER_RETURN,RETURN_IN_TRANSIT,PENDING_PACKAGE_REVIEW,PACKAGE_REVIEW_COMPLETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "INIT") INIT("INIT"),
-        @SerializedName(value = "AWAITING_BUYER_RETURN") AWAITING_BUYER_RETURN("AWAITING_BUYER_RETURN"),
-        @SerializedName(value = "RETURN_IN_TRANSIT") RETURN_IN_TRANSIT("RETURN_IN_TRANSIT"),
-        @SerializedName(value = "PENDING_PACKAGE_REVIEW") PENDING_PACKAGE_REVIEW("PENDING_PACKAGE_REVIEW"),
-        @SerializedName(value = "PACKAGE_REVIEW_COMPLETED") PACKAGE_REVIEW_COMPLETED("PACKAGE_REVIEW_COMPLETED");
-    }
 
 }
 

@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.phone_number_availability import PhoneNumberAvailability
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="PhoneNumber")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="PhoneNumber")
 class PhoneNumber:
     """
     Attributes:
-        availability (PhoneNumberAvailability | Unset): Indicates the availability of the phone number.
+        availability (str | Unset): Indicates the availability of the phone number.
             Possible values:
             - `AVAILABLE`: The phone number is available and required.
             - `UNAVAILABLE`: No phone number is available.
@@ -31,15 +30,13 @@ class PhoneNumber:
             Required if `availability=AVAILABLE`.
     """
 
-    availability: PhoneNumberAvailability | Unset = UNSET
+    availability: str | Unset = UNSET
     country_code: str | Unset = UNSET
     local_number: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        availability: str | Unset = UNSET
-        if not isinstance(self.availability, Unset):
-            availability = self.availability.value
+        availability = self.availability
 
         country_code = self.country_code
 
@@ -60,12 +57,7 @@ class PhoneNumber:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _availability = d.pop("availability", UNSET)
-        availability: PhoneNumberAvailability | Unset
-        if isinstance(_availability, Unset):
-            availability = UNSET
-        else:
-            availability = PhoneNumberAvailability(_availability)
+        availability = d.pop("availability", UNSET)
 
         country_code = d.pop("country_code", UNSET)
 

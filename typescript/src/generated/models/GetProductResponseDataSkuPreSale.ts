@@ -45,23 +45,11 @@ export interface GetProductResponseDataSkuPreSale {
      * 
      * **UK, EU, SEA, JP, and LATAM**
      * - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**.
-     * @type {GetProductResponseDataSkuPreSaleTypeEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuPreSale
      */
-    type?: GetProductResponseDataSkuPreSaleTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuPreSaleTypeEnum = {
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER',
-    Custom: 'CUSTOM'
-} as const;
-export type GetProductResponseDataSkuPreSaleTypeEnum = typeof GetProductResponseDataSkuPreSaleTypeEnum[keyof typeof GetProductResponseDataSkuPreSaleTypeEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuPreSale interface.

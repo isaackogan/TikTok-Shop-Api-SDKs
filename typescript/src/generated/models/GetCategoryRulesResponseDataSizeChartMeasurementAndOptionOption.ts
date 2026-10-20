@@ -33,16 +33,16 @@ export interface GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption
     id?: string;
     /**
      * Possible values: KEY: a key category measurement; RECOMMEND: a useful recommended measurement.
-     * @type {GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum}
+     * @type {string}
      * @memberof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption
      */
-    role?: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum;
+    role?: string;
     /**
      * Possible values: NONE: no unit conversion; LENGTH: length values such as cm or in; WEIGHT: weight values such as kg or lb; HEIGHT: person-height values such as cm or ft/in.
-     * @type {GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum}
+     * @type {string}
      * @memberof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption
      */
-    unit?: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum;
+    unit?: string;
     /**
      * Allowed metric range in [minimum, maximum] order.
      * @type {Array<string>}
@@ -56,28 +56,6 @@ export interface GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption
      */
     imperialValueRange?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum = {
-    Key: 'KEY',
-    Recommend: 'RECOMMEND'
-} as const;
-export type GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum = typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum[keyof typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionRoleEnum];
-
-/**
- * @export
- */
-export const GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum = {
-    None: 'NONE',
-    Length: 'LENGTH',
-    Weight: 'WEIGHT',
-    Height: 'HEIGHT'
-} as const;
-export type GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum = typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum[keyof typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOptionUnitEnum];
-
 
 /**
  * Check if a given object implements the GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption interface.

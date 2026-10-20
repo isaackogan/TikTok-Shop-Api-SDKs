@@ -43,7 +43,7 @@ data class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile (
 
     /* Viewer profile type. Possible values:  - NEW_FOLLOWER: viewers who newly followed after watching the video  - VIEWERS: viewers of the video */
     @SerializedName("type")
-    val type: GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile.Type? = null,
+    val type: kotlin.String? = null,
 
     /* View gender distribution */
     @SerializedName("gender_distribution")
@@ -59,15 +59,6 @@ data class GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile (
 
 ) {
 
-    /**
-     * Viewer profile type. Possible values:  - NEW_FOLLOWER: viewers who newly followed after watching the video  - VIEWERS: viewers of the video
-     *
-     * Values: NEW_FOLLOWER,VIEWERS
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "NEW_FOLLOWER") NEW_FOLLOWER("NEW_FOLLOWER"),
-        @SerializedName(value = "VIEWERS") VIEWERS("VIEWERS");
-    }
 
 }
 

@@ -38,35 +38,14 @@ data class ProductAuditStatusChangeWebhookDataAudit (
 
     /* The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit, or the audit was cancelled.   * PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to `pre_approved_reasons` for the prerequisites.   * APPROVED: The product passed the audit and has been listed on the platform. */
     @SerializedName("status")
-    val status: ProductAuditStatusChangeWebhookDataAudit.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The reason why the audit status of the product is `PRE_APPROVED`.   Possible values:      * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.   * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center. */
     @SerializedName("pre_approved_reasons")
-    val preApprovedReasons: kotlin.collections.List<ProductAuditStatusChangeWebhookDataAudit.PreApprovedReasons>? = null
+    val preApprovedReasons: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit, or the audit was cancelled.   * PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to `pre_approved_reasons` for the prerequisites.   * APPROVED: The product passed the audit and has been listed on the platform.
-     *
-     * Values: NONE,AUDITING,FAILED,PRE_APPROVED,APPROVED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "NONE") NONE("NONE"),
-        @SerializedName(value = "AUDITING") AUDITING("AUDITING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "PRE_APPROVED") PRE_APPROVED("PRE_APPROVED"),
-        @SerializedName(value = "APPROVED") APPROVED("APPROVED");
-    }
-    /**
-     * The reason why the audit status of the product is `PRE_APPROVED`.   Possible values:      * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.   * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center.
-     *
-     * Values: KYC_PENDING,RESTRICTED_CATEGORY_PENDING
-     */
-    enum class PreApprovedReasons(val value: kotlin.String) {
-        @SerializedName(value = "KYC_PENDING") KYC_PENDING("KYC_PENDING"),
-        @SerializedName(value = "RESTRICTED_CATEGORY_PENDING") RESTRICTED_CATEGORY_PENDING("RESTRICTED_CATEGORY_PENDING");
-    }
 
 }
 

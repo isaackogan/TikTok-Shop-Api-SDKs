@@ -55,66 +55,10 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
   @javax.annotation.Nullable
   private String batteryType;
 
-  /**
-   * Battery packaging type. Possible values: - STANDALONE - IN_EQUIPMENT - WITH_EQUIPMENT - OTHER
-   */
-  @JsonAdapter(BatteryPackagingTypeEnum.Adapter.class)
-  public enum BatteryPackagingTypeEnum {
-    STANDALONE("STANDALONE"),
-    
-    IN_EQUIPMENT("IN_EQUIPMENT"),
-    
-    WITH_EQUIPMENT("WITH_EQUIPMENT"),
-    
-    OTHER("OTHER");
-
-    private String value;
-
-    BatteryPackagingTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BatteryPackagingTypeEnum fromValue(String value) {
-      for (BatteryPackagingTypeEnum b : BatteryPackagingTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BatteryPackagingTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BatteryPackagingTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BatteryPackagingTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BatteryPackagingTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      BatteryPackagingTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_BATTERY_PACKAGING_TYPE = "battery_packaging_type";
   @SerializedName(SERIALIZED_NAME_BATTERY_PACKAGING_TYPE)
   @javax.annotation.Nullable
-  private BatteryPackagingTypeEnum batteryPackagingType;
+  private String batteryPackagingType;
 
   public static final String SERIALIZED_NAME_TOTAL_BATTERY_WEIGHT = "total_battery_weight";
   @SerializedName(SERIALIZED_NAME_TOTAL_BATTERY_WEIGHT)
@@ -173,7 +117,7 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
   }
 
 
-  public SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo batteryPackagingType(@javax.annotation.Nullable BatteryPackagingTypeEnum batteryPackagingType) {
+  public SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo batteryPackagingType(@javax.annotation.Nullable String batteryPackagingType) {
     this.batteryPackagingType = batteryPackagingType;
     return this;
   }
@@ -183,11 +127,11 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
    * @return batteryPackagingType
    */
   @javax.annotation.Nullable
-  public BatteryPackagingTypeEnum getBatteryPackagingType() {
+  public String getBatteryPackagingType() {
     return batteryPackagingType;
   }
 
-  public void setBatteryPackagingType(@javax.annotation.Nullable BatteryPackagingTypeEnum batteryPackagingType) {
+  public void setBatteryPackagingType(@javax.annotation.Nullable String batteryPackagingType) {
     this.batteryPackagingType = batteryPackagingType;
   }
 
@@ -452,10 +396,6 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
       }
       if ((jsonObj.get("battery_packaging_type") != null && !jsonObj.get("battery_packaging_type").isJsonNull()) && !jsonObj.get("battery_packaging_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `battery_packaging_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("battery_packaging_type").toString()));
-      }
-      // validate the optional field `battery_packaging_type`
-      if (jsonObj.get("battery_packaging_type") != null && !jsonObj.get("battery_packaging_type").isJsonNull()) {
-        BatteryPackagingTypeEnum.validateJsonElement(jsonObj.get("battery_packaging_type"));
       }
       if ((jsonObj.get("total_battery_weight") != null && !jsonObj.get("total_battery_weight").isJsonNull()) && !jsonObj.get("total_battery_weight").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `total_battery_weight` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_battery_weight").toString()));

@@ -76,7 +76,7 @@ data class GetStatementsResponseDataStatement (
 
     /* The payment status, indicating whether payment has been transferred to the seller's bank account or settled to the seller's account. Possible values: - PAID: Payment has been transferred to the seller. - FAILED: Payment transfer failed. - PROCESSING: Payment is currently being processed. - SETTLED: Funds have been settled to the seller's account. */
     @SerializedName("payment_status")
-    val paymentStatus: GetStatementsResponseDataStatement.PaymentStatus? = null,
+    val paymentStatus: kotlin.String? = null,
 
     /* The payment ID. */
     @SerializedName("payment_id")
@@ -96,17 +96,6 @@ data class GetStatementsResponseDataStatement (
 
 ) {
 
-    /**
-     * The payment status, indicating whether payment has been transferred to the seller's bank account or settled to the seller's account. Possible values: - PAID: Payment has been transferred to the seller. - FAILED: Payment transfer failed. - PROCESSING: Payment is currently being processed. - SETTLED: Funds have been settled to the seller's account.
-     *
-     * Values: PAID,FAILED,PROCESSING,SETTLED
-     */
-    enum class PaymentStatus(val value: kotlin.String) {
-        @SerializedName(value = "PAID") PAID("PAID"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "SETTLED") SETTLED("SETTLED");
-    }
 
 }
 

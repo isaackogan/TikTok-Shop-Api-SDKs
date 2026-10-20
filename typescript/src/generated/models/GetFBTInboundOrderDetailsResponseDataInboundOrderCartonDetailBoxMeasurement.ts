@@ -34,10 +34,10 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBo
      * * `MILLIGRAM` (mg)
      * * `POUNDS` (lbs)
      * * `OUNCE` (oz)
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement
      */
-    weightUnit?: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum;
+    weightUnit?: string;
     /**
      * Carton width.
      * @type {string}
@@ -66,38 +66,11 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBo
      * * `FOOT` (ft)
      * * `MICRON` (μm)
      * * `INCH` (in)
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement
      */
-    lengthUnit?: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum;
+    lengthUnit?: string;
 }
-
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum = {
-    Kilogram: 'KILOGRAM',
-    Gram: 'GRAM',
-    Milligram: 'MILLIGRAM',
-    Pounds: 'POUNDS',
-    Ounce: 'OUNCE'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementWeightUnitEnum];
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum = {
-    Meter: 'METER',
-    Centimeter: 'CENTIMETER',
-    Millimeter: 'MILLIMETER',
-    Foot: 'FOOT',
-    Micron: 'MICRON',
-    Inch: 'INCH'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurementLengthUnitEnum];
-
 
 /**
  * Check if a given object implements the GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement interface.

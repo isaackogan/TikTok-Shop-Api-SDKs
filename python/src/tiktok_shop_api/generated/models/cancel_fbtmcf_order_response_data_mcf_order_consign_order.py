@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.cancel_fbtmcf_order_response_data_mcf_order_consign_order_status import (
-    CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CancelFBTMCFOrderResponseDataMcfOrderConsignOrder")
@@ -19,8 +16,8 @@ class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder:
     """
     Attributes:
         id (str | Unset): The consign order ID, returned as a numeric string without the `OBF` prefix.
-        status (CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatus | Unset): The current status of this consign
-            order. In a cancellation response, `CLOSED` means that the consign order has been canceled.
+        status (str | Unset): The current status of this consign order. In a cancellation response, `CLOSED` means that
+            the consign order has been canceled.
 
             Possible Status Enumerations
             1. **PENDING** - Order is pending warehouse processing
@@ -38,15 +35,13 @@ class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder:
     """
 
     id: str | Unset = UNSET
-    status: CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatus | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -63,12 +58,7 @@ class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = CancelFBTMCFOrderResponseDataMcfOrderConsignOrderStatus(_status)
+        status = d.pop("status", UNSET)
 
         cancel_fbtmcf_order_response_data_mcf_order_consign_order = cls(
             id=id,

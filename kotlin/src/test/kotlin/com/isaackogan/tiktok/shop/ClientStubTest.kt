@@ -72,6 +72,13 @@ class ClientStubTest {
     }
 
     @Test
+    fun aStatusValueTheSpecDoesNotListIsKept() {
+        reply("""{"code":0,"message":"ok","request_id":"r","data":{"orders":[{"id":"1","status":"SOME_NEW_STATUS"}]}}""")
+        val resp = client().orders.getOrderList(1L)
+        assertEquals("SOME_NEW_STATUS", resp.data!!.orders!![0].status)
+    }
+
+    @Test
     fun getOrderListSendsShopCipher() {
         reply(StubSupport.OK)
         val resp = client().orders.getOrderList(20L)
@@ -290,9 +297,9 @@ class ClientStubTest {
         assertEquals(3L, d.height)
         assertEquals(4L, d.length)
         assertEquals(5L, d.width)
-        assertEquals("CENTIMETER", d.unit.value)
+        assertEquals("CENTIMETER", d.unit)
         assertEquals("1.5", resp.data!!.packageWeight!!.value)
-        assertEquals("KILOGRAM", resp.data!!.packageWeight!!.unit.value)
+        assertEquals("KILOGRAM", resp.data!!.packageWeight!!.unit)
     }
 
     @Test

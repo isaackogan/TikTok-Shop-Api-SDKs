@@ -37,10 +37,10 @@ export interface VideoPrecheckResultWebhookData {
      * Possible enumerations:  
      *  `PASS` 
      *  `FAIL`
-     * @type {VideoPrecheckResultWebhookDataResultEnum}
+     * @type {string}
      * @memberof VideoPrecheckResultWebhookData
      */
-    result?: VideoPrecheckResultWebhookDataResultEnum;
+    result?: string;
     /**
      * Only if the `result` is `FAIL`
      * @type {Array<VideoPrecheckResultWebhookDataIssue>}
@@ -48,17 +48,6 @@ export interface VideoPrecheckResultWebhookData {
      */
     issues?: Array<VideoPrecheckResultWebhookDataIssue>;
 }
-
-
-/**
- * @export
- */
-export const VideoPrecheckResultWebhookDataResultEnum = {
-    Pass: 'PASS',
-    Fail: 'FAIL'
-} as const;
-export type VideoPrecheckResultWebhookDataResultEnum = typeof VideoPrecheckResultWebhookDataResultEnum[keyof typeof VideoPrecheckResultWebhookDataResultEnum];
-
 
 /**
  * Check if a given object implements the VideoPrecheckResultWebhookData interface.

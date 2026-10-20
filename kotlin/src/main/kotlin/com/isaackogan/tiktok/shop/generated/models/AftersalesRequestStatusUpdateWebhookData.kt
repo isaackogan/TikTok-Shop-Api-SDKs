@@ -45,11 +45,11 @@ data class AftersalesRequestStatusUpdateWebhookData (
 
     /* Role that initiated the return flow. Possible enumerations:      * `BUYER`   * `SELLER` */
     @SerializedName("return_role")
-    val returnRole: AftersalesRequestStatusUpdateWebhookData.ReturnRole? = null,
+    val returnRole: kotlin.String? = null,
 
     /* Current aftersales request status. Possible enumerations:      * `PENDING_REQUEST_REVIEW`   * `REQUEST_REVIEW_COMPLETED` */
     @SerializedName("aftersales_request_status")
-    val aftersalesRequestStatus: AftersalesRequestStatusUpdateWebhookData.AftersalesRequestStatus? = null,
+    val aftersalesRequestStatus: kotlin.String? = null,
 
     /* Creation time of the aftersales request in Unix seconds. */
     @SerializedName("aftersales_request_create_time")
@@ -61,24 +61,6 @@ data class AftersalesRequestStatusUpdateWebhookData (
 
 ) {
 
-    /**
-     * Role that initiated the return flow. Possible enumerations:      * `BUYER`   * `SELLER`
-     *
-     * Values: BUYER,SELLER
-     */
-    enum class ReturnRole(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER");
-    }
-    /**
-     * Current aftersales request status. Possible enumerations:      * `PENDING_REQUEST_REVIEW`   * `REQUEST_REVIEW_COMPLETED`
-     *
-     * Values: PENDING_REQUEST_REVIEW,REQUEST_REVIEW_COMPLETED
-     */
-    enum class AftersalesRequestStatus(val value: kotlin.String) {
-        @SerializedName(value = "PENDING_REQUEST_REVIEW") PENDING_REQUEST_REVIEW("PENDING_REQUEST_REVIEW"),
-        @SerializedName(value = "REQUEST_REVIEW_COMPLETED") REQUEST_REVIEW_COMPLETED("REQUEST_REVIEW_COMPLETED");
-    }
 
 }
 

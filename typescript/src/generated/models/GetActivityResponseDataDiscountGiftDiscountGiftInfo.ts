@@ -39,10 +39,10 @@ export interface GetActivityResponseDataDiscountGiftDiscountGiftInfo {
      * purchase threshold type of discount. Possible enumerations are:
      * - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products.
      * - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order.
-     * @type {GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountGiftDiscountGiftInfo
      */
-    thresholdType?: GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum;
+    thresholdType?: string;
     /**
      * The purchase threshold value of the gift, based on `threshold_type`. Determined by the user.
      * - When `threshold_type==MINIMAL_ITEM_QUANTITY`, the buyer must purchase at least the specified number of eligible products (for example, 3 eligible products). If it represents a quantity, it must be an integer.
@@ -58,17 +58,6 @@ export interface GetActivityResponseDataDiscountGiftDiscountGiftInfo {
      */
     giftDetails?: Array<GetActivityResponseDataDiscountGiftDiscountGiftInfoGiftDetail>;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum = {
-    MinimalItemQuantity: 'MINIMAL_ITEM_QUANTITY',
-    MinimalOrderAmount: 'MINIMAL_ORDER_AMOUNT'
-} as const;
-export type GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum = typeof GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum[keyof typeof GetActivityResponseDataDiscountGiftDiscountGiftInfoThresholdTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseDataDiscountGiftDiscountGiftInfo interface.

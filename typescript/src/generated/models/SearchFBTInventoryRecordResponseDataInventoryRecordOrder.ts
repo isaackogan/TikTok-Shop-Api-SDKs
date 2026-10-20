@@ -38,30 +38,11 @@ export interface SearchFBTInventoryRecordResponseDataInventoryRecordOrder {
      * - CUSTOMER_RETURN
      * - INVENTORY_QUANTITY_ADJUSTMENT_ORDER
      * - INVENTORY_TRANSFER_ORDER
-     * @type {SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum}
+     * @type {string}
      * @memberof SearchFBTInventoryRecordResponseDataInventoryRecordOrder
      */
-    type?: SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum = {
-    InboundOrder: 'INBOUND_ORDER',
-    ReturnToSupplierOrder: 'RETURN_TO_SUPPLIER_ORDER',
-    Disposal: 'DISPOSAL',
-    InventoryStatusAdjustmentOrder: 'INVENTORY_STATUS_ADJUSTMENT_ORDER',
-    ConsignOrder: 'CONSIGN_ORDER',
-    InventoryCountOrder: 'INVENTORY_COUNT_ORDER',
-    FailedDelivery: 'FAILED_DELIVERY',
-    CustomerReturn: 'CUSTOMER_RETURN',
-    InventoryQuantityAdjustmentOrder: 'INVENTORY_QUANTITY_ADJUSTMENT_ORDER',
-    InventoryTransferOrder: 'INVENTORY_TRANSFER_ORDER'
-} as const;
-export type SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum = typeof SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum[keyof typeof SearchFBTInventoryRecordResponseDataInventoryRecordOrderTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchFBTInventoryRecordResponseDataInventoryRecordOrder interface.

@@ -46,7 +46,7 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasu
 
     /* The unit used for the carton's `weight` value.  **Possible values:** * `KILOGRAM` (kg) * `GRAM` (g) * `MILLIGRAM` (mg) * `POUNDS` (lbs) * `OUNCE` (oz) */
     @SerializedName("weight_unit")
-    val weightUnit: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement.WeightUnit? = null,
+    val weightUnit: kotlin.String? = null,
 
     /* Carton width. */
     @SerializedName("width")
@@ -62,35 +62,10 @@ data class GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasu
 
     /* The unit used for the carton's `length`, `width`, and `height` values.  **Possible values:** * `METER` (m) * `CENTIMETER` (cm) * `MILLIMETER` (mm) * `FOOT` (ft) * `MICRON` (μm) * `INCH` (in) */
     @SerializedName("length_unit")
-    val lengthUnit: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement.LengthUnit? = null
+    val lengthUnit: kotlin.String? = null
 
 ) {
 
-    /**
-     * The unit used for the carton's `weight` value.  **Possible values:** * `KILOGRAM` (kg) * `GRAM` (g) * `MILLIGRAM` (mg) * `POUNDS` (lbs) * `OUNCE` (oz)
-     *
-     * Values: KILOGRAM,GRAM,MILLIGRAM,POUNDS,OUNCE
-     */
-    enum class WeightUnit(val value: kotlin.String) {
-        @SerializedName(value = "KILOGRAM") KILOGRAM("KILOGRAM"),
-        @SerializedName(value = "GRAM") GRAM("GRAM"),
-        @SerializedName(value = "MILLIGRAM") MILLIGRAM("MILLIGRAM"),
-        @SerializedName(value = "POUNDS") POUNDS("POUNDS"),
-        @SerializedName(value = "OUNCE") OUNCE("OUNCE");
-    }
-    /**
-     * The unit used for the carton's `length`, `width`, and `height` values.  **Possible values:** * `METER` (m) * `CENTIMETER` (cm) * `MILLIMETER` (mm) * `FOOT` (ft) * `MICRON` (μm) * `INCH` (in)
-     *
-     * Values: METER,CENTIMETER,MILLIMETER,FOOT,MICRON,INCH
-     */
-    enum class LengthUnit(val value: kotlin.String) {
-        @SerializedName(value = "METER") METER("METER"),
-        @SerializedName(value = "CENTIMETER") CENTIMETER("CENTIMETER"),
-        @SerializedName(value = "MILLIMETER") MILLIMETER("MILLIMETER"),
-        @SerializedName(value = "FOOT") FOOT("FOOT"),
-        @SerializedName(value = "MICRON") MICRON("MICRON"),
-        @SerializedName(value = "INCH") INCH("INCH");
-    }
 
 }
 

@@ -44,7 +44,7 @@ data class ProductStatusChangeWebhookData (
 
     /* Product audit status, with possible values:      * PRODUCT_FIRST_PASS_REVIEW   * PRODUCT_STATUS_CHANGED   * PRODUCT_AUDIT_FAILURE */
     @SerializedName("status")
-    val status: ProductStatusChangeWebhookData.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The reason a product audit was rejected or frozen */
     @SerializedName("suspended_reason")
@@ -56,16 +56,6 @@ data class ProductStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * Product audit status, with possible values:      * PRODUCT_FIRST_PASS_REVIEW   * PRODUCT_STATUS_CHANGED   * PRODUCT_AUDIT_FAILURE
-     *
-     * Values: PRODUCT_FIRST_PASS_REVIEW,PRODUCT_STATUS_CHANGED,PRODUCT_AUDIT_FAILURE
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PRODUCT_FIRST_PASS_REVIEW") PRODUCT_FIRST_PASS_REVIEW("PRODUCT_FIRST_PASS_REVIEW"),
-        @SerializedName(value = "PRODUCT_STATUS_CHANGED") PRODUCT_STATUS_CHANGED("PRODUCT_STATUS_CHANGED"),
-        @SerializedName(value = "PRODUCT_AUDIT_FAILURE") PRODUCT_AUDIT_FAILURE("PRODUCT_AUDIT_FAILURE");
-    }
 
 }
 

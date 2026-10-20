@@ -77,10 +77,10 @@ export interface GetActivityResponseData {
      * - `BUY_MORE_SAVE_MORE`: A Buy More Save More promotion.
      * - `GIFT_WITH_PURCHASE`: A Gift With Purchase promotion.
      * - `BUY_X_GET_Y`: A Buy X Get Y promotion.
-     * @type {GetActivityResponseDataActivityTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseData
      */
-    activityType?: GetActivityResponseDataActivityTypeEnum;
+    activityType?: string;
     /**
      * The effective time type of the current activity
      * - NORMAL:  `begin_time` and `end_time` must be filled
@@ -126,10 +126,10 @@ export interface GetActivityResponseData {
      * - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired.
      * - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users.
      * - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     * @type {GetActivityResponseDataStatusEnum}
+     * @type {string}
      * @memberof GetActivityResponseData
      */
-    status?: GetActivityResponseDataStatusEnum;
+    status?: string;
     /**
      * Activity creation time as a UNIX timestamp in milliseconds.
      * @type {number}
@@ -147,10 +147,10 @@ export interface GetActivityResponseData {
      * - PRODUCT: Product level promotion activity.
      * - VARIATION: SKU level promotion activity.
      * - SHOP: Shop level promotion activity.
-     * @type {GetActivityResponseDataProductLevelEnum}
+     * @type {string}
      * @memberof GetActivityResponseData
      */
-    productLevel?: GetActivityResponseDataProductLevelEnum;
+    productLevel?: string;
     /**
      * Applicable commands to the activity:
      * - IMMUTABLE: The activity cann't be editable or deactivated
@@ -181,59 +181,11 @@ export interface GetActivityResponseData {
      * Possible values:
      * - `ALL`: The activity supports both normal products and auction products.
      * - `EXCLUDE_AUCTION`: The activity does not support auction products.
-     * @type {GetActivityResponseDataAuctionSupportTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseData
      */
-    auctionSupportType?: GetActivityResponseDataAuctionSupportTypeEnum;
+    auctionSupportType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataActivityTypeEnum = {
-    FixedPrice: 'FIXED_PRICE',
-    DirectDiscount: 'DIRECT_DISCOUNT',
-    Flashsale: 'FLASHSALE',
-    ShippingDiscount: 'SHIPPING_DISCOUNT',
-    BuyMoreSaveMore: 'BUY_MORE_SAVE_MORE',
-    GiftWithPurchase: 'GIFT_WITH_PURCHASE',
-    BuyXGetY: 'BUY_X_GET_Y'
-} as const;
-export type GetActivityResponseDataActivityTypeEnum = typeof GetActivityResponseDataActivityTypeEnum[keyof typeof GetActivityResponseDataActivityTypeEnum];
-
-/**
- * @export
- */
-export const GetActivityResponseDataStatusEnum = {
-    Draft: 'DRAFT',
-    NotStart: 'NOT_START',
-    Ongoing: 'ONGOING',
-    Expired: 'EXPIRED',
-    Deactivated: 'DEACTIVATED',
-    NotEffective: 'NOT_EFFECTIVE'
-} as const;
-export type GetActivityResponseDataStatusEnum = typeof GetActivityResponseDataStatusEnum[keyof typeof GetActivityResponseDataStatusEnum];
-
-/**
- * @export
- */
-export const GetActivityResponseDataProductLevelEnum = {
-    Product: 'PRODUCT',
-    Variation: 'VARIATION',
-    Shop: 'SHOP'
-} as const;
-export type GetActivityResponseDataProductLevelEnum = typeof GetActivityResponseDataProductLevelEnum[keyof typeof GetActivityResponseDataProductLevelEnum];
-
-/**
- * @export
- */
-export const GetActivityResponseDataAuctionSupportTypeEnum = {
-    All: 'ALL',
-    ExcludeAuction: 'EXCLUDE_AUCTION'
-} as const;
-export type GetActivityResponseDataAuctionSupportTypeEnum = typeof GetActivityResponseDataAuctionSupportTypeEnum[keyof typeof GetActivityResponseDataAuctionSupportTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseData interface.

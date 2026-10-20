@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_product_performance_detail_response_data_performance_top_content_type import (
-    GetShopProductPerformanceDetailResponseDataPerformanceTopContentType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +21,7 @@ T = TypeVar("T", bound="GetShopProductPerformanceDetailResponseDataPerformanceTo
 class GetShopProductPerformanceDetailResponseDataPerformanceTopContent:
     """
     Attributes:
-        type_ (GetShopProductPerformanceDetailResponseDataPerformanceTopContentType | Unset): Top content type.
+        type_ (str | Unset): Top content type.
             Possible values:
             - LIVE: Live stream content.
             - VIDEO: Video content.
@@ -32,14 +29,12 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopContent:
             details
     """
 
-    type_: GetShopProductPerformanceDetailResponseDataPerformanceTopContentType | Unset = UNSET
+    type_: str | Unset = UNSET
     contents: list[GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         contents: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.contents, Unset):
@@ -65,12 +60,7 @@ class GetShopProductPerformanceDetailResponseDataPerformanceTopContent:
         )
 
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetShopProductPerformanceDetailResponseDataPerformanceTopContentType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetShopProductPerformanceDetailResponseDataPerformanceTopContentType(_type_)
+        type_ = d.pop("type", UNSET)
 
         _contents = d.pop("contents", UNSET)
         contents: list[GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent] | Unset = UNSET

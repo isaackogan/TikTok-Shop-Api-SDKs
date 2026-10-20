@@ -99,9 +99,16 @@ class WebhooksTest {
         assertTrue(e instanceof OrderStatusChangeEvent);
         OrderStatusChangeWebhook w = ((OrderStatusChangeEvent) e).getPayload();
         assertEquals("576653688135258178", w.getData().getOrderId());
-        assertEquals("UNPAID", w.getData().getOrderStatus().getValue());
+        assertEquals("UNPAID", w.getData().getOrderStatus());
         assertEquals(1718305585L, w.getTimestamp());
         assertEquals(1, e.getRaw().get("type").getAsInt(), "raw is kept");
+    }
+
+    @Test
+    void anOrderStatusTheSpecDoesNotListIsKept() {
+        WebhookEvent e = Webhooks.parse("{\"type\":1,\"shop_id\":\"1\",\"data\":{\"order_status\":\"SOME_NEW_STATUS\"}}");
+        assertTrue(e instanceof OrderStatusChangeEvent);
+        assertEquals("SOME_NEW_STATUS", ((OrderStatusChangeEvent) e).getPayload().getData().getOrderStatus());
     }
 
     @Test

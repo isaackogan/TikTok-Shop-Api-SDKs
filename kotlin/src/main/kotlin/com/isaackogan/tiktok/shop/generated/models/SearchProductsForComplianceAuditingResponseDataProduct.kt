@@ -58,7 +58,7 @@ data class SearchProductsForComplianceAuditingResponseDataProduct (
 
     /* The regions where the product is sold. Possible values: - BR: Brazil - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam */
     @SerializedName("country")
-    val country: SearchProductsForComplianceAuditingResponseDataProduct.Country? = null,
+    val country: kotlin.String? = null,
 
     /* The product description in HTML format. */
     @SerializedName("description")
@@ -98,29 +98,6 @@ data class SearchProductsForComplianceAuditingResponseDataProduct (
 
 ) {
 
-    /**
-     * The regions where the product is sold. Possible values: - BR: Brazil - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam
-     *
-     * Values: BR,DE,ES,FR,GB,ID,IE,IT,JP,MX,MY,PH,SG,TH,US,VN
-     */
-    enum class Country(val value: kotlin.String) {
-        @SerializedName(value = "BR") BR("BR"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MX") MX("MX"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN");
-    }
 
 }
 

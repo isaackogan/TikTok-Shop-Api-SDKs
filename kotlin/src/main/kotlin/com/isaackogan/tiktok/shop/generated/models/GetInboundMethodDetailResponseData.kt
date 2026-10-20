@@ -44,7 +44,7 @@ data class GetInboundMethodDetailResponseData (
 
     /* **Possible values:** * `Executing` * `Succeed` * `Failed` */
     @SerializedName("placement_task_status")
-    val placementTaskStatus: GetInboundMethodDetailResponseData.PlacementTaskStatus? = null,
+    val placementTaskStatus: kotlin.String? = null,
 
     /* Unix timestamp in seconds when the placement result expires. For `ONE_HUB`, the expiration is set to 24 hours after this API processes the request. For other methods, it is 24 hours after the placement task's trigger time. After expiration, call this API again to generate a new placement task. */
     @SerializedName("expiration_timestamp")
@@ -52,16 +52,6 @@ data class GetInboundMethodDetailResponseData (
 
 ) {
 
-    /**
-     * **Possible values:** * `Executing` * `Succeed` * `Failed`
-     *
-     * Values: Executing,Succeed,Failed
-     */
-    enum class PlacementTaskStatus(val value: kotlin.String) {
-        @SerializedName(value = "Executing") Executing("Executing"),
-        @SerializedName(value = "Succeed") Succeed("Succeed"),
-        @SerializedName(value = "Failed") Failed("Failed");
-    }
 
 }
 

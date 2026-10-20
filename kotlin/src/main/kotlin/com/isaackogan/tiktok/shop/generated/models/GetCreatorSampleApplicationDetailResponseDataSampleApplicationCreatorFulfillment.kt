@@ -52,26 +52,10 @@ data class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreator
 
     /* Fulfillment status, It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation. - REPEATED: The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure. */
     @SerializedName("status")
-    val status: GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * Fulfillment status, It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation. - REPEATED: The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure.
-     *
-     * Values: PENDING,ONGOING,SUCCEED,FAILED,OVERDUE,SUSPEND,CANCELLED,EXEMPTED,REPEATED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "ONGOING") ONGOING("ONGOING"),
-        @SerializedName(value = "SUCCEED") SUCCEED("SUCCEED"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "OVERDUE") OVERDUE("OVERDUE"),
-        @SerializedName(value = "SUSPEND") SUSPEND("SUSPEND"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED"),
-        @SerializedName(value = "EXEMPTED") EXEMPTED("EXEMPTED"),
-        @SerializedName(value = "REPEATED") REPEATED("REPEATED");
-    }
 
 }
 

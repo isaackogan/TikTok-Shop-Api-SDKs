@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_performance_response_data_performance_interval_breakdown_content_breakdown_channel import (
-    GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannel,
-)
-from ..models.get_shop_performance_response_data_performance_interval_breakdown_content_breakdown_content_type import (
-    GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -26,30 +20,24 @@ T = TypeVar("T", bound="GetShopPerformanceResponseDataPerformanceIntervalBreakdo
 class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown:
     """
     Attributes:
-        channel (GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannel | Unset): Channel
-            type.
+        channel (str | Unset): Channel type.
             Possible values: CREATOR, SELLER
-        content_type (GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentType | Unset):
-            Content type.
+        content_type (str | Unset): Content type.
             Possible values: LIVE, VIDEO
         gmv (Gmv | Unset):
         indirect_gmv (IndirectGmv | Unset):
     """
 
-    channel: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannel | Unset = UNSET
-    content_type: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentType | Unset = UNSET
+    channel: str | Unset = UNSET
+    content_type: str | Unset = UNSET
     gmv: Gmv | Unset = UNSET
     indirect_gmv: IndirectGmv | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        channel: str | Unset = UNSET
-        if not isinstance(self.channel, Unset):
-            channel = self.channel.value
+        channel = self.channel
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         gmv: dict[str, Any] | Unset = UNSET
         if not isinstance(self.gmv, Unset):
@@ -79,21 +67,9 @@ class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown
         from ..models.indirect_gmv import IndirectGmv  # noqa: PLC0415
 
         d = dict(src_dict)
-        _channel = d.pop("channel", UNSET)
-        channel: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannel | Unset
-        if isinstance(_channel, Unset):
-            channel = UNSET
-        else:
-            channel = GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownChannel(_channel)
+        channel = d.pop("channel", UNSET)
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdownContentType(
-                _content_type
-            )
+        content_type = d.pop("content_type", UNSET)
 
         _gmv = d.pop("gmv", UNSET)
         gmv: Gmv | Unset

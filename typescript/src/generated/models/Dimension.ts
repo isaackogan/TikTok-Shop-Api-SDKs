@@ -43,22 +43,11 @@ export interface Dimension {
      * Available values:
      * - `CM`
      * - `INCH`
-     * @type {DimensionUnitEnum}
+     * @type {string}
      * @memberof Dimension
      */
-    unit?: DimensionUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const DimensionUnitEnum = {
-    Cm: 'CM',
-    Inch: 'INCH'
-} as const;
-export type DimensionUnitEnum = typeof DimensionUnitEnum[keyof typeof DimensionUnitEnum];
-
 
 /**
  * Check if a given object implements the Dimension interface.

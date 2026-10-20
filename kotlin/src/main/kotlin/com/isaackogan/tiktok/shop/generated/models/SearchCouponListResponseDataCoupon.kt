@@ -92,7 +92,7 @@ data class SearchCouponListResponseDataCoupon (
 
     /* The target buyer segment of the coupon. Possible enumerations are: - `ALL`: May be discovered and claimed by all TTS buyers. - `NEW`:Customers who have never purchased from your shop. - `REPEAT_CUSTOMERS`: People who have previously placed orders in your shop and made another purchase within certain days(30 days for non-US and 90 days for US). - `RECENT_CUSTOMERS`: People who have made their first purchase in your shop in the past certain days(30 days for non-US and 90 days for US). - `FREQUENT_CUSTOMERS`: Customers with more than 1 purchase within the last 90 days. - `LAPSED_CUSTOMERS`: Customers with at least 1 purchase in the past 365 days but no purchases within the last certain days(90 days for non-US and 30 days for US). - `NEW_FOLLOWERS`: People who started following the TikTok account of your shop in the past 30 days. - `EXISTING_ACTIVE_FOLLOWERS`: People who followed the TikTok account of your shop and engaged with your shop through LIVE, short videos or product cards in the past 30 days. */
     @SerializedName("target_buyer_segment")
-    val targetBuyerSegment: SearchCouponListResponseDataCoupon.TargetBuyerSegment? = null,
+    val targetBuyerSegment: kotlin.String? = null,
 
     /* Limitations for the use of the coupons. */
     @SerializedName("usage_limits")
@@ -108,7 +108,7 @@ data class SearchCouponListResponseDataCoupon (
 
     /* The range of the products which the coupon applies to. The possible enumerations are: - `FULL_SHOP`: All products sold in the shop are eligible for the coupon. - `SPECIFIC_PRODUCTS`: Only specified products are eligible for the coupon. The list of specified products are returned in the response of the `get_coupon` API. */
     @SerializedName("product_scope")
-    val productScope: SearchCouponListResponseDataCoupon.ProductScope? = null,
+    val productScope: kotlin.String? = null,
 
     /* The system where the coupon is created: - `SELLER_CENTER`: Created via the Promotions section of TikTok Seller Center. - `SELLER_APP`: Created via the TikTok Seller Mobile App. - `TTS_CRM`: Created via the TikTok Shop CRM. */
     @SerializedName("creation_source")
@@ -116,30 +116,6 @@ data class SearchCouponListResponseDataCoupon (
 
 ) {
 
-    /**
-     * The target buyer segment of the coupon. Possible enumerations are: - `ALL`: May be discovered and claimed by all TTS buyers. - `NEW`:Customers who have never purchased from your shop. - `REPEAT_CUSTOMERS`: People who have previously placed orders in your shop and made another purchase within certain days(30 days for non-US and 90 days for US). - `RECENT_CUSTOMERS`: People who have made their first purchase in your shop in the past certain days(30 days for non-US and 90 days for US). - `FREQUENT_CUSTOMERS`: Customers with more than 1 purchase within the last 90 days. - `LAPSED_CUSTOMERS`: Customers with at least 1 purchase in the past 365 days but no purchases within the last certain days(90 days for non-US and 30 days for US). - `NEW_FOLLOWERS`: People who started following the TikTok account of your shop in the past 30 days. - `EXISTING_ACTIVE_FOLLOWERS`: People who followed the TikTok account of your shop and engaged with your shop through LIVE, short videos or product cards in the past 30 days.
-     *
-     * Values: ALL,NEW,REPEAT_CUSTOMERS,RECENT_CUSTOMERS,FREQUENT_CUSTOMERS,LAPSED_CUSTOMERS,NEW_FOLLOWERS,EXISTING_ACTIVE_FOLLOWERS
-     */
-    enum class TargetBuyerSegment(val value: kotlin.String) {
-        @SerializedName(value = "ALL") ALL("ALL"),
-        @SerializedName(value = "NEW") NEW("NEW"),
-        @SerializedName(value = "REPEAT_CUSTOMERS") REPEAT_CUSTOMERS("REPEAT_CUSTOMERS"),
-        @SerializedName(value = "RECENT_CUSTOMERS") RECENT_CUSTOMERS("RECENT_CUSTOMERS"),
-        @SerializedName(value = "FREQUENT_CUSTOMERS") FREQUENT_CUSTOMERS("FREQUENT_CUSTOMERS"),
-        @SerializedName(value = "LAPSED_CUSTOMERS") LAPSED_CUSTOMERS("LAPSED_CUSTOMERS"),
-        @SerializedName(value = "NEW_FOLLOWERS") NEW_FOLLOWERS("NEW_FOLLOWERS"),
-        @SerializedName(value = "EXISTING_ACTIVE_FOLLOWERS") EXISTING_ACTIVE_FOLLOWERS("EXISTING_ACTIVE_FOLLOWERS");
-    }
-    /**
-     * The range of the products which the coupon applies to. The possible enumerations are: - `FULL_SHOP`: All products sold in the shop are eligible for the coupon. - `SPECIFIC_PRODUCTS`: Only specified products are eligible for the coupon. The list of specified products are returned in the response of the `get_coupon` API.
-     *
-     * Values: FULL_SHOP,SPECIFIC_PRODUCTS
-     */
-    enum class ProductScope(val value: kotlin.String) {
-        @SerializedName(value = "FULL_SHOP") FULL_SHOP("FULL_SHOP"),
-        @SerializedName(value = "SPECIFIC_PRODUCTS") SPECIFIC_PRODUCTS("SPECIFIC_PRODUCTS");
-    }
 
 }
 

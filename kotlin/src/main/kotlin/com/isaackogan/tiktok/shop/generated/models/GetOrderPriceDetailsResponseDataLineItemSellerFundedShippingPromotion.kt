@@ -47,19 +47,10 @@ data class GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion
 
     /* Discount type of this activity. Enumerations: - COUPON - ACTIVITY */
     @SerializedName("discount_type")
-    val discountType: GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion.DiscountType? = null
+    val discountType: kotlin.String? = null
 
 ) {
 
-    /**
-     * Discount type of this activity. Enumerations: - COUPON - ACTIVITY
-     *
-     * Values: COUPON,ACTIVITY
-     */
-    enum class DiscountType(val value: kotlin.String) {
-        @SerializedName(value = "COUPON") COUPON("COUPON"),
-        @SerializedName(value = "ACTIVITY") ACTIVITY("ACTIVITY");
-    }
 
 }
 

@@ -1,17 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_warehouse_delivery_options_response_data_delivery_option_platform_item import (
-    GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformItem,
-)
-from ..models.get_warehouse_delivery_options_response_data_delivery_option_type import (
-    GetWarehouseDeliveryOptionsResponseDataDeliveryOptionType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -32,7 +26,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
     Attributes:
         id (str | Unset): Delivery option ID.
         name (str | Unset): Delivery option name.
-        type_ (GetWarehouseDeliveryOptionsResponseDataDeliveryOptionType | Unset): Delivery option type.
+        type_ (str | Unset): Delivery option type.
             Possible values:
             - STANDARD
             - EXPRESS
@@ -45,8 +39,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
         description (str | Unset): Delivery option description.
         dimension_limit (GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit | Unset):
         weight_limit (GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit | Unset):
-        platform (list[GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformItem] | Unset): The platform on
-            which the delivery option is available
+        platform (list[str] | Unset): The platform on which the delivery option is available
             Possible values:
             - TIKTOK_SHOP
             - TOKOPEDIA
@@ -54,11 +47,11 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
-    type_: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionType | Unset = UNSET
+    type_: str | Unset = UNSET
     description: str | Unset = UNSET
     dimension_limit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit | Unset = UNSET
     weight_limit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit | Unset = UNSET
-    platform: list[GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformItem] | Unset = UNSET
+    platform: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -66,9 +59,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
 
         name = self.name
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         description = self.description
 
@@ -82,10 +73,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
 
         platform: list[str] | Unset = UNSET
         if not isinstance(self.platform, Unset):
-            platform = []
-            for platform_item_data in self.platform:
-                platform_item = platform_item_data.value
-                platform.append(platform_item)
+            platform = self.platform
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -121,12 +109,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
 
         name = d.pop("name", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionType(_type_)
+        type_ = d.pop("type", UNSET)
 
         description = d.pop("description", UNSET)
 
@@ -146,14 +129,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOption:
         else:
             weight_limit = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit.from_dict(_weight_limit)
 
-        _platform = d.pop("platform", UNSET)
-        platform: list[GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformItem] | Unset = UNSET
-        if _platform is not UNSET:
-            platform = []
-            for platform_item_data in _platform:
-                platform_item = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformItem(platform_item_data)
-
-                platform.append(platform_item)
+        platform = cast(list[str], d.pop("platform", UNSET))
 
         get_warehouse_delivery_options_response_data_delivery_option = cls(
             id=id,

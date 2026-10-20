@@ -80,73 +80,10 @@ public class OptimizeImagesResponseDataImage {
   @javax.annotation.Nullable
   private String optimizedUrl;
 
-  /**
-   * The optimization status. Possible values: - SUCCESS: The image has been successfully optimized. - IGNORE: The image already has a white background, so no optimization was applied. - PROCESSING: The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status.
-   */
-  @JsonAdapter(OptimizeStatusEnum.Adapter.class)
-  public enum OptimizeStatusEnum {
-    /**
-     * The image has been successfully optimized.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * The image already has a white background, so no optimization was applied.
-     */
-    IGNORE("IGNORE"),
-    
-    /**
-     * The optimization is in progress, and typically completes within a few seconds. Call this API again to obtain the final optimization status.
-     */
-    PROCESSING("PROCESSING");
-
-    private String value;
-
-    OptimizeStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OptimizeStatusEnum fromValue(String value) {
-      for (OptimizeStatusEnum b : OptimizeStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OptimizeStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OptimizeStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OptimizeStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OptimizeStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OptimizeStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_OPTIMIZE_STATUS = "optimize_status";
   @SerializedName(SERIALIZED_NAME_OPTIMIZE_STATUS)
   @javax.annotation.Nullable
-  private OptimizeStatusEnum optimizeStatus;
+  private String optimizeStatus;
 
   public OptimizeImagesResponseDataImage() {
   }
@@ -265,7 +202,7 @@ public class OptimizeImagesResponseDataImage {
   }
 
 
-  public OptimizeImagesResponseDataImage optimizeStatus(@javax.annotation.Nullable OptimizeStatusEnum optimizeStatus) {
+  public OptimizeImagesResponseDataImage optimizeStatus(@javax.annotation.Nullable String optimizeStatus) {
     this.optimizeStatus = optimizeStatus;
     return this;
   }
@@ -275,11 +212,11 @@ public class OptimizeImagesResponseDataImage {
    * @return optimizeStatus
    */
   @javax.annotation.Nullable
-  public OptimizeStatusEnum getOptimizeStatus() {
+  public String getOptimizeStatus() {
     return optimizeStatus;
   }
 
-  public void setOptimizeStatus(@javax.annotation.Nullable OptimizeStatusEnum optimizeStatus) {
+  public void setOptimizeStatus(@javax.annotation.Nullable String optimizeStatus) {
     this.optimizeStatus = optimizeStatus;
   }
 
@@ -416,10 +353,6 @@ public class OptimizeImagesResponseDataImage {
       }
       if ((jsonObj.get("optimize_status") != null && !jsonObj.get("optimize_status").isJsonNull()) && !jsonObj.get("optimize_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `optimize_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("optimize_status").toString()));
-      }
-      // validate the optional field `optimize_status`
-      if (jsonObj.get("optimize_status") != null && !jsonObj.get("optimize_status").isJsonNull()) {
-        OptimizeStatusEnum.validateJsonElement(jsonObj.get("optimize_status"));
       }
   }
 

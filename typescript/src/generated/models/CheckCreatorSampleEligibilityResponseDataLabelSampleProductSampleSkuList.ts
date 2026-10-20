@@ -73,26 +73,11 @@ export interface CheckCreatorSampleEligibilityResponseDataLabelSampleProductSamp
      * - EXCEED_CB_PRICE_THRESHOLD: The SKU price exceeds the applicable cross-border price threshold.
      * - ALREADY_APPLYED: The creator has already applied for this SKU.
      * - UNKNOWN: No mapped unavailability reason is available.
-     * @type {CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum}
+     * @type {string}
      * @memberof CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList
      */
-    unavailableReason?: CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum;
+    unavailableReason?: string;
 }
-
-
-/**
- * @export
- */
-export const CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum = {
-    IsPreorder: 'IS_PREORDER',
-    IsGift: 'IS_GIFT',
-    OutOfStock: 'OUT_OF_STOCK',
-    ExceedCbPriceThreshold: 'EXCEED_CB_PRICE_THRESHOLD',
-    AlreadyApplyed: 'ALREADY_APPLYED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum = typeof CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum[keyof typeof CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListUnavailableReasonEnum];
-
 
 /**
  * Check if a given object implements the CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuList interface.

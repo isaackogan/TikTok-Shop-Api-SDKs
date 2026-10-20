@@ -6,9 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.global_listing_method_change_webhook_data_listing_method import (
-    GlobalListingMethodChangeWebhookDataListingMethod,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GlobalListingMethodChangeWebhookData")
@@ -20,8 +17,7 @@ class GlobalListingMethodChangeWebhookData:
     Attributes:
         global_product_id (str | Unset): The global product ID associated with the local product.
         local_product_id (list[str] | Unset): The local product ID.
-        listing_method (GlobalListingMethodChangeWebhookDataListingMethod | Unset): The listing method applicable to the
-            local product.
+        listing_method (str | Unset): The listing method applicable to the local product.
              Possible values:
 
              * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.
@@ -30,7 +26,7 @@ class GlobalListingMethodChangeWebhookData:
 
     global_product_id: str | Unset = UNSET
     local_product_id: list[str] | Unset = UNSET
-    listing_method: GlobalListingMethodChangeWebhookDataListingMethod | Unset = UNSET
+    listing_method: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -40,9 +36,7 @@ class GlobalListingMethodChangeWebhookData:
         if not isinstance(self.local_product_id, Unset):
             local_product_id = self.local_product_id
 
-        listing_method: str | Unset = UNSET
-        if not isinstance(self.listing_method, Unset):
-            listing_method = self.listing_method.value
+        listing_method = self.listing_method
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -63,12 +57,7 @@ class GlobalListingMethodChangeWebhookData:
 
         local_product_id = cast(list[str], d.pop("local_product_id", UNSET))
 
-        _listing_method = d.pop("listing_method", UNSET)
-        listing_method: GlobalListingMethodChangeWebhookDataListingMethod | Unset
-        if isinstance(_listing_method, Unset):
-            listing_method = UNSET
-        else:
-            listing_method = GlobalListingMethodChangeWebhookDataListingMethod(_listing_method)
+        listing_method = d.pop("listing_method", UNSET)
 
         global_listing_method_change_webhook_data = cls(
             global_product_id=global_product_id,

@@ -53,68 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetGlobalListingRulesResponseData {
-  /**
-   * Gets or Sets listingMethods
-   */
-  @JsonAdapter(ListingMethodsEnum.Adapter.class)
-  public enum ListingMethodsEnum {
-    /**
-     * Create a global product, then publish it to target local markets.
-     */
-    GLOBAL_PUBLISHING("GLOBAL_PUBLISHING"),
-    
-    /**
-     * Create local product, then replicate it to other target local markets.
-     */
-    LOCAL_REPLICATION("LOCAL_REPLICATION");
-
-    private String value;
-
-    ListingMethodsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ListingMethodsEnum fromValue(String value) {
-      for (ListingMethodsEnum b : ListingMethodsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ListingMethodsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ListingMethodsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ListingMethodsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ListingMethodsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ListingMethodsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LISTING_METHODS = "listing_methods";
   @SerializedName(SERIALIZED_NAME_LISTING_METHODS)
   @javax.annotation.Nullable
-  private List<ListingMethodsEnum> listingMethods = new ArrayList<>();
+  private List<String> listingMethods = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_INVENTORY_RULES = "inventory_rules";
   @SerializedName(SERIALIZED_NAME_INVENTORY_RULES)
@@ -124,12 +66,12 @@ public class GetGlobalListingRulesResponseData {
   public GetGlobalListingRulesResponseData() {
   }
 
-  public GetGlobalListingRulesResponseData listingMethods(@javax.annotation.Nullable List<ListingMethodsEnum> listingMethods) {
+  public GetGlobalListingRulesResponseData listingMethods(@javax.annotation.Nullable List<String> listingMethods) {
     this.listingMethods = listingMethods;
     return this;
   }
 
-  public GetGlobalListingRulesResponseData addListingMethodsItem(ListingMethodsEnum listingMethodsItem) {
+  public GetGlobalListingRulesResponseData addListingMethodsItem(String listingMethodsItem) {
     if (this.listingMethods == null) {
       this.listingMethods = new ArrayList<>();
     }
@@ -142,11 +84,11 @@ public class GetGlobalListingRulesResponseData {
    * @return listingMethods
    */
   @javax.annotation.Nullable
-  public List<ListingMethodsEnum> getListingMethods() {
+  public List<String> getListingMethods() {
     return listingMethods;
   }
 
-  public void setListingMethods(@javax.annotation.Nullable List<ListingMethodsEnum> listingMethods) {
+  public void setListingMethods(@javax.annotation.Nullable List<String> listingMethods) {
     this.listingMethods = listingMethods;
   }
 

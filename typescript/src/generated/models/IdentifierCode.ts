@@ -41,25 +41,11 @@ export interface IdentifierCode {
      * - UPC
      * - ISBN
      * - JAN
-     * @type {IdentifierCodeTypeEnum}
+     * @type {string}
      * @memberof IdentifierCode
      */
-    type?: IdentifierCodeTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const IdentifierCodeTypeEnum = {
-    Gtin: 'GTIN',
-    Ean: 'EAN',
-    Upc: 'UPC',
-    Isbn: 'ISBN',
-    Jan: 'JAN'
-} as const;
-export type IdentifierCodeTypeEnum = typeof IdentifierCodeTypeEnum[keyof typeof IdentifierCodeTypeEnum];
-
 
 /**
  * Check if a given object implements the IdentifierCode interface.

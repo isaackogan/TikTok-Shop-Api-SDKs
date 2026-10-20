@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_order_price_details_response_data_line_item_seller_funded_product_promotion_discount_type import (
-    GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotionDiscountType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion")
@@ -20,15 +17,14 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
     Attributes:
         activity_id (str | Unset): A unique ID that identifies different promotion activities.
         discount_amount (str | Unset): Discount amount of this activity
-        discount_type (GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotionDiscountType | Unset):
-            Discount type of this activity. Enumerations:
+        discount_type (str | Unset): Discount type of this activity. Enumerations:
             - COUPON
             - ACTIVITY
     """
 
     activity_id: str | Unset = UNSET
     discount_amount: str | Unset = UNSET
-    discount_type: GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotionDiscountType | Unset = UNSET
+    discount_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -36,9 +32,7 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
 
         discount_amount = self.discount_amount
 
-        discount_type: str | Unset = UNSET
-        if not isinstance(self.discount_type, Unset):
-            discount_type = self.discount_type.value
+        discount_type = self.discount_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,14 +53,7 @@ class GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotion:
 
         discount_amount = d.pop("discount_amount", UNSET)
 
-        _discount_type = d.pop("discount_type", UNSET)
-        discount_type: GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotionDiscountType | Unset
-        if isinstance(_discount_type, Unset):
-            discount_type = UNSET
-        else:
-            discount_type = GetOrderPriceDetailsResponseDataLineItemSellerFundedProductPromotionDiscountType(
-                _discount_type
-            )
+        discount_type = d.pop("discount_type", UNSET)
 
         get_order_price_details_response_data_line_item_seller_funded_product_promotion = cls(
             activity_id=activity_id,

@@ -38,24 +38,11 @@ export interface GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimi
      * - POUND
      * - OUNCE
      * - KILOGRAM
-     * @type {GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum}
+     * @type {string}
      * @memberof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit
      */
-    unit?: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum = {
-    Gram: 'GRAM',
-    Pound: 'POUND',
-    Ounce: 'OUNCE',
-    Kilogram: 'KILOGRAM'
-} as const;
-export type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum = typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum[keyof typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnitEnum];
-
 
 /**
  * Check if a given object implements the GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit interface.

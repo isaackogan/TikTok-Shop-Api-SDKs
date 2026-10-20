@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_global_listing_policy_inventory_type import (
-    GetProductResponseDataSkuGlobalListingPolicyInventoryType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,8 +21,7 @@ T = TypeVar("T", bound="GetProductResponseDataSkuGlobalListingPolicy")
 class GetProductResponseDataSkuGlobalListingPolicy:
     """
     Attributes:
-        inventory_type (GetProductResponseDataSkuGlobalListingPolicyInventoryType | Unset): The type of inventory to
-            synchronize.
+        inventory_type (str | Unset): The type of inventory to synchronize.
             Possible values:
             - SHARED: Inventory Area Sharing
             - EXCLUSIVE: Inventory Exclusive
@@ -33,15 +29,13 @@ class GetProductResponseDataSkuGlobalListingPolicy:
         replicate_source (GetProductResponseDataSkuGlobalListingPolicyReplicateSource | Unset):
     """
 
-    inventory_type: GetProductResponseDataSkuGlobalListingPolicyInventoryType | Unset = UNSET
+    inventory_type: str | Unset = UNSET
     price_sync: bool | Unset = UNSET
     replicate_source: GetProductResponseDataSkuGlobalListingPolicyReplicateSource | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        inventory_type: str | Unset = UNSET
-        if not isinstance(self.inventory_type, Unset):
-            inventory_type = self.inventory_type.value
+        inventory_type = self.inventory_type
 
         price_sync = self.price_sync
 
@@ -68,12 +62,7 @@ class GetProductResponseDataSkuGlobalListingPolicy:
         )
 
         d = dict(src_dict)
-        _inventory_type = d.pop("inventory_type", UNSET)
-        inventory_type: GetProductResponseDataSkuGlobalListingPolicyInventoryType | Unset
-        if isinstance(_inventory_type, Unset):
-            inventory_type = UNSET
-        else:
-            inventory_type = GetProductResponseDataSkuGlobalListingPolicyInventoryType(_inventory_type)
+        inventory_type = d.pop("inventory_type", UNSET)
 
         price_sync = d.pop("price_sync", UNSET)
 

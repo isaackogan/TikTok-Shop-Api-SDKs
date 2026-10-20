@@ -45,7 +45,7 @@ data class GetActivityResponseDataDiscountBmsmDiscountDetail (
 
     /* The type of purchase criteria. Possible enumerations are: - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products. - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order. */
     @SerializedName("threshold_type")
-    val thresholdType: GetActivityResponseDataDiscountBmsmDiscountDetail.ThresholdType? = null,
+    val thresholdType: kotlin.String? = null,
 
     /* The purchase threshold of the discount, based on the `threshold_type`, e.g., \"3\". Determined by user. - When `threshold_type==NO_THRESHOLD`, this value is not required. - When `threshold_type==MINIMAL_ITEM_QUANTITY`, buyer must purchase at least the specified number of eligible products (e.g. must purchase 3 or more eligible products to receive the benefit). If it represents a quantity, it must be an integer. - When `threshold_type==MINIMAL_ORDER_AMOUNT`, the eligible product subtotal for the buyer's order must meet or exceed the specified order value in local currency (e.g. buyer's order subtotal must be at least $3 to receive the benefit). If it represents an order value, it must be limited to two decimal places. */
     @SerializedName("threshold_value")
@@ -53,7 +53,7 @@ data class GetActivityResponseDataDiscountBmsmDiscountDetail (
 
     /* The type of discount awarded as a benefit. The value of the discount is determined by `value`. Possible enumerations are: - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products. - `AMOUNT_OFF`: Buyer will receive X units of local currency off the price of eligible products. */
     @SerializedName("type")
-    val type: GetActivityResponseDataDiscountBmsmDiscountDetail.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Value of the discount. - When `type`==`PERCENTAGE_OFF`, the buyer will receive X% off the price of eligible products. If the value represents a percentage, it should be an integer. - `type`==`AMOUNT_OFF`, the buyer will receive X units of local currency off the price of eligible products. If the value represents a monetary amount, it should be limited to two decimal places. */
     @SerializedName("value")
@@ -61,24 +61,6 @@ data class GetActivityResponseDataDiscountBmsmDiscountDetail (
 
 ) {
 
-    /**
-     * The type of purchase criteria. Possible enumerations are: - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products. - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order.
-     *
-     * Values: MINIMAL_ITEM_QUANTITY,MINIMAL_ORDER_AMOUNT
-     */
-    enum class ThresholdType(val value: kotlin.String) {
-        @SerializedName(value = "MINIMAL_ITEM_QUANTITY") MINIMAL_ITEM_QUANTITY("MINIMAL_ITEM_QUANTITY"),
-        @SerializedName(value = "MINIMAL_ORDER_AMOUNT") MINIMAL_ORDER_AMOUNT("MINIMAL_ORDER_AMOUNT");
-    }
-    /**
-     * The type of discount awarded as a benefit. The value of the discount is determined by `value`. Possible enumerations are: - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products. - `AMOUNT_OFF`: Buyer will receive X units of local currency off the price of eligible products.
-     *
-     * Values: PERCENTAGE_OFF,AMOUNT_OFF
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PERCENTAGE_OFF") PERCENTAGE_OFF("PERCENTAGE_OFF"),
-        @SerializedName(value = "AMOUNT_OFF") AMOUNT_OFF("AMOUNT_OFF");
-    }
 
 }
 

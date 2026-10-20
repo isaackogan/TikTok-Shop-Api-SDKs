@@ -44,7 +44,7 @@ data class VideoPrecheckResultWebhookData (
 
     /* Possible enumerations:    `PASS`   `FAIL` */
     @SerializedName("result")
-    val result: VideoPrecheckResultWebhookData.Result? = null,
+    val result: kotlin.String? = null,
 
     /* Only if the `result` is `FAIL` */
     @SerializedName("issues")
@@ -52,15 +52,6 @@ data class VideoPrecheckResultWebhookData (
 
 ) {
 
-    /**
-     * Possible enumerations:    `PASS`   `FAIL`
-     *
-     * Values: PASS,FAIL
-     */
-    enum class Result(val value: kotlin.String) {
-        @SerializedName(value = "PASS") PASS("PASS"),
-        @SerializedName(value = "FAIL") FAIL("FAIL");
-    }
 
 }
 

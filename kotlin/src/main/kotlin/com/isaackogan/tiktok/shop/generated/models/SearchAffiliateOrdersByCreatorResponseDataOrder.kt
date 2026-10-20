@@ -46,7 +46,7 @@ data class SearchAffiliateOrdersByCreatorResponseDataOrder (
 
     /* The current status of the order. Possible values: - UNSPECIFIED: The status is undefined and may be updated later. - ORDERED: The order has been placed, but commission has not been settled. The estimated commission is available. - SETTLED: The commission has been settled. Actual commission values are populated when the corresponding settled amounts are available. - REFUNDED: The order was returned, refunded, or canceled by the buyer; actual commission and actual commission base amounts are returned as localized zero values. - FROZEN: Possible fraud was detected. Commission remains frozen until the issue is resolved. - DEDUCTED: An additional deduction was made from the balance account.  For statuses other than SETTLED or REFUNDED, actual commission values can be empty. Bonus, shop ads, and creator commission reward amounts are populated only when the corresponding commission data exists; their availability is not determined by order status alone. */
     @SerializedName("status")
-    val status: SearchAffiliateOrdersByCreatorResponseDataOrder.Status? = null,
+    val status: kotlin.String? = null,
 
     /* A list of SKUs associated with the order. */
     @SerializedName("skus")
@@ -62,19 +62,6 @@ data class SearchAffiliateOrdersByCreatorResponseDataOrder (
 
 ) {
 
-    /**
-     * The current status of the order. Possible values: - UNSPECIFIED: The status is undefined and may be updated later. - ORDERED: The order has been placed, but commission has not been settled. The estimated commission is available. - SETTLED: The commission has been settled. Actual commission values are populated when the corresponding settled amounts are available. - REFUNDED: The order was returned, refunded, or canceled by the buyer; actual commission and actual commission base amounts are returned as localized zero values. - FROZEN: Possible fraud was detected. Commission remains frozen until the issue is resolved. - DEDUCTED: An additional deduction was made from the balance account.  For statuses other than SETTLED or REFUNDED, actual commission values can be empty. Bonus, shop ads, and creator commission reward amounts are populated only when the corresponding commission data exists; their availability is not determined by order status alone.
-     *
-     * Values: UNSPECIFIED,ORDERED,SETTLED,REFUNDED,FROZEN,DEDUCTED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "UNSPECIFIED") UNSPECIFIED("UNSPECIFIED"),
-        @SerializedName(value = "ORDERED") ORDERED("ORDERED"),
-        @SerializedName(value = "SETTLED") SETTLED("SETTLED"),
-        @SerializedName(value = "REFUNDED") REFUNDED("REFUNDED"),
-        @SerializedName(value = "FROZEN") FROZEN("FROZEN"),
-        @SerializedName(value = "DEDUCTED") DEDUCTED("DEDUCTED");
-    }
 
 }
 

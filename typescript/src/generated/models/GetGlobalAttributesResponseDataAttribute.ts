@@ -51,10 +51,10 @@ export interface GetGlobalAttributesResponseDataAttribute {
      * Possible values:
      * - SALES_PROPERTY: Indicates sales attributes that define product variants.
      * - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-     * @type {GetGlobalAttributesResponseDataAttributeTypeEnum}
+     * @type {string}
      * @memberof GetGlobalAttributesResponseDataAttribute
      */
-    type?: GetGlobalAttributesResponseDataAttributeTypeEnum;
+    type?: string;
     /**
      * A flag indicating whether the product attribute is required across all of the seller's markets when creating or editing a product.
      * - true: The attribute is required in all of the seller's markets.
@@ -121,10 +121,10 @@ export interface GetGlobalAttributesResponseDataAttribute {
      * - VN: Vietnam
      * - MX: Mexico
      * Applicable only if `is_requried=false`.
-     * @type {Array<GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalAttributesResponseDataAttribute
      */
-    optionalRegions?: Array<GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum>;
+    optionalRegions?: Array<string>;
     /**
      * The markets where the attribute is required without conditions. When `is_requried=true`, this list contains all of the seller's markets. When `is_requried=false`, it contains only the markets where the attribute is unconditionally required. This field is omitted when there are no unconditionally required markets.
      * 
@@ -152,82 +152,11 @@ export interface GetGlobalAttributesResponseDataAttribute {
      * - US: United States
      * - VN: Vietnam
      * - MX: Mexico
-     * @type {Array<GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum>}
+     * @type {Array<string>}
      * @memberof GetGlobalAttributesResponseDataAttribute
      */
-    requiredRegions?: Array<GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum>;
+    requiredRegions?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalAttributesResponseDataAttributeTypeEnum = {
-    SalesProperty: 'SALES_PROPERTY',
-    ProductProperty: 'PRODUCT_PROPERTY'
-} as const;
-export type GetGlobalAttributesResponseDataAttributeTypeEnum = typeof GetGlobalAttributesResponseDataAttributeTypeEnum[keyof typeof GetGlobalAttributesResponseDataAttributeTypeEnum];
-
-/**
- * @export
- */
-export const GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    It: 'IT',
-    Ie: 'IE',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Pl: 'PL',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum = typeof GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum[keyof typeof GetGlobalAttributesResponseDataAttributeOptionalRegionsEnum];
-
-/**
- * @export
- */
-export const GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    It: 'IT',
-    Ie: 'IE',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Pl: 'PL',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum = typeof GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum[keyof typeof GetGlobalAttributesResponseDataAttributeRequiredRegionsEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalAttributesResponseDataAttribute interface.

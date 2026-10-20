@@ -69,6 +69,13 @@ class WebhooksTest {
     }
 
     @Test
+    fun anOrderStatusTheSpecDoesNotListIsKept() {
+        // order_status is optional, but its value must not make the payload look invalid or lose data
+        val e = Webhooks.parse("""{"type":1,"shop_id":"1","data":{"order_status":"SOME_NEW_STATUS"}}""")
+        assertEquals("SOME_NEW_STATUS", (e as WebhookEvent.OrderStatusChange).payload.data?.orderStatus)
+    }
+
+    @Test
     fun narrowsWithWhenToTheConcreteType() {
         val body = """{"type":1,"tts_notification_id":"7380066284010030890","shop_id":"7495540735365777507","timestamp":1718305585,"data":{"is_on_hold_order":true,"order_id":"576653688135258178","order_status":"UNPAID","update_time":1718305585}}"""
         val e = Webhooks.parse(body)

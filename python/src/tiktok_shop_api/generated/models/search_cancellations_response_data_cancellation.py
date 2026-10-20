@@ -6,15 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_cancellations_response_data_cancellation_cancel_status import (
-    SearchCancellationsResponseDataCancellationCancelStatus,
-)
-from ..models.search_cancellations_response_data_cancellation_cancel_type import (
-    SearchCancellationsResponseDataCancellationCancelType,
-)
-from ..models.search_cancellations_response_data_cancellation_role import (
-    SearchCancellationsResponseDataCancellationRole,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -35,17 +26,17 @@ class SearchCancellationsResponseDataCancellation:
     """
     Attributes:
         order_id (str | Unset): TikTok Shop order ID.
-        cancel_type (SearchCancellationsResponseDataCancellationCancelType | Unset): Order cancellation type.
+        cancel_type (str | Unset): Order cancellation type.
             Possible values:
             - `CANCEL`: Cancel by seller or system.
             - `BUYER_CANCEL`: Cancel by buyer. Need to be approved by seller or system.
-        cancel_status (SearchCancellationsResponseDataCancellationCancelStatus | Unset): Order cancellation status.
+        cancel_status (str | Unset): Order cancellation status.
             Possible values:
             - `CANCELLATION_REQUEST_PENDING`
             - `CANCELLATION_REQUEST_SUCCESS`
             - `CANCELLATION_REQUEST_CANCEL`
             - `CANCELLATION_REQUEST_COMPLETE`
-        role (SearchCancellationsResponseDataCancellationRole | Unset): Order cancellation initiator.
+        role (str | Unset): Order cancellation initiator.
             Possible values:
             - `BUYER`
             - `SELLER`
@@ -66,9 +57,9 @@ class SearchCancellationsResponseDataCancellation:
     """
 
     order_id: str | Unset = UNSET
-    cancel_type: SearchCancellationsResponseDataCancellationCancelType | Unset = UNSET
-    cancel_status: SearchCancellationsResponseDataCancellationCancelStatus | Unset = UNSET
-    role: SearchCancellationsResponseDataCancellationRole | Unset = UNSET
+    cancel_type: str | Unset = UNSET
+    cancel_status: str | Unset = UNSET
+    role: str | Unset = UNSET
     cancel_reason: str | Unset = UNSET
     cancel_reason_text: str | Unset = UNSET
     create_time: int | Unset = UNSET
@@ -85,17 +76,11 @@ class SearchCancellationsResponseDataCancellation:
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
 
-        cancel_type: str | Unset = UNSET
-        if not isinstance(self.cancel_type, Unset):
-            cancel_type = self.cancel_type.value
+        cancel_type = self.cancel_type
 
-        cancel_status: str | Unset = UNSET
-        if not isinstance(self.cancel_status, Unset):
-            cancel_status = self.cancel_status.value
+        cancel_status = self.cancel_status
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         cancel_reason = self.cancel_reason
 
@@ -172,26 +157,11 @@ class SearchCancellationsResponseDataCancellation:
         d = dict(src_dict)
         order_id = d.pop("order_id", UNSET)
 
-        _cancel_type = d.pop("cancel_type", UNSET)
-        cancel_type: SearchCancellationsResponseDataCancellationCancelType | Unset
-        if isinstance(_cancel_type, Unset):
-            cancel_type = UNSET
-        else:
-            cancel_type = SearchCancellationsResponseDataCancellationCancelType(_cancel_type)
+        cancel_type = d.pop("cancel_type", UNSET)
 
-        _cancel_status = d.pop("cancel_status", UNSET)
-        cancel_status: SearchCancellationsResponseDataCancellationCancelStatus | Unset
-        if isinstance(_cancel_status, Unset):
-            cancel_status = UNSET
-        else:
-            cancel_status = SearchCancellationsResponseDataCancellationCancelStatus(_cancel_status)
+        cancel_status = d.pop("cancel_status", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: SearchCancellationsResponseDataCancellationRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = SearchCancellationsResponseDataCancellationRole(_role)
+        role = d.pop("role", UNSET)
 
         cancel_reason = d.pop("cancel_reason", UNSET)
 

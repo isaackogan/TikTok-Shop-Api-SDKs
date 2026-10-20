@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.diagnosis_field import DiagnosisField
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,7 +20,7 @@ T = TypeVar("T", bound="Diagnosis")
 class Diagnosis:
     """
     Attributes:
-        field (DiagnosisField | Unset): The product field being diagnosed.
+        field (str | Unset): The product field being diagnosed.
             Possible values:
             - TITLE: Product title
             - DESCRIPTION: Product description
@@ -32,15 +31,13 @@ class Diagnosis:
         suggestion (Suggestion | Unset):
     """
 
-    field: DiagnosisField | Unset = UNSET
+    field: str | Unset = UNSET
     diagnosis_results: list[DiagnosisResult] | Unset = UNSET
     suggestion: Suggestion | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        field: str | Unset = UNSET
-        if not isinstance(self.field, Unset):
-            field = self.field.value
+        field = self.field
 
         diagnosis_results: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.diagnosis_results, Unset):
@@ -71,12 +68,7 @@ class Diagnosis:
         from ..models.suggestion import Suggestion  # noqa: PLC0415
 
         d = dict(src_dict)
-        _field = d.pop("field", UNSET)
-        field: DiagnosisField | Unset
-        if isinstance(_field, Unset):
-            field = UNSET
-        else:
-            field = DiagnosisField(_field)
+        field = d.pop("field", UNSET)
 
         _diagnosis_results = d.pop("diagnosis_results", UNSET)
         diagnosis_results: list[DiagnosisResult] | Unset = UNSET

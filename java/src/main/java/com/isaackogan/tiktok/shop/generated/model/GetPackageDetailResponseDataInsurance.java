@@ -65,78 +65,10 @@ public class GetPackageDetailResponseDataInsurance {
   @javax.annotation.Nullable
   private Boolean isClaimEligible;
 
-  /**
-   * The insurance claim status. Available values: - &#x60;NOT_STARTED&#x60;: Claim has not been initiated for this package. - &#x60;CLAIM_PENDING&#x60;: Claim is currently under review. - &#x60;APPROVED&#x60;: Claim has been approved. - &#x60;DECLINED&#x60;: Claim has been declined.
-   */
-  @JsonAdapter(ClaimStatusEnum.Adapter.class)
-  public enum ClaimStatusEnum {
-    /**
-     * Claim has not been initiated for this package.
-     */
-    NOT_STARTED("NOT_STARTED"),
-    
-    /**
-     * Claim is currently under review.
-     */
-    CLAIM_PENDING("CLAIM_PENDING"),
-    
-    /**
-     * Claim has been approved.
-     */
-    APPROVED("APPROVED"),
-    
-    /**
-     * Claim has been declined.
-     */
-    DECLINED("DECLINED");
-
-    private String value;
-
-    ClaimStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ClaimStatusEnum fromValue(String value) {
-      for (ClaimStatusEnum b : ClaimStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ClaimStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ClaimStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ClaimStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ClaimStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ClaimStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CLAIM_STATUS = "claim_status";
   @SerializedName(SERIALIZED_NAME_CLAIM_STATUS)
   @javax.annotation.Nullable
-  private ClaimStatusEnum claimStatus;
+  private String claimStatus;
 
   public GetPackageDetailResponseDataInsurance() {
   }
@@ -198,7 +130,7 @@ public class GetPackageDetailResponseDataInsurance {
   }
 
 
-  public GetPackageDetailResponseDataInsurance claimStatus(@javax.annotation.Nullable ClaimStatusEnum claimStatus) {
+  public GetPackageDetailResponseDataInsurance claimStatus(@javax.annotation.Nullable String claimStatus) {
     this.claimStatus = claimStatus;
     return this;
   }
@@ -208,11 +140,11 @@ public class GetPackageDetailResponseDataInsurance {
    * @return claimStatus
    */
   @javax.annotation.Nullable
-  public ClaimStatusEnum getClaimStatus() {
+  public String getClaimStatus() {
     return claimStatus;
   }
 
-  public void setClaimStatus(@javax.annotation.Nullable ClaimStatusEnum claimStatus) {
+  public void setClaimStatus(@javax.annotation.Nullable String claimStatus) {
     this.claimStatus = claimStatus;
   }
 
@@ -334,10 +266,6 @@ public class GetPackageDetailResponseDataInsurance {
       }
       if ((jsonObj.get("claim_status") != null && !jsonObj.get("claim_status").isJsonNull()) && !jsonObj.get("claim_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `claim_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("claim_status").toString()));
-      }
-      // validate the optional field `claim_status`
-      if (jsonObj.get("claim_status") != null && !jsonObj.get("claim_status").isJsonNull()) {
-        ClaimStatusEnum.validateJsonElement(jsonObj.get("claim_status"));
       }
   }
 

@@ -71,367 +71,25 @@ public class SkuReturnRequest {
   @javax.annotation.Nullable
   private String returnId;
 
-  /**
-   * Return type. Available values: - &#x60;REFUND&#x60;: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller. - &#x60;RETURN_AND_REFUND&#x60;: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer. - &#x60;REPLACEMENT&#x60;: The buyer requires the seller to replace the item(s). - &#x60;EXCHANGE&#x60;: The buyer requires the seller to exchange the item(s).
-   */
-  @JsonAdapter(ReturnTypeEnum.Adapter.class)
-  public enum ReturnTypeEnum {
-    /**
-     * Seller will issue a refund without return. The buyer is not required to send the item(s) back to the seller.
-     */
-    REFUND("REFUND"),
-    
-    /**
-     * Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer.
-     */
-    RETURN_AND_REFUND("RETURN_AND_REFUND"),
-    
-    /**
-     * The buyer requires the seller to replace the item(s).
-     */
-    REPLACEMENT("REPLACEMENT"),
-    
-    /**
-     * The buyer requires the seller to exchange the item(s).
-     */
-    EXCHANGE("EXCHANGE");
-
-    private String value;
-
-    ReturnTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnTypeEnum fromValue(String value) {
-      for (ReturnTypeEnum b : ReturnTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_TYPE = "return_type";
   @SerializedName(SERIALIZED_NAME_RETURN_TYPE)
   @javax.annotation.Nullable
-  private ReturnTypeEnum returnType;
-
-  /**
-   * Return status. Available values: - &#x60;RETURN_OR_REFUND_REQUEST_PENDING&#x60;: Buyer has initiated a return or refund request. The request is pending review by seller or platform. - &#x60;REFUND_OR_RETURN_REQUEST_REJECT&#x60;: The return or refund request was rejected. - &#x60;AWAITING_BUYER_SHIP&#x60;: The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn&#39;t ship the items to the seller before the deadline, the platform will close the request. - &#x60;BUYER_SHIPPED_ITEM&#x60;: Buyer has shipped the approved items to seller. - &#x60;REJECT_RECEIVE_PACKAGE&#x60;: Seller inspected the returned items and rejected the return package. - &#x60;RETURN_OR_REFUND_REQUEST_SUCCESS&#x60;: The return/refund request was approved. The buyer will be refunded. - &#x60;RETURN_OR_REFUND_REQUEST_CANCEL&#x60;: The request has been cancelled by the buyer or system. - &#x60;RETURN_OR_REFUND_REQUEST_COMPLETE&#x60;: The return/refund was processed successfully. The buyer has been refunded. - &#x60;REPLACEMENT_REQUEST_PENDING&#x60;: Buyer has initiated a replacement request. The request is pending review by seller. - &#x60;REPLACEMENT_REQUEST_REJECT&#x60;: Seller reject the buyer replacement request. - &#x60;REPLACEMENT_REQUEST_REFUND_SUCCESS&#x60;: Buyer&#39;s replacement request was resolved by refund due to insufficient inventory. - &#x60;REPLACEMENT_REQUEST_CANCEL&#x60;: Buyer canceled the replacement request. - &#x60;REPLACEMENT_REQUEST_COMPLETE&#x60;: Seller has approved the buyer&#39;s replacement request, platform will generate a new order for seller to fulfill. - &#x60;AWAITING_BUYER_RESPONSE&#x60;: Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the &#x60;seller_proposed_return_type&#x60;. - &#x60;EXCHANGE_REQUEST_PENDING&#x60;: Buyer has initiated an exchange request. The request is pending review by seller. - &#x60;EXCHANGE_REQUEST_REFUND_SUCCESS&#x60;: Buyer&#39;s exchange request was resolved by refund due to insufficient inventory. - &#x60;EXCHANGE_REQUEST_CANCEL&#x60;: Buyer canceled the exchange request. - &#x60;EXCHANGE_REQUEST_COMPLETE&#x60;: Seller has approved the buyer&#39;s exchange request, platform will generate a new order for seller to fulfill.
-   */
-  @JsonAdapter(ReturnStatusEnum.Adapter.class)
-  public enum ReturnStatusEnum {
-    /**
-     * Buyer has initiated a return or refund request. The request is pending review by seller or platform.
-     */
-    RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-    
-    /**
-     * The return or refund request was rejected.
-     */
-    REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-    
-    /**
-     * The return request was approved. The seller is waiting for the buyer to ship the approved items to the seller. If the buyer doesn&#39;t ship the items to the seller before the deadline, the platform will close the request.
-     */
-    AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-    
-    /**
-     * Buyer has shipped the approved items to seller.
-     */
-    BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-    
-    /**
-     * Seller inspected the returned items and rejected the return package.
-     */
-    REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-    
-    /**
-     * The return/refund request was approved. The buyer will be refunded.
-     */
-    RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS"),
-    
-    /**
-     * The request has been cancelled by the buyer or system.
-     */
-    RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-    
-    /**
-     * The return/refund was processed successfully. The buyer has been refunded.
-     */
-    RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE"),
-    
-    /**
-     * Buyer has initiated a replacement request. The request is pending review by seller.
-     */
-    REPLACEMENT_REQUEST_PENDING("REPLACEMENT_REQUEST_PENDING"),
-    
-    /**
-     * Seller reject the buyer replacement request.
-     */
-    REPLACEMENT_REQUEST_REJECT("REPLACEMENT_REQUEST_REJECT"),
-    
-    /**
-     * Buyer&#39;s replacement request was resolved by refund due to insufficient inventory.
-     */
-    REPLACEMENT_REQUEST_REFUND_SUCCESS("REPLACEMENT_REQUEST_REFUND_SUCCESS"),
-    
-    /**
-     * Buyer canceled the replacement request.
-     */
-    REPLACEMENT_REQUEST_CANCEL("REPLACEMENT_REQUEST_CANCEL"),
-    
-    /**
-     * Seller has approved the buyer&#39;s replacement request, platform will generate a new order for seller to fulfill.
-     */
-    REPLACEMENT_REQUEST_COMPLETE("REPLACEMENT_REQUEST_COMPLETE"),
-    
-    /**
-     * Seller offer another return type to the buyer, and waiting buyer response. Seller proposed return type can check the &#x60;seller_proposed_return_type&#x60;.
-     */
-    AWAITING_BUYER_RESPONSE("AWAITING_BUYER_RESPONSE"),
-    
-    /**
-     * Buyer has initiated an exchange request. The request is pending review by seller.
-     */
-    EXCHANGE_REQUEST_PENDING("EXCHANGE_REQUEST_PENDING"),
-    
-    /**
-     * Buyer&#39;s exchange request was resolved by refund due to insufficient inventory.
-     */
-    EXCHANGE_REQUEST_REFUND_SUCCESS("EXCHANGE_REQUEST_REFUND_SUCCESS"),
-    
-    /**
-     * Buyer canceled the exchange request.
-     */
-    EXCHANGE_REQUEST_CANCEL("EXCHANGE_REQUEST_CANCEL"),
-    
-    /**
-     * Seller has approved the buyer&#39;s exchange request, platform will generate a new order for seller to fulfill.
-     */
-    EXCHANGE_REQUEST_COMPLETE("EXCHANGE_REQUEST_COMPLETE");
-
-    private String value;
-
-    ReturnStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnStatusEnum fromValue(String value) {
-      for (ReturnStatusEnum b : ReturnStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnStatusEnum.fromValue(value);
-    }
-  }
+  private String returnType;
 
   public static final String SERIALIZED_NAME_RETURN_STATUS = "return_status";
   @SerializedName(SERIALIZED_NAME_RETURN_STATUS)
   @javax.annotation.Nullable
-  private ReturnStatusEnum returnStatus;
-
-  /**
-   * Arbitration status. Available values: - &#x60;IN_PROGRESS&#x60;: The TikTok Shop platform operator is processing arbitration and may request additional information from the seller. - &#x60;SUPPORT_BUYER&#x60;: The platform operator supports the buyer. - &#x60;SUPPORT_SELLER&#x60;: The platform operator supports the seller. - &#x60;CLOSED&#x60;: Arbitration is closed.
-   */
-  @JsonAdapter(ArbitrationStatusEnum.Adapter.class)
-  public enum ArbitrationStatusEnum {
-    /**
-     * The TikTok Shop platform operator is processing arbitration and may request additional information from the seller.
-     */
-    IN_PROGRESS("IN_PROGRESS"),
-    
-    /**
-     * The platform operator supports the buyer.
-     */
-    SUPPORT_BUYER("SUPPORT_BUYER"),
-    
-    /**
-     * The platform operator supports the seller.
-     */
-    SUPPORT_SELLER("SUPPORT_SELLER"),
-    
-    /**
-     * Arbitration is closed.
-     */
-    CLOSED("CLOSED");
-
-    private String value;
-
-    ArbitrationStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ArbitrationStatusEnum fromValue(String value) {
-      for (ArbitrationStatusEnum b : ArbitrationStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ArbitrationStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ArbitrationStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ArbitrationStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ArbitrationStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ArbitrationStatusEnum.fromValue(value);
-    }
-  }
+  private String returnStatus;
 
   public static final String SERIALIZED_NAME_ARBITRATION_STATUS = "arbitration_status";
   @SerializedName(SERIALIZED_NAME_ARBITRATION_STATUS)
   @javax.annotation.Nullable
-  private ArbitrationStatusEnum arbitrationStatus;
-
-  /**
-   * Return initiation role. Available values: - &#x60;BUYER&#x60; - &#x60;SELLER&#x60; - &#x60;OPERATOR&#x60; : TikTok Shop platform operator. - &#x60;SYSTEM&#x60;: TikTok Shop system. Please see \&quot;API overview\&quot; to learn more about roles.
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    /**
-     * 
-     */
-    BUYER("BUYER"),
-    
-    /**
-     * 
-     */
-    SELLER("SELLER"),
-    
-    /**
-     * TikTok Shop platform operator.
-     */
-    OPERATOR("OPERATOR"),
-    
-    /**
-     * TikTok Shop system.
-     */
-    SYSTEM("SYSTEM");
-
-    private String value;
-
-    RoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleEnum.fromValue(value);
-    }
-  }
+  private String arbitrationStatus;
 
   public static final String SERIALIZED_NAME_ROLE = "role";
   @SerializedName(SERIALIZED_NAME_ROLE)
   @javax.annotation.Nullable
-  private RoleEnum role;
+  private String role;
 
   public static final String SERIALIZED_NAME_RETURN_REASON = "return_reason";
   @SerializedName(SERIALIZED_NAME_RETURN_REASON)
@@ -448,68 +106,10 @@ public class SkuReturnRequest {
   @javax.annotation.Nullable
   private List<SellerNextActionResponse> sellerNextActionResponse = new ArrayList<>();
 
-  /**
-   * The shipment method selected by the buyer for sending the item(s) back to the seller. Available values: - &#x60;PLATFORM&#x60;: The buyer uses TikTok Shop&#39;s shipping service. See &#x60;handover_method&#x60; for whether the buyer uses &#x60;DROP_OFF&#x60; or &#x60;PICKUP&#x60;. - &#x60;BUYER_ARRANGE&#x60;: The buyer arranges the return shipment.
-   */
-  @JsonAdapter(ShipmentTypeEnum.Adapter.class)
-  public enum ShipmentTypeEnum {
-    /**
-     * The buyer uses TikTok Shop&#39;s shipping service. See &#x60;handover_method&#x60; for whether the buyer uses &#x60;DROP_OFF&#x60; or &#x60;PICKUP&#x60;.
-     */
-    PLATFORM("PLATFORM"),
-    
-    /**
-     * The buyer arranges the return shipment.
-     */
-    BUYER_ARRANGE("BUYER_ARRANGE");
-
-    private String value;
-
-    ShipmentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ShipmentTypeEnum fromValue(String value) {
-      for (ShipmentTypeEnum b : ShipmentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ShipmentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ShipmentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ShipmentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ShipmentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ShipmentTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SHIPMENT_TYPE = "shipment_type";
   @SerializedName(SERIALIZED_NAME_SHIPMENT_TYPE)
   @javax.annotation.Nullable
-  private ShipmentTypeEnum shipmentType;
+  private String shipmentType;
 
   public static final String SERIALIZED_NAME_HANDOVER_METHOD = "handover_method";
   @SerializedName(SERIALIZED_NAME_HANDOVER_METHOD)
@@ -576,73 +176,10 @@ public class SkuReturnRequest {
   @javax.annotation.Nullable
   private Boolean buyerKeepItem;
 
-  /**
-   * The type of return shipping document selected by the buyer. Available values: - &#x60;SHIPPING_LABEL&#x60; - &#x60;QR_CODE&#x60; - QR Code with Box - &#x60;QR_CODE_NBNL&#x60; - QR Code with No Box No Label
-   */
-  @JsonAdapter(ReturnShippingDocumentTypeEnum.Adapter.class)
-  public enum ReturnShippingDocumentTypeEnum {
-    /**
-     * 
-     */
-    SHIPPING_LABEL("SHIPPING_LABEL"),
-    
-    /**
-     * QR Code with Box
-     */
-    QR_CODE("QR_CODE"),
-    
-    /**
-     * QR Code with No Box No Label
-     */
-    QR_CODE_NBNL("QR_CODE_NBNL");
-
-    private String value;
-
-    ReturnShippingDocumentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnShippingDocumentTypeEnum fromValue(String value) {
-      for (ReturnShippingDocumentTypeEnum b : ReturnShippingDocumentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnShippingDocumentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnShippingDocumentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnShippingDocumentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnShippingDocumentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnShippingDocumentTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_SHIPPING_DOCUMENT_TYPE = "return_shipping_document_type";
   @SerializedName(SERIALIZED_NAME_RETURN_SHIPPING_DOCUMENT_TYPE)
   @javax.annotation.Nullable
-  private ReturnShippingDocumentTypeEnum returnShippingDocumentType;
+  private String returnShippingDocumentType;
 
   public static final String SERIALIZED_NAME_RETURN_METHOD = "return_method";
   @SerializedName(SERIALIZED_NAME_RETURN_METHOD)
@@ -741,7 +278,7 @@ public class SkuReturnRequest {
   }
 
 
-  public SkuReturnRequest returnType(@javax.annotation.Nullable ReturnTypeEnum returnType) {
+  public SkuReturnRequest returnType(@javax.annotation.Nullable String returnType) {
     this.returnType = returnType;
     return this;
   }
@@ -751,16 +288,16 @@ public class SkuReturnRequest {
    * @return returnType
    */
   @javax.annotation.Nullable
-  public ReturnTypeEnum getReturnType() {
+  public String getReturnType() {
     return returnType;
   }
 
-  public void setReturnType(@javax.annotation.Nullable ReturnTypeEnum returnType) {
+  public void setReturnType(@javax.annotation.Nullable String returnType) {
     this.returnType = returnType;
   }
 
 
-  public SkuReturnRequest returnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public SkuReturnRequest returnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
     return this;
   }
@@ -770,16 +307,16 @@ public class SkuReturnRequest {
    * @return returnStatus
    */
   @javax.annotation.Nullable
-  public ReturnStatusEnum getReturnStatus() {
+  public String getReturnStatus() {
     return returnStatus;
   }
 
-  public void setReturnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public void setReturnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
   }
 
 
-  public SkuReturnRequest arbitrationStatus(@javax.annotation.Nullable ArbitrationStatusEnum arbitrationStatus) {
+  public SkuReturnRequest arbitrationStatus(@javax.annotation.Nullable String arbitrationStatus) {
     this.arbitrationStatus = arbitrationStatus;
     return this;
   }
@@ -789,16 +326,16 @@ public class SkuReturnRequest {
    * @return arbitrationStatus
    */
   @javax.annotation.Nullable
-  public ArbitrationStatusEnum getArbitrationStatus() {
+  public String getArbitrationStatus() {
     return arbitrationStatus;
   }
 
-  public void setArbitrationStatus(@javax.annotation.Nullable ArbitrationStatusEnum arbitrationStatus) {
+  public void setArbitrationStatus(@javax.annotation.Nullable String arbitrationStatus) {
     this.arbitrationStatus = arbitrationStatus;
   }
 
 
-  public SkuReturnRequest role(@javax.annotation.Nullable RoleEnum role) {
+  public SkuReturnRequest role(@javax.annotation.Nullable String role) {
     this.role = role;
     return this;
   }
@@ -808,11 +345,11 @@ public class SkuReturnRequest {
    * @return role
    */
   @javax.annotation.Nullable
-  public RoleEnum getRole() {
+  public String getRole() {
     return role;
   }
 
-  public void setRole(@javax.annotation.Nullable RoleEnum role) {
+  public void setRole(@javax.annotation.Nullable String role) {
     this.role = role;
   }
 
@@ -882,7 +419,7 @@ public class SkuReturnRequest {
   }
 
 
-  public SkuReturnRequest shipmentType(@javax.annotation.Nullable ShipmentTypeEnum shipmentType) {
+  public SkuReturnRequest shipmentType(@javax.annotation.Nullable String shipmentType) {
     this.shipmentType = shipmentType;
     return this;
   }
@@ -892,11 +429,11 @@ public class SkuReturnRequest {
    * @return shipmentType
    */
   @javax.annotation.Nullable
-  public ShipmentTypeEnum getShipmentType() {
+  public String getShipmentType() {
     return shipmentType;
   }
 
-  public void setShipmentType(@javax.annotation.Nullable ShipmentTypeEnum shipmentType) {
+  public void setShipmentType(@javax.annotation.Nullable String shipmentType) {
     this.shipmentType = shipmentType;
   }
 
@@ -1156,7 +693,7 @@ public class SkuReturnRequest {
   }
 
 
-  public SkuReturnRequest returnShippingDocumentType(@javax.annotation.Nullable ReturnShippingDocumentTypeEnum returnShippingDocumentType) {
+  public SkuReturnRequest returnShippingDocumentType(@javax.annotation.Nullable String returnShippingDocumentType) {
     this.returnShippingDocumentType = returnShippingDocumentType;
     return this;
   }
@@ -1166,11 +703,11 @@ public class SkuReturnRequest {
    * @return returnShippingDocumentType
    */
   @javax.annotation.Nullable
-  public ReturnShippingDocumentTypeEnum getReturnShippingDocumentType() {
+  public String getReturnShippingDocumentType() {
     return returnShippingDocumentType;
   }
 
-  public void setReturnShippingDocumentType(@javax.annotation.Nullable ReturnShippingDocumentTypeEnum returnShippingDocumentType) {
+  public void setReturnShippingDocumentType(@javax.annotation.Nullable String returnShippingDocumentType) {
     this.returnShippingDocumentType = returnShippingDocumentType;
   }
 
@@ -1587,30 +1124,14 @@ public class SkuReturnRequest {
       if ((jsonObj.get("return_type") != null && !jsonObj.get("return_type").isJsonNull()) && !jsonObj.get("return_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_type").toString()));
       }
-      // validate the optional field `return_type`
-      if (jsonObj.get("return_type") != null && !jsonObj.get("return_type").isJsonNull()) {
-        ReturnTypeEnum.validateJsonElement(jsonObj.get("return_type"));
-      }
       if ((jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) && !jsonObj.get("return_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_status").toString()));
-      }
-      // validate the optional field `return_status`
-      if (jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) {
-        ReturnStatusEnum.validateJsonElement(jsonObj.get("return_status"));
       }
       if ((jsonObj.get("arbitration_status") != null && !jsonObj.get("arbitration_status").isJsonNull()) && !jsonObj.get("arbitration_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `arbitration_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("arbitration_status").toString()));
       }
-      // validate the optional field `arbitration_status`
-      if (jsonObj.get("arbitration_status") != null && !jsonObj.get("arbitration_status").isJsonNull()) {
-        ArbitrationStatusEnum.validateJsonElement(jsonObj.get("arbitration_status"));
-      }
       if ((jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) && !jsonObj.get("role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role").toString()));
-      }
-      // validate the optional field `role`
-      if (jsonObj.get("role") != null && !jsonObj.get("role").isJsonNull()) {
-        RoleEnum.validateJsonElement(jsonObj.get("role"));
       }
       if ((jsonObj.get("return_reason") != null && !jsonObj.get("return_reason").isJsonNull()) && !jsonObj.get("return_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_reason").toString()));
@@ -1634,10 +1155,6 @@ public class SkuReturnRequest {
       }
       if ((jsonObj.get("shipment_type") != null && !jsonObj.get("shipment_type").isJsonNull()) && !jsonObj.get("shipment_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shipment_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shipment_type").toString()));
-      }
-      // validate the optional field `shipment_type`
-      if (jsonObj.get("shipment_type") != null && !jsonObj.get("shipment_type").isJsonNull()) {
-        ShipmentTypeEnum.validateJsonElement(jsonObj.get("shipment_type"));
       }
       if ((jsonObj.get("handover_method") != null && !jsonObj.get("handover_method").isJsonNull()) && !jsonObj.get("handover_method").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `handover_method` to be a primitive type in the JSON string but got `%s`", jsonObj.get("handover_method").toString()));
@@ -1685,10 +1202,6 @@ public class SkuReturnRequest {
       }
       if ((jsonObj.get("return_shipping_document_type") != null && !jsonObj.get("return_shipping_document_type").isJsonNull()) && !jsonObj.get("return_shipping_document_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_shipping_document_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_shipping_document_type").toString()));
-      }
-      // validate the optional field `return_shipping_document_type`
-      if (jsonObj.get("return_shipping_document_type") != null && !jsonObj.get("return_shipping_document_type").isJsonNull()) {
-        ReturnShippingDocumentTypeEnum.validateJsonElement(jsonObj.get("return_shipping_document_type"));
       }
       if ((jsonObj.get("return_method") != null && !jsonObj.get("return_method").isJsonNull()) && !jsonObj.get("return_method").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_method` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_method").toString()));

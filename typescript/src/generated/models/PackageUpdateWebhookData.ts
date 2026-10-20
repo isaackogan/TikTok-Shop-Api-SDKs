@@ -39,10 +39,10 @@ export interface PackageUpdateWebhookData {
      *  * FULFILL_UNCOMBINE 
      *  * PARTLY_CANCEL_SPLIT 
      *  * SPLIT_BY_SKU_CANCEL
-     * @type {PackageUpdateWebhookDataScTypeEnum}
+     * @type {string}
      * @memberof PackageUpdateWebhookData
      */
-    scType?: PackageUpdateWebhookDataScTypeEnum;
+    scType?: string;
     /**
      * Operator of the event trigger, with possible values: 
      *   
@@ -50,10 +50,10 @@ export interface PackageUpdateWebhookData {
      *  * ROLE_SELLER 
      *  * ROLE_OPERATOR 
      *  * ROLE_SYSTEM
-     * @type {PackageUpdateWebhookDataRoleTypeEnum}
+     * @type {string}
      * @memberof PackageUpdateWebhookData
      */
-    roleType?: PackageUpdateWebhookDataRoleTypeEnum;
+    roleType?: string;
     /**
      * Package list updated by the event trigger
      * @type {Array<PackageUpdateWebhookDataPackageList>}
@@ -67,35 +67,6 @@ export interface PackageUpdateWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const PackageUpdateWebhookDataScTypeEnum = {
-    Combine: 'COMBINE',
-    CancelCombine: 'CANCEL_COMBINE',
-    Split: 'SPLIT',
-    CancelSplit: 'CANCEL_SPLIT',
-    AddressUpdateSplit: 'ADDRESS_UPDATE_SPLIT',
-    CancelFulfillSplit: 'CANCEL_FULFILL_SPLIT',
-    FulfillUncombine: 'FULFILL_UNCOMBINE',
-    PartlyCancelSplit: 'PARTLY_CANCEL_SPLIT',
-    SplitBySkuCancel: 'SPLIT_BY_SKU_CANCEL'
-} as const;
-export type PackageUpdateWebhookDataScTypeEnum = typeof PackageUpdateWebhookDataScTypeEnum[keyof typeof PackageUpdateWebhookDataScTypeEnum];
-
-/**
- * @export
- */
-export const PackageUpdateWebhookDataRoleTypeEnum = {
-    RoleUser: 'ROLE_USER',
-    RoleSeller: 'ROLE_SELLER',
-    RoleOperator: 'ROLE_OPERATOR',
-    RoleSystem: 'ROLE_SYSTEM'
-} as const;
-export type PackageUpdateWebhookDataRoleTypeEnum = typeof PackageUpdateWebhookDataRoleTypeEnum[keyof typeof PackageUpdateWebhookDataRoleTypeEnum];
-
 
 /**
  * Check if a given object implements the PackageUpdateWebhookData interface.

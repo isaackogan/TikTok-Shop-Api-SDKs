@@ -26,10 +26,10 @@ export interface SellerNextActionResponse {
      * - `SELLER_RESPOND_RETURN`
      * - `SELLER_RESPOND_RECEIVE_PACKAGE`
      * - `SELLER_RESPOND_REPLACEMENT`
-     * @type {SellerNextActionResponseActionEnum}
+     * @type {string}
      * @memberof SellerNextActionResponse
      */
-    action?: SellerNextActionResponseActionEnum;
+    action?: string;
     /**
      * The deadline for the seller to perform the specified action, as a Unix timestamp in seconds.
      * @type {number}
@@ -37,19 +37,6 @@ export interface SellerNextActionResponse {
      */
     deadline?: number;
 }
-
-
-/**
- * @export
- */
-export const SellerNextActionResponseActionEnum = {
-    SellerRespondRefund: 'SELLER_RESPOND_REFUND',
-    SellerRespondReturn: 'SELLER_RESPOND_RETURN',
-    SellerRespondReceivePackage: 'SELLER_RESPOND_RECEIVE_PACKAGE',
-    SellerRespondReplacement: 'SELLER_RESPOND_REPLACEMENT'
-} as const;
-export type SellerNextActionResponseActionEnum = typeof SellerNextActionResponseActionEnum[keyof typeof SellerNextActionResponseActionEnum];
-
 
 /**
  * Check if a given object implements the SellerNextActionResponse interface.

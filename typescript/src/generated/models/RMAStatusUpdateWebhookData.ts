@@ -36,10 +36,10 @@ export interface RMAStatusUpdateWebhookData {
      *   
      *  * `BUYER` 
      *  * `SELLER`
-     * @type {RMAStatusUpdateWebhookDataReturnRoleEnum}
+     * @type {string}
      * @memberof RMAStatusUpdateWebhookData
      */
-    returnRole?: RMAStatusUpdateWebhookDataReturnRoleEnum;
+    returnRole?: string;
     /**
      * Current RMA status. Possible enumerations: 
      *   
@@ -48,10 +48,10 @@ export interface RMAStatusUpdateWebhookData {
      *  * `RETURN_IN_TRANSIT` = Buyer has shipped the return and is in transit to the sellers destination warehouse 
      *  * `PENDING_PACKAGE_REVIEW` = The return package has been delivered and is pending seller package review. The seller has **2-4 business days** **SLA** to respond with a refund review/decision. Please refer to the latest seller academy document. 
      *  * `PACKAGE_REVIEW_COMPLETED` = The package review lifecycle is complete, and the RMA refund has either been approved or rejected.
-     * @type {RMAStatusUpdateWebhookDataRmaStatusEnum}
+     * @type {string}
      * @memberof RMAStatusUpdateWebhookData
      */
-    rmaStatus?: RMAStatusUpdateWebhookDataRmaStatusEnum;
+    rmaStatus?: string;
     /**
      * Creation time of the RMA in Unix seconds.
      * @type {number}
@@ -65,29 +65,6 @@ export interface RMAStatusUpdateWebhookData {
      */
     rmaRequestUpdateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const RMAStatusUpdateWebhookDataReturnRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER'
-} as const;
-export type RMAStatusUpdateWebhookDataReturnRoleEnum = typeof RMAStatusUpdateWebhookDataReturnRoleEnum[keyof typeof RMAStatusUpdateWebhookDataReturnRoleEnum];
-
-/**
- * @export
- */
-export const RMAStatusUpdateWebhookDataRmaStatusEnum = {
-    Init: 'INIT',
-    AwaitingBuyerShipped: 'AWAITING_BUYER_SHIPPED',
-    ReturnInTransit: 'RETURN_IN_TRANSIT',
-    PendingPackageReview: 'PENDING_PACKAGE_REVIEW',
-    PackageReviewCompleted: 'PACKAGE_REVIEW_COMPLETED'
-} as const;
-export type RMAStatusUpdateWebhookDataRmaStatusEnum = typeof RMAStatusUpdateWebhookDataRmaStatusEnum[keyof typeof RMAStatusUpdateWebhookDataRmaStatusEnum];
-
 
 /**
  * Check if a given object implements the RMAStatusUpdateWebhookData interface.

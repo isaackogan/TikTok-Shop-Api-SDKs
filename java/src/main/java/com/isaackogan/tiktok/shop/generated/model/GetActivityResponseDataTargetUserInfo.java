@@ -50,73 +50,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetActivityResponseDataTargetUserInfo {
-  /**
-   * The targeted user type. Possible values: - &#x60;ALL_USER&#x60; - &#x60;SHOP_NEW_CUSTOMER&#x60; - &#x60;SHOP_EXISTING_CUSTOMER&#x60; - &#x60;SHOP_REPEAT_CUSTOMER&#x60; - &#x60;SHOP_ABANDONED_CHECKOUTS_CUSTOMER&#x60;
-   */
-  @JsonAdapter(UserTypeEnum.Adapter.class)
-  public enum UserTypeEnum {
-    ALL_USER("ALL_USER"),
-    
-    SHOP_NEW_CUSTOMER("SHOP_NEW_CUSTOMER"),
-    
-    SHOP_EXISTING_CUSTOMER("SHOP_EXISTING_CUSTOMER"),
-    
-    SHOP_REPEAT_CUSTOMER("SHOP_REPEAT_CUSTOMER"),
-    
-    SHOP_ABANDONED_CHECKOUTS_CUSTOMER("SHOP_ABANDONED_CHECKOUTS_CUSTOMER");
-
-    private String value;
-
-    UserTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UserTypeEnum fromValue(String value) {
-      for (UserTypeEnum b : UserTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UserTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UserTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UserTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UserTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UserTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_USER_TYPE = "user_type";
   @SerializedName(SERIALIZED_NAME_USER_TYPE)
   @javax.annotation.Nullable
-  private UserTypeEnum userType;
+  private String userType;
 
   public GetActivityResponseDataTargetUserInfo() {
   }
 
-  public GetActivityResponseDataTargetUserInfo userType(@javax.annotation.Nullable UserTypeEnum userType) {
+  public GetActivityResponseDataTargetUserInfo userType(@javax.annotation.Nullable String userType) {
     this.userType = userType;
     return this;
   }
@@ -126,11 +68,11 @@ public class GetActivityResponseDataTargetUserInfo {
    * @return userType
    */
   @javax.annotation.Nullable
-  public UserTypeEnum getUserType() {
+  public String getUserType() {
     return userType;
   }
 
-  public void setUserType(@javax.annotation.Nullable UserTypeEnum userType) {
+  public void setUserType(@javax.annotation.Nullable String userType) {
     this.userType = userType;
   }
 
@@ -243,10 +185,6 @@ public class GetActivityResponseDataTargetUserInfo {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("user_type") != null && !jsonObj.get("user_type").isJsonNull()) && !jsonObj.get("user_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `user_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("user_type").toString()));
-      }
-      // validate the optional field `user_type`
-      if (jsonObj.get("user_type") != null && !jsonObj.get("user_type").isJsonNull()) {
-        UserTypeEnum.validateJsonElement(jsonObj.get("user_type"));
       }
   }
 

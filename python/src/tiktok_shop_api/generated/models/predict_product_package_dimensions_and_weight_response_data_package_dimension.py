@@ -6,10 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.predict_product_package_dimensions_and_weight_response_data_package_dimension_unit import (
-    PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnit,
-)
-
 T = TypeVar("T", bound="PredictProductPackageDimensionsAndWeightResponseDataPackageDimension")
 
 
@@ -19,8 +15,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
     Attributes:
         height (int): Predicted positive package height.
         length (int): Predicted positive package length.
-        unit (PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnit): Unit of the predicted package
-            dimensions.
+        unit (str): Unit of the predicted package dimensions.
             Possible values:
             - `CENTIMETER`
             - `INCH`
@@ -32,7 +27,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
 
     height: int
     length: int
-    unit: PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnit
+    unit: str
     width: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -41,7 +36,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
 
         length = self.length
 
-        unit = self.unit.value
+        unit = self.unit
 
         width = self.width
 
@@ -65,7 +60,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageDimension:
 
         length = d.pop("length")
 
-        unit = PredictProductPackageDimensionsAndWeightResponseDataPackageDimensionUnit(d.pop("unit"))
+        unit = d.pop("unit")
 
         width = d.pop("width")
 

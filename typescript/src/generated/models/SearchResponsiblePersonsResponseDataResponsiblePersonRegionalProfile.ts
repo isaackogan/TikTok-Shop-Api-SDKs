@@ -42,10 +42,10 @@ export interface SearchResponsiblePersonsResponseDataResponsiblePersonRegionalPr
      * - es-ES
      * - fr-FR
      * - it-IT
-     * @type {SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum}
+     * @type {string}
      * @memberof SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile
      */
-    locale?: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum;
+    locale?: string;
     /**
      * The responsible person name.
      * Max length: 200 characters
@@ -72,20 +72,6 @@ export interface SearchResponsiblePersonsResponseDataResponsiblePersonRegionalPr
      */
     address?: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress;
 }
-
-
-/**
- * @export
- */
-export const SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum = {
-    DeDe: 'de-DE',
-    EnIe: 'en-IE',
-    EsEs: 'es-ES',
-    FrFr: 'fr-FR',
-    ItIt: 'it-IT'
-} as const;
-export type SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum = typeof SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum[keyof typeof SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocaleEnum];
-
 
 /**
  * Check if a given object implements the SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile interface.

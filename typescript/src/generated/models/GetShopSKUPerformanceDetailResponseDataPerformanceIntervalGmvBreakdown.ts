@@ -37,23 +37,11 @@ export interface GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBr
      * - LIVE: Live stream content.
      * - VIDEO: Video content.
      * - PRODUCT_CARD: Product card.
-     * @type {GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum}
+     * @type {string}
      * @memberof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown
      */
-    type?: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum = {
-    Live: 'LIVE',
-    Video: 'VIDEO',
-    ProductCard: 'PRODUCT_CARD'
-} as const;
-export type GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum = typeof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum[keyof typeof GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown interface.

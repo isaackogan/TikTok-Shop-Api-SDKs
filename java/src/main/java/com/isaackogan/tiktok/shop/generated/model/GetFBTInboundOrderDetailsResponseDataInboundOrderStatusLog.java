@@ -55,151 +55,15 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
   @javax.annotation.Nullable
   private Long operateTime;
 
-  /**
-   * The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.  **Possible values:** * &#x60;WORKING&#x60; * &#x60;READY_TO_SHIP&#x60; * &#x60;TO_BE_RECEIVED&#x60; * &#x60;ARRIVED_HUB&#x60; * &#x60;INTERNAL_TRANSFER&#x60; * &#x60;RECEIVING&#x60; * &#x60;PARTIALLY_RECEIVED&#x60; * &#x60;RECEIVED&#x60; * &#x60;CANCELLED&#x60; * &#x60;DELIVERED&#x60;
-   */
-  @JsonAdapter(NewStatusEnum.Adapter.class)
-  public enum NewStatusEnum {
-    WORKING("WORKING"),
-    
-    READY_TO_SHIP("READY_TO_SHIP"),
-    
-    TO_BE_RECEIVED("TO_BE_RECEIVED"),
-    
-    ARRIVED_HUB("ARRIVED_HUB"),
-    
-    INTERNAL_TRANSFER("INTERNAL_TRANSFER"),
-    
-    RECEIVING("RECEIVING"),
-    
-    PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-    
-    RECEIVED("RECEIVED"),
-    
-    CANCELLED("CANCELLED"),
-    
-    DELIVERED("DELIVERED");
-
-    private String value;
-
-    NewStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static NewStatusEnum fromValue(String value) {
-      for (NewStatusEnum b : NewStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<NewStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final NewStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public NewStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return NewStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      NewStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_NEW_STATUS = "new_status";
   @SerializedName(SERIALIZED_NAME_NEW_STATUS)
   @javax.annotation.Nullable
-  private NewStatusEnum newStatus;
-
-  /**
-   * The order status in **Fulfilled by TikTok (FBT)** warehouse before this operation.  **Possible values:** * &#x60;WORKING&#x60; * &#x60;READY_TO_SHIP&#x60; * &#x60;TO_BE_RECEIVED&#x60; * &#x60;ARRIVED_HUB&#x60; * &#x60;INTERNAL_TRANSFER&#x60; * &#x60;RECEIVING&#x60; * &#x60;PARTIALLY_RECEIVED&#x60; * &#x60;RECEIVED&#x60; * &#x60;CANCELLED&#x60; * &#x60;DELIVERED&#x60;
-   */
-  @JsonAdapter(PreviousStatusEnum.Adapter.class)
-  public enum PreviousStatusEnum {
-    WORKING("WORKING"),
-    
-    READY_TO_SHIP("READY_TO_SHIP"),
-    
-    TO_BE_RECEIVED("TO_BE_RECEIVED"),
-    
-    ARRIVED_HUB("ARRIVED_HUB"),
-    
-    INTERNAL_TRANSFER("INTERNAL_TRANSFER"),
-    
-    RECEIVING("RECEIVING"),
-    
-    PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-    
-    RECEIVED("RECEIVED"),
-    
-    CANCELLED("CANCELLED"),
-    
-    DELIVERED("DELIVERED");
-
-    private String value;
-
-    PreviousStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PreviousStatusEnum fromValue(String value) {
-      for (PreviousStatusEnum b : PreviousStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PreviousStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PreviousStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PreviousStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PreviousStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PreviousStatusEnum.fromValue(value);
-    }
-  }
+  private String newStatus;
 
   public static final String SERIALIZED_NAME_PREVIOUS_STATUS = "previous_status";
   @SerializedName(SERIALIZED_NAME_PREVIOUS_STATUS)
   @javax.annotation.Nullable
-  private PreviousStatusEnum previousStatus;
+  private String previousStatus;
 
   public static final String SERIALIZED_NAME_OPERATOR = "operator";
   @SerializedName(SERIALIZED_NAME_OPERATOR)
@@ -228,7 +92,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog newStatus(@javax.annotation.Nullable NewStatusEnum newStatus) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog newStatus(@javax.annotation.Nullable String newStatus) {
     this.newStatus = newStatus;
     return this;
   }
@@ -238,16 +102,16 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
    * @return newStatus
    */
   @javax.annotation.Nullable
-  public NewStatusEnum getNewStatus() {
+  public String getNewStatus() {
     return newStatus;
   }
 
-  public void setNewStatus(@javax.annotation.Nullable NewStatusEnum newStatus) {
+  public void setNewStatus(@javax.annotation.Nullable String newStatus) {
     this.newStatus = newStatus;
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog previousStatus(@javax.annotation.Nullable PreviousStatusEnum previousStatus) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog previousStatus(@javax.annotation.Nullable String previousStatus) {
     this.previousStatus = previousStatus;
     return this;
   }
@@ -257,11 +121,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
    * @return previousStatus
    */
   @javax.annotation.Nullable
-  public PreviousStatusEnum getPreviousStatus() {
+  public String getPreviousStatus() {
     return previousStatus;
   }
 
-  public void setPreviousStatus(@javax.annotation.Nullable PreviousStatusEnum previousStatus) {
+  public void setPreviousStatus(@javax.annotation.Nullable String previousStatus) {
     this.previousStatus = previousStatus;
   }
 
@@ -400,16 +264,8 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog {
       if ((jsonObj.get("new_status") != null && !jsonObj.get("new_status").isJsonNull()) && !jsonObj.get("new_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `new_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("new_status").toString()));
       }
-      // validate the optional field `new_status`
-      if (jsonObj.get("new_status") != null && !jsonObj.get("new_status").isJsonNull()) {
-        NewStatusEnum.validateJsonElement(jsonObj.get("new_status"));
-      }
       if ((jsonObj.get("previous_status") != null && !jsonObj.get("previous_status").isJsonNull()) && !jsonObj.get("previous_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `previous_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("previous_status").toString()));
-      }
-      // validate the optional field `previous_status`
-      if (jsonObj.get("previous_status") != null && !jsonObj.get("previous_status").isJsonNull()) {
-        PreviousStatusEnum.validateJsonElement(jsonObj.get("previous_status"));
       }
       if ((jsonObj.get("operator") != null && !jsonObj.get("operator").isJsonNull()) && !jsonObj.get("operator").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `operator` to be a primitive type in the JSON string but got `%s`", jsonObj.get("operator").toString()));

@@ -294,10 +294,10 @@ export interface SearchCAPAffiliateOrdersResponseDataSkuOrder {
      * - PRE_LIVE
      * - PROMOTION_PAGE
      * - LINKSHARE
-     * @type {SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum}
+     * @type {string}
      * @memberof SearchCAPAffiliateOrdersResponseDataSkuOrder
      */
-    contentType?: SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum;
+    contentType?: string;
     /**
      * Unique identifier for content
      * @type {string}
@@ -311,10 +311,10 @@ export interface SearchCAPAffiliateOrdersResponseDataSkuOrder {
      * - `Indirect`: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in the Marketplace or target collaboration.
      * 
      * For other content types, this field is an empty string.
-     * @type {SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum}
+     * @type {string}
      * @memberof SearchCAPAffiliateOrdersResponseDataSkuOrder
      */
-    attributionType?: SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum;
+    attributionType?: string;
     /**
      * Commission calculation model.
      * Possible values:
@@ -509,10 +509,10 @@ export interface SearchCAPAffiliateOrdersResponseDataSkuOrder {
      * Possible values:
      * - `Yes`: this SKU order was fully returned or refunded, and no commission is paid.
      * - `No`: this SKU order was not fully returned or refunded.
-     * @type {SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum}
+     * @type {string}
      * @memberof SearchCAPAffiliateOrdersResponseDataSkuOrder
      */
-    fullyReturn?: SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum;
+    fullyReturn?: string;
     /**
      * Unix timestamp in seconds when the order commission was settled (UTC). This field is omitted when no settlement timestamp is available.
      * @type {number}
@@ -532,39 +532,6 @@ export interface SearchCAPAffiliateOrdersResponseDataSkuOrder {
      */
     isCarousel?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum = {
-    Shop: 'SHOP',
-    Video: 'VIDEO',
-    Live: 'LIVE',
-    PreLive: 'PRE_LIVE',
-    PromotionPage: 'PROMOTION_PAGE',
-    Linkshare: 'LINKSHARE'
-} as const;
-export type SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum = typeof SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum[keyof typeof SearchCAPAffiliateOrdersResponseDataSkuOrderContentTypeEnum];
-
-/**
- * @export
- */
-export const SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum = {
-    Direct: 'Direct',
-    Indirect: 'Indirect'
-} as const;
-export type SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum = typeof SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum[keyof typeof SearchCAPAffiliateOrdersResponseDataSkuOrderAttributionTypeEnum];
-
-/**
- * @export
- */
-export const SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum = {
-    Yes: 'Yes',
-    No: 'No'
-} as const;
-export type SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum = typeof SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum[keyof typeof SearchCAPAffiliateOrdersResponseDataSkuOrderFullyReturnEnum];
-
 
 /**
  * Check if a given object implements the SearchCAPAffiliateOrdersResponseDataSkuOrder interface.

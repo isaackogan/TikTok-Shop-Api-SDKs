@@ -55,202 +55,20 @@ public class ReturnStatusChangeWebhookData {
   @javax.annotation.Nullable
   private String orderId;
 
-  /**
-   * Return or refund request user, with possible values:      * BUYER   * SELLER   * SYSTEM
-   */
-  @JsonAdapter(ReturnRoleEnum.Adapter.class)
-  public enum ReturnRoleEnum {
-    BUYER("BUYER"),
-    
-    SELLER("SELLER"),
-    
-    SYSTEM("SYSTEM");
-
-    private String value;
-
-    ReturnRoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnRoleEnum fromValue(String value) {
-      for (ReturnRoleEnum b : ReturnRoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnRoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnRoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnRoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnRoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnRoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_ROLE = "return_role";
   @SerializedName(SERIALIZED_NAME_RETURN_ROLE)
   @javax.annotation.Nullable
-  private ReturnRoleEnum returnRole;
-
-  /**
-   * The return or refund request type, with possible values:      * REFUND   * REPLACEMENT   * RETURN_AND_REFUND
-   */
-  @JsonAdapter(ReturnTypeEnum.Adapter.class)
-  public enum ReturnTypeEnum {
-    REFUND("REFUND"),
-    
-    REPLACEMENT("REPLACEMENT"),
-    
-    RETURN_AND_REFUND("RETURN_AND_REFUND");
-
-    private String value;
-
-    ReturnTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnTypeEnum fromValue(String value) {
-      for (ReturnTypeEnum b : ReturnTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnTypeEnum.fromValue(value);
-    }
-  }
+  private String returnRole;
 
   public static final String SERIALIZED_NAME_RETURN_TYPE = "return_type";
   @SerializedName(SERIALIZED_NAME_RETURN_TYPE)
   @javax.annotation.Nullable
-  private ReturnTypeEnum returnType;
-
-  /**
-   * The return status for a request, with possible values:      * AWAITING_BUYER_SHIP   * BUYER_SHIPPED_ITEM   * REFUND_OR_RETURN_REQUEST_REJECT   * REJECT_RECEIVE_PACKAGE   * REPLACEMENT_REQUEST_CANCEL   * REPLACEMENT_REQUEST_COMPLETE   * REPLACEMENT_REQUEST_PENDING   * REPLACEMENT_REQUEST_REFUND_SUCCESS   * REPLACEMENT_REQUEST_REJECT   * RETURN_OR_REFUND_REQUEST_CANCEL   * RETURN_OR_REFUND_REQUEST_COMPLETE   * RETURN_OR_REFUND_REQUEST_PENDING   * RETURN_OR_REFUND_REQUEST_SUCCESS
-   */
-  @JsonAdapter(ReturnStatusEnum.Adapter.class)
-  public enum ReturnStatusEnum {
-    AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-    
-    BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-    
-    REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-    
-    REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-    
-    REPLACEMENT_REQUEST_CANCEL("REPLACEMENT_REQUEST_CANCEL"),
-    
-    REPLACEMENT_REQUEST_COMPLETE("REPLACEMENT_REQUEST_COMPLETE"),
-    
-    REPLACEMENT_REQUEST_PENDING("REPLACEMENT_REQUEST_PENDING"),
-    
-    REPLACEMENT_REQUEST_REFUND_SUCCESS("REPLACEMENT_REQUEST_REFUND_SUCCESS"),
-    
-    REPLACEMENT_REQUEST_REJECT("REPLACEMENT_REQUEST_REJECT"),
-    
-    RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-    
-    RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE"),
-    
-    RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-    
-    RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS");
-
-    private String value;
-
-    ReturnStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnStatusEnum fromValue(String value) {
-      for (ReturnStatusEnum b : ReturnStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnStatusEnum.fromValue(value);
-    }
-  }
+  private String returnType;
 
   public static final String SERIALIZED_NAME_RETURN_STATUS = "return_status";
   @SerializedName(SERIALIZED_NAME_RETURN_STATUS)
   @javax.annotation.Nullable
-  private ReturnStatusEnum returnStatus;
+  private String returnStatus;
 
   public static final String SERIALIZED_NAME_RETURN_ID = "return_id";
   @SerializedName(SERIALIZED_NAME_RETURN_ID)
@@ -289,7 +107,7 @@ public class ReturnStatusChangeWebhookData {
   }
 
 
-  public ReturnStatusChangeWebhookData returnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public ReturnStatusChangeWebhookData returnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
     return this;
   }
@@ -299,16 +117,16 @@ public class ReturnStatusChangeWebhookData {
    * @return returnRole
    */
   @javax.annotation.Nullable
-  public ReturnRoleEnum getReturnRole() {
+  public String getReturnRole() {
     return returnRole;
   }
 
-  public void setReturnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public void setReturnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
   }
 
 
-  public ReturnStatusChangeWebhookData returnType(@javax.annotation.Nullable ReturnTypeEnum returnType) {
+  public ReturnStatusChangeWebhookData returnType(@javax.annotation.Nullable String returnType) {
     this.returnType = returnType;
     return this;
   }
@@ -318,16 +136,16 @@ public class ReturnStatusChangeWebhookData {
    * @return returnType
    */
   @javax.annotation.Nullable
-  public ReturnTypeEnum getReturnType() {
+  public String getReturnType() {
     return returnType;
   }
 
-  public void setReturnType(@javax.annotation.Nullable ReturnTypeEnum returnType) {
+  public void setReturnType(@javax.annotation.Nullable String returnType) {
     this.returnType = returnType;
   }
 
 
-  public ReturnStatusChangeWebhookData returnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public ReturnStatusChangeWebhookData returnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
     return this;
   }
@@ -337,11 +155,11 @@ public class ReturnStatusChangeWebhookData {
    * @return returnStatus
    */
   @javax.annotation.Nullable
-  public ReturnStatusEnum getReturnStatus() {
+  public String getReturnStatus() {
     return returnStatus;
   }
 
-  public void setReturnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public void setReturnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
   }
 
@@ -527,23 +345,11 @@ public class ReturnStatusChangeWebhookData {
       if ((jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) && !jsonObj.get("return_role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_role").toString()));
       }
-      // validate the optional field `return_role`
-      if (jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) {
-        ReturnRoleEnum.validateJsonElement(jsonObj.get("return_role"));
-      }
       if ((jsonObj.get("return_type") != null && !jsonObj.get("return_type").isJsonNull()) && !jsonObj.get("return_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_type").toString()));
       }
-      // validate the optional field `return_type`
-      if (jsonObj.get("return_type") != null && !jsonObj.get("return_type").isJsonNull()) {
-        ReturnTypeEnum.validateJsonElement(jsonObj.get("return_type"));
-      }
       if ((jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) && !jsonObj.get("return_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_status").toString()));
-      }
-      // validate the optional field `return_status`
-      if (jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) {
-        ReturnStatusEnum.validateJsonElement(jsonObj.get("return_status"));
       }
       if ((jsonObj.get("return_id") != null && !jsonObj.get("return_id").isJsonNull()) && !jsonObj.get("return_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_id").toString()));

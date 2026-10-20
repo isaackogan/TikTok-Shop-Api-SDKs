@@ -58,68 +58,10 @@ public class GetActivityResponseDataDiscountGiftDiscountGiftInfo {
   @javax.annotation.Nullable
   private Long tier;
 
-  /**
-   * purchase threshold type of discount. Possible enumerations are: - &#x60;MINIMAL_ITEM_QUANTITY&#x60;: Buyer must meet or exceed the minimum spend criteria with eligible products. - &#x60;MINIMAL_ORDER_AMOUNT&#x60;: Buyer must meet or exceed the minimum spend criteria with eligible order.
-   */
-  @JsonAdapter(ThresholdTypeEnum.Adapter.class)
-  public enum ThresholdTypeEnum {
-    /**
-     * Buyer must meet or exceed the minimum spend criteria with eligible products.
-     */
-    MINIMAL_ITEM_QUANTITY("MINIMAL_ITEM_QUANTITY"),
-    
-    /**
-     * Buyer must meet or exceed the minimum spend criteria with eligible order.
-     */
-    MINIMAL_ORDER_AMOUNT("MINIMAL_ORDER_AMOUNT");
-
-    private String value;
-
-    ThresholdTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ThresholdTypeEnum fromValue(String value) {
-      for (ThresholdTypeEnum b : ThresholdTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ThresholdTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ThresholdTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ThresholdTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ThresholdTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ThresholdTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_THRESHOLD_TYPE = "threshold_type";
   @SerializedName(SERIALIZED_NAME_THRESHOLD_TYPE)
   @javax.annotation.Nullable
-  private ThresholdTypeEnum thresholdType;
+  private String thresholdType;
 
   public static final String SERIALIZED_NAME_THRESHOLD_VALUE = "threshold_value";
   @SerializedName(SERIALIZED_NAME_THRESHOLD_VALUE)
@@ -153,7 +95,7 @@ public class GetActivityResponseDataDiscountGiftDiscountGiftInfo {
   }
 
 
-  public GetActivityResponseDataDiscountGiftDiscountGiftInfo thresholdType(@javax.annotation.Nullable ThresholdTypeEnum thresholdType) {
+  public GetActivityResponseDataDiscountGiftDiscountGiftInfo thresholdType(@javax.annotation.Nullable String thresholdType) {
     this.thresholdType = thresholdType;
     return this;
   }
@@ -163,11 +105,11 @@ public class GetActivityResponseDataDiscountGiftDiscountGiftInfo {
    * @return thresholdType
    */
   @javax.annotation.Nullable
-  public ThresholdTypeEnum getThresholdType() {
+  public String getThresholdType() {
     return thresholdType;
   }
 
-  public void setThresholdType(@javax.annotation.Nullable ThresholdTypeEnum thresholdType) {
+  public void setThresholdType(@javax.annotation.Nullable String thresholdType) {
     this.thresholdType = thresholdType;
   }
 
@@ -332,10 +274,6 @@ public class GetActivityResponseDataDiscountGiftDiscountGiftInfo {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("threshold_type") != null && !jsonObj.get("threshold_type").isJsonNull()) && !jsonObj.get("threshold_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `threshold_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("threshold_type").toString()));
-      }
-      // validate the optional field `threshold_type`
-      if (jsonObj.get("threshold_type") != null && !jsonObj.get("threshold_type").isJsonNull()) {
-        ThresholdTypeEnum.validateJsonElement(jsonObj.get("threshold_type"));
       }
       if ((jsonObj.get("threshold_value") != null && !jsonObj.get("threshold_value").isJsonNull()) && !jsonObj.get("threshold_value").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `threshold_value` to be a primitive type in the JSON string but got `%s`", jsonObj.get("threshold_value").toString()));

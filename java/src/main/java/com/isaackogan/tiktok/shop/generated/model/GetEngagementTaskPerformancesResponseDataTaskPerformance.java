@@ -55,98 +55,10 @@ public class GetEngagementTaskPerformancesResponseDataTaskPerformance {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The status of the task. Possible values: - &#x60;UNKNOWN&#x60;: The task status is unknown. - &#x60;DRAFT&#x60;: The task is in draft status. - &#x60;WAITING&#x60;: The task is waiting. - &#x60;SENDING&#x60;: The task is sending messages. - &#x60;FAILED&#x60;: The task failed to send messages. - &#x60;CANCELED&#x60;: The task was canceled. - &#x60;SUCCESS&#x60;: The task completed successfully. - &#x60;DELETED&#x60;: The task was deleted.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The task status is unknown.
-     */
-    UNKNOWN("UNKNOWN"),
-    
-    /**
-     * The task is in draft status.
-     */
-    DRAFT("DRAFT"),
-    
-    /**
-     * The task is waiting.
-     */
-    WAITING("WAITING"),
-    
-    /**
-     * The task is sending messages.
-     */
-    SENDING("SENDING"),
-    
-    /**
-     * The task failed to send messages.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * The task was canceled.
-     */
-    CANCELED("CANCELED"),
-    
-    /**
-     * The task completed successfully.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * The task was deleted.
-     */
-    DELETED("DELETED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_SENT_RECIPIENT_COUNT = "sent_recipient_count";
   @SerializedName(SERIALIZED_NAME_SENT_RECIPIENT_COUNT)
@@ -195,7 +107,7 @@ public class GetEngagementTaskPerformancesResponseDataTaskPerformance {
   }
 
 
-  public GetEngagementTaskPerformancesResponseDataTaskPerformance status(@javax.annotation.Nullable StatusEnum status) {
+  public GetEngagementTaskPerformancesResponseDataTaskPerformance status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -205,11 +117,11 @@ public class GetEngagementTaskPerformancesResponseDataTaskPerformance {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -432,10 +344,6 @@ public class GetEngagementTaskPerformancesResponseDataTaskPerformance {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if ((jsonObj.get("gmv_amount") != null && !jsonObj.get("gmv_amount").isJsonNull()) && !jsonObj.get("gmv_amount").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `gmv_amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("gmv_amount").toString()));

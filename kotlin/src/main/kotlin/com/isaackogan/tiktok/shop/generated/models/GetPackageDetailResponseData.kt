@@ -78,11 +78,11 @@ data class GetPackageDetailResponseData (
 
     /* Possible values: - `TO_FULFILL`：Waiting for the merchant or warehouse to ship the package. - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel. - `FULFILLING`: Package has been collected by carrier and in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged. */
     @SerializedName("package_status")
-    val packageStatus: GetPackageDetailResponseData.PackageStatus? = null,
+    val packageStatus: kotlin.String? = null,
 
     /* Package sub-status. Possible values: - `CREATED`: The package has been created. - `ISSUE`: Package allocation failed; contact platform support. - `STOCKING`: Platform verification is complete and the package is waiting for the seller to ship it. - `RTSING`: The shipping label is being purchased and the carrier result is pending. - `HBW`: For FBT orders only; the package has been created in the warehouse. - `HBWING`: For FBT orders only; the package is being created in the warehouse. - `TSP_PENDING`: Authorization for third-party service-provider fulfillment is pending. - `RTS`: The shipping label has been purchased and the seller can print it. - `TTS`: The carrier has picked up the package. - `DELIVERED`: The package has been delivered to the buyer. - `SHIP_EXCEPTION`: The package cannot be delivered, for example because it is damaged or lost. See `ship_exception_reason` for the detailed reason. - `PART_DELIVERED_AND_EXCEPTION`: Part of the package delivery completed and another part encountered a shipping exception. - `CANCELLED`: The package has been canceled. */
     @SerializedName("package_sub_status")
-    val packageSubStatus: GetPackageDetailResponseData.PackageSubStatus? = null,
+    val packageSubStatus: kotlin.String? = null,
 
     /* -PACKAGE_DAMAGAED -PACKAGE_LOST -RETURNED_TO_SHIPPER -PACKAGE_SCRAP */
     @SerializedName("ship_exception_reason")
@@ -90,7 +90,7 @@ data class GetPackageDetailResponseData (
 
     /* Possible values: - `DEFAULT`: The package has not undergone any combine or split operation. - `COMBINE`: The package has been consolidated with another order. - `SPLIT`: The order has been split into multiple orders. */
     @SerializedName("split_and_combine_tag")
-    val splitAndCombineTag: GetPackageDetailResponseData.SplitAndCombineTag? = null,
+    val splitAndCombineTag: kotlin.String? = null,
 
     /* Whether there are multiple SKU IDs in a package. */
     @SerializedName("has_multi_skus")
@@ -98,7 +98,7 @@ data class GetPackageDetailResponseData (
 
     /* Possible values: - `BUYER_UNNOTED`: The order has not been noted by buyer. - `BUYER_NOTED`: The order has been noted by buyer. */
     @SerializedName("note_tag")
-    val noteTag: GetPackageDetailResponseData.NoteTag? = null,
+    val noteTag: kotlin.String? = null,
 
     /* Package shipping provider name. */
     @SerializedName("shipping_provider_name")
@@ -110,7 +110,7 @@ data class GetPackageDetailResponseData (
 
     /* Indicates who provides the shipping service. Possible values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok. - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the seller's behalf. */
     @SerializedName("shipping_type")
-    val shippingType: GetPackageDetailResponseData.ShippingType? = null,
+    val shippingType: kotlin.String? = null,
 
     /* Delivery option name. For display purposes only. */
     @SerializedName("delivery_option_name")
@@ -138,7 +138,7 @@ data class GetPackageDetailResponseData (
 
     /* Whether the package is delivered by pick up or drop off. Possible values: - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address. - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location. */
     @SerializedName("handover_method")
-    val handoverMethod: GetPackageDetailResponseData.HandoverMethod? = null,
+    val handoverMethod: kotlin.String? = null,
 
     /* The order line item ID contained in the package. */
     @SerializedName("order_line_item_ids")
@@ -178,75 +178,6 @@ data class GetPackageDetailResponseData (
 
 ) {
 
-    /**
-     * Possible values: - `TO_FULFILL`：Waiting for the merchant or warehouse to ship the package. - `PROCESSING`: Package has been arranged by seller. Waiting for carrier to collect the parcel. - `FULFILLING`: Package has been collected by carrier and in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     *
-     * Values: TO_FULFILL,PROCESSING,FULFILLING,COMPLETED,CANCELLED
-     */
-    enum class PackageStatus(val value: kotlin.String) {
-        @SerializedName(value = "TO_FULFILL") TO_FULFILL("TO_FULFILL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "FULFILLING") FULFILLING("FULFILLING"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * Package sub-status. Possible values: - `CREATED`: The package has been created. - `ISSUE`: Package allocation failed; contact platform support. - `STOCKING`: Platform verification is complete and the package is waiting for the seller to ship it. - `RTSING`: The shipping label is being purchased and the carrier result is pending. - `HBW`: For FBT orders only; the package has been created in the warehouse. - `HBWING`: For FBT orders only; the package is being created in the warehouse. - `TSP_PENDING`: Authorization for third-party service-provider fulfillment is pending. - `RTS`: The shipping label has been purchased and the seller can print it. - `TTS`: The carrier has picked up the package. - `DELIVERED`: The package has been delivered to the buyer. - `SHIP_EXCEPTION`: The package cannot be delivered, for example because it is damaged or lost. See `ship_exception_reason` for the detailed reason. - `PART_DELIVERED_AND_EXCEPTION`: Part of the package delivery completed and another part encountered a shipping exception. - `CANCELLED`: The package has been canceled.
-     *
-     * Values: CREATED,ISSUE,STOCKING,RTSING,HBW,HBWING,TSP_PENDING,RTS,TTS,DELIVERED,SHIP_EXCEPTION,PART_DELIVERED_AND_EXCEPTION,CANCELLED
-     */
-    enum class PackageSubStatus(val value: kotlin.String) {
-        @SerializedName(value = "CREATED") CREATED("CREATED"),
-        @SerializedName(value = "ISSUE") ISSUE("ISSUE"),
-        @SerializedName(value = "STOCKING") STOCKING("STOCKING"),
-        @SerializedName(value = "RTSING") RTSING("RTSING"),
-        @SerializedName(value = "HBW") HBW("HBW"),
-        @SerializedName(value = "HBWING") HBWING("HBWING"),
-        @SerializedName(value = "TSP_PENDING") TSP_PENDING("TSP_PENDING"),
-        @SerializedName(value = "RTS") RTS("RTS"),
-        @SerializedName(value = "TTS") TTS("TTS"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED"),
-        @SerializedName(value = "SHIP_EXCEPTION") SHIP_EXCEPTION("SHIP_EXCEPTION"),
-        @SerializedName(value = "PART_DELIVERED_AND_EXCEPTION") PART_DELIVERED_AND_EXCEPTION("PART_DELIVERED_AND_EXCEPTION"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * Possible values: - `DEFAULT`: The package has not undergone any combine or split operation. - `COMBINE`: The package has been consolidated with another order. - `SPLIT`: The order has been split into multiple orders.
-     *
-     * Values: DEFAULT,COMBINE,SPLIT
-     */
-    enum class SplitAndCombineTag(val value: kotlin.String) {
-        @SerializedName(value = "DEFAULT") DEFAULT("DEFAULT"),
-        @SerializedName(value = "COMBINE") COMBINE("COMBINE"),
-        @SerializedName(value = "SPLIT") SPLIT("SPLIT");
-    }
-    /**
-     * Possible values: - `BUYER_UNNOTED`: The order has not been noted by buyer. - `BUYER_NOTED`: The order has been noted by buyer.
-     *
-     * Values: BUYER_UNNOTED,BUYER_NOTED
-     */
-    enum class NoteTag(val value: kotlin.String) {
-        @SerializedName(value = "BUYER_UNNOTED") BUYER_UNNOTED("BUYER_UNNOTED"),
-        @SerializedName(value = "BUYER_NOTED") BUYER_NOTED("BUYER_NOTED");
-    }
-    /**
-     * Indicates who provides the shipping service. Possible values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok. - `SELLER`: Seller provides shipping, including through a third-party fulfillment provider acting on the seller's behalf.
-     *
-     * Values: TIKTOK,SELLER
-     */
-    enum class ShippingType(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK") TIKTOK("TIKTOK"),
-        @SerializedName(value = "SELLER") SELLER("SELLER");
-    }
-    /**
-     * Whether the package is delivered by pick up or drop off. Possible values: - `PICKUP`: A Logistics carrier will pickup the package(s) from the seller's pickup address. - `DROP_OFF`: Seller will need to drop off the package(s) to a designated location.
-     *
-     * Values: PICKUP,DROP_OFF
-     */
-    enum class HandoverMethod(val value: kotlin.String) {
-        @SerializedName(value = "PICKUP") PICKUP("PICKUP"),
-        @SerializedName(value = "DROP_OFF") DROP_OFF("DROP_OFF");
-    }
 
 }
 

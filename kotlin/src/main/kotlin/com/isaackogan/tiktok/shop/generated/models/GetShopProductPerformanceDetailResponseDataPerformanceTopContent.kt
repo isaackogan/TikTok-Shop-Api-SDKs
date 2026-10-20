@@ -39,7 +39,7 @@ data class GetShopProductPerformanceDetailResponseDataPerformanceTopContent (
 
     /* Top content type. Possible values: - LIVE: Live stream content. - VIDEO: Video content. */
     @SerializedName("type")
-    val type: GetShopProductPerformanceDetailResponseDataPerformanceTopContent.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Content details */
     @SerializedName("contents")
@@ -47,15 +47,6 @@ data class GetShopProductPerformanceDetailResponseDataPerformanceTopContent (
 
 ) {
 
-    /**
-     * Top content type. Possible values: - LIVE: Live stream content. - VIDEO: Video content.
-     *
-     * Values: LIVE,VIDEO
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO");
-    }
 
 }
 

@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_category_rules_response_data_allowed_special_product_types_item import (
-    GetCategoryRulesResponseDataAllowedSpecialProductTypesItem,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -48,8 +45,8 @@ class GetCategoryRulesResponseData:
         epr (GetCategoryRulesResponseDataEpr | Unset):
         responsible_person (GetCategoryRulesResponseDataResponsiblePerson | Unset):
         manufacturer (GetCategoryRulesResponseDataManufacturer | Unset):
-        allowed_special_product_types (list[GetCategoryRulesResponseDataAllowedSpecialProductTypesItem] | Unset): The
-            list of special product types, excluding regular products, that your shop is allowed to list in this category.
+        allowed_special_product_types (list[str] | Unset): The list of special product types, excluding regular
+            products, that your shop is allowed to list in this category.
 
             Possible values based on the region:
             **US**
@@ -77,7 +74,7 @@ class GetCategoryRulesResponseData:
     epr: GetCategoryRulesResponseDataEpr | Unset = UNSET
     responsible_person: GetCategoryRulesResponseDataResponsiblePerson | Unset = UNSET
     manufacturer: GetCategoryRulesResponseDataManufacturer | Unset = UNSET
-    allowed_special_product_types: list[GetCategoryRulesResponseDataAllowedSpecialProductTypesItem] | Unset = UNSET
+    allowed_special_product_types: list[str] | Unset = UNSET
     fees: list[GetCategoryRulesResponseDataFee] | Unset = UNSET
     seller_sku: GetCategoryRulesResponseDataSellerSku | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -116,10 +113,7 @@ class GetCategoryRulesResponseData:
 
         allowed_special_product_types: list[str] | Unset = UNSET
         if not isinstance(self.allowed_special_product_types, Unset):
-            allowed_special_product_types = []
-            for allowed_special_product_types_item_data in self.allowed_special_product_types:
-                allowed_special_product_types_item = allowed_special_product_types_item_data.value
-                allowed_special_product_types.append(allowed_special_product_types_item)
+            allowed_special_product_types = self.allowed_special_product_types
 
         fees: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.fees, Unset):
@@ -236,16 +230,7 @@ class GetCategoryRulesResponseData:
         else:
             manufacturer = GetCategoryRulesResponseDataManufacturer.from_dict(_manufacturer)
 
-        _allowed_special_product_types = d.pop("allowed_special_product_types", UNSET)
-        allowed_special_product_types: list[GetCategoryRulesResponseDataAllowedSpecialProductTypesItem] | Unset = UNSET
-        if _allowed_special_product_types is not UNSET:
-            allowed_special_product_types = []
-            for allowed_special_product_types_item_data in _allowed_special_product_types:
-                allowed_special_product_types_item = GetCategoryRulesResponseDataAllowedSpecialProductTypesItem(
-                    allowed_special_product_types_item_data
-                )
-
-                allowed_special_product_types.append(allowed_special_product_types_item)
+        allowed_special_product_types = cast(list[str], d.pop("allowed_special_product_types", UNSET))
 
         _fees = d.pop("fees", UNSET)
         fees: list[GetCategoryRulesResponseDataFee] | Unset = UNSET

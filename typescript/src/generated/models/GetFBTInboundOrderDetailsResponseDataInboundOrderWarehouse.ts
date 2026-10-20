@@ -43,22 +43,11 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse {
      * Possible values:
      * * `HUB`
      * * `FC` (Fulfillment Center)
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse
      */
-    type?: GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum = {
-    Hub: 'HUB',
-    Fc: 'FC'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouseTypeEnum];
-
 
 /**
  * Check if a given object implements the GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse interface.

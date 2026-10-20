@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.creator_search_sample_application_fulfillments_response_data_fulfillment_bound_product_status import (
-    CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatus,
-)
-from ..models.creator_search_sample_application_fulfillments_response_data_fulfillment_sample_application_type import (
-    CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment")
@@ -24,8 +18,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
         id (str | Unset): The fulfillment identifier.
         shop_id (str | Unset): The TikTok Shop identifier.
         application_id (str | Unset): The sample application identifier.
-        sample_application_type (CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationType
-            | Unset): The type of the sample application. Possible values:
+        sample_application_type (str | Unset): The type of the sample application. Possible values:
             - FREE_SAMPLE
             - SAMPLE_COUPON
             - SAMPLE_CAMPAIGN
@@ -46,8 +39,8 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
             suspended.
             - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons.
             - EXEMPTED: The creator is exempt from the fulfillment obligation.
-        bound_product_status (CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatus |
-            Unset): The promotion status of the product associated with the fulfillment. Possible values:
+        bound_product_status (str | Unset): The promotion status of the product associated with the fulfillment.
+            Possible values:
             - UNKNOWN: The product's promotion status is unknown.
             - LIVE: The product is available for promotion.
             - OUT_OF_STOCK: The product is out of stock.
@@ -60,16 +53,12 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
     id: str | Unset = UNSET
     shop_id: str | Unset = UNSET
     application_id: str | Unset = UNSET
-    sample_application_type: (
-        CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationType | Unset
-    ) = UNSET
+    sample_application_type: str | Unset = UNSET
     product_id: str | Unset = UNSET
     expiration_time: int | Unset = UNSET
     total_suspend_duration: int | Unset = UNSET
     status: str | Unset = UNSET
-    bound_product_status: (
-        CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatus | Unset
-    ) = UNSET
+    bound_product_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -79,9 +68,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
 
         application_id = self.application_id
 
-        sample_application_type: str | Unset = UNSET
-        if not isinstance(self.sample_application_type, Unset):
-            sample_application_type = self.sample_application_type.value
+        sample_application_type = self.sample_application_type
 
         product_id = self.product_id
 
@@ -91,9 +78,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
 
         status = self.status
 
-        bound_product_status: str | Unset = UNSET
-        if not isinstance(self.bound_product_status, Unset):
-            bound_product_status = self.bound_product_status.value
+        bound_product_status = self.bound_product_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -128,18 +113,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
 
         application_id = d.pop("application_id", UNSET)
 
-        _sample_application_type = d.pop("sample_application_type", UNSET)
-        sample_application_type: (
-            CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationType | Unset
-        )
-        if isinstance(_sample_application_type, Unset):
-            sample_application_type = UNSET
-        else:
-            sample_application_type = (
-                CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentSampleApplicationType(
-                    _sample_application_type
-                )
-            )
+        sample_application_type = d.pop("sample_application_type", UNSET)
 
         product_id = d.pop("product_id", UNSET)
 
@@ -149,16 +123,7 @@ class CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillment:
 
         status = d.pop("status", UNSET)
 
-        _bound_product_status = d.pop("bound_product_status", UNSET)
-        bound_product_status: (
-            CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatus | Unset
-        )
-        if isinstance(_bound_product_status, Unset):
-            bound_product_status = UNSET
-        else:
-            bound_product_status = CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentBoundProductStatus(
-                _bound_product_status
-            )
+        bound_product_status = d.pop("bound_product_status", UNSET)
 
         creator_search_sample_application_fulfillments_response_data_fulfillment = cls(
             id=id,

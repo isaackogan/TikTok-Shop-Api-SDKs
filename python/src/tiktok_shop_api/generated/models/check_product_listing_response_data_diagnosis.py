@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.check_product_listing_response_data_diagnosis_field import CheckProductListingResponseDataDiagnosisField
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -23,7 +22,7 @@ T = TypeVar("T", bound="CheckProductListingResponseDataDiagnosis")
 class CheckProductListingResponseDataDiagnosis:
     """
     Attributes:
-        field (CheckProductListingResponseDataDiagnosisField | Unset): The product field being diagnosed.
+        field (str | Unset): The product field being diagnosed.
             Possible values:
             - TITLE: Product title
             - DESCRIPTION: Product description
@@ -34,15 +33,13 @@ class CheckProductListingResponseDataDiagnosis:
         suggestions (CheckProductListingResponseDataDiagnosisSuggestion | Unset):
     """
 
-    field: CheckProductListingResponseDataDiagnosisField | Unset = UNSET
+    field: str | Unset = UNSET
     diagnosis_results: list[DiagnosisResult] | Unset = UNSET
     suggestions: CheckProductListingResponseDataDiagnosisSuggestion | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        field: str | Unset = UNSET
-        if not isinstance(self.field, Unset):
-            field = self.field.value
+        field = self.field
 
         diagnosis_results: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.diagnosis_results, Unset):
@@ -75,12 +72,7 @@ class CheckProductListingResponseDataDiagnosis:
         from ..models.diagnosis_result import DiagnosisResult  # noqa: PLC0415
 
         d = dict(src_dict)
-        _field = d.pop("field", UNSET)
-        field: CheckProductListingResponseDataDiagnosisField | Unset
-        if isinstance(_field, Unset):
-            field = UNSET
-        else:
-            field = CheckProductListingResponseDataDiagnosisField(_field)
+        field = d.pop("field", UNSET)
 
         _diagnosis_results = d.pop("diagnosis_results", UNSET)
         diagnosis_results: list[DiagnosisResult] | Unset = UNSET

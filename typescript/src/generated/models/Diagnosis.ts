@@ -42,10 +42,10 @@ export interface Diagnosis {
      * - IMAGE: Product image displayed in the image gallery
      * - ATTRIBUTE: Product attribute
      * - SIZE_CHART: Product size chart
-     * @type {DiagnosisFieldEnum}
+     * @type {string}
      * @memberof Diagnosis
      */
-    field?: DiagnosisFieldEnum;
+    field?: string;
     /**
      * The results of diagnosing the specified field.
      * @type {Array<DiagnosisResult>}
@@ -61,20 +61,6 @@ export interface Diagnosis {
      */
     suggestion?: Suggestion;
 }
-
-
-/**
- * @export
- */
-export const DiagnosisFieldEnum = {
-    Title: 'TITLE',
-    Description: 'DESCRIPTION',
-    Image: 'IMAGE',
-    Attribute: 'ATTRIBUTE',
-    SizeChart: 'SIZE_CHART'
-} as const;
-export type DiagnosisFieldEnum = typeof DiagnosisFieldEnum[keyof typeof DiagnosisFieldEnum];
-
 
 /**
  * Check if a given object implements the Diagnosis interface.

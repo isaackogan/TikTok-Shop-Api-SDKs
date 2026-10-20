@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_transactions_by_statement_response_data_transaction_reserve_status import (
-    GetTransactionsByStatementResponseDataTransactionReserveStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -122,8 +119,7 @@ class GetTransactionsByStatementResponseDataTransaction:
             - A positive amount indicates funds that have been released.
             - A negative amount indicates funds being withheld from the settlement.
         associated_order_id (str | Unset): The order ID associated with the reserve transaction.
-        reserve_status (GetTransactionsByStatementResponseDataTransactionReserveStatus | Unset): The status of the
-            reserve funds.
+        reserve_status (str | Unset): The status of the reserve funds.
             Possible values:
             - COLLECTED: A portion of the order's settlement amount has been withheld as reserve funds.
             - RELEASED: The previously reserved funds have been released and paid out to the seller.
@@ -150,7 +146,7 @@ class GetTransactionsByStatementResponseDataTransaction:
     reserve_id: str | Unset = UNSET
     reserve_amount: str | Unset = UNSET
     associated_order_id: str | Unset = UNSET
-    reserve_status: GetTransactionsByStatementResponseDataTransactionReserveStatus | Unset = UNSET
+    reserve_status: str | Unset = UNSET
     estimated_release_time: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -199,9 +195,7 @@ class GetTransactionsByStatementResponseDataTransaction:
 
         associated_order_id = self.associated_order_id
 
-        reserve_status: str | Unset = UNSET
-        if not isinstance(self.reserve_status, Unset):
-            reserve_status = self.reserve_status.value
+        reserve_status = self.reserve_status
 
         estimated_release_time = self.estimated_release_time
 
@@ -331,12 +325,7 @@ class GetTransactionsByStatementResponseDataTransaction:
 
         associated_order_id = d.pop("associated_order_id", UNSET)
 
-        _reserve_status = d.pop("reserve_status", UNSET)
-        reserve_status: GetTransactionsByStatementResponseDataTransactionReserveStatus | Unset
-        if isinstance(_reserve_status, Unset):
-            reserve_status = UNSET
-        else:
-            reserve_status = GetTransactionsByStatementResponseDataTransactionReserveStatus(_reserve_status)
+        reserve_status = d.pop("reserve_status", UNSET)
 
         estimated_release_time = d.pop("estimated_release_time", UNSET)
 

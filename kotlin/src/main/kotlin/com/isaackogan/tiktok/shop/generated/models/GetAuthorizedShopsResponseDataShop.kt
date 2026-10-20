@@ -54,7 +54,7 @@ data class GetAuthorizedShopsResponseDataShop (
 
     /* The type of seller. Possible values: - CROSS_BORDER: Cross border sellers with multiple shops in different countries. - LOCAL: Local sellers with only 1 shop. */
     @SerializedName("seller_type")
-    val sellerType: GetAuthorizedShopsResponseDataShop.SellerType? = null,
+    val sellerType: kotlin.String? = null,
 
     /* An encrypted token used to securely identify a shop in API requests. There is no need for decryption on the receiving end. */
     @SerializedName("cipher")
@@ -66,15 +66,6 @@ data class GetAuthorizedShopsResponseDataShop (
 
 ) {
 
-    /**
-     * The type of seller. Possible values: - CROSS_BORDER: Cross border sellers with multiple shops in different countries. - LOCAL: Local sellers with only 1 shop.
-     *
-     * Values: CROSS_BORDER,LOCAL
-     */
-    enum class SellerType(val value: kotlin.String) {
-        @SerializedName(value = "CROSS_BORDER") CROSS_BORDER("CROSS_BORDER"),
-        @SerializedName(value = "LOCAL") LOCAL("LOCAL");
-    }
 
 }
 

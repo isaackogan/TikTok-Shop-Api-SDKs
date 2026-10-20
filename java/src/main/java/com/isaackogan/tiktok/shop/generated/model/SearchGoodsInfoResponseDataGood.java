@@ -116,131 +116,15 @@ public class SearchGoodsInfoResponseDataGood {
   @javax.annotation.Nullable
   private SearchGoodsInfoResponseDataGoodHazmatInfo hazmatInfo;
 
-  /**
-   * SIOC-specific approval status. This field is returned when &#x60;is_sioc&#x60; is &#x60;true&#x60; and an SIOC approval status is available. Possible values: - SIOC_APPROVAL_STATUS_INVALID - SIOC_APPROVAL_STATUS_INIT - SIOC_APPROVAL_STATUS_UNDER_REVIEW - SIOC_APPROVAL_STATUS_APPROVE - SIOC_APPROVAL_STATUS_REJECT
-   */
-  @JsonAdapter(SiocApprovalStatusEnum.Adapter.class)
-  public enum SiocApprovalStatusEnum {
-    SIOC_APPROVAL_STATUS_INVALID("SIOC_APPROVAL_STATUS_INVALID"),
-    
-    SIOC_APPROVAL_STATUS_INIT("SIOC_APPROVAL_STATUS_INIT"),
-    
-    SIOC_APPROVAL_STATUS_UNDER_REVIEW("SIOC_APPROVAL_STATUS_UNDER_REVIEW"),
-    
-    SIOC_APPROVAL_STATUS_APPROVE("SIOC_APPROVAL_STATUS_APPROVE"),
-    
-    SIOC_APPROVAL_STATUS_REJECT("SIOC_APPROVAL_STATUS_REJECT");
-
-    private String value;
-
-    SiocApprovalStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SiocApprovalStatusEnum fromValue(String value) {
-      for (SiocApprovalStatusEnum b : SiocApprovalStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SiocApprovalStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SiocApprovalStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SiocApprovalStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SiocApprovalStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SiocApprovalStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SIOC_APPROVAL_STATUS = "sioc_approval_status";
   @SerializedName(SERIALIZED_NAME_SIOC_APPROVAL_STATUS)
   @javax.annotation.Nullable
-  private SiocApprovalStatusEnum siocApprovalStatus;
-
-  /**
-   * FBT fulfillment approval status. This field is returned for goods that are hazardous materials or managed as Ships in Own Container (SIOC). Possible values: - APPROVAL_STATUS_INVALID - APPROVAL_STATUS_INIT - APPROVAL_STATUS_UNDER_REVIEW - APPROVAL_STATUS_FULFILLABLE - APPROVAL_STATUS_UNFULFILLABLE
-   */
-  @JsonAdapter(HazmatApprovalStatusEnum.Adapter.class)
-  public enum HazmatApprovalStatusEnum {
-    APPROVAL_STATUS_INVALID("APPROVAL_STATUS_INVALID"),
-    
-    APPROVAL_STATUS_INIT("APPROVAL_STATUS_INIT"),
-    
-    APPROVAL_STATUS_UNDER_REVIEW("APPROVAL_STATUS_UNDER_REVIEW"),
-    
-    APPROVAL_STATUS_FULFILLABLE("APPROVAL_STATUS_FULFILLABLE"),
-    
-    APPROVAL_STATUS_UNFULFILLABLE("APPROVAL_STATUS_UNFULFILLABLE");
-
-    private String value;
-
-    HazmatApprovalStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static HazmatApprovalStatusEnum fromValue(String value) {
-      for (HazmatApprovalStatusEnum b : HazmatApprovalStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<HazmatApprovalStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final HazmatApprovalStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public HazmatApprovalStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return HazmatApprovalStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      HazmatApprovalStatusEnum.fromValue(value);
-    }
-  }
+  private String siocApprovalStatus;
 
   public static final String SERIALIZED_NAME_HAZMAT_APPROVAL_STATUS = "hazmat_approval_status";
   @SerializedName(SERIALIZED_NAME_HAZMAT_APPROVAL_STATUS)
   @javax.annotation.Nullable
-  private HazmatApprovalStatusEnum hazmatApprovalStatus;
+  private String hazmatApprovalStatus;
 
   public static final String SERIALIZED_NAME_BULKY_ITEM_ATTRIBUTE = "bulky_item_attribute";
   @SerializedName(SERIALIZED_NAME_BULKY_ITEM_ATTRIBUTE)
@@ -490,7 +374,7 @@ public class SearchGoodsInfoResponseDataGood {
   }
 
 
-  public SearchGoodsInfoResponseDataGood siocApprovalStatus(@javax.annotation.Nullable SiocApprovalStatusEnum siocApprovalStatus) {
+  public SearchGoodsInfoResponseDataGood siocApprovalStatus(@javax.annotation.Nullable String siocApprovalStatus) {
     this.siocApprovalStatus = siocApprovalStatus;
     return this;
   }
@@ -500,16 +384,16 @@ public class SearchGoodsInfoResponseDataGood {
    * @return siocApprovalStatus
    */
   @javax.annotation.Nullable
-  public SiocApprovalStatusEnum getSiocApprovalStatus() {
+  public String getSiocApprovalStatus() {
     return siocApprovalStatus;
   }
 
-  public void setSiocApprovalStatus(@javax.annotation.Nullable SiocApprovalStatusEnum siocApprovalStatus) {
+  public void setSiocApprovalStatus(@javax.annotation.Nullable String siocApprovalStatus) {
     this.siocApprovalStatus = siocApprovalStatus;
   }
 
 
-  public SearchGoodsInfoResponseDataGood hazmatApprovalStatus(@javax.annotation.Nullable HazmatApprovalStatusEnum hazmatApprovalStatus) {
+  public SearchGoodsInfoResponseDataGood hazmatApprovalStatus(@javax.annotation.Nullable String hazmatApprovalStatus) {
     this.hazmatApprovalStatus = hazmatApprovalStatus;
     return this;
   }
@@ -519,11 +403,11 @@ public class SearchGoodsInfoResponseDataGood {
    * @return hazmatApprovalStatus
    */
   @javax.annotation.Nullable
-  public HazmatApprovalStatusEnum getHazmatApprovalStatus() {
+  public String getHazmatApprovalStatus() {
     return hazmatApprovalStatus;
   }
 
-  public void setHazmatApprovalStatus(@javax.annotation.Nullable HazmatApprovalStatusEnum hazmatApprovalStatus) {
+  public void setHazmatApprovalStatus(@javax.annotation.Nullable String hazmatApprovalStatus) {
     this.hazmatApprovalStatus = hazmatApprovalStatus;
   }
 
@@ -801,16 +685,8 @@ public class SearchGoodsInfoResponseDataGood {
       if ((jsonObj.get("sioc_approval_status") != null && !jsonObj.get("sioc_approval_status").isJsonNull()) && !jsonObj.get("sioc_approval_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sioc_approval_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sioc_approval_status").toString()));
       }
-      // validate the optional field `sioc_approval_status`
-      if (jsonObj.get("sioc_approval_status") != null && !jsonObj.get("sioc_approval_status").isJsonNull()) {
-        SiocApprovalStatusEnum.validateJsonElement(jsonObj.get("sioc_approval_status"));
-      }
       if ((jsonObj.get("hazmat_approval_status") != null && !jsonObj.get("hazmat_approval_status").isJsonNull()) && !jsonObj.get("hazmat_approval_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `hazmat_approval_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("hazmat_approval_status").toString()));
-      }
-      // validate the optional field `hazmat_approval_status`
-      if (jsonObj.get("hazmat_approval_status") != null && !jsonObj.get("hazmat_approval_status").isJsonNull()) {
-        HazmatApprovalStatusEnum.validateJsonElement(jsonObj.get("hazmat_approval_status"));
       }
       // validate the optional field `bulky_item_attribute`
       if (jsonObj.get("bulky_item_attribute") != null && !jsonObj.get("bulky_item_attribute").isJsonNull()) {

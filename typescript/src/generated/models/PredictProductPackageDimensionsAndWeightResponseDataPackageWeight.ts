@@ -26,10 +26,10 @@ export interface PredictProductPackageDimensionsAndWeightResponseDataPackageWeig
      * - `POUND`
      * - `OUNCE`
      * - `KILOGRAM`
-     * @type {PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum}
+     * @type {string}
      * @memberof PredictProductPackageDimensionsAndWeightResponseDataPackageWeight
      */
-    unit: PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum;
+    unit: string;
     /**
      * Predicted positive package weight.
      * @type {string}
@@ -37,19 +37,6 @@ export interface PredictProductPackageDimensionsAndWeightResponseDataPackageWeig
      */
     value: string;
 }
-
-
-/**
- * @export
- */
-export const PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum = {
-    Gram: 'GRAM',
-    Pound: 'POUND',
-    Ounce: 'OUNCE',
-    Kilogram: 'KILOGRAM'
-} as const;
-export type PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum = typeof PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum[keyof typeof PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnitEnum];
-
 
 /**
  * Check if a given object implements the PredictProductPackageDimensionsAndWeightResponseDataPackageWeight interface.

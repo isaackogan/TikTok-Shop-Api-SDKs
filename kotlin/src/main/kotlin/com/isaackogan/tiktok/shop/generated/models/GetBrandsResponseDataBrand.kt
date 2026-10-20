@@ -49,7 +49,7 @@ data class GetBrandsResponseDataBrand (
 
     /* A status to indicate whether the seller has obtained prior authorization to sell goods bearing the brand's trademark, name, or logo.  Possible values: - UNAUTHORIEZD - AUTHORIZED  **Note**: If the brand is unauthorized, check `is_t1_brand` to determine if you can use it during product creation. */
     @SerializedName("authorized_status")
-    val authorizedStatus: GetBrandsResponseDataBrand.AuthorizedStatus? = null,
+    val authorizedStatus: kotlin.String? = null,
 
     /* A flag to indicate whether the brand is a T1 brand, which refers to internationally renowned brands that may have compliance risks and require sellers to obtain brand authorization.  **Note**: - You cannot create products with unauthorized T1 brands. - You can create products with unauthorized non-T1 brands, **but** the brand information will not appear on the product display page.  You can obtain authorization by submitting the required qualifications through TikTok Shop Seller Center > Qualification Center > Brand qualification. */
     @SerializedName("is_t1_brand")
@@ -57,28 +57,10 @@ data class GetBrandsResponseDataBrand (
 
     /* The availability of an **authorized brand** in the requested category. Possible values: - AVAILABLE - UNAVAILABLE  **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized. */
     @SerializedName("brand_status")
-    val brandStatus: GetBrandsResponseDataBrand.BrandStatus? = null
+    val brandStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * A status to indicate whether the seller has obtained prior authorization to sell goods bearing the brand's trademark, name, or logo.  Possible values: - UNAUTHORIEZD - AUTHORIZED  **Note**: If the brand is unauthorized, check `is_t1_brand` to determine if you can use it during product creation.
-     *
-     * Values: UNAUTHORIEZD,AUTHORIZED
-     */
-    enum class AuthorizedStatus(val value: kotlin.String) {
-        @SerializedName(value = "UNAUTHORIEZD") UNAUTHORIEZD("UNAUTHORIEZD"),
-        @SerializedName(value = "AUTHORIZED") AUTHORIZED("AUTHORIZED");
-    }
-    /**
-     * The availability of an **authorized brand** in the requested category. Possible values: - AVAILABLE - UNAVAILABLE  **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized.
-     *
-     * Values: AVAILABLE,UNAVAILABLE
-     */
-    enum class BrandStatus(val value: kotlin.String) {
-        @SerializedName(value = "AVAILABLE") AVAILABLE("AVAILABLE"),
-        @SerializedName(value = "UNAVAILABLE") UNAVAILABLE("UNAVAILABLE");
-    }
 
 }
 

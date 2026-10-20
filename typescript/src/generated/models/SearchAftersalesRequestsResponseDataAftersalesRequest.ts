@@ -59,10 +59,10 @@ export interface SearchAftersalesRequestsResponseDataAftersalesRequest {
      * - `INIT`
      * - `PENDING_REQUEST_REVIEW`
      * - `REQUEST_REVIEW_COMPLETED`
-     * @type {SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum}
+     * @type {string}
      * @memberof SearchAftersalesRequestsResponseDataAftersalesRequest
      */
-    status?: SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum;
+    status?: string;
     /**
      * SKU-level sub return requests associated with this aftersales request, also known as reverse orders or return requests. This field is returned only when `SKU_RETURN_REQUESTS` is included in `whitelisted_data_fields` and matching data is available.
      * @type {Array<SkuReturnRequest>}
@@ -76,18 +76,6 @@ export interface SearchAftersalesRequestsResponseDataAftersalesRequest {
      */
     returnMerchandiseAuthorizations?: Array<SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization>;
 }
-
-
-/**
- * @export
- */
-export const SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum = {
-    Init: 'INIT',
-    PendingRequestReview: 'PENDING_REQUEST_REVIEW',
-    RequestReviewCompleted: 'REQUEST_REVIEW_COMPLETED'
-} as const;
-export type SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum = typeof SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum[keyof typeof SearchAftersalesRequestsResponseDataAftersalesRequestStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchAftersalesRequestsResponseDataAftersalesRequest interface.

@@ -53,80 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetProductSKPPDetailResponseDataTaskDetail {
-  /**
-   * Key for the scoring category. Possible values: - COMMISSION_RATE - FULFILMENT - PRICING - FREE_SHIPING - FOLLOWER_BENEFITS - SAMPLING - ADS_SPEND - STOCK - SHOPPABLE_VIDEOS - INFORMATION_QUALITY - CRM_HOSTING
-   */
-  @JsonAdapter(CategoryEnum.Adapter.class)
-  public enum CategoryEnum {
-    COMMISSION_RATE("COMMISSION_RATE"),
-    
-    FULFILMENT("FULFILMENT"),
-    
-    PRICING("PRICING"),
-    
-    FREE_SHIPING("FREE_SHIPING"),
-    
-    FOLLOWER_BENEFITS("FOLLOWER_BENEFITS"),
-    
-    SAMPLING("SAMPLING"),
-    
-    ADS_SPEND("ADS_SPEND"),
-    
-    STOCK("STOCK"),
-    
-    SHOPPABLE_VIDEOS("SHOPPABLE_VIDEOS"),
-    
-    INFORMATION_QUALITY("INFORMATION_QUALITY"),
-    
-    CRM_HOSTING("CRM_HOSTING");
-
-    private String value;
-
-    CategoryEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CategoryEnum fromValue(String value) {
-      for (CategoryEnum b : CategoryEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CategoryEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CategoryEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CategoryEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CategoryEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CategoryEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CATEGORY = "category";
   @SerializedName(SERIALIZED_NAME_CATEGORY)
   @javax.annotation.Nullable
-  private CategoryEnum category;
+  private String category;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -156,7 +86,7 @@ public class GetProductSKPPDetailResponseDataTaskDetail {
   public GetProductSKPPDetailResponseDataTaskDetail() {
   }
 
-  public GetProductSKPPDetailResponseDataTaskDetail category(@javax.annotation.Nullable CategoryEnum category) {
+  public GetProductSKPPDetailResponseDataTaskDetail category(@javax.annotation.Nullable String category) {
     this.category = category;
     return this;
   }
@@ -166,11 +96,11 @@ public class GetProductSKPPDetailResponseDataTaskDetail {
    * @return category
    */
   @javax.annotation.Nullable
-  public CategoryEnum getCategory() {
+  public String getCategory() {
     return category;
   }
 
-  public void setCategory(@javax.annotation.Nullable CategoryEnum category) {
+  public void setCategory(@javax.annotation.Nullable String category) {
     this.category = category;
   }
 
@@ -396,10 +326,6 @@ public class GetProductSKPPDetailResponseDataTaskDetail {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("category") != null && !jsonObj.get("category").isJsonNull()) && !jsonObj.get("category").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `category` to be a primitive type in the JSON string but got `%s`", jsonObj.get("category").toString()));
-      }
-      // validate the optional field `category`
-      if (jsonObj.get("category") != null && !jsonObj.get("category").isJsonNull()) {
-        CategoryEnum.validateJsonElement(jsonObj.get("category"));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));

@@ -55,64 +55,10 @@ public class ProductStatusChangeWebhookData {
   @javax.annotation.Nullable
   private Long productId;
 
-  /**
-   * Product audit status, with possible values:      * PRODUCT_FIRST_PASS_REVIEW   * PRODUCT_STATUS_CHANGED   * PRODUCT_AUDIT_FAILURE
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    PRODUCT_FIRST_PASS_REVIEW("PRODUCT_FIRST_PASS_REVIEW"),
-    
-    PRODUCT_STATUS_CHANGED("PRODUCT_STATUS_CHANGED"),
-    
-    PRODUCT_AUDIT_FAILURE("PRODUCT_AUDIT_FAILURE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_SUSPENDED_REASON = "suspended_reason";
   @SerializedName(SERIALIZED_NAME_SUSPENDED_REASON)
@@ -146,7 +92,7 @@ public class ProductStatusChangeWebhookData {
   }
 
 
-  public ProductStatusChangeWebhookData status(@javax.annotation.Nullable StatusEnum status) {
+  public ProductStatusChangeWebhookData status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -156,11 +102,11 @@ public class ProductStatusChangeWebhookData {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -317,10 +263,6 @@ public class ProductStatusChangeWebhookData {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if ((jsonObj.get("suspended_reason") != null && !jsonObj.get("suspended_reason").isJsonNull()) && !jsonObj.get("suspended_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `suspended_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("suspended_reason").toString()));

@@ -106,11 +106,11 @@ data class SearchGoodsInfoResponseDataGood (
 
     /* SIOC-specific approval status. This field is returned when `is_sioc` is `true` and an SIOC approval status is available. Possible values: - SIOC_APPROVAL_STATUS_INVALID - SIOC_APPROVAL_STATUS_INIT - SIOC_APPROVAL_STATUS_UNDER_REVIEW - SIOC_APPROVAL_STATUS_APPROVE - SIOC_APPROVAL_STATUS_REJECT */
     @SerializedName("sioc_approval_status")
-    val siocApprovalStatus: SearchGoodsInfoResponseDataGood.SiocApprovalStatus? = null,
+    val siocApprovalStatus: kotlin.String? = null,
 
     /* FBT fulfillment approval status. This field is returned for goods that are hazardous materials or managed as Ships in Own Container (SIOC). Possible values: - APPROVAL_STATUS_INVALID - APPROVAL_STATUS_INIT - APPROVAL_STATUS_UNDER_REVIEW - APPROVAL_STATUS_FULFILLABLE - APPROVAL_STATUS_UNFULFILLABLE */
     @SerializedName("hazmat_approval_status")
-    val hazmatApprovalStatus: SearchGoodsInfoResponseDataGood.HazmatApprovalStatus? = null,
+    val hazmatApprovalStatus: kotlin.String? = null,
 
     /* bulky item info */
     @SerializedName("bulky_item_attribute")
@@ -130,30 +130,6 @@ data class SearchGoodsInfoResponseDataGood (
 
 ) {
 
-    /**
-     * SIOC-specific approval status. This field is returned when `is_sioc` is `true` and an SIOC approval status is available. Possible values: - SIOC_APPROVAL_STATUS_INVALID - SIOC_APPROVAL_STATUS_INIT - SIOC_APPROVAL_STATUS_UNDER_REVIEW - SIOC_APPROVAL_STATUS_APPROVE - SIOC_APPROVAL_STATUS_REJECT
-     *
-     * Values: SIOC_APPROVAL_STATUS_INVALID,SIOC_APPROVAL_STATUS_INIT,SIOC_APPROVAL_STATUS_UNDER_REVIEW,SIOC_APPROVAL_STATUS_APPROVE,SIOC_APPROVAL_STATUS_REJECT
-     */
-    enum class SiocApprovalStatus(val value: kotlin.String) {
-        @SerializedName(value = "SIOC_APPROVAL_STATUS_INVALID") SIOC_APPROVAL_STATUS_INVALID("SIOC_APPROVAL_STATUS_INVALID"),
-        @SerializedName(value = "SIOC_APPROVAL_STATUS_INIT") SIOC_APPROVAL_STATUS_INIT("SIOC_APPROVAL_STATUS_INIT"),
-        @SerializedName(value = "SIOC_APPROVAL_STATUS_UNDER_REVIEW") SIOC_APPROVAL_STATUS_UNDER_REVIEW("SIOC_APPROVAL_STATUS_UNDER_REVIEW"),
-        @SerializedName(value = "SIOC_APPROVAL_STATUS_APPROVE") SIOC_APPROVAL_STATUS_APPROVE("SIOC_APPROVAL_STATUS_APPROVE"),
-        @SerializedName(value = "SIOC_APPROVAL_STATUS_REJECT") SIOC_APPROVAL_STATUS_REJECT("SIOC_APPROVAL_STATUS_REJECT");
-    }
-    /**
-     * FBT fulfillment approval status. This field is returned for goods that are hazardous materials or managed as Ships in Own Container (SIOC). Possible values: - APPROVAL_STATUS_INVALID - APPROVAL_STATUS_INIT - APPROVAL_STATUS_UNDER_REVIEW - APPROVAL_STATUS_FULFILLABLE - APPROVAL_STATUS_UNFULFILLABLE
-     *
-     * Values: APPROVAL_STATUS_INVALID,APPROVAL_STATUS_INIT,APPROVAL_STATUS_UNDER_REVIEW,APPROVAL_STATUS_FULFILLABLE,APPROVAL_STATUS_UNFULFILLABLE
-     */
-    enum class HazmatApprovalStatus(val value: kotlin.String) {
-        @SerializedName(value = "APPROVAL_STATUS_INVALID") APPROVAL_STATUS_INVALID("APPROVAL_STATUS_INVALID"),
-        @SerializedName(value = "APPROVAL_STATUS_INIT") APPROVAL_STATUS_INIT("APPROVAL_STATUS_INIT"),
-        @SerializedName(value = "APPROVAL_STATUS_UNDER_REVIEW") APPROVAL_STATUS_UNDER_REVIEW("APPROVAL_STATUS_UNDER_REVIEW"),
-        @SerializedName(value = "APPROVAL_STATUS_FULFILLABLE") APPROVAL_STATUS_FULFILLABLE("APPROVAL_STATUS_FULFILLABLE"),
-        @SerializedName(value = "APPROVAL_STATUS_UNFULFILLABLE") APPROVAL_STATUS_UNFULFILLABLE("APPROVAL_STATUS_UNFULFILLABLE");
-    }
 
 }
 

@@ -57,10 +57,10 @@ export interface GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
      * - SAMEDAY
      * - NEXTDAY
      * - CARGO
-     * @type {GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum}
+     * @type {string}
      * @memberof GetWarehouseDeliveryOptionsResponseDataDeliveryOption
      */
-    type?: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum;
+    type?: string;
     /**
      * Delivery option description.
      * @type {string}
@@ -84,37 +84,11 @@ export interface GetWarehouseDeliveryOptionsResponseDataDeliveryOption {
      * Possible values:
      * - TIKTOK_SHOP
      * - TOKOPEDIA
-     * @type {Array<GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum>}
+     * @type {Array<string>}
      * @memberof GetWarehouseDeliveryOptionsResponseDataDeliveryOption
      */
-    platform?: Array<GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum>;
+    platform?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum = {
-    Standard: 'STANDARD',
-    Express: 'EXPRESS',
-    Economy: 'ECONOMY',
-    SendBySeller: 'SEND_BY_SELLER',
-    Instant: 'INSTANT',
-    Sameday: 'SAMEDAY',
-    Nextday: 'NEXTDAY',
-    Cargo: 'CARGO'
-} as const;
-export type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum = typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum[keyof typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionTypeEnum];
-
-/**
- * @export
- */
-export const GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum = {
-    TiktokShop: 'TIKTOK_SHOP',
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum = typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum[keyof typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionPlatformEnum];
-
 
 /**
  * Check if a given object implements the GetWarehouseDeliveryOptionsResponseDataDeliveryOption interface.

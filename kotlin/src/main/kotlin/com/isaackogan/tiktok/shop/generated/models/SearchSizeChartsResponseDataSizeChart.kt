@@ -64,19 +64,10 @@ data class SearchSizeChartsResponseDataSizeChart (
 
     /* Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved. */
     @SerializedName("size_chart_mode")
-    val sizeChartMode: SearchSizeChartsResponseDataSizeChart.SizeChartMode? = null
+    val sizeChartMode: kotlin.String? = null
 
 ) {
 
-    /**
-     * Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
-     *
-     * Values: REUSABLE_TEMPLATE,PRODUCT_SCOPED
-     */
-    enum class SizeChartMode(val value: kotlin.String) {
-        @SerializedName(value = "REUSABLE_TEMPLATE") REUSABLE_TEMPLATE("REUSABLE_TEMPLATE"),
-        @SerializedName(value = "PRODUCT_SCOPED") PRODUCT_SCOPED("PRODUCT_SCOPED");
-    }
 
 }
 

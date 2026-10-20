@@ -144,68 +144,10 @@ public class GetTransactionsByStatementResponseDataTransaction {
   @javax.annotation.Nullable
   private String associatedOrderId;
 
-  /**
-   * The status of the reserve funds. Possible values: - COLLECTED: A portion of the order&#39;s settlement amount has been withheld as reserve funds. - RELEASED: The previously reserved funds have been released and paid out to the seller.
-   */
-  @JsonAdapter(ReserveStatusEnum.Adapter.class)
-  public enum ReserveStatusEnum {
-    /**
-     * A portion of the order&#39;s settlement amount has been withheld as reserve funds.
-     */
-    COLLECTED("COLLECTED"),
-    
-    /**
-     * The previously reserved funds have been released and paid out to the seller.
-     */
-    RELEASED("RELEASED");
-
-    private String value;
-
-    ReserveStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReserveStatusEnum fromValue(String value) {
-      for (ReserveStatusEnum b : ReserveStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReserveStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReserveStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReserveStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReserveStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReserveStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RESERVE_STATUS = "reserve_status";
   @SerializedName(SERIALIZED_NAME_RESERVE_STATUS)
   @javax.annotation.Nullable
-  private ReserveStatusEnum reserveStatus;
+  private String reserveStatus;
 
   public static final String SERIALIZED_NAME_ESTIMATED_RELEASE_TIME = "estimated_release_time";
   @SerializedName(SERIALIZED_NAME_ESTIMATED_RELEASE_TIME)
@@ -557,7 +499,7 @@ public class GetTransactionsByStatementResponseDataTransaction {
   }
 
 
-  public GetTransactionsByStatementResponseDataTransaction reserveStatus(@javax.annotation.Nullable ReserveStatusEnum reserveStatus) {
+  public GetTransactionsByStatementResponseDataTransaction reserveStatus(@javax.annotation.Nullable String reserveStatus) {
     this.reserveStatus = reserveStatus;
     return this;
   }
@@ -567,11 +509,11 @@ public class GetTransactionsByStatementResponseDataTransaction {
    * @return reserveStatus
    */
   @javax.annotation.Nullable
-  public ReserveStatusEnum getReserveStatus() {
+  public String getReserveStatus() {
     return reserveStatus;
   }
 
-  public void setReserveStatus(@javax.annotation.Nullable ReserveStatusEnum reserveStatus) {
+  public void setReserveStatus(@javax.annotation.Nullable String reserveStatus) {
     this.reserveStatus = reserveStatus;
   }
 
@@ -796,10 +738,6 @@ public class GetTransactionsByStatementResponseDataTransaction {
       }
       if ((jsonObj.get("reserve_status") != null && !jsonObj.get("reserve_status").isJsonNull()) && !jsonObj.get("reserve_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `reserve_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("reserve_status").toString()));
-      }
-      // validate the optional field `reserve_status`
-      if (jsonObj.get("reserve_status") != null && !jsonObj.get("reserve_status").isJsonNull()) {
-        ReserveStatusEnum.validateJsonElement(jsonObj.get("reserve_status"));
       }
       if ((jsonObj.get("estimated_release_time") != null && !jsonObj.get("estimated_release_time").isJsonNull()) && !jsonObj.get("estimated_release_time").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `estimated_release_time` to be a primitive type in the JSON string but got `%s`", jsonObj.get("estimated_release_time").toString()));

@@ -50,231 +50,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetGlobalAttributesResponseDataAttributeRequirementCondition {
-  /**
-   * The market where the attribute is required when the conditions are met. Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-   */
-  @JsonAdapter(RegionEnum.Adapter.class)
-  public enum RegionEnum {
-    /**
-     * Austria
-     */
-    AT("AT"),
-    
-    /**
-     * Belgium
-     */
-    BE("BE"),
-    
-    /**
-     * Czech Republic
-     */
-    CZ("CZ"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Greece
-     */
-    GR("GR"),
-    
-    /**
-     * Hungary
-     */
-    HU("HU"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Netherlands
-     */
-    NL("NL"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Poland
-     */
-    PL("PL"),
-    
-    /**
-     * Portugal
-     */
-    PT("PT"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX");
-
-    private String value;
-
-    RegionEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RegionEnum fromValue(String value) {
-      for (RegionEnum b : RegionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RegionEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RegionEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RegionEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RegionEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RegionEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_REGION = "region";
   @SerializedName(SERIALIZED_NAME_REGION)
   @javax.annotation.Nullable
-  private RegionEnum region;
-
-  /**
-   * The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-   */
-  @JsonAdapter(ConditionTypeEnum.Adapter.class)
-  public enum ConditionTypeEnum {
-    /**
-     * The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     */
-    VALUE_ID_MATCH("VALUE_ID_MATCH");
-
-    private String value;
-
-    ConditionTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ConditionTypeEnum fromValue(String value) {
-      for (ConditionTypeEnum b : ConditionTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ConditionTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ConditionTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ConditionTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ConditionTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ConditionTypeEnum.fromValue(value);
-    }
-  }
+  private String region;
 
   public static final String SERIALIZED_NAME_CONDITION_TYPE = "condition_type";
   @SerializedName(SERIALIZED_NAME_CONDITION_TYPE)
   @javax.annotation.Nullable
-  private ConditionTypeEnum conditionType;
+  private String conditionType;
 
   public static final String SERIALIZED_NAME_ATTRIBUTE_ID = "attribute_id";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTE_ID)
@@ -289,7 +73,7 @@ public class GetGlobalAttributesResponseDataAttributeRequirementCondition {
   public GetGlobalAttributesResponseDataAttributeRequirementCondition() {
   }
 
-  public GetGlobalAttributesResponseDataAttributeRequirementCondition region(@javax.annotation.Nullable RegionEnum region) {
+  public GetGlobalAttributesResponseDataAttributeRequirementCondition region(@javax.annotation.Nullable String region) {
     this.region = region;
     return this;
   }
@@ -299,16 +83,16 @@ public class GetGlobalAttributesResponseDataAttributeRequirementCondition {
    * @return region
    */
   @javax.annotation.Nullable
-  public RegionEnum getRegion() {
+  public String getRegion() {
     return region;
   }
 
-  public void setRegion(@javax.annotation.Nullable RegionEnum region) {
+  public void setRegion(@javax.annotation.Nullable String region) {
     this.region = region;
   }
 
 
-  public GetGlobalAttributesResponseDataAttributeRequirementCondition conditionType(@javax.annotation.Nullable ConditionTypeEnum conditionType) {
+  public GetGlobalAttributesResponseDataAttributeRequirementCondition conditionType(@javax.annotation.Nullable String conditionType) {
     this.conditionType = conditionType;
     return this;
   }
@@ -318,11 +102,11 @@ public class GetGlobalAttributesResponseDataAttributeRequirementCondition {
    * @return conditionType
    */
   @javax.annotation.Nullable
-  public ConditionTypeEnum getConditionType() {
+  public String getConditionType() {
     return conditionType;
   }
 
-  public void setConditionType(@javax.annotation.Nullable ConditionTypeEnum conditionType) {
+  public void setConditionType(@javax.annotation.Nullable String conditionType) {
     this.conditionType = conditionType;
   }
 
@@ -480,16 +264,8 @@ public class GetGlobalAttributesResponseDataAttributeRequirementCondition {
       if ((jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) && !jsonObj.get("region").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `region` to be a primitive type in the JSON string but got `%s`", jsonObj.get("region").toString()));
       }
-      // validate the optional field `region`
-      if (jsonObj.get("region") != null && !jsonObj.get("region").isJsonNull()) {
-        RegionEnum.validateJsonElement(jsonObj.get("region"));
-      }
       if ((jsonObj.get("condition_type") != null && !jsonObj.get("condition_type").isJsonNull()) && !jsonObj.get("condition_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `condition_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("condition_type").toString()));
-      }
-      // validate the optional field `condition_type`
-      if (jsonObj.get("condition_type") != null && !jsonObj.get("condition_type").isJsonNull()) {
-        ConditionTypeEnum.validateJsonElement(jsonObj.get("condition_type"));
       }
       if ((jsonObj.get("attribute_id") != null && !jsonObj.get("attribute_id").isJsonNull()) && !jsonObj.get("attribute_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `attribute_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("attribute_id").toString()));

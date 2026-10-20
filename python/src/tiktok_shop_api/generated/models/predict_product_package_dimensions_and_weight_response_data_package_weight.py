@@ -6,10 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.predict_product_package_dimensions_and_weight_response_data_package_weight_unit import (
-    PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnit,
-)
-
 T = TypeVar("T", bound="PredictProductPackageDimensionsAndWeightResponseDataPackageWeight")
 
 
@@ -17,8 +13,7 @@ T = TypeVar("T", bound="PredictProductPackageDimensionsAndWeightResponseDataPack
 class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight:
     """
     Attributes:
-        unit (PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnit): Unit of the predicted package
-            weight.
+        unit (str): Unit of the predicted package weight.
             Possible values:
             - `GRAM`
             - `POUND`
@@ -27,12 +22,12 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight:
         value (str): Predicted positive package weight.
     """
 
-    unit: PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnit
+    unit: str
     value: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        unit = self.unit.value
+        unit = self.unit
 
         value = self.value
 
@@ -50,7 +45,7 @@ class PredictProductPackageDimensionsAndWeightResponseDataPackageWeight:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        unit = PredictProductPackageDimensionsAndWeightResponseDataPackageWeightUnit(d.pop("unit"))
+        unit = d.pop("unit")
 
         value = d.pop("value")
 

@@ -52,10 +52,10 @@ export interface GetLatestUnreadMessagesResponseDataNewestMessageList {
      * - NOTIFICATION
      * - EMOTICONS
      * - SYSTEM
-     * @type {GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum}
+     * @type {string}
      * @memberof GetLatestUnreadMessagesResponseDataNewestMessageList
      */
-    type?: GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum;
+    type?: string;
     /**
      * sender's IM id
      * @type {string}
@@ -69,25 +69,6 @@ export interface GetLatestUnreadMessagesResponseDataNewestMessageList {
      */
     unreadMessageCount?: number;
 }
-
-
-/**
- * @export
- */
-export const GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum = {
-    Text: 'TEXT',
-    ProductCard: 'PRODUCT_CARD',
-    TargetCollaborationCard: 'TARGET_COLLABORATION_CARD',
-    FreeSampleCard: 'FREE_SAMPLE_CARD',
-    Image: 'IMAGE',
-    CrmTextWithImageCard: 'CRM_TEXT_WITH_IMAGE_CARD',
-    CrmTextWithProductsCard: 'CRM_TEXT_WITH_PRODUCTS_CARD',
-    Notification: 'NOTIFICATION',
-    Emoticons: 'EMOTICONS',
-    System: 'SYSTEM'
-} as const;
-export type GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum = typeof GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum[keyof typeof GetLatestUnreadMessagesResponseDataNewestMessageListTypeEnum];
-
 
 /**
  * Check if a given object implements the GetLatestUnreadMessagesResponseDataNewestMessageList interface.

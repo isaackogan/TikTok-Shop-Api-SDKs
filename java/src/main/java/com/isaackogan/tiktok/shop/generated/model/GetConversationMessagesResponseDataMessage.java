@@ -56,133 +56,10 @@ public class GetConversationMessagesResponseDataMessage {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * Message type. Possible enumerations: - TEXT - IMAGE - ALLOCATED_SERVICE - A customer service agent joins the conversation. - NOTIFICATION - Notification from the system. - BUYER_ENTER_FROM_TRANSFER : The conversation is transferred to another customer service agent. - BUYER_ENTER_FROM_PRODUCT : The buyer is viewing a product before sending this message. - BUYER_ENTER_FROM_ORDER : The buyer is viewing an order before sending this message. - PRODUCT_CARD - EMOTICONS - ORDER_CARD - VIDEO - RETURN_REFUND_CARD: Return/refund card. - COUPON_CARD - LOGISTICS_CARD - OTHER: Messages of types not supported in this API.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * 
-     */
-    TEXT("TEXT"),
-    
-    /**
-     * 
-     */
-    IMAGE("IMAGE"),
-    
-    /**
-     * A customer service agent joins the conversation.
-     */
-    ALLOCATED_SERVICE("ALLOCATED_SERVICE"),
-    
-    /**
-     * Notification from the system.
-     */
-    NOTIFICATION("NOTIFICATION"),
-    
-    /**
-     * The conversation is transferred to another customer service agent.
-     */
-    BUYER_ENTER_FROM_TRANSFER("BUYER_ENTER_FROM_TRANSFER"),
-    
-    /**
-     * The buyer is viewing a product before sending this message.
-     */
-    BUYER_ENTER_FROM_PRODUCT("BUYER_ENTER_FROM_PRODUCT"),
-    
-    /**
-     * The buyer is viewing an order before sending this message.
-     */
-    BUYER_ENTER_FROM_ORDER("BUYER_ENTER_FROM_ORDER"),
-    
-    /**
-     * 
-     */
-    PRODUCT_CARD("PRODUCT_CARD"),
-    
-    /**
-     * 
-     */
-    EMOTICONS("EMOTICONS"),
-    
-    /**
-     * 
-     */
-    ORDER_CARD("ORDER_CARD"),
-    
-    /**
-     * 
-     */
-    VIDEO("VIDEO"),
-    
-    /**
-     * Return/refund card.
-     */
-    RETURN_REFUND_CARD("RETURN_REFUND_CARD"),
-    
-    /**
-     * 
-     */
-    COUPON_CARD("COUPON_CARD"),
-    
-    /**
-     * 
-     */
-    LOGISTICS_CARD("LOGISTICS_CARD"),
-    
-    /**
-     * Messages of types not supported in this API.
-     */
-    OTHER("OTHER");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
@@ -241,7 +118,7 @@ public class GetConversationMessagesResponseDataMessage {
   }
 
 
-  public GetConversationMessagesResponseDataMessage type(@javax.annotation.Nullable TypeEnum type) {
+  public GetConversationMessagesResponseDataMessage type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -251,11 +128,11 @@ public class GetConversationMessagesResponseDataMessage {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -520,10 +397,6 @@ public class GetConversationMessagesResponseDataMessage {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if ((jsonObj.get("content") != null && !jsonObj.get("content").isJsonNull()) && !jsonObj.get("content").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content").toString()));

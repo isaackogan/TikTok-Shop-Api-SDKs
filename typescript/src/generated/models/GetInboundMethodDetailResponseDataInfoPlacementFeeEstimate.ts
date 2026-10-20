@@ -34,25 +34,11 @@ export interface GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate {
      * * `EUR`
      * * `GBP`
      * * `SAR`
-     * @type {GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum}
+     * @type {string}
      * @memberof GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate
      */
-    currency?: GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum;
+    currency?: string;
 }
-
-
-/**
- * @export
- */
-export const GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum = {
-    Usd: 'USD',
-    Cny: 'CNY',
-    Eur: 'EUR',
-    Gbp: 'GBP',
-    Sar: 'SAR'
-} as const;
-export type GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum = typeof GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum[keyof typeof GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrencyEnum];
-
 
 /**
  * Check if a given object implements the GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate interface.

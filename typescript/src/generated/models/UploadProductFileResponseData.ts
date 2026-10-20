@@ -41,30 +41,11 @@ export interface UploadProductFileResponseData {
     /**
      * The format of the file.
      * Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG
-     * @type {UploadProductFileResponseDataFormatEnum}
+     * @type {string}
      * @memberof UploadProductFileResponseData
      */
-    format?: UploadProductFileResponseDataFormatEnum;
+    format?: string;
 }
-
-
-/**
- * @export
- */
-export const UploadProductFileResponseDataFormatEnum = {
-    Pdf: 'PDF',
-    Mp4: 'MP4',
-    Mov: 'MOV',
-    Mkv: 'MKV',
-    Wmv: 'WMV',
-    Webm: 'WEBM',
-    Avi: 'AVI',
-    _3Gp: '3GP',
-    Flv: 'FLV',
-    Mpeg: 'MPEG'
-} as const;
-export type UploadProductFileResponseDataFormatEnum = typeof UploadProductFileResponseDataFormatEnum[keyof typeof UploadProductFileResponseDataFormatEnum];
-
 
 /**
  * Check if a given object implements the UploadProductFileResponseData interface.

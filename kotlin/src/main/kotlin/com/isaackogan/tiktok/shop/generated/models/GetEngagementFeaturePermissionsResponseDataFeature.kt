@@ -38,7 +38,7 @@ data class GetEngagementFeaturePermissionsResponseDataFeature (
 
     /* The feature name. Possible values: - `FUNDAMENTAL`: The ability to use any customer engagement APIs or features. This is the prerequisite for all other customer engagement features. - `CUSTOM_MSG`: The ability to define and send custom messages. */
     @SerializedName("name")
-    val name: GetEngagementFeaturePermissionsResponseDataFeature.Name? = null,
+    val name: kotlin.String? = null,
 
     /* A flag to indicate whether the shop has permission to use this feature. Possible values: - `true`: Authorized to use this feature. - `false`: Not authorized to use this feature. */
     @SerializedName("is_authorized")
@@ -46,15 +46,6 @@ data class GetEngagementFeaturePermissionsResponseDataFeature (
 
 ) {
 
-    /**
-     * The feature name. Possible values: - `FUNDAMENTAL`: The ability to use any customer engagement APIs or features. This is the prerequisite for all other customer engagement features. - `CUSTOM_MSG`: The ability to define and send custom messages.
-     *
-     * Values: FUNDAMENTAL,CUSTOM_MSG
-     */
-    enum class Name(val value: kotlin.String) {
-        @SerializedName(value = "FUNDAMENTAL") FUNDAMENTAL("FUNDAMENTAL"),
-        @SerializedName(value = "CUSTOM_MSG") CUSTOM_MSG("CUSTOM_MSG");
-    }
 
 }
 

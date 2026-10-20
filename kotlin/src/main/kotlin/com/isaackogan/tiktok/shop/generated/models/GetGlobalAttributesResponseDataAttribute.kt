@@ -56,7 +56,7 @@ data class GetGlobalAttributesResponseDataAttribute (
 
     /* The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole. */
     @SerializedName("type")
-    val type: GetGlobalAttributesResponseDataAttribute.Type? = null,
+    val type: kotlin.String? = null,
 
     /* A flag indicating whether the product attribute is required across all of the seller's markets when creating or editing a product. - true: The attribute is required in all of the seller's markets. - false: The attribute is not required in all of the seller's markets; it may be required in some markets, required only under certain conditions, or optional. Refer to `required_regions`, `optional_regions`, and `requirement_conditions` for the specific requirements.  Applicable only if `type=PRODUCT_PROPERTY`. */
     @SerializedName("is_requried")
@@ -80,83 +80,14 @@ data class GetGlobalAttributesResponseDataAttribute (
 
     /* The markets where the attribute is purely optional, or required only under certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements. This field is omitted when there are no optional markets.  Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico Applicable only if `is_requried=false`. */
     @SerializedName("optional_regions")
-    val optionalRegions: kotlin.collections.List<GetGlobalAttributesResponseDataAttribute.OptionalRegions>? = null,
+    val optionalRegions: kotlin.collections.List<kotlin.String>? = null,
 
     /* The markets where the attribute is required without conditions. When `is_requried=true`, this list contains all of the seller's markets. When `is_requried=false`, it contains only the markets where the attribute is unconditionally required. This field is omitted when there are no unconditionally required markets.  Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico */
     @SerializedName("required_regions")
-    val requiredRegions: kotlin.collections.List<GetGlobalAttributesResponseDataAttribute.RequiredRegions>? = null
+    val requiredRegions: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-     *
-     * Values: SALES_PROPERTY,PRODUCT_PROPERTY
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "SALES_PROPERTY") SALES_PROPERTY("SALES_PROPERTY"),
-        @SerializedName(value = "PRODUCT_PROPERTY") PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-    }
-    /**
-     * The markets where the attribute is purely optional, or required only under certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements. This field is omitted when there are no optional markets.  Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico Applicable only if `is_requried=false`.
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IT,IE,JP,MY,NL,PH,PL,PT,SG,TH,US,VN,MX
-     */
-    enum class OptionalRegions(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PL") PL("PL"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN"),
-        @SerializedName(value = "MX") MX("MX");
-    }
-    /**
-     * The markets where the attribute is required without conditions. When `is_requried=true`, this list contains all of the seller's markets. When `is_requried=false`, it contains only the markets where the attribute is unconditionally required. This field is omitted when there are no unconditionally required markets.  Possible values: - AT: Austria - BE: Belgium - CZ: Czech Republic - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IT,IE,JP,MY,NL,PH,PL,PT,SG,TH,US,VN,MX
-     */
-    enum class RequiredRegions(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PL") PL("PL"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN"),
-        @SerializedName(value = "MX") MX("MX");
-    }
 
 }
 

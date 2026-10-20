@@ -64,68 +64,10 @@ public class GetGlobalAttributesResponseDataAttribute {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * The attribute type. Possible values: - SALES_PROPERTY: Indicates sales attributes that define product variants. - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * Indicates sales attributes that define product variants.
-     */
-    SALES_PROPERTY("SALES_PROPERTY"),
-    
-    /**
-     * Indicates product attributes that describe the product as a whole.
-     */
-    PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_IS_REQURIED = "is_requried";
   @SerializedName(SERIALIZED_NAME_IS_REQURIED)
@@ -152,341 +94,15 @@ public class GetGlobalAttributesResponseDataAttribute {
   @javax.annotation.Nullable
   private List<GetGlobalAttributesResponseDataAttributeRequirementCondition> requirementConditions = new ArrayList<>();
 
-  /**
-   * Gets or Sets optionalRegions
-   */
-  @JsonAdapter(OptionalRegionsEnum.Adapter.class)
-  public enum OptionalRegionsEnum {
-    /**
-     * Austria
-     */
-    AT("AT"),
-    
-    /**
-     * Belgium
-     */
-    BE("BE"),
-    
-    /**
-     * Czech Republic
-     */
-    CZ("CZ"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Greece
-     */
-    GR("GR"),
-    
-    /**
-     * Hungary
-     */
-    HU("HU"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Netherlands
-     */
-    NL("NL"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Poland
-     */
-    PL("PL"),
-    
-    /**
-     * Portugal
-     */
-    PT("PT"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX");
-
-    private String value;
-
-    OptionalRegionsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OptionalRegionsEnum fromValue(String value) {
-      for (OptionalRegionsEnum b : OptionalRegionsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OptionalRegionsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OptionalRegionsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OptionalRegionsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OptionalRegionsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OptionalRegionsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_OPTIONAL_REGIONS = "optional_regions";
   @SerializedName(SERIALIZED_NAME_OPTIONAL_REGIONS)
   @javax.annotation.Nullable
-  private List<OptionalRegionsEnum> optionalRegions = new ArrayList<>();
-
-  /**
-   * Gets or Sets requiredRegions
-   */
-  @JsonAdapter(RequiredRegionsEnum.Adapter.class)
-  public enum RequiredRegionsEnum {
-    /**
-     * Austria
-     */
-    AT("AT"),
-    
-    /**
-     * Belgium
-     */
-    BE("BE"),
-    
-    /**
-     * Czech Republic
-     */
-    CZ("CZ"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Greece
-     */
-    GR("GR"),
-    
-    /**
-     * Hungary
-     */
-    HU("HU"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Netherlands
-     */
-    NL("NL"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Poland
-     */
-    PL("PL"),
-    
-    /**
-     * Portugal
-     */
-    PT("PT"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX");
-
-    private String value;
-
-    RequiredRegionsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RequiredRegionsEnum fromValue(String value) {
-      for (RequiredRegionsEnum b : RequiredRegionsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RequiredRegionsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RequiredRegionsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RequiredRegionsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RequiredRegionsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RequiredRegionsEnum.fromValue(value);
-    }
-  }
+  private List<String> optionalRegions = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_REQUIRED_REGIONS = "required_regions";
   @SerializedName(SERIALIZED_NAME_REQUIRED_REGIONS)
   @javax.annotation.Nullable
-  private List<RequiredRegionsEnum> requiredRegions = new ArrayList<>();
+  private List<String> requiredRegions = new ArrayList<>();
 
   public GetGlobalAttributesResponseDataAttribute() {
   }
@@ -529,7 +145,7 @@ public class GetGlobalAttributesResponseDataAttribute {
   }
 
 
-  public GetGlobalAttributesResponseDataAttribute type(@javax.annotation.Nullable TypeEnum type) {
+  public GetGlobalAttributesResponseDataAttribute type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -539,11 +155,11 @@ public class GetGlobalAttributesResponseDataAttribute {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -659,12 +275,12 @@ public class GetGlobalAttributesResponseDataAttribute {
   }
 
 
-  public GetGlobalAttributesResponseDataAttribute optionalRegions(@javax.annotation.Nullable List<OptionalRegionsEnum> optionalRegions) {
+  public GetGlobalAttributesResponseDataAttribute optionalRegions(@javax.annotation.Nullable List<String> optionalRegions) {
     this.optionalRegions = optionalRegions;
     return this;
   }
 
-  public GetGlobalAttributesResponseDataAttribute addOptionalRegionsItem(OptionalRegionsEnum optionalRegionsItem) {
+  public GetGlobalAttributesResponseDataAttribute addOptionalRegionsItem(String optionalRegionsItem) {
     if (this.optionalRegions == null) {
       this.optionalRegions = new ArrayList<>();
     }
@@ -677,21 +293,21 @@ public class GetGlobalAttributesResponseDataAttribute {
    * @return optionalRegions
    */
   @javax.annotation.Nullable
-  public List<OptionalRegionsEnum> getOptionalRegions() {
+  public List<String> getOptionalRegions() {
     return optionalRegions;
   }
 
-  public void setOptionalRegions(@javax.annotation.Nullable List<OptionalRegionsEnum> optionalRegions) {
+  public void setOptionalRegions(@javax.annotation.Nullable List<String> optionalRegions) {
     this.optionalRegions = optionalRegions;
   }
 
 
-  public GetGlobalAttributesResponseDataAttribute requiredRegions(@javax.annotation.Nullable List<RequiredRegionsEnum> requiredRegions) {
+  public GetGlobalAttributesResponseDataAttribute requiredRegions(@javax.annotation.Nullable List<String> requiredRegions) {
     this.requiredRegions = requiredRegions;
     return this;
   }
 
-  public GetGlobalAttributesResponseDataAttribute addRequiredRegionsItem(RequiredRegionsEnum requiredRegionsItem) {
+  public GetGlobalAttributesResponseDataAttribute addRequiredRegionsItem(String requiredRegionsItem) {
     if (this.requiredRegions == null) {
       this.requiredRegions = new ArrayList<>();
     }
@@ -704,11 +320,11 @@ public class GetGlobalAttributesResponseDataAttribute {
    * @return requiredRegions
    */
   @javax.annotation.Nullable
-  public List<RequiredRegionsEnum> getRequiredRegions() {
+  public List<String> getRequiredRegions() {
     return requiredRegions;
   }
 
-  public void setRequiredRegions(@javax.annotation.Nullable List<RequiredRegionsEnum> requiredRegions) {
+  public void setRequiredRegions(@javax.annotation.Nullable List<String> requiredRegions) {
     this.requiredRegions = requiredRegions;
   }
 
@@ -845,10 +461,6 @@ public class GetGlobalAttributesResponseDataAttribute {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
       if (jsonObj.get("values") != null && !jsonObj.get("values").isJsonNull()) {
         JsonArray jsonArrayvalues = jsonObj.getAsJsonArray("values");

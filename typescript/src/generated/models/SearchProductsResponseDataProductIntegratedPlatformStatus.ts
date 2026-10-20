@@ -23,10 +23,10 @@ export interface SearchProductsResponseDataProductIntegratedPlatformStatus {
      * The integrated platform name.
      * Possible values:
      * - TOKOPEDIA
-     * @type {SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductIntegratedPlatformStatus
      */
-    platform?: SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum;
+    platform?: string;
     /**
      * The product status in the integrated platform.
      * Possible values:
@@ -38,36 +38,11 @@ export interface SearchProductsResponseDataProductIntegratedPlatformStatus {
      * - PLATFORM_DEACTIVATED
      * - FREEZE
      * - DELETED
-     * @type {SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum}
+     * @type {string}
      * @memberof SearchProductsResponseDataProductIntegratedPlatformStatus
      */
-    status?: SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum = {
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum = typeof SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum[keyof typeof SearchProductsResponseDataProductIntegratedPlatformStatusPlatformEnum];
-
-/**
- * @export
- */
-export const SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum = {
-    Draft: 'DRAFT',
-    Pending: 'PENDING',
-    Failed: 'FAILED',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED'
-} as const;
-export type SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum = typeof SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum[keyof typeof SearchProductsResponseDataProductIntegratedPlatformStatusStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchProductsResponseDataProductIntegratedPlatformStatus interface.

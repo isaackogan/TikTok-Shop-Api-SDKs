@@ -62,7 +62,7 @@ data class SearchFBTInventoryRecordResponseDataInventoryRecord (
 
     /* The type of goods in current inventory record. Possible values:  - NORMAL  - DEFECTIVE */
     @SerializedName("inventory_goods_type")
-    val inventoryGoodsType: SearchFBTInventoryRecordResponseDataInventoryRecord.InventoryGoodsType? = null,
+    val inventoryGoodsType: kotlin.String? = null,
 
     /* The number of goods units physically in the Fulfilled by TikTok warehouse before current inventory change, excluding those in transit. */
     @SerializedName("initial_on_hand_quantity")
@@ -78,15 +78,6 @@ data class SearchFBTInventoryRecordResponseDataInventoryRecord (
 
 ) {
 
-    /**
-     * The type of goods in current inventory record. Possible values:  - NORMAL  - DEFECTIVE
-     *
-     * Values: NORMAL,DEFECTIVE
-     */
-    enum class InventoryGoodsType(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "DEFECTIVE") DEFECTIVE("DEFECTIVE");
-    }
 
 }
 

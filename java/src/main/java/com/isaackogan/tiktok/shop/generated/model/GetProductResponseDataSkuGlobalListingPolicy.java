@@ -51,68 +51,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetProductResponseDataSkuGlobalListingPolicy {
-  /**
-   * The type of inventory to synchronize. Possible values: - SHARED: Inventory Area Sharing - EXCLUSIVE: Inventory Exclusive
-   */
-  @JsonAdapter(InventoryTypeEnum.Adapter.class)
-  public enum InventoryTypeEnum {
-    /**
-     * Inventory Area Sharing
-     */
-    SHARED("SHARED"),
-    
-    /**
-     * Inventory Exclusive
-     */
-    EXCLUSIVE("EXCLUSIVE");
-
-    private String value;
-
-    InventoryTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static InventoryTypeEnum fromValue(String value) {
-      for (InventoryTypeEnum b : InventoryTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<InventoryTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InventoryTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InventoryTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return InventoryTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      InventoryTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_INVENTORY_TYPE = "inventory_type";
   @SerializedName(SERIALIZED_NAME_INVENTORY_TYPE)
   @javax.annotation.Nullable
-  private InventoryTypeEnum inventoryType;
+  private String inventoryType;
 
   public static final String SERIALIZED_NAME_PRICE_SYNC = "price_sync";
   @SerializedName(SERIALIZED_NAME_PRICE_SYNC)
@@ -127,7 +69,7 @@ public class GetProductResponseDataSkuGlobalListingPolicy {
   public GetProductResponseDataSkuGlobalListingPolicy() {
   }
 
-  public GetProductResponseDataSkuGlobalListingPolicy inventoryType(@javax.annotation.Nullable InventoryTypeEnum inventoryType) {
+  public GetProductResponseDataSkuGlobalListingPolicy inventoryType(@javax.annotation.Nullable String inventoryType) {
     this.inventoryType = inventoryType;
     return this;
   }
@@ -137,11 +79,11 @@ public class GetProductResponseDataSkuGlobalListingPolicy {
    * @return inventoryType
    */
   @javax.annotation.Nullable
-  public InventoryTypeEnum getInventoryType() {
+  public String getInventoryType() {
     return inventoryType;
   }
 
-  public void setInventoryType(@javax.annotation.Nullable InventoryTypeEnum inventoryType) {
+  public void setInventoryType(@javax.annotation.Nullable String inventoryType) {
     this.inventoryType = inventoryType;
   }
 
@@ -296,10 +238,6 @@ public class GetProductResponseDataSkuGlobalListingPolicy {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("inventory_type") != null && !jsonObj.get("inventory_type").isJsonNull()) && !jsonObj.get("inventory_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `inventory_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("inventory_type").toString()));
-      }
-      // validate the optional field `inventory_type`
-      if (jsonObj.get("inventory_type") != null && !jsonObj.get("inventory_type").isJsonNull()) {
-        InventoryTypeEnum.validateJsonElement(jsonObj.get("inventory_type"));
       }
       // validate the optional field `replicate_source`
       if (jsonObj.get("replicate_source") != null && !jsonObj.get("replicate_source").isJsonNull()) {

@@ -28,44 +28,21 @@ export interface ProductAuditStatusChangeWebhookDataAudit {
      *  * FAILED: The product failed the audit, or the audit was cancelled. 
      *  * PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to `pre_approved_reasons` for the prerequisites. 
      *  * APPROVED: The product passed the audit and has been listed on the platform.
-     * @type {ProductAuditStatusChangeWebhookDataAuditStatusEnum}
+     * @type {string}
      * @memberof ProductAuditStatusChangeWebhookDataAudit
      */
-    status?: ProductAuditStatusChangeWebhookDataAuditStatusEnum;
+    status?: string;
     /**
      * The reason why the audit status of the product is `PRE_APPROVED`. 
      *  Possible values: 
      *   
      *  * KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing. 
      *  * RESTRICTED_CATEGORY_PENDING: Applicable only for the US market. The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center.
-     * @type {Array<ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum>}
+     * @type {Array<string>}
      * @memberof ProductAuditStatusChangeWebhookDataAudit
      */
-    preApprovedReasons?: Array<ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum>;
+    preApprovedReasons?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const ProductAuditStatusChangeWebhookDataAuditStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Failed: 'FAILED',
-    PreApproved: 'PRE_APPROVED',
-    Approved: 'APPROVED'
-} as const;
-export type ProductAuditStatusChangeWebhookDataAuditStatusEnum = typeof ProductAuditStatusChangeWebhookDataAuditStatusEnum[keyof typeof ProductAuditStatusChangeWebhookDataAuditStatusEnum];
-
-/**
- * @export
- */
-export const ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum = {
-    KycPending: 'KYC_PENDING',
-    RestrictedCategoryPending: 'RESTRICTED_CATEGORY_PENDING'
-} as const;
-export type ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum = typeof ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum[keyof typeof ProductAuditStatusChangeWebhookDataAuditPreApprovedReasonsEnum];
-
 
 /**
  * Check if a given object implements the ProductAuditStatusChangeWebhookDataAudit interface.

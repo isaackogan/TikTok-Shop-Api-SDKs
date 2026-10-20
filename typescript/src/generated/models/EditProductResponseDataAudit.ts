@@ -25,23 +25,11 @@ export interface EditProductResponseDataAudit {
      * - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.
      * - AUDITING: The product is currently being audited.
      * - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the new information is immediately published on the platform.
-     * @type {EditProductResponseDataAuditStatusEnum}
+     * @type {string}
      * @memberof EditProductResponseDataAudit
      */
-    status?: EditProductResponseDataAuditStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const EditProductResponseDataAuditStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Approved: 'APPROVED'
-} as const;
-export type EditProductResponseDataAuditStatusEnum = typeof EditProductResponseDataAuditStatusEnum[keyof typeof EditProductResponseDataAuditStatusEnum];
-
 
 /**
  * Check if a given object implements the EditProductResponseDataAudit interface.

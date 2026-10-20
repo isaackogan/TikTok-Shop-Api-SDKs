@@ -38,7 +38,7 @@ data class GetCategoryRulesResponseDataFee (
 
     /* The type of fee. Possible values: PFAND */
     @SerializedName("type")
-    val type: GetCategoryRulesResponseDataFee.Type? = null,
+    val type: kotlin.String? = null,
 
     /* A flag to indicate whether information about the fee is required. */
     @SerializedName("is_required")
@@ -46,14 +46,6 @@ data class GetCategoryRulesResponseDataFee (
 
 ) {
 
-    /**
-     * The type of fee. Possible values: PFAND
-     *
-     * Values: PFAND
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PFAND") PFAND("PFAND");
-    }
 
 }
 

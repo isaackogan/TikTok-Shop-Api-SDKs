@@ -47,16 +47,16 @@ export interface SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData
     isOneSize?: boolean;
     /**
      * Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
-     * @type {SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum}
+     * @type {string}
      * @memberof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData
      */
-    measurementType?: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum;
+    measurementType?: string;
     /**
      * Possible values: METRIC: metric units; IMPERIAL: imperial units.
-     * @type {SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum}
+     * @type {string}
      * @memberof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData
      */
-    unitSystem?: SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum;
+    unitSystem?: string;
     /**
      * Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
      * @type {Array<string>}
@@ -64,27 +64,6 @@ export interface SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData
      */
     sizeTypes?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum = {
-    GenericMeasurements: 'GENERIC_MEASUREMENTS',
-    BodyMeasurements: 'BODY_MEASUREMENTS',
-    ProductMeasurements: 'PRODUCT_MEASUREMENTS'
-} as const;
-export type SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum = typeof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum[keyof typeof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataMeasurementTypeEnum];
-
-/**
- * @export
- */
-export const SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum = {
-    Metric: 'METRIC',
-    Imperial: 'IMPERIAL'
-} as const;
-export type SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum = typeof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum[keyof typeof SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataUnitSystemEnum];
-
 
 /**
  * Check if a given object implements the SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData interface.

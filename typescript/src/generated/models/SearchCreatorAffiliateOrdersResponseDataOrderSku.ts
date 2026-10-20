@@ -203,10 +203,10 @@ export interface SearchCreatorAffiliateOrdersResponseDataOrderSku {
      * - PRE_LIVE
      * - PROMOTION_PAGE
      * - LINKSHARE
-     * @type {SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum}
+     * @type {string}
      * @memberof SearchCreatorAffiliateOrdersResponseDataOrderSku
      */
-    contentType?: SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum;
+    contentType?: string;
     /**
      * The content identifier for the creator content through which the order was created.
      * @type {string}
@@ -397,21 +397,6 @@ export interface SearchCreatorAffiliateOrdersResponseDataOrderSku {
      */
     isCarousel?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum = {
-    Shop: 'SHOP',
-    Video: 'VIDEO',
-    Live: 'LIVE',
-    PreLive: 'PRE_LIVE',
-    PromotionPage: 'PROMOTION_PAGE',
-    Linkshare: 'LINKSHARE'
-} as const;
-export type SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum = typeof SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum[keyof typeof SearchCreatorAffiliateOrdersResponseDataOrderSkuContentTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchCreatorAffiliateOrdersResponseDataOrderSku interface.

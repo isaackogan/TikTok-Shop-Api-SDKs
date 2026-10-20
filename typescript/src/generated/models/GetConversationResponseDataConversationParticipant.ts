@@ -31,10 +31,10 @@ export interface GetConversationResponseDataConversationParticipant {
      * - `BUYER`
      * - `SHOP`
      * - `CUSTOMER_SERVICE`
-     * @type {GetConversationResponseDataConversationParticipantRoleEnum}
+     * @type {string}
      * @memberof GetConversationResponseDataConversationParticipant
      */
-    role?: GetConversationResponseDataConversationParticipantRoleEnum;
+    role?: string;
     /**
      * Participant's nickname.
      * @type {string}
@@ -59,32 +59,11 @@ export interface GetConversationResponseDataConversationParticipant {
      * - `TIKTOK_SHOP`
      * - `TOKOPEDIA`
      * You cannot send platform-specific content to a buyer from another platform. For example, when sending a product card to a Tokopedia buyer, ensure that the product is listed on Tokopedia.
-     * @type {GetConversationResponseDataConversationParticipantPlatformEnum}
+     * @type {string}
      * @memberof GetConversationResponseDataConversationParticipant
      */
-    platform?: GetConversationResponseDataConversationParticipantPlatformEnum;
+    platform?: string;
 }
-
-
-/**
- * @export
- */
-export const GetConversationResponseDataConversationParticipantRoleEnum = {
-    Buyer: 'BUYER',
-    Shop: 'SHOP',
-    CustomerService: 'CUSTOMER_SERVICE'
-} as const;
-export type GetConversationResponseDataConversationParticipantRoleEnum = typeof GetConversationResponseDataConversationParticipantRoleEnum[keyof typeof GetConversationResponseDataConversationParticipantRoleEnum];
-
-/**
- * @export
- */
-export const GetConversationResponseDataConversationParticipantPlatformEnum = {
-    TiktokShop: 'TIKTOK_SHOP',
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetConversationResponseDataConversationParticipantPlatformEnum = typeof GetConversationResponseDataConversationParticipantPlatformEnum[keyof typeof GetConversationResponseDataConversationParticipantPlatformEnum];
-
 
 /**
  * Check if a given object implements the GetConversationResponseDataConversationParticipant interface.

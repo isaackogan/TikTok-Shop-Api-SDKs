@@ -60,201 +60,20 @@ public class ActivityStatusChangeWebhookData {
   @javax.annotation.Nullable
   private Long updateTime;
 
-  /**
-   * The type of the promotion activity. Possible values are:      * &#x60;FIXED_PRICE&#x60;   * &#x60;DIRECT_DISCOUNT&#x60;   * &#x60;SHIPPING_DISCOUNT&#x60;   * &#x60;BUY_MORE_SAVE_MORE&#x60;   * &#x60;FLASHSALE&#x60; (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
-   */
-  @JsonAdapter(ActivityTypeEnum.Adapter.class)
-  public enum ActivityTypeEnum {
-    /**
-     * 
-     */
-    FIXED_PRICE("FIXED_PRICE"),
-    
-    /**
-     * 
-     */
-    DIRECT_DISCOUNT("DIRECT_DISCOUNT"),
-    
-    /**
-     * 
-     */
-    SHIPPING_DISCOUNT("SHIPPING_DISCOUNT"),
-    
-    /**
-     * 
-     */
-    BUY_MORE_SAVE_MORE("BUY_MORE_SAVE_MORE"),
-    
-    /**
-     * Only available in SEA markets: SG, TH, ID, MY, PH, VN
-     */
-    FLASHSALE("FLASHSALE");
-
-    private String value;
-
-    ActivityTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ActivityTypeEnum fromValue(String value) {
-      for (ActivityTypeEnum b : ActivityTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ActivityTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ActivityTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ActivityTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ActivityTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ActivityTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ACTIVITY_TYPE = "activity_type";
   @SerializedName(SERIALIZED_NAME_ACTIVITY_TYPE)
   @javax.annotation.Nullable
-  private ActivityTypeEnum activityType;
-
-  /**
-   * Activity product dimension, values are:      * &#x60;PRODUCT&#x60;   * &#x60;VARIATION&#x60;   * &#x60;SHOP&#x60;
-   */
-  @JsonAdapter(ProductLevelEnum.Adapter.class)
-  public enum ProductLevelEnum {
-    PRODUCT("PRODUCT"),
-    
-    VARIATION("VARIATION"),
-    
-    SHOP("SHOP");
-
-    private String value;
-
-    ProductLevelEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProductLevelEnum fromValue(String value) {
-      for (ProductLevelEnum b : ProductLevelEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProductLevelEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProductLevelEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProductLevelEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProductLevelEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProductLevelEnum.fromValue(value);
-    }
-  }
+  private String activityType;
 
   public static final String SERIALIZED_NAME_PRODUCT_LEVEL = "product_level";
   @SerializedName(SERIALIZED_NAME_PRODUCT_LEVEL)
   @javax.annotation.Nullable
-  private ProductLevelEnum productLevel;
-
-  /**
-   * The current status of the promotion activity. Possible values are:      * &#x60;ONGOING&#x60;   * &#x60;EXPIRED&#x60;   * &#x60;DEACTIVATED&#x60;
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    ONGOING("ONGOING"),
-    
-    EXPIRED("EXPIRED"),
-    
-    DEACTIVATED("DEACTIVATED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
+  private String productLevel;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public ActivityStatusChangeWebhookData() {
   }
@@ -297,7 +116,7 @@ public class ActivityStatusChangeWebhookData {
   }
 
 
-  public ActivityStatusChangeWebhookData activityType(@javax.annotation.Nullable ActivityTypeEnum activityType) {
+  public ActivityStatusChangeWebhookData activityType(@javax.annotation.Nullable String activityType) {
     this.activityType = activityType;
     return this;
   }
@@ -307,16 +126,16 @@ public class ActivityStatusChangeWebhookData {
    * @return activityType
    */
   @javax.annotation.Nullable
-  public ActivityTypeEnum getActivityType() {
+  public String getActivityType() {
     return activityType;
   }
 
-  public void setActivityType(@javax.annotation.Nullable ActivityTypeEnum activityType) {
+  public void setActivityType(@javax.annotation.Nullable String activityType) {
     this.activityType = activityType;
   }
 
 
-  public ActivityStatusChangeWebhookData productLevel(@javax.annotation.Nullable ProductLevelEnum productLevel) {
+  public ActivityStatusChangeWebhookData productLevel(@javax.annotation.Nullable String productLevel) {
     this.productLevel = productLevel;
     return this;
   }
@@ -326,16 +145,16 @@ public class ActivityStatusChangeWebhookData {
    * @return productLevel
    */
   @javax.annotation.Nullable
-  public ProductLevelEnum getProductLevel() {
+  public String getProductLevel() {
     return productLevel;
   }
 
-  public void setProductLevel(@javax.annotation.Nullable ProductLevelEnum productLevel) {
+  public void setProductLevel(@javax.annotation.Nullable String productLevel) {
     this.productLevel = productLevel;
   }
 
 
-  public ActivityStatusChangeWebhookData status(@javax.annotation.Nullable StatusEnum status) {
+  public ActivityStatusChangeWebhookData status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -345,11 +164,11 @@ public class ActivityStatusChangeWebhookData {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -474,23 +293,11 @@ public class ActivityStatusChangeWebhookData {
       if ((jsonObj.get("activity_type") != null && !jsonObj.get("activity_type").isJsonNull()) && !jsonObj.get("activity_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `activity_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("activity_type").toString()));
       }
-      // validate the optional field `activity_type`
-      if (jsonObj.get("activity_type") != null && !jsonObj.get("activity_type").isJsonNull()) {
-        ActivityTypeEnum.validateJsonElement(jsonObj.get("activity_type"));
-      }
       if ((jsonObj.get("product_level") != null && !jsonObj.get("product_level").isJsonNull()) && !jsonObj.get("product_level").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_level` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_level").toString()));
       }
-      // validate the optional field `product_level`
-      if (jsonObj.get("product_level") != null && !jsonObj.get("product_level").isJsonNull()) {
-        ProductLevelEnum.validateJsonElement(jsonObj.get("product_level"));
-      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

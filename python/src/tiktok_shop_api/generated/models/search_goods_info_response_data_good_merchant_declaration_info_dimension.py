@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_merchant_declaration_info_dimension_unit import (
-    SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimensionUnit,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension")
@@ -21,7 +18,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension:
         width (str | Unset): Width value, up to three decimal places.
         length (str | Unset): Length value, up to three decimal places.
         height (str | Unset): Height value, up to three decimal places.
-        unit (SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimensionUnit | Unset): Dimension unit.
+        unit (str | Unset): Dimension unit.
             Possible values:
             - MILLIMETER
             - CENTIMETER
@@ -34,7 +31,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension:
     width: str | Unset = UNSET
     length: str | Unset = UNSET
     height: str | Unset = UNSET
-    unit: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimensionUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -44,9 +41,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension:
 
         height = self.height
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -71,12 +66,7 @@ class SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimension:
 
         height = d.pop("height", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimensionUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = SearchGoodsInfoResponseDataGoodMerchantDeclarationInfoDimensionUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         search_goods_info_response_data_good_merchant_declaration_info_dimension = cls(
             width=width,

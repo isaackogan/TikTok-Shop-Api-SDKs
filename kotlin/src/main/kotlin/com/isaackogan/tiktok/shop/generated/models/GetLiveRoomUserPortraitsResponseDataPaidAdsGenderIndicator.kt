@@ -38,7 +38,7 @@ data class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator (
 
     /* The gender category represented by this indicator. Possible values: - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender. - USER_PORTRAIT_GENDER_M: Male. - USER_PORTRAIT_GENDER_F: Female. */
     @SerializedName("type")
-    val type: GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator.Type? = null,
+    val type: kotlin.String? = null,
 
     /* The count for the corresponding paid-advertising gender indicator. */
     @SerializedName("value")
@@ -46,16 +46,6 @@ data class GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator (
 
 ) {
 
-    /**
-     * The gender category represented by this indicator. Possible values: - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender. - USER_PORTRAIT_GENDER_M: Male. - USER_PORTRAIT_GENDER_F: Female.
-     *
-     * Values: USER_PORTRAIT_GENDER_UNKNOWN,USER_PORTRAIT_GENDER_M,USER_PORTRAIT_GENDER_F
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "USER_PORTRAIT_GENDER_UNKNOWN") USER_PORTRAIT_GENDER_UNKNOWN("USER_PORTRAIT_GENDER_UNKNOWN"),
-        @SerializedName(value = "USER_PORTRAIT_GENDER_M") USER_PORTRAIT_GENDER_M("USER_PORTRAIT_GENDER_M"),
-        @SerializedName(value = "USER_PORTRAIT_GENDER_F") USER_PORTRAIT_GENDER_F("USER_PORTRAIT_GENDER_F");
-    }
 
 }
 

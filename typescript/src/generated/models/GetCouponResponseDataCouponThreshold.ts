@@ -31,10 +31,10 @@ export interface GetCouponResponseDataCouponThreshold {
      * The type of purchase criteria. Possible enumerations are:
      * - `NONE`: No minimum purchase criteria.
      * - `MIN_SPEND`: Buyer must meet or exceed the minimum spend criteria with eligible products.
-     * @type {GetCouponResponseDataCouponThresholdTypeEnum}
+     * @type {string}
      * @memberof GetCouponResponseDataCouponThreshold
      */
-    type?: GetCouponResponseDataCouponThresholdTypeEnum;
+    type?: string;
     /**
      * When `threshold.type == 'MIN_SPEND'`, a customer must purchase products from the range defined by `product_scope` with a monetary amount greater than or equal to this value, or the customer cannot use the coupon.
      * @type {MinSpend}
@@ -42,17 +42,6 @@ export interface GetCouponResponseDataCouponThreshold {
      */
     minSpend?: MinSpend;
 }
-
-
-/**
- * @export
- */
-export const GetCouponResponseDataCouponThresholdTypeEnum = {
-    None: 'NONE',
-    MinSpend: 'MIN_SPEND'
-} as const;
-export type GetCouponResponseDataCouponThresholdTypeEnum = typeof GetCouponResponseDataCouponThresholdTypeEnum[keyof typeof GetCouponResponseDataCouponThresholdTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCouponResponseDataCouponThreshold interface.

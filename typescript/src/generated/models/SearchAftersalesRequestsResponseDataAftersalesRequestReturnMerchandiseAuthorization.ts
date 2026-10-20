@@ -53,10 +53,10 @@ export interface SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerc
      * - `RETURN_IN_TRANSIT`
      * - `PENDING_PACKAGE_REVIEW`
      * - `PACKAGE_REVIEW_COMPLETED`
-     * @type {SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum}
+     * @type {string}
      * @memberof SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization
      */
-    status?: SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum;
+    status?: string;
     /**
      * List of items associated with this return merchandise authorization (RMA).
      * @type {Array<LineItem>}
@@ -64,20 +64,6 @@ export interface SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerc
      */
     lineItems?: Array<LineItem>;
 }
-
-
-/**
- * @export
- */
-export const SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum = {
-    Init: 'INIT',
-    AwaitingBuyerReturn: 'AWAITING_BUYER_RETURN',
-    ReturnInTransit: 'RETURN_IN_TRANSIT',
-    PendingPackageReview: 'PENDING_PACKAGE_REVIEW',
-    PackageReviewCompleted: 'PACKAGE_REVIEW_COMPLETED'
-} as const;
-export type SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum = typeof SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum[keyof typeof SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorizationStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization interface.

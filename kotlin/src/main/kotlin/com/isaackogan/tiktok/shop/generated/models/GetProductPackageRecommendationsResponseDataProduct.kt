@@ -46,7 +46,7 @@ data class GetProductPackageRecommendationsResponseDataProduct (
 
     /* The detected package anomaly types. Possible values: - `None`: No weight or dimension anomaly was detected. - `Dimension`: A dimension correction is recommended. - `Weight`: A weight correction is recommended. */
     @SerializedName("abnormality_types")
-    val abnormalityTypes: kotlin.collections.List<GetProductPackageRecommendationsResponseDataProduct.AbnormalityTypes>? = null,
+    val abnormalityTypes: kotlin.collections.List<kotlin.String>? = null,
 
     /* Weight correction recommendation (Returned only when the weight of product has been recommended ). */
     @SerializedName("weight_recommendation")
@@ -58,16 +58,6 @@ data class GetProductPackageRecommendationsResponseDataProduct (
 
 ) {
 
-    /**
-     * The detected package anomaly types. Possible values: - `None`: No weight or dimension anomaly was detected. - `Dimension`: A dimension correction is recommended. - `Weight`: A weight correction is recommended.
-     *
-     * Values: None,Dimension,Weight
-     */
-    enum class AbnormalityTypes(val value: kotlin.String) {
-        @SerializedName(value = "None") None("None"),
-        @SerializedName(value = "Dimension") Dimension("Dimension"),
-        @SerializedName(value = "Weight") Weight("Weight");
-    }
 
 }
 

@@ -40,11 +40,11 @@ data class GetGlobalCategoryRulesResponseDataProductCertificationRequirementCond
 
     /* The market where the certification is required when the conditions are met. Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam */
     @SerializedName("region")
-    val region: GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition.Region? = null,
+    val region: kotlin.String? = null,
 
     /* The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition. */
     @SerializedName("condition_type")
-    val conditionType: GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition.ConditionType? = null,
+    val conditionType: kotlin.String? = null,
 
     /* The ID of the product attribute that is being evaluated by the condition. */
     @SerializedName("attribute_id")
@@ -56,44 +56,6 @@ data class GetGlobalCategoryRulesResponseDataProductCertificationRequirementCond
 
 ) {
 
-    /**
-     * The market where the certification is required when the conditions are met. Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IE,IT,JP,MX,MY,NL,PH,PL,PT,SG,TH,US,VN
-     */
-    enum class Region(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MX") MX("MX"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PL") PL("PL"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN");
-    }
-    /**
-     * The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     *
-     * Values: VALUE_ID_MATCH
-     */
-    enum class ConditionType(val value: kotlin.String) {
-        @SerializedName(value = "VALUE_ID_MATCH") VALUE_ID_MATCH("VALUE_ID_MATCH");
-    }
 
 }
 

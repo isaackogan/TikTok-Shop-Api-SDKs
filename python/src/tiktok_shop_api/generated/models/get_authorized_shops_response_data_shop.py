@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_authorized_shops_response_data_shop_seller_type import GetAuthorizedShopsResponseDataShopSellerType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetAuthorizedShopsResponseDataShop")
@@ -19,7 +18,7 @@ class GetAuthorizedShopsResponseDataShop:
         id (str | Unset): An internal identifier for the TikTok Shop.
         name (str | Unset): The TikTok Shop name.
         region (str | Unset): The region of the shop.
-        seller_type (GetAuthorizedShopsResponseDataShopSellerType | Unset): The type of seller.
+        seller_type (str | Unset): The type of seller.
             Possible values:
             - CROSS_BORDER: Cross border sellers with multiple shops in different countries.
             - LOCAL: Local sellers with only 1 shop.
@@ -31,7 +30,7 @@ class GetAuthorizedShopsResponseDataShop:
     id: str | Unset = UNSET
     name: str | Unset = UNSET
     region: str | Unset = UNSET
-    seller_type: GetAuthorizedShopsResponseDataShopSellerType | Unset = UNSET
+    seller_type: str | Unset = UNSET
     cipher: str | Unset = UNSET
     code: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -43,9 +42,7 @@ class GetAuthorizedShopsResponseDataShop:
 
         region = self.region
 
-        seller_type: str | Unset = UNSET
-        if not isinstance(self.seller_type, Unset):
-            seller_type = self.seller_type.value
+        seller_type = self.seller_type
 
         cipher = self.cipher
 
@@ -78,12 +75,7 @@ class GetAuthorizedShopsResponseDataShop:
 
         region = d.pop("region", UNSET)
 
-        _seller_type = d.pop("seller_type", UNSET)
-        seller_type: GetAuthorizedShopsResponseDataShopSellerType | Unset
-        if isinstance(_seller_type, Unset):
-            seller_type = UNSET
-        else:
-            seller_type = GetAuthorizedShopsResponseDataShopSellerType(_seller_type)
+        seller_type = d.pop("seller_type", UNSET)
 
         cipher = d.pop("cipher", UNSET)
 

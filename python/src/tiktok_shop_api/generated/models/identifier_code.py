@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.identifier_code_type import IdentifierCodeType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="IdentifierCode")
@@ -25,7 +24,7 @@ class IdentifierCode:
             - ISBN: 13 digits, or 9 digits ending in capital `X`
             - JAN: 8 or 13 digits
             **Note**: The identifier code must be unique for each SKU, with no repetition allowed.
-        type_ (IdentifierCodeType | Unset): The type of identifier code.
+        type_ (str | Unset): The type of identifier code.
             Possible values:
             - GTIN
             - EAN
@@ -35,15 +34,13 @@ class IdentifierCode:
     """
 
     code: str | Unset = UNSET
-    type_: IdentifierCodeType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         code = self.code
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -60,12 +57,7 @@ class IdentifierCode:
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: IdentifierCodeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = IdentifierCodeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         identifier_code = cls(
             code=code,

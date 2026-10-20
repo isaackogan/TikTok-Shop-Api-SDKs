@@ -43,20 +43,10 @@ data class GetProductResponseDataSkuPreSale (
 
     /* The type of pre-sale. Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.  **UK, EU, SEA, JP, and LATAM** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**. */
     @SerializedName("type")
-    val type: GetProductResponseDataSkuPreSale.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * The type of pre-sale. Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **release date**. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a **duration**. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a **duration**.  **UK, EU, SEA, JP, and LATAM** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a **duration**.
-     *
-     * Values: PRE_ORDER,MADE_TO_ORDER,CUSTOM
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER"),
-        @SerializedName(value = "CUSTOM") CUSTOM("CUSTOM");
-    }
 
 }
 

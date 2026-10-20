@@ -42,22 +42,10 @@ data class NewMessageWebhookDataSender (
 
     /* Sender's role, with possible values:   * BUYER   * SHOP   * CUSTOMER_SERVICE   * SYSTEM   * ROBOT */
     @SerializedName("role")
-    val role: NewMessageWebhookDataSender.Role? = null
+    val role: kotlin.String? = null
 
 ) {
 
-    /**
-     * Sender's role, with possible values:   * BUYER   * SHOP   * CUSTOMER_SERVICE   * SYSTEM   * ROBOT
-     *
-     * Values: BUYER,SHOP,CUSTOMER_SERVICE,SYSTEM,ROBOT
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "CUSTOMER_SERVICE") CUSTOMER_SERVICE("CUSTOMER_SERVICE"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM"),
-        @SerializedName(value = "ROBOT") ROBOT("ROBOT");
-    }
 
 }
 

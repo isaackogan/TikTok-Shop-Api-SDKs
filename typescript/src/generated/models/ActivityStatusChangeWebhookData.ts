@@ -39,65 +39,31 @@ export interface ActivityStatusChangeWebhookData {
      *  * `SHIPPING_DISCOUNT` 
      *  * `BUY_MORE_SAVE_MORE` 
      *  * `FLASHSALE` (Only available in SEA markets: SG, TH, ID, MY, PH, VN)
-     * @type {ActivityStatusChangeWebhookDataActivityTypeEnum}
+     * @type {string}
      * @memberof ActivityStatusChangeWebhookData
      */
-    activityType?: ActivityStatusChangeWebhookDataActivityTypeEnum;
+    activityType?: string;
     /**
      * Activity product dimension, values are: 
      *   
      *  * `PRODUCT` 
      *  * `VARIATION` 
      *  * `SHOP`
-     * @type {ActivityStatusChangeWebhookDataProductLevelEnum}
+     * @type {string}
      * @memberof ActivityStatusChangeWebhookData
      */
-    productLevel?: ActivityStatusChangeWebhookDataProductLevelEnum;
+    productLevel?: string;
     /**
      * The current status of the promotion activity. Possible values are: 
      *   
      *  * `ONGOING` 
      *  * `EXPIRED` 
      *  * `DEACTIVATED`
-     * @type {ActivityStatusChangeWebhookDataStatusEnum}
+     * @type {string}
      * @memberof ActivityStatusChangeWebhookData
      */
-    status?: ActivityStatusChangeWebhookDataStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const ActivityStatusChangeWebhookDataActivityTypeEnum = {
-    FixedPrice: 'FIXED_PRICE',
-    DirectDiscount: 'DIRECT_DISCOUNT',
-    ShippingDiscount: 'SHIPPING_DISCOUNT',
-    BuyMoreSaveMore: 'BUY_MORE_SAVE_MORE',
-    Flashsale: 'FLASHSALE'
-} as const;
-export type ActivityStatusChangeWebhookDataActivityTypeEnum = typeof ActivityStatusChangeWebhookDataActivityTypeEnum[keyof typeof ActivityStatusChangeWebhookDataActivityTypeEnum];
-
-/**
- * @export
- */
-export const ActivityStatusChangeWebhookDataProductLevelEnum = {
-    Product: 'PRODUCT',
-    Variation: 'VARIATION',
-    Shop: 'SHOP'
-} as const;
-export type ActivityStatusChangeWebhookDataProductLevelEnum = typeof ActivityStatusChangeWebhookDataProductLevelEnum[keyof typeof ActivityStatusChangeWebhookDataProductLevelEnum];
-
-/**
- * @export
- */
-export const ActivityStatusChangeWebhookDataStatusEnum = {
-    Ongoing: 'ONGOING',
-    Expired: 'EXPIRED',
-    Deactivated: 'DEACTIVATED'
-} as const;
-export type ActivityStatusChangeWebhookDataStatusEnum = typeof ActivityStatusChangeWebhookDataStatusEnum[keyof typeof ActivityStatusChangeWebhookDataStatusEnum];
-
 
 /**
  * Check if a given object implements the ActivityStatusChangeWebhookData interface.

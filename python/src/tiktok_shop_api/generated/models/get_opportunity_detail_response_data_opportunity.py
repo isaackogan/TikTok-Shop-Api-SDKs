@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_opportunity_detail_response_data_opportunity_action_type import (
-    GetOpportunityDetailResponseDataOpportunityActionType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -34,7 +31,7 @@ class GetOpportunityDetailResponseDataOpportunity:
     """
     Attributes:
         id (str | Unset): Unique ID of the opportunity
-        action_type (GetOpportunityDetailResponseDataOpportunityActionType | Unset): The recommended action.
+        action_type (str | Unset): The recommended action.
             Possible values:
             - LIST_SAME: List the same product.
             - LIST_SIMILAR: List a similar product.
@@ -45,7 +42,7 @@ class GetOpportunityDetailResponseDataOpportunity:
     """
 
     id: str | Unset = UNSET
-    action_type: GetOpportunityDetailResponseDataOpportunityActionType | Unset = UNSET
+    action_type: str | Unset = UNSET
     listing_criteria: GetOpportunityDetailResponseDataOpportunityListingCriteria | Unset = UNSET
     content_data: GetOpportunityDetailResponseDataOpportunityContentData | Unset = UNSET
     market_data: GetOpportunityDetailResponseDataOpportunityMarketData | Unset = UNSET
@@ -55,9 +52,7 @@ class GetOpportunityDetailResponseDataOpportunity:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        action_type: str | Unset = UNSET
-        if not isinstance(self.action_type, Unset):
-            action_type = self.action_type.value
+        action_type = self.action_type
 
         listing_criteria: dict[str, Any] | Unset = UNSET
         if not isinstance(self.listing_criteria, Unset):
@@ -111,12 +106,7 @@ class GetOpportunityDetailResponseDataOpportunity:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _action_type = d.pop("action_type", UNSET)
-        action_type: GetOpportunityDetailResponseDataOpportunityActionType | Unset
-        if isinstance(_action_type, Unset):
-            action_type = UNSET
-        else:
-            action_type = GetOpportunityDetailResponseDataOpportunityActionType(_action_type)
+        action_type = d.pop("action_type", UNSET)
 
         _listing_criteria = d.pop("listing_criteria", UNSET)
         listing_criteria: GetOpportunityDetailResponseDataOpportunityListingCriteria | Unset

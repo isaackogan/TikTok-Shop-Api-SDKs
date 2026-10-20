@@ -205,10 +205,10 @@ export interface GetTransactionsByStatementResponseDataTransaction {
      * Possible values:
      * - COLLECTED: A portion of the order's settlement amount has been withheld as reserve funds.
      * - RELEASED: The previously reserved funds have been released and paid out to the seller.
-     * @type {GetTransactionsByStatementResponseDataTransactionReserveStatusEnum}
+     * @type {string}
      * @memberof GetTransactionsByStatementResponseDataTransaction
      */
-    reserveStatus?: GetTransactionsByStatementResponseDataTransactionReserveStatusEnum;
+    reserveStatus?: string;
     /**
      * The estimated date when the reserve funds will be released and paid out to the seller. Unix timestamp. 
      * Returns an empty value if the reserve funds have already been released.
@@ -217,17 +217,6 @@ export interface GetTransactionsByStatementResponseDataTransaction {
      */
     estimatedReleaseTime?: string;
 }
-
-
-/**
- * @export
- */
-export const GetTransactionsByStatementResponseDataTransactionReserveStatusEnum = {
-    Collected: 'COLLECTED',
-    Released: 'RELEASED'
-} as const;
-export type GetTransactionsByStatementResponseDataTransactionReserveStatusEnum = typeof GetTransactionsByStatementResponseDataTransactionReserveStatusEnum[keyof typeof GetTransactionsByStatementResponseDataTransactionReserveStatusEnum];
-
 
 /**
  * Check if a given object implements the GetTransactionsByStatementResponseDataTransaction interface.

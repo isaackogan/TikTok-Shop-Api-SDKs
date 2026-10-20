@@ -45,7 +45,7 @@ data class OpportunityMatchingStatusChangeWebhookData (
 
     /* The status of opportunity matching.   Possible values:   - `PENDING`: Waiting for opportunity matching.   - `MATCHED`: There are one or more matched opportunities.   - `NOT_MATCHED`: There are no matches. */
     @SerializedName("opportunity_matching_status")
-    val opportunityMatchingStatus: OpportunityMatchingStatusChangeWebhookData.OpportunityMatchingStatus? = null,
+    val opportunityMatchingStatus: kotlin.String? = null,
 
     /* A list of IDs for the matched opportunities. */
     @SerializedName("opportunity_ids")
@@ -61,16 +61,6 @@ data class OpportunityMatchingStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * The status of opportunity matching.   Possible values:   - `PENDING`: Waiting for opportunity matching.   - `MATCHED`: There are one or more matched opportunities.   - `NOT_MATCHED`: There are no matches.
-     *
-     * Values: PENDING,MATCHED,NOT_MATCHED
-     */
-    enum class OpportunityMatchingStatus(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "MATCHED") MATCHED("MATCHED"),
-        @SerializedName(value = "NOT_MATCHED") NOT_MATCHED("NOT_MATCHED");
-    }
 
 }
 

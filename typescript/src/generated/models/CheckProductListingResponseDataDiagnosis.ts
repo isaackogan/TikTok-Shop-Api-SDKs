@@ -42,10 +42,10 @@ export interface CheckProductListingResponseDataDiagnosis {
      * - IMAGE: Product image displayed in the image gallery 
      * - ATTRIBUTE: Product attribute
      * - SIZE_CHART: Product size chart
-     * @type {CheckProductListingResponseDataDiagnosisFieldEnum}
+     * @type {string}
      * @memberof CheckProductListingResponseDataDiagnosis
      */
-    field?: CheckProductListingResponseDataDiagnosisFieldEnum;
+    field?: string;
     /**
      * The diagnosis results.
      * @type {Array<DiagnosisResult>}
@@ -59,20 +59,6 @@ export interface CheckProductListingResponseDataDiagnosis {
      */
     suggestions?: CheckProductListingResponseDataDiagnosisSuggestion;
 }
-
-
-/**
- * @export
- */
-export const CheckProductListingResponseDataDiagnosisFieldEnum = {
-    Title: 'TITLE',
-    Description: 'DESCRIPTION',
-    Image: 'IMAGE',
-    Attribute: 'ATTRIBUTE',
-    SizeChart: 'SIZE_CHART'
-} as const;
-export type CheckProductListingResponseDataDiagnosisFieldEnum = typeof CheckProductListingResponseDataDiagnosisFieldEnum[keyof typeof CheckProductListingResponseDataDiagnosisFieldEnum];
-
 
 /**
  * Check if a given object implements the CheckProductListingResponseDataDiagnosis interface.

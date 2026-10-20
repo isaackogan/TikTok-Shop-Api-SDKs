@@ -42,22 +42,11 @@ export interface DiagnosisResult {
      * **Note**: 
      * - To reach a higher tier, you must implement all recommendations from the destination tier and all preceding tiers. For example, a product will reach the "GOOD" tier once all "FAIR" and "GOOD" recommendations are addressed or implemented.
      * - Available only for the US market.
-     * @type {DiagnosisResultQualityTierEnum}
+     * @type {string}
      * @memberof DiagnosisResult
      */
-    qualityTier?: DiagnosisResultQualityTierEnum;
+    qualityTier?: string;
 }
-
-
-/**
- * @export
- */
-export const DiagnosisResultQualityTierEnum = {
-    Fair: 'FAIR',
-    Good: 'GOOD'
-} as const;
-export type DiagnosisResultQualityTierEnum = typeof DiagnosisResultQualityTierEnum[keyof typeof DiagnosisResultQualityTierEnum];
-
 
 /**
  * Check if a given object implements the DiagnosisResult interface.

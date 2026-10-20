@@ -57,73 +57,10 @@ public class OpportunityMatchingStatusChangeWebhookData {
   @javax.annotation.Nullable
   private String externalProductId;
 
-  /**
-   * The status of opportunity matching.   Possible values:   - &#x60;PENDING&#x60;: Waiting for opportunity matching.   - &#x60;MATCHED&#x60;: There are one or more matched opportunities.   - &#x60;NOT_MATCHED&#x60;: There are no matches.
-   */
-  @JsonAdapter(OpportunityMatchingStatusEnum.Adapter.class)
-  public enum OpportunityMatchingStatusEnum {
-    /**
-     * Waiting for opportunity matching.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * There are one or more matched opportunities.
-     */
-    MATCHED("MATCHED"),
-    
-    /**
-     * There are no matches.
-     */
-    NOT_MATCHED("NOT_MATCHED");
-
-    private String value;
-
-    OpportunityMatchingStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OpportunityMatchingStatusEnum fromValue(String value) {
-      for (OpportunityMatchingStatusEnum b : OpportunityMatchingStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OpportunityMatchingStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OpportunityMatchingStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OpportunityMatchingStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OpportunityMatchingStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OpportunityMatchingStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_OPPORTUNITY_MATCHING_STATUS = "opportunity_matching_status";
   @SerializedName(SERIALIZED_NAME_OPPORTUNITY_MATCHING_STATUS)
   @javax.annotation.Nullable
-  private OpportunityMatchingStatusEnum opportunityMatchingStatus;
+  private String opportunityMatchingStatus;
 
   public static final String SERIALIZED_NAME_OPPORTUNITY_IDS = "opportunity_ids";
   @SerializedName(SERIALIZED_NAME_OPPORTUNITY_IDS)
@@ -162,7 +99,7 @@ public class OpportunityMatchingStatusChangeWebhookData {
   }
 
 
-  public OpportunityMatchingStatusChangeWebhookData opportunityMatchingStatus(@javax.annotation.Nullable OpportunityMatchingStatusEnum opportunityMatchingStatus) {
+  public OpportunityMatchingStatusChangeWebhookData opportunityMatchingStatus(@javax.annotation.Nullable String opportunityMatchingStatus) {
     this.opportunityMatchingStatus = opportunityMatchingStatus;
     return this;
   }
@@ -172,11 +109,11 @@ public class OpportunityMatchingStatusChangeWebhookData {
    * @return opportunityMatchingStatus
    */
   @javax.annotation.Nullable
-  public OpportunityMatchingStatusEnum getOpportunityMatchingStatus() {
+  public String getOpportunityMatchingStatus() {
     return opportunityMatchingStatus;
   }
 
-  public void setOpportunityMatchingStatus(@javax.annotation.Nullable OpportunityMatchingStatusEnum opportunityMatchingStatus) {
+  public void setOpportunityMatchingStatus(@javax.annotation.Nullable String opportunityMatchingStatus) {
     this.opportunityMatchingStatus = opportunityMatchingStatus;
   }
 
@@ -365,10 +302,6 @@ public class OpportunityMatchingStatusChangeWebhookData {
       }
       if ((jsonObj.get("opportunity_matching_status") != null && !jsonObj.get("opportunity_matching_status").isJsonNull()) && !jsonObj.get("opportunity_matching_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `opportunity_matching_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("opportunity_matching_status").toString()));
-      }
-      // validate the optional field `opportunity_matching_status`
-      if (jsonObj.get("opportunity_matching_status") != null && !jsonObj.get("opportunity_matching_status").isJsonNull()) {
-        OpportunityMatchingStatusEnum.validateJsonElement(jsonObj.get("opportunity_matching_status"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("opportunity_ids") != null && !jsonObj.get("opportunity_ids").isJsonNull() && !jsonObj.get("opportunity_ids").isJsonArray()) {

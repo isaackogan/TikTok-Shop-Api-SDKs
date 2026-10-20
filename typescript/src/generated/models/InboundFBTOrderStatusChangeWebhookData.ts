@@ -33,10 +33,10 @@ export interface InboundFBTOrderStatusChangeWebhookData {
      * - PARTIALLY_RECEIVED, 
      * - RECEIVED, 
      * - CANCELLED
-     * @type {InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum}
+     * @type {string}
      * @memberof InboundFBTOrderStatusChangeWebhookData
      */
-    orderStatus?: InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum;
+    orderStatus?: string;
     /**
      * The time when the change occurred. Unix timestamp.
      * @type {number}
@@ -44,21 +44,6 @@ export interface InboundFBTOrderStatusChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum = {
-    ToBeReceived: 'TO_BE_RECEIVED',
-    ArriveHub: 'ARRIVE_HUB',
-    Receiving: 'RECEIVING',
-    PartiallyReceived: 'PARTIALLY_RECEIVED',
-    Received: 'RECEIVED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum = typeof InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum[keyof typeof InboundFBTOrderStatusChangeWebhookDataOrderStatusEnum];
-
 
 /**
  * Check if a given object implements the InboundFBTOrderStatusChangeWebhookData interface.

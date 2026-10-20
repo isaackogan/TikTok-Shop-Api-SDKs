@@ -68,136 +68,15 @@ public class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData {
   @javax.annotation.Nullable
   private Boolean isOneSize;
 
-  /**
-   * Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
-   */
-  @JsonAdapter(MeasurementTypeEnum.Adapter.class)
-  public enum MeasurementTypeEnum {
-    /**
-     * generic measurements
-     */
-    GENERIC_MEASUREMENTS("GENERIC_MEASUREMENTS"),
-    
-    /**
-     * shopper body measurements
-     */
-    BODY_MEASUREMENTS("BODY_MEASUREMENTS"),
-    
-    /**
-     * finished-product measurements.
-     */
-    PRODUCT_MEASUREMENTS("PRODUCT_MEASUREMENTS");
-
-    private String value;
-
-    MeasurementTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static MeasurementTypeEnum fromValue(String value) {
-      for (MeasurementTypeEnum b : MeasurementTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<MeasurementTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final MeasurementTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public MeasurementTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return MeasurementTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      MeasurementTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_MEASUREMENT_TYPE = "measurement_type";
   @SerializedName(SERIALIZED_NAME_MEASUREMENT_TYPE)
   @javax.annotation.Nullable
-  private MeasurementTypeEnum measurementType;
-
-  /**
-   * Possible values: METRIC: metric units; IMPERIAL: imperial units.
-   */
-  @JsonAdapter(UnitSystemEnum.Adapter.class)
-  public enum UnitSystemEnum {
-    /**
-     * metric units
-     */
-    METRIC("METRIC"),
-    
-    /**
-     * imperial units.
-     */
-    IMPERIAL("IMPERIAL");
-
-    private String value;
-
-    UnitSystemEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnitSystemEnum fromValue(String value) {
-      for (UnitSystemEnum b : UnitSystemEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnitSystemEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnitSystemEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnitSystemEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnitSystemEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnitSystemEnum.fromValue(value);
-    }
-  }
+  private String measurementType;
 
   public static final String SERIALIZED_NAME_UNIT_SYSTEM = "unit_system";
   @SerializedName(SERIALIZED_NAME_UNIT_SYSTEM)
   @javax.annotation.Nullable
-  private UnitSystemEnum unitSystem;
+  private String unitSystem;
 
   public static final String SERIALIZED_NAME_SIZE_TYPES = "size_types";
   @SerializedName(SERIALIZED_NAME_SIZE_TYPES)
@@ -264,7 +143,7 @@ public class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData {
   }
 
 
-  public SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData measurementType(@javax.annotation.Nullable MeasurementTypeEnum measurementType) {
+  public SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData measurementType(@javax.annotation.Nullable String measurementType) {
     this.measurementType = measurementType;
     return this;
   }
@@ -274,16 +153,16 @@ public class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData {
    * @return measurementType
    */
   @javax.annotation.Nullable
-  public MeasurementTypeEnum getMeasurementType() {
+  public String getMeasurementType() {
     return measurementType;
   }
 
-  public void setMeasurementType(@javax.annotation.Nullable MeasurementTypeEnum measurementType) {
+  public void setMeasurementType(@javax.annotation.Nullable String measurementType) {
     this.measurementType = measurementType;
   }
 
 
-  public SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData unitSystem(@javax.annotation.Nullable UnitSystemEnum unitSystem) {
+  public SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData unitSystem(@javax.annotation.Nullable String unitSystem) {
     this.unitSystem = unitSystem;
     return this;
   }
@@ -293,11 +172,11 @@ public class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData {
    * @return unitSystem
    */
   @javax.annotation.Nullable
-  public UnitSystemEnum getUnitSystem() {
+  public String getUnitSystem() {
     return unitSystem;
   }
 
-  public void setUnitSystem(@javax.annotation.Nullable UnitSystemEnum unitSystem) {
+  public void setUnitSystem(@javax.annotation.Nullable String unitSystem) {
     this.unitSystem = unitSystem;
   }
 
@@ -455,16 +334,8 @@ public class SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartData {
       if ((jsonObj.get("measurement_type") != null && !jsonObj.get("measurement_type").isJsonNull()) && !jsonObj.get("measurement_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `measurement_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("measurement_type").toString()));
       }
-      // validate the optional field `measurement_type`
-      if (jsonObj.get("measurement_type") != null && !jsonObj.get("measurement_type").isJsonNull()) {
-        MeasurementTypeEnum.validateJsonElement(jsonObj.get("measurement_type"));
-      }
       if ((jsonObj.get("unit_system") != null && !jsonObj.get("unit_system").isJsonNull()) && !jsonObj.get("unit_system").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit_system` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit_system").toString()));
-      }
-      // validate the optional field `unit_system`
-      if (jsonObj.get("unit_system") != null && !jsonObj.get("unit_system").isJsonNull()) {
-        UnitSystemEnum.validateJsonElement(jsonObj.get("unit_system"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("size_types") != null && !jsonObj.get("size_types").isJsonNull() && !jsonObj.get("size_types").isJsonArray()) {

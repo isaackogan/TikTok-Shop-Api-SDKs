@@ -52,11 +52,11 @@ data class GetImageTranslationTasksResponseDataTranslationTask (
 
     /* The target language to translate the image into. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT */
     @SerializedName("target_language")
-    val targetLanguage: GetImageTranslationTasksResponseDataTranslationTask.TargetLanguage? = null,
+    val targetLanguage: kotlin.String? = null,
 
     /* The translation result. Possible values: - PROCESSING: Translation is underway and has not yet completed. - COMPLETED: Translation has completed and results are ready. - FAILED: Translation did not complete due to an error. */
     @SerializedName("status")
-    val status: GetImageTranslationTasksResponseDataTranslationTask.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The reason why the translation task failed. Possible values: - Invalid image URI. - Internal processing error, please try calling this endpoint again. - This image can't be translated. Try a different image. */
     @SerializedName("fail_reason")
@@ -68,28 +68,6 @@ data class GetImageTranslationTasksResponseDataTranslationTask (
 
 ) {
 
-    /**
-     * The target language to translate the image into. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT
-     *
-     * Values: deMinusDE,enMinusIE,esMinusES,frMinusFR,itMinusIT
-     */
-    enum class TargetLanguage(val value: kotlin.String) {
-        @SerializedName(value = "de-DE") deMinusDE("de-DE"),
-        @SerializedName(value = "en-IE") enMinusIE("en-IE"),
-        @SerializedName(value = "es-ES") esMinusES("es-ES"),
-        @SerializedName(value = "fr-FR") frMinusFR("fr-FR"),
-        @SerializedName(value = "it-IT") itMinusIT("it-IT");
-    }
-    /**
-     * The translation result. Possible values: - PROCESSING: Translation is underway and has not yet completed. - COMPLETED: Translation has completed and results are ready. - FAILED: Translation did not complete due to an error.
-     *
-     * Values: PROCESSING,COMPLETED,FAILED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "FAILED") FAILED("FAILED");
-    }
 
 }
 

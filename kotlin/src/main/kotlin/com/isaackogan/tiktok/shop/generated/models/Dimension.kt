@@ -52,19 +52,10 @@ data class Dimension (
 
     /* The unit of measurement for the package dimensions.  Available values: - `CM` - `INCH` */
     @SerializedName("unit")
-    val unit: Dimension.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * The unit of measurement for the package dimensions.  Available values: - `CM` - `INCH`
-     *
-     * Values: CM,INCH
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "CM") CM("CM"),
-        @SerializedName(value = "INCH") INCH("INCH");
-    }
 
 }
 

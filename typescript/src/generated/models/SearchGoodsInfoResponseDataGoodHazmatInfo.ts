@@ -48,10 +48,10 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfo {
      * -BATTERY 
      * -FLAMMABLE_LIQUID
      * -AEROSOLS
-     * @type {SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodHazmatInfo
      */
-    hazmatType?: SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum;
+    hazmatType?: string;
     /**
      * Additional battery information for hazmat goods.
      * @type {SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo}
@@ -76,10 +76,10 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfo {
      * -CLASS_2
      * -CLASS_3
      * -CLASS_9
-     * @type {SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodHazmatInfo
      */
-    dgClass?: SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum;
+    dgClass?: string;
     /**
      * UN identifier for the hazardous substance. Standard UN values use the `UN` prefix followed by four digits; `OTHER` is also supported.
      * Possible values:
@@ -92,10 +92,10 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfo {
      * - UN1266
      * - UN3065
      * - OTHER
-     * @type {SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodHazmatInfo
      */
-    dgUncode?: SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum;
+    dgUncode?: string;
     /**
      * Material safety data sheet of the hazmat goods to support review the goods' safety compliance in FBT
      * @type {string}
@@ -103,45 +103,6 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfo {
      */
     msdsFileUrl?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum = {
-    Magnetized: 'MAGNETIZED',
-    Battery: 'BATTERY',
-    FlammableLiquid: 'FLAMMABLE_LIQUID',
-    Aerosols: 'AEROSOLS'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum = typeof SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatInfoHazmatTypeEnum];
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum = {
-    Class2: 'CLASS_2',
-    Class3: 'CLASS_3',
-    Class9: 'CLASS_9'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum = typeof SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatInfoDgClassEnum];
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum = {
-    Un2807: 'UN2807',
-    Un3480: 'UN3480',
-    Un3090: 'UN3090',
-    Un3481: 'UN3481',
-    Un3091: 'UN3091',
-    Un1263: 'UN1263',
-    Un1266: 'UN1266',
-    Un3065: 'UN3065',
-    Other: 'OTHER'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum = typeof SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatInfoDgUncodeEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodHazmatInfo interface.

@@ -6,9 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.list_opportunities_response_data_data_opportunity_reference_source import (
-    ListOpportunitiesResponseDataDataOpportunityReferenceSource,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ListOpportunitiesResponseDataDataOpportunity")
@@ -54,8 +51,8 @@ class ListOpportunitiesResponseDataDataOpportunity:
             required. Values are localized when a translation is available; otherwise, the configured reward description is
             returned.
         external_product_id (str | Unset): Product ID on the reference source.
-        reference_source (ListOpportunitiesResponseDataDataOpportunityReferenceSource | Unset): The reference platform
-            code, returned only when `external_product_id` is present.
+        reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
+            present.
             Possible values:
             - `1`: SHOPEE
             - `2`: AMAZON
@@ -105,7 +102,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
     tag_codes: list[str] | Unset = UNSET
     reward_info: str | Unset = UNSET
     external_product_id: str | Unset = UNSET
-    reference_source: ListOpportunitiesResponseDataDataOpportunityReferenceSource | Unset = UNSET
+    reference_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -161,9 +158,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
 
         external_product_id = self.external_product_id
 
-        reference_source: str | Unset = UNSET
-        if not isinstance(self.reference_source, Unset):
-            reference_source = self.reference_source.value
+        reference_source = self.reference_source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -272,12 +267,7 @@ class ListOpportunitiesResponseDataDataOpportunity:
 
         external_product_id = d.pop("external_product_id", UNSET)
 
-        _reference_source = d.pop("reference_source", UNSET)
-        reference_source: ListOpportunitiesResponseDataDataOpportunityReferenceSource | Unset
-        if isinstance(_reference_source, Unset):
-            reference_source = UNSET
-        else:
-            reference_source = ListOpportunitiesResponseDataDataOpportunityReferenceSource(_reference_source)
+        reference_source = d.pop("reference_source", UNSET)
 
         list_opportunities_response_data_data_opportunity = cls(
             id=id,

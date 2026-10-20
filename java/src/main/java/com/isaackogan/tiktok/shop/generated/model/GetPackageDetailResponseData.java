@@ -69,342 +69,35 @@ public class GetPackageDetailResponseData {
   @javax.annotation.Nullable
   private List<Order> orders = new ArrayList<>();
 
-  /**
-   * Possible values: - &#x60;TO_FULFILL&#x60;：Waiting for the merchant or warehouse to ship the package. - &#x60;PROCESSING&#x60;: Package has been arranged by seller. Waiting for carrier to collect the parcel. - &#x60;FULFILLING&#x60;: Package has been collected by carrier and in transit. - &#x60;COMPLETED&#x60;: Package has been delivered. - &#x60;CANCELLED&#x60;: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-   */
-  @JsonAdapter(PackageStatusEnum.Adapter.class)
-  public enum PackageStatusEnum {
-    /**
-     * Waiting for the merchant or warehouse to ship the package.
-     */
-    TO_FULFILL("TO_FULFILL"),
-    
-    /**
-     * Package has been arranged by seller. Waiting for carrier to collect the parcel.
-     */
-    PROCESSING("PROCESSING"),
-    
-    /**
-     * Package has been collected by carrier and in transit.
-     */
-    FULFILLING("FULFILLING"),
-    
-    /**
-     * Package has been delivered.
-     */
-    COMPLETED("COMPLETED"),
-    
-    /**
-     * Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     */
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    PackageStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PackageStatusEnum fromValue(String value) {
-      for (PackageStatusEnum b : PackageStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PackageStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PackageStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PackageStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PackageStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PackageStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PACKAGE_STATUS = "package_status";
   @SerializedName(SERIALIZED_NAME_PACKAGE_STATUS)
   @javax.annotation.Nullable
-  private PackageStatusEnum packageStatus;
-
-  /**
-   * Package sub-status. Possible values: - &#x60;CREATED&#x60;: The package has been created. - &#x60;ISSUE&#x60;: Package allocation failed; contact platform support. - &#x60;STOCKING&#x60;: Platform verification is complete and the package is waiting for the seller to ship it. - &#x60;RTSING&#x60;: The shipping label is being purchased and the carrier result is pending. - &#x60;HBW&#x60;: For FBT orders only; the package has been created in the warehouse. - &#x60;HBWING&#x60;: For FBT orders only; the package is being created in the warehouse. - &#x60;TSP_PENDING&#x60;: Authorization for third-party service-provider fulfillment is pending. - &#x60;RTS&#x60;: The shipping label has been purchased and the seller can print it. - &#x60;TTS&#x60;: The carrier has picked up the package. - &#x60;DELIVERED&#x60;: The package has been delivered to the buyer. - &#x60;SHIP_EXCEPTION&#x60;: The package cannot be delivered, for example because it is damaged or lost. See &#x60;ship_exception_reason&#x60; for the detailed reason. - &#x60;PART_DELIVERED_AND_EXCEPTION&#x60;: Part of the package delivery completed and another part encountered a shipping exception. - &#x60;CANCELLED&#x60;: The package has been canceled.
-   */
-  @JsonAdapter(PackageSubStatusEnum.Adapter.class)
-  public enum PackageSubStatusEnum {
-    /**
-     * The package has been created.
-     */
-    CREATED("CREATED"),
-    
-    /**
-     * Package allocation failed; contact platform support.
-     */
-    ISSUE("ISSUE"),
-    
-    /**
-     * Platform verification is complete and the package is waiting for the seller to ship it.
-     */
-    STOCKING("STOCKING"),
-    
-    /**
-     * The shipping label is being purchased and the carrier result is pending.
-     */
-    RTSING("RTSING"),
-    
-    /**
-     * For FBT orders only; the package has been created in the warehouse.
-     */
-    HBW("HBW"),
-    
-    /**
-     * For FBT orders only; the package is being created in the warehouse.
-     */
-    HBWING("HBWING"),
-    
-    /**
-     * Authorization for third-party service-provider fulfillment is pending.
-     */
-    TSP_PENDING("TSP_PENDING"),
-    
-    /**
-     * The shipping label has been purchased and the seller can print it.
-     */
-    RTS("RTS"),
-    
-    /**
-     * The carrier has picked up the package.
-     */
-    TTS("TTS"),
-    
-    /**
-     * The package has been delivered to the buyer.
-     */
-    DELIVERED("DELIVERED"),
-    
-    /**
-     * The package cannot be delivered, for example because it is damaged or lost. See &#x60;ship_exception_reason&#x60; for the detailed reason.
-     */
-    SHIP_EXCEPTION("SHIP_EXCEPTION"),
-    
-    /**
-     * Part of the package delivery completed and another part encountered a shipping exception.
-     */
-    PART_DELIVERED_AND_EXCEPTION("PART_DELIVERED_AND_EXCEPTION"),
-    
-    /**
-     * The package has been canceled.
-     */
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    PackageSubStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PackageSubStatusEnum fromValue(String value) {
-      for (PackageSubStatusEnum b : PackageSubStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PackageSubStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PackageSubStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PackageSubStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PackageSubStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PackageSubStatusEnum.fromValue(value);
-    }
-  }
+  private String packageStatus;
 
   public static final String SERIALIZED_NAME_PACKAGE_SUB_STATUS = "package_sub_status";
   @SerializedName(SERIALIZED_NAME_PACKAGE_SUB_STATUS)
   @javax.annotation.Nullable
-  private PackageSubStatusEnum packageSubStatus;
+  private String packageSubStatus;
 
   public static final String SERIALIZED_NAME_SHIP_EXCEPTION_REASON = "ship_exception_reason";
   @SerializedName(SERIALIZED_NAME_SHIP_EXCEPTION_REASON)
   @javax.annotation.Nullable
   private String shipExceptionReason;
 
-  /**
-   * Possible values: - &#x60;DEFAULT&#x60;: The package has not undergone any combine or split operation. - &#x60;COMBINE&#x60;: The package has been consolidated with another order. - &#x60;SPLIT&#x60;: The order has been split into multiple orders.
-   */
-  @JsonAdapter(SplitAndCombineTagEnum.Adapter.class)
-  public enum SplitAndCombineTagEnum {
-    /**
-     * The package has not undergone any combine or split operation.
-     */
-    DEFAULT("DEFAULT"),
-    
-    /**
-     * The package has been consolidated with another order.
-     */
-    COMBINE("COMBINE"),
-    
-    /**
-     * The order has been split into multiple orders.
-     */
-    SPLIT("SPLIT");
-
-    private String value;
-
-    SplitAndCombineTagEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SplitAndCombineTagEnum fromValue(String value) {
-      for (SplitAndCombineTagEnum b : SplitAndCombineTagEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SplitAndCombineTagEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SplitAndCombineTagEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SplitAndCombineTagEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SplitAndCombineTagEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SplitAndCombineTagEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SPLIT_AND_COMBINE_TAG = "split_and_combine_tag";
   @SerializedName(SERIALIZED_NAME_SPLIT_AND_COMBINE_TAG)
   @javax.annotation.Nullable
-  private SplitAndCombineTagEnum splitAndCombineTag;
+  private String splitAndCombineTag;
 
   public static final String SERIALIZED_NAME_HAS_MULTI_SKUS = "has_multi_skus";
   @SerializedName(SERIALIZED_NAME_HAS_MULTI_SKUS)
   @javax.annotation.Nullable
   private Boolean hasMultiSkus;
 
-  /**
-   * Possible values: - &#x60;BUYER_UNNOTED&#x60;: The order has not been noted by buyer. - &#x60;BUYER_NOTED&#x60;: The order has been noted by buyer.
-   */
-  @JsonAdapter(NoteTagEnum.Adapter.class)
-  public enum NoteTagEnum {
-    /**
-     * The order has not been noted by buyer.
-     */
-    BUYER_UNNOTED("BUYER_UNNOTED"),
-    
-    /**
-     * The order has been noted by buyer.
-     */
-    BUYER_NOTED("BUYER_NOTED");
-
-    private String value;
-
-    NoteTagEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static NoteTagEnum fromValue(String value) {
-      for (NoteTagEnum b : NoteTagEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<NoteTagEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final NoteTagEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public NoteTagEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return NoteTagEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      NoteTagEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_NOTE_TAG = "note_tag";
   @SerializedName(SERIALIZED_NAME_NOTE_TAG)
   @javax.annotation.Nullable
-  private NoteTagEnum noteTag;
+  private String noteTag;
 
   public static final String SERIALIZED_NAME_SHIPPING_PROVIDER_NAME = "shipping_provider_name";
   @SerializedName(SERIALIZED_NAME_SHIPPING_PROVIDER_NAME)
@@ -416,68 +109,10 @@ public class GetPackageDetailResponseData {
   @javax.annotation.Nullable
   private String shippingProviderId;
 
-  /**
-   * Indicates who provides the shipping service. Possible values: - &#x60;TIKTOK&#x60;: Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok. - &#x60;SELLER&#x60;: Seller provides shipping, including through a third-party fulfillment provider acting on the seller&#39;s behalf.
-   */
-  @JsonAdapter(ShippingTypeEnum.Adapter.class)
-  public enum ShippingTypeEnum {
-    /**
-     * Shipping service provided by TikTok. The seller should obtain a shipping label from TikTok.
-     */
-    TIKTOK("TIKTOK"),
-    
-    /**
-     * Seller provides shipping, including through a third-party fulfillment provider acting on the seller&#39;s behalf.
-     */
-    SELLER("SELLER");
-
-    private String value;
-
-    ShippingTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ShippingTypeEnum fromValue(String value) {
-      for (ShippingTypeEnum b : ShippingTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ShippingTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ShippingTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ShippingTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ShippingTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ShippingTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SHIPPING_TYPE = "shipping_type";
   @SerializedName(SERIALIZED_NAME_SHIPPING_TYPE)
   @javax.annotation.Nullable
-  private ShippingTypeEnum shippingType;
+  private String shippingType;
 
   public static final String SERIALIZED_NAME_DELIVERY_OPTION_NAME = "delivery_option_name";
   @SerializedName(SERIALIZED_NAME_DELIVERY_OPTION_NAME)
@@ -509,68 +144,10 @@ public class GetPackageDetailResponseData {
   @javax.annotation.Nullable
   private Long createTime;
 
-  /**
-   * Whether the package is delivered by pick up or drop off. Possible values: - &#x60;PICKUP&#x60;: A Logistics carrier will pickup the package(s) from the seller&#39;s pickup address. - &#x60;DROP_OFF&#x60;: Seller will need to drop off the package(s) to a designated location.
-   */
-  @JsonAdapter(HandoverMethodEnum.Adapter.class)
-  public enum HandoverMethodEnum {
-    /**
-     * A Logistics carrier will pickup the package(s) from the seller&#39;s pickup address.
-     */
-    PICKUP("PICKUP"),
-    
-    /**
-     * Seller will need to drop off the package(s) to a designated location.
-     */
-    DROP_OFF("DROP_OFF");
-
-    private String value;
-
-    HandoverMethodEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static HandoverMethodEnum fromValue(String value) {
-      for (HandoverMethodEnum b : HandoverMethodEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<HandoverMethodEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final HandoverMethodEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public HandoverMethodEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return HandoverMethodEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      HandoverMethodEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_HANDOVER_METHOD = "handover_method";
   @SerializedName(SERIALIZED_NAME_HANDOVER_METHOD)
   @javax.annotation.Nullable
-  private HandoverMethodEnum handoverMethod;
+  private String handoverMethod;
 
   public static final String SERIALIZED_NAME_ORDER_LINE_ITEM_IDS = "order_line_item_ids";
   @SerializedName(SERIALIZED_NAME_ORDER_LINE_ITEM_IDS)
@@ -666,7 +243,7 @@ public class GetPackageDetailResponseData {
   }
 
 
-  public GetPackageDetailResponseData packageStatus(@javax.annotation.Nullable PackageStatusEnum packageStatus) {
+  public GetPackageDetailResponseData packageStatus(@javax.annotation.Nullable String packageStatus) {
     this.packageStatus = packageStatus;
     return this;
   }
@@ -676,16 +253,16 @@ public class GetPackageDetailResponseData {
    * @return packageStatus
    */
   @javax.annotation.Nullable
-  public PackageStatusEnum getPackageStatus() {
+  public String getPackageStatus() {
     return packageStatus;
   }
 
-  public void setPackageStatus(@javax.annotation.Nullable PackageStatusEnum packageStatus) {
+  public void setPackageStatus(@javax.annotation.Nullable String packageStatus) {
     this.packageStatus = packageStatus;
   }
 
 
-  public GetPackageDetailResponseData packageSubStatus(@javax.annotation.Nullable PackageSubStatusEnum packageSubStatus) {
+  public GetPackageDetailResponseData packageSubStatus(@javax.annotation.Nullable String packageSubStatus) {
     this.packageSubStatus = packageSubStatus;
     return this;
   }
@@ -695,11 +272,11 @@ public class GetPackageDetailResponseData {
    * @return packageSubStatus
    */
   @javax.annotation.Nullable
-  public PackageSubStatusEnum getPackageSubStatus() {
+  public String getPackageSubStatus() {
     return packageSubStatus;
   }
 
-  public void setPackageSubStatus(@javax.annotation.Nullable PackageSubStatusEnum packageSubStatus) {
+  public void setPackageSubStatus(@javax.annotation.Nullable String packageSubStatus) {
     this.packageSubStatus = packageSubStatus;
   }
 
@@ -723,7 +300,7 @@ public class GetPackageDetailResponseData {
   }
 
 
-  public GetPackageDetailResponseData splitAndCombineTag(@javax.annotation.Nullable SplitAndCombineTagEnum splitAndCombineTag) {
+  public GetPackageDetailResponseData splitAndCombineTag(@javax.annotation.Nullable String splitAndCombineTag) {
     this.splitAndCombineTag = splitAndCombineTag;
     return this;
   }
@@ -733,11 +310,11 @@ public class GetPackageDetailResponseData {
    * @return splitAndCombineTag
    */
   @javax.annotation.Nullable
-  public SplitAndCombineTagEnum getSplitAndCombineTag() {
+  public String getSplitAndCombineTag() {
     return splitAndCombineTag;
   }
 
-  public void setSplitAndCombineTag(@javax.annotation.Nullable SplitAndCombineTagEnum splitAndCombineTag) {
+  public void setSplitAndCombineTag(@javax.annotation.Nullable String splitAndCombineTag) {
     this.splitAndCombineTag = splitAndCombineTag;
   }
 
@@ -761,7 +338,7 @@ public class GetPackageDetailResponseData {
   }
 
 
-  public GetPackageDetailResponseData noteTag(@javax.annotation.Nullable NoteTagEnum noteTag) {
+  public GetPackageDetailResponseData noteTag(@javax.annotation.Nullable String noteTag) {
     this.noteTag = noteTag;
     return this;
   }
@@ -771,11 +348,11 @@ public class GetPackageDetailResponseData {
    * @return noteTag
    */
   @javax.annotation.Nullable
-  public NoteTagEnum getNoteTag() {
+  public String getNoteTag() {
     return noteTag;
   }
 
-  public void setNoteTag(@javax.annotation.Nullable NoteTagEnum noteTag) {
+  public void setNoteTag(@javax.annotation.Nullable String noteTag) {
     this.noteTag = noteTag;
   }
 
@@ -818,7 +395,7 @@ public class GetPackageDetailResponseData {
   }
 
 
-  public GetPackageDetailResponseData shippingType(@javax.annotation.Nullable ShippingTypeEnum shippingType) {
+  public GetPackageDetailResponseData shippingType(@javax.annotation.Nullable String shippingType) {
     this.shippingType = shippingType;
     return this;
   }
@@ -828,11 +405,11 @@ public class GetPackageDetailResponseData {
    * @return shippingType
    */
   @javax.annotation.Nullable
-  public ShippingTypeEnum getShippingType() {
+  public String getShippingType() {
     return shippingType;
   }
 
-  public void setShippingType(@javax.annotation.Nullable ShippingTypeEnum shippingType) {
+  public void setShippingType(@javax.annotation.Nullable String shippingType) {
     this.shippingType = shippingType;
   }
 
@@ -951,7 +528,7 @@ public class GetPackageDetailResponseData {
   }
 
 
-  public GetPackageDetailResponseData handoverMethod(@javax.annotation.Nullable HandoverMethodEnum handoverMethod) {
+  public GetPackageDetailResponseData handoverMethod(@javax.annotation.Nullable String handoverMethod) {
     this.handoverMethod = handoverMethod;
     return this;
   }
@@ -961,11 +538,11 @@ public class GetPackageDetailResponseData {
    * @return handoverMethod
    */
   @javax.annotation.Nullable
-  public HandoverMethodEnum getHandoverMethod() {
+  public String getHandoverMethod() {
     return handoverMethod;
   }
 
-  public void setHandoverMethod(@javax.annotation.Nullable HandoverMethodEnum handoverMethod) {
+  public void setHandoverMethod(@javax.annotation.Nullable String handoverMethod) {
     this.handoverMethod = handoverMethod;
   }
 
@@ -1335,16 +912,8 @@ public class GetPackageDetailResponseData {
       if ((jsonObj.get("package_status") != null && !jsonObj.get("package_status").isJsonNull()) && !jsonObj.get("package_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `package_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("package_status").toString()));
       }
-      // validate the optional field `package_status`
-      if (jsonObj.get("package_status") != null && !jsonObj.get("package_status").isJsonNull()) {
-        PackageStatusEnum.validateJsonElement(jsonObj.get("package_status"));
-      }
       if ((jsonObj.get("package_sub_status") != null && !jsonObj.get("package_sub_status").isJsonNull()) && !jsonObj.get("package_sub_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `package_sub_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("package_sub_status").toString()));
-      }
-      // validate the optional field `package_sub_status`
-      if (jsonObj.get("package_sub_status") != null && !jsonObj.get("package_sub_status").isJsonNull()) {
-        PackageSubStatusEnum.validateJsonElement(jsonObj.get("package_sub_status"));
       }
       if ((jsonObj.get("ship_exception_reason") != null && !jsonObj.get("ship_exception_reason").isJsonNull()) && !jsonObj.get("ship_exception_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ship_exception_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ship_exception_reason").toString()));
@@ -1352,16 +921,8 @@ public class GetPackageDetailResponseData {
       if ((jsonObj.get("split_and_combine_tag") != null && !jsonObj.get("split_and_combine_tag").isJsonNull()) && !jsonObj.get("split_and_combine_tag").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `split_and_combine_tag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("split_and_combine_tag").toString()));
       }
-      // validate the optional field `split_and_combine_tag`
-      if (jsonObj.get("split_and_combine_tag") != null && !jsonObj.get("split_and_combine_tag").isJsonNull()) {
-        SplitAndCombineTagEnum.validateJsonElement(jsonObj.get("split_and_combine_tag"));
-      }
       if ((jsonObj.get("note_tag") != null && !jsonObj.get("note_tag").isJsonNull()) && !jsonObj.get("note_tag").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `note_tag` to be a primitive type in the JSON string but got `%s`", jsonObj.get("note_tag").toString()));
-      }
-      // validate the optional field `note_tag`
-      if (jsonObj.get("note_tag") != null && !jsonObj.get("note_tag").isJsonNull()) {
-        NoteTagEnum.validateJsonElement(jsonObj.get("note_tag"));
       }
       if ((jsonObj.get("shipping_provider_name") != null && !jsonObj.get("shipping_provider_name").isJsonNull()) && !jsonObj.get("shipping_provider_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shipping_provider_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shipping_provider_name").toString()));
@@ -1371,10 +932,6 @@ public class GetPackageDetailResponseData {
       }
       if ((jsonObj.get("shipping_type") != null && !jsonObj.get("shipping_type").isJsonNull()) && !jsonObj.get("shipping_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `shipping_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("shipping_type").toString()));
-      }
-      // validate the optional field `shipping_type`
-      if (jsonObj.get("shipping_type") != null && !jsonObj.get("shipping_type").isJsonNull()) {
-        ShippingTypeEnum.validateJsonElement(jsonObj.get("shipping_type"));
       }
       if ((jsonObj.get("delivery_option_name") != null && !jsonObj.get("delivery_option_name").isJsonNull()) && !jsonObj.get("delivery_option_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `delivery_option_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("delivery_option_name").toString()));
@@ -1394,10 +951,6 @@ public class GetPackageDetailResponseData {
       }
       if ((jsonObj.get("handover_method") != null && !jsonObj.get("handover_method").isJsonNull()) && !jsonObj.get("handover_method").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `handover_method` to be a primitive type in the JSON string but got `%s`", jsonObj.get("handover_method").toString()));
-      }
-      // validate the optional field `handover_method`
-      if (jsonObj.get("handover_method") != null && !jsonObj.get("handover_method").isJsonNull()) {
-        HandoverMethodEnum.validateJsonElement(jsonObj.get("handover_method"));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("order_line_item_ids") != null && !jsonObj.get("order_line_item_ids").isJsonNull() && !jsonObj.get("order_line_item_ids").isJsonArray()) {

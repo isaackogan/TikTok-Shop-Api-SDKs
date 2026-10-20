@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_package_weight_unit import GetProductResponseDataPackageWeightUnit
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataPackageWeight")
@@ -16,21 +15,19 @@ T = TypeVar("T", bound="GetProductResponseDataPackageWeight")
 class GetProductResponseDataPackageWeight:
     """
     Attributes:
-        unit (GetProductResponseDataPackageWeightUnit | Unset): The unit for the package weight.
+        unit (str | Unset): The unit for the package weight.
             Possible values:
             - `KILOGRAM`
             - `POUND`
         value (str | Unset): The package weight.
     """
 
-    unit: GetProductResponseDataPackageWeightUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     value: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         value = self.value
 
@@ -47,12 +44,7 @@ class GetProductResponseDataPackageWeight:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _unit = d.pop("unit", UNSET)
-        unit: GetProductResponseDataPackageWeightUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = GetProductResponseDataPackageWeightUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         value = d.pop("value", UNSET)
 

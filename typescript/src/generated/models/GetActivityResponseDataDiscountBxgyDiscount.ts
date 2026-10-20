@@ -24,10 +24,10 @@ export interface GetActivityResponseDataDiscountBxgyDiscount {
      * Possible values:
      * - `MINIMAL_ITEM_QUANTITY`: The buyer must purchase at least the specified quantity of eligible products.
      * - `MINIMAL_ORDER_AMOUNT`: The eligible-product subtotal must reach the specified amount.
-     * @type {GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountBxgyDiscount
      */
-    thresholdType?: GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum;
+    thresholdType?: string;
     /**
      * The purchase threshold returned for the activity, based on `threshold_type`.
      * - When `threshold_type==MINIMAL_ITEM_QUANTITY`, this is the number of eligible products the buyer must purchase and must be an integer.
@@ -42,10 +42,10 @@ export interface GetActivityResponseDataDiscountBxgyDiscount {
      * - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products.
      * - `FREE`: Buyer will receive X eligible products for free.
      * - `AMOUNT_OFF_EACH`: Buyer will receive X units of local currency off the price of each eligible product.
-     * @type {GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountBxgyDiscount
      */
-    discountType?: GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum;
+    discountType?: string;
     /**
      * Value of the discount.
      * - When `type`==`PERCENTAGE_OFF`, the buyer will receive X% off the price of eligible products. If the value represents a percentage, it should be an integer.
@@ -67,27 +67,6 @@ export interface GetActivityResponseDataDiscountBxgyDiscount {
      */
     benefitMaxApplicableTimes?: string;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum = {
-    MinimalItemQuantity: 'MINIMAL_ITEM_QUANTITY',
-    MinimalOrderAmount: 'MINIMAL_ORDER_AMOUNT'
-} as const;
-export type GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum = typeof GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum[keyof typeof GetActivityResponseDataDiscountBxgyDiscountThresholdTypeEnum];
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum = {
-    PercentageOff: 'PERCENTAGE_OFF',
-    Free: 'FREE',
-    AmountOffEach: 'AMOUNT_OFF_EACH'
-} as const;
-export type GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum = typeof GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum[keyof typeof GetActivityResponseDataDiscountBxgyDiscountDiscountTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseDataDiscountBxgyDiscount interface.

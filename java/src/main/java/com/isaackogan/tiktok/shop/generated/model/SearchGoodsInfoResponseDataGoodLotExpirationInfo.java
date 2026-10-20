@@ -80,73 +80,10 @@ public class SearchGoodsInfoResponseDataGoodLotExpirationInfo {
   @javax.annotation.Nullable
   private Long salesCutoffDays;
 
-  /**
-   * The handling method for expired inventory. Possible values: - &#x60;STORE_UNITS&#x60;: Move the units to defective inventory. - &#x60;RETURN_TO_SELLER&#x60;: Return the units to the seller. - &#x60;DISPOSE&#x60;: Dispose of the units.
-   */
-  @JsonAdapter(HandlingMethodEnum.Adapter.class)
-  public enum HandlingMethodEnum {
-    /**
-     * Move the units to defective inventory.
-     */
-    STORE_UNITS("STORE_UNITS"),
-    
-    /**
-     * Return the units to the seller.
-     */
-    RETURN_TO_SELLER("RETURN_TO_SELLER"),
-    
-    /**
-     * Dispose of the units.
-     */
-    DISPOSE("DISPOSE");
-
-    private String value;
-
-    HandlingMethodEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static HandlingMethodEnum fromValue(String value) {
-      for (HandlingMethodEnum b : HandlingMethodEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<HandlingMethodEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final HandlingMethodEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public HandlingMethodEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return HandlingMethodEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      HandlingMethodEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_HANDLING_METHOD = "handling_method";
   @SerializedName(SERIALIZED_NAME_HANDLING_METHOD)
   @javax.annotation.Nullable
-  private HandlingMethodEnum handlingMethod;
+  private String handlingMethod;
 
   public SearchGoodsInfoResponseDataGoodLotExpirationInfo() {
   }
@@ -265,7 +202,7 @@ public class SearchGoodsInfoResponseDataGoodLotExpirationInfo {
   }
 
 
-  public SearchGoodsInfoResponseDataGoodLotExpirationInfo handlingMethod(@javax.annotation.Nullable HandlingMethodEnum handlingMethod) {
+  public SearchGoodsInfoResponseDataGoodLotExpirationInfo handlingMethod(@javax.annotation.Nullable String handlingMethod) {
     this.handlingMethod = handlingMethod;
     return this;
   }
@@ -275,11 +212,11 @@ public class SearchGoodsInfoResponseDataGoodLotExpirationInfo {
    * @return handlingMethod
    */
   @javax.annotation.Nullable
-  public HandlingMethodEnum getHandlingMethod() {
+  public String getHandlingMethod() {
     return handlingMethod;
   }
 
-  public void setHandlingMethod(@javax.annotation.Nullable HandlingMethodEnum handlingMethod) {
+  public void setHandlingMethod(@javax.annotation.Nullable String handlingMethod) {
     this.handlingMethod = handlingMethod;
   }
 
@@ -404,10 +341,6 @@ public class SearchGoodsInfoResponseDataGoodLotExpirationInfo {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("handling_method") != null && !jsonObj.get("handling_method").isJsonNull()) && !jsonObj.get("handling_method").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `handling_method` to be a primitive type in the JSON string but got `%s`", jsonObj.get("handling_method").toString()));
-      }
-      // validate the optional field `handling_method`
-      if (jsonObj.get("handling_method") != null && !jsonObj.get("handling_method").isJsonNull()) {
-        HandlingMethodEnum.validateJsonElement(jsonObj.get("handling_method"));
       }
   }
 

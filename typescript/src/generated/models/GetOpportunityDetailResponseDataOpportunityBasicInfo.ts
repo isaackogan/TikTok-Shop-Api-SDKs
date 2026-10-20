@@ -25,10 +25,10 @@ export interface GetOpportunityDetailResponseDataOpportunityBasicInfo {
      * - PRODUCT: A product opportunity.
      * - KEYWORD: A keyword opportunity.
      * - CATEGORY: A category opportunity.
-     * @type {GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum}
+     * @type {string}
      * @memberof GetOpportunityDetailResponseDataOpportunityBasicInfo
      */
-    opportunityType?: GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum;
+    opportunityType?: string;
     /**
      * Opportunity status: ACTIVE / EXPIRED / FULFILLED(已提报)
      * @type {string}
@@ -162,52 +162,11 @@ export interface GetOpportunityDetailResponseDataOpportunityBasicInfo {
      * - `20`: ALLEGRO
      * - `21`: BOL
      * - `22`: DTC
-     * @type {GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum}
+     * @type {string}
      * @memberof GetOpportunityDetailResponseDataOpportunityBasicInfo
      */
-    referenceSource?: GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum;
+    referenceSource?: string;
 }
-
-
-/**
- * @export
- */
-export const GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum = {
-    Product: 'PRODUCT',
-    Keyword: 'KEYWORD',
-    Category: 'CATEGORY'
-} as const;
-export type GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum = typeof GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum[keyof typeof GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityTypeEnum];
-
-/**
- * @export
- */
-export const GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum = {
-    _1: '1',
-    _2: '2',
-    _3: '3',
-    _4: '4',
-    _5: '5',
-    _6: '6',
-    _7: '7',
-    _8: '8',
-    _9: '9',
-    _10: '10',
-    _11: '11',
-    _12: '12',
-    _13: '13',
-    _14: '14',
-    _15: '15',
-    _16: '16',
-    _17: '17',
-    _18: '18',
-    _19: '19',
-    _20: '20',
-    _21: '21',
-    _22: '22'
-} as const;
-export type GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum = typeof GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum[keyof typeof GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSourceEnum];
-
 
 /**
  * Check if a given object implements the GetOpportunityDetailResponseDataOpportunityBasicInfo interface.

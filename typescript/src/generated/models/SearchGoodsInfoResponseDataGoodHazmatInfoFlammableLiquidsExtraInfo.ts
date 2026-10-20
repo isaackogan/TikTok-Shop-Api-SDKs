@@ -25,10 +25,10 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraI
      * -PERFUMERY
      * -ALCOHOLIC
      * -OTHER
-     * @type {SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo
      */
-    flammableLiquidsType?: SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum;
+    flammableLiquidsType?: string;
     /**
      * Volume of flammable liquid in the unit specified by volume_unit.
      * @type {string}
@@ -42,19 +42,6 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraI
      */
     volumeUnit?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum = {
-    Paint: 'PAINT',
-    Perfumery: 'PERFUMERY',
-    Alcoholic: 'ALCOHOLIC',
-    Other: 'OTHER'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum = typeof SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo interface.

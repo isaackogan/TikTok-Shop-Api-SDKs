@@ -47,19 +47,10 @@ data class DiagnosisResult (
 
     /* The listing quality tier you can reach by implementing the recommendation. Possible values: - FAIR - GOOD  **Note**:  - To reach a higher tier, you must implement all recommendations from the destination tier and all preceding tiers. For example, a product will reach the \"GOOD\" tier once all \"FAIR\" and \"GOOD\" recommendations are addressed or implemented. - Available only for the US market. */
     @SerializedName("quality_tier")
-    val qualityTier: DiagnosisResult.QualityTier? = null
+    val qualityTier: kotlin.String? = null
 
 ) {
 
-    /**
-     * The listing quality tier you can reach by implementing the recommendation. Possible values: - FAIR - GOOD  **Note**:  - To reach a higher tier, you must implement all recommendations from the destination tier and all preceding tiers. For example, a product will reach the \"GOOD\" tier once all \"FAIR\" and \"GOOD\" recommendations are addressed or implemented. - Available only for the US market.
-     *
-     * Values: FAIR,GOOD
-     */
-    enum class QualityTier(val value: kotlin.String) {
-        @SerializedName(value = "FAIR") FAIR("FAIR"),
-        @SerializedName(value = "GOOD") GOOD("GOOD");
-    }
 
 }
 

@@ -68,214 +68,20 @@ public class SearchProductsResponseDataProduct {
   @javax.annotation.Nullable
   private String title;
 
-  /**
-   * The product status in TikTok Shop. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED  **Note**: For Indonesia sellers, if you did not set the listing platform as &#x60;TIKTOK_SHOP&#x60; when creating or editing a product, this will be omitted.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    UNKNOWN("UNKNOWN"),
-    
-    DRAFT("DRAFT"),
-    
-    PENDING("PENDING"),
-    
-    FAILED("FAILED"),
-    
-    ACTIVATE("ACTIVATE"),
-    
-    SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-    
-    PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-    
-    FREEZE("FREEZE"),
-    
-    DELETED("DELETED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_SKUS = "skus";
   @SerializedName(SERIALIZED_NAME_SKUS)
   @javax.annotation.Nullable
   private List<SearchProductsResponseDataProductSku> skus = new ArrayList<>();
 
-  /**
-   * Gets or Sets salesRegions
-   */
-  @JsonAdapter(SalesRegionsEnum.Adapter.class)
-  public enum SalesRegionsEnum {
-    /**
-     * Brazil
-     */
-    BR("BR"),
-    
-    /**
-     * Germany
-     */
-    DE("DE"),
-    
-    /**
-     * Spain
-     */
-    ES("ES"),
-    
-    /**
-     * France
-     */
-    FR("FR"),
-    
-    /**
-     * United Kingdom
-     */
-    GB("GB"),
-    
-    /**
-     * Indonesia
-     */
-    ID("ID"),
-    
-    /**
-     * Ireland
-     */
-    IE("IE"),
-    
-    /**
-     * Italy
-     */
-    IT("IT"),
-    
-    /**
-     * Japan
-     */
-    JP("JP"),
-    
-    /**
-     * Mexico
-     */
-    MX("MX"),
-    
-    /**
-     * Malaysia
-     */
-    MY("MY"),
-    
-    /**
-     * Philippines
-     */
-    PH("PH"),
-    
-    /**
-     * Singapore
-     */
-    SG("SG"),
-    
-    /**
-     * Thailand
-     */
-    TH("TH"),
-    
-    /**
-     * United States
-     */
-    US("US"),
-    
-    /**
-     * Vietnam
-     */
-    VN("VN");
-
-    private String value;
-
-    SalesRegionsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SalesRegionsEnum fromValue(String value) {
-      for (SalesRegionsEnum b : SalesRegionsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SalesRegionsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SalesRegionsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SalesRegionsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SalesRegionsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SalesRegionsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SALES_REGIONS = "sales_regions";
   @SerializedName(SERIALIZED_NAME_SALES_REGIONS)
   @javax.annotation.Nullable
-  private List<SalesRegionsEnum> salesRegions = new ArrayList<>();
+  private List<String> salesRegions = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_CREATE_TIME = "create_time";
   @SerializedName(SERIALIZED_NAME_CREATE_TIME)
@@ -302,66 +108,10 @@ public class SearchProductsResponseDataProduct {
   @javax.annotation.Nullable
   private List<RecommendedCategory> recommendedCategories = new ArrayList<>();
 
-  /**
-   * The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market.
-   */
-  @JsonAdapter(ListingQualityTierEnum.Adapter.class)
-  public enum ListingQualityTierEnum {
-    POOR("POOR"),
-    
-    FAIR("FAIR"),
-    
-    GOOD("GOOD"),
-    
-    EXCELLENT("EXCELLENT");
-
-    private String value;
-
-    ListingQualityTierEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ListingQualityTierEnum fromValue(String value) {
-      for (ListingQualityTierEnum b : ListingQualityTierEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ListingQualityTierEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ListingQualityTierEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ListingQualityTierEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ListingQualityTierEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ListingQualityTierEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LISTING_QUALITY_TIER = "listing_quality_tier";
   @SerializedName(SERIALIZED_NAME_LISTING_QUALITY_TIER)
   @javax.annotation.Nullable
-  private ListingQualityTierEnum listingQualityTier;
+  private String listingQualityTier;
 
   public static final String SERIALIZED_NAME_INTEGRATED_PLATFORM_STATUSES = "integrated_platform_statuses";
   @SerializedName(SERIALIZED_NAME_INTEGRATED_PLATFORM_STATUSES)
@@ -388,121 +138,15 @@ public class SearchProductsResponseDataProduct {
   @javax.annotation.Nullable
   private GetProductResponseDataScheduledSale scheduledSale;
 
-  /**
-   * Gets or Sets productTags
-   */
-  @JsonAdapter(ProductTagsEnum.Adapter.class)
-  public enum ProductTagsEnum {
-    AUCTION("AUCTION"),
-    
-    LIVE_QUICK("LIVE_QUICK");
-
-    private String value;
-
-    ProductTagsEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProductTagsEnum fromValue(String value) {
-      for (ProductTagsEnum b : ProductTagsEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProductTagsEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProductTagsEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProductTagsEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProductTagsEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProductTagsEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PRODUCT_TAGS = "product_tags";
   @SerializedName(SERIALIZED_NAME_PRODUCT_TAGS)
   @javax.annotation.Nullable
-  private List<ProductTagsEnum> productTags = new ArrayList<>();
-
-  /**
-   * The product&#39;s sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
-   */
-  @JsonAdapter(SellingFormatEnum.Adapter.class)
-  public enum SellingFormatEnum {
-    FIXED_PRICE("FIXED_PRICE"),
-    
-    LIVE_AUCTION("LIVE_AUCTION"),
-    
-    FIXED_PRICE_AND_LIVE_AUCTION("FIXED_PRICE_AND_LIVE_AUCTION");
-
-    private String value;
-
-    SellingFormatEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SellingFormatEnum fromValue(String value) {
-      for (SellingFormatEnum b : SellingFormatEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SellingFormatEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SellingFormatEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SellingFormatEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SellingFormatEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SellingFormatEnum.fromValue(value);
-    }
-  }
+  private List<String> productTags = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_SELLING_FORMAT = "selling_format";
   @SerializedName(SERIALIZED_NAME_SELLING_FORMAT)
   @javax.annotation.Nullable
-  private SellingFormatEnum sellingFormat;
+  private String sellingFormat;
 
   public SearchProductsResponseDataProduct() {
   }
@@ -545,7 +189,7 @@ public class SearchProductsResponseDataProduct {
   }
 
 
-  public SearchProductsResponseDataProduct status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchProductsResponseDataProduct status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -555,11 +199,11 @@ public class SearchProductsResponseDataProduct {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -591,12 +235,12 @@ public class SearchProductsResponseDataProduct {
   }
 
 
-  public SearchProductsResponseDataProduct salesRegions(@javax.annotation.Nullable List<SalesRegionsEnum> salesRegions) {
+  public SearchProductsResponseDataProduct salesRegions(@javax.annotation.Nullable List<String> salesRegions) {
     this.salesRegions = salesRegions;
     return this;
   }
 
-  public SearchProductsResponseDataProduct addSalesRegionsItem(SalesRegionsEnum salesRegionsItem) {
+  public SearchProductsResponseDataProduct addSalesRegionsItem(String salesRegionsItem) {
     if (this.salesRegions == null) {
       this.salesRegions = new ArrayList<>();
     }
@@ -609,11 +253,11 @@ public class SearchProductsResponseDataProduct {
    * @return salesRegions
    */
   @javax.annotation.Nullable
-  public List<SalesRegionsEnum> getSalesRegions() {
+  public List<String> getSalesRegions() {
     return salesRegions;
   }
 
-  public void setSalesRegions(@javax.annotation.Nullable List<SalesRegionsEnum> salesRegions) {
+  public void setSalesRegions(@javax.annotation.Nullable List<String> salesRegions) {
     this.salesRegions = salesRegions;
   }
 
@@ -729,7 +373,7 @@ public class SearchProductsResponseDataProduct {
   }
 
 
-  public SearchProductsResponseDataProduct listingQualityTier(@javax.annotation.Nullable ListingQualityTierEnum listingQualityTier) {
+  public SearchProductsResponseDataProduct listingQualityTier(@javax.annotation.Nullable String listingQualityTier) {
     this.listingQualityTier = listingQualityTier;
     return this;
   }
@@ -739,11 +383,11 @@ public class SearchProductsResponseDataProduct {
    * @return listingQualityTier
    */
   @javax.annotation.Nullable
-  public ListingQualityTierEnum getListingQualityTier() {
+  public String getListingQualityTier() {
     return listingQualityTier;
   }
 
-  public void setListingQualityTier(@javax.annotation.Nullable ListingQualityTierEnum listingQualityTier) {
+  public void setListingQualityTier(@javax.annotation.Nullable String listingQualityTier) {
     this.listingQualityTier = listingQualityTier;
   }
 
@@ -859,12 +503,12 @@ public class SearchProductsResponseDataProduct {
   }
 
 
-  public SearchProductsResponseDataProduct productTags(@javax.annotation.Nullable List<ProductTagsEnum> productTags) {
+  public SearchProductsResponseDataProduct productTags(@javax.annotation.Nullable List<String> productTags) {
     this.productTags = productTags;
     return this;
   }
 
-  public SearchProductsResponseDataProduct addProductTagsItem(ProductTagsEnum productTagsItem) {
+  public SearchProductsResponseDataProduct addProductTagsItem(String productTagsItem) {
     if (this.productTags == null) {
       this.productTags = new ArrayList<>();
     }
@@ -877,16 +521,16 @@ public class SearchProductsResponseDataProduct {
    * @return productTags
    */
   @javax.annotation.Nullable
-  public List<ProductTagsEnum> getProductTags() {
+  public List<String> getProductTags() {
     return productTags;
   }
 
-  public void setProductTags(@javax.annotation.Nullable List<ProductTagsEnum> productTags) {
+  public void setProductTags(@javax.annotation.Nullable List<String> productTags) {
     this.productTags = productTags;
   }
 
 
-  public SearchProductsResponseDataProduct sellingFormat(@javax.annotation.Nullable SellingFormatEnum sellingFormat) {
+  public SearchProductsResponseDataProduct sellingFormat(@javax.annotation.Nullable String sellingFormat) {
     this.sellingFormat = sellingFormat;
     return this;
   }
@@ -896,11 +540,11 @@ public class SearchProductsResponseDataProduct {
    * @return sellingFormat
    */
   @javax.annotation.Nullable
-  public SellingFormatEnum getSellingFormat() {
+  public String getSellingFormat() {
     return sellingFormat;
   }
 
-  public void setSellingFormat(@javax.annotation.Nullable SellingFormatEnum sellingFormat) {
+  public void setSellingFormat(@javax.annotation.Nullable String sellingFormat) {
     this.sellingFormat = sellingFormat;
   }
 
@@ -1054,10 +698,6 @@ public class SearchProductsResponseDataProduct {
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
-      }
       if (jsonObj.get("skus") != null && !jsonObj.get("skus").isJsonNull()) {
         JsonArray jsonArrayskus = jsonObj.getAsJsonArray("skus");
         if (jsonArrayskus != null) {
@@ -1096,10 +736,6 @@ public class SearchProductsResponseDataProduct {
       }
       if ((jsonObj.get("listing_quality_tier") != null && !jsonObj.get("listing_quality_tier").isJsonNull()) && !jsonObj.get("listing_quality_tier").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `listing_quality_tier` to be a primitive type in the JSON string but got `%s`", jsonObj.get("listing_quality_tier").toString()));
-      }
-      // validate the optional field `listing_quality_tier`
-      if (jsonObj.get("listing_quality_tier") != null && !jsonObj.get("listing_quality_tier").isJsonNull()) {
-        ListingQualityTierEnum.validateJsonElement(jsonObj.get("listing_quality_tier"));
       }
       if (jsonObj.get("integrated_platform_statuses") != null && !jsonObj.get("integrated_platform_statuses").isJsonNull()) {
         JsonArray jsonArrayintegratedPlatformStatuses = jsonObj.getAsJsonArray("integrated_platform_statuses");
@@ -1143,10 +779,6 @@ public class SearchProductsResponseDataProduct {
       }
       if ((jsonObj.get("selling_format") != null && !jsonObj.get("selling_format").isJsonNull()) && !jsonObj.get("selling_format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `selling_format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("selling_format").toString()));
-      }
-      // validate the optional field `selling_format`
-      if (jsonObj.get("selling_format") != null && !jsonObj.get("selling_format").isJsonNull()) {
-        SellingFormatEnum.validateJsonElement(jsonObj.get("selling_format"));
       }
   }
 

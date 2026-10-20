@@ -46,10 +46,10 @@ export interface SearchGlobalProductsResponseDataGlobalProduct {
      * - UNPUBLISHED
      * - DRAFT
      * - DELETED
-     * @type {SearchGlobalProductsResponseDataGlobalProductStatusEnum}
+     * @type {string}
      * @memberof SearchGlobalProductsResponseDataGlobalProduct
      */
-    status?: SearchGlobalProductsResponseDataGlobalProductStatusEnum;
+    status?: string;
     /**
      * A list of global Stock Keeping Units (SKUs) used to identify distinct variants of the product.
      * @type {Array<SearchGlobalProductsResponseDataGlobalProductSku>}
@@ -71,19 +71,6 @@ export interface SearchGlobalProductsResponseDataGlobalProduct {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const SearchGlobalProductsResponseDataGlobalProductStatusEnum = {
-    Published: 'PUBLISHED',
-    Unpublished: 'UNPUBLISHED',
-    Draft: 'DRAFT',
-    Deleted: 'DELETED'
-} as const;
-export type SearchGlobalProductsResponseDataGlobalProductStatusEnum = typeof SearchGlobalProductsResponseDataGlobalProductStatusEnum[keyof typeof SearchGlobalProductsResponseDataGlobalProductStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchGlobalProductsResponseDataGlobalProduct interface.

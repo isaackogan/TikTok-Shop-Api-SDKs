@@ -42,7 +42,7 @@ data class GetCouponResponseDataCouponDiscount (
 
     /* The type of discount offered by the coupon. Possible enumerations are: - `AMOUNT_OFF`: Reduces the final price of the item by the specified `reduction_amount` - `PERCENT_OFF`: Reduces the final price by the specified `percentage`. */
     @SerializedName("type")
-    val type: GetCouponResponseDataCouponDiscount.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Will appear when `type == 'AMOUNT_OFF'`. */
     @SerializedName("reduction_amount")
@@ -58,15 +58,6 @@ data class GetCouponResponseDataCouponDiscount (
 
 ) {
 
-    /**
-     * The type of discount offered by the coupon. Possible enumerations are: - `AMOUNT_OFF`: Reduces the final price of the item by the specified `reduction_amount` - `PERCENT_OFF`: Reduces the final price by the specified `percentage`.
-     *
-     * Values: AMOUNT_OFF,PERCENT_OFF
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "AMOUNT_OFF") AMOUNT_OFF("AMOUNT_OFF"),
-        @SerializedName(value = "PERCENT_OFF") PERCENT_OFF("PERCENT_OFF");
-    }
 
 }
 

@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_statements_response_data_statement_payment_status import (
-    GetStatementsResponseDataStatementPaymentStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetStatementsResponseDataStatement")
@@ -34,8 +31,8 @@ class GetStatementsResponseDataStatement:
         adjustment_amount (str | Unset): The adjustment amount.
             For more details about the reason for adjustment, refer to the [Get Statement Transactions
             API](https://partner.tiktokshop.com/docv2/page/650a6749defece02be67da87).
-        payment_status (GetStatementsResponseDataStatementPaymentStatus | Unset): The payment status, indicating whether
-            payment has been transferred to the seller's bank account or settled to the seller's account.
+        payment_status (str | Unset): The payment status, indicating whether payment has been transferred to the
+            seller's bank account or settled to the seller's account.
             Possible values:
             - PAID: Payment has been transferred to the seller.
             - FAILED: Payment transfer failed.
@@ -56,7 +53,7 @@ class GetStatementsResponseDataStatement:
     revenue_amount: str | Unset = UNSET
     fee_amount: str | Unset = UNSET
     adjustment_amount: str | Unset = UNSET
-    payment_status: GetStatementsResponseDataStatementPaymentStatus | Unset = UNSET
+    payment_status: str | Unset = UNSET
     payment_id: str | Unset = UNSET
     net_sales_amount: str | Unset = UNSET
     shipping_cost_amount: str | Unset = UNSET
@@ -78,9 +75,7 @@ class GetStatementsResponseDataStatement:
 
         adjustment_amount = self.adjustment_amount
 
-        payment_status: str | Unset = UNSET
-        if not isinstance(self.payment_status, Unset):
-            payment_status = self.payment_status.value
+        payment_status = self.payment_status
 
         payment_id = self.payment_id
 
@@ -137,12 +132,7 @@ class GetStatementsResponseDataStatement:
 
         adjustment_amount = d.pop("adjustment_amount", UNSET)
 
-        _payment_status = d.pop("payment_status", UNSET)
-        payment_status: GetStatementsResponseDataStatementPaymentStatus | Unset
-        if isinstance(_payment_status, Unset):
-            payment_status = UNSET
-        else:
-            payment_status = GetStatementsResponseDataStatementPaymentStatus(_payment_status)
+        payment_status = d.pop("payment_status", UNSET)
 
         payment_id = d.pop("payment_id", UNSET)
 

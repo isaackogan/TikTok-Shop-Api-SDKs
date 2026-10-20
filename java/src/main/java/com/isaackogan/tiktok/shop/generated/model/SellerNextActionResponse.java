@@ -50,66 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SellerNextActionResponse {
-  /**
-   * Seller&#39;s next action. Available values: - &#x60;SELLER_RESPOND_REFUND&#x60; - &#x60;SELLER_RESPOND_RETURN&#x60; - &#x60;SELLER_RESPOND_RECEIVE_PACKAGE&#x60; - &#x60;SELLER_RESPOND_REPLACEMENT&#x60;
-   */
-  @JsonAdapter(ActionEnum.Adapter.class)
-  public enum ActionEnum {
-    SELLER_RESPOND_REFUND("SELLER_RESPOND_REFUND"),
-    
-    SELLER_RESPOND_RETURN("SELLER_RESPOND_RETURN"),
-    
-    SELLER_RESPOND_RECEIVE_PACKAGE("SELLER_RESPOND_RECEIVE_PACKAGE"),
-    
-    SELLER_RESPOND_REPLACEMENT("SELLER_RESPOND_REPLACEMENT");
-
-    private String value;
-
-    ActionEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ActionEnum fromValue(String value) {
-      for (ActionEnum b : ActionEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ActionEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ActionEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ActionEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ActionEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ActionEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
   @javax.annotation.Nullable
-  private ActionEnum action;
+  private String action;
 
   public static final String SERIALIZED_NAME_DEADLINE = "deadline";
   @SerializedName(SERIALIZED_NAME_DEADLINE)
@@ -119,7 +63,7 @@ public class SellerNextActionResponse {
   public SellerNextActionResponse() {
   }
 
-  public SellerNextActionResponse action(@javax.annotation.Nullable ActionEnum action) {
+  public SellerNextActionResponse action(@javax.annotation.Nullable String action) {
     this.action = action;
     return this;
   }
@@ -129,11 +73,11 @@ public class SellerNextActionResponse {
    * @return action
    */
   @javax.annotation.Nullable
-  public ActionEnum getAction() {
+  public String getAction() {
     return action;
   }
 
-  public void setAction(@javax.annotation.Nullable ActionEnum action) {
+  public void setAction(@javax.annotation.Nullable String action) {
     this.action = action;
   }
 
@@ -267,10 +211,6 @@ public class SellerNextActionResponse {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
-      }
-      // validate the optional field `action`
-      if (jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) {
-        ActionEnum.validateJsonElement(jsonObj.get("action"));
       }
   }
 

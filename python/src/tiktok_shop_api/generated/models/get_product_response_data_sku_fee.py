@@ -6,10 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_fee_additional_attribute import (
-    GetProductResponseDataSkuFeeAdditionalAttribute,
-)
-from ..models.get_product_response_data_sku_fee_type import GetProductResponseDataSkuFeeType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataSkuFee")
@@ -19,32 +15,28 @@ T = TypeVar("T", bound="GetProductResponseDataSkuFee")
 class GetProductResponseDataSkuFee:
     """
     Attributes:
-        additional_attribute (GetProductResponseDataSkuFeeAdditionalAttribute | Unset): Possible values for Pfand:
+        additional_attribute (str | Unset): Possible values for Pfand:
             - SINGLE_USE
             - REUSABLE
             - NOT_APPLICABLE
         amount (str | Unset): The fee amount.
             Valid range:
             - PFAND: [0.00 - 6300.00]
-        type_ (GetProductResponseDataSkuFeeType | Unset): The type of fee.
+        type_ (str | Unset): The type of fee.
             Possible values: PFAND
     """
 
-    additional_attribute: GetProductResponseDataSkuFeeAdditionalAttribute | Unset = UNSET
+    additional_attribute: str | Unset = UNSET
     amount: str | Unset = UNSET
-    type_: GetProductResponseDataSkuFeeType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        additional_attribute: str | Unset = UNSET
-        if not isinstance(self.additional_attribute, Unset):
-            additional_attribute = self.additional_attribute.value
+        additional_attribute = self.additional_attribute
 
         amount = self.amount
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -61,21 +53,11 @@ class GetProductResponseDataSkuFee:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _additional_attribute = d.pop("additional_attribute", UNSET)
-        additional_attribute: GetProductResponseDataSkuFeeAdditionalAttribute | Unset
-        if isinstance(_additional_attribute, Unset):
-            additional_attribute = UNSET
-        else:
-            additional_attribute = GetProductResponseDataSkuFeeAdditionalAttribute(_additional_attribute)
+        additional_attribute = d.pop("additional_attribute", UNSET)
 
         amount = d.pop("amount", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetProductResponseDataSkuFeeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetProductResponseDataSkuFeeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         get_product_response_data_sku_fee = cls(
             additional_attribute=additional_attribute,

@@ -37,10 +37,10 @@ export interface GetSellerFinancialTransactionsResponseDataWithdrawal {
      * - PAYMENT: A payment transaction.
      * - REFUND: A refund transaction.
      * - UNKNOWN: An unrecognized transaction type.
-     * @type {GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum}
+     * @type {string}
      * @memberof GetSellerFinancialTransactionsResponseDataWithdrawal
      */
-    type?: GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum;
+    type?: string;
     /**
      * The transaction amount, in the currency specified by currency.
      * @type {string}
@@ -67,10 +67,10 @@ export interface GetSellerFinancialTransactionsResponseDataWithdrawal {
      * - EXCEPTION: The transaction was partially refunded.
      * - CLOSED: The transaction was closed.
      * - UNKNOWN: The status could not be mapped.
-     * @type {GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum}
+     * @type {string}
      * @memberof GetSellerFinancialTransactionsResponseDataWithdrawal
      */
-    status?: GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum;
+    status?: string;
     /**
      * The transaction creation time, expressed as a Unix timestamp in seconds.
      * @type {number}
@@ -78,42 +78,6 @@ export interface GetSellerFinancialTransactionsResponseDataWithdrawal {
      */
     createTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum = {
-    Withdraw: 'WITHDRAW',
-    Settle: 'SETTLE',
-    Transfer: 'TRANSFER',
-    Reverse: 'REVERSE',
-    PolicyViolationDeduction: 'POLICY_VIOLATION_DEDUCTION',
-    Reward: 'REWARD',
-    Payment: 'PAYMENT',
-    Refund: 'REFUND',
-    Unknown: 'UNKNOWN'
-} as const;
-export type GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum = typeof GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum[keyof typeof GetSellerFinancialTransactionsResponseDataWithdrawalTypeEnum];
-
-/**
- * @export
- */
-export const GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum = {
-    Success: 'SUCCESS',
-    Init: 'INIT',
-    Ordered: 'ORDERED',
-    Processing: 'PROCESSING',
-    Received: 'RECEIVED',
-    Processed: 'PROCESSED',
-    Failed: 'FAILED',
-    Reversed: 'REVERSED',
-    Exception: 'EXCEPTION',
-    Closed: 'CLOSED',
-    Unknown: 'UNKNOWN'
-} as const;
-export type GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum = typeof GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum[keyof typeof GetSellerFinancialTransactionsResponseDataWithdrawalStatusEnum];
-
 
 /**
  * Check if a given object implements the GetSellerFinancialTransactionsResponseDataWithdrawal interface.

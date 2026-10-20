@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_tap_affiliate_orders_response_data_sku_order_content_type import (
-    SearchTAPAffiliateOrdersResponseDataSkuOrderContentType,
-)
-from ..models.search_tap_affiliate_orders_response_data_sku_order_fully_return import (
-    SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturn,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -94,8 +88,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
         product_id (str | Unset): Unique identifier for Product
         price (Price | Unset):
         quantity (int | Unset): Number of SKU items in the order, including refunded items.
-        content_type (SearchTAPAffiliateOrdersResponseDataSkuOrderContentType | Unset): The content format of the
-            creator content through which the order was created.
+        content_type (str | Unset): The content format of the creator content through which the order was created.
             Possible values:
             - SHOP
             - VIDEO
@@ -146,8 +139,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
             | Unset):
         actual_creator_tap_bonus_commission (SearchTAPAffiliateOrdersResponseDataSkuOrderActualCreatorTapBonusCommission
             | Unset):
-        fully_return (SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset): Whether the SKU was fully
-            returned or refunded.
+        fully_return (str | Unset): Whether the SKU was fully returned or refunded.
             Possible values:
             - `Yes`: The SKU was fully returned or refunded, and no commission is paid.
             - `No`: The SKU was not fully returned or refunded.
@@ -169,7 +161,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
     product_id: str | Unset = UNSET
     price: Price | Unset = UNSET
     quantity: int | Unset = UNSET
-    content_type: SearchTAPAffiliateOrdersResponseDataSkuOrderContentType | Unset = UNSET
+    content_type: str | Unset = UNSET
     content_id: str | Unset = UNSET
     creator_standard_commission_rate: int | Unset = UNSET
     partner_standard_commission_rate: int | Unset = UNSET
@@ -219,7 +211,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
     actual_creator_tap_bonus_commission: (
         SearchTAPAffiliateOrdersResponseDataSkuOrderActualCreatorTapBonusCommission | Unset
     ) = UNSET
-    fully_return: SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset = UNSET
+    fully_return: str | Unset = UNSET
     settlement_time: int | Unset = UNSET
     last_update_time: int | Unset = UNSET
     is_carousel: bool | Unset = UNSET
@@ -250,9 +242,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
 
         quantity = self.quantity
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         content_id = self.content_id
 
@@ -340,9 +330,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
         if not isinstance(self.actual_creator_tap_bonus_commission, Unset):
             actual_creator_tap_bonus_commission = self.actual_creator_tap_bonus_commission.to_dict()
 
-        fully_return: str | Unset = UNSET
-        if not isinstance(self.fully_return, Unset):
-            fully_return = self.fully_return.value
+        fully_return = self.fully_return
 
         settlement_time = self.settlement_time
 
@@ -520,12 +508,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
 
         quantity = d.pop("quantity", UNSET)
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: SearchTAPAffiliateOrdersResponseDataSkuOrderContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = SearchTAPAffiliateOrdersResponseDataSkuOrderContentType(_content_type)
+        content_type = d.pop("content_type", UNSET)
 
         content_id = d.pop("content_id", UNSET)
 
@@ -747,12 +730,7 @@ class SearchTAPAffiliateOrdersResponseDataSkuOrder:
                 )
             )
 
-        _fully_return = d.pop("fully_return", UNSET)
-        fully_return: SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturn | Unset
-        if isinstance(_fully_return, Unset):
-            fully_return = UNSET
-        else:
-            fully_return = SearchTAPAffiliateOrdersResponseDataSkuOrderFullyReturn(_fully_return)
+        fully_return = d.pop("fully_return", UNSET)
 
         settlement_time = d.pop("settlement_time", UNSET)
 

@@ -64,93 +64,10 @@ public class SearchPromotionActivitiesResponseDataActivity {
   @javax.annotation.Nullable
   private String title;
 
-  /**
-   * The type of promotion activity. Possible values: - &#x60;FIXED_PRICE&#x60;: Product discount activity with a fixed price. - &#x60;DIRECT_DISCOUNT&#x60;: Product discount activity with a percentage off. - &#x60;FLASHSALE&#x60;: Flash sale activity. - &#x60;SHIPPING_DISCOUNT&#x60;: Shipping fee discount activity. - &#x60;BUY_MORE_SAVE_MORE&#x60;: Buy More Save More activity. - &#x60;GIFT_WITH_PURCHASE&#x60;: Gift With Purchase activity. - &#x60;BUY_X_GET_Y&#x60;: Buy X Get Y activity.
-   */
-  @JsonAdapter(ActivityTypeEnum.Adapter.class)
-  public enum ActivityTypeEnum {
-    /**
-     * Product discount activity with a fixed price.
-     */
-    FIXED_PRICE("FIXED_PRICE"),
-    
-    /**
-     * Product discount activity with a percentage off.
-     */
-    DIRECT_DISCOUNT("DIRECT_DISCOUNT"),
-    
-    /**
-     * Flash sale activity.
-     */
-    FLASHSALE("FLASHSALE"),
-    
-    /**
-     * Shipping fee discount activity.
-     */
-    SHIPPING_DISCOUNT("SHIPPING_DISCOUNT"),
-    
-    /**
-     * Buy More Save More activity.
-     */
-    BUY_MORE_SAVE_MORE("BUY_MORE_SAVE_MORE"),
-    
-    /**
-     * Gift With Purchase activity.
-     */
-    GIFT_WITH_PURCHASE("GIFT_WITH_PURCHASE"),
-    
-    /**
-     * Buy X Get Y activity.
-     */
-    BUY_X_GET_Y("BUY_X_GET_Y");
-
-    private String value;
-
-    ActivityTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ActivityTypeEnum fromValue(String value) {
-      for (ActivityTypeEnum b : ActivityTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ActivityTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ActivityTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ActivityTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ActivityTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ActivityTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ACTIVITY_TYPE = "activity_type";
   @SerializedName(SERIALIZED_NAME_ACTIVITY_TYPE)
   @javax.annotation.Nullable
-  private ActivityTypeEnum activityType;
+  private String activityType;
 
   public static final String SERIALIZED_NAME_DURATION_TYPE = "duration_type";
   @SerializedName(SERIALIZED_NAME_DURATION_TYPE)
@@ -167,88 +84,10 @@ public class SearchPromotionActivitiesResponseDataActivity {
   @javax.annotation.Nullable
   private Long endTime;
 
-  /**
-   * Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * Promotion activities with this status are not available to TikTok users.
-     */
-    DRAFT("DRAFT"),
-    
-    /**
-     * Promotion activities with this status are not available to TikTok users until the set activity start time.
-     */
-    NOT_START("NOT_START"),
-    
-    /**
-     * Promotion activities with this status are available to TikTok users.
-     */
-    ONGOING("ONGOING"),
-    
-    /**
-     * Promotion activities with this status are not available to TikTok users because it has expired.
-     */
-    EXPIRED("EXPIRED"),
-    
-    /**
-     * The activity has been deactivated by the seller and is not available to TikTok users.
-     */
-    DEACTIVATED("DEACTIVATED"),
-    
-    /**
-     * The activity is terminated by the platform and is not available to TikTok users.
-     */
-    NOT_EFFECTIVE("NOT_EFFECTIVE");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_CREATE_TIME = "create_time";
   @SerializedName(SERIALIZED_NAME_CREATE_TIME)
@@ -280,68 +119,10 @@ public class SearchPromotionActivitiesResponseDataActivity {
   @javax.annotation.Nullable
   private GetActivityResponseDataDiscount discount;
 
-  /**
-   * Whether a &#x60;SHIPPING_DISCOUNT&#x60; activity supports auction products. This field is omitted for other activity types and can be omitted when auction-support data is unavailable. Possible values: - &#x60;ALL&#x60;: The activity supports both normal products and auction products. - &#x60;EXCLUDE_AUCTION&#x60;: The activity does not support auction products.
-   */
-  @JsonAdapter(AuctionSupportTypeEnum.Adapter.class)
-  public enum AuctionSupportTypeEnum {
-    /**
-     * The activity supports both normal products and auction products.
-     */
-    ALL("ALL"),
-    
-    /**
-     * The activity does not support auction products.
-     */
-    EXCLUDE_AUCTION("EXCLUDE_AUCTION");
-
-    private String value;
-
-    AuctionSupportTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AuctionSupportTypeEnum fromValue(String value) {
-      for (AuctionSupportTypeEnum b : AuctionSupportTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AuctionSupportTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AuctionSupportTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AuctionSupportTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AuctionSupportTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AuctionSupportTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_AUCTION_SUPPORT_TYPE = "auction_support_type";
   @SerializedName(SERIALIZED_NAME_AUCTION_SUPPORT_TYPE)
   @javax.annotation.Nullable
-  private AuctionSupportTypeEnum auctionSupportType;
+  private String auctionSupportType;
 
   public SearchPromotionActivitiesResponseDataActivity() {
   }
@@ -384,7 +165,7 @@ public class SearchPromotionActivitiesResponseDataActivity {
   }
 
 
-  public SearchPromotionActivitiesResponseDataActivity activityType(@javax.annotation.Nullable ActivityTypeEnum activityType) {
+  public SearchPromotionActivitiesResponseDataActivity activityType(@javax.annotation.Nullable String activityType) {
     this.activityType = activityType;
     return this;
   }
@@ -394,11 +175,11 @@ public class SearchPromotionActivitiesResponseDataActivity {
    * @return activityType
    */
   @javax.annotation.Nullable
-  public ActivityTypeEnum getActivityType() {
+  public String getActivityType() {
     return activityType;
   }
 
-  public void setActivityType(@javax.annotation.Nullable ActivityTypeEnum activityType) {
+  public void setActivityType(@javax.annotation.Nullable String activityType) {
     this.activityType = activityType;
   }
 
@@ -460,7 +241,7 @@ public class SearchPromotionActivitiesResponseDataActivity {
   }
 
 
-  public SearchPromotionActivitiesResponseDataActivity status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchPromotionActivitiesResponseDataActivity status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -470,11 +251,11 @@ public class SearchPromotionActivitiesResponseDataActivity {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -609,7 +390,7 @@ public class SearchPromotionActivitiesResponseDataActivity {
   }
 
 
-  public SearchPromotionActivitiesResponseDataActivity auctionSupportType(@javax.annotation.Nullable AuctionSupportTypeEnum auctionSupportType) {
+  public SearchPromotionActivitiesResponseDataActivity auctionSupportType(@javax.annotation.Nullable String auctionSupportType) {
     this.auctionSupportType = auctionSupportType;
     return this;
   }
@@ -619,11 +400,11 @@ public class SearchPromotionActivitiesResponseDataActivity {
    * @return auctionSupportType
    */
   @javax.annotation.Nullable
-  public AuctionSupportTypeEnum getAuctionSupportType() {
+  public String getAuctionSupportType() {
     return auctionSupportType;
   }
 
-  public void setAuctionSupportType(@javax.annotation.Nullable AuctionSupportTypeEnum auctionSupportType) {
+  public void setAuctionSupportType(@javax.annotation.Nullable String auctionSupportType) {
     this.auctionSupportType = auctionSupportType;
   }
 
@@ -769,19 +550,11 @@ public class SearchPromotionActivitiesResponseDataActivity {
       if ((jsonObj.get("activity_type") != null && !jsonObj.get("activity_type").isJsonNull()) && !jsonObj.get("activity_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `activity_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("activity_type").toString()));
       }
-      // validate the optional field `activity_type`
-      if (jsonObj.get("activity_type") != null && !jsonObj.get("activity_type").isJsonNull()) {
-        ActivityTypeEnum.validateJsonElement(jsonObj.get("activity_type"));
-      }
       if ((jsonObj.get("duration_type") != null && !jsonObj.get("duration_type").isJsonNull()) && !jsonObj.get("duration_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `duration_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("duration_type").toString()));
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if ((jsonObj.get("product_level") != null && !jsonObj.get("product_level").isJsonNull()) && !jsonObj.get("product_level").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_level` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_level").toString()));
@@ -810,10 +583,6 @@ public class SearchPromotionActivitiesResponseDataActivity {
       }
       if ((jsonObj.get("auction_support_type") != null && !jsonObj.get("auction_support_type").isJsonNull()) && !jsonObj.get("auction_support_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `auction_support_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("auction_support_type").toString()));
-      }
-      // validate the optional field `auction_support_type`
-      if (jsonObj.get("auction_support_type") != null && !jsonObj.get("auction_support_type").isJsonNull()) {
-        AuctionSupportTypeEnum.validateJsonElement(jsonObj.get("auction_support_type"));
       }
   }
 

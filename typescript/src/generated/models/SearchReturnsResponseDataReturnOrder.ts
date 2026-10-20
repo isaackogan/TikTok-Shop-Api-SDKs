@@ -88,10 +88,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * - `RETURN_AND_REFUND`: Buyer is required to send the item(s) back to the seller. The seller will need to review the condition of the returned item(s) before a refund can be issued to the buyer. 
      * - `REPLACEMENT`: The buyer requires the seller to replace the item(s).
      * - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
-     * @type {SearchReturnsResponseDataReturnOrderReturnTypeEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    returnType?: SearchReturnsResponseDataReturnOrderReturnTypeEnum;
+    returnType?: string;
     /**
      * Return status.
      * Available values:
@@ -113,10 +113,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * - `EXCHANGE_REQUEST_REFUND_SUCCESS`: Buyer's exchange request was resolved by refund due to insufficient inventory.
      * - `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.
      * - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new order for seller to fulfill.
-     * @type {SearchReturnsResponseDataReturnOrderReturnStatusEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    returnStatus?: SearchReturnsResponseDataReturnOrderReturnStatusEnum;
+    returnStatus?: string;
     /**
      * Arbitration status.
      * Available values:
@@ -124,10 +124,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * - `SUPPORT_BUYER`: The platform operator supports the buyer.
      * - `SUPPORT_SELLER`: The platform operator supports the seller.
      * - `CLOSED`: Arbitration is closed.
-     * @type {SearchReturnsResponseDataReturnOrderArbitrationStatusEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    arbitrationStatus?: SearchReturnsResponseDataReturnOrderArbitrationStatusEnum;
+    arbitrationStatus?: string;
     /**
      * Return initiation role.
      * Available values:
@@ -136,10 +136,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * - `OPERATOR` : TikTok Shop platform operator.
      * - `SYSTEM`:  TikTok Shop system.
      * Please see "API overview" to learn more about roles.
-     * @type {SearchReturnsResponseDataReturnOrderRoleEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    role?: SearchReturnsResponseDataReturnOrderRoleEnum;
+    role?: string;
     /**
      * Machine-readable reason code for the return. Use `return_reason_text` for localized display text.
      * @type {string}
@@ -158,10 +158,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * Available values:
      * - `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses `DROP_OFF` or `PICKUP`.
      * - `BUYER_ARRANGE`: The buyer arranges the return shipment.
-     * @type {SearchReturnsResponseDataReturnOrderShipmentTypeEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    shipmentType?: SearchReturnsResponseDataReturnOrderShipmentTypeEnum;
+    shipmentType?: string;
     /**
      * The handover method buyer chooses to use when returning item(s) to seller using platform's shipping service. 
      * - `DROP_OFF`: buyer will drop off the item(s) at courier 
@@ -254,10 +254,10 @@ export interface SearchReturnsResponseDataReturnOrder {
      * - `SHIPPING_LABEL`
      * - `QR_CODE` - QR Code with Box
      * - `QR_CODE_NBNL` - QR Code with No Box No Label
-     * @type {SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum}
+     * @type {string}
      * @memberof SearchReturnsResponseDataReturnOrder
      */
-    returnShippingDocumentType?: SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum;
+    returnShippingDocumentType?: string;
     /**
      * Return method:
      * - `SELLER_SHIPPED`: Seller offers the return shipping service.
@@ -314,85 +314,6 @@ export interface SearchReturnsResponseDataReturnOrder {
      */
     isQuickRefund?: boolean;
 }
-
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderReturnTypeEnum = {
-    Refund: 'REFUND',
-    ReturnAndRefund: 'RETURN_AND_REFUND',
-    Replacement: 'REPLACEMENT',
-    Exchange: 'EXCHANGE'
-} as const;
-export type SearchReturnsResponseDataReturnOrderReturnTypeEnum = typeof SearchReturnsResponseDataReturnOrderReturnTypeEnum[keyof typeof SearchReturnsResponseDataReturnOrderReturnTypeEnum];
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderReturnStatusEnum = {
-    ReturnOrRefundRequestPending: 'RETURN_OR_REFUND_REQUEST_PENDING',
-    RefundOrReturnRequestReject: 'REFUND_OR_RETURN_REQUEST_REJECT',
-    AwaitingBuyerShip: 'AWAITING_BUYER_SHIP',
-    BuyerShippedItem: 'BUYER_SHIPPED_ITEM',
-    RejectReceivePackage: 'REJECT_RECEIVE_PACKAGE',
-    ReturnOrRefundRequestSuccess: 'RETURN_OR_REFUND_REQUEST_SUCCESS',
-    ReturnOrRefundRequestCancel: 'RETURN_OR_REFUND_REQUEST_CANCEL',
-    ReturnOrRefundRequestComplete: 'RETURN_OR_REFUND_REQUEST_COMPLETE',
-    ReplacementRequestPending: 'REPLACEMENT_REQUEST_PENDING',
-    ReplacementRequestReject: 'REPLACEMENT_REQUEST_REJECT',
-    ReplacementRequestRefundSuccess: 'REPLACEMENT_REQUEST_REFUND_SUCCESS',
-    ReplacementRequestCancel: 'REPLACEMENT_REQUEST_CANCEL',
-    ReplacementRequestComplete: 'REPLACEMENT_REQUEST_COMPLETE',
-    AwaitingBuyerResponse: 'AWAITING_BUYER_RESPONSE',
-    ExchangeRequestPending: 'EXCHANGE_REQUEST_PENDING',
-    ExchangeRequestRefundSuccess: 'EXCHANGE_REQUEST_REFUND_SUCCESS',
-    ExchangeRequestCancel: 'EXCHANGE_REQUEST_CANCEL',
-    ExchangeRequestComplete: 'EXCHANGE_REQUEST_COMPLETE'
-} as const;
-export type SearchReturnsResponseDataReturnOrderReturnStatusEnum = typeof SearchReturnsResponseDataReturnOrderReturnStatusEnum[keyof typeof SearchReturnsResponseDataReturnOrderReturnStatusEnum];
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderArbitrationStatusEnum = {
-    InProgress: 'IN_PROGRESS',
-    SupportBuyer: 'SUPPORT_BUYER',
-    SupportSeller: 'SUPPORT_SELLER',
-    Closed: 'CLOSED'
-} as const;
-export type SearchReturnsResponseDataReturnOrderArbitrationStatusEnum = typeof SearchReturnsResponseDataReturnOrderArbitrationStatusEnum[keyof typeof SearchReturnsResponseDataReturnOrderArbitrationStatusEnum];
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type SearchReturnsResponseDataReturnOrderRoleEnum = typeof SearchReturnsResponseDataReturnOrderRoleEnum[keyof typeof SearchReturnsResponseDataReturnOrderRoleEnum];
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderShipmentTypeEnum = {
-    Platform: 'PLATFORM',
-    BuyerArrange: 'BUYER_ARRANGE'
-} as const;
-export type SearchReturnsResponseDataReturnOrderShipmentTypeEnum = typeof SearchReturnsResponseDataReturnOrderShipmentTypeEnum[keyof typeof SearchReturnsResponseDataReturnOrderShipmentTypeEnum];
-
-/**
- * @export
- */
-export const SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum = {
-    ShippingLabel: 'SHIPPING_LABEL',
-    QrCode: 'QR_CODE',
-    QrCodeNbnl: 'QR_CODE_NBNL'
-} as const;
-export type SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum = typeof SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum[keyof typeof SearchReturnsResponseDataReturnOrderReturnShippingDocumentTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchReturnsResponseDataReturnOrder interface.

@@ -32,10 +32,10 @@ export interface GetShopProductPerformanceDetailResponseDataPerformanceTopConten
      * Possible values:
      * - LIVE: Live stream content.
      * - VIDEO: Video content.
-     * @type {GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum}
+     * @type {string}
      * @memberof GetShopProductPerformanceDetailResponseDataPerformanceTopContent
      */
-    type?: GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum;
+    type?: string;
     /**
      * Content details
      * @type {Array<GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent>}
@@ -43,17 +43,6 @@ export interface GetShopProductPerformanceDetailResponseDataPerformanceTopConten
      */
     contents?: Array<GetShopProductPerformanceDetailResponseDataPerformanceTopContentContent>;
 }
-
-
-/**
- * @export
- */
-export const GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum = {
-    Live: 'LIVE',
-    Video: 'VIDEO'
-} as const;
-export type GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum = typeof GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum[keyof typeof GetShopProductPerformanceDetailResponseDataPerformanceTopContentTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopProductPerformanceDetailResponseDataPerformanceTopContent interface.

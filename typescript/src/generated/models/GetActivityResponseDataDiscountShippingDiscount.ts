@@ -33,10 +33,10 @@ export interface GetActivityResponseDataDiscountShippingDiscount {
      * - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products.
      * - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order.
      * `MINIMAL_ITEM_QUANTITY` and `MINIMAL_ORDER_AMOUNT` can only be set when `product_level==SHOP`.
-     * @type {GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountShippingDiscount
      */
-    thresholdType?: GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum;
+    thresholdType?: string;
     /**
      * The purchase threshold returned for the shipping discount, based on `threshold_type`.
      * - When `threshold_type==NO_THRESHOLD`, this value is not required.
@@ -91,18 +91,6 @@ export interface GetActivityResponseDataDiscountShippingDiscount {
      */
     areaScope?: GetActivityResponseDataDiscountShippingDiscountAreaScope;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum = {
-    NoThreshold: 'NO_THRESHOLD',
-    MinimalItemQuantity: 'MINIMAL_ITEM_QUANTITY',
-    MinimalOrderAmount: 'MINIMAL_ORDER_AMOUNT'
-} as const;
-export type GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum = typeof GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum[keyof typeof GetActivityResponseDataDiscountShippingDiscountThresholdTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseDataDiscountShippingDiscount interface.

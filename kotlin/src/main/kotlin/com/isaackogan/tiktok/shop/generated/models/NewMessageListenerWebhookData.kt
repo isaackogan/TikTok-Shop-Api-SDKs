@@ -56,7 +56,7 @@ data class NewMessageListenerWebhookData (
 
     /* Message type, with possible values:      * TEXT   * PRODUCT_CARD   * TARGET_COLLABORATION_CARD   * FREE_SAMPLE_CARD */
     @SerializedName("msg_type")
-    val msgType: NewMessageListenerWebhookData.MsgType? = null,
+    val msgType: kotlin.String? = null,
 
     /* Message content, in JSON serialized string.      * TEXT: {\"content\": \"simple text\"}   * PRODUCT_CARD: {\"product_id\": \"12345\"}   * TARGET_INVITATION_CARD: {\"invitation_group_id\": \"1234\"}   * FREE_SAMPLE_CARD: {\"apply_id\": \"1234\"} */
     @SerializedName("content")
@@ -71,17 +71,6 @@ data class NewMessageListenerWebhookData (
 
 ) {
 
-    /**
-     * Message type, with possible values:      * TEXT   * PRODUCT_CARD   * TARGET_COLLABORATION_CARD   * FREE_SAMPLE_CARD
-     *
-     * Values: TEXT,PRODUCT_CARD,TARGET_COLLABORATION_CARD,FREE_SAMPLE_CARD
-     */
-    enum class MsgType(val value: kotlin.String) {
-        @SerializedName(value = "TEXT") TEXT("TEXT"),
-        @SerializedName(value = "PRODUCT_CARD") PRODUCT_CARD("PRODUCT_CARD"),
-        @SerializedName(value = "TARGET_COLLABORATION_CARD") TARGET_COLLABORATION_CARD("TARGET_COLLABORATION_CARD"),
-        @SerializedName(value = "FREE_SAMPLE_CARD") FREE_SAMPLE_CARD("FREE_SAMPLE_CARD");
-    }
 
 }
 

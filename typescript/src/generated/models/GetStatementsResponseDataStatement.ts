@@ -73,10 +73,10 @@ export interface GetStatementsResponseDataStatement {
      * - FAILED: Payment transfer failed.
      * - PROCESSING: Payment is currently being processed.
      * - SETTLED: Funds have been settled to the seller's account.
-     * @type {GetStatementsResponseDataStatementPaymentStatusEnum}
+     * @type {string}
      * @memberof GetStatementsResponseDataStatement
      */
-    paymentStatus?: GetStatementsResponseDataStatementPaymentStatusEnum;
+    paymentStatus?: string;
     /**
      * The payment ID.
      * @type {string}
@@ -104,19 +104,6 @@ export interface GetStatementsResponseDataStatement {
      */
     paymentTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetStatementsResponseDataStatementPaymentStatusEnum = {
-    Paid: 'PAID',
-    Failed: 'FAILED',
-    Processing: 'PROCESSING',
-    Settled: 'SETTLED'
-} as const;
-export type GetStatementsResponseDataStatementPaymentStatusEnum = typeof GetStatementsResponseDataStatementPaymentStatusEnum[keyof typeof GetStatementsResponseDataStatementPaymentStatusEnum];
-
 
 /**
  * Check if a given object implements the GetStatementsResponseDataStatement interface.

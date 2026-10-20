@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_skpp_detail_response_data_task_detail_category import (
-    GetProductSKPPDetailResponseDataTaskDetailCategory,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +21,7 @@ T = TypeVar("T", bound="GetProductSKPPDetailResponseDataTaskDetail")
 class GetProductSKPPDetailResponseDataTaskDetail:
     """
     Attributes:
-        category (GetProductSKPPDetailResponseDataTaskDetailCategory | Unset): Key for the scoring category.
+        category (str | Unset): Key for the scoring category.
             Possible values:
             - COMMISSION_RATE
             - FULFILMENT
@@ -49,7 +46,7 @@ class GetProductSKPPDetailResponseDataTaskDetail:
             to complete this task; returned only when passed = false. A task may have multiple suggestions.
     """
 
-    category: GetProductSKPPDetailResponseDataTaskDetailCategory | Unset = UNSET
+    category: str | Unset = UNSET
     name: str | Unset = UNSET
     current_value: str | Unset = UNSET
     target_value: str | Unset = UNSET
@@ -58,9 +55,7 @@ class GetProductSKPPDetailResponseDataTaskDetail:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        category: str | Unset = UNSET
-        if not isinstance(self.category, Unset):
-            category = self.category.value
+        category = self.category
 
         name = self.name
 
@@ -102,12 +97,7 @@ class GetProductSKPPDetailResponseDataTaskDetail:
         )
 
         d = dict(src_dict)
-        _category = d.pop("category", UNSET)
-        category: GetProductSKPPDetailResponseDataTaskDetailCategory | Unset
-        if isinstance(_category, Unset):
-            category = UNSET
-        else:
-            category = GetProductSKPPDetailResponseDataTaskDetailCategory(_category)
+        category = d.pop("category", UNSET)
 
         name = d.pop("name", UNSET)
 

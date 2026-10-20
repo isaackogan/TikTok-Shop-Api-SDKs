@@ -6,10 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sku_status_change_webhook_data_sku_deactivation_source import (
-    SKUStatusChangeWebhookDataSkuDeactivationSource,
-)
-from ..models.sku_status_change_webhook_data_sku_status import SKUStatusChangeWebhookDataSkuStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SKUStatusChangeWebhookDataSku")
@@ -20,27 +16,22 @@ class SKUStatusChangeWebhookDataSku:
     """
     Attributes:
         sku_id (str | Unset): The ID of the SKU whose status changed.
-        status (SKUStatusChangeWebhookDataSkuStatus | Unset): The new SKU status. Possible values: `CREATED`, `DELETED`,
-            `ACTIVATED`, `DEACTIVATED`.
-        deactivation_source (SKUStatusChangeWebhookDataSkuDeactivationSource | Unset): The source of deactivation. This
-            field is returned only when `status` is `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`.
+        status (str | Unset): The new SKU status. Possible values: `CREATED`, `DELETED`, `ACTIVATED`, `DEACTIVATED`.
+        deactivation_source (str | Unset): The source of deactivation. This field is returned only when `status` is
+            `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`.
     """
 
     sku_id: str | Unset = UNSET
-    status: SKUStatusChangeWebhookDataSkuStatus | Unset = UNSET
-    deactivation_source: SKUStatusChangeWebhookDataSkuDeactivationSource | Unset = UNSET
+    status: str | Unset = UNSET
+    deactivation_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         sku_id = self.sku_id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
-        deactivation_source: str | Unset = UNSET
-        if not isinstance(self.deactivation_source, Unset):
-            deactivation_source = self.deactivation_source.value
+        deactivation_source = self.deactivation_source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,19 +50,9 @@ class SKUStatusChangeWebhookDataSku:
         d = dict(src_dict)
         sku_id = d.pop("sku_id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SKUStatusChangeWebhookDataSkuStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SKUStatusChangeWebhookDataSkuStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _deactivation_source = d.pop("deactivation_source", UNSET)
-        deactivation_source: SKUStatusChangeWebhookDataSkuDeactivationSource | Unset
-        if isinstance(_deactivation_source, Unset):
-            deactivation_source = UNSET
-        else:
-            deactivation_source = SKUStatusChangeWebhookDataSkuDeactivationSource(_deactivation_source)
+        deactivation_source = d.pop("deactivation_source", UNSET)
 
         sku_status_change_webhook_data_sku = cls(
             sku_id=sku_id,

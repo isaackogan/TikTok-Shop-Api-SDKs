@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_global_products_response_data_global_product_status import (
-    SearchGlobalProductsResponseDataGlobalProductStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -26,7 +23,7 @@ class SearchGlobalProductsResponseDataGlobalProduct:
     Attributes:
         id (str | Unset): The global product ID in TikTok Shop.
         title (str | Unset): The product title.
-        status (SearchGlobalProductsResponseDataGlobalProductStatus | Unset): The status of the product.
+        status (str | Unset): The status of the product.
             Possible values:
             - PUBLISHED
             - UNPUBLISHED
@@ -42,7 +39,7 @@ class SearchGlobalProductsResponseDataGlobalProduct:
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
-    status: SearchGlobalProductsResponseDataGlobalProductStatus | Unset = UNSET
+    status: str | Unset = UNSET
     skus: list[SearchGlobalProductsResponseDataGlobalProductSku] | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
@@ -53,9 +50,7 @@ class SearchGlobalProductsResponseDataGlobalProduct:
 
         title = self.title
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         skus: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.skus, Unset):
@@ -97,12 +92,7 @@ class SearchGlobalProductsResponseDataGlobalProduct:
 
         title = d.pop("title", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchGlobalProductsResponseDataGlobalProductStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchGlobalProductsResponseDataGlobalProductStatus(_status)
+        status = d.pop("status", UNSET)
 
         _skus = d.pop("skus", UNSET)
         skus: list[SearchGlobalProductsResponseDataGlobalProductSku] | Unset = UNSET

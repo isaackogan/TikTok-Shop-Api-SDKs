@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_barcode_type import SearchGoodsInfoResponseDataGoodBarcodeType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodBarcode")
@@ -17,7 +16,7 @@ class SearchGoodsInfoResponseDataGoodBarcode:
     """
     Attributes:
         code (str | Unset): The printable barcode for the goods.
-        type_ (SearchGoodsInfoResponseDataGoodBarcodeType | Unset): The barcode type.
+        type_ (str | Unset): The barcode type.
             Possible values:
             - UPC
             - EAN
@@ -28,15 +27,13 @@ class SearchGoodsInfoResponseDataGoodBarcode:
     """
 
     code: str | Unset = UNSET
-    type_: SearchGoodsInfoResponseDataGoodBarcodeType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         code = self.code
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -53,12 +50,7 @@ class SearchGoodsInfoResponseDataGoodBarcode:
         d = dict(src_dict)
         code = d.pop("code", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: SearchGoodsInfoResponseDataGoodBarcodeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = SearchGoodsInfoResponseDataGoodBarcodeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         search_goods_info_response_data_good_barcode = cls(
             code=code,

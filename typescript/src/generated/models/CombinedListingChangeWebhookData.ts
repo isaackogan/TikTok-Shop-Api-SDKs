@@ -49,10 +49,10 @@ export interface CombinedListingChangeWebhookData {
      *  * DELETED 
      *   
      *  Note: Only products in LIVE combined listings will appear on the product display page.
-     * @type {CombinedListingChangeWebhookDataStatusEnum}
+     * @type {string}
      * @memberof CombinedListingChangeWebhookData
      */
-    status?: CombinedListingChangeWebhookDataStatusEnum;
+    status?: string;
     /**
      * The type of change made to this combined listing. 
      *  Possible values: 
@@ -60,10 +60,10 @@ export interface CombinedListingChangeWebhookData {
      *  * CREATE: The combined listing was created. 
      *  * UPDATE: The combined listing was updated to add or remove products. 
      *  * DELETE: The combined listing was deleted.
-     * @type {CombinedListingChangeWebhookDataChangeTypeEnum}
+     * @type {string}
      * @memberof CombinedListingChangeWebhookData
      */
-    changeType?: CombinedListingChangeWebhookDataChangeTypeEnum;
+    changeType?: string;
     /**
      * The list of products that were newly added to the combined listing.
      * @type {Array<string>}
@@ -77,29 +77,6 @@ export interface CombinedListingChangeWebhookData {
      */
     removedProductIds?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const CombinedListingChangeWebhookDataStatusEnum = {
-    Live: 'LIVE',
-    SystemDeactivated: 'SYSTEM_DEACTIVATED',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    Deleted: 'DELETED'
-} as const;
-export type CombinedListingChangeWebhookDataStatusEnum = typeof CombinedListingChangeWebhookDataStatusEnum[keyof typeof CombinedListingChangeWebhookDataStatusEnum];
-
-/**
- * @export
- */
-export const CombinedListingChangeWebhookDataChangeTypeEnum = {
-    Create: 'CREATE',
-    Update: 'UPDATE',
-    Delete: 'DELETE'
-} as const;
-export type CombinedListingChangeWebhookDataChangeTypeEnum = typeof CombinedListingChangeWebhookDataChangeTypeEnum[keyof typeof CombinedListingChangeWebhookDataChangeTypeEnum];
-
 
 /**
  * Check if a given object implements the CombinedListingChangeWebhookData interface.

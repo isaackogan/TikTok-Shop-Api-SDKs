@@ -47,7 +47,7 @@ data class GetEngagementTaskPerformancesResponseDataTaskPerformance (
 
     /* The status of the task. Possible values: - `UNKNOWN`: The task status is unknown. - `DRAFT`: The task is in draft status. - `WAITING`: The task is waiting. - `SENDING`: The task is sending messages. - `FAILED`: The task failed to send messages. - `CANCELED`: The task was canceled. - `SUCCESS`: The task completed successfully. - `DELETED`: The task was deleted. */
     @SerializedName("status")
-    val status: GetEngagementTaskPerformancesResponseDataTaskPerformance.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The number of users that received the message. */
     @SerializedName("sent_recipient_count")
@@ -71,21 +71,6 @@ data class GetEngagementTaskPerformancesResponseDataTaskPerformance (
 
 ) {
 
-    /**
-     * The status of the task. Possible values: - `UNKNOWN`: The task status is unknown. - `DRAFT`: The task is in draft status. - `WAITING`: The task is waiting. - `SENDING`: The task is sending messages. - `FAILED`: The task failed to send messages. - `CANCELED`: The task was canceled. - `SUCCESS`: The task completed successfully. - `DELETED`: The task was deleted.
-     *
-     * Values: UNKNOWN,DRAFT,WAITING,SENDING,FAILED,CANCELED,SUCCESS,DELETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "WAITING") WAITING("WAITING"),
-        @SerializedName(value = "SENDING") SENDING("SENDING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "CANCELED") CANCELED("CANCELED"),
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
 
 }
 

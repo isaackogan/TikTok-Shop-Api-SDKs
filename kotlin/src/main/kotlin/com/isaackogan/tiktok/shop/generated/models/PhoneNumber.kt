@@ -39,7 +39,7 @@ data class PhoneNumber (
 
     /* Indicates the availability of the phone number. Possible values: - `AVAILABLE`: The phone number is available and required. - `UNAVAILABLE`: No phone number is available.  Default: AVAILABLE */
     @SerializedName("availability")
-    val availability: PhoneNumber.Availability? = null,
+    val availability: kotlin.String? = null,
 
     /* The country code of the phone number, prefixed by a plus `+` symbol. E.g. +353 for Ireland. Max digits: 4 Required if `availability=AVAILABLE`. */
     @SerializedName("country_code")
@@ -51,15 +51,6 @@ data class PhoneNumber (
 
 ) {
 
-    /**
-     * Indicates the availability of the phone number. Possible values: - `AVAILABLE`: The phone number is available and required. - `UNAVAILABLE`: No phone number is available.  Default: AVAILABLE
-     *
-     * Values: AVAILABLE,UNAVAILABLE
-     */
-    enum class Availability(val value: kotlin.String) {
-        @SerializedName(value = "AVAILABLE") AVAILABLE("AVAILABLE"),
-        @SerializedName(value = "UNAVAILABLE") UNAVAILABLE("UNAVAILABLE");
-    }
 
 }
 

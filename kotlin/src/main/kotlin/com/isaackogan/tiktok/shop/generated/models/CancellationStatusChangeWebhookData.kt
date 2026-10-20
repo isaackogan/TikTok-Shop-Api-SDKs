@@ -45,11 +45,11 @@ data class CancellationStatusChangeWebhookData (
 
     /* The user who initiated a cancellation, with possible values:      * BUYER   * SELLER   * SYSTEM */
     @SerializedName("cancellations_role")
-    val cancellationsRole: CancellationStatusChangeWebhookData.CancellationsRole? = null,
+    val cancellationsRole: kotlin.String? = null,
 
     /* Order cancellation status, with possible values:      * CANCELLATION_REQUEST_PENDING   * CANCELLATION_REQUEST_SUCCESS   * CANCELLATION_REQUEST_CANCELLED   * CANCELLATION_REQUEST_COMPLETE */
     @SerializedName("cancel_status")
-    val cancelStatus: CancellationStatusChangeWebhookData.CancelStatus? = null,
+    val cancelStatus: kotlin.String? = null,
 
     /* The identifier of a specific order cancellation */
     @SerializedName("cancel_id")
@@ -61,27 +61,6 @@ data class CancellationStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * The user who initiated a cancellation, with possible values:      * BUYER   * SELLER   * SYSTEM
-     *
-     * Values: BUYER,SELLER,SYSTEM
-     */
-    enum class CancellationsRole(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
-    /**
-     * Order cancellation status, with possible values:      * CANCELLATION_REQUEST_PENDING   * CANCELLATION_REQUEST_SUCCESS   * CANCELLATION_REQUEST_CANCELLED   * CANCELLATION_REQUEST_COMPLETE
-     *
-     * Values: CANCELLATION_REQUEST_PENDING,CANCELLATION_REQUEST_SUCCESS,CANCELLATION_REQUEST_CANCELLED,CANCELLATION_REQUEST_COMPLETE
-     */
-    enum class CancelStatus(val value: kotlin.String) {
-        @SerializedName(value = "CANCELLATION_REQUEST_PENDING") CANCELLATION_REQUEST_PENDING("CANCELLATION_REQUEST_PENDING"),
-        @SerializedName(value = "CANCELLATION_REQUEST_SUCCESS") CANCELLATION_REQUEST_SUCCESS("CANCELLATION_REQUEST_SUCCESS"),
-        @SerializedName(value = "CANCELLATION_REQUEST_CANCELLED") CANCELLATION_REQUEST_CANCELLED("CANCELLATION_REQUEST_CANCELLED"),
-        @SerializedName(value = "CANCELLATION_REQUEST_COMPLETE") CANCELLATION_REQUEST_COMPLETE("CANCELLATION_REQUEST_COMPLETE");
-    }
 
 }
 

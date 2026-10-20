@@ -42,19 +42,10 @@ data class UnboxingCaseList (
 
     /* Indicates if the unboxed sku is a gift item Enumerations: NORMAL or GIFT */
     @SerializedName("unbox_sku_type")
-    val unboxSkuType: UnboxingCaseList.UnboxSkuType? = null
+    val unboxSkuType: kotlin.String? = null
 
 ) {
 
-    /**
-     * Indicates if the unboxed sku is a gift item Enumerations: NORMAL or GIFT
-     *
-     * Values: NORMAL,GIFT
-     */
-    enum class UnboxSkuType(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "GIFT") GIFT("GIFT");
-    }
 
 }
 

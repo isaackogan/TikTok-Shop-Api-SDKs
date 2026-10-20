@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_pre_sale_type import GetProductResponseDataSkuPreSaleType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,7 +20,7 @@ class GetProductResponseDataSkuPreSale:
     """
     Attributes:
         fulfillment_type (FulfillmentType | Unset):
-        type_ (GetProductResponseDataSkuPreSaleType | Unset): The type of pre-sale.
+        type_ (str | Unset): The type of pre-sale.
             Possible values based on the region:
             **US**
             - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a
@@ -37,7 +36,7 @@ class GetProductResponseDataSkuPreSale:
     """
 
     fulfillment_type: FulfillmentType | Unset = UNSET
-    type_: GetProductResponseDataSkuPreSaleType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -45,9 +44,7 @@ class GetProductResponseDataSkuPreSale:
         if not isinstance(self.fulfillment_type, Unset):
             fulfillment_type = self.fulfillment_type.to_dict()
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -71,12 +68,7 @@ class GetProductResponseDataSkuPreSale:
         else:
             fulfillment_type = FulfillmentType.from_dict(_fulfillment_type)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetProductResponseDataSkuPreSaleType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetProductResponseDataSkuPreSaleType(_type_)
+        type_ = d.pop("type", UNSET)
 
         get_product_response_data_sku_pre_sale = cls(
             fulfillment_type=fulfillment_type,

@@ -50,83 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList {
-  /**
-   * Name of the logistics service provider  Possible values: * &#x60;FEDEX&#x60; (Federal Express) * &#x60;UPS&#x60; (United Parcel Service) * &#x60;DHL&#x60; (DHL Express) * &#x60;USPS&#x60; (United States Postal Service) * &#x60;OTHER&#x60; (All other logistics providers)
-   */
-  @JsonAdapter(ProviderNameEnum.Adapter.class)
-  public enum ProviderNameEnum {
-    /**
-     * Federal Express
-     */
-    FEDEX("FEDEX"),
-    
-    /**
-     * United Parcel Service
-     */
-    UPS("UPS"),
-    
-    /**
-     * DHL Express
-     */
-    DHL("DHL"),
-    
-    /**
-     * United States Postal Service
-     */
-    USPS("USPS"),
-    
-    /**
-     * All other logistics providers
-     */
-    OTHER("OTHER");
-
-    private String value;
-
-    ProviderNameEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProviderNameEnum fromValue(String value) {
-      for (ProviderNameEnum b : ProviderNameEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProviderNameEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProviderNameEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProviderNameEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProviderNameEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProviderNameEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PROVIDER_NAME = "provider_name";
   @SerializedName(SERIALIZED_NAME_PROVIDER_NAME)
   @javax.annotation.Nullable
-  private ProviderNameEnum providerName;
+  private String providerName;
 
   public static final String SERIALIZED_NAME_WAYBILL_NUMBER = "waybill_number";
   @SerializedName(SERIALIZED_NAME_WAYBILL_NUMBER)
@@ -141,7 +68,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList {
   public GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList() {
   }
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList providerName(@javax.annotation.Nullable ProviderNameEnum providerName) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList providerName(@javax.annotation.Nullable String providerName) {
     this.providerName = providerName;
     return this;
   }
@@ -151,11 +78,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList {
    * @return providerName
    */
   @javax.annotation.Nullable
-  public ProviderNameEnum getProviderName() {
+  public String getProviderName() {
     return providerName;
   }
 
-  public void setProviderName(@javax.annotation.Nullable ProviderNameEnum providerName) {
+  public void setProviderName(@javax.annotation.Nullable String providerName) {
     this.providerName = providerName;
   }
 
@@ -310,10 +237,6 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("provider_name") != null && !jsonObj.get("provider_name").isJsonNull()) && !jsonObj.get("provider_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `provider_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("provider_name").toString()));
-      }
-      // validate the optional field `provider_name`
-      if (jsonObj.get("provider_name") != null && !jsonObj.get("provider_name").isJsonNull()) {
-        ProviderNameEnum.validateJsonElement(jsonObj.get("provider_name"));
       }
       if ((jsonObj.get("waybill_number") != null && !jsonObj.get("waybill_number").isJsonNull()) && !jsonObj.get("waybill_number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `waybill_number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("waybill_number").toString()));

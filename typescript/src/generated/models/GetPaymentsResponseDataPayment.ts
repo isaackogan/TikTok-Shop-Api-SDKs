@@ -59,10 +59,10 @@ export interface GetPaymentsResponseDataPayment {
      * - PAID: Payment has been transferred to the seller.
      * - FAILED: Payment transfer failed.
      * - PROCESSING: Payment is currently being processed.
-     * @type {GetPaymentsResponseDataPaymentStatusEnum}
+     * @type {string}
      * @memberof GetPaymentsResponseDataPayment
      */
-    status?: GetPaymentsResponseDataPaymentStatusEnum;
+    status?: string;
     /**
      * The final payment amount after currency exchange.
      * @type {GetPaymentsResponseDataPaymentAmount}
@@ -100,18 +100,6 @@ export interface GetPaymentsResponseDataPayment {
      */
     bankAccount?: string;
 }
-
-
-/**
- * @export
- */
-export const GetPaymentsResponseDataPaymentStatusEnum = {
-    Paid: 'PAID',
-    Failed: 'FAILED',
-    Processing: 'PROCESSING'
-} as const;
-export type GetPaymentsResponseDataPaymentStatusEnum = typeof GetPaymentsResponseDataPaymentStatusEnum[keyof typeof GetPaymentsResponseDataPaymentStatusEnum];
-
 
 /**
  * Check if a given object implements the GetPaymentsResponseDataPayment interface.

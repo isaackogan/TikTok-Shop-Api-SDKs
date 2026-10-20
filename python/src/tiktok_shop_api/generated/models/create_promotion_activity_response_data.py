@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.create_promotion_activity_response_data_status import CreatePromotionActivityResponseDataStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CreatePromotionActivityResponseData")
@@ -21,7 +20,7 @@ class CreatePromotionActivityResponseData:
             Product](https://partner.tiktokshop.com/docv2/page/650d32c42aaa3602b86ccb5c).
         create_time (int | Unset): The time when the activity was created.
         update_time (int | Unset): The time when the activity was last updated.
-        status (CreatePromotionActivityResponseDataStatus | Unset): Possible values:
+        status (str | Unset): Possible values:
             - DRAFT: Promotion activities with this status are not available to TikTok users.
             - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
             start time.
@@ -34,7 +33,7 @@ class CreatePromotionActivityResponseData:
     activity_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
-    status: CreatePromotionActivityResponseDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -44,9 +43,7 @@ class CreatePromotionActivityResponseData:
 
         update_time = self.update_time
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -71,12 +68,7 @@ class CreatePromotionActivityResponseData:
 
         update_time = d.pop("update_time", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: CreatePromotionActivityResponseDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = CreatePromotionActivityResponseDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         create_promotion_activity_response_data = cls(
             activity_id=activity_id,

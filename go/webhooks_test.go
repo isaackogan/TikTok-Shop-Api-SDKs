@@ -89,6 +89,20 @@ func TestParseReturnsTypedModelForTypeSwitch(t *testing.T) {
 	}
 }
 
+func TestUnknownOrderStatusIsKept(t *testing.T) {
+	ev, err := Webhooks.Parse([]byte(`{"type":1,"shop_id":"1","data":{"order_status":"SOME_NEW_STATUS"}}`))
+	if err != nil {
+		t.Fatal(err)
+	}
+	e, ok := ev.(*generated.OrderStatusChangeWebhook)
+	if !ok {
+		t.Fatalf("%T", ev)
+	}
+	if got := e.Data.GetOrderStatus(); got != "SOME_NEW_STATUS" {
+		t.Errorf("order_status = %q", got)
+	}
+}
+
 func TestNineteenDigitShopIDKeepsEveryDigit(t *testing.T) {
 	ev, err := Webhooks.Parse([]byte(`{"type":1,"shop_id":7494049642642441621,"data":{"order_id":576653688135258178}}`))
 	if err != nil {

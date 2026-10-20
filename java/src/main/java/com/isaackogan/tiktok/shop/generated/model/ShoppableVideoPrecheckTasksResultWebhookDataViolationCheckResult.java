@@ -53,64 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult {
-  /**
-   * Possible enumerations:    &#x60;SUCCESS&#x60;   &#x60;FAIL&#x60;   &#x60;PROCESSING&#x60;
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    SUCCESS("SUCCESS"),
-    
-    FAIL("FAIL"),
-    
-    PROCESSING("PROCESSING");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_ISSUES = "issues";
   @SerializedName(SERIALIZED_NAME_ISSUES)
@@ -120,7 +66,7 @@ public class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult {
   public ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult() {
   }
 
-  public ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult status(@javax.annotation.Nullable StatusEnum status) {
+  public ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -130,11 +76,11 @@ public class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -276,10 +222,6 @@ public class ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if (jsonObj.get("issues") != null && !jsonObj.get("issues").isJsonNull()) {
         JsonArray jsonArrayissues = jsonObj.getAsJsonArray("issues");

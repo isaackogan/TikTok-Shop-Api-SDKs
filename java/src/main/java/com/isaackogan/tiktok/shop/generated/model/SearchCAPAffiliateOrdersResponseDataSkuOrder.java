@@ -145,138 +145,20 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
   @javax.annotation.Nullable
   private String shopName;
 
-  /**
-   * The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE
-   */
-  @JsonAdapter(ContentTypeEnum.Adapter.class)
-  public enum ContentTypeEnum {
-    SHOP("SHOP"),
-    
-    VIDEO("VIDEO"),
-    
-    LIVE("LIVE"),
-    
-    PRE_LIVE("PRE_LIVE"),
-    
-    PROMOTION_PAGE("PROMOTION_PAGE"),
-    
-    LINKSHARE("LINKSHARE");
-
-    private String value;
-
-    ContentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ContentTypeEnum fromValue(String value) {
-      for (ContentTypeEnum b : ContentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ContentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ContentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ContentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ContentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ContentTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CONTENT_TYPE = "content_type";
   @SerializedName(SERIALIZED_NAME_CONTENT_TYPE)
   @javax.annotation.Nullable
-  private ContentTypeEnum contentType;
+  private String contentType;
 
   public static final String SERIALIZED_NAME_CONTENT_ID = "content_id";
   @SerializedName(SERIALIZED_NAME_CONTENT_ID)
   @javax.annotation.Nullable
   private String contentId;
 
-  /**
-   * Attribution type for &#x60;LINKSHARE&#x60; content. Possible values: - &#x60;Direct&#x60;: same-shop attribution. - &#x60;Indirect&#x60;: non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in the Marketplace or target collaboration.  For other content types, this field is an empty string.
-   */
-  @JsonAdapter(AttributionTypeEnum.Adapter.class)
-  public enum AttributionTypeEnum {
-    /**
-     * same-shop attribution.
-     */
-    DIRECT("Direct"),
-    
-    /**
-     * non-same-shop attribution. The settlement commission rate is usually lower than the rate agreed in the Marketplace or target collaboration.
-     */
-    INDIRECT("Indirect");
-
-    private String value;
-
-    AttributionTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AttributionTypeEnum fromValue(String value) {
-      for (AttributionTypeEnum b : AttributionTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AttributionTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AttributionTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AttributionTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AttributionTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AttributionTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ATTRIBUTION_TYPE = "attribution_type";
   @SerializedName(SERIALIZED_NAME_ATTRIBUTION_TYPE)
   @javax.annotation.Nullable
-  private AttributionTypeEnum attributionType;
+  private String attributionType;
 
   public static final String SERIALIZED_NAME_COMMISSION_MODEL = "commission_model";
   @SerializedName(SERIALIZED_NAME_COMMISSION_MODEL)
@@ -433,68 +315,10 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
   @javax.annotation.Nullable
   private SearchCAPAffiliateOrdersResponseDataSkuOrderActualAgencyIva actualAgencyIva;
 
-  /**
-   * Whether this SKU order was fully returned or refunded. Possible values: - &#x60;Yes&#x60;: this SKU order was fully returned or refunded, and no commission is paid. - &#x60;No&#x60;: this SKU order was not fully returned or refunded.
-   */
-  @JsonAdapter(FullyReturnEnum.Adapter.class)
-  public enum FullyReturnEnum {
-    /**
-     * this SKU order was fully returned or refunded, and no commission is paid.
-     */
-    YES("Yes"),
-    
-    /**
-     * this SKU order was not fully returned or refunded.
-     */
-    NO("No");
-
-    private String value;
-
-    FullyReturnEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FullyReturnEnum fromValue(String value) {
-      for (FullyReturnEnum b : FullyReturnEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FullyReturnEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FullyReturnEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FullyReturnEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FullyReturnEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FullyReturnEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FULLY_RETURN = "fully_return";
   @SerializedName(SERIALIZED_NAME_FULLY_RETURN)
   @javax.annotation.Nullable
-  private FullyReturnEnum fullyReturn;
+  private String fullyReturn;
 
   public static final String SERIALIZED_NAME_SETTLEMENT_TIME = "settlement_time";
   @SerializedName(SERIALIZED_NAME_SETTLEMENT_TIME)
@@ -780,7 +604,7 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
   }
 
 
-  public SearchCAPAffiliateOrdersResponseDataSkuOrder contentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public SearchCAPAffiliateOrdersResponseDataSkuOrder contentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
     return this;
   }
@@ -790,11 +614,11 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
    * @return contentType
    */
   @javax.annotation.Nullable
-  public ContentTypeEnum getContentType() {
+  public String getContentType() {
     return contentType;
   }
 
-  public void setContentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public void setContentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
   }
 
@@ -818,7 +642,7 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
   }
 
 
-  public SearchCAPAffiliateOrdersResponseDataSkuOrder attributionType(@javax.annotation.Nullable AttributionTypeEnum attributionType) {
+  public SearchCAPAffiliateOrdersResponseDataSkuOrder attributionType(@javax.annotation.Nullable String attributionType) {
     this.attributionType = attributionType;
     return this;
   }
@@ -828,11 +652,11 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
    * @return attributionType
    */
   @javax.annotation.Nullable
-  public AttributionTypeEnum getAttributionType() {
+  public String getAttributionType() {
     return attributionType;
   }
 
-  public void setAttributionType(@javax.annotation.Nullable AttributionTypeEnum attributionType) {
+  public void setAttributionType(@javax.annotation.Nullable String attributionType) {
     this.attributionType = attributionType;
   }
 
@@ -1426,7 +1250,7 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
   }
 
 
-  public SearchCAPAffiliateOrdersResponseDataSkuOrder fullyReturn(@javax.annotation.Nullable FullyReturnEnum fullyReturn) {
+  public SearchCAPAffiliateOrdersResponseDataSkuOrder fullyReturn(@javax.annotation.Nullable String fullyReturn) {
     this.fullyReturn = fullyReturn;
     return this;
   }
@@ -1436,11 +1260,11 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
    * @return fullyReturn
    */
   @javax.annotation.Nullable
-  public FullyReturnEnum getFullyReturn() {
+  public String getFullyReturn() {
     return fullyReturn;
   }
 
-  public void setFullyReturn(@javax.annotation.Nullable FullyReturnEnum fullyReturn) {
+  public void setFullyReturn(@javax.annotation.Nullable String fullyReturn) {
     this.fullyReturn = fullyReturn;
   }
 
@@ -1747,19 +1571,11 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
       if ((jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) && !jsonObj.get("content_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_type").toString()));
       }
-      // validate the optional field `content_type`
-      if (jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) {
-        ContentTypeEnum.validateJsonElement(jsonObj.get("content_type"));
-      }
       if ((jsonObj.get("content_id") != null && !jsonObj.get("content_id").isJsonNull()) && !jsonObj.get("content_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_id").toString()));
       }
       if ((jsonObj.get("attribution_type") != null && !jsonObj.get("attribution_type").isJsonNull()) && !jsonObj.get("attribution_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `attribution_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("attribution_type").toString()));
-      }
-      // validate the optional field `attribution_type`
-      if (jsonObj.get("attribution_type") != null && !jsonObj.get("attribution_type").isJsonNull()) {
-        AttributionTypeEnum.validateJsonElement(jsonObj.get("attribution_type"));
       }
       if ((jsonObj.get("commission_model") != null && !jsonObj.get("commission_model").isJsonNull()) && !jsonObj.get("commission_model").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `commission_model` to be a primitive type in the JSON string but got `%s`", jsonObj.get("commission_model").toString()));
@@ -1865,10 +1681,6 @@ public class SearchCAPAffiliateOrdersResponseDataSkuOrder {
       }
       if ((jsonObj.get("fully_return") != null && !jsonObj.get("fully_return").isJsonNull()) && !jsonObj.get("fully_return").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `fully_return` to be a primitive type in the JSON string but got `%s`", jsonObj.get("fully_return").toString()));
-      }
-      // validate the optional field `fully_return`
-      if (jsonObj.get("fully_return") != null && !jsonObj.get("fully_return").isJsonNull()) {
-        FullyReturnEnum.validateJsonElement(jsonObj.get("fully_return"));
       }
   }
 

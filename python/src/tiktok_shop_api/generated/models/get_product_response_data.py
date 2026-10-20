@@ -6,15 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_listing_quality_tier import GetProductResponseDataListingQualityTier
-from ..models.get_product_response_data_product_status import GetProductResponseDataProductStatus
-from ..models.get_product_response_data_product_tags_item import GetProductResponseDataProductTagsItem
-from ..models.get_product_response_data_product_types_item import GetProductResponseDataProductTypesItem
-from ..models.get_product_response_data_selling_format import GetProductResponseDataSellingFormat
-from ..models.get_product_response_data_shipping_insurance_requirement import (
-    GetProductResponseDataShippingInsuranceRequirement,
-)
-from ..models.get_product_response_data_status import GetProductResponseDataStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -97,9 +88,9 @@ class GetProductResponseData:
         key_product_features (list[str] | Unset): Key Product Features. They will be displayed in the Product highlight
             module on the product detail page and will be used by search engines to increase your search weight for more
             traffic. The total number of items should not exceed 5, and the total character count should not exceed 1500.
-        listing_quality_tier (GetProductResponseDataListingQualityTier | Unset): The current quality tier of this
-            product listing. The quality tier of a product listing depends on the quality of the content in its product
-            fields such as the title, image, attributes etc.
+        listing_quality_tier (str | Unset): The current quality tier of this product listing. The quality tier of a
+            product listing depends on the quality of the content in its product fields such as the title, image, attributes
+            etc.
 
             Possible values:
             - POOR
@@ -134,8 +125,7 @@ class GetProductResponseData:
             **Note**:
             - Applicable only for US local sellers.
             - Omitted if this product does not belong to any product family.
-        product_status (GetProductResponseDataProductStatus | Unset): The product status in TikTok Shop unrelated to its
-            audit status.
+        product_status (str | Unset): The product status in TikTok Shop unrelated to its audit status.
             Possible values:
             - INITIAL
             - DRAFT
@@ -147,9 +137,9 @@ class GetProductResponseData:
 
             **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or
             editing a product, this will be omitted.
-        product_tags (list[GetProductResponseDataProductTagsItem] | Unset): Product tag to identity special type product
+        product_tags (list[str] | Unset): Product tag to identity special type product
             Possible values: AUCTION
-        product_types (list[GetProductResponseDataProductTypesItem] | Unset): The product type.
+        product_types (list[str] | Unset): The product type.
             Possible values:
             - COMBINED_PRODUCT: Indicates this is a virtual bundle product.
             - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle.
@@ -167,8 +157,8 @@ class GetProductResponseData:
             only used in search engines to increase your search weight and gain more traffic. Please ensure that ST words
             are consistent with the product description, with a maximum of 15 terms and a total of no more than 250
             characters.
-        shipping_insurance_requirement (GetProductResponseDataShippingInsuranceRequirement | Unset): The shipping
-            insurance purchase requirement imposed on buyers for the product.
+        shipping_insurance_requirement (str | Unset): The shipping insurance purchase requirement imposed on buyers for
+            the product.
 
             Possible values:
             - REQUIRED: Shipping insurance is mandatory and buyers can't opt out.
@@ -181,8 +171,8 @@ class GetProductResponseData:
         size_chart (GetProductResponseDataSizeChart | Unset):
         skus (list[GetProductResponseDataSku] | Unset): A list of Stock Keeping Units (SKUs) used to identify distinct
             variants of the product.
-        status (GetProductResponseDataStatus | Unset): The product status in TikTok Shop. This status incorporates both
-            the product status and the audit status.
+        status (str | Unset): The product status in TikTok Shop. This status incorporates both the product status and
+            the audit status.
             Possible values:
             - DRAFT
             - PENDING
@@ -200,8 +190,8 @@ class GetProductResponseData:
         title (str | Unset): The product title.
         update_time (int | Unset): The time when the product was last updated, expressed as a Unix timestamp in seconds.
         video (GetProductResponseDataVideo | Unset):
-        selling_format (GetProductResponseDataSellingFormat | Unset): The product's sale format. Possible values:
-            FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
+        selling_format (str | Unset): The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION,
+            FIXED_PRICE_AND_LIVE_AUCTION.
         is_blind_box (bool | Unset): Whether the product is a blind box of lucky bag. For example: PopMart
     """
 
@@ -223,7 +213,7 @@ class GetProductResponseData:
     is_pre_owned: bool | Unset = UNSET
     is_replicated: bool | Unset = UNSET
     key_product_features: list[str] | Unset = UNSET
-    listing_quality_tier: GetProductResponseDataListingQualityTier | Unset = UNSET
+    listing_quality_tier: str | Unset = UNSET
     main_images: list[GetProductResponseDataMainImage] | Unset = UNSET
     manufacturer_ids: list[str] | Unset = UNSET
     minimum_order_quantity: int | Unset = UNSET
@@ -234,23 +224,23 @@ class GetProductResponseData:
     primary_combined_product_id: str | Unset = UNSET
     product_attributes: list[GetProductResponseDataProductAttribute] | Unset = UNSET
     product_families: list[ProductFamily] | Unset = UNSET
-    product_status: GetProductResponseDataProductStatus | Unset = UNSET
-    product_tags: list[GetProductResponseDataProductTagsItem] | Unset = UNSET
-    product_types: list[GetProductResponseDataProductTypesItem] | Unset = UNSET
+    product_status: str | Unset = UNSET
+    product_tags: list[str] | Unset = UNSET
+    product_types: list[str] | Unset = UNSET
     recommended_categories: list[RecommendedCategory] | Unset = UNSET
     responsible_person_ids: list[str] | Unset = UNSET
     scheduled_sale: GetProductResponseDataScheduledSale | Unset = UNSET
     search_terms: list[str] | Unset = UNSET
-    shipping_insurance_requirement: GetProductResponseDataShippingInsuranceRequirement | Unset = UNSET
+    shipping_insurance_requirement: str | Unset = UNSET
     shipping_template_id: str | Unset = UNSET
     size_chart: GetProductResponseDataSizeChart | Unset = UNSET
     skus: list[GetProductResponseDataSku] | Unset = UNSET
-    status: GetProductResponseDataStatus | Unset = UNSET
+    status: str | Unset = UNSET
     subscribe_info: GetProductResponseDataSubscribeInfo | Unset = UNSET
     title: str | Unset = UNSET
     update_time: int | Unset = UNSET
     video: GetProductResponseDataVideo | Unset = UNSET
-    selling_format: GetProductResponseDataSellingFormat | Unset = UNSET
+    selling_format: str | Unset = UNSET
     is_blind_box: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -324,9 +314,7 @@ class GetProductResponseData:
         if not isinstance(self.key_product_features, Unset):
             key_product_features = self.key_product_features
 
-        listing_quality_tier: str | Unset = UNSET
-        if not isinstance(self.listing_quality_tier, Unset):
-            listing_quality_tier = self.listing_quality_tier.value
+        listing_quality_tier = self.listing_quality_tier
 
         main_images: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.main_images, Unset):
@@ -373,23 +361,15 @@ class GetProductResponseData:
                 product_families_item = product_families_item_data.to_dict()
                 product_families.append(product_families_item)
 
-        product_status: str | Unset = UNSET
-        if not isinstance(self.product_status, Unset):
-            product_status = self.product_status.value
+        product_status = self.product_status
 
         product_tags: list[str] | Unset = UNSET
         if not isinstance(self.product_tags, Unset):
-            product_tags = []
-            for product_tags_item_data in self.product_tags:
-                product_tags_item = product_tags_item_data.value
-                product_tags.append(product_tags_item)
+            product_tags = self.product_tags
 
         product_types: list[str] | Unset = UNSET
         if not isinstance(self.product_types, Unset):
-            product_types = []
-            for product_types_item_data in self.product_types:
-                product_types_item = product_types_item_data.value
-                product_types.append(product_types_item)
+            product_types = self.product_types
 
         recommended_categories: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.recommended_categories, Unset):
@@ -410,9 +390,7 @@ class GetProductResponseData:
         if not isinstance(self.search_terms, Unset):
             search_terms = self.search_terms
 
-        shipping_insurance_requirement: str | Unset = UNSET
-        if not isinstance(self.shipping_insurance_requirement, Unset):
-            shipping_insurance_requirement = self.shipping_insurance_requirement.value
+        shipping_insurance_requirement = self.shipping_insurance_requirement
 
         shipping_template_id = self.shipping_template_id
 
@@ -427,9 +405,7 @@ class GetProductResponseData:
                 skus_item = skus_item_data.to_dict()
                 skus.append(skus_item)
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         subscribe_info: dict[str, Any] | Unset = UNSET
         if not isinstance(self.subscribe_info, Unset):
@@ -443,9 +419,7 @@ class GetProductResponseData:
         if not isinstance(self.video, Unset):
             video = self.video.to_dict()
 
-        selling_format: str | Unset = UNSET
-        if not isinstance(self.selling_format, Unset):
-            selling_format = self.selling_format.value
+        selling_format = self.selling_format
 
         is_blind_box = self.is_blind_box
 
@@ -690,12 +664,7 @@ class GetProductResponseData:
 
         key_product_features = cast(list[str], d.pop("key_product_features", UNSET))
 
-        _listing_quality_tier = d.pop("listing_quality_tier", UNSET)
-        listing_quality_tier: GetProductResponseDataListingQualityTier | Unset
-        if isinstance(_listing_quality_tier, Unset):
-            listing_quality_tier = UNSET
-        else:
-            listing_quality_tier = GetProductResponseDataListingQualityTier(_listing_quality_tier)
+        listing_quality_tier = d.pop("listing_quality_tier", UNSET)
 
         _main_images = d.pop("main_images", UNSET)
         main_images: list[GetProductResponseDataMainImage] | Unset = UNSET
@@ -760,30 +729,11 @@ class GetProductResponseData:
 
                 product_families.append(product_families_item)
 
-        _product_status = d.pop("product_status", UNSET)
-        product_status: GetProductResponseDataProductStatus | Unset
-        if isinstance(_product_status, Unset):
-            product_status = UNSET
-        else:
-            product_status = GetProductResponseDataProductStatus(_product_status)
+        product_status = d.pop("product_status", UNSET)
 
-        _product_tags = d.pop("product_tags", UNSET)
-        product_tags: list[GetProductResponseDataProductTagsItem] | Unset = UNSET
-        if _product_tags is not UNSET:
-            product_tags = []
-            for product_tags_item_data in _product_tags:
-                product_tags_item = GetProductResponseDataProductTagsItem(product_tags_item_data)
+        product_tags = cast(list[str], d.pop("product_tags", UNSET))
 
-                product_tags.append(product_tags_item)
-
-        _product_types = d.pop("product_types", UNSET)
-        product_types: list[GetProductResponseDataProductTypesItem] | Unset = UNSET
-        if _product_types is not UNSET:
-            product_types = []
-            for product_types_item_data in _product_types:
-                product_types_item = GetProductResponseDataProductTypesItem(product_types_item_data)
-
-                product_types.append(product_types_item)
+        product_types = cast(list[str], d.pop("product_types", UNSET))
 
         _recommended_categories = d.pop("recommended_categories", UNSET)
         recommended_categories: list[RecommendedCategory] | Unset = UNSET
@@ -805,14 +755,7 @@ class GetProductResponseData:
 
         search_terms = cast(list[str], d.pop("search_terms", UNSET))
 
-        _shipping_insurance_requirement = d.pop("shipping_insurance_requirement", UNSET)
-        shipping_insurance_requirement: GetProductResponseDataShippingInsuranceRequirement | Unset
-        if isinstance(_shipping_insurance_requirement, Unset):
-            shipping_insurance_requirement = UNSET
-        else:
-            shipping_insurance_requirement = GetProductResponseDataShippingInsuranceRequirement(
-                _shipping_insurance_requirement
-            )
+        shipping_insurance_requirement = d.pop("shipping_insurance_requirement", UNSET)
 
         shipping_template_id = d.pop("shipping_template_id", UNSET)
 
@@ -832,12 +775,7 @@ class GetProductResponseData:
 
                 skus.append(skus_item)
 
-        _status = d.pop("status", UNSET)
-        status: GetProductResponseDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetProductResponseDataStatus(_status)
+        status = d.pop("status", UNSET)
 
         _subscribe_info = d.pop("subscribe_info", UNSET)
         subscribe_info: GetProductResponseDataSubscribeInfo | Unset
@@ -857,12 +795,7 @@ class GetProductResponseData:
         else:
             video = GetProductResponseDataVideo.from_dict(_video)
 
-        _selling_format = d.pop("selling_format", UNSET)
-        selling_format: GetProductResponseDataSellingFormat | Unset
-        if isinstance(_selling_format, Unset):
-            selling_format = UNSET
-        else:
-            selling_format = GetProductResponseDataSellingFormat(_selling_format)
+        selling_format = d.pop("selling_format", UNSET)
 
         is_blind_box = d.pop("is_blind_box", UNSET)
 

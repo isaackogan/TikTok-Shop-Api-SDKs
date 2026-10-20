@@ -34,26 +34,11 @@ export interface SearchGoodsInfoResponseDataGoodBarcode {
      * - ASIN_OR_FNSKU
      * - MERCHANT_SKU_ID
      * - FBT_SPECIFIC_BARCODE
-     * @type {SearchGoodsInfoResponseDataGoodBarcodeTypeEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodBarcode
      */
-    type?: SearchGoodsInfoResponseDataGoodBarcodeTypeEnum;
+    type?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodBarcodeTypeEnum = {
-    Upc: 'UPC',
-    Ean: 'EAN',
-    Gtin: 'GTIN',
-    AsinOrFnsku: 'ASIN_OR_FNSKU',
-    MerchantSkuId: 'MERCHANT_SKU_ID',
-    FbtSpecificBarcode: 'FBT_SPECIFIC_BARCODE'
-} as const;
-export type SearchGoodsInfoResponseDataGoodBarcodeTypeEnum = typeof SearchGoodsInfoResponseDataGoodBarcodeTypeEnum[keyof typeof SearchGoodsInfoResponseDataGoodBarcodeTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodBarcode interface.

@@ -99,19 +99,10 @@ data class GetAffiliatePartnerCampaignDetailResponseData (
 
     /* A list of seller types eligible to register for the campaign. Use this field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values: - LOCAL - CROSS_BORDER */
     @SerializedName("target_seller_types")
-    val targetSellerTypes: kotlin.collections.List<GetAffiliatePartnerCampaignDetailResponseData.TargetSellerTypes>? = null
+    val targetSellerTypes: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * A list of seller types eligible to register for the campaign. Use this field to broadly target seller types instead of the specific shops listed in `target_shops`. Possible values: - LOCAL - CROSS_BORDER
-     *
-     * Values: LOCAL,CROSS_BORDER
-     */
-    enum class TargetSellerTypes(val value: kotlin.String) {
-        @SerializedName(value = "LOCAL") LOCAL("LOCAL"),
-        @SerializedName(value = "CROSS_BORDER") CROSS_BORDER("CROSS_BORDER");
-    }
 
 }
 

@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_products_response_data_product_sku_status_info_deactivation_source import (
-    SearchProductsResponseDataProductSkuStatusInfoDeactivationSource,
-)
-from ..models.search_products_response_data_product_sku_status_info_status import (
-    SearchProductsResponseDataProductSkuStatusInfoStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchProductsResponseDataProductSkuStatusInfo")
@@ -21,30 +15,25 @@ T = TypeVar("T", bound="SearchProductsResponseDataProductSkuStatusInfo")
 class SearchProductsResponseDataProductSkuStatusInfo:
     """
     Attributes:
-        status (SearchProductsResponseDataProductSkuStatusInfoStatus | Unset): The SKU status in TikTok Shop.
+        status (str | Unset): The SKU status in TikTok Shop.
             Possible values:
             - NORMAL
             - DEACTIVATED
-        deactivation_source (SearchProductsResponseDataProductSkuStatusInfoDeactivationSource | Unset): The deactivation
-            source of the SKU with `DEACTIVATED` status.
+        deactivation_source (str | Unset): The deactivation source of the SKU with `DEACTIVATED` status.
             Possible values:
             - SELLER: Indicates that the seller deactivated the SKU
             - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons
             - COMBO_RELATION: Indicates that the platform de-activated the combined-SKU due to the deactivation of sub-SKU.
     """
 
-    status: SearchProductsResponseDataProductSkuStatusInfoStatus | Unset = UNSET
-    deactivation_source: SearchProductsResponseDataProductSkuStatusInfoDeactivationSource | Unset = UNSET
+    status: str | Unset = UNSET
+    deactivation_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
-        deactivation_source: str | Unset = UNSET
-        if not isinstance(self.deactivation_source, Unset):
-            deactivation_source = self.deactivation_source.value
+        deactivation_source = self.deactivation_source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -59,19 +48,9 @@ class SearchProductsResponseDataProductSkuStatusInfo:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _status = d.pop("status", UNSET)
-        status: SearchProductsResponseDataProductSkuStatusInfoStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchProductsResponseDataProductSkuStatusInfoStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _deactivation_source = d.pop("deactivation_source", UNSET)
-        deactivation_source: SearchProductsResponseDataProductSkuStatusInfoDeactivationSource | Unset
-        if isinstance(_deactivation_source, Unset):
-            deactivation_source = UNSET
-        else:
-            deactivation_source = SearchProductsResponseDataProductSkuStatusInfoDeactivationSource(_deactivation_source)
+        deactivation_source = d.pop("deactivation_source", UNSET)
 
         search_products_response_data_product_sku_status_info = cls(
             status=status,

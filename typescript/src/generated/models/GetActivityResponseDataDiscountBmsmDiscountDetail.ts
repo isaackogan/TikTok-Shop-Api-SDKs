@@ -31,10 +31,10 @@ export interface GetActivityResponseDataDiscountBmsmDiscountDetail {
      * The type of purchase criteria. Possible enumerations are:
      * - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products.
      * - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order.
-     * @type {GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountBmsmDiscountDetail
      */
-    thresholdType?: GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum;
+    thresholdType?: string;
     /**
      * The purchase threshold of the discount, based on the `threshold_type`, e.g., "3". Determined by user.
      * - When `threshold_type==NO_THRESHOLD`, this value is not required.
@@ -49,10 +49,10 @@ export interface GetActivityResponseDataDiscountBmsmDiscountDetail {
      * Possible enumerations are:
      * - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products.
      * - `AMOUNT_OFF`: Buyer will receive X units of local currency off the price of eligible products.
-     * @type {GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum}
+     * @type {string}
      * @memberof GetActivityResponseDataDiscountBmsmDiscountDetail
      */
-    type?: GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum;
+    type?: string;
     /**
      * Value of the discount.
      * - When `type`==`PERCENTAGE_OFF`, the buyer will receive X% off the price of eligible products. If the value represents a percentage, it should be an integer.
@@ -62,26 +62,6 @@ export interface GetActivityResponseDataDiscountBmsmDiscountDetail {
      */
     value?: string;
 }
-
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum = {
-    MinimalItemQuantity: 'MINIMAL_ITEM_QUANTITY',
-    MinimalOrderAmount: 'MINIMAL_ORDER_AMOUNT'
-} as const;
-export type GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum = typeof GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum[keyof typeof GetActivityResponseDataDiscountBmsmDiscountDetailThresholdTypeEnum];
-
-/**
- * @export
- */
-export const GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum = {
-    PercentageOff: 'PERCENTAGE_OFF',
-    AmountOff: 'AMOUNT_OFF'
-} as const;
-export type GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum = typeof GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum[keyof typeof GetActivityResponseDataDiscountBmsmDiscountDetailTypeEnum];
-
 
 /**
  * Check if a given object implements the GetActivityResponseDataDiscountBmsmDiscountDetail interface.

@@ -44,7 +44,7 @@ data class GetActivityResponseDataDiscountShippingDiscount (
 
     /* The type of purchase criteria. Possible enumerations are: - `NO_THRESHOLD`: No minimum purchase criteria.  - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products. - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order. `MINIMAL_ITEM_QUANTITY` and `MINIMAL_ORDER_AMOUNT` can only be set when `product_level==SHOP`. */
     @SerializedName("threshold_type")
-    val thresholdType: GetActivityResponseDataDiscountShippingDiscount.ThresholdType? = null,
+    val thresholdType: kotlin.String? = null,
 
     /* The purchase threshold returned for the shipping discount, based on `threshold_type`. - When `threshold_type==NO_THRESHOLD`, this value is not required. - When `threshold_type==MINIMAL_ITEM_QUANTITY`, this is the number of eligible products the buyer must purchase and must be an integer. - When `threshold_type==MINIMAL_ORDER_AMOUNT`, this is the eligible-product subtotal the buyer must reach in local currency (for example, 3 units of local currency) and must have no more than two decimal places. */
     @SerializedName("threshold_value")
@@ -72,16 +72,6 @@ data class GetActivityResponseDataDiscountShippingDiscount (
 
 ) {
 
-    /**
-     * The type of purchase criteria. Possible enumerations are: - `NO_THRESHOLD`: No minimum purchase criteria.  - `MINIMAL_ITEM_QUANTITY`: Buyer must meet or exceed the minimum spend criteria with eligible products. - `MINIMAL_ORDER_AMOUNT`: Buyer must meet or exceed the minimum spend criteria with eligible order. `MINIMAL_ITEM_QUANTITY` and `MINIMAL_ORDER_AMOUNT` can only be set when `product_level==SHOP`.
-     *
-     * Values: NO_THRESHOLD,MINIMAL_ITEM_QUANTITY,MINIMAL_ORDER_AMOUNT
-     */
-    enum class ThresholdType(val value: kotlin.String) {
-        @SerializedName(value = "NO_THRESHOLD") NO_THRESHOLD("NO_THRESHOLD"),
-        @SerializedName(value = "MINIMAL_ITEM_QUANTITY") MINIMAL_ITEM_QUANTITY("MINIMAL_ITEM_QUANTITY"),
-        @SerializedName(value = "MINIMAL_ORDER_AMOUNT") MINIMAL_ORDER_AMOUNT("MINIMAL_ORDER_AMOUNT");
-    }
 
 }
 

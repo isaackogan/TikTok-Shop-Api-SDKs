@@ -25,10 +25,10 @@ export interface GenderDistribution {
      * - MALE: male viewers
      * 
      * - FEMALE: female viewers
-     * @type {GenderDistributionGenderEnum}
+     * @type {string}
      * @memberof GenderDistribution
      */
-    gender?: GenderDistributionGenderEnum;
+    gender?: string;
     /**
      * Proportion for the corresponding gender within this viewer profile, expressed as a decimal fraction.
      * @type {string}
@@ -36,17 +36,6 @@ export interface GenderDistribution {
      */
     percentage?: string;
 }
-
-
-/**
- * @export
- */
-export const GenderDistributionGenderEnum = {
-    Male: 'MALE',
-    Female: 'FEMALE'
-} as const;
-export type GenderDistributionGenderEnum = typeof GenderDistributionGenderEnum[keyof typeof GenderDistributionGenderEnum];
-
 
 /**
  * Check if a given object implements the GenderDistribution interface.

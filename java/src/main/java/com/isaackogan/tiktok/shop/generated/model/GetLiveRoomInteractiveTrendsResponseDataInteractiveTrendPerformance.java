@@ -53,73 +53,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance {
-  /**
-   * The type of interactive trend metric. Possible values: - &#x60;TREND_WATCH_PV&#x60;: Watch count for the live room. - &#x60;TREND_COMMENT_PV&#x60;: Comment count for the live room. - &#x60;TREND_SHARE_PV&#x60;: Share count for the live room.
-   */
-  @JsonAdapter(StatsTypeEnum.Adapter.class)
-  public enum StatsTypeEnum {
-    /**
-     * Watch count for the live room.
-     */
-    TREND_WATCH_PV("TREND_WATCH_PV"),
-    
-    /**
-     * Comment count for the live room.
-     */
-    TREND_COMMENT_PV("TREND_COMMENT_PV"),
-    
-    /**
-     * Share count for the live room.
-     */
-    TREND_SHARE_PV("TREND_SHARE_PV");
-
-    private String value;
-
-    StatsTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatsTypeEnum fromValue(String value) {
-      for (StatsTypeEnum b : StatsTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatsTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatsTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatsTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatsTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatsTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATS_TYPE = "stats_type";
   @SerializedName(SERIALIZED_NAME_STATS_TYPE)
   @javax.annotation.Nullable
-  private StatsTypeEnum statsType;
+  private String statsType;
 
   public static final String SERIALIZED_NAME_DATA_POINTS = "data_points";
   @SerializedName(SERIALIZED_NAME_DATA_POINTS)
@@ -129,7 +66,7 @@ public class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance
   public GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance() {
   }
 
-  public GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance statsType(@javax.annotation.Nullable StatsTypeEnum statsType) {
+  public GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance statsType(@javax.annotation.Nullable String statsType) {
     this.statsType = statsType;
     return this;
   }
@@ -139,11 +76,11 @@ public class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance
    * @return statsType
    */
   @javax.annotation.Nullable
-  public StatsTypeEnum getStatsType() {
+  public String getStatsType() {
     return statsType;
   }
 
-  public void setStatsType(@javax.annotation.Nullable StatsTypeEnum statsType) {
+  public void setStatsType(@javax.annotation.Nullable String statsType) {
     this.statsType = statsType;
   }
 
@@ -285,10 +222,6 @@ public class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("stats_type") != null && !jsonObj.get("stats_type").isJsonNull()) && !jsonObj.get("stats_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `stats_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stats_type").toString()));
-      }
-      // validate the optional field `stats_type`
-      if (jsonObj.get("stats_type") != null && !jsonObj.get("stats_type").isJsonNull()) {
-        StatsTypeEnum.validateJsonElement(jsonObj.get("stats_type"));
       }
       if (jsonObj.get("data_points") != null && !jsonObj.get("data_points").isJsonNull()) {
         JsonArray jsonArraydataPoints = jsonObj.getAsJsonArray("data_points");

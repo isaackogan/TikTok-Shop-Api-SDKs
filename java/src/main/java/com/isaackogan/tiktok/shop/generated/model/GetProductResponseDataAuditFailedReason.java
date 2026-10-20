@@ -52,62 +52,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetProductResponseDataAuditFailedReason {
-  /**
-   * The platform for listing the product. Possible values: - TIKTOK_SHOP - TOKOPEDIA
-   */
-  @JsonAdapter(ListingPlatformEnum.Adapter.class)
-  public enum ListingPlatformEnum {
-    TIKTOK_SHOP("TIKTOK_SHOP"),
-    
-    TOKOPEDIA("TOKOPEDIA");
-
-    private String value;
-
-    ListingPlatformEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ListingPlatformEnum fromValue(String value) {
-      for (ListingPlatformEnum b : ListingPlatformEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ListingPlatformEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ListingPlatformEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ListingPlatformEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ListingPlatformEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ListingPlatformEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LISTING_PLATFORM = "listing_platform";
   @SerializedName(SERIALIZED_NAME_LISTING_PLATFORM)
   @javax.annotation.Nullable
-  private ListingPlatformEnum listingPlatform;
+  private String listingPlatform;
 
   public static final String SERIALIZED_NAME_POSITION = "position";
   @SerializedName(SERIALIZED_NAME_POSITION)
@@ -127,7 +75,7 @@ public class GetProductResponseDataAuditFailedReason {
   public GetProductResponseDataAuditFailedReason() {
   }
 
-  public GetProductResponseDataAuditFailedReason listingPlatform(@javax.annotation.Nullable ListingPlatformEnum listingPlatform) {
+  public GetProductResponseDataAuditFailedReason listingPlatform(@javax.annotation.Nullable String listingPlatform) {
     this.listingPlatform = listingPlatform;
     return this;
   }
@@ -137,11 +85,11 @@ public class GetProductResponseDataAuditFailedReason {
    * @return listingPlatform
    */
   @javax.annotation.Nullable
-  public ListingPlatformEnum getListingPlatform() {
+  public String getListingPlatform() {
     return listingPlatform;
   }
 
-  public void setListingPlatform(@javax.annotation.Nullable ListingPlatformEnum listingPlatform) {
+  public void setListingPlatform(@javax.annotation.Nullable String listingPlatform) {
     this.listingPlatform = listingPlatform;
   }
 
@@ -333,10 +281,6 @@ public class GetProductResponseDataAuditFailedReason {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("listing_platform") != null && !jsonObj.get("listing_platform").isJsonNull()) && !jsonObj.get("listing_platform").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `listing_platform` to be a primitive type in the JSON string but got `%s`", jsonObj.get("listing_platform").toString()));
-      }
-      // validate the optional field `listing_platform`
-      if (jsonObj.get("listing_platform") != null && !jsonObj.get("listing_platform").isJsonNull()) {
-        ListingPlatformEnum.validateJsonElement(jsonObj.get("listing_platform"));
       }
       if ((jsonObj.get("position") != null && !jsonObj.get("position").isJsonNull()) && !jsonObj.get("position").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `position` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position").toString()));

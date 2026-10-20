@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.return_status_change_webhook_data_return_role import ReturnStatusChangeWebhookDataReturnRole
-from ..models.return_status_change_webhook_data_return_status import ReturnStatusChangeWebhookDataReturnStatus
-from ..models.return_status_change_webhook_data_return_type import ReturnStatusChangeWebhookDataReturnType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ReturnStatusChangeWebhookData")
@@ -19,20 +16,17 @@ class ReturnStatusChangeWebhookData:
     """
     Attributes:
         order_id (str | Unset): The identification of a TikTok Shop order
-        return_role (ReturnStatusChangeWebhookDataReturnRole | Unset): Return or refund request user, with possible
-            values:
+        return_role (str | Unset): Return or refund request user, with possible values:
 
              * BUYER
              * SELLER
              * SYSTEM
-        return_type (ReturnStatusChangeWebhookDataReturnType | Unset): The return or refund request type, with possible
-            values:
+        return_type (str | Unset): The return or refund request type, with possible values:
 
              * REFUND
              * REPLACEMENT
              * RETURN_AND_REFUND
-        return_status (ReturnStatusChangeWebhookDataReturnStatus | Unset): The return status for a request, with
-            possible values:
+        return_status (str | Unset): The return status for a request, with possible values:
 
              * AWAITING_BUYER_SHIP
              * BUYER_SHIPPED_ITEM
@@ -53,9 +47,9 @@ class ReturnStatusChangeWebhookData:
     """
 
     order_id: str | Unset = UNSET
-    return_role: ReturnStatusChangeWebhookDataReturnRole | Unset = UNSET
-    return_type: ReturnStatusChangeWebhookDataReturnType | Unset = UNSET
-    return_status: ReturnStatusChangeWebhookDataReturnStatus | Unset = UNSET
+    return_role: str | Unset = UNSET
+    return_type: str | Unset = UNSET
+    return_status: str | Unset = UNSET
     return_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
@@ -64,17 +58,11 @@ class ReturnStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
 
-        return_role: str | Unset = UNSET
-        if not isinstance(self.return_role, Unset):
-            return_role = self.return_role.value
+        return_role = self.return_role
 
-        return_type: str | Unset = UNSET
-        if not isinstance(self.return_type, Unset):
-            return_type = self.return_type.value
+        return_type = self.return_type
 
-        return_status: str | Unset = UNSET
-        if not isinstance(self.return_status, Unset):
-            return_status = self.return_status.value
+        return_status = self.return_status
 
         return_id = self.return_id
 
@@ -107,26 +95,11 @@ class ReturnStatusChangeWebhookData:
         d = dict(src_dict)
         order_id = d.pop("order_id", UNSET)
 
-        _return_role = d.pop("return_role", UNSET)
-        return_role: ReturnStatusChangeWebhookDataReturnRole | Unset
-        if isinstance(_return_role, Unset):
-            return_role = UNSET
-        else:
-            return_role = ReturnStatusChangeWebhookDataReturnRole(_return_role)
+        return_role = d.pop("return_role", UNSET)
 
-        _return_type = d.pop("return_type", UNSET)
-        return_type: ReturnStatusChangeWebhookDataReturnType | Unset
-        if isinstance(_return_type, Unset):
-            return_type = UNSET
-        else:
-            return_type = ReturnStatusChangeWebhookDataReturnType(_return_type)
+        return_type = d.pop("return_type", UNSET)
 
-        _return_status = d.pop("return_status", UNSET)
-        return_status: ReturnStatusChangeWebhookDataReturnStatus | Unset
-        if isinstance(_return_status, Unset):
-            return_status = UNSET
-        else:
-            return_status = ReturnStatusChangeWebhookDataReturnStatus(_return_status)
+        return_status = d.pop("return_status", UNSET)
 
         return_id = d.pop("return_id", UNSET)
 

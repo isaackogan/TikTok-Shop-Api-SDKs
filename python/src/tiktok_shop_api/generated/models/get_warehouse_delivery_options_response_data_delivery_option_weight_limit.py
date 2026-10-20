@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_warehouse_delivery_options_response_data_delivery_option_weight_limit_unit import (
-    GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnit,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit")
@@ -20,8 +17,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit:
     Attributes:
         max_weight (int | Unset): Maximum weight limit.
         min_weight (int | Unset): Minimum weight limit.
-        unit (GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnit | Unset): The unit of measurement for
-            the weight.
+        unit (str | Unset): The unit of measurement for the weight.
             Possible values:
             - GRAM
             - POUND
@@ -31,7 +27,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit:
 
     max_weight: int | Unset = UNSET
     min_weight: int | Unset = UNSET
-    unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -39,9 +35,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit:
 
         min_weight = self.min_weight
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -62,12 +56,7 @@ class GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit:
 
         min_weight = d.pop("min_weight", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimitUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         get_warehouse_delivery_options_response_data_delivery_option_weight_limit = cls(
             max_weight=max_weight,

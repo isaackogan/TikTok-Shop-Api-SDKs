@@ -6,15 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_promotion_activities_response_data_activity_activity_type import (
-    SearchPromotionActivitiesResponseDataActivityActivityType,
-)
-from ..models.search_promotion_activities_response_data_activity_auction_support_type import (
-    SearchPromotionActivitiesResponseDataActivityAuctionSupportType,
-)
-from ..models.search_promotion_activities_response_data_activity_status import (
-    SearchPromotionActivitiesResponseDataActivityStatus,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -33,8 +24,7 @@ class SearchPromotionActivitiesResponseDataActivity:
     Attributes:
         id (str | Unset): A unique ID that identifies different activities.
         title (str | Unset): Activity name (50 characters max).
-        activity_type (SearchPromotionActivitiesResponseDataActivityActivityType | Unset): The type of promotion
-            activity. Possible values:
+        activity_type (str | Unset): The type of promotion activity. Possible values:
             - `FIXED_PRICE`: Product discount activity with a fixed price.
             - `DIRECT_DISCOUNT`: Product discount activity with a percentage off.
             - `FLASHSALE`: Flash sale activity.
@@ -51,7 +41,7 @@ class SearchPromotionActivitiesResponseDataActivity:
             Default: NORMAL
         begin_time (int | Unset): Activity start time, as a Unix timestamp in seconds.
         end_time (int | Unset): Activity end time, as a Unix timestamp in seconds.
-        status (SearchPromotionActivitiesResponseDataActivityStatus | Unset): Activity status.
+        status (str | Unset): Activity status.
             Possible values:
             - DRAFT: Promotion activities with this status are not available to TikTok users.
             - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity
@@ -72,9 +62,8 @@ class SearchPromotionActivitiesResponseDataActivity:
         participation_limit (list[SearchPromotionActivitiesResponseDataActivityParticipationLimit] | Unset): The number
             of times a buyer can participate in the promotion.
         discount (GetActivityResponseDataDiscount | Unset):
-        auction_support_type (SearchPromotionActivitiesResponseDataActivityAuctionSupportType | Unset): Whether a
-            `SHIPPING_DISCOUNT` activity supports auction products. This field is omitted for other activity types and can
-            be omitted when auction-support data is unavailable.
+        auction_support_type (str | Unset): Whether a `SHIPPING_DISCOUNT` activity supports auction products. This field
+            is omitted for other activity types and can be omitted when auction-support data is unavailable.
             Possible values:
             - `ALL`: The activity supports both normal products and auction products.
             - `EXCLUDE_AUCTION`: The activity does not support auction products.
@@ -82,18 +71,18 @@ class SearchPromotionActivitiesResponseDataActivity:
 
     id: str | Unset = UNSET
     title: str | Unset = UNSET
-    activity_type: SearchPromotionActivitiesResponseDataActivityActivityType | Unset = UNSET
+    activity_type: str | Unset = UNSET
     duration_type: str | Unset = UNSET
     begin_time: int | Unset = UNSET
     end_time: int | Unset = UNSET
-    status: SearchPromotionActivitiesResponseDataActivityStatus | Unset = UNSET
+    status: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
     product_level: str | Unset = UNSET
     activity_commands: list[str] | Unset = UNSET
     participation_limit: list[SearchPromotionActivitiesResponseDataActivityParticipationLimit] | Unset = UNSET
     discount: GetActivityResponseDataDiscount | Unset = UNSET
-    auction_support_type: SearchPromotionActivitiesResponseDataActivityAuctionSupportType | Unset = UNSET
+    auction_support_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -101,9 +90,7 @@ class SearchPromotionActivitiesResponseDataActivity:
 
         title = self.title
 
-        activity_type: str | Unset = UNSET
-        if not isinstance(self.activity_type, Unset):
-            activity_type = self.activity_type.value
+        activity_type = self.activity_type
 
         duration_type = self.duration_type
 
@@ -111,9 +98,7 @@ class SearchPromotionActivitiesResponseDataActivity:
 
         end_time = self.end_time
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         create_time = self.create_time
 
@@ -136,9 +121,7 @@ class SearchPromotionActivitiesResponseDataActivity:
         if not isinstance(self.discount, Unset):
             discount = self.discount.to_dict()
 
-        auction_support_type: str | Unset = UNSET
-        if not isinstance(self.auction_support_type, Unset):
-            auction_support_type = self.auction_support_type.value
+        auction_support_type = self.auction_support_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -186,12 +169,7 @@ class SearchPromotionActivitiesResponseDataActivity:
 
         title = d.pop("title", UNSET)
 
-        _activity_type = d.pop("activity_type", UNSET)
-        activity_type: SearchPromotionActivitiesResponseDataActivityActivityType | Unset
-        if isinstance(_activity_type, Unset):
-            activity_type = UNSET
-        else:
-            activity_type = SearchPromotionActivitiesResponseDataActivityActivityType(_activity_type)
+        activity_type = d.pop("activity_type", UNSET)
 
         duration_type = d.pop("duration_type", UNSET)
 
@@ -199,12 +177,7 @@ class SearchPromotionActivitiesResponseDataActivity:
 
         end_time = d.pop("end_time", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: SearchPromotionActivitiesResponseDataActivityStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchPromotionActivitiesResponseDataActivityStatus(_status)
+        status = d.pop("status", UNSET)
 
         create_time = d.pop("create_time", UNSET)
 
@@ -232,14 +205,7 @@ class SearchPromotionActivitiesResponseDataActivity:
         else:
             discount = GetActivityResponseDataDiscount.from_dict(_discount)
 
-        _auction_support_type = d.pop("auction_support_type", UNSET)
-        auction_support_type: SearchPromotionActivitiesResponseDataActivityAuctionSupportType | Unset
-        if isinstance(_auction_support_type, Unset):
-            auction_support_type = UNSET
-        else:
-            auction_support_type = SearchPromotionActivitiesResponseDataActivityAuctionSupportType(
-                _auction_support_type
-            )
+        auction_support_type = d.pop("auction_support_type", UNSET)
 
         search_promotion_activities_response_data_activity = cls(
             id=id,

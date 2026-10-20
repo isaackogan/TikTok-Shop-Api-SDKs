@@ -68,7 +68,7 @@ data class SearchProductsResponseDataProduct (
 
     /* The product status in TikTok Shop. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted. */
     @SerializedName("status")
-    val status: SearchProductsResponseDataProduct.Status? = null,
+    val status: kotlin.String? = null,
 
     /* A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product. */
     @SerializedName("skus")
@@ -76,7 +76,7 @@ data class SearchProductsResponseDataProduct (
 
     /* The regions where the product is sold. Possible values: - BR: Brazil - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam */
     @SerializedName("sales_regions")
-    val salesRegions: kotlin.collections.List<SearchProductsResponseDataProduct.SalesRegions>? = null,
+    val salesRegions: kotlin.collections.List<kotlin.String>? = null,
 
     /* The time when the product is created. Unix timestamp in seconds. */
     @SerializedName("create_time")
@@ -100,7 +100,7 @@ data class SearchProductsResponseDataProduct (
 
     /* The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market. */
     @SerializedName("listing_quality_tier")
-    val listingQualityTier: SearchProductsResponseDataProduct.ListingQualityTier? = null,
+    val listingQualityTier: kotlin.String? = null,
 
     /* The current status of the product on platforms that are natively integrated with TikTok Shop (e.g. TOKOPEDIA).  **Note**: For Indonesia sellers, if you did not set the listing platform as `TOKOPEDIA` when creating or editing a product, this will be omitted. */
     @SerializedName("integrated_platform_statuses")
@@ -124,83 +124,14 @@ data class SearchProductsResponseDataProduct (
 
     /* Product tag to identity special type product Possible values: AUCTION、LIVE_QUICK */
     @SerializedName("product_tags")
-    val productTags: kotlin.collections.List<SearchProductsResponseDataProduct.ProductTags>? = null,
+    val productTags: kotlin.collections.List<kotlin.String>? = null,
 
     /* The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION. */
     @SerializedName("selling_format")
-    val sellingFormat: SearchProductsResponseDataProduct.SellingFormat? = null
+    val sellingFormat: kotlin.String? = null
 
 ) {
 
-    /**
-     * The product status in TikTok Shop. Possible values: - UNKNOWN - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     *
-     * Values: UNKNOWN,DRAFT,PENDING,FAILED,ACTIVATE,SELLER_DEACTIVATED,PLATFORM_DEACTIVATED,FREEZE,DELETED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "ACTIVATE") ACTIVATE("ACTIVATE"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "PLATFORM_DEACTIVATED") PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-        @SerializedName(value = "FREEZE") FREEZE("FREEZE"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
-    /**
-     * The regions where the product is sold. Possible values: - BR: Brazil - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam
-     *
-     * Values: BR,DE,ES,FR,GB,ID,IE,IT,JP,MX,MY,PH,SG,TH,US,VN
-     */
-    enum class SalesRegions(val value: kotlin.String) {
-        @SerializedName(value = "BR") BR("BR"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MX") MX("MX"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN");
-    }
-    /**
-     * The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market.
-     *
-     * Values: POOR,FAIR,GOOD,EXCELLENT
-     */
-    enum class ListingQualityTier(val value: kotlin.String) {
-        @SerializedName(value = "POOR") POOR("POOR"),
-        @SerializedName(value = "FAIR") FAIR("FAIR"),
-        @SerializedName(value = "GOOD") GOOD("GOOD"),
-        @SerializedName(value = "EXCELLENT") EXCELLENT("EXCELLENT");
-    }
-    /**
-     * Product tag to identity special type product Possible values: AUCTION、LIVE_QUICK
-     *
-     * Values: AUCTION,LIVE_QUICK
-     */
-    enum class ProductTags(val value: kotlin.String) {
-        @SerializedName(value = "AUCTION") AUCTION("AUCTION"),
-        @SerializedName(value = "LIVE_QUICK") LIVE_QUICK("LIVE_QUICK");
-    }
-    /**
-     * The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
-     *
-     * Values: FIXED_PRICE,LIVE_AUCTION,FIXED_PRICE_AND_LIVE_AUCTION
-     */
-    enum class SellingFormat(val value: kotlin.String) {
-        @SerializedName(value = "FIXED_PRICE") FIXED_PRICE("FIXED_PRICE"),
-        @SerializedName(value = "LIVE_AUCTION") LIVE_AUCTION("LIVE_AUCTION"),
-        @SerializedName(value = "FIXED_PRICE_AND_LIVE_AUCTION") FIXED_PRICE_AND_LIVE_AUCTION("FIXED_PRICE_AND_LIVE_AUCTION");
-    }
 
 }
 

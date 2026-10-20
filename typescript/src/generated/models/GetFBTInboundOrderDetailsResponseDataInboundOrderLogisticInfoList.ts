@@ -28,10 +28,10 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoLi
      * * `DHL` (DHL Express)
      * * `USPS` (United States Postal Service)
      * * `OTHER` (All other logistics providers)
-     * @type {GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum}
+     * @type {string}
      * @memberof GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList
      */
-    providerName?: GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum;
+    providerName?: string;
     /**
      * The tracking number for the current inbound shipment with the carrier.
      * @type {string}
@@ -45,20 +45,6 @@ export interface GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoLi
      */
     relatedNumber?: string;
 }
-
-
-/**
- * @export
- */
-export const GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum = {
-    Fedex: 'FEDEX',
-    Ups: 'UPS',
-    Dhl: 'DHL',
-    Usps: 'USPS',
-    Other: 'OTHER'
-} as const;
-export type GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum = typeof GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum[keyof typeof GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderNameEnum];
-
 
 /**
  * Check if a given object implements the GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList interface.

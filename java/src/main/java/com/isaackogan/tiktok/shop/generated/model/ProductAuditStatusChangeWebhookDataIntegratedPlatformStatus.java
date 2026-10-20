@@ -50,138 +50,20 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
-  /**
-   * The integrated platform name.   Possible values:      * TOKOPEDIA.
-   */
-  @JsonAdapter(PlatformEnum.Adapter.class)
-  public enum PlatformEnum {
-    TOKOPEDIA("TOKOPEDIA");
-
-    private String value;
-
-    PlatformEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PlatformEnum fromValue(String value) {
-      for (PlatformEnum b : PlatformEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PlatformEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PlatformEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PlatformEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PlatformEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PlatformEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PLATFORM = "platform";
   @SerializedName(SERIALIZED_NAME_PLATFORM)
   @javax.annotation.Nullable
-  private PlatformEnum platform;
-
-  /**
-   * The product audit status.   Possible values:      * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.   * AUDITING: The product is currently being audited.   * FAILED: The product failed the audit or the audit was cancelled.   * APPROVED: The product passed the audit and has been listed on the platform.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.
-     */
-    NONE("NONE"),
-    
-    /**
-     * The product is currently being audited.
-     */
-    AUDITING("AUDITING"),
-    
-    /**
-     * The product failed the audit or the audit was cancelled.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * The product passed the audit and has been listed on the platform.
-     */
-    APPROVED("APPROVED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
+  private String platform;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus() {
   }
 
-  public ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus platform(@javax.annotation.Nullable PlatformEnum platform) {
+  public ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus platform(@javax.annotation.Nullable String platform) {
     this.platform = platform;
     return this;
   }
@@ -191,16 +73,16 @@ public class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
    * @return platform
    */
   @javax.annotation.Nullable
-  public PlatformEnum getPlatform() {
+  public String getPlatform() {
     return platform;
   }
 
-  public void setPlatform(@javax.annotation.Nullable PlatformEnum platform) {
+  public void setPlatform(@javax.annotation.Nullable String platform) {
     this.platform = platform;
   }
 
 
-  public ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus status(@javax.annotation.Nullable StatusEnum status) {
+  public ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -210,11 +92,11 @@ public class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -330,16 +212,8 @@ public class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
       if ((jsonObj.get("platform") != null && !jsonObj.get("platform").isJsonNull()) && !jsonObj.get("platform").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `platform` to be a primitive type in the JSON string but got `%s`", jsonObj.get("platform").toString()));
       }
-      // validate the optional field `platform`
-      if (jsonObj.get("platform") != null && !jsonObj.get("platform").isJsonNull()) {
-        PlatformEnum.validateJsonElement(jsonObj.get("platform"));
-      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

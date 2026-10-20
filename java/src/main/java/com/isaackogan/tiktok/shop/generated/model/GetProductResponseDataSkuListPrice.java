@@ -55,60 +55,10 @@ public class GetProductResponseDataSkuListPrice {
   @javax.annotation.Nullable
   private String amount;
 
-  /**
-   * The currency. Possible values: USD
-   */
-  @JsonAdapter(CurrencyEnum.Adapter.class)
-  public enum CurrencyEnum {
-    USD("USD");
-
-    private String value;
-
-    CurrencyEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CurrencyEnum fromValue(String value) {
-      for (CurrencyEnum b : CurrencyEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CurrencyEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CurrencyEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CurrencyEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CurrencyEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      CurrencyEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
   @javax.annotation.Nullable
-  private CurrencyEnum currency;
+  private String currency;
 
   public GetProductResponseDataSkuListPrice() {
   }
@@ -132,7 +82,7 @@ public class GetProductResponseDataSkuListPrice {
   }
 
 
-  public GetProductResponseDataSkuListPrice currency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public GetProductResponseDataSkuListPrice currency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
     return this;
   }
@@ -142,11 +92,11 @@ public class GetProductResponseDataSkuListPrice {
    * @return currency
    */
   @javax.annotation.Nullable
-  public CurrencyEnum getCurrency() {
+  public String getCurrency() {
     return currency;
   }
 
-  public void setCurrency(@javax.annotation.Nullable CurrencyEnum currency) {
+  public void setCurrency(@javax.annotation.Nullable String currency) {
     this.currency = currency;
   }
 
@@ -264,10 +214,6 @@ public class GetProductResponseDataSkuListPrice {
       }
       if ((jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) && !jsonObj.get("currency").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `currency` to be a primitive type in the JSON string but got `%s`", jsonObj.get("currency").toString()));
-      }
-      // validate the optional field `currency`
-      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        CurrencyEnum.validateJsonElement(jsonObj.get("currency"));
       }
   }
 

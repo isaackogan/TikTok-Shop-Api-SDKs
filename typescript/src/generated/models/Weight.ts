@@ -31,22 +31,11 @@ export interface Weight {
      * Available values:
      * - `GRAM`
      * - `POUND`
-     * @type {WeightUnitEnum}
+     * @type {string}
      * @memberof Weight
      */
-    unit?: WeightUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const WeightUnitEnum = {
-    Gram: 'GRAM',
-    Pound: 'POUND'
-} as const;
-export type WeightUnitEnum = typeof WeightUnitEnum[keyof typeof WeightUnitEnum];
-
 
 /**
  * Check if a given object implements the Weight interface.

@@ -108,70 +108,10 @@ public class SearchCreatorAffiliateOrdersResponseDataOrderSku {
   @javax.annotation.Nullable
   private String shopName;
 
-  /**
-   * The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE
-   */
-  @JsonAdapter(ContentTypeEnum.Adapter.class)
-  public enum ContentTypeEnum {
-    SHOP("SHOP"),
-    
-    VIDEO("VIDEO"),
-    
-    LIVE("LIVE"),
-    
-    PRE_LIVE("PRE_LIVE"),
-    
-    PROMOTION_PAGE("PROMOTION_PAGE"),
-    
-    LINKSHARE("LINKSHARE");
-
-    private String value;
-
-    ContentTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ContentTypeEnum fromValue(String value) {
-      for (ContentTypeEnum b : ContentTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ContentTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ContentTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ContentTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ContentTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ContentTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_CONTENT_TYPE = "content_type";
   @SerializedName(SERIALIZED_NAME_CONTENT_TYPE)
   @javax.annotation.Nullable
-  private ContentTypeEnum contentType;
+  private String contentType;
 
   public static final String SERIALIZED_NAME_CONTENT_ID = "content_id";
   @SerializedName(SERIALIZED_NAME_CONTENT_ID)
@@ -483,7 +423,7 @@ public class SearchCreatorAffiliateOrdersResponseDataOrderSku {
   }
 
 
-  public SearchCreatorAffiliateOrdersResponseDataOrderSku contentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public SearchCreatorAffiliateOrdersResponseDataOrderSku contentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
     return this;
   }
@@ -493,11 +433,11 @@ public class SearchCreatorAffiliateOrdersResponseDataOrderSku {
    * @return contentType
    */
   @javax.annotation.Nullable
-  public ContentTypeEnum getContentType() {
+  public String getContentType() {
     return contentType;
   }
 
-  public void setContentType(@javax.annotation.Nullable ContentTypeEnum contentType) {
+  public void setContentType(@javax.annotation.Nullable String contentType) {
     this.contentType = contentType;
   }
 
@@ -1302,10 +1242,6 @@ public class SearchCreatorAffiliateOrdersResponseDataOrderSku {
       }
       if ((jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) && !jsonObj.get("content_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_type").toString()));
-      }
-      // validate the optional field `content_type`
-      if (jsonObj.get("content_type") != null && !jsonObj.get("content_type").isJsonNull()) {
-        ContentTypeEnum.validateJsonElement(jsonObj.get("content_type"));
       }
       if ((jsonObj.get("content_id") != null && !jsonObj.get("content_id").isJsonNull()) && !jsonObj.get("content_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content_id").toString()));

@@ -39,7 +39,7 @@ data class GetProductResponseDataSkuFee (
 
     /* Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE */
     @SerializedName("additional_attribute")
-    val additionalAttribute: GetProductResponseDataSkuFee.AdditionalAttribute? = null,
+    val additionalAttribute: kotlin.String? = null,
 
     /* The fee amount. Valid range: - PFAND: [0.00 - 6300.00] */
     @SerializedName("amount")
@@ -47,28 +47,10 @@ data class GetProductResponseDataSkuFee (
 
     /* The type of fee. Possible values: PFAND */
     @SerializedName("type")
-    val type: GetProductResponseDataSkuFee.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * Possible values for Pfand: - SINGLE_USE - REUSABLE - NOT_APPLICABLE
-     *
-     * Values: SINGLE_USE,REUSABLE,NOT_APPLICABLE
-     */
-    enum class AdditionalAttribute(val value: kotlin.String) {
-        @SerializedName(value = "SINGLE_USE") SINGLE_USE("SINGLE_USE"),
-        @SerializedName(value = "REUSABLE") REUSABLE("REUSABLE"),
-        @SerializedName(value = "NOT_APPLICABLE") NOT_APPLICABLE("NOT_APPLICABLE");
-    }
-    /**
-     * The type of fee. Possible values: PFAND
-     *
-     * Values: PFAND
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "PFAND") PFAND("PFAND");
-    }
 
 }
 

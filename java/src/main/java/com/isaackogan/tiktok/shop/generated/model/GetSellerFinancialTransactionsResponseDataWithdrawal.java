@@ -55,103 +55,10 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * The transaction type. Possible values: - WITHDRAW: The seller withdraws the settlement amount to a bank card. - SETTLE: The platform settles the amount to the seller. - TRANSFER: A platform subsidy or deduction due to platform policies. - REVERSE: A withdrawal failure caused by incorrect bank card information. - POLICY_VIOLATION_DEDUCTION: A deduction for a policy violation. - REWARD: A reward transaction. - PAYMENT: A payment transaction. - REFUND: A refund transaction. - UNKNOWN: An unrecognized transaction type.
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * The seller withdraws the settlement amount to a bank card.
-     */
-    WITHDRAW("WITHDRAW"),
-    
-    /**
-     * The platform settles the amount to the seller.
-     */
-    SETTLE("SETTLE"),
-    
-    /**
-     * A platform subsidy or deduction due to platform policies.
-     */
-    TRANSFER("TRANSFER"),
-    
-    /**
-     * A withdrawal failure caused by incorrect bank card information.
-     */
-    REVERSE("REVERSE"),
-    
-    /**
-     * A deduction for a policy violation.
-     */
-    POLICY_VIOLATION_DEDUCTION("POLICY_VIOLATION_DEDUCTION"),
-    
-    /**
-     * A reward transaction.
-     */
-    REWARD("REWARD"),
-    
-    /**
-     * A payment transaction.
-     */
-    PAYMENT("PAYMENT"),
-    
-    /**
-     * A refund transaction.
-     */
-    REFUND("REFUND"),
-    
-    /**
-     * An unrecognized transaction type.
-     */
-    UNKNOWN("UNKNOWN");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
@@ -163,113 +70,10 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
   @javax.annotation.Nullable
   private String currency;
 
-  /**
-   * The processing status of the transaction. Possible values: - SUCCESS: The transaction completed successfully. For a WITHDRAW transaction, this means that the withdrawal has been transferred to the seller. - INIT: The withdrawal was initialized. This status applies only to WITHDRAW transactions. - ORDERED: The transaction order was created. - PROCESSING: The withdrawal is being processed. - RECEIVED: The withdrawal was received. - PROCESSED: The payout completed successfully. - FAILED: The payout failed. - REVERSED: The transaction was refunded. - EXCEPTION: The transaction was partially refunded. - CLOSED: The transaction was closed. - UNKNOWN: The status could not be mapped.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The transaction completed successfully. For a WITHDRAW transaction, this means that the withdrawal has been transferred to the seller.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * The withdrawal was initialized. This status applies only to WITHDRAW transactions.
-     */
-    INIT("INIT"),
-    
-    /**
-     * The transaction order was created.
-     */
-    ORDERED("ORDERED"),
-    
-    /**
-     * The withdrawal is being processed.
-     */
-    PROCESSING("PROCESSING"),
-    
-    /**
-     * The withdrawal was received.
-     */
-    RECEIVED("RECEIVED"),
-    
-    /**
-     * The payout completed successfully.
-     */
-    PROCESSED("PROCESSED"),
-    
-    /**
-     * The payout failed.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * The transaction was refunded.
-     */
-    REVERSED("REVERSED"),
-    
-    /**
-     * The transaction was partially refunded.
-     */
-    EXCEPTION("EXCEPTION"),
-    
-    /**
-     * The transaction was closed.
-     */
-    CLOSED("CLOSED"),
-    
-    /**
-     * The status could not be mapped.
-     */
-    UNKNOWN("UNKNOWN");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_CREATE_TIME = "create_time";
   @SerializedName(SERIALIZED_NAME_CREATE_TIME)
@@ -298,7 +102,7 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
   }
 
 
-  public GetSellerFinancialTransactionsResponseDataWithdrawal type(@javax.annotation.Nullable TypeEnum type) {
+  public GetSellerFinancialTransactionsResponseDataWithdrawal type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -308,11 +112,11 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -355,7 +159,7 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
   }
 
 
-  public GetSellerFinancialTransactionsResponseDataWithdrawal status(@javax.annotation.Nullable StatusEnum status) {
+  public GetSellerFinancialTransactionsResponseDataWithdrawal status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -365,11 +169,11 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -515,10 +319,6 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
-      }
       if ((jsonObj.get("amount") != null && !jsonObj.get("amount").isJsonNull()) && !jsonObj.get("amount").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));
       }
@@ -527,10 +327,6 @@ public class GetSellerFinancialTransactionsResponseDataWithdrawal {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

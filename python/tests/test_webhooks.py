@@ -5,6 +5,7 @@ import pytest
 
 from tiktok_shop_api import EVENT_TYPES, UnknownWebhookEvent, WebhookSignatureError, Webhooks
 from tiktok_shop_api.generated.models import OrderStatusChangeWebhook
+from tiktok_shop_api.generated.types import Unset
 
 VECTORS = json.loads((Path(__file__).parents[2] / "shared/test-vectors/webhooks.json").read_text())
 
@@ -50,6 +51,13 @@ def test_numeric_shop_id_is_exact():
     assert ev.shop_id == 7494049642642441621
     unk = Webhooks.parse('{"type":424242,"shop_id":7494049642642441621}')
     assert isinstance(unk, UnknownWebhookEvent) and unk.raw["shop_id"] == 7494049642642441621
+
+
+def test_unknown_order_status_is_kept_as_a_string():
+    ev = Webhooks.parse('{"type":1,"shop_id":"1","data":{"order_status":"SOME_NEW_STATUS"}}')
+    assert isinstance(ev, OrderStatusChangeWebhook)
+    assert not isinstance(ev.data, Unset)
+    assert ev.data.order_status == "SOME_NEW_STATUS"
 
 
 def test_event_types():

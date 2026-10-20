@@ -49,7 +49,7 @@ data class GetLatestUnreadMessagesResponseDataNewestMessageList (
 
     /* Message type. Possible values: - TEXT - PRODUCT_CARD - TARGET_COLLABORATION_CARD - FREE_SAMPLE_CARD - IMAGE - CRM_TEXT_WITH_IMAGE_CARD - CRM_TEXT_WITH_PRODUCTS_CARD - NOTIFICATION - EMOTICONS - SYSTEM */
     @SerializedName("type")
-    val type: GetLatestUnreadMessagesResponseDataNewestMessageList.Type? = null,
+    val type: kotlin.String? = null,
 
     /* sender's IM id */
     @SerializedName("sender_id")
@@ -61,23 +61,6 @@ data class GetLatestUnreadMessagesResponseDataNewestMessageList (
 
 ) {
 
-    /**
-     * Message type. Possible values: - TEXT - PRODUCT_CARD - TARGET_COLLABORATION_CARD - FREE_SAMPLE_CARD - IMAGE - CRM_TEXT_WITH_IMAGE_CARD - CRM_TEXT_WITH_PRODUCTS_CARD - NOTIFICATION - EMOTICONS - SYSTEM
-     *
-     * Values: TEXT,PRODUCT_CARD,TARGET_COLLABORATION_CARD,FREE_SAMPLE_CARD,IMAGE,CRM_TEXT_WITH_IMAGE_CARD,CRM_TEXT_WITH_PRODUCTS_CARD,NOTIFICATION,EMOTICONS,SYSTEM
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "TEXT") TEXT("TEXT"),
-        @SerializedName(value = "PRODUCT_CARD") PRODUCT_CARD("PRODUCT_CARD"),
-        @SerializedName(value = "TARGET_COLLABORATION_CARD") TARGET_COLLABORATION_CARD("TARGET_COLLABORATION_CARD"),
-        @SerializedName(value = "FREE_SAMPLE_CARD") FREE_SAMPLE_CARD("FREE_SAMPLE_CARD"),
-        @SerializedName(value = "IMAGE") IMAGE("IMAGE"),
-        @SerializedName(value = "CRM_TEXT_WITH_IMAGE_CARD") CRM_TEXT_WITH_IMAGE_CARD("CRM_TEXT_WITH_IMAGE_CARD"),
-        @SerializedName(value = "CRM_TEXT_WITH_PRODUCTS_CARD") CRM_TEXT_WITH_PRODUCTS_CARD("CRM_TEXT_WITH_PRODUCTS_CARD"),
-        @SerializedName(value = "NOTIFICATION") NOTIFICATION("NOTIFICATION"),
-        @SerializedName(value = "EMOTICONS") EMOTICONS("EMOTICONS"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

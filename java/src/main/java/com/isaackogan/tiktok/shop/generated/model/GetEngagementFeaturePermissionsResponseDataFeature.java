@@ -50,68 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetEngagementFeaturePermissionsResponseDataFeature {
-  /**
-   * The feature name. Possible values: - &#x60;FUNDAMENTAL&#x60;: The ability to use any customer engagement APIs or features. This is the prerequisite for all other customer engagement features. - &#x60;CUSTOM_MSG&#x60;: The ability to define and send custom messages.
-   */
-  @JsonAdapter(NameEnum.Adapter.class)
-  public enum NameEnum {
-    /**
-     * The ability to use any customer engagement APIs or features. This is the prerequisite for all other customer engagement features.
-     */
-    FUNDAMENTAL("FUNDAMENTAL"),
-    
-    /**
-     * The ability to define and send custom messages.
-     */
-    CUSTOM_MSG("CUSTOM_MSG");
-
-    private String value;
-
-    NameEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static NameEnum fromValue(String value) {
-      for (NameEnum b : NameEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<NameEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final NameEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public NameEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return NameEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      NameEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   @javax.annotation.Nullable
-  private NameEnum name;
+  private String name;
 
   public static final String SERIALIZED_NAME_IS_AUTHORIZED = "is_authorized";
   @SerializedName(SERIALIZED_NAME_IS_AUTHORIZED)
@@ -121,7 +63,7 @@ public class GetEngagementFeaturePermissionsResponseDataFeature {
   public GetEngagementFeaturePermissionsResponseDataFeature() {
   }
 
-  public GetEngagementFeaturePermissionsResponseDataFeature name(@javax.annotation.Nullable NameEnum name) {
+  public GetEngagementFeaturePermissionsResponseDataFeature name(@javax.annotation.Nullable String name) {
     this.name = name;
     return this;
   }
@@ -131,11 +73,11 @@ public class GetEngagementFeaturePermissionsResponseDataFeature {
    * @return name
    */
   @javax.annotation.Nullable
-  public NameEnum getName() {
+  public String getName() {
     return name;
   }
 
-  public void setName(@javax.annotation.Nullable NameEnum name) {
+  public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
   }
 
@@ -269,10 +211,6 @@ public class GetEngagementFeaturePermissionsResponseDataFeature {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      // validate the optional field `name`
-      if (jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) {
-        NameEnum.validateJsonElement(jsonObj.get("name"));
       }
   }
 

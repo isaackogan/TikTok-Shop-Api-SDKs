@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.order_status_change_webhook_data_order_status import OrderStatusChangeWebhookDataOrderStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OrderStatusChangeWebhookData")
@@ -17,8 +16,7 @@ class OrderStatusChangeWebhookData:
     """
     Attributes:
         order_id (str | Unset): The identification of a TikTok Shop order
-        order_status (OrderStatusChangeWebhookDataOrderStatus | Unset): The most recent order status, with possible
-            values:
+        order_status (str | Unset): The most recent order status, with possible values:
 
              * `UNPAID`
              * `ON_HOLD`
@@ -33,7 +31,7 @@ class OrderStatusChangeWebhookData:
     """
 
     order_id: str | Unset = UNSET
-    order_status: OrderStatusChangeWebhookDataOrderStatus | Unset = UNSET
+    order_status: str | Unset = UNSET
     is_on_hold_order: bool | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -41,9 +39,7 @@ class OrderStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
 
-        order_status: str | Unset = UNSET
-        if not isinstance(self.order_status, Unset):
-            order_status = self.order_status.value
+        order_status = self.order_status
 
         is_on_hold_order = self.is_on_hold_order
 
@@ -68,12 +64,7 @@ class OrderStatusChangeWebhookData:
         d = dict(src_dict)
         order_id = d.pop("order_id", UNSET)
 
-        _order_status = d.pop("order_status", UNSET)
-        order_status: OrderStatusChangeWebhookDataOrderStatus | Unset
-        if isinstance(_order_status, Unset):
-            order_status = UNSET
-        else:
-            order_status = OrderStatusChangeWebhookDataOrderStatus(_order_status)
+        order_status = d.pop("order_status", UNSET)
 
         is_on_hold_order = d.pop("is_on_hold_order", UNSET)
 

@@ -49,7 +49,7 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo (
 
     /* Battery packaging type. Possible values: - STANDALONE - IN_EQUIPMENT - WITH_EQUIPMENT - OTHER */
     @SerializedName("battery_packaging_type")
-    val batteryPackagingType: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo.BatteryPackagingType? = null,
+    val batteryPackagingType: kotlin.String? = null,
 
     /* Total battery weight in the unit specified by total_battery_weight_unit. */
     @SerializedName("total_battery_weight")
@@ -81,17 +81,6 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo (
 
 ) {
 
-    /**
-     * Battery packaging type. Possible values: - STANDALONE - IN_EQUIPMENT - WITH_EQUIPMENT - OTHER
-     *
-     * Values: STANDALONE,IN_EQUIPMENT,WITH_EQUIPMENT,OTHER
-     */
-    enum class BatteryPackagingType(val value: kotlin.String) {
-        @SerializedName(value = "STANDALONE") STANDALONE("STANDALONE"),
-        @SerializedName(value = "IN_EQUIPMENT") IN_EQUIPMENT("IN_EQUIPMENT"),
-        @SerializedName(value = "WITH_EQUIPMENT") WITH_EQUIPMENT("WITH_EQUIPMENT"),
-        @SerializedName(value = "OTHER") OTHER("OTHER");
-    }
 
 }
 

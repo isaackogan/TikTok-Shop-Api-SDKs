@@ -30,10 +30,10 @@ export interface GetShoppableVideoStatusResponseDataVideo {
      * - SUCCESS: The video was posted successfully.
      * - FAIL: The video failed to post.
      * - PROCESSING: The video is still being processed. Call this API again later to get the latest status.
-     * @type {GetShoppableVideoStatusResponseDataVideoPostStatusEnum}
+     * @type {string}
      * @memberof GetShoppableVideoStatusResponseDataVideo
      */
-    postStatus?: GetShoppableVideoStatusResponseDataVideoPostStatusEnum;
+    postStatus?: string;
     /**
      * Returned if the video has been successfully posted, i.e. `posting_status = SUCCESS`.
      * Represented in seconds.
@@ -42,18 +42,6 @@ export interface GetShoppableVideoStatusResponseDataVideo {
      */
     postTime?: number;
 }
-
-
-/**
- * @export
- */
-export const GetShoppableVideoStatusResponseDataVideoPostStatusEnum = {
-    Success: 'SUCCESS',
-    Fail: 'FAIL',
-    Processing: 'PROCESSING'
-} as const;
-export type GetShoppableVideoStatusResponseDataVideoPostStatusEnum = typeof GetShoppableVideoStatusResponseDataVideoPostStatusEnum[keyof typeof GetShoppableVideoStatusResponseDataVideoPostStatusEnum];
-
 
 /**
  * Check if a given object implements the GetShoppableVideoStatusResponseDataVideo interface.

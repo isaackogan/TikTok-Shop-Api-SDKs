@@ -47,19 +47,10 @@ data class GetGlobalSellerWarehousesResponseDataGlobalWarehouse (
 
     /* Possible values: - SELLER: Warehouse owned by the seller.  - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop. */
     @SerializedName("ownership")
-    val ownership: GetGlobalSellerWarehousesResponseDataGlobalWarehouse.Ownership? = null
+    val ownership: kotlin.String? = null
 
 ) {
 
-    /**
-     * Possible values: - SELLER: Warehouse owned by the seller.  - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop.
-     *
-     * Values: SELLER,PLATFORM_COOPERATION
-     */
-    enum class Ownership(val value: kotlin.String) {
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "PLATFORM_COOPERATION") PLATFORM_COOPERATION("PLATFORM_COOPERATION");
-    }
 
 }
 

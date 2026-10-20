@@ -39,7 +39,7 @@ data class GetShopProductPerformanceDetailResponseDataPerformanceRating (
 
     /* Rating star bucket. Possible values: - 1_STAR: One-star rating. - 2_STAR: Two-star rating. - 3_STAR: Three-star rating. - 4_STAR: Four-star rating. - 5_STAR: Five-star rating. */
     @SerializedName("stars")
-    val stars: GetShopProductPerformanceDetailResponseDataPerformanceRating.Stars? = null,
+    val stars: kotlin.String? = null,
 
     /* Number of reviews in the corresponding rating. */
     @SerializedName("count")
@@ -51,18 +51,6 @@ data class GetShopProductPerformanceDetailResponseDataPerformanceRating (
 
 ) {
 
-    /**
-     * Rating star bucket. Possible values: - 1_STAR: One-star rating. - 2_STAR: Two-star rating. - 3_STAR: Three-star rating. - 4_STAR: Four-star rating. - 5_STAR: Five-star rating.
-     *
-     * Values: _1_STAR,_2_STAR,_3_STAR,_4_STAR,_5_STAR
-     */
-    enum class Stars(val value: kotlin.String) {
-        @SerializedName(value = "1_STAR") _1_STAR("1_STAR"),
-        @SerializedName(value = "2_STAR") _2_STAR("2_STAR"),
-        @SerializedName(value = "3_STAR") _3_STAR("3_STAR"),
-        @SerializedName(value = "4_STAR") _4_STAR("4_STAR"),
-        @SerializedName(value = "5_STAR") _5_STAR("5_STAR");
-    }
 
 }
 

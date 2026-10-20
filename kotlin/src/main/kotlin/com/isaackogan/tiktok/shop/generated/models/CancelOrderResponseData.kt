@@ -42,21 +42,10 @@ data class CancelOrderResponseData (
 
     /* The status of an order cancellation request.  Available values: - `CANCELLATION_REQUEST_PENDING` - `CANCELLATION_REQUEST_SUCCESS` - `CANCELLATION_REQUEST_CANCEL` - `CANCELLATION_REQUEST_COMPLETE` */
     @SerializedName("cancel_status")
-    val cancelStatus: CancelOrderResponseData.CancelStatus? = null
+    val cancelStatus: kotlin.String? = null
 
 ) {
 
-    /**
-     * The status of an order cancellation request.  Available values: - `CANCELLATION_REQUEST_PENDING` - `CANCELLATION_REQUEST_SUCCESS` - `CANCELLATION_REQUEST_CANCEL` - `CANCELLATION_REQUEST_COMPLETE`
-     *
-     * Values: CANCELLATION_REQUEST_PENDING,CANCELLATION_REQUEST_SUCCESS,CANCELLATION_REQUEST_CANCEL,CANCELLATION_REQUEST_COMPLETE
-     */
-    enum class CancelStatus(val value: kotlin.String) {
-        @SerializedName(value = "CANCELLATION_REQUEST_PENDING") CANCELLATION_REQUEST_PENDING("CANCELLATION_REQUEST_PENDING"),
-        @SerializedName(value = "CANCELLATION_REQUEST_SUCCESS") CANCELLATION_REQUEST_SUCCESS("CANCELLATION_REQUEST_SUCCESS"),
-        @SerializedName(value = "CANCELLATION_REQUEST_CANCEL") CANCELLATION_REQUEST_CANCEL("CANCELLATION_REQUEST_CANCEL"),
-        @SerializedName(value = "CANCELLATION_REQUEST_COMPLETE") CANCELLATION_REQUEST_COMPLETE("CANCELLATION_REQUEST_COMPLETE");
-    }
 
 }
 

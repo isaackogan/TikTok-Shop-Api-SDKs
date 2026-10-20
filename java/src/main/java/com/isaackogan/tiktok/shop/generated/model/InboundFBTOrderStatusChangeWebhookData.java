@@ -55,70 +55,10 @@ public class InboundFBTOrderStatusChangeWebhookData {
   @javax.annotation.Nullable
   private String inboundOrderId;
 
-  /**
-   * Inbound order status. Possible enumerations:  - TO_BE_RECEIVED  - ARRIVE_HUB,  - RECEIVING,  - PARTIALLY_RECEIVED,  - RECEIVED,  - CANCELLED
-   */
-  @JsonAdapter(OrderStatusEnum.Adapter.class)
-  public enum OrderStatusEnum {
-    TO_BE_RECEIVED("TO_BE_RECEIVED"),
-    
-    ARRIVE_HUB("ARRIVE_HUB"),
-    
-    RECEIVING("RECEIVING"),
-    
-    PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-    
-    RECEIVED("RECEIVED"),
-    
-    CANCELLED("CANCELLED");
-
-    private String value;
-
-    OrderStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OrderStatusEnum fromValue(String value) {
-      for (OrderStatusEnum b : OrderStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OrderStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OrderStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OrderStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OrderStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OrderStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ORDER_STATUS = "order_status";
   @SerializedName(SERIALIZED_NAME_ORDER_STATUS)
   @javax.annotation.Nullable
-  private OrderStatusEnum orderStatus;
+  private String orderStatus;
 
   public static final String SERIALIZED_NAME_UPDATE_TIME = "update_time";
   @SerializedName(SERIALIZED_NAME_UPDATE_TIME)
@@ -147,7 +87,7 @@ public class InboundFBTOrderStatusChangeWebhookData {
   }
 
 
-  public InboundFBTOrderStatusChangeWebhookData orderStatus(@javax.annotation.Nullable OrderStatusEnum orderStatus) {
+  public InboundFBTOrderStatusChangeWebhookData orderStatus(@javax.annotation.Nullable String orderStatus) {
     this.orderStatus = orderStatus;
     return this;
   }
@@ -157,11 +97,11 @@ public class InboundFBTOrderStatusChangeWebhookData {
    * @return orderStatus
    */
   @javax.annotation.Nullable
-  public OrderStatusEnum getOrderStatus() {
+  public String getOrderStatus() {
     return orderStatus;
   }
 
-  public void setOrderStatus(@javax.annotation.Nullable OrderStatusEnum orderStatus) {
+  public void setOrderStatus(@javax.annotation.Nullable String orderStatus) {
     this.orderStatus = orderStatus;
   }
 
@@ -300,10 +240,6 @@ public class InboundFBTOrderStatusChangeWebhookData {
       }
       if ((jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) && !jsonObj.get("order_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `order_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_status").toString()));
-      }
-      // validate the optional field `order_status`
-      if (jsonObj.get("order_status") != null && !jsonObj.get("order_status").isJsonNull()) {
-        OrderStatusEnum.validateJsonElement(jsonObj.get("order_status"));
       }
   }
 

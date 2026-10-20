@@ -42,11 +42,11 @@ data class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBrea
 
     /* Channel type. Possible values: CREATOR, SELLER */
     @SerializedName("channel")
-    val channel: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown.Channel? = null,
+    val channel: kotlin.String? = null,
 
     /* Content type. Possible values: LIVE, VIDEO */
     @SerializedName("content_type")
-    val contentType: GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBreakdown.ContentType? = null,
+    val contentType: kotlin.String? = null,
 
     /* GMV for this content type and channel. */
     @SerializedName("gmv")
@@ -58,24 +58,6 @@ data class GetShopPerformanceResponseDataPerformanceIntervalBreakdownContentBrea
 
 ) {
 
-    /**
-     * Channel type. Possible values: CREATOR, SELLER
-     *
-     * Values: CREATOR,SELLER
-     */
-    enum class Channel(val value: kotlin.String) {
-        @SerializedName(value = "CREATOR") CREATOR("CREATOR"),
-        @SerializedName(value = "SELLER") SELLER("SELLER");
-    }
-    /**
-     * Content type. Possible values: LIVE, VIDEO
-     *
-     * Values: LIVE,VIDEO
-     */
-    enum class ContentType(val value: kotlin.String) {
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO");
-    }
 
 }
 

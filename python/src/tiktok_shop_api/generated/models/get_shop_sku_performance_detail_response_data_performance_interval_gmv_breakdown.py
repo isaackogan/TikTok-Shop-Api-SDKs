@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_sku_performance_detail_response_data_performance_interval_gmv_breakdown_type import (
-    GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown")
@@ -21,7 +18,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown:
         amount (str | Unset): GMV amount for the corresponding type and currency.
         currency (str | Unset): GMV currency code (ISO 4217 standard). If LOCAL currency is requested, the value will be
             the local currency code of where the shop is registered (e.g. GBP).
-        type_ (GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownType | Unset): GMV breakdown type.
+        type_ (str | Unset): GMV breakdown type.
             Possible values:
             - LIVE: Live stream content.
             - VIDEO: Video content.
@@ -30,7 +27,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown:
 
     amount: str | Unset = UNSET
     currency: str | Unset = UNSET
-    type_: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownType | Unset = UNSET
+    type_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -38,9 +35,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown:
 
         currency = self.currency
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -61,12 +56,7 @@ class GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdown:
 
         currency = d.pop("currency", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetShopSKUPerformanceDetailResponseDataPerformanceIntervalGmvBreakdownType(_type_)
+        type_ = d.pop("type", UNSET)
 
         get_shop_sku_performance_detail_response_data_performance_interval_gmv_breakdown = cls(
             amount=amount,

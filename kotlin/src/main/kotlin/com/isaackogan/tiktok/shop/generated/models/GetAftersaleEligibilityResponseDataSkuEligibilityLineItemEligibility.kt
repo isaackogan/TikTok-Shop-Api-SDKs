@@ -44,7 +44,7 @@ data class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility 
 
     /* Aftersale request type. Possible values: - `CANCEL` - `REFUND` - `RETURN_AND_REFUND` */
     @SerializedName("request_type")
-    val requestType: GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility.RequestType? = null,
+    val requestType: kotlin.String? = null,
 
     /* Specifies the order line IDs. **Note:** This is a legacy field for new integrations use `order_line_list` instead. */
     @SerializedName("order_line_items_ids")
@@ -72,16 +72,6 @@ data class GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility 
 
 ) {
 
-    /**
-     * Aftersale request type. Possible values: - `CANCEL` - `REFUND` - `RETURN_AND_REFUND`
-     *
-     * Values: CANCEL,REFUND,RETURN_AND_REFUND
-     */
-    enum class RequestType(val value: kotlin.String) {
-        @SerializedName(value = "CANCEL") CANCEL("CANCEL"),
-        @SerializedName(value = "REFUND") REFUND("REFUND"),
-        @SerializedName(value = "RETURN_AND_REFUND") RETURN_AND_REFUND("RETURN_AND_REFUND");
-    }
 
 }
 

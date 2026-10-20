@@ -66,66 +66,10 @@ public class NewMessageListenerWebhookData {
   @javax.annotation.Nullable
   private String conversationId;
 
-  /**
-   * Message type, with possible values:      * TEXT   * PRODUCT_CARD   * TARGET_COLLABORATION_CARD   * FREE_SAMPLE_CARD
-   */
-  @JsonAdapter(MsgTypeEnum.Adapter.class)
-  public enum MsgTypeEnum {
-    TEXT("TEXT"),
-    
-    PRODUCT_CARD("PRODUCT_CARD"),
-    
-    TARGET_COLLABORATION_CARD("TARGET_COLLABORATION_CARD"),
-    
-    FREE_SAMPLE_CARD("FREE_SAMPLE_CARD");
-
-    private String value;
-
-    MsgTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static MsgTypeEnum fromValue(String value) {
-      for (MsgTypeEnum b : MsgTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<MsgTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final MsgTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public MsgTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return MsgTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      MsgTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_MSG_TYPE = "msg_type";
   @SerializedName(SERIALIZED_NAME_MSG_TYPE)
   @javax.annotation.Nullable
-  private MsgTypeEnum msgType;
+  private String msgType;
 
   public static final String SERIALIZED_NAME_CONTENT = "content";
   @SerializedName(SERIALIZED_NAME_CONTENT)
@@ -202,7 +146,7 @@ public class NewMessageListenerWebhookData {
   }
 
 
-  public NewMessageListenerWebhookData msgType(@javax.annotation.Nullable MsgTypeEnum msgType) {
+  public NewMessageListenerWebhookData msgType(@javax.annotation.Nullable String msgType) {
     this.msgType = msgType;
     return this;
   }
@@ -212,11 +156,11 @@ public class NewMessageListenerWebhookData {
    * @return msgType
    */
   @javax.annotation.Nullable
-  public MsgTypeEnum getMsgType() {
+  public String getMsgType() {
     return msgType;
   }
 
-  public void setMsgType(@javax.annotation.Nullable MsgTypeEnum msgType) {
+  public void setMsgType(@javax.annotation.Nullable String msgType) {
     this.msgType = msgType;
   }
 
@@ -407,10 +351,6 @@ public class NewMessageListenerWebhookData {
       }
       if ((jsonObj.get("msg_type") != null && !jsonObj.get("msg_type").isJsonNull()) && !jsonObj.get("msg_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `msg_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("msg_type").toString()));
-      }
-      // validate the optional field `msg_type`
-      if (jsonObj.get("msg_type") != null && !jsonObj.get("msg_type").isJsonNull()) {
-        MsgTypeEnum.validateJsonElement(jsonObj.get("msg_type"));
       }
       if ((jsonObj.get("content") != null && !jsonObj.get("content").isJsonNull()) && !jsonObj.get("content").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `content` to be a primitive type in the JSON string but got `%s`", jsonObj.get("content").toString()));

@@ -83,7 +83,7 @@ data class GetCategoryRulesResponseData (
 
     /* The list of special product types, excluding regular products, that your shop is allowed to list in this category.  Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a release date. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a duration. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.  **UK and SEA** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration.   **Note**: This field is omitted if you lack the permission to list special product types. Contact your account manager for assistance if you wish to list such products. */
     @SerializedName("allowed_special_product_types")
-    val allowedSpecialProductTypes: kotlin.collections.List<GetCategoryRulesResponseData.AllowedSpecialProductTypes>? = null,
+    val allowedSpecialProductTypes: kotlin.collections.List<kotlin.String>? = null,
 
     /* Product fees related rules. */
     @SerializedName("fees")
@@ -95,16 +95,6 @@ data class GetCategoryRulesResponseData (
 
 ) {
 
-    /**
-     * The list of special product types, excluding regular products, that your shop is allowed to list in this category.  Possible values based on the region: **US** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a release date. - `MADE_TO_ORDER`: The product is produced only after the order is received. Fulfillment can be extended by specifying a duration. - `CUSTOM`: The product requires a fulfillment timeline that exceeds the standard due to other factors. Fulfillment can be extended by specifying a duration.  **UK and SEA** - `PRE_ORDER`: The product is not yet available or released. Fulfillment can be extended by specifying a duration.   **Note**: This field is omitted if you lack the permission to list special product types. Contact your account manager for assistance if you wish to list such products.
-     *
-     * Values: PRE_ORDER,MADE_TO_ORDER,CUSTOM
-     */
-    enum class AllowedSpecialProductTypes(val value: kotlin.String) {
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER"),
-        @SerializedName(value = "CUSTOM") CUSTOM("CUSTOM");
-    }
 
 }
 

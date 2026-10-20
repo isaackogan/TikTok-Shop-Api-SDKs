@@ -35,22 +35,11 @@ export interface GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPro
      * Discount type of this activity. Enumerations:
      * - COUPON
      * - ACTIVITY
-     * @type {GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum}
+     * @type {string}
      * @memberof GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion
      */
-    discountType?: GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum;
+    discountType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum = {
-    Coupon: 'COUPON',
-    Activity: 'ACTIVITY'
-} as const;
-export type GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum = typeof GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum[keyof typeof GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotionDiscountTypeEnum];
-
 
 /**
  * Check if a given object implements the GetOrderPriceDetailsResponseDataLineItemSellerFundedShippingPromotion interface.

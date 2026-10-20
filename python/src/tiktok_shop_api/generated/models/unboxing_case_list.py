@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.unboxing_case_list_unbox_sku_type import UnboxingCaseListUnboxSkuType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UnboxingCaseList")
@@ -17,20 +16,18 @@ class UnboxingCaseList:
     """
     Attributes:
         unbox_sku (str | Unset): Unboxed sku code associated with the actual unboxed item.
-        unbox_sku_type (UnboxingCaseListUnboxSkuType | Unset): Indicates if the unboxed sku is a gift item
+        unbox_sku_type (str | Unset): Indicates if the unboxed sku is a gift item
             Enumerations: NORMAL or GIFT
     """
 
     unbox_sku: str | Unset = UNSET
-    unbox_sku_type: UnboxingCaseListUnboxSkuType | Unset = UNSET
+    unbox_sku_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         unbox_sku = self.unbox_sku
 
-        unbox_sku_type: str | Unset = UNSET
-        if not isinstance(self.unbox_sku_type, Unset):
-            unbox_sku_type = self.unbox_sku_type.value
+        unbox_sku_type = self.unbox_sku_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -47,12 +44,7 @@ class UnboxingCaseList:
         d = dict(src_dict)
         unbox_sku = d.pop("unbox_sku", UNSET)
 
-        _unbox_sku_type = d.pop("unbox_sku_type", UNSET)
-        unbox_sku_type: UnboxingCaseListUnboxSkuType | Unset
-        if isinstance(_unbox_sku_type, Unset):
-            unbox_sku_type = UNSET
-        else:
-            unbox_sku_type = UnboxingCaseListUnboxSkuType(_unbox_sku_type)
+        unbox_sku_type = d.pop("unbox_sku_type", UNSET)
 
         unboxing_case_list = cls(
             unbox_sku=unbox_sku,

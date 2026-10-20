@@ -43,10 +43,10 @@ export interface GetCreatorConversationMessagesResponseDataMessageMessageBody {
      * - NOTIFICATION
      * - EMOTICONS
      * - SYSTEM
-     * @type {GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum}
+     * @type {string}
      * @memberof GetCreatorConversationMessagesResponseDataMessageMessageBody
      */
-    type?: GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum;
+    type?: string;
     /**
      * Message content serialized as a JSON string. The JSON object depends on `type`:
      * - `TEXT`: `{"content": "simple text"}`
@@ -75,25 +75,6 @@ export interface GetCreatorConversationMessagesResponseDataMessageMessageBody {
      */
     senderId?: string;
 }
-
-
-/**
- * @export
- */
-export const GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum = {
-    Text: 'TEXT',
-    ProductCard: 'PRODUCT_CARD',
-    TargetCollaborationCard: 'TARGET_COLLABORATION_CARD',
-    FreeSampleCard: 'FREE_SAMPLE_CARD',
-    Image: 'IMAGE',
-    CrmTextWithImageCard: 'CRM_TEXT_WITH_IMAGE_CARD',
-    CrmTextWithProductsCard: 'CRM_TEXT_WITH_PRODUCTS_CARD',
-    Notification: 'NOTIFICATION',
-    Emoticons: 'EMOTICONS',
-    System: 'SYSTEM'
-} as const;
-export type GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum = typeof GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum[keyof typeof GetCreatorConversationMessagesResponseDataMessageMessageBodyTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCreatorConversationMessagesResponseDataMessageMessageBody interface.

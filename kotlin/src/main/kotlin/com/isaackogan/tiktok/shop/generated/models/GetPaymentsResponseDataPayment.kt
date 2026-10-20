@@ -56,7 +56,7 @@ data class GetPaymentsResponseDataPayment (
 
     /* The payment status, indicating whether payment has been transferred to the seller's bank account. Possible values: - PAID: Payment has been transferred to the seller. - FAILED: Payment transfer failed. - PROCESSING: Payment is currently being processed. */
     @SerializedName("status")
-    val status: GetPaymentsResponseDataPayment.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The final payment amount after currency exchange. */
     @SerializedName("amount")
@@ -84,16 +84,6 @@ data class GetPaymentsResponseDataPayment (
 
 ) {
 
-    /**
-     * The payment status, indicating whether payment has been transferred to the seller's bank account. Possible values: - PAID: Payment has been transferred to the seller. - FAILED: Payment transfer failed. - PROCESSING: Payment is currently being processed.
-     *
-     * Values: PAID,FAILED,PROCESSING
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PAID") PAID("PAID"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING");
-    }
 
 }
 

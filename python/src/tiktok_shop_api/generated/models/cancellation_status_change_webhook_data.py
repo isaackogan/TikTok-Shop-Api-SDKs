@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.cancellation_status_change_webhook_data_cancel_status import (
-    CancellationStatusChangeWebhookDataCancelStatus,
-)
-from ..models.cancellation_status_change_webhook_data_cancellations_role import (
-    CancellationStatusChangeWebhookDataCancellationsRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CancellationStatusChangeWebhookData")
@@ -22,14 +16,12 @@ class CancellationStatusChangeWebhookData:
     """
     Attributes:
         order_id (str | Unset): The identification of a TikTok Shop order
-        cancellations_role (CancellationStatusChangeWebhookDataCancellationsRole | Unset): The user who initiated a
-            cancellation, with possible values:
+        cancellations_role (str | Unset): The user who initiated a cancellation, with possible values:
 
              * BUYER
              * SELLER
              * SYSTEM
-        cancel_status (CancellationStatusChangeWebhookDataCancelStatus | Unset): Order cancellation status, with
-            possible values:
+        cancel_status (str | Unset): Order cancellation status, with possible values:
 
              * CANCELLATION_REQUEST_PENDING
              * CANCELLATION_REQUEST_SUCCESS
@@ -41,8 +33,8 @@ class CancellationStatusChangeWebhookData:
     """
 
     order_id: str | Unset = UNSET
-    cancellations_role: CancellationStatusChangeWebhookDataCancellationsRole | Unset = UNSET
-    cancel_status: CancellationStatusChangeWebhookDataCancelStatus | Unset = UNSET
+    cancellations_role: str | Unset = UNSET
+    cancel_status: str | Unset = UNSET
     cancel_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -50,13 +42,9 @@ class CancellationStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         order_id = self.order_id
 
-        cancellations_role: str | Unset = UNSET
-        if not isinstance(self.cancellations_role, Unset):
-            cancellations_role = self.cancellations_role.value
+        cancellations_role = self.cancellations_role
 
-        cancel_status: str | Unset = UNSET
-        if not isinstance(self.cancel_status, Unset):
-            cancel_status = self.cancel_status.value
+        cancel_status = self.cancel_status
 
         cancel_id = self.cancel_id
 
@@ -83,19 +71,9 @@ class CancellationStatusChangeWebhookData:
         d = dict(src_dict)
         order_id = d.pop("order_id", UNSET)
 
-        _cancellations_role = d.pop("cancellations_role", UNSET)
-        cancellations_role: CancellationStatusChangeWebhookDataCancellationsRole | Unset
-        if isinstance(_cancellations_role, Unset):
-            cancellations_role = UNSET
-        else:
-            cancellations_role = CancellationStatusChangeWebhookDataCancellationsRole(_cancellations_role)
+        cancellations_role = d.pop("cancellations_role", UNSET)
 
-        _cancel_status = d.pop("cancel_status", UNSET)
-        cancel_status: CancellationStatusChangeWebhookDataCancelStatus | Unset
-        if isinstance(_cancel_status, Unset):
-            cancel_status = UNSET
-        else:
-            cancel_status = CancellationStatusChangeWebhookDataCancelStatus(_cancel_status)
+        cancel_status = d.pop("cancel_status", UNSET)
 
         cancel_id = d.pop("cancel_id", UNSET)
 

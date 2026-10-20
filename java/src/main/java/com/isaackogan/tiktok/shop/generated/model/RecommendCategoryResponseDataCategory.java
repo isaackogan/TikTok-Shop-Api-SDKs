@@ -72,78 +72,10 @@ public class RecommendCategoryResponseDataCategory {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Gets or Sets permissionStatuses
-   */
-  @JsonAdapter(PermissionStatusesEnum.Adapter.class)
-  public enum PermissionStatusesEnum {
-    /**
-     * You have the permission to create products in this category.
-     */
-    AVAILABLE("AVAILABLE"),
-    
-    /**
-     * This is a restricted category and you do not have permission to use it. Submit an application through the Qualification Center on TikTok Shop Seller Center to gain access. In Seller Center, &#x60;INVITE_ONLY&#x60; is also known as &quot;restricted&quot;.
-     */
-    INVITE_ONLY("INVITE_ONLY"),
-    
-    /**
-     * This category is not in the shop&#39;s main category.
-     */
-    NON_MAIN_CATEGORY("NON_MAIN_CATEGORY"),
-    
-    /**
-     * This category is prohibited on TikTok Shop. If your product falls under this category, do not attempt to list it, as it will be rejected during audit. Applicable only for BR and MX markets.
-     */
-    PROHIBITED("PROHIBITED");
-
-    private String value;
-
-    PermissionStatusesEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PermissionStatusesEnum fromValue(String value) {
-      for (PermissionStatusesEnum b : PermissionStatusesEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PermissionStatusesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PermissionStatusesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PermissionStatusesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PermissionStatusesEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PermissionStatusesEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PERMISSION_STATUSES = "permission_statuses";
   @SerializedName(SERIALIZED_NAME_PERMISSION_STATUSES)
   @javax.annotation.Nullable
-  private List<PermissionStatusesEnum> permissionStatuses = new ArrayList<>();
+  private List<String> permissionStatuses = new ArrayList<>();
 
   public RecommendCategoryResponseDataCategory() {
   }
@@ -224,12 +156,12 @@ public class RecommendCategoryResponseDataCategory {
   }
 
 
-  public RecommendCategoryResponseDataCategory permissionStatuses(@javax.annotation.Nullable List<PermissionStatusesEnum> permissionStatuses) {
+  public RecommendCategoryResponseDataCategory permissionStatuses(@javax.annotation.Nullable List<String> permissionStatuses) {
     this.permissionStatuses = permissionStatuses;
     return this;
   }
 
-  public RecommendCategoryResponseDataCategory addPermissionStatusesItem(PermissionStatusesEnum permissionStatusesItem) {
+  public RecommendCategoryResponseDataCategory addPermissionStatusesItem(String permissionStatusesItem) {
     if (this.permissionStatuses == null) {
       this.permissionStatuses = new ArrayList<>();
     }
@@ -242,11 +174,11 @@ public class RecommendCategoryResponseDataCategory {
    * @return permissionStatuses
    */
   @javax.annotation.Nullable
-  public List<PermissionStatusesEnum> getPermissionStatuses() {
+  public List<String> getPermissionStatuses() {
     return permissionStatuses;
   }
 
-  public void setPermissionStatuses(@javax.annotation.Nullable List<PermissionStatusesEnum> permissionStatuses) {
+  public void setPermissionStatuses(@javax.annotation.Nullable List<String> permissionStatuses) {
     this.permissionStatuses = permissionStatuses;
   }
 

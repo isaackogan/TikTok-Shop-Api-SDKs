@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_manufacturers_response_data_manufacturer_regional_profile_locale import (
-    SearchManufacturersResponseDataManufacturerRegionalProfileLocale,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -22,8 +19,8 @@ T = TypeVar("T", bound="SearchManufacturersResponseDataManufacturerRegionalProfi
 class SearchManufacturersResponseDataManufacturerRegionalProfile:
     """
     Attributes:
-        locale (SearchManufacturersResponseDataManufacturerRegionalProfileLocale | Unset): The BCP-47 locale code
-            representing the language used for specifying the manufacturer information.
+        locale (str | Unset): The BCP-47 locale code representing the language used for specifying the manufacturer
+            information.
             Possible values:
             - de-DE
             - en-IE
@@ -40,7 +37,7 @@ class SearchManufacturersResponseDataManufacturerRegionalProfile:
             Max length: 500 characters
     """
 
-    locale: SearchManufacturersResponseDataManufacturerRegionalProfileLocale | Unset = UNSET
+    locale: str | Unset = UNSET
     name: str | Unset = UNSET
     registered_trade_name: str | Unset = UNSET
     email: str | Unset = UNSET
@@ -49,9 +46,7 @@ class SearchManufacturersResponseDataManufacturerRegionalProfile:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        locale: str | Unset = UNSET
-        if not isinstance(self.locale, Unset):
-            locale = self.locale.value
+        locale = self.locale
 
         name = self.name
 
@@ -88,12 +83,7 @@ class SearchManufacturersResponseDataManufacturerRegionalProfile:
         from ..models.phone_number import PhoneNumber  # noqa: PLC0415
 
         d = dict(src_dict)
-        _locale = d.pop("locale", UNSET)
-        locale: SearchManufacturersResponseDataManufacturerRegionalProfileLocale | Unset
-        if isinstance(_locale, Unset):
-            locale = UNSET
-        else:
-            locale = SearchManufacturersResponseDataManufacturerRegionalProfileLocale(_locale)
+        locale = d.pop("locale", UNSET)
 
         name = d.pop("name", UNSET)
 

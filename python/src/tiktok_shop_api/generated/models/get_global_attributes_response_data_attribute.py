@@ -1,18 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_global_attributes_response_data_attribute_optional_regions_item import (
-    GetGlobalAttributesResponseDataAttributeOptionalRegionsItem,
-)
-from ..models.get_global_attributes_response_data_attribute_required_regions_item import (
-    GetGlobalAttributesResponseDataAttributeRequiredRegionsItem,
-)
-from ..models.get_global_attributes_response_data_attribute_type import GetGlobalAttributesResponseDataAttributeType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -33,7 +26,7 @@ class GetGlobalAttributesResponseDataAttribute:
     Attributes:
         id (str | Unset): The ID of the built-in attribute.
         name (str | Unset): The name of the built-in attribute.
-        type_ (GetGlobalAttributesResponseDataAttributeType | Unset): The attribute type.
+        type_ (str | Unset): The attribute type.
             Possible values:
             - SALES_PROPERTY: Indicates sales attributes that define product variants.
             - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
@@ -62,9 +55,9 @@ class GetGlobalAttributesResponseDataAttribute:
             Guide](https://partner.tiktokshop.com/openlearn/guide/usecase?parent_id=7256668359046153985).
 
             Applicable only if `type=PRODUCT_PROPERTY` and `optional_regions` is not empty.
-        optional_regions (list[GetGlobalAttributesResponseDataAttributeOptionalRegionsItem] | Unset): The markets where
-            the attribute is purely optional, or required only under certain conditions. Refer to `requirement_conditions`
-            for details on markets with conditional requirements. This field is omitted when there are no optional markets.
+        optional_regions (list[str] | Unset): The markets where the attribute is purely optional, or required only under
+            certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements. This
+            field is omitted when there are no optional markets.
 
             Possible values:
             - AT: Austria
@@ -91,10 +84,10 @@ class GetGlobalAttributesResponseDataAttribute:
             - VN: Vietnam
             - MX: Mexico
             Applicable only if `is_requried=false`.
-        required_regions (list[GetGlobalAttributesResponseDataAttributeRequiredRegionsItem] | Unset): The markets where
-            the attribute is required without conditions. When `is_requried=true`, this list contains all of the seller's
-            markets. When `is_requried=false`, it contains only the markets where the attribute is unconditionally required.
-            This field is omitted when there are no unconditionally required markets.
+        required_regions (list[str] | Unset): The markets where the attribute is required without conditions. When
+            `is_requried=true`, this list contains all of the seller's markets. When `is_requried=false`, it contains only
+            the markets where the attribute is unconditionally required. This field is omitted when there are no
+            unconditionally required markets.
 
             Possible values:
             - AT: Austria
@@ -124,14 +117,14 @@ class GetGlobalAttributesResponseDataAttribute:
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
-    type_: GetGlobalAttributesResponseDataAttributeType | Unset = UNSET
+    type_: str | Unset = UNSET
     is_requried: bool | Unset = UNSET
     values: list[GetGlobalAttributesResponseDataAttributeValue] | Unset = UNSET
     is_multiple_selection: bool | Unset = UNSET
     is_customizable: bool | Unset = UNSET
     requirement_conditions: list[GetGlobalAttributesResponseDataAttributeRequirementCondition] | Unset = UNSET
-    optional_regions: list[GetGlobalAttributesResponseDataAttributeOptionalRegionsItem] | Unset = UNSET
-    required_regions: list[GetGlobalAttributesResponseDataAttributeRequiredRegionsItem] | Unset = UNSET
+    optional_regions: list[str] | Unset = UNSET
+    required_regions: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -139,9 +132,7 @@ class GetGlobalAttributesResponseDataAttribute:
 
         name = self.name
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         is_requried = self.is_requried
 
@@ -165,17 +156,11 @@ class GetGlobalAttributesResponseDataAttribute:
 
         optional_regions: list[str] | Unset = UNSET
         if not isinstance(self.optional_regions, Unset):
-            optional_regions = []
-            for optional_regions_item_data in self.optional_regions:
-                optional_regions_item = optional_regions_item_data.value
-                optional_regions.append(optional_regions_item)
+            optional_regions = self.optional_regions
 
         required_regions: list[str] | Unset = UNSET
         if not isinstance(self.required_regions, Unset):
-            required_regions = []
-            for required_regions_item_data in self.required_regions:
-                required_regions_item = required_regions_item_data.value
-                required_regions.append(required_regions_item)
+            required_regions = self.required_regions
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -217,12 +202,7 @@ class GetGlobalAttributesResponseDataAttribute:
 
         name = d.pop("name", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetGlobalAttributesResponseDataAttributeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetGlobalAttributesResponseDataAttributeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         is_requried = d.pop("is_requried", UNSET)
 
@@ -250,27 +230,9 @@ class GetGlobalAttributesResponseDataAttribute:
 
                 requirement_conditions.append(requirement_conditions_item)
 
-        _optional_regions = d.pop("optional_regions", UNSET)
-        optional_regions: list[GetGlobalAttributesResponseDataAttributeOptionalRegionsItem] | Unset = UNSET
-        if _optional_regions is not UNSET:
-            optional_regions = []
-            for optional_regions_item_data in _optional_regions:
-                optional_regions_item = GetGlobalAttributesResponseDataAttributeOptionalRegionsItem(
-                    optional_regions_item_data
-                )
+        optional_regions = cast(list[str], d.pop("optional_regions", UNSET))
 
-                optional_regions.append(optional_regions_item)
-
-        _required_regions = d.pop("required_regions", UNSET)
-        required_regions: list[GetGlobalAttributesResponseDataAttributeRequiredRegionsItem] | Unset = UNSET
-        if _required_regions is not UNSET:
-            required_regions = []
-            for required_regions_item_data in _required_regions:
-                required_regions_item = GetGlobalAttributesResponseDataAttributeRequiredRegionsItem(
-                    required_regions_item_data
-                )
-
-                required_regions.append(required_regions_item)
+        required_regions = cast(list[str], d.pop("required_regions", UNSET))
 
         get_global_attributes_response_data_attribute = cls(
             id=id,

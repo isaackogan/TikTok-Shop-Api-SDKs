@@ -6,9 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.check_listing_prerequisites_response_data_check_result_check_item import (
-    CheckListingPrerequisitesResponseDataCheckResultCheckItem,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CheckListingPrerequisitesResponseDataCheckResult")
@@ -18,8 +15,7 @@ T = TypeVar("T", bound="CheckListingPrerequisitesResponseDataCheckResult")
 class CheckListingPrerequisitesResponseDataCheckResult:
     """
     Attributes:
-        check_item (CheckListingPrerequisitesResponseDataCheckResultCheckItem | Unset): A requirement that the shop
-            needs to satisfy.
+        check_item (str | Unset): A requirement that the shop needs to satisfy.
             Possible values:
             - SHOP_STATUS
             - SHOP_TAX
@@ -35,15 +31,13 @@ class CheckListingPrerequisitesResponseDataCheckResult:
         fail_reasons (list[str] | Unset): The specific reasons for failing a certain `check_item`.
     """
 
-    check_item: CheckListingPrerequisitesResponseDataCheckResultCheckItem | Unset = UNSET
+    check_item: str | Unset = UNSET
     is_failed: bool | Unset = UNSET
     fail_reasons: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        check_item: str | Unset = UNSET
-        if not isinstance(self.check_item, Unset):
-            check_item = self.check_item.value
+        check_item = self.check_item
 
         is_failed = self.is_failed
 
@@ -66,12 +60,7 @@ class CheckListingPrerequisitesResponseDataCheckResult:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _check_item = d.pop("check_item", UNSET)
-        check_item: CheckListingPrerequisitesResponseDataCheckResultCheckItem | Unset
-        if isinstance(_check_item, Unset):
-            check_item = UNSET
-        else:
-            check_item = CheckListingPrerequisitesResponseDataCheckResultCheckItem(_check_item)
+        check_item = d.pop("check_item", UNSET)
 
         is_failed = d.pop("is_failed", UNSET)
 

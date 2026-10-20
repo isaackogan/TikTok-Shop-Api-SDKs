@@ -43,10 +43,10 @@ export interface GetConversationsResponseDataConversationParticipant {
      * - `BUYER`
      * - `SHOP`
      * - `CUSTOMER_SERVICE`
-     * @type {GetConversationsResponseDataConversationParticipantRoleEnum}
+     * @type {string}
      * @memberof GetConversationsResponseDataConversationParticipant
      */
-    role?: GetConversationsResponseDataConversationParticipantRoleEnum;
+    role?: string;
     /**
      * Participant's nickname.
      * @type {string}
@@ -59,32 +59,11 @@ export interface GetConversationsResponseDataConversationParticipant {
      * - TIKTOK_SHOP
      * - TOKOPEDIA
      * You cannot send platform-specific content to the buyer from a different platform. For example, when you send a product card to the Tokopedia buyer, you must ensure the product is listed on Tokopedia.
-     * @type {GetConversationsResponseDataConversationParticipantBuyerPlatformEnum}
+     * @type {string}
      * @memberof GetConversationsResponseDataConversationParticipant
      */
-    buyerPlatform?: GetConversationsResponseDataConversationParticipantBuyerPlatformEnum;
+    buyerPlatform?: string;
 }
-
-
-/**
- * @export
- */
-export const GetConversationsResponseDataConversationParticipantRoleEnum = {
-    Buyer: 'BUYER',
-    Shop: 'SHOP',
-    CustomerService: 'CUSTOMER_SERVICE'
-} as const;
-export type GetConversationsResponseDataConversationParticipantRoleEnum = typeof GetConversationsResponseDataConversationParticipantRoleEnum[keyof typeof GetConversationsResponseDataConversationParticipantRoleEnum];
-
-/**
- * @export
- */
-export const GetConversationsResponseDataConversationParticipantBuyerPlatformEnum = {
-    TiktokShop: 'TIKTOK_SHOP',
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetConversationsResponseDataConversationParticipantBuyerPlatformEnum = typeof GetConversationsResponseDataConversationParticipantBuyerPlatformEnum[keyof typeof GetConversationsResponseDataConversationParticipantBuyerPlatformEnum];
-
 
 /**
  * Check if a given object implements the GetConversationsResponseDataConversationParticipant interface.

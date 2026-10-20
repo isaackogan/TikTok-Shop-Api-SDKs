@@ -21,10 +21,10 @@ import { mapValues } from '../runtime';
 export interface GetCompassTaskListResponseDataTask {
     /**
      * Allowed values: CREATOR, BASE.
-     * @type {GetCompassTaskListResponseDataTaskModuleTypeEnum}
+     * @type {string}
      * @memberof GetCompassTaskListResponseDataTask
      */
-    moduleType?: GetCompassTaskListResponseDataTaskModuleTypeEnum;
+    moduleType?: string;
     /**
      * The ID of the offline report task. When the task status is `SUCCEEDED`, use this value as the `task_id` path parameter in `GET /affiliate_seller/202603/compass/offline_tasks/{task_id}/file` to download the completed export task's result file.
      * @type {string}
@@ -47,17 +47,6 @@ export interface GetCompassTaskListResponseDataTask {
      */
     status?: string;
 }
-
-
-/**
- * @export
- */
-export const GetCompassTaskListResponseDataTaskModuleTypeEnum = {
-    Creator: 'CREATOR',
-    Base: 'BASE'
-} as const;
-export type GetCompassTaskListResponseDataTaskModuleTypeEnum = typeof GetCompassTaskListResponseDataTaskModuleTypeEnum[keyof typeof GetCompassTaskListResponseDataTaskModuleTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCompassTaskListResponseDataTask interface.

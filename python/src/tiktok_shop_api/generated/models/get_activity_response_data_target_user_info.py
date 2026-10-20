@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_activity_response_data_target_user_info_user_type import GetActivityResponseDataTargetUserInfoUserType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetActivityResponseDataTargetUserInfo")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GetActivityResponseDataTargetUserInfo")
 class GetActivityResponseDataTargetUserInfo:
     """
     Attributes:
-        user_type (GetActivityResponseDataTargetUserInfoUserType | Unset): The targeted user type.
+        user_type (str | Unset): The targeted user type.
             Possible values:
             - `ALL_USER`
             - `SHOP_NEW_CUSTOMER`
@@ -25,13 +24,11 @@ class GetActivityResponseDataTargetUserInfo:
             - `SHOP_ABANDONED_CHECKOUTS_CUSTOMER`
     """
 
-    user_type: GetActivityResponseDataTargetUserInfoUserType | Unset = UNSET
+    user_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        user_type: str | Unset = UNSET
-        if not isinstance(self.user_type, Unset):
-            user_type = self.user_type.value
+        user_type = self.user_type
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -44,12 +41,7 @@ class GetActivityResponseDataTargetUserInfo:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _user_type = d.pop("user_type", UNSET)
-        user_type: GetActivityResponseDataTargetUserInfoUserType | Unset
-        if isinstance(_user_type, Unset):
-            user_type = UNSET
-        else:
-            user_type = GetActivityResponseDataTargetUserInfoUserType(_user_type)
+        user_type = d.pop("user_type", UNSET)
 
         get_activity_response_data_target_user_info = cls(
             user_type=user_type,

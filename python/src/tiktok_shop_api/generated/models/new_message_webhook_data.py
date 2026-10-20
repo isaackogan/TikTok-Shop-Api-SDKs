@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.new_message_webhook_data_type import NewMessageWebhookDataType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +23,7 @@ class NewMessageWebhookData:
         index (str | Unset): The message index that can be used to sort messages.
              Newer messages have a larger index.
         conversation_id (str | Unset): The identification of the conversation
-        type_ (NewMessageWebhookDataType | Unset): Message type, with possible values:
+        type_ (str | Unset): Message type, with possible values:
              * TEXT
              * IMAGE
              * ALLOCATED_SERVICE
@@ -100,7 +99,7 @@ class NewMessageWebhookData:
     message_id: str | Unset = UNSET
     index: str | Unset = UNSET
     conversation_id: str | Unset = UNSET
-    type_: NewMessageWebhookDataType | Unset = UNSET
+    type_: str | Unset = UNSET
     content: str | Unset = UNSET
     create_time: int | Unset = UNSET
     is_visible: bool | Unset = UNSET
@@ -114,9 +113,7 @@ class NewMessageWebhookData:
 
         conversation_id = self.conversation_id
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         content = self.content
 
@@ -161,12 +158,7 @@ class NewMessageWebhookData:
 
         conversation_id = d.pop("conversation_id", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: NewMessageWebhookDataType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = NewMessageWebhookDataType(_type_)
+        type_ = d.pop("type", UNSET)
 
         content = d.pop("content", UNSET)
 

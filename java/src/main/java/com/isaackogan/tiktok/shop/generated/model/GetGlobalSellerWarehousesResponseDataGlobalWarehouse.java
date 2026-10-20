@@ -60,68 +60,10 @@ public class GetGlobalSellerWarehousesResponseDataGlobalWarehouse {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Possible values: - SELLER: Warehouse owned by the seller.  - PLATFORM_COOPERATION: Warehouse owned by TikTok Shop.
-   */
-  @JsonAdapter(OwnershipEnum.Adapter.class)
-  public enum OwnershipEnum {
-    /**
-     * Warehouse owned by the seller.
-     */
-    SELLER("SELLER"),
-    
-    /**
-     * Warehouse owned by TikTok Shop.
-     */
-    PLATFORM_COOPERATION("PLATFORM_COOPERATION");
-
-    private String value;
-
-    OwnershipEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OwnershipEnum fromValue(String value) {
-      for (OwnershipEnum b : OwnershipEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OwnershipEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OwnershipEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OwnershipEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OwnershipEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OwnershipEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_OWNERSHIP = "ownership";
   @SerializedName(SERIALIZED_NAME_OWNERSHIP)
   @javax.annotation.Nullable
-  private OwnershipEnum ownership;
+  private String ownership;
 
   public GetGlobalSellerWarehousesResponseDataGlobalWarehouse() {
   }
@@ -164,7 +106,7 @@ public class GetGlobalSellerWarehousesResponseDataGlobalWarehouse {
   }
 
 
-  public GetGlobalSellerWarehousesResponseDataGlobalWarehouse ownership(@javax.annotation.Nullable OwnershipEnum ownership) {
+  public GetGlobalSellerWarehousesResponseDataGlobalWarehouse ownership(@javax.annotation.Nullable String ownership) {
     this.ownership = ownership;
     return this;
   }
@@ -174,11 +116,11 @@ public class GetGlobalSellerWarehousesResponseDataGlobalWarehouse {
    * @return ownership
    */
   @javax.annotation.Nullable
-  public OwnershipEnum getOwnership() {
+  public String getOwnership() {
     return ownership;
   }
 
-  public void setOwnership(@javax.annotation.Nullable OwnershipEnum ownership) {
+  public void setOwnership(@javax.annotation.Nullable String ownership) {
     this.ownership = ownership;
   }
 
@@ -301,10 +243,6 @@ public class GetGlobalSellerWarehousesResponseDataGlobalWarehouse {
       }
       if ((jsonObj.get("ownership") != null && !jsonObj.get("ownership").isJsonNull()) && !jsonObj.get("ownership").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `ownership` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ownership").toString()));
-      }
-      // validate the optional field `ownership`
-      if (jsonObj.get("ownership") != null && !jsonObj.get("ownership").isJsonNull()) {
-        OwnershipEnum.validateJsonElement(jsonObj.get("ownership"));
       }
   }
 

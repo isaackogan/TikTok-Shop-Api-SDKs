@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_inbound_method_detail_response_data_info_placement_fee_estimate_currency import (
-    GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrency,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate")
@@ -19,8 +16,7 @@ class GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate:
     """
     Attributes:
         amount (str | Unset): Placement fee amount.
-        currency (GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrency | Unset): The currency of the
-            placement fee amount.
+        currency (str | Unset): The currency of the placement fee amount.
 
             **Possible values:**
             * `USD`
@@ -31,15 +27,13 @@ class GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate:
     """
 
     amount: str | Unset = UNSET
-    currency: GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrency | Unset = UNSET
+    currency: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -56,12 +50,7 @@ class GetInboundMethodDetailResponseDataInfoPlacementFeeEstimate:
         d = dict(src_dict)
         amount = d.pop("amount", UNSET)
 
-        _currency = d.pop("currency", UNSET)
-        currency: GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetInboundMethodDetailResponseDataInfoPlacementFeeEstimateCurrency(_currency)
+        currency = d.pop("currency", UNSET)
 
         get_inbound_method_detail_response_data_info_placement_fee_estimate = cls(
             amount=amount,

@@ -165,108 +165,10 @@ public class GetGlobalProductResponseData {
   @javax.annotation.Nullable
   private List<String> manufacturerIds = new ArrayList<>();
 
-  /**
-   * The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN
-   */
-  @JsonAdapter(SourceLocaleEnum.Adapter.class)
-  public enum SourceLocaleEnum {
-    CS_CZ("cs-CZ"),
-    
-    DE_AT("de-AT"),
-    
-    DE_BE("de-BE"),
-    
-    DE_DE("de-DE"),
-    
-    EL_GR("el-GR"),
-    
-    EN_GB("en-GB"),
-    
-    EN_IE("en-IE"),
-    
-    EN_US("en-US"),
-    
-    ES_ES("es-ES"),
-    
-    ES_MX("es-MX"),
-    
-    FR_FR("fr-FR"),
-    
-    FR_BE("fr-BE"),
-    
-    HU_HU("hu-HU"),
-    
-    ID_ID("id-ID"),
-    
-    IT_IT("it-IT"),
-    
-    JA_JP("ja-JP"),
-    
-    MS_MY("ms-MY"),
-    
-    NL_NL("nl-NL"),
-    
-    NL_BE("nl-BE"),
-    
-    PL_PL("pl-PL"),
-    
-    PT_BR("pt-BR"),
-    
-    PT_PT("pt-PT"),
-    
-    TH_TH("th-TH"),
-    
-    VI_VN("vi-VN"),
-    
-    ZH_CN("zh-CN");
-
-    private String value;
-
-    SourceLocaleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SourceLocaleEnum fromValue(String value) {
-      for (SourceLocaleEnum b : SourceLocaleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SourceLocaleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SourceLocaleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SourceLocaleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SourceLocaleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SourceLocaleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SOURCE_LOCALE = "source_locale";
   @SerializedName(SERIALIZED_NAME_SOURCE_LOCALE)
   @javax.annotation.Nullable
-  private SourceLocaleEnum sourceLocale;
+  private String sourceLocale;
 
   public static final String SERIALIZED_NAME_EXTERNAL_GLOBAL_PRODUCT_ID = "external_global_product_id";
   @SerializedName(SERIALIZED_NAME_EXTERNAL_GLOBAL_PRODUCT_ID)
@@ -716,7 +618,7 @@ public class GetGlobalProductResponseData {
   }
 
 
-  public GetGlobalProductResponseData sourceLocale(@javax.annotation.Nullable SourceLocaleEnum sourceLocale) {
+  public GetGlobalProductResponseData sourceLocale(@javax.annotation.Nullable String sourceLocale) {
     this.sourceLocale = sourceLocale;
     return this;
   }
@@ -726,11 +628,11 @@ public class GetGlobalProductResponseData {
    * @return sourceLocale
    */
   @javax.annotation.Nullable
-  public SourceLocaleEnum getSourceLocale() {
+  public String getSourceLocale() {
     return sourceLocale;
   }
 
-  public void setSourceLocale(@javax.annotation.Nullable SourceLocaleEnum sourceLocale) {
+  public void setSourceLocale(@javax.annotation.Nullable String sourceLocale) {
     this.sourceLocale = sourceLocale;
   }
 
@@ -1022,10 +924,6 @@ public class GetGlobalProductResponseData {
       }
       if ((jsonObj.get("source_locale") != null && !jsonObj.get("source_locale").isJsonNull()) && !jsonObj.get("source_locale").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `source_locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("source_locale").toString()));
-      }
-      // validate the optional field `source_locale`
-      if (jsonObj.get("source_locale") != null && !jsonObj.get("source_locale").isJsonNull()) {
-        SourceLocaleEnum.validateJsonElement(jsonObj.get("source_locale"));
       }
       if ((jsonObj.get("external_global_product_id") != null && !jsonObj.get("external_global_product_id").isJsonNull()) && !jsonObj.get("external_global_product_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `external_global_product_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_global_product_id").toString()));

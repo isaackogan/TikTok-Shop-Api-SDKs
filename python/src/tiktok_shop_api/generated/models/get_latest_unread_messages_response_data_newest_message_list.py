@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_latest_unread_messages_response_data_newest_message_list_type import (
-    GetLatestUnreadMessagesResponseDataNewestMessageListType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetLatestUnreadMessagesResponseDataNewestMessageList")
@@ -30,7 +27,7 @@ class GetLatestUnreadMessagesResponseDataNewestMessageList:
             - `CRM_TEXT_WITH_PRODUCTS_CARD`: `{"title": "abc", "content": "efg", "product_ids": [123, 456, 789, 222]}`
             - `NOTIFICATION` or `SYSTEM`: `{"content": "notification or system message"}`
             - `EMOTICONS`: `{"height": "110", "url": "<image URL>", "width": "110"}`
-        type_ (GetLatestUnreadMessagesResponseDataNewestMessageListType | Unset): Message type. Possible values:
+        type_ (str | Unset): Message type. Possible values:
             - TEXT
             - PRODUCT_CARD
             - TARGET_COLLABORATION_CARD
@@ -47,7 +44,7 @@ class GetLatestUnreadMessagesResponseDataNewestMessageList:
 
     conversation_id: str | Unset = UNSET
     content: str | Unset = UNSET
-    type_: GetLatestUnreadMessagesResponseDataNewestMessageListType | Unset = UNSET
+    type_: str | Unset = UNSET
     sender_id: str | Unset = UNSET
     unread_message_count: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -57,9 +54,7 @@ class GetLatestUnreadMessagesResponseDataNewestMessageList:
 
         content = self.content
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         sender_id = self.sender_id
 
@@ -88,12 +83,7 @@ class GetLatestUnreadMessagesResponseDataNewestMessageList:
 
         content = d.pop("content", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetLatestUnreadMessagesResponseDataNewestMessageListType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetLatestUnreadMessagesResponseDataNewestMessageListType(_type_)
+        type_ = d.pop("type", UNSET)
 
         sender_id = d.pop("sender_id", UNSET)
 

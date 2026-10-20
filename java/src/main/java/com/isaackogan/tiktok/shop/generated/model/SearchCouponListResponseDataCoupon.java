@@ -100,98 +100,10 @@ public class SearchCouponListResponseDataCoupon {
   @javax.annotation.Nullable
   private String promoCode;
 
-  /**
-   * The target buyer segment of the coupon. Possible enumerations are: - &#x60;ALL&#x60;: May be discovered and claimed by all TTS buyers. - &#x60;NEW&#x60;:Customers who have never purchased from your shop. - &#x60;REPEAT_CUSTOMERS&#x60;: People who have previously placed orders in your shop and made another purchase within certain days(30 days for non-US and 90 days for US). - &#x60;RECENT_CUSTOMERS&#x60;: People who have made their first purchase in your shop in the past certain days(30 days for non-US and 90 days for US). - &#x60;FREQUENT_CUSTOMERS&#x60;: Customers with more than 1 purchase within the last 90 days. - &#x60;LAPSED_CUSTOMERS&#x60;: Customers with at least 1 purchase in the past 365 days but no purchases within the last certain days(90 days for non-US and 30 days for US). - &#x60;NEW_FOLLOWERS&#x60;: People who started following the TikTok account of your shop in the past 30 days. - &#x60;EXISTING_ACTIVE_FOLLOWERS&#x60;: People who followed the TikTok account of your shop and engaged with your shop through LIVE, short videos or product cards in the past 30 days.
-   */
-  @JsonAdapter(TargetBuyerSegmentEnum.Adapter.class)
-  public enum TargetBuyerSegmentEnum {
-    /**
-     * May be discovered and claimed by all TTS buyers.
-     */
-    ALL("ALL"),
-    
-    /**
-     * Customers who have never purchased from your shop.
-     */
-    NEW("NEW"),
-    
-    /**
-     * People who have previously placed orders in your shop and made another purchase within certain days(30 days for non-US and 90 days for US).
-     */
-    REPEAT_CUSTOMERS("REPEAT_CUSTOMERS"),
-    
-    /**
-     * People who have made their first purchase in your shop in the past certain days(30 days for non-US and 90 days for US).
-     */
-    RECENT_CUSTOMERS("RECENT_CUSTOMERS"),
-    
-    /**
-     * Customers with more than 1 purchase within the last 90 days.
-     */
-    FREQUENT_CUSTOMERS("FREQUENT_CUSTOMERS"),
-    
-    /**
-     * Customers with at least 1 purchase in the past 365 days but no purchases within the last certain days(90 days for non-US and 30 days for US).
-     */
-    LAPSED_CUSTOMERS("LAPSED_CUSTOMERS"),
-    
-    /**
-     * People who started following the TikTok account of your shop in the past 30 days.
-     */
-    NEW_FOLLOWERS("NEW_FOLLOWERS"),
-    
-    /**
-     * People who followed the TikTok account of your shop and engaged with your shop through LIVE, short videos or product cards in the past 30 days.
-     */
-    EXISTING_ACTIVE_FOLLOWERS("EXISTING_ACTIVE_FOLLOWERS");
-
-    private String value;
-
-    TargetBuyerSegmentEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TargetBuyerSegmentEnum fromValue(String value) {
-      for (TargetBuyerSegmentEnum b : TargetBuyerSegmentEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TargetBuyerSegmentEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TargetBuyerSegmentEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TargetBuyerSegmentEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TargetBuyerSegmentEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TargetBuyerSegmentEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TARGET_BUYER_SEGMENT = "target_buyer_segment";
   @SerializedName(SERIALIZED_NAME_TARGET_BUYER_SEGMENT)
   @javax.annotation.Nullable
-  private TargetBuyerSegmentEnum targetBuyerSegment;
+  private String targetBuyerSegment;
 
   public static final String SERIALIZED_NAME_USAGE_LIMITS = "usage_limits";
   @SerializedName(SERIALIZED_NAME_USAGE_LIMITS)
@@ -208,68 +120,10 @@ public class SearchCouponListResponseDataCoupon {
   @javax.annotation.Nullable
   private GetCouponResponseDataCouponThreshold threshold;
 
-  /**
-   * The range of the products which the coupon applies to. The possible enumerations are: - &#x60;FULL_SHOP&#x60;: All products sold in the shop are eligible for the coupon. - &#x60;SPECIFIC_PRODUCTS&#x60;: Only specified products are eligible for the coupon. The list of specified products are returned in the response of the &#x60;get_coupon&#x60; API.
-   */
-  @JsonAdapter(ProductScopeEnum.Adapter.class)
-  public enum ProductScopeEnum {
-    /**
-     * All products sold in the shop are eligible for the coupon.
-     */
-    FULL_SHOP("FULL_SHOP"),
-    
-    /**
-     * Only specified products are eligible for the coupon. The list of specified products are returned in the response of the &#x60;get_coupon&#x60; API.
-     */
-    SPECIFIC_PRODUCTS("SPECIFIC_PRODUCTS");
-
-    private String value;
-
-    ProductScopeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ProductScopeEnum fromValue(String value) {
-      for (ProductScopeEnum b : ProductScopeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ProductScopeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ProductScopeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ProductScopeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ProductScopeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ProductScopeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_PRODUCT_SCOPE = "product_scope";
   @SerializedName(SERIALIZED_NAME_PRODUCT_SCOPE)
   @javax.annotation.Nullable
-  private ProductScopeEnum productScope;
+  private String productScope;
 
   public static final String SERIALIZED_NAME_CREATION_SOURCE = "creation_source";
   @SerializedName(SERIALIZED_NAME_CREATION_SOURCE)
@@ -450,7 +304,7 @@ public class SearchCouponListResponseDataCoupon {
   }
 
 
-  public SearchCouponListResponseDataCoupon targetBuyerSegment(@javax.annotation.Nullable TargetBuyerSegmentEnum targetBuyerSegment) {
+  public SearchCouponListResponseDataCoupon targetBuyerSegment(@javax.annotation.Nullable String targetBuyerSegment) {
     this.targetBuyerSegment = targetBuyerSegment;
     return this;
   }
@@ -460,11 +314,11 @@ public class SearchCouponListResponseDataCoupon {
    * @return targetBuyerSegment
    */
   @javax.annotation.Nullable
-  public TargetBuyerSegmentEnum getTargetBuyerSegment() {
+  public String getTargetBuyerSegment() {
     return targetBuyerSegment;
   }
 
-  public void setTargetBuyerSegment(@javax.annotation.Nullable TargetBuyerSegmentEnum targetBuyerSegment) {
+  public void setTargetBuyerSegment(@javax.annotation.Nullable String targetBuyerSegment) {
     this.targetBuyerSegment = targetBuyerSegment;
   }
 
@@ -526,7 +380,7 @@ public class SearchCouponListResponseDataCoupon {
   }
 
 
-  public SearchCouponListResponseDataCoupon productScope(@javax.annotation.Nullable ProductScopeEnum productScope) {
+  public SearchCouponListResponseDataCoupon productScope(@javax.annotation.Nullable String productScope) {
     this.productScope = productScope;
     return this;
   }
@@ -536,11 +390,11 @@ public class SearchCouponListResponseDataCoupon {
    * @return productScope
    */
   @javax.annotation.Nullable
-  public ProductScopeEnum getProductScope() {
+  public String getProductScope() {
     return productScope;
   }
 
-  public void setProductScope(@javax.annotation.Nullable ProductScopeEnum productScope) {
+  public void setProductScope(@javax.annotation.Nullable String productScope) {
     this.productScope = productScope;
   }
 
@@ -724,10 +578,6 @@ public class SearchCouponListResponseDataCoupon {
       if ((jsonObj.get("target_buyer_segment") != null && !jsonObj.get("target_buyer_segment").isJsonNull()) && !jsonObj.get("target_buyer_segment").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `target_buyer_segment` to be a primitive type in the JSON string but got `%s`", jsonObj.get("target_buyer_segment").toString()));
       }
-      // validate the optional field `target_buyer_segment`
-      if (jsonObj.get("target_buyer_segment") != null && !jsonObj.get("target_buyer_segment").isJsonNull()) {
-        TargetBuyerSegmentEnum.validateJsonElement(jsonObj.get("target_buyer_segment"));
-      }
       // validate the optional field `usage_limits`
       if (jsonObj.get("usage_limits") != null && !jsonObj.get("usage_limits").isJsonNull()) {
         UsageLimit.validateJsonElement(jsonObj.get("usage_limits"));
@@ -742,10 +592,6 @@ public class SearchCouponListResponseDataCoupon {
       }
       if ((jsonObj.get("product_scope") != null && !jsonObj.get("product_scope").isJsonNull()) && !jsonObj.get("product_scope").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `product_scope` to be a primitive type in the JSON string but got `%s`", jsonObj.get("product_scope").toString()));
-      }
-      // validate the optional field `product_scope`
-      if (jsonObj.get("product_scope") != null && !jsonObj.get("product_scope").isJsonNull()) {
-        ProductScopeEnum.validateJsonElement(jsonObj.get("product_scope"));
       }
       if ((jsonObj.get("creation_source") != null && !jsonObj.get("creation_source").isJsonNull()) && !jsonObj.get("creation_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `creation_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("creation_source").toString()));

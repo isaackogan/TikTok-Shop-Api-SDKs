@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.gender_distribution_gender import GenderDistributionGender
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GenderDistribution")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GenderDistribution")
 class GenderDistribution:
     """
     Attributes:
-        gender (GenderDistributionGender | Unset): Viewer gender. Possible values:
+        gender (str | Unset): Viewer gender. Possible values:
 
             - MALE: male viewers
 
@@ -25,14 +24,12 @@ class GenderDistribution:
             decimal fraction.
     """
 
-    gender: GenderDistributionGender | Unset = UNSET
+    gender: str | Unset = UNSET
     percentage: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        gender: str | Unset = UNSET
-        if not isinstance(self.gender, Unset):
-            gender = self.gender.value
+        gender = self.gender
 
         percentage = self.percentage
 
@@ -49,12 +46,7 @@ class GenderDistribution:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _gender = d.pop("gender", UNSET)
-        gender: GenderDistributionGender | Unset
-        if isinstance(_gender, Unset):
-            gender = UNSET
-        else:
-            gender = GenderDistributionGender(_gender)
+        gender = d.pop("gender", UNSET)
 
         percentage = d.pop("percentage", UNSET)
 

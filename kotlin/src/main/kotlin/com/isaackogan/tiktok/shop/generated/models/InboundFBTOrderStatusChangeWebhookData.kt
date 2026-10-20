@@ -43,7 +43,7 @@ data class InboundFBTOrderStatusChangeWebhookData (
 
     /* Inbound order status. Possible enumerations:  - TO_BE_RECEIVED  - ARRIVE_HUB,  - RECEIVING,  - PARTIALLY_RECEIVED,  - RECEIVED,  - CANCELLED */
     @SerializedName("order_status")
-    val orderStatus: InboundFBTOrderStatusChangeWebhookData.OrderStatus? = null,
+    val orderStatus: kotlin.String? = null,
 
     /* The time when the change occurred. Unix timestamp. */
     @SerializedName("update_time")
@@ -51,19 +51,6 @@ data class InboundFBTOrderStatusChangeWebhookData (
 
 ) {
 
-    /**
-     * Inbound order status. Possible enumerations:  - TO_BE_RECEIVED  - ARRIVE_HUB,  - RECEIVING,  - PARTIALLY_RECEIVED,  - RECEIVED,  - CANCELLED
-     *
-     * Values: TO_BE_RECEIVED,ARRIVE_HUB,RECEIVING,PARTIALLY_RECEIVED,RECEIVED,CANCELLED
-     */
-    enum class OrderStatus(val value: kotlin.String) {
-        @SerializedName(value = "TO_BE_RECEIVED") TO_BE_RECEIVED("TO_BE_RECEIVED"),
-        @SerializedName(value = "ARRIVE_HUB") ARRIVE_HUB("ARRIVE_HUB"),
-        @SerializedName(value = "RECEIVING") RECEIVING("RECEIVING"),
-        @SerializedName(value = "PARTIALLY_RECEIVED") PARTIALLY_RECEIVED("PARTIALLY_RECEIVED"),
-        @SerializedName(value = "RECEIVED") RECEIVED("RECEIVED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
 
 }
 

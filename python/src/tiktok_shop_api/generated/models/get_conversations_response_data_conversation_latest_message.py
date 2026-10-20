@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_conversations_response_data_conversation_latest_message_type import (
-    GetConversationsResponseDataConversationLatestMessageType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -25,7 +22,7 @@ class GetConversationsResponseDataConversationLatestMessage:
     """
     Attributes:
         id (str | Unset): Message ID.
-        type_ (GetConversationsResponseDataConversationLatestMessageType | Unset): Message type.
+        type_ (str | Unset): Message type.
             Possible enumerations:
             - TEXT
             - IMAGE
@@ -128,7 +125,7 @@ class GetConversationsResponseDataConversationLatestMessage:
     """
 
     id: str | Unset = UNSET
-    type_: GetConversationsResponseDataConversationLatestMessageType | Unset = UNSET
+    type_: str | Unset = UNSET
     content: str | Unset = UNSET
     create_time: int | Unset = UNSET
     is_visible: bool | Unset = UNSET
@@ -139,9 +136,7 @@ class GetConversationsResponseDataConversationLatestMessage:
     def to_dict(self) -> dict[str, Any]:
         id = self.id
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         content = self.content
 
@@ -184,12 +179,7 @@ class GetConversationsResponseDataConversationLatestMessage:
         d = dict(src_dict)
         id = d.pop("id", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetConversationsResponseDataConversationLatestMessageType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetConversationsResponseDataConversationLatestMessageType(_type_)
+        type_ = d.pop("type", UNSET)
 
         content = d.pop("content", UNSET)
 

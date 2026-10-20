@@ -69,64 +69,10 @@ public class GetShopProductsResponseDataProduct {
   @javax.annotation.Nullable
   private Price price;
 
-  /**
-   * Showcase add status with possible values: - ADDABLE - ADDED - REJECTED
-   */
-  @JsonAdapter(AddedStatusEnum.Adapter.class)
-  public enum AddedStatusEnum {
-    ADDABLE("ADDABLE"),
-    
-    ADDED("ADDED"),
-    
-    REJECTED("REJECTED");
-
-    private String value;
-
-    AddedStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AddedStatusEnum fromValue(String value) {
-      for (AddedStatusEnum b : AddedStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AddedStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AddedStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AddedStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AddedStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AddedStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_ADDED_STATUS = "added_status";
   @SerializedName(SERIALIZED_NAME_ADDED_STATUS)
   @javax.annotation.Nullable
-  private AddedStatusEnum addedStatus;
+  private String addedStatus;
 
   public static final String SERIALIZED_NAME_BRAND_NAME = "brand_name";
   @SerializedName(SERIALIZED_NAME_BRAND_NAME)
@@ -203,7 +149,7 @@ public class GetShopProductsResponseDataProduct {
   }
 
 
-  public GetShopProductsResponseDataProduct addedStatus(@javax.annotation.Nullable AddedStatusEnum addedStatus) {
+  public GetShopProductsResponseDataProduct addedStatus(@javax.annotation.Nullable String addedStatus) {
     this.addedStatus = addedStatus;
     return this;
   }
@@ -213,11 +159,11 @@ public class GetShopProductsResponseDataProduct {
    * @return addedStatus
    */
   @javax.annotation.Nullable
-  public AddedStatusEnum getAddedStatus() {
+  public String getAddedStatus() {
     return addedStatus;
   }
 
-  public void setAddedStatus(@javax.annotation.Nullable AddedStatusEnum addedStatus) {
+  public void setAddedStatus(@javax.annotation.Nullable String addedStatus) {
     this.addedStatus = addedStatus;
   }
 
@@ -417,10 +363,6 @@ public class GetShopProductsResponseDataProduct {
       }
       if ((jsonObj.get("added_status") != null && !jsonObj.get("added_status").isJsonNull()) && !jsonObj.get("added_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `added_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("added_status").toString()));
-      }
-      // validate the optional field `added_status`
-      if (jsonObj.get("added_status") != null && !jsonObj.get("added_status").isJsonNull()) {
-        AddedStatusEnum.validateJsonElement(jsonObj.get("added_status"));
       }
       if ((jsonObj.get("brand_name") != null && !jsonObj.get("brand_name").isJsonNull()) && !jsonObj.get("brand_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `brand_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brand_name").toString()));

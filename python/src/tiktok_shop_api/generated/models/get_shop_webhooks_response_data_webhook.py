@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_shop_webhooks_response_data_webhook_event_type import GetShopWebhooksResponseDataWebhookEventType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetShopWebhooksResponseDataWebhook")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GetShopWebhooksResponseDataWebhook")
 class GetShopWebhooksResponseDataWebhook:
     """
     Attributes:
-        event_type (GetShopWebhooksResponseDataWebhookEventType | Unset): The topic of the webhook event.
+        event_type (str | Unset): The topic of the webhook event.
             Possible values:
             - `ORDER_STATUS_CHANGE`: Triggers on each order status update, from new order placement through all subsequent
             status changes. See [Order Status change](650300b8a57708028b430b4a).
@@ -60,16 +59,14 @@ class GetShopWebhooksResponseDataWebhook:
             milliseconds.
     """
 
-    event_type: GetShopWebhooksResponseDataWebhookEventType | Unset = UNSET
+    event_type: str | Unset = UNSET
     address: str | Unset = UNSET
     create_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        event_type: str | Unset = UNSET
-        if not isinstance(self.event_type, Unset):
-            event_type = self.event_type.value
+        event_type = self.event_type
 
         address = self.address
 
@@ -94,12 +91,7 @@ class GetShopWebhooksResponseDataWebhook:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _event_type = d.pop("event_type", UNSET)
-        event_type: GetShopWebhooksResponseDataWebhookEventType | Unset
-        if isinstance(_event_type, Unset):
-            event_type = UNSET
-        else:
-            event_type = GetShopWebhooksResponseDataWebhookEventType(_event_type)
+        event_type = d.pop("event_type", UNSET)
 
         address = d.pop("address", UNSET)
 

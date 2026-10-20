@@ -60,140 +60,15 @@ public class RMAStatusUpdateWebhookData {
   @javax.annotation.Nullable
   private String aftersalesRequestId;
 
-  /**
-   * Role that initiated the return flow. Possible enumerations:      * &#x60;BUYER&#x60;   * &#x60;SELLER&#x60;
-   */
-  @JsonAdapter(ReturnRoleEnum.Adapter.class)
-  public enum ReturnRoleEnum {
-    BUYER("BUYER"),
-    
-    SELLER("SELLER");
-
-    private String value;
-
-    ReturnRoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnRoleEnum fromValue(String value) {
-      for (ReturnRoleEnum b : ReturnRoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnRoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnRoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnRoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnRoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnRoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_ROLE = "return_role";
   @SerializedName(SERIALIZED_NAME_RETURN_ROLE)
   @javax.annotation.Nullable
-  private ReturnRoleEnum returnRole;
-
-  /**
-   * Current RMA status. Possible enumerations:      * &#x60;INIT&#x60; &#x3D; The RMA has been created   * &#x60;AWAITING_BUYER_SHIPPED&#x60; &#x3D; Awaiting buyer&#39;s action to ship the return package with carrier   * &#x60;RETURN_IN_TRANSIT&#x60; &#x3D; Buyer has shipped the return and is in transit to the sellers destination warehouse   * &#x60;PENDING_PACKAGE_REVIEW&#x60; &#x3D; The return package has been delivered and is pending seller package review. The seller has **2-4 business days** **SLA** to respond with a refund review/decision. Please refer to the latest seller academy document.   * &#x60;PACKAGE_REVIEW_COMPLETED&#x60; &#x3D; The package review lifecycle is complete, and the RMA refund has either been approved or rejected.
-   */
-  @JsonAdapter(RmaStatusEnum.Adapter.class)
-  public enum RmaStatusEnum {
-    /**
-     * The RMA has been created
-     */
-    INIT("INIT"),
-    
-    /**
-     * Awaiting buyer&#39;s action to ship the return package with carrier
-     */
-    AWAITING_BUYER_SHIPPED("AWAITING_BUYER_SHIPPED"),
-    
-    /**
-     * Buyer has shipped the return and is in transit to the sellers destination warehouse
-     */
-    RETURN_IN_TRANSIT("RETURN_IN_TRANSIT"),
-    
-    /**
-     * The return package has been delivered and is pending seller package review. The seller has 2-4 business days SLA to respond with a refund review/decision. Please refer to the latest seller academy document.
-     */
-    PENDING_PACKAGE_REVIEW("PENDING_PACKAGE_REVIEW"),
-    
-    /**
-     * The package review lifecycle is complete, and the RMA refund has either been approved or rejected.
-     */
-    PACKAGE_REVIEW_COMPLETED("PACKAGE_REVIEW_COMPLETED");
-
-    private String value;
-
-    RmaStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RmaStatusEnum fromValue(String value) {
-      for (RmaStatusEnum b : RmaStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RmaStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RmaStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RmaStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RmaStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RmaStatusEnum.fromValue(value);
-    }
-  }
+  private String returnRole;
 
   public static final String SERIALIZED_NAME_RMA_STATUS = "rma_status";
   @SerializedName(SERIALIZED_NAME_RMA_STATUS)
   @javax.annotation.Nullable
-  private RmaStatusEnum rmaStatus;
+  private String rmaStatus;
 
   public static final String SERIALIZED_NAME_RMA_REQUEST_CREATE_TIME = "rma_request_create_time";
   @SerializedName(SERIALIZED_NAME_RMA_REQUEST_CREATE_TIME)
@@ -246,7 +121,7 @@ public class RMAStatusUpdateWebhookData {
   }
 
 
-  public RMAStatusUpdateWebhookData returnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public RMAStatusUpdateWebhookData returnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
     return this;
   }
@@ -256,16 +131,16 @@ public class RMAStatusUpdateWebhookData {
    * @return returnRole
    */
   @javax.annotation.Nullable
-  public ReturnRoleEnum getReturnRole() {
+  public String getReturnRole() {
     return returnRole;
   }
 
-  public void setReturnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public void setReturnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
   }
 
 
-  public RMAStatusUpdateWebhookData rmaStatus(@javax.annotation.Nullable RmaStatusEnum rmaStatus) {
+  public RMAStatusUpdateWebhookData rmaStatus(@javax.annotation.Nullable String rmaStatus) {
     this.rmaStatus = rmaStatus;
     return this;
   }
@@ -275,11 +150,11 @@ public class RMAStatusUpdateWebhookData {
    * @return rmaStatus
    */
   @javax.annotation.Nullable
-  public RmaStatusEnum getRmaStatus() {
+  public String getRmaStatus() {
     return rmaStatus;
   }
 
-  public void setRmaStatus(@javax.annotation.Nullable RmaStatusEnum rmaStatus) {
+  public void setRmaStatus(@javax.annotation.Nullable String rmaStatus) {
     this.rmaStatus = rmaStatus;
   }
 
@@ -447,16 +322,8 @@ public class RMAStatusUpdateWebhookData {
       if ((jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) && !jsonObj.get("return_role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_role").toString()));
       }
-      // validate the optional field `return_role`
-      if (jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) {
-        ReturnRoleEnum.validateJsonElement(jsonObj.get("return_role"));
-      }
       if ((jsonObj.get("rma_status") != null && !jsonObj.get("rma_status").isJsonNull()) && !jsonObj.get("rma_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `rma_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("rma_status").toString()));
-      }
-      // validate the optional field `rma_status`
-      if (jsonObj.get("rma_status") != null && !jsonObj.get("rma_status").isJsonNull()) {
-        RmaStatusEnum.validateJsonElement(jsonObj.get("rma_status"));
       }
   }
 

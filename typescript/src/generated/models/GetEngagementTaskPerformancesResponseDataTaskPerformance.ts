@@ -36,10 +36,10 @@ export interface GetEngagementTaskPerformancesResponseDataTaskPerformance {
      * - `CANCELED`: The task was canceled.
      * - `SUCCESS`: The task completed successfully.
      * - `DELETED`: The task was deleted.
-     * @type {GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum}
+     * @type {string}
      * @memberof GetEngagementTaskPerformancesResponseDataTaskPerformance
      */
-    status?: GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum;
+    status?: string;
     /**
      * The number of users that received the message.
      * @type {number}
@@ -71,23 +71,6 @@ export interface GetEngagementTaskPerformancesResponseDataTaskPerformance {
      */
     claimedCouponsCount?: number;
 }
-
-
-/**
- * @export
- */
-export const GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Draft: 'DRAFT',
-    Waiting: 'WAITING',
-    Sending: 'SENDING',
-    Failed: 'FAILED',
-    Canceled: 'CANCELED',
-    Success: 'SUCCESS',
-    Deleted: 'DELETED'
-} as const;
-export type GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum = typeof GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum[keyof typeof GetEngagementTaskPerformancesResponseDataTaskPerformanceStatusEnum];
-
 
 /**
  * Check if a given object implements the GetEngagementTaskPerformancesResponseDataTaskPerformance interface.

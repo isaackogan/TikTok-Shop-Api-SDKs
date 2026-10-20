@@ -35,28 +35,11 @@ export interface CreateReturnResponseData {
      * - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded.
      * - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system
      * - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded.
-     * @type {CreateReturnResponseDataReturnStatusEnum}
+     * @type {string}
      * @memberof CreateReturnResponseData
      */
-    returnStatus?: CreateReturnResponseDataReturnStatusEnum;
+    returnStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const CreateReturnResponseDataReturnStatusEnum = {
-    ReturnOrRefundRequestPending: 'RETURN_OR_REFUND_REQUEST_PENDING',
-    RefundOrReturnRequestReject: 'REFUND_OR_RETURN_REQUEST_REJECT',
-    AwaitingBuyerShip: 'AWAITING_BUYER_SHIP',
-    BuyerShippedItem: 'BUYER_SHIPPED_ITEM',
-    RejectReceivePackage: 'REJECT_RECEIVE_PACKAGE',
-    ReturnOrRefundRequestSuccess: 'RETURN_OR_REFUND_REQUEST_SUCCESS',
-    ReturnOrRefundRequestCancel: 'RETURN_OR_REFUND_REQUEST_CANCEL',
-    ReturnOrRefundRequestComplete: 'RETURN_OR_REFUND_REQUEST_COMPLETE'
-} as const;
-export type CreateReturnResponseDataReturnStatusEnum = typeof CreateReturnResponseDataReturnStatusEnum[keyof typeof CreateReturnResponseDataReturnStatusEnum];
-
 
 /**
  * Check if a given object implements the CreateReturnResponseData interface.

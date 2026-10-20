@@ -25,23 +25,11 @@ export interface PartialEditProductResponseDataAudit {
      * - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.
      * - AUDITING: The product is currently being audited.
      * - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the edits are immediately published on the platform.
-     * @type {PartialEditProductResponseDataAuditStatusEnum}
+     * @type {string}
      * @memberof PartialEditProductResponseDataAudit
      */
-    status?: PartialEditProductResponseDataAuditStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const PartialEditProductResponseDataAuditStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Approved: 'APPROVED'
-} as const;
-export type PartialEditProductResponseDataAuditStatusEnum = typeof PartialEditProductResponseDataAuditStatusEnum[keyof typeof PartialEditProductResponseDataAuditStatusEnum];
-
 
 /**
  * Check if a given object implements the PartialEditProductResponseDataAudit interface.

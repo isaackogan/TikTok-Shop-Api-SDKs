@@ -48,7 +48,7 @@ data class SizeChartChangeWebhookData (
 
     /* The change that occurred for the size chart. Possible values:   - `CREATE`: A new size chart is created   - `EDIT`: The size chart is edited   - `DELETE`: The size chart is deleted */
     @SerializedName("event_type")
-    val eventType: SizeChartChangeWebhookData.EventType? = null,
+    val eventType: kotlin.String? = null,
 
     /* The time when the change occurred. Unix timestamp. */
     @SerializedName("update_time")
@@ -56,16 +56,6 @@ data class SizeChartChangeWebhookData (
 
 ) {
 
-    /**
-     * The change that occurred for the size chart. Possible values:   - `CREATE`: A new size chart is created   - `EDIT`: The size chart is edited   - `DELETE`: The size chart is deleted
-     *
-     * Values: CREATE,EDIT,DELETE
-     */
-    enum class EventType(val value: kotlin.String) {
-        @SerializedName(value = "CREATE") CREATE("CREATE"),
-        @SerializedName(value = "EDIT") EDIT("EDIT"),
-        @SerializedName(value = "DELETE") DELETE("DELETE");
-    }
 
 }
 

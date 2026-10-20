@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.upload_product_file_response_data_format import UploadProductFileResponseDataFormat
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="UploadProductFileResponseData")
@@ -20,14 +19,14 @@ class UploadProductFileResponseData:
             Pass this value when creating or editing a product to associate the file with the product.
         url (str | Unset): The URL to access and view the file.
         name (str | Unset): The name of the file.
-        format_ (UploadProductFileResponseDataFormat | Unset): The format of the file.
+        format_ (str | Unset): The format of the file.
             Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG
     """
 
     id: str | Unset = UNSET
     url: str | Unset = UNSET
     name: str | Unset = UNSET
-    format_: UploadProductFileResponseDataFormat | Unset = UNSET
+    format_: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,9 +36,7 @@ class UploadProductFileResponseData:
 
         name = self.name
 
-        format_: str | Unset = UNSET
-        if not isinstance(self.format_, Unset):
-            format_ = self.format_.value
+        format_ = self.format_
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -64,12 +61,7 @@ class UploadProductFileResponseData:
 
         name = d.pop("name", UNSET)
 
-        _format_ = d.pop("format", UNSET)
-        format_: UploadProductFileResponseDataFormat | Unset
-        if isinstance(_format_, Unset):
-            format_ = UNSET
-        else:
-            format_ = UploadProductFileResponseDataFormat(_format_)
+        format_ = d.pop("format", UNSET)
 
         upload_product_file_response_data = cls(
             id=id,

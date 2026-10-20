@@ -62,7 +62,7 @@ data class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder (
 
     /* The status of the consign order.  Possible values: - **PENDING** - The order is pending warehouse processing. - **HANDLE_BY_WAREHOUSE** - The order is being processed by the warehouse. - **SHIPPED** - The order has shipped from the warehouse. - **HANDOVER** - The logistics carrier has received the order and it is in transit. - **CLOSED** - The order is closed. - **LOST** - The order is lost. - **DAMAGE** - The order is damaged. - **RETURNED** - The order was returned. - **SCRAP** - The order was scrapped. - **UNKNOWN** - The consign-order status or shipping-exception subtype is unknown. - **COMPLETED** - The order is complete. - **ABNORMAL** - An issue prevents the order from being fulfilled. */
     @SerializedName("status")
-    val status: GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder.Status? = null,
+    val status: kotlin.String? = null,
 
     /* Indicates who canceled the consign order when `status` is `CLOSED`. `true` means the FBT platform canceled the order; `false` means it was canceled through your OMS. */
     @SerializedName("is_platform_closed")
@@ -78,25 +78,6 @@ data class GetFBTMCFOrderStatusResponseDataMcfOrderConsignOrder (
 
 ) {
 
-    /**
-     * The status of the consign order.  Possible values: - **PENDING** - The order is pending warehouse processing. - **HANDLE_BY_WAREHOUSE** - The order is being processed by the warehouse. - **SHIPPED** - The order has shipped from the warehouse. - **HANDOVER** - The logistics carrier has received the order and it is in transit. - **CLOSED** - The order is closed. - **LOST** - The order is lost. - **DAMAGE** - The order is damaged. - **RETURNED** - The order was returned. - **SCRAP** - The order was scrapped. - **UNKNOWN** - The consign-order status or shipping-exception subtype is unknown. - **COMPLETED** - The order is complete. - **ABNORMAL** - An issue prevents the order from being fulfilled.
-     *
-     * Values: PENDING,HANDLE_BY_WAREHOUSE,SHIPPED,HANDOVER,CLOSED,LOST,DAMAGE,RETURNED,SCRAP,UNKNOWN,COMPLETED,ABNORMAL
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "HANDLE_BY_WAREHOUSE") HANDLE_BY_WAREHOUSE("HANDLE_BY_WAREHOUSE"),
-        @SerializedName(value = "SHIPPED") SHIPPED("SHIPPED"),
-        @SerializedName(value = "HANDOVER") HANDOVER("HANDOVER"),
-        @SerializedName(value = "CLOSED") CLOSED("CLOSED"),
-        @SerializedName(value = "LOST") LOST("LOST"),
-        @SerializedName(value = "DAMAGE") DAMAGE("DAMAGE"),
-        @SerializedName(value = "RETURNED") RETURNED("RETURNED"),
-        @SerializedName(value = "SCRAP") SCRAP("SCRAP"),
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "ABNORMAL") ABNORMAL("ABNORMAL");
-    }
 
 }
 

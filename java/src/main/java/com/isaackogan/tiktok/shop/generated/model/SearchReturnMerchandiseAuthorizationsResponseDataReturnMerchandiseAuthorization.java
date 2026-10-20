@@ -69,68 +69,10 @@ public class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseA
   @javax.annotation.Nullable
   private String aftersalesRequestId;
 
-  /**
-   * The current state of this RMA data. Possible values: - &#x60;INIT&#x60; - &#x60;AWAITING_BUYER_RETURN&#x60; - &#x60;RETURN_IN_TRANSIT&#x60; - &#x60;PENDING_PACKAGE_REVIEW&#x60; - &#x60;PACKAGE_REVIEW_COMPLETED&#x60;
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    INIT("INIT"),
-    
-    AWAITING_BUYER_RETURN("AWAITING_BUYER_RETURN"),
-    
-    RETURN_IN_TRANSIT("RETURN_IN_TRANSIT"),
-    
-    PENDING_PACKAGE_REVIEW("PENDING_PACKAGE_REVIEW"),
-    
-    PACKAGE_REVIEW_COMPLETED("PACKAGE_REVIEW_COMPLETED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_LINE_ITEMS = "line_items";
   @SerializedName(SERIALIZED_NAME_LINE_ITEMS)
@@ -202,7 +144,7 @@ public class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseA
   }
 
 
-  public SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorization status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -212,11 +154,11 @@ public class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseA
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -402,10 +344,6 @@ public class SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseA
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if (jsonObj.get("line_items") != null && !jsonObj.get("line_items").isJsonNull()) {
         JsonArray jsonArraylineItems = jsonObj.getAsJsonArray("line_items");

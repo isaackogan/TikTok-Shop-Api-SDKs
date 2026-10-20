@@ -23,10 +23,10 @@ export interface GetProductResponseDataIntegratedPlatformStatus {
      * The integrated platform name.
      * Possible values:
      * - TOKOPEDIA
-     * @type {GetProductResponseDataIntegratedPlatformStatusPlatformEnum}
+     * @type {string}
      * @memberof GetProductResponseDataIntegratedPlatformStatus
      */
-    platform?: GetProductResponseDataIntegratedPlatformStatusPlatformEnum;
+    platform?: string;
     /**
      * The product status in the integrated platform.
      * Possible values:
@@ -39,37 +39,11 @@ export interface GetProductResponseDataIntegratedPlatformStatus {
      * - PLATFORM_DEACTIVATED
      * - FREEZE
      * - DELETED
-     * @type {GetProductResponseDataIntegratedPlatformStatusStatusEnum}
+     * @type {string}
      * @memberof GetProductResponseDataIntegratedPlatformStatus
      */
-    status?: GetProductResponseDataIntegratedPlatformStatusStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataIntegratedPlatformStatusPlatformEnum = {
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type GetProductResponseDataIntegratedPlatformStatusPlatformEnum = typeof GetProductResponseDataIntegratedPlatformStatusPlatformEnum[keyof typeof GetProductResponseDataIntegratedPlatformStatusPlatformEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataIntegratedPlatformStatusStatusEnum = {
-    Unknown: 'UNKNOWN',
-    Draft: 'DRAFT',
-    Pending: 'PENDING',
-    Failed: 'FAILED',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED'
-} as const;
-export type GetProductResponseDataIntegratedPlatformStatusStatusEnum = typeof GetProductResponseDataIntegratedPlatformStatusStatusEnum[keyof typeof GetProductResponseDataIntegratedPlatformStatusStatusEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataIntegratedPlatformStatus interface.

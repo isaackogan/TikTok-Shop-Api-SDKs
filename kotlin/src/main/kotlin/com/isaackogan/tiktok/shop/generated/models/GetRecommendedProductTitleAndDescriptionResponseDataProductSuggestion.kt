@@ -39,7 +39,7 @@ data class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion
 
     /* The applicable product field. Possible values: - TITLE - DESCRIPTION */
     @SerializedName("field")
-    val `field`: GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion.`Field`? = null,
+    val `field`: kotlin.String? = null,
 
     /* The list of optimized text. */
     @SerializedName("items")
@@ -47,15 +47,6 @@ data class GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion
 
 ) {
 
-    /**
-     * The applicable product field. Possible values: - TITLE - DESCRIPTION
-     *
-     * Values: TITLE,DESCRIPTION
-     */
-    enum class `Field`(val value: kotlin.String) {
-        @SerializedName(value = "TITLE") TITLE("TITLE"),
-        @SerializedName(value = "DESCRIPTION") DESCRIPTION("DESCRIPTION");
-    }
 
 }
 

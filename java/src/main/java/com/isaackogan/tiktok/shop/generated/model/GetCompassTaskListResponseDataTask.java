@@ -50,62 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetCompassTaskListResponseDataTask {
-  /**
-   * Allowed values: CREATOR, BASE.
-   */
-  @JsonAdapter(ModuleTypeEnum.Adapter.class)
-  public enum ModuleTypeEnum {
-    CREATOR("CREATOR"),
-    
-    BASE("BASE");
-
-    private String value;
-
-    ModuleTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ModuleTypeEnum fromValue(String value) {
-      for (ModuleTypeEnum b : ModuleTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ModuleTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ModuleTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ModuleTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ModuleTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ModuleTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_MODULE_TYPE = "module_type";
   @SerializedName(SERIALIZED_NAME_MODULE_TYPE)
   @javax.annotation.Nullable
-  private ModuleTypeEnum moduleType;
+  private String moduleType;
 
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -125,7 +73,7 @@ public class GetCompassTaskListResponseDataTask {
   public GetCompassTaskListResponseDataTask() {
   }
 
-  public GetCompassTaskListResponseDataTask moduleType(@javax.annotation.Nullable ModuleTypeEnum moduleType) {
+  public GetCompassTaskListResponseDataTask moduleType(@javax.annotation.Nullable String moduleType) {
     this.moduleType = moduleType;
     return this;
   }
@@ -135,11 +83,11 @@ public class GetCompassTaskListResponseDataTask {
    * @return moduleType
    */
   @javax.annotation.Nullable
-  public ModuleTypeEnum getModuleType() {
+  public String getModuleType() {
     return moduleType;
   }
 
-  public void setModuleType(@javax.annotation.Nullable ModuleTypeEnum moduleType) {
+  public void setModuleType(@javax.annotation.Nullable String moduleType) {
     this.moduleType = moduleType;
   }
 
@@ -315,10 +263,6 @@ public class GetCompassTaskListResponseDataTask {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("module_type") != null && !jsonObj.get("module_type").isJsonNull()) && !jsonObj.get("module_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `module_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("module_type").toString()));
-      }
-      // validate the optional field `module_type`
-      if (jsonObj.get("module_type") != null && !jsonObj.get("module_type").isJsonNull()) {
-        ModuleTypeEnum.validateJsonElement(jsonObj.get("module_type"));
       }
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));

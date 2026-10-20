@@ -54,83 +54,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class CheckProductListingResponseDataDiagnosis {
-  /**
-   * The product field being diagnosed.  Possible values:  - TITLE: Product title - DESCRIPTION: Product description - IMAGE: Product image displayed in the image gallery  - ATTRIBUTE: Product attribute - SIZE_CHART: Product size chart
-   */
-  @JsonAdapter(FieldEnum.Adapter.class)
-  public enum FieldEnum {
-    /**
-     * Product title
-     */
-    TITLE("TITLE"),
-    
-    /**
-     * Product description
-     */
-    DESCRIPTION("DESCRIPTION"),
-    
-    /**
-     * Product image displayed in the image gallery
-     */
-    IMAGE("IMAGE"),
-    
-    /**
-     * Product attribute
-     */
-    ATTRIBUTE("ATTRIBUTE"),
-    
-    /**
-     * Product size chart
-     */
-    SIZE_CHART("SIZE_CHART");
-
-    private String value;
-
-    FieldEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FieldEnum fromValue(String value) {
-      for (FieldEnum b : FieldEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FieldEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FieldEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FieldEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FieldEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FieldEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FIELD = "field";
   @SerializedName(SERIALIZED_NAME_FIELD)
   @javax.annotation.Nullable
-  private FieldEnum field;
+  private String field;
 
   public static final String SERIALIZED_NAME_DIAGNOSIS_RESULTS = "diagnosis_results";
   @SerializedName(SERIALIZED_NAME_DIAGNOSIS_RESULTS)
@@ -145,7 +72,7 @@ public class CheckProductListingResponseDataDiagnosis {
   public CheckProductListingResponseDataDiagnosis() {
   }
 
-  public CheckProductListingResponseDataDiagnosis field(@javax.annotation.Nullable FieldEnum field) {
+  public CheckProductListingResponseDataDiagnosis field(@javax.annotation.Nullable String field) {
     this.field = field;
     return this;
   }
@@ -155,11 +82,11 @@ public class CheckProductListingResponseDataDiagnosis {
    * @return field
    */
   @javax.annotation.Nullable
-  public FieldEnum getField() {
+  public String getField() {
     return field;
   }
 
-  public void setField(@javax.annotation.Nullable FieldEnum field) {
+  public void setField(@javax.annotation.Nullable String field) {
     this.field = field;
   }
 
@@ -322,10 +249,6 @@ public class CheckProductListingResponseDataDiagnosis {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("field") != null && !jsonObj.get("field").isJsonNull()) && !jsonObj.get("field").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `field` to be a primitive type in the JSON string but got `%s`", jsonObj.get("field").toString()));
-      }
-      // validate the optional field `field`
-      if (jsonObj.get("field") != null && !jsonObj.get("field").isJsonNull()) {
-        FieldEnum.validateJsonElement(jsonObj.get("field"));
       }
       if (jsonObj.get("diagnosis_results") != null && !jsonObj.get("diagnosis_results").isJsonNull()) {
         JsonArray jsonArraydiagnosisResults = jsonObj.getAsJsonArray("diagnosis_results");

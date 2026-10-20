@@ -55,70 +55,10 @@ public class SearchGoodsInfoResponseDataGoodBarcode {
   @javax.annotation.Nullable
   private String code;
 
-  /**
-   * The barcode type. Possible values: - UPC - EAN - GTIN - ASIN_OR_FNSKU - MERCHANT_SKU_ID - FBT_SPECIFIC_BARCODE
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    UPC("UPC"),
-    
-    EAN("EAN"),
-    
-    GTIN("GTIN"),
-    
-    ASIN_OR_FNSKU("ASIN_OR_FNSKU"),
-    
-    MERCHANT_SKU_ID("MERCHANT_SKU_ID"),
-    
-    FBT_SPECIFIC_BARCODE("FBT_SPECIFIC_BARCODE");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public SearchGoodsInfoResponseDataGoodBarcode() {
   }
@@ -142,7 +82,7 @@ public class SearchGoodsInfoResponseDataGoodBarcode {
   }
 
 
-  public SearchGoodsInfoResponseDataGoodBarcode type(@javax.annotation.Nullable TypeEnum type) {
+  public SearchGoodsInfoResponseDataGoodBarcode type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -152,11 +92,11 @@ public class SearchGoodsInfoResponseDataGoodBarcode {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -274,10 +214,6 @@ public class SearchGoodsInfoResponseDataGoodBarcode {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 

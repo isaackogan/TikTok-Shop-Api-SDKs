@@ -50,7 +50,7 @@ data class GetCreatorConversationMessagesResponseDataMessageMessageBody (
 
     /* Message type. Possible values: - TEXT - PRODUCT_CARD - TARGET_COLLABORATION_CARD - FREE_SAMPLE_CARD - IMAGE - CRM_TEXT_WITH_IMAGE_CARD - CRM_TEXT_WITH_PRODUCTS_CARD - NOTIFICATION - EMOTICONS - SYSTEM */
     @SerializedName("type")
-    val type: GetCreatorConversationMessagesResponseDataMessageMessageBody.Type? = null,
+    val type: kotlin.String? = null,
 
     /* Message content serialized as a JSON string. The JSON object depends on `type`: - `TEXT`: `{\"content\": \"simple text\"}` - `PRODUCT_CARD`: `{\"product_id\": \"12345\"}` - `TARGET_COLLABORATION_CARD`: `{\"invitation_group_id\": \"1234\"}` - `FREE_SAMPLE_CARD`: `{\"apply_id\": \"1234\"}` - `IMAGE`: `{\"height\": \"290\", \"url\": \"<image_url>\", \"width\": \"304\"}` - `CRM_TEXT_WITH_IMAGE_CARD`: `{\"title\": \"abc\", \"content\": \"efg\", \"url\": \"<image_url>\"}` - `CRM_TEXT_WITH_PRODUCTS_CARD`: `{\"title\": \"abc\", \"content\": \"efg\", \"product_ids\": [123, 456, 789, 222]}` - `NOTIFICATION` or `SYSTEM`: `{\"content\": \"notification/system message\"}` - `EMOTICONS`: `{\"height\": \"110\", \"url\": \"<image_url>\", \"width\": \"110\"}` */
     @SerializedName("content")
@@ -66,23 +66,6 @@ data class GetCreatorConversationMessagesResponseDataMessageMessageBody (
 
 ) {
 
-    /**
-     * Message type. Possible values: - TEXT - PRODUCT_CARD - TARGET_COLLABORATION_CARD - FREE_SAMPLE_CARD - IMAGE - CRM_TEXT_WITH_IMAGE_CARD - CRM_TEXT_WITH_PRODUCTS_CARD - NOTIFICATION - EMOTICONS - SYSTEM
-     *
-     * Values: TEXT,PRODUCT_CARD,TARGET_COLLABORATION_CARD,FREE_SAMPLE_CARD,IMAGE,CRM_TEXT_WITH_IMAGE_CARD,CRM_TEXT_WITH_PRODUCTS_CARD,NOTIFICATION,EMOTICONS,SYSTEM
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "TEXT") TEXT("TEXT"),
-        @SerializedName(value = "PRODUCT_CARD") PRODUCT_CARD("PRODUCT_CARD"),
-        @SerializedName(value = "TARGET_COLLABORATION_CARD") TARGET_COLLABORATION_CARD("TARGET_COLLABORATION_CARD"),
-        @SerializedName(value = "FREE_SAMPLE_CARD") FREE_SAMPLE_CARD("FREE_SAMPLE_CARD"),
-        @SerializedName(value = "IMAGE") IMAGE("IMAGE"),
-        @SerializedName(value = "CRM_TEXT_WITH_IMAGE_CARD") CRM_TEXT_WITH_IMAGE_CARD("CRM_TEXT_WITH_IMAGE_CARD"),
-        @SerializedName(value = "CRM_TEXT_WITH_PRODUCTS_CARD") CRM_TEXT_WITH_PRODUCTS_CARD("CRM_TEXT_WITH_PRODUCTS_CARD"),
-        @SerializedName(value = "NOTIFICATION") NOTIFICATION("NOTIFICATION"),
-        @SerializedName(value = "EMOTICONS") EMOTICONS("EMOTICONS"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
 
 }
 

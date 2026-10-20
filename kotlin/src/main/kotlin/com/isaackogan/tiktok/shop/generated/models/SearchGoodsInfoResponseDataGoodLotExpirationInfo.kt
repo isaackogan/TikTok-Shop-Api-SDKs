@@ -67,20 +67,10 @@ data class SearchGoodsInfoResponseDataGoodLotExpirationInfo (
 
     /* The handling method for expired inventory. Possible values: - `STORE_UNITS`: Move the units to defective inventory. - `RETURN_TO_SELLER`: Return the units to the seller. - `DISPOSE`: Dispose of the units. */
     @SerializedName("handling_method")
-    val handlingMethod: SearchGoodsInfoResponseDataGoodLotExpirationInfo.HandlingMethod? = null
+    val handlingMethod: kotlin.String? = null
 
 ) {
 
-    /**
-     * The handling method for expired inventory. Possible values: - `STORE_UNITS`: Move the units to defective inventory. - `RETURN_TO_SELLER`: Return the units to the seller. - `DISPOSE`: Dispose of the units.
-     *
-     * Values: STORE_UNITS,RETURN_TO_SELLER,DISPOSE
-     */
-    enum class HandlingMethod(val value: kotlin.String) {
-        @SerializedName(value = "STORE_UNITS") STORE_UNITS("STORE_UNITS"),
-        @SerializedName(value = "RETURN_TO_SELLER") RETURN_TO_SELLER("RETURN_TO_SELLER"),
-        @SerializedName(value = "DISPOSE") DISPOSE("DISPOSE");
-    }
 
 }
 

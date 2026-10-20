@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.cancel_order_response_data_cancel_status import CancelOrderResponseDataCancelStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="CancelOrderResponseData")
@@ -17,7 +16,7 @@ class CancelOrderResponseData:
     """
     Attributes:
         cancel_id (str | Unset): The identifier of a specific order cancellation.
-        cancel_status (CancelOrderResponseDataCancelStatus | Unset): The status of an order cancellation request.
+        cancel_status (str | Unset): The status of an order cancellation request.
             Available values:
             - `CANCELLATION_REQUEST_PENDING`
             - `CANCELLATION_REQUEST_SUCCESS`
@@ -26,15 +25,13 @@ class CancelOrderResponseData:
     """
 
     cancel_id: str | Unset = UNSET
-    cancel_status: CancelOrderResponseDataCancelStatus | Unset = UNSET
+    cancel_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         cancel_id = self.cancel_id
 
-        cancel_status: str | Unset = UNSET
-        if not isinstance(self.cancel_status, Unset):
-            cancel_status = self.cancel_status.value
+        cancel_status = self.cancel_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -51,12 +48,7 @@ class CancelOrderResponseData:
         d = dict(src_dict)
         cancel_id = d.pop("cancel_id", UNSET)
 
-        _cancel_status = d.pop("cancel_status", UNSET)
-        cancel_status: CancelOrderResponseDataCancelStatus | Unset
-        if isinstance(_cancel_status, Unset):
-            cancel_status = UNSET
-        else:
-            cancel_status = CancelOrderResponseDataCancelStatus(_cancel_status)
+        cancel_status = d.pop("cancel_status", UNSET)
 
         cancel_order_response_data = cls(
             cancel_id=cancel_id,

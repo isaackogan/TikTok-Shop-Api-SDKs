@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_external_list_price_currency import (
-    GetProductResponseDataSkuExternalListPriceCurrency,
-)
-from ..models.get_product_response_data_sku_external_list_price_source import (
-    GetProductResponseDataSkuExternalListPriceSource,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataSkuExternalListPrice")
@@ -22,29 +16,24 @@ class GetProductResponseDataSkuExternalListPrice:
     """
     Attributes:
         amount (str | Unset): The price amount.
-        currency (GetProductResponseDataSkuExternalListPriceCurrency | Unset): The currency.
+        currency (str | Unset): The currency.
             Possible values: USD
-        source (GetProductResponseDataSkuExternalListPriceSource | Unset): The external ecommerce platform from which
-            the price is sourced.
+        source (str | Unset): The external ecommerce platform from which the price is sourced.
             Possible values:
             - SHOPIFY_COMPARE_AT_PRICE: The compare_at_price in Shopify.
     """
 
     amount: str | Unset = UNSET
-    currency: GetProductResponseDataSkuExternalListPriceCurrency | Unset = UNSET
-    source: GetProductResponseDataSkuExternalListPriceSource | Unset = UNSET
+    currency: str | Unset = UNSET
+    source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         amount = self.amount
 
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
-        source: str | Unset = UNSET
-        if not isinstance(self.source, Unset):
-            source = self.source.value
+        source = self.source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -63,19 +52,9 @@ class GetProductResponseDataSkuExternalListPrice:
         d = dict(src_dict)
         amount = d.pop("amount", UNSET)
 
-        _currency = d.pop("currency", UNSET)
-        currency: GetProductResponseDataSkuExternalListPriceCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetProductResponseDataSkuExternalListPriceCurrency(_currency)
+        currency = d.pop("currency", UNSET)
 
-        _source = d.pop("source", UNSET)
-        source: GetProductResponseDataSkuExternalListPriceSource | Unset
-        if isinstance(_source, Unset):
-            source = UNSET
-        else:
-            source = GetProductResponseDataSkuExternalListPriceSource(_source)
+        source = d.pop("source", UNSET)
 
         get_product_response_data_sku_external_list_price = cls(
             amount=amount,

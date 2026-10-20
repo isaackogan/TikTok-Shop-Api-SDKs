@@ -64,7 +64,7 @@ data class RecommendRequiredProductPropertiesResponseDataRecommendedProperty (
 
     /* Type of the recommended property. Possible values: - `UNSPECIFIED`: The service could not classify the property type. - `KEY_PROPERTY`: A key property used to identify the product. - `SALES_PROPERTY`: A sales property that defines product variants. - `PRODUCT_PROPERTY`: A property that describes the product as a whole. */
     @SerializedName("type")
-    val type: RecommendRequiredProductPropertiesResponseDataRecommendedProperty.Type,
+    val type: kotlin.String,
 
     /* Ordered values recommended for the property. The array is empty when the property requires a custom value or no value is recommended. */
     @SerializedName("values")
@@ -72,17 +72,6 @@ data class RecommendRequiredProductPropertiesResponseDataRecommendedProperty (
 
 ) {
 
-    /**
-     * Type of the recommended property. Possible values: - `UNSPECIFIED`: The service could not classify the property type. - `KEY_PROPERTY`: A key property used to identify the product. - `SALES_PROPERTY`: A sales property that defines product variants. - `PRODUCT_PROPERTY`: A property that describes the product as a whole.
-     *
-     * Values: UNSPECIFIED,KEY_PROPERTY,SALES_PROPERTY,PRODUCT_PROPERTY
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "UNSPECIFIED") UNSPECIFIED("UNSPECIFIED"),
-        @SerializedName(value = "KEY_PROPERTY") KEY_PROPERTY("KEY_PROPERTY"),
-        @SerializedName(value = "SALES_PROPERTY") SALES_PROPERTY("SALES_PROPERTY"),
-        @SerializedName(value = "PRODUCT_PROPERTY") PRODUCT_PROPERTY("PRODUCT_PROPERTY");
-    }
 
 }
 

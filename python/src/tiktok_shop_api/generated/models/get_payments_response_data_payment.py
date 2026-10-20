@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_payments_response_data_payment_status import GetPaymentsResponseDataPaymentStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -29,8 +28,8 @@ class GetPaymentsResponseDataPayment:
         create_time (int | Unset): The time when the payment was initiated in TikTok Shop, as a Unix timestamp in
             seconds.
         id (str | Unset): The payment ID.
-        status (GetPaymentsResponseDataPaymentStatus | Unset): The payment status, indicating whether payment has been
-            transferred to the seller's bank account.
+        status (str | Unset): The payment status, indicating whether payment has been transferred to the seller's bank
+            account.
             Possible values:
             - PAID: Payment has been transferred to the seller.
             - FAILED: Payment transfer failed.
@@ -47,7 +46,7 @@ class GetPaymentsResponseDataPayment:
 
     create_time: int | Unset = UNSET
     id: str | Unset = UNSET
-    status: GetPaymentsResponseDataPaymentStatus | Unset = UNSET
+    status: str | Unset = UNSET
     amount: GetPaymentsResponseDataPaymentAmount | Unset = UNSET
     settlement_amount: GetPaymentsResponseDataPaymentSettlementAmount | Unset = UNSET
     payment_amount_before_exchange: GetPaymentsResponseDataPaymentPaymentAmountBeforeExchange | Unset = UNSET
@@ -61,9 +60,7 @@ class GetPaymentsResponseDataPayment:
 
         id = self.id
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         amount: dict[str, Any] | Unset = UNSET
         if not isinstance(self.amount, Unset):
@@ -124,12 +121,7 @@ class GetPaymentsResponseDataPayment:
 
         id = d.pop("id", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetPaymentsResponseDataPaymentStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetPaymentsResponseDataPaymentStatus(_status)
+        status = d.pop("status", UNSET)
 
         _amount = d.pop("amount", UNSET)
         amount: GetPaymentsResponseDataPaymentAmount | Unset

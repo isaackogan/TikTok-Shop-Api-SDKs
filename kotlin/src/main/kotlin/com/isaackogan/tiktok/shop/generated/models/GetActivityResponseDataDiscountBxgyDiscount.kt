@@ -42,7 +42,7 @@ data class GetActivityResponseDataDiscountBxgyDiscount (
 
     /* The purchase criterion returned for the activity. Possible values: - `MINIMAL_ITEM_QUANTITY`: The buyer must purchase at least the specified quantity of eligible products. - `MINIMAL_ORDER_AMOUNT`: The eligible-product subtotal must reach the specified amount. */
     @SerializedName("threshold_type")
-    val thresholdType: GetActivityResponseDataDiscountBxgyDiscount.ThresholdType? = null,
+    val thresholdType: kotlin.String? = null,
 
     /* The purchase threshold returned for the activity, based on `threshold_type`. - When `threshold_type==MINIMAL_ITEM_QUANTITY`, this is the number of eligible products the buyer must purchase and must be an integer. - When `threshold_type==MINIMAL_ORDER_AMOUNT`, this is the eligible-product subtotal the buyer must reach, in local currency. */
     @SerializedName("threshold_value")
@@ -50,7 +50,7 @@ data class GetActivityResponseDataDiscountBxgyDiscount (
 
     /* The type of discount awarded as a benefit. For PERCENTAGE_OFF and AMOUNT_OFF_EACH, the discount amount is determined by `discount_value`. Possible enumerations are: - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products. - `FREE`: Buyer will receive X eligible products for free. - `AMOUNT_OFF_EACH`: Buyer will receive X units of local currency off the price of each eligible product. */
     @SerializedName("discount_type")
-    val discountType: GetActivityResponseDataDiscountBxgyDiscount.DiscountType? = null,
+    val discountType: kotlin.String? = null,
 
     /* Value of the discount. - When `type`==`PERCENTAGE_OFF`, the buyer will receive X% off the price of eligible products. If the value represents a percentage, it should be an integer. - `type`==`AMOUNT_OFF_EACH`, the buyer will receive X units of local currency off the price of each eligible products. If the value represents a monetary amount, it should be limited to two decimal places. */
     @SerializedName("discount_value")
@@ -66,25 +66,6 @@ data class GetActivityResponseDataDiscountBxgyDiscount (
 
 ) {
 
-    /**
-     * The purchase criterion returned for the activity. Possible values: - `MINIMAL_ITEM_QUANTITY`: The buyer must purchase at least the specified quantity of eligible products. - `MINIMAL_ORDER_AMOUNT`: The eligible-product subtotal must reach the specified amount.
-     *
-     * Values: MINIMAL_ITEM_QUANTITY,MINIMAL_ORDER_AMOUNT
-     */
-    enum class ThresholdType(val value: kotlin.String) {
-        @SerializedName(value = "MINIMAL_ITEM_QUANTITY") MINIMAL_ITEM_QUANTITY("MINIMAL_ITEM_QUANTITY"),
-        @SerializedName(value = "MINIMAL_ORDER_AMOUNT") MINIMAL_ORDER_AMOUNT("MINIMAL_ORDER_AMOUNT");
-    }
-    /**
-     * The type of discount awarded as a benefit. For PERCENTAGE_OFF and AMOUNT_OFF_EACH, the discount amount is determined by `discount_value`. Possible enumerations are: - `PERCENTAGE_OFF`: Buyer will receive X% off the price of the eligible products. - `FREE`: Buyer will receive X eligible products for free. - `AMOUNT_OFF_EACH`: Buyer will receive X units of local currency off the price of each eligible product.
-     *
-     * Values: PERCENTAGE_OFF,FREE,AMOUNT_OFF_EACH
-     */
-    enum class DiscountType(val value: kotlin.String) {
-        @SerializedName(value = "PERCENTAGE_OFF") PERCENTAGE_OFF("PERCENTAGE_OFF"),
-        @SerializedName(value = "FREE") FREE("FREE"),
-        @SerializedName(value = "AMOUNT_OFF_EACH") AMOUNT_OFF_EACH("AMOUNT_OFF_EACH");
-    }
 
 }
 

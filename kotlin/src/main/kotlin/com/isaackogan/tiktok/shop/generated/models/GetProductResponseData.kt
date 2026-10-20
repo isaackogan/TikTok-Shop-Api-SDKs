@@ -176,7 +176,7 @@ data class GetProductResponseData (
 
     /* The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market. */
     @SerializedName("listing_quality_tier")
-    val listingQualityTier: GetProductResponseData.ListingQualityTier? = null,
+    val listingQualityTier: kotlin.String? = null,
 
     /* A list of images to display in the product image gallery. */
     @SerializedName("main_images")
@@ -220,15 +220,15 @@ data class GetProductResponseData (
 
     /* The product status in TikTok Shop unrelated to its audit status. Possible values:  - INITIAL - DRAFT - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted. */
     @SerializedName("product_status")
-    val productStatus: GetProductResponseData.ProductStatus? = null,
+    val productStatus: kotlin.String? = null,
 
     /* Product tag to identity special type product Possible values: AUCTION */
     @SerializedName("product_tags")
-    val productTags: kotlin.collections.List<GetProductResponseData.ProductTags>? = null,
+    val productTags: kotlin.collections.List<kotlin.String>? = null,
 
     /* The product type. Possible values: - COMBINED_PRODUCT: Indicates this is a virtual bundle product. - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle. - GPR_TARGET_PRODUCT: Indicates this product is synchronized to global listings. Applicable only for the EU market. */
     @SerializedName("product_types")
-    val productTypes: kotlin.collections.List<GetProductResponseData.ProductTypes>? = null,
+    val productTypes: kotlin.collections.List<kotlin.String>? = null,
 
     /* Recommended categories for the product based on the product title, description, and images. */
     @SerializedName("recommended_categories")
@@ -248,7 +248,7 @@ data class GetProductResponseData (
 
     /* The shipping insurance purchase requirement imposed on buyers for the product.  Possible values: - REQUIRED: Shipping insurance is mandatory and buyers can't opt out. - OPTIONAL: Buyers can choose to purchase shipping insurance through the platform. - NOT_SUPPORTED: Shipping insurance is not supported for the product. Default: OPTIONAL  Applicable only if the listing platforms include TOKOPEDIA. */
     @SerializedName("shipping_insurance_requirement")
-    val shippingInsuranceRequirement: GetProductResponseData.ShippingInsuranceRequirement? = null,
+    val shippingInsuranceRequirement: kotlin.String? = null,
 
     /* Identifier of the shipping template that was bound to the product */
     @SerializedName("shipping_template_id")
@@ -264,7 +264,7 @@ data class GetProductResponseData (
 
     /* The product status in TikTok Shop. This status incorporates both the product status and the audit status. Possible values:  - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED - SCHEDULED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted. */
     @SerializedName("status")
-    val status: GetProductResponseData.Status? = null,
+    val status: kotlin.String? = null,
 
     /* All the Save and Subscribe promotion info associated with the given product. */
     @SerializedName("subscribe_info")
@@ -284,7 +284,7 @@ data class GetProductResponseData (
 
     /* The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION. */
     @SerializedName("selling_format")
-    val sellingFormat: GetProductResponseData.SellingFormat? = null,
+    val sellingFormat: kotlin.String? = null,
 
     /* Whether the product is a blind box of lucky bag. For example: PopMart */
     @SerializedName("is_blind_box")
@@ -292,85 +292,6 @@ data class GetProductResponseData (
 
 ) {
 
-    /**
-     * The current quality tier of this product listing. The quality tier of a product listing depends on the quality of the content in its product fields such as the title, image, attributes etc.  Possible values: - POOR - FAIR - GOOD - EXCELLENT  **Note**: Available only for the US market.
-     *
-     * Values: POOR,FAIR,GOOD,EXCELLENT
-     */
-    enum class ListingQualityTier(val value: kotlin.String) {
-        @SerializedName(value = "POOR") POOR("POOR"),
-        @SerializedName(value = "FAIR") FAIR("FAIR"),
-        @SerializedName(value = "GOOD") GOOD("GOOD"),
-        @SerializedName(value = "EXCELLENT") EXCELLENT("EXCELLENT");
-    }
-    /**
-     * The product status in TikTok Shop unrelated to its audit status. Possible values:  - INITIAL - DRAFT - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     *
-     * Values: INITIAL,DRAFT,ACTIVATE,SELLER_DEACTIVATED,PLATFORM_DEACTIVATED,FREEZE,DELETED
-     */
-    enum class ProductStatus(val value: kotlin.String) {
-        @SerializedName(value = "INITIAL") INITIAL("INITIAL"),
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "ACTIVATE") ACTIVATE("ACTIVATE"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "PLATFORM_DEACTIVATED") PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-        @SerializedName(value = "FREEZE") FREEZE("FREEZE"),
-        @SerializedName(value = "DELETED") DELETED("DELETED");
-    }
-    /**
-     * Product tag to identity special type product Possible values: AUCTION
-     *
-     * Values: AUCTION
-     */
-    enum class ProductTags(val value: kotlin.String) {
-        @SerializedName(value = "AUCTION") AUCTION("AUCTION");
-    }
-    /**
-     * The product type. Possible values: - COMBINED_PRODUCT: Indicates this is a virtual bundle product. - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle. - GPR_TARGET_PRODUCT: Indicates this product is synchronized to global listings. Applicable only for the EU market.
-     *
-     * Values: COMBINED_PRODUCT,IN_COMBINED_PRODUCT,GPR_TARGET_PRODUCT
-     */
-    enum class ProductTypes(val value: kotlin.String) {
-        @SerializedName(value = "COMBINED_PRODUCT") COMBINED_PRODUCT("COMBINED_PRODUCT"),
-        @SerializedName(value = "IN_COMBINED_PRODUCT") IN_COMBINED_PRODUCT("IN_COMBINED_PRODUCT"),
-        @SerializedName(value = "GPR_TARGET_PRODUCT") GPR_TARGET_PRODUCT("GPR_TARGET_PRODUCT");
-    }
-    /**
-     * The shipping insurance purchase requirement imposed on buyers for the product.  Possible values: - REQUIRED: Shipping insurance is mandatory and buyers can't opt out. - OPTIONAL: Buyers can choose to purchase shipping insurance through the platform. - NOT_SUPPORTED: Shipping insurance is not supported for the product. Default: OPTIONAL  Applicable only if the listing platforms include TOKOPEDIA.
-     *
-     * Values: REQUIRED,OPTIONAL,NOT_SUPPORTED
-     */
-    enum class ShippingInsuranceRequirement(val value: kotlin.String) {
-        @SerializedName(value = "REQUIRED") REQUIRED("REQUIRED"),
-        @SerializedName(value = "OPTIONAL") OPTIONAL("OPTIONAL"),
-        @SerializedName(value = "NOT_SUPPORTED") NOT_SUPPORTED("NOT_SUPPORTED");
-    }
-    /**
-     * The product status in TikTok Shop. This status incorporates both the product status and the audit status. Possible values:  - DRAFT - PENDING - FAILED - ACTIVATE - SELLER_DEACTIVATED - PLATFORM_DEACTIVATED - FREEZE - DELETED - SCHEDULED  **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     *
-     * Values: DRAFT,PENDING,FAILED,ACTIVATE,SELLER_DEACTIVATED,PLATFORM_DEACTIVATED,FREEZE,DELETED,SCHEDULED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "FAILED") FAILED("FAILED"),
-        @SerializedName(value = "ACTIVATE") ACTIVATE("ACTIVATE"),
-        @SerializedName(value = "SELLER_DEACTIVATED") SELLER_DEACTIVATED("SELLER_DEACTIVATED"),
-        @SerializedName(value = "PLATFORM_DEACTIVATED") PLATFORM_DEACTIVATED("PLATFORM_DEACTIVATED"),
-        @SerializedName(value = "FREEZE") FREEZE("FREEZE"),
-        @SerializedName(value = "DELETED") DELETED("DELETED"),
-        @SerializedName(value = "SCHEDULED") SCHEDULED("SCHEDULED");
-    }
-    /**
-     * The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
-     *
-     * Values: FIXED_PRICE,LIVE_AUCTION,FIXED_PRICE_AND_LIVE_AUCTION
-     */
-    enum class SellingFormat(val value: kotlin.String) {
-        @SerializedName(value = "FIXED_PRICE") FIXED_PRICE("FIXED_PRICE"),
-        @SerializedName(value = "LIVE_AUCTION") LIVE_AUCTION("LIVE_AUCTION"),
-        @SerializedName(value = "FIXED_PRICE_AND_LIVE_AUCTION") FIXED_PRICE_AND_LIVE_AUCTION("FIXED_PRICE_AND_LIVE_AUCTION");
-    }
 
 }
 

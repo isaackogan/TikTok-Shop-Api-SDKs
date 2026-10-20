@@ -6,8 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.shoppable_content_posting_webhook_data_event_scene import ShoppableContentPostingWebhookDataEventScene
-from ..models.shoppable_content_posting_webhook_data_event_type import ShoppableContentPostingWebhookDataEventType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ShoppableContentPostingWebhookDataEvent")
@@ -17,32 +15,27 @@ T = TypeVar("T", bound="ShoppableContentPostingWebhookDataEvent")
 class ShoppableContentPostingWebhookDataEvent:
     """
     Attributes:
-        type_ (ShoppableContentPostingWebhookDataEventType | Unset): The action which the creator takes to the product
-            promoted in the video or live stream. The possible enumerations are:
+        type_ (str | Unset): The action which the creator takes to the product promoted in the video or live stream. The
+            possible enumerations are:
 
              * `ADD`: Add the product.
              * `UPDATE`: Update the product.
              * `REMOVE`: Remove the product.
-        scene (ShoppableContentPostingWebhookDataEventScene | Unset): The scene where the creator promotes the product.
-            The possible enumerations are:
+        scene (str | Unset): The scene where the creator promotes the product. The possible enumerations are:
 
              * `VIDEO`: short video.
         content_id (str | Unset): The ID of the short video.
     """
 
-    type_: ShoppableContentPostingWebhookDataEventType | Unset = UNSET
-    scene: ShoppableContentPostingWebhookDataEventScene | Unset = UNSET
+    type_: str | Unset = UNSET
+    scene: str | Unset = UNSET
     content_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
-        scene: str | Unset = UNSET
-        if not isinstance(self.scene, Unset):
-            scene = self.scene.value
+        scene = self.scene
 
         content_id = self.content_id
 
@@ -61,19 +54,9 @@ class ShoppableContentPostingWebhookDataEvent:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: ShoppableContentPostingWebhookDataEventType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = ShoppableContentPostingWebhookDataEventType(_type_)
+        type_ = d.pop("type", UNSET)
 
-        _scene = d.pop("scene", UNSET)
-        scene: ShoppableContentPostingWebhookDataEventScene | Unset
-        if isinstance(_scene, Unset):
-            scene = UNSET
-        else:
-            scene = ShoppableContentPostingWebhookDataEventScene(_scene)
+        scene = d.pop("scene", UNSET)
 
         content_id = d.pop("content_id", UNSET)
 

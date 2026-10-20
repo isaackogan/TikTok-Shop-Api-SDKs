@@ -27,40 +27,17 @@ export interface SKUStatusChangeWebhookDataSku {
     skuId?: string;
     /**
      * The new SKU status. Possible values: `CREATED`, `DELETED`, `ACTIVATED`, `DEACTIVATED`.
-     * @type {SKUStatusChangeWebhookDataSkuStatusEnum}
+     * @type {string}
      * @memberof SKUStatusChangeWebhookDataSku
      */
-    status?: SKUStatusChangeWebhookDataSkuStatusEnum;
+    status?: string;
     /**
      * The source of deactivation. This field is returned only when `status` is `DEACTIVATED`. Possible values: `SELLER`, `PLATFORM`, `COMBO_RELATION`.
-     * @type {SKUStatusChangeWebhookDataSkuDeactivationSourceEnum}
+     * @type {string}
      * @memberof SKUStatusChangeWebhookDataSku
      */
-    deactivationSource?: SKUStatusChangeWebhookDataSkuDeactivationSourceEnum;
+    deactivationSource?: string;
 }
-
-
-/**
- * @export
- */
-export const SKUStatusChangeWebhookDataSkuStatusEnum = {
-    Created: 'CREATED',
-    Deleted: 'DELETED',
-    Activated: 'ACTIVATED',
-    Deactivated: 'DEACTIVATED'
-} as const;
-export type SKUStatusChangeWebhookDataSkuStatusEnum = typeof SKUStatusChangeWebhookDataSkuStatusEnum[keyof typeof SKUStatusChangeWebhookDataSkuStatusEnum];
-
-/**
- * @export
- */
-export const SKUStatusChangeWebhookDataSkuDeactivationSourceEnum = {
-    Seller: 'SELLER',
-    Platform: 'PLATFORM',
-    ComboRelation: 'COMBO_RELATION'
-} as const;
-export type SKUStatusChangeWebhookDataSkuDeactivationSourceEnum = typeof SKUStatusChangeWebhookDataSkuDeactivationSourceEnum[keyof typeof SKUStatusChangeWebhookDataSkuDeactivationSourceEnum];
-
 
 /**
  * Check if a given object implements the SKUStatusChangeWebhookDataSku interface.

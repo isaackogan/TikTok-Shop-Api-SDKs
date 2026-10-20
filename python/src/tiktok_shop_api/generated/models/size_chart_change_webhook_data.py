@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.size_chart_change_webhook_data_event_type import SizeChartChangeWebhookDataEventType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SizeChartChangeWebhookData")
@@ -18,8 +17,7 @@ class SizeChartChangeWebhookData:
     Attributes:
         size_chart_template_id (str | Unset): The ID of the size chart template that's being changed.
         size_chart_template_name (str | Unset): The name of the size chart template that's being changed.
-        event_type (SizeChartChangeWebhookDataEventType | Unset): The change that occurred for the size chart. Possible
-            values:
+        event_type (str | Unset): The change that occurred for the size chart. Possible values:
              - `CREATE`: A new size chart is created
              - `EDIT`: The size chart is edited
              - `DELETE`: The size chart is deleted
@@ -28,7 +26,7 @@ class SizeChartChangeWebhookData:
 
     size_chart_template_id: str | Unset = UNSET
     size_chart_template_name: str | Unset = UNSET
-    event_type: SizeChartChangeWebhookDataEventType | Unset = UNSET
+    event_type: str | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -37,9 +35,7 @@ class SizeChartChangeWebhookData:
 
         size_chart_template_name = self.size_chart_template_name
 
-        event_type: str | Unset = UNSET
-        if not isinstance(self.event_type, Unset):
-            event_type = self.event_type.value
+        event_type = self.event_type
 
         update_time = self.update_time
 
@@ -64,12 +60,7 @@ class SizeChartChangeWebhookData:
 
         size_chart_template_name = d.pop("size_chart_template_name", UNSET)
 
-        _event_type = d.pop("event_type", UNSET)
-        event_type: SizeChartChangeWebhookDataEventType | Unset
-        if isinstance(_event_type, Unset):
-            event_type = UNSET
-        else:
-            event_type = SizeChartChangeWebhookDataEventType(_event_type)
+        event_type = d.pop("event_type", UNSET)
 
         update_time = d.pop("update_time", UNSET)
 

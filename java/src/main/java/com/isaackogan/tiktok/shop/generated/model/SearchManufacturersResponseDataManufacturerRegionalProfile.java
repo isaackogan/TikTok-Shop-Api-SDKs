@@ -51,68 +51,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SearchManufacturersResponseDataManufacturerRegionalProfile {
-  /**
-   * The BCP-47 locale code representing the language used for specifying the manufacturer information. Possible values: - de-DE - en-IE - es-ES - fr-FR - it-IT
-   */
-  @JsonAdapter(LocaleEnum.Adapter.class)
-  public enum LocaleEnum {
-    DE_DE("de-DE"),
-    
-    EN_IE("en-IE"),
-    
-    ES_ES("es-ES"),
-    
-    FR_FR("fr-FR"),
-    
-    IT_IT("it-IT");
-
-    private String value;
-
-    LocaleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static LocaleEnum fromValue(String value) {
-      for (LocaleEnum b : LocaleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<LocaleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final LocaleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public LocaleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return LocaleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      LocaleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LOCALE = "locale";
   @SerializedName(SERIALIZED_NAME_LOCALE)
   @javax.annotation.Nullable
-  private LocaleEnum locale;
+  private String locale;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -142,7 +84,7 @@ public class SearchManufacturersResponseDataManufacturerRegionalProfile {
   public SearchManufacturersResponseDataManufacturerRegionalProfile() {
   }
 
-  public SearchManufacturersResponseDataManufacturerRegionalProfile locale(@javax.annotation.Nullable LocaleEnum locale) {
+  public SearchManufacturersResponseDataManufacturerRegionalProfile locale(@javax.annotation.Nullable String locale) {
     this.locale = locale;
     return this;
   }
@@ -152,11 +94,11 @@ public class SearchManufacturersResponseDataManufacturerRegionalProfile {
    * @return locale
    */
   @javax.annotation.Nullable
-  public LocaleEnum getLocale() {
+  public String getLocale() {
     return locale;
   }
 
-  public void setLocale(@javax.annotation.Nullable LocaleEnum locale) {
+  public void setLocale(@javax.annotation.Nullable String locale) {
     this.locale = locale;
   }
 
@@ -374,10 +316,6 @@ public class SearchManufacturersResponseDataManufacturerRegionalProfile {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("locale") != null && !jsonObj.get("locale").isJsonNull()) && !jsonObj.get("locale").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `locale` to be a primitive type in the JSON string but got `%s`", jsonObj.get("locale").toString()));
-      }
-      // validate the optional field `locale`
-      if (jsonObj.get("locale") != null && !jsonObj.get("locale").isJsonNull()) {
-        LocaleEnum.validateJsonElement(jsonObj.get("locale"));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));

@@ -55,119 +55,15 @@ public class AftersalesRequestStatusUpdateWebhookData {
   @javax.annotation.Nullable
   private String aftersalesRequestId;
 
-  /**
-   * Role that initiated the return flow. Possible enumerations:      * &#x60;BUYER&#x60;   * &#x60;SELLER&#x60;
-   */
-  @JsonAdapter(ReturnRoleEnum.Adapter.class)
-  public enum ReturnRoleEnum {
-    BUYER("BUYER"),
-    
-    SELLER("SELLER");
-
-    private String value;
-
-    ReturnRoleEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnRoleEnum fromValue(String value) {
-      for (ReturnRoleEnum b : ReturnRoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnRoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnRoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnRoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnRoleEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnRoleEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_ROLE = "return_role";
   @SerializedName(SERIALIZED_NAME_RETURN_ROLE)
   @javax.annotation.Nullable
-  private ReturnRoleEnum returnRole;
-
-  /**
-   * Current aftersales request status. Possible enumerations:      * &#x60;PENDING_REQUEST_REVIEW&#x60;   * &#x60;REQUEST_REVIEW_COMPLETED&#x60;
-   */
-  @JsonAdapter(AftersalesRequestStatusEnum.Adapter.class)
-  public enum AftersalesRequestStatusEnum {
-    PENDING_REQUEST_REVIEW("PENDING_REQUEST_REVIEW"),
-    
-    REQUEST_REVIEW_COMPLETED("REQUEST_REVIEW_COMPLETED");
-
-    private String value;
-
-    AftersalesRequestStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static AftersalesRequestStatusEnum fromValue(String value) {
-      for (AftersalesRequestStatusEnum b : AftersalesRequestStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<AftersalesRequestStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AftersalesRequestStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AftersalesRequestStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AftersalesRequestStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AftersalesRequestStatusEnum.fromValue(value);
-    }
-  }
+  private String returnRole;
 
   public static final String SERIALIZED_NAME_AFTERSALES_REQUEST_STATUS = "aftersales_request_status";
   @SerializedName(SERIALIZED_NAME_AFTERSALES_REQUEST_STATUS)
   @javax.annotation.Nullable
-  private AftersalesRequestStatusEnum aftersalesRequestStatus;
+  private String aftersalesRequestStatus;
 
   public static final String SERIALIZED_NAME_AFTERSALES_REQUEST_CREATE_TIME = "aftersales_request_create_time";
   @SerializedName(SERIALIZED_NAME_AFTERSALES_REQUEST_CREATE_TIME)
@@ -201,7 +97,7 @@ public class AftersalesRequestStatusUpdateWebhookData {
   }
 
 
-  public AftersalesRequestStatusUpdateWebhookData returnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public AftersalesRequestStatusUpdateWebhookData returnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
     return this;
   }
@@ -211,16 +107,16 @@ public class AftersalesRequestStatusUpdateWebhookData {
    * @return returnRole
    */
   @javax.annotation.Nullable
-  public ReturnRoleEnum getReturnRole() {
+  public String getReturnRole() {
     return returnRole;
   }
 
-  public void setReturnRole(@javax.annotation.Nullable ReturnRoleEnum returnRole) {
+  public void setReturnRole(@javax.annotation.Nullable String returnRole) {
     this.returnRole = returnRole;
   }
 
 
-  public AftersalesRequestStatusUpdateWebhookData aftersalesRequestStatus(@javax.annotation.Nullable AftersalesRequestStatusEnum aftersalesRequestStatus) {
+  public AftersalesRequestStatusUpdateWebhookData aftersalesRequestStatus(@javax.annotation.Nullable String aftersalesRequestStatus) {
     this.aftersalesRequestStatus = aftersalesRequestStatus;
     return this;
   }
@@ -230,11 +126,11 @@ public class AftersalesRequestStatusUpdateWebhookData {
    * @return aftersalesRequestStatus
    */
   @javax.annotation.Nullable
-  public AftersalesRequestStatusEnum getAftersalesRequestStatus() {
+  public String getAftersalesRequestStatus() {
     return aftersalesRequestStatus;
   }
 
-  public void setAftersalesRequestStatus(@javax.annotation.Nullable AftersalesRequestStatusEnum aftersalesRequestStatus) {
+  public void setAftersalesRequestStatus(@javax.annotation.Nullable String aftersalesRequestStatus) {
     this.aftersalesRequestStatus = aftersalesRequestStatus;
   }
 
@@ -397,16 +293,8 @@ public class AftersalesRequestStatusUpdateWebhookData {
       if ((jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) && !jsonObj.get("return_role").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_role` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_role").toString()));
       }
-      // validate the optional field `return_role`
-      if (jsonObj.get("return_role") != null && !jsonObj.get("return_role").isJsonNull()) {
-        ReturnRoleEnum.validateJsonElement(jsonObj.get("return_role"));
-      }
       if ((jsonObj.get("aftersales_request_status") != null && !jsonObj.get("aftersales_request_status").isJsonNull()) && !jsonObj.get("aftersales_request_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `aftersales_request_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("aftersales_request_status").toString()));
-      }
-      // validate the optional field `aftersales_request_status`
-      if (jsonObj.get("aftersales_request_status") != null && !jsonObj.get("aftersales_request_status").isJsonNull()) {
-        AftersalesRequestStatusEnum.validateJsonElement(jsonObj.get("aftersales_request_status"));
       }
   }
 

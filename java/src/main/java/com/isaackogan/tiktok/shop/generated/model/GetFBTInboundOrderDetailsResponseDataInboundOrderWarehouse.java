@@ -67,68 +67,10 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * Type of warehouse associated with the inbound order.  Possible values: * &#x60;HUB&#x60; * &#x60;FC&#x60; (Fulfillment Center)
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
-  public enum TypeEnum {
-    /**
-     * 
-     */
-    HUB("HUB"),
-    
-    /**
-     * Fulfillment Center
-     */
-    FC("FC");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      TypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   @javax.annotation.Nullable
-  private TypeEnum type;
+  private String type;
 
   public GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse() {
   }
@@ -198,7 +140,7 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse {
   }
 
 
-  public GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse type(@javax.annotation.Nullable TypeEnum type) {
+  public GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse type(@javax.annotation.Nullable String type) {
     this.type = type;
     return this;
   }
@@ -208,11 +150,11 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse {
    * @return type
    */
   @javax.annotation.Nullable
-  public TypeEnum getType() {
+  public String getType() {
     return type;
   }
 
-  public void setType(@javax.annotation.Nullable TypeEnum type) {
+  public void setType(@javax.annotation.Nullable String type) {
     this.type = type;
   }
 
@@ -341,10 +283,6 @@ public class GetFBTInboundOrderDetailsResponseDataInboundOrderWarehouse {
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      // validate the optional field `type`
-      if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
-        TypeEnum.validateJsonElement(jsonObj.get("type"));
       }
   }
 

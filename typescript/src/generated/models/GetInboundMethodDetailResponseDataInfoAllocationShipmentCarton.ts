@@ -39,10 +39,10 @@ export interface GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton 
      * **Possible values:**
      * * `SINGLE_SKU`
      * * `MULTI_SKU`
-     * @type {GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum}
+     * @type {string}
      * @memberof GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton
      */
-    cartonType?: GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum;
+    cartonType?: string;
     /**
      * Goods item list of a carton.
      * @type {Array<GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonItem>}
@@ -68,17 +68,6 @@ export interface GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton 
      */
     boxMeasurements?: GetFBTInboundOrderDetailsResponseDataInboundOrderCartonDetailBoxMeasurement;
 }
-
-
-/**
- * @export
- */
-export const GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum = {
-    SingleSku: 'SINGLE_SKU',
-    MultiSku: 'MULTI_SKU'
-} as const;
-export type GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum = typeof GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum[keyof typeof GetInboundMethodDetailResponseDataInfoAllocationShipmentCartonCartonTypeEnum];
-
 
 /**
  * Check if a given object implements the GetInboundMethodDetailResponseDataInfoAllocationShipmentCarton interface.

@@ -55,73 +55,10 @@ public class GetShoppableVideoStatusResponseDataVideo {
   @javax.annotation.Nullable
   private String id;
 
-  /**
-   * Video posting status. Possible values: - SUCCESS: The video was posted successfully. - FAIL: The video failed to post. - PROCESSING: The video is still being processed. Call this API again later to get the latest status.
-   */
-  @JsonAdapter(PostStatusEnum.Adapter.class)
-  public enum PostStatusEnum {
-    /**
-     * The video was posted successfully.
-     */
-    SUCCESS("SUCCESS"),
-    
-    /**
-     * The video failed to post.
-     */
-    FAIL("FAIL"),
-    
-    /**
-     * The video is still being processed. Call this API again later to get the latest status.
-     */
-    PROCESSING("PROCESSING");
-
-    private String value;
-
-    PostStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static PostStatusEnum fromValue(String value) {
-      for (PostStatusEnum b : PostStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<PostStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PostStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PostStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PostStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PostStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_POST_STATUS = "post_status";
   @SerializedName(SERIALIZED_NAME_POST_STATUS)
   @javax.annotation.Nullable
-  private PostStatusEnum postStatus;
+  private String postStatus;
 
   public static final String SERIALIZED_NAME_POST_TIME = "post_time";
   @SerializedName(SERIALIZED_NAME_POST_TIME)
@@ -150,7 +87,7 @@ public class GetShoppableVideoStatusResponseDataVideo {
   }
 
 
-  public GetShoppableVideoStatusResponseDataVideo postStatus(@javax.annotation.Nullable PostStatusEnum postStatus) {
+  public GetShoppableVideoStatusResponseDataVideo postStatus(@javax.annotation.Nullable String postStatus) {
     this.postStatus = postStatus;
     return this;
   }
@@ -160,11 +97,11 @@ public class GetShoppableVideoStatusResponseDataVideo {
    * @return postStatus
    */
   @javax.annotation.Nullable
-  public PostStatusEnum getPostStatus() {
+  public String getPostStatus() {
     return postStatus;
   }
 
-  public void setPostStatus(@javax.annotation.Nullable PostStatusEnum postStatus) {
+  public void setPostStatus(@javax.annotation.Nullable String postStatus) {
     this.postStatus = postStatus;
   }
 
@@ -303,10 +240,6 @@ public class GetShoppableVideoStatusResponseDataVideo {
       }
       if ((jsonObj.get("post_status") != null && !jsonObj.get("post_status").isJsonNull()) && !jsonObj.get("post_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `post_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("post_status").toString()));
-      }
-      // validate the optional field `post_status`
-      if (jsonObj.get("post_status") != null && !jsonObj.get("post_status").isJsonNull()) {
-        PostStatusEnum.validateJsonElement(jsonObj.get("post_status"));
       }
   }
 

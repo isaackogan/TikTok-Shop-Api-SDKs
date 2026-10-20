@@ -120,7 +120,7 @@ data class GetOrderListResponseDataOrder (
 
     /* Cancellation request initiator.  Available values:  - `SELLER` - `BUYER` - `SYSTEM` */
     @SerializedName("cancellation_initiator")
-    val cancellationInitiator: GetOrderListResponseDataOrder.CancellationInitiator? = null,
+    val cancellationInitiator: kotlin.String? = null,
 
     /* The ID of the current shipping provider. */
     @SerializedName("shipping_provider_id")
@@ -148,15 +148,15 @@ data class GetOrderListResponseDataOrder (
 
     /* Specific order status. Available values: - `UNPAID`: The order has been placed, but payment has not been completed. - `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release. - `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet. - `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled. */
     @SerializedName("status")
-    val status: GetOrderListResponseDataOrder.Status? = null,
+    val status: kotlin.String? = null,
 
     /* Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service. */
     @SerializedName("fulfillment_type")
-    val fulfillmentType: GetOrderListResponseDataOrder.FulfillmentType? = null,
+    val fulfillmentType: kotlin.String? = null,
 
     /* Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders. Available values: - `HOME_DELIVERY`: not a PUDO location - `COLLECTION_POINT`: a PUDO location */
     @SerializedName("delivery_type")
-    val deliveryType: GetOrderListResponseDataOrder.DeliveryType? = null,
+    val deliveryType: kotlin.String? = null,
 
     /* The date and time that the order was paid. Unix timestamp. */
     @SerializedName("paid_time")
@@ -212,7 +212,7 @@ data class GetOrderListResponseDataOrder (
 
     /* Delivery method. Available values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed. */
     @SerializedName("shipping_type")
-    val shippingType: GetOrderListResponseDataOrder.ShippingType? = null,
+    val shippingType: kotlin.String? = null,
 
     /* Buyer user ID. */
     @SerializedName("user_id")
@@ -324,11 +324,11 @@ data class GetOrderListResponseDataOrder (
 
     /* The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA`  **Note**: Available only in the Indonesia market. */
     @SerializedName("commerce_platform")
-    val commercePlatform: GetOrderListResponseDataOrder.CommercePlatform? = null,
+    val commercePlatform: kotlin.String? = null,
 
     /* The order type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE. - `AUCTION`: An order placed during auction, where the price of the product is not fixed. **US** - `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.  Returns an empty value for standard orders or other types that don't fall into the above categories. */
     @SerializedName("order_type")
-    val orderType: GetOrderListResponseDataOrder.OrderType? = null,
+    val orderType: kotlin.String? = null,
 
     /* The date on which order handling starts and the status of the order changes to [`AWAITING_SHIPMENT`](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011).  Applicable only if the `order_type` is `PRE_ORDER`. */
     @SerializedName("release_date")
@@ -360,7 +360,7 @@ data class GetOrderListResponseDataOrder (
 
     /* A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - `3_DAY_DELIVERY` - `3_DAY_POTENTIAL_SHIPPING` - `3_DAY_POTENTIAL_TRANSIT` Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market. */
     @SerializedName("fast_delivery_program")
-    val fastDeliveryProgram: GetOrderListResponseDataOrder.FastDeliveryProgram? = null,
+    val fastDeliveryProgram: kotlin.String? = null,
 
     /* Fulfillment priority value that can be used to prioritize shipping (only available in SEA)  100 = Instant 200 = Sameday 8 Hours  300 = Sameday  400 = Next Day Delivery 500 = Express 600 = Standard 700 = Economy 800 = Cargo */
     @SerializedName("fulfillment_priority_level")
@@ -396,94 +396,6 @@ data class GetOrderListResponseDataOrder (
 
 ) {
 
-    /**
-     * Cancellation request initiator.  Available values:  - `SELLER` - `BUYER` - `SYSTEM`
-     *
-     * Values: SELLER,BUYER,SYSTEM
-     */
-    enum class CancellationInitiator(val value: kotlin.String) {
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM");
-    }
-    /**
-     * Specific order status. Available values: - `UNPAID`: The order has been placed, but payment has not been completed. - `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release. - `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet. - `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
-     *
-     * Values: UNPAID,ON_HOLD,AWAITING_SHIPMENT,PARTIALLY_SHIPPING,AWAITING_COLLECTION,IN_TRANSIT,DELIVERED,COMPLETED,CANCELLED
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "UNPAID") UNPAID("UNPAID"),
-        @SerializedName(value = "ON_HOLD") ON_HOLD("ON_HOLD"),
-        @SerializedName(value = "AWAITING_SHIPMENT") AWAITING_SHIPMENT("AWAITING_SHIPMENT"),
-        @SerializedName(value = "PARTIALLY_SHIPPING") PARTIALLY_SHIPPING("PARTIALLY_SHIPPING"),
-        @SerializedName(value = "AWAITING_COLLECTION") AWAITING_COLLECTION("AWAITING_COLLECTION"),
-        @SerializedName(value = "IN_TRANSIT") IN_TRANSIT("IN_TRANSIT"),
-        @SerializedName(value = "DELIVERED") DELIVERED("DELIVERED"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "CANCELLED") CANCELLED("CANCELLED");
-    }
-    /**
-     * Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
-     *
-     * Values: FULFILLMENT_BY_SELLER,FULFILLMENT_BY_TIKTOK,FULFILLMENT_BY_DILAYANI_TOKOPEDIA
-     */
-    enum class FulfillmentType(val value: kotlin.String) {
-        @SerializedName(value = "FULFILLMENT_BY_SELLER") FULFILLMENT_BY_SELLER("FULFILLMENT_BY_SELLER"),
-        @SerializedName(value = "FULFILLMENT_BY_TIKTOK") FULFILLMENT_BY_TIKTOK("FULFILLMENT_BY_TIKTOK"),
-        @SerializedName(value = "FULFILLMENT_BY_DILAYANI_TOKOPEDIA") FULFILLMENT_BY_DILAYANI_TOKOPEDIA("FULFILLMENT_BY_DILAYANI_TOKOPEDIA");
-    }
-    /**
-     * Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders. Available values: - `HOME_DELIVERY`: not a PUDO location - `COLLECTION_POINT`: a PUDO location
-     *
-     * Values: HOME_DELIVERY,COLLECTION_POINT
-     */
-    enum class DeliveryType(val value: kotlin.String) {
-        @SerializedName(value = "HOME_DELIVERY") HOME_DELIVERY("HOME_DELIVERY"),
-        @SerializedName(value = "COLLECTION_POINT") COLLECTION_POINT("COLLECTION_POINT");
-    }
-    /**
-     * Delivery method. Available values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed.
-     *
-     * Values: TIKTOK,SELLER,TIKTOK_DIGITAL
-     */
-    enum class ShippingType(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK") TIKTOK("TIKTOK"),
-        @SerializedName(value = "SELLER") SELLER("SELLER"),
-        @SerializedName(value = "TIKTOK_DIGITAL") TIKTOK_DIGITAL("TIKTOK_DIGITAL");
-    }
-    /**
-     * The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA`  **Note**: Available only in the Indonesia market.
-     *
-     * Values: TIKTOK_SHOP,TOKOPEDIA
-     */
-    enum class CommercePlatform(val value: kotlin.String) {
-        @SerializedName(value = "TIKTOK_SHOP") TIKTOK_SHOP("TIKTOK_SHOP"),
-        @SerializedName(value = "TOKOPEDIA") TOKOPEDIA("TOKOPEDIA");
-    }
-    /**
-     * The order type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE. - `AUCTION`: An order placed during auction, where the price of the product is not fixed. **US** - `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation.  Returns an empty value for standard orders or other types that don't fall into the above categories.
-     *
-     * Values: NORMAL,ZERO_LOTTERY,AUCTION,PRE_ORDER,MADE_TO_ORDER,BACK_ORDER,VIRTUAL_ORDER
-     */
-    enum class OrderType(val value: kotlin.String) {
-        @SerializedName(value = "NORMAL") NORMAL("NORMAL"),
-        @SerializedName(value = "ZERO_LOTTERY") ZERO_LOTTERY("ZERO_LOTTERY"),
-        @SerializedName(value = "AUCTION") AUCTION("AUCTION"),
-        @SerializedName(value = "PRE_ORDER") PRE_ORDER("PRE_ORDER"),
-        @SerializedName(value = "MADE_TO_ORDER") MADE_TO_ORDER("MADE_TO_ORDER"),
-        @SerializedName(value = "BACK_ORDER") BACK_ORDER("BACK_ORDER"),
-        @SerializedName(value = "VIRTUAL_ORDER") VIRTUAL_ORDER("VIRTUAL_ORDER");
-    }
-    /**
-     * A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - `3_DAY_DELIVERY` - `3_DAY_POTENTIAL_SHIPPING` - `3_DAY_POTENTIAL_TRANSIT` Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market.
-     *
-     * Values: _3_DAY_DELIVERY,_3_DAY_POTENTIAL_SHIPPING,_3_DAY_POTENTIAL_TRANSIT
-     */
-    enum class FastDeliveryProgram(val value: kotlin.String) {
-        @SerializedName(value = "3_DAY_DELIVERY") _3_DAY_DELIVERY("3_DAY_DELIVERY"),
-        @SerializedName(value = "3_DAY_POTENTIAL_SHIPPING") _3_DAY_POTENTIAL_SHIPPING("3_DAY_POTENTIAL_SHIPPING"),
-        @SerializedName(value = "3_DAY_POTENTIAL_TRANSIT") _3_DAY_POTENTIAL_TRANSIT("3_DAY_POTENTIAL_TRANSIT");
-    }
 
 }
 

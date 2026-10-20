@@ -62,7 +62,7 @@ data class GetProductResponseDataSkuCombinedSku (
 
     /* The reasons linked to the source product included in the virtual bundle that are keeping the virtual bundle status from being live. Possible values: - SUB_PRODUCT_DEACTIVATE: Indicate the source product has been deactivated. - SUB_PRODUCT_DELETE: Indicate the source product has been deleted. - SUB_PRODUCT_FROZEN: Indicate the source product has been frozen. - SUB_SKU_DELETE: Indicate the source SKU has been deleted.  - SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR: Indicate the level one category of the virtual bundle does not match that of the source product.  - SUB_PRODUCT_CATEGORY_OVER_RESTRICTION:  Indicate the level one category of the source product is not in the set of restricted categories. */
     @SerializedName("combined_listing_not_live_reasons")
-    val combinedListingNotLiveReasons: kotlin.collections.List<GetProductResponseDataSkuCombinedSku.CombinedListingNotLiveReasons>? = null,
+    val combinedListingNotLiveReasons: kotlin.collections.List<kotlin.String>? = null,
 
     /* Source SKU inventory details. */
     @SerializedName("inventory")
@@ -102,19 +102,6 @@ data class GetProductResponseDataSkuCombinedSku (
 
 ) {
 
-    /**
-     * The reasons linked to the source product included in the virtual bundle that are keeping the virtual bundle status from being live. Possible values: - SUB_PRODUCT_DEACTIVATE: Indicate the source product has been deactivated. - SUB_PRODUCT_DELETE: Indicate the source product has been deleted. - SUB_PRODUCT_FROZEN: Indicate the source product has been frozen. - SUB_SKU_DELETE: Indicate the source SKU has been deleted.  - SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR: Indicate the level one category of the virtual bundle does not match that of the source product.  - SUB_PRODUCT_CATEGORY_OVER_RESTRICTION:  Indicate the level one category of the source product is not in the set of restricted categories.
-     *
-     * Values: SUB_PRODUCT_DEACTIVATE,SUB_PRODUCT_DELETE,SUB_PRODUCT_FROZEN,SUB_SKU_DELETE,SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR,SUB_PRODUCT_CATEGORY_OVER_RESTRICTION
-     */
-    enum class CombinedListingNotLiveReasons(val value: kotlin.String) {
-        @SerializedName(value = "SUB_PRODUCT_DEACTIVATE") SUB_PRODUCT_DEACTIVATE("SUB_PRODUCT_DEACTIVATE"),
-        @SerializedName(value = "SUB_PRODUCT_DELETE") SUB_PRODUCT_DELETE("SUB_PRODUCT_DELETE"),
-        @SerializedName(value = "SUB_PRODUCT_FROZEN") SUB_PRODUCT_FROZEN("SUB_PRODUCT_FROZEN"),
-        @SerializedName(value = "SUB_SKU_DELETE") SUB_SKU_DELETE("SUB_SKU_DELETE"),
-        @SerializedName(value = "SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR") SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR("SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR"),
-        @SerializedName(value = "SUB_PRODUCT_CATEGORY_OVER_RESTRICTION") SUB_PRODUCT_CATEGORY_OVER_RESTRICTION("SUB_PRODUCT_CATEGORY_OVER_RESTRICTION");
-    }
 
 }
 

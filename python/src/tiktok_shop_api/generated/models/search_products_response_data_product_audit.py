@@ -1,15 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_products_response_data_product_audit_pre_approved_reasons_item import (
-    SearchProductsResponseDataProductAuditPreApprovedReasonsItem,
-)
-from ..models.search_products_response_data_product_audit_status import SearchProductsResponseDataProductAuditStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchProductsResponseDataProductAudit")
@@ -19,15 +15,14 @@ T = TypeVar("T", bound="SearchProductsResponseDataProductAudit")
 class SearchProductsResponseDataProductAudit:
     """
     Attributes:
-        status (SearchProductsResponseDataProductAuditStatus | Unset): The product audit status.
+        status (str | Unset): The product audit status.
             Possible values:
             - NONE: The product is not applicable for audit as it is still in a draft, frozen, or deactivated state.
             - AUDITING: The product is currently being audited.
             - FAILED: The product failed the audit, or the audit was cancelled.
             - PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites.
             - APPROVED: The product passed the audit and has been listed on the platform.
-        pre_approved_reasons (list[SearchProductsResponseDataProductAuditPreApprovedReasonsItem] | Unset): The reason
-            why the product is pre-approved.
+        pre_approved_reasons (list[str] | Unset): The reason why the product is pre-approved.
             Applicable only if `audit.status=PRE_APPROVED`, otherwise returns an empty array.
             Possible values:
             - KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting
@@ -37,21 +32,16 @@ class SearchProductsResponseDataProductAudit:
             Applicable only for the US market.
     """
 
-    status: SearchProductsResponseDataProductAuditStatus | Unset = UNSET
-    pre_approved_reasons: list[SearchProductsResponseDataProductAuditPreApprovedReasonsItem] | Unset = UNSET
+    status: str | Unset = UNSET
+    pre_approved_reasons: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         pre_approved_reasons: list[str] | Unset = UNSET
         if not isinstance(self.pre_approved_reasons, Unset):
-            pre_approved_reasons = []
-            for pre_approved_reasons_item_data in self.pre_approved_reasons:
-                pre_approved_reasons_item = pre_approved_reasons_item_data.value
-                pre_approved_reasons.append(pre_approved_reasons_item)
+            pre_approved_reasons = self.pre_approved_reasons
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -66,23 +56,9 @@ class SearchProductsResponseDataProductAudit:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _status = d.pop("status", UNSET)
-        status: SearchProductsResponseDataProductAuditStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = SearchProductsResponseDataProductAuditStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _pre_approved_reasons = d.pop("pre_approved_reasons", UNSET)
-        pre_approved_reasons: list[SearchProductsResponseDataProductAuditPreApprovedReasonsItem] | Unset = UNSET
-        if _pre_approved_reasons is not UNSET:
-            pre_approved_reasons = []
-            for pre_approved_reasons_item_data in _pre_approved_reasons:
-                pre_approved_reasons_item = SearchProductsResponseDataProductAuditPreApprovedReasonsItem(
-                    pre_approved_reasons_item_data
-                )
-
-                pre_approved_reasons.append(pre_approved_reasons_item)
+        pre_approved_reasons = cast(list[str], d.pop("pre_approved_reasons", UNSET))
 
         search_products_response_data_product_audit = cls(
             status=status,

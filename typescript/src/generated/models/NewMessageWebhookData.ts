@@ -62,10 +62,10 @@ export interface NewMessageWebhookData {
      *  * COUPON_CARD 
      *  *LOGISTICS_CARD 
      *  * OTHER
-     * @type {NewMessageWebhookDataTypeEnum}
+     * @type {string}
      * @memberof NewMessageWebhookData
      */
-    type?: NewMessageWebhookDataTypeEnum;
+    type?: string;
     /**
      * Message content, in JSON serialized string. 
      *  Examples: 
@@ -140,29 +140,6 @@ export interface NewMessageWebhookData {
      */
     sender?: NewMessageWebhookDataSender;
 }
-
-
-/**
- * @export
- */
-export const NewMessageWebhookDataTypeEnum = {
-    Text: 'TEXT',
-    Image: 'IMAGE',
-    AllocatedService: 'ALLOCATED_SERVICE',
-    Notification: 'NOTIFICATION',
-    BuyerEnterFromTransfer: 'BUYER_ENTER_FROM_TRANSFER',
-    BuyerEnterFromProduct: 'BUYER_ENTER_FROM_PRODUCT',
-    BuyerEnterFromOrder: 'BUYER_ENTER_FROM_ORDER',
-    ProductCard: 'PRODUCT_CARD',
-    OrderCard: 'ORDER_CARD',
-    Emoticons: 'EMOTICONS',
-    Video: 'VIDEO',
-    CouponCard: 'COUPON_CARD',
-    LogisticsCard: 'LOGISTICS_CARD',
-    Other: 'OTHER'
-} as const;
-export type NewMessageWebhookDataTypeEnum = typeof NewMessageWebhookDataTypeEnum[keyof typeof NewMessageWebhookDataTypeEnum];
-
 
 /**
  * Check if a given object implements the NewMessageWebhookData interface.

@@ -41,22 +41,11 @@ export interface GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionL
      * The unit of measurement for the dimensions, with possible values:
      * - CM
      * - INCH
-     * @type {GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum}
+     * @type {string}
      * @memberof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit
      */
-    unit?: GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum = {
-    Cm: 'CM',
-    Inch: 'INCH'
-} as const;
-export type GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum = typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum[keyof typeof GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimitUnitEnum];
-
 
 /**
  * Check if a given object implements the GetWarehouseDeliveryOptionsResponseDataDeliveryOptionDimensionLimit interface.

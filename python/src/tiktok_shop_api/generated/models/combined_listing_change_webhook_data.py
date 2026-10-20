@@ -6,8 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.combined_listing_change_webhook_data_change_type import CombinedListingChangeWebhookDataChangeType
-from ..models.combined_listing_change_webhook_data_status import CombinedListingChangeWebhookDataStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,7 +22,7 @@ class CombinedListingChangeWebhookData:
         combined_listing_id (str | Unset): The combined listing ID.
         products (list[CombinedListingChangeWebhookDataProduct] | Unset): The current list of products in this combined
             listing after the change.
-        status (CombinedListingChangeWebhookDataStatus | Unset): The status of the combined listing.
+        status (str | Unset): The status of the combined listing.
              Possible values:
 
              * LIVE
@@ -33,8 +31,7 @@ class CombinedListingChangeWebhookData:
              * DELETED
 
              Note: Only products in LIVE combined listings will appear on the product display page.
-        change_type (CombinedListingChangeWebhookDataChangeType | Unset): The type of change made to this combined
-            listing.
+        change_type (str | Unset): The type of change made to this combined listing.
              Possible values:
 
              * CREATE: The combined listing was created.
@@ -46,8 +43,8 @@ class CombinedListingChangeWebhookData:
 
     combined_listing_id: str | Unset = UNSET
     products: list[CombinedListingChangeWebhookDataProduct] | Unset = UNSET
-    status: CombinedListingChangeWebhookDataStatus | Unset = UNSET
-    change_type: CombinedListingChangeWebhookDataChangeType | Unset = UNSET
+    status: str | Unset = UNSET
+    change_type: str | Unset = UNSET
     added_product_ids: list[str] | Unset = UNSET
     removed_product_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -62,13 +59,9 @@ class CombinedListingChangeWebhookData:
                 products_item = products_item_data.to_dict()
                 products.append(products_item)
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
-        change_type: str | Unset = UNSET
-        if not isinstance(self.change_type, Unset):
-            change_type = self.change_type.value
+        change_type = self.change_type
 
         added_product_ids: list[str] | Unset = UNSET
         if not isinstance(self.added_product_ids, Unset):
@@ -114,19 +107,9 @@ class CombinedListingChangeWebhookData:
 
                 products.append(products_item)
 
-        _status = d.pop("status", UNSET)
-        status: CombinedListingChangeWebhookDataStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = CombinedListingChangeWebhookDataStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _change_type = d.pop("change_type", UNSET)
-        change_type: CombinedListingChangeWebhookDataChangeType | Unset
-        if isinstance(_change_type, Unset):
-            change_type = UNSET
-        else:
-            change_type = CombinedListingChangeWebhookDataChangeType(_change_type)
+        change_type = d.pop("change_type", UNSET)
 
         added_product_ids = cast(list[str], d.pop("added_product_ids", UNSET))
 

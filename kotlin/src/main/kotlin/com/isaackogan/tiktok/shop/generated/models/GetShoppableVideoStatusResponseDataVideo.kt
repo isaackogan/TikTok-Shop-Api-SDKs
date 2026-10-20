@@ -43,7 +43,7 @@ data class GetShoppableVideoStatusResponseDataVideo (
 
     /* Video posting status. Possible values: - SUCCESS: The video was posted successfully. - FAIL: The video failed to post. - PROCESSING: The video is still being processed. Call this API again later to get the latest status. */
     @SerializedName("post_status")
-    val postStatus: GetShoppableVideoStatusResponseDataVideo.PostStatus? = null,
+    val postStatus: kotlin.String? = null,
 
     /* Returned if the video has been successfully posted, i.e. `posting_status = SUCCESS`. Represented in seconds. */
     @SerializedName("post_time")
@@ -51,16 +51,6 @@ data class GetShoppableVideoStatusResponseDataVideo (
 
 ) {
 
-    /**
-     * Video posting status. Possible values: - SUCCESS: The video was posted successfully. - FAIL: The video failed to post. - PROCESSING: The video is still being processed. Call this API again later to get the latest status.
-     *
-     * Values: SUCCESS,FAIL,PROCESSING
-     */
-    enum class PostStatus(val value: kotlin.String) {
-        @SerializedName(value = "SUCCESS") SUCCESS("SUCCESS"),
-        @SerializedName(value = "FAIL") FAIL("FAIL"),
-        @SerializedName(value = "PROCESSING") PROCESSING("PROCESSING");
-    }
 
 }
 

@@ -55,62 +55,10 @@ public class UnboxingCaseList {
   @javax.annotation.Nullable
   private String unboxSku;
 
-  /**
-   * Indicates if the unboxed sku is a gift item Enumerations: NORMAL or GIFT
-   */
-  @JsonAdapter(UnboxSkuTypeEnum.Adapter.class)
-  public enum UnboxSkuTypeEnum {
-    NORMAL("NORMAL"),
-    
-    GIFT("GIFT");
-
-    private String value;
-
-    UnboxSkuTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UnboxSkuTypeEnum fromValue(String value) {
-      for (UnboxSkuTypeEnum b : UnboxSkuTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UnboxSkuTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UnboxSkuTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UnboxSkuTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return UnboxSkuTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      UnboxSkuTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_UNBOX_SKU_TYPE = "unbox_sku_type";
   @SerializedName(SERIALIZED_NAME_UNBOX_SKU_TYPE)
   @javax.annotation.Nullable
-  private UnboxSkuTypeEnum unboxSkuType;
+  private String unboxSkuType;
 
   public UnboxingCaseList() {
   }
@@ -134,7 +82,7 @@ public class UnboxingCaseList {
   }
 
 
-  public UnboxingCaseList unboxSkuType(@javax.annotation.Nullable UnboxSkuTypeEnum unboxSkuType) {
+  public UnboxingCaseList unboxSkuType(@javax.annotation.Nullable String unboxSkuType) {
     this.unboxSkuType = unboxSkuType;
     return this;
   }
@@ -144,11 +92,11 @@ public class UnboxingCaseList {
    * @return unboxSkuType
    */
   @javax.annotation.Nullable
-  public UnboxSkuTypeEnum getUnboxSkuType() {
+  public String getUnboxSkuType() {
     return unboxSkuType;
   }
 
-  public void setUnboxSkuType(@javax.annotation.Nullable UnboxSkuTypeEnum unboxSkuType) {
+  public void setUnboxSkuType(@javax.annotation.Nullable String unboxSkuType) {
     this.unboxSkuType = unboxSkuType;
   }
 
@@ -266,10 +214,6 @@ public class UnboxingCaseList {
       }
       if ((jsonObj.get("unbox_sku_type") != null && !jsonObj.get("unbox_sku_type").isJsonNull()) && !jsonObj.get("unbox_sku_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unbox_sku_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unbox_sku_type").toString()));
-      }
-      // validate the optional field `unbox_sku_type`
-      if (jsonObj.get("unbox_sku_type") != null && !jsonObj.get("unbox_sku_type").isJsonNull()) {
-        UnboxSkuTypeEnum.validateJsonElement(jsonObj.get("unbox_sku_type"));
       }
   }
 

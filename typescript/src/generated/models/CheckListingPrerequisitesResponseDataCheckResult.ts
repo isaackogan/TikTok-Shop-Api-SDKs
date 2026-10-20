@@ -32,10 +32,10 @@ export interface CheckListingPrerequisitesResponseDataCheckResult {
      * - EXTENDED_PRODUCER_RESPONSIBILITY
      * - BANk_ACCOUNT
      * - CONTACT_INFO
-     * @type {CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum}
+     * @type {string}
      * @memberof CheckListingPrerequisitesResponseDataCheckResult
      */
-    checkItem?: CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum;
+    checkItem?: string;
     /**
      * A flag indicating whether the shop has failed a `check_item`.
      * @type {boolean}
@@ -49,25 +49,6 @@ export interface CheckListingPrerequisitesResponseDataCheckResult {
      */
     failReasons?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum = {
-    ShopStatus: 'SHOP_STATUS',
-    ShopTax: 'SHOP_TAX',
-    PickupWarehouse: 'PICKUP_WAREHOUSE',
-    ReturnWarehouse: 'RETURN_WAREHOUSE',
-    DeliveryOption: 'DELIVERY_OPTION',
-    ShippingTemplate: 'SHIPPING_TEMPLATE',
-    ProductQuantityLimit: 'PRODUCT_QUANTITY_LIMIT',
-    ExtendedProducerResponsibility: 'EXTENDED_PRODUCER_RESPONSIBILITY',
-    BankAccount: 'BANk_ACCOUNT',
-    ContactInfo: 'CONTACT_INFO'
-} as const;
-export type CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum = typeof CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum[keyof typeof CheckListingPrerequisitesResponseDataCheckResultCheckItemEnum];
-
 
 /**
  * Check if a given object implements the CheckListingPrerequisitesResponseDataCheckResult interface.

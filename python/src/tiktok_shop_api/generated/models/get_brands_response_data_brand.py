@@ -6,8 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_brands_response_data_brand_authorized_status import GetBrandsResponseDataBrandAuthorizedStatus
-from ..models.get_brands_response_data_brand_brand_status import GetBrandsResponseDataBrandBrandStatus
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetBrandsResponseDataBrand")
@@ -19,8 +17,8 @@ class GetBrandsResponseDataBrand:
     Attributes:
         id (str | Unset): The brand ID.
         name (str | Unset): The brand name.
-        authorized_status (GetBrandsResponseDataBrandAuthorizedStatus | Unset): A status to indicate whether the seller
-            has obtained prior authorization to sell goods bearing the brand's trademark, name, or logo.
+        authorized_status (str | Unset): A status to indicate whether the seller has obtained prior authorization to
+            sell goods bearing the brand's trademark, name, or logo.
             Possible values:
             - UNAUTHORIEZD
             - AUTHORIZED
@@ -36,8 +34,7 @@ class GetBrandsResponseDataBrand:
             product display page.
             You can obtain authorization by submitting the required qualifications through TikTok Shop Seller Center >
             Qualification Center > Brand qualification.
-        brand_status (GetBrandsResponseDataBrandBrandStatus | Unset): The availability of an **authorized brand** in the
-            requested category.
+        brand_status (str | Unset): The availability of an **authorized brand** in the requested category.
             Possible values:
             - AVAILABLE
             - UNAVAILABLE
@@ -47,9 +44,9 @@ class GetBrandsResponseDataBrand:
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
-    authorized_status: GetBrandsResponseDataBrandAuthorizedStatus | Unset = UNSET
+    authorized_status: str | Unset = UNSET
     is_t1_brand: bool | Unset = UNSET
-    brand_status: GetBrandsResponseDataBrandBrandStatus | Unset = UNSET
+    brand_status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -57,15 +54,11 @@ class GetBrandsResponseDataBrand:
 
         name = self.name
 
-        authorized_status: str | Unset = UNSET
-        if not isinstance(self.authorized_status, Unset):
-            authorized_status = self.authorized_status.value
+        authorized_status = self.authorized_status
 
         is_t1_brand = self.is_t1_brand
 
-        brand_status: str | Unset = UNSET
-        if not isinstance(self.brand_status, Unset):
-            brand_status = self.brand_status.value
+        brand_status = self.brand_status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -90,21 +83,11 @@ class GetBrandsResponseDataBrand:
 
         name = d.pop("name", UNSET)
 
-        _authorized_status = d.pop("authorized_status", UNSET)
-        authorized_status: GetBrandsResponseDataBrandAuthorizedStatus | Unset
-        if isinstance(_authorized_status, Unset):
-            authorized_status = UNSET
-        else:
-            authorized_status = GetBrandsResponseDataBrandAuthorizedStatus(_authorized_status)
+        authorized_status = d.pop("authorized_status", UNSET)
 
         is_t1_brand = d.pop("is_t1_brand", UNSET)
 
-        _brand_status = d.pop("brand_status", UNSET)
-        brand_status: GetBrandsResponseDataBrandBrandStatus | Unset
-        if isinstance(_brand_status, Unset):
-            brand_status = UNSET
-        else:
-            brand_status = GetBrandsResponseDataBrandBrandStatus(_brand_status)
+        brand_status = d.pop("brand_status", UNSET)
 
         get_brands_response_data_brand = cls(
             id=id,

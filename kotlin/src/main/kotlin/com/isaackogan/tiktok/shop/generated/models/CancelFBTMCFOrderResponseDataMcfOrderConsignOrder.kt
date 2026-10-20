@@ -42,29 +42,10 @@ data class CancelFBTMCFOrderResponseDataMcfOrderConsignOrder (
 
     /* The current status of this consign order. In a cancellation response, `CLOSED` means that the consign order has been canceled.  Possible Status Enumerations 1. **PENDING** - Order is pending warehouse processing 2. **HANDLE_BY_WAREHOUSE** - Order is being processed by the warehouse 3. **SHIPPED** - Order has been shipped out from the warehouse 4. **HANDOVER** - Order has been received by the logistics carrier and is in transit 5. **CLOSED** - Order has been canceled 6. **LOST** - Order is lost 7. **DAMAGE** - Order is damaged 8. **COMPLETED** - Order has been completed 9. **ABNORMAL** - There is an issue related to this order and cannot be fulfilled 10. **RETURNED** - Order has been returned 11. **SCRAP** - Order has been scrapped 12. **UNKNOWN** - Order status is unknown */
     @SerializedName("status")
-    val status: CancelFBTMCFOrderResponseDataMcfOrderConsignOrder.Status? = null
+    val status: kotlin.String? = null
 
 ) {
 
-    /**
-     * The current status of this consign order. In a cancellation response, `CLOSED` means that the consign order has been canceled.  Possible Status Enumerations 1. **PENDING** - Order is pending warehouse processing 2. **HANDLE_BY_WAREHOUSE** - Order is being processed by the warehouse 3. **SHIPPED** - Order has been shipped out from the warehouse 4. **HANDOVER** - Order has been received by the logistics carrier and is in transit 5. **CLOSED** - Order has been canceled 6. **LOST** - Order is lost 7. **DAMAGE** - Order is damaged 8. **COMPLETED** - Order has been completed 9. **ABNORMAL** - There is an issue related to this order and cannot be fulfilled 10. **RETURNED** - Order has been returned 11. **SCRAP** - Order has been scrapped 12. **UNKNOWN** - Order status is unknown
-     *
-     * Values: PENDING,HANDLE_BY_WAREHOUSE,SHIPPED,HANDOVER,CLOSED,LOST,DAMAGE,COMPLETED,ABNORMAL,RETURNED,SCRAP,UNKNOWN
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "PENDING") PENDING("PENDING"),
-        @SerializedName(value = "HANDLE_BY_WAREHOUSE") HANDLE_BY_WAREHOUSE("HANDLE_BY_WAREHOUSE"),
-        @SerializedName(value = "SHIPPED") SHIPPED("SHIPPED"),
-        @SerializedName(value = "HANDOVER") HANDOVER("HANDOVER"),
-        @SerializedName(value = "CLOSED") CLOSED("CLOSED"),
-        @SerializedName(value = "LOST") LOST("LOST"),
-        @SerializedName(value = "DAMAGE") DAMAGE("DAMAGE"),
-        @SerializedName(value = "COMPLETED") COMPLETED("COMPLETED"),
-        @SerializedName(value = "ABNORMAL") ABNORMAL("ABNORMAL"),
-        @SerializedName(value = "RETURNED") RETURNED("RETURNED"),
-        @SerializedName(value = "SCRAP") SCRAP("SCRAP"),
-        @SerializedName(value = "UNKNOWN") UNKNOWN("UNKNOWN");
-    }
 
 }
 

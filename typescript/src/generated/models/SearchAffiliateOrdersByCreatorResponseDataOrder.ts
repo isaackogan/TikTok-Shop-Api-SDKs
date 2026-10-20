@@ -43,10 +43,10 @@ export interface SearchAffiliateOrdersByCreatorResponseDataOrder {
      * - DEDUCTED: An additional deduction was made from the balance account.
      * 
      * For statuses other than SETTLED or REFUNDED, actual commission values can be empty. Bonus, shop ads, and creator commission reward amounts are populated only when the corresponding commission data exists; their availability is not determined by order status alone.
-     * @type {SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum}
+     * @type {string}
      * @memberof SearchAffiliateOrdersByCreatorResponseDataOrder
      */
-    status?: SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum;
+    status?: string;
     /**
      * A list of SKUs associated with the order.
      * @type {Array<SearchAffiliateOrdersByCreatorResponseDataOrderSku>}
@@ -66,21 +66,6 @@ export interface SearchAffiliateOrdersByCreatorResponseDataOrder {
      */
     deliveryTime?: number;
 }
-
-
-/**
- * @export
- */
-export const SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum = {
-    Unspecified: 'UNSPECIFIED',
-    Ordered: 'ORDERED',
-    Settled: 'SETTLED',
-    Refunded: 'REFUNDED',
-    Frozen: 'FROZEN',
-    Deducted: 'DEDUCTED'
-} as const;
-export type SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum = typeof SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum[keyof typeof SearchAffiliateOrdersByCreatorResponseDataOrderStatusEnum];
-
 
 /**
  * Check if a given object implements the SearchAffiliateOrdersByCreatorResponseDataOrder interface.

@@ -46,26 +46,11 @@ export interface SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensi
      * - FOOT 
      * - INCH
      * - MICRO
-     * @type {SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension
      */
-    unit?: SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum;
+    unit?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum = {
-    Millimeter: 'MILLIMETER',
-    Centimeter: 'CENTIMETER',
-    Meter: 'METER',
-    Foot: 'FOOT',
-    Inch: 'INCH',
-    Micro: 'MICRO'
-} as const;
-export type SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum = typeof SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum[keyof typeof SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensionUnitEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension interface.

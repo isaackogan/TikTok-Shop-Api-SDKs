@@ -6,10 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_category_attributes_response_data_attribute_type import GetCategoryAttributesResponseDataAttributeType
-from ..models.get_category_attributes_response_data_attribute_value_data_format import (
-    GetCategoryAttributesResponseDataAttributeValueDataFormat,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -31,7 +27,7 @@ class GetCategoryAttributesResponseDataAttribute:
     Attributes:
         id (str | Unset): The ID of the built-in attribute.
         name (str | Unset): The name of the built-in attribute.
-        type_ (GetCategoryAttributesResponseDataAttributeType | Unset): The attribute type.
+        type_ (str | Unset): The attribute type.
             Possible values:
             - SALES_PROPERTY: Indicates sales attributes that define product variants.
             - PRODUCT_PROPERTY: Indicates product attributes that describe the product as a whole.
@@ -44,8 +40,7 @@ class GetCategoryAttributesResponseDataAttribute:
             Applicable only if `type=PRODUCT_PROPERTY`.
         values (list[GetCategoryAttributesResponseDataAttributeValue] | Unset): A list of selectable values for the
             attribute.
-        value_data_format (GetCategoryAttributesResponseDataAttributeValueDataFormat | Unset): The data format for a
-            free-form attribute value.
+        value_data_format (str | Unset): The data format for a free-form attribute value.
 
             Returned for customizable numeric attributes.
 
@@ -72,10 +67,10 @@ class GetCategoryAttributesResponseDataAttribute:
 
     id: str | Unset = UNSET
     name: str | Unset = UNSET
-    type_: GetCategoryAttributesResponseDataAttributeType | Unset = UNSET
+    type_: str | Unset = UNSET
     is_requried: bool | Unset = UNSET
     values: list[GetCategoryAttributesResponseDataAttributeValue] | Unset = UNSET
-    value_data_format: GetCategoryAttributesResponseDataAttributeValueDataFormat | Unset = UNSET
+    value_data_format: str | Unset = UNSET
     is_customizable: bool | Unset = UNSET
     requirement_conditions: list[RequirementCondition] | Unset = UNSET
     is_multiple_selection: bool | Unset = UNSET
@@ -87,9 +82,7 @@ class GetCategoryAttributesResponseDataAttribute:
 
         name = self.name
 
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         is_requried = self.is_requried
 
@@ -100,9 +93,7 @@ class GetCategoryAttributesResponseDataAttribute:
                 values_item = values_item_data.to_dict()
                 values.append(values_item)
 
-        value_data_format: str | Unset = UNSET
-        if not isinstance(self.value_data_format, Unset):
-            value_data_format = self.value_data_format.value
+        value_data_format = self.value_data_format
 
         is_customizable = self.is_customizable
 
@@ -163,12 +154,7 @@ class GetCategoryAttributesResponseDataAttribute:
 
         name = d.pop("name", UNSET)
 
-        _type_ = d.pop("type", UNSET)
-        type_: GetCategoryAttributesResponseDataAttributeType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCategoryAttributesResponseDataAttributeType(_type_)
+        type_ = d.pop("type", UNSET)
 
         is_requried = d.pop("is_requried", UNSET)
 
@@ -181,12 +167,7 @@ class GetCategoryAttributesResponseDataAttribute:
 
                 values.append(values_item)
 
-        _value_data_format = d.pop("value_data_format", UNSET)
-        value_data_format: GetCategoryAttributesResponseDataAttributeValueDataFormat | Unset
-        if isinstance(_value_data_format, Unset):
-            value_data_format = UNSET
-        else:
-            value_data_format = GetCategoryAttributesResponseDataAttributeValueDataFormat(_value_data_format)
+        value_data_format = d.pop("value_data_format", UNSET)
 
         is_customizable = d.pop("is_customizable", UNSET)
 

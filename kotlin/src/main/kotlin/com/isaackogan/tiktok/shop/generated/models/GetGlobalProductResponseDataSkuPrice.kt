@@ -43,7 +43,7 @@ data class GetGlobalProductResponseDataSkuPrice (
 
     /* The currency. Possible values: - `USD`: Applicable for global sellers - `EUR`: Applicable for intra-EU sellers */
     @SerializedName("currency")
-    val currency: GetGlobalProductResponseDataSkuPrice.Currency? = null,
+    val currency: kotlin.String? = null,
 
     /* The unit price of the SKU.  You can display the unit price to facilitate easier price comparisons across different products and packaging sizes. Applicable only for the EU market.  **Note**:  - This value is available only if you have defined the elements used to calculate this price when creating the product. - Unit price = Selling price/(SKU unit count/base unit count) */
     @SerializedName("unit_price")
@@ -51,15 +51,6 @@ data class GetGlobalProductResponseDataSkuPrice (
 
 ) {
 
-    /**
-     * The currency. Possible values: - `USD`: Applicable for global sellers - `EUR`: Applicable for intra-EU sellers
-     *
-     * Values: USD,EUR
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "USD") USD("USD"),
-        @SerializedName(value = "EUR") EUR("EUR");
-    }
 
 }
 

@@ -45,18 +45,18 @@ export interface GetGlobalCategoryRulesResponseDataProductCertificationRequireme
      * - TH: Thailand
      * - US: United States
      * - VN: Vietnam
-     * @type {GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum}
+     * @type {string}
      * @memberof GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition
      */
-    region?: GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum;
+    region?: string;
     /**
      * The type of condition.
      * Possible values:
      * - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     * @type {GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum}
+     * @type {string}
      * @memberof GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition
      */
-    conditionType?: GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum;
+    conditionType?: string;
     /**
      * The ID of the product attribute that is being evaluated by the condition.
      * @type {string}
@@ -70,46 +70,6 @@ export interface GetGlobalCategoryRulesResponseDataProductCertificationRequireme
      */
     attributeValueId?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    Mx: 'MX',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Pl: 'PL',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN'
-} as const;
-export type GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum = typeof GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum[keyof typeof GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionRegionEnum];
-
-/**
- * @export
- */
-export const GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum = {
-    ValueIdMatch: 'VALUE_ID_MATCH'
-} as const;
-export type GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum = typeof GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum[keyof typeof GetGlobalCategoryRulesResponseDataProductCertificationRequirementConditionConditionTypeEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalCategoryRulesResponseDataProductCertificationRequirementCondition interface.

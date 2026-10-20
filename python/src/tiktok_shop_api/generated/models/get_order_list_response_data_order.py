@@ -6,18 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_order_list_response_data_order_cancellation_initiator import (
-    GetOrderListResponseDataOrderCancellationInitiator,
-)
-from ..models.get_order_list_response_data_order_commerce_platform import GetOrderListResponseDataOrderCommercePlatform
-from ..models.get_order_list_response_data_order_delivery_type import GetOrderListResponseDataOrderDeliveryType
-from ..models.get_order_list_response_data_order_fast_delivery_program import (
-    GetOrderListResponseDataOrderFastDeliveryProgram,
-)
-from ..models.get_order_list_response_data_order_fulfillment_type import GetOrderListResponseDataOrderFulfillmentType
-from ..models.get_order_list_response_data_order_order_type import GetOrderListResponseDataOrderOrderType
-from ..models.get_order_list_response_data_order_shipping_type import GetOrderListResponseDataOrderShippingType
-from ..models.get_order_list_response_data_order_status import GetOrderListResponseDataOrderStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -39,8 +27,7 @@ class GetOrderListResponseDataOrder:
     Attributes:
         id (str | Unset): TikTok Shop order ID.
         buyer_message (str | Unset): The note from the buyer.
-        cancellation_initiator (GetOrderListResponseDataOrderCancellationInitiator | Unset): Cancellation request
-            initiator.
+        cancellation_initiator (str | Unset): Cancellation request initiator.
             Available values:
             - `SELLER`
             - `BUYER`
@@ -51,7 +38,7 @@ class GetOrderListResponseDataOrder:
         packages (list[GetOrderListResponseDataOrderPackage] | Unset): List of packages included in this order.
         payment (Payment | Unset):
         recipient_address (GetOrderListResponseDataOrderRecipientAddress | Unset):
-        status (GetOrderListResponseDataOrderStatus | Unset): Specific order status.
+        status (str | Unset): Specific order status.
             Available values:
             - `UNPAID`: The order has been placed, but payment has not been completed.
             - `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the
@@ -64,8 +51,7 @@ class GetOrderListResponseDataOrder:
             - `DELIVERED`: The package has been delivered to the buyer.
             - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
             - `CANCELLED`: The order has been cancelled.
-        fulfillment_type (GetOrderListResponseDataOrderFulfillmentType | Unset): Fulfillment type. Only orders with
-            fulfillment type can be shipped by sellers.
+        fulfillment_type (str | Unset): Fulfillment type. Only orders with fulfillment type can be shipped by sellers.
             Available values:
             - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without
             using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and
@@ -75,8 +61,8 @@ class GetOrderListResponseDataOrder:
             customers.
             - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and
             logistics services to sellers and charges a fee for the service.
-        delivery_type (GetOrderListResponseDataOrderDeliveryType | Unset): Indicates whether it is a Pick-Up Drop-Off
-            (PUDO) location. The PUDO location is selected by the buyer when placing orders.
+        delivery_type (str | Unset): Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is
+            selected by the buyer when placing orders.
             Available values:
             - `HOME_DELIVERY`: not a PUDO location
             - `COLLECTION_POINT`: a PUDO location
@@ -100,7 +86,7 @@ class GetOrderListResponseDataOrder:
             Unix timestamp.
         warehouse_id (str | Unset): Seller warehouse ID.
         request_cancel_time (int | Unset): Buyer request cancellation time. Unix timestamp.
-        shipping_type (GetOrderListResponseDataOrderShippingType | Unset): Delivery method.
+        shipping_type (str | Unset): Delivery method.
             Available values:
             - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok.
             - `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller.
@@ -168,14 +154,13 @@ class GetOrderListResponseDataOrder:
             project. Unix timestamp.
 
             **Note**: Only available in Thailand and the Philippines.
-        commerce_platform (GetOrderListResponseDataOrderCommercePlatform | Unset): The platform where the order was
-            placed.
+        commerce_platform (str | Unset): The platform where the order was placed.
             Possible values:
             - `TIKTOK_SHOP`
             - `TOKOPEDIA`
 
             **Note**: Available only in the Indonesia market.
-        order_type (GetOrderListResponseDataOrderOrderType | Unset): The order type.
+        order_type (str | Unset): The order type.
             Possible values based on region:
 
             **All regions**
@@ -213,9 +198,8 @@ class GetOrderListResponseDataOrder:
         consultation_id (str | Unset): An ID to identify the corresponding ePharmacy consultation.
             Applicable only if an ePharmacy consultation was initiated. Not applicable if the prescription was provided by
             the customer through an image upload.
-        fast_delivery_program (GetOrderListResponseDataOrderFastDeliveryProgram | Unset): A badge presented on the
-            merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order
-            should arrive in a promised time period.
+        fast_delivery_program (str | Unset): A badge presented on the merchandise to tell the buyer that the seller
+            participates in the fast delivery program, such that the order should arrive in a promised time period.
             Possible values:
             - `3_DAY_DELIVERY`
             - `3_DAY_POTENTIAL_SHIPPING`
@@ -256,16 +240,16 @@ class GetOrderListResponseDataOrder:
 
     id: str | Unset = UNSET
     buyer_message: str | Unset = UNSET
-    cancellation_initiator: GetOrderListResponseDataOrderCancellationInitiator | Unset = UNSET
+    cancellation_initiator: str | Unset = UNSET
     shipping_provider_id: str | Unset = UNSET
     create_time: int | Unset = UNSET
     shipping_provider: str | Unset = UNSET
     packages: list[GetOrderListResponseDataOrderPackage] | Unset = UNSET
     payment: Payment | Unset = UNSET
     recipient_address: GetOrderListResponseDataOrderRecipientAddress | Unset = UNSET
-    status: GetOrderListResponseDataOrderStatus | Unset = UNSET
-    fulfillment_type: GetOrderListResponseDataOrderFulfillmentType | Unset = UNSET
-    delivery_type: GetOrderListResponseDataOrderDeliveryType | Unset = UNSET
+    status: str | Unset = UNSET
+    fulfillment_type: str | Unset = UNSET
+    delivery_type: str | Unset = UNSET
     paid_time: int | Unset = UNSET
     rts_sla_time: int | Unset = UNSET
     tts_sla_time: int | Unset = UNSET
@@ -279,7 +263,7 @@ class GetOrderListResponseDataOrder:
     cancel_order_sla_time: int | Unset = UNSET
     warehouse_id: str | Unset = UNSET
     request_cancel_time: int | Unset = UNSET
-    shipping_type: GetOrderListResponseDataOrderShippingType | Unset = UNSET
+    shipping_type: str | Unset = UNSET
     user_id: str | Unset = UNSET
     seller_note: str | Unset = UNSET
     delivery_sla_time: int | Unset = UNSET
@@ -307,8 +291,8 @@ class GetOrderListResponseDataOrder:
     is_buyer_request_cancel: bool | Unset = UNSET
     pick_up_cut_off_time: int | Unset = UNSET
     fast_dispatch_sla_time: int | Unset = UNSET
-    commerce_platform: GetOrderListResponseDataOrderCommercePlatform | Unset = UNSET
-    order_type: GetOrderListResponseDataOrderOrderType | Unset = UNSET
+    commerce_platform: str | Unset = UNSET
+    order_type: str | Unset = UNSET
     release_date: int | Unset = UNSET
     handling_duration: HandlingDuration | Unset = UNSET
     auto_combine_group_id: str | Unset = UNSET
@@ -316,7 +300,7 @@ class GetOrderListResponseDataOrder:
     is_exchange_order: bool | Unset = UNSET
     exchange_source_order_id: str | Unset = UNSET
     consultation_id: str | Unset = UNSET
-    fast_delivery_program: GetOrderListResponseDataOrderFastDeliveryProgram | Unset = UNSET
+    fast_delivery_program: str | Unset = UNSET
     fulfillment_priority_level: int | Unset = UNSET
     recommended_shipping_time: int | Unset = UNSET
     buyer_nickname: str | Unset = UNSET
@@ -332,9 +316,7 @@ class GetOrderListResponseDataOrder:
 
         buyer_message = self.buyer_message
 
-        cancellation_initiator: str | Unset = UNSET
-        if not isinstance(self.cancellation_initiator, Unset):
-            cancellation_initiator = self.cancellation_initiator.value
+        cancellation_initiator = self.cancellation_initiator
 
         shipping_provider_id = self.shipping_provider_id
 
@@ -357,17 +339,11 @@ class GetOrderListResponseDataOrder:
         if not isinstance(self.recipient_address, Unset):
             recipient_address = self.recipient_address.to_dict()
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
-        fulfillment_type: str | Unset = UNSET
-        if not isinstance(self.fulfillment_type, Unset):
-            fulfillment_type = self.fulfillment_type.value
+        fulfillment_type = self.fulfillment_type
 
-        delivery_type: str | Unset = UNSET
-        if not isinstance(self.delivery_type, Unset):
-            delivery_type = self.delivery_type.value
+        delivery_type = self.delivery_type
 
         paid_time = self.paid_time
 
@@ -395,9 +371,7 @@ class GetOrderListResponseDataOrder:
 
         request_cancel_time = self.request_cancel_time
 
-        shipping_type: str | Unset = UNSET
-        if not isinstance(self.shipping_type, Unset):
-            shipping_type = self.shipping_type.value
+        shipping_type = self.shipping_type
 
         user_id = self.user_id
 
@@ -458,13 +432,9 @@ class GetOrderListResponseDataOrder:
 
         fast_dispatch_sla_time = self.fast_dispatch_sla_time
 
-        commerce_platform: str | Unset = UNSET
-        if not isinstance(self.commerce_platform, Unset):
-            commerce_platform = self.commerce_platform.value
+        commerce_platform = self.commerce_platform
 
-        order_type: str | Unset = UNSET
-        if not isinstance(self.order_type, Unset):
-            order_type = self.order_type.value
+        order_type = self.order_type
 
         release_date = self.release_date
 
@@ -482,9 +452,7 @@ class GetOrderListResponseDataOrder:
 
         consultation_id = self.consultation_id
 
-        fast_delivery_program: str | Unset = UNSET
-        if not isinstance(self.fast_delivery_program, Unset):
-            fast_delivery_program = self.fast_delivery_program.value
+        fast_delivery_program = self.fast_delivery_program
 
         fulfillment_priority_level = self.fulfillment_priority_level
 
@@ -671,12 +639,7 @@ class GetOrderListResponseDataOrder:
 
         buyer_message = d.pop("buyer_message", UNSET)
 
-        _cancellation_initiator = d.pop("cancellation_initiator", UNSET)
-        cancellation_initiator: GetOrderListResponseDataOrderCancellationInitiator | Unset
-        if isinstance(_cancellation_initiator, Unset):
-            cancellation_initiator = UNSET
-        else:
-            cancellation_initiator = GetOrderListResponseDataOrderCancellationInitiator(_cancellation_initiator)
+        cancellation_initiator = d.pop("cancellation_initiator", UNSET)
 
         shipping_provider_id = d.pop("shipping_provider_id", UNSET)
 
@@ -707,26 +670,11 @@ class GetOrderListResponseDataOrder:
         else:
             recipient_address = GetOrderListResponseDataOrderRecipientAddress.from_dict(_recipient_address)
 
-        _status = d.pop("status", UNSET)
-        status: GetOrderListResponseDataOrderStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetOrderListResponseDataOrderStatus(_status)
+        status = d.pop("status", UNSET)
 
-        _fulfillment_type = d.pop("fulfillment_type", UNSET)
-        fulfillment_type: GetOrderListResponseDataOrderFulfillmentType | Unset
-        if isinstance(_fulfillment_type, Unset):
-            fulfillment_type = UNSET
-        else:
-            fulfillment_type = GetOrderListResponseDataOrderFulfillmentType(_fulfillment_type)
+        fulfillment_type = d.pop("fulfillment_type", UNSET)
 
-        _delivery_type = d.pop("delivery_type", UNSET)
-        delivery_type: GetOrderListResponseDataOrderDeliveryType | Unset
-        if isinstance(_delivery_type, Unset):
-            delivery_type = UNSET
-        else:
-            delivery_type = GetOrderListResponseDataOrderDeliveryType(_delivery_type)
+        delivery_type = d.pop("delivery_type", UNSET)
 
         paid_time = d.pop("paid_time", UNSET)
 
@@ -754,12 +702,7 @@ class GetOrderListResponseDataOrder:
 
         request_cancel_time = d.pop("request_cancel_time", UNSET)
 
-        _shipping_type = d.pop("shipping_type", UNSET)
-        shipping_type: GetOrderListResponseDataOrderShippingType | Unset
-        if isinstance(_shipping_type, Unset):
-            shipping_type = UNSET
-        else:
-            shipping_type = GetOrderListResponseDataOrderShippingType(_shipping_type)
+        shipping_type = d.pop("shipping_type", UNSET)
 
         user_id = d.pop("user_id", UNSET)
 
@@ -822,19 +765,9 @@ class GetOrderListResponseDataOrder:
 
         fast_dispatch_sla_time = d.pop("fast_dispatch_sla_time", UNSET)
 
-        _commerce_platform = d.pop("commerce_platform", UNSET)
-        commerce_platform: GetOrderListResponseDataOrderCommercePlatform | Unset
-        if isinstance(_commerce_platform, Unset):
-            commerce_platform = UNSET
-        else:
-            commerce_platform = GetOrderListResponseDataOrderCommercePlatform(_commerce_platform)
+        commerce_platform = d.pop("commerce_platform", UNSET)
 
-        _order_type = d.pop("order_type", UNSET)
-        order_type: GetOrderListResponseDataOrderOrderType | Unset
-        if isinstance(_order_type, Unset):
-            order_type = UNSET
-        else:
-            order_type = GetOrderListResponseDataOrderOrderType(_order_type)
+        order_type = d.pop("order_type", UNSET)
 
         release_date = d.pop("release_date", UNSET)
 
@@ -855,12 +788,7 @@ class GetOrderListResponseDataOrder:
 
         consultation_id = d.pop("consultation_id", UNSET)
 
-        _fast_delivery_program = d.pop("fast_delivery_program", UNSET)
-        fast_delivery_program: GetOrderListResponseDataOrderFastDeliveryProgram | Unset
-        if isinstance(_fast_delivery_program, Unset):
-            fast_delivery_program = UNSET
-        else:
-            fast_delivery_program = GetOrderListResponseDataOrderFastDeliveryProgram(_fast_delivery_program)
+        fast_delivery_program = d.pop("fast_delivery_program", UNSET)
 
         fulfillment_priority_level = d.pop("fulfillment_priority_level", UNSET)
 

@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.aftersales_request_status_update_webhook_data_aftersales_request_status import (
-    AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatus,
-)
-from ..models.aftersales_request_status_update_webhook_data_return_role import (
-    AftersalesRequestStatusUpdateWebhookDataReturnRole,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="AftersalesRequestStatusUpdateWebhookData")
@@ -22,13 +16,11 @@ class AftersalesRequestStatusUpdateWebhookData:
     """
     Attributes:
         aftersales_request_id (str | Unset): Unique identifier of the aftersales request.
-        return_role (AftersalesRequestStatusUpdateWebhookDataReturnRole | Unset): Role that initiated the return flow.
-            Possible enumerations:
+        return_role (str | Unset): Role that initiated the return flow. Possible enumerations:
 
              * `BUYER`
              * `SELLER`
-        aftersales_request_status (AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatus | Unset): Current
-            aftersales request status. Possible enumerations:
+        aftersales_request_status (str | Unset): Current aftersales request status. Possible enumerations:
 
              * `PENDING_REQUEST_REVIEW`
              * `REQUEST_REVIEW_COMPLETED`
@@ -37,8 +29,8 @@ class AftersalesRequestStatusUpdateWebhookData:
     """
 
     aftersales_request_id: str | Unset = UNSET
-    return_role: AftersalesRequestStatusUpdateWebhookDataReturnRole | Unset = UNSET
-    aftersales_request_status: AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatus | Unset = UNSET
+    return_role: str | Unset = UNSET
+    aftersales_request_status: str | Unset = UNSET
     aftersales_request_create_time: int | Unset = UNSET
     aftersales_request_update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -46,13 +38,9 @@ class AftersalesRequestStatusUpdateWebhookData:
     def to_dict(self) -> dict[str, Any]:
         aftersales_request_id = self.aftersales_request_id
 
-        return_role: str | Unset = UNSET
-        if not isinstance(self.return_role, Unset):
-            return_role = self.return_role.value
+        return_role = self.return_role
 
-        aftersales_request_status: str | Unset = UNSET
-        if not isinstance(self.aftersales_request_status, Unset):
-            aftersales_request_status = self.aftersales_request_status.value
+        aftersales_request_status = self.aftersales_request_status
 
         aftersales_request_create_time = self.aftersales_request_create_time
 
@@ -79,21 +67,9 @@ class AftersalesRequestStatusUpdateWebhookData:
         d = dict(src_dict)
         aftersales_request_id = d.pop("aftersales_request_id", UNSET)
 
-        _return_role = d.pop("return_role", UNSET)
-        return_role: AftersalesRequestStatusUpdateWebhookDataReturnRole | Unset
-        if isinstance(_return_role, Unset):
-            return_role = UNSET
-        else:
-            return_role = AftersalesRequestStatusUpdateWebhookDataReturnRole(_return_role)
+        return_role = d.pop("return_role", UNSET)
 
-        _aftersales_request_status = d.pop("aftersales_request_status", UNSET)
-        aftersales_request_status: AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatus | Unset
-        if isinstance(_aftersales_request_status, Unset):
-            aftersales_request_status = UNSET
-        else:
-            aftersales_request_status = AftersalesRequestStatusUpdateWebhookDataAftersalesRequestStatus(
-                _aftersales_request_status
-            )
+        aftersales_request_status = d.pop("aftersales_request_status", UNSET)
 
         aftersales_request_create_time = d.pop("aftersales_request_create_time", UNSET)
 

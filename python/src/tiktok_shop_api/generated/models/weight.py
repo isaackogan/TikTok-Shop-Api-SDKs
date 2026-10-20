@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.weight_unit import WeightUnit
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="Weight")
@@ -17,7 +16,7 @@ class Weight:
     """
     Attributes:
         value (str | Unset): The numerical value of the package weight.
-        unit (WeightUnit | Unset): The unit of measurement for the package weight.
+        unit (str | Unset): The unit of measurement for the package weight.
 
             Available values:
             - `GRAM`
@@ -25,15 +24,13 @@ class Weight:
     """
 
     value: str | Unset = UNSET
-    unit: WeightUnit | Unset = UNSET
+    unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         value = self.value
 
-        unit: str | Unset = UNSET
-        if not isinstance(self.unit, Unset):
-            unit = self.unit.value
+        unit = self.unit
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -50,12 +47,7 @@ class Weight:
         d = dict(src_dict)
         value = d.pop("value", UNSET)
 
-        _unit = d.pop("unit", UNSET)
-        unit: WeightUnit | Unset
-        if isinstance(_unit, Unset):
-            unit = UNSET
-        else:
-            unit = WeightUnit(_unit)
+        unit = d.pop("unit", UNSET)
 
         weight = cls(
             value=value,

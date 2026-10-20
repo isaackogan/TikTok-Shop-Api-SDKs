@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.product_audit_status_change_webhook_data_integrated_platform_status_platform import (
-    ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatform,
-)
-from ..models.product_audit_status_change_webhook_data_integrated_platform_status_status import (
-    ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus")
@@ -21,12 +15,11 @@ T = TypeVar("T", bound="ProductAuditStatusChangeWebhookDataIntegratedPlatformSta
 class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus:
     """
     Attributes:
-        platform (ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatform | Unset): The integrated platform
-            name.
+        platform (str | Unset): The integrated platform name.
              Possible values:
 
              * TOKOPEDIA.
-        status (ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatus | Unset): The product audit status.
+        status (str | Unset): The product audit status.
              Possible values:
 
              * NONE: The product is not applicable for audit because it has not been submitted for listing on this platform,
@@ -36,18 +29,14 @@ class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus:
              * APPROVED: The product passed the audit and has been listed on the platform.
     """
 
-    platform: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatform | Unset = UNSET
-    status: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatus | Unset = UNSET
+    platform: str | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        platform: str | Unset = UNSET
-        if not isinstance(self.platform, Unset):
-            platform = self.platform.value
+        platform = self.platform
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -62,19 +51,9 @@ class ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _platform = d.pop("platform", UNSET)
-        platform: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatform | Unset
-        if isinstance(_platform, Unset):
-            platform = UNSET
-        else:
-            platform = ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatform(_platform)
+        platform = d.pop("platform", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatus(_status)
+        status = d.pop("status", UNSET)
 
         product_audit_status_change_webhook_data_integrated_platform_status = cls(
             platform=platform,

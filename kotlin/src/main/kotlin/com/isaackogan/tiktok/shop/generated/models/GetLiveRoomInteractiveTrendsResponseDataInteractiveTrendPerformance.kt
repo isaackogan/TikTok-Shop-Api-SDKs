@@ -39,7 +39,7 @@ data class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance (
 
     /* The type of interactive trend metric. Possible values: - `TREND_WATCH_PV`: Watch count for the live room. - `TREND_COMMENT_PV`: Comment count for the live room. - `TREND_SHARE_PV`: Share count for the live room. */
     @SerializedName("stats_type")
-    val statsType: GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance.StatsType? = null,
+    val statsType: kotlin.String? = null,
 
     /* The data point of interactive trend */
     @SerializedName("data_points")
@@ -47,16 +47,6 @@ data class GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformance (
 
 ) {
 
-    /**
-     * The type of interactive trend metric. Possible values: - `TREND_WATCH_PV`: Watch count for the live room. - `TREND_COMMENT_PV`: Comment count for the live room. - `TREND_SHARE_PV`: Share count for the live room.
-     *
-     * Values: TREND_WATCH_PV,TREND_COMMENT_PV,TREND_SHARE_PV
-     */
-    enum class StatsType(val value: kotlin.String) {
-        @SerializedName(value = "TREND_WATCH_PV") TREND_WATCH_PV("TREND_WATCH_PV"),
-        @SerializedName(value = "TREND_COMMENT_PV") TREND_COMMENT_PV("TREND_COMMENT_PV"),
-        @SerializedName(value = "TREND_SHARE_PV") TREND_SHARE_PV("TREND_SHARE_PV");
-    }
 
 }
 

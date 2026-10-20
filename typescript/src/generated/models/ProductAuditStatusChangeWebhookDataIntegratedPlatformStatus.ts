@@ -24,10 +24,10 @@ export interface ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
      *  Possible values: 
      *   
      *  * TOKOPEDIA.
-     * @type {ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum}
+     * @type {string}
      * @memberof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus
      */
-    platform?: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum;
+    platform?: string;
     /**
      * The product audit status. 
      *  Possible values: 
@@ -36,32 +36,11 @@ export interface ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus {
      *  * AUDITING: The product is currently being audited. 
      *  * FAILED: The product failed the audit or the audit was cancelled. 
      *  * APPROVED: The product passed the audit and has been listed on the platform.
-     * @type {ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum}
+     * @type {string}
      * @memberof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus
      */
-    status?: ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum = {
-    Tokopedia: 'TOKOPEDIA'
-} as const;
-export type ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum = typeof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum[keyof typeof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusPlatformEnum];
-
-/**
- * @export
- */
-export const ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Failed: 'FAILED',
-    Approved: 'APPROVED'
-} as const;
-export type ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum = typeof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum[keyof typeof ProductAuditStatusChangeWebhookDataIntegratedPlatformStatusStatusEnum];
-
 
 /**
  * Check if a given object implements the ProductAuditStatusChangeWebhookDataIntegratedPlatformStatus interface.

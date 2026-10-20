@@ -53,10 +53,10 @@ export interface PublishGlobalProductResponseDataProduct {
      * - US: United States
      * - VN: Vietnam
      * - MX: Mexico
-     * @type {PublishGlobalProductResponseDataProductRegionEnum}
+     * @type {string}
      * @memberof PublishGlobalProductResponseDataProduct
      */
-    region?: PublishGlobalProductResponseDataProductRegionEnum;
+    region?: string;
     /**
      * The ID of the local shop in the specified market. One market can only have one local shop.
      * @type {string}
@@ -76,38 +76,6 @@ export interface PublishGlobalProductResponseDataProduct {
      */
     id?: string;
 }
-
-
-/**
- * @export
- */
-export const PublishGlobalProductResponseDataProductRegionEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    Ie: 'IE',
-    It: 'IT',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Po: 'PO',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type PublishGlobalProductResponseDataProductRegionEnum = typeof PublishGlobalProductResponseDataProductRegionEnum[keyof typeof PublishGlobalProductResponseDataProductRegionEnum];
-
 
 /**
  * Check if a given object implements the PublishGlobalProductResponseDataProduct interface.

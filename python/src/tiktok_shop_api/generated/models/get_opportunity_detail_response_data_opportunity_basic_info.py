@@ -6,12 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_opportunity_detail_response_data_opportunity_basic_info_opportunity_type import (
-    GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityType,
-)
-from ..models.get_opportunity_detail_response_data_opportunity_basic_info_reference_source import (
-    GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSource,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunityBasicInfo")
@@ -21,8 +15,7 @@ T = TypeVar("T", bound="GetOpportunityDetailResponseDataOpportunityBasicInfo")
 class GetOpportunityDetailResponseDataOpportunityBasicInfo:
     """
     Attributes:
-        opportunity_type (GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityType | Unset): The opportunity
-            type.
+        opportunity_type (str | Unset): The opportunity type.
             Possible values:
             - PRODUCT: A product opportunity.
             - KEYWORD: A keyword opportunity.
@@ -51,8 +44,8 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
         tag_codes (list[str] | Unset): Tag codes for the opportunity. The available codes depend on seller and market
             configuration. Examples for Latam include `core_product` and `top_product`.
         external_product_id (str | Unset): Product ID on the reference source.
-        reference_source (GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSource | Unset): The reference
-            platform code, returned only when `external_product_id` is present.
+        reference_source (str | Unset): The reference platform code, returned only when `external_product_id` is
+            present.
             Possible values:
             - `1`: SHOPEE
             - `2`: AMAZON
@@ -78,7 +71,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
             - `22`: DTC
     """
 
-    opportunity_type: GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityType | Unset = UNSET
+    opportunity_type: str | Unset = UNSET
     status: str | Unset = UNSET
     create_time: int | Unset = UNSET
     expire_time: int | Unset = UNSET
@@ -97,13 +90,11 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
     tags: str | Unset = UNSET
     tag_codes: list[str] | Unset = UNSET
     external_product_id: str | Unset = UNSET
-    reference_source: GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSource | Unset = UNSET
+    reference_source: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        opportunity_type: str | Unset = UNSET
-        if not isinstance(self.opportunity_type, Unset):
-            opportunity_type = self.opportunity_type.value
+        opportunity_type = self.opportunity_type
 
         status = self.status
 
@@ -145,9 +136,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
 
         external_product_id = self.external_product_id
 
-        reference_source: str | Unset = UNSET
-        if not isinstance(self.reference_source, Unset):
-            reference_source = self.reference_source.value
+        reference_source = self.reference_source
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -198,12 +187,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _opportunity_type = d.pop("opportunity_type", UNSET)
-        opportunity_type: GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityType | Unset
-        if isinstance(_opportunity_type, Unset):
-            opportunity_type = UNSET
-        else:
-            opportunity_type = GetOpportunityDetailResponseDataOpportunityBasicInfoOpportunityType(_opportunity_type)
+        opportunity_type = d.pop("opportunity_type", UNSET)
 
         status = d.pop("status", UNSET)
 
@@ -241,12 +225,7 @@ class GetOpportunityDetailResponseDataOpportunityBasicInfo:
 
         external_product_id = d.pop("external_product_id", UNSET)
 
-        _reference_source = d.pop("reference_source", UNSET)
-        reference_source: GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSource | Unset
-        if isinstance(_reference_source, Unset):
-            reference_source = UNSET
-        else:
-            reference_source = GetOpportunityDetailResponseDataOpportunityBasicInfoReferenceSource(_reference_source)
+        reference_source = d.pop("reference_source", UNSET)
 
         get_opportunity_detail_response_data_opportunity_basic_info = cls(
             opportunity_type=opportunity_type,

@@ -55,19 +55,10 @@ data class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProf
 
     /* Viewer profile type. Possible values: NEW_FOLLOWER, VIEWERS. */
     @SerializedName("type")
-    val type: GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile.Type? = null
+    val type: kotlin.String? = null
 
 ) {
 
-    /**
-     * Viewer profile type. Possible values: NEW_FOLLOWER, VIEWERS.
-     *
-     * Values: NEW_FOLLOWER,VIEWERS
-     */
-    enum class Type(val value: kotlin.String) {
-        @SerializedName(value = "NEW_FOLLOWER") NEW_FOLLOWER("NEW_FOLLOWER"),
-        @SerializedName(value = "VIEWERS") VIEWERS("VIEWERS");
-    }
 
 }
 

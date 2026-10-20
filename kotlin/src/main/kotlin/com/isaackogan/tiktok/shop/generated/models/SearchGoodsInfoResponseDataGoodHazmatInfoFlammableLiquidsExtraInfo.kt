@@ -39,7 +39,7 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo (
 
     /* Flammable liquid type, possible values -PAINT -PERFUMERY -ALCOHOLIC -OTHER */
     @SerializedName("flammable_liquids_type")
-    val flammableLiquidsType: SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo.FlammableLiquidsType? = null,
+    val flammableLiquidsType: kotlin.String? = null,
 
     /* Volume of flammable liquid in the unit specified by volume_unit. */
     @SerializedName("flammable_liquids_volume")
@@ -51,17 +51,6 @@ data class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo (
 
 ) {
 
-    /**
-     * Flammable liquid type, possible values -PAINT -PERFUMERY -ALCOHOLIC -OTHER
-     *
-     * Values: PAINT,PERFUMERY,ALCOHOLIC,OTHER
-     */
-    enum class FlammableLiquidsType(val value: kotlin.String) {
-        @SerializedName(value = "PAINT") PAINT("PAINT"),
-        @SerializedName(value = "PERFUMERY") PERFUMERY("PERFUMERY"),
-        @SerializedName(value = "ALCOHOLIC") ALCOHOLIC("ALCOHOLIC"),
-        @SerializedName(value = "OTHER") OTHER("OTHER");
-    }
 
 }
 

@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_affiliate_orders_by_creator_response_data_order_sku_content_type import (
-    SearchAffiliateOrdersByCreatorResponseDataOrderSkuContentType,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -63,8 +60,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
             10%.
         estimated_creator_commission_reward_fee (EstimatedCreatorCommissionRewardFee | Unset):
         actual_creator_commission_reward_fee (ActualCreatorCommissionRewardFee | Unset):
-        content_type (SearchAffiliateOrdersByCreatorResponseDataOrderSkuContentType | Unset): The content format of the
-            creator content through which the order was created.
+        content_type (str | Unset): The content format of the creator content through which the order was created.
             Possible values:
             - SHOP
             - VIDEO
@@ -100,7 +96,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
     creator_commission_reward_rate: int | Unset = UNSET
     estimated_creator_commission_reward_fee: EstimatedCreatorCommissionRewardFee | Unset = UNSET
     actual_creator_commission_reward_fee: ActualCreatorCommissionRewardFee | Unset = UNSET
-    content_type: SearchAffiliateOrdersByCreatorResponseDataOrderSkuContentType | Unset = UNSET
+    content_type: str | Unset = UNSET
     content_id: str | Unset = UNSET
     trace: SearchAffiliateOrdersByCreatorResponseDataOrderSkuTrace | Unset = UNSET
     estimated_commission: EstimatedCommission | Unset = UNSET
@@ -170,9 +166,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
         if not isinstance(self.actual_creator_commission_reward_fee, Unset):
             actual_creator_commission_reward_fee = self.actual_creator_commission_reward_fee.to_dict()
 
-        content_type: str | Unset = UNSET
-        if not isinstance(self.content_type, Unset):
-            content_type = self.content_type.value
+        content_type = self.content_type
 
         content_id = self.content_id
 
@@ -361,12 +355,7 @@ class SearchAffiliateOrdersByCreatorResponseDataOrderSku:
                 _actual_creator_commission_reward_fee
             )
 
-        _content_type = d.pop("content_type", UNSET)
-        content_type: SearchAffiliateOrdersByCreatorResponseDataOrderSkuContentType | Unset
-        if isinstance(_content_type, Unset):
-            content_type = UNSET
-        else:
-            content_type = SearchAffiliateOrdersByCreatorResponseDataOrderSkuContentType(_content_type)
+        content_type = d.pop("content_type", UNSET)
 
         content_id = d.pop("content_id", UNSET)
 

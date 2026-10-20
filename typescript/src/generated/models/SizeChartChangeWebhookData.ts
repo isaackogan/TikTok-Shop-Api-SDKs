@@ -36,10 +36,10 @@ export interface SizeChartChangeWebhookData {
      *  - `CREATE`: A new size chart is created 
      *  - `EDIT`: The size chart is edited 
      *  - `DELETE`: The size chart is deleted
-     * @type {SizeChartChangeWebhookDataEventTypeEnum}
+     * @type {string}
      * @memberof SizeChartChangeWebhookData
      */
-    eventType?: SizeChartChangeWebhookDataEventTypeEnum;
+    eventType?: string;
     /**
      * The time when the change occurred. Unix timestamp.
      * @type {number}
@@ -47,18 +47,6 @@ export interface SizeChartChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const SizeChartChangeWebhookDataEventTypeEnum = {
-    Create: 'CREATE',
-    Edit: 'EDIT',
-    Delete: 'DELETE'
-} as const;
-export type SizeChartChangeWebhookDataEventTypeEnum = typeof SizeChartChangeWebhookDataEventTypeEnum[keyof typeof SizeChartChangeWebhookDataEventTypeEnum];
-
 
 /**
  * Check if a given object implements the SizeChartChangeWebhookData interface.

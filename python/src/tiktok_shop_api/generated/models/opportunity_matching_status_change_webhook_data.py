@@ -6,9 +6,6 @@ from typing import Any, TypeVar, cast
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.opportunity_matching_status_change_webhook_data_opportunity_matching_status import (
-    OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="OpportunityMatchingStatusChangeWebhookData")
@@ -19,8 +16,7 @@ class OpportunityMatchingStatusChangeWebhookData:
     """
     Attributes:
         external_product_id (str | Unset): An external product identifier used in the external ecommerce platform.
-        opportunity_matching_status (OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatus | Unset): The
-            status of opportunity matching.
+        opportunity_matching_status (str | Unset): The status of opportunity matching.
              Possible values:
              - `PENDING`: Waiting for opportunity matching.
              - `MATCHED`: There are one or more matched opportunities.
@@ -34,7 +30,7 @@ class OpportunityMatchingStatusChangeWebhookData:
     """
 
     external_product_id: str | Unset = UNSET
-    opportunity_matching_status: OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatus | Unset = UNSET
+    opportunity_matching_status: str | Unset = UNSET
     opportunity_ids: list[str] | Unset = UNSET
     opportunity_matching_end_time: int | Unset = UNSET
     update_time: int | Unset = UNSET
@@ -43,9 +39,7 @@ class OpportunityMatchingStatusChangeWebhookData:
     def to_dict(self) -> dict[str, Any]:
         external_product_id = self.external_product_id
 
-        opportunity_matching_status: str | Unset = UNSET
-        if not isinstance(self.opportunity_matching_status, Unset):
-            opportunity_matching_status = self.opportunity_matching_status.value
+        opportunity_matching_status = self.opportunity_matching_status
 
         opportunity_ids: list[str] | Unset = UNSET
         if not isinstance(self.opportunity_ids, Unset):
@@ -76,14 +70,7 @@ class OpportunityMatchingStatusChangeWebhookData:
         d = dict(src_dict)
         external_product_id = d.pop("external_product_id", UNSET)
 
-        _opportunity_matching_status = d.pop("opportunity_matching_status", UNSET)
-        opportunity_matching_status: OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatus | Unset
-        if isinstance(_opportunity_matching_status, Unset):
-            opportunity_matching_status = UNSET
-        else:
-            opportunity_matching_status = OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatus(
-                _opportunity_matching_status
-            )
+        opportunity_matching_status = d.pop("opportunity_matching_status", UNSET)
 
         opportunity_ids = cast(list[str], d.pop("opportunity_ids", UNSET))
 

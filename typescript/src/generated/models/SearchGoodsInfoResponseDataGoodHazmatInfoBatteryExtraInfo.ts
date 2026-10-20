@@ -36,10 +36,10 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
      * - IN_EQUIPMENT
      * - WITH_EQUIPMENT
      * - OTHER
-     * @type {SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum}
+     * @type {string}
      * @memberof SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo
      */
-    batteryPackagingType?: SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum;
+    batteryPackagingType?: string;
     /**
      * Total battery weight in the unit specified by total_battery_weight_unit.
      * @type {string}
@@ -83,19 +83,6 @@ export interface SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo {
      */
     totalBatteryCapacityUnit?: string;
 }
-
-
-/**
- * @export
- */
-export const SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum = {
-    Standalone: 'STANDALONE',
-    InEquipment: 'IN_EQUIPMENT',
-    WithEquipment: 'WITH_EQUIPMENT',
-    Other: 'OTHER'
-} as const;
-export type SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum = typeof SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum[keyof typeof SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfoBatteryPackagingTypeEnum];
-
 
 /**
  * Check if a given object implements the SearchGoodsInfoResponseDataGoodHazmatInfoBatteryExtraInfo interface.

@@ -37,18 +37,10 @@ data class GetGlobalProductPermissionResponseData (
 
     /* The seller's global product permissions. Possible values: - MANAGE_GLOBAL_PRODUCT: Indicates the seller is permitted to manage global products listed in TikTok Shops across multiple countries. An empty array means the seller does not have the MANAGE_GLOBAL_PRODUCT permission. */
     @SerializedName("permissions")
-    val permissions: kotlin.collections.List<GetGlobalProductPermissionResponseData.Permissions>? = null
+    val permissions: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 
-    /**
-     * The seller's global product permissions. Possible values: - MANAGE_GLOBAL_PRODUCT: Indicates the seller is permitted to manage global products listed in TikTok Shops across multiple countries. An empty array means the seller does not have the MANAGE_GLOBAL_PRODUCT permission.
-     *
-     * Values: MANAGE_GLOBAL_PRODUCT
-     */
-    enum class Permissions(val value: kotlin.String) {
-        @SerializedName(value = "MANAGE_GLOBAL_PRODUCT") MANAGE_GLOBAL_PRODUCT("MANAGE_GLOBAL_PRODUCT");
-    }
 
 }
 

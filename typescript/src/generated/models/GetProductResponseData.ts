@@ -303,10 +303,10 @@ export interface GetProductResponseData {
      * - EXCELLENT
      * 
      * **Note**: Available only for the US market.
-     * @type {GetProductResponseDataListingQualityTierEnum}
+     * @type {string}
      * @memberof GetProductResponseData
      */
-    listingQualityTier?: GetProductResponseDataListingQualityTierEnum;
+    listingQualityTier?: string;
     /**
      * A list of images to display in the product image gallery.
      * @type {Array<GetProductResponseDataMainImage>}
@@ -389,27 +389,27 @@ export interface GetProductResponseData {
      * - DELETED
      * 
      * **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     * @type {GetProductResponseDataProductStatusEnum}
+     * @type {string}
      * @memberof GetProductResponseData
      */
-    productStatus?: GetProductResponseDataProductStatusEnum;
+    productStatus?: string;
     /**
      * Product tag to identity special type product
      * Possible values: AUCTION
-     * @type {Array<GetProductResponseDataProductTagsEnum>}
+     * @type {Array<string>}
      * @memberof GetProductResponseData
      */
-    productTags?: Array<GetProductResponseDataProductTagsEnum>;
+    productTags?: Array<string>;
     /**
      * The product type.
      * Possible values:
      * - COMBINED_PRODUCT: Indicates this is a virtual bundle product.
      * - IN_COMBINED_PRODUCT: Indicates this product is part of a virtual bundle.
      * - GPR_TARGET_PRODUCT: Indicates this product is synchronized to global listings. Applicable only for the EU market.
-     * @type {Array<GetProductResponseDataProductTypesEnum>}
+     * @type {Array<string>}
      * @memberof GetProductResponseData
      */
-    productTypes?: Array<GetProductResponseDataProductTypesEnum>;
+    productTypes?: Array<string>;
     /**
      * Recommended categories for the product based on the product title, description, and images.
      * @type {Array<RecommendedCategory>}
@@ -447,10 +447,10 @@ export interface GetProductResponseData {
      * Default: OPTIONAL
      * 
      * Applicable only if the listing platforms include TOKOPEDIA.
-     * @type {GetProductResponseDataShippingInsuranceRequirementEnum}
+     * @type {string}
      * @memberof GetProductResponseData
      */
-    shippingInsuranceRequirement?: GetProductResponseDataShippingInsuranceRequirementEnum;
+    shippingInsuranceRequirement?: string;
     /**
      * Identifier of the shipping template that was bound to the product
      * @type {string}
@@ -483,10 +483,10 @@ export interface GetProductResponseData {
      * - SCHEDULED
      * 
      * **Note**: For Indonesia sellers, if you did not set the listing platform as `TIKTOK_SHOP` when creating or editing a product, this will be omitted.
-     * @type {GetProductResponseDataStatusEnum}
+     * @type {string}
      * @memberof GetProductResponseData
      */
-    status?: GetProductResponseDataStatusEnum;
+    status?: string;
     /**
      * All the Save and Subscribe promotion info associated with the given product.
      * @type {GetProductResponseDataSubscribeInfo}
@@ -513,10 +513,10 @@ export interface GetProductResponseData {
     video?: GetProductResponseDataVideo;
     /**
      * The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
-     * @type {GetProductResponseDataSellingFormatEnum}
+     * @type {string}
      * @memberof GetProductResponseData
      */
-    sellingFormat?: GetProductResponseDataSellingFormatEnum;
+    sellingFormat?: string;
     /**
      * Whether the product is a blind box of lucky bag. For example: PopMart
      * @type {boolean}
@@ -524,87 +524,6 @@ export interface GetProductResponseData {
      */
     isBlindBox?: boolean;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataListingQualityTierEnum = {
-    Poor: 'POOR',
-    Fair: 'FAIR',
-    Good: 'GOOD',
-    Excellent: 'EXCELLENT'
-} as const;
-export type GetProductResponseDataListingQualityTierEnum = typeof GetProductResponseDataListingQualityTierEnum[keyof typeof GetProductResponseDataListingQualityTierEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataProductStatusEnum = {
-    Initial: 'INITIAL',
-    Draft: 'DRAFT',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED'
-} as const;
-export type GetProductResponseDataProductStatusEnum = typeof GetProductResponseDataProductStatusEnum[keyof typeof GetProductResponseDataProductStatusEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataProductTagsEnum = {
-    Auction: 'AUCTION'
-} as const;
-export type GetProductResponseDataProductTagsEnum = typeof GetProductResponseDataProductTagsEnum[keyof typeof GetProductResponseDataProductTagsEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataProductTypesEnum = {
-    CombinedProduct: 'COMBINED_PRODUCT',
-    InCombinedProduct: 'IN_COMBINED_PRODUCT',
-    GprTargetProduct: 'GPR_TARGET_PRODUCT'
-} as const;
-export type GetProductResponseDataProductTypesEnum = typeof GetProductResponseDataProductTypesEnum[keyof typeof GetProductResponseDataProductTypesEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataShippingInsuranceRequirementEnum = {
-    Required: 'REQUIRED',
-    Optional: 'OPTIONAL',
-    NotSupported: 'NOT_SUPPORTED'
-} as const;
-export type GetProductResponseDataShippingInsuranceRequirementEnum = typeof GetProductResponseDataShippingInsuranceRequirementEnum[keyof typeof GetProductResponseDataShippingInsuranceRequirementEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataStatusEnum = {
-    Draft: 'DRAFT',
-    Pending: 'PENDING',
-    Failed: 'FAILED',
-    Activate: 'ACTIVATE',
-    SellerDeactivated: 'SELLER_DEACTIVATED',
-    PlatformDeactivated: 'PLATFORM_DEACTIVATED',
-    Freeze: 'FREEZE',
-    Deleted: 'DELETED',
-    Scheduled: 'SCHEDULED'
-} as const;
-export type GetProductResponseDataStatusEnum = typeof GetProductResponseDataStatusEnum[keyof typeof GetProductResponseDataStatusEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataSellingFormatEnum = {
-    FixedPrice: 'FIXED_PRICE',
-    LiveAuction: 'LIVE_AUCTION',
-    FixedPriceAndLiveAuction: 'FIXED_PRICE_AND_LIVE_AUCTION'
-} as const;
-export type GetProductResponseDataSellingFormatEnum = typeof GetProductResponseDataSellingFormatEnum[keyof typeof GetProductResponseDataSellingFormatEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseData interface.

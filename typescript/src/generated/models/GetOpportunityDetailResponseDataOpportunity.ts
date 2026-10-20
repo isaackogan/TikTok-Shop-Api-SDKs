@@ -59,10 +59,10 @@ export interface GetOpportunityDetailResponseDataOpportunity {
      * Possible values:
      * - LIST_SAME: List the same product.
      * - LIST_SIMILAR: List a similar product.
-     * @type {GetOpportunityDetailResponseDataOpportunityActionTypeEnum}
+     * @type {string}
      * @memberof GetOpportunityDetailResponseDataOpportunity
      */
-    actionType?: GetOpportunityDetailResponseDataOpportunityActionTypeEnum;
+    actionType?: string;
     /**
      * The criteria for products that match the opportunity lead.
      * @type {GetOpportunityDetailResponseDataOpportunityListingCriteria}
@@ -88,17 +88,6 @@ export interface GetOpportunityDetailResponseDataOpportunity {
      */
     basicInfo?: GetOpportunityDetailResponseDataOpportunityBasicInfo;
 }
-
-
-/**
- * @export
- */
-export const GetOpportunityDetailResponseDataOpportunityActionTypeEnum = {
-    ListSame: 'LIST_SAME',
-    ListSimilar: 'LIST_SIMILAR'
-} as const;
-export type GetOpportunityDetailResponseDataOpportunityActionTypeEnum = typeof GetOpportunityDetailResponseDataOpportunityActionTypeEnum[keyof typeof GetOpportunityDetailResponseDataOpportunityActionTypeEnum];
-
 
 /**
  * Check if a given object implements the GetOpportunityDetailResponseDataOpportunity interface.

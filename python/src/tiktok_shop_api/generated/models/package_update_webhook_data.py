@@ -6,8 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.package_update_webhook_data_role_type import PackageUpdateWebhookDataRoleType
-from ..models.package_update_webhook_data_sc_type import PackageUpdateWebhookDataScType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -21,7 +19,7 @@ T = TypeVar("T", bound="PackageUpdateWebhookData")
 class PackageUpdateWebhookData:
     """
     Attributes:
-        sc_type (PackageUpdateWebhookDataScType | Unset): Type of the event trigger, with possible values:
+        sc_type (str | Unset): Type of the event trigger, with possible values:
 
              * COMBINE
              * CANCEL_COMBINE
@@ -32,7 +30,7 @@ class PackageUpdateWebhookData:
              * FULFILL_UNCOMBINE
              * PARTLY_CANCEL_SPLIT
              * SPLIT_BY_SKU_CANCEL
-        role_type (PackageUpdateWebhookDataRoleType | Unset): Operator of the event trigger, with possible values:
+        role_type (str | Unset): Operator of the event trigger, with possible values:
 
              * ROLE_USER
              * ROLE_SELLER
@@ -42,20 +40,16 @@ class PackageUpdateWebhookData:
         update_time (int | Unset): The time when the package was updated, represented as a Unix timestamp (seconds).
     """
 
-    sc_type: PackageUpdateWebhookDataScType | Unset = UNSET
-    role_type: PackageUpdateWebhookDataRoleType | Unset = UNSET
+    sc_type: str | Unset = UNSET
+    role_type: str | Unset = UNSET
     package_list: list[PackageUpdateWebhookDataPackageList] | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        sc_type: str | Unset = UNSET
-        if not isinstance(self.sc_type, Unset):
-            sc_type = self.sc_type.value
+        sc_type = self.sc_type
 
-        role_type: str | Unset = UNSET
-        if not isinstance(self.role_type, Unset):
-            role_type = self.role_type.value
+        role_type = self.role_type
 
         package_list: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.package_list, Unset):
@@ -87,19 +81,9 @@ class PackageUpdateWebhookData:
         )
 
         d = dict(src_dict)
-        _sc_type = d.pop("sc_type", UNSET)
-        sc_type: PackageUpdateWebhookDataScType | Unset
-        if isinstance(_sc_type, Unset):
-            sc_type = UNSET
-        else:
-            sc_type = PackageUpdateWebhookDataScType(_sc_type)
+        sc_type = d.pop("sc_type", UNSET)
 
-        _role_type = d.pop("role_type", UNSET)
-        role_type: PackageUpdateWebhookDataRoleType | Unset
-        if isinstance(_role_type, Unset):
-            role_type = UNSET
-        else:
-            role_type = PackageUpdateWebhookDataRoleType(_role_type)
+        role_type = d.pop("role_type", UNSET)
 
         _package_list = d.pop("package_list", UNSET)
         package_list: list[PackageUpdateWebhookDataPackageList] | Unset = UNSET

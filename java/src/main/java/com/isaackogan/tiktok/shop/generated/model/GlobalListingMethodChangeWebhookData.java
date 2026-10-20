@@ -62,68 +62,10 @@ public class GlobalListingMethodChangeWebhookData {
   @javax.annotation.Nullable
   private List<String> localProductId = new ArrayList<>();
 
-  /**
-   * The listing method applicable to the local product.   Possible values:      * GLOBAL_PUBLISHING: Create a global product, then publish it to target local markets.   * LOCAL_REPLICATION: Create local product, then replicate it to other target local markets.
-   */
-  @JsonAdapter(ListingMethodEnum.Adapter.class)
-  public enum ListingMethodEnum {
-    /**
-     * Create a global product, then publish it to target local markets.
-     */
-    GLOBAL_PUBLISHING("GLOBAL_PUBLISHING"),
-    
-    /**
-     * Create local product, then replicate it to other target local markets.
-     */
-    LOCAL_REPLICATION("LOCAL_REPLICATION");
-
-    private String value;
-
-    ListingMethodEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ListingMethodEnum fromValue(String value) {
-      for (ListingMethodEnum b : ListingMethodEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ListingMethodEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ListingMethodEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ListingMethodEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ListingMethodEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ListingMethodEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_LISTING_METHOD = "listing_method";
   @SerializedName(SERIALIZED_NAME_LISTING_METHOD)
   @javax.annotation.Nullable
-  private ListingMethodEnum listingMethod;
+  private String listingMethod;
 
   public GlobalListingMethodChangeWebhookData() {
   }
@@ -174,7 +116,7 @@ public class GlobalListingMethodChangeWebhookData {
   }
 
 
-  public GlobalListingMethodChangeWebhookData listingMethod(@javax.annotation.Nullable ListingMethodEnum listingMethod) {
+  public GlobalListingMethodChangeWebhookData listingMethod(@javax.annotation.Nullable String listingMethod) {
     this.listingMethod = listingMethod;
     return this;
   }
@@ -184,11 +126,11 @@ public class GlobalListingMethodChangeWebhookData {
    * @return listingMethod
    */
   @javax.annotation.Nullable
-  public ListingMethodEnum getListingMethod() {
+  public String getListingMethod() {
     return listingMethod;
   }
 
-  public void setListingMethod(@javax.annotation.Nullable ListingMethodEnum listingMethod) {
+  public void setListingMethod(@javax.annotation.Nullable String listingMethod) {
     this.listingMethod = listingMethod;
   }
 
@@ -312,10 +254,6 @@ public class GlobalListingMethodChangeWebhookData {
       }
       if ((jsonObj.get("listing_method") != null && !jsonObj.get("listing_method").isJsonNull()) && !jsonObj.get("listing_method").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `listing_method` to be a primitive type in the JSON string but got `%s`", jsonObj.get("listing_method").toString()));
-      }
-      // validate the optional field `listing_method`
-      if (jsonObj.get("listing_method") != null && !jsonObj.get("listing_method").isJsonNull()) {
-        ListingMethodEnum.validateJsonElement(jsonObj.get("listing_method"));
       }
   }
 

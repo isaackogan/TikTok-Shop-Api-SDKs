@@ -55,98 +55,10 @@ public class CreateReturnResponseData {
   @javax.annotation.Nullable
   private String returnId;
 
-  /**
-   * Return status, available values: - RETURN_OR_REFUND_REQUEST_PENDING: Request is pending, needs to be approved by seller or platform - REFUND_OR_RETURN_REQUEST_REJECT: Seller rejected the request - AWAITING_BUYER_SHIP: Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform - BUYER_SHIPPED_ITEM: Buyer has shipped items to seller. - REJECT_RECEIVE_PACKAGE: Seller reject return package - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded. - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded.
-   */
-  @JsonAdapter(ReturnStatusEnum.Adapter.class)
-  public enum ReturnStatusEnum {
-    /**
-     * Request is pending, needs to be approved by seller or platform
-     */
-    RETURN_OR_REFUND_REQUEST_PENDING("RETURN_OR_REFUND_REQUEST_PENDING"),
-    
-    /**
-     * Seller rejected the request
-     */
-    REFUND_OR_RETURN_REQUEST_REJECT("REFUND_OR_RETURN_REQUEST_REJECT"),
-    
-    /**
-     * Waiting buyer to ship items to seller, if exceed the deadline, request will be closed by platform
-     */
-    AWAITING_BUYER_SHIP("AWAITING_BUYER_SHIP"),
-    
-    /**
-     * Buyer has shipped items to seller.
-     */
-    BUYER_SHIPPED_ITEM("BUYER_SHIPPED_ITEM"),
-    
-    /**
-     * Seller reject return package
-     */
-    REJECT_RECEIVE_PACKAGE("REJECT_RECEIVE_PACKAGE"),
-    
-    /**
-     * The refund/return request is successful, buyer will be refunded.
-     */
-    RETURN_OR_REFUND_REQUEST_SUCCESS("RETURN_OR_REFUND_REQUEST_SUCCESS"),
-    
-    /**
-     * The request has been cancelled by buyer or system
-     */
-    RETURN_OR_REFUND_REQUEST_CANCEL("RETURN_OR_REFUND_REQUEST_CANCEL"),
-    
-    /**
-     * The request is successful, and the amount has been refunded.
-     */
-    RETURN_OR_REFUND_REQUEST_COMPLETE("RETURN_OR_REFUND_REQUEST_COMPLETE");
-
-    private String value;
-
-    ReturnStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReturnStatusEnum fromValue(String value) {
-      for (ReturnStatusEnum b : ReturnStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReturnStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReturnStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReturnStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReturnStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReturnStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_RETURN_STATUS = "return_status";
   @SerializedName(SERIALIZED_NAME_RETURN_STATUS)
   @javax.annotation.Nullable
-  private ReturnStatusEnum returnStatus;
+  private String returnStatus;
 
   public CreateReturnResponseData() {
   }
@@ -170,7 +82,7 @@ public class CreateReturnResponseData {
   }
 
 
-  public CreateReturnResponseData returnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public CreateReturnResponseData returnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
     return this;
   }
@@ -180,11 +92,11 @@ public class CreateReturnResponseData {
    * @return returnStatus
    */
   @javax.annotation.Nullable
-  public ReturnStatusEnum getReturnStatus() {
+  public String getReturnStatus() {
     return returnStatus;
   }
 
-  public void setReturnStatus(@javax.annotation.Nullable ReturnStatusEnum returnStatus) {
+  public void setReturnStatus(@javax.annotation.Nullable String returnStatus) {
     this.returnStatus = returnStatus;
   }
 
@@ -302,10 +214,6 @@ public class CreateReturnResponseData {
       }
       if ((jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) && !jsonObj.get("return_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `return_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("return_status").toString()));
-      }
-      // validate the optional field `return_status`
-      if (jsonObj.get("return_status") != null && !jsonObj.get("return_status").isJsonNull()) {
-        ReturnStatusEnum.validateJsonElement(jsonObj.get("return_status"));
       }
   }
 

@@ -26,10 +26,10 @@ export interface GetProductResponseDataAudit {
      * Possible values:
      * - KYC_PENDING: The seller's onboarding (KYC - Know Your Customer information) is incomplete or awaiting processing.
      * - RESTRICTED_CATEGORY_PENDING: The product is in a restricted category, and category approval is still pending. To request access, submit an application through the Qualification Center on TikTok Shop Seller Center. Applicable only for the US market.
-     * @type {Array<GetProductResponseDataAuditPreApprovedReasonsEnum>}
+     * @type {Array<string>}
      * @memberof GetProductResponseDataAudit
      */
-    preApprovedReasons?: Array<GetProductResponseDataAuditPreApprovedReasonsEnum>;
+    preApprovedReasons?: Array<string>;
     /**
      * The product audit status.
      * Possible values: 
@@ -38,10 +38,10 @@ export interface GetProductResponseDataAudit {
      * - FAILED: The product failed the audit, or the audit was cancelled.
      * - PRE_APPROVED: The product has passed the audit but is not yet listed due to pending prerequisites. Refer to `pre_approved_reasons` for the prerequisites.
      * - APPROVED: The product passed the audit and has been listed on the platform.
-     * @type {GetProductResponseDataAuditStatusEnum}
+     * @type {string}
      * @memberof GetProductResponseDataAudit
      */
-    status?: GetProductResponseDataAuditStatusEnum;
+    status?: string;
     /**
      * The reasons why the product has not been submitted for TikTok Shop audit.
      * Applicable only when `audit.status=NONE` and the product cannot be submitted for audit because the shop has not met one or more listing prerequisites; otherwise, an empty array is returned.
@@ -50,44 +50,11 @@ export interface GetProductResponseDataAudit {
      * - PAYMENT_ACCOUNT_NOT_LINKED: No payment account is linked to the shop.
      * - SHOP_INACTIVE: The shop is inactive.
      * - W8_NOT_CONFIGURED: The required W-8 tax information has not been provided for the shop. Applicable only to US shops.
-     * @type {Array<GetProductResponseDataAuditNotSubmittedReasonsEnum>}
+     * @type {Array<string>}
      * @memberof GetProductResponseDataAudit
      */
-    notSubmittedReasons?: Array<GetProductResponseDataAuditNotSubmittedReasonsEnum>;
+    notSubmittedReasons?: Array<string>;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataAuditPreApprovedReasonsEnum = {
-    KycPending: 'KYC_PENDING',
-    RestrictedCategoryPending: 'RESTRICTED_CATEGORY_PENDING'
-} as const;
-export type GetProductResponseDataAuditPreApprovedReasonsEnum = typeof GetProductResponseDataAuditPreApprovedReasonsEnum[keyof typeof GetProductResponseDataAuditPreApprovedReasonsEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataAuditStatusEnum = {
-    None: 'NONE',
-    Auditing: 'AUDITING',
-    Failed: 'FAILED',
-    PreApproved: 'PRE_APPROVED',
-    Approved: 'APPROVED'
-} as const;
-export type GetProductResponseDataAuditStatusEnum = typeof GetProductResponseDataAuditStatusEnum[keyof typeof GetProductResponseDataAuditStatusEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataAuditNotSubmittedReasonsEnum = {
-    PaymentAccountNotLinked: 'PAYMENT_ACCOUNT_NOT_LINKED',
-    ShopInactive: 'SHOP_INACTIVE',
-    W8NotConfigured: 'W8_NOT_CONFIGURED'
-} as const;
-export type GetProductResponseDataAuditNotSubmittedReasonsEnum = typeof GetProductResponseDataAuditNotSubmittedReasonsEnum[keyof typeof GetProductResponseDataAuditNotSubmittedReasonsEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataAudit interface.

@@ -44,7 +44,7 @@ data class GetConversationMessagesResponseDataMessageSender (
 
     /* Sender's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE` - `SYSTEM` - `ROBOT` For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the `SHOP` role. */
     @SerializedName("role")
-    val role: GetConversationMessagesResponseDataMessageSender.Role? = null,
+    val role: kotlin.String? = null,
 
     /* Sender's nickname. - For shops, the nickname is the shop's name.  - For customer service, the nickname is the customer service's name.  - For buyers, the nickname is the buyer's nickname on TikTok.  You can set the nicknames for shops and customer service agents on Seller Center. */
     @SerializedName("nickname")
@@ -56,18 +56,6 @@ data class GetConversationMessagesResponseDataMessageSender (
 
 ) {
 
-    /**
-     * Sender's role. Possible enumerations: - `BUYER` - `SHOP` - `CUSTOMER_SERVICE` - `SYSTEM` - `ROBOT` For `SYSTEM` and `ROBOT` role, the value of `im_user_id`, `nickname`, and `avatar` are the same as those of the `SHOP` role.
-     *
-     * Values: BUYER,SHOP,CUSTOMER_SERVICE,SYSTEM,ROBOT
-     */
-    enum class Role(val value: kotlin.String) {
-        @SerializedName(value = "BUYER") BUYER("BUYER"),
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "CUSTOMER_SERVICE") CUSTOMER_SERVICE("CUSTOMER_SERVICE"),
-        @SerializedName(value = "SYSTEM") SYSTEM("SYSTEM"),
-        @SerializedName(value = "ROBOT") ROBOT("ROBOT");
-    }
 
 }
 

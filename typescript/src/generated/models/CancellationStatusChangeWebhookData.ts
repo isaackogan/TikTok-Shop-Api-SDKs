@@ -31,10 +31,10 @@ export interface CancellationStatusChangeWebhookData {
      *  * BUYER 
      *  * SELLER 
      *  * SYSTEM
-     * @type {CancellationStatusChangeWebhookDataCancellationsRoleEnum}
+     * @type {string}
      * @memberof CancellationStatusChangeWebhookData
      */
-    cancellationsRole?: CancellationStatusChangeWebhookDataCancellationsRoleEnum;
+    cancellationsRole?: string;
     /**
      * Order cancellation status, with possible values: 
      *   
@@ -42,10 +42,10 @@ export interface CancellationStatusChangeWebhookData {
      *  * CANCELLATION_REQUEST_SUCCESS 
      *  * CANCELLATION_REQUEST_CANCELLED 
      *  * CANCELLATION_REQUEST_COMPLETE
-     * @type {CancellationStatusChangeWebhookDataCancelStatusEnum}
+     * @type {string}
      * @memberof CancellationStatusChangeWebhookData
      */
-    cancelStatus?: CancellationStatusChangeWebhookDataCancelStatusEnum;
+    cancelStatus?: string;
     /**
      * The identifier of a specific order cancellation
      * @type {string}
@@ -59,29 +59,6 @@ export interface CancellationStatusChangeWebhookData {
      */
     createTime?: number;
 }
-
-
-/**
- * @export
- */
-export const CancellationStatusChangeWebhookDataCancellationsRoleEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    System: 'SYSTEM'
-} as const;
-export type CancellationStatusChangeWebhookDataCancellationsRoleEnum = typeof CancellationStatusChangeWebhookDataCancellationsRoleEnum[keyof typeof CancellationStatusChangeWebhookDataCancellationsRoleEnum];
-
-/**
- * @export
- */
-export const CancellationStatusChangeWebhookDataCancelStatusEnum = {
-    CancellationRequestPending: 'CANCELLATION_REQUEST_PENDING',
-    CancellationRequestSuccess: 'CANCELLATION_REQUEST_SUCCESS',
-    CancellationRequestCancelled: 'CANCELLATION_REQUEST_CANCELLED',
-    CancellationRequestComplete: 'CANCELLATION_REQUEST_COMPLETE'
-} as const;
-export type CancellationStatusChangeWebhookDataCancelStatusEnum = typeof CancellationStatusChangeWebhookDataCancelStatusEnum[keyof typeof CancellationStatusChangeWebhookDataCancelStatusEnum];
-
 
 /**
  * Check if a given object implements the CancellationStatusChangeWebhookData interface.

@@ -22,10 +22,10 @@ export interface Fee {
     /**
      * The type of fee.
      * Possible values: PFAND
-     * @type {FeeTypeEnum}
+     * @type {string}
      * @memberof Fee
      */
-    type?: FeeTypeEnum;
+    type?: string;
     /**
      * The fee amount.
      * Valid range:
@@ -41,31 +41,11 @@ export interface Fee {
      * - SINGLE_USE
      * - REUSABLE
      * - NOT_APPLICABLE
-     * @type {FeeAdditionalAttributeEnum}
+     * @type {string}
      * @memberof Fee
      */
-    additionalAttribute?: FeeAdditionalAttributeEnum;
+    additionalAttribute?: string;
 }
-
-
-/**
- * @export
- */
-export const FeeTypeEnum = {
-    Pfand: 'PFAND'
-} as const;
-export type FeeTypeEnum = typeof FeeTypeEnum[keyof typeof FeeTypeEnum];
-
-/**
- * @export
- */
-export const FeeAdditionalAttributeEnum = {
-    SingleUse: 'SINGLE_USE',
-    Reusable: 'REUSABLE',
-    NotApplicable: 'NOT_APPLICABLE'
-} as const;
-export type FeeAdditionalAttributeEnum = typeof FeeAdditionalAttributeEnum[keyof typeof FeeAdditionalAttributeEnum];
-
 
 /**
  * Check if a given object implements the Fee interface.

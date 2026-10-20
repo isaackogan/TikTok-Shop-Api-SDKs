@@ -75,10 +75,10 @@ export interface GetOrderListResponseDataOrderLineItem {
      * - `DELIVERED`: The package has been delivered to the buyer.
      * - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
      * - `CANCELLED`: The order has been cancelled.
-     * @type {GetOrderListResponseDataOrderLineItemDisplayStatusEnum}
+     * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
-    displayStatus?: GetOrderListResponseDataOrderLineItemDisplayStatusEnum;
+    displayStatus?: string;
     /**
      * Product name.
      * @type {string}
@@ -148,11 +148,11 @@ export interface GetOrderListResponseDataOrderLineItem {
      * **US**
      * - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future.
      * - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
-     * @type {GetOrderListResponseDataOrderLineItemSkuTypeEnum}
+     * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      * @deprecated
      */
-    skuType?: GetOrderListResponseDataOrderLineItemSkuTypeEnum;
+    skuType?: string;
     /**
      * The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
      * @type {string}
@@ -179,10 +179,10 @@ export interface GetOrderListResponseDataOrderLineItem {
      * - `FULFILLING`: Package has been collected by carrier and is in transit.
      * - `COMPLETED`: Package has been delivered.
      * - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
-     * @type {GetOrderListResponseDataOrderLineItemPackageStatusEnum}
+     * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
-    packageStatus?: GetOrderListResponseDataOrderLineItemPackageStatusEnum;
+    packageStatus?: string;
     /**
      * Currency for payment.
      * @type {string}
@@ -202,10 +202,10 @@ export interface GetOrderListResponseDataOrderLineItem {
      * - `SELLER`
      * - `OPERATOR`
      * - `SYSTEM`
-     * @type {GetOrderListResponseDataOrderLineItemCancelUserEnum}
+     * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
-    cancelUser?: GetOrderListResponseDataOrderLineItemCancelUserEnum;
+    cancelUser?: string;
     /**
      * The shipping provider ID of the item.
      * @type {string}
@@ -372,57 +372,6 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     productListingType?: string;
 }
-
-
-/**
- * @export
- */
-export const GetOrderListResponseDataOrderLineItemDisplayStatusEnum = {
-    Unpaid: 'UNPAID',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    AwaitingCollection: 'AWAITING_COLLECTION',
-    InTransit: 'IN_TRANSIT',
-    Delivered: 'DELIVERED',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type GetOrderListResponseDataOrderLineItemDisplayStatusEnum = typeof GetOrderListResponseDataOrderLineItemDisplayStatusEnum[keyof typeof GetOrderListResponseDataOrderLineItemDisplayStatusEnum];
-
-/**
- * @export
- */
-export const GetOrderListResponseDataOrderLineItemSkuTypeEnum = {
-    Normal: 'NORMAL',
-    ZeroLottery: 'ZERO_LOTTERY',
-    ShopPartner: 'SHOP_PARTNER',
-    PreOrder: 'PRE_ORDER',
-    MadeToOrder: 'MADE_TO_ORDER'
-} as const;
-export type GetOrderListResponseDataOrderLineItemSkuTypeEnum = typeof GetOrderListResponseDataOrderLineItemSkuTypeEnum[keyof typeof GetOrderListResponseDataOrderLineItemSkuTypeEnum];
-
-/**
- * @export
- */
-export const GetOrderListResponseDataOrderLineItemPackageStatusEnum = {
-    ToFulfill: 'TO_FULFILL',
-    Processing: 'PROCESSING',
-    Fulfilling: 'FULFILLING',
-    Completed: 'COMPLETED',
-    Cancelled: 'CANCELLED'
-} as const;
-export type GetOrderListResponseDataOrderLineItemPackageStatusEnum = typeof GetOrderListResponseDataOrderLineItemPackageStatusEnum[keyof typeof GetOrderListResponseDataOrderLineItemPackageStatusEnum];
-
-/**
- * @export
- */
-export const GetOrderListResponseDataOrderLineItemCancelUserEnum = {
-    Buyer: 'BUYER',
-    Seller: 'SELLER',
-    Operator: 'OPERATOR',
-    System: 'SYSTEM'
-} as const;
-export type GetOrderListResponseDataOrderLineItemCancelUserEnum = typeof GetOrderListResponseDataOrderLineItemCancelUserEnum[keyof typeof GetOrderListResponseDataOrderLineItemCancelUserEnum];
-
 
 /**
  * Check if a given object implements the GetOrderListResponseDataOrderLineItem interface.

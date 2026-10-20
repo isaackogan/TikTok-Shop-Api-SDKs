@@ -46,10 +46,10 @@ export interface ImageTranslationCompletedWebhookDataTranslationTask {
      *  - PROCESSING: Translation is underway and has not yet completed. 
      *  - COMPLETED: Translation has completed and results are ready. 
      *  - FAILED: Translation did not complete due to an error.
-     * @type {ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum}
+     * @type {string}
      * @memberof ImageTranslationCompletedWebhookDataTranslationTask
      */
-    status?: ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum;
+    status?: string;
     /**
      * The reason why the translation task failed.
      * @type {string}
@@ -64,10 +64,10 @@ export interface ImageTranslationCompletedWebhookDataTranslationTask {
      *  - es-ES 
      *  - fr-FR 
      *  - it-IT
-     * @type {ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum}
+     * @type {string}
      * @memberof ImageTranslationCompletedWebhookDataTranslationTask
      */
-    targetLanguage?: ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum;
+    targetLanguage?: string;
     /**
      * The original image to be translated.
      * @type {ImageTranslationCompletedWebhookDataTranslationTaskOriginalImage}
@@ -81,30 +81,6 @@ export interface ImageTranslationCompletedWebhookDataTranslationTask {
      */
     translatedImage?: ImageTranslationCompletedWebhookDataTranslationTaskTranslatedImage;
 }
-
-
-/**
- * @export
- */
-export const ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum = {
-    Processing: 'PROCESSING',
-    Completed: 'COMPLETED',
-    Failed: 'FAILED'
-} as const;
-export type ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum = typeof ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum[keyof typeof ImageTranslationCompletedWebhookDataTranslationTaskStatusEnum];
-
-/**
- * @export
- */
-export const ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum = {
-    DeDe: 'de-DE',
-    EnIe: 'en-IE',
-    EsEs: 'es-ES',
-    FrFr: 'fr-FR',
-    ItIt: 'it-IT'
-} as const;
-export type ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum = typeof ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum[keyof typeof ImageTranslationCompletedWebhookDataTranslationTaskTargetLanguageEnum];
-
 
 /**
  * Check if a given object implements the ImageTranslationCompletedWebhookDataTranslationTask interface.

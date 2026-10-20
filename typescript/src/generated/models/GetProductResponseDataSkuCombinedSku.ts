@@ -83,10 +83,10 @@ export interface GetProductResponseDataSkuCombinedSku {
      * - SUB_SKU_DELETE: Indicate the source SKU has been deleted. 
      * - SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR: Indicate the level one category of the virtual bundle does not match that of the source product. 
      * - SUB_PRODUCT_CATEGORY_OVER_RESTRICTION:  Indicate the level one category of the source product is not in the set of restricted categories.
-     * @type {Array<GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum>}
+     * @type {Array<string>}
      * @memberof GetProductResponseDataSkuCombinedSku
      */
-    combinedListingNotLiveReasons?: Array<GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum>;
+    combinedListingNotLiveReasons?: Array<string>;
     /**
      * Source SKU inventory details.
      * @type {Array<GetProductResponseDataSkuCombinedSkuInventory>}
@@ -142,21 +142,6 @@ export interface GetProductResponseDataSkuCombinedSku {
      */
     title?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum = {
-    SubProductDeactivate: 'SUB_PRODUCT_DEACTIVATE',
-    SubProductDelete: 'SUB_PRODUCT_DELETE',
-    SubProductFrozen: 'SUB_PRODUCT_FROZEN',
-    SubSkuDelete: 'SUB_SKU_DELETE',
-    SubProductCategoryFirstLevelError: 'SUB_PRODUCT_CATEGORY_FIRST_LEVEL_ERROR',
-    SubProductCategoryOverRestriction: 'SUB_PRODUCT_CATEGORY_OVER_RESTRICTION'
-} as const;
-export type GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum = typeof GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum[keyof typeof GetProductResponseDataSkuCombinedSkuCombinedListingNotLiveReasonsEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuCombinedSku interface.

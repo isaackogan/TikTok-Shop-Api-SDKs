@@ -60,11 +60,11 @@ data class GetGlobalCategoryRulesResponseDataProductCertification (
 
     /* The markets where the certification is required, without conditions. Possible values: - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico  Applicable only if `is_required=false`. */
     @SerializedName("required_regions")
-    val requiredRegions: kotlin.collections.List<GetGlobalCategoryRulesResponseDataProductCertification.RequiredRegions>? = null,
+    val requiredRegions: kotlin.collections.List<kotlin.String>? = null,
 
     /* The markets where the certification is purely optional, or required only under certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements.  Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam  Applicable only if `is_required=false`. */
     @SerializedName("optional_regions")
-    val optionalRegions: kotlin.collections.List<GetGlobalCategoryRulesResponseDataProductCertification.OptionalRegions>? = null,
+    val optionalRegions: kotlin.collections.List<kotlin.String>? = null,
 
     /* A list of conditions that determine if the certification is required in a market based on the seller's inputs for a product attribute. If any of the conditions is met, the certification is required; otherwise, it is optional.  For example, there's a condition that states that the \"Safety Data Sheet (SDS) for flammable materials\" certification is required if the seller selects the value \"Yes\" for the attribute \"Flammable Liquid?\". For more scenario-based guidance on using this parameter, refer to the [Solution Guide](https://partner.tiktokshop.com/openlearn/guide/usecase?parent_id=7256668359046153985).  Applicable only if `optional_regions` is not empty. */
     @SerializedName("requirement_conditions")
@@ -72,58 +72,6 @@ data class GetGlobalCategoryRulesResponseDataProductCertification (
 
 ) {
 
-    /**
-     * The markets where the certification is required, without conditions. Possible values: - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - ID: Indonesia - IT: Italy - IE: Ireland - JP: Japan - MY: Malaysia - PH: Philippines - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam - MX: Mexico  Applicable only if `is_required=false`.
-     *
-     * Values: DE,ES,FR,GB,ID,IT,IE,JP,MY,PH,SG,TH,US,VN,MX
-     */
-    enum class RequiredRegions(val value: kotlin.String) {
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN"),
-        @SerializedName(value = "MX") MX("MX");
-    }
-    /**
-     * The markets where the certification is purely optional, or required only under certain conditions. Refer to `requirement_conditions` for details on markets with conditional requirements.  Possible values: - AT: Austria - BE: Belgium - CZ: Czechia - DE: Germany - ES: Spain - FR: France - GB: United Kingdom - GR: Greece - HU: Hungary - ID: Indonesia - IE: Ireland - IT: Italy - JP: Japan - MX: Mexico - MY: Malaysia - NL: Netherlands - PH: Philippines - PL: Poland - PT: Portugal - SG: Singapore - TH: Thailand - US: United States - VN: Vietnam  Applicable only if `is_required=false`.
-     *
-     * Values: AT,BE,CZ,DE,ES,FR,GB,GR,HU,ID,IE,IT,JP,MX,MY,NL,PH,PL,PT,SG,TH,US,VN
-     */
-    enum class OptionalRegions(val value: kotlin.String) {
-        @SerializedName(value = "AT") AT("AT"),
-        @SerializedName(value = "BE") BE("BE"),
-        @SerializedName(value = "CZ") CZ("CZ"),
-        @SerializedName(value = "DE") DE("DE"),
-        @SerializedName(value = "ES") ES("ES"),
-        @SerializedName(value = "FR") FR("FR"),
-        @SerializedName(value = "GB") GB("GB"),
-        @SerializedName(value = "GR") GR("GR"),
-        @SerializedName(value = "HU") HU("HU"),
-        @SerializedName(value = "ID") ID("ID"),
-        @SerializedName(value = "IE") IE("IE"),
-        @SerializedName(value = "IT") IT("IT"),
-        @SerializedName(value = "JP") JP("JP"),
-        @SerializedName(value = "MX") MX("MX"),
-        @SerializedName(value = "MY") MY("MY"),
-        @SerializedName(value = "NL") NL("NL"),
-        @SerializedName(value = "PH") PH("PH"),
-        @SerializedName(value = "PL") PL("PL"),
-        @SerializedName(value = "PT") PT("PT"),
-        @SerializedName(value = "SG") SG("SG"),
-        @SerializedName(value = "TH") TH("TH"),
-        @SerializedName(value = "US") US("US"),
-        @SerializedName(value = "VN") VN("VN");
-    }
 
 }
 

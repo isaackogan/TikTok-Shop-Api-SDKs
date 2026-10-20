@@ -25,10 +25,10 @@ export interface GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator {
      * - USER_PORTRAIT_GENDER_UNKNOWN: Unknown gender.
      * - USER_PORTRAIT_GENDER_M: Male.
      * - USER_PORTRAIT_GENDER_F: Female.
-     * @type {GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum}
+     * @type {string}
      * @memberof GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator
      */
-    type?: GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum;
+    type?: string;
     /**
      * The count for the corresponding paid-advertising gender indicator.
      * @type {string}
@@ -36,18 +36,6 @@ export interface GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator {
      */
     value?: string;
 }
-
-
-/**
- * @export
- */
-export const GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum = {
-    UserPortraitGenderUnknown: 'USER_PORTRAIT_GENDER_UNKNOWN',
-    UserPortraitGenderM: 'USER_PORTRAIT_GENDER_M',
-    UserPortraitGenderF: 'USER_PORTRAIT_GENDER_F'
-} as const;
-export type GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum = typeof GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum[keyof typeof GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicatorTypeEnum];
-
 
 /**
  * Check if a given object implements the GetLiveRoomUserPortraitsResponseDataPaidAdsGenderIndicator interface.

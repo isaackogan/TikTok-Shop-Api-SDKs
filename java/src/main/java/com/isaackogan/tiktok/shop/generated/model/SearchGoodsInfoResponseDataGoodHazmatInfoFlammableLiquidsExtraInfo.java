@@ -50,66 +50,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo {
-  /**
-   * Flammable liquid type, possible values -PAINT -PERFUMERY -ALCOHOLIC -OTHER
-   */
-  @JsonAdapter(FlammableLiquidsTypeEnum.Adapter.class)
-  public enum FlammableLiquidsTypeEnum {
-    PAINT("PAINT"),
-    
-    PERFUMERY("PERFUMERY"),
-    
-    ALCOHOLIC("ALCOHOLIC"),
-    
-    OTHER("OTHER");
-
-    private String value;
-
-    FlammableLiquidsTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FlammableLiquidsTypeEnum fromValue(String value) {
-      for (FlammableLiquidsTypeEnum b : FlammableLiquidsTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FlammableLiquidsTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FlammableLiquidsTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FlammableLiquidsTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FlammableLiquidsTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FlammableLiquidsTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FLAMMABLE_LIQUIDS_TYPE = "flammable_liquids_type";
   @SerializedName(SERIALIZED_NAME_FLAMMABLE_LIQUIDS_TYPE)
   @javax.annotation.Nullable
-  private FlammableLiquidsTypeEnum flammableLiquidsType;
+  private String flammableLiquidsType;
 
   public static final String SERIALIZED_NAME_FLAMMABLE_LIQUIDS_VOLUME = "flammable_liquids_volume";
   @SerializedName(SERIALIZED_NAME_FLAMMABLE_LIQUIDS_VOLUME)
@@ -124,7 +68,7 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo 
   public SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo() {
   }
 
-  public SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo flammableLiquidsType(@javax.annotation.Nullable FlammableLiquidsTypeEnum flammableLiquidsType) {
+  public SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo flammableLiquidsType(@javax.annotation.Nullable String flammableLiquidsType) {
     this.flammableLiquidsType = flammableLiquidsType;
     return this;
   }
@@ -134,11 +78,11 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo 
    * @return flammableLiquidsType
    */
   @javax.annotation.Nullable
-  public FlammableLiquidsTypeEnum getFlammableLiquidsType() {
+  public String getFlammableLiquidsType() {
     return flammableLiquidsType;
   }
 
-  public void setFlammableLiquidsType(@javax.annotation.Nullable FlammableLiquidsTypeEnum flammableLiquidsType) {
+  public void setFlammableLiquidsType(@javax.annotation.Nullable String flammableLiquidsType) {
     this.flammableLiquidsType = flammableLiquidsType;
   }
 
@@ -293,10 +237,6 @@ public class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo 
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("flammable_liquids_type") != null && !jsonObj.get("flammable_liquids_type").isJsonNull()) && !jsonObj.get("flammable_liquids_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `flammable_liquids_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("flammable_liquids_type").toString()));
-      }
-      // validate the optional field `flammable_liquids_type`
-      if (jsonObj.get("flammable_liquids_type") != null && !jsonObj.get("flammable_liquids_type").isJsonNull()) {
-        FlammableLiquidsTypeEnum.validateJsonElement(jsonObj.get("flammable_liquids_type"));
       }
       if ((jsonObj.get("flammable_liquids_volume") != null && !jsonObj.get("flammable_liquids_volume").isJsonNull()) && !jsonObj.get("flammable_liquids_volume").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `flammable_liquids_volume` to be a primitive type in the JSON string but got `%s`", jsonObj.get("flammable_liquids_volume").toString()));

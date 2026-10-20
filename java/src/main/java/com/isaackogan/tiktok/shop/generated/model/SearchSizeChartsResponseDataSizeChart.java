@@ -79,68 +79,10 @@ public class SearchSizeChartsResponseDataSizeChart {
   @javax.annotation.Nullable
   private List<SearchSizeChartsResponseDataSizeChartSizeChartData> sizeChartDatas = new ArrayList<>();
 
-  /**
-   * Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
-   */
-  @JsonAdapter(SizeChartModeEnum.Adapter.class)
-  public enum SizeChartModeEnum {
-    /**
-     * A size chart template that can be reused across multiple products.
-     */
-    REUSABLE_TEMPLATE("REUSABLE_TEMPLATE"),
-    
-    /**
-     * A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
-     */
-    PRODUCT_SCOPED("PRODUCT_SCOPED");
-
-    private String value;
-
-    SizeChartModeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SizeChartModeEnum fromValue(String value) {
-      for (SizeChartModeEnum b : SizeChartModeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SizeChartModeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SizeChartModeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SizeChartModeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SizeChartModeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SizeChartModeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SIZE_CHART_MODE = "size_chart_mode";
   @SerializedName(SERIALIZED_NAME_SIZE_CHART_MODE)
   @javax.annotation.Nullable
-  private SizeChartModeEnum sizeChartMode;
+  private String sizeChartMode;
 
   public SearchSizeChartsResponseDataSizeChart() {
   }
@@ -264,7 +206,7 @@ public class SearchSizeChartsResponseDataSizeChart {
   }
 
 
-  public SearchSizeChartsResponseDataSizeChart sizeChartMode(@javax.annotation.Nullable SizeChartModeEnum sizeChartMode) {
+  public SearchSizeChartsResponseDataSizeChart sizeChartMode(@javax.annotation.Nullable String sizeChartMode) {
     this.sizeChartMode = sizeChartMode;
     return this;
   }
@@ -274,11 +216,11 @@ public class SearchSizeChartsResponseDataSizeChart {
    * @return sizeChartMode
    */
   @javax.annotation.Nullable
-  public SizeChartModeEnum getSizeChartMode() {
+  public String getSizeChartMode() {
     return sizeChartMode;
   }
 
-  public void setSizeChartMode(@javax.annotation.Nullable SizeChartModeEnum sizeChartMode) {
+  public void setSizeChartMode(@javax.annotation.Nullable String sizeChartMode) {
     this.sizeChartMode = sizeChartMode;
   }
 
@@ -439,10 +381,6 @@ public class SearchSizeChartsResponseDataSizeChart {
       }
       if ((jsonObj.get("size_chart_mode") != null && !jsonObj.get("size_chart_mode").isJsonNull()) && !jsonObj.get("size_chart_mode").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `size_chart_mode` to be a primitive type in the JSON string but got `%s`", jsonObj.get("size_chart_mode").toString()));
-      }
-      // validate the optional field `size_chart_mode`
-      if (jsonObj.get("size_chart_mode") != null && !jsonObj.get("size_chart_mode").isJsonNull()) {
-        SizeChartModeEnum.validateJsonElement(jsonObj.get("size_chart_mode"));
       }
   }
 

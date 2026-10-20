@@ -53,137 +53,15 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PackageUpdateWebhookData {
-  /**
-   * Type of the event trigger, with possible values:      * COMBINE   * CANCEL_COMBINE   * SPLIT   * CANCEL_SPLIT   * ADDRESS_UPDATE_SPLIT   * CANCEL_FULFILL_SPLIT   * FULFILL_UNCOMBINE   * PARTLY_CANCEL_SPLIT   * SPLIT_BY_SKU_CANCEL
-   */
-  @JsonAdapter(ScTypeEnum.Adapter.class)
-  public enum ScTypeEnum {
-    COMBINE("COMBINE"),
-    
-    CANCEL_COMBINE("CANCEL_COMBINE"),
-    
-    SPLIT("SPLIT"),
-    
-    CANCEL_SPLIT("CANCEL_SPLIT"),
-    
-    ADDRESS_UPDATE_SPLIT("ADDRESS_UPDATE_SPLIT"),
-    
-    CANCEL_FULFILL_SPLIT("CANCEL_FULFILL_SPLIT"),
-    
-    FULFILL_UNCOMBINE("FULFILL_UNCOMBINE"),
-    
-    PARTLY_CANCEL_SPLIT("PARTLY_CANCEL_SPLIT"),
-    
-    SPLIT_BY_SKU_CANCEL("SPLIT_BY_SKU_CANCEL");
-
-    private String value;
-
-    ScTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ScTypeEnum fromValue(String value) {
-      for (ScTypeEnum b : ScTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ScTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ScTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ScTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ScTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ScTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SC_TYPE = "sc_type";
   @SerializedName(SERIALIZED_NAME_SC_TYPE)
   @javax.annotation.Nullable
-  private ScTypeEnum scType;
-
-  /**
-   * Operator of the event trigger, with possible values:      * ROLE_USER   * ROLE_SELLER   * ROLE_OPERATOR   * ROLE_SYSTEM
-   */
-  @JsonAdapter(RoleTypeEnum.Adapter.class)
-  public enum RoleTypeEnum {
-    ROLE_USER("ROLE_USER"),
-    
-    ROLE_SELLER("ROLE_SELLER"),
-    
-    ROLE_OPERATOR("ROLE_OPERATOR"),
-    
-    ROLE_SYSTEM("ROLE_SYSTEM");
-
-    private String value;
-
-    RoleTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleTypeEnum fromValue(String value) {
-      for (RoleTypeEnum b : RoleTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      RoleTypeEnum.fromValue(value);
-    }
-  }
+  private String scType;
 
   public static final String SERIALIZED_NAME_ROLE_TYPE = "role_type";
   @SerializedName(SERIALIZED_NAME_ROLE_TYPE)
   @javax.annotation.Nullable
-  private RoleTypeEnum roleType;
+  private String roleType;
 
   public static final String SERIALIZED_NAME_PACKAGE_LIST = "package_list";
   @SerializedName(SERIALIZED_NAME_PACKAGE_LIST)
@@ -198,7 +76,7 @@ public class PackageUpdateWebhookData {
   public PackageUpdateWebhookData() {
   }
 
-  public PackageUpdateWebhookData scType(@javax.annotation.Nullable ScTypeEnum scType) {
+  public PackageUpdateWebhookData scType(@javax.annotation.Nullable String scType) {
     this.scType = scType;
     return this;
   }
@@ -208,16 +86,16 @@ public class PackageUpdateWebhookData {
    * @return scType
    */
   @javax.annotation.Nullable
-  public ScTypeEnum getScType() {
+  public String getScType() {
     return scType;
   }
 
-  public void setScType(@javax.annotation.Nullable ScTypeEnum scType) {
+  public void setScType(@javax.annotation.Nullable String scType) {
     this.scType = scType;
   }
 
 
-  public PackageUpdateWebhookData roleType(@javax.annotation.Nullable RoleTypeEnum roleType) {
+  public PackageUpdateWebhookData roleType(@javax.annotation.Nullable String roleType) {
     this.roleType = roleType;
     return this;
   }
@@ -227,11 +105,11 @@ public class PackageUpdateWebhookData {
    * @return roleType
    */
   @javax.annotation.Nullable
-  public RoleTypeEnum getRoleType() {
+  public String getRoleType() {
     return roleType;
   }
 
-  public void setRoleType(@javax.annotation.Nullable RoleTypeEnum roleType) {
+  public void setRoleType(@javax.annotation.Nullable String roleType) {
     this.roleType = roleType;
   }
 
@@ -397,16 +275,8 @@ public class PackageUpdateWebhookData {
       if ((jsonObj.get("sc_type") != null && !jsonObj.get("sc_type").isJsonNull()) && !jsonObj.get("sc_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `sc_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sc_type").toString()));
       }
-      // validate the optional field `sc_type`
-      if (jsonObj.get("sc_type") != null && !jsonObj.get("sc_type").isJsonNull()) {
-        ScTypeEnum.validateJsonElement(jsonObj.get("sc_type"));
-      }
       if ((jsonObj.get("role_type") != null && !jsonObj.get("role_type").isJsonNull()) && !jsonObj.get("role_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `role_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("role_type").toString()));
-      }
-      // validate the optional field `role_type`
-      if (jsonObj.get("role_type") != null && !jsonObj.get("role_type").isJsonNull()) {
-        RoleTypeEnum.validateJsonElement(jsonObj.get("role_type"));
       }
       if (jsonObj.get("package_list") != null && !jsonObj.get("package_list").isJsonNull()) {
         JsonArray jsonArraypackageList = jsonObj.getAsJsonArray("package_list");

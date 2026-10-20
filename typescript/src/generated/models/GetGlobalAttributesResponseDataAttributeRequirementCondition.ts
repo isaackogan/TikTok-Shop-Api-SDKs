@@ -45,18 +45,18 @@ export interface GetGlobalAttributesResponseDataAttributeRequirementCondition {
      * - US: United States
      * - VN: Vietnam
      * - MX: Mexico
-     * @type {GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum}
+     * @type {string}
      * @memberof GetGlobalAttributesResponseDataAttributeRequirementCondition
      */
-    region?: GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum;
+    region?: string;
     /**
      * The type of condition.
      * Possible values:
      * - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     * @type {GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum}
+     * @type {string}
      * @memberof GetGlobalAttributesResponseDataAttributeRequirementCondition
      */
-    conditionType?: GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum;
+    conditionType?: string;
     /**
      * The ID of the product attribute that is being evaluated by the condition.
      * @type {string}
@@ -70,46 +70,6 @@ export interface GetGlobalAttributesResponseDataAttributeRequirementCondition {
      */
     attributeValueId?: string;
 }
-
-
-/**
- * @export
- */
-export const GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum = {
-    At: 'AT',
-    Be: 'BE',
-    Cz: 'CZ',
-    De: 'DE',
-    Es: 'ES',
-    Fr: 'FR',
-    Gb: 'GB',
-    Gr: 'GR',
-    Hu: 'HU',
-    Id: 'ID',
-    It: 'IT',
-    Ie: 'IE',
-    Jp: 'JP',
-    My: 'MY',
-    Nl: 'NL',
-    Ph: 'PH',
-    Pl: 'PL',
-    Pt: 'PT',
-    Sg: 'SG',
-    Th: 'TH',
-    Us: 'US',
-    Vn: 'VN',
-    Mx: 'MX'
-} as const;
-export type GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum = typeof GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum[keyof typeof GetGlobalAttributesResponseDataAttributeRequirementConditionRegionEnum];
-
-/**
- * @export
- */
-export const GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum = {
-    ValueIdMatch: 'VALUE_ID_MATCH'
-} as const;
-export type GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum = typeof GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum[keyof typeof GetGlobalAttributesResponseDataAttributeRequirementConditionConditionTypeEnum];
-
 
 /**
  * Check if a given object implements the GetGlobalAttributesResponseDataAttributeRequirementCondition interface.

@@ -42,11 +42,11 @@ data class GoodsMatchWebhookData (
 
     /* Indicates whether the seller is matching or unmatching products. Possible enumerations are: `MATCH` and `UNMATCH`. */
     @SerializedName("match_type")
-    val matchType: GoodsMatchWebhookData.MatchType? = null,
+    val matchType: kotlin.String? = null,
 
     /* Possible enumerations are: `LOCAL` and `GLOBAL`. */
     @SerializedName("product_type")
-    val productType: GoodsMatchWebhookData.ProductType? = null,
+    val productType: kotlin.String? = null,
 
     /* FBT Goods ID. */
     @SerializedName("goods_id")
@@ -66,24 +66,6 @@ data class GoodsMatchWebhookData (
 
 ) {
 
-    /**
-     * Indicates whether the seller is matching or unmatching products. Possible enumerations are: `MATCH` and `UNMATCH`.
-     *
-     * Values: MATCH,UNMATCH
-     */
-    enum class MatchType(val value: kotlin.String) {
-        @SerializedName(value = "MATCH") MATCH("MATCH"),
-        @SerializedName(value = "UNMATCH") UNMATCH("UNMATCH");
-    }
-    /**
-     * Possible enumerations are: `LOCAL` and `GLOBAL`.
-     *
-     * Values: LOCAL,GLOBAL
-     */
-    enum class ProductType(val value: kotlin.String) {
-        @SerializedName(value = "LOCAL") LOCAL("LOCAL"),
-        @SerializedName(value = "GLOBAL") GLOBAL("GLOBAL");
-    }
 
 }
 

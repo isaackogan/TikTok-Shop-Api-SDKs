@@ -47,10 +47,10 @@ export interface GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProf
      * - NEW_FOLLOWER: viewers who newly followed after watching the video
      * 
      * - VIEWERS: viewers of the video
-     * @type {GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum}
+     * @type {string}
      * @memberof GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile
      */
-    type?: GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum;
+    type?: string;
     /**
      * View gender distribution
      * @type {Array<GenderDistribution>}
@@ -70,17 +70,6 @@ export interface GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProf
      */
     countryDistribution?: Array<CountryDistribution>;
 }
-
-
-/**
- * @export
- */
-export const GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum = {
-    NewFollower: 'NEW_FOLLOWER',
-    Viewers: 'VIEWERS'
-} as const;
-export type GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum = typeof GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum[keyof typeof GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfileTypeEnum];
-
 
 /**
  * Check if a given object implements the GetShopVideoPerformanceDetailsResponseDataPerformanceViewerProfile interface.

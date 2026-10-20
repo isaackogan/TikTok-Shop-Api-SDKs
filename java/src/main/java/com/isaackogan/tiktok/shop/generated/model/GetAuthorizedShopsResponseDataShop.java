@@ -65,68 +65,10 @@ public class GetAuthorizedShopsResponseDataShop {
   @javax.annotation.Nullable
   private String region;
 
-  /**
-   * The type of seller. Possible values: - CROSS_BORDER: Cross border sellers with multiple shops in different countries. - LOCAL: Local sellers with only 1 shop.
-   */
-  @JsonAdapter(SellerTypeEnum.Adapter.class)
-  public enum SellerTypeEnum {
-    /**
-     * Cross border sellers with multiple shops in different countries.
-     */
-    CROSS_BORDER("CROSS_BORDER"),
-    
-    /**
-     * Local sellers with only 1 shop.
-     */
-    LOCAL("LOCAL");
-
-    private String value;
-
-    SellerTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static SellerTypeEnum fromValue(String value) {
-      for (SellerTypeEnum b : SellerTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<SellerTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final SellerTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public SellerTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return SellerTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      SellerTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_SELLER_TYPE = "seller_type";
   @SerializedName(SERIALIZED_NAME_SELLER_TYPE)
   @javax.annotation.Nullable
-  private SellerTypeEnum sellerType;
+  private String sellerType;
 
   public static final String SERIALIZED_NAME_CIPHER = "cipher";
   @SerializedName(SERIALIZED_NAME_CIPHER)
@@ -198,7 +140,7 @@ public class GetAuthorizedShopsResponseDataShop {
   }
 
 
-  public GetAuthorizedShopsResponseDataShop sellerType(@javax.annotation.Nullable SellerTypeEnum sellerType) {
+  public GetAuthorizedShopsResponseDataShop sellerType(@javax.annotation.Nullable String sellerType) {
     this.sellerType = sellerType;
     return this;
   }
@@ -208,11 +150,11 @@ public class GetAuthorizedShopsResponseDataShop {
    * @return sellerType
    */
   @javax.annotation.Nullable
-  public SellerTypeEnum getSellerType() {
+  public String getSellerType() {
     return sellerType;
   }
 
-  public void setSellerType(@javax.annotation.Nullable SellerTypeEnum sellerType) {
+  public void setSellerType(@javax.annotation.Nullable String sellerType) {
     this.sellerType = sellerType;
   }
 
@@ -382,10 +324,6 @@ public class GetAuthorizedShopsResponseDataShop {
       }
       if ((jsonObj.get("seller_type") != null && !jsonObj.get("seller_type").isJsonNull()) && !jsonObj.get("seller_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `seller_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("seller_type").toString()));
-      }
-      // validate the optional field `seller_type`
-      if (jsonObj.get("seller_type") != null && !jsonObj.get("seller_type").isJsonNull()) {
-        SellerTypeEnum.validateJsonElement(jsonObj.get("seller_type"));
       }
       if ((jsonObj.get("cipher") != null && !jsonObj.get("cipher").isJsonNull()) && !jsonObj.get("cipher").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `cipher` to be a primitive type in the JSON string but got `%s`", jsonObj.get("cipher").toString()));

@@ -25,41 +25,20 @@ export interface GetProductResponseDataSkuStatusInfo {
      * - SELLER: Indicates that the seller deactivated the SKU
      * - PLATFORM: Indicates that the platform de-activated the SKU due to violation reasons
      * - COMBO_RELATION: Indicates that the platform de-activated the bundle-SKU due to the deactivation of sub-SKU.
-     * @type {GetProductResponseDataSkuStatusInfoDeactivationSourceEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuStatusInfo
      */
-    deactivationSource?: GetProductResponseDataSkuStatusInfoDeactivationSourceEnum;
+    deactivationSource?: string;
     /**
      * The SKU status in TikTok Shop.
      * Possible values: 
      * - NORMAL
      * - DEACTIVATED
-     * @type {GetProductResponseDataSkuStatusInfoStatusEnum}
+     * @type {string}
      * @memberof GetProductResponseDataSkuStatusInfo
      */
-    status?: GetProductResponseDataSkuStatusInfoStatusEnum;
+    status?: string;
 }
-
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuStatusInfoDeactivationSourceEnum = {
-    Seller: 'SELLER',
-    Platform: 'PLATFORM',
-    ComboRelation: 'COMBO_RELATION'
-} as const;
-export type GetProductResponseDataSkuStatusInfoDeactivationSourceEnum = typeof GetProductResponseDataSkuStatusInfoDeactivationSourceEnum[keyof typeof GetProductResponseDataSkuStatusInfoDeactivationSourceEnum];
-
-/**
- * @export
- */
-export const GetProductResponseDataSkuStatusInfoStatusEnum = {
-    Normal: 'NORMAL',
-    Deactivated: 'DEACTIVATED'
-} as const;
-export type GetProductResponseDataSkuStatusInfoStatusEnum = typeof GetProductResponseDataSkuStatusInfoStatusEnum[keyof typeof GetProductResponseDataSkuStatusInfoStatusEnum];
-
 
 /**
  * Check if a given object implements the GetProductResponseDataSkuStatusInfo interface.

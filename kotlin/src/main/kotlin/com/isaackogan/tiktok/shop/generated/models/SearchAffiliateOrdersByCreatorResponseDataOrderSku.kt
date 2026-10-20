@@ -163,7 +163,7 @@ data class SearchAffiliateOrdersByCreatorResponseDataOrderSku (
 
     /* The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE */
     @SerializedName("content_type")
-    val contentType: SearchAffiliateOrdersByCreatorResponseDataOrderSku.ContentType? = null,
+    val contentType: kotlin.String? = null,
 
     /* The content identifier for the creator content through which the order was created. */
     @SerializedName("content_id")
@@ -183,19 +183,6 @@ data class SearchAffiliateOrdersByCreatorResponseDataOrderSku (
 
 ) {
 
-    /**
-     * The content format of the creator content through which the order was created. Possible values: - SHOP - VIDEO - LIVE - PRE_LIVE - PROMOTION_PAGE - LINKSHARE
-     *
-     * Values: SHOP,VIDEO,LIVE,PRE_LIVE,PROMOTION_PAGE,LINKSHARE
-     */
-    enum class ContentType(val value: kotlin.String) {
-        @SerializedName(value = "SHOP") SHOP("SHOP"),
-        @SerializedName(value = "VIDEO") VIDEO("VIDEO"),
-        @SerializedName(value = "LIVE") LIVE("LIVE"),
-        @SerializedName(value = "PRE_LIVE") PRE_LIVE("PRE_LIVE"),
-        @SerializedName(value = "PROMOTION_PAGE") PROMOTION_PAGE("PROMOTION_PAGE"),
-        @SerializedName(value = "LINKSHARE") LINKSHARE("LINKSHARE");
-    }
 
 }
 

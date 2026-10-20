@@ -52,73 +52,10 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
-  /**
-   * The opportunity type. Possible values: - PRODUCT: A product opportunity. - KEYWORD: A keyword opportunity. - CATEGORY: A category opportunity.
-   */
-  @JsonAdapter(OpportunityTypeEnum.Adapter.class)
-  public enum OpportunityTypeEnum {
-    /**
-     * A product opportunity.
-     */
-    PRODUCT("PRODUCT"),
-    
-    /**
-     * A keyword opportunity.
-     */
-    KEYWORD("KEYWORD"),
-    
-    /**
-     * A category opportunity.
-     */
-    CATEGORY("CATEGORY");
-
-    private String value;
-
-    OpportunityTypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static OpportunityTypeEnum fromValue(String value) {
-      for (OpportunityTypeEnum b : OpportunityTypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<OpportunityTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final OpportunityTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public OpportunityTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return OpportunityTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      OpportunityTypeEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_OPPORTUNITY_TYPE = "opportunity_type";
   @SerializedName(SERIALIZED_NAME_OPPORTUNITY_TYPE)
   @javax.annotation.Nullable
-  private OpportunityTypeEnum opportunityType;
+  private String opportunityType;
 
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
@@ -210,173 +147,15 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
   @javax.annotation.Nullable
   private String externalProductId;
 
-  /**
-   * The reference platform code, returned only when &#x60;external_product_id&#x60; is present. Possible values: - &#x60;1&#x60;: SHOPEE - &#x60;2&#x60;: AMAZON - &#x60;3&#x60;: LOOKFANTASTIC - &#x60;4&#x60;: WALMART - &#x60;5&#x60;: TTS - &#x60;6&#x60;: ASOS - &#x60;7&#x60;: UNIVERSAL_PRODUCT - &#x60;8&#x60;: DTCNEXUS - &#x60;9&#x60;: TEMU - &#x60;10&#x60;: SHOPIFY - &#x60;11&#x60;: NEXUS_SHOPIFY - &#x60;12&#x60;: SHEIN - &#x60;13&#x60;: PIXEL - &#x60;14&#x60;: SHOPIFY_NON_1P - &#x60;15&#x60;: MIRAVIA - &#x60;16&#x60;: RAKUTEN - &#x60;17&#x60;: EBAY - &#x60;18&#x60;: ONBUY - &#x60;19&#x60;: MERCADO_LIBRE - &#x60;20&#x60;: ALLEGRO - &#x60;21&#x60;: BOL - &#x60;22&#x60;: DTC
-   */
-  @JsonAdapter(ReferenceSourceEnum.Adapter.class)
-  public enum ReferenceSourceEnum {
-    /**
-     * SHOPEE
-     */
-    _1("1"),
-    
-    /**
-     * AMAZON
-     */
-    _2("2"),
-    
-    /**
-     * LOOKFANTASTIC
-     */
-    _3("3"),
-    
-    /**
-     * WALMART
-     */
-    _4("4"),
-    
-    /**
-     * TTS
-     */
-    _5("5"),
-    
-    /**
-     * ASOS
-     */
-    _6("6"),
-    
-    /**
-     * UNIVERSAL_PRODUCT
-     */
-    _7("7"),
-    
-    /**
-     * DTCNEXUS
-     */
-    _8("8"),
-    
-    /**
-     * TEMU
-     */
-    _9("9"),
-    
-    /**
-     * SHOPIFY
-     */
-    _10("10"),
-    
-    /**
-     * NEXUS_SHOPIFY
-     */
-    _11("11"),
-    
-    /**
-     * SHEIN
-     */
-    _12("12"),
-    
-    /**
-     * PIXEL
-     */
-    _13("13"),
-    
-    /**
-     * SHOPIFY_NON_1P
-     */
-    _14("14"),
-    
-    /**
-     * MIRAVIA
-     */
-    _15("15"),
-    
-    /**
-     * RAKUTEN
-     */
-    _16("16"),
-    
-    /**
-     * EBAY
-     */
-    _17("17"),
-    
-    /**
-     * ONBUY
-     */
-    _18("18"),
-    
-    /**
-     * MERCADO_LIBRE
-     */
-    _19("19"),
-    
-    /**
-     * ALLEGRO
-     */
-    _20("20"),
-    
-    /**
-     * BOL
-     */
-    _21("21"),
-    
-    /**
-     * DTC
-     */
-    _22("22");
-
-    private String value;
-
-    ReferenceSourceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static ReferenceSourceEnum fromValue(String value) {
-      for (ReferenceSourceEnum b : ReferenceSourceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<ReferenceSourceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final ReferenceSourceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public ReferenceSourceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return ReferenceSourceEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      ReferenceSourceEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_REFERENCE_SOURCE = "reference_source";
   @SerializedName(SERIALIZED_NAME_REFERENCE_SOURCE)
   @javax.annotation.Nullable
-  private ReferenceSourceEnum referenceSource;
+  private String referenceSource;
 
   public GetOpportunityDetailResponseDataOpportunityBasicInfo() {
   }
 
-  public GetOpportunityDetailResponseDataOpportunityBasicInfo opportunityType(@javax.annotation.Nullable OpportunityTypeEnum opportunityType) {
+  public GetOpportunityDetailResponseDataOpportunityBasicInfo opportunityType(@javax.annotation.Nullable String opportunityType) {
     this.opportunityType = opportunityType;
     return this;
   }
@@ -386,11 +165,11 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
    * @return opportunityType
    */
   @javax.annotation.Nullable
-  public OpportunityTypeEnum getOpportunityType() {
+  public String getOpportunityType() {
     return opportunityType;
   }
 
-  public void setOpportunityType(@javax.annotation.Nullable OpportunityTypeEnum opportunityType) {
+  public void setOpportunityType(@javax.annotation.Nullable String opportunityType) {
     this.opportunityType = opportunityType;
   }
 
@@ -753,7 +532,7 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
   }
 
 
-  public GetOpportunityDetailResponseDataOpportunityBasicInfo referenceSource(@javax.annotation.Nullable ReferenceSourceEnum referenceSource) {
+  public GetOpportunityDetailResponseDataOpportunityBasicInfo referenceSource(@javax.annotation.Nullable String referenceSource) {
     this.referenceSource = referenceSource;
     return this;
   }
@@ -763,11 +542,11 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
    * @return referenceSource
    */
   @javax.annotation.Nullable
-  public ReferenceSourceEnum getReferenceSource() {
+  public String getReferenceSource() {
     return referenceSource;
   }
 
-  public void setReferenceSource(@javax.annotation.Nullable ReferenceSourceEnum referenceSource) {
+  public void setReferenceSource(@javax.annotation.Nullable String referenceSource) {
     this.referenceSource = referenceSource;
   }
 
@@ -919,10 +698,6 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
       if ((jsonObj.get("opportunity_type") != null && !jsonObj.get("opportunity_type").isJsonNull()) && !jsonObj.get("opportunity_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `opportunity_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("opportunity_type").toString()));
       }
-      // validate the optional field `opportunity_type`
-      if (jsonObj.get("opportunity_type") != null && !jsonObj.get("opportunity_type").isJsonNull()) {
-        OpportunityTypeEnum.validateJsonElement(jsonObj.get("opportunity_type"));
-      }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
       }
@@ -975,10 +750,6 @@ public class GetOpportunityDetailResponseDataOpportunityBasicInfo {
       }
       if ((jsonObj.get("reference_source") != null && !jsonObj.get("reference_source").isJsonNull()) && !jsonObj.get("reference_source").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `reference_source` to be a primitive type in the JSON string but got `%s`", jsonObj.get("reference_source").toString()));
-      }
-      // validate the optional field `reference_source`
-      if (jsonObj.get("reference_source") != null && !jsonObj.get("reference_source").isJsonNull()) {
-        ReferenceSourceEnum.validateJsonElement(jsonObj.get("reference_source"));
       }
   }
 

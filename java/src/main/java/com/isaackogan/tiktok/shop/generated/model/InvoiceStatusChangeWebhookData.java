@@ -62,164 +62,15 @@ public class InvoiceStatusChangeWebhookData {
   @javax.annotation.Nullable
   private List<String> orderIds = new ArrayList<>();
 
-  /**
-   * The status of the invoice upload. Possible values:      * &#x60;SUCCESS&#x60;   * &#x60;PROCESSING&#x60;   * &#x60;FAILED&#x60;   * &#x60;INVALID&#x60;
-   */
-  @JsonAdapter(InvoiceStatusEnum.Adapter.class)
-  public enum InvoiceStatusEnum {
-    SUCCESS("SUCCESS"),
-    
-    PROCESSING("PROCESSING"),
-    
-    FAILED("FAILED"),
-    
-    INVALID("INVALID");
-
-    private String value;
-
-    InvoiceStatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static InvoiceStatusEnum fromValue(String value) {
-      for (InvoiceStatusEnum b : InvoiceStatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<InvoiceStatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InvoiceStatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InvoiceStatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return InvoiceStatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      InvoiceStatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_INVOICE_STATUS = "invoice_status";
   @SerializedName(SERIALIZED_NAME_INVOICE_STATUS)
   @javax.annotation.Nullable
-  private InvoiceStatusEnum invoiceStatus;
-
-  /**
-   * The reason why &#x60;invoice_status &#x3D; INVALID&#x60;. Possible values:      * &#x60;UNKNOWN&#x60;: Internal system error. Please try again later.   * &#x60;FAILED&#x60;: The NFe file or access key is invalid. Please check the XML file for correctness.   * &#x60;NOT_FOUND&#x60;: The NFe was not found. This may be due to data delay. Please try again later.   * &#x60;NOT_AUTHORIZED&#x60;: The NFe is not legally authorized. It may not have been issued or has been canceled.   * &#x60;ACCESS_KEY_DUPLICATE&#x60;: The access key already exists. You cannot upload an invoice with duplicate access key.   * &#x60;CNPJ_NOT_MATCH&#x60;：Ensure the NF-e has the same 8-digit prefix as the CNPJ you provided during onboarding.   * &#x60;UF_Inconsistent_Required&#x60;: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse.   * &#x60;UF_Inconsistent_Dismisse_Retirada_missing&#x60;: NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.   * &#x60;UF_Inconsistent_Dismissed_Retirada_Inconsistent&#x60;: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.
-   */
-  @JsonAdapter(InvalidReasonEnum.Adapter.class)
-  public enum InvalidReasonEnum {
-    /**
-     * Internal system error. Please try again later.
-     */
-    UNKNOWN("UNKNOWN"),
-    
-    /**
-     * The NFe file or access key is invalid. Please check the XML file for correctness.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * The NFe was not found. This may be due to data delay. Please try again later.
-     */
-    NOT_FOUND("NOT_FOUND"),
-    
-    /**
-     * The NFe is not legally authorized. It may not have been issued or has been canceled.
-     */
-    NOT_AUTHORIZED("NOT_AUTHORIZED"),
-    
-    /**
-     * The access key already exists. You cannot upload an invoice with duplicate access key.
-     */
-    ACCESS_KEY_DUPLICATE("ACCESS_KEY_DUPLICATE"),
-    
-    /**
-     * Ensure the NF-e has the same 8-digit prefix as the CNPJ you provided during onboarding.
-     */
-    CNPJ_NOT_MATCH("CNPJ_NOT_MATCH"),
-    
-    /**
-     * NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse.
-     */
-    UF_INCONSISTENT_REQUIRED("UF_Inconsistent_Required"),
-    
-    /**
-     * NF-e validation failed: The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.
-     */
-    UF_INCONSISTENT_DISMISSE_RETIRADA_MISSING("UF_Inconsistent_Dismisse_Retirada_missing"),
-    
-    /**
-     * The CNPJ used to issue the NF-e is registered in a different state from your warehouse. To issue a valid NF-e with this CNPJ, include warehouse information (Pickup Location Identification) in your NF-e.
-     */
-    UF_INCONSISTENT_DISMISSED_RETIRADA_INCONSISTENT("UF_Inconsistent_Dismissed_Retirada_Inconsistent");
-
-    private String value;
-
-    InvalidReasonEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static InvalidReasonEnum fromValue(String value) {
-      for (InvalidReasonEnum b : InvalidReasonEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<InvalidReasonEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final InvalidReasonEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public InvalidReasonEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return InvalidReasonEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      InvalidReasonEnum.fromValue(value);
-    }
-  }
+  private String invoiceStatus;
 
   public static final String SERIALIZED_NAME_INVALID_REASON = "invalid_reason";
   @SerializedName(SERIALIZED_NAME_INVALID_REASON)
   @javax.annotation.Nullable
-  private InvalidReasonEnum invalidReason;
+  private String invalidReason;
 
   public InvoiceStatusChangeWebhookData() {
   }
@@ -270,7 +121,7 @@ public class InvoiceStatusChangeWebhookData {
   }
 
 
-  public InvoiceStatusChangeWebhookData invoiceStatus(@javax.annotation.Nullable InvoiceStatusEnum invoiceStatus) {
+  public InvoiceStatusChangeWebhookData invoiceStatus(@javax.annotation.Nullable String invoiceStatus) {
     this.invoiceStatus = invoiceStatus;
     return this;
   }
@@ -280,16 +131,16 @@ public class InvoiceStatusChangeWebhookData {
    * @return invoiceStatus
    */
   @javax.annotation.Nullable
-  public InvoiceStatusEnum getInvoiceStatus() {
+  public String getInvoiceStatus() {
     return invoiceStatus;
   }
 
-  public void setInvoiceStatus(@javax.annotation.Nullable InvoiceStatusEnum invoiceStatus) {
+  public void setInvoiceStatus(@javax.annotation.Nullable String invoiceStatus) {
     this.invoiceStatus = invoiceStatus;
   }
 
 
-  public InvoiceStatusChangeWebhookData invalidReason(@javax.annotation.Nullable InvalidReasonEnum invalidReason) {
+  public InvoiceStatusChangeWebhookData invalidReason(@javax.annotation.Nullable String invalidReason) {
     this.invalidReason = invalidReason;
     return this;
   }
@@ -299,11 +150,11 @@ public class InvoiceStatusChangeWebhookData {
    * @return invalidReason
    */
   @javax.annotation.Nullable
-  public InvalidReasonEnum getInvalidReason() {
+  public String getInvalidReason() {
     return invalidReason;
   }
 
-  public void setInvalidReason(@javax.annotation.Nullable InvalidReasonEnum invalidReason) {
+  public void setInvalidReason(@javax.annotation.Nullable String invalidReason) {
     this.invalidReason = invalidReason;
   }
 
@@ -430,16 +281,8 @@ public class InvoiceStatusChangeWebhookData {
       if ((jsonObj.get("invoice_status") != null && !jsonObj.get("invoice_status").isJsonNull()) && !jsonObj.get("invoice_status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `invoice_status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("invoice_status").toString()));
       }
-      // validate the optional field `invoice_status`
-      if (jsonObj.get("invoice_status") != null && !jsonObj.get("invoice_status").isJsonNull()) {
-        InvoiceStatusEnum.validateJsonElement(jsonObj.get("invoice_status"));
-      }
       if ((jsonObj.get("invalid_reason") != null && !jsonObj.get("invalid_reason").isJsonNull()) && !jsonObj.get("invalid_reason").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `invalid_reason` to be a primitive type in the JSON string but got `%s`", jsonObj.get("invalid_reason").toString()));
-      }
-      // validate the optional field `invalid_reason`
-      if (jsonObj.get("invalid_reason") != null && !jsonObj.get("invalid_reason").isJsonNull()) {
-        InvalidReasonEnum.validateJsonElement(jsonObj.get("invalid_reason"));
       }
   }
 

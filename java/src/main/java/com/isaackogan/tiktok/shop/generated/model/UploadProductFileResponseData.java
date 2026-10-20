@@ -65,78 +65,10 @@ public class UploadProductFileResponseData {
   @javax.annotation.Nullable
   private String name;
 
-  /**
-   * The format of the file. Possible values: PDF, MP4, MOV, MKV, WMV, WEBM, AVI, 3GP, FLV, MPEG
-   */
-  @JsonAdapter(FormatEnum.Adapter.class)
-  public enum FormatEnum {
-    PDF("PDF"),
-    
-    MP4("MP4"),
-    
-    MOV("MOV"),
-    
-    MKV("MKV"),
-    
-    WMV("WMV"),
-    
-    WEBM("WEBM"),
-    
-    AVI("AVI"),
-    
-    _3_GP("3GP"),
-    
-    FLV("FLV"),
-    
-    MPEG("MPEG");
-
-    private String value;
-
-    FormatEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static FormatEnum fromValue(String value) {
-      for (FormatEnum b : FormatEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<FormatEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final FormatEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public FormatEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return FormatEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      FormatEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_FORMAT = "format";
   @SerializedName(SERIALIZED_NAME_FORMAT)
   @javax.annotation.Nullable
-  private FormatEnum format;
+  private String format;
 
   public UploadProductFileResponseData() {
   }
@@ -198,7 +130,7 @@ public class UploadProductFileResponseData {
   }
 
 
-  public UploadProductFileResponseData format(@javax.annotation.Nullable FormatEnum format) {
+  public UploadProductFileResponseData format(@javax.annotation.Nullable String format) {
     this.format = format;
     return this;
   }
@@ -208,11 +140,11 @@ public class UploadProductFileResponseData {
    * @return format
    */
   @javax.annotation.Nullable
-  public FormatEnum getFormat() {
+  public String getFormat() {
     return format;
   }
 
-  public void setFormat(@javax.annotation.Nullable FormatEnum format) {
+  public void setFormat(@javax.annotation.Nullable String format) {
     this.format = format;
   }
 
@@ -340,10 +272,6 @@ public class UploadProductFileResponseData {
       }
       if ((jsonObj.get("format") != null && !jsonObj.get("format").isJsonNull()) && !jsonObj.get("format").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `format` to be a primitive type in the JSON string but got `%s`", jsonObj.get("format").toString()));
-      }
-      // validate the optional field `format`
-      if (jsonObj.get("format") != null && !jsonObj.get("format").isJsonNull()) {
-        FormatEnum.validateJsonElement(jsonObj.get("format"));
       }
   }
 

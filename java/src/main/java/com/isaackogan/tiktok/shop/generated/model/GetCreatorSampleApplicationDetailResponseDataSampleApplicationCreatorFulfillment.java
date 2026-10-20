@@ -65,103 +65,10 @@ public class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreat
   @javax.annotation.Nullable
   private Long totalSuspendDuration;
 
-  /**
-   * Fulfillment status, It indicates the current status of the fulfillment process. The possible values are: - PENDING: The creator is yet to fulfill the content creation obligation. - ONGOING: Fulfillment is in progress; content has been created and is being evaluated against criteria. - SUCCEED: Fulfillment has been successfully completed; the content meets the required standards. - FAILED: Fulfillment failed; the content did not meet the required standards. - OVERDUE: Fulfillment is overdue; the creator did not meet the deadline. - SUSPEND: Fulfillment has been suspended. - CANCELLED: Fulfillment has been cancelled, either by the creator or due to operational reasons. - EXEMPTED: The creator has been exempted from the fulfillment obligation. - REPEATED: The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The creator is yet to fulfill the content creation obligation.
-     */
-    PENDING("PENDING"),
-    
-    /**
-     * Fulfillment is in progress; content has been created and is being evaluated against criteria.
-     */
-    ONGOING("ONGOING"),
-    
-    /**
-     * Fulfillment has been successfully completed; the content meets the required standards.
-     */
-    SUCCEED("SUCCEED"),
-    
-    /**
-     * Fulfillment failed; the content did not meet the required standards.
-     */
-    FAILED("FAILED"),
-    
-    /**
-     * Fulfillment is overdue; the creator did not meet the deadline.
-     */
-    OVERDUE("OVERDUE"),
-    
-    /**
-     * Fulfillment has been suspended.
-     */
-    SUSPEND("SUSPEND"),
-    
-    /**
-     * Fulfillment has been cancelled, either by the creator or due to operational reasons.
-     */
-    CANCELLED("CANCELLED"),
-    
-    /**
-     * The creator has been exempted from the fulfillment obligation.
-     */
-    EXEMPTED("EXEMPTED"),
-    
-    /**
-     * The creator repeated the fulfillment after initially completing it; repeated fulfillment is not treated as a failure.
-     */
-    REPEATED("REPEATED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment() {
   }
@@ -223,7 +130,7 @@ public class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreat
   }
 
 
-  public GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment status(@javax.annotation.Nullable StatusEnum status) {
+  public GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreatorFulfillment status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -233,11 +140,11 @@ public class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreat
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -359,10 +266,6 @@ public class GetCreatorSampleApplicationDetailResponseDataSampleApplicationCreat
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
   }
 

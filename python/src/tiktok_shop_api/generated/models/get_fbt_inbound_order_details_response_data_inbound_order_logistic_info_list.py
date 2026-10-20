@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_fbt_inbound_order_details_response_data_inbound_order_logistic_info_list_provider_name import (
-    GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderName,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList")
@@ -18,8 +15,7 @@ T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderLogisti
 class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
     """
     Attributes:
-        provider_name (GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderName | Unset): Name of
-            the logistics service provider
+        provider_name (str | Unset): Name of the logistics service provider
 
             Possible values:
             * `FEDEX` (Federal Express)
@@ -31,15 +27,13 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
         related_number (str | Unset): Carton number tied to the logistics information.
     """
 
-    provider_name: GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderName | Unset = UNSET
+    provider_name: str | Unset = UNSET
     waybill_number: str | Unset = UNSET
     related_number: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        provider_name: str | Unset = UNSET
-        if not isinstance(self.provider_name, Unset):
-            provider_name = self.provider_name.value
+        provider_name = self.provider_name
 
         waybill_number = self.waybill_number
 
@@ -60,14 +54,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _provider_name = d.pop("provider_name", UNSET)
-        provider_name: GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderName | Unset
-        if isinstance(_provider_name, Unset):
-            provider_name = UNSET
-        else:
-            provider_name = GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoListProviderName(
-                _provider_name
-            )
+        provider_name = d.pop("provider_name", UNSET)
 
         waybill_number = d.pop("waybill_number", UNSET)
 

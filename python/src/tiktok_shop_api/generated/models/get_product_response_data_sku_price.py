@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_sku_price_currency import GetProductResponseDataSkuPriceCurrency
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataSkuPrice")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GetProductResponseDataSkuPrice")
 class GetProductResponseDataSkuPrice:
     """
     Attributes:
-        currency (GetProductResponseDataSkuPriceCurrency | Unset): The currency.
+        currency (str | Unset): The currency.
             Possible values based on the region:
             - BRL: Brazil
             - CZK: Czech Republic
@@ -53,7 +52,7 @@ class GetProductResponseDataSkuPrice:
             - Unit price = Selling price/(SKU unit count/base unit count)
     """
 
-    currency: GetProductResponseDataSkuPriceCurrency | Unset = UNSET
+    currency: str | Unset = UNSET
     sale_price: str | Unset = UNSET
     starting_bid_price: str | Unset = UNSET
     tax_exclusive_price: str | Unset = UNSET
@@ -61,9 +60,7 @@ class GetProductResponseDataSkuPrice:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
         sale_price = self.sale_price
 
@@ -92,12 +89,7 @@ class GetProductResponseDataSkuPrice:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _currency = d.pop("currency", UNSET)
-        currency: GetProductResponseDataSkuPriceCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetProductResponseDataSkuPriceCurrency(_currency)
+        currency = d.pop("currency", UNSET)
 
         sale_price = d.pop("sale_price", UNSET)
 

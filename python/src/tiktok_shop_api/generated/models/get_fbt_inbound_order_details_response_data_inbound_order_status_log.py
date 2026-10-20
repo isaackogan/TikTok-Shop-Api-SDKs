@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_fbt_inbound_order_details_response_data_inbound_order_status_log_new_status import (
-    GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatus,
-)
-from ..models.get_fbt_inbound_order_details_response_data_inbound_order_status_log_previous_status import (
-    GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog")
@@ -23,8 +17,7 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog:
     Attributes:
         operate_time (int | Unset): The time when the inbound order is processed by the merchant or warehouses,
             represented as a Unix timestamp in seconds.
-        new_status (GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatus | Unset): The order status in
-            **Fulfilled by TikTok (FBT)** warehouse after this operation.
+        new_status (str | Unset): The order status in **Fulfilled by TikTok (FBT)** warehouse after this operation.
 
             **Possible values:**
             * `WORKING`
@@ -37,8 +30,8 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog:
             * `RECEIVED`
             * `CANCELLED`
             * `DELIVERED`
-        previous_status (GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatus | Unset): The order
-            status in **Fulfilled by TikTok (FBT)** warehouse before this operation.
+        previous_status (str | Unset): The order status in **Fulfilled by TikTok (FBT)** warehouse before this
+            operation.
 
             **Possible values:**
             * `WORKING`
@@ -56,21 +49,17 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog:
     """
 
     operate_time: int | Unset = UNSET
-    new_status: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatus | Unset = UNSET
-    previous_status: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatus | Unset = UNSET
+    new_status: str | Unset = UNSET
+    previous_status: str | Unset = UNSET
     operator: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         operate_time = self.operate_time
 
-        new_status: str | Unset = UNSET
-        if not isinstance(self.new_status, Unset):
-            new_status = self.new_status.value
+        new_status = self.new_status
 
-        previous_status: str | Unset = UNSET
-        if not isinstance(self.previous_status, Unset):
-            previous_status = self.previous_status.value
+        previous_status = self.previous_status
 
         operator = self.operator
 
@@ -93,19 +82,9 @@ class GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog:
         d = dict(src_dict)
         operate_time = d.pop("operate_time", UNSET)
 
-        _new_status = d.pop("new_status", UNSET)
-        new_status: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatus | Unset
-        if isinstance(_new_status, Unset):
-            new_status = UNSET
-        else:
-            new_status = GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogNewStatus(_new_status)
+        new_status = d.pop("new_status", UNSET)
 
-        _previous_status = d.pop("previous_status", UNSET)
-        previous_status: GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatus | Unset
-        if isinstance(_previous_status, Unset):
-            previous_status = UNSET
-        else:
-            previous_status = GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogPreviousStatus(_previous_status)
+        previous_status = d.pop("previous_status", UNSET)
 
         operator = d.pop("operator", UNSET)
 

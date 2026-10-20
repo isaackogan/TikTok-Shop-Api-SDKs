@@ -33,10 +33,10 @@ export interface GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligib
      * - `CANCEL`
      * - `REFUND`
      * - `RETURN_AND_REFUND`
-     * @type {GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum}
+     * @type {string}
      * @memberof GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility
      */
-    requestType?: GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum;
+    requestType?: string;
     /**
      * Specifies the order line IDs. **Note:** This is a legacy field for new integrations use `order_line_list` instead.
      * @type {Array<string>}
@@ -76,18 +76,6 @@ export interface GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligib
      */
     orderLineList?: Array<OrderLineList>;
 }
-
-
-/**
- * @export
- */
-export const GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum = {
-    Cancel: 'CANCEL',
-    Refund: 'REFUND',
-    ReturnAndRefund: 'RETURN_AND_REFUND'
-} as const;
-export type GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum = typeof GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum[keyof typeof GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibilityRequestTypeEnum];
-
 
 /**
  * Check if a given object implements the GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility interface.

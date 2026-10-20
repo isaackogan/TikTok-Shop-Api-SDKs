@@ -6,7 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_coupon_response_data_coupon_live_task_type import GetCouponResponseDataCouponLiveTaskType
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetCouponResponseDataCouponLiveTask")
@@ -16,7 +15,7 @@ T = TypeVar("T", bound="GetCouponResponseDataCouponLiveTask")
 class GetCouponResponseDataCouponLiveTask:
     """
     Attributes:
-        type_ (GetCouponResponseDataCouponLiveTaskType | Unset): Possible enumerations:
+        type_ (str | Unset): Possible enumerations:
             - `NONE`: Any shopper in the LIVE room may claim the coupon.
             - `FOLLOW_HOST`: Shoppers must follow the LIVE host before being able to claim the coupon.
             - `WATCH_FOR_MIN_TIME`: Shoppers must watch the LIVE for the time specified by `min_watch_time` before being
@@ -25,14 +24,12 @@ class GetCouponResponseDataCouponLiveTask:
             coupon.
     """
 
-    type_: GetCouponResponseDataCouponLiveTaskType | Unset = UNSET
+    type_: str | Unset = UNSET
     min_watch_time: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_: str | Unset = UNSET
-        if not isinstance(self.type_, Unset):
-            type_ = self.type_.value
+        type_ = self.type_
 
         min_watch_time = self.min_watch_time
 
@@ -49,12 +46,7 @@ class GetCouponResponseDataCouponLiveTask:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _type_ = d.pop("type", UNSET)
-        type_: GetCouponResponseDataCouponLiveTaskType | Unset
-        if isinstance(_type_, Unset):
-            type_ = UNSET
-        else:
-            type_ = GetCouponResponseDataCouponLiveTaskType(_type_)
+        type_ = d.pop("type", UNSET)
 
         min_watch_time = d.pop("min_watch_time", UNSET)
 

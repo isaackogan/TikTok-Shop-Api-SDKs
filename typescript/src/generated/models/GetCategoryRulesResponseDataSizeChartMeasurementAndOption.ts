@@ -29,10 +29,10 @@ import {
 export interface GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
     /**
      * Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements.
-     * @type {GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum}
+     * @type {string}
      * @memberof GetCategoryRulesResponseDataSizeChartMeasurementAndOption
      */
-    measurementType?: GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum;
+    measurementType?: string;
     /**
      * Online measurement options for this group.
      * @type {Array<GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption>}
@@ -40,18 +40,6 @@ export interface GetCategoryRulesResponseDataSizeChartMeasurementAndOption {
      */
     options?: Array<GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption>;
 }
-
-
-/**
- * @export
- */
-export const GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum = {
-    GenericMeasurements: 'GENERIC_MEASUREMENTS',
-    BodyMeasurements: 'BODY_MEASUREMENTS',
-    ProductMeasurements: 'PRODUCT_MEASUREMENTS'
-} as const;
-export type GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum = typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum[keyof typeof GetCategoryRulesResponseDataSizeChartMeasurementAndOptionMeasurementTypeEnum];
-
 
 /**
  * Check if a given object implements the GetCategoryRulesResponseDataSizeChartMeasurementAndOption interface.

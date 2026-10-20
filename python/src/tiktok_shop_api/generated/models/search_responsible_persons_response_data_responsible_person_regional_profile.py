@@ -6,9 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_responsible_persons_response_data_responsible_person_regional_profile_locale import (
-    SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocale,
-)
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -27,8 +24,8 @@ T = TypeVar("T", bound="SearchResponsiblePersonsResponseDataResponsiblePersonReg
 class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile:
     """
     Attributes:
-        locale (SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocale | Unset): The BCP-47 locale
-            code representing the language used for specifying the responsible person information.
+        locale (str | Unset): The BCP-47 locale code representing the language used for specifying the responsible
+            person information.
             Possible values:
             - de-DE
             - en-IE
@@ -42,7 +39,7 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile:
         address (SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress | Unset):
     """
 
-    locale: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocale | Unset = UNSET
+    locale: str | Unset = UNSET
     name: str | Unset = UNSET
     email: str | Unset = UNSET
     phone_number: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfilePhoneNumber | Unset = UNSET
@@ -50,9 +47,7 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        locale: str | Unset = UNSET
-        if not isinstance(self.locale, Unset):
-            locale = self.locale.value
+        locale = self.locale
 
         name = self.name
 
@@ -92,12 +87,7 @@ class SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfile:
         )
 
         d = dict(src_dict)
-        _locale = d.pop("locale", UNSET)
-        locale: SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocale | Unset
-        if isinstance(_locale, Unset):
-            locale = UNSET
-        else:
-            locale = SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileLocale(_locale)
+        locale = d.pop("locale", UNSET)
 
         name = d.pop("name", UNSET)
 

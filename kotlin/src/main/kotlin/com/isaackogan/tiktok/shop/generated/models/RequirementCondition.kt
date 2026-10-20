@@ -39,7 +39,7 @@ data class RequirementCondition (
 
     /* The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition. */
     @SerializedName("condition_type")
-    val conditionType: RequirementCondition.ConditionType? = null,
+    val conditionType: kotlin.String? = null,
 
     /* The ID of the product attribute that is being evaluated by the condition. */
     @SerializedName("attribute_id")
@@ -51,14 +51,6 @@ data class RequirementCondition (
 
 ) {
 
-    /**
-     * The type of condition. Possible values: - VALUE_ID_MATCH: The condition is true when the seller selects a value whose ID matches the one specified in this condition.
-     *
-     * Values: VALUE_ID_MATCH
-     */
-    enum class ConditionType(val value: kotlin.String) {
-        @SerializedName(value = "VALUE_ID_MATCH") VALUE_ID_MATCH("VALUE_ID_MATCH");
-    }
 
 }
 

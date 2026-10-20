@@ -61,10 +61,10 @@ export interface SampleApplicationStatusChangeWebhookData {
      *  * `COMPLETED`: The application is complete, and the creator has posted the content. 
      *   
      *  This field allows for tracking the status of a sample application throughout its lifecycle, providing visibility into each stage of the process for sellers and creators.
-     * @type {SampleApplicationStatusChangeWebhookDataNewStatusEnum}
+     * @type {string}
      * @memberof SampleApplicationStatusChangeWebhookData
      */
-    newStatus?: SampleApplicationStatusChangeWebhookDataNewStatusEnum;
+    newStatus?: string;
     /**
      * Creator detailed information. It includes various details such as the creator's TikTok user name and TikTok user id.
      * @type {Array<SampleApplicationStatusChangeWebhookDataCreator>}
@@ -78,30 +78,6 @@ export interface SampleApplicationStatusChangeWebhookData {
      */
     product?: Array<SampleApplicationStatusChangeWebhookDataProduct>;
 }
-
-
-/**
- * @export
- */
-export const SampleApplicationStatusChangeWebhookDataNewStatusEnum = {
-    Pending: 'PENDING',
-    AwaitingShipment: 'AWAITING_SHIPMENT',
-    Shipped: 'SHIPPED',
-    ContentPending: 'CONTENT_PENDING',
-    RejectCancelled: 'REJECT_CANCELLED',
-    OverdueCancelled: 'OVERDUE_CANCELLED',
-    UnfulfillCancelled: 'UNFULFILL_CANCELLED',
-    DelOpenCollab: 'DEL_OPEN_COLLAB',
-    SellerNotShipCancelled: 'SELLER_NOT_SHIP_CANCELLED',
-    WithdrawCancelled: 'WITHDRAW_CANCELLED',
-    UnfulfillableCancelled: 'UNFULFILLABLE_CANCELLED',
-    OpsCancelled: 'OPS_CANCELLED',
-    OpsFailed: 'OPS_FAILED',
-    OpsCompleted: 'OPS_COMPLETED',
-    Completed: 'COMPLETED'
-} as const;
-export type SampleApplicationStatusChangeWebhookDataNewStatusEnum = typeof SampleApplicationStatusChangeWebhookDataNewStatusEnum[keyof typeof SampleApplicationStatusChangeWebhookDataNewStatusEnum];
-
 
 /**
  * Check if a given object implements the SampleApplicationStatusChangeWebhookData interface.

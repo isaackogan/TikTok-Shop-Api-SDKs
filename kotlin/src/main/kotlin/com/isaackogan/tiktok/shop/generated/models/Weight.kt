@@ -42,19 +42,10 @@ data class Weight (
 
     /* The unit of measurement for the package weight.  Available values: - `GRAM` - `POUND` */
     @SerializedName("unit")
-    val unit: Weight.Unit? = null
+    val unit: kotlin.String? = null
 
 ) {
 
-    /**
-     * The unit of measurement for the package weight.  Available values: - `GRAM` - `POUND`
-     *
-     * Values: GRAM,POUND
-     */
-    enum class Unit(val value: kotlin.String) {
-        @SerializedName(value = "GRAM") GRAM("GRAM"),
-        @SerializedName(value = "POUND") POUND("POUND");
-    }
 
 }
 

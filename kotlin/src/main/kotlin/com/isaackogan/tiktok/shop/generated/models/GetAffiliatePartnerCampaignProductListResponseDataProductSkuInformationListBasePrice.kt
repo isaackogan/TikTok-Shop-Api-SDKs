@@ -45,7 +45,7 @@ data class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformati
 
     /* The currency of the SKU price. Possible values based on the region: - BRL:  Brazil - EUR: France, Germany, Ireland, Italy, Spain - GBP: United Kingdom - IDR: Indonesia - JPY: Japan - MXN: Mexico - MYR: Malaysia - PHP: Philippines - SGD: Singapore - THB: Thailand - USD: United States - VND: Vietnam */
     @SerializedName("currency")
-    val currency: GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListBasePrice.Currency? = null,
+    val currency: kotlin.String? = null,
 
     /* The SKU's list price information that has been verified to be legitimate by the audit team. This is equivalent to the manufacturer's suggested retail price (MSRP), or the recommended retail price (RRP). */
     @SerializedName("list_price")
@@ -61,25 +61,6 @@ data class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformati
 
 ) {
 
-    /**
-     * The currency of the SKU price. Possible values based on the region: - BRL:  Brazil - EUR: France, Germany, Ireland, Italy, Spain - GBP: United Kingdom - IDR: Indonesia - JPY: Japan - MXN: Mexico - MYR: Malaysia - PHP: Philippines - SGD: Singapore - THB: Thailand - USD: United States - VND: Vietnam
-     *
-     * Values: BRL,EUR,GBP,IDR,JPY,MXN,MYR,PHP,SGD,THB,USD,VND
-     */
-    enum class Currency(val value: kotlin.String) {
-        @SerializedName(value = "BRL") BRL("BRL"),
-        @SerializedName(value = "EUR") EUR("EUR"),
-        @SerializedName(value = "GBP") GBP("GBP"),
-        @SerializedName(value = "IDR") IDR("IDR"),
-        @SerializedName(value = "JPY") JPY("JPY"),
-        @SerializedName(value = "MXN") MXN("MXN"),
-        @SerializedName(value = "MYR") MYR("MYR"),
-        @SerializedName(value = "PHP") PHP("PHP"),
-        @SerializedName(value = "SGD") SGD("SGD"),
-        @SerializedName(value = "THB") THB("THB"),
-        @SerializedName(value = "USD") USD("USD"),
-        @SerializedName(value = "VND") VND("VND");
-    }
 
 }
 

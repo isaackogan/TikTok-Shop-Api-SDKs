@@ -58,88 +58,10 @@ public class SearchAffiliateOrdersByCreatorResponseDataOrder {
   @javax.annotation.Nullable
   private Long id;
 
-  /**
-   * The current status of the order. Possible values: - UNSPECIFIED: The status is undefined and may be updated later. - ORDERED: The order has been placed, but commission has not been settled. The estimated commission is available. - SETTLED: The commission has been settled. Actual commission values are populated when the corresponding settled amounts are available. - REFUNDED: The order was returned, refunded, or canceled by the buyer; actual commission and actual commission base amounts are returned as localized zero values. - FROZEN: Possible fraud was detected. Commission remains frozen until the issue is resolved. - DEDUCTED: An additional deduction was made from the balance account.  For statuses other than SETTLED or REFUNDED, actual commission values can be empty. Bonus, shop ads, and creator commission reward amounts are populated only when the corresponding commission data exists; their availability is not determined by order status alone.
-   */
-  @JsonAdapter(StatusEnum.Adapter.class)
-  public enum StatusEnum {
-    /**
-     * The status is undefined and may be updated later.
-     */
-    UNSPECIFIED("UNSPECIFIED"),
-    
-    /**
-     * The order has been placed, but commission has not been settled. The estimated commission is available.
-     */
-    ORDERED("ORDERED"),
-    
-    /**
-     * The commission has been settled. Actual commission values are populated when the corresponding settled amounts are available.
-     */
-    SETTLED("SETTLED"),
-    
-    /**
-     * The order was returned, refunded, or canceled by the buyer; actual commission and actual commission base amounts are returned as localized zero values.
-     */
-    REFUNDED("REFUNDED"),
-    
-    /**
-     * Possible fraud was detected. Commission remains frozen until the issue is resolved.
-     */
-    FROZEN("FROZEN"),
-    
-    /**
-     * An additional deduction was made from the balance account.
-     */
-    DEDUCTED("DEDUCTED");
-
-    private String value;
-
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static StatusEnum fromValue(String value) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<StatusEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public StatusEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return StatusEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      StatusEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_STATUS = "status";
   @SerializedName(SERIALIZED_NAME_STATUS)
   @javax.annotation.Nullable
-  private StatusEnum status;
+  private String status;
 
   public static final String SERIALIZED_NAME_SKUS = "skus";
   @SerializedName(SERIALIZED_NAME_SKUS)
@@ -178,7 +100,7 @@ public class SearchAffiliateOrdersByCreatorResponseDataOrder {
   }
 
 
-  public SearchAffiliateOrdersByCreatorResponseDataOrder status(@javax.annotation.Nullable StatusEnum status) {
+  public SearchAffiliateOrdersByCreatorResponseDataOrder status(@javax.annotation.Nullable String status) {
     this.status = status;
     return this;
   }
@@ -188,11 +110,11 @@ public class SearchAffiliateOrdersByCreatorResponseDataOrder {
    * @return status
    */
   @javax.annotation.Nullable
-  public StatusEnum getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  public void setStatus(@javax.annotation.Nullable StatusEnum status) {
+  public void setStatus(@javax.annotation.Nullable String status) {
     this.status = status;
   }
 
@@ -378,10 +300,6 @@ public class SearchAffiliateOrdersByCreatorResponseDataOrder {
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
-      }
-      // validate the optional field `status`
-      if (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) {
-        StatusEnum.validateJsonElement(jsonObj.get("status"));
       }
       if (jsonObj.get("skus") != null && !jsonObj.get("skus").isJsonNull()) {
         JsonArray jsonArrayskus = jsonObj.getAsJsonArray("skus");

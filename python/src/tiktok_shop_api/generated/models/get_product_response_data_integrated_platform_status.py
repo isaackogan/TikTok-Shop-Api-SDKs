@@ -6,12 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_product_response_data_integrated_platform_status_platform import (
-    GetProductResponseDataIntegratedPlatformStatusPlatform,
-)
-from ..models.get_product_response_data_integrated_platform_status_status import (
-    GetProductResponseDataIntegratedPlatformStatusStatus,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetProductResponseDataIntegratedPlatformStatus")
@@ -21,11 +15,10 @@ T = TypeVar("T", bound="GetProductResponseDataIntegratedPlatformStatus")
 class GetProductResponseDataIntegratedPlatformStatus:
     """
     Attributes:
-        platform (GetProductResponseDataIntegratedPlatformStatusPlatform | Unset): The integrated platform name.
+        platform (str | Unset): The integrated platform name.
             Possible values:
             - TOKOPEDIA
-        status (GetProductResponseDataIntegratedPlatformStatusStatus | Unset): The product status in the integrated
-            platform.
+        status (str | Unset): The product status in the integrated platform.
             Possible values:
             - UNKNOWN
             - DRAFT
@@ -38,18 +31,14 @@ class GetProductResponseDataIntegratedPlatformStatus:
             - DELETED
     """
 
-    platform: GetProductResponseDataIntegratedPlatformStatusPlatform | Unset = UNSET
-    status: GetProductResponseDataIntegratedPlatformStatusStatus | Unset = UNSET
+    platform: str | Unset = UNSET
+    status: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        platform: str | Unset = UNSET
-        if not isinstance(self.platform, Unset):
-            platform = self.platform.value
+        platform = self.platform
 
-        status: str | Unset = UNSET
-        if not isinstance(self.status, Unset):
-            status = self.status.value
+        status = self.status
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -64,19 +53,9 @@ class GetProductResponseDataIntegratedPlatformStatus:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _platform = d.pop("platform", UNSET)
-        platform: GetProductResponseDataIntegratedPlatformStatusPlatform | Unset
-        if isinstance(_platform, Unset):
-            platform = UNSET
-        else:
-            platform = GetProductResponseDataIntegratedPlatformStatusPlatform(_platform)
+        platform = d.pop("platform", UNSET)
 
-        _status = d.pop("status", UNSET)
-        status: GetProductResponseDataIntegratedPlatformStatusStatus | Unset
-        if isinstance(_status, Unset):
-            status = UNSET
-        else:
-            status = GetProductResponseDataIntegratedPlatformStatusStatus(_status)
+        status = d.pop("status", UNSET)
 
         get_product_response_data_integrated_platform_status = cls(
             platform=platform,

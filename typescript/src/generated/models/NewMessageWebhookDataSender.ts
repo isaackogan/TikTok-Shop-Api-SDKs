@@ -33,25 +33,11 @@ export interface NewMessageWebhookDataSender {
      *  * CUSTOMER_SERVICE 
      *  * SYSTEM 
      *  * ROBOT
-     * @type {NewMessageWebhookDataSenderRoleEnum}
+     * @type {string}
      * @memberof NewMessageWebhookDataSender
      */
-    role?: NewMessageWebhookDataSenderRoleEnum;
+    role?: string;
 }
-
-
-/**
- * @export
- */
-export const NewMessageWebhookDataSenderRoleEnum = {
-    Buyer: 'BUYER',
-    Shop: 'SHOP',
-    CustomerService: 'CUSTOMER_SERVICE',
-    System: 'SYSTEM',
-    Robot: 'ROBOT'
-} as const;
-export type NewMessageWebhookDataSenderRoleEnum = typeof NewMessageWebhookDataSenderRoleEnum[keyof typeof NewMessageWebhookDataSenderRoleEnum];
-
 
 /**
  * Check if a given object implements the NewMessageWebhookDataSender interface.

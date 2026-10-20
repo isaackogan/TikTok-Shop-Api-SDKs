@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_goods_info_response_data_good_hazmat_info_flammable_liquids_extra_info_flammable_liquids_type import (
-    SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsType,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo")
@@ -18,8 +15,7 @@ T = TypeVar("T", bound="SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquid
 class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
     """
     Attributes:
-        flammable_liquids_type (SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsType |
-            Unset): Flammable liquid type, possible values
+        flammable_liquids_type (str | Unset): Flammable liquid type, possible values
             -PAINT
             -PERFUMERY
             -ALCOHOLIC
@@ -28,17 +24,13 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
         volume_unit (str | Unset): Unit for `flammable_liquids_volume`, such as `MILLILITER`.
     """
 
-    flammable_liquids_type: (
-        SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsType | Unset
-    ) = UNSET
+    flammable_liquids_type: str | Unset = UNSET
     flammable_liquids_volume: str | Unset = UNSET
     volume_unit: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        flammable_liquids_type: str | Unset = UNSET
-        if not isinstance(self.flammable_liquids_type, Unset):
-            flammable_liquids_type = self.flammable_liquids_type.value
+        flammable_liquids_type = self.flammable_liquids_type
 
         flammable_liquids_volume = self.flammable_liquids_volume
 
@@ -59,18 +51,7 @@ class SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         d = dict(src_dict)
-        _flammable_liquids_type = d.pop("flammable_liquids_type", UNSET)
-        flammable_liquids_type: (
-            SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsType | Unset
-        )
-        if isinstance(_flammable_liquids_type, Unset):
-            flammable_liquids_type = UNSET
-        else:
-            flammable_liquids_type = (
-                SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfoFlammableLiquidsType(
-                    _flammable_liquids_type
-                )
-            )
+        flammable_liquids_type = d.pop("flammable_liquids_type", UNSET)
 
         flammable_liquids_volume = d.pop("flammable_liquids_volume", UNSET)
 

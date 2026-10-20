@@ -6,12 +6,6 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.sku_return_request_arbitration_status import SkuReturnRequestArbitrationStatus
-from ..models.sku_return_request_return_shipping_document_type import SkuReturnRequestReturnShippingDocumentType
-from ..models.sku_return_request_return_status import SkuReturnRequestReturnStatus
-from ..models.sku_return_request_return_type import SkuReturnRequestReturnType
-from ..models.sku_return_request_role import SkuReturnRequestRole
-from ..models.sku_return_request_shipment_type import SkuReturnRequestShipmentType
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -39,7 +33,7 @@ class SkuReturnRequest:
     Attributes:
         order_id (str | Unset): TikTok Shop main order ID associated with this SKU return request.
         return_id (str | Unset): The identifier of a specific return.
-        return_type (SkuReturnRequestReturnType | Unset): Return type.
+        return_type (str | Unset): Return type.
             Available values:
             - `REFUND`: Seller will issue a refund without return. The buyer is not required to send the item(s) back to the
             seller.
@@ -47,7 +41,7 @@ class SkuReturnRequest:
             the condition of the returned item(s) before a refund can be issued to the buyer.
             - `REPLACEMENT`: The buyer requires the seller to replace the item(s).
             - `EXCHANGE`: The buyer requires the seller to exchange the item(s).
-        return_status (SkuReturnRequestReturnStatus | Unset): Return status.
+        return_status (str | Unset): Return status.
             Available values:
             - `RETURN_OR_REFUND_REQUEST_PENDING`: Buyer has initiated a return or refund request. The request is pending
             review by seller or platform.
@@ -77,14 +71,14 @@ class SkuReturnRequest:
             - `EXCHANGE_REQUEST_CANCEL`: Buyer canceled the exchange request.
             - `EXCHANGE_REQUEST_COMPLETE`: Seller has approved the buyer's exchange request, platform will generate a new
             order for seller to fulfill.
-        arbitration_status (SkuReturnRequestArbitrationStatus | Unset): Arbitration status.
+        arbitration_status (str | Unset): Arbitration status.
             Available values:
             - `IN_PROGRESS`: The TikTok Shop platform operator is processing arbitration and may request additional
             information from the seller.
             - `SUPPORT_BUYER`: The platform operator supports the buyer.
             - `SUPPORT_SELLER`: The platform operator supports the seller.
             - `CLOSED`: Arbitration is closed.
-        role (SkuReturnRequestRole | Unset): Return initiation role.
+        role (str | Unset): Return initiation role.
             Available values:
             - `BUYER`
             - `SELLER`
@@ -96,8 +90,8 @@ class SkuReturnRequest:
         return_reason_text (str | Unset): Reason for return, in localized text.
             You can change language using the locale request parameter.
         seller_next_action_response (list[SellerNextActionResponse] | Unset): Seller's next action and deadline.
-        shipment_type (SkuReturnRequestShipmentType | Unset): The shipment method selected by the buyer for sending the
-            item(s) back to the seller.
+        shipment_type (str | Unset): The shipment method selected by the buyer for sending the item(s) back to the
+            seller.
             Available values:
             - `PLATFORM`: The buyer uses TikTok Shop's shipping service. See `handover_method` for whether the buyer uses
             `DROP_OFF` or `PICKUP`.
@@ -119,8 +113,7 @@ class SkuReturnRequest:
         shipping_fee (SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee | Unset):
         buyer_keep_item (bool | Unset): Indicates whether the buyer may keep the item(s). This field is returned as
             `true` for replacement requests and is omitted for other return types.
-        return_shipping_document_type (SkuReturnRequestReturnShippingDocumentType | Unset): The type of return shipping
-            document selected by the buyer.
+        return_shipping_document_type (str | Unset): The type of return shipping document selected by the buyer.
             Available values:
             - `SHIPPING_LABEL`
             - `QR_CODE` - QR Code with Box
@@ -150,14 +143,14 @@ class SkuReturnRequest:
 
     order_id: str | Unset = UNSET
     return_id: str | Unset = UNSET
-    return_type: SkuReturnRequestReturnType | Unset = UNSET
-    return_status: SkuReturnRequestReturnStatus | Unset = UNSET
-    arbitration_status: SkuReturnRequestArbitrationStatus | Unset = UNSET
-    role: SkuReturnRequestRole | Unset = UNSET
+    return_type: str | Unset = UNSET
+    return_status: str | Unset = UNSET
+    arbitration_status: str | Unset = UNSET
+    role: str | Unset = UNSET
     return_reason: str | Unset = UNSET
     return_reason_text: str | Unset = UNSET
     seller_next_action_response: list[SellerNextActionResponse] | Unset = UNSET
-    shipment_type: SkuReturnRequestShipmentType | Unset = UNSET
+    shipment_type: str | Unset = UNSET
     handover_method: str | Unset = UNSET
     return_tracking_number: str | Unset = UNSET
     return_provider_name: str | Unset = UNSET
@@ -171,7 +164,7 @@ class SkuReturnRequest:
     discount: SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount | Unset = UNSET
     shipping_fee: SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee | Unset = UNSET
     buyer_keep_item: bool | Unset = UNSET
-    return_shipping_document_type: SkuReturnRequestReturnShippingDocumentType | Unset = UNSET
+    return_shipping_document_type: str | Unset = UNSET
     return_method: str | Unset = UNSET
     is_combined_return: bool | Unset = UNSET
     combined_return_id: str | Unset = UNSET
@@ -190,21 +183,13 @@ class SkuReturnRequest:
 
         return_id = self.return_id
 
-        return_type: str | Unset = UNSET
-        if not isinstance(self.return_type, Unset):
-            return_type = self.return_type.value
+        return_type = self.return_type
 
-        return_status: str | Unset = UNSET
-        if not isinstance(self.return_status, Unset):
-            return_status = self.return_status.value
+        return_status = self.return_status
 
-        arbitration_status: str | Unset = UNSET
-        if not isinstance(self.arbitration_status, Unset):
-            arbitration_status = self.arbitration_status.value
+        arbitration_status = self.arbitration_status
 
-        role: str | Unset = UNSET
-        if not isinstance(self.role, Unset):
-            role = self.role.value
+        role = self.role
 
         return_reason = self.return_reason
 
@@ -217,9 +202,7 @@ class SkuReturnRequest:
                 seller_next_action_response_item = seller_next_action_response_item_data.to_dict()
                 seller_next_action_response.append(seller_next_action_response_item)
 
-        shipment_type: str | Unset = UNSET
-        if not isinstance(self.shipment_type, Unset):
-            shipment_type = self.shipment_type.value
+        shipment_type = self.shipment_type
 
         handover_method = self.handover_method
 
@@ -258,9 +241,7 @@ class SkuReturnRequest:
 
         buyer_keep_item = self.buyer_keep_item
 
-        return_shipping_document_type: str | Unset = UNSET
-        if not isinstance(self.return_shipping_document_type, Unset):
-            return_shipping_document_type = self.return_shipping_document_type.value
+        return_shipping_document_type = self.return_shipping_document_type
 
         return_method = self.return_method
 
@@ -395,33 +376,13 @@ class SkuReturnRequest:
 
         return_id = d.pop("return_id", UNSET)
 
-        _return_type = d.pop("return_type", UNSET)
-        return_type: SkuReturnRequestReturnType | Unset
-        if isinstance(_return_type, Unset):
-            return_type = UNSET
-        else:
-            return_type = SkuReturnRequestReturnType(_return_type)
+        return_type = d.pop("return_type", UNSET)
 
-        _return_status = d.pop("return_status", UNSET)
-        return_status: SkuReturnRequestReturnStatus | Unset
-        if isinstance(_return_status, Unset):
-            return_status = UNSET
-        else:
-            return_status = SkuReturnRequestReturnStatus(_return_status)
+        return_status = d.pop("return_status", UNSET)
 
-        _arbitration_status = d.pop("arbitration_status", UNSET)
-        arbitration_status: SkuReturnRequestArbitrationStatus | Unset
-        if isinstance(_arbitration_status, Unset):
-            arbitration_status = UNSET
-        else:
-            arbitration_status = SkuReturnRequestArbitrationStatus(_arbitration_status)
+        arbitration_status = d.pop("arbitration_status", UNSET)
 
-        _role = d.pop("role", UNSET)
-        role: SkuReturnRequestRole | Unset
-        if isinstance(_role, Unset):
-            role = UNSET
-        else:
-            role = SkuReturnRequestRole(_role)
+        role = d.pop("role", UNSET)
 
         return_reason = d.pop("return_reason", UNSET)
 
@@ -438,12 +399,7 @@ class SkuReturnRequest:
 
                 seller_next_action_response.append(seller_next_action_response_item)
 
-        _shipment_type = d.pop("shipment_type", UNSET)
-        shipment_type: SkuReturnRequestShipmentType | Unset
-        if isinstance(_shipment_type, Unset):
-            shipment_type = UNSET
-        else:
-            shipment_type = SkuReturnRequestShipmentType(_shipment_type)
+        shipment_type = d.pop("shipment_type", UNSET)
 
         handover_method = d.pop("handover_method", UNSET)
 
@@ -497,12 +453,7 @@ class SkuReturnRequest:
 
         buyer_keep_item = d.pop("buyer_keep_item", UNSET)
 
-        _return_shipping_document_type = d.pop("return_shipping_document_type", UNSET)
-        return_shipping_document_type: SkuReturnRequestReturnShippingDocumentType | Unset
-        if isinstance(_return_shipping_document_type, Unset):
-            return_shipping_document_type = UNSET
-        else:
-            return_shipping_document_type = SkuReturnRequestReturnShippingDocumentType(_return_shipping_document_type)
+        return_shipping_document_type = d.pop("return_shipping_document_type", UNSET)
 
         return_method = d.pop("return_method", UNSET)
 

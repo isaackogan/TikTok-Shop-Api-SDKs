@@ -32,24 +32,11 @@ export interface CancelOrderResponseData {
      * - `CANCELLATION_REQUEST_SUCCESS`
      * - `CANCELLATION_REQUEST_CANCEL`
      * - `CANCELLATION_REQUEST_COMPLETE`
-     * @type {CancelOrderResponseDataCancelStatusEnum}
+     * @type {string}
      * @memberof CancelOrderResponseData
      */
-    cancelStatus?: CancelOrderResponseDataCancelStatusEnum;
+    cancelStatus?: string;
 }
-
-
-/**
- * @export
- */
-export const CancelOrderResponseDataCancelStatusEnum = {
-    CancellationRequestPending: 'CANCELLATION_REQUEST_PENDING',
-    CancellationRequestSuccess: 'CANCELLATION_REQUEST_SUCCESS',
-    CancellationRequestCancel: 'CANCELLATION_REQUEST_CANCEL',
-    CancellationRequestComplete: 'CANCELLATION_REQUEST_COMPLETE'
-} as const;
-export type CancelOrderResponseDataCancelStatusEnum = typeof CancelOrderResponseDataCancelStatusEnum[keyof typeof CancelOrderResponseDataCancelStatusEnum];
-
 
 /**
  * Check if a given object implements the CancelOrderResponseData interface.

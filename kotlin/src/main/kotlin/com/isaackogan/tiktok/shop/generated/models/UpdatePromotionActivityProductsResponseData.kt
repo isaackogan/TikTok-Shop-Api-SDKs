@@ -53,7 +53,7 @@ data class UpdatePromotionActivityProductsResponseData (
 
     /* Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users. */
     @SerializedName("status")
-    val status: UpdatePromotionActivityProductsResponseData.Status? = null,
+    val status: kotlin.String? = null,
 
     /* The number of items in this request. When `product_level==PRODUCT`, this is the number of products. When `product_level==VARIATION`, this is the total number of SKUs across all products. When `product_level==SHOP`, this value is `0`. IDs in `benefit_product_ids` and `exclude_product_ids` are not included. */
     @SerializedName("total_count")
@@ -61,19 +61,6 @@ data class UpdatePromotionActivityProductsResponseData (
 
 ) {
 
-    /**
-     * Activity status. Possible values: - DRAFT: Promotion activities with this status are not available to TikTok users. - NOT_START: Promotion activities with this status are not available to TikTok users until the set activity start time. - ONGOING: Promotion activities with this status are available to TikTok users. - EXPIRED: Promotion activities with this status are not available to TikTok users because it has expired. - DEACTIVATED: The activity has been deactivated by the seller and is not available to TikTok users. - NOT_EFFECTIVE:  The activity is terminated by the platform and is not available to TikTok users.
-     *
-     * Values: DRAFT,NOT_START,ONGOING,EXPIRED,DEACTIVATED,NOT_EFFECTIVE
-     */
-    enum class Status(val value: kotlin.String) {
-        @SerializedName(value = "DRAFT") DRAFT("DRAFT"),
-        @SerializedName(value = "NOT_START") NOT_START("NOT_START"),
-        @SerializedName(value = "ONGOING") ONGOING("ONGOING"),
-        @SerializedName(value = "EXPIRED") EXPIRED("EXPIRED"),
-        @SerializedName(value = "DEACTIVATED") DEACTIVATED("DEACTIVATED"),
-        @SerializedName(value = "NOT_EFFECTIVE") NOT_EFFECTIVE("NOT_EFFECTIVE");
-    }
 
 }
 

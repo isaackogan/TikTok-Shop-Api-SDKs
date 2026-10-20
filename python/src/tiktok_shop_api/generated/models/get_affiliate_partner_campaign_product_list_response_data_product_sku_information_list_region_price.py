@@ -6,9 +6,6 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.get_affiliate_partner_campaign_product_list_response_data_product_sku_information_list_region_price_currency import (
-    GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrency,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPrice")
@@ -19,8 +16,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationLis
     """
     Attributes:
         region_code (str | Unset): the region code of the sku
-        currency (GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrency |
-            Unset): The currency of the SKU price.
+        currency (str | Unset): The currency of the SKU price.
             Possible values based on the region:
             - BRL:  Brazil
             - EUR: France, Germany, Ireland, Italy, Spain
@@ -43,9 +39,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationLis
     """
 
     region_code: str | Unset = UNSET
-    currency: GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrency | Unset = (
-        UNSET
-    )
+    currency: str | Unset = UNSET
     list_price: str | Unset = UNSET
     sale_price: str | Unset = UNSET
     localized_dutiable_price: str | Unset = UNSET
@@ -54,9 +48,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationLis
     def to_dict(self) -> dict[str, Any]:
         region_code = self.region_code
 
-        currency: str | Unset = UNSET
-        if not isinstance(self.currency, Unset):
-            currency = self.currency.value
+        currency = self.currency
 
         list_price = self.list_price
 
@@ -85,14 +77,7 @@ class GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationLis
         d = dict(src_dict)
         region_code = d.pop("region_code", UNSET)
 
-        _currency = d.pop("currency", UNSET)
-        currency: GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrency | Unset
-        if isinstance(_currency, Unset):
-            currency = UNSET
-        else:
-            currency = GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListRegionPriceCurrency(
-                _currency
-            )
+        currency = d.pop("currency", UNSET)
 
         list_price = d.pop("list_price", UNSET)
 

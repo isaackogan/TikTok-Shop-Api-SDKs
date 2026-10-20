@@ -31,10 +31,10 @@ export interface OpportunityMatchingStatusChangeWebhookData {
      *  - `PENDING`: Waiting for opportunity matching. 
      *  - `MATCHED`: There are one or more matched opportunities. 
      *  - `NOT_MATCHED`: There are no matches.
-     * @type {OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum}
+     * @type {string}
      * @memberof OpportunityMatchingStatusChangeWebhookData
      */
-    opportunityMatchingStatus?: OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum;
+    opportunityMatchingStatus?: string;
     /**
      * A list of IDs for the matched opportunities.
      * @type {Array<string>}
@@ -56,18 +56,6 @@ export interface OpportunityMatchingStatusChangeWebhookData {
      */
     updateTime?: number;
 }
-
-
-/**
- * @export
- */
-export const OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum = {
-    Pending: 'PENDING',
-    Matched: 'MATCHED',
-    NotMatched: 'NOT_MATCHED'
-} as const;
-export type OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum = typeof OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum[keyof typeof OpportunityMatchingStatusChangeWebhookDataOpportunityMatchingStatusEnum];
-
 
 /**
  * Check if a given object implements the OpportunityMatchingStatusChangeWebhookData interface.
