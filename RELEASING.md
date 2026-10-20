@@ -24,9 +24,12 @@ The publish jobs read their registry secrets from an environment called `release
 
 ### npm (TypeScript)
 
-- [ ] Create a **granular access token** (npm → Access Tokens → Generate New Token → Granular). Give it read and write on packages, scoped to `tiktok-shop-api` (or to all packages for the very first publish, before the package exists), and tick **Bypass two-factor authentication (2FA)**: CI cannot answer a 2FA prompt. npm's write tokens are short-lived (at most 90 days), so note when it expires. Store it as `NPM_TOKEN`.
-- [ ] Provenance needs nothing more: the job has `id-token: write`, and the repo must be public.
-- [ ] After the first publish, switch to a **trusted publisher** so no token is needed: on npmjs.com open the package → Settings → Trusted Publisher → GitHub Actions, with owner `isaackogan`, repository `TikTok-Shop-Api-SDKs`, workflow `release.yml` and environment `release`. The job installs npm 11.5.1 or later, which trusted publishing needs. Then delete `NPM_TOKEN` (and revoke the token on npm).
+The workflow publishes with **npm trusted publishing**: no npm token is stored. 0.1.0 was published by hand, because a trusted publisher can only be added to a package that exists.
+
+- [ ] On npmjs.com, open `tiktok-shop-api` → Settings → Trusted Publisher → GitHub Actions, and enter: organization or user `isaackogan`, repository `TikTok-Shop-Api-SDKs`, workflow filename `release.yml`, environment `release`.
+- [ ] Optionally, under Settings → Publishing access, choose "Require two-factor authentication and disallow tokens", so only the trusted publisher (and you, with 2FA) can publish.
+- [ ] Provenance needs nothing more: the job has `id-token: write`, installs npm 11.5.1 or later, and the repo is public.
+- [ ] Because 0.1.0 is already on npm, choose `patch`, `minor` or `major` for TypeScript on the next release. `current` would try to publish 0.1.0 again and fail.
 
 ### PyPI (Python)
 
