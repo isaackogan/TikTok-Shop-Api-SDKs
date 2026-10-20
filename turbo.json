@@ -3,6 +3,6 @@
   "tasks": {
     "generate": { "cache": false },
     "build": { "dependsOn": ["generate"] },
-    "test": { "dependsOn": ["generate"] }
+    "test": { "dependsOn": ["generate", "build"] }
   }
 }
