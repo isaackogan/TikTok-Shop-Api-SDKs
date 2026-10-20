@@ -1,0 +1,10 @@
+/* A subtitle under the site title, so nobody mistakes the site for TikTok's own documentation. The theme's header
+   renders its own SiteTitle, so the subtitle is added here rather than through a component override. */
+.site-title .title-text::after {
+    content: 'Unofficial Community SDKs';
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--muted-foreground);
+}
