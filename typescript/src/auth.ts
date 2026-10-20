@@ -95,18 +95,27 @@ export class TikTokShopAuth {
     const init: RequestInit = { method: 'GET', headers: { 'user-agent': USER_AGENT }, ...(signal ? { signal } : {}) };
     // 'manual' targets Node, where a 3xx comes back as a normal response; in a browser it would be an opaque status-0 response.
     if (!this.#opts.fetch) init.redirect = 'manual';
+    // R15: the query carries the app secret and the code or refresh token (extra's first value), and a fetch you
+    // supply may quote the URL in its errors.
+    const secrets = [this.#opts.appSecret, extra[0]![1]];
     let res: Response;
     try {
       res = await (this.#opts.fetch ?? fetch)(url, init);
     } catch (e) {
-      // R13c: no HTTP response at all. The URL carries the secrets, so the message never includes it (fetch's errors don't).
-      throw transportError(e);
+      // R13c: no HTTP response at all.
+      throw transportError(e, secrets);
     }
     let text: string;
     try {
       text = await res.text();
     } catch (e) {
-      throw new TikTokShopError({ code: -1, message: `Token response could not be read (HTTP ${res.status})`, requestId: '', httpStatus: res.status, cause: e });
+      throw new TikTokShopError({
+        code: -1,
+        message: `Token response could not be read (HTTP ${res.status})`,
+        requestId: '',
+        httpStatus: res.status,
+        cause: safeCause(e, secrets),
+      });
     }
     // R13b: a reply with no usable TikTok code has the HTTP status as its code if it is non-2xx (a redirect included,
     // since it is never followed); -1 only when a 2xx reply cannot be understood.
@@ -157,12 +166,42 @@ export class TikTokShopAuth {
   }
 }
 
-function transportError(e: unknown): TikTokShopError {
+function transportError(e: unknown, secrets: string[]): TikTokShopError {
   const timedOut = e instanceof Error && (e.name === 'TimeoutError' || e.name === 'AbortError');
   return new TikTokShopError({
     code: -1,
-    message: `${timedOut ? 'Token request timed out or was aborted' : 'Token request failed'}: ${e instanceof Error ? e.message : String(e)}`,
+    message: `${timedOut ? 'Token request timed out or was aborted' : 'Token request failed'}: ${scrub(e instanceof Error ? e.message : String(e), secrets)}`,
     requestId: '',
-    cause: e,
+    cause: safeCause(e, secrets),
   });
+}
+
+/** Each secret as sent and as it appears in the URL. */
+const forms = (secrets: string[]) => secrets.filter((s) => s !== '').flatMap((s) => [s, enc(s)]);
+
+/** R15: `text` without URL queries, token parameters or secrets. */
+function scrub(text: string, secrets: string[]): string {
+  let out = text
+    .replace(/(\bhttps?:\/\/[^\s?#]*)\?[^\s)]*/gi, '$1')
+    .replace(/[?&](?:app_key|app_secret|auth_code|refresh_token|grant_type)=[^\s&)]*/g, '');
+  for (const s of forms(secrets)) out = out.replaceAll(s, '***');
+  return out;
+}
+
+/**
+ * R15: `e` itself when no text along its cause chain holds a secret (fetch's own errors don't), else a fresh error with
+ * the same name and the scrubbed message.
+ */
+function safeCause(e: unknown, secrets: string[]): unknown {
+  const leaks = (t: unknown) => typeof t === 'string' && forms(secrets).some((s) => t.includes(s));
+  const seen = new Set<unknown>();
+  for (let c: any = e; c != null && !seen.has(c); c = typeof c === 'object' ? c.cause : undefined) {
+    seen.add(c);
+    if (typeof c !== 'object' ? leaks(String(c)) : Object.getOwnPropertyNames(c).some((k) => leaks(c[k]))) {
+      const fresh = new Error(scrub(e instanceof Error ? e.message : String(e), secrets));
+      if (e instanceof Error) fresh.name = e.name;
+      return fresh;
+    }
+  }
+  return e;
 }

@@ -127,6 +127,54 @@ describe('token errors never contain secrets', () => {
     });
     for (const call of calls(auth)) await expectClean(call);
   });
+
+  // node-fetch, for one, puts the full request URL in its error messages ("request to <url> failed, reason: ...").
+  it('a custom fetch whose error embeds the request URL', async () => {
+    const auth = new TikTokShopAuth({
+      appKey: 'k',
+      appSecret: SECRETS[0]!,
+      baseUrl,
+      fetch: async (url) => {
+        throw new Error(`request to ${String(url)} failed, reason: connect ECONNREFUSED`);
+      },
+    });
+    for (const call of calls(auth)) {
+      await expectClean(call);
+      const err = await call().catch((e) => e);
+      expect(err.message).toMatch(/^Token request failed: request to http:\/\/127\.0\.0\.1:\d+\/api\/v2\/token\/\w+ failed, reason: connect ECONNREFUSED$/);
+    }
+  });
+
+  it('a custom fetch whose error embeds the URL, with secrets that need percent-encoding', async () => {
+    const secrets = ['app+sec/ret=1 &x', 'auth+co/de=2 &y', 'refresh+to/ken=3 &z'];
+    const auth = new TikTokShopAuth({
+      appKey: 'k',
+      appSecret: secrets[0]!,
+      baseUrl,
+      fetch: async (url) => {
+        throw new Error(`request to ${String(url)} failed`);
+      },
+    });
+    for (const call of [() => auth.exchangeCode(secrets[1]!), () => auth.refresh(secrets[2]!)]) {
+      const text = chainText(await call().catch((e) => e));
+      for (const s of secrets) {
+        expect(encodeURIComponent(s)).not.toBe(s);
+        expect(text).not.toContain(s);
+        expect(text).not.toContain(encodeURIComponent(s));
+      }
+    }
+  });
+
+  it('a body read error that embeds the request URL', async () => {
+    const auth = new TikTokShopAuth({
+      appKey: 'k',
+      appSecret: SECRETS[0]!,
+      baseUrl,
+      fetch: async (url) =>
+        new Response(new ReadableStream({ start: (c) => c.error(new Error(`invalid response body at: ${String(url)}`)) }), { status: 200 }),
+    });
+    for (const call of calls(auth)) await expectClean(call);
+  });
 });
 
 describe('required token fields', () => {
