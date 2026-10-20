@@ -203,7 +203,7 @@ fn every_webhook_in_the_spec_has_a_variant() {
 
 #[test]
 fn the_rendered_table_has_the_expected_paths_for_real_models() {
-    let has = |ty: i64, path: &[&str]| webhooks::string_paths(ty).iter().any(|p| *p == path);
+    let has = |ty: i64, path: &[&str]| webhooks::string_paths(ty).contains(&path);
     assert!(has(1, &["shop_id"]));
     assert!(has(1, &["tts_notification_id"]));
     assert!(has(1, &["data", "order_id"]));
