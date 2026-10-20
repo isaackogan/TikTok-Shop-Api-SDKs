@@ -73,6 +73,12 @@ public final class TikTokShopAuth {
         this.http = http.followRedirects(false).followSslRedirects(false).build();
     }
 
+    /** Never prints the app secret. */
+    @Override
+    public String toString() {
+        return "TikTokShopAuth{appKey=" + appKey + ", appSecret=***, serviceId=" + serviceId + ", baseUrl=" + baseUrl + "}";
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -156,7 +162,9 @@ public final class TikTokShopAuth {
             }
             env = json.getAsJsonObject();
         } catch (RuntimeException e) {
-            throw new TikTokShopException(-1, "unparseable token response (HTTP " + status + ")", "", status, e);
+            // No TikTok code at all: -1, except a redirect, which is never followed and so is reported by its status.
+            throw new TikTokShopException(status >= 300 && status < 400 ? status : -1, "unparseable token response (HTTP " + status + ")",
+                    "", status, e);
         }
         String requestId = str(env.get("request_id"));
         requestId = requestId == null ? "" : requestId;
@@ -261,6 +269,13 @@ public final class TikTokShopAuth {
         private OkHttpClient httpClient;
 
         private Builder() {}
+
+        /** Never prints the app secret. */
+        @Override
+        public String toString() {
+            return "TikTokShopAuth.Builder{appKey=" + appKey + ", appSecret=" + (appSecret == null ? "null" : "***") + ", serviceId=" + serviceId
+                    + ", baseUrl=" + baseUrl + "}";
+        }
 
         public Builder appKey(String appKey) {
             this.appKey = appKey;

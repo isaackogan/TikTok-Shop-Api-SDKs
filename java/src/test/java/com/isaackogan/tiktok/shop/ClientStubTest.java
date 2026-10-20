@@ -341,4 +341,100 @@ class ClientStubTest {
             assertEquals("{\"only_need_conversation_id\":true}", new String(r.body, StandardCharsets.UTF_8));
         }
     }
+
+    private static GetConversationListRequest onlyIds() {
+        return new GetConversationListRequest().onlyNeedConversationId(true);
+    }
+
+    @Test
+    void zeroOkHttpTimeoutsMeanNoLimitOnTheGetWithBodyPath() throws Exception {
+        try (RawServer raw = new RawServer()) {
+            OkHttpClient noLimits = new OkHttpClient.Builder().connectTimeout(Duration.ZERO).readTimeout(Duration.ZERO)
+                    .callTimeout(Duration.ZERO).build();
+            TikTokShop.builder().appKey("key1").appSecret(SECRET).baseUrl(raw.baseUrl()).httpClient(noLimits).build()
+                    .affiliateSeller().getConversationList(10L, null, null, null, onlyIds());
+            assertEquals("GET", raw.take().method);
+        }
+    }
+
+    @Test
+    void zeroReadAndCallTimeoutsWithADefaultConnectTimeoutStillComplete() throws Exception {
+        try (RawServer raw = new RawServer()) {
+            OkHttpClient c = new OkHttpClient.Builder().readTimeout(Duration.ZERO).callTimeout(Duration.ZERO).build();
+            TikTokShop.builder().appKey("key1").appSecret(SECRET).baseUrl(raw.baseUrl()).httpClient(c).build()
+                    .affiliateSeller().getConversationList(10L, null, null, null, onlyIds());
+            assertEquals("GET", raw.take().method);
+        }
+    }
+
+    @Test
+    void anExplicitDirectOrSocksProxyMeansNoProxyForTheJdkClient() {
+        for (java.net.Proxy p : new java.net.Proxy[] {java.net.Proxy.NO_PROXY,
+                new java.net.Proxy(java.net.Proxy.Type.SOCKS, new java.net.InetSocketAddress("127.0.0.1", 9))}) {
+            TikTokShop c = TikTokShop.builder().appKey("k").appSecret("s").httpClient(new OkHttpClient.Builder().proxy(p).build()).build();
+            assertEquals(java.net.Proxy.Type.DIRECT,
+                    c.jdkClient().proxy().get().select(java.net.URI.create("http://example.com")).get(0).type());
+        }
+    }
+
+    @Test
+    void theJdkClientIsOnlyBuiltByAGetWithBody() throws Exception {
+        try (RawServer raw = new RawServer()) {
+            reply(StubSupport.OK);
+            TikTokShop c = builder().build();
+            assertFalse(c.jdkClientBuilt(), "built with the client");
+            c.authorization().getAuthorizedShops();
+            assertFalse(c.jdkClientBuilt(), "built by an ordinary call");
+            assertFalse(c.withShop("t2", "c2").jdkClientBuilt(), "built by withShop");
+            TikTokShop g = TikTokShop.builder().appKey("key1").appSecret(SECRET).baseUrl(raw.baseUrl()).build();
+            g.affiliateSeller().getConversationList(10L, null, null, null, onlyIds());
+            assertTrue(g.jdkClientBuilt(), "not built by a GET with a body");
+        }
+    }
+
+    @Test
+    void aRedirectIsNotFollowedAndSurfacesAsTheErrorWithItsStatus() throws Exception {
+        try (MockWebServer target = new MockWebServer()) {
+            target.start();
+            server.enqueue(new MockResponse().setResponseCode(302).setHeader("Location", target.url("/stolen").toString()));
+            TikTokShopException e = assertThrows(TikTokShopException.class, () -> builder().build().authorization().getAuthorizedShops());
+            assertEquals(302, e.getCode());
+            assertEquals(Integer.valueOf(302), e.getHttpStatus());
+            assertEquals(0, target.getRequestCount(), "the redirect target got a request");
+        }
+    }
+
+    @Test
+    void aRedirectOnTheGetWithBodyPathIsNotFollowedEither() throws Exception {
+        try (MockWebServer target = new MockWebServer(); RawServer raw = new RawServer()) {
+            target.start();
+            raw.respond(302, "").location(target.url("/stolen").toString());
+            TikTokShopException e = assertThrows(TikTokShopException.class, () -> TikTokShop.builder().appKey("key1").appSecret(SECRET)
+                    .accessToken("tok1").baseUrl(raw.baseUrl()).build().affiliateSeller().getConversationList(10L, null, null, null, onlyIds()));
+            assertEquals(302, e.getCode());
+            assertEquals(Integer.valueOf(302), e.getHttpStatus());
+            assertEquals(0, target.getRequestCount());
+        }
+    }
+
+    @Test
+    void aSuppliedHttpClientIsUsedAsIsSoItsRedirectPolicyApplies() throws Exception {
+        try (MockWebServer target = new MockWebServer()) {
+            target.start();
+            target.enqueue(new MockResponse().setHeader("Content-Type", "application/json").setBody(OK));
+            server.enqueue(new MockResponse().setResponseCode(302).setHeader("Location", target.url("/followed").toString()));
+            builder().httpClient(new OkHttpClient.Builder().followRedirects(true).build()).build().authorization().getAuthorizedShops();
+            assertEquals(1, target.getRequestCount());
+        }
+    }
+
+    @Test
+    void non2xxWithCodeZeroOrNoCodeUsesTheHttpStatusAsTheCode() {
+        for (String body : new String[] {"{\"message\":\"x\"}", "{\"code\":0}"}) {
+            server.enqueue(new MockResponse().setResponseCode(503).setBody(body));
+            TikTokShopException e = assertThrows(TikTokShopException.class, () -> builder().build().authorization().getAuthorizedShops());
+            assertEquals(503, e.getCode(), body);
+            assertEquals(Integer.valueOf(503), e.getHttpStatus(), body);
+        }
+    }
 }

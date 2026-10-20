@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Supplier;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -45,6 +46,12 @@ final class SigningInterceptor implements Interceptor {
             this.accessToken = accessToken == null || accessToken.isEmpty() ? null : accessToken;
             this.shopCipher = shopCipher == null || shopCipher.isEmpty() ? null : shopCipher;
         }
+
+        @Override
+        public String toString() {
+            return "Credentials{appKey=" + appKey + ", appSecret=***, accessToken=" + (accessToken == null ? "null" : "***")
+                    + ", shopCipher=" + (shopCipher == null ? "null" : "***") + "}";
+        }
     }
 
     private static final Set<String> RESERVED = new HashSet<>(Arrays.asList("app_key", "timestamp", "sign", "shop_cipher"));
@@ -53,9 +60,9 @@ final class SigningInterceptor implements Interceptor {
     private static final String UNRESERVED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
 
     private final Credentials creds;
-    private final HttpClient jdk;
+    private final Supplier<HttpClient> jdk;
 
-    SigningInterceptor(Credentials creds, HttpClient jdk) {
+    SigningInterceptor(Credentials creds, Supplier<HttpClient> jdk) {
         this.creds = creds;
         this.jdk = jdk;
     }
@@ -158,8 +165,10 @@ final class SigningInterceptor implements Interceptor {
 
     private HttpResponse<byte[]> sendWithJdk(Chain chain, Request out, GetBody getBody, String contentType) throws IOException {
         long nanos = chain.call().timeout().timeoutNanos();
-        Duration timeout = nanos > 0 ? Duration.ofNanos(nanos) : Duration.ofMillis(Math.max(chain.readTimeoutMillis(), 1));
-        HttpRequest.Builder b = HttpRequest.newBuilder(URI.create(out.url().toString())).timeout(timeout)
+        // OkHttp: 0 means no limit, here as there. The exchange is bound by the call timeout, else the read timeout, else not at all.
+        Duration timeout = nanos > 0 ? Duration.ofNanos(nanos)
+                : chain.readTimeoutMillis() > 0 ? Duration.ofMillis(chain.readTimeoutMillis()) : null;
+        HttpRequest.Builder b = HttpRequest.newBuilder(URI.create(out.url().toString()))
                 .method("GET", HttpRequest.BodyPublishers.ofByteArray(getBody.bytes));
         for (String name : out.headers().names()) {
             if (!JDK_RESTRICTED.contains(name.toLowerCase(Locale.ROOT)) && !name.equalsIgnoreCase("Content-Type")) {
@@ -171,10 +180,13 @@ final class SigningInterceptor implements Interceptor {
         if (contentType != null) {
             b.header("Content-Type", contentType);
         }
+        if (timeout != null) {
+            b.timeout(timeout);
+        }
         // HttpRequest.timeout only covers the wait for the headers; bound the whole exchange, body included.
-        java.util.concurrent.CompletableFuture<HttpResponse<byte[]>> f = jdk.sendAsync(b.build(), HttpResponse.BodyHandlers.ofByteArray());
+        java.util.concurrent.CompletableFuture<HttpResponse<byte[]>> f = jdk.get().sendAsync(b.build(), HttpResponse.BodyHandlers.ofByteArray());
         try {
-            return f.get(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
+            return timeout == null ? f.get() : f.get(timeout.toMillis(), java.util.concurrent.TimeUnit.MILLISECONDS);
         } catch (java.util.concurrent.TimeoutException e) {
             f.cancel(true);
             throw new java.net.http.HttpTimeoutException("timeout");
@@ -218,7 +230,8 @@ final class SigningInterceptor implements Interceptor {
             }
         }
         if (!ok) {
-            int c = code != null && code >= Integer.MIN_VALUE && code <= Integer.MAX_VALUE ? code.intValue() : status;
+            // R13a: a body without a code, or with code 0, still failed, so the HTTP status is the code.
+            int c = code != null && code != 0 && code >= Integer.MIN_VALUE && code <= Integer.MAX_VALUE ? code.intValue() : status;
             String msg = message != null ? message : "HTTP " + status;
             throw new TikTokShopException(c, msg, requestId, status, null);
         }

@@ -25,6 +25,7 @@ import java.net.ProxySelector;
 import java.net.http.HttpClient;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -77,7 +78,7 @@ public final class TikTokShop {
         this.shared = shared;
         this.creds = creds;
         // newBuilder shares the base client's connection pool and dispatcher; only the signing interceptor differs.
-        OkHttpClient http = shared.http.newBuilder().addInterceptor(new SigningInterceptor(creds, shared.jdk)).build();
+        OkHttpClient http = shared.http.newBuilder().addInterceptor(new SigningInterceptor(creds, shared::jdk)).build();
         ApiClient api = new TikTokApiClient(http);
         api.setBasePath(shared.baseUrl);
         api.setUserAgent("tiktok-shop-api-java/0.1.0");
@@ -100,6 +101,13 @@ public final class TikTokShop {
         this.seller = new SellerApi(api);
         this.supplyChain = new SupplyChainApi(api);
         this.tools = new ToolsApi(api);
+    }
+
+    /** Never prints the app secret, the access token or the shop cipher. */
+    @Override
+    public String toString() {
+        return "TikTokShop{appKey=" + creds.appKey + ", appSecret=***, accessToken=" + (creds.accessToken == null || creds.accessToken.isEmpty() ? "null" : "***") + ", shopCipher=" + (creds.shopCipher == null || creds.shopCipher.isEmpty() ? "null" : "***")
+                + ", baseUrl=" + shared.baseUrl + "}";
     }
 
     /** Starts a client. */
@@ -220,28 +228,73 @@ public final class TikTokShop {
 
     /** The JDK client used for GET requests with a body. */
     HttpClient jdkClient() {
-        return shared.jdk;
+        return shared.jdk();
+    }
+
+    /** Reports whether the JDK client has been built yet. */
+    boolean jdkClientBuilt() {
+        return shared.jdkBuilt();
     }
 
     /** What a client and the clients {@code withShop} derives from it share. */
     private static final class Shared {
+        /** Answers every {@code select} with {@link java.net.Proxy#NO_PROXY}, never the JVM default. */
+        private static final ProxySelector NO_PROXY = new ProxySelector() {
+            @Override
+            public List<java.net.Proxy> select(java.net.URI uri) {
+                return Collections.singletonList(java.net.Proxy.NO_PROXY);
+            }
+
+            @Override
+            public void connectFailed(java.net.URI uri, java.net.SocketAddress sa, java.io.IOException ioe) {}
+        };
+
         final OkHttpClient http;
-        final HttpClient jdk;
         final String baseUrl;
+        private volatile HttpClient jdk;
 
         Shared(OkHttpClient http, String baseUrl) {
             this.http = http;
             this.baseUrl = baseUrl;
-            // For the GET requests that carry a body, which OkHttp cannot send. HTTP/1.1 only: no h2c upgrade headers.
-            HttpClient.Builder j = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
-                    .connectTimeout(Duration.ofMillis(Math.max(http.connectTimeoutMillis(), 1)));
+        }
+
+        boolean jdkBuilt() {
+            return jdk != null;
+        }
+
+        /**
+         * For the GET requests that carry a body, which OkHttp cannot send. Built on first use, so a client that never makes
+         * one never starts the JDK client's selector thread. HTTP/1.1 only: no h2c upgrade headers.
+         */
+        HttpClient jdk() {
+            HttpClient c = jdk;
+            if (c == null) {
+                synchronized (this) {
+                    c = jdk;
+                    if (c == null) {
+                        c = buildJdk();
+                        jdk = c;
+                    }
+                }
+            }
+            return c;
+        }
+
+        private HttpClient buildJdk() {
+            HttpClient.Builder j = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1);
+            // OkHttp: 0 means no timeout. The JDK client has no connect timeout unless one is set.
+            if (http.connectTimeoutMillis() > 0) {
+                j.connectTimeout(Duration.ofMillis(http.connectTimeoutMillis()));
+            }
             java.net.Proxy proxy = http.proxy();
-            if (proxy != null && proxy.type() == java.net.Proxy.Type.HTTP && proxy.address() instanceof java.net.InetSocketAddress) {
-                j.proxy(ProxySelector.of((java.net.InetSocketAddress) proxy.address()));
-            } else if (proxy == null) {
+            if (proxy == null) {
                 j.proxy(http.proxySelector() == null ? ProxySelector.getDefault() : http.proxySelector());
-            } // an explicit DIRECT proxy: none; SOCKS cannot be expressed: none
-            this.jdk = j.build();
+            } else if (proxy.type() == java.net.Proxy.Type.HTTP && proxy.address() instanceof java.net.InetSocketAddress) {
+                j.proxy(ProxySelector.of((java.net.InetSocketAddress) proxy.address()));
+            } else {
+                j.proxy(NO_PROXY); // an explicit DIRECT: none; SOCKS cannot be expressed: none, never the JVM default
+            }
+            return j.build();
         }
     }
 
@@ -256,6 +309,13 @@ public final class TikTokShop {
         private OkHttpClient httpClient;
 
         private Builder() {}
+
+        /** Never prints the app secret, the access token or the shop cipher. */
+        @Override
+        public String toString() {
+            return "TikTokShop.Builder{appKey=" + appKey + ", appSecret=" + (appSecret == null ? "null" : "***") + ", accessToken=" + (accessToken == null || accessToken.isEmpty() ? "null" : "***")
+                    + ", shopCipher=" + (shopCipher == null || shopCipher.isEmpty() ? "null" : "***") + ", baseUrl=" + baseUrl + ", timeout=" + timeout + ", httpClient=" + (httpClient != null) + "}";
+        }
 
         public Builder appKey(String appKey) {
             this.appKey = appKey;
@@ -296,7 +356,9 @@ public final class TikTokShop {
 
         /**
          * Carries the signed requests. Its connection pool, proxy, TLS settings, interceptors and timeouts are used as they are.
-         * Without it, a default OkHttp client is used, which honours the JVM's proxy settings.
+         * Without it, a default OkHttp client is used, which honours the JVM's proxy settings and never follows a redirect
+         * (a 3xx surfaces as a {@link TikTokShopException} carrying the status). A client you supply is used as it is,
+         * so its redirect policy applies.
          *
          * <p>Three operations ({@code getConversationList}, {@code mapTokopediaToTikTokShopProductIDs} and
          * {@code getShippingTemplateAvailability}) are GETs with a body, which OkHttp cannot send, so they go through the JDK's
@@ -315,7 +377,10 @@ public final class TikTokShop {
             if (appKey == null || appSecret == null) {
                 throw new IllegalStateException("appKey and appSecret are required");
             }
-            OkHttpClient.Builder http = httpClient != null ? httpClient.newBuilder() : new OkHttpClient.Builder();
+            // The default client never follows a redirect: a followed cross-host redirect would forward the x-tts-access-token
+            // header. A client you supply is used as it is.
+            OkHttpClient.Builder http = httpClient != null ? httpClient.newBuilder()
+                    : new OkHttpClient.Builder().followRedirects(false).followSslRedirects(false);
             Duration t = timeout != null ? timeout : (httpClient == null ? DEFAULT_TIMEOUT : null);
             if (t != null) {
                 http.connectTimeout(t).readTimeout(t).writeTimeout(t).callTimeout(t);

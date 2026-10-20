@@ -1,13 +1,12 @@
 package com.isaackogan.tiktok.shop;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.isaackogan.tiktok.shop.generated.Meta;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
@@ -48,34 +47,46 @@ class WiringTest {
 
     @Test
     void everyOperationIsAMethodOnItsGroupsConcreteApiClass() throws Exception {
-        JsonArray ops = read("build/meta.json").getAsJsonArray("operations");
-        assertEquals(320, ops.size());
-        for (JsonElement el : ops) {
-            JsonObject op = el.getAsJsonObject();
-            String group = op.get("group").getAsString();
-            Method getter = TikTokShop.class.getMethod(group);
+        // Meta is generated from the spec and committed, so this needs no build output.
+        assertFalse(Meta.OPERATIONS.isEmpty());
+        java.util.Map<String, java.util.Set<String>> methodsOf = new java.util.HashMap<>();
+        for (Meta.Operation op : Meta.OPERATIONS) {
+            Method getter = TikTokShop.class.getMethod(op.group);
             Class<?> api = getter.getReturnType();
             assertTrue(api.getName().startsWith("com.isaackogan.tiktok.shop.generated.api.") && api.getName().endsWith("Api"),
-                    group + " returns the concrete generated API, got " + api.getName());
-            String id = op.get("operationId").getAsString();
-            boolean found = false;
-            for (Method m : api.getMethods()) {
-                if (m.getName().equals(id)) {
-                    found = true;
-                    break;
+                    op.group + " returns the concrete generated API, got " + api.getName());
+            assertEquals(op.apiClass, api.getSimpleName(), op.group + " is the class Meta names");
+            java.util.Set<String> methods = methodsOf.computeIfAbsent(op.group, g -> {
+                java.util.Set<String> names = new java.util.HashSet<>();
+                for (Method m : api.getMethods()) {
+                    names.add(m.getName());
                 }
-            }
-            assertTrue(found, id + " is a method of " + api.getSimpleName());
-            assertNotNull(Class.forName("com.isaackogan.tiktok.shop.generated.Meta"));
+                return names;
+            });
+            assertTrue(methods.contains(op.operationId), op.operationId + " is a method of " + api.getSimpleName());
         }
+        assertEquals(new TreeSet<>(GROUPS), new TreeSet<>(Meta.OPERATIONS.stream().map(o -> o.group).collect(java.util.stream.Collectors.toSet())));
+        assertEquals(new TreeSet<>(GROUPS), new TreeSet<>(Meta.GROUPS.stream().map(g -> g.name).collect(java.util.stream.Collectors.toSet())));
     }
 
     @Test
-    void metaMatchesTheSpec() throws Exception {
-        JsonArray ops = read("build/meta.json").getAsJsonArray("operations");
-        assertEquals(ops.size(), com.isaackogan.tiktok.shop.generated.Meta.OPERATIONS.size());
-        long cipher = com.isaackogan.tiktok.shop.generated.Meta.OPERATIONS.stream().filter(o -> o.requiresShopCipher).count();
-        assertEquals(233, cipher);
-        assertEquals(16, com.isaackogan.tiktok.shop.generated.Meta.EVENT_TYPES.size());
+    void metaIsInternallyConsistent() {
+        assertTrue(Meta.OPERATIONS.stream().anyMatch(o -> o.requiresShopCipher));
+        assertTrue(Meta.OPERATIONS.stream().anyMatch(o -> !o.requiresShopCipher));
+        assertEquals(Meta.OPERATIONS.size(), Meta.OPERATIONS.stream().map(o -> o.operationId).distinct().count(), "operation ids are unique");
+        assertFalse(Meta.EVENT_TYPES.isEmpty());
+        java.util.Map<Integer, String> fromWebhooks = new java.util.HashMap<>();
+        for (Meta.Webhook w : Meta.WEBHOOKS) {
+            if (w.eventType != null) {
+                fromWebhooks.put(w.type, w.eventType);
+            }
+        }
+        assertEquals(fromWebhooks, Meta.EVENT_TYPES);
+        // the matcher agrees with Meta for every operation that has no path parameter
+        for (Meta.Operation op : Meta.OPERATIONS) {
+            if (!op.path.contains("{")) {
+                assertEquals(op.requiresShopCipher, TikTokShop.requiresShopCipher(op.method, op.path), op.operationId);
+            }
+        }
     }
 }

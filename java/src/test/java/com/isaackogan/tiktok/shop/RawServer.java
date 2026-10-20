@@ -38,6 +38,7 @@ final class RawServer implements Closeable {
     private volatile String reply = StubSupport.OK;
     private volatile boolean hang;
     private volatile boolean drip;
+    private volatile String location;
 
     RawServer() throws IOException {
         socket = new ServerSocket(0);
@@ -54,6 +55,12 @@ final class RawServer implements Closeable {
         this.status = status;
         this.reply = body;
         this.hang = false;
+        return this;
+    }
+
+    /** Adds a Location header to the reply. */
+    RawServer location(String url) {
+        this.location = url;
         return this;
     }
 
@@ -122,7 +129,8 @@ final class RawServer implements Closeable {
             }
             byte[] body = reply.getBytes(StandardCharsets.UTF_8);
             OutputStream out = sock.getOutputStream();
-            out.write(("HTTP/1.1 " + status + " X\r\nContent-Type: application/json\r\nContent-Length: " + body.length
+            out.write(("HTTP/1.1 " + status + " X\r\nContent-Type: application/json\r\n"
+                    + (location == null ? "" : "Location: " + location + "\r\n") + "Content-Length: " + body.length
                     + "\r\nConnection: close\r\n\r\n").getBytes(StandardCharsets.UTF_8));
             out.write(body);
             out.flush();

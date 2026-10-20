@@ -286,4 +286,27 @@ class AuthTest {
         TikTokShopException ex = assertThrows(TikTokShopException.class, () -> auth.exchangeCode("CODE-SECRET"));
         assertNoSecrets(ex);
     }
+
+    @Test
+    void aTokenRedirectIsNotFollowedAndSurfacesAsItsStatus() throws Exception {
+        try (MockWebServer target = new MockWebServer(); MockWebServer s = new MockWebServer()) {
+            target.start();
+            s.enqueue(new MockResponse().setResponseCode(302).setHeader("Location", target.url("/stolen").toString()));
+            s.start();
+            TikTokShopException ex = assertThrows(TikTokShopException.class, () -> builder(s).build().exchangeCode("C"));
+            assertEquals(302, ex.getCode());
+            assertEquals(Integer.valueOf(302), ex.getHttpStatus());
+            assertEquals(0, target.getRequestCount());
+        }
+    }
+
+    @Test
+    void aTokenFailureWithNoCodeOrCodeZeroUsesTheHttpStatus() throws Exception {
+        for (String body : new String[] {"{\"message\":\"x\"}", "{\"code\":0}"}) {
+            TikTokShopException ex = exchangeFails(body, 503);
+            assertEquals(503, ex.getCode(), body);
+            assertEquals(Integer.valueOf(503), ex.getHttpStatus(), body);
+        }
+        assertEquals(-1, exchangeFails("down", 503).getCode());
+    }
 }

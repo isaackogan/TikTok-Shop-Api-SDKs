@@ -27,6 +27,16 @@ public final class ShopCredentials {
         return new Builder();
     }
 
+    /** Never prints the access token or the shop cipher. */
+    @Override
+    public String toString() {
+        return "ShopCredentials{accessToken=" + show(accessTokenSet, accessToken) + ", shopCipher=" + show(shopCipherSet, shopCipher) + "}";
+    }
+
+    private static String show(boolean set, String value) {
+        return !set ? "<keep>" : value == null || value.isEmpty() ? "<clear>" : "***";
+    }
+
     boolean isAccessTokenSet() {
         return accessTokenSet;
     }
@@ -51,6 +61,12 @@ public final class ShopCredentials {
         private String shopCipher;
 
         private Builder() {}
+
+        /** Never prints the access token or the shop cipher. */
+        @Override
+        public String toString() {
+            return "ShopCredentials.Builder{accessToken=" + show(accessTokenSet, accessToken) + ", shopCipher=" + show(shopCipherSet, shopCipher) + "}";
+        }
 
         /** Sets the access token. {@code null} or an empty string clears it; not calling this keeps the current one. */
         public Builder accessToken(String accessToken) {
