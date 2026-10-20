@@ -126,7 +126,7 @@ try {
 }
 ```
 
-Every failure is a `TikTokShopException`: a non-zero `code` in a 200 reply, a non-2xx status, a reply that is not JSON, and network errors and timeouts (code 0, no HTTP status). Messages and previous exceptions never contain the request URL, so a logged exception does not leak the signature.
+Every failure is a `TikTokShopException`: a non-zero `code` in a 200 reply, a non-2xx status, a reply that is not JSON, and network errors and timeouts (code -1, no HTTP status). Messages and previous exceptions never contain the request URL, so a logged exception does not leak the signature.
 
 ## Webhooks
 

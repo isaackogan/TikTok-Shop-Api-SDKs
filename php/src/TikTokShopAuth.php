@@ -251,7 +251,7 @@ final class TikTokShopAuth
 
         return new TikTokShopException(
             "$where " . ($timedOut ? 'timed out' : 'failed') . ' (' . $e::class . "): $clean",
-            0,
+            -1,
             '',
             null,
             new \RuntimeException($clean),

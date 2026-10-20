@@ -352,7 +352,7 @@ final class AuthTest extends TestCase
                 $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
                 $this->fail('expected a TikTokShopException');
             } catch (TikTokShopException $e) {
-                $this->assertSame(0, $e->getTikTokCode());
+                $this->assertSame(-1, $e->getTikTokCode());
                 $this->assertNull($e->getHttpStatus());
                 $this->assertNotNull($e->getPrevious());
                 self::assertNoSecrets($this, $e, [self::SECRET, self::CODE, self::REFRESH]);

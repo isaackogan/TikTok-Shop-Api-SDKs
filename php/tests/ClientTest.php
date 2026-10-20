@@ -266,7 +266,7 @@ final class ClientTest extends TestCase
             $this->shop($stub)->orders->getOrderList(10);
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
-            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertSame(-1, $e->getTikTokCode());
             $this->assertNull($e->getHttpStatus());
             self::assertScrubbed($e);
             $this->assertStringContainsString('cURL error 7', $e->getMessage());
@@ -357,7 +357,7 @@ final class ClientTest extends TestCase
             $this->shop($stub)->orders->getOrderListAsync(10)->wait();
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
-            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertSame(-1, $e->getTikTokCode());
             self::assertScrubbed($e);
         }
     }

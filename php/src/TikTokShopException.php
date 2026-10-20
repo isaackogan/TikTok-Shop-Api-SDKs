@@ -10,7 +10,7 @@ namespace TikTokShop\Api;
  *
  * The code follows ruling R13b. A non-2xx reply's code is TikTok's non-zero `code` from the body, else the HTTP
  * status. A 2xx reply's code is TikTok's code, or -1 when the reply cannot be understood. A transport failure has
- * code 0 and no HTTP status. {@see self::getCode()} returns the same value as {@see self::getTikTokCode()}.
+ * code -1 and no HTTP status (ruling R13c). {@see self::getCode()} returns the same value as {@see self::getTikTokCode()}.
  *
  * Transport failures never carry the request URL (it holds the signature and other request parameters): the
  * message and the {@see self::getPrevious()} chain are scrubbed.

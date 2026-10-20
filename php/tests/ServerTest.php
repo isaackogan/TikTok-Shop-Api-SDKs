@@ -161,7 +161,7 @@ final class ServerTest extends TestCase
             $this->shop('/x', 5.0, $closed)->orders->getOrderList(10);
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
-            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertSame(-1, $e->getTikTokCode());
             $this->assertNull($e->getHttpStatus());
             $this->assertNotNull($e->getPrevious());
             $this->assertScrubbedOfRequest($e);
@@ -176,7 +176,7 @@ final class ServerTest extends TestCase
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
             $this->assertLessThan(2.0, microtime(true) - $started);
-            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertSame(-1, $e->getTikTokCode());
             $this->assertStringContainsString('timed out', $e->getMessage());
             $this->assertScrubbedOfRequest($e);
         }
@@ -196,7 +196,7 @@ final class ServerTest extends TestCase
             $this->shop('/x', 5.0, $closed)->authorization->getAuthorizedShopsAsync()->wait();
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
-            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertSame(-1, $e->getTikTokCode());
             $this->assertScrubbedOfRequest($e);
         }
     }
@@ -254,7 +254,7 @@ final class ServerTest extends TestCase
                 $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
                 $this->fail('expected a TikTokShopException');
             } catch (TikTokShopException $e) {
-                $this->assertSame(0, $e->getTikTokCode());
+                $this->assertSame(-1, $e->getTikTokCode());
                 $this->assertNull($e->getHttpStatus());
                 $this->assertNotNull($e->getPrevious());
                 AuthTest::assertNoSecrets($this, $e, [self::SECRET, self::CODE, self::REFRESH]);
@@ -271,7 +271,7 @@ final class ServerTest extends TestCase
                 $kind === 'exchange' ? $auth->exchangeCode(self::CODE) : $auth->refresh(self::REFRESH);
                 $this->fail('expected a TikTokShopException');
             } catch (TikTokShopException $e) {
-                $this->assertSame(0, $e->getTikTokCode());
+                $this->assertSame(-1, $e->getTikTokCode());
                 $this->assertStringContainsString('timed out', $e->getMessage());
                 AuthTest::assertNoSecrets($this, $e, [self::SECRET, self::CODE, self::REFRESH]);
             }

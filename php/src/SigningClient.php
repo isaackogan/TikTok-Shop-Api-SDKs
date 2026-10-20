@@ -251,7 +251,7 @@ final class SigningClient implements ClientInterface
         // A fresh previous exception: Guzzle's own holds the request, and with it the URL.
         return new TikTokShopException(
             ($timedOut ? 'Request timed out' : 'Request failed') . " ($kind): $clean",
-            0,
+            -1,
             '',
             null,
             new \RuntimeException($clean),
