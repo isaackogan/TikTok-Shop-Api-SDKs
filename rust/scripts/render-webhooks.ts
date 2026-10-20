@@ -7,6 +7,7 @@ type Schema = {
   items?: Schema;
   allOf?: Schema[];
   anyOf?: Schema[];
+  additionalProperties?: Schema | boolean;
   oneOf?: Schema[];
   $ref?: string;
 };
@@ -18,6 +19,8 @@ interface Webhook {
 
 /** Marks "every element of the array" in a path. */
 export const EACH = '[]';
+/** Marks "every value of the object" (an `additionalProperties` map) in a path. */
+export const ANY = '*';
 
 const kinds = (s: Schema): string[] => (Array.isArray(s.type) ? s.type : s.type ? [s.type] : []);
 
@@ -41,6 +44,7 @@ export function stringPaths(schemas: Record<string, Schema>, root: string): stri
     if (k.includes('string') && path.length) out.push(path);
     if (k.includes('array') && s.items) walk(s.items, [...path, EACH], stack);
     for (const [name, p] of Object.entries(s.properties ?? {})) walk(p, [...path, name], stack);
+    if (s.additionalProperties && typeof s.additionalProperties === 'object') walk(s.additionalProperties, [...path, ANY], stack);
   };
   walk({ $ref: `#/components/schemas/${root}` }, [], []);
   const seen = new Set<string>();
@@ -54,8 +58,8 @@ export function stringPaths(schemas: Record<string, Schema>, root: string): stri
 
 const q = (s: string) => JSON.stringify(s);
 
-/** `OrderStatusChangeWebhook` to `OrderStatusChange`. */
-export const variantName = (schema: string) => schema.replace(/Webhook$/, '') || schema;
+/** The generated model's name without its `Webhook` suffix: `FbtMerchantOnboardingWebhook` to `FbtMerchantOnboarding`. */
+export const variantName = (model: string) => model.replace(/Webhook$/, '') || model;
 
 /** Write `<dir>/webhooks.rs`: the `WebhookEvent` enum, `decode`, and the string-path table. */
 export function renderWebhooks(specPath: string, metaPath: string, dir: string): void {
@@ -71,11 +75,11 @@ export function renderWebhooks(specPath: string, metaPath: string, dir: string):
 
   const names = new Set<string>(['Unknown']);
   const variants = webhooks.map((w) => {
-    const v = variantName(w.schema);
-    if (names.has(v)) throw new Error(`webhook variant ${v} (${w.schema}) is not unique`);
-    names.add(v);
     const model = structs.get(w.schema.toLowerCase());
     if (!model) throw new Error(`no generated model for webhook schema ${w.schema}`);
+    const v = variantName(model);
+    if (names.has(v)) throw new Error(`webhook variant ${v} (${w.schema}) is not unique`);
+    names.add(v);
     return { ...w, variant: v, model, paths: stringPaths(schemas, w.schema) };
   });
 
@@ -127,7 +131,8 @@ ${typeArms.join('\n')}
 
 ${pathTables.join('\n\n')}
 
-/// The string-typed property paths of a webhook type's model (\`"[]"\` is every array element), or none.
+/// The string-typed property paths of a webhook type's model (\`"[]"\` is every array element, \`"*"\` every value of a map), or none.
+#[doc(hidden)]
 pub fn string_paths(event_type: i64) -> &'static [&'static [&'static str]] {
     match event_type {
 ${pathArms.join('\n')}

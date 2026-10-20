@@ -1,6 +1,6 @@
 # TikTok Shop API client for Rust
 
-A typed Rust client for the **TikTok Shop API** (the TikTok Shop Partner API): 320 operations across 19 API groups, request signing, OAuth token helpers and typed webhooks. The API methods are generated from a machine-readable OpenAPI v3 spec built from TikTok's partner documentation, so they track the docs.
+A typed Rust client for the **TikTok Shop API** (the TikTok Shop Partner API): every operation in TikTok's partner documentation, grouped as the documentation groups them, request signing, OAuth token helpers and typed webhooks. The API methods are generated from a machine-readable OpenAPI v3 spec built from TikTok's partner documentation, so they track the docs.
 
 Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 
@@ -150,6 +150,7 @@ IDs such as `shop_id` keep every digit whether TikTok sends them as strings or a
 
 - Query values are signed decoded, exactly as the server receives them.
 - The default HTTP client honours `HTTP_PROXY`/`HTTPS_PROXY`/`NO_PROXY`, follows no redirects and times out after 30 seconds. Pass your own `reqwest::Client` with `Options::http_client` (or `AuthOptions::http_client`) to change that.
+- A custom `http_client` follows redirects unless you build it with `redirect::Policy::none()`. Do that for `AuthOptions::http_client`: the token query holds your app secret, and a followed redirect would forward it.
 - `Options::base_url` and `AuthOptions::base_url` can point at a test server.
 - `Debug` for `Options`, `AuthOptions`, `TokenSet` and the clients hides every secret.
 

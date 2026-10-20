@@ -200,3 +200,16 @@ fn every_webhook_in_the_spec_has_a_variant() {
         }
     }
 }
+
+#[test]
+fn the_rendered_table_has_the_expected_paths_for_real_models() {
+    let has = |ty: i64, path: &[&str]| webhooks::string_paths(ty).iter().any(|p| *p == path);
+    assert!(has(1, &["shop_id"]));
+    assert!(has(1, &["tts_notification_id"]));
+    assert!(has(1, &["data", "order_id"]));
+    assert!(has(66, &["data", "appeal_task", "appeal_audit_result", "[]", "indicator_type"]));
+    assert!(!has(1, &["timestamp"]), "an integer field is not in the table");
+    assert!(!has(1, &["type"]), "the integer type is not in the table");
+    assert!(!has(1, &["data"]), "an object is not in the table");
+    assert!(webhooks::string_paths(9999).is_empty());
+}

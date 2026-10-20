@@ -109,7 +109,8 @@ pub struct TokenSet {
     pub refresh_token: String,
     /// The Unix time (seconds) at which the refresh token expires.
     pub refresh_token_expire_in: i64,
-    /// Kept as text: it is an id, exact even when TikTok sends it as a number.
+    /// Kept as text: it is an id, exact even when TikTok sends it as a number, up to 64-bit integers (the
+    /// reply is parsed to a `serde_json::Value` first, so a wider integer has already lost digits).
     pub open_id: Option<String>,
     pub seller_name: Option<String>,
     pub seller_base_region: Option<String>,

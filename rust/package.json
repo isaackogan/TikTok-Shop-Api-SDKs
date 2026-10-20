@@ -5,7 +5,7 @@
   "scripts": {
     "generate": "tsx scripts/generate.ts",
     "build": "cargo build",
-    "test": "cargo test"
+    "test": "tsx --test scripts/render-webhooks.test.ts && cargo test"
   },
   "devDependencies": {
     "tsx": "4.20.6"

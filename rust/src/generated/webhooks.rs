@@ -49,13 +49,13 @@ pub enum WebhookEvent {
     /// Webhook type 20.
     CreatorDeauthorization(Box<models::CreatorDeauthorizationWebhook>),
     /// Webhook type 21.
-    InboundFBTOrderStatusChange(Box<models::InboundFbtOrderStatusChangeWebhook>),
+    InboundFbtOrderStatusChange(Box<models::InboundFbtOrderStatusChangeWebhook>),
     /// Webhook type 22.
-    FBTMerchantOnboarding(Box<models::FbtMerchantOnboardingWebhook>),
+    FbtMerchantOnboarding(Box<models::FbtMerchantOnboardingWebhook>),
     /// Webhook type 23.
     GoodsMatch(Box<models::GoodsMatchWebhook>),
     /// Webhook type 24.
-    FBTInventoryUpdate(Box<models::FbtInventoryUpdateWebhook>),
+    FbtInventoryUpdate(Box<models::FbtInventoryUpdateWebhook>),
     /// Webhook type 25.
     OpportunityMatchingStatusChange(Box<models::OpportunityMatchingStatusChangeWebhook>),
     /// Webhook type 27.
@@ -77,7 +77,7 @@ pub enum WebhookEvent {
     /// Webhook type 46.
     ImageTranslationCompleted(Box<models::ImageTranslationCompletedWebhook>),
     /// Webhook type 50.
-    SKUStatusChange(Box<models::SkuStatusChangeWebhook>),
+    SkuStatusChange(Box<models::SkuStatusChangeWebhook>),
     /// Webhook type 51.
     GlobalReplicationStatusChange(Box<models::GlobalReplicationStatusChangeWebhook>),
     /// Webhook type 52.
@@ -87,7 +87,7 @@ pub enum WebhookEvent {
     /// Webhook type 56.
     SampleApplicationStatusChange(Box<models::SampleApplicationStatusChangeWebhook>),
     /// Webhook type 58.
-    GetFBTMCFOrderStatus(Box<models::GetFbtmcfOrderStatusWebhook>),
+    GetFbtmcfOrderStatus(Box<models::GetFbtmcfOrderStatusWebhook>),
     /// Webhook type 59.
     ShoppableVideoPrecheckTasksResult(Box<models::ShoppableVideoPrecheckTasksResultWebhook>),
     /// Webhook type 62.
@@ -97,7 +97,7 @@ pub enum WebhookEvent {
     /// Webhook type 64.
     AftersalesRequestStatusUpdate(Box<models::AftersalesRequestStatusUpdateWebhook>),
     /// Webhook type 65.
-    RMAStatusUpdate(Box<models::RmaStatusUpdateWebhook>),
+    RmaStatusUpdate(Box<models::RmaStatusUpdateWebhook>),
     /// Webhook type 66.
     AppealCompleted(Box<models::AppealCompletedWebhook>),
     /// Webhook type 67.
@@ -128,10 +128,10 @@ impl WebhookEvent {
             WebhookEvent::ProductCategoryChange(_) => 18,
             WebhookEvent::SizeChartChange(_) => 19,
             WebhookEvent::CreatorDeauthorization(_) => 20,
-            WebhookEvent::InboundFBTOrderStatusChange(_) => 21,
-            WebhookEvent::FBTMerchantOnboarding(_) => 22,
+            WebhookEvent::InboundFbtOrderStatusChange(_) => 21,
+            WebhookEvent::FbtMerchantOnboarding(_) => 22,
             WebhookEvent::GoodsMatch(_) => 23,
-            WebhookEvent::FBTInventoryUpdate(_) => 24,
+            WebhookEvent::FbtInventoryUpdate(_) => 24,
             WebhookEvent::OpportunityMatchingStatusChange(_) => 25,
             WebhookEvent::InventoryStatusChange(_) => 27,
             WebhookEvent::NewMessageListener(_) => 33,
@@ -142,17 +142,17 @@ impl WebhookEvent {
             WebhookEvent::ActivityStatusChange(_) => 39,
             WebhookEvent::CombinedListingChange(_) => 42,
             WebhookEvent::ImageTranslationCompleted(_) => 46,
-            WebhookEvent::SKUStatusChange(_) => 50,
+            WebhookEvent::SkuStatusChange(_) => 50,
             WebhookEvent::GlobalReplicationStatusChange(_) => 51,
             WebhookEvent::GlobalListingMethodChange(_) => 52,
             WebhookEvent::VideoPrecheckResult(_) => 55,
             WebhookEvent::SampleApplicationStatusChange(_) => 56,
-            WebhookEvent::GetFBTMCFOrderStatus(_) => 58,
+            WebhookEvent::GetFbtmcfOrderStatus(_) => 58,
             WebhookEvent::ShoppableVideoPrecheckTasksResult(_) => 59,
             WebhookEvent::ProductPackageRecommended(_) => 62,
             WebhookEvent::ActivityChange(_) => 63,
             WebhookEvent::AftersalesRequestStatusUpdate(_) => 64,
-            WebhookEvent::RMAStatusUpdate(_) => 65,
+            WebhookEvent::RmaStatusUpdate(_) => 65,
             WebhookEvent::AppealCompleted(_) => 66,
             WebhookEvent::RefundSuccess(_) => 67,
             WebhookEvent::InventoryChangedByShop(_) => 71,
@@ -516,7 +516,8 @@ const PATHS_71: &[&[&str]] = &[
     &["data", "change_detail", "[]", "occurred_at"],
 ];
 
-/// The string-typed property paths of a webhook type's model (`"[]"` is every array element), or none.
+/// The string-typed property paths of a webhook type's model (`"[]"` is every array element, `"*"` every value of a map), or none.
+#[doc(hidden)]
 pub fn string_paths(event_type: i64) -> &'static [&'static [&'static str]] {
     match event_type {
         1 => PATHS_1,
@@ -586,10 +587,10 @@ pub(crate) fn decode(event_type: i64, raw: Value) -> Result<WebhookEvent, Error>
         18 => known(18, raw, WebhookEvent::ProductCategoryChange),
         19 => known(19, raw, WebhookEvent::SizeChartChange),
         20 => known(20, raw, WebhookEvent::CreatorDeauthorization),
-        21 => known(21, raw, WebhookEvent::InboundFBTOrderStatusChange),
-        22 => known(22, raw, WebhookEvent::FBTMerchantOnboarding),
+        21 => known(21, raw, WebhookEvent::InboundFbtOrderStatusChange),
+        22 => known(22, raw, WebhookEvent::FbtMerchantOnboarding),
         23 => known(23, raw, WebhookEvent::GoodsMatch),
-        24 => known(24, raw, WebhookEvent::FBTInventoryUpdate),
+        24 => known(24, raw, WebhookEvent::FbtInventoryUpdate),
         25 => known(25, raw, WebhookEvent::OpportunityMatchingStatusChange),
         27 => known(27, raw, WebhookEvent::InventoryStatusChange),
         33 => known(33, raw, WebhookEvent::NewMessageListener),
@@ -600,17 +601,17 @@ pub(crate) fn decode(event_type: i64, raw: Value) -> Result<WebhookEvent, Error>
         39 => known(39, raw, WebhookEvent::ActivityStatusChange),
         42 => known(42, raw, WebhookEvent::CombinedListingChange),
         46 => known(46, raw, WebhookEvent::ImageTranslationCompleted),
-        50 => known(50, raw, WebhookEvent::SKUStatusChange),
+        50 => known(50, raw, WebhookEvent::SkuStatusChange),
         51 => known(51, raw, WebhookEvent::GlobalReplicationStatusChange),
         52 => known(52, raw, WebhookEvent::GlobalListingMethodChange),
         55 => known(55, raw, WebhookEvent::VideoPrecheckResult),
         56 => known(56, raw, WebhookEvent::SampleApplicationStatusChange),
-        58 => known(58, raw, WebhookEvent::GetFBTMCFOrderStatus),
+        58 => known(58, raw, WebhookEvent::GetFbtmcfOrderStatus),
         59 => known(59, raw, WebhookEvent::ShoppableVideoPrecheckTasksResult),
         62 => known(62, raw, WebhookEvent::ProductPackageRecommended),
         63 => known(63, raw, WebhookEvent::ActivityChange),
         64 => known(64, raw, WebhookEvent::AftersalesRequestStatusUpdate),
-        65 => known(65, raw, WebhookEvent::RMAStatusUpdate),
+        65 => known(65, raw, WebhookEvent::RmaStatusUpdate),
         66 => known(66, raw, WebhookEvent::AppealCompleted),
         67 => known(67, raw, WebhookEvent::RefundSuccess),
         71 => known(71, raw, WebhookEvent::InventoryChangedByShop),

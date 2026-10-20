@@ -3,6 +3,9 @@
 //! [`verify`] checks the `Authorization` header against the raw body; [`parse`] turns a body into a
 //! [`WebhookEvent`], one variant per webhook type; [`verify_and_parse`] does both.
 //!
+//! Numbers in `String` fields (TikTok sends IDs such as `shop_id` as numbers) become their exact text, up to
+//! 64-bit integers; see [`fit`].
+//!
 //! Always verify the body exactly as it arrived. Re-serializing it (whitespace, key order) changes the
 //! bytes and fails the check.
 use hmac::{Hmac, Mac};
@@ -63,8 +66,11 @@ pub fn verify_and_parse(
 /// Turns a JSON number at each of `event_type`'s string-typed paths into its exact text.
 ///
 /// TikTok sends ids such as `shop_id` as numbers in some payloads, and serde refuses a number for a
-/// `String`. Integers up to 64 bits keep every digit. This is what [`parse`] does before decoding a known
-/// type; it is public so the table behind it can be tested.
+/// `String`. This is what [`parse`] does before decoding a known type; it is public (but hidden) only so
+/// the table behind it can be tested.
+///
+/// Exactness holds up to 64 bits: the body is parsed to a `serde_json::Value` first, so an integer wider
+/// than `u64`/`i64` has already become a float by now.
 #[doc(hidden)]
 pub fn fit(event_type: i64, mut raw: Value) -> Value {
     for path in string_paths(event_type) {
@@ -78,6 +84,13 @@ fn fit_at(v: &mut Value, path: &[&str]) {
         None => {
             if let Value::Number(n) = v {
                 *v = Value::String(n.to_string());
+            }
+        }
+        Some((&"*", rest)) => {
+            if let Value::Object(map) = v {
+                for child in map.values_mut() {
+                    fit_at(child, rest);
+                }
             }
         }
         Some((&"[]", rest)) => {
@@ -106,4 +119,17 @@ pub(crate) fn known<T: DeserializeOwned>(
     serde_json::from_value::<T>(fit(event_type, raw))
         .map(|model| wrap(Box::new(model)))
         .map_err(|e| Error::Webhook(format!("type {event_type}: {e}")))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::fit_at;
+    use serde_json::json;
+
+    #[test]
+    fn a_wildcard_segment_fits_every_value_of_a_map() {
+        let mut v = json!({"labels": {"a": 7494049642642441621u64, "b": "x", "c": null}, "n": 1});
+        fit_at(&mut v, &["labels", "*"]);
+        assert_eq!(v, json!({"labels": {"a": "7494049642642441621", "b": "x", "c": null}, "n": 1}));
+    }
 }
