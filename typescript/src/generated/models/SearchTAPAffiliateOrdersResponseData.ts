@@ -62,6 +62,9 @@ export function SearchTAPAffiliateOrdersResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchTAPAffiliateOrdersResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'skuOrders': json['sku_orders'] == null ? undefined : ((json['sku_orders'] as Array<any>).map(SearchTAPAffiliateOrdersResponseDataSkuOrderFromJSON)),

@@ -74,6 +74,9 @@ export function SortFromJSONTyped(json: any, ignoreDiscriminator: boolean): Sort
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Sort: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sortField': json['sort_field'] == null ? undefined : json['sort_field'],

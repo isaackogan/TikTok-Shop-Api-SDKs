@@ -48,6 +48,9 @@ export function GetCreatorMarketplaceAdvancedSearchFiltersResponseDataDataSorter
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorMarketplaceAdvancedSearchFiltersResponseDataDataSorter: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'algorithmId': json['algorithm_id'] == null ? undefined : json['algorithm_id'],

@@ -54,6 +54,9 @@ export function CreateImageTranslationTasksRequestFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateImageTranslationTasksRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'images': ((json['images'] as Array<any>).map(CreateImageTranslationTasksRequestImageFromJSON)),

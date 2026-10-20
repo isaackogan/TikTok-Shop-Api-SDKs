@@ -56,6 +56,9 @@ export function GetShopWebhooksResponseDataFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopWebhooksResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'webhooks': json['webhooks'] == null ? undefined : ((json['webhooks'] as Array<any>).map(GetShopWebhooksResponseDataWebhookFromJSON)),

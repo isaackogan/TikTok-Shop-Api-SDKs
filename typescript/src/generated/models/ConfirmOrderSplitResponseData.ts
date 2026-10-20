@@ -50,6 +50,9 @@ export function ConfirmOrderSplitResponseDataFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ConfirmOrderSplitResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'packages': json['packages'] == null ? undefined : ((json['packages'] as Array<any>).map(ConfirmOrderSplitResponseDataPackageFromJSON)),

@@ -100,6 +100,9 @@ export function GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataPodInfoPodTemplateSurfaceCustomArea: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'areaName': json['area_name'] == null ? undefined : json['area_name'],

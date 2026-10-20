@@ -50,6 +50,9 @@ export function GetShopSKPPSummaryResponseDataFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopSKPPSummaryResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopSummary': json['shop_summary'] == null ? undefined : GetShopSKPPSummaryResponseDataShopSummaryFromJSON(json['shop_summary']),

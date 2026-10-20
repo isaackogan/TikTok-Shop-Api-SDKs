@@ -70,6 +70,9 @@ export function GetCategoryRulesResponseDataSizeChartFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCategoryRulesResponseDataSizeChart: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isSupported': json['is_supported'] == null ? undefined : json['is_supported'],

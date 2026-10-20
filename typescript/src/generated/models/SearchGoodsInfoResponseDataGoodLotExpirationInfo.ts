@@ -87,6 +87,9 @@ export function SearchGoodsInfoResponseDataGoodLotExpirationInfoFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsInfoResponseDataGoodLotExpirationInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isLotControl': json['is_lot_control'] == null ? undefined : json['is_lot_control'],

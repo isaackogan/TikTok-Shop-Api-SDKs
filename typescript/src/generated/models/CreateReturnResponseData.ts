@@ -56,6 +56,9 @@ export function CreateReturnResponseDataFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateReturnResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnId': json['return_id'] == null ? undefined : json['return_id'],

@@ -68,6 +68,9 @@ export function SearchSizeChartsRequestFromJSONTyped(json: any, ignoreDiscrimina
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchSizeChartsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ids': json['ids'] == null ? undefined : json['ids'],

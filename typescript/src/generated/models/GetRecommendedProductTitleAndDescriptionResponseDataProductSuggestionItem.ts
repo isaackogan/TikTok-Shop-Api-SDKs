@@ -42,6 +42,9 @@ export function GetRecommendedProductTitleAndDescriptionResponseDataProductSugge
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'text': json['text'] == null ? undefined : json['text'],

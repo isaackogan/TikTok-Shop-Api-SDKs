@@ -56,6 +56,9 @@ export function ShippingInfoListFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShippingInfoList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'trackingNumber': json['tracking_number'] == null ? undefined : json['tracking_number'],

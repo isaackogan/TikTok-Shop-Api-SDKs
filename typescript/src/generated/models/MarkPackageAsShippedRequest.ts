@@ -64,6 +64,9 @@ export function MarkPackageAsShippedRequestFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`MarkPackageAsShippedRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderLineList': json['order_line_list'] == null ? undefined : ((json['order_line_list'] as Array<any>).map(ConfirmOrderSplitRequestSplittableGroupsV2OrderLineListFromJSON)),

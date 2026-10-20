@@ -57,6 +57,9 @@ export function GetActivityResponseDataDiscountGiftDiscountFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetActivityResponseDataDiscountGiftDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'giftReceivingType': json['gift_receiving_type'] == null ? undefined : json['gift_receiving_type'],

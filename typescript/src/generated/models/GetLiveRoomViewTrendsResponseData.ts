@@ -50,6 +50,9 @@ export function GetLiveRoomViewTrendsResponseDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomViewTrendsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'viewTrendPerformances': json['view_trend_performances'] == null ? undefined : ((json['view_trend_performances'] as Array<any>).map(GetLiveRoomViewTrendsResponseDataViewTrendPerformanceFromJSON)),

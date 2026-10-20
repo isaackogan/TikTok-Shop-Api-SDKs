@@ -65,6 +65,9 @@ export function UpdateFBTGoodsInfoRequestFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateFBTGoodsInfoRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'updateGoodsDto': json['update_goods_dto'] == null ? undefined : UpdateFBTGoodsInfoRequestUpdateGoodsDtoFromJSON(json['update_goods_dto']),

@@ -198,6 +198,9 @@ export function PaymentFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Payment: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'currency': json['currency'] == null ? undefined : json['currency'],

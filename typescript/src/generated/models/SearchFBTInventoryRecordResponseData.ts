@@ -62,6 +62,9 @@ export function SearchFBTInventoryRecordResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchFBTInventoryRecordResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventoryRecords': json['inventory_records'] == null ? undefined : ((json['inventory_records'] as Array<any>).map(SearchFBTInventoryRecordResponseDataInventoryRecordFromJSON)),

@@ -50,6 +50,9 @@ export function GetOrderSplitAttributesResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderSplitAttributesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'splitAttributes': json['split_attributes'] == null ? undefined : ((json['split_attributes'] as Array<any>).map(GetOrderSplitAttributesResponseDataSplitAttributeFromJSON)),

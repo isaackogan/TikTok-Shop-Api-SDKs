@@ -50,6 +50,9 @@ export function ListAvailableInboundMethodsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListAvailableInboundMethodsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'availableInboundMethodList': json['available_inbound_method_list'] == null ? undefined : ((json['available_inbound_method_list'] as Array<any>).map(ListAvailableInboundMethodsResponseDataAvailableInboundMethodListFromJSON)),

@@ -63,6 +63,9 @@ export function GetProductResponseDataSizeChartFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSizeChart: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'image': json['image'] == null ? undefined : GetProductResponseDataCertificationImageFromJSON(json['image']),

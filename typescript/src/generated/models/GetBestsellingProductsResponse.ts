@@ -68,6 +68,9 @@ export function GetBestsellingProductsResponseFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetBestsellingProductsResponse: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'code': json['code'] == null ? undefined : json['code'],

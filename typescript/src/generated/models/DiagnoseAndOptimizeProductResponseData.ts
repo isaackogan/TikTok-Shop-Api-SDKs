@@ -63,6 +63,9 @@ export function DiagnoseAndOptimizeProductResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DiagnoseAndOptimizeProductResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'listingQuality': json['listing_quality'] == null ? undefined : ListingQualityFromJSON(json['listing_quality']),

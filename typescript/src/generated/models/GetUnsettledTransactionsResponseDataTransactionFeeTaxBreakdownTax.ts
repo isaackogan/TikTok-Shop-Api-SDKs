@@ -137,6 +137,9 @@ export function GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTa
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'salesTaxAmount': json['sales_tax_amount'] == null ? undefined : json['sales_tax_amount'],

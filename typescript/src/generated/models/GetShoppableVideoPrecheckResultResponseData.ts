@@ -50,6 +50,9 @@ export function GetShoppableVideoPrecheckResultResponseDataFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShoppableVideoPrecheckResultResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'precheckTask': json['precheck_task'] == null ? undefined : GetShoppableVideoPrecheckResultResponseDataPrecheckTaskFromJSON(json['precheck_task']),

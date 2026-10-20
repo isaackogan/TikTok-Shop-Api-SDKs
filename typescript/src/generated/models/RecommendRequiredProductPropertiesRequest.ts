@@ -89,6 +89,9 @@ export function RecommendRequiredProductPropertiesRequestFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RecommendRequiredProductPropertiesRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'categoryId': json['category_id'],

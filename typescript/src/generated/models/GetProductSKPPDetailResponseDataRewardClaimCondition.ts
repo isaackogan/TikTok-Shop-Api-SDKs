@@ -54,6 +54,9 @@ export function GetProductSKPPDetailResponseDataRewardClaimConditionFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductSKPPDetailResponseDataRewardClaimCondition: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'conditionType': json['condition_type'] == null ? undefined : json['condition_type'],

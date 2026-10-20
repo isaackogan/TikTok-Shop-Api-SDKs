@@ -127,6 +127,9 @@ export function ReplicateProductRequestReplicateTargetFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReplicateProductRequestReplicateTarget: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'certifications': json['certifications'] == null ? undefined : ((json['certifications'] as Array<any>).map(ReplicateProductRequestReplicateTargetCertificationFromJSON)),

@@ -66,6 +66,9 @@ export function PriceDetailFromJSONTyped(json: any, ignoreDiscriminator: boolean
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PriceDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'currency': json['currency'] == null ? undefined : json['currency'],

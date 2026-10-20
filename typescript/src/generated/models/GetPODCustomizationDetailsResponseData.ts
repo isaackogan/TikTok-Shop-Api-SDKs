@@ -56,6 +56,9 @@ export function GetPODCustomizationDetailsResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPODCustomizationDetailsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'podDetails': json['pod_details'] == null ? undefined : ((json['pod_details'] as Array<any>).map(GetPODCustomizationDetailsResponseDataPodDetailFromJSON)),

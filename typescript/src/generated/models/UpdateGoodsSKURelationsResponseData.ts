@@ -50,6 +50,9 @@ export function UpdateGoodsSKURelationsResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateGoodsSKURelationsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'operateGoodsSkuRelationInfo': json['operate_goods_sku_relation_info'] == null ? undefined : UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoFromJSON(json['operate_goods_sku_relation_info']),

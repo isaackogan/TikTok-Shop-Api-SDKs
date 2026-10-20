@@ -75,6 +75,9 @@ export function GetAuthorizedShopsResponseDataShopFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAuthorizedShopsResponseDataShop: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'id': json['id'] == null ? undefined : json['id'],

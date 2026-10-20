@@ -89,6 +89,9 @@ export function GetShopPerformanceResponseDataPerformanceIntervalBreakdownFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopPerformanceResponseDataPerformanceIntervalBreakdown: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'affiliateProductCardAttributedGmv': json['affiliate_product_card_attributed_gmv'] == null ? undefined : GetShopPerformanceResponseDataPerformanceIntervalBreakdownAffiliateProductCardAttributedGmvFromJSON(json['affiliate_product_card_attributed_gmv']),

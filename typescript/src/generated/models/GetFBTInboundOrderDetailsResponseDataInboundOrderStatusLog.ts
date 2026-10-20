@@ -84,6 +84,9 @@ export function GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLogFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTInboundOrderDetailsResponseDataInboundOrderStatusLog: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'operateTime': json['operate_time'] == null ? undefined : json['operate_time'],

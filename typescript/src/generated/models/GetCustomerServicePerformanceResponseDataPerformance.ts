@@ -80,6 +80,9 @@ export function GetCustomerServicePerformanceResponseDataPerformanceFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCustomerServicePerformanceResponseDataPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'supportSessionCount': json['support_session_count'] == null ? undefined : json['support_session_count'],

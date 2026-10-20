@@ -42,6 +42,9 @@ export function FBTMerchantOnboardingWebhookDataOnboardedRegionFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`FBTMerchantOnboardingWebhookDataOnboardedRegion: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'regionCode': json['region_code'] == null ? undefined : json['region_code'],

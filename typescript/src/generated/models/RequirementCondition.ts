@@ -56,6 +56,9 @@ export function RequirementConditionFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RequirementCondition: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'conditionType': json['condition_type'] == null ? undefined : json['condition_type'],

@@ -62,6 +62,9 @@ export function SearchAffiliateOrdersByCreatorResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchAffiliateOrdersByCreatorResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orders': json['orders'] == null ? undefined : ((json['orders'] as Array<any>).map(SearchAffiliateOrdersByCreatorResponseDataOrderFromJSON)),

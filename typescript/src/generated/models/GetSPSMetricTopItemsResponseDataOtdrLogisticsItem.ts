@@ -60,6 +60,9 @@ export function GetSPSMetricTopItemsResponseDataOtdrLogisticsItemFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricTopItemsResponseDataOtdrLogisticsItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'deliveredOrderCount': json['delivered_order_count'] == null ? undefined : json['delivered_order_count'],

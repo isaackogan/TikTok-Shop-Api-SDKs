@@ -83,6 +83,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestContentPerformanceFromJ
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequestContentPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgVideoViews': json['avg_video_views'] == null ? undefined : json['avg_video_views'],

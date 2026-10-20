@@ -62,6 +62,9 @@ export function SearchPromotionActivitiesResponseDataFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchPromotionActivitiesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'totalCount': json['total_count'] == null ? undefined : json['total_count'],

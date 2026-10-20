@@ -85,6 +85,9 @@ export function ShelfLifeAttributeInfoFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShelfLifeAttributeInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shelfLife': json['shelf_life'] == null ? undefined : json['shelf_life'],

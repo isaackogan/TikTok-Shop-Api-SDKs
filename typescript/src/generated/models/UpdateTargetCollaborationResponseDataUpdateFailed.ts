@@ -118,6 +118,9 @@ export function UpdateTargetCollaborationResponseDataUpdateFailedFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateTargetCollaborationResponseDataUpdateFailed: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'removeCreatorOpenIds': json['remove_creator_open_ids'] == null ? undefined : json['remove_creator_open_ids'],

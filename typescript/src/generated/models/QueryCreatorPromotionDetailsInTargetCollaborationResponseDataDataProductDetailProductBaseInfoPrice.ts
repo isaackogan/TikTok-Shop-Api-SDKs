@@ -63,6 +63,9 @@ export function QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'minPrice': json['min_price'] == null ? undefined : MinPriceFromJSON(json['min_price']),

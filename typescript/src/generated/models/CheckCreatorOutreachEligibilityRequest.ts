@@ -51,6 +51,9 @@ export function CheckCreatorOutreachEligibilityRequestFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckCreatorOutreachEligibilityRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorInfos': ((json['creator_infos'] as Array<any>).map(CheckCreatorOutreachEligibilityRequestCreatorInfoFromJSON)),

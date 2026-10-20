@@ -50,6 +50,9 @@ export function CreateOpenCollaborationResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateOpenCollaborationResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'openCollaboration': json['open_collaboration'] == null ? undefined : CreateOpenCollaborationResponseDataOpenCollaborationFromJSON(json['open_collaboration']),

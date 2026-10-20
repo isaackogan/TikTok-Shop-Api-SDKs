@@ -63,6 +63,9 @@ export function GetLiveRoomTrafficPerformanceResponseDataTrafficPerformanceFromJ
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomTrafficPerformanceResponseDataTrafficPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'source': json['source'] == null ? undefined : GetLiveRoomTrafficPerformanceResponseDataTrafficPerformanceSourceFromJSON(json['source']),

@@ -71,6 +71,9 @@ export function GetConversationMessagesResponseDataMessageSenderFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetConversationMessagesResponseDataMessageSender: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'imUserId': json['im_user_id'] == null ? undefined : json['im_user_id'],

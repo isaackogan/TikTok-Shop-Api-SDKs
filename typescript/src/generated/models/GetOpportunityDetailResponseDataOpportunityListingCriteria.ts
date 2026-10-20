@@ -60,6 +60,9 @@ export function GetOpportunityDetailResponseDataOpportunityListingCriteriaFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpportunityDetailResponseDataOpportunityListingCriteria: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productBrand': json['product_brand'] == null ? undefined : json['product_brand'],

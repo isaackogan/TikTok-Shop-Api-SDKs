@@ -51,6 +51,9 @@ export function UpdateInventoryRequestFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateInventoryRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'skus': ((json['skus'] as Array<any>).map(UpdateInventoryRequestSkuFromJSON)),

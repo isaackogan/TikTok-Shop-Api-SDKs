@@ -60,6 +60,9 @@ export function GetGlobalProductResponseDataProductSkuMappingSalesAttributeMappi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalProductResponseDataProductSkuMappingSalesAttributeMapping: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalAttributeId': json['global_attribute_id'] == null ? undefined : json['global_attribute_id'],

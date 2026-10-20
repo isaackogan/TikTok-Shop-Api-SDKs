@@ -50,6 +50,9 @@ export function SubmitProductViaOpportunityResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SubmitProductViaOpportunityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'submission': json['submission'] == null ? undefined : SubmitProductViaOpportunityResponseDataSubmissionFromJSON(json['submission']),

@@ -50,6 +50,9 @@ export function GetGlobalAttributesResponseDataFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalAttributesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'attributes': json['attributes'] == null ? undefined : ((json['attributes'] as Array<any>).map(GetGlobalAttributesResponseDataAttributeFromJSON)),

@@ -51,6 +51,9 @@ export function QueryGoodsInventoryForMCFRequestFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryGoodsInventoryForMCFRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'goods': ((json['goods'] as Array<any>).map(QueryGoodsInventoryForMCFRequestGoodFromJSON)),

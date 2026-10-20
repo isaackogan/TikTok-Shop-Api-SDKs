@@ -60,6 +60,9 @@ export function GetSPSMetricDiagnosisResponseDataCalculationRuleFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricDiagnosisResponseDataCalculationRule: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'denominatorLabel': json['denominator_label'] == null ? undefined : json['denominator_label'],

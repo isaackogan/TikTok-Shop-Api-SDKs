@@ -76,6 +76,9 @@ export function InventorySearchResponseDataInventorySkuTotalAvailableInventoryDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistribution: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'campaignInventory': json['campaign_inventory'] == null ? undefined : ((json['campaign_inventory'] as Array<any>).map(InventorySearchResponseDataInventorySkuTotalAvailableInventoryDistributionCampaignInventoryFromJSON)),

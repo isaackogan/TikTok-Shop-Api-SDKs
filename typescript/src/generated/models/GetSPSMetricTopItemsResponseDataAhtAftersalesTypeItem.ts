@@ -78,6 +78,9 @@ export function GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItemFromJSONTyp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'handleDurationHours': json['handle_duration_hours'] == null ? undefined : json['handle_duration_hours'],

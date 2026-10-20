@@ -48,6 +48,9 @@ export function ClaimDurationFromJSONTyped(json: any, ignoreDiscriminator: boole
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ClaimDuration: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'startTime': json['start_time'] == null ? undefined : json['start_time'],

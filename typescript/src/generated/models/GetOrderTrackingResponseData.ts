@@ -50,6 +50,9 @@ export function GetOrderTrackingResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderTrackingResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'tracking': json['tracking'] == null ? undefined : ((json['tracking'] as Array<any>).map(GetOrderTrackingResponseDataTrackingFromJSON)),

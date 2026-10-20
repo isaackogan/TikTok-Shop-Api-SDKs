@@ -57,6 +57,9 @@ export function EditOpenCollaborationSampleRuleRequestFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`EditOpenCollaborationSampleRuleRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productId': json['product_id'],

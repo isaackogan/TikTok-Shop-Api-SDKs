@@ -50,6 +50,9 @@ export function DeleteGlobalProductsResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DeleteGlobalProductsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'errors': json['errors'] == null ? undefined : ((json['errors'] as Array<any>).map(DeleteGlobalProductsResponseDataErrorFromJSON)),

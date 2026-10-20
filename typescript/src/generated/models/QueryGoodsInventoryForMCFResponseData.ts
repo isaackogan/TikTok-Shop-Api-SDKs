@@ -50,6 +50,9 @@ export function QueryGoodsInventoryForMCFResponseDataFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryGoodsInventoryForMCFResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'goodsInventoryList': json['goods_inventory_list'] == null ? undefined : ((json['goods_inventory_list'] as Array<any>).map(QueryGoodsInventoryForMCFResponseDataGoodsInventoryListFromJSON)),

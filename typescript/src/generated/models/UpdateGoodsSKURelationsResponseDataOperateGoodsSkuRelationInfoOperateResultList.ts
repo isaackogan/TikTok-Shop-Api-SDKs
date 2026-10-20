@@ -60,6 +60,9 @@ export function UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ttsGoodsId': json['tts_goods_id'] == null ? undefined : json['tts_goods_id'],

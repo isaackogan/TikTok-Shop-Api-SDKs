@@ -153,6 +153,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'searchKey': json['search_key'] == null ? undefined : json['search_key'],

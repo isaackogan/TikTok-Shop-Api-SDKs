@@ -84,6 +84,9 @@ export function GetFBTWarehouseListResponseDataWarehouseAddressFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTWarehouseListResponseDataWarehouseAddress: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'postalCode': json['postal_code'] == null ? undefined : json['postal_code'],

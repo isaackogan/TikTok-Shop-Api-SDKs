@@ -56,6 +56,9 @@ export function GetGlobalProductResponseDataMainImageFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalProductResponseDataMainImage: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'height': json['height'] == null ? undefined : json['height'],

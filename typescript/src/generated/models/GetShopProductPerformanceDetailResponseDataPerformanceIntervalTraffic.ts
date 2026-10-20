@@ -50,6 +50,9 @@ export function GetShopProductPerformanceDetailResponseDataPerformanceIntervalTr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopProductPerformanceDetailResponseDataPerformanceIntervalTraffic: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'breakdowns': json['breakdowns'] == null ? undefined : ((json['breakdowns'] as Array<any>).map(GetShopProductPerformanceDetailResponseDataPerformanceIntervalTrafficBreakdownFromJSON)),

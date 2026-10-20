@@ -58,6 +58,9 @@ export function SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraIn
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsInfoResponseDataGoodHazmatInfoFlammableLiquidsExtraInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'flammableLiquidsType': json['flammable_liquids_type'] == null ? undefined : json['flammable_liquids_type'],

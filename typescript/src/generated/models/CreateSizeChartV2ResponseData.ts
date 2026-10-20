@@ -42,6 +42,9 @@ export function CreateSizeChartV2ResponseDataFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateSizeChartV2ResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sizeChartId': json['size_chart_id'] == null ? undefined : json['size_chart_id'],

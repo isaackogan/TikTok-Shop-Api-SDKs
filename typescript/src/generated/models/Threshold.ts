@@ -72,6 +72,9 @@ export function ThresholdFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Threshold: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'minimumFollowerCount': json['minimum_follower_count'] == null ? undefined : json['minimum_follower_count'],

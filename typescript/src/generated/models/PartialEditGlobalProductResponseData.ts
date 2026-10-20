@@ -63,6 +63,9 @@ export function PartialEditGlobalProductResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditGlobalProductResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalSkus': json['global_skus'] == null ? undefined : ((json['global_skus'] as Array<any>).map(GlobalSkuFromJSON)),

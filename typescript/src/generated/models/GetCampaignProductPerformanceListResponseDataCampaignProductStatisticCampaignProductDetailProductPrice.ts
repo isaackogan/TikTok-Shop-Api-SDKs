@@ -54,6 +54,9 @@ export function GetCampaignProductPerformanceListResponseDataCampaignProductStat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCampaignProductPerformanceListResponseDataCampaignProductStatisticCampaignProductDetailProductPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'minPrice': json['min_price'] == null ? undefined : json['min_price'],

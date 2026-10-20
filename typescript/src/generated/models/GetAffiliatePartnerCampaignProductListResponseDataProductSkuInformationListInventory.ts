@@ -42,6 +42,9 @@ export function GetAffiliatePartnerCampaignProductListResponseDataProductSkuInfo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAffiliatePartnerCampaignProductListResponseDataProductSkuInformationListInventory: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'availableQuantity': json['available_quantity'] == null ? undefined : json['available_quantity'],

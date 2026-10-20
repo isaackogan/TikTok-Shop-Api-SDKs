@@ -62,6 +62,9 @@ export function GetCreatorConversationMessagesResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorConversationMessagesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'hasMore': json['has_more'] == null ? undefined : json['has_more'],

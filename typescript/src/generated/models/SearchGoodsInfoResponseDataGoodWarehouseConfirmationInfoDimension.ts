@@ -67,6 +67,9 @@ export function SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimensio
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsInfoResponseDataGoodWarehouseConfirmationInfoDimension: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'width': json['width'] == null ? undefined : json['width'],

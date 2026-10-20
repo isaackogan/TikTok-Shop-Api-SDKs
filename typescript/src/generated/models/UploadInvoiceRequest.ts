@@ -50,6 +50,9 @@ export function UploadInvoiceRequestFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadInvoiceRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'invoices': json['invoices'] == null ? undefined : ((json['invoices'] as Array<any>).map(UploadInvoiceRequestInvoiceFromJSON)),

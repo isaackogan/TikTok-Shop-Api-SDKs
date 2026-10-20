@@ -44,6 +44,9 @@ export function UpdateStockOperationSettingsRequestStockOperationSettingFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateStockOperationSettingsRequestStockOperationSetting: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'enableAutoRestock': json['enable_auto_restock'] == null ? undefined : json['enable_auto_restock'],

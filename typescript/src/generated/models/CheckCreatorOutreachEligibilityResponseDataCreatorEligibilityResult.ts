@@ -78,6 +78,9 @@ export function CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityRes
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorLevel': json['creator_level'] == null ? undefined : json['creator_level'],

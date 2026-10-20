@@ -54,6 +54,9 @@ export function GetOrderTrackingResponseDataTrackingFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderTrackingResponseDataTracking: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'description': json['description'] == null ? undefined : json['description'],

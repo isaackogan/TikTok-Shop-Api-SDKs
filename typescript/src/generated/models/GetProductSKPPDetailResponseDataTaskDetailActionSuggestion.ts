@@ -48,6 +48,9 @@ export function GetProductSKPPDetailResponseDataTaskDetailActionSuggestionFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductSKPPDetailResponseDataTaskDetailActionSuggestion: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'scoreIncrease': json['score_increase'] == null ? undefined : json['score_increase'],

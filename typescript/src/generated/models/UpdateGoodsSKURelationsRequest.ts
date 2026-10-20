@@ -69,6 +69,9 @@ export function UpdateGoodsSKURelationsRequestFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateGoodsSKURelationsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'operateGoodsSkuRelationList': ((json['operate_goods_sku_relation_list'] as Array<any>).map(UpdateGoodsSKURelationsRequestOperateGoodsSkuRelationListFromJSON)),

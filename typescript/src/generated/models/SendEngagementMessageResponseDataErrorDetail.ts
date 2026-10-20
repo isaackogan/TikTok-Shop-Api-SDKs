@@ -42,6 +42,9 @@ export function SendEngagementMessageResponseDataErrorDetailFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SendEngagementMessageResponseDataErrorDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'buyerEmail': json['buyer_email'] == null ? undefined : json['buyer_email'],

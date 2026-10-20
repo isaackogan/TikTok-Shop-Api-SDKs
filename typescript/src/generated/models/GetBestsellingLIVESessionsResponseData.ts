@@ -50,6 +50,9 @@ export function GetBestsellingLIVESessionsResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetBestsellingLIVESessionsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'lives': json['lives'] == null ? undefined : ((json['lives'] as Array<any>).map(GetBestsellingLIVESessionsResponseDataLiveFromJSON)),

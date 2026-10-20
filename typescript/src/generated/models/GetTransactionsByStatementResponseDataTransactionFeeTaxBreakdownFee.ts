@@ -396,6 +396,9 @@ export function GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdown
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'platformCommissionAmount': json['platform_commission_amount'] == null ? undefined : json['platform_commission_amount'],

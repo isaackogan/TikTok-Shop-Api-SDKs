@@ -42,6 +42,9 @@ export function CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttributeFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateFBTGoodsRequestCreateGoodsDtoListBulkyItemAttribute: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isBulkyItemAccessories': json['is_bulky_item_accessories'] == null ? undefined : json['is_bulky_item_accessories'],

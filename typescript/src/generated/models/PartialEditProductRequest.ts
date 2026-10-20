@@ -469,6 +469,9 @@ export function PartialEditProductRequestFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'autoTranslateEnabled': json['auto_translate_enabled'] == null ? undefined : json['auto_translate_enabled'],

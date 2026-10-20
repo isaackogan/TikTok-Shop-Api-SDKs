@@ -50,6 +50,9 @@ export function DiscountBmsmDiscountFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DiscountBmsmDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'details': json['details'] == null ? undefined : ((json['details'] as Array<any>).map(CreatePromotionActivityRequestDiscountBmsmDiscountDetailFromJSON)),

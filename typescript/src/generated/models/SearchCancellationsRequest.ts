@@ -129,6 +129,9 @@ export function SearchCancellationsRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCancellationsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cancelIds': json['cancel_ids'] == null ? undefined : json['cancel_ids'],

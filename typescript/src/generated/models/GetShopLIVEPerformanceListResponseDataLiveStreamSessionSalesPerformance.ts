@@ -221,6 +221,9 @@ export function GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerf
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEPerformanceListResponseDataLiveStreamSessionSalesPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'aov': json['aov'] == null ? undefined : AovFromJSON(json['aov']),

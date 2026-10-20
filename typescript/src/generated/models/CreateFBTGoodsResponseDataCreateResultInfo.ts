@@ -50,6 +50,9 @@ export function CreateFBTGoodsResponseDataCreateResultInfoFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateFBTGoodsResponseDataCreateResultInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'createResultList': json['create_result_list'] == null ? undefined : ((json['create_result_list'] as Array<any>).map(CreateFBTGoodsResponseDataCreateResultInfoCreateResultListFromJSON)),

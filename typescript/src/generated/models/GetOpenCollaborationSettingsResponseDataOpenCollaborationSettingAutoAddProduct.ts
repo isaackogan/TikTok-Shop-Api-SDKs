@@ -52,6 +52,9 @@ export function GetOpenCollaborationSettingsResponseDataOpenCollaborationSetting
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingAutoAddProduct: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'enable': json['enable'] == null ? undefined : json['enable'],

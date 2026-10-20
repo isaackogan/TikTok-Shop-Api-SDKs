@@ -52,6 +52,9 @@ export function CreateGlobalProductRequestSkuInventoryFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateGlobalProductRequestSkuInventory: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalWarehouseId': json['global_warehouse_id'],

@@ -69,6 +69,9 @@ export function GetInboundMethodDetailResponseDataInfoFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetInboundMethodDetailResponseDataInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'allocationShipments': json['allocation_shipments'] == null ? undefined : ((json['allocation_shipments'] as Array<any>).map(GetInboundMethodDetailResponseDataInfoAllocationShipmentFromJSON)),

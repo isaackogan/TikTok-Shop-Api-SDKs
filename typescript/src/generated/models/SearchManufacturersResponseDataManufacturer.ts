@@ -56,6 +56,9 @@ export function SearchManufacturersResponseDataManufacturerFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchManufacturersResponseDataManufacturer: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'id': json['id'] == null ? undefined : json['id'],

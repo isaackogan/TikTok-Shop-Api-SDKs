@@ -112,6 +112,9 @@ export function SearchReturnsResponseDataReturnOrderReturnLineItemFromJSONTyped(
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchReturnsResponseDataReturnOrderReturnLineItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnLineItemId': json['return_line_item_id'] == null ? undefined : json['return_line_item_id'],

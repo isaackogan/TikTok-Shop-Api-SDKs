@@ -50,6 +50,9 @@ export function GetSPSMetricDiagnosisResponseDataTrendFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricDiagnosisResponseDataTrend: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'dataPoints': json['data_points'] == null ? undefined : ((json['data_points'] as Array<any>).map(GetSPSMetricDiagnosisResponseDataTrendDataPointFromJSON)),

@@ -92,6 +92,9 @@ export function GetShopLIVEMinutePerformanceResponseDataPerformanceOverallFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEMinutePerformanceResponseDataPerformanceOverall: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'liveTitle': json['live_title'] == null ? undefined : json['live_title'],

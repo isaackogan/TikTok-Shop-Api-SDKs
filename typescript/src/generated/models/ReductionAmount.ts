@@ -48,6 +48,9 @@ export function ReductionAmountFromJSONTyped(json: any, ignoreDiscriminator: boo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReductionAmount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'amount': json['amount'] == null ? undefined : json['amount'],

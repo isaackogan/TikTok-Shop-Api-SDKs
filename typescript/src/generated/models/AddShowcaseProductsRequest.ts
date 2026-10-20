@@ -57,6 +57,9 @@ export function AddShowcaseProductsRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AddShowcaseProductsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'addType': json['add_type'],

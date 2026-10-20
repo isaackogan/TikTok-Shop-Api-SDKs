@@ -63,6 +63,9 @@ export function SearchSampleApplicationFulfillmentsResponseDataFulfillmentFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchSampleApplicationFulfillmentsResponseDataFulfillment: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'product': json['product'] == null ? undefined : SearchSampleApplicationFulfillmentsResponseDataFulfillmentProductFromJSON(json['product']),

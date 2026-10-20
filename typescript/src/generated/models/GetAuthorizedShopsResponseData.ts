@@ -50,6 +50,9 @@ export function GetAuthorizedShopsResponseDataFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAuthorizedShopsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shops': json['shops'] == null ? undefined : ((json['shops'] as Array<any>).map(GetAuthorizedShopsResponseDataShopFromJSON)),

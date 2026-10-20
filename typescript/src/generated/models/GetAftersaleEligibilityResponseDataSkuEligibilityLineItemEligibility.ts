@@ -92,6 +92,9 @@ export function GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'requestType': json['request_type'] == null ? undefined : json['request_type'],

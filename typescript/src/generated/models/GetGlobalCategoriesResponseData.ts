@@ -50,6 +50,9 @@ export function GetGlobalCategoriesResponseDataFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalCategoriesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'categories': json['categories'] == null ? undefined : ((json['categories'] as Array<any>).map(GetGlobalCategoriesResponseDataCategoryFromJSON)),

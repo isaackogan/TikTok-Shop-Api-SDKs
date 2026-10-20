@@ -87,6 +87,9 @@ export function PartialEditProductResponseDataSkuFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductResponseDataSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'externalSkuId': json['external_sku_id'] == null ? undefined : json['external_sku_id'],

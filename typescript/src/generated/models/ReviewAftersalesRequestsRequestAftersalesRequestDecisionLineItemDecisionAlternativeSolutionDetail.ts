@@ -48,6 +48,9 @@ export function ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItem
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionAlternativeSolutionDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'partialRefundAmount': json['partial_refund_amount'] == null ? undefined : json['partial_refund_amount'],

@@ -91,6 +91,9 @@ export function AppealCompletedWebhookFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AppealCompletedWebhook: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopId': json['shop_id'],

@@ -540,6 +540,9 @@ export function CreateProductRequestFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateProductRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'saveMode': json['save_mode'] == null ? undefined : json['save_mode'],

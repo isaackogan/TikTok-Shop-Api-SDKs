@@ -60,6 +60,9 @@ export function GetShopProductPerformanceDetailResponseDataPerformanceRatingFrom
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopProductPerformanceDetailResponseDataPerformanceRating: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'stars': json['stars'] == null ? undefined : json['stars'],

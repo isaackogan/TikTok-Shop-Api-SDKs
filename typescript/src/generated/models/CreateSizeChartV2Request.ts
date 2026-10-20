@@ -74,6 +74,9 @@ export function CreateSizeChartV2RequestFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateSizeChartV2Request: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'categoryId': json['category_id'],

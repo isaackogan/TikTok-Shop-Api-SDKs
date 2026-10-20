@@ -50,6 +50,9 @@ export function GetProductResponseDataPodInfoFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataPodInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'podTemplates': json['pod_templates'] == null ? undefined : ((json['pod_templates'] as Array<any>).map(GetProductResponseDataPodInfoPodTemplateFromJSON)),

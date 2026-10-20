@@ -50,6 +50,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCoun
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequestFollowerDemographicCountRange: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'countGe': json['count_ge'] == null ? undefined : json['count_ge'],

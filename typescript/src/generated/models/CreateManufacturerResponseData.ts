@@ -42,6 +42,9 @@ export function CreateManufacturerResponseDataFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateManufacturerResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'manufacturerId': json['manufacturer_id'] == null ? undefined : json['manufacturer_id'],

@@ -1,3 +1,4 @@
+import { createHmac } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { EVENT_TYPES, isUnknownWebhookEvent, WebhookParseError, Webhooks, WebhookSignatureError } from '../src/index.ts';
@@ -100,6 +101,25 @@ describe('strict parsing (lesson 16, R28)', () => {
     j.data.appeal_task.appeal_audit_result = 'x';
     expect(() => Webhooks.parse(JSON.stringify(j))).toThrow(WebhookParseError);
   });
+  const wrongKind: [string, (j: any) => void][] = [
+    ['data is a string', (j) => (j.data = 'not an object')],
+    ['a nested object is a number', (j) => (j.data.appeal_task = 5)],
+    ['a nested object is a list', (j) => (j.data.appeal_task = [{ appeal_audit_result: [] }])],
+    ['a list item is a string', (j) => (j.data.appeal_task.appeal_audit_result = ['x'])],
+  ];
+  for (const [name, edit] of wrongKind) {
+    it(`rejects a known type where a model should be an object: ${name}`, () => {
+      const j = appeal();
+      edit(j);
+      expect(() => Webhooks.parse(JSON.stringify(j))).toThrow(WebhookParseError);
+    });
+  }
+  it("rejects the reviewer's probe: type 66 with data a string", () => {
+    const body = '{"type":66,"shop_id":"1","tts_notification_id":"n","timestamp":1,"data":"not an object"}';
+    expect(() => Webhooks.parse(body)).toThrow(WebhookParseError);
+    const signature = createHmac('sha256', 's').update('k' + body).digest('hex');
+    expect(() => Webhooks.verifyAndParse({ appKey: 'k', appSecret: 's', rawBody: body, signature })).toThrow(WebhookParseError);
+  });
   it('rejects bytes that are not UTF-8', () => {
     expect(() => Webhooks.parse(new Uint8Array([0x7b, 0xff, 0x7d]))).toThrow(WebhookParseError);
   });
@@ -108,9 +128,10 @@ describe('strict parsing (lesson 16, R28)', () => {
     expect(isUnknownWebhookEvent(ev)).toBe(true);
     expect(ev.type).toBe(9999);
   });
-  it('verifyAndParse is strict too', () => {
-    const ok = vectors.verify[0];
-    expect(() => Webhooks.verifyAndParse({ appKey: ok.appKey, appSecret: ok.appSecret, rawBody: '[]', signature: 'x' })).toThrow(WebhookSignatureError);
+  it('verifyAndParse is strict too: a correctly signed body that is not an object is a parse error', () => {
+    const signature = createHmac('sha256', 's').update('k[]').digest('hex');
+    expect(Webhooks.verify({ appKey: 'k', appSecret: 's', rawBody: '[]', signature })).toBe(true);
+    expect(() => Webhooks.verifyAndParse({ appKey: 'k', appSecret: 's', rawBody: '[]', signature })).toThrow(WebhookParseError);
   });
 });
 

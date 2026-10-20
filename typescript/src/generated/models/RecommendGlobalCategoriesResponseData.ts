@@ -56,6 +56,9 @@ export function RecommendGlobalCategoriesResponseDataFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RecommendGlobalCategoriesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'leafCategoryId': json['leaf_category_id'] == null ? undefined : json['leaf_category_id'],

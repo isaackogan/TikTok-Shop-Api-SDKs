@@ -42,6 +42,9 @@ export function GenerateAffiliatePartnerCampaignProductLinkResponseDataFromJSONT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GenerateAffiliatePartnerCampaignProductLinkResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productPromotionLink': json['product_promotion_link'] == null ? undefined : json['product_promotion_link'],

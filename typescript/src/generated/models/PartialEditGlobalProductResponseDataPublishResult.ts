@@ -81,6 +81,9 @@ export function PartialEditGlobalProductResponseDataPublishResultFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditGlobalProductResponseDataPublishResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'region': json['region'] == null ? undefined : json['region'],

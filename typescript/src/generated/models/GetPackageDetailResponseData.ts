@@ -280,6 +280,9 @@ export function GetPackageDetailResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPackageDetailResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'packageId': json['package_id'] == null ? undefined : json['package_id'],

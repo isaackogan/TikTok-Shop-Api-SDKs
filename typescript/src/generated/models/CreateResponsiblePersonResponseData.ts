@@ -42,6 +42,9 @@ export function CreateResponsiblePersonResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateResponsiblePersonResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'responsiblePersonId': json['responsible_person_id'] == null ? undefined : json['responsible_person_id'],

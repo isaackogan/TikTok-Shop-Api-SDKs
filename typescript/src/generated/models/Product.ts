@@ -48,6 +48,9 @@ export function ProductFromJSONTyped(json: any, ignoreDiscriminator: boolean): P
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Product: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'tokoPid': json['toko_pid'] == null ? undefined : json['toko_pid'],

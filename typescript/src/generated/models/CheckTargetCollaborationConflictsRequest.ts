@@ -50,6 +50,9 @@ export function CheckTargetCollaborationConflictsRequestFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckTargetCollaborationConflictsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorOpenIdList': json['creator_open_id_list'],

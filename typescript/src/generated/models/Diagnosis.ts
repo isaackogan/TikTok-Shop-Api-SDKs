@@ -77,6 +77,9 @@ export function DiagnosisFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Diagnosis: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'field': json['field'] == null ? undefined : json['field'],

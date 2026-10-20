@@ -54,6 +54,9 @@ export function CheckProductListingResponseDataPreCheckResultPreCheckDetailFromJ
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckProductListingResponseDataPreCheckResultPreCheckDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shortReason': json['short_reason'] == null ? undefined : json['short_reason'],

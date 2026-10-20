@@ -50,6 +50,9 @@ export function GetWarehouseDeliveryOptionsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetWarehouseDeliveryOptionsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'deliveryOptions': json['delivery_options'] == null ? undefined : ((json['delivery_options'] as Array<any>).map(GetWarehouseDeliveryOptionsResponseDataDeliveryOptionFromJSON)),

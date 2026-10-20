@@ -101,6 +101,9 @@ export function GetSPSMetricTopItemsResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricTopItemsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ahtAftersalesTypeItems': json['aht_aftersales_type_items'] == null ? undefined : ((json['aht_aftersales_type_items'] as Array<any>).map(GetSPSMetricTopItemsResponseDataAhtAftersalesTypeItemFromJSON)),

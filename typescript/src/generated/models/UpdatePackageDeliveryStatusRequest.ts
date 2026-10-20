@@ -51,6 +51,9 @@ export function UpdatePackageDeliveryStatusRequestFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdatePackageDeliveryStatusRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'packages': ((json['packages'] as Array<any>).map(UpdatePackageDeliveryStatusRequestPackageFromJSON)),

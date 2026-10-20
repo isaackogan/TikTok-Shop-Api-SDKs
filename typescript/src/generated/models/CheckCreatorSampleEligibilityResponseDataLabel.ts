@@ -78,6 +78,9 @@ export function CheckCreatorSampleEligibilityResponseDataLabelFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckCreatorSampleEligibilityResponseDataLabel: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'canApply': json['can_apply'] == null ? undefined : json['can_apply'],

@@ -42,6 +42,9 @@ export function ConfirmInboundMethodResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ConfirmInboundMethodResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inboundOrderIds': json['inbound_order_ids'] == null ? undefined : json['inbound_order_ids'],

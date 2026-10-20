@@ -90,6 +90,9 @@ export function SearchResponsiblePersonsResponseDataResponsiblePersonRegionalPro
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchResponsiblePersonsResponseDataResponsiblePersonRegionalProfileAddress: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'streetAddressLine1': json['street_address_line1'] == null ? undefined : json['street_address_line1'],

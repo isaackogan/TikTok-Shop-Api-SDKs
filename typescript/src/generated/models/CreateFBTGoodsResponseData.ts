@@ -50,6 +50,9 @@ export function CreateFBTGoodsResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateFBTGoodsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'createResultInfo': json['create_result_info'] == null ? undefined : CreateFBTGoodsResponseDataCreateResultInfoFromJSON(json['create_result_info']),

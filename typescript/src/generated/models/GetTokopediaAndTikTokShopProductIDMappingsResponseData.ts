@@ -63,6 +63,9 @@ export function GetTokopediaAndTikTokShopProductIDMappingsResponseDataFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTokopediaAndTikTokShopProductIDMappingsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'error': json['error'] == null ? undefined : GetTokopediaAndTikTokShopProductIDMappingsResponseDataErrorFromJSON(json['error']),

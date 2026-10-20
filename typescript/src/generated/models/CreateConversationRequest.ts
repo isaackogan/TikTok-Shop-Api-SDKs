@@ -44,6 +44,9 @@ export function CreateConversationRequestFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateConversationRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'buyerUserId': json['buyer_user_id'],

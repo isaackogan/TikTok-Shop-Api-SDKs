@@ -68,6 +68,9 @@ export function GetShowcaseProductsResponseDataProductStatusFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShowcaseProductsResponseDataProductStatus: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventoryStatus': json['inventory_status'] == null ? undefined : json['inventory_status'],

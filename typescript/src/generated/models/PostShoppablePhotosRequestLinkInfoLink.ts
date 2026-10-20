@@ -48,6 +48,9 @@ export function PostShoppablePhotosRequestLinkInfoLinkFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PostShoppablePhotosRequestLinkInfoLink: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productId': json['product_id'] == null ? undefined : json['product_id'],

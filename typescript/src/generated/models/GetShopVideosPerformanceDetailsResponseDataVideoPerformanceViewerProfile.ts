@@ -82,6 +82,9 @@ export function GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewe
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideosPerformanceDetailsResponseDataVideoPerformanceViewerProfile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ageDistribution': json['age_distribution'] == null ? undefined : ((json['age_distribution'] as Array<any>).map(AgeDistributionFromJSON)),

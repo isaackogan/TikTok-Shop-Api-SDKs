@@ -50,6 +50,9 @@ export function ImageTranslationCompletedWebhookDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ImageTranslationCompletedWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'translationTask': json['translation_task'] == null ? undefined : ImageTranslationCompletedWebhookDataTranslationTaskFromJSON(json['translation_task']),

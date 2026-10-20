@@ -56,6 +56,9 @@ export function AppealCompletedWebhookDataAppealTaskAppealAuditResultFromJSONTyp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AppealCompletedWebhookDataAppealTaskAppealAuditResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'indicatorType': json['indicator_type'],

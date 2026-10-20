@@ -50,6 +50,9 @@ export function ScheduledSaleFromJSONTyped(json: any, ignoreDiscriminator: boole
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ScheduledSale: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isEnabledScheduledSale': json['is_enabled_scheduled_sale'],

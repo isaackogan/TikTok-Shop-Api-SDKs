@@ -42,6 +42,9 @@ export function UncombinePackagesRequestFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UncombinePackagesRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderIds': json['order_ids'] == null ? undefined : json['order_ids'],

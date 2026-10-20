@@ -50,6 +50,9 @@ export function EditOpenCollaborationSettingsRequestFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`EditOpenCollaborationSettingsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'autoAddProduct': json['auto_add_product'] == null ? undefined : EditOpenCollaborationSettingsRequestAutoAddProductFromJSON(json['auto_add_product']),

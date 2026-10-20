@@ -59,6 +59,9 @@ export function GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetWarehouseDeliveryOptionsResponseDataDeliveryOptionWeightLimit: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'maxWeight': json['max_weight'] == null ? undefined : json['max_weight'],

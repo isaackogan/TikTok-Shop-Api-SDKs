@@ -62,6 +62,9 @@ export function GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageArea: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'defaultImage': json['default_image'] == null ? undefined : GetProductResponseDataPodInfoPodTemplateSurfaceCustomAreaImageAreaDefaultImageFromJSON(json['default_image']),

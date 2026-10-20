@@ -50,6 +50,9 @@ export function GetShippingTemplateAvailabilityResponseDataFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShippingTemplateAvailabilityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'templates': json['templates'] == null ? undefined : ((json['templates'] as Array<any>).map(GetShippingTemplateAvailabilityResponseDataTemplateFromJSON)),

@@ -63,6 +63,9 @@ export function GetProductResponseDataAuditFailedReasonFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataAuditFailedReason: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'listingPlatform': json['listing_platform'] == null ? undefined : json['listing_platform'],

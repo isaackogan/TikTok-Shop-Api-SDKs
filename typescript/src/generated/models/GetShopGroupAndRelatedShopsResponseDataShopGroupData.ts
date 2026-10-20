@@ -63,6 +63,9 @@ export function GetShopGroupAndRelatedShopsResponseDataShopGroupDataFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopGroupAndRelatedShopsResponseDataShopGroupData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopGroup': json['shop_group'] == null ? undefined : GetShopGroupAndRelatedShopsResponseDataShopGroupDataShopGroupFromJSON(json['shop_group']),

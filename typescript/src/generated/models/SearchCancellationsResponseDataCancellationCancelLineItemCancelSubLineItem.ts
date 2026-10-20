@@ -111,6 +111,9 @@ export function SearchCancellationsResponseDataCancellationCancelLineItemCancelS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCancellationsResponseDataCancellationCancelLineItemCancelSubLineItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cancelSubLineItemId': json['cancel_sub_line_item_id'] == null ? undefined : json['cancel_sub_line_item_id'],

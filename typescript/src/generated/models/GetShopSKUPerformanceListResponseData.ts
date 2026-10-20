@@ -68,6 +68,9 @@ export function GetShopSKUPerformanceListResponseDataFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopSKUPerformanceListResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'skus': json['skus'] == null ? undefined : ((json['skus'] as Array<any>).map(GetShopSKUPerformanceListResponseDataSkuFromJSON)),

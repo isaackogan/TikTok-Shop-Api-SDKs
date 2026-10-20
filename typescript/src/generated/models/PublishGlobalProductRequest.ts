@@ -51,6 +51,9 @@ export function PublishGlobalProductRequestFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PublishGlobalProductRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'publishTarget': ((json['publish_target'] as Array<any>).map(PublishGlobalProductRequestPublishTargetFromJSON)),

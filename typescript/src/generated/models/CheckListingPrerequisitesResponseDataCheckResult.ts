@@ -65,6 +65,9 @@ export function CheckListingPrerequisitesResponseDataCheckResultFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckListingPrerequisitesResponseDataCheckResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'checkItem': json['check_item'] == null ? undefined : json['check_item'],

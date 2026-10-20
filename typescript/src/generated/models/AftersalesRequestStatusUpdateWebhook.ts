@@ -87,6 +87,9 @@ export function AftersalesRequestStatusUpdateWebhookFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AftersalesRequestStatusUpdateWebhook: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopId': json['shop_id'] == null ? undefined : json['shop_id'],

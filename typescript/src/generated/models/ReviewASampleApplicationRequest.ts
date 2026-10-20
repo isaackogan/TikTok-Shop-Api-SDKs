@@ -79,6 +79,9 @@ export function ReviewASampleApplicationRequestFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReviewASampleApplicationRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'reviewResult': json['review_result'],

@@ -62,6 +62,9 @@ export function SearchAftersalesRequestsResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchAftersalesRequestsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'aftersalesRequests': json['aftersales_requests'] == null ? undefined : ((json['aftersales_requests'] as Array<any>).map(SearchAftersalesRequestsResponseDataAftersalesRequestFromJSON)),

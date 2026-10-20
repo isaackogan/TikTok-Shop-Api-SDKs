@@ -48,6 +48,9 @@ export function SellerSearchOpenCollaborationProductsRequestCommissionRateRangeF
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SellerSearchOpenCollaborationProductsRequestCommissionRateRange: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'rateGe': json['rate_ge'] == null ? undefined : json['rate_ge'],

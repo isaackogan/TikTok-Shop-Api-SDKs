@@ -50,6 +50,9 @@ export function GetEngagementTaskPerformancesResponseDataFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetEngagementTaskPerformancesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'taskPerformances': json['task_performances'] == null ? undefined : ((json['task_performances'] as Array<any>).map(GetEngagementTaskPerformancesResponseDataTaskPerformanceFromJSON)),

@@ -80,6 +80,9 @@ export function SearchResponsiblePersonsRequestFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchResponsiblePersonsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'responsiblePersonIds': json['responsible_person_ids'] == null ? undefined : json['responsible_person_ids'],

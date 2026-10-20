@@ -132,6 +132,9 @@ export function PartialEditProductRequestReplicatedProductFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequestReplicatedProduct: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventoryMode': json['inventory_mode'] == null ? undefined : json['inventory_mode'],

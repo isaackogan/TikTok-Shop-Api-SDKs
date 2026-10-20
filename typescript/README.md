@@ -108,7 +108,7 @@ createServer(async (req, res) => {
 ```
 
 - Never re-serialize the body before verifying. Changed whitespace or key order makes the signature fail.
-- Parsing is strict. A body that is not a JSON object, or whose `type` is missing or not an integer, throws `WebhookParseError`, and so does a known type with a required field missing or null: a known type missing a required field is a parse error.
+- Parsing is strict. A body that is not a JSON object, or whose `type` is missing or not an integer, throws `WebhookParseError`. So does a known type with a required field missing or null, or with a model field that isn't a JSON object, at any depth: a known type missing a required field is a parse error.
 - A webhook type this SDK does not know comes back as `{ type, raw }`. Known events never have a `raw` property, so `'raw' in event` (or `isUnknownWebhookEvent(event)`) separates the two. After that, `event.type` narrows to the specific webhook model.
 - `EVENT_TYPES` maps a type number to its name (`1` is `ORDER_STATUS_CHANGE`).
 
@@ -133,7 +133,7 @@ Every failed call throws `TikTokShopError`, with `code`, `message`, `requestId`,
 | A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
 | No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | unset |
 
-The generated models copy scalar fields as sent, without checking their type. A list or object of the wrong shape is the -1 error above.
+The generated models copy scalar fields as sent, without checking their type. A field that should hold a model but isn't a JSON object, or should hold a list of models but isn't a list, is the -1 error above, at any depth.
 
 ## About
 

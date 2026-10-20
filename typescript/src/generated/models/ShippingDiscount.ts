@@ -121,6 +121,9 @@ export function ShippingDiscountFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShippingDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'thresholdType': json['threshold_type'],

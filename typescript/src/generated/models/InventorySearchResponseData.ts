@@ -50,6 +50,9 @@ export function InventorySearchResponseDataFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`InventorySearchResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventory': json['inventory'] == null ? undefined : ((json['inventory'] as Array<any>).map(InventorySearchResponseDataInventoryFromJSON)),

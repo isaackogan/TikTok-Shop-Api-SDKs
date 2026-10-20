@@ -82,6 +82,9 @@ export function SellerSearchOpenCollaborationProductsRequestFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SellerSearchOpenCollaborationProductsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'titleKeywords': json['title_keywords'] == null ? undefined : json['title_keywords'],

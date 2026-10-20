@@ -64,6 +64,9 @@ export function ConfirmOrderSplitRequestFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ConfirmOrderSplitRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'splittableGroups': ((json['splittable_groups'] as Array<any>).map(ConfirmOrderSplitRequestSplittableGroupFromJSON)),

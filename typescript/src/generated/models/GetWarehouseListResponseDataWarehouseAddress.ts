@@ -167,6 +167,9 @@ export function GetWarehouseListResponseDataWarehouseAddressFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetWarehouseListResponseDataWarehouseAddress: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'region': json['region'] == null ? undefined : json['region'],

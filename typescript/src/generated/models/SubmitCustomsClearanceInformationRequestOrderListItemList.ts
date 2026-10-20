@@ -62,6 +62,9 @@ export function SubmitCustomsClearanceInformationRequestOrderListItemListFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SubmitCustomsClearanceInformationRequestOrderListItemList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderLineId': json['order_line_id'] == null ? undefined : json['order_line_id'],

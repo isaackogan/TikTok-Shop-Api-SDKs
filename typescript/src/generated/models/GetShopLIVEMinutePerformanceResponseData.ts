@@ -62,6 +62,9 @@ export function GetShopLIVEMinutePerformanceResponseDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEMinutePerformanceResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'performance': json['performance'] == null ? undefined : GetShopLIVEMinutePerformanceResponseDataPerformanceFromJSON(json['performance']),

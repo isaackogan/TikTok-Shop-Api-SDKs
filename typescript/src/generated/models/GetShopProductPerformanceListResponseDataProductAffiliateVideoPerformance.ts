@@ -128,6 +128,9 @@ export function GetShopProductPerformanceListResponseDataProductAffiliateVideoPe
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'attributedVideoGmv': json['attributed_video_gmv'] == null ? undefined : GetShopProductPerformanceListResponseDataProductAffiliateVideoPerformanceAttributedVideoGmvFromJSON(json['attributed_video_gmv']),

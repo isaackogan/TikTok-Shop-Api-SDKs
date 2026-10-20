@@ -105,6 +105,9 @@ export function SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProf
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isOfficialRecommend': json['is_official_recommend'] == null ? undefined : json['is_official_recommend'],

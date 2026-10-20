@@ -78,6 +78,9 @@ export function GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraff
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEMinutePerformanceResponseDataPerformanceIntervalTraffic: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'viewers': json['viewers'] == null ? undefined : json['viewers'],

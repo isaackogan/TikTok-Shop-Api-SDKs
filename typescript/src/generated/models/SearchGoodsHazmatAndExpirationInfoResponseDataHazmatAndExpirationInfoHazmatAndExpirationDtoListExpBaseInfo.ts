@@ -54,6 +54,9 @@ export function SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpiratio
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoListExpBaseInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inboundCutoffDays': json['inbound_cutoff_days'] == null ? undefined : json['inbound_cutoff_days'],

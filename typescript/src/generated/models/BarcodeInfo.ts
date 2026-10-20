@@ -48,6 +48,9 @@ export function BarcodeInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`BarcodeInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'barcodeType': json['barcode_type'] == null ? undefined : json['barcode_type'],

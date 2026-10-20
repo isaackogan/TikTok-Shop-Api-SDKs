@@ -68,6 +68,9 @@ export function PublishGlobalProductResponseDataProductSkuFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PublishGlobalProductResponseDataProductSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'relatedGlobalSkuId': json['related_global_sku_id'] == null ? undefined : json['related_global_sku_id'],

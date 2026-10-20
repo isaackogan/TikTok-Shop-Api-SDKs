@@ -50,6 +50,9 @@ export function GetCreatorSampleApplicationDetailResponseDataFromJSONTyped(json:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorSampleApplicationDetailResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sampleApplication': json['sample_application'] == null ? undefined : GetCreatorSampleApplicationDetailResponseDataSampleApplicationFromJSON(json['sample_application']),

@@ -175,6 +175,9 @@ export function GetShopLIVEPerformanceOverviewResponseDataPerformanceIntervalFro
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEPerformanceOverviewResponseDataPerformanceInterval: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgLiveAuctionPrice': json['avg_live_auction_price'] == null ? undefined : AvgLiveAuctionPriceFromJSON(json['avg_live_auction_price']),

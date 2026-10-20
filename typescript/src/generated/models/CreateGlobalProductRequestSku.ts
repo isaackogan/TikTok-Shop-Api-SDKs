@@ -159,6 +159,9 @@ export function CreateGlobalProductRequestSkuFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateGlobalProductRequestSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalQuantity': json['global_quantity'] == null ? undefined : json['global_quantity'],

@@ -82,6 +82,9 @@ export function ReplicateProductRequestReplicateTargetSkuFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReplicateProductRequestReplicateTargetSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventory': json['inventory'] == null ? undefined : ((json['inventory'] as Array<any>).map(PartialEditProductRequestReplicatedProductSkuInventoryFromJSON)),

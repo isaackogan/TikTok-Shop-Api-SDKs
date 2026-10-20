@@ -50,6 +50,9 @@ export function TrackingStatusUpdateResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`TrackingStatusUpdateResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'trackResults': json['track_results'] == null ? undefined : ((json['track_results'] as Array<any>).map(TrackingStatusUpdateResponseDataTrackResultFromJSON)),

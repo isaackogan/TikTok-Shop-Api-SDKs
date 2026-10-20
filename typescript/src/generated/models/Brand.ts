@@ -48,6 +48,9 @@ export function BrandFromJSONTyped(json: any, ignoreDiscriminator: boolean): Bra
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Brand: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'id': json['id'] == null ? undefined : json['id'],

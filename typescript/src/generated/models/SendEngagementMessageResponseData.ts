@@ -50,6 +50,9 @@ export function SendEngagementMessageResponseDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SendEngagementMessageResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'errors': json['errors'] == null ? undefined : ((json['errors'] as Array<any>).map(SendEngagementMessageResponseDataErrorFromJSON)),

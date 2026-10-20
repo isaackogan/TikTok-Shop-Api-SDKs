@@ -49,6 +49,9 @@ export function GetCategoryRulesResponseDataFeeFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCategoryRulesResponseDataFee: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'type': json['type'] == null ? undefined : json['type'],

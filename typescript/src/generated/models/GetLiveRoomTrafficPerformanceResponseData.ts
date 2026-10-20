@@ -50,6 +50,9 @@ export function GetLiveRoomTrafficPerformanceResponseDataFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomTrafficPerformanceResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'trafficPerformances': json['traffic_performances'] == null ? undefined : ((json['traffic_performances'] as Array<any>).map(GetLiveRoomTrafficPerformanceResponseDataTrafficPerformanceFromJSON)),

@@ -82,6 +82,9 @@ export function GetShopVideosPerformanceDetailsResponseDataVideoFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideosPerformanceDetailsResponseDataVideo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'error': json['error'] == null ? undefined : GetAvailableReviewDecisionsResponseDataErrorFromJSON(json['error']),

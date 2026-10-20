@@ -53,6 +53,9 @@ export function GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreac
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReasonFilterReason: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'filterType': json['filter_type'] == null ? undefined : json['filter_type'],

@@ -87,6 +87,9 @@ export function GetShopLIVEProductsPerformanceListResponseDataProductTrafficFrom
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEProductsPerformanceListResponseDataProductTraffic: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productImpressions': json['product_impressions'] == null ? undefined : json['product_impressions'],

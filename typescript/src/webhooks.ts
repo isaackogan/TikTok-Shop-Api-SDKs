@@ -23,8 +23,8 @@ export function isUnknownWebhookEvent(event: WebhookEvent | UnknownWebhookEvent)
 
 /**
  * The body is not a webhook this SDK can read: not JSON, not a JSON object, no integer `type`, or a known `type` whose
- * required fields are missing or null (R28). Only an integer `type` the SDK does not know gives an
- * {@link UnknownWebhookEvent}.
+ * required fields are missing or null, or whose model fields aren't JSON objects (R28). Only an integer `type` the SDK
+ * does not know gives an {@link UnknownWebhookEvent}.
  */
 export class WebhookParseError extends Error {
   override name = 'WebhookParseError';
@@ -113,8 +113,8 @@ export const Webhooks = {
    * stay exact.
    *
    * Parsing is strict (R28): it throws {@link WebhookParseError} when the body is not a JSON object, its `type` is
-   * missing or not an integer (a string, bool, null or float), or a known type lacks a required field or has it null,
-   * at any depth.
+   * missing or not an integer (a string, bool, null or float), or a known type lacks a required field, has it null, or
+   * has a model field that isn't a JSON object, at any depth.
    */
   parse(rawBody: RawBody): WebhookEvent | UnknownWebhookEvent {
     let json: unknown;

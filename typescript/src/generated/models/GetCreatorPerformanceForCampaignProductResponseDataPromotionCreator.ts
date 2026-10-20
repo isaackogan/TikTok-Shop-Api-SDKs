@@ -122,6 +122,9 @@ export function GetCreatorPerformanceForCampaignProductResponseDataPromotionCrea
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorPerformanceForCampaignProductResponseDataPromotionCreator: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'paidAmount': json['paid_amount'] == null ? undefined : GetCreatorPerformanceForCampaignProductResponseDataPromotionCreatorPaidAmountFromJSON(json['paid_amount']),

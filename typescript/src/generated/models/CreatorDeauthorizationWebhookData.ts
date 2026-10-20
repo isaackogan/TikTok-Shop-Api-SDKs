@@ -42,6 +42,9 @@ export function CreatorDeauthorizationWebhookDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreatorDeauthorizationWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cancelTime': json['cancel_time'] == null ? undefined : json['cancel_time'],

@@ -102,6 +102,9 @@ export function GetCreatorProfileResponseDataFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorProfileResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avatar': json['avatar'] == null ? undefined : GetCreatorProfileResponseDataAvatarFromJSON(json['avatar']),

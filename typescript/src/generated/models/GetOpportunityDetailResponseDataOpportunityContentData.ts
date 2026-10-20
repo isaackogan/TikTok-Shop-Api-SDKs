@@ -60,6 +60,9 @@ export function GetOpportunityDetailResponseDataOpportunityContentDataFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpportunityDetailResponseDataOpportunityContentData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'videoViewPv': json['video_view_pv'] == null ? undefined : json['video_view_pv'],

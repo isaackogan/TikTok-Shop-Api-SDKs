@@ -61,6 +61,9 @@ export function GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoLis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTInboundOrderDetailsResponseDataInboundOrderLogisticInfoList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'providerName': json['provider_name'] == null ? undefined : json['provider_name'],

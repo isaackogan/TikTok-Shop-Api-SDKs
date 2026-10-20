@@ -48,6 +48,9 @@ export function SalesPriceRangeFromJSONTyped(json: any, ignoreDiscriminator: boo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SalesPriceRange: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'amountGe': json['amount_ge'] == null ? undefined : json['amount_ge'],

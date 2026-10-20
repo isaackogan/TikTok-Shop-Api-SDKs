@@ -42,6 +42,9 @@ export function DeleteProductsResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DeleteProductsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'errors': json['errors'] == null ? undefined : json['errors'],

@@ -59,6 +59,9 @@ export function GetGlobalListingRulesResponseDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalListingRulesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'listingMethods': json['listing_methods'] == null ? undefined : json['listing_methods'],

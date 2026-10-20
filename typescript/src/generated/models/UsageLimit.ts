@@ -54,6 +54,9 @@ export function UsageLimitFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UsageLimit: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'singleBuyerClaimLimit': json['single_buyer_claim_limit'] == null ? undefined : json['single_buyer_claim_limit'],

@@ -64,6 +64,9 @@ export function SearchCreatorSampleApplicationsRequestFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorSampleApplicationsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'applicationStatuses': json['application_statuses'] == null ? undefined : json['application_statuses'],

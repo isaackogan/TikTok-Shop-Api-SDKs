@@ -50,6 +50,9 @@ export function GetDecisionEligibilityResponseDataFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetDecisionEligibilityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'decisions': json['decisions'] == null ? undefined : ((json['decisions'] as Array<any>).map(GetDecisionEligibilityResponseDataDecisionFromJSON)),

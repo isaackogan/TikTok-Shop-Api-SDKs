@@ -74,6 +74,9 @@ export function QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productBaseInfo': json['product_base_info'] == null ? undefined : QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailProductBaseInfoFromJSON(json['product_base_info']),

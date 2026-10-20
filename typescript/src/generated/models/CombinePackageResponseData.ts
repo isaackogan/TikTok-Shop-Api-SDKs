@@ -63,6 +63,9 @@ export function CombinePackageResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CombinePackageResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'packages': json['packages'] == null ? undefined : ((json['packages'] as Array<any>).map(PackageFromJSON)),

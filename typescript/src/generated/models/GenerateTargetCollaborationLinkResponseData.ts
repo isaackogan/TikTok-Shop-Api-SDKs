@@ -42,6 +42,9 @@ export function GenerateTargetCollaborationLinkResponseDataFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GenerateTargetCollaborationLinkResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'link': json['link'] == null ? undefined : json['link'],

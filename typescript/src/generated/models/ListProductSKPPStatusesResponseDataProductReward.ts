@@ -60,6 +60,9 @@ export function ListProductSKPPStatusesResponseDataProductRewardFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListProductSKPPStatusesResponseDataProductReward: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'rewardType': json['reward_type'] == null ? undefined : json['reward_type'],

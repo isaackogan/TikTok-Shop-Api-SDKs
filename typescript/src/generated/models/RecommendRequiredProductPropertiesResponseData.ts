@@ -50,6 +50,9 @@ export function RecommendRequiredProductPropertiesResponseDataFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RecommendRequiredProductPropertiesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'recommendedProperties': json['recommended_properties'] == null ? undefined : ((json['recommended_properties'] as Array<any>).map(RecommendRequiredProductPropertiesResponseDataRecommendedPropertyFromJSON)),

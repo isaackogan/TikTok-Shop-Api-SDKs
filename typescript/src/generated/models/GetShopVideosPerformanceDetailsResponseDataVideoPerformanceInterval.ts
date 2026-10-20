@@ -75,6 +75,9 @@ export function GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInter
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'endDate': json['end_date'] == null ? undefined : (new Date(json['end_date'])),

@@ -50,6 +50,9 @@ export function GetFBTMCFOrderStatusResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTMCFOrderStatusResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'mcfOrder': json['mcf_order'] == null ? undefined : GetFBTMCFOrderStatusResponseDataMcfOrderFromJSON(json['mcf_order']),

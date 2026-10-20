@@ -50,6 +50,9 @@ export function GetConversationResponseDataFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetConversationResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'conversation': json['conversation'] == null ? undefined : GetConversationResponseDataConversationFromJSON(json['conversation']),

@@ -87,6 +87,9 @@ export function GetDecisionEligibilityResponseDataDecisionFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetDecisionEligibilityResponseDataDecision: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'decision': json['decision'] == null ? undefined : json['decision'],

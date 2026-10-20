@@ -236,6 +236,9 @@ export function RecommendCategoryRequestFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RecommendCategoryRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'categoryVersion': json['category_version'] == null ? undefined : json['category_version'],

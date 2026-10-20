@@ -42,6 +42,9 @@ export function CreateEngagementTaskResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateEngagementTaskResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'taskId': json['task_id'] == null ? undefined : json['task_id'],

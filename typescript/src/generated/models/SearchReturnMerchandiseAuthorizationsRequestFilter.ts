@@ -100,6 +100,9 @@ export function SearchReturnMerchandiseAuthorizationsRequestFilterFromJSONTyped(
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchReturnMerchandiseAuthorizationsRequestFilter: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'rmaIds': json['rma_ids'] == null ? undefined : json['rma_ids'],

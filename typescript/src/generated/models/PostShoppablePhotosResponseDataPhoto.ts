@@ -42,6 +42,9 @@ export function PostShoppablePhotosResponseDataPhotoFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PostShoppablePhotosResponseDataPhoto: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'photoPostId': json['photo_post_id'] == null ? undefined : json['photo_post_id'],

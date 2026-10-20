@@ -104,6 +104,9 @@ export function SearchPromotionActivitiesRequestFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchPromotionActivitiesRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'status': json['status'] == null ? undefined : json['status'],

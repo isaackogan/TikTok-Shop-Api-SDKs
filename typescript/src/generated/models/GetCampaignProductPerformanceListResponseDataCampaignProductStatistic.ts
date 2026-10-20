@@ -80,6 +80,9 @@ export function GetCampaignProductPerformanceListResponseDataCampaignProductStat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCampaignProductPerformanceListResponseDataCampaignProductStatistic: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'dataUpdateTime': json['data_update_time'] == null ? undefined : json['data_update_time'],

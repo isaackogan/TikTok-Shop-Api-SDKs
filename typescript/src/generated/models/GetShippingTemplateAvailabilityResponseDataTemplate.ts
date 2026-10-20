@@ -69,6 +69,9 @@ export function GetShippingTemplateAvailabilityResponseDataTemplateFromJSONTyped
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShippingTemplateAvailabilityResponseDataTemplate: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'templateIsAvailable': json['template_is_available'] == null ? undefined : json['template_is_available'],

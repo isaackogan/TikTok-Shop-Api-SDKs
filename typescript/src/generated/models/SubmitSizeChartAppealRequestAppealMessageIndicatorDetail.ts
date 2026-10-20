@@ -59,6 +59,9 @@ export function SubmitSizeChartAppealRequestAppealMessageIndicatorDetailFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SubmitSizeChartAppealRequestAppealMessageIndicatorDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'indicatorType': json['indicator_type'],

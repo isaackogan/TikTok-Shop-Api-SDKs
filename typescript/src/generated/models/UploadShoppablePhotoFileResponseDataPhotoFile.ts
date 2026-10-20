@@ -42,6 +42,9 @@ export function UploadShoppablePhotoFileResponseDataPhotoFileFromJSONTyped(json:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadShoppablePhotoFileResponseDataPhotoFile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'photoUri': json['photo_uri'] == null ? undefined : json['photo_uri'],

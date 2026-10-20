@@ -48,6 +48,9 @@ export function ListAvailableInboundMethodsResponseDataAvailableInboundMethodLis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'warehouseName': json['warehouse_name'] == null ? undefined : json['warehouse_name'],

@@ -48,6 +48,9 @@ export function ShippingFeeFromJSONTyped(json: any, ignoreDiscriminator: boolean
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShippingFee: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'amount': json['amount'] == null ? undefined : json['amount'],

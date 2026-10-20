@@ -103,6 +103,9 @@ export function GetAvailableReviewDecisionsResponseDataLineItemDecisionFromJSONT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAvailableReviewDecisionsResponseDataLineItemDecision: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'decision': json['decision'] == null ? undefined : json['decision'],

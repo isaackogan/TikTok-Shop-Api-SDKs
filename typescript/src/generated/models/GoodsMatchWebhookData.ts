@@ -72,6 +72,9 @@ export function GoodsMatchWebhookDataFromJSONTyped(json: any, ignoreDiscriminato
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GoodsMatchWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'matchType': json['match_type'] == null ? undefined : json['match_type'],

@@ -162,6 +162,9 @@ export function GetSPSMetricDiagnosisResponseDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricDiagnosisResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'benchmarks': json['benchmarks'] == null ? undefined : BenchmarkFromJSON(json['benchmarks']),

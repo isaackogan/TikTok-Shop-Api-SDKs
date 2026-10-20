@@ -96,6 +96,9 @@ export function GetPackageDetailResponseDataRecipientAddressFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPackageDetailResponseDataRecipientAddress: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'fullAddress': json['full_address'] == null ? undefined : json['full_address'],

@@ -60,6 +60,9 @@ export function TrackingStatusUpdateRequestTrackLocationFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`TrackingStatusUpdateRequestTrackLocation: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'country': json['country'] == null ? undefined : json['country'],

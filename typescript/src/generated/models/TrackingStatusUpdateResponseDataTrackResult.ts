@@ -72,6 +72,9 @@ export function TrackingStatusUpdateResponseDataTrackResultFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`TrackingStatusUpdateResponseDataTrackResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'actionCode': json['action_code'] == null ? undefined : json['action_code'],

@@ -52,6 +52,9 @@ export function GetExternalOrderReferencesResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetExternalOrderReferencesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'externalOrders': json['external_orders'] == null ? undefined : ((json['external_orders'] as Array<any>).map(ExternalOrderFromJSON)),

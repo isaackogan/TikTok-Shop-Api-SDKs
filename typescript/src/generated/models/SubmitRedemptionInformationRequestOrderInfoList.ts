@@ -64,6 +64,9 @@ export function SubmitRedemptionInformationRequestOrderInfoListFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SubmitRedemptionInformationRequestOrderInfoList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderLineId': json['order_line_id'],

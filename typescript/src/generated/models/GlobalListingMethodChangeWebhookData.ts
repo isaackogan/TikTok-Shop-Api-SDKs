@@ -58,6 +58,9 @@ export function GlobalListingMethodChangeWebhookDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GlobalListingMethodChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalProductId': json['global_product_id'] == null ? undefined : json['global_product_id'],

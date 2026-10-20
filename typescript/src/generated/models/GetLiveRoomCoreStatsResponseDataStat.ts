@@ -153,6 +153,9 @@ export function GetLiveRoomCoreStatsResponseDataStatFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomCoreStatsResponseDataStat: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sales': json['sales'] == null ? undefined : json['sales'],

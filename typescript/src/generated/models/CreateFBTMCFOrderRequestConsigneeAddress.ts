@@ -82,6 +82,9 @@ export function CreateFBTMCFOrderRequestConsigneeAddressFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateFBTMCFOrderRequestConsigneeAddress: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'countryCode': json['country_code'],

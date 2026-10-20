@@ -42,6 +42,9 @@ export function GetFBTMerchantMCFStatusResponseDataMcfStatusFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTMerchantMCFStatusResponseDataMcfStatus: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isMcf': json['is_mcf'] == null ? undefined : json['is_mcf'],

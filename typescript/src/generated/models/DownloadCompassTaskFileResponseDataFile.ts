@@ -42,6 +42,9 @@ export function DownloadCompassTaskFileResponseDataFileFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DownloadCompassTaskFileResponseDataFile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'base64': json['base64'] == null ? undefined : json['base64'],

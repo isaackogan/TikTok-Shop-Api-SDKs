@@ -50,6 +50,9 @@ export function GetLiveRoomGMVAndOrderTrendsResponseDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomGMVAndOrderTrendsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'gmvTrendPerformances': json['gmv_trend_performances'] == null ? undefined : ((json['gmv_trend_performances'] as Array<any>).map(GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceFromJSON)),

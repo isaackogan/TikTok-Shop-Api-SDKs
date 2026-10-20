@@ -53,6 +53,9 @@ export function AgeDistributionFromJSONTyped(json: any, ignoreDiscriminator: boo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AgeDistribution: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'age': json['age'] == null ? undefined : json['age'],

@@ -66,6 +66,9 @@ export function GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreatorFr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEPerformanceListResponseDataLiveStreamSessionCreator: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'authorType': json['author_type'] == null ? undefined : json['author_type'],

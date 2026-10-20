@@ -80,6 +80,9 @@ export function SearchManufacturersRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchManufacturersRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'manufacturerIds': json['manufacturer_ids'] == null ? undefined : json['manufacturer_ids'],

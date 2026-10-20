@@ -63,6 +63,9 @@ export function GetShippingTemplateAvailabilityRequestProductAttributeFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShippingTemplateAvailabilityRequestProductAttribute: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'weight': json['weight'] == null ? undefined : GetShippingTemplateAvailabilityRequestProductAttributeWeightFromJSON(json['weight']),

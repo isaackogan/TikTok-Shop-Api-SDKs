@@ -50,6 +50,9 @@ export function CreatorSearchSampleApplicationFulfillmentsResponseDataFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreatorSearchSampleApplicationFulfillmentsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'fulfillments': json['fulfillments'] == null ? undefined : ((json['fulfillments'] as Array<any>).map(CreatorSearchSampleApplicationFulfillmentsResponseDataFulfillmentFromJSON)),

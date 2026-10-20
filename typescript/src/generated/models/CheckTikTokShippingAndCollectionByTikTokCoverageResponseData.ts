@@ -48,6 +48,9 @@ export function CheckTikTokShippingAndCollectionByTikTokCoverageResponseDataFrom
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckTikTokShippingAndCollectionByTikTokCoverageResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isTiktokShipping': json['is_tiktok_shipping'] == null ? undefined : json['is_tiktok_shipping'],

@@ -76,6 +76,9 @@ export function SearchProductsForComplianceAuditingRequestFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchProductsForComplianceAuditingRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productTitle': json['product_title'] == null ? undefined : json['product_title'],

@@ -50,6 +50,9 @@ export function SearchGoodsHazmatAndExpirationInfoResponseDataFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsHazmatAndExpirationInfoResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'hazmatAndExpirationInfo': json['hazmat_and_expiration_info'] == null ? undefined : SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoFromJSON(json['hazmat_and_expiration_info']),

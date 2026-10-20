@@ -78,6 +78,9 @@ export function GetSPSMetricProblemDetailsResponseDataImDsatChatItemFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricProblemDetailsResponseDataImDsatChatItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'chatDurationHours': json['chat_duration_hours'] == null ? undefined : json['chat_duration_hours'],

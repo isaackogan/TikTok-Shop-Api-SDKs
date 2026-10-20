@@ -65,6 +65,9 @@ export function GetProductResponseDataSkuGlobalListingPolicyFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSkuGlobalListingPolicy: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inventoryType': json['inventory_type'] == null ? undefined : json['inventory_type'],

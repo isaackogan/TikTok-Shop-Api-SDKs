@@ -43,6 +43,9 @@ export function CreateVideoPrecheckTaskRequestVideoInfoFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateVideoPrecheckTaskRequestVideoInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'fileId': json['file_id'],

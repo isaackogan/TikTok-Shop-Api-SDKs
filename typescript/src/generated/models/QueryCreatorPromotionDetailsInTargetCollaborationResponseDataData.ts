@@ -50,6 +50,9 @@ export function QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryCreatorPromotionDetailsInTargetCollaborationResponseDataData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productDetails': json['product_details'] == null ? undefined : ((json['product_details'] as Array<any>).map(QueryCreatorPromotionDetailsInTargetCollaborationResponseDataDataProductDetailFromJSON)),

@@ -76,6 +76,9 @@ export function GetShowcaseProductsResponseDataProductPriceFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShowcaseProductsResponseDataProductPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'originalPrice': json['original_price'] == null ? undefined : GetShowcaseProductsResponseDataProductPriceOriginalPriceFromJSON(json['original_price']),

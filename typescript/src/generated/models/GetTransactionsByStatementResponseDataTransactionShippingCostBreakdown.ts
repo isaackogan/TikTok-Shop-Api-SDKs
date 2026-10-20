@@ -217,6 +217,9 @@ export function GetTransactionsByStatementResponseDataTransactionShippingCostBre
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTransactionsByStatementResponseDataTransactionShippingCostBreakdown: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'actualShippingFeeAmount': json['actual_shipping_fee_amount'] == null ? undefined : json['actual_shipping_fee_amount'],

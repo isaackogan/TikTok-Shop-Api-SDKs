@@ -60,6 +60,9 @@ export function GetShopSKPPSummaryResponseDataShopSummaryFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopSKPPSummaryResponseDataShopSummary: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'qualifiedProductsCount': json['qualified_products_count'] == null ? undefined : json['qualified_products_count'],

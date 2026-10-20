@@ -62,6 +62,9 @@ export function GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataP
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomGMVAndOrderTrendsResponseDataGmvTrendPerformanceDataPoint: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderCount': json['order_count'] == null ? undefined : json['order_count'],

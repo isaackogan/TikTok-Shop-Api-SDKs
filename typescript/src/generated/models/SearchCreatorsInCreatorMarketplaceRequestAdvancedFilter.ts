@@ -70,6 +70,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestAdvancedFilterFromJSONT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequestAdvancedFilter: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'contentPreferenceType': json['content_preference_type'] == null ? undefined : json['content_preference_type'],

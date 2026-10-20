@@ -265,6 +265,9 @@ export function PartialEditProductRequestSkuFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequestSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'externalListPrices': json['external_list_prices'] == null ? undefined : ((json['external_list_prices'] as Array<any>).map(PartialEditProductRequestSkuExternalListPriceFromJSON)),

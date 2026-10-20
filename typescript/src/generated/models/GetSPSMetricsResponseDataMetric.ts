@@ -122,6 +122,9 @@ export function GetSPSMetricsResponseDataMetricFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricsResponseDataMetric: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'benchmarks': json['benchmarks'] == null ? undefined : BenchmarkFromJSON(json['benchmarks']),

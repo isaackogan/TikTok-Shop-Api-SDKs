@@ -58,6 +58,9 @@ export function GetPODCustomizationDetailsRequestFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPODCustomizationDetailsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'mainOrderId': json['main_order_id'],

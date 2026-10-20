@@ -72,6 +72,9 @@ export function GenerateGeneralSharingLinksResponseDataSharingLinkFromJSONTyped(
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GenerateGeneralSharingLinksResponseDataSharingLink: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'materialId': json['material_id'] == null ? undefined : json['material_id'],

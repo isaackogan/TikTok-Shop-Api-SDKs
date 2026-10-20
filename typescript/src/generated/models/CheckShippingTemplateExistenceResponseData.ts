@@ -42,6 +42,9 @@ export function CheckShippingTemplateExistenceResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckShippingTemplateExistenceResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'templateExist': json['template_exist'] == null ? undefined : json['template_exist'],

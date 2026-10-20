@@ -49,6 +49,9 @@ export function ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItem
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionLineItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnLineItemId': json['return_line_item_id'],

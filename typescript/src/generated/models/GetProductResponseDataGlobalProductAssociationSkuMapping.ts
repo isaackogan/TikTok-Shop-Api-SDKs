@@ -62,6 +62,9 @@ export function GetProductResponseDataGlobalProductAssociationSkuMappingFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataGlobalProductAssociationSkuMapping: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalSkuId': json['global_sku_id'] == null ? undefined : json['global_sku_id'],

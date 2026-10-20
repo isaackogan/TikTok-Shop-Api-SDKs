@@ -50,6 +50,9 @@ export function UploadShoppableVideoFileResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadShoppableVideoFileResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'videoFile': json['video_file'] == null ? undefined : UploadShoppableVideoFileResponseDataVideoFileFromJSON(json['video_file']),

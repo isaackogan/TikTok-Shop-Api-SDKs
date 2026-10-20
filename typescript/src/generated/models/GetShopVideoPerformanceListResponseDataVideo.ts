@@ -253,6 +253,9 @@ export function GetShopVideoPerformanceListResponseDataVideoFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideoPerformanceListResponseDataVideo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'advertisable': json['advertisable'] == null ? undefined : json['advertisable'],

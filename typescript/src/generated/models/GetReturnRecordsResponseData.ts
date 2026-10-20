@@ -50,6 +50,9 @@ export function GetReturnRecordsResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetReturnRecordsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'records': json['records'] == null ? undefined : ((json['records'] as Array<any>).map(GetReturnRecordsResponseDataRecordFromJSON)),

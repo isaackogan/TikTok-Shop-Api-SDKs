@@ -51,6 +51,9 @@ export function DiscountDetailFromJSONTyped(json: any, ignoreDiscriminator: bool
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DiscountDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'discountLevel': json['discount_level'] == null ? undefined : json['discount_level'],

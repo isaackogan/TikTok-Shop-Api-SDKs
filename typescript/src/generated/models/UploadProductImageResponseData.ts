@@ -75,6 +75,9 @@ export function UploadProductImageResponseDataFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadProductImageResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'uri': json['uri'] == null ? undefined : json['uri'],

@@ -84,6 +84,9 @@ export function EditOpenCollaborationSampleRuleRequestSampleRuleFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`EditOpenCollaborationSampleRuleRequestSampleRule: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sampleQuota': json['sample_quota'] == null ? undefined : json['sample_quota'],

@@ -91,6 +91,9 @@ export function GetShopProductPerformanceDetailResponseDataPerformanceFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopProductPerformanceDetailResponseDataPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'intervals': json['intervals'] == null ? undefined : ((json['intervals'] as Array<any>).map(GetShopProductPerformanceDetailResponseDataPerformanceIntervalFromJSON)),

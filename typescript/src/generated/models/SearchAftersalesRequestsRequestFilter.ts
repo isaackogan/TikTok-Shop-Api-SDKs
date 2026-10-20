@@ -112,6 +112,9 @@ export function SearchAftersalesRequestsRequestFilterFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchAftersalesRequestsRequestFilter: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'aftersalesRequestIds': json['aftersales_request_ids'] == null ? undefined : json['aftersales_request_ids'],

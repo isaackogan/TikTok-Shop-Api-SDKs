@@ -50,6 +50,9 @@ export function GetLiveRoomInteractiveTrendsResponseDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomInteractiveTrendsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'interactiveTrendPerformances': json['interactive_trend_performances'] == null ? undefined : ((json['interactive_trend_performances'] as Array<any>).map(GetLiveRoomInteractiveTrendsResponseDataInteractiveTrendPerformanceFromJSON)),

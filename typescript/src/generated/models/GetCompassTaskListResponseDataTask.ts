@@ -63,6 +63,9 @@ export function GetCompassTaskListResponseDataTaskFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCompassTaskListResponseDataTask: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'moduleType': json['module_type'] == null ? undefined : json['module_type'],

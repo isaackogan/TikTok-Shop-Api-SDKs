@@ -62,6 +62,9 @@ export function ProductTagOperationFromJSONTyped(json: any, ignoreDiscriminator:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ProductTagOperation: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productTag': json['product_tag'],

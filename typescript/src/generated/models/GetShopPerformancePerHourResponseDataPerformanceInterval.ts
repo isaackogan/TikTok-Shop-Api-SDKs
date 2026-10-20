@@ -182,6 +182,9 @@ export function GetShopPerformancePerHourResponseDataPerformanceIntervalFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopPerformancePerHourResponseDataPerformanceInterval: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgOrderValue': json['avg_order_value'] == null ? undefined : AvgOrderValueFromJSON(json['avg_order_value']),

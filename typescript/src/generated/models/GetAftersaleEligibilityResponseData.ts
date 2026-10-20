@@ -50,6 +50,9 @@ export function GetAftersaleEligibilityResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAftersaleEligibilityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'skuEligibility': json['sku_eligibility'] == null ? undefined : ((json['sku_eligibility'] as Array<any>).map(GetAftersaleEligibilityResponseDataSkuEligibilityFromJSON)),

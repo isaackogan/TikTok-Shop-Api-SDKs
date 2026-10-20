@@ -63,6 +63,9 @@ export function GetCreatorMarketplaceAdvancedSearchFiltersResponseDataDataFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorMarketplaceAdvancedSearchFiltersResponseDataData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'optionList': json['option_list'] == null ? undefined : ((json['option_list'] as Array<any>).map(GetCreatorMarketplaceAdvancedSearchFiltersResponseDataDataOptionListFromJSON)),

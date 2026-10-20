@@ -74,6 +74,9 @@ export function UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateTheBlindBoxOpeningResultsRequestBlindBatchBoxResultBlindBoxOrderLineList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'blindResultProductId': json['blind_result_product_id'] == null ? undefined : json['blind_result_product_id'],

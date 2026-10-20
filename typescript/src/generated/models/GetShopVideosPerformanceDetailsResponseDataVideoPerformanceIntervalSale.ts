@@ -50,6 +50,9 @@ export function GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInter
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSale: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'overall': json['overall'] == null ? undefined : GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverallFromJSON(json['overall']),

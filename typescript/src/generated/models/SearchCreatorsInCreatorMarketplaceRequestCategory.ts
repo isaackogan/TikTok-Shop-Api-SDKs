@@ -48,6 +48,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestCategoryFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequestCategory: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'parentCategoryId': json['parent_category_id'] == null ? undefined : json['parent_category_id'],

@@ -52,6 +52,9 @@ export function ListAvailableInboundMethodsResponseDataAvailableInboundMethodLis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'startTimestamp': json['start_timestamp'] == null ? undefined : json['start_timestamp'],

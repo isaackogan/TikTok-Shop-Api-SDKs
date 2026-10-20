@@ -60,6 +60,9 @@ export function PartialEditProductRequestSubscribeInfoEditFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequestSubscribeInfoEdit: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'subscribeStatus': json['subscribe_status'] == null ? undefined : json['subscribe_status'],

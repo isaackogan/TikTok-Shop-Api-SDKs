@@ -62,6 +62,9 @@ export function SearchReturnsResponseDataFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchReturnsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnOrders': json['return_orders'] == null ? undefined : ((json['return_orders'] as Array<any>).map(SearchReturnsResponseDataReturnOrderFromJSON)),

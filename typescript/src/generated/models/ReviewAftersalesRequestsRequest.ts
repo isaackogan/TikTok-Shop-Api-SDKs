@@ -50,6 +50,9 @@ export function ReviewAftersalesRequestsRequestFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReviewAftersalesRequestsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'aftersalesRequestDecisions': json['aftersales_request_decisions'] == null ? undefined : ((json['aftersales_request_decisions'] as Array<any>).map(ReviewAftersalesRequestsRequestAftersalesRequestDecisionFromJSON)),

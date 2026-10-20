@@ -63,6 +63,9 @@ export function TimeFromJSONTyped(json: any, ignoreDiscriminator: boolean): Time
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Time: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'createTime': json['create_time'] == null ? undefined : CreateTimeFromJSON(json['create_time']),

@@ -51,6 +51,9 @@ export function PrintInboundOrderLabelsResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PrintInboundOrderLabelsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'downloadUrl': json['download_url'] == null ? undefined : json['download_url'],

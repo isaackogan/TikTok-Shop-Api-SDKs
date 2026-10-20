@@ -50,6 +50,9 @@ export function GetOpenCollaborationSettingsResponseDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpenCollaborationSettingsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'openCollaborationSettings': json['open_collaboration_settings'] == null ? undefined : GetOpenCollaborationSettingsResponseDataOpenCollaborationSettingFromJSON(json['open_collaboration_settings']),

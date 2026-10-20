@@ -50,6 +50,9 @@ export function CreateVideoPrecheckTaskResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateVideoPrecheckTaskResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'precheck': json['precheck'] == null ? undefined : CreateVideoPrecheckTaskResponseDataPrecheckFromJSON(json['precheck']),

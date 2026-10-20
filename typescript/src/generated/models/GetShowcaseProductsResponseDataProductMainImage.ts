@@ -54,6 +54,9 @@ export function GetShowcaseProductsResponseDataProductMainImageFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShowcaseProductsResponseDataProductMainImage: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'width': json['width'] == null ? undefined : json['width'],

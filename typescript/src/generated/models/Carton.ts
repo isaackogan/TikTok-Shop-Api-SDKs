@@ -100,6 +100,9 @@ export function CartonFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ca
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Carton: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cartonType': json['carton_type'],

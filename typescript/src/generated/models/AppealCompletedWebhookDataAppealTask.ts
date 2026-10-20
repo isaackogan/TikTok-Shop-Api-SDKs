@@ -63,6 +63,9 @@ export function AppealCompletedWebhookDataAppealTaskFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AppealCompletedWebhookDataAppealTask: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sizeChartId': json['size_chart_id'] == null ? undefined : json['size_chart_id'],

@@ -81,6 +81,9 @@ export function GetProductResponseDataCertificationFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataCertification: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'expirationDate': json['expiration_date'] == null ? undefined : json['expiration_date'],

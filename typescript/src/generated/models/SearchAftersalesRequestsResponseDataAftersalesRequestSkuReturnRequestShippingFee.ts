@@ -54,6 +54,9 @@ export function SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRe
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sellerPaidReturnShippingFeeAmount': json['seller_paid_return_shipping_fee_amount'] == null ? undefined : json['seller_paid_return_shipping_fee_amount'],

@@ -60,6 +60,9 @@ export function SearchSellerAffiliateOrdersRequestFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchSellerAffiliateOrdersRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'createTimeLt': json['create_time_lt'] == null ? undefined : json['create_time_lt'],

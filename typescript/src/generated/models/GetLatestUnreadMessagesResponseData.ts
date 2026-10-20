@@ -50,6 +50,9 @@ export function GetLatestUnreadMessagesResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLatestUnreadMessagesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'newestMessageList': json['newest_message_list'] == null ? undefined : ((json['newest_message_list'] as Array<any>).map(GetLatestUnreadMessagesResponseDataNewestMessageListFromJSON)),

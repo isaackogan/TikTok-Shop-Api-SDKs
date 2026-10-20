@@ -50,6 +50,9 @@ export function GetTradeInSupplierAccountBalanceResponseDataFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTradeInSupplierAccountBalanceResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'availableBalance': json['available_balance'] == null ? undefined : GetTradeInSupplierAccountBalanceResponseDataAvailableBalanceFromJSON(json['available_balance']),

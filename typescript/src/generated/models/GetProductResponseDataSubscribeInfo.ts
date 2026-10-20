@@ -77,6 +77,9 @@ export function GetProductResponseDataSubscribeInfoFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSubscribeInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'subscribeDiscountDetails': json['subscribe_discount_details'] == null ? undefined : ((json['subscribe_discount_details'] as Array<any>).map(GetProductResponseDataSubscribeInfoSubscribeDiscountDetailFromJSON)),

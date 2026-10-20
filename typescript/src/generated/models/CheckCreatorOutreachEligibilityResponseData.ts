@@ -62,6 +62,9 @@ export function CheckCreatorOutreachEligibilityResponseDataFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckCreatorOutreachEligibilityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorEligibilityResults': json['creator_eligibility_results'] == null ? undefined : ((json['creator_eligibility_results'] as Array<any>).map(CheckCreatorOutreachEligibilityResponseDataCreatorEligibilityResultFromJSON)),

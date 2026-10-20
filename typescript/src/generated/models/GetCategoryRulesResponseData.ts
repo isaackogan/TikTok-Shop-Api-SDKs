@@ -177,6 +177,9 @@ export function GetCategoryRulesResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCategoryRulesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productCertifications': json['product_certifications'] == null ? undefined : ((json['product_certifications'] as Array<any>).map(GetCategoryRulesResponseDataProductCertificationFromJSON)),

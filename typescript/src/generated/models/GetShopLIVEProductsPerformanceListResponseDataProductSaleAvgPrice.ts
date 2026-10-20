@@ -48,6 +48,9 @@ export function GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPric
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEProductsPerformanceListResponseDataProductSaleAvgPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'currency': json['currency'] == null ? undefined : json['currency'],

@@ -88,6 +88,9 @@ export function GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRuleFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetWeeklyCreatorOutreachQuotaResponseDataDataGmvLevelRule: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'reachedMaxFollowerCnt': json['reached_max_follower_cnt'] == null ? undefined : json['reached_max_follower_cnt'],

@@ -62,6 +62,9 @@ export function SearchCancellationsResponseDataFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCancellationsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cancellations': json['cancellations'] == null ? undefined : ((json['cancellations'] as Array<any>).map(SearchCancellationsResponseDataCancellationFromJSON)),

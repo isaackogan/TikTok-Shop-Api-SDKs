@@ -62,6 +62,9 @@ export function SearchCombinablePackagesResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCombinablePackagesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'combinablePackages': json['combinable_packages'] == null ? undefined : ((json['combinable_packages'] as Array<any>).map(SearchCombinablePackagesResponseDataCombinablePackageFromJSON)),

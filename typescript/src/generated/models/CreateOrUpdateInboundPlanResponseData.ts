@@ -50,6 +50,9 @@ export function CreateOrUpdateInboundPlanResponseDataFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateOrUpdateInboundPlanResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inboundPlan': json['inbound_plan'] == null ? undefined : CreateOrUpdateInboundPlanResponseDataInboundPlanFromJSON(json['inbound_plan']),

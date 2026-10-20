@@ -49,6 +49,9 @@ export function UnboxingCaseListFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UnboxingCaseList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'unboxSku': json['unbox_sku'] == null ? undefined : json['unbox_sku'],

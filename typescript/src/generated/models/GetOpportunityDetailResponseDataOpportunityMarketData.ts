@@ -78,6 +78,9 @@ export function GetOpportunityDetailResponseDataOpportunityMarketDataFromJSONTyp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpportunityDetailResponseDataOpportunityMarketData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'estMarketSalesVolume': json['est_market_sales_volume'] == null ? undefined : json['est_market_sales_volume'],

@@ -144,6 +144,9 @@ export function SearchOpenCollaborationProductsResponseDataProductFromJSONTyped(
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchOpenCollaborationProductsResponseDataProduct: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shop': json['shop'] == null ? undefined : ShopFromJSON(json['shop']),

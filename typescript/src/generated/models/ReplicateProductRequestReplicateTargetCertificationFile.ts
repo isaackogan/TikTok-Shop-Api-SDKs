@@ -57,6 +57,9 @@ export function ReplicateProductRequestReplicateTargetCertificationFileFromJSONT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReplicateProductRequestReplicateTargetCertificationFile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'format': json['format'] == null ? undefined : json['format'],

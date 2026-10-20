@@ -82,6 +82,9 @@ export function PostShoppablePhotosRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PostShoppablePhotosRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'photosInfo': ((json['photos_info'] as Array<any>).map(PostShoppablePhotosRequestPhotosInfoFromJSON)),

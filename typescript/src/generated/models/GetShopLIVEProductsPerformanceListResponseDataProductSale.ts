@@ -99,6 +99,9 @@ export function GetShopLIVEProductsPerformanceListResponseDataProductSaleFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEProductsPerformanceListResponseDataProductSale: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'directGmv': json['direct_gmv'] == null ? undefined : GetShopLIVEProductsPerformanceListResponseDataProductSaleDirectGmvFromJSON(json['direct_gmv']),

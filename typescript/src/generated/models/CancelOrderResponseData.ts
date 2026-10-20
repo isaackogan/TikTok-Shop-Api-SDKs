@@ -53,6 +53,9 @@ export function CancelOrderResponseDataFromJSONTyped(json: any, ignoreDiscrimina
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CancelOrderResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'cancelId': json['cancel_id'] == null ? undefined : json['cancel_id'],

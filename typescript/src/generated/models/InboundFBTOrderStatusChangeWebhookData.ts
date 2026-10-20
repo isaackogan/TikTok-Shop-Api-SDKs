@@ -60,6 +60,9 @@ export function InboundFBTOrderStatusChangeWebhookDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`InboundFBTOrderStatusChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inboundOrderId': json['inbound_order_id'] == null ? undefined : json['inbound_order_id'],

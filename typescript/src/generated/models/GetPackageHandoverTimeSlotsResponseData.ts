@@ -74,6 +74,9 @@ export function GetPackageHandoverTimeSlotsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPackageHandoverTimeSlotsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'canPickup': json['can_pickup'] == null ? undefined : json['can_pickup'],

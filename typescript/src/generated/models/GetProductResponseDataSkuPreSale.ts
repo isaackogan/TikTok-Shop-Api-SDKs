@@ -66,6 +66,9 @@ export function GetProductResponseDataSkuPreSaleFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSkuPreSale: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'fulfillmentType': json['fulfillment_type'] == null ? undefined : FulfillmentTypeFromJSON(json['fulfillment_type']),

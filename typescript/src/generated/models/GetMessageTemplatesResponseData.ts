@@ -50,6 +50,9 @@ export function GetMessageTemplatesResponseDataFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetMessageTemplatesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'messageTemplates': json['message_templates'] == null ? undefined : ((json['message_templates'] as Array<any>).map(GetMessageTemplatesResponseDataMessageTemplateFromJSON)),

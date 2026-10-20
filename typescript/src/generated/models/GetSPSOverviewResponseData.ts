@@ -137,6 +137,9 @@ export function GetSPSOverviewResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSOverviewResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'benefits': json['benefits'] == null ? undefined : ((json['benefits'] as Array<any>).map(GetSPSOverviewResponseDataBenefitFromJSON)),

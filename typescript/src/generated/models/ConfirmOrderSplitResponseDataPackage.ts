@@ -48,6 +48,9 @@ export function ConfirmOrderSplitResponseDataPackageFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ConfirmOrderSplitResponseDataPackage: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'splittableGroupId': json['splittable_group_id'] == null ? undefined : json['splittable_group_id'],

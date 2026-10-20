@@ -42,6 +42,9 @@ export function MapTokopediaToTikTokShopProductIDsRequestFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`MapTokopediaToTikTokShopProductIDsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'tokoPids': json['toko_pids'] == null ? undefined : json['toko_pids'],

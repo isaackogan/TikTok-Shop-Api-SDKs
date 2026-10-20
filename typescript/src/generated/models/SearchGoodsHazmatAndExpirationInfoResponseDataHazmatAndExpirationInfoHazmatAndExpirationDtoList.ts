@@ -80,6 +80,9 @@ export function SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpiratio
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsHazmatAndExpirationInfoResponseDataHazmatAndExpirationInfoHazmatAndExpirationDtoList: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ttsSkuId': json['tts_sku_id'] == null ? undefined : json['tts_sku_id'],

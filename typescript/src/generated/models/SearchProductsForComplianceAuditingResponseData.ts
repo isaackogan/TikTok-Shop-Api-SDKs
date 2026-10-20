@@ -62,6 +62,9 @@ export function SearchProductsForComplianceAuditingResponseDataFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchProductsForComplianceAuditingResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'nextPageToken': json['next_page_token'] == null ? undefined : json['next_page_token'],

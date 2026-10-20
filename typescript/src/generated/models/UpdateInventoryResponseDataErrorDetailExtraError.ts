@@ -54,6 +54,9 @@ export function UpdateInventoryResponseDataErrorDetailExtraErrorFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateInventoryResponseDataErrorDetailExtraError: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'warehouseId': json['warehouse_id'] == null ? undefined : json['warehouse_id'],

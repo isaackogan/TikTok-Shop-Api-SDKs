@@ -50,6 +50,9 @@ export function GetFBTMerchantOnboardedRegionsResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetFBTMerchantOnboardedRegionsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'onboardedRegions': json['onboarded_regions'] == null ? undefined : ((json['onboarded_regions'] as Array<any>).map(GetFBTMerchantOnboardedRegionsResponseDataOnboardedRegionFromJSON)),

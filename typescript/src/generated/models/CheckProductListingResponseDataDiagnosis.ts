@@ -75,6 +75,9 @@ export function CheckProductListingResponseDataDiagnosisFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckProductListingResponseDataDiagnosis: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'field': json['field'] == null ? undefined : json['field'],

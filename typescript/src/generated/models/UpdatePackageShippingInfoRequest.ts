@@ -52,6 +52,9 @@ export function UpdatePackageShippingInfoRequestFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdatePackageShippingInfoRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shippingInfoList': ((json['shipping_info_list'] as Array<any>).map(ShippingInfoListFromJSON)),

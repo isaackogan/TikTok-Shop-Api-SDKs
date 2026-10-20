@@ -119,6 +119,9 @@ export function SearchGoodsInfoResponseDataGoodHazmatInfoFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsInfoResponseDataGoodHazmatInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'hazmatType': json['hazmat_type'] == null ? undefined : json['hazmat_type'],

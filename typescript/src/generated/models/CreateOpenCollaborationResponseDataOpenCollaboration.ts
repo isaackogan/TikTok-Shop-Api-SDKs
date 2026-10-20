@@ -54,6 +54,9 @@ export function CreateOpenCollaborationResponseDataOpenCollaborationFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateOpenCollaborationResponseDataOpenCollaboration: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'id': json['id'] == null ? undefined : json['id'],

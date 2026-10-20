@@ -50,6 +50,9 @@ export function GetSPSMetricsResponseDataFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'metrics': json['metrics'] == null ? undefined : ((json['metrics'] as Array<any>).map(GetSPSMetricsResponseDataMetricFromJSON)),

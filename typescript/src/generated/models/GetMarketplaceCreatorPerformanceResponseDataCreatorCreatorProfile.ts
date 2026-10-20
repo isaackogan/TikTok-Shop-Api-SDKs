@@ -171,6 +171,9 @@ export function GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfil
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetMarketplaceCreatorPerformanceResponseDataCreatorCreatorProfile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isOfficialRecommend': json['is_official_recommend'] == null ? undefined : json['is_official_recommend'],

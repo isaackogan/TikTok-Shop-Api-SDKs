@@ -48,6 +48,9 @@ export function AvailableRejectReasonFromJSONTyped(json: any, ignoreDiscriminato
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AvailableRejectReason: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'name': json['name'] == null ? undefined : json['name'],

@@ -65,6 +65,9 @@ export function GetPackageDetailResponseDataInsuranceFromJSONTyped(json: any, ig
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetPackageDetailResponseDataInsurance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'isPurchased': json['is_purchased'] == null ? undefined : json['is_purchased'],

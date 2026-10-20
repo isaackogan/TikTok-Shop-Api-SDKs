@@ -48,6 +48,9 @@ export function AerosolExtraInfoFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`AerosolExtraInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'volume': json['volume'] == null ? undefined : json['volume'],

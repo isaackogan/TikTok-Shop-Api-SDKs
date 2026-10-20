@@ -50,6 +50,9 @@ export function RecommendCategoryRequestOriginPlatformProductMetaDataFromJSONTyp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RecommendCategoryRequestOriginPlatformProductMetaData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'attributeValueList': json['attribute_value_list'] == null ? undefined : ((json['attribute_value_list'] as Array<any>).map(RecommendCategoryRequestOriginPlatformProductMetaDataAttributeValueListFromJSON)),

@@ -62,6 +62,9 @@ export function SearchSizeChartsResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchSizeChartsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sizeChart': json['size_chart'] == null ? undefined : ((json['size_chart'] as Array<any>).map(SearchSizeChartsResponseDataSizeChartFromJSON)),

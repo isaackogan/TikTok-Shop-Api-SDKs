@@ -89,6 +89,9 @@ export function DiscountFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Discount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shippingDiscount': json['shipping_discount'] == null ? undefined : ShippingDiscountFromJSON(json['shipping_discount']),

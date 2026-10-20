@@ -49,6 +49,9 @@ export function SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollower
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'gender': json['gender'] == null ? undefined : json['gender'],

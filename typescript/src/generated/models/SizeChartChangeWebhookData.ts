@@ -63,6 +63,9 @@ export function SizeChartChangeWebhookDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SizeChartChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sizeChartTemplateId': json['size_chart_template_id'] == null ? undefined : json['size_chart_template_id'],

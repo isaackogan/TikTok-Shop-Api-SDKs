@@ -48,6 +48,9 @@ export function UpdateAgentSettingsRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateAgentSettingsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'canAcceptChat': json['can_accept_chat'],

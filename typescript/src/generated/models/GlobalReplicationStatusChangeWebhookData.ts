@@ -56,6 +56,9 @@ export function GlobalReplicationStatusChangeWebhookDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GlobalReplicationStatusChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sourceProductId': json['source_product_id'] == null ? undefined : json['source_product_id'],

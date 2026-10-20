@@ -63,6 +63,9 @@ export function GetVideoPerformancesResponseDataVideoPerformanceFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetVideoPerformancesResponseDataVideoPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'timeRange': json['time_range'] == null ? undefined : GetVideoPerformancesResponseDataVideoPerformanceTimeRangeFromJSON(json['time_range']),

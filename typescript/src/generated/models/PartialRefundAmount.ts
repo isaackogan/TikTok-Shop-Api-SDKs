@@ -48,6 +48,9 @@ export function PartialRefundAmountFromJSONTyped(json: any, ignoreDiscriminator:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialRefundAmount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'partialRefundTotal': json['partial_refund_total'] == null ? undefined : json['partial_refund_total'],

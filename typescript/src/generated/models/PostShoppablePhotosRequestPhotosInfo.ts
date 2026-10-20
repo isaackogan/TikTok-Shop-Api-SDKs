@@ -43,6 +43,9 @@ export function PostShoppablePhotosRequestPhotosInfoFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PostShoppablePhotosRequestPhotosInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'photoFileUris': json['photo_file_uris'],

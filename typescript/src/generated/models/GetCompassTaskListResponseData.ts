@@ -50,6 +50,9 @@ export function GetCompassTaskListResponseDataFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCompassTaskListResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'tasks': json['tasks'] == null ? undefined : ((json['tasks'] as Array<any>).map(GetCompassTaskListResponseDataTaskFromJSON)),

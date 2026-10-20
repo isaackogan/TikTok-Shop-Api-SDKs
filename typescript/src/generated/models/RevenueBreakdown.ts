@@ -83,6 +83,9 @@ export function RevenueBreakdownFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RevenueBreakdown: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'subtotalBeforeDiscountAmount': json['subtotal_before_discount_amount'] == null ? undefined : json['subtotal_before_discount_amount'],

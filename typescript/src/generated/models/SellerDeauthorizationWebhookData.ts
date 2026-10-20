@@ -42,6 +42,9 @@ export function SellerDeauthorizationWebhookDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SellerDeauthorizationWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'message': json['message'] == null ? undefined : json['message'],

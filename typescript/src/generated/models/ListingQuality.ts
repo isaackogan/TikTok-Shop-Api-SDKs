@@ -59,6 +59,9 @@ export function ListingQualityFromJSONTyped(json: any, ignoreDiscriminator: bool
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListingQuality: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'currentTier': json['current_tier'] == null ? undefined : json['current_tier'],

@@ -84,6 +84,9 @@ export function GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteracti
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopLIVEPerformanceListResponseDataLiveStreamSessionInteractionPerformance: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'commentRate': json['comment_rate'] == null ? undefined : json['comment_rate'],

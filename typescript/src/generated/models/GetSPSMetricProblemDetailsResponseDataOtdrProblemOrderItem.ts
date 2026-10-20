@@ -66,6 +66,9 @@ export function GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItemFromJS
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricProblemDetailsResponseDataOtdrProblemOrderItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'actualDeliverTime': json['actual_deliver_time'] == null ? undefined : json['actual_deliver_time'],

@@ -42,6 +42,9 @@ export function CreateAffiliatePartnerCampaignResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateAffiliatePartnerCampaignResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'campaignId': json['campaign_id'] == null ? undefined : json['campaign_id'],

@@ -153,6 +153,9 @@ export function GetLiveRoomProductStatsResponseDataProductStatFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomProductStatsResponseDataProductStat: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'mainImageUrl': json['main_image_url'] == null ? undefined : json['main_image_url'],

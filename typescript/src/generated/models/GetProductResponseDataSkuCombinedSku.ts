@@ -158,6 +158,9 @@ export function GetProductResponseDataSkuCombinedSkuFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSkuCombinedSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'brand': json['brand'] == null ? undefined : BrandFromJSON(json['brand']),

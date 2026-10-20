@@ -62,6 +62,9 @@ export function GetShopProductPerformanceDetailResponseDataPerformanceIntervalSa
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopProductPerformanceDetailResponseDataPerformanceIntervalSaleBreakdownSale: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'gmv': json['gmv'] == null ? undefined : GmvFromJSON(json['gmv']),

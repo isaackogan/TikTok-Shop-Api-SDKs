@@ -50,6 +50,9 @@ export function GetInboxCategoryCountsResponseDataDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetInboxCategoryCountsResponseDataData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'groupCounts': json['group_counts'] == null ? undefined : ((json['group_counts'] as Array<any>).map(GetInboxCategoryCountsResponseDataDataGroupCountFromJSON)),

@@ -58,6 +58,9 @@ export function GetAffiliateCampaignCreatorProductSampleStatusResponseDataSample
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAffiliateCampaignCreatorProductSampleStatusResponseDataSampleStatusTrackingResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'trackingEventUpdateDate': json['tracking_event_update_date'] == null ? undefined : json['tracking_event_update_date'],

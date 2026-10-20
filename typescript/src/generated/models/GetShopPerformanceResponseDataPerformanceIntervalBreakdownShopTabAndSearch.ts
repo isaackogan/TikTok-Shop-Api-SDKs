@@ -76,6 +76,9 @@ export function GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTa
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearch: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'others': json['others'] == null ? undefined : GetShopPerformanceResponseDataPerformanceIntervalBreakdownShopTabAndSearchOtherFromJSON(json['others']),

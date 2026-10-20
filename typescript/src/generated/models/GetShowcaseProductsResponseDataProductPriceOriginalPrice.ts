@@ -54,6 +54,9 @@ export function GetShowcaseProductsResponseDataProductPriceOriginalPriceFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShowcaseProductsResponseDataProductPriceOriginalPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'minimumAmount': json['minimum_amount'] == null ? undefined : json['minimum_amount'],

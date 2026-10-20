@@ -50,6 +50,9 @@ export function GetCouponResponseDataFromJSONTyped(json: any, ignoreDiscriminato
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCouponResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'coupon': json['coupon'] == null ? undefined : GetCouponResponseDataCouponFromJSON(json['coupon']),

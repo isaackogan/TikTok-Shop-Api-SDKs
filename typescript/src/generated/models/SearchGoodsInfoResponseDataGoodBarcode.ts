@@ -55,6 +55,9 @@ export function SearchGoodsInfoResponseDataGoodBarcodeFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGoodsInfoResponseDataGoodBarcode: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'code': json['code'] == null ? undefined : json['code'],

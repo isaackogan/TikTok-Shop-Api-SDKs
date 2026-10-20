@@ -62,6 +62,9 @@ export function SearchManufacturersResponseDataFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchManufacturersResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'manufacturers': json['manufacturers'] == null ? undefined : ((json['manufacturers'] as Array<any>).map(SearchManufacturersResponseDataManufacturerFromJSON)),

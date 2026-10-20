@@ -44,6 +44,9 @@ export function GetConversationListRequestFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetConversationListRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'onlyNeedConversationId': json['only_need_conversation_id'] == null ? undefined : json['only_need_conversation_id'],

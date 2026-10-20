@@ -56,6 +56,9 @@ export function GetProductResponseDataGlobalProductAssociationFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataGlobalProductAssociation: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'globalProductId': json['global_product_id'] == null ? undefined : json['global_product_id'],

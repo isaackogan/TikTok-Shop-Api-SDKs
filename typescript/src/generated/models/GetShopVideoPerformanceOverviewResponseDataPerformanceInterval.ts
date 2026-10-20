@@ -168,6 +168,9 @@ export function GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalFr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopVideoPerformanceOverviewResponseDataPerformanceInterval: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgDailyCustomers': json['avg_daily_customers'] == null ? undefined : json['avg_daily_customers'],

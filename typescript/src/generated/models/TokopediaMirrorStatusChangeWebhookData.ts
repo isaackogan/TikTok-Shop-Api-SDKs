@@ -57,6 +57,9 @@ export function TokopediaMirrorStatusChangeWebhookDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`TokopediaMirrorStatusChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ttsShopId': json['tts_shop_id'] == null ? undefined : json['tts_shop_id'],

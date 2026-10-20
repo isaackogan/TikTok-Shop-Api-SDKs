@@ -62,6 +62,9 @@ export function FulfillmentTypeFromJSONTyped(json: any, ignoreDiscriminator: boo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`FulfillmentType: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'handlingDurationDays': json['handling_duration_days'] == null ? undefined : json['handling_duration_days'],

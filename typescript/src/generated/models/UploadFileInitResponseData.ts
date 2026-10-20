@@ -48,6 +48,9 @@ export function UploadFileInitResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadFileInitResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'uploadUrl': json['upload_url'] == null ? undefined : json['upload_url'],

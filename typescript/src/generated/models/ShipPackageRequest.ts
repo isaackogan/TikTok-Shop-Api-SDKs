@@ -82,6 +82,9 @@ export function ShipPackageRequestFromJSONTyped(json: any, ignoreDiscriminator: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShipPackageRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'handoverMethod': json['handover_method'] == null ? undefined : json['handover_method'],

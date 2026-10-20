@@ -50,6 +50,9 @@ export function GetCreatorMarketplaceAdvancedSearchFiltersRequestFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorMarketplaceAdvancedSearchFiltersRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'options': json['options'] == null ? undefined : ((json['options'] as Array<any>).map(GetCreatorMarketplaceAdvancedSearchFiltersRequestOptionFromJSON)),

@@ -59,6 +59,9 @@ export function ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResu
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'status': json['status'] == null ? undefined : json['status'],

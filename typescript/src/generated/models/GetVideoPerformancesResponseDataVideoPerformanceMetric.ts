@@ -74,6 +74,9 @@ export function GetVideoPerformancesResponseDataVideoPerformanceMetricFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetVideoPerformancesResponseDataVideoPerformanceMetric: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'anchorDisplayRate': json['anchor_display_rate'] == null ? undefined : json['anchor_display_rate'],

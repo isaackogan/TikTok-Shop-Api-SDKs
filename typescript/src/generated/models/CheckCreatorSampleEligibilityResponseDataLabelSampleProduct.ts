@@ -50,6 +50,9 @@ export function CheckCreatorSampleEligibilityResponseDataLabelSampleProductFromJ
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckCreatorSampleEligibilityResponseDataLabelSampleProduct: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sampleSkuList': json['sample_sku_list'] == null ? undefined : ((json['sample_sku_list'] as Array<any>).map(CheckCreatorSampleEligibilityResponseDataLabelSampleProductSampleSkuListFromJSON)),

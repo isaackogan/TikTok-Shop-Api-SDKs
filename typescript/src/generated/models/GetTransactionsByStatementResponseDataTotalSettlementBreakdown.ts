@@ -61,6 +61,9 @@ export function GetTransactionsByStatementResponseDataTotalSettlementBreakdownFr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTransactionsByStatementResponseDataTotalSettlementBreakdown: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'totalRevenueAmount': json['total_revenue_amount'] == null ? undefined : json['total_revenue_amount'],

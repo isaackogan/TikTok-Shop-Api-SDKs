@@ -43,6 +43,9 @@ export function GetEngagementTaskPerformancesRequestFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetEngagementTaskPerformancesRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'taskIds': json['task_ids'],

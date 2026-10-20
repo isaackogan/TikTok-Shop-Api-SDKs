@@ -50,6 +50,9 @@ export function SearchOrdersByExternalOrderReferenceResponseDataFromJSONTyped(js
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchOrdersByExternalOrderReferenceResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orders': json['orders'] == null ? undefined : ((json['orders'] as Array<any>).map(SearchOrdersByExternalOrderReferenceResponseDataOrderFromJSON)),

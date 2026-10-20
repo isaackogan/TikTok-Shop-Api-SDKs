@@ -50,6 +50,9 @@ export function GetShippingProvidersResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShippingProvidersResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shippingProviders': json['shipping_providers'] == null ? undefined : ((json['shipping_providers'] as Array<any>).map(ShippingProviderFromJSON)),

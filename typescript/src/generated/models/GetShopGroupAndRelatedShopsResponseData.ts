@@ -50,6 +50,9 @@ export function GetShopGroupAndRelatedShopsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopGroupAndRelatedShopsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopGroupData': json['shop_group_data'] == null ? undefined : GetShopGroupAndRelatedShopsResponseDataShopGroupDataFromJSON(json['shop_group_data']),

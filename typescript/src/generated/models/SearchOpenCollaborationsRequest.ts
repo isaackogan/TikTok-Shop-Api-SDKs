@@ -69,6 +69,9 @@ export function SearchOpenCollaborationsRequestFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchOpenCollaborationsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'keywordType': json['keyword_type'] == null ? undefined : json['keyword_type'],

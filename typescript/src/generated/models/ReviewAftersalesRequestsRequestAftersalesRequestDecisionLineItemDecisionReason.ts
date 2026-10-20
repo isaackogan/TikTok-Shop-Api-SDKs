@@ -63,6 +63,9 @@ export function ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItem
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReason: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'reasonId': json['reason_id'] == null ? undefined : json['reason_id'],

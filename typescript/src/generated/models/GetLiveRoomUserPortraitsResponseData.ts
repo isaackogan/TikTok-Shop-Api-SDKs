@@ -128,6 +128,9 @@ export function GetLiveRoomUserPortraitsResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomUserPortraitsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'allAdsGenderIndicators': json['all_ads_gender_indicators'] == null ? undefined : ((json['all_ads_gender_indicators'] as Array<any>).map(GetLiveRoomUserPortraitsResponseDataAllAdsGenderIndicatorFromJSON)),

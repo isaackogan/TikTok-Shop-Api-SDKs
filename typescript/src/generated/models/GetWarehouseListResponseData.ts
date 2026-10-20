@@ -50,6 +50,9 @@ export function GetWarehouseListResponseDataFromJSONTyped(json: any, ignoreDiscr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetWarehouseListResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'warehouses': json['warehouses'] == null ? undefined : ((json['warehouses'] as Array<any>).map(GetWarehouseListResponseDataWarehouseFromJSON)),

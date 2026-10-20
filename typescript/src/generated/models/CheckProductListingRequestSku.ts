@@ -267,6 +267,9 @@ export function CheckProductListingRequestSkuFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckProductListingRequestSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'salesAttributes': json['sales_attributes'] == null ? undefined : ((json['sales_attributes'] as Array<any>).map(CheckProductListingRequestSkuSalesAttributeFromJSON)),

@@ -50,6 +50,9 @@ export function GetShoppableVideoStatusResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShoppableVideoStatusResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'video': json['video'] == null ? undefined : GetShoppableVideoStatusResponseDataVideoFromJSON(json['video']),

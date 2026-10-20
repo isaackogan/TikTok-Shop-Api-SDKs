@@ -48,6 +48,9 @@ export function GetSPSMetricDiagnosisResponseDataAnalysisFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricDiagnosisResponseDataAnalysis: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'summaries': json['summaries'] == null ? undefined : json['summaries'],

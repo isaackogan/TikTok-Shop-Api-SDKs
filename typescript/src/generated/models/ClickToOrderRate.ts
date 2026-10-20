@@ -48,6 +48,9 @@ export function ClickToOrderRateFromJSONTyped(json: any, ignoreDiscriminator: bo
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ClickToOrderRate: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'skuOrderCtor': json['sku_order_ctor'] == null ? undefined : json['sku_order_ctor'],

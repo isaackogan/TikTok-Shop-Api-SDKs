@@ -60,6 +60,9 @@ export function GetGlobalProductResponseDataPackageDimensionFromJSONTyped(json: 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetGlobalProductResponseDataPackageDimension: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'length': json['length'] == null ? undefined : json['length'],

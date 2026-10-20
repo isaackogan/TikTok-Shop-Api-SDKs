@@ -42,6 +42,9 @@ export function SeoWordFromJSONTyped(json: any, ignoreDiscriminator: boolean): S
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SeoWord: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'text': json['text'] == null ? undefined : json['text'],

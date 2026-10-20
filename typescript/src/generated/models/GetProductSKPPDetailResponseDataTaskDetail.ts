@@ -92,6 +92,9 @@ export function GetProductSKPPDetailResponseDataTaskDetailFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductSKPPDetailResponseDataTaskDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'category': json['category'] == null ? undefined : json['category'],

@@ -52,6 +52,9 @@ export function CreateCustomEngagementTaskRequestCustomMessageFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateCustomEngagementTaskRequestCustomMessage: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'title': json['title'] == null ? undefined : json['title'],

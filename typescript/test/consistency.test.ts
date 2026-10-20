@@ -239,8 +239,9 @@ describe('R12: unknown response fields decode', () => {
 });
 
 describe('R13d: a 2xx envelope that does not fit its model', () => {
-  // typescript-fetch's FromJSON copies scalars without checking their types (they arrive as sent), but it throws on a
-  // list or object of the wrong shape. That throw becomes a TikTokShopError with code -1.
+  // typescript-fetch's FromJSON copies scalars without checking their types (they arrive as sent). A list of the wrong
+  // shape makes it throw, and so does a value that isn't a JSON object where a model is expected (a fix-up in
+  // scripts/generate.ts). That throw becomes a TikTokShopError with code -1.
   it('a wrong-typed list is a TikTokShopError with code -1, httpStatus, requestId and the decoder error as cause', async () => {
     reply.body = '{"code":0,"message":"Success","request_id":"q9","data":{"skus":"not a list"}}';
     const err = await client().products.getProduct({ productId: '1' }).catch((e) => e);
@@ -248,12 +249,33 @@ describe('R13d: a 2xx envelope that does not fit its model', () => {
     expect([err.code, err.httpStatus, err.requestId]).toEqual([-1, 200, 'q9']);
     expect(err.cause).toBeInstanceOf(TypeError);
   });
-  it('a wrong-typed nested object is a TikTokShopError too', async () => {
+  it('a wrong-typed list inside a list item is a TikTokShopError too', async () => {
     reply.body = '{"code":0,"message":"Success","request_id":"q10","data":{"skus":[{"id":"1","sales_attributes":"not a list"}]}}';
     const err = await client().products.getProduct({ productId: '1' }).catch((e) => e);
     expect(err).toBeInstanceOf(TikTokShopError);
     expect([err.code, err.requestId]).toEqual([-1, 'q10']);
   });
+  it('a scalar where data should be an object is code -1 with httpStatus 200', async () => {
+    reply.body = '{"code":0,"message":"Success","request_id":"q11","data":"not an object"}';
+    const err = await client().products.getProduct({ productId: '1' }).catch((e) => e);
+    expect(err).toBeInstanceOf(TikTokShopError);
+    expect([err.code, err.httpStatus, err.requestId]).toEqual([-1, 200, 'q11']);
+    expect(err.cause).toBeInstanceOf(TypeError);
+  });
+  const nested: [string, string][] = [
+    ['a number for a nested object', '{"brand":5}'],
+    ['a list for a nested object', '{"brand":[{"id":"1"}]}'],
+    ['a string for an object inside a list item', '{"skus":[{"id":"1","price":"not an object"}]}'],
+    ['a string for a list item', '{"skus":["not an object"]}'],
+  ];
+  for (const [name, data] of nested) {
+    it(`a wrong-typed nested object is code -1 too: ${name}`, async () => {
+      reply.body = `{"code":0,"message":"Success","request_id":"q12","data":${data}}`;
+      const err = await client().products.getProduct({ productId: '1' }).catch((e) => e);
+      expect(err).toBeInstanceOf(TikTokShopError);
+      expect([err.code, err.httpStatus, err.requestId]).toEqual([-1, 200, 'q12']);
+    });
+  }
   it('a wrong-typed scalar is returned as sent (documented leniency)', async () => {
     reply.body = '{"code":0,"message":"Success","request_id":"r","data":{"id":{"not":"a string"}}}';
     const res = await client().products.getProduct({ productId: '1' });

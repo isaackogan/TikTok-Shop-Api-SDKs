@@ -50,6 +50,9 @@ export function GetBestsellingCreatorsResponseDataFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetBestsellingCreatorsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creators': json['creators'] == null ? undefined : ((json['creators'] as Array<any>).map(GetBestsellingCreatorsResponseDataCreatorFromJSON)),

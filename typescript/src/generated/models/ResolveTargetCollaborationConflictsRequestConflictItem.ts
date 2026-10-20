@@ -50,6 +50,9 @@ export function ResolveTargetCollaborationConflictsRequestConflictItemFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ResolveTargetCollaborationConflictsRequestConflictItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'existingCollaborationId': json['existing_collaboration_id'],

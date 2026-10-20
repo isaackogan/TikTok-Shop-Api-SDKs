@@ -81,6 +81,9 @@ export function RMAStatusUpdateWebhookDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`RMAStatusUpdateWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'rmaId': json['rma_id'] == null ? undefined : json['rma_id'],

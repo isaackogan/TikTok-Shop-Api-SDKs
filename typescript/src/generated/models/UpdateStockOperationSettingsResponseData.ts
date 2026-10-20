@@ -50,6 +50,9 @@ export function UpdateStockOperationSettingsResponseDataFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateStockOperationSettingsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'stockOperation': json['stock_operation'] == null ? undefined : UpdateStockOperationSettingsResponseDataStockOperationFromJSON(json['stock_operation']),

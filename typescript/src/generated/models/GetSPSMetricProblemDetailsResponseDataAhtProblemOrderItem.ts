@@ -78,6 +78,9 @@ export function GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItemFromJSO
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'aftersalesTypeName': json['aftersales_type_name'] == null ? undefined : json['aftersales_type_name'],

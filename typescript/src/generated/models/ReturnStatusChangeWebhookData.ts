@@ -100,6 +100,9 @@ export function ReturnStatusChangeWebhookDataFromJSONTyped(json: any, ignoreDisc
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReturnStatusChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderId': json['order_id'] == null ? undefined : json['order_id'],

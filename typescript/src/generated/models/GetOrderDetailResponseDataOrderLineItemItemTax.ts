@@ -56,6 +56,9 @@ export function GetOrderDetailResponseDataOrderLineItemItemTaxFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderDetailResponseDataOrderLineItemItemTax: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'taxType': json['tax_type'] == null ? undefined : json['tax_type'],

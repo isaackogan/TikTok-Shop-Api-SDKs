@@ -78,6 +78,9 @@ export function GetShopPerformanceResponseDataPerformanceIntervalTrafficFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShopPerformanceResponseDataPerformanceIntervalTraffic: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgConversationRate': json['avg_conversation_rate'] == null ? undefined : json['avg_conversation_rate'],

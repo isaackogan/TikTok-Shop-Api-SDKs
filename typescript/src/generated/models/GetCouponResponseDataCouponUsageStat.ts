@@ -48,6 +48,9 @@ export function GetCouponResponseDataCouponUsageStatFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCouponResponseDataCouponUsageStat: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'claimedCount': json['claimed_count'] == null ? undefined : json['claimed_count'],

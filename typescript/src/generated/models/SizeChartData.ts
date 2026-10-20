@@ -104,6 +104,9 @@ export function SizeChartDataFromJSONTyped(json: any, ignoreDiscriminator: boole
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SizeChartData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'description': json['description'] == null ? undefined : json['description'],

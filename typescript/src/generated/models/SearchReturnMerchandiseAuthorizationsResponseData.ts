@@ -62,6 +62,9 @@ export function SearchReturnMerchandiseAuthorizationsResponseDataFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchReturnMerchandiseAuthorizationsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnMerchandiseAuthorizations': json['return_merchandise_authorizations'] == null ? undefined : ((json['return_merchandise_authorizations'] as Array<any>).map(SearchReturnMerchandiseAuthorizationsResponseDataReturnMerchandiseAuthorizationFromJSON)),

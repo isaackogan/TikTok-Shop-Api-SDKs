@@ -56,6 +56,9 @@ export function CheckProductListingResponseDataPreCheckResultFromJSONTyped(json:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckProductListingResponseDataPreCheckResult: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'preCheckItem': json['pre_check_item'] == null ? undefined : json['pre_check_item'],

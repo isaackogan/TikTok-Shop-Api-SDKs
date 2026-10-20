@@ -42,6 +42,9 @@ export function WarningFromJSONTyped(json: any, ignoreDiscriminator: boolean): W
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Warning: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'message': json['message'] == null ? undefined : json['message'],

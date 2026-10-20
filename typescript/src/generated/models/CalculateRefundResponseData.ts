@@ -50,6 +50,9 @@ export function CalculateRefundResponseDataFromJSONTyped(json: any, ignoreDiscri
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CalculateRefundResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderRefundAmount': json['order_refund_amount'] == null ? undefined : CalculateRefundResponseDataOrderRefundAmountFromJSON(json['order_refund_amount']),

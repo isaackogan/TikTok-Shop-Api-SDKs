@@ -71,6 +71,9 @@ export function ShipInboundOrderRequestFromJSONTyped(json: any, ignoreDiscrimina
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ShipInboundOrderRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'inboundOrderId': json['inbound_order_id'],

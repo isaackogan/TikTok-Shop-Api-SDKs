@@ -57,6 +57,9 @@ export function CancelFBTMCFOrderRequestFromJSONTyped(json: any, ignoreDiscrimin
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CancelFBTMCFOrderRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'mcfOrderId': json['mcf_order_id'],

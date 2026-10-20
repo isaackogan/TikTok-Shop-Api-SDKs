@@ -42,6 +42,9 @@ export function NewMessageListenerWebhookDataSenderFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`NewMessageListenerWebhookDataSender: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'senderImUserId': json['sender_im_user_id'] == null ? undefined : json['sender_im_user_id'],

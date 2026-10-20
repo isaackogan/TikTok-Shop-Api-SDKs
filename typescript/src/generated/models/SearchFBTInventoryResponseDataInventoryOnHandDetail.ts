@@ -62,6 +62,9 @@ export function SearchFBTInventoryResponseDataInventoryOnHandDetailFromJSONTyped
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchFBTInventoryResponseDataInventoryOnHandDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'totalQuantity': json['total_quantity'] == null ? undefined : json['total_quantity'],

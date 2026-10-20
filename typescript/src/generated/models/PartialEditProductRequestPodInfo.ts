@@ -50,6 +50,9 @@ export function PartialEditProductRequestPodInfoFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequestPodInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'podTemplates': json['pod_templates'] == null ? undefined : ((json['pod_templates'] as Array<any>).map(PartialEditProductRequestPodInfoPodTemplateFromJSON)),

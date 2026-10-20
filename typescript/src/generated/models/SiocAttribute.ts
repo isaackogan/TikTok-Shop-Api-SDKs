@@ -50,6 +50,9 @@ export function SiocAttributeFromJSONTyped(json: any, ignoreDiscriminator: boole
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SiocAttribute: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'siocFiles': json['sioc_files'] == null ? undefined : ((json['sioc_files'] as Array<any>).map(SiocFileFromJSON)),

@@ -78,6 +78,9 @@ export function PartialEditProductRequestCertificationFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`PartialEditProductRequestCertification: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'expirationDate': json['expiration_date'] == null ? undefined : json['expiration_date'],

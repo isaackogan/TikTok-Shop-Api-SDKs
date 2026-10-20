@@ -62,6 +62,9 @@ export function SearchOpenCollaborationsResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchOpenCollaborationsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'nextPageToken': json['next_page_token'] == null ? undefined : json['next_page_token'],

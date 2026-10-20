@@ -89,6 +89,9 @@ export function CreateFirstMileBundleV2RequestFromJSONTyped(json: any, ignoreDis
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreateFirstMileBundleV2Request: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderIds': json['order_ids'],

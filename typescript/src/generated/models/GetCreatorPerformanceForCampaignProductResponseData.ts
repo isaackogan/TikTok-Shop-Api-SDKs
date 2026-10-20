@@ -62,6 +62,9 @@ export function GetCreatorPerformanceForCampaignProductResponseDataFromJSONTyped
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetCreatorPerformanceForCampaignProductResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'totalCreatorCount': json['total_creator_count'] == null ? undefined : json['total_creator_count'],

@@ -154,6 +154,9 @@ export function GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'vatAmount': json['vat_amount'] == null ? undefined : json['vat_amount'],

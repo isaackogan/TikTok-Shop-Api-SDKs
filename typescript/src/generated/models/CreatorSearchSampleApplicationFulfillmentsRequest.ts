@@ -68,6 +68,9 @@ export function CreatorSearchSampleApplicationFulfillmentsRequestFromJSONTyped(j
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreatorSearchSampleApplicationFulfillmentsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'fulfillmentStatuses': json['fulfillment_statuses'],

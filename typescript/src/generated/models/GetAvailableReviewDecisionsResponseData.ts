@@ -70,6 +70,9 @@ export function GetAvailableReviewDecisionsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAvailableReviewDecisionsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'lineItems': json['line_items'] == null ? undefined : ((json['line_items'] as Array<any>).map(GetAvailableReviewDecisionsResponseDataLineItemFromJSON)),

@@ -72,6 +72,9 @@ export function OpportunityMatchingStatusChangeWebhookDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`OpportunityMatchingStatusChangeWebhookData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'externalProductId': json['external_product_id'] == null ? undefined : json['external_product_id'],

@@ -66,6 +66,9 @@ export function TextAreaFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`TextArea: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'alignType': json['align_type'] == null ? undefined : json['align_type'],

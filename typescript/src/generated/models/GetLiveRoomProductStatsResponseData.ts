@@ -50,6 +50,9 @@ export function GetLiveRoomProductStatsResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomProductStatsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productStats': json['product_stats'] == null ? undefined : ((json['product_stats'] as Array<any>).map(GetLiveRoomProductStatsResponseDataProductStatFromJSON)),

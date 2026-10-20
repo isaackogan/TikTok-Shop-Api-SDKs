@@ -280,6 +280,9 @@ export function GetProductResponseDataSkuFromJSONTyped(json: any, ignoreDiscrimi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSku: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'combinedSkus': json['combined_skus'] == null ? undefined : ((json['combined_skus'] as Array<any>).map(GetProductResponseDataSkuCombinedSkuFromJSON)),

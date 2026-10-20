@@ -60,6 +60,9 @@ export function GetProductResponseDataIntegratedPlatformStatusFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataIntegratedPlatformStatus: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'platform': json['platform'] == null ? undefined : json['platform'],

@@ -85,6 +85,9 @@ export function SearchPackageRequestFromJSONTyped(json: any, ignoreDiscriminator
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchPackageRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'createTimeGe': json['create_time_ge'] == null ? undefined : json['create_time_ge'],

@@ -183,6 +183,9 @@ export function GetOpportunityDetailResponseDataOpportunityBasicInfoFromJSONType
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpportunityDetailResponseDataOpportunityBasicInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'opportunityType': json['opportunity_type'] == null ? undefined : json['opportunity_type'],

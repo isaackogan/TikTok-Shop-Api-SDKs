@@ -50,6 +50,9 @@ export function GetAuthorizedCategoryAssetsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAuthorizedCategoryAssetsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'categoryAssets': json['category_assets'] == null ? undefined : ((json['category_assets'] as Array<any>).map(GetAuthorizedCategoryAssetsResponseDataCategoryAssetFromJSON)),

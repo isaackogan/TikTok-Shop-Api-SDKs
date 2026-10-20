@@ -42,6 +42,9 @@ export function MarkConversationsAsReadResponseDataFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`MarkConversationsAsReadResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'failedConversationIds': json['failed_conversation_ids'] == null ? undefined : json['failed_conversation_ids'],

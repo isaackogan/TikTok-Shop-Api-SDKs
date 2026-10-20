@@ -66,6 +66,9 @@ export function GetSPSOverviewResponseDataDimensionFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSOverviewResponseDataDimension: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'name': json['name'] == null ? undefined : json['name'],

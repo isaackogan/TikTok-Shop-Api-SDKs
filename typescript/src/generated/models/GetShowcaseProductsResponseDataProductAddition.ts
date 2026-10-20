@@ -50,6 +50,9 @@ export function GetShowcaseProductsResponseDataProductAdditionFromJSONTyped(json
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetShowcaseProductsResponseDataProductAddition: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'customizedMainImages': json['customized_main_images'] == null ? undefined : ((json['customized_main_images'] as Array<any>).map(GetShowcaseProductsResponseDataProductAdditionCustomizedMainImageFromJSON)),

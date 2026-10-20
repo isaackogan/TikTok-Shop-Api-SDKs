@@ -82,6 +82,9 @@ export function GetEligibleShippingServicesRequestFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetEligibleShippingServicesRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderLineItemIds': json['order_line_item_ids'] == null ? undefined : json['order_line_item_ids'],

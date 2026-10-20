@@ -68,6 +68,9 @@ export function SearchCreatorTargetCollaborationsRequestFromJSONTyped(json: any,
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorTargetCollaborationsRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shopId': json['shop_id'],

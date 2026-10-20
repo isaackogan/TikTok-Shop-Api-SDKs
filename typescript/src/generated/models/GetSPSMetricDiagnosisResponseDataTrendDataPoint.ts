@@ -48,6 +48,9 @@ export function GetSPSMetricDiagnosisResponseDataTrendDataPointFromJSONTyped(jso
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricDiagnosisResponseDataTrendDataPoint: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'recordDate': json['record_date'] == null ? undefined : json['record_date'],

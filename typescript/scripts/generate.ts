@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { renderMeta } from './render-meta.ts';
 
@@ -47,5 +47,32 @@ writeFileSync(
         '        } catch (e) {\n            throw decodeFailure(this.raw, json, e);\n        }\n    }\n',
     ),
 );
+
+// R13d, R28: FromJSON reads a scalar or a list where a model is expected as an empty model. Each model's FromJSONTyped
+// throws instead, so an API reply gets the -1 error above and a webhook a parse error, at any depth. The WebhookEvent
+// union dispatches to the models and needs no check of its own.
+const modelsDir = resolve(dest, 'models');
+const unions = ['WebhookEvent.ts'];
+const missed: string[] = [];
+for (const file of readdirSync(modelsDir)) {
+  if (file === 'index.ts') continue;
+  const name = file.replace(/\.ts$/, '');
+  const path = resolve(modelsDir, file);
+  const source = readFileSync(path, 'utf8');
+  const head = `export function ${name}FromJSONTyped(json: any, ignoreDiscriminator: boolean): ${name} {\n    if (json == null) {\n        return json;\n    }\n`;
+  const count = source.split(`${head}    return {\n`).length - 1;
+  if (count !== 1) {
+    missed.push(file);
+    continue;
+  }
+  const check =
+    "    if (typeof json !== 'object' || Array.isArray(json)) {\n" +
+    `        throw new TypeError(\`${name}: expected a JSON object, got \${Array.isArray(json) ? 'an array' : typeof json}\`);\n` +
+    '    }\n';
+  writeFileSync(path, source.replace(head, head + check));
+}
+if (missed.sort().join() !== unions.join()) {
+  throw new Error(`models fix-up: expected every model but ${unions.join(', ')} to match once; unmatched: ${missed.join(', ')}`);
+}
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest, resolve(pkg, 'build/openapi.json'));

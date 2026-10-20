@@ -62,6 +62,9 @@ export function GetSubmissionRecordsResponseDataDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSubmissionRecordsResponseDataData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'submissions': json['submissions'] == null ? undefined : ((json['submissions'] as Array<any>).map(GetSubmissionRecordsResponseDataDataSubmissionFromJSON)),

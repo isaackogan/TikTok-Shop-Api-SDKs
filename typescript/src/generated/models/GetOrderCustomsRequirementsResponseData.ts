@@ -50,6 +50,9 @@ export function GetOrderCustomsRequirementsResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderCustomsRequirementsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderClearanceList': json['order_clearance_list'] == null ? undefined : ((json['order_clearance_list'] as Array<any>).map(GetOrderCustomsRequirementsResponseDataOrderClearanceListFromJSON)),

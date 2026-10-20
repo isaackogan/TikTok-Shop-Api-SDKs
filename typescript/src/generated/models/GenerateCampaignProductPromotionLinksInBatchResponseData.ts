@@ -56,6 +56,9 @@ export function GenerateCampaignProductPromotionLinksInBatchResponseDataFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GenerateCampaignProductPromotionLinksInBatchResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'productPromotionLinks': json['product_promotion_links'] == null ? undefined : ((json['product_promotion_links'] as Array<any>).map(GenerateCampaignProductPromotionLinksInBatchResponseDataProductPromotionLinkFromJSON)),

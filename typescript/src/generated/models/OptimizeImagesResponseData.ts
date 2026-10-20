@@ -50,6 +50,9 @@ export function OptimizeImagesResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`OptimizeImagesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'images': json['images'] == null ? undefined : ((json['images'] as Array<any>).map(OptimizeImagesResponseDataImageFromJSON)),

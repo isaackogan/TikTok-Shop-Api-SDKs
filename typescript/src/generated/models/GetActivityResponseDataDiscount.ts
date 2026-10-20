@@ -89,6 +89,9 @@ export function GetActivityResponseDataDiscountFromJSONTyped(json: any, ignoreDi
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetActivityResponseDataDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'shippingDiscount': json['shipping_discount'] == null ? undefined : GetActivityResponseDataDiscountShippingDiscountFromJSON(json['shipping_discount']),

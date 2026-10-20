@@ -140,6 +140,9 @@ export function GetOrderListRequestFromJSONTyped(json: any, ignoreDiscriminator:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderListRequest: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'orderStatus': json['order_status'] == null ? undefined : json['order_status'],

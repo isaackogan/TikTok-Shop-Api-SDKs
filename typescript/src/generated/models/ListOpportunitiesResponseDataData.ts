@@ -62,6 +62,9 @@ export function ListOpportunitiesResponseDataDataFromJSONTyped(json: any, ignore
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ListOpportunitiesResponseDataData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'opportunities': json['opportunities'] == null ? undefined : ((json['opportunities'] as Array<any>).map(ListOpportunitiesResponseDataDataOpportunityFromJSON)),

@@ -89,6 +89,9 @@ export function CreatePackagesResponseDataFromJSONTyped(json: any, ignoreDiscrim
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CreatePackagesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'dimension': json['dimension'] == null ? undefined : DimensionFromJSON(json['dimension']),

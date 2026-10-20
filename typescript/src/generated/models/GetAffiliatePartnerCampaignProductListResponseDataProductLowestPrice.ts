@@ -48,6 +48,9 @@ export function GetAffiliatePartnerCampaignProductListResponseDataProductLowestP
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAffiliatePartnerCampaignProductListResponseDataProductLowestPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'currency': json['currency'] == null ? undefined : json['currency'],

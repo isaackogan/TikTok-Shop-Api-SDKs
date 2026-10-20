@@ -48,6 +48,9 @@ export function CountryDistributionFromJSONTyped(json: any, ignoreDiscriminator:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CountryDistribution: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'countryCode': json['country_code'] == null ? undefined : json['country_code'],

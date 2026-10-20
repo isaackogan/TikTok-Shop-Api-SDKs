@@ -56,6 +56,9 @@ export function GetSPSOverviewResponseDataTopIssueFromJSONTyped(json: any, ignor
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSOverviewResponseDataTopIssue: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'issues': json['issues'] == null ? undefined : ((json['issues'] as Array<any>).map(GetSPSOverviewResponseDataTopIssueIssueFromJSON)),

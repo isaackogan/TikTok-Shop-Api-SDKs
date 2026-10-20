@@ -133,6 +133,9 @@ export function GetSPSMetricProblemDetailsResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetSPSMetricProblemDetailsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'ahtProblemOrderItems': json['aht_problem_order_items'] == null ? undefined : ((json['aht_problem_order_items'] as Array<any>).map(GetSPSMetricProblemDetailsResponseDataAhtProblemOrderItemFromJSON)),

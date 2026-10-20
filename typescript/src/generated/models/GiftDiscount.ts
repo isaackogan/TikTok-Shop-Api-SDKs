@@ -59,6 +59,9 @@ export function GiftDiscountFromJSONTyped(json: any, ignoreDiscriminator: boolea
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GiftDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'giftReceivingType': json['gift_receiving_type'],

@@ -62,6 +62,9 @@ export function ItemFromJSONTyped(json: any, ignoreDiscriminator: boolean): Item
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`Item: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'goodsId': json['goods_id'],

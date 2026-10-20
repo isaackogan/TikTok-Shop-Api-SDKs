@@ -91,6 +91,9 @@ export function GetTradeInAccountTransactionsResponseDataFlowFromJSONTyped(json:
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetTradeInAccountTransactionsResponseDataFlow: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'amount': json['amount'] == null ? undefined : GetTradeInAccountTransactionsResponseDataFlowAmountFromJSON(json['amount']),

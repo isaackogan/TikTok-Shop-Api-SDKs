@@ -45,6 +45,9 @@ export function SearchPromotionActivitiesResponseDataActivityParticipationLimitF
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchPromotionActivitiesResponseDataActivityParticipationLimit: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'type': json['type'] == null ? undefined : json['type'],

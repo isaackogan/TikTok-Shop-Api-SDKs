@@ -50,6 +50,9 @@ export function UploadShoppablePhotoFileResponseDataFromJSONTyped(json: any, ign
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadShoppablePhotoFileResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'photoFile': json['photo_file'] == null ? undefined : UploadShoppablePhotoFileResponseDataPhotoFileFromJSON(json['photo_file']),

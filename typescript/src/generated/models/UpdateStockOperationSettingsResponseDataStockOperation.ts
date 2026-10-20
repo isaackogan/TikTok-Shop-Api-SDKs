@@ -48,6 +48,9 @@ export function UpdateStockOperationSettingsResponseDataStockOperationFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateStockOperationSettingsResponseDataStockOperation: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'failedSkuIds': json['failed_sku_ids'] == null ? undefined : json['failed_sku_ids'],

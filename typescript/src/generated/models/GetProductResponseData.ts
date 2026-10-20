@@ -540,6 +540,9 @@ export function GetProductResponseDataFromJSONTyped(json: any, ignoreDiscriminat
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'audit': json['audit'] == null ? undefined : GetProductResponseDataAuditFromJSON(json['audit']),

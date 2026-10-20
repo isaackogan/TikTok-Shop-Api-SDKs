@@ -111,6 +111,9 @@ export function ReturnSubLineItemFromJSONTyped(json: any, ignoreDiscriminator: b
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ReturnSubLineItem: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'returnSubLineItemId': json['return_sub_line_item_id'] == null ? undefined : json['return_sub_line_item_id'],

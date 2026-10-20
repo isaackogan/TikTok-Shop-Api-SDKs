@@ -49,6 +49,9 @@ export function QueryTargetCollaborationDetailResponseDataTargetCollaborationFre
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'hasFreeSample': json['has_free_sample'] == null ? undefined : json['has_free_sample'],

@@ -42,6 +42,9 @@ export function GetOrderListResponseDataOrderRecipientAddressDeliveryPreferenceF
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrderListResponseDataOrderRecipientAddressDeliveryPreference: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'dropOffLocation': json['drop_off_location'] == null ? undefined : json['drop_off_location'],

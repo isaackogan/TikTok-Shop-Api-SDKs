@@ -63,6 +63,9 @@ export function SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataT
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTable: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'headers': json['headers'] == null ? undefined : ((json['headers'] as Array<any>).map(SearchSizeChartsResponseDataSizeChartSizeChartDataSizeChartDataTableHeaderFromJSON)),

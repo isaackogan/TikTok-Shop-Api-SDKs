@@ -54,6 +54,9 @@ export function GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRe
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAvailableReviewDecisionsResponseDataLineItemDecisionPartialRefundAmountRange: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'minAmount': json['min_amount'] == null ? undefined : json['min_amount'],

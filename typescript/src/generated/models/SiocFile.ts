@@ -51,6 +51,9 @@ export function SiocFileFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SiocFile: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'siocCertificationUrl': json['sioc_certification_url'] == null ? undefined : json['sioc_certification_url'],

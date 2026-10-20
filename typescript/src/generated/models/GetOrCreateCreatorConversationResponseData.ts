@@ -72,6 +72,9 @@ export function GetOrCreateCreatorConversationResponseDataFromJSONTyped(json: an
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOrCreateCreatorConversationResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'conversationId': json['conversation_id'] == null ? undefined : json['conversation_id'],

@@ -45,6 +45,9 @@ export function GetActivityResponseDataParticipationLimitFromJSONTyped(json: any
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetActivityResponseDataParticipationLimit: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'type': json['type'] == null ? undefined : json['type'],

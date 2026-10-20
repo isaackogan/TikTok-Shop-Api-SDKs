@@ -50,6 +50,9 @@ export function SubmitStrikethroughPriceRequestSkuExternalRetailPriceFromJSONTyp
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SubmitStrikethroughPriceRequestSkuExternalRetailPrice: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'amount': json['amount'],

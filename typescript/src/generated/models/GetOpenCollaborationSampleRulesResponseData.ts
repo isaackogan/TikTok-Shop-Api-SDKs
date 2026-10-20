@@ -50,6 +50,9 @@ export function GetOpenCollaborationSampleRulesResponseDataFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpenCollaborationSampleRulesResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sampleRules': json['sample_rules'] == null ? undefined : ((json['sample_rules'] as Array<any>).map(GetOpenCollaborationSampleRulesResponseDataSampleRuleFromJSON)),

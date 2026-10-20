@@ -50,6 +50,9 @@ export function GetAffiliateCampaignCreatorProductContentStatisticsResponseDataF
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetAffiliateCampaignCreatorProductContentStatisticsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorContentStatistics': json['creator_content_statistics'] == null ? undefined : ((json['creator_content_statistics'] as Array<any>).map(GetAffiliateCampaignCreatorProductContentStatisticsResponseDataCreatorContentStatisticFromJSON)),

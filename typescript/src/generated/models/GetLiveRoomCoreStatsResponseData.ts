@@ -50,6 +50,9 @@ export function GetLiveRoomCoreStatsResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetLiveRoomCoreStatsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'stats': json['stats'] == null ? undefined : GetLiveRoomCoreStatsResponseDataStatFromJSON(json['stats']),

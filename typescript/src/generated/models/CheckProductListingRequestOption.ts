@@ -52,6 +52,9 @@ export function CheckProductListingRequestOptionFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`CheckProductListingRequestOption: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'needTriggerGneAsyncCheck': json['need_trigger_gne_async_check'] == null ? undefined : json['need_trigger_gne_async_check'],

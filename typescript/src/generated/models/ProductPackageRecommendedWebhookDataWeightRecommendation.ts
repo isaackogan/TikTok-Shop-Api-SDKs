@@ -56,6 +56,9 @@ export function ProductPackageRecommendedWebhookDataWeightRecommendationFromJSON
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`ProductPackageRecommendedWebhookDataWeightRecommendation: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'unit': json['unit'] == null ? undefined : json['unit'],

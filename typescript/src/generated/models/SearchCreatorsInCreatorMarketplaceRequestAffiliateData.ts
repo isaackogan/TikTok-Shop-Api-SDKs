@@ -79,6 +79,9 @@ export function SearchCreatorsInCreatorMarketplaceRequestAffiliateDataFromJSONTy
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchCreatorsInCreatorMarketplaceRequestAffiliateData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'avgCommissionRate': json['avg_commission_rate'] == null ? undefined : json['avg_commission_rate'],

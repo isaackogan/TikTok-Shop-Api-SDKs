@@ -77,6 +77,9 @@ export function GetOpenCollaborationCreatorContentDetailsResponseDataCreatorCont
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'creatorProfile': json['creator_profile'] == null ? undefined : GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetailCreatorProfileFromJSON(json['creator_profile']),

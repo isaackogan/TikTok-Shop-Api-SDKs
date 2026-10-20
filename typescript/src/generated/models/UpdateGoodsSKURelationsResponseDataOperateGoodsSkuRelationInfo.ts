@@ -50,6 +50,9 @@ export function UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoFr
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'operateResultList': json['operate_result_list'] == null ? undefined : ((json['operate_result_list'] as Array<any>).map(UpdateGoodsSKURelationsResponseDataOperateGoodsSkuRelationInfoOperateResultListFromJSON)),

@@ -83,6 +83,9 @@ export function GetActivityResponseDataDiscountBxgyDiscountFromJSONTyped(json: a
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetActivityResponseDataDiscountBxgyDiscount: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'thresholdType': json['threshold_type'] == null ? undefined : json['threshold_type'],

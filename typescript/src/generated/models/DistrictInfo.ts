@@ -60,6 +60,9 @@ export function DistrictInfoFromJSONTyped(json: any, ignoreDiscriminator: boolea
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`DistrictInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'addressLevelName': json['address_level_name'] == null ? undefined : json['address_level_name'],

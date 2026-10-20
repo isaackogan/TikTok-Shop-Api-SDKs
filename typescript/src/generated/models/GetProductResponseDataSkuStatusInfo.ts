@@ -55,6 +55,9 @@ export function GetProductResponseDataSkuStatusInfoFromJSONTyped(json: any, igno
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetProductResponseDataSkuStatusInfo: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'deactivationSource': json['deactivation_source'] == null ? undefined : json['deactivation_source'],

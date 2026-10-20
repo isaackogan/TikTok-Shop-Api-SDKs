@@ -63,6 +63,9 @@ export function GenerateGeneralSharingLinksResponseDataFromJSONTyped(json: any, 
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GenerateGeneralSharingLinksResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'sharingLinks': json['sharing_links'] == null ? undefined : ((json['sharing_links'] as Array<any>).map(GenerateGeneralSharingLinksResponseDataSharingLinkFromJSON)),

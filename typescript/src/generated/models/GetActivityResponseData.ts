@@ -202,6 +202,9 @@ export function GetActivityResponseDataFromJSONTyped(json: any, ignoreDiscrimina
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`GetActivityResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'activityId': json['activity_id'] == null ? undefined : json['activity_id'],

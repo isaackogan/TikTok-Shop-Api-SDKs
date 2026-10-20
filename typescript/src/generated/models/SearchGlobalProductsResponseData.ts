@@ -62,6 +62,9 @@ export function SearchGlobalProductsResponseDataFromJSONTyped(json: any, ignoreD
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`SearchGlobalProductsResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'nextPageToken': json['next_page_token'] == null ? undefined : json['next_page_token'],

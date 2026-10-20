@@ -56,6 +56,9 @@ export function UploadProofOfDeliveryImageResponseDataFromJSONTyped(json: any, i
     if (json == null) {
         return json;
     }
+    if (typeof json !== 'object' || Array.isArray(json)) {
+        throw new TypeError(`UploadProofOfDeliveryImageResponseData: expected a JSON object, got ${Array.isArray(json) ? 'an array' : typeof json}`);
+    }
     return {
         
         'url': json['url'] == null ? undefined : json['url'],
