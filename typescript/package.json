@@ -1,6 +1,6 @@
 {
   "name": "tiktok-shop-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript client for the TikTok Shop API (TikTok Shop Partner API): request signing, OAuth, multi-shop support, typed webhooks and exact 64-bit IDs. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
   "keywords": [
     "tiktok shop api",
