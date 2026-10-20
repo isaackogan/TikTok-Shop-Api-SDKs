@@ -15,7 +15,7 @@ namespace TikTokShop.Api;
 public class TikTokShopException : Exception
 {
     /// <summary>Creates the exception.</summary>
-    public TikTokShopException(string message, int code, string requestId = "", int? httpStatus = null, Exception? innerException = null)
+    public TikTokShopException(string message, long code, string requestId = "", int? httpStatus = null, Exception? innerException = null)
         : base(message, innerException)
     {
         Code = code;
@@ -24,7 +24,7 @@ public class TikTokShopException : Exception
     }
 
     /// <summary>TikTok's error code, or the HTTP status, or -1, see the class remarks.</summary>
-    public int Code { get; }
+    public long Code { get; }
 
     /// <summary>The <c>message</c> from TikTok's reply, or a description when the reply had none.</summary>
     public string TikTokMessage => Message;

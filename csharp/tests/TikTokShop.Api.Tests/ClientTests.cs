@@ -126,6 +126,8 @@ public class ClientTests
         Assert.Equal("GET", r.Method);
         Assert.Equal("/affiliate_seller/202412/conversations", r.RawPath);
         Assert.NotEmpty(r.Body);
+        // The re-created content kept its Content-Type, so the server and the sign both see application/json.
+        Assert.StartsWith("application/json", r.Header("Content-Type"));
         using var json = JsonDocument.Parse(r.Body);
         Assert.True(json.RootElement.GetProperty("only_need_conversation_id").GetBoolean());
         // The sign covers exactly those bytes.
@@ -351,6 +353,66 @@ public class ClientTests
         var reply = await client.Orders.GetOrderListAsync(10);
 
         Assert.Equal(0, reply.Code);
+    }
+
+    [Theory]
+    [InlineData("{\"code\":99999999999,\"message\":\"big\",\"request_id\":\"q\"}", 99999999999L, "big")]
+    [InlineData("{\"code\":-99999999999,\"message\":\"neg\",\"request_id\":\"q\"}", -99999999999L, "neg")]
+    [InlineData("{\"code\":\"7\",\"message\":\"odd\",\"request_id\":\"q\"}", -1L, "odd")]
+    [InlineData("{\"code\":1.5,\"message\":\"odd\",\"request_id\":\"q\"}", -1L, "odd")]
+    public async Task ACodeThatIsOutOfIntRangeOrNotAnIntegerIsAnErrorNotSuccess(string body, long code, string message)
+    {
+        using var server = new RawServer(_ => new RawResponse(200, body));
+        var client = NewClient(server.BaseUrl);
+
+        var e = await Assert.ThrowsAsync<TikTokShopException>(() => client.Authorization.GetAuthorizedShopsAsync());
+
+        Assert.Equal(code, e.Code);
+        Assert.Equal(message, e.TikTokMessage);
+        Assert.Equal("q", e.RequestId);
+        Assert.Equal(200, e.HttpStatus);
+    }
+
+    [Fact]
+    public async Task AHandlerErrorThatPrintsTheSignedUrlIsScrubbedFromTheMessageToStringAndEveryInnerException()
+    {
+        // Real transports put the request URI, query and all, in their messages. This one prints it, twice.
+        string? printed = null;
+        var handler = new FailingHandler(request =>
+        {
+            printed = request.RequestUri!.ToString();
+            return new HttpRequestException($"An error occurred sending the request to {request.RequestUri} (again: {printed})",
+                new InvalidOperationException($"inner {request.RequestUri}"));
+        });
+        var client = NewClient("http://127.0.0.1:1", handler: handler);
+
+        var e = await Assert.ThrowsAsync<TikTokShopException>(() => client.Orders.GetOrderListAsync(10));
+
+        Assert.Equal(-1, e.Code);
+        Assert.Null(e.HttpStatus);
+        // The failing handler really did see a signed URL with a query.
+        var query = printed![(printed.IndexOf('?') + 1)..];
+        Assert.Contains("sign=", query);
+        ErrorAssert.NoneOf(e, new[] { query, "sign=", "app_key=", "timestamp=", "shop_cipher=", Secret });
+        Assert.Contains("/order/202309/orders/search", e.Message);
+    }
+
+    [Fact]
+    public void TheConstructorRejectsNullOptions()
+    {
+        Assert.Throws<ArgumentNullException>(() => new TikTokShopClient((TikTokShopOptions)null!));
+    }
+
+    [Fact]
+    public void TheDefaultHandlerRecyclesPooledConnectionsAndNeverFollowsRedirects()
+    {
+        var client = new TikTokShopClient(new TikTokShopOptions { AppKey = "k", AppSecret = "s" });
+
+        var handler = Assert.IsType<SocketsHttpHandler>(
+            typeof(TikTokShopClient).GetField("_handler", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)!.GetValue(client));
+
+        Assert.Equal(TimeSpan.FromMinutes(2), handler.PooledConnectionLifetime);
+        Assert.False(handler.AllowAutoRedirect);
     }
 
     // ---- withShop ----

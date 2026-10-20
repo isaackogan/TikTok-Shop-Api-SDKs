@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -270,6 +271,51 @@ internal sealed class RawServer : IDisposable
                 result[i] = (byte)b;
             }
             return result;
+        }
+    }
+}
+
+/// <summary>A handler that fails every request with the exception the factory makes from it (it may print the request URI).</summary>
+internal sealed class FailingHandler : HttpMessageHandler
+{
+    private readonly Func<HttpRequestMessage, Exception> _make;
+
+    public FailingHandler(Func<HttpRequestMessage, Exception> make) => _make = make;
+
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) =>
+        Task.FromException<HttpResponseMessage>(_make(request));
+}
+
+/// <summary>A pass-through <see cref="DelegatingHandler"/>, to put around another handler.</summary>
+internal sealed class PassThroughHandler : DelegatingHandler
+{
+    public PassThroughHandler(HttpMessageHandler inner) : base(inner)
+    {
+    }
+}
+
+internal static class ErrorAssert
+{
+    /// <summary>Every message in the chain, then the full <c>ToString()</c>.</summary>
+    public static IEnumerable<string> Texts(Exception e)
+    {
+        for (Exception? x = e; x is not null; x = x.InnerException)
+        {
+            yield return x.Message;
+            yield return x.ToString();
+        }
+    }
+
+    /// <summary>No secret, and no query-string fragment, anywhere in the message, <c>ToString()</c> or any inner exception.</summary>
+    public static void NoneOf(Exception e, IEnumerable<string> forbidden)
+    {
+        var all = forbidden.ToList();
+        foreach (var text in Texts(e))
+        {
+            foreach (var f in all)
+            {
+                Assert.DoesNotContain(f, text);
+            }
         }
     }
 }

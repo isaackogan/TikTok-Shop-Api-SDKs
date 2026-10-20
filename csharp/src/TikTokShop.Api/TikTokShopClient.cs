@@ -26,7 +26,7 @@ public sealed class TikTokShopOptions
 
     /// <summary>
     /// The limit for one request, for the whole exchange. <c>null</c> means <see cref="TikTokShopClient.DefaultTimeout"/>;
-    /// <see cref="TimeSpan.Zero"/> and <see cref="Timeout.InfiniteTimeSpan"/> mean no limit.
+    /// <see cref="TimeSpan.Zero"/> and <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> mean no limit.
     /// </summary>
     public TimeSpan? Timeout { get; set; }
 
@@ -47,6 +47,9 @@ public sealed class TikTokShopOptions
 /// </summary>
 /// <remarks>
 /// Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
+/// <para>
+/// Create one client and reuse it for the life of your app: it owns a connection pool, and <see cref="WithShop"/> shares it.
+/// </para>
 /// <para>
 /// Every request is signed, and every failure is a <see cref="TikTokShopException"/>. A reply that does not decode into
 /// the generated model surfaces as the generator's own <c>ApiException</c>.
@@ -131,7 +134,7 @@ public sealed class TikTokShopClient
     /// <summary>Creates a client from options.</summary>
     public TikTokShopClient(TikTokShopOptions options)
         : this(
-            new ShopCredentials(options.AppKey, options.AppSecret, options.AccessToken, options.ShopCipher),
+            new ShopCredentials(Required(options).AppKey, options.AppSecret, options.AccessToken, options.ShopCipher),
             options.BaseUrl,
             options.Timeout,
             options.Handler ?? CreateDefaultHandler())
@@ -209,10 +212,17 @@ public sealed class TikTokShopClient
     /// <inheritdoc/>
     public override string ToString() => $"TikTokShopClient {{ BaseUrl = {_baseUrl}, Credentials = {_credentials} }}";
 
-    private static HttpMessageHandler CreateDefaultHandler() => new SocketsHttpHandler
+    private static TikTokShopOptions Required(TikTokShopOptions? options) =>
+        options ?? throw new ArgumentNullException(nameof(options));
+
+    /// <summary>How long a pooled connection is reused before it is closed, so a long-lived client picks up DNS changes.</summary>
+    internal static readonly TimeSpan PooledConnectionLifetime = TimeSpan.FromMinutes(2);
+
+    internal static SocketsHttpHandler CreateDefaultHandler() => new()
     {
         AllowAutoRedirect = false,
         UseCookies = false,
         AutomaticDecompression = DecompressionMethods.All,
+        PooledConnectionLifetime = PooledConnectionLifetime,
     };
 }

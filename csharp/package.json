@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "generate": "tsx scripts/generate.ts",
-    "build": "dotnet build TikTokShop.Api.sln -c Release",
+    "build": "dotnet build TikTokShop.Api.sln -c Release && dotnet pack src/TikTokShop.Api/TikTokShop.Api.csproj -c Release --no-build -o build/pack",
     "test": "dotnet test TikTokShop.Api.sln"
   },
   "devDependencies": {

@@ -1,6 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { renderEvents } from './render-events.ts';
 import { renderMeta } from './render-meta.ts';
 
 const pkg = resolve(import.meta.dirname, '..');
@@ -42,3 +43,4 @@ mkdirSync(dest, { recursive: true });
 for (const d of ['Api', 'Client', 'Model']) cpSync(resolve(src, d), resolve(dest, d), { recursive: true });
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
+renderEvents(resolve(pkg, 'build/meta.json'), dest);

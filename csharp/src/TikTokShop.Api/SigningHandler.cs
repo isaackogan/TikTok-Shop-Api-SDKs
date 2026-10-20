@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,25 +36,13 @@ public sealed class SigningHandler : DelegatingHandler
     /// <param name="innerHandler">The handler that sends the request.</param>
     /// <param name="timeout">
     /// The limit for one request. <c>null</c> means <see cref="TikTokShopClient.DefaultTimeout"/>;
-    /// <see cref="TimeSpan.Zero"/> and <see cref="Timeout.InfiniteTimeSpan"/> mean no limit.
+    /// <see cref="TimeSpan.Zero"/> and <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> mean no limit.
     /// </param>
     public SigningHandler(ShopCredentials credentials, HttpMessageHandler innerHandler, TimeSpan? timeout = null)
         : base(innerHandler)
     {
         _credentials = credentials ?? throw new ArgumentNullException(nameof(credentials));
-        var t = timeout ?? TikTokShopClient.DefaultTimeout;
-        if (t == TimeSpan.Zero || t == Timeout.InfiniteTimeSpan)
-        {
-            _timeout = null;
-        }
-        else if (t < TimeSpan.Zero)
-        {
-            throw new ArgumentOutOfRangeException(nameof(timeout), "The timeout must not be negative (zero or Timeout.InfiniteTimeSpan mean no limit).");
-        }
-        else
-        {
-            _timeout = t;
-        }
+        _timeout = Handlers.ResolveTimeout(timeout, nameof(timeout));
     }
 
     /// <inheritdoc/>
@@ -103,11 +89,13 @@ public sealed class SigningHandler : DelegatingHandler
             throw Failure(e, request.RequestUri ?? uri);
         }
 
-        var error = Interpret(response, payload);
-        if (error is not null)
+        using (var reply = Reply.Read((int)response.StatusCode, response.ReasonPhrase, payload, "Response"))
         {
-            response.Dispose();
-            throw error;
+            if (reply.Error is not null)
+            {
+                response.Dispose();
+                throw reply.Error;
+            }
         }
 
         // The body was consumed: hand the caller a fresh content with the same headers.
@@ -185,92 +173,7 @@ public sealed class SigningHandler : DelegatingHandler
         return result;
     }
 
-    /// <summary>R13b: the exception for a reply, or <c>null</c> when it is a 2xx with <c>code</c> 0.</summary>
-    private static TikTokShopException? Interpret(HttpResponseMessage response, byte[] payload)
-    {
-        var status = (int)response.StatusCode;
-        var ok = status is >= 200 and < 300;
-
-        JsonDocument? doc = null;
-        Exception? parseError = null;
-        try
-        {
-            doc = JsonDocument.Parse(payload, new JsonDocumentOptions { MaxDepth = 1024 });
-        }
-        catch (JsonException e)
-        {
-            parseError = e;
-        }
-
-        using (doc)
-        {
-            var isObject = doc is not null && doc.RootElement.ValueKind == JsonValueKind.Object;
-            if (ok && !isObject)
-            {
-                return new TikTokShopException($"Response is not a JSON object (HTTP {status})", -1, "", status, parseError);
-            }
-
-            int? code = null;
-            string? message = null;
-            var requestId = "";
-            if (isObject)
-            {
-                var root = doc!.RootElement;
-                if (root.TryGetProperty("code", out var c) && c.ValueKind == JsonValueKind.Number && c.TryGetInt32(out var ci))
-                {
-                    code = ci;
-                }
-                if (root.TryGetProperty("message", out var m) && m.ValueKind == JsonValueKind.String)
-                {
-                    message = m.GetString();
-                }
-                if (root.TryGetProperty("request_id", out var r) && r.ValueKind == JsonValueKind.String)
-                {
-                    requestId = r.GetString() ?? "";
-                }
-            }
-
-            if (!ok)
-            {
-                var reason = response.ReasonPhrase;
-                return new TikTokShopException(
-                    message ?? (!string.IsNullOrEmpty(reason) ? reason : $"HTTP {status}"),
-                    code.HasValue && code.Value != 0 ? code.Value : status,
-                    requestId,
-                    status);
-            }
-            if (code.HasValue && code.Value != 0)
-            {
-                return new TikTokShopException(message ?? "", code.Value, requestId, status);
-            }
-            return null;
-        }
-    }
-
     /// <summary>R13c and R15: no response at all. The original exception is not kept, as it can hold the URL.</summary>
-    private TikTokShopException Failure(Exception e, Uri uri)
-    {
-        var timedOut = e is OperationCanceledException or TimeoutException || e.InnerException is TimeoutException;
-        var clean = Scrub(e.Message ?? "", uri);
-        var message = (timedOut ? "Request timed out" : "Request failed") + $" ({e.GetType().Name}): {clean}";
-        Exception inner = timedOut ? new TimeoutException(clean) : new HttpRequestException(clean);
-        return new TikTokShopException(message, -1, "", null, inner);
-    }
-
-    /// <summary>Strip the request URL's query, and every secret, out of a transport error message.</summary>
-    private string Scrub(string message, Uri uri)
-    {
-        var bare = uri.GetLeftPart(UriPartial.Path);
-        message = message.Replace(uri.ToString(), bare).Replace(uri.AbsoluteUri, bare);
-        message = Regex.Replace(message, @"(\bhttps?://[^\s?#]*)\?[^\s)]*", "$1", RegexOptions.IgnoreCase);
-        message = Regex.Replace(message, @"[?&](?:app_key|timestamp|sign|shop_cipher)=[^\s&)]*", "");
-        foreach (var secret in new[] { _credentials.AppSecret, _credentials.AccessToken, _credentials.ShopCipher })
-        {
-            if (!string.IsNullOrEmpty(secret))
-            {
-                message = message.Replace(secret, "***").Replace(Uri.EscapeDataString(secret), "***");
-            }
-        }
-        return message;
-    }
+    private TikTokShopException Failure(Exception e, Uri uri) =>
+        ErrorScrub.Failure("Request", e, uri, new[] { _credentials.AppSecret, _credentials.AccessToken, _credentials.ShopCipher });
 }
