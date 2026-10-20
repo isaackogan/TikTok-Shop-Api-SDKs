@@ -27,7 +27,7 @@ pub struct SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile {
     pub has_collaborated: Option<bool>,
     /// User type tag. Possible values: - 1: Privacy creator - 2: Carve-out creator
     #[serde(rename = "user_type_tag", skip_serializing_if = "Option::is_none")]
-    pub user_type_tag: Option<Vec<UserTypeTag>>,
+    pub user_type_tag: Option<Vec<i64>>,
     /// Has invited creaor before 90 days
     #[serde(rename = "has_invited_90d", skip_serializing_if = "Option::is_none")]
     pub has_invited_90d: Option<bool>,
@@ -63,20 +63,6 @@ impl SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile {
             is_rising_star: None,
             creator_level: None,
         }
-    }
-}
-/// User type tag. Possible values: - 1: Privacy creator - 2: Carve-out creator
-#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
-pub enum UserTypeTag {
-    #[serde(rename = "1")]
-    Variant1,
-    #[serde(rename = "2")]
-    Variant2,
-}
-
-impl Default for UserTypeTag {
-    fn default() -> UserTypeTag {
-        Self::Variant1
     }
 }
 

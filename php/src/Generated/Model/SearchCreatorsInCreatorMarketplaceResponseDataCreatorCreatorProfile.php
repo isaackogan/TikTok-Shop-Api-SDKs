@@ -288,21 +288,6 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile implem
         return self::$openAPIModelName;
     }
 
-    public const USER_TYPE_TAG_NUMBER_1 = 1;
-    public const USER_TYPE_TAG_NUMBER_2 = 2;
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getUserTypeTagAllowableValues()
-    {
-        return [
-            self::USER_TYPE_TAG_NUMBER_1,
-            self::USER_TYPE_TAG_NUMBER_2,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -503,15 +488,6 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile implem
     {
         if (is_null($user_type_tag)) {
             throw new \InvalidArgumentException('non-nullable user_type_tag cannot be null');
-        }
-        $allowedValues = $this->getUserTypeTagAllowableValues();
-        if (array_diff($user_type_tag, $allowedValues)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'user_type_tag', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
         }
         $this->container['user_type_tag'] = $user_type_tag;
 

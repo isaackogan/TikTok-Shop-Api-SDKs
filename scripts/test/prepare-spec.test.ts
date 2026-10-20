@@ -3,7 +3,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { parseSpec, prepareSpec } from '../lib/meta.ts';
+import { parseSpec, prepareSpec, relaxResponseEnums } from '../lib/meta.ts';
 
 const root = resolve(import.meta.dirname, '../..');
 const fixtureText = readFileSync(resolve(import.meta.dirname, 'fixtures/mini.openapi.json'), 'utf8');
@@ -193,15 +193,42 @@ describe('prepareSpec: R21 relaxes response and webhook string enums', () => {
     expect(p.either.oneOf[0].enum).toBeUndefined();
   });
 
-  it('keeps integer enums, even on webhook payloads', () => {
+  it('R21b: relaxes integer enums in responses and webhooks too, keeping the values in the description', () => {
     const spec = prep(make({
-      response: { type: 'object', properties: { n: { type: 'integer', enum: [1, 2] } } },
-      schemas: { W: { type: 'object', properties: { type: { type: 'integer', enum: [1] }, kind: { type: 'string', enum: ['A'] } } } },
+      response: { type: 'object', properties: {
+        n: { type: 'integer', enum: [1, 2] },
+        tags: { type: 'array', items: { type: 'integer', format: 'int64', enum: [1, 2], 'x-enum-descriptions': ['a', 'b'] } },
+      } },
+      schemas: { W: { type: 'object', properties: { type: { type: 'integer', const: 1 }, level: { type: ['integer', 'null'], enum: [3, null] }, kind: { type: 'string', enum: ['A'] } } } },
       webhooks: { w: { post: { 'x-tts-webhook-type': 1, requestBody: { content: { 'application/json': { schema: { $ref: S + 'W' } } } } } } },
     }));
-    expect(spec.components.schemas.W.properties.type.enum).toEqual([1]);
+    const props = spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties;
+    expect(props.n).toEqual({ type: 'integer', description: 'Possible values: `1`, `2`' });
+    expect(props.tags.items).toEqual({ type: 'integer', format: 'int64', description: 'Possible values: `1`, `2`' });
+    expect(spec.components.schemas.W.properties.level).toEqual({ type: ['integer', 'null'], description: 'Possible values: `3`' });
     expect(spec.components.schemas.W.properties.kind.enum).toBeUndefined();
-    expect(spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties.n.enum).toEqual([1, 2]);
+    // The webhook `type` discriminator is a const, not an enum: untouched.
+    expect(spec.components.schemas.W.properties.type).toEqual({ type: 'integer', const: 1 });
+  });
+
+  it('R21b: keeps request-only integer enums', () => {
+    const spec = prep(make({ request: { type: 'object', properties: { n: { type: 'integer', enum: [1, 2] } } } }));
+    expect(spec.paths['/a'].post.requestBody.content['application/json'].schema.properties.n.enum).toEqual([1, 2]);
+  });
+
+  it('R21b: no integer enum survives in the live spec\'s responses or webhooks, and every webhook type is a const', () => {
+    const live = parseSpec(readFileSync(resolve(root, '.openapi/tiktok-shop.openapi.json'), 'utf8'));
+    for (const item of Object.values<any>(live.webhooks ?? {})) {
+      const name = item.post.requestBody.content['application/json'].schema.$ref.split('/').pop();
+      const t = live.components.schemas[name].properties.type;
+      expect(t.const, name).toBe(item.post['x-tts-webhook-type']);
+      expect(t.enum, name).toBeUndefined();
+    }
+    const { spec } = prepareSpec(live, 'go', {});
+    // Re-running the relax over the prepared spec finds nothing left to strip in anything a response or webhook reaches.
+    expect(relaxResponseEnums(spec).stripped).toBe(0);
+    const tag = spec.components.schemas.SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile?.properties?.user_type_tag?.items;
+    if (tag) expect(tag.enum).toBeUndefined();
   });
 
   it('keeps a property named "enum" or "example" and walks past it', () => {

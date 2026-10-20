@@ -63,7 +63,7 @@ data class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile (
 
     /* User type tag. Possible values: - 1: Privacy creator - 2: Carve-out creator */
     @SerializedName("user_type_tag")
-    val userTypeTag: kotlin.collections.List<SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile.UserTypeTag>? = null,
+    val userTypeTag: kotlin.collections.List<kotlin.Long>? = null,
 
     /* Has invited creaor before 90 days */
     @SerializedName("has_invited_90d")
@@ -91,15 +91,6 @@ data class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile (
 
 ) {
 
-    /**
-     * User type tag. Possible values: - 1: Privacy creator - 2: Carve-out creator
-     *
-     * Values: _1,_2
-     */
-    enum class UserTypeTag(val value: kotlin.Long) {
-        @SerializedName(value = "1") _1(1),
-        @SerializedName(value = "2") _2(2);
-    }
 
 }
 

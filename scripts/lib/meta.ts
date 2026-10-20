@@ -213,14 +213,15 @@ function webhooksMeta(spec: Json): WebhookMeta[] {
 }
 
 export interface RelaxStats {
-  /** String enums turned into plain strings. */
+  /** String and integer enums turned into plain strings and integers. */
   stripped: number;
   /** Schemas reachable from a response or webhook payload. */
   reachable: number;
 }
 
-const isStringType = (t: unknown): boolean =>
-  t === 'string' || (Array.isArray(t) && t.length > 0 && t.every((x) => x === 'string' || x === 'null') && t.includes('string'));
+/** True when `t` is `kind`, or a type array of `kind` plus optionally "null". */
+const isScalarType = (t: unknown, kind: string): boolean =>
+  t === kind || (Array.isArray(t) && t.length > 0 && t.every((x) => x === kind || x === 'null') && t.includes(kind));
 
 const escapeRegExp = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -238,6 +239,8 @@ function appendValues(schema: Json, values: string[]): void {
 /**
  * R21: TikTok adds values to status-like fields over time, so every string enum a client or
  * webhook receiver can decode becomes a plain string (the values move into the description).
+ * R21b: integer enums get the same treatment and become plain integers. The webhook `type` is a
+ * `const`, not an enum, so it is untouched.
  * Request-only schemas and parameters keep their enums. Mutates `spec` (an already-cloned spec).
  */
 export function relaxResponseEnums(spec: Json): RelaxStats {
@@ -251,8 +254,8 @@ export function relaxResponseEnums(spec: Json): RelaxStats {
     if (!isObj(node) || isRaw(node) || seen.has(node)) return;
     seen.add(node);
     stats.reachable++;
-    if (Array.isArray(node.enum) && isStringType(node.type)) {
-      appendValues(node, node.enum.filter((v: unknown): v is string => typeof v === 'string'));
+    if (Array.isArray(node.enum) && (isScalarType(node.type, 'string') || isScalarType(node.type, 'integer'))) {
+      appendValues(node, node.enum.filter((v: unknown) => v !== null).map((v: unknown) => (isRaw(v) ? String((v as any).rawJSON) : String(v))));
       delete node.enum;
       delete node['x-enum-varnames'];
       delete node['x-enum-descriptions'];

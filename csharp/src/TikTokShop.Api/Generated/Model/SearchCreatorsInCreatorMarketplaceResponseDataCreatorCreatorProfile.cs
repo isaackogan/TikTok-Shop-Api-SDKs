@@ -33,22 +33,6 @@ namespace TikTokShop.Api.Generated.Model
     public partial class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile : IValidatableObject
     {
         /// <summary>
-        /// Defines UserTypeTag
-        /// </summary>
-        public enum UserTypeTagEnum : long
-        {
-            /// <summary>
-            /// Enum NUMBER_1 for value: 1
-            /// </summary>
-            NUMBER_1 = 1,
-
-            /// <summary>
-            /// Enum NUMBER_2 for value: 2
-            /// </summary>
-            NUMBER_2 = 2
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile" /> class.
         /// </summary>
         /// <param name="isOfficialRecommend">Creator has official recommend tag or not.</param>
@@ -62,7 +46,7 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="isEligibleFlatFee">Is creator eligible for flat fee, only available for US local seller.</param>
         /// <param name="isRisingStar">Creator has rising star tag or not.</param>
         /// <param name="creatorLevel">Creator level.</param>
-        public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile(bool isOfficialRecommend = default, string creatorBindMcnName = default, bool isFastGrowing = default, bool hasCollaborated = default, List<UserTypeTagEnum> userTypeTag = default, bool hasInvited90d = default, bool isCreatorBlocked = default, string ppsScore = default, bool isEligibleFlatFee = default, bool isRisingStar = default, long creatorLevel = default)
+        public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile(bool isOfficialRecommend = default, string creatorBindMcnName = default, bool isFastGrowing = default, bool hasCollaborated = default, List<long> userTypeTag = default, bool hasInvited90d = default, bool isCreatorBlocked = default, string ppsScore = default, bool isEligibleFlatFee = default, bool isRisingStar = default, long creatorLevel = default)
         {
             this.IsOfficialRecommend = isOfficialRecommend;
             this.CreatorBindMcnName = creatorBindMcnName;
@@ -111,7 +95,7 @@ namespace TikTokShop.Api.Generated.Model
         /// </summary>
         /// <value>User type tag. Possible values: - 1: Privacy creator - 2: Carve-out creator</value>
         [DataMember(Name = "user_type_tag", EmitDefaultValue = false)]
-        public List<SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile.UserTypeTagEnum> UserTypeTag { get; set; }
+        public List<long> UserTypeTag { get; set; }
 
         /// <summary>
         /// Has invited creaor before 90 days

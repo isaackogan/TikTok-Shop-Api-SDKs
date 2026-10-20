@@ -48,10 +48,10 @@ export interface SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorPro
      * Possible values:
      * - 1: Privacy creator
      * - 2: Carve-out creator
-     * @type {Array<SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum>}
+     * @type {Array<number>}
      * @memberof SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile
      */
-    userTypeTag?: Array<SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum>;
+    userTypeTag?: Array<number>;
     /**
      * Has invited creaor before 90 days
      * @type {boolean}
@@ -89,17 +89,6 @@ export interface SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorPro
      */
     creatorLevel?: number;
 }
-
-
-/**
- * @export
- */
-export const SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum = {
-    NUMBER_1: 1,
-    NUMBER_2: 2
-} as const;
-export type SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum = typeof SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum[keyof typeof SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagEnum];
-
 
 /**
  * Check if a given object implements the SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile interface.

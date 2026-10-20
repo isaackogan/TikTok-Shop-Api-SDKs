@@ -72,68 +72,10 @@ public class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile
   @javax.annotation.Nullable
   private Boolean hasCollaborated;
 
-  /**
-   * Gets or Sets userTypeTag
-   */
-  @JsonAdapter(UserTypeTagEnum.Adapter.class)
-  public enum UserTypeTagEnum {
-    /**
-     * Privacy creator
-     */
-    NUMBER_1(1l),
-    
-    /**
-     * Carve-out creator
-     */
-    NUMBER_2(2l);
-
-    private Long value;
-
-    UserTypeTagEnum(Long value) {
-      this.value = value;
-    }
-
-    public Long getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static UserTypeTagEnum fromValue(Long value) {
-      for (UserTypeTagEnum b : UserTypeTagEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<UserTypeTagEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final UserTypeTagEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public UserTypeTagEnum read(final JsonReader jsonReader) throws IOException {
-        Long value =  jsonReader.nextLong();
-        return UserTypeTagEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      Long value = jsonElement.getAsLong();
-      UserTypeTagEnum.fromValue(value);
-    }
-  }
-
   public static final String SERIALIZED_NAME_USER_TYPE_TAG = "user_type_tag";
   @SerializedName(SERIALIZED_NAME_USER_TYPE_TAG)
   @javax.annotation.Nullable
-  private List<UserTypeTagEnum> userTypeTag = new ArrayList<>();
+  private List<Long> userTypeTag = new ArrayList<>();
 
   public static final String SERIALIZED_NAME_HAS_INVITED90D = "has_invited_90d";
   @SerializedName(SERIALIZED_NAME_HAS_INVITED90D)
@@ -244,12 +186,12 @@ public class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile
   }
 
 
-  public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile userTypeTag(@javax.annotation.Nullable List<UserTypeTagEnum> userTypeTag) {
+  public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile userTypeTag(@javax.annotation.Nullable List<Long> userTypeTag) {
     this.userTypeTag = userTypeTag;
     return this;
   }
 
-  public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile addUserTypeTagItem(UserTypeTagEnum userTypeTagItem) {
+  public SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile addUserTypeTagItem(Long userTypeTagItem) {
     if (this.userTypeTag == null) {
       this.userTypeTag = new ArrayList<>();
     }
@@ -262,11 +204,11 @@ public class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile
    * @return userTypeTag
    */
   @javax.annotation.Nullable
-  public List<UserTypeTagEnum> getUserTypeTag() {
+  public List<Long> getUserTypeTag() {
     return userTypeTag;
   }
 
-  public void setUserTypeTag(@javax.annotation.Nullable List<UserTypeTagEnum> userTypeTag) {
+  public void setUserTypeTag(@javax.annotation.Nullable List<Long> userTypeTag) {
     this.userTypeTag = userTypeTag;
   }
 

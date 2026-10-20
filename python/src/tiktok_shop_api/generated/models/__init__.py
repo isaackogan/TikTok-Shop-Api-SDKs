@@ -2947,9 +2947,6 @@ from .search_creators_in_creator_marketplace_response_data_creator import (
 from .search_creators_in_creator_marketplace_response_data_creator_creator_profile import (
     SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile,
 )
-from .search_creators_in_creator_marketplace_response_data_creator_creator_profile_user_type_tag_item import (
-    SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem,
-)
 from .search_creators_in_creator_marketplace_response_data_creator_top_follower_demographic import (
     SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic,
 )
@@ -5537,7 +5534,6 @@ __all__ = (
     "SearchCreatorsInCreatorMarketplaceResponseData",
     "SearchCreatorsInCreatorMarketplaceResponseDataCreator",
     "SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile",
-    "SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem",
     "SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographic",
     "SearchCreatorsInCreatorMarketplaceResponseDataCreatorTopFollowerDemographicMajorGender",
     "SearchCreatorTargetCollaborationsRequest",

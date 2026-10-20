@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.search_creators_in_creator_marketplace_response_data_creator_creator_profile_user_type_tag_item import (
-    SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem,
-)
 from ..types import UNSET, Unset
 
 T = TypeVar("T", bound="SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile")
@@ -22,8 +19,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
         creator_bind_mcn_name (str | Unset): Creator bind MCN name
         is_fast_growing (bool | Unset): Creator has fast growing tag or not
         has_collaborated (bool | Unset): Has collaborated with this creator or not
-        user_type_tag (list[SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem] |
-            Unset): User type tag.
+        user_type_tag (list[int] | Unset): User type tag.
             Possible values:
             - 1: Privacy creator
             - 2: Carve-out creator
@@ -41,9 +37,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
     creator_bind_mcn_name: str | Unset = UNSET
     is_fast_growing: bool | Unset = UNSET
     has_collaborated: bool | Unset = UNSET
-    user_type_tag: list[SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem] | Unset = (
-        UNSET
-    )
+    user_type_tag: list[int] | Unset = UNSET
     has_invited_90d: bool | Unset = UNSET
     is_creator_blocked: bool | Unset = UNSET
     pps_score: str | Unset = UNSET
@@ -63,10 +57,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
 
         user_type_tag: list[int] | Unset = UNSET
         if not isinstance(self.user_type_tag, Unset):
-            user_type_tag = []
-            for user_type_tag_item_data in self.user_type_tag:
-                user_type_tag_item = user_type_tag_item_data.value
-                user_type_tag.append(user_type_tag_item)
+            user_type_tag = self.user_type_tag
 
         has_invited_90d = self.has_invited_90d
 
@@ -119,18 +110,7 @@ class SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfile:
 
         has_collaborated = d.pop("has_collaborated", UNSET)
 
-        _user_type_tag = d.pop("user_type_tag", UNSET)
-        user_type_tag: (
-            list[SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem] | Unset
-        ) = UNSET
-        if _user_type_tag is not UNSET:
-            user_type_tag = []
-            for user_type_tag_item_data in _user_type_tag:
-                user_type_tag_item = SearchCreatorsInCreatorMarketplaceResponseDataCreatorCreatorProfileUserTypeTagItem(
-                    user_type_tag_item_data
-                )
-
-                user_type_tag.append(user_type_tag_item)
+        user_type_tag = cast(list[int], d.pop("user_type_tag", UNSET))
 
         has_invited_90d = d.pop("has_invited_90d", UNSET)
 
