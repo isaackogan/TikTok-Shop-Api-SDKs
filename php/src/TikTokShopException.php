@@ -60,7 +60,7 @@ class TikTokShopException extends \RuntimeException
     {
         try {
             return $decode();
-        } catch (self $e) {
+        } catch (TikTokShopException $e) {
             throw $e;
         } catch (\InvalidArgumentException | \UnexpectedValueException | \TypeError | \ValueError $e) {
             $body = (string) $response->getBody();
