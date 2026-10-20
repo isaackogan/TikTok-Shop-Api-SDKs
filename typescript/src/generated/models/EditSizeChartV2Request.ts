@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateSizeChartV2RequestSizeChartData } from './CreateSizeChartV2RequestSizeChartData';
+import type { SizeChartData } from './SizeChartData';
 import {
-    CreateSizeChartV2RequestSizeChartDataFromJSON,
-    CreateSizeChartV2RequestSizeChartDataFromJSONTyped,
-    CreateSizeChartV2RequestSizeChartDataToJSON,
-    CreateSizeChartV2RequestSizeChartDataToJSONTyped,
-} from './CreateSizeChartV2RequestSizeChartData';
+    SizeChartDataFromJSON,
+    SizeChartDataFromJSONTyped,
+    SizeChartDataToJSON,
+    SizeChartDataToJSONTyped,
+} from './SizeChartData';
 
 /**
  * 
@@ -29,10 +29,10 @@ import {
 export interface EditSizeChartV2Request {
     /**
      * Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
-     * @type {CreateSizeChartV2RequestSizeChartData}
+     * @type {SizeChartData}
      * @memberof EditSizeChartV2Request
      */
-    sizeChartData: CreateSizeChartV2RequestSizeChartData;
+    sizeChartData: SizeChartData;
     /**
      * The ID of the seller-owned reusable size chart template to update.
      * @type {string}
@@ -66,7 +66,7 @@ export function EditSizeChartV2RequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'sizeChartData': CreateSizeChartV2RequestSizeChartDataFromJSON(json['size_chart_data']),
+        'sizeChartData': SizeChartDataFromJSON(json['size_chart_data']),
         'sizeChartId': json['size_chart_id'],
         'templateName': json['template_name'] == null ? undefined : json['template_name'],
     };
@@ -83,7 +83,7 @@ export function EditSizeChartV2RequestToJSONTyped(value?: EditSizeChartV2Request
 
     return {
         
-        'size_chart_data': CreateSizeChartV2RequestSizeChartDataToJSON(value['sizeChartData']),
+        'size_chart_data': SizeChartDataToJSON(value['sizeChartData']),
         'size_chart_id': value['sizeChartId'],
         'template_name': value['templateName'],
     };

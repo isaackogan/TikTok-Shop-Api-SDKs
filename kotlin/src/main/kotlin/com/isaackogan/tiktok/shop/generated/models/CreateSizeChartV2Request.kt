@@ -23,7 +23,7 @@
 
 package com.isaackogan.tiktok.shop.generated.models
 
-import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartV2RequestSizeChartData
+import com.isaackogan.tiktok.shop.generated.models.SizeChartData
 
 import com.google.gson.annotations.SerializedName
 
@@ -45,7 +45,7 @@ data class CreateSizeChartV2Request (
 
     /* Structured size chart content. */
     @SerializedName("size_chart_data")
-    val sizeChartData: CreateSizeChartV2RequestSizeChartData,
+    val sizeChartData: SizeChartData,
 
     /* Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. */
     @SerializedName("size_chart_mode")

@@ -20,13 +20,13 @@ import {
     HeaderToJSON,
     HeaderToJSONTyped,
 } from './Header';
-import type { Row } from './Row';
+import type { TableRow } from './TableRow';
 import {
-    RowFromJSON,
-    RowFromJSONTyped,
-    RowToJSON,
-    RowToJSONTyped,
-} from './Row';
+    TableRowFromJSON,
+    TableRowFromJSONTyped,
+    TableRowToJSON,
+    TableRowToJSONTyped,
+} from './TableRow';
 
 /**
  * 
@@ -42,10 +42,10 @@ export interface Table {
     headers: Array<Header>;
     /**
      * Rows of the size chart. Provide 1 to 45 rows.
-     * @type {Array<Row>}
+     * @type {Array<TableRow>}
      * @memberof Table
      */
-    rows: Array<Row>;
+    rows: Array<TableRow>;
 }
 
 /**
@@ -68,7 +68,7 @@ export function TableFromJSONTyped(json: any, ignoreDiscriminator: boolean): Tab
     return {
         
         'headers': ((json['headers'] as Array<any>).map(HeaderFromJSON)),
-        'rows': ((json['rows'] as Array<any>).map(RowFromJSON)),
+        'rows': ((json['rows'] as Array<any>).map(TableRowFromJSON)),
     };
 }
 
@@ -84,7 +84,7 @@ export function TableToJSONTyped(value?: Table | null, ignoreDiscriminator: bool
     return {
         
         'headers': ((value['headers'] as Array<any>).map(HeaderToJSON)),
-        'rows': ((value['rows'] as Array<any>).map(RowToJSON)),
+        'rows': ((value['rows'] as Array<any>).map(TableRowToJSON)),
     };
 }
 

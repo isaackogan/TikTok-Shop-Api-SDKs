@@ -94,13 +94,6 @@ pub enum CreateResponsiblePersonError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`create_size_chart`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CreateSizeChartError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`create_size_chart_v2`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -147,13 +140,6 @@ pub enum EditGlobalProductError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum EditProductError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`edit_size_chart`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum EditSizeChartError {
     UnknownValue(serde_json::Value),
 }
 
@@ -1029,52 +1015,6 @@ pub async fn create_responsible_person(configuration: &configuration::Configurat
     }
 }
 
-/// Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID.
-pub async fn create_size_chart(configuration: &configuration::Configuration, create_size_chart_request: models::CreateSizeChartRequest) -> Result<models::CreateSizeChartResponse, Error<CreateSizeChartError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_body_create_size_chart_request = create_size_chart_request;
-
-    let uri_str = format!("{}/product/202608/size_charts", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-tts-access-token", value);
-    };
-    req_builder = req_builder.json(&p_body_create_size_chart_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CreateSizeChartResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CreateSizeChartResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CreateSizeChartError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
 /// Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID. The request must identify one authorized shop using shop_cipher.
 pub async fn create_size_chart_v2(configuration: &configuration::Configuration, create_size_chart_v2_request: models::CreateSizeChartV2Request) -> Result<models::CreateSizeChartV2Response, Error<CreateSizeChartV2Error>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -1395,52 +1335,6 @@ pub async fn edit_product(configuration: &configuration::Configuration, product_
     } else {
         let content = resp.text().await?;
         let entity: Option<EditProductError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name.
-pub async fn edit_size_chart(configuration: &configuration::Configuration, edit_size_chart_request: models::EditSizeChartRequest) -> Result<models::EditSizeChartResponse, Error<EditSizeChartError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_body_edit_size_chart_request = edit_size_chart_request;
-
-    let uri_str = format!("{}/product/202608/size_charts/edit", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-tts-access-token", value);
-    };
-    req_builder = req_builder.json(&p_body_edit_size_chart_request);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-    let content_type = resp
-        .headers()
-        .get("content-type")
-        .and_then(|v| v.to_str().ok())
-        .unwrap_or("application/octet-stream");
-    let content_type = super::ContentType::from(content_type);
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        match content_type {
-            ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::EditSizeChartResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::EditSizeChartResponse`")))),
-        }
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<EditSizeChartError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

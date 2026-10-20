@@ -23,7 +23,7 @@ type CreateSizeChartV2Request struct {
 	// The leaf category for which to create the size chart. The category must support size charts.
 	CategoryId string `json:"category_id"`
 	// Structured size chart content.
-	SizeChartData CreateSizeChartV2RequestSizeChartData `json:"size_chart_data"`
+	SizeChartData SizeChartData `json:"size_chart_data"`
 	// Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product.
 	SizeChartMode string `json:"size_chart_mode"`
 	// Template name. Required when size_chart_mode is REUSABLE_TEMPLATE. When size_chart_mode is PRODUCT_SCOPED, any value provided for this field is discarded and is not stored.
@@ -37,7 +37,7 @@ type _CreateSizeChartV2Request CreateSizeChartV2Request
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSizeChartV2Request(categoryId string, sizeChartData CreateSizeChartV2RequestSizeChartData, sizeChartMode string) *CreateSizeChartV2Request {
+func NewCreateSizeChartV2Request(categoryId string, sizeChartData SizeChartData, sizeChartMode string) *CreateSizeChartV2Request {
 	this := CreateSizeChartV2Request{}
 	this.CategoryId = categoryId
 	this.SizeChartData = sizeChartData
@@ -78,9 +78,9 @@ func (o *CreateSizeChartV2Request) SetCategoryId(v string) {
 }
 
 // GetSizeChartData returns the SizeChartData field value
-func (o *CreateSizeChartV2Request) GetSizeChartData() CreateSizeChartV2RequestSizeChartData {
+func (o *CreateSizeChartV2Request) GetSizeChartData() SizeChartData {
 	if o == nil {
-		var ret CreateSizeChartV2RequestSizeChartData
+		var ret SizeChartData
 		return ret
 	}
 
@@ -89,7 +89,7 @@ func (o *CreateSizeChartV2Request) GetSizeChartData() CreateSizeChartV2RequestSi
 
 // GetSizeChartDataOk returns a tuple with the SizeChartData field value
 // and a boolean to check if the value has been set.
-func (o *CreateSizeChartV2Request) GetSizeChartDataOk() (*CreateSizeChartV2RequestSizeChartData, bool) {
+func (o *CreateSizeChartV2Request) GetSizeChartDataOk() (*SizeChartData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *CreateSizeChartV2Request) GetSizeChartDataOk() (*CreateSizeChartV2Reque
 }
 
 // SetSizeChartData sets field value
-func (o *CreateSizeChartV2Request) SetSizeChartData(v CreateSizeChartV2RequestSizeChartData) {
+func (o *CreateSizeChartV2Request) SetSizeChartData(v SizeChartData) {
 	o.SizeChartData = v
 }
 

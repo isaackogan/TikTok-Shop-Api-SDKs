@@ -53,16 +53,6 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class SizeChartData {
-  public static final String SERIALIZED_NAME_TABLE = "table";
-  @SerializedName(SERIALIZED_NAME_TABLE)
-  @javax.annotation.Nonnull
-  private Table table;
-
-  public static final String SERIALIZED_NAME_SIZE_TYPES = "size_types";
-  @SerializedName(SERIALIZED_NAME_SIZE_TYPES)
-  @javax.annotation.Nullable
-  private List<String> sizeTypes = new ArrayList<>();
-
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   @javax.annotation.Nullable
@@ -141,6 +131,16 @@ public class SizeChartData {
   @javax.annotation.Nonnull
   private MeasurementTypeEnum measurementType;
 
+  public static final String SERIALIZED_NAME_SIZE_TYPES = "size_types";
+  @SerializedName(SERIALIZED_NAME_SIZE_TYPES)
+  @javax.annotation.Nullable
+  private List<String> sizeTypes = new ArrayList<>();
+
+  public static final String SERIALIZED_NAME_TABLE = "table";
+  @SerializedName(SERIALIZED_NAME_TABLE)
+  @javax.annotation.Nonnull
+  private Table table;
+
   /**
    * Possible values: METRIC: metric units; IMPERIAL: imperial units.
    */
@@ -207,52 +207,6 @@ public class SizeChartData {
   public SizeChartData() {
   }
 
-  public SizeChartData table(@javax.annotation.Nonnull Table table) {
-    this.table = table;
-    return this;
-  }
-
-  /**
-   * Table containing headers and rows.
-   * @return table
-   */
-  @javax.annotation.Nonnull
-  public Table getTable() {
-    return table;
-  }
-
-  public void setTable(@javax.annotation.Nonnull Table table) {
-    this.table = table;
-  }
-
-
-  public SizeChartData sizeTypes(@javax.annotation.Nullable List<String> sizeTypes) {
-    this.sizeTypes = sizeTypes;
-    return this;
-  }
-
-  public SizeChartData addSizeTypesItem(String sizeTypesItem) {
-    if (this.sizeTypes == null) {
-      this.sizeTypes = new ArrayList<>();
-    }
-    this.sizeTypes.add(sizeTypesItem);
-    return this;
-  }
-
-  /**
-   * Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&amp;tall: Big &amp; Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
-   * @return sizeTypes
-   */
-  @javax.annotation.Nullable
-  public List<String> getSizeTypes() {
-    return sizeTypes;
-  }
-
-  public void setSizeTypes(@javax.annotation.Nullable List<String> sizeTypes) {
-    this.sizeTypes = sizeTypes;
-  }
-
-
   public SizeChartData description(@javax.annotation.Nullable String description) {
     this.description = description;
     return this;
@@ -307,6 +261,52 @@ public class SizeChartData {
 
   public void setMeasurementType(@javax.annotation.Nonnull MeasurementTypeEnum measurementType) {
     this.measurementType = measurementType;
+  }
+
+
+  public SizeChartData sizeTypes(@javax.annotation.Nullable List<String> sizeTypes) {
+    this.sizeTypes = sizeTypes;
+    return this;
+  }
+
+  public SizeChartData addSizeTypesItem(String sizeTypesItem) {
+    if (this.sizeTypes == null) {
+      this.sizeTypes = new ArrayList<>();
+    }
+    this.sizeTypes.add(sizeTypesItem);
+    return this;
+  }
+
+  /**
+   * Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&amp;tall: Big &amp; Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
+   * @return sizeTypes
+   */
+  @javax.annotation.Nullable
+  public List<String> getSizeTypes() {
+    return sizeTypes;
+  }
+
+  public void setSizeTypes(@javax.annotation.Nullable List<String> sizeTypes) {
+    this.sizeTypes = sizeTypes;
+  }
+
+
+  public SizeChartData table(@javax.annotation.Nonnull Table table) {
+    this.table = table;
+    return this;
+  }
+
+  /**
+   * Table containing headers and rows.
+   * @return table
+   */
+  @javax.annotation.Nonnull
+  public Table getTable() {
+    return table;
+  }
+
+  public void setTable(@javax.annotation.Nonnull Table table) {
+    this.table = table;
   }
 
 
@@ -383,29 +383,29 @@ public class SizeChartData {
       return false;
     }
     SizeChartData sizeChartData = (SizeChartData) o;
-    return Objects.equals(this.table, sizeChartData.table) &&
-        Objects.equals(this.sizeTypes, sizeChartData.sizeTypes) &&
-        Objects.equals(this.description, sizeChartData.description) &&
+    return Objects.equals(this.description, sizeChartData.description) &&
         Objects.equals(this.isOneSize, sizeChartData.isOneSize) &&
         Objects.equals(this.measurementType, sizeChartData.measurementType) &&
+        Objects.equals(this.sizeTypes, sizeChartData.sizeTypes) &&
+        Objects.equals(this.table, sizeChartData.table) &&
         Objects.equals(this.unitSystem, sizeChartData.unitSystem)&&
         Objects.equals(this.additionalProperties, sizeChartData.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(table, sizeTypes, description, isOneSize, measurementType, unitSystem, additionalProperties);
+    return Objects.hash(description, isOneSize, measurementType, sizeTypes, table, unitSystem, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class SizeChartData {\n");
-    sb.append("    table: ").append(toIndentedString(table)).append("\n");
-    sb.append("    sizeTypes: ").append(toIndentedString(sizeTypes)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    isOneSize: ").append(toIndentedString(isOneSize)).append("\n");
     sb.append("    measurementType: ").append(toIndentedString(measurementType)).append("\n");
+    sb.append("    sizeTypes: ").append(toIndentedString(sizeTypes)).append("\n");
+    sb.append("    table: ").append(toIndentedString(table)).append("\n");
     sb.append("    unitSystem: ").append(toIndentedString(unitSystem)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -426,10 +426,10 @@ public class SizeChartData {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("table", "size_types", "description", "is_one_size", "measurement_type", "unit_system"));
+    openapiFields = new HashSet<String>(Arrays.asList("description", "is_one_size", "measurement_type", "size_types", "table", "unit_system"));
 
     // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>(Arrays.asList("table", "measurement_type", "unit_system"));
+    openapiRequiredFields = new HashSet<String>(Arrays.asList("measurement_type", "table", "unit_system"));
   }
 
   /**
@@ -452,12 +452,6 @@ public class SizeChartData {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `table`
-      Table.validateJsonElement(jsonObj.get("table"));
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("size_types") != null && !jsonObj.get("size_types").isJsonNull() && !jsonObj.get("size_types").isJsonArray()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `size_types` to be an array in the JSON string but got `%s`", jsonObj.get("size_types").toString()));
-      }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
@@ -466,6 +460,12 @@ public class SizeChartData {
       }
       // validate the required field `measurement_type`
       MeasurementTypeEnum.validateJsonElement(jsonObj.get("measurement_type"));
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("size_types") != null && !jsonObj.get("size_types").isJsonNull() && !jsonObj.get("size_types").isJsonArray()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `size_types` to be an array in the JSON string but got `%s`", jsonObj.get("size_types").toString()));
+      }
+      // validate the required field `table`
+      Table.validateJsonElement(jsonObj.get("table"));
       if (!jsonObj.get("unit_system").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `unit_system` to be a primitive type in the JSON string but got `%s`", jsonObj.get("unit_system").toString()));
       }

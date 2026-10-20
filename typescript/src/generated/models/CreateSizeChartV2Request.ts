@@ -13,13 +13,13 @@
  */
 
 import { mapValues } from '../runtime';
-import type { CreateSizeChartV2RequestSizeChartData } from './CreateSizeChartV2RequestSizeChartData';
+import type { SizeChartData } from './SizeChartData';
 import {
-    CreateSizeChartV2RequestSizeChartDataFromJSON,
-    CreateSizeChartV2RequestSizeChartDataFromJSONTyped,
-    CreateSizeChartV2RequestSizeChartDataToJSON,
-    CreateSizeChartV2RequestSizeChartDataToJSONTyped,
-} from './CreateSizeChartV2RequestSizeChartData';
+    SizeChartDataFromJSON,
+    SizeChartDataFromJSONTyped,
+    SizeChartDataToJSON,
+    SizeChartDataToJSONTyped,
+} from './SizeChartData';
 
 /**
  * 
@@ -35,10 +35,10 @@ export interface CreateSizeChartV2Request {
     categoryId: string;
     /**
      * Structured size chart content.
-     * @type {CreateSizeChartV2RequestSizeChartData}
+     * @type {SizeChartData}
      * @memberof CreateSizeChartV2Request
      */
-    sizeChartData: CreateSizeChartV2RequestSizeChartData;
+    sizeChartData: SizeChartData;
     /**
      * Possible values:
      * REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products.
@@ -77,7 +77,7 @@ export function CreateSizeChartV2RequestFromJSONTyped(json: any, ignoreDiscrimin
     return {
         
         'categoryId': json['category_id'],
-        'sizeChartData': CreateSizeChartV2RequestSizeChartDataFromJSON(json['size_chart_data']),
+        'sizeChartData': SizeChartDataFromJSON(json['size_chart_data']),
         'sizeChartMode': json['size_chart_mode'],
         'templateName': json['template_name'] == null ? undefined : json['template_name'],
     };
@@ -95,7 +95,7 @@ export function CreateSizeChartV2RequestToJSONTyped(value?: CreateSizeChartV2Req
     return {
         
         'category_id': value['categoryId'],
-        'size_chart_data': CreateSizeChartV2RequestSizeChartDataToJSON(value['sizeChartData']),
+        'size_chart_data': SizeChartDataToJSON(value['sizeChartData']),
         'size_chart_mode': value['sizeChartMode'],
         'template_name': value['templateName'],
     };

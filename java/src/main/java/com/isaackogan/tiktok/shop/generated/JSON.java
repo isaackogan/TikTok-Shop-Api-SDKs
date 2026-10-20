@@ -181,7 +181,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Carton.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Category.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CategoryChain.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Cell.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Certification.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CheckCreatorOutreachEligibilityRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CheckCreatorOutreachEligibilityRequestCreatorInfo.CustomTypeAdapterFactory());
@@ -351,14 +350,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateReturnRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateReturnResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateReturnResponseData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartResponse.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartResponseData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartResponseDataData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2Request.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2RequestSizeChartData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2RequestSizeChartDataTable.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2RequestSizeChartDataTableHeader.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2ResponseData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.CreateTargetCollaborationRequest.CustomTypeAdapterFactory());
@@ -440,10 +432,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditProductResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditProductResponseData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditProductResponseDataAudit.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartResponse.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartResponseData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartResponseDataData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartV2Request.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartV2Response.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.EditSizeChartV2ResponseData.CustomTypeAdapterFactory());
@@ -1664,7 +1652,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.ReviewAftersalesRequestsRequestAftersalesRequestDecisionLineItemDecisionReasonMedia.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.ReviewAftersalesRequestsResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.ReviewAftersalesRequestsResponseData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Row.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.SKUStatusChangeWebhook.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.SKUStatusChangeWebhookData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.SKUStatusChangeWebhookDataSku.CustomTypeAdapterFactory());
@@ -2031,6 +2018,8 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Suggestion.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.SupplementarySkuImage.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Table.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.TableRow.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.TableRowCell.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.TargetCollaborationConflict.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Tax.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.Template.CustomTypeAdapterFactory());

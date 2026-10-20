@@ -24,7 +24,7 @@
 package com.isaackogan.tiktok.shop.generated.models
 
 import com.isaackogan.tiktok.shop.generated.models.Header
-import com.isaackogan.tiktok.shop.generated.models.Row
+import com.isaackogan.tiktok.shop.generated.models.TableRow
 
 import com.google.gson.annotations.SerializedName
 
@@ -44,7 +44,7 @@ data class Table (
 
     /* Rows of the size chart. Provide 1 to 45 rows. */
     @SerializedName("rows")
-    val rows: kotlin.collections.List<Row>
+    val rows: kotlin.collections.List<TableRow>
 
 ) {
 

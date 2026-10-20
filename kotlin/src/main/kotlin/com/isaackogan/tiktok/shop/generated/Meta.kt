@@ -310,8 +310,6 @@ object Meta {
         Operation("getShopSKPPSummary", "Products", "products", "ProductsApi", "GET", "/product/202606/skpps/sum", true),
         Operation("getProductSKPPDetail", "Products", "products", "ProductsApi", "GET", "/product/202606/skpps/{product_id}", true),
         Operation("updateStockOperationSettings", "Products", "products", "ProductsApi", "POST", "/product/202608/inventory/operation/settings", true),
-        Operation("createSizeChart", "Products", "products", "ProductsApi", "POST", "/product/202608/size_charts", false),
-        Operation("editSizeChart", "Products", "products", "ProductsApi", "POST", "/product/202608/size_charts/edit", false),
         Operation("suggestBrands", "Products", "products", "ProductsApi", "POST", "/product/202609/brands/suggest", true),
         Operation("predictProductPackageDimensionsAndWeight", "Products", "products", "ProductsApi", "POST", "/product/202609/products/package/predict", true),
         Operation("recommendRequiredProductProperties", "Products", "products", "ProductsApi", "POST", "/product/202609/products/properties/recommend", true),

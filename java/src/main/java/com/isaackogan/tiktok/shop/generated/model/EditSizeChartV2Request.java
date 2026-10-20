@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.isaackogan.tiktok.shop.generated.model.CreateSizeChartV2RequestSizeChartData;
+import com.isaackogan.tiktok.shop.generated.model.SizeChartData;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -54,7 +54,7 @@ public class EditSizeChartV2Request {
   public static final String SERIALIZED_NAME_SIZE_CHART_DATA = "size_chart_data";
   @SerializedName(SERIALIZED_NAME_SIZE_CHART_DATA)
   @javax.annotation.Nonnull
-  private CreateSizeChartV2RequestSizeChartData sizeChartData;
+  private SizeChartData sizeChartData;
 
   public static final String SERIALIZED_NAME_SIZE_CHART_ID = "size_chart_id";
   @SerializedName(SERIALIZED_NAME_SIZE_CHART_ID)
@@ -69,7 +69,7 @@ public class EditSizeChartV2Request {
   public EditSizeChartV2Request() {
   }
 
-  public EditSizeChartV2Request sizeChartData(@javax.annotation.Nonnull CreateSizeChartV2RequestSizeChartData sizeChartData) {
+  public EditSizeChartV2Request sizeChartData(@javax.annotation.Nonnull SizeChartData sizeChartData) {
     this.sizeChartData = sizeChartData;
     return this;
   }
@@ -79,11 +79,11 @@ public class EditSizeChartV2Request {
    * @return sizeChartData
    */
   @javax.annotation.Nonnull
-  public CreateSizeChartV2RequestSizeChartData getSizeChartData() {
+  public SizeChartData getSizeChartData() {
     return sizeChartData;
   }
 
-  public void setSizeChartData(@javax.annotation.Nonnull CreateSizeChartV2RequestSizeChartData sizeChartData) {
+  public void setSizeChartData(@javax.annotation.Nonnull SizeChartData sizeChartData) {
     this.sizeChartData = sizeChartData;
   }
 
@@ -244,7 +244,7 @@ public class EditSizeChartV2Request {
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
       // validate the required field `size_chart_data`
-      CreateSizeChartV2RequestSizeChartData.validateJsonElement(jsonObj.get("size_chart_data"));
+      SizeChartData.validateJsonElement(jsonObj.get("size_chart_data"));
       if (!jsonObj.get("size_chart_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `size_chart_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("size_chart_id").toString()));
       }

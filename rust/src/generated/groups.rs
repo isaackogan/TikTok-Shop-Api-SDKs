@@ -3742,22 +3742,6 @@ impl ProductsApi {
             .map_err(Error::from)
     }
 
-    /// Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID.
-    pub async fn create_size_chart(
-        &self,
-        create_size_chart_request: models::CreateSizeChartRequest,
-    ) -> Result<models::CreateSizeChartResponse, Error> {
-        apis::products_api::create_size_chart(&self.config, create_size_chart_request).await.map_err(Error::from)
-    }
-
-    /// Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name.
-    pub async fn edit_size_chart(
-        &self,
-        edit_size_chart_request: models::EditSizeChartRequest,
-    ) -> Result<models::EditSizeChartResponse, Error> {
-        apis::products_api::edit_size_chart(&self.config, edit_size_chart_request).await.map_err(Error::from)
-    }
-
     /// Recommend brands based on product information.
     pub async fn suggest_brands(
         &self,

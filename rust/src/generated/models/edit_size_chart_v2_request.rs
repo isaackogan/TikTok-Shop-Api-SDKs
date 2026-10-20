@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 pub struct EditSizeChartV2Request {
     /// Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
     #[serde(rename = "size_chart_data")]
-    pub size_chart_data: Box<models::CreateSizeChartV2RequestSizeChartData>,
+    pub size_chart_data: Box<models::SizeChartData>,
     /// The ID of the seller-owned reusable size chart template to update.
     #[serde(rename = "size_chart_id")]
     pub size_chart_id: String,
@@ -25,7 +25,7 @@ pub struct EditSizeChartV2Request {
 }
 
 impl EditSizeChartV2Request {
-    pub fn new(size_chart_data: models::CreateSizeChartV2RequestSizeChartData, size_chart_id: String) -> EditSizeChartV2Request {
+    pub fn new(size_chart_data: models::SizeChartData, size_chart_id: String) -> EditSizeChartV2Request {
         EditSizeChartV2Request {
             size_chart_data: Box::new(size_chart_data),
             size_chart_id,

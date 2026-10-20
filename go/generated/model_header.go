@@ -20,10 +20,10 @@ var _ MappedNullable = &Header{}
 
 // Header struct for Header
 type Header struct {
-	// Header display name. Maximum length: 32 characters.
-	Name string `json:"name"`
 	// Standard size-system or measurement ID. For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type. For size-system columns, use the following predefined IDs: - Size: size_chart_size_system_size - US: size_chart_size_system_us - UK: size_chart_size_system_uk - EU: size_chart_size_system_eu - JP: size_chart_size_system_jp - MX: size_chart_size_system_mx Omit this field for custom columns.
 	Id *string `json:"id,omitempty"`
+	// Header display name. Maximum length: 32 characters.
+	Name string `json:"name"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,30 +45,6 @@ func NewHeader(name string) *Header {
 func NewHeaderWithDefaults() *Header {
 	this := Header{}
 	return &this
-}
-
-// GetName returns the Name field value
-func (o *Header) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *Header) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *Header) SetName(v string) {
-	o.Name = v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -103,6 +79,30 @@ func (o *Header) SetId(v string) {
 	o.Id = &v
 }
 
+// GetName returns the Name field value
+func (o *Header) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *Header) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *Header) SetName(v string) {
+	o.Name = v
+}
+
 func (o Header) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -113,10 +113,10 @@ func (o Header) MarshalJSON() ([]byte, error) {
 
 func (o Header) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
+	toSerialize["name"] = o.Name
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -160,8 +160,8 @@ func (o *Header) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

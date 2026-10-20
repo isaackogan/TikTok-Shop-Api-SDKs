@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.isaackogan.tiktok.shop.generated.model.Header;
-import com.isaackogan.tiktok.shop.generated.model.Row;
+import com.isaackogan.tiktok.shop.generated.model.TableRow;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,7 +62,7 @@ public class Table {
   public static final String SERIALIZED_NAME_ROWS = "rows";
   @SerializedName(SERIALIZED_NAME_ROWS)
   @javax.annotation.Nonnull
-  private List<Row> rows = new ArrayList<>();
+  private List<TableRow> rows = new ArrayList<>();
 
   public Table() {
   }
@@ -94,12 +94,12 @@ public class Table {
   }
 
 
-  public Table rows(@javax.annotation.Nonnull List<Row> rows) {
+  public Table rows(@javax.annotation.Nonnull List<TableRow> rows) {
     this.rows = rows;
     return this;
   }
 
-  public Table addRowsItem(Row rowsItem) {
+  public Table addRowsItem(TableRow rowsItem) {
     if (this.rows == null) {
       this.rows = new ArrayList<>();
     }
@@ -112,11 +112,11 @@ public class Table {
    * @return rows
    */
   @javax.annotation.Nonnull
-  public List<Row> getRows() {
+  public List<TableRow> getRows() {
     return rows;
   }
 
-  public void setRows(@javax.annotation.Nonnull List<Row> rows) {
+  public void setRows(@javax.annotation.Nonnull List<TableRow> rows) {
     this.rows = rows;
   }
 
@@ -253,7 +253,7 @@ public class Table {
         JsonArray jsonArrayrows = jsonObj.getAsJsonArray("rows");
         // validate the required field `rows` (array)
         for (int i = 0; i < jsonArrayrows.size(); i++) {
-          Row.validateJsonElement(jsonArrayrows.get(i));
+          TableRow.validateJsonElement(jsonArrayrows.get(i));
         }
       }
   }

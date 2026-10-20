@@ -109,16 +109,6 @@ import {
     CreateResponsiblePersonResponseToJSON,
 } from '../models/CreateResponsiblePersonResponse';
 import {
-    type CreateSizeChartRequest,
-    CreateSizeChartRequestFromJSON,
-    CreateSizeChartRequestToJSON,
-} from '../models/CreateSizeChartRequest';
-import {
-    type CreateSizeChartResponse,
-    CreateSizeChartResponseFromJSON,
-    CreateSizeChartResponseToJSON,
-} from '../models/CreateSizeChartResponse';
-import {
     type CreateSizeChartV2Request,
     CreateSizeChartV2RequestFromJSON,
     CreateSizeChartV2RequestToJSON,
@@ -188,16 +178,6 @@ import {
     EditProductResponseFromJSON,
     EditProductResponseToJSON,
 } from '../models/EditProductResponse';
-import {
-    type EditSizeChartRequest,
-    EditSizeChartRequestFromJSON,
-    EditSizeChartRequestToJSON,
-} from '../models/EditSizeChartRequest';
-import {
-    type EditSizeChartResponse,
-    EditSizeChartResponseFromJSON,
-    EditSizeChartResponseToJSON,
-} from '../models/EditSizeChartResponse';
 import {
     type EditSizeChartV2Request,
     EditSizeChartV2RequestFromJSON,
@@ -655,10 +635,6 @@ export interface CreateResponsiblePersonOperationRequest {
     createResponsiblePersonRequest: CreateResponsiblePersonRequest;
 }
 
-export interface CreateSizeChartOperationRequest {
-    createSizeChartRequest: CreateSizeChartRequest;
-}
-
 export interface CreateSizeChartV2OperationRequest {
     createSizeChartV2Request: CreateSizeChartV2Request;
 }
@@ -687,10 +663,6 @@ export interface EditGlobalProductOperationRequest {
 export interface EditProductOperationRequest {
     productId: string;
     editProductRequest: EditProductRequest;
-}
-
-export interface EditSizeChartOperationRequest {
-    editSizeChartRequest: EditSizeChartRequest;
 }
 
 export interface EditSizeChartV2OperationRequest {
@@ -1528,59 +1500,6 @@ export class ProductsApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates request options for createSizeChart without sending the request
-     */
-    async createSizeChartRequestOpts(requestParameters: CreateSizeChartOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['createSizeChartRequest'] == null) {
-            throw new runtime.RequiredError(
-                'createSizeChartRequest',
-                'Required parameter "createSizeChartRequest" was null or undefined when calling createSizeChart().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-tts-access-token"] = await this.configuration.apiKey("x-tts-access-token"); // accessToken authentication
-        }
-
-
-        let urlPath = `/product/202608/size_charts`;
-
-        return {
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: CreateSizeChartRequestToJSON(requestParameters['createSizeChartRequest']),
-        };
-    }
-
-    /**
-     * Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID.
-     * Create Size Chart
-     */
-    async createSizeChartRaw(requestParameters: CreateSizeChartOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CreateSizeChartResponse>> {
-        const requestOptions = await this.createSizeChartRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => CreateSizeChartResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID.
-     * Create Size Chart
-     */
-    async createSizeChart(requestParameters: CreateSizeChartOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CreateSizeChartResponse> {
-        const response = await this.createSizeChartRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
      * Creates request options for createSizeChartV2 without sending the request
      */
     async createSizeChartV2RequestOpts(requestParameters: CreateSizeChartV2OperationRequest): Promise<runtime.RequestOpts> {
@@ -1964,59 +1883,6 @@ export class ProductsApi extends runtime.BaseAPI {
      */
     async editProduct(requestParameters: EditProductOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EditProductResponse> {
         const response = await this.editProductRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for editSizeChart without sending the request
-     */
-    async editSizeChartRequestOpts(requestParameters: EditSizeChartOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['editSizeChartRequest'] == null) {
-            throw new runtime.RequiredError(
-                'editSizeChartRequest',
-                'Required parameter "editSizeChartRequest" was null or undefined when calling editSizeChart().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-tts-access-token"] = await this.configuration.apiKey("x-tts-access-token"); // accessToken authentication
-        }
-
-
-        let urlPath = `/product/202608/size_charts/edit`;
-
-        return {
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: EditSizeChartRequestToJSON(requestParameters['editSizeChartRequest']),
-        };
-    }
-
-    /**
-     * Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name.
-     * Edit Size Chart
-     */
-    async editSizeChartRaw(requestParameters: EditSizeChartOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<EditSizeChartResponse>> {
-        const requestOptions = await this.editSizeChartRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => EditSizeChartResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name.
-     * Edit Size Chart
-     */
-    async editSizeChart(requestParameters: EditSizeChartOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EditSizeChartResponse> {
-        const response = await this.editSizeChartRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

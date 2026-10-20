@@ -18,7 +18,7 @@ pub struct CreateSizeChartV2Request {
     pub category_id: String,
     /// Structured size chart content.
     #[serde(rename = "size_chart_data")]
-    pub size_chart_data: Box<models::CreateSizeChartV2RequestSizeChartData>,
+    pub size_chart_data: Box<models::SizeChartData>,
     /// Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product.
     #[serde(rename = "size_chart_mode")]
     pub size_chart_mode: String,
@@ -28,7 +28,7 @@ pub struct CreateSizeChartV2Request {
 }
 
 impl CreateSizeChartV2Request {
-    pub fn new(category_id: String, size_chart_data: models::CreateSizeChartV2RequestSizeChartData, size_chart_mode: String) -> CreateSizeChartV2Request {
+    pub fn new(category_id: String, size_chart_data: models::SizeChartData, size_chart_mode: String) -> CreateSizeChartV2Request {
         CreateSizeChartV2Request {
             category_id,
             size_chart_data: Box::new(size_chart_data),

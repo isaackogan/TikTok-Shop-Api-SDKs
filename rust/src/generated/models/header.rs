@@ -13,19 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Header {
-    /// Header display name. Maximum length: 32 characters.
-    #[serde(rename = "name")]
-    pub name: String,
     /// Standard size-system or measurement ID. For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type. For size-system columns, use the following predefined IDs: - Size: size_chart_size_system_size - US: size_chart_size_system_us - UK: size_chart_size_system_uk - EU: size_chart_size_system_eu - JP: size_chart_size_system_jp - MX: size_chart_size_system_mx Omit this field for custom columns.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
+    /// Header display name. Maximum length: 32 characters.
+    #[serde(rename = "name")]
+    pub name: String,
 }
 
 impl Header {
     pub fn new(name: String) -> Header {
         Header {
-            name,
             id: None,
+            name,
         }
     }
 }

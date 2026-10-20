@@ -20,12 +20,6 @@ import { mapValues } from '../runtime';
  */
 export interface Header {
     /**
-     * Header display name. Maximum length: 32 characters.
-     * @type {string}
-     * @memberof Header
-     */
-    name: string;
-    /**
      * Standard size-system or measurement ID.
      * For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type.
      * For size-system columns, use the following predefined IDs:
@@ -40,6 +34,12 @@ export interface Header {
      * @memberof Header
      */
     id?: string;
+    /**
+     * Header display name. Maximum length: 32 characters.
+     * @type {string}
+     * @memberof Header
+     */
+    name: string;
 }
 
 /**
@@ -60,8 +60,8 @@ export function HeaderFromJSONTyped(json: any, ignoreDiscriminator: boolean): He
     }
     return {
         
-        'name': json['name'],
         'id': json['id'] == null ? undefined : json['id'],
+        'name': json['name'],
     };
 }
 
@@ -76,8 +76,8 @@ export function HeaderToJSONTyped(value?: Header | null, ignoreDiscriminator: bo
 
     return {
         
-        'name': value['name'],
         'id': value['id'],
+        'name': value['name'],
     };
 }
 

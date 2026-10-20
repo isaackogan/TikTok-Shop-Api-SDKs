@@ -345,8 +345,6 @@ public final class Meta {
             new Operation("getShopSKPPSummary", "Products", "products", "ProductsApi", "GET", "/product/202606/skpps/sum", true),
             new Operation("getProductSKPPDetail", "Products", "products", "ProductsApi", "GET", "/product/202606/skpps/{product_id}", true),
             new Operation("updateStockOperationSettings", "Products", "products", "ProductsApi", "POST", "/product/202608/inventory/operation/settings", true),
-            new Operation("createSizeChart", "Products", "products", "ProductsApi", "POST", "/product/202608/size_charts", false),
-            new Operation("editSizeChart", "Products", "products", "ProductsApi", "POST", "/product/202608/size_charts/edit", false),
             new Operation("suggestBrands", "Products", "products", "ProductsApi", "POST", "/product/202609/brands/suggest", true),
             new Operation("predictProductPackageDimensionsAndWeight", "Products", "products", "ProductsApi", "POST", "/product/202609/products/package/predict", true),
             new Operation("recommendRequiredProductProperties", "Products", "products", "ProductsApi", "POST", "/product/202609/products/properties/recommend", true),

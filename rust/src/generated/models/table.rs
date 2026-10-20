@@ -18,11 +18,11 @@ pub struct Table {
     pub headers: Vec<models::Header>,
     /// Rows of the size chart. Provide 1 to 45 rows.
     #[serde(rename = "rows")]
-    pub rows: Vec<models::Row>,
+    pub rows: Vec<models::TableRow>,
 }
 
 impl Table {
-    pub fn new(headers: Vec<models::Header>, rows: Vec<models::Row>) -> Table {
+    pub fn new(headers: Vec<models::Header>, rows: Vec<models::TableRow>) -> Table {
         Table {
             headers,
             rows,

@@ -30,32 +30,28 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param table Table containing headers and rows.
  * @param measurementType Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
+ * @param table Table containing headers and rows.
  * @param unitSystem Possible values: METRIC: metric units; IMPERIAL: imperial units.
- * @param sizeTypes Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
  * @param description Additional size chart description.
  * @param isOneSize Whether this is a one-size chart.
+ * @param sizeTypes Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
  */
 
 
 data class SizeChartData (
 
-    /* Table containing headers and rows. */
-    @SerializedName("table")
-    val table: Table,
-
     /* Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements. */
     @SerializedName("measurement_type")
     val measurementType: SizeChartData.MeasurementType,
 
+    /* Table containing headers and rows. */
+    @SerializedName("table")
+    val table: Table,
+
     /* Possible values: METRIC: metric units; IMPERIAL: imperial units. */
     @SerializedName("unit_system")
     val unitSystem: SizeChartData.UnitSystem,
-
-    /* Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category. */
-    @SerializedName("size_types")
-    val sizeTypes: kotlin.collections.List<kotlin.String>? = null,
 
     /* Additional size chart description. */
     @SerializedName("description")
@@ -63,7 +59,11 @@ data class SizeChartData (
 
     /* Whether this is a one-size chart. */
     @SerializedName("is_one_size")
-    val isOneSize: kotlin.Boolean? = null
+    val isOneSize: kotlin.Boolean? = null,
+
+    /* Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category. */
+    @SerializedName("size_types")
+    val sizeTypes: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 

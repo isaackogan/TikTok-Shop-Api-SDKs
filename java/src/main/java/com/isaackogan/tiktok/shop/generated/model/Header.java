@@ -50,37 +50,18 @@ import com.isaackogan.tiktok.shop.generated.JSON;
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class Header {
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  @javax.annotation.Nonnull
-  private String name;
-
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   @javax.annotation.Nullable
   private String id;
 
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  @javax.annotation.Nonnull
+  private String name;
+
   public Header() {
   }
-
-  public Header name(@javax.annotation.Nonnull String name) {
-    this.name = name;
-    return this;
-  }
-
-  /**
-   * Header display name. Maximum length: 32 characters.
-   * @return name
-   */
-  @javax.annotation.Nonnull
-  public String getName() {
-    return name;
-  }
-
-  public void setName(@javax.annotation.Nonnull String name) {
-    this.name = name;
-  }
-
 
   public Header id(@javax.annotation.Nullable String id) {
     this.id = id;
@@ -98,6 +79,25 @@ public class Header {
 
   public void setId(@javax.annotation.Nullable String id) {
     this.id = id;
+  }
+
+
+  public Header name(@javax.annotation.Nonnull String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Header display name. Maximum length: 32 characters.
+   * @return name
+   */
+  @javax.annotation.Nonnull
+  public String getName() {
+    return name;
+  }
+
+  public void setName(@javax.annotation.Nonnull String name) {
+    this.name = name;
   }
 
   /**
@@ -155,22 +155,22 @@ public class Header {
       return false;
     }
     Header header = (Header) o;
-    return Objects.equals(this.name, header.name) &&
-        Objects.equals(this.id, header.id)&&
+    return Objects.equals(this.id, header.id) &&
+        Objects.equals(this.name, header.name)&&
         Objects.equals(this.additionalProperties, header.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, id, additionalProperties);
+    return Objects.hash(id, name, additionalProperties);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class Header {\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -190,7 +190,7 @@ public class Header {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("name", "id"));
+    openapiFields = new HashSet<String>(Arrays.asList("id", "name"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(Arrays.asList("name"));
@@ -216,11 +216,11 @@ public class Header {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      if (!jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
   }
 

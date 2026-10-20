@@ -20,16 +20,16 @@ var _ MappedNullable = &SizeChartData{}
 
 // SizeChartData struct for SizeChartData
 type SizeChartData struct {
-	// Table containing headers and rows.
-	Table Table `json:"table"`
-	// Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
-	SizeTypes []string `json:"size_types,omitempty"`
 	// Additional size chart description.
 	Description *string `json:"description,omitempty"`
 	// Whether this is a one-size chart.
 	IsOneSize *bool `json:"is_one_size,omitempty"`
 	// Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
 	MeasurementType string `json:"measurement_type"`
+	// Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
+	SizeTypes []string `json:"size_types,omitempty"`
+	// Table containing headers and rows.
+	Table Table `json:"table"`
 	// Possible values: METRIC: metric units; IMPERIAL: imperial units.
 	UnitSystem string `json:"unit_system"`
 	AdditionalProperties map[string]interface{}
@@ -41,10 +41,10 @@ type _SizeChartData SizeChartData
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSizeChartData(table Table, measurementType string, unitSystem string) *SizeChartData {
+func NewSizeChartData(measurementType string, table Table, unitSystem string) *SizeChartData {
 	this := SizeChartData{}
-	this.Table = table
 	this.MeasurementType = measurementType
+	this.Table = table
 	this.UnitSystem = unitSystem
 	return &this
 }
@@ -55,62 +55,6 @@ func NewSizeChartData(table Table, measurementType string, unitSystem string) *S
 func NewSizeChartDataWithDefaults() *SizeChartData {
 	this := SizeChartData{}
 	return &this
-}
-
-// GetTable returns the Table field value
-func (o *SizeChartData) GetTable() Table {
-	if o == nil {
-		var ret Table
-		return ret
-	}
-
-	return o.Table
-}
-
-// GetTableOk returns a tuple with the Table field value
-// and a boolean to check if the value has been set.
-func (o *SizeChartData) GetTableOk() (*Table, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Table, true
-}
-
-// SetTable sets field value
-func (o *SizeChartData) SetTable(v Table) {
-	o.Table = v
-}
-
-// GetSizeTypes returns the SizeTypes field value if set, zero value otherwise.
-func (o *SizeChartData) GetSizeTypes() []string {
-	if o == nil || IsNil(o.SizeTypes) {
-		var ret []string
-		return ret
-	}
-	return o.SizeTypes
-}
-
-// GetSizeTypesOk returns a tuple with the SizeTypes field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SizeChartData) GetSizeTypesOk() ([]string, bool) {
-	if o == nil || IsNil(o.SizeTypes) {
-		return nil, false
-	}
-	return o.SizeTypes, true
-}
-
-// HasSizeTypes returns a boolean if a field has been set.
-func (o *SizeChartData) HasSizeTypes() bool {
-	if o != nil && !IsNil(o.SizeTypes) {
-		return true
-	}
-
-	return false
-}
-
-// SetSizeTypes gets a reference to the given []string and assigns it to the SizeTypes field.
-func (o *SizeChartData) SetSizeTypes(v []string) {
-	o.SizeTypes = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -201,6 +145,62 @@ func (o *SizeChartData) SetMeasurementType(v string) {
 	o.MeasurementType = v
 }
 
+// GetSizeTypes returns the SizeTypes field value if set, zero value otherwise.
+func (o *SizeChartData) GetSizeTypes() []string {
+	if o == nil || IsNil(o.SizeTypes) {
+		var ret []string
+		return ret
+	}
+	return o.SizeTypes
+}
+
+// GetSizeTypesOk returns a tuple with the SizeTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SizeChartData) GetSizeTypesOk() ([]string, bool) {
+	if o == nil || IsNil(o.SizeTypes) {
+		return nil, false
+	}
+	return o.SizeTypes, true
+}
+
+// HasSizeTypes returns a boolean if a field has been set.
+func (o *SizeChartData) HasSizeTypes() bool {
+	if o != nil && !IsNil(o.SizeTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetSizeTypes gets a reference to the given []string and assigns it to the SizeTypes field.
+func (o *SizeChartData) SetSizeTypes(v []string) {
+	o.SizeTypes = v
+}
+
+// GetTable returns the Table field value
+func (o *SizeChartData) GetTable() Table {
+	if o == nil {
+		var ret Table
+		return ret
+	}
+
+	return o.Table
+}
+
+// GetTableOk returns a tuple with the Table field value
+// and a boolean to check if the value has been set.
+func (o *SizeChartData) GetTableOk() (*Table, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Table, true
+}
+
+// SetTable sets field value
+func (o *SizeChartData) SetTable(v Table) {
+	o.Table = v
+}
+
 // GetUnitSystem returns the UnitSystem field value
 func (o *SizeChartData) GetUnitSystem() string {
 	if o == nil {
@@ -235,10 +235,6 @@ func (o SizeChartData) MarshalJSON() ([]byte, error) {
 
 func (o SizeChartData) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["table"] = o.Table
-	if !IsNil(o.SizeTypes) {
-		toSerialize["size_types"] = o.SizeTypes
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -246,6 +242,10 @@ func (o SizeChartData) ToMap() (map[string]interface{}, error) {
 		toSerialize["is_one_size"] = o.IsOneSize
 	}
 	toSerialize["measurement_type"] = o.MeasurementType
+	if !IsNil(o.SizeTypes) {
+		toSerialize["size_types"] = o.SizeTypes
+	}
+	toSerialize["table"] = o.Table
 	toSerialize["unit_system"] = o.UnitSystem
 
 	for key, value := range o.AdditionalProperties {
@@ -260,8 +260,8 @@ func (o *SizeChartData) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"table",
 		"measurement_type",
+		"table",
 		"unit_system",
 	}
 
@@ -292,11 +292,11 @@ func (o *SizeChartData) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "table")
-		delete(additionalProperties, "size_types")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "is_one_size")
 		delete(additionalProperties, "measurement_type")
+		delete(additionalProperties, "size_types")
+		delete(additionalProperties, "table")
 		delete(additionalProperties, "unit_system")
 		o.AdditionalProperties = additionalProperties
 	}

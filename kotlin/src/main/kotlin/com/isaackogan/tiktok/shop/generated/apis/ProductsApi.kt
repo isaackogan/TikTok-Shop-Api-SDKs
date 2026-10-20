@@ -46,8 +46,6 @@ import com.isaackogan.tiktok.shop.generated.models.CreateProductRequest
 import com.isaackogan.tiktok.shop.generated.models.CreateProductResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateResponsiblePersonRequest
 import com.isaackogan.tiktok.shop.generated.models.CreateResponsiblePersonResponse
-import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartRequest
-import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartV2Request
 import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartV2Response
 import com.isaackogan.tiktok.shop.generated.models.DeactivateProductsRequest
@@ -62,8 +60,6 @@ import com.isaackogan.tiktok.shop.generated.models.EditGlobalProductRequest
 import com.isaackogan.tiktok.shop.generated.models.EditGlobalProductResponse
 import com.isaackogan.tiktok.shop.generated.models.EditProductRequest
 import com.isaackogan.tiktok.shop.generated.models.EditProductResponse
-import com.isaackogan.tiktok.shop.generated.models.EditSizeChartRequest
-import com.isaackogan.tiktok.shop.generated.models.EditSizeChartResponse
 import com.isaackogan.tiktok.shop.generated.models.EditSizeChartV2Request
 import com.isaackogan.tiktok.shop.generated.models.EditSizeChartV2Response
 import com.isaackogan.tiktok.shop.generated.models.GetBrandsResponse
@@ -991,80 +987,6 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
     }
 
     /**
-     * POST /product/202608/size_charts
-     * Create Size Chart
-     * Create one size chart from structured table data. Use &#x60;REUSABLE_TEMPLATE&#x60; to create a seller template that can be reused across products, or &#x60;PRODUCT_SCOPED&#x60; to create a chart for a single product. The response returns the created size chart ID.
-     * @param createSizeChartRequest 
-     * @return CreateSizeChartResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun createSizeChart(createSizeChartRequest: CreateSizeChartRequest) : CreateSizeChartResponse {
-        val localVarResponse = createSizeChartWithHttpInfo(createSizeChartRequest = createSizeChartRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as CreateSizeChartResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /product/202608/size_charts
-     * Create Size Chart
-     * Create one size chart from structured table data. Use &#x60;REUSABLE_TEMPLATE&#x60; to create a seller template that can be reused across products, or &#x60;PRODUCT_SCOPED&#x60; to create a chart for a single product. The response returns the created size chart ID.
-     * @param createSizeChartRequest 
-     * @return ApiResponse<CreateSizeChartResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun createSizeChartWithHttpInfo(createSizeChartRequest: CreateSizeChartRequest) : ApiResponse<CreateSizeChartResponse?> {
-        val localVariableConfig = createSizeChartRequestConfig(createSizeChartRequest = createSizeChartRequest)
-
-        return request<CreateSizeChartRequest, CreateSizeChartResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation createSizeChart
-     *
-     * @param createSizeChartRequest 
-     * @return RequestConfig
-     */
-    fun createSizeChartRequestConfig(createSizeChartRequest: CreateSizeChartRequest) : RequestConfig<CreateSizeChartRequest> {
-        val localVariableBody = createSizeChartRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/product/202608/size_charts",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
      * POST /product/202610/size_charts
      * Create Size Chart V2
      * Create one size chart from structured table data. Use &#x60;REUSABLE_TEMPLATE&#x60; to create a seller template that can be reused across products, or &#x60;PRODUCT_SCOPED&#x60; to create a chart for a single product. The response returns the created size chart ID. The request must identify one authorized shop using shop_cipher.
@@ -1581,80 +1503,6 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.PUT,
             path = "/product/202509/products/{product_id}".replace("{"+"product_id"+"}", encodeURIComponent(productId.toString())),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /product/202608/size_charts/edit
-     * Edit Size Chart
-     * Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit &#x60;template_name&#x60; to keep the current template name.
-     * @param editSizeChartRequest 
-     * @return EditSizeChartResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun editSizeChart(editSizeChartRequest: EditSizeChartRequest) : EditSizeChartResponse {
-        val localVarResponse = editSizeChartWithHttpInfo(editSizeChartRequest = editSizeChartRequest)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as EditSizeChartResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /product/202608/size_charts/edit
-     * Edit Size Chart
-     * Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit &#x60;template_name&#x60; to keep the current template name.
-     * @param editSizeChartRequest 
-     * @return ApiResponse<EditSizeChartResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun editSizeChartWithHttpInfo(editSizeChartRequest: EditSizeChartRequest) : ApiResponse<EditSizeChartResponse?> {
-        val localVariableConfig = editSizeChartRequestConfig(editSizeChartRequest = editSizeChartRequest)
-
-        return request<EditSizeChartRequest, EditSizeChartResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation editSizeChart
-     *
-     * @param editSizeChartRequest 
-     * @return RequestConfig
-     */
-    fun editSizeChartRequestConfig(editSizeChartRequest: EditSizeChartRequest) : RequestConfig<EditSizeChartRequest> {
-        val localVariableBody = editSizeChartRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/product/202608/size_charts/edit",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

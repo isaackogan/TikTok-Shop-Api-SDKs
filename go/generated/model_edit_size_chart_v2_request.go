@@ -21,7 +21,7 @@ var _ MappedNullable = &EditSizeChartV2Request{}
 // EditSizeChartV2Request struct for EditSizeChartV2Request
 type EditSizeChartV2Request struct {
 	// Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
-	SizeChartData CreateSizeChartV2RequestSizeChartData `json:"size_chart_data"`
+	SizeChartData SizeChartData `json:"size_chart_data"`
 	// The ID of the seller-owned reusable size chart template to update.
 	SizeChartId string `json:"size_chart_id"`
 	// The new name of the size chart template. If omitted, the current name remains unchanged.
@@ -35,7 +35,7 @@ type _EditSizeChartV2Request EditSizeChartV2Request
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEditSizeChartV2Request(sizeChartData CreateSizeChartV2RequestSizeChartData, sizeChartId string) *EditSizeChartV2Request {
+func NewEditSizeChartV2Request(sizeChartData SizeChartData, sizeChartId string) *EditSizeChartV2Request {
 	this := EditSizeChartV2Request{}
 	this.SizeChartData = sizeChartData
 	this.SizeChartId = sizeChartId
@@ -51,9 +51,9 @@ func NewEditSizeChartV2RequestWithDefaults() *EditSizeChartV2Request {
 }
 
 // GetSizeChartData returns the SizeChartData field value
-func (o *EditSizeChartV2Request) GetSizeChartData() CreateSizeChartV2RequestSizeChartData {
+func (o *EditSizeChartV2Request) GetSizeChartData() SizeChartData {
 	if o == nil {
-		var ret CreateSizeChartV2RequestSizeChartData
+		var ret SizeChartData
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *EditSizeChartV2Request) GetSizeChartData() CreateSizeChartV2RequestSize
 
 // GetSizeChartDataOk returns a tuple with the SizeChartData field value
 // and a boolean to check if the value has been set.
-func (o *EditSizeChartV2Request) GetSizeChartDataOk() (*CreateSizeChartV2RequestSizeChartData, bool) {
+func (o *EditSizeChartV2Request) GetSizeChartDataOk() (*SizeChartData, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *EditSizeChartV2Request) GetSizeChartDataOk() (*CreateSizeChartV2Request
 }
 
 // SetSizeChartData sets field value
-func (o *EditSizeChartV2Request) SetSizeChartData(v CreateSizeChartV2RequestSizeChartData) {
+func (o *EditSizeChartV2Request) SetSizeChartData(v SizeChartData) {
 	o.SizeChartData = v
 }
 

@@ -109,7 +109,6 @@ from .carton import Carton
 from .carton_carton_type import CartonCartonType
 from .category import Category
 from .category_chain import CategoryChain
-from .cell import Cell
 from .certification import Certification
 from .check_creator_outreach_eligibility_request import CheckCreatorOutreachEligibilityRequest
 from .check_creator_outreach_eligibility_request_creator_info import CheckCreatorOutreachEligibilityRequestCreatorInfo
@@ -369,18 +368,7 @@ from .create_responsible_person_response_data import CreateResponsiblePersonResp
 from .create_return_request import CreateReturnRequest
 from .create_return_response import CreateReturnResponse
 from .create_return_response_data import CreateReturnResponseData
-from .create_size_chart_request import CreateSizeChartRequest
-from .create_size_chart_response import CreateSizeChartResponse
-from .create_size_chart_response_data import CreateSizeChartResponseData
-from .create_size_chart_response_data_data import CreateSizeChartResponseDataData
 from .create_size_chart_v2_request import CreateSizeChartV2Request
-from .create_size_chart_v2_request_size_chart_data import CreateSizeChartV2RequestSizeChartData
-from .create_size_chart_v2_request_size_chart_data_measurement_type import (
-    CreateSizeChartV2RequestSizeChartDataMeasurementType,
-)
-from .create_size_chart_v2_request_size_chart_data_table import CreateSizeChartV2RequestSizeChartDataTable
-from .create_size_chart_v2_request_size_chart_data_table_header import CreateSizeChartV2RequestSizeChartDataTableHeader
-from .create_size_chart_v2_request_size_chart_data_unit_system import CreateSizeChartV2RequestSizeChartDataUnitSystem
 from .create_size_chart_v2_response import CreateSizeChartV2Response
 from .create_size_chart_v2_response_data import CreateSizeChartV2ResponseData
 from .create_target_collaboration_request import CreateTargetCollaborationRequest
@@ -506,10 +494,6 @@ from .edit_product_request_subscribe_info_edit import EditProductRequestSubscrib
 from .edit_product_response import EditProductResponse
 from .edit_product_response_data import EditProductResponseData
 from .edit_product_response_data_audit import EditProductResponseDataAudit
-from .edit_size_chart_request import EditSizeChartRequest
-from .edit_size_chart_response import EditSizeChartResponse
-from .edit_size_chart_response_data import EditSizeChartResponseData
-from .edit_size_chart_response_data_data import EditSizeChartResponseDataData
 from .edit_size_chart_v2_request import EditSizeChartV2Request
 from .edit_size_chart_v2_response import EditSizeChartV2Response
 from .edit_size_chart_v2_response_data import EditSizeChartV2ResponseData
@@ -2765,7 +2749,6 @@ from .review_aftersales_requests_response import ReviewAftersalesRequestsRespons
 from .review_aftersales_requests_response_data import ReviewAftersalesRequestsResponseData
 from .rma_status_update_webhook import RMAStatusUpdateWebhook
 from .rma_status_update_webhook_data import RMAStatusUpdateWebhookData
-from .row import Row
 from .sales_attribute import SalesAttribute
 from .sales_price import SalesPrice
 from .sales_price_range import SalesPriceRange
@@ -3483,6 +3466,8 @@ from .suggest_brands_response_data_brand import SuggestBrandsResponseDataBrand
 from .suggestion import Suggestion
 from .supplementary_sku_image import SupplementarySkuImage
 from .table import Table
+from .table_row import TableRow
+from .table_row_cell import TableRowCell
 from .target_collaboration_conflict import TargetCollaborationConflict
 from .tax import Tax
 from .template import Template
@@ -3793,7 +3778,6 @@ __all__ = (
     "CartonCartonType",
     "Category",
     "CategoryChain",
-    "Cell",
     "Certification",
     "CheckCreatorOutreachEligibilityRequest",
     "CheckCreatorOutreachEligibilityRequestCreatorInfo",
@@ -4003,16 +3987,7 @@ __all__ = (
     "CreateReturnRequest",
     "CreateReturnResponse",
     "CreateReturnResponseData",
-    "CreateSizeChartRequest",
-    "CreateSizeChartResponse",
-    "CreateSizeChartResponseData",
-    "CreateSizeChartResponseDataData",
     "CreateSizeChartV2Request",
-    "CreateSizeChartV2RequestSizeChartData",
-    "CreateSizeChartV2RequestSizeChartDataMeasurementType",
-    "CreateSizeChartV2RequestSizeChartDataTable",
-    "CreateSizeChartV2RequestSizeChartDataTableHeader",
-    "CreateSizeChartV2RequestSizeChartDataUnitSystem",
     "CreateSizeChartV2Response",
     "CreateSizeChartV2ResponseData",
     "CreateTargetCollaborationRequest",
@@ -4114,10 +4089,6 @@ __all__ = (
     "EditProductResponse",
     "EditProductResponseData",
     "EditProductResponseDataAudit",
-    "EditSizeChartRequest",
-    "EditSizeChartResponse",
-    "EditSizeChartResponseData",
-    "EditSizeChartResponseDataData",
     "EditSizeChartV2Request",
     "EditSizeChartV2Response",
     "EditSizeChartV2ResponseData",
@@ -5473,7 +5444,6 @@ __all__ = (
     "ReviewASampleApplicationResponseData",
     "RMAStatusUpdateWebhook",
     "RMAStatusUpdateWebhookData",
-    "Row",
     "SalesAttribute",
     "SalesPrice",
     "SalesPriceRange",
@@ -5903,6 +5873,8 @@ __all__ = (
     "Suggestion",
     "SupplementarySkuImage",
     "Table",
+    "TableRow",
+    "TableRowCell",
     "TargetCollaborationConflict",
     "Tax",
     "Template",

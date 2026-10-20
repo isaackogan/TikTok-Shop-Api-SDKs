@@ -23,7 +23,7 @@ type Table struct {
 	// Ordered header definitions. Provide 1 to 20 headers.
 	Headers []Header `json:"headers"`
 	// Rows of the size chart. Provide 1 to 45 rows.
-	Rows []Row `json:"rows"`
+	Rows []TableRow `json:"rows"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _Table Table
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTable(headers []Header, rows []Row) *Table {
+func NewTable(headers []Header, rows []TableRow) *Table {
 	this := Table{}
 	this.Headers = headers
 	this.Rows = rows
@@ -73,9 +73,9 @@ func (o *Table) SetHeaders(v []Header) {
 }
 
 // GetRows returns the Rows field value
-func (o *Table) GetRows() []Row {
+func (o *Table) GetRows() []TableRow {
 	if o == nil {
-		var ret []Row
+		var ret []TableRow
 		return ret
 	}
 
@@ -84,7 +84,7 @@ func (o *Table) GetRows() []Row {
 
 // GetRowsOk returns a tuple with the Rows field value
 // and a boolean to check if the value has been set.
-func (o *Table) GetRowsOk() ([]Row, bool) {
+func (o *Table) GetRowsOk() ([]TableRow, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *Table) GetRowsOk() ([]Row, bool) {
 }
 
 // SetRows sets field value
-func (o *Table) SetRows(v []Row) {
+func (o *Table) SetRows(v []TableRow) {
 	o.Rows = v
 }
 

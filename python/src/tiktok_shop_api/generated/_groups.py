@@ -92,8 +92,6 @@ if TYPE_CHECKING:
     from .models.create_responsible_person_response import CreateResponsiblePersonResponse
     from .models.create_return_request import CreateReturnRequest
     from .models.create_return_response import CreateReturnResponse
-    from .models.create_size_chart_request import CreateSizeChartRequest
-    from .models.create_size_chart_response import CreateSizeChartResponse
     from .models.create_size_chart_v2_request import CreateSizeChartV2Request
     from .models.create_size_chart_v2_response import CreateSizeChartV2Response
     from .models.create_target_collaboration_request import CreateTargetCollaborationRequest
@@ -126,8 +124,6 @@ if TYPE_CHECKING:
     from .models.edit_open_collaboration_settings_response import EditOpenCollaborationSettingsResponse
     from .models.edit_product_request import EditProductRequest
     from .models.edit_product_response import EditProductResponse
-    from .models.edit_size_chart_request import EditSizeChartRequest
-    from .models.edit_size_chart_response import EditSizeChartResponse
     from .models.edit_size_chart_v2_request import EditSizeChartV2Request
     from .models.edit_size_chart_v2_response import EditSizeChartV2Response
     from .models.end_session_request import EndSessionRequest
@@ -11543,28 +11539,6 @@ class ProductsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, body=body)
 
-    def create_size_chart(
-        self,
-        *,
-        body: CreateSizeChartRequest,
-    ) -> CreateSizeChartResponse | None:
-        """Create Size Chart
-
-         Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller
-        template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single
-        product. The response returns the created size chart ID.
-
-        Args:
-            body (CreateSizeChartRequest):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.products import create_size_chart as _op
-
-        return self._run(_op.sync_detailed, body=body)
-
     def create_size_chart_v2(
         self,
         *,
@@ -11794,27 +11768,6 @@ class ProductsApi(SyncGroup):
         from .api.products import edit_product as _op
 
         return self._run(_op.sync_detailed, product_id=product_id, body=body)
-
-    def edit_size_chart(
-        self,
-        *,
-        body: EditSizeChartRequest,
-    ) -> EditSizeChartResponse | None:
-        """Edit Size Chart
-
-         Edit an existing seller-owned size chart by replacing its structured table and editable metadata.
-        Omit `template_name` to keep the current template name.
-
-        Args:
-            body (EditSizeChartRequest):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.products import edit_size_chart as _op
-
-        return self._run(_op.sync_detailed, body=body)
 
     def edit_size_chart_v2(
         self,
@@ -13577,28 +13530,6 @@ class AsyncProductsApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, body=body)
 
-    async def create_size_chart(
-        self,
-        *,
-        body: CreateSizeChartRequest,
-    ) -> CreateSizeChartResponse | None:
-        """Create Size Chart
-
-         Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller
-        template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single
-        product. The response returns the created size chart ID.
-
-        Args:
-            body (CreateSizeChartRequest):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.products import create_size_chart as _op
-
-        return await self._run(_op.asyncio_detailed, body=body)
-
     async def create_size_chart_v2(
         self,
         *,
@@ -13828,27 +13759,6 @@ class AsyncProductsApi(AsyncGroup):
         from .api.products import edit_product as _op
 
         return await self._run(_op.asyncio_detailed, product_id=product_id, body=body)
-
-    async def edit_size_chart(
-        self,
-        *,
-        body: EditSizeChartRequest,
-    ) -> EditSizeChartResponse | None:
-        """Edit Size Chart
-
-         Edit an existing seller-owned size chart by replacing its structured table and editable metadata.
-        Omit `template_name` to keep the current template name.
-
-        Args:
-            body (EditSizeChartRequest):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.products import edit_size_chart as _op
-
-        return await self._run(_op.asyncio_detailed, body=body)
 
     async def edit_size_chart_v2(
         self,

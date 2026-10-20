@@ -23,7 +23,7 @@
 
 package com.isaackogan.tiktok.shop.generated.models
 
-import com.isaackogan.tiktok.shop.generated.models.CreateSizeChartV2RequestSizeChartData
+import com.isaackogan.tiktok.shop.generated.models.SizeChartData
 
 import com.google.gson.annotations.SerializedName
 
@@ -40,7 +40,7 @@ data class EditSizeChartV2Request (
 
     /* Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata. */
     @SerializedName("size_chart_data")
-    val sizeChartData: CreateSizeChartV2RequestSizeChartData,
+    val sizeChartData: SizeChartData,
 
     /* The ID of the seller-owned reusable size chart template to update. */
     @SerializedName("size_chart_id")

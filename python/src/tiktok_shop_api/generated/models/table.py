@@ -8,7 +8,7 @@ from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
     from ..models.header import Header
-    from ..models.row import Row
+    from ..models.table_row import TableRow
 
 
 T = TypeVar("T", bound="Table")
@@ -19,11 +19,11 @@ class Table:
     """
     Attributes:
         headers (list[Header]): Ordered header definitions. Provide 1 to 20 headers.
-        rows (list[Row]): Rows of the size chart. Provide 1 to 45 rows.
+        rows (list[TableRow]): Rows of the size chart. Provide 1 to 45 rows.
     """
 
     headers: list[Header]
-    rows: list[Row]
+    rows: list[TableRow]
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,7 +51,7 @@ class Table:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.header import Header  # noqa: PLC0415
-        from ..models.row import Row  # noqa: PLC0415
+        from ..models.table_row import TableRow  # noqa: PLC0415
 
         d = dict(src_dict)
         headers = []
@@ -64,7 +64,7 @@ class Table:
         rows = []
         _rows = d.pop("rows")
         for rows_item_data in _rows:
-            rows_item = Row.from_dict(rows_item_data)
+            rows_item = TableRow.from_dict(rows_item_data)
 
             rows.append(rows_item)
 

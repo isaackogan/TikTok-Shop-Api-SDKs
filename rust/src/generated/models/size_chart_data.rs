@@ -13,12 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SizeChartData {
-    /// Table containing headers and rows.
-    #[serde(rename = "table")]
-    pub table: Box<models::Table>,
-    /// Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
-    #[serde(rename = "size_types", skip_serializing_if = "Option::is_none")]
-    pub size_types: Option<Vec<String>>,
     /// Additional size chart description.
     #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
@@ -28,19 +22,25 @@ pub struct SizeChartData {
     /// Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements.
     #[serde(rename = "measurement_type")]
     pub measurement_type: MeasurementType,
+    /// Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
+    #[serde(rename = "size_types", skip_serializing_if = "Option::is_none")]
+    pub size_types: Option<Vec<String>>,
+    /// Table containing headers and rows.
+    #[serde(rename = "table")]
+    pub table: Box<models::Table>,
     /// Possible values: METRIC: metric units; IMPERIAL: imperial units.
     #[serde(rename = "unit_system")]
     pub unit_system: UnitSystem,
 }
 
 impl SizeChartData {
-    pub fn new(table: models::Table, measurement_type: MeasurementType, unit_system: UnitSystem) -> SizeChartData {
+    pub fn new(measurement_type: MeasurementType, table: models::Table, unit_system: UnitSystem) -> SizeChartData {
         SizeChartData {
-            table: Box::new(table),
-            size_types: None,
             description: None,
             is_one_size: None,
             measurement_type,
+            size_types: None,
+            table: Box::new(table),
             unit_system,
         }
     }

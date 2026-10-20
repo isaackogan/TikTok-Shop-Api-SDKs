@@ -2257,22 +2257,6 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
-    "operationId": "createSizeChart",
-    "tag": "Products",
-    "group": "products",
-    "method": "post",
-    "path": "/product/202608/size_charts",
-    "requiresShopCipher": false
-  },
-  {
-    "operationId": "editSizeChart",
-    "tag": "Products",
-    "group": "products",
-    "method": "post",
-    "path": "/product/202608/size_charts/edit",
-    "requiresShopCipher": false
-  },
-  {
     "operationId": "suggestBrands",
     "tag": "Products",
     "group": "products",

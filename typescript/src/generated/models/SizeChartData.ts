@@ -28,18 +28,6 @@ import {
  */
 export interface SizeChartData {
     /**
-     * Table containing headers and rows.
-     * @type {Table}
-     * @memberof SizeChartData
-     */
-    table: Table;
-    /**
-     * Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
-     * @type {Array<string>}
-     * @memberof SizeChartData
-     */
-    sizeTypes?: Array<string>;
-    /**
      * Additional size chart description.
      * @type {string}
      * @memberof SizeChartData
@@ -57,6 +45,18 @@ export interface SizeChartData {
      * @memberof SizeChartData
      */
     measurementType: SizeChartDataMeasurementTypeEnum;
+    /**
+     * Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category.
+     * @type {Array<string>}
+     * @memberof SizeChartData
+     */
+    sizeTypes?: Array<string>;
+    /**
+     * Table containing headers and rows.
+     * @type {Table}
+     * @memberof SizeChartData
+     */
+    table: Table;
     /**
      * Possible values: METRIC: metric units; IMPERIAL: imperial units.
      * @type {SizeChartDataUnitSystemEnum}
@@ -90,8 +90,8 @@ export type SizeChartDataUnitSystemEnum = typeof SizeChartDataUnitSystemEnum[key
  * Check if a given object implements the SizeChartData interface.
  */
 export function instanceOfSizeChartData(value: object): value is SizeChartData {
-    if (!('table' in value) || value['table'] === undefined) return false;
     if ((!('measurementType' in (value as Record<string, any>)) && !('measurement_type' in (value as Record<string, any>))) || ((value as Record<string, any>)['measurementType'] === undefined && (value as Record<string, any>)['measurement_type'] === undefined)) return false;
+    if (!('table' in value) || value['table'] === undefined) return false;
     if ((!('unitSystem' in (value as Record<string, any>)) && !('unit_system' in (value as Record<string, any>))) || ((value as Record<string, any>)['unitSystem'] === undefined && (value as Record<string, any>)['unit_system'] === undefined)) return false;
     return true;
 }
@@ -106,11 +106,11 @@ export function SizeChartDataFromJSONTyped(json: any, ignoreDiscriminator: boole
     }
     return {
         
-        'table': TableFromJSON(json['table']),
-        'sizeTypes': json['size_types'] == null ? undefined : json['size_types'],
         'description': json['description'] == null ? undefined : json['description'],
         'isOneSize': json['is_one_size'] == null ? undefined : json['is_one_size'],
         'measurementType': json['measurement_type'],
+        'sizeTypes': json['size_types'] == null ? undefined : json['size_types'],
+        'table': TableFromJSON(json['table']),
         'unitSystem': json['unit_system'],
     };
 }
@@ -126,11 +126,11 @@ export function SizeChartDataToJSONTyped(value?: SizeChartData | null, ignoreDis
 
     return {
         
-        'table': TableToJSON(value['table']),
-        'size_types': value['sizeTypes'],
         'description': value['description'],
         'is_one_size': value['isOneSize'],
         'measurement_type': value['measurementType'],
+        'size_types': value['sizeTypes'],
+        'table': TableToJSON(value['table']),
         'unit_system': value['unitSystem'],
     };
 }
