@@ -10,3 +10,9 @@ it('test/readme-examples.ts contains every statement of the README ts blocks', (
     expect(file, line).toContain(line);
   }
 });
+
+it('the npm description carries the disclaimer', () => {
+  // npmjs.com shows the README, but search results and `npm view` show the description.
+  const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')) as { description: string };
+  expect(pkg.description.endsWith('Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.'), pkg.description).toBe(true);
+});

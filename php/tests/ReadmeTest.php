@@ -61,6 +61,15 @@ final class ReadmeTest extends TestCase
         $this->assertSame($expected, self::files(), 'one SnippetN.php per README php block, numbered from 1');
     }
 
+    public function testTheComposerDescriptionCarriesTheDisclaimer(): void
+    {
+        // Packagist search results show the composer.json description, not the README.
+        $composer = json_decode((string) file_get_contents(__DIR__ . '/../composer.json'), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertIsArray($composer);
+        $this->assertIsString($composer['description'] ?? null, 'the package has a description');
+        $this->assertStringEndsWith('Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.', $composer['description']);
+    }
+
     #[DataProvider('snippets')]
     public function testASnippetFileIsItsReadmeBlock(int $n): void
     {
