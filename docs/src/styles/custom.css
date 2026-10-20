@@ -8,3 +8,19 @@
     line-height: 1.2;
     color: var(--muted-foreground);
 }
+
+/* The API reference's operation names are long and wrap. The theme gives sidebar links a fixed height, so wrapped
+   names overlapped the next link; let each link grow with its text instead, and keep the method badge whole. */
+.sidebar a.entry-link {
+    height: auto;
+    min-height: 1.875rem;
+}
+
+.sidebar a.entry-link .entry-link-inner {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+}
+
+.sidebar a.entry-link .entry-badge {
+    flex-shrink: 0;
+}
