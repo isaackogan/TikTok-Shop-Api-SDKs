@@ -312,6 +312,70 @@ final class ClientTest extends TestCase
         $this->assertNotSame($a, $b);
     }
 
+    public function testAsyncSuccessResolvesToTheModel(): void
+    {
+        $stub = (new Stub())->push(Stub::ok(['shops' => [['id' => '7']]]));
+        $result = $this->shop($stub)->authorization->getAuthorizedShopsAsync()->wait();
+
+        $this->assertSame('7', $result->getData()->getShops()[0]->getId());
+        [$given, $expected] = Stub::signs($stub->last(), self::SECRET);
+        $this->assertSame($expected, $given);
+    }
+
+    public function testAsyncEnvelopeErrorRejectsWithATikTokShopException(): void
+    {
+        $stub = (new Stub())->push(Stub::json(['code' => 36009003, 'message' => 'invalid', 'request_id' => 'r1']));
+        try {
+            $this->shop($stub)->authorization->getAuthorizedShopsAsync()->wait();
+            $this->fail('expected a TikTokShopException');
+        } catch (TikTokShopException $e) {
+            $this->assertSame(36009003, $e->getTikTokCode());
+            $this->assertSame('r1', $e->getRequestId());
+        }
+    }
+
+    public function testAsyncNon2xxFollowsR13b(): void
+    {
+        foreach ([true, false] as $httpErrors) {
+            $stub = (new Stub())->push(new Response(503, [], '{"message":"x"}'));
+            try {
+                $this->shop($stub, $httpErrors)->authorization->getAuthorizedShopsAsync()->wait();
+                $this->fail('expected a TikTokShopException');
+            } catch (TikTokShopException $e) {
+                $this->assertSame(503, $e->getTikTokCode());
+                $this->assertSame(503, $e->getHttpStatus());
+                $this->assertSame('x', $e->getMessage());
+            }
+        }
+    }
+
+    public function testAsyncTransportErrorRejectsWithAScrubbedTikTokShopException(): void
+    {
+        $url = 'https://open-api.tiktokglobalshop.com/order/202309/orders/search?app_key=k1&sign=abc123&shop_cipher=cipher-1&timestamp=1';
+        $stub = (new Stub())->push(new ConnectException("cURL error 7: refused for $url", new Request('GET', $url)));
+        try {
+            $this->shop($stub)->orders->getOrderListAsync(10)->wait();
+            $this->fail('expected a TikTokShopException');
+        } catch (TikTokShopException $e) {
+            $this->assertSame(0, $e->getTikTokCode());
+            self::assertScrubbed($e);
+        }
+    }
+
+    public function testTheTimeoutOptionReachesGuzzleFaithfully(): void
+    {
+        $config = static function (?float $timeout): array {
+            $shop = new TikTokShop(appKey: 'k', appSecret: 's', timeout: $timeout);
+            $p = new \ReflectionProperty($shop, 'httpClient');
+            $client = $p->getValue($shop);
+
+            return [$client->getConfig('timeout'), $client->getConfig('allow_redirects')];
+        };
+        $this->assertSame([0.0, false], $config(0.0));
+        $this->assertSame([TikTokShop::DEFAULT_TIMEOUT, false], $config(null));
+        $this->assertSame([2.5, false], $config(2.5));
+    }
+
     public function testANegativeTimeoutIsRejected(): void
     {
         $this->expectException(\InvalidArgumentException::class);

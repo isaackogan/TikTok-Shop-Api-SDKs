@@ -1,7 +1,7 @@
 <?php
 // Router for PHP's built-in web server (see ServerTest). Logs every request as a JSON line to $STUB_LOG, then:
 //   /redirect/...  -> 302 to /target/secret on the same server
-//   /sleep/...     -> answers after 3 seconds
+//   /sleep-N/...   -> answers after N milliseconds
 //   anything else  -> a success envelope
 declare(strict_types=1);
 
@@ -24,7 +24,7 @@ if (str_starts_with($path, '/redirect')) {
     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/target/secret');
     return;
 }
-if (str_starts_with($path, '/sleep')) {
-    sleep(3);
+if (preg_match('~^/sleep-(\d+)~', $path, $m) === 1) {
+    usleep((int) $m[1] * 1000);
 }
 echo json_encode(['code' => 0, 'message' => 'Success', 'request_id' => 'req-live', 'data' => new stdClass()]);

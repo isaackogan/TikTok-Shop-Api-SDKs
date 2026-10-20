@@ -66,6 +66,12 @@ final class Credentials
         ];
     }
 
+    /** The secrets are keyed by object identity, so a clone would have none: use {@see self::with()} instead. */
+    public function __clone(): void
+    {
+        throw new \LogicException('Credentials cannot be cloned; use with() to derive a copy.');
+    }
+
     public function __serialize(): array
     {
         throw new \LogicException('Credentials cannot be serialized.');

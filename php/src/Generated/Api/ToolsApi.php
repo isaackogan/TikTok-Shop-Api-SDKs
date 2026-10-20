@@ -293,6 +293,9 @@ class ToolsApi
                     ];
                 },
                 function ($exception) {
+                    if ($exception instanceof \TikTokShop\Api\TikTokShopException) {
+                        throw $exception;
+                    }
                     $response = $exception->getResponse();
                     $statusCode = $response->getStatusCode();
                     throw new ApiException(

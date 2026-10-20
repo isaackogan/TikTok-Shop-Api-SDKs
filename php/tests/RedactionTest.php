@@ -62,6 +62,13 @@ final class RedactionTest extends TestCase
         $this->assertNoSecrets(print_r((array) $shop, true));
     }
 
+    public function testCredentialsCannotBeCloned(): void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('use with()');
+        clone new Credentials('k', 'APP-SECRET-VALUE');
+    }
+
     public function testCredentialsCannotBeSerialized(): void
     {
         $this->expectException(\LogicException::class);

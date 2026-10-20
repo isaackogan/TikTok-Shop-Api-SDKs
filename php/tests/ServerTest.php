@@ -171,10 +171,10 @@ final class ServerTest extends TestCase
     {
         $started = microtime(true);
         try {
-            $this->shop('/sleep', 0.5)->orders->getOrderList(10);
+            $this->shop('/sleep-800', 0.5)->orders->getOrderList(10);
             $this->fail('expected a TikTokShopException');
         } catch (TikTokShopException $e) {
-            $this->assertLessThan(2.5, microtime(true) - $started);
+            $this->assertLessThan(2.0, microtime(true) - $started);
             $this->assertSame(0, $e->getTikTokCode());
             $this->assertStringContainsString('timed out', $e->getMessage());
             $this->assertScrubbedOfRequest($e);
@@ -183,9 +183,21 @@ final class ServerTest extends TestCase
 
     public function testAZeroTimeoutMeansNoLimit(): void
     {
-        // The stub answers after 3 seconds; a timeout of 0 must wait for it, not give up at once.
-        $result = $this->shop('/sleep', 0.0)->authorization->getAuthorizedShops();
+        // The stub answers after 0.7 s; a timeout of 0 must wait for it, not give up at once.
+        $result = $this->shop('/sleep-700', 0.0)->authorization->getAuthorizedShops();
         $this->assertSame('req-live', $result->getRequestId());
+    }
+
+    public function testAnAsyncClosedPortRejectsWithATikTokShopException(): void
+    {
+        $closed = self::freePort();
+        try {
+            $this->shop('/x', 5.0, $closed)->authorization->getAuthorizedShopsAsync()->wait();
+            $this->fail('expected a TikTokShopException');
+        } catch (TikTokShopException $e) {
+            $this->assertSame(0, $e->getTikTokCode());
+            $this->assertScrubbedOfRequest($e);
+        }
     }
 
     private function assertScrubbedOfRequest(\Throwable $e): void
