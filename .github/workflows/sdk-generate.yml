@@ -420,12 +420,12 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/rust run test
       - name: Clippy
         run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
-      - name: Set up Rust 1.82 (MSRV)
+      - name: Set up Rust 1.88 (MSRV)
         uses: dtolnay/rust-toolchain@master
         with:
-          toolchain: "1.82"
+          toolchain: "1.88"
       - name: Check MSRV
-        run: cargo +1.82 check --all-targets --manifest-path rust/Cargo.toml
+        run: cargo +1.88 check --all-targets --manifest-path rust/Cargo.toml
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code

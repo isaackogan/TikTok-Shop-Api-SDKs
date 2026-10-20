@@ -2,7 +2,7 @@
 name = "tiktok-shop-api"
 version = "0.1.0"
 edition = "2021"
-rust-version = "1.82"
+rust-version = "1.88"
 description = "Unofficial TikTok Shop Partner API client for Rust: generated from the documentation, with request signing."
 license = "MIT"
 repository = "https://github.com/isaackogan/TikTok-Shop-Api-SDKs"

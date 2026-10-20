@@ -47,7 +47,7 @@ fn the_readme_carries_the_required_lines() {
         "Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.",
         "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml",
         "cargo add tiktok-shop-api",
-        "Rust 1.82",
+        "Rust 1.88",
         "has not been verified against the live API",
     ] {
         assert!(readme.contains(needle), "README lacks {needle:?}");
