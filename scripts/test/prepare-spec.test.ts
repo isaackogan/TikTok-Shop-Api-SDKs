@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parseSpec, prepareSpec } from '../lib/meta.ts';
@@ -241,14 +242,19 @@ describe('prepareSpec: R21 relaxes response and webhook string enums', () => {
 });
 
 describe('prepare-spec CLI', () => {
-  it('writes openapi.json and meta.json under <lang>/build from any directory', () => {
-    const out = resolve(root, 'go/build');
-    rmSync(out, { recursive: true, force: true });
-    execFileSync(resolve(root, 'scripts/node_modules/.bin/tsx'), [resolve(root, 'scripts/prepare-spec.ts'), '--lang', 'go'], { cwd: import.meta.dirname });
-    expect(existsSync(resolve(out, 'openapi.json'))).toBe(true);
-    const meta = JSON.parse(readFileSync(resolve(out, 'meta.json'), 'utf8'));
-    expect(meta.operations).toHaveLength(320);
-    rmSync(out, { recursive: true, force: true });
+  it('writes openapi.json and meta.json to --out from any directory, never into a language folder', () => {
+    const out = mkdtempSync(resolve(tmpdir(), 'prepare-spec-'));
+    try {
+      execFileSync(resolve(root, 'scripts/node_modules/.bin/tsx'), [resolve(root, 'scripts/prepare-spec.ts'), '--lang', 'go', '--out', out], { cwd: import.meta.dirname });
+      expect(existsSync(resolve(out, 'openapi.json'))).toBe(true);
+      const meta = JSON.parse(readFileSync(resolve(out, 'meta.json'), 'utf8'));
+      const live = parseSpec(readFileSync(resolve(root, '.openapi/tiktok-shop.openapi.json'), 'utf8'));
+      const groups = JSON.parse(readFileSync(resolve(root, 'shared/api-groups.json'), 'utf8'));
+      expect(meta.operations).toHaveLength(prepareSpec(live, 'go', groups).meta.operations.length);
+      expect(meta.operations.length).toBeGreaterThan(0);
+    } finally {
+      rmSync(out, { recursive: true, force: true });
+    }
   });
 
   it('rejects an unknown language', () => {

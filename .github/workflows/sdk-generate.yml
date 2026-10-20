@@ -7,7 +7,7 @@ name: sdk-generate
 on:
   push:
     branches: [main]
-    paths:
+    paths: 
       - ".openapi/**"
       - "typescript/**"
       - "python/**"
@@ -21,7 +21,7 @@ on:
       - "scripts/**"
       - ".github/workflows/sdk-generate.yml"
   pull_request:
-    paths:
+    paths: 
       - ".openapi/**"
       - "typescript/**"
       - "python/**"
@@ -127,13 +127,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate
@@ -153,7 +153,7 @@ jobs:
           path: typescript/src/generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   python:
     name: python
@@ -169,12 +169,12 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: 3.11
+          python-version: "3.11"
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate
@@ -192,10 +192,13 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: sdk-python
-          path: python/src/tiktok_shop_api/generated
+          path: |
+            python/src/tiktok_shop_api/generated
+            !python/src/tiktok_shop_api/generated/**/__pycache__
+            !python/src/tiktok_shop_api/generated/**/*.pyc
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   go:
     name: go
@@ -211,13 +214,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
       - name: Set up Go
         uses: actions/setup-go@v7
         with:
@@ -240,7 +243,7 @@ jobs:
           path: go/generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   java:
     name: java
@@ -256,13 +259,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
           cache: maven
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
@@ -281,7 +284,7 @@ jobs:
           path: java/src/main/java/com/isaackogan/tiktok/shop/generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   kotlin:
     name: kotlin
@@ -297,13 +300,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
           cache: gradle
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
@@ -322,7 +325,7 @@ jobs:
           path: kotlin/src/main/kotlin/com/isaackogan/tiktok/shop/generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   php:
     name: php
@@ -338,17 +341,17 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
       - name: Set up PHP
         uses: shivammathur/setup-php@2.40.0
         with:
-          php-version: 8.3
+          php-version: "8.3"
           tools: composer
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
@@ -369,7 +372,7 @@ jobs:
           path: php/src/Generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   rust:
     name: rust
@@ -385,13 +388,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@stable
         with:
@@ -417,6 +420,12 @@ jobs:
         run: pnpm --filter @tiktok-shop-api/rust run test
       - name: Clippy
         run: cargo clippy --manifest-path rust/Cargo.toml --all-targets -- -D warnings
+      - name: Set up Rust 1.82 (MSRV)
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: "1.82"
+      - name: Check MSRV
+        run: cargo +1.82 check --all-targets --manifest-path rust/Cargo.toml
       - name: Check that only generated folders changed
         run: pnpm exec tsx scripts/check-generated-only.ts
       - name: Upload generated code
@@ -426,7 +435,7 @@ jobs:
           path: rust/src/generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
 
   csharp:
     name: csharp
@@ -442,17 +451,17 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: "22"
           cache: pnpm
       - name: Set up Java (openapi-generator jar)
         uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: 21
+          java-version: "21"
       - name: Set up .NET
         uses: actions/setup-dotnet@v6
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: "8.0.x"
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Generate
@@ -470,11 +479,30 @@ jobs:
           path: csharp/src/TikTokShop.Api/Generated
           include-hidden-files: true
           if-no-files-found: error
-          retention-days: 7
+          retention-days: "7"
+
+  scripts:
+    name: scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test scripts
+        run: pnpm --filter @tiktok-shop-api/scripts run test
 
   commit:
     name: commit regenerated SDKs
-    needs: [typescript, python, go, java, kotlin, php, rust, csharp]
+    needs: [scripts, typescript, python, go, java, kotlin, php, rust, csharp]
     # Only for a push to main, and only when every enabled job succeeded (skipped = disabled).
     if: ${{ always() && github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
     runs-on: ubuntu-latest
@@ -522,4 +550,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "chore(sdk): regenerate from spec $version"
-          git push origin HEAD:main
+          # main may have moved during the run; only generated folders differ, so a rebase is safe.
+          for attempt in 1 2 3; do
+            git pull --rebase origin main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "push attempt $attempt failed; retrying"
+            sleep $((attempt * 5))
+          done
+          echo "::error::could not push the regenerated SDKs to main after 3 attempts"
+          exit 1
