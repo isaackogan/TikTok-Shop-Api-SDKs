@@ -169,7 +169,7 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
-      id-token: write # npm provenance
+      id-token: write # npm trusted publishing (OIDC) and provenance
     steps:
       - name: Check out
         uses: actions/checkout@v7
@@ -180,7 +180,6 @@ jobs:
         with:
           node-version: "22"
           cache: pnpm
-          registry-url: https://registry.npmjs.org
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile
       - name: Set version
@@ -197,10 +196,9 @@ jobs:
         run: npm install -g npm@^11.5.1
       - name: Publish with provenance
         working-directory: typescript
-        env:
-          # A granular token with "bypass 2FA" until npm trusted publishing is set up (RELEASING.md); with a trusted
-          # publisher configured, OIDC is used and this may be empty.
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        # npm trusted publishing: npm exchanges this job's OIDC token for a short-lived publish credential, so no
+        # npm token is stored anywhere. The trusted publisher on npmjs.com must name release.yml and the release
+        # environment (RELEASING.md).
         run: npm publish --provenance --access public
 
   pypi:
