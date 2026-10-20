@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.RejectedExecutionException;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -27,8 +26,9 @@ import okio.Buffer;
  *       {@link SigningInterceptor};
  *   <li>a 2xx body that does not fit its model is a {@link TikTokShopException} with code -1 (R13d), not a raw gson or
  *       validation exception;
- *   <li>the {@code *Async} methods deliver a {@link TikTokShopException} to {@code onFailure} as the cause of the
- *       {@link ApiException}, instead of losing it to OkHttp's dispatcher thread.
+ *   <li>a {@link TikTokShopException} from {@link SigningInterceptor} reaches the caller: thrown as itself by the
+ *       synchronous methods, and as the cause of the {@link ApiException} given to {@code onFailure} by the {@code *Async}
+ *       ones, which stay enqueued on the OkHttp dispatcher and so within its limits.
  * </ul>
  */
 final class TikTokApiClient extends ApiClient {
@@ -84,34 +84,53 @@ final class TikTokApiClient extends ApiClient {
         }
     }
 
+    /** Unwraps the {@link TikTokShopException} that {@link SigningInterceptor} throws inside a {@link TikTokShopIOException}. */
+    @Override
+    public <T> ApiResponse<T> execute(Call call, Type returnType) throws ApiException {
+        try {
+            return super.execute(call, returnType);
+        } catch (ApiException e) {
+            TikTokShopException t = TikTokShopIOException.unwrap(e);
+            if (t != null) {
+                throw t;
+            }
+            throw e;
+        }
+    }
+
     /**
-     * Runs the call synchronously on the HTTP client's dispatcher threads, so a {@link TikTokShopException} thrown by the
-     * signing interceptor reaches {@code callback.onFailure} as the cause of an {@link ApiException} (with the HTTP status
-     * as its code, 0 when no response arrived) instead of being rethrown on OkHttp's dispatcher thread.
+     * Enqueues the call as the generated code does, so the dispatcher's {@code maxRequests} and {@code maxRequestsPerHost}
+     * apply, and hands {@code onFailure} the {@link TikTokShopException} as the cause of an {@link ApiException} (with the
+     * HTTP status as its code, 0 when no response arrived).
      */
     @Override
     public <T> void executeAsync(Call call, Type returnType, ApiCallback<T> callback) {
-        Runnable run = () -> {
-            ApiResponse<T> r;
-            try {
-                r = execute(call, returnType);
-            } catch (ApiException e) {
-                callback.onFailure(e, e.getCode(), e.getResponseHeaders());
-                return;
-            } catch (TikTokShopException e) {
-                int status = e.getHttpStatus() == null ? 0 : e.getHttpStatus();
-                callback.onFailure(new ApiException(e.getMessage(), e, status, null), status, null);
-                return;
-            } catch (RuntimeException e) {
-                callback.onFailure(new ApiException(e), 0, null);
-                return;
+        super.executeAsync(call, returnType, new ApiCallback<T>() {
+            @Override
+            public void onFailure(ApiException e, int statusCode, Map<String, List<String>> responseHeaders) {
+                TikTokShopException t = TikTokShopIOException.unwrap(e);
+                if (t == null) {
+                    callback.onFailure(e, statusCode, responseHeaders);
+                    return;
+                }
+                int status = t.getHttpStatus() == null ? 0 : t.getHttpStatus();
+                callback.onFailure(new ApiException(t.getMessage(), t, status, null), status, null);
             }
-            callback.onSuccess(r.getData(), r.getStatusCode(), r.getHeaders());
-        };
-        try {
-            getHttpClient().dispatcher().executorService().execute(run);
-        } catch (RejectedExecutionException e) {
-            callback.onFailure(new ApiException(e), 0, null);
-        }
+
+            @Override
+            public void onSuccess(T result, int statusCode, Map<String, List<String>> responseHeaders) {
+                callback.onSuccess(result, statusCode, responseHeaders);
+            }
+
+            @Override
+            public void onUploadProgress(long bytesWritten, long contentLength, boolean done) {
+                callback.onUploadProgress(bytesWritten, contentLength, done);
+            }
+
+            @Override
+            public void onDownloadProgress(long bytesRead, long contentLength, boolean done) {
+                callback.onDownloadProgress(bytesRead, contentLength, done);
+            }
+        });
     }
 }

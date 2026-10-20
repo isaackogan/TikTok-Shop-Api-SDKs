@@ -94,7 +94,7 @@ Every failed call raises the unchecked `TikTokShopException` (`getCode()`, `getM
 
 The generated methods also declare the checked `ApiException`, which can still surface for client-side problems such as a missing required parameter, so catch or declare both.
 
-The `*Async` methods report every failure to `ApiCallback.onFailure` as an `ApiException` whose `getCause()` is the `TikTokShopException` (its `getCode()` is the HTTP status, 0 when no response arrived).
+The `*Async` methods report every failure to `ApiCallback.onFailure` as an `ApiException` whose `getCause()` is the `TikTokShopException` (its `getCode()` is the HTTP status, 0 when no response arrived). They are enqueued on the OkHttp client's dispatcher, so async calls honour its `maxRequests` and `maxRequestsPerHost` limits (64 and 5 by default; set them on the `Dispatcher` of a client you pass to `httpClient`).
 
 ## Options
 

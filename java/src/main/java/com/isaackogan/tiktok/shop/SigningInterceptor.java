@@ -29,8 +29,8 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 
 /**
- * The request and response hook. It signs every request and turns every failure into a {@link TikTokShopException}. It never
- * modifies the request it is given.
+ * The request and response hook. It signs every request and turns every failure into a {@link TikTokShopException}, which
+ * it throws inside a {@link TikTokShopIOException}. It never modifies the request it is given.
  */
 final class SigningInterceptor implements Interceptor {
     /** The values one client signs with. */
@@ -83,6 +83,15 @@ final class SigningInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        try {
+            return signAndSend(chain);
+        } catch (TikTokShopException e) {
+            // OkHttp rethrows anything but an IOException on an async call's dispatcher thread (N2).
+            throw new TikTokShopIOException(e);
+        }
+    }
+
+    private Response signAndSend(Chain chain) throws IOException {
         Request req = chain.request();
         GetBody getBody = req.tag(GetBody.class);
 

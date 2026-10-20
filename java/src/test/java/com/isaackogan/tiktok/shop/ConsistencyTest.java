@@ -26,10 +26,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import okhttp3.OkHttpClient;
+import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -38,7 +40,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-/** Cross-language rules from the final review: R13c, R13d, lesson 34, I6 and M22. */
+/** Cross-language rules from the final review: R13c, R13d, lesson 34, I6, N2 and M22. */
 class ConsistencyTest {
     MockWebServer server;
 
@@ -199,11 +201,60 @@ class ConsistencyTest {
     }
 
     @Test
+    void anAsyncDecodeFailureReachesOnFailureWithTheTikTokShopExceptionAsCause() throws Exception {
+        reply("{\"code\":0,\"message\":\"Success\",\"request_id\":\"q9\",\"data\":{\"shops\":\"not a list\"}}");
+        Captured<GetAuthorizedShopsResponse> cb = runAsync(builder().build().authorization()::getAuthorizedShopsAsync);
+        TikTokShopException e = assertInstanceOf(TikTokShopException.class, cb.failure.get().getCause());
+        assertEquals(-1, e.getCode());
+        assertEquals("q9", e.getRequestId());
+        assertEquals(200, cb.failure.get().getCode());
+    }
+
+    @Test
     void anAsyncSuccessStillReachesOnSuccess() throws Exception {
         reply("{\"code\":0,\"message\":\"Success\",\"request_id\":\"r1\",\"data\":{\"shops\":[{\"id\":\"7\"}]}}");
         Captured<GetAuthorizedShopsResponse> cb = runAsync(builder().build().authorization()::getAuthorizedShopsAsync);
         assertNull(cb.failure.get());
         assertEquals("7", cb.success.get().getData().getShops().get(0).getId());
+    }
+
+    @Test
+    void asyncCallsHonourTheDispatchersMaxRequests() throws Exception {
+        CountDownLatch firstArrived = new CountDownLatch(1);
+        CountDownLatch release = new CountDownLatch(1);
+        AtomicInteger arrived = new AtomicInteger();
+        server.setDispatcher(new Dispatcher() {
+            @Override
+            public MockResponse dispatch(RecordedRequest request) throws InterruptedException {
+                if (arrived.incrementAndGet() == 1) {
+                    firstArrived.countDown();
+                    release.await(10, TimeUnit.SECONDS); // hold the first response
+                }
+                return new MockResponse().setHeader("Content-Type", "application/json")
+                        .setBody("{\"code\":0,\"request_id\":\"r1\",\"data\":{\"shops\":[]}}");
+            }
+        });
+        okhttp3.Dispatcher dispatcher = new okhttp3.Dispatcher();
+        dispatcher.setMaxRequests(1);
+        TikTokShop c = builder().httpClient(new OkHttpClient.Builder().dispatcher(dispatcher).build()).build();
+        Captured<GetAuthorizedShopsResponse> first = new Captured<>();
+        Captured<GetAuthorizedShopsResponse> second = new Captured<>();
+        try {
+            c.authorization().getAuthorizedShopsAsync(first);
+            c.authorization().getAuthorizedShopsAsync(second);
+            assertTrue(firstArrived.await(10, TimeUnit.SECONDS), "the first request never arrived");
+            Thread.sleep(300); // time for a second request to arrive, if it were allowed to start
+            assertEquals(1, arrived.get(), "the second call started while the first was still running");
+            assertEquals(1, dispatcher.runningCallsCount());
+            assertEquals(1, dispatcher.queuedCallsCount());
+        } finally {
+            release.countDown();
+        }
+        first.await();
+        second.await();
+        assertNull(first.failure.get());
+        assertNull(second.failure.get());
+        assertEquals(2, arrived.get());
     }
 
     // --- lesson 34 ------------------------------------------------------------------------------------------------------
