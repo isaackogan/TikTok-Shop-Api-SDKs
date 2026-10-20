@@ -31,8 +31,9 @@ pub struct Options {
     /// Bounds one request, response body included. `None` (or zero) means no limit. [`Options::new`] sets
     /// [`DEFAULT_TIMEOUT`]. Ignored when you pass your own [`http_client`](Options::http_client).
     pub timeout: Option<Duration>,
-    /// Your own HTTP client (proxy, TLS roots, its own timeout, ...). The default honours the proxy
-    /// environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`).
+    /// Your own HTTP client (proxy, TLS roots, its own timeout, redirect policy, ...), used as is. The default
+    /// honours the proxy environment variables (`HTTP_PROXY`, `HTTPS_PROXY`, `NO_PROXY`) and follows no
+    /// redirects, so a redirect reply is an [`Error::Api`](crate::Error::Api) with its HTTP status.
     pub http_client: Option<reqwest::Client>,
 }
 
@@ -202,7 +203,8 @@ impl TikTokShop {
         let http = match options.http_client.take() {
             Some(c) => c,
             None => {
-                let mut b = reqwest::Client::builder();
+                // No redirects: the access-token header must never follow one to another host.
+                let mut b = reqwest::Client::builder().redirect(reqwest::redirect::Policy::none());
                 if let Some(t) = options.timeout.filter(|t| !t.is_zero()) {
                     b = b.timeout(t);
                 }

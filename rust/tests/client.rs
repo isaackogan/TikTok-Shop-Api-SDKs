@@ -373,3 +373,66 @@ fn debug_output_redacts_every_secret() {
     assert!(format!("{o:?}").contains("app-key-visible"), "the app key is not a secret");
     assert!(format!("{o:?}").contains("[redacted]"));
 }
+
+#[tokio::test]
+async fn an_absent_post_body_is_sent_and_signed_as_no_body() {
+    let server = stub().await;
+    client(&server).orders.get_order_list(20, None, None, None, None).await.unwrap();
+    let req = last_request(&server).await;
+    assert_eq!(req.method.as_str(), "POST");
+    assert_signed_without_body(&req);
+    // Signing the literal `null` would differ.
+    assert_ne!(one(&decoded_query(&req), "sign"), expected_sign(&req, Some(b"null")));
+}
+
+#[tokio::test]
+async fn an_absent_get_body_is_sent_and_signed_as_no_body() {
+    let server = stub().await;
+    client(&server).affiliate_seller.get_conversation_list(10, None, None, None, None).await.unwrap();
+    let req = last_request(&server).await;
+    assert_eq!(req.method.as_str(), "GET");
+    assert_signed_without_body(&req);
+}
+
+#[tokio::test]
+async fn a_non_2xx_reply_whose_code_is_zero_uses_the_http_status() {
+    let server = stub_with(
+        ResponseTemplate::new(503).set_body_raw(r#"{"code":0,"message":"down","request_id":"r7"}"#, "application/json"),
+    )
+    .await;
+    let err = client(&server).orders.get_order_list(20, None, None, None, None).await.unwrap_err();
+    match err {
+        Error::Api { code, message, http_status, .. } => {
+            assert_eq!((code, message.as_str(), http_status), (503, "down", Some(503)))
+        }
+        other => panic!("expected Error::Api, got {other:?}"),
+    }
+}
+
+#[tokio::test]
+async fn an_invalid_access_token_is_an_error_and_nothing_is_sent() {
+    let server = stub().await;
+    let c = TikTokShop::new(options(&server).access_token("bad\ntoken")).unwrap();
+    let err = c.orders.get_order_list(20, None, None, None, None).await.unwrap_err();
+    assert!(matches!(err, Error::Other(_)), "got {err:?}");
+    assert!(!format!("{err} {err:?}").contains("bad"), "the token leaked");
+    assert!(server.received_requests().await.unwrap().is_empty(), "the request must not go out unauthenticated");
+    // The same through with_shop.
+    let c = client(&server).with_shop(Shop::new().access_token("x\r\ny"));
+    assert!(c.orders.get_order_list(20, None, None, None, None).await.is_err());
+    assert!(server.received_requests().await.unwrap().is_empty());
+}
+
+#[tokio::test]
+async fn redirects_are_not_followed_by_the_default_client() {
+    let target = stub().await;
+    let redirecting =
+        stub_with(ResponseTemplate::new(302).insert_header("location", format!("{}/elsewhere", target.uri()).as_str()))
+            .await;
+    let err = client(&redirecting).orders.get_order_list(20, None, None, None, None).await.unwrap_err();
+    match err {
+        Error::Api { code, http_status, .. } => assert_eq!((code, http_status), (302, Some(302))),
+        other => panic!("expected Error::Api, got {other:?}"),
+    }
+    assert!(target.received_requests().await.unwrap().is_empty(), "the redirect target must not be contacted");
+}

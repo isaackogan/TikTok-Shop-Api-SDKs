@@ -66,3 +66,10 @@ pub fn assert_signed(req: &Request) {
 pub async fn last_request(server: &MockServer) -> Request {
     server.received_requests().await.unwrap().pop().expect("the stub saw no request")
 }
+
+/// No body arrived (not even `null`), no content type, and the sign is the empty-body form.
+pub fn assert_signed_without_body(req: &Request) {
+    assert!(req.body.is_empty(), "unexpected body: {:?}", String::from_utf8_lossy(&req.body));
+    assert!(req.headers.get("content-type").is_none(), "unexpected content-type");
+    assert_eq!(one(&decoded_query(req), "sign"), expected_sign(req, None));
+}

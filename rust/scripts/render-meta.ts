@@ -101,6 +101,11 @@ export function renderMeta(metaPath: string, dir: string): void {
       `    OperationMeta { operation_id: ${q(op.operationId)}, tag: ${q(op.tag)}, group: ${q(snake(op.group))}, method: ${q(fn.name)}, http_method: ${q(op.method.toUpperCase())}, path: ${q(op.path)}, requires_shop_cipher: ${op.requiresShopCipher} },`,
     );
   }
+  const known = new Set(meta.operations.map((o) => o.operationId.toLowerCase()));
+  const extra = fns.filter((f) => !known.has(f.name.replace(/_/g, '')));
+  if (extra.length) {
+    throw new Error(`generated functions with no operation in meta.json: ${extra.map((f) => `${f.module}::${f.name}`).join(', ')}`);
+  }
   const sortedGroups = [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
   const groupRows = sortedGroups.map(
     ([g, v]) => `    GroupMeta { name: ${q(snake(g))}, tag: ${q(v.tag)}, type_name: ${q(pascal(g) + 'Api')} },`,

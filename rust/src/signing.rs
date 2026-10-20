@@ -142,7 +142,7 @@ impl SigningMiddleware {
         }
     }
 
-    fn sign_request(&self, req: &mut Request) {
+    fn sign_request(&self, req: &mut Request) -> Result<(), Error> {
         let c = &self.creds;
         let mut query: Vec<(String, String)> = req
             .url()
@@ -160,12 +160,22 @@ impl SigningMiddleware {
         query.push(("timestamp".into(), now.to_string()));
 
         match c.access_token.as_deref().map(HeaderValue::from_str) {
-            Some(Ok(v)) => {
+            Some(Ok(mut v)) => {
+                v.set_sensitive(true);
                 req.headers_mut().insert("x-tts-access-token", v);
             }
-            _ => {
+            // The message never includes the token.
+            Some(Err(_)) => return Err(Error::Other("the access token is not a valid HTTP header value".into())),
+            None => {
                 req.headers_mut().remove("x-tts-access-token");
             }
+        }
+
+        // The generated functions serialize an absent optional body as the JSON `null`. No body is meant.
+        if req.body().and_then(|b| b.as_bytes()) == Some(b"null") {
+            *req.body_mut() = None;
+            req.headers_mut().remove(CONTENT_TYPE);
+            req.headers_mut().remove(reqwest::header::CONTENT_LENGTH);
         }
 
         // A streaming body (a multipart upload) has no bytes to read, and multipart is never signed anyway.
@@ -182,6 +192,7 @@ impl SigningMiddleware {
 
         let raw = query.iter().map(|(k, v)| format!("{}={}", encode(k), encode(v))).collect::<Vec<_>>().join("&");
         req.url_mut().set_query(Some(&raw));
+        Ok(())
     }
 }
 
@@ -199,7 +210,7 @@ impl Middleware for SigningMiddleware {
         extensions: &mut http::Extensions,
         next: Next<'_>,
     ) -> reqwest_middleware::Result<Response> {
-        self.sign_request(&mut req);
+        self.sign_request(&mut req).map_err(reqwest_middleware::Error::middleware)?;
         let resp = next.run(req, extensions).await?;
 
         let status = resp.status();
@@ -238,7 +249,7 @@ pub(crate) fn check_response(status: u16, reason: Option<&str>, data: &[u8]) -> 
     let request_id = field("request_id").and_then(Value::as_str).unwrap_or_default().to_owned();
     if !ok {
         return Err(Error::Api {
-            code: code.unwrap_or(i64::from(status)),
+            code: code.filter(|c| *c != 0).unwrap_or(i64::from(status)),
             message: message.or_else(|| reason.map(str::to_owned)).unwrap_or_else(|| format!("HTTP {status}")),
             request_id,
             http_status: Some(status),
