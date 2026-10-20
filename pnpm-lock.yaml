@@ -11,6 +11,9 @@ importers:
       '@openapitools/openapi-generator-cli':
         specifier: 2.41.0
         version: 2.41.0
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
       turbo:
         specifier: ^2.5.0
         version: 2.11.9
