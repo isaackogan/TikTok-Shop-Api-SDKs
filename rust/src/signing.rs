@@ -96,7 +96,7 @@ pub fn requires_shop_cipher(method: &str, path: &str) -> bool {
 const UNRESERVED: &[u8] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
 
 /// RFC 3986 percent-encoding: everything but the unreserved characters.
-fn encode(s: &str) -> String {
+pub(crate) fn encode(s: &str) -> String {
     let mut out = String::with_capacity(s.len());
     for &b in s.as_bytes() {
         if UNRESERVED.contains(&b) {

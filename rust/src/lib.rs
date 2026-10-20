@@ -5,10 +5,14 @@
 //! [`TikTokShop`] has one field per API group (`client.orders`, `client.products`, ...); each method signs
 //! its request and turns a failed reply into an [`Error`]. The models are in [`generated::models`].
 
+pub mod auth;
 pub mod client;
 pub mod error;
 pub mod generated;
 pub mod signing;
+pub mod webhooks;
 
+pub use auth::{AuthOptions, AuthType, Region, TikTokShopAuth, TokenSet};
 pub use client::{Options, Shop, TikTokShop, DEFAULT_BASE_URL, DEFAULT_TIMEOUT};
 pub use error::Error;
+pub use generated::webhooks::WebhookEvent;

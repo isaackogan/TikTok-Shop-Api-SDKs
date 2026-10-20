@@ -5,3 +5,4 @@ pub mod apis;
 pub mod models;
 pub mod groups;
 pub mod meta;
+pub mod webhooks;

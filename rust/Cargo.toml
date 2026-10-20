@@ -8,9 +8,11 @@ license = "MIT"
 repository = "https://github.com/isaackogan/TikTok-Shop-Api-SDKs"
 homepage = "https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/rust"
 readme = "README.md"
+documentation = "https://docs.rs/tiktok-shop-api"
 keywords = ["tiktok", "tiktok-shop", "api", "sdk", "openapi"]
 categories = ["api-bindings"]
-exclude = ["build/", "scripts/", "package.json", "node_modules/"]
+# The tests read ../shared/test-vectors, which is outside the package.
+exclude = ["build/", "scripts/", "package.json", "node_modules/", "tests/"]
 
 [lib]
 # The generated doc comments are TikTok's prose, not Rust examples.

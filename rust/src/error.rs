@@ -29,6 +29,11 @@ pub enum Error {
     Timeout,
     /// A reply that is valid JSON but does not fit the expected model.
     Decode(serde_json::Error),
+    /// A webhook's signature does not match its body.
+    WebhookSignature,
+    /// A webhook body that cannot be parsed: not a JSON object, no integer `type`, or a known type whose
+    /// fields do not fit its model (the message names the field).
+    Webhook(String),
     /// Reading a file to upload failed.
     Io(std::io::Error),
     /// Anything else, as text.
@@ -78,6 +83,8 @@ impl fmt::Display for Error {
             Error::Http(e) => write!(f, "tiktok shop: request failed: {e}"),
             Error::Timeout => write!(f, "tiktok shop: the request timed out"),
             Error::Decode(e) => write!(f, "tiktok shop: the reply does not match the expected model: {e}"),
+            Error::WebhookSignature => write!(f, "tiktok shop: webhook signature does not match"),
+            Error::Webhook(m) => write!(f, "tiktok shop: invalid webhook: {m}"),
             Error::Io(e) => write!(f, "tiktok shop: {e}"),
             Error::Other(m) => write!(f, "tiktok shop: {m}"),
         }
