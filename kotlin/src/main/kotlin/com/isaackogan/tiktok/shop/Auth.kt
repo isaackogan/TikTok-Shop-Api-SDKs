@@ -131,7 +131,8 @@ class TikTokShopAuth(options: TikTokShopAuthOptions) {
                 require(json.isJsonObject) { "body is not a JSON object" }
                 json.asJsonObject
             } catch (e: RuntimeException) {
-                throw TikTokShopException(-1, "unparseable token response (HTTP $status)", httpStatus = status, cause = e)
+                // No TikTok code at all: -1, except a redirect, which is never followed and so is reported by its status.
+                throw TikTokShopException(if (status in 300..399) status else -1, "unparseable token response (HTTP $status)", httpStatus = status, cause = e)
             }
         val requestId = str(env["request_id"]) ?: ""
         val message = str(env["message"])

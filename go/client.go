@@ -1,6 +1,7 @@
 package tiktokshop
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -28,8 +29,27 @@ type Options struct {
 	// Timeout bounds one request, response body included. 0 means DefaultTimeout; negative means none.
 	Timeout time.Duration
 	// Transport carries the signed requests. nil means http.DefaultTransport, which honours the proxy
-	// environment variables. [TikTokShop.WithShop] shares it.
+	// environment variables. [TikTokShop.WithShop] shares it. The client the SDK builds around it never
+	// follows a redirect: a 3xx reply is returned as an [*Error] carrying the status, so the access token
+	// is never forwarded to another host. A Transport you supply is used as it is.
 	Transport http.RoundTripper
+}
+
+// String describes the options without the app secret, the access token or the shop cipher.
+func (o Options) String() string {
+	return fmt.Sprintf("Options{AppKey:%s AppSecret:%s AccessToken:%s ShopCipher:%s BaseURL:%s Timeout:%s Transport:%t}",
+		o.AppKey, redact(o.AppSecret), redact(o.AccessToken), redact(o.ShopCipher), o.BaseURL, o.Timeout, o.Transport != nil)
+}
+
+// GoString is String, so %#v does not print the secrets either.
+func (o Options) GoString() string { return o.String() }
+
+// redact masks a secret, keeping only whether it is set.
+func redact(secret string) string {
+	if secret == "" {
+		return "<empty>"
+	}
+	return "***"
 }
 
 // ShopOption selects what [TikTokShop.WithShop] changes. See [ShopAccessToken] and [ShopCipher].
@@ -67,6 +87,12 @@ type TikTokShop struct {
 	opts Options
 }
 
+// String describes the client without its secrets.
+func (c TikTokShop) String() string { return "TikTokShop{" + c.opts.String() + "}" }
+
+// GoString is String, so %#v does not print the secrets either.
+func (c TikTokShop) GoString() string { return c.String() }
+
 // New returns a client. It never fails and does no I/O.
 func New(o Options) *TikTokShop {
 	if o.BaseURL == "" {
@@ -88,7 +114,7 @@ func New(o Options) *TikTokShop {
 	cfg.UserAgent = "tiktok-shop-api-go/0.1.0"
 	// No http.Client.Timeout: net/http would replace our *Error with its own string error. The
 	// transport applies the timeout itself.
-	cfg.HTTPClient = &http.Client{Transport: t}
+	cfg.HTTPClient = &http.Client{Transport: t, CheckRedirect: noRedirect}
 	api := generated.NewAPIClient(cfg)
 	return &TikTokShop{
 		AffiliateCreator:   api.AffiliateCreatorAPI,
@@ -132,3 +158,6 @@ func (c *TikTokShop) WithShop(opts ...ShopOption) *TikTokShop {
 	}
 	return New(o)
 }
+
+// noRedirect makes an http.Client hand back a 3xx reply instead of following it.
+func noRedirect(*http.Request, []*http.Request) error { return http.ErrUseLastResponse }

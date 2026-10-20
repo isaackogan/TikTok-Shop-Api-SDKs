@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Literal
 from urllib.parse import quote
 
@@ -31,10 +31,16 @@ def _enc(s: str) -> str:
 
 @dataclass(frozen=True)
 class TokenSet:
-    access_token: str
+    """The result of exchanging an auth code or refreshing a token.
+
+    It holds secrets. ``repr`` hides both tokens, but ``dataclasses.asdict`` and the attributes keep them, so you can
+    serialise a set to store it: protect wherever you store it.
+    """
+
+    access_token: str = field(repr=False)
     #: Unix timestamp (seconds) at which the access token expires.
     access_token_expire_in: int
-    refresh_token: str
+    refresh_token: str = field(repr=False)
     #: Unix timestamp (seconds) at which the refresh token expires.
     refresh_token_expire_in: int
     #: Everything below is optional: creator and partner tokens may lack the seller fields.
@@ -56,6 +62,9 @@ class _AuthBase:
         self._app_secret = app_secret
         self._service_id = service_id
         self._base_url = base_url.rstrip("/")
+
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}(app_key={self._app_key!r}, app_secret='***', service_id={self._service_id!r}, base_url={self._base_url!r})"
 
     def authorization_url(self, *, type: AuthType, region: Region, state: str | None = None) -> str:
         """The URL to send the seller (or partner, or creator) to. ``state`` is echoed back to your redirect URL."""
@@ -89,20 +98,27 @@ def _transport_error(e: httpx.HTTPError | httpx.InvalidURL) -> TikTokShopError:
     return TikTokShopError(f"{kind}: {e}")
 
 
+def _no_code(status: int) -> int:
+    """The code for a reply with no TikTok code at all: -1, except a redirect (never followed), which has its status."""
+    return status if 300 <= status < 400 else -1
+
+
 def _to_token_set(response: httpx.Response) -> TokenSet:
     status = response.status_code
     ok = 200 <= status < 300
     try:
         env: Any = json.loads(response.content)
     except ValueError as e:
-        raise TikTokShopError(f"Unparseable token response (HTTP {status})", code=-1, http_status=status) from e
+        raise TikTokShopError(f"Unparseable token response (HTTP {status})", code=_no_code(status), http_status=status) from e
     if not isinstance(env, dict):
-        raise TikTokShopError(f"Unexpected token response (HTTP {status})", code=-1, http_status=status)
+        raise TikTokShopError(f"Unexpected token response (HTTP {status})", code=_no_code(status), http_status=status)
     request_id = str(env.get("request_id") or "")
     code = env.get("code")
     if not isinstance(code, int) or isinstance(code, bool):
         code = -1 if ok else status
     if code != 0 or not ok:
+        if code == 0:
+            code = status  # R13a: a failure that carries no TikTok code uses the HTTP status
         raise TikTokShopError(
             str(env.get("message") or f"HTTP {status}"),
             code=code,

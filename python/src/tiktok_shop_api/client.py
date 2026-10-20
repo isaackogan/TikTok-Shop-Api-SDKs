@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import Generator
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from typing import Any
 from urllib.parse import parse_qsl, quote
 
@@ -64,9 +64,9 @@ _RESERVED = frozenset({"app_key", "timestamp", "sign", "shop_cipher"})
 @dataclass(frozen=True)
 class _Credentials:
     app_key: str
-    app_secret: str
-    access_token: str | None = None
-    shop_cipher: str | None = None
+    app_secret: str = field(repr=False)
+    access_token: str | None = field(default=None, repr=False)
+    shop_cipher: str | None = field(default=None, repr=False)
 
 
 def _encode(s: str) -> str:
@@ -136,7 +136,8 @@ def _check_response(response: httpx.Response) -> None:
     if not ok:
         raise TikTokShopError(
             message if message is not None else (response.reason_phrase or f"HTTP {status}"),
-            code=code if code is not None else status,
+            # R13a: a body with no code, or code 0, still failed, so the HTTP status is the code.
+            code=code if code else status,
             request_id=request_id,
             http_status=status,
         )
@@ -245,6 +246,9 @@ class TikTokShop:
         for name, cls in SYNC_GROUPS.items():
             setattr(self, name, cls(self._client))
 
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}(app_key={self._creds.app_key!r}, base_url={self._base_url!r}, secrets hidden)"
+
     def with_shop(self, *, access_token: str | None = _KEEP, shop_cipher: str | None = _KEEP) -> TikTokShop:
         """A client for another shop or token that shares this client's HTTP transport.
 
@@ -330,6 +334,9 @@ class AsyncTikTokShop:
         )
         for name, cls in ASYNC_GROUPS.items():
             setattr(self, name, cls(self._client))
+
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}(app_key={self._creds.app_key!r}, base_url={self._base_url!r}, secrets hidden)"
 
     def with_shop(self, *, access_token: str | None = _KEEP, shop_cipher: str | None = _KEEP) -> AsyncTikTokShop:
         """A client for another shop or token that shares this client's HTTP transport (see :meth:`TikTokShop.with_shop`)."""

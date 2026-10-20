@@ -12,7 +12,8 @@ export interface TransportOptions {
 
 /**
  * The `fetchApi` for the generated client. Its responses' `.json()` keeps 64-bit IDs exact
- * (`parseJsonExact` with `ID_FIELDS`). A GET with a body, which `fetch` refuses, is sent with
+ * (`parseJsonExact` with `ID_FIELDS`). The default `fetch` never follows a redirect (a supplied one is used as is).
+ * A GET with a body, which `fetch` refuses, is sent with
  * `node:http`/`node:https` instead and comes back as a standard `Response`.
  */
 export function createFetchApi(options: TransportOptions = {}): typeof fetch {
@@ -24,7 +25,7 @@ export function createFetchApi(options: TransportOptions = {}): typeof fetch {
     const res =
       method === 'GET' && init?.body != null && !(input instanceof Request)
         ? await sendWithBody(String(input), init, signal)
-        : await base(input, signal ? { ...init, signal } : init);
+        : await base(input, { ...init, ...(signal ? { signal } : {}), ...(options.fetch ? {} : { redirect: 'manual' as const }) });
     return exactJson(res);
   };
 }

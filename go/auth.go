@@ -54,9 +54,20 @@ type AuthOptions struct {
 	BaseURL string
 	// Timeout bounds one token request. 0 means DefaultTimeout; negative means none.
 	Timeout time.Duration
-	// Transport carries the requests. nil means http.DefaultTransport.
+	// Transport carries the requests. nil means http.DefaultTransport. The client the SDK builds around it never
+	// follows a redirect (a 3xx reply is returned as an [*Error] carrying the status), so the app secret and the
+	// code are never forwarded to another host. A Transport you supply is used as it is.
 	Transport http.RoundTripper
 }
+
+// String describes the options without the app secret.
+func (o AuthOptions) String() string {
+	return fmt.Sprintf("AuthOptions{AppKey:%s AppSecret:%s ServiceID:%s BaseURL:%s Timeout:%s Transport:%t}",
+		o.AppKey, redact(o.AppSecret), o.ServiceID, o.BaseURL, o.Timeout, o.Transport != nil)
+}
+
+// GoString is String, so %#v does not print the secret either.
+func (o AuthOptions) GoString() string { return o.String() }
 
 // AuthorizationURLOptions select the page [Auth.AuthorizationURL] builds.
 type AuthorizationURLOptions struct {
@@ -81,11 +92,26 @@ type TokenSet struct {
 	GrantedScopes        []string
 }
 
+// String describes the set without its tokens. json.Marshal is unchanged, so a set can still be stored.
+func (t TokenSet) String() string {
+	return fmt.Sprintf("TokenSet{AccessToken:*** RefreshToken:*** OpenID:%s SellerName:%s SellerBaseRegion:%s UserType:%d GrantedScopes:%v}",
+		t.OpenID, t.SellerName, t.SellerBaseRegion, t.UserType, t.GrantedScopes)
+}
+
+// GoString is String, so %#v does not print the tokens either.
+func (t TokenSet) GoString() string { return t.String() }
+
 // Auth is the OAuth helper: authorization URLs, code exchange and token refresh.
 type Auth struct {
 	opts   AuthOptions
 	client *http.Client
 }
+
+// String describes the helper without the app secret.
+func (a Auth) String() string { return "Auth{" + a.opts.String() + "}" }
+
+// GoString is String, so %#v does not print the secret either.
+func (a Auth) GoString() string { return a.String() }
 
 // NewAuth returns an OAuth helper. It never fails and does no I/O.
 func NewAuth(o AuthOptions) *Auth {
@@ -99,7 +125,7 @@ func NewAuth(o AuthOptions) *Auth {
 	} else if timeout < 0 {
 		timeout = 0
 	}
-	return &Auth{opts: o, client: &http.Client{Transport: o.Transport, Timeout: timeout}}
+	return &Auth{opts: o, client: &http.Client{Transport: o.Transport, Timeout: timeout, CheckRedirect: noRedirect}}
 }
 
 // enc is RFC 3986 percent-encoding: only unreserved characters stay, a space becomes %20.
@@ -188,7 +214,11 @@ func toTokenSet(status int, body []byte) (*TokenSet, error) {
 		if err == nil {
 			err = fmt.Errorf("body is not a JSON object")
 		}
-		return nil, &Error{Code: -1, Message: fmt.Sprintf("unparseable token response (HTTP %d)", status), HTTPStatus: status, Cause: err}
+		code := -1
+		if status >= 300 && status < 400 {
+			code = status // a redirect is never followed; report it by its status
+		}
+		return nil, &Error{Code: code, Message: fmt.Sprintf("unparseable token response (HTTP %d)", status), HTTPStatus: status, Cause: err}
 	}
 	var requestID, message string
 	_ = json.Unmarshal(env["request_id"], &requestID)

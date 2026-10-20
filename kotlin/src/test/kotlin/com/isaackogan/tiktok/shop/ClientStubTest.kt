@@ -360,4 +360,50 @@ class ClientStubTest {
         assertFalse(text.contains("super-secret-value") || text.contains("tok-value-xyz") || text.contains("cipher-xyz"), text)
         assertContains(text, "appkey1")
     }
+
+    @Test
+    fun aRedirectIsNotFollowedAndSurfacesAsTheErrorWithItsStatus() {
+        MockWebServer().use { target ->
+            target.start()
+            server.enqueue(MockResponse.Builder().code(302).setHeader("Location", target.url("/stolen").toString()).build())
+            val e = assertFailsWith<TikTokShopException> { client().authorization.getAuthorizedShops() }
+            assertEquals(302, e.code)
+            assertEquals(302, e.httpStatus)
+            assertEquals(0, target.requestCount, "the redirect target got a request")
+        }
+    }
+
+    @Test
+    fun aRedirectOnTheGetWithBodyPathIsNotFollowedEither() {
+        MockWebServer().use { target ->
+            target.start()
+            RawServer().respond(302, "").location(target.url("/stolen").toString()).use { raw ->
+                val e = assertFailsWith<TikTokShopException> { client(raw.baseUrl()).affiliateSeller.getConversationList(10L, getConversationListRequest = onlyIds) }
+                assertEquals(302, e.code)
+                assertEquals(302, e.httpStatus)
+                assertEquals(0, target.requestCount)
+            }
+        }
+    }
+
+    @Test
+    fun aSuppliedHttpClientIsUsedAsIsSoItsRedirectPolicyApplies() {
+        MockWebServer().use { target ->
+            target.start()
+            target.enqueue(MockResponse.Builder().setHeader("Content-Type", "application/json").body(StubSupport.OK).build())
+            server.enqueue(MockResponse.Builder().code(302).setHeader("Location", target.url("/followed").toString()).build())
+            TikTokShop(options().copy(httpClient = OkHttpClient.Builder().followRedirects(true).build())).authorization.getAuthorizedShops()
+            assertEquals(1, target.requestCount)
+        }
+    }
+
+    @Test
+    fun non2xxWithCodeZeroOrNoCodeUsesTheHttpStatusAsTheCode() {
+        for (body in listOf("""{"message":"x"}""", """{"code":0}""")) {
+            server.enqueue(MockResponse.Builder().code(503).body(body).build())
+            val e = assertFailsWith<TikTokShopException> { client().authorization.getAuthorizedShops() }
+            assertEquals(503, e.code, body)
+            assertEquals(503, e.httpStatus, body)
+        }
+    }
 }

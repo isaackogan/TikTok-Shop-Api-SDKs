@@ -10,7 +10,11 @@ export interface TikTokShopAuthOptions {
   serviceId?: string;
   /** Token endpoint host. Defaults to `https://auth.tiktok-shops.com`. */
   baseUrl?: string;
-  /** HTTP client override (defaults to the global `fetch`). */
+  /**
+   * HTTP client override (defaults to the global `fetch`). The default never follows a redirect: a 3xx reply is thrown
+   * as a {@link TikTokShopError} whose `code` and `httpStatus` are the status, so the app secret and the code are never
+   * forwarded to another host. A `fetch` you supply is used as is, so its own redirect policy applies.
+   */
   fetch?: typeof fetch;
 }
 
@@ -20,6 +24,10 @@ export interface AuthorizationUrlOptions {
   state?: string;
 }
 
+/**
+ * The result of exchanging an auth code or refreshing a token. It is a plain data object, so you can serialise it to
+ * store it, but it holds secrets (`accessToken`, `refreshToken`): never log it, and protect wherever you store it.
+ */
 export interface TokenSet {
   accessToken: string;
   /** Unix timestamp (seconds) at which the access token expires. */
@@ -78,16 +86,22 @@ export class TikTokShopAuth {
     const params: [string, string][] = [['app_key', this.#opts.appKey], ['app_secret', this.#opts.appSecret], ...extra];
     const base = (this.#opts.baseUrl ?? DEFAULT_AUTH_BASE_URL).replace(/\/+$/, '');
     const url = `${base}/api/v2/token/${endpoint}?${params.map(([k, v]) => `${k}=${enc(v)}`).join('&')}`;
-    const res = await (this.#opts.fetch ?? fetch)(url, { method: 'GET' });
+    const res = await (this.#opts.fetch ?? fetch)(url, this.#opts.fetch ? { method: 'GET' } : { method: 'GET', redirect: 'manual' });
     const text = await res.text();
+    // No TikTok code at all (R13): -1, except a redirect, which is never followed and so is reported by its status.
+    const noCode = res.status >= 300 && res.status < 400 ? res.status : -1;
     let env: any;
     try {
       env = parseJsonExact(text, ['open_id']);
     } catch (cause) {
-      throw new TikTokShopError({ code: -1, message: `Unparseable token response (HTTP ${res.status})`, requestId: '', httpStatus: res.status, cause });
+      throw new TikTokShopError({ code: noCode, message: `Unparseable token response (HTTP ${res.status})`, requestId: '', httpStatus: res.status, cause });
     }
-    const code = typeof env?.code === 'number' ? env.code : res.ok ? -1 : res.status;
+    if (typeof env !== 'object' || env === null || Array.isArray(env)) {
+      throw new TikTokShopError({ code: noCode, message: `Unexpected token response (HTTP ${res.status})`, requestId: '', httpStatus: res.status });
+    }
+    let code = typeof env.code === 'number' ? env.code : res.ok ? -1 : res.status;
     if (code !== 0 || !res.ok) {
+      if (code === 0) code = res.status; // R13a: a failure that carries no TikTok code uses the HTTP status
       throw new TikTokShopError({
         code,
         message: env?.message ?? `HTTP ${res.status}`,

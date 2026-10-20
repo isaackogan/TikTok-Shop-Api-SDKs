@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import * as generated from '../src/generated/index.ts';
 import { EVENT_TYPES, GROUPS, ID_BODY_PATHS, ID_FIELDS, OPERATIONS, WEBHOOKS } from '../src/generated/meta.ts';
@@ -7,35 +7,55 @@ import { findGroupClasses } from '../scripts/render-meta.ts';
 const groups = Object.values(
   JSON.parse(readFileSync(new URL('../../shared/api-groups.json', import.meta.url), 'utf8')),
 ) as string[];
-const meta = JSON.parse(readFileSync(new URL('../build/meta.json', import.meta.url), 'utf8'));
+// Everything here reads committed files: the rendered src/generated/meta.ts and the generated API sources.
+// Nothing under build/ (gitignored), and no hard-coded spec counts.
+const apiSources = (cls: string): string => {
+  const dir = new URL('../src/generated/apis/', import.meta.url);
+  for (const f of readdirSync(dir)) {
+    const src = readFileSync(new URL(f, dir), 'utf8');
+    if (new RegExp(`export class ${cls}\\b`).test(src)) return src;
+  }
+  throw new Error(`no source for ${cls}`);
+};
 
 describe('generated client', () => {
-  it('maps all 19 groups to exported API classes', () => {
-    expect(groups).toHaveLength(19);
+  it('maps every group to an exported API class', () => {
+    expect(groups.length).toBeGreaterThan(0);
+    expect(Object.keys(GROUPS).sort()).toEqual([...groups].sort());
     for (const g of groups) {
       expect(GROUPS[g], g).toBeDefined();
       expect((generated as Record<string, unknown>)[GROUPS[g].className], g).toBeTypeOf('function');
     }
   });
-  it('has 320 operations matching meta.json', () => {
-    expect(OPERATIONS.length).toBe(320);
-    expect(OPERATIONS).toEqual(meta.operations);
+  it('has every operation as a method on its group class, with unique ids', () => {
+    expect(OPERATIONS.length).toBeGreaterThan(0);
+    expect(new Set(OPERATIONS.map((o) => o.operationId)).size).toBe(OPERATIONS.length);
+    expect(new Set(OPERATIONS.map((o) => o.group))).toEqual(new Set(groups));
+    const sources = new Map<string, string>();
+    for (const op of OPERATIONS) {
+      const cls = GROUPS[op.group].className;
+      if (!sources.has(cls)) sources.set(cls, apiSources(cls));
+      expect(sources.get(cls), `${op.operationId} on ${cls}`).toMatch(new RegExp(`async ${op.operationId}\\(`));
+    }
+    expect(OPERATIONS.some((o) => o.requiresShopCipher)).toBe(true);
+    expect(OPERATIONS.some((o) => !o.requiresShopCipher)).toBe(true);
   });
-  it('carries the webhooks and event types from meta.json', () => {
-    expect(WEBHOOKS).toHaveLength(44);
-    expect(WEBHOOKS).toEqual(meta.webhooks);
+  it('carries the webhooks, each with a generated model, and their event types', () => {
+    expect(WEBHOOKS.length).toBeGreaterThan(0);
+    const models = new Set(readdirSync(new URL('../src/generated/models/', import.meta.url)).map((f) => f.replace(/\.ts$/, '')));
+    for (const w of WEBHOOKS) expect(models.has(w.schema), w.schema).toBe(true);
+    expect(EVENT_TYPES).toEqual(Object.fromEntries(WEBHOOKS.filter((w) => w.eventType).map((w) => [w.type, w.eventType])));
     expect(EVENT_TYPES[1]).toBe('ORDER_STATUS_CHANGE');
-    expect(Object.keys(EVENT_TYPES)).toHaveLength(16);
   });
-  it('carries the ID fields from meta.json', () => {
-    expect(ID_FIELDS).toEqual(meta.idFields);
+  it('carries the ID fields', () => {
     for (const f of ['product_id', 'shop_id', 'sku_id', 'material_id', 'tts_pid']) {
       expect(ID_FIELDS).toContain(f);
     }
   });
-  it('carries the request-body ID paths from meta.json', () => {
-    expect(meta.idBodyPaths).toBeTypeOf('object');
-    expect(ID_BODY_PATHS).toEqual(meta.idBodyPaths);
+  it('carries request-body ID paths only for operations that exist', () => {
+    expect(ID_BODY_PATHS).toBeTypeOf('object');
+    const ids = new Set(OPERATIONS.map((o) => o.operationId));
+    for (const id of Object.keys(ID_BODY_PATHS)) expect(ids.has(id), id).toBe(true);
   });
 });
 

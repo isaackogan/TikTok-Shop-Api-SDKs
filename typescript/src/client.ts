@@ -18,6 +18,10 @@ export interface TikTokShopOptions {
   /**
    * HTTP client override (defaults to the global `fetch`). A GET with a body, which `fetch`
    * refuses, is sent with `node:http`/`node:https` instead.
+   *
+   * The default client never follows a redirect: a 3xx reply is thrown as a {@link TikTokShopError}
+   * whose `code` and `httpStatus` are the status, so the access token is never forwarded to another
+   * host. A `fetch` you supply is used as is, so its own redirect policy applies.
    */
   fetch?: typeof fetch;
 }
@@ -56,10 +60,12 @@ export class TikTokShop {
   readonly supplyChain: g.SupplyChainApi;
   readonly tools: g.ToolsApi;
 
-  private readonly options: TikTokShopOptions;
+  // A #private field: it never shows in util.inspect, console.log, JSON.stringify or Object.keys, so the app
+  // secret, access token and shop cipher stay out of logs.
+  readonly #options: TikTokShopOptions;
 
   constructor(options: TikTokShopOptions) {
-    this.options = options;
+    this.#options = options;
     const cfg = new g.Configuration({
       basePath: (options.baseUrl ?? DEFAULT_BASE_URL).replace(/\/+$/, ''),
       middleware: [{ pre: (ctx) => this.requestHook(ctx), post: (ctx) => this.responseHook(ctx),
@@ -90,11 +96,11 @@ export class TikTokShop {
 
   /** A client for another shop or token that shares this client's HTTP client. */
   withShop(shop: { accessToken?: string; shopCipher?: string }): TikTokShop {
-    return new TikTokShop({ ...this.options, ...shop });
+    return new TikTokShop({ ...this.#options, ...shop });
   }
 
   private async requestHook(ctx: g.RequestContext): Promise<g.FetchParams> {
-    const o = this.options;
+    const o = this.#options;
     const url = new URL(ctx.url);
     const method = (ctx.init.method ?? 'GET').toUpperCase();
     const query = parseQuery(url.search.slice(1)).filter(
@@ -153,7 +159,8 @@ export class TikTokShop {
     const requestId = isObj && typeof envelope!.request_id === 'string' ? envelope!.request_id : '';
     if (!res.ok) {
       throw new TikTokShopError({
-        code: code ?? res.status,
+        // R13a: a body with no code, or code 0, still failed, so the HTTP status is the code.
+        code: code || res.status,
         message: message ?? res.statusText ?? `HTTP ${res.status}`,
         requestId,
         httpStatus: res.status,

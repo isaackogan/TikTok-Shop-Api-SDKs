@@ -287,4 +287,29 @@ class AuthTest {
         val a = TikTokShopAuth(TikTokShopAuthOptions(appKey = "pubkey", appSecret = "SEKRET-VALUE")).toString()
         assertFalse(a.contains("SEKRET-VALUE"), a)
     }
+
+    @Test
+    fun aTokenRedirectIsNotFollowedAndSurfacesAsItsStatus() {
+        MockWebServer().use { target ->
+            target.start()
+            MockWebServer().use { s ->
+                s.enqueue(MockResponse.Builder().code(302).setHeader("Location", target.url("/stolen").toString()).build())
+                s.start()
+                val ex = assertFailsWith<TikTokShopException> { auth(s).exchangeCode("C") }
+                assertEquals(302, ex.code)
+                assertEquals(302, ex.httpStatus)
+                assertEquals(0, target.requestCount)
+            }
+        }
+    }
+
+    @Test
+    fun aTokenFailureWithNoCodeOrCodeZeroUsesTheHttpStatus() {
+        for (body in listOf("""{"message":"x"}""", """{"code":0}""")) {
+            val ex = exchangeFails(body, 503)
+            assertEquals(503, ex.code, body)
+            assertEquals(503, ex.httpStatus, body)
+        }
+        assertEquals(-1, exchangeFails("down", 503).code)
+    }
 }

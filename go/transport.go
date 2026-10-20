@@ -166,7 +166,8 @@ func checkResponse(status int, statusText string, data []byte) error {
 	}
 	if !ok {
 		e := &Error{Code: status, RequestID: requestID, HTTPStatus: status}
-		if code != nil {
+		// A body with no code, or code 0, still failed: the HTTP status is the code (R13a).
+		if code != nil && *code != 0 {
 			e.Code = *code
 		}
 		switch {

@@ -54,7 +54,9 @@ data class TikTokShopOptions(
     val timeout: Duration? = null,
     /**
      * Carries the signed requests. Its connection pool, proxy, TLS settings, interceptors and timeouts are used as they are.
-     * Without it, a default OkHttp client is used, which honours the JVM's proxy settings.
+     * Without it, a default OkHttp client is used, which honours the JVM's proxy settings and never follows a redirect (a 3xx
+     * surfaces as a [TikTokShopException] carrying the status). A client you supply is used as it is, so its redirect policy
+     * applies.
      *
      * Three operations (`getConversationList`, `mapTokopediaToTikTokShopProductIDs` and `getShippingTemplateAvailability`)
      * are GETs with a body, which OkHttp cannot send, so they go through the JDK's `java.net.http.HttpClient` instead. For
@@ -163,7 +165,9 @@ class TikTokShop private constructor(private val shared: Shared, private val cre
             }
 
             fun of(options: TikTokShopOptions): Shared {
-                val http = (options.httpClient?.newBuilder() ?: OkHttpClient.Builder()).apply {
+                // The default client never follows a redirect: a followed cross-host redirect would forward the x-tts-access-token
+                // header. A client you supply is used as it is.
+                val http = (options.httpClient?.newBuilder() ?: OkHttpClient.Builder().followRedirects(false).followSslRedirects(false)).apply {
                     val t = options.timeout ?: (if (options.httpClient == null) DEFAULT_TIMEOUT else null)
                     if (t != null) connectTimeout(t).readTimeout(t).writeTimeout(t).callTimeout(t)
                 }.build()

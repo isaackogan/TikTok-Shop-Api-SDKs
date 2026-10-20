@@ -177,7 +177,8 @@ internal class SigningInterceptor(private val creds: Credentials, private val jd
                 requestId = stringOf(env, "request_id") ?: ""
             }
             if (!ok) {
-                val c = if (code != null && code in Int.MIN_VALUE..Int.MAX_VALUE) code.toInt() else status
+                // R13a: a body without a code, or with code 0, still failed, so the HTTP status is the code.
+                val c = if (code != null && code != 0L && code in Int.MIN_VALUE..Int.MAX_VALUE) code.toInt() else status
                 throw TikTokShopException(c, message ?: "HTTP $status", requestId, status)
             }
             if (code != null && code != 0L) {

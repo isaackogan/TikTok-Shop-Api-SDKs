@@ -36,6 +36,8 @@ class RawServer : Closeable {
 
     @Volatile private var drip = false
 
+    @Volatile private var location: String? = null
+
     init {
         Thread(::loop, "raw-server").apply { isDaemon = true }.start()
     }
@@ -46,6 +48,12 @@ class RawServer : Closeable {
         this.status = status
         reply = body
         hang = false
+        return this
+    }
+
+    /** Adds a Location header to the reply. */
+    fun location(url: String): RawServer {
+        location = url
         return this
     }
 
@@ -106,7 +114,7 @@ class RawServer : Closeable {
                     return
                 }
                 val body = reply.toByteArray()
-                out.write("HTTP/1.1 $status X\r\nContent-Type: application/json\r\nContent-Length: ${body.size}\r\nConnection: close\r\n\r\n".toByteArray())
+                out.write("HTTP/1.1 $status X\r\nContent-Type: application/json\r\n${location?.let { "Location: $it\r\n" } ?: ""}Content-Length: ${body.size}\r\nConnection: close\r\n\r\n".toByteArray())
                 out.write(body)
                 out.flush()
             }
