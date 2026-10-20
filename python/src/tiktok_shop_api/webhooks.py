@@ -9,6 +9,8 @@ import json
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, TypeAlias
 
+import attrs
+
 from .generated._meta import EVENT_TYPES as _EVENT_TYPES
 from .generated._meta import WEBHOOKS
 
@@ -46,6 +48,29 @@ def _model(schema: str) -> Any:
     return getattr(importlib.import_module("tiktok_shop_api.generated.models"), schema)
 
 
+def _first_null_required(value: Any, path: str) -> str | None:
+    """R28: the first required attribute (dotted path) that is None, in a generated model and the models it holds."""
+    if isinstance(value, list):
+        for i, item in enumerate(value):
+            found = _first_null_required(item, f"{path}[{i}]")
+            if found is not None:
+                return found
+        return None
+    if not attrs.has(type(value)):
+        return None
+    for f in attrs.fields(type(value)):
+        if not f.init:  # additional_properties
+            continue
+        v = getattr(value, f.name)
+        where = f"{path}.{f.name}" if path else f.name
+        if v is None and f.default is attrs.NOTHING:
+            return where
+        found = _first_null_required(v, where)
+        if found is not None:
+            return found
+    return None
+
+
 def _to_bytes(raw_body: bytes | bytearray | memoryview | str) -> bytes:
     return raw_body.encode("utf-8") if isinstance(raw_body, str) else bytes(raw_body)
 
@@ -70,7 +95,8 @@ class Webhooks:
     def parse(raw_body: bytes | str) -> WebhookEvent:
         """Parse a body to its generated model; an unknown ``type`` gives an :class:`UnknownWebhookEvent`.
 
-        Raises ``ValueError`` when the body is not JSON, not an object, has no integer ``type``, or lacks the fields its type requires.
+        Parsing is strict (R28): raises ``ValueError`` when the body is not JSON, not an object, has no integer ``type``,
+        or (for a known type) lacks a required field or has it null, at any depth.
         """
         body = json.loads(_to_bytes(raw_body))
         if not isinstance(body, dict):
@@ -82,9 +108,13 @@ class Webhooks:
         if schema is None:
             return UnknownWebhookEvent(type=t, raw=body)
         try:
-            return _model(schema).from_dict(body)
-        except (KeyError, TypeError, AttributeError) as e:
+            event = _model(schema).from_dict(body)
+        except (KeyError, TypeError, AttributeError, ValueError) as e:
             raise ValueError(f"Webhook type {t} does not match {schema}: {e!r}") from e
+        missing = _first_null_required(event, "")
+        if missing is not None:
+            raise ValueError(f"Webhook type {t} does not match {schema}: required field {missing!r} is null")
+        return event
 
     @staticmethod
     def verify_and_parse(*, app_key: str, app_secret: str, raw_body: bytes | str, signature: str) -> WebhookEvent:

@@ -9,7 +9,11 @@ from urllib.parse import quote
 
 import httpx
 
+from . import _logging
+from ._version import USER_AGENT
 from .errors import TikTokShopError
+
+_logging.install()
 
 DEFAULT_AUTH_BASE_URL = "https://auth.tiktok-shops.com"
 DEFAULT_TIMEOUT = 30.0
@@ -53,7 +57,10 @@ class TokenSet:
 
 
 def _timeout(value: float | httpx.Timeout | None) -> httpx.Timeout:
-    return value if isinstance(value, httpx.Timeout) else httpx.Timeout(value)
+    """A number of seconds, an httpx.Timeout, or None/0 for no limit (never a zero-second limit)."""
+    if isinstance(value, httpx.Timeout):
+        return value
+    return httpx.Timeout(None if value == 0 else value)
 
 
 class _AuthBase:
@@ -80,7 +87,8 @@ class _AuthBase:
             if not self._service_id:
                 raise ValueError(f"service_id is required for {type} authorization URLs")
             first = f"service_id={_enc(self._service_id)}"
-        return f"{host}{h['path']}?{first}" + ("" if state is None else f"&state={_enc(state)}")
+        # Lesson 34: an empty state is omitted, like an absent one.
+        return f"{host}{h['path']}?{first}" + (f"&state={_enc(state)}" if state else "")
 
     def _url(self, endpoint: str, extra: list[tuple[str, str]]) -> str:
         params = [("app_key", self._app_key), ("app_secret", self._app_secret), *extra]
@@ -94,8 +102,9 @@ class _AuthBase:
 
 
 def _transport_error(e: httpx.HTTPError | httpx.InvalidURL) -> TikTokShopError:
+    """R13c: no HTTP response at all is code -1 with no http_status. httpx's messages here never include the URL."""
     kind = "Request timed out" if isinstance(e, httpx.TimeoutException) else "Request failed"
-    return TikTokShopError(f"{kind}: {e}")
+    return TikTokShopError(f"{kind}: {e}", code=-1)
 
 
 def _no_code(status: int) -> int:
@@ -113,44 +122,53 @@ def _to_token_set(response: httpx.Response) -> TokenSet:
         raise TikTokShopError(f"Unparseable token response (HTTP {status})", code=_no_code(status), http_status=status) from e
     if not isinstance(env, dict):
         raise TikTokShopError(f"Unexpected token response (HTTP {status})", code=_no_code(status), http_status=status)
-    request_id = str(env.get("request_id") or "")
-    code = env.get("code")
-    if not isinstance(code, int) or isinstance(code, bool):
-        code = -1 if ok else status
+    request_id = env.get("request_id")
+    request_id = request_id if isinstance(request_id, str) else ""
+    raw_code = env.get("code")
+    # Lesson 34: a code that is missing or not an integer makes a 2xx unreadable (-1); on a non-2xx the status is the code.
+    code: int = raw_code if isinstance(raw_code, int) and not isinstance(raw_code, bool) else (-1 if ok else status)
     if code != 0 or not ok:
         if code == 0:
             code = status  # R13a: a failure that carries no TikTok code uses the HTTP status
+        message = env.get("message")
         raise TikTokShopError(
-            str(env.get("message") or f"HTTP {status}"),
+            message if isinstance(message, str) and message else f"HTTP {status}",
             code=code,
             request_id=request_id,
-            http_status=None if ok else status,
+            http_status=status,
         )
     d = env.get("data")
     if not isinstance(d, dict):
-        raise TikTokShopError("Token response has no data", code=-1, request_id=request_id)
+        raise TikTokShopError("Token response has no data", code=-1, request_id=request_id, http_status=status)
     for k in ("access_token", "refresh_token"):
         v = d.get(k)
         if not isinstance(v, str) or v == "":
-            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id)
+            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id, http_status=status)
     for k in ("access_token_expire_in", "refresh_token_expire_in"):
-        v = d.get(k)
-        if not isinstance(v, int) or isinstance(v, bool):
-            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id)
-    try:
-        return TokenSet(
-            access_token=d["access_token"],
-            access_token_expire_in=d["access_token_expire_in"],
-            refresh_token=d["refresh_token"],
-            refresh_token_expire_in=d["refresh_token_expire_in"],
-            open_id=None if d.get("open_id") is None else str(d["open_id"]),
-            seller_name=d.get("seller_name"),
-            seller_base_region=d.get("seller_base_region"),
-            user_type=d.get("user_type"),
-            granted_scopes=None if d.get("granted_scopes") is None else list(d["granted_scopes"]),
-        )
-    except KeyError as e:
-        raise TikTokShopError(f"Token response is missing {e}", code=-1, request_id=request_id) from e
+        if not _is_int(d.get(k)):
+            raise TikTokShopError(f"Token response is missing {k}", code=-1, request_id=request_id, http_status=status)
+    # Lesson 21: an optional field of the wrong type is treated as absent.
+    open_id = d.get("open_id")
+    scopes = d.get("granted_scopes")
+    return TokenSet(
+        access_token=d["access_token"],
+        access_token_expire_in=d["access_token_expire_in"],
+        refresh_token=d["refresh_token"],
+        refresh_token_expire_in=d["refresh_token_expire_in"],
+        open_id=open_id if isinstance(open_id, str) else str(open_id) if _is_int(open_id) else None,
+        seller_name=_str_or_none(d.get("seller_name")),
+        seller_base_region=_str_or_none(d.get("seller_base_region")),
+        user_type=d["user_type"] if _is_int(d.get("user_type")) else None,
+        granted_scopes=list(scopes) if isinstance(scopes, list) and all(isinstance(s, str) for s in scopes) else None,
+    )
+
+
+def _is_int(v: object) -> bool:
+    return isinstance(v, int) and not isinstance(v, bool)
+
+
+def _str_or_none(v: object) -> str | None:
+    return v if isinstance(v, str) else None
 
 
 class TikTokShopAuth(_AuthBase):
@@ -180,7 +198,7 @@ class TikTokShopAuth(_AuthBase):
 
     def _get(self, url: str) -> TokenSet:
         try:
-            with httpx.Client(timeout=self._timeout, transport=self._transport) as c:
+            with httpx.Client(timeout=self._timeout, transport=self._transport, headers={"User-Agent": USER_AGENT}) as c:
                 response = c.get(url)
         except (httpx.HTTPError, httpx.InvalidURL) as e:
             raise _transport_error(e) from e
@@ -212,7 +230,7 @@ class AsyncTikTokShopAuth(_AuthBase):
 
     async def _get(self, url: str) -> TokenSet:
         try:
-            async with httpx.AsyncClient(timeout=self._timeout, transport=self._transport) as c:
+            async with httpx.AsyncClient(timeout=self._timeout, transport=self._transport, headers={"User-Agent": USER_AGENT}) as c:
                 response = await c.get(url)
         except (httpx.HTTPError, httpx.InvalidURL) as e:
             raise _transport_error(e) from e

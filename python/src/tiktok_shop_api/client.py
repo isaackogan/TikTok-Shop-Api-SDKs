@@ -9,6 +9,8 @@ from urllib.parse import parse_qsl, quote
 
 import httpx
 
+from ._base import _ACCEPTED
+from ._version import USER_AGENT
 from .errors import TikTokShopError
 from .generated._groups import (
     ASYNC_GROUPS,
@@ -128,22 +130,27 @@ def _check_response(response: httpx.Response) -> None:
     # R13b: -1 only for a 2xx reply that cannot be understood (not a JSON object).
     if ok and not is_obj:
         raise TikTokShopError(f"Response is not valid JSON (HTTP {status})", code=-1, http_status=status) from parse_error
-    code = envelope.get("code") if is_obj else None
+    has_code = is_obj and "code" in envelope
+    raw_code = envelope.get("code") if is_obj else None
     message = envelope.get("message") if is_obj else None
     request_id = envelope.get("request_id") if is_obj else None
-    code = code if isinstance(code, int) and not isinstance(code, bool) else None
+    code = raw_code if isinstance(raw_code, int) and not isinstance(raw_code, bool) else None
     message = message if isinstance(message, str) else None
     request_id = request_id if isinstance(request_id, str) else ""
     if not ok:
         raise TikTokShopError(
-            message if message is not None else (response.reason_phrase or f"HTTP {status}"),
-            # R13a: a body with no code, or code 0, still failed, so the HTTP status is the code.
+            message or response.reason_phrase or f"HTTP {status}",
+            # R13a: a body with no integer code, or code 0, still failed, so the HTTP status is the code.
             code=code if code else status,
             request_id=request_id,
             http_status=status,
         )
+    if has_code and code is None:
+        # Lesson 34: a code that is present but not an integer makes the reply unreadable.
+        raise TikTokShopError(f"Response has a non-integer code (HTTP {status})", code=-1, request_id=request_id, http_status=status)
     if code is not None and code != 0:
         raise TikTokShopError(message or "", code=code, request_id=request_id, http_status=status)
+    _ACCEPTED.set((status, request_id))
 
 
 def _sync_hook(response: httpx.Response) -> None:
@@ -189,7 +196,10 @@ _KEEP: Any = _Keep()
 
 
 def _timeout(value: float | httpx.Timeout | None) -> httpx.Timeout:
-    return value if isinstance(value, httpx.Timeout) else httpx.Timeout(value)
+    """A number of seconds, an httpx.Timeout, or None/0 for no limit (never a zero-second limit)."""
+    if isinstance(value, httpx.Timeout):
+        return value
+    return httpx.Timeout(None if value == 0 else value)
 
 
 class TikTokShop:
@@ -236,6 +246,7 @@ class TikTokShop:
         self._client = Client(
             base_url=self._base_url,
             timeout=_timeout(self._timeout),
+            headers={"User-Agent": USER_AGENT},
             httpx_args={
                 "auth": _SigningAuth(self._creds),
                 # No transport of our own unless the caller gave one: httpx then builds its default,
@@ -325,6 +336,7 @@ class AsyncTikTokShop:
         self._client = Client(
             base_url=self._base_url,
             timeout=_timeout(self._timeout),
+            headers={"User-Agent": USER_AGENT},
             httpx_args={
                 "auth": _SigningAuth(self._creds),
                 # No transport of our own unless the caller gave one: httpx then builds its default,

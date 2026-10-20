@@ -6,7 +6,7 @@ It signs requests for you, handles OAuth, works with many shops at once, and ver
 
 > **Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.**
 >
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 The client is generated from an OpenAPI spec that is itself built from the TikTok Shop Partner Center docs: [tiktok-shop.openapi.yaml](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml).
 
@@ -44,7 +44,7 @@ tokens = auth.exchange_code(code_from_redirect)
 renewed = auth.refresh(tokens.refresh_token)
 ```
 
-`AsyncTikTokShopAuth` has the same methods as coroutines. A non-zero `code` in TikTok's response raises a `TikTokShopError` with `code`, `message` and `request_id`.
+`AsyncTikTokShopAuth` has the same methods as coroutines. A non-zero `code` in TikTok's response raises a `TikTokShopError` with `code`, `message` and `request_id` (see [Errors](#errors)).
 
 ## Make your first call
 
@@ -132,6 +132,8 @@ def tiktok_shop_webhook():
         )
     except WebhookSignatureError:
         return "", 401
+    except ValueError:  # not a webhook this SDK can read
+        return "", 400
     if isinstance(event, UnknownWebhookEvent):
         print("unknown webhook type", event.type, event.raw)
     elif isinstance(event, OrderStatusChangeWebhook):
@@ -141,12 +143,26 @@ def tiktok_shop_webhook():
 
 - Never re-serialize the body before verifying. Changed whitespace or key order makes the signature fail.
 - A webhook type this SDK does not know comes back as `UnknownWebhookEvent(type, raw)`. Known events are the generated model for that webhook, so `isinstance` narrows them.
-- `parse` raises `ValueError` for a body that is not a JSON object or lacks the fields its type requires.
+- Parsing is strict. `parse` raises `ValueError` for a body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required field missing or null: a known type missing a required field is a parse error.
 - `EVENT_TYPES` maps a type number to its name (`1` is `ORDER_STATUS_CHANGE`).
+
+## Options
+
+- `base_url` (on the clients and the auth helpers) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path.
+- `timeout` (on all four) is in seconds and defaults to 30. `None` or `0` means no limit; you can also pass an `httpx.Timeout`.
+- Requests carry the User-Agent `tiktok-shop-api-python/<version>`.
+- Token calls send `app_secret`, `auth_code` and `refresh_token` in the URL query, and httpx logs every request URL at INFO. Importing `tiktok_shop_api` adds a filter to the `httpx` logger that replaces those three values with `***`, so a service logging at INFO never writes them. Keep the filter if you reconfigure that logger.
 
 ## Errors
 
-A response with `code != 0`, a non-2xx status, a body that is not JSON, or a network error or timeout raises `TikTokShopError` with `code`, `message`, `request_id` and (for HTTP failures) `http_status`. The original exception, if any, is `__cause__`.
+Every failed call raises `TikTokShopError`, with `code`, `message`, `request_id`, `http_status` and the original exception as `__cause__`:
+
+| What happened | `code` | `http_status` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | `None` |
 
 ## About
 

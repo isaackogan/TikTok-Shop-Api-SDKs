@@ -95,3 +95,59 @@ def test_malformed_body_raises_value_error():
 def test_missing_or_non_integer_type_raises_value_error(body):
     with pytest.raises(ValueError, match="type"):
         Webhooks.parse(body)
+
+
+# --- R28: strict parsing. A known type's required fields must be present and non-null, at any depth. -------------------
+
+def _appeal():
+    return {
+        "type": 66,
+        "shop_id": "1",
+        "tts_notification_id": "n1",
+        "timestamp": 1,
+        "data": {"product_id": 5, "appeal_task": {"appeal_audit_result": [{"indicator_type": "A", "status": "S"}]}},
+    }
+
+
+def test_complete_known_event_parses():
+    ev = Webhooks.parse(json.dumps(_appeal()))
+    assert type(ev).__name__ == "AppealCompletedWebhook"
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        ("shop_id",),
+        ("timestamp",),
+        ("data",),
+        ("data", "product_id"),
+        ("data", "appeal_task", "appeal_audit_result", 0, "status"),
+    ],
+)
+def test_null_required_field_is_a_parse_error(path):
+    body = _appeal()
+    node = body
+    for p in path[:-1]:
+        node = node[p]
+    node[path[-1]] = None
+    with pytest.raises(ValueError, match="AppealCompletedWebhook"):
+        Webhooks.parse(json.dumps(body))
+
+
+def test_missing_nested_required_field_is_a_parse_error():
+    body = _appeal()
+    del body["data"]["appeal_task"]["appeal_audit_result"][0]["indicator_type"]
+    with pytest.raises(ValueError):
+        Webhooks.parse(json.dumps(body))
+
+
+@pytest.mark.parametrize("body", ["null", "1", '"x"', "[]", '{"type":9007199254740993.0}'])
+def test_non_object_or_non_integer_bodies_are_parse_errors(body):
+    with pytest.raises(ValueError):
+        Webhooks.parse(body)
+
+
+def test_unknown_fields_in_a_webhook_are_accepted():
+    body = {"type": 1, "shop_id": "1", "brand_new": {"x": 1}, "data": {"order_id": "5", "order_status": "UNPAID", "future": [1]}}
+    ev = Webhooks.parse(json.dumps(body))
+    assert isinstance(ev, OrderStatusChangeWebhook)

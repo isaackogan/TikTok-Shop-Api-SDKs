@@ -100,6 +100,8 @@ def block_webhooks() -> None:
             )
         except WebhookSignatureError:
             return "", 401
+        except ValueError:  # not a webhook this SDK can read
+            return "", 400
         if isinstance(event, UnknownWebhookEvent):
             print("unknown webhook type", event.type, event.raw)
         elif isinstance(event, OrderStatusChangeWebhook):

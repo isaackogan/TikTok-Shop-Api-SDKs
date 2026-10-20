@@ -2,15 +2,15 @@ from __future__ import annotations
 
 
 class TikTokShopError(Exception):
-    """Raised for every failed call.
+    """Raised for every failed call. The original exception, if any, is ``__cause__``.
 
-    Covers an envelope with ``code != 0`` (even on HTTP 200), a non-2xx status (``http_status`` is set,
-    ``code`` and ``message`` come from the body when it has them), a 2xx response whose body is not JSON,
-    and network errors and timeouts. The original exception, if any, is ``__cause__``.
-
-    ``code`` is TikTok's non-zero ``code`` when the reply has one; for a non-2xx reply without one it is the HTTP status
-    (``http_status`` is then always set); it is -1 only for a 2xx reply that cannot be understood (not a JSON object, or
-    ``code`` 0 without ``data`` on a token call); it is 0 for network errors and timeouts.
+    - An envelope with a non-zero ``code``, even on HTTP 200: TikTok's ``code``, with ``http_status`` set.
+    - A non-2xx reply: TikTok's non-zero ``code`` if the body has one, else the HTTP status; ``http_status`` is set.
+    - A 2xx reply that cannot be understood: -1 with ``http_status`` set. That covers a body that is not a JSON object,
+      a ``code`` that is not an integer, ``code`` 0 without ``data`` on a token call, and a body that does not fit its
+      model.
+    - A transport failure with no HTTP response at all (connection refused, DNS, TLS, timeout): -1 with ``http_status``
+      ``None``.
     """
 
     def __init__(
