@@ -8,10 +8,19 @@ The spec is generated automatically from TikTok Shop's official partner document
 
 ## What's here
 
-| Path | Contents | Status |
+| Path | Contents | Install |
 | --- | --- | --- |
-| [`.openapi/tiktok-shop.openapi.yaml`](.openapi/tiktok-shop.openapi.yaml) | The OpenAPI 3.1 spec (also as [JSON](.openapi/tiktok-shop.openapi.json)) | Published, regenerated daily |
-| `typescript/`, `python/`, `php/`, `java/`, `kotlin/`, `rust/` | TikTok Shop SDKs generated from the spec | Planned |
+| [`.openapi/tiktok-shop.openapi.yaml`](.openapi/tiktok-shop.openapi.yaml) | The OpenAPI 3.1 spec (also as [JSON](.openapi/tiktok-shop.openapi.json)), regenerated daily | |
+| [`typescript/`](typescript) | TypeScript SDK, [npm](https://www.npmjs.com/package/tiktok-shop-api) | `npm install tiktok-shop-api` |
+| [`python/`](python) | Python SDK, [PyPI](https://pypi.org/project/tiktok-shop-api/) | `pip install tiktok-shop-api` |
+| [`go/`](go) | Go SDK, [Go modules](https://pkg.go.dev/github.com/isaackogan/TikTok-Shop-Api-SDKs/go) | `go get github.com/isaackogan/TikTok-Shop-Api-SDKs/go` |
+| [`java/`](java) | Java SDK, [Maven Central](https://central.sonatype.com/artifact/com.isaackogan/tiktok-shop-api) | Maven `com.isaackogan:tiktok-shop-api` |
+| [`kotlin/`](kotlin) | Kotlin SDK, [Maven Central](https://central.sonatype.com/artifact/com.isaackogan/tiktok-shop-api-kotlin) | `com.isaackogan:tiktok-shop-api-kotlin` |
+| [`php/`](php) | PHP SDK, [Packagist](https://packagist.org/packages/isaackogan/tiktok-shop-api) | `composer require isaackogan/tiktok-shop-api` |
+| [`rust/`](rust) | Rust SDK, [crates.io](https://crates.io/crates/tiktok-shop-api) | `cargo add tiktok-shop-api` |
+| [`csharp/`](csharp) | C# SDK, [NuGet](https://www.nuget.org/packages/TikTokShop.Api) | `dotnet add package TikTokShop.Api` |
+
+Every SDK is generated from the spec and adds the parts a generator can't: request signing, shop cipher handling, an OAuth helper (authorization URL, token exchange and refresh) and typed webhooks. Request signing follows TikTok's documentation and has not been verified against the live API yet. Releases are cut with the button described in [RELEASING.md](RELEASING.md).
 
 ## Coverage
 

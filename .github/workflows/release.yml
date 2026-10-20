@@ -1,0 +1,599 @@
+# Press-button release. Run it from the Actions tab (Run workflow, on main) and pick, per language,
+# skip | current | patch | minor | major:
+#   skip     do not release this language (default)
+#   current  publish the manifest's version unchanged (the first 0.1.0 release; Go and PHP: 0.1.0 when untagged)
+#   patch|minor|major  bump the manifest (Go and PHP: the latest go/vX.Y.Z or php/vX.Y.Z tag) and publish that
+# Flow: prepare (compute versions) -> generate (sdk-generate.yml: generate, build, test the chosen SDKs)
+#   -> one publish job per chosen language -> release (commit bumped manifests, tag, GitHub Releases)
+#   -> go-proxy (warm proxy.golang.org). Nothing is committed or tagged unless every chosen publish succeeded.
+# One-time setup (tokens, Maven Central namespace, the PHP mirror repo) is in RELEASING.md.
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      typescript:
+        description: "TypeScript (npm: tiktok-shop-api)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      python:
+        description: "Python (PyPI: tiktok-shop-api)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      go:
+        description: "Go (tag go/vX.Y.Z)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      java:
+        description: "Java (Maven Central: com.isaackogan:tiktok-shop-api)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      kotlin:
+        description: "Kotlin (Maven Central: com.isaackogan:tiktok-shop-api-kotlin)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      php:
+        description: "PHP (Packagist: isaackogan/tiktok-shop-api, via the mirror repo)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      rust:
+        description: "Rust (crates.io: tiktok-shop-api)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+      csharp:
+        description: "C# (NuGet: TikTokShop.Api)"
+        type: choice
+        options: [skip, current, patch, minor, major]
+        default: skip
+
+# Releases queue behind each other; a release is never cancelled halfway.
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      typescript_version: ${{ steps.versions.outputs.typescript_version }}
+      python_version: ${{ steps.versions.outputs.python_version }}
+      go_version: ${{ steps.versions.outputs.go_version }}
+      java_version: ${{ steps.versions.outputs.java_version }}
+      kotlin_version: ${{ steps.versions.outputs.kotlin_version }}
+      php_version: ${{ steps.versions.outputs.php_version }}
+      rust_version: ${{ steps.versions.outputs.rust_version }}
+      csharp_version: ${{ steps.versions.outputs.csharp_version }}
+    steps:
+      - name: Require main
+        run: |
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
+            echo "::error::Releases run from main only (this run is on $GITHUB_REF). Pick main in 'Use workflow from'."
+            exit 1
+          fi
+      - name: Check out
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Compute versions
+        id: versions
+        env:
+          CHOICE_TYPESCRIPT: ${{ inputs.typescript }}
+          CHOICE_PYTHON: ${{ inputs.python }}
+          CHOICE_GO: ${{ inputs.go }}
+          CHOICE_JAVA: ${{ inputs.java }}
+          CHOICE_KOTLIN: ${{ inputs.kotlin }}
+          CHOICE_PHP: ${{ inputs.php }}
+          CHOICE_RUST: ${{ inputs.rust }}
+          CHOICE_CSHARP: ${{ inputs.csharp }}
+        run: |
+          set -euo pipefail
+          chosen=0
+          {
+            echo "### Release plan"
+            echo
+            echo "| Language | Choice | Version |"
+            echo "| --- | --- | --- |"
+          } >> "$GITHUB_STEP_SUMMARY"
+          for lang in typescript python go java kotlin php rust csharp; do
+            var="CHOICE_${lang^^}"
+            kind="${!var}"
+            if [ "$kind" = "skip" ]; then
+              echo "${lang}_version=" >> "$GITHUB_OUTPUT"
+              echo "| $lang | skip | |" >> "$GITHUB_STEP_SUMMARY"
+              continue
+            fi
+            # --no-write: only compute here; each job that needs the bump applies it in its own checkout.
+            version="$(pnpm exec tsx scripts/bump-version.ts "$lang" "$kind" --no-write)"
+            if git rev-parse -q --verify "refs/tags/$lang/v$version" > /dev/null; then
+              echo "::error::tag $lang/v$version already exists"
+              exit 1
+            fi
+            echo "${lang}_version=$version" >> "$GITHUB_OUTPUT"
+            echo "| $lang | $kind | $version |" >> "$GITHUB_STEP_SUMMARY"
+            chosen=$((chosen + 1))
+          done
+          if [ "$chosen" -eq 0 ]; then
+            echo "::error::Nothing to release: every language is set to skip."
+            exit 1
+          fi
+
+  # Generate, build and test the chosen SDKs first. The callee's commit job (push events only) asks for
+  # contents: write, so the caller has to grant it even though that job is skipped here.
+  generate:
+    name: generate
+    needs: [prepare]
+    permissions:
+      contents: write
+    uses: ./.github/workflows/sdk-generate.yml
+    with:
+      typescript: ${{ inputs.typescript != 'skip' }}
+      python: ${{ inputs.python != 'skip' }}
+      go: ${{ inputs.go != 'skip' }}
+      java: ${{ inputs.java != 'skip' }}
+      kotlin: ${{ inputs.kotlin != 'skip' }}
+      php: ${{ inputs.php != 'skip' }}
+      rust: ${{ inputs.rust != 'skip' }}
+      csharp: ${{ inputs.csharp != 'skip' }}
+
+  npm:
+    name: publish typescript to npm
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.typescript_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write # npm provenance
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.typescript }}
+          EXPECTED: ${{ needs.prepare.outputs.typescript_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts typescript "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Build
+        run: pnpm --filter tiktok-shop-api run build
+      - name: Publish with provenance
+        working-directory: typescript
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
+
+  pypi:
+    name: publish python to PyPI
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.python_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Trusted publishing: register release.yml and the "pypi" environment as the publisher on PyPI (RELEASING.md).
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write # PyPI trusted publishing
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.python }}
+          EXPECTED: ${{ needs.prepare.outputs.python_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts python "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Build sdist and wheel
+        run: |
+          set -euo pipefail
+          python -m pip install build
+          python -m build python --outdir dist
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          # Trusted publishing needs no secret. To use an API token instead, add the PYPI_TOKEN secret
+          # (this is empty, so ignored, until you do).
+          password: ${{ secrets.PYPI_TOKEN }}
+
+  maven-central:
+    name: publish java to Maven Central
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.java_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java and Maven Central credentials
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          server-id: central
+          server-username: MAVEN_CENTRAL_USERNAME
+          server-password: MAVEN_CENTRAL_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.java }}
+          EXPECTED: ${{ needs.prepare.outputs.java_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts java "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Sign and deploy
+        working-directory: java
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        # Tests already ran in the generate job; the release profile adds sources/javadoc jars, signs and uploads.
+        run: mvn -B -P release -DskipTests deploy
+
+  kotlin:
+    name: publish kotlin to Maven Central
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.kotlin_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: gradle
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.kotlin }}
+          EXPECTED: ${{ needs.prepare.outputs.kotlin_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts kotlin "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Sign, upload and release
+        working-directory: kotlin
+        env:
+          # The vanniktech plugin reads these as Gradle properties. The same secrets as the Java job
+          # (the GPG key is exported ASCII-armored; the user token is the Central Portal one).
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+        # publishAndReleaseToMavenCentral = publishToMavenCentral + automatic release, matching the Java job's autoPublish.
+        run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+
+  crates:
+    name: publish rust to crates.io
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.rust_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.rust }}
+          EXPECTED: ${{ needs.prepare.outputs.rust_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts rust "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        # The bump leaves the tree dirty; the release job commits it after every publish has succeeded.
+        run: cargo publish --manifest-path rust/Cargo.toml --allow-dirty
+
+  nuget:
+    name: publish csharp to NuGet
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.csharp_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Set version
+        env:
+          CHOICE: ${{ inputs.csharp }}
+          EXPECTED: ${{ needs.prepare.outputs.csharp_version }}
+        run: |
+          set -euo pipefail
+          got="$(pnpm exec tsx scripts/bump-version.ts csharp "$CHOICE")"
+          [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
+      - name: Pack
+        run: dotnet pack csharp/src/TikTokShop.Api/TikTokShop.Api.csproj -c Release -o nupkgs
+      - name: Push
+        env:
+          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key "$NUGET_TOKEN" --source https://api.nuget.org/v3/index.json
+
+  packagist:
+    name: publish php to the Packagist mirror
+    needs: [prepare, generate]
+    if: ${{ needs.prepare.outputs.php_version != '' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out (full history for git subtree)
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Push php/ to the mirror and tag it
+        env:
+          PHP_VERSION: ${{ needs.prepare.outputs.php_version }}
+          PHP_MIRROR_DEPLOY_KEY: ${{ secrets.PHP_MIRROR_DEPLOY_KEY }}
+        run: |
+          set -euo pipefail
+          key="$RUNNER_TEMP/php-mirror-key"
+          install -m 600 /dev/null "$key"
+          printf '%s\n' "$PHP_MIRROR_DEPLOY_KEY" > "$key"
+          export GIT_SSH_COMMAND="ssh -i $key -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          bash scripts/split-php.sh "$PHP_VERSION"
+          rm -f "$key"
+
+  # Commits the bumped manifests, tags every released language, creates the GitHub Releases.
+  # Runs only when every chosen publish succeeded (skipped publish jobs are fine).
+  release:
+    name: commit, tag and create releases
+    needs: [prepare, generate, npm, pypi, maven-central, kotlin, crates, nuget, packagist]
+    if: ${{ always() && needs.prepare.result == 'success' && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v6
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Bump manifests, commit and push
+        env:
+          CHOICE_TYPESCRIPT: ${{ inputs.typescript }}
+          CHOICE_PYTHON: ${{ inputs.python }}
+          CHOICE_JAVA: ${{ inputs.java }}
+          CHOICE_KOTLIN: ${{ inputs.kotlin }}
+          CHOICE_RUST: ${{ inputs.rust }}
+          CHOICE_CSHARP: ${{ inputs.csharp }}
+          V_TYPESCRIPT: ${{ needs.prepare.outputs.typescript_version }}
+          V_PYTHON: ${{ needs.prepare.outputs.python_version }}
+          V_GO: ${{ needs.prepare.outputs.go_version }}
+          V_JAVA: ${{ needs.prepare.outputs.java_version }}
+          V_KOTLIN: ${{ needs.prepare.outputs.kotlin_version }}
+          V_PHP: ${{ needs.prepare.outputs.php_version }}
+          V_RUST: ${{ needs.prepare.outputs.rust_version }}
+          V_CSHARP: ${{ needs.prepare.outputs.csharp_version }}
+        run: |
+          set -euo pipefail
+          declare -A MANIFEST=(
+            [typescript]="typescript/package.json"
+            [python]="python/pyproject.toml"
+            [java]="java/pom.xml"
+            [kotlin]="kotlin/build.gradle.kts"
+            [rust]="rust/Cargo.toml rust/Cargo.lock"
+            [csharp]="csharp/src/TikTokShop.Api/TikTokShop.Api.csproj"
+          )
+          released=()   # "lang@version", in release order
+          : > "$RUNNER_TEMP/first-releases"
+          for lang in typescript python go java kotlin php rust csharp; do
+            var="V_${lang^^}"
+            version="${!var}"
+            [ -n "$version" ] || continue
+            released+=("$lang@$version")
+            # A language's first release is the one with no earlier <lang>/v* tag; its notes carry the disclaimers.
+            if [ -z "$(git tag --list "$lang/v*")" ]; then echo "$lang" >> "$RUNNER_TEMP/first-releases"; fi
+            if [ -n "${MANIFEST[$lang]:-}" ]; then
+              cvar="CHOICE_${lang^^}"
+              got="$(pnpm exec tsx scripts/bump-version.ts "$lang" "${!cvar}")"
+              [ "$got" = "$version" ] || { echo "::error::version drifted for $lang: $version vs $got"; exit 1; }
+              # shellcheck disable=SC2086
+              git add -- ${MANIFEST[$lang]}
+            fi
+          done
+          printf '%s\n' "${released[@]}" > "$RUNNER_TEMP/released"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --quiet; then
+            echo "No manifest changed (versions were 'current' or tag-only); tagging the current commit."
+          else
+            summary="$(IFS=,; echo "${released[*]}")"
+            summary="${summary//,/, }"
+            git commit -m "chore: release $summary [skip ci]"
+            # main may have moved during the run (e.g. a regenerate commit); only the manifests differ, so a rebase is safe.
+            pushed=0
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then pushed=1; break; fi
+              echo "push attempt $attempt failed; retrying"
+              sleep $((attempt * 5))
+            done
+            if [ "$pushed" -ne 1 ]; then
+              echo "::error::could not push the release commit to main after 3 attempts. The packages ARE published; add the commit and tags by hand (see RELEASING.md)."
+              exit 1
+            fi
+          fi
+      - name: Tag every released language
+        run: |
+          set -euo pipefail
+          sha="$(git rev-parse HEAD)"
+          while IFS='@' read -r lang version; do
+            git tag "$lang/v$version" "$sha"
+            git push origin "refs/tags/$lang/v$version"
+          done < "$RUNNER_TEMP/released"
+      - name: Create GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          declare -A INSTALL=(
+            [typescript]="npm install tiktok-shop-api"
+            [python]="pip install tiktok-shop-api"
+            [go]="go get github.com/isaackogan/TikTok-Shop-Api-SDKs/go"
+            [java]="com.isaackogan:tiktok-shop-api (Maven Central)"
+            [kotlin]="com.isaackogan:tiktok-shop-api-kotlin (Maven Central)"
+            [php]="composer require isaackogan/tiktok-shop-api"
+            [rust]="cargo add tiktok-shop-api"
+            [csharp]="dotnet add package TikTokShop.Api"
+          )
+          while IFS='@' read -r lang version; do
+            notes="$RUNNER_TEMP/notes-$lang.md"
+            {
+              echo "Install: \`${INSTALL[$lang]}\`"
+              echo
+              echo "Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."
+              if grep -qx "$lang" "$RUNNER_TEMP/first-releases"; then
+                echo
+                echo "First release. Request signing follows TikTok's documentation and has not been verified against the live API."
+              fi
+            } > "$notes"
+            gh release create "$lang/v$version" --verify-tag --title "$lang $version" --notes-file "$notes" --generate-notes
+          done < "$RUNNER_TEMP/released"
+
+  # Go has no upload: the tag is the release. Ask the module proxy for it so it is cached and shows on pkg.go.dev.
+  go-proxy:
+    name: warm the Go module proxy
+    needs: [prepare, release]
+    if: ${{ needs.prepare.outputs.go_version != '' && needs.release.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v7
+        with:
+          go-version: "stable"
+          cache: false
+      - name: Request the new version
+        env:
+          GO_VERSION: ${{ needs.prepare.outputs.go_version }}
+        run: |
+          set -euo pipefail
+          # Run from an empty module so nothing local resolves the lookup.
+          cd "$(mktemp -d)"
+          go mod init warmup
+          for attempt in 1 2 3 4 5; do
+            if GOPROXY=proxy.golang.org GOFLAGS=-mod=mod go list -m "github.com/isaackogan/TikTok-Shop-Api-SDKs/go@v$GO_VERSION"; then
+              exit 0
+            fi
+            echo "proxy lookup attempt $attempt failed; retrying"
+            sleep $((attempt * 10))
+          done
+          echo "::error::proxy.golang.org did not return go v$GO_VERSION"
+          exit 1
