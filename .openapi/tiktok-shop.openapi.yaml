@@ -25385,153 +25385,6 @@ paths:
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/update-stock-operation-settings-202608
-  /product/202608/size_charts:
-    post:
-      operationId: createSizeChart
-      summary: Create Size Chart
-      description: Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID.
-      tags:
-        - Products
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateSizeChartRequest"
-            example:
-              category_id: "601739"
-              size_chart_mode: REUSABLE_TEMPLATE
-              template_name: Women's Tops Size Chart
-              size_chart_data:
-                table:
-                  headers:
-                    - name: "Bust "
-                      id: size_chart_option_bust
-                  rows:
-                    - cells:
-                        - value: "90"
-                size_types:
-                  - size_chart_size_type_petite
-                description: Use body measurements.
-                is_one_size: false
-                measurement_type: BODY_MEASUREMENTS
-                unit_system: METRIC
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateSizeChartResponse"
-              example:
-                code: 0
-                data:
-                  code: 0
-                  message: Success
-                  request_id: "20260831000000000000000000000000"
-                  data:
-                    size_chart_id: "7612345678901234567"
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
-      x-tts-scenario: 2
-      x-tts-scopes:
-        - Product Basic
-      x-tts-error-codes:
-        - code: "12052122"
-          message: Size chart description contain sensitive word
-        - code: "12052123"
-          message: Size chart header contain sensitive word
-        - code: "12052124"
-          message: Size chart content contain sensitive word
-        - code: "12052125"
-          message: Size chart struct error
-        - code: "12052126"
-          message: Save template exceed limit
-        - code: "12052127"
-          message: Save size chart template has duplicate name
-        - code: "12052267"
-          message: Param is invalid
-        - code: "12052331"
-          message: sizeChart mandatory option need fill
-        - code: "12052700"
-          message: The seller is inactive.
-        - code: "36009003"
-          message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/create-size-chart-202608
-  /product/202608/size_charts/edit:
-    post:
-      operationId: editSizeChart
-      summary: Edit Size Chart
-      description: Edit an existing seller-owned size chart by replacing its structured table and editable metadata. Omit `template_name` to keep the current template name.
-      tags:
-        - Products
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EditSizeChartRequest"
-            example:
-              size_chart_id: "12345"
-              template_name: Women's Tops
-              size_chart_data:
-                table:
-                  headers:
-                    - name: Size
-                      id: size_chart_size_system_size
-                  rows:
-                    - cells:
-                        - value: S
-                size_types:
-                  - size_chart_size_type_regular
-                description: Women tops size chart
-                is_one_size: false
-                measurement_type: BODY_MEASUREMENTS
-                unit_system: METRIC
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/EditSizeChartResponse"
-              example:
-                code: 0
-                data:
-                  code: 0
-                  message: Success
-                  request_id: "202608311234567890"
-                  data:
-                    size_chart_id: "12345"
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
-      x-tts-scenario: 2
-      x-tts-scopes:
-        - Product Basic
-      x-tts-error-codes:
-        - code: "12052121"
-          message: Size chart is invalid
-        - code: "12052122"
-          message: Size chart description contain sensitive word
-        - code: "12052123"
-          message: Size chart header contain sensitive word
-        - code: "12052124"
-          message: Size chart content contain sensitive word
-        - code: "12052125"
-          message: Size chart struct error
-        - code: "12052127"
-          message: Save size chart template has duplicate name
-        - code: "12052128"
-          message: Size chart not found
-        - code: "12052267"
-          message: Param is invalid
-        - code: "12052331"
-          message: sizeChart mandatory option need fill
-        - code: "12052700"
-          message: The seller is inactive.
-        - code: "36009003"
-          message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/edit-size-chart-202608
   /product/202609/brands/suggest:
     post:
       operationId: suggestBrands
@@ -32083,15 +31936,6 @@ components:
         parent_id:
           type: string
           description: The category id of its parent category
-    Cell:
-      type: object
-      properties:
-        value:
-          type: string
-          maxLength: 32
-          description: "Cell value. Maximum length: 32 characters."
-      required:
-        - value
     Certification:
       type: object
       properties:
@@ -36717,67 +36561,6 @@ components:
             - RETURN_OR_REFUND_REQUEST_SUCCESS: The refund/return request is successful, buyer will be refunded.
             - RETURN_OR_REFUND_REQUEST_CANCEL: The request has been cancelled by buyer or system
             - RETURN_OR_REFUND_REQUEST_COMPLETE: The request is successful, and the amount has been refunded.
-    CreateSizeChartRequest:
-      type: object
-      properties:
-        category_id:
-          type: string
-          description: The leaf category for which to create the size chart. The category must support size charts.
-        size_chart_mode:
-          type: string
-          description: |-
-            Possible values:
-            REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products.
-            PRODUCT_SCOPED: A size chart created for and used by a single product.
-        template_name:
-          type: string
-          description: |-
-            Template name. Required when size_chart_mode is REUSABLE_TEMPLATE.
-            When size_chart_mode is PRODUCT_SCOPED, any value provided for this field is discarded and is not stored.
-        size_chart_data:
-          $ref: "#/components/schemas/SizeChartData"
-          description: Structured size chart content.
-      required:
-        - category_id
-        - size_chart_mode
-        - size_chart_data
-    CreateSizeChartResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: Status code; 0 means success.
-        message:
-          type: string
-          description: Success or failure message.
-        request_id:
-          type: string
-          description: Request log ID.
-        data:
-          $ref: "#/components/schemas/CreateSizeChartResponseData"
-    CreateSizeChartResponseData:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: 0 indicates success.
-        message:
-          type: string
-          description: Success or failure message.
-        request_id:
-          type: string
-          description: Request trace ID.
-        data:
-          $ref: "#/components/schemas/CreateSizeChartResponseDataData"
-          description: The created size chart information.
-    CreateSizeChartResponseDataData:
-      type: object
-      properties:
-        size_chart_id:
-          type: string
-          description: The ID of the created size chart. For REUSABLE_TEMPLATE mode, use this value as size_chart.template.id in subsequent product APIs. For PRODUCT_SCOPED mode, this ID identifies a size chart specific to a single product and cannot be reused as a template ID.
     CreateSizeChartV2Request:
       type: object
       properties:
@@ -36785,7 +36568,7 @@ components:
           type: string
           description: The leaf category for which to create the size chart. The category must support size charts.
         size_chart_data:
-          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartData"
+          $ref: "#/components/schemas/SizeChartData"
           description: Structured size chart content.
         size_chart_mode:
           type: string
@@ -36802,85 +36585,6 @@ components:
         - category_id
         - size_chart_data
         - size_chart_mode
-    CreateSizeChartV2RequestSizeChartData:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Additional size chart description.
-        is_one_size:
-          type: boolean
-          description: Whether this is a one-size chart.
-        measurement_type:
-          type: string
-          enum:
-            - GENERIC_MEASUREMENTS
-            - BODY_MEASUREMENTS
-            - PRODUCT_MEASUREMENTS
-          x-enum-descriptions:
-            - generic measurements
-            - shopper body measurements
-            - finished-product measurements.
-          description: "Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements."
-        size_types:
-          type: array
-          items:
-            type: string
-          description: "Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category."
-        table:
-          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTable"
-          description: Table containing headers and rows.
-        unit_system:
-          type: string
-          enum:
-            - METRIC
-            - IMPERIAL
-          x-enum-descriptions:
-            - metric units
-            - imperial units.
-          description: "Possible values: METRIC: metric units; IMPERIAL: imperial units."
-      required:
-        - measurement_type
-        - table
-        - unit_system
-    CreateSizeChartV2RequestSizeChartDataTable:
-      type: object
-      properties:
-        headers:
-          type: array
-          items:
-            $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartDataTableHeader"
-          description: Ordered header definitions. Provide 1 to 20 headers.
-        rows:
-          type: array
-          items:
-            $ref: "#/components/schemas/Row"
-          description: Rows of the size chart. Provide 1 to 45 rows.
-      required:
-        - headers
-        - rows
-    CreateSizeChartV2RequestSizeChartDataTableHeader:
-      type: object
-      properties:
-        id:
-          type: string
-          description: |-
-            Standard size-system or measurement ID.
-            For standard measurement columns, call Get Category Rules for the corresponding category and use the ID from measurement_and_options[].options[].id under the applicable measurement_type.
-            For size-system columns, use the following predefined IDs:
-            - Size: size_chart_size_system_size
-            - US: size_chart_size_system_us
-            - UK: size_chart_size_system_uk
-            - EU: size_chart_size_system_eu
-            - JP: size_chart_size_system_jp
-            - MX: size_chart_size_system_mx
-            Omit this field for custom columns.
-        name:
-          type: string
-          maxLength: 32
-          description: "Header display name. Maximum length: 32 characters."
-      required:
-        - name
     CreateSizeChartV2Response:
       type: object
       properties:
@@ -39254,63 +38958,11 @@ components:
             - NONE: The product is not applicable for audit because it has not been submitted for listing on this platform, or it is in a draft, frozen, or deactivated state.
             - AUDITING: The product is currently being audited.
             - APPROVED: If you only edited the `price` or `inventory` fields of an approved product, the product remains approved and the new information is immediately published on the platform.
-    EditSizeChartRequest:
-      type: object
-      properties:
-        size_chart_id:
-          type: string
-          description: The ID of the seller-owned reusable size chart template to update.
-        template_name:
-          type: string
-          description: The new name of the size chart template. If omitted, the current name remains unchanged.
-        size_chart_data:
-          $ref: "#/components/schemas/SizeChartData"
-          description: Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
-      required:
-        - size_chart_id
-        - size_chart_data
-    EditSizeChartResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: Status code; 0 means success.
-        message:
-          type: string
-          description: Success or failure message.
-        request_id:
-          type: string
-          description: Request log ID.
-        data:
-          $ref: "#/components/schemas/EditSizeChartResponseData"
-    EditSizeChartResponseData:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: The success or failure status code returned in API response.
-        message:
-          type: string
-          description: The success or failure messages returned in API response. Reasons of failure will be described in the message.
-        request_id:
-          type: string
-          description: Request log
-        data:
-          $ref: "#/components/schemas/EditSizeChartResponseDataData"
-          description: The size chart edit result.
-    EditSizeChartResponseDataData:
-      type: object
-      properties:
-        size_chart_id:
-          type: string
-          description: The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
     EditSizeChartV2Request:
       type: object
       properties:
         size_chart_data:
-          $ref: "#/components/schemas/CreateSizeChartV2RequestSizeChartData"
+          $ref: "#/components/schemas/SizeChartData"
           description: Complete replacement size-chart data, including the structured table, measurement type, unit system, and optional descriptive metadata.
         size_chart_id:
           type: string
@@ -61419,10 +61071,6 @@ components:
     Header:
       type: object
       properties:
-        name:
-          type: string
-          maxLength: 32
-          description: "Header display name. Maximum length: 32 characters."
         id:
           type: string
           description: |-
@@ -61436,6 +61084,10 @@ components:
             - JP: size_chart_size_system_jp
             - MX: size_chart_size_system_mx
             Omit this field for custom columns.
+        name:
+          type: string
+          maxLength: 32
+          description: "Header display name. Maximum length: 32 characters."
       required:
         - name
     IdentifierCode:
@@ -69229,16 +68881,6 @@ components:
             Lists errors for partially failed requests. For example, if a request reviews multiple orders or items and only some fail, individual error details are returned here.
 
             **IMPORTANT**: Partial failures still return a top-level success code (0), so clients must also check this field to detect partial errors. For complete failures (e.g. validation errors), the top-level response code and message will indicate a failure, but this field will remain empty.
-    Row:
-      type: object
-      properties:
-        cells:
-          type: array
-          items:
-            $ref: "#/components/schemas/Cell"
-          description: Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header.
-      required:
-        - cells
     SKUStatusChangeWebhook:
       type: object
       properties:
@@ -77555,14 +77197,6 @@ components:
     SizeChartData:
       type: object
       properties:
-        table:
-          $ref: "#/components/schemas/Table"
-          description: Table containing headers and rows.
-        size_types:
-          type: array
-          items:
-            type: string
-          description: "Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category."
         description:
           type: string
           description: Additional size chart description.
@@ -77580,6 +77214,14 @@ components:
             - shopper body measurements
             - finished-product measurements.
           description: "Possible values: GENERIC_MEASUREMENTS: generic measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product measurements."
+        size_types:
+          type: array
+          items:
+            type: string
+          description: "Possible values: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. Available values depend on the category."
+        table:
+          $ref: "#/components/schemas/Table"
+          description: Table containing headers and rows.
         unit_system:
           type: string
           enum:
@@ -77590,8 +77232,8 @@ components:
             - imperial units.
           description: "Possible values: METRIC: metric units; IMPERIAL: imperial units."
       required:
-        - table
         - measurement_type
+        - table
         - unit_system
     Sku:
       type: object
@@ -78627,11 +78269,30 @@ components:
         rows:
           type: array
           items:
-            $ref: "#/components/schemas/Row"
+            $ref: "#/components/schemas/TableRow"
           description: Rows of the size chart. Provide 1 to 45 rows.
       required:
         - headers
         - rows
+    TableRow:
+      type: object
+      properties:
+        cells:
+          type: array
+          items:
+            $ref: "#/components/schemas/TableRowCell"
+          description: Cells aligned by index with `table.headers`. Each row must contain exactly one cell for every header.
+      required:
+        - cells
+    TableRowCell:
+      type: object
+      properties:
+        value:
+          type: string
+          maxLength: 32
+          description: "Cell value. Maximum length: 32 characters."
+      required:
+        - value
     TargetCollaborationConflict:
       type: object
       properties:
