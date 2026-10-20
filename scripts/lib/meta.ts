@@ -212,9 +212,78 @@ function webhooksMeta(spec: Json): WebhookMeta[] {
   });
 }
 
+export interface RelaxStats {
+  /** String enums turned into plain strings. */
+  stripped: number;
+  /** Schemas reachable from a response or webhook payload. */
+  reachable: number;
+}
+
+const isStringType = (t: unknown): boolean =>
+  t === 'string' || (Array.isArray(t) && t.length > 0 && t.every((x) => x === 'string' || x === 'null') && t.includes('string'));
+
+function appendValues(schema: Json, values: string[]): void {
+  const desc: string | undefined = typeof schema.description === 'string' && schema.description !== '' ? schema.description : undefined;
+  if (desc !== undefined && values.every((v) => desc.includes(v))) return;
+  const list = `Possible values: ${values.map((v) => `\`${v}\``).join(', ')}`;
+  schema.description = desc === undefined ? list : `${desc}\n\n${list}`;
+}
+
+/**
+ * R21: TikTok adds values to status-like fields over time, so every string enum a client or
+ * webhook receiver can decode becomes a plain string (the values move into the description).
+ * Request-only schemas and parameters keep their enums. Mutates `spec` (an already-cloned spec).
+ */
+export function relaxResponseEnums(spec: Json): RelaxStats {
+  const seen = new Set<Json>();
+  const stats: RelaxStats = { stripped: 0, reachable: 0 };
+  const resolve = (ref: string): Json => {
+    if (!ref.startsWith('#/')) return undefined;
+    return ref.slice(2).split('/').reduce<Json>((n, seg) => n?.[seg.replace(/~1/g, '/').replace(/~0/g, '~')], spec);
+  };
+  const walk = (node: Json): void => {
+    if (!isObj(node) || isRaw(node) || seen.has(node)) return;
+    seen.add(node);
+    stats.reachable++;
+    if (Array.isArray(node.enum) && isStringType(node.type)) {
+      appendValues(node, node.enum.filter((v: unknown): v is string => typeof v === 'string'));
+      delete node.enum;
+      delete node['x-enum-varnames'];
+      delete node['x-enum-descriptions'];
+      stats.stripped++;
+    }
+    if (typeof node.$ref === 'string') walk(resolve(node.$ref));
+    if (isObj(node.properties)) Object.values(node.properties).forEach(walk);
+    for (const k of ['items', 'additionalProperties', 'not']) walk(node[k]);
+    for (const k of ['allOf', 'anyOf', 'oneOf', 'prefixItems']) if (Array.isArray(node[k])) node[k].forEach(walk);
+  };
+  const bodies = (content: Json): void => {
+    if (!isObj(content)) return;
+    for (const [type, media] of Object.entries<Json>(content)) {
+      if (/json/i.test(type) && isObj(media)) walk(media.schema);
+    }
+  };
+  const response = (r: Json): void => {
+    const resolved = isObj(r) && typeof r.$ref === 'string' ? resolve(r.$ref) : r;
+    if (isObj(resolved)) bodies(resolved.content);
+  };
+  for (const item of Object.values<Json>(spec.paths ?? {})) {
+    for (const m of METHODS) {
+      const responses = item[m]?.responses;
+      if (!isObj(responses)) continue;
+      for (const [code, r] of Object.entries(responses)) if (/^2/.test(code)) response(r);
+    }
+  }
+  for (const item of Object.values<Json>(spec.webhooks ?? {})) {
+    for (const m of METHODS) bodies(item[m]?.requestBody?.content);
+  }
+  return stats;
+}
+
 export function prepareSpec(spec: object, lang: Lang, groups: Record<string, string>): { spec: Json; meta: Meta } {
   const out: Json = clone(spec);
   const meta: Meta = { operations: operationsMeta(out, groups), webhooks: webhooksMeta(out) };
+  relaxResponseEnums(out); // before the webhooks go: their payloads are decoded too
   delete out.webhooks;
   removeShopCipher(out);
   if (lang === 'typescript') {

@@ -96,6 +96,150 @@ describe('prepareSpec', () => {
   });
 });
 
+describe('prepareSpec: R21 relaxes response and webhook string enums', () => {
+  const ok = (schema: object) => ({ '200': { description: 'ok', content: { 'application/json': { schema } } } });
+  const S = '#/components/schemas/';
+  const make = (o: { schemas?: object; response?: object; request?: object; params?: object[]; webhooks?: object }) => ({
+    paths: {
+      '/a': {
+        post: {
+          operationId: 'a',
+          tags: ['T'],
+          ...(o.params ? { parameters: o.params } : {}),
+          ...(o.request ? { requestBody: { content: { 'application/json': { schema: o.request } } } } : {}),
+          responses: ok(o.response ?? { type: 'object' }),
+        },
+      },
+    },
+    ...(o.webhooks ? { webhooks: o.webhooks } : {}),
+    components: { schemas: o.schemas ?? {} },
+  });
+  const prep = (spec: object) => prepareSpec(spec, 'go', {}).spec;
+
+  it('strips an enum on a response property', () => {
+    const spec = prep(make({ response: { $ref: S + 'R' }, schemas: { R: { type: 'object', properties: { st: { type: 'string', enum: ['A', 'B'], description: 'A or B' } } } } }));
+    expect(spec.components.schemas.R.properties.st).toEqual({ type: 'string', description: 'A or B' });
+  });
+
+  it('strips enums in webhook payloads, including via $ref and a component that is itself an enum', () => {
+    const spec = prep(make({
+      webhooks: { w: { post: { 'x-tts-webhook-type': 1, requestBody: { content: { 'application/json': { schema: { $ref: S + 'W' } } } } } } },
+      schemas: {
+        W: { type: 'object', properties: { data: { type: 'object', properties: { s: { $ref: S + 'Kind' } } } } },
+        Kind: { type: 'string', enum: ['X', 'Y'] },
+      },
+    }));
+    expect(spec.components.schemas.Kind.enum).toBeUndefined();
+    expect(spec.components.schemas.Kind.type).toBe('string');
+    expect(spec).not.toHaveProperty('webhooks');
+  });
+
+  it('keeps an enum that only a request body reaches', () => {
+    const spec = prep(make({ request: { $ref: S + 'Q' }, schemas: { Q: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } } }));
+    expect(spec.components.schemas.Q.properties.s.enum).toEqual(['A']);
+    const inline = prep(make({ request: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } }));
+    expect(inline.paths['/a'].post.requestBody.content['application/json'].schema.properties.s.enum).toEqual(['A']);
+  });
+
+  it('keeps query, path and header parameter enums', () => {
+    const params = ['query', 'path', 'header'].map((i) => ({ name: 'p_' + i, in: i, schema: { type: 'string', enum: ['A', 'B'] } }));
+    const spec = prep(make({ params, response: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } }));
+    for (const p of spec.paths['/a'].post.parameters) expect(p.schema.enum).toEqual(['A', 'B']);
+    expect(spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties.s.enum).toBeUndefined();
+  });
+
+  it('strips a schema shared by a request and a response', () => {
+    const spec = prep(make({
+      request: { $ref: S + 'Shared' },
+      response: { $ref: S + 'Shared' },
+      schemas: { Shared: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } },
+    }));
+    expect(spec.components.schemas.Shared.properties.s.enum).toBeUndefined();
+  });
+
+  it('strips array items enums and nested inline object enums', () => {
+    const spec = prep(make({
+      response: { type: 'object', properties: {
+        list: { type: 'array', items: { type: 'string', enum: ['A', 'B'] } },
+        outer: { type: 'object', properties: { inner: { type: 'object', properties: { s: { type: 'string', enum: ['C'] } } } } },
+        map: { type: 'object', additionalProperties: { type: 'string', enum: ['D'] } },
+        either: { oneOf: [{ type: 'string', enum: ['E'] }, { type: 'integer' }] },
+      } },
+    }));
+    const p = spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties;
+    expect(p.list.items.enum).toBeUndefined();
+    expect(p.outer.properties.inner.properties.s.enum).toBeUndefined();
+    expect(p.map.additionalProperties.enum).toBeUndefined();
+    expect(p.either.oneOf[0].enum).toBeUndefined();
+  });
+
+  it('keeps integer enums, even on webhook payloads', () => {
+    const spec = prep(make({
+      response: { type: 'object', properties: { n: { type: 'integer', enum: [1, 2] } } },
+      schemas: { W: { type: 'object', properties: { type: { type: 'integer', enum: [1] }, kind: { type: 'string', enum: ['A'] } } } },
+      webhooks: { w: { post: { 'x-tts-webhook-type': 1, requestBody: { content: { 'application/json': { schema: { $ref: S + 'W' } } } } } } },
+    }));
+    expect(spec.components.schemas.W.properties.type.enum).toEqual([1]);
+    expect(spec.components.schemas.W.properties.kind.enum).toBeUndefined();
+    expect(spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties.n.enum).toEqual([1, 2]);
+  });
+
+  it('keeps a property named "enum" or "example" and walks past it', () => {
+    const spec = prep(make({ response: { type: 'object', properties: { enum: { type: 'string', enum: ['A'] } } } }));
+    const props = spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties;
+    expect(props.enum).toEqual({ type: 'string', description: 'Possible values: `A`' });
+  });
+
+  it('strips a ["string","null"] enum, dropping x-enum-* extensions', () => {
+    const spec = prep(make({ response: { type: 'object', properties: {
+      s: { type: ['string', 'null'], enum: ['A', null], 'x-enum-varnames': ['A'], 'x-enum-descriptions': ['a'], description: 'A.' },
+    } } }));
+    const s = spec.paths['/a'].post.responses['200'].content['application/json'].schema.properties.s;
+    expect(s).toEqual({ type: ['string', 'null'], description: 'A.' });
+  });
+
+  it('keeps allowed values in the description', () => {
+    const schemas = {
+      Listed: { type: 'string', enum: ['PAID', 'SHIPPED'], description: 'One of PAID or SHIPPED.' },
+      Partial: { type: 'string', enum: ['PAID', 'SHIPPED', 'DONE'], description: 'Status, e.g. PAID.' },
+      None: { type: 'string', enum: ['PAID', 'SHIPPED'] },
+    };
+    const spec = prep(make({
+      response: { type: 'object', properties: { a: { $ref: S + 'Listed' }, b: { $ref: S + 'Partial' }, c: { $ref: S + 'None' } } },
+      schemas,
+    }));
+    const c = spec.components.schemas;
+    expect(c.Listed.description).toBe('One of PAID or SHIPPED.');
+    expect(c.Partial.description).toBe('Status, e.g. PAID.\n\nPossible values: `PAID`, `SHIPPED`, `DONE`');
+    expect(c.None.description).toBe('Possible values: `PAID`, `SHIPPED`');
+  });
+
+  it('follows allOf and a recursive schema once', () => {
+    const spec = prep(make({
+      response: { allOf: [{ $ref: S + 'Node' }] },
+      schemas: { Node: { type: 'object', properties: { s: { type: 'string', enum: ['A'] }, kids: { type: 'array', items: { $ref: S + 'Node' } } } } },
+    }));
+    expect(spec.components.schemas.Node.properties.s.enum).toBeUndefined();
+  });
+
+  it('ignores non-2xx responses', () => {
+    const input = make({ schemas: { E: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } } });
+    (input.paths['/a'].post.responses as any)['400'] = { content: { 'application/json': { schema: { $ref: S + 'E' } } } };
+    expect(prep(input).components.schemas.E.properties.s.enum).toEqual(['A']);
+  });
+
+  it('does not mutate the input', () => {
+    const input = make({
+      response: { $ref: S + 'R' },
+      schemas: { R: { type: 'object', properties: { s: { type: 'string', enum: ['A'] } } } },
+      webhooks: { w: { post: { 'x-tts-webhook-type': 1, requestBody: { content: { 'application/json': { schema: { $ref: S + 'R' } } } } } } },
+    });
+    const before = JSON.stringify(input);
+    prepareSpec(input, 'kotlin', {});
+    expect(JSON.stringify(input)).toBe(before);
+  });
+});
+
 describe('prepare-spec CLI', () => {
   it('writes openapi.json and meta.json under <lang>/build from any directory', () => {
     const out = resolve(root, 'go/build');
