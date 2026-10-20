@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>TikTok Shop API</name>
-    <description>Unofficial Java client for the TikTok Shop Partner API, with request signing built in.</description>
+    <description>Java client for the TikTok Shop Partner API, with request signing built in. Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.</description>
     <url>https://github.com/isaackogan/TikTok-Shop-Api-SDKs/tree/main/java</url>
 
     <licenses>

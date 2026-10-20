@@ -25,7 +25,7 @@ public final class TokenSet {
         this.sellerName = sellerName;
         this.sellerBaseRegion = sellerBaseRegion;
         this.userType = userType;
-        this.grantedScopes = Collections.unmodifiableList(grantedScopes);
+        this.grantedScopes = grantedScopes == null ? null : Collections.unmodifiableList(grantedScopes);
     }
 
     public String getAccessToken() {
@@ -66,7 +66,7 @@ public final class TokenSet {
         return userType;
     }
 
-    /** Empty when TikTok sent none. */
+    /** Null when TikTok sent none (or something other than a list of strings). */
     public List<String> getGrantedScopes() {
         return grantedScopes;
     }

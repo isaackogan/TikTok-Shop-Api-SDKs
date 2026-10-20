@@ -52,4 +52,13 @@ class ReadmeTest {
         assertFalse(readme.contains("!["), "no logo or image");
         assertTrue(Files.exists(Paths.get("LICENSE")));
     }
+
+    @Test
+    void thePomDescriptionCarriesTheDisclaimer() throws IOException {
+        // Maven Central and mvnrepository show the POM, not the README.
+        String pom = read("pom.xml");
+        Matcher m = Pattern.compile("</modelVersion>[\\s\\S]*?<description>([^<]*)</description>").matcher(pom);
+        assertTrue(m.find(), "the project has a description");
+        assertTrue(m.group(1).endsWith("Unofficial. Not affiliated with or endorsed by TikTok or ByteDance."), m.group(1));
+    }
 }

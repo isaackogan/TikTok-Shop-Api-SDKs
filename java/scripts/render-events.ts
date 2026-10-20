@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { webhookModels, type SchemaNode } from '../../scripts/lib/webhook-models.ts';
 
 interface Webhook {
   type: number;
@@ -14,10 +15,12 @@ const base = (schema: string) => schema.replace(/Webhook$/, '');
 
 /**
  * Write `<generatedDir>/event/`: one `XxxEvent` class per webhook (extends the hand-written `WebhookEvent`,
- * wraps the generated `XxxWebhook` model), `WebhookEventVisitor` and `WebhookEvents` (the type → event dispatch).
+ * wraps the generated `XxxWebhook` model), `WebhookEventVisitor`, `WebhookEvents` (the type → event dispatch) and
+ * `WebhookRequired` (the required-field check, R28).
  */
-export function renderEvents(metaPath: string, generatedDir: string): void {
+export function renderEvents(metaPath: string, generatedDir: string, specPath: string): void {
   const hooks = (JSON.parse(readFileSync(metaPath, 'utf8')) as { webhooks: Webhook[] }).webhooks;
+  const spec = JSON.parse(readFileSync(specPath, 'utf8')) as { components?: { schemas?: Record<string, SchemaNode> } };
   const dir = join(generatedDir, 'event');
   mkdirSync(dir, { recursive: true });
   const names = new Set<string>();
@@ -94,6 +97,7 @@ ${visits.join('\n')}}
 
   const cases = hooks.map(
     (w) => `            case ${w.type}:
+                WebhookRequired.check(${JSON.stringify(w.schema)}, raw);
                 return new ${base(w.schema)}Event(JSON.getGson().fromJson(raw, ${w.schema}.class), raw);`,
   );
   writeFileSync(
@@ -120,4 +124,114 @@ ${cases.join('\n')}
 }
 `,
   );
+
+  writeFileSync(join(dir, 'WebhookRequired.java'), renderWebhookRequired(spec.components?.schemas ?? {}, hooks));
+}
+
+const q = (s: string) => JSON.stringify(s);
+
+/**
+ * `WebhookRequired.java`: every model reachable from a webhook, with its required JSON properties and the properties
+ * holding other models, and the check that walks a body with it. The generated models let a JSON null through for a
+ * required number (validateJsonElement checks presence and some types only), so the parser checks first (R28).
+ */
+export function renderWebhookRequired(schemas: Record<string, SchemaNode>, hooks: Webhook[]): string {
+  const models = webhookModels(schemas, hooks);
+  const puts = Object.entries(models).map(([name, m]) => {
+    const children = Object.entries(m.children).map(([p, [kind, model]]) => `child(${q(p)}, ${q(kind)}, ${q(model)})`);
+    return `        model(m, ${q(name)}, Arrays.asList(${m.required.map(q).join(', ')})${children.length ? ', ' + children.join(', ') : ''});`;
+  });
+  return `${HEADER}package com.isaackogan.tiktok.shop.generated.event;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+/** The required-field check behind {@code Webhooks.parse}: required properties must be present and non-null, at any depth. */
+public final class WebhookRequired {
+    private WebhookRequired() {}
+
+    private static final class Model {
+        final List<String> required;
+        final Map<String, String[]> children = new LinkedHashMap<>(); // property -> {kind, model}
+
+        Model(List<String> required) {
+            this.required = required;
+        }
+    }
+
+    private static final Map<String, Model> MODELS;
+
+    private static String[] child(String property, String kind, String model) {
+        return new String[] {property, kind, model};
+    }
+
+    private static void model(Map<String, Model> m, String name, List<String> required, String[]... children) {
+        Model model = new Model(required);
+        for (String[] c : children) {
+            model.children.put(c[0], new String[] {c[1], c[2]});
+        }
+        m.put(name, model);
+    }
+
+    static {
+        Map<String, Model> m = new HashMap<>();
+${puts.join('\n')}
+        MODELS = Collections.unmodifiableMap(m);
+    }
+
+    /** Throws {@link IllegalArgumentException} naming the first required property that is missing or null. */
+    public static void check(String schema, JsonObject raw) {
+        String missing = firstMissing(schema, raw, "");
+        if (missing != null) {
+            throw new IllegalArgumentException("required field \\"" + missing + "\\" is missing or null");
+        }
+    }
+
+    private static String firstMissing(String schema, JsonObject obj, String path) {
+        Model m = MODELS.get(schema);
+        if (m == null) {
+            return null;
+        }
+        for (String name : m.required) {
+            JsonElement v = obj.get(name);
+            if (v == null || v.isJsonNull()) {
+                return path + name;
+            }
+        }
+        for (Map.Entry<String, String[]> e : m.children.entrySet()) {
+            JsonElement v = obj.get(e.getKey());
+            String kind = e.getValue()[0];
+            String model = e.getValue()[1];
+            String found = null;
+            if ("object".equals(kind) && v != null && v.isJsonObject()) {
+                found = firstMissing(model, v.getAsJsonObject(), path + e.getKey() + ".");
+            } else if ("list".equals(kind) && v != null && v.isJsonArray()) {
+                JsonArray items = v.getAsJsonArray();
+                for (int i = 0; i < items.size() && found == null; i++) {
+                    if (items.get(i).isJsonObject()) {
+                        found = firstMissing(model, items.get(i).getAsJsonObject(), path + e.getKey() + "[" + i + "].");
+                    }
+                }
+            } else if ("map".equals(kind) && v != null && v.isJsonObject()) {
+                for (Map.Entry<String, JsonElement> item : v.getAsJsonObject().entrySet()) {
+                    if (found == null && item.getValue().isJsonObject()) {
+                        found = firstMissing(model, item.getValue().getAsJsonObject(), path + e.getKey() + "." + item.getKey() + ".");
+                    }
+                }
+            }
+            if (found != null) {
+                return found;
+            }
+        }
+        return null;
+    }
+}
+`;
 }

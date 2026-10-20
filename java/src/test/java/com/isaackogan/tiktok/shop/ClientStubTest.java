@@ -368,13 +368,14 @@ class ClientStubTest {
     }
 
     @Test
-    void anExplicitDirectOrSocksProxyMeansNoProxyForTheJdkClient() {
-        for (java.net.Proxy p : new java.net.Proxy[] {java.net.Proxy.NO_PROXY,
-                new java.net.Proxy(java.net.Proxy.Type.SOCKS, new java.net.InetSocketAddress("127.0.0.1", 9))}) {
-            TikTokShop c = TikTokShop.builder().appKey("k").appSecret("s").httpClient(new OkHttpClient.Builder().proxy(p).build()).build();
-            assertEquals(java.net.Proxy.Type.DIRECT,
-                    c.jdkClient().proxy().get().select(java.net.URI.create("http://example.com")).get(0).type());
-        }
+    void anExplicitDirectProxyMeansNoProxyForTheJdkClientAndSocksIsRefused() {
+        TikTokShop c = TikTokShop.builder().appKey("k").appSecret("s")
+                .httpClient(new OkHttpClient.Builder().proxy(java.net.Proxy.NO_PROXY).build()).build();
+        assertEquals(java.net.Proxy.Type.DIRECT,
+                c.jdkClient().proxy().get().select(java.net.URI.create("http://example.com")).get(0).type());
+        TikTokShop socks = TikTokShop.builder().appKey("k").appSecret("s").httpClient(new OkHttpClient.Builder()
+                .proxy(new java.net.Proxy(java.net.Proxy.Type.SOCKS, new java.net.InetSocketAddress("127.0.0.1", 9))).build()).build();
+        assertEquals(-1, assertThrows(TikTokShopException.class, socks::jdkClient).getCode());
     }
 
     @Test

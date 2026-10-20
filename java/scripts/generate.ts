@@ -31,4 +31,4 @@ mkdirSync(dest, { recursive: true });
 cpSync(resolve(out, pkgPath), dest, { recursive: true });
 
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
-renderEvents(resolve(pkg, 'build/meta.json'), dest);
+renderEvents(resolve(pkg, 'build/meta.json'), dest, resolve(pkg, 'build/openapi.json'));

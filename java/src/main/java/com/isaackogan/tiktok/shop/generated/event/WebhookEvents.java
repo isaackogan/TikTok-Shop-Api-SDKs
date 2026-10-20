@@ -15,92 +15,136 @@ public final class WebhookEvents {
     public static WebhookEvent fromJson(int type, JsonObject raw) {
         switch (type) {
             case 63:
+                WebhookRequired.check("ActivityChangeWebhook", raw);
                 return new ActivityChangeEvent(JSON.getGson().fromJson(raw, ActivityChangeWebhook.class), raw);
             case 39:
+                WebhookRequired.check("ActivityStatusChangeWebhook", raw);
                 return new ActivityStatusChangeEvent(JSON.getGson().fromJson(raw, ActivityStatusChangeWebhook.class), raw);
             case 64:
+                WebhookRequired.check("AftersalesRequestStatusUpdateWebhook", raw);
                 return new AftersalesRequestStatusUpdateEvent(JSON.getGson().fromJson(raw, AftersalesRequestStatusUpdateWebhook.class), raw);
             case 66:
+                WebhookRequired.check("AppealCompletedWebhook", raw);
                 return new AppealCompletedEvent(JSON.getGson().fromJson(raw, AppealCompletedWebhook.class), raw);
             case 11:
+                WebhookRequired.check("CancellationStatusChangeWebhook", raw);
                 return new CancellationStatusChangeEvent(JSON.getGson().fromJson(raw, CancellationStatusChangeWebhook.class), raw);
             case 42:
+                WebhookRequired.check("CombinedListingChangeWebhook", raw);
                 return new CombinedListingChangeEvent(JSON.getGson().fromJson(raw, CombinedListingChangeWebhook.class), raw);
             case 20:
+                WebhookRequired.check("CreatorDeauthorizationWebhook", raw);
                 return new CreatorDeauthorizationEvent(JSON.getGson().fromJson(raw, CreatorDeauthorizationWebhook.class), raw);
             case 24:
+                WebhookRequired.check("FBTInventoryUpdateWebhook", raw);
                 return new FBTInventoryUpdateEvent(JSON.getGson().fromJson(raw, FBTInventoryUpdateWebhook.class), raw);
             case 22:
+                WebhookRequired.check("FBTMerchantOnboardingWebhook", raw);
                 return new FBTMerchantOnboardingEvent(JSON.getGson().fromJson(raw, FBTMerchantOnboardingWebhook.class), raw);
             case 58:
+                WebhookRequired.check("GetFBTMCFOrderStatusWebhook", raw);
                 return new GetFBTMCFOrderStatusEvent(JSON.getGson().fromJson(raw, GetFBTMCFOrderStatusWebhook.class), raw);
             case 52:
+                WebhookRequired.check("GlobalListingMethodChangeWebhook", raw);
                 return new GlobalListingMethodChangeEvent(JSON.getGson().fromJson(raw, GlobalListingMethodChangeWebhook.class), raw);
             case 51:
+                WebhookRequired.check("GlobalReplicationStatusChangeWebhook", raw);
                 return new GlobalReplicationStatusChangeEvent(JSON.getGson().fromJson(raw, GlobalReplicationStatusChangeWebhook.class), raw);
             case 23:
+                WebhookRequired.check("GoodsMatchWebhook", raw);
                 return new GoodsMatchEvent(JSON.getGson().fromJson(raw, GoodsMatchWebhook.class), raw);
             case 46:
+                WebhookRequired.check("ImageTranslationCompletedWebhook", raw);
                 return new ImageTranslationCompletedEvent(JSON.getGson().fromJson(raw, ImageTranslationCompletedWebhook.class), raw);
             case 21:
+                WebhookRequired.check("InboundFBTOrderStatusChangeWebhook", raw);
                 return new InboundFBTOrderStatusChangeEvent(JSON.getGson().fromJson(raw, InboundFBTOrderStatusChangeWebhook.class), raw);
             case 71:
+                WebhookRequired.check("InventoryChangedByShopWebhook", raw);
                 return new InventoryChangedByShopEvent(JSON.getGson().fromJson(raw, InventoryChangedByShopWebhook.class), raw);
             case 27:
+                WebhookRequired.check("InventoryStatusChangeWebhook", raw);
                 return new InventoryStatusChangeEvent(JSON.getGson().fromJson(raw, InventoryStatusChangeWebhook.class), raw);
             case 36:
+                WebhookRequired.check("InvoiceStatusChangeWebhook", raw);
                 return new InvoiceStatusChangeEvent(JSON.getGson().fromJson(raw, InvoiceStatusChangeWebhook.class), raw);
             case 13:
+                WebhookRequired.check("NewConversationWebhook", raw);
                 return new NewConversationEvent(JSON.getGson().fromJson(raw, NewConversationWebhook.class), raw);
             case 14:
+                WebhookRequired.check("NewMessageWebhook", raw);
                 return new NewMessageEvent(JSON.getGson().fromJson(raw, NewMessageWebhook.class), raw);
             case 33:
+                WebhookRequired.check("NewMessageListenerWebhook", raw);
                 return new NewMessageListenerEvent(JSON.getGson().fromJson(raw, NewMessageListenerWebhook.class), raw);
             case 25:
+                WebhookRequired.check("OpportunityMatchingStatusChangeWebhook", raw);
                 return new OpportunityMatchingStatusChangeEvent(JSON.getGson().fromJson(raw, OpportunityMatchingStatusChangeWebhook.class), raw);
             case 1:
+                WebhookRequired.check("OrderStatusChangeWebhook", raw);
                 return new OrderStatusChangeEvent(JSON.getGson().fromJson(raw, OrderStatusChangeWebhook.class), raw);
             case 4:
+                WebhookRequired.check("PackageUpdateWebhook", raw);
                 return new PackageUpdateEvent(JSON.getGson().fromJson(raw, PackageUpdateWebhook.class), raw);
             case 37:
+                WebhookRequired.check("ProductAuditStatusChangeWebhook", raw);
                 return new ProductAuditStatusChangeEvent(JSON.getGson().fromJson(raw, ProductAuditStatusChangeWebhook.class), raw);
             case 18:
+                WebhookRequired.check("ProductCategoryChangeWebhook", raw);
                 return new ProductCategoryChangeEvent(JSON.getGson().fromJson(raw, ProductCategoryChangeWebhook.class), raw);
             case 16:
+                WebhookRequired.check("ProductCreationWebhook", raw);
                 return new ProductCreationEvent(JSON.getGson().fromJson(raw, ProductCreationWebhook.class), raw);
             case 15:
+                WebhookRequired.check("ProductInformationChangeWebhook", raw);
                 return new ProductInformationChangeEvent(JSON.getGson().fromJson(raw, ProductInformationChangeWebhook.class), raw);
             case 62:
+                WebhookRequired.check("ProductPackageRecommendedWebhook", raw);
                 return new ProductPackageRecommendedEvent(JSON.getGson().fromJson(raw, ProductPackageRecommendedWebhook.class), raw);
             case 5:
+                WebhookRequired.check("ProductStatusChangeWebhook", raw);
                 return new ProductStatusChangeEvent(JSON.getGson().fromJson(raw, ProductStatusChangeWebhook.class), raw);
             case 3:
+                WebhookRequired.check("RecipientAddressUpdateWebhook", raw);
                 return new RecipientAddressUpdateEvent(JSON.getGson().fromJson(raw, RecipientAddressUpdateWebhook.class), raw);
             case 67:
+                WebhookRequired.check("RefundSuccessWebhook", raw);
                 return new RefundSuccessEvent(JSON.getGson().fromJson(raw, RefundSuccessWebhook.class), raw);
             case 12:
+                WebhookRequired.check("ReturnStatusChangeWebhook", raw);
                 return new ReturnStatusChangeEvent(JSON.getGson().fromJson(raw, ReturnStatusChangeWebhook.class), raw);
             case 65:
+                WebhookRequired.check("RMAStatusUpdateWebhook", raw);
                 return new RMAStatusUpdateEvent(JSON.getGson().fromJson(raw, RMAStatusUpdateWebhook.class), raw);
             case 56:
+                WebhookRequired.check("SampleApplicationStatusChangeWebhook", raw);
                 return new SampleApplicationStatusChangeEvent(JSON.getGson().fromJson(raw, SampleApplicationStatusChangeWebhook.class), raw);
             case 6:
+                WebhookRequired.check("SellerDeauthorizationWebhook", raw);
                 return new SellerDeauthorizationEvent(JSON.getGson().fromJson(raw, SellerDeauthorizationWebhook.class), raw);
             case 17:
+                WebhookRequired.check("ShoppableContentPostingWebhook", raw);
                 return new ShoppableContentPostingEvent(JSON.getGson().fromJson(raw, ShoppableContentPostingWebhook.class), raw);
             case 59:
+                WebhookRequired.check("ShoppableVideoPrecheckTasksResultWebhook", raw);
                 return new ShoppableVideoPrecheckTasksResultEvent(JSON.getGson().fromJson(raw, ShoppableVideoPrecheckTasksResultWebhook.class), raw);
             case 19:
+                WebhookRequired.check("SizeChartChangeWebhook", raw);
                 return new SizeChartChangeEvent(JSON.getGson().fromJson(raw, SizeChartChangeWebhook.class), raw);
             case 50:
+                WebhookRequired.check("SKUStatusChangeWebhook", raw);
                 return new SKUStatusChangeEvent(JSON.getGson().fromJson(raw, SKUStatusChangeWebhook.class), raw);
             case 38:
+                WebhookRequired.check("StrikethroughPriceExpiredWebhook", raw);
                 return new StrikethroughPriceExpiredEvent(JSON.getGson().fromJson(raw, StrikethroughPriceExpiredWebhook.class), raw);
             case 35:
+                WebhookRequired.check("TokopediaMirrorStatusChangeWebhook", raw);
                 return new TokopediaMirrorStatusChangeEvent(JSON.getGson().fromJson(raw, TokopediaMirrorStatusChangeWebhook.class), raw);
             case 7:
+                WebhookRequired.check("UpcomingAuthorizationExpirationWebhook", raw);
                 return new UpcomingAuthorizationExpirationEvent(JSON.getGson().fromJson(raw, UpcomingAuthorizationExpirationWebhook.class), raw);
             case 55:
+                WebhookRequired.check("VideoPrecheckResultWebhook", raw);
                 return new VideoPrecheckResultEvent(JSON.getGson().fromJson(raw, VideoPrecheckResultWebhook.class), raw);
             default:
                 return null;

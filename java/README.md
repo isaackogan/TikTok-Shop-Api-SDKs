@@ -6,7 +6,7 @@ It signs requests for you, handles OAuth, works with many shops at once, and ver
 
 > Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 >
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 The client is generated from an OpenAPI v3 spec built from TikTok's partner documentation, so it tracks the docs: [tiktok-shop.openapi.yaml](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml).
 
@@ -81,7 +81,27 @@ class FirstCall {
 
 Each API group is a getter on the client (`orders()`, `products()`, `fulfillment()`, `finance()`, ...) returning the generated API class. Signing, `app_key`, `timestamp`, the `x-tts-access-token` header and `shop_cipher` are added for you.
 
-Failures that come back from TikTok, such as a `code` other than 0, a non-2xx status or a network error, raise the unchecked `TikTokShopException` (`getCode()`, `getMessage()`, `getRequestId()`, `getHttpStatus()`). The generated methods also declare the checked `ApiException`, which can still surface for client-side problems such as a missing required parameter, so catch or declare both.
+## Errors
+
+Every failed call raises the unchecked `TikTokShopException` (`getCode()`, `getMessage()`, `getRequestId()`, `getHttpStatus()`, and the original exception as `getCause()`):
+
+| What happened | `getCode()` | `getHttpStatus()` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | `null` |
+
+The generated methods also declare the checked `ApiException`, which can still surface for client-side problems such as a missing required parameter, so catch or declare both.
+
+The `*Async` methods report every failure to `ApiCallback.onFailure` as an `ApiException` whose `getCause()` is the `TikTokShopException` (its `getCode()` is the HTTP status, 0 when no response arrived).
+
+## Options
+
+- `baseUrl` (on both builders) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path.
+- `timeout` bounds one request, 30 seconds by default.
+- Requests carry the User-Agent `tiktok-shop-api-java/<version>`.
+- The three GET operations that carry a body are sent with `java.net.http`, which cannot use a SOCKS proxy: with one configured on your `OkHttpClient`, those calls fail with a `TikTokShopException` (code -1) instead of going direct.
 
 ## Many shops
 
@@ -125,7 +145,7 @@ class WebhookExample {
 }
 ```
 
-`parse` picks the model from the integer `type`, so a `WebhookEvent` is one of the generated event classes (`OrderStatusChangeEvent`, ...), each with `getPayload()`, or an `UnknownWebhookEvent` (`getType()`, `getRaw()`) for a type this SDK does not know. Use `instanceof`, or `event.accept(visitor)` with a `WebhookEventVisitor`. A body whose `type` is missing or not an integer is rejected with an `IllegalArgumentException`.
+`parse` picks the model from the integer `type`, so a `WebhookEvent` is one of the generated event classes (`OrderStatusChangeEvent`, ...), each with `getPayload()`, or an `UnknownWebhookEvent` (`getType()`, `getRaw()`) for a type this SDK does not know. Use `instanceof`, or `event.accept(visitor)` with a `WebhookEventVisitor`. Parsing is strict: a body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required field missing or null is rejected with an `IllegalArgumentException`. In short, a known type missing a required field is a parse error.
 
 Verify against the **raw** body: re-serializing it changes the bytes and the signature will not match. Big IDs such as `shop_id` keep their exact digits. `Webhooks.EVENT_TYPES` maps a type number to its event name.
 

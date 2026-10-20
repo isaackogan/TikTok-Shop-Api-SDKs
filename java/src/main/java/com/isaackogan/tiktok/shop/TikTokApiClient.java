@@ -3,19 +3,33 @@ package com.isaackogan.tiktok.shop;
 import com.isaackogan.tiktok.shop.generated.ApiClient;
 import com.isaackogan.tiktok.shop.generated.ApiException;
 import com.isaackogan.tiktok.shop.generated.ApiCallback;
+import com.isaackogan.tiktok.shop.generated.ApiResponse;
 import com.isaackogan.tiktok.shop.generated.Pair;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.RejectedExecutionException;
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import okio.Buffer;
 
 /**
- * The generated {@link ApiClient} with one change: a GET that has a body keeps it. The generated code drops the body of a
- * GET, and OkHttp itself refuses to build one, so the body is serialized as a POST would and carried on the request as a
- * {@link GetBody} tag for {@link SigningInterceptor}.
+ * The generated {@link ApiClient} with three changes:
+ *
+ * <ul>
+ *   <li>a GET that has a body keeps it. The generated code drops the body of a GET, and OkHttp itself refuses to build one,
+ *       so the body is serialized as a POST would and carried on the request as a {@link GetBody} tag for
+ *       {@link SigningInterceptor};
+ *   <li>a 2xx body that does not fit its model is a {@link TikTokShopException} with code -1 (R13d), not a raw gson or
+ *       validation exception;
+ *   <li>the {@code *Async} methods deliver a {@link TikTokShopException} to {@code onFailure} as the cause of the
+ *       {@link ApiException}, instead of losing it to OkHttp's dispatcher thread.
+ * </ul>
  */
 final class TikTokApiClient extends ApiClient {
     TikTokApiClient(OkHttpClient client) {
@@ -43,5 +57,61 @@ final class TikTokApiClient extends ApiClient {
         }
         GetBody carried = new GetBody(buf.readByteArray(), rb == null ? null : rb.contentType());
         return asPost.newBuilder().method("GET", null).tag(GetBody.class, carried).build();
+    }
+
+    /** R13d: a 2xx body that does not decode into its model is a {@link TikTokShopException} with code -1. */
+    @Override
+    public <T> T deserialize(Response response, Type returnType) throws ApiException {
+        ResponseBody body = response == null ? null : response.body();
+        if (body == null || returnType == null || "byte[]".equals(returnType.toString()) || returnType.equals(java.io.File.class)) {
+            return super.deserialize(response, returnType);
+        }
+        byte[] data;
+        try {
+            data = body.bytes();
+        } catch (IOException e) {
+            throw new TikTokShopException(-1, "reading the response failed: " + e.getClass().getSimpleName(), "", response.code(), e);
+        }
+        Response copy = response.newBuilder().body(ResponseBody.create(data, body.contentType())).build();
+        try {
+            return super.deserialize(copy, returnType);
+        } catch (RuntimeException e) {
+            if (e instanceof TikTokShopException) {
+                throw e;
+            }
+            throw new TikTokShopException(-1, "response does not match its model: " + e.getClass().getSimpleName() + ": " + e.getMessage(),
+                    SigningInterceptor.requestIdOf(data), response.code(), e);
+        }
+    }
+
+    /**
+     * Runs the call synchronously on the HTTP client's dispatcher threads, so a {@link TikTokShopException} thrown by the
+     * signing interceptor reaches {@code callback.onFailure} as the cause of an {@link ApiException} (with the HTTP status
+     * as its code, 0 when no response arrived) instead of being rethrown on OkHttp's dispatcher thread.
+     */
+    @Override
+    public <T> void executeAsync(Call call, Type returnType, ApiCallback<T> callback) {
+        Runnable run = () -> {
+            ApiResponse<T> r;
+            try {
+                r = execute(call, returnType);
+            } catch (ApiException e) {
+                callback.onFailure(e, e.getCode(), e.getResponseHeaders());
+                return;
+            } catch (TikTokShopException e) {
+                int status = e.getHttpStatus() == null ? 0 : e.getHttpStatus();
+                callback.onFailure(new ApiException(e.getMessage(), e, status, null), status, null);
+                return;
+            } catch (RuntimeException e) {
+                callback.onFailure(new ApiException(e), 0, null);
+                return;
+            }
+            callback.onSuccess(r.getData(), r.getStatusCode(), r.getHeaders());
+        };
+        try {
+            getHttpClient().dispatcher().executorService().execute(run);
+        } catch (RejectedExecutionException e) {
+            callback.onFailure(new ApiException(e), 0, null);
+        }
     }
 }

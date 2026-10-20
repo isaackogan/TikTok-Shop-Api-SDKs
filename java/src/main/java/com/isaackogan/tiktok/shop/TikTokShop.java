@@ -50,6 +50,8 @@ public final class TikTokShop {
     public static final String DEFAULT_BASE_URL = "https://open-api.tiktokglobalshop.com";
     /** Bounds one request, response body included, unless {@link Builder#timeout} says otherwise. */
     public static final Duration DEFAULT_TIMEOUT = Duration.ofSeconds(30);
+    /** Sent on every API and token call. {@code scripts/bump-version.ts} keeps it in step with the pom. */
+    static final String USER_AGENT = "tiktok-shop-api-java/0.1.0";
 
     private final Shared shared;
     private final SigningInterceptor.Credentials creds;
@@ -81,7 +83,7 @@ public final class TikTokShop {
         OkHttpClient http = shared.http.newBuilder().addInterceptor(new SigningInterceptor(creds, shared::jdk)).build();
         ApiClient api = new TikTokApiClient(http);
         api.setBasePath(shared.baseUrl);
-        api.setUserAgent("tiktok-shop-api-java/0.1.0");
+        api.setUserAgent(USER_AGENT);
         this.affiliateCreator = new AffiliateCreatorApi(api);
         this.affiliatePartner = new AffiliatePartnerApi(api);
         this.affiliateSeller = new AffiliateSellerApi(api);
@@ -291,8 +293,12 @@ public final class TikTokShop {
                 j.proxy(http.proxySelector() == null ? ProxySelector.getDefault() : http.proxySelector());
             } else if (proxy.type() == java.net.Proxy.Type.HTTP && proxy.address() instanceof java.net.InetSocketAddress) {
                 j.proxy(ProxySelector.of((java.net.InetSocketAddress) proxy.address()));
+            } else if (proxy.type() == java.net.Proxy.Type.SOCKS) {
+                // java.net.http cannot use a SOCKS proxy. Fail rather than silently send the request direct.
+                throw new TikTokShopException(-1, "a GET with a body is sent with java.net.http, which cannot use the configured"
+                        + " SOCKS proxy; configure an HTTP proxy or none", "", null, null);
             } else {
-                j.proxy(NO_PROXY); // an explicit DIRECT: none; SOCKS cannot be expressed: none, never the JVM default
+                j.proxy(NO_PROXY); // an explicit DIRECT: none, never the JVM default
             }
             return j.build();
         }

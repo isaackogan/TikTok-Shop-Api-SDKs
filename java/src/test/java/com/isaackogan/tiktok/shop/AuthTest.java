@@ -146,7 +146,7 @@ class AuthTest {
         assertNull(t.getSellerName());
         assertNull(t.getSellerBaseRegion());
         assertNull(t.getUserType());
-        assertEquals(Collections.<String>emptyList(), t.getGrantedScopes());
+        assertNull(t.getGrantedScopes());
     }
 
     private static String data(String fields) {
@@ -162,9 +162,9 @@ class AuthTest {
         assertNull(t.getSellerName());
         assertNull(t.getSellerBaseRegion());
         assertNull(t.getUserType());
-        assertTrue(t.getGrantedScopes().isEmpty());
+        assertNull(t.getGrantedScopes());
         TokenSet u = exchange(data(TOK + ",\"granted_scopes\":[\"a\",1,null,\"b\"]"));
-        assertEquals(Arrays.asList("a", "b"), u.getGrantedScopes());
+        assertNull(u.getGrantedScopes(), "a list with a non-string is ill-typed, so absent");
     }
 
     @Test

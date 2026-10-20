@@ -142,7 +142,7 @@ public final class TikTokShopAuth {
         q.addEncodedQueryParameter("grant_type", enc(grantType));
         int status;
         String body;
-        try (Response res = http.newCall(new Request.Builder().url(q.build()).get().build()).execute()) {
+        try (Response res = http.newCall(new Request.Builder().url(q.build()).header("User-Agent", TikTokShop.USER_AGENT).get().build()).execute()) {
             status = res.code();
             body = res.body() == null ? "" : res.body().string();
         } catch (IOException | RuntimeException e) {
@@ -197,14 +197,18 @@ public final class TikTokShopAuth {
                 ? o.getAsString() : null;
         JsonElement ut = data.get("user_type");
         Long userType = integer(ut);
-        List<String> scopes = new ArrayList<>();
+        // Lesson 34: absent, null or ill-typed (not a list of strings) granted_scopes is null, never an empty list.
+        List<String> scopes = null;
         JsonElement gs = data.get("granted_scopes");
         if (gs != null && gs.isJsonArray()) {
+            scopes = new ArrayList<>();
             for (JsonElement s : (JsonArray) gs) {
                 String v = str(s);
-                if (v != null) {
-                    scopes.add(v);
+                if (v == null) {
+                    scopes = null;
+                    break;
                 }
+                scopes.add(v);
             }
         }
         return new TokenSet(access, accessExp, refresh, refreshExp, openId, str(data.get("seller_name")),

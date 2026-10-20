@@ -156,7 +156,8 @@ final class SigningInterceptor implements Interceptor {
             }
         } catch (IOException e) {
             // Only the exception's class: its message can carry the request URL.
-            throw new TikTokShopException(0, "request failed: " + e.getClass().getSimpleName(), "", null, e);
+            // R13c: no HTTP response at all is -1 with no status.
+            throw new TikTokShopException(-1, "request failed: " + e.getClass().getSimpleName(), "", null, e);
         }
 
         checkResponse(status, data);
@@ -217,9 +218,11 @@ final class SigningInterceptor implements Interceptor {
             throw new TikTokShopException(-1, "Response is not valid JSON (HTTP " + status + ")", "", status, parseError);
         }
         Long code = null;
+        boolean hasCode = false;
         String message = null;
         String requestId = "";
         if (env != null) {
+            hasCode = env.has("code");
             code = longOf(env, "code");
             JsonElement m = env.get("message");
             if (m != null && m.isJsonPrimitive() && m.getAsJsonPrimitive().isString()) {
@@ -236,10 +239,30 @@ final class SigningInterceptor implements Interceptor {
             String msg = message != null ? message : "HTTP " + status;
             throw new TikTokShopException(c, msg, requestId, status, null);
         }
+        if (hasCode && code == null) {
+            // Lesson 34: a code that is present but not an integer makes the reply unreadable.
+            throw new TikTokShopException(-1, "Response has a non-integer code (HTTP " + status + ")", requestId, status, null);
+        }
         if (code != null && code != 0) {
             int c = code >= Integer.MIN_VALUE && code <= Integer.MAX_VALUE ? code.intValue() : -1;
             throw new TikTokShopException(c, message == null ? "" : message, requestId, status, null);
         }
+    }
+
+    /** The request_id of a body, or an empty string. */
+    static String requestIdOf(byte[] data) {
+        try {
+            JsonElement el = JsonParser.parseString(new String(data, StandardCharsets.UTF_8));
+            if (el.isJsonObject()) {
+                JsonElement r = el.getAsJsonObject().get("request_id");
+                if (r != null && r.isJsonPrimitive() && r.getAsJsonPrimitive().isString()) {
+                    return r.getAsString();
+                }
+            }
+        } catch (RuntimeException ignored) {
+            // not JSON: no request ID
+        }
+        return "";
     }
 
     private static Long longOf(JsonObject o, String key) {
