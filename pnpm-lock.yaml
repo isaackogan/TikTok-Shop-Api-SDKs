@@ -35,6 +35,12 @@ importers:
 
   python: {}
 
+  rust:
+    devDependencies:
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
+
   scripts:
     devDependencies:
       '@types/node':
