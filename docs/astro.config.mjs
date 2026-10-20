@@ -64,7 +64,7 @@ export default defineConfig({
         navLinks: [
           { label: 'Docs', link: base },
           { label: 'SDKs', link: `${base}sdks/` },
-          { label: 'OpenAPI', link: `${base}openapi/` },
+          { label: 'API Reference', link: `${base}openapi/reference/` },
         ],
         footerText: `Unofficial project, not affiliated with or endorsed by TikTok or ByteDance. Generated from TikTok Shop's partner documentation (spec ${info.version}). Source on [GitHub](${repo}).`,
       }), starlightOpenAPI([{
