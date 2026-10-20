@@ -1,6 +1,6 @@
 # tiktok-shop-api: TikTok Shop API client for Java
 
-A typed Java client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers 320 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more.
+A typed Java client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers over 300 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more.
 
 It signs requests for you, handles OAuth, works with many shops at once, and verifies and types TikTok Shop webhooks.
 
@@ -125,7 +125,7 @@ class WebhookExample {
 }
 ```
 
-`parse` picks the model from the integer `type`, so a `WebhookEvent` is one of 44 generated event classes (`OrderStatusChangeEvent`, ...), each with `getPayload()`, or an `UnknownWebhookEvent` (`getType()`, `getRaw()`) for a type this SDK does not know. Use `instanceof`, or `event.accept(visitor)` with a `WebhookEventVisitor`. A body whose `type` is missing or not an integer is rejected with an `IllegalArgumentException`.
+`parse` picks the model from the integer `type`, so a `WebhookEvent` is one of the generated event classes (`OrderStatusChangeEvent`, ...), each with `getPayload()`, or an `UnknownWebhookEvent` (`getType()`, `getRaw()`) for a type this SDK does not know. Use `instanceof`, or `event.accept(visitor)` with a `WebhookEventVisitor`. A body whose `type` is missing or not an integer is rejected with an `IllegalArgumentException`.
 
 Verify against the **raw** body: re-serializing it changes the bytes and the signature will not match. Big IDs such as `shop_id` keep their exact digits. `Webhooks.EVENT_TYPES` maps a type number to its event name.
 

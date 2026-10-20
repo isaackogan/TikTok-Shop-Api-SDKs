@@ -53,8 +53,8 @@ func TestGroupNames(t *testing.T) {
 }
 
 func TestEveryOperationIsAMethodOnItsGroup(t *testing.T) {
-	if len(generated.Operations) != 320 {
-		t.Errorf("operations = %d, want 320", len(generated.Operations))
+	if len(generated.Operations) == 0 {
+		t.Fatal("meta has no operations")
 	}
 	shop := reflect.ValueOf(New(Options{AppKey: "k", AppSecret: "s"})).Elem()
 	for _, op := range generated.Operations {

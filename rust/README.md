@@ -8,7 +8,7 @@ Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 
 ## Install
 
-Requires Rust 1.82 or newer.
+Requires Rust 1.88 or newer.
 
 ```sh
 cargo add tiktok-shop-api

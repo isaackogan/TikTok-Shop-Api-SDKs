@@ -1,6 +1,6 @@
 # TikTok Shop API client for Go
 
-A typed Go client for the **TikTok Shop API** (the TikTok Shop Partner API): 320 operations across 19 API groups, request signing, OAuth token helpers and typed webhooks. The API methods are generated from a machine-readable OpenAPI v3 spec built from TikTok's partner documentation, so they track the docs.
+A typed Go client for the **TikTok Shop API** (the TikTok Shop Partner API): over 300 operations across 19 API groups, request signing, OAuth token helpers and typed webhooks. The API methods are generated from a machine-readable OpenAPI v3 spec built from TikTok's partner documentation, so they track the docs.
 
 Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 

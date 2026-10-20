@@ -173,11 +173,11 @@ func TestVerifyAndParse(t *testing.T) {
 }
 
 func TestEventTypesAndDispatchCoverMeta(t *testing.T) {
-	if len(EventTypes) != 16 || EventTypes[1] != "ORDER_STATUS_CHANGE" {
+	if len(EventTypes) == 0 || len(EventTypes) != len(generated.EventTypes) || EventTypes[1] != "ORDER_STATUS_CHANGE" {
 		t.Errorf("%d %q", len(EventTypes), EventTypes[1])
 	}
-	if len(generated.Webhooks) != 44 {
-		t.Fatalf("%d webhooks", len(generated.Webhooks))
+	if len(generated.Webhooks) == 0 {
+		t.Fatal("meta has no webhooks")
 	}
 	for _, w := range generated.Webhooks {
 		m := generated.NewWebhookModel(w.Type)

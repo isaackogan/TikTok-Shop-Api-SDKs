@@ -96,7 +96,7 @@ class OperationSource:
         doc = self.doc.split("\n\nRaises:")[0].rstrip().replace("\\", "\\\\").replace('"""', '\\"\\"\\"')
         doc = re.sub(r"\n(?=[^\n])", "\n        ", doc)
         kind = "asyncio_detailed" if is_async else "sync_detailed"
-        # Plain `def`/`async def` with a lazy import: importing the SDK must not import 320 modules.
+        # Plain `def`/`async def` with a lazy import: importing the SDK must not import every operation module.
         head = "async def" if is_async else "def"
         aw = "await " if is_async else ""
         run = f"{aw}self._run(_op.{kind}" + (f", {call}" if call else "") + ")"

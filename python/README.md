@@ -1,6 +1,6 @@
 # tiktok-shop-api: TikTok Shop API client for Python
 
-A typed Python client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers 320 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more, with a sync client and an async client.
+A typed Python client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers over 300 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more, with a sync client and an async client.
 
 It signs requests for you, handles OAuth, works with many shops at once, and verifies and types TikTok Shop webhooks.
 

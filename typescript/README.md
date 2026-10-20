@@ -1,6 +1,6 @@
 # tiktok-shop-api: TikTok Shop API client for TypeScript
 
-A typed TypeScript and Node.js client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers 320 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more.
+A typed TypeScript and Node.js client for the **TikTok Shop API** (the TikTok Shop Partner API). It covers over 300 operations across orders, products, fulfillment, logistics, finance, affiliate, customer service and more.
 
 It signs requests for you, handles OAuth, works with many shops at once, and verifies and types TikTok Shop webhooks.
 
