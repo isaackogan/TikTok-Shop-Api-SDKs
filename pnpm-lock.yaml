@@ -36,6 +36,12 @@ importers:
         specifier: 4.20.6
         version: 4.20.6
 
+  php:
+    devDependencies:
+      tsx:
+        specifier: 4.20.6
+        version: 4.20.6
+
   python: {}
 
   rust:

@@ -1,0 +1,13 @@
+{
+  "name": "@tiktok-shop-api/php",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "tsx scripts/generate.ts",
+    "build": "composer dump-autoload && php scripts/lint.php",
+    "test": "vendor/bin/phpunit"
+  },
+  "devDependencies": {
+    "tsx": "4.20.6"
+  }
+}
