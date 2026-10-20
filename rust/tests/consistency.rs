@@ -1,5 +1,5 @@
-//! Cross-language rules from the final review: lesson 34 (a non-integer `code`), R21b (integer enums) and R28 (strict
-//! webhook parsing, nulls included).
+//! Cross-language rules from the final review: lesson 34 (a non-integer `code`, the User-Agent), R21b (integer enums)
+//! and R28 (strict webhook parsing, nulls included).
 mod common;
 
 use common::*;
@@ -35,6 +35,25 @@ async fn a_non_integer_code_on_a_2xx_is_minus_one() {
     let server =
         stub_with(ResponseTemplate::new(200).set_body_raw(r#"{"request_id":"q","data":{}}"#, "application/json")).await;
     client(&server).authorization.get_authorized_shops().await.expect("no code at all is a success");
+}
+
+#[tokio::test]
+async fn the_user_agent_is_tiktok_shop_api_rust_and_the_crate_version_on_api_and_token_calls() {
+    let expected = format!("tiktok-shop-api-rust/{}", env!("CARGO_PKG_VERSION"));
+    let server = stub().await;
+    client(&server).authorization.get_authorized_shops().await.unwrap();
+    let body = r#"{"code":0,"request_id":"q","data":{"access_token":"a","access_token_expire_in":1,"refresh_token":"r","refresh_token_expire_in":2}}"#;
+    let token_server = stub_with(ResponseTemplate::new(200).set_body_raw(body, "application/json")).await;
+    let auth = TikTokShopAuth::new(AuthOptions::new("k", SECRET).base_url(token_server.uri())).unwrap();
+    auth.exchange_code("c").await.unwrap();
+    auth.refresh("r").await.unwrap();
+    let requests =
+        [server.received_requests().await.unwrap(), token_server.received_requests().await.unwrap()].concat();
+    assert_eq!(requests.len(), 3);
+    for req in requests {
+        let ua = req.headers.get("user-agent").map(|v| v.to_str().unwrap().to_string());
+        assert_eq!(ua.as_deref(), Some(expected.as_str()), "{}", req.url.path());
+    }
 }
 
 #[tokio::test]
