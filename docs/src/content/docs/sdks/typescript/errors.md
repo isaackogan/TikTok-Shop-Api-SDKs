@@ -14,6 +14,8 @@ Every failed call throws `TikTokShopError`, with `code`, `message`, `requestId`,
 | A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
 | No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | unset |
 
+The generated models copy scalar fields as sent, without checking their type. A field that should hold a model but isn't a JSON object, or should hold a list of models but isn't a list, is the -1 error, at any depth.
+
 - **Look up TikTok's code.** Each operation's error codes are listed in the [API reference](/openapi/reference/) (`x-tts-error-codes` in the spec).
 - **Keep the `requestId`.** TikTok's support asks for it.
 - **Redirects are errors.** With the default `fetch`, a 3xx reply is an error whose `code` and `httpStatus` are the status, and the client does not follow it.

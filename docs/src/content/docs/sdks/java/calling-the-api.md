@@ -85,4 +85,4 @@ Three operations are GET requests with a body: `getConversationList`, `mapTokope
 
 Requests carry the User-Agent `tiktok-shop-api-java/<version>`. `TikTokShop.requiresShopCipher(method, path)` reports whether an operation takes a `shop_cipher`.
 
-The generated API classes also have `*Async` methods; see [errors](/sdks/java/errors/) for how they report failures.
+The generated API classes also have `*Async` methods. They are enqueued on the OkHttp client's dispatcher, so async calls honour its `maxRequests` and `maxRequestsPerHost` limits (64 and 5 by default; set them on the `Dispatcher` of a client you pass to `httpClient`). See [errors](/sdks/java/errors/) for how they report failures.

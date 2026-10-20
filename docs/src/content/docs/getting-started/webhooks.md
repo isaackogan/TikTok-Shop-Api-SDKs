@@ -28,7 +28,8 @@ The top-level fields are `type`, `tts_notification_id`, `shop_id`, `timestamp` a
 Parsing is strict, and identical in every SDK. The body is a parse error when:
 - it isn't a JSON object;
 - its `type` is missing or isn't an integer (a string, boolean, null or float all fail);
-- it is a known type with a required field missing or null, at any depth. A known type missing a required field is always a parse error.
+- it is a known type with a required field missing or null, at any depth. A known type missing a required field is always a parse error;
+- a field that should hold a model isn't a JSON object, at any depth.
 
 A `type` the SDK doesn't know is not an error. It comes back as an unknown-event value holding the type and the raw JSON, so a webhook TikTok adds later doesn't fail your endpoint before you upgrade.
 
