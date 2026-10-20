@@ -208,7 +208,8 @@ final class SigningClient implements ClientInterface
         if ($ok && !$isObject) {
             return new TikTokShopException("Response is not valid JSON (HTTP $status)", -1, '', $status, $parseError);
         }
-        $code = $isObject && isset($envelope->code) && is_int($envelope->code) ? $envelope->code : null;
+        $hasCode = $isObject && property_exists($envelope, 'code');
+        $code = $hasCode && is_int($envelope->code) ? $envelope->code : null;
         $message = $isObject && isset($envelope->message) && is_string($envelope->message) ? $envelope->message : null;
         $requestId = $isObject && isset($envelope->request_id) && is_string($envelope->request_id) ? $envelope->request_id : '';
 
@@ -221,6 +222,10 @@ final class SigningClient implements ClientInterface
                 $requestId,
                 $status,
             );
+        }
+        if ($hasCode && $code === null) {
+            // Lesson 34: a code that is present but not an integer makes the reply unreadable.
+            return new TikTokShopException("Response has a non-integer code (HTTP $status)", -1, $requestId, $status);
         }
         if ($code !== null && $code !== 0) {
             return new TikTokShopException($message ?? '', $code, $requestId, $status);

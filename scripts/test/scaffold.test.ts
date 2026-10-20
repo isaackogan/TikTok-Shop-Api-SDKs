@@ -34,3 +34,13 @@ describe('monorepo scaffold', () => {
     expect(attrs).toContain('linguist-generated=true');
   });
 });
+
+describe('the PHP mirror ships only the library (M21)', () => {
+  it('php/.gitattributes export-ignores every dev file and folder', () => {
+    const attrs = readFileSync(resolve(root, 'php/.gitattributes'), 'utf8');
+    for (const path of ['/tests', '/scripts', '/build', '/package.json', '/phpunit.xml']) {
+      expect(attrs, path).toMatch(new RegExp(`^${path.replace(/[.]/g, '\\.')}\\s+export-ignore$`, 'm'));
+    }
+    for (const kept of ['/src', '/composer.json', '/README.md', '/LICENSE']) expect(attrs).not.toContain(`${kept} export-ignore`);
+  });
+});

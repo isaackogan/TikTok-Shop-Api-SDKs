@@ -167,7 +167,7 @@ final class AuthTest extends TestCase
         $this->assertNull($tokens->sellerName);
         $this->assertNull($tokens->sellerBaseRegion);
         $this->assertNull($tokens->userType);
-        $this->assertSame([], $tokens->grantedScopes);
+        $this->assertNull($tokens->grantedScopes);
     }
 
     public function testNullOptionalFieldsBecomeNull(): void
@@ -181,7 +181,7 @@ final class AuthTest extends TestCase
         $this->assertNull($tokens->sellerName);
         $this->assertNull($tokens->sellerBaseRegion);
         $this->assertNull($tokens->userType);
-        $this->assertSame([], $tokens->grantedScopes);
+        $this->assertNull($tokens->grantedScopes);
     }
 
     public function testWrongTypedOptionalFieldsAreTreatedAsAbsent(): void
@@ -195,7 +195,7 @@ final class AuthTest extends TestCase
         $this->assertNull($tokens->sellerName);
         $this->assertNull($tokens->sellerBaseRegion);
         $this->assertNull($tokens->userType);
-        $this->assertSame(['a', 'b'], $tokens->grantedScopes);
+        $this->assertNull($tokens->grantedScopes, 'a list with a non-string is ill-typed, so absent');
     }
 
     public function testAnOpenIdSentAsANumberKeepsItsExactDigits(): void

@@ -52,5 +52,27 @@ for (const f of readdirSync(resolve(dest, 'Api')).filter((n) => n.endsWith('Api.
 const ops = (JSON.parse(readFileSync(resolve(pkg, 'build/meta.json'), 'utf8')) as { operations: unknown[] }).operations.length;
 if (patched !== ops) throw new Error(`async rejection fix-up: patched ${patched} handlers, expected ${ops} (one per operation)`);
 
+// Fix-up (R13d): a 2xx body that does not fit its model (ObjectSerializer throws InvalidArgumentException for a list of the
+// wrong shape) becomes a TikTokShopException with code -1, the status and the request ID. The decode runs in one
+// handleResponseWithDataType per Api file and in one async success handler per operation.
+const DECODES = [
+  { call: 'ObjectSerializer::deserialize($content, $dataType, []),', per: 'Api file' },
+  { call: 'ObjectSerializer::deserialize($content, $returnType, []),', per: 'operation' },
+] as const;
+const apiFiles = readdirSync(resolve(dest, 'Api')).filter((n) => n.endsWith('Api.php'));
+for (const { call, per } of DECODES) {
+  let count = 0;
+  for (const f of apiFiles) {
+    const p = resolve(dest, 'Api', f);
+    const src = readFileSync(p, 'utf8');
+    const parts = src.split(call);
+    count += parts.length - 1;
+    const wrapped = `\\TikTokShop\\Api\\TikTokShopException::decoding(static fn () => ${call.slice(0, -1)}, $response),`;
+    if (parts.length > 1) writeFileSync(p, parts.join(wrapped));
+  }
+  const want = per === 'Api file' ? apiFiles.length : ops;
+  if (count !== want) throw new Error(`decode fix-up: found ${count} "${call}", expected ${want} (one per ${per})`);
+}
+
 renderMeta(resolve(pkg, 'build/meta.json'), dest);
 renderEvents(resolve(pkg, 'build/meta.json'), resolve(pkg, 'build/openapi.json'), dest);

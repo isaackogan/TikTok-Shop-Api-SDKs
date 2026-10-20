@@ -1,26 +1,16 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { webhookModels, type SchemaNode, type WebhookModel } from '../../scripts/lib/webhook-models.ts';
 
 interface Webhook {
   type: number;
   schema: string;
   eventType?: string;
 }
-interface Schema {
-  properties?: Record<string, Property>;
-  required?: string[];
-}
-interface Property {
-  $ref?: string;
-  items?: Property;
-  additionalProperties?: Property | boolean;
-}
 
 const NS = 'TikTokShop\\Api\\Generated';
 /** A PHP single-quoted string literal. */
 const q = (s: string) => `'${s.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
-const refName = (p: Property | boolean | undefined): string | undefined =>
-  typeof p === 'object' && p.$ref ? p.$ref.split('/').pop() : undefined;
 
 /** The event class for a webhook schema: `OrderStatusChangeWebhook` becomes `OrderStatusChangeEvent`. */
 export function eventClass(schema: string): string {
@@ -28,38 +18,15 @@ export function eventClass(schema: string): string {
   return `${schema.slice(0, -'Webhook'.length)}Event`;
 }
 
-type Child = [kind: 'object' | 'list' | 'map', model: string];
-interface Model {
-  required: string[];
-  children: Record<string, Child>;
-}
-
 /**
  * Every model reachable from a webhook: its required property names, and which properties hold other such models
  * (directly, as a list, or as a string-keyed map). The generated PHP models do not throw for a missing property, so
- * the parser checks presence on the decoded JSON with this table.
+ * the parser checks presence on the decoded JSON with this table. Built by the shared `webhookModels`, which throws at
+ * generation on a property shape the check cannot follow (a list of lists, an inline object, a combinator other than a
+ * nullable `$ref`).
  */
-export function requiredModels(schemas: Record<string, Schema>, webhooks: Webhook[]): Map<string, Model> {
-  const out = new Map<string, Model>();
-  const walk = (name: string) => {
-    if (out.has(name)) return;
-    const schema = schemas[name];
-    if (!schema) throw new Error(`schema ${name} not found`);
-    const model: Model = { required: [...(schema.required ?? [])], children: {} };
-    out.set(name, model);
-    for (const [prop, p] of Object.entries(schema.properties ?? {})) {
-      const direct = refName(p);
-      const item = refName(p.items);
-      const map = refName(p.additionalProperties);
-      const child: Child | undefined = direct ? ['object', direct] : item ? ['list', item] : map ? ['map', map] : undefined;
-      if (child) {
-        model.children[prop] = child;
-        walk(child[1]);
-      }
-    }
-  };
-  for (const w of webhooks) walk(w.schema);
-  return out;
+export function requiredModels(schemas: Record<string, SchemaNode>, webhooks: Webhook[]): Map<string, WebhookModel> {
+  return new Map(Object.entries(webhookModels(schemas, webhooks)));
 }
 
 /**
@@ -69,7 +36,7 @@ export function requiredModels(schemas: Record<string, Schema>, webhooks: Webhoo
  */
 export function renderEvents(metaPath: string, specPath: string, dir: string): void {
   const meta = JSON.parse(readFileSync(metaPath, 'utf8')) as { webhooks: Webhook[] };
-  const spec = JSON.parse(readFileSync(specPath, 'utf8')) as { components: { schemas: Record<string, Schema> } };
+  const spec = JSON.parse(readFileSync(specPath, 'utf8')) as { components: { schemas: Record<string, SchemaNode> } };
   const webhooks = [...meta.webhooks].sort((a, b) => a.type - b.type);
   const names = new Set<string>();
   for (const w of webhooks) {

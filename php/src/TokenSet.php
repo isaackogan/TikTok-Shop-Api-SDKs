@@ -21,7 +21,7 @@ final class TokenSet implements \JsonSerializable
     private static ?\WeakMap $secrets = null;
 
     /**
-     * @param list<string> $grantedScopes
+     * @param list<string>|null $grantedScopes Null when TikTok sent none.
      */
     public function __construct(
         string $accessToken,
@@ -32,7 +32,7 @@ final class TokenSet implements \JsonSerializable
         public readonly ?string $sellerName = null,
         public readonly ?string $sellerBaseRegion = null,
         public readonly ?int $userType = null,
-        public readonly array $grantedScopes = [],
+        public readonly ?array $grantedScopes = null,
     ) {
         if ($accessToken === '' || $refreshToken === '') {
             throw new \InvalidArgumentException('accessToken and refreshToken must not be empty');
@@ -54,7 +54,7 @@ final class TokenSet implements \JsonSerializable
     /**
      * Every field with its real values, tokens included, under the camelCase names of the constructor.
      *
-     * @return array{accessToken: string, accessTokenExpireIn: int, refreshToken: string, refreshTokenExpireIn: int, openId: ?string, sellerName: ?string, sellerBaseRegion: ?string, userType: ?int, grantedScopes: list<string>}
+     * @return array{accessToken: string, accessTokenExpireIn: int, refreshToken: string, refreshTokenExpireIn: int, openId: ?string, sellerName: ?string, sellerBaseRegion: ?string, userType: ?int, grantedScopes: ?list<string>}
      */
     public function toArray(): array
     {
@@ -86,7 +86,7 @@ final class TokenSet implements \JsonSerializable
         if (!is_string($access) || !is_string($refresh) || !is_int($accessExp) || !is_int($refreshExp)) {
             throw new \InvalidArgumentException('accessToken and refreshToken must be strings, and both expiries integers');
         }
-        $scopes = $data['grantedScopes'] ?? [];
+        $scopes = $data['grantedScopes'] ?? null;
 
         return new self(
             $access,
@@ -97,7 +97,7 @@ final class TokenSet implements \JsonSerializable
             is_string($data['sellerName'] ?? null) ? $data['sellerName'] : null,
             is_string($data['sellerBaseRegion'] ?? null) ? $data['sellerBaseRegion'] : null,
             is_int($data['userType'] ?? null) ? $data['userType'] : null,
-            is_array($scopes) ? array_values(array_filter($scopes, 'is_string')) : [],
+            is_array($scopes) ? array_values(array_filter($scopes, 'is_string')) : null,
         );
     }
 

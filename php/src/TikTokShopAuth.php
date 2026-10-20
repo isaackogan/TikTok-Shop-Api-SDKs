@@ -146,7 +146,7 @@ final class TikTokShopAuth
             . '&app_secret=' . rawurlencode($this->credentials->appSecret())
             . '&' . $name . '=' . rawurlencode($value)
             . '&grant_type=' . $grantType;
-        $request = new Request('GET', "{$this->baseUrl}/api/v2/token/$endpoint?$query");
+        $request = new Request('GET', "{$this->baseUrl}/api/v2/token/$endpoint?$query", ['User-Agent' => TikTokShop::userAgent()]);
         try {
             // Per request, so it holds on a client you supplied: a redirect would carry the secret and the code on.
             $response = $this->httpClient->send($request, ['allow_redirects' => false, 'http_errors' => false]);
@@ -184,7 +184,12 @@ final class TikTokShopAuth
         }
         $requestId = isset($env->request_id) && is_string($env->request_id) ? $env->request_id : '';
         $message = isset($env->message) && is_string($env->message) ? $env->message : '';
-        $code = isset($env->code) && is_int($env->code) ? $env->code : null;
+        $hasCode = property_exists($env, 'code');
+        $code = $hasCode && is_int($env->code) ? $env->code : null;
+        if ($ok && $hasCode && $code === null) {
+            // Lesson 34: a code that is present but not an integer makes the reply unreadable.
+            throw new TikTokShopException("token response has a non-integer code (HTTP $status)", -1, $requestId, $status);
+        }
 
         if (!$ok || ($code !== null && $code !== 0)) {
             throw new TikTokShopException(
@@ -227,7 +232,8 @@ final class TikTokShopAuth
             isset($data->seller_name) && is_string($data->seller_name) ? $data->seller_name : null,
             isset($data->seller_base_region) && is_string($data->seller_base_region) ? $data->seller_base_region : null,
             isset($data->user_type) && is_int($data->user_type) ? $data->user_type : null,
-            is_array($scopes) ? array_values(array_filter($scopes, 'is_string')) : [],
+            // Lesson 34: absent, null or ill-typed (not a list of strings) granted_scopes is null, never [].
+            is_array($scopes) && array_is_list($scopes) && count(array_filter($scopes, 'is_string')) === count($scopes) ? $scopes : null,
         );
     }
 

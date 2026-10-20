@@ -33,6 +33,14 @@ final class TikTokShop
     /** Seconds, used when no `$timeout` is given. */
     public const DEFAULT_TIMEOUT = 30.0;
 
+    /**
+     * The version {@see self::userAgent()} reports when Composer cannot tell (a checkout rather than an install).
+     * `scripts/bump-version.ts` keeps it in step with the release tag.
+     */
+    private const VERSION = '0.1.0';
+
+    private const PACKAGE = 'isaackogan/tiktok-shop-api';
+
     public readonly Generated\Api\AffiliateCreatorApi $affiliateCreator;
     public readonly Generated\Api\AffiliatePartnerApi $affiliatePartner;
     public readonly Generated\Api\AffiliateSellerApi $affiliateSeller;
@@ -89,7 +97,7 @@ final class TikTokShop
         ]);
 
         $signing = new SigningClient($this->httpClient, $this->credentials);
-        $config = (new Generated\Configuration())->setHost($this->baseUrl);
+        $config = (new Generated\Configuration())->setHost($this->baseUrl)->setUserAgent(self::userAgent());
         $this->affiliateCreator = new Generated\Api\AffiliateCreatorApi($signing, $config);
         $this->affiliatePartner = new Generated\Api\AffiliatePartnerApi($signing, $config);
         $this->affiliateSeller = new Generated\Api\AffiliateSellerApi($signing, $config);
@@ -109,6 +117,24 @@ final class TikTokShop
         $this->seller = new Generated\Api\SellerApi($signing, $config);
         $this->supplyChain = new Generated\Api\SupplyChainApi($signing, $config);
         $this->tools = new Generated\Api\ToolsApi($signing, $config);
+    }
+
+    /**
+     * The User-Agent of every API and token call: `tiktok-shop-api-php/<version>`. The version is the installed package's,
+     * as Composer records it, so a release reports its own tag (the Packagist mirror is pushed before the release commit
+     * stamps {@see self::VERSION}).
+     */
+    public static function userAgent(): string
+    {
+        $version = self::VERSION;
+        if (class_exists(\Composer\InstalledVersions::class) && \Composer\InstalledVersions::isInstalled(self::PACKAGE)) {
+            $pretty = \Composer\InstalledVersions::getPrettyVersion(self::PACKAGE);
+            if (is_string($pretty) && preg_match('/^v?(\d+\.\d+\.\d+)$/', $pretty, $m) === 1) {
+                $version = $m[1];
+            }
+        }
+
+        return 'tiktok-shop-api-php/' . $version;
     }
 
     /**

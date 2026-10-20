@@ -9,9 +9,9 @@ Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 - **Request signing** (HMAC-SHA256), `app_key`, `timestamp`, `shop_cipher` and the `x-tts-access-token` header added for you.
 - **OAuth helper** for the authorization URL, code exchange and token refresh.
 - **Webhooks**: verify the signature, then get a typed event class for any of the webhook types.
-- **PHP 8.1+** with `ext-curl` and `ext-json`, on Guzzle 7.
+- **PHP 8.2+** with `ext-curl`, `ext-json` and `ext-mbstring`, on Guzzle 7.
 
-> Request signing follows TikTok's documentation and has not been verified against the live API.
+> Request signing follows TikTok's documentation and has not been verified against the live API. If TikTok rejects a signature, please open an issue at https://github.com/isaackogan/TikTok-Shop-Api-SDKs/issues.
 
 ## Install
 
@@ -19,7 +19,7 @@ Unofficial. Not affiliated with or endorsed by TikTok or ByteDance.
 composer require isaackogan/tiktok-shop-api
 ```
 
-Needs PHP 8.1 or newer, with `ext-curl`, `ext-json` and `ext-mbstring`.
+Needs PHP 8.2 or newer, with `ext-curl`, `ext-json` and `ext-mbstring`.
 
 The package is developed in the [TikTok-Shop-Api-SDKs](https://github.com/isaackogan/TikTok-Shop-Api-SDKs) monorepo and mirrored to [isaackogan/TikTok-Shop-Api-PHP](https://github.com/isaackogan/TikTok-Shop-Api-PHP), which is the repository Packagist reads. Please open issues in the main repository.
 
@@ -126,7 +126,16 @@ try {
 }
 ```
 
-Every failure is a `TikTokShopException`: a non-zero `code` in a 200 reply, a non-2xx status, a reply that is not JSON, and network errors and timeouts (code -1, no HTTP status). Messages and previous exceptions never contain the request URL, so a logged exception does not leak the signature.
+Every failure is a `TikTokShopException`, with `getTikTokCode()`, `getMessage()`, `getRequestId()`, `getHttpStatus()` and the original exception as `getPrevious()`:
+
+| What happened | `getTikTokCode()` | `getHttpStatus()` |
+|---|---|---|
+| TikTok's reply has a non-zero `code`, even on HTTP 200 | TikTok's code | the status |
+| A non-2xx reply | TikTok's non-zero code if the body has one, else the HTTP status | the status |
+| A 2xx reply that can't be read: not a JSON object, a `code` that isn't an integer, a body that doesn't fit its model, or a token reply without `data` | -1 | the status |
+| No HTTP response at all: connection refused, DNS, TLS, or a timeout | -1 | `null` |
+
+Messages and previous exceptions never contain the request URL, so a logged exception does not leak the signature.
 
 ## Webhooks
 
@@ -164,7 +173,7 @@ http_response_code(200);
 
 - `Webhooks::parse()` returns one event class per webhook type (they live in `TikTokShop\Api\Generated\Event`, rendered from the spec), each with a typed `getPayload()`, or an `UnknownWebhookEvent`. Narrow with `instanceof`. All of them extend `TikTokShop\Api\WebhookEvent`, which has `getType()` and `getRaw()` (the decoded body, unknown fields included).
 - Verify against the **raw body** as received: re-encoding the JSON changes the signature.
-- A body whose `type` is missing or not an integer, or whose payload lacks a property its model requires, throws `InvalidArgumentException`. An integer `type` this SDK does not know becomes `UnknownWebhookEvent`. Unknown fields are ignored.
+- Parsing is strict. A body that is not a JSON object, a `type` that is missing or not an integer, or a known type with a required property missing or null throws `InvalidArgumentException`: a known type missing a required field is a parse error. An integer `type` this SDK does not know becomes `UnknownWebhookEvent`. Unknown fields are ignored.
 - 64-bit IDs keep their exact digits (a `shop_id` sent as a JSON number arrives as the string `"7494049642642441621"`).
 - `Webhooks::EVENT_TYPES` maps a type to its name, for example `1` to `ORDER_STATUS_CHANGE`.
 
@@ -174,13 +183,13 @@ The client's properties are the API groups: `affiliateCreator`, `affiliatePartne
 
 ## HTTP client
 
-By default the SDK builds a Guzzle client that never follows redirects, with a 30 second timeout (`timeout:`, 0 for none) and Guzzle's default proxy behaviour. Pass your own with `httpClient:`; it is used as is, except that the OAuth token calls never follow redirects even on your client, because their URL holds your app secret.
+By default the SDK builds a Guzzle client that never follows redirects, with a 30 second timeout (`timeout:`, 0 for none) and Guzzle's default proxy behaviour. `baseUrl:` (on the client and the OAuth helper) must be an origin such as `https://host:8443`, with no path prefix: signing and shop-cipher matching use the request path. Requests carry the User-Agent `tiktok-shop-api-php/<version>`. Pass your own with `httpClient:`; it is used as is, except that the OAuth token calls never follow redirects even on your client, because their URL holds your app secret.
 
 ## Notes
 
 - Generated from [the spec](https://github.com/isaackogan/TikTok-Shop-Api-SDKs/blob/main/.openapi/tiktok-shop.openapi.yaml) in the [TikTok-Shop-Api-SDKs](https://github.com/isaackogan/TikTok-Shop-Api-SDKs) repository, which also has SDKs for TypeScript, Python, Go, Java, Kotlin, Rust and C#.
 - Three operations are GETs with a body (`getConversationList`, `mapTokopediaToTikTokShopProductIDs`, `getShippingTemplateAvailability`). The SDK sends the body and signs it.
-- On PHP 8.2+ the secrets passed to the OAuth helper are also hidden from stack traces (`#[\SensitiveParameter]`).
+- The secrets passed to the OAuth helper are also hidden from stack traces (`#[\SensitiveParameter]`).
 
 ## License
 

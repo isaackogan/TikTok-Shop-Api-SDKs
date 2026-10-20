@@ -486,7 +486,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -757,7 +757,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1021,7 +1021,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1307,7 +1307,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1576,7 +1576,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1851,7 +1851,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2120,7 +2120,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2395,7 +2395,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2670,7 +2670,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -2945,7 +2945,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -3220,7 +3220,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -3495,7 +3495,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -3770,7 +3770,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4045,7 +4045,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4320,7 +4320,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4595,7 +4595,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -4874,7 +4874,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -5169,7 +5169,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -5460,7 +5460,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -5755,7 +5755,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -6113,7 +6113,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -6451,7 +6451,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -6768,7 +6768,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -7074,7 +7074,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -7380,7 +7380,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -7681,7 +7681,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -7975,7 +7975,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -8235,7 +8235,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -8511,7 +8511,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -8787,7 +8787,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -9065,7 +9065,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -9364,7 +9364,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -9673,7 +9673,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -9958,7 +9958,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -10265,7 +10265,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -10552,7 +10552,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -10829,7 +10829,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -11102,7 +11102,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -11386,7 +11386,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -11732,7 +11732,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -12013,7 +12013,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -12334,7 +12334,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -12614,7 +12614,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -12887,7 +12887,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -13176,7 +13176,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -13465,7 +13465,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -13754,7 +13754,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -14039,7 +14039,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -14318,7 +14318,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -14609,7 +14609,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -14884,7 +14884,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -15159,7 +15159,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -15434,7 +15434,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -15713,7 +15713,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -16006,7 +16006,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -16317,7 +16317,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -16628,7 +16628,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -16947,7 +16947,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -17280,7 +17280,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -17595,7 +17595,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -17913,7 +17913,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -18204,7 +18204,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -18483,7 +18483,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -18774,7 +18774,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -19053,7 +19053,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -19348,7 +19348,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -19643,7 +19643,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -19934,7 +19934,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -20213,7 +20213,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -20504,7 +20504,7 @@ class ProductsApi
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
+                        \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $returnType, []), $response),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -20685,7 +20685,7 @@ class ProductsApi
         }
 
         return [
-            ObjectSerializer::deserialize($content, $dataType, []),
+            \TikTokShop\Api\TikTokShopException::decoding(static fn () => ObjectSerializer::deserialize($content, $dataType, []), $response),
             $response->getStatusCode(),
             $response->getHeaders()
         ];
