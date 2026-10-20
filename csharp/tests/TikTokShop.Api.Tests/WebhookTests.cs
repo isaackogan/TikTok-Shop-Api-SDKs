@@ -73,7 +73,7 @@ public class WebhookTests
         if (c.GetProperty("known").GetBoolean())
         {
             var schema = c.GetProperty("schema").GetString()!;
-            Assert.NotIsType<UnknownWebhookEvent>(e);
+            Assert.IsNotType<UnknownWebhookEvent>(e);
             Assert.Equal(schema, e.GetType().GetProperty("Payload")!.PropertyType.Name);
         }
         else
