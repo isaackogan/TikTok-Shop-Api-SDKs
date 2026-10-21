@@ -49,7 +49,12 @@ class ReadmeTest {
         }
         assertFalse(readme.toLowerCase().contains("official client"), "never claim to be official");
         assertFalse(readme.toLowerCase().replace("unofficial", "").contains("official"), "the only 'official' is inside 'Unofficial'");
-        assertFalse(readme.contains("!["), "no logo or image");
+        // No logo: the only images allowed are img.shields.io badges.
+        int images = readme.split("!\\[", -1).length - 1;
+        Matcher badge = Pattern.compile("!\\[[^\\]\\n]*\\]\\(https://img\\.shields\\.io/").matcher(readme);
+        int badges = 0;
+        while (badge.find()) badges++;
+        assertEquals(images, badges, "no logo: the only images allowed are img.shields.io badges");
         assertTrue(Files.exists(Paths.get("LICENSE")));
     }
 

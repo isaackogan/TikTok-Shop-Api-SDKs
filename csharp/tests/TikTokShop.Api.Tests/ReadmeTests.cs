@@ -84,7 +84,10 @@ public class ReadmeTests
     [Fact]
     public void ThePackagePageHasNoLogoAndNeverSaysOfficial()
     {
-        Assert.DoesNotContain("![", Readme);
+        // No logo: the only images allowed are img.shields.io badges.
+        var images = Regex.Matches(Readme, @"!\[").Count;
+        var badges = Regex.Matches(Readme, @"!\[[^\]\n]*\]\(https://img\.shields\.io/").Count;
+        Assert.True(images == badges, "No logo: the only images allowed are img.shields.io badges.");
         Assert.DoesNotContain("<img", Readme, StringComparison.OrdinalIgnoreCase);
         // "Unofficial" is the only place the word appears.
         Assert.Empty(Regex.Matches(Readme, @"(?<!Un)official", RegexOptions.IgnoreCase));

@@ -39,7 +39,10 @@ class ReadmeTest {
         )) assertTrue(readme.contains(must), "README lacks: $must")
         assertFalse(readme.lowercase().contains("official client"), "never claim to be official")
         assertFalse(readme.lowercase().replace("unofficial", "").contains("official"), "the only 'official' is inside 'Unofficial'")
-        assertFalse(readme.contains("!["), "no logo or image")
+        // No logo: the only images allowed are img.shields.io badges.
+        val images = Regex("""!\[""").findAll(readme).count()
+        val badges = Regex("""!\[[^\]\n]*\]\(https://img\.shields\.io/""").findAll(readme).count()
+        assertEquals(images, badges, "no logo: the only images allowed are img.shields.io badges")
         assertTrue(Files.exists(Paths.get("LICENSE")))
         assertEquals(read("../LICENSE"), read("LICENSE"), "LICENSE is the repo's")
     }
