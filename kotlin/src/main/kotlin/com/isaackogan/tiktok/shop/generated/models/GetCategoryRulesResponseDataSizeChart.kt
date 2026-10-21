@@ -33,7 +33,8 @@ import com.google.gson.annotations.SerializedName
  * @param isSupported A flag to indicate whether size charts are supported.  **Note**: If size charts are not supported, even if you provide a size chart when creating or editing a product, the size chart will not be saved.
  * @param isRequired A flag to indicate whether a size chart is required.
  * @param measurementAndOptions Measurement rules grouped by measurement basis.
- * @param sizeTypes Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category.
+ * @param sizeTypes Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category.
+ * @param sizeSystems Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned.
  */
 
 
@@ -51,9 +52,13 @@ data class GetCategoryRulesResponseDataSizeChart (
     @SerializedName("measurement_and_options")
     val measurementAndOptions: kotlin.collections.List<GetCategoryRulesResponseDataSizeChartMeasurementAndOption>? = null,
 
-    /* Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category. */
+    /* Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category. */
     @SerializedName("size_types")
-    val sizeTypes: kotlin.collections.List<kotlin.String>? = null
+    val sizeTypes: kotlin.collections.List<kotlin.String>? = null,
+
+    /* Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned. */
+    @SerializedName("size_systems")
+    val sizeSystems: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 

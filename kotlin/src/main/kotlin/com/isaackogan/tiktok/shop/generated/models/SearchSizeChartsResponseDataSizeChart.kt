@@ -37,6 +37,7 @@ import com.google.gson.annotations.SerializedName
  * @param relatedCategoryIds Leaf category IDs applicable to this size chart.
  * @param sizeChartDatas Localized structured size chart data. Each item contains a locale and the structured data for that locale.
  * @param sizeChartMode Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
+ * @param targetRegions Target country or market codes recorded for this size chart, used for localized content and images. The list may include historical targets. Omitted when no target regions are recorded; omission does not mean worldwide support. This field does not determine product publishing eligibility.
  */
 
 
@@ -64,7 +65,11 @@ data class SearchSizeChartsResponseDataSizeChart (
 
     /* Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved. */
     @SerializedName("size_chart_mode")
-    val sizeChartMode: kotlin.String? = null
+    val sizeChartMode: kotlin.String? = null,
+
+    /* Target country or market codes recorded for this size chart, used for localized content and images. The list may include historical targets. Omitted when no target regions are recorded; omission does not mean worldwide support. This field does not determine product publishing eligibility. */
+    @SerializedName("target_regions")
+    val targetRegions: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 

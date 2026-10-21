@@ -35,15 +35,20 @@ class GetCategoryRulesResponseDataSizeChart:
                 rules grouped by measurement basis.
             size_types (list[str] | Unset): Available size types configured for this category. Use values returned in this
                 list for size_chart_data.size_types when creating or editing a size chart. Possible values include:
-                size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors:
-                Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall;
-                size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category.
+                size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus;
+                size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size
+                types do not apply to the category.
+            size_systems (list[str] | Unset): Size system IDs supported by the current shop, determined by the shop region
+                and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or
+                editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This
+                field is omitted when size charts are unsupported or no size systems are returned.
      """
 
     is_supported: bool | Unset = UNSET
     is_required: bool | Unset = UNSET
     measurement_and_options: list[GetCategoryRulesResponseDataSizeChartMeasurementAndOption] | Unset = UNSET
     size_types: list[str] | Unset = UNSET
+    size_systems: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -71,6 +76,12 @@ class GetCategoryRulesResponseDataSizeChart:
 
 
 
+        size_systems: list[str] | Unset = UNSET
+        if not isinstance(self.size_systems, Unset):
+            size_systems = self.size_systems
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -84,6 +95,8 @@ class GetCategoryRulesResponseDataSizeChart:
             field_dict["measurement_and_options"] = measurement_and_options
         if size_types is not UNSET:
             field_dict["size_types"] = size_types
+        if size_systems is not UNSET:
+            field_dict["size_systems"] = size_systems
 
         return field_dict
 
@@ -112,11 +125,15 @@ class GetCategoryRulesResponseDataSizeChart:
         size_types = cast(list[str], d.pop("size_types", UNSET))
 
 
+        size_systems = cast(list[str], d.pop("size_systems", UNSET))
+
+
         get_category_rules_response_data_size_chart = cls(
             is_supported=is_supported,
             is_required=is_required,
             measurement_and_options=measurement_and_options,
             size_types=size_types,
+            size_systems=size_systems,
         )
 
 

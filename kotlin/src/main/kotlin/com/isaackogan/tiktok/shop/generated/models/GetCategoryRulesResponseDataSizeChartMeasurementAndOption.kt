@@ -30,12 +30,17 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param sizeSystems Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned.
  * @param measurementType Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements.
  * @param options Online measurement options for this group.
  */
 
 
 data class GetCategoryRulesResponseDataSizeChartMeasurementAndOption (
+
+    /* Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned. */
+    @SerializedName("size_systems")
+    val sizeSystems: kotlin.collections.List<kotlin.String>? = null,
 
     /* Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements; PRODUCT_MEASUREMENTS: finished-product or garment measurements. */
     @SerializedName("measurement_type")

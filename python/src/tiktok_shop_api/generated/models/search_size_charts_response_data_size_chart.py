@@ -36,6 +36,10 @@ class SearchSizeChartsResponseDataSizeChart:
             size_chart_mode (str | Unset): Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size
                 chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by
                 a single product. If omitted, the existing search behavior is preserved.
+            target_regions (list[str] | Unset): Target country or market codes recorded for this size chart, used for
+                localized content and images. The list may include historical targets. Omitted when no target regions are
+                recorded; omission does not mean worldwide support. This field does not determine product publishing
+                eligibility.
      """
 
     template_id: str | Unset = UNSET
@@ -44,6 +48,7 @@ class SearchSizeChartsResponseDataSizeChart:
     related_category_ids: list[str] | Unset = UNSET
     size_chart_datas: list[SearchSizeChartsResponseDataSizeChartSizeChartData] | Unset = UNSET
     size_chart_mode: str | Unset = UNSET
+    target_regions: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -83,6 +88,12 @@ class SearchSizeChartsResponseDataSizeChart:
 
         size_chart_mode = self.size_chart_mode
 
+        target_regions: list[str] | Unset = UNSET
+        if not isinstance(self.target_regions, Unset):
+            target_regions = self.target_regions
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -100,6 +111,8 @@ class SearchSizeChartsResponseDataSizeChart:
             field_dict["size_chart_datas"] = size_chart_datas
         if size_chart_mode is not UNSET:
             field_dict["size_chart_mode"] = size_chart_mode
+        if target_regions is not UNSET:
+            field_dict["target_regions"] = target_regions
 
         return field_dict
 
@@ -143,6 +156,9 @@ class SearchSizeChartsResponseDataSizeChart:
 
         size_chart_mode = d.pop("size_chart_mode", UNSET)
 
+        target_regions = cast(list[str], d.pop("target_regions", UNSET))
+
+
         search_size_charts_response_data_size_chart = cls(
             template_id=template_id,
             template_name=template_name,
@@ -150,6 +166,7 @@ class SearchSizeChartsResponseDataSizeChart:
             related_category_ids=related_category_ids,
             size_chart_datas=size_chart_datas,
             size_chart_mode=size_chart_mode,
+            target_regions=target_regions,
         )
 
 

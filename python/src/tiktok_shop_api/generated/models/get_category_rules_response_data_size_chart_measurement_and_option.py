@@ -26,6 +26,10 @@ T = TypeVar("T", bound="GetCategoryRulesResponseDataSizeChartMeasurementAndOptio
 class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
     """ 
         Attributes:
+            size_systems (list[str] | Unset): Size system IDs supported by the current shop, determined by the shop region
+                and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or
+                editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This
+                field is omitted when size charts are unsupported or no size systems are returned.
             measurement_type (str | Unset): Possible values: GENERIC_MEASUREMENTS: generic measurements for categories that
                 do not distinguish body and product measurements; BODY_MEASUREMENTS: shopper body measurements;
                 PRODUCT_MEASUREMENTS: finished-product or garment measurements.
@@ -33,6 +37,7 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
                 options for this group.
      """
 
+    size_systems: list[str] | Unset = UNSET
     measurement_type: str | Unset = UNSET
     options: list[GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -43,6 +48,12 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
 
     def to_dict(self) -> dict[str, Any]:
         from ..models.get_category_rules_response_data_size_chart_measurement_and_option_option import GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption # noqa: PLC0415
+        size_systems: list[str] | Unset = UNSET
+        if not isinstance(self.size_systems, Unset):
+            size_systems = self.size_systems
+
+
+
         measurement_type = self.measurement_type
 
         options: list[dict[str, Any]] | Unset = UNSET
@@ -59,6 +70,8 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
         field_dict.update(self.additional_properties)
         field_dict.update({
         })
+        if size_systems is not UNSET:
+            field_dict["size_systems"] = size_systems
         if measurement_type is not UNSET:
             field_dict["measurement_type"] = measurement_type
         if options is not UNSET:
@@ -72,6 +85,9 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.get_category_rules_response_data_size_chart_measurement_and_option_option import GetCategoryRulesResponseDataSizeChartMeasurementAndOptionOption # noqa: PLC0415
         d = dict(src_dict)
+        size_systems = cast(list[str], d.pop("size_systems", UNSET))
+
+
         measurement_type = d.pop("measurement_type", UNSET)
 
         _options = d.pop("options", UNSET)
@@ -87,6 +103,7 @@ class GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
 
 
         get_category_rules_response_data_size_chart_measurement_and_option = cls(
+            size_systems=size_systems,
             measurement_type=measurement_type,
             options=options,
         )

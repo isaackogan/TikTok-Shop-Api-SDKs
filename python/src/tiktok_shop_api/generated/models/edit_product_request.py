@@ -43,22 +43,6 @@ T = TypeVar("T", bound="EditProductRequest")
 class EditProductRequest:
     """ 
         Attributes:
-            description (str): The product description in HTML format.
-
-                **Note**:
-                - The content must conform to the [HTML syntax](https://html.spec.whatwg.org/). All HTML tags are accepted but
-                to optimize display on the TikTok Shop product detail page, the system will automatically convert certain tags
-                into alternative formats, such as rendering `<table>` tags as images.
-                - Max length: 10,000 characters.
-                - Image guidelines: You must use [TikTok Shop image URLs](6509df95defece02be598a22). Max 30 `<img>` tags, each
-                under 4000px with `src`, `width`, and `height` attributes.
-
-                **Recommendations**:
-                - If you are syncing a pre-existing description from another platform, include the full HTML source description
-                here.
-                - Provide a detailed description, ideally over 300 characters.
-                - Include 3-5 key selling points, each under 250 characters, with supporting images.
-                - Use 1600x1600 px for the image dimensions.
             category_id (str): The ID of the category of this product. It must be a leaf category that corresponds to the
                 category tree type specified in the `category_version` property. Use the [Get Categories
                 API](https://partner.tiktokshop.com/docv2/page/6509c89d0fcef602bf1acd9b) to obtain the available categories.
@@ -105,6 +89,22 @@ class EditProductRequest:
                 `FREEZE` on any listing platform.
                 - When saving a post-live draft with `save_mode=AS_DRAFT`, `inventory` and `delivery_option_ids` are not
                 supported and will not be saved.
+            description (str | Unset): The product description in HTML format.
+
+                **Note**:
+                - The content must conform to the [HTML syntax](https://html.spec.whatwg.org/). All HTML tags are accepted but
+                to optimize display on the TikTok Shop product detail page, the system will automatically convert certain tags
+                into alternative formats, such as rendering `<table>` tags as images.
+                - Max length: 10,000 characters.
+                - Image guidelines: You must use [TikTok Shop image URLs](6509df95defece02be598a22). Max 30 `<img>` tags, each
+                under 4000px with `src`, `width`, and `height` attributes.
+
+                **Recommendations**:
+                - If you are syncing a pre-existing description from another platform, include the full HTML source description
+                here.
+                - Provide a detailed description, ideally over 300 characters.
+                - Include 3-5 key selling points, each under 250 characters, with supporting images.
+                - Use 1600x1600 px for the image dimensions.
             brand_id (str | Unset): The ID of the brand of this product.
                 Use the [Get Brands API](https://partner.tiktokshop.com/docv2/page/6503075656e2bb0289dd5d01) to get the list of
                 available brands for a shop.
@@ -279,12 +279,12 @@ class EditProductRequest:
             is_blind_box (bool | Unset): Whether the product is a blind box of lucky bag. For example: PopMart
      """
 
-    description: str
     category_id: str
     main_images: list[MainImage]
     skus: list[EditProductRequestSku]
     title: str
     save_mode: EditProductRequestSaveMode | Unset = UNSET
+    description: str | Unset = UNSET
     brand_id: str | Unset = UNSET
     is_cod_allowed: bool | Unset = UNSET
     certifications: list[Certification] | Unset = UNSET
@@ -336,8 +336,6 @@ class EditProductRequest:
         from ..models.scheduled_sale import ScheduledSale # noqa: PLC0415
         from ..models.size_chart import SizeChart # noqa: PLC0415
         from ..models.video import Video # noqa: PLC0415
-        description = self.description
-
         category_id = self.category_id
 
         main_images = []
@@ -360,6 +358,8 @@ class EditProductRequest:
         if not isinstance(self.save_mode, Unset):
             save_mode = self.save_mode.value
 
+
+        description = self.description
 
         brand_id = self.brand_id
 
@@ -505,7 +505,6 @@ class EditProductRequest:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({
-            "description": description,
             "category_id": category_id,
             "main_images": main_images,
             "skus": skus,
@@ -513,6 +512,8 @@ class EditProductRequest:
         })
         if save_mode is not UNSET:
             field_dict["save_mode"] = save_mode
+        if description is not UNSET:
+            field_dict["description"] = description
         if brand_id is not UNSET:
             field_dict["brand_id"] = brand_id
         if is_cod_allowed is not UNSET:
@@ -596,8 +597,6 @@ class EditProductRequest:
         from ..models.size_chart import SizeChart # noqa: PLC0415
         from ..models.video import Video # noqa: PLC0415
         d = dict(src_dict)
-        description = d.pop("description")
-
         category_id = d.pop("category_id")
 
         main_images = []
@@ -631,6 +630,8 @@ class EditProductRequest:
 
 
 
+
+        description = d.pop("description", UNSET)
 
         brand_id = d.pop("brand_id", UNSET)
 
@@ -830,12 +831,12 @@ class EditProductRequest:
         is_blind_box = d.pop("is_blind_box", UNSET)
 
         edit_product_request = cls(
-            description=description,
             category_id=category_id,
             main_images=main_images,
             skus=skus,
             title=title,
             save_mode=save_mode,
+            description=description,
             brand_id=brand_id,
             is_cod_allowed=is_cod_allowed,
             certifications=certifications,
