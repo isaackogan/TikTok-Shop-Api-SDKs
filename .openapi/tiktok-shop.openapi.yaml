@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.10.19
+  version: 2026.10.21
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -17767,7 +17767,11 @@ paths:
                     is_supported: true
                     is_required: true
                     measurement_and_options:
-                      - measurement_type: BODY_MEASUREMENTS
+                      - size_systems:
+                          - size_chart_size_system_us
+                          - size_chart_size_system_uk
+                          - size_chart_size_system_eu
+                        measurement_type: BODY_MEASUREMENTS
                         options:
                           - name: Bust
                             id: size_chart_option_bust
@@ -17782,6 +17786,10 @@ paths:
                     size_types:
                       - size_chart_size_type_regular
                       - size_chart_size_type_petite
+                    size_systems:
+                      - size_chart_size_system_us
+                      - size_chart_size_system_uk
+                      - size_chart_size_system_eu
                   cod:
                     is_supported: true
                   package_dimension:
@@ -21982,6 +21990,9 @@ paths:
                             size_types:
                               - size_chart_size_type_regular
                       size_chart_mode: REUSABLE_TEMPLATE
+                      target_regions:
+                        - US
+                        - GB
                   next_page_token: cGFnZV9udW1iZXI9Mg==
                   total_count: 100
                 message: Success
@@ -32536,7 +32547,6 @@ components:
             true — LIVE_QUICK products. Only seller with the required permissions can creat LIVE_QUICK products.
             Default: false
       required:
-        - description
         - category_id
         - main_images
         - skus
@@ -35786,7 +35796,6 @@ components:
           type: boolean
           description: "Whether the product is a blind box of lucky bag. For example: PopMart"
       required:
-        - description
         - category_id
         - main_images
         - skus
@@ -38528,7 +38537,6 @@ components:
           type: boolean
           description: "Whether the product is a blind box of lucky bag. For example: PopMart"
       required:
-        - description
         - category_id
         - main_images
         - skus
@@ -42100,10 +42108,20 @@ components:
           type: array
           items:
             type: string
-          description: "Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_common_size_type: Common; size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category."
+          description: "Available size types configured for this category. Use values returned in this list for size_chart_data.size_types when creating or editing a size chart. Possible values include: size_chart_size_type_regular: Regular; size_chart_size_type_juniors: Juniors; size_chart_size_type_plus: Plus; size_chart_size_type_big&tall: Big & Tall; size_chart_size_type_petite: Petite. This field is omitted when size types do not apply to the category."
+        size_systems:
+          type: array
+          items:
+            type: string
+          description: Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned.
     GetCategoryRulesResponseDataSizeChartMeasurementAndOption:
       type: object
       properties:
+        size_systems:
+          type: array
+          items:
+            type: string
+          description: Size system IDs supported by the current shop, determined by the shop region and seller type. Use these IDs for size-system columns in size_chart_data.table.headers[].id when creating or editing a size chart. The available list is configuration-dependent and may change; do not hardcode it. This field is omitted when size charts are unsupported or no size systems are returned.
         measurement_type:
           type: string
           enum:
@@ -75701,6 +75719,11 @@ components:
             - A size chart template that can be reused across multiple products.
             - A size chart created for and used by a single product. If omitted, the existing search behavior is preserved.
           description: "Filter size charts by usage mode. Possible values: REUSABLE_TEMPLATE: A size chart template that can be reused across multiple products. PRODUCT_SCOPED: A size chart created for and used by a single product. If omitted, the existing search behavior is preserved."
+        target_regions:
+          type: array
+          items:
+            type: string
+          description: Target country or market codes recorded for this size chart, used for localized content and images. The list may include historical targets. Omitted when no target regions are recorded; omission does not mean worldwide support. This field does not determine product publishing eligibility.
     SearchSizeChartsResponseDataSizeChartImage:
       type: object
       properties:
