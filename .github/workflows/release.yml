@@ -397,6 +397,7 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: read
+      id-token: write # NuGet trusted publishing (OIDC)
     steps:
       - name: Check out
         uses: actions/checkout@v7
@@ -423,10 +424,17 @@ jobs:
           [ "$got" = "$EXPECTED" ] || { echo "::error::version drifted: prepare said $EXPECTED, now $got"; exit 1; }
       - name: Pack
         run: dotnet pack csharp/src/TikTokShop.Api/TikTokShop.Api.csproj -c Release -o nupkgs
+      # NuGet trusted publishing: the job's OIDC token is exchanged for a short-lived API key, so no NuGet key is
+      # stored. The trusted publishing policy on nuget.org must name release.yml and the release environment.
+      - name: Log in to NuGet
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          user: isaackogan
       - name: Push
         env:
-          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
-        run: dotnet nuget push "nupkgs/*.nupkg" --api-key "$NUGET_TOKEN" --source https://api.nuget.org/v3/index.json
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json
 
   packagist:
     name: publish php to the Packagist mirror

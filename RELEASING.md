@@ -42,7 +42,10 @@ The workflow publishes with **npm trusted publishing**: no npm token is stored. 
 
 ### NuGet (C#)
 
-- [ ] Create an API key at nuget.org (glob pattern `TikTokShop.Api`, scopes *Push new packages* and *Push package versions*). Store it as `NUGET_TOKEN`.
+The workflow publishes with **NuGet trusted publishing**: no NuGet API key is stored.
+
+- [ ] On nuget.org open your account → **Trusted Publishing** → **Create**, and enter: package owner `isaackogan`, CI/CD provider GitHub Actions, repository owner `isaackogan`, repository `TikTok-Shop-Api-SDKs`, workflow file `release.yml`, environment `release`. Under scopes choose **Push → Push new packages and package versions**, and add the package `TikTokShop.Api`.
+- [ ] The workflow logs in as the nuget.org user `isaackogan` (`NuGet/login` in `release.yml`). If your nuget.org username differs, change it there.
 
 ### Packagist (PHP)
 
