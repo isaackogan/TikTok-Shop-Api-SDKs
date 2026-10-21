@@ -38,7 +38,11 @@ The workflow publishes with **npm trusted publishing**: no npm token is stored. 
 
 ### crates.io (Rust)
 
-- [ ] Create an API token at crates.io (Account Settings → API Tokens, scope `publish-new` and `publish-update`). Store it as `CARGO_REGISTRY_TOKEN`.
+The workflow publishes with **crates.io trusted publishing**: no crates.io token is stored. 0.1.0 was published with an API token, because a trusted publisher can only be added to a crate that exists.
+
+- [ ] Your crates.io account needs a verified email address (Account Settings → Profile), or every publish is refused.
+- [ ] On crates.io open `tiktok-shop-api` → Settings → Trusted Publishing → Add, and enter: repository owner `isaackogan`, repository `TikTok-Shop-Api-SDKs`, workflow filename `release.yml`, environment `release`.
+- [ ] Because 0.1.0 is already on crates.io, choose `patch`, `minor` or `major` for Rust on the next release. `current` would try to publish 0.1.0 again and fail.
 
 ### NuGet (C#)
 
