@@ -87,15 +87,16 @@ const readmes = new Map(await Promise.all(SDKS.map(async (sdk) => {
   return [sdk.dir, { text, blocks: codeBlocks(text).map((b) => b.code) }];
 })));
 
-// Every SDK section has the same pages, and its overview carries the README's install snippet.
+// Every SDK section has the same pages, and its overview carries the README's install snippet: the first code block
+// under the README's `## Getting Started`, whose step 1 is the install.
 // `--only python,go` limits this to some sections, for checking one section while writing it.
 const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1].split(',') : null;
 for (const sdk of SDKS.filter((s) => !only || only.includes(s.dir))) {
   const present = pages.filter((p) => p.rel.startsWith(`sdks/${sdk.dir}/`)).map((p) => p.rel.replace(/^.*\/|\.mdx?$/g, ''));
   assert.deepEqual(present.sort(), [...SDK_PAGES].sort(), `sdks/${sdk.dir}/ must have exactly: ${SDK_PAGES.join(', ')}`);
-  const install = readmes.get(sdk.dir).text.split(/^## Install\b/m)[1];
+  const install = readmes.get(sdk.dir).text.split(/^## Getting Started\b/m)[1];
   const installBlock = install && codeBlocks(install)[0]?.code;
-  assert(installBlock, `${sdk.readme} has no install snippet.`);
+  assert(installBlock, `${sdk.readme} has no install snippet (the first code block under "## Getting Started").`);
   assert(codeBlocks(page(`sdks/${sdk.dir}/index.md`)).some((b) => stampVersions(b.code) === installBlock),
     `sdks/${sdk.dir}/index must show the install snippet from ${sdk.readme}.`);
 }

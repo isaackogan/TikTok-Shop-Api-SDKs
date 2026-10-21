@@ -20,7 +20,7 @@ pnpm --dir docs build
 ```
 
 `check` verifies the authored pages against the SDKs and the spec:
-- **SDK sections.** Every section has the same five pages, and each overview shows its README's install snippet.
+- **SDK sections.** Every section has the same five pages, and each overview shows its README's install snippet: the first code block under the README's `## Getting Started`.
 - **Code.** Every code block in an SDK's language, under an SDK's tab, or on an SDK's pages is copied from that SDK's README.
 - **Counts.** The operation and webhook counts quoted in prose match the spec.
 - **The OpenAPI page** lists every tag and documents every vendor extension.
