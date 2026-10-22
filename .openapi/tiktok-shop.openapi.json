@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.10.21",
+    "version": "2026.10.22",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -18809,6 +18809,7 @@
                 "order_line_item_ids": [
                   "32132124331234"
                 ],
+                "warehouse_id": "7559598297381865271",
                 "weight": {
                   "value": "0.4",
                   "unit": "GRAM"
@@ -20818,6 +20819,7 @@
               "example": {
                 "ship_type": "2",
                 "order_id": "2882335594258860015",
+                "warehouse_id": "7559598297381865271",
                 "order_line_item": [
                   {
                     "order_line_id": "2882335594258860015",
@@ -50105,6 +50107,10 @@
             "type": "string",
             "description": "The TikTok Shop order ID. Required when `ship_type` is `1` or `2`; not used when `ship_type` is `3`."
           },
+          "warehouse_id": {
+            "type": "string",
+            "description": "Only use for US local-to-local orders.\nIf you need to modify the shipping warehouse, you can edit warehouse ID; The address associated with this ID will be used to generate shipping labels, and it has no impact on inventory.\nNote: We only support warehouse IDs in the enabled status. Passing in repository IDs with other statuses will result in shipment failure."
+          },
           "order_line_item": {
             "type": "array",
             "items": {
@@ -58987,6 +58993,10 @@
               "type": "string"
             },
             "description": "Order line item ID list"
+          },
+          "warehouse_id": {
+            "type": "string",
+            "description": "Specifies the shipping warehouse. Call Get Warehouse List to retrieve the list of available warehouses."
           },
           "weight": {
             "$ref": "#/components/schemas/GetEligibleShippingServicesRequestWeight",
