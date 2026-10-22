@@ -33,6 +33,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param orderLineItemIds Order line item ID list
+ * @param warehouseId Specifies the shipping warehouse. Call Get Warehouse List to retrieve the list of available warehouses.
  * @param weight The weight of the scheduled package.
  * @param dimension The dimensions of the scheduled package.
  * @param orderLineList This new parameter is completely backward compatible with the previous oder_line_items_ids field and in addition this supports bundle order splitting, use the sub items accordingly
@@ -44,6 +45,10 @@ data class GetEligibleShippingServicesRequest (
     /* Order line item ID list */
     @SerializedName("order_line_item_ids")
     val orderLineItemIds: kotlin.collections.List<kotlin.String>? = null,
+
+    /* Specifies the shipping warehouse. Call Get Warehouse List to retrieve the list of available warehouses. */
+    @SerializedName("warehouse_id")
+    val warehouseId: kotlin.String? = null,
 
     /* The weight of the scheduled package. */
     @SerializedName("weight")

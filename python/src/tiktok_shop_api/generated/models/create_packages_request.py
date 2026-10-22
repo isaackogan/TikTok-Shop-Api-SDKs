@@ -33,6 +33,11 @@ class CreatePackagesRequest:
                   3:All the products in multiple orders are shipped in one package with one tracking number.
             order_id (str | Unset): The TikTok Shop order ID. Required when `ship_type` is `1` or `2`; not used when
                 `ship_type` is `3`.
+            warehouse_id (str | Unset): Only use for US local-to-local orders.
+                If you need to modify the shipping warehouse, you can edit warehouse ID; The address associated with this ID
+                will be used to generate shipping labels, and it has no impact on inventory.
+                Note: We only support warehouse IDs in the enabled status. Passing in repository IDs with other statuses will
+                result in shipment failure.
             order_line_item (list[CreatePackagesRequestOrderLineItem] | Unset): List of order line item IDs.
                 If ship_type=2,This is a required field;If ship_type=1&3,we will not use this field
             order_list_ids (list[str] | Unset): The TikTok Shop order IDs to combine into one package. Required when
@@ -46,6 +51,7 @@ class CreatePackagesRequest:
 
     ship_type: str
     order_id: str | Unset = UNSET
+    warehouse_id: str | Unset = UNSET
     order_line_item: list[CreatePackagesRequestOrderLineItem] | Unset = UNSET
     order_list_ids: list[str] | Unset = UNSET
     dimension: CreatePackagesRequestDimension | Unset = UNSET
@@ -64,6 +70,8 @@ class CreatePackagesRequest:
         ship_type = self.ship_type
 
         order_id = self.order_id
+
+        warehouse_id = self.warehouse_id
 
         order_line_item: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.order_line_item, Unset):
@@ -98,6 +106,8 @@ class CreatePackagesRequest:
         })
         if order_id is not UNSET:
             field_dict["order_id"] = order_id
+        if warehouse_id is not UNSET:
+            field_dict["warehouse_id"] = warehouse_id
         if order_line_item is not UNSET:
             field_dict["order_line_item"] = order_line_item
         if order_list_ids is not UNSET:
@@ -122,6 +132,8 @@ class CreatePackagesRequest:
         ship_type = d.pop("ship_type")
 
         order_id = d.pop("order_id", UNSET)
+
+        warehouse_id = d.pop("warehouse_id", UNSET)
 
         _order_line_item = d.pop("order_line_item", UNSET)
         order_line_item: list[CreatePackagesRequestOrderLineItem] | Unset = UNSET
@@ -163,6 +175,7 @@ class CreatePackagesRequest:
         create_packages_request = cls(
             ship_type=ship_type,
             order_id=order_id,
+            warehouse_id=warehouse_id,
             order_line_item=order_line_item,
             order_list_ids=order_list_ids,
             dimension=dimension,

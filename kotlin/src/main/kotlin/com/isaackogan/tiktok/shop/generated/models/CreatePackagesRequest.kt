@@ -34,6 +34,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param shipType 1:All the products in one order are shipped in one package with one tracking number   2:Partical products in one parent order are shipped in multiple packages with multiple tracking numbers   3:All the products in multiple orders are shipped in one package with one tracking number.
  * @param orderId The TikTok Shop order ID. Required when `ship_type` is `1` or `2`; not used when `ship_type` is `3`.
+ * @param warehouseId Only use for US local-to-local orders. If you need to modify the shipping warehouse, you can edit warehouse ID; The address associated with this ID will be used to generate shipping labels, and it has no impact on inventory. Note: We only support warehouse IDs in the enabled status. Passing in repository IDs with other statuses will result in shipment failure.
  * @param orderLineItem List of order line item IDs. If ship_type=2,This is a required field;If ship_type=1&3,we will not use this field
  * @param orderListIds The TikTok Shop order IDs to combine into one package. Required when `ship_type` is `3`; provide at least two order IDs.
  * @param dimension Package dimensions. For `ship_type` `1` and `2`, each dimension must be between 0.01 and 999999 and have no more than two decimal places.
@@ -51,6 +52,10 @@ data class CreatePackagesRequest (
     /* The TikTok Shop order ID. Required when `ship_type` is `1` or `2`; not used when `ship_type` is `3`. */
     @SerializedName("order_id")
     val orderId: kotlin.String? = null,
+
+    /* Only use for US local-to-local orders. If you need to modify the shipping warehouse, you can edit warehouse ID; The address associated with this ID will be used to generate shipping labels, and it has no impact on inventory. Note: We only support warehouse IDs in the enabled status. Passing in repository IDs with other statuses will result in shipment failure. */
+    @SerializedName("warehouse_id")
+    val warehouseId: kotlin.String? = null,
 
     /* List of order line item IDs. If ship_type=2,This is a required field;If ship_type=1&3,we will not use this field */
     @SerializedName("order_line_item")

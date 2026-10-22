@@ -29,6 +29,8 @@ class GetEligibleShippingServicesRequest:
     """ 
         Attributes:
             order_line_item_ids (list[str] | Unset): Order line item ID list
+            warehouse_id (str | Unset): Specifies the shipping warehouse. Call Get Warehouse List to retrieve the list of
+                available warehouses.
             weight (GetEligibleShippingServicesRequestWeight | Unset):
             dimension (GetEligibleShippingServicesRequestDimension | Unset):
             order_line_list (list[ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList] | Unset): This new parameter is
@@ -37,6 +39,7 @@ class GetEligibleShippingServicesRequest:
      """
 
     order_line_item_ids: list[str] | Unset = UNSET
+    warehouse_id: str | Unset = UNSET
     weight: GetEligibleShippingServicesRequestWeight | Unset = UNSET
     dimension: GetEligibleShippingServicesRequestDimension | Unset = UNSET
     order_line_list: list[ConfirmOrderSplitRequestSplittableGroupsV2OrderLineList] | Unset = UNSET
@@ -55,6 +58,8 @@ class GetEligibleShippingServicesRequest:
             order_line_item_ids = self.order_line_item_ids
 
 
+
+        warehouse_id = self.warehouse_id
 
         weight: dict[str, Any] | Unset = UNSET
         if not isinstance(self.weight, Unset):
@@ -80,6 +85,8 @@ class GetEligibleShippingServicesRequest:
         })
         if order_line_item_ids is not UNSET:
             field_dict["order_line_item_ids"] = order_line_item_ids
+        if warehouse_id is not UNSET:
+            field_dict["warehouse_id"] = warehouse_id
         if weight is not UNSET:
             field_dict["weight"] = weight
         if dimension is not UNSET:
@@ -99,6 +106,8 @@ class GetEligibleShippingServicesRequest:
         d = dict(src_dict)
         order_line_item_ids = cast(list[str], d.pop("order_line_item_ids", UNSET))
 
+
+        warehouse_id = d.pop("warehouse_id", UNSET)
 
         _weight = d.pop("weight", UNSET)
         weight: GetEligibleShippingServicesRequestWeight | Unset
@@ -134,6 +143,7 @@ class GetEligibleShippingServicesRequest:
 
         get_eligible_shipping_services_request = cls(
             order_line_item_ids=order_line_item_ids,
+            warehouse_id=warehouse_id,
             weight=weight,
             dimension=dimension,
             order_line_list=order_line_list,
