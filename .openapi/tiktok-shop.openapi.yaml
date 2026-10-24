@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.10.22
+  version: 2026.10.23
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -3620,6 +3620,8 @@ paths:
                           returned_quantity: 1
                           fully_return: Yes
                           is_carousel: false
+                          sku_name: Silver PVD
+                          seller_sku: cs001-pvd-bag
                   next_page_token: WzE2OTUxMTY2NTQ2OTMsNTc2NDczNDg5ODYxNDEyMDI1XQ==
                   total_count: 10000
                 message: Success
@@ -5893,6 +5895,7 @@ paths:
       x-tts-scenario: 4
       x-tts-scopes:
         - Content Posting
+        - Live Data
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-video-performances-202403
   /analytics/202502/live_rooms/{live_room_id}/core_stats:
@@ -75268,7 +75271,7 @@ components:
         create_time_lt:
           type: integer
           format: int64
-          description: Filter orders created before this time, specified as a Unix timestamp in seconds. Use it with `create_time_ge`; the interval in a single request must not exceed three months. See `create_time_ge` for omitted-bound behavior.
+          description: Filter orders to show only those that are created before the specified date and time. Unix timestamp.Refer to notes in `create_time_ge` for more usage information. Please note that we only support 3 montns' data at maximum for each single request
         create_time_ge:
           type: integer
           format: int64
@@ -75282,7 +75285,7 @@ components:
             If both are not specified, data from the last three months will be queried by default.
         program_id:
           type: string
-          description: Filter orders by the associated affiliate partner campaign ID.
+          description: Filter orders by the associated affiliate program which refer to your agency partner's campaign ID.
     SearchSellerAffiliateOrdersResponse:
       type: object
       properties:
@@ -75305,10 +75308,10 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/SearchSellerAffiliateOrdersResponseDataOrder"
-          description: The orders represented by the SKU-order records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages. Aggregate SKU entries with the same order ID across all retrieved pages.
+          description: The returned list of orders.
         next_page_token:
           type: string
-          description: An opaque token for retrieving the next page. To keep the effective time filter fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same `program_id` value or omission. An empty string indicates that there is no next page.
+          description: An opaque token used to retrieve the next page of a paginated result set. Provide this value in the `page_token` parameter of your request if the current response does not return all the results.
         total_count:
           type: integer
           format: int64
@@ -75326,11 +75329,10 @@ components:
         create_time:
           type: integer
           format: int64
-          description: The Unix timestamp, in seconds, when the order was created.
+          description: The date and time when the order was created. Unix timestamp.
         status:
           type: string
-          description: Deprecated. This field is not returned. Use each SKU's `settlement_status` instead.
-          deprecated: true
+          description: Field depreciated, we won't return the value. For your skus settlement status, please find below settle_status.
         skus:
           type: array
           items:
@@ -75362,14 +75364,14 @@ components:
           description: The ID of the TAP campaign in which the product is enrolled.
         creator_username:
           type: string
-          description: The username of the creator attributed to the SKU order. This field is returned as an empty string for affiliate partner campaign orders.
+          description: The username of the creator that's participating in the specified open collaboration.
         price:
           $ref: "#/components/schemas/Price"
           description: The SKU selling price information.
         quantity:
           type: integer
           format: int64
-          description: The number of units of the SKU in the order, including units that were later refunded.
+          description: The SKU quantity for the order.
         content_type:
           type: string
           enum:
@@ -75397,22 +75399,20 @@ components:
         commission_model:
           type: string
           description: |-
-            The commission model selected for the SKU order.
-            Possible values:
-            - `Fixed commission`: The fixed commission model is selected.
-            - `Tiered commission`: The tiered commission model is selected; see `commission_tier_setting` for any available tier settings.
+            Determine order commission be calculated based on fixed commission model or tiering
+            model
         commission_tier_setting:
           type: string
-          description: For `Tiered commission`, the creator commission rates configured by the seller, expressed as percentages in ascending threshold order and separated by ` OR `. Returns `-` when tiered commission does not apply or no tier is configured.
+          description: Between Seller & Creator percentagecommission. When tiering commission model applied, will return each tier's commission rate seller set.
         commission_rate:
           type: string
-          description: The commission rate established by the seller for creators involved in the collaboration, expressed in hundredths of a percent. For example, 1550 represents a commission rate of 15.50%. This value is returned only when the order is generated directly by the seller's creator. For affiliate partner campaign orders, see `partner_commission_rate`.
+          description: The commission rate established by the seller to be paid to creators involved in the collaboration, expressed in hundredths of a percent. For example, 1550 represents a commission rate of 15.50%. Please note that we only return the value when this order is directly generated from your creator. If you are working with partner, please refer to partner_commission_rate.
         partner_commission_rate:
           type: string
           description: The commission rate established by the seller to be paid to affiliate partner involved in the collaboration, expressed in hundredths of a percent. For example, 1550 represents a commission rate of 15.50%.
         shop_ads_commission_rate:
           type: string
-          description: The commission rate for orders generated through Shop Ads, expressed in hundredths of a percent. For example, 5000 represents 50.00%.
+          description: The commission rate for orders generated through Shop Ads.
         estimated_commission_base:
           $ref: "#/components/schemas/EstimatedCommissionBase"
           description: |-
@@ -75426,9 +75426,9 @@ components:
         estimated_paid_commission:
           $ref: "#/components/schemas/SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidCommission"
           description: |-
-            The estimated commission that the seller will pay on sales.
-            Formula: estimated commission base * commission rate.
-            This value is returned only when the order is generated directly by the seller's creator. For affiliate partner campaign orders, see `estimated_paid_partner_commission`.
+            The estimated commission that a seller will pay on sales.
+            Formula: estimated commission base *  commission rate.
+            Please note that we only return the value when this order is directly generated from your creator. If you are working with partner, please refer to paid_partner_commission.
         estimated_paid_partner_commission:
           $ref: "#/components/schemas/SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidPartnerCommission"
           description: |-
@@ -75442,9 +75442,9 @@ components:
         actual_paid_commission:
           $ref: "#/components/schemas/SearchSellerAffiliateOrdersResponseDataOrderSkuActualPaidCommission"
           description: |-
-            The actual commission that the seller will pay on sales.
+            The actual commission the seller will pay on sales.
             Formula: actual commission base * commission rate.
-            This value is returned only when the order is generated directly by the seller's creator. For affiliate partner campaign orders, see `actual_paid_partner_commission`.
+            Please note that we only return the value when this order is directly generated from your creator. If you are working with partner, please refer to actual_paid_partner_commission.
         actual_paid_partner_commission:
           $ref: "#/components/schemas/SearchSellerAffiliateOrdersResponseDataOrderSkuActualPaidPartnerCommission"
           description: |-
@@ -75464,28 +75464,23 @@ components:
         refunded_quantity:
           type: integer
           format: int64
-          description: Deprecated. This field is not returned. Use `fully_return` to determine whether the SKU order was fully returned or refunded.
-          deprecated: true
+          description: Field depreciated, no value return.please refer to fully_return.
         returned_quantity:
           type: integer
           format: int64
-          description: Deprecated. This field is not returned. Use `fully_return` to determine whether the SKU order was fully returned or refunded.
-          deprecated: true
+          description: Field depreciated, no value return.please refer to fully_return.
         fully_return:
           type: string
-          enum:
-            - Yes
-            - No
-          x-enum-descriptions:
-            - The full quantity was returned or refunded, so no commission is paid.
-            - The full quantity was not returned or refunded.
-          description: |-
-            Indicates whether the entire SKU order was returned or refunded. Possible values:
-            - `Yes`: The full quantity was returned or refunded, so no commission is paid.
-            - `No`: The full quantity was not returned or refunded.
+          description: Return yes when this sku is fully returned/refunded. No commission given when full return/refund
         is_carousel:
           type: boolean
-          description: Indicates whether the SKU order is attributed to carousel content. Carousel content may involve a commission rate discount. Returns `true` for a carousel-attributed SKU order and `false` otherwise.
+          description: Carousel content may involve a commission rate discount. Return [True] when orders is attributed to carousel content
+        sku_name:
+          type: string
+          description: The official display name and unique identifier for this product, defined and standardized by TikTok Shop.
+        seller_sku:
+          type: string
+          description: A unique identifier for this product, defined exclusively by the seller for their own use.
     SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount:
       type: object
       properties:
