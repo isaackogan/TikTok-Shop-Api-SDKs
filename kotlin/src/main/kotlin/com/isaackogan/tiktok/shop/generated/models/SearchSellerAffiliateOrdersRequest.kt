@@ -29,15 +29,15 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param createTimeLt Filter orders created before this time, specified as a Unix timestamp in seconds. Use it with `create_time_ge`; the interval in a single request must not exceed three months. See `create_time_ge` for omitted-bound behavior.
+ * @param createTimeLt Filter orders to show only those that are created before the specified date and time. Unix timestamp.Refer to notes in `create_time_ge` for more usage information. Please note that we only support 3 montns' data at maximum for each single request
  * @param createTimeGe Filter orders to show only those that are created on or after the specified date and time. Unix timestamp.  Note: `create_time_ge` and `create_time_lt` together constitute the creation time filter condition. - If `create_time_ge` is filled but `create_time_lt` is empty, `create_time_lt` will default to the current time. - If `create_time_lt` is filled but `create_time_ge` is empty, `create_time_ge` will default to the earliest shop time. If both are not specified, data from the last three months will be queried by default.
- * @param programId Filter orders by the associated affiliate partner campaign ID.
+ * @param programId Filter orders by the associated affiliate program which refer to your agency partner's campaign ID.
  */
 
 
 data class SearchSellerAffiliateOrdersRequest (
 
-    /* Filter orders created before this time, specified as a Unix timestamp in seconds. Use it with `create_time_ge`; the interval in a single request must not exceed three months. See `create_time_ge` for omitted-bound behavior. */
+    /* Filter orders to show only those that are created before the specified date and time. Unix timestamp.Refer to notes in `create_time_ge` for more usage information. Please note that we only support 3 montns' data at maximum for each single request */
     @SerializedName("create_time_lt")
     val createTimeLt: kotlin.Long? = null,
 
@@ -45,7 +45,7 @@ data class SearchSellerAffiliateOrdersRequest (
     @SerializedName("create_time_ge")
     val createTimeGe: kotlin.Long? = null,
 
-    /* Filter orders by the associated affiliate partner campaign ID. */
+    /* Filter orders by the associated affiliate program which refer to your agency partner's campaign ID. */
     @SerializedName("program_id")
     val programId: kotlin.String? = null
 

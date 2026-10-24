@@ -26,14 +26,10 @@ T = TypeVar("T", bound="SearchSellerAffiliateOrdersResponseData")
 class SearchSellerAffiliateOrdersResponseData:
     """ 
         Attributes:
-            orders (list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset): The orders represented by the SKU-order
-                records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can
-                contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages.
-                Aggregate SKU entries with the same order ID across all retrieved pages.
-            next_page_token (str | Unset): An opaque token for retrieving the next page. To keep the effective time filter
-                fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this
-                value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same
-                `program_id` value or omission. An empty string indicates that there is no next page.
+            orders (list[SearchSellerAffiliateOrdersResponseDataOrder] | Unset): The returned list of orders.
+            next_page_token (str | Unset): An opaque token used to retrieve the next page of a paginated result set. Provide
+                this value in the `page_token` parameter of your request if the current response does not return all the
+                results.
             total_count (int | Unset): The total number of sku orders that matches the query conditions.
      """
 

@@ -46,10 +46,10 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
             open_collaboration_id (str | Unset): The ID of the open collaboration in which the product is enrolled.
             target_collaboration_id (str | Unset): The ID of the target collaboration in which the product is enrolled.
             campaign_id (str | Unset): The ID of the TAP campaign in which the product is enrolled.
-            creator_username (str | Unset): The username of the creator attributed to the SKU order. This field is returned
-                as an empty string for affiliate partner campaign orders.
+            creator_username (str | Unset): The username of the creator that's participating in the specified open
+                collaboration.
             price (Price | Unset):
-            quantity (int | Unset): The number of units of the SKU in the order, including units that were later refunded.
+            quantity (int | Unset): The SKU quantity for the order.
             content_type (str | Unset): The content format of the creator content through which the order was created.
                 Possible values:
                 - SHOP
@@ -60,23 +60,19 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
                 - LINKSHARE
             content_id (str | Unset): The content identifier.
             product_id (str | Unset): The product  ID in TikTok Shop.
-            commission_model (str | Unset): The commission model selected for the SKU order.
-                Possible values:
-                - `Fixed commission`: The fixed commission model is selected.
-                - `Tiered commission`: The tiered commission model is selected; see `commission_tier_setting` for any available
-                tier settings.
-            commission_tier_setting (str | Unset): For `Tiered commission`, the creator commission rates configured by the
-                seller, expressed as percentages in ascending threshold order and separated by ` OR `. Returns `-` when tiered
-                commission does not apply or no tier is configured.
-            commission_rate (str | Unset): The commission rate established by the seller for creators involved in the
-                collaboration, expressed in hundredths of a percent. For example, 1550 represents a commission rate of 15.50%.
-                This value is returned only when the order is generated directly by the seller's creator. For affiliate partner
-                campaign orders, see `partner_commission_rate`.
+            commission_model (str | Unset): Determine order commission be calculated based on fixed commission model or
+                tiering
+                model
+            commission_tier_setting (str | Unset): Between Seller & Creator percentagecommission. When tiering commission
+                model applied, will return each tier's commission rate seller set.
+            commission_rate (str | Unset): The commission rate established by the seller to be paid to creators involved in
+                the collaboration, expressed in hundredths of a percent. For example, 1550 represents a commission rate of
+                15.50%. Please note that we only return the value when this order is directly generated from your creator. If
+                you are working with partner, please refer to partner_commission_rate.
             partner_commission_rate (str | Unset): The commission rate established by the seller to be paid to affiliate
                 partner involved in the collaboration, expressed in hundredths of a percent. For example, 1550 represents a
                 commission rate of 15.50%.
-            shop_ads_commission_rate (str | Unset): The commission rate for orders generated through Shop Ads, expressed in
-                hundredths of a percent. For example, 5000 represents 50.00%.
+            shop_ads_commission_rate (str | Unset): The commission rate for orders generated through Shop Ads.
             estimated_commission_base (EstimatedCommissionBase | Unset):
             estimated_paid_shop_ads_commission
                 (SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission | Unset):
@@ -93,16 +89,16 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
                 (SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedCofundedCreatorBonusAmount | Unset):
             actual_cofunded_creator_bonus_amount
                 (SearchSellerAffiliateOrdersResponseDataOrderSkuActualCofundedCreatorBonusAmount | Unset):
-            refunded_quantity (int | Unset): Deprecated. This field is not returned. Use `fully_return` to determine whether
-                the SKU order was fully returned or refunded.
-            returned_quantity (int | Unset): Deprecated. This field is not returned. Use `fully_return` to determine whether
-                the SKU order was fully returned or refunded.
-            fully_return (str | Unset): Indicates whether the entire SKU order was returned or refunded. Possible values:
-                - `Yes`: The full quantity was returned or refunded, so no commission is paid.
-                - `No`: The full quantity was not returned or refunded.
-            is_carousel (bool | Unset): Indicates whether the SKU order is attributed to carousel content. Carousel content
-                may involve a commission rate discount. Returns `true` for a carousel-attributed SKU order and `false`
-                otherwise.
+            refunded_quantity (int | Unset): Field depreciated, no value return.please refer to fully_return.
+            returned_quantity (int | Unset): Field depreciated, no value return.please refer to fully_return.
+            fully_return (str | Unset): Return yes when this sku is fully returned/refunded. No commission given when full
+                return/refund
+            is_carousel (bool | Unset): Carousel content may involve a commission rate discount. Return [True] when orders
+                is attributed to carousel content
+            sku_name (str | Unset): The official display name and unique identifier for this product, defined and
+                standardized by TikTok Shop.
+            seller_sku (str | Unset): A unique identifier for this product, defined exclusively by the seller for their own
+                use.
      """
 
     sku_id: str | Unset = UNSET
@@ -135,6 +131,8 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
     returned_quantity: int | Unset = UNSET
     fully_return: str | Unset = UNSET
     is_carousel: bool | Unset = UNSET
+    sku_name: str | Unset = UNSET
+    seller_sku: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -235,6 +233,10 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         is_carousel = self.is_carousel
 
+        sku_name = self.sku_name
+
+        seller_sku = self.seller_sku
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -300,6 +302,10 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
             field_dict["fully_return"] = fully_return
         if is_carousel is not UNSET:
             field_dict["is_carousel"] = is_carousel
+        if sku_name is not UNSET:
+            field_dict["sku_name"] = sku_name
+        if seller_sku is not UNSET:
+            field_dict["seller_sku"] = seller_sku
 
         return field_dict
 
@@ -467,6 +473,10 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
 
         is_carousel = d.pop("is_carousel", UNSET)
 
+        sku_name = d.pop("sku_name", UNSET)
+
+        seller_sku = d.pop("seller_sku", UNSET)
+
         search_seller_affiliate_orders_response_data_order_sku = cls(
             sku_id=sku_id,
             settlement_status=settlement_status,
@@ -498,6 +508,8 @@ class SearchSellerAffiliateOrdersResponseDataOrderSku:
             returned_quantity=returned_quantity,
             fully_return=fully_return,
             is_carousel=is_carousel,
+            sku_name=sku_name,
+            seller_sku=seller_sku,
         )
 
 

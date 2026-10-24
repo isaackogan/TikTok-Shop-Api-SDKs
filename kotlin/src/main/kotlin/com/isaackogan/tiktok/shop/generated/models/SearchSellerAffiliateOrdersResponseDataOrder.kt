@@ -32,8 +32,8 @@ import com.google.gson.annotations.SerializedName
  *
  * @param id The order ID.
  * @param deliveryTime The date and time when the order was delivered. Unix timestamp.
- * @param createTime The Unix timestamp, in seconds, when the order was created.
- * @param status Deprecated. This field is not returned. Use each SKU's `settlement_status` instead.
+ * @param createTime The date and time when the order was created. Unix timestamp.
+ * @param status Field depreciated, we won't return the value. For your skus settlement status, please find below settle_status.
  * @param skus The list of SKUs that are included in this order.
  */
 
@@ -48,13 +48,12 @@ data class SearchSellerAffiliateOrdersResponseDataOrder (
     @SerializedName("delivery_time")
     val deliveryTime: kotlin.Long? = null,
 
-    /* The Unix timestamp, in seconds, when the order was created. */
+    /* The date and time when the order was created. Unix timestamp. */
     @SerializedName("create_time")
     val createTime: kotlin.Long? = null,
 
-    /* Deprecated. This field is not returned. Use each SKU's `settlement_status` instead. */
+    /* Field depreciated, we won't return the value. For your skus settlement status, please find below settle_status. */
     @SerializedName("status")
-    @Deprecated(message = "This property is deprecated.")
     val status: kotlin.String? = null,
 
     /* The list of SKUs that are included in this order. */

@@ -28,8 +28,9 @@ class SearchSellerAffiliateOrdersResponseDataOrder:
         Attributes:
             id (str | Unset): The order ID.
             delivery_time (int | Unset): The date and time when the order was delivered. Unix timestamp.
-            create_time (int | Unset): The Unix timestamp, in seconds, when the order was created.
-            status (str | Unset): Deprecated. This field is not returned. Use each SKU's `settlement_status` instead.
+            create_time (int | Unset): The date and time when the order was created. Unix timestamp.
+            status (str | Unset): Field depreciated, we won't return the value. For your skus settlement status, please find
+                below settle_status.
             skus (list[SearchSellerAffiliateOrdersResponseDataOrderSku] | Unset): The list of SKUs that are included in this
                 order.
      """

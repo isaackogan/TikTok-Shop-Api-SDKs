@@ -30,19 +30,19 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param orders The orders represented by the SKU-order records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages. Aggregate SKU entries with the same order ID across all retrieved pages.
- * @param nextPageToken An opaque token for retrieving the next page. To keep the effective time filter fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same `program_id` value or omission. An empty string indicates that there is no next page.
+ * @param orders The returned list of orders.
+ * @param nextPageToken An opaque token used to retrieve the next page of a paginated result set. Provide this value in the `page_token` parameter of your request if the current response does not return all the results.
  * @param totalCount The total number of sku orders that matches the query conditions.
  */
 
 
 data class SearchSellerAffiliateOrdersResponseData (
 
-    /* The orders represented by the SKU-order records selected for this page, grouped by order ID. Pagination is applied before grouping, so `orders` can contain fewer objects than `page_size`, and SKU entries for the same order can appear on different pages. Aggregate SKU entries with the same order ID across all retrieved pages. */
+    /* The returned list of orders. */
     @SerializedName("orders")
     val orders: kotlin.collections.List<SearchSellerAffiliateOrdersResponseDataOrder>? = null,
 
-    /* An opaque token for retrieving the next page. To keep the effective time filter fixed across pages, provide explicit `create_time_ge` and `create_time_lt` values in the first request. If this value is non-empty, pass it as `page_token` in the next request and reuse those exact time values and the same `program_id` value or omission. An empty string indicates that there is no next page. */
+    /* An opaque token used to retrieve the next page of a paginated result set. Provide this value in the `page_token` parameter of your request if the current response does not return all the results. */
     @SerializedName("next_page_token")
     val nextPageToken: kotlin.String? = null,
 
