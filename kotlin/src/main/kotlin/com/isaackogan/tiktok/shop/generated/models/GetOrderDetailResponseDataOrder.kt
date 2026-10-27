@@ -88,7 +88,7 @@ import com.google.gson.annotations.SerializedName
  * @param collectionDueTime If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop
  * @param pickUpCutOffTime To avoid LDR, you must ensure the package is picked up by this time. Only applicable in Southeast Asia regions.
  * @param fastDispatchSlaTime The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
- * @param commercePlatform The platform where the order was placed. Possible values: - TIKTOK_SHOP - TOKOPEDIA **Note**: Available only in the Indonesia market.
+ * @param commercePlatform The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` - `TIKTOK_SHOP_APP` **Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market.
  * @param orderType The order type. Possible values based on region: **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE. - `AUCTION`: An order placed during auction, where the price of the product is not fixed. **US** - `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation. Returns an empty value for standard orders or other types that don't fall into the above categories.
  * @param releaseDate The date on which order handling starts and the status of the order changes to [`AWAITING_SHIPMENT`](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011). Applicable only if the `order_type` is `PRE_ORDER`.
  * @param handlingDuration The duration for the seller to process the order and hand it over to a shipping carrier after the order is placed.  Applicable only if the `order_type` is `MADE_TO_ORDER` or `BACK_ORDER`.
@@ -330,7 +330,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("fast_dispatch_sla_time")
     val fastDispatchSlaTime: kotlin.Long? = null,
 
-    /* The platform where the order was placed. Possible values: - TIKTOK_SHOP - TOKOPEDIA **Note**: Available only in the Indonesia market. */
+    /* The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` - `TIKTOK_SHOP_APP` **Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market. */
     @SerializedName("commerce_platform")
     val commercePlatform: kotlin.String? = null,
 

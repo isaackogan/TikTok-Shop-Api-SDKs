@@ -97,6 +97,7 @@ import com.google.gson.annotations.SerializedName
  * @param video Product video information.
  * @param sellingFormat The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION, FIXED_PRICE_AND_LIVE_AUCTION.
  * @param isBlindBox Whether the product is a blind box of lucky bag. For example: PopMart
+ * @param productDetailUrl Product detail URL supporting deep link to launch TikTok client. Need  add GET_PRODUCT_DETAIL_URL in query_options param.
  */
 
 
@@ -288,7 +289,11 @@ data class GetProductResponseData (
 
     /* Whether the product is a blind box of lucky bag. For example: PopMart */
     @SerializedName("is_blind_box")
-    val isBlindBox: kotlin.Boolean? = null
+    val isBlindBox: kotlin.Boolean? = null,
+
+    /* Product detail URL supporting deep link to launch TikTok client. Need  add GET_PRODUCT_DETAIL_URL in query_options param. */
+    @SerializedName("product_detail_url")
+    val productDetailUrl: kotlin.String? = null
 
 ) {
 

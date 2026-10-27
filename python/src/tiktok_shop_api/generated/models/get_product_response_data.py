@@ -194,6 +194,8 @@ class GetProductResponseData:
             selling_format (str | Unset): The product's sale format. Possible values: FIXED_PRICE, LIVE_AUCTION,
                 FIXED_PRICE_AND_LIVE_AUCTION.
             is_blind_box (bool | Unset): Whether the product is a blind box of lucky bag. For example: PopMart
+            product_detail_url (str | Unset): Product detail URL supporting deep link to launch TikTok client. Need  add
+                GET_PRODUCT_DETAIL_URL in query_options param.
      """
 
     audit: GetProductResponseDataAudit | Unset = UNSET
@@ -243,6 +245,7 @@ class GetProductResponseData:
     video: GetProductResponseDataVideo | Unset = UNSET
     selling_format: str | Unset = UNSET
     is_blind_box: bool | Unset = UNSET
+    product_detail_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -481,6 +484,8 @@ class GetProductResponseData:
 
         is_blind_box = self.is_blind_box
 
+        product_detail_url = self.product_detail_url
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -580,6 +585,8 @@ class GetProductResponseData:
             field_dict["selling_format"] = selling_format
         if is_blind_box is not UNSET:
             field_dict["is_blind_box"] = is_blind_box
+        if product_detail_url is not UNSET:
+            field_dict["product_detail_url"] = product_detail_url
 
         return field_dict
 
@@ -897,6 +904,8 @@ class GetProductResponseData:
 
         is_blind_box = d.pop("is_blind_box", UNSET)
 
+        product_detail_url = d.pop("product_detail_url", UNSET)
+
         get_product_response_data = cls(
             audit=audit,
             audit_failed_reasons=audit_failed_reasons,
@@ -945,6 +954,7 @@ class GetProductResponseData:
             video=video,
             selling_format=selling_format,
             is_blind_box=is_blind_box,
+            product_detail_url=product_detail_url,
         )
 
 

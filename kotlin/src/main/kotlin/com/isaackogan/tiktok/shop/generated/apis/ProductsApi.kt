@@ -2922,6 +2922,7 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * @param returnUnderReviewVersion A flag to indicate what product information to retrieve if a live product (&#x60;ACTIVATE&#x60; status) is edited and resent for TikTok Shop review. - True: Retrieves the latest version of the product information that is currently under review. - False: Retrieves a snapshot of the product information that is live and online (before the edit). Default: False (optional)
      * @param returnDraftVersion A flag to indicate what product information to retrieve if a product has a draft in TikTok Shop. - True: Retrieves the draft version of the product information. - False: Retrieves the latest product information. Default: False  **Note**:  - Applicable only if the product is in the &#x60;DRAFT&#x60;, &#x60;ACTIVATE&#x60;, &#x60;SELLER_DEACTIVATED&#x60;, or &#x60;PLATFORM_DEACTIVATED&#x60; status. - This field and &#x60;return_under_review_version&#x60; are mutually exclusive. Specify only one to receive results. (optional)
      * @param locale The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN (optional)
+     * @param queryOptions Options for retrieving additional product information. Currently supported: - &#x60;GET_PRODUCT_DETAIL_URL&#x60; : Returns the product detail URL, which supports deep link to launch TikTok client. (optional)
      * @return GetProductResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -2931,8 +2932,8 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun getProduct(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean? = null, returnDraftVersion: kotlin.Boolean? = null, locale: LocaleGetProduct? = null) : GetProductResponse {
-        val localVarResponse = getProductWithHttpInfo(productId = productId, returnUnderReviewVersion = returnUnderReviewVersion, returnDraftVersion = returnDraftVersion, locale = locale)
+    fun getProduct(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean? = null, returnDraftVersion: kotlin.Boolean? = null, locale: LocaleGetProduct? = null, queryOptions: kotlin.collections.List<kotlin.String>? = null) : GetProductResponse {
+        val localVarResponse = getProductWithHttpInfo(productId = productId, returnUnderReviewVersion = returnUnderReviewVersion, returnDraftVersion = returnDraftVersion, locale = locale, queryOptions = queryOptions)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GetProductResponse
@@ -2957,14 +2958,15 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * @param returnUnderReviewVersion A flag to indicate what product information to retrieve if a live product (&#x60;ACTIVATE&#x60; status) is edited and resent for TikTok Shop review. - True: Retrieves the latest version of the product information that is currently under review. - False: Retrieves a snapshot of the product information that is live and online (before the edit). Default: False (optional)
      * @param returnDraftVersion A flag to indicate what product information to retrieve if a product has a draft in TikTok Shop. - True: Retrieves the draft version of the product information. - False: Retrieves the latest product information. Default: False  **Note**:  - Applicable only if the product is in the &#x60;DRAFT&#x60;, &#x60;ACTIVATE&#x60;, &#x60;SELLER_DEACTIVATED&#x60;, or &#x60;PLATFORM_DEACTIVATED&#x60; status. - This field and &#x60;return_under_review_version&#x60; are mutually exclusive. Specify only one to receive results. (optional)
      * @param locale The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN (optional)
+     * @param queryOptions Options for retrieving additional product information. Currently supported: - &#x60;GET_PRODUCT_DETAIL_URL&#x60; : Returns the product detail URL, which supports deep link to launch TikTok client. (optional)
      * @return ApiResponse<GetProductResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun getProductWithHttpInfo(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean?, returnDraftVersion: kotlin.Boolean?, locale: LocaleGetProduct?) : ApiResponse<GetProductResponse?> {
-        val localVariableConfig = getProductRequestConfig(productId = productId, returnUnderReviewVersion = returnUnderReviewVersion, returnDraftVersion = returnDraftVersion, locale = locale)
+    fun getProductWithHttpInfo(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean?, returnDraftVersion: kotlin.Boolean?, locale: LocaleGetProduct?, queryOptions: kotlin.collections.List<kotlin.String>?) : ApiResponse<GetProductResponse?> {
+        val localVariableConfig = getProductRequestConfig(productId = productId, returnUnderReviewVersion = returnUnderReviewVersion, returnDraftVersion = returnDraftVersion, locale = locale, queryOptions = queryOptions)
 
         return request<Unit, GetProductResponse>(
             localVariableConfig
@@ -2978,9 +2980,10 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
      * @param returnUnderReviewVersion A flag to indicate what product information to retrieve if a live product (&#x60;ACTIVATE&#x60; status) is edited and resent for TikTok Shop review. - True: Retrieves the latest version of the product information that is currently under review. - False: Retrieves a snapshot of the product information that is live and online (before the edit). Default: False (optional)
      * @param returnDraftVersion A flag to indicate what product information to retrieve if a product has a draft in TikTok Shop. - True: Retrieves the draft version of the product information. - False: Retrieves the latest product information. Default: False  **Note**:  - Applicable only if the product is in the &#x60;DRAFT&#x60;, &#x60;ACTIVATE&#x60;, &#x60;SELLER_DEACTIVATED&#x60;, or &#x60;PLATFORM_DEACTIVATED&#x60; status. - This field and &#x60;return_under_review_version&#x60; are mutually exclusive. Specify only one to receive results. (optional)
      * @param locale The BCP-47 locale codes for displaying category information. Default: The default locale of your shop. Possible values: - cs-CZ - de-AT - de-BE - de-DE - el-GR - en-GB - en-IE - en-US - es-ES - es-MX - fr-FR - fr-BE - hu-HU - id-ID - it-IT - ja-JP - ms-MY - nl-NL - nl-BE - pl-PL - pt-BR - pt-PT - th-TH - vi-VN - zh-CN (optional)
+     * @param queryOptions Options for retrieving additional product information. Currently supported: - &#x60;GET_PRODUCT_DETAIL_URL&#x60; : Returns the product detail URL, which supports deep link to launch TikTok client. (optional)
      * @return RequestConfig
      */
-    fun getProductRequestConfig(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean?, returnDraftVersion: kotlin.Boolean?, locale: LocaleGetProduct?) : RequestConfig<Unit> {
+    fun getProductRequestConfig(productId: kotlin.String, returnUnderReviewVersion: kotlin.Boolean?, returnDraftVersion: kotlin.Boolean?, locale: LocaleGetProduct?, queryOptions: kotlin.collections.List<kotlin.String>?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -2992,6 +2995,9 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
                 }
                 if (locale != null) {
                     put("locale", listOf(locale.value))
+                }
+                if (queryOptions != null) {
+                    put("query_options", toMultiValue(queryOptions.toList(), "csv"))
                 }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()

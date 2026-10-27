@@ -3313,6 +3313,7 @@ impl ProductsApi {
         return_under_review_version: Option<bool>,
         return_draft_version: Option<bool>,
         locale: Option<&str>,
+        query_options: Option<Vec<String>>,
     ) -> Result<models::GetProductResponse, Error> {
         apis::products_api::get_product(
             &self.config,
@@ -3320,6 +3321,7 @@ impl ProductsApi {
             return_under_review_version,
             return_draft_version,
             locale,
+            query_options,
         )
         .await
         .map_err(Error::from)

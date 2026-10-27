@@ -163,8 +163,8 @@ class GetOrderListResponseDataOrder:
                 Possible values:
                 - `TIKTOK_SHOP`
                 - `TOKOPEDIA`
-
-                **Note**: Available only in the Indonesia market.
+                - `TIKTOK_SHOP_APP`
+                **Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market.
             order_type (str | Unset): The order type.
                 Possible values based on region:
 

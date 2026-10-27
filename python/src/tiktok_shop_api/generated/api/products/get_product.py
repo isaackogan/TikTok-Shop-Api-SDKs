@@ -21,6 +21,7 @@ def _get_kwargs(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+    query_options: list[str] | Unset = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -38,6 +39,13 @@ def _get_kwargs(
         json_locale = locale.value
 
     params["locale"] = json_locale
+
+    json_query_options: list[str] | Unset = UNSET
+    if not isinstance(query_options, Unset):
+        json_query_options = query_options
+
+
+    params["query_options"] = json_query_options
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -84,6 +92,7 @@ def sync_detailed(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+    query_options: list[str] | Unset = UNSET,
 
 ) -> Response[GetProductResponse]:
     """ Get Product
@@ -95,6 +104,7 @@ def sync_detailed(
         return_under_review_version (bool | Unset):
         return_draft_version (bool | Unset):
         locale (GetProductLocale | Unset):
+        query_options (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -110,6 +120,7 @@ def sync_detailed(
 return_under_review_version=return_under_review_version,
 return_draft_version=return_draft_version,
 locale=locale,
+query_options=query_options,
 
     )
 
@@ -126,6 +137,7 @@ def sync(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+    query_options: list[str] | Unset = UNSET,
 
 ) -> GetProductResponse | None:
     """ Get Product
@@ -137,6 +149,7 @@ def sync(
         return_under_review_version (bool | Unset):
         return_draft_version (bool | Unset):
         locale (GetProductLocale | Unset):
+        query_options (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -153,6 +166,7 @@ client=client,
 return_under_review_version=return_under_review_version,
 return_draft_version=return_draft_version,
 locale=locale,
+query_options=query_options,
 
     ).parsed
 
@@ -163,6 +177,7 @@ async def asyncio_detailed(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+    query_options: list[str] | Unset = UNSET,
 
 ) -> Response[GetProductResponse]:
     """ Get Product
@@ -174,6 +189,7 @@ async def asyncio_detailed(
         return_under_review_version (bool | Unset):
         return_draft_version (bool | Unset):
         locale (GetProductLocale | Unset):
+        query_options (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -189,6 +205,7 @@ async def asyncio_detailed(
 return_under_review_version=return_under_review_version,
 return_draft_version=return_draft_version,
 locale=locale,
+query_options=query_options,
 
     )
 
@@ -205,6 +222,7 @@ async def asyncio(
     return_under_review_version: bool | Unset = UNSET,
     return_draft_version: bool | Unset = UNSET,
     locale: GetProductLocale | Unset = UNSET,
+    query_options: list[str] | Unset = UNSET,
 
 ) -> GetProductResponse | None:
     """ Get Product
@@ -216,6 +234,7 @@ async def asyncio(
         return_under_review_version (bool | Unset):
         return_draft_version (bool | Unset):
         locale (GetProductLocale | Unset):
+        query_options (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -232,5 +251,6 @@ client=client,
 return_under_review_version=return_under_review_version,
 return_draft_version=return_draft_version,
 locale=locale,
+query_options=query_options,
 
     )).parsed

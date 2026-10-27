@@ -12151,6 +12151,7 @@ class ProductsApi(SyncGroup):
         return_under_review_version: bool | Unset = UNSET,
         return_draft_version: bool | Unset = UNSET,
         locale: GetProductLocale | Unset = UNSET,
+        query_options: list[str] | Unset = UNSET,
     ) -> GetProductResponse | None:
         """Get Product
 
@@ -12161,6 +12162,7 @@ class ProductsApi(SyncGroup):
             return_under_review_version (bool | Unset):
             return_draft_version (bool | Unset):
             locale (GetProductLocale | Unset):
+            query_options (list[str] | Unset):
 
         Raises:
             TikTokShopError: for a TikTok error code, a non-2xx status,
@@ -12168,7 +12170,7 @@ class ProductsApi(SyncGroup):
         """
         from .api.products import get_product as _op
 
-        return self._run(_op.sync_detailed, product_id=product_id, return_under_review_version=return_under_review_version, return_draft_version=return_draft_version, locale=locale)
+        return self._run(_op.sync_detailed, product_id=product_id, return_under_review_version=return_under_review_version, return_draft_version=return_draft_version, locale=locale, query_options=query_options)
 
     def get_product_diagnoses(
         self,
@@ -14142,6 +14144,7 @@ class AsyncProductsApi(AsyncGroup):
         return_under_review_version: bool | Unset = UNSET,
         return_draft_version: bool | Unset = UNSET,
         locale: GetProductLocale | Unset = UNSET,
+        query_options: list[str] | Unset = UNSET,
     ) -> GetProductResponse | None:
         """Get Product
 
@@ -14152,6 +14155,7 @@ class AsyncProductsApi(AsyncGroup):
             return_under_review_version (bool | Unset):
             return_draft_version (bool | Unset):
             locale (GetProductLocale | Unset):
+            query_options (list[str] | Unset):
 
         Raises:
             TikTokShopError: for a TikTok error code, a non-2xx status,
@@ -14159,7 +14163,7 @@ class AsyncProductsApi(AsyncGroup):
         """
         from .api.products import get_product as _op
 
-        return await self._run(_op.asyncio_detailed, product_id=product_id, return_under_review_version=return_under_review_version, return_draft_version=return_draft_version, locale=locale)
+        return await self._run(_op.asyncio_detailed, product_id=product_id, return_under_review_version=return_under_review_version, return_draft_version=return_draft_version, locale=locale, query_options=query_options)
 
     async def get_product_diagnoses(
         self,
