@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.10.23",
+    "version": "2026.10.26",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -30048,6 +30048,19 @@
                 "zh-CN"
               ]
             }
+          },
+          {
+            "name": "query_options",
+            "in": "query",
+            "required": false,
+            "description": "Options for retrieving additional product information.\nCurrently supported:\n- `GET_PRODUCT_DETAIL_URL` : Returns the product detail URL, which supports deep link to launch TikTok client.",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
           }
         ],
         "responses": {
@@ -30591,7 +30604,8 @@
                       "width": 1280
                     },
                     "selling_format": "FIXED_PRICE",
-                    "is_blind_box": false
+                    "is_blind_box": false,
+                    "product_detail_url": "detail_url"
                   },
                   "message": "Success",
                   "request_id": "202203070749000101890810281E8C70B7"
@@ -65054,9 +65068,10 @@
             "type": "string",
             "enum": [
               "TIKTOK_SHOP",
-              "TOKOPEDIA"
+              "TOKOPEDIA",
+              "TIKTOK_SHOP_APP"
             ],
-            "description": "The platform where the order was placed.\nPossible values:\n- TIKTOK_SHOP\n- TOKOPEDIA\n**Note**: Available only in the Indonesia market."
+            "description": "The platform where the order was placed.\nPossible values:\n- `TIKTOK_SHOP`\n- `TOKOPEDIA`\n- `TIKTOK_SHOP_APP`\n**Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market."
           },
           "order_type": {
             "type": "string",
@@ -65912,9 +65927,10 @@
             "type": "string",
             "enum": [
               "TIKTOK_SHOP",
-              "TOKOPEDIA"
+              "TOKOPEDIA",
+              "TIKTOK_SHOP_APP"
             ],
-            "description": "The platform where the order was placed.\nPossible values:\n- `TIKTOK_SHOP`\n- `TOKOPEDIA`\n\n**Note**: Available only in the Indonesia market."
+            "description": "The platform where the order was placed.\nPossible values:\n- `TIKTOK_SHOP`\n- `TOKOPEDIA`\n- `TIKTOK_SHOP_APP`\n**Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market."
           },
           "order_type": {
             "type": "string",
@@ -68013,6 +68029,10 @@
           "is_blind_box": {
             "type": "boolean",
             "description": "Whether the product is a blind box of lucky bag. For example: PopMart"
+          },
+          "product_detail_url": {
+            "type": "string",
+            "description": "Product detail URL supporting deep link to launch TikTok client. Need  add GET_PRODUCT_DETAIL_URL in query_options param."
           }
         }
       },
