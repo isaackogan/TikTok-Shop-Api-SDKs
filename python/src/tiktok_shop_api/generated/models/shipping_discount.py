@@ -55,12 +55,14 @@ class ShippingDiscount:
                 - `ALL_SHIPPING_METHOD`: Applies to all shipping methods that the shop offers.
                 Default: `STANDARD_SHIPPING`
             inventory_type (str | Unset): The inventory types to which the promotion activity applies:
-                - `SELF_FULFILLED`: Only applies to Inventory fulfilled from seller warehouses
-                - `FULFILLED_BY_TIKTOK`: Only applies to Inventory fulfilled by TikTok from FBT (Fulfilled by TikTok)
+                - `SELF_FULFILLED`: Only applies to inventory fulfilled from seller warehouses
+                - `FULFILLED_BY_TIKTOK`: Only applies to inventory fulfilled by TikTok from FBT (Fulfilled by TikTok)
                 warehouses.
-                - `ALL`:  Applies to all inventory of eligible products.
-                Default: `SELF_FULFILLED`
-                `FULFILLED_BY_TIKTOK` and `ALL` can only be set when `product_level`==`SHOP` and `threshold_type=NO_THRESHOLD`.
+                - `ALL`: Applies to all inventory of eligible products.
+                For US shop-wide free-shipping promotions (`product_level` == `SHOP`), the default is `ALL`, and
+                `inventory_type` cannot be set to only `SELF_FULFILLED` or only `FULFILLED_BY_TIKTOK`.
+                For other areas, the default is `SELF_FULFILLED`. `FULFILLED_BY_TIKTOK` and `ALL` can only be set when
+                `product_level` == `SHOP` and `threshold_type` = `NO_THRESHOLD`.
      """
 
     threshold_type: ShippingDiscountThresholdType
