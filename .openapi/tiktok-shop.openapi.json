@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.10.26",
+    "version": "2026.10.28",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -96926,7 +96926,7 @@
           },
           "inventory_type": {
             "type": "string",
-            "description": "The inventory types to which the promotion activity applies:\n- `SELF_FULFILLED`: Only applies to Inventory fulfilled from seller warehouses\n- `FULFILLED_BY_TIKTOK`: Only applies to Inventory fulfilled by TikTok from FBT (Fulfilled by TikTok) warehouses.\n- `ALL`:  Applies to all inventory of eligible products.\nDefault: `SELF_FULFILLED`\n`FULFILLED_BY_TIKTOK` and `ALL` can only be set when `product_level`==`SHOP` and `threshold_type=NO_THRESHOLD`."
+            "description": "The inventory types to which the promotion activity applies: \n- `SELF_FULFILLED`: Only applies to inventory fulfilled from seller warehouses \n- `FULFILLED_BY_TIKTOK`: Only applies to inventory fulfilled by TikTok from FBT (Fulfilled by TikTok) warehouses. \n- `ALL`: Applies to all inventory of eligible products. \nFor US shop-wide free-shipping promotions (`product_level` == `SHOP`), the default is `ALL`, and `inventory_type` cannot be set to only `SELF_FULFILLED` or only `FULFILLED_BY_TIKTOK`. \nFor other areas, the default is `SELF_FULFILLED`. `FULFILLED_BY_TIKTOK` and `ALL` can only be set when `product_level` == `SHOP` and `threshold_type` = `NO_THRESHOLD`."
           },
           "area_scope": {
             "$ref": "#/components/schemas/AreaScope",
