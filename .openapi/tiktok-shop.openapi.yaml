@@ -5833,7 +5833,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Read Seller Affiliate Collaboration
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/check-creator-outreach-eligibility-202610
   /analytics/202403/videos/performances:
@@ -25505,7 +25506,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/predict-product-package-dimensions-and-weight-202609
   /product/202609/products/properties/recommend:
@@ -25562,7 +25564,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/recommend-required-product-properties-202609
   /product/202609/products/{product_id}/strikethrough_price/submit:
@@ -25618,7 +25621,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/submit-strikethrough-price-202609
   /product/202610/size_charts:
@@ -25672,7 +25676,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/create-size-chart-v2-202610
   /product/202610/size_charts/edit:
@@ -25725,7 +25730,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/edit-size-chart-v2-202610
   /promotion/202309/activities:

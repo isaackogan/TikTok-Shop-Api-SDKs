@@ -8564,7 +8564,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Read Seller Affiliate Collaboration"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/check-creator-outreach-eligibility-202610"
       }
@@ -37506,7 +37508,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/predict-product-package-dimensions-and-weight-202609"
       }
@@ -37594,7 +37598,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/recommend-required-product-properties-202609"
       }
@@ -37674,7 +37680,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/submit-strikethrough-price-202609"
       }
@@ -37762,7 +37770,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/create-size-chart-v2-202610"
       }
@@ -37849,7 +37859,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/edit-size-chart-v2-202610"
       }
