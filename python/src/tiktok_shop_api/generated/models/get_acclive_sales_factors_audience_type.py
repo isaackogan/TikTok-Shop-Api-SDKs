@@ -1,0 +1,13 @@
+from enum import StrEnum
+
+class GetAccliveSalesFactorsAudienceType(StrEnum):
+    CONVERSION = "CONVERSION"
+    DTC_NEW_CONVERSION = "DTC_NEW_CONVERSION"
+    DTC_REPEAT_CONVERSION = "DTC_REPEAT_CONVERSION"
+    NEW_CONVERSION = "NEW_CONVERSION"
+    REPEAT_CONVERSION = "REPEAT_CONVERSION"
+    SHOP_CLICKED_NOT_PURCHASED = "SHOP_CLICKED_NOT_PURCHASED"
+    SHOP_NON_EXPOSED = "SHOP_NON_EXPOSED"
+
+    def __str__(self) -> str:
+        return str(self.value)

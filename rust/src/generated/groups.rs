@@ -1740,6 +1740,239 @@ impl AnalyticsApi {
         .await
         .map_err(Error::from)
     }
+
+    /// Get authorized ACC brands and their associated industries for the current shop. When a record includes both IDs, use its `brand_id` and `industry_id` together for Get ACC Audience Overview.
+    pub async fn get_acc_brands(&self) -> Result<models::GetAccBrandsResponse, Error> {
+        apis::analytics_api::get_acc_brands(&self.config).await.map_err(Error::from)
+    }
+
+    /// Get ACC audience key metrics, benchmarks, and trends.
+    pub async fn get_acc_audience_overview(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        date: Option<chrono::NaiveDate>,
+        benchmark: Option<&str>,
+    ) -> Result<models::GetAccAudienceOverviewResponse, Error> {
+        apis::analytics_api::get_acc_audience_overview(&self.config, brand_id, industry_id, date, benchmark)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the selected reporting window.  Use brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type; account_type and form filter the reported segments.
+    pub async fn get_acc_audience_penetration(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        date: Option<chrono::NaiveDate>,
+        trend_days: Option<i64>,
+        account_type: Option<&str>,
+        form: Option<&str>,
+        audience_type: Option<&str>,
+    ) -> Result<models::GetAccAudiencePenetrationResponse, Error> {
+        apis::analytics_api::get_acc_audience_penetration(
+            &self.config,
+            brand_id,
+            industry_id,
+            date,
+            trend_days,
+            account_type,
+            form,
+            audience_type,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected ACC audience for a brand.  Use `entity_type` to choose the ranking. Each item contains its rank, entity information and preference metrics; `entity_detail` varies by entity type. Select the analysis window with `date` and `trend_days`, and use `scope` to choose shop-level or market-level results. To retrieve more results, pass the returned `page_token` as `page_token` in the next request.
+    pub async fn get_acc_audience_preference_list(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        audience_type: &str,
+        entity_type: &str,
+        date: Option<chrono::NaiveDate>,
+        trend_days: Option<i64>,
+        scope: Option<&str>,
+        keyword: Option<&str>,
+        l2_category_id: Option<&str>,
+        l3_category_id: Option<&str>,
+        category_id: Option<&str>,
+        factor_id: Option<&str>,
+        sort_field: Option<&str>,
+        sort_order: Option<&str>,
+        page_size: Option<i64>,
+        page_token: Option<&str>,
+    ) -> Result<models::GetAccAudiencePreferenceListResponse, Error> {
+        apis::analytics_api::get_acc_audience_preference_list(
+            &self.config,
+            brand_id,
+            industry_id,
+            audience_type,
+            entity_type,
+            date,
+            trend_days,
+            scope,
+            keyword,
+            l2_category_id,
+            l3_category_id,
+            category_id,
+            factor_id,
+            sort_field,
+            sort_order,
+            page_size,
+            page_token,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and reporting window. Each factor includes its ID, display name, GMV range, and customer and order counts.
+    pub async fn get_acclive_sales_factors(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        audience_type: &str,
+        date: Option<chrono::NaiveDate>,
+        trend_days: Option<i64>,
+        scope: Option<&str>,
+        category_id: Option<&str>,
+        keyword: Option<&str>,
+        sort_field: Option<&str>,
+        sort_order: Option<&str>,
+        page_size: Option<i64>,
+        page_token: Option<&str>,
+    ) -> Result<models::GetAccliveSalesFactorsResponse, Error> {
+        apis::analytics_api::get_acclive_sales_factors(
+            &self.config,
+            brand_id,
+            industry_id,
+            audience_type,
+            date,
+            trend_days,
+            scope,
+            category_id,
+            keyword,
+            sort_field,
+            sort_order,
+            page_size,
+            page_token,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Get ACC product category sales rankings for the selected audience, brand and date window. Results contain level-2 categories with level-3 children; sorting and pagination apply to the level-2 categories.
+    pub async fn get_acc_top_sales_categories(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        audience_type: &str,
+        date: Option<chrono::NaiveDate>,
+        trend_days: Option<i64>,
+        scope: Option<&str>,
+        keyword: Option<&str>,
+        sort_field: Option<&str>,
+        sort_order: Option<&str>,
+        page_size: Option<i64>,
+        page_token: Option<&str>,
+    ) -> Result<models::GetAccTopSalesCategoriesResponse, Error> {
+        apis::analytics_api::get_acc_top_sales_categories(
+            &self.config,
+            brand_id,
+            industry_id,
+            audience_type,
+            date,
+            trend_days,
+            scope,
+            keyword,
+            sort_field,
+            sort_order,
+            page_size,
+            page_token,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for the selected brand, audience segment, scope, and reporting window.
+    pub async fn get_acc_audience_preference_summary(
+        &self,
+        brand_id: &str,
+        industry_id: &str,
+        audience_type: &str,
+        date: Option<chrono::NaiveDate>,
+        trend_days: Option<i64>,
+        scope: Option<&str>,
+    ) -> Result<models::GetAccAudiencePreferenceSummaryResponse, Error> {
+        apis::analytics_api::get_acc_audience_preference_summary(
+            &self.config,
+            brand_id,
+            industry_id,
+            audience_type,
+            date,
+            trend_days,
+            scope,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products, including GMV and off-site effect metrics.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. If neither report is available, no content records are returned.
+    pub async fn get_off_site_performance_details(
+        &self,
+        pixel_id: &str,
+        attribution_setting: &str,
+        content_type: &str,
+        date: Option<chrono::NaiveDate>,
+        sort_field: Option<&str>,
+        sort_order: Option<&str>,
+        page_size: Option<i64>,
+        page_token: Option<&str>,
+    ) -> Result<models::GetOffSitePerformanceDetailsResponse, Error> {
+        apis::analytics_api::get_off_site_performance_details(
+            &self.config,
+            pixel_id,
+            attribution_setting,
+            content_type,
+            date,
+            sort_field,
+            sort_order,
+            page_size,
+            page_token,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Compare weekly on-site and off-site attributed customer audience distributions.  Lists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean that the returned percentages may not sum to 100%.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report data and do not necessarily mean that the shop had no customers.
+    pub async fn get_off_site_audience_insights(
+        &self,
+        pixel_id: &str,
+        attribution_setting: &str,
+        date: Option<chrono::NaiveDate>,
+    ) -> Result<models::GetOffSiteAudienceInsightsResponse, Error> {
+        apis::analytics_api::get_off_site_audience_insights(&self.config, pixel_id, attribution_setting, date)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Retrieve weekly off-site performance metrics and trends.
+    pub async fn get_off_site_performance_overview(
+        &self,
+        pixel_id: &str,
+        attribution_setting: &str,
+        date: Option<chrono::NaiveDate>,
+    ) -> Result<models::GetOffSitePerformanceOverviewResponse, Error> {
+        apis::analytics_api::get_off_site_performance_overview(&self.config, pixel_id, attribution_setting, date)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Retrieve the Pixel IDs available to the authorized shop.
+    pub async fn get_shop_off_site_pixels(&self) -> Result<models::GetShopOffSitePixelsResponse, Error> {
+        apis::analytics_api::get_shop_off_site_pixels(&self.config).await.map_err(Error::from)
+    }
 }
 
 impl fmt::Debug for AnalyticsApi {

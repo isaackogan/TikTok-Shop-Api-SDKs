@@ -140,6 +140,18 @@ if TYPE_CHECKING:
     from .models.generate_publisher_sharing_links_in_batch_response import GeneratePublisherSharingLinksInBatchResponse
     from .models.generate_target_collaboration_link_request import GenerateTargetCollaborationLinkRequest
     from .models.generate_target_collaboration_link_response import GenerateTargetCollaborationLinkResponse
+    from .models.get_acc_audience_overview_response import GetACCAudienceOverviewResponse
+    from .models.get_acc_audience_penetration_response import GetACCAudiencePenetrationResponse
+    from .models.get_acc_audience_preference_list_page_size import GetAccAudiencePreferenceListPageSize
+    from .models.get_acc_audience_preference_list_response import GetACCAudiencePreferenceListResponse
+    from .models.get_acc_audience_preference_summary_response import GetACCAudiencePreferenceSummaryResponse
+    from .models.get_acc_brands_response import GetACCBrandsResponse
+    from .models.get_acc_top_sales_categories_page_size import GetAccTopSalesCategoriesPageSize
+    from .models.get_acc_top_sales_categories_response import GetACCTopSalesCategoriesResponse
+    from .models.get_acclive_sales_factors_audience_type import GetAccliveSalesFactorsAudienceType
+    from .models.get_acclive_sales_factors_page_size import GetAccliveSalesFactorsPageSize
+    from .models.get_acclive_sales_factors_response import GetACCLIVESalesFactorsResponse
+    from .models.get_acclive_sales_factors_trend_days import GetAccliveSalesFactorsTrendDays
     from .models.get_active_shops_response import GetActiveShopsResponse
     from .models.get_activity_response import GetActivityResponse
     from .models.get_affiliate_campaign_creator_product_content_statistics_response import GetAffiliateCampaignCreatorProductContentStatisticsResponse
@@ -234,6 +246,11 @@ if TYPE_CHECKING:
     from .models.get_marketplace_creator_performance_data_groups_item import GetMarketplaceCreatorPerformanceDataGroupsItem
     from .models.get_marketplace_creator_performance_response import GetMarketplaceCreatorPerformanceResponse
     from .models.get_message_templates_response import GetMessageTemplatesResponse
+    from .models.get_off_site_audience_insights_response import GetOffSiteAudienceInsightsResponse
+    from .models.get_off_site_performance_details_content_type import GetOffSitePerformanceDetailsContentType
+    from .models.get_off_site_performance_details_response import GetOffSitePerformanceDetailsResponse
+    from .models.get_off_site_performance_details_sort_order import GetOffSitePerformanceDetailsSortOrder
+    from .models.get_off_site_performance_overview_response import GetOffSitePerformanceOverviewResponse
     from .models.get_open_collaboration_creator_content_details_response import GetOpenCollaborationCreatorContentDetailsResponse
     from .models.get_open_collaboration_product_list_by_product_ids_request import GetOpenCollaborationProductListByProductIdsRequest
     from .models.get_open_collaboration_product_list_by_product_ids_response import GetOpenCollaborationProductListByProductIdsResponse
@@ -291,6 +308,7 @@ if TYPE_CHECKING:
     from .models.get_shop_live_products_performance_list_response import GetShopLIVEProductsPerformanceListResponse
     from .models.get_shop_live_products_performance_list_sort_field import GetShopLiveProductsPerformanceListSortField
     from .models.get_shop_live_products_performance_list_sort_order import GetShopLiveProductsPerformanceListSortOrder
+    from .models.get_shop_off_site_pixels_response import GetShopOffSitePixelsResponse
     from .models.get_shop_performance_currency import GetShopPerformanceCurrency
     from .models.get_shop_performance_granularity import GetShopPerformanceGranularity
     from .models.get_shop_performance_per_hour_currency import GetShopPerformancePerHourCurrency
@@ -4672,6 +4690,258 @@ class AsyncAffiliateSellerApi(AsyncGroup):
 class AnalyticsApi(SyncGroup):
     """Operations tagged \"Analytics\"."""
 
+    def get_acc_audience_overview(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        benchmark: str | Unset = UNSET,
+    ) -> GetACCAudienceOverviewResponse | None:
+        """Get ACC Audience Overview
+
+         Get ACC audience key metrics, benchmarks, and trends.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            benchmark (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_overview as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, benchmark=benchmark)
+
+    def get_acc_audience_penetration(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        account_type: str | Unset = UNSET,
+        form: str | Unset = UNSET,
+        audience_type: str | Unset = UNSET,
+    ) -> GetACCAudiencePenetrationResponse | None:
+        """Get ACC Audience Penetration
+
+         Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the
+        selected reporting window.
+
+        Use brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET
+        /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type;
+        account_type and form filter the reported segments.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            account_type (str | Unset):
+            form (str | Unset):
+            audience_type (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_penetration as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, account_type=account_type, form=form, audience_type=audience_type)
+
+    def get_acc_audience_preference_list(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        entity_type: str,
+        scope: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        l2_category_id: str | Unset = UNSET,
+        l3_category_id: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        factor_id: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccAudiencePreferenceListPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCAudiencePreferenceListResponse | None:
+        """Get ACC Audience Preference List
+
+         Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected
+        ACC audience for a brand.
+
+        Use `entity_type` to choose the ranking. Each item contains its rank, entity information and
+        preference metrics; `entity_detail` varies by entity type. Select the analysis window with `date`
+        and `trend_days`, and use `scope` to choose shop-level or market-level results. To retrieve more
+        results, pass the returned `page_token` as `page_token` in the next request.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            entity_type (str):
+            scope (str | Unset):
+            keyword (str | Unset):
+            l2_category_id (str | Unset):
+            l3_category_id (str | Unset):
+            category_id (str | Unset):
+            factor_id (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccAudiencePreferenceListPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_preference_list as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, entity_type=entity_type, scope=scope, keyword=keyword, l2_category_id=l2_category_id, l3_category_id=l3_category_id, category_id=category_id, factor_id=factor_id, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    def get_acc_audience_preference_summary(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        scope: str | Unset = UNSET,
+    ) -> GetACCAudiencePreferenceSummaryResponse | None:
+        """Get ACC Audience Preference Summary
+
+         Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for
+        the selected brand, audience segment, scope, and reporting window.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            scope (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_preference_summary as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope)
+
+    def get_acc_brands(
+        self,
+    ) -> GetACCBrandsResponse | None:
+        """Get ACC Brands
+
+         Get authorized ACC brands and their associated industries for the current shop. When a record
+        includes both IDs, use its `brand_id` and `industry_id` together for Get ACC Audience Overview.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_brands as _op
+
+        return self._run(_op.sync_detailed)
+
+    def get_acc_top_sales_categories(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        scope: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccTopSalesCategoriesPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCTopSalesCategoriesResponse | None:
+        """Get ACC Top Sales Categories
+
+         Get ACC product category sales rankings for the selected audience, brand and date window. Results
+        contain level-2 categories with level-3 children; sorting and pagination apply to the level-2
+        categories.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            scope (str | Unset):
+            keyword (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccTopSalesCategoriesPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_top_sales_categories as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    def get_acclive_sales_factors(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: GetAccliveSalesFactorsTrendDays | Unset = UNSET,
+        audience_type: GetAccliveSalesFactorsAudienceType,
+        scope: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccliveSalesFactorsPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCLIVESalesFactorsResponse | None:
+        """Get ACC LIVE Sales Factors
+
+         Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and
+        reporting window. Each factor includes its ID, display name, GMV range, and customer and order
+        counts.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (GetAccliveSalesFactorsTrendDays | Unset):
+            audience_type (GetAccliveSalesFactorsAudienceType):
+            scope (str | Unset):
+            category_id (str | Unset):
+            keyword (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccliveSalesFactorsPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acclive_sales_factors as _op
+
+        return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, category_id=category_id, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
     def get_bestselling_creators(
         self,
         *,
@@ -4915,6 +5185,100 @@ class AnalyticsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, live_room_id=live_room_id)
 
+    def get_off_site_audience_insights(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+    ) -> GetOffSiteAudienceInsightsResponse | None:
+        """Get Off Site Audience Insights
+
+         Compare weekly on-site and off-site attributed customer audience distributions.
+
+        Lists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean
+        that the returned percentages may not sum to 100%.
+
+        If the report for the requested pixel and attribution setting is unavailable, results may use the
+        shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report
+        data and do not necessarily mean that the shop had no customers.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_audience_insights as _op
+
+        return self._run(_op.sync_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting)
+
+    def get_off_site_performance_details(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+        content_type: GetOffSitePerformanceDetailsContentType,
+        sort_field: str | Unset = UNSET,
+        sort_order: GetOffSitePerformanceDetailsSortOrder | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetOffSitePerformanceDetailsResponse | None:
+        """Get Off Site Performance Details
+
+         Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products,
+        including GMV and off-site effect metrics.
+
+        If the report for the requested pixel and attribution setting is unavailable, results may use the
+        shop-level report with VIEW_14D attribution. If neither report is available, no content records are
+        returned.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+            content_type (GetOffSitePerformanceDetailsContentType):
+            sort_field (str | Unset):
+            sort_order (GetOffSitePerformanceDetailsSortOrder | Unset):
+            page_size (int | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_performance_details as _op
+
+        return self._run(_op.sync_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting, content_type=content_type, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    def get_off_site_performance_overview(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+    ) -> GetOffSitePerformanceOverviewResponse | None:
+        """Get Off Site Performance Overview
+
+         Retrieve weekly off-site performance metrics and trends.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_performance_overview as _op
+
+        return self._run(_op.sync_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting)
+
     def get_shop_live_minute_performance(
         self,
         live_id: str,
@@ -5031,6 +5395,21 @@ class AnalyticsApi(SyncGroup):
         from .api.analytics import get_shop_live_products_performance_list as _op
 
         return self._run(_op.sync_detailed, live_id=live_id, sort_order=sort_order, sort_field=sort_field, currency=currency)
+
+    def get_shop_off_site_pixels(
+        self,
+    ) -> GetShopOffSitePixelsResponse | None:
+        """Get Shop Off Site Pixels
+
+         Retrieve the Pixel IDs available to the authorized shop.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_shop_off_site_pixels as _op
+
+        return self._run(_op.sync_detailed)
 
     def get_shop_performance(
         self,
@@ -5549,6 +5928,258 @@ class AnalyticsApi(SyncGroup):
 class AsyncAnalyticsApi(AsyncGroup):
     """Operations tagged \"Analytics\"."""
 
+    async def get_acc_audience_overview(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        benchmark: str | Unset = UNSET,
+    ) -> GetACCAudienceOverviewResponse | None:
+        """Get ACC Audience Overview
+
+         Get ACC audience key metrics, benchmarks, and trends.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            benchmark (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_overview as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, benchmark=benchmark)
+
+    async def get_acc_audience_penetration(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        account_type: str | Unset = UNSET,
+        form: str | Unset = UNSET,
+        audience_type: str | Unset = UNSET,
+    ) -> GetACCAudiencePenetrationResponse | None:
+        """Get ACC Audience Penetration
+
+         Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the
+        selected reporting window.
+
+        Use brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET
+        /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type;
+        account_type and form filter the reported segments.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            account_type (str | Unset):
+            form (str | Unset):
+            audience_type (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_penetration as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, account_type=account_type, form=form, audience_type=audience_type)
+
+    async def get_acc_audience_preference_list(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        entity_type: str,
+        scope: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        l2_category_id: str | Unset = UNSET,
+        l3_category_id: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        factor_id: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccAudiencePreferenceListPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCAudiencePreferenceListResponse | None:
+        """Get ACC Audience Preference List
+
+         Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected
+        ACC audience for a brand.
+
+        Use `entity_type` to choose the ranking. Each item contains its rank, entity information and
+        preference metrics; `entity_detail` varies by entity type. Select the analysis window with `date`
+        and `trend_days`, and use `scope` to choose shop-level or market-level results. To retrieve more
+        results, pass the returned `page_token` as `page_token` in the next request.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            entity_type (str):
+            scope (str | Unset):
+            keyword (str | Unset):
+            l2_category_id (str | Unset):
+            l3_category_id (str | Unset):
+            category_id (str | Unset):
+            factor_id (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccAudiencePreferenceListPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_preference_list as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, entity_type=entity_type, scope=scope, keyword=keyword, l2_category_id=l2_category_id, l3_category_id=l3_category_id, category_id=category_id, factor_id=factor_id, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    async def get_acc_audience_preference_summary(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        scope: str | Unset = UNSET,
+    ) -> GetACCAudiencePreferenceSummaryResponse | None:
+        """Get ACC Audience Preference Summary
+
+         Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for
+        the selected brand, audience segment, scope, and reporting window.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            scope (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_audience_preference_summary as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope)
+
+    async def get_acc_brands(
+        self,
+    ) -> GetACCBrandsResponse | None:
+        """Get ACC Brands
+
+         Get authorized ACC brands and their associated industries for the current shop. When a record
+        includes both IDs, use its `brand_id` and `industry_id` together for Get ACC Audience Overview.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_brands as _op
+
+        return await self._run(_op.asyncio_detailed)
+
+    async def get_acc_top_sales_categories(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: int | Unset = UNSET,
+        audience_type: str,
+        scope: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccTopSalesCategoriesPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCTopSalesCategoriesResponse | None:
+        """Get ACC Top Sales Categories
+
+         Get ACC product category sales rankings for the selected audience, brand and date window. Results
+        contain level-2 categories with level-3 children; sorting and pagination apply to the level-2
+        categories.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (int | Unset):
+            audience_type (str):
+            scope (str | Unset):
+            keyword (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccTopSalesCategoriesPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acc_top_sales_categories as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    async def get_acclive_sales_factors(
+        self,
+        *,
+        brand_id: str,
+        industry_id: str,
+        date: datetime.date | Unset = UNSET,
+        trend_days: GetAccliveSalesFactorsTrendDays | Unset = UNSET,
+        audience_type: GetAccliveSalesFactorsAudienceType,
+        scope: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        keyword: str | Unset = UNSET,
+        sort_field: str | Unset = UNSET,
+        sort_order: str | Unset = UNSET,
+        page_size: GetAccliveSalesFactorsPageSize | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetACCLIVESalesFactorsResponse | None:
+        """Get ACC LIVE Sales Factors
+
+         Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and
+        reporting window. Each factor includes its ID, display name, GMV range, and customer and order
+        counts.
+
+        Args:
+            brand_id (str):
+            industry_id (str):
+            date (datetime.date | Unset):
+            trend_days (GetAccliveSalesFactorsTrendDays | Unset):
+            audience_type (GetAccliveSalesFactorsAudienceType):
+            scope (str | Unset):
+            category_id (str | Unset):
+            keyword (str | Unset):
+            sort_field (str | Unset):
+            sort_order (str | Unset):
+            page_size (GetAccliveSalesFactorsPageSize | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_acclive_sales_factors as _op
+
+        return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, category_id=category_id, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
     async def get_bestselling_creators(
         self,
         *,
@@ -5792,6 +6423,100 @@ class AsyncAnalyticsApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, live_room_id=live_room_id)
 
+    async def get_off_site_audience_insights(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+    ) -> GetOffSiteAudienceInsightsResponse | None:
+        """Get Off Site Audience Insights
+
+         Compare weekly on-site and off-site attributed customer audience distributions.
+
+        Lists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean
+        that the returned percentages may not sum to 100%.
+
+        If the report for the requested pixel and attribution setting is unavailable, results may use the
+        shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report
+        data and do not necessarily mean that the shop had no customers.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_audience_insights as _op
+
+        return await self._run(_op.asyncio_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting)
+
+    async def get_off_site_performance_details(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+        content_type: GetOffSitePerformanceDetailsContentType,
+        sort_field: str | Unset = UNSET,
+        sort_order: GetOffSitePerformanceDetailsSortOrder | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+    ) -> GetOffSitePerformanceDetailsResponse | None:
+        """Get Off Site Performance Details
+
+         Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products,
+        including GMV and off-site effect metrics.
+
+        If the report for the requested pixel and attribution setting is unavailable, results may use the
+        shop-level report with VIEW_14D attribution. If neither report is available, no content records are
+        returned.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+            content_type (GetOffSitePerformanceDetailsContentType):
+            sort_field (str | Unset):
+            sort_order (GetOffSitePerformanceDetailsSortOrder | Unset):
+            page_size (int | Unset):
+            page_token (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_performance_details as _op
+
+        return await self._run(_op.asyncio_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting, content_type=content_type, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    async def get_off_site_performance_overview(
+        self,
+        *,
+        date: datetime.date | Unset = UNSET,
+        pixel_id: str,
+        attribution_setting: str,
+    ) -> GetOffSitePerformanceOverviewResponse | None:
+        """Get Off Site Performance Overview
+
+         Retrieve weekly off-site performance metrics and trends.
+
+        Args:
+            date (datetime.date | Unset):
+            pixel_id (str):
+            attribution_setting (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_off_site_performance_overview as _op
+
+        return await self._run(_op.asyncio_detailed, date=date, pixel_id=pixel_id, attribution_setting=attribution_setting)
+
     async def get_shop_live_minute_performance(
         self,
         live_id: str,
@@ -5908,6 +6633,21 @@ class AsyncAnalyticsApi(AsyncGroup):
         from .api.analytics import get_shop_live_products_performance_list as _op
 
         return await self._run(_op.asyncio_detailed, live_id=live_id, sort_order=sort_order, sort_field=sort_field, currency=currency)
+
+    async def get_shop_off_site_pixels(
+        self,
+    ) -> GetShopOffSitePixelsResponse | None:
+        """Get Shop Off Site Pixels
+
+         Retrieve the Pixel IDs available to the authorized shop.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_shop_off_site_pixels as _op
+
+        return await self._run(_op.asyncio_detailed)
 
     async def get_shop_performance(
         self,

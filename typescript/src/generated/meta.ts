@@ -953,6 +953,94 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "getACCBrands",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/brands",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCAudienceOverview",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/overview",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCAudiencePenetration",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/penetration",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCAudiencePreferenceList",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/preferences",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCLIVESalesFactors",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/preferences/live/factors",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCTopSalesCategories",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/preferences/product/categories",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getACCAudiencePreferenceSummary",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/acc/preferences/summary",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getOffSitePerformanceDetails",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/off_site/details",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getOffSiteAudienceInsights",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/off_site/insights",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getOffSitePerformanceOverview",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/off_site/overview",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getShopOffSitePixels",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/off_site/pixels",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "getAuthorizedShops",
     "tag": "Authorization",
     "group": "authorization",

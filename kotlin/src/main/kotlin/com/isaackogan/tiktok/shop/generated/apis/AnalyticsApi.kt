@@ -27,6 +27,13 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import com.isaackogan.tiktok.shop.generated.models.GetACCAudienceOverviewResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCAudiencePenetrationResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCAudiencePreferenceListResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCAudiencePreferenceSummaryResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCBrandsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCLIVESalesFactorsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetACCTopSalesCategoriesResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingCreatorsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingLIVESessionsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingProductsResponse
@@ -38,6 +45,9 @@ import com.isaackogan.tiktok.shop.generated.models.GetLiveRoomProductStatsRespon
 import com.isaackogan.tiktok.shop.generated.models.GetLiveRoomTrafficPerformanceResponse
 import com.isaackogan.tiktok.shop.generated.models.GetLiveRoomUserPortraitsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetLiveRoomViewTrendsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetOffSiteAudienceInsightsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetOffSitePerformanceDetailsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetOffSitePerformanceOverviewResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricDiagnosisResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricProblemDetailsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricTopItemsResponse
@@ -47,6 +57,7 @@ import com.isaackogan.tiktok.shop.generated.models.GetShopLIVEMinutePerformanceR
 import com.isaackogan.tiktok.shop.generated.models.GetShopLIVEPerformanceListResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopLIVEPerformanceOverviewResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopLIVEProductsPerformanceListResponse
+import com.isaackogan.tiktok.shop.generated.models.GetShopOffSitePixelsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopPerformancePerHourResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopPerformanceResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopProductPerformanceDetailResponse
@@ -82,6 +93,907 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.BASE_URL_KEY, "https://open-api.tiktokglobalshop.com")
         }
+    }
+
+    /**
+     * GET /analytics/202610/acc/overview
+     * Get ACC Audience Overview
+     * Get ACC audience key metrics, benchmarks, and trends.
+     * @param brandId The authorized brand ID to analyze. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands). Neither ID may be blank.
+     * @param industryId The industry ID used to select data availability and industry benchmarks. Use &#x60;industry_id&#x60; from the same Get ACC Brands record as &#x60;brand_id&#x60;. This value is required and must not be blank.
+     * @param date Date for the key metrics, in &#x60;YYYY-MM-DD&#x60; format (UTC). If omitted, uses the latest available date for the requested brand and industry. The date must be within the available data range. (optional)
+     * @param benchmark Selects the industry benchmark: the average value of the corresponding audience metric among the industry&#39;s top N brands. Allowed values: 5, 10, 25, and 50. Default: 5. (optional)
+     * @return GetACCAudienceOverviewResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCAudienceOverview(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate? = null, benchmark: kotlin.String? = null) : GetACCAudienceOverviewResponse {
+        val localVarResponse = getACCAudienceOverviewWithHttpInfo(brandId = brandId, industryId = industryId, date = date, benchmark = benchmark)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCAudienceOverviewResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/overview
+     * Get ACC Audience Overview
+     * Get ACC audience key metrics, benchmarks, and trends.
+     * @param brandId The authorized brand ID to analyze. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands). Neither ID may be blank.
+     * @param industryId The industry ID used to select data availability and industry benchmarks. Use &#x60;industry_id&#x60; from the same Get ACC Brands record as &#x60;brand_id&#x60;. This value is required and must not be blank.
+     * @param date Date for the key metrics, in &#x60;YYYY-MM-DD&#x60; format (UTC). If omitted, uses the latest available date for the requested brand and industry. The date must be within the available data range. (optional)
+     * @param benchmark Selects the industry benchmark: the average value of the corresponding audience metric among the industry&#39;s top N brands. Allowed values: 5, 10, 25, and 50. Default: 5. (optional)
+     * @return ApiResponse<GetACCAudienceOverviewResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCAudienceOverviewWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate?, benchmark: kotlin.String?) : ApiResponse<GetACCAudienceOverviewResponse?> {
+        val localVariableConfig = getACCAudienceOverviewRequestConfig(brandId = brandId, industryId = industryId, date = date, benchmark = benchmark)
+
+        return request<Unit, GetACCAudienceOverviewResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCAudienceOverview
+     *
+     * @param brandId The authorized brand ID to analyze. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands). Neither ID may be blank.
+     * @param industryId The industry ID used to select data availability and industry benchmarks. Use &#x60;industry_id&#x60; from the same Get ACC Brands record as &#x60;brand_id&#x60;. This value is required and must not be blank.
+     * @param date Date for the key metrics, in &#x60;YYYY-MM-DD&#x60; format (UTC). If omitted, uses the latest available date for the requested brand and industry. The date must be within the available data range. (optional)
+     * @param benchmark Selects the industry benchmark: the average value of the corresponding audience metric among the industry&#39;s top N brands. Allowed values: 5, 10, 25, and 50. Default: 5. (optional)
+     * @return RequestConfig
+     */
+    fun getACCAudienceOverviewRequestConfig(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate?, benchmark: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (benchmark != null) {
+                    put("benchmark", listOf(benchmark.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/overview",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202610/acc/penetration
+     * Get ACC Audience Penetration
+     * Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the selected reporting window.  Use brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type; account_type and form filter the reported segments.
+     * @param brandId ID of the brand to analyze. Use brand_id from a brands[] record returned by Get ACC Brands for the current shop, together with industry_id from that same record. Must not be blank.
+     * @param industryId ID of the industry used to determine available reporting dates. Use industry_id from the same Get ACC Brands brands[] record as brand_id. Must not be blank.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall within the available date range for the selected shop, brand, and industry. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param accountType Account type used to filter the reported segments. Supported values: ALL (all account types), LINK_ACCOUNT (shop-linked accounts), CREATOR_ACCOUNT (affiliate creator accounts). Defaults to ALL when omitted or blank. (optional)
+     * @param form Content form used to filter the reported segments. Supported values: ALL (all forms), PRODUCT (product cards), VIDEO (short videos), LIVE (livestreams), PHOTO (image-and-text posts). Defaults to ALL when omitted or blank. (optional)
+     * @param audienceType Initial audience segment used as the baseline for penetration ratios. Supported values: ACC (deduplicated union of awareness, consideration, and conversion audiences), AWARENESS (people exposed to or who viewed the brand content or products), CONSIDERATION (people who clicked, added to cart, followed, or otherwise showed deeper interest), CONVERSION (purchasers), NEW_CONVERSION (first-time shop buyers), and REPEAT_CONVERSION (repeat shop buyers). Defaults to ACC when omitted or blank. The baseline count is taken at the start of the reporting window. (optional)
+     * @return GetACCAudiencePenetrationResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCAudiencePenetration(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate? = null, trendDays: kotlin.Long? = null, accountType: kotlin.String? = null, form: kotlin.String? = null, audienceType: kotlin.String? = null) : GetACCAudiencePenetrationResponse {
+        val localVarResponse = getACCAudiencePenetrationWithHttpInfo(brandId = brandId, industryId = industryId, date = date, trendDays = trendDays, accountType = accountType, form = form, audienceType = audienceType)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCAudiencePenetrationResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/penetration
+     * Get ACC Audience Penetration
+     * Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the selected reporting window.  Use brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type; account_type and form filter the reported segments.
+     * @param brandId ID of the brand to analyze. Use brand_id from a brands[] record returned by Get ACC Brands for the current shop, together with industry_id from that same record. Must not be blank.
+     * @param industryId ID of the industry used to determine available reporting dates. Use industry_id from the same Get ACC Brands brands[] record as brand_id. Must not be blank.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall within the available date range for the selected shop, brand, and industry. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param accountType Account type used to filter the reported segments. Supported values: ALL (all account types), LINK_ACCOUNT (shop-linked accounts), CREATOR_ACCOUNT (affiliate creator accounts). Defaults to ALL when omitted or blank. (optional)
+     * @param form Content form used to filter the reported segments. Supported values: ALL (all forms), PRODUCT (product cards), VIDEO (short videos), LIVE (livestreams), PHOTO (image-and-text posts). Defaults to ALL when omitted or blank. (optional)
+     * @param audienceType Initial audience segment used as the baseline for penetration ratios. Supported values: ACC (deduplicated union of awareness, consideration, and conversion audiences), AWARENESS (people exposed to or who viewed the brand content or products), CONSIDERATION (people who clicked, added to cart, followed, or otherwise showed deeper interest), CONVERSION (purchasers), NEW_CONVERSION (first-time shop buyers), and REPEAT_CONVERSION (repeat shop buyers). Defaults to ACC when omitted or blank. The baseline count is taken at the start of the reporting window. (optional)
+     * @return ApiResponse<GetACCAudiencePenetrationResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCAudiencePenetrationWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, accountType: kotlin.String?, form: kotlin.String?, audienceType: kotlin.String?) : ApiResponse<GetACCAudiencePenetrationResponse?> {
+        val localVariableConfig = getACCAudiencePenetrationRequestConfig(brandId = brandId, industryId = industryId, date = date, trendDays = trendDays, accountType = accountType, form = form, audienceType = audienceType)
+
+        return request<Unit, GetACCAudiencePenetrationResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCAudiencePenetration
+     *
+     * @param brandId ID of the brand to analyze. Use brand_id from a brands[] record returned by Get ACC Brands for the current shop, together with industry_id from that same record. Must not be blank.
+     * @param industryId ID of the industry used to determine available reporting dates. Use industry_id from the same Get ACC Brands brands[] record as brand_id. Must not be blank.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall within the available date range for the selected shop, brand, and industry. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param accountType Account type used to filter the reported segments. Supported values: ALL (all account types), LINK_ACCOUNT (shop-linked accounts), CREATOR_ACCOUNT (affiliate creator accounts). Defaults to ALL when omitted or blank. (optional)
+     * @param form Content form used to filter the reported segments. Supported values: ALL (all forms), PRODUCT (product cards), VIDEO (short videos), LIVE (livestreams), PHOTO (image-and-text posts). Defaults to ALL when omitted or blank. (optional)
+     * @param audienceType Initial audience segment used as the baseline for penetration ratios. Supported values: ACC (deduplicated union of awareness, consideration, and conversion audiences), AWARENESS (people exposed to or who viewed the brand content or products), CONSIDERATION (people who clicked, added to cart, followed, or otherwise showed deeper interest), CONVERSION (purchasers), NEW_CONVERSION (first-time shop buyers), and REPEAT_CONVERSION (repeat shop buyers). Defaults to ACC when omitted or blank. The baseline count is taken at the start of the reporting window. (optional)
+     * @return RequestConfig
+     */
+    fun getACCAudiencePenetrationRequestConfig(brandId: kotlin.String, industryId: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, accountType: kotlin.String?, form: kotlin.String?, audienceType: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (trendDays != null) {
+                    put("trend_days", listOf(trendDays.toString()))
+                }
+                if (accountType != null) {
+                    put("account_type", listOf(accountType.toString()))
+                }
+                if (form != null) {
+                    put("form", listOf(form.toString()))
+                }
+                if (audienceType != null) {
+                    put("audience_type", listOf(audienceType.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/penetration",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter pageSize
+     */
+     enum class PageSizeGetACCAudiencePreferenceList(val value: kotlin.Long) {
+         @SerializedName(value = "10") _10(10),
+         @SerializedName(value = "20") _20(20),
+         @SerializedName(value = "50") _50(50),
+         @SerializedName(value = "100") _100(100);
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * GET /analytics/202610/acc/preferences
+     * Get ACC Audience Preference List
+     * Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected ACC audience for a brand.  Use &#x60;entity_type&#x60; to choose the ranking. Each item contains its rank, entity information and preference metrics; &#x60;entity_detail&#x60; varies by entity type. Select the analysis window with &#x60;date&#x60; and &#x60;trend_days&#x60;, and use &#x60;scope&#x60; to choose shop-level or market-level results. To retrieve more results, pass the returned &#x60;page_token&#x60; as &#x60;page_token&#x60; in the next request.
+     * @param brandId Authorized brand ID to analyze. After trimming surrounding whitespace, this value must be nonempty. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID used to determine the available analysis dates. After trimming surrounding whitespace, this value must be nonempty. Use industry_id from the same Get ACC Brands record as brand_id.
+     * @param audienceType ACC audience segment to analyze. Supported values: &#x60;SHOP_NON_EXPOSED&#x60;, &#x60;SHOP_CLICKED_NOT_PURCHASED&#x60;, &#x60;CONVERSION&#x60;, &#x60;NEW_CONVERSION&#x60;, &#x60;REPEAT_CONVERSION&#x60;, &#x60;DTC_NEW_CONVERSION&#x60;, &#x60;DTC_REPEAT_CONVERSION&#x60;. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param entityType Type of entity to rank. Supported values: PRODUCT (products), LIVE (live streams), VIDEO (videos), and PHOTO (photo posts); matching is case-insensitive. The fields in items[].entity_detail depend on this value. For category and factor filtering, PRODUCT supports l2_category_id and l3_category_id; LIVE supports category_id and factor_id; VIDEO and PHOTO support category_id. Supplying any of these category or factor filters for an unsupported entity type is invalid.
+     * @param date End date of the analysis window, in &#x60;YYYY-MM-DD&#x60; format (UTC). Defaults to the latest available date when omitted. The full window, including the start date determined by &#x60;trend_days&#x60;, must be within &#x60;earliest_available_date&#x60; and &#x60;latest_available_date&#x60;. (optional)
+     * @param trendDays Number of calendar days in the analysis window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking. Supported values: &#x60;MY_SHOP&#x60; (shop-level results), &#x60;MARKET&#x60; (market-level results). Default: &#x60;MY_SHOP&#x60;. (optional)
+     * @param keyword Optional search filter. - &#x60;PRODUCT&#x60;: a numeric product ID performs an exact ID match; otherwise, the keyword is a case-sensitive substring of the product name. - &#x60;LIVE&#x60;: case-insensitive substring match against the live stream ID, live type, category or title. - &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;: case-insensitive substring match against the content ID, creator ID, title, creator alias or creator handle. An omitted, empty, or whitespace-only value applies no keyword filter. No keyword-length validation is applied. (optional)
+     * @param l2CategoryId Second-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60;; omit it for other entity types. Required when &#x60;l3_category_id&#x60; is supplied. Use a &#x60;category_id&#x60; with &#x60;category_level&#x3D;2&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param l3CategoryId Third-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60; and requires a nonblank &#x60;l2_category_id&#x60;; omit it for other entity types. Omit it to use the default third-level category selection; supply it to select a specific third-level category. Use a level-3 child &#x60;category_id&#x60; under the selected level-2 category returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param categoryId Category ID to filter by for &#x60;entity_type&#x3D;LIVE&#x60;, &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;. Omit this parameter for &#x60;PRODUCT&#x60;. For &#x60;LIVE&#x60;, omission applies no category filter. For &#x60;VIDEO&#x60; and &#x60;PHOTO&#x60;, omission uses the default category selection; supply a category ID to select a specific category. (optional)
+     * @param factorId Live-type ID to filter by. Only supported for &#x60;entity_type&#x3D;LIVE&#x60;; omit it for other entity types. Omit this parameter to apply no live-type filter. Use a &#x60;factor_id&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/live/factors&#x60;, queried with the same shop, brand, industry, audience, analysis window, scope and any selected &#x60;category_id&#x60;. The value is used as a stable query identifier; do not pass the display name factor_name. (optional)
+     * @param sortField Metric used to order the ranking. Supported values: &#x60;GMV&#x60;, &#x60;CUSTOMERS&#x60;, &#x60;ORDERS&#x60;. Default: &#x60;GMV&#x60;. (optional)
+     * @param sortOrder Sort direction for &#x60;sort_field&#x60;. Supported values: &#x60;DESC&#x60; (descending), &#x60;ASC&#x60; (ascending). Default: &#x60;DESC&#x60;. (optional)
+     * @param pageSize Maximum number of ranking entries returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token returned as &#x60;page_token&#x60; in the previous response. Omit this parameter for the first page. Pass the returned token unchanged to retrieve the next page, keeping the same &#x60;page_size&#x60;, filters and sort settings. (optional)
+     * @return GetACCAudiencePreferenceListResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCAudiencePreferenceList(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, entityType: kotlin.String, date: java.time.LocalDate? = null, trendDays: kotlin.Long? = null, scope: kotlin.String? = null, keyword: kotlin.String? = null, l2CategoryId: kotlin.String? = null, l3CategoryId: kotlin.String? = null, categoryId: kotlin.String? = null, factorId: kotlin.String? = null, sortField: kotlin.String? = null, sortOrder: kotlin.String? = null, pageSize: PageSizeGetACCAudiencePreferenceList? = null, pageToken: kotlin.String? = null) : GetACCAudiencePreferenceListResponse {
+        val localVarResponse = getACCAudiencePreferenceListWithHttpInfo(brandId = brandId, industryId = industryId, audienceType = audienceType, entityType = entityType, date = date, trendDays = trendDays, scope = scope, keyword = keyword, l2CategoryId = l2CategoryId, l3CategoryId = l3CategoryId, categoryId = categoryId, factorId = factorId, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCAudiencePreferenceListResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/preferences
+     * Get ACC Audience Preference List
+     * Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected ACC audience for a brand.  Use &#x60;entity_type&#x60; to choose the ranking. Each item contains its rank, entity information and preference metrics; &#x60;entity_detail&#x60; varies by entity type. Select the analysis window with &#x60;date&#x60; and &#x60;trend_days&#x60;, and use &#x60;scope&#x60; to choose shop-level or market-level results. To retrieve more results, pass the returned &#x60;page_token&#x60; as &#x60;page_token&#x60; in the next request.
+     * @param brandId Authorized brand ID to analyze. After trimming surrounding whitespace, this value must be nonempty. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID used to determine the available analysis dates. After trimming surrounding whitespace, this value must be nonempty. Use industry_id from the same Get ACC Brands record as brand_id.
+     * @param audienceType ACC audience segment to analyze. Supported values: &#x60;SHOP_NON_EXPOSED&#x60;, &#x60;SHOP_CLICKED_NOT_PURCHASED&#x60;, &#x60;CONVERSION&#x60;, &#x60;NEW_CONVERSION&#x60;, &#x60;REPEAT_CONVERSION&#x60;, &#x60;DTC_NEW_CONVERSION&#x60;, &#x60;DTC_REPEAT_CONVERSION&#x60;. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param entityType Type of entity to rank. Supported values: PRODUCT (products), LIVE (live streams), VIDEO (videos), and PHOTO (photo posts); matching is case-insensitive. The fields in items[].entity_detail depend on this value. For category and factor filtering, PRODUCT supports l2_category_id and l3_category_id; LIVE supports category_id and factor_id; VIDEO and PHOTO support category_id. Supplying any of these category or factor filters for an unsupported entity type is invalid.
+     * @param date End date of the analysis window, in &#x60;YYYY-MM-DD&#x60; format (UTC). Defaults to the latest available date when omitted. The full window, including the start date determined by &#x60;trend_days&#x60;, must be within &#x60;earliest_available_date&#x60; and &#x60;latest_available_date&#x60;. (optional)
+     * @param trendDays Number of calendar days in the analysis window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking. Supported values: &#x60;MY_SHOP&#x60; (shop-level results), &#x60;MARKET&#x60; (market-level results). Default: &#x60;MY_SHOP&#x60;. (optional)
+     * @param keyword Optional search filter. - &#x60;PRODUCT&#x60;: a numeric product ID performs an exact ID match; otherwise, the keyword is a case-sensitive substring of the product name. - &#x60;LIVE&#x60;: case-insensitive substring match against the live stream ID, live type, category or title. - &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;: case-insensitive substring match against the content ID, creator ID, title, creator alias or creator handle. An omitted, empty, or whitespace-only value applies no keyword filter. No keyword-length validation is applied. (optional)
+     * @param l2CategoryId Second-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60;; omit it for other entity types. Required when &#x60;l3_category_id&#x60; is supplied. Use a &#x60;category_id&#x60; with &#x60;category_level&#x3D;2&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param l3CategoryId Third-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60; and requires a nonblank &#x60;l2_category_id&#x60;; omit it for other entity types. Omit it to use the default third-level category selection; supply it to select a specific third-level category. Use a level-3 child &#x60;category_id&#x60; under the selected level-2 category returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param categoryId Category ID to filter by for &#x60;entity_type&#x3D;LIVE&#x60;, &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;. Omit this parameter for &#x60;PRODUCT&#x60;. For &#x60;LIVE&#x60;, omission applies no category filter. For &#x60;VIDEO&#x60; and &#x60;PHOTO&#x60;, omission uses the default category selection; supply a category ID to select a specific category. (optional)
+     * @param factorId Live-type ID to filter by. Only supported for &#x60;entity_type&#x3D;LIVE&#x60;; omit it for other entity types. Omit this parameter to apply no live-type filter. Use a &#x60;factor_id&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/live/factors&#x60;, queried with the same shop, brand, industry, audience, analysis window, scope and any selected &#x60;category_id&#x60;. The value is used as a stable query identifier; do not pass the display name factor_name. (optional)
+     * @param sortField Metric used to order the ranking. Supported values: &#x60;GMV&#x60;, &#x60;CUSTOMERS&#x60;, &#x60;ORDERS&#x60;. Default: &#x60;GMV&#x60;. (optional)
+     * @param sortOrder Sort direction for &#x60;sort_field&#x60;. Supported values: &#x60;DESC&#x60; (descending), &#x60;ASC&#x60; (ascending). Default: &#x60;DESC&#x60;. (optional)
+     * @param pageSize Maximum number of ranking entries returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token returned as &#x60;page_token&#x60; in the previous response. Omit this parameter for the first page. Pass the returned token unchanged to retrieve the next page, keeping the same &#x60;page_size&#x60;, filters and sort settings. (optional)
+     * @return ApiResponse<GetACCAudiencePreferenceListResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCAudiencePreferenceListWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, entityType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?, keyword: kotlin.String?, l2CategoryId: kotlin.String?, l3CategoryId: kotlin.String?, categoryId: kotlin.String?, factorId: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCAudiencePreferenceList?, pageToken: kotlin.String?) : ApiResponse<GetACCAudiencePreferenceListResponse?> {
+        val localVariableConfig = getACCAudiencePreferenceListRequestConfig(brandId = brandId, industryId = industryId, audienceType = audienceType, entityType = entityType, date = date, trendDays = trendDays, scope = scope, keyword = keyword, l2CategoryId = l2CategoryId, l3CategoryId = l3CategoryId, categoryId = categoryId, factorId = factorId, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return request<Unit, GetACCAudiencePreferenceListResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCAudiencePreferenceList
+     *
+     * @param brandId Authorized brand ID to analyze. After trimming surrounding whitespace, this value must be nonempty. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID used to determine the available analysis dates. After trimming surrounding whitespace, this value must be nonempty. Use industry_id from the same Get ACC Brands record as brand_id.
+     * @param audienceType ACC audience segment to analyze. Supported values: &#x60;SHOP_NON_EXPOSED&#x60;, &#x60;SHOP_CLICKED_NOT_PURCHASED&#x60;, &#x60;CONVERSION&#x60;, &#x60;NEW_CONVERSION&#x60;, &#x60;REPEAT_CONVERSION&#x60;, &#x60;DTC_NEW_CONVERSION&#x60;, &#x60;DTC_REPEAT_CONVERSION&#x60;. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param entityType Type of entity to rank. Supported values: PRODUCT (products), LIVE (live streams), VIDEO (videos), and PHOTO (photo posts); matching is case-insensitive. The fields in items[].entity_detail depend on this value. For category and factor filtering, PRODUCT supports l2_category_id and l3_category_id; LIVE supports category_id and factor_id; VIDEO and PHOTO support category_id. Supplying any of these category or factor filters for an unsupported entity type is invalid.
+     * @param date End date of the analysis window, in &#x60;YYYY-MM-DD&#x60; format (UTC). Defaults to the latest available date when omitted. The full window, including the start date determined by &#x60;trend_days&#x60;, must be within &#x60;earliest_available_date&#x60; and &#x60;latest_available_date&#x60;. (optional)
+     * @param trendDays Number of calendar days in the analysis window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking. Supported values: &#x60;MY_SHOP&#x60; (shop-level results), &#x60;MARKET&#x60; (market-level results). Default: &#x60;MY_SHOP&#x60;. (optional)
+     * @param keyword Optional search filter. - &#x60;PRODUCT&#x60;: a numeric product ID performs an exact ID match; otherwise, the keyword is a case-sensitive substring of the product name. - &#x60;LIVE&#x60;: case-insensitive substring match against the live stream ID, live type, category or title. - &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;: case-insensitive substring match against the content ID, creator ID, title, creator alias or creator handle. An omitted, empty, or whitespace-only value applies no keyword filter. No keyword-length validation is applied. (optional)
+     * @param l2CategoryId Second-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60;; omit it for other entity types. Required when &#x60;l3_category_id&#x60; is supplied. Use a &#x60;category_id&#x60; with &#x60;category_level&#x3D;2&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param l3CategoryId Third-level product category ID to filter by. Only supported for &#x60;entity_type&#x3D;PRODUCT&#x60; and requires a nonblank &#x60;l2_category_id&#x60;; omit it for other entity types. Omit it to use the default third-level category selection; supply it to select a specific third-level category. Use a level-3 child &#x60;category_id&#x60; under the selected level-2 category returned by &#x60;GET /analytics/202610/acc/preferences/product/categories&#x60;, queried with the same shop, brand, industry, audience, analysis window and scope. (optional)
+     * @param categoryId Category ID to filter by for &#x60;entity_type&#x3D;LIVE&#x60;, &#x60;VIDEO&#x60; or &#x60;PHOTO&#x60;. Omit this parameter for &#x60;PRODUCT&#x60;. For &#x60;LIVE&#x60;, omission applies no category filter. For &#x60;VIDEO&#x60; and &#x60;PHOTO&#x60;, omission uses the default category selection; supply a category ID to select a specific category. (optional)
+     * @param factorId Live-type ID to filter by. Only supported for &#x60;entity_type&#x3D;LIVE&#x60;; omit it for other entity types. Omit this parameter to apply no live-type filter. Use a &#x60;factor_id&#x60; returned by &#x60;GET /analytics/202610/acc/preferences/live/factors&#x60;, queried with the same shop, brand, industry, audience, analysis window, scope and any selected &#x60;category_id&#x60;. The value is used as a stable query identifier; do not pass the display name factor_name. (optional)
+     * @param sortField Metric used to order the ranking. Supported values: &#x60;GMV&#x60;, &#x60;CUSTOMERS&#x60;, &#x60;ORDERS&#x60;. Default: &#x60;GMV&#x60;. (optional)
+     * @param sortOrder Sort direction for &#x60;sort_field&#x60;. Supported values: &#x60;DESC&#x60; (descending), &#x60;ASC&#x60; (ascending). Default: &#x60;DESC&#x60;. (optional)
+     * @param pageSize Maximum number of ranking entries returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token returned as &#x60;page_token&#x60; in the previous response. Omit this parameter for the first page. Pass the returned token unchanged to retrieve the next page, keeping the same &#x60;page_size&#x60;, filters and sort settings. (optional)
+     * @return RequestConfig
+     */
+    fun getACCAudiencePreferenceListRequestConfig(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, entityType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?, keyword: kotlin.String?, l2CategoryId: kotlin.String?, l3CategoryId: kotlin.String?, categoryId: kotlin.String?, factorId: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCAudiencePreferenceList?, pageToken: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (trendDays != null) {
+                    put("trend_days", listOf(trendDays.toString()))
+                }
+                put("audience_type", listOf(audienceType.toString()))
+                put("entity_type", listOf(entityType.toString()))
+                if (scope != null) {
+                    put("scope", listOf(scope.toString()))
+                }
+                if (keyword != null) {
+                    put("keyword", listOf(keyword.toString()))
+                }
+                if (l2CategoryId != null) {
+                    put("l2_category_id", listOf(l2CategoryId.toString()))
+                }
+                if (l3CategoryId != null) {
+                    put("l3_category_id", listOf(l3CategoryId.toString()))
+                }
+                if (categoryId != null) {
+                    put("category_id", listOf(categoryId.toString()))
+                }
+                if (factorId != null) {
+                    put("factor_id", listOf(factorId.toString()))
+                }
+                if (sortField != null) {
+                    put("sort_field", listOf(sortField.toString()))
+                }
+                if (sortOrder != null) {
+                    put("sort_order", listOf(sortOrder.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/preferences",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202610/acc/preferences/summary
+     * Get ACC Audience Preference Summary
+     * Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for the selected brand, audience segment, scope, and reporting window.
+     * @param brandId Authorized brand ID to analyze. Use brand_id and industry_id from the same Get ACC Brands record for the current shop. Must not be blank.
+     * @param industryId Industry ID used to determine the available reporting dates. Use industry_id from the same Get ACC Brands record as brand_id. Must not be blank.
+     * @param audienceType Audience segment to analyze. Supported values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall between earliest_available_date and latest_available_date. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including its end date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param scope Scope of the preference data. Supported values: MY_SHOP for shop-level data; MARKET for market-level data. Defaults to MY_SHOP when omitted or blank. (optional)
+     * @return GetACCAudiencePreferenceSummaryResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCAudiencePreferenceSummary(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate? = null, trendDays: kotlin.Long? = null, scope: kotlin.String? = null) : GetACCAudiencePreferenceSummaryResponse {
+        val localVarResponse = getACCAudiencePreferenceSummaryWithHttpInfo(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCAudiencePreferenceSummaryResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/preferences/summary
+     * Get ACC Audience Preference Summary
+     * Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for the selected brand, audience segment, scope, and reporting window.
+     * @param brandId Authorized brand ID to analyze. Use brand_id and industry_id from the same Get ACC Brands record for the current shop. Must not be blank.
+     * @param industryId Industry ID used to determine the available reporting dates. Use industry_id from the same Get ACC Brands record as brand_id. Must not be blank.
+     * @param audienceType Audience segment to analyze. Supported values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall between earliest_available_date and latest_available_date. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including its end date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param scope Scope of the preference data. Supported values: MY_SHOP for shop-level data; MARKET for market-level data. Defaults to MY_SHOP when omitted or blank. (optional)
+     * @return ApiResponse<GetACCAudiencePreferenceSummaryResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCAudiencePreferenceSummaryWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?) : ApiResponse<GetACCAudiencePreferenceSummaryResponse?> {
+        val localVariableConfig = getACCAudiencePreferenceSummaryRequestConfig(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope)
+
+        return request<Unit, GetACCAudiencePreferenceSummaryResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCAudiencePreferenceSummary
+     *
+     * @param brandId Authorized brand ID to analyze. Use brand_id and industry_id from the same Get ACC Brands record for the current shop. Must not be blank.
+     * @param industryId Industry ID used to determine the available reporting dates. Use industry_id from the same Get ACC Brands record as brand_id. Must not be blank.
+     * @param audienceType Audience segment to analyze. Supported values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall between earliest_available_date and latest_available_date. (optional)
+     * @param trendDays Number of calendar days in the reporting window, including its end date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. (optional)
+     * @param scope Scope of the preference data. Supported values: MY_SHOP for shop-level data; MARKET for market-level data. Defaults to MY_SHOP when omitted or blank. (optional)
+     * @return RequestConfig
+     */
+    fun getACCAudiencePreferenceSummaryRequestConfig(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (trendDays != null) {
+                    put("trend_days", listOf(trendDays.toString()))
+                }
+                put("audience_type", listOf(audienceType.toString()))
+                if (scope != null) {
+                    put("scope", listOf(scope.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/preferences/summary",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202610/acc/brands
+     * Get ACC Brands
+     * Get authorized ACC brands and their associated industries for the current shop. When a record includes both IDs, use its &#x60;brand_id&#x60; and &#x60;industry_id&#x60; together for Get ACC Audience Overview.
+     * @return GetACCBrandsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCBrands() : GetACCBrandsResponse {
+        val localVarResponse = getACCBrandsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCBrandsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/brands
+     * Get ACC Brands
+     * Get authorized ACC brands and their associated industries for the current shop. When a record includes both IDs, use its &#x60;brand_id&#x60; and &#x60;industry_id&#x60; together for Get ACC Audience Overview.
+     * @return ApiResponse<GetACCBrandsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCBrandsWithHttpInfo() : ApiResponse<GetACCBrandsResponse?> {
+        val localVariableConfig = getACCBrandsRequestConfig()
+
+        return request<Unit, GetACCBrandsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCBrands
+     *
+     * @return RequestConfig
+     */
+    fun getACCBrandsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/brands",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter audienceType
+     */
+     enum class AudienceTypeGetACCLIVESalesFactors(val value: kotlin.String) {
+         @SerializedName(value = "SHOP_NON_EXPOSED") SHOP_NON_EXPOSED("SHOP_NON_EXPOSED"),
+         @SerializedName(value = "SHOP_CLICKED_NOT_PURCHASED") SHOP_CLICKED_NOT_PURCHASED("SHOP_CLICKED_NOT_PURCHASED"),
+         @SerializedName(value = "CONVERSION") CONVERSION("CONVERSION"),
+         @SerializedName(value = "NEW_CONVERSION") NEW_CONVERSION("NEW_CONVERSION"),
+         @SerializedName(value = "REPEAT_CONVERSION") REPEAT_CONVERSION("REPEAT_CONVERSION"),
+         @SerializedName(value = "DTC_NEW_CONVERSION") DTC_NEW_CONVERSION("DTC_NEW_CONVERSION"),
+         @SerializedName(value = "DTC_REPEAT_CONVERSION") DTC_REPEAT_CONVERSION("DTC_REPEAT_CONVERSION");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * enum for parameter trendDays
+     */
+     enum class TrendDaysGetACCLIVESalesFactors(val value: kotlin.Long) {
+         @SerializedName(value = "7") _7(7),
+         @SerializedName(value = "14") _14(14),
+         @SerializedName(value = "30") _30(30);
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * enum for parameter pageSize
+     */
+     enum class PageSizeGetACCLIVESalesFactors(val value: kotlin.Long) {
+         @SerializedName(value = "10") _10(10),
+         @SerializedName(value = "20") _20(20),
+         @SerializedName(value = "50") _50(50),
+         @SerializedName(value = "100") _100(100);
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * GET /analytics/202610/acc/preferences/live/factors
+     * Get ACC LIVE Sales Factors
+     * Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and reporting window. Each factor includes its ID, display name, GMV range, and customer and order counts.
+     * @param brandId ID of the brand to analyze. Obtain brand_id and its associated industry_id from the same entry returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID associated with brand_id, used to determine the available reporting dates. Obtain it from the same brand entry returned by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType Audience segment whose LIVE preferences are ranked. Allowed values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted, the latest available date is used. The entire window selected by date and trend_days must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the LIVE Preference List request that will consume these factor IDs. (optional)
+     * @param trendDays Length of the reporting window in calendar days, including date. Allowed values: 7, 14, 30. Default: 30. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking: MY_SHOP for the current shop, or MARKET for the market. Default: MY_SHOP. (optional)
+     * @param categoryId Category ID to select a category-specific LIVE factor ranking. If omitted, the aggregate category (-1) is selected; this does not combine all category-specific rows. Use a LIVE Market category ID from the Market Categories API. Product L2/L3 category IDs are not valid here. If a category is supplied, reuse it in the corresponding LIVE Preference List request. (optional)
+     * @param keyword Case-insensitive substring filter for the LIVE type identifier, display name, or category ID. If omitted or blank, no keyword filter is applied. (optional)
+     * @param sortField Metric used to sort factors: GMV, CUSTOMERS, or ORDERS. Default: GMV. GMV sorting uses the numeric amount before it is formatted as gmv_range. (optional)
+     * @param sortOrder Sort direction for sort_field: ASC for ascending or DESC for descending. Default: DESC. (optional)
+     * @param pageSize Maximum number of factors returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return GetACCLIVESalesFactorsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCLIVESalesFactors(brandId: kotlin.String, industryId: kotlin.String, audienceType: AudienceTypeGetACCLIVESalesFactors, date: java.time.LocalDate? = null, trendDays: TrendDaysGetACCLIVESalesFactors? = null, scope: kotlin.String? = null, categoryId: kotlin.String? = null, keyword: kotlin.String? = null, sortField: kotlin.String? = null, sortOrder: kotlin.String? = null, pageSize: PageSizeGetACCLIVESalesFactors? = null, pageToken: kotlin.String? = null) : GetACCLIVESalesFactorsResponse {
+        val localVarResponse = getACCLIVESalesFactorsWithHttpInfo(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope, categoryId = categoryId, keyword = keyword, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCLIVESalesFactorsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/preferences/live/factors
+     * Get ACC LIVE Sales Factors
+     * Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and reporting window. Each factor includes its ID, display name, GMV range, and customer and order counts.
+     * @param brandId ID of the brand to analyze. Obtain brand_id and its associated industry_id from the same entry returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID associated with brand_id, used to determine the available reporting dates. Obtain it from the same brand entry returned by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType Audience segment whose LIVE preferences are ranked. Allowed values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted, the latest available date is used. The entire window selected by date and trend_days must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the LIVE Preference List request that will consume these factor IDs. (optional)
+     * @param trendDays Length of the reporting window in calendar days, including date. Allowed values: 7, 14, 30. Default: 30. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking: MY_SHOP for the current shop, or MARKET for the market. Default: MY_SHOP. (optional)
+     * @param categoryId Category ID to select a category-specific LIVE factor ranking. If omitted, the aggregate category (-1) is selected; this does not combine all category-specific rows. Use a LIVE Market category ID from the Market Categories API. Product L2/L3 category IDs are not valid here. If a category is supplied, reuse it in the corresponding LIVE Preference List request. (optional)
+     * @param keyword Case-insensitive substring filter for the LIVE type identifier, display name, or category ID. If omitted or blank, no keyword filter is applied. (optional)
+     * @param sortField Metric used to sort factors: GMV, CUSTOMERS, or ORDERS. Default: GMV. GMV sorting uses the numeric amount before it is formatted as gmv_range. (optional)
+     * @param sortOrder Sort direction for sort_field: ASC for ascending or DESC for descending. Default: DESC. (optional)
+     * @param pageSize Maximum number of factors returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return ApiResponse<GetACCLIVESalesFactorsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCLIVESalesFactorsWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, audienceType: AudienceTypeGetACCLIVESalesFactors, date: java.time.LocalDate?, trendDays: TrendDaysGetACCLIVESalesFactors?, scope: kotlin.String?, categoryId: kotlin.String?, keyword: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCLIVESalesFactors?, pageToken: kotlin.String?) : ApiResponse<GetACCLIVESalesFactorsResponse?> {
+        val localVariableConfig = getACCLIVESalesFactorsRequestConfig(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope, categoryId = categoryId, keyword = keyword, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return request<Unit, GetACCLIVESalesFactorsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCLIVESalesFactors
+     *
+     * @param brandId ID of the brand to analyze. Obtain brand_id and its associated industry_id from the same entry returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.
+     * @param industryId Industry ID associated with brand_id, used to determine the available reporting dates. Obtain it from the same brand entry returned by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType Audience segment whose LIVE preferences are ranked. Allowed values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted, the latest available date is used. The entire window selected by date and trend_days must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the LIVE Preference List request that will consume these factor IDs. (optional)
+     * @param trendDays Length of the reporting window in calendar days, including date. Allowed values: 7, 14, 30. Default: 30. The start date is date minus (trend_days - 1) days. (optional)
+     * @param scope Scope of the ranking: MY_SHOP for the current shop, or MARKET for the market. Default: MY_SHOP. (optional)
+     * @param categoryId Category ID to select a category-specific LIVE factor ranking. If omitted, the aggregate category (-1) is selected; this does not combine all category-specific rows. Use a LIVE Market category ID from the Market Categories API. Product L2/L3 category IDs are not valid here. If a category is supplied, reuse it in the corresponding LIVE Preference List request. (optional)
+     * @param keyword Case-insensitive substring filter for the LIVE type identifier, display name, or category ID. If omitted or blank, no keyword filter is applied. (optional)
+     * @param sortField Metric used to sort factors: GMV, CUSTOMERS, or ORDERS. Default: GMV. GMV sorting uses the numeric amount before it is formatted as gmv_range. (optional)
+     * @param sortOrder Sort direction for sort_field: ASC for ascending or DESC for descending. Default: DESC. (optional)
+     * @param pageSize Maximum number of factors returned per page. Allowed values: 10, 20, 50, 100. Default: 10. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return RequestConfig
+     */
+    fun getACCLIVESalesFactorsRequestConfig(brandId: kotlin.String, industryId: kotlin.String, audienceType: AudienceTypeGetACCLIVESalesFactors, date: java.time.LocalDate?, trendDays: TrendDaysGetACCLIVESalesFactors?, scope: kotlin.String?, categoryId: kotlin.String?, keyword: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCLIVESalesFactors?, pageToken: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (trendDays != null) {
+                    put("trend_days", listOf(trendDays.toString()))
+                }
+                put("audience_type", listOf(audienceType.value))
+                if (scope != null) {
+                    put("scope", listOf(scope.toString()))
+                }
+                if (categoryId != null) {
+                    put("category_id", listOf(categoryId.toString()))
+                }
+                if (keyword != null) {
+                    put("keyword", listOf(keyword.toString()))
+                }
+                if (sortField != null) {
+                    put("sort_field", listOf(sortField.toString()))
+                }
+                if (sortOrder != null) {
+                    put("sort_order", listOf(sortOrder.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/preferences/live/factors",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter pageSize
+     */
+     enum class PageSizeGetACCTopSalesCategories(val value: kotlin.Long) {
+         @SerializedName(value = "10") _10(10),
+         @SerializedName(value = "20") _20(20),
+         @SerializedName(value = "50") _50(50),
+         @SerializedName(value = "100") _100(100);
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * GET /analytics/202610/acc/preferences/product/categories
+     * Get ACC Top Sales Categories
+     * Get ACC product category sales rankings for the selected audience, brand and date window. Results contain level-2 categories with level-3 children; sorting and pagination apply to the level-2 categories.
+     * @param brandId ACC brand ID. Use a brand_id returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the same shop.
+     * @param industryId ACC industry ID used with brand_id to determine available data dates. Use the industry_id returned alongside that brand by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType ACC audience segment used for the category ranking. Valid values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the data window, in UTC using YYYY-MM-DD format. Defaults to the latest available date when omitted. The entire trend_days window, including its start date, must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the Product Preference List request that will consume these category IDs. (optional)
+     * @param trendDays Number of days in the data window, including date. Valid values: 7, 14, 30. Default: 30. The start date is date - (trend_days - 1) days. (optional)
+     * @param scope Scope of the category metrics. Valid values: MY_SHOP (shop data), MARKET (market data). Default: MY_SHOP. (optional)
+     * @param keyword Filter categories by a case-insensitive substring of a category ID or category name. The filter is applied before the category tree is built and paginated. Omit this parameter to disable keyword filtering. (optional)
+     * @param sortField Metric used to sort the level-2 categories. Valid values: GMV, CUSTOMERS, ORDERS. Default: GMV. Categories with equal values are ordered by category ID in ascending numeric order. Level-3 children are ordered separately by category ID. (optional)
+     * @param sortOrder Sort direction for level-2 categories. Valid values: ASC (ascending), DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of level-2 categories per page. Allowed values: 10, 20, 50, 100. Default: 10. Level-3 children do not count toward this limit. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return GetACCTopSalesCategoriesResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getACCTopSalesCategories(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate? = null, trendDays: kotlin.Long? = null, scope: kotlin.String? = null, keyword: kotlin.String? = null, sortField: kotlin.String? = null, sortOrder: kotlin.String? = null, pageSize: PageSizeGetACCTopSalesCategories? = null, pageToken: kotlin.String? = null) : GetACCTopSalesCategoriesResponse {
+        val localVarResponse = getACCTopSalesCategoriesWithHttpInfo(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope, keyword = keyword, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetACCTopSalesCategoriesResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/acc/preferences/product/categories
+     * Get ACC Top Sales Categories
+     * Get ACC product category sales rankings for the selected audience, brand and date window. Results contain level-2 categories with level-3 children; sorting and pagination apply to the level-2 categories.
+     * @param brandId ACC brand ID. Use a brand_id returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the same shop.
+     * @param industryId ACC industry ID used with brand_id to determine available data dates. Use the industry_id returned alongside that brand by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType ACC audience segment used for the category ranking. Valid values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the data window, in UTC using YYYY-MM-DD format. Defaults to the latest available date when omitted. The entire trend_days window, including its start date, must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the Product Preference List request that will consume these category IDs. (optional)
+     * @param trendDays Number of days in the data window, including date. Valid values: 7, 14, 30. Default: 30. The start date is date - (trend_days - 1) days. (optional)
+     * @param scope Scope of the category metrics. Valid values: MY_SHOP (shop data), MARKET (market data). Default: MY_SHOP. (optional)
+     * @param keyword Filter categories by a case-insensitive substring of a category ID or category name. The filter is applied before the category tree is built and paginated. Omit this parameter to disable keyword filtering. (optional)
+     * @param sortField Metric used to sort the level-2 categories. Valid values: GMV, CUSTOMERS, ORDERS. Default: GMV. Categories with equal values are ordered by category ID in ascending numeric order. Level-3 children are ordered separately by category ID. (optional)
+     * @param sortOrder Sort direction for level-2 categories. Valid values: ASC (ascending), DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of level-2 categories per page. Allowed values: 10, 20, 50, 100. Default: 10. Level-3 children do not count toward this limit. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return ApiResponse<GetACCTopSalesCategoriesResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getACCTopSalesCategoriesWithHttpInfo(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?, keyword: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCTopSalesCategories?, pageToken: kotlin.String?) : ApiResponse<GetACCTopSalesCategoriesResponse?> {
+        val localVariableConfig = getACCTopSalesCategoriesRequestConfig(brandId = brandId, industryId = industryId, audienceType = audienceType, date = date, trendDays = trendDays, scope = scope, keyword = keyword, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return request<Unit, GetACCTopSalesCategoriesResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getACCTopSalesCategories
+     *
+     * @param brandId ACC brand ID. Use a brand_id returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the same shop.
+     * @param industryId ACC industry ID used with brand_id to determine available data dates. Use the industry_id returned alongside that brand by Get ACC Brands (GET /analytics/202610/acc/brands).
+     * @param audienceType ACC audience segment used for the category ranking. Valid values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.
+     * @param date Inclusive end date of the data window, in UTC using YYYY-MM-DD format. Defaults to the latest available date when omitted. The entire trend_days window, including its start date, must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the Product Preference List request that will consume these category IDs. (optional)
+     * @param trendDays Number of days in the data window, including date. Valid values: 7, 14, 30. Default: 30. The start date is date - (trend_days - 1) days. (optional)
+     * @param scope Scope of the category metrics. Valid values: MY_SHOP (shop data), MARKET (market data). Default: MY_SHOP. (optional)
+     * @param keyword Filter categories by a case-insensitive substring of a category ID or category name. The filter is applied before the category tree is built and paginated. Omit this parameter to disable keyword filtering. (optional)
+     * @param sortField Metric used to sort the level-2 categories. Valid values: GMV, CUSTOMERS, ORDERS. Default: GMV. Categories with equal values are ordered by category ID in ascending numeric order. Level-3 children are ordered separately by category ID. (optional)
+     * @param sortOrder Sort direction for level-2 categories. Valid values: ASC (ascending), DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of level-2 categories per page. Allowed values: 10, 20, 50, 100. Default: 10. Level-3 children do not count toward this limit. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return RequestConfig
+     */
+    fun getACCTopSalesCategoriesRequestConfig(brandId: kotlin.String, industryId: kotlin.String, audienceType: kotlin.String, date: java.time.LocalDate?, trendDays: kotlin.Long?, scope: kotlin.String?, keyword: kotlin.String?, sortField: kotlin.String?, sortOrder: kotlin.String?, pageSize: PageSizeGetACCTopSalesCategories?, pageToken: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("brand_id", listOf(brandId.toString()))
+                put("industry_id", listOf(industryId.toString()))
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                if (trendDays != null) {
+                    put("trend_days", listOf(trendDays.toString()))
+                }
+                put("audience_type", listOf(audienceType.toString()))
+                if (scope != null) {
+                    put("scope", listOf(scope.toString()))
+                }
+                if (keyword != null) {
+                    put("keyword", listOf(keyword.toString()))
+                }
+                if (sortField != null) {
+                    put("sort_field", listOf(sortField.toString()))
+                }
+                if (sortOrder != null) {
+                    put("sort_order", listOf(sortOrder.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/acc/preferences/product/categories",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -1062,6 +1974,327 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
+     * GET /analytics/202610/off_site/insights
+     * Get Off Site Audience Insights
+     * Compare weekly on-site and off-site attributed customer audience distributions.  Lists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean that the returned percentages may not sum to 100%.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report data and do not necessarily mean that the shop had no customers.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return GetOffSiteAudienceInsightsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getOffSiteAudienceInsights(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate? = null) : GetOffSiteAudienceInsightsResponse {
+        val localVarResponse = getOffSiteAudienceInsightsWithHttpInfo(pixelId = pixelId, attributionSetting = attributionSetting, date = date)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetOffSiteAudienceInsightsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/off_site/insights
+     * Get Off Site Audience Insights
+     * Compare weekly on-site and off-site attributed customer audience distributions.  Lists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean that the returned percentages may not sum to 100%.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report data and do not necessarily mean that the shop had no customers.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return ApiResponse<GetOffSiteAudienceInsightsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getOffSiteAudienceInsightsWithHttpInfo(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate?) : ApiResponse<GetOffSiteAudienceInsightsResponse?> {
+        val localVariableConfig = getOffSiteAudienceInsightsRequestConfig(pixelId = pixelId, attributionSetting = attributionSetting, date = date)
+
+        return request<Unit, GetOffSiteAudienceInsightsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getOffSiteAudienceInsights
+     *
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return RequestConfig
+     */
+    fun getOffSiteAudienceInsightsRequestConfig(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                put("pixel_id", listOf(pixelId.toString()))
+                put("attribution_setting", listOf(attributionSetting.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/off_site/insights",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter contentType
+     */
+     enum class ContentTypeGetOffSitePerformanceDetails(val value: kotlin.String) {
+         @SerializedName(value = "VIDEO") VIDEO("VIDEO"),
+         @SerializedName(value = "LIVE") LIVE("LIVE"),
+         @SerializedName(value = "PRODUCT") PRODUCT("PRODUCT");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * enum for parameter sortOrder
+     */
+     enum class SortOrderGetOffSitePerformanceDetails(val value: kotlin.String) {
+         @SerializedName(value = "ASC") ASC("ASC"),
+         @SerializedName(value = "Default") Default("Default");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * GET /analytics/202610/off_site/details
+     * Get Off Site Performance Details
+     * Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products, including GMV and off-site effect metrics.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. If neither report is available, no content records are returned.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param contentType Type of item to retrieve. Allowed values: - VIDEO: Videos. - LIVE: LIVE sessions. - PRODUCT: Products.
+     * @param date A date in the requested report week, formatted as YYYY-MM-DD. Each report week runs from Sunday through Saturday in the shop&#39;s reporting timezone. For both attribution settings, the earliest supported report week starts on 2026-06-14. Select the latest available week or one of the preceding 11 weeks. If omitted, the latest available week is used. (optional)
+     * @param sortField Metric used to sort the report candidate set. Allowed values: off_site_gmv, tiktok_shop_gmv, total_gmv, and off_site_effect_rate. Default: total_gmv. Records with equal metric values have no guaranteed secondary order, including across page requests. (optional)
+     * @param sortOrder Sort direction. Allowed values: ASC (ascending) and DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of records returned per page. Supported values: 10, 20, and 50. Default: 10. The same values apply to VIDEO, LIVE, and PRODUCT details. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return GetOffSitePerformanceDetailsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getOffSitePerformanceDetails(pixelId: kotlin.String, attributionSetting: kotlin.String, contentType: ContentTypeGetOffSitePerformanceDetails, date: java.time.LocalDate? = null, sortField: kotlin.String? = null, sortOrder: SortOrderGetOffSitePerformanceDetails? = null, pageSize: kotlin.Long? = null, pageToken: kotlin.String? = null) : GetOffSitePerformanceDetailsResponse {
+        val localVarResponse = getOffSitePerformanceDetailsWithHttpInfo(pixelId = pixelId, attributionSetting = attributionSetting, contentType = contentType, date = date, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetOffSitePerformanceDetailsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/off_site/details
+     * Get Off Site Performance Details
+     * Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products, including GMV and off-site effect metrics.  If the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. If neither report is available, no content records are returned.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param contentType Type of item to retrieve. Allowed values: - VIDEO: Videos. - LIVE: LIVE sessions. - PRODUCT: Products.
+     * @param date A date in the requested report week, formatted as YYYY-MM-DD. Each report week runs from Sunday through Saturday in the shop&#39;s reporting timezone. For both attribution settings, the earliest supported report week starts on 2026-06-14. Select the latest available week or one of the preceding 11 weeks. If omitted, the latest available week is used. (optional)
+     * @param sortField Metric used to sort the report candidate set. Allowed values: off_site_gmv, tiktok_shop_gmv, total_gmv, and off_site_effect_rate. Default: total_gmv. Records with equal metric values have no guaranteed secondary order, including across page requests. (optional)
+     * @param sortOrder Sort direction. Allowed values: ASC (ascending) and DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of records returned per page. Supported values: 10, 20, and 50. Default: 10. The same values apply to VIDEO, LIVE, and PRODUCT details. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return ApiResponse<GetOffSitePerformanceDetailsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getOffSitePerformanceDetailsWithHttpInfo(pixelId: kotlin.String, attributionSetting: kotlin.String, contentType: ContentTypeGetOffSitePerformanceDetails, date: java.time.LocalDate?, sortField: kotlin.String?, sortOrder: SortOrderGetOffSitePerformanceDetails?, pageSize: kotlin.Long?, pageToken: kotlin.String?) : ApiResponse<GetOffSitePerformanceDetailsResponse?> {
+        val localVariableConfig = getOffSitePerformanceDetailsRequestConfig(pixelId = pixelId, attributionSetting = attributionSetting, contentType = contentType, date = date, sortField = sortField, sortOrder = sortOrder, pageSize = pageSize, pageToken = pageToken)
+
+        return request<Unit, GetOffSitePerformanceDetailsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getOffSitePerformanceDetails
+     *
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param contentType Type of item to retrieve. Allowed values: - VIDEO: Videos. - LIVE: LIVE sessions. - PRODUCT: Products.
+     * @param date A date in the requested report week, formatted as YYYY-MM-DD. Each report week runs from Sunday through Saturday in the shop&#39;s reporting timezone. For both attribution settings, the earliest supported report week starts on 2026-06-14. Select the latest available week or one of the preceding 11 weeks. If omitted, the latest available week is used. (optional)
+     * @param sortField Metric used to sort the report candidate set. Allowed values: off_site_gmv, tiktok_shop_gmv, total_gmv, and off_site_effect_rate. Default: total_gmv. Records with equal metric values have no guaranteed secondary order, including across page requests. (optional)
+     * @param sortOrder Sort direction. Allowed values: ASC (ascending) and DESC (descending). Default: DESC. (optional)
+     * @param pageSize Maximum number of records returned per page. Supported values: 10, 20, and 50. Default: 10. The same values apply to VIDEO, LIVE, and PRODUCT details. (optional)
+     * @param pageToken Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged. (optional)
+     * @return RequestConfig
+     */
+    fun getOffSitePerformanceDetailsRequestConfig(pixelId: kotlin.String, attributionSetting: kotlin.String, contentType: ContentTypeGetOffSitePerformanceDetails, date: java.time.LocalDate?, sortField: kotlin.String?, sortOrder: SortOrderGetOffSitePerformanceDetails?, pageSize: kotlin.Long?, pageToken: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                put("pixel_id", listOf(pixelId.toString()))
+                put("attribution_setting", listOf(attributionSetting.toString()))
+                put("content_type", listOf(contentType.value))
+                if (sortField != null) {
+                    put("sort_field", listOf(sortField.toString()))
+                }
+                if (sortOrder != null) {
+                    put("sort_order", listOf(sortOrder.value))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/off_site/details",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202610/off_site/overview
+     * Get Off Site Performance Overview
+     * Retrieve weekly off-site performance metrics and trends.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return GetOffSitePerformanceOverviewResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getOffSitePerformanceOverview(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate? = null) : GetOffSitePerformanceOverviewResponse {
+        val localVarResponse = getOffSitePerformanceOverviewWithHttpInfo(pixelId = pixelId, attributionSetting = attributionSetting, date = date)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetOffSitePerformanceOverviewResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/off_site/overview
+     * Get Off Site Performance Overview
+     * Retrieve weekly off-site performance metrics and trends.
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return ApiResponse<GetOffSitePerformanceOverviewResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getOffSitePerformanceOverviewWithHttpInfo(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate?) : ApiResponse<GetOffSitePerformanceOverviewResponse?> {
+        val localVariableConfig = getOffSitePerformanceOverviewRequestConfig(pixelId = pixelId, attributionSetting = attributionSetting, date = date)
+
+        return request<Unit, GetOffSitePerformanceOverviewResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getOffSitePerformanceOverview
+     *
+     * @param pixelId Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.
+     * @param attributionSetting Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.
+     * @param date A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop&#39;s reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14. (optional)
+     * @return RequestConfig
+     */
+    fun getOffSitePerformanceOverviewRequestConfig(pixelId: kotlin.String, attributionSetting: kotlin.String, date: java.time.LocalDate?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (date != null) {
+                    put("date", listOf(parseDateToQueryString<java.time.LocalDate>(date)))
+                }
+                put("pixel_id", listOf(pixelId.toString()))
+                put("attribution_setting", listOf(attributionSetting.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/off_site/overview",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /analytics/202606/shop_performances/metrics/{metric_code}/diagnosis
      * Get SPS Metric Diagnosis
      * Returns diagnosis details for a single SPS metric, including benchmark thresholds, trends, calculation details, and distribution details.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
@@ -2034,6 +3267,76 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/analytics/202512/shop/{live_id}/products_performance".replace("{"+"live_id"+"}", encodeURIComponent(liveId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202610/off_site/pixels
+     * Get Shop Off Site Pixels
+     * Retrieve the Pixel IDs available to the authorized shop.
+     * @return GetShopOffSitePixelsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getShopOffSitePixels() : GetShopOffSitePixelsResponse {
+        val localVarResponse = getShopOffSitePixelsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetShopOffSitePixelsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/off_site/pixels
+     * Get Shop Off Site Pixels
+     * Retrieve the Pixel IDs available to the authorized shop.
+     * @return ApiResponse<GetShopOffSitePixelsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getShopOffSitePixelsWithHttpInfo() : ApiResponse<GetShopOffSitePixelsResponse?> {
+        val localVariableConfig = getShopOffSitePixelsRequestConfig()
+
+        return request<Unit, GetShopOffSitePixelsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getShopOffSitePixels
+     *
+     * @return RequestConfig
+     */
+    fun getShopOffSitePixelsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/off_site/pixels",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

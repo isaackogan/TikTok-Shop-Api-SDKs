@@ -469,6 +469,56 @@ from .generate_publisher_sharing_links_in_batch_response_data_sharing_link impor
 from .generate_target_collaboration_link_request import GenerateTargetCollaborationLinkRequest
 from .generate_target_collaboration_link_response import GenerateTargetCollaborationLinkResponse
 from .generate_target_collaboration_link_response_data import GenerateTargetCollaborationLinkResponseData
+from .get_acc_audience_overview_response import GetACCAudienceOverviewResponse
+from .get_acc_audience_overview_response_data import GetACCAudienceOverviewResponseData
+from .get_acc_audience_overview_response_data_key_metric import GetACCAudienceOverviewResponseDataKeyMetric
+from .get_acc_audience_overview_response_data_key_metric_acc import GetACCAudienceOverviewResponseDataKeyMetricAcc
+from .get_acc_audience_overview_response_data_key_metric_awareness import GetACCAudienceOverviewResponseDataKeyMetricAwareness
+from .get_acc_audience_overview_response_data_key_metric_consideration import GetACCAudienceOverviewResponseDataKeyMetricConsideration
+from .get_acc_audience_overview_response_data_key_metric_conversion import GetACCAudienceOverviewResponseDataKeyMetricConversion
+from .get_acc_audience_overview_response_data_key_metric_new_conversion import GetACCAudienceOverviewResponseDataKeyMetricNewConversion
+from .get_acc_audience_overview_response_data_key_metric_repeat_conversion import GetACCAudienceOverviewResponseDataKeyMetricRepeatConversion
+from .get_acc_audience_overview_response_data_trend import GetACCAudienceOverviewResponseDataTrend
+from .get_acc_audience_overview_response_data_trend_interval import GetACCAudienceOverviewResponseDataTrendInterval
+from .get_acc_audience_penetration_response import GetACCAudiencePenetrationResponse
+from .get_acc_audience_penetration_response_data import GetACCAudiencePenetrationResponseData
+from .get_acc_audience_penetration_response_data_funnel import GetACCAudiencePenetrationResponseDataFunnel
+from .get_acc_audience_penetration_response_data_funnel_clicked import GetACCAudiencePenetrationResponseDataFunnelClicked
+from .get_acc_audience_penetration_response_data_funnel_ordered import GetACCAudiencePenetrationResponseDataFunnelOrdered
+from .get_acc_audience_penetration_response_data_funnel_total import GetACCAudiencePenetrationResponseDataFunnelTotal
+from .get_acc_audience_penetration_response_data_funnel_viewed import GetACCAudiencePenetrationResponseDataFunnelViewed
+from .get_acc_audience_preference_list_page_size import GetAccAudiencePreferenceListPageSize
+from .get_acc_audience_preference_list_response import GetACCAudiencePreferenceListResponse
+from .get_acc_audience_preference_list_response_data import GetACCAudiencePreferenceListResponseData
+from .get_acc_audience_preference_list_response_data_item import GetACCAudiencePreferenceListResponseDataItem
+from .get_acc_audience_preference_list_response_data_item_entity_detail import GetACCAudiencePreferenceListResponseDataItemEntityDetail
+from .get_acc_audience_preference_summary_response import GetACCAudiencePreferenceSummaryResponse
+from .get_acc_audience_preference_summary_response_data import GetACCAudiencePreferenceSummaryResponseData
+from .get_acc_audience_preference_summary_response_data_channel_summary import GetACCAudiencePreferenceSummaryResponseDataChannelSummary
+from .get_acc_audience_preference_summary_response_data_channel_summary_live_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_live_type_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTypeTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_photo_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_photo_top_item_post_image import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItemPostImage
+from .get_acc_audience_preference_summary_response_data_channel_summary_product_category_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_product_category_top_item_children import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItemChildren
+from .get_acc_audience_preference_summary_response_data_channel_summary_product_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_seller_own_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummarySellerOwnTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_video_top_item import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItem
+from .get_acc_audience_preference_summary_response_data_channel_summary_video_top_item_video_info import GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItemVideoInfo
+from .get_acc_brands_response import GetACCBrandsResponse
+from .get_acc_brands_response_data import GetACCBrandsResponseData
+from .get_acc_brands_response_data_brand import GetACCBrandsResponseDataBrand
+from .get_acc_top_sales_categories_page_size import GetAccTopSalesCategoriesPageSize
+from .get_acc_top_sales_categories_response import GetACCTopSalesCategoriesResponse
+from .get_acc_top_sales_categories_response_data import GetACCTopSalesCategoriesResponseData
+from .get_acc_top_sales_categories_response_data_category import GetACCTopSalesCategoriesResponseDataCategory
+from .get_acc_top_sales_categories_response_data_category_children import GetACCTopSalesCategoriesResponseDataCategoryChildren
+from .get_acclive_sales_factors_audience_type import GetAccliveSalesFactorsAudienceType
+from .get_acclive_sales_factors_page_size import GetAccliveSalesFactorsPageSize
+from .get_acclive_sales_factors_response import GetACCLIVESalesFactorsResponse
+from .get_acclive_sales_factors_response_data import GetACCLIVESalesFactorsResponseData
+from .get_acclive_sales_factors_response_data_factor import GetACCLIVESalesFactorsResponseDataFactor
+from .get_acclive_sales_factors_trend_days import GetAccliveSalesFactorsTrendDays
 from .get_active_shops_response import GetActiveShopsResponse
 from .get_active_shops_response_data import GetActiveShopsResponseData
 from .get_active_shops_response_data_shop import GetActiveShopsResponseDataShop
@@ -849,6 +899,32 @@ from .get_message_templates_response_data import GetMessageTemplatesResponseData
 from .get_message_templates_response_data_message_template import GetMessageTemplatesResponseDataMessageTemplate
 from .get_message_templates_response_data_message_template_coupon_card_rule import GetMessageTemplatesResponseDataMessageTemplateCouponCardRule
 from .get_message_templates_response_data_message_template_product_card_rule import GetMessageTemplatesResponseDataMessageTemplateProductCardRule
+from .get_off_site_audience_insights_response import GetOffSiteAudienceInsightsResponse
+from .get_off_site_audience_insights_response_data import GetOffSiteAudienceInsightsResponseData
+from .get_off_site_audience_insights_response_data_age import GetOffSiteAudienceInsightsResponseDataAge
+from .get_off_site_audience_insights_response_data_consumption_level import GetOffSiteAudienceInsightsResponseDataConsumptionLevel
+from .get_off_site_audience_insights_response_data_followed_shop import GetOffSiteAudienceInsightsResponseDataFollowedShop
+from .get_off_site_audience_insights_response_data_gender import GetOffSiteAudienceInsightsResponseDataGender
+from .get_off_site_audience_insights_response_data_persona import GetOffSiteAudienceInsightsResponseDataPersona
+from .get_off_site_audience_insights_response_data_region import GetOffSiteAudienceInsightsResponseDataRegion
+from .get_off_site_audience_insights_response_data_top_favorite_content import GetOffSiteAudienceInsightsResponseDataTopFavoriteContent
+from .get_off_site_audience_insights_response_data_top_purchase_category_preference import GetOffSiteAudienceInsightsResponseDataTopPurchaseCategoryPreference
+from .get_off_site_performance_details_content_type import GetOffSitePerformanceDetailsContentType
+from .get_off_site_performance_details_response import GetOffSitePerformanceDetailsResponse
+from .get_off_site_performance_details_response_data import GetOffSitePerformanceDetailsResponseData
+from .get_off_site_performance_details_response_data_content import GetOffSitePerformanceDetailsResponseDataContent
+from .get_off_site_performance_details_response_data_content_creator import GetOffSitePerformanceDetailsResponseDataContentCreator
+from .get_off_site_performance_details_response_data_content_metric import GetOffSitePerformanceDetailsResponseDataContentMetric
+from .get_off_site_performance_details_response_data_content_metric_total_gmv import GetOffSitePerformanceDetailsResponseDataContentMetricTotalGmv
+from .get_off_site_performance_details_sort_order import GetOffSitePerformanceDetailsSortOrder
+from .get_off_site_performance_overview_response import GetOffSitePerformanceOverviewResponse
+from .get_off_site_performance_overview_response_data import GetOffSitePerformanceOverviewResponseData
+from .get_off_site_performance_overview_response_data_key_metric import GetOffSitePerformanceOverviewResponseDataKeyMetric
+from .get_off_site_performance_overview_response_data_key_metric_live_off_site_effect_rate import GetOffSitePerformanceOverviewResponseDataKeyMetricLiveOffSiteEffectRate
+from .get_off_site_performance_overview_response_data_key_metric_video_off_site_effect_rate import GetOffSitePerformanceOverviewResponseDataKeyMetricVideoOffSiteEffectRate
+from .get_off_site_performance_overview_response_data_trend import GetOffSitePerformanceOverviewResponseDataTrend
+from .get_off_site_performance_overview_response_data_trend_interval import GetOffSitePerformanceOverviewResponseDataTrendInterval
+from .get_off_site_performance_overview_response_data_trend_interval_metric import GetOffSitePerformanceOverviewResponseDataTrendIntervalMetric
 from .get_open_collaboration_creator_content_details_response import GetOpenCollaborationCreatorContentDetailsResponse
 from .get_open_collaboration_creator_content_details_response_data import GetOpenCollaborationCreatorContentDetailsResponseData
 from .get_open_collaboration_creator_content_details_response_data_creator_content_detail import GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail
@@ -1093,6 +1169,9 @@ from .get_shop_live_products_performance_list_response_data_product_traffic impo
 from .get_shop_live_products_performance_list_response_data_product_traffic_gpm import GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm
 from .get_shop_live_products_performance_list_sort_field import GetShopLiveProductsPerformanceListSortField
 from .get_shop_live_products_performance_list_sort_order import GetShopLiveProductsPerformanceListSortOrder
+from .get_shop_off_site_pixels_response import GetShopOffSitePixelsResponse
+from .get_shop_off_site_pixels_response_data import GetShopOffSitePixelsResponseData
+from .get_shop_off_site_pixels_response_data_pixel import GetShopOffSitePixelsResponseDataPixel
 from .get_shop_performance_currency import GetShopPerformanceCurrency
 from .get_shop_performance_granularity import GetShopPerformanceGranularity
 from .get_shop_performance_per_hour_currency import GetShopPerformancePerHourCurrency
@@ -1426,6 +1505,7 @@ from .invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData
 from .item import Item
 from .item_tax import ItemTax
 from .line_item import LineItem
+from .linked_product import LinkedProduct
 from .list_available_inbound_methods_request import ListAvailableInboundMethodsRequest
 from .list_available_inbound_methods_response import ListAvailableInboundMethodsResponse
 from .list_available_inbound_methods_response_data import ListAvailableInboundMethodsResponseData
@@ -1469,6 +1549,7 @@ from .mark_package_as_shipped_response import MarkPackageAsShippedResponse
 from .mark_package_as_shipped_response_data import MarkPackageAsShippedResponseData
 from .max_discount import MaxDiscount
 from .max_price import MaxPrice
+from .metric import Metric
 from .metric_standard_info import MetricStandardInfo
 from .metric_value_module_info import MetricValueModuleInfo
 from .min_price import MinPrice
@@ -1484,6 +1565,7 @@ from .new_message_listener_webhook_data_sender import NewMessageListenerWebhookD
 from .new_message_webhook import NewMessageWebhook
 from .new_message_webhook_data import NewMessageWebhookData
 from .new_message_webhook_data_sender import NewMessageWebhookDataSender
+from .off_site_gmv import OffSiteGmv
 from .opportunity_matching_status_change_webhook import OpportunityMatchingStatusChangeWebhook
 from .opportunity_matching_status_change_webhook_data import OpportunityMatchingStatusChangeWebhookData
 from .optimize_images_request import OptimizeImagesRequest
@@ -2152,6 +2234,7 @@ from .smart_text import SmartText
 from .sort import Sort
 from .sort_sort_field import SortSortField
 from .sort_sort_order import SortSortOrder
+from .stat import Stat
 from .strikethrough_price_expired_webhook import StrikethroughPriceExpiredWebhook
 from .strikethrough_price_expired_webhook_data import StrikethroughPriceExpiredWebhookData
 from .sub_item_info import SubItemInfo
@@ -2200,6 +2283,7 @@ from .tax import Tax
 from .template import Template
 from .text_area import TextArea
 from .threshold import Threshold
+from .tiktok_shop_gmv import TiktokShopGmv
 from .time import Time
 from .tokopedia_mirror_status_change_webhook import TokopediaMirrorStatusChangeWebhook
 from .tokopedia_mirror_status_change_webhook_data import TokopediaMirrorStatusChangeWebhookData
@@ -2835,6 +2919,56 @@ __all__ = (
     "GenerateTargetCollaborationLinkRequest",
     "GenerateTargetCollaborationLinkResponse",
     "GenerateTargetCollaborationLinkResponseData",
+    "GetACCAudienceOverviewResponse",
+    "GetACCAudienceOverviewResponseData",
+    "GetACCAudienceOverviewResponseDataKeyMetric",
+    "GetACCAudienceOverviewResponseDataKeyMetricAcc",
+    "GetACCAudienceOverviewResponseDataKeyMetricAwareness",
+    "GetACCAudienceOverviewResponseDataKeyMetricConsideration",
+    "GetACCAudienceOverviewResponseDataKeyMetricConversion",
+    "GetACCAudienceOverviewResponseDataKeyMetricNewConversion",
+    "GetACCAudienceOverviewResponseDataKeyMetricRepeatConversion",
+    "GetACCAudienceOverviewResponseDataTrend",
+    "GetACCAudienceOverviewResponseDataTrendInterval",
+    "GetACCAudiencePenetrationResponse",
+    "GetACCAudiencePenetrationResponseData",
+    "GetACCAudiencePenetrationResponseDataFunnel",
+    "GetACCAudiencePenetrationResponseDataFunnelClicked",
+    "GetACCAudiencePenetrationResponseDataFunnelOrdered",
+    "GetACCAudiencePenetrationResponseDataFunnelTotal",
+    "GetACCAudiencePenetrationResponseDataFunnelViewed",
+    "GetAccAudiencePreferenceListPageSize",
+    "GetACCAudiencePreferenceListResponse",
+    "GetACCAudiencePreferenceListResponseData",
+    "GetACCAudiencePreferenceListResponseDataItem",
+    "GetACCAudiencePreferenceListResponseDataItemEntityDetail",
+    "GetACCAudiencePreferenceSummaryResponse",
+    "GetACCAudiencePreferenceSummaryResponseData",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummary",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTypeTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItemPostImage",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItemChildren",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummarySellerOwnTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItem",
+    "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItemVideoInfo",
+    "GetACCBrandsResponse",
+    "GetACCBrandsResponseData",
+    "GetACCBrandsResponseDataBrand",
+    "GetAccliveSalesFactorsAudienceType",
+    "GetAccliveSalesFactorsPageSize",
+    "GetACCLIVESalesFactorsResponse",
+    "GetACCLIVESalesFactorsResponseData",
+    "GetACCLIVESalesFactorsResponseDataFactor",
+    "GetAccliveSalesFactorsTrendDays",
+    "GetAccTopSalesCategoriesPageSize",
+    "GetACCTopSalesCategoriesResponse",
+    "GetACCTopSalesCategoriesResponseData",
+    "GetACCTopSalesCategoriesResponseDataCategory",
+    "GetACCTopSalesCategoriesResponseDataCategoryChildren",
     "GetActiveShopsResponse",
     "GetActiveShopsResponseData",
     "GetActiveShopsResponseDataShop",
@@ -3215,6 +3349,32 @@ __all__ = (
     "GetMessageTemplatesResponseDataMessageTemplate",
     "GetMessageTemplatesResponseDataMessageTemplateCouponCardRule",
     "GetMessageTemplatesResponseDataMessageTemplateProductCardRule",
+    "GetOffSiteAudienceInsightsResponse",
+    "GetOffSiteAudienceInsightsResponseData",
+    "GetOffSiteAudienceInsightsResponseDataAge",
+    "GetOffSiteAudienceInsightsResponseDataConsumptionLevel",
+    "GetOffSiteAudienceInsightsResponseDataFollowedShop",
+    "GetOffSiteAudienceInsightsResponseDataGender",
+    "GetOffSiteAudienceInsightsResponseDataPersona",
+    "GetOffSiteAudienceInsightsResponseDataRegion",
+    "GetOffSiteAudienceInsightsResponseDataTopFavoriteContent",
+    "GetOffSiteAudienceInsightsResponseDataTopPurchaseCategoryPreference",
+    "GetOffSitePerformanceDetailsContentType",
+    "GetOffSitePerformanceDetailsResponse",
+    "GetOffSitePerformanceDetailsResponseData",
+    "GetOffSitePerformanceDetailsResponseDataContent",
+    "GetOffSitePerformanceDetailsResponseDataContentCreator",
+    "GetOffSitePerformanceDetailsResponseDataContentMetric",
+    "GetOffSitePerformanceDetailsResponseDataContentMetricTotalGmv",
+    "GetOffSitePerformanceDetailsSortOrder",
+    "GetOffSitePerformanceOverviewResponse",
+    "GetOffSitePerformanceOverviewResponseData",
+    "GetOffSitePerformanceOverviewResponseDataKeyMetric",
+    "GetOffSitePerformanceOverviewResponseDataKeyMetricLiveOffSiteEffectRate",
+    "GetOffSitePerformanceOverviewResponseDataKeyMetricVideoOffSiteEffectRate",
+    "GetOffSitePerformanceOverviewResponseDataTrend",
+    "GetOffSitePerformanceOverviewResponseDataTrendInterval",
+    "GetOffSitePerformanceOverviewResponseDataTrendIntervalMetric",
     "GetOpenCollaborationCreatorContentDetailsResponse",
     "GetOpenCollaborationCreatorContentDetailsResponseData",
     "GetOpenCollaborationCreatorContentDetailsResponseDataCreatorContentDetail",
@@ -3459,6 +3619,9 @@ __all__ = (
     "GetShopLIVEProductsPerformanceListResponseDataProductTrafficGpm",
     "GetShopLiveProductsPerformanceListSortField",
     "GetShopLiveProductsPerformanceListSortOrder",
+    "GetShopOffSitePixelsResponse",
+    "GetShopOffSitePixelsResponseData",
+    "GetShopOffSitePixelsResponseDataPixel",
     "GetShoppableVideoPrecheckResultResponse",
     "GetShoppableVideoPrecheckResultResponseData",
     "GetShoppableVideoPrecheckResultResponseDataPrecheckTask",
@@ -3792,6 +3955,7 @@ __all__ = (
     "Item",
     "ItemTax",
     "LineItem",
+    "LinkedProduct",
     "ListAvailableInboundMethodsRequest",
     "ListAvailableInboundMethodsResponse",
     "ListAvailableInboundMethodsResponseData",
@@ -3835,6 +3999,7 @@ __all__ = (
     "MarkPackageAsShippedResponseData",
     "MaxDiscount",
     "MaxPrice",
+    "Metric",
     "MetricStandardInfo",
     "MetricValueModuleInfo",
     "MinPrice",
@@ -3850,6 +4015,7 @@ __all__ = (
     "NewMessageWebhook",
     "NewMessageWebhookData",
     "NewMessageWebhookDataSender",
+    "OffSiteGmv",
     "OpportunityMatchingStatusChangeWebhook",
     "OpportunityMatchingStatusChangeWebhookData",
     "OptimizeImagesRequest",
@@ -4518,6 +4684,7 @@ __all__ = (
     "Sort",
     "SortSortField",
     "SortSortOrder",
+    "Stat",
     "StrikethroughPriceExpiredWebhook",
     "StrikethroughPriceExpiredWebhookData",
     "SubItemInfo",
@@ -4566,6 +4733,7 @@ __all__ = (
     "Template",
     "TextArea",
     "Threshold",
+    "TiktokShopGmv",
     "Time",
     "TokopediaMirrorStatusChangeWebhook",
     "TokopediaMirrorStatusChangeWebhookData",
