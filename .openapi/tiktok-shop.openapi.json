@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.10.28",
+    "version": "2026.11.02",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -12968,6 +12968,1642 @@
         ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-shop-video-performance-overview-202609"
+      }
+    },
+    "/analytics/202610/acc/brands": {
+      "get": {
+        "operationId": "getACCBrands",
+        "summary": "Get ACC Brands",
+        "description": "Get authorized ACC brands and their associated industries for the current shop. When a record includes both IDs, use its `brand_id` and `industry_id` together for Get ACC Audience Overview.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCBrandsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "brands": [
+                      {
+                        "brand_id": "1000001",
+                        "brand_logo_url": "https://example.com/images/demo-brand-logo.png",
+                        "brand_name": "Demo Brand",
+                        "industry_id": "9000001",
+                        "industry_name": "Beauty & Personal Care",
+                        "shop_id": "1000000000000000002",
+                        "shop_name": "Demo Shop",
+                        "ttms_id": "1000000000000000003"
+                      }
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-brands-202610"
+      }
+    },
+    "/analytics/202610/acc/overview": {
+      "get": {
+        "operationId": "getACCAudienceOverview",
+        "summary": "Get ACC Audience Overview",
+        "description": "Get ACC audience key metrics, benchmarks, and trends.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "The authorized brand ID to analyze. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands). Neither ID may be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "The industry ID used to select data availability and industry benchmarks. Use `industry_id` from the same Get ACC Brands record as `brand_id`. This value is required and must not be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Date for the key metrics, in `YYYY-MM-DD` format (UTC). If omitted, uses the latest available date for the requested brand and industry. The date must be within the available data range.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "benchmark",
+            "in": "query",
+            "required": false,
+            "description": "Selects the industry benchmark: the average value of the corresponding audience metric among the industry's top N brands. Allowed values: 5, 10, 25, and 50. Default: 5.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCAudienceOverviewResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "key_metrics": {
+                      "acc": {
+                        "benchmark": 32000000,
+                        "dod_change_rate": "2.00%",
+                        "value": 27000000
+                      },
+                      "awareness": {
+                        "benchmark": 26000000,
+                        "dod_change_rate": "2.00%",
+                        "value": 22000000
+                      },
+                      "consideration": {
+                        "benchmark": 5000000,
+                        "dod_change_rate": "2.00%",
+                        "value": 4000000
+                      },
+                      "conversion": {
+                        "benchmark": 1000000,
+                        "dod_change_rate": "2.00%",
+                        "value": 1000000
+                      },
+                      "new_conversion": {
+                        "benchmark": 600000,
+                        "dod_change_rate": "2.00%",
+                        "value": 600000
+                      },
+                      "repeat_conversion": {
+                        "benchmark": 400000,
+                        "dod_change_rate": "2.00%",
+                        "value": 400000
+                      }
+                    },
+                    "latest_available_date": "2026-09-20",
+                    "trend": [
+                      {
+                        "actual_end_date": "2026-09-20",
+                        "actual_start_date": "2026-09-20",
+                        "interval_count": 1,
+                        "intervals": [
+                          {
+                            "benchmark": 32000000,
+                            "date": "2026-09-20",
+                            "value": 27000000
+                          }
+                        ],
+                        "metric": "ACC"
+                      }
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-audience-overview-202610"
+      }
+    },
+    "/analytics/202610/acc/penetration": {
+      "get": {
+        "operationId": "getACCAudiencePenetration",
+        "summary": "Get ACC Audience Penetration",
+        "description": "Retrieve viewed, clicked, and ordered audience counts and penetration ratios for a brand over the selected reporting window.\n\nUse brand_id and industry_id from the same brands[] record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop. Select the initial audience with audience_type; account_type and form filter the reported segments.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "ID of the brand to analyze. Use brand_id from a brands[] record returned by Get ACC Brands for the current shop, together with industry_id from that same record. Must not be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "ID of the industry used to determine available reporting dates. Use industry_id from the same Get ACC Brands brands[] record as brand_id. Must not be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall within the available date range for the selected shop, brand, and industry.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "trend_days",
+            "in": "query",
+            "required": false,
+            "description": "Number of calendar days in the reporting window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "account_type",
+            "in": "query",
+            "required": false,
+            "description": "Account type used to filter the reported segments. Supported values: ALL (all account types), LINK_ACCOUNT (shop-linked accounts), CREATOR_ACCOUNT (affiliate creator accounts). Defaults to ALL when omitted or blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "form",
+            "in": "query",
+            "required": false,
+            "description": "Content form used to filter the reported segments. Supported values: ALL (all forms), PRODUCT (product cards), VIDEO (short videos), LIVE (livestreams), PHOTO (image-and-text posts). Defaults to ALL when omitted or blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "audience_type",
+            "in": "query",
+            "required": false,
+            "description": "Initial audience segment used as the baseline for penetration ratios. Supported values: ACC (deduplicated union of awareness, consideration, and conversion audiences), AWARENESS (people exposed to or who viewed the brand content or products), CONSIDERATION (people who clicked, added to cart, followed, or otherwise showed deeper interest), CONVERSION (purchasers), NEW_CONVERSION (first-time shop buyers), and REPEAT_CONVERSION (repeat shop buyers). Defaults to ACC when omitted or blank. The baseline count is taken at the start of the reporting window.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCAudiencePenetrationResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "funnel": {
+                      "clicked": {
+                        "not_rate": "80.00%",
+                        "not_value": 21600000,
+                        "rate": "20.00%",
+                        "value": 5400000
+                      },
+                      "ordered": {
+                        "not_rate": "96.30%",
+                        "not_value": 26000000,
+                        "rate": "3.70%",
+                        "value": 1000000
+                      },
+                      "total": {
+                        "value": 27000000
+                      },
+                      "viewed": {
+                        "not_rate": "50.00%",
+                        "not_value": 13500000,
+                        "rate": "50.00%",
+                        "value": 13500000
+                      }
+                    },
+                    "latest_available_date": "2026-09-20"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-audience-penetration-202610"
+      }
+    },
+    "/analytics/202610/acc/preferences": {
+      "get": {
+        "operationId": "getACCAudiencePreferenceList",
+        "summary": "Get ACC Audience Preference List",
+        "description": "Get a paginated ranking of products, live streams, videos, or photo posts preferred by the selected ACC audience for a brand.\n\nUse `entity_type` to choose the ranking. Each item contains its rank, entity information and preference metrics; `entity_detail` varies by entity type. Select the analysis window with `date` and `trend_days`, and use `scope` to choose shop-level or market-level results. To retrieve more results, pass the returned `page_token` as `page_token` in the next request.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "Authorized brand ID to analyze. After trimming surrounding whitespace, this value must be nonempty. Use brand_id and industry_id from the same record returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "Industry ID used to determine the available analysis dates. After trimming surrounding whitespace, this value must be nonempty. Use industry_id from the same Get ACC Brands record as brand_id.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "End date of the analysis window, in `YYYY-MM-DD` format (UTC). Defaults to the latest available date when omitted. The full window, including the start date determined by `trend_days`, must be within `earliest_available_date` and `latest_available_date`.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "trend_days",
+            "in": "query",
+            "required": false,
+            "description": "Number of calendar days in the analysis window, including date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0. The start date is date minus (trend_days - 1) days.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "audience_type",
+            "in": "query",
+            "required": true,
+            "description": "ACC audience segment to analyze. Supported values: `SHOP_NON_EXPOSED`, `SHOP_CLICKED_NOT_PURCHASED`, `CONVERSION`, `NEW_CONVERSION`, `REPEAT_CONVERSION`, `DTC_NEW_CONVERSION`, `DTC_REPEAT_CONVERSION`. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entity_type",
+            "in": "query",
+            "required": true,
+            "description": "Type of entity to rank. Supported values: PRODUCT (products), LIVE (live streams), VIDEO (videos), and PHOTO (photo posts); matching is case-insensitive. The fields in items[].entity_detail depend on this value. For category and factor filtering, PRODUCT supports l2_category_id and l3_category_id; LIVE supports category_id and factor_id; VIDEO and PHOTO support category_id. Supplying any of these category or factor filters for an unsupported entity type is invalid.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "description": "Scope of the ranking. Supported values: `MY_SHOP` (shop-level results), `MARKET` (market-level results). Default: `MY_SHOP`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "description": "Optional search filter.\n- `PRODUCT`: a numeric product ID performs an exact ID match; otherwise, the keyword is a case-sensitive substring of the product name.\n- `LIVE`: case-insensitive substring match against the live stream ID, live type, category or title.\n- `VIDEO` or `PHOTO`: case-insensitive substring match against the content ID, creator ID, title, creator alias or creator handle.\nAn omitted, empty, or whitespace-only value applies no keyword filter. No keyword-length validation is applied.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "l2_category_id",
+            "in": "query",
+            "required": false,
+            "description": "Second-level product category ID to filter by. Only supported for `entity_type=PRODUCT`; omit it for other entity types. Required when `l3_category_id` is supplied. Use a `category_id` with `category_level=2` returned by `GET /analytics/202610/acc/preferences/product/categories`, queried with the same shop, brand, industry, audience, analysis window and scope.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "l3_category_id",
+            "in": "query",
+            "required": false,
+            "description": "Third-level product category ID to filter by. Only supported for `entity_type=PRODUCT` and requires a nonblank `l2_category_id`; omit it for other entity types. Omit it to use the default third-level category selection; supply it to select a specific third-level category. Use a level-3 child `category_id` under the selected level-2 category returned by `GET /analytics/202610/acc/preferences/product/categories`, queried with the same shop, brand, industry, audience, analysis window and scope.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "description": "Category ID to filter by for `entity_type=LIVE`, `VIDEO` or `PHOTO`. Omit this parameter for `PRODUCT`. For `LIVE`, omission applies no category filter. For `VIDEO` and `PHOTO`, omission uses the default category selection; supply a category ID to select a specific category.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "factor_id",
+            "in": "query",
+            "required": false,
+            "description": "Live-type ID to filter by. Only supported for `entity_type=LIVE`; omit it for other entity types. Omit this parameter to apply no live-type filter. Use a `factor_id` returned by `GET /analytics/202610/acc/preferences/live/factors`, queried with the same shop, brand, industry, audience, analysis window, scope and any selected `category_id`. The value is used as a stable query identifier; do not pass the display name factor_name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_field",
+            "in": "query",
+            "required": false,
+            "description": "Metric used to order the ranking. Supported values: `GMV`, `CUSTOMERS`, `ORDERS`. Default: `GMV`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "description": "Sort direction for `sort_field`. Supported values: `DESC` (descending), `ASC` (ascending). Default: `DESC`.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of ranking entries returned per page. Allowed values: 10, 20, 50, 100. Default: 10.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "enum": [
+                10,
+                20,
+                50,
+                100
+              ]
+            }
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Pagination token returned as `page_token` in the previous response. Omit this parameter for the first page. Pass the returned token unchanged to retrieve the next page, keeping the same `page_size`, filters and sort settings.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCAudiencePreferenceListResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "audience_type": "CONVERSION",
+                    "earliest_available_date": "2026-08-21",
+                    "end_date": "2026-09-20",
+                    "entity_type": "PRODUCT",
+                    "items": [
+                      {
+                        "entity_cover": "https://example.com/images/product-001.jpg",
+                        "entity_detail": {
+                          "creator_id": "1000000000000000004",
+                          "creator_name": "Demo Creator",
+                          "l2_category_id": "848648",
+                          "l3_category_id": "601529",
+                          "live_start_time": "2026-09-18",
+                          "post_time": "2026-09-18",
+                          "product_url": "https://example.com/products/1000000000000000001",
+                          "replay_url": "https://example.com/live/1000000000000000005/replay"
+                        },
+                        "entity_id": "1000000000000000001",
+                        "entity_name": "Demo Makeup Set",
+                        "metrics": {
+                          "customers": "4210",
+                          "gmv_range": "$331,451.00 ~ $331,500.00",
+                          "orders": "8566"
+                        },
+                        "rank": 1
+                      }
+                    ],
+                    "latest_available_date": "2026-09-20",
+                    "next_page_token": "cGFnZV9udW1iZXI9MQ==",
+                    "scope": "MY_SHOP",
+                    "start_date": "2026-08-22",
+                    "total_count": 1
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-audience-preference-list-202610"
+      }
+    },
+    "/analytics/202610/acc/preferences/live/factors": {
+      "get": {
+        "operationId": "getACCLIVESalesFactors",
+        "summary": "Get ACC LIVE Sales Factors",
+        "description": "Get a paginated ranking of LIVE types (sales factors) for a selected ACC audience, scope, and reporting window. Each factor includes its ID, display name, GMV range, and customer and order counts.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "ID of the brand to analyze. Obtain brand_id and its associated industry_id from the same entry returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the current shop.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "Industry ID associated with brand_id, used to determine the available reporting dates. Obtain it from the same brand entry returned by Get ACC Brands (GET /analytics/202610/acc/brands).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted, the latest available date is used. The entire window selected by date and trend_days must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the LIVE Preference List request that will consume these factor IDs.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "trend_days",
+            "in": "query",
+            "required": false,
+            "description": "Length of the reporting window in calendar days, including date. Allowed values: 7, 14, 30. Default: 30. The start date is date minus (trend_days - 1) days.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "enum": [
+                7,
+                14,
+                30
+              ]
+            }
+          },
+          {
+            "name": "audience_type",
+            "in": "query",
+            "required": true,
+            "description": "Audience segment whose LIVE preferences are ranked. Allowed values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SHOP_NON_EXPOSED",
+                "SHOP_CLICKED_NOT_PURCHASED",
+                "CONVERSION",
+                "NEW_CONVERSION",
+                "REPEAT_CONVERSION",
+                "DTC_NEW_CONVERSION",
+                "DTC_REPEAT_CONVERSION"
+              ]
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "description": "Scope of the ranking: MY_SHOP for the current shop, or MARKET for the market. Default: MY_SHOP.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "required": false,
+            "description": "Category ID to select a category-specific LIVE factor ranking. If omitted, the aggregate category (-1) is selected; this does not combine all category-specific rows. Use a LIVE Market category ID from the Market Categories API. Product L2/L3 category IDs are not valid here. If a category is supplied, reuse it in the corresponding LIVE Preference List request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "description": "Case-insensitive substring filter for the LIVE type identifier, display name, or category ID. If omitted or blank, no keyword filter is applied.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_field",
+            "in": "query",
+            "required": false,
+            "description": "Metric used to sort factors: GMV, CUSTOMERS, or ORDERS. Default: GMV. GMV sorting uses the numeric amount before it is formatted as gmv_range.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "description": "Sort direction for sort_field: ASC for ascending or DESC for descending. Default: DESC.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of factors returned per page. Allowed values: 10, 20, 50, 100. Default: 10.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "enum": [
+                10,
+                20,
+                50,
+                100
+              ]
+            }
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCLIVESalesFactorsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "earliest_available_date": "2026-08-21",
+                    "end_date": "2026-09-20",
+                    "factors": [
+                      {
+                        "factor_id": "label1",
+                        "factor_name": "Stable, non-shaky image",
+                        "metrics": {
+                          "customers": "4210",
+                          "gmv_range": "$331,451.00 ~ $331,500.00",
+                          "orders": "8566"
+                        }
+                      }
+                    ],
+                    "latest_available_date": "2026-09-20",
+                    "next_page_token": "cGFnZV9udW1iZXI9MQ==",
+                    "start_date": "2026-08-22",
+                    "total_count": 1
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-live-sales-factors-202610"
+      }
+    },
+    "/analytics/202610/acc/preferences/product/categories": {
+      "get": {
+        "operationId": "getACCTopSalesCategories",
+        "summary": "Get ACC Top Sales Categories",
+        "description": "Get ACC product category sales rankings for the selected audience, brand and date window. Results contain level-2 categories with level-3 children; sorting and pagination apply to the level-2 categories.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "ACC brand ID. Use a brand_id returned by Get ACC Brands (GET /analytics/202610/acc/brands) for the same shop.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "ACC industry ID used with brand_id to determine available data dates. Use the industry_id returned alongside that brand by Get ACC Brands (GET /analytics/202610/acc/brands).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive end date of the data window, in UTC using YYYY-MM-DD format. Defaults to the latest available date when omitted. The entire trend_days window, including its start date, must fall between earliest_available_date and latest_available_date. Use the same date and trend_days as the Product Preference List request that will consume these category IDs.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "trend_days",
+            "in": "query",
+            "required": false,
+            "description": "Number of days in the data window, including date. Valid values: 7, 14, 30. Default: 30. The start date is date - (trend_days - 1) days.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "audience_type",
+            "in": "query",
+            "required": true,
+            "description": "ACC audience segment used for the category ranking. Valid values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "description": "Scope of the category metrics. Valid values: MY_SHOP (shop data), MARKET (market data). Default: MY_SHOP.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": false,
+            "description": "Filter categories by a case-insensitive substring of a category ID or category name. The filter is applied before the category tree is built and paginated. Omit this parameter to disable keyword filtering.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_field",
+            "in": "query",
+            "required": false,
+            "description": "Metric used to sort the level-2 categories. Valid values: GMV, CUSTOMERS, ORDERS. Default: GMV. Categories with equal values are ordered by category ID in ascending numeric order. Level-3 children are ordered separately by category ID.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "description": "Sort direction for level-2 categories. Valid values: ASC (ascending), DESC (descending). Default: DESC.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of level-2 categories per page. Allowed values: 10, 20, 50, 100. Default: 10. Level-3 children do not count toward this limit.",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "enum": [
+                10,
+                20,
+                50,
+                100
+              ]
+            }
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCTopSalesCategoriesResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "categories": [
+                      {
+                        "category_id": "848648",
+                        "category_level": 2,
+                        "category_name": "Makeup",
+                        "children": [
+                          {
+                            "category_id": "601529",
+                            "category_level": 3,
+                            "category_name": "Makeup Sets",
+                            "metrics": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "metrics": {
+                          "customers": "4210",
+                          "gmv_range": "$331,451.00 ~ $331,500.00",
+                          "orders": "8566"
+                        }
+                      }
+                    ],
+                    "earliest_available_date": "2026-08-21",
+                    "end_date": "2026-09-20",
+                    "latest_available_date": "2026-09-20",
+                    "next_page_token": "cGFnZV9udW1iZXI9MQ==",
+                    "start_date": "2026-08-22",
+                    "total_count": 1
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-top-sales-categories-202610"
+      }
+    },
+    "/analytics/202610/acc/preferences/summary": {
+      "get": {
+        "operationId": "getACCAudiencePreferenceSummary",
+        "summary": "Get ACC Audience Preference Summary",
+        "description": "Retrieve ACC audience preference summaries for products, livestreams, videos, and photo posts for the selected brand, audience segment, scope, and reporting window.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "brand_id",
+            "in": "query",
+            "required": true,
+            "description": "Authorized brand ID to analyze. Use brand_id and industry_id from the same Get ACC Brands record for the current shop. Must not be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry_id",
+            "in": "query",
+            "required": true,
+            "description": "Industry ID used to determine the available reporting dates. Use industry_id from the same Get ACC Brands record as brand_id. Must not be blank.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). If omitted or blank, the latest available date is used. The entire window selected by trend_days must fall between earliest_available_date and latest_available_date.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "trend_days",
+            "in": "query",
+            "required": false,
+            "description": "Number of calendar days in the reporting window, including its end date. Supported values: 7, 14, 30. Defaults to 30 when omitted or set to 0.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "audience_type",
+            "in": "query",
+            "required": true,
+            "description": "Audience segment to analyze. Supported values: SHOP_NON_EXPOSED, SHOP_CLICKED_NOT_PURCHASED, CONVERSION, NEW_CONVERSION, REPEAT_CONVERSION, DTC_NEW_CONVERSION, DTC_REPEAT_CONVERSION. Segment definitions: SHOP_NON_EXPOSED means people not exposed to the shop; SHOP_CLICKED_NOT_PURCHASED means people who clicked the shop without purchasing; CONVERSION means people who completed a purchase; NEW_CONVERSION means first-time shop buyers; REPEAT_CONVERSION means repeat shop buyers. DTC_NEW_CONVERSION and DTC_REPEAT_CONVERSION select the corresponding DTC new-conversion and repeat-conversion cohorts. ACC, AWARENESS, CONSIDERATION, and the DRC-prefixed values are not supported by the preference APIs.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "description": "Scope of the preference data. Supported values: MY_SHOP for shop-level data; MARKET for market-level data. Defaults to MY_SHOP when omitted or blank.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "audience_type": "CONVERSION",
+                    "channel_summaries": [
+                      {
+                        "channel": "PRODUCT",
+                        "live_top_items": [
+                          {
+                            "live_room_type": "demo_room_type",
+                            "live_start_time": "2026-09-18",
+                            "live_type": "label1",
+                            "replay_url": "https://example.com/live/1000000000000000005/replay",
+                            "room_id": "1000000000000000005",
+                            "room_image_url": "https://example.com/images/live-001.jpg",
+                            "room_title": "Demo LIVE Session",
+                            "seller_own_id": "1000000000000000004",
+                            "seller_own_name": "Demo Creator",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "live_type_top_items": [
+                          {
+                            "live_type": "label1",
+                            "live_type_name": "Stable, non-shaky image",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "photo_top_items": [
+                          {
+                            "image_urls": [
+                              "https://example.com/images/photo-001.jpg"
+                            ],
+                            "linked_products": [
+                              {
+                                "product_id": "1000000000000000001",
+                                "product_image_url": "https://example.com/images/product-001.jpg",
+                                "product_name": "Demo Makeup Set",
+                                "product_scan_url": "https://example.com/products/1000000000000000001"
+                              }
+                            ],
+                            "photo_id": "1000000000000000007",
+                            "photo_title": "Demo Product Photo Post",
+                            "post_images": [
+                              {
+                                "color": "#FFFFFF",
+                                "height": 1080,
+                                "mimetype": "image/jpeg",
+                                "size": "204800",
+                                "thumb_uri": "demo/photo-001-thumb",
+                                "thumb_url_list": [
+                                  "https://example.com/images/photo-001-thumb.jpg"
+                                ],
+                                "tint_color": "#F0F0F0",
+                                "uri": "demo/photo-001",
+                                "url_list": [
+                                  "https://example.com/images/photo-001.jpg"
+                                ],
+                                "width": 1080
+                              }
+                            ],
+                            "publish_time": "2026-09-18",
+                            "seller_own_avatar_url": "https://example.com/images/creator-001.png",
+                            "seller_own_id": "1000000000000000004",
+                            "seller_own_name": "Demo Creator",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "product_category_top_items": [
+                          {
+                            "category_id": "848648",
+                            "category_name": "Makeup",
+                            "children": [
+                              {
+                                "category_id": "601529",
+                                "category_name": "Makeup Sets",
+                                "level": 3,
+                                "stats": {
+                                  "customers": "4210",
+                                  "gmv_range": "$331,451.00 ~ $331,500.00",
+                                  "orders": "8566"
+                                }
+                              }
+                            ],
+                            "level": 2,
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "product_top_items": [
+                          {
+                            "l2_category_id": "848648",
+                            "l2_category_name": "Makeup",
+                            "l3_category_id": "601529",
+                            "l3_category_name": "Makeup Sets",
+                            "product_id": "1000000000000000001",
+                            "product_image_url": "https://example.com/images/product-001.jpg",
+                            "product_name": "Demo Makeup Set",
+                            "product_scan_url": "https://example.com/products/1000000000000000001",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            }
+                          }
+                        ],
+                        "seller_own_top_items": [
+                          {
+                            "content_type": "VIDEO",
+                            "seller_own_avatar_url": "https://example.com/images/creator-001.png",
+                            "seller_own_id": "1000000000000000004",
+                            "seller_own_name": "Demo Creator",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            },
+                            "sub_channel": "VIDEO"
+                          }
+                        ],
+                        "video_top_items": [
+                          {
+                            "linked_products": [
+                              {
+                                "product_id": "1000000000000000001",
+                                "product_image_url": "https://example.com/images/product-001.jpg",
+                                "product_name": "Demo Makeup Set",
+                                "product_scan_url": "https://example.com/products/1000000000000000001"
+                              }
+                            ],
+                            "publish_time": "2026-09-18",
+                            "seller_own_avatar_url": "https://example.com/images/creator-001.png",
+                            "seller_own_id": "1000000000000000004",
+                            "seller_own_name": "Demo Creator",
+                            "stats": {
+                              "customers": "4210",
+                              "gmv_range": "$331,451.00 ~ $331,500.00",
+                              "orders": "8566"
+                            },
+                            "video_cover_url": "https://example.com/images/video-001.jpg",
+                            "video_id": "1000000000000000006",
+                            "video_infos": [
+                              {
+                                "backup_url": "https://example.com/media/video-001-backup.mp4",
+                                "bitrate": 1200000,
+                                "file_hash": "00000000000000000000000000000000",
+                                "format": "mp4",
+                                "height": 720,
+                                "main_url": "https://example.com/media/video-001.mp4",
+                                "size": 10485760,
+                                "url_expire": 1793505600,
+                                "video_quality": "720p",
+                                "width": 1280
+                              }
+                            ],
+                            "video_title": "Demo Product Video"
+                          }
+                        ]
+                      }
+                    ],
+                    "earliest_available_date": "2026-08-21",
+                    "end_date": "2026-09-20",
+                    "latest_available_date": "2026-09-20",
+                    "scope": "MY_SHOP",
+                    "start_date": "2026-08-22"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-acc-audience-preference-summary-202610"
+      }
+    },
+    "/analytics/202610/off_site/details": {
+      "get": {
+        "operationId": "getOffSitePerformanceDetails",
+        "summary": "Get Off Site Performance Details",
+        "description": "Retrieve paginated weekly off-site performance details for videos, LIVE sessions, or products, including GMV and off-site effect metrics.\n\nIf the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. If neither report is available, no content records are returned.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "A date in the requested report week, formatted as YYYY-MM-DD. Each report week runs from Sunday through Saturday in the shop's reporting timezone. For both attribution settings, the earliest supported report week starts on 2026-06-14. Select the latest available week or one of the preceding 11 weeks. If omitted, the latest available week is used.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pixel_id",
+            "in": "query",
+            "required": true,
+            "description": "Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attribution_setting",
+            "in": "query",
+            "required": true,
+            "description": "Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "content_type",
+            "in": "query",
+            "required": true,
+            "description": "Type of item to retrieve. Allowed values:\n- VIDEO: Videos.\n- LIVE: LIVE sessions.\n- PRODUCT: Products.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "VIDEO",
+                "LIVE",
+                "PRODUCT"
+              ],
+              "x-enum-descriptions": [
+                "Videos.",
+                "LIVE sessions.",
+                "Products."
+              ]
+            }
+          },
+          {
+            "name": "sort_field",
+            "in": "query",
+            "required": false,
+            "description": "Metric used to sort the report candidate set. Allowed values: off_site_gmv, tiktok_shop_gmv, total_gmv, and off_site_effect_rate. Default: total_gmv. Records with equal metric values have no guaranteed secondary order, including across page requests.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "description": "Sort direction. Allowed values: ASC (ascending) and DESC (descending). Default: DESC.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ASC",
+                "Default"
+              ],
+              "x-enum-descriptions": [
+                "ascending and DESC (descending).",
+                "DESC."
+              ]
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of records returned per page. Supported values: 10, 20, and 50. Default: 10. The same values apply to VIDEO, LIVE, and PRODUCT details.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Pagination token from next_page_token in the previous response. Omit this parameter for the first page. For subsequent pages, pass the returned token unchanged as page_token and keep all other request parameters unchanged.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "contents": [
+                      {
+                        "content_id": "7000000000000000001",
+                        "content_type": "VIDEO",
+                        "cover_image_url": "https://example.com/video-cover.jpg",
+                        "creator": {
+                          "avatar_url": "https://example.com/creator-avatar.jpg",
+                          "id": "7000000000000000002",
+                          "name": "demo_creator"
+                        },
+                        "duration_seconds": 38,
+                        "metrics": {
+                          "off_site_effect_rate": "0.2500",
+                          "off_site_gmv": {
+                            "amount": "1000.00",
+                            "currency": "USD"
+                          },
+                          "tiktok_shop_gmv": {
+                            "amount": "4000.00",
+                            "currency": "USD"
+                          },
+                          "total_gmv": {
+                            "amount": "5000.00",
+                            "currency": "USD"
+                          }
+                        },
+                        "post_time": "2026-09-08T15:26:40Z",
+                        "rank": 1,
+                        "title": "Demo product styling video"
+                      }
+                    ],
+                    "latest_available_date": "2026-09-12",
+                    "next_page_token": "cGFnZV9udW1iZXI9MQ==",
+                    "total_count": 1
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-off-site-performance-details-202610"
+      }
+    },
+    "/analytics/202610/off_site/insights": {
+      "get": {
+        "operationId": "getOffSiteAudienceInsights",
+        "summary": "Get Off Site Audience Insights",
+        "description": "Compare weekly on-site and off-site attributed customer audience distributions.\n\nLists use labels from the TikTok Shop customer distribution. Label filtering and top-10 limits mean that the returned percentages may not sum to 100%.\n\nIf the report for the requested pixel and attribution setting is unavailable, results may use the shop-level report with VIEW_14D attribution. Empty distributions can indicate unavailable report data and do not necessarily mean that the shop had no customers.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop's reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pixel_id",
+            "in": "query",
+            "required": true,
+            "description": "Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attribution_setting",
+            "in": "query",
+            "required": true,
+            "description": "Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "age": [
+                      {
+                        "name": "25-34",
+                        "off_site_customers_value": "38.21%",
+                        "tts_customers_value": "35.80%"
+                      }
+                    ],
+                    "consumption_level": [
+                      {
+                        "name": "High",
+                        "off_site_customers_value": "31.50%",
+                        "tts_customers_value": "28.90%"
+                      }
+                    ],
+                    "followed_shop": [
+                      {
+                        "name": "Following",
+                        "off_site_customers_value": "42.00%",
+                        "tts_customers_value": "39.60%"
+                      }
+                    ],
+                    "gender": [
+                      {
+                        "name": "Female",
+                        "off_site_customers_value": "63.20%",
+                        "tts_customers_value": "61.10%"
+                      }
+                    ],
+                    "personas": [
+                      {
+                        "name": "Quality-focused",
+                        "off_site_customers_value": "24.80%",
+                        "tts_customers_value": "21.40%"
+                      }
+                    ],
+                    "region": [
+                      {
+                        "name": "Los Angeles",
+                        "off_site_customers_value": "12.40%",
+                        "tts_customers_value": "11.80%"
+                      }
+                    ],
+                    "top_favorite_content": [
+                      {
+                        "name": "Beauty & Personal Care",
+                        "off_site_customers_value": "29.70%",
+                        "tts_customers_value": "27.30%"
+                      }
+                    ],
+                    "top_purchase_category_preferences": [
+                      {
+                        "name": "Skin Care",
+                        "off_site_customers_value": "22.60%",
+                        "tts_customers_value": "20.10%"
+                      }
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-off-site-audience-insights-202610"
+      }
+    },
+    "/analytics/202610/off_site/overview": {
+      "get": {
+        "operationId": "getOffSitePerformanceOverview",
+        "summary": "Get Off Site Performance Overview",
+        "description": "Retrieve weekly off-site performance metrics and trends.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "A date within the requested report week, formatted as YYYY-MM-DD. Reporting weeks run from Sunday through Saturday in the shop's reporting timezone. If omitted, the latest available report week is selected. Supported weeks are the latest available week and the preceding 11 weeks, with no report week starting before 2026-06-14.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "pixel_id",
+            "in": "query",
+            "required": true,
+            "description": "Pixel ID for the authorized shop. Use a pixel_id returned by GET /analytics/202610/off_site/pixels for the same shop. An ID that does not belong to the shop may fall back to the shop-level report instead of returning Pixel-specific data.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attribution_setting",
+            "in": "query",
+            "required": true,
+            "description": "Attribution setting for off-site purchases. Allowed values: VIEW_14D (the customer viewed TikTok Shop commerce content within 14 days before purchase) and CLICK_14D_OR_VIEW_1D (the customer clicked within 14 days or viewed within 1 day before purchase). A purchase satisfying both conditions is counted once. If the requested report is unavailable, the shop-level fallback report may use VIEW_14D.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "end_date": "2026-09-12",
+                    "key_metrics": {
+                      "live_off_site_effect_rate": {
+                        "affiliate_account_rate": "0.1500",
+                        "linked_account_rate": "0.3000",
+                        "overall_rate": "0.2000"
+                      },
+                      "off_site_effect_rate": "0.3000",
+                      "off_site_gmv": {
+                        "amount": "3000.00",
+                        "currency": "USD"
+                      },
+                      "product_card_off_site_effect_rate": "1.5000",
+                      "tiktok_shop_gmv": {
+                        "amount": "10000.00",
+                        "currency": "USD"
+                      },
+                      "video_off_site_effect_rate": {
+                        "affiliate_account_rate": "0.1500",
+                        "linked_account_rate": "0.3000",
+                        "overall_rate": "0.2000"
+                      }
+                    },
+                    "latest_available_date": "2026-09-12",
+                    "start_date": "2026-09-06",
+                    "trend": {
+                      "actual_end_date": "2026-09-13",
+                      "actual_start_date": "2026-09-06",
+                      "granularity": "1W",
+                      "interval_count": 1,
+                      "intervals": [
+                        {
+                          "end_date": "2026-09-13",
+                          "metrics": {
+                            "live_off_site_effect_rate": "0.2000",
+                            "off_site_effect_rate": "0.3000",
+                            "off_site_gmv": {
+                              "amount": "3000.00",
+                              "currency": "USD"
+                            },
+                            "product_card_off_site_effect_rate": "1.5000",
+                            "tiktok_shop_gmv": {
+                              "amount": "10000.00",
+                              "currency": "USD"
+                            },
+                            "video_off_site_effect_rate": "0.2000"
+                          },
+                          "start_date": "2026-09-06"
+                        }
+                      ]
+                    }
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-off-site-performance-overview-202610"
+      }
+    },
+    "/analytics/202610/off_site/pixels": {
+      "get": {
+        "operationId": "getShopOffSitePixels",
+        "summary": "Get Shop Off Site Pixels",
+        "description": "Retrieve the Pixel IDs available to the authorized shop.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetShopOffSitePixelsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "pixels": [
+                      {
+                        "pixel_id": "123123123",
+                        "pixel_name": "PIXLE NAME"
+                      }
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-shop-off-site-pixels-202610"
       }
     },
     "/authorization/202309/shops": {
@@ -54540,6 +56176,1295 @@
           }
         }
       },
+      "GetACCAudienceOverviewResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseData"
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseData": {
+        "type": "object",
+        "properties": {
+          "key_metrics": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetric",
+            "description": "Audience metrics for the selected date. Counts and benchmarks are available only when greater than 1,000. The day-over-day change is unavailable when the corresponding audience count is 1,000 or fewer."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available date for the requested brand and industry, in `YYYY-MM-DD` format (UTC). This may differ from the requested `date`."
+          },
+          "trend": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataTrend"
+            },
+            "description": "Time series for the six audience metrics. Each series contains up to 30 available daily data points in ascending UTC date order. Missing dates are not filled."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetric": {
+        "type": "object",
+        "properties": {
+          "acc": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricAcc",
+            "description": "Audience count, day-over-day change, and industry benchmark for the total ACC audience: the deduplicated union of the awareness, consideration, and conversion audiences."
+          },
+          "awareness": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricAwareness",
+            "description": "Audience count, day-over-day change, and industry benchmark for the awareness audience: people exposed to or who viewed the brand's content or products."
+          },
+          "consideration": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricConsideration",
+            "description": "Audience count, day-over-day change, and industry benchmark for the consideration audience: people who showed deeper interest through actions such as clicking, adding to cart, or following."
+          },
+          "conversion": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricConversion",
+            "description": "Audience count, day-over-day change, and industry benchmark for the conversion audience: people who completed a purchase in the reporting period."
+          },
+          "new_conversion": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricNewConversion",
+            "description": "Audience count, day-over-day change, and industry benchmark for the new-conversion audience: people making their first purchase in the shop in the reporting period."
+          },
+          "repeat_conversion": {
+            "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataKeyMetricRepeatConversion",
+            "description": "Audience count, day-over-day change, and industry benchmark for the repeat-conversion audience: people whose purchase in the reporting period was not their first purchase in the shop."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricAcc": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricAwareness": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricConsideration": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricConversion": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricNewConversion": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataKeyMetricRepeatConversion": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "dod_change_rate": {
+            "type": "string",
+            "description": "Percentage change in this audience count from the previous UTC calendar day, calculated as (current - previous) / previous * 100 and returned as a percentage string, for example \"9.21%\". Unavailable when comparison data is unavailable or the previous count is zero."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the selected date."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataTrend": {
+        "type": "object",
+        "properties": {
+          "actual_end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest UTC date included in `intervals`, in `YYYY-MM-DD` format. Unavailable when `intervals` is empty."
+          },
+          "actual_start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest UTC date included in `intervals`, in `YYYY-MM-DD` format. Unavailable when `intervals` is empty."
+          },
+          "interval_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of data points in `intervals` (0 to 30)."
+          },
+          "intervals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudienceOverviewResponseDataTrendInterval"
+            },
+            "description": "Daily data points for this metric, in ascending UTC date order. Counts and benchmarks are available only when greater than 1,000."
+          },
+          "metric": {
+            "type": "string",
+            "description": "Audience metric represented by this series. Possible values: `ACC`, `AWARENESS`, `CONSIDERATION`, `CONVERSION`, `NEW_CONVERSION`, and `REPEAT_CONVERSION`. The six metric meanings match the corresponding fields in key_metrics."
+          }
+        }
+      },
+      "GetACCAudienceOverviewResponseDataTrendInterval": {
+        "type": "object",
+        "properties": {
+          "benchmark": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Average audience count for this metric and date among the selected industry's top N brands, where N is the benchmark request parameter. Unit: people."
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "UTC date of this data point, in `YYYY-MM-DD` format."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Audience count for this metric on the data point date."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseData"
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseData": {
+        "type": "object",
+        "properties": {
+          "funnel": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseDataFunnel",
+            "description": "Audience penetration funnel for the selected reporting window. All segment ratios use the selected initial audience count at the start of the window as their denominator. Segment counts and rates are withheld when that segment has 1,000 or fewer audience members; unavailable values must not be interpreted as zero."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available reporting date for the selected shop, brand, and industry, in YYYY-MM-DD format (UTC). This date is used when the request date is omitted or blank; it can be later than an explicitly requested date."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseDataFunnel": {
+        "type": "object",
+        "properties": {
+          "clicked": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseDataFunnelClicked",
+            "description": "Reported clicked and not-clicked audience segments in the selected reporting window, with counts and ratios to the initial audience baseline."
+          },
+          "ordered": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseDataFunnelOrdered",
+            "description": "Reported ordered and not-ordered audience segments in the selected reporting window, with counts and ratios to the initial audience baseline."
+          },
+          "total": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseDataFunnelTotal",
+            "description": "Initial audience baseline selected by audience_type at the start of the reporting window. This baseline is not filtered by account_type or form."
+          },
+          "viewed": {
+            "$ref": "#/components/schemas/GetACCAudiencePenetrationResponseDataFunnelViewed",
+            "description": "Reported viewed and not-viewed audience segments in the selected reporting window, with counts and ratios to the initial audience baseline."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseDataFunnelClicked": {
+        "type": "object",
+        "properties": {
+          "not_rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by clicked.not_value, calculated as clicked.not_value / funnel.total.value * 100 and returned as a percentage string, for example \"55.12%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "not_value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the not-clicked segment for the selected reporting window."
+          },
+          "rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by clicked.value, calculated as clicked.value / funnel.total.value * 100 and returned as a percentage string, for example \"44.88%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the clicked segment for the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseDataFunnelOrdered": {
+        "type": "object",
+        "properties": {
+          "not_rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by ordered.not_value, calculated as ordered.not_value / funnel.total.value * 100 and returned as a percentage string, for example \"55.12%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "not_value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the not-ordered segment for the selected reporting window."
+          },
+          "rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by ordered.value, calculated as ordered.value / funnel.total.value * 100 and returned as a percentage string, for example \"44.88%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the ordered segment for the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseDataFunnelTotal": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of audience members in the selected initial audience at the start of the reporting window. Available only when a positive baseline count is obtained."
+          }
+        }
+      },
+      "GetACCAudiencePenetrationResponseDataFunnelViewed": {
+        "type": "object",
+        "properties": {
+          "not_rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by viewed.not_value, calculated as viewed.not_value / funnel.total.value * 100 and returned as a percentage string, for example \"55.12%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "not_value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the not-viewed segment for the selected reporting window."
+          },
+          "rate": {
+            "type": "string",
+            "description": "Percentage of the initial audience represented by viewed.value, calculated as viewed.value / funnel.total.value * 100 and returned as a percentage string, for example \"44.88%\". Do not multiply the returned percentage by 100 again. Unavailable when the initial audience count is not positive."
+          },
+          "value": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Reported number of audience members in the viewed segment for the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCAudiencePreferenceListResponseData"
+          }
+        }
+      },
+      "GetACCAudiencePreferenceListResponseData": {
+        "type": "object",
+        "properties": {
+          "audience_type": {
+            "type": "string",
+            "description": "ACC audience segment used for this ranking, corresponding to the request `audience_type`."
+          },
+          "earliest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest available analysis date for the selected shop, brand and industry, in `YYYY-MM-DD` format (UTC). The analysis window must not start before this date."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive end date of the analysis window, in `YYYY-MM-DD` format (UTC). Equals the requested `date`, or the latest available date when `date` is omitted."
+          },
+          "entity_type": {
+            "type": "string",
+            "description": "Type of entity in this ranking: `PRODUCT`, `LIVE`, `VIDEO` or `PHOTO`, corresponding to the request `entity_type`."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceListResponseDataItem"
+            },
+            "description": "Current page of ranked entities for the requested `entity_type`, after applying the selected audience, scope and filters. Each entry includes its rank, entity information and preference metrics. An empty array means no results for the selected entity and filters; missing entity metadata does not remove an otherwise valid metrics record."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available analysis date for the selected shop, brand and industry, in `YYYY-MM-DD` format (UTC). Used as the analysis end date when the request `date` is omitted."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Token for the next page. Pass this value unchanged as page_token in the next request and keep all other request parameters unchanged. An empty string means there are no more pages."
+          },
+          "scope": {
+            "type": "string",
+            "description": "Scope used for this ranking: `MY_SHOP` for shop-level results or `MARKET` for market-level results."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive start date of the analysis window, in `YYYY-MM-DD` format (UTC). Calculated as `end_date` minus `trend_days - 1` days."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of matching ranking entries after filtering and before pagination."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceListResponseDataItem": {
+        "type": "object",
+        "properties": {
+          "entity_cover": {
+            "type": "string",
+            "description": "Cover image URL for the product, live stream, video or photo post, when available. For `PHOTO`, this is the first image URL."
+          },
+          "entity_detail": {
+            "$ref": "#/components/schemas/GetACCAudiencePreferenceListResponseDataItemEntityDetail",
+            "description": "Additional details for the selected entity type, when available:\n- `PRODUCT`: `product_url`, `l2_category_id`, `l3_category_id`.\n- `LIVE`: `live_start_time`, `replay_url`.\n- `VIDEO` or `PHOTO`: `post_time`, `creator_id`, `creator_name`."
+          },
+          "entity_id": {
+            "type": "string",
+            "description": "ID of the ranked entity: product ID for `PRODUCT`, live stream room ID for `LIVE`, video ID for `VIDEO`, or photo post ID for `PHOTO`."
+          },
+          "entity_name": {
+            "type": "string",
+            "description": "Product name for `PRODUCT`, live stream title for `LIVE`, or content title for `VIDEO` and `PHOTO`, when available."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metric",
+            "description": "Preference metrics for this entity within the selected audience, scope and analysis window."
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int64",
+            "description": "One-based position of this entry in the requested ordering, continuing across pages. This is a display position for the current pagination sequence, not a stable business ranking."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceListResponseDataItemEntityDetail": {
+        "type": "object",
+        "properties": {
+          "creator_id": {
+            "type": "string",
+            "description": "ID of the creator of the video or photo post, when available. Applies to `VIDEO` and `PHOTO`."
+          },
+          "creator_name": {
+            "type": "string",
+            "description": "Display name of the creator of the video or photo post, when available. Applies to `VIDEO` and `PHOTO`."
+          },
+          "l2_category_id": {
+            "type": "string",
+            "description": "Second-level category ID of the ranked product. Applies to `PRODUCT`."
+          },
+          "l3_category_id": {
+            "type": "string",
+            "description": "Third-level category identifier associated with this ranking entry. Applies to `PRODUCT`. A value of `-1` denotes the default third-level category selection."
+          },
+          "live_start_time": {
+            "type": "string",
+            "format": "date",
+            "description": "UTC calendar date on which the live stream started, in `YYYY-MM-DD` format, when available. Applies to `LIVE`."
+          },
+          "post_time": {
+            "type": "string",
+            "format": "date",
+            "description": "UTC publication date of the video or photo post, in `YYYY-MM-DD` format, when available. Applies to `VIDEO` and `PHOTO`."
+          },
+          "product_url": {
+            "type": "string",
+            "description": "Link to the ranked product, when available. Applies to `PRODUCT`."
+          },
+          "replay_url": {
+            "type": "string",
+            "description": "Link to the live stream replay, when available. Applies to `LIVE`."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseData"
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseData": {
+        "type": "object",
+        "properties": {
+          "audience_type": {
+            "type": "string",
+            "description": "Audience segment used for the summary, returned as the uppercase audience_type value."
+          },
+          "channel_summaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummary"
+            },
+            "description": "Channel summaries in this order: PRODUCT, LIVE, VIDEO, PHOTO. Lists within each summary can be empty when no items are available. These are structured Top 3 results rather than generated narrative text. A list may also be empty when its underlying query fails; an empty list alone does not establish that the channel had no activity."
+          },
+          "earliest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest date available for the selected shop, brand, and industry, in YYYY-MM-DD format (UTC)."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC)."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest date available for the selected shop, brand, and industry, in YYYY-MM-DD format (UTC)."
+          },
+          "scope": {
+            "type": "string",
+            "description": "Scope used for the summary: MY_SHOP for shop-level data or MARKET for market-level data."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive start date of the reporting window, in YYYY-MM-DD format (UTC)."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummary": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "Channel represented by this summary: PRODUCT, LIVE, VIDEO, or PHOTO."
+          },
+          "live_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTopItem"
+            },
+            "description": "Up to 3 livestreams with the highest GMV for the selected audience, scope, and reporting window, in descending GMV order. Populated in the LIVE summary when data is available."
+          },
+          "live_type_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTypeTopItem"
+            },
+            "description": "Up to 3 livestream types with the highest GMV for the selected audience, scope, and reporting window, in descending GMV order. Populated in the LIVE summary when data is available."
+          },
+          "photo_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItem"
+            },
+            "description": "Up to 3 photo posts with the highest GMV for the selected audience, scope, and reporting window, in descending GMV order. Populated in the PHOTO summary when data is available."
+          },
+          "product_category_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItem"
+            },
+            "description": "Up to 3 level-2 product categories with the highest GMV, in descending GMV order, in the PRODUCT summary. Each category includes its available level-3 children; the 3-category limit applies to level-2 entries."
+          },
+          "product_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductTopItem"
+            },
+            "description": "Up to 3 products with the highest GMV for the selected audience, scope, and reporting window, in descending GMV order. Populated in the PRODUCT summary when data is available."
+          },
+          "seller_own_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummarySellerOwnTopItem"
+            },
+            "description": "Content-author preference summaries for the channel. This list can be empty."
+          },
+          "video_top_items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItem"
+            },
+            "description": "Up to 3 videos with the highest GMV for the selected audience, scope, and reporting window, in descending GMV order. Populated in the VIDEO summary when data is available."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTopItem": {
+        "type": "object",
+        "properties": {
+          "live_room_type": {
+            "type": "string",
+            "description": "Livestream room category label."
+          },
+          "live_start_time": {
+            "type": "string",
+            "format": "date",
+            "description": "Date when the livestream started, in YYYY-MM-DD format (UTC)."
+          },
+          "live_type": {
+            "type": "string",
+            "description": "Livestream type label."
+          },
+          "replay_url": {
+            "type": "string",
+            "description": "URL of the livestream replay."
+          },
+          "room_id": {
+            "type": "string",
+            "description": "ID of the livestream room."
+          },
+          "room_image_url": {
+            "type": "string",
+            "description": "URL of the livestream cover image."
+          },
+          "room_title": {
+            "type": "string",
+            "description": "Title of the livestream."
+          },
+          "seller_own_id": {
+            "type": "string",
+            "description": "ID of the content author."
+          },
+          "seller_own_name": {
+            "type": "string",
+            "description": "Display name of the content author."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryLiveTypeTopItem": {
+        "type": "object",
+        "properties": {
+          "live_type": {
+            "type": "string",
+            "description": "Stable LIVE type identifier, such as label1. Use this identifier as factor_id in Get ACC Audience Preference List for entity_type=LIVE; the localized display name is not a query value."
+          },
+          "live_type_name": {
+            "type": "string",
+            "description": "Localized display name of the LIVE factor. Use live_type, rather than this display name, as the stable identifier for filtering LIVE preferences."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItem": {
+        "type": "object",
+        "properties": {
+          "image_urls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs of images in the photo post. The cover image URL can be returned when no other image URLs are available."
+          },
+          "linked_products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedProduct"
+            },
+            "description": "Products linked to the photo post, when provided."
+          },
+          "photo_id": {
+            "type": "string",
+            "description": "ID of the photo post."
+          },
+          "photo_title": {
+            "type": "string",
+            "description": "Title of the photo post."
+          },
+          "post_images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItemPostImage"
+            },
+            "description": "Image metadata for the images in the photo post."
+          },
+          "publish_time": {
+            "type": "string",
+            "format": "date",
+            "description": "Publication date of the photo post, in YYYY-MM-DD format (UTC)."
+          },
+          "seller_own_avatar_url": {
+            "type": "string",
+            "description": "URL of the content author's avatar."
+          },
+          "seller_own_id": {
+            "type": "string",
+            "description": "ID of the content author."
+          },
+          "seller_own_name": {
+            "type": "string",
+            "description": "Display name of the content author."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryPhotoTopItemPostImage": {
+        "type": "object",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "Color of the image metadata for the images in the photo post."
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Height of the image metadata for the images in the photo post."
+          },
+          "mimetype": {
+            "type": "string",
+            "description": "MIME type of the image."
+          },
+          "size": {
+            "type": "string",
+            "description": "Size of the image metadata for the images in the photo post."
+          },
+          "thumb_uri": {
+            "type": "string",
+            "description": "Resource URI identifying the image thumbnail."
+          },
+          "thumb_url_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs for the image thumbnail."
+          },
+          "tint_color": {
+            "type": "string",
+            "description": "Tint color of the image metadata for the images in the photo post."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Resource URI identifying the image."
+          },
+          "url_list": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "URLs for the image."
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Width of the image metadata for the images in the photo post."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItem": {
+        "type": "object",
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "description": "ID of this level-2 product category."
+          },
+          "category_name": {
+            "type": "string",
+            "description": "Name of this level-2 product category."
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItemChildren"
+            },
+            "description": "Level-3 product categories belonging to this level-2 category. The top-3 limit on product_category_top_items does not independently limit this child list."
+          },
+          "level": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Product category level. This node is level 2."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductCategoryTopItemChildren": {
+        "type": "object",
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "description": "ID of this level-3 product category."
+          },
+          "category_name": {
+            "type": "string",
+            "description": "Name of this level-3 product category."
+          },
+          "level": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Product category level. This node is level 3."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryProductTopItem": {
+        "type": "object",
+        "properties": {
+          "l2_category_id": {
+            "type": "string",
+            "description": "ID of the product's level-2 category."
+          },
+          "l2_category_name": {
+            "type": "string",
+            "description": "Name of the product's level-2 category."
+          },
+          "l3_category_id": {
+            "type": "string",
+            "description": "ID of the product's level-3 category."
+          },
+          "l3_category_name": {
+            "type": "string",
+            "description": "Name of the product's level-3 category."
+          },
+          "product_id": {
+            "type": "string",
+            "description": "ID of the product."
+          },
+          "product_image_url": {
+            "type": "string",
+            "description": "URL of the product image."
+          },
+          "product_name": {
+            "type": "string",
+            "description": "Name of the product."
+          },
+          "product_scan_url": {
+            "type": "string",
+            "description": "Share link for the product."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummarySellerOwnTopItem": {
+        "type": "object",
+        "properties": {
+          "content_type": {
+            "type": "string",
+            "description": "Content classification associated with this content-author summary."
+          },
+          "seller_own_avatar_url": {
+            "type": "string",
+            "description": "URL of the content author's avatar."
+          },
+          "seller_own_id": {
+            "type": "string",
+            "description": "ID of the content author."
+          },
+          "seller_own_name": {
+            "type": "string",
+            "description": "Display name of the content author."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          },
+          "sub_channel": {
+            "type": "string",
+            "description": "Channel associated with this content-author summary."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItem": {
+        "type": "object",
+        "properties": {
+          "linked_products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LinkedProduct"
+            },
+            "description": "Products linked to the video, when provided."
+          },
+          "publish_time": {
+            "type": "string",
+            "format": "date",
+            "description": "Publication date of the video, in YYYY-MM-DD format (UTC)."
+          },
+          "seller_own_avatar_url": {
+            "type": "string",
+            "description": "URL of the content author's avatar."
+          },
+          "seller_own_id": {
+            "type": "string",
+            "description": "ID of the content author."
+          },
+          "seller_own_name": {
+            "type": "string",
+            "description": "Display name of the content author."
+          },
+          "stats": {
+            "$ref": "#/components/schemas/Stat",
+            "description": "Audience preference metrics for this item in the selected reporting window."
+          },
+          "video_cover_url": {
+            "type": "string",
+            "description": "URL of the video cover image."
+          },
+          "video_id": {
+            "type": "string",
+            "description": "ID of the video."
+          },
+          "video_infos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItemVideoInfo"
+            },
+            "description": "Available video file representations and their playback metadata."
+          },
+          "video_title": {
+            "type": "string",
+            "description": "Title of the video."
+          }
+        }
+      },
+      "GetACCAudiencePreferenceSummaryResponseDataChannelSummaryVideoTopItemVideoInfo": {
+        "type": "object",
+        "properties": {
+          "backup_url": {
+            "type": "string",
+            "description": "Backup playback URL for this video representation."
+          },
+          "bitrate": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Bitrate of this video representation."
+          },
+          "file_hash": {
+            "type": "string",
+            "description": "Hash identifying this video file."
+          },
+          "format": {
+            "type": "string",
+            "description": "File format of this video representation."
+          },
+          "height": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Height format of this video representation."
+          },
+          "main_url": {
+            "type": "string",
+            "description": "Primary playback URL for this video representation."
+          },
+          "size": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Size of this video representation."
+          },
+          "url_expire": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Url expire timestamp format of this video representation."
+          },
+          "video_quality": {
+            "type": "string",
+            "description": "Quality label of this video representation."
+          },
+          "width": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Width of this video representation."
+          }
+        }
+      },
+      "GetACCBrandsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCBrandsResponseData"
+          }
+        }
+      },
+      "GetACCBrandsResponseData": {
+        "type": "object",
+        "properties": {
+          "brands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCBrandsResponseDataBrand"
+            },
+            "description": "Authorized brand and industry records for the current shop. Returns all records without pagination and in no guaranteed order; an empty array means no authorized records. Records are deduplicated by brand ID and do not enumerate every possible brand-industry relationship. Use brand_id and industry_id from the same record in the other ACC data APIs."
+          }
+        }
+      },
+      "GetACCBrandsResponseDataBrand": {
+        "type": "object",
+        "properties": {
+          "brand_id": {
+            "type": "string",
+            "description": "ID of the authorized brand. Use it together with industry_id from this same record when calling the other ACC data APIs."
+          },
+          "brand_logo_url": {
+            "type": "string",
+            "description": "URL of the authorized brand's logo."
+          },
+          "brand_name": {
+            "type": "string",
+            "description": "Name of the authorized brand."
+          },
+          "industry_id": {
+            "type": "string",
+            "description": "ID of the industry associated with the brand. Use it together with brand_id from this same record when calling the other ACC data APIs."
+          },
+          "industry_name": {
+            "type": "string",
+            "description": "Name of the industry associated with the brand."
+          },
+          "shop_id": {
+            "type": "string",
+            "description": "ID of the current shop to which this brand authorization applies. This is a read-only response identifier; the shop used by ACC requests is determined from the authorized shop context."
+          },
+          "shop_name": {
+            "type": "string",
+            "description": "Name of the current shop to which this brand authorization applies."
+          },
+          "ttms_id": {
+            "type": "string",
+            "description": "TTMS identifier associated with the brand. Returned for reference only; do not pass it as a business parameter to the ACC APIs."
+          }
+        }
+      },
+      "GetACCLIVESalesFactorsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCLIVESalesFactorsResponseData"
+          }
+        }
+      },
+      "GetACCLIVESalesFactorsResponseData": {
+        "type": "object",
+        "properties": {
+          "earliest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest available reporting date for the requested shop, brand, and industry, in YYYY-MM-DD format (UTC). The reporting window must not start before this date."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive end date of the reporting window, in YYYY-MM-DD format (UTC). This is date when supplied, or latest_available_date when date is omitted."
+          },
+          "factors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCLIVESalesFactorsResponseDataFactor"
+            },
+            "description": "LIVE type factors for the current page, ordered by sort_field and sort_order. An empty array means no factors were returned for this page and selection."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available reporting date for the requested shop, brand, and industry, in YYYY-MM-DD format (UTC). This is the default end_date when date is omitted."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Token for the next page. Pass this value unchanged as page_token in the next request and keep all other request parameters unchanged. An empty string means there are no more pages."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive start date of the reporting window, in YYYY-MM-DD format (UTC), calculated as end_date minus (trend_days - 1) days."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of factor rows matching the selected scope, category, and keyword before pagination."
+          }
+        }
+      },
+      "GetACCLIVESalesFactorsResponseDataFactor": {
+        "type": "object",
+        "properties": {
+          "factor_id": {
+            "type": "string",
+            "description": "Stable LIVE factor identifier, such as label1. Pass this value unchanged as factor_id when filtering LIVE in Get ACC Audience Preference List; do not pass factor_name."
+          },
+          "factor_name": {
+            "type": "string",
+            "description": "Localized display name of the LIVE factor, when available. Use factor_id, rather than this display name, when filtering LIVE preferences."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metric",
+            "description": "GMV range, customer count, and order count for this LIVE factor in the selected audience, scope, and reporting window."
+          }
+        }
+      },
+      "GetACCTopSalesCategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetACCTopSalesCategoriesResponseData"
+          }
+        }
+      },
+      "GetACCTopSalesCategoriesResponseData": {
+        "type": "object",
+        "properties": {
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCTopSalesCategoriesResponseDataCategory"
+            },
+            "description": "Current page of level-2 category rankings, with their level-3 children after scope and keyword filtering. Sorting, page_size and page_token apply to this top-level list."
+          },
+          "earliest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest available UTC data date for the requested shop, brand and industry, in YYYY-MM-DD format. The start_date must not precede this date."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive end date of the data window used for the ranking, in UTC using YYYY-MM-DD format. It is the requested date, or the latest available date when date is omitted."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available UTC data date for the requested shop, brand and industry, in YYYY-MM-DD format. Used as end_date when date is omitted."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Token for the next page. Pass this value unchanged as page_token in the next request and keep all other request parameters unchanged. An empty string means there are no more pages."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Inclusive start date of the data window used for the ranking, in UTC using YYYY-MM-DD format. It is end_date - (trend_days - 1) days."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of matching level-2 categories before pagination. Level-3 children are excluded."
+          }
+        }
+      },
+      "GetACCTopSalesCategoriesResponseDataCategory": {
+        "type": "object",
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "description": "ID of the level-2 product category. Pass this ID as l2_category_id when querying PRODUCT in Get ACC Audience Preference List. These product category IDs are not the Market category IDs used for LIVE, VIDEO, or PHOTO."
+          },
+          "category_level": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Product category level. The value is 2 for this node."
+          },
+          "category_name": {
+            "type": "string",
+            "description": "Name of the level-2 product category."
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetACCTopSalesCategoriesResponseDataCategoryChildren"
+            },
+            "description": "Level-3 categories under this level-2 category, after scope and keyword filtering, ordered by category ID in ascending numeric order. This list is not paginated."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metric",
+            "description": "Sales metrics reported for this level-2 category and the selected audience, scope and date window, when available."
+          }
+        }
+      },
+      "GetACCTopSalesCategoriesResponseDataCategoryChildren": {
+        "type": "object",
+        "properties": {
+          "category_id": {
+            "type": "string",
+            "description": "ID of the level-3 product category. To query PRODUCT preferences for this node, pass this ID as l3_category_id together with the parent level-2 category_id as l2_category_id."
+          },
+          "category_level": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Product category level. The value is 3 for this node."
+          },
+          "category_name": {
+            "type": "string",
+            "description": "Name of the level-3 product category."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/Metric",
+            "description": "Sales metrics reported for this level-3 category and the selected audience, scope and date window."
+          }
+        }
+      },
       "GetActiveShopsResponse": {
         "type": "object",
         "properties": {
@@ -63906,6 +66831,618 @@
           }
         }
       },
+      "GetOffSiteAudienceInsightsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseData"
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseData": {
+        "type": "object",
+        "properties": {
+          "age": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataAge"
+            },
+            "description": "Age-group distribution, ordered by descending TikTok Shop customer count. Empty labels and `Unknown` are excluded."
+          },
+          "consumption_level": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataConsumptionLevel"
+            },
+            "description": "Consumption-level distribution, ordered by descending TikTok Shop customer count. Empty labels and `Unknown` are excluded."
+          },
+          "followed_shop": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataFollowedShop"
+            },
+            "description": "Distribution by shop-follow status, ordered by descending TikTok Shop customer count. Empty labels and `Unknown` are excluded."
+          },
+          "gender": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataGender"
+            },
+            "description": "Gender distribution, ordered by descending TikTok Shop customer count. Empty labels and `Unknown` are excluded."
+          },
+          "personas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataPersona"
+            },
+            "description": "Audience persona distribution, ordered by descending TikTok Shop customer count. Empty labels and `Unknown` are excluded; `OTHERS` is also excluded regardless of case. The number of returned persona labels is not fixed at eight."
+          },
+          "region": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataRegion"
+            },
+            "description": "City distribution, ordered by descending TikTok Shop customer count. At most 10 entries are returned: the top 10 labels are selected before empty labels and `Unknown` are removed."
+          },
+          "top_favorite_content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataTopFavoriteContent"
+            },
+            "description": "Content-interest distribution, ordered by descending TikTok Shop customer count. At most 10 entries are returned: the top 10 labels are selected before empty labels and `Unknown` are removed."
+          },
+          "top_purchase_category_preferences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSiteAudienceInsightsResponseDataTopPurchaseCategoryPreference"
+            },
+            "description": "Level-2 purchase-category distribution, ordered by descending TikTok Shop customer count. At most 10 entries are returned; categories are selected before label filtering, so fewer than 10 entries may be returned."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataAge": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Age-group name returned by the report; labels are source values and are not guaranteed to follow a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers in this age group, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers in this age group, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataConsumptionLevel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Consumption-level name returned by the report; labels are source values and are not guaranteed to follow a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers in this consumption level, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers in this consumption level, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataFollowedShop": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Shop-follow status label returned by the report; labels are source values and are not guaranteed to follow a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers with this shop-follow status, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers with this shop-follow status, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataGender": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Gender label returned by the report; labels are source values and are not guaranteed to follow a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers in this gender category, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers in this gender category, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataPersona": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Audience persona label returned by the report. The personas distribution is not guaranteed to contain exactly eight labels."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers with this audience persona, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers with this audience persona, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataRegion": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "City label returned by the report. Labels are source values and are not guaranteed to follow a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers in this city, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers in this city, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataTopFavoriteContent": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Content-interest label returned by the report; it is not guaranteed to be a canonical content-category display name."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers with this content-interest label, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers with this content-interest label, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSiteAudienceInsightsResponseDataTopPurchaseCategoryPreference": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Level-2 purchase-category label returned by the report after source label processing; it is not guaranteed to use a fixed display dictionary."
+          },
+          "off_site_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's off-site attributed purchasers with this level-2 purchase-category preference, calculated against the report's total off-site customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          },
+          "tts_customers_value": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Percentage of the report's TikTok Shop purchasers with this level-2 purchase-category preference, calculated against the report's total TikTok Shop customer count. Returned as a percentage string with a % suffix, such as 32.15%; do not multiply by 100 again. Unavailable values may be null and must not be replaced with 0%."
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponseData"
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponseData": {
+        "type": "object",
+        "properties": {
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponseDataContent"
+            },
+            "description": "Performance records in the current page, in the requested sort order. The report selects up to 100 items for each of four descending metric rankings: tiktok_shop_gmv, off_site_gmv, total_gmv, and off_site_effect_rate. GMV rankings require a positive value for the ranked metric; the effect-rate ranking requires both GMV values to be positive. Results are the union of these selections, deduplicated by content ID. The requested sorting and pagination apply only to this subset, which may not contain every item of the requested content_type. Available metadata depends on content_type."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available report date in the shop's reporting timezone, formatted as YYYY-MM-DD. The containing week is selected when date is omitted. Together with the preceding 11 report weeks, it defines the supported query window; an available date does not guarantee data for every Pixel and attribution setting."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Token for the next page. Pass this value unchanged as page_token in the next request and keep all other request parameters unchanged. An empty string means there are no more pages."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of unique items in the report candidate set for the current report week, Pixel, attribution setting, and content type, before pagination and metadata enrichment. This is not the number of items in the current page or all matching items in the shop. Missing or deleted content metadata does not reduce the count."
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponseDataContent": {
+        "type": "object",
+        "properties": {
+          "content_id": {
+            "type": "string",
+            "description": "Video ID for VIDEO items, LIVE room ID for LIVE items, or product ID for PRODUCT items."
+          },
+          "content_type": {
+            "type": "string",
+            "description": "Type of item: VIDEO (video), LIVE (LIVE session), or PRODUCT (product)."
+          },
+          "cover_image_url": {
+            "type": "string",
+            "description": "Cover image URL for the video, LIVE session, or product, when available."
+          },
+          "creator": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponseDataContentCreator",
+            "description": "Creator information for VIDEO items when metadata is available. LIVE and PRODUCT items do not provide creator information. Missing creator metadata is returned as null."
+          },
+          "duration_seconds": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "format": "int64",
+            "description": "Duration of the VIDEO or LIVE session in seconds, when available. Not applicable to PRODUCT items; missing or inapplicable metadata may be null."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponseDataContentMetric",
+            "description": "GMV and off-site effect metrics for this item for the report week."
+          },
+          "post_time": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time",
+            "description": "Publication time for VIDEO items or start time for LIVE sessions, expressed as an ISO 8601 timestamp with timezone. Not applicable to PRODUCT items; unavailable metadata may be null."
+          },
+          "rank": {
+            "type": "integer",
+            "format": "int64",
+            "description": "One-based display position in the current sorted result set, continuing across pages. This is not a stable business rank; records with equal sort values may change order between requests."
+          },
+          "title": {
+            "type": "string",
+            "description": "Video title, LIVE session title, or product name, depending on content_type, when available."
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponseDataContentCreator": {
+        "type": "object",
+        "properties": {
+          "avatar_url": {
+            "type": "string",
+            "description": "Avatar image URL of the video's creator, when available."
+          },
+          "id": {
+            "type": "string",
+            "description": "TikTok user ID of the video's creator, expressed as a string."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the video's creator, when available."
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponseDataContentMetric": {
+        "type": "object",
+        "properties": {
+          "off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for this item in the report week, expressed as a decimal ratio; 1.0000 means 100%, and the ratio can exceed 1. A null value indicates an unavailable ratio and must not be interpreted as zero; the response does not identify the cause of unavailability."
+          },
+          "off_site_gmv": {
+            "$ref": "#/components/schemas/OffSiteGmv",
+            "description": "Off-site GMV attributed to this item for the report week."
+          },
+          "tiktok_shop_gmv": {
+            "$ref": "#/components/schemas/TiktokShopGmv",
+            "description": "TikTok Shop GMV for this item for the report week. It is aggregated at shop and item level, independently of pixel_id and attribution_setting."
+          },
+          "total_gmv": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceDetailsResponseDataContentMetricTotalGmv",
+            "description": "Sum of this item's TikTok Shop GMV and off-site GMV for the report week."
+          }
+        }
+      },
+      "GetOffSitePerformanceDetailsResponseDataContentMetricTotalGmv": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "GMV amount expressed as a decimal string. The number of fractional digits is not fixed."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 three-letter currency code for the GMV amount, taken from the authorized shop context."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseData"
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseData": {
+        "type": "object",
+        "properties": {
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last date of the selected report week, inclusive, formatted as YYYY-MM-DD. This is a Saturday."
+          },
+          "key_metrics": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataKeyMetric"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Performance metrics for the selected report week. Effect rates are decimal ratios, where 1.0000 means 100%, and can exceed 1. An unavailable rate may be null and must not be interpreted as zero; the response does not identify the cause of unavailability."
+          },
+          "latest_available_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Latest available report date in the shop's reporting timezone, formatted as YYYY-MM-DD. The containing week is selected when date is omitted. Together with the preceding 11 report weeks, it defines the supported query window; an available date does not guarantee data for every Pixel and attribution setting."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First date of the selected report week, inclusive, formatted as YYYY-MM-DD. This is a Sunday."
+          },
+          "trend": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataTrend",
+            "description": "Weekly performance trends for up to eight report weeks ending with the selected report week. This historical window is not truncated by the 12-week limit used to select date. The response dates identify the history actually returned; some weeks may have unavailable metrics."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataKeyMetric": {
+        "type": "object",
+        "properties": {
+          "live_off_site_effect_rate": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataKeyMetricLiveOffSiteEffectRate",
+            "description": "Off-site effect rates for LIVE content in the selected report week, with overall, linked-account, and affiliate-account breakdowns."
+          },
+          "off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for the selected report week."
+          },
+          "off_site_gmv": {
+            "$ref": "#/components/schemas/OffSiteGmv",
+            "description": "Off-site gross merchandise value (GMV) attributed to TikTok Shop commerce content under the selected attribution setting for the report week."
+          },
+          "product_card_off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for product-card content in the selected report week."
+          },
+          "tiktok_shop_gmv": {
+            "$ref": "#/components/schemas/TiktokShopGmv",
+            "description": "TikTok Shop gross merchandise value (GMV) for the selected report week."
+          },
+          "video_off_site_effect_rate": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataKeyMetricVideoOffSiteEffectRate",
+            "description": "Off-site effect rates for video content in the selected report week, with overall, linked-account, and affiliate-account breakdowns."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataKeyMetricLiveOffSiteEffectRate": {
+        "type": "object",
+        "properties": {
+          "affiliate_account_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for LIVE content from affiliate accounts in the selected report week."
+          },
+          "linked_account_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for LIVE content from linked accounts in the selected report week."
+          },
+          "overall_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for LIVE content in the selected report week."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataKeyMetricVideoOffSiteEffectRate": {
+        "type": "object",
+        "properties": {
+          "affiliate_account_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for video content from affiliate accounts in the selected report week."
+          },
+          "linked_account_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for video content from linked accounts in the selected report week."
+          },
+          "overall_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for video content in the selected report week."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataTrend": {
+        "type": "object",
+        "properties": {
+          "actual_end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "End date of the last returned trend interval, exclusive, formatted as YYYY-MM-DD."
+          },
+          "actual_start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Start date of the first returned trend interval, inclusive, formatted as YYYY-MM-DD."
+          },
+          "granularity": {
+            "type": "string",
+            "description": "Time granularity of each trend interval. The value is 1W, representing one reporting week."
+          },
+          "interval_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Number of weekly intervals returned in intervals, up to eight."
+          },
+          "intervals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataTrendInterval"
+            },
+            "description": "Weekly intervals ordered by start_date from earliest to latest. Up to eight intervals are returned."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataTrendInterval": {
+        "type": "object",
+        "properties": {
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "End date of this weekly interval, exclusive, formatted as YYYY-MM-DD."
+          },
+          "metrics": {
+            "$ref": "#/components/schemas/GetOffSitePerformanceOverviewResponseDataTrendIntervalMetric",
+            "description": "Performance metrics for this weekly interval. Rates follow the same calculation, decimal format, and unavailable-data behavior as key_metrics."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First date of this weekly interval, inclusive, formatted as YYYY-MM-DD."
+          }
+        }
+      },
+      "GetOffSitePerformanceOverviewResponseDataTrendIntervalMetric": {
+        "type": "object",
+        "properties": {
+          "live_off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for LIVE content in this weekly interval, expressed as a decimal ratio."
+          },
+          "off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for all content in this weekly interval, expressed as a decimal ratio."
+          },
+          "off_site_gmv": {
+            "$ref": "#/components/schemas/OffSiteGmv",
+            "description": "Off-site gross merchandise value (GMV) for this weekly interval."
+          },
+          "product_card_off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for product-card content in this weekly interval, expressed as a decimal ratio."
+          },
+          "tiktok_shop_gmv": {
+            "$ref": "#/components/schemas/TiktokShopGmv",
+            "description": "TikTok Shop gross merchandise value (GMV) for this weekly interval."
+          },
+          "video_off_site_effect_rate": {
+            "type": "string",
+            "description": "Off-site GMV divided by TikTok Shop GMV for video content in this weekly interval, expressed as a decimal ratio."
+          }
+        }
+      },
       "GetOpenCollaborationCreatorContentDetailsResponse": {
         "type": "object",
         "properties": {
@@ -72349,6 +75886,52 @@
           }
         }
       },
+      "GetShopOffSitePixelsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetShopOffSitePixelsResponseData"
+          }
+        }
+      },
+      "GetShopOffSitePixelsResponseData": {
+        "type": "object",
+        "properties": {
+          "pixels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetShopOffSitePixelsResponseDataPixel"
+            },
+            "description": "Pixels available for off-site analysis for the authorized shop within the latest 56-day report-data window. This is not a list of every Pixel ever linked to the shop; newly linked Pixels without report data and Pixels with no recent data may be absent. Entries with a missing or blank Pixel ID or name, or a Pixel ID of 0, are excluded. An empty list means no analyzable Pixels were found in this window."
+          }
+        }
+      },
+      "GetShopOffSitePixelsResponseDataPixel": {
+        "type": "object",
+        "properties": {
+          "pixel_id": {
+            "type": "string",
+            "description": "Pixel ID available for off-site analysis in the report-data window. Pass this value as pixel_id when requesting off-site reports for the same authorized shop."
+          },
+          "pixel_name": {
+            "type": "string",
+            "description": "Display name of the Pixel as returned by the report data source."
+          }
+        }
+      },
       "GetShopPerformancePerHourResponse": {
         "type": "object",
         "properties": {
@@ -80475,6 +84058,27 @@
           }
         }
       },
+      "LinkedProduct": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "ID of the product."
+          },
+          "product_image_url": {
+            "type": "string",
+            "description": "URL of the product image."
+          },
+          "product_name": {
+            "type": "string",
+            "description": "Name of the product."
+          },
+          "product_scan_url": {
+            "type": "string",
+            "description": "URL associated with the linked product."
+          }
+        }
+      },
       "ListAvailableInboundMethodsRequest": {
         "type": "object",
         "properties": {
@@ -81340,6 +84944,23 @@
           }
         }
       },
+      "Metric": {
+        "type": "object",
+        "properties": {
+          "customers": {
+            "type": "string",
+            "description": "Customer count for this entity within the selected audience, scope and analysis window, represented as a string."
+          },
+          "gmv_range": {
+            "type": "string",
+            "description": "Formatted gross merchandise value (GMV) range for this entity, using the shop's currency. Zero is represented as a formatted zero rather than a range. Positive GMV is grouped into 50-unit bands in the shop's local currency. The formatted value is returned without conversion to another currency."
+          },
+          "orders": {
+            "type": "string",
+            "description": "Order count for this entity within the selected audience, scope and analysis window, represented as a string."
+          }
+        }
+      },
       "MetricStandardInfo": {
         "type": "object",
         "properties": {
@@ -81672,6 +85293,19 @@
               "ROBOT"
             ],
             "description": "Sender's role, with possible values: \n * BUYER \n * SHOP \n * CUSTOMER_SERVICE \n * SYSTEM \n * ROBOT"
+          }
+        }
+      },
+      "OffSiteGmv": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "GMV amount expressed as a decimal string. The number of fractional digits is not fixed."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 three-letter currency code for the GMV amount, taken from the authorized shop context."
           }
         }
       },
@@ -97712,6 +101346,23 @@
           }
         }
       },
+      "Stat": {
+        "type": "object",
+        "properties": {
+          "customers": {
+            "type": "string",
+            "description": "Reported customer count for this item in the selected reporting window, represented as a string."
+          },
+          "gmv_range": {
+            "type": "string",
+            "description": "Formatted gross merchandise value (GMV) band for this item. Positive values use 50-unit bands separated by \" ~ \"; nonpositive values are shown as a formatted zero. Currency formatting uses the shop's region and currency information where available."
+          },
+          "orders": {
+            "type": "string",
+            "description": "Reported order count for this item in the selected reporting window, represented as a string."
+          }
+        }
+      },
       "StrikethroughPriceExpiredWebhook": {
         "type": "object",
         "properties": {
@@ -98700,6 +102351,19 @@
           "predicted_fulfillment_rank": {
             "type": "string",
             "description": "The creators whose predicted rate of posting a shoppable video or LIVE after receiving a sample.\n- ALL. All creators regardless of the rate.\n- LOW. The creators whose rate is above or equal to low.\n- MEDIUM. The creators whose rate is above or equal to medium.\n- HIGH. The creators whose rate is high."
+          }
+        }
+      },
+      "TiktokShopGmv": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "string",
+            "description": "GMV amount expressed as a decimal string. The number of fractional digits is not fixed."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 three-letter currency code for the GMV amount, taken from the authorized shop context."
           }
         }
       },
