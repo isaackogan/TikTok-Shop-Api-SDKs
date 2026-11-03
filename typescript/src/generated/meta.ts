@@ -2377,6 +2377,22 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "createImageBasedProductListingTask",
+    "tag": "Products",
+    "group": "products",
+    "method": "post",
+    "path": "/product/202610/image_listing_tasks",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getProductPropertyRecommendationTask",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202610/property_recommendation_tasks/{task_id}",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "createSizeChartV2",
     "tag": "Products",
     "group": "products",

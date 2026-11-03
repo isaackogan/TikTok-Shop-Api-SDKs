@@ -360,6 +360,8 @@ public final class Meta {
             new Operation("predictProductPackageDimensionsAndWeight", "Products", "products", "ProductsApi", "POST", "/product/202609/products/package/predict", true),
             new Operation("recommendRequiredProductProperties", "Products", "products", "ProductsApi", "POST", "/product/202609/products/properties/recommend", true),
             new Operation("submitStrikethroughPrice", "Products", "products", "ProductsApi", "POST", "/product/202609/products/{product_id}/strikethrough_price/submit", true),
+            new Operation("createImageBasedProductListingTask", "Products", "products", "ProductsApi", "POST", "/product/202610/image_listing_tasks", true),
+            new Operation("getProductPropertyRecommendationTask", "Products", "products", "ProductsApi", "GET", "/product/202610/property_recommendation_tasks/{task_id}", true),
             new Operation("createSizeChartV2", "Products", "products", "ProductsApi", "POST", "/product/202610/size_charts", true),
             new Operation("editSizeChartV2", "Products", "products", "ProductsApi", "POST", "/product/202610/size_charts/edit", true),
             new Operation("createPromotionActivity", "Promotion", "promotion", "PromotionApi", "POST", "/promotion/202309/activities", true),

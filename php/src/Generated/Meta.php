@@ -310,6 +310,8 @@ final class Meta
         ['predictProductPackageDimensionsAndWeight', 'products', 'POST', '/product/202609/products/package/predict', true],
         ['recommendRequiredProductProperties', 'products', 'POST', '/product/202609/products/properties/recommend', true],
         ['submitStrikethroughPrice', 'products', 'POST', '/product/202609/products/{product_id}/strikethrough_price/submit', true],
+        ['createImageBasedProductListingTask', 'products', 'POST', '/product/202610/image_listing_tasks', true],
+        ['getProductPropertyRecommendationTask', 'products', 'GET', '/product/202610/property_recommendation_tasks/{task_id}', true],
         ['createSizeChartV2', 'products', 'POST', '/product/202610/size_charts', true],
         ['editSizeChartV2', 'products', 'POST', '/product/202610/size_charts/edit', true],
         ['createPromotionActivity', 'promotion', 'POST', '/promotion/202309/activities', true],

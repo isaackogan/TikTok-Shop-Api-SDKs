@@ -18,6 +18,7 @@ def _get_kwargs(
     *,
     page_token: str | Unset = UNSET,
     page_size: int,
+    order_id_list: list[str] | Unset = UNSET,
 
 ) -> dict[str, Any]:
     
@@ -29,6 +30,13 @@ def _get_kwargs(
     params["page_token"] = page_token
 
     params["page_size"] = page_size
+
+    json_order_id_list: list[str] | Unset = UNSET
+    if not isinstance(order_id_list, Unset):
+        json_order_id_list = order_id_list
+
+
+    params["order_id_list"] = json_order_id_list
 
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
@@ -73,6 +81,7 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     page_size: int,
+    order_id_list: list[str] | Unset = UNSET,
 
 ) -> Response[SearchCombinablePackagesResponse]:
     """ Search Combinable Packages
@@ -82,6 +91,7 @@ def sync_detailed(
     Args:
         page_token (str | Unset):
         page_size (int):
+        order_id_list (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -95,6 +105,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         page_token=page_token,
 page_size=page_size,
+order_id_list=order_id_list,
 
     )
 
@@ -109,6 +120,7 @@ def sync(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     page_size: int,
+    order_id_list: list[str] | Unset = UNSET,
 
 ) -> SearchCombinablePackagesResponse | None:
     """ Search Combinable Packages
@@ -118,6 +130,7 @@ def sync(
     Args:
         page_token (str | Unset):
         page_size (int):
+        order_id_list (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,6 +145,7 @@ def sync(
         client=client,
 page_token=page_token,
 page_size=page_size,
+order_id_list=order_id_list,
 
     ).parsed
 
@@ -140,6 +154,7 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     page_size: int,
+    order_id_list: list[str] | Unset = UNSET,
 
 ) -> Response[SearchCombinablePackagesResponse]:
     """ Search Combinable Packages
@@ -149,6 +164,7 @@ async def asyncio_detailed(
     Args:
         page_token (str | Unset):
         page_size (int):
+        order_id_list (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -162,6 +178,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         page_token=page_token,
 page_size=page_size,
+order_id_list=order_id_list,
 
     )
 
@@ -176,6 +193,7 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     page_token: str | Unset = UNSET,
     page_size: int,
+    order_id_list: list[str] | Unset = UNSET,
 
 ) -> SearchCombinablePackagesResponse | None:
     """ Search Combinable Packages
@@ -185,6 +203,7 @@ async def asyncio(
     Args:
         page_token (str | Unset):
         page_size (int):
+        order_id_list (list[str] | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -199,5 +218,6 @@ async def asyncio(
         client=client,
 page_token=page_token,
 page_size=page_size,
+order_id_list=order_id_list,
 
     )).parsed

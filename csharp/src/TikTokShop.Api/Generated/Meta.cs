@@ -317,6 +317,8 @@ public static class Meta
         new("PredictProductPackageDimensionsAndWeight", "Products", "POST", "/product/202609/products/package/predict", true),
         new("RecommendRequiredProductProperties", "Products", "POST", "/product/202609/products/properties/recommend", true),
         new("SubmitStrikethroughPrice", "Products", "POST", "/product/202609/products/{product_id}/strikethrough_price/submit", true),
+        new("CreateImageBasedProductListingTask", "Products", "POST", "/product/202610/image_listing_tasks", true),
+        new("GetProductPropertyRecommendationTask", "Products", "GET", "/product/202610/property_recommendation_tasks/{task_id}", true),
         new("CreateSizeChartV2", "Products", "POST", "/product/202610/size_charts", true),
         new("EditSizeChartV2", "Products", "POST", "/product/202610/size_charts/edit", true),
         new("CreatePromotionActivity", "Promotion", "POST", "/promotion/202309/activities", true),

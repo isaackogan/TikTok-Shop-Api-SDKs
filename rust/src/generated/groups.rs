@@ -2770,8 +2770,9 @@ impl FulfillmentApi {
         &self,
         page_size: i64,
         page_token: Option<&str>,
+        order_id_list: Option<Vec<String>>,
     ) -> Result<models::SearchCombinablePackagesResponse, Error> {
-        apis::fulfillment_api::search_combinable_packages(&self.config, page_size, page_token)
+        apis::fulfillment_api::search_combinable_packages(&self.config, page_size, page_token, order_id_list)
             .await
             .map_err(Error::from)
     }
@@ -4020,6 +4021,27 @@ impl ProductsApi {
         apis::products_api::submit_strikethrough_price(&self.config, product_id, submit_strikethrough_price_request)
             .await
             .map_err(Error::from)
+    }
+
+    /// Creates an asynchronous image-based product listing task from the product title, leaf category, and one product image. The response contains only the task ID.  Currently, this API only supports recommending product properties and their values. When processing finishes, a subscribed application receives a completion webhook. Use the task ID with the Get Product Property Recommendation Task API to retrieve the property recommendation result.  Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in the product title or image. The response does not return the submitted product content.
+    pub async fn create_image_based_product_listing_task(
+        &self,
+        create_image_based_product_listing_task_request: models::CreateImageBasedProductListingTaskRequest,
+    ) -> Result<models::CreateImageBasedProductListingTaskResponse, Error> {
+        apis::products_api::create_image_based_product_listing_task(
+            &self.config,
+            create_image_based_product_listing_task_request,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Retrieves the product property recommendation result for an image-based product listing task after the completion webhook is received.  Currently, image-based product listing tasks only support product property recommendations.
+    pub async fn get_product_property_recommendation_task(
+        &self,
+        task_id: &str,
+    ) -> Result<models::GetProductPropertyRecommendationTaskResponse, Error> {
+        apis::products_api::get_product_property_recommendation_task(&self.config, task_id).await.map_err(Error::from)
     }
 
     /// Create one size chart from structured table data. Use `REUSABLE_TEMPLATE` to create a seller template that can be reused across products, or `PRODUCT_SCOPED` to create a chart for a single product. The response returns the created size chart ID. The request must identify one authorized shop using shop_cipher.

@@ -1358,6 +1358,7 @@ open class FulfillmentApi(basePath: kotlin.String = defaultBasePath, client: Cal
      * Use this API to query orders eligible for combined shipping.
      * @param pageSize The number of results to be returned per page. Valid range: [1-50].
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
+     * @param orderIdList query by order_id, maximum number of order_id_list is 200 (optional)
      * @return SearchCombinablePackagesResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
@@ -1367,8 +1368,8 @@ open class FulfillmentApi(basePath: kotlin.String = defaultBasePath, client: Cal
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun searchCombinablePackages(pageSize: kotlin.Long, pageToken: kotlin.String? = null) : SearchCombinablePackagesResponse {
-        val localVarResponse = searchCombinablePackagesWithHttpInfo(pageSize = pageSize, pageToken = pageToken)
+    fun searchCombinablePackages(pageSize: kotlin.Long, pageToken: kotlin.String? = null, orderIdList: kotlin.collections.List<kotlin.String>? = null) : SearchCombinablePackagesResponse {
+        val localVarResponse = searchCombinablePackagesWithHttpInfo(pageSize = pageSize, pageToken = pageToken, orderIdList = orderIdList)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as SearchCombinablePackagesResponse
@@ -1391,14 +1392,15 @@ open class FulfillmentApi(basePath: kotlin.String = defaultBasePath, client: Cal
      * Use this API to query orders eligible for combined shipping.
      * @param pageSize The number of results to be returned per page. Valid range: [1-50].
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
+     * @param orderIdList query by order_id, maximum number of order_id_list is 200 (optional)
      * @return ApiResponse<SearchCombinablePackagesResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun searchCombinablePackagesWithHttpInfo(pageSize: kotlin.Long, pageToken: kotlin.String?) : ApiResponse<SearchCombinablePackagesResponse?> {
-        val localVariableConfig = searchCombinablePackagesRequestConfig(pageSize = pageSize, pageToken = pageToken)
+    fun searchCombinablePackagesWithHttpInfo(pageSize: kotlin.Long, pageToken: kotlin.String?, orderIdList: kotlin.collections.List<kotlin.String>?) : ApiResponse<SearchCombinablePackagesResponse?> {
+        val localVariableConfig = searchCombinablePackagesRequestConfig(pageSize = pageSize, pageToken = pageToken, orderIdList = orderIdList)
 
         return request<Unit, SearchCombinablePackagesResponse>(
             localVariableConfig
@@ -1410,9 +1412,10 @@ open class FulfillmentApi(basePath: kotlin.String = defaultBasePath, client: Cal
      *
      * @param pageSize The number of results to be returned per page. Valid range: [1-50].
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
+     * @param orderIdList query by order_id, maximum number of order_id_list is 200 (optional)
      * @return RequestConfig
      */
-    fun searchCombinablePackagesRequestConfig(pageSize: kotlin.Long, pageToken: kotlin.String?) : RequestConfig<Unit> {
+    fun searchCombinablePackagesRequestConfig(pageSize: kotlin.Long, pageToken: kotlin.String?, orderIdList: kotlin.collections.List<kotlin.String>?) : RequestConfig<Unit> {
         val localVariableBody = null
         val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
             .apply {
@@ -1420,6 +1423,9 @@ open class FulfillmentApi(basePath: kotlin.String = defaultBasePath, client: Cal
                     put("page_token", listOf(pageToken.toString()))
                 }
                 put("page_size", listOf(pageSize.toString()))
+                if (orderIdList != null) {
+                    put("order_id_list", toMultiValue(orderIdList.toList(), "csv"))
+                }
             }
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"

@@ -244,6 +244,10 @@ from .create_global_product_response_data import CreateGlobalProductResponseData
 from .create_gpa_upgrade_task_request import CreateGPAUpgradeTaskRequest
 from .create_gpa_upgrade_task_response import CreateGPAUpgradeTaskResponse
 from .create_gpa_upgrade_task_response_data import CreateGPAUpgradeTaskResponseData
+from .create_image_based_product_listing_task_request import CreateImageBasedProductListingTaskRequest
+from .create_image_based_product_listing_task_request_scene import CreateImageBasedProductListingTaskRequestScene
+from .create_image_based_product_listing_task_response import CreateImageBasedProductListingTaskResponse
+from .create_image_based_product_listing_task_response_data import CreateImageBasedProductListingTaskResponseData
 from .create_image_translation_tasks_request import CreateImageTranslationTasksRequest
 from .create_image_translation_tasks_request_image import CreateImageTranslationTasksRequestImage
 from .create_image_translation_tasks_request_image_target_languages_item import CreateImageTranslationTasksRequestImageTargetLanguagesItem
@@ -1027,6 +1031,9 @@ from .get_product_package_recommendations_response_data_product_dimension_recomm
 from .get_product_package_recommendations_response_data_product_dimension_recommendation_width import GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth
 from .get_product_package_recommendations_response_data_product_weight_recommendation import GetProductPackageRecommendationsResponseDataProductWeightRecommendation
 from .get_product_package_recommendations_response_data_product_weight_recommendation_weight import GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight
+from .get_product_property_recommendation_task_response import GetProductPropertyRecommendationTaskResponse
+from .get_product_property_recommendation_task_response_data import GetProductPropertyRecommendationTaskResponseData
+from .get_product_property_recommendation_task_response_data_recommended_property import GetProductPropertyRecommendationTaskResponseDataRecommendedProperty
 from .get_product_response import GetProductResponse
 from .get_product_response_data import GetProductResponseData
 from .get_product_response_data_audit import GetProductResponseDataAudit
@@ -2694,6 +2701,10 @@ __all__ = (
     "CreateGPAUpgradeTaskRequest",
     "CreateGPAUpgradeTaskResponse",
     "CreateGPAUpgradeTaskResponseData",
+    "CreateImageBasedProductListingTaskRequest",
+    "CreateImageBasedProductListingTaskRequestScene",
+    "CreateImageBasedProductListingTaskResponse",
+    "CreateImageBasedProductListingTaskResponseData",
     "CreateImageTranslationTasksRequest",
     "CreateImageTranslationTasksRequestImage",
     "CreateImageTranslationTasksRequestImageTargetLanguagesItem",
@@ -3477,6 +3488,9 @@ __all__ = (
     "GetProductPackageRecommendationsResponseDataProductDimensionRecommendationWidth",
     "GetProductPackageRecommendationsResponseDataProductWeightRecommendation",
     "GetProductPackageRecommendationsResponseDataProductWeightRecommendationWeight",
+    "GetProductPropertyRecommendationTaskResponse",
+    "GetProductPropertyRecommendationTaskResponseData",
+    "GetProductPropertyRecommendationTaskResponseDataRecommendedProperty",
     "GetProductResponse",
     "GetProductResponseData",
     "GetProductResponseDataAudit",

@@ -74,6 +74,8 @@ if TYPE_CHECKING:
     from .models.create_global_product_response import CreateGlobalProductResponse
     from .models.create_gpa_upgrade_task_request import CreateGPAUpgradeTaskRequest
     from .models.create_gpa_upgrade_task_response import CreateGPAUpgradeTaskResponse
+    from .models.create_image_based_product_listing_task_request import CreateImageBasedProductListingTaskRequest
+    from .models.create_image_based_product_listing_task_response import CreateImageBasedProductListingTaskResponse
     from .models.create_image_translation_tasks_request import CreateImageTranslationTasksRequest
     from .models.create_image_translation_tasks_response import CreateImageTranslationTasksResponse
     from .models.create_manufacturer_request import CreateManufacturerRequest
@@ -282,6 +284,7 @@ if TYPE_CHECKING:
     from .models.get_product_locale import GetProductLocale
     from .models.get_product_package_recommendations_request import GetProductPackageRecommendationsRequest
     from .models.get_product_package_recommendations_response import GetProductPackageRecommendationsResponse
+    from .models.get_product_property_recommendation_task_response import GetProductPropertyRecommendationTaskResponse
     from .models.get_product_response import GetProductResponse
     from .models.get_product_skpp_detail_locale import GetProductSkppDetailLocale
     from .models.get_product_skpp_detail_response import GetProductSKPPDetailResponse
@@ -10234,6 +10237,7 @@ class FulfillmentApi(SyncGroup):
         *,
         page_token: str | Unset = UNSET,
         page_size: int,
+        order_id_list: list[str] | Unset = UNSET,
     ) -> SearchCombinablePackagesResponse | None:
         """Search Combinable Packages
 
@@ -10242,6 +10246,7 @@ class FulfillmentApi(SyncGroup):
         Args:
             page_token (str | Unset):
             page_size (int):
+            order_id_list (list[str] | Unset):
 
         Raises:
             TikTokShopError: for a TikTok error code, a non-2xx status,
@@ -10249,7 +10254,7 @@ class FulfillmentApi(SyncGroup):
         """
         from .api.fulfillment import search_combinable_packages as _op
 
-        return self._run(_op.sync_detailed, page_token=page_token, page_size=page_size)
+        return self._run(_op.sync_detailed, page_token=page_token, page_size=page_size, order_id_list=order_id_list)
 
     def search_package(
         self,
@@ -10945,6 +10950,7 @@ class AsyncFulfillmentApi(AsyncGroup):
         *,
         page_token: str | Unset = UNSET,
         page_size: int,
+        order_id_list: list[str] | Unset = UNSET,
     ) -> SearchCombinablePackagesResponse | None:
         """Search Combinable Packages
 
@@ -10953,6 +10959,7 @@ class AsyncFulfillmentApi(AsyncGroup):
         Args:
             page_token (str | Unset):
             page_size (int):
+            order_id_list (list[str] | Unset):
 
         Raises:
             TikTokShopError: for a TikTok error code, a non-2xx status,
@@ -10960,7 +10967,7 @@ class AsyncFulfillmentApi(AsyncGroup):
         """
         from .api.fulfillment import search_combinable_packages as _op
 
-        return await self._run(_op.asyncio_detailed, page_token=page_token, page_size=page_size)
+        return await self._run(_op.asyncio_detailed, page_token=page_token, page_size=page_size, order_id_list=order_id_list)
 
     async def search_package(
         self,
@@ -12156,6 +12163,34 @@ class ProductsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, body=body)
 
+    def create_image_based_product_listing_task(
+        self,
+        *,
+        body: CreateImageBasedProductListingTaskRequest,
+    ) -> CreateImageBasedProductListingTaskResponse | None:
+        """Create Image-based Product Listing Task
+
+         Creates an asynchronous image-based product listing task from the product title, leaf category, and
+        one product image. The response contains only the task ID.
+
+        Currently, this API only supports recommending product properties and their values. When processing
+        finishes, a subscribed application receives a completion webhook. Use the task ID with the Get
+        Product Property Recommendation Task API to retrieve the property recommendation result.
+
+        Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in
+        the product title or image. The response does not return the submitted product content.
+
+        Args:
+            body (CreateImageBasedProductListingTaskRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import create_image_based_product_listing_task as _op
+
+        return self._run(_op.sync_detailed, body=body)
+
     def create_image_translation_tasks(
         self,
         *,
@@ -12965,6 +13000,28 @@ class ProductsApi(SyncGroup):
         from .api.products import get_product_package_recommendations as _op
 
         return self._run(_op.sync_detailed, body=body, page_size=page_size, page_token=page_token)
+
+    def get_product_property_recommendation_task(
+        self,
+        task_id: str,
+    ) -> GetProductPropertyRecommendationTaskResponse | None:
+        """Get Product Property Recommendation Task
+
+         Retrieves the product property recommendation result for an image-based product listing task after
+        the completion webhook is received.
+
+        Currently, image-based product listing tasks only support product property recommendations.
+
+        Args:
+            task_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_product_property_recommendation_task as _op
+
+        return self._run(_op.sync_detailed, task_id=task_id)
 
     def get_product_skpp_detail(
         self,
@@ -14149,6 +14206,34 @@ class AsyncProductsApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, body=body)
 
+    async def create_image_based_product_listing_task(
+        self,
+        *,
+        body: CreateImageBasedProductListingTaskRequest,
+    ) -> CreateImageBasedProductListingTaskResponse | None:
+        """Create Image-based Product Listing Task
+
+         Creates an asynchronous image-based product listing task from the product title, leaf category, and
+        one product image. The response contains only the task ID.
+
+        Currently, this API only supports recommending product properties and their values. When processing
+        finishes, a subscribed application receives a completion webhook. Use the task ID with the Get
+        Product Property Recommendation Task API to retrieve the property recommendation result.
+
+        Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in
+        the product title or image. The response does not return the submitted product content.
+
+        Args:
+            body (CreateImageBasedProductListingTaskRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import create_image_based_product_listing_task as _op
+
+        return await self._run(_op.asyncio_detailed, body=body)
+
     async def create_image_translation_tasks(
         self,
         *,
@@ -14958,6 +15043,28 @@ class AsyncProductsApi(AsyncGroup):
         from .api.products import get_product_package_recommendations as _op
 
         return await self._run(_op.asyncio_detailed, body=body, page_size=page_size, page_token=page_token)
+
+    async def get_product_property_recommendation_task(
+        self,
+        task_id: str,
+    ) -> GetProductPropertyRecommendationTaskResponse | None:
+        """Get Product Property Recommendation Task
+
+         Retrieves the product property recommendation result for an image-based product listing task after
+        the completion webhook is received.
+
+        Currently, image-based product listing tasks only support product property recommendations.
+
+        Args:
+            task_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_product_property_recommendation_task as _op
+
+        return await self._run(_op.asyncio_detailed, task_id=task_id)
 
     async def get_product_skpp_detail(
         self,

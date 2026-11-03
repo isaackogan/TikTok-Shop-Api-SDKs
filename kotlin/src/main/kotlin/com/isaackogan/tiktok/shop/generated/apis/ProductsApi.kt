@@ -38,6 +38,8 @@ import com.isaackogan.tiktok.shop.generated.models.CreateCustomBrandsResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateGPAUpgradeTaskResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateGlobalProductRequest
 import com.isaackogan.tiktok.shop.generated.models.CreateGlobalProductResponse
+import com.isaackogan.tiktok.shop.generated.models.CreateImageBasedProductListingTaskRequest
+import com.isaackogan.tiktok.shop.generated.models.CreateImageBasedProductListingTaskResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateImageTranslationTasksRequest
 import com.isaackogan.tiktok.shop.generated.models.CreateImageTranslationTasksResponse
 import com.isaackogan.tiktok.shop.generated.models.CreateManufacturerRequest
@@ -77,6 +79,7 @@ import com.isaackogan.tiktok.shop.generated.models.GetOpportunityDetailResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductDiagnosesResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductPackageRecommendationsRequest
 import com.isaackogan.tiktok.shop.generated.models.GetProductPackageRecommendationsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetProductPropertyRecommendationTaskResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductSKPPDetailResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductsSEOWordsResponse
@@ -683,6 +686,80 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/product/202309/global_products",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /product/202610/image_listing_tasks
+     * Create Image-based Product Listing Task
+     * Creates an asynchronous image-based product listing task from the product title, leaf category, and one product image. The response contains only the task ID.  Currently, this API only supports recommending product properties and their values. When processing finishes, a subscribed application receives a completion webhook. Use the task ID with the Get Product Property Recommendation Task API to retrieve the property recommendation result.  Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in the product title or image. The response does not return the submitted product content.
+     * @param createImageBasedProductListingTaskRequest 
+     * @return CreateImageBasedProductListingTaskResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun createImageBasedProductListingTask(createImageBasedProductListingTaskRequest: CreateImageBasedProductListingTaskRequest) : CreateImageBasedProductListingTaskResponse {
+        val localVarResponse = createImageBasedProductListingTaskWithHttpInfo(createImageBasedProductListingTaskRequest = createImageBasedProductListingTaskRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CreateImageBasedProductListingTaskResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /product/202610/image_listing_tasks
+     * Create Image-based Product Listing Task
+     * Creates an asynchronous image-based product listing task from the product title, leaf category, and one product image. The response contains only the task ID.  Currently, this API only supports recommending product properties and their values. When processing finishes, a subscribed application receives a completion webhook. Use the task ID with the Get Product Property Recommendation Task API to retrieve the property recommendation result.  Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in the product title or image. The response does not return the submitted product content.
+     * @param createImageBasedProductListingTaskRequest 
+     * @return ApiResponse<CreateImageBasedProductListingTaskResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun createImageBasedProductListingTaskWithHttpInfo(createImageBasedProductListingTaskRequest: CreateImageBasedProductListingTaskRequest) : ApiResponse<CreateImageBasedProductListingTaskResponse?> {
+        val localVariableConfig = createImageBasedProductListingTaskRequestConfig(createImageBasedProductListingTaskRequest = createImageBasedProductListingTaskRequest)
+
+        return request<CreateImageBasedProductListingTaskRequest, CreateImageBasedProductListingTaskResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation createImageBasedProductListingTask
+     *
+     * @param createImageBasedProductListingTaskRequest 
+     * @return RequestConfig
+     */
+    fun createImageBasedProductListingTaskRequestConfig(createImageBasedProductListingTaskRequest: CreateImageBasedProductListingTaskRequest) : RequestConfig<CreateImageBasedProductListingTaskRequest> {
+        val localVariableBody = createImageBasedProductListingTaskRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/product/202610/image_listing_tasks",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -3168,6 +3245,79 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/product/202602/packages/recommend",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /product/202610/property_recommendation_tasks/{task_id}
+     * Get Product Property Recommendation Task
+     * Retrieves the product property recommendation result for an image-based product listing task after the completion webhook is received.  Currently, image-based product listing tasks only support product property recommendations.
+     * @param taskId ID returned by the Create Image-based Product Listing Task API.
+     * @return GetProductPropertyRecommendationTaskResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getProductPropertyRecommendationTask(taskId: kotlin.String) : GetProductPropertyRecommendationTaskResponse {
+        val localVarResponse = getProductPropertyRecommendationTaskWithHttpInfo(taskId = taskId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetProductPropertyRecommendationTaskResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202610/property_recommendation_tasks/{task_id}
+     * Get Product Property Recommendation Task
+     * Retrieves the product property recommendation result for an image-based product listing task after the completion webhook is received.  Currently, image-based product listing tasks only support product property recommendations.
+     * @param taskId ID returned by the Create Image-based Product Listing Task API.
+     * @return ApiResponse<GetProductPropertyRecommendationTaskResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getProductPropertyRecommendationTaskWithHttpInfo(taskId: kotlin.String) : ApiResponse<GetProductPropertyRecommendationTaskResponse?> {
+        val localVariableConfig = getProductPropertyRecommendationTaskRequestConfig(taskId = taskId)
+
+        return request<Unit, GetProductPropertyRecommendationTaskResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getProductPropertyRecommendationTask
+     *
+     * @param taskId ID returned by the Create Image-based Product Listing Task API.
+     * @return RequestConfig
+     */
+    fun getProductPropertyRecommendationTaskRequestConfig(taskId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202610/property_recommendation_tasks/{task_id}".replace("{"+"task_id"+"}", encodeURIComponent(taskId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
