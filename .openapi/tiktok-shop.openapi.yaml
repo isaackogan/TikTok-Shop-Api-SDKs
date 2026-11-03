@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.02
+  version: 2026.11.03
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -14317,6 +14317,15 @@ paths:
             format: int64
             minimum: 1
             maximum: 50
+        - name: order_id_list
+          in: query
+          required: false
+          description: query by order_id, maximum number of order_id_list is 200
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         "200":
           description: Success
@@ -26776,6 +26785,97 @@ paths:
         - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/submit-strikethrough-price-202609
+  /product/202610/image_listing_tasks:
+    post:
+      operationId: createImageBasedProductListingTask
+      summary: Create Image-based Product Listing Task
+      description: |-
+        Creates an asynchronous image-based product listing task from the product title, leaf category, and one product image. The response contains only the task ID.
+
+        Currently, this API only supports recommending product properties and their values. When processing finishes, a subscribed application receives a completion webhook. Use the task ID with the Get Product Property Recommendation Task API to retrieve the property recommendation result.
+
+        Do not include personal data, such as names, phone numbers, email addresses, or postal addresses, in the product title or image. The response does not return the submitted product content.
+      tags:
+        - Products
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateImageBasedProductListingTaskRequest"
+            example:
+              category_id: "600001"
+              images:
+                - uri: tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe
+              product_title: Short Boat Invisible Socks
+              scene: PROPERTY_RECOMMENDATION
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateImageBasedProductListingTaskResponse"
+              example:
+                code: 0
+                data:
+                  task_id: 764c6e87eedcea90399a0dafcd572b71
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Basic
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/create-image-based-product-listing-task-202610
+  /product/202610/property_recommendation_tasks/{task_id}:
+    get:
+      operationId: getProductPropertyRecommendationTask
+      summary: Get Product Property Recommendation Task
+      description: |-
+        Retrieves the product property recommendation result for an image-based product listing task after the completion webhook is received.
+
+        Currently, image-based product listing tasks only support product property recommendations.
+      tags:
+        - Products
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: ID returned by the Create Image-based Product Listing Task API.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProductPropertyRecommendationTaskResponse"
+              example:
+                code: 0
+                data:
+                  recommended_properties:
+                    - id: "100392"
+                      is_customizable: false
+                      is_multiple_selection: false
+                      is_required: true
+                      name: Occasion
+                      values:
+                        - id: "1001533"
+                          name: Birthday
+                  task_id: 764c6e87eedcea90399a0dafcd572b71
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Basic
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-product-property-recommendation-task-202610
   /product/202610/size_charts:
     post:
       operationId: createSizeChartV2
@@ -36162,6 +36262,56 @@ components:
           items:
             $ref: "#/components/schemas/GlobalSku"
           description: A list of global Stock Keeping Units (SKUs) used to identify distinct variants of the product.
+    CreateImageBasedProductListingTaskRequest:
+      type: object
+      properties:
+        category_id:
+          type: string
+          description: The ID of the leaf category selected for the product.
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/Image"
+          description: Exactly one product image used for the image-based product listing task. Do not include an image containing personal data.
+        product_title:
+          type: string
+          description: Product title used to predict product properties. Do not include personal data.
+        scene:
+          type: string
+          enum:
+            - PROPERTY_RECOMMENDATION
+          x-enum-descriptions:
+            - Recommends product properties and values.
+          description: |-
+            Scene of the image-based product listing task.
+            Possible values:
+            - `PROPERTY_RECOMMENDATION`: Recommends product properties and values.
+      required:
+        - category_id
+        - images
+        - product_title
+        - scene
+    CreateImageBasedProductListingTaskResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/CreateImageBasedProductListingTaskResponseData"
+    CreateImageBasedProductListingTaskResponseData:
+      type: object
+      properties:
+        task_id:
+          type: string
+          description: ID of the image-based product listing task. Use this ID to retrieve the property recommendation task status and result.
     CreateImageTranslationTasksRequest:
       type: object
       properties:
@@ -54041,6 +54191,55 @@ components:
         max_value:
           type: string
           description: "Recommended range maximum; unit: g"
+    GetProductPropertyRecommendationTaskResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetProductPropertyRecommendationTaskResponseData"
+    GetProductPropertyRecommendationTaskResponseData:
+      type: object
+      properties:
+        recommended_properties:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetProductPropertyRecommendationTaskResponseDataRecommendedProperty"
+          description: Ordered product properties and values predicted for the product. The array is empty when no property recommendation is available.
+        task_id:
+          type: string
+          description: ID of the product property recommendation task.
+    GetProductPropertyRecommendationTaskResponseDataRecommendedProperty:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the recommended property.
+        is_customizable:
+          type: boolean
+          description: Whether the seller can enter a custom value when no recommended value applies.
+        is_multiple_selection:
+          type: boolean
+          description: Whether the seller can select more than one value for the property.
+        is_required:
+          type: boolean
+          description: Whether the property must be provided when the product is created or edited.
+        name:
+          type: string
+          description: Display name of the recommended property for the shop's region.
+        values:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetGlobalAttributesResponseDataAttributeValue"
+          description: Ordered values recommended for the property. The array is empty when the property requires a custom value or no value is recommended.
     GetProductResponse:
       type: object
       properties:
