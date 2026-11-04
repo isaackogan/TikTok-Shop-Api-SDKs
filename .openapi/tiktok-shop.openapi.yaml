@@ -26614,7 +26614,8 @@ paths:
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Product Basic
       x-tts-error-codes:
         - code: "12052109"
           message: number of requests from merchants over limit

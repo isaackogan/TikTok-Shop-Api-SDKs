@@ -39074,7 +39074,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Product Basic"
+        ],
         "x-tts-error-codes": [
           {
             "code": "12052109",
