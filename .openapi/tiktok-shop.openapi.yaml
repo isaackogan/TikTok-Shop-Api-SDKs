@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.03
+  version: 2026.11.05
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -5837,6 +5837,307 @@ paths:
         - Read Seller Affiliate Collaboration
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/check-creator-outreach-eligibility-202610
+  /affiliate_seller/202611/partner_campaigns:
+    get:
+      operationId: searchSellerPartnerCampaigns
+      summary: Search Seller Partner Campaigns
+      description: Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default search behavior. Campaign type and online-status filters apply to the specified-category branch. Results do not provide a complete assessment of product or shop registration eligibility. Omit page_token for the first page and use next_page_token to continue, keeping filters and page_size unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains the actual matching count. Optional fields vary by campaign type and query branch. Display text can contain user-authored content.
+      tags:
+        - Affiliate seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: page_size
+          in: query
+          required: true
+          description: Required. Number of records per page, from 1 to 100. Only pages fully within the first 10000 matching records are accessible.
+          schema:
+            type: integer
+            format: int64
+        - name: page_token
+          in: query
+          required: false
+          description: Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot.
+          schema:
+            type: string
+        - name: key_word
+          in: query
+          required: false
+          description: For JOINED, NOT_JOINED or CLOSED, leading and trailing whitespace is removed. A non-empty keyword requires CAMPAIGN_NAME, CAMPAIGN_ID or AGENCY_NAME in search_type. An omitted or UNSPECIFIED category retains the legacy name search.
+          schema:
+            type: string
+        - name: campaign_join_status_category
+          in: query
+          required: false
+          description: JOINED selects Manage, NOT_JOINED selects Discover, and CLOSED selects Closed. Omit or use UNSPECIFIED for the existing default search.
+          schema:
+            type: string
+        - name: campaign_online_status
+          in: query
+          required: false
+          description: Filter upcoming or ongoing campaigns. Omit or use UNSPECIFIED for all online states. Applies when a join-status category is specified.
+          schema:
+            type: string
+        - name: campaign_types
+          in: query
+          required: false
+          description: Campaign types to include. Omit or send an empty list to use AGENCY_INITIATED, SELLER_INITIATED and OPS_CAMPAIGN. Applies when a join-status category is specified. Send multiple values as a comma-separated query parameter.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: search_type
+          in: query
+          required: false
+          description: Keyword matching mode. UNSPECIFIED or omission is allowed only without a keyword in the specified-category branch; the default search branch retains its name-search behavior.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponse"
+              example:
+                code: 0
+                data:
+                  campaign_details: []
+                  next_page_token: ""
+                  total_num: 0
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Read Seller Affiliate Collaboration
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/search-seller-partner-campaigns-202611
+  /affiliate_seller/202611/partner_campaigns/{campaign_id}:
+    get:
+      operationId: getSellerPartnerCampaignDetail
+      summary: Get Seller Partner Campaign Detail
+      description: Returns the rules, registration period, campaign period, available statistics and applicable shop or agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign registration-window state, not a guarantee of shop or product eligibility. is_registered reflects existing participation. Contact details and linked TikTok business accounts are not returned. Optional fields depend on campaign type and available data. Display text can contain user-authored content.
+      tags:
+        - Affiliate seller
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          description: Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponse"
+              example:
+                code: 0
+                data:
+                  campaign_detail:
+                    campaign_id: "7702356308406863629"
+                    campaign_name: Creator product collaboration
+                    can_register: true
+                    commission_rate: 1500
+                    is_registered: false
+                    status: ONLINE_REGISTRABLE
+                    type: AGENCY_INITIATED
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Read Seller Affiliate Collaboration
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-seller-partner-campaign-detail-202611
+  /affiliate_seller/202611/partner_campaigns/{campaign_id}/candidate_products:
+    get:
+      operationId: getSellerPartnerCampaignCandidateProducts
+      summary: Get Seller Partner Campaign Candidate Products
+      description: Lists the authorized shop's live products as candidates for a partner campaign. is_under_governed and has_registered identify relevant restrictions; listing a product does not guarantee successful registration. Product prices and available Open Plan commission settings are included. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50 or 100. total_num is the total matching count. Optional properties may be absent when the corresponding data is unavailable.
+      tags:
+        - Affiliate seller
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          description: Required. Positive campaign ID for the existing registration checks, encoded as a decimal string within the signed 64-bit range.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: page_size
+          in: query
+          required: true
+          description: "Required. Existing supported page sizes: 20, 50, 100."
+          schema:
+            type: integer
+            format: int64
+        - name: page_token
+          in: query
+          required: false
+          description: Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot.
+          schema:
+            type: string
+        - name: key_word
+          in: query
+          required: false
+          description: Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result.
+          schema:
+            type: string
+        - name: category_id
+          in: query
+          required: false
+          description: Optional. Empty means no category filter; otherwise provide a positive category ID within the signed 64-bit range, encoded as a decimal string.
+          schema:
+            type: string
+        - name: product_search_key
+          in: query
+          required: true
+          description: "Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID."
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSellerPartnerCampaignCandidateProductsResponse"
+              example:
+                code: 0
+                data:
+                  next_page_token: ""
+                  product_detail: []
+                  total_num: 0
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Read Seller Affiliate Collaboration
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-seller-partner-campaign-candidate-products-202611
+  /affiliate_seller/202611/partner_campaigns/{campaign_id}/products:
+    get:
+      operationId: getSellerPartnerCampaignRegisteredProducts
+      summary: Get Seller Partner Campaign Registered Products
+      description: Lists the authorized shop's product registrations for one partner campaign. product_status selects PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing; rejected records may permit resubmission when can_seller_re_register is true. Closed records are no longer active in the campaign. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may be absent. Optional fields vary by status and available source data.
+      tags:
+        - Affiliate seller
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          description: Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: page_size
+          in: query
+          required: true
+          description: "Required. Existing supported page sizes: 10, 20, 50, 100."
+          schema:
+            type: integer
+            format: int64
+        - name: page_token
+          in: query
+          required: false
+          description: Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot.
+          schema:
+            type: string
+        - name: key_word
+          in: query
+          required: false
+          description: Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result.
+          schema:
+            type: string
+        - name: product_search_key
+          in: query
+          required: true
+          description: "Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID."
+          schema:
+            type: string
+        - name: product_status
+          in: query
+          required: true
+          description: Campaign product registration status to query.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSellerPartnerCampaignRegisteredProductsResponse"
+              example:
+                code: 0
+                data:
+                  next_page_token: ""
+                  product_details: []
+                  total_num: 0
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Read Seller Affiliate Collaboration
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-seller-partner-campaign-registered-products-202611
+    post:
+      operationId: registerSellerPartnerCampaignProducts
+      summary: Register Seller Partner Campaign Products
+      description: "Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign registration window, shop eligibility, product ownership and applicable commission rules are checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not supported. The same sample_quota applies to each submitted product. Ads-commission map keys must occur in product_ids. A successful response has data: {}; it does not return per-product results. Query registered products to inspect resulting status. No idempotency-key guarantee is provided; check the registration records before retrying an ambiguous submission."
+      tags:
+        - Affiliate seller
+      parameters:
+        - name: campaign_id
+          in: path
+          required: true
+          description: Required. Positive campaign ID encoded as a decimal string.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterSellerPartnerCampaignProductsRequest"
+            example:
+              campaign_contact_info:
+                - type: EMAIL
+                  value: seller@example.com
+              creator_commission_rate: 900
+              partner_commission_rate: 600
+              product_ads_commission_rate:
+                "1732218641706554139": 500
+              product_ids:
+                - "1732218641706554139"
+              sample_quota: 1
+              total_commission_rate: 1500
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterSellerPartnerCampaignProductsResponse"
+              example:
+                code: 0
+                data: {}
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Manage Seller Affiliate Collaboration
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/register-seller-partner-campaign-products-202611
   /analytics/202403/videos/performances:
     get:
       operationId: getVideoPerformances
@@ -38138,6 +38439,40 @@ components:
         cancel_time:
           type: string
           description: The UNIX timestamp when this event happened.
+    CreatorPreference:
+      type: object
+      properties:
+        age_range:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: Indexes of the selected creator age-range options in the campaign configuration.
+        content_format:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: Indexes of the selected content-format options in the campaign configuration.
+        content_style:
+          type: array
+          items:
+            type: string
+          description: Selected content-style keys or supported custom style text.
+        follower_size:
+          type: array
+          items:
+            type: integer
+            format: int64
+          description: Indexes of the selected creator follower-size options in the campaign configuration.
+        notes:
+          type: string
+          description: "@redact Free-text creator preferences; may contain contact information."
+        product_category_ids:
+          type: array
+          items:
+            type: string
+          description: Product category IDs used to specify preferred creator categories.
     CreatorSearchSampleApplicationFulfillmentsRequest:
       type: object
       properties:
@@ -57129,6 +57464,519 @@ components:
           type: integer
           format: int64
           description: The transaction creation time, expressed as a Unix timestamp in seconds.
+    GetSellerPartnerCampaignCandidateProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignCandidateProductsResponseData"
+    GetSellerPartnerCampaignCandidateProductsResponseData:
+      type: object
+      properties:
+        next_page_token:
+          type: string
+          description: Pass this token unchanged to retrieve the next page. Empty when no further page is available within the supported query window.
+        product_detail:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetSellerPartnerCampaignCandidateProductsResponseDataProductDetail"
+          description: Preserve the singular field name from Athena; its value is a list.
+        total_num:
+          type: integer
+          format: int64
+          description: Total matching candidate products, not the number in this page.
+      required:
+        - next_page_token
+    GetSellerPartnerCampaignCandidateProductsResponseDataProductDetail:
+      type: object
+      properties:
+        has_registered:
+          type: boolean
+          description: |-
+            Indicates whether the product is treated as already registered in the campaign. A rejected
+            product eligible for re-registration may be reported as false.
+        image:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignCandidateProductsResponseDataProductDetailImage"
+          description: Product image and its media metadata.
+        is_under_governed:
+          type: boolean
+          description: Indicates whether the product is subject to a governance restriction.
+        open_plan_ads_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Ads commission rate under the product's Open Plan, expressed as the percentage multiplied by
+            100.
+        open_plan_commission_rate:
+          type: integer
+          format: int64
+          description: Product commission rate under the Open Plan, expressed as the percentage multiplied by 100.
+        price_range:
+          $ref: "#/components/schemas/PriceRange"
+          description: |-
+            Minimum and maximum product prices, with separate numeric-string and formatted-display
+            values.
+        product_id:
+          type: string
+          description: Product ID encoded as a decimal string.
+        product_name:
+          type: string
+          description: Display name of the product.
+        product_stock:
+          type: integer
+          format: int64
+          description: Product inventory quantity at the time of the query.
+        tier_commission_info:
+          $ref: "#/components/schemas/TierCommissionInfo"
+          description: Tiered commission settings for the product.
+    GetSellerPartnerCampaignCandidateProductsResponseDataProductDetailImage:
+      type: object
+      properties:
+        height:
+          type: integer
+          format: int64
+          description: Original image height in pixels.
+        thumb_uri:
+          type: string
+          description: Internal resource URI of the image thumbnail.
+        thumb_url_list:
+          type: array
+          items:
+            type: string
+          description: URLs for the image thumbnail.
+        uri:
+          type: string
+          description: Internal resource URI of the image. It is distinct from a publicly accessible image URL.
+        url_list:
+          type: array
+          items:
+            type: string
+          description: URLs for the image.
+        width:
+          type: integer
+          format: int64
+          description: Original image width in pixels.
+    GetSellerPartnerCampaignDetailResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseData"
+    GetSellerPartnerCampaignDetailResponseData:
+      type: object
+      properties:
+        campaign_detail:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetail"
+          description: |-
+            Absent on error. Optional subfields depend on campaign type and visibility.
+            Contact details and linked business account information are not returned.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetail:
+      type: object
+      properties:
+        affiliate_partner_name:
+          type: string
+          description: Name of the agency that initiated the campaign.
+        campaign_id:
+          type: string
+          description: Campaign ID encoded as a decimal string.
+        campaign_name:
+          type: string
+          description: Display name of the campaign.
+        campaign_statistics:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetailCampaignStatistic"
+          description: Aggregate performance and participation statistics for the campaign.
+        can_register:
+          type: boolean
+          description: |-
+            Campaign-level registration flag. Detail currently derives it from campaign status, not
+            complete shop/product eligibility.
+        commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Minimum commission rate required by the campaign, expressed as the percentage multiplied by
+            100; for example, 1200 means 12%.
+        description:
+          type: string
+          description: "@redact Free-text campaign description; it may contain personal contact information."
+        end_time:
+          type: string
+          description: Campaign end time, as a Unix timestamp in milliseconds encoded as a string.
+        invited_agency_details:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetailInvitedAgencyDetail"
+          description: |-
+            Restricted collaboration relationship data; return only within the authorized
+            campaign/seller scope.
+        is_auto_register:
+          type: boolean
+          description: Indicates whether automatic registration or approval is enabled for the campaign.
+        is_registered:
+          type: boolean
+          description: |-
+            Indicates whether the current shop has joined or registered for the campaign. It does not
+            mean that every submitted product has been approved.
+        is_target_campaign:
+          type: boolean
+          description: Indicates whether the campaign is targeted or invitation-only.
+        partner_icon_uri:
+          type: string
+          description: |-
+            Resource URI of the agency icon. A resource URI is not necessarily a publicly accessible
+            URL.
+        publish_time:
+          type: string
+          description: |-
+            Time at which the campaign was published, as a Unix timestamp in milliseconds encoded as a
+            string.
+        registration_end_time:
+          type: string
+          description: |-
+            End of the campaign registration window, as a Unix timestamp in milliseconds encoded as a
+            string.
+        registration_start_time:
+          type: string
+          description: |-
+            Start of the campaign registration window, as a Unix timestamp in milliseconds encoded as a
+            string.
+        seller_campaign_extra:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerCampaignExtra"
+          description: Additional settings for a seller-initiated campaign or its sub-campaign.
+        seller_info:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfo"
+          description: |-
+            Shop information for applicable seller-initiated campaigns. Current search packing does not
+            populate this object.
+        start_time:
+          type: string
+          description: Campaign start time, as a Unix timestamp in milliseconds encoded as a string.
+        status:
+          type: string
+          description: Current campaign state. DRAFT is not submitted; SUBMITTED is submitted for review; ONLINE_REGISTRABLE accepts registration; ONLINE_UNREGISTRABLE is online but does not accept registration; ENDED has finished; DELETED has been deleted.
+        type:
+          type: string
+          description: Campaign creation type. AGENCY_INITIATED is created by an agency; SELLER_INITIATED is created by a seller; SELLER_INITIATED_SUB is an agency sub-campaign of a seller campaign; OPS_CAMPAIGN is created by operations; OPS_SUB_CAMPAIGN is a sub-campaign of an operations campaign.
+        version:
+          type: string
+          description: Commission model. MVP is the legacy creator/agency split model; MULTI_CREATOR_COMMISSION uses total commission. An omitted version has MVP behavior. This is distinct from the API path version.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetailCampaignStatistic:
+      type: object
+      properties:
+        closed_products_num:
+          type: integer
+          format: int64
+          description: Number of product registrations in the closed state.
+        currency:
+          type: string
+          description: ISO 4217 currency code for these statistics, such as USD. May be absent or empty when unavailable.
+        currency_symbol:
+          type: string
+          description: Display symbol for the statistics currency. A symbol alone does not uniquely identify a currency.
+        declined_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies that have declined participation in the campaign.
+        est_total_commissions:
+          type: string
+          description: Formatted estimated total commission amount for the campaign.
+        joined_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies that have joined the campaign.
+        ongoing_products_num:
+          type: integer
+          format: int64
+          description: Number of products currently participating in the campaign.
+        paid_gmv:
+          type: string
+          description: |-
+            Formatted gross merchandise value of paid orders attributed to the campaign. The value may
+            include a currency symbol.
+        paid_order_num:
+          type: string
+          description: Number of paid orders attributed to the campaign, encoded as a string.
+        pending_products_num:
+          type: integer
+          format: int64
+          description: Number of submitted products awaiting review.
+        rejected_products_num:
+          type: integer
+          format: int64
+          description: Number of products rejected from the campaign.
+        sale_products_num:
+          type: string
+          description: Number of campaign products with sales, encoded as a string.
+        settled_gmv:
+          type: string
+          description: Formatted gross merchandise value of settled orders attributed to the campaign.
+        settled_order_num:
+          type: string
+          description: Number of settled orders attributed to the campaign, encoded as a string.
+        settled_total_commissions:
+          type: string
+          description: Formatted settled total commission amount for the campaign.
+        statistics_update_time:
+          type: string
+          description: |-
+            Time at which the campaign statistics were updated, encoded as a string in the format
+            provided by the statistics source.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetailInvitedAgencyDetail:
+      type: object
+      properties:
+        partner_id:
+          type: string
+          description: ID of the agency or TikTok Shop affiliate partner, encoded as a string.
+        partner_name:
+          type: string
+          description: Display name of the invited agency.
+        partner_status:
+          type: string
+          description: Agency participation state. INVITED means the invitation is pending; JOINED means the agency accepted; DECLINED means the agency rejected the invitation.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerCampaignExtra:
+      type: object
+      properties:
+        creator_preferences:
+          $ref: "#/components/schemas/CreatorPreference"
+          description: Creator preferences configured for the seller campaign.
+        exclusives:
+          type: array
+          items:
+            type: string
+          description: |-
+            Selected exclusive benefits, represented by the Starling keys from the campaign-
+            configuration options.
+        invited_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies invited to the seller campaign.
+        max_total_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Maximum total commission rate for the seller campaign, expressed as the percentage
+            multiplied by 100.
+        min_total_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Minimum total commission rate for the seller campaign, expressed as the percentage
+            multiplied by 100.
+        objectives:
+          type: array
+          items:
+            type: string
+          description: |-
+            Selected collaboration objectives, represented by the Starling keys from the campaign-
+            configuration options.
+        parent_campaign_id:
+          type: string
+          description: ID of the parent seller campaign associated with this sub-campaign, encoded as a string.
+        registration_type:
+          type: string
+          description: Agency registration policy. ALL_AGENCIES allows all eligible agencies to register; INVITE_ONLY allows only invited agencies.
+        sample_availability:
+          type: string
+          description: |-
+            Text describing sample availability for the campaign. This is distinct from a product-level
+            sample quota.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfo:
+      type: object
+      properties:
+        image:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfoImage"
+          description: Shop image and its media metadata.
+        seller_id:
+          type: string
+          description: ID of the seller associated with the campaign, encoded as a decimal string.
+        shop_code:
+          type: string
+          description: Business code identifying the shop. This is distinct from seller_id.
+        shop_name:
+          type: string
+          description: Display name of the shop.
+    GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfoImage:
+      type: object
+      properties:
+        height:
+          type: integer
+          format: int64
+          description: Original image height in pixels.
+        uri:
+          type: string
+          description: Internal resource URI of the image. It is distinct from a publicly accessible image URL.
+        url_list:
+          type: array
+          items:
+            type: string
+          description: URLs for the image.
+        width:
+          type: integer
+          format: int64
+          description: Original image width in pixels.
+    GetSellerPartnerCampaignRegisteredProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignRegisteredProductsResponseData"
+    GetSellerPartnerCampaignRegisteredProductsResponseData:
+      type: object
+      properties:
+        closed_num:
+          type: integer
+          format: int64
+          description: Number of closed registrations.
+        next_page_token:
+          type: string
+          description: Pass this token unchanged to retrieve the next page. Empty when no further page is available within the supported query window.
+        ongoing_num:
+          type: integer
+          format: int64
+          description: Number of ongoing registrations.
+        pending_num:
+          type: integer
+          format: int64
+          description: Number of pending registrations.
+        product_details:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetail"
+          description: Registration records for the current campaign and authorized seller.
+        rejected_num:
+          type: integer
+          format: int64
+          description: Number of rejected registrations.
+        total_num:
+          type: integer
+          format: int64
+          description: Total matching registrations, not the number in this page.
+      required:
+        - next_page_token
+    GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetail:
+      type: object
+      properties:
+        can_seller_re_register:
+          type: boolean
+          description: |-
+            Indicates whether the seller may submit the product again after its registration was
+            rejected.
+        has_removed:
+          type: boolean
+          description: Indicates whether the product has been removed or deleted.
+        image:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignCandidateProductsResponseDataProductDetailImage"
+          description: Product image and its media metadata.
+        is_new:
+          type: boolean
+          description: Page display flag indicating that the product is newly added.
+        is_under_canceling:
+          type: boolean
+          description: Indicates whether the product is currently going through the campaign-exit process.
+        is_under_governed:
+          type: boolean
+          description: Indicates whether the product is subject to a governance restriction.
+        open_plan_ads_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Ads commission rate under the product's Open Plan, expressed as the percentage multiplied by
+            100.
+        open_plan_commission_rate:
+          type: integer
+          format: int64
+          description: Product commission rate under the Open Plan, expressed as the percentage multiplied by 100.
+        price_range:
+          $ref: "#/components/schemas/PriceRange"
+          description: |-
+            Minimum and maximum product prices, with separate numeric-string and formatted-display
+            values.
+        product_id:
+          type: string
+          description: Product ID encoded as a decimal string.
+        product_name:
+          type: string
+          description: Display name of the product.
+        product_statistics:
+          $ref: "#/components/schemas/GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailProductStatistic"
+          description: Performance statistics for the product in the campaign.
+        product_status:
+          type: string
+          description: Campaign product registration state. PENDING means awaiting approval; ONGOING means approved and participating; REJECTED means rejected; CLOSED means the registration has ended or been closed.
+        product_stock:
+          type: integer
+          format: int64
+          description: Product inventory quantity at the time of the query.
+        rejected_reason:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailRejectedReason"
+          description: Structured rejection messages with localization keys and default display text.
+        sample_quota:
+          type: integer
+          format: int64
+          description: |-
+            Individual free-sample quota; absent if unset. For sub-campaigns this excludes
+            shared_sample_quota.
+        shared_sample_quota:
+          type: integer
+          format: int64
+          description: Free-sample quota shared through the parent or campaign-group mechanism, where applicable.
+        tier_commission_info:
+          $ref: "#/components/schemas/TierCommissionInfo"
+          description: Tiered commission settings for the product.
+        total_ads_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Total Ads commission rate configured for the campaign product, expressed as the percentage
+            multiplied by 100.
+        total_commission_rate:
+          type: integer
+          format: int64
+          description: Total campaign commission, percentage multiplied by 100 (1000 = 10%).
+    GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailProductStatistic:
+      type: object
+      properties:
+        sold_num:
+          type: string
+          description: Number of product units sold through the campaign, encoded as a string.
+    GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailRejectedReason:
+      type: object
+      properties:
+        default_text:
+          type: string
+          description: Default display text for the product rejection reason.
+        starling_key:
+          type: string
+          description: Internal localization key identifying the product rejection message.
     GetShippingProvidersResponse:
       type: object
       properties:
@@ -68374,6 +69222,21 @@ components:
         refund_tax:
           type: string
           description: Ignore this field. It is not yet supported.
+    PriceRange:
+      type: object
+      properties:
+        max_price:
+          type: string
+          description: Maximum product price encoded as a decimal numeric string.
+        max_price_format:
+          type: string
+          description: Formatted maximum product price, which may include a currency symbol.
+        min_price:
+          type: string
+          description: Minimum product price encoded as a decimal numeric string.
+        min_price_format:
+          type: string
+          description: Formatted minimum product price, which may include a currency symbol.
     PrintInboundOrderLabelsRequest:
       type: object
       properties:
@@ -70653,6 +71516,78 @@ components:
         sub_return_line_item_id:
           type: string
           description: Optional child line-item identifier, only applicable for Virtual Bundle returns.
+    RegisterSellerPartnerCampaignProductsRequest:
+      type: object
+      properties:
+        campaign_contact_info:
+          type: array
+          items:
+            $ref: "#/components/schemas/RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo"
+          description: Authorized seller contact entries for this submission. EMAIL is required. Optional WHATSAPP requires region_code; other types are rejected. At most one entry per contact type is allowed. Contact values must not be logged or exposed in responses.
+        creator_commission_rate:
+          type: integer
+          format: int64
+          description: Creator commission rate for the legacy commission model, expressed as the percentage multiplied by 100 (900 = 9%). Required together with partner_commission_rate only when campaign_detail.version returned by Get Seller Partner Campaign Detail is MVP or omitted. For MULTI_CREATOR_COMMISSION, provide total_commission_rate instead. When both split rates are provided, creator_commission_rate + partner_commission_rate must equal total_commission_rate. Both split rates must be supplied together and each must be between 100 and 7900 (1%-79%).
+        partner_commission_rate:
+          type: integer
+          format: int64
+          description: Partner commission rate for the legacy commission model, expressed as the percentage multiplied by 100 (600 = 6%). Required together with creator_commission_rate only when campaign_detail.version returned by Get Seller Partner Campaign Detail is MVP or omitted. For MULTI_CREATOR_COMMISSION, provide total_commission_rate instead. When both split rates are provided, creator_commission_rate + partner_commission_rate must equal total_commission_rate. Both split rates must be supplied together and each must be between 100 and 7900 (1%-79%).
+        product_ads_commission_rate:
+          description: |-
+            Product ID -> Ads commission, percentage * 100. Existing Athena range is
+            100-8000; shop feature permission and campaign/Open Plan thresholds still apply.
+            Only keys for products in product_ids are accepted. A subset is allowed;
+            omitted products have no ads commission supplied by this request.
+        product_ids:
+          type: array
+          items:
+            type: string
+          description: Required. 1-200 unique positive product IDs for one campaign; all products must belong to the authorized shop. IDs must fit a signed 64-bit integer.
+        sample_quota:
+          type: integer
+          format: int64
+          description: Free-sample quota for each product in the batch, not a per-product map. Optional integer from 0 to 100000000; omission preserves the existing default and 0 is allowed.
+        total_commission_rate:
+          type: integer
+          format: int64
+          description: Required. Total commission rate applied to the submitted batch of products, expressed as the percentage multiplied by 100 (1500 = 15%). When creator_commission_rate and partner_commission_rate are provided, their sum must equal total_commission_rate. Allowed range is 100-8000 (1%-80%).
+      required:
+        - campaign_contact_info
+        - product_ids
+        - total_commission_rate
+    RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo:
+      type: object
+      properties:
+        region_code:
+          type: string
+          description: Supported country and calling-code pair from the registration country selector, for example US#1 or TH#66. Required for WhatsApp; optional and ignored for email. The pair is validated; phone ownership and WhatsApp account availability are not verified.
+        type:
+          type: string
+          description: Contact method. At least one EMAIL entry is required; WHATSAPP is optional.
+        value:
+          type: string
+          description: Plain email address for type EMAIL, without display names or Markdown. For type WHATSAPP, use 1-30 digits, optionally preceded by a plus sign. This sensitive value is not returned in error messages.
+      required:
+        - type
+        - value
+    RegisterSellerPartnerCampaignProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/RegisterSellerPartnerCampaignProductsResponseData"
+    RegisterSellerPartnerCampaignProductsResponseData:
+      type: object
+      properties: {}
     RejectCancellationRequest:
       type: object
       properties:
@@ -78378,6 +79313,193 @@ components:
         currency:
           type: string
           description: The commission currency.
+    SearchSellerPartnerCampaignsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponseData"
+    SearchSellerPartnerCampaignsResponseData:
+      type: object
+      properties:
+        campaign_details:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponseDataCampaignDetail"
+          description: Complete shared schema; actual fields depend on campaign type and list branch.
+        campaign_join_status_counts:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponseDataCampaignJoinStatusCount"
+          description: Counts for available join-status categories. Array order has no business meaning; identify each count by category.
+        next_page_token:
+          type: string
+          description: Pass this token unchanged to retrieve the next page. Empty when no further page is available within the supported query window.
+        total_num:
+          type: integer
+          format: int64
+          description: Total matching campaigns, not the number of records in this page.
+      required:
+        - next_page_token
+    SearchSellerPartnerCampaignsResponseDataCampaignDetail:
+      type: object
+      properties:
+        affiliate_partner_id:
+          type: string
+          description: |-
+            ID of the agency that initiated the campaign. This is distinct from a seller ID or company
+            ID.
+        affiliate_partner_name:
+          type: string
+          description: Name of the agency that initiated the campaign.
+        campaign_id:
+          type: string
+          description: Campaign ID encoded as a decimal string.
+        campaign_name:
+          type: string
+          description: Display name of the campaign.
+        campaign_statistics:
+          $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponseDataCampaignDetailCampaignStatistic"
+          description: Aggregate performance and participation statistics for the campaign.
+        commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Minimum commission rate required by the campaign, expressed as the percentage multiplied by
+            100; for example, 1200 means 12%.
+        description:
+          type: string
+          description: "@redact Free-text campaign description; it may contain personal contact information."
+        end_time:
+          type: string
+          description: Campaign end time, as a Unix timestamp in milliseconds encoded as a string.
+        is_target_campaign:
+          type: boolean
+          description: Indicates whether the campaign is targeted or invitation-only.
+        partner_icon_uri:
+          type: string
+          description: |-
+            Resource URI of the agency icon. A resource URI is not necessarily a publicly accessible
+            URL.
+        registration_end_time:
+          type: string
+          description: |-
+            End of the campaign registration window, as a Unix timestamp in milliseconds encoded as a
+            string.
+        registration_start_time:
+          type: string
+          description: |-
+            Start of the campaign registration window, as a Unix timestamp in milliseconds encoded as a
+            string.
+        seller_campaign_extra:
+          $ref: "#/components/schemas/SearchSellerPartnerCampaignsResponseDataCampaignDetailSellerCampaignExtra"
+          description: Additional settings for a seller-initiated campaign or its sub-campaign.
+        start_time:
+          type: string
+          description: Campaign start time, as a Unix timestamp in milliseconds encoded as a string.
+        status:
+          type: string
+          description: Current campaign state. DRAFT is not submitted; SUBMITTED is submitted for review; ONLINE_REGISTRABLE accepts registration; ONLINE_UNREGISTRABLE is online but does not accept registration; ENDED has finished; DELETED has been deleted.
+        type:
+          type: string
+          description: Campaign creation type. AGENCY_INITIATED is created by an agency; SELLER_INITIATED is created by a seller; SELLER_INITIATED_SUB is an agency sub-campaign of a seller campaign; OPS_CAMPAIGN is created by operations; OPS_SUB_CAMPAIGN is a sub-campaign of an operations campaign.
+    SearchSellerPartnerCampaignsResponseDataCampaignDetailCampaignStatistic:
+      type: object
+      properties:
+        applied_products_num:
+          type: integer
+          format: int64
+          description: Number of products submitted to the campaign.
+        closed_products_num:
+          type: integer
+          format: int64
+          description: Number of product registrations in the closed state.
+        declined_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies that have declined participation in the campaign.
+        joined_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies that have joined the campaign.
+        ongoing_products_num:
+          type: integer
+          format: int64
+          description: Number of products currently participating in the campaign.
+        pending_products_num:
+          type: integer
+          format: int64
+          description: Number of submitted products awaiting review.
+        rejected_products_num:
+          type: integer
+          format: int64
+          description: Number of products rejected from the campaign.
+    SearchSellerPartnerCampaignsResponseDataCampaignDetailSellerCampaignExtra:
+      type: object
+      properties:
+        creator_preferences:
+          $ref: "#/components/schemas/CreatorPreference"
+          description: Creator preferences configured for the seller campaign.
+        exclusives:
+          type: array
+          items:
+            type: string
+          description: |-
+            Selected exclusive benefits, represented by the Starling keys from the campaign-
+            configuration options.
+        invited_agency_num:
+          type: integer
+          format: int64
+          description: Number of agencies invited to the seller campaign.
+        max_total_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Maximum total commission rate for the seller campaign, expressed as the percentage
+            multiplied by 100.
+        min_total_commission_rate:
+          type: integer
+          format: int64
+          description: |-
+            Minimum total commission rate for the seller campaign, expressed as the percentage
+            multiplied by 100.
+        objectives:
+          type: array
+          items:
+            type: string
+          description: |-
+            Selected collaboration objectives, represented by the Starling keys from the campaign-
+            configuration options.
+        registration_type:
+          type: string
+          description: Agency registration policy. ALL_AGENCIES allows all eligible agencies to register; INVITE_ONLY allows only invited agencies.
+        sample_availability:
+          type: string
+          description: |-
+            Text describing sample availability for the campaign. This is distinct from a product-level
+            sample quota.
+    SearchSellerPartnerCampaignsResponseDataCampaignJoinStatusCount:
+      type: object
+      properties:
+        category:
+          type: string
+          description: UNSPECIFIED is an unspecified category; JOINED is Manage; NOT_JOINED is Discover; CLOSED is Closed.
+        count:
+          type: integer
+          format: int64
+          description: Number of campaigns in this join-status category.
+      required:
+        - category
+        - count
     SearchSessionsRequest:
       type: object
       properties:
@@ -81239,6 +82361,27 @@ components:
             - LOW. The creators whose rate is above or equal to low.
             - MEDIUM. The creators whose rate is above or equal to medium.
             - HIGH. The creators whose rate is high.
+    TierCommissionInfo:
+      type: object
+      properties:
+        commission_rate_after_threshold:
+          type: integer
+          format: int64
+          description: |-
+            Commission rate after the tier threshold is reached, expressed as the percentage multiplied
+            by 100.
+        commission_rate_before_threshold:
+          type: integer
+          format: int64
+          description: |-
+            Commission rate before the tier threshold is reached, expressed as the percentage multiplied
+            by 100.
+        threshold:
+          type: integer
+          format: int64
+          description: |-
+            Threshold at which the tiered commission changes from the rate before the threshold to the
+            rate after it. The source plan defines the threshold unit and measurement window.
     TiktokShopGmv:
       type: object
       properties:
